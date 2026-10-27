@@ -29,6 +29,15 @@
 - 剧本 v3.3 定稿中；TD 第一轮设计图里 02（红细胞特写）和 03（墨线流线）通过。
 - "岩浆流出→拉远见肝"转场试了 5 轮，导演决定先搁置，以后从"叶脉里液体流过"的思路重做。
 - 选曲：导演偏好 The Weeknd、NewJeans《Supernatural》前半、Kendrick Lamar《luther》、Kate Bush《Running Up That Hill》、Hearts2Hearts《RUDE!》；"freezing"、"2worlds" 待确认是哪首。
+- 项目已同步到 GitHub。这份 README 是各个 AI 之间的交接本，每做完一件事就更新这一段。
+
+### 下一步
+
+1. 确认 "freezing"、"2worlds" 的歌手，等导演提供音频后实测 BPM 和无人声区间，把歌曲对到 W1–W5。
+2. 等组员名单和一段真人出镜测试片段。
+3. TD：把 02、03 的风格用到正式镜头里，替换掉发光血液的旧方案。
+4. 转场以后重做，方向是"叶脉里液体流过"。
+5. 导演装好 After Effects 后，再做 AE 自动化。
 
 ## 不在仓库里的东西
 
