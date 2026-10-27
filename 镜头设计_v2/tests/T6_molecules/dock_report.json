@@ -1,0 +1,190 @@
+{
+  "box_center": [
+    -4.84,
+    2.26,
+    10.91
+  ],
+  "box_size": 22.0,
+  "exhaustiveness": 32,
+  "seed": 20261025,
+  "ligands": {
+    "001": {
+      "smiles": "CNC(=O)c1cc(Nc2ncc3ccccc3n2)c[nH]1",
+      "formula": "C14H13N5O",
+      "mw": 267.29,
+      "mh_plus_mono": 268.12,
+      "modes": [
+        {
+          "mode": 1,
+          "vina_kcal_mol": -8.309,
+          "hinge_Met84_N": 5.07,
+          "hinge_Met84_O": 3.12,
+          "Leu85_N": 4.49,
+          "Lys33_NZ": 7.37,
+          "hinge_contact": true
+        },
+        {
+          "mode": 2,
+          "vina_kcal_mol": -8.198,
+          "hinge_Met84_N": 4.79,
+          "hinge_Met84_O": 3.1,
+          "Leu85_N": 4.48,
+          "Lys33_NZ": 7.17,
+          "hinge_contact": true
+        },
+        {
+          "mode": 3,
+          "vina_kcal_mol": -7.944,
+          "hinge_Met84_N": 3.23,
+          "hinge_Met84_O": 2.9,
+          "Leu85_N": 5.0,
+          "Lys33_NZ": 9.04,
+          "hinge_contact": true
+        },
+        {
+          "mode": 4,
+          "vina_kcal_mol": -7.768,
+          "hinge_Met84_N": 5.62,
+          "hinge_Met84_O": 5.49,
+          "Leu85_N": 6.63,
+          "Lys33_NZ": 6.53,
+          "hinge_contact": false
+        },
+        {
+          "mode": 5,
+          "vina_kcal_mol": -7.662,
+          "hinge_Met84_N": 5.77,
+          "hinge_Met84_O": 3.37,
+          "Leu85_N": 5.13,
+          "Lys33_NZ": 5.88,
+          "hinge_contact": true
+        },
+        {
+          "mode": 6,
+          "vina_kcal_mol": -7.644,
+          "hinge_Met84_N": 3.27,
+          "hinge_Met84_O": 3.23,
+          "Leu85_N": 5.33,
+          "Lys33_NZ": 8.81,
+          "hinge_contact": true
+        },
+        {
+          "mode": 7,
+          "vina_kcal_mol": -7.578,
+          "hinge_Met84_N": 8.73,
+          "hinge_Met84_O": 8.7,
+          "Leu85_N": 10.55,
+          "Lys33_NZ": 3.47,
+          "hinge_contact": false
+        },
+        {
+          "mode": 8,
+          "vina_kcal_mol": -7.531,
+          "hinge_Met84_N": 8.8,
+          "hinge_Met84_O": 8.81,
+          "Leu85_N": 10.63,
+          "Lys33_NZ": 3.31,
+          "hinge_contact": false
+        },
+        {
+          "mode": 9,
+          "vina_kcal_mol": -7.408,
+          "hinge_Met84_N": 7.67,
+          "hinge_Met84_O": 7.1,
+          "Leu85_N": 9.03,
+          "Lys33_NZ": 5.74,
+          "hinge_contact": false
+        }
+      ]
+    },
+    "048": {
+      "smiles": "CNC(=O)c1cc(Nc2ncc3ccc(-c4cn[nH]c4)cc3n2)c[nH]1",
+      "formula": "C17H15N7O",
+      "mw": 333.36,
+      "mh_plus_mono": 334.14,
+      "modes": [
+        {
+          "mode": 1,
+          "vina_kcal_mol": -8.89,
+          "hinge_Met84_N": 4.1,
+          "hinge_Met84_O": 3.19,
+          "Leu85_N": 5.31,
+          "Lys33_NZ": 3.18,
+          "hinge_contact": true
+        },
+        {
+          "mode": 2,
+          "vina_kcal_mol": -8.838,
+          "hinge_Met84_N": 3.46,
+          "hinge_Met84_O": 2.95,
+          "Leu85_N": 4.58,
+          "Lys33_NZ": 3.42,
+          "hinge_contact": true
+        },
+        {
+          "mode": 3,
+          "vina_kcal_mol": -8.591,
+          "hinge_Met84_N": 3.21,
+          "hinge_Met84_O": 2.8,
+          "Leu85_N": 4.84,
+          "Lys33_NZ": 3.16,
+          "hinge_contact": true
+        },
+        {
+          "mode": 4,
+          "vina_kcal_mol": -8.468,
+          "hinge_Met84_N": 6.81,
+          "hinge_Met84_O": 4.16,
+          "Leu85_N": 5.42,
+          "Lys33_NZ": 5.1,
+          "hinge_contact": false
+        },
+        {
+          "mode": 5,
+          "vina_kcal_mol": -8.172,
+          "hinge_Met84_N": 4.58,
+          "hinge_Met84_O": 3.62,
+          "Leu85_N": 5.73,
+          "Lys33_NZ": 3.29,
+          "hinge_contact": false
+        },
+        {
+          "mode": 6,
+          "vina_kcal_mol": -8.13,
+          "hinge_Met84_N": 3.03,
+          "hinge_Met84_O": 3.13,
+          "Leu85_N": 5.21,
+          "Lys33_NZ": 3.81,
+          "hinge_contact": true
+        },
+        {
+          "mode": 7,
+          "vina_kcal_mol": -8.056,
+          "hinge_Met84_N": 2.9,
+          "hinge_Met84_O": 2.87,
+          "Leu85_N": 4.9,
+          "Lys33_NZ": 3.18,
+          "hinge_contact": true
+        },
+        {
+          "mode": 8,
+          "vina_kcal_mol": -8.038,
+          "hinge_Met84_N": 3.07,
+          "hinge_Met84_O": 3.89,
+          "Leu85_N": 5.62,
+          "Lys33_NZ": 4.86,
+          "hinge_contact": true
+        },
+        {
+          "mode": 9,
+          "vina_kcal_mol": -7.916,
+          "hinge_Met84_N": 4.65,
+          "hinge_Met84_O": 3.22,
+          "Leu85_N": 4.47,
+          "Lys33_NZ": 6.56,
+          "hinge_contact": true
+        }
+      ]
+    }
+  }
+}

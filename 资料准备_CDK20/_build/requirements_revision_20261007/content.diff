@@ -1,0 +1,231 @@
+--- before
++++ after
+@@ -5,7 +5,7 @@
+   "date": "2026-10-07",
+   "sections": [
+     {
+-      "id": "S01",
++      "id": "C01",
+       "title_sc": "还没做出来，能先判断值不值得试吗",
+       "title_en": "Before we make it",
+       "paragraphs": [
+@@ -21,9 +21,9 @@
+         },
+         {
+           "id": "P02",
+-          "en": "AI offers an interesting possibility: use patterns learned from existing data to suggest designs worth investigating. But a suggested structure is not yet an experimentally confirmed hit. To follow that journey, we will examine one study of early molecule discovery for liver cancer. We will trace the design, the experiment and the changes that followed.",
+-          "zh_sc": "AI提供了一种值得研究的可能：利用从已有数据中学到的规律，提出值得进一步探索的设计。不过，提出一个结构，还不等于得到实验确认的命中物。接下来，我们用一项肝癌早期分子发现研究，追踪设计、实验，以及实验之后的改进。",
+-          "zh_tc": "AI提供了一種值得研究的可能：利用從已有數據中學到的規律，提出值得進一步探索的設計。不過，提出一個結構，還不等於得到實驗確認的命中物。接下來，我們用一項肝癌早期分子發現研究，追蹤設計、實驗，以及實驗之後的改進。",
++          "en": "AI offers an interesting possibility: use patterns learned from existing data to suggest designs worth investigating. But a suggested structure is not yet an experimentally confirmed hit. We will follow one liver cancer study from design to testing and improvement, then ask what AI contributed, which benefits remain possible rather than proven, and what better evidence would require.",
++          "zh_sc": "AI提供了一种值得研究的可能：利用从已有数据中学到的规律，提出值得进一步探索的设计。不过，提出一个结构，还不等于得到实验确认的命中物。我们会沿着一项肝癌研究，追踪设计、测试与改进，再判断AI具体贡献了什么、哪些收益仍只是潜力，以及还需要怎样的证据。",
++          "zh_tc": "AI提供了一種值得研究的可能：利用從已有數據中學到的規律，提出值得進一步探索的設計。不過，提出一個結構，還不等於得到實驗確認的命中物。我們會沿着一項肝癌研究，追蹤設計、測試與改進，再判斷AI具體貢獻了什麼、哪些收益仍只是潛力，以及還需要怎樣的證據。",
+           "refs": [
+             "E06",
+             "E09",
+@@ -42,10 +42,11 @@
+           ]
+         }
+       ],
+-      "title_tc": "還沒做出來，能先判斷值不值得試嗎"
+-    },
+-    {
+-      "id": "S02",
++      "title_tc": "還沒做出來，能先判斷值不值得試嗎",
++      "role_en": "Overview"
++    },
++    {
++      "id": "C02",
+       "title_sc": "我们希望这个分子做什么",
+       "title_en": "A disease is not yet a design task",
+       "paragraphs": [
+@@ -92,10 +93,11 @@
+           ]
+         }
+       ],
+-      "title_tc": "我們希望這個分子做什麼"
+-    },
+-    {
+-      "id": "S03",
++      "title_tc": "我們希望這個分子做什麼",
++      "role_en": "Introduction"
++    },
++    {
++      "id": "C03",
+       "title_sc": "知道名字，还缺什么",
+       "title_en": "Why the target shape matters",
+       "paragraphs": [
+@@ -150,10 +152,11 @@
+           ]
+         }
+       ],
+-      "title_tc": "知道名字，還缺什麼"
+-    },
+-    {
+-      "id": "S04",
++      "title_tc": "知道名字，還缺什麼",
++      "role_en": "Body"
++    },
++    {
++      "id": "C04",
+       "title_sc": "算法怎样提出新的设计",
+       "title_en": "Generating possibilities rather than one answer",
+       "paragraphs": [
+@@ -213,10 +216,11 @@
+           ]
+         }
+       ],
+-      "title_tc": "算法怎樣提出新的設計"
+-    },
+-    {
+-      "id": "S05",
++      "title_tc": "算法怎樣提出新的設計",
++      "role_en": "Body"
++    },
++    {
++      "id": "C05",
+       "title_sc": "这么多设计，为什么先做这几个",
+       "title_en": "Choosing what reaches the laboratory",
+       "paragraphs": [
+@@ -262,10 +266,11 @@
+           ]
+         }
+       ],
+-      "title_tc": "這麼多設計，為什麼先做這幾個"
+-    },
+-    {
+-      "id": "S06",
++      "title_tc": "這麼多設計，為什麼先做這幾個",
++      "role_en": "Body"
++    },
++    {
++      "id": "C06",
+       "title_sc": "真正做出来后，预测成立了吗",
+       "title_en": "The first result and what thirty days means",
+       "paragraphs": [
+@@ -301,10 +306,11 @@
+           ]
+         }
+       ],
+-      "title_tc": "真正做出來後，預測成立了嗎"
+-    },
+-    {
+-      "id": "S07",
++      "title_tc": "真正做出來後，預測成立了嗎",
++      "role_en": "Body"
++    },
++    {
++      "id": "C07",
+       "title_sc": "能结合，为什么还要改",
+       "title_en": "What the first result did not solve",
+       "paragraphs": [
+@@ -364,18 +370,19 @@
+           ]
+         }
+       ],
+-      "title_tc": "能結合，為什麼還要改"
+-    },
+-    {
+-      "id": "S08",
++      "title_tc": "能結合，為什麼還要改",
++      "role_en": "Body"
++    },
++    {
++      "id": "C08",
+       "title_sc": "所以，AI到底帮助了什么",
+       "title_en": "A better starting point and a fairer test",
+       "paragraphs": [
+         {
+           "id": "P30",
+-          "en": "We can now return to our opening question. Can we predict whether a molecule is worth testing before making it? We can make informed predictions and use them to guide experiments. In this case, predicted protein structure supported design, AI-assisted generation proposed molecules, and experiments identified a hit and supported further improvement. The predictions were useful as starting points, not final verdicts.",
+-          "zh_sc": "现在可以回到开场的问题：一个分子还没做出来，我们能先预测它是否值得测试吗？我们可以提出有依据的预测，并用它们引导实验。在本案例中，预测蛋白结构支持了设计，AI辅助生成提出了分子，实验找到了命中物，也支持了进一步改进。预测的价值是提供起点，而不是作出最终判决。",
+-          "zh_tc": "現在可以回到開場的問題：一個分子還沒做出來，我們能先預測它是否值得測試嗎？我們可以提出有依據的預測，並用它們引導實驗。在本案例中，預測蛋白結構支持了設計，AI輔助生成提出了分子，實驗找到了命中物，也支持了進一步改進。預測的價值是提供起點，而不是作出最終判決。",
++          "en": "Those experiments give us a basis for discussing benefits. Predicted protein structure supported design, AI-assisted generation proposed molecules, and experiments identified a hit and supported further improvement. This is a contribution to early discovery, not proof of a finished treatment. We should separate what this workflow achieved from the wider advantages we hope it could bring.",
++          "zh_sc": "这些实验让我们有依据讨论收益。预测蛋白结构支持了设计，AI辅助生成提出了分子，实验找到了命中物，也支持了进一步改进。这是对早期发现的贡献，不是已经完成治疗药物的证明。我们应把这条流程实际取得的成果，与希望它进一步带来的好处分开。",
++          "zh_tc": "這些實驗讓我們有依據討論收益。預測蛋白結構支持了設計，AI輔助生成提出了分子，實驗找到了命中物，也支持了進一步改進。這是對早期發現的貢獻，不是已經完成治療藥物的證明。我們應把這條流程實際取得的成果，與希望它進一步帶來的好處分開。",
+           "refs": [
+             "E09",
+             "E10",
+@@ -406,7 +413,25 @@
+           ]
+         },
+         {
++          "en": "The wider hopes include health, cost and animal welfare. Earlier useful candidates might support future treatments, and avoiding low-value experiments might save resources. Better predictions might also help researchers consider alternatives to some animal experiments. These are possibilities, not measured outcomes of this case. We would need evidence of actual savings and suitable validation, not simply a shorter list of molecules.",
++          "zh_sc": "更广泛的期待包括健康、成本与动物福利。更早找到有用的候选物，可能支持未来治疗研究；避免低价值实验，也可能节省资源。更好的预测还可能帮助研究者考虑某些动物实验的替代方法。这些是可能性，不是本案例已经测出的结果。我们需要实际节省投入的证据和合适的验证，不能只看分子清单变短了。",
++          "refs": [
++            "E36"
++          ],
+           "id": "P33",
++          "zh_tc": "更廣泛的期待包括健康、成本與動物福利。更早找到有用的候選物，可能支持未來治療研究；避免低價值實驗，也可能節省資源。更好的預測還可能幫助研究者考慮某些動物實驗的替代方法。這些是可能性，不是本案例已經測出的結果。我們需要實際節省投入的證據和合適的驗證，不能只看分子清單變短了。"
++        },
++        {
++          "en": "Environmental claims need the same care. Fewer unnecessary syntheses could mean less material use and waste, but computers also consume electricity. We should compare the resources used by both the calculations and the laboratory work for a similar research outcome. Without that comparison, this case does not establish that AI is cheaper, reduces animal use or is environmentally better overall.",
++          "zh_sc": "环境收益也要同样谨慎。减少不必要的合成，可能减少材料消耗与废物，但电脑也会耗电。我们应在取得相近研究成果的条件下，比较计算和实验两部分的资源投入。缺少这种比较，就不能用本案例断言AI总体上更便宜、减少了动物使用，或更加环保。",
++          "refs": [
++            "E37"
++          ],
++          "id": "P34",
++          "zh_tc": "環境收益也要同樣謹慎。減少不必要的合成，可能減少材料消耗與廢物，但電腦也會耗電。我們應在取得相近研究成果的條件下，比較計算和實驗兩部分的資源投入。缺少這種比較，就不能用本案例斷言AI總體上更便宜、減少了動物使用，或更加環保。"
++        },
++        {
++          "id": "P35",
+           "en": "A stronger next study could compare methods on the same target, with similar information, resources and definitions of success. It should record time to a confirmed hit and experimental effort, including unsuccessful attempts. A second improvement is to use new experimental feedback to check and revise predictions. A third is to evaluate several properties together, so better binding does not hide poor selectivity or other problems.",
+           "zh_sc": "更有说服力的后续研究，可以在同一靶点上，用相近信息、资源和成功标准比较不同方法，并记录首次确认命中的时间与实验投入，包括失败尝试。第二个方向是利用新的实验反馈检查和修正预测。第三个方向是同时评价多项性质，避免更好的结合表现掩盖选择性不足或其他问题。",
+           "zh_tc": "更有說服力的後續研究，可以在同一靶點上，用相近信息、資源和成功標準比較不同方法，並記錄首次確認命中的時間與實驗投入，包括失敗嘗試。第二個方向是利用新的實驗反饋檢查和修正預測。第三個方向是同時評價多項性質，避免更好的結合表現掩蓋選擇性不足或其他問題。",
+@@ -418,7 +443,7 @@
+           ]
+         },
+         {
+-          "id": "P34",
++          "id": "P36",
+           "en": "Our sources have different jobs too. The original study and its supplement support the case numbers and experiments. Method papers explain what the tools do. Scholarly books and reviews help explain the concepts and wider context. A platform developer describing its own work is useful evidence, but not the same as an independent comparison. We need to evaluate the source, not just count references.",
+           "zh_sc": "我们的资料也各有用途。原始研究和补充材料支撑案例数字与实验，方法论文解释工具做什么，学术书籍和综述帮助说明概念与背景。平台开发者介绍自己的研究是有用证据，但不等同于独立比较。我们要评价资料，而不只是计算参考文献数量。",
+           "zh_tc": "我們的資料也各有用途。原始研究和補充材料支撐案例數字與實驗，方法論文解釋工具做什麼，學術書籍和綜述幫助說明概念與背景。平臺開發者介紹自己的研究是有用證據，但不等同於獨立比較。我們要評價資料，而不只是計算參考文獻數量。",
+@@ -431,7 +456,7 @@
+           ]
+         },
+         {
+-          "id": "P35",
++          "id": "P37",
+           "en": "This matters outside a research laboratory. When we hear that AI has discovered a drug, we can ask what the headline actually means. Was it a predicted structure, a laboratory hit, a result in cells or evidence from patients? Understanding those stages helps us judge the news without dismissing genuine progress or expecting a treatment that has not been demonstrated.",
+           "zh_sc": "这也与实验室之外的生活有关。当我们听到“AI发现了新药”，可以先问：新闻具体说的是预测结构、实验命中物、细胞结果，还是患者证据？理解这些阶段，能帮助我们既不忽视真实进展，也不期待尚未证实的治疗。",
+           "zh_tc": "這也與實驗室之外的生活有關。當我們聽到“AI發現了新藥”，可以先問：新聞具體說的是預測結構、實驗命中物、細胞結果，還是患者證據？理解這些階段，能幫助我們既不忽視真實進展，也不期待尚未證實的治療。",
+@@ -441,10 +466,10 @@
+           ]
+         },
+         {
+-          "id": "P36",
+-          "en": "The CDK20 story is therefore neither a computer replacing science nor just a long list of molecules. It is a case of algorithms helping people propose and prioritise designs, with experiments deciding what deserves the next step. The promise is a better-directed search. How much faster that search becomes, and whether it leads to a useful medicine, remain questions for further evidence.",
+-          "zh_sc": "因此，CDK20的故事既不是电脑取代科学，也不只是生成了一长串分子。它展示了算法怎样帮助人提出设计和安排优先级，再由实验决定什么值得进入下一步。它的潜力在于让探索更有方向；这种探索到底快了多少，最终能否带来有用的药物，仍要由进一步证据回答。",
+-          "zh_tc": "因此，CDK20的故事既不是電腦取代科學，也不只是生成了一長串分子。它展示了算法怎樣幫助人提出設計和安排優先級，再由實驗決定什麼值得進入下一步。它的潛力在於讓探索更有方向；這種探索到底快了多少，最終能否帶來有用的藥物，仍要由進一步證據回答。",
++          "id": "P38",
++          "en": "We can now answer our opening question. Can we predict whether a molecule is worth testing before we even make it? We can make informed predictions, but experiments must test them. In this case, algorithms helped people propose and prioritise designs, while experiments guided the next step. The promise is a better-directed search. How much faster that search becomes, and whether it leads to a useful medicine, remain questions for further evidence.",
++          "zh_sc": "现在可以回答开场的问题：一个还没做出来的分子，我们能先预测它是否值得测试吗？我们可以提出有依据的预测，但必须用实验检验。在本案例中，算法帮助人提出设计和安排优先级，实验则引导下一步。它的潜力在于让探索更有方向；这种探索到底快了多少，最终能否带来有用的药物，仍要由进一步证据回答。",
++          "zh_tc": "現在可以回答開場的問題：一個還沒做出來的分子，我們能先預測它是否值得測試嗎？我們可以提出有依據的預測，但必須用實驗檢驗。在本案例中，算法幫助人提出設計和安排優先級，實驗則引導下一步。它的潛力在於讓探索更有方向；這種探索到底快了多少，最終能否帶來有用的藥物，仍要由進一步證據回答。",
+           "refs": [
+             "E23",
+             "E25",
+@@ -452,8 +477,22 @@
+           ]
+         }
+       ],
+-      "title_tc": "所以，AI到底幫助了什麼"
++      "title_tc": "所以，AI到底幫助了什麼",
++      "role_en": "Benefits, future directions and conclusion"
+     }
+   ],
+-  "english_word_count": 2105
++  "english_word_count": 2233,
++  "revision": "teacher-requirements revision 2",
++  "research_question_en": "How can AI-assisted computation improve early molecule discovery for liver cancer, and which benefits have or have not been demonstrated?",
++  "research_question_sc": "AI辅助计算怎样改善肝癌早期分子发现？哪些收益已经展示，哪些仍未得到证明？",
++  "objectives": [
++    {
++      "en": "Explain how computational design and experiments work together in the CDK20 case.",
++      "zh_sc": "解释CDK20案例中计算设计与实验怎样相互配合。"
++    },
++    {
++      "en": "Evaluate the observed benefits, evidence gaps and practical next research steps.",
++      "zh_sc": "评价已经观察到的收益、证据缺口和具体的后续研究方向。"
++    }
++  ]
+ }

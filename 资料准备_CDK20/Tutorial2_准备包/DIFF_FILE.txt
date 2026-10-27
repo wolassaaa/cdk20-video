@@ -1,0 +1,130 @@
+Changed fields: Q1(i-ii), Q2(i-ii), Q3(i-ii), Q4(i-ii), Q5(i-ii), Q6 outline.
+Original blank worksheet -> reference answers on a copy.
+Q1 preserves the two objectives actually written in Tutorial 1 photos.
+Header identity fields unchanged/blank; Q6 A/B/C/D are four member labels; 5 continuous minutes each.
+Original SHA256: 95e3356343ac94447f9e47bab652a44b4dcda818105fa0971b2a44f677181ca2
+
+{
+  "1i": [
+    [
+      "Objective",
+      "To identify major computer-aided methods used in cancer drug discovery."
+    ],
+    [
+      "Evaluation",
+      "Largely achieved for the CDK20 case: we identified target prioritisation, AlphaFold structure prediction, Chemistry42 molecular generation and docking. This explains an integrated workflow, not every method used across cancer research."
+    ]
+  ],
+  "1ii": [
+    [
+      "Objective",
+      "To evaluate how these methods help assess potential cancer drug candidates."
+    ],
+    [
+      "Evaluation",
+      "Achieved for early-stage assessment: 8,918 designs led to 7 synthesised compounds and a first binding hit in 30 days; later tests supported optimisation. However, no matched non-AI comparison quantified time savings, and patient benefit was not established."
+    ]
+  ],
+  "2i": [
+    [
+      "Method",
+      "Structure-guided molecular generation and docking."
+    ],
+    [
+      "Evaluation",
+      "Researchers used an AlphaFold CDK20 model to guide Chemistry42 designs, then docking and clustering to prioritise synthesis. Predicted conformations and scores may be inaccurate, so they require experiments. Without a matched comparator, this workflow does not quantify AI-specific efficiency gains."
+    ]
+  ],
+  "2ii": [
+    [
+      "Method",
+      "CellTiter-Glo cell viability assay."
+    ],
+    [
+      "Evaluation",
+      "After 3 days of compound exposure, ATP-dependent luminescence was measured in Huh7 and HEK293 cells. Compound 048 gave IC50 values of 208.7 +/- 3.3 and 1,706.7 +/- 670.0 nM, respectively. This indirect readout does not establish CDK20-specific causation; HEK293 is not normal liver tissue, and cultured cells do not establish human safety or efficacy."
+    ]
+  ],
+  "3i": [
+    [
+      "",
+      "Benchmark the AI-assisted workflow against a conventional computational workflow using the same CDK20 target, information, budget and pre-specified experimental hit criterion. Repeat runs and record time to first confirmed hit, total costs, compounds tested and failures. This would test efficiency rather than infer it from 30 days alone."
+    ]
+  ],
+  "3ii": [
+    [
+      "",
+      "Test compound 048 across additional HCC models and non-malignant liver cells, with vehicle controls and CDK20 perturbation/rescue experiments. Measure viability, target engagement and kinase selectivity; assess ADME properties. Independent repeats would help assess on-target effects, off-target activity and barriers to translation."
+    ]
+  ],
+  "4i": [
+    [
+      "",
+      "Target versus candidate molecule: show our disease-target-molecule diagram. Explain that HCC is the disease, CDK20 is the protein being studied, and the candidate is a molecule tested against it. One target is not the only cause of cancer."
+    ]
+  ],
+  "4ii": [
+    [
+      "",
+      "Prediction versus validation: animate the steps from a predicted structure to synthesis, binding, enzyme activity and cell tests. Label each step with what it measures, and mark patient evidence as not reported in this case. A prediction is not proof of treatment benefit."
+    ]
+  ],
+  "5i": [
+    [
+      "",
+      "AI can support structure prediction, new molecular designs and experimental prioritisation, creating opportunities for future treatment research. The 30-day result was a first binding hit, not an approved cancer medicine or a measured speedup over a matched alternative."
+    ]
+  ],
+  "5ii": [
+    [
+      "",
+      "Read \"AI discovers a drug\" headlines critically: ask whether the evidence is computational, biochemical, cellular or clinical, and check the original study. Early laboratory results alone are not a reason to change prescribed treatment."
+    ]
+  ]
+}
+
+Q6:
+[
+  [
+    "Introduction",
+    "Daily-life relevance; HCC, CDK20 and candidate molecules; focused research question and both objectives.",
+    "0:00-5:00",
+    "A"
+  ],
+  [
+    "Introduction / methods",
+    "Literature-search approach, source quality and relevance; briefly outline the presentation.",
+    "5:00-6:00",
+    "B"
+  ],
+  [
+    "Body: workflow",
+    "Target prioritisation; AlphaFold, Chemistry42, docking and human selection; 8,918 -> 54 -> 7.",
+    "6:00-10:00",
+    "B"
+  ],
+  [
+    "Body: results",
+    "30-day first binding hit; binding versus enzyme function; later optimisation and cell results. Keep the two rounds separate.",
+    "10:00-13:00",
+    "C"
+  ],
+  [
+    "Discussion: limitations",
+    "Evaluate uncertain predictions, missing matched efficiency comparisons and cell-model limitations.",
+    "13:00-15:00",
+    "C"
+  ],
+  [
+    "Discussion: future work",
+    "Propose matched workflow benchmarking and stronger biological validation to address the identified limitations.",
+    "15:00-16:00",
+    "D"
+  ],
+  [
+    "Conclusion",
+    "Evaluate both objectives; summarise supported outcomes and unresolved benefits; deliver two take-home messages and full references.",
+    "16:00-20:00",
+    "D"
+  ]
+]

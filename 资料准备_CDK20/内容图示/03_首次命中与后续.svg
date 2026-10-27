@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="900" viewBox="0 0 1800 900">
+<rect width="1800" height="900" fill="white"/>
+<text x="65" y="111" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="49" font-weight="700">图三 30天的终点在哪里</text>
+<rect x="70" y="190" width="440" height="190" rx="14" fill="#F0F5F8" stroke="#254F6B" stroke-width="3"/>
+<text x="94" y="250" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="35" font-weight="700">8,918 个</text>
+<text x="94" y="311" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="400">生成结构</text>
+<text x="94" y="355" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="400">首轮计算探索</text>
+<rect x="680" y="190" width="440" height="190" rx="14" fill="#F0F5F8" stroke="#254F6B" stroke-width="3"/>
+<text x="704" y="250" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="35" font-weight="700">54 个</text>
+<text x="704" y="311" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="400">优先候选</text>
+<text x="704" y="355" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="400">不是实际合成数</text>
+<rect x="1290" y="190" width="440" height="190" rx="14" fill="#F0F5F8" stroke="#254F6B" stroke-width="3"/>
+<text x="1314" y="250" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="35" font-weight="700">7 个</text>
+<text x="1314" y="311" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="400">选择合成测试</text>
+<text x="1314" y="355" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="400">不是7个全部成功</text>
+<polyline points="510,285 680,285" fill="none" stroke="#254F6B" stroke-width="5"/>
+<polygon points="680.0,285.0 658.0,274.0 658.0,296.0" fill="#254F6B"/>
+<polyline points="1120,285 1290,285" fill="none" stroke="#254F6B" stroke-width="5"/>
+<polygon points="1290.0,285.0 1268.0,274.0 1268.0,296.0" fill="#254F6B"/>
+<text x="70" y="477" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="42" font-weight="700">30 天：靶点选择 → 首个实验确认的结合命中物</text>
+<text x="70" y="533" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="33" font-weight="400">不是上市周期，也不是完整后续优化周期。</text>
+<rect x="70" y="595" width="770" height="145" rx="14" fill="#F0F5F8" stroke="#254F6B" stroke-width="3"/>
+<text x="94" y="655" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="35" font-weight="700">后续另一轮</text>
+<text x="94" y="716" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="400">16 个新设计 → 6 个合成测试</text>
+<rect x="960" y="595" width="770" height="145" rx="14" fill="#F0F5F8" stroke="#254F6B" stroke-width="3"/>
+<text x="984" y="655" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="35" font-weight="700">后续结果</text>
+<text x="984" y="716" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="400">结合表现改善，并进一步做功能和细胞评价</text>
+<polyline points="840,665 960,665" fill="none" stroke="#254F6B" stroke-width="5"/>
+<polygon points="960.0,665.0 938.0,654.0 938.0,676.0" fill="#254F6B"/>
+<text x="65" y="850" fill="#60707B" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="400">依据 S02 E11、E13–E23 | 数量不是比例尺，不可据此计算提速倍数</text>
+</svg>

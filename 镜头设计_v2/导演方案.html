@@ -1,0 +1,229 @@
+<title>Worth Testing 导演方案</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a single-look "holo lab" production document — dark navy field, cyan for hologram/system, orange only where the film itself uses orange (uncertainty, the picked few). */
+:root{
+  color-scheme:dark;
+  --bg:#070B12; --panel:#0E1520; --panel2:#121B28; --line:#1F2C3D;
+  --ink:#E4ECF2; --muted:#8C9BAB; --cyan:#5BD8F5; --orange:#FF7A3D; --warm:#E9D9C4;
+  --A:#FF8F6B; --B:#6FE3B8; --C:#A9A2FF; --D:#F2C55C; --ALL:#9FB2C2;
+  --display:"IBM Plex Sans Condensed","Noto Sans SC",system-ui,sans-serif;
+  --body:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.7;margin:0}
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:44px 90px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:.01em}
+h1{font-size:clamp(40px,7vw,76px);line-height:1;font-weight:700}
+h2{font-size:26px;font-weight:700;margin-bottom:16px}
+h3{font-size:18px;font-weight:600}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan)}
+.muted{color:var(--muted)}
+.note{font-size:13.5px;color:var(--muted)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+header{display:grid;gap:16px;margin-bottom:34px}
+.logline{font-size:19px;max-width:60ch;color:var(--warm)}
+.facts{display:flex;flex-wrap:wrap;gap:12px 32px}
+.facts div{display:grid}
+.facts b{font-family:var(--mono);font-size:20px;font-weight:600}
+.facts span{font-size:12px;color:var(--muted)}
+section{margin-top:56px}
+.frames{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
+figure{margin:0;display:grid;gap:8px;min-width:0}
+figure .img{aspect-ratio:16/9;max-width:100%;background:var(--panel);border:1px solid var(--line);border-radius:4px;overflow:hidden;display:grid;place-items:center}
+figure img{width:100%;height:100%;object-fit:cover;display:block}
+figcaption{font-size:13.5px;color:var(--muted)}
+figcaption b{color:var(--ink);font-weight:600}
+.layers{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.layer{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:18px;display:grid;gap:8px;align-content:start;min-width:0}
+.layer .tag{font-family:var(--mono);font-size:12px;letter-spacing:.1em}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;min-width:860px;font-size:14px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font-size:12px;color:var(--muted);font-weight:500;background:var(--panel2);position:sticky;top:0}
+tr:last-child td{border-bottom:0}
+td.t{font-family:var(--mono);font-size:12.5px;white-space:nowrap;color:var(--muted)}
+.who{display:inline-block;font-family:var(--mono);font-size:12px;font-weight:600;padding:1px 7px;border-radius:3px;color:#081018}
+.lay{font-family:var(--mono);font-size:11.5px;padding:1px 6px;border-radius:3px;border:1px solid var(--line);white-space:nowrap;display:inline-block;margin:0 4px 4px 0}
+.lay.holo{border-color:var(--cyan);color:var(--cyan)}
+.lay.hero{background:var(--orange);border-color:var(--orange);color:#140800}
+.snd{font-family:var(--mono);font-size:11.5px;color:var(--warm)}
+.bar{display:flex;height:16px;border-radius:3px;overflow:hidden;margin:6px 0 4px;min-width:0}
+.bar span{display:block;height:100%}
+.ratio{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12.5px;color:var(--muted)}
+.heroes{display:grid;gap:14px}
+.hero{display:grid;grid-template-columns:110px minmax(0,1fr);gap:18px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--orange);border-radius:6px;padding:18px}
+.hero .k{font-family:var(--mono);font-size:30px;font-weight:600;color:var(--orange);line-height:1}
+.hero .k small{display:block;font-size:12px;color:var(--muted);margin-top:8px;font-weight:400}
+.hero dl{display:grid;grid-template-columns:76px minmax(0,1fr);gap:5px 14px;margin:10px 0 0;font-size:14px}
+.hero dt{color:var(--muted);font-size:13px}
+.hero dd{margin:0;min-width:0}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.cols>*{min-width:0}
+ul{margin:8px 0 0;padding-left:18px}
+li{margin:4px 0}
+.weeks{display:grid;gap:10px}
+.week{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.week:last-child{border-bottom:0}
+.week .d{font-family:var(--mono);font-size:13px;color:var(--cyan)}
+.decide{display:grid;gap:10px;counter-reset:q}
+.decide div{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px 16px 14px 48px;position:relative}
+.decide div::before{counter-increment:q;content:counter(q);position:absolute;left:16px;top:13px;font-family:var(--mono);font-weight:600;color:var(--orange)}
+.decide b{color:var(--ink)}
+.pending{color:var(--orange);font-family:var(--mono);font-size:12px}
+@media (max-width:640px){.hero{grid-template-columns:1fr}.week{grid-template-columns:1fr;gap:4px}.hero dl{grid-template-columns:1fr}}
+a{color:var(--cyan)}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">SCIE1007 · Topic 10 · 导演方案 v2 · 2026-10-25</div>
+  <h1>Worth Testing?</h1>
+  <p class="logline">一个从香港开始的研究：AI 怎样帮科学家在动手之前，找到一个值得做出来测试的分子，以及这个分子到底证明到了哪一步。</p>
+  <div class="facts">
+    <div><b>18:40</b><span>预计总长，含片尾 40 秒</span></div>
+    <div><b>4</b><span>讲者（暂按 4 人）</span></div>
+    <div><b>6</b><span>全息交互重点镜头</span></div>
+    <div><b>≈1,850</b><span>口播词数预算</span></div>
+    <div><b>11/27</b><span>截止，计划 11/26 上传</span></div>
+  </div>
+</header>
+
+<section>
+  <div class="eyebrow">Look</div>
+  <h2>样张</h2>
+  <div class="frames">
+    <figure><div class="img"><img src="styleframes/keyhole.png" alt="CDK20 的 AlphaFold 预测结构做成全息影像，橙色低置信尾巴穿过发光的 ATP 口袋"></div>
+      <figcaption><b>H3 钥匙孔被堵住。</b>真实的 AlphaFold CDK20 模型。橙色是低置信尾巴（303–346），亮点是堵在 ATP 口袋里的 Arg305，白环标出口袋位置。讲者会用两指捏住这段尾巴把它拉走。</figcaption></figure>
+    <figure><div class="img"><img src="styleframes/wall.png" alt="弧形全息墙上排满 8,918 个分子符号，少数被拉近、7 个亮成橙色"></div>
+      <figcaption><b>H4 筛选墙。</b>8,918 个设计排成一面弧墙，54 个被拉近，7 个亮成橙色。讲者会站在前景，背对镜头面向这面墙。墙上的分子是示意符号；被选中的 7 个在正片里换成论文图 5 的真实结构。</figcaption></figure>
+  </div>
+  <p class="note" style="margin-top:12px">两张都是在你的 5080 上用 Blender 直接渲染的效果测试，还没加界面文字和讲者。</p>
+</section>
+
+<section>
+  <div class="eyebrow">System</div>
+  <h2>三层画面</h2>
+  <div class="layers">
+    <div class="layer"><span class="tag" style="color:var(--warm)">REAL · 实拍</span><h3>真实的人和地方</h3><p class="note">组员在校园、实验室、图书馆，以及科学园外景。自然光，色调偏暖。对着镜头只说一两句短话，用现场声音。开场和结尾的新闻、手机、挂锁也都是实拍。</p></div>
+    <div class="layer"><span class="tag" style="color:var(--cyan)">HOLO · 全息交互</span><h3>绿幕里的全息实验室</h3><p class="note">深蓝暗场里，讲者用手势操作全息影像，手的位置靠 MediaPipe 逐帧追踪，影像跟着真手动。这部分只拍动作，讲解后期补录画外音。全片 6 个重点镜头都在这一层。</p></div>
+    <div class="layer"><span class="tag" style="color:var(--ink)">EXPLAIN · 讲解动画</span><h3>干净的数据和结构</h3><p class="note">数字、对比、证据层级、论文原图，用清楚的 2D 和 3D 讲。不加特效，让人读得清。全部引用就近标注，片尾给 ACS 格式的完整书目。</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Structure</div>
+  <h2>结构</h2>
+  <div class="bar" aria-label="引言、主体、讨论与结论的时长比例">
+    <span style="width:27%;background:var(--A)"></span><span style="width:45%;background:var(--cyan)"></span><span style="width:28%;background:var(--D)"></span>
+  </div>
+  <div class="ratio"><span>引言 0:00–5:00 · 27%</span><span>主体 5:00–13:30 · 45%</span><span>讨论与结论 13:30–18:40 · 28%</span><span>讲义建议 30 / 50 / 20</span></div>
+  <div class="tablewrap" style="margin-top:16px">
+  <table>
+    <thead><tr><th>时间</th><th>段落</th><th>讲者</th><th>画面层</th><th>内容</th><th>声音</th></tr></thead>
+    <tbody>
+      <tr><td class="t">0:00–0:50</td><td><b>冷开场</b></td><td><span class="who" style="background:var(--A)">A</span></td><td><span class="lay">REAL</span><span class="lay hero">H1</span></td><td>深夜，手机刷到“AI 30 天设计出肝癌新药”。A 抬头说一句：真的吗？切到全息实验室，A 一推手，片名在空中点亮。</td><td class="snd">The Weeknd 原曲片段，无讲解</td></tr>
+      <tr><td class="t">0:50–2:10</td><td><b>为什么关心</b></td><td><span class="who" style="background:var(--A)">A</span></td><td><span class="lay">REAL</span><span class="lay">EXPLAIN</span></td><td>香港的肝癌负担 <span class="pending">数据待查</span>；回到实验二，我们亲手给癌细胞加过 drug X；一种新药平均要 10–17 年、约 28 亿美元，进入临床的化合物约一成能上市（Wang 2023；Lecture 1c 的研发五步骤）。</td><td class="snd">同期短句 + 画外音</td></tr>
+      <tr><td class="t">2:10–3:20</td><td><b>问题、目标、方法</b></td><td><span class="who" style="background:var(--A)">A</span></td><td><span class="lay holo">HOLO</span><span class="lay hero">H2</span></td><td>研究问题和 Tutorial 1 交的两个目标；文献方法与两条来源评价标准（讲义要求放在引言）；A 挥手展开全片路线环。</td><td class="snd">画外音</td></tr>
+      <tr><td class="t">3:20–5:00</td><td><b>靶点从哪里来</b></td><td><span class="who" style="background:var(--A)">A</span></td><td><span class="lay">REAL</span><span class="lay">EXPLAIN</span></td><td>香港线：中大团队用威尔斯亲王医院的样本，发现 52 例肝癌中 36 例 CCRK（即 CDK20）升高（Feng 2011）。2023 年 AI 平台用 10 组数据（1,133 份肿瘤、674 份健康样本）给靶点排序，选中 CDK20：和肝癌关联强、没有实验结构、也没有获批药物。挂锁登场：靶点是锁，分子是钥匙。</td><td class="snd">同期短句 + 画外音</td></tr>
+      <tr><td class="t">5:00–6:10</td><td><b>工具箱与“暗靶点”</b></td><td><span class="who" style="background:var(--B)">B</span></td><td><span class="lay holo">HOLO</span></td><td>B 接过挂锁。计算工具箱：对接、分子动力学、量子力学、化学信息学、机器学习（老师课件第 47 页）。问题：这把锁没有照片，怎么配钥匙？</td><td class="snd">同期短句 + 画外音</td></tr>
+      <tr><td class="t">6:10–8:00</td><td><b>钥匙孔被堵住</b></td><td><span class="who" style="background:var(--B)">B</span></td><td><span class="lay">REAL</span><span class="lay hero">H3</span></td><td>B 在电脑上打开 AlphaFold 数据库查 CDK20（真实录屏），结构从屏幕里拉出来变成全息影像。按置信度上色，发现低置信尾巴里的 Arg305 堵在 ATP 口袋；B 捏住尾巴拉走，口袋露出来。2024 诺贝尔化学奖一句带过。</td><td class="snd">画外音，音乐抬起</td></tr>
+      <tr><td class="t">8:00–9:20</td><td><b>配钥匙机</b></td><td><span class="who" style="background:var(--B)">B</span></td><td><span class="lay holo">HOLO</span><span class="lay">EXPLAIN</span></td><td>Chemistry42 按口袋形状生成新分子，规则是必须抓住铰链处的 Met84。设计越来越多，汇成 8,918 个。</td><td class="snd">画外音</td></tr>
+      <tr><td class="t">9:20–10:40</td><td><b>筛选墙</b></td><td><span class="who" style="background:var(--C)">C</span></td><td><span class="lay holo">HOLO</span><span class="lay hero">H4</span></td><td>C 接过钥匙。8,918 个设计组成弧墙，C 挥手：对接打分像波纹扫过，聚类成组，54 个被拉近，化学家选 7 个做出来。</td><td class="snd">The Weeknd 片段（不压讲解）</td></tr>
+      <tr><td class="t">10:40–12:00</td><td><b>第一把钥匙</b></td><td><span class="who" style="background:var(--C)">C</span></td><td><span class="lay">REAL</span><span class="lay">EXPLAIN</span></td><td>7 个里 1 个结合：001，Kd 9.2 µM。从选靶点到这一步用了 30 天，对比前面的 10–17 年。但它插得进、拧不动：酶活性 IC50 &gt; 6,000 nM（实拍挂锁特写）。</td><td class="snd">同期短句 + 画外音</td></tr>
+      <tr><td class="t">12:00–13:30</td><td><b>第二轮</b></td><td><span class="who" style="background:var(--C)">C</span></td><td><span class="lay holo">HOLO</span><span class="lay hero">H5</span></td><td>C 在全息影像里改钥匙：两种设计思路，048 多抓住 Lys33，结合强 15 倍（566.7 nM），酶 IC50 33.4 nM；第二轮也在 30 天内完成。细胞：肝癌 Huh7 比对照 HEK293 敏感约 8 倍，接回 Lecture 1c“化疗分不清癌细胞和正常细胞”。</td><td class="snd">画外音</td></tr>
+      <tr><td class="t">13:30–15:00</td><td><b>证据到哪一级</b></td><td><span class="who" style="background:var(--D)">D</span></td><td><span class="lay holo">HOLO</span><span class="lay hero">H6</span></td><td>D 接过阶梯卡，全息证据阶梯点亮到“细胞”为止。局限：预测会错；没有公平对照，提速多少不知道；体外不等于体内（老师 Tutorial 2 的原例）；研究由开发平台的公司做，论文已声明利益关系。</td><td class="snd">同期短句 + 画外音</td></tr>
+      <tr><td class="t">15:00–16:20</td><td><b>收益</b></td><td><span class="who" style="background:var(--D)">D</span></td><td><span class="lay">EXPLAIN</span></td><td>健康、经济、伦理、环境四格（老师课件第 49 页），每格分“这次展示了”和“可能，但没测”；环境一格同时算计算耗电。</td><td class="snd">画外音</td></tr>
+      <tr><td class="t">16:20–17:10</td><td><b>未来方向</b></td><td><span class="who" style="background:var(--D)">D</span></td><td><span class="lay">EXPLAIN</span></td><td>四条：同靶点同预算的公平赛跑；更多生物学验证（动物模型、选择性、ADME）；用实验结构检验预测；公开失败数据，让模型学得更好。</td><td class="snd">画外音</td></tr>
+      <tr><td class="t">17:10–18:00</td><td><b>结论</b></td><td><span class="who" style="background:var(--D)">D</span> <span class="who" style="background:var(--ALL)">全组</span></td><td><span class="lay">REAL</span><span class="lay hero">H6</span></td><td>逐条回答两个目标；两条带走的信息；D 把开场那条新闻拉进全息阶梯，它停在“结合”这一级。四人同框收尾。</td><td class="snd">同期</td></tr>
+      <tr><td class="t">18:00–18:40</td><td><b>片尾</b></td><td>—</td><td><span class="lay">EXPLAIN</span></td><td>ACS 格式参考文献、图源许可、音乐署名、AI 使用说明。</td><td class="snd">The Weeknd 片段</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note" style="margin-top:10px">讲者时长：A 约 5:00（含开场），B 4:20，C 4:10，D 4:30 加全组收尾。所有数字都对照过 Ren 2023 原文；香港的发病数据还没查到可靠出处，查到前不进稿。</p>
+</section>
+
+<section>
+  <div class="eyebrow">Hero shots</div>
+  <h2>六个重点镜头</h2>
+  <p class="note" style="margin-bottom:14px">每个手势都对应一个真实的科学步骤，不做纯装饰的特效。</p>
+  <div class="heroes">
+    <div class="hero"><div class="k">H1<small>约 20 秒 · A</small></div><div><h3>片名点火</h3><dl><dt>手势</dt><dd>站在暗场里，抬手向前一推。</dd><dt>画面</dt><dd>手掌前方炸开细线和光点，汇成片名 Worth Testing?；全息光反打到脸和手上。</dd><dt>意义</dt><dd>开场的问题本身被点亮，告诉观众这部片子要回答它。</dd></dl></div></div>
+    <div class="hero"><div class="k">H2<small>约 25 秒 · A</small></div><div><h3>路线环</h3><dl><dt>手势</dt><dd>双手从胸前向两侧拉开。</dd><dt>画面</dt><dd>九个站点绕着讲者展开成一圈：靶点、结构、设计、筛选、测试、改进、局限、收益、未来，每站标上负责的讲者。</dd><dt>意义</dt><dd>评分要求的 Overview。之后每章开头，这个环缩成角标，并高亮当前站。</dd></dl></div></div>
+    <div class="hero"><div class="k">H3<small>约 45 秒 · B</small></div><div><h3>钥匙孔被堵住</h3><dl><dt>手势</dt><dd>从笔记本屏幕里“抓出”结构，单手转动，两指捏住尾巴向外拉。</dd><dt>画面</dt><dd>蛋白按置信度变色，镜头推进口袋，橙色尾巴和 Arg305 堵在里面；拉走后尾巴化成光点散掉，口袋亮起。</dd><dt>意义</dt><dd>AlphaFold 给的是预测，研究者要判断哪部分可信，这正是论文里真实做过的处理。</dd></dl></div></div>
+    <div class="hero"><div class="k">H4<small>约 40 秒 · C</small></div><div><h3>筛选墙</h3><dl><dt>手势</dt><dd>向右横扫，再向身前收拢，最后用指尖点选。</dd><dt>画面</dt><dd>8,918 个设计组成的弧墙，对接打分像波纹扫过，同类聚成簇，54 个飞到身前，点中的 7 个变成论文里的真实结构式。</dd><dt>意义</dt><dd>计算的作用是在动手合成前缩小范围；最后选哪几个还是由人决定。</dd></dl></div></div>
+    <div class="hero"><div class="k">H5<small>约 45 秒 · C</small></div><div><h3>改一把钥匙</h3><dl><dt>手势</dt><dd>把 001 拉到面前，在分子的一端“接”上一个新基团。</dd><dt>画面</dt><dd>新基团伸向 Lys33 并连上一条氢键；Kd 数字从 9,200 nM 滚到 566.7 nM，旁边标出 15 倍。</dd><dt>意义</dt><dd>实验结果反过来指导下一轮设计，这才是 AI 加实验合作的样子。</dd></dl></div></div>
+    <div class="hero"><div class="k">H6<small>两段共约 50 秒 · D</small></div><div><h3>证据阶梯与那条新闻</h3><dl><dt>手势</dt><dd>手掌由下往上抬，阶梯一级级亮；结尾把手机上的新闻拖进阶梯。</dd><dt>画面</dt><dd>预测、结合、酶、细胞四级亮起，动物和病人两级保持暗；新闻标题停在“结合”那一级。</dd><dt>意义</dt><dd>回答开场的问题，并留给观众一个日常可用的方法：看到“AI 发现新药”，先问证据走到哪一级。</dd></dl></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Sound</div>
+  <h2>音乐与声音</h2>
+  <div class="cols">
+    <div><h3>配乐</h3><ul>
+      <li>底乐用合成器为主的暗色电子（synthwave / darkwave 纯音乐），整片一个主题动机，按章节变化。</li>
+      <li>The Weeknd 原曲只放在没人讲话的三处：冷开场、筛选墙揭开、片尾。歌词不压讲解。</li>
+      <li>原曲用于课程提交、注明出处，风险较低；如果以后要公开发布，这三处需要换成可授权的音乐。</li>
+    </ul></div>
+    <div><h3>混音规则</h3><ul>
+      <li>人声优先：讲解时音乐压低约 20 dB。</li>
+      <li>全息界面配轻音效（展开、点选、吸附），使用可商用素材。</li>
+      <li>四个人的画外音在同一个安静房间、用同一支麦克风录，音色才统一。</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Shoot</div>
+  <h2>怎么拍</h2>
+  <div class="cols">
+    <div><h3>实景日（每人约 1 小时）</h3><p class="note">对着镜头的短句用现场声音，句子短到说错一句重来就好。加拍补充画面：查 AlphaFold 网页、手机、挂锁、钥匙、校园走路。实验室镜头要先问助教能不能拍。</p></div>
+    <div><h3>绿幕日（全组约 3–4 小时）</h3><p class="note">每人拍自己负责的 1–2 个重点镜头，只做动作不讲话。我会做一个网页预演工具：电脑摄像头实时叠上全息画面，拍的人看着屏幕就知道手往哪推、眼睛看哪。</p></div>
+    <div><h3>录音（每人 30–45 分钟）</h3><p class="note">剪出粗剪后，按画面长度录画外音。这样每句的时长是先定好的，不会超时。</p></div>
+  </div>
+  <div class="cols" style="margin-top:16px">
+    <div><h3>要买或借的</h3><ul>
+      <li>绿幕布至少 2×3 米，加支架</li>
+      <li>两盏柔光灯打绿幕，一盏主光打人</li>
+      <li>三脚架、领夹麦</li>
+      <li>道具：挂锁和钥匙、7 把普通钥匙、打印的证据阶梯卡</li>
+    </ul></div>
+    <div><h3>我负责做的</h3><ul>
+      <li>抠像和手势追踪流程，全息影像跟随真手</li>
+      <li>Blender 全息与讲解用的 3D（蛋白、分子、肝脏）</li>
+      <li>Remotion 2D、字幕、总剪辑、混音</li>
+      <li>从论文图 5 和图 7 重画 001、048 等真实分子</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Schedule</div>
+  <h2>时间表</h2>
+  <div class="weeks">
+    <div class="week"><div class="d">10/26 – 11/1</div><div>定方案和镜头表；买绿幕和灯；我搭好抠像、手势追踪和预演工具，做全息风格；选定音乐。</div></div>
+    <div class="week"><div class="d">11/2 – 11/8</div><div>15 秒绿幕测试，验证整条流程；拍实景日；按镜头写口播定稿；做讲解动画和 3D 素材。</div></div>
+    <div class="week"><div class="d">11/9 – 11/15</div><div>绿幕日，全组一次拍完重点镜头；我合成六个重点镜头。</div></div>
+    <div class="week"><div class="d">11/16 – 11/22</div><div>粗剪，按画面录画外音；检查总长在 15–20 分钟内；全组看一遍，提修改。</div></div>
+    <div class="week"><div class="d">11/23 – 11/26</div><div>精修、混音、字幕、参考文献；导出并在 11/26 上传，留一天余量。文件名按 S#-Gp#-T10 格式。</div></div>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">Decide</div>
+  <h2>需要你们定的事</h2>
+  <div class="decide">
+    <div><b>组员人数和名字。</b>Tutorial 2 准备包里有 3 人版也有 4 人版，本方案先按 4 人排。</div>
+    <div><b>Tutorial 1 实际交的研究问题和目标。</b>结论要逐条回答它们；有照片最好。</div>
+    <div><b>用哪几首 The Weeknd。</b>开场、筛选墙、片尾各一段，每段 10–20 秒。</div>
+    <div><b>绿幕和灯什么时候到。</b>它决定第二周的测试能不能按时做。</div>
+    <div><b>能不能在实验室拍。</b>需要先问助教或 Dr. Carmen Liu。</div>
+  </div>
+</section>
+</div>

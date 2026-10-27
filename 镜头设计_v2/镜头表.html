@@ -1,0 +1,337 @@
+<title>Worth Testing 镜头表</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: same holo-lab identity as the treatment. Summary strip, then the film as sequences of compact shot rows; tests and sound after. */
+:root{
+  color-scheme:dark;
+  --bg:#070B12; --panel:#0E1520; --panel2:#121B28; --line:#1F2C3D;
+  --ink:#E4ECF2; --muted:#8C9BAB; --cyan:#5BD8F5; --orange:#FF7A3D; --warm:#E9D9C4; --ok:#6FE3B8; --wait:#F2C55C;
+  --A:#FF8F6B; --B:#6FE3B8; --C:#A9A2FF; --D:#F2C55C; --ALL:#9FB2C2;
+  --mR:#E9D9C4; --mB:#B9A88F; --mH:#5BD8F5; --m3:#FF7A3D; --m2:#8FA6FF; --mP:#C7B2E8; --mG:#9FB2C2;
+  --display:"IBM Plex Sans Condensed","Noto Sans SC",system-ui,sans-serif;
+  --body:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.65;margin:0}
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:44px 90px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+h1{font-size:clamp(36px,6vw,64px);line-height:1.02;font-weight:700}
+h2{font-size:25px;font-weight:700;margin-bottom:14px}
+h3{font-size:17px;font-weight:600}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--cyan)}
+.note{font-size:13.5px;color:var(--muted)}
+header{display:grid;gap:14px;margin-bottom:28px}
+.lede{max-width:66ch;color:var(--warm)}
+.facts{display:flex;flex-wrap:wrap;gap:12px 32px}
+.facts div{display:grid}
+.facts b{font-family:var(--mono);font-size:20px;font-weight:600}
+.facts span{font-size:12px;color:var(--muted)}
+section{margin-top:52px}
+.tl{overflow-x:auto}
+.tl svg{display:block;width:100%;min-width:760px;height:auto}
+.tl text{font-family:var(--mono);font-size:10px;fill:var(--muted)}
+.tl .sec{font-family:var(--body);font-size:11px;fill:var(--ink)}
+.tl a:hover rect,.tl a:focus rect{opacity:.6}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:10px;font-size:12.5px;color:var(--muted)}
+.sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.filter{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-bottom:1px solid var(--line);margin-top:40px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.filter button{font:500 13px var(--body);color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:5px 13px;cursor:pointer}
+.filter button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.filter button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+.filter .count{margin-left:auto;font-size:12px;color:var(--muted)}
+.seq{margin-top:34px}
+.seqHead{display:grid;gap:3px;padding-left:12px;border-left:3px solid var(--c);margin-bottom:12px}
+.seqHead .meta{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.shot{display:grid;grid-template-columns:76px minmax(0,1fr) minmax(0,250px);gap:16px;padding:14px 16px;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--mc);border-radius:5px;margin-bottom:8px;scroll-margin-top:64px}
+.shot .no{font-family:var(--mono);font-size:20px;font-weight:600;color:var(--mc);line-height:1.1}
+.shot .no small{display:block;font-size:11.5px;color:var(--muted);font-weight:400;margin-top:6px}
+.shot h3{margin-bottom:4px}
+.shot .fr{font-size:14.5px}
+.side{display:grid;gap:6px;align-content:start;font-size:13px;min-width:0}
+.side .row{display:grid;grid-template-columns:34px minmax(0,1fr);gap:8px}
+.side .k{color:var(--muted)}
+.chip{display:inline-block;font-family:var(--mono);font-size:11.5px;padding:1px 7px;border-radius:3px;margin:0 4px 4px 0;white-space:nowrap}
+.who{color:#081018;font-weight:600}
+.mode{border:1px solid var(--mc);color:var(--mc)}
+.test{border:1px solid var(--line);color:var(--wait)}
+@media (max-width:760px){.shot{grid-template-columns:1fr}.side{border-top:1px solid var(--line);padding-top:8px}}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:6px}
+table{border-collapse:collapse;width:100%;min-width:820px;font-size:14px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font-size:12px;color:var(--muted);font-weight:500;background:var(--panel2)}
+tr:last-child td{border-bottom:0}
+td.id{font-family:var(--mono);font-weight:600;color:var(--cyan);white-space:nowrap}
+.st{font-family:var(--mono);font-size:12px;white-space:nowrap}
+.st.ok{color:var(--ok)} .st.run{color:var(--wait)} .st.need{color:var(--orange)} .st.todo{color:var(--muted)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.cols>*{min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:16px;display:grid;gap:6px;align-content:start}
+.people{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.card ul li,.card ol li{margin:3px 0}
+.cue{display:grid;grid-template-columns:110px minmax(0,1fr);gap:14px;padding:11px 0;border-bottom:1px solid var(--line)}
+.cue:last-child{border-bottom:0}
+.cue .t{font-family:var(--mono);font-size:12.5px;color:var(--cyan)}
+.cue b{color:var(--warm);font-weight:500}
+@media (max-width:600px){.cue{grid-template-columns:1fr;gap:2px}}
+figure{margin:0;display:grid;gap:8px}
+video{width:100%;max-width:100%;border:1px solid var(--line);border-radius:4px;background:#000}
+a{color:var(--cyan)}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">SCIE1007 · Topic 10 · 镜头表 v3 · 探索阶段</div>
+  <h1>Worth Testing? 镜头表</h1>
+  <p class="lede">先定镜头，再按镜头写词。这一版把实拍压到最低：每人只需要在一面素墙前、一个固定机位拍 20–30 分钟，不用绿幕、不用外景、不用道具，其余全部是 3D 和 2D。测试通过的做法才进入批量制作。</p>
+  <div class="facts" id="facts"></div>
+</header>
+
+<section style="margin-top:8px">
+  <div class="tl" id="tl"></div>
+  <div class="legend" id="legend"></div>
+</section>
+
+<section id="tests">
+  <div class="eyebrow">Feasibility</div>
+  <h2>可行性测试</h2>
+  <p class="note" style="margin-bottom:14px">每个新做法先做一个小测试，看效果、看耗时。绿色是已通过，黄色是进行中，橙色要你们先给素材或做决定。</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>编号</th><th>要验证的事</th><th>怎么测</th><th>通过标准</th><th>状态</th></tr></thead>
+    <tbody id="testRows"></tbody>
+  </table></div>
+  <div class="cols" style="margin-top:16px">
+    <figure><video src="tests/T3_keyhole_8s.mp4" controls muted playsinline preload="metadata"></video><figcaption class="note">T3 · 纯 3D：镜头推进口袋，橙色尾巴被拉走、口袋亮起。</figcaption></figure>
+    <figure><video src="tests/T4_keyhole_overlay.mp4" controls muted playsinline preload="metadata"></video><figcaption class="note">T4 · 同一段加上 Remotion 的标签、引用和字幕。</figcaption></figure>
+    <figure><img src="tests/pose_001.png" alt="001 在 CDK20 口袋里的对接姿势，两条黄色虚线连到铰链 Met84" style="width:100%;border:1px solid var(--line);border-radius:4px"><figcaption class="note">T6 · 001（第一轮命中物）：喹唑啉 N 和连接处 NH 跟 Met84 形成一对铰链氢键（黄色虚线），够不到 Lys33。Vina −7.9 kcal/mol。</figcaption></figure>
+    <figure><img src="tests/pose_048.png" alt="048 在 CDK20 口袋里的对接姿势，黄色虚线连到 Met84，橙色虚线从吡唑连到 Lys33" style="width:100%;border:1px solid var(--line);border-radius:4px"><figcaption class="note">T6 · 048（第二轮）：同样抓住 Met84，新加的吡唑多出一条到 Lys33 的氢键（橙色），吡咯 NH 还贴着 Ile10。Vina −8.8 kcal/mol。这是我们自己重做的对接，用来做画面，不是论文作者的原始姿势；对接分数也不等于实测结合强度。</figcaption></figure>
+    <figure><video src="tests/T1_hand_holo_occlusion.mp4" controls muted playsinline preload="metadata" style="max-height:640px;width:auto;justify-self:start"></video><figcaption class="note">T1 · 你拍的手势视频：MediaPipe 追踪双手，光环跟着手掌，两手之间托着 CDK20 全息，捏合时亮橙色；手指挡在全息前面。</figcaption></figure>
+    <figure><img src="tests/body_liver.png" alt="半透明的全息人体，右上腹里是红色的真实肝脏模型，外面围着三道扫描环" style="width:100%;border:1px solid var(--line);border-radius:4px"><figcaption class="note">T5 · BodyParts3D 的真实人体皮肤网格做成全息，肝脏模型在右侧肋骨下方的真实位置。</figcaption></figure>
+  </div>
+</section>
+
+<div class="filter" role="toolbar" aria-label="筛选镜头">
+  <button type="button" data-f="all" aria-pressed="true">全部</button>
+  <button type="button" data-f="A" aria-pressed="false">A</button>
+  <button type="button" data-f="B" aria-pressed="false">B</button>
+  <button type="button" data-f="C" aria-pressed="false">C</button>
+  <button type="button" data-f="D" aria-pressed="false">D</button>
+  <button type="button" data-f="3D" aria-pressed="false">只看 3D</button>
+  <button type="button" data-f="H" aria-pressed="false">只看手势</button>
+  <button type="button" data-f="R" aria-pressed="false">只看短句</button>
+  <span class="count" id="count"></span>
+</div>
+<div id="shots"></div>
+
+<section id="shoot">
+  <div class="eyebrow">Shoot</div>
+  <h2>拍摄清单</h2>
+  <p class="note" style="margin-bottom:14px">全片要拍的只有讲者短句、手势镜头和片尾四分屏，全部在同一个素墙机位完成。每人拍 20–30 分钟，可以各自找时间拍，不需要四个人凑在一起，也不用买绿幕。评分要求每个人都出镜并亲口讲，这一部分不能省。</p>
+  <div class="cols">
+    <div class="card"><h3>机位设置（四人一样）</h3><ul class="note" style="margin:4px 0 0;padding-left:18px">
+      <li>任意一面浅色素墙，人离墙 1 米以上</li>
+      <li>手机横放上三脚架，镜头和胸口同高；拍到腰以上，头顶和两侧留空，手伸开不出画</li>
+      <li>1080p 或 4K、30 fps；锁定曝光和对焦，关美颜</li>
+      <li>面向窗户，或一盏台灯从侧前方照，不要背光</li>
+      <li>深色纯色上衣，不穿绿色和细条纹</li>
+      <li>原文件用网盘传，不要用微信发（微信会压缩）</li>
+    </ul></div>
+    <div class="card"><h3>六个标准手势</h3><ul class="note" style="margin:4px 0 0;padding-left:18px">
+      <li><b>推开</b>：手掌从胸前向镜头推出</li>
+      <li><b>拉开</b>：双手从胸前向两侧拉开</li>
+      <li><b>托起</b>：手掌向上，停在胸前 3 秒</li>
+      <li><b>捏住拉走</b>：两指捏住空中一点，往外拉</li>
+      <li><b>横扫</b>：手从一侧扫到另一侧</li>
+      <li><b>递出 / 接住</b>：往画面右边递出；从画面左边接住</li>
+    </ul><p class="note" style="margin-top:6px">每个动作慢一点、拍 3 遍，眼睛看着手前方的“全息”。</p></div>
+    <div class="card"><h3>先拍一段标准测试镜头（20 秒）</h3><p class="note">按上面的机位：站好说一句话，然后依次做推开、拉开、捏住拉走、托起。用这一段一次测完 AI 抠像（T2）、手势追踪（T1）和手挡住全息的遮挡效果，测过了再让四个人正式拍。</p></div>
+  </div>
+  <div class="people" id="people" style="margin-top:18px"></div>
+</section>
+
+<section>
+  <div class="eyebrow">Music</div>
+  <h2>衬托音乐</h2>
+  <p class="note" style="margin-bottom:10px">整片一个主题动机：暗色合成器，70–90 BPM。讲解时音乐压低约 20 dB；没人讲话的地方才让音乐站到前面。</p>
+  <div id="cues"></div>
+</section>
+
+<section>
+  <div class="eyebrow">Everything else</div>
+  <h2>其他要做的</h2>
+  <div class="cols" id="extras"></div>
+</section>
+</div>
+
+<script>
+const P={A:"var(--A)",B:"var(--B)",C:"var(--C)",D:"var(--D)",ALL:"var(--ALL)"};
+const M={
+  R:{n:"讲者短句",c:"var(--mR)",d:"固定机位、素墙，对镜头说一两句，用现场声音"},
+  H:{n:"手势镜头",c:"var(--mH)",d:"同一个机位，只做规定的手势、不说话；后期 AI 抠像换背景、加全息"},
+  "3D":{n:"全屏 3D",c:"var(--m3)",d:"Blender 渲染的三维镜头"},
+  "2D":{n:"2D 图解",c:"var(--m2)",d:"Remotion 做的图、数字、文字和录屏"},
+  P:{n:"文献",c:"var(--mP)",d:"论文原页或原图，就近标引用"},
+  G:{n:"四分屏",c:"var(--mG)",d:"四个人各自的镜头拼成一屏，不用聚在一起拍"}
+};
+const SEQ=[
+ {id:"s0",n:"冷开场",who:"A"},{id:"s1",n:"为什么关心",who:"A"},{id:"s2",n:"问题、目标、方法",who:"A"},{id:"s3",n:"靶点从哪里来",who:"A"},
+ {id:"s4",n:"工具箱与暗靶点",who:"B"},{id:"s5",n:"钥匙孔被堵住",who:"B"},{id:"s6",n:"配钥匙机",who:"B"},
+ {id:"s7",n:"筛选墙",who:"C"},{id:"s8",n:"第一把钥匙",who:"C"},{id:"s9",n:"第二轮",who:"C"},
+ {id:"s10",n:"证据到哪一级",who:"D"},{id:"s11",n:"收益",who:"D"},{id:"s12",n:"未来方向",who:"D"},{id:"s13",n:"结论",who:"D"},{id:"s14",n:"片尾",who:"ALL"}
+];
+// s seq · w who · m mode · d seconds · t title · f frame & motion · a audio · k tool · x tests
+const S=[
+ {s:"s0",w:"A",m:"3D",d:6,t:"新闻推送",f:"暗场里一部 3D 手机，屏幕亮起一条推送：AI designs liver cancer drug in 30 days（仿造的示意标题，不用真实媒体标识）。",a:"The Weeknd 前奏淡入",k:"Blender + Remotion"},
+ {s:"s0",w:"A",m:"R",d:6,t:"真的吗",f:"A 对镜头一句：Is that true?",a:"同期一句",k:"素墙机位"},
+ {s:"s0",w:"A",m:"3D",d:10,t:"钻进屏幕",f:"镜头贴近 3D 手机屏幕，穿过像素，像素散成漂浮的分子线框，远处有一个发光的蛋白在等着。",a:"音乐抬起",k:"Blender",x:["T3"]},
+ {s:"s0",w:"A",m:"H",d:18,t:"H1 片名点火",f:"A 抬手一推，光点从掌心飞出汇成 Worth Testing?，光反打到脸和手上。背景换成暗色全息实验室。",a:"音乐重拍落在推手瞬间",k:"素墙机位 + AI 抠像 + 手势追踪",x:["T1","T2","T4"]},
+ {s:"s0",w:"ALL",m:"2D",d:10,t:"片名信息",f:"片名下方：SCIE1007 · Topic 10 · Group __，四个名字依次亮起。",a:"音乐收",k:"Remotion"},
+
+ {s:"s1",w:"A",m:"3D",d:14,t:"香港",f:"低多边形的香港地形和城市剪影，镜头从海面飞向九龙，城市灯光点点亮起。",a:"底乐进入，画外音开始",k:"Blender"},
+ {s:"s1",w:"A",m:"3D",d:16,t:"肝在哪里",f:"半透明的人体（哑光、低细节）缓慢旋转，肝脏的位置亮成暖红；旁边一张数据卡写香港的肝癌负担（数据待查）。",a:"画外音",k:"Blender",x:["T5"]},
+ {s:"s1",w:"A",m:"2D",d:12,t:"我们的实验课",f:"实验二的照片：六孔板、显微镜下的癌细胞，我们给它们加过 drug X。有人当时拍过照就用，没有就并进下一镜的 3D 六孔板。",a:"画外音",k:"已有照片 + Remotion"},
+ {s:"s1",w:"A",m:"3D",d:12,t:"六孔板放大",f:"六孔板的 3D 模型，镜头推进一个孔，里面的细胞从对照变成肿胀（按实验手册的观察词，示意）。",a:"画外音",k:"Blender"},
+ {s:"s1",w:"A",m:"3D",d:26,t:"10–17 年的路",f:"一条伸向远方的长路，路上依次立着研发五个阶段的门（Lecture 1c），路边标 10–17 年、约 28 亿美元、进入临床的化合物约一成能上市（Wang 2023）。镜头沿路飞过去。",a:"画外音",k:"Blender + Remotion 文字"},
+
+ {s:"s2",w:"A",m:"R",d:8,t:"我们只问一个问题",f:"A 同期一句，引出研究问题。",a:"同期",k:"素墙机位"},
+ {s:"s2",w:"A",m:"H",d:22,t:"问题与目标",f:"研究问题以全息文字在 A 面前逐行出现，两个目标变成两个光环落在 A 两侧。",a:"画外音",k:"素墙机位 +Remotion",x:["T1","T4"]},
+ {s:"s2",w:"A",m:"H",d:25,t:"H2 路线环",f:"A 双手向两侧拉开，九个站点绕着 A 展开成一圈，每站标负责的讲者。",a:"画外音",k:"素墙机位 +手势追踪 + Blender",x:["T1"]},
+ {s:"s2",w:"A",m:"2D",d:15,t:"我们怎么读文献",f:"四类来源卡（原始研究、方法论文、综述、学术书）和两条评价标准：来源类型、证据强度。",a:"画外音",k:"Remotion"},
+
+ {s:"s3",w:"A",m:"3D",d:10,t:"香港的研究",f:"接回第 6 镜的 3D 香港，镜头落到沙田，一个光点标出中大和威尔斯亲王医院的位置。",a:"画外音",k:"Blender（复用场景）"},
+ {s:"s3",w:"A",m:"P",d:14,t:"Feng 2011",f:"论文首页和图 10 局部，框出：52 例肝癌里 36 例 CCRK 升高。",a:"画外音",k:"Remotion"},
+ {s:"s3",w:"A",m:"3D",d:22,t:"从肝到一个蛋白",f:"连续尺度穿越：肝组织 → 肝细胞 → 细胞里成千上万的蛋白，其中 CDK20 被点亮。每一级标尺度。",a:"画外音",k:"Blender",x:["T3"]},
+ {s:"s3",w:"A",m:"3D",d:16,t:"数据选靶点",f:"10 组数据化成 10 根光柱，1,133 份肿瘤和 674 份健康样本像点云落下，候选靶点排成一列，CDK20 升到最前。",a:"画外音",k:"Blender"},
+ {s:"s3",w:"A",m:"2D",d:12,t:"为什么是它",f:"三张理由卡：和肝癌关联强；没有实验结构（暗靶点）；没有获批药物。",a:"画外音",k:"Remotion"},
+ {s:"s3",w:"A",m:"H",d:12,t:"掌心的挂锁",f:"A 摊开手掌，掌心浮出一把全息挂锁和一把钥匙：把 CDK20 想成一把锁。",a:"画外音",k:"素墙机位 + 手势追踪 + Blender",x:["T1","T2"]},
+ {s:"s3",w:"A",m:"3D",d:6,t:"锁变成蛋白",f:"全息挂锁放大占满画面，再溶解成 CDK20 结构。",a:"转场音效",k:"Blender"},
+ {s:"s3",w:"A",m:"H",d:8,t:"交接给 B",f:"A 把全息挂锁推出画右；切到 B 的镜头，挂锁从画左飞进 B 的手里。两人分开拍，动作方向对上就行。",a:"音乐过门",k:"素墙机位 + 手势追踪",x:["T1"]},
+
+ {s:"s4",w:"B",m:"R",d:10,t:"这把锁没有照片",f:"B 对镜头一句：没有人拍过这把锁的照片。",a:"同期",k:"素墙机位"},
+ {s:"s4",w:"B",m:"H",d:30,t:"全息工具箱",f:"五种方法变成五个 3D 小物件环绕 B：对接（钥匙插孔）、分子动力学（晃动的原子）、量子力学（电子云）、化学信息学（分子网格）、机器学习（神经网络）。B 依次点亮本案例用到的。",a:"画外音",k:"素墙机位 +手势追踪 + Blender",x:["T1"]},
+ {s:"s4",w:"B",m:"3D",d:30,t:"暗靶点",f:"一片蛋白星空：有实验结构的亮，没有的暗。镜头飞向其中一颗暗星，它就是 CDK20。",a:"画外音",k:"Blender"},
+
+ {s:"s5",w:"B",m:"2D",d:12,t:"查 AlphaFold",f:"电脑录屏：打开 AlphaFold 数据库，搜 CDK20（Q8IZL9），出现彩色结构。只录屏幕，不用拍人。",a:"画外音",k:"录屏 + Remotion"},
+ {s:"s5",w:"B",m:"H",d:15,t:"从屏幕里抓出来",f:"录屏画面缩小成一块浮着的屏幕，B 伸手从里面把结构抓出来，变成全息影像浮在手上。",a:"音乐抬起",k:"素墙机位 + 手势追踪",x:["T1","T2"]},
+ {s:"s5",w:"B",m:"3D",d:15,t:"序列到结构",f:"346 个字母排成长条，旁边浮现预测出来的三维结构（不做假的折叠过程）。角落小字：2024 诺贝尔化学奖。",a:"画外音",k:"Blender"},
+ {s:"s5",w:"B",m:"H",d:15,t:"按置信度上色",f:"B 转动结构，颜色从蓝到橙铺开：蓝色可信，橙色不可信。",a:"画外音",k:"素墙机位 +手势追踪",x:["T1"]},
+ {s:"s5",w:"B",m:"3D",d:20,t:"推进口袋",f:"镜头一路推进 ATP 口袋：橙色尾巴穿过口袋，Arg305 正堵在里面，残基编号标出。",a:"音乐收紧",k:"Blender",x:["T3"]},
+ {s:"s5",w:"B",m:"H",d:18,t:"H3 拉走尾巴",f:"B 两指捏住尾巴往外拉，尾巴化成光点散掉，口袋亮起。",a:"音乐释放",k:"素墙机位 +手势追踪 + Blender",x:["T1","T3"]},
+ {s:"s5",w:"B",m:"3D",d:15,t:"口袋的形状",f:"口袋表面显形，铰链处的 Met84 标出，体积约 150 Å³。",a:"画外音",k:"Blender"},
+
+ {s:"s6",w:"B",m:"3D",d:30,t:"在口袋里长出分子",f:"口袋里先长出一个抓住 Met84 的核心，再一次次换分支，生成不同的设计并向外飞出排队（示意结构）。",a:"画外音",k:"Blender",x:["T6"]},
+ {s:"s6",w:"B",m:"2D",d:20,t:"生成模型怎么想",f:"三步极简图：学已有化学数据 → 按口袋规则生成 → 打分。",a:"画外音",k:"Remotion"},
+ {s:"s6",w:"B",m:"3D",d:20,t:"8,918",f:"设计越来越多，汇成一团粒子云，计数器跑到 8,918。",a:"音乐渐强",k:"Blender 或 TouchDesigner",x:["T9"]},
+ {s:"s6",w:"B",m:"H",d:10,t:"交接给 C",f:"B 把一串全息钥匙推出画右，C 在自己的镜头里接住。",a:"音乐过门",k:"素墙机位 + 手势追踪",x:["T1"]},
+
+ {s:"s7",w:"C",m:"R",d:8,t:"太多了",f:"C 对镜头一句：8,918 个，不可能全做出来。",a:"同期",k:"素墙机位"},
+ {s:"s7",w:"C",m:"H",d:32,t:"H4 筛选墙",f:"8,918 个设计组成弧墙环绕 C。C 横扫，对接分数像波纹扫过；收拢，同类聚成簇；54 个飞到身前；点选 7 个。",a:"The Weeknd 片段，不压讲解",k:"素墙机位 + AI 抠像 + 手势追踪 + Blender",x:["T1","T2","T3"]},
+ {s:"s7",w:"C",m:"3D",d:25,t:"对接是什么",f:"一个设计插进口袋，旁边分数条升高；另外几个插不进去被弹开。",a:"画外音",k:"Blender",x:["T6"]},
+ {s:"s7",w:"C",m:"2D",d:15,t:"真实的 7 个",f:"论文图 5 的 7 个结构式重画，一个个落下排好。",a:"画外音",k:"Remotion",x:["T6"]},
+
+ {s:"s8",w:"C",m:"3D",d:10,t:"进实验室",f:"3D 实验台：7 个小瓶排好，移液器滴下，孔板上的读数亮起。",a:"画外音",k:"Blender"},
+ {s:"s8",w:"C",m:"3D",d:20,t:"1 个结合",f:"7 个小瓶，6 个暗下去，001 亮起：Kd 9.2 µM。",a:"画外音",k:"Blender"},
+ {s:"s8",w:"C",m:"3D",d:15,t:"30 天放回长路",f:"回到第 10 镜那条 10–17 年的长路，30 天只占起点的一小段。",a:"画外音",k:"Blender（复用场景）"},
+ {s:"s8",w:"C",m:"R",d:8,t:"插得进，拧不动",f:"C 对镜头一句：它插得进去，但拧不动。",a:"同期",k:"素墙机位"},
+ {s:"s8",w:"C",m:"3D",d:12,t:"钥匙拧不动",f:"3D 挂锁特写：钥匙插到底，试着转，卡住。",a:"一声金属卡住的音效",k:"Blender"},
+ {s:"s8",w:"C",m:"3D",d:15,t:"001 在口袋里",f:"001 停在口袋里的姿势（我们自己重做的对接），旁边标酶活性 IC50 > 6,000 nM。",a:"画外音",k:"Blender",x:["T6"]},
+
+ {s:"s9",w:"C",m:"H",d:35,t:"H5 改一把钥匙",f:"C 把 001 拉到面前，给一端接上新基团，基团伸向 Lys33，氢键亮起；Kd 从 9,200 nM 滚到 566.7 nM，旁边标 15 倍。",a:"成功时一个上扬和弦",k:"素墙机位 +手势追踪 + Blender",x:["T1","T6"]},
+ {s:"s9",w:"C",m:"3D",d:25,t:"048 长什么样",f:"048 的真实结构 3D 旋转，和几种已知抑制剂并排：骨架不同，是新的一类。",a:"画外音",k:"Blender",x:["T6"]},
+ {s:"s9",w:"C",m:"3D",d:30,t:"细胞里的差别",f:"两个培养孔：肝癌 Huh7 和对照 HEK293，柱子高度差约 8 倍；接回 Lecture 1c：化疗分不清癌细胞和正常细胞。",a:"画外音",k:"Blender + Remotion"},
+
+ {s:"s10",w:"D",m:"R",d:10,t:"证据到哪一级",f:"D 对镜头一句：结果再好，也要问它走到了哪一步。",a:"同期",k:"素墙机位"},
+ {s:"s10",w:"D",m:"H",d:30,t:"H6 证据阶梯",f:"D 手掌由下往上抬，全息阶梯一级级亮：预测、结合、酶、细胞；动物和病人两级保持暗。",a:"画外音",k:"素墙机位 +手势追踪 + Blender",x:["T1"]},
+ {s:"s10",w:"D",m:"3D",d:30,t:"三个局限",f:"三个小场景：蓝图上浮起误差云（预测会错）；两条赛道只有一条有车（没有对照）；细胞孔和人体并排（体外不等于体内）。",a:"画外音",k:"Blender"},
+ {s:"s10",w:"D",m:"2D",d:20,t:"谁做的研究",f:"作者单位与利益声明：开发平台的公司自己做、自己发表，论文已声明；我们怎么看。",a:"画外音",k:"Remotion"},
+
+ {s:"s11",w:"D",m:"3D",d:50,t:"四类收益",f:"健康、经济、伦理、环境四个 3D 小图标，每个分成“这次展示了”和“可能，但没测”两半。",a:"画外音",k:"Blender + Remotion"},
+ {s:"s11",w:"D",m:"R",d:15,t:"电费也要算",f:"D 对镜头一句：算力也要用电；接一个 3D 显卡风扇转动的特写。",a:"同期",k:"素墙机位 + Blender"},
+ {s:"s11",w:"D",m:"3D",d:15,t:"天平",f:"一边是少合成的试剂，一边是计算耗电，天平停平，标 not measured。",a:"画外音",k:"Blender"},
+
+ {s:"s12",w:"D",m:"R",d:8,t:"接下来该测什么",f:"D 对镜头一句，引出四条未来方向。",a:"同期",k:"素墙机位"},
+ {s:"s12",w:"D",m:"3D",d:42,t:"四条未来方向",f:"每条一个 3D 小场景：公平赛跑；动物模型与选择性；用实验结构核对预测；把失败的数据也公开。",a:"画外音",k:"Blender"},
+
+ {s:"s13",w:"D",m:"2D",d:15,t:"两个目标打分",f:"两个目标逐条评价：做到了什么，没做到什么。",a:"画外音",k:"Remotion"},
+ {s:"s13",w:"D",m:"H",d:20,t:"把新闻放上阶梯",f:"D 把开场那条新闻从手机里拖出来，放进全息阶梯，它停在“结合”这一级。",a:"主题动机回来",k:"素墙机位 + 手势追踪",x:["T1"]},
+ {s:"s13",w:"ALL",m:"G",d:15,t:"四人收尾",f:"四分屏：四个人在各自的镜头里依次说出一句带走的话，最后同时收手，全息熄灭。",a:"同期",k:"四人各自的素墙机位"},
+
+ {s:"s14",w:"ALL",m:"2D",d:30,t:"参考文献与署名",f:"ACS 格式参考文献、图源许可、音乐署名、AI 使用说明。",a:"The Weeknd 片段",k:"Remotion"},
+ {s:"s14",w:"ALL",m:"2D",d:10,t:"幕后花絮",f:"10 秒快剪：抠像前后对比、手势追踪的骨架线、Blender 线框、渲染中的画面，让老师看到做了多少工作。",a:"音乐收尾",k:"录屏 + 测试素材"}
+];
+const TESTS=[
+ {id:"T1",what:"全息跟着真手动",how:"拍 10 秒手势视频（普通墙就行），用 MediaPipe 逐帧追踪手，把全息叠在手上",pass:"全息贴着手走，不抖、不漂",st:"ok",sv:"手在画面里时 94% 的帧追到手，59% 两只手都追到；光环跟手、两手之间托住蛋白、捏合都能触发。手挡住全息也做好了：用追踪点画出手的遮罩，手指在全息前面。正式拍要横屏、三脚架、传原文件"},
+ {id:"T2",what:"素墙前的 AI 抠像",how:"拍一段“标准测试镜头”（见下方拍摄清单），用 AI 抠像把人从素墙里抠出来，换成全息实验室背景",pass:"头发和手指边缘干净，四个人分开拍也能接上；不用买绿幕",st:"need",sv:"需要一段标准测试镜头"},
+ {id:"T3",what:"3D 动画镜头的质量和耗时",how:"在 5080 上渲染一段 8 秒的钥匙孔推进动画",pass:"画面稳定好看；每秒成片的渲染时间够排进时间表",st:"ok",sv:"240 帧用 184 秒，每秒成片约 23 秒渲染（1080p、256 采样、OptiX 降噪）"},
+ {id:"T4",what:"2D 和 3D 合成",how:"用 Remotion 把标签、数字、字幕叠到 T3 的画面上，导出 MP4",pass:"文字清楚、跟着画面走，导出正常",st:"ok",sv:"8 秒合成用 16 秒。标签已经钉在 3D 点上：从 Blender 导出每一帧的屏幕坐标，尾巴被拉走时标签跟着走；引用小字加了底色"},
+ {id:"T5",what:"人体和器官素材",how:"找有授权的人体模型（BodyParts3D 或 MakeHuman），配合已有的肝脏网格",pass:"授权可用于课程作业，渲染出来不廉价",st:"ok",sv:"用 BodyParts3D 的皮肤网格（CC BY-SA 2.1 JP，片尾署名），和肝脏同一套坐标，肝脏自动落在右上腹；导入加渲染 6.6 秒。自己用骨架生成的人体太粗糙，弃用"},
+ {id:"T6",what:"真实分子和对接姿势",how:"从补充材料取 001 和 048 的结构，生成 3D 构象，在 AlphaFold 模型上自己跑一次对接",pass:"结构与论文图 5、图 7 一致；姿势抓住 Met84",st:"ok",sv:"结构按论文图 5、图 7 重建，分子量与 SI 质谱一致。AutoDock Vina 对接：两个分子都和 Met84 形成一对铰链氢键；只有 048 的吡唑贴到 Lys33（3.4 Å），和论文说的一样"},
+ {id:"T7",what:"音乐和人声混音",how:"拿一段候选底乐和一段试录人声，做自动压低音乐",pass:"音乐在，人声每个词都听得清",st:"need",sv:"需要你选几首候选音乐"},
+ {id:"T8",what:"拍摄预演工具",how:"网页打开电脑摄像头，实时叠上全息画面",pass:"拍的人能看着屏幕找准手的位置",st:"ok",sv:"做好了（镜头设计_v2/预演工具，双击“启动预演工具.cmd”）。有构图参考线、出画提醒、六个手势依次打勾；也能用录好的视频练习。用你的手势视频测过：120 帧里 102 帧追到手，推开和拉开自动判定通过。摄像头要在你电脑上试"},
+ {id:"T9",what:"TouchDesigner 粒子",how:"你在 TD 里做 8,918 粒子云的一段，导出后合成",pass:"和 Blender 画面风格接得上",st:"need",sv:"需要你来做；免费版输出上限 1280 像素"},
+ {id:"T10",what:"全片渲染预算",how:"用 T3 的每秒耗时乘以全片 3D 和全息的秒数",pass:"总渲染时间放得进 11/9–11/22",st:"ok",sv:"3D 加全息约 12.6 分钟 × 23 秒 ≈ 4.8 小时一遍；改三遍也只要一个周末"}
+];
+const CUES=[
+ ["0:00–0:50","冷开场","The Weeknd 原曲前奏（你来选曲），推手点火时落重拍，片名后收。"],
+ ["0:50–5:00","引言","底乐：低频脉冲加柔和的合成器长音，很安静，给讲解让路。"],
+ ["5:00–9:20","结构与生成","加入分解和弦，节奏渐密；拉走尾巴那一刻一次释放。"],
+ ["9:20–10:40","筛选墙","The Weeknd 片段 10–15 秒，筛选墙揭开时没人讲话，之后回到底乐。"],
+ ["10:40–13:30","实验","鼓点进入但压得很低；048 成功时一个上扬和弦。"],
+ ["13:30–17:10","讨论","撤掉鼓，只留长音，给批判性讨论留空间。"],
+ ["17:10–18:00","结论","主题动机完整回来，四人收尾时收住。"],
+ ["18:00–18:40","片尾","The Weeknd 片段，配幕后花絮。"]
+];
+const EXTRAS=[
+ ["音效设计","全息界面的声音（展开、点选、吸附、溶解）、镜头穿越的呼啸、数字跳动的滴答。用可商用的素材库。"],
+ ["全息界面规范","一套字体、线宽、颜色和标签格式，六个全息镜头共用，看起来是同一个系统。"],
+ ["匹配剪辑","手机像素变分子、掌心挂锁变蛋白、录屏变全息、递出和接住接上两个人的镜头。转场靠形状和动作接上，少用淡入淡出。"],
+ ["调色","四个人分开拍，抠像后统一放进同一个全息背景、套同一套调色，看起来就像在同一个地方拍的。"],
+ ["字幕","英文字幕必做；繁体中文字幕可选。"],
+ ["幕后花絮","片尾 10 秒，展示绿幕、线框、渲染过程，老师能直接看到工作量。"],
+ ["预演工具","拍摄当天用：电脑摄像头实时叠上全息，讲者看屏幕就知道手往哪推、眼睛看哪。"],
+ ["引用标注","每个关键数字旁边标短引用，片尾给 ACS 格式完整书目。"]
+];
+
+let t=0;S.forEach((x,i)=>{x.i=i+1;x.id="shot"+String(i+1).padStart(2,"0");x.st=t;t+=x.d;x.en=t;x.x=x.x||[];});
+const TOTAL=t, fmt=s=>Math.floor(s/60)+":"+String(Math.round(s%60)).padStart(2,"0");
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const sum=f=>S.filter(f).reduce((a,x)=>a+x.d,0);
+const d3=sum(x=>x.m==="3D"), cg=sum(x=>["3D","2D","P"].includes(x.m)), cam=S.filter(x=>["R","H","G"].includes(x.m));
+document.getElementById("facts").innerHTML=[[fmt(TOTAL),"总长"],[S.length,"镜头"],[Math.round(cg/TOTAL*100)+"%","不用拍（3D、2D、文献）"],[Math.round(d3/TOTAL*100)+"%","其中全屏 3D"],[cam.length,"要拍的镜头，全在同一个素墙机位"]].map(([v,k])=>`<div><b>${v}</b><span>${k}</span></div>`).join("");
+
+(function(){const W=1000,sc=W/TOTAL;let o=`<svg viewBox="0 -18 ${W} 66" aria-label="全片时间轴">`;
+ SEQ.forEach(q=>{const xs=S.filter(x=>x.s===q.id);if(!xs.length)return;const a=xs[0].st*sc;o+=`<line x1="${a}" y1="-16" x2="${a}" y2="40" stroke="var(--line)"/>${(xs[xs.length-1].en-xs[0].st)*sc>44?`<text x="${a+2}" y="-6" class="sec">${q.n}</text>`:""}`;});
+ S.forEach(x=>{const a=x.st*sc,w=Math.max(1,x.d*sc-.8);o+=`<a href="#${x.id}"><title>${x.i} ${esc(x.t)} · ${fmt(x.st)}–${fmt(x.en)}</title><rect x="${a}" y="0" width="${w}" height="12" fill="${P[x.w]}"/><rect x="${a}" y="14" width="${w}" height="14" fill="${M[x.m].c}"/></a>`;});
+ for(let m=0;m<=Math.floor(TOTAL/60);m++){const xx=m*60*sc;o+=`<line x1="${xx}" y1="30" x2="${xx}" y2="34" stroke="var(--muted)"/><text x="${xx}" y="45" text-anchor="${m?"middle":"start"}">${m}:00</text>`;}
+ document.getElementById("tl").innerHTML=o+"</svg>";
+ document.getElementById("legend").innerHTML=["A","B","C","D","ALL"].map(k=>`<span><i class="sw" style="background:${P[k]}"></i>${k==="ALL"?"全组":k}</span>`).join("")+Object.entries(M).map(([k,m])=>`<span title="${m.d}"><i class="sw" style="background:${m.c}"></i>${m.n}</span>`).join("");})();
+
+const stName={ok:"已通过",run:"进行中",need:"等你们",todo:"未开始"};
+document.getElementById("testRows").innerHTML=TESTS.map(x=>{const n=S.filter(s=>s.x.includes(x.id)).length;return `<tr id="${x.id}"><td class="id">${x.id}</td><td><b>${x.what}</b>${n?`<div class="note">影响 ${n} 个镜头</div>`:""}</td><td>${x.how}</td><td>${x.pass}</td><td><span class="st ${x.st}">${stName[x.st]}</span><div class="note">${x.sv}</div></td></tr>`;}).join("");
+
+document.getElementById("shots").innerHTML=SEQ.map(q=>{const xs=S.filter(x=>x.s===q.id);
+ return `<div class="seq" data-seq="${q.id}"><div class="seqHead" style="--c:${P[q.who]}"><div class="meta">${fmt(xs[0].st)}–${fmt(xs[xs.length-1].en)} · ${xs.length} 镜 · ${q.who==="ALL"?"全组":"讲者 "+q.who}</div><h2 style="margin:0">${q.n}</h2></div>`+
+ xs.map(x=>`<article class="shot" id="${x.id}" data-w="${x.w}" data-m="${x.m}" style="--mc:${M[x.m].c}"><div class="no">${String(x.i).padStart(2,"0")}<small>${fmt(x.st)} · ${x.d}s</small></div><div><h3>${esc(x.t)}</h3><p class="fr">${esc(x.f)}</p></div><div class="side"><div><span class="chip who" style="background:${P[x.w]}">${x.w==="ALL"?"全组":x.w}</span><span class="chip mode">${M[x.m].n}</span>${x.x.map(id=>`<a class="chip test" href="#${id}">${id}</a>`).join("")}</div><div class="row"><span class="k">声音</span><span>${esc(x.a)}</span></div><div class="row"><span class="k">工具</span><span>${esc(x.k)}</span></div></div></article>`).join("")+"</div>";}).join("");
+
+document.getElementById("people").innerHTML=["A","B","C","D"].map(k=>{
+ const xs=cam.filter(x=>x.w===k||x.w==="ALL");
+ const lines=xs.filter(x=>x.m==="R"||x.m==="G").length, gest=xs.filter(x=>x.m==="H").length;
+ return `<div class="card" style="border-top:3px solid ${P[k]}"><h3>${k}</h3><p class="note">${lines} 句对镜头短句 · ${gest} 个手势镜头</p><ol class="note" style="margin:6px 0 0;padding-left:18px">${xs.map(x=>`<li><a href="#${x.id}" style="color:inherit">${String(x.i).padStart(2,"0")} ${esc(x.t)}</a> · ${M[x.m].n}</li>`).join("")}</ol></div>`;}).join("");
+document.getElementById("cues").innerHTML=CUES.map(([t,n,d])=>`<div class="cue"><div class="t">${t}</div><div><b>${n}</b> · ${d}</div></div>`).join("");
+document.getElementById("extras").innerHTML=EXTRAS.map(([h,d])=>`<div class="card"><h3>${h}</h3><p class="note">${d}</p></div>`).join("");
+
+const btns=[...document.querySelectorAll(".filter button")];
+function apply(f){btns.forEach(b=>b.setAttribute("aria-pressed",b.dataset.f===f));let n=0;
+ document.querySelectorAll(".shot").forEach(el=>{const on=f==="all"||el.dataset.w===f||el.dataset.w==="ALL"&&["A","B","C","D"].includes(f)||el.dataset.m===f;el.hidden=!on;if(on)n++;});
+ document.querySelectorAll(".seq").forEach(s=>{s.hidden=![...s.querySelectorAll(".shot")].some(e=>!e.hidden);});
+ document.getElementById("count").textContent=n+" / "+S.length+" 镜";
+ try{localStorage.setItem("wt3-filter",f);}catch(e){}}
+btns.forEach(b=>b.addEventListener("click",()=>apply(b.dataset.f)));
+let saved="all";try{saved=localStorage.getItem("wt3-filter")||"all";}catch(e){}
+apply(btns.some(b=>b.dataset.f===saved)?saved:"all");
+</script>

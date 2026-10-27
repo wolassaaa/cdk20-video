@@ -1,0 +1,84 @@
+资料核查记录
+核查日期 2026-10-03
+
+CHECKS=74 PASS=74 FAIL=0
+
+PASS | 主资料包重新打开 | characters=11563
+PASS | 来源说明重新打开 | characters=3503
+PASS | CSV格式与编号 | rows=35 unique_ids=35
+PASS | CSV字段完整 | 15 fields; no empty values
+PASS | Excel中文编码 | UTF-8 BOM
+PASS | 正文证据引用均存在 | referenced=35
+PASS | 证据来源编号有效 | 
+PASS | 主案例正式DOI | 10.1039/d2sc05709c
+PASS | 原文数值匹配 8918 molecules | 
+PASS | 原文数值匹配 54 molecules | 
+PASS | 原文数值匹配 7 compounds | 
+PASS | 原文数值匹配 30 days | 
+PASS | 原文数值匹配 9.2 ± 0.5 | 
+PASS | 原文数值匹配 >6000 | 
+PASS | 原文数值匹配 16 novel molecules | 
+PASS | 原文数值匹配 6 out of 16 | 
+PASS | 原文数值匹配 566.7 ± 256.2 | 
+PASS | 原文数值匹配 360.0 ± 14.1 | 
+PASS | 原文数值匹配 33.4 ± 22.6 | 
+PASS | 原文数值匹配 208.7 ± 3.3 | 
+PASS | 原文数值匹配 1706.7 ± 670.0 | 
+PASS | 原文数值匹配 three independent experiments | 
+PASS | 正式版本单位换算 | 
+PASS | 方法全文重新解析 AlphaFold_2021_fulltext.xml | 10.1038/s41586-021-03819-2
+PASS | 方法全文重新解析 Chemistry42_2023_fulltext.xml | 10.1021/acs.jcim.2c01191
+PASS | 补充材料重新打开 | pages=16; compounds found
+PASS | 逐页索引完整 | 
+PASS | 正文定位索引重新打开 | 
+PASS | 原有资料未改动 Group_Project_Rubrics_for_Moodle.pdf | f37c1c5f2a8b67d046407cab6acbb300cfa7098382bf4adffb86a6085ea47eba
+PASS | 原有资料未改动 Group Project Introduction.pdf | 16c99052ac6d5d8f9494ed73c8b8f1e95d3533130cb7881f32b560afae862d37
+PASS | 原有资料未改动 pharmaceuticals-16-00253.pdf | b2c2eb6d948a3361ab72411daf56f36068a6b9d0e367d05be8def8b168a02ac3
+PASS | 原有资料未改动 Guidelines for generative AI for SCIE 1007.pdf | b102b91f4fdd0a1a60f4efc1a7fd3a29d19679b180a229c480ffdfffc959f6c3
+PASS | 来源文件完整 AlphaFold_2021_fulltext.xml | 
+PASS | 来源文件完整 Bender_2026_Crossref_metadata.json | 
+PASS | 来源文件完整 Chemistry42_2023_fulltext.xml | 
+PASS | 来源文件完整 Feng_2011_CCRK_fulltext.html | 
+PASS | 来源文件完整 Feng_2011_CCRK_text.txt | 
+PASS | 来源文件完整 input_hashes_before.json | 
+PASS | 来源文件完整 Lengauer_2007_chapter1_text.txt | 
+PASS | 来源文件完整 Lengauer_2007_chapter_Crossref_metadata.json | 
+PASS | 来源文件完整 Ren_2023_CDK20_fulltext.xml | 
+PASS | 来源文件完整 SC-014-D2SC05709C-s001.pdf | 
+PASS | 来源文件完整 Wiley_book_sample_3527312781.pdf | 
+PASS | 来源文件完整 正文定位索引.txt | 
+PASS | 来源文件完整 补充材料页索引.json | 
+PASS | 内容覆盖 一 我们为肝癌寻找的是什么 | 
+PASS | 内容覆盖 二 为什么早期药物发现需要计算帮助 | 
+PASS | 内容覆盖 三 主案例中的方法怎样协作 | 
+PASS | 内容覆盖 四 主案例实际得到什么结果 | 
+PASS | 内容覆盖 五 药物发现的优点怎样体现 | 
+PASS | 内容覆盖 六 怎样评价原因而不是只展示好结果 | 
+PASS | 内容覆盖 七 下一步研究怎样获得更强证据 | 
+PASS | 内容覆盖 八 可直接复用的内容表述 | 
+PASS | 内容覆盖 九 常见追问及回答 | 
+PASS | 内容覆盖 十 资料检验与复用 | 
+PASS | 没有增加第二病例 | 
+PASS | 时间检查区分期刊卷页与安排 | 
+PASS | 没有展示时间与成员分配 | 
+PASS | 没有混用预印本数值 | 
+PASS | 未伪造实验执行或受众测试 | 
+PASS | 公开摘要与目录层级透明 | 
+PASS | 前期靶点官方全文重新打开 | 
+PASS | 前期靶点原文匹配 52 pairs of HCC cases | 
+PASS | 前期靶点原文匹配 69.2% (36/52) | 
+PASS | 前期靶点原文匹配 Constitutively active β-catenin and TCF rescued | 
+PASS | 前期靶点原文匹配 3 independent experiments | 
+PASS | 靶点依据来源分界 | 
+PASS | 零基础内容初稿重新打开 | characters=2981
+PASS | 初稿引用证据编号有效 | 
+PASS | 初稿来源编号有效 | 
+PASS | 初稿区分早期成果与疗效 | 
+PASS | 初稿区分靶点和分子实验 | 
+PASS | 初稿没有时间与成员分配 | 
+PASS | 初稿保留待检验状态 | 
+
+执行命令
+"C:\Users\woola\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" "D:\。hkbu\molecular science\资料准备_CDK20\_build\verify_materials.py"
+
+自动检查覆盖文件完整性、数字匹配、内容覆盖与输入哈希；不等同于独立同行评审或实际读者理解测试。

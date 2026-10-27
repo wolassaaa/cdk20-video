@@ -1,0 +1,26 @@
+{
+  "checks": {
+    "38段英文逐字不变": true,
+    "原简中繁中底稿保留": true,
+    "2233词": true,
+    "时间线870秒正文加30秒片尾": true,
+    "镜头连续无重叠": true,
+    "38段独立媒介与交互设计": true,
+    "字幕完整保留所有英文词": true,
+    "字幕时间连续且正时长": true,
+    "字幕每条英文至多13词": true,
+    "每条字幕均有繁中且属于一段": true,
+    "要求导出MP4而非网页替代": true,
+    "字幕预排而非伪称已对齐": true,
+    "范围为15分钟项目讲述测试": true,
+    "文件重新打开": true
+  },
+  "result": "14/14 PASS",
+  "cue_count": 250,
+  "voiceover_words": 2233,
+  "approx_wpm": 154.0,
+  "audio_alignment": "PENDING",
+  "cue_internal_semantic_check": "PENDING",
+  "video_export": "NOT PERFORMED BY THIS TASK",
+  "scientific_narration": "UNCHANGED"
+}

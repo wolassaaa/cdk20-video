@@ -1,0 +1,10 @@
+def main():
+    t = op('/project1').create(baseCOMP, 'tmp_probe')
+    g = t.create(geometryCOMP); r = t.create(renderTOP); l = t.create(lineMAT); s = t.create(scriptSOP)
+    print('aa', r.par.antialias.menuNames, r.par.antialias.eval())
+    print('icm', g.par.instancecolormode.menuNames)
+    print('linewidthatt', l.par.linewidthatt.eval(), l.par.linecoloratt.eval(), l.par.widthnear.eval(), l.par.widthfar.eval())
+    print('dim', l.par.depthinterpolationmodel.menuNames)
+    print(s.par.callbacks.eval().text[:600])
+    t.destroy()
+main()

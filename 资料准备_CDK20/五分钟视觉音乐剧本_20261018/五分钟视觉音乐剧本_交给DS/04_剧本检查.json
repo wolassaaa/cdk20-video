@@ -1,0 +1,19 @@
+{
+  "checks": {
+    "40连续动作段落": true,
+    "时长正好300秒": true,
+    "无时间缺口或重叠": true,
+    "每段都有动作镜头风格交接音乐": true,
+    "音乐小节与时长一致": true,
+    "要求无口播无手绘": true,
+    "生成指令不沿用短片要求": true,
+    "四次局部glitch而非全片滥用": true,
+    "明确只是剧本而非已制成媒体": true,
+    "每个镜头写入可读剧本": true,
+    "JSON重新打开": true,
+    "Markdown重新打开": true
+  },
+  "result": "12/12 PASS",
+  "actual_video_review": "NOT PERFORMED — script-only deliverable",
+  "actual_music_review": "NOT PERFORMED — no audio supplied"
+}

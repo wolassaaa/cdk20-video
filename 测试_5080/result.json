@@ -1,0 +1,21 @@
+{
+  "devices": {
+    "OPTIX": [
+      [
+        "NVIDIA GeForce RTX 5080",
+        "OPTIX"
+      ]
+    ],
+    "CUDA": [
+      [
+        "NVIDIA GeForce RTX 5080",
+        "CUDA"
+      ]
+    ]
+  },
+  "gpu_128spp_s": 1.62,
+  "cpu_128spp_s": 33.14,
+  "look_gpu_1024spp_s": 4.92,
+  "residues": 346,
+  "turntable_150f_s": 257.9
+}

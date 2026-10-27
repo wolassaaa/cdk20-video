@@ -1,0 +1,75 @@
+Can we predict whether a molecule is worth testing before we even make it? That question matters because a promising idea on a computer still has to become something real. Someone must work out how to make the molecule, produce it and test what it actually does. We cannot give every possible design the same attention.
+
+AI offers an interesting possibility: use patterns learned from existing data to suggest designs worth investigating. But a suggested structure is not yet an experimentally confirmed hit. We will follow one liver cancer study from design to testing and improvement, then ask what AI contributed, which benefits remain possible rather than proven, and what better evidence would require.
+
+Our question is not whether a computer can finish drug development by itself. It is whether algorithms can help researchers reach a more useful starting point. Before we ask how a molecule is designed, though, we need to know what we want it to do.
+
+The disease in this case is hepatocellular carcinoma, or HCC, the most common type of primary liver cancer in adults. Primary means that the cancer starts in the liver. We are not covering every cancer or every treatment. Our focus is one early research task: finding molecules that might affect a protein called CDK20.
+
+A protein is one of the working components inside cells. When researchers choose a protein they hope a molecule will act on, they call it a target. The target and the candidate molecule are different things. CDK20 is the object researchers want to affect; a candidate is a possible chemical design they want to test.
+
+CDK20 did not become interesting simply because an AI selected its name. Earlier research had linked it to HCC and investigated what happened when its activity or expression was changed in experimental models. In the 2023 study, disease-related data analysis helped prioritise targets, and researchers combined that information with existing biological evidence to choose CDK20.
+
+That choice does not make CDK20 the single cause of liver cancer, or prove that blocking it will treat patients. It gives the team a focused question: can we find a molecule that interacts with this target and deserves further investigation? A target name makes the task more specific. But a name alone does not tell us what shape a molecule should have.
+
+Molecules interact in three-dimensional space. A useful design must do more than look interesting on paper: it needs suitable interactions with the target. Knowing the protein shape can help researchers think about where and how a small molecule might bind. This is where we must separate two different structures: the shape of the target protein, and the structure of the molecule being designed.
+
+The team used a predicted CDK20 structure from the AlphaFold database. In broad terms, AlphaFold uses protein sequences, information from related sequences and patterns learned from known structures to predict a three-dimensional model. That is different from measuring the structure experimentally. The output is a prediction, not a direct photograph of the protein.
+
+A sequence is the order of the building blocks that make up a protein. Knowing that order and knowing the folded shape are different kinds of information. Structure prediction helps connect them. The researchers did not ask the model to discover the disease or invent CDK20. They used structural information to help ask a more focused chemical question.
+
+The researchers also examined uncertainty in that model. They removed a low-confidence region at one end before continuing the design work. We do not need to memorise its position. The important point is that a model did not remove the need for judgement. Researchers still had to decide which information was useful enough for the next step.
+
+The predicted structure helped the team start structure-guided design without an experimentally determined CDK20 structure in their starting workflow. That is a practical contribution. It does not show exactly how much time this route saved over every alternative. More importantly, knowing the target shape still leaves a huge question: what new molecule should we try?
+
+This is where molecular generation enters the story. Instead of only sorting a fixed collection of existing molecules, a generative model can propose candidate structures. It learns patterns from chemical data and uses design information and evaluation criteria to explore possibilities. In this study, the team used a platform called Chemistry42 to support that work.
+
+This is not just a shape-matching puzzle. Chemical interactions matter too, and researchers need structures they can actually make and investigate. A design can therefore be promising for one reason and unsuitable for another. That is why proposing many structures and evaluating them are connected tasks, rather than a machine announcing a single perfect answer.
+
+It helps to think of this as proposing chemical hypotheses. A hypothesis says: this structure might have properties worth testing. It does not say: this is the one correct drug. There may be many different structures that interact with a target, and each can have different strengths and weaknesses. Generating a design also does not manufacture the substance.
+
+The team then used computational evaluation, including molecular docking. Docking explores possible ways a molecule could sit in the target pocket and helps assess which designs to prioritise. The predicted pose and score are clues, not proof of real binding. A convincing-looking fit on a computer still has to survive an experiment.
+
+In this first design stage, algorithms contribute before the laboratory tests, but they do not replace the laboratory. AI helps supply structural predictions and new suggestions. Other calculations help evaluate them. Researchers bring chemical and biological judgement to the choice of what to make. The interesting question is whether this cooperation can turn a large set of possibilities into a useful experimental starting point.
+
+In the first round, the team generated 8,918 structures. They did not synthesise all of them. Through computational evaluation, docking and clustering, they prioritised 54, then selected seven for synthesis and testing. Clustering helps organise related designs, rather than treating every suggestion as completely separate.
+
+Those numbers describe different stages, not different measures of success. The 8,918 are generated structures. The 54 are prioritised candidates. The seven are selected experimental objects. Seven selected molecules does not mean seven successful drugs, or even seven confirmed hits. Selection tells us what the researchers chose to investigate, not what the experiments would find.
+
+This is where the potential efficiency benefit becomes concrete. Making and testing molecules takes resources. Better suggestions could help researchers spend more of those resources on useful experiments and follow-up work. But we should not divide 8,918 by seven and call the result a speed increase. Nobody established that a comparable alternative had to make every generated structure.
+
+Traditional discovery is not blind guessing either. It also uses existing knowledge, computation and expert decisions. The fair question is whether the AI-assisted route produces more useful results under comparable conditions. Before making that comparison, however, the team first needed to show something more basic: did any selected molecule actually bind CDK20?
+
+The experiments did identify a binding hit: a molecule that showed binding to CDK20 under the reported test conditions. This matters because the story had moved beyond a computational score. The team had made a molecule and obtained an experimental result. A prediction had led to something that could be investigated in the real world.
+
+The paper reports 30 days from target selection to the first experimentally confirmed binding hit. That is the milestone behind the striking number. It is not 30 days to an approved medicine, and it does not include all the optimisation that followed. The reported period also does not mean the team built its data resources and AI platforms from scratch within that time.
+
+We can therefore say the workflow produced an early result on a short reported timeline. We cannot yet say how many times faster it was than another route. That needs a comparison with the same task and a similar starting point. And even this real binding result raised a new problem: binding to a protein is not the same as strongly changing what the protein does.
+
+The first hit had relatively weak functional inhibition in the enzyme test. That does not erase the binding result. It shows that the team had answered one question but not yet achieved the performance it wanted. This distinction is important: a binding test asks whether the molecule interacts with the target; a functional test asks whether it changes the target activity.
+
+The researchers used experimental information and predicted binding poses to guide another design round. They proposed 16 structures and synthesised six for testing. The later compounds included molecules with improved binding. One compound also underwent further enzyme and cell evaluation. These later results belong to follow-up work, not to the first 30-day milestone.
+
+The follow-up compound, referred to here as 048, inhibited CDK20 enzyme activity and reduced Huh7 liver cancer cell viability in a laboratory assay. That is additional evidence, but a cell result still is not a patient result. It also does not, by itself, prove that every effect in the cells came only from acting on CDK20. Different experiments answer different questions, and their answers should not be merged into one claim of treatment success.
+
+Selectivity is another useful word here. It asks whether a molecule acts on the intended target rather than also affecting other targets. Stronger binding to one protein does not answer that question. Likewise, a cell experiment examines a model under particular conditions, not the whole human body. These are reasons to continue studying a hit, not reasons to ignore the progress already made.
+
+The useful lesson is the loop: propose a design, test it, identify what is missing, and revise the design. The first imperfection becomes information for the next decision. Researchers still need to study selectivity, what happens to the molecule in the body and possible toxicity. The 2023 candidate study did not report animal or patient trials for these molecules.
+
+Those experiments give us a basis for discussing benefits. Predicted protein structure supported design, AI-assisted generation proposed molecules, and experiments identified a hit and supported further improvement. This is a contribution to early discovery, not proof of a finished treatment. We should separate what this workflow achieved from the wider advantages we hope it could bring.
+
+This connects to the efficiency idea we care about. If algorithms supply more useful designs earlier, researchers may avoid some low-value attempts and spend more effort on validation and optimisation. That is a meaningful possible benefit. But this single study does not measure how much time or money was saved compared with an equally resourced alternative. The achievement and the size of the advantage are separate questions.
+
+Saving effort early would matter even if later drug development remained difficult. A team has limited laboratory capacity. If useful designs arrive sooner, it may have more room to test alternatives and learn from failures. The value is not simply having fewer molecules on a list. It is reaching better decisions with available resources, while retaining enough variety to avoid overlooking other promising directions.
+
+The wider hopes include health, cost and animal welfare. Earlier useful candidates might support future treatments, and avoiding low-value experiments might save resources. Better predictions might also help researchers consider alternatives to some animal experiments. These are possibilities, not measured outcomes of this case. We would need evidence of actual savings and suitable validation, not simply a shorter list of molecules.
+
+Environmental claims need the same care. Fewer unnecessary syntheses could mean less material use and waste, but computers also consume electricity. We should compare the resources used by both the calculations and the laboratory work for a similar research outcome. Without that comparison, this case does not establish that AI is cheaper, reduces animal use or is environmentally better overall.
+
+A stronger next study could compare methods on the same target, with similar information, resources and definitions of success. It should record time to a confirmed hit and experimental effort, including unsuccessful attempts. A second improvement is to use new experimental feedback to check and revise predictions. A third is to evaluate several properties together, so better binding does not hide poor selectivity or other problems.
+
+Our sources have different jobs too. The original study and its supplement support the case numbers and experiments. Method papers explain what the tools do. Scholarly books and reviews help explain the concepts and wider context. A platform developer describing its own work is useful evidence, but not the same as an independent comparison. We need to evaluate the source, not just count references.
+
+This matters outside a research laboratory. When we hear that AI has discovered a drug, we can ask what the headline actually means. Was it a predicted structure, a laboratory hit, a result in cells or evidence from patients? Understanding those stages helps us judge the news without dismissing genuine progress or expecting a treatment that has not been demonstrated.
+
+We can now answer our opening question. Can we predict whether a molecule is worth testing before we even make it? We can make informed predictions, but experiments must test them. In this case, algorithms helped people propose and prioritise designs, while experiments guided the next step. The promise is a better-directed search. How much faster that search becomes, and whether it leads to a useful medicine, remain questions for further evidence.

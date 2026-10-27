@@ -1,0 +1,86 @@
+{
+  "date": "2026-10-18",
+  "checks": [
+    {
+      "check": "38 shots match 38 paragraphs",
+      "pass": true
+    },
+    {
+      "check": "English narration unchanged",
+      "pass": true
+    },
+    {
+      "check": "Both Chinese versions unchanged",
+      "pass": true
+    },
+    {
+      "check": "2233 English words",
+      "pass": true
+    },
+    {
+      "check": "Four presenters assigned all paragraphs",
+      "pass": true
+    },
+    {
+      "check": "Time range 15-20 minutes",
+      "pass": true
+    },
+    {
+      "check": "Contiguous timeline",
+      "pass": true
+    },
+    {
+      "check": "Every shot has camera, 3 beats, transition, boundary, evidence",
+      "pass": true
+    },
+    {
+      "check": "Every paragraph in Markdown verbatim",
+      "pass": true
+    },
+    {
+      "check": "No actual media production claimed",
+      "pass": true
+    },
+    {
+      "check": "P18-P19 selection stage not efficacy",
+      "pass": true
+    },
+    {
+      "check": "30-day endpoint retained",
+      "pass": true
+    },
+    {
+      "check": "Patient result boundary retained",
+      "pass": true
+    },
+    {
+      "check": "Environmental net benefit not asserted",
+      "pass": true
+    },
+    {
+      "check": "S07 abstract-only disclosure retained",
+      "pass": true
+    },
+    {
+      "check": "No fake presenter substitution",
+      "pass": true
+    },
+    {
+      "check": "JSON reopens",
+      "pass": true
+    }
+  ],
+  "result": "17/17 PASS",
+  "presenter_word_counts": {
+    "A": 560,
+    "B": 557,
+    "C": 546,
+    "D": 570
+  },
+  "planned_duration_seconds": 1123.8,
+  "planned_duration_mmss": "18:44",
+  "actual_recording": "NOT PROVIDED",
+  "actual_video_generation": "NOT PERFORMED",
+  "actual_audio_alignment": "NOT PERFORMED",
+  "source_file_changed": false
+}

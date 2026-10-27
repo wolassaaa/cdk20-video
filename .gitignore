@@ -1,0 +1,46 @@
+# ---- 环境 / 依赖 / 缓存（可重建）----
+.venv/
+node_modules/
+_deps/
+__pycache__/
+script_dependencies/
+*.pid
+*.log
+*.exe
+*.zip
+*.task
+
+# ---- 音乐与歌词（版权，只在本地）----
+*.flac
+*.wav
+*.mp3
+*.m4a
+*.aac
+*.lrclib.json
+*.lyrics.json
+
+# ---- 视频 / 序列帧 / 大型 3D（太大，放网盘）----
+*.mp4
+*.mov
+*.webm
+*.stl
+*.glb
+*.obj
+*.npy
+**/clips/
+**/_frames_turn/
+**/turntable/
+**/T3_frames/
+**/_passes/
+
+# ---- 课程资料与论文全文（版权，只在本地）----
+/*.pdf
+*.pdf
+参考文献下载/
+paper_download/
+teacher_requirements_check/
+资料准备_CDK20/sources/*_text.txt
+资料准备_CDK20/sources/*_fulltext.*
+
+# Office 临时锁文件
+~$*

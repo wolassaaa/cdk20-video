@@ -1,0 +1,30 @@
+Ren et al 2023 正式发表版本定位索引
+DOI 10.1039/d2sc05709c
+Europe PMC PMC9906638
+
+Introduction
+  Fig. 1 The pipeline to combine AlphaFold with Insilico Medicine end-to-end, and AI-powered drug discovery platforms PandaOmics and Chemistry42 in the drug discovery for hepatocellular carcinoma from target selection and hit generation to hit identification. A novel therapeutic target was identified from a pool of dark targets that have AlphaFold-predicted but lack experimentally determined structures. Such a target represents a first-in-class novel targ
+Target selection and identification
+CDK20 as a promising target for cancer treatment
+Generation of novel hits targeting CDK20 by using AlphaFold predicted structures
+  Fig. 2 Reported CDK20 inhibitors from the literature and the novel inhibitor ISM042-2-048 discovered in this paper. The Tanimoto similarities of reported molecules to ISM042-2-048 are calculated from Morgan fingerprints using RDKit. 1
+  Fig. 3 Insilico Medicine generative procedures for CDK20 hits.
+  Fig. 4 (A) The AlphaFold predicted structure of CDK20 (AF- Q8IZL9 -F1-model_v1); (B) ATP pocket of CDK20 with a DFG-in (residue Phe146) conformation. Met84 is the hinge residue. P-loop is colored in green. Two acid centers Asp87 and Glu90 are located in the solvent-exposed region of the protein.
+Results and discussion
+  Fig. 5 Chemical structures for the selected 7 molecules from the first-round Chemistry42 generation for synthesis and testing in CDK20 binding assay.
+  Fig. 6 (A) Representative binding affinity curve of ISM042-2-001 in CDK20 kinase binding assay. Data points are presented as the mean of duplicate wells in one experiment. Similar results were obtained in three independent experiments and the KD is the mean ± SD of three independent experiments. (B) Predicted binding pose for ISM042-2-001 with CDK20.
+  Fig. 7 Chemical structures for the second-round Chemistry42 generation for synthesis and testing in CDK20 binding and kinase activity assays. Biological data with a standard deviation are presented from three independent experiments.
+  Fig. 8 (A) Representative binding affinity curve for ISM042-2-048 in CDK20 kinase binding assay. Data points are presented as the mean of duplicate wells in one experiment. Similar results were obtained in three independent experiments and the KD is the mean ± SD of the three independent experiments. (B) Predicted binding pose for ISM042-2-048 in CDK20.
+  Fig. 9 (A) Representative dose–response curve for ISM042-2-048 in CDK20 kinase activity assay. Similar results were obtained in three independent experiments and the IC50 is the mean ± SD of the three independent experiments. (B) Cell viability curves for ISM042-2-048 in cell line Huh7 and counter screen cell line HEK293. Data points are presented as the mean of duplicate wells in one experiment. Similar results were obtained in three independent experi
+Conclusions
+Materials and methods
+Code availability
+Data availability
+Author contributions
+Conflicts of interest
+Supplementary Material
+Acknowledgments
+
+补充材料 SC-014-D2SC05709C-s001.pdf 共16页，内容以化学合成及分子表征为主。
+已逐页提取文本；其中 ISM042-2-001 与 ISM042-2-048 的标识均存在。
+补充材料不作为提速倍数、患者疗效或平台完整重现证据。

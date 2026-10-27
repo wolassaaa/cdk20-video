@@ -1,0 +1,1428 @@
+﻿1
+00:00:00,000 --> 00:00:02,727
+Can we predict whether a molecule is
+一個分子還沒做出來，
+
+2
+00:00:02,727 --> 00:00:05,454
+worth testing before we even make it?
+我們能先預測它值不值得測試嗎？
+
+3
+00:00:05,454 --> 00:00:08,571
+That question matters because a promising idea
+on
+這個問題很重要，因為電腦裏有希望的設計，
+
+4
+00:00:08,571 --> 00:00:11,688
+a computer still has to become something real.
+仍要變成真實的物質。
+
+5
+00:00:11,688 --> 00:00:14,805
+Someone must work out how to make the
+研究者得想辦法合成它、
+
+6
+00:00:14,805 --> 00:00:18,312
+molecule, produce it and test what it actually
+does.
+做出樣品，再測試它的實際作用。
+
+7
+00:00:18,312 --> 00:00:21,818
+We cannot give every possible design the same
+attention.
+我們很難給每個可能的設計同樣多的關注。
+
+8
+00:00:21,818 --> 00:00:24,935
+AI offers an interesting possibility: use
+patterns learned
+AI提供一種可能：利用已有數據中學到的規律，
+
+9
+00:00:24,935 --> 00:00:28,052
+from existing data to suggest designs worth
+investigating.
+提出值得探索的設計。
+
+10
+00:00:28,052 --> 00:00:32,338
+But a suggested structure is not yet an
+experimentally confirmed hit.
+但提出一個結構，還不等於得到實驗確認的命中物。
+
+11
+00:00:32,338 --> 00:00:36,234
+We will follow one liver cancer study from
+design to
+我們會追蹤一項肝癌研究中的設計、
+
+12
+00:00:36,234 --> 00:00:40,520
+testing and improvement, then ask what AI
+contributed, which benefits remain
+測試和改進，再問AI貢獻了什麼、
+
+13
+00:00:40,520 --> 00:00:44,416
+possible rather than proven, and what better
+evidence would require.
+哪些收益只是潛力，以及還需要什麼證據。
+
+14
+00:00:44,416 --> 00:00:49,481
+Our question is not whether a computer can
+finish drug development by itself.
+我們不是在問電腦能否獨自完成藥物研發。
+
+15
+00:00:49,481 --> 00:00:54,546
+It is whether algorithms can help researchers
+reach a more useful starting point.
+我們要問，算法能否幫助研究者找到更有用的起點。
+
+16
+00:00:54,546 --> 00:00:58,442
+Before we ask how a molecule is designed,
+though, we
+但在討論怎樣設計分子前，
+
+17
+00:00:58,442 --> 00:01:01,948
+need to know what we want it to do.
+得先知道希望它做什麼。
+
+18
+00:01:01,948 --> 00:01:05,844
+The disease in this case is hepatocellular
+carcinoma, or HCC,
+本案例研究肝細胞癌，簡稱HCC，
+
+19
+00:01:05,844 --> 00:01:09,740
+the most common type of primary liver cancer in
+adults.
+是成人原發性肝癌最常見的類型。
+
+20
+00:01:09,740 --> 00:01:13,247
+Primary means that the cancer starts in the
+liver.
+原發性表示癌症從肝臟起始。
+
+21
+00:01:13,247 --> 00:01:16,753
+We are not covering every cancer or every
+treatment.
+我們不覆蓋所有癌症或所有治療。
+
+22
+00:01:16,753 --> 00:01:19,870
+Our focus is one early research task: finding
+我們聚焦一個早期任務：
+
+23
+00:01:19,870 --> 00:01:22,987
+molecules that might affect a protein called
+CDK20.
+尋找可能影響CDK20蛋白的分子。
+
+24
+00:01:22,987 --> 00:01:26,883
+A protein is one of the working components
+inside cells.
+蛋白是細胞內的工作組件之一。
+
+25
+00:01:26,883 --> 00:01:30,000
+When researchers choose a protein they hope a
+研究者選定希望分子作用的蛋白時，
+
+26
+00:01:30,000 --> 00:01:33,507
+molecule will act on, they call it a target.
+稱它為靶點。
+
+27
+00:01:33,507 --> 00:01:37,013
+The target and the candidate molecule are
+different things.
+靶點和候選分子不是同一件事。
+
+28
+00:01:37,013 --> 00:01:40,909
+CDK20 is the object researchers want to affect;
+a candidate
+CDK20是希望影響的對象，
+
+29
+00:01:40,909 --> 00:01:44,416
+is a possible chemical design they want to test.
+候選物則是準備測試的化學設計。
+
+30
+00:01:44,416 --> 00:01:49,091
+CDK20 did not become interesting simply because
+an AI selected its name.
+CDK20並不是因為被AI選中，才突然有研究意義
+。
+
+31
+00:01:49,091 --> 00:01:52,987
+Earlier research had linked it to HCC and
+investigated what
+較早研究已發現它與HCC有關，
+
+32
+00:01:52,987 --> 00:01:57,273
+happened when its activity or expression was
+changed in experimental models.
+並研究改變它的活動或表達後，實驗模型會怎樣變化。
+
+33
+00:01:57,273 --> 00:02:01,558
+In the 2023 study, disease-related data analysis
+helped prioritise targets, and
+2023年研究利用疾病數據分析安排靶點優先級，
+
+34
+00:02:01,558 --> 00:02:05,844
+researchers combined that information with
+existing biological evidence to choose CDK20.
+再結合已有生物學證據選擇CDK20。
+
+35
+00:02:05,844 --> 00:02:09,740
+That choice does not make CDK20 the single cause
+of
+這不表示CDK20是肝癌唯一原因，
+
+36
+00:02:09,740 --> 00:02:13,636
+liver cancer, or prove that blocking it will
+treat patients.
+也不證明抑制它能治療患者。
+
+37
+00:02:13,636 --> 00:02:17,533
+It gives the team a focused question: can we
+find
+它提出一個具體問題：
+
+38
+00:02:17,533 --> 00:02:21,818
+a molecule that interacts with this target and
+deserves further investigation?
+能否找到與靶點作用、值得繼續研究的分子？
+
+39
+00:02:21,818 --> 00:02:24,935
+A target name makes the task more specific.
+靶點名稱讓任務更明確。
+
+40
+00:02:24,935 --> 00:02:27,663
+But a name alone does not tell
+但名字本身不能告訴我
+
+41
+00:02:27,663 --> 00:02:30,390
+us what shape a molecule should have.
+們分子該是什麼形狀。
+
+42
+00:02:30,390 --> 00:02:32,338
+Molecules interact in three-dimensional space.
+分子在三維空間中相互作用。
+
+43
+00:02:32,338 --> 00:02:35,844
+A useful design must do more than look
+interesting
+有用的設計不只要在紙上好看，
+
+44
+00:02:35,844 --> 00:02:39,351
+on paper: it needs suitable interactions with
+the target.
+還要與靶點形成合適的相互作用。
+
+45
+00:02:39,351 --> 00:02:42,468
+Knowing the protein shape can help researchers
+think
+蛋白形狀能幫助研究者判斷小分子可能在哪裏、
+
+46
+00:02:42,468 --> 00:02:45,974
+about where and how a small molecule might bind.
+怎樣結合。
+
+47
+00:02:45,974 --> 00:02:50,649
+This is where we must separate two different
+structures: the shape of
+這裏要區分兩種結構：
+
+48
+00:02:50,649 --> 00:02:54,935
+the target protein, and the structure of the
+molecule being designed.
+靶點蛋白的形狀，與正在設計的分子結構。
+
+49
+00:02:54,935 --> 00:02:59,221
+The team used a predicted CDK20 structure from
+the AlphaFold database.
+團隊使用AlphaFold數據庫裏的CDK20預
+測結構。
+
+50
+00:02:59,221 --> 00:03:03,506
+In broad terms, AlphaFold uses protein
+sequences, information from related sequences
+簡單說，AlphaFold利用蛋白序列、
+
+51
+00:03:03,506 --> 00:03:07,792
+and patterns learned from known structures to
+predict a three-dimensional model.
+相關序列信息和已知結構中學到的規律，預測三維模型
+。
+
+52
+00:03:07,792 --> 00:03:10,909
+That is different from measuring the structure
+experimentally.
+這不同於實驗測定結構。
+
+53
+00:03:10,909 --> 00:03:15,584
+The output is a prediction, not a direct
+photograph of the protein.
+輸出是預測，不是蛋白的直接照片。
+
+54
+00:03:15,584 --> 00:03:18,311
+A sequence is the order of the
+序列是組成蛋白的基
+
+55
+00:03:18,311 --> 00:03:21,039
+building blocks that make up a protein.
+本單位的排列順序。
+
+56
+00:03:21,039 --> 00:03:26,104
+Knowing that order and knowing the folded shape
+are different kinds of information.
+知道順序，與知道摺疊後的形狀，是不同的信息。
+
+57
+00:03:26,104 --> 00:03:28,052
+Structure prediction helps connect them.
+結構預測幫助連接兩者。
+
+58
+00:03:28,052 --> 00:03:30,779
+The researchers did not ask the model
+研究者不是讓模型發現
+
+59
+00:03:30,779 --> 00:03:33,507
+to discover the disease or invent CDK20.
+疾病或發明CDK20。
+
+60
+00:03:33,507 --> 00:03:38,182
+They used structural information to help ask a
+more focused chemical question.
+他們利用結構信息，提出更具體的化學問題。
+
+61
+00:03:38,182 --> 00:03:41,299
+The researchers also examined uncertainty in
+that model.
+研究者也檢查了模型的不確定性。
+
+62
+00:03:41,299 --> 00:03:46,364
+They removed a low-confidence region at one end
+before continuing the design work.
+繼續設計前，他們移除了末端一個低置信度區域。
+
+63
+00:03:46,364 --> 00:03:49,481
+We do not need to memorise its position.
+我們不必記住它的位置。
+
+64
+00:03:49,481 --> 00:03:52,208
+The important point is that a model
+關鍵是模型沒有消
+
+65
+00:03:52,208 --> 00:03:54,935
+did not remove the need for judgement.
+除判斷的必要。
+
+66
+00:03:54,935 --> 00:03:57,663
+Researchers still had to decide which
+information
+研究者仍要決定，
+
+67
+00:03:57,663 --> 00:04:00,390
+was useful enough for the next step.
+哪些信息足夠有用，能進入下一步。
+
+68
+00:04:00,390 --> 00:04:04,286
+The predicted structure helped the team start
+structure-guided design without
+團隊在起始流程裏沒有實驗測定的CDK20結構，
+
+69
+00:04:04,286 --> 00:04:07,792
+an experimentally determined CDK20 structure in
+their starting workflow.
+預測結構幫助他們開展結構引導設計。
+
+70
+00:04:07,792 --> 00:04:09,740
+That is a practical contribution.
+這是具體貢獻。
+
+71
+00:04:09,740 --> 00:04:12,468
+It does not show exactly how much
+但它沒有精確說明，
+
+72
+00:04:12,468 --> 00:04:15,195
+time this route saved over every alternative.
+這條路線比所有替代方案節省多少時間。
+
+73
+00:04:15,195 --> 00:04:18,312
+More importantly, knowing the target shape still
+leaves
+更重要的是，知道靶點形狀後仍有大問題：
+
+74
+00:04:18,312 --> 00:04:21,818
+a huge question: what new molecule should we
+try?
+該嘗試什麼新分子？
+
+75
+00:04:21,818 --> 00:04:24,935
+This is where molecular generation enters the
+story.
+這裏，分子生成進入故事。
+
+76
+00:04:24,935 --> 00:04:28,052
+Instead of only sorting a fixed collection of
+生成模型不只給現成分子排序，
+
+77
+00:04:28,052 --> 00:04:31,558
+existing molecules, a generative model can
+propose candidate structures.
+還能提出候選結構。
+
+78
+00:04:31,558 --> 00:04:34,675
+It learns patterns from chemical data and uses
+它從化學數據學習規律，
+
+79
+00:04:34,675 --> 00:04:37,792
+design information and evaluation criteria to
+explore possibilities.
+結合設計信息與評價要求探索可能性。
+
+80
+00:04:37,792 --> 00:04:40,520
+In this study, the team used a
+本研究使用Chemist
+
+81
+00:04:40,520 --> 00:04:43,247
+platform called Chemistry42 to support that
+work.
+ry42平臺支持這項工作。
+
+82
+00:04:43,247 --> 00:04:45,974
+This is not just a shape-matching puzzle.
+這不只是形狀配對遊戲。
+
+83
+00:04:45,974 --> 00:04:48,701
+Chemical interactions matter too, and
+researchers need
+化學相互作用同樣重要，
+
+84
+00:04:48,701 --> 00:04:51,429
+structures they can actually make and
+investigate.
+研究者也需要真正能做出、能研究的結構。
+
+85
+00:04:51,429 --> 00:04:56,493
+A design can therefore be promising for one
+reason and unsuitable for another.
+一個設計可能在某方面有希望，在另一方面不合適。
+
+86
+00:04:56,493 --> 00:05:00,389
+That is why proposing many structures and
+evaluating them are
+所以提出和評價多個結構必須連接起來，
+
+87
+00:05:00,389 --> 00:05:04,675
+connected tasks, rather than a machine
+announcing a single perfect answer.
+而不是機器宣佈一個完美答案。
+
+88
+00:05:04,675 --> 00:05:08,571
+It helps to think of this as proposing chemical
+hypotheses.
+可以把它理解為提出化學假設。
+
+89
+00:05:08,571 --> 00:05:12,467
+A hypothesis says: this structure might have
+properties worth testing.
+假設說，這種結構可能有值得測試的性質。
+
+90
+00:05:12,467 --> 00:05:16,364
+It does not say: this is the one correct drug.
+它沒有說，這就是唯一正確的藥物。
+
+91
+00:05:16,364 --> 00:05:20,260
+There may be many different structures that
+interact with a
+許多不同結構都可能與靶點作用，
+
+92
+00:05:20,260 --> 00:05:23,766
+target, and each can have different strengths
+and weaknesses.
+各有優點和不足。
+
+93
+00:05:23,766 --> 00:05:27,273
+Generating a design also does not manufacture
+the substance.
+而且，生成設計不等於製造物質。
+
+94
+00:05:27,273 --> 00:05:30,779
+The team then used computational evaluation,
+including molecular docking.
+團隊接着用計算評價，包括分子對接。
+
+95
+00:05:30,779 --> 00:05:34,675
+Docking explores possible ways a molecule could
+sit in the
+對接探索分子在靶點口袋裏的可能姿態，
+
+96
+00:05:34,675 --> 00:05:38,182
+target pocket and helps assess which designs to
+prioritise.
+幫助判斷優先考慮哪些設計。
+
+97
+00:05:38,182 --> 00:05:42,857
+The predicted pose and score are clues, not
+proof of real binding.
+預測姿態和分數是線索，不是真實結合的證明。
+
+98
+00:05:42,857 --> 00:05:47,532
+A convincing-looking fit on a computer still has
+to survive an experiment.
+電腦裏看起來合適的設計，仍要接受實驗檢驗。
+
+99
+00:05:47,532 --> 00:05:51,039
+In this first design stage, algorithms
+contribute before the
+首輪設計中，算法在實驗前就有貢獻，
+
+100
+00:05:51,039 --> 00:05:54,545
+laboratory tests, but they do not replace the
+laboratory.
+但沒有取代實驗室。
+
+101
+00:05:54,545 --> 00:05:57,662
+AI helps supply structural predictions and new
+suggestions.
+AI提供結構預測與新建議。
+
+102
+00:05:57,662 --> 00:05:59,610
+Other calculations help evaluate them.
+其他計算幫助評價。
+
+103
+00:05:59,610 --> 00:06:04,676
+Researchers bring chemical and biological
+judgement to the choice of what to make.
+研究者結合化學與生物學判斷，決定做什麼。
+
+104
+00:06:04,676 --> 00:06:08,572
+The interesting question is whether this
+cooperation can turn a
+有趣的問題是，
+
+105
+00:06:08,572 --> 00:06:12,468
+large set of possibilities into a useful
+experimental starting point.
+這種協作能否把大量可能性變成有用的實驗起點。
+
+106
+00:06:12,468 --> 00:06:16,364
+In the first round, the team generated 8,918
+structures.
+首輪團隊生成了8,918個結構。
+
+107
+00:06:16,364 --> 00:06:19,091
+They did not synthesise all of them.
+他們沒有把全部結構都合成出來。
+
+108
+00:06:19,091 --> 00:06:22,208
+Through computational evaluation, docking and
+clustering, they prioritised
+通過計算評價、對接與聚類，
+
+109
+00:06:22,208 --> 00:06:25,325
+54, then selected seven for synthesis and
+testing.
+他們優先考慮54個，再選7個合成測試。
+
+110
+00:06:25,325 --> 00:06:30,390
+Clustering helps organise related designs,
+rather than treating every suggestion as
+completely separate.
+聚類整理相關設計，而不是把每個建議當成完全獨立的
+對象。
+
+111
+00:06:30,390 --> 00:06:34,286
+Those numbers describe different stages, not
+different measures of success.
+這些數字表示不同階段，不是不同成功指標。
+
+112
+00:06:34,286 --> 00:06:36,624
+The 8,918 are generated structures.
+8,918是生成結構。
+
+113
+00:06:36,624 --> 00:06:38,572
+The 54 are prioritised candidates.
+54是優先候選。
+
+114
+00:06:38,572 --> 00:06:40,909
+The seven are selected experimental objects.
+7是選中的實驗對象。
+
+115
+00:06:40,909 --> 00:06:43,637
+Seven selected molecules does not mean seven
+選了7個，不表示得到7種成功藥物，
+
+116
+00:06:43,637 --> 00:06:46,364
+successful drugs, or even seven confirmed hits.
+甚至不表示7個都是確認命中物。
+
+117
+00:06:46,364 --> 00:06:49,481
+Selection tells us what the researchers chose to
+選擇說明研究者準備查什麼，
+
+118
+00:06:49,481 --> 00:06:52,208
+investigate, not what the experiments would
+find.
+不說明實驗最終會找到什麼。
+
+119
+00:06:52,208 --> 00:06:55,714
+This is where the potential efficiency benefit
+becomes concrete.
+這裏，效率的潛在價值變具體了。
+
+120
+00:06:55,714 --> 00:06:58,052
+Making and testing molecules takes resources.
+合成與測試分子需要資源。
+
+121
+00:06:58,052 --> 00:07:01,169
+Better suggestions could help researchers spend
+more of
+更好的建議，
+
+122
+00:07:01,169 --> 00:07:04,286
+those resources on useful experiments and
+follow-up work.
+可能幫助研究者把資源用在有用的實驗和後續工作。
+
+123
+00:07:04,286 --> 00:07:07,792
+But we should not divide 8,918 by seven
+但不能用8,918除以7，
+
+124
+00:07:07,792 --> 00:07:10,520
+and call the result a speed increase.
+就當作提速倍數。
+
+125
+00:07:10,520 --> 00:07:15,195
+Nobody established that a comparable alternative
+had to make every generated structure.
+沒有人證明，一條可比的替代路線必須合成所有生成結
+構。
+
+126
+00:07:15,195 --> 00:07:17,922
+Traditional discovery is not blind guessing
+either.
+傳統發現也不是盲目猜測。
+
+127
+00:07:17,922 --> 00:07:21,429
+It also uses existing knowledge, computation and
+expert decisions.
+它同樣使用已有知識、計算與專家判斷。
+
+128
+00:07:21,429 --> 00:07:24,546
+The fair question is whether the AI-assisted
+route
+公平的問題是，相同可比條件下，
+
+129
+00:07:24,546 --> 00:07:27,273
+produces more useful results under comparable
+conditions.
+AI路線能否產生更有用的結果。
+
+130
+00:07:27,273 --> 00:07:31,169
+Before making that comparison, however, the team
+first needed to
+但比較前，團隊先要回答更基本的問題：
+
+131
+00:07:31,169 --> 00:07:35,455
+show something more basic: did any selected
+molecule actually bind CDK20?
+選中的分子真的結合CDK20了嗎？
+
+132
+00:07:35,455 --> 00:07:39,351
+The experiments did identify a binding hit: a
+molecule that
+實驗確實找到了結合命中物：在報告條件下，
+
+133
+00:07:39,351 --> 00:07:42,857
+showed binding to CDK20 under the reported test
+conditions.
+表現出與CDK20結合的分子。
+
+134
+00:07:42,857 --> 00:07:47,143
+This matters because the story had moved beyond
+a computational score.
+這很重要，故事已經超出計算評分。
+
+135
+00:07:47,143 --> 00:07:51,429
+The team had made a molecule and obtained an
+experimental result.
+團隊做出了分子，也得到實驗結果。
+
+136
+00:07:51,429 --> 00:07:54,156
+A prediction had led to something that
+預測推進成了現實中可
+
+137
+00:07:54,156 --> 00:07:56,883
+could be investigated in the real world.
+以繼續調查的對象。
+
+138
+00:07:56,883 --> 00:08:00,000
+The paper reports 30 days from target selection
+論文報告，從靶點選擇到首次實驗
+
+139
+00:08:00,000 --> 00:08:02,727
+to the first experimentally confirmed binding
+hit.
+確認的結合命中物，用了30天。
+
+140
+00:08:02,727 --> 00:08:05,844
+That is the milestone behind the striking
+number.
+這就是亮眼數字對應的里程碑。
+
+141
+00:08:05,844 --> 00:08:09,740
+It is not 30 days to an approved medicine, and
+它不是30天得到批准藥物，
+
+142
+00:08:09,740 --> 00:08:13,247
+it does not include all the optimisation that
+followed.
+也不包含全部後續優化。
+
+143
+00:08:13,247 --> 00:08:17,143
+The reported period also does not mean the team
+built
+這個時間也不表示團隊在30天
+
+144
+00:08:17,143 --> 00:08:21,429
+its data resources and AI platforms from scratch
+within that time.
+內從零搭建數據資源與AI平臺。
+
+145
+00:08:21,429 --> 00:08:24,546
+We can therefore say the workflow produced an
+因此可以說，
+
+146
+00:08:24,546 --> 00:08:27,273
+early result on a short reported timeline.
+這條流程在報告的較短時間內取得早期結果。
+
+147
+00:08:27,273 --> 00:08:32,338
+We cannot yet say how many times faster it was
+than another route.
+但還不能說它比另一條路線快多少倍。
+
+148
+00:08:32,338 --> 00:08:37,403
+That needs a comparison with the same task and a
+similar starting point.
+這需要同任務、相近起點的比較。
+
+149
+00:08:37,403 --> 00:08:42,078
+And even this real binding result raised a new
+problem: binding to
+而且真實結合也帶來新問題：結合蛋白，
+
+150
+00:08:42,078 --> 00:08:47,143
+a protein is not the same as strongly changing
+what the protein does.
+不等於明顯改變蛋白的功能。
+
+151
+00:08:47,143 --> 00:08:51,818
+The first hit had relatively weak functional
+inhibition in the enzyme test.
+首次命中物在酶測試裏的功能抑制仍較弱。
+
+152
+00:08:51,818 --> 00:08:54,546
+That does not erase the binding result.
+這沒有抹去結合結果。
+
+153
+00:08:54,546 --> 00:08:57,662
+It shows that the team had answered one
+它表示團隊回答了一個問題，
+
+154
+00:08:57,662 --> 00:09:01,169
+question but not yet achieved the performance it
+wanted.
+卻還沒達到想要的表現。
+
+155
+00:09:01,169 --> 00:09:05,844
+This distinction is important: a binding test
+asks whether the molecule interacts
+區別很重要：結合測試問是否相互作用，
+
+156
+00:09:05,844 --> 00:09:10,909
+with the target; a functional test asks whether
+it changes the target activity.
+功能測試問是否改變靶點活動。
+
+157
+00:09:10,909 --> 00:09:13,636
+The researchers used experimental information
+and predicted
+研究者結合實驗信息與預測結合姿態，
+
+158
+00:09:13,636 --> 00:09:16,363
+binding poses to guide another design round.
+指導下一輪設計。
+
+159
+00:09:16,363 --> 00:09:19,870
+They proposed 16 structures and synthesised six
+for testing.
+他們提出16個結構，合成6個測試。
+
+160
+00:09:19,870 --> 00:09:22,987
+The later compounds included molecules with
+improved binding.
+後續分子中出現結合表現改善的對象。
+
+161
+00:09:22,987 --> 00:09:26,493
+One compound also underwent further enzyme and
+cell evaluation.
+其中一個還接受了酶與細胞評價。
+
+162
+00:09:26,493 --> 00:09:31,558
+These later results belong to follow-up work,
+not to the first 30-day milestone.
+這些是後續工作，不屬於首個30天里程碑。
+
+163
+00:09:31,558 --> 00:09:36,233
+The follow-up compound, referred to here as 048,
+inhibited CDK20 enzyme activity
+後續分子簡稱048，它抑制CDK20酶活性，
+
+164
+00:09:36,233 --> 00:09:40,519
+and reduced Huh7 liver cancer cell viability in
+a laboratory assay.
+也在實驗裏降低Huh7肝癌細胞的活力。
+
+165
+00:09:40,519 --> 00:09:43,247
+That is additional evidence, but a cell
+這是更多證據，
+
+166
+00:09:43,247 --> 00:09:45,974
+result still is not a patient result.
+但細胞結果仍不是患者結果。
+
+167
+00:09:45,974 --> 00:09:49,870
+It also does not, by itself, prove that every
+effect
+它本身也不能證明，
+
+168
+00:09:49,870 --> 00:09:53,377
+in the cells came only from acting on CDK20.
+細胞裏每種變化都只來自CDK20作用。
+
+169
+00:09:53,377 --> 00:09:56,883
+Different experiments answer different
+questions, and their answers should
+不同實驗回答不同問題，
+
+170
+00:09:56,883 --> 00:10:00,390
+not be merged into one claim of treatment
+success.
+不能合併成一句治療成功。
+
+171
+00:10:00,390 --> 00:10:02,728
+Selectivity is another useful word here.
+這裏還有一個有用概念：選擇性。
+
+172
+00:10:02,728 --> 00:10:05,844
+It asks whether a molecule acts on the
+它問，分子作用於想要的靶點，
+
+173
+00:10:05,844 --> 00:10:08,961
+intended target rather than also affecting other
+targets.
+還是也影響其他靶點。
+
+174
+00:10:08,961 --> 00:10:12,857
+Stronger binding to one protein does not answer
+that question.
+與一個蛋白結合更強，沒有回答這個問題。
+
+175
+00:10:12,857 --> 00:10:15,974
+Likewise, a cell experiment examines a model
+under
+同樣，細胞實驗研究的是特定條件下的模型，
+
+176
+00:10:15,974 --> 00:10:18,701
+particular conditions, not the whole human body.
+不是完整人體。
+
+177
+00:10:18,701 --> 00:10:21,818
+These are reasons to continue studying a hit,
+這些是繼續研究命中物的理由，
+
+178
+00:10:21,818 --> 00:10:24,935
+not reasons to ignore the progress already made.
+不是否定已有進展。
+
+179
+00:10:24,935 --> 00:10:28,831
+The useful lesson is the loop: propose a design,
+test
+有價值的是這個循環：提出設計、
+
+180
+00:10:28,831 --> 00:10:32,338
+it, identify what is missing, and revise the
+design.
+測試、找不足，再修改設計。
+
+181
+00:10:32,338 --> 00:10:35,844
+The first imperfection becomes information for
+the next decision.
+首次不理想之處變成下一次決策的信息。
+
+182
+00:10:35,844 --> 00:10:38,961
+Researchers still need to study selectivity,
+what happens
+研究者仍要研究選擇性、
+
+183
+00:10:38,961 --> 00:10:42,467
+to the molecule in the body and possible
+toxicity.
+分子進入體內後的表現，以及可能的毒性。
+
+184
+00:10:42,467 --> 00:10:45,195
+The 2023 candidate study did not report
+2023年候選物研究沒有報告
+
+185
+00:10:45,195 --> 00:10:47,922
+animal or patient trials for these molecules.
+這些分子的動物或患者試驗。
+
+186
+00:10:47,922 --> 00:10:51,428
+Those experiments give us a basis for discussing
+benefits.
+這些實驗讓我們有依據討論收益。
+
+187
+00:10:51,428 --> 00:10:54,935
+Predicted protein structure supported design,
+AI-assisted generation proposed molecules,
+預測蛋白結構支持設計，AI輔助生成提出分子，
+
+188
+00:10:54,935 --> 00:10:58,441
+and experiments identified a hit and supported
+further improvement.
+實驗找到命中物並支持進一步改進。
+
+189
+00:10:58,441 --> 00:11:03,506
+This is a contribution to early discovery, not
+proof of a finished treatment.
+這是對早期發現的貢獻，不是完成治療藥物的證明。
+
+190
+00:11:03,506 --> 00:11:06,623
+We should separate what this workflow achieved
+from
+要把實際成果與希望進
+
+191
+00:11:06,623 --> 00:11:09,740
+the wider advantages we hope it could bring.
+一步帶來的好處分開。
+
+192
+00:11:09,740 --> 00:11:13,247
+This connects to the efficiency idea we care
+about.
+這連接到我們關心的效率問題。
+
+193
+00:11:13,247 --> 00:11:17,143
+If algorithms supply more useful designs
+earlier, researchers may avoid
+如果算法更早提供有用的設計，
+
+194
+00:11:17,143 --> 00:11:21,428
+some low-value attempts and spend more effort on
+validation and optimisation.
+研究者就可能減少低價值嘗試，把精力放到驗證與優化
+。
+
+195
+00:11:21,428 --> 00:11:23,766
+That is a meaningful possible benefit.
+這是有意義的潛在收益。
+
+196
+00:11:23,766 --> 00:11:27,662
+But this single study does not measure how much
+time
+但單項研究沒有量出，
+
+197
+00:11:27,662 --> 00:11:31,558
+or money was saved compared with an equally
+resourced alternative.
+相比同等資源的替代路線節省多少時間或金錢。
+
+198
+00:11:31,558 --> 00:11:35,844
+The achievement and the size of the advantage
+are separate questions.
+取得成果，與優勢多大，是兩個不同問題。
+
+199
+00:11:35,844 --> 00:11:40,519
+Saving effort early would matter even if later
+drug development remained difficult.
+即使後續研發仍困難，前期節省精力也有價值。
+
+200
+00:11:40,519 --> 00:11:42,857
+A team has limited laboratory capacity.
+團隊的實驗能力有限。
+
+201
+00:11:42,857 --> 00:11:45,974
+If useful designs arrive sooner, it may have
+有用設計更早出現，
+
+202
+00:11:45,974 --> 00:11:49,480
+more room to test alternatives and learn from
+failures.
+可能騰出空間測試其他方案，從失敗中學習。
+
+203
+00:11:49,480 --> 00:11:53,766
+The value is not simply having fewer molecules
+on a list.
+價值不只是清單上的分子更少。
+
+204
+00:11:53,766 --> 00:11:57,273
+It is reaching better decisions with available
+resources, while
+而是用現有資源做更好決策，
+
+205
+00:11:57,273 --> 00:12:00,779
+retaining enough variety to avoid overlooking
+other promising directions.
+同時保留足夠多樣的選擇，避免漏掉有希望的方向。
+
+206
+00:12:00,779 --> 00:12:04,285
+The wider hopes include health, cost and animal
+welfare.
+更廣泛的期待包括健康、成本和動物福利。
+
+207
+00:12:04,285 --> 00:12:07,013
+Earlier useful candidates might support future
+treatments,
+更早找到有用候選物，可能支持未來治療；
+
+208
+00:12:07,013 --> 00:12:09,740
+and avoiding low-value experiments might save
+resources.
+減少低價值實驗，也可能節省資源。
+
+209
+00:12:09,740 --> 00:12:14,415
+Better predictions might also help researchers
+consider alternatives to some animal
+experiments.
+更好的預測還可能幫助考慮某些動物實驗的替代方法。
+
+210
+00:12:14,415 --> 00:12:17,922
+These are possibilities, not measured outcomes
+of this case.
+這些是可能性，不是本案例已測出的結果。
+
+211
+00:12:17,922 --> 00:12:21,039
+We would need evidence of actual savings and
+需要實際節省投入的證據和合適驗證，
+
+212
+00:12:21,039 --> 00:12:24,545
+suitable validation, not simply a shorter list
+of molecules.
+不能只看清單變短。
+
+213
+00:12:24,545 --> 00:12:26,883
+Environmental claims need the same care.
+環境收益也要同樣謹慎。
+
+214
+00:12:26,883 --> 00:12:30,000
+Fewer unnecessary syntheses could mean less
+material use
+減少不必要的合成可能減少材料和廢物，
+
+215
+00:12:30,000 --> 00:12:32,727
+and waste, but computers also consume
+electricity.
+但電腦也耗電。
+
+216
+00:12:32,727 --> 00:12:36,623
+We should compare the resources used by both the
+calculations
+應在取得相近研究成果的條件下，
+
+217
+00:12:36,623 --> 00:12:40,130
+and the laboratory work for a similar research
+outcome.
+比較計算與實驗兩部分的資源。
+
+218
+00:12:40,130 --> 00:12:44,026
+Without that comparison, this case does not
+establish that AI
+缺少這種比較，就不能斷言AI總體更便宜、
+
+219
+00:12:44,026 --> 00:12:47,922
+is cheaper, reduces animal use or is
+environmentally better overall.
+減少動物使用或更加環保。
+
+220
+00:12:47,922 --> 00:12:51,818
+A stronger next study could compare methods on
+the same
+更強的後續研究，可以在同一靶點，
+
+221
+00:12:51,818 --> 00:12:55,325
+target, with similar information, resources and
+definitions of success.
+用相近信息、資源和成功標準比較方法。
+
+222
+00:12:55,325 --> 00:12:58,052
+It should record time to a confirmed
+它應記錄首次確認命中的時間與實驗投入，
+
+223
+00:12:58,052 --> 00:13:00,779
+hit and experimental effort, including
+unsuccessful attempts.
+包括失敗嘗試。
+
+224
+00:13:00,779 --> 00:13:03,506
+A second improvement is to use new
+第二個方向是用新實驗反饋檢查、
+
+225
+00:13:03,506 --> 00:13:06,233
+experimental feedback to check and revise
+predictions.
+修正預測。
+
+226
+00:13:06,233 --> 00:13:10,130
+A third is to evaluate several properties
+together, so better
+第三個是同時評價多項性質，
+
+227
+00:13:10,130 --> 00:13:13,636
+binding does not hide poor selectivity or other
+problems.
+避免更好結合掩蓋選擇性或其他問題。
+
+228
+00:13:13,636 --> 00:13:15,974
+Our sources have different jobs too.
+資料也各有用途。
+
+229
+00:13:15,974 --> 00:13:20,649
+The original study and its supplement support
+the case numbers and experiments.
+原始研究和補充材料支撐案例數字與實驗。
+
+230
+00:13:20,649 --> 00:13:23,376
+Method papers explain what the tools do.
+方法論文解釋工具。
+
+231
+00:13:23,376 --> 00:13:27,662
+Scholarly books and reviews help explain the
+concepts and wider context.
+學術書和綜述幫助解釋概念與背景。
+
+232
+00:13:27,662 --> 00:13:31,168
+A platform developer describing its own work is
+useful
+平臺開發者介紹自身研究是有用證據，
+
+233
+00:13:31,168 --> 00:13:34,675
+evidence, but not the same as an independent
+comparison.
+但不等於獨立比較。
+
+234
+00:13:34,675 --> 00:13:38,571
+We need to evaluate the source, not just count
+references.
+要評價資料，而不只是數參考文獻。
+
+235
+00:13:38,571 --> 00:13:40,909
+This matters outside a research laboratory.
+這也與實驗室外的生活有關。
+
+236
+00:13:40,909 --> 00:13:44,026
+When we hear that AI has discovered a
+聽到AI發現新藥，
+
+237
+00:13:44,026 --> 00:13:47,532
+drug, we can ask what the headline actually
+means.
+可以先問標題具體指什麼。
+
+238
+00:13:47,532 --> 00:13:50,649
+Was it a predicted structure, a laboratory hit,
+是預測結構、實驗命中物、
+
+239
+00:13:50,649 --> 00:13:53,766
+a result in cells or evidence from patients?
+細胞結果，還是患者證據？
+
+240
+00:13:53,766 --> 00:13:57,662
+Understanding those stages helps us judge the
+news without dismissing
+理解階段，能幫助我們既不忽視真實進展，
+
+241
+00:13:57,662 --> 00:14:01,948
+genuine progress or expecting a treatment that
+has not been demonstrated.
+也不期待尚未證實的治療。
+
+242
+00:14:01,948 --> 00:14:04,675
+We can now answer our opening question.
+現在可以回答開場問題。
+
+243
+00:14:04,675 --> 00:14:07,403
+Can we predict whether a molecule is
+分子還沒做出來，
+
+244
+00:14:07,403 --> 00:14:10,130
+worth testing before we even make it?
+我們能先預測它值不值得測試嗎？
+
+245
+00:14:10,130 --> 00:14:14,026
+We can make informed predictions, but
+experiments must test them.
+能提出有依據的預測，但必須用實驗檢驗。
+
+246
+00:14:14,026 --> 00:14:17,143
+In this case, algorithms helped people propose
+and
+本案例中，算法幫人提出和優先考慮設計，
+
+247
+00:14:17,143 --> 00:14:20,260
+prioritise designs, while experiments guided the
+next step.
+實驗引導下一步。
+
+248
+00:14:20,260 --> 00:14:22,597
+The promise is a better-directed search.
+潛力在於讓探索更有方向。
+
+249
+00:14:22,597 --> 00:14:26,494
+How much faster that search becomes, and whether
+it leads
+到底快多少、最終能否帶來有用藥物，
+
+250
+00:14:26,494 --> 00:14:30,000
+to a useful medicine, remain questions for
+further evidence.
+仍要進一步證據。

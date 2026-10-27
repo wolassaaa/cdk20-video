@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-07",
+  "pages_reviewed": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17
+  ],
+  "result": "PASS",
+  "pdf_sha256": "e7babc7d51d752acce51947db2e53675c59b14bbb8ace49c82187ed5870d7603",
+  "notes": "Changed pages 1, 2, 4, 6, 7 rendered and individually inspected at full resolution on 2026-10-07. Other 12 page PNG SHA256 values exactly match previously individually reviewed pages. No clipping, overlap or broken tables observed.",
+  "renderer": "Microsoft Word native export + packaged render_docx.py rasterizer"
+}

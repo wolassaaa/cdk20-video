@@ -1,0 +1,416 @@
+<title>Worth Testing 分镜</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a production sheet — summary strip, then the film as a vertical stack of storyboard rows (frame left, notes right). */
+:root{
+  --bg:#ECEAE4; --sheet:#F8F7F3; --ink:#1F2422; --muted:#646B67; --line:#D3D0C7; --frame:#FFFFFF;
+  --hi:#C8643B; --hi-soft:#F0DCCF;
+  --pA:#B5583A; --pB:#3F7A66; --pC:#5E5A9C; --pD:#A27A1E; --pALL:#55605B;
+  --display:"Newsreader","Noto Serif SC",Georgia,serif;
+  --body:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#161816; --sheet:#1E211F; --ink:#E7E5DF; --muted:#A0A69F; --line:#363B37; --frame:#262A27;
+  --hi:#E08559; --hi-soft:#4A2E22;
+  --pA:#E08A6C; --pB:#7DBBA3; --pC:#A39FDB; --pD:#D7B35A; --pALL:#9AA59F; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#161816; --sheet:#1E211F; --ink:#E7E5DF; --muted:#A0A69F; --line:#363B37; --frame:#262A27;
+  --hi:#E08559; --hi-soft:#4A2E22;
+  --pA:#E08A6C; --pB:#7DBBA3; --pC:#A39FDB; --pD:#D7B35A; --pALL:#9AA59F; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.65;margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:40px 80px}
+h1,h2,h3{text-wrap:balance;margin:0}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(34px,5vw,54px);line-height:1.05;letter-spacing:-.01em}
+h2{font-size:22px;font-weight:700;margin-bottom:14px}
+h3{font-size:16px;font-weight:700}
+p{margin:0}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+header{display:grid;gap:14px;margin-bottom:28px}
+header .lede{max-width:68ch;color:var(--muted)}
+.stats{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:6px}
+.stats div{display:grid}
+.stats b{font-family:var(--mono);font-size:20px;font-weight:600}
+.stats span{font-size:12px;color:var(--muted)}
+section.block{background:var(--sheet);border:1px solid var(--line);border-radius:6px;padding:22px clamp(16px,3vw,28px);margin-bottom:18px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.cols>*{min-width:0}
+.note{font-size:13px;color:var(--muted)}
+ul.tight{margin:6px 0 0;padding-left:18px}
+ul.tight li{margin:3px 0}
+/* timeline */
+.tl{overflow-x:auto}
+.tl svg{display:block;width:100%;min-width:720px;height:auto}
+.tl text{font-family:var(--mono);font-size:10px;fill:var(--muted)}
+.tl .sec{font-family:var(--body);font-size:11px;fill:var(--ink);font-weight:500}
+.tl a rect{cursor:pointer}
+.tl a:hover rect,.tl a:focus rect{opacity:.65}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:10px;font-size:12px;color:var(--muted)}
+.sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+/* grammar */
+.grammar{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.gcard{display:grid;gap:6px;align-content:start}
+.gcard svg{width:100%;height:auto;border:1px solid var(--line);border-radius:3px;background:var(--frame)}
+.gcard .k{font-family:var(--mono);font-weight:600;color:var(--hi)}
+/* tools */
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;vertical-align:top;padding:9px 10px;border-bottom:1px solid var(--line)}
+th{font-size:12px;color:var(--muted);font-weight:500}
+.tablewrap{overflow-x:auto}
+.verdict{font-family:var(--mono);font-size:12px;white-space:nowrap}
+.yes{color:var(--pB)} .no{color:var(--muted)} .opt{color:var(--pD)}
+/* filter */
+.filter{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-bottom:1px solid var(--line);margin-bottom:18px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.filter button{font:500 13px var(--body);color:var(--ink);background:var(--sheet);border:1px solid var(--line);border-radius:999px;padding:5px 14px;cursor:pointer}
+.filter button[aria-pressed="true"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+.filter button:focus-visible{outline:2px solid var(--hi);outline-offset:2px}
+.filter .count{margin-left:auto;font-size:12px;color:var(--muted)}
+/* shots */
+.secHead{display:grid;gap:4px;margin:34px 0 14px;padding-left:12px;border-left:3px solid var(--c,var(--ink))}
+.secHead .meta{font-size:13px;color:var(--muted)}
+.shot{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:20px;background:var(--sheet);border:1px solid var(--line);border-radius:6px;padding:16px;margin-bottom:12px;scroll-margin-top:70px}
+.shot .thumb svg{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:3px;background:var(--frame)}
+.shot .cap{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin-top:8px;font-size:12px;color:var(--muted)}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:12px;line-height:1;padding:4px 8px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
+.chip.who{color:#fff;border-color:transparent}
+.dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+.body{display:grid;gap:8px;min-width:0}
+.titleRow{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline}
+.titleRow .id{font-family:var(--mono);font-weight:600;color:var(--hi)}
+.titleRow .tc{font-family:var(--mono);font-size:12px;color:var(--muted)}
+dl{display:grid;grid-template-columns:88px minmax(0,1fr);gap:4px 12px;margin:0;font-size:14px}
+dt{color:var(--muted);font-size:13px}
+dd{margin:0;min-width:0}
+.osd{font-family:var(--display);font-size:15px;font-style:normal}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:11.5px;padding:2px 7px;border-radius:3px;background:var(--hi-soft);color:var(--ink)}
+.asset{display:inline-flex;gap:5px;align-items:baseline;margin-right:12px}
+.asset b{font-family:var(--mono);font-size:11px;padding:1px 5px;border-radius:3px;border:1px solid var(--line)}
+.tool{font-family:var(--mono);font-size:12px}
+@media (max-width:720px){.shot{grid-template-columns:1fr}dl{grid-template-columns:1fr}dt{margin-top:6px}}
+/* thumbnails */
+.sv .bg{fill:var(--frame)}
+.sv .ln{stroke:var(--ink);fill:none;stroke-width:1.1;stroke-linecap:round;stroke-linejoin:round}
+.sv .lnf{stroke:var(--muted);fill:none;stroke-width:.8;stroke-dasharray:2 2}
+.sv .soft{fill:var(--line)}
+.sv .ink{fill:var(--ink)}
+.sv .mut{fill:var(--muted)}
+.sv .hi{fill:var(--hi)}
+.sv .his{stroke:var(--hi);fill:none;stroke-width:1.4}
+.sv .card{fill:var(--sheet);stroke:var(--line);stroke-width:.8}
+.sv text{font-family:var(--mono);fill:var(--ink)}
+.sv .serif{font-family:var(--display)}
+.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px 20px;margin-top:8px}
+.checks div{font-size:14px;padding-left:22px;position:relative}
+.checks div::before{content:"";position:absolute;left:0;top:6px;width:12px;height:12px;border:1.5px solid var(--hi);border-radius:2px}
+.people{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.person{border-top:3px solid var(--c);padding-top:10px;display:grid;gap:6px;min-width:0}
+.person ol{margin:0;padding-left:18px;font-size:13.5px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+html{scroll-behavior:smooth}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">SCIE1007 · Topic 10 · 镜头设计 v1 · 2026-10-25</div>
+  <h1>Worth Testing?</h1>
+  <p class="lede">先定镜头，口播之后按镜头填。每个镜头写好了时长、画面、动作、屏幕字、观众要懂什么，以及用哪个工具做。口播按每分钟约130词换算成每个镜头的词数预算。</p>
+  <div class="stats" id="stats"></div>
+</header>
+
+<section class="block">
+  <h2>质量目标与工具链</h2>
+  <div class="cols">
+    <div>
+      <h3>以 Anthropic 的科研讲解片为标杆</h3>
+      <p class="note" style="margin-top:4px">学它的做法，不搬它的标识和字体。我们要做到的是下面这几条：</p>
+      <ul class="tight">
+        <li><b>人是主角。</b>研究者对着镜头自然地讲，侧窗自然光，背景有景深。图解是来帮人讲清楚的。</li>
+        <li><b>浅色、安静的画面。</b>暖白纸面加一个强调色，留白多，一个画面只讲一件事。</li>
+        <li><b>概念图像手作。</b>线条简单，有一点纸面颗粒；动画缓入缓出，元素少。</li>
+        <li><b>3D 少而精。</b>柔和棚拍光，哑光材质（陶土、磨砂），只在需要空间感的地方用：肝脏、蛋白、分子、锁。</li>
+        <li><b>字少。</b>屏幕上只放关键词和数字；衬线标题配干净的无衬线正文。</li>
+        <li><b>节奏慢。</b>每个关键数字停够两秒；音乐很淡，不抢人声。</li>
+      </ul>
+      <p class="note" style="margin-top:8px">旧片的深色科技界面、细线网格和满屏小字，全部换掉。</p>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>工具</th><th>用不用</th><th>负责什么</th></tr></thead>
+        <tbody>
+          <tr><td><b>Blender 5.1</b></td><td class="verdict yes">主力</td><td>所有 3D 主镜头：人体与肝脏、组织窗口、CDK20 预测结构、候选分子、挂锁。我用 Python 脚本建场景，用本机 RTX 5080 渲染，场景可以复现、可以改。</td></tr>
+          <tr><td><b>Remotion</b></td><td class="verdict yes">主力</td><td>所有 2D 动画、文字、数据、字幕，同时也是总剪辑：把组员实拍、Blender 渲染和图解放在一条代码时间轴上，改一处就重新导出。</td></tr>
+          <tr><td>After Effects</td><td class="verdict opt">可选</td><td>本机没装。不是必需；如果组里有人会用，可以用来抠像或调色。</td></tr>
+          <tr><td>网页生成 (three.js)</td><td class="verdict no">退役</td><td>旧片的渲染管线不再用。它的肝脏网格和 AlphaFold 结构文件搬进 Blender 继续用。</td></tr>
+          <tr><td>TouchDesigner</td><td class="verdict no">不用</td><td>本机没装。它擅长实时、生成式、音画联动的视觉，这部片子用不上。</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <h2>时间轴</h2>
+  <div class="tl" id="tl"></div>
+  <div class="legend" id="legend"></div>
+  <p class="note" style="margin-top:10px">上条：谁在讲。下条：镜头类型。点任一格跳到对应镜头。引言、主体、结论约占 28% / 48% / 24%，接近 Tutorial 2 讲义建议的 30 / 50 / 20。</p>
+</section>
+
+<section class="block">
+  <h2>贯穿全片的三条线</h2>
+  <div class="cols">
+    <div><h3>锁与钥匙（概念）</h3><p class="note">靶点蛋白是锁，候选分子是钥匙；AlphaFold 给出锁的“蓝图”，生成模型是“配钥匙机”，结合是“插得进”，抑制酶是“拧得动”。道具在交接时从一个人手里递到下一个人手里。</p></div>
+    <div><h3>证据阶梯（证据层级）</h3><p class="note">Predicted → Binds → Blocks enzyme → Affects cells → Animals → Patients。每个实验结果都回到阶梯上点亮一级；最后两级在本研究里一直是暗的。</p></div>
+    <div><h3>同一条新闻（生活联系）</h3><p class="note">开场刷到“AI 30 天设计出肝癌新药”，结尾 D 拿起同一部手机再看一遍，问：这条新闻在阶梯的第几级？首尾同一个构图。</p></div>
+  </div>
+</section>
+
+<section class="block">
+  <h2>镜头语法</h2>
+  <p class="note" style="margin-bottom:14px">全片只用 7 种镜头，拍摄和制作都可以重复使用。不需要绿幕：拍 S 类镜头时讲者站在画面左三分之一，背后是浅色素墙，右侧的空墙留给图解叠上去。</p>
+  <div class="grammar" id="grammar"></div>
+</section>
+
+<div class="filter" role="toolbar" aria-label="按讲者筛选">
+  <button type="button" data-f="all" aria-pressed="true">全部</button>
+  <button type="button" data-f="A" aria-pressed="false">A</button>
+  <button type="button" data-f="B" aria-pressed="false">B</button>
+  <button type="button" data-f="C" aria-pressed="false">C</button>
+  <button type="button" data-f="D" aria-pressed="false">D</button>
+  <span class="count" id="count"></span>
+</div>
+<div id="shots"></div>
+
+<section class="block" style="margin-top:30px">
+  <h2>每个人要拍什么</h2>
+  <p class="note" style="margin-bottom:12px">讲义要求每人都有大致相等的机会出镜并亲口讲，不能用 AI 配音。下面是每人需要露脸的镜头；四人同框的第 04、43 镜安排在同一次集体拍摄里完成。</p>
+  <div class="people" id="people"></div>
+</section>
+
+<section class="block">
+  <h2>实拍规格（发给组员）</h2>
+  <div class="cols">
+    <ul class="tight">
+      <li>手机横拍，4K 或 1080p，<b>30 fps</b>，关闭美颜和自动 HDR。</li>
+      <li>侧前方窗户光，不开顶灯；人离背景墙至少 1.5 米。</li>
+      <li>镜头与眼睛同高，人物视线略偏镜头一侧，像在和采访者说话。</li>
+      <li>S 类镜头：人站在画面左三分之一，右侧留空墙。</li>
+    </ul>
+    <ul class="tight">
+      <li>收音：领夹麦最好；没有就用另一部手机放在胸前 30 cm 内录音。</li>
+      <li>每段开头拍一下手，方便对齐声音。</li>
+      <li>交接镜头：递出方向是画面右侧，接住方向是画面左侧，两段动作要接得上。</li>
+      <li>道具：挂锁 1 把、配套钥匙 1 把、普通钥匙 7 把、钥匙胚一串、打印的证据阶梯卡。</li>
+    </ul>
+  </div>
+</section>
+
+<section class="block">
+  <h2>还要你们定的事</h2>
+  <div class="checks">
+    <div>四位组员的名字，以及谁是 A / B / C / D</div>
+    <div>能在哪里拍：实验室要不要先问助教？</div>
+    <div>实验二（drug X 处理癌细胞）当时有没有人拍过照片或视频？</div>
+    <div>四人能否约一次集体拍摄（第 04、43 镜）</div>
+  </div>
+</section>
+</div>
+
+<script>
+const P = {A:"var(--pA)",B:"var(--pB)",C:"var(--pC)",D:"var(--pD)",ALL:"var(--pALL)"};
+const MODES = {
+  T:{n:"讲者镜头",d:"中景对着镜头讲。真实地点（实验室、图书馆），自然光，背景有景深。每人登场、提出问题、关键判断时使用。",c:"var(--ink)"},
+  S:{n:"讲者 + 图解",d:"讲者在左三分之一，右侧是图解。全片最主要的讲解方式。",c:"var(--muted)"},
+  F:{n:"全屏图解",d:"Blender 3D 或 Remotion 2D 占满画面，讲者的声音继续。用于需要看清楚的过程和数字。",c:"var(--hi)"},
+  P:{n:"文献证据",d:"真实论文页面或图表局部，框出关键句，角落标 ACS 引用。",c:"var(--pD)"},
+  O:{n:"实物特写",d:"手和道具的特写：手机、挂锁、钥匙、六孔板照片。用来打比方、做生活联系。",c:"var(--pB)"},
+  G:{n:"四人同框",d:"四位成员在同一个画面里。只用在开头和结尾。",c:"var(--pC)"},
+  H:{n:"交接",d:"4–8 秒的动作匹配剪辑：上一位把道具递出画面，下一位接住。",c:"var(--pA)"}
+};
+const SECS = [
+  {id:"open",name:"开场",who:"ALL",desc:"新闻标题、我们的实验课、四人登场"},
+  {id:"intro",name:"引言：问题、疾病与靶点",who:"A",desc:"研究问题、目标、全片路线、HCC、CDK20"},
+  {id:"method",name:"主体一：结构预测、生成设计与筛选",who:"B",desc:"计算工具箱、AlphaFold、生成模型、8,918 → 54 → 7"},
+  {id:"exp",name:"主体二：实验证据与局限",who:"C",desc:"证据阶梯、首个结合物、30 天、第二轮 048、细胞、局限"},
+  {id:"end",name:"收益、未来与结论",who:"D",desc:"四类收益、算力耗电、未来研究、文献评价、回到新闻"}
+];
+// a:[code,text]  code: 拍 组员实拍 / 做 我来制作 / 有 已有资产 / 找 需要找
+const S = [
+ {s:"open",who:"A",m:"O",d:12,face:0,v:"headline",t:"手机上的新闻标题",fr:"俯拍桌面，手握手机刷新闻，停在一条标题上。手机占画面六成，旁边是课本和实验记录本。",mv:"手指上滑，停住，镜头缓慢推近标题。",osd:"AI designs liver cancer drug in 30 days（标 Illustrative headline）",g:"这是日常会刷到的报道。全片要回答它说对了多少。",a:[["拍","手机和桌面"],["做","仿新闻卡片，不用真实媒体的标识"]],tool:"实拍 + Remotion",tg:["Audience","Visual aids"]},
+ {s:"open",who:"A",m:"T",d:18,face:1,v:"phone",t:"A 抬头提问",fr:"A 坐在桌前，中景，手里还拿着手机，抬头看向镜头。背景是图书馆或书桌，有景深。",mv:"从手机特写切到 A；A 放下手机开口。",osd:"只有下三分之一姓名条",g:"引出核心问题：一个还没做出来的分子，能先判断值不值得测试吗？",a:[["拍","A"]],tool:"实拍",tg:["Delivery","Audience"]},
+ {s:"open",who:"A",m:"O",d:15,face:0,v:"plate",t:"回到我们自己的实验课",fr:"实验二的六孔板、显微镜下的癌细胞照片，A 画外音。",mv:"照片缓慢推近；对照孔和加药孔交叉淡入。",osd:"Our lab: drug X on cancer cells",g:"我们亲眼见过药物作用于癌细胞。那候选分子是从哪里来的？把课程和课题接起来。",a:[["找","实验课照片"],["做","没有照片就用 Blender 做六孔板"]],tool:"照片 + Remotion",tg:["Audience","Creativity"]},
+ {s:"open",who:"ALL",m:"G",d:22,face:1,v:"group",t:"四人登场",fr:"四人同框，站在教学楼走廊或实验室门口，依次说出自己的名字；谁说话就亮谁的姓名条。",mv:"固定机位，不推不摇。",osd:"四个姓名条 + 组别",g:"一眼看到四位成员都在，都开口了。",a:[["拍","四人集体拍摄"]],tool:"实拍",tg:["Teamwork","Delivery"]},
+ {s:"open",who:"ALL",m:"F",d:8,face:0,v:"title",t:"片名",fr:"暖白纸面，衬线大字片名，旁边一把 3D 陶土质感的挂锁静静转半圈。",mv:"字逐词浮现；锁转半圈停住。",osd:"Worth Testing? How AI helps design liver cancer drug candidates · SCIE1007 · Topic 10",g:"题目和课题编号。",a:[["做","片名卡与挂锁"]],tool:"Remotion + Blender",tg:["Structure"],nw:1},
+
+ {s:"intro",who:"A",m:"S",d:35,face:1,v:"question",t:"研究问题与两个目标",fr:"A 在左三分之一；右侧逐行出现研究问题和两个目标。",mv:"研究问题完整出现后，在 AI-assisted 和 which benefits 下划线；两个目标分两拍出现。",osd:"RQ · Objective 1 · Objective 2（英文短句）",g:"知道本片要回答什么、怎样判断有没有答到。",a:[["拍","A"],["做","文字动画"]],tool:"实拍 + Remotion",tg:["Structure","Content"]},
+ {s:"intro",who:"A",m:"F",d:40,face:0,v:"roadmap",t:"全片路线图",fr:"一条横向路线，9 个站点：Target、Structure、Design、Filter、Test、Improve、Limits、Benefits、Future。每站一个小图标，下面标讲者字母。",mv:"路线从左到右画出，站点依次点亮；结束时缩成角标。之后每章开头角标再出现，高亮当前站。",osd:"站点名 + A/B/C/D",g:"先拿到整片地图，对应评分里的 Overview。",a:[["做","路线图与角标系统"]],tool:"Remotion",tg:["Structure","Visual aids"]},
+ {s:"intro",who:"A",m:"S",d:20,face:1,v:"sources",t:"我们读了哪些资料",fr:"A 在左；右侧四张资料卡依次落下：原始研究、方法论文、综述、学术书，每张一行写它的用途。",mv:"四张卡依次落下排成一列。",osd:"Ren 2023 · Jumper 2021 / Ivanenkov 2023 · Wang 2023 · Lengauer 2007",g:"交代文献范围。怎么评价这些资料，放到 D 的部分讲。",a:[["拍","A"],["做","资料卡"]],tool:"实拍 + Remotion",tg:["Literature"]},
+ {s:"intro",who:"A",m:"F",d:30,face:0,v:"body",t:"从人体到肝脏",fr:"左侧一个有体积感的简化人体，肝区亮起；匹配剪辑到同一角度的 3D 肝脏，柔光，陶土暖红。",mv:"人体肝区亮起，镜头推入；匹配剪辑到肝脏缓慢转动。",osd:"Hepatocellular carcinoma (HCC) · the most common primary liver cancer in adults",g:"这是什么病、长在哪里。",a:[["有","BodyParts3D 肝脏网格"],["做","简化人体"]],tool:"Blender",tg:["Content","Audience"]},
+ {s:"intro",who:"A",m:"F",d:25,face:0,v:"cell",t:"肝脏 → 组织 → 细胞",fr:"肝脏表面开出一个圆形放大窗：铺石状排列的肝细胞，其中一个高亮，细胞里有核和几个蛋白小点。",mv:"连续放大两级，每级都标尺度（cm → µm）。",osd:"Schematic, not patient tissue",g:"药物要作用的对象在细胞里面。",a:[["做","组织与细胞示意"]],tool:"Blender",tg:["Visual aids","Audience"]},
+ {s:"intro",who:"A",m:"O",d:25,face:1,v:"lock",t:"锁与钥匙",fr:"A 拿着一把挂锁和一把钥匙，中近景。",mv:"A 举起锁，旁边浮出标签“Target protein = lock”；再举起钥匙，浮出“Candidate molecule = key”。",osd:"Target = lock · Candidate = key · An analogy, not the full biology",g:"用一个贯穿全片的比喻分清靶点和候选分子。后面三个人都接着用这套道具。",a:[["拍","A + 挂锁和钥匙"],["做","标签"]],tool:"实拍 + Remotion",tg:["Audience","Creativity","Visual aids"]},
+ {s:"intro",who:"A",m:"F",d:30,face:0,v:"protein",t:"这把锁就是 CDK20",fr:"细胞里一个蛋白点放大成 CDK20 的 AlphaFold 预测结构，用丝带表示，磨砂材质。右下一张小卡：PandaOmics 用 10 个数据集给靶点排序。",mv:"蛋白缓慢转一圈，停在口袋朝向观众的角度。",osd:"CDK20 (also called CCRK) · chosen by data + researchers",g:"为什么选它：疾病关联强、缺少实验结构、还没有获批药物。",a:[["有","AF-Q8IZL9 预测结构"]],tool:"Blender",tg:["Content"]},
+ {s:"intro",who:"A",m:"P",d:20,face:0,v:"paper",t:"选这个靶点的依据",fr:"Feng 2011 论文页面，框出关键结果：52 对肿瘤组织里 36 对（69.2%）CCRK 升高。",mv:"页面从斜放转正，再框出那一句。",osd:"Feng et al., 2011 · Association, not proof that blocking it cures",g:"选靶点有依据，但相关不等于因果。",a:[["有","Feng 2011 PDF"]],tool:"Remotion",tg:["Literature","Critical thinking"]},
+ {s:"intro",who:"A",to:"B",m:"H",d:8,face:1,v:"handover",t:"交接：锁交给 B",fr:"A 把挂锁递向画面右侧、出画；切到 B 从画面左侧接住。",mv:"动作匹配剪辑，两段的递出和接住方向一致。",osd:"路线角标：Target ✓ → Structure",g:"自然换人，看得见团队配合。",a:[["拍","A、B 各一段"]],tool:"实拍",tg:["Teamwork"]},
+
+ {s:"method",who:"B",m:"T",d:20,face:1,v:"lock",t:"没有锁的照片，怎么配钥匙",fr:"B 中景，手里拿着那把锁，背景换到电脑室或实验室。",mv:"固定机位；结尾 B 把锁放到桌上。",osd:"CDK20 had no experimental structure",g:"本章的问题：这个蛋白没有实验测定的三维结构。",a:[["拍","B"]],tool:"实拍",tg:["Content","Delivery"]},
+ {s:"method",who:"B",m:"F",d:30,face:0,v:"toolbox",t:"计算药物发现的工具箱",fr:"五个工具图标排成一行：分子对接、分子动力学、量子力学、化学信息学、机器学习；本案例用到的那几个亮起。",mv:"工具依次出现；没用到的变灰，但留在画面上。",osd:"Docking · MD · QM · Cheminformatics · ML · used in this case",g:"我们知道这个领域有很多方法（老师课件第 47 页），本片只深挖其中一条流程。",a:[["做","工具图标"]],tool:"Remotion",tg:["Content","Critical thinking"]},
+ {s:"method",who:"B",m:"F",d:35,face:0,v:"seq",t:"从序列到预测结构",fr:"左侧一行氨基酸字母（CDK20 的真实序列片段），中间一个箭头写 AlphaFold，右侧出现三维结构。角落小字：2024 年诺贝尔化学奖。",mv:"字母条滑入，箭头画出，结构淡入。不做假的折叠动画。",osd:"Sequence → predicted 3D structure · Nobel Prize in Chemistry 2024",g:"AlphaFold 具体做了什么。",a:[["有","序列与结构"],["做","版式"]],tool:"Blender + Remotion",tg:["Content","Visual aids"]},
+ {s:"method",who:"B",m:"S",d:25,face:1,v:"confidence",t:"这是蓝图，不是照片",fr:"B 在左；右侧结构按置信度上色，深蓝是高置信，橙色是低置信；末端低置信的一段被剪掉。",mv:"颜色一档一档出现，然后剪掉尾部。研究者确实这样处理过：只用第 1–302 号残基。",osd:"Confidence (pLDDT) · Researchers kept residues 1–302",g:"预测有不确定性，研究者会处理它。也为后面讲局限埋下伏笔。",a:[["拍","B"],["有","结构与置信度数据"]],tool:"实拍 + Blender",tg:["Content","Critical thinking"]},
+ {s:"method",who:"B",m:"P",d:15,face:0,v:"paper",t:"方法的出处",fr:"Jumper 2021 首页和 Ren 2023 图 4A 的局部，并排放。",mv:"两页并排，镜头轻推。",osd:"Jumper et al., 2021 · Ren et al., 2023",g:"方法来自原始的方法论文。",a:[["有","两篇 PDF"]],tool:"Remotion",tg:["Literature"]},
+ {s:"method",who:"B",m:"O",d:35,face:0,v:"molfamily",t:"配钥匙机：生成新分子",fr:"先是 B 手里摊开一串钥匙胚的实拍特写，匹配剪辑到 6–10 个结构各不相同的示意分子，在口袋周围出现。",mv:"钥匙胚摊开，切到分子错开出现；主候选先亮，其他退到后面。",osd:"A generative model proposes new structures · Illustrative designs, not the study's molecules",g:"AI 不只是从现成名单里挑，它会提出新结构。",a:[["拍","钥匙胚特写"],["做","化学上合理的示意分子"]],tool:"实拍 + Blender",tg:["Content","Creativity"]},
+ {s:"method",who:"B",m:"S",d:25,face:1,v:"rules",t:"规则和人",fr:"B 在左；右侧三张规则卡：放得进口袋、像药、做得出来；下面一个化学家图标。",mv:"不符合规则的分子被划掉、退出画面。",osd:"Fits the pocket · Drug-like · Can be made · Chemists reviewed the shortlist",g:"生成受规则约束，最后由人决定，不是全自动。",a:[["拍","B"],["做","规则卡"]],tool:"实拍 + Remotion",tg:["Content","Critical thinking"]},
+ {s:"method",who:"B",m:"F",d:40,face:0,v:"funnel",t:"8,918 → 54 → 7",fr:"大数字主导：8,918 个小点铺满画面，收拢成 54，再收成 7 个，变成 7 个小瓶。每个阶段下面一行说明怎么筛的。",mv:"每次收拢后停 2 秒，让数字读清楚。",osd:"8,918 generated · 54 prioritised (docking + clustering) · 7 synthesised",g:"计算的作用是在动手合成之前缩小范围。",a:[["做","数据动画"]],tool:"Remotion",tg:["Content","Visual aids"]},
+ {s:"method",who:"B",m:"O",d:15,face:0,v:"keys7",t:"真正做出来的只有 7 个",fr:"俯拍桌面，B 把 7 把钥匙一把一把摆成一排。",mv:"放钥匙的节奏和旁白计数对上。",osd:"7 made and tested",g:"真正进实验室的只有 7 个。",a:[["拍","7 把钥匙"]],tool:"实拍",tg:["Visual aids","Creativity"]},
+ {s:"method",who:"B",m:"S",d:12,face:1,v:"vials",t:"选中不等于成功",fr:"B 在左；右侧 7 个小瓶，每个都打着问号。",mv:"问号一个个出现。",osd:"Selected ≠ successful",g:"防止观众以为这是 7 个药。",a:[["拍","B"],["做","小瓶"]],tool:"实拍 + Remotion",tg:["Critical thinking"]},
+ {s:"method",who:"B",to:"C",m:"H",d:8,face:1,v:"handover",t:"交接：钥匙交给 C",fr:"B 把一串钥匙递出画面，C 接住。",mv:"同第 14 镜。",osd:"路线角标：Filter ✓ → Test",g:"换人。",a:[["拍","B、C 各一段"]],tool:"实拍",tg:["Teamwork"]},
+
+ {s:"exp",who:"C",m:"T",d:15,face:1,v:"keys7",t:"钥匙插得进真锁吗",fr:"C 中景拿着钥匙，背景是实验室。",mv:"固定机位。",osd:"无",g:"从计算转到实验。",a:[["拍","C"]],tool:"实拍",tg:["Delivery"]},
+ {s:"exp",who:"C",m:"F",d:30,face:0,v:"ladder",n:1,t:"证据阶梯",fr:"竖向六级阶梯：Predicted、Binds、Blocks enzyme、Affects cells、Animals、Patients。第一级亮。",mv:"阶梯从下往上画出。之后每个实验镜头结束时都回到阶梯，点亮一级。",osd:"六级名称",g:"全片第二个贯穿工具：每个结果都放到它所在的那一级。",a:[["做","阶梯动画"],["做","可打印的实体阶梯卡"]],tool:"Remotion",tg:["Structure","Critical thinking","Visual aids"]},
+ {s:"exp",who:"C",m:"F",d:35,face:0,v:"binding",t:"7 个里有 1 个结合",fr:"7 个小瓶，6 个变灰，1 个亮起（ISM042-2-001）。下面一条时间轴：选定靶点到首个结合物，30 天。",mv:"逐个测试，命中的那一个放大；时间轴从左画到右。阶梯第 2 级亮。",osd:"Kd 9.2 ± 0.5 µM (n = 3) · 30 days: target selection → first hit",g:"第一个经实验确认的结合物，用了 30 天。",a:[["做","数据动画"]],tool:"Remotion",tg:["Content"]},
+ {s:"exp",who:"C",m:"S",d:25,face:1,v:"timeline",t:"30 天走到了哪一步",fr:"C 在左；右侧时间轴拉远：30 天只是最前面的一小段，后面的优化、临床前、临床试验画成虚线，不标时长。",mv:"镜头从 30 天这一段拉远到整条时间轴。",osd:"30 days to a first hit, not to a medicine",g:"给开场那条标题降温，同时不编造后面要几年。",a:[["拍","C"],["做","时间轴"]],tool:"实拍 + Remotion",tg:["Critical thinking","Audience"]},
+ {s:"exp",who:"C",m:"O",d:25,face:1,v:"keyturn",t:"插得进，但拧不动",fr:"特写：C 把钥匙插进挂锁，插到底，但拧不开。",mv:"插入，试着拧，停住；文字叠上来。",osd:"001 binds… but weakly blocks the enzyme (IC50 > 6,000 nM)",g:"结合不等于改变功能。这是全片最关键的概念区分之一。",a:[["拍","C + 挂锁和一把插得进的钥匙"]],tool:"实拍 + Remotion",tg:["Audience","Creativity","Content"]},
+ {s:"exp",who:"C",m:"F",d:40,face:0,v:"loop",t:"第二轮：16 → 6 → 048",fr:"一个环形箭头，表示实验结果反馈回设计：16 个新设计，6 个合成，048 亮起。两个数值分别放在两张卡上。",mv:"环转一圈；两张卡依次翻开；阶梯第 3 级亮。",osd:"Round 2 · 048 binding Kd 566.7 ± 256.2 nM · Enzyme IC50 33.4 ± 22.6 nM",g:"实验反过来指导设计；048 才真正抑制了酶。第二轮不在那 30 天里。",a:[["做","数据动画"],["做","048 示意分子"]],tool:"Remotion + Blender",tg:["Content"]},
+ {s:"exp",who:"C",m:"F",d:35,face:0,v:"cells",t:"细胞实验",fr:"两个培养孔示意：Huh7（肝癌细胞）和 HEK293（对照细胞），各一根柱子表示 IC50；角落小图回扣我们实验课的六孔板。",mv:"两根柱子依次升起；阶梯第 4 级亮。",osd:"Huh7 IC50 208.7 nM · HEK293 1,706.7 nM · ATP signal after 3 days",g:"肝癌细胞更敏感；但 HEK293 不是正常肝细胞。",a:[["做","数据动画"]],tool:"Remotion",tg:["Content","Audience"]},
+ {s:"exp",who:"C",m:"S",d:20,face:1,v:"ladder",n:4,t:"最后两级是空的",fr:"C 在左，手里拿着实体阶梯卡；右侧阶梯第 5、6 级保持暗色，标 not reported。",mv:"第 5、6 级轻轻闪一下，然后保持暗。",osd:"Animals · Patients: not reported in this study",g:"证据停在细胞这一级。",a:[["拍","C + 阶梯卡"],["做","阶梯"]],tool:"实拍 + Remotion",tg:["Critical thinking"]},
+ {s:"exp",who:"C",m:"F",d:40,face:0,v:"limits",t:"三个局限",fr:"三张卡并排：预测可能出错；没有公平对照，所以提速多少未知；细胞不等于人体。另加一行小注：作者来自开发这个平台的公司（论文已声明）。",mv:"三张卡依次翻开，每张配一个前面出现过的画面缩略：蓝图、30 天轴、细胞孔。",osd:"Prediction can be wrong · No fair comparison · Cells ≠ a body · Company-run study (disclosed)",g:"对研究本身做评价，对应评分里的 Critical thinking。",a:[["做","局限卡"]],tool:"Remotion",tg:["Critical thinking"]},
+ {s:"exp",who:"C",to:"D",m:"H",d:8,face:1,v:"handover",t:"交接：阶梯卡交给 D",fr:"C 把阶梯卡递出画面，D 接住。",mv:"同第 14 镜。",osd:"路线角标：Limits ✓ → Benefits",g:"换人。",a:[["拍","C、D 各一段"]],tool:"实拍",tg:["Teamwork"]},
+
+ {s:"end",who:"D",m:"T",d:15,face:1,v:"ladder",n:4,t:"那到底有什么好处",fr:"D 中景，手里拿着阶梯卡。",mv:"固定机位。",osd:"无",g:"进入收益评价。",a:[["拍","D"]],tool:"实拍",tg:["Delivery"]},
+ {s:"end",who:"D",m:"F",d:50,face:0,v:"benefits",t:"四类收益：已展示的和可能的",fr:"2×2 四格：Health、Economic、Ethical、Environmental（老师课件第 49 页）。每格左半写“这次展示了”，右半写“可能，但没测”。",mv:"一格一格展开；“已展示”用实线框，“可能”用虚线框。",osd:"每格两条短语，例如 Health：shown, a binding hit and an enzyme inhibitor; possible, faster cancer drug discovery",g:"回应老师给的四个收益维度，同时不夸大。",a:[["做","四格动画"]],tool:"Remotion",tg:["Content","Critical thinking"]},
+ {s:"end",who:"D",m:"S",d:25,face:1,v:"power",t:"环境的另一面：计算耗电",fr:"D 在左；右侧一架天平：一边是“只合成了 7 个”（少浪费试剂），一边是“GPU 计算耗电”。天平不倾斜，写 not measured。",mv:"两边砝码依次放上，天平晃一下后停平。",osd:"Fewer syntheses vs. computing power · Not measured",g:"环境上是否更好，要把计算和实验加在一起算。",a:[["拍","D"],["做","天平"]],tool:"实拍 + Remotion",tg:["Critical thinking","Creativity"]},
+ {s:"end",who:"D",m:"F",d:35,face:0,v:"future",t:"未来研究",fr:"两张方案卡。一：公平赛跑，同一靶点、同样预算，AI 流程对比传统流程。二：更多生物学验证，更多肝癌模型、正常肝细胞、选择性和 ADME。",mv:"第一张做成两条并排赛道的小动画。",osd:"A fair race · More biology",g:"两个未来方向分别对应前面的局限。",a:[["做","方案卡"]],tool:"Remotion",tg:["Critical thinking"]},
+ {s:"end",who:"D",m:"P",d:30,face:0,v:"srcEval",t:"这些资料可信吗",fr:"一张四行表：来源类型、用来做什么、强项、要小心的地方。Ren 2023 那一行标出“同行评审，但作者来自公司”。",mv:"一行一行亮起。",osd:"资料评价表",g:"不只是列出文献，还评价了它们，对应评分里的 Literature。",a:[["做","表格动画"]],tool:"Remotion",tg:["Literature","Critical thinking"]},
+ {s:"end",who:"D",m:"O",d:30,face:1,v:"headline",t:"再看那条新闻",fr:"D 拿起开场那部手机，还是同一条标题；旁边叠上证据阶梯，这条标题被放到第 2 级（结合）。",mv:"和开场镜头同一个构图，首尾呼应。",osd:"Which rung is this headline on?",g:"日常怎么用：看到“AI 发现新药”，先问证据到了哪一级。",a:[["拍","D + 开场同一部手机"],["做","阶梯叠加"]],tool:"实拍 + Remotion",tg:["Audience","Structure"]},
+ {s:"end",who:"D",m:"S",d:25,face:1,v:"takeaways",t:"回答开场的问题",fr:"D 在左；右侧两条要带走的信息逐条出现。",mv:"两条依次出现。",osd:"1. AI can help design molecules worth testing. 2. Check which stage the evidence reached.",g:"直接回答研究问题和两个目标，对应评分里的 Conclusion。",a:[["拍","D"],["做","文字"]],tool:"实拍 + Remotion",tg:["Structure","Audience"]},
+ {s:"end",who:"ALL",m:"G",d:15,face:1,v:"group",t:"四人收尾",fr:"和第 04 镜同一地点、同一机位，四人站在一起；D 把锁和钥匙放回桌上。",mv:"固定机位。",osd:"无",g:"首尾呼应，四人一起收尾。",a:[["拍","和第 04 镜同一次拍"]],tool:"实拍",tg:["Teamwork"]},
+ {s:"end",who:"ALL",m:"F",d:45,face:0,v:"refs",t:"参考文献与说明",fr:"ACS 格式参考文献滚动，然后是图源许可（BodyParts3D CC BY-SA，AlphaFold DB CC BY 4.0）和 AI 使用说明。",mv:"匀速滚动，可以按暂停读。",osd:"References · Image credits · AI use statement",g:"计入总时长，满足引用要求。",a:[["做","片尾"]],tool:"Remotion",tg:["Literature"],nw:1}
+];
+
+// ---------- timing ----------
+let t=0; S.forEach((x,i)=>{x.i=i+1;x.id="s"+String(i+1).padStart(2,"0");x.st=t;t+=x.d;x.en=t;});
+const TOTAL=t;
+const fmt=s=>Math.floor(s/60)+":"+String(Math.round(s%60)).padStart(2,"0");
+const words=x=>x.nw?0:Math.round(x.d*130/60/5)*5;
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+
+// ---------- thumbnail drawing (viewBox 160x90) ----------
+const R=(x,y,w,h,c="card",rx=1.5)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" class="${c}"/>`;
+const T=(x,y,s,txt,c="",a="start")=>`<text x="${x}" y="${y}" font-size="${s}" text-anchor="${a}" class="${c}">${esc(txt)}</text>`;
+const L=(x1,y1,x2,y2,c="ln")=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" class="${c}"/>`;
+const C=(cx,cy,r,c="ln")=>`<circle cx="${cx}" cy="${cy}" r="${r}" class="${c}"/>`;
+function person(cx,by,s,col){return `<g fill="${col}" opacity=".9"><circle cx="${cx}" cy="${by-27*s}" r="${7*s}"/><path d="M${cx-15*s} ${by} Q${cx-15*s} ${by-17*s} ${cx} ${by-18*s} Q${cx+15*s} ${by-17*s} ${cx+15*s} ${by} Z"/></g>`;}
+function hex(cx,cy,r,c="ln"){let p=[];for(let k=0;k<6;k++){const a=Math.PI/3*k+Math.PI/6;p.push((cx+r*Math.cos(a)).toFixed(1)+","+(cy+r*Math.sin(a)).toFixed(1));}return `<polygon points="${p.join(" ")}" class="${c}"/>`;}
+function mol(x,y,s,v=0){const r=5*s;let o=hex(x,y,r);const ax=x+r*1.73;
+  if(v%3===0)o+=hex(ax,y,r)+L(ax+r*.87,y-r*.5,ax+r*1.9,y-r*1.1);
+  if(v%3===1)o+=L(x+r*.87,y+r*.5,x+r*2,y+r*1.2)+hex(x+r*2.9,y+r*1.7,r*.85)+C(x-r*1.3,y-r*1,1.2*s,"hi");
+  if(v%3===2)o+=L(x+r*.87,y-r*.5,x+r*1.9,y-r*1.3)+L(x+r*1.9,y-r*1.3,x+r*3,y-r*.6)+hex(x+r*3.8,y-r*.1,r*.8);
+  return o;}
+function trace(x,y,w,h,seed=3,cls="ln"){let r=seed;const rnd=()=>(r=(r*9301+49297)%233280)/233280;let d=`M${x+w*.1} ${y+h*.6}`;for(let k=0;k<26;k++){d+=` Q${(x+rnd()*w).toFixed(1)} ${(y+rnd()*h).toFixed(1)} ${(x+rnd()*w).toFixed(1)} ${(y+rnd()*h).toFixed(1)}`;}return `<path d="${d}" class="${cls}" stroke-width=".8"/>`;}
+function ladder(x,y,w,h,lit){let o=L(x,y,x,y+h)+L(x+w,y,x+w,y+h);const names=["Predicted","Binds","Enzyme","Cells","Animals","Patients"];
+  for(let k=0;k<6;k++){const yy=y+h-(k+.5)*h/6;o+=`<line x1="${x}" y1="${yy}" x2="${x+w}" y2="${yy}" class="${k<lit?"his":"lnf"}"/>`+T(x+w+3,yy+2,4.2,names[k],k<lit?"":"mut");}return o;}
+function lock(x,y,s){return `<path d="M${x-6*s} ${y} V${y-6*s} a${6*s} ${6*s} 0 0 1 ${12*s} 0 V${y}" class="ln" stroke-width="${1.6*s}"/>`+R(x-9*s,y,18*s,14*s,"hi",2*s)+C(x,y+6*s,1.6*s,"card");}
+function key(x,y,s,ang=0){return `<g transform="translate(${x} ${y}) rotate(${ang})">${C(0,0,3.5*s)}<path d="M${3.5*s} 0 H${16*s} M${12*s} 0 v${3*s} M${15*s} 0 v${2.5*s}" class="ln"/></g>`;}
+function paper(x,y,w,h){let o=R(x,y,w,h,"card",.5);for(let k=0;k<9;k++)o+=L(x+5,y+8+k*(h-14)/9,x+w-5-(k%3)*6,y+8+k*(h-14)/9,"lnf");o+=`<rect x="${x+3}" y="${y+h*.45}" width="${w-6}" height="${h*.16}" class="his" rx="1"/>`;return o;}
+function vis(v,x,y,w,h,n){const cx=x+w/2,cy=y+h/2;switch(v){
+ case "headline":return R(cx-18,y+2,36,h-4,"card",3)+R(cx-14,y+10,28,10,"soft")+T(cx,y+28,4,"AI designs","serif","middle")+T(cx,y+33,4,"liver cancer drug","serif","middle")+T(cx,y+38,4,"in 30 days","serif","middle")+L(cx-12,y+45,cx+12,y+45,"lnf")+L(cx-12,y+50,cx+8,y+50,"lnf")+`<ellipse cx="${cx+20}" cy="${y+h-10}" rx="8" ry="5" class="soft"/>`;
+ case "phone":return R(x+w*.62,y+h*.55,9,15,"card",2);
+ case "plate":{let o=R(x+6,y+8,w-12,h-16,"card",4);for(let r=0;r<2;r++)for(let c=0;c<3;c++)o+=C(x+w*.25+c*w*.25,y+h*.35+r*h*.32,Math.min(w,h)*.11,c?"ln":"lnf");o+=C(x+w*.75,y+h*.67,Math.min(w,h)*.11,"his");return o;}
+ case "title":return T(x+10,cy-2,11,"Worth Testing?","serif")+T(x+10,cy+8,4.5,"How AI helps design liver cancer drug candidates","mut")+lock(x+w-22,cy-6,1.1);
+ case "question":return T(x+4,y+12,5,"Research question","mut")+L(x+4,y+18,x+w-6,y+18)+L(x+4,y+24,x+w-14,y+24)+`<line x1="${x+4}" y1="${y+26}" x2="${x+30}" y2="${y+26}" class="his"/>`+R(x+4,y+36,w-10,12)+T(x+7,y+43.5,4.2,"Objective 1")+R(x+4,y+52,w-10,12)+T(x+7,y+59.5,4.2,"Objective 2");
+ case "roadmap":{let o=`<path d="M${x+6} ${cy} C${x+w*.3} ${cy-14} ${x+w*.6} ${cy+14} ${x+w-6} ${cy}" class="ln"/>`;const lab=["Target","Struct","Design","Filter","Test","Improve","Limits","Benefit","Future"],who="AABBCCCDD";for(let k=0;k<9;k++){const px=x+6+k*(w-12)/8,py=cy+Math.sin(k/8*Math.PI*2)*-6;o+=C(px,py,3,k<2?"hi":"card")+T(px,py+11,3.6,lab[k],"","middle")+`<text x="${px}" y="${py-6}" font-size="4" text-anchor="middle" fill="${P[who[k]]}">${who[k]}</text>`;}return o;}
+ case "sources":{let o="";const s=["Primary study","Method papers","Review","Book"];s.forEach((q,k)=>{o+=R(x+6+k*2,y+6+k*15,w-20,12)+T(x+10+k*2,y+13.5+k*15,4.2,q);});return o;}
+ case "body":return `<g class="soft"><circle cx="${x+w*.25}" cy="${y+14}" r="6"/><path d="M${x+w*.25-12} ${y+h-4} L${x+w*.25-11} ${y+28} Q${x+w*.25} ${y+21} ${x+w*.25+11} ${y+28} L${x+w*.25+12} ${y+h-4} Z"/></g><ellipse cx="${x+w*.25-3}" cy="${y+38}" rx="6" ry="3.5" class="hi"/><path d="M${x+w*.5} ${cy+8} C${x+w*.55} ${cy-22} ${x+w*.95} ${cy-18} ${x+w*.93} ${cy+4} C${x+w*.85} ${cy+18} ${x+w*.6} ${cy+20} ${x+w*.5} ${cy+8} Z" class="hi" opacity=".85"/>`+L(x+w*.25+4,y+38,x+w*.5,cy+2,"lnf");
+ case "cell":{let o=`<path d="M${x+4} ${cy+16} C${x+12} ${cy-20} ${x+38} ${cy-20} ${x+42} ${cy+10} Z" class="hi" opacity=".8"/>`+C(x+w*.62,cy,h*.42,"card")+C(x+w*.62,cy,h*.42)+L(x+36,cy,x+w*.62-h*.42,cy,"lnf");for(let k=0;k<7;k++){const a=k/7*Math.PI*2;o+=hex(x+w*.62+Math.cos(a)*h*.24,cy+Math.sin(a)*h*.24,h*.09,"lnf");}o+=hex(x+w*.62,cy,h*.11,"his")+C(x+w*.62,cy,1.5,"hi");return o;}
+ case "lock":return lock(x+w*.4,cy-4,1.3)+key(x+w*.62,cy+6,1.1,-20)+R(x+w*.08,y+6,34,9)+T(x+w*.08+3,y+12,4,"Target = lock")+R(x+w*.6,y+h-16,38,9)+T(x+w*.6+3,y+h-10,4,"Candidate = key");
+ case "protein":return trace(x+w*.18,y+6,w*.55,h-12,7)+`<ellipse cx="${x+w*.5}" cy="${cy}" rx="7" ry="5" class="his" stroke-dasharray="2 1.5"/>`+R(x+w*.72,y+h-20,w*.26,14)+T(x+w*.72+3,y+h-11,3.8,"10 datasets");
+ case "paper":return paper(x+w*.15,y+4,w*.42,h-8)+paper(x+w*.52,y+8,w*.38,h-14);
+ case "toolbox":{let o="";const n=["Dock","MD","QM","Chem","ML"];n.forEach((q,k)=>{const px=x+10+k*(w-20)/4;const on=[0,4].includes(k);o+=R(px-9,cy-9,18,18,on?"card":"soft",3)+(on?`<rect x="${px-9}" y="${cy-9}" width="18" height="18" rx="3" class="his"/>`:"")+T(px,cy+17,4,q,on?"":"mut","middle");});return o;}
+ case "seq":return T(x+4,cy+1,4.2,"MDQYCILGRIGEGAHG…")+`<path d="M${x+w*.45} ${cy-2} H${x+w*.58} m-3 -3 l3 3 l-3 3" class="his"/>`+T(x+w*.515,cy-6,3.6,"AlphaFold","","middle")+trace(x+w*.6,y+8,w*.36,h-16,11);
+ case "confidence":return `<g>${trace(x+6,y+6,w*.6,h-12,5,"ln")}</g>`+`<path d="M${x+w*.7} ${y+20} q8 6 2 14 q-6 8 6 14" class="his" stroke-dasharray="2 1.5"/>`+L(x+w*.68,y+18,x+w*.82,y+52,"ln")+T(x+w*.66,y+h-6,3.8,"kept 1–302");
+ case "molfamily":{let o=`<ellipse cx="${cx}" cy="${cy}" rx="${w*.12}" ry="${h*.14}" class="his" stroke-dasharray="2 1.5"/>`;const pts=[[.12,.25],[.6,.12],[.78,.55],[.18,.7],[.45,.78],[.82,.2]];pts.forEach((p,k)=>{o+=`<g opacity="${k?0.55:1}">${mol(x+w*p[0],y+h*p[1],.75,k)}</g>`;});return o;}
+ case "rules":{let o="";["Fits the pocket","Drug-like","Can be made"].forEach((q,k)=>{o+=R(x+6,y+6+k*15,w*.62,11)+T(x+9,y+13+k*15,4.2,q);});o+=person(x+w*.85,y+h-4,.45,"var(--muted)")+mol(x+w*.72,y+12,.5,1)+L(x+w*.68,y+6,x+w*.95,y+20,"his");return o;}
+ case "funnel":return T(x+w*.16,cy-4,10,"8,918","serif","middle")+T(x+w*.5,cy-4,10,"54","serif","middle")+`<text x="${x+w*.83}" y="${cy-4}" font-size="11" text-anchor="middle" class="serif hi">7</text>`+`<path d="M${x+w*.3} ${cy-7} h6 m-2 -2 l2 2 l-2 2 M${x+w*.63} ${cy-7} h6 m-2 -2 l2 2 l-2 2" class="ln"/>`+T(x+w*.16,cy+8,3.8,"generated","mut","middle")+T(x+w*.5,cy+8,3.8,"prioritised","mut","middle")+T(x+w*.83,cy+8,3.8,"synthesised","mut","middle")+(()=>{let o="";for(let k=0;k<60;k++)o+=C(x+4+(k*37%100)/100*w*.28,y+h-14+(k*53%10),.6,"mut");return o;})();
+ case "keys7":{let o="";for(let k=0;k<7;k++)o+=key(x+12+k*(w-24)/6,cy-8+(k%2)*3,.75,90);return o;}
+ case "vials":{let o="";for(let k=0;k<7;k++){const px=x+10+k*(w-20)/6;o+=R(px-4,cy-6,8,18,"card",2)+`<rect x="${px-4}" y="${cy+4}" width="8" height="8" class="soft"/>`+T(px,cy-9,5,"?","hi","middle");}return o;}
+ case "ladder":return ladder(x+w*.3,y+6,w*.18,h-12,n||1);
+ case "binding":{let o="";for(let k=0;k<7;k++){const px=x+10+k*(w-20)/6;o+=R(px-4,y+8,8,16,k===3?"card":"soft",2)+(k===3?`<rect x="${px-5}" y="${y+7}" width="10" height="18" rx="2" class="his"/>`:"");}o+=L(x+8,y+h-14,x+w-8,y+h-14)+C(x+8,y+h-14,1.5,"ink")+C(x+w-8,y+h-14,1.8,"hi")+T(cx,y+h-17,4.2,"30 days","","middle")+T(cx,y+h-5,4,"Kd 9.2 µM","mut","middle");return o;}
+ case "timeline":return `<line x1="${x+6}" y1="${cy}" x2="${x+22}" y2="${cy}" class="his" stroke-width="2.2"/>`+`<line x1="${x+22}" y1="${cy}" x2="${x+w-6}" y2="${cy}" class="lnf"/>`+T(x+6,cy-5,4,"30 days")+T(x+30,cy+9,3.6,"optimise","mut")+T(x+w*.5,cy+9,3.6,"preclinical","mut")+T(x+w*.75,cy+9,3.6,"clinical","mut");
+ case "keyturn":return lock(cx-6,cy-4,1.6)+`<g transform="translate(${cx-6} ${cy+12})">${C(0,14,4)}<path d="M0 10 V-2" class="ln"/></g>`+`<path d="M${cx+14} ${cy+16} a8 8 0 0 0 -4 -10" class="ln"/><path d="M${cx+20} ${cy+4} l6 6 m0 -6 l-6 6" class="his"/>`;
+ case "loop":return `<path d="M${x+w*.35} ${cy-18} A18 18 0 1 1 ${x+w*.35-1} ${cy-18}" class="ln"/><path d="M${x+w*.35-4} ${cy-21} l4 3 l-4 3" class="ln"/>`+T(x+w*.35,cy+2,6,"16 → 6","serif","middle")+R(x+w*.64,y+10,w*.32,18)+T(x+w*.66,y+21,4,"048 Kd 567 nM")+R(x+w*.64,y+34,w*.32,18)+T(x+w*.66,y+45,4,"Enzyme IC50 33 nM")+`<rect x="${x+w*.64}" y="${y+34}" width="${w*.32}" height="18" rx="1.5" class="his"/>`;
+ case "cells":return C(x+w*.2,y+24,11,"card")+C(x+w*.2,y+24,11)+C(x+w*.48,y+24,11,"card")+C(x+w*.48,y+24,11)+T(x+w*.2,y+43,4,"Huh7","","middle")+T(x+w*.48,y+43,4,"HEK293","","middle")+`<rect x="${x+w*.68}" y="${y+h-16}" width="8" height="8" class="hi"/><rect x="${x+w*.8}" y="${y+h-52}" width="8" height="44" class="soft"/>`+L(x+w*.64,y+h-8,x+w-4,y+h-8)+T(x+w*.66,y+h-3,3.4,"209 nM")+T(x+w*.8,y+h-3,3.4,"1707")+ladder(x+4,y+h-20,8,16,4).replace(/font-size="4.2"/g,'font-size="0"');
+ case "limits":{let o="";["Prediction","No fair","Cells ≠"].forEach((q,k)=>{const px=x+4+k*(w-8)/3;o+=R(px,y+8,(w-8)/3-4,h-22)+T(px+4,y+18,4.2,q)+L(px+4,y+26,px+(w-8)/3-10,y+26,"lnf")+L(px+4,y+31,px+(w-8)/3-14,y+31,"lnf");});o+=T(x+4,y+h-4,3.8,"Company-run study (disclosed)","mut");return o;}
+ case "benefits":{let o="";["Health","Economic","Ethical","Environment"].forEach((q,k)=>{const px=x+4+(k%2)*(w/2-2),py=y+4+Math.floor(k/2)*(h/2-2);o+=R(px,py,w/2-6,h/2-6)+T(px+3,py+7,4,q)+`<rect x="${px+3}" y="${py+11}" width="${(w/2-12)/2}" height="${h/2-20}" class="ln" rx="1"/><rect x="${px+5+(w/2-12)/2}" y="${py+11}" width="${(w/2-12)/2}" height="${h/2-20}" class="lnf" rx="1"/>`;});return o;}
+ case "power":return L(cx,y+14,cx,y+h-8)+L(cx-26,y+20,cx+26,y+20)+`<path d="M${cx-34} ${y+38} l8 -18 l8 18 Z M${cx+18} ${y+38} l8 -18 l8 18 Z" class="ln"/>`+T(cx-26,y+46,3.8,"7 made","","middle")+T(cx+26,y+46,3.8,"GPU power","","middle")+T(cx,y+h-2,4,"not measured","hi","middle");
+ case "future":return R(x+4,y+6,w/2-8,h-12)+T(x+8,y+15,4.2,"A fair race")+L(x+8,y+28,x+w/2-10,y+28,"his")+L(x+8,y+36,x+w/2-14,y+36,"ln")+R(x+w/2+2,y+6,w/2-8,h-12)+T(x+w/2+6,y+15,4.2,"More biology")+C(x+w/2+14,y+34,5)+C(x+w/2+28,y+34,5)+C(x+w/2+42,y+34,5,"lnf");
+ case "srcEval":{let o="";for(let r=0;r<5;r++){o+=L(x+4,y+8+r*14,x+w-4,y+8+r*14,r?"lnf":"ln");}["Type","Use","Strength","Caution"].forEach((q,k)=>{o+=T(x+6+k*(w-8)/4,y+6,3.8,q,"mut");});o+=`<rect x="${x+4}" y="${y+9}" width="${w-8}" height="12" class="his" rx="1"/>`+T(x+6,y+17,3.8,"Ren 2023");return o;}
+ case "takeaways":return T(x+4,y+18,6,"1","serif hi")+L(x+12,y+16,x+w-8,y+16)+L(x+12,y+22,x+w-20,y+22)+T(x+4,y+44,6,"2","serif hi")+L(x+12,y+42,x+w-8,y+42)+L(x+12,y+48,x+w-28,y+48);
+ case "refs":{let o=T(x+6,y+10,5,"References","serif");for(let k=0;k<7;k++)o+=L(x+6,y+18+k*8,x+w-10-(k%3)*12,y+18+k*8,"lnf");return o;}
+ default:return "";}}
+function thumb(x){
+  const col=P[x.who]; let body="";
+  const nm=(c)=>`<rect x="8" y="72" width="40" height="7" fill="${c}" rx="1"/>`;
+  switch(x.m){
+    case "T":body=`<line x1="0" y1="64" x2="160" y2="64" class="lnf"/>`+person(62,90,1.75,col)+nm(col)+vis(x.v,96,34,50,40,x.n);break;
+    case "S":body=person(30,90,1.35,col)+`<line x1="56" y1="10" x2="56" y2="82" class="lnf"/>`+vis(x.v,60,8,94,74,x.n)+nm(col);break;
+    case "F":body=vis(x.v,8,8,144,74,x.n);break;
+    case "P":body=vis("paper",8,8,144,74);break;
+    case "O":body=vis(x.v,24,8,112,74,x.n)+(x.face?person(18,90,1.1,col):"");break;
+    case "G":body=`<line x1="0" y1="70" x2="160" y2="70" class="lnf"/>`+["A","B","C","D"].map((k,j)=>person(34+j*31,90,1.05,P[k])).join("")+(x.i>10?lock(140,58,.6):"");break;
+    case "H":body=`<line x1="80" y1="6" x2="80" y2="84" class="ln"/>`+person(40,90,1.2,P[x.who])+person(122,90,1.2,P[x.to])+lock(70,40,.7)+`<path d="M64 52 H96 m-3 -3 l3 3 l-3 3" class="his"/>`;break;
+  }
+  return `<svg class="sv" viewBox="0 0 160 90" role="img" aria-label="${esc(x.t)} 草图"><rect width="160" height="90" class="bg"/>${body}</svg>`;
+}
+
+// ---------- header stats ----------
+const spk={A:0,B:0,C:0,D:0},cam={A:0,B:0,C:0,D:0};
+S.forEach(x=>{const ks=x.who==="ALL"?["A","B","C","D"]:[x.who].concat(x.to?[x.to]:[]);const share=x.who==="ALL"?x.d/4:x.to?x.d/2:x.d;
+  if(!x.nw)ks.forEach(k=>spk[k]+=share);if(x.face)ks.forEach(k=>cam[k]+=x.who==="ALL"?x.d:x.to?x.d/2:x.d);});
+const totalWords=S.reduce((a,x)=>a+words(x),0);
+document.getElementById("stats").innerHTML=[["总时长",fmt(TOTAL)],["镜头",S.length],["口播预算","≈ "+totalWords+" 词"],["每人讲述",["A","B","C","D"].map(k=>k+" "+fmt(spk[k])).join(" · ")],["每人露脸",["A","B","C","D"].map(k=>k+" "+fmt(cam[k])).join(" · ")]].map(([k,v])=>`<div><b>${v}</b><span>${k}</span></div>`).join("");
+
+// ---------- timeline ----------
+(function(){const W=1000,sc=W/TOTAL;let o=`<svg viewBox="0 -18 ${W} 66" aria-label="全片时间轴">`;
+  SECS.forEach(sec=>{const xs=S.filter(x=>x.s===sec.id);const a=xs[0].st*sc,b=xs[xs.length-1].en*sc;o+=`<text x="${a+2}" y="-6" class="sec">${sec.name.split("：")[0]}</text><line x1="${a}" y1="-16" x2="${a}" y2="40" stroke="var(--line)"/>`;});
+  S.forEach(x=>{const a=x.st*sc,w=Math.max(1,x.d*sc-1);o+=`<a href="#${x.id}"><title>${x.id} ${esc(x.t)} · ${fmt(x.st)}–${fmt(x.en)}</title><rect x="${a}" y="0" width="${w}" height="14" fill="${P[x.who]}"/><rect x="${a}" y="16" width="${w}" height="12" fill="${MODES[x.m].c}" opacity=".8"/>${w>16?`<text x="${a+w/2}" y="25.5" text-anchor="middle" style="fill:var(--frame);font-size:8px">${x.m}</text>`:""}</a>`;});
+  for(let m=0;m<=Math.floor(TOTAL/60);m++){const xx=m*60*sc;o+=`<line x1="${xx}" y1="30" x2="${xx}" y2="34" stroke="var(--muted)"/><text x="${xx}" y="45" text-anchor="${m?"middle":"start"}">${m}:00</text>`;}
+  o+="</svg>";document.getElementById("tl").innerHTML=o;
+  document.getElementById("legend").innerHTML=["A","B","C","D","ALL"].map(k=>`<span><i class="sw" style="background:${P[k]}"></i>${k==="ALL"?"全组":k}</span>`).join("")+Object.entries(MODES).map(([k,m])=>`<span><i class="sw" style="background:${m.c};opacity:.8"></i>${k} ${m.n}</span>`).join("");})();
+
+// ---------- grammar ----------
+const sample={T:{m:"T",who:"B",v:"lock"},S:{m:"S",who:"A",v:"question"},F:{m:"F",who:"B",v:"funnel"},P:{m:"P",who:"A",v:"paper"},O:{m:"O",who:"C",v:"keyturn",face:1},G:{m:"G",who:"ALL",v:"group",i:1},H:{m:"H",who:"A",to:"B",v:"handover"}};
+document.getElementById("grammar").innerHTML=Object.entries(MODES).map(([k,m])=>{const n=S.filter(x=>x.m===k);const sec=n.reduce((a,x)=>a+x.d,0);return `<div class="gcard">${thumb(Object.assign({t:m.n},sample[k]))}<div><span class="k">${k}</span> <b>${m.n}</b> <span class="note">· ${n.length} 镜 · ${fmt(sec)}</span></div><p class="note">${m.d}</p></div>`;}).join("");
+
+// ---------- shots ----------
+const tagCN={"Content":"内容 30%","Structure":"结构 20%","Literature":"文献 10%","Audience":"受众 10%","Delivery":"表达 10%","Visual aids":"视觉辅助 10%","Critical thinking":"批判与创意 5%","Creativity":"批判与创意 5%","Teamwork":"团队 5%"};
+function shotHTML(x){const col=P[x.who];const whoLabel=x.who==="ALL"?"全组":x.to?x.who+" → "+x.to:x.who;
+  const tags=[...new Set(x.tg.map(t=>tagCN[t]))].map(t=>`<span class="tag">${t}</span>`).join("");
+  return `<article class="shot" id="${x.id}" data-who="${x.who}" data-to="${x.to||""}">
+  <div class="thumb">${thumb(x)}<div class="cap"><span class="chip who" style="background:${col}">${whoLabel}</span><span class="chip">${x.m} · ${MODES[x.m].n}</span><span class="tool">${esc(x.tool)}</span></div></div>
+  <div class="body"><div class="titleRow"><span class="id">${String(x.i).padStart(2,"0")}</span><h3>${esc(x.t)}</h3><span class="tc">${fmt(x.st)}–${fmt(x.en)} · ${x.d}s${words(x)?" · 口播约 "+words(x)+" 词":""}</span></div>
+  <dl><dt>画面</dt><dd>${esc(x.fr)}</dd><dt>镜头/动作</dt><dd>${esc(x.mv)}</dd><dt>屏幕文字</dt><dd class="osd">${esc(x.osd)}</dd><dt>观众要懂</dt><dd>${esc(x.g)}</dd><dt>素材</dt><dd>${x.a.map(([c,t])=>`<span class="asset"><b>${c}</b>${esc(t)}</span>`).join("")}</dd></dl>
+  <div class="tags">${tags}</div></div></article>`;}
+document.getElementById("shots").innerHTML=SECS.map(sec=>{const xs=S.filter(x=>x.s===sec.id);const st=xs[0].st,en=xs[xs.length-1].en;
+  return `<div class="secHead" data-sec="${sec.id}" style="--c:${P[sec.who]}"><div class="eyebrow">${fmt(st)}–${fmt(en)} · ${xs.length} 镜 · ${sec.who==="ALL"?"A + 全组":"讲者 "+sec.who}</div><h2 style="margin:0">${sec.name}</h2><div class="meta">${sec.desc}</div></div>`+xs.map(shotHTML).join("");}).join("")
+  +`<p class="note" style="margin-top:10px">素材标记：<b class="mono">拍</b> 组员实拍 · <b class="mono">做</b> 我来制作 · <b class="mono">有</b> 已有资产 · <b class="mono">找</b> 需要找。屏幕文字里的数字都已对照 Ren 2023 原文和证据清单核过。</p>`;
+
+// ---------- people ----------
+document.getElementById("people").innerHTML=["A","B","C","D"].map(k=>{const xs=S.filter(x=>x.face&&(x.who===k||x.to===k||x.who==="ALL"));
+  return `<div class="person" style="--c:${P[k]}"><h3>${k}</h3><div class="note">露脸 ${fmt(cam[k])} · 讲述 ${fmt(spk[k])}</div><ol>${xs.map(x=>`<li><a href="#${x.id}" style="color:inherit">${String(x.i).padStart(2,"0")} ${esc(x.t)}</a> <span class="note">${x.m} · ${x.d}s</span></li>`).join("")}</ol></div>`;}).join("");
+
+// ---------- filter ----------
+const btns=[...document.querySelectorAll(".filter button")];
+function apply(f){btns.forEach(b=>b.setAttribute("aria-pressed",b.dataset.f===f));let n=0;
+  document.querySelectorAll(".shot").forEach(el=>{const on=f==="all"||el.dataset.who===f||el.dataset.to===f||el.dataset.who==="ALL";el.hidden=!on;if(on)n++;});
+  document.querySelectorAll(".secHead").forEach(h=>{const xs=S.filter(x=>x.s===h.dataset.sec);h.hidden=!xs.some(x=>f==="all"||x.who===f||x.to===f||x.who==="ALL");});
+  document.getElementById("count").textContent=n+" / "+S.length+" 镜";
+  try{localStorage.setItem("wt-filter",f);}catch(e){}}
+btns.forEach(b=>b.addEventListener("click",()=>apply(b.dataset.f)));
+let saved="all";try{saved=localStorage.getItem("wt-filter")||"all";}catch(e){}
+apply(saved);
+</script>

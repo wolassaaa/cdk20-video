@@ -1,0 +1,37 @@
+{
+ "groups": {
+  "portal_vein_hepatic": {
+   "rows": [
+    0,
+    52
+   ],
+   "skeleton_voxels": 1863,
+   "leaves": 52,
+   "root_rule": "low"
+  },
+  "hepatic_veins": {
+   "rows": [
+    52,
+    70
+   ],
+   "skeleton_voxels": 946,
+   "leaves": 18,
+   "root_rule": "high"
+  },
+  "hepatic_artery": {
+   "rows": [
+    70,
+    97
+   ],
+   "skeleton_voxels": 1054,
+   "leaves": 27,
+   "root_rule": "low"
+  }
+ },
+ "shape": [
+  97,
+  128,
+  4
+ ],
+ "source": "BodyParts3D v4 (CC BY 4.0), centrelines by skeletonisation"
+}

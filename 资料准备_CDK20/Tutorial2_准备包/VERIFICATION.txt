@@ -1,0 +1,29 @@
+Changed field: Q6 revised to four members; 20 minutes total, 5 continuous minutes each. Q1-Q5 unchanged.
+Introduction=6min; body/discussion=10min; conclusion=4min.
+MODIFIED_FILE: D:\。hkbu\molecular science\资料准备_CDK20\Tutorial2_准备包\Tutorial2_英文填写参考.pdf
+DIFF_FILE: D:\。hkbu\molecular science\资料准备_CDK20\Tutorial2_准备包\DIFF_FILE.txt
+VERIFICATION: D:\。hkbu\molecular science\资料准备_CDK20\Tutorial2_准备包\VERIFICATION.txt
+ROLLBACK: D:\。hkbu\molecular science\资料准备_CDK20\Tutorial2_准备包\ROLLBACK.sh
+BASELINE
+Command: C:/Users/woola/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe "D:\。hkbu\molecular science\资料准备_CDK20\Tutorial2_准备包\verify.py" baseline
+Input: source worksheet
+Literal output: BASELINE: PASS; pages=3; answers=blank; original_SHA256=matched
+Exit status: 0
+MODIFIED
+Command: C:/Users/woola/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe "D:\。hkbu\molecular science\资料准备_CDK20\Tutorial2_准备包\verify.py" modified
+Input: filled PDF
+Literal output: MODIFIED: PASS; pages=3; Q1-Q6=present; timing=20min; A/B/C/D=5min; original=unchanged
+Exit status: 0
+ROLLBACK
+Command: C:/Users/woola/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/git/usr/bin/sh.exe "D:\。hkbu\molecular science\资料准备_CDK20\Tutorial2_准备包\ROLLBACK.sh" "D:\。hkbu\molecular science\资料准备_CDK20\Tutorial2_准备包\rollback_test.pdf"
+Input: separate rollback_test.pdf copy
+Literal output: ROLLBACK: restored original bytes
+Exit status: 0
+ROLLBACK_VERIFY
+Command: C:/Users/woola/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe "D:\。hkbu\molecular science\资料准备_CDK20\Tutorial2_准备包\verify.py" rollback "D:\。hkbu\molecular science\资料准备_CDK20\Tutorial2_准备包\rollback_test.pdf"
+Input: separate rollback_test.pdf copy
+Literal output: ROLLBACK: PASS; pages=3; answers=blank; original_SHA256=matched
+Exit status: 0
+TIMING: PASS; total=20min; A/B/C/D=5 continuous minutes each; ratio=30/50/20.
+Restored status: separate rollback copy is blank and byte-identical to source; completed PDF remains filled.
+Reopened PDF and inspected revised page 3; Q1-Q5 unchanged.

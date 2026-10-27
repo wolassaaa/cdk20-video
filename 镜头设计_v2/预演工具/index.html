@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>手势预演</title>
+<style>
+  /* Rehearsal mirror for the gesture shots: camera + live hand tracking + hologram preview + gesture checklist. */
+  :root{--bg:#070B12;--panel:#0E1520;--line:#1F2C3D;--ink:#E4ECF2;--muted:#8C9BAB;--cyan:#5BD8F5;--orange:#FF7A3D;--ok:#6FE3B8;color-scheme:dark}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 "Microsoft YaHei","PingFang SC",system-ui,sans-serif;display:grid;grid-template-columns:minmax(0,1fr) 320px;min-height:100vh}
+  main{display:grid;place-items:center;padding:16px;min-width:0}
+  canvas{width:100%;max-width:1280px;aspect-ratio:16/9;background:#000;border:1px solid var(--line);border-radius:6px}
+  aside{background:var(--panel);border-left:1px solid var(--line);padding:20px;display:grid;gap:16px;align-content:start}
+  h1{font-size:20px;margin:0}
+  .note{font-size:13px;color:var(--muted)}
+  button{font:inherit;color:var(--ink);background:#162231;border:1px solid var(--line);border-radius:6px;padding:8px 12px;cursor:pointer}
+  button:hover{border-color:var(--cyan)}
+  button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+  .row{display:flex;gap:8px;flex-wrap:wrap}
+  ol{margin:0;padding-left:0;list-style:none;display:grid;gap:6px}
+  li{padding:8px 10px;border:1px solid var(--line);border-radius:6px;display:grid;gap:2px}
+  li b{font-size:15px}
+  li span{font-size:12.5px;color:var(--muted)}
+  li.now{border-color:var(--cyan);background:#0F2030}
+  li.done b::after{content:"  ✓";color:var(--ok)}
+  #status{font-family:Consolas,monospace;font-size:13px;color:var(--cyan)}
+  label{display:flex;gap:8px;align-items:center;font-size:14px}
+  @media (max-width:900px){body{grid-template-columns:1fr}aside{border-left:0;border-top:1px solid var(--line)}}
+</style>
+</head>
+<body>
+<main><canvas id="view" width="1280" height="720" aria-label="摄像头画面与全息预览"></canvas></main>
+<aside>
+  <div><h1>手势预演</h1><p class="note">对着电脑摄像头练习手势：画面里会实时出现全息，做对了右边会打勾。正式拍摄前先在这里练熟。</p></div>
+  <div class="row"><button id="start" type="button">打开摄像头</button><button id="next" type="button">下一个手势</button><button id="reset" type="button">重新开始</button></div>
+  <label>或者用录好的视频练习：<input id="file" type="file" accept="video/*"></label>
+  <label><input id="mirror" type="checkbox" checked> 镜像显示（像照镜子）</label>
+  <label><input id="guides" type="checkbox" checked> 显示构图参考线</label>
+  <div id="status">未开始</div>
+  <ol id="list"></ol>
+  <p class="note">提示：动作慢一点；眼睛看着手前方全息出现的位置；双手始终留在虚线框里。正式拍摄时手机横放、上三脚架，机位和这里一样放在胸口高度。</p>
+</aside>
+<script type="module">
+import {FilesetResolver, HandLandmarker} from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/vision_bundle.mjs";
+
+const GESTURES = [
+  {id: "push", name: "推开", tip: "手掌从胸前向镜头推出"},
+  {id: "spread", name: "拉开", tip: "双手从胸前向两侧拉开"},
+  {id: "hold", name: "托起", tip: "手掌张开向上，停住 2 秒"},
+  {id: "pinch", name: "捏住拉走", tip: "两指捏住，再往外拉"},
+  {id: "swipe", name: "横扫", tip: "手从一侧快速扫到另一侧"},
+  {id: "pass", name: "递出", tip: "把手伸向画面右边，直到出画"},
+];
+const PALM = [0, 5, 9, 13, 17], TIPS = [4, 8, 12, 16, 20];
+const BONES = [[0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[5,9],[9,10],[10,11],[11,12],[9,13],[13,14],[14,15],[15,16],[13,17],[0,17],[17,18],[18,19],[19,20]];
+
+const cv = document.getElementById("view"), ctx = cv.getContext("2d");
+const W = cv.width, H = cv.height;
+const statusEl = document.getElementById("status"), listEl = document.getElementById("list");
+const holoImg = new Image(); holoImg.src = "holo.png";
+const video = document.createElement("video"); video.playsInline = true; video.muted = true;
+let landmarker = null, current = 0, done = new Set(), history = [], lastHit = 0;
+
+function renderList() {
+  listEl.innerHTML = GESTURES.map((g, i) => `<li class="${i === current ? "now" : ""} ${done.has(g.id) ? "done" : ""}"><b>${i + 1}. ${g.name}</b><span>${g.tip}</span></li>`).join("");
+}
+renderList();
+
+// hand summary in camera coordinates (0..W, 0..H, not mirrored)
+function summarise(lms) {
+  const p = lms.map(l => [l.x * W, l.y * H]);
+  const d = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1]);
+  const size = d(p[0], p[9]) || 1;
+  const palm = [PALM.reduce((s, k) => s + p[k][0], 0) / 5, PALM.reduce((s, k) => s + p[k][1], 0) / 5];
+  return {p, size, palm, pinch: d(p[4], p[8]) / size, open: TIPS.reduce((s, k) => s + d(p[k], palm), 0) / 5 / size};
+}
+
+// gesture checks over the last ~1.5 s of hand summaries
+function check(id, now) {
+  const recent = history.filter(h => now - h.t < 1500);
+  if (recent.length < 5) return false;
+  const first = recent[0], last = recent[recent.length - 1];
+  const one = h => h.hands[0];
+  switch (id) {
+    case "push": { const a = one(first), b = one(last); return a && b && b.size > a.size * 1.35; }
+    case "spread": {
+      const span = h => h.hands.length === 2 ? Math.hypot(h.hands[0].palm[0] - h.hands[1].palm[0], h.hands[0].palm[1] - h.hands[1].palm[1]) : null;
+      const a = span(first), b = span(last); return a && b && b > a * 1.6 && b > W * 0.35;
+    }
+    case "hold": {
+      const hs = recent.filter(h => now - h.t < 2000).map(one).filter(Boolean);
+      if (hs.length < 10 || hs.some(h => h.open < 1.25)) return false;
+      const xs = hs.map(h => h.palm[0]), ys = hs.map(h => h.palm[1]);
+      return Math.max(...xs) - Math.min(...xs) < W * 0.04 && Math.max(...ys) - Math.min(...ys) < H * 0.05 && now - recent[0].t > 1400;
+    }
+    case "pinch": {
+      const ps = recent.map(one).filter(h => h && h.pinch < 0.35);
+      return ps.length > 4 && Math.hypot(ps[ps.length - 1].palm[0] - ps[0].palm[0], ps[ps.length - 1].palm[1] - ps[0].palm[1]) > W * 0.1;
+    }
+    case "swipe": {
+      const fast = history.filter(h => now - h.t < 600).map(one).filter(Boolean);
+      return fast.length > 3 && Math.abs(fast[fast.length - 1].palm[0] - fast[0].palm[0]) > W * 0.3;
+    }
+    case "pass": {
+      const a = one(recent[recent.length - 2] || first);
+      return a && a.palm[0] > W * 0.85 && !last.hands.length;
+    }
+  }
+  return false;
+}
+
+function draw(hands, mirror, guides) {
+  ctx.save();
+  if (mirror) { ctx.translate(W, 0); ctx.scale(-1, 1); }
+  ctx.drawImage(video, 0, 0, W, H);
+  ctx.fillStyle = "rgba(4,10,18,0.38)"; ctx.fillRect(0, 0, W, H);
+  // hologram between two palms
+  if (hands.length === 2 && holoImg.complete) {
+    const [a, b] = hands;
+    const cx = (a.palm[0] + b.palm[0]) / 2, cy = (a.palm[1] + b.palm[1]) / 2;
+    const s = Math.max(140, Math.hypot(a.palm[0] - b.palm[0], a.palm[1] - b.palm[1]) * 0.95);
+    ctx.globalCompositeOperation = "screen";
+    ctx.drawImage(holoImg, cx - s / 2, cy - s / 2 - s * 0.15, s, s);
+    ctx.globalCompositeOperation = "source-over";
+  }
+  for (const h of hands) {
+    ctx.strokeStyle = "rgba(91,216,245,0.9)"; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(h.palm[0], h.palm[1], h.size * 0.75, 0, Math.PI * 2); ctx.stroke();
+    ctx.strokeStyle = "rgba(91,216,245,0.35)"; ctx.lineWidth = 1;
+    for (const [i, j] of BONES) { ctx.beginPath(); ctx.moveTo(...h.p[i]); ctx.lineTo(...h.p[j]); ctx.stroke(); }
+    ctx.fillStyle = "#5BD8F5";
+    for (const k of TIPS) { ctx.beginPath(); ctx.arc(h.p[k][0], h.p[k][1], 5, 0, Math.PI * 2); ctx.fill(); }
+    if (h.pinch < 0.35) {
+      const x = (h.p[4][0] + h.p[8][0]) / 2, y = (h.p[4][1] + h.p[8][1]) / 2;
+      ctx.fillStyle = "rgba(255,122,61,0.9)"; ctx.beginPath(); ctx.arc(x, y, 14, 0, Math.PI * 2); ctx.fill();
+    }
+  }
+  ctx.restore();
+  if (guides) {
+    ctx.strokeStyle = "rgba(228,236,242,0.25)"; ctx.lineWidth = 1; ctx.setLineDash([]);
+    for (const x of [W / 3, (2 * W) / 3]) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+    ctx.beginPath(); ctx.moveTo(0, H * 0.12); ctx.lineTo(W, H * 0.12); ctx.stroke();
+    ctx.setLineDash([8, 8]); ctx.strokeStyle = "rgba(91,216,245,0.5)";
+    ctx.strokeRect(W * 0.06, H * 0.08, W * 0.88, H * 0.86); ctx.setLineDash([]);
+    ctx.fillStyle = "rgba(228,236,242,0.55)"; ctx.font = "14px Microsoft YaHei";
+    ctx.fillText("头顶留在这条线下方", 12, H * 0.12 - 6);
+    ctx.fillText("双手留在虚线框内", W * 0.06 + 8, H * 0.94 - 8);
+  }
+  const out = hands.some(h => h.p.some(([x, y]) => x < W * 0.06 || x > W * 0.94 || y < H * 0.08 || y > H * 0.94));
+  if (out && GESTURES[current].id !== "pass") {
+    ctx.fillStyle = "rgba(255,122,61,0.9)"; ctx.font = "bold 22px Microsoft YaHei"; ctx.fillText("手快出画了", W / 2 - 60, 40);
+  }
+  if (performance.now() - lastHit < 900) {
+    ctx.fillStyle = "rgba(111,227,184,0.95)"; ctx.font = "bold 44px Microsoft YaHei"; ctx.fillText("✓ " + GESTURES[Math.max(0, current - 1)].name, W / 2 - 90, H / 2);
+  }
+}
+
+function loop() {
+  step();
+  requestAnimationFrame(loop);
+}
+
+// one frame of tracking + gesture check + drawing; exposed so it can be driven without requestAnimationFrame
+function step() {
+  const now = performance.now();
+  let hands = [];
+  if (landmarker && video.readyState >= 2) {
+    const res = landmarker.detectForVideo(video, now);
+    hands = (res.landmarks || []).map(summarise);
+    history.push({t: now, hands});
+    history = history.filter(h => now - h.t < 2500);
+    const g = GESTURES[current];
+    if (g && !done.has(g.id) && now - lastHit > 1200 && check(g.id, now)) {
+      done.add(g.id); lastHit = now; current = Math.min(current + 1, GESTURES.length - 1); history = []; renderList();
+    }
+    statusEl.textContent = `追踪中 · ${hands.length} 只手 · 已完成 ${done.size}/${GESTURES.length}`;
+  }
+  draw(hands, document.getElementById("mirror").checked, document.getElementById("guides").checked);
+  return hands.length;
+}
+window.__step = step;
+
+let looping = false;
+async function begin(attachSource) {
+  try {
+    await attachSource();
+    await video.play();
+    if (!landmarker) {
+      statusEl.textContent = "正在加载手势模型…";
+      const vision = await FilesetResolver.forVisionTasks("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm");
+      landmarker = await HandLandmarker.createFromOptions(vision, {
+        baseOptions: {modelAssetPath: "hand_landmarker.task", delegate: "GPU"}, runningMode: "VIDEO", numHands: 2});
+    }
+    if (!looping) { looping = true; requestAnimationFrame(loop); }
+  } catch (e) {
+    statusEl.textContent = "打不开：" + (e.name === "NotAllowedError" ? "摄像头权限被拒绝，请在浏览器地址栏允许摄像头" : e.message);
+  }
+}
+document.getElementById("start").addEventListener("click", () => begin(async () => {
+  statusEl.textContent = "正在打开摄像头…";
+  video.srcObject = await navigator.mediaDevices.getUserMedia({video: {width: 1280, height: 720}, audio: false});
+}));
+document.getElementById("file").addEventListener("change", e => {
+  const f = e.target.files[0];
+  if (f) begin(async () => { video.srcObject = null; video.src = URL.createObjectURL(f); video.loop = true; });
+});
+// for automated checks: start from a URL served next to this page
+window.__startUrl = url => begin(async () => { video.srcObject = null; video.src = url; video.loop = true; });
+document.getElementById("next").addEventListener("click", () => { current = (current + 1) % GESTURES.length; history = []; renderList(); });
+document.getElementById("reset").addEventListener("click", () => { current = 0; done.clear(); history = []; renderList(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+{
+  "fps": 30,
+  "note": "v2 'Carbon vs Silicon'. Scene and caption times are SONG seconds of that act's song; build_v2.py maps them onto the master mix and snaps cuts to bars. world: si = computer/AI (cool, terminal, screenlife), c = biology/lab (warm, fluorescent, hand-drawn), mix = where they meet. Captions paraphrase the gist of the lyric at that moment; never lyric lines.",
+  "acts": [
+    {
+      "name": "A", "song": "song_a",
+      "pieces": [[0, 93.7]],
+      "out": {"kind": "tapestop", "dur": 1.2},
+      "scenes": [
+        {"t": 0,     "world": "si", "kind": "headline",  "props": {"mode": "open"}},
+        {"t": 13.05, "world": "si", "kind": "glitch",    "props": {"lines": ["IS THAT", "TRUE?"]}},
+        {"t": 15.88, "world": "c",  "kind": "cclip",     "props": {"src": "mv/body_liver.mp4", "rate": 0.9, "lines": ["Liver cancer is common", "in Hong Kong."]}},
+        {"t": 21.48, "world": "c",  "kind": "cells",     "props": {"lines": ["Cancer cells", "keep dividing."]}},
+        {"t": 27.1,  "world": "c",  "kind": "cells",     "props": {"zoom": true, "lines": ["A protein called CDK20", "helps them do it."]}},
+        {"t": 32.72, "world": "c",  "kind": "lockkey",   "props": {"mode": "fit", "lines": ["A drug is a key", "that jams the lock."]}},
+        {"t": 38.31, "world": "c",  "kind": "lockkey",   "props": {"mode": "unknown", "lines": ["But no one had seen", "CDK20's shape."]}},
+        {"t": 43.93, "world": "si", "kind": "term",      "props": {"title": "alphafold", "lines": ["> query AlphaFold DB  CDK20 (Q8IZL9)", "  predicted structure found: AF-Q8IZL9", "> open model", "  confidence: high in the core, low in the loops"]}},
+        {"t": 49.55, "world": "si", "kind": "siclip",    "props": {"src": "mv/tail_pull.mp4", "rate": 0.8, "lines": ["AI predicted the shape.", "Its own tail blocked the pocket."]}},
+        {"t": 55.17, "world": "si", "kind": "siclip",    "props": {"src": "mv/keyhole_push.mp4", "rate": 1, "lines": ["Move the tail:", "a pocket a key could fit."]}},
+        {"t": 60.79, "world": "si", "kind": "siclip",    "props": {"src": "mv/wall_dolly.mp4", "rate": 1.2, "flash": true, "lines": []}},
+        {"t": 66.41, "world": "c",  "kind": "timeline",  "props": {}},
+        {"t": 77.62, "world": "si", "kind": "glitch",    "props": {"lines": ["CAN AI FIND", "A KEY FASTER?"]}},
+        {"t": 83.22, "world": "si", "kind": "montage",   "props": {"srcs": ["mv/keyhole_push.mp4", "mv/wall_dolly.mp4", "mv/tail_pull.mp4", "mv/body_liver.mp4"], "term": "> generate --target CDK20 --pocket open"}}
+      ],
+      "captions": [
+        {"t": 60.79, "bars": 2, "text": "AI TURNED THE LIGHTS ON."},
+        {"t": 66.41, "bars": 2, "text": "no sleep until we find it", "world": "c"},
+        {"t": 72.0,  "bars": 2, "text": "lost in a long night", "world": "c"}
+      ]
+    },
+    {
+      "name": "B", "song": "song_b",
+      "pieces": [[45.84, 85.17], [100.91, 181.58]],
+      "out": {"kind": "radio", "bars": 4},
+      "markers": {"gen": 45.84, "latent": 69.45, "cut54": 102.89, "cut7": 118.63, "hero": 128.45, "r2": 148.14, "r2cut": 152.07, "hero2": 156.01},
+      "scenes": [
+        {"t": 45.84,  "world": "si", "kind": "cloud",    "props": {"term": ["> chemistry42 generate --pocket CDK20", "  drawing molecules that fit..."]}},
+        {"t": 51.73,  "world": "si", "kind": "term",     "props": {"title": "chemistry42", "lines": ["# generative AI: it invents new molecules", "# shaped for the pocket, instead of", "# searching a fixed catalogue", "> generate", "  8,918 designs"]}},
+        {"t": 57.63,  "world": "si", "kind": "cloud",    "props": {"term": ["> view library"]}},
+        {"t": 63.55,  "world": "si", "kind": "siclip",   "props": {"src": "mv/wall_dolly.mp4", "rate": 1, "lines": ["8,918 designs.", "Far too many to make."]}},
+        {"t": 69.45,  "world": "si", "kind": "cloud",    "props": {"term": ["> embed --space latent", "  similar ideas sit close"]}},
+        {"t": 75.35,  "world": "si", "kind": "scores",   "props": {}},
+        {"t": 81.25,  "world": "si", "kind": "siclip",   "props": {"src": "mv/keyhole_push.mp4", "rate": 1.4, "lines": ["Each one tried", "in the pocket."]}},
+        {"t": 100.91, "world": "si", "kind": "cloud",    "props": {"term": ["> score + filter"]}},
+        {"t": 108.78, "world": "si", "kind": "term",     "props": {"title": "rank", "lines": ["> rank and filter the designs", "  keep 54", "> chemists choose which to make", "  make 7"]}},
+        {"t": 114.68, "world": "si", "kind": "cloud",    "props": {"term": ["> synthesize"]}},
+        {"t": 122.56, "world": "c",  "kind": "flask",    "props": {"lines": ["7 made", "in a real lab."]}},
+        {"t": 128.45, "world": "si", "kind": "cloud",    "props": {"term": ["> assay", "  001 binds CDK20"]}},
+        {"t": 134.37, "world": "si", "kind": "siclip",   "props": {"src": "mv/pose_001.mp4", "rate": 0.9, "lines": ["30 days to the first hit.", "001 sticks to CDK20 (Kd 9.2 µM)."]}},
+        {"t": 140.27, "world": "c",  "kind": "lockkey",  "props": {"mode": "noturn", "lines": ["It fits,", "but barely blocks it (IC50 > 6 µM)."]}},
+        {"t": 146.17, "world": "si", "kind": "glitch",   "props": {"lines": ["ROUND 2"]}},
+        {"t": 148.14, "world": "si", "kind": "cloud",    "props": {"term": ["> generate --from 001", "  16 variants -> make 6"]}},
+        {"t": 157.97, "world": "si", "kind": "siclip",   "props": {"src": "mv/pose_048.mp4", "rate": 0.8, "counter": [9200, 566.7], "lines": ["048 grabs one more spot.", "16x tighter."]}},
+        {"t": 165.84, "world": "si", "kind": "numbers",  "props": {"title": "BLOCKS THE ENZYME · IC50", "steps": [["> 6,000 nM", "001"], ["33.4 nM", "048"]]}},
+        {"t": 171.74, "world": "c",  "kind": "lockkey",  "props": {"mode": "turn", "lines": ["048 jams", "the lock."]}},
+        {"t": 177.63, "world": "mix","kind": "radio",    "props": {}}
+      ],
+      "captions": [
+        {"t": 47.81,  "bars": 2, "text": "SOMETHING HAS TO GIVE."},
+        {"t": 61.56,  "bars": 2, "text": "WE CAN'T KEEP THEM ALL."},
+        {"t": 102.89, "bars": 3, "text": "LET 8,864 GO."},
+        {"t": 118.63, "bars": 2, "text": "KEEP SEVEN."},
+        {"t": 150.09, "bars": 2, "text": "WE TRIED AGAIN."},
+        {"t": 173.71, "bars": 2, "text": "worth the time", "world": "c"}
+      ]
+    },
+    {
+      "name": "C", "song": "song_c",
+      "pieces": [[0.67, 83.24]],
+      "in": {"kind": "radio", "dur": 2.5},
+      "out": {"kind": "fade", "dur": 4},
+      "scenes": [
+        {"t": 0.67,  "world": "mix", "kind": "dish",     "props": {"single": true, "lines": ["From the screen", "to living cells."]}},
+        {"t": 8.41,  "world": "mix", "kind": "dish",     "props": {"lines": ["048 on liver cancer cells", "vs kidney cells."]}},
+        {"t": 21.32, "world": "mix", "kind": "numbers",  "props": {"title": "STOPS CELL GROWTH · IC50", "steps": [["208.7 nM", "Huh7 · liver cancer"], ["1,706.7 nM", "HEK293 · kidney"], ["~8x", "more effect on the cancer cells"]]}},
+        {"t": 29.05, "world": "mix", "kind": "ladder",   "props": {}},
+        {"t": 41.96, "world": "si",  "kind": "headline", "props": {"mode": "return"}},
+        {"t": 49.69, "world": "mix", "kind": "headline", "props": {"mode": "fix"}},
+        {"t": 60.02, "world": "mix", "kind": "verdict",  "props": {}},
+        {"t": 72.91, "world": "c",   "kind": "credits",  "props": {}}
+      ],
+      "captions": []
+    }
+  ]
+}

@@ -1,0 +1,290 @@
+{
+  "result": "CHECKS=58 PASS=58 FAIL=0",
+  "english_words": 2233,
+  "estimated_minutes_at_120_135_wpm": [
+    16.5,
+    18.6
+  ],
+  "checks": [
+    {
+      "name": "8 chapters C01-C08; 38 continuous paragraph IDs",
+      "pass": true
+    },
+    {
+      "name": "2233 English words; estimate only",
+      "pass": true
+    },
+    {
+      "name": "English-only voiceover matches canonical",
+      "pass": true
+    },
+    {
+      "name": "Original 35 evidence rows unchanged; 2 explicitly conditional rows added",
+      "pass": true
+    },
+    {
+      "name": "All evidence IDs resolve",
+      "pass": true
+    },
+    {
+      "name": "New benefits cite teacher guidance and conditional analysis",
+      "pass": true
+    },
+    {
+      "name": "SC/TC numbers match",
+      "pass": true
+    },
+    {
+      "name": "SC/TC reviewed conversion matches",
+      "pass": true
+    },
+    {
+      "name": "opening",
+      "pass": true
+    },
+    {
+      "name": "counts",
+      "pass": true
+    },
+    {
+      "name": "54 and 7",
+      "pass": true
+    },
+    {
+      "name": "30-day endpoint",
+      "pass": true
+    },
+    {
+      "name": "later16and6",
+      "pass": true
+    },
+    {
+      "name": "cell viability",
+      "pass": true
+    },
+    {
+      "name": "no patient inference",
+      "pass": true
+    },
+    {
+      "name": "case had no animal/patient trials",
+      "pass": true
+    },
+    {
+      "name": "fair traditional comparison",
+      "pass": true
+    },
+    {
+      "name": "fair future comparison",
+      "pass": true
+    },
+    {
+      "name": "daily life",
+      "pass": true
+    },
+    {
+      "name": "source evaluation",
+      "pass": true
+    },
+    {
+      "name": "health/cost/welfare potential",
+      "pass": true
+    },
+    {
+      "name": "electricity trade-off",
+      "pass": true
+    },
+    {
+      "name": "resource comparison",
+      "pass": true
+    },
+    {
+      "name": "no net benefit asserted",
+      "pass": true
+    },
+    {
+      "name": "explicit closing answer",
+      "pass": true
+    },
+    {
+      "name": "No animation/shooting instructions in spoken content",
+      "pass": true
+    },
+    {
+      "name": "Unedited scientific paragraphs preserved",
+      "pass": true
+    },
+    {
+      "name": "简中 Word 38 English paragraphs in order",
+      "pass": true
+    },
+    {
+      "name": "简中 Word Chinese complete",
+      "pass": true
+    },
+    {
+      "name": "简中 English main title and objectives",
+      "pass": true
+    },
+    {
+      "name": "简中 TOC field and cached internal hyperlinks",
+      "pass": true
+    },
+    {
+      "name": "简中 Heading labels distinguish chapter and sources",
+      "pass": true
+    },
+    {
+      "name": "简中 Visible benefits/future/conclusion subheadings",
+      "pass": true
+    },
+    {
+      "name": "简中 Team on-screen and oral requirement explicit",
+      "pass": true
+    },
+    {
+      "name": "简中 PDF all bilingual spoken content complete",
+      "pass": true
+    },
+    {
+      "name": "简中 PDF all13pages readable",
+      "pass": true
+    },
+    {
+      "name": "简中 PDF has clickable navigation and 8 research URLs",
+      "pass": true
+    },
+    {
+      "name": "简中 All TOC page numbers correct",
+      "pass": true
+    },
+    {
+      "name": "简中 PDF text stays within page edges",
+      "pass": true
+    },
+    {
+      "name": "繁中 Word 38 English paragraphs in order",
+      "pass": true
+    },
+    {
+      "name": "繁中 Word Chinese complete",
+      "pass": true
+    },
+    {
+      "name": "繁中 English main title and objectives",
+      "pass": true
+    },
+    {
+      "name": "繁中 TOC field and cached internal hyperlinks",
+      "pass": true
+    },
+    {
+      "name": "繁中 Heading labels distinguish chapter and sources",
+      "pass": true
+    },
+    {
+      "name": "繁中 Visible benefits/future/conclusion subheadings",
+      "pass": true
+    },
+    {
+      "name": "繁中 Team on-screen and oral requirement explicit",
+      "pass": true
+    },
+    {
+      "name": "繁中 PDF all bilingual spoken content complete",
+      "pass": true
+    },
+    {
+      "name": "繁中 PDF all13pages readable",
+      "pass": true
+    },
+    {
+      "name": "繁中 PDF has clickable navigation and 8 research URLs",
+      "pass": true
+    },
+    {
+      "name": "繁中 All TOC page numbers correct",
+      "pass": true
+    },
+    {
+      "name": "繁中 PDF text stays within page edges",
+      "pass": true
+    },
+    {
+      "name": "Both English versions identical",
+      "pass": true
+    },
+    {
+      "name": "Original retained 视频内容稿_英文加简中.docx",
+      "pass": true
+    },
+    {
+      "name": "Original retained 视频内容稿_英文加繁中.docx",
+      "pass": true
+    },
+    {
+      "name": "Original retained 视频内容稿_英文加简中.pdf",
+      "pass": true
+    },
+    {
+      "name": "Original retained 视频内容稿_英文加繁中.pdf",
+      "pass": true
+    },
+    {
+      "name": "Original retained 双语内容主稿.json",
+      "pass": true
+    },
+    {
+      "name": "Original retained 证据索引.csv",
+      "pass": true
+    }
+  ],
+  "pages": {
+    "简中": 13,
+    "繁中": 13
+  },
+  "artifact_sha256": {
+    "视频内容稿_英文加简中.docx": "4de61fa569fccad6af76ec46dade5d0fbd72491afbfa30998135f3b5edafe764",
+    "视频内容稿_英文加简中.pdf": "98528c7af4dd4b6314256a91642c352aaaa84d4ea1fdadf7d0d200ecea65142f",
+    "视频内容稿_英文加繁中.docx": "950a5679f56f6cdb8aafe40981d308a1d4536b62be5da20089aaa5972b52ff5e",
+    "视频内容稿_英文加繁中.pdf": "48f2e6dfb63aa89f8df889a1fcc082b1a71970db9ce1d833079f3a439dbcc882"
+  },
+  "actual_timed_reading": "PENDING",
+  "finished_video_and_four_presenters": "PENDING",
+  "new_teacher_announcements": "NOT_CHECKED",
+  "visual_review": {
+    "reviewed_pages": {
+      "简中": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "繁中": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ]
+    },
+    "result": "PASS; all26pages individually viewed; no clipping, overlap, missing glyphs or TOC overflow observed"
+  }
+}

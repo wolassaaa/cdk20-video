@@ -1,0 +1,12 @@
+{
+ "source": "Ren et al. 2023 Chem Sci Fig. 5, transcribed by us; 025 stereocentre omitted",
+ "smiles": {
+  "001": "CNC(=O)c1cc(Nc2ncc3ccccc3n2)c[nH]1",
+  "004": "CC1(CC1)Nc1cc(Oc2cnn(C)c2)ccn1",
+  "007": "NC(=O)c1cc(N2CCC(F)(F)CC2)nc(-c2cc[nH]n2)n1",
+  "009": "C1CC1Nc1cc(-n2cc(C3COC3)nn2)ccn1",
+  "015": "CCc1ccc(-c2cccc3nc(NC4CCCC4)[nH]c23)[nH]c1=O",
+  "019": "Cc1ccnc(-n2cncc2N2CC3(COC3)C2)n1",
+  "025": "c1(-c2ccnc(NC3CCNC3)n2)nc2cnncc2s1"
+ }
+}

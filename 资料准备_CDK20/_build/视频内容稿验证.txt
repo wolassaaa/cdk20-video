@@ -1,0 +1,45 @@
+2026-10-07 双版本视频内容稿验证
+VIDEO_SCRIPT_CHECKS=39 PASS=39 FAIL=0
+ENGLISH_WORDS=2105
+ESTIMATED_MINUTES=16.2–18.3 at 115–130 wpm; not an actual timed reading.
+WORD_PDF_REOPENED=4; VISUAL_PAGES_REVIEWED=22; source and narrative reviews=PASS.
+PASS | 主稿8节36段 | 
+PASS | 段落编号连续唯一 | 
+PASS | 英文词数2105且估算落入15到20分钟 | 
+PASS | 纯英文口播与主稿完全一致 | 
+PASS | 35张原始证据卡保持不变 | 
+PASS | 全部段落引用有效且有依据 | 
+PASS | 方法与实验引用错配已修正 | 
+PASS | 简繁各段数字一致 | 
+PASS | 开场问题 | 
+PASS | 首轮数字 | 
+PASS | 54与7阶段 | 
+PASS | 30天正确终点 | 
+PASS | 后续16与6 | 
+PASS | 048细胞活力 | 
+PASS | 非患者结果 | 
+PASS | 无动物患者试验 | 
+PASS | 传统不是盲猜 | 
+PASS | 公平对照建议 | 
+PASS | 日常新闻识读 | 
+PASS | 学术书籍与资料评价 | 
+PASS | 主稿没有动画或拍摄安排 | 
+PASS | 繁中转换与审阅版本一致 | 
+PASS | 简中 Word所有36段英文顺序准确 | 
+PASS | 简中 Word所有中文与证据标签齐全 | 
+PASS | 简中 PDF英文中文均完整 | 
+PASS | 简中 PDF无空白页且全部重新打开 | 
+PASS | 简中 标题黑色无下划线边框 | 
+PASS | 简中 八项文献链接可点击 | 
+PASS | 简中 页面文字未越界 | []
+PASS | 简中 全部11页已渲染 | 
+PASS | 繁中 Word所有36段英文顺序准确 | 
+PASS | 繁中 Word所有中文与证据标签齐全 | 
+PASS | 繁中 PDF英文中文均完整 | 
+PASS | 繁中 PDF无空白页且全部重新打开 | 
+PASS | 繁中 标题黑色无下划线边框 | 
+PASS | 繁中 八项文献链接可点击 | 
+PASS | 繁中 页面文字未越界 | []
+PASS | 繁中 全部11页已渲染 | 
+PASS | 两版英文逐段完全相同 | 
+EXIT_STATUS=0

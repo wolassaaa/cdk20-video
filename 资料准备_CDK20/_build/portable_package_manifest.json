@@ -1,0 +1,212 @@
+{
+  "package": "CDK20 完整内容准备包",
+  "version_date": "2026-10-07",
+  "entry_document": "AI辅助肝癌候选分子发现内容手册.pdf",
+  "files": [
+    {
+      "path": "AI辅助肝癌候选分子发现内容手册.docx",
+      "bytes": 542134,
+      "sha256": "b8ce256ed6b5355b66cbd77e6983a72ec470b41fb9f1a4322a44e9ede0301f15"
+    },
+    {
+      "path": "AI辅助肝癌候选分子发现内容手册.pdf",
+      "bytes": 939076,
+      "sha256": "e7babc7d51d752acce51947db2e53675c59b14bbb8ace49c82187ed5870d7603"
+    },
+    {
+      "path": "Tutorial1_答案参考.md",
+      "bytes": 5943,
+      "sha256": "a6c701a794a3ffebb7dae929be4ef7893af71ea5716cb5c2895d632db9ac3a9f"
+    },
+    {
+      "path": "sources/AlphaFold_2021_fulltext.xml",
+      "bytes": 177643,
+      "sha256": "a93693b00ee4ba41da6bc50f04712a66aa1aa2184d3a85b4b68ec7a35757c028"
+    },
+    {
+      "path": "sources/Bender_2026_Crossref_metadata.json",
+      "bytes": 104373,
+      "sha256": "4239c6b8487cdad15997b6dcb667534bede1506272a5224b44a593d93d7cafc7"
+    },
+    {
+      "path": "sources/Chemistry42_2023_fulltext.xml",
+      "bytes": 77862,
+      "sha256": "48ccd8bcdff75795c0a80bcc5fb4115681d754a063bdc1d7f5b9dffc22309f41"
+    },
+    {
+      "path": "sources/Feng_2011_CCRK_fulltext.html",
+      "bytes": 210178,
+      "sha256": "26d9718755a164ad58b092f46dc87bd3fd8ed5b4d8aa89fb0cbedc85aff21713"
+    },
+    {
+      "path": "sources/Feng_2011_CCRK_text.txt",
+      "bytes": 89257,
+      "sha256": "b1dd5e7e7727d1709c6cbcf581e950ff2f5660db8111af47feb49406d393c98b"
+    },
+    {
+      "path": "sources/Lengauer_2007_chapter1_text.txt",
+      "bytes": 63450,
+      "sha256": "023742b6986edad1312db6fc326dc128c3a82161685ec8bf76ff549e9d8aef0a"
+    },
+    {
+      "path": "sources/Lengauer_2007_chapter_Crossref_metadata.json",
+      "bytes": 4025,
+      "sha256": "b6fb48bdbe1a271edf3f7f02352c77903544e35a0347e2fb9a9675a530558921"
+    },
+    {
+      "path": "sources/Ren_2023_CDK20_fulltext.xml",
+      "bytes": 110132,
+      "sha256": "b4e6abc00233d49ac6faa382e4eaafa65e03052842455cfcb033943d9ba73500"
+    },
+    {
+      "path": "sources/SC-014-D2SC05709C-s001.pdf",
+      "bytes": 690511,
+      "sha256": "22e928d169c2856a9183a201a96c46cd7d6134bee1fbb9ebb9bfcab56748d13f"
+    },
+    {
+      "path": "sources/Wiley_book_sample_3527312781.pdf",
+      "bytes": 12678514,
+      "sha256": "e1efa89c3c8e95e66127e27c66ad97f3299687fe402c22d8717feb4c2aada38b"
+    },
+    {
+      "path": "sources/input_hashes_before.json",
+      "bytes": 443,
+      "sha256": "a43f5e7f51627c3a9d451d71f1882ef9a3144d8929893d5156510ddac8e90546"
+    },
+    {
+      "path": "sources/source_manifest.json",
+      "bytes": 2875,
+      "sha256": "5d4b6838a36bec098790694d65a4e1f50fa69ecdfc9b6a6312740a48b5a5096e"
+    },
+    {
+      "path": "sources/正文定位索引.txt",
+      "bytes": 3361,
+      "sha256": "10ab819c7babe749727d5d35a7f36efc2027a4a15195369c9f2fcec8ea9f49b2"
+    },
+    {
+      "path": "sources/补充材料页索引.json",
+      "bytes": 1468,
+      "sha256": "84cf1fca47efdafe7138ff385a721edbef221593e533296562d654de40723859"
+    },
+    {
+      "path": "内容初稿_零基础版.md",
+      "bytes": 7255,
+      "sha256": "f5a4785a2014ad7419b48e4efc649203fd978a046f11233a76e47a31b89e89fa"
+    },
+    {
+      "path": "内容图示/01_疾病靶点分子.png",
+      "bytes": 115898,
+      "sha256": "ee3e361c51d1ff9ba48bf17312e7697d588697f3f2caaf83ca83103031a3f50e"
+    },
+    {
+      "path": "内容图示/01_疾病靶点分子.svg",
+      "bytes": 2775,
+      "sha256": "742f0b91dc3b90001d9d74ac48a1427ba6bd94a37f0c7fca06db1796214f3041"
+    },
+    {
+      "path": "内容图示/02_方法协作流程.png",
+      "bytes": 156516,
+      "sha256": "1da61c23cfdaada4c06507bbe372a3a06385662fd5c7c2f8f135ae1530a4ba03"
+    },
+    {
+      "path": "内容图示/02_方法协作流程.svg",
+      "bytes": 4732,
+      "sha256": "877af3884f511e31749ddc132b6aff8d4894d4efc6625419ba35ca116d34d843"
+    },
+    {
+      "path": "内容图示/03_首次命中与后续.png",
+      "bytes": 119499,
+      "sha256": "0952cc3681c6ffd3fbe0168a1c3663812dd9a78d01c9c987ef2303ef91165f5e"
+    },
+    {
+      "path": "内容图示/03_首次命中与后续.svg",
+      "bytes": 3679,
+      "sha256": "c8e009f59f5361979eb57e30127409d25d962d70ed24b11c7a2e44bfa7a63b82"
+    },
+    {
+      "path": "内容图示/04_证据层级.png",
+      "bytes": 126335,
+      "sha256": "caa57a7ab0b1e098177d17e23713dedf21cfdc6ce1f217f75ae071f6a20bbce7"
+    },
+    {
+      "path": "内容图示/04_证据层级.svg",
+      "bytes": 3535,
+      "sha256": "3b91cf2656e3c7db3700f14d95388274a8e9e8a557c64a630b535b633d8260ac"
+    },
+    {
+      "path": "内容图示/图示说明.json",
+      "bytes": 3667,
+      "sha256": "dee73aa70881573b6be9f2004d1a0bffdc6e6a6ebf2b6f5adb1980ced8133b84"
+    },
+    {
+      "path": "内容完整版.md",
+      "bytes": 28339,
+      "sha256": "a5dc4a724ee11f9f926fe389f8f20ebea0a6037498be63206df084564201a0eb"
+    },
+    {
+      "path": "内容资料包.md",
+      "bytes": 26057,
+      "sha256": "b69a4fbee9fd835733ecf665f5f9a657f2016c7b7a3295d42199d52af5943591"
+    },
+    {
+      "path": "完整包验证记录.txt",
+      "bytes": 2441,
+      "sha256": "44edeaf397bf1349b39127b8c5c62013a34999154bd42b1f3c8752c177d834f6"
+    },
+    {
+      "path": "教师材料/Group Project Introduction.pdf",
+      "bytes": 4681255,
+      "sha256": "16c99052ac6d5d8f9494ed73c8b8f1e95d3533130cb7881f32b560afae862d37"
+    },
+    {
+      "path": "教师材料/Group_Project_Rubrics_for_Moodle.pdf",
+      "bytes": 122856,
+      "sha256": "f37c1c5f2a8b67d046407cab6acbb300cfa7098382bf4adffb86a6085ea47eba"
+    },
+    {
+      "path": "教师材料/Guidelines for generative AI for SCIE 1007.pdf",
+      "bytes": 583003,
+      "sha256": "b102b91f4fdd0a1a60f4efc1a7fd3a29d19679b180a229c480ffdfffc959f6c3"
+    },
+    {
+      "path": "教师材料/Overview of Projects.pdf",
+      "bytes": 340380,
+      "sha256": "ea35d64c94858d208ab66c86c0a98cc318648e29fe2df2ecc48ab9e0bb257090"
+    },
+    {
+      "path": "教师材料/[Work Sheet] Tutorial 1 Research objectives and methods.pdf",
+      "bytes": 177900,
+      "sha256": "e59d500f29f2af17ea400870fb3f4de0977c9b692bbe1daa98493c5957dc4d26"
+    },
+    {
+      "path": "来源与核查说明.md",
+      "bytes": 7439,
+      "sha256": "f1f3144d6ab3b191344de67fcbb057635e77fc62ec5d958347983036e42c0d59"
+    },
+    {
+      "path": "组员讨论用_研究问题微调.pdf",
+      "bytes": 166141,
+      "sha256": "c2ced5a32a37098e50263fb789752d80f6db5a45e1fbe3dd15ede1eb47441794"
+    },
+    {
+      "path": "背景综述/pharmaceuticals-16-00253.pdf",
+      "bytes": 1650330,
+      "sha256": "b2c2eb6d948a3361ab72411daf56f36068a6b9d0e367d05be8def8b168a02ac3"
+    },
+    {
+      "path": "证据清单.csv",
+      "bytes": 18576,
+      "sha256": "45591fad88cd8f088d28321c28bc41b759974ebd27b8bcd5af72aab5084c32a8"
+    },
+    {
+      "path": "阅读说明.md",
+      "bytes": 2210,
+      "sha256": "35be2171f23f2dea210a0ed1e47acca6de2b3bc8e487b662a3ba57bd9ff6b2c9"
+    },
+    {
+      "path": "验证记录.txt",
+      "bytes": 4597,
+      "sha256": "cf5850cdc0fd49a5bd04a983cbc8a2dfbee56f8797c8dc35512e6bff317de00d"
+    }
+  ]
+}

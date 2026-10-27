@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="900" viewBox="0 0 1800 900">
+<rect width="1800" height="900" fill="white"/>
+<text x="65" y="111" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="49" font-weight="700">图四 这些证据回答不同问题</text>
+<rect x="65" y="250" width="290" height="260" rx="14" fill="#F0F5F8" stroke="#254F6B" stroke-width="3"/>
+<text x="89" y="310" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="35" font-weight="700">计算预测</text>
+<text x="89" y="371" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="400">看起来有可能吗</text>
+<text x="89" y="415" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="400">研究提供预测</text>
+<rect x="415" y="250" width="290" height="260" rx="14" fill="#F0F5F8" stroke="#254F6B" stroke-width="3"/>
+<text x="439" y="310" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="35" font-weight="700">蛋白结合</text>
+<text x="439" y="371" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="400">真的能结合吗</text>
+<text x="439" y="415" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="400">已有实验结果</text>
+<rect x="765" y="250" width="290" height="260" rx="14" fill="#F0F5F8" stroke="#254F6B" stroke-width="3"/>
+<text x="789" y="310" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="35" font-weight="700">蛋白功能</text>
+<text x="789" y="371" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="400">能影响功能吗</text>
+<text x="789" y="415" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="400">已有实验结果</text>
+<rect x="1115" y="250" width="290" height="260" rx="14" fill="#F0F5F8" stroke="#254F6B" stroke-width="3"/>
+<text x="1139" y="310" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="35" font-weight="700">细胞实验</text>
+<text x="1139" y="371" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="400">细胞发生什么变化</text>
+<text x="1139" y="415" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="400">已有模型结果</text>
+<rect x="1465" y="250" width="290" height="260" rx="14" fill="#F5F5F5" stroke="#9AA2A8" stroke-width="3" stroke-dasharray="12 8"/>
+<text x="1489" y="310" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="35" font-weight="700">患者治疗</text>
+<text x="1489" y="371" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="400">患者是否获益</text>
+<text x="1489" y="415" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="400">本案例未报告</text>
+<text x="65" y="651" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="36" font-weight="400">结合、功能与细胞结果不能互相替代，更不能直接变成患者疗效。</text>
+<text x="65" y="721" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="31" font-weight="400">2011年的靶点动物模型，不是2023年AI候选分子的动物验证。</text>
+<text x="65" y="850" fill="#60707B" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="400">依据 S02、S08 E14–E23、E33 | 四类报告结果，不表示疗效已经成立</text>
+</svg>

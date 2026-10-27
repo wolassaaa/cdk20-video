@@ -1,0 +1,205 @@
+{
+  "indexed": {
+    "date-parts": [
+      [
+        2026,
+        1,
+        8
+      ]
+    ],
+    "date-time": "2026-01-08T18:42:40Z",
+    "timestamp": 1767897760953,
+    "version": "3.49.0"
+  },
+  "edition-number": "1",
+  "reference-count": 7,
+  "publisher": "Wiley",
+  "isbn-type": [
+    {
+      "value": "9783527312788",
+      "type": "print"
+    },
+    {
+      "value": "9783527619368",
+      "type": "electronic"
+    }
+  ],
+  "license": [
+    {
+      "start": {
+        "date-parts": [
+          [
+            2007,
+            1,
+            11
+          ]
+        ],
+        "date-time": "2007-01-11T00:00:00Z",
+        "timestamp": 1168473600000
+      },
+      "content-version": "tdm",
+      "delay-in-days": 0,
+      "URL": "http://doi.wiley.com/10.1002/tdm_license_1.1"
+    }
+  ],
+  "content-domain": {
+    "domain": [],
+    "crossmark-restriction": false
+  },
+  "short-container-title": [],
+  "published-print": {
+    "date-parts": [
+      [
+        2007,
+        1,
+        11
+      ]
+    ]
+  },
+  "DOI": "10.1002/9783527619368.ch1",
+  "type": "other",
+  "created": {
+    "date-parts": [
+      [
+        2008,
+        2,
+        5
+      ]
+    ],
+    "date-time": "2008-02-05T16:52:05Z",
+    "timestamp": 1202230325000
+  },
+  "page": "1-24",
+  "source": "Crossref",
+  "is-referenced-by-count": 1,
+  "title": [
+    "Bioinformatics — From Genomes to Therapies"
+  ],
+  "prefix": "10.1002",
+  "author": [
+    {
+      "given": "Thomas",
+      "family": "Lengauer",
+      "sequence": "first",
+      "affiliation": [],
+      "role": [
+        {
+          "role": "author",
+          "vocabulary": "crossref"
+        }
+      ]
+    }
+  ],
+  "member": "311",
+  "published-online": {
+    "date-parts": [
+      [
+        2008,
+        2,
+        5
+      ]
+    ]
+  },
+  "reference": [
+    {
+      "key": "e_1_2_1_2_2",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1038/nature01626"
+    },
+    {
+      "key": "e_1_2_1_3_2",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1126/science.278.5338.680"
+    },
+    {
+      "key": "e_1_2_1_4_2",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1126/science.287.5460.1960"
+    },
+    {
+      "key": "e_1_2_1_5_2",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1002/cber.18940270364"
+    },
+    {
+      "key": "e_1_2_1_6_2",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1093/embo-reports/kve033"
+    },
+    {
+      "key": "e_1_2_1_7_2",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1093/nar/gkj405"
+    },
+    {
+      "key": "e_1_2_1_8_2",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1016/S1359-6446(04)03316-1"
+    }
+  ],
+  "container-title": [
+    "Bioinformatics‐From Genomes to Therapies"
+  ],
+  "original-title": [],
+  "language": "en",
+  "link": [
+    {
+      "URL": "https://onlinelibrary.wiley.com/doi/pdf/10.1002/9783527619368.ch1",
+      "content-type": "unspecified",
+      "content-version": "vor",
+      "intended-application": "similarity-checking"
+    }
+  ],
+  "deposited": {
+    "date-parts": [
+      [
+        2023,
+        8,
+        25
+      ]
+    ],
+    "date-time": "2023-08-25T21:34:48Z",
+    "timestamp": 1692999288000
+  },
+  "score": 1,
+  "resource": {
+    "primary": {
+      "URL": "https://onlinelibrary.wiley.com/doi/10.1002/9783527619368.ch1"
+    }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+    "date-parts": [
+      [
+        2007,
+        1,
+        11
+      ]
+    ]
+  },
+  "ISBN": [
+    "9783527312788",
+    "9783527619368"
+  ],
+  "references-count": 7,
+  "alternative-id": [
+    "10.1002/9783527619368.ch1",
+    "10.1002/9783527619368"
+  ],
+  "URL": "https://doi.org/10.1002/9783527619368.ch1",
+  "archive": [
+    "Portico"
+  ],
+  "relation": {},
+  "subject": [],
+  "published": {
+    "date-parts": [
+      [
+        2007,
+        1,
+        11
+      ]
+    ]
+  }
+}

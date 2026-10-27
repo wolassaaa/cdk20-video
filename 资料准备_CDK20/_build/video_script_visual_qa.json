@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-07",
+  "result": "PASS",
+  "pages_reviewed": {
+    "简中": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "繁中": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ]
+  },
+  "artifact_sha256": {
+    "视频内容稿_英文加简中.docx": "9ab7f3ad7bb0dde5024518822053394391a8cb7dd9ecb8cef4f0cb51eec13977",
+    "视频内容稿_英文加简中.pdf": "a4e8be82a2a3d76f7c807d1abb58d452f8e6beb412717b4e153ea6b95a0e3c87",
+    "视频内容稿_英文加繁中.docx": "900eb66afb068a5222381fe406674322b9be520d7b1135c38881c96a763cca02",
+    "视频内容稿_英文加繁中.pdf": "ba7079ba29966e8fad74b308b71a386aaeb09d910fa695caeec2fb8628d1ac9b"
+  },
+  "review": "22 full-resolution page images individually inspected. No clipping, overlaps, orphan headings or missing glyphs observed. Source and narrative agents reviewed the final 36-paragraph canonical content and reported PASS. No real audience test or timed recording claimed."
+}

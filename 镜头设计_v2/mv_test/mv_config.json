@@ -1,0 +1,46 @@
+{
+  "fps": 30,
+  "note": "Three acts, one song each (Blinding Lights, Sacrifice, Out of Time). Scene times are seconds from the start of their act; build_plan.py snaps every cut to a bar start. Lyric cues: pocket lights on 'blinded by the light' (A ~65.6 s), the 7 lands on 'sacrifice' (B ~41.2 s), 'Not yet.' lands on 'out of time' (C ~65 s). Sacrifice skips 85-101 s of the song to leave out an explicit line.",
+  "acts": [
+    {
+      "name": "A",
+      "music": {"src": "mv/song_a.wav", "beats": "song_a.beats.json", "pieces": [{"from": 0, "to": 97.27}], "fade_in": 0, "fade_out": 0.6},
+      "scenes": [
+        {"t": 0,     "kind": "phone",    "props": {"headline": "AI designs liver cancer drug in 30 days"}},
+        {"t": 13.05, "kind": "title",    "props": {"lines": ["Is that", "true?"]}},
+        {"t": 19,    "kind": "clip",     "props": {"src": "mv/body_liver.mp4", "rate": 0.7, "lines": ["Liver cancer is common", "in Hong Kong."]}},
+        {"t": 35.5,  "kind": "clip",     "props": {"src": "mv/keyhole_push.mp4", "rate": 1, "lines": ["Every drug needs a target.", "Ours is a protein: CDK20."]}},
+        {"t": 44,    "kind": "title",    "props": {"lines": ["No one had seen", "its shape."]}},
+        {"t": 52.36, "kind": "clip",     "props": {"src": "mv/tail_pull.mp4", "rate": 0.56, "lines": ["AI guessed it.", "Its own tail blocked the keyhole."]}},
+        {"t": 66.4,  "kind": "timeline", "props": {}},
+        {"t": 83,    "kind": "title",    "props": {"lines": ["Can AI find", "a key faster?"]}}
+      ]
+    },
+    {
+      "name": "B",
+      "music": {"src": "mv/song_b.wav", "beats": "song_b.beats.json", "pieces": [{"from": 45.84, "to": 85.17}, {"from": 100.91, "to": 181.58}], "fade_in": 0.2, "fade_out": 0.8},
+      "scenes": [
+        {"t": 0,     "kind": "clip",     "props": {"src": "mv/wall_dolly.mp4", "rate": 0.75, "lines": ["The AI drew", "8,918 keys."]}},
+        {"t": 16,    "kind": "title",    "props": {"lines": ["Too many", "to make them all."]}},
+        {"t": 24,    "kind": "clip",     "props": {"src": "mv/keyhole_push.mp4", "rate": 0.8, "lines": ["A computer tries each one", "in the pocket and scores it."]}},
+        {"t": 33.44, "kind": "numbers",  "props": {"steps": [["8,918", "designed"], ["54", "picked by computer"], ["7", "actually made"]]}},
+        {"t": 46,    "kind": "clip",     "props": {"src": "mv/pose_001.mp4", "rate": 0.65, "lines": ["7 made.", "1 fit the lock."]}},
+        {"t": 58,    "kind": "title",    "props": {"lines": ["It fits.", "But it doesn't turn."]}},
+        {"t": 66,    "kind": "title",    "props": {"lines": ["Round 2."]}},
+        {"t": 70,    "kind": "clip",     "props": {"src": "mv/pose_048.mp4", "rate": 0.5, "counter": [9200, 566.7], "lines": ["048 grabs one more spot.", "15x tighter."]}},
+        {"t": 90,    "kind": "title",    "props": {"lines": ["It turns.", "Liver cancer cells react too."]}},
+        {"t": 100,   "kind": "clip",     "props": {"src": "mv/keyhole_push.mp4", "rate": 0.5, "lines": ["30 days", "to the first hit."]}}
+      ]
+    },
+    {
+      "name": "C",
+      "music": {"src": "mv/song_c.wav", "beats": "song_c.beats.json", "pieces": [{"from": 0.67, "to": 83.24}], "fade_in": 0.3, "fade_out": 4},
+      "scenes": [
+        {"t": 0,     "kind": "ladder",   "props": {}},
+        {"t": 30,    "kind": "phone",    "props": {"headline": "AI designs liver cancer drug in 30 days", "verdict": "Step 2 of 6: it binds."}},
+        {"t": 62.0,  "kind": "title",    "props": {"lines": ["Worth testing? Yes.", "A medicine? Not yet."]}},
+        {"t": 72,    "kind": "credits",  "props": {}}
+      ]
+    }
+  ]
+}

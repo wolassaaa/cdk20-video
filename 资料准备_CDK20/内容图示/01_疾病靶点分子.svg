@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="900" viewBox="0 0 1800 900">
+<rect width="1800" height="900" fill="white"/>
+<text x="65" y="111" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="49" font-weight="700">图一 我们到底在寻找什么</text>
+<rect x="70" y="245" width="480" height="250" rx="14" fill="#F0F5F8" stroke="#254F6B" stroke-width="3"/>
+<text x="94" y="305" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="35" font-weight="700">疾病研究需求</text>
+<text x="94" y="366" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="400">肝细胞癌 HCC</text>
+<text x="94" y="410" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="400">我们想解决的研究问题</text>
+<rect x="660" y="245" width="480" height="250" rx="14" fill="#F0F5F8" stroke="#254F6B" stroke-width="3"/>
+<text x="684" y="305" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="35" font-weight="700">药物作用对象</text>
+<text x="684" y="366" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="400">CDK20 蛋白</text>
+<text x="684" y="410" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="400">潜在靶点 不是唯一病因</text>
+<rect x="1250" y="245" width="480" height="250" rx="14" fill="#F0F5F8" stroke="#254F6B" stroke-width="3"/>
+<text x="1274" y="305" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="35" font-weight="700">候选分子</text>
+<text x="1274" y="366" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="400">寻找值得测试的结构</text>
+<text x="1274" y="410" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="400">早期研究对象 不是上市药</text>
+<polyline points="550,370 660,370" fill="none" stroke="#254F6B" stroke-width="5"/>
+<polygon points="660.0,370.0 638.0,359.0 638.0,381.0" fill="#254F6B"/>
+<polyline points="1140,370 1250,370" fill="none" stroke="#254F6B" stroke-width="5"/>
+<polygon points="1250.0,370.0 1228.0,359.0 1228.0,381.0" fill="#254F6B"/>
+<text x="70" y="658" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="38" font-weight="400">主线：确定研究需求 → 选择作用对象 → 寻找并验证分子</text>
+<text x="70" y="723" fill="#17242F" font-family="Microsoft YaHei, sans-serif" font-size="33" font-weight="400">聚焦一个靶点，不等于疾病只有一个原因。</text>
+<text x="65" y="850" fill="#60707B" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="400">依据 S01、S02、S10 | 教学概念图，不是实验图</text>
+</svg>

@@ -1,0 +1,21 @@
+{
+  "pdf": "D:\\。hkbu\\molecular science\\资料准备_CDK20\\组员讨论用_研究问题微调.pdf",
+  "pages": 1,
+  "checks": {
+    "one_page": true,
+    "question_present": true,
+    "case_present": true,
+    "scope_clear": true,
+    "sources_clickable": true,
+    "peer_review_request": true
+  },
+  "links": [
+    "https://doi.org/10.1039/D2SC05709C",
+    "https://doi.org/10.1038/s41586-021-03819-2",
+    "https://doi.org/10.1021/acs.jcim.2c01191",
+    "https://doi.org/10.3390/ph16020253"
+  ],
+  "characters": 794,
+  "visual_inspection": "PASS one page readable, no clipping or missing glyphs",
+  "sha256": "c2ced5a32a37098e50263fb789752d80f6db5a45e1fbe3dd15ede1eb47441794"
+}

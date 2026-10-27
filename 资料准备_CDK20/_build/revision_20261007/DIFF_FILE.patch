@@ -1,0 +1,136 @@
+--- 20261003/内容完整版.md
++++ 20261007/内容完整版.md
+@@ -1,12 +1,12 @@
+ # AI辅助肝癌候选分子发现内容手册
+ 
+-SCIE1007 内容准备版 2026年10月3日
++SCIE1007 内容准备版 2026年10月7日
+ 
+ ## 先看这张白话解释表
+ 
+ 这份手册把我们的研究方向、完整内容、证据和常见问题一次整理好。先读前六部分，就能理解整个故事；后面的资料用于核对、讨论和回答追问。正文尽量少用术语，专业参数放在附录。
+ 
+-**我们的结论：AI可以帮助研究者提出和挑选值得实验的分子，计算与实验合作已经得到早期结果；这个案例还没有量出提速倍数，也没有证明患者疗效。**
++**我们的结论：AI不只帮助筛选，还能预测蛋白结构、提出新的分子设计。CDK20案例将这些计算建议推进到真实实验和改进；它展示了早期结果，但还没有量出提速倍数或证明患者疗效。**
+ 
+ | 名称 | 用白话怎么理解 | 在这次研究里是什么 |
+ |---|---|---|
+@@ -30,19 +30,19 @@
+ 
+ 老师给的主题是 **Computer-aided drug discovery and its benefits**，即计算辅助药物发现及其优点。我们从中选择一个具体问题，而不是把老师列出的所有技术名称都介绍一遍。[T01]
+ 
+-**研究问题：AI怎样帮助研究者更有方向地寻找肝癌候选分子？CDK20案例展示了哪些优点，又有哪些收益还需要验证？**
+-
+-英文问题：How can AI-assisted computational methods support early-stage molecule discovery for hepatocellular carcinoma, and which benefits are supported by the CDK20 case study?
+-
+-**目标一：**解释从选择作用对象，到设计、筛选、合成和测试分子的过程，说明AI、其他计算方法、人和实验各做了什么。
++**研究问题：AI怎样预测结构、提出有希望的肝癌候选分子？CDK20案例的实验结果支持哪些早期发现收益？**
++
++英文问题：How do AI-assisted structure prediction and molecular design support early molecule discovery for hepatocellular carcinoma, and which benefits do the CDK20 experiments support?
++
++**目标一：**解释算法怎样预测蛋白结构、提出候选分子，再连接计算评价、人类选择和真实实验；不把AI仅仅讲成筛选工具。
+ 
+ **目标二：**用论文中的时间和实验结果评价价值，同时区分已经观察到的成果、我们的解释和仍待证明的收益。
+ 
+ ### 为什么保留这个方向
+ 
+-它有具体疾病，有明确的AI参与，也有真实合成与实验结果，适合追问“计算建议怎样变成实验成果”。我们不必先把整个癌症机制讲完，零基础读者也能跟上这条线。
+-
+-这个病例来自2023年的研究，是一个清楚、可核查的案例，并不是我们声称的最新临床进展。较新的综述和评价文章用于提供背景；主案例数字仍回到正式原文。[S02、S06、S07]
++它有具体疾病，有结构预测和分子生成，也有真实合成与实验结果，适合追问“算法提出的设计怎样变成实验成果”。我们不必先把整个癌症机制讲完，零基础读者也能跟上这条线。
++
++这个案例来自2023年的研究，是一个清楚、可核查的案例，并不是我们声称的最新临床进展。较新的综述和评价文章用于提供背景；主案例数字仍回到正式原文。[S02、S06、S07]
+ 
+ ### 对此前方向的取舍
+ 
+@@ -89,13 +89,13 @@
+ | 合成和测试 | 分子是否真的有作用 | 化学材料及实验读出 | 按不同实验条件分别判断 |
+ | 继续优化 | 怎样改进首次结果 | 下一轮设计 | 再次测试是否兑现改进 |
+ 
+-在这个案例中，PandaOmics帮助处理疾病相关信息。AlphaFold提供蛋白结构预测。Chemistry42帮助提出候选分子。分子对接等计算评价和研究者判断帮助决定实验对象。[E06–E11、E26]
++在这个案例中，PandaOmics帮助处理疾病相关信息。AlphaFold预测目标蛋白的三维形状；Chemistry42提出新的候选分子结构。分子对接等计算评价和研究者判断再帮助决定实验对象。[E06–E11、E26]
+ 
+ **预测结构不是实验测出的结构。** 团队使用已有的AlphaFold数据库模型，并处理了低置信度的末端区域，才继续设计。这个细节说明人的判断并没有消失。[E09]
+ 
+ **生成结构不是做出了实物。** 分子还要真实合成，实验才能测试。**计算评分也不是药物成功概率。** 高分对象仍可能失败。[E10–E12]
+ 
+-AI在这里不是靠算力完整模拟人体，也不是让聊天机器人写出药物配方。我们应把学习预测、其他计算评价与真实实验分开，再解释它们如何合作。
++**算法怎样发挥作用？** 模型从已有数据中学习规律，用于预测结构或提出新设计；它不只是给现成分子排序，也不是靠算力完整模拟人体。蛋白形状与候选分子结构是两种不同输出，都要审视和检验。[S04、S05]
+ 
+ 最后一步不是流程的终点。实验会把新的信息带回来，帮助下一轮设计；这正是主案例的重点。
+ 
+@@ -136,12 +136,12 @@
+ | 优点 | 案例展示了什么 | 结论要停在哪里 |
+ |---|---|---|
+ | 支持开展设计 | 使用预测结构设计并得到命中物 | 没有测出比其他结构路线省了多久 |
+-| 探索候选结构 | 生成、选择并真实合成测试分子 | 新结构不等于最好药物 |
++| 提出新的分子设计 | 生成候选结构，再选择合成测试 | 设计建议不等于已证明有效的药物 |
+ | 帮助安排实验 | 从较大计算范围选择较小实验集合 | 不能直接算成实验减少比例 |
+ | 获得早期结果 | 报告30天首次结合命中 | 没有同任务比较，提速幅度未知 |
+ | 支持继续改进 | 后续分子结合表现改善并进一步测试 | 不代表所有性质都同步变好 |
+ 
+-这些事实支持我们的解释：计算与实验的合作可以让探索更有方向，也提供了较快取得早期结果的实例。[E09–E25] 但“这条路线获得了结果”和“比另一条路线改善了多少”是两个问题。
++这些事实支持我们的解释：算法可以帮助预测结构和提出设计，计算与实验的合作则推动早期发现。[E09–E25] 如果设计建议更有用，研究者就可能减少低收益尝试，把时间用于验证和改进；具体节省多少仍要比较。
+ 
+ ### 怎样连接日常生活
+ 
+@@ -181,7 +181,7 @@
+ 
+ ### 我们的最终结论
+ 
+-**CDK20案例显示，AI辅助计算可以与研究者和实验合作，发现并改进早期分子。它的价值是把计算建议推进到真实验证。具体提速幅度、完整研发收益和患者价值，仍需要比较与后续研究。**
++**CDK20案例显示，AI可以帮助预测蛋白结构、提出新的候选分子，再与研究者和实验合作改进结果。我们关注算法如何支持早期发现，而不只关注筛选数量。具体提速幅度、完整研发收益和患者价值，仍需要比较与后续研究。**
+ 
+ 我们保留前沿感，但不靠夸大获得它。内容的深度来自解释每一步为什么有用，以及证据到底支持到哪里。
+ 
+--- 20261003/内容资料包.md
++++ 20261007/内容资料包.md
+@@ -4,7 +4,7 @@
+ 
+ 这份资料用于 SCIE1007 的 **Computer-aided drug discovery and its benefits** 主题。我们只研究一个疾病和一个主案例：肝细胞癌，以及 Ren 等人在 2023 年发表的 CDK20 候选分子发现研究。内容不包含展示时间、成员分工、患者诊断或工业制药安排。
+ 
+-**核心问题：AI 辅助计算如何提高肝癌早期候选分子的发现效率？现有研究展示了哪些收益，又有哪些尚未得到证明？**
++**核心问题：AI怎样预测结构、提出有希望的肝癌候选分子？CDK20案例的实验结果支持哪些早期发现收益？**
+ 
+ 当前证据支持的结论是：这项研究将疾病数据分析、预测结构、生成式分子设计、计算筛选和真实实验连接起来，较快获得了早期命中物，并进行了后续优化。它展示了流程的可行性，但没有设置同任务、同资源的非 AI 发现流程作为对照，因此不能据此确定 AI 的提速倍数。
+ 
+@@ -212,9 +212,9 @@
+ 
+ ### 研究问题
+ 
+-AI 辅助计算如何提高肝癌早期候选分子的发现效率？现有研究展示了哪些收益，又有哪些尚未得到证明？
+-
+-How can AI-assisted computational methods improve the efficiency of early-stage molecule discovery for hepatocellular carcinoma, and which benefits are supported by the CDK20 case study?
++AI怎样预测结构、提出有希望的肝癌候选分子？CDK20案例的实验结果支持哪些早期发现收益？
++
++How do AI-assisted structure prediction and molecular design support early molecule discovery for hepatocellular carcinoma, and which benefits do the CDK20 experiments support?
+ 
+ ### 研究目标
+ 
+--- 20261003/Tutorial1_答案参考.md
++++ 20261007/Tutorial1_答案参考.md
+@@ -10,11 +10,11 @@
+ 
+ ## 2 更具体的研究问题
+ 
+-How can AI-assisted computational methods support early-stage molecule discovery for hepatocellular carcinoma, and which benefits are supported by the CDK20 case study?
++How do AI-assisted structure prediction and molecular design support early molecule discovery for hepatocellular carcinoma, and which benefits do the CDK20 experiments support?
+ 
+ ## 3 两个研究目标
+ 
+-i. Explain how target selection, predicted protein structures, molecule generation, computational evaluation and laboratory experiments work together in the CDK20 case.
++i. Explain how AI-assisted protein structure prediction and molecular design connect to computational evaluation, researcher decisions and experimental validation in the CDK20 case.
+ 
+ ii. Evaluate the reported time and experimental results, and distinguish demonstrated early-stage outcomes from unmeasured efficiency gains and potential patient benefits.
+ 
+--- 20261003/阅读说明.md
++++ 20261007/阅读说明.md
+@@ -1,4 +1,8 @@
+ # 本轮完整内容准备的阅读说明
++
++## 本轮调整
++
++2026年10月7日：保留HCC与CDK20案例，将重点明确为AI辅助结构预测和分子设计，而不只是筛选。实验用于判断计算建议是否成立；节省时间是要评价的收益，不预设提速倍数。主手册与Tutorial研究问题已同步。旧的一页讨论稿保留作历史记录。
+ 
+ ## 最先读什么
+ 

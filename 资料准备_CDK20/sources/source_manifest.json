@@ -1,0 +1,67 @@
+[
+  {
+    "file": "D:\\。hkbu\\molecular science\\资料准备_CDK20\\sources\\AlphaFold_2021_fulltext.xml",
+    "bytes": 177643,
+    "sha256": "a93693b00ee4ba41da6bc50f04712a66aa1aa2184d3a85b4b68ec7a35757c028"
+  },
+  {
+    "file": "D:\\。hkbu\\molecular science\\资料准备_CDK20\\sources\\Bender_2026_Crossref_metadata.json",
+    "bytes": 104373,
+    "sha256": "4239c6b8487cdad15997b6dcb667534bede1506272a5224b44a593d93d7cafc7"
+  },
+  {
+    "file": "D:\\。hkbu\\molecular science\\资料准备_CDK20\\sources\\Chemistry42_2023_fulltext.xml",
+    "bytes": 77862,
+    "sha256": "48ccd8bcdff75795c0a80bcc5fb4115681d754a063bdc1d7f5b9dffc22309f41"
+  },
+  {
+    "file": "D:\\。hkbu\\molecular science\\资料准备_CDK20\\sources\\Feng_2011_CCRK_fulltext.html",
+    "bytes": 210178,
+    "sha256": "26d9718755a164ad58b092f46dc87bd3fd8ed5b4d8aa89fb0cbedc85aff21713"
+  },
+  {
+    "file": "D:\\。hkbu\\molecular science\\资料准备_CDK20\\sources\\Feng_2011_CCRK_text.txt",
+    "bytes": 89257,
+    "sha256": "b1dd5e7e7727d1709c6cbcf581e950ff2f5660db8111af47feb49406d393c98b"
+  },
+  {
+    "file": "D:\\。hkbu\\molecular science\\资料准备_CDK20\\sources\\input_hashes_before.json",
+    "bytes": 443,
+    "sha256": "a43f5e7f51627c3a9d451d71f1882ef9a3144d8929893d5156510ddac8e90546"
+  },
+  {
+    "file": "D:\\。hkbu\\molecular science\\资料准备_CDK20\\sources\\Lengauer_2007_chapter1_text.txt",
+    "bytes": 63450,
+    "sha256": "023742b6986edad1312db6fc326dc128c3a82161685ec8bf76ff549e9d8aef0a"
+  },
+  {
+    "file": "D:\\。hkbu\\molecular science\\资料准备_CDK20\\sources\\Lengauer_2007_chapter_Crossref_metadata.json",
+    "bytes": 4025,
+    "sha256": "b6fb48bdbe1a271edf3f7f02352c77903544e35a0347e2fb9a9675a530558921"
+  },
+  {
+    "file": "D:\\。hkbu\\molecular science\\资料准备_CDK20\\sources\\Ren_2023_CDK20_fulltext.xml",
+    "bytes": 110132,
+    "sha256": "b4e6abc00233d49ac6faa382e4eaafa65e03052842455cfcb033943d9ba73500"
+  },
+  {
+    "file": "D:\\。hkbu\\molecular science\\资料准备_CDK20\\sources\\SC-014-D2SC05709C-s001.pdf",
+    "bytes": 690511,
+    "sha256": "22e928d169c2856a9183a201a96c46cd7d6134bee1fbb9ebb9bfcab56748d13f"
+  },
+  {
+    "file": "D:\\。hkbu\\molecular science\\资料准备_CDK20\\sources\\Wiley_book_sample_3527312781.pdf",
+    "bytes": 12678514,
+    "sha256": "e1efa89c3c8e95e66127e27c66ad97f3299687fe402c22d8717feb4c2aada38b"
+  },
+  {
+    "file": "D:\\。hkbu\\molecular science\\资料准备_CDK20\\sources\\正文定位索引.txt",
+    "bytes": 3361,
+    "sha256": "10ab819c7babe749727d5d35a7f36efc2027a4a15195369c9f2fcec8ea9f49b2"
+  },
+  {
+    "file": "D:\\。hkbu\\molecular science\\资料准备_CDK20\\sources\\补充材料页索引.json",
+    "bytes": 1468,
+    "sha256": "84cf1fca47efdafe7138ff385a721edbef221593e533296562d654de40723859"
+  }
+]
