@@ -209,10 +209,10 @@ def guides(d, member=None):
     para(d, "拍摄和录音分开做：这次只管\"演\"，声音之后单独录。", size=10, italic=True)
     for g in SHOOT:
         d.add_paragraph(g, style="List Bullet")
-    heading(d, "道具（不用买）", 1)
+    heading(d, "道具（不用准备）", 1)
     for g in PROPS:
         d.add_paragraph(g, style="List Bullet")
-    heading(d, "对话段：尽量坐在一起拍", 1)
+    heading(d, "对话段：各拍各的，后期剪到一起", 1)
     for g in TOGETHER:
         d.add_paragraph(g)
     heading(d, "空镜（每人拍一点，剪辑时垫用）", 1)
@@ -223,7 +223,7 @@ def guides(d, member=None):
         d.add_paragraph(g, style="List Bullet")
     ids = [b for b in order if spoken(b) and mode(b) == "出镜" and (member is None or who(b) == member)]
     heading(d, "出镜句的动作指导", 1)
-    para(d, "出镜时你的画面是一张暖色的“照片卡”，占半屏，另一半是黑底墨线图示（后期做，你不用管）。标【道具】的用手边的东西，标【后期】的是我画上去的。知道旁边会出现什么，可以帮你掌握说话的节奏和手势方向。",
+    para(d, "出镜时你的画面是一张暖色的“照片卡”，占半屏，另一半是黑底墨线图示（后期做，你不用管）。标【后期】的是我画上去的，你只要做手势。知道旁边会出现什么，可以帮你掌握说话的节奏和手势方向。",
          size=10, italic=True)
     t = d.add_table(rows=1, cols=5)
     t.style = "Table Grid"

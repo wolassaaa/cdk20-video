@@ -106,7 +106,7 @@ All time codes use the conservative estimate. Re-time everything from the record
 
 ## How to read this script
 
-- **ON-CAM** = talking head, warm and soft: seated at a desk, natural colour graded warm, a warm lamp glowing out of focus behind, eye level, medium close-up, every line 19 words or fewer. The machine side ([TD], [3D], [2D], cyan) stays cold and hard; that contrast is the film's look. On screen the footage sits as a paper-edged photo card inside the ink-black world. Conversation pairs (1-05/06/07, 4-04/05, 4-11/12, 5-05/06, 6-04/05, 8-05/06) are filmed side by side in one shot when the team can meet, otherwise separately and cut together. Props are only free everyday things (a key, a phone, paper, scissors); everything else is an ink prop drawn onto the hand in post. Acting notes for every ON-CAM line are in `oncam_direction_v33.py`.
+- **ON-CAM** = talking head, warm and soft: seated at a desk, natural colour graded warm, a warm lamp glowing out of focus behind, eye level, medium close-up, every line 19 words or fewer. The machine side ([TD], [3D], [2D], cyan) stays cold and hard; that contrast is the film's look. On screen the footage sits as a paper-edged photo card inside the ink-black world. Every member films alone on a phone; conversation pairs (1-05/06/07, 4-04/05, 4-11/12, 5-05/06, 6-04/05, 8-05/06) are cut together from separate takes with matching eyelines. No props are needed: every prop is ink drawn onto the hand in post. Acting notes for every ON-CAM line are in `oncam_direction_v33.py`.
 - **VO** = voice-over under visuals, spoken by the same member. No person is on screen.
 - **MUSIC-ONLY WINDOW** = no narration; the music comes up and the picture carries the peak.
 - **Voice.** Speak it like a channel host, not a reader:
@@ -226,7 +226,7 @@ Every member stays at 3.5 minutes or more on both estimates. C keeps both turnin
 
 > Like, ten-to-seventeen-years hard.
 
-- Visual: [CAM] C, in the two-shot with B and D; her hand pulls out an ink "10-17 years" timeline.
+- Visual: [CAM] C; her hand pulls out an ink "10-17 years" timeline.
 - Source: W23 p.1
 
 **1-08 · 01:00–01:16 · C · VO** (37 words)
@@ -291,7 +291,7 @@ Every member stays at 3.5 minutes or more on both estimates. C keeps both turnin
 
 > We set ourselves two objectives.
 
-- Visual: [CAM] C writes "1" and "2" on a sheet of paper; the ink numerals echo beside the card.
+- Visual: [CAM] C holds up two fingers; ink numerals "1" and "2" appear beside the card.
 - Source: Tutorial 1 worksheet
 
 **2-05 · 03:13–03:28 · C · VO** (24 words)
@@ -332,7 +332,7 @@ Every member stays at 3.5 minutes or more on both estimates. C keeps both turnin
 
 > Okay. To get this, picture a lock and a key.
 
-- Visual: [CAM] D holds up a real key; an ink lock sketches itself beside it (drawn in post).
+- Visual: [CAM] D raises a hand as if holding a key; an ink key and lock sketch themselves beside it (post).
 - Source: L07 p.12
 
 **3-02 · 04:47–04:59 · D · VO** (31 words)
@@ -425,14 +425,14 @@ Every member stays at 3.5 minutes or more on both estimates. C keeps both turnin
 
 > So what did they do?
 
-- Visual: [CAM] C, asking B (two-shot, or cut as a conversation).
+- Visual: [CAM] C, looking off to one side as if asking B (cut as a conversation).
 - Source: -
 
 **4-05 · 08:20–08:25 · B · ON-CAM** (15 words)
 
 > They cut the tail off. The AI made the guess. A human caught the problem.
 
-- Visual: [CAM] B snips the end off a paper strip with real scissors; an ink snip mark flashes at the frame edge.
+- Visual: [CAM] B mimes scissors with two fingers; ink scissors snip and the tail drops (post).
 - Source: R23 Fig. 4A text (residues 1-302 kept)
 
 **4-06 · 08:25–08:43 · A · VO** (42 words)
@@ -479,7 +479,7 @@ Every member stays at 3.5 minutes or more on both estimates. C keeps both turnin
 
 > Wait. So the computer picked the winners?
 
-- Visual: [CAM] D, eyebrows up, interrupting A (two-shot, or cut as a conversation).
+- Visual: [CAM] D, eyebrows up, as if interrupting A (cut as a conversation).
 - Source: -
 
 **4-12 · 10:17–10:23 · A · ON-CAM** (15 words)
@@ -506,7 +506,7 @@ Every member stays at 3.5 minutes or more on both estimates. C keeps both turnin
 
 > Six of them barely held on. But one stood out. Its name? 001.
 
-- Visual: [CAM] C flips over a sheet with a handwritten "001".
+- Visual: [CAM] C holds up one finger; ink "001" is written beside the card.
 - Source: R23 Fig. 5
 
 **5-03 · 10:48–11:02 · C · VO** (32 words)
@@ -527,14 +527,14 @@ Every member stays at 3.5 minutes or more on both estimates. C keeps both turnin
 
 > The key went into the lock. But it barely turned.
 
-- Visual: [CAM] C mimes turning her key, which stops halfway; an ink lock is drawn around the hand in post; music tape-stops under the line.
+- Visual: [CAM] C mimes turning a key, which stops halfway; an ink lock is drawn around the hand in post; music tape-stops under the line.
 - Source: E15
 
 **5-06 · 11:30–11:33 · B · ON-CAM** (8 words)
 
 > So was that it? Back to square one?
 
-- Visual: [CAM] B, quietly, asking C (two-shot with 5-05, or cut as a conversation).
+- Visual: [CAM] B, quietly, as if asking C (cut as a conversation).
 - Source: -
 
 **5-07 · 11:33–11:53 · C · VO** (48 words)
@@ -555,7 +555,7 @@ Every member stays at 3.5 minutes or more on both estimates. C keeps both turnin
 
 > This time, the key turned.
 
-- Visual: [CAM] C turns the same key all the way; the ink lock lights up; one empty beat, then music hits full level into W4.
+- Visual: [CAM] C mimes turning the key all the way; the ink lock lights up; one empty beat, then music hits full level into W4.
 - Source: E20
 
 **W4 · 12:10–12:18 · MUSIC-ONLY WINDOW** (8 s, no narration)
@@ -608,7 +608,7 @@ Every member stays at 3.5 minutes or more on both estimates. C keeps both turnin
 
 > Thirteen. That's honestly wild.
 
-- Visual: [CAM] B, a short laugh of disbelief, reacting to D (two-shot, or cut as a conversation).
+- Visual: [CAM] B, a short laugh of disbelief, as if reacting to D (cut as a conversation).
 - Source: R23
 
 **6-06 · 13:31–13:44 · D · VO** (27 words)
@@ -670,7 +670,7 @@ Every member stays at 3.5 minutes or more on both estimates. C keeps both turnin
 
 > So, what should happen next? We'd suggest three things.
 
-- Visual: [CAM] A writes 1, 2, 3 in a notebook; the ink numerals echo beside the card.
+- Visual: [CAM] A holds up three fingers; ink numerals 1-3 appear beside the card.
 - Source: -
 
 **7-02 · 15:18–15:37 · A · VO** (43 words)
@@ -732,7 +732,7 @@ Every member stays at 3.5 minutes or more on both estimates. C keeps both turnin
 
 > So next time you see a headline like 'AI discovers a cancer drug'...
 
-- Visual: [CAM] B holds up their own phone; in post the screen becomes an ink headline bar (no real outlet's branding).
+- Visual: [CAM] B holds up a hand as if showing a phone; in post an ink phone appears with an ink headline bar (no real outlet's branding).
 - Source: T2 worksheet Q5
 
 **8-06 · 16:56–17:03 · D · ON-CAM** (14 words)
@@ -746,7 +746,7 @@ Every member stays at 3.5 minutes or more on both estimates. C keeps both turnin
 
 > AI didn't replace the scientists. It gave them trial and error at light speed. Thanks for watching.
 
-- Visual: [CAM] A → all four seated together at the desk, smiling or waving at the camera (5 s; if the team cannot meet, a 2x2 grid of four separate cards) → W5.
+- Visual: [CAM] A → 2x2 grid of four separate cards, each member smiling or waving (5 s each, shot alone) → W5.
 - Source: -
 
 **W5 · 17:10–17:43 · MUSIC-ONLY WINDOW** (33 s, no narration)
