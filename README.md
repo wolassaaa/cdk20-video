@@ -29,6 +29,7 @@
 - 剧本 v3.3 定稿中；TD 第一轮设计图里 02（红细胞特写）和 03（墨线流线）通过。
 - "岩浆流出→拉远见肝"转场试了 5 轮，导演决定先搁置，以后从"叶脉里液体流过"的思路重做。
 - 选曲：导演偏好 The Weeknd、NewJeans《Supernatural》前半、Kendrick Lamar《luther》、Kate Bush《Running Up That Hill》、Hearts2Hearts《RUDE!》；"freezing"、"2worlds" 待确认是哪首。
+- 出镜风格改成"人暖、机器冷"：台词不动；出镜改为坐在桌前，暖色自然光，身后一盏台灯；对话段尽量同框；道具只用手边免费的东西，其余是后期画上去的墨线道具。已更新出镜指导 `oncam_direction_v33.py`、剧本 [CAM] 备注和组员分稿。
 - 项目已同步到 GitHub。这份 README 是各个 AI 之间的交接本，每做完一件事就更新这一段。
 
 ### 下一步

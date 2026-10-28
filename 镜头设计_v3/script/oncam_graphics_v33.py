@@ -1,5 +1,5 @@
 """Motion graphics beside the speaker for every ON-CAM line of script v3.3 (the 'not a dry talking head' layer).
-Keys are beat IDs; values: (图示, 出现时机). The speaker's paper card fills one half of the frame (A and C on the left,
+Keys are beat IDs; values: (图示, 出现时机). The speaker's warm, paper-edged photo card fills one half of the frame (A and C on the left,
 B and D on the right); the graphic lives in the other half, hand-drawn ink + data type, drawn on at the keyword.
 Imported by build_member_docs.py.
 """

@@ -10,7 +10,7 @@ from docx.oxml.ns import qn
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 import sys; sys.path.insert(0, HERE)
-from oncam_direction_v33 import DIRECTION, SHOOT, BROLL, RECORD
+from oncam_direction_v33 import DIRECTION, SHOOT, BROLL, RECORD, PROPS, TOGETHER
 from oncam_graphics_v33 import GRAPHICS
 OUT = os.path.join(HERE, "分稿")
 os.makedirs(OUT, exist_ok=True)
@@ -126,7 +126,7 @@ ROLE = {
 
 GENERAL = [
     "语速基准：画外音每分钟约 130 个英文单词（每秒 2 个多一点），出镜句稍慢，约 115。表格里每句标了「约几秒」，录的时候差 10% 以内都没问题，最后以真实录音重新卡时间。",
-    "出镜句：对着镜头，像在跟一个朋友解释一件很酷的事。每句拍 3 遍，选最自然的那遍。出镜句都在 19 个词以内，可以背下来。",
+    "出镜句：坐着，对着镜头，像在跟坐在对面的朋友聊天。每句拍 3 遍，选最自然的那遍。出镜句都在 19 个词以内，可以背下来。",
     "画外音：在安静的房间，用同一个麦克风录，嘴离麦克风约一拳远。",
     "停顿比速度更重要：句号停一下，问号后停一拍，\"But\" 前面停一下。",
     "情绪：这是一个有起伏的故事，不是读报告。前面有悬念，中间有失落和翻转，最后有答案。",
@@ -209,12 +209,21 @@ def guides(d, member=None):
     para(d, "拍摄和录音分开做：这次只管\"演\"，声音之后单独录。", size=10, italic=True)
     for g in SHOOT:
         d.add_paragraph(g, style="List Bullet")
+    heading(d, "道具（不用买）", 1)
+    for g in PROPS:
+        d.add_paragraph(g, style="List Bullet")
+    heading(d, "对话段：尽量坐在一起拍", 1)
+    for g in TOGETHER:
+        d.add_paragraph(g)
+    heading(d, "空镜（每人拍一点，剪辑时垫用）", 1)
+    for g in BROLL:
+        d.add_paragraph(g, style="List Bullet")
     heading(d, "录音说明（之后单独录声音）", 1)
     for g in RECORD:
         d.add_paragraph(g, style="List Bullet")
     ids = [b for b in order if spoken(b) and mode(b) == "出镜" and (member is None or who(b) == member)]
     heading(d, "出镜句的动作指导", 1)
-    para(d, "出镜时你的画面占半屏，另一半会弹出图示（后期做，你不用管）。知道旁边会出现什么，可以帮你掌握说话的节奏和手势方向。",
+    para(d, "出镜时你的画面是一张暖色的“照片卡”，占半屏，另一半是黑底墨线图示（后期做，你不用管）。标【道具】的用手边的东西，标【后期】的是我画上去的。知道旁边会出现什么，可以帮你掌握说话的节奏和手势方向。",
          size=10, italic=True)
     t = d.add_table(rows=1, cols=5)
     t.style = "Table Grid"
