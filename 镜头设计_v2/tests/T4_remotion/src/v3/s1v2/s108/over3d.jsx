@@ -6,21 +6,38 @@ import ANCH from "./anch.json";
 const Head = ({children, y = 96, color = P.ink}) => <MText x={70} y={y} size={15} opacity={0.65} ls={4} color={color}>{children}</MText>;
 const Fail = ({x = 1850, y = 1000, color = P.red, anchor = "end"}) => <GText x={x} y={y} size={30} weight={600} anchor={anchor} color={color}>Any step can fail.</GText>;
 
-/* 1-09 · neon metro on a black wall */
-export const RoadNeon = ({lit = 6}) => {
+/* 1-09 · neon metro on a black wall. flag: shows how a running "we are here" tag sits on the map */
+export const RoadNeon = ({lit = 6, flag = 0}) => {
   const A = ANCH.neon;
+  const k = (A[3][1] - A[0][1]) / 3.7; // px per scene unit (top row z=3.0, bottom row z=-0.7)
+  const drops = [34, 17, 8, 4, 3, 1];
+  const plate = flag ? `plates/neon_lit${lit}.png` : lit >= 6 ? "plates/neon_full.png" : `plates/neon_lit${lit}.png`;
   return <Print grain={0.17} band={0.05}>
-    <Plate src={lit >= 6 ? "plates/neon_full.png" : "plates/neon_lit4.png"}/>
+    <Plate src={plate}/>
     <Svg>
       {A.map(([x, y], i) => {
-        const top = i < 3, on = i < lit, sz = i === 5 ? 44 : 36;
-        const ty = top ? y - 70 : y + 92;
-        return <g key={i} opacity={on ? 1 : 0.28}>
-          <MText x={x} y={top ? ty - sz - 6 : ty - sz - 8} size={15} anchor="middle" color={on ? P.red : P.ink}>{ST[i].n}</MText>
-          <GText x={x} y={ty} size={sz} anchor="middle" lh={1.0}>{top ? ST[i].name : ST[i].short}</GText>
-          {ST[i].sub ? <MText x={x} y={ty + (top ? 30 : sz * 2 + 2)} size={13} anchor="middle" weight={400} ls={1} opacity={0.6}>{ST[i].sub}</MText> : null}
+        const on = i < lit, top = i < 3, sz = i === 5 ? 40 : top ? 36 : 32;
+        const two = !top && ST[i].short.includes(String.fromCharCode(10));
+        const ty = y - 62 - (two ? sz : 0);
+        const n = i === 0 ? 34 : drops[i], per = i === 0 ? 17 : 9;
+        const yb = y + (0.35 + 0.3 + Math.min(n, per) * 0.25) * k + 26;
+        return <g key={i}>
+          <g opacity={on ? 1 : 0.28}>
+            <MText x={x} y={ty - sz - 6} size={15} anchor="middle" color={on ? P.red : P.ink}>{ST[i].n}</MText>
+            <GText x={x} y={ty} size={sz} anchor="middle" lh={1.0}>{top ? ST[i].name : ST[i].short}</GText>
+          </g>
+          {ST[i].sub && on && top ? <MText x={x} y={y - 34} size={12} anchor="middle" weight={400} ls={1} opacity={0.55}>{ST[i].sub}</MText> : null}
+          {on && !(flag && i === 0 && false) ? <MText x={x} y={yb} size={14} anchor="middle" color={i === 0 ? P.red : P.ink} opacity={0.75} ls={1}>{i === 0 ? "34 START" : "−" + drops[i]}</MText> : null}
         </g>;
       })}
+      {flag ? (() => {
+        const [x, y] = A[lit - 1];
+        return <g>
+          <circle cx={x} cy={y} r={34} fill="none" stroke={P.red} strokeWidth={3}/>
+          <path d={`M${x + 34},${y + 30} L${x + 52},${y + 46} H${x + 214} V${y + 84} H${x + 52} Z`} fill={P.red}/>
+          <MText x={x + 64} y={y + 71} size={15} weight={800} color={P.ink} ls={2}>WE ARE HERE</MText>
+        </g>;
+      })() : null}
       <Head>EVERY MEDICINE WALKS THE SAME ROAD</Head>
       {lit >= 6 ? <Fail/> : null}
       <Tag/>
@@ -95,5 +112,20 @@ export const Counter = () => <Print grain={0.2} band={0.05} blotch={0}>
     <MText x={70} y={96} size={15} ls={4} opacity={0.7}>US$ · IT CAN COST ALMOST 2.8 BILLION US DOLLARS</MText>
     <MText x={70} y={1010} size={15} ls={4} opacity={0.7}>THE YEAR WE WERE BORN → ONLY READY NOW</MText>
     <Tag/>
+  </Svg>
+</Print>;
+
+/* 1-08 · fogged glass v2: one blue source, strokes clear and lit from behind; the single red stroke is the only red */
+export const FogBlueTime = () => <Print grain={0.16} band={0.04} blotch={0}>
+  <Plate src="plates/fogblue_time.png"/>
+  <Svg>
+    <MText x={70} y={1010} size={15} ls={4} opacity={0.75}>START THE SEARCH THE YEAR WE WERE BORN</MText>
+    <MText x={1850} y={1010} size={15} ls={4} opacity={0.75} anchor="end">IT CAN COST ALMOST 2.8 BILLION US DOLLARS</MText>
+  </Svg>
+</Print>;
+export const FogBlueTally = () => <Print grain={0.16} band={0.04} blotch={0}>
+  <Plate src="plates/fogblue_tally.png"/>
+  <Svg>
+    <MText x={70} y={1010} size={15} ls={4} opacity={0.75}>OF DRUGS TESTED IN PEOPLE, ONLY ABOUT ONE IN TEN REACHES THE MARKET</MText>
   </Svg>
 </Print>;

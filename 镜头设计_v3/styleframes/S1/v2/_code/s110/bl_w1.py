@@ -12,7 +12,7 @@ U.render_setup(scn, samples=A.samples, pct=A.pct, exposure=A.exp, bounces=16, vi
 look = A.look
 random.seed(A.seed)
 
-if look == "fog":
+if look in ("fog", "fog2"):
     # a fogged window, the title wiped by a finger; red and blue lights beyond, out of focus
     bpy.ops.mesh.primitive_plane_add(size=1, location=(0, 0, 0), rotation=(math.pi / 2, 0, 0))
     pane = bpy.context.active_object; pane.scale = (3.2, 1.8, 1)
@@ -34,6 +34,10 @@ if look == "fog":
     tl = nt.nodes.new("ShaderNodeBsdfTranslucent"); tl.inputs[0].default_value = U.hex2lin("#C9CCD6")
     fogmix = nt.nodes.new("ShaderNodeMixShader"); fogmix.inputs[0].default_value = 0.22
     nt.links.new(fogg.outputs[0], fogmix.inputs[1]); nt.links.new(tl.outputs[0], fogmix.inputs[2])
+    if look == "fog2":  # denser condensation: lets less light through, so the wiped letters glow by contrast
+        dk = nt.nodes.new("ShaderNodeBsdfDiffuse"); dk.inputs[0].default_value = U.hex2lin("#0C1022")
+        fm2 = nt.nodes.new("ShaderNodeMixShader"); fm2.inputs[0].default_value = 0.95
+        nt.links.new(fogmix.outputs[0], fm2.inputs[1]); nt.links.new(dk.outputs[0], fm2.inputs[2]); fogmix = fm2
     mx = nt.nodes.new("ShaderNodeMixShader"); nt.links.new(inv.outputs[0], mx.inputs[0])
     nt.links.new(clear.outputs[0], mx.inputs[1]); nt.links.new(fogmix.outputs[0], mx.inputs[2])
     nt.links.new(mx.outputs[0], out.inputs["Surface"])
@@ -45,30 +49,44 @@ if look == "fog":
         bpy.ops.mesh.primitive_uv_sphere_add(radius=r * 3.2 * 1.2, segments=24, ring_count=12, location=((u - 0.5) * 3.2, -0.002, (0.5 - v) * 1.8))
         o = bpy.context.active_object; o.scale.y = 0.45; U.assign(o, wat)
         for f in o.data.polygons: f.use_smooth = True
-    # the world beyond the window: bokeh lights
-    cols = [U.VERM] * 7 + [U.BLUE] * 16 + [U.INK] * 4
-    for k, c in enumerate(cols):
-        if c == U.VERM:
-            x = random.uniform(-6, -1); z = random.uniform(-3.2, -0.5)
-        else:
-            x = random.uniform(-1, 6); z = random.uniform(-1.5, 3.0)
-        y = random.uniform(4, 14)
-        bpy.ops.mesh.primitive_uv_sphere_add(radius=random.uniform(0.06, 0.22), location=(x * (y / 8), y, z * (y / 8)))
-        U.assign(bpy.context.active_object, U.emissive("b%d" % k, c, random.uniform(4, 14)))
-    # a long red strip light far behind (a corridor / ward light), and blue ambient
-    U.plane("strip", 1, (-1.8, 9, -0.9), rot=(math.pi / 2, 0, 0), m=U.emissive("stripm", U.VERM, 12), scale=(3.0, 0.08, 1))
-    U.light_panel("frontgraze", U.INK, 60, (-2.5, -1.2, 2.4), 1.5, look_at=(0, 0, 0))
-    U.light_panel("blueamb", U.BLUE, 150, (3, 8, 4), 8, look_at=(0, 0, 0))
+    if look == "fog":
+        # the world beyond the window: bokeh lights
+        cols = [U.VERM] * 7 + [U.BLUE] * 16 + [U.INK] * 4
+        for k, c in enumerate(cols):
+            if c == U.VERM:
+                x = random.uniform(-6, -1); z = random.uniform(-3.2, -0.5)
+            else:
+                x = random.uniform(-1, 6); z = random.uniform(-1.5, 3.0)
+            y = random.uniform(4, 14)
+            bpy.ops.mesh.primitive_uv_sphere_add(radius=random.uniform(0.06, 0.22), location=(x * (y / 8), y, z * (y / 8)))
+            U.assign(bpy.context.active_object, U.emissive("b%d" % k, c, random.uniform(4, 14)))
+        # a long red strip light far behind (a corridor / ward light), and blue ambient
+        U.plane("strip", 1, (-1.8, 9, -0.9), rot=(math.pi / 2, 0, 0), m=U.emissive("stripm", U.VERM, 12), scale=(3.0, 0.08, 1))
+        U.light_panel("frontgraze", U.INK, 60, (-2.5, -1.2, 2.4), 1.5, look_at=(0, 0, 0))
+        U.light_panel("blueamb", U.BLUE, 150, (3, 8, 4), 8, look_at=(0, 0, 0))
+    else:
+        # one light colour: a deep-blue light wall behind the glass (uneven, like a lit room), a crimson glow only behind the "?"
+        lw, nt2, out2 = U.mat("lightwall")
+        nz = nt2.nodes.new("ShaderNodeTexNoise"); nz.inputs["Scale"].default_value = 1.6; nz.inputs["Detail"].default_value = 2
+        mr = nt2.nodes.new("ShaderNodeMapRange"); mr.inputs[3].default_value = 1.4; mr.inputs[4].default_value = 3.6
+        nt2.links.new(nz.outputs["Fac"], mr.inputs[0])
+        em = nt2.nodes.new("ShaderNodeEmission"); em.inputs[0].default_value = U.hex2lin("#1430FF")
+        nt2.links.new(mr.outputs[0], em.inputs[1]); nt2.links.new(em.outputs[0], out2.inputs[0])
+        U.plane("wall", 1, (0, 2.5, 0), rot=(math.pi / 2, 0, 0), m=lw, scale=(9, 6, 1))
+        q = json.load(open(U.CODE + "fog_q.json")); k = (4.1 + 2.45) / 4.1
+        U.plane("qglow", 1, ((q["u"] - 0.5 - 0.028) * 3.2 * k, 2.45, (0.5 - q["v"]) * 1.8 * k), rot=(math.pi / 2, 0, 0), m=U.emissive("qg", "#E0102A", 2.2), scale=(0.49, 1.0, 1))
+        U.light_panel("frontgraze", U.INK, 25, (-2.5, -1.2, 2.4), 1.5, look_at=(0, 0, 0))
     cam = U.camera((0, -4.1, 0), (0, 0, 0), lens=47, fstop=A.fstop, focus=4.1)
 
 elif look in ("splash", "rain"):
     # vermilion ink splats onto the glass in front of the title; its drips run down and turn into rain (into S2)
-    title_m = U.emissive("title", U.INK, 1.4)
+    title_m = U.emissive("title", U.INK, 1.0)
     U.text3d("WORTH", "ArchivoBlack-Regular.ttf", size=1.25, loc=(0, 1.0, 0.62), m=title_m, spacing=0.96)
-    U.text3d("TESTING?", "ArchivoBlack-Regular.ttf", size=1.25, loc=(0, 1.0, -0.55), m=title_m, spacing=0.96)
+    t2 = U.text3d("TESTING?", "ArchivoBlack-Regular.ttf", size=1.25, loc=(0, 1.0, -0.55), m=title_m, spacing=0.96)
+    t2.data.materials.append(U.emissive("qmark", "#E0102A", 1.0)); t2.data.body_format[7].material_index = 1
     mb = bpy.data.metaballs.new("ink"); mb.resolution = 0.016; mb.render_resolution = 0.009; mb.threshold = 0.6
     mo = bpy.data.objects.new("ink", mb); scn.collection.objects.link(mo)
-    inkm, nt, b, out = U.principled("inkliquid", color="#E0102A", rough=0.04, coat=0.8)
+    inkm, nt, b, out = U.principled("inkliquid", color="#0B1E9E", rough=0.45, coat=0.15)  # matte Indian ink, deep blue
     mb.materials.append(inkm)
     FLAT = 0.22
     def ball(p, r, sx=1.0, sz=1.0):
@@ -107,10 +125,10 @@ elif look in ("splash", "rain"):
         ball(Vector((x, 0, z0 - L - 0.03)), rr * 1.5, 1.0, 1.4)
     if t > 0:
         # rain: fine streaks falling in the space between the glass and the title
-        rainm = U.emissive("rain", "#AFC0FF", 1.1)
-        for k in range(260):
+        rainm = U.emissive("rain", "#C9D4FF", 0.9)
+        for k in range(420):
             p = Vector((random.uniform(-4.2, 4.2), random.uniform(-1.0, 3.0), random.uniform(-2.8, 2.8)))
-            bpy.ops.mesh.primitive_cylinder_add(radius=random.uniform(0.006, 0.012), depth=random.uniform(0.3, 0.9), vertices=8, location=p)
+            bpy.ops.mesh.primitive_cylinder_add(radius=random.uniform(0.0025, 0.005), depth=random.uniform(0.35, 1.1), vertices=6, location=p)
             U.assign(bpy.context.active_object, rainm)
     U.light_panel("key", U.INK, 520, (-1.0, -4, 3.5), 2.5, look_at=(1.5, 0, 0.8))
     U.light_panel("rimB", U.BLUE, 900, (3.5, 3, 2.5), 2.5, look_at=(0.5, 0, 0.3))

@@ -60,10 +60,10 @@ def drop_to(o, z, s=1.0, xy=(0, 0)):
 
 
 if look == "glass":
-    rib = place(G.ribbon(res, width_mul=1.1))
-    U.assign(rib, glass_mat(disp=0.6))
+    rib = place(G.ribbon(res, coil_r=0.6, helix_w=1.6, sheet_w=1.45, thick=0.45, arrow=1.7))
+    U.assign(rib, glass_mat(disp=0.12))
     # black room; behind the protein: one thin vermilion light slit and a low blue halo (Turrell-like aperture)
-    U.plane("slit", 1, (0.35, 3.2, 0), rot=(math.pi / 2, 0, 0), m=U.emissive("slitm", U.VERM, 40), scale=(0.035, 9, 1))
+    U.plane("slit", 1, (0.35, 3.2, 0), rot=(math.pi / 2, 0, 0), m=U.emissive("slitm", U.VERM, 12), scale=(0.035, 9, 1))
     halo, nt, out = U.mat("halo")
     tc = nt.nodes.new("ShaderNodeTexCoord"); grad = nt.nodes.new("ShaderNodeTexGradient"); grad.gradient_type = "SPHERICAL"
     mp = nt.nodes.new("ShaderNodeMapping"); mp.inputs["Scale"].default_value = (0.42, 0.6, 1)
@@ -74,10 +74,11 @@ if look == "glass":
     nt.links.new(grad.outputs[1], pw.inputs[0]); nt.links.new(pw.outputs[0], sc.inputs[0]); nt.links.new(sc.outputs[0], em.inputs[1])
     nt.links.new(em.outputs[0], out.inputs[0])
     U.plane("halo", 30, (0.35, 6, 0.0), rot=(math.pi / 2, 0, 0), m=halo)
-    U.plane("stripL", 1, (-4.5, 1.5, 0.5), rot=(math.pi / 2, 0, math.radians(-60)), m=U.emissive("eL", U.VERM, 3), scale=(0.25, 6, 1)).visible_camera = False
+    U.plane("stripL", 1, (-4.5, 1.5, 0.5), rot=(math.pi / 2, 0, math.radians(-60)), m=U.emissive("eL", U.INK, 5), scale=(0.25, 6, 1)).visible_camera = False
     U.plane("stripR", 1, (4.5, 1.2, 0.3), rot=(math.pi / 2, 0, math.radians(60)), m=U.emissive("eR", U.BLUE, 16), scale=(0.25, 6, 1)).visible_camera = False
     U.plane("top", 1, (0, -1.0, 4.5), m=U.emissive("eT", U.INK, 7), scale=(5, 0.6, 1)).visible_camera = False
-    U.plane("side", 1, (-5, -3, 1), rot=(math.pi / 2, 0, math.radians(-50)), m=U.emissive("eS", U.INK, 3), scale=(1.5, 4, 1)).visible_camera = False
+    U.plane("side", 1, (-5, -3, 1), rot=(math.pi / 2, 0, math.radians(-50)), m=U.emissive("eS", U.INK, 6), scale=(1.5, 4, 1)).visible_camera = False
+    U.plane("side2", 1, (5, -3, 0.5), rot=(math.pi / 2, 0, math.radians(50)), m=U.emissive("eS2", U.INK, 4), scale=(1.5, 4, 1)).visible_camera = False
 
 elif look == "xray":
     # radiograph: edges glow bone-white (facing ratio), body nearly transparent; faint blue film base

@@ -13,4 +13,6 @@ Source script: `script_v3.3.md` 1-11 (Visual: Hong Kong coastline, a vermilion v
 
 Code: `_code/s110/prep_map.py` (stitches the OSM ways into land rings → `hk_land.json`), `bl_map.py` (writes the screen positions of the labels to JSON), `render_all.sh`. Remotion: `src/v3/s1v2/s110/F111.jsx`. Data note: `assets/maps/SOURCE.md`.
 
-Caveats: the place points are approximate (from public maps). The bbox also includes Shenzhen land at the top, because the coastline has no border.
+Fix pass: on every map, land north of the HK boundary (Shenzhen, plus the Dapeng peninsula) is dimmed with a soft black veil of about 60%. The boundary line is approximate and is not drawn. In opt2 the coast wire uses a simplified coast: narrow inlets and river channels (the Shing Mun River, which read as rails) are cut out by `prep_map.py` → `rings_simple`, and the exposure is lifted.
+
+Caveat: the place points and the boundary are approximate (from public maps).

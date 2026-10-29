@@ -83,7 +83,7 @@ const O2 = ({part, v}) => <AbsoluteFill style={{background: K.bg}}>
     {part === "c" ? <Unmet x={1820} y={120} size={100}/> : null}
     <Tags illustrative={part !== "a"} source={part === "b" ? SRC_SV : part === "c" ? SRC_R23 : null} opt="opt2 pigment-field"/>
   </Svg>
-  <Print grain={0.2} dark={0.25} band={0.05} vignette={0.3}/>
+  <Print grain={0.12} dark={0.25} band={0.05} vignette={0.3}/>
 </AbsoluteFill>;
 
 // ---------------------------------------------------------------- opt3 ten-beams (Blender volumetrics: ten shafts of light in haze)

@@ -33,9 +33,9 @@ def land_curve(name, extrude, bevel=0.0, z=0.0, clip=None):
     return o
 
 
-def coast_wire(name, radius, z=0.0, clip=None):
+def coast_wire(name, radius, z=0.0, clip=None, key="rings"):
     cu = bpy.data.curves.new(name, "CURVE"); cu.dimensions = "3D"; cu.bevel_depth = radius; cu.bevel_resolution = 2
-    for r in D["rings"]:
+    for r in D[key]:
         p = r["p"]
         if clip:
             xs = [q[0] * K for q in p]; ys = [q[1] * K for q in p]
@@ -105,7 +105,7 @@ elif look == "thread":
     felt, nt, b, out = U.principled("felt", color="#030303", rough=1.0)
     U.plane("felt", 400, (0, 0, 0), m=felt)
     clip = (-30, -20, 34, 22)
-    wire = coast_wire("coast", 0.03, z=0.03, clip=clip)
+    wire = coast_wire("coast", 0.03, z=0.03, clip=clip, key="rings_simple")
     wm, _, wb, _ = U.principled("wire", color=U.INK, rough=0.35)
     wire.data.materials.append(wm)
     ro, pts = route(0.045, z=0.05, lift=0.9, reveal=A.reveal)
@@ -150,5 +150,9 @@ scr = {}
 for k, p in list(poi.items()) + [("route_mid", Vector((sum(q[0] for q in D["route"]) / len(D["route"]) * K, sum(q[1] for q in D["route"]) / len(D["route"]) * K, 0)))]:
     v = world_to_camera_view(scn, co, p)
     scr[k] = [round(v.x * 1920, 1), round((1 - v.y) * 1080, 1)]
+scr["sz"] = []
+for q in D["sz"]:
+    v = world_to_camera_view(scn, co, Vector((q[0] * K, q[1] * K, 0)))
+    scr["sz"].append([round(v.x * 1920, 1), round((1 - v.y) * 1080, 1), round(v.z, 2)])
 json.dump(scr, open(A.out.replace(".png", ".json"), "w"))
 U.save(scn, A.out)

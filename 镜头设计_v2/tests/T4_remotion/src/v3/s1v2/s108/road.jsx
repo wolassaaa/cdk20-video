@@ -124,16 +124,17 @@ export const RoadType = ({lit = 6}) => {
 
 /* ------------------------------------------------------------------ 4. VESSEL + VALVES (Blender plate on Klein-blue table) */
 const VES_A = [[183, 724], [483, 537], [798, 444], [1098, 613], [1425, 568], [1714, 399]];
-const VES_OFF = [[40, 150], [-40, -150], [0, -170], [30, 170], [0, -170], [-10, 170]];
+const VES_R = [92, 72, 58, 46, 38, 30]; // valve ring radius on screen (approx.)
 export const RoadVessel = ({lit = 6}) => <Print grain={0.24} band={0.06} blotch={0.04} bg={P.deep}>
   <Plate src={lit >= 6 ? "plates/vessel_full.png" : "plates/vessel_lit4.png"}/>
   <Svg>
     {VES_A.map(([x, y], i) => {
-      const [dx, dy] = VES_OFF[i], tx = x + dx, ty = y + dy, up = dy < 0;
-      return <g key={i} opacity={dimOr(i, lit, 1, 0.35)}>
-        <line x1={x} y1={y + (up ? -40 : 40)} x2={tx} y2={ty + (up ? 16 : -46)} stroke={P.ink} strokeWidth={1.5} opacity={0.75}/>
-        <MText x={tx} y={up ? ty - 38 : ty - 20 + 30} size={15} anchor="middle" color={P.ink}>{ST[i].n}</MText>
-        <GText x={tx} y={up ? ty - 4 : ty + 52} size={32} anchor="middle">{ST[i].name}</GText>
+      const ly = 210, on = i < lit;
+      return <g key={i} opacity={on ? 1 : 0.4}>
+        <line x1={x} y1={ly + 22} x2={x} y2={y - VES_R[i] - 6} stroke={P.ink} strokeWidth={1.4} opacity={0.85}/>
+        <circle cx={x} cy={y - VES_R[i] - 6} r={4} fill={P.ink}/>
+        <MText x={x} y={ly - 40} size={15} anchor="middle" color={P.ink}>{ST[i].n}</MText>
+        <GText x={x} y={ly} size={32} anchor="middle">{ST[i].name}</GText>
       </g>;
     })}
     <MText x={70} y={1010} size={15} opacity={0.8} ls={4}>EVERY MEDICINE WALKS THE SAME ROAD</MText>

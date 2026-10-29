@@ -41,19 +41,32 @@ def principled(name, base, rough, trans=0.0, ior=1.45, coat=0.0, emit=None):
 
 
 glass = principled("glass", (1, 1, 1), 0.0, trans=1.0, ior=1.47)[0]
+
+
+def thin_glass():
+    """Beaker glass without refraction: transparent + Fresnel gloss, edges brighter. A refracting beaker acted as a
+    cylinder lens here (the liquid read as a dome), and a vitrine shot does not need the lens."""
+    m, nt, out = mat("thin_glass")
+    fr = nt.nodes.new("ShaderNodeFresnel"); fr.inputs["IOR"].default_value = 1.5
+    lw = nt.nodes.new("ShaderNodeLayerWeight"); lw.inputs["Blend"].default_value = 0.25
+    mx = nt.nodes.new("ShaderNodeMath"); mx.operation = "MAXIMUM"
+    nt.links.new(fr.outputs[0], mx.inputs[0]); nt.links.new(lw.outputs["Facing"], mx.inputs[1])
+    sc = nt.nodes.new("ShaderNodeMath"); sc.operation = "MULTIPLY"; sc.inputs[1].default_value = 0.32
+    nt.links.new(mx.outputs[0], sc.inputs[0])
+    tr = nt.nodes.new("ShaderNodeBsdfTransparent")
+    gl = nt.nodes.new("ShaderNodeBsdfGlossy"); gl.inputs["Roughness"].default_value = 0.02
+    mix = nt.nodes.new("ShaderNodeMixShader")
+    nt.links.new(sc.outputs[0], mix.inputs[0]); nt.links.new(tr.outputs[0], mix.inputs[1]); nt.links.new(gl.outputs[0], mix.inputs[2])
+    nt.links.new(mix.outputs[0], out.inputs["Surface"])
+    return m
 red_lacquer = principled("granule", (0.86, 0.006, 0.03), 0.28, coat=0.8)[0]
 ink = principled("ink", (0.9, 0.89, 0.86), 0.5, emit=((0.93, 0.92, 0.89), 0.6))[0]
 
 
 def red_liquid():
-    m, nt, out = principled("liquid", (1, 1, 1), 0.0, trans=1.0, ior=1.34)
-    va = nt.nodes.new("ShaderNodeVolumeAbsorption"); va.inputs["Color"].default_value = (1.0, 0.01, 0.06, 1); va.inputs["Density"].default_value = 5
-    vs = nt.nodes.new("ShaderNodeVolumeScatter"); vs.inputs["Color"].default_value = (1.0, 0.02, 0.07, 1); vs.inputs["Density"].default_value = 5
-    ve = nt.nodes.new("ShaderNodeEmission"); ve.inputs["Color"].default_value = (1.0, 0.004, 0.04, 1); ve.inputs["Strength"].default_value = 0.35
-    a1 = nt.nodes.new("ShaderNodeAddShader"); nt.links.new(va.outputs[0], a1.inputs[0]); nt.links.new(vs.outputs[0], a1.inputs[1])
-    a2 = nt.nodes.new("ShaderNodeAddShader"); nt.links.new(a1.outputs[0], a2.inputs[0]); nt.links.new(ve.outputs[0], a2.inputs[1])
-    nt.links.new(a2.outputs[0], out.inputs["Volume"])
-    return m
+    # an opaque, glossy crimson syrup with an even surface glow. (A volume emitter glows by thickness, which drew
+    # a bright dome in the middle of the cylinder, so the liquid is a surface.)
+    return principled("liquid", (0.86, 0.006, 0.03), 0.06, coat=1.0, emit=((1.0, 0.004, 0.04), 0.35))[0]
 
 
 def capsule_mesh(name, rad, half, nu=96, nv=32):
@@ -91,7 +104,7 @@ def glass_capsule(name, rad, half):
 
 
 # ---------------------------------------------------------------- the plinth: glossy black top, a soft front edge
-pl, nt, out = principled("plinth", (0.004, 0.004, 0.005), 0.06, coat=1.0)
+pl, nt, out = principled("plinth", (0.03, 0.03, 0.032), 0.35, coat=1.0)
 bpy.ops.mesh.primitive_cube_add(size=1, location=(0, 1.0, -0.5))
 plinth = bpy.context.active_object; plinth.scale = (9.0, 5.0, 1.0)
 bv = plinth.modifiers.new("bevel", "BEVEL"); bv.width = 0.02; bv.segments = 4
@@ -109,13 +122,13 @@ if A.obj == "beaker":
             a = math.atan2(v.co.y, v.co.x); k = 1.035 + 0.09 * math.exp(-(a / 0.22) ** 2)
             v.co.x *= k; v.co.y *= k
     bm.to_mesh(bk.data); bm.free()
-    for f in bk.data.polygons: f.use_smooth = True
+    for f in bk.data.polygons: f.use_smooth = abs(f.normal.z) < 0.5   # flat caps: a smoothed n-gon cap refracts like a dome
     s = bk.modifiers.new("solid", "SOLIDIFY"); s.thickness = WALL; s.offset = -1
-    bk.data.materials.append(glass)
+    bk.data.materials.append(thin_glass())
     lh = (HGT - WALL) * FILL
     bpy.ops.mesh.primitive_cylinder_add(vertices=128, radius=RAD - WALL - 0.002, depth=lh, location=(0, 0, WALL + lh / 2 + 0.001))
     lq = bpy.context.active_object; b2 = lq.modifiers.new("bevel", "BEVEL"); b2.width = 0.01; b2.segments = 4
-    for f in lq.data.polygons: f.use_smooth = True
+    for f in lq.data.polygons: f.use_smooth = abs(f.normal.z) < 0.5
     lq.data.materials.append(red_liquid())
     for i in range(1, 6):
         z = WALL + (HGT - WALL) * i / 6; w = 0.16 if i % 2 == 0 else 0.09
@@ -123,7 +136,7 @@ if A.obj == "beaker":
         bpy.ops.mesh.primitive_cube_add(size=1); t = bpy.context.active_object; t.scale = (w, 0.006, 0.011)
         t.location = (RAD * 1.002 * math.cos(ang), RAD * 1.002 * math.sin(ang), z); t.rotation_euler = (0, 0, ang + math.pi / 2)
         t.data.materials.append(ink)
-    focus = Vector((0, -0.45, 0.55)); aim = Vector((0, 0, 0.72)); dist, lens, height = 5.2, 85, 1.05
+    focus = Vector((0, -0.45, 0.55)); aim = Vector((0, 0, 0.72)); dist, lens, height = 6.6, 50, 0.75
 elif A.obj == "capsule":
     RAD, HALF = 0.42, 0.62
     root = bpy.data.objects.new("root", None); scn.collection.objects.link(root)
@@ -144,21 +157,21 @@ elif A.obj == "capsule":
         o = proto.copy(); o.location = (x, y, z); o.scale = (rr, rr, rr); o.parent = root; scn.collection.objects.link(o)
     bpy.data.objects.remove(proto)
     root.location = (0, 0, RAD); root.rotation_euler = (0, 0, math.radians(-28))
-    focus = Vector((0.2, -0.2, RAD)); aim = Vector((0, 0, RAD * 0.9)); dist, lens, height = 4.6, 85, 0.95
+    focus = Vector((0.2, -0.2, RAD)); aim = Vector((0, 0, RAD * 0.9)); dist, lens, height = 6.0, 50, 1.0
 else:  # row
-    RAD, HALF, N = 0.17, 0.26, 9
-    filled = {2, 6}
+    RAD, HALF, N = 0.17, 0.26, 11
+    filled = {3, 7}
     liq = red_lacquer
     for i in range(N):
-        x, y = -1.6 + i * 0.42, 0.9 - i * 0.38   # a diagonal row receding toward the back-left... toward the back-right
+        x, y = -1.2 + i * 0.30, -0.6 + i * 0.36   # a diagonal row receding toward the back-right
         o = glass_capsule(f"cap{i}", RAD, HALF); o.rotation_euler = (0, math.radians(90), 0); o.location = (x, y, HALF + RAD)
         if i in filled:
             fi = capsule_mesh(f"fill{i}", RAD * 0.86, HALF * 0.97); fi.data.materials.append(liq)
             fi.rotation_euler = (0, math.radians(90), 0); fi.location = (x, y, HALF + RAD)
-    focus = Vector((-1.6 + 2 * 0.42, 0.9 - 2 * 0.38, 0.4)); aim = Vector((0.1, -0.3, 0.42)); dist, lens, height = 5.0, 70, 0.75
+    focus = Vector((-1.2 + 3 * 0.30, -0.6 + 3 * 0.36, 0.4)); aim = Vector((0.2, 0.9, 0.42)); dist, lens, height = 5.6, 40, 1.0
 
 # ---------------------------------------------------------------- light: a pool from above, a cobalt rim, nothing else
-sp = bpy.data.lights.new("pool", "SPOT"); sp.energy = 900; sp.spot_size = math.radians(30); sp.spot_blend = 0.55
+sp = bpy.data.lights.new("pool", "SPOT"); sp.energy = 1400; sp.spot_size = math.radians(30); sp.spot_blend = 0.55
 sp.shadow_soft_size = 0.25; sp.color = (1.0, 0.99, 0.97)
 so = bpy.data.objects.new("pool", sp); scn.collection.objects.link(so)
 so.location = aim + Vector((0.4, 0.3, 4.2)); so.rotation_euler = (aim - so.location).to_track_quat("-Z", "Y").to_euler()
@@ -171,10 +184,15 @@ def panel(name, strength, w, h, loc, color, tgt):
     m, nt, out = mat(name); e = nt.nodes.new("ShaderNodeEmission")
     e.inputs["Color"].default_value = (*color, 1); e.inputs["Strength"].default_value = strength
     nt.links.new(e.outputs[0], out.inputs["Surface"]); o.data.materials.append(m)
+    # light linking: the rim panels light the object's edges but never the plinth, so they leave no bar in its reflection
+    rc = bpy.data.collections.new(name + "_recv")
+    rc.objects.link(plinth)
+    o.light_linking.receiver_collection = rc
+    rc.collection_objects[0].light_linking.link_state = "EXCLUDE"
 
 
-panel("rim", 40, 0.15, 2.6, tuple(aim + Vector((-2.3, 1.6, 0.6))), (0.0, 0.012, 1.0), aim)    # cobalt rim, back-left
-panel("rim2", 22, 0.12, 2.4, tuple(aim + Vector((2.4, 1.2, 0.5))), (1, 1, 1), aim)             # white edge line, back-right
+panel("rim", 45, 0.15, 2.6, tuple(aim + Vector((-2.3, 1.8, 0.6))), (0.0, 0.012, 1.0), aim)    # cobalt rim, back-left
+panel("rim2", 24, 0.12, 2.4, tuple(aim + Vector((2.4, 1.4, 0.5))), (1, 1, 1), aim)             # white edge line, back-right
 
 world = bpy.data.worlds.new("w"); scn.world = world; world.use_nodes = True
 world.node_tree.nodes["Background"].inputs["Color"].default_value = (0, 0, 0, 1)

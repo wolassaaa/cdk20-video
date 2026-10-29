@@ -8,7 +8,7 @@ import {Grain, Blotch} from "../../texture";
 export const GROT = loadGrot("normal", {weights: ["400", "600", "800", "900"], subsets: ["latin"]}).fontFamily;
 export {MONO, C, W, H};
 export const NB = String.fromCharCode(160);
-export const P = {bg: "#060606", ink: "#EDEBE4", red: "#FF3B1F", blue: "#1F3BFF", deep: "#0A1AFF", klein: "#002FA7", grey: "#3a3a38", dim: "rgba(237,235,228,0.22)"};
+export const P = {bg: "#060606", ink: "#EDEBE4", red: "#FF1A2E", blue: "#1F3BFF", deep: "#0A1AFF", klein: "#002FA7", grey: "#3a3a38", dim: "rgba(237,235,228,0.22)"};
 
 // the six stations (names follow script_v3.3 1-09 visual note)
 export const ST = [

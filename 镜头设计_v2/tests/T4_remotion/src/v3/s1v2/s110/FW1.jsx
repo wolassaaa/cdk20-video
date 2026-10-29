@@ -13,6 +13,16 @@ export const W1Fog = () => <AbsoluteFill style={{background: K.bg}}>
   <Finish grain={0.14} vignette={0.35}/>
 </AbsoluteFill>;
 
+// 1 v2: one light colour (deep blue) behind the fog; the wiped title glows; crimson only behind the "?"
+export const W1Fog2 = () => <AbsoluteFill style={{background: K.bg}}>
+  <Plate src="w_fog2.png"/>
+  <RoadFaint y={986} color="rgba(237,235,228,0.16)" label={false}/>
+  <div style={{position: "absolute", left: 0, top: 900, width: W, textAlign: "center", fontFamily: GROT, fontSize: 30, fontWeight: 400, color: K.ink, letterSpacing: 0.3}}>{SUB}</div>
+  <T x={96} y={1030} size={12} ls={2.5} color={K.dim}>{COURSE}</T>
+  <Members x={1824} y={1030} size={12} anchor="right"/>
+  <Finish grain={0.14} vignette={0.45}/>
+</AbsoluteFill>;
+
 // 2. Swiss / International: huge grotesk, flush left, hairline grid, faint road map
 export const W1Swiss = () => <AbsoluteFill style={{background: K.bg}}>
   <svg width={W} height={H} style={{position: "absolute"}}>
@@ -55,6 +65,16 @@ export const W1Klein = () => <AbsoluteFill style={{background: K.klein}}>
   <Finish grain={0.18} vignette={0.25}/>
 </AbsoluteFill>;
 
+// 4 v2: bone type with a deep-crimson "?" on the pigment field (vermilion on Klein blue read orange)
+export const W1Klein2 = () => <AbsoluteFill style={{background: K.klein}}>
+  <Plate src="w_pigment.png"/>
+  <RoadFaint y={830} color="rgba(237,235,228,0.25)"/>
+  <div style={{position: "absolute", left: 0, top: 170, width: W, textAlign: "center", fontFamily: GROT, fontWeight: 900, fontSize: 250, letterSpacing: -10, color: K.ink, lineHeight: 0.86}}>WORTH<br/>TESTING<span style={{color: "#E0102A"}}>?</span></div>
+  <div style={{position: "absolute", left: 0, top: 640, width: W, textAlign: "center", fontFamily: SERIF, fontSize: 44, color: K.ink}}>{SUB}</div>
+  <div style={{position: "absolute", left: 0, top: 960, width: W, textAlign: "center", fontFamily: MONO, fontSize: 13, letterSpacing: 3, color: K.ink}}>{COURSE}   ·   {MEMBERS.join("  ·  ")}</div>
+  <Finish grain={0.18} vignette={0.25}/>
+</AbsoluteFill>;
+
 // 5. title through a glass protein (Blender: 3D type behind the glass CDK20 model)
 export const W1Glass = () => <AbsoluteFill style={{background: K.bg}}>
   <Plate src="w_titleglass.png"/>
@@ -75,6 +95,6 @@ export const W1Ink = ({part = "a"}) => <AbsoluteFill style={{background: K.bg}}>
 </AbsoluteFill>;
 
 export const OPTIONS_W1 = [
-  {id: "SW1o1", C: W1Fog}, {id: "SW1o2", C: W1Swiss}, {id: "SW1o3", C: W1Catalogue}, {id: "SW1o4", C: W1Klein}, {id: "SW1o5", C: W1Glass},
+  {id: "SW1o1", C: W1Fog}, {id: "SW1o1v2", C: W1Fog2}, {id: "SW1o4v2", C: W1Klein2}, {id: "SW1o2", C: W1Swiss}, {id: "SW1o3", C: W1Catalogue}, {id: "SW1o4", C: W1Klein}, {id: "SW1o5", C: W1Glass},
   {id: "SW1o6a", C: W1Ink, p: {part: "a"}}, {id: "SW1o6b", C: W1Ink, p: {part: "b"}},
 ];

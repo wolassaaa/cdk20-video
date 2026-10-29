@@ -65,4 +65,6 @@ a = np.maximum(a, d)
 edge = np.array(Image.fromarray((a * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(4))) / 255.0
 Image.fromarray((edge * 255).astype(np.uint8)).save(CODE + "public/fog_mask.png")
 json.dump(beads, open(CODE + "fog_beads.json", "w"))
+qx, qy, qw = b2[-1]
+json.dump({"u": (qx + qw / 2) / W, "v": (qy + 0.42 * 640) / H}, open(CODE + "fog_q.json", "w"))
 print("beads", len(beads))

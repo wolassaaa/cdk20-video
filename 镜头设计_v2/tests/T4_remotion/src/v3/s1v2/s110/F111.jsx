@@ -8,6 +8,11 @@ import PT from "./m_thread.json";
 import PB from "./m_bluesea.json";
 import PBC from "./m_bluesea_close.json";
 
+// dim land north of the HK boundary (Shenzhen): soft-edged black veil over the projected polygon
+const Dim = ({poly, op = 0.6}) => <svg width={W} height={H} style={{position: "absolute", left: 0, top: 0, filter: "blur(22px)"}}>
+  <polygon points={poly.map(p => p[0] + "," + p[1]).join(" ")} fill="#020202" fillOpacity={op}/>
+</svg>;
+
 // a label with a hairline leader
 const Pin = ({at, dx = 40, dy = -40, title, sub, color = K.ink, line = "rgba(237,235,228,0.6)", anchor = "left"}) => {
   const [x, y] = at, lx = x + dx, ly = y + dy;
@@ -28,6 +33,7 @@ const PINS = (P, o = {}) => <>
 // 1. Klein relief: Hong Kong in one blue pigment, a glossy red cord (Yves Klein, Relief planetaire RP 17, Nice)
 export const M1Klein = () => <AbsoluteFill style={{background: K.bg}}>
   <Plate src="m_klein.png"/>
+  <Dim poly={PK.sz} op={0.55}/>
   {PINS(PK)}
   <T x={96} y={84} size={92} font={GROT} weight={800} ls={-3} color={K.ink}>Hong Kong</T>
   <T x={100} y={190} size={13} ls={3} color={K.ink}>22.38°N 114.20°E → 22.43°N 114.21°E</T>
@@ -38,6 +44,7 @@ export const M1Klein = () => <AbsoluteFill style={{background: K.bg}}>
 // 2. Red thread (Chiharu Shiota): coast as bone wire on black felt, one red thread pinned between two places
 export const M2Thread = () => <AbsoluteFill style={{background: K.bg}}>
   <Plate src="m_thread.png"/>
+  <Dim poly={PT.sz} op={0.6}/>
   {PINS(PT, {adx: -80, ady: 60, bdx: -90, bdy: -70})}
   <T x={96} y={90} size={14} ls={4} color={K.dim}>PART OF IT STARTS HERE</T>
   <T x={96} y={114} size={44} font={SERIF} color={K.ink}>Sha Tin → Pak Shek Kok</T>
@@ -51,6 +58,7 @@ export const M3Blue = ({part = "a"}) => {
   const P = part === "a" ? PB : PBC;
   return <AbsoluteFill style={{background: K.bg}}>
     <Plate src={part === "a" ? "m_bluesea.png" : "m_bluesea_close.png"}/>
+    <Dim poly={P.sz} op={0.6}/>
     {part === "a" ? <>
       <T x={96} y={86} size={120} font={GROT} weight={900} ls={-5} color={K.ink}>HONG KONG</T>
       {PINS(P, {adx: -70, ady: 80, bdx: -80, bdy: -60})}
@@ -74,10 +82,12 @@ export const M4Coord = () => {
   const d = LAND.rings.map(r => "M" + r.p.map(q => pr(q).map(v => v.toFixed(1)).join(",")).join("L") + "Z").join("");
   const rt = LAND.route.map(q => pr(q));
   const a = pr(LAND.poi.pwh), b = pr(LAND.poi.hkstp);
+  const sz = LAND.sz.map(q => pr(q));
   return <AbsoluteFill style={{background: K.bg}}>
     <svg width={W} height={H} style={{position: "absolute"}}>
       <defs><clipPath id="c4"><rect x={470} y={80} width={1400} height={900}/></clipPath></defs>
       <path d={d} fill="none" stroke="rgba(237,235,228,0.62)" strokeWidth={1} clipPath="url(#c4)"/>
+      <polygon points={sz.map(p => p.join(",")).join(" ")} fill={K.bg} fillOpacity={0.62} style={{filter: "blur(10px)"}}/>
       <polyline points={rt.map(p => p.join(",")).join(" ")} fill="none" stroke={K.verm} strokeWidth={6} strokeLinecap="round"/>
       <circle cx={a[0]} cy={a[1]} r={5} fill={K.verm}/><circle cx={b[0]} cy={b[1]} r={5} fill={K.verm}/>
     </svg>

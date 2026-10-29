@@ -2,7 +2,7 @@
 import React from "react";
 import {registerRoot, Still} from "remotion";
 import {RoadMetro, RoadGlass, RoadType, RoadVessel, RoadGates, RoadRecorder, StripFlat} from "./road";
-import {RoadNeon, RoadType3D, RoadRecorder3D, Stair, FogTime, FogTally, Counter} from "./over3d";
+import {RoadNeon, RoadType3D, RoadRecorder3D, Stair, FogTime, FogTally, FogBlueTime, FogBlueTally, Counter} from "./over3d";
 import {LedgerTime, LedgerMoney, LedgerTen, DotYears, Vials, Growth} from "./cost";
 
 const roads = {Metro: RoadMetro, Glass: RoadGlass, Type: RoadType, Vessel: RoadVessel, Gates: RoadGates, Recorder: RoadRecorder,
@@ -15,6 +15,9 @@ const Root = () => <>
   ])}
   <Still id="StripFlat" component={StripFlat} width={5200} height={600} defaultProps={{lit: 6}}/>
   <Still id="StripFlat-lit4" component={StripFlat} width={5200} height={600} defaultProps={{lit: 4}}/>
+  <S id="R-Neon-flag" component={RoadNeon} defaultProps={{lit: 2, flag: 1}}/>
+  <S id="C-FogBlueTime" component={FogBlueTime}/>
+  <S id="C-FogBlueTally" component={FogBlueTally}/>
   <S id="C-LedgerTime" component={LedgerTime}/>
   <S id="C-LedgerMoney" component={LedgerMoney}/>
   <S id="C-LedgerTen" component={LedgerTen}/>

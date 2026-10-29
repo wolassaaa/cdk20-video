@@ -22,7 +22,7 @@ ap.add_argument("--anchors", default="")
 ap.add_argument("--fstop", type=float, default=0.0)
 ap.add_argument("--mask", default="")
 A = ap.parse_args(argv)
-LIT = 6 if A.state == "full" else 4
+LIT = 6 if A.state == "full" else (int(A.state[3:]) if A.state.startswith("lit") else 4)
 
 for o in list(bpy.data.objects): bpy.data.objects.remove(o, do_unlink=True)
 scn = bpy.context.scene
@@ -34,7 +34,7 @@ def lin(h):
     return tuple(((x + 0.055) / 1.055) ** 2.4 if x > 0.04045 else x / 12.92 for x in c) + (1.0,)
 
 
-VERM, BLUE, KLEIN, BONE, CYAN = lin("#FF3B1F"), lin("#1F3BFF"), lin("#002FA7"), lin("#EDEBE4"), lin("#29F0FF")
+VERM, BLUE, KLEIN, BONE, CYAN = lin("#E8102A"), lin("#1F3BFF"), lin("#002FA7"), lin("#EDEBE4"), lin("#29F0FF")
 
 
 def mat(name, color=(0.8, 0.8, 0.8, 1), rough=0.3, metal=0.0, trans=0.0, ior=1.45, coat=0.0, emit=None, estr=0.0, alpha=1.0):
@@ -210,7 +210,9 @@ elif A.scene == "vessel":
         s = T * i / N; p, _ = at(s)
         (live if s <= cut else dead).append(((p.x, p.y, Z), rad_at(s)))
     if dead: dead.insert(0, live[-1])
-    curve_tube([q for q, _ in live], [r for _, r in live], red, "live")
+    lacq = mat("lacq", lin("#9A0618"), rough=0.32, coat=1.0)
+    lacq.node_tree.nodes["Principled BSDF"].inputs["Coat Roughness"].default_value = 0.02
+    curve_tube([q for q, _ in live], [r for _, r in live], lacq, "live")
     ghost = mat("ghost", (0.01, 0.015, 0.12, 1), rough=0.2, coat=1.0)
     if dead: curve_tube([q for q, _ in dead], [r for _, r in dead], ghost, "dead")
     ring_on = mat("ringon", BONE, rough=0.25, coat=1.0)
@@ -250,7 +252,7 @@ elif A.scene == "gates":
     n = 6; gap = 3.4
     dirv = Vector((1, 0, 0))
     gate_on = emis("gon", BONE, 9)
-    gate_last = emis("glast", VERM, 12)
+    gate_last = emis("glast", VERM, 3.5)
     gate_off = mat("goff", (0.02, 0.02, 0.022, 1), rough=0.35, metal=0.6)
     H, Wd, th = 3.2, 2.1, 0.07
     for i in range(n):
@@ -292,7 +294,7 @@ elif A.scene == "gates":
 # ====================================================================== VIALS (1-08)
 elif A.scene == "vials":
     cloud = mat("cloud", (0.5, 0.5, 0.52, 1), rough=0.35, trans=0.85, ior=1.33)
-    liquid = mat("liq", VERM, rough=0.05, trans=0.0, coat=1.0, emit=VERM, estr=1.4)
+    liquid = mat("liq", VERM, rough=0.05, trans=0.0, coat=1.0, emit=VERM, estr=0.6)
     win = 6
     for i in range(10):
         x = (i - 4.5) * 0.92
@@ -306,14 +308,17 @@ elif A.scene == "vials":
     point(((win - 4.5) * 0.95, -0.2, 0.9), 40, VERM, 0.1)
     floor(rough=0.08)
     area("key", (0, -6, 8), (0, 0, 1), 5, 600, BONE, sy=2)
-    area("rimB", (0, 6, 3), (0, 0, 1.2), 20, 2500, BLUE, sy=3)
+    bpy.ops.mesh.primitive_plane_add(size=1, location=(0, 3.0, 5), rotation=(math.pi / 2, 0, 0))
+    bd = bpy.context.object; bd.scale = (60, 20, 1); put(bd, mat("bd", (0.003, 0.003, 0.004, 1), rough=0.9))
+    area("rimL", (-7, 1.5, 1.2), (0, 0, 1.0), 3, 1700, BLUE, sy=2.4)
+    area("rimR", (7, 1.5, 1.2), (0, 0, 1.0), 3, 1700, BLUE, sy=2.4)
     camera((0, -15.5, 1.75), (0, 0, 1.3), lens=50)
 
 # ====================================================================== NEON METRO (1-09)
 elif A.scene == "neon":
-    zt, zb = 2.4, -0.5
-    path = [(-10.5, zt), (-2.2, zt), (0.7, zb), (10.5, zb)]
-    stx = [(-8.3, zt), (-6.0, zt), (-3.7, zt), (2.2, zb), (5.0, zb), (7.9, zb)]
+    zt, zb = 3.0, -0.7
+    path = [(-11.5, zt), (-2.0, zt), (1.7, zb), (11.5, zb)]
+    stx = [(-7.8, zt), (-5.3, zt), (-2.8, zt), (2.6, zb), (4.9, zb), (7.2, zb)]
     wallm = mat("wall", (0.012, 0.012, 0.013, 1), rough=0.75)
     bpy.ops.mesh.primitive_plane_add(size=1, location=(0, 0.35, 0), rotation=(math.pi / 2, 0, 0))
     w = bpy.context.object; w.scale = (300, 60, 1); put(w, wallm)
@@ -332,7 +337,7 @@ elif A.scene == "neon":
     dense.append(path[-1])
     live = [(x, -0.05, z) for x, z in dense if x <= xcut]
     dead = [(x, -0.05, z) for x, z in dense if x >= xcut - 0.05]
-    poly_tube(live, 0.075, emis("neon", VERM, 18), "live")
+    poly_tube(live, 0.075, emis("neon", VERM, 3.2), "live")
     poly_tube(live, 0.095, mat("jacket", (1, 1, 1, 1), rough=0.05, trans=1.0, ior=1.45), "jk")
     if len(dead) > 1:
         poly_tube(dead, 0.085, mat("unlit", (0.5, 0.5, 0.52, 1), rough=0.25, trans=0.6, ior=1.45), "dead")
@@ -345,19 +350,24 @@ elif A.scene == "neon":
         ANCH.append((x, -0.1, z))
         rr_ = 0.36 if i == 5 else 0.28
         cyl(rr_, 0.06, (x, 0.28, z), rot=(math.pi / 2, 0, 0), m=(emis("st%d" % i, BONE, 2.2) if on else mat("stoff", (0.09, 0.09, 0.09, 1), rough=0.5)), verts=64)
-    ledge_z = -2.4
-    box((22, 0.5, 0.06), (0.5, 0.05, ledge_z), mat("ledge", (0.02, 0.02, 0.02, 1), rough=0.25))
+    # beads threaded on hanging wires under each station (abacus): red = the 34 that start, grey = dropped at that station
     cnt = [34, 17, 9, 5, 2, 1]
+    wire = mat("wirem", (0.5, 0.5, 0.5, 1), rough=0.3, metal=1.0)
+    def strand(x, ztop, n, m, per):
+        cols = max(1, -(-n // per))
+        for c in range(cols):
+            xx = x + (c - (cols - 1) / 2) * 0.27
+            m_ = min(per, n - c * per)
+            cyl(0.008, m_ * 0.25 + 0.3, (xx, 0.0, ztop - (m_ * 0.25 + 0.3) / 2), rot=(0, 0, 0), m=wire, verts=8)
+            for j in range(m_):
+                sphere(0.12, (xx, 0.0, ztop - 0.3 - j * 0.25), m)
+    strand(stx[0][0], stx[0][1] - 0.35, 34, red, 17)
     for i in range(1, LIT):
-        k = cnt[i - 1] - cnt[i]
-        for j in range(k):
-            sphere(0.13, (stx[i][0] - (min(k, 6) - 1) * 0.14 + (j % 6) * 0.28 + (j // 6 % 2) * 0.14, -0.05, ledge_z + 0.16 + (j // 6) * 0.25), grey)
-    for j in range(34):
-        sphere(0.13, (-9.4 + (j % 6) * 0.28 + (j // 6 % 2) * 0.14, -0.05, ledge_z + 0.16 + (j // 6) * 0.25), red)
-    area("key", (-4, -9, 7), (0, 0, -0.8), 8, 900, BONE, sy=3)
+        strand(stx[i][0], stx[i][1] - 0.35, cnt[i - 1] - cnt[i], grey, 9)
+    area("key", (-4, -9, 7), (0, 0, 0.0), 8, 260, BONE, sy=3)
     area("rimB", (2, -5, 12), (0, 0.3, 1.0), 26, 1400, BLUE, sy=3)
     area("rimB2", (-16, -3, -1), (0, 0, 0.5), 6, 500, BLUE)
-    camera((-0.6, -20.0, 0.9), (-0.6, 0, 0.35), lens=36, focus=(0, 0, 0.5))
+    camera((-0.3, -20.0, 1.2), (-0.3, 0, 1.0), lens=40, focus=(0, 0, 0.5))
 
 # ====================================================================== TYPOGRAPHIC ROAD (1-09)
 elif A.scene == "typeroad":
@@ -485,11 +495,44 @@ elif A.scene == "fog":
     area("key", (0, -6, 5), (0, 0, 0), 10, 120, BONE)
     camera((0, -9.0, 0), (0, 0, 0), lens=34, focus=(0, 0, 0))
 
+# ====================================================================== FOGGED GLASS v2 (1-08): one blue source, strokes read clear and lit from behind
+elif A.scene == "fogblue":
+    img = bpy.data.images.load(A.mask); img.colorspace_settings.name = "Non-Color"
+    pane = bpy.data.materials.new("pane"); pane.use_nodes = True
+    nt = pane.node_tree; nt.nodes.clear()
+    out = nt.nodes.new("ShaderNodeOutputMaterial")
+    clear = nt.nodes.new("ShaderNodeBsdfPrincipled"); clear.inputs["Transmission Weight"].default_value = 1; clear.inputs["Roughness"].default_value = 0.0
+    fogb = nt.nodes.new("ShaderNodeBsdfPrincipled"); fogb.inputs["Transmission Weight"].default_value = 1; fogb.inputs["Roughness"].default_value = 0.6
+    fogb.inputs["Base Color"].default_value = (0.035, 0.037, 0.045, 1)
+    tx = nt.nodes.new("ShaderNodeTexImage"); tx.image = img
+    mix = nt.nodes.new("ShaderNodeMixShader")
+    nt.links.new(tx.outputs[0], mix.inputs[0]); nt.links.new(fogb.outputs[0], mix.inputs[1]); nt.links.new(clear.outputs[0], mix.inputs[2])
+    nt.links.new(mix.outputs[0], out.inputs[0])
+    bpy.ops.mesh.primitive_plane_add(size=1, location=(0, 0, 0), rotation=(math.pi / 2, 0, 0))
+    p_ = bpy.context.object; p_.scale = (16, 9, 1); put(p_, pane)
+    # the single source: a soft blue window behind, fading out to black
+    win = bpy.data.materials.new("win"); win.use_nodes = True; wn = win.node_tree; wn.nodes.clear()
+    o_ = wn.nodes.new("ShaderNodeOutputMaterial"); em = wn.nodes.new("ShaderNodeEmission"); em.inputs[0].default_value = BLUE
+    tc = wn.nodes.new("ShaderNodeTexCoord"); mp = wn.nodes.new("ShaderNodeMapping"); mp.inputs["Scale"].default_value = (2.3, 2.3, 2.3)
+    gr = wn.nodes.new("ShaderNodeTexGradient"); gr.gradient_type = "SPHERICAL"
+    ma = wn.nodes.new("ShaderNodeMath"); ma.operation = "POWER"; ma.inputs[1].default_value = 0.7
+    mu = wn.nodes.new("ShaderNodeMath"); mu.operation = "MULTIPLY"; mu.inputs[1].default_value = 3.0
+    wn.links.new(tc.outputs["Object"], mp.inputs[0]); wn.links.new(mp.outputs[0], gr.inputs[0]); wn.links.new(gr.outputs[1], ma.inputs[0])
+    wn.links.new(ma.outputs[0], mu.inputs[0]); wn.links.new(mu.outputs[0], em.inputs[1]); wn.links.new(em.outputs[0], o_.inputs[0])
+    bpy.ops.mesh.primitive_plane_add(size=1, location=(-0.2, 3.5, -0.15), rotation=(math.pi / 2, 0, 0))
+    wp = bpy.context.object; wp.scale = (13, 7.5, 1); put(wp, win)
+    if A.state == "tally":
+        # a red capsule just behind stroke 7 only (shape follows the stroke so the fog halo is soft, not a box)
+        bpy.ops.mesh.primitive_cylinder_add(radius=0.16, depth=1.25, location=(0.62 * 9.6 / 9, 0.6, 0.0), vertices=32)
+        rp = bpy.context.object; put(rp, emis("redstrip", VERM, 2.2))
+        for zz in (0.625, -0.625): sphere(0.16, (0.62 * 9.6 / 9, 0.6, zz), emis("redcap", VERM, 2.2))
+    camera((0, -9.0, 0), (0, 0, 0), lens=34, focus=(0, 0, 0))
+
 # ====================================================================== LED COUNTER WALL (1-08, after Tatsuo Miyajima)
 elif A.scene == "counter":
     SEG = {"0": "abcdef", "1": "bc", "2": "abged", "3": "abgcd", "4": "fgbc", "5": "afgcd", "6": "afgedc", "7": "abc", "8": "abcdefg", "9": "abcfgd"}
-    on_m = emis("ledon", VERM, 4.5); off_m = mat("ledoff", (0.22, 0.015, 0.01, 1), rough=0.35)
-    on_b = emis("ledb", BLUE, 4.5); off_b = mat("ledboff", (0.01, 0.02, 0.2, 1), rough=0.35)
+    on_m = emis("ledon", VERM, 1.6); off_m = mat("ledoff", (0.22, 0.015, 0.01, 1), rough=0.35)
+    on_b = emis("ledb", BLUE, 1.6); off_b = mat("ledboff", (0.01, 0.02, 0.2, 1), rough=0.35)
     unit_m = mat("unit", (0.008, 0.008, 0.009, 1), rough=0.25, coat=1.0)
 
     def digit(ch, x, z, s, onm, offm, y=-0.06):
@@ -547,8 +590,8 @@ scn.cycles.device = "GPU"; scn.cycles.samples = A.samples
 scn.cycles.use_denoising = True; scn.cycles.denoiser = "OPENIMAGEDENOISE"
 scn.cycles.max_bounces = 16; scn.cycles.transmission_bounces = 16; scn.cycles.glossy_bounces = 8; scn.cycles.transparent_max_bounces = 16
 scn.render.resolution_x, scn.render.resolution_y, scn.render.resolution_percentage = 1920, 1080, A.pct
-vs_ = scn.view_settings; vs_.view_transform = "AgX"
-try: vs_.look = "AgX - Punchy"
+vs_ = scn.view_settings; vs_.view_transform = "Standard"
+try: vs_.look = "None"
 except Exception as e: print("look", e)
 scn.render.image_settings.file_format = "PNG"
 scn.render.filepath = A.out

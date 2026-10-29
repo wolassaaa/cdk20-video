@@ -80,6 +80,36 @@ for r in rings:
         out.append({"a": round(area), "p": s.round(1).tolist()})
 out.sort(key=lambda r: -r["a"])
 
+
+# simplified coast (for the wire/thread look): cut narrow inlets and river channels.
+# Greedy: from point i, if a later point j is within GAP metres but more than LMIN metres away along the coast, jump straight to j.
+def cut_inlets(p, gap=420.0, lmin=1500.0):
+    p = np.asarray(p, float)
+    seg = np.hypot(*np.diff(p, axis=0).T); s = np.concatenate([[0], np.cumsum(seg)])
+    keep = []; i = 0; n = len(p)
+    while i < n:
+        keep.append(i)
+        far = np.where((s > s[i] + lmin))[0]
+        if len(far):
+            dd = np.hypot(*(p[far] - p[i]).T)
+            ok = far[dd < gap]
+            if len(ok):
+                i = int(ok.max()); continue
+        i += 1
+    return p[keep]
+
+
+simple = []
+for r in out:
+    q = cut_inlets(r["p"]) if r["a"] > 2e6 else np.asarray(r["p"])
+    simple.append({"a": r["a"], "p": q.round(1).tolist()})
+
+# land north of the HK boundary (Shenzhen), as a polygon in metres, for dimming. Boundary approximate (Deep Bay, Shenzhen River,
+# Sha Tau Kok, Mirs Bay), then the Dapeng peninsula to the east.
+SZ_LL = [(113.80, 22.49), (113.95, 22.497), (114.03, 22.508), (114.07, 22.515), (114.115, 22.528), (114.16, 22.538), (114.225, 22.545),
+         (114.26, 22.56), (114.33, 22.535), (114.40, 22.47), (114.48, 22.44), (114.60, 22.44), (114.60, 22.80), (113.80, 22.80)]
+SZ = [[round(v, 1) for v in P(*ll)] for ll in SZ_LL]
+
 POI = {  # lon, lat (approximate, from public maps)
     "pwh": (114.2014, 22.3794),        # Prince of Wales Hospital, Sha Tin
     "cuhk": (114.2068, 22.4196),       # CUHK main campus
@@ -94,7 +124,7 @@ _a, _b = np.array(P(*POI["pwh"])), np.array(P(*POI["hkstp"]))
 _d = (_b - _a) / np.hypot(*(_b - _a)); _c = (_a + _b) / 2 + np.array([_d[1], -_d[0]]) * 900
 ROUTE_M = [[round(float(v), 1) for v in (1 - t) ** 2 * _a + 2 * (1 - t) * t * _c + t * t * _b] for t in np.linspace(0, 1, 25)]
 json.dump({"src": "(c) OpenStreetMap contributors, ODbL; natural=coastline via Overpass, base " + d["osm3s"]["timestamp_osm_base"],
-           "origin": [LON0, LAT0], "rings": out,
+           "origin": [LON0, LAT0], "rings": out, "rings_simple": simple, "sz": SZ,
            "poi": {k: [round(v, 1) for v in P(*ll)] for k, ll in POI.items()},
            "route": ROUTE_M}, open(OUT, "w"))
 print(len(out), "rings, points", sum(len(r["p"]) for r in out))

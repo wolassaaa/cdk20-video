@@ -102,7 +102,7 @@ elif shot == "hit2":
 elif shot == "hit3":
     pos, tgt, lens, f, fp = (0.9, -5.4, 0.9), (0.05, 0.0, 0.0), 55, 5.6, (0, 0, 0)
 else:  # 1-01: liver in the right half of frame
-    pos, tgt, lens, f, fp = (-0.4, -6.4, 0.8), (-1.35, 0.0, 0.05), 46, 5.6, (0, 0, 0)
+    pos, tgt, lens, f, fp = (-0.5, -6.4, 0.8), (-1.25, 0.0, 0.05), 39, 5.6, (0, 0, 0)
 c = camera(scn, pos, tgt, lens=lens, fstop=f)
 c.data.dof.focus_distance = (Vector(fp) - Vector(pos)).length
 
