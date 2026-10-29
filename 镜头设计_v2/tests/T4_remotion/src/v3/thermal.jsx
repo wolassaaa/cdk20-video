@@ -1,10 +1,10 @@
 // Thermal false colour: draw heat as white-on-black (brightness = heat), then map brightness through our own palette.
-// Cold → hot: black, navy, blue, cyan, acid fringe, vermilion, orange, yellow, white. Banded like a 12-colour print.
+// Cold → hot: black, deep teal, teal, cyan, acid fringe, vermilion, orange, yellow, white. Banded like a 12-colour print.
 import React from "react";
 import {C} from "./core";
 
 export const HEAT_STOPS = [
-  [0.00, "#050505"], [0.14, "#0A1240"], [0.28, "#1530B8"], [0.40, "#1E7BFF"], [0.48, C.cyan], [0.52, C.acid],
+  [0.00, "#050505"], [0.12, "#03171A"], [0.26, "#08454A"], [0.38, "#11949A"], [0.48, C.cyan], [0.52, C.acid],
   [0.56, C.verm], [0.70, "#FF6A1A"], [0.82, "#FFB21F"], [0.92, "#FFF04A"], [1.00, "#FFFFFF"],
 ];
 const rgb = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16) / 255);
