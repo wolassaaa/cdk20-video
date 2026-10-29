@@ -35,7 +35,7 @@ const mix = (a, b, t) => {
   const A = p(a), B = p(b);
   return `rgb(${A.map((v, i) => Math.round(lerp(v, B[i], clamp01(t)))).join(",")})`;
 };
-const inside = (poly, x, y) => {
+export const inside = (poly, x, y) => {
   let c = false;
   for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
     const [xi, yi] = poly[i], [xj, yj] = poly[j];
@@ -43,8 +43,8 @@ const inside = (poly, x, y) => {
   }
   return c;
 };
-const pick = (pts, n, seed) => pts.map((p, i) => [hash(i, seed), p]).sort((a, b) => a[0] - b[0]).slice(0, n).map(e => e[1]);
-const centroid = pts => [pts.reduce((s, p) => s + p[0], 0) / pts.length, pts.reduce((s, p) => s + p[1], 0) / pts.length];
+export const pick = (pts, n, seed) => pts.map((p, i) => [hash(i, seed), p]).sort((a, b) => a[0] - b[0]).slice(0, n).map(e => e[1]);
+export const centroid = pts => [pts.reduce((s, p) => s + p[0], 0) / pts.length, pts.reduce((s, p) => s + p[1], 0) / pts.length];
 
 // spine as a function of s (0 bottom → 1 top); a slow S-curve so the run up has turns to follow
 const spineT = s => [960 + 70 * Math.sin(s * 7.5) + 26 * Math.sin(s * 19 + 1), lerp(Y0, Y1, s)];
@@ -56,7 +56,7 @@ const CELLS = Array.from({length: 150}, (_, i) => ({x: 960 + (hash(i, 41) - 0.5)
   r: 1.5 + 3 * hash(i, 47), a: 0.25 + 0.5 * hash(i, 53), dx: (hash(i, 59) - 0.5) * 0.6}));
 
 /** Halve along the longer side, recursively. Same sizes in → same tree shape out, so text and liver trees pair node for node. */
-const splitTree = (pts, out, d = 0, parent = -1) => {
+export const splitTree = (pts, out, d = 0, parent = -1) => {
   const id = out.length;
   out.push({d, parent, c: centroid(pts), n: pts.length});
   if (pts.length === 1) return;
@@ -67,7 +67,7 @@ const splitTree = (pts, out, d = 0, parent = -1) => {
   splitTree(s.slice(h), out, d + 1, id);
 };
 /** Each node walks ~2/(levels left) of the way from its parent toward its own centroid, so tips land exactly. */
-const place = (nodes, root) => {
+export const place = (nodes, root) => {
   const P = [];
   nodes.forEach((n, i) => {
     P[i] = n.parent < 0 ? root : [0, 1].map(a => lerp(P[n.parent][a], n.c[a], Math.min(1, 1.9 / (Math.ceil(Math.log2(n.n)) + 1))));

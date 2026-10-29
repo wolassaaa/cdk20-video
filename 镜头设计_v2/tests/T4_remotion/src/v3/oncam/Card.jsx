@@ -5,6 +5,7 @@ import React from "react";
 import {OffthreadVideo, useCurrentFrame} from "remotion";
 import {useBoil, ramp, clamp01, inOut, vnoise} from "../core";
 import {InkDefs} from "../texture";
+import {ThermalFilter} from "../thermal";
 
 export const PIC_W = 860, PIC_H = 920, EDGE = 24;
 export const CW = PIC_W + EDGE * 2, CH = PIC_H + EDGE * 2;
@@ -30,6 +31,7 @@ const CardDefs = ({id}) => {
         <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="2" seed={s} result="n"/>
         <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/>
       </filter>
+      <ThermalFilter id={`oc-thermal-${id}`} seed={s} noise={0.18}/>
     </defs>
   </svg>;
 };
@@ -50,8 +52,9 @@ export const OcInkDefs = () => {
 /**
  * Place inside a <Sequence> that spans the card's time on screen (dur frames).
  * src: footage URL (staticFile). videoStart: first frame of the take to use.
+ * thermal: [from, to] local frames: the take shows as a heat image first and develops into the warm print over that span.
  */
-export const OnCamCard = ({who, src, videoStart = 0, dur, full, children}) => {
+export const OnCamCard = ({who, src, videoStart = 0, dur, full, thermal, children}) => {
   const f = useCurrentFrame(), b = useBoil();
   if (f >= dur) return null;
   const {show, grow, fu} = cardState(f, dur, full);
@@ -72,6 +75,9 @@ export const OnCamCard = ({who, src, videoStart = 0, dur, full, children}) => {
       <div style={{position: "absolute", inset: 0, background: "#FF9A4A", mixBlendMode: "soft-light", opacity: 0.35}}/>
       <div style={{position: "absolute", inset: 0, background: LIFT, mixBlendMode: "lighten"}}/>
       <div style={{position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 48%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.45) 100%)"}}/>
+      {thermal && f < thermal[1] && <OffthreadVideo src={src} startFrom={videoStart} muted
+        style={{position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", filter: `url(#oc-thermal-${who})`,
+          opacity: 1 - inOut(ramp(f, thermal[0], thermal[1]))}}/>}
     </div>
     <svg width={CW} height={CH} style={{position: "absolute", left: 0, top: 0, overflow: "visible"}}>
       <InkDefs/>
