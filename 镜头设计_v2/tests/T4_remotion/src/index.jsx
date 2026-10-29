@@ -9,6 +9,7 @@ import {MV2, MV2_FRAMES} from "./mv2/MV2";
 import {V3Title, V3LockKey, V3Funnel, V3Ladder, V3Demo, V3_DEMO_FRAMES} from "./v3";
 import {V3Reel, REEL_FRAMES} from "./v3reel/Reel";
 import {V3OnCam, ONCAM_FRAMES} from "./v3reel/OnCam";
+import {V3OnCamCards, ONCAM_CARDS_FRAMES} from "./v3/oncam/Demo";
 
 // T4: 2D labels, citation and subtitle composited over the T3 Blender render.
 // T1: holograms driven by hand tracking on the test footage (398 frames cut from the phone clip).
@@ -32,6 +33,7 @@ const Root = () => (
     <Composition id="V3-Demo" component={V3Demo} durationInFrames={V3_DEMO_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="V3-Reel" component={V3Reel} durationInFrames={REEL_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="V3-OnCam" component={V3OnCam} durationInFrames={ONCAM_FRAMES} fps={30} width={1920} height={1080} />
+    <Composition id="V3-OnCamCards" component={V3OnCamCards} durationInFrames={ONCAM_CARDS_FRAMES} fps={30} width={1920} height={1080} />
   </>
 );
 
