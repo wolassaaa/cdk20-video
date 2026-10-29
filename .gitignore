@@ -44,3 +44,7 @@ teacher_requirements_check/
 
 # Office 临时锁文件
 ~$*
+
+# ---- AE：渲染输出和由脚本生成的工程 ----
+镜头设计_v3/ae/_out/
+*.aep

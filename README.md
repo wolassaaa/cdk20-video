@@ -13,6 +13,7 @@
 | 视觉风格 | `镜头设计_v3/research/style_bible.md` |
 | **视觉排产表（按 v3.3 排，10 个模块 + 逐 beat 对照 + 到 11-27 的时间线）** | `镜头设计_v3/production/视觉排产表_v1.md` |
 | 分镜（旧，按剧本 v3 排，时间码已过时） | `镜头设计_v3/storyboard/` |
+| AE 脚本（出镜卡模板等）和运行方法 | `镜头设计_v3/ae/` |
 | 风格帧图（TD / Blender / Remotion） | `镜头设计_v3/styleframes/` |
 | TouchDesigner 待办和踩坑记录 | `镜头设计_v3/td/TD_待办_20261027.md` |
 | TD 场景脚本（通过 MCP 在 TD 2025 里运行） | `镜头设计_v3/td/scripts/` |
@@ -32,6 +33,7 @@
 - 选曲：导演偏好 The Weeknd、NewJeans《Supernatural》前半、Kendrick Lamar《luther》、Kate Bush《Running Up That Hill》、Hearts2Hearts《RUDE!》；"freezing"、"2worlds" 待确认是哪首。
 - 出镜风格改成"人暖、机器冷"：台词不动；每人自己用手机坐着单独拍（十分钟内），不同框、不用掌机、不准备道具；对话段后期按眼神方向剪成一问一答；暖色调色、照片纸边和所有道具（墨线）都在后期做。实拍期望放低，画面质感靠后期。已更新出镜指导 `oncam_direction_v33.py`、剧本 [CAM] 备注和组员分稿。
 - 10-29 开始做视觉：出了视觉排产表 v1。分镜 v3 的时间码和 beat 编号对不上 v3.3，以后以排产表为准。全片拆成 10 个可复用模块，先做路线图（用 12 次）、数据卡、出镜卡模板，再做 W2/W3/W4 三个高潮。成片规格、合成软件等 5 件事等导演定（见排产表第 4 节）。
+- 10-29 AE 2026 装好并接通：用 `python 镜头设计_v3/ae/run_in_ae.py <脚本.jsx>` 在开着的 AE 里跑脚本。踩到的坑：脚本路径有中文时 `AfterFX -r` 直接失败，所以要靠 run_in_ae.py 转一下；AE 是中文版，属性要用 matchName（如 `ADBE Photo Filter-0003`）或 `layer.transform.xxx`，表达式里滑块用 `effect("Grow")(1)`；加效果后之前拿到的属性引用会失效，要重新取。出镜卡 M3 模板 v1 做完（`ae/oncam_card.jsx`），等导演看预览。
 - 项目已同步到 GitHub。这份 README 是各个 AI 之间的交接本，每做完一件事就更新这一段。
 
 ### 下一步
