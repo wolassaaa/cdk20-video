@@ -48,3 +48,7 @@ teacher_requirements_check/
 # ---- AE：渲染输出和由脚本生成的工程 ----
 镜头设计_v3/ae/_out/
 *.aep
+
+# ---- 片尾 AI 娘素材（CC BY-NC-SA，按 README 里的 commit 可重新下载）----
+镜头设计_v3/assets/ai_girls/crosspet/*/
+镜头设计_v3/assets/ai_girls/_contact_*.jpg
