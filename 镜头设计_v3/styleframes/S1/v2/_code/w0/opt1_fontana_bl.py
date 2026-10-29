@@ -1,6 +1,7 @@
 """Option 1 · fontana-cut (Blender): an ultramarine canvas (Klein's blue) is slashed on each hit (Lucio Fontana, Concetto spaziale);
 red light lives behind it. Real geometry: the lips curl back into the cut, a raking light catches them.
---shot hit1|hit2|hit3|1-01
+--shot hit1|hit2|hit3|1-01|hit3_alt
+hit3_alt: same three cuts, but deeper lips, one hard grazing light and almost no fill, so the canvas reads as a physical object in deep shadow.
 """
 import os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -8,6 +9,8 @@ from bl_common import *
 import numpy as np
 
 A = args()
+ALT = A.shot == "hit3_alt"
+if ALT: A.shot = "hit3"
 scn = reset()
 world(scn, (0, 0, 0))
 
@@ -34,7 +37,7 @@ for (cx, y0, y1, lean, bow, wid) in CUTS:
     t = (py - y0) / (y1 - y0); tc = np.clip(t, 0, 1)
     xc = cx + lean * (py - y0) + bow * np.sin(np.pi * tc)
     prof = np.abs(np.sin(np.pi * tc)) ** 0.7
-    half = wid * 0.5 * prof
+    half = wid * 0.5 * prof * (1.35 if ALT else 1.0)
     dx = px - xc
     d = np.abs(dx) - half
     tipy = np.where(t <= 0, y0, y1); tipx = cx + lean * (tipy - y0)
@@ -43,12 +46,13 @@ for (cx, y0, y1, lean, bow, wid) in CUTS:
     d = np.where(within, d, dt + 2)
     inside |= within & (np.abs(dx) < half)
     # snap the first ring of outside vertices onto the true cut contour (no staircase edges)
-    near = within & (d > 0) & (d < 1.5 * SP)
+    # (hit3_alt: the raking light shows the stair where a leaning cut steps a column between rows, so the second ring snaps too)
+    near = within & (d > 0) & (d < (2.05 if ALT else 1.5) * SP)
     Xsnap = np.where(near, -np.sign(dx) * d / PX, Xsnap)
     # lips: the cloth is pushed back (into the canvas) and slightly rolled, strongest mid-cut
     lipr = 9 + 16 * prof
     fall = np.exp(-np.clip(d, 0, None) / lipr) * (0.25 + 0.75 * prof)
-    Ymove = np.maximum(Ymove, fall * (0.03 + 0.05 * prof))
+    Ymove = np.maximum(Ymove, fall * (0.03 + 0.05 * prof) * (1.5 if ALT else 1.0))
     # a little bunching just outside the lip (the canvas was stretched and gave way)
     Ymove -= np.exp(-((np.clip(d, 0, None) - lipr * 2.2) / (lipr * 1.2)) ** 2) * 0.006 * prof
     Dmin = np.minimum(Dmin, d)
@@ -107,7 +111,7 @@ for (cx, y0, y1, lean, bow, wid) in CUTS:
     L = (y1 - y0) / PX
     # a strip light behind each cut: a hot core seen through the slit, falling off toward its ends
     ld = bpy.data.lights.new("rc", "AREA"); ld.shape = "ELLIPSE"; ld.size = 0.06; ld.size_y = L * 0.8
-    ld.energy = 1.6 * L; ld.color = (1.0, 0.006, 0.003)
+    ld.energy = 1.6 * L * (0.4 if ALT else 1.0); ld.color = (1.0, 0.006, 0.003)
     o = bpy.data.objects.new("rc", ld); scn.collection.objects.link(o)
     o.location = (X0, 0.16, Z0); o.rotation_euler = (math.radians(90), math.atan(lean), 0)  # faces -y (toward canvas)
     o.visible_camera = False
@@ -118,12 +122,23 @@ hz = bpy.context.active_object; hz.scale = (CW * 1.3, 0.66, CH * 1.3)
 hz.data.materials.append(volume("backhaze", (1, 1, 1), 0.35, aniso=0.5))
 
 # ---------------------------------------------------------------- front: one raking key from upper left, very low fill
-area(scn, "key", 420, 0.6, (-3.4, -1.2, 2.6), (0.4, 0, -0.3), (0.9, 0.95, 1.0), size_y=3.0)
-area(scn, "fill", 30, 4, (1.5, -5, 0.5), (0, 0, 0), (0.6, 0.75, 1.0))
+if ALT:
+    # one hard light from the far right, almost parallel to the canvas: every lip throws a long shadow, the field falls off into black
+    # a low sun from the upper left, ~9 deg off the canvas plane: hard, parallel, long shadows off every lip
+    sd = bpy.data.lights.new("rake", "SUN"); sd.energy = 3.5; sd.angle = math.radians(0.8); sd.color = (0.92, 0.95, 1.0)
+    so = bpy.data.objects.new("rake", sd); scn.collection.objects.link(so)
+    so.rotation_euler = Vector((-1.0, -0.16, 0.42)).to_track_quat("Z", "Y").to_euler()   # lamp +Z points back at the source (upper-left-front); light travels along -Z
+    b.inputs["Sheen Weight"].default_value = 0.15
+    area(scn, "fill", 4, 4, (1.5, -5, 0.5), (0, 0, 0), (0.6, 0.75, 1.0))
+else:
+    area(scn, "key", 420, 0.6, (-3.4, -1.2, 2.6), (0.4, 0, -0.3), (0.9, 0.95, 1.0), size_y=3.0)
+    area(scn, "fill", 30, 4, (1.5, -5, 0.5), (0, 0, 0), (0.6, 0.75, 1.0))
 
 cam_y = -5.2
 if A.shot == "1-01":
     camera(scn, (0.0, cam_y, 0.0), (0.0, 0, 0.0), lens=39, fstop=5.6, focus=5.2)  # 4.8 m wide = frame px mapping
+elif ALT:
+    camera(scn, (-2.2, cam_y + 0.9, -0.6), (0.15, 0, 0.05), lens=55, fstop=4.0, focus=4.9)
 else:
     camera(scn, (-1.6, cam_y + 0.25, -0.35), (0.05, 0, 0.0), lens=48, fstop=5.6, focus=5.4)
 

@@ -1,7 +1,7 @@
 """Option 2 · light-room: Kandinsky's point / line / plane built as a light installation in a fog-filled room
 (Ann Veronica Janssens' coloured fog, Dan Flavin's single fluorescent tube, James Turrell's glowing aperture).
-hit1 a red point of light hangs in the fog; hit2 it becomes a floor-to-ceiling red line; hit3 the back wall opens into a blue plane.
-1-01: the plane stays; four red lines stand in the fog beside A's card.
+hit1 a red point of light hangs in the fog; hit2 it becomes a floor-to-ceiling red line; hit3 the back wall fills with blue light.
+1-01: the blue wall stays; four red lines stand in the fog beside A's card.
 """
 import os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -12,6 +12,7 @@ scn = reset()
 world(scn, (0, 0, 0))
 
 RW, RD, RH = 10.0, 12.0, 4.2  # room width, depth, height; back wall at y = RD/2
+if A.shot == "1-01": RW = 17.0  # wider room so the blue wall runs on behind the four lines, right of the card
 conc, nt, b = principled("concrete", (0.012, 0.012, 0.014), rough=0.35)
 # floor with a faint wet sheen so lines reflect
 noise = nt.nodes.new("ShaderNodeTexNoise"); noise.inputs["Scale"].default_value = 3.0; noise.inputs["Detail"].default_value = 8
@@ -24,21 +25,23 @@ box(scn, "wl", (0.1, RD, RH), (-RW / 2, 0, RH / 2), wallm)
 box(scn, "wr", (0.1, RD, RH), (RW / 2, 0, RH / 2), wallm)
 
 shot = A.shot
-# back wall: solid, or with a Turrell aperture (a rectangle cut into it, glowing blue from a hidden light box behind)
+BRANCH = shot == "hit3_branch"
+if BRANCH: shot = "hit3"
+# back wall: solid (hit1/hit2), or washed with blue light from a hidden floor slot (hit3, 1-01).
+# (pass 1 cut a Turrell aperture here; it read as a flat screen and was replaced)
 if shot in ("hit3", "1-01"):
-    ap_w, ap_h, ap_x, ap_z = (4.6, 2.6, 0.9, 1.95) if shot == "hit3" else (5.6, 2.9, 2.3, 2.0)
-    # wall around the aperture as four boxes
-    L, R = ap_x - ap_w / 2, ap_x + ap_w / 2; Bt, T = ap_z - ap_h / 2, ap_z + ap_h / 2
+    # no window at all. The back wall is dark and washed from a hidden slot at its foot: blue light grazes up the wall
+    # and across the floor, brightest at the base and dying upward into the haze (a wall of light, not a screen)
     yb = RD / 2
-    box(scn, "bw_l", (L + RW / 2, 0.1, RH), ((L - RW / 2) / 2, yb, RH / 2), wallm)
-    box(scn, "bw_r", (RW / 2 - R, 0.1, RH), ((R + RW / 2) / 2, yb, RH / 2), wallm)
-    box(scn, "bw_b", (ap_w, 0.1, Bt), (ap_x, yb, Bt / 2), wallm)
-    box(scn, "bw_t", (ap_w, 0.1, RH - T), (ap_x, yb, (T + RH) / 2), wallm)
-    # the blue field: an emissive panel far behind the opening (no visible edges => Ganzfeld) + light pouring in
-    bpy.ops.mesh.primitive_plane_add(size=1, location=(ap_x, yb + 1.5, ap_z), rotation=(math.radians(90), 0, 0))
-    p = bpy.context.active_object; p.scale = (ap_w * 2.5, ap_h * 2.5, 1)
-    p.data.materials.append(emission("ganzfeld", (0.0, 0.035, 1.0), 1.15))
-    area(scn, "blue_in", 110, ap_w, (ap_x, yb + 0.3, ap_z), (ap_x, -3, ap_z * 0.7), (0.0, 0.035, 1.0), size_y=ap_h, spread=70)
+    washm, _, _ = principled("washwall", (0.1, 0.105, 0.11), rough=0.95)   # dark: the wash dies within a metre, the top of the wall is night
+    box(scn, "bw", (RW, 0.1, RH), (0, yb, RH / 2), washm)
+    for xx in [-RW / 2 + 2.0 + 3.0 * i for i in range(int((RW - 4.0) / 3.0) + 1)]:
+        o = area(scn, "wash", 300, 3.0, (xx, yb - 0.32, 0.03), (xx, yb + 0.25, 1.4), (0.0, 0.035, 1.0), size_y=0.05)
+        o.visible_camera = False
+    o = area(scn, "floorwash", 60, 9.0, (0.0, yb - 0.1, 0.25), (0.0, 0.0, 0.0), (0.0, 0.035, 1.0), size_y=0.08, spread=60)
+    o.visible_camera = False
+    bpy.ops.mesh.primitive_cube_add(size=1, location=(0, yb - 0.17, 0.06)); sl = bpy.context.active_object
+    sl.scale = (RW, 0.12, 0.12); sl.data.materials.append(wallm)   # the low lip that hides the slot
 else:
     box(scn, "bw", (RW, 0.1, RH), (0, RD / 2, RH / 2), wallm)
 
@@ -51,12 +54,25 @@ pv.inputs["Color"].default_value = (0.92, 0.92, 0.92, 1); pv.inputs["Anisotropy"
 # fog not perfectly even: slow noise in density (drifting haze)
 nz = fnt.nodes.new("ShaderNodeTexNoise"); nz.inputs["Scale"].default_value = 0.35; nz.inputs["Detail"].default_value = 3
 dm = fnt.nodes.new("ShaderNodeMapRange"); dm.inputs["To Min"].default_value = 0.012; dm.inputs["To Max"].default_value = 0.05
-fnt.links.new(nz.outputs["Fac"], dm.inputs["Value"]); fnt.links.new(dm.outputs[0], pv.inputs["Density"])
+fnt.links.new(nz.outputs["Fac"], dm.inputs["Value"])
+if shot in ("hit3", "1-01"):
+    # haze thickens toward the back wall, so the aperture's light spills into the room and its edges soften
+    tcf = fnt.nodes.new("ShaderNodeTexCoord"); sep = fnt.nodes.new("ShaderNodeSeparateXYZ")
+    fnt.links.new(tcf.outputs["Generated"], sep.inputs[0])
+    ry = fnt.nodes.new("ShaderNodeMapRange"); ry.interpolation_type = "SMOOTHSTEP"
+    ry.inputs["From Min"].default_value = 0.86; ry.inputs["From Max"].default_value = 1.0
+    ry.inputs["To Min"].default_value = 0.0; ry.inputs["To Max"].default_value = 0.16
+    fnt.links.new(sep.outputs["Y"], ry.inputs["Value"])
+    ad = fnt.nodes.new("ShaderNodeMath"); ad.operation = "ADD"
+    fnt.links.new(dm.outputs[0], ad.inputs[0]); fnt.links.new(ry.outputs[0], ad.inputs[1])
+    fnt.links.new(ad.outputs[0], pv.inputs["Density"])
+else:
+    fnt.links.new(dm.outputs[0], pv.inputs["Density"])
 fnt.links.new(pv.outputs[0], fout.inputs["Volume"])
 fog.data.materials.append(fogm)
 
 # a dim cold fill so the fog body reads blue-black, never empty black
-area(scn, "cold_fill", 8, 6, (0, -2, RH - 0.2), (0, 2, 0), (0.0, 0.035, 1.0), size_y=6)
+area(scn, "cold_fill", 2 if shot in ("hit3", "1-01") else 8, 6, (0, -2, RH - 0.2), (0, 2, 0), (0.0, 0.035, 1.0), size_y=6)
 
 def cam_only_emission(name, rgb, strength):
     """Tube surface glows for the camera only; the fog glow comes from the controlled point-light chain instead."""
@@ -89,6 +105,22 @@ if shot == "hit1":
     point(scn, "redp", 60, (0.9, 2.5, 1.75), RED, radius=0.07)
 elif shot == "hit2":
     red_line(0.9, 2.5)
+elif shot == "hit3" and BRANCH:
+    # one line rises, then splits: straight tube segments meeting at small joints (a light installation, not an anatomical tree)
+    def seg(p0, p1, power, r=0.022):
+        p0, p1 = Vector(p0), Vector(p1); d = p1 - p0
+        bpy.ops.mesh.primitive_cylinder_add(radius=r, depth=d.length, location=(p0 + p1) / 2, vertices=24)
+        c = bpy.context.active_object; c.rotation_euler = d.to_track_quat("Z", "Y").to_euler()
+        c.data.materials.append(red_m); c.visible_shadow = False
+        n = max(3, int(d.length * 4))
+        for k in range(n):
+            o = point(scn, "rl", power / n, p0 + d * ((k + 0.5) / n), RED, radius=0.02); o.visible_camera = False
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=r * 1.25, location=p1)
+        j = bpy.context.active_object; j.data.materials.append(red_m); j.visible_shadow = False
+    J1 = (0.9, 2.5, 2.05); J2 = (0.35, 2.4, 3.05)
+    seg((0.9, 2.5, 0.0), J1, 40)
+    seg(J1, J2, 18); seg(J1, (1.55, 2.75, RH), 18); seg(J1, (0.98, 2.2, RH), 14)
+    seg(J2, (-0.2, 2.5, RH), 10); seg(J2, (0.42, 2.0, RH), 8)
 elif shot == "hit3":
     red_line(0.9, 2.5, power=70)
 elif shot == "1-01":
