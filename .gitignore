@@ -55,3 +55,12 @@ teacher_requirements_check/
 
 # CrossPet sprites converted for Remotion (CC BY-NC-SA, re-download, see assets/ai_girls/README.md)
 镜头设计_v3/remotion_public/ai_girls/
+
+# S1 explorations: keep code, READMEs and contact sheets; renders stay local
+镜头设计_v3/styleframes/S1/explore/**/*.png
+镜头设计_v3/styleframes/S1/explore/**/frames/
+镜头设计_v3/styleframes/S1/explore/**/rounds/
+镜头设计_v3/styleframes/S1/explore/**/iter*/
+镜头设计_v3/styleframes/S1/explore/**/stills/
+镜头设计_v3/blender/**/*.blend
+镜头设计_v3/blender/**/*.npz
