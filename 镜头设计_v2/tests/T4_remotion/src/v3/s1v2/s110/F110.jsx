@@ -55,7 +55,7 @@ export const O3Plinth = () => <AbsoluteFill style={{background: K.bg}}>
 // 4. radiograph + monumental serif (X-ray; type as the star)
 export const O4Xray = () => <AbsoluteFill style={{background: K.bg}}>
   <Plate src="p_xray.png" style={{opacity: 0.92}}/>
-  <T x={960} y={80} size={15} ls={6} color={K.dim} anchor="center" style={{left: 0, width: W}}>AN AI THAT PREDICTS THE SHAPE OF PROTEINS</T>
+  <T x={960} y={748} size={15} ls={6} color={K.dim} anchor="center" style={{left: 0, width: W}}>AN AI THAT PREDICTS THE SHAPE OF PROTEINS</T>
   <div style={{position: "absolute", left: 0, top: 790, width: W, textAlign: "center", fontFamily: SERIF, fontSize: 112, color: K.ink, lineHeight: 1, letterSpacing: 1,
     mixBlendMode: "difference"}}>Nobel Prize in Chemistry 2024</div>
   <div style={{position: "absolute", left: 0, top: 924, width: W, textAlign: "center", fontFamily: MONO, fontSize: 16, letterSpacing: 5, color: K.verm}}>DEMIS HASSABIS · JOHN JUMPER · ALPHAFOLD</div>

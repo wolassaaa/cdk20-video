@@ -106,14 +106,14 @@ def lamp(name, color, strength, loc, size, shape="disc", soft=0.0):
 
 
 if A.look == "duo":
-    lamp("red_lamp", (1.0, 0.006, 0.003), 30.0, (1.3, 9.0, 0.4), 0.55)                         # vermilion, right of centre
+    lamp("red_lamp", (1.0, 0.004, 0.035), 30.0, (1.3, 9.0, 0.4), 0.55)                         # vermilion, right of centre
     lamp("blue_lamp", (0.0, 0.008, 1.0), 26.0, (-3.6, 10.0, 1.0), (0.25, 3.2), shape="rect")       # tall cobalt strip, far left
     lamp("blue_low", (0.0, 0.01, 0.55), 0.6, (-0.4, 14.0, -2.6), (9.0, 1.2), shape="rect")       # faint cobalt floor bounce
     lamp("bone_dot", (0.95, 0.94, 0.9), 0.9, (3.2, 12.0, 1.6), 0.05)                             # one far white point (bokeh)
 else:
     # quiet: one large, low-intensity deep-red field behind the left half (a Rothko block seen through breath on glass);
     # cobalt only as a faint bleed at the far right edge. Everything else is dark.
-    lamp("red_field", (0.55, 0.004, 0.002), 2.6, (-2.4, 7.0, 0.4), (4.2, 4.2), shape="rect", soft=2.2)
+    lamp("red_field", (0.55, 0.003, 0.02), 2.6, (-2.4, 7.0, 0.4), (4.2, 4.2), shape="rect", soft=2.2)
     lamp("blue_edge", (0.0, 0.006, 0.6), 9.0, (5.6, 8.0, 0.0), (0.3, 3.0), shape="rect")
 
 # front room light: a soft, very dim panel behind the camera, high left: a long sheen across the glass

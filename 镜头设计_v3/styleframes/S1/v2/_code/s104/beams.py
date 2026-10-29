@@ -73,7 +73,7 @@ nt.links.new(v.outputs[0], out.inputs["Volume"])
 bpy.ops.mesh.primitive_cube_add(size=1, location=(0, 0, 3)); hz = bpy.context.object
 hz.scale = (24, 24, 6); hz.data.materials.append(m)
 
-RED = (1.0, 0.018, 0.004)
+RED = (1.0, 0.003, 0.014)  # crimson (v2 red pass)
 BLUE = (0.012, 0.035, 1.0)
 N, GAP, TOP = 10, 0.9, 5.6
 x0 = -GAP * (N - 1) / 2

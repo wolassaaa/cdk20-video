@@ -41,15 +41,15 @@ def principled(name, base, rough, trans=0.0, ior=1.45, coat=0.0, emit=None):
 
 
 glass = principled("glass", (1, 1, 1), 0.0, trans=1.0, ior=1.47)[0]
-red_lacquer = principled("granule", (0.85, 0.02, 0.006), 0.28, coat=0.8)[0]
+red_lacquer = principled("granule", (0.86, 0.006, 0.03), 0.28, coat=0.8)[0]
 ink = principled("ink", (0.9, 0.89, 0.86), 0.5, emit=((0.93, 0.92, 0.89), 0.6))[0]
 
 
 def red_liquid():
     m, nt, out = principled("liquid", (1, 1, 1), 0.0, trans=1.0, ior=1.34)
-    va = nt.nodes.new("ShaderNodeVolumeAbsorption"); va.inputs["Color"].default_value = (1.0, 0.03, 0.01, 1); va.inputs["Density"].default_value = 5
-    vs = nt.nodes.new("ShaderNodeVolumeScatter"); vs.inputs["Color"].default_value = (1.0, 0.05, 0.02, 1); vs.inputs["Density"].default_value = 5
-    ve = nt.nodes.new("ShaderNodeEmission"); ve.inputs["Color"].default_value = (1.0, 0.01, 0.004, 1); ve.inputs["Strength"].default_value = 0.35
+    va = nt.nodes.new("ShaderNodeVolumeAbsorption"); va.inputs["Color"].default_value = (1.0, 0.01, 0.06, 1); va.inputs["Density"].default_value = 5
+    vs = nt.nodes.new("ShaderNodeVolumeScatter"); vs.inputs["Color"].default_value = (1.0, 0.02, 0.07, 1); vs.inputs["Density"].default_value = 5
+    ve = nt.nodes.new("ShaderNodeEmission"); ve.inputs["Color"].default_value = (1.0, 0.004, 0.04, 1); ve.inputs["Strength"].default_value = 0.35
     a1 = nt.nodes.new("ShaderNodeAddShader"); nt.links.new(va.outputs[0], a1.inputs[0]); nt.links.new(vs.outputs[0], a1.inputs[1])
     a2 = nt.nodes.new("ShaderNodeAddShader"); nt.links.new(a1.outputs[0], a2.inputs[0]); nt.links.new(ve.outputs[0], a2.inputs[1])
     nt.links.new(a2.outputs[0], out.inputs["Volume"])

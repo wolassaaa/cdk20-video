@@ -61,7 +61,7 @@ nt.links.new(b.outputs[0], out.inputs["Surface"])
 
 red, nt, out = mat("granule")
 b = nt.nodes.new("ShaderNodeBsdfPrincipled")
-b.inputs["Base Color"].default_value = (1.0, 0.05, 0.015, 1); b.inputs["Roughness"].default_value = 0.3
+b.inputs["Base Color"].default_value = (0.86, 0.006, 0.03, 1); b.inputs["Roughness"].default_value = 0.3
 b.inputs["Coat Weight"].default_value = 0.6
 nt.links.new(b.outputs[0], out.inputs["Surface"])
 
@@ -136,7 +136,7 @@ scn.cycles.max_bounces = 16; scn.cycles.transmission_bounces = 16
 scn.render.resolution_x = 1200; scn.render.resolution_y = 900; scn.render.resolution_percentage = A.pct
 scn.render.film_transparent = True
 scn.cycles.film_transparent_glass = True
-scn.view_settings.view_transform = "AgX"; scn.view_settings.exposure = 0.9
+scn.view_settings.view_transform = "Standard"; scn.view_settings.look = "None"; scn.view_settings.exposure = 0.6  # Standard: AgX pushes red to orange
 scn.render.image_settings.file_format = "PNG"; scn.render.image_settings.color_mode = "RGBA"
 scn.render.filepath = A.out
 bpy.ops.render.render(write_still=True)

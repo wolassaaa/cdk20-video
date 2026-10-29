@@ -23,7 +23,7 @@ export const W1Swiss = () => <AbsoluteFill style={{background: K.bg}}>
   <div style={{position: "absolute", left: 82, top: 110, fontFamily: GROT, fontWeight: 900, fontSize: 300, lineHeight: 0.82, letterSpacing: -14, color: K.ink}}>
     WORTH<br/>TESTING<span style={{color: K.verm}}>?</span>
   </div>
-  <T x={96} y={850} size={34} font={GROT} weight={400} ls={-0.5} w={980} style={{whiteSpace: "normal", lineHeight: 1.2}}>{SUB}</T>
+  <T x={96} y={850} size={34} font={GROT} weight={400} ls={-0.5} w={860} style={{whiteSpace: "normal", lineHeight: 1.2}}>{SUB}</T>
   <T x={1056} y={850} size={13} ls={2.5} color={K.dim}>{COURSE}</T>
   {MEMBERS.map((m, i) => <T key={i} x={1056 + (i % 2) * 240} y={890 + Math.floor(i / 2) * 26} size={13} ls={2.5}>{m}</T>)}
   <T x={1536} y={110} size={13} ls={2.5} color={K.dim}>01 / 08</T>
@@ -32,12 +32,12 @@ export const W1Swiss = () => <AbsoluteFill style={{background: K.bg}}>
 
 // 3. Contemporary-art catalogue cover: small mono type, lots of black, one small plate
 export const W1Catalogue = () => <AbsoluteFill style={{background: "#050505"}}>
-  <div style={{position: "absolute", left: 836, top: 380, width: 248, height: 140, overflow: "hidden", outline: "1px solid rgba(237,235,228,0.15)"}}>
-    <img src={require("remotion").staticFile("p_xray.png")} style={{width: 248, height: 140, objectFit: "cover", transform: "scale(1.35)"}}/>
+  <div style={{position: "absolute", left: 750, top: 330, width: 420, height: 236, overflow: "hidden", outline: "1px solid rgba(237,235,228,0.15)"}}>
+    <img src={require("remotion").staticFile("p_xray.png")} style={{width: 420, height: 236, objectFit: "cover", transform: "scale(1.25)"}}/>
   </div>
-  <T x={836} y={538} size={10} ls={1.5} color={K.dim}>pl. 1 · CDK20, predicted (AlphaFold DB)</T>
-  <T x={96} y={96} size={15} ls={4} weight={700}>{TITLE}</T>
-  <T x={96} y={122} size={13} ls={1} color={K.dim} w={520} style={{whiteSpace: "normal"}}>{SUB}</T>
+  <T x={750} y={580} size={11} ls={1.5} color={K.dim}>pl. 1 · CDK20, predicted (AlphaFold DB)</T>
+  <T x={96} y={96} size={22} ls={5} weight={700}>{TITLE}</T>
+  <T x={96} y={132} size={14} ls={1} color={K.dim} w={560} style={{whiteSpace: "normal"}}>{SUB}</T>
   <T x={1824} y={96} size={13} ls={2.5} anchor="right" color={K.dim}>{COURSE}</T>
   {MEMBERS.map((m, i) => <T key={i} x={96} y={890 + i * 22} size={12} ls={2.5}>{m}</T>)}
   <RoadFaint y={1000} x0={760} x1={1760} color="rgba(237,235,228,0.14)" label={false}/>
@@ -48,9 +48,9 @@ export const W1Catalogue = () => <AbsoluteFill style={{background: "#050505"}}>
 // 4. Klein blue field, red type (Blender pigment plate)
 export const W1Klein = () => <AbsoluteFill style={{background: K.klein}}>
   <Plate src="w_pigment.png"/>
-  <RoadFaint y={800} color="rgba(237,235,228,0.22)"/>
-  <div style={{position: "absolute", left: 0, top: 290, width: W, textAlign: "center", fontFamily: GROT, fontWeight: 900, fontSize: 236, letterSpacing: -9, color: K.verm, lineHeight: 1}}>{TITLE}</div>
-  <div style={{position: "absolute", left: 0, top: 560, width: W, textAlign: "center", fontFamily: SERIF, fontSize: 44, color: K.ink}}>{SUB}</div>
+  <RoadFaint y={830} color="rgba(237,235,228,0.25)"/>
+  <div style={{position: "absolute", left: 0, top: 170, width: W, textAlign: "center", fontFamily: GROT, fontWeight: 900, fontSize: 250, letterSpacing: -10, color: K.verm, lineHeight: 0.86}}>WORTH<br/>TESTING?</div>
+  <div style={{position: "absolute", left: 0, top: 640, width: W, textAlign: "center", fontFamily: SERIF, fontSize: 44, color: K.ink}}>{SUB}</div>
   <div style={{position: "absolute", left: 0, top: 960, width: W, textAlign: "center", fontFamily: MONO, fontSize: 13, letterSpacing: 3, color: K.ink}}>{COURSE}   ·   {MEMBERS.join("  ·  ")}</div>
   <Finish grain={0.18} vignette={0.25}/>
 </AbsoluteFill>;

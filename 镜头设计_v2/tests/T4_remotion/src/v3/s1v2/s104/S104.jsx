@@ -53,10 +53,10 @@ const Switch = ({x = 116, y = 250, big = 104, color = K.ink, dim = K.dim}) => <g
   <T x={x} y={y + 220} size={big * 0.58} w={200} color={color}>→</T>
   <T x={x} y={y + 330} size={big} w={500} color={color} ls={-2}>{SW_NEW}</T>
 </g>;
-const Survival = ({x, y, size = 150, anchor = "start", color = K.ink}) => <g>
+const Survival = ({x, y, size = 150, anchor = "start", color = K.ink, ms = 20, mls = 3}) => <g>
   <T x={x} y={y} size={size} w={700} anchor={anchor} color={color} ls={-4}><tspan fill={K.verm}>~3</tspan> in 10</T>
-  <M x={x + 6} y={y + size * 0.43} size={20} color={color} ls={3} anchor={anchor}>{SV_A}</M>
-  <M x={x + 6} y={y + size * 0.43 + 32} size={16} color={K.dim} ls={3} anchor={anchor}>{SV_C}</M>
+  <M x={x + 6} y={y + size * 0.43} size={ms} color={color} ls={mls} anchor={anchor}>{SV_A}</M>
+  <M x={x + 6} y={y + size * 0.43 + ms * 1.6} size={ms * 0.8} color={K.dim} ls={mls} anchor={anchor}>{SV_C}</M>
 </g>;
 const Unmet = ({x, y, size = 116, anchor = "end", color = K.ink}) => <g>
   <T x={x} y={y} size={30} w={300} anchor={anchor} color={K.dim}>The study we follow calls it</T>
@@ -65,13 +65,20 @@ const Unmet = ({x, y, size = 116, anchor = "end", color = K.ink}) => <g>
 </g>;
 
 // ---------------------------------------------------------------- opt2 pigment-field (Blender: dry pigment bed split 3:7, vermilion | IKB)
-const O2 = ({part}) => <AbsoluteFill style={{background: K.bg}}>
-  {part === "a" ? <Bg src="pigment_top.png" op={0.4} filter="blur(6px)"/> : null}
+const O2 = ({part, v}) => <AbsoluteFill style={{background: K.bg}}>
+  {part === "a" && !v ? <Bg src="pigment_top.png" op={0.4} filter="blur(6px)"/> : null}
+  {part === "a" && v ? <Bg src="pigment_a_v2.png"/> : null}
   {part === "b" ? <Bg src="pigment_b.png"/> : null}
   {part === "c" ? <Bg src="pigment_c.png"/> : null}
   {part === "c" ? <AbsoluteFill style={{background: "linear-gradient(180deg, rgba(6,6,6,0.85) 0%, rgba(6,6,6,0) 45%)"}}/> : null}
   <Svg>
-    {part === "a" ? <Switch/> : null}
+    {part === "a" && !v ? <Switch/> : null}
+    {part === "a" && v ? <g>
+      <M x={114} y={110} size={16} color={K.dim} ls={4}>{SW_CTX}</M>
+      <T x={110} y={200} size={64} w={200} color={K.ink} op={0.28}>{SW_OLD}</T>
+      <T x={110} y={300} size={84} w={500} color={K.ink} ls={-2}>atezolizumab</T>
+      <T x={110} y={392} size={84} w={500} color={K.ink} ls={-2}><tspan fontWeight={200} fill={K.dim}>+ </tspan>bevacizumab</T>
+    </g> : null}
     {part === "b" ? <Survival x={116} y={230} size={130}/> : null}
     {part === "c" ? <Unmet x={1820} y={120} size={100}/> : null}
     <Tags illustrative={part !== "a"} source={part === "b" ? SRC_SV : part === "c" ? SRC_R23 : null} opt="opt2 pigment-field"/>
@@ -85,7 +92,7 @@ const O3 = ({part}) => <AbsoluteFill style={{background: K.bg}}>
   {part === "c" ? <AbsoluteFill style={{background: "linear-gradient(270deg, rgba(6,6,6,0.9) 10%, rgba(6,6,6,0) 55%)"}}/> : null}
   <Svg>
     {part === "a" ? <Switch x={116} y={300}/> : null}
-    {part === "b" ? <Survival x={1856} y={930} size={120} anchor="end"/> : null}
+    {part === "b" ? <Survival x={1870} y={150} size={92} anchor="end" ms={16} mls={1.5}/> : null}
     {part === "c" ? <Unmet x={1820} y={300} size={110}/> : null}
     <Tags illustrative={part !== "a"} source={part === "b" ? SRC_SV : part === "c" ? SRC_R23 : null} opt="opt3 ten-beams"/>
   </Svg>
@@ -93,8 +100,8 @@ const O3 = ({part}) => <AbsoluteFill style={{background: K.bg}}>
 </AbsoluteFill>;
 
 // ---------------------------------------------------------------- opt4 fog-glass (Blender: frosted pane, finger-wiped strokes, neon behind)
-const O4 = ({part}) => <AbsoluteFill style={{background: K.bg}}>
-  <Bg src={`fog_${part}.png`}/>
+const O4 = ({part, v}) => <AbsoluteFill style={{background: K.bg}}>
+  <Bg src={`fog_${part}${v ? "_v2" : ""}.png`}/>
   <Svg>
     {part === "a" ? <M x={216} y={800} size={18} color={K.ink} ls={4} op={0.75}>{SW_CTX}</M> : null}
     {part === "b" ? <Survival x={80} y={150} size={96}/> : null}

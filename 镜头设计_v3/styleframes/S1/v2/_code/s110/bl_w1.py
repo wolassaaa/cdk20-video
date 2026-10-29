@@ -68,7 +68,7 @@ elif look in ("splash", "rain"):
     U.text3d("TESTING?", "ArchivoBlack-Regular.ttf", size=1.25, loc=(0, 1.0, -0.55), m=title_m, spacing=0.96)
     mb = bpy.data.metaballs.new("ink"); mb.resolution = 0.016; mb.render_resolution = 0.009; mb.threshold = 0.6
     mo = bpy.data.objects.new("ink", mb); scn.collection.objects.link(mo)
-    inkm, nt, b, out = U.principled("inkliquid", color=U.VERM, rough=0.04, coat=0.8)
+    inkm, nt, b, out = U.principled("inkliquid", color="#E0102A", rough=0.04, coat=0.8)
     mb.materials.append(inkm)
     FLAT = 0.22
     def ball(p, r, sx=1.0, sz=1.0):
@@ -112,7 +112,7 @@ elif look in ("splash", "rain"):
             p = Vector((random.uniform(-4.2, 4.2), random.uniform(-1.0, 3.0), random.uniform(-2.8, 2.8)))
             bpy.ops.mesh.primitive_cylinder_add(radius=random.uniform(0.006, 0.012), depth=random.uniform(0.3, 0.9), vertices=8, location=p)
             U.assign(bpy.context.active_object, rainm)
-    U.light_panel("key", U.INK, 260, (-2.5, -4, 3.5), 2.0, look_at=(0.5, 0, 0.3))
+    U.light_panel("key", U.INK, 520, (-1.0, -4, 3.5), 2.5, look_at=(1.5, 0, 0.8))
     U.light_panel("rimB", U.BLUE, 900, (3.5, 3, 2.5), 2.5, look_at=(0.5, 0, 0.3))
     U.light_panel("rimB2", U.BLUE, 500, (-3.5, 3, 2.5), 2.5, look_at=(0.5, 0, 0.3))
     U.plane("rimstrip", 1, (0, -3, 4.0), rot=(math.radians(-40), 0, 0), m=U.emissive("rs", U.INK, 5), scale=(6, 0.3, 1)).visible_camera = False

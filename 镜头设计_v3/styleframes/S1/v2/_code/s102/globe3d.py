@@ -76,9 +76,9 @@ hk = xyz(22.3, 114.17, R * 1.006)
 bpy.ops.mesh.primitive_uv_sphere_add(segments=48, ring_count=24, radius=0.022, location=xyz(22.3, 114.17, R * 1.014))
 h = bpy.context.active_object
 hm, nt, out = mat("hk"); hb = nt.nodes.new("ShaderNodeBsdfPrincipled")
-hb.inputs["Base Color"].default_value = (0.9, 0.015, 0.005, 1); hb.inputs["Roughness"].default_value = 0.25
+hb.inputs["Base Color"].default_value = (0.86, 0.006, 0.03, 1); hb.inputs["Roughness"].default_value = 0.25
 hb.inputs["Coat Weight"].default_value = 1.0; hb.inputs["Coat Roughness"].default_value = 0.02
-hb.inputs["Emission Color"].default_value = (1.0, 0.01, 0.004, 1); hb.inputs["Emission Strength"].default_value = 2.5
+hb.inputs["Emission Color"].default_value = (1.0, 0.004, 0.04, 1); hb.inputs["Emission Strength"].default_value = 2.5
 nt.links.new(hb.outputs[0], out.inputs["Surface"]); h.data.materials.append(hm)
 # (no point light / volume halo: they bloomed into an orange core; the bead's own emission is enough)
 

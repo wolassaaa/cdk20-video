@@ -25,3 +25,8 @@ want beaker3d    && still s103-beaker3d    "$OUT/1-03/opt2_beaker.png" 70
 want vessel      && still s103-vessel      "$OUT/1-03/opt2_beaker_b-ink.png" 70
 want capsule3d   && still s103-capsule3d   "$OUT/1-03/opt3_glass-capsule.png" 70
 want words       && still s103-words       "$OUT/1-03/opt4_words.png" 70
+want fog2        && still s102-fog2        "$OUT/1-02/opt1_fog-tally_v2.png"
+want liver2      && still s102-liver2      "$OUT/1-02/opt2_liver_v2.png"
+want vit-beaker  && still s103-vitrine-beaker  "$OUT/1-03/opt2_beaker_v2.png" 70
+want vit-capsule && still s103-vitrine-capsule "$OUT/1-03/opt3_glass-capsule_v2.png" 70
+want vit-row     && still s103-vitrine-row     "$OUT/1-03/opt5_capsule-row.png" 70

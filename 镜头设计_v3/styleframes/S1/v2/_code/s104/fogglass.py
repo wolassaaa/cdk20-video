@@ -15,6 +15,7 @@ ap.add_argument("--part", default="b")
 ap.add_argument("--samples", type=int, default=512)
 ap.add_argument("--pct", type=int, default=100)
 ap.add_argument("--lit", default="1,4,8")
+ap.add_argument("--fogdark", type=float, default=-1, help="share of dark matte in the fog film (default 0.9 for a, 0.45 for b/c)")
 A = ap.parse_args(argv)
 LIT = {int(i) for i in A.lit.split(",") if i != ""}
 
@@ -61,7 +62,7 @@ clear = nt.nodes.new("ShaderNodeBsdfGlass"); clear.inputs["Roughness"].default_v
 frost = nt.nodes.new("ShaderNodeBsdfGlass"); frost.inputs["Roughness"].default_value = 0.42; frost.inputs["IOR"].default_value = 1.5
 # v2: fog is mostly a dark matte film (near-black ground), only ~35% of the light scatters through
 milk = nt.nodes.new("ShaderNodeBsdfDiffuse"); milk.inputs[0].default_value = (0.012, 0.012, 0.013, 1)
-fm = nt.nodes.new("ShaderNodeMixShader"); fm.inputs[0].default_value = 0.65
+fm = nt.nodes.new("ShaderNodeMixShader"); fm.inputs[0].default_value = A.fogdark if A.fogdark >= 0 else (0.9 if A.part == "a" else 0.45)
 nt.links.new(frost.outputs[0], fm.inputs[1]); nt.links.new(milk.outputs[0], fm.inputs[2])
 # condensation beads on the fogged part: voronoi bumps (droplets refract the light behind)
 vor = nt.nodes.new("ShaderNodeTexVoronoi"); vor.feature = "F1"; vor.inputs["Scale"].default_value = 260; vor.inputs["Randomness"].default_value = 1
@@ -90,7 +91,7 @@ s = pane.modifiers.new("sol", "SOLIDIFY"); s.thickness = 0.006
 
 # ---------------------------------------------------------------- behind the glass
 RED, BLUE, BONE = (1.0, 0.02, 0.005), (0.015, 0.05, 1.0), (0.85, 0.85, 0.8)
-mRed, mBlue = emit("neonR", (1.0, 0.043, 0.0137), 1.6), emit("neonB", (0.0137, 0.0433, 1.0), 1.6)
+mRed, mBlue = emit("neonR", (1.0, 0.010, 0.027), 2.6), emit("neonB", (0.0137, 0.0433, 1.0), 2.6)
 
 
 DEPTH = 0.55
@@ -122,7 +123,7 @@ bpy.ops.mesh.primitive_plane_add(size=1, location=(0, 12, 1), rotation=(math.rad
 bpy.context.object.scale = (30, 12, 1); bpy.context.object.data.materials.append(emit("sky", (0, 0, 0), 0.0))
 
 # a little light on our side, to catch the beads
-d = bpy.data.lights.new("key", "AREA"); d.energy = 10; d.size = 1.5; d.color = (0.93, 0.92, 0.89)
+d = bpy.data.lights.new("key", "AREA"); d.energy = 22; d.size = 1.5; d.color = (0.93, 0.92, 0.89)
 o = bpy.data.objects.new("key", d); scn.collection.objects.link(o); o.location = (1.5, -1.6, 2.6)
 o.rotation_euler = (Vector((0, 0, PZ)) - o.location).to_track_quat("-Z", "Y").to_euler()
 

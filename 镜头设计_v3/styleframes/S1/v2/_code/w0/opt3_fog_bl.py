@@ -69,6 +69,13 @@ for i in range(N):
     o.scale = (s, s, s)
     o.material_slots[0].link = "OBJECT"; o.material_slots[0].material = random.choice(mats[kind])
     o.visible_shadow = False
+if A.shot == "1-01":
+    # a few red lights placed so they are seen through the four finger-lines
+    for px_, py_, D_, sz in ((1225, 520, 14, 0.06), (1388, 380, 22, 0.08), (1560, 640, 10, 0.045), (1716, 470, 18, 0.07)):
+        o = proto.copy(); o.data = proto.data; scn.collection.objects.link(o); o.hide_render = False
+        o.location = ((px_ - 960) / 1920 * FWm * D_ / DG, D_, (540 - py_) / 1920 * FWm * D_ / DG)
+        o.scale = (sz * D_ / 10,) * 3
+        o.material_slots[0].link = "OBJECT"; o.material_slots[0].material = mats["red"][0]
 # a distant blue glow at street level (sky reflected off the harbour), very soft
 bpy.ops.mesh.primitive_plane_add(size=1, location=(0, 90, 0), rotation=(math.radians(90), 0, 0))
 pl = bpy.context.active_object; pl.scale = (260, 140, 1)

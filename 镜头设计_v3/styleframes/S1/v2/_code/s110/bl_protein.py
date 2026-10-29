@@ -100,7 +100,7 @@ elif look == "plddt":
     m, nt, b, out = U.principled("lacquer", rough=0.18, coat=1.0)
     nt.nodes["Principled BSDF"].inputs["Coat Roughness"].default_value = 0.03
     # AlphaFold bins, red/blue only: <50 vermilion, 50-70 bone, 70-90 electric blue, >=90 Klein blue
-    cr = attr_ramp(nt, "plddt", [(0.0, U.VERM), (0.5, U.INK), (0.7, U.BLUE), (0.9, U.KLEIN)])
+    cr = attr_ramp(nt, "plddt", [(0.0, U.VERM_S), (0.5, U.INK), (0.7, U.BLUE), (0.9, U.KLEIN)])
     nt.links.new(cr.outputs[0], b.inputs["Base Color"])
     U.assign(rib, m)
     U.light_panel("key", U.INK, 900, (-3.5, -4.5, 4.5), 3.0)
@@ -171,7 +171,7 @@ elif look == "assemble":
     if done > 0.01:
         rib = G.ribbon(res, end=min(1.0, done), name="landed")
         rib.rotation_euler = rot
-        m, nt, b_, out = U.principled("landedm", color=U.VERM, rough=0.12, coat=1.0)
+        m, nt, b_, out = U.principled("landedm", color=U.VERM_S, rough=0.12, coat=1.0)
         U.assign(rib, m)
     U.light_panel("key", U.INK, 500, (-3, -5, 4), 3.0)
     U.light_panel("rim", U.BLUE, 600, (4, 4, 1), 2.0)

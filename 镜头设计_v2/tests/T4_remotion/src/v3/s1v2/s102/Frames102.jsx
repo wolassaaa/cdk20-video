@@ -46,10 +46,11 @@ export const Opt1Tally = ({count = N}) => {
 };
 
 // ------------------------------------------------------------------ opt2 liver: BodyParts3D glass liver, red vs blue
-export const Opt2Liver = ({line = "hk", img = "liver_rb_full.png", xf = "translate(400px, 0px) scale(0.9)", fade = 48}) => <Frame bg="#000">
+export const Opt2Liver = ({line = "hk", img = "liver_rb_full.png", xf = "translate(400px, 0px) scale(0.9)", fade = 48, hero = false}) => <Frame bg="#000">
   <Img src={staticFile(img)} style={{position: "absolute", left: 0, top: 0, width: W, height: H,
     transform: xf, transformOrigin: "50% 50%"}}/>
   <AbsoluteFill style={{background: `linear-gradient(90deg, rgba(6,6,6,0.92) 0%, rgba(6,6,6,0.6) ${fade * 0.62}%, rgba(6,6,6,0) ${fade}%)`}}/>
+  {hero && <AbsoluteFill style={{background: "linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 12%)"}}/>}
   <Svg>
     {line === "hk" ? <>
       <T x={92} y={560} size={250} weight={100} ls={-10}>1,412</T>
@@ -64,7 +65,9 @@ export const Opt2Liver = ({line = "hk", img = "liver_rb_full.png", xf = "transla
       <T x={268} y={760} size={44} weight={300}>deadliest</T>
       <Src>{SRC_WORLD}</Src>
     </>}
-    <T x={1840} y={1036} size={13} weight={400} font={GM} anchor="end" opacity={0.5} ls={1}>LIVER + VESSELS: BODYPARTS3D © DBCLS, CC BY 4.0 · RED PORTAL VEIN + HEPATIC ARTERY · BLUE HEPATIC VEINS</T>
+    {hero
+      ? <T x={1840} y={1036} size={13} weight={400} font={GM} anchor="end" opacity={0.5} ls={1}>BODYPARTS3D © DBCLS, CC BY 4.0 · RED PORTAL VEIN · BLUE HEPATIC VEINS</T>
+      : <T x={1840} y={1036} size={13} weight={400} font={GM} anchor="end" opacity={0.5} ls={1}>LIVER + VESSELS: BODYPARTS3D © DBCLS, CC BY 4.0 · RED PORTAL VEIN + HEPATIC ARTERY · BLUE HEPATIC VEINS</T>}
   </Svg>
   <PrintGrain amount={0.26}/>
 </Frame>;

@@ -5,7 +5,9 @@ import React from "react";
 import {AbsoluteFill, staticFile} from "remotion";
 import {W, H, C} from "../../core";
 import {OnCamCard, CW, CH} from "../../oncam/Card";
-import {PropTimeline} from "../../oncam/props";
+import {useCurrentFrame} from "remotion";
+import {ramp, clamp01, outCubic, handLine} from "../../core";
+import {InkLine} from "../../ink";
 import {InkPath} from "../../ink";
 import {HandArrow} from "../../marks";
 import {K, T, M, GROT, Print} from "./common";
@@ -38,6 +40,29 @@ const BeatTag = ({who, opt}) => <g>
 const Quote = ({x, y, who, size = 34, anchor = "start", w = 300, color = K.ink, maxW}) =>
   <T x={x} y={y} size={size} w={w} anchor={anchor} color={color} ls={-0.5}>“{LINES[who].text}”</T>;
 
+/** PropTimeline (oncam/props.jsx) with the same ink line, ticks and bracket, but the Knewave lettering swapped for the
+ *  grotesk + mono of the L3 panels, so all four layouts share one type system. Card-local coords, origin = left end. */
+const TimelineG = ({x, y, s = 1, start = 0}) => {
+  const f = useCurrentFrame() - start;
+  if (f < 0) return null;
+  const L = 1150, d = outCubic(ramp(f, 0, 14)), u = L / 17.4;
+  return <g transform={`translate(${x} ${y}) scale(${s})`}>
+    <g filter="url(#oc-ink)">
+      <InkPath points={handLine([0, 0], [L, -8], {bow: -6, over: 4})} seed={100} size={8} progress={d} pressure="nib"/>
+      <circle cx={0} cy={0} r={9} fill={C.ink} opacity={clamp01(f / 3)}/>
+      {Array.from({length: 17}, (_, i) => {
+        const tx = u * (i + 1), late = i >= 9;
+        if (tx > L * d) return null;
+        return <InkLine key={i} from={[tx, late ? -30 : -18]} to={[tx, late ? 30 : 18]} seed={110 + i} size={late ? 6 : 4} color={late ? K.verm : C.ink} pressure="marker"/>;
+      })}
+      <InkPath points={[[u * 10, -60], [u * 10, -80], [u * 17, -82], [u * 17, -62]]} seed={130} size={6} color={K.verm} progress={ramp(f, 14, 22)} pressure="marker"/>
+    </g>
+    <T x={u * 13.5} y={-106} size={84} w={700} anchor="middle" color={K.ink} ls={-2} op={ramp(f, 14, 20)}>10–17 YEARS</T>
+    {[0, 5, 10, 15, 17].map(n => <M key={n} x={n === 0 ? 0 : u * n} y={64} size={20} anchor="middle" ls={0} color={n >= 10 ? K.verm : K.dim} op={ramp(f, 4, 10)}>{n}</M>)}
+    <M x={L + 20} y={64} size={16} ls={3} color={K.dim} op={ramp(f, 4, 10)}>YEARS</M>
+  </g>;
+};
+
 // ---------------------------------------------------------------- L1 corner-relay
 // Three prints stay in their own corners; the speaker's print leans in and grows, the others recede.
 // A thin ink "line of talk" arcs from speaker to the one they answer. C's timeline is pulled out along the bottom edge.
@@ -55,7 +80,7 @@ const L1 = ({who}) => {
   }[who];
   return <AbsoluteFill style={{background: K.bg}}>
     {order.map(k => <Placed key={k} who={k} cx={P[k][0]} cy={P[k][1]} w={P[k][2]} dim={k === who ? 0 : 0.75}>
-      {k === "C" && who === "C" ? <PropTimeline x={CW + 40} y={340} s={1.28} start={0}/> : null}
+      {k === "C" && who === "C" ? <TimelineG x={CW + 40} y={340} s={1.28} start={0}/> : null}
     </Placed>)}
     <Over>
       {arc ? <HandArrow from={arc.from} to={arc.to} bend={arc.bend} size={4} head={22} color={K.ink} seed={who === "D" ? 5 : 9}/> : null}
@@ -76,7 +101,7 @@ const L2 = ({who}) => {
   const order = ["B", "D", "C"].filter(k => k !== who).concat(who);
   return <AbsoluteFill style={{background: K.bg}}>
     {order.map(k => <Placed key={k} who={k} {...P[k]} w={k === who ? 640 : 560} dim={k === who ? 0 : 0.45}>
-      {k === "C" && who === "C" ? <PropTimeline x={-80} y={-60} s={1.7} start={0}/> : null}
+      {k === "C" && who === "C" ? <TimelineG x={-80} y={-60} s={1.7} start={0}/> : null}
     </Placed>)}
     <Over>
       {who === "D" ? <Quote x={110} y={200} who="D" size={36}/> : null}
@@ -143,7 +168,7 @@ const L4 = ({who}) => {
   }[who];
   return <AbsoluteFill style={{background: K.bg}}>
     <Placed who={who} cx={big[who][0]} cy={big[who][1]} w={who === "C" ? 760 : 780}>
-      {who === "C" ? <PropTimeline x={CW + 60} y={CH * 0.5} s={0.78} start={0}/> : null}
+      {who === "C" ? <TimelineG x={CW + 60} y={CH * 0.5} s={0.78} start={0}/> : null}
     </Placed>
     {others.map(k => <Placed key={k} who={k} cx={chip[k][0]} cy={chip[k][1]} w={230} dim={0.4}/>)}
     <Over>

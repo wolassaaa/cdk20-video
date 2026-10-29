@@ -8,7 +8,7 @@ import {C, W, H} from "../../core";
 export const SANS = loadGeist("normal", {weights: ["100", "200", "300", "400", "500"], subsets: ["latin"]}).fontFamily;
 export const GM = loadGeistMono("normal", {weights: ["300", "400", "500"], subsets: ["latin"]}).fontFamily;
 
-export const BLUE = "#1F3BFF", IKB = "#002FA7", BONE = C.ink, RED = C.verm, BG = C.bg;
+export const BLUE = "#1F3BFF", IKB = "#002FA7", BONE = C.ink, RED = "#EE1430", BG = C.bg;
 
 // sources (wording per script_v3.3 1-02)
 export const SRC_HK = "SOURCE  Hong Kong Cancer Registry, Hospital Authority: Liver Cancer in 2022 (Oct 2024)";

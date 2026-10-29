@@ -18,6 +18,8 @@ ap.add_argument("--pct", type=int, default=100)
 ap.add_argument("--out", required=True)
 ap.add_argument("--subdiv", type=int, default=1)
 ap.add_argument("--shiftx", type=float, default=0.0)
+ap.add_argument("--hero_density", type=float, default=30.0)
+ap.add_argument("--haze", type=float, default=0.025, help="forward-scatter haze inside the liver; higher buries far/thin vessels")
 ap.add_argument("--cam", default="", help="override: tx,ty,tz,az,el,d,lens,fstop(0=off)")
 ap.add_argument("--ivc", type=int, default=0)
 ap.add_argument("--heatpass", default="all", help="all | liver (volume glow only) | vessel (tubes only, RGBA alpha)")
@@ -97,7 +99,7 @@ def ghost_shell(name):
     nt.links.new(mx.outputs[0], out.inputs["Surface"])
     vs = nt.nodes.new("ShaderNodeVolumeScatter")
     vs.inputs["Color"].default_value = (0.8, 0.8, 0.82, 1)
-    vs.inputs["Density"].default_value = 0.025
+    vs.inputs["Density"].default_value = A.haze
     vs.inputs["Anisotropy"].default_value = 0.55
     nt.links.new(vs.outputs[0], out.inputs["Volume"])
     return m
@@ -270,8 +272,10 @@ world = bpy.data.worlds.new("w"); scn.world = world; world.use_nodes = True
 world.node_tree.nodes["Background"].inputs["Color"].default_value = (0, 0, 0, 1)
 
 if A.look == "glass":
-    warm = glass_liquid("blood", (0.85, 0.03, 0.01), 110.0, surface_tint=(1.0, 0.97, 0.95))
-    cool = glass_liquid("blue", (0.02, 0.10, 1.0), 70.0, surface_tint=(0.92, 0.95, 1.0))
+    # hero: lower absorption density, so colour depends on thickness: trunks stay saturated, twigs go almost clear
+    dw, dc = (A.hero_density, A.hero_density * 0.7) if A.hero else (110.0, 70.0)
+    warm = glass_liquid("blood", (0.9, 0.006, 0.05), dw, surface_tint=(1.0, 0.97, 0.95))
+    cool = glass_liquid("blue", (0.02, 0.10, 1.0), dc, surface_tint=(0.92, 0.95, 1.0))
     for o, fam in objs.values():
         o.data.materials.append(warm if fam == "warm" else cool)
     liver.data.materials.append(ghost_shell("ghost"))
@@ -317,9 +321,7 @@ scn.render.resolution_x = 1920; scn.render.resolution_y = 1080; scn.render.resol
 scn.render.film_transparent = (A.look == "heat" and A.heatpass == "vessel")
 vs = scn.view_settings
 if A.look == "glass":
-    vs.view_transform = "AgX"
-    try: vs.look = "AgX - Punchy"
-    except Exception as e: print("look", e)
+    vs.view_transform = "Standard"; vs.look = "None"   # not AgX: it pushes the red arteries toward orange (banned)
     vs.exposure = A.exposure
     scn.render.image_settings.file_format = "PNG"; scn.render.image_settings.color_mode = "RGB"
     scn.render.image_settings.color_depth = "8"

@@ -12,3 +12,8 @@ for p in a b c; do BL fogglass.py -- --part $p --mask "$M/fog_$p.png" --samples 
 BL pigment.py -- --shot oblique --samples $S --out "$P/pigment_b.png"
 BL pigment.py -- --shot edge --samples $S --out "$P/pigment_c.png"
 BL pigment.py -- --shot top --samples $S --out "$P/pigment_top.png"
+# ---- v2 fix pass (10-31): near-black fog film, pure #1F3BFF, no neon behind the words; pigment groove switch
+for p in a b c; do m=fog_$p.png; [ $p = a ] && m=fog_a_v2.png; BL fogglass.py -- --part $p --mask "$M/$m" --samples $S --out "$P/fog_${p}_v2.png"; done
+BL pigment.py -- --shot groove --groove 1 --redfrac 1 --samples $S --out "$P/pigment_a_v2.png"
+# 10-31 red pass: all reds re-biased to crimson (vials/beams/pigment/fog). vials now use the Standard view transform.
+# Check with: python redcheck.py public/*.png ../../1-04/*.png

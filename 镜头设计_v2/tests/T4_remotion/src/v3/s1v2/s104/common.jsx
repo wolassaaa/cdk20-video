@@ -8,7 +8,8 @@ import {C, MONO, W, H, useBoil} from "../../core";
 export const GROT = loadGrot("normal", {weights: ["200", "300", "500", "700", "800"], subsets: ["latin"]}).fontFamily;
 export const SERIF = loadSerif("italic", {weights: ["400"], subsets: ["latin"]}).fontFamily;
 export const K = {
-  bg: C.bg, ink: C.ink, verm: C.verm, dim: "rgba(237,235,228,0.5)", faint: "rgba(237,235,228,0.18)",
+  bg: C.bg, ink: C.ink, verm: "#F5142B", // crimson-biased red for s104 (10-31 red pass: director banned orange; #FF3B1F read warm)
+  dim: "rgba(237,235,228,0.5)", faint: "rgba(237,235,228,0.18)",
   klein: "#002FA7", blue: "#1F3BFF", blue2: "#0A1AFF",
 };
 

@@ -92,7 +92,7 @@ if look == "klein":
     land = land_curve("land", 0.11, bevel=0.06, z=0.11, clip=clip); land.data.materials.append(pig)
     U.plane("sea", 200, (0, 0, -0.02), m=pig)
     ro, pts = route(0.075, z=0.30)
-    rm, _, rb, _ = U.principled("cord", color=U.VERM, rough=0.15, coat=1.0); ro.data.materials.append(rm)
+    rm, _, rb, _ = U.principled("cord", color=U.VERM_S, rough=0.15, coat=1.0); ro.data.materials.append(rm)
     for k in ("pwh", "hkstp"):
         bpy.ops.mesh.primitive_uv_sphere_add(radius=0.14, location=(poi[k].x, poi[k].y, 0.30)); U.assign(bpy.context.active_object, rm)
     sun = bpy.data.lights.new("sun", "SUN"); sun.energy = 5.5; sun.angle = math.radians(1.5); sun.color = U.hex2lin("#FFF4EC")[:3]
@@ -109,8 +109,8 @@ elif look == "thread":
     wm, _, wb, _ = U.principled("wire", color=U.INK, rough=0.35)
     wire.data.materials.append(wm)
     ro, pts = route(0.045, z=0.05, lift=0.9, reveal=A.reveal)
-    rm, _, rb, _ = U.principled("thread", color=U.VERM, rough=0.55)
-    rb.inputs["Sheen Weight"].default_value = 0.6
+    rm, _, rb, _ = U.principled("thread", color="#D0081E", rough=0.4)
+    rb.inputs["Sheen Weight"].default_value = 0.0
     ro.data.materials.append(rm)
     pinm, _, _, _ = U.principled("pin", color="#DDDDDD", metal=1.0, rough=0.15)
     for k in ("pwh", "hkstp"):

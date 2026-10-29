@@ -10,8 +10,9 @@ import {GM, BONE, RED, T, Tag, PrintGrain, Svg} from "./lib";
 
 export const CARD_DUR = 180;
 const Card = () => <OnCamCard who="A" src={staticFile("placeholder_hand.mp4")} videoStart={40} dur={CARD_DUR}/>;
-const Shell = ({children}) => <BoilProvider rate={2.5}>
+const Shell = ({children, bg}) => <BoilProvider rate={2.5}>
   <Stage grain={0.16}>
+    {bg && <Img src={staticFile(bg)} style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080}}/>}
     <Sequence from={0} durationInFrames={CARD_DUR}><AbsoluteFill><Card/></AbsoluteFill></Sequence>
     {children}
     <Svg><T x={960} y={1062} size={13} font={GM} anchor="middle" opacity={0.4} ls={3}>1-03 · A ON-CAM · PLACEHOLDER FOOTAGE</T></Svg>
@@ -96,5 +97,11 @@ export const O4Words = () => <Shell>
 // ------------------------------------------------------------------ opt2b beaker 3D: Blender lab beaker, a third full
 export const O2Beaker3D = () => <Shell>
   <Img src={staticFile("beaker.png")} style={{position: "absolute", left: 1000, top: 90, width: 900, height: 900}}/>
+  <Svg><Tag x={1840} y={1036}>ILLUSTRATIVE</Tag></Svg>
+</Shell>;
+
+// ------------------------------------------------------------------ v2 vitrine: the object lit like a museum piece in the same dark room as the card
+// Blender renders the whole 1920x1080 room (glossy black plinth, one pool of light, cobalt rim, shallow focus); the card sits over the left half.
+export const OVitrine = ({obj = "beaker"}) => <Shell bg={`vitrine_${obj}.png`}>
   <Svg><Tag x={1840} y={1036}>ILLUSTRATIVE</Tag></Svg>
 </Shell>;

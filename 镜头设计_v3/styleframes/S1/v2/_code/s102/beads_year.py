@@ -31,9 +31,9 @@ def mat(name):
 # red lacquer bead (glass read as dark on black; a glossy coated red keeps the vermilion and takes a cobalt rim)
 bead_m, nt, out = mat("bead")
 b = nt.nodes.new("ShaderNodeBsdfPrincipled")
-b.inputs["Base Color"].default_value = (0.85, 0.018, 0.006, 1); b.inputs["Roughness"].default_value = 0.25
+b.inputs["Base Color"].default_value = (0.86, 0.006, 0.03, 1); b.inputs["Roughness"].default_value = 0.25
 b.inputs["Coat Weight"].default_value = 1.0; b.inputs["Coat Roughness"].default_value = 0.02
-b.inputs["Subsurface Weight"].default_value = 0.2; b.inputs["Subsurface Radius"].default_value = (1.0, 0.05, 0.02)
+b.inputs["Subsurface Weight"].default_value = 0.2; b.inputs["Subsurface Radius"].default_value = (1.0, 0.02, 0.06)
 nt.links.new(b.outputs[0], out.inputs["Surface"])
 # empty slot: a tiny bone-white pinprick on the table (where a bead could have been)
 dot_m, nt, out = mat("slot")

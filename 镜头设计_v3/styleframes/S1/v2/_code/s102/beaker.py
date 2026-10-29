@@ -36,11 +36,11 @@ b = nt.nodes.new("ShaderNodeBsdfPrincipled")
 b.inputs["Base Color"].default_value = (1, 1, 1, 1); b.inputs["Roughness"].default_value = 0.0
 b.inputs["Transmission Weight"].default_value = 1.0; b.inputs["IOR"].default_value = 1.34
 nt.links.new(b.outputs[0], out.inputs["Surface"])
-va = nt.nodes.new("ShaderNodeVolumeAbsorption"); va.inputs["Color"].default_value = (1.0, 0.03, 0.01, 1); va.inputs["Density"].default_value = 5
-vs = nt.nodes.new("ShaderNodeVolumeScatter"); vs.inputs["Color"].default_value = (1.0, 0.05, 0.02, 1); vs.inputs["Density"].default_value = 5.0
+va = nt.nodes.new("ShaderNodeVolumeAbsorption"); va.inputs["Color"].default_value = (1.0, 0.01, 0.06, 1); va.inputs["Density"].default_value = 5
+vs = nt.nodes.new("ShaderNodeVolumeScatter"); vs.inputs["Color"].default_value = (1.0, 0.02, 0.07, 1); vs.inputs["Density"].default_value = 5.0
 ad = nt.nodes.new("ShaderNodeAddShader"); nt.links.new(va.outputs[0], ad.inputs[0]); nt.links.new(vs.outputs[0], ad.inputs[1])
 # a faint glow from within (the backlight can't reach the volume through glass when it is hidden from transmission)
-ve = nt.nodes.new("ShaderNodeEmission"); ve.inputs["Color"].default_value = (1.0, 0.01, 0.004, 1); ve.inputs["Strength"].default_value = 0.45
+ve = nt.nodes.new("ShaderNodeEmission"); ve.inputs["Color"].default_value = (1.0, 0.004, 0.04, 1); ve.inputs["Strength"].default_value = 0.45
 ad2 = nt.nodes.new("ShaderNodeAddShader"); nt.links.new(ad.outputs[0], ad2.inputs[0]); nt.links.new(ve.outputs[0], ad2.inputs[1])
 nt.links.new(ad2.outputs[0], out.inputs["Volume"])
 

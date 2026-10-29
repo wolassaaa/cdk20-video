@@ -21,7 +21,9 @@ def hex2lin(h, a=1.0):
     return (*[f(x) for x in c], a)
 
 
-VERM, BLUE, KLEIN, INK, BG, CYAN = "#FF3B1F", "#1F3BFF", "#002FA7", "#EDEBE4", "#060606", "#29F0FF"
+# reds are biased to crimson in 3D so AgX/Filmic never pushes them to orange (renders read as #FF3B1F or deeper)
+VERM, BLUE, KLEIN, INK, BG, CYAN = "#E8102A", "#1F3BFF", "#002FA7", "#EDEBE4", "#060606", "#29F0FF"
+VERM_S = "#FF1A2E"  # crimson-leaning red for lit surfaces (gloss, ink, thread)
 
 
 def reset():
@@ -29,7 +31,7 @@ def reset():
     return bpy.context.scene
 
 
-def render_setup(scn, samples=256, w=1920, h=1080, pct=100, look="AgX - Base Contrast", exposure=0.0, bounces=12,
+def render_setup(scn, samples=256, w=1920, h=1080, pct=100, look="AgX - Punchy", exposure=0.0, bounces=12,
                  caustics=False, denoise=True, view="AgX"):
     scn.render.engine = "CYCLES"
     pref = bpy.context.preferences.addons["cycles"].preferences

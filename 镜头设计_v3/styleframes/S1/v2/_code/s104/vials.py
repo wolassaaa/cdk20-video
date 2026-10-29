@@ -34,8 +34,8 @@ scn.cycles.max_bounces = 16; scn.cycles.transmission_bounces = 16; scn.cycles.gl
 scn.cycles.caustics_refractive = False
 scn.render.resolution_x, scn.render.resolution_y = 1920, 1080
 scn.render.resolution_percentage = A.pct
-scn.view_settings.view_transform = "AgX"
-scn.view_settings.look = "AgX - Medium High Contrast"
+scn.view_settings.view_transform = "Standard"  # v2: AgX skewed the red to orange
+scn.view_settings.look = "Medium High Contrast"
 scn.view_settings.exposure = 0.0
 scn.render.image_settings.file_format = "PNG"
 w = bpy.data.worlds.new("w"); scn.world = w; w.use_nodes = True
@@ -62,10 +62,10 @@ def glass():
 def liquid():
     m, nt, out = mat("liquid")
     b = nt.nodes.new("ShaderNodeBsdfPrincipled")
-    b.inputs["Base Color"].default_value = (1.0, 0.06, 0.02, 1)
+    b.inputs["Base Color"].default_value = (1.0, 0.004, 0.014, 1)
     b.inputs["Roughness"].default_value = 0.05
     b.inputs["Transmission Weight"].default_value = 0.6
-    b.inputs["Emission Color"].default_value = (1.0, 0.018, 0.006, 1)
+    b.inputs["Emission Color"].default_value = (1.0, 0.004, 0.014, 1)  # crimson (v2 red pass)
     b.inputs["Emission Strength"].default_value = 1.5
     # seen through the neighbouring glass (transmission rays) the liquid is dark, so empty tubes stay blue
     lp = nt.nodes.new("ShaderNodeLightPath"); dk = nt.nodes.new("ShaderNodeBsdfDiffuse")

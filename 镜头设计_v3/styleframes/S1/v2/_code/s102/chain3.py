@@ -28,7 +28,7 @@ def mat(name):
 # glossy lacquer red
 red, nt, out = mat("lacquer")
 b = nt.nodes.new("ShaderNodeBsdfPrincipled")
-b.inputs["Base Color"].default_value = (0.75, 0.018, 0.006, 1)
+b.inputs["Base Color"].default_value = (0.75, 0.005, 0.026, 1)
 b.inputs["Roughness"].default_value = 0.22
 b.inputs["Coat Weight"].default_value = 1.0
 b.inputs["Coat Roughness"].default_value = 0.03

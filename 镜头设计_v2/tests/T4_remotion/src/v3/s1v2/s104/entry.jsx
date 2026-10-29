@@ -13,6 +13,8 @@ const Root = () => <>
     <Composition key={o.id + p} id={o.id + p} component={wrap(o.C, {part: p})} durationInFrames={60} fps={30} width={1920} height={1080}/>))}
   {LAYOUTS.flatMap(o => ["D", "B", "C"].map(w =>
     <Composition key={o.id + w} id={o.id + w} component={wrap(o.C, {who: w})} durationInFrames={60} fps={30} width={1920} height={1080}/>))}
+  {[["O4", "a"], ["O4", "b"], ["O4", "c"], ["O2", "a"]].map(([o, p]) => <Composition key={o + p + "2"} id={o + p + "2"}
+    component={wrap(OPTIONS_104.find(x => x.id === o).C, {part: p, v: 2})} durationInFrames={60} fps={30} width={1920} height={1080}/>)}
   {["a", "b", "c"].map(p => <Composition key={"M" + p} id={"Mask" + p} component={wrap(Mask, {part: p})} durationInFrames={1} fps={30} width={1920} height={1080}/>)}
 </>;
 registerRoot(Root);

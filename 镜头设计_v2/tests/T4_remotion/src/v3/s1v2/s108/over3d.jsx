@@ -17,8 +17,8 @@ export const RoadNeon = ({lit = 6}) => {
         const ty = top ? y - 70 : y + 92;
         return <g key={i} opacity={on ? 1 : 0.28}>
           <MText x={x} y={top ? ty - sz - 6 : ty - sz - 8} size={15} anchor="middle" color={on ? P.red : P.ink}>{ST[i].n}</MText>
-          <GText x={x} y={ty} size={sz} anchor="middle">{ST[i].name}</GText>
-          {ST[i].sub ? <MText x={x} y={ty + 30} size={13} anchor="middle" weight={400} ls={1} opacity={0.6}>{ST[i].sub}</MText> : null}
+          <GText x={x} y={ty} size={sz} anchor="middle" lh={1.0}>{top ? ST[i].name : ST[i].short}</GText>
+          {ST[i].sub ? <MText x={x} y={ty + (top ? 30 : sz * 2 + 2)} size={13} anchor="middle" weight={400} ls={1} opacity={0.6}>{ST[i].sub}</MText> : null}
         </g>;
       })}
       <Head>EVERY MEDICINE WALKS THE SAME ROAD</Head>
@@ -62,9 +62,9 @@ export const Stair = () => {
   return <Print grain={0.2} band={0.05}>
     <Plate src="plates/stair_full.png"/>
     <Svg>
-      {[1, 5, 10, 15, 19].map(k => <MText key={k} x={A[k][0] - 6} y={A[k][1] + 34} size={15} anchor="middle" opacity={0.8} ls={1}>{2006 + k + (k === 19 ? 1 : 0)}</MText>)}
+      {[5, 10, 15].map(k => <MText key={k} x={A[k][0] - 6} y={A[k][1] + 34} size={15} anchor="middle" opacity={0.8} ls={1}>{2006 + k}</MText>)}
       <MText x={70} y={1010} size={15} ls={3}>← 2006 · THE YEAR WE WERE BORN</MText>
-      <MText x={A[19][0] + 40} y={A[19][1] + 66} size={15} ls={3} anchor="end" color={P.red}>ONLY READY NOW</MText>
+      <MText x={A[19][0] + 60} y={A[19][1] - 40} size={15} ls={3} anchor="end" color={P.red}>2026 · ONLY READY NOW</MText>
       <GText x={70} y={200} size={110} weight={900} ls={-4}>US$2.8<tspan fill={P.blue} dx={30}>billion</tspan></GText>
       <MText x={74} y={250} size={15} ls={3} opacity={0.7}>IT CAN COST ALMOST · 1 CUBE = US$10 MILLION, RUNNING TOTAL</MText>
       <Tag/>

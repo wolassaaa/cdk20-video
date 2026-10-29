@@ -106,7 +106,7 @@ if __name__ == "__main__":
     if shot == "hit2": make(shot, B, [L1], 34, [(948, 790, 150)], 2)
     if shot == "hit3": make(shot, B, [L1, L2, L3], 34, [(948, 790, 190), (788, 750, 110), (1118, 772, 240), (1105, 420, 70)], 3)
     if shot == "1-01":
-        full = np.clip(0.85 + 0.2 * (fy / FH) + 0.12 * (value_noise(TW, TH, 200 * SS, 8, octaves=3) - 0.5), 0, 1)
+        full = np.clip(0.5 + 0.42 * (fy / FH) + 0.45 * (value_noise(TW, TH, 260 * SS, 8, octaves=3) - 0.5), 0, 1)
         xs_ = [1210, 1380, 1550, 1720]
         lines = [finger(px, 300 + 14 * i, px + 12 - 6 * i, 790 - 10 * i, 7 * (-1) ** i) for i, px in enumerate(xs_)]
         make(shot, full, lines, 30, [(1222, 785, 170), (1386, 776, 100), (1556, 766, 220), (1714, 756, 130), (1393, 430, 80)], 4)
