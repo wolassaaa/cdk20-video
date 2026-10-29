@@ -52,3 +52,6 @@ teacher_requirements_check/
 # ---- 片尾 AI 娘素材（CC BY-NC-SA，按 README 里的 commit 可重新下载）----
 镜头设计_v3/assets/ai_girls/crosspet/*/
 镜头设计_v3/assets/ai_girls/_contact_*.jpg
+
+# CrossPet sprites converted for Remotion (CC BY-NC-SA, re-download, see assets/ai_girls/README.md)
+镜头设计_v3/remotion_public/ai_girls/
