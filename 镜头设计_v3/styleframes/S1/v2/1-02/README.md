@@ -1,0 +1,23 @@
+# 1-02 · 00:08–00:25 · A · VO: style frames (agent s102)
+
+Script (v3.3): "That's 1,412 people in 2022 alone. Here, it's one of the three deadliest cancers, alongside lung and colorectal. And it's not just us. Worldwide, it's the sixth most common cancer, and the third deadliest."
+On-screen strings are copied from the script's Visual line: "1,412 deaths in Hong Kong, 2022" / "Top 3 deadliest in HK: lung · colorectal · liver" / "World: 6th most common · 3rd deadliest". Sources on screen: HKCaR 2022 liver factsheet (Hospital Authority, Oct 2024), plus the 2023 overview for the top-3 line; GLOBOCAN 2020 via Ren et al., Chem. Sci. 2023 for the world line.
+
+Each key frame shows one of the three statements. The `_b-` files are alternates: either the same idea carrying another statement, or the earlier 2D version of an idea that now has a Blender render.
+
+| File | Idea | Why it fits the line | Tool | Draws on |
+|---|---|---|---|---|
+| `opt1_fog-tally.png` | All 1,412 deaths are wiped as tally marks (283 groups) by a fingertip into a fogged window, with "1,412" written below and left to drip. A vermilion lamp and a cobalt lamp behind the glass bloom through the fog. | Each death is one mark made by a hand. Fog fades, so the count reads as something kept against forgetting. | Blender Cycles (`fog_mask.py` → `fog_glass.py`), type in Remotion | Writing on fogged glass (director's list). Doris Salcedo, *Palimpsest* (2013–17): names of the drowned that form in water and fade. |
+| `opt1_fog-tally_b-2d-ink.png` | The same count as dry-brush ink tallies on black. The last two strokes are red. | Same idea, flat. | Remotion | Prison-wall tally |
+| `opt2_liver.png` | The real liver (BodyParts3D) as blown glass: portal vein and hepatic artery in red, hepatic veins in pure blue. Big thin "1,412". | The organ itself, cold and beautiful, next to the number. This is the most "real anatomy" option. | Blender Cycles (`liver_rb.py`, adapted from the S1 look-dev) + Remotion | BodyParts3D renders (director liked them); anatomical glass models |
+| `opt2_liver_b-world.png` | The same liver carrying "World: 6th · 3rd". | Shows the option can carry the whole beat. | same | |
+| `opt3_year-beads.png` | 2022 laid out as a calendar on black lacquer, one red bead per death: 317 days hold four beads and 48 hold three, 1,412 in total (the script asserts the count). A cobalt horizon sits behind. | "About four a day" made physical: you see a year of it. Tagged SCHEMATIC, because the beads are spread evenly and are not daily data. | Blender Cycles (`beads_year.py`) + Remotion | Felix Gonzalez-Torres, candy spills (one object per person, a count you can see); Christian Boltanski, archives of the dead (*Les Archives du Coeur*) |
+| `opt3_year-beads_b-2d.png` | The same calendar as flat red dots (Ikeda-like). It is cleaner and reads faster. | | Remotion | |
+| `opt4_ikeda.png` | 1,412 hairlines in pure white, one per person, cut like a barcode across the full width. The last four lines (about one day) are red. A mono data line underneath steps through the three statements. | Data as a test pattern. The scale hits before the number does. | Remotion (flat, because flat is the idea) | Ryoji Ikeda, *data.tron* / *test pattern* |
+| `opt4_ikeda_b-world.png` | Same frame, on statement 03 (world). | | Remotion | |
+| `opt5_globe.png` | A black glass globe with land as cobalt lacquer beads (Natural Earth 110m), turned to Hong Kong, which is the one red bead. Big "6th / 3rd" ordinals. | The zoom from world to HK as an object you could hold. It matches the bead language of opt3. | Blender Cycles (`globe3d.py`, one merged mesh) + Remotion | Bead/pin world maps; Gonzalez-Torres again, for one object per place |
+| `opt5_globe_b-2d.png` | A flat orthographic dot globe with a graticule and a red HK crosshair. | Lighter alternative. | Remotion | |
+| `opt6_chain.png` | Three glossy vermilion chain links on International Klein Blue, posterised with heavy grain. Type: "Top 3 deadliest in HK: lung · colorectal · liver", with liver brightest. | The three deadliest, linked. The links are equal, so no values are implied (tagged ILLUSTRATIVE). | Blender Cycles (`chain3.py`) + Remotion | *Red Knot Chain* (Tangle Creations 2026, the director's reference); Yves Klein blue |
+
+Code: `../_code/s102/` (Blender scripts, `run_blender.sh`, `render.sh`, land-dot builder, fog mask). Remotion entry: `镜头设计_v2/tests/T4_remotion/src/v3/s1v2/s102/entry.jsx`. Its public dir is `_code/s102/public`, which holds the Blender renders and a copy of the placeholder footage.
+Credits on frames: BodyParts3D © DBCLS (CC BY 4.0); Natural Earth (public domain).

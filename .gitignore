@@ -64,3 +64,11 @@ teacher_requirements_check/
 镜头设计_v3/styleframes/S1/explore/**/stills/
 镜头设计_v3/blender/**/*.blend
 镜头设计_v3/blender/**/*.npz
+镜头设计_v3/styleframes/S1/v2/**/*.png
+镜头设计_v3/styleframes/S1/v2/**/*.mp4
+镜头设计_v3/styleframes/S1/v2/**/*.exr
+镜头设计_v3/styleframes/S1/v2/**/*.blend
+镜头设计_v3/styleframes/S1/v2/**/*.npz
+镜头设计_v3/styleframes/S1/v2/_code/**/public/
+镜头设计_v3/styleframes/S1/v2/_code/**/bundle*/
+镜头设计_v3/styleframes/S1/v2/_code/**/out/
