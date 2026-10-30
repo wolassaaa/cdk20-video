@@ -4,8 +4,9 @@
 //   "It can cost almost 2.8 billion US dollars."                                 6.0–10.3 s -> US$ counts to 2.8 BILLION, 2,800 cells fill
 //   "And of drugs tested in people, only about one in ten reaches the market."  10.5–16 s  -> ten circles, nine fade, one stays blood red
 import React from "react";
-import {AbsoluteFill, Sequence, useCurrentFrame} from "remotion";
+import {AbsoluteFill} from "remotion";
 import {ramp, inOut, outExpo, outCubic, outBack, hash, clamp01} from "../../../core";
+import {useFrame30, Seq30} from "../../../time30";
 import {Print, Tag, Svg, GText, MText, P, W, H} from "../../s108/common";
 
 export const DUR_108 = 480;
@@ -17,7 +18,7 @@ const land = (f, a, n = 10) => ({o: outCubic(ramp(f, a, a + n)), dy: 14 * (1 - o
 
 /* ------------------------------------------------------------------ A. time: 2006 -> 2026 */
 const Time = () => {
-  const f = useCurrentFrame();
+  const f = useFrame30();
   const x0 = 180, x1 = 1740, y = 610;
   const B0 = sec(2.3), B1 = sec(4.7);                      // the bar runs on "and it might only be ready now"
   const p = inOut(ramp(f, B0, B1));
@@ -59,7 +60,7 @@ const cellD = (n0, n1) => {           // cells n0..n1-1, filled column by column
 };
 const EMPTY = cellD(0, COLS * ROWS);
 const Money = () => {
-  const f = useCurrentFrame();
+  const f = useFrame30();
   const C0 = 24, C1 = 78;                     // local frames: count runs 6.8–8.6 s, lands on "2.8 billion"
   const p = clamp01(outCubic(ramp(f, C0, C1)) * 1.0);
   const n = Math.round(2800 * p);
@@ -87,7 +88,7 @@ const Money = () => {
 
 /* ------------------------------------------------------------------ C. one in ten */
 const Ten = () => {
-  const f = useCurrentFrame();
+  const f = useFrame30();
   const cx = i => 200 + i * 169, cy = 520, R = 62, win = 6;
   const IN = i => 6 + i * 3;                        // ten circles land (drugs tested in people)
   const FADE0 = sec(2.3);                            // "only about one in ten" (~12.8 s)
@@ -129,7 +130,7 @@ const Ten = () => {
 // panels dissolve into each other over 8 frames (as the v1 reel did)
 const PANELS = [[0, sec(6.0), Time], [sec(6.0), sec(10.5), Money], [sec(10.5), DUR_108, Ten]];
 const XF = 8;
-const Panel = ({C, fade}) => { const f = useCurrentFrame(); return <AbsoluteFill style={{opacity: fade ? inOut(ramp(f, 0, XF)) : 1}}><Print><C/></Print></AbsoluteFill>; };
+const Panel = ({C, fade}) => { const f = useFrame30(); return <AbsoluteFill style={{opacity: fade ? inOut(ramp(f, 0, XF)) : 1}}><Print><C/></Print></AbsoluteFill>; };
 export const Beat108 = () => <AbsoluteFill style={{background: P.bg}}>
-  {PANELS.map(([a, b, C], i) => <Sequence key={i} from={a} durationInFrames={b - a + (i < PANELS.length - 1 ? XF : 0)}><Panel C={C} fade={i > 0}/></Sequence>)}
+  {PANELS.map(([a, b, C], i) => <Seq30 key={i} from={a} durationInFrames={b - a + (i < PANELS.length - 1 ? XF : 0)}><Panel C={C} fade={i > 0}/></Seq30>)}
 </AbsoluteFill>;

@@ -1,23 +1,23 @@
 // 1-03 (00:25–00:31, A ON-CAM): "Here's the thing. We already have medicines. Just not good enough ones."
 // A's warm photo card at its half-screen state (left half); the options are what sits beside / around it.
 import React from "react";
-import {AbsoluteFill, Img, Sequence, staticFile, useCurrentFrame} from "remotion";
-import {C, BoilProvider, handLine} from "../../core";
+import {AbsoluteFill, Img, staticFile, useCurrentFrame} from "remotion";
+import {C, handLine} from "../../core";
 import {InkPath, Hatch} from "../../ink";
 import {InkDefs, Stage} from "../../texture";
+import {Seq30 as Sequence} from "../../time30";  // CARD_DUR counts at 30 fps
 import {OnCamCard} from "../../oncam/Card";
 import {GM, BONE, RED, T, Tag, PrintGrain, Svg} from "./lib";
 
 export const CARD_DUR = 180;
 const Card = () => <OnCamCard who="A" src={staticFile("placeholder_hand.mp4")} videoStart={40} dur={CARD_DUR}/>;
-const Shell = ({children, bg}) => <BoilProvider rate={2.5}>
-  <Stage grain={0.16}>
-    {bg && <Img src={staticFile(bg)} style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080}}/>}
-    <Sequence from={0} durationInFrames={CARD_DUR}><AbsoluteFill><Card/></AbsoluteFill></Sequence>
-    {children}
-    <Svg><T x={960} y={1062} size={13} font={GM} anchor="middle" opacity={0.4} ls={3}>1-03 · A ON-CAM · PLACEHOLDER FOOTAGE</T></Svg>
-  </Stage>
-</BoilProvider>;
+// No BoilProvider of its own: the boil clock comes from whoever hosts the shot, so a frozen reel freezes the card edge too.
+const Shell = ({children, bg}) => <Stage grain={0.16}>
+  {bg && <Img src={staticFile(bg)} style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080}}/>}
+  <Sequence from={0} durationInFrames={CARD_DUR}><AbsoluteFill><Card/></AbsoluteFill></Sequence>
+  {children}
+  <Svg><T x={960} y={1062} size={13} font={GM} anchor="middle" opacity={0.4} ls={3}>1-03 · A ON-CAM · PLACEHOLDER FOOTAGE</T></Svg>
+</Stage>;
 
 // stadium (capsule) outline as a point list, centred at (cx, cy), length L, radius r, rotated a
 const stadium = (cx, cy, L, r, a = 0, n = 26) => {

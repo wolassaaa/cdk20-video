@@ -1,0 +1,94 @@
+{
+  "notes": [
+    "Plan section 4 with the corrections of 核查修正. Run when the card is idle:  python run_bench.py cases_4k.json",
+    "Run r00*,r01*,r02*,s01*,s02* first, put the winning seed and denoiser into var WIN, then the rest. WIN starts empty, which keeps the approved look: animated seed, OptiX.",
+    "Rows 3-6 use --caustics 0, the plan's 4K setting. Rows 1-2 keep the script's caustics so they compare with frames_hq, and r13 is the A/B.",
+    "Hardest frames from the logs and frames_hq file times, at 1080p: 1-02 163-170 (17.0 s) against 60-67 (12.9 s), the rows the 1.61 / 0.58 reading is planned on, so both are here. 1-02 plates: 266 (10.7 s) over 450 (7.0 s). 1-04 A: window 254-259 (9.5 s), single peak 160 (15.9 s). 1-04 B: peak 10 (11.8 s). Canvas: 18-23 is the truck's fastest stretch, 79 the static end frame (11.3 s).",
+    "Remotion is at 60 fps through the fps prop, so frames are twice the plan's 30-based numbers: 1600 -> 3200, 3600 -> 7200, 3900 -> 7800. No baked-noise plates exist yet, so noiseDir stays null and the live filters are measured.",
+    "If time runs out, the plan cuts r10 and r11e first, then r06.",
+    "Not in this file: Render Time / Sample Count passes for row 3 (need multilayer EXR and a Blender-side reader), the 90-frame review loop of acceptance rule 6, real 4K phone footage, a real plate warp in Chrome. None of these has code yet."
+  ],
+  "vars": {
+    "ROOT": "D:/。hkbu/molecular science",
+    "CODE": "{ROOT}/镜头设计_v3/styleframes/S1/v2/_code",
+    "BL": "D:/software/tools/blender.exe",
+    "ORGANS": "{CODE}/reel2/organs102/organs.py",
+    "SCENE": "{CODE}/reel2/drugs104/scene.py",
+    "CANVAS": "{CODE}/reel2/motion/fontana_anim.py",
+    "POST": "{CODE}/reel2/motion/post_seq.py",
+    "RECOLOR": "{CODE}/reel2/organs102/recolor_seq.py",
+    "W1": "{CODE}/s110/bl_w1.py",
+    "METRICS": "{BENCH}/metrics.py",
+    "PUB": "{CODE}/reel/public",
+    "HQ": "{CODE}/reel2/organs102/frames_hq",
+    "R": "{ROOT}/镜头设计_v2/tests/T4_remotion",
+    "RCLI": "{R}/node_modules/@remotion/cli/remotion-cli.js",
+    "FF": "{R}/node_modules/@remotion/compositor-win32-x64-msvc/ffmpeg.exe",
+    "BLEND": ["-b", "--factory-startup", "-t", "4", "--python-exit-code", "1"],
+    "WIN": ["--seed", "7"],
+    "T4K": ["--pct", "200", "--tile", "4096", "--caustics", "0"],
+    "A4K": ["--shot", "A", "--pct", "200", "--tile", "4096", "--out-format", "png"],
+    "MASTER": ["--scale=2", "--concurrency=2", "--color-space=bt709", "--codec=h264", "--crf=17", "--x264-preset=slow", "--offthreadvideo-cache-size-in-bytes=1073741824", "--props={\"captions\":false,\"fps\":60}"],
+    "RMARK": "Rendered (\\d+)/\\d+"
+  },
+  "defaults": {"time_limit_s": 900, "vram_limit_gib": 15.5, "gpu": true},
+  "cases": [
+    {"name": "r00a_104a_existing", "cmd": ["{PY}", "{METRICS}", "seq", "{PUB}/drugs104/a", "--frames", "254-259", "--json", "{OUT}/r00a.json"], "gpu": false, "time_limit_s": 120, "est_min": 0.2, "note": "row 0: does the existing 96 spp flicker, costliest window (corrected from 251-256)"},
+    {"name": "r00b_104b_existing", "cmd": ["{PY}", "{METRICS}", "seq", "{PUB}/drugs104/b", "--frames", "34-41", "--json", "{OUT}/r00b.json"], "gpu": false, "time_limit_s": 120, "est_min": 0.2, "note": "row 0: same for 1-04 B"},
+    {"name": "r00c_warp", "cmd": ["{PY}", "-c", "pass"], "blocked": "row 0 warp checks (266 to 227/306, 450 to 397/509, 1-04 B 262 to 342, plus the full-lit frame at camera t=0): no warp script exists yet"},
+
+    {"name": "r01_102_1080_seed", "cmd": ["{BL}", "{BLEND}", "-P", "{ORGANS}", "--", "--out", "{OUT}/r01/f_####", "--frames", "60-67", "--samples", "512", "--thresh", "0.004", "--seed", "7"], "frames": 8, "time_limit_s": 600, "est_min": 2.3, "note": "row 1: fixed seed against frames_hq. Check by eye that noise does not stick to the screen"},
+    {"name": "r02_102_1080_oidn", "cmd": ["{BL}", "{BLEND}", "-P", "{ORGANS}", "--", "--out", "{OUT}/r02/f_####", "--frames", "60-67", "--samples", "512", "--thresh", "0.004", "--denoiser", "OIDN"], "frames": 8, "time_limit_s": 600, "est_min": 2.3, "note": "row 2: GPU OIDN, Accurate, against frames_hq"},
+    {"name": "s01_seed", "cmd": ["{PY}", "{METRICS}", "gate", "{OUT}/r01", "{HQ}", "--frames", "60-67", "--no-red", "--json", "{OUT}/s01.json"], "gpu": false, "time_limit_s": 180, "est_min": 0.3},
+    {"name": "s02_denoiser", "cmd": ["{PY}", "{METRICS}", "gate", "{OUT}/r02", "{HQ}", "--frames", "60-67", "--no-red", "--json", "{OUT}/s02.json"], "gpu": false, "time_limit_s": 180, "est_min": 0.3},
+
+    {"name": "r14_102_plate_250", "cmd": ["{BL}", "{BLEND}", "-P", "{ORGANS}", "--", "--out", "{OUT}/r14/plate", "--stills", "266", "--pct", "250", "--samples", "512", "--thresh", "0.004", "--tile", "4096", "--caustics", "0", "{WIN}"], "frames": 1, "time_limit_s": 420, "est_min": 1.2, "note": "heaviest VRAM case in the plan (4800x2700), run early. 266 is the costlier of the two plates"},
+
+    {"name": "r03_102_4k_ref", "cmd": ["{BL}", "{BLEND}", "-P", "{ORGANS}", "--", "--out", "{OUT}/r03/f_####", "--frames", "60-67", "--samples", "512", "--thresh", "0.004", "{T4K}", "{WIN}"], "frames": 8, "time_limit_s": 1300, "est_min": 9.1, "note": "row 3: 4K reference"},
+    {"name": "r04_102_4k_t1", "cmd": ["{BL}", "{BLEND}", "-P", "{ORGANS}", "--", "--out", "{OUT}/r04/f_####", "--frames", "60-67", "--samples", "256", "--thresh", "0.0057", "{T4K}", "{WIN}"], "frames": 8, "time_limit_s": 720, "est_min": 4.5, "note": "row 4: T1"},
+    {"name": "r04p_102_4k_t1_hardest", "cmd": ["{BL}", "{BLEND}", "-P", "{ORGANS}", "--", "--out", "{OUT}/r04p/f_####", "--frames", "163-170", "--samples", "256", "--thresh", "0.0057", "{T4K}", "{WIN}"], "frames": 8, "time_limit_s": 900, "est_min": 6, "note": "added: the costliest 1-02 window, inside the first pull-back, for the time budget"},
+    {"name": "r05_102_4k_t2", "cmd": ["{BL}", "{BLEND}", "-P", "{ORGANS}", "--", "--out", "{OUT}/r05/f_####", "--frames", "60-67", "--samples", "128", "--thresh", "0.008", "{T4K}", "{WIN}"], "frames": 8, "time_limit_s": 480, "est_min": 2.3, "note": "row 5: T2"},
+    {"name": "r06_102_4k_t1_default_tile", "cmd": ["{BL}", "{BLEND}", "-P", "{ORGANS}", "--", "--out", "{OUT}/r06/f_####", "--frames", "60-62", "--samples", "256", "--thresh", "0.0057", "--pct", "200", "--caustics", "0", "{WIN}"], "frames": 3, "time_limit_s": 420, "est_min": 1.7, "note": "row 6: what tiling costs against r04"},
+
+    {"name": "r07_104a_4k_256", "cmd": ["{BL}", "{BLEND}", "-P", "{SCENE}", "--", "{A4K}", "--out", "{OUT}/r07/", "--start", "254", "--end", "259", "--samples", "256", "--thresh", "0.01", "{WIN}"], "frames": 6, "time_limit_s": 1400, "est_min": 10.2, "note": "row 7: 1-04 reference, corrected window. The estimate came from a likely CPU+OptiX run, the script is OptiX only now"},
+    {"name": "r08_104a_4k_128", "cmd": ["{BL}", "{BLEND}", "-P", "{SCENE}", "--", "{A4K}", "--out", "{OUT}/r08/", "--start", "254", "--end", "259", "--samples", "128", "--thresh", "0.01", "{WIN}"], "frames": 6, "time_limit_s": 800, "est_min": 5.1, "note": "row 8: half the cap"},
+    {"name": "r08b_104a_4k_tight", "cmd": ["{BL}", "{BLEND}", "-P", "{SCENE}", "--", "{A4K}", "--out", "{OUT}/r08b/", "--start", "254", "--end", "259", "--samples", "256", "--thresh", "0.0057", "{WIN}"], "frames": 6, "time_limit_s": 1500, "est_min": 12, "note": "added by 核查修正: if 0.01 stops most pixels, the caps of r07 and r08 give the same picture and this is the only lever left"},
+    {"name": "r08c_104a_4k_peak", "cmd": ["{BL}", "{BLEND}", "-P", "{SCENE}", "--", "{A4K}", "--out", "{OUT}/r08c/", "--stills", "160", "--samples", "256", "--thresh", "0.01", "{WIN}"], "frames": 1, "time_limit_s": 540, "est_min": 2.8, "note": "added: the single costliest frame of shot A"},
+
+    {"name": "r09_104b_plates", "cmd": ["{PY}", "-c", "pass"], "blocked": "row 9: scene.py has no plate mode and the WebGL relight is not written"},
+    {"name": "r09p_104b_250_proxy", "cmd": ["{BL}", "{BLEND}", "-P", "{SCENE}", "--", "--shot", "B", "--out", "{OUT}/r09p/", "--stills", "10", "--pct", "250", "--samples", "256", "--tile", "4096", "--out-format", "png"], "frames": 1, "time_limit_s": 600, "est_min": 3.3, "note": "added: stands in for row 9's time and VRAM, a normal frame with all ten globes lit (peak of shot B) at plate size"},
+
+    {"name": "r10_w_pigment_250", "cmd": ["{BL}", "{BLEND}", "-P", "{W1}", "--", "--look", "pigment", "--samples", "256", "--pct", "250", "--tile", "4096", "--out", "{OUT}/r10/w_pigment.png"], "frames": 1, "time_limit_s": 180, "est_min": 3, "note": "row 10: limit from the plan. If it stops, r11e simply keeps the 1080p plate"},
+
+    {"name": "r11_bundle", "cmd": ["node", "{RCLI}", "bundle", "src/v3/s1v2/reel2/entry.jsx", "--out-dir={OUT}/r11_bundle", "--public-dir={PUB}"], "cwd": "{R}", "gpu": false, "time_limit_s": 300, "est_min": 1, "note": "on D:, since a bundle copies all of public (139 MB today)"},
+    {"name": "r11_plate", "cmd": ["{PY}", "-c", "import os, shutil, sys; os.path.exists(sys.argv[1]) and shutil.copyfile(sys.argv[1], sys.argv[2])", "{OUT}/r10/w_pigment.png", "{OUT}/r11_bundle/public/w_pigment.png"], "gpu": false, "time_limit_s": 30, "est_min": 0, "note": "puts the 250% plate into the bundle only, public stays as it is"},
+    {"name": "r11a_talk_png_angle", "cmd": ["node", "{RCLI}", "render", "{OUT}/r11_bundle", "S1Reel", "{OUT}/r11a.mp4", "--frames=3200-3259", "--image-format=png", "--gl=angle", "{MASTER}"], "cwd": "{R}", "frames": 60, "frame_marker": "{RMARK}", "time_limit_s": 600, "est_min": 2, "note": "row 11: 1-05..07, the 3 video streams. Footage is still the 720x1280 placeholder, so this says nothing about 4K HEVC decode"},
+    {"name": "r11b_talk_png_noangle", "cmd": ["node", "{RCLI}", "render", "{OUT}/r11_bundle", "S1Reel", "{OUT}/r11b.mp4", "--frames=3200-3259", "--image-format=png", "{MASTER}"], "cwd": "{R}", "frames": 60, "frame_marker": "{RMARK}", "time_limit_s": 600, "est_min": 2, "note": "row 11: does --gl=angle help"},
+    {"name": "r11c_talk_jpeg95_angle", "cmd": ["node", "{RCLI}", "render", "{OUT}/r11_bundle", "S1Reel", "{OUT}/r11c.mp4", "--frames=3200-3259", "--image-format=jpeg", "--jpeg-quality=95", "--gl=angle", "{MASTER}"], "cwd": "{R}", "frames": 60, "frame_marker": "{RMARK}", "time_limit_s": 600, "est_min": 2, "note": "added by 核查修正: JPEG q95 against r11a, the real cost of PNG capture"},
+    {"name": "r11d_map_png_angle", "cmd": ["node", "{RCLI}", "render", "{OUT}/r11_bundle", "S1Reel", "{OUT}/r11d.mp4", "--frames=7200-7259", "--image-format=png", "--gl=angle", "{MASTER}"], "cwd": "{R}", "frames": 60, "frame_marker": "{RMARK}", "time_limit_s": 600, "est_min": 2, "note": "row 11: does 1-11 flicker"},
+    {"name": "r11e_w1_png_angle", "cmd": ["node", "{RCLI}", "render", "{OUT}/r11_bundle", "S1Reel", "{OUT}/r11e.mp4", "--frames=7800-7859", "--image-format=png", "--gl=angle", "{MASTER}"], "cwd": "{R}", "frames": 60, "frame_marker": "{RMARK}", "time_limit_s": 600, "est_min": 2, "note": "row 11: does the slow push breathe"},
+    {"name": "r11d_decode", "cmd": ["{FF}", "-y", "-hide_banner", "-loglevel", "error", "-i", "{OUT}/r11d.mp4", "{OUT}/r11d_f/f_%04d.png"], "mkdir": ["{OUT}/r11d_f"], "gpu": false, "time_limit_s": 120, "est_min": 0.2},
+    {"name": "r11e_decode", "cmd": ["{FF}", "-y", "-hide_banner", "-loglevel", "error", "-i", "{OUT}/r11e.mp4", "{OUT}/r11e_f/f_%04d.png"], "mkdir": ["{OUT}/r11e_f"], "gpu": false, "time_limit_s": 120, "est_min": 0.2},
+    {"name": "s11d_map_flicker", "cmd": ["{PY}", "{METRICS}", "seq", "{OUT}/r11d_f", "--json", "{OUT}/s11d.json"], "gpu": false, "time_limit_s": 300, "est_min": 1},
+    {"name": "s11e_w1_sharpness", "cmd": ["{PY}", "{METRICS}", "seq", "{OUT}/r11e_f", "--json", "{OUT}/s11e.json"], "gpu": false, "time_limit_s": 300, "est_min": 1},
+
+    {"name": "r12_canvas_212", "cmd": ["{BL}", "{BLEND}", "-P", "{CANVAS}", "--", "--seq", "101", "--out", "{OUT}/r12_raw", "--only", "c101_018,c101_019,c101_020,c101_021,c101_022,c101_023,c101_079", "--pct", "212", "--samples", "384", "--tile", "4096"], "frames": 7, "time_limit_s": 900, "est_min": 5.2, "note": "added by 核查修正: the weave is near the 2 px Nyquist limit at 212%. 18-23 is the fastest truck, 79 the static end frame"},
+    {"name": "r12_post", "cmd": ["{PY}", "{POST}", "{OUT}/r12_raw", "{OUT}/r12_post", "--jpg", "95", "--sheet", "{OUT}/r12_sheet.jpg"], "gpu": false, "frames": 7, "frame_marker": "post c101", "time_limit_s": 300, "est_min": 2, "note": "single process, the plan guessed 15 s a frame"},
+    {"name": "s12_canvas_base", "cmd": ["{PY}", "{METRICS}", "seq", "{PUB}/motion/fontana/c101_*.jpg", "--frames", "18-23", "--json", "{OUT}/s12_base.json"], "gpu": false, "time_limit_s": 120, "est_min": 0.2, "note": "today's 1080p frames, to read r12 against"},
+    {"name": "s12_canvas", "cmd": ["{PY}", "{METRICS}", "seq", "{OUT}/r12_post", "--json", "{OUT}/s12.json"], "gpu": false, "time_limit_s": 300, "est_min": 0.5, "note": "shimmer shows as flicker and band above s12_canvas_base. Frame 79 is for the eye: look for moire"},
+
+    {"name": "r13_caustics_on", "cmd": ["{BL}", "{BLEND}", "-P", "{ORGANS}", "--", "--out", "{OUT}/r13_on/s", "--stills", "60", "--pct", "200", "--samples", "256", "--thresh", "0.0057", "--tile", "4096", "--caustics", "1", "{WIN}"], "frames": 1, "time_limit_s": 420, "est_min": 1.2, "note": "added by 核查修正: the look the director approved"},
+    {"name": "r13_caustics_off", "cmd": ["{BL}", "{BLEND}", "-P", "{ORGANS}", "--", "--out", "{OUT}/r13_off/s", "--stills", "60", "--pct", "200", "--samples", "256", "--thresh", "0.0057", "--tile", "4096", "--caustics", "0", "{WIN}"], "frames": 1, "time_limit_s": 420, "est_min": 1.2, "note": "the plan's 4K setting. Compare the two PNGs by eye, and the times"},
+
+    {"name": "r03_rc", "cmd": ["{PY}", "{RECOLOR}", "{OUT}/r03", "{OUT}/r03_rc"], "gpu": false, "frames": 8, "frame_marker": null, "time_limit_s": 180, "est_min": 0.3, "note": "finished pixels for the gate. Also times recolor_seq at 4K"},
+    {"name": "r04_rc", "cmd": ["{PY}", "{RECOLOR}", "{OUT}/r04", "{OUT}/r04_rc"], "gpu": false, "frames": 8, "frame_marker": null, "time_limit_s": 180, "est_min": 0.3},
+    {"name": "r05_rc", "cmd": ["{PY}", "{RECOLOR}", "{OUT}/r05", "{OUT}/r05_rc"], "gpu": false, "frames": 8, "frame_marker": null, "time_limit_s": 180, "est_min": 0.3},
+    {"name": "s04_t1_vs_ref", "cmd": ["{PY}", "{METRICS}", "gate", "{OUT}/r04_rc", "{OUT}/r03_rc", "--json", "{OUT}/s04.json"], "gpu": false, "time_limit_s": 420, "est_min": 1.5},
+    {"name": "s05_t2_vs_ref", "cmd": ["{PY}", "{METRICS}", "gate", "{OUT}/r05_rc", "{OUT}/r03_rc", "--json", "{OUT}/s05.json"], "gpu": false, "time_limit_s": 420, "est_min": 1.5},
+    {"name": "s07_256_vs_tight", "cmd": ["{PY}", "{METRICS}", "gate", "{OUT}/r07", "{OUT}/r08b", "--json", "{OUT}/s07.json"], "gpu": false, "time_limit_s": 420, "est_min": 1.2, "note": "is 256 / 0.01 already as good as the tighter threshold"},
+    {"name": "s08_128_vs_256", "cmd": ["{PY}", "{METRICS}", "gate", "{OUT}/r08", "{OUT}/r07", "--json", "{OUT}/s08.json"], "gpu": false, "time_limit_s": 420, "est_min": 1.2},
+
+    {"name": "r20a_102_round2_near_still", "cmd": ["{BL}", "{BLEND}", "-P", "{ORGANS}", "--", "--out", "{OUT}/r20a/f_####", "--frames", "220-227", "--samples", "256", "--thresh", "0.0057", "{T4K}", "{WIN}"], "frames": 8, "blocked": "round 2, outside the hour: delete this field and set the winning samples and threshold first", "time_limit_s": 900, "est_min": 4},
+    {"name": "r20b_102_round2_near_still", "cmd": ["{BL}", "{BLEND}", "-P", "{ORGANS}", "--", "--out", "{OUT}/r20b/f_####", "--frames", "390-397", "--samples", "256", "--thresh", "0.0057", "{T4K}", "{WIN}"], "frames": 8, "blocked": "round 2, outside the hour: delete this field and set the winning samples and threshold first", "time_limit_s": 900, "est_min": 3}
+  ]
+}

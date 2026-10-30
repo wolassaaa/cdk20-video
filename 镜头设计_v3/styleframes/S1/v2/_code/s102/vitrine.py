@@ -7,10 +7,13 @@ photo card can be laid over the left half and sit in the same dark room (the pli
   --obj row      nine clear capsules standing in a receding row; only two are filled red
 
 blender -b --factory-startup -t 4 -P vitrine.py -- --obj beaker --out X.png [--samples 768] [--pct 100]
+        [--resume 1] [--seed N --denoiser OIDN --tile 4096 --thresh 0.01 --caustics 0 --out-format png]  (flags: bl_common.RENDER_FLAGS)
 Refs: Damien Hirst, Pharmacy (1992) and the pill cabinets: medicine shown as a cool, lit specimen.
 """
-import bpy, bmesh, sys, math, argparse, random
+import bpy, bmesh, sys, math, argparse, random, os
 from mathutils import Vector
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "w0"))
+import bl_common as C
 
 argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 ap = argparse.ArgumentParser()
@@ -18,6 +21,7 @@ ap.add_argument("--obj", default="beaker")
 ap.add_argument("--out", required=True)
 ap.add_argument("--samples", type=int, default=768)
 ap.add_argument("--pct", type=int, default=100)
+C.add_render_flags(ap)
 A = ap.parse_args(argv)
 
 bpy.ops.wm.read_factory_settings(use_empty=True)
@@ -220,6 +224,5 @@ scn.cycles.max_bounces = 24; scn.cycles.transmission_bounces = 24; scn.cycles.vo
 scn.render.resolution_x = 1920; scn.render.resolution_y = 1080; scn.render.resolution_percentage = A.pct
 scn.view_settings.view_transform = "Standard"; scn.view_settings.look = "None"
 scn.render.image_settings.file_format = "PNG"; scn.render.image_settings.color_mode = "RGB"
-scn.render.filepath = A.out
-bpy.ops.render.render(write_still=True)
-print("DONE", A.out)
+C.apply_flags(scn, A)
+print("DONE", C.render(scn, A.out))

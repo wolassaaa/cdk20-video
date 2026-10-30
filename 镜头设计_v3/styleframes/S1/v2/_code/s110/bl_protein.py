@@ -1,13 +1,17 @@
 """1-10 / W1 protein looks. AlphaFold DB AF-Q8IZL9-F1 v6 (CC BY 4.0), predicted.
 blender -b -t 4 -P bl_protein.py -- --look glass|plddt|plaster|assemble|titleglass --out X.png [--samples N --pct P --t 0.5]
+        [--resume 1] [--seed N --denoiser OIDN --tile 4096 --thresh 0.01 --caustics 0 --out-format png]  (flags: bl_common.RENDER_FLAGS)
 """
-import bpy, sys, math, random
+import bpy, sys, math, random, os
 from mathutils import Vector, Euler
-sys.path.append("D:/。hkbu/molecular science/镜头设计_v3/styleframes/S1/v2/_code/s110/")
+HERE = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/") + "/"
+sys.path += [HERE, HERE + "../w0"]
 import bl_util as U
 import prot_geo as G
+import bl_common as C
+U.CODE, U.FONTS, G.JSON = HERE, HERE + "fonts/", HERE + "cdk20_backbone.json"   # those two modules hard-code D:/
 
-A = U.args({"look": "glass", "out": "", "samples": 256, "pct": 100, "t": 0.6, "rx": 18.0, "ry": 0.0, "rz": -28.0,
+A = U.args({**C.RENDER_FLAGS, "look": "glass", "out": "", "samples": 256, "pct": 100, "t": 0.6, "rx": 18.0, "ry": 0.0, "rz": -28.0,
             "cam": "", "fstop": 0.0, "exp": 0.0, "variant": 0, "view": "AgX"})
 scn = U.reset()
 U.render_setup(scn, samples=A.samples, pct=A.pct, exposure=A.exp, bounces=16, view=A.view)
@@ -188,4 +192,5 @@ elif look == "titleglass":
     U.plane("top", 1, (0, -1.0, 4.5), m=U.emissive("eT", U.INK, 2.0), scale=(5, 0.8, 1)).visible_camera = False
 
 cam = U.camera(*cam_d[:2], lens=cam_d[2], fstop=A.fstop)
-U.save(scn, A.out)
+C.apply_flags(scn, A)
+print("SAVED", C.render(scn, A.out))

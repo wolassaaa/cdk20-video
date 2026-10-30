@@ -4,12 +4,15 @@
   320-380 pull back again: oesophagus, stomach, prostate fade in; lung/colon reds drain to clear -> world row
 Everything at true relative scale (BodyParts3D, mm), one shared plinth.
 
-blender -b --factory-startup -t 4 -P organs.py -- --out DIR/f_#### [--frames 0-509 | --frame 100] [--samples 48] [--pct 100]
+blender -b --factory-startup -t 4 -P organs.py -- --out DIR/f_#### [--frames 0-509 | --stills 266,450] [--samples 48] [--pct 100]
+        [--step 3 --hold 1] [--resume 1] [--seed N --denoiser OIDN --tile 4096 --thresh 0.0057 --caustics 0 --out-format png]  (flags: bl_common.RENDER_FLAGS)
 Also writes DIR/../labels.json (projected label anchors per frame) when --labels is given.
 """
 import bpy, bmesh, sys, math, argparse, time, json, os
 from mathutils import Vector, Matrix
 from bpy_extras.object_utils import world_to_camera_view
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "w0"))
+import bl_common as C
 
 argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 ap = argparse.ArgumentParser()
@@ -23,9 +26,10 @@ ap.add_argument("--labels", default="")
 ap.add_argument("--labels_only", type=int, default=0)
 ap.add_argument("--exposure", type=float, default=0.35)
 ap.add_argument("--haze", type=float, default=0.025)
+C.add_render_flags(ap, seq=True)
 A = ap.parse_args(argv)
 
-ANAT = "D:/。hkbu/molecular science/镜头设计_v3/assets/anatomy/"
+ANAT = C.V3 + "/assets/anatomy/"
 V4 = ANAT + "bp3d_v4_groups_stl/"
 V3 = ANAT + "bp3d_v3_stl/"
 S = 0.01  # 1 unit = 100 mm
@@ -392,16 +396,15 @@ vs = scn.view_settings; vs.view_transform = "Standard"; vs.look = "None"; vs.exp
 for f, e in [(F_PULL1[0], A.exposure), (F_PULL1[1], A.exposure + 0.3), (F_PULL2[0], A.exposure + 0.3), (F_PULL2[1], A.exposure + 0.45)]:
     vs.exposure = e; vs.keyframe_insert("exposure", frame=f)
 scn.render.image_settings.file_format = "PNG"; scn.render.image_settings.color_mode = "RGB"; scn.render.image_settings.color_depth = "8"
+C.apply_flags(scn, A)
 
 if A.stills:
     for fr in [int(x) for x in A.stills.split(",")]:
-        scn.frame_set(fr); scn.render.filepath = A.out + "_%04d.png" % fr
-        t1 = time.time(); bpy.ops.render.render(write_still=True)
-        print("RENDER_TIME %.1fs -> %s" % (time.time() - t1, scn.render.filepath))
+        scn.frame_set(fr)
+        t1 = time.time(); p = C.render(scn, A.out + "_%04d.png" % fr)
+        print("RENDER_TIME %.1fs -> %s" % (time.time() - t1, p))
 elif A.frames:
     a, b = [int(x) for x in A.frames.split("-")]
-    step = 1
-    if ":" in A.frames: pass
-    scn.frame_start = a; scn.frame_end = b; scn.render.filepath = A.out
-    t1 = time.time(); bpy.ops.render.render(animation=True)
-    print("RENDER_TIME %.1fs (%d frames) -> %s" % (time.time() - t1, b - a + 1, A.out))
+    scn.render.filepath = A.out
+    t1 = time.time(); C.render_seq(scn, a, b, A)
+    print("RENDER_TIME %.1fs (%d frames) -> %s" % (time.time() - t1, (b - a) // max(1, A.step) + 1, A.out))

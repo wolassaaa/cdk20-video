@@ -1,0 +1,20 @@
+{
+  "notes": "Harmless cases that prove run_bench.py itself: every stop path, with no render.  python run_bench.py cases_selftest.json --out DIR",
+  "vars": {
+    "FRAMES": "import time\nfor i in range(3): print(\"Saved: 'frame %d'\" % i); time.sleep(0.3)",
+    "SLEEP": "import time; time.sleep(60)",
+    "TREE": "import subprocess, sys, time; c = subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(60)']); open(sys.argv[1], 'w').write(str(c.pid)); time.sleep(60)"
+  },
+  "defaults": {"time_limit_s": 20, "vram_limit_gib": 15.5, "gpu": false},
+  "cases": [
+    {"name": "frames_ok", "cmd": ["{PY}", "-c", "{FRAMES}"], "frames": 3, "note": "expect ok, 3 frames"},
+    {"name": "remotion_marker", "cmd": ["{PY}", "-c", "print('Rendered 2/8'); print('Rendered 2/8'); print('Rendered 8/8'); print('Encoded 8/8')"], "frames": 8, "frame_marker": "Rendered (\\d+)/\\d+", "note": "expect ok, 8 frames: a marker with a group counts"},
+    {"name": "no_marker", "cmd": ["{PY}", "-c", "pass"], "note": "expect ok: no frames expected"},
+    {"name": "exit_3", "cmd": ["{PY}", "-c", "raise SystemExit(3)"], "note": "expect failed"},
+    {"name": "short_run", "cmd": ["{PY}", "-c", "print(\"Saved: 'one'\")"], "frames": 5, "note": "expect incomplete: exit 0 with 1 of 5 frames, like a Blender script error"},
+    {"name": "time_limit", "cmd": ["{PY}", "-c", "{SLEEP}"], "time_limit_s": 2, "note": "expect time_limit near 2 s"},
+    {"name": "vram_stop", "cmd": ["{PY}", "-c", "{SLEEP}"], "gpu": true, "vram_limit_gib": 0.001, "note": "expect vram_limit: the desktop alone is over 1 MiB"},
+    {"name": "tree_kill", "cmd": ["{PY}", "-c", "{TREE}", "{OUT}/child.pid"], "time_limit_s": 2, "note": "expect time_limit, and the child in child.pid gone too"},
+    {"name": "blocked", "cmd": ["no-such-program"], "blocked": "expect blocked, never launched"}
+  ]
+}

@@ -2,10 +2,12 @@
 // a readable drug switch and 3-in-10 in 1-04; a recognisable Hong Kong map in 1-11 (modules in ./organs102, ./drugs104, ./map111, ./motion).
 // Public dir = 镜头设计_v3/styleframes/S1/v2/_code/reel/public (recoloured plates + fontana re-renders + placeholder_hand.mp4).
 // Reuses the option modules as-is; two small local copies (1-02 liver, W1 Klein v2) exist only because those modules hard-code an old red.
+// Every frame number here and in the modules counts at 30 fps; the fps prop (30 or 60) only changes how finely they are sampled, see ../../time30.jsx.
 import React from "react";
-import {registerRoot, Composition, AbsoluteFill, Sequence, Img, staticFile, useCurrentFrame} from "remotion";
+import {registerRoot, Composition, AbsoluteFill, Img, staticFile} from "remotion";
 import {C, W, H, BoilProvider, ramp, inOut, outExpo, clamp01} from "../../core";
-import {Grain, GrainScale} from "../../texture";
+import {useFrame30, Seq30, toFps} from "../../time30";
+import {Grain, GrainScale, BakedNoise} from "../../texture";
 import {OnCamCard} from "../../oncam/Card";
 // s102
 import {OVitrine} from "../s102/Frames103";
@@ -33,7 +35,7 @@ const S110o2 = OPTIONS_110.find(o => o.id === "S110o2").C;
 // ------------------------------------------------------------------ local: W1 Klein field v2 (s110 FW1 hard-codes the "?" as #E0102A)
 // "先静半拍，片名砸下": half a second of bare pigment, the title lands, subtitle and credits follow.
 const W1 = () => {
-  const f = useCurrentFrame();
+  const f = useFrame30();
   const land = ramp(f, 15, 19), slam = 1 + 0.06 * (1 - outExpo(ramp(f, 15, 24)));
   return <AbsoluteFill style={{background: K110.klein, overflow: "hidden"}}>
     <Plate110 src="w_pigment.png" style={{transform: `scale(${1.0 + 0.03 * f / sec(18)})`}}/>
@@ -53,11 +55,11 @@ const Bg = ({src}) => <Img src={staticFile(src)} style={{position: "absolute", l
 // Each speaker's segment is offset so the cards (and their footage) keep running instead of re-growing on every line.
 const TALK = [["D", 52, 54.7], ["B", 54.7, 57.0], ["C", 57.0, 60]];
 // C's layout lifts the prints 60 px: a 6-frame dissolve hides the jump.
-const Fade = ({n, children}) => { const f = useCurrentFrame(); return <AbsoluteFill style={{opacity: n ? inOut(ramp(f, 0, n)) : 1}}>{children}</AbsoluteFill>; };
+const Fade = ({n, children}) => { const f = useFrame30(); return <AbsoluteFill style={{opacity: n ? inOut(ramp(f, 0, n)) : 1}}>{children}</AbsoluteFill>; };
 const Talk = () => <>{TALK.map(([who, a, b]) => { const n = who === "C" ? 6 : 0, st = sec(a) - sec(52) - n;
-  return <Sequence key={who} from={st} durationInFrames={sec(b) - sec(a) + n}>
-    <Fade n={n}><Sequence from={-st}><L3 who={who}/></Sequence></Fade>
-  </Sequence>; })}</>;
+  return <Seq30 key={who} from={st} durationInFrames={sec(b) - sec(a) + n}>
+    <Fade n={n}><Seq30 from={-st}><L3 who={who}/></Seq30></Fade>
+  </Seq30>; })}</>;
 
 // ------------------------------------------------------------------ shot list: [from s, to s, fade-in frames, push [s0, s1], render]
 // fade-in = the shot dissolves in over the one below it (which is held under it for those frames). 0 = hard cut.
@@ -78,7 +80,7 @@ const SHOTS = [
 ];
 
 const Shot = ({s, tail}) => {
-  const f = useCurrentFrame(), len = sec(s.b) - sec(s.a) + tail;
+  const f = useFrame30(), len = sec(s.b) - sec(s.a) + tail;
   const op = s.fi ? inOut(ramp(f, 0, s.fi)) : 1;
   const sc = s.kick ? kick(f) : s.push ? s.push[0] + (s.push[1] - s.push[0]) * (f / len) : 1;
   return <AbsoluteFill style={{opacity: op, overflow: "hidden", background: "#000"}}>
@@ -115,7 +117,7 @@ const CAP = [
 ];
 const tc = f => { const s = Math.floor(f / FPS); return `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`; };
 const Captions = () => {
-  const f = useCurrentFrame(), t = f / FPS;
+  const f = useFrame30(), t = f / FPS;
   const c = CAP.find(([a, b]) => t >= a && t < b);
   return <AbsoluteFill style={{pointerEvents: "none"}}>
     <div style={{position: "absolute", left: 0, right: 0, bottom: 0, height: 52, background: "linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.35) 70%, rgba(0,0,0,0) 100%)"}}/>
@@ -127,18 +129,20 @@ const Captions = () => {
 
 // Director (10-30): grain and boil read as blur and flicker. Default: no moving grain, boil frozen (lines stop re-drawing),
 // plus one very faint static dither so dark gradients don't band. grain/boil props bring the textured look back.
-export const S1Reel = ({captions = true, grain = 0, boil = false, dither = 0.035}) => <GrainScale.Provider value={grain}><BoilProvider rate={2.5} frozen={!boil}>
+// noiseDir: public/ folder of baked 4K noise plates (see BakedNoise in texture.jsx), for --scale=2 only. null = live filters.
+export const S1Reel = ({captions = true, grain = 0, boil = false, dither = 0.035, noiseDir = null}) => <BakedNoise.Provider value={noiseDir}><GrainScale.Provider value={grain}><BoilProvider rate={2.5} frozen={!boil}>
   <AbsoluteFill style={{background: "#000"}}>
     {SHOTS.map((s, i) => {
       const tail = SHOTS[i + 1] ? SHOTS[i + 1].fi : 0;
-      return <Sequence key={i} from={sec(s.a)} durationInFrames={sec(s.b) - sec(s.a) + tail}><Shot s={s} tail={tail}/></Sequence>;
+      return <Seq30 key={i} from={sec(s.a)} durationInFrames={sec(s.b) - sec(s.a) + tail}><Shot s={s} tail={tail}/></Seq30>;
     })}
     {dither ? <GrainScale.Provider value={1}><BoilProvider frozen><Grain opacity={dither}/></BoilProvider></GrainScale.Provider> : null}
     {captions ? <Captions/> : null}
   </AbsoluteFill>
-</BoilProvider></GrainScale.Provider>;
+</BoilProvider></GrainScale.Provider></BakedNoise.Provider>;
 
 const Root = () => <>
-  <Composition id="S1Reel" component={S1Reel} durationInFrames={DUR} fps={FPS} width={1920} height={1080} defaultProps={{captions: true, grain: 0, boil: false, dither: 0.035}}/>
+  <Composition id="S1Reel" component={S1Reel} durationInFrames={DUR} fps={FPS} width={1920} height={1080} defaultProps={{captions: true, grain: 0, boil: false, dither: 0.035, noiseDir: null, fps: FPS}}
+    calculateMetadata={({props}) => ({fps: props.fps, durationInFrames: toFps(DUR, props.fps)})}/>
 </>;
 registerRoot(Root);

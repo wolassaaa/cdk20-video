@@ -5,18 +5,21 @@ Changes: the canvas is wider (the 1-01 camera sits further left and further back
 and the camera can move. The mesh is rebuilt per frame from the numpy grid (foreach_set, ~1 s).
 
   blender -b --factory-startup -t 4 -P fontana_anim.py -- --seq w0|101|all --out DIR [--only 0,5,40] [--samples 384]
+        [--step 3 --hold 1] [--resume 1] [--seed N --denoiser OIDN --tile 4096 --thresh 0.01 --caustics 0 --out-format png]  (flags: bl_common.RENDER_FLAGS)
 Frame plan (unique frames only; Remotion maps every timeline frame to one of these):  plan() below, also written to DIR/plan.json.
+--stills is another name for --only. --step counts through the plan, so every plan entry still gets a file only with --hold 1.
 """
 import os, sys, json
-sys.path.insert(0, "D:/。hkbu/molecular science/镜头设计_v3/styleframes/S1/v2/_code/w0")
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "w0"))
 from bl_common import *
 import numpy as np
 
 argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 ap = argparse.ArgumentParser()
 ap.add_argument("--seq", default="all"); ap.add_argument("--out", required=True)
-ap.add_argument("--only", default=""); ap.add_argument("--samples", type=int, default=384); ap.add_argument("--pct", type=int, default=100)
+ap.add_argument("--only", "--stills", default=""); ap.add_argument("--samples", type=int, default=384); ap.add_argument("--pct", type=int, default=100)
 ap.add_argument("--planonly", action="store_true")
+add_render_flags(ap, seq=True)
 A = ap.parse_args(argv)
 
 PX = 400.0
@@ -197,7 +200,7 @@ area(scn, "key", 420, 0.6, (-3.4, -1.2, 2.6), (0.4, 0, -0.3), (0.9, 0.95, 1.0), 
 area(scn, "fill", 30, 4, (1.5, -5, 0.5), (0, 0, 0), (0.6, 0.75, 1.0))
 
 cam = camera(scn, CAM_HIT["pos"], CAM_HIT["tgt"], lens=CAM_HIT["lens"], fstop=5.6, focus=CAM_HIT["focus"])
-gpu(scn, A.samples, A.pct, view="Standard", look="None")
+gpu(scn, A.samples, A.pct, view="Standard", look="None", flags=A)
 
 
 def set_cam(c):
@@ -206,7 +209,15 @@ def set_cam(c):
     cam.data.lens = c["lens"]; cam.data.dof.focus_distance = c["focus"]
 
 
-for p in PLAN:
+held = None
+for i, p in enumerate(PLAN):
+    path = out_file(os.path.join(A.out, p["name"] + ".png"), A.out_format)
+    if i % max(1, A.step):
+        if A.hold and held: shutil.copyfile(held, path)
+        continue
+    held = path
+    if A.resume and frame_done(path):
+        print("SKIP", path); continue
     set_mesh(*geometry(p["cuts"]))
     for (ld, o, e0, cx, y0, y1, lean, bow), (s, w, fl) in zip(LIGHTS, p["cuts"]):
         ld.energy = e0 * min(w, 1.0) * fl * min(1.0, s * 1.2)
@@ -215,5 +226,5 @@ for p in PLAN:
         o.location = ((cx + lean * (ym - y0) + bow * math.sin(math.pi * (ym - y0) / (y1 - y0)) - 960) / PX, 0.16, (540 - ym) / PX)
         ld.size_y = max(0.02, (ye - y0) / PX * 0.8)
     set_cam(p["cam"])
-    render(scn, os.path.join(A.out, p["name"] + ".png"))
+    render(scn, path)
 print("ALLDONE", len(PLAN))

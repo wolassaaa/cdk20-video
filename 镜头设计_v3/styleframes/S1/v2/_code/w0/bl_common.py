@@ -1,14 +1,112 @@
 """Shared Blender helpers for the W0 / 1-01 options (Blender 5.1, Cycles GPU OPTIX).
 Run one Blender at a time:  blender.exe -b --factory-startup -t 4 -P optX.py -- --shot hit1 --out X.png
 """
-import bpy, bmesh, sys, math, argparse
+import bpy, bmesh, sys, math, argparse, os, shutil, time
 from mathutils import Vector
 
-ANAT = "D:/。hkbu/molecular science/镜头设计_v3/assets/anatomy/bp3d_v4_groups_stl/"
+# the 镜头设计_v3 folder: found from this file, or set HKBU_V3 if the assets live elsewhere (a rented machine)
+V3 = (os.environ.get("HKBU_V3") or os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "..", ".."))).replace("\\", "/")
+ANAT = V3 + "/assets/anatomy/bp3d_v4_groups_stl/"
 LIVER_C = Vector((-10.35, -122.87, 1105.54))
+
+# 4K batch flags, shared by every Cycles script. Each default leaves the script as it is, so a run without them renders what it always did.
+RENDER_FLAGS = {
+    "seed": -1,        # >=0: fixed Cycles seed, use_animated_seed off
+    "denoiser": "",    # OPTIX | OIDN (OIDN: on the GPU, Accurate prefilter, High quality)
+    "tile": 0,         # tile_size. 4096 keeps a 4K frame in one tile; the 2048 default splits it and caches tiles to disk
+    "thresh": 0.0,     # >0: adaptive sampling threshold
+    "caustics": -1,    # 0/1: refractive caustics. Reflective stays as the script set it.
+    "out-format": "",  # png | jpg. Blender's JPEG is 4:2:0, so for 4:4:4 write png and convert with PIL.
+    "resume": 0,       # 1: skip frames already on disk and whole. It cannot see settings, so give each setting its own --out.
+    "vram-log": "",    # path: append nvidia-smi samples (csv) once a second
+}
+SEQ_FLAGS = {          # scripts with a timeline only
+    "step": 1,         # render every Nth frame (drafts)
+    "hold": 0,         # 1: copy each rendered frame over the skipped ones, so the sequence has no gaps
+}
+_flags = None          # the parsed flags: args() and apply_flags() set them, gpu() and render() read them
+
+
+def add_render_flags(ap, seq=False):
+    """A flag the script already has stays the script's own (organs --thresh)."""
+    for k, v in {**RENDER_FLAGS, **(SEQ_FLAGS if seq else {})}.items():
+        if "--" + k not in ap._option_string_actions: ap.add_argument("--" + k, type=type(v), default=v)
+
+
+def vram_log(path, every=1.0, cmd=("nvidia-smi", "--query-gpu=timestamp,memory.used,memory.total,utilization.gpu", "--format=csv,noheader,nounits")):
+    """Sample the card from a daemon thread: it dies with Blender, so an out-of-memory crash leaves no nvidia-smi running."""
+    import subprocess, threading
+
+    def loop():
+        with open(path, "a") as f:
+            while True:
+                try: f.write(subprocess.run(cmd, capture_output=True, text=True, timeout=5, creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0)).stdout)
+                except Exception as e: print("vram-log stopped:", e); return
+                f.flush(); time.sleep(every)
+    threading.Thread(target=loop, daemon=True).start()
+
+
+def apply_flags(scn, A, seed=None):
+    """Lay the flags over a script's own Cycles setup. Call it last, just before rendering. seed: a script whose --seed means something else passes its own."""
+    global _flags
+    _flags = A
+    c, st, r = scn.cycles, scn.render.image_settings, scn.render
+    seed = A.seed if seed is None else seed
+    if seed >= 0: c.seed = seed; c.use_animated_seed = False
+    if A.denoiser == "OIDN":
+        c.denoiser = "OPENIMAGEDENOISE"; c.denoising_use_gpu = True
+        c.denoising_prefilter = "ACCURATE"; c.denoising_quality = "HIGH"
+    elif A.denoiser: c.denoiser = A.denoiser
+    if A.tile > 0: c.tile_size = A.tile
+    if A.thresh > 0: c.use_adaptive_sampling = True; c.adaptive_threshold = A.thresh
+    if A.caustics >= 0: c.caustics_refractive = bool(A.caustics)
+    if A.out_format not in ("", "png", "jpg"): raise ValueError("--out-format png|jpg, got " + A.out_format)
+    if A.out_format == "jpg" and st.file_format != "JPEG":
+        st.file_format = "JPEG"; st.color_mode = "RGB"; st.quality = 95
+    elif A.out_format == "png" and st.file_format != "PNG":
+        st.file_format = "PNG"; st.color_mode = "RGB"; st.color_depth = "8"
+    if A.vram_log: vram_log(A.vram_log)
+    w, h = r.resolution_x * r.resolution_percentage // 100, r.resolution_y * r.resolution_percentage // 100
+    print("SETTINGS %dx%d tiles=%s(%d) spp=%d thresh=%g seed=%d animated=%s denoiser=%s gpu=%s refr_caustics=%s %s devices=%s" % (
+        w, h, "many" if w * h > c.tile_size ** 2 else "one", c.tile_size, c.samples, c.adaptive_threshold, c.seed, c.use_animated_seed, c.denoiser,
+        c.denoising_use_gpu, c.caustics_refractive, st.file_format, [d.name for d in bpy.context.preferences.addons["cycles"].preferences.devices if d.use]))
+
+
+def out_file(path, fmt=""):
+    """path with the extension Blender will give it; fmt = --out-format, "" keeps what the path says."""
+    b, e = os.path.splitext(path)
+    if e.lower() not in (".png", ".jpg", ".jpeg"): b, e = path, ".png"
+    return b + ("." + fmt if fmt else e)
+
+
+def frame_done(path):
+    """True if path is a whole PNG or JPEG. Blender writes straight to the final name, so a crash mid-write leaves a cut-off file that must not count."""
+    try:
+        with open(path, "rb") as f:
+            f.seek(-12, 2); tail = f.read()
+    except OSError:
+        return False
+    return tail == b"\x00\x00\x00\x00IEND\xaeB`\x82" or tail[-2:] == b"\xff\xd9"
+
+
+def render_seq(scn, a, b, A):
+    """Animation render of frames a..b to scn.render.filepath, honouring --step, --hold and --resume."""
+    step = max(1, A.step); r = scn.render
+    scn.frame_start, scn.frame_end, scn.frame_step = a, b, step
+    if A.resume:
+        r.use_overwrite = False                     # Blender skips every file that exists, so take away the ones a crash cut off
+        for f in range(a, b + 1, step):
+            p = r.frame_path(frame=f)
+            if os.path.exists(p) and not frame_done(p):
+                print("CUT OFF, rendering again:", p); os.remove(p)
+    bpy.ops.render.render(animation=True)
+    if A.hold:
+        for f in range(a, b + 1, step):
+            for g in range(f + 1, min(f + step, b + 1)): shutil.copyfile(r.frame_path(frame=f), r.frame_path(frame=g))
 
 
 def args(extra=None):
+    global _flags
     argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
     ap = argparse.ArgumentParser()
     ap.add_argument("--shot", default="hit1")
@@ -17,7 +115,9 @@ def args(extra=None):
     ap.add_argument("--pct", type=int, default=100)
     ap.add_argument("--exposure", type=float, default=0.0)
     if extra: extra(ap)
-    return ap.parse_args(argv)
+    add_render_flags(ap)
+    _flags = ap.parse_args(argv)
+    return _flags
 
 
 def reset():
@@ -25,7 +125,7 @@ def reset():
     return bpy.context.scene
 
 
-def gpu(scn, samples, pct=100, transparent=False, view="AgX", look="AgX - Base Contrast", exposure=0.0):
+def gpu(scn, samples, pct=100, transparent=False, view="AgX", look="AgX - Base Contrast", exposure=0.0, flags=None):
     scn.render.engine = "CYCLES"
     pref = bpy.context.preferences.addons["cycles"].preferences
     for dev in ("OPTIX", "CUDA"):
@@ -53,14 +153,20 @@ def gpu(scn, samples, pct=100, transparent=False, view="AgX", look="AgX - Base C
     vs.exposure = exposure
     st = scn.render.image_settings
     st.file_format = "PNG"; st.color_mode = "RGBA" if transparent else "RGB"; st.color_depth = "16"
+    if flags or _flags: apply_flags(scn, flags or _flags)
 
 
 def render(scn, out):
-    import time
+    """Write one image and return its path. With --resume a whole file is left alone."""
+    if _flags:
+        out = out_file(out, _flags.out_format)
+        if _flags.resume and frame_done(out):
+            print("SKIP", out); return out
     scn.render.filepath = out
     t = time.time()
     bpy.ops.render.render(write_still=True)
     print("RENDER %.1fs -> %s" % (time.time() - t, out))
+    return out
 
 
 def mat(name):

@@ -2,8 +2,9 @@
 // Grows from the speaker's corner (A TL, B TR, C BL, D BR) to half screen, optionally to full, then back and out.
 // Children are drawn in card-local pixels (0..CW, 0..CH, overflow visible), so ink props scale and move with the card.
 import React from "react";
-import {OffthreadVideo, useCurrentFrame} from "remotion";
+import {OffthreadVideo, useVideoConfig} from "remotion";
 import {useBoil, ramp, clamp01, inOut, vnoise} from "../core";
+import {useFrame30, toFps} from "../time30";
 import {InkDefs} from "../texture";
 import {ThermalFilter} from "../thermal";
 
@@ -51,11 +52,11 @@ export const OcInkDefs = () => {
 
 /**
  * Place inside a <Sequence> that spans the card's time on screen (dur frames).
- * src: footage URL (staticFile). videoStart: first frame of the take to use.
+ * src: footage URL (staticFile). videoStart: first frame of the take to use, counted at 30 fps like dur, full and thermal.
  * thermal: [from, to] local frames: the take shows as a heat image first and develops into the warm print over that span.
  */
 export const OnCamCard = ({who, src, videoStart = 0, dur, full, thermal, children}) => {
-  const f = useCurrentFrame(), b = useBoil();
+  const f = useFrame30(), b = useBoil(), start = toFps(videoStart, useVideoConfig().fps);
   if (f >= dur) return null;
   const {show, grow, fu} = cardState(f, dur, full);
   const c = CORNER[who], left = c === 1 || c === 3, top = c <= 2;
@@ -69,13 +70,13 @@ export const OnCamCard = ({who, src, videoStart = 0, dur, full, thermal, childre
     <CardDefs id={who}/>
     <div style={{position: "absolute", inset: 0, background: PAPER, filter: `url(#oc-rough-${who})`, boxShadow: "0 0 70px rgba(58,36,18,0.55)"}}/>
     <div style={{position: "absolute", left: EDGE, top: EDGE, width: PIC_W, height: PIC_H, overflow: "hidden", background: LIFT}}>
-      <OffthreadVideo src={src} startFrom={videoStart} muted
+      <OffthreadVideo src={src} startFrom={start} muted
         style={{width: "100%", height: "100%", objectFit: "cover", filter: "sepia(0.22) saturate(1.12) contrast(0.94) brightness(1.03)"}}/>
       {/* warm: orange soft-light wash, blacks lifted to warm brown (a print, not dead black), soft vignette */}
       <div style={{position: "absolute", inset: 0, background: "#FF9A4A", mixBlendMode: "soft-light", opacity: 0.35}}/>
       <div style={{position: "absolute", inset: 0, background: LIFT, mixBlendMode: "lighten"}}/>
       <div style={{position: "absolute", inset: 0, background: "radial-gradient(ellipse at 50% 48%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.45) 100%)"}}/>
-      {thermal && f < thermal[1] && <OffthreadVideo src={src} startFrom={videoStart} muted
+      {thermal && f < thermal[1] && <OffthreadVideo src={src} startFrom={start} muted
         style={{position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", filter: `url(#oc-thermal-${who})`,
           opacity: 1 - inOut(ramp(f, thermal[0], thermal[1]))}}/>}
     </div>

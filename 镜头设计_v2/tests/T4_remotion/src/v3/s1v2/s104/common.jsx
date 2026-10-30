@@ -1,9 +1,10 @@
 // s104 shared: grotesk type, print texture (grain, banding, misregistration), tags. Palette per S1 brief v2.
-import React from "react";
+import React, {useContext} from "react";
 import {AbsoluteFill} from "remotion";
 import {loadFont as loadGrot} from "@remotion/google-fonts/InterTight";
 import {loadFont as loadSerif} from "@remotion/google-fonts/InstrumentSerif";
 import {C, MONO, W, H, useBoil} from "../../core";
+import {GrainScale, NoisePlate, useNoisePlate} from "../../texture";
 
 export const GROT = loadGrot("normal", {weights: ["200", "300", "500", "700", "800"], subsets: ["latin"]}).fontFamily;
 export const SERIF = loadSerif("italic", {weights: ["400"], subsets: ["latin"]}).fontFamily;
@@ -25,10 +26,18 @@ export const Tags = ({illustrative = true, source, beat = "1-04", opt, color = K
   <M x={W - 64} y={H - 44} size={12} anchor="end" color="rgba(237,235,228,0.3)" ls={2}>{`${beat}${opt ? " · " + opt : ""}`}</M>
 </g>;
 
-/** Print finish on top of everything: horizontal ink banding, dark + light grain, soft vignette. */
+/** Print finish on top of everything: horizontal ink banding, dark + light grain, soft vignette. GrainScale calms both grains; the band and vignette stay. */
 export const Print = ({grain = 0.32, band = 0.1, dark = 0.35, vignette = 0.5, seed = 0}) => {
   const s = (useBoil() % 997) + 1 + seed;
+  const plate = useNoisePlate();
+  const k = useContext(GrainScale);
+  grain *= k; dark *= k;
   return <AbsoluteFill style={{pointerEvents: "none"}}>
+    {plate ? <>
+      <NoisePlate src={plate(`print-band-${s + 5}`)} opacity={band}/>
+      {dark > 0 ? <NoisePlate src={plate(`print-dark-${s + 21}`)} opacity={dark}/> : null}
+      {grain > 0 ? <NoisePlate src={plate(`print-grain-${s + 9}`)} opacity={grain}/> : null}
+    </> : null}
     <svg width={W} height={H} style={{position: "absolute"}}>
       <defs>
         <filter id={`pb-${s}`} x="0" y="0" width="100%" height="100%">
@@ -48,9 +57,11 @@ export const Print = ({grain = 0.32, band = 0.1, dark = 0.35, vignette = 0.5, se
           <stop offset="1" stopColor="#000" stopOpacity="1"/>
         </radialGradient>
       </defs>
-      <rect width={W} height={H} filter={`url(#pb-${s})`} opacity={band}/>
-      <rect width={W} height={H} filter={`url(#pd-${s})`} opacity={dark}/>
-      <rect width={W} height={H} filter={`url(#pg-${s})`} opacity={grain}/>
+      {plate ? null : <>
+        <rect width={W} height={H} filter={`url(#pb-${s})`} opacity={band}/>
+        {dark > 0 ? <rect width={W} height={H} filter={`url(#pd-${s})`} opacity={dark}/> : null}
+        {grain > 0 ? <rect width={W} height={H} filter={`url(#pg-${s})`} opacity={grain}/> : null}
+      </>}
       <rect width={W} height={H} fill="url(#pv)" opacity={vignette}/>
     </svg>
   </AbsoluteFill>;

@@ -9,9 +9,10 @@
 // "5-year relative survival ~3 in 10 (HK, 2010-2021)", "huge unmet need"); "sorafenib", "tablets", "IV infusion"
 // and "compared with people of the same age and sex" (script Part 6 note on F22) are added descriptors.
 import React from "react";
-import {AbsoluteFill, Img, staticFile, useCurrentFrame} from "remotion";
+import {AbsoluteFill, Img, staticFile} from "remotion";
 import {ramp, inOut, outExpo, outCubic} from "../../../core";
 import {Grain} from "../../../texture";
+import {useFrame30} from "../../../time30";
 import {GROT, SERIF, MONO, K, W, H} from "../../s110/lib";
 import PA from "./projA.json";
 import PB from "./projB.json";
@@ -34,7 +35,7 @@ const SRC = "SOURCE  ";
 
 // ------------------------------------------------------------------ A: the switch
 const SwitchA = ({f}) => {
-  const p = PA[Math.min(NA, Math.max(1, f + 1))];
+  const p = PA[Math.min(NA, Math.max(1, Math.floor(f) + 1))];
   const xl = p.objL[0], xr = p.objR[0];
   const old = 1 - 0.62 * inOut(ramp(f, 166, 204));                 // "Nexavar" steps back with its light
   const newIn = outCubic(ramp(f, 196, 232));
@@ -69,7 +70,7 @@ const SwitchA = ({f}) => {
 const LIT = [1, 4, 8];
 const OUTS = [[6, 30], [0, 44], [9, 58], [3, 74], [7, 92], [2, 114], [5, 140]];   // = scene.py OUT (Blender frame)
 const SurvivalB = ({b}) => {               // b = local frame inside B (0..341); Blender frame = b + 1
-  const p = PB[Math.min(NB, Math.max(1, b + 1))];
+  const p = PB[Math.min(NB, Math.max(1, Math.floor(b) + 1))];
   const rIn = ramp(b, 6, 24), run = ramp(b, 24, 156);                // ruler: year 0 -> 5 over the seven outs
   const num = outExpo(ramp(b, 150, 176)), sub = ramp(b, 166, 192);
   const unmet = outCubic(ramp(b, 196, 236));
@@ -125,15 +126,15 @@ const SurvivalB = ({b}) => {               // b = local frame inside B (0..341);
 };
 
 export const Beat104 = () => {
-  const f = useCurrentFrame();
+  const f = useFrame30();
   const b = f - CUT;
   const aOp = 1 - ramp(f, CUT - 14, CUT), bOp = ramp(f, CUT, CUT + 16);    // short dip through black
   return <AbsoluteFill style={{background: K.bg, overflow: "hidden"}}>
     {f < CUT ? <div style={{opacity: aOp}}>
-      <Seq dir="a" idx={Math.min(NA, f + 1)}/>
+      <Seq dir="a" idx={Math.min(NA, Math.floor(f) + 1)}/>
       <SwitchA f={f}/>
     </div> : <div style={{opacity: bOp}}>
-      <Seq dir="b" idx={Math.min(NB, b + 1)}/>
+      <Seq dir="b" idx={Math.min(NB, Math.floor(b) + 1)}/>
       <SurvivalB b={b}/>
     </div>}
     <AbsoluteFill style={{pointerEvents: "none", background: "radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.45) 100%)"}}/>

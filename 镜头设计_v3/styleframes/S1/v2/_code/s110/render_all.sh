@@ -1,8 +1,8 @@
 #!/bin/bash
-# Final plates, one Blender at a time (GPU, -t 4). Usage: bash render_all.sh [pct] [filter]
+# Final plates, one Blender at a time (GPU, -t 4). Usage: [EXTRA="--tile 4096 --resume 1"] bash render_all.sh [pct] [filter]
 cd "$(dirname "$0")"
 B=/d/software/tools/blender.exe; P=${1:-100}; F=${2:-.}; O="$(pwd)/public"
-run(){ name=$1; shift; echo "$name" | grep -q -- "$F" || return 0; echo ">> $name"; $B -b -t 4 -P "$@" --pct $P --out "$O/$name.png" 2>&1 | grep -E "Error|SAVED|Traceback"; }
+run(){ name=$1; shift; echo "$name" | grep -q -- "$F" || return 0; echo ">> $name"; $B -b -t 4 -P "$@" --pct $P --out "$O/$name.png" ${EXTRA:-} 2>&1 | grep -E "Error|SAVED|Traceback"; }
 run p_glass bl_protein.py -- --look glass --samples 768 --fstop 4 --cam "0.2,-7.9,0.45,0.1,0,0,55"
 run p_plddt bl_protein.py -- --look plddt --samples 384 --cam "0.6,-5.6,1.2,0.2,0,-0.1,50" --fstop 2.8
 run p_plaster bl_protein.py -- --look plaster --samples 512

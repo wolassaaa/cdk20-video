@@ -1,6 +1,6 @@
 // Surface: black stage with print grain, ink-edge filters, halftone fields, dust.
 import React, {createContext, useContext} from "react";
-import {AbsoluteFill, useCurrentFrame} from "remotion";
+import {AbsoluteFill, Img, staticFile, useCurrentFrame} from "remotion";
 import {C, W, H, hash, useBoil, rotPt} from "./core";
 
 /**
@@ -34,10 +34,25 @@ export const InkDefs = ({textScale = 4.5, inkScale = 2.6}) => {
 /** Multiplies every Grain's opacity below it (a reel can calm all its modules at once). */
 export const GrainScale = createContext(1);
 
+/**
+ * Folder under public/ holding baked noise plates; null = live filters (default, today's look).
+ * A plate is one noise layer alone on transparent at full strength, 3840x2160 RGBA PNG, baked and used with --scale=2 so it lands 1:1 on the 4K frame.
+ * Names: grain-<seed>-<freq>, blotch-<seed>, print-band-<seed>, print-dark-<seed>, print-grain-<seed> (the seed each live filter would use).
+ * Plates hold one seed, so they only fit a frozen boil: a running boil asks for seeds that were never baked and <Img> stops the render.
+ */
+export const BakedNoise = createContext(null);
+export const useNoisePlate = () => {
+  const dir = useContext(BakedNoise);
+  return dir ? name => staticFile(`${dir}/${name}.png`) : null;
+};
+export const NoisePlate = ({src, opacity}) => <Img src={src} style={{position: "absolute", left: 0, top: 0, width: W, height: H, opacity, pointerEvents: "none"}}/>;
+
 export const Grain = ({opacity = 0.22, freq = 0.8}) => {
   const s = useBoil() % 997 + 1;
+  const plate = useNoisePlate();
   opacity *= useContext(GrainScale);
   if (opacity <= 0) return null;
+  if (plate) return <NoisePlate src={plate(`grain-${s}-${freq}`)} opacity={opacity}/>;
   return <AbsoluteFill style={{pointerEvents: "none"}}>
     <svg width={W} height={H}>
       <filter id={`v3-grain-${s}`} x="0" y="0" width="100%" height="100%">
@@ -50,15 +65,19 @@ export const Grain = ({opacity = 0.22, freq = 0.8}) => {
 };
 
 /** Uneven black: large soft blotches, like ink printed on rough stock. Static. */
-export const Blotch = ({opacity = 0.06, seed = 4}) => <AbsoluteFill style={{pointerEvents: "none"}}>
-  <svg width={W} height={H}>
-    <filter id={`v3-blotch-${seed}`} x="0" y="0" width="100%" height="100%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.0022" numOctaves="4" seed={seed}/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0.93  0 0 0 0 0.92  0 0 0 0 0.89  2.2 0 0 0 -0.9"/>
-    </filter>
-    <rect width={W} height={H} filter={`url(#v3-blotch-${seed})`} opacity={opacity}/>
-  </svg>
-</AbsoluteFill>;
+export const Blotch = ({opacity = 0.06, seed = 4}) => {
+  const plate = useNoisePlate();
+  if (plate) return <NoisePlate src={plate(`blotch-${seed}`)} opacity={opacity}/>;
+  return <AbsoluteFill style={{pointerEvents: "none"}}>
+    <svg width={W} height={H}>
+      <filter id={`v3-blotch-${seed}`} x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.0022" numOctaves="4" seed={seed}/>
+        <feColorMatrix type="matrix" values="0 0 0 0 0.93  0 0 0 0 0.92  0 0 0 0 0.89  2.2 0 0 0 -0.9"/>
+      </filter>
+      <rect width={W} height={H} filter={`url(#v3-blotch-${seed})`} opacity={opacity}/>
+    </svg>
+  </AbsoluteFill>;
+};
 
 /** Dust & hairline scratches that jump with the boil clock. */
 export const Dust = ({n = 26, color = C.ink, opacity = 0.5, seed = 9}) => {

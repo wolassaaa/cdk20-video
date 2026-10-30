@@ -9,8 +9,9 @@
 //   Test it in cells, then animals. (12.2–14.3) Then human trials: phase one, two, three. (14.6–17.0) Then approval. (17.3–18.2)
 //   Any step can fail. (18.5–19.7)
 import React from "react";
-import {AbsoluteFill, Img, staticFile, useCurrentFrame} from "remotion";
-import {ramp, outExpo, outCubic, inOut, hash} from "../../../core";
+import {AbsoluteFill, Img, staticFile} from "remotion";
+import {ramp, outExpo, outCubic, inOut} from "../../../core";
+import {useFrame30} from "../../../time30";
 import {Print, Tag, Svg, GText, MText, P, ST, W, H} from "../../s108/common";
 
 export const DUR_109 = 600;
@@ -39,14 +40,14 @@ const headX = f => {
 };
 // a neon tube striking: off/on stutter, then steady
 const FLICK = [1, 0.15, 0.9, 0, 0.35, 1, 0.6, 1, 1, 0.85, 1];
-const flick = (f, a) => f < a ? 0 : f - a < FLICK.length ? FLICK[f - a] : 1;
+const flick = (f, a) => f < a ? 0 : f - a < FLICK.length ? FLICK[Math.floor(f - a)] : 1;
 const moving = f => T.some(([a, b]) => f >= a && f < b) || (f >= TAIL[0] && f < TAIL[1]);
 
 const plate = n => staticFile(`motion/neon/${n}.png`);
 const Layer = ({n, clip, opacity = 1}) => <Img src={plate(n)} style={{position: "absolute", left: 0, top: 0, width: W, height: H, clipPath: clip, opacity}}/>;
 
 export const Beat109 = () => {
-  const f = useCurrentFrame();
+  const f = useFrame30();
   const xh = headX(f), yh = yOnPath(xh);
   const drops = [34, 17, 8, 4, 3, 1];
   const A = STX;
@@ -69,7 +70,7 @@ export const Beat109 = () => {
     </AbsoluteFill>
     <Svg>
       <defs><radialGradient id="mo-head"><stop offset="0" stopColor="#fff" stopOpacity="0.95"/><stop offset="0.25" stopColor={P.red} stopOpacity="0.8"/><stop offset="1" stopColor={P.red} stopOpacity="0"/></radialGradient></defs>
-      {moving(f) && xh > 0 && xh < W ? <circle cx={xh} cy={yh} r={26 + 6 * hash(f, 3)} fill="url(#mo-head)" style={{mixBlendMode: "screen"}}/> : null}
+      {moving(f) && xh > 0 && xh < W ? <circle cx={xh} cy={yh} r={29} fill="url(#mo-head)" style={{mixBlendMode: "screen"}}/> : null}
       {A.map(([x, y], i) => {
         const o = flick(f, T[i][1]), on = o > 0.5 && f >= T[i][1];
         const dimIn = 0.28 * ramp(f, HEAD + 6 + i * 2, HEAD + 18 + i * 2);

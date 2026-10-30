@@ -6,9 +6,10 @@
 // 镜头设计_v3/styleframes/S1/v2/_code/reel2/map111/prep111.py into ./prd.json (local metres, origin 114.17E 22.35N).
 // Everything is drawn as vector per frame through a small perspective camera (so the zoom is continuous and sharp).
 import React, {useMemo} from "react";
-import {AbsoluteFill, useCurrentFrame} from "remotion";
+import {AbsoluteFill} from "remotion";
 import {ramp, inOut, clamp01, lerp} from "../../../core";
 import {Finish, K, GROT, MONO, OSM_CREDIT, W, H} from "../../s110/lib";
+import {useFrame30} from "../../../time30";
 import DATA from "./prd.json";
 
 export const DUR_111 = 330;
@@ -75,7 +76,8 @@ const prepRings = rings => rings.map(r => {
 const LODS = DATA.lod.map(L => ({box: L.box, rings: prepRings(L.rings)}));
 const HKB = DATA.hk.map(p => ({p, a: 1, bb: [Math.min(...p.map(q => q[0])), Math.min(...p.map(q => q[1])), Math.max(...p.map(q => q[0])), Math.max(...p.map(q => q[1]))]}));
 
-const pathOf = (rings, pr, fp, z, pxMin = 0.8, close = true) => {
+// pxMin and the two decimals are in 1920 space: at --scale=2 that is 0.8 and 0.02 device px, fine enough for the 4K coast.
+const pathOf = (rings, pr, fp, z, pxMin = 0.4, close = true) => {
   let d = "";
   for (const r of rings) {
     const b = r.bb;
@@ -85,7 +87,7 @@ const pathOf = (rings, pr, fp, z, pxMin = 0.8, close = true) => {
       const s = pr(q[0], q[1], z);
       if (!s) continue;
       if (Math.abs(s[0] - lx) + Math.abs(s[1] - ly) < pxMin) continue;
-      seg += (n ? "L" : "M") + s[0].toFixed(1) + "," + s[1].toFixed(1);
+      seg += (n ? "L" : "M") + s[0].toFixed(2) + "," + s[1].toFixed(2);
       lx = s[0]; ly = s[1]; n++;
     }
     if (n >= 3) d += seg + (close ? "Z" : "");
@@ -200,11 +202,11 @@ const Graticule = ({pr, fp, s}) => {
     let d = "";
     for (let lo = Math.ceil(lon0 / st) * st; lo <= lon1; lo += st) {
       const a = pr((lo - LON0) * KX, fp[1]), b = pr((lo - LON0) * KX, fp[3]);
-      if (a && b) d += `M${a[0].toFixed(1)},${a[1].toFixed(1)}L${b[0].toFixed(1)},${b[1].toFixed(1)}`;
+      if (a && b) d += `M${a[0].toFixed(2)},${a[1].toFixed(2)}L${b[0].toFixed(2)},${b[1].toFixed(2)}`;
     }
     for (let la = Math.ceil(lat0 / st) * st; la <= lat1; la += st) {
       const a = pr(fp[0], (la - LAT0) * KY), b = pr(fp[2], (la - LAT0) * KY);
-      if (a && b) d += `M${a[0].toFixed(1)},${a[1].toFixed(1)}L${b[0].toFixed(1)},${b[1].toFixed(1)}`;
+      if (a && b) d += `M${a[0].toFixed(2)},${a[1].toFixed(2)}L${b[0].toFixed(2)},${b[1].toFixed(2)}`;
     }
     out.push(<path key={k} d={d} fill="none" stroke={COL.ink} strokeOpacity={0.09 * op} strokeWidth={1}/>);
   });
@@ -213,7 +215,7 @@ const Graticule = ({pr, fp, s}) => {
 
 // ------------------------------------------------------------------ the shot
 export const Beat111 = () => {
-  const f = useCurrentFrame();
+  const f = useFrame30();
   const cam = camAt(f);
   const {pr, fp} = makeProj(cam);
   const s = cam.s, zt = 0.011 * s;                       // slab thickness (only shows once the camera tilts)
@@ -224,14 +226,14 @@ export const Beat111 = () => {
   const layers = [{L: LODS[0], op: 1 - ramp(Math.log(s), Math.log(30000), Math.log(26000))}, {L: LODS[1], op: a1 * (1 - ramp(Math.log(s), Math.log(9500), Math.log(8200)))}, {L: LODS[2], op: a2}]
     .filter(o => o.op > 0.001)
     .map(o => ({...o, top: pathOf(o.L.rings, pr, fp, zt), base: cam.pitch > 0.01 ? pathOf(o.L.rings, pr, fp, 0) : ""}));
-  const hk = pathOf(HKB, pr, fp, zt, 0.8);
-  const hkLine = pathOf(HKB, pr, fp, zt, 0.8);
+  const hk = pathOf(HKB, pr, fp, zt, 0.4);
+  const hkLine = pathOf(HKB, pr, fp, zt, 0.4);
   const glowW = 10 + 10 * clamp01((S1 - s) / (S1 - S2));
 
   // route
   const u = inOut(ramp(f, 246, 300));
   const rpts = routeUpTo(u).map(q => pr(q[0], q[1], zt)).filter(Boolean);
-  const rd = rpts.length > 1 ? "M" + rpts.map(p => p[0].toFixed(1) + "," + p[1].toFixed(1)).join("L") : "";
+  const rd = rpts.length > 1 ? "M" + rpts.map(p => p[0].toFixed(2) + "," + p[1].toFixed(2)).join("L") : "";
   const head = rpts[rpts.length - 1];
   const pA = pr(POI.pwh[0], POI.pwh[1], zt), pB = pr(POI.hkstp[0], POI.hkstp[1], zt);
   const pHK = pr(LB.hk[0], LB.hk[1], zt);

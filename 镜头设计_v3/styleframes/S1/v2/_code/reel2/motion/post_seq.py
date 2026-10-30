@@ -1,13 +1,17 @@
-"""Post for the fontana frame sequence: exactly w0/post.py defaults (bloom 0.6 @ 0.55, vignette 0.25, grain 0.04, tonemap),
-except the grain seed follows the frame so the print grain lives instead of sitting still on a moving canvas,
+"""Post for the fontana frame sequence: exactly w0/post.py defaults (bloom 0.6 @ 0.55, vignette 0.25, tonemap), no grain unless asked for
+(--grain 0.04 is the old print grain, seed following the frame),
 then the reel's blood-red recolour (reel/py/recolor.py, --hue 2.5, as reel/py/recolor_all.sh does for the v1 fontana stills).
-python post_seq.py RAWDIR OUTDIR [--jpg 93] [--sheet sheet.jpg]
+Frames keep their size. Bloom radii are 1080p pixels and scale with height, 16-bit PNGs stay 16-bit up to the bloom (bench/png16.py).
+python post_seq.py RAWDIR OUTDIR [--jpg 93] [--sheet sheet.jpg] [--grain 0] [--workers 1]
 """
-import os, sys, glob, argparse, zlib
+import os, sys, glob, argparse, zlib, tempfile
+from multiprocessing.pool import ThreadPool
 sys.path.insert(0, "D:/。hkbu/molecular science/镜头设计_v3/styleframes/S1/v2/_code/w0")
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "bench"))
 import numpy as np
 from PIL import Image
-from sf import bloom, vignette, grain, tonemap, W, H
+from sf import bloom_lo, vignette, grain, tonemap, H
+from png16 import read_png16
 
 
 def recolor(a, hue=2.5, pull=0.6, val=0.93):
@@ -24,28 +28,46 @@ def recolor(a, hue=2.5, pull=0.6, val=0.93):
     new = np.stack([v, lo + (v - lo) * f, lo], -1)
     return a * (1 - w[..., None]) + new * w[..., None]
 
+
+def recolor_lut(hue=2.5, pull=0.6, val=0.93):
+    """every 8-bit colour through recolor() once, so a frame is one table lookup. 50 MB, kept in the temp folder."""
+    p = os.path.join(tempfile.gettempdir(), "recolor_lut_%g_%g_%g.npy" % (hue, pull, val))
+    if os.path.exists(p): return np.load(p)
+    g, b = np.meshgrid(np.arange(256), np.arange(256), indexing="ij")
+    lut = np.empty((1 << 24, 3), np.uint8)
+    for r in range(256):
+        a = np.stack([np.full_like(g, r), g, b], -1).astype(np.float32) / 255
+        lut[r << 16:(r + 1) << 16] = (np.clip(recolor(a, hue, pull, val), 0, 1) * 255 + 0.5).astype(np.uint8).reshape(-1, 3)
+    np.save(p, lut)
+    return lut
+
 ap = argparse.ArgumentParser()
 ap.add_argument("raw"); ap.add_argument("out"); ap.add_argument("--jpg", type=int, default=93); ap.add_argument("--sheet", default="")
-ap.add_argument("--grain", type=float, default=0.04)  # 0 since 10-30: the director found moving grain flickery
+ap.add_argument("--grain", type=float, default=0.0)  # 0 since 10-30: the director found moving grain flickery
+ap.add_argument("--workers", type=int, default=1)    # numpy, Pillow and zlib let go of the GIL, so threads are enough; 4K needs about 0.6 GB each
 A = ap.parse_args()
 os.makedirs(A.out, exist_ok=True)
 files = sorted(glob.glob(os.path.join(A.raw, "*.png")))
-thumbs = []
-for i, f in enumerate(files):
-    a = np.asarray(Image.open(f), np.float32)
-    a = a / (65535.0 if a.max() > 255 else 255.0)
+LUT = recolor_lut()
+
+
+def one(f):
+    a = read_png16(f)
+    if a is None: a = np.asarray(Image.open(f), np.float32) / 255
     img = a[..., :3]
-    if img.shape[1] != W: img = np.asarray(Image.fromarray((np.clip(img, 0, 1) * 255).astype(np.uint8)).resize((W, H), Image.LANCZOS), np.float32) / 255
-    img = bloom(img, sig=(4, 18, 60), gain=(0.18, 0.15, 0.132), thresh=0.55)
+    k = img.shape[0] / H
+    img = bloom_lo(img, sig=(4 * k, 18 * k, 60 * k), gain=(0.18, 0.15, 0.132), thresh=0.55)
     img = vignette(img, 0.25)
     name = os.path.splitext(os.path.basename(f))[0]
     if A.grain: img = grain(img, A.grain, seed=1000 + (zlib.crc32(name.encode()) % 100000))
     img = tonemap(img)
-    img = recolor(np.round(np.clip(img, 0, 1) * 255) / 255)
-    im = Image.fromarray((np.clip(img, 0, 1) * 255 + 0.5).astype(np.uint8))
+    q = np.round(np.clip(img, 0, 1) * 255).astype(np.uint32)
+    im = Image.fromarray(LUT[q[..., 0] << 16 | q[..., 1] << 8 | q[..., 2]])
     im.save(os.path.join(A.out, name + ".jpg"), quality=A.jpg, subsampling=0)
-    thumbs.append((name, im.resize((480, 270))))
     print("post", name)
+    return name, im.resize((480, 270))
+
+with ThreadPool(A.workers) as pool: thumbs = pool.map(one, files, 1)
 if A.sheet:
     from PIL import ImageDraw
     n = len(thumbs); cols = 4; rows = (n + cols - 1) // cols

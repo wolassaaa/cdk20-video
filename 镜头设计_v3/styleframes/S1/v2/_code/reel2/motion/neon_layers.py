@@ -1,6 +1,7 @@
 """reel2/motion COPY of s108/road3d.py, used only for --scene neon: renders the neon metro in separable layers for animation.
 --state L?S?B?  L1 = neon line lit, S1 = station discs lit, B1 = bead columns hang; red = blood red #E8190F.
 --anchors also lists the four path corners after the six stations.
+Optional: [--resume 1] [--seed N --denoiser OIDN --tile 4096 --thresh 0.01 --caustics 0 --out-format png]  (flags: bl_common.RENDER_FLAGS)
 """
 """S1 v2 / 1-08 + 1-09 Blender plates (no text; labels are laid on top in Remotion).
 
@@ -12,8 +13,10 @@ gates  : six light-frame gates (Flavin-like) in 3/4 perspective on a black mirro
 vials  : ten glass vials; nine clouded grey, one vermilion (1-08, "one in ten").
 --state lit4 : stations 1-4 lit, 5-6 dim (re-use proof).
 """
-import bpy, sys, math, random, argparse
+import bpy, sys, math, random, argparse, os
 from mathutils import Vector
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "w0"))
+import bl_common as C
 
 argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 ap = argparse.ArgumentParser()
@@ -25,6 +28,7 @@ ap.add_argument("--pct", type=int, default=100)
 ap.add_argument("--anchors", default="")
 ap.add_argument("--fstop", type=float, default=0.0)
 ap.add_argument("--mask", default="")
+C.add_render_flags(ap)
 A = ap.parse_args(argv)
 LINE, STS, BEADS = "L1" in A.state, "S1" in A.state, "B1" in A.state
 LIT = 6 if A.state == "full" else (int(A.state[3:]) if A.state.startswith("lit") else 4)
@@ -600,6 +604,5 @@ vs_ = scn.view_settings; vs_.view_transform = "Standard"
 try: vs_.look = "None"
 except Exception as e: print("look", e)
 scn.render.image_settings.file_format = "PNG"
-scn.render.filepath = A.out
-bpy.ops.render.render(write_still=True)
-print("WROTE", A.out)
+C.apply_flags(scn, A)
+print("WROTE", C.render(scn, A.out))

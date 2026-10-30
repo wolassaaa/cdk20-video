@@ -2,9 +2,10 @@
 // 镜头设计_v3/styleframes/S1/v2/_code/reel2/motion/fontana_anim.py (+ post_seq.py), public/motion/fontana/*.jpg.
 // Only the frames where something changes were rendered; every timeline frame maps to one of them.
 import React from "react";
-import {AbsoluteFill, Img, staticFile, useCurrentFrame} from "remotion";
+import {AbsoluteFill, Img, staticFile} from "remotion";
 import {W, H, ramp, outExpo, hash} from "../../../core";
 import {Grain} from "../../../texture";
+import {useFrame30} from "../../../time30";
 
 const OPEN = 8;               // rendered frames per opening (fontana_anim.py W_CURVE length)
 const HITS = [0, 20, 40];     // W0 drum hits (0, 0.67, 1.33 s)
@@ -29,9 +30,9 @@ const Frame = ({name, s = 1, x = 0, y = 0, origin = "50% 50%"}) =>
     transform: `translate(${x}px, ${y}px) scale(${s})`, transformOrigin: origin}}/>;
 
 export const BeatW0 = () => {
-  const f = useCurrentFrame();
+  const f = useFrame30();
   const h = [...HITS].reverse().find(v => v <= f) ?? 0, k = f - h;
-  const name = `w0_${pad(k < OPEN ? f : h + OPEN - 1, 2)}`;
+  const name = `w0_${pad(Math.floor(k < OPEN ? f : h + OPEN - 1), 2)}`;
   const kk = kick(k);
   return <AbsoluteFill style={{background: "#000", overflow: "hidden"}}>
     <Frame name={name} s={kk.s * 1.01} x={kk.x} y={kk.y}/>
@@ -40,13 +41,13 @@ export const BeatW0 = () => {
 
 // background only: A's on-camera card is laid on top by the reel (top-left stays plain canvas)
 export const Beat101Bg = () => {
-  const f = useCurrentFrame();
+  const f = useFrame30();
   const t = f <= TRUCK ? f : f < CUT4 ? TRUCK : f < CUT4 + OPEN ? f : CUT4 + OPEN - 1;
   const kk = kick(f - CUT4, 0.6);
   // the reel's v1 used a slow 1.00 -> 1.04 push; it starts once the camera has settled, centred on the cuts
   const push = 1.01 + 0.03 * ramp(f, TRUCK, DUR_101);
   return <AbsoluteFill style={{background: "#000", overflow: "hidden"}}>
-    <Frame name={`c101_${pad(t, 3)}`} s={kk.s * push} x={kk.x} y={kk.y} origin="74% 50%"/>
+    <Frame name={`c101_${pad(Math.floor(t), 3)}`} s={kk.s * push} x={kk.x} y={kk.y} origin="74% 50%"/>
     <Grain opacity={0.08}/>
   </AbsoluteFill>;
 };

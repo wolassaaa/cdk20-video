@@ -3,6 +3,8 @@
 python recolor_seq.py SRC_DIR DST_DIR"""
 import sys, os, numpy as np
 from PIL import Image
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "bench"))
+from png16 import read_png16
 
 HUE, PULL, VAL = 2.0, 1.0, 0.93
 
@@ -27,7 +29,8 @@ src, dst = sys.argv[1], sys.argv[2]
 os.makedirs(dst, exist_ok=True)
 fs = sorted(f for f in os.listdir(src) if f.endswith(".png"))
 for i, f in enumerate(fs):
-    a = np.asarray(Image.open(os.path.join(src, f)).convert("RGB"), np.float32) / 255
+    p = os.path.join(src, f); a = read_png16(p)   # organs.py writes 8-bit today; a 16-bit source keeps its bits up to the recolour
+    a = np.asarray(Image.open(p).convert("RGB"), np.float32) / 255 if a is None else a[..., :3]
     Image.fromarray(np.clip(recolor(a) * 255 + 0.5, 0, 255).astype(np.uint8)).save(os.path.join(dst, f), compress_level=1)
     if i % 50 == 0: print(i, f, flush=True)
 print("done", len(fs))

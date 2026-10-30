@@ -6,12 +6,15 @@
   B (342 f, 9.6-21 s): ten frosted glass globes on a long plinth, all lit blood red. Seven go out one by one
      (indices 6,0,9,3,7,2,5); 1,4,8 stay lit. Then a cold blue rim comes up on the seven dark ones.
 
-blender -b --factory-startup -t 4 -P scene.py -- --shot A|B --out DIR/prefix_ [--start N --end N]
-        [--samples 96] [--pct 100] [--proj file.json]
+blender -b --factory-startup -t 4 -P scene.py -- --shot A|B --out DIR/prefix_ [--start N --end N | --stills 100,262]
+        [--samples 96] [--pct 100] [--proj file.json] [--step 3 --hold 1] [--resume 1]
+        [--seed N --denoiser OIDN --tile 4096 --thresh 0.01 --caustics 0 --out-format png]  (flags: bl_common.RENDER_FLAGS)
 """
-import bpy, sys, math, json, argparse
+import bpy, sys, math, json, argparse, os
 from mathutils import Vector
 from bpy_extras.object_utils import world_to_camera_view
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "w0"))
+import bl_common as C
 
 argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 ap = argparse.ArgumentParser()
@@ -22,6 +25,8 @@ ap.add_argument("--end", type=int, default=0)
 ap.add_argument("--samples", type=int, default=96)
 ap.add_argument("--pct", type=int, default=100)
 ap.add_argument("--proj", default="")
+ap.add_argument("--stills", default="", help="comma-separated frames, same file names as the sequence")
+C.add_render_flags(ap, seq=True)
 A = ap.parse_args(argv)
 NFR = {"A": 288, "B": 342}[A.shot]
 
@@ -31,10 +36,11 @@ scn.render.engine = "CYCLES"
 prefs = bpy.context.preferences.addons["cycles"].preferences
 try:
     prefs.compute_device_type = "OPTIX"; prefs.get_devices()
-    for d in prefs.devices: d.use = True
+    for d in prefs.devices: d.use = (d.type == "OPTIX")   # OptiX cards only; True here also switched on the CPU
     scn.cycles.device = "GPU"
 except Exception as e:
     print("GPU fallback", e)
+scn.render.use_persistent_data = True
 scn.cycles.samples = A.samples
 scn.cycles.use_denoising = True
 scn.cycles.denoiser = "OPTIX"
@@ -301,6 +307,10 @@ if A.proj:
 end = A.end or NFR
 scn.frame_start, scn.frame_end = A.start, end
 scn.render.filepath = A.out
-import os
+C.apply_flags(scn, A)
 if os.environ.get("PROBE"): exec(open(os.environ["PROBE"]).read())
-else: bpy.ops.render.render(animation=True)
+elif A.stills:
+    paths = {f: scn.render.frame_path(frame=f) for f in [int(x) for x in A.stills.split(",")]}
+    for f, p in paths.items():
+        scn.frame_set(f); C.render(scn, p)
+else: C.render_seq(scn, A.start, end, A)

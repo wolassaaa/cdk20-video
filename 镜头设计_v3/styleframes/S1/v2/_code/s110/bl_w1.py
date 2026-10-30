@@ -1,12 +1,17 @@
 """W1 title-card plates (Blender Cycles). Type that must stay crisp is laid over in Remotion.
 blender -b -t 4 -P bl_w1.py -- --look fog|splash|rain|pigment --out X.png [--samples N --pct P]
+        [--resume 1] [--cseed N --denoiser OIDN --tile 4096 --thresh 0.01 --caustics 0 --out-format png]  (flags: bl_common.RENDER_FLAGS)
+--seed here is the layout seed (bokeh, ink, rain) and always was; the Cycles seed is --cseed.
 """
-import bpy, sys, math, json, random
+import bpy, sys, math, json, random, os
 from mathutils import Vector
-sys.path.append("D:/。hkbu/molecular science/镜头设计_v3/styleframes/S1/v2/_code/s110/")
+HERE = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/") + "/"
+sys.path += [HERE, HERE + "../w0"]
 import bl_util as U
+import bl_common as C
+U.CODE, U.FONTS = HERE, HERE + "fonts/"   # bl_util hard-codes D:/
 
-A = U.args({"look": "fog", "out": "", "samples": 256, "pct": 100, "fstop": 1.8, "exp": 0.0, "view": "AgX", "seed": 3})
+A = U.args({**C.RENDER_FLAGS, "look": "fog", "out": "", "samples": 256, "pct": 100, "fstop": 1.8, "exp": 0.0, "view": "AgX", "seed": 3, "cseed": -1})
 scn = U.reset()
 U.render_setup(scn, samples=A.samples, pct=A.pct, exposure=A.exp, bounces=16, view=A.view)
 look = A.look
@@ -154,4 +159,5 @@ elif look == "pigment":
     U.light_panel("soft", U.INK, 60, (0, -5, 0), 6, look_at=(0, 0, 0))
     cam = U.camera((0, -4.0, 0), (0, 0, 0), lens=45, fstop=0)
 
-U.save(scn, A.out)
+C.apply_flags(scn, A, seed=A.cseed)
+print("SAVED", C.render(scn, A.out))

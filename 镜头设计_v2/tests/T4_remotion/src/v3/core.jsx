@@ -1,8 +1,8 @@
 // v3 "INK / SIGNAL" design system: tokens, seeded randomness, boil clock, geometry helpers.
 import React, {createContext, useContext} from "react";
-import {useCurrentFrame} from "remotion";
 import {loadFont as loadHand} from "@remotion/google-fonts/Knewave";
 import {loadFont as loadMono} from "@remotion/google-fonts/MartianMono";
+import {useFrame30} from "./time30";
 
 // ---------- tokens ----------
 export const HAND = loadHand("normal", {weights: ["400"], subsets: ["latin"]}).fontFamily;
@@ -44,7 +44,7 @@ export const vnoise = (x, seed = 0) => {
 export const BoilCtx = createContext({rate: 2.5, frozen: false});
 export const BoilProvider = ({rate = 2.5, frozen = false, children}) => React.createElement(BoilCtx.Provider, {value: {rate, frozen}}, children);
 export const useBoil = () => {
-  const f = useCurrentFrame();
+  const f = Math.floor(useFrame30());             // on the 30 fps grid, so a seed holds for the whole 30 fps frame
   const {rate, frozen} = useContext(BoilCtx);
   return frozen ? 0 : Math.floor(f / rate);
 };

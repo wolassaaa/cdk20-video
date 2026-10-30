@@ -4,9 +4,10 @@
 // glass colon materialise either side (HK top 3) -> pull back again, oesophagus / stomach / prostate join, the other reds
 // drain to clear glass and only the liver stays red (world 6th / 3rd). Organ labels follow the 3D anchors in labels.json.
 import React from "react";
-import {AbsoluteFill, OffthreadVideo, staticFile, useCurrentFrame, interpolate} from "remotion";
+import {AbsoluteFill, OffthreadVideo, staticFile, interpolate} from "remotion";
 import {C, W, H, ramp, inOut} from "../../../core";
 import {Grain} from "../../../texture";
+import {useFrame30, Hold30} from "../../../time30";
 import {T, Src, GM, SRC_HK, SRC_WORLD} from "../../s102/lib";
 import LAB from "./labels.json";  // copied from the Blender run (projected label anchors per frame)
 
@@ -24,7 +25,7 @@ const ORGANS = [
 ];
 
 const Labels = ({f}) => {
-  const i = Math.min(f, LAB.organs.liver.base.length - 1);
+  const i = Math.min(Math.floor(f), LAB.organs.liver.base.length - 1);
   return <g>{ORGANS.map(([k, name, tier], n) => {
     const x = LAB.organs[k].base[i][0], y = LAB.organs.liver.base[i][1] + 30;  // one label line just under the liver (front-most) base
     // tier 0/1: from the "Top 3" line on; tier 2: from the world line on (staggered left to right)
@@ -40,20 +41,20 @@ const Labels = ({f}) => {
 };
 
 const Spot = ({f, on}) => {
-  const i = Math.min(f, LAB.organs.liver.base.length - 1);
+  const i = Math.min(Math.floor(f), LAB.organs.liver.base.length - 1);
   const [x, y] = LAB.organs.liver.base[i];
   return <AbsoluteFill style={{opacity: on * 0.85, background:
     `radial-gradient(ellipse 760px 620px at ${x}px ${y - 190}px, rgba(0,0,0,0) 35%, rgba(0,0,0,0.5) 100%)`}}/>;
 };
 
 export const Beat102 = () => {
-  const f = useCurrentFrame();
+  const f = useFrame30();
   const a = 1 - ramp(f, A1 - 14, A1 + 2);
   const b = fadeWin(f, B0, B1, 16);
   const c = ramp(f, C0, C0 + 16);
   const credA = 1 - ramp(f, 140, 170), credB = ramp(f, 180, 210);
   return <AbsoluteFill style={{background: "#000", overflow: "hidden"}}>
-    <OffthreadVideo src={staticFile("organs102/organs102.mp4")} style={{width: W, height: H}} muted/>
+    <Hold30><OffthreadVideo src={staticFile("organs102/organs102.mp4")} style={{width: W, height: H}} muted/></Hold30>
     {/* left shade only while the type sits beside the close liver */}
     <AbsoluteFill style={{opacity: a, background: "linear-gradient(90deg, rgba(6,6,6,0.85) 0%, rgba(6,6,6,0.45) 27%, rgba(6,6,6,0) 42%)"}}/>
     <AbsoluteFill style={{background: "linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 9%)"}}/>
