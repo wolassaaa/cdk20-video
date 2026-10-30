@@ -74,3 +74,10 @@ teacher_requirements_check/
 镜头设计_v3/styleframes/S1/v2/_code/**/out/
 镜头设计_v3/styleframes/S1/v2/_code/reel2/**/dl/
 镜头设计_v3/styleframes/S1/v2/_code/reel2/**/frames*/
+镜头设计_v3/styleframes/S1/v3_frontier/**/*.png
+镜头设计_v3/styleframes/S1/v3_frontier/**/*.exr
+镜头设计_v3/styleframes/S1/v3_frontier/**/*.blend
+镜头设计_v3/styleframes/S1/v3_frontier/**/*.npz
+镜头设计_v3/styleframes/S1/v3_frontier/**/*.npy
+镜头设计_v3/styleframes/S1/v3_frontier/**/frames*/
+镜头设计_v3/styleframes/S1/v3_frontier/**/public/
