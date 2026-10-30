@@ -169,4 +169,4 @@ def lin(h):
     return tuple(x / 12.92 if x <= 0.04045 else ((x + 0.055) / 1.055) ** 2.4 for x in c)
 
 
-RED = lin("FF2A14"); VERM = lin("F5142B"); IKB = lin("002FA7"); BLUE = lin("1F3BFF"); BONE = lin("EDEBE4")
+RED = lin("FF2A14"); VERM = lin("E8190F"); IKB = lin("002FA7"); BLUE = lin("1F3BFF"); BONE = lin("EDEBE4")

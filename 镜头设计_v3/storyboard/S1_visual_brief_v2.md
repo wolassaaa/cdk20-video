@@ -19,7 +19,7 @@ Read this first. It applies to every agent working on S1 (00:00–02:21, beats W
 
 ## Palette
 
-- **Black stage** #060606, **bone/off-white ink** #EDEBE4, **crimson** #F5142B (body, blood, life; was vermilion #FF3B1F until 10-30, which read orange), **electric cyan** #29F0FF (computer, AI).
+- **Black stage** #060606, **bone/off-white ink** #EDEBE4, **blood red** #E8190F (body, blood, life; set 10-30: vermilion #FF3B1F read orange, crimson #F5142B read pink), **electric cyan** #29F0FF (computer, AI).
 - New this round: a **pure blue** family is allowed against the red, e.g. #1F3BFF and #0A1AFF, or a cobalt/ultramarine like Yves Klein blue #002FA7. Red against blue is the main contrast to try.
 - **Do not use:** orange, yellow, green, yellow-green / acid, or rainbow false-colour ramps.
 - Grain, print texture and halftone are welcome.

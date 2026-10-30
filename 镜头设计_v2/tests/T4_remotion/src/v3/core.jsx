@@ -11,8 +11,8 @@ export const MONO = loadMono("normal", {weights: ["400", "700", "800"], subsets:
 export const C = {
   bg: "#060606",        // black stage
   ink: "#EDEBE4",       // off-white ink
-  verm: "#F5142B",      // body / blood: crimson (10-30; #FF3B1F read orange on blue)
-  vermDeep: "#A80C1F",  // large dark areas of vessels and organs, never text
+  verm: "#E8190F",      // body / blood: blood red (10-30; #FF3B1F read orange, #F5142B read pink)
+  vermDeep: "#9A0E08",  // large dark areas of vessels and organs, never text
   blue: "#1F3BFF",      // pure blue, the cold end against red
   klein: "#002FA7",     // Klein blue colour fields
   cyan: "#29F0FF",      // AI / computation

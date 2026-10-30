@@ -17,7 +17,7 @@ def hexc(h):
     return np.array([int(h[i:i + 2], 16) / 255 for i in (0, 2, 4)], np.float32)
 
 
-BLACK = hexc("060606"); BONE = hexc("EDEBE4"); VERM = hexc("F5142B"); CYAN = hexc("29F0FF")
+BLACK = hexc("060606"); BONE = hexc("EDEBE4"); VERM = hexc("E8190F"); CYAN = hexc("29F0FF")
 IKB = hexc("002FA7"); BLUE = hexc("1F3BFF"); DEEPBLUE = hexc("0A1AFF")
 
 RNG = np.random.default_rng(7)

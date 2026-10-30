@@ -11,7 +11,7 @@ from mathutils import Vector, Matrix
 
 INK = (0.929, 0.922, 0.894)       # #EDEBE4 off-white ink
 BLACK = (0.027, 0.027, 0.027)     # #070707
-VERMILION = (0.913, 0.007, 0.024)   # #F5142B body / blood (linear; crimson since 10-30)
+VERMILION = (0.807, 0.010, 0.005)   # #E8190F body / blood (linear; blood red since 10-30)
 CYAN = (0.161, 0.941, 1.0)        # #29F0FF AI / computed
 
 HERE = os.path.dirname(os.path.abspath(__file__))
