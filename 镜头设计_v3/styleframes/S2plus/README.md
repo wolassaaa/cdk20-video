@@ -4,7 +4,7 @@ S2 到 S8 的 14 张概念静帧，清单见 `research/marathon_refs_20261031.md
 
 - 代码：`镜头设计_v2/tests/T4_remotion/src/v3/s2plus/`。`kit.jsx` 是共用件，`stills/s01.jsx` 到 `s14.jsx` 每张一个文件，`entry.jsx` 不用改。
 - 这个文件夹：`code/` 放脚本，`public/` 放脚本生成的素材，`stills/` 放 1080p 审看图，`stills/4k/` 放成品，`stills/S2plus_总览.jpg` 是带中文说明的总览，`motion/` 放动态测试（只留本地）。
-- 动态测试：`src/v3/s2plus/motion/`。W3（8 秒）从空场数到 8,918，停在静帧 06；W2（10 秒）蓝雾沿肽链凝成 CDK20，停在静帧 04。合成名 `W2M`、`W3M`，60 帧版 `W2M60`、`W3M60`，都按秒算。
+- 动态测试：`src/v3/s2plus/motion/`。W3（8 秒）从空场数到 8,918，停在静帧 06；W2（10 秒）蓝雾沿肽链凝成 CDK20，停在静帧 04。合成名 `W2M`、`W3M`，60 帧版 `W2M60`、`W3M60`，都按秒算。4K60 加 `--scale=2`，W3 约 40 秒，W2 约 135 秒。
 
 | 脚本 | 产出 |
 |---|---|
