@@ -124,7 +124,7 @@ const Heart = ({cell, lost, white = 0}) => <g>
   {HEART.flatMap((row, r) => [...row].map((ch, c) => {
     if (ch === ".") return null;
     const fill = ch === "O" ? (lost ? "#6A625C" : "#1B0B08")
-      : mix(lost ? "#211C1A" : {R: C.verm, W: "#FFD8CC", D: "#B0220F"}[ch], "#FFFFFF", white);
+      : mix(lost ? "#211C1A" : {R: C.verm, W: "#FFD6DC", D: C.vermDeep}[ch], "#FFFFFF", white);
     return <rect key={`${r}-${c}`} x={c * cell} y={r * cell} width={cell + 0.5} height={cell + 0.5} fill={fill}/>;
   }))}
 </g>;
@@ -153,8 +153,8 @@ const Lights = ({f}) => <g opacity={ramp(f, 172, 180)}>
     const on = ramp(f, 172 + i * 3, 180 + i * 3) * (1 - ramp(f, off, off + 6));
     const flash = f >= off ? Math.exp(-(f - off) / 3) : 0;
     return <g key={i}>
-      <circle cx={x} cy={y} r={26} fill="#FFC77A" opacity={0.7 * on + 0.5 * flash} filter="url(#s1-glow)"/>
-      <circle cx={x} cy={y} r={8} fill={mix("#FFE2B0", "#5A5650", 1 - on)}/>
+      <circle cx={x} cy={y} r={26} fill="#F3E6E2" opacity={0.7 * on + 0.5 * flash} filter="url(#s1-glow)"/>
+      <circle cx={x} cy={y} r={8} fill={mix("#FFF4F0", "#5A5650", 1 - on)}/>
     </g>;
   })}
 </g>;
@@ -172,7 +172,7 @@ const Scene = ({lives}) => {
   const nodes = useNet();
   const [z, cx, cy] = camAt(f);
   const sick = ramp(f, 186, 236);
-  const vein = mix(C.verm, SICK, sick), flow = mix("#FFB09A", "#D8D2A8", sick);
+  const vein = mix(C.verm, SICK, sick), flow = mix("#FF9AAA", "#D8D2A8", sick);
   const uS = inOut(ramp(f, MORPH[0], MORPH[1] + SWEEP / 2));
   // branch roots ride the (morphing) spine; everything else slides on its own, swept left to right
   const pos = nodes.map(n => {
@@ -208,15 +208,15 @@ const Scene = ({lives}) => {
       })}
       {/* the words sit on top of the branches so they read at the hold */}
       <g opacity={0.62 * ramp(f, 118, 142) * (1 - inOut(ramp(f, 142, 160)))}>
-        {WORDS.map(([t, y]) => <text key={t} x={W / 2} y={y} textAnchor="middle" fontFamily={FONT_FAMILY} fontWeight={900} fontSize={245} fill="#FF7A5C" style={{mixBlendMode: "screen"}}>{t}</text>)}
+        {WORDS.map(([t, y]) => <text key={t} x={W / 2} y={y} textAnchor="middle" fontFamily={FONT_FAMILY} fontWeight={900} fontSize={245} fill="#FF4A62" style={{mixBlendMode: "screen"}}>{t}</text>)}
       </g>
       {/* the spine: one vessel, with a glowing tip while it runs */}
       {spine.length > 1 && <g>
         <path d={spineD} fill="none" stroke={vein} strokeWidth={13} strokeLinecap="round" strokeLinejoin="round"/>
         <path d={spineD} fill="none" stroke={flow} strokeWidth={5} strokeLinecap="round" strokeDasharray="14 46" strokeDashoffset={-f * 9} opacity={0.8}/>
         {f < RUN[1] + 10 && <g opacity={1 - ramp(f, RUN[1], RUN[1] + 10)}>
-          <circle cx={tip[0]} cy={tip[1]} r={22} fill="#FF8A6A" opacity={0.8} filter="url(#s1-glow)"/>
-          <circle cx={tip[0]} cy={tip[1]} r={7} fill="#FFE2D6"/>
+          <circle cx={tip[0]} cy={tip[1]} r={22} fill="#FF5A72" opacity={0.8} filter="url(#s1-glow)"/>
+          <circle cx={tip[0]} cy={tip[1]} r={7} fill="#FFE0E6"/>
         </g>}
       </g>}
       <g filter="url(#v3-ink)" opacity={ramp(f, 170, 180)}>

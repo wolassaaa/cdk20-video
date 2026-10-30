@@ -137,7 +137,7 @@ for name, (x0, y0, x1, y1), W in [("full", (-38000, -24000, 32000, 26000), 1600)
     for r in out:
         dr.polygon([T(p) for p in r["p"]], fill=(6, 6, 6))
     rt = [T(p) for p in ROUTE_M]
-    dr.line(rt, fill=(255, 59, 31), width=4)
+    dr.line(rt, fill=(245, 20, 43), width=4)
     for k, ll in POI.items():
         x, y = T(P(*ll)); dr.ellipse([x - 5, y - 5, x + 5, y + 5], outline=(237, 235, 228), width=2); dr.text((x + 8, y - 6), k, fill=(237, 235, 228))
     im.save(ROOT + f"/styleframes/S1/v2/_code/s110/renders/map_preview_{name}.png")

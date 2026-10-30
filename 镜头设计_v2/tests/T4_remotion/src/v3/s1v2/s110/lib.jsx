@@ -10,7 +10,7 @@ export const GROT = loadGrot("normal", {weights: ["300", "400", "600", "800", "9
 export const SERIF = loadSerif("normal", {weights: ["400"], subsets: ["latin"]}).fontFamily;
 loadSerif("italic", {weights: ["400"], subsets: ["latin"]});
 export {MONO};
-export const K = {bg: "#060606", ink: "#EDEBE4", verm: "#FF3B1F", blue: "#1F3BFF", klein: "#002FA7", dim: "rgba(237,235,228,0.55)", faint: "rgba(237,235,228,0.22)"};
+export const K = {bg: "#060606", ink: "#EDEBE4", verm: "#F5142B", blue: "#1F3BFF", klein: "#002FA7", dim: "rgba(237,235,228,0.55)", faint: "rgba(237,235,228,0.22)"};
 export const W = 1920, H = 1080;
 
 // exact script text (W1)
