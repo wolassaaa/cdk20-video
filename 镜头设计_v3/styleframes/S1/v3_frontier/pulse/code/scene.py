@@ -34,6 +34,8 @@ ap.add_argument("--jitter", type=int, default=1, help="eevee: 1 lens samples per
 ap.add_argument("--overblur", type=float, default=0.0)
 ap.add_argument("--rt", type=int, default=0, help="eevee: 1 raytraced reflections on opaque surfaces; blended glass can't use them")
 ap.add_argument("--mb_steps", type=int, default=1, help="eevee: time steps. The lens pattern is built per step, so pass --samples 256 * mb_steps")
+ap.add_argument("--rim_wide", type=float, default=0.0, help="eevee: thin ring on every globe once the camera has pulled back")
+ap.add_argument("--bulb_gain", type=float, default=1.0, help="eevee: glass glow and filament once the camera has pulled back. Bulbs only: threads are already at Cycles' level")
 A = ap.parse_args(argv)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -627,7 +629,14 @@ if A.engine == "eevee":
     nt.links.new(ring.outputs[0], rm.inputs[0]); nt.links.new(bk.outputs[0], rm.inputs[1])
     gs = nt.nodes.new("ShaderNodeMath"); gs.operation = "MULTIPLY"
     nt.links.new(GL["pw"].outputs[0], gs.inputs[0]); nt.links.new(rm.outputs[0], gs.inputs[1])
-    nt.links.new(gs.outputs[0], GL["emg"].inputs["Strength"])
+    gw = nt.nodes.new("ShaderNodeMath"); gw.operation = "MULTIPLY"
+    nt.links.new(gs.outputs[0], gw.inputs[0])
+    nt.links.new(gw.outputs[0], GL["emg"].inputs["Strength"])
+    # small bulbs lose what the inner reflections gave them in Cycles, about 13% in the wide shot. Both pull-back keys start at frame 183 so everything before stays as it was
+    ef = next(n for n in m_fil.node_tree.nodes if n.type == "EMISSION")
+    for sock in (gw.inputs[1], ef.inputs["Strength"]):
+        sock.default_value = 1.0; sock.keyframe_insert("default_value", frame=183)
+        sock.default_value = A.bulb_gain; sock.keyframe_insert("default_value", frame=240)
     # 2. a dead bulb keeps a faint lit rim on its front shell
     nb = nt.nodes.new("ShaderNodeMath"); nb.operation = "SUBTRACT"; nb.inputs[0].default_value = 1.0
     nt.links.new(ng.outputs["Backfacing"], nb.inputs[1])
@@ -639,7 +648,19 @@ if A.engine == "eevee":
     nt.links.new(fs.outputs[0], emr.inputs["Strength"])
     ad2 = nt.nodes.new("ShaderNodeAddShader")
     nt.links.new(GL["ad"].outputs[0], ad2.inputs[0]); nt.links.new(emr.outputs[0], ad2.inputs[1])
-    nt.links.new(ad2.outputs[0], GL["out"].inputs["Surface"])
+    # the wide shot needs Cycles' thin ring of reflections. It's on both shells: where one erases the other the survivor still shows, so the ring stays whole
+    lwr = nt.nodes.new("ShaderNodeLayerWeight"); lwr.inputs["Blend"].default_value = 0.5
+    pr = nt.nodes.new("ShaderNodeMath"); pr.operation = "POWER"; pr.inputs[1].default_value = 4.0
+    nt.links.new(lwr.outputs["Facing"], pr.inputs[0])
+    kr = nt.nodes.new("ShaderNodeMath"); kr.operation = "MULTIPLY"
+    nt.links.new(pr.outputs[0], kr.inputs[0])
+    kr.inputs[1].default_value = 0.0; kr.inputs[1].keyframe_insert("default_value", frame=183)
+    kr.inputs[1].default_value = A.rim_wide; kr.inputs[1].keyframe_insert("default_value", frame=215)
+    emw = nt.nodes.new("ShaderNodeEmission"); emw.inputs["Color"].default_value = (*BONE, 1)
+    nt.links.new(kr.outputs[0], emw.inputs["Strength"])
+    ad3 = nt.nodes.new("ShaderNodeAddShader")
+    nt.links.new(ad2.outputs[0], ad3.inputs[0]); nt.links.new(emw.outputs[0], ad3.inputs[1])
+    nt.links.new(ad3.outputs[0], GL["out"].inputs["Surface"])
     # 3. caps: the faint level Cycles gives them. Cables get CAB_NEAR above
     bc = m_cap.node_tree.nodes["Principled BSDF"]
     bc.inputs["Emission Color"].default_value = (*BONE, 1); bc.inputs["Emission Strength"].default_value = 0.003

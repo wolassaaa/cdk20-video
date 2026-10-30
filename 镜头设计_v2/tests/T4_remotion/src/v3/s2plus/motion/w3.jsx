@@ -25,7 +25,7 @@ const Dots = ({n}) => {
 
 export default () => {
   const f = useCurrentFrame(), {fps} = useVideoConfig(), t = f / fps;
-  const x = Math.min(1, t / FILL), n = Math.round(N * x * x * (3 - 2 * x));   // starts one at a time, ends in a rush
+  const x = Math.min(1, t / FILL), n = Math.round(N * x * x);   // starts one at a time, ends in a rush
   return <Stage bg={K.blue}>
     <Dots n={n}/>
     <PlateText x={DOTS.tag.x} y={DOTS.tag.y} on={K.blue}>Tool: generative design</PlateText>

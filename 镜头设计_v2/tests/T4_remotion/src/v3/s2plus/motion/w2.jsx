@@ -7,6 +7,7 @@ import {Stage, Plate, Barcode, K, W, H, M, N_RES, PLDDT} from "../kit";
 import META from "../data/protein_points.json";
 
 const START = 0.6, SWEEP = 6.2, TRAVEL = 1.1;  // seconds: first residue leaves, last one leaves after SWEEP, each takes TRAVEL
+const SPREAD = 0.25;                           // seconds: dots of one residue leave this far apart
 const PLATE_AT = 8.2;                          // the one label cuts in once the shape has settled
 const TIGHT = 1.1, LOOSE = 1.75;               // dot radii, as still 04
 const REACH = 520, DRIFT = 7;                  // px: how far out the cloud starts, how far the tail wanders
@@ -35,11 +36,11 @@ const Cloud = ({t}) => {
     c.width = W * ss; c.height = H * ss;
     g.setTransform(ss, 0, 0, ss, 0, 0);
     // one pass per colour, flushed in batches: a single path of 30k circles is slow to fill
-    const draw = (ink, rad, want) => {
+    const draw = (ink, rad, layer) => {
       g.fillStyle = ink; g.beginPath();
       for (let i = 0, k = 0; i < d.rs.length; i++) {
-        const r = d.rs[i], sure = PLDDT[r - 1] >= META.cutoff, p = smooth((t - leaves(r) - hash(i, 4) * 0.25) / TRAVEL), landed = sure && p >= 1;
-        if (landed !== want) continue;
+        const r = d.rs[i], sure = PLDDT[r - 1] >= META.cutoff, p = smooth((t - leaves(r) - hash(i, 4) * SPREAD) / TRAVEL);
+        if ((sure ? (p >= 1 ? 1 : 0) : 2) !== layer) continue;
         const w = sure ? 0 : DRIFT, dx = w * Math.sin(0.5 * t + d.ph[i]), dy = w * Math.cos(0.37 * t + 1.7 * d.ph[i]);
         const x = d.xs[i] + d.ox[i] * (1 - p) + dx, y = d.ys[i] + d.oy[i] * (1 - p) + dy;
         g.moveTo(x + rad, y); g.arc(x, y, rad, 0, 2 * Math.PI);
@@ -47,16 +48,18 @@ const Cloud = ({t}) => {
       }
       g.fill();
     };
-    draw(K.blue, LOOSE, false);
-    draw(K.bone, TIGHT, true);
+    // sure dots in flight, landed bone, then the tail on top, as still 04 stacks them
+    draw(K.blue, LOOSE, 0);
+    draw(K.bone, TIGHT, 1);
+    draw(K.blue, LOOSE, 2);
   }, [d, t]);
   return <canvas ref={ref} style={{position: "absolute", left: 0, top: 0, width: W, height: H}}/>;
 };
 
 export default () => {
   const f = useCurrentFrame(), {fps} = useVideoConfig(), t = f / fps;
-  // bars grow out from the left as their residues land
-  const lit = Math.min(N_RES, Math.max(0, Math.floor((t - START - TRAVEL) / SWEEP * (N_RES - 1)) + 1));
+  // bars grow out from the left once a residue's last dot has landed
+  const lit = Math.min(N_RES, Math.max(0, Math.floor((t - START - TRAVEL - SPREAD) / SWEEP * (N_RES - 1)) + 1));
   return <Stage>
     <Cloud t={t}/>
     {t >= PLATE_AT ? <Plate kind="ai" x={M} y={M}>AlphaFold DB v6 · predicted</Plate> : null}
