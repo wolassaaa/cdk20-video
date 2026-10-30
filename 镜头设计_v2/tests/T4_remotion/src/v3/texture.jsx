@@ -1,5 +1,5 @@
 // Surface: black stage with print grain, ink-edge filters, halftone fields, dust.
-import React from "react";
+import React, {createContext, useContext} from "react";
 import {AbsoluteFill, useCurrentFrame} from "remotion";
 import {C, W, H, hash, useBoil, rotPt} from "./core";
 
@@ -31,8 +31,13 @@ export const InkDefs = ({textScale = 4.5, inkScale = 2.6}) => {
 };
 
 /** Grain: light specks on black, re-seeded on the boil clock (the whole sheet is "re-printed" with each re-draw). */
+/** Multiplies every Grain's opacity below it (a reel can calm all its modules at once). */
+export const GrainScale = createContext(1);
+
 export const Grain = ({opacity = 0.22, freq = 0.8}) => {
   const s = useBoil() % 997 + 1;
+  opacity *= useContext(GrainScale);
+  if (opacity <= 0) return null;
   return <AbsoluteFill style={{pointerEvents: "none"}}>
     <svg width={W} height={H}>
       <filter id={`v3-grain-${s}`} x="0" y="0" width="100%" height="100%">

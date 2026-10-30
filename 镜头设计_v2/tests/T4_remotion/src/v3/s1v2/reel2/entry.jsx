@@ -5,7 +5,7 @@
 import React from "react";
 import {registerRoot, Composition, AbsoluteFill, Sequence, Img, staticFile, useCurrentFrame} from "remotion";
 import {C, W, H, BoilProvider, ramp, inOut, outExpo, clamp01} from "../../core";
-import {Grain} from "../../texture";
+import {Grain, GrainScale} from "../../texture";
 import {OnCamCard} from "../../oncam/Card";
 // s102
 import {OVitrine} from "../s102/Frames103";
@@ -125,7 +125,8 @@ const Captions = () => {
   </AbsoluteFill>;
 };
 
-export const S1Reel = ({captions = true}) => <BoilProvider rate={2.5}>
+// grain: v2 stacked every module's own grain and read as noise (director, 10-30); 0.35 keeps a hint of print texture
+export const S1Reel = ({captions = true, grain = 0.35}) => <GrainScale.Provider value={grain}><BoilProvider rate={2.5}>
   <AbsoluteFill style={{background: "#000"}}>
     {SHOTS.map((s, i) => {
       const tail = SHOTS[i + 1] ? SHOTS[i + 1].fi : 0;
@@ -133,9 +134,9 @@ export const S1Reel = ({captions = true}) => <BoilProvider rate={2.5}>
     })}
     {captions ? <Captions/> : null}
   </AbsoluteFill>
-</BoilProvider>;
+</BoilProvider></GrainScale.Provider>;
 
 const Root = () => <>
-  <Composition id="S1Reel" component={S1Reel} durationInFrames={DUR} fps={FPS} width={1920} height={1080} defaultProps={{captions: true}}/>
+  <Composition id="S1Reel" component={S1Reel} durationInFrames={DUR} fps={FPS} width={1920} height={1080} defaultProps={{captions: true, grain: 0.35}}/>
 </>;
 registerRoot(Root);
