@@ -1,0 +1,4 @@
+# Stills and plates stay local: every file in them comes out of code/
+*.png
+*.jpg
+public/

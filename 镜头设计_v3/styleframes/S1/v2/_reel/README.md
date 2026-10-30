@@ -1,3 +1,14 @@
+# S1 预览片 v3（10-31 凌晨，只改色彩和清理）
+
+`S1_preview_v3.mp4` 和手机版 `S1_preview_v3_phone.mp4`：画面内容和 v2 一样，修了两件事。
+
+- **血红不再偏橙。** Remotion 默认按 BT.601 编码又不打标记，播放器按 BT.709 解，#E8190F 显示成约 (249,42,12)。现在一律加 `--color-space=bt709`。
+- **再清一遍闪动。** 1-03、1-05 至 1-07、1-09、1-11 去掉了残留的逐帧噪声和缩放时增减的点，这几段和 v2 会有细微不同。
+
+命令见 `research/render_pipeline_plan.md` 的审片档：JPEG q95，CRF 14，全片约 5 分钟。
+
+---
+
 # S1 预览片 v2（10-30 下午，按导演对 v1 的意见改）
 
 `S1_preview_v2.mp4`：入口 `镜头设计_v2/tests/T4_remotion/src/v3/s1v2/reel2/entry.jsx`，合成 `S1Reel`。各镜头模块在同一目录的 `motion/`、`organs102/`、`drugs104/`、`map111/`；Blender 和数据脚本在 `_code/reel2/<同名>/`；共用说明 `v2_brief.md`。

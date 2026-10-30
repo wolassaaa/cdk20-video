@@ -83,3 +83,6 @@ teacher_requirements_check/
 镜头设计_v3/styleframes/S1/v3_frontier/**/public/
 镜头设计_v3/styleframes/S1/v3_frontier/**/scratch/
 镜头设计_v3/styleframes/S1/v3_frontier/**/work/
+
+# ---- 静帧打包结果（可重建）----
+镜头设计_v2/tests/T4_remotion/.s2bundle/

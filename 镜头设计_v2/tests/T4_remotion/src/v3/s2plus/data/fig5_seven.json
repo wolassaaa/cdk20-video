@@ -1,0 +1,396 @@
+{
+ "source": "RDKit 2026.09.1 CoordGen 2D depiction; y flipped for screen; units = RDKit (bond ~1.0-1.5)",
+ "compounds": [
+  {
+   "id": "001",
+   "esi_page": 2,
+   "kd": "001: 9.2 µM",
+   "sourced": true,
+   "smiles": "CNC(=O)c1cc(Nc2ncc3ccccc3n2)c[nH]1",
+   "note": null,
+   "atoms": [
+    {
+     "i": 0,
+     "el": "C",
+     "x": 4.0162,
+     "y": 2.7938,
+     "h": 3,
+     "arom": false
+    },
+    {
+     "i": 1,
+     "el": "N",
+     "x": 3.1254,
+     "y": 2.3394,
+     "h": 1,
+     "arom": false
+    },
+    {
+     "i": 2,
+     "el": "C",
+     "x": 3.0734,
+     "y": 1.3408,
+     "h": 0,
+     "arom": false
+    },
+    {
+     "i": 3,
+     "el": "O",
+     "x": 3.9122,
+     "y": 0.7966,
+     "h": 0,
+     "arom": false
+    },
+    {
+     "i": 4,
+     "el": "C",
+     "x": 2.1826,
+     "y": 0.8866,
+     "h": 0,
+     "arom": true
+    },
+    {
+     "i": 5,
+     "el": "C",
+     "x": 2.0266,
+     "y": -0.1014,
+     "h": 1,
+     "arom": true
+    },
+    {
+     "i": 6,
+     "el": "C",
+     "x": 1.039,
+     "y": -0.258,
+     "h": 0,
+     "arom": true
+    },
+    {
+     "i": 7,
+     "el": "N",
+     "x": 0.5854,
+     "y": -1.1494,
+     "h": 1,
+     "arom": false
+    },
+    {
+     "i": 8,
+     "el": "C",
+     "x": -0.4132,
+     "y": -1.2022,
+     "h": 0,
+     "arom": true
+    },
+    {
+     "i": 9,
+     "el": "N",
+     "x": -0.8668,
+     "y": -2.0934,
+     "h": 0,
+     "arom": true
+    },
+    {
+     "i": 10,
+     "el": "C",
+     "x": -1.8654,
+     "y": -2.146,
+     "h": 1,
+     "arom": true
+    },
+    {
+     "i": 11,
+     "el": "C",
+     "x": -2.4104,
+     "y": -1.3078,
+     "h": 0,
+     "arom": true
+    },
+    {
+     "i": 12,
+     "el": "C",
+     "x": -3.409,
+     "y": -1.3604,
+     "h": 1,
+     "arom": true
+    },
+    {
+     "i": 13,
+     "el": "C",
+     "x": -3.954,
+     "y": -0.5222,
+     "h": 1,
+     "arom": true
+    },
+    {
+     "i": 14,
+     "el": "C",
+     "x": -3.5004,
+     "y": 0.3692,
+     "h": 1,
+     "arom": true
+    },
+    {
+     "i": 15,
+     "el": "C",
+     "x": -2.5018,
+     "y": 0.4218,
+     "h": 1,
+     "arom": true
+    },
+    {
+     "i": 16,
+     "el": "C",
+     "x": -1.9568,
+     "y": -0.4164,
+     "h": 0,
+     "arom": true
+    },
+    {
+     "i": 17,
+     "el": "N",
+     "x": -0.9582,
+     "y": -0.3638,
+     "h": 0,
+     "arom": true
+    },
+    {
+     "i": 18,
+     "el": "C",
+     "x": 0.5844,
+     "y": 0.6326,
+     "h": 1,
+     "arom": true
+    },
+    {
+     "i": 19,
+     "el": "N",
+     "x": 1.2914,
+     "y": 1.34,
+     "h": 1,
+     "arom": true
+    }
+   ],
+   "bonds": [
+    {
+     "a": 0,
+     "b": 1,
+     "order": 1,
+     "ring": false
+    },
+    {
+     "a": 1,
+     "b": 2,
+     "order": 1,
+     "ring": false
+    },
+    {
+     "a": 2,
+     "b": 3,
+     "order": 2,
+     "ring": false
+    },
+    {
+     "a": 2,
+     "b": 4,
+     "order": 1,
+     "ring": false
+    },
+    {
+     "a": 4,
+     "b": 5,
+     "order": 2,
+     "ring": true
+    },
+    {
+     "a": 5,
+     "b": 6,
+     "order": 1,
+     "ring": true
+    },
+    {
+     "a": 6,
+     "b": 7,
+     "order": 1,
+     "ring": false
+    },
+    {
+     "a": 7,
+     "b": 8,
+     "order": 1,
+     "ring": false
+    },
+    {
+     "a": 8,
+     "b": 9,
+     "order": 1,
+     "ring": true
+    },
+    {
+     "a": 9,
+     "b": 10,
+     "order": 2,
+     "ring": true
+    },
+    {
+     "a": 10,
+     "b": 11,
+     "order": 1,
+     "ring": true
+    },
+    {
+     "a": 11,
+     "b": 12,
+     "order": 2,
+     "ring": true
+    },
+    {
+     "a": 12,
+     "b": 13,
+     "order": 1,
+     "ring": true
+    },
+    {
+     "a": 13,
+     "b": 14,
+     "order": 2,
+     "ring": true
+    },
+    {
+     "a": 14,
+     "b": 15,
+     "order": 1,
+     "ring": true
+    },
+    {
+     "a": 15,
+     "b": 16,
+     "order": 2,
+     "ring": true
+    },
+    {
+     "a": 16,
+     "b": 17,
+     "order": 1,
+     "ring": true
+    },
+    {
+     "a": 6,
+     "b": 18,
+     "order": 2,
+     "ring": true
+    },
+    {
+     "a": 18,
+     "b": 19,
+     "order": 1,
+     "ring": true
+    },
+    {
+     "a": 19,
+     "b": 4,
+     "order": 1,
+     "ring": true
+    },
+    {
+     "a": 17,
+     "b": 8,
+     "order": 2,
+     "ring": true
+    },
+    {
+     "a": 16,
+     "b": 11,
+     "order": 1,
+     "ring": true
+    }
+   ],
+   "rings": [
+    [
+     8,
+     9,
+     10,
+     11,
+     16,
+     17
+    ],
+    [
+     11,
+     12,
+     13,
+     14,
+     15,
+     16
+    ],
+    [
+     4,
+     5,
+     6,
+     18,
+     19
+    ]
+   ],
+   "formula": "C14H13N5O",
+   "mh_plus": 268.12
+  },
+  {
+   "id": "004",
+   "esi_page": 3,
+   "kd": "> 30 µM",
+   "sourced": false,
+   "smiles": null,
+   "note": "no SMILES in Ren 2023 text or ESI; Fig. 5 is a bitmap. Needs a figure read."
+  },
+  {
+   "id": "007",
+   "esi_page": 4,
+   "kd": "> 30 µM",
+   "sourced": false,
+   "smiles": null,
+   "note": "no SMILES in Ren 2023 text or ESI; Fig. 5 is a bitmap. Needs a figure read."
+  },
+  {
+   "id": "009",
+   "esi_page": 5,
+   "kd": "> 30 µM",
+   "sourced": false,
+   "smiles": null,
+   "note": "no SMILES in Ren 2023 text or ESI; Fig. 5 is a bitmap. Needs a figure read."
+  },
+  {
+   "id": "015",
+   "esi_page": 6,
+   "kd": "> 30 µM",
+   "sourced": false,
+   "smiles": null,
+   "note": "no SMILES in Ren 2023 text or ESI; Fig. 5 is a bitmap. Needs a figure read."
+  },
+  {
+   "id": "019",
+   "esi_page": 8,
+   "kd": "> 30 µM",
+   "sourced": false,
+   "smiles": null,
+   "note": "no SMILES in Ren 2023 text or ESI; Fig. 5 is a bitmap. Needs a figure read."
+  },
+  {
+   "id": "025",
+   "esi_page": 9,
+   "kd": "> 30 µM",
+   "sourced": false,
+   "smiles": null,
+   "note": "no SMILES in Ren 2023 text or ESI; Fig. 5 is a bitmap. Needs a figure read.",
+   "stereo_note": "025 carries a stereocentre that this source does not define: the ESI entry (p9-p10) gives no (R)/(S) descriptor, no chiral reagent and no resolution step, and its final 1H NMR shows a single CH multiplet at 4.60-4.72 ppm with diastereotopic CH2 signals. If 025 is ever drawn, draw that centre flat (no wedge, no hash) unless a chemist confirms the configuration. Do not pick one to make the drawing look finished."
+  }
+ ],
+ "sourced": [
+  "001"
+ ],
+ "unsourced": [
+  "004",
+  "007",
+  "009",
+  "015",
+  "019",
+  "025"
+ ]
+}
