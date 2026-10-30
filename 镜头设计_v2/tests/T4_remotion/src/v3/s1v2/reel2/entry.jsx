@@ -125,18 +125,20 @@ const Captions = () => {
   </AbsoluteFill>;
 };
 
-// grain: v2 stacked every module's own grain and read as noise (director, 10-30); 0.35 keeps a hint of print texture
-export const S1Reel = ({captions = true, grain = 0.35}) => <GrainScale.Provider value={grain}><BoilProvider rate={2.5}>
+// Director (10-30): grain and boil read as blur and flicker. Default: no moving grain, boil frozen (lines stop re-drawing),
+// plus one very faint static dither so dark gradients don't band. grain/boil props bring the textured look back.
+export const S1Reel = ({captions = true, grain = 0, boil = false, dither = 0.035}) => <GrainScale.Provider value={grain}><BoilProvider rate={2.5} frozen={!boil}>
   <AbsoluteFill style={{background: "#000"}}>
     {SHOTS.map((s, i) => {
       const tail = SHOTS[i + 1] ? SHOTS[i + 1].fi : 0;
       return <Sequence key={i} from={sec(s.a)} durationInFrames={sec(s.b) - sec(s.a) + tail}><Shot s={s} tail={tail}/></Sequence>;
     })}
+    {dither ? <GrainScale.Provider value={1}><BoilProvider frozen><Grain opacity={dither}/></BoilProvider></GrainScale.Provider> : null}
     {captions ? <Captions/> : null}
   </AbsoluteFill>
 </BoilProvider></GrainScale.Provider>;
 
 const Root = () => <>
-  <Composition id="S1Reel" component={S1Reel} durationInFrames={DUR} fps={FPS} width={1920} height={1080} defaultProps={{captions: true, grain: 0.35}}/>
+  <Composition id="S1Reel" component={S1Reel} durationInFrames={DUR} fps={FPS} width={1920} height={1080} defaultProps={{captions: true, grain: 0, boil: false, dither: 0.035}}/>
 </>;
 registerRoot(Root);

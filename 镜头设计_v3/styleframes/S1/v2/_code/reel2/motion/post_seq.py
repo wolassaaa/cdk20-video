@@ -26,6 +26,7 @@ def recolor(a, hue=2.5, pull=0.6, val=0.93):
 
 ap = argparse.ArgumentParser()
 ap.add_argument("raw"); ap.add_argument("out"); ap.add_argument("--jpg", type=int, default=93); ap.add_argument("--sheet", default="")
+ap.add_argument("--grain", type=float, default=0.04)  # 0 since 10-30: the director found moving grain flickery
 A = ap.parse_args()
 os.makedirs(A.out, exist_ok=True)
 files = sorted(glob.glob(os.path.join(A.raw, "*.png")))
@@ -38,7 +39,7 @@ for i, f in enumerate(files):
     img = bloom(img, sig=(4, 18, 60), gain=(0.18, 0.15, 0.132), thresh=0.55)
     img = vignette(img, 0.25)
     name = os.path.splitext(os.path.basename(f))[0]
-    img = grain(img, 0.04, seed=1000 + (zlib.crc32(name.encode()) % 100000))
+    if A.grain: img = grain(img, A.grain, seed=1000 + (zlib.crc32(name.encode()) % 100000))
     img = tonemap(img)
     img = recolor(np.round(np.clip(img, 0, 1) * 255) / 255)
     im = Image.fromarray((np.clip(img, 0, 1) * 255 + 0.5).astype(np.uint8))

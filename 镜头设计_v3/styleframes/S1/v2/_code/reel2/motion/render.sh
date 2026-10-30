@@ -9,7 +9,7 @@ BL=D:/software/tools/blender.exe
 case "$1" in
   fontana)
     "$BL" -b --factory-startup -t 4 -P "$D/fontana_anim.py" -- --out "$S/raw" --samples 384 2>&1 | grep -E "RENDER|Error|Trace|ALLDONE" | tail -3
-    python "$D/post_seq.py" "$S/raw" "$PUB/motion/fontana" --sheet "$S/fontana_sheet.jpg" | tail -1 ;;
+    python "$D/post_seq.py" "$S/raw" "$PUB/motion/fontana" --grain 0 --sheet "$S/fontana_sheet.jpg" | tail -1 ;;
   neon)
     mkdir -p "$PUB/motion/neon"
     for st in L0S0B0:base L1S0B0:line L1S1B0:st L1S1B1:beads; do

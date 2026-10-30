@@ -17,6 +17,7 @@ ap.add_argument("--out", required=True)
 ap.add_argument("--frames", default="")
 ap.add_argument("--stills", default="", help="comma-separated frames -> OUT_####.png")
 ap.add_argument("--samples", type=int, default=48)
+ap.add_argument("--thresh", type=float, default=0.02)  # adaptive noise threshold; 0.004 for the clean pass (10-30)
 ap.add_argument("--pct", type=int, default=100)
 ap.add_argument("--labels", default="")
 ap.add_argument("--labels_only", type=int, default=0)
@@ -376,7 +377,7 @@ pref.compute_device_type = "OPTIX"; pref.get_devices()
 for d in pref.devices: d.use = (d.type == "OPTIX")
 scn.cycles.device = "GPU"
 scn.cycles.samples = A.samples
-scn.cycles.use_adaptive_sampling = True; scn.cycles.adaptive_threshold = 0.02
+scn.cycles.use_adaptive_sampling = True; scn.cycles.adaptive_threshold = A.thresh
 scn.cycles.use_denoising = True; scn.cycles.denoiser = "OPTIX"
 scn.cycles.denoising_input_passes = "RGB_ALBEDO_NORMAL"
 scn.cycles.max_bounces = 16; scn.cycles.transmission_bounces = 16; scn.cycles.glossy_bounces = 6
