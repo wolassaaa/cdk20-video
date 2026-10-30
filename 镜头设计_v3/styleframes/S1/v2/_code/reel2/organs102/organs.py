@@ -26,6 +26,7 @@ ap.add_argument("--labels", default="")
 ap.add_argument("--labels_only", type=int, default=0)
 ap.add_argument("--exposure", type=float, default=0.35)
 ap.add_argument("--haze", type=float, default=0.025)
+ap.add_argument("--engine", default="cycles", help="eevee: test only, GPU rasteriser with raytraced refraction; --samples is the jitter count")
 C.add_render_flags(ap, seq=True)
 A = ap.parse_args(argv)
 
@@ -397,6 +398,13 @@ for f, e in [(F_PULL1[0], A.exposure), (F_PULL1[1], A.exposure + 0.3), (F_PULL2[
     vs.exposure = e; vs.keyframe_insert("exposure", frame=f)
 scn.render.image_settings.file_format = "PNG"; scn.render.image_settings.color_mode = "RGB"; scn.render.image_settings.color_depth = "8"
 C.apply_flags(scn, A)
+if A.engine == "eevee":
+    scn.render.engine = "BLENDER_EEVEE"
+    scn.eevee.taa_render_samples = A.samples
+    scn.eevee.use_raytracing = True
+    scn.eevee.volumetric_tile_size = "2"; scn.eevee.volumetric_samples = 128
+    for m in bpy.data.materials:
+        m.use_raytrace_refraction = True
 
 if A.stills:
     for fr in [int(x) for x in A.stills.split(",")]:

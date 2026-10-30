@@ -1,7 +1,7 @@
 // PULSE, 1,412 lights: type layer over the Blender frames. Palette and fonts as the rest of S1.
 // Wall-label logic: quiet, no motion but a fade, set in the empty wedge under the left lobe.
 import React from "react";
-import {registerRoot, Composition, AbsoluteFill, Img, staticFile, useCurrentFrame, interpolate, Easing} from "remotion";
+import {registerRoot, Composition, AbsoluteFill, Img, staticFile, useCurrentFrame, useVideoConfig, interpolate, Easing} from "remotion";
 import {loadFont as loadGrot} from "@remotion/google-fonts/InterTight";
 import {loadFont as loadSerif} from "@remotion/google-fonts/InstrumentSerif";
 import {loadFont as loadMono} from "@remotion/google-fonts/MartianMono";
@@ -27,10 +27,10 @@ const Label = ({f}) => <div style={{position: "absolute", right: 96, bottom: 118
 </div>;
 
 const PulseTest = () => {
-  const f = useCurrentFrame();
+  const f = useCurrentFrame(), {fps} = useVideoConfig();
   return <AbsoluteFill style={{background: "#060606"}}>
     <Img src={staticFile(`frames/p_${pad(f)}.png`)} style={{position: "absolute", width: W, height: H}}/>
-    <Label f={f}/>
+    <Label f={f * FPS / fps}/>
   </AbsoluteFill>;
 };
 
@@ -49,6 +49,7 @@ const PulseExtra = () => <AbsoluteFill style={{background: "#060606"}}>
 
 const Root = () => <>
   <Composition id="PulseTest" component={PulseTest} width={W} height={H} fps={FPS} durationInFrames={300}/>
+  <Composition id="PulseTest60" component={PulseTest} width={W} height={H} fps={60} durationInFrames={600}/>
   <Composition id="PulseExtra" component={PulseExtra} width={W} height={H} fps={FPS} durationInFrames={1}/>
 </>;
 registerRoot(Root);

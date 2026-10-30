@@ -28,12 +28,19 @@ ap.add_argument("--plan_only", type=int, default=0)
 ap.add_argument("--floor", type=int, default=1)
 ap.add_argument("--step", type=int, default=1)
 ap.add_argument("--extra", type=int, default=0, help="1: the ten-bulb still for 1-04 instead of the liver")
+ap.add_argument("--engine", default="cycles", help="eevee: same scene drawn by the GPU rasteriser; --samples is then the jitter count")
+ap.add_argument("--fps", type=int, default=30, help="30 or 60. The camera stays keyed in 30 fps frames and is read between them; heartbeats are worked out at this rate")
+ap.add_argument("--jitter", type=int, default=1, help="eevee: 1 lens samples per pass, 0 the post-process blur")
+ap.add_argument("--overblur", type=float, default=0.0)
+ap.add_argument("--rt", type=int, default=0, help="eevee: 1 raytraced reflections on opaque surfaces; blended glass can't use them")
+ap.add_argument("--mb_steps", type=int, default=1, help="eevee: time steps. The lens pattern is built per step, so pass --samples 256 * mb_steps")
 A = ap.parse_args(argv)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "..", "data")
 t0 = time.time()
-FPS, NF = 30, 300
+FPS, NF = 30, 300               # camera and timing keys
+NFT = NF * A.fps // FPS         # heartbeat rows
 W_, H_ = 1920, 1080
 
 # ------------------------------------------------------------------ palette (linear)
@@ -172,8 +179,8 @@ bpm = np.clip(rng.normal(72, 8, N), 54, 96)
 phase0 = rng.random(N)
 gain = 0.85 + 0.3 * rng.random(N)      # bulbs are hand-made; a little spread in brightness
 SUB = 8                                 # sub-samples per frame (box filter over the frame)
-ts = (np.arange(NF * SUB) + 0.5) / (FPS * SUB)
-dt = 1.0 / (FPS * SUB)
+ts = (np.arange(NFT * SUB) + 0.5) / (A.fps * SUB)
+dt = 1.0 / (A.fps * SUB)
 
 
 def beat_shape(tau):
@@ -185,10 +192,10 @@ def beat_shape(tau):
 
 
 REST = 0.42
-white = np.zeros((N, NF * SUB))
-ember = np.zeros((N, NF * SUB))
-tr_r = np.full((N, NF * SUB), 0.97)     # glass transmission, red
-tr_g = np.full((N, NF * SUB), 0.97)     # glass transmission, green and blue
+white = np.zeros((N, NFT * SUB))
+ember = np.zeros((N, NFT * SUB))
+tr_r = np.full((N, NFT * SUB), 0.97)     # glass transmission, red
+tr_g = np.full((N, NFT * SUB), 0.97)     # glass transmission, green and blue
 death_t = {}
 for i in range(N):
     rate = np.full(len(ts), bpm[i] / 60.0)
@@ -229,11 +236,11 @@ for i in range(N):
         acc += (drive[n_] - acc) * al; lag[n_] = acc
     white[i] = lag * gain[i]
 # box filter to frames
-white_f = white.reshape(N, NF, SUB).mean(2)
-ember_f = ember.reshape(N, NF, SUB).mean(2)
-tr_r_f = tr_r.reshape(N, NF, SUB).mean(2)
-tr_g_f = tr_g.reshape(N, NF, SUB).mean(2)
-np.savez(os.path.join(DATA, "pulse.npz"), white=white_f, ember=ember_f, bpm=bpm, phase0=phase0, gain=gain,
+white_f = white.reshape(N, NFT, SUB).mean(2)
+ember_f = ember.reshape(N, NFT, SUB).mean(2)
+tr_r_f = tr_r.reshape(N, NFT, SUB).mean(2)
+tr_g_f = tr_g.reshape(N, NFT, SUB).mean(2)
+np.savez(os.path.join(DATA, "pulse.npz" if A.fps == FPS else f"pulse_{A.fps}.npz"), white=white_f, ember=ember_f, bpm=bpm, phase0=phase0, gain=gain,
          dying=np.array(PL["dying"]), death_t=np.array([death_t.get(i, -1) for i in PL["dying"]]))
 print("death times:", {i: round(t, 3) for i, t in death_t.items()}, "(%.1fs)" % (time.time() - t0))
 if A.plan_only:
@@ -245,14 +252,14 @@ scn = bpy.context.scene
 scn.render.fps = FPS
 scn.frame_start, scn.frame_end = 0, NF - 1
 
-img = bpy.data.images.new("pulse_tex", N, NF, alpha=True, float_buffer=True)
-px = np.zeros((NF, N, 4), np.float32)
+img = bpy.data.images.new("pulse_tex", N, NFT, alpha=True, float_buffer=True)
+px = np.zeros((NFT, N, 4), np.float32)
 px[..., 0] = white_f.T; px[..., 1] = ember_f.T; px[..., 3] = 1
 img.pixels.foreach_set(px.ravel())
 img.pack()
 img.colorspace_settings.name = "Non-Color"
-img_tr = bpy.data.images.new("glass_tex", N, NF, alpha=True, float_buffer=True)
-px = np.zeros((NF, N, 4), np.float32)
+img_tr = bpy.data.images.new("glass_tex", N, NFT, alpha=True, float_buffer=True)
+px = np.zeros((NFT, N, 4), np.float32)
 px[..., 0] = tr_r_f.T; px[..., 1] = tr_g_f.T; px[..., 2] = tr_g_f.T; px[..., 3] = 1
 img_tr.pixels.foreach_set(px.ravel())
 img_tr.pack()
@@ -327,6 +334,7 @@ ad = nt.nodes.new("ShaderNodeAddShader")
 nt.links.new(mx.outputs[0], ad.inputs[0]); nt.links.new(emg.outputs[0], ad.inputs[1])
 nt.links.new(ad.outputs[0], out.inputs["Surface"])
 m_gl.cycles.emission_sampling = "NONE"      # glow reaches the camera directly; not a light for other surfaces
+GL = dict(inv=inv, pw=pw, emg=emg, ad=ad, fresnel=fr_, out=out)   # the eevee branch rewires these
 
 # cap and cable: black, a little gloss so they catch their neighbours
 def dark(name, rough, base=0.012, spec=0.5):
@@ -353,7 +361,16 @@ mr.inputs["To Min"].default_value = 1.0; mr.inputs["To Max"].default_value = 0.0
 nt.links.new(sz.outputs["Z"], mr.inputs["Value"])
 CAB_VAL = nt.nodes.new("ShaderNodeValue")
 cm_ = nt.nodes.new("ShaderNodeMath"); cm_.operation = "MULTIPLY"
-nt.links.new(mr.outputs[0], cm_.inputs[0]); nt.links.new(CAB_VAL.outputs[0], cm_.inputs[1])
+# CAB_NEAR stands in for the light Cycles gets from the filaments: a thin stripe down the tube in the close-up. Zero under Cycles
+CAB_NEAR = nt.nodes.new("ShaderNodeValue")
+lwc = nt.nodes.new("ShaderNodeLayerWeight"); lwc.inputs["Blend"].default_value = 0.5
+ivc = nt.nodes.new("ShaderNodeMath"); ivc.operation = "SUBTRACT"; ivc.inputs[0].default_value = 1.0
+nt.links.new(lwc.outputs["Facing"], ivc.inputs[1])
+pwc = nt.nodes.new("ShaderNodeMath"); pwc.operation = "POWER"; pwc.inputs[1].default_value = 8.0
+nt.links.new(ivc.outputs[0], pwc.inputs[0])
+stc = nt.nodes.new("ShaderNodeMath"); stc.operation = "MULTIPLY_ADD"
+nt.links.new(pwc.outputs[0], stc.inputs[0]); nt.links.new(CAB_NEAR.outputs[0], stc.inputs[1]); nt.links.new(CAB_VAL.outputs[0], stc.inputs[2])
+nt.links.new(mr.outputs[0], cm_.inputs[0]); nt.links.new(stc.outputs[0], cm_.inputs[1])
 emc = nt.nodes.new("ShaderNodeEmission"); emc.inputs["Color"].default_value = (*BONE, 1)
 nt.links.new(cm_.outputs[0], emc.inputs["Strength"])
 adc = nt.nodes.new("ShaderNodeAddShader")
@@ -534,13 +551,18 @@ for fr in range(NF):
     cam.keyframe_insert("location", frame=fr); cam.keyframe_insert("rotation_quaternion", frame=fr)
     camd.dof.focus_distance = fdist; camd.dof.aperture_fstop = fstop
     camd.dof.keyframe_insert("focus_distance", frame=fr); camd.dof.keyframe_insert("aperture_fstop", frame=fr)
-    for vn in FRAME_KEYS:
-        vn.outputs[0].default_value = (fr + 0.5) / NF
-        vn.outputs[0].keyframe_insert("default_value", frame=fr)
     THR_VAL.outputs[0].default_value = -0.2 + 1.45 * smoother((fr - 226) / 60)
     THR_VAL.outputs[0].keyframe_insert("default_value", frame=fr)
     CAB_VAL.outputs[0].default_value = CAB_L * smoother((fr - 212) / 60)
     CAB_VAL.outputs[0].keyframe_insert("default_value", frame=fr)
+    CAB_NEAR.outputs[0].default_value = 0.011 * (1 - smoother((fr - 165) / 30)) if A.engine == "eevee" else 0.0
+    CAB_NEAR.outputs[0].keyframe_insert("default_value", frame=fr)
+
+
+for k in range(NFT):
+    for vn in FRAME_KEYS:
+        vn.outputs[0].default_value = (k + 0.5) / NFT
+        vn.outputs[0].keyframe_insert("default_value", frame=k * FPS / A.fps)
 
 
 def set_interp(idb, kind):
@@ -580,10 +602,47 @@ scn.cycles.blur_glossy = 0.0
 scn.cycles.sample_clamp_direct = 6.0
 scn.cycles.sample_clamp_indirect = 4.0
 scn.cycles.seed = 1412; scn.cycles.use_animated_seed = False
-scn.render.use_motion_blur = True; scn.render.motion_blur_shutter = 0.5
+scn.render.use_motion_blur = True; scn.render.motion_blur_shutter = 0.5 * FPS / A.fps
 scn.render.use_persistent_data = True
 scn.render.resolution_x = W_; scn.render.resolution_y = H_; scn.render.resolution_percentage = A.pct
 scn.view_settings.view_transform = "Standard"; scn.view_settings.look = "None"; scn.view_settings.exposure = 0.0
+if A.engine == "eevee":
+    scn.render.engine = "BLENDER_EEVEE"
+    scn.eevee.taa_render_samples = A.samples
+    scn.eevee.use_bokeh_jittered = bool(A.jitter)
+    scn.eevee.bokeh_overblur = A.overblur
+    scn.eevee.use_raytracing = bool(A.rt)
+    scn.eevee.motion_blur_steps = A.mb_steps
+    # dithering draws 3% opaque glass as a rare pixel at 33x its glow: blended keeps the glow additive, like Cycles
+    m_gl.surface_render_method = "BLENDED"; m_gl.use_transparency_overlap = True
+    # no lamps in the scene, so what the filaments light in Cycles has to be drawn. Three fixes follow, values measured against the Cycles EXRs
+    nt = m_gl.node_tree
+    # 1. past r = 0.667 the back shell reflects everything, so Cycles gathers that ring's glow about four times. Blended shells draw in face order and can erase each other, so all of it goes on the back shell
+    ng = nt.nodes.new("ShaderNodeNewGeometry")
+    ring = nt.nodes.new("ShaderNodeMath"); ring.operation = "LESS_THAN"; ring.inputs[1].default_value = 0.745
+    nt.links.new(GL["inv"].outputs[0], ring.inputs[0])
+    bk = nt.nodes.new("ShaderNodeMath"); bk.operation = "MULTIPLY_ADD"; bk.inputs[1].default_value = 3.8; bk.inputs[2].default_value = -1.0
+    nt.links.new(ng.outputs["Backfacing"], bk.inputs[0])
+    rm = nt.nodes.new("ShaderNodeMath"); rm.operation = "MULTIPLY_ADD"; rm.inputs[2].default_value = 1.0
+    nt.links.new(ring.outputs[0], rm.inputs[0]); nt.links.new(bk.outputs[0], rm.inputs[1])
+    gs = nt.nodes.new("ShaderNodeMath"); gs.operation = "MULTIPLY"
+    nt.links.new(GL["pw"].outputs[0], gs.inputs[0]); nt.links.new(rm.outputs[0], gs.inputs[1])
+    nt.links.new(gs.outputs[0], GL["emg"].inputs["Strength"])
+    # 2. a dead bulb keeps a faint lit rim on its front shell
+    nb = nt.nodes.new("ShaderNodeMath"); nb.operation = "SUBTRACT"; nb.inputs[0].default_value = 1.0
+    nt.links.new(ng.outputs["Backfacing"], nb.inputs[1])
+    fk = nt.nodes.new("ShaderNodeMath"); fk.operation = "MULTIPLY"
+    nt.links.new(GL["fresnel"].outputs[0], fk.inputs[0]); nt.links.new(nb.outputs[0], fk.inputs[1])
+    fs = nt.nodes.new("ShaderNodeMath"); fs.operation = "MULTIPLY"; fs.inputs[1].default_value = 0.025
+    nt.links.new(fk.outputs[0], fs.inputs[0])
+    emr = nt.nodes.new("ShaderNodeEmission"); emr.inputs["Color"].default_value = (*BONE, 1)
+    nt.links.new(fs.outputs[0], emr.inputs["Strength"])
+    ad2 = nt.nodes.new("ShaderNodeAddShader")
+    nt.links.new(GL["ad"].outputs[0], ad2.inputs[0]); nt.links.new(emr.outputs[0], ad2.inputs[1])
+    nt.links.new(ad2.outputs[0], GL["out"].inputs["Surface"])
+    # 3. caps: the faint level Cycles gives them. Cables get CAB_NEAR above
+    bc = m_cap.node_tree.nodes["Principled BSDF"]
+    bc.inputs["Emission Color"].default_value = (*BONE, 1); bc.inputs["Emission Strength"].default_value = 0.003
 ims = scn.render.image_settings
 ims.file_format = "OPEN_EXR"; ims.color_mode = "RGB"; ims.color_depth = "16"; ims.exr_codec = "ZIP"
 
@@ -606,6 +665,7 @@ elif A.frames:
     for fr in range(a, b + 1, A.step):
         fp = A.out + "%04d.exr" % fr
         if os.path.exists(fp): continue
-        scn.frame_set(fr); scn.render.filepath = fp
+        t_ = fr * FPS / A.fps
+        scn.frame_set(int(t_), subframe=t_ - int(t_)); scn.render.filepath = fp
         t1 = time.time(); bpy.ops.render.render(write_still=True)
         print("RENDER_TIME %.1fs -> %s" % (time.time() - t1, fp), flush=True)

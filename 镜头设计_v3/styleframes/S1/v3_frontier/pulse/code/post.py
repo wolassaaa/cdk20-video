@@ -24,7 +24,7 @@ def load_exr(path):
     w, h = img.size
     px = np.empty(w * h * 4, np.float32); img.pixels.foreach_get(px)
     bpy.data.images.remove(img)
-    return px.reshape(h, w, 4)[::-1, :, :3].astype(np.float64)
+    return px.reshape(h, w, 4)[::-1, :, :3].astype(np.float32)
 
 
 def write_png(path, rgb8):
@@ -32,7 +32,7 @@ def write_png(path, rgb8):
     raw = b"".join(b"\x00" + rgb8[y].tobytes() for y in range(h))
     def chunk(t, d): return struct.pack(">I", len(d)) + t + d + struct.pack(">I", zlib.crc32(t + d) & 0xffffffff)
     with open(path, "wb") as f:
-        f.write(b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", w, h, 8, 2, 0, 0, 0)) + chunk(b"IDAT", zlib.compress(raw, 6)) + chunk(b"IEND", b""))
+        f.write(b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", w, h, 8, 2, 0, 0, 0)) + chunk(b"IDAT", zlib.compress(raw, 1)) + chunk(b"IEND", b""))
 
 
 # glow = a sum of wide gaussians, the way light scatters in a lens; computed once per frame from that frame only.
@@ -42,17 +42,28 @@ BG = 6 / 255
 RHO = 0.62
 
 
-def blur_fft(img, sigmas):
+def blur_fft(img, s):
     h, w = img.shape[:2]
-    pad = 256
+    pad = int(3 * s) + 8
     H_, W_ = h + 2 * pad, w + 2 * pad
-    out = []
     fy = np.fft.fftfreq(H_)[:, None]; fx = np.fft.rfftfreq(W_)[None, :]
-    ft = [np.fft.rfft2(np.pad(img[..., c], pad, mode="constant")) for c in range(3)]
-    for s in sigmas:
-        k = KF.setdefault((s, H_, W_), np.exp(-2 * (np.pi * s) ** 2 * (fx ** 2 + fy ** 2)))
-        out.append(np.stack([np.fft.irfft2(f_ * k, s=(H_, W_))[pad:-pad, pad:-pad] for f_ in ft], 2))
-    return out
+    k = KF.setdefault((s, H_, W_), np.exp(-2 * (np.pi * s) ** 2 * (fx ** 2 + fy ** 2)))
+    return np.stack([np.fft.irfft2(np.fft.rfft2(np.pad(img[..., c], pad, mode="constant")) * k, s=(H_, W_))[pad:-pad, pad:-pad] for c in range(3)], 2)
+
+
+def blur_lo(img, s):
+    """Wide glows don't need every pixel: box down by k, blur the small image, bilinear back up. k stays under s / 3, so the result has no edge the upscale could show."""
+    k = max(1, int(s // 3))
+    if k == 1:
+        return blur_fft(img, s)
+    h, w = img.shape[:2]
+    hs, ws = h // k, w // k
+    sm = img[:hs * k, :ws * k].reshape(hs, k, ws, k, 3).mean((1, 3))
+    sm = blur_fft(sm, float(np.sqrt(max(s * s / (k * k) - 1 / 12, 0.05))))
+    y = np.clip((np.arange(h) + 0.5) / k - 0.5, 0, hs - 1.001); i = y.astype(int); t = (y - i)[:, None, None]
+    sm = sm[i] * (1 - t) + sm[i + 1] * t
+    x = np.clip((np.arange(w) + 0.5) / k - 0.5, 0, ws - 1.001); j = x.astype(int); t = (x - j)[None, :, None]
+    return sm[:, j] * (1 - t) + sm[:, j + 1] * t
 
 
 def red_guard(s):
@@ -73,7 +84,8 @@ def red_guard(s):
 def grade(L, frame):
     h = L.shape[0]
     sc = h / 1080
-    bl = blur_fft(np.minimum(L, 40.0), [s * sc for s, _ in GLOW])
+    clipped = np.minimum(L, 40.0)
+    bl = [blur_lo(clipped, s * sc) for s, _ in GLOW]
     a = sum(wt for _, wt in GLOW)
     o = L * (1 - a)
     for b, (_, wt) in zip(bl, GLOW): o = o + b * wt
