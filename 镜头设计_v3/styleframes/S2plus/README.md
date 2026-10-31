@@ -86,4 +86,5 @@ python "D:/。hkbu/molecular science/镜头设计_v3/styleframes/S2plus/code/mak
 - 排版时按等宽字算：Martian Mono 每字 0.7 em，`PlateText` 每字 18.2 px，`Foot` 每字 15.4 px。
 - 在色块上放字或牌子时都要传 `on`，比如 `<Foot on={K.klein}>`、`<Plate kind="illustrative" on={K.blue}/>`。违反 2.1 节对比度表的组合会直接报错，渲染会停下来，这是故意的。没传 `on` 时按黑底检查，查不出来。
 - 血红上和黑底血红字，`Body` 36 px 以上才放行，`PlateText` 和 `Foot` 都不行。红底上的小字放到黑条上。
+- 大白话用 `Body`，放在数字正下方，颜色跟数字走。字句来自 `script/数字大白话_brief_20261031.md`，不要自己新写含义。`stills/before_plain/` 是加字前的原图。
 - `millions → 13` 照原文打字就行。这三款字体的 Google 子集都没有 `→`，`kit.jsx` 会换成矢量箭头。这个替换只在六个字体组件里生效。

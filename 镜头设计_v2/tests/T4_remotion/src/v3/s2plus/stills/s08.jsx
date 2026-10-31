@@ -4,7 +4,7 @@
 // belong to the earlier Kd row, never to an IC50 axis. The ± is never dropped.
 // Shorter is better here, so the long bar is the loser: 001 is DIM and 048 is the only full-bone data on screen.
 import React from "react";
-import {Stage, Big, Foot, Plate, K, DIM, M, W} from "../kit";
+import {Stage, Big, Body, Foot, Plate, K, DIM, M, W} from "../kit";
 import {NmBar, PX_PER_NM} from "./lib_s5";
 
 // --- one real linear axis, in nM. Scale and bar live in lib_s5.jsx, shared with still 10 ---
@@ -40,11 +40,14 @@ export default () => <Stage>
     <NmBar x={AX} y={forty8.y} h={BAR_H} value={forty8.value} sd={forty8.sd}/>
   </svg>
 
-  <Big x={M} y={260} size={64} color={DIM}>{one.label}</Big>
-  <div style={{position: "absolute", right: M, top: 266}}><Plate kind="measured" style={{background: DIM}}/></div>
+  {/* plain-language lines sit under their own number and take its colour. 001's is script 5-05. 048's starts past the whisker, on the bar's own band */}
+  <Big x={M} y={216} size={64} color={DIM}>{one.label}</Big>
+  <div style={{position: "absolute", right: M, top: 222}}><Plate kind="measured" style={{background: DIM}}/></div>
+  <Body x={M} y={296} color={DIM}>The key went in. It barely turned.</Body>
 
   <Big x={M} y={576} size={96}>{forty8.label}</Big>
   <div style={{position: "absolute", right: M, top: 599}}><Plate kind="measured" fig="9A"/></div>
+  <Body x={M + 40} y={693} style={{whiteSpace: "nowrap"}}>Far less molecule, same job done. The key turned.</Body>
 
   {MAJOR.map(nm => <Foot key={`l${nm}`} x={nm ? nmX(nm) - 60 : AX} y={AXIS_Y + 26} w={120} style={{textAlign: nm ? "center" : "left"}}>
     {comma(nm)}

@@ -6,10 +6,10 @@
 // What differs is the concentration it took, which is the bar under each dish, on still 8's nM scale (the script's 5-10 asks for bars).
 // Never draw one dish emptier than the other — that would claim a difference in effect rather than in potency.
 import React from "react";
-import {Stage, Big, PlateText, Foot, Plate, K, DIM, W, M, colX} from "../kit";
+import {Stage, Big, Body, PlateText, Foot, Plate, K, DIM, W, M, colX} from "../kit";
 import {Dish, DISH_N, NmBar, halfLit} from "./lib_s5";
 
-const CY = 360, R = 190, BAR_Y = 806, BAR_H = 24;
+const CY = 330, R = 190, BAR_Y = 776, BAR_H = 24;
 // Dish, name, value and bar share one left edge, because the bars start from zero. Columns 1 and 7 leave the longest whisker inside the margin.
 const CELLS = [
   {name: "Huh7", value: "208.7 ± 3.3 nM", nm: 208.7, sd: 3.3, x: colX(1), seed: 1, bar: K.bone},
@@ -32,10 +32,13 @@ export default () => <Stage>
 
   {/* emitted left to right with "vs" in the gap, so the markup order is the reading order of the frame */}
   {CELLS.map((c, i) => <React.Fragment key={c.name}>
-    {i ? <Big x={MID - 50} y={726} w={100} size={64} color={DIM} style={{textAlign: "center"}}>vs</Big> : null}
-    <PlateText x={c.x} y={690}>{c.name}</PlateText>
-    <Big x={c.x} y={726} size={64} style={{whiteSpace: "nowrap"}}>{c.value}</Big>
+    {i ? <Big x={MID - 50} y={696} w={100} size={64} color={DIM} style={{textAlign: "center"}}>vs</Big> : null}
+    <PlateText x={c.x} y={660}>{c.name}</PlateText>
+    <Big x={c.x} y={696} size={64} style={{whiteSpace: "nowrap"}}>{c.value}</Big>
   </React.Fragment>)}
+
+  {/* plain-language line, script 5-10's own wording: "lost half", not "killed", because the readout is a living-cell signal. It runs under both bars since it compares them */}
+  <Body x={CELLS[0].x} y={812} style={{whiteSpace: "nowrap"}}>Liver cancer cells lost half their signal at about one eighth of the amount.</Body>
 
   {/* section 3 S5: neither footnote may be shrunk, so both stay full bone at the Foot setting, not dimmed */}
   <Foot x={M} y={890} color={K.bone}>~8x = our calculation</Foot>

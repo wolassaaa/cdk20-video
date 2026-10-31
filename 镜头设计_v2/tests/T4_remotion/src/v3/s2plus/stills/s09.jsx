@@ -24,8 +24,9 @@ export default () => {
   const rendered = getStaticFiles().some(f => f.name === FILE);
   return <Stage>
     <div style={{position: "absolute", left: 0, top: 0, width: LINE, height: H, background: K.red}}/>
-    <Body x={M} y={778} on={K.red}>Enzyme IC50</Body>{/* W4 has no narration, so the frame says what the number is: not this pose's score */}
-    <Big x={M - 3} y={826} size={84} on={K.red} style={{whiteSpace: "nowrap"}}>048 = 33.4 ± 22.6 nM</Big>
+    <Body x={M} y={730} on={K.red}>Enzyme IC50</Body>{/* W4 has no narration, so the frame says what the number is: not this pose's score */}
+    <Big x={M - 3} y={778} size={84} on={K.red} style={{whiteSpace: "nowrap"}}>048 = 33.4 ± 22.6 nM</Big>
+    <Body x={M} y={872} on={K.red} style={{whiteSpace: "nowrap"}}>Just this much cuts the enzyme's activity in half.</Body>{/* plain-language line, same as M09 */}
     <Plate kind="measured" fig="9A" x={M} y={PLATE_Y} on={K.red}/>
     {rendered ? [POCKET, FILE].map(f => <Img key={f} src={staticFile(f)} style={{position: "absolute", left: LINE, top: 0, width: LINE, height: H}}/>) : <StandIn/>}
     {rendered && <PlateText x={1296} y={108}>Lys33</PlateText>}

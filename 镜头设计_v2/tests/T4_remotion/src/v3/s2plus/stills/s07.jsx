@@ -34,6 +34,7 @@ export default () => <Stage>
     <Plate key={c.id} kind="measured" x={cellX(i)} y={PLATE_Y} style={c.sourced ? null : {background: DIM}}>{c.kd}</Plate>)}
 
   <Body x={M} y={702}>Kd: lower = tighter</Body>{/* the key to the row, so it sits directly under it */}
+  <Body x={M} y={750}>Six barely held on. 001 stood out.</Body>{/* plain-language line, script 5-02 verbatim; "barely held on" is not "did not hold" */}
   {/* placeholder marker, same class as the kit's PersonPlaceholder tag: delete it once the six structures are drawn */}
   {FIG5.unsourced.length
     ? <Foot x={M} y={936} color={DIM}>PLACEHOLDER · {FIG5.unsourced.length} structures pending Fig. 5</Foot>
