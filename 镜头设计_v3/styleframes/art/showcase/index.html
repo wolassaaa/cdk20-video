@@ -1,0 +1,158 @@
+<title>CDK20 片子主基调</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a grading-room review sheet. The frames are the page; text sits beside them on one dark, slightly warm ground. */
+:root{--bg:#0c0a0a;--panel:#171312;--line:#352c29;--fg:#f1ebe4;--mute:#b2a59c;--ember:#ff9400;
+--sans:"Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;--mono:"IBM Plex Mono",Consolas,monospace;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:16px/1.7 var(--sans)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{line-height:1.2;text-wrap:balance;margin:0}
+p{margin:0}
+.hero{position:relative;background:#000}
+.hero img{display:block;width:100%;height:auto}
+.head{display:grid;gap:14px;padding-block:28px 12px;max-width:760px}
+.kicker{font:500 13px/1.4 var(--mono);color:var(--mute)}
+h1{font-size:clamp(34px,6vw,60px);font-weight:900}
+.lead{font-size:18px}
+.funnel{display:flex;flex-wrap:wrap;gap:8px 20px;padding-block:12px 4px;font-family:var(--mono);font-size:14px;color:var(--mute);font-variant-numeric:tabular-nums}
+.funnel b{color:var(--fg);font-weight:500;font-size:22px;margin-right:6px}
+.block{padding-block:30px;border-top:1px solid var(--line);margin-top:30px}
+.block h2{font-size:24px;font-weight:700;margin-bottom:14px}
+.ask{display:grid;gap:14px;margin:0;padding:0;list-style:none;counter-reset:a}
+.ask li{counter-increment:a;display:grid;grid-template-columns:30px 1fr;gap:6px;max-width:760px}
+.ask li::before{content:counter(a);font:500 16px/1.7 var(--mono);color:var(--ember)}
+.ask b{font-weight:700}
+.prose{display:grid;gap:12px;max-width:720px}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+nav a{color:var(--fg);text-decoration:none;font-size:15px;padding:6px 14px;border:1px solid var(--line);border-radius:3px}
+nav a:hover,nav a:focus-visible{border-color:var(--ember);outline:none}
+.fin{padding-block:34px;border-top:1px solid var(--line);display:grid;gap:18px;scroll-margin-top:12px}
+.fin header{display:grid;gap:8px;max-width:760px}
+.fin h2{font-size:clamp(28px,4.4vw,42px);font-weight:900;color:var(--ac);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.pick{font:500 13px/1 var(--mono);color:#120b05;background:var(--ac);padding:6px 9px;border-radius:2px}
+.claim{font-size:18px}
+.stage{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:20px;align-items:start}
+video{display:block;width:100%;max-width:100%;aspect-ratio:16/9;background:#000}
+dl{margin:0;display:grid;gap:12px}
+dt{font:500 13px/1.4 var(--mono);color:var(--mute)}
+dd{margin:2px 0 0;font-size:15px;line-height:1.6}
+.shots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.shot{position:relative;display:block;padding:0;border:0;background:#000;cursor:zoom-in;color:inherit;font:inherit;min-width:0}
+.shot img{display:block;width:100%;height:auto}
+.shot:focus-visible{outline:2px solid var(--ember);outline-offset:2px}
+.shot span{position:absolute;left:0;bottom:0;background:rgba(10,8,8,.8);color:var(--fg);font:500 12px/1 var(--mono);padding:5px 7px}
+.wide span{font-family:var(--sans);font-size:13px}
+.cs{margin:0;display:grid;gap:6px}
+.cs img{display:block;width:100%;height:auto}
+.cs figcaption{font-size:13px;color:var(--mute)}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:15px}
+th,td{text-align:left;padding:9px 12px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:500 13px/1.4 var(--mono);color:var(--mute)}
+td.n{font-family:var(--mono);font-variant-numeric:tabular-nums}
+details{border-top:1px solid var(--line);padding-block:16px}
+summary{cursor:pointer;font-size:18px;font-weight:700}
+.sheets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:14px}
+.note{margin-top:12px;color:var(--mute);font-size:14px}
+.tight{padding-block:0;border-top:0}
+footer{padding-block:28px 40px;color:var(--mute);font-size:14px}
+dialog{border:0;padding:0;background:transparent;max-width:100vw;max-height:100vh}
+dialog::backdrop{background:rgba(0,0,0,.92)}
+dialog img{display:block;max-width:96vw;max-height:88vh;width:auto;height:auto}
+dialog p{color:var(--fg);padding:8px 2px;font-size:14px}
+@media (max-width:760px){.stage{grid-template-columns:minmax(0,1fr)}.shots{grid-template-columns:repeat(2,minmax(0,1fr))}.sheets{grid-template-columns:minmax(0,1fr)}}
+</style>
+<div class="hero"><img src="a/eclipse_T4.jpg" alt="日食方向 T4：CDK20 真实表面挡住太阳，珍珠白的日冕从缝隙里爆出来" width="1280" height="720"></div>
+<div class="wrap">
+<div class="head">
+<p class="kicker">HKBU SCIE1007 课程作业科普视频 · 艺术方向探索 · 2026-10-31</p>
+<h1>首选日食</h1>
+<p class="lead">全片是一场日食。那把谁也没见过的锁，就是挡住太阳的影子。AI 开灯时，日冕从真实的蛋白表面爆出来。路线图是日食的相位，结尾只到第一缕光，因为 048 还不是药。</p>
+</div>
+<div class="funnel" aria-label="筛选过程"><span><b>60</b>新风格</span><span><b>20</b>旧作</span><span><b>14</b>方向试多镜头</span><span><b>5</b>决赛</span><span><b>1</b>首选</span></div>
+<nav aria-label="决赛方向"><a href="#eclipse">日食</a><a href="#manual">说明书</a><a href="#hot">马拉松热色</a><a href="#lantern">举灯</a><a href="#hands">手</a></nav>
+
+<section class="block">
+<h2>为什么是它</h2>
+<div class="prose">
+<p>它是从这个故事长出来的。"谁也没见过的锁"正好是只看得见影子的东西，换成别的科普片就不成立。</p>
+<p>它最反常理，又最好懂。蛋白不再是一个发光的模型，而是一个天体大小的黑影。太阳被挡住，谁都看得懂。</p>
+<p>统一还是每段不同，我的判断是一条主线，每段是线上的一个窗口。暖带从黑到血红是世界，橙金只给人，珍珠白只给机器。全片一个基调，每段颜色都不同，相邻的很接近。</p>
+<p>它最省码率。大片是纯黑和平的红，样片只用 2.0 Mbps，对 1 GB 的上限最友好。</p>
+</div>
+</section>
+
+<section class="block">
+<h2>要你定的</h2>
+<ol class="ask">
+<li><span><b>选主基调。</b>我选日食。想要每段明显不同，就选说明书。</span></li>
+<li><span><b>拍一段 10 秒的手机片。</b>坐着说话，普通房间。五个方向的 T2 都还是占位，项目里没有人脸素材，这是最大的未知。</span></li>
+<li><span><b>路线图第四站怎么写。</b>剧本 6-10 旁白说细胞初测已做，画面说明却标 not reported。决赛稿暂写 cells: first tests 和 animals: not reported。</span></li>
+</ol>
+</section>
+
+<section class="fin" id="eclipse" style="--ac:#ff9400">
+<header><h2>日食<span class="pick">首选</span></h2><p class="claim">全片是一场日食。挡住太阳的是 CDK20 真实的轮廓，光一点点从边上露出来，结尾只到第一缕光。</p></header>
+<div class="stage"><video controls muted playsinline preload="metadata" poster="a/eclipse_T4.jpg" src="a/eclipse.mp4"></video>
+<dl><div><dt>人怎么放</dt><dd>抠人，转灰阶后映射到橙金，背景压到黑和暗红。月牙光斑落在身上，不上脸。</dd></div><div><dt>四种证据</dt><dd>实测是实心圆，AI 预测是细圆环，我们的对接是虚线圆环，示意是斜线半圆。</dd></div><div><dt>做全片</dt><dd>4K 一帧 12.2 秒（真跑最重的一帧）。全片估约 37 小时，4 个通宵。</dd></div><div><dt>最大风险</dt><dd>真人映射到色带后可能太单色。S4 有 3:33 黑底，要靠人和冷光打断。</dd></div></dl></div>
+<div class="shots"><button class="shot" data-src="a/eclipse_T1.jpg" data-cap="日食 · T1 肝与 1,412"><img loading="lazy" src="a/eclipse_T1.jpg" alt="日食方向 T1 肝与 1,412" width="1280" height="720"><span>T1</span></button><button class="shot" data-src="a/eclipse_T2.jpg" data-cap="日食 · T2 说话的人"><img loading="lazy" src="a/eclipse_T2.jpg" alt="日食方向 T2 说话的人" width="1280" height="720"><span>T2</span></button><button class="shot" data-src="a/eclipse_T3.jpg" data-cap="日食 · T3 最黑的一刻"><img loading="lazy" src="a/eclipse_T3.jpg" alt="日食方向 T3 最黑的一刻" width="1280" height="720"><span>T3</span></button><button class="shot" data-src="a/eclipse_T4.jpg" data-cap="日食 · T4 CDK20 第一次被看见"><img loading="lazy" src="a/eclipse_T4.jpg" alt="日食方向 T4 CDK20 第一次被看见" width="1280" height="720"><span>T4</span></button><button class="shot" data-src="a/eclipse_T5.jpg" data-cap="日食 · T5 钥匙转动"><img loading="lazy" src="a/eclipse_T5.jpg" alt="日食方向 T5 钥匙转动" width="1280" height="720"><span>T5</span></button><button class="shot" data-src="a/eclipse_T6.jpg" data-cap="日食 · T6 路线图"><img loading="lazy" src="a/eclipse_T6.jpg" alt="日食方向 T6 路线图" width="1280" height="720"><span>T6</span></button></div>
+<figure class="cs"><img loading="lazy" src="a/eclipse_cs.jpg" alt="日食方向的色彩脚本，八段按时长排列" width="1280" height="320"><figcaption>色彩脚本：S1 到 S8，宽度按时长</figcaption></figure>
+</section>
+<section class="fin" id="manual" style="--ac:#f6b414">
+<header><h2>说明书</h2><p class="claim">这把锁附了一本谁也读不懂的说明书，AI 帮人读懂了一页。八章八种纸，同一本书。</p></header>
+<div class="stage"><video controls muted playsinline preload="metadata" poster="a/manual_T4.jpg" src="a/manual.mp4"></video>
+<dl><div><dt>人怎么放</dt><dd>手机片不抠，当照片贴进书页。普通画质反而合适。</dd></div><div><dt>四种证据</dt><dd>实测是红章，AI 预测是网点加符文，我们的对接是铅笔虚线框，示意是素线。</dd></div><div><dt>做全片</dt><dd>EEVEE 4K 一帧 1.1 秒（只测了表面）。全片估约 10 小时，书页搬进 EEVEE 还没做。</dd></div><div><dt>最大风险</dt><dd>真人的脸过网点可能显冷。翻页只能做简单折叠。</dd></div></dl></div>
+<div class="shots"><button class="shot" data-src="a/manual_T1.jpg" data-cap="说明书 · T1 肝与 1,412"><img loading="lazy" src="a/manual_T1.jpg" alt="说明书方向 T1 肝与 1,412" width="1280" height="720"><span>T1</span></button><button class="shot" data-src="a/manual_T2.jpg" data-cap="说明书 · T2 说话的人"><img loading="lazy" src="a/manual_T2.jpg" alt="说明书方向 T2 说话的人" width="1280" height="720"><span>T2</span></button><button class="shot" data-src="a/manual_T3.jpg" data-cap="说明书 · T3 最黑的一刻"><img loading="lazy" src="a/manual_T3.jpg" alt="说明书方向 T3 最黑的一刻" width="1280" height="720"><span>T3</span></button><button class="shot" data-src="a/manual_T4.jpg" data-cap="说明书 · T4 CDK20 第一次被看见"><img loading="lazy" src="a/manual_T4.jpg" alt="说明书方向 T4 CDK20 第一次被看见" width="1280" height="720"><span>T4</span></button><button class="shot" data-src="a/manual_T5.jpg" data-cap="说明书 · T5 钥匙转动"><img loading="lazy" src="a/manual_T5.jpg" alt="说明书方向 T5 钥匙转动" width="1280" height="720"><span>T5</span></button><button class="shot" data-src="a/manual_T6.jpg" data-cap="说明书 · T6 路线图"><img loading="lazy" src="a/manual_T6.jpg" alt="说明书方向 T6 路线图" width="1280" height="720"><span>T6</span></button></div>
+<figure class="cs"><img loading="lazy" src="a/manual_cs.jpg" alt="说明书方向的色彩脚本，八段按时长排列" width="1280" height="320"><figcaption>色彩脚本：S1 到 S8，宽度按时长</figcaption></figure>
+</section>
+<section class="fin" id="hot" style="--ac:#f0ff00">
+<header><h2>马拉松热色</h2><p class="claim">同一把锁，一张图里七种读法。全片安静，只在三个高潮炸开，荧光黄 6:52 前不出现。</p></header>
+<div class="stage"><video controls muted playsinline preload="metadata" poster="a/hot_T4.jpg" src="a/hot.mp4"></video>
+<dl><div><dt>人怎么放</dt><dd>粗抠，亮度映射到暖色带，加骨白贴纸边。人永远是完整的一块，不进格子。</dd></div><div><dt>四种证据</dt><dd>实测是实心方块，AI 预测是阶梯切角，我们的对接是空心双线框，示意是虚线框。</dd></div><div><dt>做全片</dt><dd>4K 一帧 12 到 20 秒（真跑）。全片估 37 到 61 小时。</dd></div><div><dt>最大风险</dt><dd>看久了累，放在癌症题材里要拿捏分寸。转动的刻线吃码率，全片要限制在 2 到 3 分钟内。</dd></div></dl></div>
+<div class="shots"><button class="shot" data-src="a/hot_T1.jpg" data-cap="马拉松热色 · T1 肝与 1,412"><img loading="lazy" src="a/hot_T1.jpg" alt="马拉松热色方向 T1 肝与 1,412" width="1280" height="720"><span>T1</span></button><button class="shot" data-src="a/hot_T2.jpg" data-cap="马拉松热色 · T2 说话的人"><img loading="lazy" src="a/hot_T2.jpg" alt="马拉松热色方向 T2 说话的人" width="1280" height="720"><span>T2</span></button><button class="shot" data-src="a/hot_T3.jpg" data-cap="马拉松热色 · T3 最黑的一刻"><img loading="lazy" src="a/hot_T3.jpg" alt="马拉松热色方向 T3 最黑的一刻" width="1280" height="720"><span>T3</span></button><button class="shot" data-src="a/hot_T4.jpg" data-cap="马拉松热色 · T4 CDK20 第一次被看见"><img loading="lazy" src="a/hot_T4.jpg" alt="马拉松热色方向 T4 CDK20 第一次被看见" width="1280" height="720"><span>T4</span></button><button class="shot" data-src="a/hot_T5.jpg" data-cap="马拉松热色 · T5 钥匙转动"><img loading="lazy" src="a/hot_T5.jpg" alt="马拉松热色方向 T5 钥匙转动" width="1280" height="720"><span>T5</span></button><button class="shot" data-src="a/hot_T6.jpg" data-cap="马拉松热色 · T6 路线图"><img loading="lazy" src="a/hot_T6.jpg" alt="马拉松热色方向 T6 路线图" width="1280" height="720"><span>T6</span></button></div>
+<figure class="cs"><img loading="lazy" src="a/hot_cs.jpg" alt="马拉松热色方向的色彩脚本，八段按时长排列" width="1280" height="320"><figcaption>色彩脚本：S1 到 S8，宽度按时长</figcaption></figure>
+</section>
+<section class="fin" id="lantern" style="--ac:#ffa63d">
+<header><h2>举灯</h2><p class="claim">只有光照到的地方才存在。人举的是暖灯，AI 打开的是冷光。</p></header>
+<div class="stage"><video controls muted playsinline preload="metadata" poster="a/lantern_T4.jpg" src="a/lantern.mp4"></video>
+<dl><div><dt>人怎么放</dt><dd>暗房拍，手里的手机就是灯，不用抠。组员要关灯，再打一盏小灯。</dd></div><div><dt>四种证据</dt><dd>实测是实心光，AI 预测是冷条纹，线宽跟真实 pLDDT 走，我们的对接是网点光，示意是粉笔虚线。</dd></div><div><dt>做全片</dt><dd>EEVEE 4K 一帧 1.2 秒（真跑）。全片上限约 11 小时，平面层没量。</dd></div><div><dt>最大风险</dt><dd>只有琥珀和冷白，17 分钟可能单调。组员要照规定的光拍。</dd></div></dl></div>
+<div class="shots"><button class="shot" data-src="a/lantern_T1.jpg" data-cap="举灯 · T1 肝与 1,412"><img loading="lazy" src="a/lantern_T1.jpg" alt="举灯方向 T1 肝与 1,412" width="1280" height="720"><span>T1</span></button><button class="shot" data-src="a/lantern_T2.jpg" data-cap="举灯 · T2 说话的人"><img loading="lazy" src="a/lantern_T2.jpg" alt="举灯方向 T2 说话的人" width="1280" height="720"><span>T2</span></button><button class="shot" data-src="a/lantern_T3.jpg" data-cap="举灯 · T3 最黑的一刻"><img loading="lazy" src="a/lantern_T3.jpg" alt="举灯方向 T3 最黑的一刻" width="1280" height="720"><span>T3</span></button><button class="shot" data-src="a/lantern_T4.jpg" data-cap="举灯 · T4 CDK20 第一次被看见"><img loading="lazy" src="a/lantern_T4.jpg" alt="举灯方向 T4 CDK20 第一次被看见" width="1280" height="720"><span>T4</span></button><button class="shot" data-src="a/lantern_T5.jpg" data-cap="举灯 · T5 钥匙转动"><img loading="lazy" src="a/lantern_T5.jpg" alt="举灯方向 T5 钥匙转动" width="1280" height="720"><span>T5</span></button><button class="shot" data-src="a/lantern_T6.jpg" data-cap="举灯 · T6 路线图"><img loading="lazy" src="a/lantern_T6.jpg" alt="举灯方向 T6 路线图" width="1280" height="720"><span>T6</span></button></div>
+<figure class="cs"><img loading="lazy" src="a/lantern_cs.jpg" alt="举灯方向的色彩脚本，八段按时长排列" width="1280" height="320"><figcaption>色彩脚本：S1 到 S8，宽度按时长</figcaption></figure>
+</section>
+<section class="fin" id="hands" style="--ac:#eda833">
+<header><h2>手</h2><p class="claim">这个世界是灰的，所有的暖都在人身上。1,412 只手拼成一个肝，手印真的数过。</p></header>
+<div class="stage"><video controls muted playsinline preload="metadata" poster="a/hands_T4.jpg" src="a/hands.mp4"></video>
+<dl><div><dt>人怎么放</dt><dd>不抠，整帧去色，只留肤色，没有抠像边。木家具的颜色可能被一起留下。</dd></div><div><dt>四种证据</dt><dd>实测是实心金牌，AI 预测是等宽字加细线框，我们的对接是断开的指尖点，示意是斜体不加框。</dd></div><div><dt>做全片</dt><dd>Cycles 4K 一帧 51 秒，走不通逐帧。改走通道加合成，全片估约 58 小时。</dd></div><div><dt>最大风险</dt><dd>手要用 4K 重拍。灰色全片偏沉。</dd></div></dl></div>
+<div class="shots"><button class="shot" data-src="a/hands_T1.jpg" data-cap="手 · T1 肝与 1,412"><img loading="lazy" src="a/hands_T1.jpg" alt="手方向 T1 肝与 1,412" width="1280" height="720"><span>T1</span></button><button class="shot" data-src="a/hands_T2.jpg" data-cap="手 · T2 说话的人"><img loading="lazy" src="a/hands_T2.jpg" alt="手方向 T2 说话的人" width="1280" height="720"><span>T2</span></button><button class="shot" data-src="a/hands_T3.jpg" data-cap="手 · T3 最黑的一刻"><img loading="lazy" src="a/hands_T3.jpg" alt="手方向 T3 最黑的一刻" width="1280" height="720"><span>T3</span></button><button class="shot" data-src="a/hands_T4.jpg" data-cap="手 · T4 CDK20 第一次被看见"><img loading="lazy" src="a/hands_T4.jpg" alt="手方向 T4 CDK20 第一次被看见" width="1280" height="720"><span>T4</span></button><button class="shot" data-src="a/hands_T5.jpg" data-cap="手 · T5 钥匙转动"><img loading="lazy" src="a/hands_T5.jpg" alt="手方向 T5 钥匙转动" width="1280" height="720"><span>T5</span></button><button class="shot" data-src="a/hands_T6.jpg" data-cap="手 · T6 路线图"><img loading="lazy" src="a/hands_T6.jpg" alt="手方向 T6 路线图" width="1280" height="720"><span>T6</span></button></div>
+<figure class="cs"><img loading="lazy" src="a/hands_cs.jpg" alt="手方向的色彩脚本，八段按时长排列" width="1280" height="320"><figcaption>色彩脚本：S1 到 S8，宽度按时长</figcaption></figure>
+</section>
+
+<section class="block">
+<h2>五个放一起比</h2>
+<div class="tbl"><table>
+<thead><tr><th>方向</th><th>缩略图冲击力</th><th>手机素材</th><th>全片 4K60（估算）</th><th>样片码率</th></tr></thead>
+<tbody>
+<tr><td>日食</td><td>最强</td><td>要抠，没试过真人</td><td class="n">约 37 小时</td><td class="n">2.0 Mbps</td></tr>
+<tr><td>说明书</td><td>强</td><td>最好接，不用抠</td><td class="n">约 10 小时，未含书页</td><td class="n">5.9 Mbps</td></tr>
+<tr><td>马拉松热色</td><td>最强</td><td>要抠，没试过真人</td><td class="n">37–61 小时</td><td class="n">6.8 Mbps</td></tr>
+<tr><td>举灯</td><td>强</td><td>要暗房拍</td><td class="n">上限约 11 小时，平面层没量</td><td class="n">4.0 Mbps</td></tr>
+<tr><td>手</td><td>T1、T3 最强</td><td>不用抠，没试过真脸</td><td class="n">约 58 小时</td><td class="n">3.4 Mbps</td></tr>
+</tbody></table></div>
+<p class="note">样片都是 1080p30。全片时长是单帧实测乘帧数的估算，帧的类型也不全一样，只能粗比。</p>
+</section>
+
+<section class="block tight">
+<details><summary>第二轮：没进决赛的 9 个方向</summary><p class="note">破晓、霓虹街、山水、色即分子是备选。假彩色、偏振、暗房、舞台、黏土淘汰，理由在 02_第一批筛选.md。</p><div class="sheets"><button class="shot wide" data-src="a/r2_dawn.jpg" data-cap="破晓 · 备选"><img loading="lazy" src="a/r2_dawn.jpg" alt="破晓 · 备选 总表"><span>破晓 · 备选</span></button><button class="shot wide" data-src="a/r2_neon.jpg" data-cap="霓虹街 · 备选"><img loading="lazy" src="a/r2_neon.jpg" alt="霓虹街 · 备选 总表"><span>霓虹街 · 备选</span></button><button class="shot wide" data-src="a/r2_shanshui.jpg" data-cap="山水 · 备选"><img loading="lazy" src="a/r2_shanshui.jpg" alt="山水 · 备选 总表"><span>山水 · 备选</span></button><button class="shot wide" data-src="a/r2_pigment.jpg" data-cap="色即分子 · 备选"><img loading="lazy" src="a/r2_pigment.jpg" alt="色即分子 · 备选 总表"><span>色即分子 · 备选</span></button><button class="shot wide" data-src="a/r2_falsecolor.jpg" data-cap="假彩色"><img loading="lazy" src="a/r2_falsecolor.jpg" alt="假彩色 总表"><span>假彩色</span></button><button class="shot wide" data-src="a/r2_polar.jpg" data-cap="偏振"><img loading="lazy" src="a/r2_polar.jpg" alt="偏振 总表"><span>偏振</span></button><button class="shot wide" data-src="a/r2_darkroom.jpg" data-cap="暗房"><img loading="lazy" src="a/r2_darkroom.jpg" alt="暗房 总表"><span>暗房</span></button><button class="shot wide" data-src="a/r2_arena.jpg" data-cap="舞台"><img loading="lazy" src="a/r2_arena.jpg" alt="舞台 总表"><span>舞台</span></button><button class="shot wide" data-src="a/r2_clay.jpg" data-cap="黏土"><img loading="lazy" src="a/r2_clay.jpg" alt="黏土 总表"><span>黏土</span></button></div></details>
+<details><summary>第一轮：60 种新风格和 20 张旧作</summary><div class="sheets"><button class="shot wide" data-src="a/r1_a.jpg" data-cap="前卫艺术"><img loading="lazy" src="a/r1_a.jpg" alt="前卫艺术 总表"><span>前卫艺术</span></button><button class="shot wide" data-src="a/r1_b.jpg" data-cap="光与当代装置"><img loading="lazy" src="a/r1_b.jpg" alt="光与当代装置 总表"><span>光与当代装置</span></button><button class="shot wide" data-src="a/r1_c.jpg" data-cap="游戏大作"><img loading="lazy" src="a/r1_c.jpg" alt="游戏大作 总表"><span>游戏大作</span></button><button class="shot wide" data-src="a/r1_d.jpg" data-cap="独立游戏"><img loading="lazy" src="a/r1_d.jpg" alt="独立游戏 总表"><span>独立游戏</span></button><button class="shot wide" data-src="a/r1_e.jpg" data-cap="3D 与 demo"><img loading="lazy" src="a/r1_e.jpg" alt="3D 与 demo 总表"><span>3D 与 demo</span></button><button class="shot wide" data-src="a/r1_f.jpg" data-cap="电影和片头"><img loading="lazy" src="a/r1_f.jpg" alt="电影和片头 总表"><span>电影和片头</span></button><button class="shot wide" data-src="a/r1_g.jpg" data-cap="科学图像与东方"><img loading="lazy" src="a/r1_g.jpg" alt="科学图像与东方 总表"><span>科学图像与东方</span></button><button class="shot wide" data-src="a/r1_old.jpg" data-cap="我们的旧作"><img loading="lazy" src="a/r1_old.jpg" alt="我们的旧作 总表"><span>我们的旧作</span></button></div></details>
+</section>
+<footer>分子、数值和结论都来自公开文献 Ren et al. 2023。对接画面只作示意，是我们自己做的。图里说话的人物都是占位。</footer>
+</div>
+<dialog id="lb" aria-label="放大看图"><img alt=""><p></p></dialog>
+<script>
+const lb=document.getElementById('lb'),im=lb.querySelector('img'),cap=lb.querySelector('p');
+document.querySelectorAll('.shot').forEach(b=>b.addEventListener('click',()=>{im.src=b.dataset.src;im.alt=b.dataset.cap;cap.textContent=b.dataset.cap;lb.showModal()}));
+lb.addEventListener('click',()=>lb.close());
+</script>

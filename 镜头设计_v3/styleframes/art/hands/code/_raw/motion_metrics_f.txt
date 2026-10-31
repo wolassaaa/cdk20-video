@@ -1,0 +1,6 @@
+frames 540 at 30 fps, 18.0 s
+file 7.6 MB, 3.38 Mbit/s
+mean luminance (0 to 1): min 0.0077, max 0.2731
+largest change between neighbouring frames 0.01080, that is 2.76 of 255
+mean change 0.00069
+reversals of direction above 0.0015: 2, most in any one second: 1

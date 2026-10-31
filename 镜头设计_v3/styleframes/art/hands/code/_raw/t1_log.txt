@@ -1,0 +1,7 @@
+placed 1412
+ids found in the buffer 1412
+visible share of each hand: min 0.404, median 0.995
+hands under 30% visible: 0
+hand box 36 px at 1080p
+
+wrote T1.png

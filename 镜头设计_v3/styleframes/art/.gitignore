@@ -1,0 +1,7 @@
+# Stills and renders stay local, the repo keeps only code and notes
+*.png
+*.jpg
+*.webp
+.slots/
+_work/
+*.npz
