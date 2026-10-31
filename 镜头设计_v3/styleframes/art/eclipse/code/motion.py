@@ -237,7 +237,8 @@ class World:
 
         # beads in the gaps
         if s >= 3.0 and leak.max() > 0:
-            b = fb(leak, 3 * k) * 2.5 + fb(leak, 12 * k) * 7 + fb(leak, 40 * k) * 12
+            # the true surface is a little tighter than the 1080p splat, so the real gaps let more through: the bloom is held down to match
+            b = (fb(leak, 3 * k) * 2.5 + fb(leak, 12 * k) * 7 + fb(leak, 40 * k) * 12) * (0.45 if K4 else 1.0)
             Lb = leak * 40 + b * (1 - 0.5 * h)
             tb = expose(Lb, 2.6)
             t = np.clip(t + tb, 0, 1)
