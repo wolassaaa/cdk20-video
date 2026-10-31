@@ -4,7 +4,7 @@
 import React from "react";
 import {Img, staticFile} from "remotion";
 import {Stage, K, M} from "../kit";
-import {FieldPlate, Micro, Reg, Cross, RingCode, RingLetters, RingTicks} from "../kit_m";
+import {FieldPlate, Reg, Cross, RingCode, RingLetters, RingTicks} from "../kit_m";
 
 const CX = 1010, CY = 540, START = 54;
 
@@ -16,5 +16,4 @@ export default () => <Stage bg={K.blue}>
   <Cross x={CX} y={CY - 470} s={18}/><Cross x={CX - 470} y={CY} s={18}/>
   <FieldPlate x={M} y={M}>AlphaFold DB v6 · predicted</FieldPlate>
   <Reg x={44} y={1000 - 4}/><Reg x={1836} y={44} flip/>
-  <Micro x={M} y={940} size={14}>{"bars 001-302  mean pLDDT 91.5\nbars 303-346  mean pLDDT 47.2"}</Micro>
 </Stage>;
