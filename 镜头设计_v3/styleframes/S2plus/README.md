@@ -16,6 +16,24 @@ S2 到 S8 的 14 张概念静帧，清单见 `research/marathon_refs_20261031.md
 | `make_dots.py` | `data/dots_8918.json`；`python make_dots.py count 某图.png` 在成图上逐个数点 |
 | `pocket048.py`、`render_048.py` | `public/pose_048_lig.png` 和 `pose_048_grey.png`，约 8 秒。`--pocket 1F3BFF --name blue` 出蓝色备选 |
 | `make_fig5.py` | `data/fig5_seven.json` |
+| `make_surface.py` | `_work/cdk20_surface.npz`：全部 2,735 个重原子的表面，带 pLDDT，不进仓库 |
+| `bl_lines.py` | `public/cdk20_lines.png`：刻线蛋白，4K 单帧约 4 秒。中心用 `--xc --yc`，写成 `--cx --cy` 会和 Blender 的 Cycles 参数冲突 |
+| `render_048.py --lines 6.5 --name lines` | `public/pose_048_lines.png`：刻线口袋 |
+| `make_dots_m.py` | `data/dots_m06.json`；`python make_dots_m.py count 某图.png` 在成图上逐个数点 |
+| `render_m.sh` | 打包并出 M 系列。`SCALE=2` 进 `stills/m/4k/` |
+
+## 第二轮 M 系列
+
+看过马拉松真实画面后重做的四张，说明见 `research/marathon_refs_v2_20261031.md`。代码在 `src/v3/s2plus/stills_m/` 和 `kit_m.jsx`，入口是 `entry_m.jsx`。第一版静帧保留，方便对比。
+
+改 M06 的字形后要按这个顺序走，否则点和字对不上：
+
+```bash
+bash code/render_m.sh M06mask
+python code/make_dots_m.py stills/m/M06mask.png
+SCALE=2 bash code/render_m.sh M06
+python code/make_dots_m.py count stills/m/4k/M06.png
+```
 
 ## 渲染
 

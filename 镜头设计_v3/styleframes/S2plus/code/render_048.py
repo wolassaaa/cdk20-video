@@ -23,6 +23,7 @@ ap.add_argument("--samples", type=int, default=256)   # 4 MP of short diffuse pa
 ap.add_argument("--pct", type=int, default=100)
 ap.add_argument("--pocket", default="6B6965")   # pocket colour, hex; s09.jsx explains the grey
 ap.add_argument("--name", default="grey")       # names the layer pose_048_<name>.png
+ap.add_argument("--lines", type=float, default=0)   # engraved pocket for M09: line pitch in px at 1080p, 0 keeps the matte surface
 A = ap.parse_args(argv)
 OUT = A.outdir.rstrip("/\\")
 SC = 0.1  # 1 A -> 0.1 m
@@ -79,11 +80,49 @@ def matte(name, hexcol):
 BONE = matte("bone", "EDEBE4")
 
 
+def engrave(nt, dif):
+    """Lines on planes through the model, width from the same sun as the matte look, so the pocket matches the protein in M04. Emission, so the ink is its exact hex."""
+    def op(kind, a, b=None):
+        n = nt.nodes.new("ShaderNodeMath")
+        n.operation = kind
+        for i, v in enumerate((a, b)):
+            if v is None:
+                continue
+            if isinstance(v, (int, float)):
+                n.inputs[i].default_value = v
+            else:
+                nt.links.new(v, n.inputs[i])
+        return n.outputs[0]
+
+    def dot(sock, v):
+        n = nt.nodes.new("ShaderNodeVectorMath")
+        n.operation = "DOT_PRODUCT"
+        nt.links.new(sock, n.inputs[0])
+        n.inputs[1].default_value = tuple(float(x) for x in v)
+        return n.outputs["Value"]
+
+    geo = nt.nodes.new("ShaderNodeNewGeometry")
+    plane = Vector((0.20, 0.96, 0.18)).normalized()
+    s = op("MULTIPLY", dot(geo.outputs["Position"], plane), ppa / SC / A.lines)
+    tri = op("ABSOLUTE", op("SUBTRACT", op("MULTIPLY", op("FRACT", s), 2.0), 1.0))
+    shade = op("MAXIMUM", dot(geo.outputs["Normal"], G.LIGHT), 0.0)
+    line = op("LESS_THAN", tri, op("ADD", 0.07, op("MULTIPLY", op("POWER", shade, 1.3), 0.72)))
+    em = nt.nodes.new("ShaderNodeEmission")
+    em.inputs["Color"].default_value = dif.inputs["Color"].default_value
+    mix = nt.nodes.new("ShaderNodeMixShader")
+    nt.links.new(line, mix.inputs[0])
+    nt.links.new(nt.nodes.new("ShaderNodeHoldout").outputs[0], mix.inputs[1])
+    nt.links.new(em.outputs[0], mix.inputs[2])
+    return mix
+
+
 def pocket_mat():
     """Diffuse blue where the show attribute is over 0.5, holdout elsewhere, which leaves the film transparent and lets the stage show."""
     m, dif, out = node_mat("pocket", "ShaderNodeBsdfDiffuse")
     nt = m.node_tree
     dif.inputs["Color"].default_value = (*G.srgb2lin(A.pocket).tolist(), 1)
+    if A.lines:
+        dif = engrave(nt, dif)
     at = nt.nodes.new("ShaderNodeAttribute")
     at.attribute_name, at.attribute_type = "show", "GEOMETRY"
     gt = nt.nodes.new("ShaderNodeMath")
