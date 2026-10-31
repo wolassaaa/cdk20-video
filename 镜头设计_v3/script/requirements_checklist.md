@@ -28,7 +28,7 @@
 | 4 | 视频长度 **15–20 分钟**（"15-20 minutes sharp"） | Overview p.2；Rubric Structure；T2 p.19 | 2,120 词，估计全片 16:49–17:33（含 4 秒片名卡、六次 2 秒音乐停顿、15 秒片尾） | 粗剪后按真实录音计时。Rubric：超出或不足 3 分钟以内，Structure 最高只到 C；超过 3 分钟降到 D。`script_v3.md` 第五部分有加长和删减的备用方案 |
 | 5 | 截止：**2026 年 11 月 27 日（周五）晚上 11:59** | Overview p.2；T2 p.21 | — | 建议提前一天上传 |
 | 6 | 在**自己 section 的 Moodle** 提交，每组一份；文件名格式如 `S1-Gp1A-T9.{格式}`，我们是 T10 | T2 p.21；Overview p.2 | 片名卡留出 section、组号、成员姓名 | 填入真实 section 号和组号 |
-| 7 | 可接受格式：.mov .mp4 .m4v .mpeg .mpe .mpg .avi .wmv .asf .3gp | Overview p.2；T2 p.21 | — | 导出 .mp4 |
+| 7 | 可接受格式：.mov .mp4 .m4v .mpeg .mpe .mpg .avi .wmv .asf .3gp | Overview p.2；T2 p.21 | — | 导出 .mp4。Moodle 上限 1 GB（导演 10-31 确认）。YouTube 链接方案要老师书面同意，PDF 不在格式列表里，见 `00_下次开工.md` |
 | 8 | 迟交罚分：迟 1 天扣 20%，2 天 40%，3 天 60%，4–6 天 80%，超过 6 天 0 分（周末、假日都算） | FAQ Q7 | — | — |
 | 9 | 作业用**英文**提交 | Lab intro p.9 | 口播和屏幕文字全英文；中文稿（`script_v3_zh.md`）只给组员内部阅读 | 屏幕上不要放中文 |
 | 10 | **注明所有参考资料**（老师在这一条后面写了 "AI?"） | Lab intro p.9；T2 p.18 | 每个 beat 都写了 Source；屏幕上就近放简短出处；片尾列完整 ACS 格式参考文献、数据与图片来源、AI 使用说明 | 片尾 AI 说明按我们实际用过的工具修改 |

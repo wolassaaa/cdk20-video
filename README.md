@@ -6,6 +6,7 @@
 
 | 想了解 | 文件 |
 |---|---|
+| **下次从哪开始（10-31 的决定和待办）** | `镜头设计_v3/00_下次开工.md` |
 | 最新剧本（v3.3，含时间码和音乐窗口 W1–W5） | `镜头设计_v3/script/script_v3.3.md` |
 | 每人分稿（中英对照） | `镜头设计_v3/script/分稿/` |
 | 课程要求核对 | `镜头设计_v3/script/requirements_checklist.md` |
@@ -36,7 +37,11 @@
 - 10-29 AE 2026 装好并接通：用 `python 镜头设计_v3/ae/run_in_ae.py <脚本.jsx>` 在开着的 AE 里跑脚本。踩到的坑：脚本路径有中文时 `AfterFX -r` 直接失败，所以要靠 run_in_ae.py 转一下；AE 是中文版，属性要用 matchName（如 `ADBE Photo Filter-0003`）或 `layer.transform.xxx`，表达式里滑块用 `effect("Grow")(1)`；加效果后之前拿到的属性引用会失效，要重新取。导演看了 AE 版出镜卡，觉得 AE 做纯图形不比 Remotion 好，于是**改成以 Remotion 为主**：出镜卡和 8 种墨线道具都放在 Remotion `src/v3/oncam/`（合成 `V3-OnCamCards`，渲染时用 `--public-dir` 指向 `镜头设计_v3/remotion_public`，素材放在那里）。AE 只做调色、防抖、抠人、跟踪；`ae/oncam_card.jsx` 留作参考。Remotion 的 `--scale` 要选能整除的值，比如 0.5（0.6667 会报高度不是整数）。
 - 项目已同步到 GitHub。这份 README 是各个 AI 之间的交接本，每做完一件事就更新这一段。
 
+- 10-31：PULSE 定用 EEVEE；SPLAT 不走 Cycles，显卡直画版待导演看；Moodle 上限 1 GB，YouTube 链接方案待问老师；BodyParts3D 按 CC BY 4.0 署名；七个结构通过并排比对和质谱比对；马拉松要看真实画面重做一轮。写提示和文档先说明是课程作业，规矩在 `CLAUDE.md`。
+
 ### 下一步
+
+先看 `镜头设计_v3/00_下次开工.md`，第一件事是重看马拉松。下面是更早的列表。
 
 0. 按排产表第 3 节推进：10-29 至 11-01 做系统件（M2 路线图、M4 数据卡、M3 出镜卡模板）和 17:43 动态分镜。
 1. 确认 "freezing"、"2worlds" 的歌手，等导演提供音频后实测 BPM 和无人声区间，把歌曲对到 W1–W5。
