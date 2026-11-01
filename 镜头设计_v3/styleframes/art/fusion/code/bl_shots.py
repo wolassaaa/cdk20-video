@@ -19,10 +19,6 @@ sys.path.insert(0, HERE)
 import plate_kit as P  # noqa: E402
 
 gk = P.gk
-argv = sys.argv[sys.argv.index("--") + 1:]
-SHOT, OUT = argv[0], argv[1]
-SAMPLES = int(argv[2]) if len(argv) > 2 else 192
-PCT = int(argv[3]) if len(argv) > 3 else 100
 STY = HERE + "../../../"
 
 
@@ -505,12 +501,17 @@ def f6():
     print("F6_FILL_END_PX", 960 + end * P.PPU)
 
 
-sc = P.scene(samples=SAMPLES)
-sc.render.resolution_percentage = PCT
-P.floor()
-P.sun()
-P.camera(160.0 if SHOT == "f3" else P.PPU)
-{"f1": f1, "f2": f2, "f3": f3, "f4": f4, "f5": f5, "f6": f6}[SHOT]()
-if SHOT in ("f2", "f5", "f6"):
-    sc.cycles.caustics_refractive = False
-gk.render(OUT)
+if __name__ == "__main__":
+    argv = sys.argv[sys.argv.index("--") + 1:]
+    SHOT, OUT = argv[0], argv[1]
+    SAMPLES = int(argv[2]) if len(argv) > 2 else 192
+    PCT = int(argv[3]) if len(argv) > 3 else 100
+    sc = P.scene(samples=SAMPLES)
+    sc.render.resolution_percentage = PCT
+    P.floor()
+    P.sun()
+    P.camera(160.0 if SHOT == "f3" else P.PPU)
+    {"f1": f1, "f2": f2, "f3": f3, "f4": f4, "f5": f5, "f6": f6}[SHOT]()
+    if SHOT in ("f2", "f5", "f6"):
+        sc.cycles.caustics_refractive = False
+    gk.render(OUT)
