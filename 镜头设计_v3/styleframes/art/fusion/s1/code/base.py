@@ -224,7 +224,7 @@ def state(t):
 def main():
     sc = Scene()
     if sys.argv[1] == "--still":
-        Image.fromarray(sc.frame(float(sys.argv[2]))).save(sys.argv[3])
+        Image.fromarray(sc.frame(T.clock(float(sys.argv[2])))).save(sys.argv[3])
         return
     out = sys.argv[1]
     a = float(sys.argv[2]) if len(sys.argv) > 2 else 0.0
@@ -235,7 +235,7 @@ def main():
                            "-vf", "scale=out_color_matrix=bt709:out_range=tv", out], stdin=subprocess.PIPE)
     last_key, last = None, None
     for i in range(int(a * T.FPS), int(b * T.FPS)):
-        t = i / T.FPS
+        t = T.clock(i / T.FPS)
         key = state(t)
         if key != last_key:
             buf = io.BytesIO()
@@ -244,7 +244,7 @@ def main():
         last_key = key
         ff.stdin.write(last)
         if i % 600 == 0:
-            print("t=%.1f" % t, flush=True)
+            print("t=%.1f" % (i / T.FPS), flush=True)
     ff.stdin.close()
     ff.wait()
 

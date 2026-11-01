@@ -1,6 +1,6 @@
 // HKBU SCIE1007 coursework science video. S1 motion test, fusion direction: type, marks and photo prints on the table.
 // The picture under it (base.mp4) comes from 镜头设计_v3/styleframes/art/fusion/s1/code/base.py. Both read the same camera, so everything here is placed in table coordinates and moves with the table.
-// Words on screen follow script_v3.3.md. Times are seconds, the same clock as timeline.py. Props: review shows the script line along the top; base=false leaves the type on bone for quick stills.
+// Words on screen follow script_v3.3.md. Times are seconds on the script's clock, the same as timeline.py; TL.u turns each frame of the film into that clock, from 节奏表.csv. Props: review shows the script line along the top; base=false leaves the type on bone for quick stills.
 import React from "react";
 import {registerRoot, Composition, AbsoluteFill, OffthreadVideo, staticFile, useCurrentFrame, continueRender, delayRender} from "remotion";
 import TL from "./s1_timeline.json";
@@ -16,7 +16,7 @@ Promise.all(faces.map(f => f.load())).then(l => { l.forEach(f => document.fonts.
 const clamp = x => Math.min(1, Math.max(0, x));
 const smooth = x => { x = clamp(x); return x * x * x * (x * (6 * x - 15) + 10); };
 const out = x => 1 - Math.pow(1 - clamp(x), 3);
-const Clock = React.createContext(0);
+const Clock = React.createContext(0), Zoom = React.createContext(1);
 const useT = () => React.useContext(Clock);
 const after = (t, at, d = 0.5) => out((t - at) / d);
 
@@ -219,7 +219,7 @@ const Protein = () => {
 };
 
 const Pin = ({xy, at, children, dy = 0}) => {
-  const t = useT(), z = TL.cam[Math.min(N - 1, Math.round(t * FPS))][2], k = 1 / Math.max(1, z), a = after(t, at);
+  const t = useT(), z = React.useContext(Zoom), k = 1 / Math.max(1, z), a = after(t, at);
   return a > 0 ? <g opacity={a}>
     <circle cx={xy[0]} cy={xy[1]} r={7 * k} fill={INK}/>
     <text x={xy[0] - 18 * k} y={xy[1] + (13 + dy) * k} textAnchor="end" fontFamily={SANS} fontWeight={600} fontSize={40 * k} fill={INK}>{children}</text>
@@ -259,8 +259,8 @@ const Review = () => {
 
 // ---------------------------------------------------------------- the frame
 const S1 = ({review = true, base = true}) => {
-  const f = useCurrentFrame(), t = f / FPS, [cx, cy, z] = TL.cam[f];
-  return <Clock.Provider value={t}>
+  const f = useCurrentFrame(), t = TL.u[f], [cx, cy, z] = TL.cam[f];
+  return <Clock.Provider value={t}><Zoom.Provider value={z}>
     <AbsoluteFill style={{background: BONE}}>
       {base && <OffthreadVideo src={staticFile("fusion_s1/base.mp4")} muted/>}
       <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
@@ -279,7 +279,7 @@ const S1 = ({review = true, base = true}) => {
       </svg>
       {review && <Review/>}
     </AbsoluteFill>
-  </Clock.Provider>;
+  </Zoom.Provider></Clock.Provider>;
 };
 
 const Root = () => <Composition id="S1Fusion" component={S1} durationInFrames={N} fps={FPS} width={W} height={H} defaultProps={{review: true, base: true}}/>;

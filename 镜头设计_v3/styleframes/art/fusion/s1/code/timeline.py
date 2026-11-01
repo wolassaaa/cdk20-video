@@ -1,18 +1,20 @@
 """HKBU SCIE1007 coursework science video. S1 motion test, fusion direction: every timed value on the table, as a pure function of time. Beat times follow script_v3.3.md; moments inside a beat are placed by word count.
 
+Every time in this file and in entry.jsx is on the script's clock. 节奏表.csv says when each line really starts; clock() turns a time in the finished film into a time on the script's clock, so everything follows the table.
 Writes s1_timeline.json for Remotion, so the type stays locked to the same camera as the picture.
 Run: python timeline.py
 """
+import csv
+import io
 import json
 import math
+import os
 
 import numpy as np
 
 import world as W
 
 FPS = W.FPS
-DUR = 141.0
-N = int(DUR * FPS)
 
 
 def smooth(x):
@@ -71,6 +73,62 @@ CAM = [(0, 1060, 540, 3.0), (0.32, 1060, 540, 3.0), (1.0, 1120, 540, 2.6), (1.65
        (123.0, 14391, 1490, 3.0), (126.8, 7680, -872, 0.1146)]
 
 
+MOVES = [(a[0], b[0]) for a, b in zip(CAM, CAM[1:]) if a[1:] != b[1:]]
+TABLE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "节奏表.csv")
+
+
+def seconds(text):
+    """76, 76.5 or 1:16.5"""
+    m, _, x = text.strip().rpartition(":")
+    return (int(m) * 60 if m else 0) + float(x)
+
+
+def read_table():
+    raw = open(TABLE, "rb").read()
+    try:
+        text = raw.decode("utf-8-sig")
+    except UnicodeDecodeError:
+        text = raw.decode("gbk")             # Excel's plain CSV on a Chinese system
+    rows, anchors = [], []
+    for r in csv.DictReader(io.StringIO(text)):
+        if not r["原定开始"].strip():
+            continue
+        u, x = seconds(r["原定开始"]), r["实际开始"].strip()
+        t = seconds(x) if x else (anchors[-1][1] + u - anchors[-1][0] if anchors else u)    # blank keeps the previous line's shift
+        if anchors and (u <= anchors[-1][0] or t <= anchors[-1][1]):
+            raise SystemExit("节奏表 %s: 时间要比上一行晚" % r["段落"])
+        rows.append(r["段落"])
+        anchors.append((u, t))
+    return rows, anchors
+
+
+def warp(anchors):
+    """Inside a line everything stretches evenly, except camera moves, which keep their speed so a pan never drags."""
+    us, ts = [anchors[0][0]], [anchors[0][1]]
+    for (a, x), (b, y) in zip(anchors, anchors[1:]):
+        cuts = sorted({a, b} | {c for m in MOVES for c in m if a < c < b})
+        spans = [(p, q, any(m[0] <= p and q <= m[1] for m in MOVES)) for p, q in zip(cuts, cuts[1:])]
+        held = sum(q - p for p, q, h in spans if h)
+        k = ((y - x) - held) / ((b - a) - held) if b - a > held else 0
+        if k < 0.25:                         # too tight to keep the moves whole
+            spans, k = [(p, q, False) for p, q, _ in spans], (y - x) / (b - a)
+        for p, q, h in spans:
+            us.append(q)
+            ts.append(ts[-1] + (q - p) * (1 if h else k))
+    return us, ts
+
+
+ROWS, ANCHORS = read_table()
+US, TS = warp(ANCHORS)
+DUR = TS[-1]
+N = int(round(DUR * FPS))
+
+
+def clock(t):
+    """Time on the script's clock for a time in the finished film."""
+    return float(np.interp(t, TS, US))
+
+
 def camera(t):
     """Centre x, y and zoom. Zoom eases on a log scale, so a pull back reads at one even speed."""
     keys = CAM
@@ -126,10 +184,13 @@ def tok(t, on, off):
 
 
 def export():
-    d = dict(fps=FPS, n=N, cam=[[round(v, 3) for v in camera(i / FPS)] for i in range(N)],
+    us = [clock(i / FPS) for i in range(N)]
+    d = dict(fps=FPS, n=N, u=[round(u, 4) for u in us], cam=[[round(v, 3) for v in camera(u)] for u in us],
              world=dict(ruler=W.RULER, road=W.STATIONS, lens=W.LENS, pwh=W.PWH, hkstp=W.HKSTP))
     json.dump(d, open(r"D:/。hkbu/molecular science/镜头设计_v2/tests/T4_remotion/src/v3/fusion/s1_timeline.json", "w"), separators=(",", ":"))
-    print("frames", N)
+    for name, (a, x), (b, y) in zip(ROWS, ANCHORS, ANCHORS[1:]):
+        print("%-5s %7.2f -> %7.2f  %4d%%" % (name, a, x, round((y - x) / (b - a) * 100)))
+    print("seconds %.2f frames %d" % (DUR, N))
 
 
 if __name__ == "__main__":
