@@ -502,7 +502,41 @@ const W2 = ({file = "fusion_s1/w2_td_1.mp4"}) => <Clock.Provider value={useCurre
   </svg>
 </AbsoluteFill></Clock.Provider>;
 
+/** S3 test boards: the beats that have to read in five seconds. Numbers are Feng 2011's; the grid's cells are drawn, so it carries schematic. */
+const Tally = () => <g transform="translate(0 110)">
+  {Array.from({length: 52}, (_, i) => <rect key={i} x={250 + (i % 26) * 54} y={i < 26 ? 300 : 450} width={26} height={120} rx={13} fill={i < 36 ? RED : "#D4D1C8"}/>)}
+  <text x={250} y={210} fontFamily={SERIF} fontSize={150} fill={RED}>36 of 52</text>
+  <text x={810} y={210} fontFamily={SERIF} fontSize={150} fill={INK}>= 69%</text>
+  <text x={250} y={650} fontFamily={SANS} fontSize={44} fontWeight={600} fill={INK}>liver tumours with more CDK20 than the tissue next to them</text>
+  <text x={250} y={770} fontFamily={SANS} fontSize={44} fontWeight={600} fill={DARK}>→ later stage</text>
+  <text x={700} y={770} fontFamily={SANS} fontSize={44} fontWeight={600} fill={DARK}>→ shorter survival</text>
+  <Source x={250} y={850} at={-1}>Feng 2011</Source>
+</g>;
+
+const SEEN = new Set([3, 17, 26, 34]);
+const Blanks = () => <g>
+  {Array.from({length: 45}, (_, i) => {
+    const x = 170 + (i % 9) * 174, y = 120 + Math.floor(i / 9) * 140;
+    return <g key={i}>
+      <rect x={x} y={y} width={150} height={118} rx={14} fill="none" stroke="#C9C6BC" strokeWidth={3} strokeDasharray={SEEN.has(i) ? "none" : "9 9"}/>
+      {SEEN.has(i) && <ellipse cx={x + 75} cy={y + 59} rx={44 + i % 5 * 3} ry={34} fill={KLEIN}/>}
+    </g>;
+  })}
+  <rect x={170 + 4 * 174} y={120 + 2 * 140} width={150} height={118} rx={14} fill={BONE} stroke={RED} strokeWidth={4}/>
+  <text x={170 + 4 * 174 + 75} y={120 + 2 * 140 + 72} textAnchor="middle" fontFamily={SANS} fontSize={36} fontWeight={700} fill={RED}>CDK20</text>
+  <text x={960} y={896} textAnchor="middle" fontFamily={SERIF} fontSize={72} fill={INK}>no one had measured its shape</text>
+  <Tag kind="schematic" x={850} y={960} at={-1}>schematic</Tag>
+  <Source x={906} y={1010} at={-1}>Ren 2023</Source>
+</g>;
+
+const S3Board = ({beat = "tally"}) => <Clock.Provider value={99}><AbsoluteFill style={{background: BONE}}>
+  <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
+    {beat === "tally" ? <Tally/> : <Blanks/>}
+  </svg>
+</AbsoluteFill></Clock.Provider>;
+
 const Root = () => <>
+  <Composition id="S3Board" component={S3Board} durationInFrames={1} fps={60} width={W} height={H}/>
   <Composition id="S1Fusion" component={S1} durationInFrames={N} fps={FPS} width={W} height={H} defaultProps={{review: true, base: true}}/>
   <Composition id="W3" component={W3} durationInFrames={942} fps={60} width={W} height={H}/>
   <Composition id="Wall" component={Wall} durationInFrames={1500} fps={60} width={W} height={H}/>
