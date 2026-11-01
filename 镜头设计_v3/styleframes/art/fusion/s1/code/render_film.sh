@@ -2,10 +2,14 @@
 # HKBU SCIE1007 coursework science video. S1 motion test, fusion direction: picture, then type, then the finished file. Stops at the first failure and says so.
 # Run: bash render_film.sh [out.mp4] [1|2] [from_s to_s]    1 is 1080p, 2 is 4K. from and to are film seconds and make a short clip.
 set -o pipefail
+export TEMP=D:/render_tmp TMP=D:/render_tmp   # the Windows temp folder got cleared mid-render on 11-02
+mkdir -p "$TEMP"
 HERE="$(cd "$(dirname "$0")" && pwd)"
 PUB="D:/。hkbu/molecular science/镜头设计_v3/remotion_public"
 OUT="${1:-D:/。hkbu/molecular science/镜头设计_v3/styleframes/art/fusion/s1/S1_fusion_next.mp4}"
 export S1_K="${2:-1}"
+# A 4K picture pass needs the memory the two Blenders hold on this 28 GB machine, so it waits for them.
+if [ "$S1_K" = 2 ]; then while tasklist | grep -qi blender.exe; do sleep 30; done; fi
 FROM="${3:-0}"
 BASE=base.mp4
 [ "$S1_K" = 2 ] && BASE=base_4k.mp4

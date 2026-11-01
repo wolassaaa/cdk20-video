@@ -4,6 +4,7 @@
 import React from "react";
 import {registerRoot, Composition, AbsoluteFill, OffthreadVideo, Sequence, staticFile, useCurrentFrame, continueRender, delayRender} from "remotion";
 import TL from "./s1_timeline.json";
+import W3C from "./w3_count.json";
 
 const FPS = TL.fps, N = TL.n, W = 1920, H = 1080;
 const INK = "#111113", SOFT = "#545458", RED = "#E8190F", DARK = "#9A0E08", KLEIN = "#002FA7", BONE = "#EDEBE4";
@@ -430,5 +431,47 @@ const S1 = ({review = true, base = true, clear = false, file = "fusion_s1/base.m
   </Zoom.Provider></Clock.Provider>;
 };
 
-const Root = () => <Composition id="S1Fusion" component={S1} durationInFrames={N} fps={FPS} width={W} height={H} defaultProps={{review: true, base: true}}/>;
+/** W3: the dots come from TouchDesigner (镜头设计_v3/td/w3); the count is the number that have really landed. */
+const W3 = ({file = "fusion_s1/w3_td.mp4"}) => {
+  const f = useCurrentFrame(), t = f / 60, n = W3C.count[Math.min(f, W3C.count.length - 1)], land = 7 * 15.7 / 8, done = t >= land;
+  const k = 1 + 0.06 * (1 - out((t - land) / 0.4)) * (done ? 1 : 0);
+  return <Clock.Provider value={t}><AbsoluteFill style={{background: BONE}}>
+    <OffthreadVideo src={staticFile(file)} muted/>
+    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
+      {n > 0 && <text transform={`translate(960 610) scale(${k})`} textAnchor="middle" fontFamily={SERIF} fontSize={210} fill={done ? RED : INK}>{n.toLocaleString("en-US")}</text>}
+      <Ink x={960} y={680} size={44} at={land + 0.2} anchor="middle" w={420}>brand-new designs</Ink>
+      <Tag kind="schematic" x={850} y={746} at={land + 0.6}>schematic</Tag>
+      <Source x={906} y={796} at={land + 0.6}>Ren 2023</Source>
+    </svg>
+  </AbsoluteFill></Clock.Provider>;
+};
+
+const WALL_LINES = [[0, "brand-new designs"], [3, "way too many to make"], [5.6, "tried in a virtual lock"], [8.4, "docking: a predicted fit"], [14.6, "similar designs grouped"], [17.4, "the shortlist"], [20.8, "picked to make"]];
+const between = (t, a, b, from, to) => Math.round(from * Math.pow(to / from, smooth((t - a) / (b - a))));
+
+/** 4-10: picks up the W3 wall; 8,918, 54 and 7 are the paper's, the groups are drawn. */
+const Wall = ({file = "fusion_s1/wall_td.mp4"}) => {
+  const t = useCurrentFrame() / 60;
+  const n = t < 20.8 ? between(t, 17.4, 19.2, 8918, 54) : between(t, 20.8, 21.8, 54, 7);
+  return <Clock.Provider value={t}><AbsoluteFill style={{background: BONE}}>
+    <OffthreadVideo src={staticFile(file)} muted/>
+    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
+      <text x={960} y={610} textAnchor="middle" fontFamily={SERIF} fontSize={210} fill={RED}>{n.toLocaleString("en-US")}</text>
+      {WALL_LINES.map(([at, line], i) => <text key={at} x={960} y={680} textAnchor="middle" fontFamily={SANS} fontSize={44} fontWeight={600} fill={INK} opacity={(at ? after(t, at) : 1) * (1 - after(t, WALL_LINES[i + 1]?.[0] ?? 1e9))}>{line}</text>)}
+      <Tag kind="schematic" x={850} y={746} at={-1}>schematic</Tag>
+      <Source x={906} y={796} at={-1}>Ren 2023</Source>
+      <rect x={48} y={50} width={592} height={62} fill={BONE} opacity={0.94 * after(t, 5.4)}/>
+      <Ink x={64} y={92} size={36} at={5.6} w={640}>Tool: docking / virtual screening</Ink>
+      <Ink x={820} y={1006} size={44} at={17.4} w={160}>8,918</Ink>
+      <Ink x={946} y={1006} size={44} at={18.6} w={140}>→ 54</Ink>
+      <Ink x={1046} y={1006} size={44} at={20.8} w={120}>→ 7</Ink>
+    </svg>
+  </AbsoluteFill></Clock.Provider>;
+};
+
+const Root = () => <>
+  <Composition id="S1Fusion" component={S1} durationInFrames={N} fps={FPS} width={W} height={H} defaultProps={{review: true, base: true}}/>
+  <Composition id="W3" component={W3} durationInFrames={942} fps={60} width={W} height={H}/>
+  <Composition id="Wall" component={Wall} durationInFrames={1500} fps={60} width={W} height={H}/>
+</>;
 registerRoot(Root);

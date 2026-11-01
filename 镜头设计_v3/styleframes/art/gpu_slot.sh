@@ -2,6 +2,9 @@
 # HKBU SCIE1007 coursework science video. Runs one render at a time per slot so parallel branches never hold more than two on the GPU.
 # Usage: bash gpu_slot.sh <command> [args...]. mkdir is atomic, a slot older than 15 minutes counts as abandoned.
 D="$(cd "$(dirname "$0")" && pwd)/.slots"
+# On 11-02 something cleared the Windows temp folder mid-render and killed two chunks, so renders keep their own.
+export TEMP=D:/render_tmp TMP=D:/render_tmp
+mkdir -p "$TEMP"
 mkdir -p "$D"
 while :; do
   for s in 1 2; do
