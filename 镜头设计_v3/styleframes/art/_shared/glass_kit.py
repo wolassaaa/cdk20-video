@@ -12,6 +12,7 @@ Numbers come from the old work: Standard view so red does not drift to orange, c
 Scale: 1 unit = 10 Angstrom for CDK20 and 100 mm for the liver. Liver comes from BodyParts3D with its own axes: right lobe at -x, front at -y, so looking from -y puts the right lobe at image left. Do not mirror it.
 """
 import math
+import os
 import time
 
 import bmesh
@@ -31,10 +32,11 @@ def scene(w=1920, h=1080, samples=256, exposure=0.0, world=(0, 0, 0), look="Medi
     sc = bpy.context.scene
     sc.render.engine = "CYCLES"
     prefs = bpy.context.preferences.addons["cycles"].preferences
-    prefs.compute_device_type = "OPTIX"
+    backend = os.environ.get("CYCLES_BACKEND", "OPTIX")
+    prefs.compute_device_type = backend
     prefs.refresh_devices()
     for d in prefs.devices:
-        d.use = d.type == "OPTIX"
+        d.use = d.type == backend
     c = sc.cycles
     c.device, c.samples, c.use_denoising, c.denoiser = "GPU", samples, True, "OPENIMAGEDENOISE"
     c.max_bounces, c.transmission_bounces, c.glossy_bounces, c.transparent_max_bounces, c.volume_bounces = 24, 24, 8, 32, 2

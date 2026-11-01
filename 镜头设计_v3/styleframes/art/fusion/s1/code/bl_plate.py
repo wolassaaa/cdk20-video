@@ -1,9 +1,12 @@
 """HKBU SCIE1007 coursework science video. S1 motion test, fusion direction: the static table. Rendered once as two versions; base.py wipes from one to the other, so the liquid can run without a render per frame.
 
-Run: bash gpu_slot.sh blender.exe -b -t 4 -P bl_plate.py -- <strip|map> <e|f> <out.png> [samples]
+Run: bash gpu_slot.sh blender.exe -b -t 4 -P bl_plate.py -- <strip|map|s2|drugs> <e|l|f> <out.png> [samples] [size]
+size 1 is for 1080p, 2 for 4K. drugs renders only the medicines station, for checking the models. Plates too big for the denoiser go tile by tile and stitch.py joins them.
 e: bare glass, pale figures, no drops. l: e with liquid in the glass. f: l with red figures, drops, the lens.
 """
+import math
 import os
+import subprocess
 import sys
 
 import bpy
@@ -18,6 +21,7 @@ P, gk = B.P, B.gk
 argv = sys.argv[sys.argv.index("--") + 1:]
 WHAT, STATE, OUT = argv[0], argv[1], argv[2]
 SAMPLES = int(argv[3]) if len(argv) > 3 else 64
+SIZE = int(argv[4]) if len(argv) > 4 else 1
 FULL = STATE == "f"
 LIQUID = STATE in "lf"
 
@@ -71,6 +75,83 @@ def bead(xy, r, mat):
     bpy.ops.object.shade_smooth()
 
 
+def revolve(profile, cx, cy, mat, name, rest=None):
+    """Turns a (radius, along) profile in table px about a line lying on the table and pointing up the screen. rest is the line's height."""
+    n, rest = 96, rest or W.VIAL_R
+    verts, faces = [], []
+    for r, a in profile:
+        for j in range(n):
+            q = 2 * math.pi * j / n
+            verts.append(((cx + r * math.cos(q)) / W.PPU, -(cy - a) / W.PPU, (rest + r * math.sin(q)) / W.PPU))
+    for i in range(len(profile) - 1):
+        for j in range(n):
+            k = (j + 1) % n
+            faces.append((i * n + j, i * n + k, (i + 1) * n + k, (i + 1) * n + j))
+    me = bpy.data.meshes.new(name)
+    me.from_pydata(verts, [], faces)
+    me.materials.append(mat)
+    o = bpy.data.objects.new(name, me)
+    bpy.context.scene.collection.objects.link(o)
+    B.smooth(o)
+    return o
+
+
+def vial(cx, cy, glass, liquid, cap, label, seal):
+    """A generic injection vial lying on the table. Schematic, no maker's marks."""
+    o = revolve([(0, -125), (54, -125), (62, -117), (62, 52), (55, 68), (41, 84), (38, 96), (0, 96)], cx, cy, glass, "vial")
+    o.visible_shadow = False
+    revolve([(0, -116), (52, -116), (56, -110), (56, 46), (0, 46)], cx, cy, liquid, "dose")
+    revolve([(0, -84), (63.5, -84), (63.5, 16), (0, 16)], cx, cy, label, "label")
+    revolve([(0, 92), (44, 92), (46, 96), (46, 112), (0, 112)], cx, cy, seal, "seal")
+    revolve([(0, 112), (40, 112), (40, 126), (36, 130), (0, 130)], cx, cy, cap, "cap")
+
+
+def sample_tube(cx, cy, glass, liquid, cap):
+    """A generic sample tube lying on the map, with a blue cap. Schematic."""
+    k = 0.22
+    o = revolve([(r * k, a * k) for r, a in [(0, -190), (34, -176), (42, -150), (42, 150), (0, 150)]], cx, cy, glass, "sample", 10)
+    o.visible_shadow = False
+    revolve([(r * k, a * k) for r, a in [(0, -178), (30, -166), (36, -146), (36, 30), (0, 30)]], cx, cy, liquid, "sample_dose", 10)
+    revolve([(r * k, a * k) for r, a in [(0, 150), (46, 150), (46, 205), (0, 205)]], cx, cy, cap, "sample_cap", 10)
+
+
+def blister(cx, cy):
+    """A generic foil strip of round tablets. Schematic, no maker's marks."""
+    foil, nt, out = gk._mat("foil")
+    b = nt.nodes.new("ShaderNodeBsdfPrincipled")
+    b.inputs["Base Color"].default_value = (0.78, 0.78, 0.80, 1)
+    b.inputs["Metallic"].default_value = 1.0
+    b.inputs["Roughness"].default_value = 0.34
+    nt.links.new(b.outputs[0], out.inputs["Surface"])
+    w, h = 200, 112
+    corners = [(cx - w, cy - h), (cx + w, cy - h), (cx + w, cy + h), (cx - w, cy + h)]
+    B.extrude([B.round_poly([(x / W.PPU, -y / W.PPU) for x, y in corners], 0.09)], 0.03, 0.01, name="foil", mat=foil)
+    tablet = P.gloss((0.32, 0.012, 0.008), 0.25, 0.6)
+    dome = B.clear_glass()
+    for row in (-1, 1):
+        for col in (-1.5, -0.5, 0.5, 1.5):
+            xy = (cx + col * 92, cy + row * 50)
+            bpy.ops.mesh.primitive_uv_sphere_add(radius=30 / W.PPU, location=(xy[0] / W.PPU, -xy[1] / W.PPU, 0.09), scale=(1, 1, 0.4), segments=64, ring_count=32)
+            o = bpy.context.object
+            o.data.materials.append(tablet)
+            bpy.ops.object.shade_smooth()
+            bpy.ops.mesh.primitive_uv_sphere_add(radius=38 / W.PPU, location=(xy[0] / W.PPU, -xy[1] / W.PPU, 0.04), scale=(1, 1, 0.55), segments=64, ring_count=32)
+            o = bpy.context.object
+            o.data.materials.append(dome)
+            o.visible_shadow = False
+            bpy.ops.object.shade_smooth()
+
+
+def medicines():
+    glass, ink_paper = B.clear_glass(), gk.surface((0.86, 0.85, 0.81), 0.5, 0.2)
+    liquid = B.fluid((0.72, 0.78, 0.92), (0.9, 0.92, 0.96))
+    cap = P.gloss(P.KLEIN, 0.25, 0.6)
+    seal = gk.surface((0.62, 0.62, 0.64), 0.35, 0.5)
+    blister(*W.BLISTER)
+    for xy in W.VIALS:
+        vial(*xy, glass, liquid, cap, ink_paper, seal)
+
+
 def strip():
     red_fluid = B.fluid(P.RED, (0.9, 0.05, 0.03))
     pale = gk.surface((0.70, 0.69, 0.655), 0.55, 0.15)
@@ -99,6 +180,8 @@ def strip():
         bpy.ops.mesh.primitive_torus_add(major_radius=r / W.PPU, minor_radius=3.5 / W.PPU, location=u((x, y), 0.1), major_segments=256, minor_segments=20)
         bpy.context.object.data.materials.append(ink)
         B.smooth(bpy.context.object)
+    if FULL:
+        medicines()
     for i, xy in enumerate(W.STATIONS):
         B.bulb(xy[0] / W.PPU, -xy[1] / W.PPU, W.SURFACE_Z / W.PPU, 0.31, ink, red_fluid if FULL and i == 0 else None, width=0.022)
 
@@ -117,23 +200,57 @@ def hk():
         B.extrude([poly], 0.02, 0.006, name="land", mat=land)
         n += 1
     print("LAND", n)
-    pts = W.PATHS["map"]
-    k = [max(0.3, 1 - 0.7 * i / (len(pts) * 0.45)) for i in range(len(pts))]    # the line thins as it comes ashore
+    pts, n = W.PATHS["map"] + W.PATHS["exit"][1:], len(W.PATHS["map"])
+    k = [min(1, max(0.3, 1 - 0.7 * i / (n * 0.45)) + max(0, i - len(pts) + 90) / 90 * 0.7) for i in range(len(pts))]    # the line thins as it comes ashore, and widens again just before the map's edge
     glass_pipe(pts, taper=k)
     if LIQUID:
         o = pipe(pts, W.FLUID_R, B.fluid(P.RED, (0.9, 0.05, 0.03)), "liquid", taper=k)
         o.visible_diffuse = False
+    if FULL:
+        glass, liquid, cap = B.clear_glass(), B.fluid(P.RED, (0.9, 0.05, 0.03)), P.gloss(P.KLEIN, 0.25, 0.6)
+        for xy in W.SAMPLES:
+            sample_tube(*xy, glass, liquid, cap)
 
 
-x0, y0, x1, y1 = W.STRIP if WHAT == "strip" else W.MAP
-k = 1 if WHAT == "strip" else W.MAP_SCALE
+def s2():
+    glass_pipe(W.PATHS["s2"])
+    if LIQUID:
+        o = pipe(W.PATHS["s2"], W.FLUID_R, B.fluid(P.RED, (0.9, 0.05, 0.03)), "liquid")
+        o.visible_diffuse = False
+
+
+def render_tiles(w, h):
+    """The denoiser runs out of memory on a whole 4K plate, so big plates go in overlapping tiles."""
+    cols, rows = math.ceil(w / 5000), math.ceil(h / 4400)
+    if cols * rows == 1:
+        gk.render(OUT)
+        return
+    r, lap = sc.render, 64
+    r.use_border, r.use_crop_to_border = True, True
+    sc.render.use_persistent_data = True
+    for j in range(rows):
+        for i in range(cols):
+            a, b = max(0, i * w // cols - lap), min(w, (i + 1) * w // cols + lap)
+            c, d = max(0, j * h // rows - lap), min(h, (j + 1) * h // rows + lap)
+            r.border_min_x, r.border_max_x = (a + 0.25) / w, (b + 0.25) / w
+            r.border_min_y, r.border_max_y = (h - d + 0.25) / h, (h - c + 0.25) / h
+            gk.render("%s_%d_%d.png" % (OUT[:-4], i, j))
+    subprocess.run(["python", HERE + "stitch.py", OUT, str(w), str(h), str(cols), str(rows), str(lap)], check=True)
+
+
+x0, y0, x1, y1 = {"strip": W.STRIP, "map": W.MAP, "s2": W.S2_STRIP, "drugs": (3840, 0, 5760, 1080)}[WHAT]
+k = (W.MAP_SCALE if WHAT == "map" else 1) * SIZE
 sc = P.scene(samples=SAMPLES, w=(x1 - x0) * k, h=(y1 - y0) * k)
 sc.cycles.denoising_use_gpu = True
 P.floor()
+bpy.data.objects["floor"].scale = (5, 5, 1)    # the S2 table runs past the floor's usual edge
 P.sun()
 c = P.camera(W.PPU)
 c.data.ortho_scale = (x1 - x0) / W.PPU
 c.location = ((x0 + x1) / 2 / W.PPU, -(y0 + y1) / 2 / W.PPU, 20)
-(strip if WHAT == "strip" else hk)()
+if WHAT == "drugs":
+    medicines()
+else:
+    {"strip": strip, "map": hk, "s2": s2}[WHAT]()
 sc.cycles.caustics_refractive = False
-gk.render(OUT)
+render_tiles((x1 - x0) * k, (y1 - y0) * k)

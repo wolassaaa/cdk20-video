@@ -2,7 +2,7 @@
 // The picture under it (base.mp4) comes from 镜头设计_v3/styleframes/art/fusion/s1/code/base.py. Both read the same camera, so everything here is placed in table coordinates and moves with the table.
 // Words on screen follow script_v3.3.md. Times are seconds on the script's clock, the same as timeline.py; TL.u turns each frame of the film into that clock, from 节奏表.csv. Props: review shows the script line along the top; base=false leaves the type on bone for quick stills.
 import React from "react";
-import {registerRoot, Composition, AbsoluteFill, OffthreadVideo, staticFile, useCurrentFrame, continueRender, delayRender} from "remotion";
+import {registerRoot, Composition, AbsoluteFill, OffthreadVideo, Sequence, staticFile, useCurrentFrame, continueRender, delayRender} from "remotion";
 import TL from "./s1_timeline.json";
 
 const FPS = TL.fps, N = TL.n, W = 1920, H = 1080;
@@ -52,18 +52,18 @@ const Tag = ({kind, x, y, at, size = 30, children}) => {
   if (a <= 0) return null;
   const r = size / 2, cx = x + r, cy = y - size * 0.36;
   return <g opacity={a}>
-    {kind === "schematic" && <g fill="none" stroke={INK} strokeWidth={2.5}>
+    {kind === "schematic" && <g fill="none" stroke={INK} strokeWidth={size / 12}>
       <rect x={cx - r} y={cy - r} width={size} height={size}/>
-      {[-0.7, 0, 0.7].map(o => <line key={o} x1={cx - r + Math.max(0, o * r)} y1={cy + r + Math.min(0, o * r)} x2={cx + r + Math.min(0, o * r)} y2={cy - r + Math.max(0, o * r)} strokeWidth={2}/>)}
+      {[-0.7, 0, 0.7].map(o => <line key={o} x1={cx - r + Math.max(0, o * r)} y1={cy + r + Math.min(0, o * r)} x2={cx + r + Math.min(0, o * r)} y2={cy - r + Math.max(0, o * r)} strokeWidth={size / 15}/>)}
     </g>}
     {kind === "predicted" && <circle cx={cx} cy={cy} r={r} fill="none" stroke={INK} strokeWidth={2.5} strokeDasharray="6 5"/>}
-    <text x={x + size + 14} y={y} fontFamily={SANS} fontSize={size} fontWeight={600} fill={INK}>{children}</text>
+    <text x={x + size * 1.45} y={y} fontFamily={SANS} fontSize={size} fontWeight={600} fill={INK}>{children}</text>
   </g>;
 };
 
-const Source = ({x, y, at, until = 1e9, children}) => {
+const Source = ({x, y, at, until = 1e9, size = 26, children}) => {
   const t = useT(), a = after(t, at) * (1 - after(t, until));
-  return a > 0 ? <text x={x} y={y} fontFamily={SANS} fontSize={26} fontWeight={500} fill={SOFT} opacity={a}>{children}</text> : null;
+  return a > 0 ? <text x={x} y={y} fontFamily={SANS} fontSize={size} fontWeight={500} fill={SOFT} opacity={a}>{children}</text> : null;
 };
 
 // ---------------------------------------------------------------- the phone clip on a print
@@ -146,17 +146,17 @@ const Drugs = () => {
   const x = ST2, t = useT();
   const arrow = smooth((t - 34.9) / 0.5), grey = smooth((t - 36.2) / 0.8);
   return <g>
-    <text x={x + 96} y={300} fontFamily={SERIF} fontSize={100} fill={INK} opacity={after(t, 33.0) * (1 - 0.6 * grey)}>Nexavar</text>
+    <text x={x + 260} y={490} textAnchor="middle" fontFamily={SERIF} fontSize={72} fill={INK} opacity={after(t, 33.0) * (1 - 0.6 * grey)}>Nexavar</text>
     {arrow > 0 && <g stroke={RED} strokeWidth={5} fill="none">
-      <line x1={x + 450} y1={266} x2={x + 450 + 120 * arrow} y2={266}/>
-      <polyline points={`${x + 450 + 120 * arrow - 18},${248} ${x + 450 + 120 * arrow},${266} ${x + 450 + 120 * arrow - 18},${284}`} opacity={arrow}/>
+      <line x1={x + 510} y1={235} x2={x + 510 + 120 * arrow} y2={235}/>
+      <polyline points={`${x + 510 + 120 * arrow - 18},${217} ${x + 510 + 120 * arrow},${235} ${x + 510 + 120 * arrow - 18},${253}`} opacity={arrow}/>
     </g>}
-    <Ink x={x + 600} y={300} size={100} at={35.3} font={SERIF} w={1200} dur={0.9}>atezolizumab + bevacizumab</Ink>
-    <Ink x={x + 600} y={364} size={40} at={37.0} weight={500} fill={SOFT}>first-line, advanced HCC</Ink>
-    <Ink x={x + 96} y={650} size={170} at={46.2} font={SERIF} fill={RED} w={620} dur={0.6}>~3 in 10</Ink>
-    <Ink x={x + 660} y={600} size={46} at={46.8}>5-year relative survival</Ink>
-    <Ink x={x + 660} y={650} size={36} at={47.2} weight={500} fill={SOFT}>HK, 2010-2021</Ink>
-    <Tag kind="schematic" x={x + 1520} y={650} at={47.2}>schematic</Tag>
+    <Ink x={x + 1100} y={490} size={72} at={35.3} font={SERIF} anchor="middle" w={960} dur={0.9}>atezolizumab + bevacizumab</Ink>
+    <Ink x={x + 1100} y={540} size={36} at={37.0} weight={500} fill={SOFT} anchor="middle" w={520}>first-line, advanced HCC</Ink>
+    <Ink x={x + 96} y={730} size={170} at={46.2} font={SERIF} fill={RED} w={620} dur={0.6}>~3 in 10</Ink>
+    <Ink x={x + 660} y={680} size={46} at={46.8}>5-year relative survival</Ink>
+    <Ink x={x + 660} y={730} size={36} at={47.2} weight={500} fill={SOFT}>HK, 2010-2021</Ink>
+    <Tag kind="schematic" x={x + 1520} y={120} at={35.6}>schematic</Tag>
     <Source x={x + 96} y={1062} at={33.0}>Ren 2023 · HKCaR 2022</Source>
   </g>;
 };
@@ -226,10 +226,148 @@ const Pin = ({xy, at, children, dy = 0}) => {
   </g> : null;
 };
 
+// ---------------------------------------------------------------- S2: Hong Kong, the question, the sources
+const K3 = 1 / 3;    // the map scenes run at zoom 3, so sizes here are screen sizes over 3
+
+const Stories = () => {
+  return <g>
+    <Ink x={14040} y={1416} size={84 * K3} at={143.2} font={SERIF} fill={RED} w={100}>2011</Ink>
+    <Ink x={14040} y={1440} size={40 * K3} at={144.2} w={260}>Chinese University of Hong Kong</Ink>
+    <Ink x={14040} y={1458} size={40 * K3} at={145.2} w={260}>Prince of Wales Hospital</Ink>
+    <Ink x={14040} y={1476} size={36 * K3} at={146.4} weight={500} fill={SOFT} w={260}>liver tumours from patients</Ink>
+    <Ink x={14040} y={1546} size={120 * K3} at={153.0} font={SERIF} fill={DARK} w={320} dur={0.8}>CCRK = CDK20</Ink>
+    <Tag kind="schematic" x={14108} y={1668} at={147.6} size={10}>schematic</Tag>
+    <Source x={14040} y={1712} at={146.4} until={158.4} size={27 * K3}>Feng 2011</Source>
+    <Ink x={14446} y={1476} size={84 * K3} at={158.8} font={SERIF} fill={RED} w={100}>2023</Ink>
+    <Ink x={14446} y={1500} size={40 * K3} at={160.6} w={240}>AI drug-discovery study</Ink>
+    <Ink x={14446} y={1518} size={36 * K3} at={162.2} weight={500} fill={SOFT} w={240}>the same protein</Ink>
+    <Ink x={14446} y={1536} size={40 * K3} at={166.0} w={240}>Insilico Medicine, Hong Kong</Ink>
+    <Ink x={14446} y={1554} size={36 * K3} at={168.6} weight={500} fill={SOFT} w={240}>Science Park</Ink>
+    <Source x={14060} y={1622} at={166.0} until={172.8} size={27 * K3}>Ren 2023</Source>
+  </g>;
+};
+
+const Question = () => {
+  const x = 15360, y = 1080;
+  return <g>
+    <Ink x={x + 960} y={y + 210} size={44} at={175.8} fill={SOFT} weight={500}>Our research question</Ink>
+    {["How can computer-aided", "methods help scientists", "find and assess potential", "cancer drug candidates?"].map((s, i) =>
+      <Ink key={i} x={x + 960} y={y + 320 + i * 96} size={84} at={177.0 + i * 1.6} font={SERIF} w={900} dur={1.5}>{s}</Ink>)}
+    <Ink x={x + 960} y={y + 760} size={46} at={184.8} fill={DARK} w={900} dur={1.0}>A case study of CDK20 in liver cancer</Ink>
+  </g>;
+};
+
+const OBJ = [["Identify the major", "computer-aided methods", "used in cancer drug discovery"], ["Evaluate how these methods", "help scientists assess", "potential drug candidates"]];
+const Objectives = () => {
+  const x = 17280, y = 1080, t = useT(), gone = 1 - smooth((t - 206.0) / 0.6), tags = smooth((t - 206.4) / 0.6);
+  return <g>
+    <Print who="C" x={x + 96} y={y + 168} w={620} h={744} at={190.05} rot={-0.9}/>
+    <g opacity={gone}>
+      {OBJ.map((lines, i) => <g key={i}>
+        <Ink x={x + 800} y={y + 340 + i * 380} size={170} at={190.6 + i * 0.5} font={SERIF} fill={RED} w={110}>{i + 1}</Ink>
+        {lines.map((s, j) => <Ink key={j} x={x + 930} y={y + 240 + i * 380 + j * 60} size={46} at={(i ? 199.6 : 193.4) + j * 1.4} w={760} dur={1.2}>{s}</Ink>)}
+      </g>)}
+    </g>
+    {tags > 0 && <g opacity={tags} fontFamily={SANS} fontSize={36} fontWeight={600} fill={INK}>
+      <text x={x + 96} y={y + 100}><tspan fill={RED}>1</tspan> Identify methods</text>
+      <text x={x + 96} y={y + 146}><tspan fill={RED}>2</tspan> Evaluate candidates</text>
+    </g>}
+  </g>;
+};
+
+const CARDS = [["original study", "Feng et al.", "J. Clin. Invest. 2011", 225.0], ["method paper", "Jumper et al.", "Nature 2021", 227.0], ["method paper", "Ivanenkov et al.", "J. Chem. Inf. Model. 2023", 227.7], ["review", "Wang et al.", "Pharmaceuticals 2023", 229.6], ["book chapter", "Lengauer", "Bioinformatics, Wiley-VCH 2007", 231.2], ["Perspective (abstract only)", "Bender et al.", "Nat. Rev. Drug Discov. 2026", 233.2]];
+const PAGE = {x: 19296, y: 1190, w: 600, h: 850};
+const TICKS = [243.7, 245.3, 246.9, 248.5, 249.9, 251.5];
+
+const Card = ({c, i}) => {
+  const t = useT(), p = out((t - c[3]) / 0.8);
+  if (p <= 0) return null;
+  const col = i % 2, row = Math.floor(i / 2), W_ = 520, H_ = 170, tx = 19960 + col * 540, ty = 1280 + row * 186;
+  const sx = PAGE.x + PAGE.w / 2 - W_ / 2, sy = PAGE.y + PAGE.h / 2 - H_ / 2, x = sx + (tx - sx) * p, y = sy + (ty - sy) * p, r = (1 - p) * (i - 2.5) * 3;
+  const tick = smooth((t - TICKS[i]) / 0.3);
+  return <g transform={`translate(${x} ${y}) rotate(${r} ${W_ / 2} ${H_ / 2})`}>
+    <rect x={8} y={12} width={W_} height={H_} fill="#3C3228" opacity={0.2} style={{filter: "blur(12px)"}}/>
+    <rect width={W_} height={H_} fill="#F7F3EA"/>
+    <text x={24} y={54} fontFamily={SANS} fontSize={36} fontWeight={700} fill={INK}>{c[0]}</text>
+    <text x={24} y={100} fontFamily={SANS} fontSize={28} fontWeight={500} fill={SOFT}>{c[1]}</text>
+    <text x={24} y={138} fontFamily={SANS} fontSize={28} fontWeight={500} fill={SOFT}>{c[2]}</text>
+    {tick > 0 && <path d="M 462 118 L 476 134 L 502 100" fill="none" stroke={KLEIN} strokeWidth={7} strokeLinecap="round" strokeLinejoin="round" strokeDasharray={80} strokeDashoffset={80 * (1 - tick)}/>}
+  </g>;
+};
+
+const TITLE = ["AlphaFold accelerates artificial", "intelligence powered drug", "discovery: efficient discovery", "of a novel CDK20 small", "molecule inhibitor"];
+const Paper = () => {
+  const t = useT(), at = 209.0, p = out((t - at) / 0.5), {x, y, w, h} = PAGE;
+  if (t < at) return null;
+  const lift = 1 - p, stamp = clamp((t - 217.2) / 0.1), sk = 1 + 0.08 * (1 - out((t - 217.2) / 0.3)), bracket = smooth((t - 256.6) / 0.5);
+  return <g transform={`translate(${-60 * lift} ${130 * lift})`} opacity={clamp((t - at) / 0.08)}>
+    <rect x={x + 12} y={y + 16} width={w} height={h} fill="#3C3228" opacity={0.3} style={{filter: "blur(14px)"}}/>
+    <rect x={x} y={y} width={w} height={h} fill="#F7F3EA"/>
+    <text x={x + 40} y={y + 62} fontFamily={SANS} fontSize={26} fontWeight={600} fill={SOFT}>Chemical Science · 2023</text>
+    {TITLE.map((s, i) => <text key={i} x={x + 40} y={y + 124 + i * 44} fontFamily={SERIF} fontSize={38} fill={INK}>{s}</text>)}
+    <text x={x + 40} y={y + 348} fontFamily={SANS} fontSize={28} fontWeight={600} fill={INK}>Ren et al.</text>
+    {[0, 1, 2, 3].map(i => <rect key={i} x={x + 40} y={y + 382 + i * 20} width={w - 80 - (i === 3 ? 180 : 0)} height={7} fill="#D8D4C8"/>)}
+    <text x={x + 40} y={y + 498} fontFamily={SANS} fontSize={30} fontWeight={700} fill={INK}>Conflicts of interest</text>
+    {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(i => <rect key={i} x={x + 40} y={y + 526 + i * 20} width={w - 80 - (i % 4 === 3 ? 140 : 0)} height={7} fill="#D8D4C8"/>)}
+    {bracket > 0 && <path d={`M ${x + 30} ${y + 468} h -14 v 42 h 14`} fill="none" stroke={INK} strokeWidth={3} opacity={bracket}/>}
+    {stamp > 0 && <g transform={`translate(${x + 410} ${y + 338}) rotate(-6) scale(${sk})`} opacity={stamp}>
+      <rect x={-150} y={-34} width={300} height={68} fill="none" stroke={RED} strokeWidth={4}/>
+      <text x={0} y={13} textAnchor="middle" fontFamily={SANS} fontSize={36} fontWeight={700} fill={RED}>original research</text>
+    </g>}
+  </g>;
+};
+
+const glide = (keys, t) => {
+  if (t <= keys[0][0]) return keys[0].slice(1);
+  for (let i = 1; i < keys.length; i++) if (t <= keys[i][0]) {
+    const a = keys[i - 1], b = keys[i], q = smooth((t - a[0]) / (b[0] - a[0]));
+    return [a[1] + (b[1] - a[1]) * q, a[2] + (b[2] - a[2]) * q];
+  }
+  return keys[keys.length - 1].slice(1);
+};
+
+const Lens = ({keys}) => {
+  const t = useT();
+  if (t < keys[0][0] || t > keys[keys.length - 1][0]) return null;
+  const [x, y] = glide(keys, t);
+  return <g transform={`translate(${x} ${y})`}>
+    <line x1={72} y1={72} x2={170} y2={170} stroke="#3C3228" opacity={0.25} strokeWidth={20} strokeLinecap="round" style={{filter: "blur(10px)"}} transform="translate(14 18)"/>
+    <circle r={96} fill="#FFFFFF" fillOpacity={0.16} stroke={INK} strokeWidth={7}/>
+    <line x1={70} y1={70} x2={170} y2={170} stroke={INK} strokeWidth={16} strokeLinecap="round"/>
+  </g>;
+};
+
+const Sources = () => {
+  const x = 19200, y = 1080, t = useT();
+  const note = [["Most authors work for", 257.0, INK], ["Insilico Medicine,", 258.4, INK], ["which built its AI tools.", 259.6, INK], ["They say so openly.", 262.2, SOFT], ["Useful evidence,", 264.2, DARK], ["not an independent check.", 265.0, DARK]];
+  return <g>
+    <Ink x={x + 760} y={y + 160} size={72} at={212.4} font={SERIF} w={520} dur={0.7}>Literature review</Ink>
+    <Ink x={x + 1270} y={y + 160} size={40} at={213.8} weight={500} fill={SOFT} w={520}>no lab work of our own</Ink>
+    {CARDS.map((c, i) => <Card key={i} c={c} i={i}/>)}
+    <Paper/>
+    <Ink x={x + 760} y={y + 830} size={40} at={243.0} w={1000} dur={1.2}>What kind? How much did we read?</Ink>
+    <Ink x={x + 760} y={y + 884} size={40} at={246.4} w={1000} dur={0.9}>How strong is the evidence?</Ink>
+    <Ink x={x + 760} y={y + 938} size={40} at={249.4} w={1000} dur={1.6}>Who did the work? Controls and repeats?</Ink>
+    <Lens keys={[[242.4, 21300, 1200], [243.4, 20220, 1365], [245.0, 20760, 1365], [246.6, 20220, 1551], [248.2, 20760, 1551], [249.4, 21300, 1560]]}/>
+    <Lens keys={[[248.6, 19800, 2300], [249.6, 20220, 1737], [251.2, 20760, 1737], [252.6, 21300, 1800]]}/>
+    <Source x={x + 760} y={y + 996} at={225.0} until={254.4}>Ren 2023 · Feng 2011 · Jumper 2021 · Ivanenkov 2023 · Wang 2023 · Lengauer 2007 · Bender 2026</Source>
+    {note.map(([s, at, c], i) => <Ink key={i} x={19270} y={1486 + i * 34 + (i > 2 ? 18 : 0) + (i > 3 ? 18 : 0)} size={21} at={at} anchor="end" fill={c} w={300}>{s}</Ink>)}
+  </g>;
+};
+
+const Route = () => {
+  const r = TL.world.road, t = useT();
+  return <g>
+    {[272.0, 274.2, 276.6].map((at, i) => { const p = smooth((t - at) / 0.7);
+      return p > 0 ? <circle key={i} cx={r[i][0]} cy={r[i][1]} r={84} fill="none" stroke={RED} strokeWidth={7} strokeDasharray={528} strokeDashoffset={528 * (1 - p)} transform={`rotate(-90 ${r[i][0]} ${r[i][1]})`}/> : null; })}
+    <Ink x={(r[0][0] + r[2][0]) / 2} y={350} size={84} at={272.2} font={SERIF} fill={RED} anchor="middle" w={520} dur={0.8}>today's route</Ink>
+  </g>;
+};
+
 // ---------------------------------------------------------------- what lives in screen space
 const Title = () => {
   const t = useT(), at = 125.6, land = clamp((t - at) / 0.1), k = 1 + 0.05 * (1 - out((t - at) / 0.3));
-  return t < at ? null : <g>
+  return t < at || t > 142.2 ? null : <g opacity={1 - after(t, 141.0, 1.2)}>
     <g transform={`translate(960 330) scale(${k})`} opacity={land}>
       <text x={0} y={0} textAnchor="middle" fontFamily={SERIF} fontSize={240} fill={INK}>WORTH TESTING<tspan fill={RED}>?</tspan></text>
     </g>
@@ -250,6 +388,14 @@ const LINES = [
   [76, 96, "D", "To see why, let's follow one drug's journey. Every medicine walks the same road. Find a target. Find a hit, a first molecule that works on it. Improve it. Test it in cells, then animals. Then human trials: phase one, two, three. Then approval. Any step can fail."],
   [96, 112, "B", "Now here's where it gets interesting. In 2024, part of the Nobel Prize in Chemistry went to Demis Hassabis and John Jumper, for AlphaFold, an AI that predicts the shape of proteins."],
   [112, 123, "C", "So can AI walk the first steps faster? Let's follow one real case, where AI tools took on liver cancer. And part of it starts right here, in Hong Kong."],
+  [141, 174, "A", "Hong Kong first. In 2011, a team at the Chinese University of Hong Kong studied liver tumours from patients at the Prince of Wales Hospital. One protein kept showing up raised: CCRK, also called CDK20. Fast forward to 2023: an AI drug-discovery study goes after the same protein, with co-authors at Insilico Medicine's Hong Kong office in Science Park."],
+  [174, 184, "A · on camera", "So our research question is: how can computer-aided methods help scientists find and assess potential cancer drug candidates?"],
+  [184, 190, "A", "And we'll answer it with one case study: CDK20 in liver cancer."],
+  [190, 193, "C · on camera", "We set ourselves two objectives."],
+  [193, 208, "C", "One: to identify the major computer-aided methods used in cancer drug discovery. Two: to evaluate how these methods help scientists assess potential drug candidates."],
+  [208, 242, "C", "So how did we check all this? We read. A lot. No lab work of our own: this is a literature review. At the centre, one original study by Ren and colleagues in Chemical Science, 2023, with its supplementary data. Around it, the earlier Hong Kong study, papers behind two AI tools, a 2023 review, a textbook chapter, and a 2026 expert Perspective, which we read only as an abstract."],
+  [242, 268, "D", "For every source, we asked: what kind is it, how much did we read, and how strong is the evidence? Who did the work? Were there controls and repeats? One thing worth knowing: most authors of the main study work for Insilico Medicine, which built its AI tools. They say so openly. Useful evidence, not an independent check."],
+  [268, 281, "A", "So here's where we're going. First, the lock. Then how AI helped cut a key for it. Then what happened in the lab. And finally, the big one: how much did the computers really help?"],
 ];
 
 const Review = () => {
@@ -258,24 +404,26 @@ const Review = () => {
 };
 
 // ---------------------------------------------------------------- the frame
-const S1 = ({review = true, base = true}) => {
+const S1 = ({review = true, base = true, clear = false, file = "fusion_s1/base.mp4", start = 0}) => {
   const f = useCurrentFrame(), t = TL.u[f], [cx, cy, z] = TL.cam[f];
   return <Clock.Provider value={t}><Zoom.Provider value={z}>
-    <AbsoluteFill style={{background: BONE}}>
-      {base && <OffthreadVideo src={staticFile("fusion_s1/base.mp4")} muted/>}
+    <AbsoluteFill style={{background: clear ? "transparent" : BONE}}>
+      {base && <Sequence from={start} layout="none"><OffthreadVideo src={staticFile(file)} muted/></Sequence>}
       <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
         <g transform={`translate(${W / 2} ${H / 2}) scale(${z}) translate(${-cx} ${-cy})`}>
-          <Liver/><Drugs/><Ruler/><Cost/><Road/><Protein/>
+          <Liver/><Drugs/><Ruler/><Cost/><Road/><Protein/><Stories/><Question/><Objectives/><Sources/><Route/>
           <Print who="A" x={96} y={84} w={760} h={912} at={2.15} rot={-1.2}/>
           <Print who="A" x={ST1 + 96} y={84} w={760} h={912} at={25.05} rot={0.9}/>
           <Print who="D" x={5840} y={170} w={500} h={600} at={52.05} rot={-1.5}/>
           <Print who="B" x={6430} y={170} w={500} h={600} at={55.0} rot={1.0}/>
           <Print who="C" x={7020} y={170} w={500} h={600} at={58.0} rot={-0.8}/>
+          <Print who="A" x={15456} y={1164} w={760} h={912} at={174.9} rot={-0.9}/>
           <Pin xy={TL.world.pwh} at={119.8}>Sha Tin</Pin>
           <Pin xy={TL.world.hkstp} at={122.0}>Pak Shek Kok</Pin>
         </g>
         <Title/>
         {t > 113.4 && t < 123.2 && <text x={96} y={1050} fontFamily={SANS} fontSize={26} fontWeight={500} fill={SOFT} opacity={after(t, 113.4)}>© OpenStreetMap contributors</text>}
+        {t > 143.6 && t < 173.6 && <text x={1824} y={1050} textAnchor="end" fontFamily={SANS} fontSize={26} fontWeight={500} fill={SOFT} opacity={after(t, 143.6) * (1 - after(t, 172.6))}>© OpenStreetMap contributors</text>}
       </svg>
       {review && <Review/>}
     </AbsoluteFill>

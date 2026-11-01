@@ -12,6 +12,7 @@ PROTEIN_T = (97.0, 112.0)                  # seconds: the chain grows and settle
 STRIP = (0, 0, 13440, 2160)                # the static table, rendered once
 MAP = (13440, 1080, 15360, 2160)           # the Hong Kong tile, rendered at 3x
 MAP_SCALE = 3
+S2_STRIP = (15360, 1080, 21120, 2160)      # S2: three more screens, right of the map
 TUBE_R, FLUID_R = 12, 9.5
 SURFACE_Z = 12                             # tube centre height, world px
 
@@ -26,6 +27,9 @@ ROAD_PX = [228, 512, 790, 1072, 1395, 1704]
 ROAD_X0, ROAD_Y = 11520, 516
 STATIONS = [(ROAD_X0 + p, ROAD_Y) for p in ROAD_PX]
 LENS = (3640, 770, 150)
+BLISTER = (4100, 235)                      # the medicines station
+VIALS = [(4800, 235), (5080, 235)]
+VIAL_R = 62
 NTERM = (12677, 1536)                      # residue 1 of the protein in its final pose
 
 MAIN_A = [(1420, 540), (1760, 540), (1760, 1010), (5560, 1010), (5560, 620), (11340, 620), (11340, 516), (11748, 516)]
@@ -45,6 +49,9 @@ def m2w(x, y):
 HK = json.load(open(r"D:/。hkbu/molecular science/镜头设计_v3/styleframes/S1/v2/_code/s110/hk_land.json", encoding="utf8"))
 PWH, HKSTP = m2w(*HK["poi"]["pwh"]), m2w(*HK["poi"]["hkstp"])
 MAP_TUBE = [(13440, 2060), (14060, 2060), (PWH[0], 1720), PWH] + [m2w(*p) for p in HK["route"][1:]]
+EXIT_TUBE = [HKSTP, (15130, HKSTP[1]), (15130, 2060), (15360, 2060)]   # 2-02: the red line leaves the map
+SAMPLES = [(PWH[0] - 150 + i * 34, PWH[1] + 66) for i in range(3)]     # 2-01: three sample tubes beside the hospital pin
+S2_TUBE = [(15360, 2060), (21120, 2060)]
 
 
 def fillet(pts, step=4.0, R=90.0):
@@ -73,7 +80,7 @@ def fillet(pts, step=4.0, R=90.0):
     return out
 
 
-PATHS = {k: fillet(v, R=r) for k, v, r in (('main_a', MAIN_A, 130), ('main_b', MAIN_B, 130), ('liver', LIVER_BRANCH, 60), ('prot', PROT_BRANCH, 60), ('map', MAP_TUBE, 30))}
+PATHS = {k: fillet(v, R=r) for k, v, r in (('main_a', MAIN_A, 130), ('main_b', MAIN_B, 130), ('liver', LIVER_BRANCH, 60), ('prot', PROT_BRANCH, 60), ('map', MAP_TUBE, 30), ('exit', EXIT_TUBE, 90), ('s2', S2_TUBE, 30))}
 
 
 def s_at(path, xy):

@@ -2,9 +2,11 @@
 
 Each frame: cut the view out of the bare table and the filled table, wipe between them along the liquid front and over the figures, then multiply on the liver and the protein.
 Run: python base.py <out.mp4> [first_second last_second]    or    python base.py --still <t> <out.png>
+Set S1_K=2 for 4K; it reads the renders in _work_4k instead of _work.
 """
 import io
 import math
+import os
 import subprocess
 import sys
 
@@ -15,9 +17,10 @@ import timeline as T
 import world as W
 
 Image.MAX_IMAGE_PIXELS = None
-WORK = "../_work/"
+K = int(os.environ.get("S1_K", "1"))      # 1 is 1080p, 2 is 4K
+WORK = "../_work/" if K == 1 else "../_work_4k/"
 FF = r"D:/。hkbu/molecular science/镜头设计_v2/tests/T4_remotion/node_modules/@remotion/compositor-win32-x64-msvc/ffmpeg.exe"
-FW, FH, SS = 1920, 1080, 2
+FW, FH, SS = 1920 * K, 1080 * K, 2 if K == 1 else 1
 BONE = (238, 236, 229)                   # the table's own tone as rendered
 TUBE = (2000, 2120)                      # rows of the table where the tube crosses from strip to map
 
@@ -60,21 +63,21 @@ def feather(h, w, band):
 
 def close_strip(strip):
     """The strip's render stops short at its right end. Carry the last clean column of the tube through to the edge."""
-    x = W.STRIP[2] - 10
-    strip.paste(strip.crop((x, TUBE[0], x + 1, TUBE[1])).resize((10, TUBE[1] - TUBE[0])), (x, TUBE[0]))
+    x, y0, y1 = (W.STRIP[2] - 10) * K, TUBE[0] * K, TUBE[1] * K
+    strip.paste(strip.crop((x, y0, x + 1, y1)).resize((10 * K, y1 - y0)), (x, y0))
 
 
 def fit_map(mp, strip):
     """The map is a separate render. Its land fades out toward its edges so it never stops on a straight cut, and the strip's tube blends into the map's."""
     m = np.asarray(mp, dtype=np.float32).copy()
-    k = W.MAP_SCALE
+    k = W.MAP_SCALE * K
     sea = np.median(m[-300:, :300].reshape(-1, 3), axis=0)
     fx, fy = [np.clip(np.arange(n, dtype=np.float32) / band, 0, 1) for n, band in ((m.shape[1], 260 * k), (m.shape[0], 170 * k))]
     edge = np.outer(fy * fy * (3 - 2 * fy), fx * fx * (3 - 2 * fx))[..., None]     # only the left and top edges cut land; the others are open water
     r0, r1 = (TUBE[0] - W.MAP[1]) * k, (TUBE[1] - W.MAP[1]) * k
     edge[r0:r1] = 1
     m = sea + (m - sea) * edge
-    col = np.asarray(strip.crop((W.STRIP[2] - 1, TUBE[0], W.STRIP[2], TUBE[1])).resize((1, r1 - r0), Image.BICUBIC), dtype=np.float32)
+    col = np.asarray(strip.crop((W.STRIP[2] * K - 1, TUBE[0] * K, W.STRIP[2] * K, TUBE[1] * K)).resize((1, r1 - r0), Image.BICUBIC), dtype=np.float32)
     a = T.smooth_np(np.arange(80 * k) / (80 * k))[None, :, None].astype(np.float32)
     m[r0:r1, :80 * k] = col * (1 - a) + m[r0:r1, :80 * k] * a
     return Image.fromarray((np.clip(m, 0, 255) + 0.5).astype(np.uint8))
@@ -86,7 +89,7 @@ class Hero:
     def __init__(self, name, n, rect):
         self.name, self.n, self.rect = name, n, rect
         self.cache = (None, None)
-        self.edge = feather(1080, 1920, 160)
+        self.edge = feather(FH, FW, 160 * K)
 
     def frame(self, i):
         i = max(0, min(self.n - 1, i))
@@ -94,9 +97,11 @@ class Hero:
             a = np.asarray(Image.open("%s%s/%s_%04d.png" % (WORK, self.name, self.name, i)).convert("RGB"), dtype=np.float32)
             bone = np.median(np.concatenate([a[:8].reshape(-1, 3), a[-8:].reshape(-1, 3)]), axis=0)
             r = 1 + (np.clip(a / bone, 0, 1) - 1) * self.edge
-            m = T.smooth_np((r.max(2) - r.min(2) - 0.10) / 0.10)      # colour means object; shadow and bounce light stay nearly neutral
+            im = Image.fromarray((r * 255 + 0.5).astype(np.uint8))
+            q = np.asarray(im.reduce(K), dtype=np.float32) / 255          # the mask is worked out at 1080p at any size
+            m = T.smooth_np((q.max(2) - q.min(2) - 0.10) / 0.10)      # colour means object; shadow and bounce light stay nearly neutral
             m = Image.fromarray((m * 255 + 0.5).astype(np.uint8)).filter(ImageFilter.MaxFilter(9)).filter(ImageFilter.MinFilter(9)).filter(ImageFilter.GaussianBlur(1))
-            self.cache = (i, (Image.fromarray((r * 255 + 0.5).astype(np.uint8)), m))
+            self.cache = (i, (im, m))
         return self.cache[1]
 
     def apply(self, arr, i, cam, fade=1.0):
@@ -110,7 +115,7 @@ class Hero:
         box = (max(0, box[0]), max(0, box[1]), min(1920, box[2]), min(1080, box[3]))
         r, m = self.frame(i)
         size = (dx1 - dx0, dy1 - dy0)
-        r = 1 + (np.asarray(r.resize(size, Image.BILINEAR, box=box), dtype=np.float32) / 255 - 1) * fade
+        r = 1 + (np.asarray(r.resize(size, Image.BILINEAR, box=tuple(v * K for v in box)), dtype=np.float32) / 255 - 1) * fade
         m = np.asarray(m.resize(size, Image.BILINEAR, box=box), dtype=np.float32)[..., None] / 255 * fade
         arr[dy0:dy1, dx0:dx1] = (arr[dy0:dy1, dx0:dx1] * (1 - m) + np.array(BONE, dtype=np.float32) * m) * r
 
@@ -156,6 +161,14 @@ def box(d, cam, xy, h, a):
     d.rectangle([x0, y0, x1, y1], fill=int(255 * a))
 
 
+def rect(d, cam, xy, half, a):
+    if a <= 0:
+        return
+    x0, y0 = to_s(cam, (xy[0] - half[0], xy[1] - half[1]))
+    x1, y1 = to_s(cam, (xy[0] + half[0], xy[1] + half[1]))
+    d.rectangle([x0, y0, x1, y1], fill=int(255 * min(1, a)))
+
+
 def masks_at(t, cam):
     """Two wipes: the liquid (bare table to liquid), then the objects on top of it (figures, beads, drops, lens), so a bead can fade without cutting the line through it."""
     ml, mo = [Image.new("L", (FW * SS, FH * SS), 0) for _ in "lo"]
@@ -165,6 +178,8 @@ def masks_at(t, cam):
     wipe_path(d, cam, "main_b", T.seg(T.FRONT_B, t))
     wipe_path(d, cam, "prot", T.seg(T.FRONT_P, t))
     wipe_path(d, cam, "map", T.seg(T.FRONT_M, t), width=30)
+    wipe_path(d, cam, "exit", T.seg(T.FRONT_X, t), width=30)
+    wipe_path(d, cam, "s2", T.seg(T.FRONT_S, t))
     d = ImageDraw.Draw(mo)
     for i, (xy, t0) in enumerate(zip(W.DROPS, T.HITS)):
         disc(d, cam, xy, 58 * T.smooth((t - t0) / 0.1))
@@ -176,6 +191,10 @@ def masks_at(t, cam):
         box(d, cam, xy, 100, T.lift(t, t0, 0.3))
     for xy, on, off in zip(W.BEADS, T.BEAD_ON, T.BEAD_OFF):
         disc(d, cam, xy, 58, T.tok(t, on, off))
+    rect(d, cam, W.BLISTER, (250, 170), T.lift(t, T.PILL_ON) * (1 - 0.6 * T.lift(t, T.PILL_DIM, 0.8)))
+    rect(d, cam, ((W.VIALS[0][0] + W.VIALS[1][0]) / 2, 235), (360, 235), T.lift(t, T.VIAL_ON))
+    p = T.lift(t, T.SAMPLE_ON, 1.4)
+    rect(d, cam, (W.SAMPLES[1][0] - 72 + 72 * p, W.SAMPLES[1][1]), (72 * p, 70), 1 if p > 0 else 0)
     if t > T.LENS_T:
         disc(d, cam, W.LENS[:2], (W.LENS[2] + 18) * T.smooth((t - T.LENS_T) / 0.9))
     if t > T.BULB_T:
@@ -188,11 +207,13 @@ class Scene:
         se, sl, sf = [load(WORK + "strip_%s.png" % k) for k in "elf"]
         for im in (se, sl, sf):
             close_strip(im)
-        me = Source(fit_map(load(WORK + "map_e.png"), se), W.MAP, W.MAP_SCALE)
-        mf = Source(fit_map(load(WORK + "map_f.png"), sl), W.MAP, W.MAP_SCALE)
-        self.E = [Source(se, W.STRIP, 1), me]
-        self.L = [Source(sl, W.STRIP, 1), mf]
-        self.F = [Source(sf, W.STRIP, 1), mf]
+        me = Source(fit_map(load(WORK + "map_e.png"), se), W.MAP, W.MAP_SCALE * K)
+        ml = Source(fit_map(load(WORK + "map_l.png"), sl), W.MAP, W.MAP_SCALE * K)
+        mf = Source(fit_map(load(WORK + "map_f.png"), sl), W.MAP, W.MAP_SCALE * K)
+        s2e, s2l = [Source(load(WORK + "s2_%s.png" % k), W.S2_STRIP, K) for k in "el"]
+        self.E = [Source(se, W.STRIP, K), me, s2e]
+        self.L = [Source(sl, W.STRIP, K), ml, s2l]
+        self.F = [Source(sf, W.STRIP, K), mf, s2l]
         self.liver = Hero("liver", int((W.LIVER_T[1] - W.LIVER_T[0]) * T.FPS), (1920, 0, 3840, 1080))
         self.protein = Hero("protein", int((W.PROTEIN_T[1] - W.PROTEIN_T[0]) * T.FPS), (W.ROAD_X0, 1080, W.ROAD_X0 + 1920, 2160))
 
@@ -203,7 +224,8 @@ class Scene:
         return np.asarray(c, dtype=np.float32)
 
     def frame(self, t):
-        cam = T.camera(t)
+        cx, cy, z = T.camera(t)
+        cam = cx, cy, z * K
         ml, mo = masks_at(t, cam)
         a = self.layer(self.E, cam) * (1 - ml) + self.layer(self.L, cam) * ml
         if mo.max() > 0:
@@ -216,8 +238,8 @@ class Scene:
 
 def state(t):
     """Everything a frame depends on. Two times with the same state make the same picture, so held moments cost nothing."""
-    objs = [T.lift(t, a, 0.3) for a in T.FOUR_ON + T.STUDENT_ON] + [T.tok(t, a, b) for a, b in zip(T.TEN_ON + T.BEAD_ON, T.TEN_OFF + T.BEAD_OFF)]
-    return (T.camera(t), T.front_a(t), T.seg(T.FRONT_L, t), T.seg(T.FRONT_B, t), T.seg(T.FRONT_P, t), T.seg(T.FRONT_M, t), min(t, W.LIVER_T[1]) if t > W.LIVER_T[0] else 0,
+    objs = [T.lift(t, a, 0.3) for a in T.FOUR_ON + T.STUDENT_ON] + [T.tok(t, a, b) for a, b in zip(T.TEN_ON + T.BEAD_ON, T.TEN_OFF + T.BEAD_OFF)] + [T.lift(t, T.PILL_ON), T.lift(t, T.PILL_DIM, 0.8), T.lift(t, T.VIAL_ON)] + [T.lift(t, T.SAMPLE_ON, 1.4)]
+    return (T.camera(t), T.front_a(t), T.seg(T.FRONT_L, t), T.seg(T.FRONT_B, t), T.seg(T.FRONT_P, t), T.seg(T.FRONT_M, t), T.seg(T.FRONT_X, t), T.seg(T.FRONT_S, t), min(t, W.LIVER_T[1]) if t > W.LIVER_T[0] else 0,
             min(t, W.PROTEIN_T[1]) if t > W.PROTEIN_T[0] else 0, tuple(objs), min(t, T.HITS[3] + 0.1) if t < 6 else 6, min(t, T.LENS_T + 0.9) if t > T.LENS_T else 0, min(t, T.BULB_T + 0.35) if t > T.BULB_T else 0)
 
 
