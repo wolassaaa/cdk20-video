@@ -22,6 +22,8 @@ FIN = [
 R2 = [("dawn", "破晓 · 备选"), ("neon", "霓虹街 · 备选"), ("shanshui", "山水 · 备选"), ("pigment", "色即分子 · 备选"),
       ("falsecolor", "假彩色"), ("polar", "偏振"), ("darkroom", "暗房"), ("arena", "舞台"), ("clay", "黏土")]
 R1 = [("a", "前卫艺术"), ("b", "光与当代装置"), ("c", "游戏大作"), ("d", "独立游戏"), ("e", "3D 与 demo"), ("f", "电影和片头"), ("g", "科学图像与东方"), ("old", "我们的旧作")]
+OUT = {"eclipse", "manual"}
+FIN.sort(key=lambda f: f[0] in OUT)
 NAMES = ["T1 肝与 1,412", "T2 说话的人", "T3 最黑的一刻", "T4 CDK20 第一次被看见", "T5 钥匙转动", "T6 路线图"]
 
 
@@ -30,7 +32,7 @@ def card(i, f):
     shots = "".join(
         f'<button class="shot" data-src="a/{k}_T{t}.jpg" data-cap="{n} · {NAMES[t - 1]}"><img loading="lazy" src="a/{k}_T{t}.jpg" alt="{n}方向 {NAMES[t - 1]}" width="1280" height="720"><span>T{t}</span></button>'
         for t in range(1, 7))
-    tag = '<span class="pick">首选</span>' if i == 0 else ""
+    tag = '<span class="pick">没过</span>' if k in OUT else '<span class="pick">留下</span>'
     return f'''<section class="fin" id="{k}" style="--ac:{ac}">
 <header><h2>{n}{tag}</h2><p class="claim">{claim}</p></header>
 <div class="stage"><video controls muted playsinline preload="metadata" poster="a/{k}_T4.jpg" src="a/{k}.mp4"></video>
