@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 /* Layout: a grading-room review sheet. The frames are the page; text sits beside them on one dark, slightly warm ground. */
-:root{--bg:#0c0a0a;--panel:#171312;--line:#352c29;--fg:#f1ebe4;--mute:#b2a59c;--ember:#ff9400;
+:root{--bg:#0c0a0a;--panel:#171312;--line:#352c29;--fg:#f1ebe4;--mute:#b2a59c;--ember:#E8190F;
 --sans:"Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;--mono:"IBM Plex Mono",Consolas,monospace;color-scheme:dark}
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--fg);font:16px/1.7 var(--sans)}
@@ -58,6 +58,13 @@ summary{cursor:pointer;font-size:18px;font-weight:700}
 .sheets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:14px}
 .note{margin-top:12px;color:var(--mute);font-size:14px}
 .tight{padding-block:0;border-top:0}
+.fin h2{color:var(--fg)}
+.pick{color:#fff;background:var(--ember)}
+.facts{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+details h3{font-size:18px;margin-top:18px}
+.note+.shots{margin-top:8px}
+.rub td:first-child{white-space:nowrap}
+@media (max-width:760px){.facts{grid-template-columns:minmax(0,1fr)}}
 footer{padding-block:28px 40px;color:var(--mute);font-size:14px}
 dialog{border:0;padding:0;background:transparent;max-width:100vw;max-height:100vh}
 dialog::backdrop{background:rgba(0,0,0,.92)}
@@ -65,53 +72,48 @@ dialog img{display:block;max-width:96vw;max-height:88vh;width:auto;height:auto}
 dialog p{color:var(--fg);padding:8px 2px;font-size:14px}
 @media (max-width:760px){.stage{grid-template-columns:minmax(0,1fr)}.shots{grid-template-columns:repeat(2,minmax(0,1fr))}.sheets{grid-template-columns:minmax(0,1fr)}}
 </style>
-<div class="hero"><img src="a/hands_T1.jpg" alt="手方向 T1：1,412 只手拼成一个真实的肝" width="1280" height="720"></div>
+<div class="hero"><img src="a/plate_F4.jpg" alt="白底图版方向 F4：AI 预测的 CDK20，软尾巴标成红色" width="1280" height="720"></div>
 <div class="wrap">
 <div class="head">
-<p class="kicker">HKBU SCIE1007 课程作业科普视频 · 艺术方向探索 · 2026-11-01 更新</p>
-<h1>留下手、举灯、马拉松热色</h1>
-<p class="lead">主基调还没定。导演看完决赛后定了新标准：先把生物和科学展示出来，概念不能压过内容。日食和说明书出局，下一步往科学图像靠。</p>
+<p class="kicker">HKBU SCIE1007 课程作业科普视频 · 艺术方向 · 2026-11-01 第二轮</p>
+<h1>顺着评分标准，做得更艺术</h1>
+<p class="lead">{{LEAD}}</p>
 </div>
-<div class="funnel" aria-label="筛选过程"><span><b>60</b>新风格</span><span><b>20</b>旧作</span><span><b>14</b>方向试多镜头</span><span><b>5</b>决赛</span><span><b>3</b>留下</span></div>
-<nav aria-label="决赛方向">{{NAV}}</nav>
+<div class="funnel" aria-label="这一轮"><span><b>5</b>科学图像方向</span><span><b>6</b>讲解镜头</span><span><b>1</b>组推荐</span></div>
+<nav aria-label="五个方向">{{NAV}}</nav>
 
 <section class="block">
-<h2>导演的取舍</h2>
-<div class="prose">
-<p><b>留下：</b>手、举灯、马拉松热色。</p>
-<p><b>挺好：</b>第一轮的科学图像这组，因为这部片子本身在讲科学。</p>
-<p><b>还可以：</b>色即分子，第一轮的光与当代装置，3D demo 里的一部分。</p>
-<p><b>不要：</b>日食、说明书、山水、假彩色、偏振、舞台，第一轮的电影和片头这组。日食的问题是概念压过了实际，不像在展示生物，更适合做故事叙事。</p>
-</div>
+<h2>我的建议</h2>
+<div class="prose">{{ADVICE}}</div>
+<div class="shots" style="margin-top:16px">{{COMBO}}</div>
 </section>
 
 <section class="block">
 <h2>要你定的</h2>
-<ol class="ask">
-<li><span><b>下一步往哪走。</b>确认"我们做的已经相当不错"是不是指旧作：是的话回到旧作上定基调，否则用科学图像新开一批。</span></li>
-<li><span><b>拍一段 10 秒的手机片。</b>坐着说话，普通房间。各方向的 T2 都还是占位，项目里没有人脸素材，这是最大的未知。</span></li>
-<li><span><b>路线图第四站怎么写。</b>剧本 6-10 旁白说细胞初测已做，画面说明却标 not reported。决赛稿暂写 cells: first tests 和 animals: not reported。</span></li>
-</ol>
+<ol class="ask">{{ASK}}</ol>
 </section>
-
-{{FIN}}
 
 <section class="block">
-<h2>五个放一起比</h2>
-<div class="tbl"><table>
-<thead><tr><th>方向</th><th>缩略图冲击力</th><th>手机素材</th><th>全片 4K60（估算）</th><th>样片码率</th></tr></thead>
+<h2>评分标准怎么管画面</h2>
+<div class="tbl"><table class="rub">
+<thead><tr><th>标准</th><th>比重</th><th>画面要做到</th></tr></thead>
 <tbody>
-<tr><td>日食</td><td>最强</td><td>要抠，没试过真人</td><td class="n">约 28 小时</td><td class="n">2.0 Mbps</td></tr>
-<tr><td>说明书</td><td>强</td><td>最好接，不用抠</td><td class="n">约 10 小时，未含书页</td><td class="n">5.9 Mbps</td></tr>
-<tr><td>马拉松热色</td><td>最强</td><td>要抠，没试过真人</td><td class="n">37–61 小时</td><td class="n">6.8 Mbps</td></tr>
-<tr><td>举灯</td><td>强</td><td>要暗房拍</td><td class="n">上限约 11 小时，平面层没量</td><td class="n">4.0 Mbps</td></tr>
-<tr><td>手</td><td>T1、T3 最强</td><td>不用抠，没试过真脸</td><td class="n">约 58 小时</td><td class="n">3.4 Mbps</td></tr>
+<tr><td>Content</td><td class="n">30%</td><td>一张图一个信息，关键数字大，一次一个</td></tr>
+<tr><td>Structure</td><td class="n">20%</td><td>路线图反复出现，观众随时知道走到哪</td></tr>
+<tr><td>Literature</td><td class="n">10%</td><td>出处就近放在画面上，看得出证据等级</td></tr>
+<tr><td>Audience</td><td class="n">10%</td><td>先看懂比喻，再出术语</td></tr>
+<tr><td>Delivery</td><td class="n">10%</td><td>人讲的时候画面不抢，这一项主要靠组员自己讲</td></tr>
+<tr><td>Visual Aids</td><td class="n">10%</td><td>图本身在讲解，不是装饰</td></tr>
+<tr><td>Critical Thinking</td><td class="n">5%</td><td>没测过的就画成没测过</td></tr>
+<tr><td>Teamwork</td><td class="n">5%</td><td>人是画面的主角之一</td></tr>
 </tbody></table></div>
-<p class="note">样片码率是 1080p30。全片时长是单帧实测乘帧数的估算，帧的类型也不全一样，只能粗比。只有日食真渲过 4K60，那一镜 49 分钟，6.9 Mbps，可以当其他方向的参考。</p>
 </section>
 
+{{SCI}}
+
 <section class="block tight">
-<details><summary>第二轮：没进决赛的 9 个方向</summary><p class="note">色即分子还可以。山水、假彩色、偏振、舞台导演不要。破晓、霓虹街、暗房、黏土导演没提到。</p><div class="sheets">{{R2}}</div></details>
+<details><summary>第一轮决赛的五个方向</summary><p class="note">留下手、举灯、马拉松热色的想法，日食和说明书没过。动态样片留在本地。</p>{{FIN}}</details>
+<details><summary>第一轮：没进决赛的 9 个方向</summary><div class="sheets">{{R2}}</div></details>
 <details><summary>第一轮：60 种新风格和 20 张旧作</summary><div class="sheets">{{R1}}</div></details>
 </section>
 <footer>分子、数值和结论都来自公开文献 Ren et al. 2023。对接画面只作示意，是我们自己做的。图里说话的人物都是占位。</footer>
