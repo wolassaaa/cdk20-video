@@ -469,9 +469,44 @@ const Wall = ({file = "fusion_s1/wall_td.mp4"}) => {
   </AbsoluteFill></Clock.Provider>;
 };
 
+const LOOP_SPOTS = [["invent", 960, 214, 10.4, "middle"], ["score", 1270, 552, 12.4, "start"], ["learn", 960, 900, 13.8, "middle"], ["go again", 650, 552, 15.0, "end"]];
+
+/** 4-07: the dots come from TouchDesigner; the words are the voice-over's, and they leave once the loop is too fast to read. */
+const Loop = ({file = "fusion_s1/loop_td_1.mp4"}) => {
+  const t = useCurrentFrame() / 60, words = 1 - after(t, 18, 1), name = after(t, 4.4) * (1 - after(t, 9.6)), hours = after(t, 18.6);
+  return <Clock.Provider value={t}><AbsoluteFill style={{background: BONE}}>
+    <OffthreadVideo src={staticFile(file)} muted/>
+    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
+      <circle cx={960} cy={540} r={262} fill="none" stroke={SOFT} strokeWidth={2} opacity={0.3 * (1 - after(t, 14, 3))}/>
+      <Ink x={64} y={92} size={36} at={0.6} w={560}>Tool: generative design</Ink>
+      {LOOP_SPOTS.map(([word, x, y, at, anchor]) => <text key={word} x={x} y={y} textAnchor={anchor} fontFamily={SANS} fontSize={44} fontWeight={600} fill={INK} opacity={after(t, at) * words}>{word}</text>)}
+      <g opacity={name} textAnchor="middle">
+        <text x={960} y={530} fontFamily={SERIF} fontSize={84} fill={INK}>Chemistry42</text>
+        <text x={960} y={590} fontFamily={SANS} fontSize={36} fontWeight={600} fill={SOFT}>dozens of AI models</text>
+      </g>
+      <g opacity={hours} textAnchor="middle">
+        <text x={960} y={530} fontFamily={SERIF} fontSize={72} fill={RED}>within hours</text>
+        <text x={960} y={590} fontFamily={SANS} fontSize={36} fontWeight={600} fill={INK}>its makers say</text>
+        <text x={960} y={636} fontFamily={SANS} fontSize={26} fontWeight={500} fill={SOFT}>Ivanenkov 2023</text>
+      </g>
+      <Tag kind="schematic" x={1650} y={78} at={0.6}>schematic</Tag>
+    </svg>
+  </AbsoluteFill></Clock.Provider>;
+};
+
+/** W2: the one label the script asks for, once the light has reached the corner. */
+const W2 = ({file = "fusion_s1/w2_td_1.mp4"}) => <Clock.Provider value={useCurrentFrame() / 60}><AbsoluteFill style={{background: BONE}}>
+  <OffthreadVideo src={staticFile(file)} muted/>
+  <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
+    <Tag kind="predicted" x={96} y={1000} at={21.2} size={36}>AlphaFold DB v6 · predicted</Tag>
+  </svg>
+</AbsoluteFill></Clock.Provider>;
+
 const Root = () => <>
   <Composition id="S1Fusion" component={S1} durationInFrames={N} fps={FPS} width={W} height={H} defaultProps={{review: true, base: true}}/>
   <Composition id="W3" component={W3} durationInFrames={942} fps={60} width={W} height={H}/>
   <Composition id="Wall" component={Wall} durationInFrames={1500} fps={60} width={W} height={H}/>
+  <Composition id="W2" component={W2} durationInFrames={1500} fps={60} width={W} height={H}/>
+  <Composition id="Loop" component={Loop} durationInFrames={1620} fps={60} width={W} height={H}/>
 </>;
 registerRoot(Root);
