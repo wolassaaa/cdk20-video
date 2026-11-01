@@ -529,9 +529,22 @@ const Blanks = () => <g>
   <Source x={906} y={1010} at={-1}>Ren 2023</Source>
 </g>;
 
+/** 3-07: the paper never prints the 20 names, so only CDK20's row carries one. */
+const List = () => <g>
+  <text x={170} y={190} fontFamily={SERIF} fontSize={120} fill={INK}>top 20 targets</text>
+  {Array.from({length: 20}, (_, i) => {
+    const x = 170 + Math.floor(i / 10) * 830, y = 300 + (i % 10) * 60;
+    return i ? <rect key={i} x={x} y={y - 25} width={750} height={28} rx={14} fill="#D4D1C8"/> :
+      <text key={i} x={x} y={y + 4} fontFamily={SANS} fontSize={48} fontWeight={700} fill={RED}>CDK20</text>;
+  })}
+  <ellipse cx={250} cy={286} rx={124} ry={41} fill="none" stroke={RED} strokeWidth={4}/>
+  <Tag kind="schematic" x={170} y={960} at={-1}>schematic</Tag>
+  <Source x={170} y={1020} at={-1}>the other 19 names are not in the paper · Ren 2023</Source>
+</g>;
+
 const S3Board = ({beat = "tally"}) => <Clock.Provider value={99}><AbsoluteFill style={{background: BONE}}>
   <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
-    {beat === "tally" ? <Tally/> : <Blanks/>}
+    {{tally: <Tally/>, blanks: <Blanks/>, list: <List/>}[beat]}
   </svg>
 </AbsoluteFill></Clock.Provider>;
 
