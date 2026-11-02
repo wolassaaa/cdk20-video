@@ -1,10 +1,12 @@
-"""HKBU SCIE1007 coursework science video. S1 insert shots: real 3D close-ups on the same bone table, cut into the long holds of the film. One object does one thing in each. All schematic, no maker's marks.
+"""HKBU SCIE1007 coursework science video. S1 table shots: the film's own table, seen first from the film's own overhead view, with a camera that falls to it and climbs back. What lies flat on the page stands up when the camera comes down, and lies back down when it leaves. All schematic, no maker's marks.
 
-a: a tablet bursts through the foil of a strip and lands on the table, 2.3 s, over "Nexavar".
-b: two vials are set down and the liquid settles, 2.6 s, over "atezolizumab + bevacizumab".
-c: ten figures; red drains out of seven and three stay, 3.0 s, over "three in ten".
+a: 32.1-35.4 s. An empty table; a foil strip lands; the camera falls to it; a tablet bursts through the foil and lands.
+w: 35.12-35.52 s. A vial falls past the lens, alone on a clear film. It hides the cut from a to b.
+b: 35.15-38.78 s. Two vials are set down; the camera climbs back and they lie down where the full view has them.
+c: 43.35-48.52 s. The camera falls to the ten flat figures, they stand, seven drain and lie down, three stay, the camera climbs back.
 
-Run: blender.exe -b -t 4 -P bl_inserts.py -- <a|b|c> <out dir> [first] [last] [samples] [size]
+Times are seconds on the film's clock. Table units are the plates': 200 px to the unit, y flipped.
+Run: blender.exe -b -t 4 -P bl_inserts.py -- <a|w|b|c> <out dir> [first] [last] [samples] [size] [step]
 """
 import math
 import os
@@ -17,16 +19,21 @@ from mathutils import Quaternion, Vector
 HERE = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/") + "/"
 sys.path[:0] = [HERE + "../code/", HERE + "../../code/"]
 import bl_shots as B   # noqa: E402
+import world as W      # noqa: E402
 
 P, gk = B.P, B.gk
 argv = sys.argv[sys.argv.index("--") + 1:]
 SHOT, OUT = argv[0], argv[1]
-FRAMES = dict(a=138, b=156, c=180)[SHOT]
+START = dict(a=32.1, w=35.12, b=35.15, c=43.35)[SHOT]
+FRAMES = dict(a=198, w=24, b=218, c=310)[SHOT]
 FIRST = int(argv[2]) if len(argv) > 2 else 0
 LAST = min(int(argv[3]), FRAMES - 1) if len(argv) > 3 else FRAMES - 1
 SAMPLES = int(argv[4]) if len(argv) > 4 else 64
-SIZE = int(argv[5]) if len(argv) > 5 else 1
+SIZE = float(argv[5]) if len(argv) > 5 else 1
+STEP = int(argv[6]) if len(argv) > 6 else 1
 FPS = 60.0
+K = W.PPU
+TOP = dict(at=(24.0, -2.7, 0.0), az=0.0, el=math.radians(89.9), d=160.0, mm=600.0)    # a very long lens, high up: the full view's frame at the table, to within a pixel
 
 
 def smooth(x):
@@ -39,8 +46,8 @@ def lerp(a, b, x):
 
 
 def stage():
-    """The same table and sun as the plates, seen from low down. Camera rays that miss the floor see bone, so there is no horizon. Reflections see one big window behind the objects, because a low camera never sees the plates' window above."""
-    sc = P.scene(samples=SAMPLES, w=1920 * SIZE, h=1080 * SIZE)
+    """The same table and sun as the plates. Camera rays that miss the floor see bone, so there is no horizon. Reflections see one big window behind the objects while the camera is low, because a low camera never sees the plates' window above; sky(x) slides it back overhead as the camera climbs."""
+    sc = P.scene(samples=SAMPLES, w=int(1920 * SIZE), h=int(1080 * SIZE))
     sc.cycles.denoising_use_gpu = True
     sc.render.use_persistent_data = True
     sc.render.use_motion_blur = True
@@ -48,10 +55,14 @@ def stage():
     sc.render.fps = int(FPS)
     nt = sc.world.node_tree
     pick = lambda kind: [n for n in nt.nodes if n.type == kind]
-    pick("VECT_MATH")[0].inputs[1].default_value = (-0.22, 0.92, 0.32)
-    win = pick("MAP_RANGE")[1]
-    win.inputs[1].default_value, win.inputs[2].default_value = 0.74, 0.97
-    win.inputs[3].default_value, win.inputs[4].default_value = dict(a=0.2, b=0.1, c=0.04)[SHOT], dict(a=1.25, b=2.0, c=2.6)[SHOT]
+    dot, win = pick("VECT_MATH")[0], pick("MAP_RANGE")[1]
+    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6)[SHOT]
+
+    def sky(x):
+        dot.inputs[1].default_value = lerp((-0.22, 0.92, 0.32), P.WINDOW, x)
+        win.inputs[1].default_value, win.inputs[2].default_value = lerp((0.74, 0.97), (0.92, 0.975), x)
+        win.inputs[3].default_value, win.inputs[4].default_value = lerp((low, high), (0.03, 7.0), x)
+    sky(0)
     bone = nt.nodes.new("ShaderNodeBackground")
     bone.inputs[0].default_value = (*P.BONE_LIN, 1)
     mix = nt.nodes.new("ShaderNodeMixShader")
@@ -62,12 +73,12 @@ def stage():
     P.floor()
     bpy.data.objects["floor"].scale = (5, 5, 1)
     P.sun()
-    return sc
+    return sc, sky
 
 
-def lens(sc, mm, stop):
+def lens(sc, stop):
     d = bpy.data.cameras.new("cam")
-    d.lens, d.sensor_width = mm, 36
+    d.sensor_width = 36
     d.clip_start, d.clip_end = 0.05, 400
     d.dof.use_dof, d.dof.aperture_fstop = True, stop
     c = bpy.data.objects.new("cam", d)
@@ -77,12 +88,43 @@ def lens(sc, mm, stop):
     return c
 
 
-def shoot(c, f, eye, at, focus=None):
-    v = Vector(at) - Vector(eye)
-    c.location, c.rotation_quaternion = eye, v.to_track_quat("-Z", "Y")
-    c.data.dof.focus_distance = (Vector(focus) - Vector(eye)).length if focus else v.length
+def polar(eye, at, mm):
+    v = Vector(eye) - Vector(at)
+    return dict(at=tuple(at), az=math.atan2(v.x, -v.y), el=math.asin(v.z / v.length), d=v.length, mm=mm)
+
+
+def eye_of(v):
+    c = math.cos(v["el"])
+    return (v["at"][0] + v["d"] * math.sin(v["az"]) * c, v["at"][1] - v["d"] * math.cos(v["az"]) * c, v["at"][2] + v["d"] * math.sin(v["el"]))
+
+
+def fall(p, q, x):
+    """From a high view p down to a low view q. Distance and lens ease on a log scale, so the fall reads at one even speed. The tilt comes late: the camera drops first and looks up as it lands."""
+    y = smooth((x - 0.2) / 0.8)
+    log = lambda k: math.exp(math.log(p[k]) + (math.log(q[k]) - math.log(p[k])) * x)
+    return dict(at=lerp(p["at"], q["at"], x), az=p["az"] + (q["az"] - p["az"]) * x, el=p["el"] + (q["el"] - p["el"]) * y, d=log("d"), mm=log("mm"))
+
+
+def climb(p, q, x):
+    """The same move run backwards: from a low view p up to a high view q."""
+    return fall(q, p, 1 - x)
+
+
+last_q = [None]
+
+
+def shoot(c, f, v, focus):
+    eye = eye_of(v)
+    q = (Vector(v["at"]) - Vector(eye)).to_track_quat("-Z", "Y")
+    if last_q[0] is not None and q.dot(last_q[0]) < 0:
+        q.negate()
+    last_q[0] = q.copy()
+    c.location, c.rotation_quaternion = eye, q
+    c.data.lens = v["mm"]
+    c.data.dof.focus_distance = (Vector(focus) - Vector(eye)).length
     c.keyframe_insert("location", frame=f)
     c.keyframe_insert("rotation_quaternion", frame=f)
+    c.data.keyframe_insert("lens", frame=f)
     c.data.dof.keyframe_insert("focus_distance", frame=f)
 
 
@@ -111,15 +153,44 @@ def empty(name):
     return o
 
 
-# ---------------------------------------------------------------- shot a: the strip and the tablet
-HALF = (2.0, 1.12)                      # the plates' strip: 400 x 224 px
+def pipe(pts, r_px, mat, name):
+    cu = bpy.data.curves.new(name, "CURVE")
+    cu.dimensions = "3D"
+    cu.bevel_depth, cu.bevel_resolution = r_px / K, 8
+    cu.use_fill_caps = True
+    s = cu.splines.new("POLY")
+    s.points.add(len(pts) - 1)
+    for q, xy in zip(s.points, pts):
+        q.co = (xy[0] / K, -xy[1] / K, W.SURFACE_Z / K, 1)
+    o = bpy.data.objects.new(name, cu)
+    bpy.context.scene.collection.objects.link(o)
+    cu.materials.append(mat)
+    return o
+
+
+def tube(front):
+    """The glass line of the full view, filled as far as x = front."""
+    path = W.PATHS["main_a"]
+    glass = pipe(path, W.TUBE_R, B.clear_glass(), "glass")
+    glass.visible_shadow, glass.visible_diffuse = False, False
+    wet = pipe(path[:int(W.s_at("main_a", (front, 1010)) / 4) + 1], W.FLUID_R, B.fluid(P.RED, (0.9, 0.05, 0.03)), "liquid")
+    wet.visible_diffuse = False
+
+
+# ---------------------------------------------------------------- the strip and the tablet, twice the plates' size in their own units
+HALF = (2.0, 1.12)
+S = 0.5                                 # own units to table units
 POCKETS = [(c * 0.92, r * 0.50) for r in (-1, 1) for c in (-1.5, -0.5, 0.5, 1.5)]
 HERO = POCKETS[2]
 Z_FOIL, RIM = 0.25, 0.34
-TEAR, LEAVE, LAND = 0.55, 0.75, 1.46    # seconds: foil tears, tablet clears it, tablet lands
-SPOT = (1.02, -2.02)
+TEAR, LEAVE, LAND = 0.55, 0.75, 1.46    # seconds after 33.0: foil tears, tablet clears it, tablet lands
+SPOT = (1.1, -1.5)                      # just below the strip on the table, above the word Nexavar in the full view
 TABLET = [(0, 0.115), (0.08, 0.112), (0.16, 0.100), (0.24, 0.078), (0.285, 0.056), (0.30, 0.04), (0.30, -0.04), (0.285, -0.056), (0.24, -0.078), (0.16, -0.100), (0.08, -0.112), (0, -0.115)]
-G = 8.0                                 # gravity in table units: a macro lens running slow
+G = 8.0                                 # gravity in the strip's units: a macro lens running slow
+
+
+def on_strip(p):
+    return (W.BLISTER[0] / K + p[0] * S, -W.BLISTER[1] / K + p[1] * S, p[2] * S)
 
 
 def tablet_rest(tilt):
@@ -156,6 +227,7 @@ class Strip:
         b.inputs["Metallic"].default_value = 1.0
         b.inputs["Roughness"].default_value = 0.28
         nt.links.new(b.outputs[0], out.inputs["Surface"])
+        self.skin = b
         nx, ny = 501, 281
         x, y = np.meshgrid(np.linspace(-HALF[0], HALF[0], nx), np.linspace(-HALF[1], HALF[1], ny))
         cr = 0.09
@@ -200,6 +272,12 @@ class Strip:
             if xy != HERO:
                 c = lathe(TABLET, tablet, "tablet", parent)
                 c.location = (*xy, 0.118)
+
+    def seen(self, x):
+        """Mirror foil for a low camera; from overhead, where the dark room would turn it to chrome, the plain pale strip of the plates."""
+        self.skin.inputs["Metallic"].default_value = 1.0 - 0.8 * x
+        self.skin.inputs["Roughness"].default_value = 0.28 + 0.27 * x
+        self.skin.inputs["Base Color"].default_value = (*lerp((0.70, 0.70, 0.72), (0.80, 0.80, 0.80), x), 1)
 
     def update(self, t):
         v = np.stack((self.x, self.y, ground(t, self.x, self.y)), 1)
@@ -256,34 +334,77 @@ def tablet_path(t):
     return (SPOT[0] + dx / ln * slide - roll * math.sin(phi), SPOT[1] + dy / ln * slide + roll * math.cos(phi), tablet_rest(tilt) + hop), Quaternion((math.cos(phi), math.sin(phi), 0), tilt)
 
 
-def shot_a(sc):
-    c = lens(sc, 60, 0.5)
-    strip = Strip()
-    hero = lathe(TABLET, strip.tablet_mat, "hero")
+def spent_strip():
+    """The strip as it stays for the rest of the scene: torn, the tablet at rest beside it."""
+    root = empty("strip")
+    root.location, root.scale = on_strip((0, 0, 0)), (S, S, S)
+    strip = Strip(root)
+    strip.update(9.0)
+    hero = lathe(TABLET, strip.tablet_mat, "hero", root)
+    hero.rotation_mode = "QUATERNION"
+    hero.location, hero.rotation_quaternion = tablet_path(9.0)
+    return strip
+
+
+def a_view(t):
+    t = max(0.0, t - 33.0)
+    x = smooth(t / 2.3)
+    pull = smooth((t - LEAVE) / (LAND - LEAVE + 0.1))
+    look = lerp((HERO[0] - 0.05, HERO[1] - 0.15, 0.25), (SPOT[0] - 0.25, SPOT[1] + 0.45, 0.14), pull)
+    return polar(on_strip(lerp((1.55, -6.55, 1.72), (1.15, -5.85, 1.42), x)), on_strip(look), 60), on_strip(lerp((*HERO, 0.3), (SPOT[0] + 0.08, SPOT[1] - 0.23, 0.12), pull))
+
+
+def strip_height(t):
+    """Falls from above the lens onto the table, with one small bounce."""
+    x = (t - 32.3) / 0.32
+    if x < 1:
+        return 110 * (1 - max(0.0, x) ** 2)
+    d = t - 32.62
+    return 0.04 * math.sin(math.pi * d / 0.16) if d < 0.16 else 0.0
+
+
+def a_fall(t):
+    return smooth((t - 32.5) / 0.85)
+
+
+def shot_a(sc, sky):
+    c = lens(sc, 1.0)
+    tube(3950)
+    Crowd(False)
+    root = empty("strip")
+    root.scale = (S, S, S)
+    strip = Strip(root)
+    hero = lathe(TABLET, strip.tablet_mat, "hero", root)
     hero.rotation_mode = "QUATERNION"
     last = None
     for f in range(FRAMES + 1):
-        t = f / FPS
-        loc, q = tablet_path(t)
+        t = START + f / FPS
+        loc, q = tablet_path(t - 33.0)
         if last is not None and q.dot(last) < 0:
             q.negate()
         last = q.copy()
         hero.location, hero.rotation_quaternion = loc, q
         hero.keyframe_insert("location", frame=f)
         hero.keyframe_insert("rotation_quaternion", frame=f)
-        x = smooth(t / (FRAMES / FPS))
-        pull = smooth((t - LEAVE) / (LAND - LEAVE + 0.1))
-        look = lerp((HERO[0] - 0.05, HERO[1] - 0.15, 0.25), (SPOT[0] - 0.25, SPOT[1] + 0.45, 0.14), pull)
-        shoot(c, f, lerp((1.55, -6.55, 1.72), (1.15, -5.85, 1.42), x), look, lerp((*HERO, 0.3), (SPOT[0] + 0.08, SPOT[1] - 0.23, 0.12), pull))
-    return strip.update
+        root.location = (*on_strip((0, 0, 0))[:2], strip_height(t))
+        root.keyframe_insert("location", frame=f)
+        v, focus = a_view(t)
+        shoot(c, f, fall(TOP, v, a_fall(t)), focus if a_fall(t) > 0.5 else on_strip((0, 0, 0)))
+
+    def update(t):
+        strip.update(t - 33.0)
+        strip.seen(1 - a_fall(t))
+        sky(1 - a_fall(t))
+    return update
 
 
-# ---------------------------------------------------------------- shot b: two vials set down
-VIAL_R = 62 / 200
+# ---------------------------------------------------------------- the vials
+VIAL_R = 62 / K
+STAND = [(x / K, -(y + 125) / K - VIAL_R) for x, y in W.VIALS]    # upright here, each vial lies down onto its spot in the full view
 
 
 def px(profile):
-    return [(r / 200, (a + 125) / 200) for r, a in profile]
+    return [(r / K, (a + 125) / K) for r, a in profile]
 
 
 class Dose:
@@ -314,26 +435,37 @@ class Dose:
         self.o.data.update()
 
 
-def set_down(root, xy, land, swing):
-    """Falls from above the frame and slows, but still touches down with a small knock, then rocks on its base."""
+def lying(d):
+    """How far a vial has tipped back, d seconds after it starts: it falls like a hinged lid and knocks twice."""
+    if d <= 0:
+        return 0.0
+    if d < 0.42:
+        return math.pi / 2 * (d / 0.42) ** 2
+    d -= 0.42
+    return math.pi / 2 - math.radians(3.2) * abs(math.sin(2 * math.pi * 3.4 * d)) * math.exp(-d / 0.09)
+
+
+def set_down(root, xy, land, swing, tip):
+    """Falls from above the frame and slows, but still touches down with a small knock, then rocks on its base. Later it tips back about the far edge of its base."""
     drop, h, last = 0.62, 1.95, None
     ax = (math.cos(swing), math.sin(swing), 0)
     for f in range(FRAMES + 1):
-        t = f / FPS
+        t = START + f / FPS
         s = min(1.0, max(0.0, (t - land + drop) / drop))
         d = t - land
         rock = math.radians(1.5) * math.exp(-d / 0.28) * math.cos(2 * math.pi * 3.2 * d) if d > 0 else math.radians(1.5) * (1 - s)
-        q = Quaternion(ax, rock)
+        back = lying(t - tip)
+        q = Quaternion((1, 0, 0), -back) @ Quaternion(ax, rock)
         if last is not None and q.dot(last) < 0:
             q.negate()
         last = q.copy()
-        root.location = (xy[0], xy[1], h * (1 - s) * (1 - 0.7 * s) + VIAL_R * abs(math.sin(rock)))
+        root.location = (xy[0], xy[1] + VIAL_R * (1 - math.cos(back)), VIAL_R * math.sin(back) + h * (1 - s) * (1 - 0.7 * s) + VIAL_R * abs(math.sin(rock)))
         root.rotation_quaternion = q
         root.keyframe_insert("location", frame=f)
         root.keyframe_insert("rotation_quaternion", frame=f)
 
 
-def vial(xy, land, swing):
+def vial_body(swing):
     glass, paper = B.clear_glass(), gk.surface((0.86, 0.85, 0.81), 0.5, 0.2)
     liquid = B.fluid((0.42, 0.52, 0.86), (0.8, 0.86, 0.96))
     cap, seal = P.gloss(P.KLEIN, 0.25, 0.6), gk.surface((0.62, 0.62, 0.64), 0.35, 0.5)
@@ -344,37 +476,76 @@ def vial(xy, land, swing):
     lathe(px([(0, -34), (63.9, -34), (63.9, -24), (0, -24)]), cap, "vial_band", root)
     lathe(px([(0, 92), (44, 92), (46, 96), (46, 112), (0, 112)]), seal, "vial_seal", root)
     lathe(px([(0, 112), (40, 112), (40, 126), (36, 130), (0, 130)]), cap, "vial_cap", root)
-    dose = Dose(root, liquid, swing)
-    set_down(root, xy, land, swing)
+    return root, Dose(root, liquid, swing)
+
+
+def vial(xy, land, swing, tip):
+    root, dose = vial_body(swing)
+    set_down(root, xy, land, swing, tip)
     return lambda t: dose.update(t - land)
 
 
-def shot_b(sc):
-    c = lens(sc, 85, 0.6)
-    back = empty("old_strip")
-    back.location = (-2.1, 4.0, 0)
-    strip = Strip(back)
-    strip.update(9.0)
-    tab = lathe(TABLET, strip.tablet_mat, "hero", back)
-    tab.location = (SPOT[0] + 0.25, SPOT[1] - 0.25, 0.115)
-    first, second = vial((-0.48, 0.0), 0.62, 0.5), vial((0.52, 0.30), 1.18, 2.2)
+def shot_w(sc, sky):
+    """The first vial, close to the lens and far out of focus, on a clear film."""
+    sc.render.film_transparent = True
+    sc.render.image_settings.color_mode = "RGBA"
+    bpy.data.objects["floor"].visible_camera = False
+    c = lens(sc, 1.0)
+    v, focus = a_view(35.27)
+    eye = Vector(eye_of(v))
+    look = (Vector(v["at"]) - eye).normalized()
+    fill = P.sun(1.1, 40.0)                     # from the lens, so the wipe stays as pale as the table instead of blinking dark
+    fill.rotation_mode = "QUATERNION"
+    fill.rotation_quaternion = look.to_track_quat("-Z", "Y")
+    root, _ = vial_body(0.5)
     for f in range(FRAMES + 1):
-        x = smooth(f / FRAMES)
-        shoot(c, f, lerp((-0.72, -7.3, 1.08), (-0.20, -6.75, 1.0), x), (-0.40, 0.1, 0.63), (0.03, 0.1, 0.63))
+        t = START + f / FPS
+        shoot(c, f, v, focus)
+        root.location = (*(eye + look * 0.92).xy, eye.z - 0.35 - 5.2 * (t - 35.27) - 1.2 * (t - 35.27) ** 2)
+        root.keyframe_insert("location", frame=f)
+    return lambda t: None
+
+
+B_AT = (24.35, -2.2, 0.62)
+CLIMB_B = (37.55, 1.1)
+
+
+def b_view(t):
+    x = smooth((t - 35.15) / 2.6)
+    return polar(lerp((29.2, -8.6, 1.08), (28.7, -8.2, 1.0), x), B_AT, 85)
+
+
+def shot_b(sc, sky):
+    c = lens(sc, 0.6)
+    tube(3950)
+    Crowd(False)
+    strip = spent_strip()
+    first, second = vial(STAND[0], 35.92, 0.5, 37.75), vial(STAND[1], 36.48, 2.2, 37.85)
+    focus = (STAND[0][0], STAND[0][1], 0.63)
+    for f in range(FRAMES + 1):
+        t = START + f / FPS
+        x = smooth((t - CLIMB_B[0]) / CLIMB_B[1])
+        shoot(c, f, climb(b_view(t), TOP, x), focus if x < 0.5 else TOP["at"])
 
     def update(t):
         first(t)
         second(t)
+        x = smooth((t - CLIMB_B[0]) / CLIMB_B[1])
+        strip.seen(x)
+        sky(x)
     return update
 
 
-# ---------------------------------------------------------------- shot c: ten figures, seven drain
-GAP, TALL = 0.75, 0.85
-DRAIN = [None, None, None] + [0.25 + i * 0.22 for i in range(7)]   # the same stagger as the film's table
+# ---------------------------------------------------------------- ten figures
+TALL = 0.85
+FEET = -985 / K                         # the line their feet stand on in the full view
+DRAIN = [None, None, None] + [44.6 + i * 0.22 for i in range(7)]   # the same stagger as the film's table
+RISE = [43.62 + i * 0.045 for i in range(10)]
+DOWN = [47.85 + i * 0.06 for i in range(3)] + [46.95 + i * 0.07 for i in range(7)]   # the seven first; the three last, as the camera leaves
 
 
 def outline():
-    """The stand-in's plain person shape, base on the table. Same shape as bl_plate.py's figure, standing up."""
+    """The stand-in's plain person shape, feet on y = 0. Same shape as bl_plate.py's figure."""
     half = [(0, 435), (60, 420), (98, 360), (104, 300), (92, 235), (62, 185), (52, 150), (56, 120), (100, 92), (210, 62), (270, 30), (300, -30), (315, -120), (330, -300), (340, -420)]
     ctrl = half + [(-x, y) for x, y in reversed(half[1:])]
     n, pts = len(ctrl), []
@@ -439,52 +610,85 @@ def fill_mat(i):
     return m
 
 
-def pipe(a, b, r, mat, name, z):
-    cu = bpy.data.curves.new(name, "CURVE")
-    cu.dimensions = "3D"
-    cu.bevel_depth, cu.bevel_resolution = r, 8
-    cu.use_fill_caps = True
-    s = cu.splines.new("POLY")
-    s.points.add(1)
-    s.points[0].co, s.points[1].co = (*a, z, 1), (*b, z, 1)
-    o = bpy.data.objects.new(name, cu)
-    bpy.context.scene.collection.objects.link(o)
-    cu.materials.append(mat)
-    return o
+class Crowd:
+    """Ten figures lying flat where the full view has them, each hinged at its feet like a pop-up in a book."""
 
+    def __init__(self, red):
+        poly = outline()
+        self.mats, self.figs = [], []
+        for i, (x, _) in enumerate(W.TEN):
+            m = fill_mat(i)
+            m.node_tree.nodes["level"].outputs[0].default_value = 2.0 if red else -1.0
+            self.mats.append(m)
+            o = B.extrude([poly], 0.10, 0.03, name="figure", mat=m)
+            o.select_set(False)                  # extrude applies transforms to everything selected
+            o.location = (x / K, FEET, 0)
+            self.figs.append(o)
 
-def shot_c(sc):
-    c = lens(sc, 50, 0.8)
-    poly = outline()
-    mats = []
-    for i in range(10):
-        m = fill_mat(i)
-        mats.append(m)
-        o = B.extrude([poly], 0.14, 0.03, name="figure", mat=m)
-        o.rotation_euler = (math.pi / 2, 0, 0)
-        o.location = (i * GAP, 0.07, 0)
-    glass = pipe((-9, -0.17), (40, -0.17), 0.10, B.clear_glass(), "glass", 0.10)
-    glass.visible_shadow, glass.visible_diffuse = False, False
-    wet = pipe((-9, -0.17), (40, -0.17), 0.075, B.fluid(P.RED, (0.9, 0.05, 0.03)), "liquid", 0.10)
-    wet.visible_diffuse = False
-    for f in range(FRAMES + 1):
-        x = smooth(f / FRAMES)
-        shoot(c, f, lerp((-2.45, -7.25, 1.02), (-2.2, -6.95, 0.92), x), lerp((2.5, 0.0, 0.44), (2.56, 0.0, 0.42), x), (1.15, 0, 0.45))
+    def angle(self, i, t):
+        """Up from flat. They come up past upright and settle; they go down like a hinged lid."""
+        up, down = RISE[i], DOWN[i]
+        d = t - up
+        a = math.pi / 2 * smooth(d / 0.45)
+        if d > 0.45:
+            a += math.radians(3) * math.exp(-(d - 0.45) / 0.16) * math.sin(2 * math.pi * 2.6 * (d - 0.45))
+        d = (t - down) / 0.46
+        return a * (1 - max(0.0, min(1.0, d)) ** 2)
 
-    def update(t):
-        for i, m in enumerate(mats):
+    def pose(self):
+        for f in range(FRAMES + 1):
+            t = START + f / FPS
+            for i, o in enumerate(self.figs):
+                a = self.angle(i, t)
+                o.rotation_euler = (a, 0, 0)
+                o.location.y = FEET + 0.05 * math.sin(a)
+                o.keyframe_insert("rotation_euler", frame=f)
+                o.keyframe_insert("location", frame=f)
+
+    def update(self, t):
+        for i, m in enumerate(self.mats):
             n = m.node_tree.nodes
             go = DRAIN[i]
             n["phase"].outputs[0].default_value = 5.0 * t + i * 1.7
             n["level"].outputs[0].default_value = 2.0 if go is None else TALL * 1.03 * (1 - smooth((t - go) / 0.85)) - 0.03 * smooth((t - go) / 0.85)
+
+
+C_FALL, C_CLIMB = (43.5, 0.9), (47.35, 1.0)
+
+
+def c_view(t):
+    x = smooth((t - 44.3) / 3.0)
+    return polar(lerp((17.5, -12.175, 0.30), (17.75, -11.875, 0.26), x), lerp((22.45, -4.925, 1.10), (22.51, -4.925, 1.08), x), 50)
+
+
+def shot_c(sc, sky):
+    c = lens(sc, 0.8)
+    tube(5422)
+    strip = spent_strip()
+    for xy, s in zip(STAND, (0.5, 2.2)):
+        vial(xy, 30.0, s, 31.0)
+    crowd = Crowd(True)
+    crowd.pose()
+    focus = (21.1, FEET, 0.45)
+    for f in range(FRAMES + 1):
+        t = START + f / FPS
+        a, b = smooth((t - C_FALL[0]) / C_FALL[1]), smooth((t - C_CLIMB[0]) / C_CLIMB[1])
+        v = climb(c_view(t), TOP, b) if b > 0 else fall(TOP, c_view(t), a)
+        shoot(c, f, v, focus if 0.5 < a and b < 0.5 else TOP["at"])
+
+    def update(t):
+        crowd.update(t)
+        x = 1 - smooth((t - C_FALL[0]) / C_FALL[1]) + smooth((t - C_CLIMB[0]) / C_CLIMB[1])
+        strip.seen(x)
+        sky(x)
     return update
 
 
-sc = stage()
-update = dict(a=shot_a, b=shot_b, c=shot_c)[SHOT](sc)
+sc, sky = stage()
+update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c)[SHOT](sc, sky)
 sc.frame_start, sc.frame_end = 0, FRAMES
-for f in range(FIRST, LAST + 1):
+for f in range(FIRST, LAST + 1, STEP):
     sc.frame_set(f)
-    update(f / FPS)
+    update(START + f / FPS)
     gk.render("%s/%s_%04d.png" % (OUT, SHOT, f))
 print("INSERT_OK", SHOT, FIRST, LAST)

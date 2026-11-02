@@ -47,17 +47,13 @@ const Leader = ({pts, at, fill = INK, onColour}) => {
   </g>;
 };
 
-/** Evidence kinds differ by mark shape: hatched square for schematic, dashed circle for predicted. */
-const Tag = ({kind, x, y, at, size = 30, children}) => {
+/** AI-predicted structures carry a dashed circle. Drawn scenes wear no mark: their source line starts with Illustration. */
+const Tag = ({x, y, at, size = 30, children}) => {
   const t = useT(), a = after(t, at);
   if (a <= 0) return null;
   const r = size / 2, cx = x + r, cy = y - size * 0.36;
   return <g opacity={a}>
-    {kind === "schematic" && <g fill="none" stroke={INK} strokeWidth={size / 12}>
-      <rect x={cx - r} y={cy - r} width={size} height={size}/>
-      {[-0.7, 0, 0.7].map(o => <line key={o} x1={cx - r + Math.max(0, o * r)} y1={cy + r + Math.min(0, o * r)} x2={cx + r + Math.min(0, o * r)} y2={cy - r + Math.max(0, o * r)} strokeWidth={size / 15}/>)}
-    </g>}
-    {kind === "predicted" && <circle cx={cx} cy={cy} r={r} fill="none" stroke={INK} strokeWidth={2.5} strokeDasharray="6 5"/>}
+    <circle cx={cx} cy={cy} r={r} fill="none" stroke={INK} strokeWidth={2.5} strokeDasharray="6 5"/>
     <text x={x + size * 1.45} y={y} fontFamily={SANS} fontSize={size} fontWeight={600} fill={INK}>{children}</text>
   </g>;
 };
@@ -114,13 +110,15 @@ const Liver = () => {
   for (let j = -4; j <= 4; j++) for (let i = -4; i <= 4; i++) { const w = Math.sqrt(3) * 55, cx = (i + (j & 1 ? 0.5 : 0)) * w, cy = j * 1.5 * 55 + 55; cells.push([Math.hypot(cx, cy), cx, cy]); }
   cells.sort((p, q) => p[0] - q[0]);
   return <g>
-    <Ink x={x + 96} y={460} size={250} at={8.9} font={SERIF} fill={RED} w={760} dur={0.7}>1,412</Ink>
-    <Ink x={x + 104} y={546} size={50} at={9.7} weight={500}>deaths in Hong Kong, 2022</Ink>
-    <Ink x={x + 340} y={668} size={36} at={11.0} weight={500} fill={SOFT}>about four a day</Ink>
-    <Ink x={x + 104} y={760} size={40} at={13.0}>Top 3 deadliest in HK</Ink>
-    <Ink x={x + 104} y={808} size={36} at={13.5} weight={500}>lung · colorectal · liver</Ink>
-    <Ink x={x + 104} y={884} size={40} at={20.0}>World: 6th most common</Ink>
-    <Ink x={x + 104} y={932} size={40} at={20.8}>3rd deadliest</Ink>
+    <g opacity={1 - after(t, 24.7, 0.3)}>{/* clears the column before A's print lands, so print and figure never touch */}
+      <Ink x={x + 96} y={460} size={250} at={8.9} font={SERIF} fill={RED} w={760} dur={0.7}>1,412</Ink>
+      <Ink x={x + 104} y={546} size={50} at={9.7} weight={500}>deaths in Hong Kong, 2022</Ink>
+      <Ink x={x + 340} y={668} size={36} at={11.0} weight={500} fill={SOFT}>about four a day</Ink>
+      <Ink x={x + 104} y={760} size={40} at={13.0}>Top 3 deadliest in HK</Ink>
+      <Ink x={x + 104} y={808} size={36} at={13.5} weight={500}>lung · colorectal · liver</Ink>
+      <Ink x={x + 104} y={884} size={40} at={20.0}>World: 6th most common</Ink>
+      <Ink x={x + 104} y={932} size={40} at={20.8}>3rd deadliest</Ink>
+    </g>
     <Leader pts={[[x + 1262, 700], [x + 1176, 862], [x + 1146, 862]]} at={12.6} fill={RED}/>
     <Ink x={x + 1134} y={875} size={40} at={13.0} fill={DARK} anchor="end">portal vein</Ink>
     <Leader pts={[[x + 1184, 296], [x + 1240, 110], [x + 1300, 110]]} at={16.6} fill={KLEIN}/>
@@ -136,10 +134,7 @@ const Liver = () => {
       {cells.slice(0, 12).map(([, cx, cy], i) => { const c = smooth((t - 22.4 - i * 0.08) / 0.5);
         return c > 0 ? <g key={i} opacity={c}><polygon points={hex(lc[0] + cx, lc[1] + cy, 51)} fill="#DDD9CE" strokeLinejoin="round"/><circle cx={lc[0] + cx} cy={lc[1] + cy} r={15} fill="#BCB7AA"/></g> : null; })}
     </g>
-    {a > 0 && <line x1={lc[0]} y1={lc[1] + lr + 3} x2={lc[0]} y2={942} stroke={INK} strokeWidth={2} opacity={a}/>}
-    <Tag kind="schematic" x={lc[0] - 90} y={984} at={23.2} size={34}>schematic</Tag>
-    <Tag kind="schematic" x={x + 640} y={668} at={11.2} size={26}>schematic</Tag>
-    <Source x={x + 96} y={1062} at={9.8}>HKCaR 2022 · GLOBOCAN 2020 · BodyParts3D, DBCLS, CC BY 4.0</Source>
+    <Source x={x + 96} y={1062} at={9.8}>Illustration · HKCaR 2022 · GLOBOCAN 2020 · BodyParts3D, DBCLS, CC BY 4.0</Source>
   </g>;
 };
 
@@ -157,8 +152,7 @@ const Drugs = () => {
     <Ink x={x + 96} y={730} size={170} at={46.2} font={SERIF} fill={RED} w={620} dur={0.6}>~3 in 10</Ink>
     <Ink x={x + 660} y={680} size={46} at={46.8}>5-year relative survival</Ink>
     <Ink x={x + 660} y={730} size={36} at={47.2} weight={500} fill={SOFT}>HK, 2010-2021</Ink>
-    <Tag kind="schematic" x={x + 1520} y={120} at={35.6}>schematic</Tag>
-    <Source x={x + 96} y={1062} at={33.0}>Ren 2023 · HKCaR 2022</Source>
+    <Source x={x + 96} y={1062} at={33.0}>Illustration · Ren 2023 · HKCaR 2022</Source>
   </g>;
 };
 
@@ -180,8 +174,7 @@ const Ruler = () => {
       <path d={`M ${x0 - 64} ${y - 74} L ${x0 + 64} ${y - 74}`}/>
       <path d={`M ${x0 - 38} ${y - 16} Q ${x0} ${y - 6} ${x0 + 38} ${y - 16}`}/>
     </g>
-    <Tag kind="schematic" x={x0 + 30} y={y + 104} at={60.6} size={30}>schematic</Tag>
-    <Source x={x0 + 30} y={y + 200} at={60.6}>Wang 2023</Source>
+    <Source x={x0 + 30} y={y + 200} at={60.6}>Illustration · Wang 2023</Source>
   </g>;
 };
 
@@ -191,8 +184,7 @@ const Cost = () => {
     <Ink x={x + 96} y={420} size={190} at={67.2} font={SERIF} fill={RED} w={1100} dur={0.8}>~US$2.8 billion</Ink>
     <Ink x={x + 96} y={784} size={84} at={73.0} font={SERIF} w={900} dur={0.7}>about 1 in 10</Ink>
     <Ink x={x + 96} y={846} size={44} at={73.6}>of drugs tested in people reaches the market</Ink>
-    <Tag kind="schematic" x={x + 1500} y={784} at={73.0}>schematic</Tag>
-    <Source x={x + 96} y={1062} at={67.2}>Wang 2023</Source>
+    <Source x={x + 96} y={1062} at={67.2}>Illustration · Wang 2023</Source>
   </g>;
 };
 
@@ -215,7 +207,7 @@ const Protein = () => {
     <Ink x={x + 1450} y={y + 840} size={68} at={99.6} font={SERIF} w={460}>2024</Ink>
     <Ink x={x + 1450} y={y + 900} size={36} at={101.2} weight={500}>Demis Hassabis</Ink>
     <Ink x={x + 1450} y={y + 944} size={36} at={101.8} weight={500}>John Jumper</Ink>
-    <Tag kind="predicted" x={x + 96} y={y + 1012} at={99.0}>AlphaFold DB v6 · predicted</Tag>
+    <Tag x={x + 96} y={y + 1012} at={99.0}>AlphaFold DB v6 · predicted</Tag>
   </g>;
 };
 
@@ -237,8 +229,7 @@ const Stories = () => {
     <Ink x={14040} y={1458} size={40 * K3} at={145.2} w={260}>Prince of Wales Hospital</Ink>
     <Ink x={14040} y={1476} size={36 * K3} at={146.4} weight={500} fill={SOFT} w={260}>liver tumours from patients</Ink>
     <Ink x={14040} y={1546} size={120 * K3} at={153.0} font={SERIF} fill={DARK} w={320} dur={0.8}>CCRK = CDK20</Ink>
-    <Tag kind="schematic" x={14108} y={1668} at={147.6} size={10}>schematic</Tag>
-    <Source x={14040} y={1712} at={146.4} until={158.4} size={27 * K3}>Feng 2011</Source>
+    <Source x={14040} y={1712} at={146.4} until={158.4} size={27 * K3}>Illustration · Feng 2011</Source>
     <Ink x={14446} y={1476} size={84 * K3} at={158.8} font={SERIF} fill={RED} w={100}>2023</Ink>
     <Ink x={14446} y={1500} size={40 * K3} at={160.6} w={240}>AI drug-discovery study</Ink>
     <Ink x={14446} y={1518} size={36 * K3} at={162.2} weight={500} fill={SOFT} w={240}>the same protein</Ink>
@@ -414,7 +405,7 @@ const S1 = ({review = true, base = true, clear = false, file = "fusion_s1/base.m
         <g transform={`translate(${W / 2} ${H / 2}) scale(${z}) translate(${-cx} ${-cy})`}>
           <Liver/><Drugs/><Ruler/><Cost/><Road/><Protein/><Stories/><Question/><Objectives/><Sources/><Route/>
           <Print who="A" x={96} y={84} w={760} h={912} at={2.15} rot={-1.2}/>
-          <Print who="A" x={ST1 + 96} y={84} w={760} h={912} at={25.05} rot={0.9}/>
+          <Print who="A" x={ST1 + 72} y={168} w={620} h={744} at={25.05} rot={0.9}/>
           <Print who="D" x={5840} y={170} w={500} h={600} at={52.05} rot={-1.5}/>
           <Print who="B" x={6430} y={170} w={500} h={600} at={55.0} rot={1.0}/>
           <Print who="C" x={7020} y={170} w={500} h={600} at={58.0} rot={-0.8}/>
@@ -440,8 +431,7 @@ const W3 = ({file = "fusion_s1/w3_td.mp4"}) => {
     <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
       {n > 0 && <text transform={`translate(960 610) scale(${k})`} textAnchor="middle" fontFamily={SERIF} fontSize={210} fill={done ? RED : INK}>{n.toLocaleString("en-US")}</text>}
       <Ink x={960} y={680} size={44} at={land + 0.2} anchor="middle" w={420}>brand-new designs</Ink>
-      <Tag kind="schematic" x={850} y={746} at={land + 0.6}>schematic</Tag>
-      <Source x={906} y={796} at={land + 0.6}>Ren 2023</Source>
+      <Source x={825} y={746} at={land + 0.6}>Illustration · Ren 2023</Source>
     </svg>
   </AbsoluteFill></Clock.Provider>;
 };
@@ -458,8 +448,7 @@ const Wall = ({file = "fusion_s1/wall_td.mp4"}) => {
     <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
       <text x={960} y={610} textAnchor="middle" fontFamily={SERIF} fontSize={210} fill={RED}>{n.toLocaleString("en-US")}</text>
       {WALL_LINES.map(([at, line], i) => <text key={at} x={960} y={680} textAnchor="middle" fontFamily={SANS} fontSize={44} fontWeight={600} fill={INK} opacity={(at ? after(t, at) : 1) * (1 - after(t, WALL_LINES[i + 1]?.[0] ?? 1e9))}>{line}</text>)}
-      <Tag kind="schematic" x={850} y={746} at={-1}>schematic</Tag>
-      <Source x={906} y={796} at={-1}>Ren 2023</Source>
+      <Source x={825} y={746} at={-1}>Illustration · Ren 2023</Source>
       <rect x={48} y={50} width={592} height={62} fill={BONE} opacity={0.94 * after(t, 5.4)}/>
       <Ink x={64} y={92} size={36} at={5.6} w={640}>Tool: docking / virtual screening</Ink>
       <Ink x={820} y={1006} size={44} at={17.4} w={160}>8,918</Ink>
@@ -489,7 +478,7 @@ const Loop = ({file = "fusion_s1/loop_td_1.mp4"}) => {
         <text x={960} y={590} fontFamily={SANS} fontSize={36} fontWeight={600} fill={INK}>its makers say</text>
         <text x={960} y={636} fontFamily={SANS} fontSize={26} fontWeight={500} fill={SOFT}>Ivanenkov 2023</text>
       </g>
-      <Tag kind="schematic" x={1650} y={78} at={0.6}>schematic</Tag>
+      <Source x={96} y={1062} at={0.6}>Illustration</Source>
     </svg>
   </AbsoluteFill></Clock.Provider>;
 };
@@ -498,11 +487,11 @@ const Loop = ({file = "fusion_s1/loop_td_1.mp4"}) => {
 const W2 = ({file = "fusion_s1/w2_td_1.mp4"}) => <Clock.Provider value={useCurrentFrame() / 60}><AbsoluteFill style={{background: BONE}}>
   <OffthreadVideo src={staticFile(file)} muted/>
   <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
-    <Tag kind="predicted" x={96} y={1000} at={21.2} size={36}>AlphaFold DB v6 · predicted</Tag>
+    <Tag x={96} y={1000} at={21.2} size={36}>AlphaFold DB v6 · predicted</Tag>
   </svg>
 </AbsoluteFill></Clock.Provider>;
 
-/** S3 test boards: the beats that have to read in five seconds. Numbers are Feng 2011's; the grid's cells are drawn, so it carries schematic. */
+/** S3 test boards: the beats that have to read in five seconds. Numbers are Feng 2011's; the grid's cells are drawn, so its source line says Illustration. */
 const Tally = () => <g transform="translate(0 110)">
   {Array.from({length: 52}, (_, i) => <rect key={i} x={250 + (i % 26) * 54} y={i < 26 ? 300 : 450} width={26} height={120} rx={13} fill={i < 36 ? RED : "#D4D1C8"}/>)}
   <text x={250} y={210} fontFamily={SERIF} fontSize={150} fill={RED}>36 of 52</text>
@@ -510,7 +499,7 @@ const Tally = () => <g transform="translate(0 110)">
   <text x={250} y={650} fontFamily={SANS} fontSize={44} fontWeight={600} fill={INK}>liver tumours with more CDK20 than the tissue next to them</text>
   <text x={250} y={770} fontFamily={SANS} fontSize={44} fontWeight={600} fill={DARK}>→ later stage</text>
   <text x={700} y={770} fontFamily={SANS} fontSize={44} fontWeight={600} fill={DARK}>→ shorter survival</text>
-  <Source x={250} y={850} at={-1}>Feng 2011</Source>
+  <Source x={250} y={850} at={-1}>Illustration · Feng 2011</Source>
 </g>;
 
 const SEEN = new Set([3, 17, 26, 34]);
@@ -525,8 +514,7 @@ const Blanks = () => <g>
   <rect x={170 + 4 * 174} y={120 + 2 * 140} width={150} height={118} rx={14} fill={BONE} stroke={RED} strokeWidth={4}/>
   <text x={170 + 4 * 174 + 75} y={120 + 2 * 140 + 72} textAnchor="middle" fontFamily={SANS} fontSize={36} fontWeight={700} fill={RED}>CDK20</text>
   <text x={960} y={896} textAnchor="middle" fontFamily={SERIF} fontSize={72} fill={INK}>no one had measured its shape</text>
-  <Tag kind="schematic" x={850} y={960} at={-1}>schematic</Tag>
-  <Source x={906} y={1010} at={-1}>Ren 2023</Source>
+  <Source x={825} y={960} at={-1}>Illustration · Ren 2023</Source>
 </g>;
 
 /** 3-07: the paper never prints the 20 names, so only CDK20's row carries one. */
@@ -538,8 +526,7 @@ const List = () => <g>
       <text key={i} x={x} y={y + 4} fontFamily={SANS} fontSize={48} fontWeight={700} fill={RED}>CDK20</text>;
   })}
   <ellipse cx={250} cy={286} rx={124} ry={41} fill="none" stroke={RED} strokeWidth={4}/>
-  <Tag kind="schematic" x={170} y={960} at={-1}>schematic</Tag>
-  <Source x={170} y={1020} at={-1}>the other 19 names are not in the paper · Ren 2023</Source>
+  <Source x={170} y={1020} at={-1}>Illustration · the other 19 names are not in the paper · Ren 2023</Source>
 </g>;
 
 const S3Board = ({beat = "tally"}) => <Clock.Provider value={99}><AbsoluteFill style={{background: BONE}}>
