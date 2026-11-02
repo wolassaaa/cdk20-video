@@ -46,6 +46,7 @@
 - 11-02 清晨：S1 第三版（含药物）和 S2 第一版都出了，1080p60。TouchDesigner 接手 W2、4-07、W3、4-10 四场，4K 成片已出，节拍等歌到再对，见 `镜头设计_v3/td/TD_接手方案.md`。当晚的进度看 `镜头设计_v3/排片表.md`。
 - 11-02 晚：S1、S2 加了真 3D 台面镜头，字体按导演选的方案 C 换完，全片 4K 已出，`镜头设计_v3/styleframes/art/fusion/s1/inserts/S1S2_table_2.mp4`，不提交。英文字幕定为单独的 SRT 文件。
 - 11-02 深夜：S3 动效一条一条做，导演逐条把关。第 1 条锁和钥匙的审片片已出，`镜头设计_v3/styleframes/art/fusion/s1/inserts/S3_lock_key_1.mp4`，不提交，等导演看。
+- 11-03 清晨：S3 五条动效都有了，整段 129 秒接成 `镜头设计_v3/styleframes/art/fusion/s1/inserts/S3_all_1.mp4`（1080p）和 `S3_all_2.mp4`（4K），不提交，等导演看第 2–5 条。
 
 ### 下一步
 

@@ -9,6 +9,7 @@ g: 146.0-152.9 s. The camera falls to the map, three sample tubes are set down, 
 h: 224.5-235.4 s. The camera falls to the table, the six source cards are set down two by two, each pair lies back as the next arrives, the camera climbs back.
 k: 285.8-312.0 s. A lock and a key land beside the print; the camera slides off it, falls to the lock, then the key, and follows the key into its pocket; it climbs back, a second lock and key land, and the camera falls again to watch that key land on the wrong lock. Then the first key leaves and the camera dives into its empty pocket. The stills between come from the same frames, held.
 p: 313.2-330.0 s. The camera backs out of the real ATP pocket of the CDK20 model, which stands on the table and turns slowly.
+q: 330.0-412.0 s. Further along the same table: 52 sample tubes, 36 of them rise red; ten thin tubes run into one and reach the list of 20; the first road bulb fills; a grid of mostly empty cells, one holding CDK20 over an empty keyhole. Between its moves the frames are held.
 
 Times are seconds on the film's clock. Table units are the plates': 200 px to the unit, y flipped.
 Run: blender.exe -b -t 4 -P bl_inserts.py -- <a|w|b|c> <out dir> [first] [last] [samples] [size] [step]
@@ -29,8 +30,8 @@ import world as W      # noqa: E402
 P, gk = B.P, B.gk
 argv = sys.argv[sys.argv.index("--") + 1:]
 SHOT, OUT = argv[0], argv[1]
-START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=313.2)[SHOT]
-FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1008)[SHOT]
+START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=313.2, q=330.0)[SHOT]
+FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1008, q=4920)[SHOT]
 FIRST = int(argv[2]) if len(argv) > 2 else 0
 LAST = min(int(argv[3]), FRAMES - 1) if len(argv) > 3 else FRAMES - 1
 SAMPLES = int(argv[4]) if len(argv) > 4 else 64
@@ -61,7 +62,7 @@ def stage():
     nt = sc.world.node_tree
     pick = lambda kind: [n for n in nt.nodes if n.type == kind]
     dot, win = pick("VECT_MATH")[0], pick("MAP_RANGE")[1]
-    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9)[SHOT]
+    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9)[SHOT]
 
     def sky(x):
         dot.inputs[1].default_value = lerp((-0.22, 0.92, 0.32), P.WINDOW, x)
@@ -712,11 +713,11 @@ def road_front(t):
 class Bulb:
     """The liquid in a road bulb. Everything past the front is held on it, so the part-full bulb ends in a straight line, as the plates draw it."""
 
-    def __init__(self, x, mat):
-        n, m, r = 96, 48, RING * 0.93
+    def __init__(self, x, mat, y=None, z=None, r=RING * 0.93):
+        n, m, y, z = 96, 48, Y_ROAD if y is None else y, W.SURFACE_Z / K if z is None else z
         q, p = np.meshgrid(np.linspace(0, 2 * math.pi, n, endpoint=False), np.linspace(0, math.pi, m + 1))
         self.left = x - r
-        self.x, self.y, self.z = (x + r * np.sin(p) * np.cos(q)).ravel(), (Y_ROAD + r * np.sin(p) * np.sin(q)).ravel(), (W.SURFACE_Z / K + 0.85 * r * np.cos(p)).ravel()
+        self.x, self.y, self.z = (x + r * np.sin(p) * np.cos(q)).ravel(), (y + r * np.sin(p) * np.sin(q)).ravel(), (z + 0.85 * r * np.cos(p)).ravel()
         faces = [(i * n + j, i * n + (j + 1) % n, (i + 1) * n + (j + 1) % n, (i + 1) * n + j) for i in range(m) for j in range(n)]
         self.o = mesh("bulbfluid", np.stack((self.x, self.y, self.z), 1).tolist(), faces, mat)
         self.o.visible_diffuse = False
@@ -1115,7 +1116,7 @@ L_PROT = polar((79.0, -12.3, 3.3), (79.0, -2.7, 1.55), 50)
 
 
 def yaw_p(t):
-    x = min(1.0, (t - START) / (P_PLUG - START))
+    x = min(1.0, (t - P_BACK[0]) / (P_PLUG - P_BACK[0]))
     d = t - P_PLUG
     return math.radians(P_YAW[0] + (P_YAW[1] - P_YAW[0]) * x + (1.2 * math.exp(-d / 0.14) * math.sin(math.pi * 2 * d / 0.3) if d > 0 else 0.0))
 
@@ -1172,7 +1173,7 @@ def shot_p(sc, sky):
         p = cam[1] @ (at_mouth(t, out) - cam[0])
         k = view["mm"] / 36 / -p.z
         track.append([round(960 + 1920 * k * p.x, 1), round(540 - 1920 * k * p.y, 1)])
-    if FIRST == 0:
+    if FIRST == 0 and SHOT == "p":
         import json
         json.dump(track[::6], open(HERE + "frames/p_track.json", "w"))
 
@@ -1181,8 +1182,178 @@ def shot_p(sc, sky):
     return update
 
 
+# ---------------------------------------------------------------- the road from the suspect to the empty cell
+Q_RACK = (90.5, -2.7)                   # the 52 tubes, 13 to a row
+Q_STEP = 0.62
+Q_DEEP = 0.8
+Q_RISE, Q_EACH = 333.8, 0.1             # the first tube starts, and the gap to the next
+V_RACK = polar((90.5, -12.8, 15.4), (90.5, -2.1, 0.4), 50)
+V_IN = dict(V_RACK, d=V_RACK["d"] * 0.94)
+V_SIDE = polar((88.1, -16.0, 19.6), (88.1, -2.6, 0.4), 50)     # the print goes on the left
+TOP_R = dict(TOP, at=(104.0, -2.7, 0.0))
+TOP_L = dict(TOP, at=(113.6, -2.7, 0.0))
+TOP_C = dict(TOP, at=(127.0, -2.3, 0.0))
+TOP_Z = dict(TOP, at=(126.4, -2.3, 0.0), mm=1800.0)
+Q_FLOW, Q_RUN = 363.0, 2.4              # the ten streams start, and how long each takes to reach the join
+JOIN = 105.5
+Q_CARD = (110.9, 116.3, -1.0, -4.2)     # left, right, top, bottom
+Q_ROAD = -4.72
+Q_LIT = 379.6
+Q_GONE = 390.0                          # the model is in the frame before this and gone from the one at it; the page fades between them
+SEEN = (3, 17, 26, 34)
+
+
+def cell_at(i):
+    return TOP_C["at"][0] + (i % 9 - 4) * 0.95, TOP_C["at"][1] - (i // 9 - 2) * 0.84
+
+
+def box(l, r, top, bot, rad=0.06):
+    return B.round_poly([(l, top), (r, top), (r, bot), (l, bot)], rad)
+
+
+def q_view(t):
+    if t < 333.2:
+        return fall(L_PROT, V_RACK, smooth((t - 330.0) / 2.5))
+    if t < 350.4:
+        return fall(V_RACK, V_IN, smooth((t - 333.2) / 6.0))
+    if t < 358.6:
+        return fall(V_IN, V_SIDE, smooth((t - 350.4) / 1.5))
+    if t < 363.0:
+        return fall(V_SIDE, TOP_R, smooth((t - 358.6) / 2.0))
+    if t < 382.6:
+        return dict(TOP_R, at=lerp(TOP_R["at"], TOP_L["at"], smooth((t - 367.6) / 2.4)))
+    if t < 398.0:
+        return dict(TOP_L, at=lerp(TOP_L["at"], TOP_C["at"], smooth((t - 382.6) / 2.0)))
+    return fall(TOP_C, TOP_Z, smooth((t - 398.0) / 3.0))
+
+
+class Vial:
+    """A sample tube standing on the rack. The red is cut flat at a level that can rise."""
+
+    def __init__(self, xy, rise, glass, red, cap):
+        self.rise, self.was = rise, None
+        root = empty("vial")
+        root.location = (*xy, 0.05)
+        o = lathe([(0, 0.0), (0.16, 0.03), (0.2, 0.12), (0.2, 1.1), (0, 1.1)], glass, "vial", root, 48)
+        o.visible_shadow = False
+        lathe([(0, 1.1), (0.205, 1.1), (0.205, 1.22), (0, 1.22)], cap, "vial_cap", root, 48)
+        self.dose = lathe([(0, 0.015), (0.14, 0.04), (0.17, 0.12), (0.17, 1.0), (0, 1.0)], red, "vial_dose", root, 48)
+        self.dose.visible_diffuse = False
+        self.v = np.zeros(len(self.dose.data.vertices) * 3, np.float32)
+        self.dose.data.vertices.foreach_get("co", self.v)
+
+    def update(self, t):
+        level = 0.24 + 0.68 * (smooth((t - self.rise) / 0.5) if self.rise else 0.0)
+        if level != self.was:
+            v = self.v.copy()
+            v[2::3] = np.minimum(v[2::3], level)
+            self.dose.data.vertices.foreach_set("co", v)
+            self.dose.data.update()
+            self.was = level
+
+
+def shot_q(sc, sky):
+    shot_p(sc, sky)             # the model is where the last piece left it
+    c = sc.camera
+    model = bpy.data.objects["cdk20"]
+    cover = [model, bpy.data.objects["plug"]]
+    glass, red, cap = B.clear_glass(), B.fluid(P.RED, (0.9, 0.05, 0.03)), P.gloss(P.KLEIN, 0.25, 0.6)
+    tray = gk.surface((0.74, 0.725, 0.67), 0.7, 0.1)
+    x0, y0 = Q_RACK[0] - 6 * Q_STEP, Q_RACK[1] + 1.5 * Q_DEEP
+    B.extrude([box(x0 - 0.42, x0 + 12 * Q_STEP + 0.42, y0 + 0.42, y0 - 3 * Q_DEEP - 0.42, 0.14)], 0.05, 0.02, name="tray", mat=tray)
+    tubes = []
+    for i in range(52):     # the far row first: the count reads like lines of text
+        tubes.append(Vial((x0 + (i % 13) * Q_STEP, y0 - (i // 13) * Q_DEEP), Q_RISE + i * Q_EACH if i < 36 else 0, glass, red, cap))
+
+    # ten streams into one
+    wet = []
+    blue = B.fluid(P.KLEIN, (0.02, 0.08, 0.7))
+
+    def stream(pts, r, name):
+        g = pipe(pts, r, B.clear_glass(), name)
+        g.visible_shadow, g.visible_diffuse = False, False
+        w = pipe(pts, r * 0.62, blue, name + "_wet")
+        w.visible_diffuse = False
+        w.data.bevel_factor_mapping_end = "SPLINE"
+        w.data.bevel_factor_end = 0.0
+        wet.append(w)
+    for i in range(10):
+        y = -0.25 - i * 0.544
+        stream([((98.8 + (JOIN - 98.8) * u) * K, -(y + (-2.7 - y) * smooth(u * 1.1 - 0.1)) * K) for u in np.linspace(0, 1, 160)], 4.5, "stream")
+    stream([(JOIN * K - 8, 2.7 * K), (Q_CARD[0] * K + 6, 2.7 * K)], 9.0, "main")
+
+    # the list: 20 rows, and the paper names only one of them
+    l, r, top, bot = Q_CARD
+    B.extrude([box(l, r, top, bot)], 0.03, 0.01, name="card", mat=gk.surface((0.93, 0.925, 0.89), 0.6, 0.15))
+    bar = gk.surface((0.70, 0.685, 0.63), 0.7, 0.1)
+    for i in range(1, 20):
+        bx, by = l + 0.2 + (i // 10) * 2.6, top - 0.34 - (i % 10) * 0.28
+        B.extrude([box(bx, bx + 2.4, by + 0.05, by - 0.05, 0.05)], 0.008, 0.003, z=0.03, name="row", mat=bar)
+
+    # the road, small, with its first station about to fill
+    ink = gk.surface((0.012, 0.012, 0.014), 0.3)
+    bx = [111.6 + i * 0.92 for i in range(6)]
+    g = pipe([(bx[0] * K, -Q_ROAD * K), (bx[5] * K, -Q_ROAD * K)], 3.5, B.clear_glass(), "road")
+    g.visible_shadow, g.visible_diffuse = False, False
+    for x in bx:
+        B.bulb(x, Q_ROAD, W.SURFACE_Z / K, 0.2, ink, None, width=0.016)
+    first = Bulb(bx[0], red, Q_ROAD, None, 0.186)
+
+    # the grid: most cells empty, a few holding a shape someone has measured
+    rim, red_rim = gk.surface((0.60, 0.585, 0.54), 0.7, 0.1), gk.surface(P.RED, 0.5, 0.2)
+    shape = P.gloss(P.KLEIN, 0.34, 0.7)
+    for i in range(45):
+        cx, cy = cell_at(i)
+        outer, inner = box(cx - 0.435, cx + 0.435, cy + 0.35, cy - 0.35, 0.07), box(cx - 0.42, cx + 0.42, cy + 0.335, cy - 0.335, 0.06)
+        B.extrude([outer, inner[::-1]], 0.016, 0.004, name="cell", mat=red_rim if i == 22 else rim)
+        if i in SEEN:
+            B.extrude([B.blob(cx, cy, 0.17 + 0.01 * (i % 5), [(2, 0.08, i * 1.3), (3, 0.07, i * 2.1), (5, 0.03, i * 0.7)])], 0.2, 0.07, name="shape", mat=shape)
+
+    # the empty keyhole: the same outline as the first lock's pocket
+    cx, cy = cell_at(22)
+    hole = B.round_poly(B.key_blade(0, 0, c=0.035), 0.03)
+    hx, hy = [p[0] for p in hole], [p[1] for p in hole]
+    mx, my = (min(hx) + max(hx)) / 2, (min(hy) + max(hy)) / 2
+    outline = [((cx + (p[0] - mx) * 0.32) * K, -(cy + (p[1] - my) * 0.32) * K) for p in hole]
+    pipe(outline + outline[:1], 1.3, ink, "keyhole")
+
+    # the same model, small, with its pocket looking up
+    me = model.data
+    q = Quaternion((1, 0, 0), -(math.pi / 2 - P_UP))
+    pts = np.zeros(len(me.vertices) * 3)
+    me.vertices.foreach_get("co", pts)
+    pts = pts.reshape(-1, 3) @ np.array(q.to_matrix()).T
+    d = np.load(HERE + "frames/cdk20.npz")
+    q0 = Vector(d["mouth"].tolist()).rotation_difference(Vector((0, -math.cos(P_UP), math.sin(P_UP))))
+    pk = np.array(q @ (q0 @ Vector(d["pocket"].tolist()))) * P_S
+    s = 0.31 / float(np.linalg.norm(pts[:, :2] - pk[:2], axis=1).max())
+    small = bpy.data.objects.new("cdk20_small", me)
+    sc.collection.objects.link(small)
+    small.rotation_mode = "QUATERNION"
+    small.rotation_quaternion, small.scale = q, (s, s, s)
+    small.location = (cx - pk[0] * s, cy - pk[1] * s, -float(pts[:, 2].min()) * s + 0.01)
+
+    for f in range(FRAMES + 1):
+        t = START + f / FPS
+        v = q_view(t)
+        shoot(c, f, v, lerp((P_AT[0], P_AT[1] - 1.2, 1.6), v["at"], smooth((t - START) / 2.5)))
+
+    def update(t):
+        for o in cover:
+            o.hide_render = t > 333.0
+        small.hide_render = t >= Q_GONE
+        for tube_ in tubes:
+            tube_.update(t)
+        for i, w in enumerate(wet[:10]):
+            w.data.bevel_factor_end = smooth((t - Q_FLOW - 0.11 * i) / Q_RUN)
+        wet[10].data.bevel_factor_end = smooth((t - Q_FLOW - 2.8) / 3.8)
+        first.update(bx[0] - 0.2 + 0.4 * smooth((t - Q_LIT) / 1.0))
+        sky(smooth((q_view(t)["el"] - 0.75) / 0.7))
+    return update
+
+
 sc, sky = stage()
-update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p)[SHOT](sc, sky)
+update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q)[SHOT](sc, sky)
 sc.frame_start, sc.frame_end = 0, FRAMES
 for f in range(FIRST, LAST + 1, STEP):
     sc.frame_set(f)

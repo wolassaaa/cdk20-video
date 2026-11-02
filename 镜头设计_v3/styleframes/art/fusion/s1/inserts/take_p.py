@@ -22,5 +22,5 @@ def take(out, files):
 
 # frame 1426 is the held full view; 1572 on is the dive
 take(A, ["%s/frames/k/k_1426.png" % HERE] * 120 + ["%s/frames/k/k_%04d.png" % (HERE, min(n, 1643)) for n in range(1572, 1645)])
-take(B, ["%s/frames/p/p_0000.png" % HERE] * 192 + ["%s/frames/p/p_%04d.png" % (HERE, min(n, LAST_P)) for n in range(END_P)])    # the same clock as the other take
+take(B, ["%s/frames/p/p_0000.png" % HERE] * 192 + ["%s/frames/p/p_%04d.png" % (HERE, min(n, LAST_P)) for n in range(END_P + 30)])    # the same clock as the other take
 print("TAKE_OK")
