@@ -7,7 +7,8 @@ c: 43.35-48.52 s. The camera falls to the ten flat figures, they stand, seven dr
 f: 78.8-94.8 s. The camera falls to the road and rides along it as the red line fills the six bulbs; it climbs back and the line runs home.
 g: 146.0-152.9 s. The camera falls to the map, three sample tubes are set down, their red rises one after another, they lie down where the full view has them.
 h: 224.5-235.4 s. The camera falls to the table, the six source cards are set down two by two, each pair lies back as the next arrives, the camera climbs back.
-k: 285.8-312.0 s. A lock and a key land beside the print; the camera slides off it, falls to the lock, then the key, and follows the key into its pocket; it climbs back, a second lock and key land, and the camera falls again to watch that key stop at the wrong door. The stills between come from the same frames, held.
+k: 285.8-312.0 s. A lock and a key land beside the print; the camera slides off it, falls to the lock, then the key, and follows the key into its pocket; it climbs back, a second lock and key land, and the camera falls again to watch that key land on the wrong lock. Then the first key leaves and the camera dives into its empty pocket. The stills between come from the same frames, held.
+p: 313.2-330.0 s. The camera backs out of the real ATP pocket of the CDK20 model, which stands on the table and turns slowly.
 
 Times are seconds on the film's clock. Table units are the plates': 200 px to the unit, y flipped.
 Run: blender.exe -b -t 4 -P bl_inserts.py -- <a|w|b|c> <out dir> [first] [last] [samples] [size] [step]
@@ -28,8 +29,8 @@ import world as W      # noqa: E402
 P, gk = B.P, B.gk
 argv = sys.argv[sys.argv.index("--") + 1:]
 SHOT, OUT = argv[0], argv[1]
-START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8)[SHOT]
-FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1572)[SHOT]
+START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=313.2)[SHOT]
+FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1008)[SHOT]
 FIRST = int(argv[2]) if len(argv) > 2 else 0
 LAST = min(int(argv[3]), FRAMES - 1) if len(argv) > 3 else FRAMES - 1
 SAMPLES = int(argv[4]) if len(argv) > 4 else 64
@@ -60,7 +61,7 @@ def stage():
     nt = sc.world.node_tree
     pick = lambda kind: [n for n in nt.nodes if n.type == kind]
     dot, win = pick("VECT_MATH")[0], pick("MAP_RANGE")[1]
-    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9)[SHOT]
+    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9)[SHOT]
 
     def sky(x):
         dot.inputs[1].default_value = lerp((-0.22, 0.92, 0.32), P.WINDOW, x)
@@ -972,6 +973,8 @@ L_SEAT = polar((67.83, -6.0, 3.58), (69.0, -2.8, 0.5), 45)     # high enough to 
 L_DOOR = polar((73.7, -5.75, 3.68), (74.9, -2.55, 0.6), 45)
 K_PAN, K_FALL, K_CLIMB = (287.0, 1.0), (287.75, 1.5), (297.3, 1.4)
 K_FALL2, K_CLIMB2 = (305.7, 1.0), (308.3, 1.1)
+K_DIVE, K_LEAVE = (312.15, 1.05), (312.0, 0.5)
+L_DIVE = dict(at=(69.35, -2.78, 0.29), az=0.0, el=math.radians(89.9), d=0.3, mm=45.0)     # the floor of the first pocket fills the frame
 LAND_K = dict(lock_a=286.55, key_a=286.8, lock_b=305.1, key_b=305.35)
 FROM_K = dict(lock_a=(2.5, 0.6), key_a=(1.2, -2.6), lock_b=(1.6, 0.5), key_b=(0.8, -2.6))     # how far from where it lands each throw starts, off the edge of the view, in table units
 FLY_K = 0.55
@@ -1024,6 +1027,8 @@ def low_k(t):
 
 
 def k_view(t):
+    if t >= K_DIVE[0]:
+        return fall(TOP_K, L_DIVE, smooth((t - K_DIVE[0]) / K_DIVE[1]))
     if t < 300:
         pan = dict(TOP, at=lerp(TOP_K1["at"], TOP_K2["at"], smooth((t - K_PAN[0]) / K_PAN[1])))
         a, b = smooth((t - K_FALL[0]) / K_FALL[1]), smooth((t - K_CLIMB[0]) / K_CLIMB[1])
@@ -1033,6 +1038,8 @@ def k_view(t):
 
 
 def k_focus(t):
+    if t >= K_DIVE[0]:
+        return L_DIVE["at"]
     if t < 290.6:
         return (70.0, -2.7, 0.3)
     if t < 294.2:
@@ -1075,24 +1082,107 @@ def shot_k(sc, sky):
                                  ("lock_b", 0.0, 0.0, jolt(t, HIT_B, 0.03)),
                                  ("key_b", BACK_B + (OVER_LOCK_B[0] - BACK_B) * over_b, OVER_LOCK_B[1] * over_b, carried(t, RISE_B, HIT_B, 0.62, 0.3, 0.26, 0.2))):
             dx, dy, h = thrown(t, name)
+            if name == "key_a" and t > K_LEAVE[0]:
+                u = (t - K_LEAVE[0]) / K_LEAVE[1]         # straight up out of the pocket first, then off the edge of the view
+                dx, h = -3.0 * u * u / K_S, h + 40.0 * u * u / K_S
             things[name].location = (x + dx, y_at + dy, h + z)
             things[name].keyframe_insert("location", frame=f)
-        near = K_FALL[0] + K_FALL[1] / 2 < t < K_CLIMB[0] + K_CLIMB[1] / 2 or K_FALL2[0] + K_FALL2[1] / 2 < t < K_CLIMB2[0] + K_CLIMB2[1] / 2
+        near = K_FALL[0] + K_FALL[1] / 2 < t < K_CLIMB[0] + K_CLIMB[1] / 2 or K_FALL2[0] + K_FALL2[1] / 2 < t < K_CLIMB2[0] + K_CLIMB2[1] / 2 or t > K_DIVE[0] + K_DIVE[1] / 2
         shoot(c, f, k_view(t), k_focus(t) if near else TOP_K["at"])
 
     def update(t):
         for name, o in things.items():
             for part in o.children:
                 part.hide_render = t < LAND_K[name] - FLY_K
-        if t < 300:
+        if t >= K_DIVE[0]:
+            sky(1 - smooth((t - K_DIVE[0]) / K_DIVE[1]))
+        elif t < 300:
             sky(1 - smooth((t - K_FALL[0]) / K_FALL[1]) + smooth((t - K_CLIMB[0]) / K_CLIMB[1]))
         else:
             sky(1 - smooth((t - K_FALL2[0]) / K_FALL2[1]) + smooth((t - K_CLIMB2[0]) / K_CLIMB2[1]))
     return update
 
 
+# ---------------------------------------------------------------- the CDK20 model
+P_AT = (80.0, -2.7)                     # on the table, right of the locks
+P_S = 0.05                              # table units to the Angstrom
+P_UP = math.radians(16)                 # how far above the table the pocket looks
+P_YAW = (-20.0, 6.0)                    # degrees at the start and when it stops, the pocket stays in view
+P_BACK = (313.2, 2.2)
+P_PLUG, P_FLY = 326.6, 0.55             # the plug lands and the turning stops
+P_R = 0.2                               # radius of the plug
+L_PROT = polar((79.0, -12.3, 3.3), (79.0, -2.7, 1.55), 50)
+
+
+def yaw_p(t):
+    x = min(1.0, (t - START) / (P_PLUG - START))
+    d = t - P_PLUG
+    return math.radians(P_YAW[0] + (P_YAW[1] - P_YAW[0]) * x + (1.2 * math.exp(-d / 0.14) * math.sin(math.pi * 2 * d / 0.3) if d > 0 else 0.0))
+
+
+def shot_p(sc, sky):
+    c = lens(sc, 8.0)
+    d = np.load(HERE + "frames/cdk20.npz")
+    mouth, pocket = Vector(d["mouth"].tolist()), Vector(d["pocket"].tolist())
+    front = Vector((0, -math.cos(P_UP), math.sin(P_UP)))
+    q = mouth.rotation_difference(front)
+    R = np.array(q.to_matrix())
+    v = (d["verts"] @ R.T) * P_S
+    pk = np.array(q @ pocket) * P_S
+    fr = np.array(front)
+    off = (v - pk) - ((v - pk) @ fr)[:, None] * fr
+    out = float(((v[np.linalg.norm(off, axis=1) < 3.0 * P_S] - pk) @ fr).max())     # how far the surface is from the pocket's centre, along the way out
+    clear = lambda p: float(np.linalg.norm(v - p, axis=1).min())
+    rest = next(s for s in np.arange(0, 3, 0.005) if clear(pk + fr * s) >= P_R + 0.005)     # the plug stops where it touches the walls
+    # it comes in along the way out, curving in from high on the right; no step of the path may touch the surface
+    way = lambda u: pk + fr * (rest + 7.0 * u) + np.array([2.2, 0.0, 3.0]) * u * u
+    assert all(clear(way(u)) >= P_R for u in np.arange(0, 1.01, 0.02))
+    me = bpy.data.meshes.new("cdk20")
+    me.from_pydata(v.tolist(), [], d["quads"].tolist())
+    me.materials.append(P.gloss(P.KLEIN, 0.34, 0.7))
+    o = bpy.data.objects.new("cdk20", me)
+    sc.collection.objects.link(o)
+    B.smooth(o)
+    o.rotation_mode = "QUATERNION"
+    o.location = (*P_AT, -float(v[:, 2].min()))
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=P_R, segments=96, ring_count=48)
+    plug = bpy.context.object
+    plug.name = "plug"
+    bpy.ops.object.shade_smooth()
+    plug.data.materials.append(P.gloss(P.RED, 0.18, 0.7))
+    plug.parent = o
+
+    def at_mouth(t, s):
+        return Vector(o.location) + Quaternion((0, 0, 1), yaw_p(t)) @ (Vector(pk.tolist()) + front * s)
+    start = at_mouth(START, out)
+    w = Quaternion((0, 0, 1), yaw_p(START)) @ front
+    near_v = dict(at=tuple(start), az=math.atan2(w.x, -w.y), el=math.asin(w.z), d=0.45, mm=45.0)
+    track = []
+    for f in range(FRAMES + 1):
+        t = START + f / FPS
+        o.rotation_quaternion = Quaternion((0, 0, 1), yaw_p(t))
+        o.keyframe_insert("rotation_quaternion", frame=f)
+        u = max(0.0, 1 - (t - P_PLUG + P_FLY) / P_FLY)
+        plug.location = tuple(way(u))
+        plug.keyframe_insert("location", frame=f)
+        x = smooth((t - P_BACK[0]) / P_BACK[1])
+        view = fall(near_v, L_PROT, x)
+        shoot(c, f, view, lerp(start, (P_AT[0], P_AT[1] - 1.2, 1.6), x))
+        cam = (Vector(eye_of(view)), last_q[0].to_matrix().inverted())
+        p = cam[1] @ (at_mouth(t, out) - cam[0])
+        k = view["mm"] / 36 / -p.z
+        track.append([round(960 + 1920 * k * p.x, 1), round(540 - 1920 * k * p.y, 1)])
+    if FIRST == 0:
+        import json
+        json.dump(track[::6], open(HERE + "frames/p_track.json", "w"))
+
+    def update(t):
+        plug.hide_render = t < P_PLUG - P_FLY
+    return update
+
+
 sc, sky = stage()
-update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k)[SHOT](sc, sky)
+update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p)[SHOT](sc, sky)
 sc.frame_start, sc.frame_end = 0, FRAMES
 for f in range(FIRST, LAST + 1, STEP):
     sc.frame_set(f)
