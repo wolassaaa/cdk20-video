@@ -7,6 +7,7 @@ HERE="$ROOT/镜头设计_v3/styleframes/art/fusion/s1/inserts"
 FUSION="$ROOT/镜头设计_v3/remotion_public/fusion_s1"
 A="$ROOT/镜头设计_v2/tests/T4_remotion/src/v3/fusion"
 K="${3:-1}"
+REVIEW=$([ "$K" = 1 ] && echo true || echo false)   # the script line along the top is for the 1080p review only
 OUT="${2:-$HERE/S1S2_table_${K}.mp4}"
 PUB="$W/cut_public"
 FF="$ROOT/镜头设计_v2/tests/T4_remotion/node_modules/@remotion/compositor-win32-x64-msvc/ffmpeg.exe"
@@ -19,7 +20,7 @@ python "$HERE/patch_entry.py" || exit 1
 cd "$ROOT/镜头设计_v2/tests/T4_remotion" || exit 1
 npx remotion bundle src/v3/fusion/entry_cut.jsx --out-dir="$W/cut_bundle" --public-dir="$PUB" 2>&1 | tail -1
 part() {   # name, clip, first film frame of the clip, frames
-  npx remotion render "$W/cut_bundle" Cut "$W/part_$1.mp4" --props="{\"file\":\"fusion_s1/$2\",\"start\":$3}" --frames="$4" --scale="$K" --image-format=jpeg --jpeg-quality=95 --crf=14 --color-space=bt709 --concurrency="${JOBS:-4}" > "$W/cut_$1.log" 2>&1 || { tail -20 "$W/cut_$1.log"; mv "$A/entry_cut.jsx" "$W/"; echo CUT_FAILED remotion; exit 1; }
+  npx remotion render "$W/cut_bundle" Cut "$W/part_$1.mp4" --props="{\"review\":$REVIEW,\"file\":\"fusion_s1/$2\",\"start\":$3}" --frames="$4" --scale="$K" --image-format=jpeg --jpeg-quality=95 --crf=14 --color-space=bt709 --concurrency="${JOBS:-4}" > "$W/cut_$1.log" 2>&1 || { tail -20 "$W/cut_$1.log"; mv "$A/entry_cut.jsx" "$W/"; echo CUT_FAILED remotion; exit 1; }
 }
 part s1 "clip_${K}_0_141.mp4" 0 0-8459
 part s2 "clip_${K}_141_283.mp4" 8460 8460-16979
