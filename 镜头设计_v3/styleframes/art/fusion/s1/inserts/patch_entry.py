@@ -36,7 +36,7 @@ const Takes = ({f}) => {
       </g>}
       {k === "c" && <g opacity={1 - after(t, 47.25, 0.3)}>{/* top left, as in the other shots: the row never crosses it, and it leaves before the camera climbs */}
         <Ink x={96} y={300} size={170} at={46.2} font={SERIF} fill={RED} w={620} dur={0.6}>~3 in 10</Ink>
-        <Ink x={660} y={250} size={46} at={46.5}>5-year relative survival</Ink>
+        <Ink x={660} y={250} size={64} at={46.5} font={SERIF} w={760}>5-year relative survival</Ink>
         <Ink x={660} y={300} size={36} at={46.8} weight={500} fill={SOFT}>HK, 2010-2021</Ink>
       </g>}
       {(k === "p" || k === "c") && <Source x={96} y={1062} at={33.0}>Illustration · Ren 2023 · HKCaR 2022</Source>}

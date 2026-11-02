@@ -10,7 +10,7 @@ const FPS = TL.fps, N = TL.n, W = 1920, H = 1080;
 const INK = "#111113", SOFT = "#545458", RED = "#E8190F", DARK = "#9A0E08", KLEIN = "#002FA7", BONE = "#EDEBE4";
 const SERIF = "Instrument Serif", SANS = "Inter Tight";
 
-const faces = [new FontFace(SERIF, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Regular.ttf")})`), new FontFace(SANS, `url(${staticFile("fusion_s1/fonts/InterTight.ttf")})`, {weight: "100 900"})];
+const faces = [new FontFace(SERIF, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Regular.ttf")})`), new FontFace(SERIF, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Italic.ttf")})`, {style: "italic"}), new FontFace(SANS, `url(${staticFile("fusion_s1/fonts/InterTight.ttf")})`, {weight: "100 900"})];
 const fontHandle = delayRender("fonts");
 Promise.all(faces.map(f => f.load())).then(l => { l.forEach(f => document.fonts.add(f)); continueRender(fontHandle); });
 
@@ -33,6 +33,20 @@ const Ink = ({x, y, size, at, font = SANS, weight = 600, fill = INK, anchor = "s
   return <g>
     <clipPath id={id}><rect x={left} y={y - size * 1.2} width={width * p} height={size * 1.6}/></clipPath>
     <text x={x} y={y} fontFamily={font} fontSize={size} fontWeight={font === SERIF ? 400 : weight} fill={fill} textAnchor={anchor} clipPath={`url(#${id})`}>{children}</text>
+  </g>;
+};
+
+const ruler = document.createElement("canvas").getContext("2d");
+/** A serif line with its key words in italic; a red rule draws under them once the line has printed. parts is the words before, the key words, the words after. */
+const Keyed = ({x, y, size, at, dur = 1.2, fill = INK, w = 1000, parts: [a, key, b = ""]}) => {
+  const t = useT(), p = smooth((t - at - dur) / 0.5), k = size / 66;
+  ruler.font = `400 ${size}px "${SERIF}"`;
+  const x0 = x + ruler.measureText(a).width;
+  ruler.font = `italic 400 ${size}px "${SERIF}"`;
+  const len = ruler.measureText(key).width;
+  return <g>
+    <Ink x={x} y={y} size={size} at={at} font={SERIF} fill={fill} w={w} dur={dur}>{a}<tspan fontStyle="italic">{key}</tspan>{b}</Ink>
+    {p > 0 && <rect x={x0} y={y + 13 * k} width={len * p} height={5 * k} fill={RED}/>}
   </g>;
 };
 
@@ -112,12 +126,12 @@ const Liver = () => {
   return <g>
     <g opacity={1 - after(t, 24.7, 0.3)}>{/* clears the column before A's print lands, so print and figure never touch */}
       <Ink x={x + 96} y={460} size={250} at={8.9} font={SERIF} fill={RED} w={760} dur={0.7}>1,412</Ink>
-      <Ink x={x + 104} y={546} size={50} at={9.7} weight={500}>deaths in Hong Kong, 2022</Ink>
+      <Ink x={x + 104} y={546} size={70} at={9.7} font={SERIF} w={760}>deaths in Hong Kong, 2022</Ink>
       <Ink x={x + 340} y={668} size={36} at={11.0} weight={500} fill={SOFT}>about four a day</Ink>
-      <Ink x={x + 104} y={760} size={40} at={13.0}>Top 3 deadliest in HK</Ink>
+      <Ink x={x + 104} y={760} size={56} at={13.0} font={SERIF} w={760}>Top 3 deadliest in HK</Ink>
       <Ink x={x + 104} y={808} size={36} at={13.5} weight={500}>lung · colorectal · liver</Ink>
-      <Ink x={x + 104} y={884} size={40} at={20.0}>World: 6th most common</Ink>
-      <Ink x={x + 104} y={932} size={40} at={20.8}>3rd deadliest</Ink>
+      <Ink x={x + 104} y={878} size={56} at={20.0} font={SERIF} w={760}>World: 6th most common</Ink>
+      <Ink x={x + 104} y={938} size={56} at={20.8} font={SERIF} w={760}>3rd deadliest</Ink>
     </g>
     <Leader pts={[[x + 1262, 700], [x + 1176, 862], [x + 1146, 862]]} at={12.6} fill={RED}/>
     <Ink x={x + 1134} y={875} size={40} at={13.0} fill={DARK} anchor="end">portal vein</Ink>
@@ -150,7 +164,7 @@ const Drugs = () => {
     <Ink x={x + 1100} y={490} size={72} at={35.3} font={SERIF} anchor="middle" w={960} dur={0.9}>atezolizumab + bevacizumab</Ink>
     <Ink x={x + 1100} y={540} size={36} at={37.0} weight={500} fill={SOFT} anchor="middle" w={520}>first-line, advanced HCC</Ink>
     <Ink x={x + 96} y={730} size={170} at={46.2} font={SERIF} fill={RED} w={620} dur={0.6}>~3 in 10</Ink>
-    <Ink x={x + 660} y={680} size={46} at={46.8}>5-year relative survival</Ink>
+    <Ink x={x + 660} y={680} size={64} at={46.8} font={SERIF} w={760}>5-year relative survival</Ink>
     <Ink x={x + 660} y={730} size={36} at={47.2} weight={500} fill={SOFT}>HK, 2010-2021</Ink>
     <Source x={x + 96} y={1062} at={33.0}>Illustration · Ren 2023 · HKCaR 2022</Source>
   </g>;
@@ -162,8 +176,8 @@ const Ruler = () => {
   return <g>
     {yrs.map(i => { const a = clamp((t - 59.9 - i * (5.5 / 17)) / 0.25), big = i === 0 || i === 10 || i === 17;
       return a > 0 ? <line key={i} x1={x0 + i * st} y1={y + 18} x2={x0 + i * st} y2={y + 18 + (big ? 44 : 22) * a} stroke={INK} strokeWidth={big ? 3 : 2}/> : null; })}
-    <Ink x={x0 + 10 * st} y={y + 104} size={44} at={63.2} anchor="middle" w={100}>10</Ink>
-    <Ink x={x0 + 17 * st} y={y + 104} size={44} at={65.4} anchor="middle" w={100}>17</Ink>
+    <Ink x={x0 + 10 * st} y={y + 104} size={60} at={63.2} font={SERIF} anchor="middle" w={100}>10</Ink>
+    <Ink x={x0 + 17 * st} y={y + 104} size={60} at={65.4} font={SERIF} anchor="middle" w={100}>17</Ink>
     {t > 65.6 && <g>
       <line x1={x0 + 10 * st} y1={y + 136} x2={x0 + (10 + 7 * smooth((t - 65.6) / 0.6)) * st} y2={y + 136} stroke={RED} strokeWidth={8}/>
       <Ink x={x0 + 13.5 * st} y={y + 200} size={60} at={66.0} font={SERIF} fill={DARK} anchor="middle" w={400}>10-17 years</Ink>
@@ -183,7 +197,7 @@ const Cost = () => {
   return <g>
     <Ink x={x + 96} y={420} size={190} at={67.2} font={SERIF} fill={RED} w={1100} dur={0.8}>~US$2.8 billion</Ink>
     <Ink x={x + 96} y={784} size={84} at={73.0} font={SERIF} w={900} dur={0.7}>about 1 in 10</Ink>
-    <Ink x={x + 96} y={846} size={44} at={73.6}>of drugs tested in people reaches the market</Ink>
+    <Keyed x={x + 96} y={856} size={62} at={73.6} w={1100} parts={["of drugs tested in people ", "reaches the market"]}/>
     <Source x={x + 96} y={1062} at={67.2}>Illustration · Wang 2023</Source>
   </g>;
 };
@@ -225,16 +239,16 @@ const K3 = 1 / 3;    // the map scenes run at zoom 3, so sizes here are screen s
 const Stories = () => {
   return <g>
     <Ink x={14040} y={1416} size={84 * K3} at={143.2} font={SERIF} fill={RED} w={100}>2011</Ink>
-    <Ink x={14040} y={1440} size={40 * K3} at={144.2} w={260}>Chinese University of Hong Kong</Ink>
-    <Ink x={14040} y={1458} size={40 * K3} at={145.2} w={260}>Prince of Wales Hospital</Ink>
-    <Ink x={14040} y={1476} size={36 * K3} at={146.4} weight={500} fill={SOFT} w={260}>liver tumours from patients</Ink>
+    <Ink x={14040} y={1442} size={56 * K3} at={144.2} font={SERIF} w={260}>Chinese University of Hong Kong</Ink>
+    <Ink x={14040} y={1464} size={56 * K3} at={145.2} font={SERIF} w={260}>Prince of Wales Hospital</Ink>
+    <Ink x={14040} y={1486} size={36 * K3} at={146.4} weight={500} fill={SOFT} w={260}>liver tumours from patients</Ink>
     <Ink x={14040} y={1546} size={120 * K3} at={153.0} font={SERIF} fill={DARK} w={320} dur={0.8}>CCRK = CDK20</Ink>
     <Source x={14040} y={1712} at={146.4} until={158.4} size={27 * K3}>Illustration · Feng 2011</Source>
     <Ink x={14446} y={1476} size={84 * K3} at={158.8} font={SERIF} fill={RED} w={100}>2023</Ink>
-    <Ink x={14446} y={1500} size={40 * K3} at={160.6} w={240}>AI drug-discovery study</Ink>
-    <Ink x={14446} y={1518} size={36 * K3} at={162.2} weight={500} fill={SOFT} w={240}>the same protein</Ink>
-    <Ink x={14446} y={1536} size={40 * K3} at={166.0} w={240}>Insilico Medicine, Hong Kong</Ink>
-    <Ink x={14446} y={1554} size={36 * K3} at={168.6} weight={500} fill={SOFT} w={240}>Science Park</Ink>
+    <Ink x={14446} y={1502} size={56 * K3} at={160.6} font={SERIF} w={240}>AI drug-discovery study</Ink>
+    <Ink x={14446} y={1522} size={36 * K3} at={162.2} weight={500} fill={SOFT} w={240}>the same protein</Ink>
+    <Ink x={14446} y={1546} size={56 * K3} at={166.0} font={SERIF} w={240}>Insilico Medicine, Hong Kong</Ink>
+    <Ink x={14446} y={1566} size={36 * K3} at={168.6} weight={500} fill={SOFT} w={240}>Science Park</Ink>
     <Source x={14060} y={1622} at={166.0} until={172.8} size={27 * K3}>Ren 2023</Source>
   </g>;
 };
@@ -245,10 +259,11 @@ const Question = () => {
     <Ink x={x + 960} y={y + 210} size={44} at={175.8} fill={SOFT} weight={500}>Our research question</Ink>
     {["How can computer-aided", "methods help scientists", "find and assess potential", "cancer drug candidates?"].map((s, i) =>
       <Ink key={i} x={x + 960} y={y + 320 + i * 96} size={84} at={177.0 + i * 1.6} font={SERIF} w={900} dur={1.5}>{s}</Ink>)}
-    <Ink x={x + 960} y={y + 760} size={46} at={184.8} fill={DARK} w={900} dur={1.0}>A case study of CDK20 in liver cancer</Ink>
+    <Keyed x={x + 960} y={y + 760} size={64} at={184.8} fill={DARK} w={900} dur={1.0} parts={["A case study of ", "CDK20 in liver cancer"]}/>
   </g>;
 };
 
+const OBJ_KEY = ["computer-aided methods", "potential drug candidates"];
 const OBJ = [["Identify the major", "computer-aided methods", "used in cancer drug discovery"], ["Evaluate how these methods", "help scientists assess", "potential drug candidates"]];
 const Objectives = () => {
   const x = 17280, y = 1080, t = useT(), gone = 1 - smooth((t - 206.0) / 0.6), tags = smooth((t - 206.4) / 0.6);
@@ -257,7 +272,8 @@ const Objectives = () => {
     <g opacity={gone}>
       {OBJ.map((lines, i) => <g key={i}>
         <Ink x={x + 800} y={y + 340 + i * 380} size={170} at={190.6 + i * 0.5} font={SERIF} fill={RED} w={110}>{i + 1}</Ink>
-        {lines.map((s, j) => <Ink key={j} x={x + 930} y={y + 240 + i * 380 + j * 60} size={46} at={(i ? 199.6 : 193.4) + j * 1.4} w={760} dur={1.2}>{s}</Ink>)}
+        {lines.map((s, j) => { const line = {x: x + 930, y: y + 214 + i * 380 + j * 74, size: 66, at: (i ? 199.6 : 193.4) + j * 1.4, w: 860, dur: 1.2};
+          return OBJ_KEY.includes(s) ? <Keyed key={j} {...line} parts={["", s]}/> : <Ink key={j} {...line} font={SERIF}>{s}</Ink>; })}
       </g>)}
     </g>
     {tags > 0 && <g opacity={tags} fontFamily={SANS} fontSize={36} fontWeight={600} fill={INK}>
@@ -337,9 +353,9 @@ const Sources = () => {
     <Ink x={x + 1270} y={y + 160} size={40} at={213.8} weight={500} fill={SOFT} w={520}>no lab work of our own</Ink>
     {CARDS.map((c, i) => <Card key={i} c={c} i={i}/>)}
     <Paper/>
-    <Ink x={x + 760} y={y + 830} size={40} at={243.0} w={1000} dur={1.2}>What kind? How much did we read?</Ink>
-    <Ink x={x + 760} y={y + 884} size={40} at={246.4} w={1000} dur={0.9}>How strong is the evidence?</Ink>
-    <Ink x={x + 760} y={y + 938} size={40} at={249.4} w={1000} dur={1.6}>Who did the work? Controls and repeats?</Ink>
+    <Ink x={x + 760} y={y + 826} size={56} at={243.0} font={SERIF} w={1000} dur={1.2}>What kind? How much did we read?</Ink>
+    <Ink x={x + 760} y={y + 886} size={56} at={246.4} font={SERIF} w={1000} dur={0.9}>How strong is the evidence?</Ink>
+    <Ink x={x + 760} y={y + 946} size={56} at={249.4} font={SERIF} w={1000} dur={1.6}>Who did the work? Controls and repeats?</Ink>
     <Lens keys={[[242.4, 21300, 1200], [243.4, 20220, 1365], [245.0, 20760, 1365], [246.6, 20220, 1551], [248.2, 20760, 1551], [249.4, 21300, 1560]]}/>
     <Lens keys={[[248.6, 19800, 2300], [249.6, 20220, 1737], [251.2, 20760, 1737], [252.6, 21300, 1800]]}/>
     <Source x={x + 760} y={y + 996} at={225.0} until={254.4}>Ren 2023 · Feng 2011 · Jumper 2021 · Ivanenkov 2023 · Wang 2023 · Lengauer 2007 · Bender 2026</Source>
@@ -363,7 +379,7 @@ const Title = () => {
     <g transform={`translate(960 330) scale(${k})`} opacity={land}>
       <text x={0} y={0} textAnchor="middle" fontFamily={SERIF} fontSize={240} fill={INK}>WORTH TESTING<tspan fill={RED}>?</tspan></text>
     </g>
-    <text x={960} y={424} textAnchor="middle" fontFamily={SANS} fontWeight={500} fontSize={48} fill={INK} opacity={after(t, at + 0.7)}>How computers help find cancer drug candidates: the CDK20 story</text>
+    <text x={960} y={424} textAnchor="middle" fontFamily={SERIF} fontSize={66} fill={INK} opacity={after(t, at + 0.7)}>How computers help find cancer drug candidates: the CDK20 story</text>
     <text x={960} y={1002} textAnchor="middle" fontFamily={SANS} fontWeight={500} fontSize={30} fill={SOFT} opacity={after(t, at + 1.6)}>SCIE1007 · Section — · Group — · Member A · Member B · Member C · Member D</text>
   </g>;
 };
@@ -447,7 +463,7 @@ const Wall = ({file = "fusion_s1/wall_td.mp4"}) => {
     <OffthreadVideo src={staticFile(file)} muted/>
     <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
       <text x={960} y={610} textAnchor="middle" fontFamily={SERIF} fontSize={210} fill={RED}>{n.toLocaleString("en-US")}</text>
-      {WALL_LINES.map(([at, line], i) => <text key={at} x={960} y={680} textAnchor="middle" fontFamily={SANS} fontSize={44} fontWeight={600} fill={INK} opacity={(at ? after(t, at) : 1) * (1 - after(t, WALL_LINES[i + 1]?.[0] ?? 1e9))}>{line}</text>)}
+      {WALL_LINES.map(([at, line], i) => <text key={at} x={960} y={680} textAnchor="middle" fontFamily={SERIF} fontSize={62} fill={INK} opacity={(at ? after(t, at) : 1) * (1 - after(t, WALL_LINES[i + 1]?.[0] ?? 1e9))}>{line}</text>)}
       <Source x={825} y={746} at={-1}>Illustration · Ren 2023</Source>
       <rect x={48} y={50} width={592} height={62} fill={BONE} opacity={0.94 * after(t, 5.4)}/>
       <Ink x={64} y={92} size={36} at={5.6} w={640}>Tool: docking / virtual screening</Ink>
@@ -496,7 +512,7 @@ const Tally = () => <g transform="translate(0 110)">
   {Array.from({length: 52}, (_, i) => <rect key={i} x={250 + (i % 26) * 54} y={i < 26 ? 300 : 450} width={26} height={120} rx={13} fill={i < 36 ? RED : "#D4D1C8"}/>)}
   <text x={250} y={210} fontFamily={SERIF} fontSize={150} fill={RED}>36 of 52</text>
   <text x={810} y={210} fontFamily={SERIF} fontSize={150} fill={INK}>= 69%</text>
-  <text x={250} y={650} fontFamily={SANS} fontSize={44} fontWeight={600} fill={INK}>liver tumours with more CDK20 than the tissue next to them</text>
+  <text x={250} y={650} fontFamily={SERIF} fontSize={62} fill={INK}>liver tumours with more CDK20 than the tissue next to them</text>
   <text x={250} y={770} fontFamily={SANS} fontSize={44} fontWeight={600} fill={DARK}>→ later stage</text>
   <text x={700} y={770} fontFamily={SANS} fontSize={44} fontWeight={600} fill={DARK}>→ shorter survival</text>
   <Source x={250} y={850} at={-1}>Illustration · Feng 2011</Source>
