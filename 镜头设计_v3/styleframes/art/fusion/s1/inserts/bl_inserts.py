@@ -4,6 +4,9 @@ a: 32.1-35.4 s. An empty table; a foil strip lands; the camera falls to it; a ta
 w: 35.12-35.52 s. A vial falls past the lens, alone on a clear film. It hides the cut from a to b.
 b: 35.15-38.78 s. Two vials are set down; the camera climbs back and they lie down where the full view has them.
 c: 43.35-48.52 s. The camera falls to the ten flat figures, they stand, seven drain and lie down, three stay, the camera climbs back.
+f: 78.8-94.8 s. The camera falls to the road and rides along it as the red line fills the six bulbs; it climbs back and the line runs home.
+g: 146.0-152.9 s. The camera falls to the map, three sample tubes are set down, their red rises one after another, they lie down where the full view has them.
+h: 224.5-235.4 s. The camera falls to the table, the six source cards are set down two by two, each pair lies back as the next arrives, the camera climbs back.
 
 Times are seconds on the film's clock. Table units are the plates': 200 px to the unit, y flipped.
 Run: blender.exe -b -t 4 -P bl_inserts.py -- <a|w|b|c> <out dir> [first] [last] [samples] [size] [step]
@@ -24,8 +27,8 @@ import world as W      # noqa: E402
 P, gk = B.P, B.gk
 argv = sys.argv[sys.argv.index("--") + 1:]
 SHOT, OUT = argv[0], argv[1]
-START = dict(a=32.1, w=35.12, b=35.15, c=43.35)[SHOT]
-FRAMES = dict(a=198, w=24, b=218, c=310)[SHOT]
+START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5)[SHOT]
+FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654)[SHOT]
 FIRST = int(argv[2]) if len(argv) > 2 else 0
 LAST = min(int(argv[3]), FRAMES - 1) if len(argv) > 3 else FRAMES - 1
 SAMPLES = int(argv[4]) if len(argv) > 4 else 64
@@ -56,7 +59,7 @@ def stage():
     nt = sc.world.node_tree
     pick = lambda kind: [n for n in nt.nodes if n.type == kind]
     dot, win = pick("VECT_MATH")[0], pick("MAP_RANGE")[1]
-    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6)[SHOT]
+    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0)[SHOT]
 
     def sky(x):
         dot.inputs[1].default_value = lerp((-0.22, 0.92, 0.32), P.WINDOW, x)
@@ -153,15 +156,17 @@ def empty(name):
     return o
 
 
-def pipe(pts, r_px, mat, name):
+def pipe(pts, r_px, mat, name, taper=None):
     cu = bpy.data.curves.new(name, "CURVE")
     cu.dimensions = "3D"
     cu.bevel_depth, cu.bevel_resolution = r_px / K, 8
     cu.use_fill_caps = True
     s = cu.splines.new("POLY")
     s.points.add(len(pts) - 1)
-    for q, xy in zip(s.points, pts):
+    for i, (q, xy) in enumerate(zip(s.points, pts)):
         q.co = (xy[0] / K, -xy[1] / K, W.SURFACE_Z / K, 1)
+        if taper:
+            q.radius = taper[i]
     o = bpy.data.objects.new(name, cu)
     bpy.context.scene.collection.objects.link(o)
     cu.materials.append(mat)
@@ -173,7 +178,7 @@ def tube(front):
     path = W.PATHS["main_a"]
     glass = pipe(path, W.TUBE_R, B.clear_glass(), "glass")
     glass.visible_shadow, glass.visible_diffuse = False, False
-    wet = pipe(path[:int(W.s_at("main_a", (front, 1010)) / 4) + 1], W.FLUID_R, B.fluid(P.RED, (0.9, 0.05, 0.03)), "liquid")
+    wet = pipe(path if front is None else path[:int(W.s_at("main_a", (front, 1010)) / 4) + 1], W.FLUID_R, B.fluid(P.RED, (0.9, 0.05, 0.03)), "liquid")
     wet.visible_diffuse = False
 
 
@@ -684,8 +689,272 @@ def shot_c(sc, sky):
     return update
 
 
+# ---------------------------------------------------------------- the road
+RING = 0.31
+TOP_F = dict(TOP, at=(62.4, -2.7, 0.0))
+XS = [x / K for x, _ in W.STATIONS]
+Y_ROAD = -W.ROAD_Y / K
+END_F = (W.STATIONS[5][0] + 90) / K
+STEPS = [80.7, 81.9, 84.3, 85.6, 88.1, 91.6]    # the film's six words; each bulb is full as its word lands
+F_FALL, F_CLIMB, F_BACK = (78.9, 1.3), (92.2, 1.3), (93.1, 1.4)
+
+
+def road_front(t):
+    """Table x of the liquid's front. It runs from bulb to bulb, and at the end it runs back into the first."""
+    x = XS[0] + RING
+    for i in range(1, 6):
+        x += (XS[i] + RING - x) * smooth((t - STEPS[i] + 0.75) / 0.75)
+    return x + (XS[0] + RING - x) * smooth((t - F_BACK[0]) / F_BACK[1])
+
+
+class Bulb:
+    """The liquid in a road bulb. Everything past the front is held on it, so the part-full bulb ends in a straight line, as the plates draw it."""
+
+    def __init__(self, x, mat):
+        n, m, r = 96, 48, RING * 0.93
+        q, p = np.meshgrid(np.linspace(0, 2 * math.pi, n, endpoint=False), np.linspace(0, math.pi, m + 1))
+        self.left = x - r
+        self.x, self.y, self.z = (x + r * np.sin(p) * np.cos(q)).ravel(), (Y_ROAD + r * np.sin(p) * np.sin(q)).ravel(), (W.SURFACE_Z / K + 0.85 * r * np.cos(p)).ravel()
+        faces = [(i * n + j, i * n + (j + 1) % n, (i + 1) * n + (j + 1) % n, (i + 1) * n + j) for i in range(m) for j in range(n)]
+        self.o = mesh("bulbfluid", np.stack((self.x, self.y, self.z), 1).tolist(), faces, mat)
+        self.o.visible_diffuse = False
+
+    def update(self, front):
+        self.o.hide_render = front <= self.left
+        self.o.data.vertices.foreach_set("co", np.stack((np.minimum(self.x, front), self.y, self.z), 1).astype(np.float32).ravel())
+        self.o.data.update()
+
+
+def shot_f(sc, sky):
+    c = lens(sc, 1.0)
+    tube(None)
+    red, ink = B.fluid(P.RED, (0.9, 0.05, 0.03)), gk.surface((0.012, 0.012, 0.014), 0.3)
+    for pts in (W.PATHS["main_b"], W.ROAD_TUBE):
+        g = pipe(pts, W.TUBE_R, B.clear_glass(), "glass")
+        g.visible_shadow, g.visible_diffuse = False, False
+    wet = pipe(W.ROAD_TUBE, W.FLUID_R, red, "road")
+    wet.visible_diffuse = False
+    wet.data.bevel_factor_mapping_end = "SPLINE"
+    bulbs = []
+    for i, x in enumerate(XS):
+        B.bulb(x, Y_ROAD, W.SURFACE_Z / K, RING, ink, None if i else red, width=0.022)
+        if i:
+            bulbs.append(Bulb(x, red))
+    ts = START + np.arange(FRAMES + 1) / FPS
+    track = np.interp(ts, STEPS, XS)
+    box = np.ones(91) / 91
+    for _ in range(2):
+        track = np.convolve(np.pad(track, 45, "edge"), box, "valid")        # steps become one long glide
+    for f, t in enumerate(ts):
+        x = float(track[f])
+        v = polar((x - 2.3, -6.3, 0.42), (x + 0.5, Y_ROAD, 0.40), 50)
+        a, b = smooth((t - F_FALL[0]) / F_FALL[1]), smooth((t - F_CLIMB[0]) / F_CLIMB[1])
+        shoot(c, f, climb(v, TOP_F, b) if b > 0 else fall(TOP_F, v, a), (x, Y_ROAD, 0.1) if 0.5 < a and b < 0.5 else TOP_F["at"])
+
+    def update(t):
+        x = road_front(t)
+        wet.data.bevel_factor_end = (x - XS[0]) / (END_F - XS[0])
+        for b in bulbs:
+            b.update(x)
+        sky(1 - smooth((t - F_FALL[0]) / F_FALL[1]) + smooth((t - F_CLIMB[0]) / F_CLIMB[1]))
+    return update
+
+
+# ---------------------------------------------------------------- the sample tubes on the map
+TOP_G = dict(TOP, at=(14340 / K, -1540 / K, 0.0), mm=1800.0)
+TK = 0.22 / K                             # the plates' tube profile, in table units
+BASE_G = [(x / K, -(y + 190 * 0.22) / K) for x, y in W.SAMPLES]    # the foot of each tube: lying down from here it lands on its spot in the full view
+G_FALL, G_CLIMB = (146.0, 1.1), (151.6, 1.1)
+SET_G = [147.25, 147.6, 147.95]
+RAISE_G = [149.6, 150.2, 150.8]           # "one protein kept showing up raised": the red climbs to the level the full view has
+DOWN_G = [151.75 + i * 0.06 for i in range(3)]
+
+
+def map_table():
+    """The map tile of the plates: the raised land and the thinning red line."""
+    land = gk.surface((0.74, 0.725, 0.67), 0.7, 0.1)
+    for r in W.HK["rings_simple"]:
+        pts = [W.m2w(*p) for p in r["p"]]
+        xs, ys = [p[0] for p in pts], [p[1] for p in pts]
+        if max(xs) < W.MAP[0] or min(xs) > W.MAP[2] or max(ys) < W.MAP[1] or min(ys) > W.MAP[3]:
+            continue
+        poly = [(x / K, -y / K) for x, y in pts]
+        if poly[0] == poly[-1]:
+            poly = poly[:-1]
+        B.extrude([poly], 0.02, 0.006, name="land", mat=land).select_set(False)
+    pts, n = W.PATHS["map"] + W.PATHS["exit"][1:], len(W.PATHS["map"])
+    k = [min(1, max(0.3, 1 - 0.7 * i / (n * 0.45)) + max(0, i - len(pts) + 90) / 90 * 0.7) for i in range(len(pts))]
+    g = pipe(pts, W.TUBE_R, B.clear_glass(), "glass", taper=k)
+    g.visible_shadow, g.visible_diffuse = False, False
+    wet = pipe(pts, W.FLUID_R, B.fluid(P.RED, (0.9, 0.05, 0.03)), "liquid", taper=k)
+    wet.visible_diffuse = False
+    return g, wet
+
+
+class Sample:
+    """A sample tube, hinged at its foot. It is set down upright and later lies back on the map like a lid. The red is cut flat at a level that can rise."""
+
+    def __init__(self, xy, land, rise, down, glass, red, cap):
+        self.xy, self.land, self.down, self.rise = xy, land, down, rise
+        z = lambda a: (a + 190) * TK
+        self.root = empty("sample")
+        o = lathe([(r * TK, z(a)) for r, a in [(0, -190), (34, -176), (42, -150), (42, 150), (0, 150)]], glass, "sample", self.root)
+        o.visible_shadow = False
+        lathe([(r * TK, z(a)) for r, a in [(0, 150), (46, 150), (46, 205), (0, 205)]], cap, "sample_cap", self.root)
+        self.dose = lathe([(r * TK, z(a)) for r, a in [(0, -178), (30, -166), (36, -146), (36, 30), (0, 30)]], red, "sample_dose", self.root)
+        self.dose.visible_diffuse = False
+        self.parts = list(self.root.children)
+        n = len(self.dose.data.vertices)
+        self.v = np.zeros(n * 3, np.float32)
+        self.dose.data.vertices.foreach_get("co", self.v)
+        self.top, self.low = z(30), z(-105)
+        for f in range(FRAMES + 1):
+            t = START + f / FPS
+            s, d = min(1.0, max(0.0, (t - land + 0.6) / 0.6)), t - land
+            hop = 0.012 * math.exp(-d / 0.09) * abs(math.sin(2 * math.pi * 4.5 * d)) if d > 0 else 0.0
+            back = math.pi / 2 * min(1.0, max(0.0, (t - down) / 0.42)) ** 2
+            self.root.location = (xy[0], xy[1], 2.2 * (1 - s) * (1 - 0.6 * s) + hop + 10 / K * math.sin(back))
+            self.root.rotation_quaternion = Quaternion((1, 0, 0), -back)
+            self.root.keyframe_insert("location", frame=f)
+            self.root.keyframe_insert("rotation_quaternion", frame=f)
+
+    def update(self, t):
+        for o in self.parts:
+            o.hide_render = t < self.land - 0.6     # the overhead view must not see it waiting above the table
+        level = self.low + (self.top - self.low) * smooth((t - self.rise) / 0.85)
+        v = self.v.copy()
+        v[2::3] = np.minimum(v[2::3], level)
+        self.dose.data.vertices.foreach_set("co", v)
+        self.dose.data.update()
+
+
+def g_view(t):
+    x = smooth((t - 147.0) / 4.8)
+    cx, cy = BASE_G[1]
+    return polar(lerp((cx - 1.17, cy - 1.11, 0.10), (cx - 1.08, cy - 1.03, 0.09), x), lerp((cx - 0.17, cy + 0.17, 0.235), (cx - 0.17, cy + 0.17, 0.225), x), 50)
+
+
+def shot_g(sc, sky):
+    c = lens(sc, 2.8)
+    road = map_table()
+    glass, red, cap = B.clear_glass(), B.fluid(P.RED, (0.9, 0.05, 0.03)), P.gloss(P.KLEIN, 0.25, 0.6)
+    tubes = [Sample(xy, *when, glass, red, cap) for xy, *when in zip(BASE_G, SET_G, RAISE_G, DOWN_G)]
+    focus = (BASE_G[1][0], BASE_G[1][1], 0.2)
+    for f in range(FRAMES + 1):
+        t = START + f / FPS
+        a, b = smooth((t - G_FALL[0]) / G_FALL[1]), smooth((t - G_CLIMB[0]) / G_CLIMB[1])
+        v = climb(g_view(t), TOP_G, b) if b > 0 else fall(TOP_G, g_view(t), a)
+        shoot(c, f, v, focus if 0.5 < a and b < 0.5 else TOP_G["at"])
+
+    def update(t):
+        for s in tubes:
+            s.update(t)
+        for o in road:
+            o.data.bevel_factor_start = 0.3 if 146.77 < t < 146.84 else 0.0     # the falling camera crosses the road's first stretch, out of frame; without it nothing red flashes past the lens
+        sky(1 - smooth((t - G_FALL[0]) / G_FALL[1]) + smooth((t - G_CLIMB[0]) / G_CLIMB[1]))
+    return update
+
+
+# ---------------------------------------------------------------- the source cards
+TOP_H = dict(TOP, at=(20160 / K, -1620 / K, 0.0))
+LAND_H = [225.4, 227.0, 227.75, 229.6, 231.2, 233.2]    # as the voice names each source
+BACK_H = [227.55, 227.62, 231.0, 231.07, 234.35, 234.42]
+H_FALL, H_CLIMB = (224.5, 1.1), (234.2, 1.1)
+ROWS_T = (225.6, 228.0, 231.4)
+PAGE = (19296, 1190, 600, 850)
+
+
+def leaf(name, w, h, image):
+    """A sheet of card lying face up, its near edge on the x axis. The picture is on the top face; every other face takes the paper's plain margin."""
+    t = 0.02
+    m, nt, out = gk._mat(name)
+    b = nt.nodes.new("ShaderNodeBsdfPrincipled")
+    b.inputs["Roughness"].default_value = 0.7
+    b.inputs["Specular IOR Level"].default_value = 0.1
+    tex = nt.nodes.new("ShaderNodeTexImage")
+    tex.image = bpy.data.images.load(image)
+    tex.interpolation = "Cubic"
+    nt.links.new(tex.outputs["Color"], b.inputs["Base Color"])
+    glow = nt.nodes.new("ShaderNodeEmission")     # an upright card faces away from the sun; this keeps it paper-pale
+    glow.name = "glow"
+    glow.inputs["Strength"].default_value = 0.0
+    nt.links.new(tex.outputs["Color"], glow.inputs["Color"])
+    add = nt.nodes.new("ShaderNodeAddShader")
+    nt.links.new(b.outputs[0], add.inputs[0])
+    nt.links.new(glow.outputs[0], add.inputs[1])
+    nt.links.new(add.outputs[0], out.inputs["Surface"])
+    v = [(0, 0, 0), (w, 0, 0), (w, h, 0), (0, h, 0), (0, 0, t), (w, 0, t), (w, h, t), (0, h, t)]
+    o = mesh(name, v, [(4, 5, 6, 7), (0, 3, 2, 1), (0, 1, 5, 4), (1, 2, 6, 5), (2, 3, 7, 6), (3, 0, 4, 7)], m)
+    for p in o.data.polygons:
+        p.use_smooth = False
+    uv = o.data.uv_layers.new(name="uv").data
+    for i in range(len(uv)):
+        uv[i].uv = (0.985, 0.5)
+    for i, q in enumerate(((0, 0), (1, 0), (1, 1), (0, 1))):
+        uv[i].uv = q
+    return o
+
+
+class Cards:
+    """Six cards, each set down on its near edge at its spot in the grid. Each lies back like a lid onto that spot."""
+
+    def __init__(self):
+        self.o = []
+        for i in range(6):
+            col, row = i % 2, i // 2
+            o = leaf("card%d" % i, 520 / K, 170 / K, HERE + "frames/cards/card_%d.png" % i)
+            o.location = ((19960 + col * 540) / K, -(1280 + row * 186 + 170) / K, 0)
+            self.o.append(o)
+        for f in range(FRAMES + 1):
+            t = START + f / FPS
+            for o, land, back in zip(self.o, LAND_H, BACK_H):
+                o.rotation_euler = (self.angle(t, land, back), 0, 0)
+                o.location.z = 3.4 * (1 - min(1.0, max(0.0, (t - land + 0.6) / 0.6))) * (1 - 0.6 * min(1.0, max(0.0, (t - land + 0.6) / 0.6)))
+                o.keyframe_insert("rotation_euler", frame=f)
+                o.keyframe_insert("location", frame=f)
+
+    @staticmethod
+    def angle(t, land, back):
+        d = t - land
+        rock = math.radians(2.2) * math.exp(-d / 0.2) * math.cos(2 * math.pi * 3.0 * d) if d > 0 else 0.0
+        x = min(1.0, max(0.0, (t - back) / 0.46))
+        return (math.pi / 2 + rock) * (1 - x * x)
+
+    def update(self, t):
+        for o, land, back in zip(self.o, LAND_H, BACK_H):
+            o.hide_render = t < land - 0.6
+            o.data.materials[0].node_tree.nodes["glow"].inputs["Strength"].default_value = 0.27 * max(0.0, math.sin(self.angle(t, land, back)))
+
+
+def shot_h(sc, sky):
+    c = lens(sc, 2.0)
+    path = W.PATHS["s2"]
+    g = pipe(path, W.TUBE_R, B.clear_glass(), "glass")
+    g.visible_shadow, g.visible_diffuse = False, False
+    pipe(path[:int(W.s_at("s2", (19800, 2060)) / 4) + 1], W.FLUID_R, B.fluid(P.RED, (0.9, 0.05, 0.03)), "liquid").visible_diffuse = False
+    paper = leaf("paper", PAGE[2] / K, PAGE[3] / K, HERE + "frames/cards/paper.png")
+    paper.location = (PAGE[0] / K, -(PAGE[1] + PAGE[3]) / K, 0)
+    cards = Cards()
+    ts = START + np.arange(FRAMES + 1) / FPS
+    track = np.interp(ts, ROWS_T, [-(1450 + i * 186) / K for i in range(3)])
+    box = np.ones(61) / 61
+    for _ in range(2):
+        track = np.convolve(np.pad(track, 30, "edge"), box, "valid")
+    x = 20490 / K
+    for f, t in enumerate(ts):
+        y = float(track[f])
+        v = polar((x - 3.7, y - 5.6, 0.50), (x - 0.35, y, 0.80), 40)
+        a, b = smooth((t - H_FALL[0]) / H_FALL[1]), smooth((t - H_CLIMB[0]) / H_CLIMB[1])
+        shoot(c, f, climb(v, TOP_H, b) if b > 0 else fall(TOP_H, v, a), (x, y, 0.4) if 0.5 < a and b < 0.5 else TOP_H["at"])
+
+    def update(t):
+        cards.update(t)
+        sky(1 - smooth((t - H_FALL[0]) / H_FALL[1]) + smooth((t - H_CLIMB[0]) / H_CLIMB[1]))
+    return update
+
+
 sc, sky = stage()
-update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c)[SHOT](sc, sky)
+update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h)[SHOT](sc, sky)
 sc.frame_start, sc.frame_end = 0, FRAMES
 for f in range(FIRST, LAST + 1, STEP):
     sc.frame_set(f)
