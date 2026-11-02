@@ -968,17 +968,20 @@ TOP_K1 = dict(TOP, at=on_k(-5.6))       # the first lock beside the print
 TOP_K2 = dict(TOP, at=on_k(-0.9))
 L_LOCK = polar((66.9, -7.2, 1.9), (70.0, -2.7, 0.25), 45)
 L_KEY = polar((64.4, -4.4, 0.7), (68.3, -2.78, 0.28), 40)
-L_SEAT = polar((66.6, -4.2, 0.85), (69.2, -2.75, 0.35), 40)
-L_DOOR = polar(on_k(2.2, -3.6, 2.7), on_k(3.0, 0.0, 0.45), 50)
+L_SEAT = polar((67.83, -6.0, 3.58), (69.0, -2.8, 0.5), 45)     # high enough to look down on the pocket with the key above it
+L_DOOR = polar((73.7, -5.75, 3.68), (74.9, -2.55, 0.6), 45)
 K_PAN, K_FALL, K_CLIMB = (287.0, 1.0), (287.75, 1.5), (297.3, 1.4)
 K_FALL2, K_CLIMB2 = (305.7, 1.0), (308.3, 1.1)
 LAND_K = dict(lock_a=286.55, key_a=286.8, lock_b=305.1, key_b=305.35)
 FROM_K = dict(lock_a=(2.5, 0.6), key_a=(1.2, -2.6), lock_b=(1.6, 0.5), key_b=(0.8, -2.6))     # how far from where it lands each throw starts, off the edge of the view, in table units
 FLY_K = 0.55
-LIFT_A, SLIDE_A = (294.2, 0.7), (294.6, 2.2)
-LIFT_B, SLIDE_B = (306.7, 0.5), (306.9, 0.9)
+RISE_A, OVER_A, HIT_A = (294.6, 0.7), (294.95, 1.25), 296.8
+RISE_B, OVER_B, HIT_B = (306.6, 0.5), (306.75, 0.7), 307.85
+FALL_T = 0.3                            # the last stretch of a key, straight down
+CARRY = 1.05                            # height a key crosses a lock at, clear of its top at 0.62
 GAP_A = 1.75                            # how far back of its seat the first key lies, in F3's units
-BACK_B, HIT_B = -0.30, 0.33             # where the second key lies and where its tip meets the wrong lock
+BACK_B = -0.30                          # where the second key lies
+OVER_LOCK_B = (2.3, 0.3)                # how far it moves to lie over the second pocket, in F3's units
 
 
 def flight(t, land):
@@ -1002,17 +1005,22 @@ def thrown(t, name):
 
 def jolt(t, at, size):
     d = t - at
-    return size * math.exp(-d / 0.12) * math.cos(2 * math.pi * 5 * d) if d > 0 else 0.0
+    return size * math.exp(-d / 0.12) * abs(math.sin(2 * math.pi * 5 * d)) if d > 0 else 0.0
 
 
-def key_b_x(t):
-    x = min(1.0, max(0.0, (t - SLIDE_B[0]) / SLIDE_B[1]))
-    d = t - SLIDE_B[0] - SLIDE_B[1]
-    return BACK_B + (HIT_B - BACK_B) * x * x - (0.1 * (1 - math.exp(-d / 0.09)) if d > 0 else 0.0)
+def carried(t, rise, hit, rest, ring, beat, fade):
+    """Height of a key lifted off the table, carried over a lock and dropped. The pockets are open at the top, and the teeth only match them at the seat, so sliding in from the side would pass through the lock."""
+    if t < hit - FALL_T:
+        return CARRY * smooth((t - rise[0]) / rise[1])
+    if t < hit:
+        x = (t - hit + FALL_T) / FALL_T
+        return CARRY + (rest - CARRY) * x * x
+    d = t - hit
+    return rest + ring * abs(math.sin(math.pi * d / beat)) * math.exp(-d / fade)
 
 
 def low_k(t):
-    return fall(fall(L_LOCK, L_KEY, smooth((t - 290.6) / 2.0)), L_SEAT, smooth((t - 294.2) / 2.8))
+    return fall(fall(L_LOCK, L_KEY, smooth((t - 290.6) / 2.0)), L_SEAT, smooth((t - 293.9) / 2.4))
 
 
 def k_view(t):
@@ -1030,8 +1038,8 @@ def k_focus(t):
     if t < 294.2:
         return lerp((70.0, -2.7, 0.3), (67.6, -2.78, 0.2), smooth((t - 290.6) / 2.0))
     if t < 300:
-        return lerp((67.6, -2.78, 0.2), (68.8, -2.75, 0.35), smooth((t - 294.2) / 2.8))
-    return on_k(3.0, -0.1, 0.45)
+        return lerp((67.6, -2.78, 0.2), (69.0, -2.8, 0.55), smooth((t - 293.9) / 2.4))
+    return (74.9, -2.55, 0.6)
 
 
 def shot_k(sc, sky):
@@ -1054,19 +1062,20 @@ def shot_k(sc, sky):
         return held(parts)
     lock_a = held([B.lock(-2.42, -0.02, 1.62, [(2, 0.06, 0.8), (3, 0.05, 2.1), (5, 0.022, 0.4)], B.round_poly(B.key_blade(x_a, y, c=0.035), 0.03), P.gloss(P.KLEIN, 0.2, 0.7))])
     key_a = key_at(x_a)
-    # the other lock's pocket sits higher up than the key's blade, so the tip meets a wall
+    # the other lock's pocket has its notches on the far side, so with the blade over it the teeth land on the top of the lock
     other = [(x, 2 * y + 0.3 - v) for x, v in B.key_blade(3.3, y, c=0.035, teeth=((0.34, 0.30), (0.78, 0.17)), blade=1.2, t=0.26)]
     lock_b = held([B.lock(4.3, -0.05, 1.3, [(2, 0.05, 2.4), (3, 0.075, 0.5), (4, 0.03, 1.2)], B.round_poly(other, 0.03), P.gloss((0.008, 0.03, 0.62), 0.2, 0.7))])
     key_b = key_at(1.0)
     things = dict(lock_a=lock_a, key_a=key_a, lock_b=lock_b, key_b=key_b)
-    seat = SLIDE_A[0] + SLIDE_A[1]
-    hit = SLIDE_B[0] + SLIDE_B[1]
     for f in range(FRAMES + 1):
         t = START + f / FPS
-        lift_a, lift_b = smooth((t - LIFT_A[0]) / LIFT_A[1]), smooth((t - LIFT_B[0]) / LIFT_B[1])
-        for name, x, z in (("lock_a", jolt(t, seat, 0.012), 0.0), ("key_a", -GAP_A * (1 - smooth((t - SLIDE_A[0]) / SLIDE_A[1])), 0.36 * lift_a), ("lock_b", jolt(t, hit, 0.03), 0.0), ("key_b", key_b_x(t), 0.36 * lift_b)):
+        over_a, over_b = smooth((t - OVER_A[0]) / OVER_A[1]), smooth((t - OVER_B[0]) / OVER_B[1])
+        for name, x, y_at, z in (("lock_a", 0.0, 0.0, jolt(t, HIT_A, 0.02)),
+                                 ("key_a", -GAP_A * (1 - over_a), 0.0, carried(t, RISE_A, HIT_A, 0.36, 0.03, 0.13, 0.09)),
+                                 ("lock_b", 0.0, 0.0, jolt(t, HIT_B, 0.03)),
+                                 ("key_b", BACK_B + (OVER_LOCK_B[0] - BACK_B) * over_b, OVER_LOCK_B[1] * over_b, carried(t, RISE_B, HIT_B, 0.62, 0.3, 0.26, 0.2))):
             dx, dy, h = thrown(t, name)
-            things[name].location = (x + dx, dy, h + z)
+            things[name].location = (x + dx, y_at + dy, h + z)
             things[name].keyframe_insert("location", frame=f)
         near = K_FALL[0] + K_FALL[1] / 2 < t < K_CLIMB[0] + K_CLIMB[1] / 2 or K_FALL2[0] + K_FALL2[1] / 2 < t < K_CLIMB2[0] + K_CLIMB2[1] / 2
         shoot(c, f, k_view(t), k_focus(t) if near else TOP_K["at"])

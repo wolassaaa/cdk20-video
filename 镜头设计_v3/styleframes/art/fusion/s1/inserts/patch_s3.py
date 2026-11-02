@@ -33,9 +33,9 @@ const S3K = ({review = true, still = ""}) => {
         <Ink x={200} y={915} size={44} at={301.9} fill={DARK} weight={700} w={620}>candidate (a small molecule)</Ink>
         <Mark x={640} y={556} at={304.2} yes/>
       </g>
-      <Mark x={1438} y={556} at={309.5}/>
-      {t > 309.5 && <Leader pts={[[1438, 512], [1438, 272]]} at={309.6} onColour/>}
-      <Keyed x={1270} y={240} size={92} at={310.0} dur={0.6} w={420} parts={["", "selectivity"]}/>
+      <Mark x={1812} y={508} at={309.5}/>
+      {t > 309.5 && <Leader pts={[[1812, 466], [1812, 272]]} at={309.6} onColour/>}
+      <Keyed x={1490} y={240} size={92} at={310.0} dur={0.6} w={420} parts={["", "selectivity"]}/>
       <Source x={96} y={1062} at={286.6}>Illustration · Lengauer 2007</Source>
     </svg>
     {review && l && <div style={{position: "absolute", left: 120, right: 120, top: 22, textAlign: "center", fontFamily: SANS, fontWeight: 500, fontSize: 24, lineHeight: 1.3, color: SOFT}}><b style={{color: INK}}>{l[2]}</b>  {l[3]}</div>}
