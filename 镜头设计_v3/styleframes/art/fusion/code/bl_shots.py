@@ -1,6 +1,6 @@
 """HKBU SCIE1007 coursework science video. Fusion direction (white plate with one small cell view): the Blender layers for test frames F1 to F6 (no type, that comes from compose.py).
 
-Run: bash gpu_slot.sh blender.exe -b -t 4 -P bl_shots.py -- <shot> <out.png> [samples] [pct]
+Run: bash gpu_slot.sh blender.exe -b -t 4 -P bl_shots.py -- <shot> <out.png> [samples] [pct] [f3 only: key slide]
 Shots: f1 liver with lens, f2 print for the phone clip with road tube, f3 lock and key, f4 CDK20 ribbon with a bead tail, f5 tube, sliver and lens, f6 road tube.
 Copied from plate/code/bl_shots.py. New here: lens(), bulb(), the print in f2, the beads in f4.
 """
@@ -398,13 +398,13 @@ def f2():
     return {"stations": stations.tolist(), "y": y}
 
 
-def f3():
-    """Frame is 12 x 6.75 units here (160 px per unit), the keys need the room."""
+def f3(slide=0.0):
+    """Frame is 12 x 6.75 units here (160 px per unit), the keys need the room. slide draws the seated key that far back out of its lock, for 3-02."""
     blue = P.gloss(P.KLEIN, 0.2, 0.7)
     # own lock: pocket cut with the key's own outline, so it fits, and the key is seated in it
     x_a, y_a = -4.3, -0.1
     lock(-2.42, -0.02, 1.62, [(2, 0.06, 0.8), (3, 0.05, 2.1), (5, 0.022, 0.4)], round_poly(key_blade(x_a, y_a, c=0.035), 0.03), blue)
-    key(x_a, y_a, P.gloss(P.RED, 0.18, 0.7), z=0.36)
+    key(x_a - slide, y_a, P.gloss(P.RED, 0.18, 0.7), z=0.36)
     # other lock: another outline, a pocket with its teeth the other way up, and the same key stopped at the door
     y_b = -0.1
     other = [(x, 2 * y_b - v) for x, v in key_blade(3.3, y_b, c=0.035, teeth=((0.34, 0.30), (0.78, 0.17)), blade=1.2, t=0.26)]
@@ -511,7 +511,7 @@ if __name__ == "__main__":
     P.floor()
     P.sun()
     P.camera(160.0 if SHOT == "f3" else P.PPU)
-    {"f1": f1, "f2": f2, "f3": f3, "f4": f4, "f5": f5, "f6": f6}[SHOT]()
+    {"f1": f1, "f2": f2, "f3": lambda: f3(float(argv[4]) if len(argv) > 4 else 0.0), "f4": f4, "f5": f5, "f6": f6}[SHOT]()
     if SHOT in ("f2", "f5", "f6"):
         sc.cycles.caustics_refractive = False
     gk.render(OUT)

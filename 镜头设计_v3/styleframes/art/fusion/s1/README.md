@@ -86,6 +86,10 @@ bash render_film.sh out.mp4 1 30 50        # 任意一段都能单独出，测�
 - 屏幕字新增 "about four a day"、"about 1 in 10"、"Sha Tin"、"Pak Shek Kok"、两位获奖者姓名和 "Any step can fail."，都来自台词或剧本。
 - 剧本表写"All four on camera in the first 40 s"，这版 D、B、C 在 0:52–1:00 才出镜。
 
+## 4K60 成片
+
+S1 用 `S1_fusion_4k_v2.mp4`，S2 用 `../s2/S2_fusion_4k_v1.mp4`。S1 v1 第 16.2 秒有一帧黑噪点，别用。两段都是 4K60、无声，全部帧已查。
+
 ## 4K60 用时
 
 实测和预估见 `镜头设计_v3/排片表.md`。
