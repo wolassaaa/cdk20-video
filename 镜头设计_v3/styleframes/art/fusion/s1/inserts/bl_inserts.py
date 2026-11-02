@@ -7,6 +7,7 @@ c: 43.35-48.52 s. The camera falls to the ten flat figures, they stand, seven dr
 f: 78.8-94.8 s. The camera falls to the road and rides along it as the red line fills the six bulbs; it climbs back and the line runs home.
 g: 146.0-152.9 s. The camera falls to the map, three sample tubes are set down, their red rises one after another, they lie down where the full view has them.
 h: 224.5-235.4 s. The camera falls to the table, the six source cards are set down two by two, each pair lies back as the next arrives, the camera climbs back.
+k: 285.8-312.0 s. A lock and a key land beside the print; the camera slides off it, falls to the lock, then the key, and follows the key into its pocket; it climbs back, a second lock and key land, and the camera falls again to watch that key stop at the wrong door. The stills between come from the same frames, held.
 
 Times are seconds on the film's clock. Table units are the plates': 200 px to the unit, y flipped.
 Run: blender.exe -b -t 4 -P bl_inserts.py -- <a|w|b|c> <out dir> [first] [last] [samples] [size] [step]
@@ -27,8 +28,8 @@ import world as W      # noqa: E402
 P, gk = B.P, B.gk
 argv = sys.argv[sys.argv.index("--") + 1:]
 SHOT, OUT = argv[0], argv[1]
-START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5)[SHOT]
-FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654)[SHOT]
+START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8)[SHOT]
+FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1572)[SHOT]
 FIRST = int(argv[2]) if len(argv) > 2 else 0
 LAST = min(int(argv[3]), FRAMES - 1) if len(argv) > 3 else FRAMES - 1
 SAMPLES = int(argv[4]) if len(argv) > 4 else 64
@@ -59,7 +60,7 @@ def stage():
     nt = sc.world.node_tree
     pick = lambda kind: [n for n in nt.nodes if n.type == kind]
     dot, win = pick("VECT_MATH")[0], pick("MAP_RANGE")[1]
-    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0)[SHOT]
+    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9)[SHOT]
 
     def sky(x):
         dot.inputs[1].default_value = lerp((-0.22, 0.92, 0.32), P.WINDOW, x)
@@ -953,8 +954,136 @@ def shot_h(sc, sky):
     return update
 
 
+# ---------------------------------------------------------------- the lock and the key
+K_AT = (72.0, -2.7)                     # the middle of the view with both locks, x 14400 on the film's table
+K_S = 0.8                               # F3 was drawn at 160 px to the unit; the table is 200
+
+
+def on_k(x, y=0.0, z=0.0):
+    return (K_AT[0] + x * K_S, K_AT[1] + y * K_S, z * K_S)
+
+
+TOP_K = dict(TOP, at=on_k(0))
+TOP_K1 = dict(TOP, at=on_k(-5.6))       # the first lock beside the print
+TOP_K2 = dict(TOP, at=on_k(-0.9))
+L_LOCK = polar((66.9, -7.2, 1.9), (70.0, -2.7, 0.25), 45)
+L_KEY = polar((64.4, -4.4, 0.7), (68.3, -2.78, 0.28), 40)
+L_SEAT = polar((66.6, -4.2, 0.85), (69.2, -2.75, 0.35), 40)
+L_DOOR = polar(on_k(2.2, -3.6, 2.7), on_k(3.0, 0.0, 0.45), 50)
+K_PAN, K_FALL, K_CLIMB = (287.0, 1.0), (287.75, 1.5), (297.3, 1.4)
+K_FALL2, K_CLIMB2 = (305.7, 1.0), (308.3, 1.1)
+LAND_K = dict(lock_a=286.55, key_a=286.8, lock_b=305.1, key_b=305.35)
+FROM_K = dict(lock_a=(2.5, 0.6), key_a=(1.2, -2.6), lock_b=(1.6, 0.5), key_b=(0.8, -2.6))     # how far from where it lands each throw starts, off the edge of the view, in table units
+FLY_K = 0.55
+LIFT_A, SLIDE_A = (294.2, 0.7), (294.6, 2.2)
+LIFT_B, SLIDE_B = (306.7, 0.5), (306.9, 0.9)
+GAP_A = 1.75                            # how far back of its seat the first key lies, in F3's units
+BACK_B, HIT_B = -0.30, 0.33             # where the second key lies and where its tip meets the wrong lock
+
+
+def flight(t, land):
+    return min(1.0, max(0.0, (t - land + FLY_K) / FLY_K))
+
+
+def drop(t, land, high=40.0):
+    """Height of a thing thrown down at the table, with one small bounce."""
+    x = flight(t, land)
+    if x < 1:
+        return high * (1 - x * x)
+    d = t - land
+    return 0.05 * abs(math.sin(math.pi * d / 0.17)) * math.exp(-d / 0.11)
+
+
+def thrown(t, name):
+    """Offset of a thrown thing from where it lands, in F3's units. At this long lens height shows only as size, so a straight drop would just appear in the frame; the throw has to cross the edge of the view."""
+    x, (dx, dy) = flight(t, LAND_K[name]), FROM_K[name]
+    return dx * (1 - x) / K_S, dy * (1 - x) / K_S, drop(t, LAND_K[name]) / K_S
+
+
+def jolt(t, at, size):
+    d = t - at
+    return size * math.exp(-d / 0.12) * math.cos(2 * math.pi * 5 * d) if d > 0 else 0.0
+
+
+def key_b_x(t):
+    x = min(1.0, max(0.0, (t - SLIDE_B[0]) / SLIDE_B[1]))
+    d = t - SLIDE_B[0] - SLIDE_B[1]
+    return BACK_B + (HIT_B - BACK_B) * x * x - (0.1 * (1 - math.exp(-d / 0.09)) if d > 0 else 0.0)
+
+
+def low_k(t):
+    return fall(fall(L_LOCK, L_KEY, smooth((t - 290.6) / 2.0)), L_SEAT, smooth((t - 294.2) / 2.8))
+
+
+def k_view(t):
+    if t < 300:
+        pan = dict(TOP, at=lerp(TOP_K1["at"], TOP_K2["at"], smooth((t - K_PAN[0]) / K_PAN[1])))
+        a, b = smooth((t - K_FALL[0]) / K_FALL[1]), smooth((t - K_CLIMB[0]) / K_CLIMB[1])
+        return climb(low_k(t), TOP_K, b) if b > 0 else fall(pan, low_k(t), a)
+    a, b = smooth((t - K_FALL2[0]) / K_FALL2[1]), smooth((t - K_CLIMB2[0]) / K_CLIMB2[1])
+    return climb(L_DOOR, TOP_K, b) if b > 0 else fall(TOP_K, L_DOOR, a)
+
+
+def k_focus(t):
+    if t < 290.6:
+        return (70.0, -2.7, 0.3)
+    if t < 294.2:
+        return lerp((70.0, -2.7, 0.3), (67.6, -2.78, 0.2), smooth((t - 290.6) / 2.0))
+    if t < 300:
+        return lerp((67.6, -2.78, 0.2), (68.8, -2.75, 0.35), smooth((t - 294.2) / 2.8))
+    return on_k(3.0, -0.1, 0.45)
+
+
+def shot_k(sc, sky):
+    c = lens(sc, 2.8)
+    root = empty("table")
+    root.location, root.scale = (*K_AT, 0), (K_S, K_S, K_S)
+
+    def held(parts):
+        e = empty("mover")
+        e.parent = root
+        for o in parts:
+            o.parent = e
+        return e
+    red = P.gloss(P.RED, 0.18, 0.7)
+    x_a, y = -4.3, -0.1
+
+    def key_at(x):
+        parts = B.key(x, y, red, z=0.0)
+        parts[0].location.z = -0.008        # the blade's end lies inside the bow at the same height, and in the air the two faces show as a black patch
+        return held(parts)
+    lock_a = held([B.lock(-2.42, -0.02, 1.62, [(2, 0.06, 0.8), (3, 0.05, 2.1), (5, 0.022, 0.4)], B.round_poly(B.key_blade(x_a, y, c=0.035), 0.03), P.gloss(P.KLEIN, 0.2, 0.7))])
+    key_a = key_at(x_a)
+    # the other lock's pocket sits higher up than the key's blade, so the tip meets a wall
+    other = [(x, 2 * y + 0.3 - v) for x, v in B.key_blade(3.3, y, c=0.035, teeth=((0.34, 0.30), (0.78, 0.17)), blade=1.2, t=0.26)]
+    lock_b = held([B.lock(4.3, -0.05, 1.3, [(2, 0.05, 2.4), (3, 0.075, 0.5), (4, 0.03, 1.2)], B.round_poly(other, 0.03), P.gloss((0.008, 0.03, 0.62), 0.2, 0.7))])
+    key_b = key_at(1.0)
+    things = dict(lock_a=lock_a, key_a=key_a, lock_b=lock_b, key_b=key_b)
+    seat = SLIDE_A[0] + SLIDE_A[1]
+    hit = SLIDE_B[0] + SLIDE_B[1]
+    for f in range(FRAMES + 1):
+        t = START + f / FPS
+        lift_a, lift_b = smooth((t - LIFT_A[0]) / LIFT_A[1]), smooth((t - LIFT_B[0]) / LIFT_B[1])
+        for name, x, z in (("lock_a", jolt(t, seat, 0.012), 0.0), ("key_a", -GAP_A * (1 - smooth((t - SLIDE_A[0]) / SLIDE_A[1])), 0.36 * lift_a), ("lock_b", jolt(t, hit, 0.03), 0.0), ("key_b", key_b_x(t), 0.36 * lift_b)):
+            dx, dy, h = thrown(t, name)
+            things[name].location = (x + dx, dy, h + z)
+            things[name].keyframe_insert("location", frame=f)
+        near = K_FALL[0] + K_FALL[1] / 2 < t < K_CLIMB[0] + K_CLIMB[1] / 2 or K_FALL2[0] + K_FALL2[1] / 2 < t < K_CLIMB2[0] + K_CLIMB2[1] / 2
+        shoot(c, f, k_view(t), k_focus(t) if near else TOP_K["at"])
+
+    def update(t):
+        for name, o in things.items():
+            for part in o.children:
+                part.hide_render = t < LAND_K[name] - FLY_K
+        if t < 300:
+            sky(1 - smooth((t - K_FALL[0]) / K_FALL[1]) + smooth((t - K_CLIMB[0]) / K_CLIMB[1]))
+        else:
+            sky(1 - smooth((t - K_FALL2[0]) / K_FALL2[1]) + smooth((t - K_CLIMB2[0]) / K_CLIMB2[1]))
+    return update
+
+
 sc, sky = stage()
-update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h)[SHOT](sc, sky)
+update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k)[SHOT](sc, sky)
 sc.frame_start, sc.frame_end = 0, FRAMES
 for f in range(FIRST, LAST + 1, STEP):
     sc.frame_set(f)
