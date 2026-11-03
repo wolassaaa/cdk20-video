@@ -24,7 +24,7 @@ const S3K = ({review = true, still = ""}) => {
   const f = useCurrentFrame(), t = 283 + f / 60, l = K_LINES.find(([a, b]) => t >= a && t < b);
   const labels = 1 - after(t, 305.15, 0.3) + after(t, 309.4, 0.4);     // they leave before the camera falls to the second lock and come back when it has climbed
   return <Clock.Provider value={t}><AbsoluteFill style={{background: BONE}}>
-    {still ? <Img src={staticFile(still)} style={{width: W, height: H}}/> : <OffthreadVideo src={staticFile("fusion_s1/take_k.mp4")} muted/>}
+    {still ? <Img src={staticFile(still)} style={{width: W, height: H}}/> : <OffthreadVideo src={staticFile("fusion_s1/take_k.mp4")} muted style={{width: W, height: H}}/>}
     <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
       <g transform={`translate(${-752 * smooth(t - 287)} 0)`}>{/* the same slide as the camera's in the take */}
         {t < 288 && <Print who="D" x={72} y={168} w={620} h={744} at={283.1} rot={-1.0}/>}
@@ -61,8 +61,8 @@ const S3L = ({review = true, still = ""}) => {
   const [px, py] = pocketAt(t), ring = out((t - 318.6) / 0.7), R = 104;
   const line = [[px - R, py], [772, py]];
   return <Clock.Provider value={t}><AbsoluteFill style={{background: BONE}}>
-    <OffthreadVideo src={staticFile("fusion_s1/take_l.mp4")} muted/>
-    <div style={{position: "absolute", left: 0, top: 0, width: W, height: H, opacity: t >= 312.0 ? 1 : 0}}><OffthreadVideo src={staticFile("fusion_s1/take_p.mp4")} muted/></div>
+    <OffthreadVideo src={staticFile("fusion_s1/take_l.mp4")} muted style={{width: W, height: H}}/>
+    <div style={{position: "absolute", left: 0, top: 0, width: W, height: H, opacity: t >= 312.0 ? 1 : 0}}><OffthreadVideo src={staticFile("fusion_s1/take_p.mp4")} muted style={{width: W, height: H}}/></div>
     <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
       <g opacity={1 - after(t, 312.0, 0.3)}>
         <Leader pts={[[640, 330], [640, 150], [700, 150]]} at={299.9} fill={KLEIN} onColour/>

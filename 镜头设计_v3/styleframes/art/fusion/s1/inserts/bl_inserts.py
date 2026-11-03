@@ -31,8 +31,8 @@ import world as W      # noqa: E402
 P, gk = B.P, B.gk
 argv = sys.argv[sys.argv.index("--") + 1:]
 SHOT, OUT = argv[0], argv[1]
-START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0)[SHOT]
-FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920)[SHOT]
+START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0)[SHOT]
+FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501)[SHOT]
 FIRST = int(argv[2]) if len(argv) > 2 else 0
 LAST = min(int(argv[3]), FRAMES - 1) if len(argv) > 3 else FRAMES - 1
 SAMPLES = int(argv[4]) if len(argv) > 4 else 64
@@ -64,7 +64,7 @@ def stage():
     nt = sc.world.node_tree
     pick = lambda kind: [n for n in nt.nodes if n.type == kind]
     dot, win = pick("VECT_MATH")[0], pick("MAP_RANGE")[1]
-    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9)[SHOT]
+    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9)[SHOT]
 
     def sky(x):
         dot.inputs[1].default_value = lerp((-0.22, 0.92, 0.32), P.WINDOW, x)
@@ -1544,8 +1544,56 @@ def shot_x(sc, sky):
     return update
 
 
+def shot_y(sc, sky):
+    """W2 motion test for the S4 proposal, 412-437 s: S3's empty cell, seen from where S3 ends. An ink bead chain lies coiled in it, is lifted like a necklace and folds into the AlphaFold model in the air (path from w2_path.py, no two beads ever overlap), then sets down on the lock and recolours by confidence, blue at 70 or more, red below. The darkness at the start is laid on afterwards. Run: blender -b -P bl_inserts.py -- y <out dir> [first] [last] [samples] [size]"""
+    global START
+    START = 330.0
+    shot_q(sc, sky)             # the table, the grid and the keyhole as S3 left them
+    START = 412.0
+    for name in ("cdk20_small", "cdk20", "plug"):
+        bpy.data.objects[name].hide_render = True
+    d = np.load(HERE + "frames/w2_path.npz")
+    pos, conf, r = d["pos"], d["conf"], float(d["r"])
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=r, segments=32, ring_count=16)
+    proto = bpy.context.object
+    bpy.ops.object.shade_smooth()
+    me = {}
+    for name, m in (("ink", P.gloss((0.012, 0.012, 0.014), 0.25, 0.7)), ("blue", P.gloss(P.KLEIN, 0.22, 0.7)), ("red", P.gloss(P.RED, 0.22, 0.7))):
+        me[name] = proto.data.copy()
+        me[name].materials.clear()
+        me[name].materials.append(m)
+    bpy.data.objects.remove(proto)
+    beads = []
+    for i in range(len(conf)):
+        o = bpy.data.objects.new("bead", me["ink"])
+        sc.collection.objects.link(o)
+        beads.append(o)
+    lock = 412.0 + 19.5
+    c = sc.camera
+    c.animation_data_clear()
+    c.data.animation_data_clear()
+    end = polar((127.55, -4.55, 1.75), (127.0, -2.3, 0.24), 60)
+    for f in range(FRAMES):
+        t = START + f / FPS
+        v = fall(TOP_Z, end, smooth((t - 414.5) / 5.0))
+        v["az"] += math.radians(14) * smooth((t - 420.0) / 17.0)       # a slow turn round the model while it folds and after
+        shoot(c, f, v, lerp(TOP_Z["at"], (127.0, -2.3, 0.22), smooth((t - 414.5) / 5.0)))
+        for i, o in enumerate(beads):
+            o.location = tuple(pos[f, i].tolist())
+            o.keyframe_insert("location", frame=f)
+    dashes = [o for o in bpy.data.objects if o.parent and o.parent.name == "keyhole"]
+
+    def update(t):
+        for o in dashes:        # the necklace lies over the dashes; they show once it is lifted
+            o.hide_render = t < 415.6
+        for i, o in enumerate(beads):
+            o.data = me["ink"] if t < lock + 1.2 * i / len(beads) else me["blue" if conf[i] >= 70 else "red"]
+        sky(0.2)
+    return update
+
+
 sc, sky = stage()
-update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x)[SHOT](sc, sky)
+update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y)[SHOT](sc, sky)
 sc.frame_start, sc.frame_end = 0, FRAMES
 for f in range(FIRST, LAST + 1, STEP):
     sc.frame_set(f)

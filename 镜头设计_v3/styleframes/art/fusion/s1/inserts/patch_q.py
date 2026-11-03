@@ -22,7 +22,7 @@ const S3Q = ({review = true}) => {
   const n = Math.max(0, Math.min(36, Math.floor((t - 334.05) / 0.1) + 1));
   const leaveR = 1920 * smooth((t - 367.6) / 2.4), leaveL = 2680 * smooth((t - 382.6) / 2.0);
   return <Clock.Provider value={t}><AbsoluteFill style={{background: BONE}}>
-    <OffthreadVideo src={staticFile("fusion_s1/take_q.mp4")} muted/>
+    <OffthreadVideo src={staticFile("fusion_s1/take_q.mp4")} muted style={{width: W, height: H}}/>
     {t < 330.3 && <Img src={staticFile("fusion_s1/q_join.png")} style={{position: "absolute", left: 0, top: 0, width: W, height: H, opacity: 1 - smooth((t - 330) / 0.3)}}/>}
     {t >= 390 && t < 394 && <Img src={staticFile("fusion_s1/q_model.png")} style={{position: "absolute", left: 0, top: 0, width: W, height: H, opacity: 1 - smooth((t - 390) / 4)}}/>}
     <div style={{position: "absolute", left: 0, top: 0, width: W, height: H, background: "#050506", opacity: 0.9 * smooth((t - 404.6) / 4.5)}}/>
