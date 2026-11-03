@@ -31,8 +31,8 @@ import world as W      # noqa: E402
 P, gk = B.P, B.gk
 argv = sys.argv[sys.argv.index("--") + 1:]
 SHOT, OUT = argv[0], argv[1]
-START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0)[SHOT]
-FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920)[SHOT]
+START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0)[SHOT]
+FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920)[SHOT]
 FIRST = int(argv[2]) if len(argv) > 2 else 0
 LAST = min(int(argv[3]), FRAMES - 1) if len(argv) > 3 else FRAMES - 1
 SAMPLES = int(argv[4]) if len(argv) > 4 else 64
@@ -64,7 +64,7 @@ def stage():
     nt = sc.world.node_tree
     pick = lambda kind: [n for n in nt.nodes if n.type == kind]
     dot, win = pick("VECT_MATH")[0], pick("MAP_RANGE")[1]
-    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9)[SHOT]
+    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9)[SHOT]
 
     def sky(x):
         dot.inputs[1].default_value = lerp((-0.22, 0.92, 0.32), P.WINDOW, x)
@@ -1428,6 +1428,7 @@ def shot_q(sc, sky):
         if i in SEEN:
             B.extrude([B.blob(cx, cy, 0.17 + 0.01 * (i % 5), [(2, 0.08, i * 1.3), (3, 0.07, i * 2.1), (5, 0.03, i * 0.7)])], 0.2, 0.07, name="shape", mat=shape)
 
+    keyhole = empty("keyhole")
     # the empty keyhole: the hollow of CDK20's own pocket, cut through the predicted model (pocket_outline.py), dashed because no one had measured it
     cx, cy = cell_at(22)
     hole = np.array(json.load(open(HERE + "frames/pocket_outline.json"))["points"]) * 0.28 + (cx, cy)
@@ -1437,7 +1438,7 @@ def shot_q(sc, sky):
     for i in range(n):          # a dash and a gap, the dashes a little over half
         s = np.linspace(i, i + 0.6, 8) * run[-1] / n
         dash = np.c_[np.interp(s, run, hole[:, 0]), np.interp(s, run, hole[:, 1])]
-        pipe([(x * K, -y * K) for x, y in dash], 1.3, ink, "keyhole")
+        pipe([(x * K, -y * K) for x, y in dash], 1.3, ink, "keyhole").parent = keyhole
 
     # the same model, small, with its pocket looking up
     me = model.data
@@ -1474,8 +1475,77 @@ def shot_q(sc, sky):
     return update
 
 
+# ---------------------------------------------------------------- S4 idea stills, not in the film yet
+X_FOLD = {0: 0.0, 1: 0.55, 2: 1.0, 3: 1.0}     # frame: how far the chain has folded; frame 3 has the tail cut off
+
+
+def shot_x(sc, sky):
+    """Stills for the S4 proposal (W2, 4-03, 4-05): in the empty cell where S3 ends, a chain of 346 beads, one per residue of the AlphaFold model, lies coiled like a dropped necklace, lifts and folds into the model's real shape. Beads at 70 or more confidence are Klein blue, below 70 blood red, so the floppy tail shows. The folding path is drawn: AlphaFold does not simulate folding. Frame 3 has residues 303-346 cut away and lying on the table. Run: blender -b -P bl_inserts.py -- x <out dir> 0 3 32 1"""
+    shot_q(sc, sky)
+    sc.render.use_motion_blur = False       # stills: each frame is a separate pose and camera
+    for name in ("cdk20_small", "cdk20", "plug"):
+        bpy.data.objects[name].hide_render = True
+    dashes = [o for o in bpy.data.objects if o.parent and o.parent.name == "keyhole"]
+
+    cx, cy = cell_at(22)
+    lines = [l for l in open(HERE + "../../../../../assets/alphafold/AF-Q8IZL9-F1-model_v6.pdb") if l.startswith("ATOM") and l[12:16].strip() == "CA"]
+    ca = np.array([[float(l[30:38]), float(l[38:46]), float(l[46:54])] for l in lines])
+    conf = np.array([float(l[60:66]) for l in lines])
+    ca -= ca[:302].mean(0)
+    # small enough that the whole necklace coils inside the cell: a spiral of radius 0.3 with rows 2.3 beads apart holds pi 0.3^2 / gap of chain
+    s = math.sqrt(math.pi * 0.3 ** 2 / (2.3 * 0.42 * 3.8 * 3.8 * (len(ca) - 1)))
+    folded = ca * s + (cx, cy, 0.0)
+    folded[:, 2] += 0.03 - folded[:, 2].min()
+    r = 3.8 * s * 0.42
+    # the necklace: an even spiral on the cell floor, inside out, beads one spacing apart
+    gap = 2.3 * r
+    th, coil = 0.0, []
+    for i in range(len(ca)):
+        rad = 0.05 + gap * th / (2 * math.pi)
+        coil.append((cx + rad * math.cos(th), cy + rad * math.sin(th), r))
+        th += 3.8 * s / max(rad, 0.05)
+    coil = np.array(coil)
+    blue, red = P.gloss(P.KLEIN, 0.22, 0.7), P.gloss(P.RED, 0.22, 0.7)
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=r, segments=32, ring_count=16)
+    proto = bpy.context.object
+    bpy.ops.object.shade_smooth()
+    me = {}
+    for name, m in (("blue", blue), ("red", red)):
+        me[name] = proto.data.copy()
+        me[name].materials.clear()
+        me[name].materials.append(m)
+    bpy.data.objects.remove(proto)
+    beads = []
+    for i in range(len(ca)):
+        o = bpy.data.objects.new("bead", me["blue" if conf[i] >= 70 else "red"])
+        sc.collection.objects.link(o)
+        beads.append(o)
+    c = sc.camera
+    c.animation_data_clear()
+    c.data.animation_data_clear()
+
+    def update(t):
+        f = round((t - START) * FPS)
+        k = X_FOLD[f]
+        lift = 0.22 * math.sin(math.pi * k)
+        for i, o in enumerate(beads):
+            u = smooth((k - 0.3 * i / len(beads)) / 0.7) if 0 < k < 1 else k
+            p = coil[i] + (folded[i] - coil[i]) * u
+            p[2] += lift * math.sin(math.pi * u)
+            if f == 3 and i >= 302:      # the tail, snipped, lies in a loose line on the table to the right
+                j = i - 302
+                p = np.array((cx + 0.95 + 0.2 * math.sin(j * 0.16), cy - 0.27 + j * 0.0125, r))     # in the next cell, clear of the rims
+            o.location = tuple(p)
+        for o in dashes:            # the necklace lies where the dashes are; they show again once it lifts
+            o.hide_render = f == 0
+        v = polar((cx + 0.6, cy - 2.4, 1.5 + 0.3 * k), (cx + (0.3 if f == 3 else 0.0), cy, 0.15 + 0.12 * k), 70 if f < 3 else 58)
+        shoot(c, f, v, v["at"])
+        sky(0.3)
+    return update
+
+
 sc, sky = stage()
-update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q)[SHOT](sc, sky)
+update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x)[SHOT](sc, sky)
 sc.frame_start, sc.frame_end = 0, FRAMES
 for f in range(FIRST, LAST + 1, STEP):
     sc.frame_set(f)
