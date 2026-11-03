@@ -154,18 +154,18 @@ const Liver = () => {
     <g opacity={1 - after(t, 24.7, 0.3)}>{/* clears the column before A's print lands, so print and figure never touch */}
       <Ink x={x + 96} y={460} size={250} at={8.9} font={SERIF} fill={RED} w={760} dur={0.7}>1,412</Ink>
       <Ink x={x + 104} y={546} size={70} at={9.7} font={SERIF} w={760}>deaths in Hong Kong, 2022</Ink>
-      <Ink x={x + 340} y={668} size={36} at={11.0} weight={500} fill={SOFT}>about four a day</Ink>
+      <Note x={x + 340} y={668} size={48} at={11.0} fill={DARK}>about four a day</Note>
       <Ink x={x + 104} y={760} size={56} at={13.0} font={SERIF} w={760}>Top 3 deadliest in HK</Ink>
-      <Ink x={x + 104} y={808} size={36} at={13.5} weight={500}>lung · colorectal · liver</Ink>
+      <Note x={x + 104} y={808} size={48} at={13.5}>lung · colorectal · liver</Note>
       <Ink x={x + 104} y={878} size={56} at={20.0} font={SERIF} w={760}>World: 6th most common</Ink>
       <Ink x={x + 104} y={938} size={56} at={20.8} font={SERIF} w={760}>3rd deadliest</Ink>
     </g>
     <Leader pts={[[x + 1262, 700], [x + 1176, 862], [x + 1146, 862]]} at={12.6} fill={RED}/>
-    <Ink x={x + 1134} y={875} size={40} at={13.0} fill={DARK} anchor="end">portal vein</Ink>
+    <Note x={x + 1134} y={875} size={53} at={13.0} fill={DARK} anchor="end">portal vein</Note>
     <Leader pts={[[x + 1184, 296], [x + 1240, 110], [x + 1300, 110]]} at={16.6} fill={KLEIN}/>
-    <Ink x={x + 1310} y={123} size={40} at={17.0} fill={KLEIN}>hepatic veins</Ink>
+    <Note x={x + 1310} y={123} size={53} at={17.0} fill={KLEIN}>hepatic veins</Note>
     <Leader pts={[[x + 1640, 352], [x + 1640, 196], [x + 1696, 196]]} at={18.6}/>
-    <Ink x={x + 1708} y={209} size={40} at={19.0}>liver</Ink>
+    <Note x={x + 1708} y={209} size={53} at={19.0}>liver</Note>
     {a > 0 && <g opacity={a}>
       {tan.map((s, i) => <line key={i} x1={s[0][0]} y1={s[0][1]} x2={s[1][0]} y2={s[1][1]} stroke={INK} strokeWidth={1.5}/>)}
       <circle cx={ring[0]} cy={ring[1]} r={rr} fill="none" stroke={INK} strokeWidth={2.5}/>
@@ -189,10 +189,10 @@ const Drugs = () => {
       <polyline points={`${x + 510 + 120 * arrow - 18},${217} ${x + 510 + 120 * arrow},${235} ${x + 510 + 120 * arrow - 18},${253}`} opacity={arrow}/>
     </g>}
     <Ink x={x + 1100} y={490} size={72} at={35.3} font={SERIF} anchor="middle" w={960} dur={0.9}>atezolizumab + bevacizumab</Ink>
-    <Ink x={x + 1100} y={540} size={36} at={37.0} weight={500} fill={SOFT} anchor="middle" w={520}>first-line, advanced HCC</Ink>
+    <Note x={x + 1100} y={540} size={48} at={37.0} fill={DARK} anchor="middle">first-line, advanced HCC</Note>
     <Ink x={x + 96} y={730} size={170} at={46.2} font={SERIF} fill={RED} w={620} dur={0.6}>~3 in 10</Ink>
     <Ink x={x + 660} y={680} size={64} at={46.8} font={SERIF} w={760}>5-year relative survival</Ink>
-    <Ink x={x + 660} y={730} size={36} at={47.2} weight={500} fill={SOFT}>HK, 2010-2021</Ink>
+    <Note x={x + 660} y={730} size={48} at={47.2} fill={DARK}>HK, 2010-2021</Note>
     <Source x={x + 96} y={1062} at={33.0}>Illustration · Ren 2023 · HKCaR 2022</Source>
   </g>;
 };
@@ -234,7 +234,7 @@ const Road = () => {
   const names = [[80.7, ["Target"]], [81.9, ["Hit"]], [84.3, ["Improve"]], [85.6, ["Cells & animals"]], [88.1, ["Clinical trials", "1-2-3"]], [91.6, ["Approval"]]];
   return <g>
     {names.map(([at, lines], i) => <g key={i}>
-      {lines.map((s, j) => <Ink key={j} x={r[i][0]} y={670 + j * 46} size={40} at={at + j * 0.9} anchor="middle" w={340}>{s}</Ink>)}
+      {lines.map((s, j) => <Note key={j} x={r[i][0]} y={670 + j * 46} size={53} at={at + j * 0.9} anchor="middle">{s}</Note>)}
     </g>)}
     <Ink x={W / 2 + 11520} y={900} size={84} at={93.1} font={SERIF} anchor="middle" w={900}>Any step can fail.</Ink>
   </g>;
@@ -246,8 +246,8 @@ const Protein = () => {
     <Ink x={x + 1450} y={y + 700} size={68} at={98.8} font={SERIF} w={460}>Nobel Prize</Ink>
     <Ink x={x + 1450} y={y + 770} size={68} at={99.2} font={SERIF} w={460}>in Chemistry</Ink>
     <Ink x={x + 1450} y={y + 840} size={68} at={99.6} font={SERIF} w={460}>2024</Ink>
-    <Ink x={x + 1450} y={y + 900} size={36} at={101.2} weight={500}>Demis Hassabis</Ink>
-    <Ink x={x + 1450} y={y + 944} size={36} at={101.8} weight={500}>John Jumper</Ink>
+    <Note x={x + 1450} y={y + 900} size={48} at={101.2}>Demis Hassabis</Note>
+    <Note x={x + 1450} y={y + 944} size={48} at={101.8}>John Jumper</Note>
     <Tag x={x + 96} y={y + 1012} at={99.0}>AlphaFold DB v6 · predicted</Tag>
   </g>;
 };
@@ -268,14 +268,14 @@ const Stories = () => {
     <Ink x={14040} y={1416} size={84 * K3} at={143.2} font={SERIF} fill={RED} w={100}>2011</Ink>
     <Ink x={14040} y={1442} size={56 * K3} at={144.2} font={SERIF} w={260}>Chinese University of Hong Kong</Ink>
     <Ink x={14040} y={1464} size={56 * K3} at={145.2} font={SERIF} w={260}>Prince of Wales Hospital</Ink>
-    <Ink x={14040} y={1486} size={36 * K3} at={146.4} weight={500} fill={SOFT} w={260}>liver tumours from patients</Ink>
+    <Note x={14040} y={1486} size={48 * K3} at={146.4} fill={DARK}>liver tumours from patients</Note>
     <Ink x={14040} y={1546} size={120 * K3} at={153.0} font={SERIF} fill={DARK} w={320} dur={0.8}>CCRK = CDK20</Ink>
     <Source x={14040} y={1712} at={146.4} until={158.4} size={27 * K3}>Illustration · Feng 2011</Source>
     <Ink x={14446} y={1476} size={84 * K3} at={158.8} font={SERIF} fill={RED} w={100}>2023</Ink>
     <Ink x={14446} y={1502} size={56 * K3} at={160.6} font={SERIF} w={240}>AI drug-discovery study</Ink>
-    <Ink x={14446} y={1522} size={36 * K3} at={162.2} weight={500} fill={SOFT} w={240}>the same protein</Ink>
+    <Note x={14446} y={1522} size={48 * K3} at={162.2} fill={DARK}>the same protein</Note>
     <Ink x={14446} y={1546} size={56 * K3} at={166.0} font={SERIF} w={240}>Insilico Medicine, Hong Kong</Ink>
-    <Ink x={14446} y={1566} size={36 * K3} at={168.6} weight={500} fill={SOFT} w={240}>Science Park</Ink>
+    <Note x={14446} y={1566} size={48 * K3} at={168.6} fill={DARK}>Science Park</Note>
     <Source x={14060} y={1622} at={166.0} until={172.8} size={27 * K3}>Ren 2023</Source>
   </g>;
 };
@@ -283,7 +283,7 @@ const Stories = () => {
 const Question = () => {
   const x = 15360, y = 1080;
   return <g>
-    <Ink x={x + 960} y={y + 210} size={44} at={175.8} fill={SOFT} weight={500}>Our research question</Ink>
+    <Note x={x + 960} y={y + 210} size={58} at={175.8} fill={DARK}>Our research question</Note>
     {["How can computer-aided", "methods help scientists", "find and assess potential", "cancer drug candidates?"].map((s, i) =>
       <Ink key={i} x={x + 960} y={y + 320 + i * 96} size={84} at={177.0 + i * 1.6} font={SERIF} w={900} dur={1.5}>{s}</Ink>)}
     <Keyed x={x + 960} y={y + 760} size={64} at={184.8} fill={DARK} w={900} dur={1.0} parts={["A case study of ", "CDK20 in liver cancer"]}/>
@@ -377,7 +377,7 @@ const Sources = () => {
   const note = [["Most authors work for", 257.0, INK], ["Insilico Medicine,", 258.4, INK], ["which built its AI tools.", 259.6, INK], ["They say so openly.", 262.2, SOFT], ["Useful evidence,", 264.2, DARK], ["not an independent check.", 265.0, DARK]];
   return <g>
     <Ink x={x + 760} y={y + 160} size={72} at={212.4} font={SERIF} w={520} dur={0.7}>Literature review</Ink>
-    <Ink x={x + 1270} y={y + 160} size={40} at={213.8} weight={500} fill={SOFT} w={520}>no lab work of our own</Ink>
+    <Note x={x + 1270} y={y + 160} size={53} at={213.8} fill={DARK}>no lab work of our own</Note>
     {CARDS.map((c, i) => <Card key={i} c={c} i={i}/>)}
     <Paper/>
     <Ink x={x + 760} y={y + 826} size={56} at={243.0} font={SERIF} w={1000} dur={1.2}>What kind? How much did we read?</Ink>
@@ -386,7 +386,7 @@ const Sources = () => {
     <Lens keys={[[242.4, 21300, 1200], [243.4, 20220, 1365], [245.0, 20760, 1365], [246.6, 20220, 1551], [248.2, 20760, 1551], [249.4, 21300, 1560]]}/>
     <Lens keys={[[248.6, 19800, 2300], [249.6, 20220, 1737], [251.2, 20760, 1737], [252.6, 21300, 1800]]}/>
     <Source x={x + 760} y={y + 996} at={225.0} until={254.4}>Ren 2023 · Feng 2011 · Jumper 2021 · Ivanenkov 2023 · Wang 2023 · Lengauer 2007 · Bender 2026</Source>
-    {note.map(([s, at, c], i) => <Ink key={i} x={19270} y={1486 + i * 34 + (i > 2 ? 18 : 0) + (i > 3 ? 18 : 0)} size={21} at={at} anchor="end" fill={c} w={300}>{s}</Ink>)}
+    {note.map(([s, at, c], i) => <Note key={i} x={19270} y={1486 + i * 34 + (i > 2 ? 18 : 0) + (i > 3 ? 18 : 0)} size={28} at={at} anchor="end" fill={c}>{s}</Note>)}
   </g>;
 };
 

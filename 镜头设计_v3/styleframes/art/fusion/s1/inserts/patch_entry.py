@@ -37,7 +37,7 @@ const Takes = ({f}) => {
       {k === "c" && <g opacity={1 - after(t, 47.25, 0.3)}>{/* top left, as in the other shots: the row never crosses it, and it leaves before the camera climbs */}
         <Ink x={96} y={300} size={170} at={46.2} font={SERIF} fill={RED} w={620} dur={0.6}>~3 in 10</Ink>
         <Ink x={660} y={250} size={64} at={46.5} font={SERIF} w={760}>5-year relative survival</Ink>
-        <Ink x={660} y={300} size={36} at={46.8} weight={500} fill={SOFT}>HK, 2010-2021</Ink>
+        <Note x={660} y={300} size={48} at={46.8} fill={DARK}>HK, 2010-2021</Note>
       </g>}
       {(k === "p" || k === "c") && <Source x={96} y={1062} at={33.0}>Illustration · Ren 2023 · HKCaR 2022</Source>}
       {t > 80 && t < 93 && WORDS.map(([at, word], i) => <g key={i} opacity={1 - after(t, i < 5 ? WORDS[i + 1][0] - 0.2 : 92.2, 0.2)}><Ink x={96} y={250} size={92} at={at} font={SERIF} w={900} dur={0.5}>{word}</Ink></g>)}
