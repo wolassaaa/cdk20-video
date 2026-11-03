@@ -7,7 +7,7 @@ HERE = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/")
 FF = "D:/。hkbu/molecular science/镜头设计_v2/tests/T4_remotion/node_modules/@remotion/compositor-win32-x64-msvc/ffmpeg.exe"
 OUT = sys.argv[1]
 K = int(sys.argv[2]) if len(sys.argv) > 2 else 1
-MOVES = [(0, 150), (192, 552), (1224, 1314), (1716, 1836), (1980, 2400), (2976, 3036), (3156, 3276), (3594, 3594), (3600, 3600), (4080, 4260)]
+MOVES = [(0, 180), (192, 552), (1224, 1314), (1716, 1836), (1980, 2400), (2976, 3036), (3156, 3276), (3594, 3594), (3600, 3600), (4080, 4260)]
 END = 4920
 have = sorted(n for a, b in MOVES for n in range(a, b + 1))
 

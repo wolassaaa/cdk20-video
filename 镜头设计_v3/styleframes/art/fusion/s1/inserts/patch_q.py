@@ -32,8 +32,8 @@ const S3Q = ({review = true}) => {
         <Keyed x={96} y={240} size={92} at={314.4} dur={0.6} w={760} parts={["Our lock is ", "CDK20"]}/>
         <circle cx={px} cy={py} r={R} fill="none" stroke={BONE} strokeWidth={5}/>
         <Leader pts={[[px - R, py], [772, py]]} at={319.2} onColour/>
-        <Ink x={760} y={py + 15} size={44} at={319.5} fill={KLEIN} weight={700} anchor="end" w={420}>ATP pocket</Ink>
-        <Ink x={760} y={py + 87} size={44} at={326.5} fill={DARK} weight={700} anchor="end" w={420}>the right key</Ink>
+        <Note x={760} y={py + 15} size={58} at={319.5} fill={KLEIN} anchor="end">ATP pocket</Note>
+        <Note x={760} y={py + 87} size={58} at={326.5} fill={DARK} anchor="end">the right key</Note>
         <Ink x={760} y={py + 170} size={58} at={327.2} font={SERIF} anchor="end" w={500}>can't do its job</Ink>
         <Tag x={96} y={1000} at={315.2} size={36}>predicted model (AlphaFold DB v6)</Tag>
         <Source x={96} y={1062} at={315.2}>Illustration · Ren et al. 2023</Source>
@@ -42,16 +42,16 @@ const S3Q = ({review = true}) => {
       {/* third piece: the tally */}
       <g opacity={1 - after(t, 333.2, 0.3)}>
         <Keyed x={96} y={170} size={92} at={330.5} dur={0.6} w={700} parts={["Why this ", "lock", "?"]}/>
-        <Ink x={96} y={250} size={44} at={331.5} weight={600} fill={SOFT} w={600}>the Hong Kong team</Ink>
+        <Note x={96} y={250} size={58} at={331.5} fill={DARK}>the Hong Kong team</Note>
       </g>
       <g opacity={after(t, 333.5, 0.3) * (1 - after(t, 350.3, 0.3))}>
         <text x={96} y={170} fontFamily={SERIF} fontSize={120}><tspan fill={RED}>{n}</tspan><tspan fill={INK}> of 52</tspan></text>
         <Ink x={96} y={250} size={58} at={335.2} font={SERIF} w={900}>liver tumours with more CDK20</Ink>
         <Ink x={96} y={318} size={58} at={335.7} font={SERIF} w={900}>than the tissue next to them</Ink>
         <Ink x={470} y={170} size={120} at={338.3} font={SERIF} fill={INK} w={340}>= 69%</Ink>
-        <Ink x={1240} y={120} size={44} at={340.4} fill={DARK} weight={700} w={560}>→ later stage</Ink>
-        <Ink x={1240} y={190} size={44} at={342.2} fill={DARK} weight={700} w={560}>→ shorter survival</Ink>
-        <Ink x={1240} y={260} size={44} at={345.4} fill={DARK} weight={700} w={640}>CDK20 down → slower growth</Ink>
+        <Note x={1240} y={120} size={58} at={340.4} fill={DARK}>→ later stage</Note>
+        <Note x={1240} y={190} size={58} at={342.2} fill={DARK}>→ shorter survival</Note>
+        <Note x={1240} y={260} size={58} at={345.4} fill={DARK}>CDK20 down → slower growth</Note>
       </g>
       <Source x={96} y={1062} at={330.6} until={359.0}>Illustration · Feng et al. 2011</Source>
 
@@ -60,27 +60,27 @@ const S3Q = ({review = true}) => {
       </g>
       <g opacity={1 - after(t, 358.4, 0.3)}>
         <Keyed x={780} y={150} size={92} at={352.8} dur={0.6} w={700} parts={["a strong ", "suspect"]}/>
-        <Ink x={780} y={226} size={44} at={354.6} fill={SOFT} weight={600} w={700}>not the only cause</Ink>
+        <Note x={780} y={226} size={58} at={354.6} fill={DARK}>not the only cause</Note>
       </g>
 
       {/* fourth piece: many streams, one name */}
       <g transform={`translate(${-leaveR} 0)`}>
         <g opacity={1 - after(t, 363.0, 0.3)}>
           <Keyed x={1210} y={260} size={92} at={360.2} dur={0.6} w={640} parts={["", "PandaOmics"]}/>
-          <Ink x={1210} y={330} size={44} at={361.0} fill={SOFT} weight={600} w={640}>an AI platform, 2023</Ink>
+          <Note x={1210} y={330} size={58} at={361.0} fill={DARK}>an AI platform, 2023</Note>
         </g>
         <Ink x={1210} y={260} size={92} at={363.3} font={SERIF} w={640}>10 data sets</Ink>
-        <Ink x={1210} y={800} size={44} at={365.0} fill={KLEIN} weight={700} w={640}>1,133 tumour samples</Ink>
-        <Ink x={1210} y={870} size={44} at={366.0} fill={KLEIN} weight={700} w={640}>674 healthy samples</Ink>
+        <Note x={1210} y={800} size={58} at={365.0} fill={KLEIN}>1,133 tumour samples</Note>
+        <Note x={1210} y={870} size={58} at={366.0} fill={KLEIN}>674 healthy samples</Note>
       </g>
       <g transform={`translate(${-leaveL} 0)`}>
         <Keyed x={420} y={140} size={92} at={371.2} dur={0.8} w={1100} parts={["People checked the ", "top 20"]}/>
-        <Ink x={464} y={%ROW%} size={36} at={373.6} fill={RED} weight={700} w={200}>CDK20</Ink>
+        <Note x={464} y={%ROW%} size={48} at={373.6} fill={RED}>CDK20</Note>
         {t > 374.6 && <ellipse cx={520} cy={%RING%} rx={92} ry={34} fill="none" stroke={RED} strokeWidth={3.5} pathLength={1} strokeDasharray={`${smooth((t - 374.6) / 0.7)} 1`}/>}
         <Ink x={1540} y={420} size={58} at={378.0} font={SERIF} w={380}>no approved</Ink>
         <Ink x={1540} y={490} size={58} at={378.4} font={SERIF} w={380}>drug against</Ink>
         <Ink x={1540} y={560} size={58} at={378.8} font={SERIF} w={380}>it yet</Ink>
-        <Ink x={%ROADX%} y={892} size={36} at={380.2} fill={DARK} weight={700} anchor="middle" w={220}>Target</Ink>
+        <Note x={%ROADX%} y={892} size={48} at={380.2} fill={DARK} anchor="middle">Target</Note>
         <Source x={96} y={1062} at={371.4}>Illustration · the other 19 names are not in the paper · Ren et al. 2023</Source>
       </g>
       <Source x={1210} y={1062} at={360.0} until={367.4}>Illustration · Ren et al. 2023</Source>
@@ -91,13 +91,15 @@ const S3Q = ({review = true}) => {
       </g>
       <g opacity={1 - after(t, 397.6, 0.3)}>
         <Ink x={960} y={1016} size={72} at={393.2} font={SERIF} anchor="middle" w={1400}>only a small fraction of proteins have been measured</Ink>
-        <Ink x={960} y={%CELL%} size={36} at={387.6} fill={RED} weight={700} anchor="middle" w={200}>CDK20</Ink>
+        <Note x={960} y={%CELL%} size={48} at={387.6} fill={RED} anchor="middle">CDK20</Note>
         <Leader pts={[[960, 464], [960, 400]]} at={387.4} fill={RED}/>
       </g>
       <g opacity={1 - after(t, 404.6, 0.4)}>
-        <Ink x={520} y={620} size={54} at={401.2} font={SERIF} w={480}>without a 3D shape,</Ink>
-        <Ink x={520} y={690} size={54} at={401.9} font={SERIF} w={480}>predictions get</Ink>
-        <Keyed x={520} y={760} size={54} at={402.6} dur={0.8} w={480} parts={["", "expensive, slow, difficult"]}/>
+        {/* four short lines, so they stay inside the cell left of CDK20's (x 505-985, y 345-725 at this zoom) */}
+        <Ink x={540} y={470} size={54} at={401.2} font={SERIF} w={440}>without a 3D shape,</Ink>
+        <Ink x={540} y={536} size={54} at={401.9} font={SERIF} w={440}>predictions get</Ink>
+        <Keyed x={540} y={602} size={54} at={402.6} dur={0.5} w={440} parts={["", "expensive, slow,"]}/>
+        <Keyed x={540} y={668} size={54} at={403.1} dur={0.4} w={440} parts={["", "difficult"]}/>
       </g>
       <Source x={96} y={1062} at={385.2} until={404.8}>Illustration · Ren et al. 2023</Source>
 

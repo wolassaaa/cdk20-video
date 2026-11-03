@@ -1,4 +1,4 @@
-"""HKBU SCIE1007 coursework science video. Joins the frames for S3's second piece into two takes: the end of the lock and key shot from 310 s, and the CDK20 shot from 313.2 s. Both run frame for frame on the film's clock. k is 1 for 1080p, 2 for 4K. Run: python take_p.py <lock.mp4> <cdk20.mp4> [k]"""
+"""HKBU SCIE1007 coursework science video. Joins the frames for S3's second piece into two takes: the held full view of the lock and key shot from 310 s, and shot p from 312.0 s, where the first lock turns into the CDK20 model. Both run frame for frame on the film's clock. k is 1 for 1080p, 2 for 4K. Run: python take_p.py <lock.mp4> <cdk20.mp4> [k]"""
 import os
 import subprocess
 import sys
@@ -7,7 +7,7 @@ HERE = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/")
 FF = "D:/。hkbu/molecular science/镜头设计_v2/tests/T4_remotion/node_modules/@remotion/compositor-win32-x64-msvc/ffmpeg.exe"
 A, B = sys.argv[1:3]
 K = int(sys.argv[3]) if len(sys.argv) > 3 else 1
-LAST_P, END_P = 840, 1008                # the model stands still after frame 840
+LAST_P, END_P = 912, 1080                # the model stands still after frame 912
 
 
 def take(out, files):
@@ -20,7 +20,7 @@ def take(out, files):
     print("frames", len(files))
 
 
-# frame 1426 is the held full view; 1572 on is the dive
-take(A, ["%s/frames/k/k_1426.png" % HERE] * 120 + ["%s/frames/k/k_%04d.png" % (HERE, min(n, 1643)) for n in range(1572, 1645)])
-take(B, ["%s/frames/p/p_0000.png" % HERE] * 192 + ["%s/frames/p/p_%04d.png" % (HERE, min(n, LAST_P)) for n in range(END_P + 30)])    # the same clock as the other take
+# frame 1426 is the held full view; shot p's first frame is the same view at 312.0 s
+take(A, ["%s/frames/k/k_1426.png" % HERE] * 120)
+take(B, ["%s/frames/p/p_0000.png" % HERE] * 120 + ["%s/frames/p/p_%04d.png" % (HERE, min(n, LAST_P)) for n in range(END_P + 30)])    # the same clock as the other take
 print("TAKE_OK")

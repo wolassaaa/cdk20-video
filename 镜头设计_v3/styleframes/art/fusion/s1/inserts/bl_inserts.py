@@ -7,13 +7,14 @@ c: 43.35-48.52 s. The camera falls to the ten flat figures, they stand, seven dr
 f: 78.8-94.8 s. The camera falls to the road and rides along it as the red line fills the six bulbs; it climbs back and the line runs home.
 g: 146.0-152.9 s. The camera falls to the map, three sample tubes are set down, their red rises one after another, they lie down where the full view has them.
 h: 224.5-235.4 s. The camera falls to the table, the six source cards are set down two by two, each pair lies back as the next arrives, the camera climbs back.
-k: 285.8-312.0 s. A lock and a key land beside the print; the camera slides off it, falls to the lock, then the key, and follows the key into its pocket; it climbs back, a second lock and key land, and the camera falls again to watch that key land on the wrong lock. Then the first key leaves and the camera dives into its empty pocket. The stills between come from the same frames, held.
-p: 313.2-330.0 s. The camera backs out of the real ATP pocket of the CDK20 model, which stands on the table and turns slowly.
+k: 285.8-312.0 s. A lock and a key land beside the print; the camera slides off it, falls to the lock, then the key, and follows the key into its pocket; it climbs back, a second lock and key land, and the camera falls again to watch that key land on the wrong lock. From 312.0 s shot p takes over. The stills between come from the same frames, held.
+p: 312.0-330.0 s. The first key lifts out; the camera falls from the full view to the first lock, which swells into the CDK20 model where it stands; the model turns slowly and a plug lands in its real ATP pocket.
 q: 330.0-412.0 s. Further along the same table: 52 sample tubes, 36 of them rise red; ten thin tubes run into one and reach the list of 20; the first road bulb fills; a grid of mostly empty cells, one holding CDK20 over an empty keyhole. Between its moves the frames are held.
 
 Times are seconds on the film's clock. Table units are the plates': 200 px to the unit, y flipped.
 Run: blender.exe -b -t 4 -P bl_inserts.py -- <a|w|b|c> <out dir> [first] [last] [samples] [size] [step]
 """
+import json
 import math
 import os
 import sys
@@ -30,8 +31,8 @@ import world as W      # noqa: E402
 P, gk = B.P, B.gk
 argv = sys.argv[sys.argv.index("--") + 1:]
 SHOT, OUT = argv[0], argv[1]
-START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=313.2, q=330.0)[SHOT]
-FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1008, q=4920)[SHOT]
+START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0)[SHOT]
+FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920)[SHOT]
 FIRST = int(argv[2]) if len(argv) > 2 else 0
 LAST = min(int(argv[3]), FRAMES - 1) if len(argv) > 3 else FRAMES - 1
 SAMPLES = int(argv[4]) if len(argv) > 4 else 64
@@ -1050,8 +1051,8 @@ def k_focus(t):
     return (74.9, -2.55, 0.6)
 
 
-def shot_k(sc, sky):
-    c = lens(sc, 2.8)
+def k_things():
+    """The two locks and two keys, as movers under one table empty scaled from F3's units."""
     root = empty("table")
     root.location, root.scale = (*K_AT, 0), (K_S, K_S, K_S)
 
@@ -1074,19 +1075,32 @@ def shot_k(sc, sky):
     other = [(x, 2 * y + 0.3 - v) for x, v in B.key_blade(3.3, y, c=0.035, teeth=((0.34, 0.30), (0.78, 0.17)), blade=1.2, t=0.26)]
     lock_b = held([B.lock(4.3, -0.05, 1.3, [(2, 0.05, 2.4), (3, 0.075, 0.5), (4, 0.03, 1.2)], B.round_poly(other, 0.03), P.gloss((0.008, 0.03, 0.62), 0.2, 0.7))])
     key_b = key_at(1.0)
-    things = dict(lock_a=lock_a, key_a=key_a, lock_b=lock_b, key_b=key_b)
+    return dict(lock_a=lock_a, key_a=key_a, lock_b=lock_b, key_b=key_b)
+
+
+def k_place(t):
+    """Where each of the four things is at time t, in F3's units under the table."""
+    over_a, over_b = smooth((t - OVER_A[0]) / OVER_A[1]), smooth((t - OVER_B[0]) / OVER_B[1])
+    at = {}
+    for name, x, y_at, z in (("lock_a", 0.0, 0.0, jolt(t, HIT_A, 0.02)),
+                             ("key_a", -GAP_A * (1 - over_a), 0.0, carried(t, RISE_A, HIT_A, 0.36, 0.03, 0.13, 0.09)),
+                             ("lock_b", 0.0, 0.0, jolt(t, HIT_B, 0.03)),
+                             ("key_b", BACK_B + (OVER_LOCK_B[0] - BACK_B) * over_b, OVER_LOCK_B[1] * over_b, carried(t, RISE_B, HIT_B, 0.62, 0.3, 0.26, 0.2))):
+        dx, dy, h = thrown(t, name)
+        if name == "key_a" and t > K_LEAVE[0]:
+            u = (t - K_LEAVE[0]) / K_LEAVE[1]         # straight up out of the pocket first, then off the edge of the view
+            dx, h = -3.0 * u * u / K_S, h + 40.0 * u * u / K_S
+        at[name] = (x + dx, y_at + dy, h + z)
+    return at
+
+
+def shot_k(sc, sky):
+    c = lens(sc, 2.8)
+    things = k_things()
     for f in range(FRAMES + 1):
         t = START + f / FPS
-        over_a, over_b = smooth((t - OVER_A[0]) / OVER_A[1]), smooth((t - OVER_B[0]) / OVER_B[1])
-        for name, x, y_at, z in (("lock_a", 0.0, 0.0, jolt(t, HIT_A, 0.02)),
-                                 ("key_a", -GAP_A * (1 - over_a), 0.0, carried(t, RISE_A, HIT_A, 0.36, 0.03, 0.13, 0.09)),
-                                 ("lock_b", 0.0, 0.0, jolt(t, HIT_B, 0.03)),
-                                 ("key_b", BACK_B + (OVER_LOCK_B[0] - BACK_B) * over_b, OVER_LOCK_B[1] * over_b, carried(t, RISE_B, HIT_B, 0.62, 0.3, 0.26, 0.2))):
-            dx, dy, h = thrown(t, name)
-            if name == "key_a" and t > K_LEAVE[0]:
-                u = (t - K_LEAVE[0]) / K_LEAVE[1]         # straight up out of the pocket first, then off the edge of the view
-                dx, h = -3.0 * u * u / K_S, h + 40.0 * u * u / K_S
-            things[name].location = (x + dx, y_at + dy, h + z)
+        for name, p in k_place(t).items():
+            things[name].location = p
             things[name].keyframe_insert("location", frame=f)
         near = K_FALL[0] + K_FALL[1] / 2 < t < K_CLIMB[0] + K_CLIMB[1] / 2 or K_FALL2[0] + K_FALL2[1] / 2 < t < K_CLIMB2[0] + K_CLIMB2[1] / 2 or t > K_DIVE[0] + K_DIVE[1] / 2
         shoot(c, f, k_view(t), k_focus(t) if near else TOP_K["at"])
@@ -1105,20 +1119,98 @@ def shot_k(sc, sky):
 
 
 # ---------------------------------------------------------------- the CDK20 model
-P_AT = (80.0, -2.7)                     # on the table, right of the locks
+P_AT = on_k(-2.42, -0.02)[:2]           # where the first lock stands: it turns into the model there
 P_S = 0.05                              # table units to the Angstrom
 P_UP = math.radians(16)                 # how far above the table the pocket looks
 P_YAW = (-20.0, 6.0)                    # degrees at the start and when it stops, the pocket stays in view
-P_BACK = (313.2, 2.2)
+P_BACK = (312.4, 2.6)                   # the camera falls from the full view to the model
+P_GROW = (312.7, 2.2)                   # the lock swells into the model
 P_PLUG, P_FLY = 326.6, 0.55             # the plug lands and the turning stops
 P_R = 0.2                               # radius of the plug
-L_PROT = polar((79.0, -12.3, 3.3), (79.0, -2.7, 1.55), 50)
+L_PROT = polar((P_AT[0] - 1.0, -12.3, 3.3), (P_AT[0] - 1.0, -2.7, 1.55), 50)
+VOX = 0.02                              # voxel of the two distance fields, table units
+VOX_SOFT = 0.05                         # voxel of their blurred copies
+NEAR = 1.0                              # the sharp fields only count near the start and the end, where the surface is close to one shape
+REACH = 3.0                             # how far the fields reach; the model's top is 2.8 above the lock's
 
 
 def yaw_p(t):
     x = min(1.0, (t - P_BACK[0]) / (P_PLUG - P_BACK[0]))
     d = t - P_PLUG
     return math.radians(P_YAW[0] + (P_YAW[1] - P_YAW[0]) * x + (1.2 * math.exp(-d / 0.14) * math.sin(math.pi * 2 * d / 0.3) if d > 0 else 0.0))
+
+
+def rays(o, on):
+    for k in ("visible_camera", "visible_diffuse", "visible_glossy", "visible_transmission", "visible_volume_scatter", "visible_shadow"):
+        setattr(o, k, on)
+
+
+def morph(src, dst, fac, mat, lo, hi):
+    """The lock swells into the model. Both become distance fields; the surface is drawn where their blend crosses zero, so one shape grows out of the other with no seam. Halfway, a plain blend creases where the fields' ridges meet, so blurred copies of both are mixed in by the middle of the growth and it swells like dough. The objects are read with their modifiers and where they stand."""
+    ng = bpy.data.node_groups.new("morph", "GeometryNodeTree")
+    ng.interface.new_socket("Geometry", in_out="OUTPUT", socket_type="NodeSocketGeometry")
+    N, L = ng.nodes.new, ng.links.new
+    pos = N("GeometryNodeInputPosition")
+    sock = lambda node, ident: next(s for s in node.inputs if s.identifier == ident)
+
+    def blend(a, b, by):
+        m = N("ShaderNodeMix")
+        m.data_type = "FLOAT"
+        L(by, sock(m, "Factor_Float"))
+        L(a, sock(m, "A_Float"))
+        L(b, sock(m, "B_Float"))
+        return m.outputs[0]
+
+    def sample(grid):
+        s = N("GeometryNodeSampleGrid")
+        s.data_type = "FLOAT"
+        L(grid, s.inputs["Grid"])
+        L(pos.outputs[0], s.inputs["Position"])
+        return s.outputs[0]
+    val, bump = N("ShaderNodeValue"), N("ShaderNodeValue")
+    sharp, soft = [], []
+    for o in (src, dst):
+        oi = N("GeometryNodeObjectInfo")
+        oi.transform_space = "RELATIVE"
+        oi.inputs["Object"].default_value = o
+        sdf, coarse = N("GeometryNodeMeshToSDFGrid"), N("GeometryNodeMeshToSDFGrid")
+        for g, v in ((sdf, VOX), (coarse, VOX_SOFT)):      # the blurred copy needs no fine voxels, and on them the blur is very slow
+            g.inputs["Voxel Size"].default_value = v
+            g.inputs["Band Width"].default_value = int((REACH if g is coarse else NEAR) / v)
+            L(oi.outputs["Geometry"], g.inputs["Mesh"])
+        mean = N("GeometryNodeSDFGridMean")
+        mean.inputs["Width"].default_value, mean.inputs["Iterations"].default_value = 3, 3
+        L(coarse.outputs[0], mean.inputs["Grid"])
+        sharp.append(sample(sdf.outputs[0]))
+        soft.append(sample(mean.outputs[0]))
+    field = blend(blend(*sharp, val.outputs[0]), blend(*soft, val.outputs[0]), bump.outputs[0])
+    cube = N("GeometryNodeCubeGridTopology")
+    cube.inputs["Bounds Min"].default_value, cube.inputs["Bounds Max"].default_value = lo, hi
+    for i, a in enumerate("XYZ"):
+        cube.inputs["Resolution " + a].default_value = int(round((hi[i] - lo[i]) / VOX))
+    ftg = N("GeometryNodeFieldToGrid")
+    ftg.grid_items.new("FLOAT", "sdf")
+    L(cube.outputs[0], ftg.inputs["Topology"])
+    L(field, ftg.inputs[1])
+    g2m = N("GeometryNodeGridToMesh")
+    L(ftg.outputs[0], g2m.inputs["Grid"])
+    sm = N("GeometryNodeSetShadeSmooth")
+    L(g2m.outputs[0], sm.inputs["Geometry"])
+    sm_mat = N("GeometryNodeSetMaterial")
+    sm_mat.inputs["Material"].default_value = mat
+    L(sm.outputs[0], sm_mat.inputs["Geometry"])
+    L(sm_mat.outputs[0], N("NodeGroupOutput").inputs[0])
+    me = bpy.data.meshes.new("morph")
+    o = bpy.data.objects.new("morph", me)
+    bpy.context.scene.collection.objects.link(o)
+    o.modifiers.new("morph", "NODES").node_group = ng
+    o.cycles.use_motion_blur = False     # the surface is rebuilt each frame, so there is nothing to blur between
+    for f in range(FRAMES + 1):
+        x = fac(START + f / FPS)
+        val.outputs[0].default_value, bump.outputs[0].default_value = x, math.sqrt(4 * x * (1 - x))
+        val.outputs[0].keyframe_insert("default_value", frame=f)
+        bump.outputs[0].keyframe_insert("default_value", frame=f)
+    return o
 
 
 def shot_p(sc, sky):
@@ -1155,9 +1247,22 @@ def shot_p(sc, sky):
 
     def at_mouth(t, s):
         return Vector(o.location) + Quaternion((0, 0, 1), yaw_p(t)) @ (Vector(pk.tolist()) + front * s)
-    start = at_mouth(START, out)
-    w = Quaternion((0, 0, 1), yaw_p(START)) @ front
-    near_v = dict(at=tuple(start), az=math.atan2(w.x, -w.y), el=math.asin(w.z), d=0.45, mm=45.0)
+
+    # the locks and keys stay where the last shot left them; the first key is lifting out as this one starts
+    things = k_things()
+    for name, p in k_place(START).items():
+        things[name].location = p
+    lock = things["lock_a"].children[0]
+    grow = lambda t: smooth((t - P_GROW[0]) / P_GROW[1])
+    if SHOT != "p":         # later shots see only the second lock and key, still lying where they were left
+        rays(lock, False)
+        for part in things["key_a"].children:
+            part.hide_render = True
+    if SHOT == "p":
+        mat = P.gloss(P.KLEIN, 0.2, 0.7)
+        rough = next(n for n in mat.node_tree.nodes if n.type == "BSDF_PRINCIPLED").inputs["Roughness"]
+        half = 2.1      # wide enough for the turning model's corners; a field cut off at the box edge leaves a fin
+        blob = morph(lock, o, grow, mat, (P_AT[0] - half, P_AT[1] - half, -0.05), (P_AT[0] + half, P_AT[1] + half, 3.6))
     track = []
     for f in range(FRAMES + 1):
         t = START + f / FPS
@@ -1166,19 +1271,32 @@ def shot_p(sc, sky):
         u = max(0.0, 1 - (t - P_PLUG + P_FLY) / P_FLY)
         plug.location = tuple(way(u))
         plug.keyframe_insert("location", frame=f)
+        if SHOT == "p":
+            things["key_a"].location = k_place(t)["key_a"]
+            things["key_a"].keyframe_insert("location", frame=f)
+            rough.default_value = 0.2 + 0.14 * grow(t)      # the model's paint is a little softer than the lock's
+            rough.keyframe_insert("default_value", frame=f)
         x = smooth((t - P_BACK[0]) / P_BACK[1])
-        view = fall(near_v, L_PROT, x)
-        shoot(c, f, view, lerp(start, (P_AT[0], P_AT[1] - 1.2, 1.6), x))
+        view = fall(TOP_K, L_PROT, x)
+        shoot(c, f, view, lerp(TOP_K["at"], (P_AT[0], P_AT[1] - 1.2, 1.6), x))
         cam = (Vector(eye_of(view)), last_q[0].to_matrix().inverted())
         p = cam[1] @ (at_mouth(t, out) - cam[0])
         k = view["mm"] / 36 / -p.z
         track.append([round(960 + 1920 * k * p.x, 1), round(540 - 1920 * k * p.y, 1)])
     if FIRST == 0 and SHOT == "p":
-        import json
         json.dump(track[::6], open(HERE + "frames/p_track.json", "w"))
 
     def update(t):
         plug.hide_render = t < P_PLUG - P_FLY
+        for part in things["key_a"].children:
+            part.hide_render = SHOT != "p" or t > K_LEAVE[0] + 0.7
+        if SHOT == "p":
+            g = grow(t)
+            rays(lock, g <= 0)              # the lock, then the growing shape, then the model itself
+            rays(blob, 0 < g < 1)
+            blob.modifiers["morph"].show_render = 0 < g < 1     # the fields are costly; build them only while it grows
+            rays(o, g >= 1)
+            sky(1 - smooth((t - P_BACK[0]) / P_BACK[1]))
     return update
 
 
@@ -1213,7 +1331,7 @@ def box(l, r, top, bot, rad=0.06):
 
 def q_view(t):
     if t < 333.2:
-        return fall(L_PROT, V_RACK, smooth((t - 330.0) / 2.5))
+        return fall(L_PROT, V_RACK, smooth((t - 330.0) / 3.0))     # the model now stands ten units further back
     if t < 350.4:
         return fall(V_RACK, V_IN, smooth((t - 333.2) / 6.0))
     if t < 358.6:
@@ -1309,13 +1427,16 @@ def shot_q(sc, sky):
         if i in SEEN:
             B.extrude([B.blob(cx, cy, 0.17 + 0.01 * (i % 5), [(2, 0.08, i * 1.3), (3, 0.07, i * 2.1), (5, 0.03, i * 0.7)])], 0.2, 0.07, name="shape", mat=shape)
 
-    # the empty keyhole: the same outline as the first lock's pocket
+    # the empty keyhole: the hollow of CDK20's own pocket, cut through the predicted model (pocket_outline.py), dashed because no one had measured it
     cx, cy = cell_at(22)
-    hole = B.round_poly(B.key_blade(0, 0, c=0.035), 0.03)
-    hx, hy = [p[0] for p in hole], [p[1] for p in hole]
-    mx, my = (min(hx) + max(hx)) / 2, (min(hy) + max(hy)) / 2
-    outline = [((cx + (p[0] - mx) * 0.32) * K, -(cy + (p[1] - my) * 0.32) * K) for p in hole]
-    pipe(outline + outline[:1], 1.3, ink, "keyhole")
+    hole = np.array(json.load(open(HERE + "frames/pocket_outline.json"))["points"]) * 0.28 + (cx, cy)
+    hole = np.r_[hole, hole[:1]]
+    run = np.r_[0, np.cumsum(np.linalg.norm(np.diff(hole, axis=0), axis=1))]
+    n = max(1, round(run[-1] / 0.06))
+    for i in range(n):          # a dash and a gap, the dashes a little over half
+        s = np.linspace(i, i + 0.6, 8) * run[-1] / n
+        dash = np.c_[np.interp(s, run, hole[:, 0]), np.interp(s, run, hole[:, 1])]
+        pipe([(x * K, -y * K) for x, y in dash], 1.3, ink, "keyhole")
 
     # the same model, small, with its pocket looking up
     me = model.data
@@ -1336,7 +1457,7 @@ def shot_q(sc, sky):
     for f in range(FRAMES + 1):
         t = START + f / FPS
         v = q_view(t)
-        shoot(c, f, v, lerp((P_AT[0], P_AT[1] - 1.2, 1.6), v["at"], smooth((t - START) / 2.5)))
+        shoot(c, f, v, lerp((P_AT[0], P_AT[1] - 1.2, 1.6), v["at"], smooth((t - START) / 3.0)))
 
     def update(t):
         for o in cover:

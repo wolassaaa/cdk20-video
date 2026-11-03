@@ -12,7 +12,7 @@ PUB="$W/q_public"
 mkdir -p "$PUB/fusion_s1"
 cp -r "$ROOT/镜头设计_v3/remotion_public/fusion_s1/fonts" "$PUB/fusion_s1/"
 cp "$HERE/frames/q/q_3594.png" "$PUB/fusion_s1/q_model.png"
-cp "$HERE/frames/p/p_0840.png" "$PUB/fusion_s1/q_join.png"
+cp "$HERE/frames/p/p_0912.png" "$PUB/fusion_s1/q_join.png"
 date '+start %H:%M:%S'
 [ -n "$SKIP_TAKE" ] || python "$HERE/take_q.py" "$PUB/fusion_s1/take_q.mp4" "$K" || { echo CUT_FAILED take; exit 1; }
 python "$HERE/patch_q.py" || exit 1

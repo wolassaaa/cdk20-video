@@ -8,9 +8,9 @@ import W3C from "./w3_count.json";
 
 const FPS = TL.fps, N = TL.n, W = 1920, H = 1080;
 const INK = "#111113", SOFT = "#545458", RED = "#E8190F", DARK = "#9A0E08", KLEIN = "#002FA7", BONE = "#EDEBE4";
-const SERIF = "Instrument Serif", SANS = "Inter Tight";
+const SERIF = "Instrument Serif", SANS = "Inter Tight", HAND = "Caveat";
 
-const faces = [new FontFace(SERIF, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Regular.ttf")})`), new FontFace(SERIF, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Italic.ttf")})`, {style: "italic"}), new FontFace(SANS, `url(${staticFile("fusion_s1/fonts/InterTight.ttf")})`, {weight: "100 900"})];
+const faces = [new FontFace(SERIF, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Regular.ttf")})`), new FontFace(SERIF, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Italic.ttf")})`, {style: "italic"}), new FontFace(SANS, `url(${staticFile("fusion_s1/fonts/InterTight.ttf")})`, {weight: "100 900"}), new FontFace(HAND, `url(${staticFile("fusion_s1/fonts/Caveat.ttf")})`, {weight: "400 700"})];
 const fontHandle = delayRender("fonts");
 Promise.all(faces.map(f => f.load())).then(l => { l.forEach(f => document.fonts.add(f)); continueRender(fontHandle); });
 
@@ -69,6 +69,33 @@ const Tag = ({x, y, at, size = 30, children}) => {
   return <g opacity={a}>
     <circle cx={cx} cy={cy} r={r} fill="none" stroke={INK} strokeWidth={2.5} strokeDasharray="6 5"/>
     <text x={x + size * 1.45} y={y} fontFamily={SANS} fontSize={size} fontWeight={600} fill={INK}>{children}</text>
+  </g>;
+};
+
+/** A pen note in Caveat, written on the table like a margin note: slightly tilted, appearing left to right at writing speed. The hand has no arrow, so each "→" in the text is drawn as a pen stroke. */
+const Note = ({x, y, size, at, fill = DARK, anchor = "start", rot = -2, dur, children}) => {
+  const t = useT(), text = String(children), p = smooth((t - at) / (dur || 0.3 + text.length * 0.03));
+  const id = React.useMemo(() => `pen${wipeId++}`, []);
+  if (p <= 0) return null;
+  ruler.font = `600 ${size}px "${HAND}"`;
+  const gap = size * 0.22, len = size * 0.95, bits = [];
+  text.split("→").forEach((s, i, all) => {
+    if (s.trim()) bits.push({s: s.trim(), w: ruler.measureText(s.trim()).width});
+    if (i < all.length - 1) bits.push({w: len});
+  });
+  const total = bits.reduce((s, b) => s + b.w, 0) + gap * (bits.length - 1);
+  const left = anchor === "start" ? x : anchor === "end" ? x - total : x - total / 2;
+  let cx = left;
+  const marks = bits.map((b, i) => {
+    const a = cx;
+    cx += b.w + gap;
+    if (b.s) return <text key={i} x={a} y={y} fontFamily={HAND} fontSize={size} fontWeight={600} fill={fill}>{b.s}</text>;
+    const h = y - size * 0.26, k = size * 0.2;
+    return <path key={i} d={`M${a} ${h + 2} Q${a + b.w * 0.5} ${h - 3} ${a + b.w} ${h} M${a + b.w - k} ${h - k * 0.8} L${a + b.w} ${h} L${a + b.w - k * 0.95} ${h + k * 0.75}`} fill="none" stroke={fill} strokeWidth={size * 0.065} strokeLinecap="round" strokeLinejoin="round"/>;
+  });
+  return <g transform={`rotate(${rot} ${x} ${y})`}>
+    <clipPath id={id}><rect x={left - 10} y={y - size * 1.1} width={(total + 20) * p} height={size * 1.5}/></clipPath>
+    <g clipPath={`url(#${id})`}>{marks}</g>
   </g>;
 };
 

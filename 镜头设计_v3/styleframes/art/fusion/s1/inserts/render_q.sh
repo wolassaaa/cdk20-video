@@ -14,7 +14,7 @@ run() {     # log name, then first and last of each stretch
     done
 }
 date '+start %H:%M:%S'
-run a 0 150 192 552 1224 1314 &
+run a 0 180 192 552 1224 1314 &
 run b 1716 1836 1980 2400 2976 3036 3156 3276 3594 3594 3600 3600 4080 4260 &
 wait
 date '+end %H:%M:%S'

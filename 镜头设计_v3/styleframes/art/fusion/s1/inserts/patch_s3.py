@@ -33,9 +33,9 @@ const S3K = ({review = true, still = ""}) => {
       <g opacity={1 - after(t, 296.9, 0.3)}><Ink x={96} y={250} size={92} at={291.4} font={SERIF} w={500} dur={0.5}>drug</Ink></g>
       <g opacity={t > 299 ? labels : 0}>
         <Leader pts={[[640, 330], [640, 150], [700, 150]]} at={299.9} fill={KLEIN} onColour/>
-        <Ink x={710} y={165} size={44} at={300.3} fill={KLEIN} weight={700} w={420}>target (a protein)</Ink>
+        <Note x={710} y={165} size={58} at={300.3} fill={KLEIN}>target (a protein)</Note>
         <Leader pts={[[130, 610], [130, 900], [190, 900]]} at={301.5} fill={DARK} onColour/>
-        <Ink x={200} y={915} size={44} at={301.9} fill={DARK} weight={700} w={620}>candidate (a small molecule)</Ink>
+        <Note x={200} y={915} size={58} at={301.9} fill={DARK}>candidate (a small molecule)</Note>
         <Mark x={640} y={556} at={304.2} yes/>
       </g>
       <Mark x={1812} y={508} at={309.5}/>
@@ -52,8 +52,8 @@ const L_LINES = [
   [312, 330, "D", "Our lock is CDK20. It's an enzyme, a protein with a chemical job. Its keyhole is a pocket where it normally grabs a small molecule called ATP. Plug that pocket with the right key, and the enzyme can't do its job."],
 ];
 const TRACK = %TRACK%;
-const pocketAt = t => {     // where the pocket's mouth is on screen; the track holds one point per tenth of a second from 313.2 s
-  const u = Math.max(0, (t - 313.2) * 10), i = Math.min(Math.floor(u), TRACK.length - 2), k = Math.min(1, u - i);
+const pocketAt = t => {     // where the pocket's mouth is on screen; the track holds one point per tenth of a second from 312.0 s
+  const u = Math.max(0, (t - 312.0) * 10), i = Math.min(Math.floor(u), TRACK.length - 2), k = Math.min(1, u - i);
   return [0, 1].map(j => TRACK[i][j] + (TRACK[i + 1][j] - TRACK[i][j]) * k);
 };
 const S3L = ({review = true, still = ""}) => {
@@ -62,13 +62,13 @@ const S3L = ({review = true, still = ""}) => {
   const line = [[px - R, py], [772, py]];
   return <Clock.Provider value={t}><AbsoluteFill style={{background: BONE}}>
     <OffthreadVideo src={staticFile("fusion_s1/take_l.mp4")} muted/>
-    <div style={{position: "absolute", left: 0, top: 0, width: W, height: H, opacity: after(t, 313.15, 0.15)}}><OffthreadVideo src={staticFile("fusion_s1/take_p.mp4")} muted/></div>
+    <div style={{position: "absolute", left: 0, top: 0, width: W, height: H, opacity: t >= 312.0 ? 1 : 0}}><OffthreadVideo src={staticFile("fusion_s1/take_p.mp4")} muted/></div>
     <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
       <g opacity={1 - after(t, 312.0, 0.3)}>
         <Leader pts={[[640, 330], [640, 150], [700, 150]]} at={299.9} fill={KLEIN} onColour/>
-        <Ink x={710} y={165} size={44} at={300.3} fill={KLEIN} weight={700} w={420}>target (a protein)</Ink>
+        <Note x={710} y={165} size={58} at={300.3} fill={KLEIN}>target (a protein)</Note>
         <Leader pts={[[130, 610], [130, 900], [190, 900]]} at={301.5} fill={DARK} onColour/>
-        <Ink x={200} y={915} size={44} at={301.9} fill={DARK} weight={700} w={620}>candidate (a small molecule)</Ink>
+        <Note x={200} y={915} size={58} at={301.9} fill={DARK}>candidate (a small molecule)</Note>
         <Mark x={640} y={556} at={304.2} yes/>
         <Mark x={1812} y={508} at={309.5}/>
         <Leader pts={[[1812, 466], [1812, 272]]} at={309.6} onColour/>
@@ -82,8 +82,8 @@ const S3L = ({review = true, still = ""}) => {
       </g>
       {ring > 0 && <circle cx={px} cy={py} r={R} fill="none" stroke={BONE} strokeWidth={5} strokeDasharray={2 * Math.PI * R} strokeDashoffset={2 * Math.PI * R * (1 - ring)} transform={`rotate(180 ${px} ${py})`}/>}
       {t > 319.2 && <Leader pts={line} at={319.2} onColour/>}
-      <Ink x={760} y={py + 15} size={44} at={319.5} fill={KLEIN} weight={700} anchor="end" w={420}>ATP pocket</Ink>
-      <Ink x={760} y={py + 87} size={44} at={326.5} fill={DARK} weight={700} anchor="end" w={420}>the right key</Ink>
+      <Note x={760} y={py + 15} size={58} at={319.5} fill={KLEIN} anchor="end">ATP pocket</Note>
+      <Note x={760} y={py + 87} size={58} at={326.5} fill={DARK} anchor="end">the right key</Note>
       <Ink x={760} y={py + 170} size={58} at={327.2} font={SERIF} anchor="end" w={500}>can't do its job</Ink>
       <Tag x={96} y={1000} at={315.2} size={36}>predicted model (AlphaFold DB v6)</Tag>
       <Source x={96} y={1062} at={315.2}>Illustration · Ren et al. 2023</Source>
