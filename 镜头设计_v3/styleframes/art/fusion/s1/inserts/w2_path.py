@@ -1,4 +1,4 @@
-"""HKBU SCIE1007 coursework science video. The bead chain for the W2 motion test (S4 upgrade idea 1): 346 beads, one per residue of the AlphaFold DB v6 model, lie coiled in S3's empty cell, are lifted like a necklace, fold in the air and set down as the model's real shape. The path is drawn, AlphaFold does not simulate folding; only the end is real. The necklace is picked up whole, then the whole chain folds at once, so no bead has to thread into a finished shape. Every frame is relaxed so neighbours keep their spacing and no two beads overlap or sink into the table, then all frames are written to frames/w2_path.npz for bl_inserts.py shot y. Run: python w2_path.py"""
+"""HKBU SCIE1007 coursework science video. The bead chain for the W2 motion test (S4 upgrade idea 1): 346 beads, one per residue of the AlphaFold DB v6 model, are lowered into S3's empty cell and coil up, are lifted like a necklace, fold in the air and set down as the model's real shape. The path is drawn, AlphaFold does not simulate folding; only the end is real. The necklace is picked up whole, then the whole chain folds at once, so no bead has to thread into a finished shape. Every frame is relaxed so neighbours keep their spacing and no two beads overlap or sink into the table, then all frames are written to frames/w2_path.npz for bl_inserts.py shot y. Run: python w2_path.py"""
 import math
 import os
 
@@ -7,9 +7,10 @@ import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/") + "/"
 CELL = (127.0, -2.3)                    # cell 22, where S3 ends
 FPS, SECONDS = 60, 25.0
-LIFT = (3.0, 3.0)                       # the first bead lifts off the coil, and the spread to the last: the necklace is picked up whole
+POUR = (0.2, 3.4)                       # the chain is lowered into the empty cell from straight above and coils up, bead 1 first: start, and how long to the last bead
+LIFT = (4.2, 3.0)                       # the first bead lifts off the coil, and the spread to the last: the necklace is picked up whole
 RISE = 1.2                              # how long each bead takes to rise
-FOLD = (7.0, 3.0, 9.0)                  # the whole chain folds: start, spread from first bead to last, and how long each takes
+FOLD = (7.6, 3.0, 8.4)                  # the whole chain folds: start, spread from first bead to last, and how long each takes
 LOCK = 19.5                             # the shape locks in: the first big chord, until the song is here
 HIGH = 0.3                              # how high the necklace is lifted
 AIR = 0.06                              # the model builds this far above the table, clear of the coil, and sets down on the lock
@@ -28,7 +29,7 @@ coil, th = [], 0.0
 for i in range(n):
     rad = 0.05 + 2.3 * r * th / (2 * math.pi)
     coil.append((CELL[0] + rad * math.cos(th), CELL[1] + rad * math.sin(th), r))
-    th += 3.8 * s / max(rad, 0.05)
+    th += bond[min(i, n - 2)] / max(rad, 0.05)     # each bead sits one real bond from the last, so the coil keeps the chain's own spacing
 coil = np.array(coil)
 
 
@@ -45,21 +46,34 @@ def folding(t):
     return smooth((t - FOLD[0] - FOLD[1] * np.arange(n) / n) / FOLD[2])
 
 
+def landed(t):
+    return t >= POUR[0] + POUR[1] * np.arange(n) / n
+
+
+def base(t):
+    """Where each bead is before it is lifted: in the coil once it has landed, before that in the hanging chain straight above the bead landing now."""
+    k = int(np.clip(np.floor((t - POUR[0]) / POUR[1] * n), -1, n - 1))
+    top = coil[max(k, 0)]
+    hang = top + np.c_[np.zeros(n), np.zeros(n), np.r_[0, np.cumsum(bond)] - np.r_[0, np.cumsum(bond)][max(k, 0)]]
+    return np.where(landed(t)[:, None], coil, hang)
+
+
 def target(t):
+    coil_t = base(t)
     up = coil + (0, 0, HIGH)
     above = folded + (0, 0, AIR * (1 - float(smooth((t - LOCK) / 0.8))))
     a, u = lifted(t)[:, None], folding(t)[:, None]
-    return coil + (up - coil) * a + (above - up) * u
+    return coil_t + (up - coil_t) * a + (above - up) * u
 
 
 far = 2.1 * r                           # no two beads closer than this, centre to centre
 mask = np.abs(np.subtract.outer(np.arange(n), np.arange(n))) > 1
-frames, p = [], coil.copy()
+frames, p = [], base(0.0)
 for f in range(int(SECONDS * FPS) + 1):
     t = f / FPS
-    free = (lifted(t) > 0).astype(float)              # beads still lying in the coil do not move
+    free = (lifted(t) > 0).astype(float)              # beads still lying in the coil, or still hanging, do not give way
     goal = target(t)
-    p = p + (goal - p) * 0.3
+    p = np.where(free[:, None] > 0, p + (goal - p) * 0.3, goal)      # coiled and hanging beads sit exactly on their path, so the chain never gaps while it is lowered
     fly = np.nonzero(free)[0]
     near_ok = np.abs(fly[:, None] - np.arange(n)[None, :]) > 1
     for _ in range(40):

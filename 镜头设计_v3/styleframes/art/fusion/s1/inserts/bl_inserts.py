@@ -1545,7 +1545,7 @@ def shot_x(sc, sky):
 
 
 def shot_y(sc, sky):
-    """W2 motion test for the S4 proposal, 412-437 s: S3's empty cell, seen from where S3 ends. An ink bead chain lies coiled in it, is lifted like a necklace and folds into the AlphaFold model in the air (path from w2_path.py, no two beads ever overlap), then sets down on the lock and recolours by confidence, blue at 70 or more, red below. The darkness at the start is laid on afterwards. Run: blender -b -P bl_inserts.py -- y <out dir> [first] [last] [samples] [size]"""
+    """W2 motion test for the S4 proposal, 412-437 s: S3's empty cell, seen from where S3 ends. An ink bead chain is lowered into it and coils up, is lifted like a necklace and folds into the AlphaFold model in the air (path from w2_path.py, no two beads ever overlap), then sets down on the lock and recolours by confidence, blue at 70 or more, red below. The darkness at the start is laid on afterwards. Run: blender -b -P bl_inserts.py -- y <out dir> [first] [last] [samples] [size]"""
     global START
     START = 330.0
     shot_q(sc, sky)             # the table, the grid and the keyhole as S3 left them
@@ -1582,10 +1582,14 @@ def shot_y(sc, sky):
             o.location = tuple(pos[f, i].tolist())
             o.keyframe_insert("location", frame=f)
     dashes = [o for o in bpy.data.objects if o.parent and o.parent.name == "keyhole"]
+    bpy.context.view_layer.update()
+    mid = np.array([tuple(o.matrix_world @ Vector(np.mean(o.bound_box, 0).tolist())) for o in dashes])
 
     def update(t):
-        for o in dashes:        # the necklace lies over the dashes; they show once it is lifted
-            o.hide_render = t < 415.6
+        q = pos[min(FRAMES - 1, max(0, round((t - START) * FPS)))]
+        low = q[q[:, 2] < 3 * r]
+        for o, m in zip(dashes, mid):       # a dash is hidden only while a bead lies on it: S3 leaves them showing, the coil covers them, the lift uncovers them
+            o.hide_render = bool(len(low)) and float(np.min(np.hypot(low[:, 0] - m[0], low[:, 1] - m[1]))) < 1.6 * r
         for i, o in enumerate(beads):
             o.data = me["ink"] if t < lock + 1.2 * i / len(beads) else me["blue" if conf[i] >= 70 else "red"]
         sky(0.2)
