@@ -68,7 +68,9 @@ S3 的动效按段做，导演逐条把关，通过一条再做下一条。全�
 
 第 3–5 条共用一个镜头 `q`，一起看 `S3_q_1.mp4`（1080p，82 秒，带顶部台词行）。整段 S3 连着看 `S3_all_1.mp4`（1080p，129 秒）。4K 是 `S3_q_2.mp4` 和 `S3_all_2.mp4`，不带台词行。
 
-字（导演 11-03 选 D）：整句、数字、重点词照旧 Instrument Serif，原来用 Inter Tight 的小标签改成 Caveat 手写批注，用 `entry.jsx` 的 `Note`，略斜，逐字写出，文字里的 `→` 画成笔画。出处行和 `Tag` 留 Inter Tight。S1、S2 还没改，等导演看过 S3 再铺。
+字（导演 11-03 选 D）：整句、数字、重点词照旧 Instrument Serif，原来用 Inter Tight 的小标签改成 Caveat 手写批注，用 `entry.jsx` 的 `Note`，略斜，逐字写出，文字里的 `→` 画成笔画。出处行和 `Tag` 留 Inter Tight。S1、S2 11-04 也改了，17 个标签，审片片 `S1S2_notes_1.mp4`，4K `S1S2_notes_2.mp4`。
+
+4K 注意：S3 各合成里的 take 视频一律写明 `style={{width: W, height: H}}`。放在普通 div 里而不写尺寸时，4K 下视频按自己的 3840 宽铺开，只露出左上四分之一，1080p 看不出来（11-04 第 2 条踩过）。
 
 第 1 条的重现：
 
