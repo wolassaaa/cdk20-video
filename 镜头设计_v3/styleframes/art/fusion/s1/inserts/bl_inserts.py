@@ -31,8 +31,8 @@ import world as W      # noqa: E402
 P, gk = B.P, B.gk
 argv = sys.argv[sys.argv.index("--") + 1:]
 SHOT, OUT = argv[0], argv[1]
-START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0)[SHOT]
-FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501)[SHOT]
+START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0)[SHOT]
+FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721)[SHOT]
 FIRST = int(argv[2]) if len(argv) > 2 else 0
 LAST = min(int(argv[3]), FRAMES - 1) if len(argv) > 3 else FRAMES - 1
 SAMPLES = int(argv[4]) if len(argv) > 4 else 64
@@ -64,7 +64,7 @@ def stage():
     nt = sc.world.node_tree
     pick = lambda kind: [n for n in nt.nodes if n.type == kind]
     dot, win = pick("VECT_MATH")[0], pick("MAP_RANGE")[1]
-    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9)[SHOT]
+    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9)[SHOT]
 
     def sky(x):
         dot.inputs[1].default_value = lerp((-0.22, 0.92, 0.32), P.WINDOW, x)
@@ -1596,8 +1596,65 @@ def shot_y(sc, sky):
     return update
 
 
+def shot_z(sc, sky):
+    """Tail cut test for the S4 proposal (ideas 2 and 3), straight after shot y, 437-449 s: the coloured bead model holds, the camera pushes in over the red tail lying across the pocket, the tail is snipped off at 302/303, lifted out, swung over the empty cell to the right and paid out into it (path from tail_path.py), and the camera pulls back to show both cells. Run: blender -b -P bl_inserts.py -- z <out dir> [first] [last] [samples] [size]"""
+    global START
+    START = 330.0
+    shot_q(sc, sky)
+    START = 437.0
+    for name in ("cdk20_small", "cdk20", "plug"):
+        bpy.data.objects[name].hide_render = True
+    d = np.load(HERE + "frames/tail_path.npz")
+    pos, conf, r = d["pos"], d["conf"], float(d["r"])
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=r, segments=32, ring_count=16)
+    proto = bpy.context.object
+    bpy.ops.object.shade_smooth()
+    me = {}
+    for name, m in (("blue", P.gloss(P.KLEIN, 0.22, 0.7)), ("red", P.gloss(P.RED, 0.22, 0.7))):
+        me[name] = proto.data.copy()
+        me[name].materials.clear()
+        me[name].materials.append(m)
+    bpy.data.objects.remove(proto)
+    beads = []
+    for i in range(len(conf)):
+        o = bpy.data.objects.new("bead", me["blue" if conf[i] >= 70 else "red"])
+        sc.collection.objects.link(o)
+        beads.append(o)
+    dashes = [o for o in bpy.data.objects if o.parent and o.parent.name == "keyhole"]
+    bpy.context.view_layer.update()
+    mid = np.array([tuple(o.matrix_world @ Vector(np.mean(o.bound_box, 0).tolist())) for o in dashes])
+    c = sc.camera
+    c.animation_data_clear()
+    c.data.animation_data_clear()
+    held = polar((127.55, -4.55, 1.75), (127.0, -2.3, 0.24), 60)        # where shot y ends
+    held["az"] += math.radians(14)
+    close = dict(held, at=tuple(pos[0, 302:].mean(0).tolist()), d=1.0, el=math.radians(58))
+    wide = dict(held, at=(127.5, -2.42, 0.22), d=2.9, el=math.radians(40))      # both cells, and room above for the tail on its way over
+
+    def view(a, b, x):
+        return dict(a, at=lerp(a["at"], b["at"], x), d=a["d"] * (b["d"] / a["d"]) ** x, el=a["el"] + (b["el"] - a["el"]) * x, az=a["az"] + (b["az"] - a["az"]) * x)
+
+    for f in range(FRAMES):
+        t = f / FPS
+        v = view(held, close, smooth((t - 0.5) / 4.5)) if t < 6.3 else view(close, wide, smooth((t - 6.3) / 4.0))      # in over the tail, then back out as it is lifted
+        shoot(c, f, v, v["at"])
+        for i, o in enumerate(beads[302:], 302):
+            o.location = tuple(pos[f, i].tolist())
+            o.keyframe_insert("location", frame=f)
+    for i, o in enumerate(beads[:302]):
+        o.location = tuple(pos[0, i].tolist())
+
+    def update(t):
+        q = pos[min(FRAMES - 1, max(0, round((t - START) * FPS)))]
+        low = q[q[:, 2] < 3 * r]
+        for o, m in zip(dashes, mid):       # as in shot y: a dash is hidden only while a bead lies on it
+            o.hide_render = bool(len(low)) and float(np.min(np.hypot(low[:, 0] - m[0], low[:, 1] - m[1]))) < 1.6 * r
+        sky(0.2)
+    return update
+
+
 sc, sky = stage()
-update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y)[SHOT](sc, sky)
+update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z)[SHOT](sc, sky)
 sc.frame_start, sc.frame_end = 0, FRAMES
 for f in range(FIRST, LAST + 1, STEP):
     sc.frame_set(f)
