@@ -12,7 +12,7 @@ p: 312.0-330.0 s. The first key lifts out; the camera falls from the full view t
 q: 330.0-412.0 s. Further along the same table: 52 sample tubes, 36 of them rise red; ten thin tubes run into one and reach the list of 20; the first road bulb fills; a grid of mostly empty cells, one holding CDK20 over an empty keyhole. Between its moves the frames are held.
 
 Times are seconds on the film's clock. Table units are the plates': 200 px to the unit, y flipped.
-Run: blender.exe -b -t 4 -P bl_inserts.py -- <a|w|b|c> <out dir> [first] [last] [samples] [size] [step]
+Run: blender.exe -b -t 4 -P bl_inserts.py -- <a|w|b|c> <out dir> [first] [last] [samples] [size] [step] [model]
 """
 import json
 import math
@@ -38,6 +38,7 @@ LAST = min(int(argv[3]), FRAMES - 1) if len(argv) > 3 else FRAMES - 1
 SAMPLES = int(argv[4]) if len(argv) > 4 else 64
 SIZE = float(argv[5]) if len(argv) > 5 else 1
 STEP = int(argv[6]) if len(argv) > 6 else 1
+ONLY = argv[7] if len(argv) > 7 else ""      # "model": shot p shows the finished model in place of the growing shape, for the dissolve at the end of the growth
 FPS = 60.0
 K = W.PPU
 TOP = dict(at=(24.0, -2.7, 0.0), az=0.0, el=math.radians(89.9), d=160.0, mm=600.0)    # a very long lens, high up: the full view's frame at the table, to within a pixel
@@ -1291,7 +1292,7 @@ def shot_p(sc, sky):
         for part in things["key_a"].children:
             part.hide_render = SHOT != "p" or t > K_LEAVE[0] + 0.7
         if SHOT == "p":
-            g = grow(t)
+            g = 1.0 if ONLY == "model" else grow(t)
             rays(lock, g <= 0)              # the lock, then the growing shape, then the model itself
             rays(blob, 0 < g < 1)
             blob.modifiers["morph"].show_render = 0 < g < 1     # the fields are costly; build them only while it grows
