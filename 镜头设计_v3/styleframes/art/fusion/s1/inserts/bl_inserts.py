@@ -31,8 +31,8 @@ import world as W      # noqa: E402
 P, gk = B.P, B.gk
 argv = sys.argv[sys.argv.index("--") + 1:]
 SHOT, OUT = argv[0], argv[1]
-START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0)[SHOT]
-FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6)[SHOT]
+START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0, r=412.0)[SHOT]
+FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6, r=6)[SHOT]
 FIRST = int(argv[2]) if len(argv) > 2 else 0
 LAST = min(int(argv[3]), FRAMES - 1) if len(argv) > 3 else FRAMES - 1
 SAMPLES = int(argv[4]) if len(argv) > 4 else 64
@@ -64,7 +64,7 @@ def stage():
     nt = sc.world.node_tree
     pick = lambda kind: [n for n in nt.nodes if n.type == kind]
     dot, win = pick("VECT_MATH")[0], pick("MAP_RANGE")[1]
-    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2, t=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9, t=0.9)[SHOT]
+    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2, t=0.2, r=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9, t=0.9, r=0.9)[SHOT]
 
     def sky(x):
         dot.inputs[1].default_value = lerp((-0.22, 0.92, 0.32), P.WINDOW, x)
@@ -2115,8 +2115,222 @@ def shot_t(sc, sky):
     return update
 
 
+def shot_r(sc, sky):
+    """Stills for the culture tank, version 2 (the director's notes of 11-04 13:05): the tank is filled with mist, not liquid, and stands in a dark machine ring with a cyan light strip and a slot-machine reel on its front. 0 a question mark hangs in the mist, the reel shows "?"; 1 the question mark is sucked up the pipe as if by a vacuum, the reel starts to spin; 2 in thick mist CDK20 forms in a frenzy, shaking hard, the reel a blur; 3 the mist thins and the shape turns solid, blue and red, still trembling, the reel lands on a small CDK20; 4 the glass lifts and the steam bursts out with a bang; 5 open, the last steam drifting off. Built on shot t. The guesses, the mist and the machine are drawn; the blue shape and the red tail are the AlphaFold DB v6 model. Run: blender -b -P bl_inserts.py -- r <out dir> 0 5 64 1"""
+    base_update = shot_t(sc, sky)
+    cx, cy = cell_at(22)
+    ob = bpy.data.objects
+    for name in ("tank_liquid", "tank_floor"):
+        ob[name].hide_render = name == "tank_liquid"
+    for o in ob:
+        if o.name.startswith("Sphere") or (o.name.startswith("Torus") and abs(o.location.z - 0.045) < 0.01):
+            o.hide_render = True             # no bubbles in the mist; the foot ring gives way to the machine ring
+    ask, core, tail = ob["ask"], ob["core"], ob["tail"]
+    ghosts = [o for o in ob if o.name.split(".")[0] == "guess"]
+    lid = [ob["tank_glass"], ob["tank_cap"], ob["tank_pipe"]] + [o for o in ob if o.name.startswith("Torus") and o.location.z > 0.5]
+    sc.render.use_motion_blur = True
+    sc.render.motion_blur_shutter = 0.5
+
+    def emit(rgb, power):
+        m, nt, out = gk._mat("glow")
+        e = nt.nodes.new("ShaderNodeEmission")
+        e.inputs[0].default_value, e.inputs[1].default_value = (*rgb, 1), power
+        nt.links.new(e.outputs[0], out.inputs["Surface"])
+        return m
+
+    def mist_mat(name, rgb, scale):
+        """Steam: scattering volume broken up by noise, so it reads as wisps, not fog."""
+        m = bpy.data.materials.new(name)
+        m.use_nodes = True
+        nt = m.node_tree
+        nt.nodes.clear()
+        out = nt.nodes.new("ShaderNodeOutputMaterial")
+        vol = nt.nodes.new("ShaderNodeVolumePrincipled")
+        vol.inputs["Color"].default_value = (*rgb, 1)
+        nz = nt.nodes.new("ShaderNodeTexNoise")
+        nz.inputs["Scale"].default_value = scale
+        nz.inputs["Detail"].default_value = 6
+        ramp = nt.nodes.new("ShaderNodeMapRange")
+        ramp.inputs[1].default_value, ramp.inputs[2].default_value = 0.42, 0.75
+        mul = nt.nodes.new("ShaderNodeMath")
+        mul.operation = "MULTIPLY"
+        nt.links.new(nz.outputs[0], ramp.inputs[0])
+        nt.links.new(ramp.outputs[0], mul.inputs[0])
+        nt.links.new(mul.outputs[0], vol.inputs["Density"])
+        nt.links.new(vol.outputs[0], out.inputs["Volume"])
+        return m, mul.inputs[1]
+
+    def solid(name, verts_r, depth, z, mat):
+        bpy.ops.mesh.primitive_cylinder_add(vertices=160, radius=verts_r, depth=depth, location=(cx, cy, z))
+        o = bpy.context.object
+        o.name = name
+        o.data.materials.append(mat)
+        bpy.ops.object.shade_smooth()
+        return o
+
+    # the machine ring: rests on the cell's raised border like the glass floor, a hole in the middle so the keyhole still shows
+    dark = P.gloss((0.06, 0.065, 0.075), 0.3, 0.5)
+    next(n for n in dark.node_tree.nodes if n.type == "BSDF_PRINCIPLED").inputs["Metallic"].default_value = 0.6
+    ring = solid("machine_ring", 0.45, 0.08, 0.017 + 0.04, dark)
+    hole = solid("ring_hole", 0.389, 0.2, 0.06, dark)
+    cut = ring.modifiers.new("hole", "BOOLEAN")
+    cut.operation, cut.object = "DIFFERENCE", hole
+    hole.hide_render = hole.hide_viewport = True
+    ob["tank_floor"].scale = (0.389 / 0.40, 0.389 / 0.40, 1)
+    cyan = emit((0.25, 0.9, 1.0), 9.0)
+    bpy.ops.mesh.primitive_torus_add(major_radius=0.452, minor_radius=0.005, major_segments=160, minor_segments=12, location=(cx, cy, 0.072))
+    bpy.context.object.data.materials.append(cyan)
+    bpy.ops.mesh.primitive_torus_add(major_radius=0.392, minor_radius=0.004, major_segments=160, minor_segments=12, location=(cx, cy, 0.79))
+    strip_top = bpy.context.object
+    strip_top.data.materials.append(cyan)
+    lid.append(strip_top)
+
+    # the reel: a drum behind a window in a box on the ring's front, facing the lens
+    c = sc.camera
+    near = polar((127.55, -4.55, 1.75), (127.0, -2.3, 0.42), 60)
+    near["d"] *= 1.3
+    front = Vector((math.sin(near["az"]), -math.cos(near["az"]), 0))
+    side = Vector((math.cos(near["az"]), math.sin(near["az"]), 0))
+    spot = Vector((cx, cy, 0)) + front * 0.47
+    yaw = Quaternion((0, 0, 1), near["az"])
+    bpy.ops.mesh.primitive_cube_add(size=1, location=(spot.x, spot.y, 0.085))
+    box = bpy.context.object
+    box.rotation_mode = "QUATERNION"
+    box.rotation_quaternion = yaw
+    box.scale = (0.26, 0.08, 0.13)
+    box.data.materials.append(dark)
+    bpy.ops.mesh.primitive_cube_add(size=1, location=tuple(spot - front * 0.03 + Vector((0, 0, 0.09))))
+    win = bpy.context.object
+    win.rotation_mode = "QUATERNION"
+    win.rotation_quaternion = yaw
+    win.scale = (0.18, 0.08, 0.07)
+    cut = box.modifiers.new("window", "BOOLEAN")
+    cut.operation, cut.object = "DIFFERENCE", win
+    win.hide_render = win.hide_viewport = True
+    bpy.ops.mesh.primitive_cube_add(size=1, location=tuple(spot + Vector((0, 0, 0.09))))
+    edge_ = bpy.context.object          # a glowing frame round the window
+    edge_.rotation_mode = "QUATERNION"
+    edge_.rotation_quaternion = yaw
+    edge_.scale = (0.19, 0.075, 0.08)
+    edge_.data.materials.append(cyan)
+    inner = edge_.modifiers.new("frame", "BOOLEAN")
+    bpy.ops.mesh.primitive_cube_add(size=1, location=tuple(spot + Vector((0, 0, 0.09))))
+    edge_cut = bpy.context.object
+    edge_cut.rotation_mode = "QUATERNION"
+    edge_cut.rotation_quaternion = yaw
+    edge_cut.scale = (0.175, 0.2, 0.065)
+    inner.operation, inner.object = "DIFFERENCE", edge_cut
+    edge_cut.hide_render = edge_cut.hide_viewport = True
+    drum = empty("drum")
+    drum.location = tuple(spot + Vector((0, 0, 0.09)))
+    drum.rotation_mode = "QUATERNION"
+    drum.rotation_quaternion = yaw
+    bpy.ops.mesh.primitive_cylinder_add(vertices=96, radius=0.05, depth=0.16, location=(0, 0, 0), rotation=(0, math.pi / 2, 0))
+    barrel = bpy.context.object
+    barrel.data.materials.append(P.gloss((0.9, 0.92, 0.93), 0.4, 0.1))
+    barrel.parent = drum
+    font = bpy.data.fonts.load(HERE + "../../../../../remotion_public/fusion_s1/fonts/InstrumentSerif-Regular.ttf")
+    ink = emit((0.02, 0.02, 0.025), 1.0)
+    faces = []
+    for k in range(8):           # round the drum: question marks, and one small CDK20
+        a = 2 * math.pi * k / 8
+        holder = empty("face")
+        holder.parent = drum
+        holder.rotation_euler = (a, 0, 0)
+        if k == 0:
+            me = core.data.copy()
+            o = bpy.data.objects.new("reel_cdk20", me)
+            sc.collection.objects.link(o)
+            o.scale = (0.016,) * 3
+            o.location = (0, -0.052, 0)
+            o.rotation_euler = (math.pi / 2, 0, 0)
+        else:
+            cu = bpy.data.curves.new("q", "FONT")
+            cu.body, cu.font, cu.size, cu.extrude = "?", font, 0.045, 0.002
+            cu.align_x, cu.align_y = "CENTER", "CENTER"
+            cu.materials.append(ink)
+            o = bpy.data.objects.new("reel_q", cu)
+            sc.collection.objects.link(o)
+            o.location = (0, -0.051, 0)
+            o.rotation_euler = (math.pi / 2, 0, 0)
+        o.parent = holder
+        faces.append(o)
+    # the mist inside the tank, and the burst of steam when it opens
+    mist = solid("mist", 0.378, 0.74, 0.029 + 0.37, None)
+    mist.data.materials.clear()
+    mm, mist_density = mist_mat("mist", (0.86, 0.97, 1.0), 9.0)
+    mist.data.materials.append(mm)
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=1.0, segments=48, ring_count=24, location=(cx, cy, 0.3))
+    puff = bpy.context.object
+    puff.name = "steam_puff"
+    pm, puff_density = mist_mat("steam", (0.95, 0.98, 1.0), 4.0)
+    puff.data.materials.append(pm)
+
+    # the camera holds still between stills; only the things that shake, spin or rush are blurred
+    c.animation_data_clear()
+    c.data.animation_data_clear()
+    for f, v in enumerate([near, near, near, near, dict(near, d=near["d"] * 1.2, at=(127.0, -2.3, 0.6)), polar((127.55, -4.55, 1.75), (127.0, -2.3, 0.3), 60)]):
+        for s in (-0.3, 0.0, 0.3):          # the same view on both sides of each still, so the camera never blurs
+            shoot(c, f + s, v, (cx, cy, 0.3))
+    g = np.random.default_rng(11)
+
+    def shake(o, f, amp, base):
+        """A hard tremble inside the shutter: five places in a quarter of a frame each way."""
+        o.animation_data_clear()
+        for s in (-0.25, -0.12, 0.0, 0.12, 0.25):
+            o.location = tuple(np.asarray(base) + g.normal(0, amp, 3) * (1, 1, 0.5))
+            o.keyframe_insert("location", frame=f + s)
+    rest = {o.name: tuple(o.location) for o in [core, tail] + ghosts}
+    turns = {1: 3.0, 2: 9.0}         # reel turns in one shutter
+
+    def update(t):
+        base_update(t)              # shot t's show and hide, the lid's place
+        f = min(FRAMES - 1, max(0, round((t - START) * FPS)))
+        ob["tank_liquid"].hide_render = True
+        for o in ob:
+            if o.name.startswith("Sphere"):
+                o.hide_render = True
+        for o in [x for x in ob if x.name.split(".")[0] == "letter"]:
+            o.hide_render = True                 # no letters flying in: the sequence is not shown here
+        ask.hide_render = f > 1
+        ask.animation_data_clear()
+        if f == 1:                  # sucked up the pipe, stretched thin
+            ask.scale = (0.35, 2.6, 1)
+            for s, z in ((-0.25, 0.48), (0.25, 0.74)):
+                ask.location = (cx, cy, z)
+                ask.keyframe_insert("location", frame=f + s)
+        else:
+            ask.scale = (1, 1, 1)
+            ask.location = (cx, cy, 0.4)
+        for o in [core, tail] + ghosts:
+            x, y, z = rest[o.name]
+            up = {2: 0.12, 3: 0.12}.get(f, 0.019)
+            if f in (2, 3) and not o.hide_render:
+                shake(o, f, 0.022 if f == 2 else 0.006, (x, y, z + up))
+            else:
+                o.animation_data_clear()
+                o.location = (x, y, z + up)
+        drum.animation_data_clear()
+        a0 = {0: 2 * math.pi * 1 / 8, 3: 0.0, 4: 0.0, 5: 0.0}.get(f, 0.0)
+        if f in turns:
+            for s in (-0.25, 0.25):
+                drum.rotation_quaternion = yaw @ Quaternion((1, 0, 0), a0 + turns[f] * 2 * math.pi * (s + 0.25))
+                drum.keyframe_insert("rotation_quaternion", frame=f + s)
+        else:
+            drum.rotation_quaternion = yaw @ Quaternion((1, 0, 0), -a0)
+        mist.hide_render = f >= 4
+        mist_density.default_value = {0: 14.0, 1: 22.0, 2: 40.0, 3: 6.0}.get(f, 0.0)
+        puff.hide_render = f < 4
+        puff.scale = (0.75, 0.75, 0.32) if f == 4 else (1.15, 1.15, 0.55)
+        puff.location = (cx, cy, 0.22 if f == 4 else 0.45)
+        puff_density.default_value = 30.0 if f == 4 else 5.0
+        strip_top.hide_render = f == 5
+        strip_top.location.z = 0.79 + (0.45 if f == 4 else 0.0)
+    return update
+
+
 sc, sky = stage()
-update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t)[SHOT](sc, sky)
+update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t, r=shot_r)[SHOT](sc, sky)
 sc.frame_start, sc.frame_end = 0, FRAMES
 for f in range(FIRST, LAST + 1, STEP):
     sc.frame_set(f)
