@@ -3629,12 +3629,15 @@ def shot_j(sc, sky, ferro=False, spikes=True, meta=False, shake=False):
     sky(0.2)
     sc.render.use_motion_blur = True
     sc.render.motion_blur_shutter = 0.5
-    B_ = 60.0 / (123.477 if shake else 123.0)          # shot d is on Harder Better Faster Stronger itself, from 5.732 s: the riff is in on beat 0, the bass on beat 32 (音乐/W2_押韵字幕.md); the rest are on the old grid
+    B_ = 60.0 / (123.477 if shake else 123.0)          # shot d is on Harder Better Faster Stronger itself, from 50.446 s, so the first sung bar is on beat 4 (音乐/W2_押韵字幕.md); the rest are on the old grid
     beat = lambda n: n * B_
     POP, APEX, CALM, SNAP, RED, DOWN, LAND, END = beat(4), beat(6), beat(20), beat(28), beat(29), beat(30), beat(34), (FRAMES - 1) / FPS
     MELT, WHIP, SPLAT, PULL = beat(30), beat(31), beat(32), beat(33)
     if shake:           # shot d: it stays up for the shake, comes down once the tail is off
-        DOWN, LAND = beat(32), beat(36)
+        # version 4 (the director's note of 11-04 22:50: the tail went too fast, shake it longer, on the beat): the tail stays red and flickering to beat 32,
+        # melts on 32, winds up on 33, shakes from 34 with a swing on every eighth note, lets go on 39 and splats on the downbeat of 40
+        MELT, WHIP, SPLAT, PULL = beat(32), beat(34), beat(40), beat(41)
+        DOWN, LAND = beat(40), beat(44)
 
     # the guess: the real model as its basis, eight bent guesses as shape keys, placed where S3's small model lay
     full = np.load(HERE + "frames/cdk20.npz")
@@ -3911,30 +3914,38 @@ def shot_j(sc, sky, ferro=False, spikes=True, meta=False, shake=False):
         CC = coil.mean(0)
         r_t = Mrel[:3, :3] @ HT.mean(0) + Mrel[:3, 3]
         sgn = 1.0 if -r_t[1] >= 0 else -1.0         # turn the way that swings the tail towards +x, the next cell
-        Y0, TP, TAU = -sgn * math.radians(50), 0.18, 0.55          # the director's note of 11-04 21:05: the shake was not big or shaky enough
+        Y0, TP, TAU = -sgn * math.radians(50), B_, 0.3          # a full swing there and back every beat, so it turns round on every eighth note
+        WIND = MELT + B_                    # the wind-up, beat 33
+        TR = WHIP + 5 * B_ + TP / 4         # it lets go on the sixth swing towards the next cell, a quarter beat after 39
+
+        def env(u):
+            """How big the shake is, u after it starts: it builds a little over the first bar, then dies quickly once the tail is gone."""
+            if WHIP + u < TR:
+                return 0.85 + 0.15 * smooth(u / (4 * B_))
+            return math.exp(-(WHIP + u - TR) / TAU)
         TILT_AX = Vector((r_t[0], r_t[1], 0.0)).normalized()     # it rocks about the line out to the tail as well, so the tail itself stays on its throw
 
         def tilt(t):
             u = t - WHIP
-            return 0.0 if u < 0 else math.radians(18) * math.exp(-u / TAU) * math.sin(2 * math.pi * u / TP)
+            return 0.0 if u < 0 else math.radians(18) * env(u) * math.sin(2 * math.pi * u / TP)
 
         def bounce(t):
             u = t - WHIP
             if u < 0:
-                return -0.04 * smooth((t - MELT) / (WHIP - MELT))        # it crouches into the wind-up
-            return -0.04 * math.exp(-u / 0.08) + 0.035 * math.exp(-u / TAU) * abs(math.sin(2 * math.pi * u / TP))       # and hops on every swing
+                return -0.04 * smooth((t - WIND) / (WHIP - WIND))        # it crouches into the wind-up
+            return -0.04 * math.exp(-u / 0.08) + 0.035 * env(u) * abs(math.sin(2 * math.pi * u / TP))       # and hops on every swing, down on the eighth notes
         print("tail sits %.3f %.3f off the axis; shake turns %s" % (r_t[0], r_t[1], "left" if sgn > 0 else "right"))
 
         def yaw(t):
             if t < MELT:
                 return 0.0
             if t < WHIP:
-                return Y0 * smooth((t - MELT) / (WHIP - MELT))          # wind up
+                return Y0 * env(0.0) * smooth((t - WIND) / (WHIP - WIND))          # wind up
             u = t - WHIP
-            return Y0 * math.exp(-u / TAU) * math.cos(2 * math.pi * u / TP)      # the shake, about five a second, dying away
+            return Y0 * env(u) * math.cos(2 * math.pi * u / TP)      # the shake: turned furthest on every eighth note
         dist_ = np.linalg.norm(HT - HOME[301], axis=1)
         order = (dist_ - dist_.min()) / (dist_.max() - dist_.min())          # 0 at the cut end, 1 at the far tip
-        T_REL = WHIP + TP / 4 + 0.06 * (1 - order)            # the tip lets go first, as the turn is fastest
+        T_REL = TR + 0.06 * (1 - order)            # the tip lets go first, as the turn is fastest
         T_LAND = SPLAT - 0.04 + 0.1 * (1 - order)
         tj = np.random.default_rng(5)
         LAND_P = CC + (coil - CC) * 0.45 + np.c_[tj.normal(0, 0.012, (len(HT), 2)), np.zeros(len(HT))]
@@ -4085,12 +4096,12 @@ def shot_j(sc, sky, ferro=False, spikes=True, meta=False, shake=False):
             if t < SPLAT + B_ / 2:
                 u = t - WHIP
                 if u > 0:           # the camera takes the shake too
-                    k_ = 0.035 * math.exp(-u / 0.35)
+                    k_ = 0.02 * env(u)
                     fl = dict(fl, at=(fl["at"][0] + k_ * math.sin(61 * u), fl["at"][1] + k_ * math.sin(47 * u + 1), fl["at"][2] + k_ * math.sin(73 * u + 2)))
                 return fl
-            if t < beat(40):
-                return blend(fl, fin, smooth((t - SPLAT - B_ / 2) / (beat(40) - SPLAT - B_ / 2)))
-            return blend(fin, push, smooth((t - beat(40)) / (END - beat(40))))          # the last three bars of W2: a slow push in on both cells under the last two lines
+            if t < beat(46):
+                return blend(fl, fin, smooth((t - SPLAT - B_ / 2) / (beat(46) - SPLAT - B_ / 2)))
+            return blend(fin, push, smooth((t - beat(46)) / (END - beat(46))))          # the end of W2: a slow push in on both cells
         if t < DOWN:
             return top
         return blend(top, land, smooth((t - DOWN) / (END - DOWN)))
@@ -4165,7 +4176,7 @@ def shot_e(sc, sky):
 
 
 def shot_d(sc, sky):
-    """W2 motion with the tail shaken off (the director's pick of 11-04 20:45, way 3): shot e's liquid up to the snap and the red tail flickering; beat 30 the tail melts back into red liquid and the body winds up; beat 31 it shakes like a wet dog, about five turns a second dying away, and the red liquid is flung off in a streak, the tip first; beat 32 it splats in the next cell (cell 23) and spreads; beat 33 it draws together into a red line, the flat coil from u_path_2.py; beats 32-36 the blue body, residues 1-302, floats down into its cell with its pocket open. The flight is a smooth arc from the speed it was flung at to a falling drop, checked every frame clear of the kept part and of the table. Version 3 (11-04 22:05): on the song itself, 123.477 BPM, and 13 bars long (25.3 s, all of W2), the last three bars a slow push in on both cells; the camera leaves the bottom of the frame for the rhyming captions (音乐/W2_押韵字幕.md). Run: blender -b -P bl_inserts.py -- d <out dir> 0 1516 16 0.5 2"""
+    """W2 motion with the tail shaken off (the director's pick of 11-04 20:45, way 3): shot e's liquid up to the snap and the red tail flickering; beat 30 the tail melts back into red liquid and the body winds up; beat 31 it shakes like a wet dog, about five turns a second dying away, and the red liquid is flung off in a streak, the tip first; beat 32 it splats in the next cell (cell 23) and spreads; beat 33 it draws together into a red line, the flat coil from u_path_2.py; beats 32-36 the blue body, residues 1-302, floats down into its cell with its pocket open. The flight is a smooth arc from the speed it was flung at to a falling drop, checked every frame clear of the kept part and of the table. Version 3 (11-04 22:05): on the song itself, 123.477 BPM, and 13 bars long (25.3 s, all of W2), the last bars a slow push in on both cells; the camera leaves the bottom of the frame for the rhyming captions (音乐/W2_押韵字幕.md). Version 4 (11-04 22:50, the tail went too fast): it melts on beat 32, winds up on 33, shakes from 34 with a turn on every eighth note, lets go a quarter beat after 39, splats on the downbeat of 40 and draws into the line on 41-42; the body comes down 40-44. Run: blender -b -P bl_inserts.py -- d <out dir> 0 1516 16 0.5 2"""
     return shot_j(sc, sky, ferro=True, spikes=False, meta=True, shake=True)
 
 
