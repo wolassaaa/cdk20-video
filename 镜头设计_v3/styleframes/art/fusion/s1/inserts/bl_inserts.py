@@ -31,8 +31,8 @@ import world as W      # noqa: E402
 P, gk = B.P, B.gk
 argv = sys.argv[sys.argv.index("--") + 1:]
 SHOT, OUT = argv[0], argv[1]
-START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0, r=412.0)[SHOT]
-FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6, r=6)[SHOT]
+START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0, r=412.0, s=412.0)[SHOT]
+FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6, r=6, s=6)[SHOT]
 FIRST = int(argv[2]) if len(argv) > 2 else 0
 LAST = min(int(argv[3]), FRAMES - 1) if len(argv) > 3 else FRAMES - 1
 SAMPLES = int(argv[4]) if len(argv) > 4 else 64
@@ -64,7 +64,7 @@ def stage():
     nt = sc.world.node_tree
     pick = lambda kind: [n for n in nt.nodes if n.type == kind]
     dot, win = pick("VECT_MATH")[0], pick("MAP_RANGE")[1]
-    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2, t=0.2, r=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9, t=0.9, r=0.9)[SHOT]
+    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2, t=0.2, r=0.2, s=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9, t=0.9, r=0.9, s=0.9)[SHOT]
 
     def sky(x):
         dot.inputs[1].default_value = lerp((-0.22, 0.92, 0.32), P.WINDOW, x)
@@ -2329,8 +2329,310 @@ def shot_r(sc, sky):
     return update
 
 
+def shot_s(sc, sky):
+    """Stills for the culture tank, version 3 (the director's notes of 11-04 14:05): a finer machine, and a real slot machine with four reels that land on AlphaFold's own confidence (pLDDT, the mean over each stretch of CDK20 in AlphaFold DB v6): 87, 92 and 95 in blue, the tail 303-346 at 47 in red. 0 a question mark hangs in the mist, the reels show "??"; 1 the question mark is sucked up the pipe, the lever is pulled, the reels start; 2 in mist CDK20 forms in a frenzy, shaking, the reels a blur; 3 the mist thins, the shape is solid, the reels land; 4 the glass lifts and steam bursts out; 5 open. Built on shot t (shot r is version 2). The machine, the mist and the guesses are drawn; the blue shape, the red tail and the four numbers come from the AlphaFold DB v6 model. Run: blender -b -P bl_inserts.py -- s <out dir> 0 5 64 1"""
+    base_update = shot_t(sc, sky)
+    cx, cy = cell_at(22)
+    C = Vector((cx, cy, 0))
+    ob = bpy.data.objects
+    hide_always = [ob["tank_liquid"]] + [o for o in ob if o.name.startswith("Sphere") or o.name.split(".")[0] == "letter" or (o.name.startswith("Torus") and abs(o.location.z - 0.045) < 0.01)]
+    ask, core, tail = ob["ask"], ob["core"], ob["tail"]
+    ghosts = [o for o in ob if o.name.split(".")[0] == "guess"]
+    glass, cap, pipe = ob["tank_glass"], ob["tank_cap"], ob["tank_pipe"]
+    sc.render.use_motion_blur = True
+    sc.render.motion_blur_shutter = 0.5
+    pdb = [l for l in open(HERE + "../../../../../assets/alphafold/AF-Q8IZL9-F1-model_v6.pdb") if l.startswith("ATOM") and l[12:16].strip() == "CA"]
+    conf = np.array([float(l[60:66]) for l in pdb])
+    res = np.array([int(l[22:26]) for l in pdb])
+    STRETCH = [(1, 100), (101, 200), (201, 302), (303, 346)]
+    SCORE = [int(round(conf[(res >= a) & (res <= b)].mean())) for a, b in STRETCH]
+    print("reels land on", SCORE)
+
+    def mat(rgb, rough, metal=0.0, coat=0.2):
+        m = P.gloss(rgb, rough, coat)
+        next(n for n in m.node_tree.nodes if n.type == "BSDF_PRINCIPLED").inputs["Metallic"].default_value = metal
+        return m
+
+    def emit(rgb, power):
+        m, nt, out = gk._mat("glow")
+        e = nt.nodes.new("ShaderNodeEmission")
+        e.inputs[0].default_value, e.inputs[1].default_value = (*rgb, 1), power
+        nt.links.new(e.outputs[0], out.inputs["Surface"])
+        return m
+
+    steel, dark, rubber = mat((0.66, 0.68, 0.72), 0.22, 1.0), mat((0.07, 0.075, 0.085), 0.32, 0.5, 0.5), mat((0.03, 0.03, 0.035), 0.55)
+    cyan, amber = emit((0.25, 0.9, 1.0), 9.0), emit((1.0, 0.55, 0.12), 8.0)
+    label = emit((0.78, 0.86, 0.9), 2.5)
+
+    def finish(o, m, bevel=0.0):
+        if m is not None:
+            o.data.materials.clear()
+            o.data.materials.append(m)
+        if bevel:
+            b = o.modifiers.new("bevel", "BEVEL")
+            b.width, b.segments, b.limit_method = bevel, 3, "ANGLE"
+        bpy.context.view_layer.objects.active = o
+        o.select_set(True)
+        try:
+            bpy.ops.object.shade_smooth_by_angle(angle=math.radians(35))
+        except Exception:
+            bpy.ops.object.shade_smooth()
+        o.select_set(False)
+        return o
+
+    def cyl(r, depth, at, m, bevel=0.0, rot=None, n=96):
+        bpy.ops.mesh.primitive_cylinder_add(vertices=n, radius=r, depth=depth, location=tuple(at))
+        o = bpy.context.object
+        if rot is not None:
+            o.rotation_mode = "QUATERNION"
+            o.rotation_quaternion = rot
+        return finish(o, m, bevel)
+
+    def ring_(R, r, z, m, at=None):
+        bpy.ops.mesh.primitive_torus_add(major_radius=R, minor_radius=r, major_segments=160, minor_segments=16, location=tuple(at) if at is not None else (cx, cy, z))
+        return finish(bpy.context.object, m)
+
+    def cut(o, cutter):
+        b = o.modifiers.new("cut", "BOOLEAN")
+        b.operation, b.object = "DIFFERENCE", cutter
+        cutter.hide_render = cutter.hide_viewport = True
+
+    near = polar((127.55, -4.55, 1.75), (127.0, -2.36, 0.38), 60)
+    near["d"] *= 1.45
+    yaw = Quaternion((0, 0, 1), near["az"])
+    front = yaw @ Vector((0, -1, 0))
+    side = yaw @ Vector((1, 0, 0))
+    around = lambda a, rad, z: C + (yaw @ Quaternion((0, 0, 1), a)) @ Vector((0, -rad, 0)) + Vector((0, 0, z))     # a = 0 faces the lens
+
+    # the machine ring under the tank, resting on the cell's raised border; its hole keeps the keyhole in view through the glass floor
+    ring = cyl(0.45, 0.08, (cx, cy, 0.057), dark, 0.006, n=160)
+    cut(ring, cyl(0.389, 0.3, (cx, cy, 0.06), None, n=160))
+    ob["tank_floor"].scale = (0.389 / 0.40, 0.389 / 0.40, 1)
+    ring_(0.452, 0.0045, 0.057, cyan)
+    ring_(0.447, 0.007, 0.097, steel)
+    for k in range(12):
+        cyl(0.011, 0.01, around(2 * math.pi * (k + 0.5) / 12, 0.42, 0.102), steel, 0.002, n=24)
+    before = set(o.name for o in ob)
+    # four struts from the ring to the cap, clear of the glass, none in front of the window; they belong to the lid and lift with it
+    for k in range(4):
+        a = math.pi / 4 + k * math.pi / 2
+        p = around(a, 0.405, (0.097 + 0.78) / 2)
+        cyl(0.011, 0.78 - 0.097, p, steel, 0.002, n=32)
+        cyl(0.018, 0.02, around(a, 0.405, 0.107), steel, 0.003, n=32)
+        cyl(0.018, 0.02, around(a, 0.405, 0.77), steel, 0.003, n=32)
+    # the cap in tiers, bolted, with collars round the top of the glass, status lights, and a valve on the pipe
+    finish(cap, steel, 0.006)
+    cyl(0.31, 0.03, (cx, cy, 0.82), dark, 0.005, n=160)
+    cyl(0.16, 0.025, (cx, cy, 0.845), steel, 0.004, n=96)
+    ring_(0.392, 0.006, 0.766, steel)
+    ring_(0.392, 0.006, 0.748, steel)
+    for k in range(16):
+        cyl(0.009, 0.01, around(2 * math.pi * (k + 0.5) / 16, 0.37, 0.81), steel, 0.002, n=20)
+    lights = []
+    for k, m in enumerate((cyan, cyan, amber)):
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=0.011, segments=16, ring_count=8, location=tuple(around(math.radians(-14 + 14 * k), 0.395, 0.79)))
+        lights.append(finish(bpy.context.object, m))
+    finish(pipe, steel, 0.003)
+    for z in (0.88, 1.0):
+        ring_(0.058, 0.008, z, steel)
+    wheel = ring_(0.1, 0.008, 0.94, dark)
+    for k in range(4):
+        cyl(0.005, 0.2, (cx, cy, 0.94), steel, rot=Quaternion((0, 0, 1), k * math.pi / 4) @ Quaternion((0, 1, 0), math.pi / 2), n=12)
+    lid = [glass, cap, pipe] + [o for o in ob if o.name not in before]        # everything on the cap lifts with it, lights and struts too; shot t moves the glass, the cap, the pipe and the lip
+    lid_z = {o.name: o.location.z for o in lid}
+    # two hoses from the cap down the back to the ring
+    for a in (math.radians(140), math.radians(-140)):
+        pts = [around(a, 0.30, 0.83), around(a, 0.47, 0.88), around(a, 0.53, 0.6), around(a, 0.52, 0.3), around(a, 0.44, 0.13), around(a, 0.43, 0.1)]
+        h = tube3d([tuple(p) for p in pts], 0.014, rubber, "hose")
+
+    # the slot machine on the ring's front: four reels behind four windows, a lever on the right
+    W_, H_, D_ = 0.66, 0.2, 0.1
+    mid = C + front * 0.505 + Vector((0, 0, 0.022 + H_ / 2))
+    bpy.ops.mesh.primitive_cube_add(size=1, location=tuple(mid))
+    house = bpy.context.object
+    house.rotation_mode = "QUATERNION"
+    house.rotation_quaternion = yaw
+    house.scale = (W_, D_, H_)
+    finish(house, dark, 0.008)
+    xs = [-0.24, -0.08, 0.08, 0.24]
+    zc = mid.z + 0.005
+    for x in xs:
+        bpy.ops.mesh.primitive_cube_add(size=1, location=tuple(mid + side * x + front * 0.045 + Vector((0, 0, 0.005))))
+        w = bpy.context.object
+        w.rotation_mode = "QUATERNION"
+        w.rotation_quaternion = yaw
+        w.scale = (0.11, 0.04, 0.09)
+        cut(house, w)
+        bpy.ops.mesh.primitive_cube_add(size=1, location=tuple(mid + side * x - front * 0.005 + Vector((0, 0, 0.005))))
+        hollow = bpy.context.object          # room inside for the reel, behind the front wall
+        hollow.rotation_mode = "QUATERNION"
+        hollow.rotation_quaternion = yaw
+        hollow.scale = (0.115, 0.085, 0.13)
+        cut(house, hollow)
+        for dz in (-0.048, 0.048):          # a glowing line over and under each window
+            bpy.ops.mesh.primitive_cube_add(size=1, location=tuple(mid + side * x + front * (D_ / 2 + 0.001) + Vector((0, 0, 0.005 + dz))))
+            g_ = bpy.context.object
+            g_.rotation_mode = "QUATERNION"
+            g_.rotation_quaternion = yaw
+            g_.scale = (0.112, 0.002, 0.004)
+            g_.data.materials.append(cyan)
+    font = bpy.data.fonts.load(HERE + "../../../../../remotion_public/fusion_s1/fonts/InstrumentSerif-Regular.ttf")
+    sans = bpy.data.fonts.load(HERE + "../../../../../remotion_public/fusion_s1/fonts/InterTight.ttf")
+
+    def text(body, size, at, m, f=sans, extrude=0.0005):
+        cu = bpy.data.curves.new("txt", "FONT")
+        cu.body, cu.font, cu.size, cu.extrude = body, f, size, extrude
+        cu.align_x, cu.align_y = "CENTER", "CENTER"
+        cu.materials.append(m)
+        o = bpy.data.objects.new("txt", cu)
+        sc.collection.objects.link(o)
+        o.rotation_mode = "QUATERNION"
+        o.rotation_quaternion = yaw @ Quaternion((1, 0, 0), math.pi / 2)
+        o.location = tuple(at)
+        return o
+    face_front = front * (D_ / 2 + 0.0015)
+    text("AlphaFold confidence (pLDDT)", 0.019, mid + face_front + Vector((0, 0, 0.078)), label)
+    for x, (a, b) in zip(xs, STRETCH):
+        text("%d–%d" % (a, b), 0.016, mid + face_front + side * x + Vector((0, 0, -0.07)), label)
+    drum_white = mat((0.93, 0.93, 0.9), 0.35)
+    ink_m = mat((0.02, 0.02, 0.025), 0.4)
+    blue_m, red_m = mat(P.KLEIN, 0.3), mat(P.RED, 0.3)
+    g = np.random.default_rng(3)
+    drums, N = [], 10
+    for j, x in enumerate(xs):
+        d = empty("drum")
+        d.location = tuple(mid + side * x + Vector((0, 0, 0.005)))        # radius 0.045: inside the hollow, 5 mm behind the front wall
+        d.rotation_quaternion = yaw
+        barrel = cyl(0.045, 0.1, (0, 0, 0), drum_white, rot=Quaternion((0, 1, 0), math.pi / 2), n=64)
+        barrel.parent = d
+        for k in range(N):
+            h = empty("face")
+            h.parent = d
+            h.rotation_quaternion = Quaternion((1, 0, 0), 2 * math.pi * k / N)
+            body = str(SCORE[j]) if k == 0 else ("??" if k == N // 2 else str(int(g.integers(10, 99))))
+            m = (blue_m if SCORE[j] >= 70 else red_m) if k == 0 else ink_m
+            cu = bpy.data.curves.new("num", "FONT")
+            cu.body, cu.font, cu.size, cu.extrude = body, font, 0.04, 0.0015
+            cu.align_x, cu.align_y = "CENTER", "CENTER"
+            cu.materials.append(m)
+            o = bpy.data.objects.new("num", cu)
+            sc.collection.objects.link(o)
+            o.parent = h
+            o.rotation_mode = "QUATERNION"
+            o.rotation_quaternion = Quaternion((1, 0, 0), math.pi / 2)
+            o.location = (0, -0.0462, 0)
+        drums.append(d)
+    lever = empty("lever")
+    lever.location = tuple(mid + side * (W_ / 2 + 0.012) + Vector((0, 0, 0.0)))
+    cyl(0.02, 0.024, (0, 0, 0), steel, rot=Quaternion((0, 1, 0), math.pi / 2), n=32).parent = lever
+    rod = cyl(0.007, 0.2, (0.012, 0, 0.1), steel, n=16)
+    rod.parent = lever
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=0.024, segments=24, ring_count=12, location=(0.012, 0, 0.2))
+    knob = finish(bpy.context.object, mat(P.RED, 0.2, 0.0, 0.6))
+    knob.parent = lever
+
+    # mist inside, and the burst of steam when it opens
+    def mist_mat(name, rgb, scale):
+        m = bpy.data.materials.new(name)
+        m.use_nodes = True
+        nt = m.node_tree
+        nt.nodes.clear()
+        out = nt.nodes.new("ShaderNodeOutputMaterial")
+        vol = nt.nodes.new("ShaderNodeVolumePrincipled")
+        vol.inputs["Color"].default_value = (*rgb, 1)
+        nz = nt.nodes.new("ShaderNodeTexNoise")
+        nz.inputs["Scale"].default_value = scale
+        nz.inputs["Detail"].default_value = 6
+        ramp = nt.nodes.new("ShaderNodeMapRange")
+        ramp.inputs[1].default_value, ramp.inputs[2].default_value = 0.45, 0.78
+        mul = nt.nodes.new("ShaderNodeMath")
+        mul.operation = "MULTIPLY"
+        nt.links.new(nz.outputs[0], ramp.inputs[0])
+        nt.links.new(ramp.outputs[0], mul.inputs[0])
+        nt.links.new(mul.outputs[0], vol.inputs["Density"])
+        nt.links.new(vol.outputs[0], out.inputs["Volume"])
+        return m, mul.inputs[1]
+    bpy.ops.mesh.primitive_cylinder_add(vertices=96, radius=0.375, depth=0.72, location=(cx, cy, 0.031 + 0.36))
+    mist = bpy.context.object
+    mm, mist_d = mist_mat("mist", (0.86, 0.97, 1.0), 9.0)
+    mist.data.materials.append(mm)
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=1.0, segments=48, ring_count=24, location=(cx, cy, 0.2))
+    puff = bpy.context.object
+    puff.name = "steam_puff"
+    pm, puff_d = mist_mat("steam", (0.95, 0.98, 1.0), 5.0)
+    puff.data.materials.append(pm)
+
+    c = sc.camera
+    c.animation_data_clear()
+    c.data.animation_data_clear()
+    for f, v in enumerate([near, near, near, near, dict(near, d=near["d"] * 1.15, at=(127.0, -2.36, 0.55)), dict(near, at=(127.0, -2.36, 0.3), d=near["d"] * 0.95)]):
+        for s in (-0.3, 0.0, 0.3):
+            shoot(c, f + s, v, (cx, cy, 0.3))
+    rng = np.random.default_rng(11)
+
+    def shake(o, f, amp, base):
+        o.animation_data_clear()
+        for s in (-0.25, -0.12, 0.0, 0.12, 0.25):
+            o.location = tuple(np.asarray(base) + rng.normal(0, amp, 3) * (1, 1, 0.5))
+            o.keyframe_insert("location", frame=f + s)
+    rest = {o.name: tuple(o.location) for o in [core, tail] + ghosts}
+    hoses = [o for o in ob if o.name.split(".")[0] == "hose"]
+
+    def update(t):
+        base_update(t)
+        f = min(FRAMES - 1, max(0, round((t - START) * FPS)))
+        for o in hide_always:
+            o.hide_render = True
+        ask.hide_render = f > 1
+        ask.animation_data_clear()
+        if f == 1:                  # sucked up the pipe, stretched thin
+            ask.scale = (0.35, 2.6, 1)
+            for s, z in ((-0.25, 0.5), (0.25, 0.74)):
+                ask.location = (cx, cy, z)
+                ask.keyframe_insert("location", frame=f + s)
+        else:
+            ask.scale = (1, 1, 1)
+            ask.location = (cx, cy, 0.4)
+        for o in [core, tail] + ghosts:
+            x, y, z = rest[o.name]
+            up = {2: 0.12, 3: 0.12}.get(f, 0.019)
+            if f in (2, 3) and not o.hide_render:
+                shake(o, f, 0.02 if f == 2 else 0.005, (x, y, z + up))
+            else:
+                o.animation_data_clear()
+                o.location = (x, y, z + up)
+        for j, d in enumerate(drums):
+            d.animation_data_clear()
+            if f in (1, 2):         # spinning: each reel its own speed, blurred in the shutter
+                turns = (1.5 if f == 1 else 5.0) * (1 + 0.25 * j)
+                for s in (-0.25, 0.25):
+                    d.rotation_quaternion = yaw @ Quaternion((1, 0, 0), 2 * math.pi * turns * (s + 0.25))
+                    d.keyframe_insert("rotation_quaternion", frame=f + s)
+            else:
+                k = N // 2 if f == 0 else 0
+                d.rotation_quaternion = yaw @ Quaternion((1, 0, 0), -2 * math.pi * k / N)
+        lever.rotation_quaternion = yaw @ Quaternion((1, 0, 0), math.radians(-75 if f == 1 else 0))
+        mist.hide_render = f >= 4
+        mist_d.default_value = {0: 5.0, 1: 6.0, 2: 4.0, 3: 1.2}.get(f, 0.0)        # thin enough at 2 for the forming shape to show through
+        puff.hide_render = f < 4
+        puff.scale = (0.55, 0.55, 0.2) if f == 4 else (0.75, 0.75, 0.3)
+        puff.location = (cx, cy, 0.2 if f == 4 else 0.32)
+        puff_d.default_value = 14.0 if f == 4 else 2.0
+        for o in lid:
+            if o in (glass, cap, pipe):
+                continue
+            o.hide_render = f == 5
+            o.location.z = lid_z[o.name] + (0.45 if f == 4 else 0.0)
+        for o in hoses:
+            o.hide_render = f >= 4
+        for o in lights:
+            o.hide_render = f == 5
+        sky(0.2)
+    return update
+
+
 sc, sky = stage()
-update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t, r=shot_r)[SHOT](sc, sky)
+update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t, r=shot_r, s=shot_s)[SHOT](sc, sky)
 sc.frame_start, sc.frame_end = 0, FRAMES
 for f in range(FIRST, LAST + 1, STEP):
     sc.frame_set(f)
