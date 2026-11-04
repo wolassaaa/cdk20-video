@@ -97,7 +97,7 @@ Draft v3.3, 2026-10-28: v3.2 rewritten in an explainer-channel voice. The story 
 |---|---|---|---|---|
 | W0 | 00:00–00:02 | 2 s | S1 | Opening hits (per storyboard) |
 | W1 | 02:03–02:21 | 18 s | S1 | NewJeans - Supernatural (Instrumental), intro 8 bars (~17.6 s) |
-| W2 | 06:52–07:17 | 25 s | S4 | Jon Hopkins - Emerald Rush, from the start to the kick entry |
+| W2 | 06:52–07:17 | 25 s | S4 | Daft Punk - Harder, Better, Faster, Stronger, from 50.446 s (director's pick, 11-04; was Emerald Rush) |
 | W3 | 09:34–09:49 | 15 s | S4 | Holly Herndon & Jlin - Godmother, 8 bars (~15.7 s) |
 | W4 | 12:10–12:18 | 8 s | S5 | The Weeknd - Dancing in the Flames (Instrumental), 4 bars (~8.2 s), full level after one empty beat |
 | W5 | 17:10–17:43 | 33 s | S8 | The Weeknd - Wake Me Up (feat. Justice), instrumental tail 4:16.9-4:49.7 |
@@ -397,8 +397,8 @@ Every member stays at 3.5 minutes or more on both estimates. C keeps both turnin
 
 **W2 · 06:52–07:17 · MUSIC-ONLY WINDOW** (25 s, no narration)
 
-- Visual: EMOTIONAL PEAK 1, the lights come on. Out of total black, an ink bead chain (one dot per residue) folds into the AlphaFold CDK20 model (DB v6) and recolours by confidence; the ribbon locks into shape on the first big chord or kick. One label only: "AlphaFold DB v6 · predicted".
-- Music: Jon Hopkins - Emerald Rush, from the start to the kick entry
+- Visual (updated 11-04, director approved): EMOTIONAL PEAK 1. S3's dashed empty cell springs off the table as a black liquid that keeps changing shape on the beat (the AI's guesses, drawn), calms, turns Klein blue and settles into the AlphaFold CDK20 model (DB v6); the low-confidence tail (303-346) turns red, melts, and the body shakes it off like a wet dog into the next cell, where it lies as a red coil; residues 1-302 land back in their cell. One label only: "AlphaFold DB v6 · predicted". Burned-in bilingual rhyming captions only where the song is sung (音乐/W2_押韵字幕.md); not in the SRT.
+- Music: Daft Punk - Harder, Better, Faster, Stronger, from 50.446 s, so the first sung bar lands on the jump off the table
 
 **4-01 · 07:17–07:43 · B · VO** (65 words)
 
