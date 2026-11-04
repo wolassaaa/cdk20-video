@@ -32,7 +32,7 @@ P, gk = B.P, B.gk
 argv = sys.argv[sys.argv.index("--") + 1:]
 SHOT, OUT = argv[0], argv[1]
 START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0, r=412.0, s=412.0, n=412.0, o=412.0, m=412.0, j=412.0, l=412.0, e=412.0, d=412.0)[SHOT]
-FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6, r=6, s=6, n=4, o=3, m=1171, j=1055, l=1055, e=1055, d=1099)[SHOT]
+FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6, r=6, s=6, n=4, o=3, m=1171, j=1055, l=1055, e=1055, d=1517)[SHOT]
 FIRST = int(argv[2]) if len(argv) > 2 else 0
 LAST = min(int(argv[3]), FRAMES - 1) if len(argv) > 3 else FRAMES - 1
 SAMPLES = int(argv[4]) if len(argv) > 4 else 64
@@ -3629,7 +3629,7 @@ def shot_j(sc, sky, ferro=False, spikes=True, meta=False, shake=False):
     sky(0.2)
     sc.render.use_motion_blur = True
     sc.render.motion_blur_shutter = 0.5
-    B_ = 60.0 / 123.0
+    B_ = 60.0 / (123.477 if shake else 123.0)          # shot d is on Harder Better Faster Stronger itself, from 5.732 s: the riff is in on beat 0, the bass on beat 32 (音乐/W2_押韵字幕.md); the rest are on the old grid
     beat = lambda n: n * B_
     POP, APEX, CALM, SNAP, RED, DOWN, LAND, END = beat(4), beat(6), beat(20), beat(28), beat(29), beat(30), beat(34), (FRAMES - 1) / FPS
     MELT, WHIP, SPLAT, PULL = beat(30), beat(31), beat(32), beat(33)
@@ -4054,10 +4054,11 @@ def shot_j(sc, sky, ferro=False, spikes=True, meta=False, shake=False):
         return dict(at=lerp(p["at"], q["at"], x), az=p["az"] + (q["az"] - p["az"]) * x, el=p["el"] + (q["el"] - p["el"]) * x, d=log("d"), mm=log("mm"))
 
     held = polar((127.55, -4.55, 1.75), (127.0, -2.3, 0.24), 60)
-    dair = 5.2 * RB0
+    dair = 5.2 * RB0 * (1.15 if shake else 1.0)          # shot d: a little further out, and aimed a little low, so the bottom of the frame stays free for the captions
+    ZO = -0.07 if shake else 0.0
     AZ0 = held["az"] - (math.radians(10) if ferro else 0.0)           # shot l: S2's blue pebble sits behind the cell at about 29 degrees, so the camera starts off that line and circles away from it
     ORB = math.radians(-60 if ferro else 60)
-    air = lambda t: dict(at=(P0.x, P0.y, P0.z + lift(t)), az=AZ0, el=math.radians(6), d=dair, mm=40.0)
+    air = lambda t: dict(at=(P0.x, P0.y, P0.z + lift(t) + ZO), az=AZ0, el=math.radians(6), d=dair, mm=40.0)
     land = dict(at=tuple(P0), az=held["az"], el=math.radians(35), d=2.6, mm=50.0)
 
     def view(t):
@@ -4065,7 +4066,7 @@ def shot_j(sc, sky, ferro=False, spikes=True, meta=False, shake=False):
             return held
         if t < APEX + B_:
             v = blend(held, air(t), smooth((t - POP) / (APEX + B_ - POP)))
-            v["at"] = (v["at"][0], v["at"][1], P0.z + 0.9 * lift(t))         # the camera rides up with the jump, so the shape never leaves the frame
+            v["at"] = (v["at"][0], v["at"][1], P0.z + 0.9 * lift(t) + ZO)         # the camera rides up with the jump, so the shape never leaves the frame
             return v
         if t < SNAP:
             x = smooth((t - APEX - B_) / (SNAP - APEX - B_))
@@ -4074,8 +4075,9 @@ def shot_j(sc, sky, ferro=False, spikes=True, meta=False, shake=False):
         top = dict(air(t), az=AZ0 + ORB, el=math.radians(14), d=dair * 0.85)
         if shake:           # out and round so the body in the air and the next cell are both in frame for the throw, then down to both cells
             mx = (P0.x + float(CC[0])) / 2
-            fl = dict(at=(mx, P0.y, 0.62 * (P0.z + H)), az=held["az"] - math.radians(25), el=math.radians(16), d=3.7, mm=40.0)
-            fin = dict(at=(mx, float(CC[1]), 0.16), az=held["az"], el=math.radians(32), d=2.8, mm=45.0)
+            fl = dict(at=(mx, P0.y - 0.15, 0.5 * (P0.z + H)), az=held["az"] - math.radians(25), el=math.radians(16), d=4.4, mm=40.0)
+            fin = dict(at=(mx, float(CC[1]) - 0.22, 0.03), az=held["az"], el=math.radians(32), d=2.8, mm=45.0)          # aimed short of the cells, so they sit above the caption band
+            push = dict(fin, az=held["az"] + math.radians(7), d=2.35)
             if t < SNAP + B_ / 2:
                 return top
             if t < WHIP - B_ / 4:
@@ -4086,7 +4088,9 @@ def shot_j(sc, sky, ferro=False, spikes=True, meta=False, shake=False):
                     k_ = 0.035 * math.exp(-u / 0.35)
                     fl = dict(fl, at=(fl["at"][0] + k_ * math.sin(61 * u), fl["at"][1] + k_ * math.sin(47 * u + 1), fl["at"][2] + k_ * math.sin(73 * u + 2)))
                 return fl
-            return blend(fl, fin, smooth((t - SPLAT - B_ / 2) / (END - SPLAT - B_ / 2)))
+            if t < beat(40):
+                return blend(fl, fin, smooth((t - SPLAT - B_ / 2) / (beat(40) - SPLAT - B_ / 2)))
+            return blend(fin, push, smooth((t - beat(40)) / (END - beat(40))))          # the last three bars of W2: a slow push in on both cells under the last two lines
         if t < DOWN:
             return top
         return blend(top, land, smooth((t - DOWN) / (END - DOWN)))
@@ -4161,7 +4165,7 @@ def shot_e(sc, sky):
 
 
 def shot_d(sc, sky):
-    """W2 motion with the tail shaken off (the director's pick of 11-04 20:45, way 3): shot e's liquid up to the snap and the red tail flickering; beat 30 the tail melts back into red liquid and the body winds up; beat 31 it shakes like a wet dog, about five turns a second dying away, and the red liquid is flung off in a streak, the tip first; beat 32 it splats in the next cell (cell 23) and spreads; beat 33 it draws together into a red line, the flat coil from u_path_2.py; beats 32-36 the blue body, residues 1-302, floats down into its cell with its pocket open. The flight is a smooth arc from the speed it was flung at to a falling drop, checked every frame clear of the kept part and of the table. Run: blender -b -P bl_inserts.py -- d <out dir> 0 1098 16 0.5 2"""
+    """W2 motion with the tail shaken off (the director's pick of 11-04 20:45, way 3): shot e's liquid up to the snap and the red tail flickering; beat 30 the tail melts back into red liquid and the body winds up; beat 31 it shakes like a wet dog, about five turns a second dying away, and the red liquid is flung off in a streak, the tip first; beat 32 it splats in the next cell (cell 23) and spreads; beat 33 it draws together into a red line, the flat coil from u_path_2.py; beats 32-36 the blue body, residues 1-302, floats down into its cell with its pocket open. The flight is a smooth arc from the speed it was flung at to a falling drop, checked every frame clear of the kept part and of the table. Version 3 (11-04 22:05): on the song itself, 123.477 BPM, and 13 bars long (25.3 s, all of W2), the last three bars a slow push in on both cells; the camera leaves the bottom of the frame for the rhyming captions (音乐/W2_押韵字幕.md). Run: blender -b -P bl_inserts.py -- d <out dir> 0 1516 16 0.5 2"""
     return shot_j(sc, sky, ferro=True, spikes=False, meta=True, shake=True)
 
 

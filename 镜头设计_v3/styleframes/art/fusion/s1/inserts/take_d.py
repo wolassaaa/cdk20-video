@@ -10,7 +10,7 @@ from PIL import Image
 FF = "D:/。hkbu/molecular science/镜头设计_v2/tests/T4_remotion/node_modules/@remotion/compositor-win32-x64-msvc/ffmpeg.exe"
 SRC, OUT = sys.argv[1], sys.argv[2]
 files = sorted(glob.glob(SRC + "/d_*.png"))
-assert len(files) == 550, len(files)
+assert len(files) in (550, 759), len(files)          # 550 for versions 1-2 (18.3 s), 759 for version 3 (25.3 s, all of W2)
 
 p = subprocess.Popen([FF, "-y", "-loglevel", "error", "-f", "image2pipe", "-c:v", "png", "-r", "30", "-i", "-", "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p", "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709", OUT], stdin=subprocess.PIPE)
 jumps, last = [], None

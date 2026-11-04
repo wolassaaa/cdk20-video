@@ -8,9 +8,9 @@ import W3C from "./w3_count.json";
 
 const FPS = TL.fps, N = TL.n, W = 1920, H = 1080;
 const INK = "#111113", SOFT = "#545458", RED = "#E8190F", DARK = "#9A0E08", KLEIN = "#002FA7", BONE = "#EDEBE4";
-const SERIF = "Instrument Serif", SANS = "Inter Tight", HAND = "Caveat";
+const SERIF = "Instrument Serif", SANS = "Inter Tight", HAND = "Caveat", ZH = "Noto Serif SC";
 
-const faces = [new FontFace(SERIF, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Regular.ttf")})`), new FontFace(SERIF, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Italic.ttf")})`, {style: "italic"}), new FontFace(SANS, `url(${staticFile("fusion_s1/fonts/InterTight.ttf")})`, {weight: "100 900"}), new FontFace(HAND, `url(${staticFile("fusion_s1/fonts/Caveat.ttf")})`, {weight: "400 700"})];
+const faces = [new FontFace(SERIF, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Regular.ttf")})`), new FontFace(SERIF, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Italic.ttf")})`, {style: "italic"}), new FontFace(SANS, `url(${staticFile("fusion_s1/fonts/InterTight.ttf")})`, {weight: "100 900"}), new FontFace(HAND, `url(${staticFile("fusion_s1/fonts/Caveat.ttf")})`, {weight: "400 700"}), new FontFace(ZH, `url(${staticFile("fusion_s1/fonts/NotoSerifSC-VF.ttf")})`, {weight: "200 900"})];
 const fontHandle = delayRender("fonts");
 Promise.all(faces.map(f => f.load())).then(l => { l.forEach(f => document.fonts.add(f)); continueRender(fontHandle); });
 
@@ -534,6 +534,59 @@ const W2 = ({file = "fusion_s1/w2_td_1.mp4"}) => <Clock.Provider value={useCurre
   </svg>
 </AbsoluteFill></Clock.Provider>;
 
+/** W2 with its rhyming captions (音乐/W2_押韵字幕.md, the director's OK of 11-04 22:00): the picture is shot d on Harder Better Faster Stronger from 5.732 s (riff in; the bass comes in on beat 32, the splat),
+ * 123.477 BPM. Each line is 7 Chinese characters over 7 English syllables, one per eighth note from its first beat; the whole line shows faint a little before,
+ * each syllable inks in on its own beat. Rhyme words are in italic, coloured where the colour means something (blue sure, red the tail). The director's note of
+ * 11-04 22:20: the captions need not sit in one place, they can float. Each line has its own spot, picked from shot d's frames where nothing is (prints never
+ * cover the figure), and drifts slowly while it shows: [centre x, centre y] as parts of the frame, then the drift over its time in px. The predicted tag and the
+ * source line sit bottom right, the one corner nothing reaches all through the shot (top left is where CDK20 ends up). Beats count from the start of the shot. */
+const W2_BEAT = 60 / 123.477;
+const W2_LINES = [
+  [4, "跳上半空猜模样", ["Up ", "it ", "springs ", "to ", "guess ", "the ", "form,"], INK, [0.82, 0.52], [22, -34]],
+  [12, "翻来滚去像海浪", ["twist", "ing, ", "turn", "ing, ", "liq", "uid ", "storm."], INK, [0.40, 0.84], [-40, -10]],
+  [25, "越转越慢定成蓝", ["Slow", "ing, ", "set", "tling, ", "sure ", "in ", "blue;"], KLEIN, [0.21, 0.24], [14, 10]],
+  [29, "红尾没底就此完", ["red ", "tail? ", "Not ", "so ", "sure. ", "It's ", "through."], RED, [0.75, 0.27], [30, 16]],
+  [33, "甩飞出去满地洒", ["Flung ", "off, ", "splashed ", "a", "cross ", "the ", "floor,"], RED, [0.70, 0.85], [20, 8]],
+  [37, "一到三零二留下", ["one ", "to ", "three-", "oh-", "two: ", "the ", "core."], KLEIN, [0.31, 0.86], [-16, -8]],
+  [44, "那时没人测过它", ["No ", "one ", "then ", "had ", "seen ", "it ", "yet;"], INK, [0.73, 0.20], [-24, 12]],
+  [48, "押上预测这一把", ["what ", "they ", "had: ", "a ", "well-", "placed ", "bet."], INK, [0.56, 0.85], [24, -12]],
+];
+const W2Line = ({t, i}) => {
+  const [b0, zh, en, accent, [cx, cy], [dx, dy]] = W2_LINES[i];
+  const t0 = b0 * W2_BEAT, next = i + 1 < W2_LINES.length ? W2_LINES[i + 1][0] * W2_BEAT : 1e9;
+  const vis = clamp((t - t0 + 0.25) / 0.15) * (1 - clamp((t - next + 0.2) / 0.15));
+  if (vis <= 0) return null;
+  const ink = k => { const u = (t - t0 - k * W2_BEAT / 2) / 0.07; return {opacity: 0.2 + 0.8 * clamp(u), transform: `translateY(${(1 - out(u)) * 7}px)`, display: "inline-block", whiteSpace: "pre"}; };
+  const last = k => k === 6;
+  const end = Math.min(next, 25.3), u = clamp((t - t0 + 0.25) / (end - t0 + 0.25));
+  const fx = cx * W - 500 + dx * u + 5 * Math.sin(1.1 * t + i), fy = cy * H - 61 + dy * u + 6 * Math.sin(1.4 * t + 2 * i) + (1 - out(vis)) * 14;      // drifts across its time, bobs, rises in as it appears
+  const rot = 0.8 * Math.sin(0.7 * t + i);
+  return <div style={{position: "absolute", left: fx, top: fy, width: 1000, textAlign: "center", opacity: vis, transform: `rotate(${rot}deg)`, textShadow: `0 0 10px ${BONE}, 0 0 4px ${BONE}`}}>
+    <div style={{fontFamily: ZH, fontWeight: 500, fontSize: 50, letterSpacing: 10, color: INK, lineHeight: "62px"}}>
+      {[...zh].map((c, k) => <span key={k} style={{...ink(k), color: last(k) ? accent : INK}}>{c}</span>)}
+    </div>
+    <div style={{fontFamily: SERIF, fontSize: 52, color: INK, lineHeight: "60px"}}>
+      {en.map((w, k) => <span key={k} style={{...ink(k), color: last(k) ? accent : INK, fontStyle: last(k) ? "italic" : "normal"}}>{w}</span>)}
+    </div>
+  </div>;
+};
+const W2Lyrics = ({file = "fusion_s1/w2_shake_3.mp4", fps = 30}) => {
+  const t = useCurrentFrame() / fps;
+  ruler.font = `600 28px "${SANS}"`;
+  const W2_TAG_W = ruler.measureText("AlphaFold DB v6 · predicted").width;          // measured once the fonts are in
+  return <Clock.Provider value={t}><AbsoluteFill style={{background: BONE}}>
+    <OffthreadVideo src={staticFile(file)} muted style={{width: W, height: H}}/>
+    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
+      <g opacity={after(t, 0.3)}>
+        <circle cx={W - 72 - W2_TAG_W - 26} cy={1018 - 10} r={14} fill="none" stroke={INK} strokeWidth={2.5} strokeDasharray="6 5"/>
+        <text x={W - 72} y={1018} fontFamily={SANS} fontSize={28} fontWeight={600} fill={INK} textAnchor="end">AlphaFold DB v6 · predicted</text>
+        <text x={W - 72} y={1056} fontFamily={SANS} fontSize={22} fontWeight={500} fill={SOFT} textAnchor="end">Illustration · motion drawn · structure AlphaFold DB v6 · Ren 2023</text>
+      </g>
+    </svg>
+    {W2_LINES.map((_, i) => <W2Line key={i} t={t} i={i}/>)}
+  </AbsoluteFill></Clock.Provider>;
+};
+
 /** S3 test boards: the beats that have to read in five seconds. Numbers are Feng 2011's; the grid's cells are drawn, so its source line says Illustration. */
 const Tally = () => <g transform="translate(0 110)">
   {Array.from({length: 52}, (_, i) => <rect key={i} x={250 + (i % 26) * 54} y={i < 26 ? 300 : 450} width={26} height={120} rx={13} fill={i < 36 ? RED : "#D4D1C8"}/>)}
@@ -584,6 +637,7 @@ const Root = () => <>
   <Composition id="W3" component={W3} durationInFrames={942} fps={60} width={W} height={H}/>
   <Composition id="Wall" component={Wall} durationInFrames={1500} fps={60} width={W} height={H}/>
   <Composition id="W2" component={W2} durationInFrames={1500} fps={60} width={W} height={H}/>
+  <Composition id="W2Lyrics" component={W2Lyrics} durationInFrames={759} fps={30} width={W} height={H}/>
   <Composition id="Loop" component={Loop} durationInFrames={1620} fps={60} width={W} height={H}/>
 </>;
 registerRoot(Root);
