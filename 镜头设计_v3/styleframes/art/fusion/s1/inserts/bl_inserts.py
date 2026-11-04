@@ -31,8 +31,8 @@ import world as W      # noqa: E402
 P, gk = B.P, B.gk
 argv = sys.argv[sys.argv.index("--") + 1:]
 SHOT, OUT = argv[0], argv[1]
-START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0, r=412.0, s=412.0, n=412.0, o=412.0, m=412.0, j=412.0, l=412.0, e=412.0, d=412.0, i=437.0, i2=463.0)[SHOT]
-FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6, r=6, s=6, n=4, o=3, m=1171, j=1055, l=1055, e=1055, d=1517, i=1560, i2=1020)[SHOT]
+START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0, r=412.0, s=412.0, n=412.0, o=412.0, m=412.0, j=412.0, l=412.0, e=412.0, d=412.0, i=437.0, i2=463.0, i3=480.0, i4=505.0)[SHOT]
+FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6, r=6, s=6, n=4, o=3, m=1171, j=1055, l=1055, e=1055, d=1517, i=1560, i2=1020, i3=1080, i4=210)[SHOT]
 FIRST = int(argv[2]) if len(argv) > 2 else 0
 LAST = min(int(argv[3]), FRAMES - 1) if len(argv) > 3 else FRAMES - 1
 SAMPLES = int(argv[4]) if len(argv) > 4 else 64
@@ -64,7 +64,7 @@ def stage():
     nt = sc.world.node_tree
     pick = lambda kind: [n for n in nt.nodes if n.type == kind]
     dot, win = pick("VECT_MATH")[0], pick("MAP_RANGE")[1]
-    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2, t=0.2, r=0.2, s=0.2, n=0.2, o=0.2, m=0.2, j=0.2, l=0.2, e=0.2, d=0.2, i=0.2, i2=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9, t=0.9, r=0.9, s=0.9, n=0.9, o=0.9, m=0.9, j=0.9, l=0.9, e=0.9, d=0.9, i=0.9, i2=0.9)[SHOT]
+    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2, t=0.2, r=0.2, s=0.2, n=0.2, o=0.2, m=0.2, j=0.2, l=0.2, e=0.2, d=0.2, i=0.2, i2=0.2, i3=0.2, i4=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9, t=0.9, r=0.9, s=0.9, n=0.9, o=0.9, m=0.9, j=0.9, l=0.9, e=0.9, d=0.9, i=0.9, i2=0.9, i3=0.9, i4=0.9)[SHOT]
 
     def sky(x):
         dot.inputs[1].default_value = lerp((-0.22, 0.92, 0.32), P.WINDOW, x)
@@ -4186,6 +4186,8 @@ def shot_d(sc, sky):
 I_VO = dict(start=0.0, ai=4.4, chain=7.6, order=13.6, learned=16.8, sure=20.0, end=26.0)
 # 4-02 (07:43-08:00), the same, at 0.45 s a word
 I2_VO = dict(before=0.0, now=3.1, downloaded=3.6, first=9.0, end=17.0)
+# 4-03 (08:00-08:18), 44 words at 0.41 s a word
+I3_VO = dict(closer=0.0, tail=1.5, model=6.6, block=10.4, trust=14.0, end=18.0)
 
 
 
@@ -4194,6 +4196,19 @@ def shot_i2(sc, sky):
     camera climbs over S3's whole grid, where only four of 45 cells hold a shape someone measured in a lab ("before"); then down to CDK20's cell, which now holds the free
     prediction ("now"), and in on it for the paper's "first time". Labels are laid on in Remotion (S402) at the screen spots printed here. Run: blender -b -P bl_inserts.py -- i2 <out dir> 0 1019 16 0.5 2"""
     return shot_i(sc, sky, part=2)
+
+
+def shot_i3(sc, sky):
+    """4-03 (08:00-08:18, B's voice-over), straight on from shot i2: "But look closer." The coil in the next cell comes up as its blocks again, mostly red; a see-through red
+    copy of the tail peels off it and runs back along its own path to where the model put it, across the pocket; the camera goes in over the pocket and one block, Arg305,
+    lights up inside it. Labels are laid on in Remotion (S403) at the screen spots printed here. Run: blender -b -P bl_inserts.py -- i3 <out dir> 0 1079 16 0.5 2"""
+    return shot_i(sc, sky, part=3)
+
+
+def shot_i4(sc, sky):
+    """Back on the table after 4-05 (B on camera: "They cut the tail off"), the first 3.5 s of 4-06's voice-over: the see-through tail breaks into its own 44 blocks, which drift
+    straight out from the body and shrink away, the tail's end first; the camera pulls back to the body and the real coil in the next cell. Run: blender -b -P bl_inserts.py -- i4 <out dir> 0 209 16 0.5 2"""
+    return shot_i(sc, sky, part=4)
 
 def smooth_np(x):
     x = np.clip(x, 0, 1)
@@ -4234,7 +4249,7 @@ def shot_i(sc, sky, part=1):
     are drawn. Times are in I_VO. Run: blender -b -P bl_inserts.py -- i <out dir> 0 1559 16 0.5 2"""
     global START
     shot_v(sc, sky)
-    START = 437.0 if part == 1 else 463.0
+    START = {1: 437.0, 2: 463.0, 3: 480.0, 4: 505.0}[part]
     sc.render.use_motion_blur = True
     sc.render.motion_blur_shutter = 0.5
     ob = bpy.data.objects
@@ -4375,6 +4390,78 @@ def shot_i(sc, sky, part=1):
         close = dict(at=(P0.x, P0.y - 0.05, 0.8 * P0.z), az=held["az"] - math.radians(10), el=math.radians(27), d=2.45, mm=45.0)
         keys = [(0.0, keys[-1][1]), (V2["now"] - 0.2, grid), (V2["downloaded"] + 1.4, grid), (V2["first"] - 0.6, cell), (V2["end"], close)]
 
+    if part in (3, 4):
+        # 4-03: "but look closer". The coil's blocks come up again in their own colours (the tail: mostly not sure); a see-through red copy of the tail peels off the coil and
+        # runs back along its own path (u_tail_2.npz, the path W2's tail took out to the coil, played backwards; every frame of it was checked clear of the body) to where the
+        # model put it, across the pocket; then one block, Arg305, lights up inside the pocket. The ghost and the block are drawn; where they sit is the AlphaFold DB v6 model.
+        V3 = I3_VO
+        ut = np.load(HERE + "frames/u_tail_2.npz")
+        UPOS = ut["pos"].astype(float)
+        ghost_l, ghost_s = see_through(P.RED, 0.0), see_through(P.RED, 0.0)
+        gl_bsdf = next(n for n in ghost_l.node_tree.nodes if n.type == "BSDF_PRINCIPLED")
+        gs_bsdf = next(n for n in ghost_s.node_tree.nodes if n.type == "BSDF_PRINCIPLED")
+        g_line = tube3d(UPOS[-1], float(ut["tr"]), ghost_l, "ghost_line")
+        g_tail = ob["tail"]                    # shot v's tail surface, 303-346, where the model has it
+        assert g_tail.type == "MESH"
+        g_tail.data.materials[0] = ghost_s
+        sc305 = np.array([[float(l[30:38]), float(l[38:46]), float(l[46:54])] for l in pdb
+                          if int(l[22:26]) == 305 and l[12:16].strip() not in ("N", "CA", "C", "O") and l[76:78].strip() != "H"])
+        A305 = (sc305.mean(0) - hv.mean(0)) @ R.T * P_S          # Arg305's side chain, the part that reaches into the pocket, in the model's mesh
+        F305 = frames_along(HOME[:306])[304]
+        me305 = bpy.data.meshes.new("arg305")
+        L305 = (UB @ F305.T) * HALF * 1.6 * P_S          # a little bigger than 4-01's blocks, so the one block reads from here
+        me305.from_pydata((A305 + L305).tolist(), [], UQ.tolist())
+        me305.attributes.new("col", "FLOAT_COLOR", "POINT")
+        me305.attributes.new("glow", "FLOAT", "POINT")
+        me305.attributes["col"].data.foreach_set("color", np.tile([*P.RED, 1.0], len(UB)).astype(np.float32))     # pLDDT 58: red, as in 4-01
+        me305.materials.append(m)
+        arg = bpy.data.objects.new("arg305", me305)
+        sc.collection.objects.link(arg)
+        B.smooth(arg)
+        arg.rotation_mode = "QUATERNION"
+        arg.rotation_quaternion, arg.scale, arg.location = core.rotation_quaternion, core.scale, core.location
+        bpy.context.view_layer.update()
+        mw = small.matrix_world
+        mid = mw @ Vector((np.asarray(full["pocket"]) @ R.T * P_S).tolist())
+        way = (mw.to_3x3() @ Vector((R @ np.asarray(full["mouth"])).tolist())).normalized()
+        az_in = math.atan2(way.x, -way.y)
+        az_in += round((held["az"] - az_in) / (2 * math.pi)) * 2 * math.pi
+        W305 = arg.matrix_world @ Vector(A305.tolist())
+        side = W305 - P0          # the pocket's side of the body is where Arg305 sits: the camera goes round to that side
+        print("4-03: mouth az %.0f, Arg305 side az %.0f" % (math.degrees(az_in), math.degrees(math.atan2(side.x, -side.y))))
+        az_in = math.atan2(side.x, -side.y)
+        az_in += round((held["az"] - az_in) / (2 * math.pi)) * 2 * math.pi
+        print("4-03: Arg305 side chain %.1f A from the pocket's centre" % (np.linalg.norm(A305 - np.asarray(full["pocket"]) @ R.T * P_S) / P_S))
+        close = dict(at=(P0.x, P0.y - 0.05, 0.8 * P0.z), az=held["az"] - math.radians(10), el=math.radians(27), d=2.45, mm=45.0)        # where 4-02 ends
+        pair = dict(at=((P0.x + float(CC[0])) / 2 + 0.08, float(CC[1]) - 0.02, 0.12), az=held["az"] + math.radians(4), el=math.radians(30), d=2.6, mm=45.0)
+        pocket = dict(at=tuple(lerp(tuple(mid), tuple(W305), 0.5)[:2]) + (float(lerp(tuple(mid), tuple(W305), 0.5)[2]) + 0.12,), az=az_in, el=math.radians(46), d=2.2, mm=50.0)
+        inside = dict(pocket, d=1.95)          # the whole body stays clear of the corner tag
+        keys = [(0.0, close), (1.4, dict(close, d=2.25)), (V3["tail"] + 0.6, pair), (V3["model"] + 0.2, pair), (V3["model"] + 3.4, pocket),
+                (V3["block"] + 0.2, pocket), (V3["block"] + 2.8, inside), (V3["end"], dict(inside, d=1.9))]
+    if part == 4:
+        # after 4-05 ("they cut the tail off"): the ghost breaks into its own 44 blocks (on its CAs, in their colours), each drifts straight out from the body's centre and
+        # shrinks away, the tail's end first; the camera pulls back to both cells, where the real coil still lies
+        keys = [(0.0, keys[-1][1]), (0.5, keys[-1][1]), (3.4, dict(pair, d=2.7))]
+        GH = HOME[302:]
+        ghost_frs = frames_along(HOME[300:])[2:]
+        me_g = bpy.data.meshes.new("ghost_blocks")
+        LG = np.concatenate([UB @ F.T for F in ghost_frs]) * HALF * P_S
+        CG = np.repeat(GH, len(UB), 0)
+        me_g.from_pydata((CG + LG).tolist(), [], np.concatenate([UQ + k * len(UB) for k in range(44)]).tolist())
+        me_g.attributes.new("col", "FLOAT_COLOR", "POINT")
+        me_g.attributes.new("glow", "FLOAT", "POINT")
+        me_g.attributes["col"].data.foreach_set("color", np.c_[np.repeat(sure[302:], len(UB), 0), np.ones(44 * len(UB))].astype(np.float32).ravel())
+        me_g.materials.append(m)
+        gb = bpy.data.objects.new("ghost_blocks", me_g)
+        sc.collection.objects.link(gb)
+        B.smooth(gb)
+        gb.rotation_mode = "QUATERNION"
+        gb.rotation_quaternion, gb.scale, gb.location = core.rotation_quaternion, core.scale, core.location
+        core_c = (np.array([[float(l[30:38]), float(l[38:46]), float(l[46:54])] for l in pdb if l[76:78].strip() != "H" and int(l[22:26]) <= 302]).mean(0) - hv.mean(0)) @ R.T * P_S
+        away = GH - core_c
+        away /= np.linalg.norm(away, axis=1)[:, None]
+        t_go = 0.45 + 0.6 * (43 - np.arange(44)) / 43          # the tail's end goes first, Arg305's block (k 2) among the last
+
     def mix(p, q, x):
         log = lambda k: math.exp(math.log(p[k]) + (math.log(q[k]) - math.log(p[k])) * x)
         return dict(at=lerp(p["at"], q["at"], x), az=p["az"] + (q["az"] - p["az"]) * x, el=p["el"] + (q["el"] - p["el"]) * x, d=log("d"), mm=log("mm"))
@@ -4396,9 +4483,84 @@ def shot_i(sc, sky, part=1):
         for f in (round((I2_VO["now"] + 0.5) * FPS), round(I2_VO["downloaded"] + 1.0) * round(FPS), round((I2_VO["first"] + 1.0) * FPS), FRAMES - 1):
             sc.frame_set(f)
             print("4-02 frame %d:" % f, ", ".join("%s %.0f %.0f" % (k, *(lambda q: (q.x * 1920, (1 - q.y) * 1080))(world_to_camera_view(sc, c, Vector(p_)))) for k, p_ in spots.items()))
+    if part == 3:          # the coil, the pocket and Arg305 on screen, for the Remotion layer (S403)
+        from bpy_extras.object_utils import world_to_camera_view
+        spots = dict(coil=(float(CC[0]), float(CC[1]), 0.03), pocket=tuple(mid), arg305=tuple(W305))
+        for tt in (V3["tail"] + 3.0, V3["model"] + 3.6, V3["block"] + 1.0, V3["trust"] + 2.0, V3["end"] - 0.02):
+            f = round(tt * FPS)
+            sc.frame_set(f)
+            print("4-03 frame %d:" % f, ", ".join("%s %.0f %.0f" % (k, *(lambda q: (q.x * 1920, (1 - q.y) * 1080))(world_to_camera_view(sc, c, Vector(p_)))) for k, p_ in spots.items()))
+
+    def update3(t):
+        c_bsdf.inputs["Alpha"].default_value = 1.0
+        thread.hide_render = True
+        for o in letters:
+            o.hide_render = True
+        blk[0][0].hide_render = True
+        # the coil's 44 blocks come up again in their colours, then melt back into the line before the ghost leaves it
+        up = smooth((t - V3["tail"] - 0.7) / 0.6) * (1 - smooth((t - V3["model"] + 0.5) / 0.6))
+        l_bsdf.inputs["Alpha"].default_value = 1 - 0.84 * up
+        thread_t.hide_render = bool(up <= 0)
+        k = np.arange(44)
+        pop = np.clip((t - (V3["tail"] + 0.8 + 0.8 * k / 43)) / 0.25, 0, 1)
+        pop = (1 - (1 - pop) ** 3) * (1 - smooth((t - V3["model"] + 0.5) / 0.6))
+        o, me, cen, loc, n = blk[1]
+        nv = len(UB)
+        me.vertices.foreach_set("co", (cen + loc * np.maximum(np.repeat(pop, nv)[:, None], 1e-3)).astype(np.float32).ravel())
+        me.attributes["col"].data.foreach_set("color", np.c_[np.repeat(sure[302:], nv, 0), np.ones(n * nv)].astype(np.float32).ravel())
+        me.attributes["glow"].data.foreach_set("value", np.zeros(n * nv, np.float32))
+        me.update()
+        o.hide_render = bool(pop.max() <= 0)
+        # the ghost: off the coil and back along the path to the model's place for it, then the tail's own surface, see-through, across the pocket
+        g = smooth((t - V3["model"] - 0.2) / 2.8)
+        pos = UPOS[round((1 - g) * (len(UPOS) - 1))]
+        for q, p_ in zip(g_line.data.splines[0].points, pos):
+            q.co = (*p_.tolist(), 1)
+        a_line = 0.5 * smooth((t - V3["model"] - 0.2) / 0.3) * (1 - smooth((t - V3["model"] - 3.0) / 0.6))
+        gl_bsdf.inputs["Alpha"].default_value = a_line
+        g_line.hide_render = bool(a_line <= 0.005)
+        flash = math.exp(-((t - V3["trust"] - 2.7) / 0.35) ** 2)          # "a blocked door"
+        a_tail = 0.34 * smooth((t - V3["model"] - 2.7) / 0.6) * (1 - 0.4 * smooth((t - V3["block"] - 0.1) / 0.5)) + 0.3 * flash
+        gs_bsdf.inputs["Alpha"].default_value = a_tail
+        g_tail.hide_render = bool(a_tail <= 0.005)
+        # Arg305: one block, in the pocket
+        u = min(1.0, max(0.0, (t - V3["block"] - 0.3) / 0.25))
+        u = 1 - (1 - u) ** 3
+        me305.vertices.foreach_set("co", (A305 + L305 * max(u, 1e-3)).astype(np.float32).ravel())
+        glow = (0.5 + 1.2 * math.exp(-max(t - V3["block"] - 0.3, 0) / 0.6) + 0.8 * flash) * u
+        me305.attributes["glow"].data.foreach_set("value", np.full(len(UB), glow, np.float32))
+        me305.update()
+        arg.hide_render = bool(u <= 0)
+
+    def update4(t):
+        c_bsdf.inputs["Alpha"].default_value, l_bsdf.inputs["Alpha"].default_value = 1.0, 1.0
+        for o in letters + [thread, thread_t, blk[0][0], blk[1][0], g_line]:
+            o.hide_render = True
+        flash = 0.0
+        a_tail = 0.34 * 0.6 * (1 - smooth((t - 0.1) / 0.45))
+        gs_bsdf.inputs["Alpha"].default_value = a_tail
+        g_tail.hide_render = bool(a_tail <= 0.005)
+        u = 1 - smooth((t - 0.1) / 0.3)
+        me305.vertices.foreach_set("co", (A305 + L305 * max(u, 1e-3)).astype(np.float32).ravel())
+        me305.attributes["glow"].data.foreach_set("value", np.full(len(UB), 0.5 * u, np.float32))
+        me305.update()
+        arg.hide_render = bool(u <= 0)
+        inn = smooth_np((t - 0.05) / 0.3)
+        go = np.clip((t - t_go) / 1.1, 0, 1)
+        size = inn * (1 - smooth_np(go))
+        drift = (go ** 1.5)[:, None] * 9.0 * P_S * away          # out to 9 A from where it sat
+        nv = len(UB)
+        me_g.vertices.foreach_set("co", (np.repeat(GH + drift, nv, 0) + LG * np.maximum(np.repeat(size, nv)[:, None], 1e-3)).astype(np.float32).ravel())
+        me_g.attributes["glow"].data.foreach_set("value", np.repeat(0.6 * (1 - go), nv).astype(np.float32))
+        me_g.update()
+        gb.hide_render = bool(size.max() <= 0)
 
     def update(t):
         t = t - START
+        if part == 3:
+            return update3(t)
+        if part == 4:
+            return update4(t)
         back = 0.0
         if part == 2:          # it starts as 4-01 ends; the glass fills back in, the letters lie down and the coil's blocks melt back into the line
             back, t = smooth((t - 0.3) / 1.4), I_VO["end"] + t
@@ -4430,7 +4592,7 @@ def shot_i(sc, sky, part=1):
 
 
 sc, sky = stage()
-update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t, r=shot_r, s=shot_s, n=shot_n, o=shot_o, m=shot_m, j=shot_j, l=shot_l, e=shot_e, d=shot_d, i=shot_i, i2=shot_i2)[SHOT](sc, sky)
+update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t, r=shot_r, s=shot_s, n=shot_n, o=shot_o, m=shot_m, j=shot_j, l=shot_l, e=shot_e, d=shot_d, i=shot_i, i2=shot_i2, i3=shot_i3, i4=shot_i4)[SHOT](sc, sky)
 sc.frame_start, sc.frame_end = 0, FRAMES
 for f in range(FIRST, LAST + 1, STEP):
     sc.frame_set(f)

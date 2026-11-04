@@ -655,6 +655,70 @@ const S402 = ({file = "fusion_s1/s4_402_1.mp4", fps = 30, review = true}) => {
   </AbsoluteFill></Clock.Provider>;
 };
 
+/** 4-03 (08:00-08:18, B's voice-over) over shot i3: "but look closer". The coil's blocks come up red again, a see-through red copy of the tail runs back across the pocket,
+ * and one block, Arg305, lights up inside it. Spots are the screen points shot i3 prints (coil at 4.5 s, Arg305 from 11.4 s on). Times follow I3_VO in bl_inserts.py. */
+const S403_VO = {tail: 1.5, model: 6.6, block: 10.4, trust: 14.0};
+const S403_LINES = [[0, "But look closer."], [1.5, "One end of the protein, a floppy tail, had really low confidence."], [6.6, "And in the model, it lay across the keyhole, with one building block sitting inside the ATP pocket."], [14.0, "Trust it blindly, and you'd cut keys for a blocked door."]];
+const S403_COIL = [1301, 658], S403_ARG = [[11.4, 972, 656], [18.0, 973, 671]];          // Arg305 drifts a little as the camera keeps creeping in
+const S403 = ({file = "fusion_s1/s4_403_1.mp4", fps = 30, review = true}) => {
+  const t = useCurrentFrame() / fps, V = S403_VO;
+  ruler.font = `600 28px "${SANS}"`;
+  const tagW = ruler.measureText("AlphaFold DB v6 · predicted").width;
+  const tail = 1 - after(t, V.model + 0.1, 0.4);
+  const [[t0, x0, y0], [t1, x1, y1]] = S403_ARG, k = Math.min(1, Math.max(0, (t - t0) / (t1 - t0)));
+  const ax = x0 + (x1 - x0) * k, ay = y0 + (y1 - y0) * k, lx = 1500, ly = 760;
+  return <Clock.Provider value={t}><AbsoluteFill style={{background: BONE}}>
+    <OffthreadVideo src={staticFile(file)} muted style={{width: W, height: H}}/>
+    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
+      <text x={1856} y={92} fontFamily={SANS} fontSize={36} fontWeight={600} fill={INK} textAnchor="end">Objective 1 / Tool: structure prediction</text>
+      <g opacity={tail}>
+        <Note x={S403_COIL[0]} y={S403_COIL[1] - 110} size={52} at={V.tail + 3.0} anchor="middle" rot={-2}>the floppy tail: mostly below 70</Note>
+      </g>
+      <Leader pts={[[ax, ay], [lx - 20, ly - 18]]} at={V.block + 1.0}/>
+      <Ink x={lx} y={ly} size={60} at={V.block + 1.3} font={SERIF} w={300} dur={0.6}>Arg305</Ink>
+      <Ink x={lx} y={ly + 44} size={30} at={V.block + 1.8} w={420}>one block of the tail,</Ink>
+      <Ink x={lx} y={ly + 82} size={30} at={V.block + 2.2} w={420}>inside the ATP pocket</Ink>
+      <Note x={150} y={740} size={56} at={V.trust + 2.4} rot={-3}>a blocked door</Note>
+      {review && <text x={64} y={1018} fontFamily={SANS} fontSize={24} fontWeight={500} fill={SOFT}>VO (B): {[...S403_LINES].reverse().find(([a]) => t >= a)[1]}</text>}
+      <g>
+        <circle cx={W - 72 - tagW - 26} cy={1018 - 10} r={14} fill="none" stroke={INK} strokeWidth={2.5} strokeDasharray="6 5"/>
+        <text x={W - 72} y={1018} fontFamily={SANS} fontSize={28} fontWeight={600} fill={INK} textAnchor="end">AlphaFold DB v6 · predicted</text>
+        <text x={W - 72} y={1056} fontFamily={SANS} fontSize={22} fontWeight={500} fill={SOFT} textAnchor="end">Illustration · ghost and blocks drawn · structure and confidence AlphaFold DB v6 · Ren 2023 Fig. 4A</text>
+      </g>
+    </svg>
+  </AbsoluteFill></Clock.Provider>;
+};
+
+/** Piece 2 of S4's second half in one review clip (08:00-08:28.5): 4-03 over shot i3, a card where C and B go on camera (4-04, 4-05; footage comes 11-12), then shot i4,
+ * back on the table as 4-06 starts: the see-through tail breaks into its blocks and they drift away ("they cut the tail off"). */
+const S4B = () => {
+  const f = useCurrentFrame(), t = f / 30;
+  ruler.font = `600 28px "${SANS}"`;
+  const tagW = ruler.measureText("AlphaFold DB v6 · predicted").width;
+  return <AbsoluteFill style={{background: BONE}}>
+    <Sequence durationInFrames={540}><S403/></Sequence>
+    <Sequence from={540} durationInFrames={210}><Clock.Provider value={t - 18}><AbsoluteFill style={{background: BONE}}>
+      <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`}>
+        <text x={160} y={380} fontFamily={SANS} fontSize={30} fontWeight={600} fill={SOFT}>08:18 · 4-04 · C on camera (footage comes 11-12)</text>
+        <text x={160} y={450} fontFamily={SERIF} fontSize={64} fill={INK}>“So what did they do?”</text>
+        <text x={160} y={600} fontFamily={SANS} fontSize={30} fontWeight={600} fill={SOFT}>08:20 · 4-05 · B on camera, ink scissors snip in post</text>
+        <text x={160} y={670} fontFamily={SERIF} fontSize={64} fill={INK}>“They cut the tail off. The AI made the guess.</text>
+        <text x={160} y={745} fontFamily={SERIF} fontSize={64} fill={INK}>A human caught the problem.”</text>
+      </svg>
+    </AbsoluteFill></Clock.Provider></Sequence>
+    <Sequence from={750} durationInFrames={105}><AbsoluteFill>
+      <OffthreadVideo src={staticFile("fusion_s1/s4_404_1.mp4")} muted style={{width: W, height: H}}/>
+      <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
+        <text x={1856} y={92} fontFamily={SANS} fontSize={36} fontWeight={600} fill={INK} textAnchor="end">Objective 1 / Tool: structure prediction</text>
+        <text x={64} y={1018} fontFamily={SANS} fontSize={24} fontWeight={500} fill={SOFT}>VO (A): And this next part honestly blew my mind.</text>
+        <circle cx={W - 72 - tagW - 26} cy={1018 - 10} r={14} fill="none" stroke={INK} strokeWidth={2.5} strokeDasharray="6 5"/>
+        <text x={W - 72} y={1018} fontFamily={SANS} fontSize={28} fontWeight={600} fill={INK} textAnchor="end">AlphaFold DB v6 · predicted</text>
+        <text x={W - 72} y={1056} fontFamily={SANS} fontSize={22} fontWeight={500} fill={SOFT} textAnchor="end">Illustration · blocks drawn · structure AlphaFold DB v6 · Ren 2023</text>
+      </svg>
+    </AbsoluteFill></Sequence>
+  </AbsoluteFill>;
+};
+
 /** S3 test boards: the beats that have to read in five seconds. Numbers are Feng 2011's; the grid's cells are drawn, so its source line says Illustration. */
 const Tally = () => <g transform="translate(0 110)">
   {Array.from({length: 52}, (_, i) => <rect key={i} x={250 + (i % 26) * 54} y={i < 26 ? 300 : 450} width={26} height={120} rx={13} fill={i < 36 ? RED : "#D4D1C8"}/>)}
@@ -708,6 +772,8 @@ const Root = () => <>
   <Composition id="W2Lyrics" component={W2Lyrics} durationInFrames={759} fps={30} width={W} height={H}/>
   <Composition id="S401" component={S401} durationInFrames={780} fps={30} width={W} height={H}/>
   <Composition id="S402" component={S402} durationInFrames={510} fps={30} width={W} height={H}/>
+  <Composition id="S403" component={S403} durationInFrames={540} fps={30} width={W} height={H}/>
+  <Composition id="S4B" component={S4B} durationInFrames={855} fps={30} width={W} height={H}/>
   <Composition id="Loop" component={Loop} durationInFrames={1620} fps={60} width={W} height={H}/>
 </>;
 registerRoot(Root);
