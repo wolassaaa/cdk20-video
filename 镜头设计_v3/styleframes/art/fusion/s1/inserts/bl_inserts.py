@@ -31,8 +31,8 @@ import world as W      # noqa: E402
 P, gk = B.P, B.gk
 argv = sys.argv[sys.argv.index("--") + 1:]
 SHOT, OUT = argv[0], argv[1]
-START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0)[SHOT]
-FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551)[SHOT]
+START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0)[SHOT]
+FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6)[SHOT]
 FIRST = int(argv[2]) if len(argv) > 2 else 0
 LAST = min(int(argv[3]), FRAMES - 1) if len(argv) > 3 else FRAMES - 1
 SAMPLES = int(argv[4]) if len(argv) > 4 else 64
@@ -64,7 +64,7 @@ def stage():
     nt = sc.world.node_tree
     pick = lambda kind: [n for n in nt.nodes if n.type == kind]
     dot, win = pick("VECT_MATH")[0], pick("MAP_RANGE")[1]
-    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9)[SHOT]
+    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2, t=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9, t=0.9)[SHOT]
 
     def sky(x):
         dot.inputs[1].default_value = lerp((-0.22, 0.92, 0.32), P.WINDOW, x)
@@ -1994,8 +1994,129 @@ def shot_u(sc, sky):
     return update
 
 
+def shot_t(sc, sky):
+    """Stills for the S4 opening as a culture tank, the director's idea of 11-04 (W2 to Harder Better Faster Stronger): 0 a sci-fi culture tank stands in S3's empty cell, a question mark hangs in its liquid; 1 CDK20's sequence, a line of letters, goes in at the port on its foot; 2 a guess forms in the liquid, one more on every beat; 3 it settles: most of it Klein blue (residues 1-302), the tail red; 4 the liquid drains through the foot and the glass lifts away; 5 open: CDK20 stands in the cell as W2 leaves it for 4-01. Built on shot v's shapes; the guesses are drawn, the blue shape and the red tail are the AlphaFold DB v6 model. Notes are laid on afterwards. Run: blender -b -P bl_inserts.py -- t <out dir> 0 5 64 1"""
+    shot_v(sc, sky)
+    cx, cy = cell_at(22)
+    pick = lambda prefix: [o for o in bpy.data.objects if o.name.split(".")[0] == prefix]
+    letters, ghosts, tail_g = pick("letter"), pick("guess"), pick("tail_guess")
+    core, tail = bpy.data.objects["core"], bpy.data.objects["tail"]
+    dashes = [o for o in bpy.data.objects if o.parent and o.parent.name == "keyhole"]
+
+    def alpha(o, a):
+        b = next(n for n in o.active_material.node_tree.nodes if n.type == "BSDF_PRINCIPLED")
+        b.inputs["Alpha"].default_value = a
+    alpha(ghosts[1], 0.85)          # the guess on this beat, nearly solid; the last one fading behind it
+    alpha(ghosts[0], 0.15)
+
+    metal = P.gloss((0.55, 0.57, 0.61), 0.28, 0.2)
+    next(n for n in metal.node_tree.nodes if n.type == "BSDF_PRINCIPLED").inputs["Metallic"].default_value = 1.0
+
+    def liquid():
+        """Pale cyan, clear like the film's glass: nothing bends, a little gloss where it faces away."""
+        m, nt, out = gk._mat("liquid")
+        tr = nt.nodes.new("ShaderNodeBsdfTransparent")
+        tr.inputs[0].default_value = (0.80, 0.94, 0.97, 1)
+        g = nt.nodes.new("ShaderNodeBsdfGlossy")
+        g.inputs["Roughness"].default_value = 0.05
+        fr = nt.nodes.new("ShaderNodeFresnel")
+        fr.inputs["IOR"].default_value = 1.33
+        mx = nt.nodes.new("ShaderNodeMixShader")
+        nt.links.new(fr.outputs[0], mx.inputs[0])
+        nt.links.new(tr.outputs[0], mx.inputs[1])
+        nt.links.new(g.outputs[0], mx.inputs[2])
+        geo = nt.nodes.new("ShaderNodeNewGeometry")
+        pure = nt.nodes.new("ShaderNodeBsdfTransparent")
+        pure.inputs[0].default_value = (0.9, 0.97, 0.98, 1)
+        mx2 = nt.nodes.new("ShaderNodeMixShader")
+        nt.links.new(geo.outputs["Backfacing"], mx2.inputs[0])
+        nt.links.new(mx.outputs[0], mx2.inputs[1])
+        nt.links.new(pure.outputs[0], mx2.inputs[2])
+        nt.links.new(mx2.outputs[0], out.inputs["Surface"])
+        return m
+
+    def cyl(name, r, depth, z, mat, caps=True):
+        bpy.ops.mesh.primitive_cylinder_add(vertices=160, radius=r, depth=depth, location=(cx, cy, z), end_fill_type="NGON" if caps else "NOTHING")
+        o = bpy.context.object
+        o.name = name
+        o.data.materials.append(mat)
+        bpy.ops.object.shade_smooth()
+        return o
+
+    # the tank stands on a glass floor laid across the cell's raised border (0.016 high): the cell is too narrow for a round foot inside it, and the keyhole shows through the floor
+    R_GL, TOP, FLOOR = 0.385, 0.8, 0.017 + 0.012
+    floor_ = cyl("tank_floor", 0.40, 0.012, 0.017 + 0.006, B.clear_glass())
+    bpy.ops.mesh.primitive_torus_add(major_radius=0.392, minor_radius=0.016, major_segments=160, minor_segments=24, location=(cx, cy, FLOOR + 0.016))
+    foot = bpy.context.object
+    foot.data.materials.append(metal)
+    bpy.ops.object.shade_smooth()
+    glass = cyl("tank_glass", R_GL, TOP - FLOOR, (TOP + FLOOR) / 2, B.clear_glass(), caps=False)
+    glass.visible_shadow = False
+    cap = cyl("tank_cap", 0.41, 0.05, TOP + 0.025, metal)
+    pipe = cyl("tank_pipe", 0.05, 0.3, TOP + 0.2, metal)        # the feed: the sequence goes in at its open top
+    bpy.ops.mesh.primitive_torus_add(major_radius=0.392, minor_radius=0.022, major_segments=160, minor_segments=24, location=(cx, cy, TOP - 0.01))
+    lip = bpy.context.object
+    lip.data.materials.append(metal)
+    bpy.ops.object.shade_smooth()
+    lid = [glass, cap, pipe, lip]
+    juice = cyl("tank_liquid", R_GL - 0.006, 0.6, FLOOR + 0.002 + 0.3, liquid())
+    juice.visible_shadow = False
+    g = np.random.default_rng(7)
+    bubbles = []
+    white = P.gloss((0.95, 0.97, 0.98), 0.1, 0.3)
+    for _ in range(36):
+        a, r = g.uniform(0, 2 * math.pi), 0.34 * math.sqrt(g.uniform(0.05, 1))
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=float(g.uniform(0.006, 0.016)), segments=16, ring_count=8, location=(cx + r * math.cos(a), cy + r * math.sin(a), float(g.uniform(0.06, 0.58))))
+        o = bpy.context.object
+        o.data.materials.append(white)
+        bpy.ops.object.shade_smooth()
+        bubbles.append(o)
+    font = bpy.data.fonts.load(HERE + "../../../../../remotion_public/fusion_s1/fonts/InstrumentSerif-Regular.ttf")
+    cu = bpy.data.curves.new("ask", "FONT")
+    cu.body, cu.font, cu.size, cu.extrude = "?", font, 0.34, 0.03
+    cu.align_x, cu.align_y = "CENTER", "CENTER"
+    ask = bpy.data.objects.new("ask", cu)
+    sc.collection.objects.link(ask)
+    cu.materials.append(gk.surface((0.012, 0.012, 0.014), 0.3))
+    for i, o in enumerate(letters):         # the sequence streams through the air into the feed's open top, clear of the table and its raised borders
+        u = i / (len(letters) - 1)
+        o.location = (cx - 1.5 + 1.42 * u, cy - 0.05 * u, 0.75 + 0.36 * u + 0.12 * math.sin(math.pi * u))
+
+    c = sc.camera
+    c.animation_data_clear()
+    c.data.animation_data_clear()
+    near = polar((127.55, -4.55, 1.75), (127.0, -2.3, 0.42), 60)
+    near["d"] *= 1.3
+    ask.location, ask.rotation_euler = (cx, cy, 0.4), (math.pi / 2, 0, near["az"])     # faces the lens
+    cu.size = 0.4
+    views = [near, dict(near, at=(126.7, -2.3, 0.6), d=near["d"] * 1.15), near, near, dict(near, d=near["d"] * 1.2, at=(127.0, -2.3, 0.6)), polar((127.55, -4.55, 1.75), (127.0, -2.3, 0.24), 60)]
+    for f, v in enumerate(views):
+        shoot(c, f, v, (cx, cy, 0.3))
+    UP = {2: 0.12, 3: 0.12, 4: FLOOR - 0.01, 5: FLOOR - 0.01}         # it hangs in the liquid while it forms, then rests on the glass floor
+    rest = {o.name: tuple(o.location) for o in [core, tail] + ghosts}
+
+    def update(t):
+        f = min(FRAMES - 1, max(0, round((t - START) * FPS)))
+        show = {0: [ask], 1: [ask] + letters, 2: ghosts[:2], 3: [core, tail], 4: [core, tail], 5: [core, tail]}[f]
+        for o in letters + ghosts + tail_g + [core, tail, bpy.data.objects["tail_cut"], ask]:
+            o.hide_render = o not in show
+        for o in [core, tail] + ghosts:
+            x, y, z = rest[o.name]
+            o.location = (x, y, z + UP.get(f, 0.0))
+        juice.hide_render = f >= 4
+        for o in bubbles:
+            o.hide_render = f >= 4
+        for o in lid:
+            o.hide_render = f == 5
+            o.location.z = {glass: (TOP + FLOOR) / 2, cap: TOP + 0.025, pipe: TOP + 0.2, lip: TOP - 0.01}[o] + (0.45 if f == 4 else 0.0)
+        for o in dashes:
+            o.hide_render = f >= 3
+        sky(0.2)
+    return update
+
+
 sc, sky = stage()
-update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u)[SHOT](sc, sky)
+update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t)[SHOT](sc, sky)
 sc.frame_start, sc.frame_end = 0, FRAMES
 for f in range(FIRST, LAST + 1, STEP):
     sc.frame_set(f)
