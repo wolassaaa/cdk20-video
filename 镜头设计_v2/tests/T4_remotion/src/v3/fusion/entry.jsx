@@ -8,9 +8,9 @@ import W3C from "./w3_count.json";
 
 const FPS = TL.fps, N = TL.n, W = 1920, H = 1080;
 const INK = "#111113", SOFT = "#545458", RED = "#E8190F", DARK = "#9A0E08", KLEIN = "#002FA7", BONE = "#EDEBE4";
-const SERIF = "Instrument Serif", SANS = "Inter Tight", HAND = "Caveat", ZH = "FZShuTi W2";
+const SERIF = "Instrument Serif", SANS = "Inter Tight", HAND = "Caveat", ZH = "Noto Serif SC";
 
-const faces = [new FontFace(SERIF, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Regular.ttf")})`), new FontFace(SERIF, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Italic.ttf")})`, {style: "italic"}), new FontFace(SANS, `url(${staticFile("fusion_s1/fonts/InterTight.ttf")})`, {weight: "100 900"}), new FontFace(HAND, `url(${staticFile("fusion_s1/fonts/Caveat.ttf")})`, {weight: "400 700"}), new FontFace(ZH, `url(${staticFile("fusion_s1/fonts/FZSTK.TTF")})`)];
+const faces = [new FontFace(SERIF, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Regular.ttf")})`), new FontFace(SERIF, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Italic.ttf")})`, {style: "italic"}), new FontFace(SANS, `url(${staticFile("fusion_s1/fonts/InterTight.ttf")})`, {weight: "100 900"}), new FontFace(HAND, `url(${staticFile("fusion_s1/fonts/Caveat.ttf")})`, {weight: "400 700"}), new FontFace(ZH, `url(${staticFile("fusion_s1/fonts/NotoSerifSC-VF.ttf")})`, {weight: "200 900"})];
 const fontHandle = delayRender("fonts");
 Promise.all(faces.map(f => f.load())).then(l => { l.forEach(f => document.fonts.add(f)); continueRender(fontHandle); });
 
@@ -534,12 +534,13 @@ const W2 = ({file = "fusion_s1/w2_td_1.mp4"}) => <Clock.Provider value={useCurre
   </svg>
 </AbsoluteFill></Clock.Provider>;
 
-/** W2 with its captions, version 2 (the director's notes of 11-04 22:30-22:45: captions only where the song is sung, in its rhythm, simple, handwritten).
+/** W2 with its captions, version 3 (the director's notes of 11-04 22:30-22:45: captions only where the song is sung, in its rhythm, simple; then not handwritten).
  * The song starts at 50.446 s, so the first sung bar (52.39 s) lands on beat 4, the spring off the table. In these 13 bars the voice sings three 2-bar phrases:
  * beats 4-11 and 36-43 with a two-syllable word on beats 1 and 3 of the bar, beats 20-27 answering on beats 2 and 4 (found by taking the repeating backing out
  * of the audio, 音乐/W2_押韵字幕.md). Each phrase is four two-syllable words, ours, on the song's pattern: a row of verbs, a row of -er words, then the tail.
  * A word inks on its beat; a phrase floats where the picture is empty and fades two beats after its last word.
- * English is Caveat, Chinese is FZShuTi (方正舒体), both hand lettering. Beats count from the start of the shot. */
+ * Set in the film's type, Instrument Serif over Noto Serif SC, the last word italic and coloured (version 2 was hand lettering, Caveat and 方正舒体;
+ * the director turned it down on 11-04). Beats count from the start of the shot. */
 const W2_BEAT = 60 / 123.477;
 const W2_PHRASES = [
   {at: [4, 6, 8, 10], zh: ["猜它", "捏它", "翻它", "转它"], en: ["Guess it,", "squeeze it,", "twist it,", "turn it"], pos: [0.62, 0.78], drift: [20, -16], colour: INK},
@@ -556,8 +557,8 @@ const W2Phrase = ({t, i}) => {
   const ink = k => { const p = out((t - at[k] * W2_BEAT) / 0.08); return {opacity: p, transform: `translateY(${(1 - p) * 10}px) scale(${0.9 + 0.1 * p})`, display: "inline-block", margin: "0 0.22em"}; };
   const tint = k => k === 3 ? colour : INK;          // the last word carries the colour: blue sure, red the tail
   return <div style={{position: "absolute", left: fx, top: fy, width: 1040, textAlign: "center", opacity: vis, transform: `rotate(${0.8 * Math.sin(0.7 * t + i) - 1.5}deg)`, textShadow: `0 0 10px ${BONE}, 0 0 4px ${BONE}`}}>
-    <div style={{fontFamily: ZH, fontSize: 62, lineHeight: "74px"}}>{zh.map((w, k) => <span key={k} style={{...ink(k), color: tint(k)}}>{w}</span>)}</div>
-    <div style={{fontFamily: HAND, fontWeight: 600, fontSize: 64, lineHeight: "66px"}}>{en.map((w, k) => <span key={k} style={{...ink(k), color: tint(k)}}>{w}</span>)}</div>
+    <div style={{fontFamily: ZH, fontWeight: 500, fontSize: 54, letterSpacing: 4, lineHeight: "70px"}}>{zh.map((w, k) => <span key={k} style={{...ink(k), color: tint(k)}}>{w}</span>)}</div>
+    <div style={{fontFamily: SERIF, fontSize: 66, lineHeight: "70px"}}>{en.map((w, k) => <span key={k} style={{...ink(k), color: tint(k), fontStyle: k === 3 ? "italic" : "normal"}}>{w}</span>)}</div>
   </div>;
 };
 const W2Lyrics = ({file = "fusion_s1/w2_shake_3.mp4", fps = 30}) => {
