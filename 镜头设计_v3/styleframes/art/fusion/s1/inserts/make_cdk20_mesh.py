@@ -1,4 +1,4 @@
-"""HKBU SCIE1007 coursework science video. Builds the solid CDK20 shape for S3's second piece: a soft surface over the heavy atoms of the AlphaFold DB v6 model, with the mouth of the ATP pocket found from our re-docked 048. numpy only. Run: python make_cdk20_mesh.py <out.npz> [last residue]"""
+"""HKBU SCIE1007 coursework science video. Builds the solid CDK20 shape for S3's second piece: a soft surface over the heavy atoms of the AlphaFold DB v6 model, with the mouth of the ATP pocket found from our re-docked 048. numpy only. Run: python make_cdk20_mesh.py <out.npz> [last residue] [first residue]"""
 import json
 import sys
 from pathlib import Path
@@ -12,12 +12,13 @@ import pocket048 as G
 
 OUT = sys.argv[1]
 LAST = int(sys.argv[2]) if len(sys.argv) > 2 else 346
+FIRST = int(sys.argv[3]) if len(sys.argv) > 3 else 1      # 303 with last 346: the tail on its own, for S4
 PDB = V3 / "assets" / "alphafold" / "AF-Q8IZL9-F1-model_v6.pdb"
 H, PAD, K_BLOB = 0.6, 6.0, 0.55     # grid step and padding in Angstrom; low K_BLOB keeps it one soft mass, a silhouette and not a pile of atoms
 
 xyz, el = [], []
 for l in PDB.read_text(encoding="utf8").splitlines():
-    if l.startswith("ATOM") and l[76:78].strip() != "H" and int(l[22:26]) <= LAST:
+    if l.startswith("ATOM") and l[76:78].strip() != "H" and FIRST <= int(l[22:26]) <= LAST:
         xyz.append([float(l[30:38]), float(l[38:46]), float(l[46:54])])
         el.append(l[76:78].strip())
 xyz = np.array(xyz)

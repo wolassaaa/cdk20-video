@@ -31,8 +31,8 @@ import world as W      # noqa: E402
 P, gk = B.P, B.gk
 argv = sys.argv[sys.argv.index("--") + 1:]
 SHOT, OUT = argv[0], argv[1]
-START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0)[SHOT]
-FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721)[SHOT]
+START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0)[SHOT]
+FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6)[SHOT]
 FIRST = int(argv[2]) if len(argv) > 2 else 0
 LAST = min(int(argv[3]), FRAMES - 1) if len(argv) > 3 else FRAMES - 1
 SAMPLES = int(argv[4]) if len(argv) > 4 else 64
@@ -64,7 +64,7 @@ def stage():
     nt = sc.world.node_tree
     pick = lambda kind: [n for n in nt.nodes if n.type == kind]
     dot, win = pick("VECT_MATH")[0], pick("MAP_RANGE")[1]
-    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9)[SHOT]
+    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9)[SHOT]
 
     def sky(x):
         dot.inputs[1].default_value = lerp((-0.22, 0.92, 0.32), P.WINDOW, x)
@@ -1653,8 +1653,163 @@ def shot_z(sc, sky):
     return update
 
 
+def tube3d(pts, r, mat, name):
+    """A smooth 3D tube through pts, in the object's own units."""
+    cu = bpy.data.curves.new(name, "CURVE")
+    cu.dimensions = "3D"
+    cu.bevel_depth, cu.bevel_resolution = r, 6
+    cu.use_fill_caps = True
+    s = cu.splines.new("NURBS")
+    s.points.add(len(pts) - 1)
+    for q, p in zip(s.points, pts):
+        q.co = (*p, 1)
+    s.order_u, s.use_endpoint_u = 4, True
+    o = bpy.data.objects.new(name, cu)
+    bpy.context.scene.collection.objects.link(o)
+    cu.materials.append(mat)
+    return o
+
+
+def see_through(rgb, alpha):
+    m = P.gloss(rgb, 0.4, 0.3)
+    bsdf = next(n for n in m.node_tree.nodes if n.type == "BSDF_PRINCIPLED")
+    bsdf.inputs["Alpha"].default_value = alpha
+    return m
+
+
+def shot_v(sc, sky):
+    """Stills for the new S4 opening (the storyboard W2_storyboard_1): instead of a bead chain, the AI keeps guessing CDK20's shape. 0 the empty cell where S3 ends; 1 the sequence, a line of letters, walks into the cell; 2 guesses, see-through and bent, over the keyhole; 3 most of it holds still in Klein blue (residues 1-302), the tail still a blur of guesses; 4 pushed in: the tail in red, never settling, lies across the keyhole; 5 pulled back: the tail is cut off and lies coiled in the next cell (the coil from tail_path.py). The guesses are drawn; the blue shape and the red tail are the AlphaFold DB v6 model. Notes are laid on afterwards. Run: blender -b -P bl_inserts.py -- v <out dir> 0 5 64 1"""
+    global START
+    START = 330.0
+    shot_q(sc, sky)             # the table, the grid and the keyhole as S3 left them
+    START = 412.0
+    sc.render.use_motion_blur = False
+    small = bpy.data.objects["cdk20_small"]
+    for name in ("cdk20_small", "cdk20", "plug"):
+        bpy.data.objects[name].hide_render = True
+    dashes = [o for o in bpy.data.objects if o.parent and o.parent.name == "keyhole"]
+    cx, cy = cell_at(22)
+    pdb = [l for l in open(HERE + "../../../../../assets/alphafold/AF-Q8IZL9-F1-model_v6.pdb") if l.startswith("ATOM")]
+
+    # the model's own frame: the same turn and scale as S3's small model, so the shapes sit where it sat
+    full = np.load(HERE + "frames/cdk20.npz")
+    q0 = Vector(full["mouth"].tolist()).rotation_difference(Vector((0, -math.cos(P_UP), math.sin(P_UP))))
+    R = np.array(q0.to_matrix())
+    heavy = lambda last, first=1: np.array([[float(l[30:38]), float(l[38:46]), float(l[46:54])] for l in pdb if l[76:78].strip() != "H" and first <= int(l[22:26]) <= last])
+    centre = heavy(346).mean(0)
+    local = lambda x: (np.asarray(x) - centre) @ R.T * P_S          # angstrom, PDB frame -> the small model's mesh
+    core_npz = np.load(HERE + "frames/cdk20_core.npz")
+    core_v = local(core_npz["verts"] + heavy(302).mean(0))
+    ca = np.array([[float(l[30:38]), float(l[38:46]), float(l[46:54])] for l in pdb if l[12:16].strip() == "CA"])
+    tail = local(ca[301:])          # 302-346: from the last kept residue out to the end
+    tail_npz = np.load(HERE + "frames/cdk20_tail.npz")
+    tail_v = local(tail_npz["verts"] + heavy(346, 303).mean(0))     # the tail's own surface, 303-346: Arg305 reaches into the pocket, so it plugs the mouth
+
+    def place(o):
+        o.rotation_mode = "QUATERNION"
+        o.rotation_quaternion, o.scale, o.location = small.rotation_quaternion, small.scale, small.location
+        return o
+
+    def mesh(v, faces, mat, name):
+        me = bpy.data.meshes.new(name)
+        me.from_pydata(v.tolist(), [], faces.tolist())
+        me.materials.append(mat)
+        o = bpy.data.objects.new(name, me)
+        sc.collection.objects.link(o)
+        B.smooth(o)
+        return place(o)
+
+    def bend(v, seed, amp):
+        """A smooth random bend of the shape: one of the AI's guesses."""
+        g = np.random.default_rng(seed)
+        out = v.copy()
+        for _ in range(3):
+            k, ph = g.uniform(0.08, 0.2, 3), g.uniform(0, 6.3, 3)
+            out += amp * np.sin(v @ k[:, None] + ph)
+        return out
+
+    core = mesh(core_v, core_npz["quads"], P.gloss(P.KLEIN, 0.34, 0.7), "core")
+    ghosts = []
+    for seed, g, turn, dx in ((3, 0.22, -28, -0.07), (8, 0.4, 4, 0.0), (21, 0.58, 32, 0.07)):     # three guesses, each its own grey and turned a little, so they read apart
+        o = mesh(bend(local(full["verts"] + centre), seed, 7.0 * P_S), full["quads"], see_through((g, g, g + 0.03), 0.3), "guess")
+        o.rotation_quaternion = Quaternion((0, 0, 1), math.radians(turn)) @ o.rotation_quaternion
+        o.location = (o.location[0] + dx, o.location[1], o.location[2])
+        ghosts.append(o)
+
+    # the tail's guesses: swung round where it leaves the model, the swings that keep it furthest from the kept part's surface
+    def turn_by(axis, ang):
+        return np.array(Quaternion(Vector(axis).normalized(), math.radians(ang)).to_matrix())
+
+    def near(p):
+        return min(float(np.sqrt(((core_v - q) ** 2).sum(1)).min()) for q in p)
+    g = np.random.default_rng(1)
+    tries = [turn_by(g.normal(size=3), g.uniform(18, 40)) for _ in range(400)]
+    clear = [near((tail[5:] - tail[0]) @ M.T + tail[0]) for M in tries]        # the first few beyond the cut swing very little, so only the rest are tested
+    picks = [tries[i] for i in np.argsort(clear)[::-1][:4]]
+    print("tail guesses clear of the kept part by %.1f A or more" % (sorted(clear)[-4] / P_S))
+    red = P.gloss(P.RED, 0.22, 0.7)
+    tail_main = mesh(tail_v, tail_npz["quads"], red, "tail")
+    tail_grey = [mesh((tail_v - tail[0]) @ M.T + tail[0], tail_npz["quads"], see_through((0.3, 0.3, 0.33), 0.45), "tail_guess") for M in picks]
+    tail_red = [mesh((tail_v - tail[0]) @ M.T + tail[0], tail_npz["quads"], see_through(P.RED, 0.3), "tail_guess") for M in picks]
+    cut = mesh(tail_v, tail_npz["quads"], red, "tail_cut")         # set down in the next cell, lying on its flattest side
+    bpy.context.view_layer.update()
+    w = np.array([tuple(cut.matrix_world @ v.co) for v in cut.data.vertices])
+    flat = np.linalg.eigh(np.cov((w - w.mean(0)).T))[1][:, 0]       # the direction it is thinnest in goes straight up
+    lay = Vector(flat.tolist()).rotation_difference(Vector((0, 0, 1)))
+    turned = (w - w.mean(0)) @ np.array(lay.to_matrix()).T
+    cut.rotation_quaternion = lay @ cut.rotation_quaternion
+    spot = Vector((cx + 0.95, cy, 0.002 - float(turned[:, 2].min())))
+    cut.location = spot + lay @ (cut.location - Vector(w.mean(0).tolist()))
+
+    # the sequence: CDK20's first 20 letters, set in the film's serif, lying on the table and walking into the cell
+    AA = dict(ALA="A", ARG="R", ASN="N", ASP="D", CYS="C", GLN="Q", GLU="E", GLY="G", HIS="H", ILE="I", LEU="L", LYS="K", MET="M", PHE="F", PRO="P", SER="S", THR="T", TRP="W", TYR="Y", VAL="V")
+    seq = "".join(AA[l[17:20]] for l in pdb if l[12:16].strip() == "CA")
+    font = bpy.data.fonts.load(HERE + "../../../../../remotion_public/fusion_s1/fonts/InstrumentSerif-Regular.ttf")
+    ink = gk.surface((0.012, 0.012, 0.014), 0.3)
+    letters = []
+
+    def path(u):
+        return (cx - 1.3 + 1.3 * u, cy - 0.2 + 0.2 * u)
+    for i in range(20):         # standing up like type blocks, facing the camera, so they read
+        u = i / 19
+        cu = bpy.data.curves.new("letter", "FONT")
+        cu.body, cu.font, cu.size, cu.extrude = seq[i], font, 0.12, 0.012
+        cu.align_x, cu.align_y = "CENTER", "CENTER"
+        o = bpy.data.objects.new("letter", cu)
+        sc.collection.objects.link(o)
+        cu.materials.append(ink)
+        o.location = (*path(u), 0.06)
+        o.rotation_euler = (math.pi / 2, 0, 0)
+        letters.append(o)
+
+    c = sc.camera
+    c.animation_data_clear()
+    c.data.animation_data_clear()
+    held = polar((127.55, -4.55, 1.75), (127.0, -2.3, 0.24), 60)        # where the bead test ended: the cell from the front, a little above
+    bpy.context.view_layer.update()
+    mw = small.matrix_world
+    mid = mw @ Vector((np.asarray(full["pocket"]) @ R.T * P_S).tolist())         # the pocket
+    out = (mw.to_3x3() @ Vector((R @ np.asarray(full["mouth"])).tolist())).normalized()       # and its way out
+    views = [held, held, held, dict(held, el=math.radians(50)),
+             dict(at=tuple(mid), az=math.atan2(out.x, -out.y), el=math.radians(68), d=1.0, mm=60.0),     # from above, on the side the pocket opens to
+             dict(held, at=(127.5, -2.42, 0.22), d=2.9, el=math.radians(40))]
+    for f, v in enumerate(views):
+        shoot(c, f, v, v["at"])
+    show = {0: [], 1: letters, 2: ghosts, 3: [core] + tail_grey, 4: [core, tail_main] + tail_red, 5: [core, cut]}
+    every = letters + ghosts + [core, tail_main, cut] + tail_grey + tail_red
+
+    def update(t):
+        f = min(FRAMES - 1, max(0, round((t - START) * FPS)))
+        for o in every:
+            o.hide_render = o not in show[f]
+        for o in dashes:            # the dashed keyhole shows until the solid model covers it
+            o.hide_render = f >= 3
+        sky(0.2)
+    return update
+
+
 sc, sky = stage()
-update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z)[SHOT](sc, sky)
+update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v)[SHOT](sc, sky)
 sc.frame_start, sc.frame_end = 0, FRAMES
 for f in range(FIRST, LAST + 1, STEP):
     sc.frame_set(f)
