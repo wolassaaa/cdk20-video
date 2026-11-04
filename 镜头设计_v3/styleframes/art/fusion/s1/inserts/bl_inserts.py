@@ -31,8 +31,8 @@ import world as W      # noqa: E402
 P, gk = B.P, B.gk
 argv = sys.argv[sys.argv.index("--") + 1:]
 SHOT, OUT = argv[0], argv[1]
-START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0, r=412.0, s=412.0, n=412.0, o=412.0, m=412.0, j=412.0, l=412.0, e=412.0)[SHOT]
-FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6, r=6, s=6, n=4, o=3, m=1171, j=1055, l=1055, e=1055)[SHOT]
+START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0, r=412.0, s=412.0, n=412.0, o=412.0, m=412.0, j=412.0, l=412.0, e=412.0, d=412.0)[SHOT]
+FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6, r=6, s=6, n=4, o=3, m=1171, j=1055, l=1055, e=1055, d=1099)[SHOT]
 FIRST = int(argv[2]) if len(argv) > 2 else 0
 LAST = min(int(argv[3]), FRAMES - 1) if len(argv) > 3 else FRAMES - 1
 SAMPLES = int(argv[4]) if len(argv) > 4 else 64
@@ -64,7 +64,7 @@ def stage():
     nt = sc.world.node_tree
     pick = lambda kind: [n for n in nt.nodes if n.type == kind]
     dot, win = pick("VECT_MATH")[0], pick("MAP_RANGE")[1]
-    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2, t=0.2, r=0.2, s=0.2, n=0.2, o=0.2, m=0.2, j=0.2, l=0.2, e=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9, t=0.9, r=0.9, s=0.9, n=0.9, o=0.9, m=0.9, j=0.9, l=0.9, e=0.9)[SHOT]
+    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2, t=0.2, r=0.2, s=0.2, n=0.2, o=0.2, m=0.2, j=0.2, l=0.2, e=0.2, d=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9, t=0.9, r=0.9, s=0.9, n=0.9, o=0.9, m=0.9, j=0.9, l=0.9, e=0.9, d=0.9)[SHOT]
 
     def sky(x):
         dot.inputs[1].default_value = lerp((-0.22, 0.92, 0.32), P.WINDOW, x)
@@ -3615,7 +3615,7 @@ def shot_m(sc, sky):
     return update
 
 
-def shot_j(sc, sky, ferro=False, spikes=True, meta=False):
+def shot_j(sc, sky, ferro=False, spikes=True, meta=False, shake=False):
     """W2 motion without the tank (the director's note of 11-04 17:40: the tank is ugly, drop it): on a 123 BPM grid until the song arrives (one beat 0.488 s). Bars 0-1 S3's empty cell with the dashed keyhole; beat 4 the outline springs up off the table as a flat grey shape that stretches and flies up; beats 6-28 it hangs in the air in a frenzy, a new guess on every beat, tumbling, twitching on every half beat, greying into blue as it calms; beat 28 it snaps into the real model, the core Klein blue; beat 29 the tail turns red and keeps twitching between its guesses; beats 30-34 it floats down into its cell, where 4-01 goes on. The guesses are drawn (smooth random bends of the real model); the blue shape and the red tail are the AlphaFold DB v6 model. Run: blender -b -P bl_inserts.py -- j <out dir> 0 1054 16 0.5 2"""
     shot_v(sc, sky)
     ob = bpy.data.objects
@@ -3632,6 +3632,9 @@ def shot_j(sc, sky, ferro=False, spikes=True, meta=False):
     B_ = 60.0 / 123.0
     beat = lambda n: n * B_
     POP, APEX, CALM, SNAP, RED, DOWN, LAND, END = beat(4), beat(6), beat(20), beat(28), beat(29), beat(30), beat(34), (FRAMES - 1) / FPS
+    MELT, WHIP, SPLAT, PULL = beat(30), beat(31), beat(32), beat(33)
+    if shake:           # shot d: it stays up for the shake, comes down once the tail is off
+        DOWN, LAND = beat(32), beat(36)
 
     # the guess: the real model as its basis, eight bent guesses as shape keys, placed where S3's small model lay
     full = np.load(HERE + "frames/cdk20.npz")
@@ -3889,6 +3892,8 @@ def shot_j(sc, sky, ferro=False, spikes=True, meta=False):
             off = calm * ramp * np.array([0.06 * math.sin(0.9 * t + 1), 0.06 * math.sin(1.2 * t + 2), 0.03 * math.sin(1.5 * t)])
             sh = sh * 0.3
             pulse = 1.0 + 0.03 * calm * ramp * bristle(t)
+        if shake:
+            q = Quaternion((0, 0, 1), yaw(t)) @ q
         sxy, sz = stretch(t) if t >= POP else (1.0, 0.04)
         snap = 1.0 + 0.06 * math.exp(-(t - SNAP) / 0.12) * math.cos(2 * math.pi * (t - SNAP) / 0.25) if t >= SNAP else 1.0
         s = (sxy * pulse * snap, sxy * pulse * snap, sz * pulse * snap)
@@ -3897,6 +3902,113 @@ def shot_j(sc, sky, ferro=False, spikes=True, meta=False):
             z = max(z, 0.003 - s[2] * LO)            # while it springs up unturned, its lowest point stays on or above the table
         loc = Vector((P0.x + off[0] + sh[0], P0.y + off[1] + sh[1], z))
         return loc, q, s, w, 1.0 - calm, n
+
+    if shake:
+        # shot d: the tail melts back into red liquid, the body shakes like a wet dog, and the liquid is flung off into the next cell, where it splats and draws into a line
+        AW = P_S * guess.scale[0]                   # world units to the Angstrom
+        HT = HOME[302:]                             # residues 303-346, in the guess's mesh
+        coil = np.load(HERE + "frames/u_tail_2.npz")["pos"][-1].astype(float)      # the flat coil in the next cell from u_path_2.py, one point per residue, same order
+        CC = coil.mean(0)
+        r_t = Mrel[:3, :3] @ HT.mean(0) + Mrel[:3, 3]
+        sgn = 1.0 if -r_t[1] >= 0 else -1.0         # turn the way that swings the tail towards +x, the next cell
+        Y0, TP, TAU = -sgn * math.radians(22), 0.2, 0.32
+        print("tail sits %.3f %.3f off the axis; shake turns %s" % (r_t[0], r_t[1], "left" if sgn > 0 else "right"))
+
+        def yaw(t):
+            if t < MELT:
+                return 0.0
+            if t < WHIP:
+                return Y0 * smooth((t - MELT) / (WHIP - MELT))          # wind up
+            u = t - WHIP
+            return Y0 * math.exp(-u / TAU) * math.cos(2 * math.pi * u / TP)      # the shake, about five a second, dying away
+        dist_ = np.linalg.norm(HT - HOME[301], axis=1)
+        order = (dist_ - dist_.min()) / (dist_.max() - dist_.min())          # 0 at the cut end, 1 at the far tip
+        T_REL = WHIP + TP / 4 + 0.06 * (1 - order)            # the tip lets go first, as the turn is fastest
+        T_LAND = SPLAT - 0.04 + 0.1 * (1 - order)
+        tj = np.random.default_rng(5)
+        LAND_P = CC + (coil - CC) * 0.45 + np.c_[tj.normal(0, 0.012, (len(HT), 2)), np.zeros(len(HT))]
+        SPRD = CC + (coil - CC) * 1.1 + np.c_[tj.normal(0, 0.01, (len(HT), 2)), np.zeros(len(HT))]
+        R_FLY, R_PUD, R_LINE = 1.7 * RAD * guess.scale[0], 1.4 * RAD * guess.scale[0], 3.0 * AW          # fat enough in flight and on the table to stay one liquid
+        Z_PUD, Z_LINE = 0.15 * R_PUD, float(coil[0, 2])
+        G_ = np.array([0.0, 0.0, -9.0])
+
+        # as it melts, the red liquid runs out of the pocket and gathers on the outside: each ball climbs away from the nearest kept residue until it is 8 A clear,
+        # so it never gets closer to the kept part than it started; this is where it is flung from
+        KEPT = HOME[:302]
+        OUT = HT.copy()
+        for _ in range(300):
+            dd = np.linalg.norm(OUT[:, None] - KEPT[None], axis=2)
+            nn = dd.argmin(1)
+            dmin = dd[np.arange(len(OUT)), nn]
+            go = dmin < 8.0 * P_S
+            if not go.any():
+                break
+            away = OUT - KEPT[nn]
+            OUT[go] += 0.25 * P_S * away[go] / np.linalg.norm(away[go], axis=1, keepdims=True)
+        print("tail gathers out of the pocket: balls move up to %.1f A" % (np.linalg.norm(OUT - HT, axis=1).max() / P_S))
+
+        def attached(t):
+            loc, q, s_, _, _, _ = state(t)
+            Mp = np.array(Matrix.LocRotScale(loc, q, Vector(s_))) @ Mrel
+            ht = HT + (OUT - HT) * smooth((t - MELT) / (0.8 * B_))
+            w_ = (np.c_[ht, np.ones(len(HT))] @ Mp.T)[:, :3]
+            liq = smooth((t - MELT) / (B_ / 2))
+            return w_ + liq * 2.0 * AW * np.sin(HT @ KB.T * 1.5 + 9.0 * t + PB)        # it sloshes once it is liquid
+
+        P_REL = np.array([attached(tr_)[k_] for k_, tr_ in enumerate(T_REL)])
+        V_REL = np.array([(attached(tr_ + 1e-3)[k_] - attached(tr_ - 1e-3)[k_]) / 2e-3 for k_, tr_ in enumerate(T_REL)])
+        PC = np.array(state(WHIP)[0])
+        aw_ = P_REL - PC
+        aw_[:, 2] = 0
+        V_REL += 2.5 * aw_ / np.linalg.norm(aw_, axis=1, keepdims=True)           # and it leaves outwards, away from the body, as well as round
+        FL_T = T_LAND - T_REL
+        LP = LAND_P.copy()
+        LP[:, 2] = Z_PUD
+        V_IN = (LP - P_REL) / FL_T[:, None] - 0.5 * G_ * FL_T[:, None]
+        V_LAND = V_IN + G_ * FL_T[:, None]
+
+        def tail_balls(t):
+            """Where every tail ball is at time t, in world units, and its radius."""
+            if t < T_REL.min():
+                return attached(t), np.full(len(HT), RAD * guess.scale[0] * (1 + 0.3 * smooth((t - MELT) / B_)))
+            at_ = attached(t)
+            pos, rad = np.zeros_like(at_), np.zeros(len(HT))
+            for k_ in range(len(HT)):
+                if t < T_REL[k_]:
+                    pos[k_], rad[k_] = at_[k_], R_FLY
+                    continue
+                if t < T_LAND[k_]:            # a smooth arc that leaves at the speed it was flung and comes down like a thrown drop
+                    x_, T_ = (t - T_REL[k_]) / FL_T[k_], FL_T[k_]
+                    h00, h10, h01, h11 = 2 * x_ ** 3 - 3 * x_ ** 2 + 1, x_ ** 3 - 2 * x_ ** 2 + x_, -2 * x_ ** 3 + 3 * x_ ** 2, x_ ** 3 - x_ ** 2
+                    pos[k_] = h00 * P_REL[k_] + h10 * T_ * V_REL[k_] + h01 * LP[k_] + h11 * T_ * V_LAND[k_]
+                    rad[k_] = R_FLY
+                    continue
+                u = t - T_LAND[k_]
+                sp = 1 - (1 - min(1.0, u / 0.14)) ** 3            # splat: out fast, slowing
+                sq = SPRD[k_].copy()
+                sq[2] = Z_PUD
+                p_ = LP[k_] + (sq - LP[k_]) * sp
+                r_ = R_FLY + (R_PUD - R_FLY) * sp
+                x_ = smooth((t - PULL) / B_)         # it draws together into the line
+                tgt = coil[k_]
+                pos[k_] = p_ + (tgt - p_) * x_
+                rad[k_] = r_ + (R_LINE - r_) * x_
+            return pos, rad
+
+        tmb = bpy.data.metaballs.new("tailmb")
+        tmb.resolution, tmb.render_resolution, tmb.threshold = 1.2 * AW, 0.4 * AW, 0.6
+        tels = []
+        for p_ in HT:
+            e_ = tmb.elements.new()
+            e_.co, e_.radius = (0.0, 0.0, 0.0), RAD * guess.scale[0]
+            tels.append(e_)
+        tmb.materials.append(red_m)
+        tmo = bpy.data.objects.new("tailmb", tmb)
+        sc.collection.objects.link(tmo)
+        tmo.hide_render = True
+        line_o = tube3d(coil, float(np.load(HERE + "frames/u_tail_2.npz")["tr"]), red_m, "tail_line")      # the line it ends as: shot u's tube along the coil
+        line_o.hide_render = True
+        T_LINE = PULL + B_
 
     # the clearance check: every frame, the lowest point of whatever shows must stay above the table
     lowest = 9.0
@@ -3908,6 +4020,23 @@ def shot_j(sc, sky, ferro=False, spikes=True, meta=False):
         lowest = min(lowest, float(((np.c_[v[::7], np.ones(len(v[::7]))] @ Mp.T)[:, 2]).min()) - (1.5 * RAD * guess.scale[0] * max(s) if meta else 0.0))
     print("lowest point over the shot: %.4f above the table" % lowest)
     assert lowest > -0.001
+    if shake:
+        near_, low_ = 9.0, 9.0
+        worst = None
+        for f in range(round(MELT * FPS), round(T_LAND.max() * FPS)):
+            t = f / FPS
+            loc, q, s, _, _, _ = state(t)
+            Mp = np.array(Matrix.LocRotScale(loc, q, Vector(s))) @ Mrel
+            kept = (np.c_[HOME[:302], np.ones(302)] @ Mp.T)[:, :3]
+            pos, rad = tail_balls(t)
+            fly = (t >= T_REL + 0.05) & (t < T_LAND - 0.03)            # once it has left: at the moment it lets go the cut end still touches residue 302
+            if fly.any():
+                dd = np.linalg.norm(pos[fly][:, None] - kept[None], axis=2).min() / AW
+                if dd < near_:
+                    near_, worst = float(dd), (f, int(np.flatnonzero(fly)[np.linalg.norm(pos[fly][:, None] - kept[None], axis=2).min(1).argmin()]))
+                low_ = min(low_, float((pos[fly][:, 2] - 0.6 * rad[fly]).min()))
+        print("flung tail: at least %.1f A from the kept part's CA (frame, ball %s), lowest %.4f above the table in flight" % (near_, worst, low_))
+        assert near_ > 6.0 and low_ > 0.0
 
     def blend(p, q, x):
         log = lambda k: math.exp(math.log(p[k]) + (math.log(q[k]) - math.log(p[k])) * x)
@@ -3932,6 +4061,17 @@ def shot_j(sc, sky, ferro=False, spikes=True, meta=False):
             v = air(t)
             return dict(v, az=v["az"] + ORB * x, el=math.radians(6 + 8 * x), d=dair * (1 - 0.15 * x))
         top = dict(air(t), az=AZ0 + ORB, el=math.radians(14), d=dair * 0.85)
+        if shake:           # out and round so the body in the air and the next cell are both in frame for the throw, then down to both cells
+            mx = (P0.x + float(CC[0])) / 2
+            fl = dict(at=(mx, P0.y, 0.62 * (P0.z + H)), az=held["az"] - math.radians(25), el=math.radians(16), d=3.7, mm=40.0)
+            fin = dict(at=(mx, float(CC[1]), 0.16), az=held["az"], el=math.radians(32), d=2.8, mm=45.0)
+            if t < SNAP + B_ / 2:
+                return top
+            if t < WHIP - B_ / 4:
+                return blend(top, fl, smooth((t - SNAP - B_ / 2) / (WHIP - B_ / 4 - SNAP - B_ / 2)))
+            if t < SPLAT + B_ / 2:
+                return fl
+            return blend(fl, fin, smooth((t - SPLAT - B_ / 2) / (END - SPLAT - B_ / 2)))
         if t < DOWN:
             return top
         return blend(top, land, smooth((t - DOWN) / (END - DOWN)))
@@ -3983,8 +4123,16 @@ def shot_j(sc, sky, ferro=False, spikes=True, meta=False):
         r_bsdf.inputs["Emission Strength"].default_value = 0.6 * pulse
         m_ = int((t - RED) / B_) if red else -1
         for i, (o, b_) in enumerate(zip(tail_ghosts, gh_bsdf)):          # the tail never settles: one of its swings flickers on every beat
-            o.hide_render = not (red and i == m_ % 4)
+            o.hide_render = not (red and i == m_ % 4) or (shake and t >= MELT)
             b_.inputs["Alpha"].default_value = 0.45 * math.exp(-((t - RED) - m_ * B_) / 0.18) if red else 0.0
+        if shake:
+            tail.hide_render = tail.hide_render or t >= MELT
+            tmo.hide_render = not MELT <= t < T_LINE
+            line_o.hide_render = t < T_LINE
+            if t >= MELT:
+                pos, rad = tail_balls(t)
+                for e_, p_, r_ in zip(tels, pos, rad):
+                    e_.co, e_.radius = p_.tolist(), float(r_)
     return update
 
 def shot_l(sc, sky):
@@ -3997,9 +4145,14 @@ def shot_e(sc, sky):
     return shot_j(sc, sky, ferro=True, spikes=False, meta=True)
 
 
+def shot_d(sc, sky):
+    """W2 motion with the tail shaken off (the director's pick of 11-04 20:45, way 3): shot e's liquid up to the snap and the red tail flickering; beat 30 the tail melts back into red liquid and the body winds up; beat 31 it shakes like a wet dog, about five turns a second dying away, and the red liquid is flung off in a streak, the tip first; beat 32 it splats in the next cell (cell 23) and spreads; beat 33 it draws together into a red line, the flat coil from u_path_2.py; beats 32-36 the blue body, residues 1-302, floats down into its cell with its pocket open. The flight is a smooth arc from the speed it was flung at to a falling drop, checked every frame clear of the kept part and of the table. Run: blender -b -P bl_inserts.py -- d <out dir> 0 1098 16 0.5 2"""
+    return shot_j(sc, sky, ferro=True, spikes=False, meta=True, shake=True)
+
+
 
 sc, sky = stage()
-update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t, r=shot_r, s=shot_s, n=shot_n, o=shot_o, m=shot_m, j=shot_j, l=shot_l, e=shot_e)[SHOT](sc, sky)
+update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t, r=shot_r, s=shot_s, n=shot_n, o=shot_o, m=shot_m, j=shot_j, l=shot_l, e=shot_e, d=shot_d)[SHOT](sc, sky)
 sc.frame_start, sc.frame_end = 0, FRAMES
 for f in range(FIRST, LAST + 1, STEP):
     sc.frame_set(f)
