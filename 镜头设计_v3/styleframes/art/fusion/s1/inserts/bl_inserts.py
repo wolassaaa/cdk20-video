@@ -31,8 +31,8 @@ import world as W      # noqa: E402
 P, gk = B.P, B.gk
 argv = sys.argv[sys.argv.index("--") + 1:]
 SHOT, OUT = argv[0], argv[1]
-START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0, r=412.0, s=412.0, n=412.0, o=412.0, m=412.0, j=412.0, l=412.0)[SHOT]
-FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6, r=6, s=6, n=4, o=3, m=1171, j=1055, l=1055)[SHOT]
+START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0, r=412.0, s=412.0, n=412.0, o=412.0, m=412.0, j=412.0, l=412.0, e=412.0)[SHOT]
+FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6, r=6, s=6, n=4, o=3, m=1171, j=1055, l=1055, e=1055)[SHOT]
 FIRST = int(argv[2]) if len(argv) > 2 else 0
 LAST = min(int(argv[3]), FRAMES - 1) if len(argv) > 3 else FRAMES - 1
 SAMPLES = int(argv[4]) if len(argv) > 4 else 64
@@ -64,7 +64,7 @@ def stage():
     nt = sc.world.node_tree
     pick = lambda kind: [n for n in nt.nodes if n.type == kind]
     dot, win = pick("VECT_MATH")[0], pick("MAP_RANGE")[1]
-    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2, t=0.2, r=0.2, s=0.2, n=0.2, o=0.2, m=0.2, j=0.2, l=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9, t=0.9, r=0.9, s=0.9, n=0.9, o=0.9, m=0.9, j=0.9, l=0.9)[SHOT]
+    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2, t=0.2, r=0.2, s=0.2, n=0.2, o=0.2, m=0.2, j=0.2, l=0.2, e=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9, t=0.9, r=0.9, s=0.9, n=0.9, o=0.9, m=0.9, j=0.9, l=0.9, e=0.9)[SHOT]
 
     def sky(x):
         dot.inputs[1].default_value = lerp((-0.22, 0.92, 0.32), P.WINDOW, x)
@@ -3615,7 +3615,7 @@ def shot_m(sc, sky):
     return update
 
 
-def shot_j(sc, sky, ferro=False):
+def shot_j(sc, sky, ferro=False, spikes=True, meta=False):
     """W2 motion without the tank (the director's note of 11-04 17:40: the tank is ugly, drop it): on a 123 BPM grid until the song arrives (one beat 0.488 s). Bars 0-1 S3's empty cell with the dashed keyhole; beat 4 the outline springs up off the table as a flat grey shape that stretches and flies up; beats 6-28 it hangs in the air in a frenzy, a new guess on every beat, tumbling, twitching on every half beat, greying into blue as it calms; beat 28 it snaps into the real model, the core Klein blue; beat 29 the tail turns red and keeps twitching between its guesses; beats 30-34 it floats down into its cell, where 4-01 goes on. The guesses are drawn (smooth random bends of the real model); the blue shape and the red tail are the AlphaFold DB v6 model. Run: blender -b -P bl_inserts.py -- j <out dir> 0 1054 16 0.5 2"""
     shot_v(sc, sky)
     ob = bpy.data.objects
@@ -3682,7 +3682,7 @@ def shot_j(sc, sky, ferro=False):
             acc = np.stack([np.bincount(ed[:, 0], nb[:, k_], len(v)) for k_ in range(3)], 1)
             return acc / np.maximum(deg, 1) - v
         SM = base_v.copy()
-        for _ in range(1500):           # plain diffusion over about 15 A: the protein's lumps melt into one liquid body
+        for _ in range(0 if meta else 3000 if not spikes else 1500):           # plain diffusion over about 15 A (20 A for shot e, which closes the deep cleft): the protein's lumps melt into one liquid body
             SM = SM + 0.5 * lap(SM)
         c0 = base_v.mean(0)
         SM = c0 + (SM - SM.mean(0)) * (np.linalg.norm(base_v - c0, axis=1).mean() / np.linalg.norm(SM - SM.mean(0), axis=1).mean())     # grown back to the model's size
@@ -3719,6 +3719,19 @@ def shot_j(sc, sky, ferro=False):
         DMAX = 4 * 1.3 + 12 * 1.1 * 1.2 + 2.5 * 3 + float(np.linalg.norm(SM - base_v, axis=1).max()) / P_S          # the furthest the surface can move out, in A
         grow = DMAX * P_S * guess.scale[0]
         RB, LO = RB + grow, LO - grow
+        if not spikes:
+            # shot e, plain liquid: six big lobes slide round the body, each swelling and sinking on its own clock (two of them dents);
+            # every half beat a bulge pushes out somewhere; faster, broader waves underneath
+            DV = (SM - SM.mean(0)) / np.linalg.norm(SM - SM.mean(0), axis=1, keepdims=True)
+            LOB_U = [Vector(gf.normal(size=3).tolist()).normalized() for _ in range(6)]
+            LOB_AX = [Vector(gf.normal(size=3).tolist()).normalized() for _ in range(6)]
+            LOB_W = gf.uniform(1.8, 3.0, 6) * gf.choice((-1, 1), 6)          # how fast each lobe slides round, rad/s
+            LOB_F, LOB_P = gf.uniform(3.5, 5.5, 6), gf.uniform(0, 6.3, 6)       # how fast each swells and sinks
+            LOB_A = np.array([9.0, 9.0, 8.0, 8.0, -3.0, -3.0])                   # A; the last two are shallow dents, deeper ones fold the surface over
+            ev_s = gf.uniform(10, 15, len(ev_t))
+            W = np.stack([np.exp(-((A_ - A_[c_]) ** 2).sum(1) / (2 * s_ ** 2)) for c_, s_ in zip(ev_c, ev_s)]).astype(np.float32)
+            KF = gf.normal(0, 0.07, (3, 3))
+            WF = gf.uniform(4.0, 6.0, 3)
         print("ferro: %d spikes, %d patches, surface moves out up to %.1f A" % (len(tips), len(ev_t), DMAX))
     H = max(0.9, 1.25 * RB + 0.16 - P0.z)            # high enough that a guess turned any way and twitching never meets the table
     print("pivot z %.3f, reach %.3f, lowest %.3f, rest bottom %.3f, flight %.3f" % (P0.z, RB, LO, float(world[0][:, 2].min()), H))
@@ -3784,11 +3797,73 @@ def shot_j(sc, sky, ferro=False):
         pf = np.minimum(g_ @ W, 1.3)            # spikes only stand where a patch is strong: away from them the surface stays a clean mirror
         sg = bristle(t)
         flow = np.sin(A_ @ KF.T + WF * t + PF).sum(1)
+        if not spikes:
+            lob = np.zeros(len(A_))
+            for k_ in range(6):
+                u_ = Quaternion(LOB_AX[k_], LOB_W[k_] * t) @ LOB_U[k_]
+                amp = LOB_A[k_] * (0.55 + 0.45 * math.sin(LOB_F[k_] * t + LOB_P[k_]))
+                lob += amp * np.exp((DV @ np.array(u_) - 1) / 0.12)
+            return cm * P_S * (lob + 7 * pf * (0.8 + 0.2 * sg) + 4 * flow)
         return cm * P_S * (4 * pf + 12 * SPIKE * np.clip((pf - 0.2) / 0.8, 0, None) * (0.6 + 0.4 * sg) + 2.5 * flow)
 
     def ferro_verts(t):
         cm = calm_at(t)
         return SM + (base_v - SM) * smooth(1 - cm) + NV * ferro_disp(t)[:, None]
+
+    if meta:
+        # shot e: the liquid is a metaball, one ball on every residue's CA, so neighbours fuse into one smooth body that can bulge, part and run back together;
+        # at rest the balls sit on their own residues and the body is close to the real surface, which takes over at the snap
+        pdb_ = [l for l in open(HERE + "../../../../../assets/alphafold/AF-Q8IZL9-F1-model_v6.pdb") if l.startswith("ATOM")]
+        hv = np.array([[float(l[30:38]), float(l[38:46]), float(l[46:54])] for l in pdb_ if l[76:78].strip() != "H"])
+        ACA = np.array([[float(l[30:38]), float(l[38:46]), float(l[46:54])] for l in pdb_ if l[12:16].strip() == "CA"]) - hv.mean(0)
+        HOME = ACA @ R.T * P_S
+        C0 = HOME.mean(0)
+        DN = (HOME - C0) / np.linalg.norm(HOME - C0, axis=1, keepdims=True)
+        WB = np.stack([np.exp(-((ACA - ACA[k_]) ** 2).sum(1) / (2 * s_ ** 2)) for k_, s_ in zip(gf.integers(0, len(ACA), len(ev_t)), ev_s)])
+        KB, PB = gf.normal(0, 0.07, (3, 3)), gf.uniform(0, 6.3, 3)
+        RAD = 6.5 * P_S
+        mbd = bpy.data.metaballs.new("liquidmb")
+        mbd.resolution, mbd.render_resolution, mbd.threshold = 1.2 * P_S, 0.6 * P_S, 0.6
+        els = []
+        for p_ in HOME:
+            e_ = mbd.elements.new()
+            e_.co, e_.radius = p_.tolist(), RAD
+            els.append(e_)
+        mbd.materials.append(grey)
+        mbo = bpy.data.objects.new("liquidmb", mbd)
+        sc.collection.objects.link(mbo)
+        mw_ = guess.matrix_world.copy()
+        mbo.parent = pivot
+        mbo.matrix_parent_inverse = pivot.matrix_world.inverted()
+        mbo.matrix_world = mw_
+        guess.hide_render = True
+
+        def balls(t):
+            cm = calm_at(t)
+            if t < POP or cm <= 0:
+                return HOME.copy()
+            lob = np.zeros(len(HOME))
+            for k_ in range(6):
+                u_ = Quaternion(LOB_AX[k_], LOB_W[k_] * t) @ LOB_U[k_]
+                lob += 1.3 * LOB_A[k_] * (0.55 + 0.45 * math.sin(LOB_F[k_] * t + LOB_P[k_])) * np.exp((DN @ np.array(u_) - 1) / 0.15)
+            u = t - ev_t
+            pf = np.minimum(np.where(u > 0, (u / 0.2) * np.exp(1 - u / 0.2), 0.0) @ WB, 1.3)
+            flow = np.sin(ACA @ KB.T + WF * t + PB)
+            body = C0 + (HOME - C0) * (1 - 0.2 * cm)            # a little rounder while it is liquid
+            return body + cm * P_S * (DN * (lob + 9 * pf)[:, None] + 4 * flow)
+
+    if meta:
+        reach = max(float(np.linalg.norm(balls(f_ / FPS) - C0, axis=1).max()) for f_ in range(round(POP * FPS), round(SNAP * FPS), 3)) + 1.5 * RAD
+        RB = reach * guess.scale[0]
+        LO = -RB
+        H = max(0.9, 1.25 * RB + 0.16 - P0.z)
+        print("metaball: %d balls, reaches %.3f from the middle, flight %.3f" % (len(HOME), RB, H))
+    elif ferro and not spikes:            # measure how far the liquid really reaches, and fly high enough for it
+        reach = max(float(np.linalg.norm(ferro_verts(f_ / FPS)[::5] - (base_v.mean(0)), axis=1).max()) for f_ in range(round(POP * FPS), round(SNAP * FPS), 3))
+        RB = reach * guess.scale[0]
+        LO = -RB
+        H = max(0.9, 1.25 * RB + 0.16 - P0.z)
+        print("liquid: reaches %.3f from the middle, flight %.3f" % (RB, H))
 
     def state(t):
         """Where the pivot is, how it is turned and scaled, the shape-key weights, and how solid the guess looks, at time t."""
@@ -3828,9 +3903,9 @@ def shot_j(sc, sky, ferro=False):
     for f in range(round(POP * FPS), FRAMES):
         t = f / FPS
         loc, q, s, w, _, _ = state(t)
-        v = ferro_verts(t) if ferro else shapes[0] + sum(wi * (shapes[i + 1] - shapes[0]) for i, wi in enumerate(w) if wi)
+        v = balls(t) if meta else ferro_verts(t) if ferro else shapes[0] + sum(wi * (shapes[i + 1] - shapes[0]) for i, wi in enumerate(w) if wi)
         Mp = np.array(Matrix.LocRotScale(loc, q, Vector(s))) @ Mrel
-        lowest = min(lowest, float(((np.c_[v[::7], np.ones(len(v[::7]))] @ Mp.T)[:, 2]).min()))
+        lowest = min(lowest, float(((np.c_[v[::7], np.ones(len(v[::7]))] @ Mp.T)[:, 2]).min()) - (1.5 * RAD * guess.scale[0] * max(s) if meta else 0.0))
     print("lowest point over the shot: %.4f above the table" % lowest)
     assert lowest > -0.001
 
@@ -3874,7 +3949,9 @@ def shot_j(sc, sky, ferro=False):
         for o in dashes:
             o.hide_render = t >= POP
         forming = POP <= t < SNAP
-        guess.hide_render = not forming
+        guess.hide_render = meta or not forming
+        if meta:
+            mbo.hide_render = not forming
         core.hide_render = tail.hide_render = t < SNAP
         pivot.animation_data_clear()
         for s_ in (-0.25, 0.25):            # keyed either side of the frame, so the shutter sees the motion
@@ -3886,7 +3963,11 @@ def shot_j(sc, sky, ferro=False):
         for k_, wi in zip(keys, w):
             k_.value = wi
         if ferro:           # black mirror fluid, turning Klein blue and less glossy as it settles into the real shape
-            if forming:
+            if forming and meta:
+                rr = RAD * (1 + 0.5 * calm_at(t))         # fatter balls while it is liquid fuse into one smooth body; back to size as it settles
+                for e_, p_ in zip(els, balls(t)):
+                    e_.co, e_.radius = p_.tolist(), rr
+            elif forming:
                 me.vertices.foreach_set("co", ferro_verts(t).astype(np.float32).ravel())
                 me.update()
             g_bsdf.inputs["Alpha"].default_value = 1.0
@@ -3911,9 +3992,14 @@ def shot_l(sc, sky):
     return shot_j(sc, sky, ferro=True)
 
 
+def shot_e(sc, sky):
+    """W2 motion as a plain liquid (the director's note of 11-04 18:58: not spikes, a liquid changing fast and smoothly): shot l's black mirror fluid without the spikes, built as a metaball with one ball per residue: big lobes slide round it, swell and sink, a bulge pushes out on every half beat, broad waves run underneath, drops can part and run back; it turns Klein blue and settles into the real CDK20. Run: blender -b -P bl_inserts.py -- e <out dir> 0 1054 16 0.5 2"""
+    return shot_j(sc, sky, ferro=True, spikes=False, meta=True)
+
+
 
 sc, sky = stage()
-update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t, r=shot_r, s=shot_s, n=shot_n, o=shot_o, m=shot_m, j=shot_j, l=shot_l)[SHOT](sc, sky)
+update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t, r=shot_r, s=shot_s, n=shot_n, o=shot_o, m=shot_m, j=shot_j, l=shot_l, e=shot_e)[SHOT](sc, sky)
 sc.frame_start, sc.frame_end = 0, FRAMES
 for f in range(FIRST, LAST + 1, STEP):
     sc.frame_set(f)
