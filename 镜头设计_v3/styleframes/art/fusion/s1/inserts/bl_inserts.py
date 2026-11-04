@@ -1809,7 +1809,7 @@ def shot_v(sc, sky):
 
 
 def shot_u(sc, sky):
-    """Motion test of the new S4 opening, W2 to 4-05 (the stills are shot v), 412-454.5 s with 4-01 and 4-02 cut short: S3's empty cell; CDK20's sequence, a line of letters, walks into it; the AI's guesses swell up where the letters go in, three see-through shapes that keep bending; they agree, and most of it holds still in Klein blue (residues 1-302); the tail turns red and keeps swinging (three swings from u_path.py, each tested clear of the kept part); the camera pushes in over the pocket; the tail comes to rest across it; it is cut at 302/303, draws tight onto its backbone, and is drawn out along its own path, carried over and coiled in the next cell (u_path.py, every frame checked). The guesses are drawn; the blue shape and the red tail are the AlphaFold DB v6 model. Notes and the source line are laid on afterwards. Run: blender -b -P bl_inserts.py -- u <out dir> [first] [last] [samples] [size] [step]"""
+    """Motion test of the new S4 opening, W2 to 4-05 (the stills are shot v), 412-454.5 s with 4-01 and 4-02 cut short: S3's empty cell; CDK20's sequence, a line of letters, walks into it; the AI's guesses swell up where the letters go in, three see-through shapes that keep bending; they agree, and most of it holds still in Klein blue (residues 1-302); the tail turns red and keeps swinging (three swings from u_path.py, each tested clear of the kept part); the camera pushes in over the pocket; the tail comes to rest across it; it is cut at 302/303, draws tight onto its backbone, and is drawn out along its own path, low over the model and into the next cell, where it winds into a coil (u_path_2.py, every frame checked). The guesses are drawn; the blue shape and the red tail are the AlphaFold DB v6 model. Notes and the source line are laid on afterwards. Run: blender -b -P bl_inserts.py -- u <out dir> [first] [last] [samples] [size] [step]"""
     global START
     START = 330.0
     shot_q(sc, sky)             # the table, the grid and the keyhole as S3 left them
@@ -1831,7 +1831,7 @@ def shot_u(sc, sky):
     core_A = core_npz["verts"] + heavy(302).mean(0)          # both surfaces in angstrom, PDB frame
     tail_A = tail_npz["verts"] + heavy(346, 303).mean(0)
     ca = np.array([[float(l[30:38]), float(l[38:46]), float(l[46:54])] for l in pdb if l[12:16].strip() == "CA"])
-    ut = np.load(HERE + "frames/u_tail.npz")
+    ut = np.load(HERE + "frames/u_tail_2.npz")        # version 2: the tail crawls low into the next cell (version 1, u_tail.npz, hung it up out of frame)
     pivot, picks = ut["pivot"], [Matrix(M.tolist()).to_quaternion() for M in ut["picks"]]
     T_CUT = float(ut["t0"])
 
@@ -1861,7 +1861,7 @@ def shot_u(sc, sky):
         o.data.update()
 
     # three guesses, each a core and a tail that bend together; guess 1 becomes the answer
-    G = [dict(seed=3, grey=0.22, turn=-28, dx=-0.07, ph=0.0), dict(seed=8, grey=0.4, turn=4, dx=0.0, ph=0.37), dict(seed=21, grey=0.58, turn=32, dx=0.07, ph=0.71)]
+    G = [dict(seed=3, grey=0.22, turn=-18, dx=-0.05, ph=0.0), dict(seed=8, grey=0.4, turn=0, dx=0.0, ph=0.37), dict(seed=21, grey=0.58, turn=18, dx=0.05, ph=0.71)]
     for j, gd in enumerate(G):
         r_ = np.random.default_rng(gd["seed"])
         gd["k"] = r_.normal(size=(3, 3)) * 0.07                # three waves, 40-100 A long, across the 60 A model
@@ -1908,7 +1908,7 @@ def shot_u(sc, sky):
     letters = []
     for i in range(20):
         cu = bpy.data.curves.new("letter", "FONT")
-        cu.body, cu.font, cu.size, cu.extrude = seq[i], font, 0.12, 0.012
+        cu.body, cu.font, cu.size, cu.extrude = seq[i], font, 0.17, 0.017
         cu.align_x, cu.align_y = "CENTER", "CENTER"
         o = bpy.data.objects.new("letter", cu)
         sc.collection.objects.link(o)
@@ -1958,9 +1958,9 @@ def shot_u(sc, sky):
         red = smooth((t - 19.0) / 1.5)
         wob = smooth((t - 18.5) / 2.0) * (1 - smooth((t - 31.0) / 1.5))
         for i, o in enumerate(letters):
-            p = (t - 5.0) * 0.3 - i * 0.045
+            p = (t - 3.0) * 0.19 - i * 0.055          # slow enough to read a few as they pass
             o.hide_render = not 0 <= p < 1
-            o.location = (cx - 3.5 + 3.25 * p, cy - 0.25 + 0.2 * p, 0.06)
+            o.location = (cx - 3.5 + 3.25 * p, cy - 0.25 + 0.2 * p, 0.085)
             o.scale = (1 - smooth((p - 0.88) / 0.12),) * 3
         for j, gd in enumerate(G):
             for o in (gd["core"], gd["tail"]):
@@ -1972,7 +1972,7 @@ def shot_u(sc, sky):
             if grow > 0:
                 set_verts(gd["core"], bent(core_A, gd, t, amp))
             core_rgb = lerp(grey_of(gd), P.KLEIN, settle) if main else grey_of(gd)
-            paint(gd["core"], core_rgb, 0.42 * grow + 0.58 * settle if main else 0.2 * grow * (1 - settle))      # the leading guess reads through the others
+            paint(gd["core"], core_rgb, 0.55 * grow + 0.45 * settle if main else 0.12 * grow * (1 - settle))      # the leading guess reads through the others
             v = swung(bent(tail_A, gd, t, amp), t, gd["ph"], wob)
             if main and t >= T_CUT:
                 v = tail_A + (tight - tail_A) * smooth((t - T_CUT - 0.1) / 0.8)
@@ -1980,16 +1980,16 @@ def shot_u(sc, sky):
                 set_verts(gd["tail"], v)
             tail_rgb = lerp(grey_of(gd), P.RED, red)
             if main:
-                paint(gd["tail"], tail_rgb, 0 if t >= T_CUT + 0.95 else 0.3 * grow + 0.7 * red)
+                paint(gd["tail"], tail_rgb, 0 if t >= T_CUT + 0.95 else 0.55 * grow + 0.45 * red)
             else:
-                paint(gd["tail"], tail_rgb, (0.2 + 0.1 * red) * grow * (1 - smooth((t - 31.0) / 1.5)))
+                paint(gd["tail"], tail_rgb, (0.12 + 0.18 * red) * grow * (1 - smooth((t - 31.0) / 1.5)))
         tube.hide_render = t < T_CUT + 0.95
         if not tube.hide_render:
             pos = ut["pos"][min(len(ut["pos"]) - 1, round((t - T_CUT) * FPS))]
             for q, p in zip(tube.data.splines[0].points, pos):
                 q.co = (*p.tolist(), 1)
-        for o in dashes:            # the dashed keyhole shows under the guesses until the answer is solid enough to cover it
-            o.hide_render = settle > 0.5
+        for i, o in enumerate(dashes):          # the dashed keyhole shows under the guesses and goes dash by dash as the answer turns solid
+            o.hide_render = settle > 0.2 + 0.6 * i / len(dashes)
         sky(0.2)
     return update
 
