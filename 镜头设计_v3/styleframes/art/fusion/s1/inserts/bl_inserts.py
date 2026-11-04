@@ -2964,7 +2964,7 @@ def shot_n(sc, sky):
 
 
 def shot_o(sc, sky):
-    """The culture tank rebuilt from sci-fi film references (镜头设计_v3/styleframes/art/fusion/s4/培养罐参考.md, 11-04 14:35): the tank is its own light, a straight glass tube whose ends hide in two tall housings with seams and lit squares, hung from above by a mast, a ring and four clamping arms (the claw for the tail comes later from the same ring), the slot machine a screen on an arm at its side. The room dims for W2. 0 the hero view, dimmed; 1 closer, from the right; 2 the hero view with the room lit, as when the tank opens. The machine, the mist and the bubbles are drawn; the blue shape, the red tail and the four numbers come from the AlphaFold DB v6 model. Run: blender -b -P bl_inserts.py -- o <out dir> 0 2 64 1"""
+    """The culture tank rebuilt from sci-fi film references (镜头设计_v3/styleframes/art/fusion/s4/培养罐参考.md, 11-04 14:35): the tank is its own light, a straight glass tube whose ends hide in two tall housings with seams and lit squares, hung from above by a mast, a ring and four clamping arms (the claw for the tail comes later from the same ring), the slot machine a screen on an arm at its side. The room dims for W2. 0 the hero view, dimmed; 1 the top, closer, from the right: the reels and the pipes; 2 the hero view with the room lit, as when the tank opens. The machine, the mist and the bubbles are drawn; the blue shape, the red tail and the four numbers come from the AlphaFold DB v6 model. Run: blender -b -P bl_inserts.py -- o <out dir> 0 2 64 1"""
     base_update = shot_v(sc, sky)
     ob = bpy.data.objects
     core, tail = ob["core"], ob["tail"]
@@ -2980,7 +2980,7 @@ def shot_o(sc, sky):
     SCORE = [int(round(conf[(res >= a) & (res <= b)].mean())) for a, b in STRETCH]
     print("reels land on", SCORE)
 
-    hero = dict(at=(C.x, C.y, 0.8), az=math.atan2(0.55, 2.19), el=math.radians(12), d=4.1, mm=40.0)
+    hero = dict(at=(C.x, C.y, 0.9), az=math.atan2(0.55, 2.19), el=math.radians(12), d=4.5, mm=40.0)
     T = 0.2          # the glass runs 0.2 taller than the first try: the tank reads as a tube, not a canister
     yaw = Quaternion((0, 0, 1), hero["az"])
     front = yaw @ Vector((0, -1, 0))
@@ -3212,13 +3212,34 @@ def shot_o(sc, sky):
     ring_(0.3765, 0.0018, 1.021, cyan)
     lit_panels(0.94, 10, 0.0, (0.05, 0.004, 0.02), cyan_soft)
     ring_(0.318, 0.006, 0.878, cyan)
-    # the hanger: a mast from above, a ring, four arms that clamp the top housing
-    turn([(0.001, 1.15), (0.07, 1.15), (0.07, 1.2), (0.05, 1.215), (0.05, 3.2), (0.001, 3.2)], gun, 0.004)
+    # the hanger: a ring held up by three rods, four arms from it that clamp the top housing (the director's note of 14:43: no single mast)
+    steel = mat((0.62, 0.64, 0.68), 0.2, 1.0)
     turn([(0.40, 1.29), (0.48, 1.29), (0.48, 1.33), (0.40, 1.33), (0.40, 1.29)], gun, 0.004)
     ring_(0.481, 0.0025, 1.31, cyan)
+    for k in range(4):          # hangers above the four arms
+        a = math.pi / 4 + k * math.pi / 2
+        beam(around(a, 0.44, 1.32), around(a, 0.44, 3.0), 0.022, gun)
+    # a bundle of pipes and cables, thick and thin, out of the back of the crown and up out of frame
+    for a_, r0, rr, m_p, lean, top in ((180, 0.12, 0.034, steel, 0.25, 2.8), (150, 0.2, 0.022, rubber, 0.7, 2.4), (210, 0.2, 0.022, rubber, 0.7, 2.4), (120, 0.16, 0.018, gun, 0.9, 2.1),
+                                       (240, 0.16, 0.018, gun, 0.9, 2.1), (100, 0.24, 0.014, rubber, 1.2, 1.9), (260, 0.24, 0.014, rubber, 1.2, 1.9), (180, 0.25, 0.02, gun, 0.5, 2.6)):
+        aa = math.radians(a_)       # each rises a little, then arcs back and out, so the bundle fans instead of standing like bars
+        pts = [around(aa, r0, 1.11), around(aa, r0, 1.26), around(aa, r0 + lean * 0.15, 1.42), around(aa, r0 + lean * 0.5, 1.62), around(aa, r0 + lean, top * 0.9), around(aa, r0 + lean * 1.3, top + 0.6)]
+        tube3d([tuple(p) for p in pts], rr, m_p, "pipe")
+        bpy.ops.mesh.primitive_torus_add(major_radius=rr + 0.006, minor_radius=0.007, major_segments=48, minor_segments=10, location=tuple(around(aa, r0, 1.165)))
+        cl = bpy.context.object
+        cl.data.materials.append(steel)
+        bpy.ops.object.shade_smooth()
+    # the slot machine sits on the crown, on a plinth, facing the lens; its own lever is hidden, the lever is on the base
+    block((0.5, 0.11, 0.25), C + front * 0.1 + Vector((0, 0, 1.24)), yaw, band, 0.006)       # tall enough to lift the reels clear above the ring
+    console(shell, black, cyan, label, mat(P.RED, 0.2, 0.0, 0.6), 0.4)
+    con = [o for o in ob if o.name.startswith("console")][-1]
+    con.scale = (0.9, 0.9, 0.9)
+    con.location = tuple(C + front * 0.1 + Vector((0, 0, 1.365 + 0.085 * 0.9)))
+    bd = next(n for n in drum_white.node_tree.nodes if n.type == "BSDF_PRINCIPLED")
+    bd.inputs["Emission Color"].default_value, bd.inputs["Emission Strength"].default_value = (1, 1, 0.97, 1), 0.8      # the reels are lit from inside, so the numbers read in the dark
+    con.rotation_quaternion = yaw
     for k in range(4):
         a = math.pi / 4 + k * math.pi / 2
-        beam(around(a, 0.07, 1.31), around(a, 0.41, 1.31), 0.025, gun)          # spokes from the mast to the ring
         sh, el, hd = around(a, 0.45, 1.29), around(a, 0.56, 1.16), around(a, 0.40, 1.03)
         beam(sh, el, 0.046, gun)
         beam(el, hd, 0.04, gun)
@@ -3244,14 +3265,15 @@ def shot_o(sc, sky):
     for _ in range(46):
         a, r = g.uniform(0, 2 * math.pi), 0.27 * math.sqrt(g.uniform(0.02, 1))
         joint(C + Vector((r * math.cos(a), r * math.sin(a), g.uniform(0.31, 0.87 + T))), float(g.uniform(0.004, 0.011)), bub)
-    # the slot machine as a screen on an arm at the base's right, turned toward the lens, clear of the glass
-    console(shell, black, cyan, label, mat(P.RED, 0.2, 0.0, 0.6), 0.4)
-    con = [o for o in ob if o.name.startswith("console")][-1]
-    con.scale = (0.85, 0.85, 0.85)
-    con.location = tuple(around(math.radians(62), 0.6, 0.2))
-    con.rotation_quaternion = yaw @ Quaternion((0, 0, 1), math.radians(28)) @ Quaternion((1, 0, 0), math.radians(-12))
-    beam(around(math.radians(62), 0.37, 0.15), around(math.radians(62), 0.55, 0.2), 0.03, gun)
-    joint(around(math.radians(62), 0.55, 0.2), 0.026, gun)
+    for o in ob:                # the console's own lever goes; the lever is on the base
+        if o.parent and o.parent.name.startswith("lever"):
+            o.hide_render = True
+    # the lever on the base, front right: pull it and the reels on top spin
+    la = math.radians(68)
+    radial(la, 0.38, 0.2, (0.06, 0.03, 0.06), gun, 0.006)
+    beam(around(la, 0.40, 0.2), around(la, 0.47, 0.4), 0.014, steel)
+    joint(around(la, 0.40, 0.2), 0.022, steel)
+    joint(around(la, 0.47, 0.4), 0.03, mat(P.RED, 0.2, 0.0, 0.6))
 
     # lights: a white key from the front left keeps blue and red true; the room dims for W2 and comes back when the tank opens
     kd = bpy.data.lights.new("key", "AREA")
@@ -3276,7 +3298,7 @@ def shot_o(sc, sky):
     wnt.links.new(dim.outputs[0], bgs[0].inputs[1])
     bone_s = bgs[1].inputs[1].default_value
 
-    close = dict(at=(C.x, C.y, 0.72), az=hero["az"] + math.radians(32), el=math.radians(18), d=2.7, mm=40.0)
+    close = dict(at=(C.x, C.y, 1.42), az=hero["az"] + math.radians(24), el=math.radians(14), d=2.4, mm=40.0)      # the top: reels and pipes
     views = [hero, close, hero]
     c = sc.camera
     c.animation_data_clear()
