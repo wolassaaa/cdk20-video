@@ -3893,11 +3893,11 @@ def shot_j(sc, sky, ferro=False, spikes=True, meta=False, shake=False):
             sh = sh * 0.3
             pulse = 1.0 + 0.03 * calm * ramp * bristle(t)
         if shake:
-            q = Quaternion((0, 0, 1), yaw(t)) @ q
+            q = Quaternion(TILT_AX, tilt(t)) @ Quaternion((0, 0, 1), yaw(t)) @ q
         sxy, sz = stretch(t) if t >= POP else (1.0, 0.04)
         snap = 1.0 + 0.06 * math.exp(-(t - SNAP) / 0.12) * math.cos(2 * math.pi * (t - SNAP) / 0.25) if t >= SNAP else 1.0
         s = (sxy * pulse * snap, sxy * pulse * snap, sz * pulse * snap)
-        z = P0.z + lift(t) + off[2] + sh[2]
+        z = P0.z + lift(t) + off[2] + sh[2] + (bounce(t) if shake else 0.0)
         if t < APEX:
             z = max(z, 0.003 - s[2] * LO)            # while it springs up unturned, its lowest point stays on or above the table
         loc = Vector((P0.x + off[0] + sh[0], P0.y + off[1] + sh[1], z))
@@ -3911,7 +3911,18 @@ def shot_j(sc, sky, ferro=False, spikes=True, meta=False, shake=False):
         CC = coil.mean(0)
         r_t = Mrel[:3, :3] @ HT.mean(0) + Mrel[:3, 3]
         sgn = 1.0 if -r_t[1] >= 0 else -1.0         # turn the way that swings the tail towards +x, the next cell
-        Y0, TP, TAU = -sgn * math.radians(22), 0.2, 0.32
+        Y0, TP, TAU = -sgn * math.radians(50), 0.18, 0.55          # the director's note of 11-04 21:05: the shake was not big or shaky enough
+        TILT_AX = Vector((r_t[0], r_t[1], 0.0)).normalized()     # it rocks about the line out to the tail as well, so the tail itself stays on its throw
+
+        def tilt(t):
+            u = t - WHIP
+            return 0.0 if u < 0 else math.radians(18) * math.exp(-u / TAU) * math.sin(2 * math.pi * u / TP)
+
+        def bounce(t):
+            u = t - WHIP
+            if u < 0:
+                return -0.04 * smooth((t - MELT) / (WHIP - MELT))        # it crouches into the wind-up
+            return -0.04 * math.exp(-u / 0.08) + 0.035 * math.exp(-u / TAU) * abs(math.sin(2 * math.pi * u / TP))       # and hops on every swing
         print("tail sits %.3f %.3f off the axis; shake turns %s" % (r_t[0], r_t[1], "left" if sgn > 0 else "right"))
 
         def yaw(t):
@@ -3928,7 +3939,7 @@ def shot_j(sc, sky, ferro=False, spikes=True, meta=False, shake=False):
         tj = np.random.default_rng(5)
         LAND_P = CC + (coil - CC) * 0.45 + np.c_[tj.normal(0, 0.012, (len(HT), 2)), np.zeros(len(HT))]
         SPRD = CC + (coil - CC) * 1.1 + np.c_[tj.normal(0, 0.01, (len(HT), 2)), np.zeros(len(HT))]
-        R_FLY, R_PUD, R_LINE = 1.7 * RAD * guess.scale[0], 1.4 * RAD * guess.scale[0], 3.0 * AW          # fat enough in flight and on the table to stay one liquid
+        R_FLY, R_PUD, R_LINE = 2.0 * RAD * guess.scale[0], 1.4 * RAD * guess.scale[0], 3.0 * AW          # fat enough in flight and on the table to stay one liquid
         Z_PUD, Z_LINE = 0.15 * R_PUD, float(coil[0, 2])
         G_ = np.array([0.0, 0.0, -9.0])
 
@@ -3960,7 +3971,7 @@ def shot_j(sc, sky, ferro=False, spikes=True, meta=False, shake=False):
         PC = np.array(state(WHIP)[0])
         aw_ = P_REL - PC
         aw_[:, 2] = 0
-        V_REL += 2.5 * aw_ / np.linalg.norm(aw_, axis=1, keepdims=True)           # and it leaves outwards, away from the body, as well as round
+        V_REL += 4.0 * aw_ / np.linalg.norm(aw_, axis=1, keepdims=True)           # and it leaves outwards, away from the body, as well as round
         FL_T = T_LAND - T_REL
         LP = LAND_P.copy()
         LP[:, 2] = Z_PUD
@@ -4070,6 +4081,10 @@ def shot_j(sc, sky, ferro=False, spikes=True, meta=False, shake=False):
             if t < WHIP - B_ / 4:
                 return blend(top, fl, smooth((t - SNAP - B_ / 2) / (WHIP - B_ / 4 - SNAP - B_ / 2)))
             if t < SPLAT + B_ / 2:
+                u = t - WHIP
+                if u > 0:           # the camera takes the shake too
+                    k_ = 0.035 * math.exp(-u / 0.35)
+                    fl = dict(fl, at=(fl["at"][0] + k_ * math.sin(61 * u), fl["at"][1] + k_ * math.sin(47 * u + 1), fl["at"][2] + k_ * math.sin(73 * u + 2)))
                 return fl
             return blend(fl, fin, smooth((t - SPLAT - B_ / 2) / (END - SPLAT - B_ / 2)))
         if t < DOWN:
