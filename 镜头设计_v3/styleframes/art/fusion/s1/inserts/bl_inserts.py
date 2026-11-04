@@ -31,8 +31,8 @@ import world as W      # noqa: E402
 P, gk = B.P, B.gk
 argv = sys.argv[sys.argv.index("--") + 1:]
 SHOT, OUT = argv[0], argv[1]
-START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0, r=412.0, s=412.0, n=412.0, o=412.0)[SHOT]
-FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6, r=6, s=6, n=4, o=3)[SHOT]
+START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0, r=412.0, s=412.0, n=412.0, o=412.0, m=412.0)[SHOT]
+FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6, r=6, s=6, n=4, o=3, m=1171)[SHOT]
 FIRST = int(argv[2]) if len(argv) > 2 else 0
 LAST = min(int(argv[3]), FRAMES - 1) if len(argv) > 3 else FRAMES - 1
 SAMPLES = int(argv[4]) if len(argv) > 4 else 64
@@ -64,7 +64,7 @@ def stage():
     nt = sc.world.node_tree
     pick = lambda kind: [n for n in nt.nodes if n.type == kind]
     dot, win = pick("VECT_MATH")[0], pick("MAP_RANGE")[1]
-    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2, t=0.2, r=0.2, s=0.2, n=0.2, o=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9, t=0.9, r=0.9, s=0.9, n=0.9, o=0.9)[SHOT]
+    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2, t=0.2, r=0.2, s=0.2, n=0.2, o=0.2, m=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9, t=0.9, r=0.9, s=0.9, n=0.9, o=0.9, m=0.9)[SHOT]
 
     def sky(x):
         dot.inputs[1].default_value = lerp((-0.22, 0.92, 0.32), P.WINDOW, x)
@@ -2963,9 +2963,13 @@ def shot_n(sc, sky):
     return update
 
 
+TANK = {}          # handles shot o leaves for shot m, which animates the same tank
+
+
 def shot_o(sc, sky):
-    """The culture tank rebuilt from sci-fi film references (镜头设计_v3/styleframes/art/fusion/s4/培养罐参考.md, 11-04 14:35): the tank is its own light, a straight glass tube whose ends hide in two tall housings with seams and lit squares, hung from above by a mast, a ring and four clamping arms (the claw for the tail comes later from the same ring), the slot machine a screen on an arm at its side. The room dims for W2. 0 the hero view, dimmed; 1 the top, closer, from the right: the reels and the pipes; 2 the hero view with the room lit, as when the tank opens. The machine, the mist and the bubbles are drawn; the blue shape, the red tail and the four numbers come from the AlphaFold DB v6 model. Run: blender -b -P bl_inserts.py -- o <out dir> 0 2 64 1"""
+    """The culture tank rebuilt from sci-fi film references (镜头设计_v3/styleframes/art/fusion/s4/培养罐参考.md, 11-04 14:35): the tank is its own light, a straight glass tube whose ends hide in two tall housings with seams and lit squares, hung from a ring on four rods with four clamping arms (the claw for the tail comes later from the same ring); version 6 (11-04 14:43): a bundle of eight pipes fans out of the crown, the slot machine sits on the crown on a plinth, the lever is on the base. The room dims for W2. 0 the hero view, dimmed; 1 the top, closer, from the right: the reels and the pipes; 2 the hero view with the room lit, as when the tank opens. The machine, the mist and the bubbles are drawn; the blue shape, the red tail and the four numbers come from the AlphaFold DB v6 model. Run: blender -b -P bl_inserts.py -- o <out dir> 0 2 64 1"""
     base_update = shot_v(sc, sky)
+    before_tank = set(o.name for o in bpy.data.objects)
     ob = bpy.data.objects
     core, tail = ob["core"], ob["tail"]
     every = [o for o in ob if o.name.split(".")[0] in ("letter", "guess", "tail_guess", "tail_cut")]
@@ -3260,20 +3264,27 @@ def shot_o(sc, sky):
     vol = next(n for n in m_.data.materials[0].node_tree.nodes if n.type == "PRINCIPLED_VOLUME")
     vol.inputs["Emission Color"].default_value = (0.25, 0.85, 1.0, 1)
     vol.inputs["Emission Strength"].default_value = 0.5          # any brighter and the red tail washes to pink
+    TANK.clear()
+    TANK["bubbles"] = []
     g = np.random.default_rng(5)
     bub = emit((0.75, 0.97, 1.0), 2.0)
     for _ in range(46):
         a, r = g.uniform(0, 2 * math.pi), 0.27 * math.sqrt(g.uniform(0.02, 1))
-        joint(C + Vector((r * math.cos(a), r * math.sin(a), g.uniform(0.31, 0.87 + T))), float(g.uniform(0.004, 0.011)), bub)
+        TANK["bubbles"].append(joint(C + Vector((r * math.cos(a), r * math.sin(a), g.uniform(0.31, 0.87 + T))), float(g.uniform(0.004, 0.011)), bub))
     for o in ob:                # the console's own lever goes; the lever is on the base
         if o.parent and o.parent.name.startswith("lever"):
             o.hide_render = True
     # the lever on the base, front right: pull it and the reels on top spin
     la = math.radians(68)
     radial(la, 0.38, 0.2, (0.06, 0.03, 0.06), gun, 0.006)
-    beam(around(la, 0.40, 0.2), around(la, 0.47, 0.4), 0.014, steel)
-    joint(around(la, 0.40, 0.2), 0.022, steel)
-    joint(around(la, 0.47, 0.4), 0.03, mat(P.RED, 0.2, 0.0, 0.6))
+    lever = empty("lever_pivot")         # the rod and knob turn about the hub's own axis, tangent to the base
+    lever.location = tuple(around(la, 0.40, 0.2))
+    bpy.context.view_layer.update()
+    for o in (beam(around(la, 0.40, 0.2), around(la, 0.47, 0.4), 0.014, steel), joint(around(la, 0.40, 0.2), 0.022, steel), joint(around(la, 0.47, 0.4), 0.03, mat(P.RED, 0.2, 0.0, 0.6))):
+        o.parent = lever
+        o.matrix_parent_inverse = lever.matrix_world.inverted()
+    TANK.update(lever=lever, lever_axis=yaw @ Quaternion((0, 0, 1), la) @ Vector((1, 0, 0)), mist_density=next(n for n in m_.data.materials[0].node_tree.nodes if n.type == "MATH").inputs[1],
+                drums=[o for o in ob if o.name.startswith("drum")], drum_white=drum_white, C=C, T=T, UP=UP, yaw=yaw, hero=hero)
 
     # lights: a white key from the front left keeps blue and red true; the room dims for W2 and comes back when the tank opens
     kd = bpy.data.lights.new("key", "AREA")
@@ -3297,6 +3308,7 @@ def shot_o(sc, sky):
     wnt.links.new(src, dim.inputs[0])
     wnt.links.new(dim.outputs[0], bgs[0].inputs[1])
     bone_s = bgs[1].inputs[1].default_value
+    TANK.update(key=key, recv=recv, dim=dim, bgs=bgs, bone_s=bone_s, sun=sun_o, sun_e=sun_e, parts=[o for o in ob if o.name not in before_tank and o.type != "LIGHT"])
 
     close = dict(at=(C.x, C.y, 1.42), az=hero["az"] + math.radians(24), el=math.radians(14), d=2.4, mm=40.0)      # the top: reels and pipes
     views = [hero, close, hero]
@@ -3326,8 +3338,285 @@ def shot_o(sc, sky):
     return update
 
 
+def shot_m(sc, sky):
+    """W2 motion, part one, on the tank of shot o (version 6, the director's OK of 11-04 14:57), on a 123 BPM grid until the song arrives (one beat 0.488 s, one bar 1.95 s): bars 0-1 the tank comes down on its rig onto S3's empty cell as the room dims; bar 2 the lever pulls itself, the tank gurgles; bar 3 the question mark is sucked up into the top and the four reels start; bars 4-7 in the mist a shape forms in a frenzy, a new guess on every beat, shaking, turning, the mist thinning as it firms up; bar 8 the reels stop one by one on the beat, 87 92 95: the shape holds in Klein blue; 47: the tail turns red and keeps pulsing; bar 9 the camera comes down to the shape. The guesses are drawn (smooth random bends of the real model, kept inside the glass); the blue shape, the red tail and the four numbers come from the AlphaFold DB v6 model. Run: blender -b -P bl_inserts.py -- m <out dir> 0 1170 16 0.5 2"""
+    shot_o(sc, sky)
+    ob = bpy.data.objects
+    C, T, UP, yaw, hero = TANK["C"], TANK["T"], TANK["UP"], TANK["yaw"], TANK["hero"]
+    core, tail, small = ob["core"], ob["tail"], ob["cdk20_small"]
+    for o in ob:                # S3's letters and old guesses never show here
+        if o.name.split(".")[0] in ("letter", "guess", "tail_guess", "tail_cut"):
+            o.hide_render = True
+    dashes = [o for o in ob if o.parent and o.parent.name == "keyhole"]
+    sky(0.2)
+    sc.render.use_motion_blur = True
+    sc.render.motion_blur_shutter = 0.5
+    B_ = 60.0 / 123.0
+    beat = lambda n: n * B_
+
+    # the guess: the real model, unbent as its basis, with eight bent guesses as shape keys
+    pdb = [l for l in open(HERE + "../../../../../assets/alphafold/AF-Q8IZL9-F1-model_v6.pdb") if l.startswith("ATOM")]
+    full = np.load(HERE + "frames/cdk20.npz")
+    q0 = Vector(full["mouth"].tolist()).rotation_difference(Vector((0, -math.cos(P_UP), math.sin(P_UP))))
+    R = np.array(q0.to_matrix())
+    heavy = np.array([[float(l[30:38]), float(l[38:46]), float(l[46:54])] for l in pdb if l[76:78].strip() != "H"])
+    centre = heavy.mean(0)
+    base_v = (full["verts"] + centre - centre) @ R.T * P_S
+    me = bpy.data.meshes.new("frenzy")
+    me.from_pydata(base_v.tolist(), [], full["quads"].tolist())
+    grey = see_through((0.75, 0.78, 0.82), 0.5)
+    g_bsdf = next(n for n in grey.node_tree.nodes if n.type == "BSDF_PRINCIPLED")
+    me.materials.append(grey)
+    guess = bpy.data.objects.new("frenzy", me)
+    sc.collection.objects.link(guess)
+    B.smooth(guess)
+    guess.rotation_mode = "QUATERNION"
+    guess.rotation_quaternion, guess.scale = small.rotation_quaternion, small.scale
+    guess.location = Vector(small.location) + Vector((0, 0, UP))
+    bpy.context.view_layer.update()
+    M = guess.matrix_world.copy()
+    Mi = M.inverted()
+    guess.shape_key_add(name="Basis")
+    world0 = (np.c_[base_v, np.ones(len(base_v))] @ np.array(M).T)[:, :3]
+    zc = float(world0[:, 2].mean())
+    LIM_R, Z_LO, Z_HI = 0.282, 0.315, 1.065         # inside the glass (0.305) less the shake, clear of the back light strip (0.294); between the two housings
+    keys = []
+    for k in range(8):
+        gr = np.random.default_rng(40 + k)
+        v = base_v.copy()
+        for _ in range(3):
+            kk, ph = gr.uniform(0.08, 0.2, 3), gr.uniform(0, 6.3, 3)
+            v = v + 7.0 * P_S * np.sin(base_v @ kk[:, None] + ph)
+        w = (np.c_[v, np.ones(len(v))] @ np.array(M).T)[:, :3]
+        d = w[:, :2] - np.array([C.x, C.y])
+        rmax = float(np.sqrt((d ** 2).sum(1)).max())
+        if rmax > LIM_R:                # squeeze the guess sideways until it fits the glass
+            w[:, :2] = np.array([C.x, C.y]) + d * (LIM_R / rmax)
+        lo, hi = float(w[:, 2].min()), float(w[:, 2].max())
+        if lo < Z_LO or hi > Z_HI:
+            s_ = min(1.0, (Z_HI - Z_LO) / (hi - lo))
+            w[:, 2] = (w[:, 2] - (lo + hi) / 2) * s_ + (Z_LO + Z_HI) / 2
+        sk = guess.shape_key_add(name="guess%d" % k)
+        sk.data.foreach_set("co", (np.c_[w, np.ones(len(w))] @ np.array(Mi).T)[:, :3].astype(np.float32).ravel())
+        keys.append(sk)
+    print("guess keys fit: r <= %.3f, z %.3f-%.3f" % (LIM_R, Z_LO, Z_HI))
+
+    # everything turns about the tank's axis through the shape's middle, so turning never brings it nearer the glass
+    pivot = empty("frenzy_pivot")
+    pivot.location = (C.x, C.y, zc)
+    bpy.context.view_layer.update()
+    for o in (guess, core, tail):
+        mw = o.matrix_world.copy()
+        o.parent = pivot
+        o.matrix_parent_inverse = pivot.matrix_world.inverted()
+        o.matrix_world = mw
+    TANK["recv"].objects.link(guess)
+
+    # the whole tank, the rig and the shape come down together
+    root = empty("tank_root")
+    for o in TANK["parts"] + [pivot]:
+        if o.parent is None and o is not root:
+            o.parent = root
+    red_m = tail.active_material
+    r_bsdf = next(n for n in red_m.node_tree.nodes if n.type == "BSDF_PRINCIPLED")
+    tail_red = tuple(r_bsdf.inputs["Base Color"].default_value)
+    tail_grey = see_through((0.55, 0.58, 0.63), 0.5)
+    t_bsdf = next(n for n in tail_grey.node_tree.nodes if n.type == "BSDF_PRINCIPLED")
+
+    # the question mark, dark in the glowing mist, facing the lens
+    font = bpy.data.fonts.load(HERE + "../../../../../remotion_public/fusion_s1/fonts/InstrumentSerif-Regular.ttf")
+    cu = bpy.data.curves.new("ask", "FONT")
+    cu.body, cu.font, cu.size, cu.extrude = "?", font, 0.6, 0.03
+    cu.align_x, cu.align_y = "CENTER", "CENTER"
+    cu.materials.append(gk.surface((0.004, 0.004, 0.005), 0.3))
+    ask = bpy.data.objects.new("ask_m", cu)
+    sc.collection.objects.link(ask)
+    ask.parent = root
+    ask.rotation_mode = "QUATERNION"
+    ask.rotation_quaternion = yaw @ Quaternion((1, 0, 0), math.pi / 2)
+    ask_home = Vector((C.x, C.y, zc))
+
+    # the reels start on "??"
+    for d in TANK["drums"]:
+        for h in d.children:
+            if h.name.startswith("face") and abs(h.rotation_quaternion.angle - math.pi) < 0.01:
+                for o in h.children:
+                    o.data.body = "??"
+    bubbles = TANK["bubbles"]
+    bub0 = [Vector(o.location) for o in bubbles]
+
+    # the beats
+    LAND, LEVER, SUCK, FORM, STOP = beat(7), beat(8), beat(12), beat(13), [beat(32), beat(33), beat(34), beat(35)]
+    END = 19.5
+    DROP = 2.2
+
+    def drop_z(t):
+        """Lowered on its rig, slowing to a stop on the cell's border: no bounce, it would sink into the border."""
+        x = min(1.0, max(0.0, t / LAND))
+        return DROP * (1 - x) ** 2.2
+
+    def lever_angle(t):
+        u = t - LEVER
+        if u < 0:
+            return 0.0
+        if u < 0.12:
+            return math.radians(60) * smooth(u / 0.12)
+        if u < 0.5:
+            return math.radians(60)
+        return math.radians(60) * (1 - smooth((u - 0.5) / 0.5))
+
+    def bubble_rise(t):
+        """Height risen so far: slow drift, four times as fast in the two seconds after the lever (the gurgle)."""
+        boost = lambda x: max(0.0, min(x, LEVER + 2.0) - LEVER)
+        return 0.06 * t + 0.24 * boost(t) - 0.24 * max(0.0, min(t, LEVER + 2.0) - (LEVER + 1.4)) * 0.5
+
+    UPR, DN = 0.25, 0.45          # each reel winds up in 0.25 s and slows to a stop over 0.45 s, ending exactly on its beat
+
+    def run(t, ts, te):
+        """Turns so far, in seconds at full speed."""
+        if t <= ts:
+            return 0.0
+        if t <= ts + UPR:
+            return (t - ts) ** 2 / (2 * UPR)
+        if t <= te - DN:
+            return (t - ts) - UPR / 2
+        if t <= te:
+            u = t - (te - DN)
+            return (te - DN - ts) - UPR / 2 + u - u * u / (2 * DN)
+        return (te - ts) - UPR / 2 - DN / 2
+
+    spins = []
+    for j in range(4):
+        ts, te = SUCK + 0.06 * j, STOP[j]
+        total = run(te + 1, ts, te)
+        n = round((5.0 * 2 * math.pi * total - math.pi) / (2 * math.pi))        # about five turns a second
+        spins.append((ts, te, (math.pi + 2 * math.pi * n) / total))
+
+    def reel_angle(j, t):
+        ts, te, w = spins[j]
+        return -math.pi - w * run(t, ts, te)         # starts on face 5, "??", ends a whole number of turns later on face 0
+
+    rng = np.random.default_rng(9)
+    turns = rng.uniform(-35, 35, 64)
+    jit = rng.normal(0, 1, (64, 3))
+
+    def frenzy(t):
+        """Which two guesses blend, how far, the turn about the axis, the jitter, how bent, how solid."""
+        n = int((t - FORM) / B_)
+        x = smooth(min(1.0, ((t - FORM) - n * B_) / 0.11))          # each new guess snaps in within 0.11 s of its beat
+        calm = 1.0 - smooth((t - beat(22)) / (STOP[2] - beat(22)))       # from bar 5½ the guesses settle toward the real shape
+        bend = 0.12 + 0.88 * calm
+        ang = (turns[n % 64] * x + turns[(n - 1) % 64] * (1 - x)) * calm
+        shake = (0.007 * calm + 0.002) * np.sin(np.array([71.0, 53.0, 97.0]) * t + jit[n % 64])
+        return n, x, bend, ang, shake, 1.0 - calm
+
+    hero_in = dict(hero, d=hero["d"] * 0.62, at=(C.x, C.y, 0.74))          # in on the shape while it forms; the reels come back at bar 8
+    medium = dict(hero, d=3.1, at=(C.x, C.y, 1.15), el=math.radians(10))
+    low_in = dict(at=(C.x, C.y, zc), az=hero["az"] - math.radians(10), el=math.radians(14), d=2.0, mm=45.0)
+    held = polar((127.55, -4.55, 1.75), (127.0, -2.3, 0.24), 60)
+
+    def view(t):
+        if t < beat(8):
+            v = blend(held, hero, smooth(t / beat(8)))
+            if LAND <= t < LAND + 0.3:          # the thud of the landing, in the camera
+                v["at"] = (v["at"][0], v["at"][1], v["at"][2] + 0.006 * math.sin(60 * (t - LAND)) * (1 - (t - LAND) / 0.3))
+            return v
+        if t < FORM:
+            return hero
+        if t < beat(31):
+            return blend(hero, hero_in, smooth((t - FORM) / (beat(31) - FORM)))
+        if t < beat(32):
+            return blend(hero_in, medium, smooth((t - beat(31)) / B_))
+        if t < beat(36):
+            return medium
+        return blend(medium, low_in, smooth((t - beat(36)) / (END - beat(36))))
+
+    def blend(p, q, x):
+        log = lambda k: math.exp(math.log(p[k]) + (math.log(q[k]) - math.log(p[k])) * x)
+        return dict(at=lerp(p["at"], q["at"], x), az=p["az"] + (q["az"] - p["az"]) * x, el=p["el"] + (q["el"] - p["el"]) * x, d=log("d"), mm=log("mm"))
+
+    c = sc.camera
+    c.animation_data_clear()
+    c.data.animation_data_clear()
+    for f in range(FRAMES):
+        v = view(f / FPS)
+        shoot(c, f, v, v["at"])
+
+    def key_pose(o, f, fn):
+        """Keys o at f - 0.25 and f + 0.25 from fn(time), so the shutter sees the motion."""
+        o.animation_data_clear()
+        for s_ in (-0.25, 0.25):
+            fn((f + s_) / FPS)
+            o.keyframe_insert("location", frame=f + s_)
+            o.keyframe_insert("rotation_quaternion", frame=f + s_)
+
+    def update(t):
+        t = t - START
+        f = round(t * FPS)
+        k = 1.0 - 0.95 * smooth((t - 0.5) / (LAND - 0.5))           # the room dims as the tank comes down
+        TANK["dim"].inputs[1].default_value = k
+        TANK["bgs"][1].inputs[1].default_value = TANK["bone_s"] * k
+        TANK["sun"].data.energy = TANK["sun_e"] * k
+        for o in dashes:
+            o.hide_render = t > LAND - 0.3
+        key_pose(root, f, lambda x: setattr(root, "location", (0, 0, drop_z(x))))
+        lv = TANK["lever"]
+        key_pose(lv, f, lambda x: setattr(lv, "rotation_quaternion", Quaternion(TANK["lever_axis"], lever_angle(x))))
+        for o, p0 in zip(bubbles, bub0):
+            z = 0.31 + ((p0.z - 0.31) + bubble_rise(t)) % (0.87 + T - 0.31)
+            o.location = (p0.x, p0.y, z)
+        # the question mark: hangs, then is pulled up into the top
+        u = (t - SUCK) / 0.35
+        ask.hide_render = u > 1.0
+        if u <= 0:
+            ask.animation_data_clear()
+            ask.scale = (1, 1, 1)
+            ask.location = ask_home + Vector((0, 0, 0.01 * math.sin(2.1 * t)))
+        else:
+            def pose(x):
+                v_ = min(1.0, max(0.0, (x - SUCK) / 0.35)) ** 2
+                ask.scale = (1 - 0.6 * v_, 1 + 2.2 * v_, 1)
+                ask.location = ask_home + Vector((0, 0, (Z_HI + 0.12 - zc) * v_))
+            key_pose(ask, f, pose)
+        for j, d in enumerate(TANK["drums"]):
+            key_pose(d, f, lambda x, j=j, d=d: setattr(d, "rotation_quaternion", Quaternion((1, 0, 0), reel_angle(j, x))))
+        # the mist: thick while it guesses, thinning as the shape firms up
+        TANK["mist_density"].default_value = 1.0 + 1.0 * smooth((t - SUCK) / 1.5) - 1.4 * smooth((t - beat(22)) / (STOP[2] - beat(22)))
+        # the shape
+        forming = FORM <= t < STOP[2]
+        guess.hide_render = not forming
+        core.hide_render = tail.hide_render = t < STOP[2]
+        if t < FORM:
+            pivot.animation_data_clear()
+            pivot.rotation_quaternion = Quaternion()
+        elif forming:
+            n, x, bend, ang, shake, solid = frenzy(t)
+            for i, sk in enumerate(keys):
+                sk.value = bend * (x if i == n % 8 else (1 - x) if i == (n - 1) % 8 else 0.0)
+            g_bsdf.inputs["Alpha"].default_value = 0.5 + 0.4 * solid          # it must read through the mist from the first beat
+            g_bsdf.inputs["Base Color"].default_value = (*lerp((0.75, 0.78, 0.82), (0.12, 0.2, 0.55), solid), 1)
+
+            def pose(xx):
+                if xx < FORM:
+                    xx = FORM
+                nn, xa, _, a_, sh, _ = frenzy(min(xx, STOP[2] - 1e-3))
+                pivot.rotation_quaternion = Quaternion((0, 0, 1), math.radians(a_))
+                pivot.location = (C.x + sh[0], C.y + sh[1], zc + 0.5 * sh[2])
+            key_pose(pivot, f, pose)
+        else:
+            pivot.animation_data_clear()
+            pivot.rotation_quaternion = Quaternion()
+            pivot.location = (C.x, C.y, zc)
+            red = t >= STOP[3]
+            tail.active_material = red_m if red else tail_grey
+            pulse = 0.5 + 0.5 * math.cos(2 * math.pi * (t - STOP[3]) / B_) if red else 0.0
+            r_bsdf.inputs["Emission Color"].default_value = (*tail_red[:3], 1)
+            r_bsdf.inputs["Emission Strength"].default_value = 0.6 * pulse          # the tail keeps pulsing on the beat: the AI is not sure of it
+    return update
+
+
 sc, sky = stage()
-update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t, r=shot_r, s=shot_s, n=shot_n, o=shot_o)[SHOT](sc, sky)
+update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t, r=shot_r, s=shot_s, n=shot_n, o=shot_o, m=shot_m)[SHOT](sc, sky)
 sc.frame_start, sc.frame_end = 0, FRAMES
 for f in range(FIRST, LAST + 1, STEP):
     sc.frame_set(f)
