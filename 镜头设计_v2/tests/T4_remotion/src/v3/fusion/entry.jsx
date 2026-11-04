@@ -578,6 +578,83 @@ const W2Lyrics = ({file = "fusion_s1/w2_shake_3.mp4", fps = 30}) => {
   </AbsoluteFill></Clock.Provider>;
 };
 
+/** 4-01 (07:17-07:43, B's voice-over) over shot i: the coil and then the body turn into a chain of blocks, a light runs along it as the sequence stands up, and each block takes
+ * its AlphaFold DB v6 confidence colour. Times follow I_VO in bl_inserts.py (the sentences at 0.39 s a word, until the real recording on 11-12). The corner tag sits top right,
+ * because S2's blue pebble crosses the top left. The predicted tag and the source line stay where W2 left them. */
+const S401_VO = {ai: 4.4, chain: 7.6, order: 13.6, learned: 16.8, sure: 20.0};
+const S401_LINES = [[0, "So the team did something that once sounded like science fiction."], [4.4, "They asked an AI to guess the shape."], [7.6, "Imagine a protein as a chain of building blocks that folds into a 3D shape."], [13.6, "The order of the blocks is the sequence."], [16.8, "AlphaFold learned from known structures how sequences fold."], [20.0, "Give it one, and it predicts the shape, plus how sure it is about each part."]];
+/** review: the voice-over line being spoken, small at the bottom left, for judging the timing before the recording exists; off in the film. */
+const S401 = ({file = "fusion_s1/s4_401_1.mp4", fps = 30, review = true}) => {
+  const t = useCurrentFrame() / fps, V = S401_VO;
+  ruler.font = `600 28px "${SANS}"`;
+  const tagW = ruler.measureText("AlphaFold DB v6 · predicted").width;
+  const legend = after(t, V.sure + 0.6);
+  return <Clock.Provider value={t}><AbsoluteFill style={{background: BONE}}>
+    <OffthreadVideo src={staticFile(file)} muted style={{width: W, height: H}}/>
+    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
+      <Ink x={1856} y={92} size={36} at={V.ai + 0.2} anchor="end" w={760}>Objective 1 / Tool: structure prediction</Ink>
+      <g opacity={1 - after(t, V.order - 0.6)}><Note x={1180} y={300} size={54} at={V.chain + 1.6} rot={-3}>1 block = 1 amino acid</Note></g>
+      <g opacity={1 - after(t, V.sure - 0.4)}><Note x={150} y={860} size={50} at={V.order + 2.6} rot={-2}>the sequence: 346 letters, one per block</Note></g>
+      {legend > 0 && <g opacity={legend}>
+        <text x={1310} y={196} fontFamily={SANS} fontSize={30} fontWeight={600} fill={INK}>AlphaFold confidence (pLDDT)</text>
+        <rect x={1310} y={222} width={30} height={30} rx={8} fill={KLEIN}/>
+        <text x={1356} y={247} fontFamily={SANS} fontSize={30} fontWeight={500} fill={INK}>70 and up: sure</text>
+        <rect x={1310} y={268} width={30} height={30} rx={8} fill={RED}/>
+        <text x={1356} y={293} fontFamily={SANS} fontSize={30} fontWeight={500} fill={INK}>below 70: not sure</text>
+      </g>}
+      <Note x={860} y={250} size={52} at={V.sure + 3.0} fill={KLEIN} rot={-3}>the body: mostly sure</Note>
+      <Note x={1440} y={540} size={52} at={V.sure + 3.8} rot={-2}>the tail: mostly not sure</Note>
+      {review && <text x={64} y={1018} fontFamily={SANS} fontSize={24} fontWeight={500} fill={SOFT}>VO (B): {[...S401_LINES].reverse().find(([a]) => t >= a)[1]}</text>}
+      <g>
+        <circle cx={W - 72 - tagW - 26} cy={1018 - 10} r={14} fill="none" stroke={INK} strokeWidth={2.5} strokeDasharray="6 5"/>
+        <text x={W - 72} y={1018} fontFamily={SANS} fontSize={28} fontWeight={600} fill={INK} textAnchor="end">AlphaFold DB v6 · predicted</text>
+        <text x={W - 72} y={1056} fontFamily={SANS} fontSize={22} fontWeight={500} fill={SOFT} textAnchor="end">Illustration · blocks drawn · structure and confidence AlphaFold DB v6 · Jumper 2021 · Ren 2023</text>
+      </g>
+    </svg>
+  </AbsoluteFill></Clock.Provider>;
+};
+
+/** 4-02 (07:43-08:00, B's voice-over) over shot i2: the camera climbs over S3's grid, where a few cells hold a shape someone measured in a lab, then comes down to CDK20's cell,
+ * which now holds the free prediction. The script's split screen (before / now) happens on the table itself: solid rings for measured shapes, a dashed ring for the prediction
+ * (the film's mark for AI-predicted structures). Ring spots are the screen points shot i2 prints for its grid view (frames 216-300). Times follow I2_VO. */
+const S402_VO = {now: 3.1, downloaded: 3.6, first: 9.0};
+const S402_LINES = [[0, "Before, you'd need a lab-measured structure."], [3.1, "Now?"], [3.6, "The team just downloaded a prediction, for free, from a public database."], [9.0, "According to the paper, this was the first time AlphaFold had been used to find a hit like this."]];
+const S402_SEEN = [[791, 218], [1657, 501], [1644, 637], [1425, 743]], S402_CDK = [880, 488];
+const Ring = ({x, y, r, at, dashed, fill = INK}) => {
+  const t = useT(), p = smooth((t - at) / 0.5), L = 2 * Math.PI * r;
+  if (p <= 0) return null;
+  return dashed
+    ? <circle cx={x} cy={y} r={r} fill="none" stroke={fill} strokeWidth={3} strokeDasharray="10 8" opacity={p}/>
+    : <circle cx={x} cy={y} r={r} fill="none" stroke={fill} strokeWidth={3} strokeDasharray={`${L * p} ${L}`} transform={`rotate(-90 ${x} ${y})`}/>;
+};
+const S402 = ({file = "fusion_s1/s4_402_1.mp4", fps = 30, review = true}) => {
+  const t = useCurrentFrame() / fps, V = S402_VO;
+  ruler.font = `600 28px "${SANS}"`;
+  const tagW = ruler.measureText("AlphaFold DB v6 · predicted").width;
+  const grid = 1 - after(t, 5.0, 0.4);          // the grid labels hold while the camera does, and go before it moves down
+  return <Clock.Provider value={t}><AbsoluteFill style={{background: BONE}}>
+    <OffthreadVideo src={staticFile(file)} muted style={{width: W, height: H}}/>
+    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
+      <text x={1856} y={92} fontFamily={SANS} fontSize={36} fontWeight={600} fill={INK} textAnchor="end">Objective 1 / Tool: structure prediction</text>
+      <g opacity={grid}>
+        {S402_SEEN.map(([x, y], i) => <Ring key={i} x={x} y={y} r={58} at={1.9 + 0.2 * i}/>)}
+        <Ink x={96} y={128} size={56} at={1.7} font={SERIF} w={900} dur={1.0}>Before: a lab-measured structure</Ink>
+        <Ink x={96} y={176} size={30} at={2.5} w={700}>only a few proteins have one</Ink>
+        <Ring x={S402_CDK[0]} y={S402_CDK[1]} r={70} at={V.now} dashed/>
+        <Ink x={820} y={640} size={56} at={V.now + 0.3} font={SERIF} anchor="end" w={760} dur={0.9}>Now: a free AlphaFold prediction</Ink>
+        <Ink x={820} y={688} size={30} at={V.downloaded + 0.8} anchor="end" w={600}>downloaded from a public database</Ink>
+      </g>
+      <Note x={1240} y={330} size={56} at={V.first + 3.6} rot={-3}>a first, says the paper</Note>
+      {review && <text x={64} y={1018} fontFamily={SANS} fontSize={24} fontWeight={500} fill={SOFT}>VO (B): {[...S402_LINES].reverse().find(([a]) => t >= a)[1]}</text>}
+      <g>
+        <circle cx={W - 72 - tagW - 26} cy={1018 - 10} r={14} fill="none" stroke={INK} strokeWidth={2.5} strokeDasharray="6 5"/>
+        <text x={W - 72} y={1018} fontFamily={SANS} fontSize={28} fontWeight={600} fill={INK} textAnchor="end">AlphaFold DB v6 · predicted</text>
+        <text x={W - 72} y={1056} fontFamily={SANS} fontSize={22} fontWeight={500} fill={SOFT} textAnchor="end">Illustration · structure AlphaFold DB v6 · Ren 2023</text>
+      </g>
+    </svg>
+  </AbsoluteFill></Clock.Provider>;
+};
+
 /** S3 test boards: the beats that have to read in five seconds. Numbers are Feng 2011's; the grid's cells are drawn, so its source line says Illustration. */
 const Tally = () => <g transform="translate(0 110)">
   {Array.from({length: 52}, (_, i) => <rect key={i} x={250 + (i % 26) * 54} y={i < 26 ? 300 : 450} width={26} height={120} rx={13} fill={i < 36 ? RED : "#D4D1C8"}/>)}
@@ -629,6 +706,8 @@ const Root = () => <>
   <Composition id="Wall" component={Wall} durationInFrames={1500} fps={60} width={W} height={H}/>
   <Composition id="W2" component={W2} durationInFrames={1500} fps={60} width={W} height={H}/>
   <Composition id="W2Lyrics" component={W2Lyrics} durationInFrames={759} fps={30} width={W} height={H}/>
+  <Composition id="S401" component={S401} durationInFrames={780} fps={30} width={W} height={H}/>
+  <Composition id="S402" component={S402} durationInFrames={510} fps={30} width={W} height={H}/>
   <Composition id="Loop" component={Loop} durationInFrames={1620} fps={60} width={W} height={H}/>
 </>;
 registerRoot(Root);

@@ -31,8 +31,8 @@ import world as W      # noqa: E402
 P, gk = B.P, B.gk
 argv = sys.argv[sys.argv.index("--") + 1:]
 SHOT, OUT = argv[0], argv[1]
-START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0, r=412.0, s=412.0, n=412.0, o=412.0, m=412.0, j=412.0, l=412.0, e=412.0, d=412.0)[SHOT]
-FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6, r=6, s=6, n=4, o=3, m=1171, j=1055, l=1055, e=1055, d=1517)[SHOT]
+START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0, r=412.0, s=412.0, n=412.0, o=412.0, m=412.0, j=412.0, l=412.0, e=412.0, d=412.0, i=437.0, i2=463.0)[SHOT]
+FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6, r=6, s=6, n=4, o=3, m=1171, j=1055, l=1055, e=1055, d=1517, i=1560, i2=1020)[SHOT]
 FIRST = int(argv[2]) if len(argv) > 2 else 0
 LAST = min(int(argv[3]), FRAMES - 1) if len(argv) > 3 else FRAMES - 1
 SAMPLES = int(argv[4]) if len(argv) > 4 else 64
@@ -64,7 +64,7 @@ def stage():
     nt = sc.world.node_tree
     pick = lambda kind: [n for n in nt.nodes if n.type == kind]
     dot, win = pick("VECT_MATH")[0], pick("MAP_RANGE")[1]
-    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2, t=0.2, r=0.2, s=0.2, n=0.2, o=0.2, m=0.2, j=0.2, l=0.2, e=0.2, d=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9, t=0.9, r=0.9, s=0.9, n=0.9, o=0.9, m=0.9, j=0.9, l=0.9, e=0.9, d=0.9)[SHOT]
+    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2, t=0.2, r=0.2, s=0.2, n=0.2, o=0.2, m=0.2, j=0.2, l=0.2, e=0.2, d=0.2, i=0.2, i2=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9, t=0.9, r=0.9, s=0.9, n=0.9, o=0.9, m=0.9, j=0.9, l=0.9, e=0.9, d=0.9, i=0.9, i2=0.9)[SHOT]
 
     def sky(x):
         dot.inputs[1].default_value = lerp((-0.22, 0.92, 0.32), P.WINDOW, x)
@@ -4181,8 +4181,256 @@ def shot_d(sc, sky):
 
 
 
+
+# 4-01 (07:17-07:43), B's voice-over, as the sentences are now timed (0.39 s a word); the real recording comes on 11-12 and moves these
+I_VO = dict(start=0.0, ai=4.4, chain=7.6, order=13.6, learned=16.8, sure=20.0, end=26.0)
+# 4-02 (07:43-08:00), the same, at 0.45 s a word
+I2_VO = dict(before=0.0, now=3.1, downloaded=3.6, first=9.0, end=17.0)
+
+
+
+def shot_i2(sc, sky):
+    """4-02 (07:43-08:00, B's voice-over), straight on from shot i: the glass body fills back in, the letters lie down, the coil's blocks melt back into the red line, and the
+    camera climbs over S3's whole grid, where only four of 45 cells hold a shape someone measured in a lab ("before"); then down to CDK20's cell, which now holds the free
+    prediction ("now"), and in on it for the paper's "first time". Labels are laid on in Remotion (S402) at the screen spots printed here. Run: blender -b -P bl_inserts.py -- i2 <out dir> 0 1019 16 0.5 2"""
+    return shot_i(sc, sky, part=2)
+
+def smooth_np(x):
+    x = np.clip(x, 0, 1)
+    return x * x * x * (x * (6 * x - 15) + 10)
+
+
+def rounded_block(n=4, p=6.0):
+    """A unit block with rounded edges (a superellipsoid from a gridded cube, shared corners), as vertices and quads facing out."""
+    ids, verts, quads = {}, [], []
+
+    def vid(v):
+        key = tuple(np.round(v, 6))
+        if key not in ids:
+            ids[key] = len(verts)
+            verts.append(v)
+        return ids[key]
+    g = np.linspace(-1, 1, n + 1)
+    for ax in range(3):
+        for sg in (-1, 1):
+            for i in range(n):
+                for j in range(n):
+                    q = []
+                    for a, b in ((i, j), (i + 1, j), (i + 1, j + 1), (i, j + 1)):
+                        v = np.zeros(3)
+                        v[ax], v[(ax + 1) % 3], v[(ax + 2) % 3] = sg, g[a], g[b]
+                        q.append(vid(v))
+                    quads.append(q if sg > 0 else q[::-1])
+    V = np.array(verts)
+    return V / ((np.abs(V) ** p).sum(1, keepdims=True) ** (1 / p)), np.array(quads)
+
+
+def shot_i(sc, sky, part=1):
+    """4-01 (07:17-07:43, B's voice-over), straight on from W2's last frame (shot d): the blue body in its cell, the red coil in the next. The camera eases back to both cells.
+    "A chain of building blocks": the body's surface turns to glass and shows the real chain inside, one small block on every residue's CA, strung on an ink thread; the red coil
+    turns into its 44 blocks the same way. "The order of the blocks is the sequence": a light runs along the chain from residue 1, and the first 24 letters of CDK20's sequence
+    stand up on the table one by one as it passes their blocks. "How sure it is about each part": every block takes its own AlphaFold DB v6 confidence, Klein blue for 70 and up,
+    red below 70 (11 of the kept 302 are red, 4 of the tail's 44 are blue: the colours are the real per-residue values). The structure is AlphaFold DB v6; the blocks and the light
+    are drawn. Times are in I_VO. Run: blender -b -P bl_inserts.py -- i <out dir> 0 1559 16 0.5 2"""
+    global START
+    shot_v(sc, sky)
+    START = 437.0 if part == 1 else 463.0
+    sc.render.use_motion_blur = True
+    sc.render.motion_blur_shutter = 0.5
+    ob = bpy.data.objects
+    for o in ob:
+        if o.name.split(".")[0] in ("letter", "guess", "tail_guess", "tail_cut", "tail"):
+            o.hide_render = True
+        if o.parent and o.parent.name == "keyhole":
+            o.hide_render = True
+    core, small = ob["core"], ob["cdk20_small"]
+    core.hide_render = False
+    sky(0.2)
+    V = I_VO
+    cx, cy = cell_at(22)
+    pdb = [l for l in open(HERE + "../../../../../assets/alphafold/AF-Q8IZL9-F1-model_v6.pdb") if l.startswith("ATOM")]
+    full = np.load(HERE + "frames/cdk20.npz")
+    q0 = Vector(full["mouth"].tolist()).rotation_difference(Vector((0, -math.cos(P_UP), math.sin(P_UP))))
+    R = np.array(q0.to_matrix())
+    hv = np.array([[float(l[30:38]), float(l[38:46]), float(l[46:54])] for l in pdb if l[76:78].strip() != "H"])
+    cal = [l for l in pdb if l[12:16].strip() == "CA"]
+    ca = np.array([[float(l[30:38]), float(l[38:46]), float(l[46:54])] for l in cal])
+    plddt = np.array([float(l[60:66]) for l in cal])
+    AA = dict(ALA="A", ARG="R", ASN="N", ASP="D", CYS="C", GLN="Q", GLU="E", GLY="G", HIS="H", ILE="I", LEU="L", LYS="K", MET="M", PHE="F", PRO="P", SER="S", THR="T", TRP="W", TYR="Y", VAL="V")
+    seq = "".join(AA[l[17:20]] for l in cal)
+    HOME = (ca - hv.mean(0)) @ R.T * P_S          # the CAs in the model's mesh, as in shot d
+    bpy.context.view_layer.update()
+    Mc = np.array(core.matrix_world)
+    P0 = Vector(((np.c_[full["verts"] @ R.T * P_S, np.ones(len(full["verts"]))] @ Mc.T)[:, :3]).mean(0).tolist())
+    AW = P_S * small.scale[0]                      # world units to the Angstrom
+    npz = np.load(HERE + "frames/u_tail_2.npz")
+    coil = npz["pos"][-1].astype(float)            # the red coil W2 ends on, one point per residue 303-346, in world units
+    CC = coil.mean(0)
+    print("4-01: body at %.3f %.3f %.3f, coil at %.3f %.3f, %d red of the kept 302, %d blue of the tail's 44, AW %.5f" % (*P0, CC[0], CC[1], (plddt[:302] < 70).sum(), (plddt[302:] >= 70).sum(), AW))
+
+    # the materials: glass the body and the coil can fade to, ink for the thread, the blocks coloured per vertex
+    c_bsdf = next(n for n in core.active_material.node_tree.nodes if n.type == "BSDF_PRINCIPLED")
+    red_line = P.gloss(P.RED, 0.22, 0.7)
+    l_bsdf = next(n for n in red_line.node_tree.nodes if n.type == "BSDF_PRINCIPLED")
+    tube3d(coil, float(npz["tr"]), red_line, "tail_line")
+    ink = gk.surface((0.012, 0.012, 0.014), 0.3)
+    m, nt, out_ = gk._mat("blocks")
+    bb = nt.nodes.new("ShaderNodeBsdfPrincipled")
+    at_c, at_g = nt.nodes.new("ShaderNodeAttribute"), nt.nodes.new("ShaderNodeAttribute")
+    at_c.attribute_name, at_g.attribute_name = "col", "glow"
+    mul = nt.nodes.new("ShaderNodeMath")
+    mul.operation = "MULTIPLY"
+    mul.inputs[1].default_value = 2.5
+    nt.links.new(at_c.outputs["Color"], bb.inputs["Base Color"])
+    nt.links.new(at_c.outputs["Color"], bb.inputs["Emission Color"])
+    nt.links.new(at_g.outputs["Fac"], mul.inputs[0])
+    nt.links.new(mul.outputs[0], bb.inputs["Emission Strength"])
+    bb.inputs["Roughness"].default_value = 0.3
+    bb.inputs["Coat Weight"].default_value = 0.5
+    nt.links.new(bb.outputs[0], out_.inputs["Surface"])
+
+    # the blocks: one on every CA, its long side along the chain; the kept 302 in the model's mesh, the tail's 44 on the coil in world units
+    UB, UQ = rounded_block()
+
+    def frames_along(pts):
+        out = []
+        for k in range(len(pts)):
+            t_ = pts[min(k + 1, len(pts) - 1)] - pts[max(k - 1, 0)]
+            t_ = t_ / np.linalg.norm(t_)
+            a_ = np.array([0.0, 0.0, 1.0]) if abs(t_[2]) < 0.9 else np.array([1.0, 0.0, 0.0])
+            u_ = np.cross(t_, a_)
+            u_ /= np.linalg.norm(u_)
+            out.append(np.stack([t_ * 1.15, u_, np.cross(t_, u_)], 1))     # a little longer along the chain
+        return out
+    HALF = 1.2                                      # A: blocks about 2.4 A across on a chain 3.8 A a step, so the thread shows between them
+    tail_pts = coil.copy()
+    tail_pts[:, 2] = np.maximum(tail_pts[:, 2], HALF * 1.2 * AW + 0.002)          # resting on the table, not in it
+    sets = [(HOME[:302], frames_along(HOME[:302]), HALF * P_S, True), (tail_pts, frames_along(tail_pts), HALF * AW, False)]
+    blk = []
+    for pts, frs, h_, in_model in sets:
+        me = bpy.data.meshes.new("blocks")
+        loc = np.concatenate([UB @ F.T for F in frs]) * h_
+        cen = np.repeat(pts, len(UB), 0)
+        me.from_pydata((cen + loc).tolist(), [], np.concatenate([UQ + k * len(UB) for k in range(len(pts))]).tolist())
+        me.attributes.new("col", "FLOAT_COLOR", "POINT")
+        me.attributes.new("glow", "FLOAT", "POINT")
+        me.materials.append(m)
+        o = bpy.data.objects.new("blocks", me)
+        sc.collection.objects.link(o)
+        B.smooth(o)
+        if in_model:
+            o.rotation_mode = "QUATERNION"
+            o.rotation_quaternion, o.scale, o.location = core.rotation_quaternion, core.scale, core.location
+        blk.append((o, me, cen, loc, len(pts)))
+    thread = tube3d(HOME[:302], 0.35 * P_S, ink, "thread")
+    thread.rotation_mode = "QUATERNION"
+    thread.rotation_quaternion, thread.scale, thread.location = core.rotation_quaternion, core.scale, core.location
+    thread_t = tube3d(tail_pts, 0.35 * AW, ink, "thread")
+
+    # when each block comes in, lights up and takes its colour; residue k of 346
+    k_all = np.arange(346)
+    # the flat coil first ("a chain of building blocks"), then the folded body ("that folds into a 3D shape")
+    t_pop = np.where(k_all < 302, V["chain"] + 3.0 + 2.0 * k_all / 301, V["chain"] + 0.5 + 1.0 * (k_all - 302) / 43)
+    NL = 24
+    t_lit = np.where(k_all < NL, V["order"] + 0.2 + 2.0 * k_all / NL, V["order"] + 2.2 + 1.0 * (k_all - NL) / (345 - NL))
+    t_col = V["sure"] + 0.4 + 2.2 * k_all / 345
+    BONE_C = np.array([0.80, 0.78, 0.72])
+    sure = np.where(plddt[:, None] >= 70, np.array(P.KLEIN), np.array(P.RED))
+
+    # the sequence: CDK20's first 24 letters, standing in the bare band of table in front of both cells (no rim there), facing the camera
+    font = bpy.data.fonts.load(HERE + "../../../../../remotion_public/fusion_s1/fonts/InstrumentSerif-Regular.ttf")
+    held = polar((127.55, -4.55, 1.75), (127.0, -2.3, 0.24), 60)
+    letters = []
+    band_y = cy - 0.42
+    x0, x1 = cx - 0.40, float(CC[0]) + 0.40
+    for i in range(NL + 1):
+        cu = bpy.data.curves.new("letter", "FONT")
+        cu.body, cu.font, cu.size, cu.extrude = (seq[i] if i < NL else "…"), font, 0.1, 0.008
+        cu.align_x, cu.align_y = "CENTER", "BOTTOM"
+        o = bpy.data.objects.new("letter", cu)
+        sc.collection.objects.link(o)
+        cu.materials.append(ink)
+        o.location = (x0 + (x1 - x0) * i / NL, band_y, 0.0)
+        o.rotation_euler = (math.pi / 2, 0, held["az"])
+        letters.append(o)
+
+    # the camera: from W2's last frame (shot d's slow push) back to both cells, in on the body for the chain and the letters, round it, and back out for the colours
+    mx = (P0.x + float(CC[0])) / 2
+    fin = dict(at=(mx, float(CC[1]) - 0.22, 0.03), az=held["az"], el=math.radians(32), d=2.8, mm=45.0)
+    v0 = dict(fin, az=held["az"] + math.radians(7), d=2.35)
+    both = dict(at=(mx, cy - 0.10, 0.12), az=held["az"] + math.radians(3), el=math.radians(25), d=2.7, mm=45.0)
+    flat = dict(at=(float(CC[0]), float(CC[1]) - 0.04, 0.02), az=held["az"] + math.radians(8), el=math.radians(38), d=1.35, mm=45.0)
+    chain = dict(at=(P0.x + 0.05, P0.y - 0.10, 0.6 * P0.z), az=held["az"] - math.radians(12), el=math.radians(22), d=2.0, mm=45.0)
+    order = dict(at=(P0.x + 0.40, cy - 0.28, 0.08), az=held["az"] - math.radians(6), el=math.radians(24), d=2.5, mm=45.0)
+    learned = dict(order, at=(P0.x + 0.2, P0.y - 0.15, 0.6 * P0.z), az=held["az"] + math.radians(10), el=math.radians(24), d=2.4)
+    sure_v = dict(both, az=held["az"] + math.radians(1), el=math.radians(28), d=2.9)
+    keys = [(0.0, v0), (4.2, both), (V["chain"] - 0.3, both), (V["chain"] + 1.2, flat), (V["chain"] + 2.6, flat), (V["chain"] + 4.6, chain), (V["order"], chain),
+            (V["order"] + 1.6, order), (V["learned"] + 0.4, order), (V["learned"] + 3.0, learned), (V["sure"], learned), (V["sure"] + 2.6, sure_v), (V["end"], dict(sure_v, d=2.75))]
+
+    if part == 2:
+        # 4-02: up over the whole grid, where only four cells hold a shape someone measured in a lab (S3's grid), then back down to CDK20's cell, which now holds the prediction
+        V2 = I2_VO
+        grid = dict(at=(cx + 0.45, cy - 0.15, 0.0), az=held["az"], el=math.radians(54), d=12.0, mm=45.0)
+        cell = dict(at=(cx + 0.15, cy - 0.05, 0.08), az=held["az"] - math.radians(4), el=math.radians(40), d=3.4, mm=45.0)
+        close = dict(at=(P0.x, P0.y - 0.05, 0.8 * P0.z), az=held["az"] - math.radians(10), el=math.radians(27), d=2.45, mm=45.0)
+        keys = [(0.0, keys[-1][1]), (V2["now"] - 0.2, grid), (V2["downloaded"] + 1.4, grid), (V2["first"] - 0.6, cell), (V2["end"], close)]
+
+    def mix(p, q, x):
+        log = lambda k: math.exp(math.log(p[k]) + (math.log(q[k]) - math.log(p[k])) * x)
+        return dict(at=lerp(p["at"], q["at"], x), az=p["az"] + (q["az"] - p["az"]) * x, el=p["el"] + (q["el"] - p["el"]) * x, d=log("d"), mm=log("mm"))
+
+    def view(t):
+        for (ta, a), (tb, b) in zip(keys, keys[1:]):
+            if t < tb:
+                return mix(a, b, smooth((t - ta) / (tb - ta)))
+        return keys[-1][1]
+    c = sc.camera
+    c.animation_data_clear()
+    c.data.animation_data_clear()
+    for f in range(FRAMES):
+        v = view(f / FPS)
+        shoot(c, f, v, v["at"])
+    if part == 2:          # where the labels go: the measured shapes and CDK20's cell on screen, for the Remotion layer
+        from bpy_extras.object_utils import world_to_camera_view
+        spots = dict(cdk20=(cx, cy, 0.1), **{"seen%d" % i: (*cell_at(i), 0.1) for i in SEEN})
+        for f in (round((I2_VO["now"] + 0.5) * FPS), round(I2_VO["downloaded"] + 1.0) * round(FPS), round((I2_VO["first"] + 1.0) * FPS), FRAMES - 1):
+            sc.frame_set(f)
+            print("4-02 frame %d:" % f, ", ".join("%s %.0f %.0f" % (k, *(lambda q: (q.x * 1920, (1 - q.y) * 1080))(world_to_camera_view(sc, c, Vector(p_)))) for k, p_ in spots.items()))
+
+    def update(t):
+        t = t - START
+        back = 0.0
+        if part == 2:          # it starts as 4-01 ends; the glass fills back in, the letters lie down and the coil's blocks melt back into the line
+            back, t = smooth((t - 0.3) / 1.4), I_VO["end"] + t
+        c_bsdf.inputs["Alpha"].default_value = 1 - 0.84 * smooth((t - V["chain"] - 2.6) / 1.2) * (1 - back)            # the surface to glass: 1 to 0.16
+        l_bsdf.inputs["Alpha"].default_value = 1 - 0.84 * smooth((t - V["chain"] - 0.2) / 1.0) * (1 - back)
+        thread.hide_render = bool(t < V["chain"] + 2.9 or back >= 1)
+        thread_t.hide_render = bool(t < V["chain"] + 0.4 or back >= 1)
+        pop = np.clip((t - t_pop) / 0.25, 0, 1)
+        pop = (1 - (1 - pop) ** 3) * (1 - back)
+        lit = np.where(t >= t_lit, np.exp(-np.maximum(t - t_lit, 0) / 0.35), 0.0)
+        cm = smooth_np((t - t_col) / 0.3)
+        col = BONE_C[None] * (1 - cm[:, None]) + sure * cm[:, None]
+        for (o, me, cen, loc, n), ks in zip(blk, (slice(0, 302), slice(302, 346))):
+            nv = len(UB)
+            s_ = np.repeat(pop[ks], nv)[:, None]
+            me.vertices.foreach_set("co", (cen + loc * np.maximum(s_, 1e-3)).astype(np.float32).ravel())
+            cc_ = np.c_[np.repeat(col[ks], nv, 0), np.ones(n * nv)]
+            me.attributes["col"].data.foreach_set("color", cc_.astype(np.float32).ravel())
+            me.attributes["glow"].data.foreach_set("value", np.repeat(lit[ks], nv).astype(np.float32))
+            me.update()
+            o.hide_render = bool(pop[ks].max() <= 0)
+        for i, o in enumerate(letters):
+            ti = t_lit[i] if i < NL else t_lit[NL] + 0.1
+            u = min(1.0, max(0.0, (t - ti) / 0.18))
+            u = (1 - (1 - u) ** 3) * (1 - smooth(back * 1.4))
+            o.hide_render = bool(u <= 0)
+            o.scale = (1.0, max(u, 1e-3), 1.0)            # it stands up out of the table
+    return update
+
+
 sc, sky = stage()
-update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t, r=shot_r, s=shot_s, n=shot_n, o=shot_o, m=shot_m, j=shot_j, l=shot_l, e=shot_e, d=shot_d)[SHOT](sc, sky)
+update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t, r=shot_r, s=shot_s, n=shot_n, o=shot_o, m=shot_m, j=shot_j, l=shot_l, e=shot_e, d=shot_d, i=shot_i, i2=shot_i2)[SHOT](sc, sky)
 sc.frame_start, sc.frame_end = 0, FRAMES
 for f in range(FIRST, LAST + 1, STEP):
     sc.frame_set(f)
