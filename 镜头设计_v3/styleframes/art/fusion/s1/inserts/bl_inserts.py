@@ -31,8 +31,8 @@ import world as W      # noqa: E402
 P, gk = B.P, B.gk
 argv = sys.argv[sys.argv.index("--") + 1:]
 SHOT, OUT = argv[0], argv[1]
-START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0, r=412.0, s=412.0, n=412.0)[SHOT]
-FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6, r=6, s=6, n=4)[SHOT]
+START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0, r=412.0, s=412.0, n=412.0, o=412.0)[SHOT]
+FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6, r=6, s=6, n=4, o=3)[SHOT]
 FIRST = int(argv[2]) if len(argv) > 2 else 0
 LAST = min(int(argv[3]), FRAMES - 1) if len(argv) > 3 else FRAMES - 1
 SAMPLES = int(argv[4]) if len(argv) > 4 else 64
@@ -64,7 +64,7 @@ def stage():
     nt = sc.world.node_tree
     pick = lambda kind: [n for n in nt.nodes if n.type == kind]
     dot, win = pick("VECT_MATH")[0], pick("MAP_RANGE")[1]
-    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2, t=0.2, r=0.2, s=0.2, n=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9, t=0.9, r=0.9, s=0.9, n=0.9)[SHOT]
+    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2, t=0.2, r=0.2, s=0.2, n=0.2, o=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9, t=0.9, r=0.9, s=0.9, n=0.9, o=0.9)[SHOT]
 
     def sky(x):
         dot.inputs[1].default_value = lerp((-0.22, 0.92, 0.32), P.WINDOW, x)
@@ -2963,8 +2963,349 @@ def shot_n(sc, sky):
     return update
 
 
+def shot_o(sc, sky):
+    """The culture tank rebuilt from sci-fi film references (镜头设计_v3/styleframes/art/fusion/s4/培养罐参考.md, 11-04 14:35): the tank is its own light, a straight glass tube whose ends hide in two tall housings with seams and lit squares, hung from above by a mast, a ring and four clamping arms (the claw for the tail comes later from the same ring), the slot machine a screen on an arm at its side. The room dims for W2. 0 the hero view, dimmed; 1 closer, from the right; 2 the hero view with the room lit, as when the tank opens. The machine, the mist and the bubbles are drawn; the blue shape, the red tail and the four numbers come from the AlphaFold DB v6 model. Run: blender -b -P bl_inserts.py -- o <out dir> 0 2 64 1"""
+    base_update = shot_v(sc, sky)
+    ob = bpy.data.objects
+    core, tail = ob["core"], ob["tail"]
+    every = [o for o in ob if o.name.split(".")[0] in ("letter", "guess", "tail_guess", "tail_cut")]
+    C = Vector((127.03, -2.35, 0.0))          # the centre of the smallest circle round the model
+    UP = 0.43
+    for o in (core, tail):
+        o.location.z += UP
+    pdb = [l for l in open(HERE + "../../../../../assets/alphafold/AF-Q8IZL9-F1-model_v6.pdb") if l.startswith("ATOM") and l[12:16].strip() == "CA"]
+    conf = np.array([float(l[60:66]) for l in pdb])
+    res = np.array([int(l[22:26]) for l in pdb])
+    STRETCH = [(1, 100), (101, 200), (201, 302), (303, 346)]
+    SCORE = [int(round(conf[(res >= a) & (res <= b)].mean())) for a, b in STRETCH]
+    print("reels land on", SCORE)
+
+    hero = dict(at=(C.x, C.y, 0.8), az=math.atan2(0.55, 2.19), el=math.radians(12), d=4.1, mm=40.0)
+    T = 0.2          # the glass runs 0.2 taller than the first try: the tank reads as a tube, not a canister
+    yaw = Quaternion((0, 0, 1), hero["az"])
+    front = yaw @ Vector((0, -1, 0))
+    around = lambda a, rad, z: C + (yaw @ Quaternion((0, 0, 1), a)) @ Vector((0, -rad, 0)) + Vector((0, 0, z))     # a = 0 faces the lens
+
+    def mat(rgb, rough, metal=0.0, coat=0.3):
+        m = P.gloss(rgb, rough, coat)
+        next(n for n in m.node_tree.nodes if n.type == "BSDF_PRINCIPLED").inputs["Metallic"].default_value = metal
+        return m
+
+    def emit(rgb, power):
+        m, nt, out = gk._mat("glow")
+        e = nt.nodes.new("ShaderNodeEmission")
+        e.inputs[0].default_value, e.inputs[1].default_value = (*rgb, 1), power
+        nt.links.new(e.outputs[0], out.inputs["Surface"])
+        return m
+
+    def glass_m(rgb):
+        m = B.clear_glass()
+        next(n for n in m.node_tree.nodes if n.type == "BSDF_TRANSPARENT").inputs[0].default_value = (*rgb, 1)
+        return m
+
+    def sharp(o, angle=32):
+        bpy.context.view_layer.objects.active = o
+        o.select_set(True)
+        try:
+            bpy.ops.object.shade_smooth_by_angle(angle=math.radians(angle))
+        except Exception:
+            bpy.ops.object.shade_smooth()
+        o.select_set(False)
+        return o
+
+    def rnd(pts, b=0.005):
+        """Rounds every corner of a profile with a three-point fillet, so edges catch a highlight."""
+        out = [pts[0]]
+        for i in range(1, len(pts) - 1):
+            p, q, r = (np.array(x, float) for x in (pts[i - 1], pts[i], pts[i + 1]))
+            a, c = p - q, r - q
+            la, lc = np.linalg.norm(a), np.linalg.norm(c)
+            s = min(b, la / 2.5, lc / 2.5)
+            u, v = a / la * s, c / lc * s
+            out += [tuple(q + u), tuple(q + (u + v) * 0.3), tuple(q + v)]
+        return out + [pts[-1]]
+
+    def turn(profile, m, b=0.005, n=160, rot=0.0, z0=None):
+        o = lathe(rnd(profile, b) if b else profile, m, "tank_part", n=n)
+        o.location = tuple(C)
+        o.rotation_euler = (0, 0, rot)
+        return sharp(o)
+
+    def loop(outer, inner, m, b=0.003, n=160, rot=0.0):
+        """A thick-walled shell: up the outside, back down the inside, closed."""
+        return turn(list(outer) + list(inner) + [outer[0]], m, b, n, rot)
+
+    def ring_(R, r, z, m):
+        bpy.ops.mesh.primitive_torus_add(major_radius=R, minor_radius=r, major_segments=160, minor_segments=12, location=(C.x, C.y, z))
+        o = bpy.context.object
+        o.data.materials.append(m)
+        bpy.ops.object.shade_smooth()
+        return o
+
+    def block(size, at, rot, m, bevel=0.003, parent=None):
+        bpy.ops.mesh.primitive_cube_add(size=1, location=tuple(at))
+        o = bpy.context.object
+        o.rotation_mode = "QUATERNION"
+        o.rotation_quaternion = rot
+        o.scale = size
+        o.data.materials.append(m)
+        if bevel:
+            bv = o.modifiers.new("bevel", "BEVEL")
+            bv.width, bv.segments, bv.limit_method = bevel, 3, "ANGLE"
+        o.parent = parent
+        return sharp(o)
+
+    def radial(a, rad, z, size, m, bevel=0.002):
+        """A block standing at angle a round the tank, its depth pointing out from the axis."""
+        return block(size, around(a, rad, z), yaw @ Quaternion((0, 0, 1), a), m, bevel)
+
+    cutters = []
+
+    def cut(o, cutter):
+        b = o.modifiers.new("cut", "BOOLEAN")
+        b.operation, b.object = "DIFFERENCE", cutter
+        cutter.hide_render = cutter.hide_viewport = True
+        cutters.append(cutter)
+
+    def mist_in(r, z0, z1, density):
+        bpy.ops.mesh.primitive_cylinder_add(vertices=96, radius=r, depth=z1 - z0, location=(C.x, C.y, (z0 + z1) / 2))
+        o = bpy.context.object
+        m = bpy.data.materials.new("mist")
+        m.use_nodes = True
+        nt = m.node_tree
+        nt.nodes.clear()
+        out = nt.nodes.new("ShaderNodeOutputMaterial")
+        vol = nt.nodes.new("ShaderNodeVolumePrincipled")
+        vol.inputs["Color"].default_value = (0.86, 0.97, 1.0, 1)
+        nz = nt.nodes.new("ShaderNodeTexNoise")
+        nz.inputs["Scale"].default_value, nz.inputs["Detail"].default_value = 7.0, 6
+        mr = nt.nodes.new("ShaderNodeMapRange")
+        mr.inputs[1].default_value, mr.inputs[2].default_value = 0.45, 0.8
+        mul = nt.nodes.new("ShaderNodeMath")
+        mul.operation, mul.inputs[1].default_value = "MULTIPLY", density
+        nt.links.new(nz.outputs[0], mr.inputs[0])
+        nt.links.new(mr.outputs[0], mul.inputs[0])
+        nt.links.new(mul.outputs[0], vol.inputs["Density"])
+        nt.links.new(vol.outputs[0], out.inputs["Volume"])
+        o.data.materials.append(m)
+        return o
+
+    font = bpy.data.fonts.load(HERE + "../../../../../remotion_public/fusion_s1/fonts/InstrumentSerif-Regular.ttf")
+    sans = bpy.data.fonts.load(HERE + "../../../../../remotion_public/fusion_s1/fonts/InterTight.ttf")
+
+    def text(body, size, at, m, f, parent, extrude=0.0005):
+        cu = bpy.data.curves.new("txt", "FONT")
+        cu.body, cu.font, cu.size, cu.extrude = body, f, size, extrude
+        cu.align_x, cu.align_y = "CENTER", "CENTER"
+        cu.materials.append(m)
+        o = bpy.data.objects.new("txt", cu)
+        sc.collection.objects.link(o)
+        o.parent = parent
+        o.rotation_mode = "QUATERNION"
+        o.rotation_quaternion = Quaternion((1, 0, 0), math.pi / 2)
+        o.location = tuple(at)
+        return o
+
+    drum_white, ink_m = mat((0.93, 0.93, 0.9), 0.35), mat((0.02, 0.02, 0.025), 0.4)
+    blue_m, red_m = mat(P.KLEIN, 0.3), mat(P.RED, 0.3)
+
+    def console(shell, plate, trim, label, knob, reach, lean=18):
+        """The slot machine: a box leaning back out of the base's front, four reels behind four windows, a lever on the right. Built in its own frame: x along it, -y out of the face, z up its face."""
+        W_, H_, D_ = 0.56, 0.17, 0.1
+        con = empty("console")
+        con.rotation_quaternion = yaw @ Quaternion((1, 0, 0), math.radians(-lean))
+        con.location = tuple(C + front * (reach + D_ / 2 - 0.02) + Vector((0, 0, 0.135)))
+        house = block((W_, D_, H_), (0, 0, 0), Quaternion(), shell, 0.012, con)
+        face = block((W_ - 0.03, 0.004, H_ - 0.03), (0, -D_ / 2 - 0.001, 0), Quaternion(), plate, 0.0, con)
+        xs = [-0.195, -0.065, 0.065, 0.195]
+        for x in xs:
+            for target in (house, face):
+                w = block((0.1, 0.05, 0.075), (x, -D_ / 2, 0.005), Quaternion(), shell, 0.0, con)
+                cut(target, w)
+            hollow = block((0.108, 0.085, 0.13), (x, 0.005, 0.005), Quaternion(), shell, 0.0, con)
+            cut(house, hollow)
+            for dz in (-0.044, 0.044):
+                block((0.102, 0.002, 0.003), (x, -D_ / 2 - 0.004, 0.005 + dz), Quaternion(), trim, 0.0, con)
+        text("AlphaFold confidence (pLDDT)", 0.017, (0, -D_ / 2 - 0.0035, 0.064), label, sans, con)
+        for x, (a, b) in zip(xs, STRETCH):
+            text("%d–%d" % (a, b), 0.014, (x, -D_ / 2 - 0.0035, -0.058), label, sans, con)
+        g = np.random.default_rng(3)
+        for j, x in enumerate(xs):
+            d = empty("drum")
+            d.parent = con
+            d.location = (x, 0, 0.005)
+            bpy.ops.mesh.primitive_cylinder_add(vertices=64, radius=0.042, depth=0.092)
+            barrel = bpy.context.object
+            barrel.rotation_mode = "QUATERNION"
+            barrel.rotation_quaternion = Quaternion((0, 1, 0), math.pi / 2)
+            barrel.data.materials.append(drum_white)
+            bpy.ops.object.shade_smooth()
+            barrel.parent = d
+            for k in range(10):
+                h = empty("face")
+                h.parent = d
+                h.rotation_quaternion = Quaternion((1, 0, 0), 2 * math.pi * k / 10)
+                body = str(SCORE[j]) if k == 0 else str(int(g.integers(10, 99)))
+                cu = bpy.data.curves.new("num", "FONT")
+                cu.body, cu.font, cu.size, cu.extrude = body, font, 0.038, 0.0015
+                cu.align_x, cu.align_y = "CENTER", "CENTER"
+                cu.materials.append((blue_m if SCORE[j] >= 70 else red_m) if k == 0 else ink_m)
+                o = bpy.data.objects.new("num", cu)
+                sc.collection.objects.link(o)
+                o.parent = h
+                o.rotation_mode = "QUATERNION"
+                o.rotation_quaternion = Quaternion((1, 0, 0), math.pi / 2)
+                o.location = (0, -0.0432, 0)
+        lev = empty("lever")
+        lev.parent = con
+        lev.location = (W_ / 2 + 0.012, 0, 0.0)
+        hub = block((0.024, 0.04, 0.04), (0, 0, 0), Quaternion(), shell, 0.006, lev)
+        rod = block((0.008, 0.008, 0.17), (0.006, 0, 0.085), Quaternion(), mat((0.7, 0.72, 0.75), 0.15, 1.0), 0.002, lev)
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=0.022, segments=24, ring_count=12, location=(0.006, 0, 0.17))
+        k_ = bpy.context.object
+        k_.data.materials.append(knob)
+        bpy.ops.object.shade_smooth()
+        k_.parent = lev
+
+    cyan = emit((0.3, 0.9, 1.0), 12.0)
+    cyan_soft = emit((0.3, 0.9, 1.0), 4.0)
+    label = emit((0.82, 0.9, 0.95), 2.5)
+    shell = mat((0.80, 0.81, 0.80), 0.32, 0.0, 0.5)         # pale hard shell: catches the tank's own glow
+    band = mat((0.05, 0.055, 0.06), 0.3, 0.4, 0.6)
+    gun = mat((0.07, 0.075, 0.085), 0.3, 1.0, 0.3)
+    black = mat((0.012, 0.012, 0.016), 0.06, 0.0, 1.0)
+    rubber = mat((0.02, 0.02, 0.024), 0.5)
+
+    def beam(p, q, w, m):
+        p, q = Vector(p), Vector(q)
+        o = block((w, w, (q - p).length), (p + q) / 2, Vector((0, 0, 1)).rotation_difference(q - p), m, 0.004)
+        return o
+
+    def joint(p, r, m):
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=r, segments=24, ring_count=12, location=tuple(p))
+        o = bpy.context.object
+        o.data.materials.append(m)
+        bpy.ops.object.shade_smooth()
+        return o
+
+    def lit_panels(z, n, a0, size, m):
+        """Small glowing squares set round a housing wall."""
+        for k in range(n):
+            radial(a0 + 2 * math.pi * k / n, 0.371, z, size, m, 0.0)
+
+    # the glass: a straight tube whose ends hide inside the two housings
+    loop([(0.315, 0.27), (0.315, 0.91 + T)], [(0.305, 0.91 + T), (0.305, 0.27)], glass_m((0.9, 0.98, 1.0)), 0.0).visible_shadow = False
+    # the base housing: a wide foot, a tall wall with seams and lit squares, a lip the glass sinks into
+    turn([(0.001, 0.016), (0.43, 0.016), (0.43, 0.05), (0.40, 0.062), (0.37, 0.07), (0.37, 0.118), (0.362, 0.121), (0.362, 0.127), (0.37, 0.13),
+          (0.37, 0.2), (0.362, 0.203), (0.362, 0.209), (0.37, 0.212), (0.37, 0.27), (0.335, 0.298), (0.318, 0.3), (0.318, 0.28), (0.001, 0.28)], shell, 0.006)
+    turn([(0.4305, 0.026), (0.436, 0.028), (0.436, 0.04), (0.4305, 0.042)], band, 0.0015)
+    ring_(0.437, 0.0022, 0.034, cyan)
+    lit_panels(0.165, 10, math.pi / 10, (0.05, 0.004, 0.022), cyan_soft)
+    for k in range(20):         # vents round the foot
+        radial(2 * math.pi * (k + 0.5) / 20, 0.38, 0.09, (0.012, 0.03, 0.03), band, 0.002)
+    ring_(0.318, 0.006, 0.302, cyan)
+    # the top housing, the same family turned upside down, with a hub the mast plugs into; built at the first try's height, then lifted by T
+    before_top = set(o.name for o in ob)
+    turn([(0.001, 0.88), (0.318, 0.88), (0.318, 0.882), (0.335, 0.884), (0.37, 0.912), (0.37, 0.97), (0.362, 0.973), (0.362, 0.979), (0.37, 0.982),
+          (0.37, 1.06), (0.33, 1.1), (0.22, 1.12), (0.22, 1.15), (0.12, 1.16), (0.001, 1.16)], shell, 0.006)
+    turn([(0.3705, 1.005), (0.376, 1.007), (0.376, 1.035), (0.3705, 1.037)], band, 0.0015)
+    ring_(0.3765, 0.0018, 1.021, cyan)
+    lit_panels(0.94, 10, 0.0, (0.05, 0.004, 0.02), cyan_soft)
+    ring_(0.318, 0.006, 0.878, cyan)
+    # the hanger: a mast from above, a ring, four arms that clamp the top housing
+    turn([(0.001, 1.15), (0.07, 1.15), (0.07, 1.2), (0.05, 1.215), (0.05, 3.2), (0.001, 3.2)], gun, 0.004)
+    turn([(0.40, 1.29), (0.48, 1.29), (0.48, 1.33), (0.40, 1.33), (0.40, 1.29)], gun, 0.004)
+    ring_(0.481, 0.0025, 1.31, cyan)
+    for k in range(4):
+        a = math.pi / 4 + k * math.pi / 2
+        beam(around(a, 0.07, 1.31), around(a, 0.41, 1.31), 0.025, gun)          # spokes from the mast to the ring
+        sh, el, hd = around(a, 0.45, 1.29), around(a, 0.56, 1.16), around(a, 0.40, 1.03)
+        beam(sh, el, 0.046, gun)
+        beam(el, hd, 0.04, gun)
+        beam(lerp(sh, el, 0.3), lerp(el, hd, 0.6), 0.014, mat((0.7, 0.72, 0.75), 0.15, 1.0))       # a piston across the elbow
+        joint(el, 0.038, gun)
+        joint(sh, 0.026, gun)
+        radial(a, 0.385, 1.03, (0.06, 0.03, 0.07), band, 0.004)                  # the clamp pad on the housing
+        radial(a, 0.401, 1.03, (0.03, 0.002, 0.006), cyan, 0.0)
+    for a in (math.radians(160), math.radians(200), math.radians(180)):        # cables from the ring down into the back of the top housing
+        pts = [around(a, 0.44, 1.29), around(a, 0.5, 1.2), around(a, 0.46, 1.09), around(a, 0.36, 1.07)]
+        tube3d([tuple(p) for p in pts], 0.012, rubber, "cable")
+    for o in ob:
+        if o.name not in before_top and o.parent is None:
+            o.location.z += T
+    # inside: a light strip at the back for a rim on the shape, glowing mist, bubbles
+    radial(math.pi, 0.296, 0.59 + T / 2, (0.02, 0.004, 0.6 + T), emit((0.6, 0.95, 1.0), 6.0), 0.0)
+    m_ = mist_in(0.302, 0.285, 0.895 + T, 1.0)
+    vol = next(n for n in m_.data.materials[0].node_tree.nodes if n.type == "PRINCIPLED_VOLUME")
+    vol.inputs["Emission Color"].default_value = (0.25, 0.85, 1.0, 1)
+    vol.inputs["Emission Strength"].default_value = 0.5          # any brighter and the red tail washes to pink
+    g = np.random.default_rng(5)
+    bub = emit((0.75, 0.97, 1.0), 2.0)
+    for _ in range(46):
+        a, r = g.uniform(0, 2 * math.pi), 0.27 * math.sqrt(g.uniform(0.02, 1))
+        joint(C + Vector((r * math.cos(a), r * math.sin(a), g.uniform(0.31, 0.87 + T))), float(g.uniform(0.004, 0.011)), bub)
+    # the slot machine as a screen on an arm at the base's right, turned toward the lens, clear of the glass
+    console(shell, black, cyan, label, mat(P.RED, 0.2, 0.0, 0.6), 0.4)
+    con = [o for o in ob if o.name.startswith("console")][-1]
+    con.scale = (0.85, 0.85, 0.85)
+    con.location = tuple(around(math.radians(62), 0.6, 0.2))
+    con.rotation_quaternion = yaw @ Quaternion((0, 0, 1), math.radians(28)) @ Quaternion((1, 0, 0), math.radians(-12))
+    beam(around(math.radians(62), 0.37, 0.15), around(math.radians(62), 0.55, 0.2), 0.03, gun)
+    joint(around(math.radians(62), 0.55, 0.2), 0.026, gun)
+
+    # lights: a white key from the front left keeps blue and red true; the room dims for W2 and comes back when the tank opens
+    kd = bpy.data.lights.new("key", "AREA")
+    kd.size, kd.energy = 0.6, 30.0
+    key = bpy.data.objects.new("key", kd)
+    sc.collection.objects.link(key)
+    key.location = tuple(around(math.radians(-40), 1.7, 1.4))
+    recv = bpy.data.collections.new("key_lights_only_the_shape")      # light linking: the key lights the blue and red shape and nothing else, so the dimmed table stays dark
+    recv.objects.link(core)
+    recv.objects.link(tail)
+    key.light_linking.receiver_collection = recv
+    key.rotation_mode = "QUATERNION"
+    key.rotation_quaternion = (Vector((C.x, C.y, 0.69)) - key.location).to_track_quat("-Z", "Y")
+    sun_o = next(o for o in ob if o.type == "LIGHT" and o.data.type == "SUN")
+    sun_e = sun_o.data.energy
+    wnt = sc.world.node_tree
+    bgs = [n for n in wnt.nodes if n.type == "BACKGROUND"]
+    dim = wnt.nodes.new("ShaderNodeMath")
+    dim.operation = "MULTIPLY"
+    src = bgs[0].inputs[1].links[0].from_socket
+    wnt.links.new(src, dim.inputs[0])
+    wnt.links.new(dim.outputs[0], bgs[0].inputs[1])
+    bone_s = bgs[1].inputs[1].default_value
+
+    close = dict(at=(C.x, C.y, 0.72), az=hero["az"] + math.radians(32), el=math.radians(18), d=2.7, mm=40.0)
+    views = [hero, close, hero]
+    c = sc.camera
+    c.animation_data_clear()
+    c.data.animation_data_clear()
+    for f, v in enumerate(views):
+        for s in (-0.3, 0.0, 0.3):
+            shoot(c, f + s, v, (C.x, C.y, 0.69))
+    sc.render.use_motion_blur = False
+
+    def update(t):
+        base_update(t)
+        f = min(FRAMES - 1, max(0, round((t - START) * FPS)))
+        for o in every:
+            o.hide_render = True
+        core.hide_render = tail.hide_render = False
+        for o in ob:
+            if o.parent and o.parent.name == "keyhole":
+                o.hide_render = True
+        k = 1.0 if f == 2 else 0.05
+        sky(0.2)
+        dim.inputs[1].default_value = k
+        bgs[1].inputs[1].default_value = bone_s * k
+        sun_o.data.energy = sun_e * k
+        key.hide_render = f == 2
+    return update
+
+
 sc, sky = stage()
-update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t, r=shot_r, s=shot_s, n=shot_n)[SHOT](sc, sky)
+update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t, r=shot_r, s=shot_s, n=shot_n, o=shot_o)[SHOT](sc, sky)
 sc.frame_start, sc.frame_end = 0, FRAMES
 for f in range(FIRST, LAST + 1, STEP):
     sc.frame_set(f)
