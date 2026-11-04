@@ -400,9 +400,9 @@ Every member stays at 3.5 minutes or more on both estimates. C keeps both turnin
 - Visual (updated 11-04, director approved): EMOTIONAL PEAK 1. S3's dashed empty cell springs off the table as a black liquid that keeps changing shape on the beat (the AI's guesses, drawn), calms, turns Klein blue and settles into the AlphaFold CDK20 model (DB v6); the low-confidence tail (303-346) turns red, melts, and the body shakes it off like a wet dog into the next cell, where it lies as a red coil; residues 1-302 land back in their cell. One label only: "AlphaFold DB v6 · predicted". Burned-in bilingual rhyming captions only where the song is sung (音乐/W2_押韵字幕.md); not in the SRT.
 - Music: Daft Punk - Harder, Better, Faster, Stronger, from 50.446 s, so the first sung bar lands on the jump off the table
 
-**4-01 · 07:17–07:43 · B · VO** (65 words)
+**4-01 · 07:17–07:43 · B · VO** (66 words; 'string of beads' changed to 'chain of building blocks' on 11-05, director's call)
 
-> So the team did something that once sounded like science fiction. They asked an AI to guess the shape. Imagine a protein as a string of beads that folds into a 3D shape. The order of the beads is the sequence. AlphaFold learned from known structures how sequences fold. Give it one, and it predicts the shape, plus how sure it is about each part.
+> So the team did something that once sounded like science fiction. They asked an AI to guess the shape. Imagine a protein as a chain of building blocks that folds into a 3D shape. The order of the blocks is the sequence. AlphaFold learned from known structures how sequences fold. Give it one, and it predicts the shape, plus how sure it is about each part.
 
 - Visual: Corner tag "Objective 1 / Tool: structure prediction"; [3D] the ribbon that folded in W2 holds still; a small legend explains the confidence colours (pLDDT).
 - Source: J21 (E06); R23 Introduction (pLDDT); flag F10
