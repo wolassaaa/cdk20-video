@@ -21,7 +21,7 @@ import sys
 
 import bpy
 import numpy as np
-from mathutils import Quaternion, Vector
+from mathutils import Matrix, Quaternion, Vector
 
 HERE = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/") + "/"
 sys.path[:0] = [HERE + "../code/", HERE + "../../code/"]
@@ -31,8 +31,8 @@ import world as W      # noqa: E402
 P, gk = B.P, B.gk
 argv = sys.argv[sys.argv.index("--") + 1:]
 SHOT, OUT = argv[0], argv[1]
-START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0)[SHOT]
-FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6)[SHOT]
+START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0)[SHOT]
+FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551)[SHOT]
 FIRST = int(argv[2]) if len(argv) > 2 else 0
 LAST = min(int(argv[3]), FRAMES - 1) if len(argv) > 3 else FRAMES - 1
 SAMPLES = int(argv[4]) if len(argv) > 4 else 64
@@ -64,7 +64,7 @@ def stage():
     nt = sc.world.node_tree
     pick = lambda kind: [n for n in nt.nodes if n.type == kind]
     dot, win = pick("VECT_MATH")[0], pick("MAP_RANGE")[1]
-    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9)[SHOT]
+    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9)[SHOT]
 
     def sky(x):
         dot.inputs[1].default_value = lerp((-0.22, 0.92, 0.32), P.WINDOW, x)
@@ -1808,8 +1808,194 @@ def shot_v(sc, sky):
     return update
 
 
+def shot_u(sc, sky):
+    """Motion test of the new S4 opening, W2 to 4-05 (the stills are shot v), 412-454.5 s with 4-01 and 4-02 cut short: S3's empty cell; CDK20's sequence, a line of letters, walks into it; the AI's guesses swell up where the letters go in, three see-through shapes that keep bending; they agree, and most of it holds still in Klein blue (residues 1-302); the tail turns red and keeps swinging (three swings from u_path.py, each tested clear of the kept part); the camera pushes in over the pocket; the tail comes to rest across it; it is cut at 302/303, draws tight onto its backbone, and is drawn out along its own path, carried over and coiled in the next cell (u_path.py, every frame checked). The guesses are drawn; the blue shape and the red tail are the AlphaFold DB v6 model. Notes and the source line are laid on afterwards. Run: blender -b -P bl_inserts.py -- u <out dir> [first] [last] [samples] [size] [step]"""
+    global START
+    START = 330.0
+    shot_q(sc, sky)             # the table, the grid and the keyhole as S3 left them
+    START = 412.0
+    sc.render.use_motion_blur = False           # the shapes are rebuilt every frame
+    small = bpy.data.objects["cdk20_small"]
+    for name in ("cdk20_small", "cdk20", "plug"):
+        bpy.data.objects[name].hide_render = True
+    dashes = [o for o in bpy.data.objects if o.parent and o.parent.name == "keyhole"]
+    cx, cy = cell_at(22)
+    pdb = [l for l in open(HERE + "../../../../../assets/alphafold/AF-Q8IZL9-F1-model_v6.pdb") if l.startswith("ATOM")]
+    full = np.load(HERE + "frames/cdk20.npz")
+    q0 = Vector(full["mouth"].tolist()).rotation_difference(Vector((0, -math.cos(P_UP), math.sin(P_UP))))
+    R = np.array(q0.to_matrix())
+    heavy = lambda last, first=1: np.array([[float(l[30:38]), float(l[38:46]), float(l[46:54])] for l in pdb if l[76:78].strip() != "H" and first <= int(l[22:26]) <= last])
+    centre = heavy(346).mean(0)
+    local = lambda x: (np.asarray(x) - centre) @ R.T * P_S          # angstrom, PDB frame -> the small model's mesh
+    core_npz, tail_npz = np.load(HERE + "frames/cdk20_core.npz"), np.load(HERE + "frames/cdk20_tail.npz")
+    core_A = core_npz["verts"] + heavy(302).mean(0)          # both surfaces in angstrom, PDB frame
+    tail_A = tail_npz["verts"] + heavy(346, 303).mean(0)
+    ca = np.array([[float(l[30:38]), float(l[38:46]), float(l[46:54])] for l in pdb if l[12:16].strip() == "CA"])
+    ut = np.load(HERE + "frames/u_tail.npz")
+    pivot, picks = ut["pivot"], [Matrix(M.tolist()).to_quaternion() for M in ut["picks"]]
+    T_CUT = float(ut["t0"])
+
+    def place(o):
+        o.rotation_mode = "QUATERNION"
+        o.rotation_quaternion, o.scale, o.location = small.rotation_quaternion, small.scale, small.location
+        return o
+
+    def mesh(v, faces, name):
+        m = P.gloss((0.4, 0.4, 0.43), 0.34, 0.7)
+        me = bpy.data.meshes.new(name)
+        me.from_pydata(local(v).tolist(), [], faces.tolist())
+        me.materials.append(m)
+        o = bpy.data.objects.new(name, me)
+        sc.collection.objects.link(o)
+        B.smooth(o)
+        return place(o)
+
+    def paint(o, rgb, alpha):
+        b = next(n for n in o.active_material.node_tree.nodes if n.type == "BSDF_PRINCIPLED")
+        b.inputs["Base Color"].default_value = (*rgb, 1)
+        b.inputs["Alpha"].default_value = alpha
+        o.hide_render = alpha < 0.01
+
+    def set_verts(o, v):
+        o.data.vertices.foreach_set("co", local(v).ravel())
+        o.data.update()
+
+    # three guesses, each a core and a tail that bend together; guess 1 becomes the answer
+    G = [dict(seed=3, grey=0.22, turn=-28, dx=-0.07, ph=0.0), dict(seed=8, grey=0.4, turn=4, dx=0.0, ph=0.37), dict(seed=21, grey=0.58, turn=32, dx=0.07, ph=0.71)]
+    for j, gd in enumerate(G):
+        r_ = np.random.default_rng(gd["seed"])
+        gd["k"] = r_.normal(size=(3, 3)) * 0.07                # three waves, 40-100 A long, across the 60 A model
+        gd["phase"] = r_.uniform(0, 6.3, (3, 3))
+        gd["w"] = r_.uniform(0.9, 1.6, 3)                      # each keeps changing its mind at its own pace
+        gd["core"], gd["tail"] = mesh(core_A, core_npz["quads"], "guess_core"), mesh(tail_A, tail_npz["quads"], "guess_tail")
+
+    def bent(v, gd, t, amp):
+        if amp <= 0:
+            return v
+        out = v.copy()
+        for i in range(3):
+            out = out + amp * np.sin(v @ gd["k"][i][:, None] + gd["phase"][i] + gd["w"][i] * t) / 3 ** 0.5
+        return out
+
+    def swung(v, t, ph, amp):
+        """The tail never settles: from the real pose out to one of the tested swings and back, over and over."""
+        if amp <= 0:
+            return v
+        x = t / 1.4 + ph
+        q = Quaternion().slerp(picks[int(x) % len(picks)], amp * (1 - math.cos(2 * math.pi * (x % 1))) / 2)
+        return pivot + (v - pivot) @ np.array(q.to_matrix()).T
+
+    # the cut: the tail's surface draws tight onto its backbone, then the backbone tube takes over
+    line = ca[302:]
+    a_, b_ = line[:-1], line[1:]
+    foot = np.zeros_like(tail_A)
+    best = np.full(len(tail_A), np.inf)
+    for p, q in zip(a_, b_):
+        s = np.clip(((tail_A - p) @ (q - p)) / ((q - p) @ (q - p)), 0, 1)
+        f_ = p + s[:, None] * (q - p)
+        d = np.linalg.norm(tail_A - f_, axis=1)
+        take = d < best
+        best[take], foot[take] = d[take], f_[take]
+    off = tail_A - foot
+    tight = foot + off / np.maximum(np.linalg.norm(off, axis=1), 1e-6)[:, None] * 1.6
+    tube = tube3d(ut["pos"][0].astype(float), float(ut["tr"]), P.gloss(P.RED, 0.34, 0.7), "tail_cut")
+
+    # the sequence: CDK20's first 20 letters walk in from the left, standing like type blocks, and go into the cell
+    AA = dict(ALA="A", ARG="R", ASN="N", ASP="D", CYS="C", GLN="Q", GLU="E", GLY="G", HIS="H", ILE="I", LEU="L", LYS="K", MET="M", PHE="F", PRO="P", SER="S", THR="T", TRP="W", TYR="Y", VAL="V")
+    seq = "".join(AA[l[17:20]] for l in pdb if l[12:16].strip() == "CA")
+    font = bpy.data.fonts.load(HERE + "../../../../../remotion_public/fusion_s1/fonts/InstrumentSerif-Regular.ttf")
+    ink = gk.surface((0.012, 0.012, 0.014), 0.3)
+    letters = []
+    for i in range(20):
+        cu = bpy.data.curves.new("letter", "FONT")
+        cu.body, cu.font, cu.size, cu.extrude = seq[i], font, 0.12, 0.012
+        cu.align_x, cu.align_y = "CENTER", "CENTER"
+        o = bpy.data.objects.new("letter", cu)
+        sc.collection.objects.link(o)
+        cu.materials.append(ink)
+        o.rotation_euler = (math.pi / 2, 0, 0)
+        letters.append(o)
+
+    # the camera: down from S3's last view to the cell, a slow drift while it guesses, in over the pocket for 4-03, back out for the cut
+    c = sc.camera
+    c.animation_data_clear()
+    c.data.animation_data_clear()
+    held = polar((127.55, -4.55, 1.75), (127.0, -2.3, 0.24), 60)
+    bpy.context.view_layer.update()
+    mw = small.matrix_world
+    mid = mw @ Vector((np.asarray(full["pocket"]) @ R.T * P_S).tolist())
+    out = (mw.to_3x3() @ Vector((R @ np.asarray(full["mouth"])).tolist())).normalized()
+    drift = dict(held, az=held["az"] + math.radians(8))
+    az_in = math.atan2(out.x, -out.y)
+    az_in += round((drift["az"] - az_in) / (2 * math.pi)) * 2 * math.pi
+    close = dict(at=tuple(mid), az=az_in, el=math.radians(64), d=1.6, mm=60.0)       # the whole pocket side in frame, the tail across it
+    wide = dict(held, at=(127.5, -2.42, 0.3), d=3.3, el=math.radians(36))
+
+    def view(a, b, x):
+        return dict(a, at=lerp(a["at"], b["at"], x), d=a["d"] * (b["d"] / a["d"]) ** x, el=a["el"] + (b["el"] - a["el"]) * x, az=a["az"] + (b["az"] - a["az"]) * x, mm=a["mm"] + (b["mm"] - a["mm"]) * x)
+
+    for f in range(FRAMES):
+        t = f / FPS
+        if t < 8.0:
+            x = smooth((t - 2.5) / 5.0)
+            shoot(c, f, fall(TOP_Z, held, x), lerp(TOP_Z["at"], held["at"], x))
+            continue
+        if t < 26.5:
+            v = view(held, drift, smooth((t - 8.0) / 18.5))
+        elif t < 34.0:
+            v = view(drift, close, smooth((t - 26.5) / 5.0))
+        else:
+            v = view(close, wide, smooth((t - 34.0) / 4.5))
+        shoot(c, f, v, v["at"])
+
+    grey_of = lambda gd: (gd["grey"], gd["grey"], gd["grey"] + 0.03)
+
+    def update(t):
+        t -= START
+        grow = smooth((t - 8.6) / 3.5)
+        settle = smooth((t - 17.5) / 2.5)
+        amp = 7.0 * (1 - 0.6 * smooth((t - 12.0) / 5.5)) * (1 - settle)
+        red = smooth((t - 19.0) / 1.5)
+        wob = smooth((t - 18.5) / 2.0) * (1 - smooth((t - 31.0) / 1.5))
+        for i, o in enumerate(letters):
+            p = (t - 5.0) * 0.3 - i * 0.045
+            o.hide_render = not 0 <= p < 1
+            o.location = (cx - 3.5 + 3.25 * p, cy - 0.25 + 0.2 * p, 0.06)
+            o.scale = (1 - smooth((p - 0.88) / 0.12),) * 3
+        for j, gd in enumerate(G):
+            for o in (gd["core"], gd["tail"]):
+                k = 0.55 + 0.45 * grow
+                o.rotation_quaternion = Quaternion((0, 0, 1), math.radians(gd["turn"]) * (1 - settle)) @ small.rotation_quaternion
+                o.scale = tuple(k * s for s in small.scale)
+                o.location = (small.location[0] + gd["dx"] * (1 - settle), small.location[1], small.location[2] + (1 - k) * 0.25)
+            main = j == 1
+            if grow > 0:
+                set_verts(gd["core"], bent(core_A, gd, t, amp))
+            core_rgb = lerp(grey_of(gd), P.KLEIN, settle) if main else grey_of(gd)
+            paint(gd["core"], core_rgb, 0.42 * grow + 0.58 * settle if main else 0.2 * grow * (1 - settle))      # the leading guess reads through the others
+            v = swung(bent(tail_A, gd, t, amp), t, gd["ph"], wob)
+            if main and t >= T_CUT:
+                v = tail_A + (tight - tail_A) * smooth((t - T_CUT - 0.1) / 0.8)
+            if grow > 0:
+                set_verts(gd["tail"], v)
+            tail_rgb = lerp(grey_of(gd), P.RED, red)
+            if main:
+                paint(gd["tail"], tail_rgb, 0 if t >= T_CUT + 0.95 else 0.3 * grow + 0.7 * red)
+            else:
+                paint(gd["tail"], tail_rgb, (0.2 + 0.1 * red) * grow * (1 - smooth((t - 31.0) / 1.5)))
+        tube.hide_render = t < T_CUT + 0.95
+        if not tube.hide_render:
+            pos = ut["pos"][min(len(ut["pos"]) - 1, round((t - T_CUT) * FPS))]
+            for q, p in zip(tube.data.splines[0].points, pos):
+                q.co = (*p.tolist(), 1)
+        for o in dashes:            # the dashed keyhole shows under the guesses until the answer is solid enough to cover it
+            o.hide_render = settle > 0.5
+        sky(0.2)
+    return update
+
+
 sc, sky = stage()
-update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v)[SHOT](sc, sky)
+update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u)[SHOT](sc, sky)
 sc.frame_start, sc.frame_end = 0, FRAMES
 for f in range(FIRST, LAST + 1, STEP):
     sc.frame_set(f)
