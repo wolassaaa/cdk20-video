@@ -31,8 +31,8 @@ import world as W      # noqa: E402
 P, gk = B.P, B.gk
 argv = sys.argv[sys.argv.index("--") + 1:]
 SHOT, OUT = argv[0], argv[1]
-START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0, r=412.0, s=412.0, n=412.0, o=412.0, m=412.0)[SHOT]
-FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6, r=6, s=6, n=4, o=3, m=1171)[SHOT]
+START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0, r=412.0, s=412.0, n=412.0, o=412.0, m=412.0, j=412.0)[SHOT]
+FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6, r=6, s=6, n=4, o=3, m=1171, j=1055)[SHOT]
 FIRST = int(argv[2]) if len(argv) > 2 else 0
 LAST = min(int(argv[3]), FRAMES - 1) if len(argv) > 3 else FRAMES - 1
 SAMPLES = int(argv[4]) if len(argv) > 4 else 64
@@ -64,7 +64,7 @@ def stage():
     nt = sc.world.node_tree
     pick = lambda kind: [n for n in nt.nodes if n.type == kind]
     dot, win = pick("VECT_MATH")[0], pick("MAP_RANGE")[1]
-    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2, t=0.2, r=0.2, s=0.2, n=0.2, o=0.2, m=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9, t=0.9, r=0.9, s=0.9, n=0.9, o=0.9, m=0.9)[SHOT]
+    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2, t=0.2, r=0.2, s=0.2, n=0.2, o=0.2, m=0.2, j=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9, t=0.9, r=0.9, s=0.9, n=0.9, o=0.9, m=0.9, j=0.9)[SHOT]
 
     def sky(x):
         dot.inputs[1].default_value = lerp((-0.22, 0.92, 0.32), P.WINDOW, x)
@@ -3615,8 +3615,200 @@ def shot_m(sc, sky):
     return update
 
 
+def shot_j(sc, sky):
+    """W2 motion without the tank (the director's note of 11-04 17:40: the tank is ugly, drop it): on a 123 BPM grid until the song arrives (one beat 0.488 s). Bars 0-1 S3's empty cell with the dashed keyhole; beat 4 the outline springs up off the table as a flat grey shape that stretches and flies up; beats 6-28 it hangs in the air in a frenzy, a new guess on every beat, tumbling, twitching on every half beat, greying into blue as it calms; beat 28 it snaps into the real model, the core Klein blue; beat 29 the tail turns red and keeps twitching between its guesses; beats 30-34 it floats down into its cell, where 4-01 goes on. The guesses are drawn (smooth random bends of the real model); the blue shape and the red tail are the AlphaFold DB v6 model. Run: blender -b -P bl_inserts.py -- j <out dir> 0 1054 16 0.5 2"""
+    shot_v(sc, sky)
+    ob = bpy.data.objects
+    core, tail, small = ob["core"], ob["tail"], ob["cdk20_small"]
+    tg = sorted([o for o in ob if o.name.split(".")[0] == "tail_guess"], key=lambda o: o.name)
+    tail_ghosts = tg[4:]            # shot_v makes four grey swings of the tail, then the same four in see-through red
+    for o in ob:
+        if o.name.split(".")[0] in ("letter", "guess", "tail_guess", "tail_cut"):
+            o.hide_render = True
+    dashes = [o for o in ob if o.parent and o.parent.name == "keyhole"]
+    sky(0.2)
+    sc.render.use_motion_blur = True
+    sc.render.motion_blur_shutter = 0.5
+    B_ = 60.0 / 123.0
+    beat = lambda n: n * B_
+    POP, APEX, CALM, SNAP, RED, DOWN, LAND, END = beat(4), beat(6), beat(20), beat(28), beat(29), beat(30), beat(34), (FRAMES - 1) / FPS
+
+    # the guess: the real model as its basis, eight bent guesses as shape keys, placed where S3's small model lay
+    full = np.load(HERE + "frames/cdk20.npz")
+    q0 = Vector(full["mouth"].tolist()).rotation_difference(Vector((0, -math.cos(P_UP), math.sin(P_UP))))
+    R = np.array(q0.to_matrix())
+    base_v = full["verts"] @ R.T * P_S
+    me = bpy.data.meshes.new("frenzy")
+    me.from_pydata(base_v.tolist(), [], full["quads"].tolist())
+    grey = see_through((0.42, 0.44, 0.48), 0.55)
+    g_bsdf = next(n for n in grey.node_tree.nodes if n.type == "BSDF_PRINCIPLED")
+    me.materials.append(grey)
+    guess = bpy.data.objects.new("frenzy", me)
+    sc.collection.objects.link(guess)
+    B.smooth(guess)
+    guess.rotation_mode = "QUATERNION"
+    guess.rotation_quaternion, guess.scale, guess.location = small.rotation_quaternion, small.scale, small.location
+    guess.shape_key_add(name="Basis")
+    shapes = [base_v]
+    for k in range(8):
+        gr = np.random.default_rng(40 + k)
+        v = base_v.copy()
+        for _ in range(3):
+            kk, ph = gr.uniform(0.08, 0.2, 3), gr.uniform(0, 6.3, 3)
+            v = v + 8.0 * P_S * np.sin(base_v @ kk[:, None] + ph)
+        guess.shape_key_add(name="guess%d" % k).data.foreach_set("co", v.astype(np.float32).ravel())
+        shapes.append(v)
+    keys = list(guess.data.shape_keys.key_blocks)[1:]
+    bpy.context.view_layer.update()
+    Mg = np.array(guess.matrix_world)
+    world = [(np.c_[v, np.ones(len(v))] @ Mg.T)[:, :3] for v in shapes]
+    P0 = Vector(world[0].mean(0).tolist())          # the pivot: the middle of the real shape at rest
+    RB = max(float(np.sqrt(((w - np.array(P0)) ** 2).sum(1)).max()) for w in world)        # no part of any guess is further than this from the pivot
+    LO = min(float(w[:, 2].min()) for w in world) - P0.z                                  # the lowest any guess reaches below the pivot, unturned
+    H = max(0.9, 1.25 * RB + 0.16 - P0.z)            # high enough that a guess turned any way and twitching never meets the table
+    print("pivot z %.3f, reach %.3f, lowest %.3f, rest bottom %.3f, flight %.3f" % (P0.z, RB, LO, float(world[0][:, 2].min()), H))
+
+    pivot = empty("frenzy_pivot")
+    pivot.location = P0
+    bpy.context.view_layer.update()
+    for o in [guess, core, tail] + tail_ghosts:
+        mw = o.matrix_world.copy()
+        o.parent = pivot
+        o.matrix_parent_inverse = pivot.matrix_world.inverted()
+        o.matrix_world = mw
+    Mrel = np.array(pivot.matrix_world.inverted() @ guess.matrix_world)
+    red_m = tail.active_material
+    r_bsdf = next(n for n in red_m.node_tree.nodes if n.type == "BSDF_PRINCIPLED")
+    tail_red = tuple(r_bsdf.inputs["Base Color"].default_value)
+    tail_grey = see_through((0.55, 0.58, 0.63), 0.6)
+    gh_bsdf = [next(n for n in o.active_material.node_tree.nodes if n.type == "BSDF_PRINCIPLED") for o in tail_ghosts]
+
+    rng = np.random.default_rng(11)
+    QS = [Quaternion(Vector(rng.normal(size=3).tolist()).normalized(), math.radians(rng.uniform(45, 100) * rng.choice((-1, 1)))) for _ in range(64)]
+    OFF = rng.uniform(-1, 1, (64, 3)) * np.array([0.12, 0.12, 0.05])
+    JIT = rng.normal(0, 1, (64, 3))
+
+    def lift(t):
+        if t < POP:
+            return 0.0
+        if t < APEX:
+            u = (t - POP) / (APEX - POP)
+            return H * (1 - (1 - u) ** 3)             # shot up, slowing to a hang
+        bob = 0.04 * math.sin(2 * math.pi * (t - APEX) / (4 * B_))
+        if t < DOWN:
+            return H + bob
+        return (H + bob) * (1 - smooth((t - DOWN) / (LAND - DOWN)))      # floats down, no bounce
+
+    def stretch(t):
+        """Squash and stretch of the spring off the table: flat, then tall and thin, then a ringing back to round."""
+        u = t - POP
+        if u < 0.14:
+            x = smooth(u / 0.14)
+            return 1.0 - 0.15 * x, 0.04 + 1.31 * x
+        r = math.exp(-(u - 0.14) / 0.1) * math.cos(2 * math.pi * (u - 0.14) / 0.3)
+        return 1.0 - 0.15 * r, 1.0 + 0.35 * r
+
+    def state(t):
+        """Where the pivot is, how it is turned and scaled, the shape-key weights, and how solid the guess looks, at time t."""
+        n = max(0, int((t - POP) / B_))
+        ub = (t - POP) - n * B_
+        x = smooth(ub / 0.11)                      # each new guess snaps in within 0.11 s of its beat
+        calm = 1.0 - smooth((t - CALM) / (SNAP - CALM))
+        ramp = smooth((t - (APEX - 0.25)) / 0.25)        # no turning until it is well clear of the table
+        w = [0.0] * 8
+        w[n % 8] += 1.2 * calm * x
+        w[(n - 1) % 8] += 1.2 * calm * (1 - x)
+        q = Quaternion().slerp(QS[(n - 1) % 64].slerp(QS[n % 64], x), calm * ramp)
+        uh = (t - POP) % (B_ / 2)
+        spasm = math.exp(-uh / 0.08) * (1.0 if ub < B_ / 2 else 0.5)        # a twitch on every beat, a smaller one on the off-beat
+        sh = (0.03 * calm + 0.004) * spasm * np.sin(np.array([71.0, 53.0, 97.0]) * t + JIT[n % 64])
+        off = (OFF[(n - 1) % 64] * (1 - x) + OFF[n % 64] * x) * calm * ramp
+        pulse = 1.0 + 0.1 * calm * ramp * spasm
+        sxy, sz = stretch(t) if t >= POP else (1.0, 0.04)
+        snap = 1.0 + 0.06 * math.exp(-(t - SNAP) / 0.12) * math.cos(2 * math.pi * (t - SNAP) / 0.25) if t >= SNAP else 1.0
+        s = (sxy * pulse * snap, sxy * pulse * snap, sz * pulse * snap)
+        z = P0.z + lift(t) + off[2] + sh[2]
+        if t < APEX:
+            z = max(z, 0.003 - s[2] * LO)            # while it springs up unturned, its lowest point stays on or above the table
+        loc = Vector((P0.x + off[0] + sh[0], P0.y + off[1] + sh[1], z))
+        return loc, q, s, w, 1.0 - calm, n
+
+    # the clearance check: every frame, the lowest point of whatever shows must stay above the table
+    lowest = 9.0
+    for f in range(round(POP * FPS), FRAMES):
+        t = f / FPS
+        loc, q, s, w, _, _ = state(t)
+        v = shapes[0] + sum(wi * (shapes[i + 1] - shapes[0]) for i, wi in enumerate(w) if wi)
+        Mp = np.array(Matrix.LocRotScale(loc, q, Vector(s))) @ Mrel
+        lowest = min(lowest, float(((np.c_[v[::7], np.ones(len(v[::7]))] @ Mp.T)[:, 2]).min()))
+    print("lowest point over the shot: %.4f above the table" % lowest)
+    assert lowest > -0.001
+
+    def blend(p, q, x):
+        log = lambda k: math.exp(math.log(p[k]) + (math.log(q[k]) - math.log(p[k])) * x)
+        return dict(at=lerp(p["at"], q["at"], x), az=p["az"] + (q["az"] - p["az"]) * x, el=p["el"] + (q["el"] - p["el"]) * x, d=log("d"), mm=log("mm"))
+
+    held = polar((127.55, -4.55, 1.75), (127.0, -2.3, 0.24), 60)
+    dair = 5.2 * RB
+    air = lambda t: dict(at=(P0.x, P0.y, P0.z + lift(t)), az=held["az"], el=math.radians(6), d=dair, mm=40.0)
+    land = dict(at=tuple(P0), az=held["az"], el=math.radians(35), d=2.6, mm=50.0)
+
+    def view(t):
+        if t < POP:
+            return held
+        if t < APEX + B_:
+            v = blend(held, air(t), smooth((t - POP) / (APEX + B_ - POP)))
+            v["at"] = (v["at"][0], v["at"][1], P0.z + 0.9 * lift(t))         # the camera rides up with the jump, so the shape never leaves the frame
+            return v
+        if t < SNAP:
+            x = smooth((t - APEX - B_) / (SNAP - APEX - B_))
+            v = air(t)
+            return dict(v, az=v["az"] + math.radians(60) * x, el=math.radians(6 + 8 * x), d=dair * (1 - 0.15 * x))
+        top = dict(air(t), az=held["az"] + math.radians(60), el=math.radians(14), d=dair * 0.85)
+        if t < DOWN:
+            return top
+        return blend(top, land, smooth((t - DOWN) / (END - DOWN)))
+
+    c = sc.camera
+    c.animation_data_clear()
+    c.data.animation_data_clear()
+    for f in range(FRAMES):
+        v = view(f / FPS)
+        shoot(c, f, v, v["at"])
+
+    def update(t):
+        t = t - START
+        f = round(t * FPS)
+        for o in dashes:
+            o.hide_render = t >= POP
+        forming = POP <= t < SNAP
+        guess.hide_render = not forming
+        core.hide_render = tail.hide_render = t < SNAP
+        pivot.animation_data_clear()
+        for s_ in (-0.25, 0.25):            # keyed either side of the frame, so the shutter sees the motion
+            loc, q, s, _, _, _ = state((f + s_) / FPS)
+            pivot.location, pivot.rotation_quaternion, pivot.scale = loc, q, s
+            for p_ in ("location", "rotation_quaternion", "scale"):
+                pivot.keyframe_insert(p_, frame=f + s_)
+        _, _, _, w, solid, n = state(t)
+        for k_, wi in zip(keys, w):
+            k_.value = wi
+        g_bsdf.inputs["Alpha"].default_value = 0.55 + 0.4 * solid
+        g_bsdf.inputs["Base Color"].default_value = (*lerp((0.42, 0.44, 0.48), P.KLEIN, solid), 1)
+        red = t >= RED
+        tail.active_material = red_m if red else tail_grey
+        pulse = 0.5 + 0.5 * math.cos(2 * math.pi * (t - RED) / B_) if red else 0.0
+        r_bsdf.inputs["Emission Color"].default_value = (*tail_red[:3], 1)
+        r_bsdf.inputs["Emission Strength"].default_value = 0.6 * pulse
+        m_ = int((t - RED) / B_) if red else -1
+        for i, (o, b_) in enumerate(zip(tail_ghosts, gh_bsdf)):          # the tail never settles: one of its swings flickers on every beat
+            o.hide_render = not (red and i == m_ % 4)
+            b_.inputs["Alpha"].default_value = 0.45 * math.exp(-((t - RED) - m_ * B_) / 0.18) if red else 0.0
+    return update
+
+
 sc, sky = stage()
-update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t, r=shot_r, s=shot_s, n=shot_n, o=shot_o, m=shot_m)[SHOT](sc, sky)
+update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t, r=shot_r, s=shot_s, n=shot_n, o=shot_o, m=shot_m, j=shot_j)[SHOT](sc, sky)
 sc.frame_start, sc.frame_end = 0, FRAMES
 for f in range(FIRST, LAST + 1, STEP):
     sc.frame_set(f)
