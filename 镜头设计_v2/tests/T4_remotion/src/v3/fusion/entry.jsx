@@ -719,6 +719,102 @@ const S4B = () => {
   </AbsoluteFill>;
 };
 
+/** Piece 3 of S4's second half, 4-06 and 4-07 (08:28.5-09:10, A's voice-over), over shot lp. Times are on the 4-06 clock (LP_VO in bl_inserts.py); the shot starts 3.5 s in,
+ * where shot i4 ends. The loop's words are written one by one as the turntable brings each thing round, in a row at the top like a pen note; time and money label the clock
+ * and the coins; 4-07 swaps the corner tag to generative design. Spots are the screen points shot lp prints. Sources: Lengauer 2007 (lab rounds cost time and money),
+ * Ivanenkov 2023 (Chemistry42: 40+ generative models, scores fed back, new structures within hours), Ren 2023. */
+const LP = {think: 3.0, imagine: 6.4, make: 7.8, test: 8.7, fails: 9.6, tweak: 10.5, again: 11.4, every: 12.6, ai: 18.0, chem: 23.4, invent: 31.0, hours: 39.2};
+const LP_LINES = [[0, "And this next part honestly blew my mind."], [3.0, "Think about how chemists have always found a key."], [6.4, "Imagine a molecule."], [7.8, "Make it."], [8.7, "Test it."], [9.6, "It fails."],
+  [10.5, "Tweak it."], [11.4, "Try again."], [12.6, "And every single round in a real lab costs time and money."], [18.0, "Generative AI takes that loop and moves it inside a computer."],
+  [23.4, "The platform here, Chemistry42, runs dozens of AI models side by side, built on known chemistry."], [31.0, "They invent new molecules for this exact keyhole, score them, learn from the scores, and go again."],
+  [39.2, "Its makers say it turns out new structures within hours."]];
+const LP_SPOT = {clock: [340, 514], coins: [1638, 759]};          // printed by shot lp at 13.6 s
+const S4C = ({file = "fusion_s1/s4_lp_1.mp4", fps = 30, review = true}) => {
+  const t = 3.5 + useCurrentFrame() / fps, V = LP;
+  ruler.font = `600 28px "${SANS}"`;
+  const tagW = ruler.measureText("AlphaFold DB v6 · predicted").width;
+  ruler.font = `600 50px "${HAND}"`;
+  const words = [["think", V.imagine], ["make", V.make], ["test", V.test], ["fail", V.fails], ["tweak", V.tweak], ["again", V.again]];
+  let x = 96;
+  const row = words.map(([w, at], i) => {
+    const s = (i ? "→ " : "") + w, at_ = at + 0.15, me = {s, x, at: at_};
+    x += ruler.measureText(w).width + (i ? 50 * 1.17 : 0) + 30;          // Note draws the arrow as a stroke 0.95 of the size wide, then a 0.22 gap
+    return me;
+  });
+  const loopRow = 1 - after(t, V.ai + 1.6, 0.5);
+  const lab = after(t, V.ai + 0.3, 0.6);
+  const [cxk, cyk] = LP_SPOT.clock, [cxc, cyc] = LP_SPOT.coins;
+  return <Clock.Provider value={t}><AbsoluteFill style={{background: BONE}}>
+    <OffthreadVideo src={staticFile(file)} muted style={{width: W, height: H}}/>
+    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
+      <g opacity={1 - lab}><text x={1856} y={92} fontFamily={SANS} fontSize={36} fontWeight={600} fill={INK} textAnchor="end">Objective 1 / Tool: structure prediction</text></g>
+      <g opacity={lab * (1 - after(t, V.hours - 1.0, 0.5))}><text x={1856} y={92} fontFamily={SANS} fontSize={36} fontWeight={600} fill={INK} textAnchor="end">Objective 1 / Tool: generative design</text></g>
+      <g opacity={loopRow}>
+        {row.map((r, i) => <Note key={i} x={r.x} y={950} size={50} at={r.at} rot={-1.5}>{r.s}</Note>)}
+        <g opacity={1 - after(t, V.every + 5.4, 0.4)}>
+          <Note x={cxk} y={cyk + 90} size={46} at={V.every + 3.4} anchor="middle" rot={-2}>time</Note>
+          <Note x={cxc} y={cyc + 90} size={46} at={V.every + 4.2} anchor="middle" rot={-2}>money</Note>
+        </g>
+      </g>
+      <g opacity={1 - after(t, V.invent - 0.4, 0.4)}>
+        <Ink x={96} y={150} size={56} at={V.chem + 2.4} font={SERIF} w={1000} dur={1.0}>Chemistry42: dozens of AI models, side by side</Ink>
+        <Ink x={96} y={196} size={30} at={V.chem + 3.4} w={900}>40+ generative models, built on known chemistry (Ivanenkov 2023)</Ink>
+      </g>
+      <g opacity={1 - after(t, V.hours, 0.4)}>
+        <Note x={96} y={150} size={50} at={V.invent + 1.6} rot={-1.5}>invent → score → learn → again</Note>
+      </g>
+      <Note x={96} y={992} size={50} at={V.hours + 2.4} rot={-1.5}>new structures within hours, says its maker</Note>
+      {review && <text x={64} y={t > V.hours + 1.6 ? 1066 : 1018} fontFamily={SANS} fontSize={24} fontWeight={500} fill={SOFT}>VO (A): {[...LP_LINES].reverse().find(([a]) => t >= a)[1]}</text>}
+      <g>
+        <circle cx={W - 72 - tagW - 26} cy={1018 - 10} r={14} fill="none" stroke={INK} strokeWidth={2.5} strokeDasharray="6 5"/>
+        <text x={W - 72} y={1018} fontFamily={SANS} fontSize={28} fontWeight={600} fill={INK} textAnchor="end">AlphaFold DB v6 · predicted</text>
+        <text x={W - 72} y={1056} fontFamily={SANS} fontSize={22} fontWeight={500} fill={SOFT} textAnchor="end">{t < V.ai ? "Illustration · lab rounds: Lengauer 2007" : "Illustration · Chemistry42: Ivanenkov 2023 · Ren 2023 · structure AlphaFold DB v6"}</text>
+      </g>
+    </svg>
+  </AbsoluteFill></Clock.Provider>;
+};
+
+/** 4-09 (09:17-09:34, B's voice-over), over shot hz. Times are on the 4-09 clock (HZ_VO in bl_inserts.py). The pocket's patch gets a pen note, the pin a leader line to
+ * "must grip here" and the hinge's name, the sieve a note for what it tosses and then what it scores. Spots are the screen points shot hz prints. Sources: Ren 2023 (pocket-based
+ * generation, hinge Met84), Ivanenkov 2023 (medicinal-chemistry filters, drug-likeness, synthetic accessibility); the cards and the sieve are drawn. */
+const HZ = {shape: 0.0, rule: 2.6, hinge: 3.2, filters: 6.2, toss: 7.4, toxic: 8.6, score: 10.6, easy: 12.4, end: 17.0};
+const HZ_LINES = [[0, "The team gave it the pocket's shape"], [2.6, "and one rule: every key must grip a spot called the hinge."],
+  [6.2, "Its filters are built to toss designs with reactive or possibly toxic groups,"], [10.6, "and to score how drug-like and easy to make each one is."]];
+const HZ_SPOT = {patch: [800, 380], pin: [950, 417]};          // printed by shot hz at 2.2 and 4.8 s (pin head); the patch note ends on the table left of it
+const S4D = ({file = "fusion_s1/s4_hz_1.mp4", fps = 30, review = true}) => {
+  const t = useCurrentFrame() / fps, V = HZ;
+  ruler.font = `600 28px "${SANS}"`;
+  const tagW = ruler.measureText("AlphaFold DB v6 · predicted").width;
+  const [px, py] = HZ_SPOT.pin, [ax, ay] = HZ_SPOT.patch;
+  const pocketNotes = 1 - after(t, V.filters - 0.6, 0.4);
+  const lead = Math.min(1, Math.max(0, (t - V.hinge - 1.3) / 0.35));
+  const lx = 680, ly = 500;          // on the table left of the body; the leader line runs from the note's end to the pin's head
+  return <Clock.Provider value={t}><AbsoluteFill style={{background: BONE}}>
+    <OffthreadVideo src={staticFile(file)} muted style={{width: W, height: H}}/>
+    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
+      <g opacity={1 - after(t, V.easy + 1.8, 0.4) + after(t, V.end - 0.6, 0.4)}><text x={1856} y={92} fontFamily={SANS} fontSize={36} fontWeight={600} fill={INK} textAnchor="end">Objective 1 / Tool: generative design</text></g>
+      <g opacity={pocketNotes}>
+        <Note x={ax} y={ay} size={46} at={V.shape + 1.2} anchor="end" rot={-2}>{"the pocket's shape →"}</Note>
+        {lead > 0 && <line x1={lx + 16} y1={ly - 12} x2={lx + 16 + (px - 20 - lx - 16) * lead} y2={ly - 12 + (py + 4 - ly + 12) * lead} stroke={DARK} strokeWidth={3} strokeLinecap="round"/>}
+        <Note x={lx} y={ly} size={50} at={V.hinge + 1.5} anchor="end" rot={-2}>must grip here</Note>
+        <Ink x={lx} y={ly + 46} size={28} at={V.hinge + 2.3} anchor="end" w={420}>the hinge · Met84</Ink>
+      </g>
+      <g opacity={after(t, V.toss + 0.6, 0.3) * (1 - after(t, V.score - 0.2, 0.4))}>
+        <Note x={96} y={150} size={46} at={V.toss + 0.6} rot={-1.5}>out: reactive or possibly toxic groups</Note>
+      </g>
+      <g opacity={1 - after(t, V.end - 2.2, 0.5)}>
+        <Note x={96} y={150} size={46} at={V.score + 0.4} rot={-1.5}>scored: drug-like? easy to make?</Note>
+      </g>
+      {review && <text x={64} y={1018} fontFamily={SANS} fontSize={24} fontWeight={500} fill={SOFT}>VO (B): {[...HZ_LINES].reverse().find(([a]) => t >= a)[1]}</text>}
+      <g>
+        <circle cx={W - 72 - tagW - 26} cy={1018 - 10} r={14} fill="none" stroke={INK} strokeWidth={2.5} strokeDasharray="6 5"/>
+        <text x={W - 72} y={1018} fontFamily={SANS} fontSize={28} fontWeight={600} fill={INK} textAnchor="end">AlphaFold DB v6 · predicted</text>
+        <text x={W - 72} y={1056} fontFamily={SANS} fontSize={22} fontWeight={500} fill={SOFT} textAnchor="end">Illustration · pocket and hinge Met84: Ren 2023 · filters: Ivanenkov 2023 · structure AlphaFold DB v6</text>
+      </g>
+    </svg>
+  </AbsoluteFill></Clock.Provider>;
+};
+
 /** S3 test boards: the beats that have to read in five seconds. Numbers are Feng 2011's; the grid's cells are drawn, so its source line says Illustration. */
 const Tally = () => <g transform="translate(0 110)">
   {Array.from({length: 52}, (_, i) => <rect key={i} x={250 + (i % 26) * 54} y={i < 26 ? 300 : 450} width={26} height={120} rx={13} fill={i < 36 ? RED : "#D4D1C8"}/>)}
@@ -770,10 +866,13 @@ const Root = () => <>
   <Composition id="Wall" component={Wall} durationInFrames={1500} fps={60} width={W} height={H}/>
   <Composition id="W2" component={W2} durationInFrames={1500} fps={60} width={W} height={H}/>
   <Composition id="W2Lyrics" component={W2Lyrics} durationInFrames={759} fps={30} width={W} height={H}/>
+  <Composition id="W2Lyrics4K" component={W2Lyrics} durationInFrames={1517} fps={60} width={W} height={H} defaultProps={{file: "fusion_s1/w2_shake_4k.mp4", fps: 60}}/>
   <Composition id="S401" component={S401} durationInFrames={780} fps={30} width={W} height={H}/>
   <Composition id="S402" component={S402} durationInFrames={510} fps={30} width={W} height={H}/>
   <Composition id="S403" component={S403} durationInFrames={540} fps={30} width={W} height={H}/>
   <Composition id="S4B" component={S4B} durationInFrames={855} fps={30} width={W} height={H}/>
+  <Composition id="S4C" component={S4C} durationInFrames={1245} fps={30} width={W} height={H}/>
+  <Composition id="S4D" component={S4D} durationInFrames={510} fps={30} width={W} height={H}/>
   <Composition id="Loop" component={Loop} durationInFrames={1620} fps={60} width={W} height={H}/>
 </>;
 registerRoot(Root);

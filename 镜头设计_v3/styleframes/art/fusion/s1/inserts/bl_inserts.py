@@ -31,8 +31,8 @@ import world as W      # noqa: E402
 P, gk = B.P, B.gk
 argv = sys.argv[sys.argv.index("--") + 1:]
 SHOT, OUT = argv[0], argv[1]
-START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0, r=412.0, s=412.0, n=412.0, o=412.0, m=412.0, j=412.0, l=412.0, e=412.0, d=412.0, i=437.0, i2=463.0, i3=480.0, i4=505.0)[SHOT]
-FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6, r=6, s=6, n=4, o=3, m=1171, j=1055, l=1055, e=1055, d=1517, i=1560, i2=1020, i3=1080, i4=210)[SHOT]
+START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0, r=412.0, s=412.0, n=412.0, o=412.0, m=412.0, j=412.0, l=412.0, e=412.0, d=412.0, i=437.0, i2=463.0, i3=480.0, i4=505.0, lp=508.5, hz=557.0)[SHOT]
+FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6, r=6, s=6, n=4, o=3, m=1171, j=1055, l=1055, e=1055, d=1517, i=1560, i2=1020, i3=1080, i4=210, lp=2490, hz=1020)[SHOT]
 FIRST = int(argv[2]) if len(argv) > 2 else 0
 LAST = min(int(argv[3]), FRAMES - 1) if len(argv) > 3 else FRAMES - 1
 SAMPLES = int(argv[4]) if len(argv) > 4 else 64
@@ -64,7 +64,7 @@ def stage():
     nt = sc.world.node_tree
     pick = lambda kind: [n for n in nt.nodes if n.type == kind]
     dot, win = pick("VECT_MATH")[0], pick("MAP_RANGE")[1]
-    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2, t=0.2, r=0.2, s=0.2, n=0.2, o=0.2, m=0.2, j=0.2, l=0.2, e=0.2, d=0.2, i=0.2, i2=0.2, i3=0.2, i4=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9, t=0.9, r=0.9, s=0.9, n=0.9, o=0.9, m=0.9, j=0.9, l=0.9, e=0.9, d=0.9, i=0.9, i2=0.9, i3=0.9, i4=0.9)[SHOT]
+    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2, t=0.2, r=0.2, s=0.2, n=0.2, o=0.2, m=0.2, j=0.2, l=0.2, e=0.2, d=0.2, i=0.2, i2=0.2, i3=0.2, i4=0.2, lp=0.2, hz=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9, t=0.9, r=0.9, s=0.9, n=0.9, o=0.9, m=0.9, j=0.9, l=0.9, e=0.9, d=0.9, i=0.9, i2=0.9, i3=0.9, i4=0.9, lp=0.9, hz=0.9)[SHOT]
 
     def sky(x):
         dot.inputs[1].default_value = lerp((-0.22, 0.92, 0.32), P.WINDOW, x)
@@ -4591,8 +4591,862 @@ def shot_i(sc, sky, part=1):
     return update
 
 
+# 4-06 (08:25-08:43, A) and 4-07 (08:43-09:10, A), on the 4-06 clock, at about 0.43 and 0.48 s a word until the recording comes on 11-12
+LP_VO = dict(mind=0.0, think=3.0, imagine=6.4, make=7.8, test=8.7, fails=9.6, tweak=10.5, again=11.4, every=12.6, ai=18.0, chem=23.4, invent=31.0, hours=39.2, end=45.0)
+LP_T0 = 3.5             # the shot starts where shot i4 ends, 3.5 s into 4-06
+
+
+def attr_mat(name, mult):
+    """Colour and glow per vertex, like 4-01's blocks."""
+    m, nt, out_ = gk._mat(name)
+    bb = nt.nodes.new("ShaderNodeBsdfPrincipled")
+    at_c, at_g = nt.nodes.new("ShaderNodeAttribute"), nt.nodes.new("ShaderNodeAttribute")
+    at_c.attribute_name, at_g.attribute_name = "col", "glow"
+    mul = nt.nodes.new("ShaderNodeMath")
+    mul.operation = "MULTIPLY"
+    mul.inputs[1].default_value = mult
+    nt.links.new(at_c.outputs["Color"], bb.inputs["Base Color"])
+    nt.links.new(at_c.outputs["Color"], bb.inputs["Emission Color"])
+    nt.links.new(at_g.outputs["Fac"], mul.inputs[0])
+    nt.links.new(mul.outputs[0], bb.inputs["Emission Strength"])
+    bb.inputs["Roughness"].default_value = 0.35
+    nt.links.new(bb.outputs[0], out_.inputs["Surface"])
+    return m
+
+
+def attr_mesh(name, verts, faces, mat):
+    me = bpy.data.meshes.new(name)
+    me.from_pydata(np.asarray(verts).tolist(), [], [list(map(int, f)) for f in faces])          # faces may differ in size
+    me.attributes.new("col", "FLOAT_COLOR", "POINT")
+    me.attributes.new("glow", "FLOAT", "POINT")
+    me.materials.append(mat)
+    o = bpy.data.objects.new(name, me)
+    bpy.context.scene.collection.objects.link(o)
+    B.smooth(o)
+    return o, me
+
+
+def set_attr(me, col, glow):
+    n = len(me.vertices)
+    me.attributes["col"].data.foreach_set("color", np.c_[np.broadcast_to(np.asarray(col, np.float32), (n, 3)), np.ones(n)].astype(np.float32).ravel())
+    me.attributes["glow"].data.foreach_set("value", np.broadcast_to(np.asarray(glow, np.float32), (n,)).astype(np.float32).copy())
+
+
+def ring_geo(r, rr, n=64, m=8):
+    """A torus about z: its vertices, faces and each vertex's angle round the ring."""
+    a = np.repeat(np.linspace(0, 2 * np.pi, n, endpoint=False), m)
+    b = np.tile(np.linspace(0, 2 * np.pi, m, endpoint=False), n)
+    v = np.c_[(r + rr * np.cos(b)) * np.cos(a), (r + rr * np.cos(b)) * np.sin(a), rr * np.sin(b)]
+    f = [(i * m + j, i * m + (j + 1) % m, ((i + 1) % n) * m + (j + 1) % m, ((i + 1) % n) * m + j) for i in range(n) for j in range(m)]
+    return v, np.array(f), a, b
+
+
+def shot_lp(sc, sky):
+    """4-06 and 4-07 (08:28.5-09:10, A's voice-over), straight on from shot i4. The camera leaves CDK20's cell for the empty cell in front of it (31), where a small turntable is
+    set down with five things from the film's table on it: an idea card, a sample vial, a well plate, a red cross lying flat and a spanner on a bolt. "Imagine a molecule. Make
+    it. Test it. It fails. Tweak it. Try again.": each word turns the next one to the front, and it does its one thing (a molecule is sketched on the card, the vial fills, the
+    wells light, the cross stands up, the spanner turns the bolt). "Every single round in a real lab costs time and money": two more laps, and at the end of each a clock in
+    the corner ticks on and a coin drops onto a stack. 4-07: the cell's floor lights up as a screen, the turntable spins faster and faster, its things shrink into a comet of
+    light going round; "dozens of AI models side by side": it splits into 42 small rings across the screen (Ivanenkov 2023 says 40 and more; the count is drawn); "invent new
+    molecules for this exact keyhole, score them, learn from the scores": sparks fly from the rings to CDK20's pocket and back, and each ring flares as one comes home;
+    "within hours": the clock's hands spin. All of it is drawn; the body and its pocket are AlphaFold DB v6. Times are LP_VO. Run: blender -b -P bl_inserts.py -- lp <out dir> 0 2489 16 0.5 2"""
+    global START
+    upd4 = shot_i(sc, sky, part=4)
+    upd4(505.0 + 3.5)                       # everything as shot i4 leaves it
+    START = 505.0 + LP_T0
+    V = LP_VO
+    ob = bpy.data.objects
+    core = ob["core"]
+    held = polar((127.55, -4.55, 1.75), (127.0, -2.3, 0.24), 60)
+    bpy.context.view_layer.update()
+    wv = np.array([tuple(core.matrix_world @ v.co) for v in core.data.vertices])
+    P0 = Vector(wv.mean(0).tolist())
+    CC = np.load(HERE + "frames/u_tail_2.npz")["pos"][-1].astype(float).mean(0)
+    full = np.load(HERE + "frames/cdk20.npz")
+    q0 = Vector(full["mouth"].tolist()).rotation_difference(Vector((0, -math.cos(P_UP), math.sin(P_UP))))
+    mid = ob["cdk20_small"].matrix_world @ Vector((np.asarray(full["pocket"]) @ np.array(q0.to_matrix()).T * P_S).tolist())
+    cx, cy = cell_at(31)
+    Z0 = 0.002                              # the screen's thickness: everything in the cell stands on it
+    C = Vector((cx, cy + 0.02, Z0))
+    front = math.atan2(-math.cos(held["az"]), math.sin(held["az"]))          # the turntable's side that faces the camera
+
+    ink = gk.surface((0.012, 0.012, 0.014), 0.3)
+    card_m = gk.surface((0.93, 0.925, 0.89), 0.6, 0.15)
+    tray = gk.surface((0.74, 0.725, 0.67), 0.7, 0.1)
+    steel = P.gloss((0.42, 0.42, 0.44), 0.3, 0.3)
+    red = P.gloss(P.RED, 0.22, 0.6)
+    am = attr_mat("lp_glow", 3.0)
+
+    # the turntable and what stands on it; it turns about its own centre, so everything on it is parented to it
+    turn = empty("turntable")
+    turn.location = C
+    turn.rotation_mode = "XYZ"
+    TT = 0.014
+    disc = lathe([(0, 0), (0.27, 0), (0.275, 0.006), (0.27, TT), (0, TT)], tray, "turntable_disc", turn, 128)
+    track = tube3d([(0.19 * math.cos(a), 0.19 * math.sin(a), TT + 0.001) for a in np.linspace(0, 2 * math.pi, 97)], 0.0022, ink, "track")
+    track.parent = turn
+    R0 = 0.19
+
+    def station(k, name):
+        a = math.radians(72 * k)
+        e = empty(name)
+        e.parent = turn
+        e.rotation_mode = "XYZ"
+        e.location = (R0 * math.cos(a), R0 * math.sin(a), TT)
+        e.rotation_euler = (0, 0, a + math.pi / 2)            # local -y points out from the centre, local +x along the track
+        return e
+    st = [station(k, n) for k, n in enumerate(("st_card", "st_vial", "st_plate", "st_cross", "st_spanner"))]
+
+    # 0 the idea card, leaning back a little, a molecule sketched on its face
+    card = B.extrude([box(-0.042, 0.042, 0.11, 0.0, 0.01)], 0.006, 0.0015, name="card", mat=card_m)
+    card.parent, card.rotation_mode = st[0], "XYZ"
+    card.rotation_euler = (math.radians(75), 0, 0)
+    card.location = (0, 0.012, 0)
+    hexa = [(0.02 * math.cos(math.radians(30 + 60 * i)), 0.058 + 0.02 * math.sin(math.radians(30 + 60 * i)), 0.0068) for i in range(7)]
+    sketch = [tube3d(hexa, 0.0016, ink, "sketch"), tube3d([hexa[0], (0.036, 0.078, 0.0068), (0.036, 0.094, 0.0068)], 0.0016, ink, "sketch"),
+              tube3d([hexa[3], (-0.036, 0.042, 0.0068), (-0.03, 0.026, 0.0068)], 0.0016, ink, "sketch")]
+    for o in sketch:
+        o.parent = card
+        o.data.bevel_factor_mapping_end = "SPLINE"
+        o.data.bevel_factor_end = 0.0
+
+    # 1 the vial, red rising in it on "make it"
+    vial_root = empty("lp_vial")
+    vial_root.parent = st[1]
+    glass = lathe([(0, 0.0), (0.019, 0.003), (0.022, 0.012), (0.022, 0.095), (0, 0.095)], B.clear_glass(), "lp_vial_glass", vial_root, 48)
+    glass.visible_shadow = False
+    lathe([(0, 0.095), (0.0235, 0.095), (0.0235, 0.11), (0, 0.11)], P.gloss(P.KLEIN, 0.25, 0.6), "lp_vial_cap", vial_root, 48)
+    dose = lathe([(0, 0.002), (0.016, 0.005), (0.019, 0.012), (0.019, 0.09), (0, 0.09)], B.fluid(P.RED, (0.9, 0.05, 0.03)), "lp_vial_dose", vial_root, 48)
+    dose.visible_diffuse = False
+    dose_v = np.zeros(len(dose.data.vertices) * 3, np.float32)
+    dose.data.vertices.foreach_get("co", dose_v)
+
+    # 2 the well plate: 3 by 4 wells that light Klein blue on "test it", then go red when it fails
+    plate = B.extrude([box(-0.06, 0.06, 0.042, -0.042, 0.008)], 0.018, 0.003, name="lp_plate", mat=card_m)
+    plate.parent = st[2]
+    wv_, wf_ = [], []
+    for i in range(12):
+        x, y = -0.039 + (i % 4) * 0.026, -0.022 + (i // 4) * 0.022
+        g = [(x + 0.0085 * math.cos(2 * math.pi * j / 16), y + 0.0085 * math.sin(2 * math.pi * j / 16)) for j in range(16)]
+        base = len(wv_)
+        wv_ += [(px_, py_, 0.0185) for px_, py_ in g] + [(px_, py_, 0.0205) for px_, py_ in g]
+        wf_ += [tuple(base + 16 + j for j in range(16))] + [(base + j, base + (j + 1) % 16, base + 16 + (j + 1) % 16, base + 16 + j) for j in range(16)]
+    wells, wells_me = attr_mesh("lp_wells", wv_, wf_, am)
+    wells.parent = st[2]
+    WELL_ORDER = np.repeat(np.arange(12), 32)
+
+    # 3 the red cross: lies flat, stands up on its bottom edge when the round fails
+    hinge = empty("lp_cross")
+    hinge.parent, hinge.rotation_mode = st[3], "XYZ"
+    hinge.location = (0, -0.04, 0.0)          # its bottom edge, 4 cm out from the station: lying flat it reaches inward, standing it faces out
+    for s_ in (1, -1):
+        ang = math.radians(45 * s_)
+        bar = [(px_ * math.cos(ang) - py_ * math.sin(ang), 0.04 + px_ * math.sin(ang) + py_ * math.cos(ang))
+               for px_, py_ in B.round_poly([(-0.05, -0.011), (0.05, -0.011), (0.05, 0.011), (-0.05, 0.011)], 0.008)]
+        o = B.extrude([bar], 0.014, 0.003, name="lp_cross_bar", mat=red)
+        o.parent = hinge
+
+    # 4 the spanner on a bolt: on "tweak it" it turns the bolt a sixth of a turn
+    bolt = lathe([(0, 0), (0.0095, 0), (0.0095, 0.022), (0, 0.022)], steel, "lp_bolt", st[4], 6)
+    pivot = empty("lp_spanner")
+    pivot.parent, pivot.rotation_mode = st[4], "XYZ"
+    pivot.location = (0, 0, 0.004)
+    head = [(0.022 * math.cos(a_), 0.022 * math.sin(a_)) for a_ in np.linspace(0, 2 * math.pi, 48, endpoint=False)]
+    hole = [(0.0115 * math.cos(a_), 0.0115 * math.sin(a_)) for a_ in np.linspace(0, 2 * math.pi, 6, endpoint=False)][::-1]
+    o = B.extrude([head, hole], 0.009, 0.002, name="lp_spanner_head", mat=steel)
+    o.parent = pivot
+    o = B.extrude([box(-0.008, 0.008, 0.12, 0.016, 0.006)], 0.008, 0.002, name="lp_spanner_handle", mat=steel)
+    o.parent = pivot
+    o.rotation_euler = (0, 0, math.radians(-90))           # the handle lies along the track
+
+    # in the cell's front corners, off the turntable: a clock that ticks on a quarter at the end of each round, and a stack the round's coin drops onto
+    clock_at = (cx - 0.35, cy + 0.0)          # beside the turntable, left and right, where the camera always sees them
+    face = lathe([(0, 0), (0.055, 0), (0.057, 0.005), (0.055, 0.011), (0, 0.011)], card_m, "lp_clock", None, 96)
+    face.location = (*clock_at, Z0)
+    rim_ = tube3d([(clock_at[0] + 0.05 * math.cos(a_), clock_at[1] + 0.05 * math.sin(a_), 0.0115 + Z0) for a_ in np.linspace(0, 2 * math.pi, 65)], 0.0018, ink, "lp_clock_rim")
+    hands = []
+    for L_, w_ in ((0.028, 0.0035), (0.043, 0.0025)):
+        h_ = empty("lp_hand")
+        h_.location, h_.rotation_mode = (*clock_at, 0.012 + Z0), "XYZ"
+        o = B.extrude([box(-w_, w_, L_, -0.006, w_ * 0.9)], 0.002, 0.0006, name="lp_hand_bar", mat=ink)
+        o.parent = h_
+        hands.append(h_)
+    coin_at = (cx + 0.35, cy + 0.0)
+    coins = []
+    for i in range(3):
+        o = lathe([(0, 0), (0.028, 0), (0.03, 0.0035), (0.028, 0.007), (0, 0.007)], P.gloss((0.62, 0.6, 0.55), 0.3, 0.5), "lp_coin", None, 64)
+        o.location = (coin_at[0] + 0.003 * (i % 2), coin_at[1] - 0.002 * i, Z0)
+        coins.append(o)
+
+    # the screen: the cell's own floor, dark with a blue glow once the loop goes inside the computer
+    scr_m, nt, out_ = gk._mat("lp_screen")
+    sb = nt.nodes.new("ShaderNodeBsdfPrincipled")
+    sb.inputs["Roughness"].default_value = 0.25
+    sb.inputs["Emission Color"].default_value = (*P.BLUE, 1)
+    nt.links.new(sb.outputs[0], out_.inputs["Surface"])
+    screen = B.extrude([box(cx - 0.415, cx + 0.415, cy + 0.33, cy - 0.33, 0.055)], 0.002, 0.0005, name="lp_screen", mat=scr_m)
+
+    # the comet that the turntable becomes, then 42 small ones, one per model, across the screen
+    rv, rf, ra, rb = ring_geo(1.0, 0.03)
+    GRID = [(cx - 0.24 + 0.08 * (i % 7), cy - 0.2375 + 0.095 * (i // 7)) for i in range(42)]          # 7 by 6, between the clock and the coins
+    nR = len(rv)
+    comets, comets_me = attr_mesh("lp_comets", np.zeros((42 * nR, 3)), np.concatenate([rf + k * nR for k in range(42)]), am)
+    spin_ph = np.random.default_rng(5).uniform(0, 2 * np.pi, 42)
+    spin_w = np.random.default_rng(6).uniform(0.8, 1.25, 42)
+
+    # sparks: new molecules out to the pocket, and back with a score
+    NSP = 48
+    sv, sf, _, _ = ring_geo(0.6, 0.4, 8, 6)          # a small bead
+    sparks, sparks_me = attr_mesh("lp_sparks", np.zeros((NSP * len(sv), 3)), np.concatenate([sf + k * len(sv) for k in range(NSP)]), am)
+    g_ = np.random.default_rng(9)
+    sp_from = g_.integers(0, 42, NSP)
+    sp_t = V["invent"] + 0.5 + np.sort(g_.uniform(0, 6.0, NSP))
+    sp_good = g_.uniform(0, 1, NSP) < 0.3          # how it scored: a few blue, most red
+    way = ob["cdk20_small"].matrix_world.to_3x3() @ Vector((np.array(q0.to_matrix()) @ np.asarray(full["mouth"])).tolist())
+    nrm = np.array(tuple(way.normalized()))                  # the way out of the pocket (cdk20.npz "mouth"), as S3's keyhole used it
+    tgt = [0.04]
+    target = np.array(tuple(mid)) + 0.04 * nrm               # just outside the pocket's mouth; the spark shrinks away there
+    side = np.array((nrm[0], nrm[1], 0.0)) / max(1e-6, math.hypot(nrm[0], nrm[1]))
+
+    shape = [None]
+
+    def spark_at(g0, u):
+        """Out of a ring, up and round the pocket's side of the body, and in at the mouth: a cubic curve, checked clear of the body below."""
+        a1, h1, a2, h2 = shape[0]
+        p1 = g0 + np.array((0, 0, h1)) + a1 * side
+        p2 = target + a2 * nrm + np.array((0, 0, h2))
+        return (1 - u) ** 3 * g0 + 3 * (1 - u) ** 2 * u * p1 + 3 * (1 - u) * u ** 2 * p2 + u ** 3 * target
+
+    from mathutils.bvhtree import BVHTree
+    tree = BVHTree.FromPolygons([tuple(v) for v in wv], [tuple(p_.vertices) for p_ in core.data.polygons])
+
+    def crossings():
+        """How many times the sparks' paths pass through the body's surface, and how close they come to it before the last 15% (the way into the mouth)."""
+        n_, near_, where = 0, 9.0, []
+        for k in range(42):
+            us = np.linspace(0, 1, 120)
+            pts = [spark_at(np.array((*GRID[k], 0.03)), u) for u in us]
+            for u_, a_, b_ in zip(us, pts, pts[1:]):
+                d_ = Vector(tuple(b_ - a_))
+                hit = tree.ray_cast(Vector(tuple(a_)), d_.normalized(), d_.length)
+                if hit[0] is not None:
+                    n_ += 1
+                    where.append(round(float(u_), 2))
+            for q_ in pts[:102]:
+                near_ = min(near_, tree.find_nearest(Vector(tuple(q_)))[3])
+        crossings.where = sorted(set(where))[:12]
+        return n_, near_
+    for off in (0.07, 0.1, 0.13):
+        target = np.array(tuple(mid)) + off * nrm
+        for cand in [(a1, h1, a2, h2) for a2 in (0.3, 0.45, 0.6) for a1 in (0.3, 0.5, 0.7) for h1 in (0.35, 0.55) for h2 in (0.0, 0.1)]:
+            shape[0] = cand
+            n_x, near = crossings()
+            if n_x == 0 and near >= 0.025:
+                break
+        print("4-07 sparks: end %.2f out of the mouth, path %s, %d crossings (at u %s), closest %.3f before the last 15%%" % (off, shape[0], n_x, crossings.where, near))
+        if n_x == 0 and near >= 0.025:
+            break
+
+    # when things happen: the steps of the first round, then two even rounds
+    steps = [V["imagine"], V["make"], V["test"], V["fails"], V["tweak"], V["again"]]
+    laps = [(V["every"], V["every"] + 2.4), (V["every"] + 2.6, V["every"] + 5.0)]
+    lap_end = [V["again"] + 0.45] + [b for a, b in laps]
+
+    def turn_angle(t):
+        """The turntable's angle: station k faces the camera after step k; then two laps at an even pace; then faster and faster inside the computer."""
+        ang = front
+        for i, ts in enumerate(steps[1:]):
+            x = min(1.0, max(0.0, (t - ts) / 0.42))
+            ang -= math.radians(72) * (smooth(x) + 0.06 * math.sin(math.pi * x) * (x < 1))
+        for a, b in laps:
+            ang -= 2 * math.pi * smooth((t - a) / (b - a))
+        if t > V["ai"] + 2.6:          # spinning up: 0.4 turns a second, doubling every 0.9 s, up to 9
+            u = t - V["ai"] - 2.6
+            w0, k_ = 0.4, math.log(2) / 0.9
+            T_ = math.log(9 / w0) / k_
+            turns = w0 / k_ * (math.exp(k_ * min(u, T_)) - 1) + 9 * max(0.0, u - T_)
+            ang -= 2 * math.pi * turns
+        return ang
+
+    # the camera: from shot i4's last view down to the turntable, round it a little through the rounds, up over the screen, back to see the pocket, in on the clock
+    pair = dict(at=((P0.x + float(CC[0])) / 2 + 0.08, float(CC[1]) - 0.02, 0.12), az=held["az"] + math.radians(4), el=math.radians(30), d=2.7, mm=45.0)
+    loop = dict(at=(C.x, C.y + 0.01, 0.05), az=held["az"], el=math.radians(36), d=1.3, mm=45.0)
+    over = dict(at=(cx, cy, 0.0), az=held["az"] + math.radians(6), el=math.radians(60), d=1.5, mm=45.0)
+    wide = dict(at=((cx + P0.x) / 2, (cy + P0.y) / 2 - 0.05, 0.12), az=held["az"] + math.radians(8), el=math.radians(40), d=2.9, mm=45.0)
+    over_d = 2.2          # far enough that the 42 rings stay clear of the title at the top left and the source line at the bottom
+    # round to the clock's far side, where the cell's rim and the bare table fill the bottom of the frame, so the source line never sits on the rings
+    clock_v = dict(at=(*clock_at, 0.01), az=held["az"] - math.radians(115), el=math.radians(55), d=1.1, mm=45.0)
+    keys = [(LP_T0, pair), (V["think"] + 3.0, loop), (V["every"], dict(loop, az=held["az"] + math.radians(4), d=1.24)), (V["ai"], dict(loop, az=held["az"] + math.radians(8), d=1.2)),
+            (V["ai"] + 3.2, over), (V["chem"] + 3.0, dict(over, d=over_d)), (V["invent"] - 0.2, dict(over, d=over_d)), (V["invent"] + 2.0, wide), (V["hours"] - 1.2, dict(wide, d=2.8)),
+            (V["hours"] + 2.8, clock_v), (V["end"], dict(clock_v, d=1.02))]
+
+    def mix(p, q, x):
+        log = lambda k: math.exp(math.log(p[k]) + (math.log(q[k]) - math.log(p[k])) * x)
+        return dict(at=lerp(p["at"], q["at"], x), az=p["az"] + (q["az"] - p["az"]) * x, el=p["el"] + (q["el"] - p["el"]) * x, d=log("d"), mm=log("mm"))
+
+    def view(t):
+        for (ta, a), (tb, b) in zip(keys, keys[1:]):
+            if t < tb:
+                return mix(a, b, smooth((t - ta) / (tb - ta)))
+        return keys[-1][1]
+    c = sc.camera
+    c.animation_data_clear()
+    c.data.animation_data_clear()
+    last_q[0] = None
+    for f in range(FRAMES):
+        t = LP_T0 + f / FPS
+        v = view(t)
+        shoot(c, f, v, v["at"])
+        turn.rotation_euler = (0, 0, turn_angle(t))          # keyed, so the fast spin blurs
+        turn.keyframe_insert("rotation_euler", index=2, frame=f)
+    from bpy_extras.object_utils import world_to_camera_view
+    spots = dict(turntable=tuple(C), clock=(*clock_at, 0.01), coins=(*coin_at, 0.02), pocket=tuple(mid))
+    for tt in (V["imagine"], V["every"] + 1.0, V["chem"] + 4.0, V["invent"] + 3.0, V["end"] - 0.1):
+        f = round((tt - LP_T0) * FPS)
+        sc.frame_set(f)
+        print("4-06/07 t %.1f:" % tt, ", ".join("%s %.0f %.0f" % (k, *(lambda q: (q.x * 1920, (1 - q.y) * 1080))(world_to_camera_view(sc, c, Vector(p_)))) for k, p_ in spots.items()))
+
+    things = [disc, track, card, vial_root, plate, hinge, pivot, bolt] + st
+
+    def drop(t, at):
+        """Set down from above: falls, lands at 'at', a small bounce."""
+        x = t - at
+        if x < -0.45:
+            return 1.2
+        if x < 0:
+            return 1.2 * (x / -0.45) ** 2
+        return 0.012 * abs(math.sin(min(x, 0.3) / 0.3 * math.pi)) * (1 - min(x, 0.3) / 0.3)
+
+    def update(t):
+        t = t - START + LP_T0
+        # set down, one by one, while the camera comes over: the turntable first, then its five things
+        h0 = drop(t, V["think"] + 1.2)
+        turn.location = (C.x, C.y, Z0 + h0)
+        disc.hide_render = track.hide_render = bool(h0 >= 1.2)
+        for k, e in enumerate(st):
+            hk = drop(t, V["think"] + 1.6 + 0.3 * k)
+            e.location = (e.location[0], e.location[1], TT + hk)
+            for o in e.children_recursive:
+                o.hide_render = bool(hk >= 1.2)          # nothing hangs in view before it falls
+        # inside the computer: the things shrink into the comet
+        gone = smooth((t - V["ai"] - 4.4) / 1.6)
+        for e in st:
+            e.scale = (max(1 - gone, 1e-3),) * 3
+        if gone >= 1:
+            disc.hide_render = track.hide_render = True
+            for e in st:
+                for o in e.children_recursive:
+                    o.hide_render = True
+        turn.scale = (1.0, 1.0, max(1 - gone, 1e-3))
+        # 0 the sketch, once per round
+        s_ = smooth((t - V["imagine"] - 0.1) / 0.6)          # drawn once; it stays
+        for i, o in enumerate(sketch):
+            o.data.bevel_factor_end = min(1.0, max(0.0, s_ * 3 - i)) if s_ < 1 else 1.0
+        # 1 the vial: fills on "make it", empties at the end of each round, fills again on the way round
+        fill = 0.0
+        for a, b in [(V["make"] + 0.35, lap_end[0])] + [(a + 0.48, b) for a, b in laps]:
+            fill = max(fill, smooth((t - a) / 0.45) * (1 - smooth((t - b + 0.05) / 0.25)))
+        level = 0.014 + 0.066 * fill
+        v_ = dose_v.copy()
+        v_[2::3] = np.minimum(v_[2::3], level)
+        dose.data.vertices.foreach_set("co", v_)
+        dose.data.update()
+        # 2 the wells: blue one after another on "test it", red when it fails, dark again for the next round
+        lit = np.zeros(12)
+        bad = 0.0
+        for a, fl, b in [(V["test"] + 0.35, V["fails"] + 0.4, lap_end[0])] + [(a + 0.96, a + 1.44, b) for a, b in laps]:
+            on = np.clip((t - a - 0.03 * np.arange(12)) / 0.12, 0, 1) * (1 - smooth((t - b + 0.05) / 0.25))
+            lit = np.maximum(lit, on)
+            bad = max(bad, smooth((t - fl) / 0.3) * (1 - smooth((t - b + 0.05) / 0.25)))
+        col = np.array(P.KLEIN)[None] * (1 - bad) + np.array(P.RED)[None] * bad
+        bone = np.array((0.80, 0.78, 0.72))[None]
+        cw = bone * (1 - lit[:, None]) + col * lit[:, None]
+        set_attr(wells_me, np.repeat(cw, 32, 0), np.repeat(lit * 0.7, 32))
+        wells_me.update()
+        # 3 the cross stands up when it fails and lies down for the next round
+        up = 0.0
+        for a, b in [(V["fails"] + 0.4, lap_end[0])] + [(a + 1.44, b) for a, b in laps]:
+            x = (t - a) / 0.35
+            up = max(up, (smooth(x) + 0.12 * math.sin(math.pi * min(max(x, 0), 1))) * (1 - smooth((t - b + 0.1) / 0.3)))
+        hinge.rotation_euler = (math.radians(90) * up, 0, 0)
+        # 4 the spanner turns the bolt a sixth of a turn, every round
+        tw = sum(smooth((t - a) / 0.4) for a in [V["tweak"] + 0.4] + [a + 1.92 for a, b in laps])
+        pivot.rotation_euler = (0, 0, math.radians(60) * tw)
+        bolt.rotation_euler = (0, 0, math.radians(60) * tw)
+        # the clock ticks on a quarter at the end of each round; "within hours", the hands spin
+        tick = sum(smooth((t - e_) / 0.18) for e_ in lap_end)
+        fast = 0.0
+        if t > V["hours"] + 1.6:
+            u = t - V["hours"] - 1.6
+            fast = 2.2 * u - 0.8 * max(0.0, u - 2.0) ** 2 if u < 3.375 else 2.2 * 3.375 - 0.8 * 1.375 ** 2
+        hands[1].rotation_euler = (0, 0, -math.radians(90) * tick - 2 * math.pi * fast)
+        hands[0].rotation_euler = (0, 0, math.radians(-120) - math.radians(7.5) * tick - 2 * math.pi * fast / 12)
+        for i, o in enumerate(coins):           # a coin falls onto the stack at the end of each round
+            x = t - lap_end[i]
+            o.hide_render = bool(x < -0.5)
+            fall_h = 0.0 if x >= 0 else 0.5 * (x / 0.5) ** 2
+            o.location = (o.location[0], o.location[1], Z0 + 0.007 * i + fall_h + (0.004 * abs(math.sin(min(x, 0.2) / 0.2 * math.pi)) * (1 - min(x, 0.2) / 0.2) if x > 0 else 0))
+        # the screen lights
+        glow = smooth((t - V["ai"] - 0.8) / 1.8)
+        sb.inputs["Base Color"].default_value = (*lerp((0.80, 0.78, 0.72), (0.01, 0.012, 0.03), glow), 1)
+        sb.inputs["Emission Strength"].default_value = 0.35 * glow
+        # the comet, then 42 of them
+        comet = smooth((t - V["ai"] - 4.4) / 1.4)
+        split = smooth((t - V["chem"] - 0.8) / 1.8)
+        flare = np.zeros(42)
+        for k in range(NSP):
+            x = t - sp_t[k] - 1.8
+            if 0 <= x < 0.6:
+                flare[sp_from[k]] = max(flare[sp_from[k]], 1 - x / 0.6)
+        verts, cols, glows = [], [], []
+        head = turn_angle(t) - front
+        for k in range(42):
+            if split <= 0 and k > 0:
+                cen, r = (C.x, C.y), 0.19
+            else:
+                g0 = GRID[k] if k else GRID[17]
+                cen = lerp((C.x, C.y), g0, split)
+                r = 0.19 + (0.031 - 0.19) * split
+            ph = head if split <= 0 else head * (1 - split) + split * (spin_ph[k] + 2 * math.pi * 2.0 * spin_w[k] * (t - V["chem"]))
+            rt = 0.0045 + 0.0035 * (1 - split)
+            vv = np.c_[(r + rt * np.cos(rb)) * np.cos(ra + ph), (r + rt * np.cos(rb)) * np.sin(ra + ph), rt * np.sin(rb)]
+            vv += (cen[0], cen[1], Z0 + 0.02 + 0.03 * (1 - split))
+            tail = ra / (2 * np.pi)          # it turns clockwise, so its trail lies at larger angles: bright at the head, fading round to the tail
+            verts.append(vv)
+            cols.append(np.repeat(np.array(P.BLUE)[None], nR, 0) * (1 - 0.5 * flare[k]) + np.array((0.6, 0.75, 1.0))[None] * 0.5 * flare[k])
+            glows.append(comet * (0.25 + 1.6 * (1 - tail) ** 2) * (1 + 1.5 * flare[k]) * (1 if (split > 0 or k == 0) else 0))
+        comets_me.vertices.foreach_set("co", np.concatenate(verts).astype(np.float32).ravel())
+        set_attr(comets_me, np.concatenate(cols), np.concatenate(glows))
+        comets_me.update()
+        comets.hide_render = bool(comet <= 0)
+        # sparks: out along an arc to the pocket, back to their ring with a score
+        pv, pc, pg = [], [], []
+        for k in range(NSP):
+            x = t - sp_t[k]
+            g0 = np.array((*GRID[sp_from[k]], 0.03))
+            if 0 <= x < 1.8:
+                u = smooth(x / 0.9) if x < 0.9 else smooth(2 - x / 0.9)
+                p_ = spark_at(g0, u)
+                cc = np.array(P.BLUE) if x < 0.9 else (np.array(P.KLEIN) * 1.6 if sp_good[k] else np.array(P.RED))
+                gl = 4.0
+                sz = 0.016 * (1 - 0.6 * max(0.0, 1 - abs(x - 0.9) / 0.15))          # smaller as it touches the pocket
+            else:
+                p_, cc, gl, sz = g0, np.array(P.BLUE), 0.0, 1e-4
+            pv.append(sv * sz + p_)
+            pc.append(np.repeat(cc[None], len(sv), 0))
+            pg.append(np.full(len(sv), gl))
+        sparks_me.vertices.foreach_set("co", np.concatenate(pv).astype(np.float32).ravel())
+        set_attr(sparks_me, np.concatenate(pc), np.concatenate(pg))
+        sparks_me.update()
+        sparks.hide_render = bool(t < V["invent"])
+        sky(0.2)
+    return update
+
+
+HZ_VO = dict(shape=0.0, rule=2.6, hinge=3.2, filters=6.2, toss=7.4, toxic=8.6, score=10.6, easy=12.4, end=17.0)
+HZ_START = 557.0        # shot lp ends at 550 (09:10), then 4-08 is A on camera for 7 s
+
+
+def shot_hz(sc, sky):
+    """4-09 (09:17-09:34, B's voice-over), back on the table after 4-08. "The team gave it the pocket's shape": the camera goes in to CDK20's pocket, the pocket's patch of the
+    surface turns to paper and an ink wireframe grows over it from the middle out (the real AlphaFold DB v6 surface within 10 A of the pocket's centre). "And one rule: every key
+    must grip a spot called the hinge": a red-headed pin goes in along a line checked clear of the body and stops on Met84's backbone (the hinge residue in Ren 2023; in the v6
+    model its backbone lines the pocket, 3.6-5.6 A from the centre). "Its filters are built to toss designs with reactive or possibly toxic groups": a round wire sieve comes down
+    over the screen cell, nine small design cards fly out of the outer rings and land on it; the three with a red group are struck through and crumble, the crumbs falling through
+    the sieve's holes (each one at a hole's centre, so none touches a wire). "And to score how drug-like and easy to make each one is": two bars fill on each card that is left.
+    The designs and the sieve are drawn; the body, the pocket and Met84 are AlphaFold DB v6. Run: blender -b -P bl_inserts.py -- hz <out dir> 0 1019 16 0.5 2"""
+    global START
+    from mathutils.bvhtree import BVHTree
+    upd_lp = shot_lp(sc, sky)
+    lp_off = LP_VO["end"] - LP_T0          # shot lp's update, run on: its rings keep turning, its clock stays where it stopped
+    START = HZ_START
+    V = HZ_VO
+    ob = bpy.data.objects
+    core = ob["core"]
+    held = polar((127.55, -4.55, 1.75), (127.0, -2.3, 0.24), 60)
+    bpy.context.view_layer.update()
+    wv = np.array([tuple(core.matrix_world @ v.co) for v in core.data.vertices])
+    P0 = Vector(wv.mean(0).tolist())
+    CC = np.load(HERE + "frames/u_tail_2.npz")["pos"][-1].astype(float).mean(0)
+    full = np.load(HERE + "frames/cdk20.npz")
+    q0 = Vector(full["mouth"].tolist()).rotation_difference(Vector((0, -math.cos(P_UP), math.sin(P_UP))))
+    smw = ob["cdk20_small"].matrix_world
+    q0m = np.array(q0.to_matrix())
+    to_w = lambda x: smw @ Vector((np.asarray(x) @ q0m.T * P_S).tolist())          # a point in the model's own frame (A) to the table
+    mid = to_w(full["pocket"])
+    unit = (to_w(np.asarray(full["pocket"]) + (1.0, 0, 0)) - mid).length          # table units to the Angstrom here
+    nrm = (smw.to_3x3() @ Vector((q0m @ np.asarray(full["mouth"])).tolist())).normalized()          # the way out of the pocket
+    pdb = [l for l in open(HERE + "../../../../../assets/alphafold/AF-Q8IZL9-F1-model_v6.pdb") if l.startswith("ATOM")]
+    m84 = [l for l in pdb if int(l[22:26]) == 84]
+    assert m84[0][17:20] == "MET"
+    bb84 = np.array([[float(l[30:38]), float(l[38:46]), float(l[46:54])] for l in m84 if l[12:16].strip() in ("N", "CA", "C", "O")]).mean(0)
+    W84 = to_w(bb84)
+    print("4-09: Met84 backbone %.1f A from the pocket's centre, pLDDT %s" % ((W84 - mid).length / unit, m84[0][60:66].strip()))
+    tree = BVHTree.FromPolygons([tuple(v) for v in wv], [tuple(p_.vertices) for p_ in core.data.polygons])
+    cx, cy = cell_at(31)
+    C = Vector((cx, cy + 0.02, 0.002))
+
+    ink_c = (0.012, 0.012, 0.014)
+    ink = gk.surface(ink_c, 0.3)
+    card_m = gk.surface((0.93, 0.925, 0.89), 0.6, 0.15)
+    steel = P.gloss((0.42, 0.42, 0.44), 0.3, 0.3)
+    red = P.gloss(P.RED, 0.22, 0.6)
+    klein = P.gloss(P.KLEIN, 0.3, 0.5)
+
+    # the pocket's patch: paper instead of blue, from the centre out, on the body's own surface
+    dist = np.linalg.norm(wv - np.array(tuple(mid)), axis=1)
+    m = core.active_material
+    if m.users > 1:
+        m = m.copy()
+        core.active_material = m
+    nt = m.node_tree
+    cb = next(n for n in nt.nodes if n.type == "BSDF_PRINCIPLED")
+    core.data.attributes.new("pk", "FLOAT", "POINT")
+    core.data.attributes["pk"].data.foreach_set("value", (dist / unit).astype(np.float32))          # in A
+    reveal = []
+
+    def mask_node(nt_, attr):
+        at_ = nt_.nodes.new("ShaderNodeAttribute")
+        at_.attribute_name = attr
+        mr = nt_.nodes.new("ShaderNodeMapRange")
+        mr.clamp = True
+        nt_.links.new(at_.outputs["Fac"], mr.inputs["Value"])
+        mr.inputs["To Min"].default_value, mr.inputs["To Max"].default_value = 1.0, 0.0
+        reveal.append(mr)
+        return mr
+    mr = mask_node(nt, "pk")
+    mx = nt.nodes.new("ShaderNodeMix")
+    mx.data_type = "RGBA"
+    if cb.inputs["Base Color"].is_linked:
+        nt.links.new(cb.inputs["Base Color"].links[0].from_socket, mx.inputs[6])
+    else:
+        mx.inputs[6].default_value = cb.inputs["Base Color"].default_value
+    mx.inputs[7].default_value = (0.9, 0.885, 0.84, 1)
+    nt.links.new(mr.outputs[0], mx.inputs[0])
+    nt.links.new(mx.outputs[2], cb.inputs["Base Color"])
+    def exit_from(p_, d_):
+        """How far along d_ from p_ until the body is more than 4 A away for the next 5 A: where the cleft opens out."""
+        for s_ in np.linspace(0.0, 1.0, 201):
+            if all(tree.find_nearest(p_ + float(x) * d_)[3] > 4 * unit for x in np.linspace(s_, s_ + 5 * unit, 6)):
+                return float(s_)
+        return 1.0
+    mouth_s = exit_from(mid, nrm)
+    RMAX = 15.0          # the cleft between the two lobes and its lips; the pocket's centre lies deep inside it
+    print("4-09: the cleft opens %.1f A out from the pocket's centre; patch out to %.1f A" % (mouth_s / unit, RMAX))
+
+    # the ink wireframe over it: the same patch, thinned, lifted a hair off the surface
+    keep = dist / unit < RMAX + 1.0
+    polys = [tuple(p_.vertices) for p_ in core.data.polygons if keep[list(p_.vertices)].all()]
+    used = sorted({i for p_ in polys for i in p_})
+    re_ = {i: k for k, i in enumerate(used)}
+    nrm_v = np.array([tuple((core.matrix_world.to_3x3() @ core.data.vertices[i].normal).normalized()) for i in used])
+    pv = wv[used] + 0.0025 * nrm_v
+    pme = bpy.data.meshes.new("hz_patch")
+    pme.from_pydata(pv.tolist(), [], [[re_[i] for i in p_] for p_ in polys])
+    patch = bpy.data.objects.new("hz_patch", pme)
+    sc.collection.objects.link(patch)
+    dec = patch.modifiers.new("dec", "DECIMATE")
+    dec.ratio = min(1.0, 260.0 / max(1, len(polys)))          # few, so the lines read as a drawing, not a clump
+    wf = patch.modifiers.new("wf", "WIREFRAME")
+    wf.thickness, wf.use_even_offset, wf.use_replace, wf.offset = 0.0022, True, True, 0.0
+    bpy.context.view_layer.update()
+    wme = bpy.data.meshes.new_from_object(patch.evaluated_get(bpy.context.evaluated_depsgraph_get()))
+    bpy.data.objects.remove(patch)
+    wire = bpy.data.objects.new("hz_wire", wme)
+    sc.collection.objects.link(wire)
+    wvv = np.zeros(len(wme.vertices) * 3)
+    wme.vertices.foreach_get("co", wvv)
+    wme.attributes.new("pk", "FLOAT", "POINT")
+    wme.attributes["pk"].data.foreach_set("value", (np.linalg.norm(wvv.reshape(-1, 3) - np.array(tuple(mid)), axis=1) / unit).astype(np.float32))
+    wm, wnt, wout = gk._mat("hz_wire")
+    wb = wnt.nodes.new("ShaderNodeBsdfPrincipled")
+    wb.inputs["Base Color"].default_value = (*ink_c, 1)
+    wb.inputs["Roughness"].default_value = 0.4
+    tr = wnt.nodes.new("ShaderNodeBsdfTransparent")
+    ms = wnt.nodes.new("ShaderNodeMixShader")
+    wmr = mask_node(wnt, "pk")
+    wnt.links.new(wmr.outputs[0], ms.inputs[0])
+    wnt.links.new(tr.outputs[0], ms.inputs[1])
+    wnt.links.new(wb.outputs[0], ms.inputs[2])
+    wnt.links.new(ms.outputs[0], wout.inputs["Surface"])
+    wme.materials.append(wm)
+    wire.visible_shadow = False
+    print("4-09: pocket patch %d faces, wireframe from %d" % (len(polys), int(len(polys) * dec.ratio)))
+
+    # the pin: its tip on the surface nearest Met84's backbone, in along a line that nothing else crosses
+    hit = tree.find_nearest(W84)
+    tip, n_s = Vector(hit[0]), Vector(hit[1]).normalized()
+    if n_s.dot(nrm) < 0:
+        n_s = -n_s
+    print("4-09: the pin's tip is %.1f A from Met84's backbone" % (hit[3] / unit))
+    HR = 0.011
+    best = None
+    near84 = np.where(np.linalg.norm(wv - np.array(tuple(W84)), axis=1) < 3.0 * unit)[0]
+    tips = [(tip, n_s)] + [(Vector(tuple(wv[i])), None) for i in np.random.default_rng(3).choice(near84, min(12, len(near84)), replace=False)]
+    g_pin = np.random.default_rng(4)
+    dirs = [nrm.copy()]
+    for _ in range(40):          # within 35 degrees of the pocket's axis
+        a_, r_ = g_pin.uniform(0, 2 * math.pi), math.radians(35) * math.sqrt(g_pin.uniform())
+        ax = nrm.orthogonal().normalized()
+        dirs.append((Quaternion(nrm, a_) @ (Quaternion(ax, r_) @ nrm)).normalized())
+    for tp, _n in tips:
+        for d_ in dirs:
+            if tree.ray_cast(tp + 0.004 * d_, d_, 1.0)[0] is not None:
+                continue
+            c_needle = min(tree.find_nearest(tp + float(s_) * d_)[3] for s_ in np.linspace(0.03, 1.0, 80)) - 0.0018
+            if c_needle < 0.0007:
+                continue
+            pl = max(0.09, exit_from(tp, d_) + 0.03)          # long enough that the head stands outside the mouth
+            c_head = min(tree.find_nearest(tp + float(s_) * d_)[3] for s_ in np.linspace(pl, 1.0, 60)) - HR
+            if c_head < 0.002:
+                continue
+            score = (-(tp - W84).length, -pl)          # nearest Met84 first, then the shortest pin
+            if best is None or score > best[0]:
+                best = (score, tp, d_, pl, c_needle, c_head)
+    assert best is not None, "no clear way in for the pin"
+    _, tip, d0, PL, cn_, ch_ = best
+    print("4-09 pin: tip %.1f A from Met84's backbone, %.0f degrees off the pocket's axis, needle %.3f" % ((tip - W84).length / unit, math.degrees(d0.angle(nrm)), PL))
+    print("4-09 pin: needle passes %.4f from the body, head %.4f" % (cn_, ch_))
+    pin = empty("hz_pin")
+    pin.rotation_mode = "QUATERNION"
+    pin.rotation_quaternion = Vector((0, 0, 1)).rotation_difference(d0)
+    lathe([(0, 0), (0.0018, 0.008), (0.0018, PL), (0, PL)], steel, "hz_needle", pin, 24)
+    lathe([(HR * math.sin(a_), PL + HR - HR * math.cos(a_)) for a_ in np.linspace(0, math.pi, 17)], red, "hz_pinhead", pin, 32)
+    SINK = 0.005
+
+    # the sieve: a steel rim and a grid of ink wires, 2 cm apart; the holes' centres sit 1 cm off the wires
+    SR, SZ, PITCH = 0.24, 0.15, 0.02
+    sieve = empty("hz_sieve")
+    sieve.location = (C.x, C.y, SZ)
+    rim = tube3d([(SR * math.cos(a_), SR * math.sin(a_), 0.0) for a_ in np.linspace(0, 2 * math.pi, 129)], 0.006, steel, "hz_rim")
+    rim.parent = sieve
+    for k in range(-11, 12):
+        x = k * PITCH
+        h = math.sqrt(SR * SR - x * x)
+        for pts in ([(x, -h, 0.0), (x, h, 0.0)], [(-h, x, 0.0), (h, x, 0.0)]):
+            o = tube3d(pts, 0.0011, ink, "hz_mesh")
+            o.parent = sieve
+    WR = 0.0011
+
+    # nine design cards, flying out of the outer rings and landing on the sieve, three by three, 10 cm apart
+    GRID = [(cx - 0.24 + 0.08 * (i % 7), cy - 0.2375 + 0.095 * (i // 7)) for i in range(42)]
+    outer = sorted([i for i in range(42) if math.hypot(GRID[i][0] - C.x, GRID[i][1] - C.y) > 0.27], key=lambda i: math.atan2(GRID[i][1] - C.y, GRID[i][0] - C.x))
+    spots = [(0.1 * i, 0.1 * j) for j in (1, 0, -1) for i in (-1, 0, 1)]
+    src = []
+    for sx, sy in spots:          # each card from the outer ring nearest its spot's direction
+        a = math.atan2(sy, sx) if (sx or sy) else 2.9
+        k = min((i for i in outer if i not in src), key=lambda i: abs(math.remainder(math.atan2(GRID[i][1] - C.y, GRID[i][0] - C.x) - a, 2 * math.pi)))
+        src.append(k)
+    BAD = [1, 5, 6]
+    CS, CT = 0.035, 0.006          # half size, thickness
+    g_ = np.random.default_rng(21)
+    cards = []
+    for n in range(9):
+        root = empty("hz_card")
+        root.rotation_mode = "XYZ"
+        body = B.extrude([box(-CS, CS, CS, -CS, 0.006)], CT, 0.0015, name="hz_card_body", mat=card_m)
+        body.parent = root
+        z = CT + 0.0008
+        hx, hy, hr = -0.008, 0.012, 0.012
+        ring = [(hx + hr * math.cos(math.radians(30 + 60 * i)), hy + hr * math.sin(math.radians(30 + 60 * i)), z) for i in range(7)]
+        lines = [ring]
+        ends = []
+        for v_ in g_.choice(6, size=int(g_.integers(1, 4)), replace=False):
+            a_ = math.radians(30 + 60 * int(v_))
+            p_ = ring[int(v_)]
+            e_ = (p_[0] + 0.011 * math.cos(a_), p_[1] + 0.011 * math.sin(a_), z)
+            if abs(e_[0]) < CS - 0.004 and -0.01 < e_[1] < CS - 0.004:
+                lines.append([p_, e_])
+                ends.append(e_)
+        for pts in lines:
+            o = tube3d(pts, 0.0013, ink, "hz_sketch")
+            o.parent = root
+        flag = None
+        if n in BAD:          # the group the filter catches: a red bead on one end
+            e_ = ends[0] if ends else ring[0]
+            flag = lathe([(0.0042 * math.sin(a_), -0.0042 * math.cos(a_)) for a_ in np.linspace(0, math.pi, 9)], red, "hz_flag", root, 16)
+            flag.location = (e_[0], e_[1], z + 0.001)
+        strike = tube3d([(-CS + 0.006, -CS + 0.006, z + 0.002), (CS - 0.006, CS - 0.006, z + 0.002)], 0.0024, red, "hz_strike")
+        strike.parent = root
+        strike.data.bevel_factor_mapping_end = "SPLINE"
+        strike.data.bevel_factor_end = 0.0
+        bars = []
+        for j, yy in enumerate((-0.016, -0.026)):
+            o = mesh("hz_bar", [(x_, yy + y_, z + z_) for x_ in (0, 1) for y_ in (-0.003, 0.003) for z_ in (0, 0.0012)],
+                     [(0, 1, 3, 2), (4, 6, 7, 5), (0, 4, 5, 1), (2, 3, 7, 6), (0, 2, 6, 4), (1, 5, 7, 3)], klein, root)
+            bars.append(o)
+        cards.append(dict(root=root, strike=strike, bars=bars, score=g_.uniform(0.5, 0.95, 2), flag=flag))
+    LAND = V["filters"] + 0.7
+    ORDER = [4, 1, 3, 5, 7, 0, 2, 6, 8]          # the middle one first, then the sides, then the corners: no two meet in the air (checked below)
+    t_go = [LAND + 0.1 * ORDER.index(n) for n in range(9)]
+    card_size = lambda z: 0.12 + 0.88 * smooth((z - (SZ + 0.03)) / 0.1)          # a spark until it is above the rim, so it never touches it on the way up
+    FLY = 0.85
+    rest_z = SZ + WR
+
+    def card_path(n, u):
+        g0 = np.array((*GRID[src[n]], 0.04))
+        e_ = np.array((C.x + spots[n][0], C.y + spots[n][1], rest_z))
+        p1, p2 = g0 + (0, 0, 0.6), e_ + (0, 0, 0.32)
+        return (1 - u) ** 3 * g0 + 3 * (1 - u) ** 2 * u * p1 + 3 * (1 - u) * u ** 2 * p2 + u ** 3 * e_
+
+    # checks: no card's flight dips through the rim or the wires before it lands, and no two cards meet in the air
+    low = 9.0
+    for n in range(9):
+        for u in np.linspace(0, 1, 300):
+            p_ = card_path(n, u)
+            if abs(math.hypot(p_[0] - C.x, p_[1] - C.y) - SR) < 0.006 + 0.05 * card_size(p_[2]) + 0.002:          # over the rim, card's corners included
+                low = min(low, -1.0 if SZ - 0.018 < p_[2] < SZ + 0.008 else abs(p_[2] - SZ))
+    gap = 9.0
+    for tt in np.linspace(LAND, t_go[-1] + FLY, 240):
+        on = [n for n in range(9) if tt >= t_go[n]]
+        P_ = {n: card_path(n, smooth(min(1.0, (tt - t_go[n]) / FLY))) for n in on}
+        S_ = {n: (card_size(float(P_[n][2])) if tt < t_go[n] + FLY else 1.0) for n in on}
+        for a in on:
+            for b in on:
+                if a < b:          # centres apart, less both half diagonals: below 0 two cards could touch
+                    gap = min(gap, float(np.linalg.norm(P_[a] - P_[b])) - 0.0495 * (S_[a] + S_[b]))
+    print("4-09 cards: nearest pass to the rim's plane while over it %.3f (want > 0), room between any two cards %.3f (want >= 0)" % (low, gap))
+    STRIKE = [V["toxic"] + 0.1 + 0.4 * k for k in range(3)]          # all nine are down by then
+    assert STRIKE[0] > t_go[-1] + FLY + 0.1
+    crumbs = []
+    for k, n in enumerate(BAD):
+        for hx_ in (-0.03, -0.01, 0.01, 0.03):
+            for hy_ in (-0.03, -0.01, 0.01, 0.03):
+                crumbs.append((n, STRIKE[k] + 0.5 + g_.uniform(0, 0.15), C.x + spots[n][0] + hx_ + 0.0, C.y + spots[n][1] + hy_))
+    # the hole centres are 1 cm off the wires (wires at whole 2 cm steps from the sieve's centre, cards at whole 10 cm steps)
+    cv, cf, _, _ = ring_geo(0.6, 0.4, 8, 6)
+    cme = bpy.data.meshes.new("hz_crumbs")
+    cme.from_pydata(np.zeros((len(crumbs) * len(cv), 3)).tolist(), [], np.concatenate([cf + k * len(cv) for k in range(len(crumbs))]).tolist())
+    cme.materials.append(card_m)
+    crumb_o = bpy.data.objects.new("hz_crumbs", cme)
+    sc.collection.objects.link(crumb_o)
+    CRB = 0.0045
+    assert CRB < PITCH / 2 - WR
+    SCORE = [V["score"] + 0.4 + 0.3 * k for k in range(6)]
+    kept = [n for n in range(9) if n not in BAD]
+
+    # the camera: in to the pocket from the mouth's side, over to the sieve, back to both cells
+    d_cam = (nrm + d0).normalized()
+    az_p = math.atan2(d_cam.x, -d_cam.y)
+    az_p += round((held["az"] - az_p) / (2 * math.pi)) * 2 * math.pi
+    el_p = min(math.radians(82), max(math.radians(32), math.asin(max(-1, min(1, d_cam.z)))))          # the mouth opens upward here: look down into it
+    focus = mid + 0.7 * mouth_s * nrm          # the mouth
+    # far enough back, and aimed a third of the way to the body's middle, that the whole body sits clear of the corner tag and the source line
+    # round 40 degrees from straight down the mouth, aimed past the mouth to the body's middle and back far enough that the whole body sits clear of the corner tag and the
+    # source line, and the screen cell is out of the frame
+    pocket_v = dict(at=tuple(lerp(tuple(focus), tuple(P0), 0.55)), az=az_p + math.radians(40), el=el_p, d=1.6, mm=45.0)
+    start_v = dict(pocket_v, at=tuple(lerp(tuple(focus), tuple(P0), 0.6)), d=2.3)
+    az_s = held["az"] + math.radians(6)
+    # aimed 7 cm nearer than the sieve's centre, so the screen sits high in the frame and the rings stay clear of the source line at the bottom
+    sieve_v = dict(at=(C.x + 0.09 * math.sin(az_s), C.y - 0.09 * math.cos(az_s), SZ - 0.02), az=az_s, el=math.radians(58), d=1.75, mm=45.0)
+    wide = dict(at=((cx + P0.x) / 2, (cy + P0.y) / 2 - 0.05, 0.12), az=held["az"] + math.radians(8), el=math.radians(40), d=2.9, mm=45.0)
+    keys = [(0.0, start_v), (2.2, pocket_v), (V["filters"] - 0.7, dict(pocket_v, d=1.52)), (V["filters"] + 1.4, sieve_v), (V["easy"] + 1.6, dict(sieve_v, d=1.68)),
+            (V["end"] - 0.2, wide)]
+
+    def mix(p, q, x):
+        log = lambda k: math.exp(math.log(p[k]) + (math.log(q[k]) - math.log(p[k])) * x)
+        return dict(at=lerp(p["at"], q["at"], x), az=p["az"] + (q["az"] - p["az"]) * x, el=p["el"] + (q["el"] - p["el"]) * x, d=log("d"), mm=log("mm"))
+
+    def view(t):
+        for (ta, a), (tb, b) in zip(keys, keys[1:]):
+            if t < tb:
+                return mix(a, b, smooth((t - ta) / (tb - ta)))
+        return keys[-1][1]
+    c = sc.camera
+    c.animation_data_clear()
+    c.data.animation_data_clear()
+    last_q[0] = None
+    for f in range(FRAMES):
+        v = view(f / FPS)
+        shoot(c, f, v, v["at"])
+    from bpy_extras.object_utils import world_to_camera_view
+    head = tip + (PL + HR) * d0
+    marks = dict(pocket=tuple(mid), pin_head=tuple(head), sieve=(C.x, C.y, SZ), bad=(C.x + spots[BAD[0]][0], C.y + spots[BAD[0]][1], SZ), good=(C.x + spots[4][0], C.y + spots[4][1], SZ),
+                 rim_left=(C.x - SR, C.y, SZ), rim_right=(C.x + SR, C.y, SZ), rim_top=(C.x, C.y + SR, SZ))
+    for tt in (2.2, 4.8, V["toss"] + 1.0, V["score"] + 1.5, V["end"] - 0.1):
+        sc.frame_set(round(tt * FPS))
+        print("4-09 t %.1f:" % tt, ", ".join("%s %.0f %.0f" % (k, *(lambda q: (q.x * 1920, (1 - q.y) * 1080))(world_to_camera_view(sc, c, Vector(p_)))) for k, p_ in marks.items()))
+
+    def drop(t, at, hh=1.2):
+        x = t - at
+        if x < -0.45:
+            return hh
+        if x < 0:
+            return hh * (x / -0.45) ** 2
+        return 0.006 * abs(math.sin(min(x, 0.3) / 0.3 * math.pi)) * (1 - min(x, 0.3) / 0.3)
+
+    def update(t):
+        t = t - START
+        upd_lp(START + lp_off + t)
+        # the patch, from the centre out, and back to blue at the end
+        grow = smooth((t - 0.6) / 1.8) * (1 - smooth((t - V["end"] + 2.4) / 1.4))
+        R = 0.5 + (RMAX - 0.5) * grow
+        for n_ in reveal:
+            n_.inputs["From Min"].default_value, n_.inputs["From Max"].default_value = R - 1.6, R
+        wire.hide_render = bool(grow <= 0.001)
+        # the pin
+        s_ = 1 - smooth((t - V["hinge"] - 0.4) / 0.7)
+        bump = 0.0015 * math.sin(math.pi * min(1.0, max(0.0, (t - V["hinge"] - 1.1) / 0.25)))
+        pin.location = tip + (-SINK + bump + 0.9 * s_ ** 2) * d0
+        for o in pin.children:
+            o.hide_render = bool(t < V["hinge"] + 0.3)
+        # the sieve comes down
+        hs = drop(t, V["filters"] + 0.4, 1.3)
+        sieve.location = (C.x, C.y, SZ + hs)
+        for o in sieve.children:
+            o.hide_render = bool(hs >= 1.3)
+        # the cards
+        for n, cd in enumerate(cards):
+            u = (t - t_go[n]) / FLY
+            root = cd["root"]
+            if u < 0:
+                root.location, root.scale = (*GRID[src[n]], 0.04), (1e-3,) * 3
+                for o in root.children:
+                    o.hide_render = True
+                continue
+            p_ = card_path(n, smooth(min(1.0, u)))
+            sz = card_size(float(p_[2])) if u < 1 else 1.0
+            land = max(0.0, t - t_go[n] - FLY)
+            if n in BAD:
+                k = BAD.index(n)
+                gone = smooth((t - STRIKE[k] - 0.45) / 0.18)
+                sz *= 1 - gone
+                cd["strike"].data.bevel_factor_end = smooth((t - STRIKE[k]) / 0.3)
+            root.location = (float(p_[0]), float(p_[1]), float(p_[2]) + hs + (0.004 * abs(math.sin(min(land, 0.25) / 0.25 * math.pi)) * (1 - min(land, 0.25) / 0.25) if land > 0 else 0.0))
+            root.rotation_euler = (0, 0, 0.6 * (1 - smooth(min(1.0, u))))
+            root.scale = (max(sz, 1e-3),) * 3
+            for o in root.children:
+                o.hide_render = bool(sz <= 0.002)
+            cd["strike"].hide_render = bool(n not in BAD or cd["strike"].data.bevel_factor_end <= 0 or sz <= 0.002)
+            if n in kept:
+                k = kept.index(n)
+                for j, b_ in enumerate(cd["bars"]):
+                    L_ = 0.05 * cd["score"][j] * smooth((t - SCORE[k] - 0.25 * j) / 0.5)
+                    b_.location = (-0.027, 0, 0)
+                    b_.scale = (max(L_, 1e-4), 1, 1)
+                    b_.hide_render = bool(L_ <= 1e-4 or sz <= 0.002)
+            else:
+                for b_ in cd["bars"]:
+                    b_.hide_render = True
+        # crumbs through the holes, shrinking away before they reach the rings
+        cvv = []
+        for (n, t0, x_, y_) in crumbs:
+            x = t - t0
+            if x < 0:
+                cvv.append(cv * 1e-5 + (x_, y_, rest_z + 0.003))
+                continue
+            zz = rest_z + 0.003 - 0.5 * 1.4 * x * x
+            r_ = CRB * max(0.0, 1 - max(0.0, x - 0.08) / 0.3) * min(1.0, x / 0.06)
+            cvv.append(cv * max(r_, 1e-5) + (x_, y_, zz))
+        cme.vertices.foreach_set("co", np.concatenate(cvv).astype(np.float32).ravel())
+        cme.update()
+        crumb_o.hide_render = bool(t < STRIKE[0] + 0.4 or t > STRIKE[-1] + 1.2)
+        sky(0.2)
+    return update
+
+
 sc, sky = stage()
-update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t, r=shot_r, s=shot_s, n=shot_n, o=shot_o, m=shot_m, j=shot_j, l=shot_l, e=shot_e, d=shot_d, i=shot_i, i2=shot_i2, i3=shot_i3, i4=shot_i4)[SHOT](sc, sky)
+update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t, r=shot_r, s=shot_s, n=shot_n, o=shot_o, m=shot_m, j=shot_j, l=shot_l, e=shot_e, d=shot_d, i=shot_i, i2=shot_i2, i3=shot_i3, i4=shot_i4, lp=shot_lp, hz=shot_hz)[SHOT](sc, sky)
 sc.frame_start, sc.frame_end = 0, FRAMES
 for f in range(FIRST, LAST + 1, STEP):
     sc.frame_set(f)
