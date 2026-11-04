@@ -8,9 +8,9 @@ import W3C from "./w3_count.json";
 
 const FPS = TL.fps, N = TL.n, W = 1920, H = 1080;
 const INK = "#111113", SOFT = "#545458", RED = "#E8190F", DARK = "#9A0E08", KLEIN = "#002FA7", BONE = "#EDEBE4";
-const SERIF = "Instrument Serif", SANS = "Inter Tight", HAND = "Caveat", ZH = "Noto Serif SC";
+const SERIF = "Instrument Serif", SANS = "Inter Tight", HAND = "Caveat", ZH = "FZShuTi W2";
 
-const faces = [new FontFace(SERIF, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Regular.ttf")})`), new FontFace(SERIF, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Italic.ttf")})`, {style: "italic"}), new FontFace(SANS, `url(${staticFile("fusion_s1/fonts/InterTight.ttf")})`, {weight: "100 900"}), new FontFace(HAND, `url(${staticFile("fusion_s1/fonts/Caveat.ttf")})`, {weight: "400 700"}), new FontFace(ZH, `url(${staticFile("fusion_s1/fonts/NotoSerifSC-VF.ttf")})`, {weight: "200 900"})];
+const faces = [new FontFace(SERIF, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Regular.ttf")})`), new FontFace(SERIF, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Italic.ttf")})`, {style: "italic"}), new FontFace(SANS, `url(${staticFile("fusion_s1/fonts/InterTight.ttf")})`, {weight: "100 900"}), new FontFace(HAND, `url(${staticFile("fusion_s1/fonts/Caveat.ttf")})`, {weight: "400 700"}), new FontFace(ZH, `url(${staticFile("fusion_s1/fonts/FZSTK.TTF")})`)];
 const fontHandle = delayRender("fonts");
 Promise.all(faces.map(f => f.load())).then(l => { l.forEach(f => document.fonts.add(f)); continueRender(fontHandle); });
 
@@ -534,40 +534,30 @@ const W2 = ({file = "fusion_s1/w2_td_1.mp4"}) => <Clock.Provider value={useCurre
   </svg>
 </AbsoluteFill></Clock.Provider>;
 
-/** W2 with its rhyming captions (音乐/W2_押韵字幕.md, the director's OK of 11-04 22:00): the picture is shot d on Harder Better Faster Stronger from 5.732 s (riff in; the bass comes in on beat 32, the splat),
- * 123.477 BPM. Each line is 7 Chinese characters over 7 English syllables, one per eighth note from its first beat; the whole line shows faint a little before,
- * each syllable inks in on its own beat. Rhyme words are in italic, coloured where the colour means something (blue sure, red the tail). The director's note of
- * 11-04 22:20: the captions need not sit in one place, they can float. Each line has its own spot, picked from shot d's frames where nothing is (prints never
- * cover the figure), and drifts slowly while it shows: [centre x, centre y] as parts of the frame, then the drift over its time in px. The predicted tag and the
- * source line sit bottom right, the one corner nothing reaches all through the shot (top left is where CDK20 ends up). Beats count from the start of the shot. */
+/** W2 with its captions, version 2 (the director's notes of 11-04 22:30-22:45: captions only where the song is sung, in its rhythm, simple, handwritten).
+ * The song starts at 50.446 s, so the first sung bar (52.39 s) lands on beat 4, the spring off the table. In these 13 bars the voice sings three 2-bar phrases:
+ * beats 4-11 and 36-43 with a two-syllable word on beats 1 and 3 of the bar, beats 20-27 answering on beats 2 and 4 (found by taking the repeating backing out
+ * of the audio, 音乐/W2_押韵字幕.md). Each phrase is four two-syllable words, ours, on the song's pattern: a row of verbs, a row of -er words, then the tail.
+ * A word inks on its beat; a phrase floats where the picture is empty and fades two beats after its last word.
+ * English is Caveat, Chinese is FZShuTi (方正舒体), both hand lettering. Beats count from the start of the shot. */
 const W2_BEAT = 60 / 123.477;
-const W2_LINES = [
-  [4, "跳上半空猜模样", ["Up ", "it ", "springs ", "to ", "guess ", "the ", "form,"], INK, [0.82, 0.52], [22, -34]],
-  [12, "翻来滚去像海浪", ["twist", "ing, ", "turn", "ing, ", "liq", "uid ", "storm."], INK, [0.40, 0.84], [-40, -10]],
-  [25, "越转越慢定成蓝", ["Slow", "ing, ", "set", "tling, ", "sure ", "in ", "blue;"], KLEIN, [0.21, 0.24], [14, 10]],
-  [29, "红尾没底就此完", ["red ", "tail? ", "Not ", "so ", "sure. ", "It's ", "through."], RED, [0.75, 0.27], [30, 16]],
-  [33, "甩飞出去满地洒", ["Flung ", "off, ", "splashed ", "a", "cross ", "the ", "floor,"], RED, [0.70, 0.85], [20, 8]],
-  [37, "一到三零二留下", ["one ", "to ", "three-", "oh-", "two: ", "the ", "core."], KLEIN, [0.31, 0.86], [-16, -8]],
-  [44, "那时没人测过它", ["No ", "one ", "then ", "had ", "seen ", "it ", "yet;"], INK, [0.73, 0.20], [-24, 12]],
-  [48, "押上预测这一把", ["what ", "they ", "had: ", "a ", "well-", "placed ", "bet."], INK, [0.56, 0.85], [24, -12]],
+const W2_PHRASES = [
+  {at: [4, 6, 8, 10], zh: ["猜它", "捏它", "翻它", "转它"], en: ["Guess it,", "squeeze it,", "twist it,", "turn it"], pos: [0.62, 0.78], drift: [20, -16], colour: INK},
+  {at: [21, 23, 25, 27], zh: ["慢了", "稳了", "定了", "蓝了"], en: ["Slower,", "calmer,", "firmer,", "bluer."], pos: [0.24, 0.85], drift: [14, -8], colour: KLEIN},
+  {at: [36, 38, 40, 42], zh: ["没准？", "甩掉！", "留下", "核心"], en: ["Not sure?", "Shake it!", "Keep the", "core."], pos: [0.75, 0.22], drift: [-16, 12], colour: RED},
 ];
-const W2Line = ({t, i}) => {
-  const [b0, zh, en, accent, [cx, cy], [dx, dy]] = W2_LINES[i];
-  const t0 = b0 * W2_BEAT, next = i + 1 < W2_LINES.length ? W2_LINES[i + 1][0] * W2_BEAT : 1e9;
-  const vis = clamp((t - t0 + 0.25) / 0.15) * (1 - clamp((t - next + 0.2) / 0.15));
+const W2Phrase = ({t, i}) => {
+  const {at, zh, en, pos: [cx, cy], drift: [dx, dy], colour} = W2_PHRASES[i];
+  const t0 = at[0] * W2_BEAT, t1 = (at[3] + 2) * W2_BEAT;          // gone two beats after the voice stops
+  const vis = clamp((t - t0 + 0.2) / 0.15) * (1 - clamp((t - t1) / 0.3));
   if (vis <= 0) return null;
-  const ink = k => { const u = (t - t0 - k * W2_BEAT / 2) / 0.07; return {opacity: 0.2 + 0.8 * clamp(u), transform: `translateY(${(1 - out(u)) * 7}px)`, display: "inline-block", whiteSpace: "pre"}; };
-  const last = k => k === 6;
-  const end = Math.min(next, 25.3), u = clamp((t - t0 + 0.25) / (end - t0 + 0.25));
-  const fx = cx * W - 500 + dx * u + 5 * Math.sin(1.1 * t + i), fy = cy * H - 61 + dy * u + 6 * Math.sin(1.4 * t + 2 * i) + (1 - out(vis)) * 14;      // drifts across its time, bobs, rises in as it appears
-  const rot = 0.8 * Math.sin(0.7 * t + i);
-  return <div style={{position: "absolute", left: fx, top: fy, width: 1000, textAlign: "center", opacity: vis, transform: `rotate(${rot}deg)`, textShadow: `0 0 10px ${BONE}, 0 0 4px ${BONE}`}}>
-    <div style={{fontFamily: ZH, fontWeight: 500, fontSize: 50, letterSpacing: 10, color: INK, lineHeight: "62px"}}>
-      {[...zh].map((c, k) => <span key={k} style={{...ink(k), color: last(k) ? accent : INK}}>{c}</span>)}
-    </div>
-    <div style={{fontFamily: SERIF, fontSize: 52, color: INK, lineHeight: "60px"}}>
-      {en.map((w, k) => <span key={k} style={{...ink(k), color: last(k) ? accent : INK, fontStyle: last(k) ? "italic" : "normal"}}>{w}</span>)}
-    </div>
+  const u = clamp((t - t0 + 0.2) / (t1 - t0 + 0.5));
+  const fx = cx * W - 520 + dx * u + 5 * Math.sin(1.1 * t + i), fy = cy * H - 70 + dy * u + 6 * Math.sin(1.4 * t + 2 * i);
+  const ink = k => { const p = out((t - at[k] * W2_BEAT) / 0.08); return {opacity: p, transform: `translateY(${(1 - p) * 10}px) scale(${0.9 + 0.1 * p})`, display: "inline-block", margin: "0 0.22em"}; };
+  const tint = k => k === 3 ? colour : INK;          // the last word carries the colour: blue sure, red the tail
+  return <div style={{position: "absolute", left: fx, top: fy, width: 1040, textAlign: "center", opacity: vis, transform: `rotate(${0.8 * Math.sin(0.7 * t + i) - 1.5}deg)`, textShadow: `0 0 10px ${BONE}, 0 0 4px ${BONE}`}}>
+    <div style={{fontFamily: ZH, fontSize: 62, lineHeight: "74px"}}>{zh.map((w, k) => <span key={k} style={{...ink(k), color: tint(k)}}>{w}</span>)}</div>
+    <div style={{fontFamily: HAND, fontWeight: 600, fontSize: 64, lineHeight: "66px"}}>{en.map((w, k) => <span key={k} style={{...ink(k), color: tint(k)}}>{w}</span>)}</div>
   </div>;
 };
 const W2Lyrics = ({file = "fusion_s1/w2_shake_3.mp4", fps = 30}) => {
@@ -583,7 +573,7 @@ const W2Lyrics = ({file = "fusion_s1/w2_shake_3.mp4", fps = 30}) => {
         <text x={W - 72} y={1056} fontFamily={SANS} fontSize={22} fontWeight={500} fill={SOFT} textAnchor="end">Illustration · motion drawn · structure AlphaFold DB v6 · Ren 2023</text>
       </g>
     </svg>
-    {W2_LINES.map((_, i) => <W2Line key={i} t={t} i={i}/>)}
+    {W2_PHRASES.map((_, i) => <W2Phrase key={i} t={t} i={i}/>)}
   </AbsoluteFill></Clock.Provider>;
 };
 
