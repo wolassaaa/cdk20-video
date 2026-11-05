@@ -807,20 +807,20 @@ const S4D = ({file = "fusion_s1/s4_hz_1.mp4", fps = 30, review = true}) => {
   const [qx, qy, mx, my] = hzAt(t);
   const pocketNotes = 1 - after(t, V.filters - 0.8, 0.3);
   const lead = (at) => Math.min(1, Math.max(0, (t - at) / 0.35));
-  const l1 = lead(V.shape + 2.4), l2 = lead(V.hinge + 1.3);
+  const l1 = lead(V.shape + 2.4), l2 = lead(V.hinge + 0.8);
   const nx = 430, ny = 690, hx = 452, hy = 540;          // the notes sit on the bare table left of the body; the leaders run from each note to its spot
   const ex = mx - 112, ey = my + 8;          // the pen loop's left side
   return <Clock.Provider value={t}><AbsoluteFill style={{background: BONE}}>
     <OffthreadVideo src={staticFile(file)} muted style={{width: W, height: H}}/>
     <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
-      <g opacity={1 - after(t, 1.0, 0.4) + after(t, V.filters + 1.6, 0.4)}><text x={1856} y={92} fontFamily={SANS} fontSize={36} fontWeight={600} fill={INK} textAnchor="end">Objective 1 / Tool: generative design</text></g>
+      <g opacity={after(t, V.filters + 1.6, 0.4) * (1 - after(t, V.easy + 1.6, 0.3)) + after(t, V.end - 0.6, 0.4)}><text x={1856} y={92} fontFamily={SANS} fontSize={36} fontWeight={600} fill={INK} textAnchor="end">Objective 1 / Tool: generative design</text></g>
       <g opacity={pocketNotes}>
         {l1 > 0 && <line x1={nx + 14} y1={ny - 14} x2={nx + 14 + (qx - 60 - nx - 14) * l1} y2={ny - 14 + (qy + 40 - ny + 14) * l1} stroke={DARK} strokeWidth={3} strokeLinecap="round"/>}
         <Note x={nx} y={ny} size={46} at={V.shape + 2.0} anchor="end" rot={-2}>the pocket's shape</Note>
         <PenLoop x={mx + 4} y={my + 4} rx={118} ry={190} at={V.hinge + 0.4}/>
         {l2 > 0 && <line x1={hx + 14} y1={hy - 14} x2={hx + 14 + (ex - hx - 14) * l2} y2={hy - 14 + (ey - hy + 14) * l2} stroke={DARK} strokeWidth={3} strokeLinecap="round"/>}
-        <Note x={hx} y={hy} size={50} at={V.hinge + 1.5} anchor="end" rot={-2}>must grip here</Note>
-        <Ink x={hx} y={hy + 46} size={28} at={V.hinge + 2.3} anchor="end" w={420}>the hinge · Met84</Ink>
+        <Note x={hx} y={hy} size={50} at={V.hinge + 1.0} anchor="end" rot={-2}>must grip here</Note>
+        <Ink x={hx} y={hy + 46} size={28} at={V.hinge + 1.6} anchor="end" w={420}>the hinge · Met84</Ink>
       </g>
       <g opacity={after(t, V.toss + 0.6, 0.3) * (1 - after(t, V.score - 0.2, 0.4))}>
         <Note x={96} y={100} size={44} at={V.toss + 0.6} rot={-1.5}>out: reactive or possibly toxic groups</Note>
@@ -829,10 +829,18 @@ const S4D = ({file = "fusion_s1/s4_hz_1.mp4", fps = 30, review = true}) => {
         <Note x={96} y={100} size={44} at={V.score + 0.4} rot={-1.5}>scored: drug-like? easy to make?</Note>
       </g>
       {review && <text x={64} y={1018} fontFamily={SANS} fontSize={24} fontWeight={500} fill={SOFT}>VO (B): {[...HZ_LINES].reverse().find(([a]) => t >= a)[1]}</text>}
-      <g>
-        <circle cx={W - 72 - tagW - 26} cy={1018 - 10} r={14} fill="none" stroke={INK} strokeWidth={2.5} strokeDasharray="6 5"/>
-        <text x={W - 72} y={1018} fontFamily={SANS} fontSize={28} fontWeight={600} fill={INK} textAnchor="end">AlphaFold DB v6 · predicted</text>
-        <text x={W - 72} y={1056} fontFamily={SANS} fontSize={22} fontWeight={500} fill={SOFT} textAnchor="end">Illustration · pocket and hinge Met84: Ren 2023 · filters: Ivanenkov 2023 · structure AlphaFold DB v6</text>
+      {/* the tag and the source line sit bottom right while CDK20 and the table fill the frame; over the screen the rings reach the bottom, so the source line
+          moves up under the title, on the bare table along the top (CDK20 is out of view there, so its tag goes) */}
+      <g opacity={1 - after(t, V.filters - 0.7, 0.3) + after(t, V.end - 0.5, 0.3)}>
+        <circle cx={W - 72 - tagW - 26} cy={986 - 10} r={14} fill="none" stroke={INK} strokeWidth={2.5} strokeDasharray="6 5"/>
+        <text x={W - 72} y={986} fontFamily={SANS} fontSize={28} fontWeight={600} fill={INK} textAnchor="end">AlphaFold DB v6 · predicted</text>
+        {/* two short lines, so in the closing wide view it stays on the table, clear of the screen's corner */}
+        <text x={W - 72} y={1024} fontFamily={SANS} fontSize={22} fontWeight={500} fill={SOFT} textAnchor="end">Illustration · pocket and hinge Met84: Ren 2023</text>
+        <text x={W - 72} y={1054} fontFamily={SANS} fontSize={22} fontWeight={500} fill={SOFT} textAnchor="end">filters: Ivanenkov 2023 · structure AlphaFold DB v6</text>
+      </g>
+      <g opacity={after(t, V.filters + 1.6, 0.4) * (1 - after(t, V.easy + 1.6, 0.3))}>          {/* gone before the pull-back brings CDK20 up into the top right */}
+        <text x={1856} y={136} fontFamily={SANS} fontSize={22} fontWeight={500} fill={SOFT} textAnchor="end">Illustration · pocket and hinge Met84: Ren 2023</text>
+        <text x={1856} y={166} fontFamily={SANS} fontSize={22} fontWeight={500} fill={SOFT} textAnchor="end">filters: Ivanenkov 2023 · structure AlphaFold DB v6</text>
       </g>
     </svg>
   </AbsoluteFill></Clock.Provider>;

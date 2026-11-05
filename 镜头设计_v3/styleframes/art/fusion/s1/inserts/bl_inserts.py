@@ -5678,8 +5678,9 @@ def shot_hz(sc, sky):
     start_v = dict(pocket_v, at=tuple(lerp(tuple(S84), tuple(P0), 0.6)), az=AZ_R + math.radians(16), el=math.radians(45), d=2.0)
     ring_v = down(dict(pocket_v, at=tuple(lerp(tuple(S84), tuple(P0), 0.1)), d=0.9), 0.06)
     top_v = dict(at=tuple(lerp(tuple(P0), (C.x, C.y, ZR), 0.55)), az=(AZ_R + az_s) / 2, el=math.radians(80), d=1.9, mm=45.0)
-    scr_a = dict(at=(C.x - 0.06 * rgt[0] + 0.15 * bhd[0], C.y - 0.06 * rgt[1] + 0.15 * bhd[1], ZR), az=az_s - math.radians(8), el=math.radians(38), d=0.9, mm=45.0)
-    scr_b = dict(at=(C.x + 0.06 * rgt[0] + 0.15 * bhd[0], C.y + 0.06 * rgt[1] + 0.15 * bhd[1], ZR), az=az_s + math.radians(6), el=math.radians(40), d=0.84, mm=45.0)
+    # aimed well past the screen's middle, so a band of bare table runs along the top of the frame: the notes, the title and the source line sit there, off the rings
+    scr_a = dict(at=(C.x - 0.06 * rgt[0] + 0.22 * bhd[0], C.y - 0.06 * rgt[1] + 0.22 * bhd[1], ZR), az=az_s - math.radians(8), el=math.radians(35), d=0.9, mm=45.0)
+    scr_b = dict(at=(C.x + 0.06 * rgt[0] + 0.22 * bhd[0], C.y + 0.06 * rgt[1] + 0.22 * bhd[1], ZR), az=az_s + math.radians(6), el=math.radians(37), d=0.84, mm=45.0)
     wide = dict(at=((cx + P0.x) / 2, (cy + P0.y) / 2 - 0.05, 0.12), az=held["az"] + math.radians(8), el=math.radians(40), d=2.9, mm=45.0)
     keys = [(0.0, start_v), (2.2, pocket_v), (V["hinge"] + 0.3, ring_v), (V["filters"] - 0.8, dict(ring_v, d=0.88)), (V["filters"] + 0.3, top_v), (V["filters"] + 1.4, scr_a),
             (V["easy"] + 1.6, scr_b), (V["end"] - 0.2, wide)]
