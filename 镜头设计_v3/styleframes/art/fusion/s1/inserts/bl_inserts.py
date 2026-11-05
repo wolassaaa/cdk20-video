@@ -4787,7 +4787,10 @@ def shot_lp(sc, sky):
     lv = Vector((-math.sin(front), math.cos(front), 0.0))         # screen right
     cam_yaw = front + math.pi / 2                                  # turns the face (local -y) to the camera
 
-    def emo_mesh(name, dizzy):
+    tear_m = P.gloss((0.25, 0.55, 1.0), 0.15, 0.6)
+
+    def emo_mesh(name, face):
+        """One head with one face: beam, shock, wince (can't watch), sad or dizzy. The face looks out along local -y."""
         bm = bmesh.new()
 
         def put(kind, M, mi):
@@ -4808,26 +4811,51 @@ def shot_lp(sc, sky):
             M = Matrix((a * sx, b * sy, n * sz)).transposed().to_4x4()
             M.translation = n * at
             return M
+        def dots(pts, r=0.045):
+            for q in pts:
+                put("s", frame(q, 0.99, r, r, r), 1)
+
+        def line(a, b, n):
+            return [tuple(a[i] + (b[i] - a[i]) * u for i in range(3)) for u in np.linspace(0, 1, n)]
         put("s", Matrix.Identity(4), 0)
         for sx_ in (-1, 1):
-            eye = (0.36 * sx_, -0.9, 0.24)
-            if dizzy:
+            ex = 0.36 * sx_
+            eye = (ex, -0.9, 0.24)
+            if face == "dizzy":
                 for sp in (math.pi / 4, -math.pi / 4):
                     put("c", frame(eye, 0.985, 0.36, 0.085, 0.09, sp), 1)
-            else:
-                put("s", frame(eye, 0.975, 0.085, 0.14, 0.06), 1)
-        if dizzy:
+            elif face == "beam":                                         # closed, smiling eyes: an arch
+                dots([(ex + u, -0.9, 0.2 + 0.1 * (1 - (u / 0.14) ** 2)) for u in np.linspace(-0.14, 0.14, 9)])
+            elif face == "shock":                                        # wide eyes, brows up
+                put("s", frame(eye, 0.97, 0.12, 0.18, 0.06), 1)
+                put("c", frame((ex, -0.8, 0.6), 0.99, 0.22, 0.06, 0.08, -0.2 * sx_), 1)
+            elif face == "wince":                                        # squeezed shut: > on the left, < on the right
+                tip = (ex + 0.08 * (-sx_), -0.9, 0.24)
+                dots(line((ex + 0.1 * sx_, -0.9, 0.34), tip, 7) + line(tip, (ex + 0.1 * sx_, -0.9, 0.14), 7))
+            else:                                                        # sad: small eyes, brows up at the middle
+                put("s", frame(eye, 0.975, 0.07, 0.11, 0.06), 1)
+                put("c", frame((ex, -0.84, 0.5), 0.99, 0.22, 0.06, 0.08, -0.4 * sx_), 1)
+        if face == "dizzy":
             put("s", frame((0, -0.93, -0.38), 0.975, 0.14, 0.12, 0.06), 1)          # a small round "o"
+        elif face == "beam":
+            dots([(x, -0.93, -0.3 - 1.6 * (0.1225 - x * x)) for x in np.linspace(-0.35, 0.35, 15)], 0.06)          # a big grin
+        elif face == "shock":
+            put("s", frame((0, -0.93, -0.42), 0.97, 0.13, 0.19, 0.07), 1)           # a tall "O"
+        elif face == "wince":
+            zz = [(x, -0.93, -0.38 + (0.045 if i % 2 else -0.045)) for i, x in enumerate(np.linspace(-0.26, 0.26, 7))]
+            dots([q for a, b in zip(zz, zz[1:]) for q in line(a, b, 5)], 0.035)       # a zigzag
         else:
-            for x in np.linspace(-0.3, 0.3, 9):
-                put("s", frame((x, -0.93, -0.34 - 0.9 * (0.09 - x * x)), 0.99, 0.05, 0.05, 0.05), 1)
+            dots([(x, -0.93, -0.47 + 0.9 * (0.09 - x * x)) for x in np.linspace(-0.27, 0.27, 9)])   # a frown
+            put("s", frame((-0.42, -0.86, 0.0), 0.99, 0.07, 0.13, 0.06), 2)          # a tear under the left eye
         me = bpy.data.meshes.new(name)
         bm.to_mesh(me)
         bm.free()
-        me.materials.append(yel)
-        me.materials.append(ink)
+        for m_ in (yel, ink, tear_m):
+            me.materials.append(m_)
         return me
-    me_happy, me_dizzy = emo_mesh("emo_happy", False), emo_mesh("emo_dizzy", True)
+    FACES = ["beam", "shock", "wince", "sad"]
+    me_face = {k: emo_mesh("emo_" + k, k) for k in FACES}
+    me_dizzy = emo_mesh("emo_dizzy", "dizzy")
 
     def emo_obj(name, me):
         o = bpy.data.objects.new(name, me)
@@ -4883,7 +4911,7 @@ def shot_lp(sc, sky):
         nd["yaw"], nd["ph"] = float(rng_e.uniform(-0.3, 0.3)), float(rng_e.uniform(0, 2 * math.pi))
         nd["obj"] = emo_obj("emo_%d" % nd["g"], me_dizzy)
     root = nodes[0]
-    root_happy = emo_obj("emo_happy", me_happy)
+    root_faces = {k: emo_obj("emo_" + k, me_face[k]) for k in FACES}
     worst = min(room(nd["pos"], R_E[nd["g"]]) for nd in nodes)
     worst_path = min(room(nd["parent"]["pos"] + (nd["pos"] - nd["parent"]["pos"]) * u, R_E[nd["g"]]) for nd in nodes[1:] for u in np.linspace(0, 1, 12))
     sib = min(float(np.hypot(*(a["pos"] - b["pos"]))) - R_E[a["g"]] - R_E[b["g"]] for a in nodes for b in nodes if a is not b and a["g"] == b["g"])
@@ -5161,7 +5189,8 @@ def shot_lp(sc, sky):
         E = root["pos"]
         tg = C + R0 * fv
         dyaw = (math.atan2(tg.x - E[0], -(tg.y - E[1])) - cam_yaw + math.pi) % (2 * math.pi) - math.pi
-        yaw = cam_yaw + 0.6 * dyaw + turn_angle(min(max(t, V["every"]), laps[1][1])) - turn_angle(V["every"])
+        away = smooth((t - V["tweak"] - 0.1) / 0.3) * (1 - smooth((t - V["every"] - 0.1) / 0.4))          # "can't watch": it turns away
+        yaw = cam_yaw + (0.6 - 0.95 * away) * dyaw + turn_angle(min(max(t, laps[1][0]), laps[1][1])) - turn_angle(laps[1][0])          # round once on the second lap
         nod = sum(0.22 * math.sin(math.pi * min(1.0, max(0.0, (t - ts) / 0.35))) for ts in steps)
         t_d, t_f, t_u = laps[0][1], laps[1][1], T_SPLIT[0] - 0.35
         wob = smooth((t - t_d) / 0.6) * (1 - smooth((t - t_f) / 0.2))
@@ -5169,11 +5198,15 @@ def shot_lp(sc, sky):
         fall = (smooth(x_f) - 0.1 * math.sin(math.pi * min(1.0, max(0.0, (t - t_f - 0.4) / 0.3)))) * (1 - smooth((t - t_u) / 0.3))
         roll = 0.22 * wob * math.sin(2 * math.pi * 1.7 * (t - t_d)) + math.radians(88) * fall
         hop = 0.03 * math.sin(math.pi * min(1.0, max(0.0, (t - t_u) / 0.3)))
-        dizzy = t >= t_d
-        for o, on in ((root_happy, not dizzy), (root["obj"], dizzy)):
+        # the faces in turn: beaming while it goes well, shocked when it fails, can't watch the tweak and the next try, sad when it starts costing, then dizzy
+        f_at = [(-1.0, "beam"), (V["fails"] + 0.1, "shock"), (V["tweak"] + 0.1, "wince"), (V["every"] + 0.1, "sad"), (t_d, "dizzy")]
+        cur = [k for a, k in f_at if t >= a][-1]
+        since = t - [a for a, k in f_at if t >= a][-1]
+        pulse = 1 + 0.1 * math.sin(math.pi * min(1.0, since / 0.2)) if since < 0.2 and cur != "beam" else 1.0
+        for o, on in [(root_faces[k], cur == k) for k in FACES] + [(root["obj"], cur == "dizzy")]:
             o.hide_render = bool(not on or h_e >= 1.2 or t >= T_SPLIT[0])
             o.location = (E[0], E[1], Z0 + R_E[0] + h_e + hop)
-            o.scale = (R_E[0],) * 3
+            o.scale = (R_E[0] * pulse,) * 3
             o.rotation_euler = (nod, roll, yaw)
         s_st = smooth((t - t_d) / 0.3) * (1 - smooth((t - T_SPLIT[0] + 0.4) / 0.3))
         orbit.location = (E[0], E[1], Z0 + 2.15 * R_E[0] + hop)
