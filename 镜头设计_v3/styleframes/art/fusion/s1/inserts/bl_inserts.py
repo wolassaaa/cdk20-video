@@ -5331,13 +5331,14 @@ HZ_START = 557.0        # shot lp ends at 550 (09:10), then 4-08 is A on camera 
 
 
 def shot_hz(sc, sky):
-    """4-09 (09:17-09:34, B's voice-over), back on the table after 4-08. "The team gave it the pocket's shape": the camera goes in to CDK20's pocket, the pocket's patch of the
-    surface turns to paper and an ink wireframe grows over it from the middle out (the real AlphaFold DB v6 surface within 10 A of the pocket's centre). "And one rule: every key
-    must grip a spot called the hinge": a red-headed pin goes in along a line checked clear of the body and stops on Met84's backbone (the hinge residue in Ren 2023; in the v6
-    model its backbone lines the pocket, 3.6-5.6 A from the centre). "Its filters are built to toss designs with reactive or possibly toxic groups": a round wire sieve comes down
-    over the screen cell, nine small design cards fly out of the outer rings and land on it; the three with a red group are struck through and crumble, the crumbs falling through
-    the sieve's holes (each one at a hole's centre, so none touches a wire). "And to score how drug-like and easy to make each one is": two bars fill on each card that is left.
-    The designs and the sieve are drawn; the body, the pocket and Met84 are AlphaFold DB v6. Run: blender -b -P bl_inserts.py -- hz <out dir> 0 1019 16 0.5 2"""
+    """4-09 (09:17-09:34, B's voice-over), back on the table after 4-08. Version A (the director's 11-05 pick: no new props, carry on in 4-07's world).
+    "The team gave it the pocket's shape": the camera goes in close to CDK20's pocket, the pocket's patch of the surface turns to paper and an ink wireframe grows over it
+    from the middle out (the real AlphaFold DB v6 surface within 15 A of the pocket's centre). "And one rule: every key must grip a spot called the hinge": a big red circle
+    lights on the body's own surface round Met84 (the hinge residue in Ren 2023; in the v6 model its backbone lines the pocket), painted on, so nothing passes through.
+    "Its filters are built to toss designs with reactive or possibly toxic groups": over at the screen, each of 4-07's 42 small rings sends up a small drawn molecule;
+    the twelve with a red group flash, shrink and sink back into their own ring's hole, and that ring dims red. "And to score how drug-like and easy to make each one is":
+    two bars grow beside each one that is left, one on each half of the line. The molecules and the scores are drawn; the body, the pocket and Met84 are AlphaFold DB v6.
+    Run: blender -b -P bl_inserts.py -- hz <out dir> 0 1019 16 0.5 2"""
     global START
     from mathutils.bvhtree import BVHTree
     upd_lp = shot_lp(sc, sky)
@@ -5456,175 +5457,232 @@ def shot_hz(sc, sky):
     wire.visible_shadow = False
     print("4-09: pocket patch %d faces, wireframe from %d" % (len(polys), int(len(polys) * dec.ratio)))
 
-    # the pin: its tip on the surface nearest Met84's backbone, in along a line that nothing else crosses
+    # the red circle round Met84: painted on the body's own surface, so nothing can pass through it
     hit = tree.find_nearest(W84)
-    tip, n_s = Vector(hit[0]), Vector(hit[1]).normalized()
-    if n_s.dot(nrm) < 0:
-        n_s = -n_s
-    print("4-09: the pin's tip is %.1f A from Met84's backbone" % (hit[3] / unit))
-    HR = 0.011
-    best = None
-    near84 = np.where(np.linalg.norm(wv - np.array(tuple(W84)), axis=1) < 3.0 * unit)[0]
-    tips = [(tip, n_s)] + [(Vector(tuple(wv[i])), None) for i in np.random.default_rng(3).choice(near84, min(12, len(near84)), replace=False)]
-    g_pin = np.random.default_rng(4)
-    dirs = [nrm.copy()]
-    for _ in range(40):          # within 35 degrees of the pocket's axis
-        a_, r_ = g_pin.uniform(0, 2 * math.pi), math.radians(35) * math.sqrt(g_pin.uniform())
-        ax = nrm.orthogonal().normalized()
-        dirs.append((Quaternion(nrm, a_) @ (Quaternion(ax, r_) @ nrm)).normalized())
-    for tp, _n in tips:
-        for d_ in dirs:
-            if tree.ray_cast(tp + 0.004 * d_, d_, 1.0)[0] is not None:
-                continue
-            c_needle = min(tree.find_nearest(tp + float(s_) * d_)[3] for s_ in np.linspace(0.03, 1.0, 80)) - 0.0018
-            if c_needle < 0.0007:
-                continue
-            pl = max(0.09, exit_from(tp, d_) + 0.03)          # long enough that the head stands outside the mouth
-            c_head = min(tree.find_nearest(tp + float(s_) * d_)[3] for s_ in np.linspace(pl, 1.0, 60)) - HR
-            if c_head < 0.002:
-                continue
-            score = (-(tp - W84).length, -pl)          # nearest Met84 first, then the shortest pin
-            if best is None or score > best[0]:
-                best = (score, tp, d_, pl, c_needle, c_head)
-    assert best is not None, "no clear way in for the pin"
-    _, tip, d0, PL, cn_, ch_ = best
-    print("4-09 pin: tip %.1f A from Met84's backbone, %.0f degrees off the pocket's axis, needle %.3f" % ((tip - W84).length / unit, math.degrees(d0.angle(nrm)), PL))
-    print("4-09 pin: needle passes %.4f from the body, head %.4f" % (cn_, ch_))
-    pin = empty("hz_pin")
-    pin.rotation_mode = "QUATERNION"
-    pin.rotation_quaternion = Vector((0, 0, 1)).rotation_difference(d0)
-    lathe([(0, 0), (0.0018, 0.008), (0.0018, PL), (0, PL)], steel, "hz_needle", pin, 24)
-    lathe([(HR * math.sin(a_), PL + HR - HR * math.cos(a_)) for a_ in np.linspace(0, math.pi, 17)], red, "hz_pinhead", pin, 32)
-    SINK = 0.005
+    S84, n84 = Vector(hit[0]), Vector(hit[1]).normalized()
+    if n84.dot(nrm) < 0:
+        n84 = -n84
+    print("4-09: the red circle is centred %.1f A from Met84's backbone" % (hit[3] / unit))
+    d84 = np.linalg.norm(wv - np.array(tuple(S84)), axis=1) / unit
+    core.data.attributes.new("hk", "FLOAT", "POINT")
+    core.data.attributes["hk"].data.foreach_set("value", d84.astype(np.float32))
+    RR, RW = 7.0, 1.1          # the circle's radius and its line's half width, in A
 
-    # the sieve: a steel rim and a grid of ink wires, 2 cm apart; the holes' centres sit 1 cm off the wires
-    SR, SZ, PITCH = 0.24, 0.15, 0.02
-    sieve = empty("hz_sieve")
-    sieve.location = (C.x, C.y, SZ)
-    rim = tube3d([(SR * math.cos(a_), SR * math.sin(a_), 0.0) for a_ in np.linspace(0, 2 * math.pi, 129)], 0.006, steel, "hz_rim")
-    rim.parent = sieve
-    for k in range(-11, 12):
-        x = k * PITCH
-        h = math.sqrt(SR * SR - x * x)
-        for pts in ([(x, -h, 0.0), (x, h, 0.0)], [(-h, x, 0.0), (h, x, 0.0)]):
-            o = tube3d(pts, 0.0011, ink, "hz_mesh")
-            o.parent = sieve
-    WR = 0.0011
+    def node(kind, op=None):
+        n_ = nt.nodes.new(kind)
+        if op:
+            n_.operation = op
+        return n_
+    a84 = node("ShaderNodeAttribute")
+    a84.attribute_name = "hk"
+    dd = node("ShaderNodeMath", "SUBTRACT")
+    nt.links.new(a84.outputs["Fac"], dd.inputs[0])
+    ab_ = node("ShaderNodeMath", "ABSOLUTE")
+    nt.links.new(dd.outputs[0], ab_.inputs[0])
+    band = node("ShaderNodeMapRange")
+    band.clamp = True
+    nt.links.new(ab_.outputs[0], band.inputs["Value"])
+    band.inputs["From Min"].default_value, band.inputs["From Max"].default_value = 0.0, RW
+    band.inputs["To Min"].default_value, band.inputs["To Max"].default_value = 1.0, 0.0
+    fill = node("ShaderNodeMapRange")
+    fill.clamp = True
+    nt.links.new(a84.outputs["Fac"], fill.inputs["Value"])
+    fill.inputs["To Min"].default_value, fill.inputs["To Max"].default_value = 0.35, 0.0
+    both = node("ShaderNodeMath", "MAXIMUM")
+    nt.links.new(band.outputs[0], both.inputs[0])
+    nt.links.new(fill.outputs[0], both.inputs[1])
+    amt = node("ShaderNodeMath", "MULTIPLY")
+    nt.links.new(both.outputs[0], amt.inputs[0])
+    mx2 = node("ShaderNodeMix")
+    mx2.data_type = "RGBA"
+    nt.links.new(mx.outputs[2], mx2.inputs[6])
+    mx2.inputs[7].default_value = (*P.RED[:3], 1)
+    nt.links.new(amt.outputs[0], mx2.inputs[0])
+    nt.links.new(mx2.outputs[2], cb.inputs["Base Color"])
+    for l_ in list(cb.inputs["Emission Color"].links):
+        nt.links.remove(l_)
+    cb.inputs["Emission Color"].default_value = (*P.RED[:3], 1)
+    em = node("ShaderNodeMath", "MULTIPLY")
+    nt.links.new(amt.outputs[0], em.inputs[0])
+    nt.links.new(em.outputs[0], cb.inputs["Emission Strength"])
 
-    # nine design cards, flying out of the outer rings and landing on the sieve, three by three, 10 cm apart
-    GRID = [(cx - 0.24 + 0.08 * (i % 7), cy - 0.2375 + 0.095 * (i // 7)) for i in range(42)]
-    outer = sorted([i for i in range(42) if math.hypot(GRID[i][0] - C.x, GRID[i][1] - C.y) > 0.27], key=lambda i: math.atan2(GRID[i][1] - C.y, GRID[i][0] - C.x))
-    spots = [(0.1 * i, 0.1 * j) for j in (1, 0, -1) for i in (-1, 0, 1)]
-    src = []
-    for sx, sy in spots:          # each card from the outer ring nearest its spot's direction
-        a = math.atan2(sy, sx) if (sx or sy) else 2.9
-        k = min((i for i in outer if i not in src), key=lambda i: abs(math.remainder(math.atan2(GRID[i][1] - C.y, GRID[i][0] - C.x) - a, 2 * math.pi)))
-        src.append(k)
-    BAD = [1, 5, 6]
-    CS, CT = 0.035, 0.006          # half size, thickness
+    # 4-07's 42 rings, where shot lp left them (they keep turning in place)
+    upd_lp(HZ_START + lp_off)
+    cme_ = bpy.data.meshes["lp_comets"]
+    nR = len(cme_.vertices) // 42
+    rco = np.zeros(len(cme_.vertices) * 3)
+    cme_.vertices.foreach_get("co", rco)
+    rco = rco.reshape(42, nR, 3)
+    RC = rco.mean(1)
+    ZR = float(RC[:, 2].mean())
+    rad = np.hypot(rco[..., 0] - RC[:, None, 0], rco[..., 1] - RC[:, None, 1])
+    HOLE, OUTR, RT = float(rad.min()), float(rad.max()), float((rco[..., 2] - RC[:, None, 2]).max())
+    scr = ob["lp_screen"]
+    SCR = max((scr.matrix_world @ Vector(b_)).z for b_ in scr.bound_box)
+    print("4-09 rings: plane %.4f, hole %.4f, outer %.4f, tube %.4f; screen top %.4f" % (ZR, HOLE, OUTR, RT, SCR))
+
+    # the small molecules: a ring of six atoms and one to three side groups, bone white on the dark screen; twelve carry a red group
+    import bmesh
+    bone = P.gloss((0.9, 0.885, 0.84), 0.3, 0.5)
+    hot_m, hnt, hout = gk._mat("hz_hot")
+    hb = hnt.nodes.new("ShaderNodeBsdfPrincipled")
+    hb.inputs["Base Color"].default_value = hb.inputs["Emission Color"].default_value = (*P.RED[:3], 1)
+    hb.inputs["Roughness"].default_value = 0.3
+    hnt.links.new(hb.outputs[0], hout.inputs["Surface"])
     g_ = np.random.default_rng(21)
-    cards = []
-    for n in range(9):
-        root = empty("hz_card")
-        root.rotation_mode = "XYZ"
-        body = B.extrude([box(-CS, CS, CS, -CS, 0.006)], CT, 0.0015, name="hz_card_body", mat=card_m)
-        body.parent = root
-        z = CT + 0.0008
-        hx, hy, hr = -0.008, 0.012, 0.012
-        ring = [(hx + hr * math.cos(math.radians(30 + 60 * i)), hy + hr * math.sin(math.radians(30 + 60 * i)), z) for i in range(7)]
-        lines = [ring]
-        ends = []
-        for v_ in g_.choice(6, size=int(g_.integers(1, 4)), replace=False):
-            a_ = math.radians(30 + 60 * int(v_))
-            p_ = ring[int(v_)]
-            e_ = (p_[0] + 0.011 * math.cos(a_), p_[1] + 0.011 * math.sin(a_), z)
-            if abs(e_[0]) < CS - 0.004 and -0.01 < e_[1] < CS - 0.004:
-                lines.append([p_, e_])
-                ends.append(e_)
-        for pts in lines:
-            o = tube3d(pts, 0.0013, ink, "hz_sketch")
-            o.parent = root
-        flag = None
-        if n in BAD:          # the group the filter catches: a red bead on one end
-            e_ = ends[0] if ends else ring[0]
-            flag = lathe([(0.0042 * math.sin(a_), -0.0042 * math.cos(a_)) for a_ in np.linspace(0, math.pi, 9)], red, "hz_flag", root, 16)
-            flag.location = (e_[0], e_[1], z + 0.001)
-        strike = tube3d([(-CS + 0.006, -CS + 0.006, z + 0.002), (CS - 0.006, CS - 0.006, z + 0.002)], 0.0024, red, "hz_strike")
-        strike.parent = root
-        strike.data.bevel_factor_mapping_end = "SPLINE"
-        strike.data.bevel_factor_end = 0.0
-        bars = []
-        for j, yy in enumerate((-0.016, -0.026)):
-            o = mesh("hz_bar", [(x_, yy + y_, z + z_) for x_ in (0, 1) for y_ in (-0.003, 0.003) for z_ in (0, 0.0012)],
-                     [(0, 1, 3, 2), (4, 6, 7, 5), (0, 4, 5, 1), (2, 3, 7, 6), (0, 2, 6, 4), (1, 5, 7, 3)], klein, root)
-            bars.append(o)
-        cards.append(dict(root=root, strike=strike, bars=bars, score=g_.uniform(0.5, 0.95, 2), flag=flag))
-    LAND = V["filters"] + 0.7
-    ORDER = [4, 1, 3, 5, 7, 0, 2, 6, 8]          # the middle one first, then the sides, then the corners: no two meet in the air (checked below)
-    t_go = [LAND + 0.1 * ORDER.index(n) for n in range(9)]
-    card_size = lambda z: 0.12 + 0.88 * smooth((z - (SZ + 0.03)) / 0.1)          # a spark until it is above the rim, so it never touches it on the way up
-    FLY = 0.85
-    rest_z = SZ + WR
+    BADS = sorted(int(k) for k in g_.choice(42, 12, replace=False))
+    R6, AR, BR, SUB, RED_R = 0.0105, 0.003, 0.0014, 0.0085, 0.004
+    mols = []
+    for k in range(42):
+        if k == 0:          # shot lp's first ring ends on GRID[17], stacked on ring 17: one molecule there, not two
+            mols.append(None)
+            continue
+        bm = bmesh.new()
 
-    def card_path(n, u):
-        g0 = np.array((*GRID[src[n]], 0.04))
-        e_ = np.array((C.x + spots[n][0], C.y + spots[n][1], rest_z))
-        p1, p2 = g0 + (0, 0, 0.6), e_ + (0, 0, 0.32)
-        return (1 - u) ** 3 * g0 + 3 * (1 - u) ** 2 * u * p1 + 3 * (1 - u) * u ** 2 * p2 + u ** 3 * e_
+        def tag(r_, mi):
+            for f_ in {f for v in r_["verts"] for f in v.link_faces}:
+                f_.material_index = mi
+                f_.smooth = True
 
-    # checks: no card's flight dips through the rim or the wires before it lands, and no two cards meet in the air
-    low = 9.0
-    for n in range(9):
-        for u in np.linspace(0, 1, 300):
-            p_ = card_path(n, u)
-            if abs(math.hypot(p_[0] - C.x, p_[1] - C.y) - SR) < 0.006 + 0.05 * card_size(p_[2]) + 0.002:          # over the rim, card's corners included
-                low = min(low, -1.0 if SZ - 0.018 < p_[2] < SZ + 0.008 else abs(p_[2] - SZ))
-    gap = 9.0
-    for tt in np.linspace(LAND, t_go[-1] + FLY, 240):
-        on = [n for n in range(9) if tt >= t_go[n]]
-        P_ = {n: card_path(n, smooth(min(1.0, (tt - t_go[n]) / FLY))) for n in on}
-        S_ = {n: (card_size(float(P_[n][2])) if tt < t_go[n] + FLY else 1.0) for n in on}
-        for a in on:
-            for b in on:
-                if a < b:          # centres apart, less both half diagonals: below 0 two cards could touch
-                    gap = min(gap, float(np.linalg.norm(P_[a] - P_[b])) - 0.0495 * (S_[a] + S_[b]))
-    print("4-09 cards: nearest pass to the rim's plane while over it %.3f (want > 0), room between any two cards %.3f (want >= 0)" % (low, gap))
-    STRIKE = [V["toxic"] + 0.1 + 0.4 * k for k in range(3)]          # all nine are down by then
-    assert STRIKE[0] > t_go[-1] + FLY + 0.1
-    crumbs = []
-    for k, n in enumerate(BAD):
-        for hx_ in (-0.03, -0.01, 0.01, 0.03):
-            for hy_ in (-0.03, -0.01, 0.01, 0.03):
-                crumbs.append((n, STRIKE[k] + 0.5 + g_.uniform(0, 0.15), C.x + spots[n][0] + hx_ + 0.0, C.y + spots[n][1] + hy_))
-    # the hole centres are 1 cm off the wires (wires at whole 2 cm steps from the sieve's centre, cards at whole 10 cm steps)
-    cv, cf, _, _ = ring_geo(0.6, 0.4, 8, 6)
-    cme = bpy.data.meshes.new("hz_crumbs")
-    cme.from_pydata(np.zeros((len(crumbs) * len(cv), 3)).tolist(), [], np.concatenate([cf + k * len(cv) for k in range(len(crumbs))]).tolist())
-    cme.materials.append(card_m)
-    crumb_o = bpy.data.objects.new("hz_crumbs", cme)
-    sc.collection.objects.link(crumb_o)
-    CRB = 0.0045
-    assert CRB < PITCH / 2 - WR
-    SCORE = [V["score"] + 0.4 + 0.3 * k for k in range(6)]
-    kept = [n for n in range(9) if n not in BAD]
+        def ball(c_, r, mi=0):
+            tag(bmesh.ops.create_uvsphere(bm, u_segments=16, v_segments=10, radius=r, matrix=Matrix.Translation(c_)), mi)
 
-    # the camera: in to the pocket from the mouth's side, over to the sieve, back to both cells
-    d_cam = (nrm + d0).normalized()
+        def stick(a_, b_):
+            d_ = b_ - a_
+            M = (Matrix.Translation((a_ + b_) / 2) @ Vector((0, 0, 1)).rotation_difference(d_.normalized()).to_matrix().to_4x4())
+            tag(bmesh.ops.create_cone(bm, cap_ends=True, segments=10, radius1=BR, radius2=BR, depth=d_.length, matrix=M), 0)
+        hexa = [Vector((R6 * math.cos(math.radians(30 + 60 * i)), R6 * math.sin(math.radians(30 + 60 * i)), 0.0)) for i in range(6)]
+        for c_ in hexa:
+            ball(c_, AR)
+        for i in range(6):
+            stick(hexa[i], hexa[(i + 1) % 6])
+        for j, v_ in enumerate(g_.choice(6, int(g_.integers(1, 4)), replace=False)):
+            a_ = hexa[int(v_)]
+            e_ = a_ + a_.normalized() * SUB
+            stick(a_, e_)
+            red_ = k in BADS and j == 0
+            ball(e_, RED_R if red_ else AR, 1 if red_ else 0)
+        me = bpy.data.meshes.new("hz_mol")
+        bm.to_mesh(me)
+        bm.free()
+        me.materials.append(bone)
+        me.materials.append(hot_m)
+        o = bpy.data.objects.new("hz_mol", me)
+        sc.collection.objects.link(o)
+        o.rotation_mode = "QUATERNION"
+        lv_ = np.zeros(len(me.vertices) * 3)
+        me.vertices.foreach_get("co", lv_)
+        lv_ = lv_.reshape(-1, 3)
+        mols.append(dict(obj=o, lv=lv_, ext=float(np.hypot(lv_[:, 0], lv_[:, 1]).max()), ph=float(g_.uniform(0, 2 * math.pi)), w=float(g_.uniform(-0.5, 0.5))))
+    BADS = [k for k in BADS if k != 0]
+    LIVE = list(range(1, 42))
+    kept = [k for k in LIVE if k not in BADS]
+    rank = np.argsort(np.argsort(np.hypot(RC[:, 0] - C.x, RC[:, 1] - C.y)))          # from the middle of the screen out
+    T_POP = [V["filters"] + 0.6 + 0.025 * int(rank[k]) for k in range(42)]
+    T_POP[0] = 99.0
+    T_SINK = {k: V["toxic"] + 0.3 + 0.09 * i for i, k in enumerate(BADS)}
+    T_BAR = [{k: V["score"] + 0.3 + 0.02 * i for i, k in enumerate(kept)}, {k: V["easy"] + 0.1 + 0.02 * i for i, k in enumerate(kept)}]
+    H_MOL, TILT, MS = 0.046, math.radians(35), 1.4          # MS: drawn 1.4 times its first size, so it reads from the camera
+    az_s = held["az"] + math.radians(6)
+    rgt = np.array((math.cos(az_s), math.sin(az_s)))
+    bhd = np.array((-math.sin(az_s), math.cos(az_s)))          # away from the camera, on the table
+    n_face = Vector((-bhd[0] * math.sin(TILT), -bhd[1] * math.sin(TILT), math.cos(TILT)))          # each molecule leans to face the camera
+    q_face = Vector((0, 0, 1)).rotation_difference(n_face)
+
+    def mol_pose(k, t):
+        """Where molecule k is at t: its height over its ring's plane, its scale and its turn in its own plane."""
+        x = (t - T_POP[k]) / 0.45
+        if x <= 0:
+            return None
+        u = smooth(x)
+        s_ = MS * u * (1 + 0.15 * math.sin(math.pi * min(1.0, x)))
+        zo = H_MOL * u + 0.0015 * u * math.sin(2 * math.pi * 0.5 * t + mols[k]["ph"])
+        if k in T_SINK:
+            y = (t - T_SINK[k]) / 0.5
+            if y > 0:
+                s_ *= 1 - smooth(2.0 * y)          # small enough for the ring's hole before it gets there
+                zo = zo * (1 - smooth(y)) - 0.004 * smooth(y)
+        if s_ <= 1e-3:
+            return None
+        return zo, s_, q_face @ Quaternion((0, 0, 1), mols[k]["ph"] + mols[k]["w"] * t)
+
+    # checks: a molecule never touches its ring's tube or the screen on its way up or down; neighbours never meet
+    low, tube = 9.0, 9.0
+    for k in LIVE:
+        lv_ = mols[k]["lv"][::3]
+        t_end = T_SINK[k] + 0.8 if k in T_SINK else T_POP[k] + 1.0
+        for tt in np.arange(T_POP[k], t_end, 1 / FPS):
+            ps = mol_pose(k, tt)
+            if ps is None:
+                continue
+            zo, s_, q = ps
+            R_ = np.array(q.to_matrix())
+            w_ = (lv_ @ R_.T) * s_ + (0, 0, zo)
+            low = min(low, float((ZR + w_[:, 2]).min()) - SCR)
+            r_ = np.hypot(w_[:, 0], w_[:, 1])
+            inband = np.abs(w_[:, 2]) < RT + 0.001
+            if inband.any():
+                tube = min(tube, HOLE - float(r_[inband].max()))
+    ext = max(mols[k]["ext"] for k in LIVE)
+    ext *= MS
+    sp_ = min(float(np.hypot(*(RC[a][:2] - RC[b][:2]))) for a in LIVE for b in LIVE if a < b)
+    print("4-09 molecules: lowest point over the screen %.4f, room to the ring's tube while level with it %.4f, between neighbours %.4f (all want > 0)" % (
+        low, tube, sp_ - 2 * ext * 1.15))
+
+    # two score bars beside each molecule that is left, standing on the screen in the gap to the right of its ring (behind it they looked as if they ran through it)
+    def glow_m(name, col, st):
+        m_, n_, o_ = gk._mat(name)
+        b_ = n_.nodes.new("ShaderNodeBsdfPrincipled")
+        b_.inputs["Base Color"].default_value = b_.inputs["Emission Color"].default_value = (*col, 1)
+        b_.inputs["Emission Strength"].default_value = st
+        b_.inputs["Roughness"].default_value = 0.35
+        n_.links.new(b_.outputs[0], o_.inputs["Surface"])
+        return m_
+    bar_m = [glow_m("hz_bar_a", (0.25, 0.45, 1.0), 1.2), glow_m("hz_bar_b", (0.9, 0.885, 0.84), 0.5)]
+    BW, BD, B_OFF, B_GAP, B_MAX = 0.0024, 0.0024, 0.04, 0.0042, 0.07
+    bars = {}
+    for k in kept:
+        for j in range(2):
+            o = mesh("hz_bar", [(x_, y_, z_) for x_ in (-BW, BW) for y_ in (-BD, BD) for z_ in (0.0, 1.0)],
+                     [(0, 1, 3, 2), (4, 6, 7, 5), (0, 4, 5, 1), (2, 3, 7, 6), (0, 2, 6, 4), (1, 5, 7, 3)], bar_m[j])
+            o.rotation_mode = "XYZ"
+            xy = RC[k][:2] + np.array((B_OFF, (1 - 2 * j) * B_GAP))          # the first in front, the second behind it
+            o.location = (float(xy[0]), float(xy[1]), SCR)
+            bars[(k, j)] = dict(obj=o, score=float(g_.uniform(0.45, 0.95)), xy=xy)
+    room_r, room_m = 9.0, 9.0
+    for (k, j), b_ in bars.items():
+        for cx_, cy_ in [(-BW, -BD), (-BW, BD), (BW, -BD), (BW, BD), (0, -BD), (0, BD), (-BW, 0), (BW, 0)]:
+            q = b_["xy"] + np.array((cx_, cy_))
+            for i in range(42):
+                r_ = float(np.hypot(*(q - RC[i][:2])))
+                room_r = min(room_r, max(r_ - OUTR, HOLE - r_))
+                if i in kept:
+                    room_m = min(room_m, r_ - mols[i]["ext"] * MS * 1.02)          # the bars come after the molecules have settled
+    print("4-09 bars: room to the nearest ring's tube %.4f, to the nearest molecule %.4f (want > 0)" % (room_r, room_m))
+
+    # the camera: in close to the pocket, closer on the red circle, over to the screen, across it, back to both cells
+    d_cam = (nrm + n84).normalized()
     az_p = math.atan2(d_cam.x, -d_cam.y)
     az_p += round((held["az"] - az_p) / (2 * math.pi)) * 2 * math.pi
     el_p = min(math.radians(82), max(math.radians(32), math.asin(max(-1, min(1, d_cam.z)))))          # the mouth opens upward here: look down into it
     focus = mid + 0.7 * mouth_s * nrm          # the mouth
-    # far enough back, and aimed a third of the way to the body's middle, that the whole body sits clear of the corner tag and the source line
-    # round 40 degrees from straight down the mouth, aimed past the mouth to the body's middle and back far enough that the whole body sits clear of the corner tag and the
-    # source line, and the screen cell is out of the frame
-    pocket_v = dict(at=tuple(lerp(tuple(focus), tuple(P0), 0.55)), az=az_p + math.radians(40), el=el_p, d=1.6, mm=45.0)
-    start_v = dict(pocket_v, at=tuple(lerp(tuple(focus), tuple(P0), 0.6)), d=2.3)
-    az_s = held["az"] + math.radians(6)
-    # aimed 7 cm nearer than the sieve's centre, so the screen sits high in the frame and the rings stay clear of the source line at the bottom
-    sieve_v = dict(at=(C.x + 0.09 * math.sin(az_s), C.y - 0.09 * math.cos(az_s), SZ - 0.02), az=az_s, el=math.radians(58), d=1.75, mm=45.0)
+    # Met84 sits deep in the cleft: from the usual side none of the red circle shows. A search over views (printed below) found it best seen from az -121, el 57,
+    # about two thirds of its line in sight. 4-09 comes after a cut (4-08 is on camera), so the shot opens on that side; it leaves up and over the top to the screen.
+    AZ_R = math.radians(-121.0)
+    AZ_R += round((held["az"] - AZ_R) / (2 * math.pi)) * 2 * math.pi
+    def down(v, k):
+        """The view with its aim moved k down the frame, so the scene sits higher in it (the source line at the bottom right stays on bare table)."""
+        up_ = Vector((-math.sin(v["az"]) * math.sin(v["el"]), math.cos(v["az"]) * math.sin(v["el"]), math.cos(v["el"])))
+        return dict(v, at=tuple(Vector(v["at"]) - k * up_))
+    pocket_v = down(dict(at=tuple(lerp(tuple(S84), tuple(P0), 0.3)), az=AZ_R, el=math.radians(57), d=1.15, mm=45.0), 0.05)
+    start_v = dict(pocket_v, at=tuple(lerp(tuple(S84), tuple(P0), 0.6)), az=AZ_R + math.radians(16), el=math.radians(45), d=2.0)
+    ring_v = down(dict(pocket_v, at=tuple(lerp(tuple(S84), tuple(P0), 0.1)), d=0.9), 0.06)
+    top_v = dict(at=tuple(lerp(tuple(P0), (C.x, C.y, ZR), 0.55)), az=(AZ_R + az_s) / 2, el=math.radians(80), d=1.9, mm=45.0)
+    scr_a = dict(at=(C.x - 0.06 * rgt[0] + 0.15 * bhd[0], C.y - 0.06 * rgt[1] + 0.15 * bhd[1], ZR), az=az_s - math.radians(8), el=math.radians(38), d=0.9, mm=45.0)
+    scr_b = dict(at=(C.x + 0.06 * rgt[0] + 0.15 * bhd[0], C.y + 0.06 * rgt[1] + 0.15 * bhd[1], ZR), az=az_s + math.radians(6), el=math.radians(40), d=0.84, mm=45.0)
     wide = dict(at=((cx + P0.x) / 2, (cy + P0.y) / 2 - 0.05, 0.12), az=held["az"] + math.radians(8), el=math.radians(40), d=2.9, mm=45.0)
-    keys = [(0.0, start_v), (2.2, pocket_v), (V["filters"] - 0.7, dict(pocket_v, d=1.52)), (V["filters"] + 1.4, sieve_v), (V["easy"] + 1.6, dict(sieve_v, d=1.68)),
-            (V["end"] - 0.2, wide)]
+    keys = [(0.0, start_v), (2.2, pocket_v), (V["hinge"] + 0.3, ring_v), (V["filters"] - 0.8, dict(ring_v, d=0.88)), (V["filters"] + 0.3, top_v), (V["filters"] + 1.4, scr_a),
+            (V["easy"] + 1.6, scr_b), (V["end"] - 0.2, wide)]
 
     def mix(p, q, x):
         log = lambda k: math.exp(math.log(p[k]) + (math.log(q[k]) - math.log(p[k])) * x)
@@ -5643,87 +5701,115 @@ def shot_hz(sc, sky):
         v = view(f / FPS)
         shoot(c, f, v, v["at"])
     from bpy_extras.object_utils import world_to_camera_view
-    head = tip + (PL + HR) * d0
-    marks = dict(pocket=tuple(mid), pin_head=tuple(head), sieve=(C.x, C.y, SZ), bad=(C.x + spots[BAD[0]][0], C.y + spots[BAD[0]][1], SZ), good=(C.x + spots[4][0], C.y + spots[4][1], SZ),
-                 rim_left=(C.x - SR, C.y, SZ), rim_right=(C.x + SR, C.y, SZ), rim_top=(C.x, C.y + SR, SZ))
-    for tt in (2.2, 4.8, V["toss"] + 1.0, V["score"] + 1.5, V["end"] - 0.1):
+    px_ = lambda p_: (lambda q: (q.x * 1920, (1 - q.y) * 1080, q.z))(world_to_camera_view(sc, c, Vector(tuple(p_))))
+    # how much of the red circle's line the camera sees while it is lit
+    sc.frame_set(round((V["hinge"] + 1.5) * FPS))
+    cam = c.matrix_world.translation
+    on_line = np.where(np.abs(d84 - RR) < 0.6 * RW)[0]
+    nv = np.array([tuple((core.matrix_world.to_3x3() @ core.data.vertices[int(i)].normal).normalized()) for i in on_line])
+    seen = []
+    for i, n_ in zip(on_line, nv):
+        p_ = Vector(tuple(wv[i])) + 0.0008 * Vector(tuple(n_))
+        d_ = cam - p_
+        x_, y_, z_ = px_(p_)
+        if z_ > 0 and 0 <= x_ <= 1920 and 0 <= y_ <= 1080 and Vector(tuple(n_)).dot(d_) > 0 and tree.ray_cast(p_, d_.normalized(), d_.length)[0] is None:
+            seen.append((x_, y_))
+    seen = np.array(seen) if seen else np.zeros((0, 2))
+    print("4-09 red circle: %d of %d points on its line in view and unhidden at t %.1f; on screen x %s, y %s" % (
+        len(seen), len(on_line), V["hinge"] + 1.5, "%.0f-%.0f" % (seen[:, 0].min(), seen[:, 0].max()) if len(seen) else "-",
+        "%.0f-%.0f" % (seen[:, 1].min(), seen[:, 1].max()) if len(seen) else "-"))
+    vis_all = [(i, Vector(tuple(wv[i])), Vector(tuple(n_))) for i, n_ in zip(on_line, nv)]
+    g_s = np.random.default_rng(8)
+    found = []
+    for _ in range(400):
+        a_, r_ = g_s.uniform(0, 2 * math.pi), math.radians(75) * math.sqrt(g_s.uniform())
+        dv = (Quaternion(nrm, a_) @ (Quaternion(nrm.orthogonal().normalized(), r_) @ nrm)).normalized()
+        if dv.z < 0.25:
+            continue
+        eye = S84 + 1.0 * dv
+        n_ok = sum(1 for i, p0, n_ in vis_all if n_.dot(eye - p0) > 0 and tree.ray_cast(p0 + 0.0008 * n_, (eye - p0).normalized(), (eye - p0).length)[0] is None)
+        found.append((n_ok, math.degrees(math.atan2(dv.x, -dv.y)), math.degrees(math.asin(dv.z)), math.degrees(dv.angle(nrm))))
+    found.sort(reverse=True)
+    print("4-09 red circle, best views (seen of %d, az, el, off the mouth's axis):" % len(vis_all), "; ".join("%d %.0f %.0f %.0f" % f_ for f_ in found[:6]),
+          "| the views so far: pocket az %.0f el %.0f" % (math.degrees(pocket_v["az"]), math.degrees(pocket_v["el"])))
+    marks = dict(pocket=tuple(mid), met84=tuple(S84), ring_first=tuple(RC[0]), ring_6=tuple(RC[6]), ring_35=tuple(RC[35]), ring_last=tuple(RC[41]), screen_mid=(C.x, C.y, ZR),
+                 far_edge=(cx, cy + 0.33, SCR), far_left=(cx - 0.415, cy + 0.33, SCR), far_right=(cx + 0.415, cy + 0.33, SCR), near_edge=(cx, cy - 0.33, SCR))
+    for tt in (2.2, V["hinge"] + 1.5, V["toss"] + 1.0, V["score"] + 1.5, V["easy"] + 1.5, V["end"] - 0.1):
         sc.frame_set(round(tt * FPS))
-        print("4-09 t %.1f:" % tt, ", ".join("%s %.0f %.0f" % (k, *(lambda q: (q.x * 1920, (1 - q.y) * 1080))(world_to_camera_view(sc, c, Vector(p_)))) for k, p_ in marks.items()))
-
-    def drop(t, at, hh=1.2):
-        x = t - at
-        if x < -0.45:
-            return hh
-        if x < 0:
-            return hh * (x / -0.45) ** 2
-        return 0.006 * abs(math.sin(min(x, 0.3) / 0.3 * math.pi)) * (1 - min(x, 0.3) / 0.3)
+        print("4-09 t %.1f:" % tt, ", ".join("%s %.0f %.0f" % (k, *px_(p_)[:2]) for k, p_ in marks.items()))
+    # for the overlay: where the pocket and Met84 sit on screen, every 0.1 s while they are in view
+    track = []
+    for f in range(0, round((V["filters"] + 0.2) * FPS) + 1, 6):
+        sc.frame_set(f)
+        track.append([round(f / FPS, 1), *[round(v_) for v_ in px_(mid)[:2]], *[round(v_) for v_ in px_(S84)[:2]]])
+    print("4-09 TRACK", json.dumps(track, separators=(",", ":")))
+    RED3 = np.array(P.RED[:3])
+    co0 = np.zeros(len(cme_.vertices) * 3, np.float32)
 
     def update(t):
         t = t - START
         upd_lp(START + lp_off + t)
+        cme_.vertices.foreach_get("co", co0)          # shot lp's first ring sits on ring 17; folded to a point here, so the two never flicker through each other
+        c3 = co0.reshape(42, nR, 3)
+        c3[0] = RC[17]
+        cme_.vertices.foreach_set("co", co0)
+        cme_.update()
         # the patch, from the centre out, and back to blue at the end
         grow = smooth((t - 0.6) / 1.8) * (1 - smooth((t - V["end"] + 2.4) / 1.4))
         R = 0.5 + (RMAX - 0.5) * grow
         for n_ in reveal:
             n_.inputs["From Min"].default_value, n_.inputs["From Max"].default_value = R - 1.6, R
         wire.hide_render = bool(grow <= 0.001)
-        # the pin
-        s_ = 1 - smooth((t - V["hinge"] - 0.4) / 0.7)
-        bump = 0.0015 * math.sin(math.pi * min(1.0, max(0.0, (t - V["hinge"] - 1.1) / 0.25)))
-        pin.location = tip + (-SINK + bump + 0.9 * s_ ** 2) * d0
-        for o in pin.children:
-            o.hide_render = bool(t < V["hinge"] + 0.3)
-        # the sieve comes down
-        hs = drop(t, V["filters"] + 0.4, 1.3)
-        sieve.location = (C.x, C.y, SZ + hs)
-        for o in sieve.children:
-            o.hide_render = bool(hs >= 1.3)
-        # the cards
-        for n, cd in enumerate(cards):
-            u = (t - t_go[n]) / FLY
-            root = cd["root"]
-            if u < 0:
-                root.location, root.scale = (*GRID[src[n]], 0.04), (1e-3,) * 3
-                for o in root.children:
-                    o.hide_render = True
+        # the red circle: opens out from Met84, pulses twice, stays lit until the camera leaves
+        x = (t - V["hinge"] - 0.2) / 0.5
+        on = smooth(x) * (1 - smooth((t - V["filters"] - 0.4) / 0.6))
+        Rc = RR * (smooth(x) + 0.08 * math.sin(math.pi * min(1.0, max(0.0, x))))
+        dd.inputs[1].default_value = Rc
+        fill.inputs["From Min"].default_value, fill.inputs["From Max"].default_value = Rc - 0.6, Rc
+        amt.inputs[1].default_value = on
+        pul = 1.0 + sum(0.9 * math.sin(math.pi * (t - tp) / 0.35) for tp in (V["hinge"] + 1.0, V["hinge"] + 1.6) if 0 <= t - tp < 0.35)
+        em.inputs[1].default_value = 2.5 * pul
+        # the molecules
+        for k, md in enumerate(mols):
+            if md is None:
                 continue
-            p_ = card_path(n, smooth(min(1.0, u)))
-            sz = card_size(float(p_[2])) if u < 1 else 1.0
-            land = max(0.0, t - t_go[n] - FLY)
-            if n in BAD:
-                k = BAD.index(n)
-                gone = smooth((t - STRIKE[k] - 0.45) / 0.18)
-                sz *= 1 - gone
-                cd["strike"].data.bevel_factor_end = smooth((t - STRIKE[k]) / 0.3)
-            root.location = (float(p_[0]), float(p_[1]), float(p_[2]) + hs + (0.004 * abs(math.sin(min(land, 0.25) / 0.25 * math.pi)) * (1 - min(land, 0.25) / 0.25) if land > 0 else 0.0))
-            root.rotation_euler = (0, 0, 0.6 * (1 - smooth(min(1.0, u))))
-            root.scale = (max(sz, 1e-3),) * 3
-            for o in root.children:
-                o.hide_render = bool(sz <= 0.002)
-            cd["strike"].hide_render = bool(n not in BAD or cd["strike"].data.bevel_factor_end <= 0 or sz <= 0.002)
-            if n in kept:
-                k = kept.index(n)
-                for j, b_ in enumerate(cd["bars"]):
-                    L_ = 0.05 * cd["score"][j] * smooth((t - SCORE[k] - 0.25 * j) / 0.5)
-                    b_.location = (-0.027, 0, 0)
-                    b_.scale = (max(L_, 1e-4), 1, 1)
-                    b_.hide_render = bool(L_ <= 1e-4 or sz <= 0.002)
-            else:
-                for b_ in cd["bars"]:
-                    b_.hide_render = True
-        # crumbs through the holes, shrinking away before they reach the rings
-        cvv = []
-        for (n, t0, x_, y_) in crumbs:
-            x = t - t0
-            if x < 0:
-                cvv.append(cv * 1e-5 + (x_, y_, rest_z + 0.003))
+            ps = mol_pose(k, t)
+            o = md["obj"]
+            o.hide_render = ps is None
+            if ps is None:
+                o.location, o.scale = (float(RC[k][0]), float(RC[k][1]), ZR), (1e-3,) * 3
                 continue
-            zz = rest_z + 0.003 - 0.5 * 1.4 * x * x
-            r_ = CRB * max(0.0, 1 - max(0.0, x - 0.08) / 0.3) * min(1.0, x / 0.06)
-            cvv.append(cv * max(r_, 1e-5) + (x_, y_, zz))
-        cme.vertices.foreach_set("co", np.concatenate(cvv).astype(np.float32).ravel())
-        cme.update()
-        crumb_o.hide_render = bool(t < STRIKE[0] + 0.4 or t > STRIKE[-1] + 1.2)
+            zo, s_, q = ps
+            o.location = (float(RC[k][0]), float(RC[k][1]), ZR + zo)
+            o.scale = (s_,) * 3
+            o.rotation_quaternion = q
+        # the red groups light on "reactive or possibly toxic", blinking twice
+        xb = t - V["toss"] - 0.6
+        hb.inputs["Emission Strength"].default_value = 0.4 + (5.0 * max(0.0, math.sin(2 * math.pi * 1.6 * xb)) if 0 <= xb < 1.25 else 0.0) + (2.0 if xb >= 1.25 else 0.0)
+        # the rings: a flash as each molecule comes up, red and dim once its molecule has sunk back
+        if t >= T_POP[0] - 0.05:
+            col = np.zeros(len(cme_.vertices) * 4, np.float32)
+            cme_.attributes["col"].data.foreach_get("color", col)
+            col = col.reshape(42, nR, 4)
+            gl = np.zeros(len(cme_.vertices), np.float32)
+            cme_.attributes["glow"].data.foreach_get("value", gl)
+            gl = gl.reshape(42, nR)
+            for k in range(42):
+                xp = (t - T_POP[k]) / 0.35
+                if 0 <= xp < 1:
+                    gl[k] *= 1 + 1.5 * (1 - xp)
+                if k in T_SINK:
+                    rd = smooth((t - T_SINK[k] - 0.15) / 0.4)
+                    col[k, :, :3] = col[k, :, :3] * (1 - rd) + RED3 * rd
+                    gl[k] *= 1 - 0.55 * rd
+            cme_.attributes["col"].data.foreach_set("color", col.ravel())
+            cme_.attributes["glow"].data.foreach_set("value", gl.ravel())
+            cme_.update()
+        # the score bars
+        for (k, j), b_ in bars.items():
+            h = B_MAX * b_["score"] * smooth((t - T_BAR[j][k]) / 0.5)
+            b_["obj"].scale = (1.0, 1.0, max(h, 1e-4))
+            b_["obj"].hide_render = bool(h <= 1e-4)
         sky(0.2)
     return update
 

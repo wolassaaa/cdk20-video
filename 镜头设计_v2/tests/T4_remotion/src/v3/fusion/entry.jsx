@@ -774,36 +774,59 @@ const S4C = ({file = "fusion_s1/s4_lp_1.mp4", fps = 30, review = true}) => {
   </AbsoluteFill></Clock.Provider>;
 };
 
-/** 4-09 (09:17-09:34, B's voice-over), over shot hz. Times are on the 4-09 clock (HZ_VO in bl_inserts.py). The pocket's patch gets a pen note, the pin a leader line to
- * "must grip here" and the hinge's name, the sieve a note for what it tosses and then what it scores. Spots are the screen points shot hz prints. Sources: Ren 2023 (pocket-based
- * generation, hinge Met84), Ivanenkov 2023 (medicinal-chemistry filters, drug-likeness, synthetic accessibility); the cards and the sieve are drawn. */
+/** 4-09 (09:17-09:34, B's voice-over), over shot hz, version A (the director's 11-05 pick). Times are on the 4-09 clock (HZ_VO in bl_inserts.py). The pocket's patch gets a
+ * pen note with a leader; Met84's red patch on the body gets a red pen circle (from the back of the cleft it shows as a red band, so the pen makes the circle), a leader to
+ * "must grip here" and the hinge's name; over the screen, a note for what is tossed and then for what is scored. HZ_TRACK is what shot hz prints: t, pocket x y, Met84 x y.
+ * Sources: Ren 2023 (pocket-based generation, hinge Met84), Ivanenkov 2023 (medicinal-chemistry filters, drug-likeness, synthetic accessibility); the molecules and scores are drawn. */
 const HZ = {shape: 0.0, rule: 2.6, hinge: 3.2, filters: 6.2, toss: 7.4, toxic: 8.6, score: 10.6, easy: 12.4, end: 17.0};
 const HZ_LINES = [[0, "The team gave it the pocket's shape"], [2.6, "and one rule: every key must grip a spot called the hinge."],
   [6.2, "Its filters are built to toss designs with reactive or possibly toxic groups,"], [10.6, "and to score how drug-like and easy to make each one is."]];
-const HZ_SPOT = {patch: [800, 380], pin: [950, 417]};          // printed by shot hz at 2.2 and 4.8 s (pin head); the patch note ends on the table left of it
+const HZ_TRACK = [[0.0,902,593,900,594],[0.5,904,589,902,590],[1.0,913,567,907,566],[1.5,923,523,913,520],[2.0,927,495,915,490],[2.5,929,488,916,483],[2.8,939,461,924,457],[3.0,947,436,931,432],[3.2,955,416,938,412],[3.5,958,407,941,403],[5.4,958,403,940,400],[5.5,951,408,934,404],[5.6,910,434,896,428],[5.7,819,476,812,467],[5.8,689,505,691,492],[6.0,468,412,484,399],[6.2,439,229,459,221],[6.4,467,146,487,140]];
+const hzAt = (t) => {          // the pocket and Met84 on screen at t, read off HZ_TRACK
+  const i = Math.max(0, HZ_TRACK.findIndex(r => r[0] > t) - 1), a = HZ_TRACK[i], b = HZ_TRACK[Math.min(i + 1, HZ_TRACK.length - 1)];
+  const u = b[0] > a[0] ? Math.min(1, Math.max(0, (t - a[0]) / (b[0] - a[0]))) : 0;
+  return a.slice(1).map((v, k) => v + (b[k + 1] - v) * u);
+};
+/** A red pen loop drawn round a spot: a slightly uneven ellipse that runs a little past where it started, as a hand would. */
+const PenLoop = ({x, y, rx, ry, at, dur = 0.6, rot = -8, fill = RED}) => {
+  const t = useT(), p = smooth((t - at) / dur);
+  if (p <= 0) return null;
+  const pts = [];
+  for (let i = 0; i <= 64; i++) {
+    const a = -Math.PI * 0.6 + i / 64 * Math.PI * 2.25, w = 1 + 0.05 * Math.sin(3 * a + 0.7) + 0.04 * i / 64;
+    pts.push([x + rx * w * Math.cos(a), y + ry * w * Math.sin(a)]);
+  }
+  const L = pts.slice(1).reduce((s, q, i) => s + Math.hypot(q[0] - pts[i][0], q[1] - pts[i][1]), 0);
+  return <polyline points={pts.map(q => q.join(",")).join(" ")} fill="none" stroke={fill} strokeWidth={6} strokeLinecap="round" strokeLinejoin="round"
+    strokeDasharray={`${L * p} ${L}`} transform={`rotate(${rot} ${x} ${y})`}/>;
+};
 const S4D = ({file = "fusion_s1/s4_hz_1.mp4", fps = 30, review = true}) => {
   const t = useCurrentFrame() / fps, V = HZ;
   ruler.font = `600 28px "${SANS}"`;
   const tagW = ruler.measureText("AlphaFold DB v6 · predicted").width;
-  const [px, py] = HZ_SPOT.pin, [ax, ay] = HZ_SPOT.patch;
-  const pocketNotes = 1 - after(t, V.filters - 0.6, 0.4);
-  const lead = Math.min(1, Math.max(0, (t - V.hinge - 1.3) / 0.35));
-  const lx = 680, ly = 500;          // on the table left of the body; the leader line runs from the note's end to the pin's head
+  const [qx, qy, mx, my] = hzAt(t);
+  const pocketNotes = 1 - after(t, V.filters - 0.8, 0.3);
+  const lead = (at) => Math.min(1, Math.max(0, (t - at) / 0.35));
+  const l1 = lead(V.shape + 2.4), l2 = lead(V.hinge + 1.3);
+  const nx = 430, ny = 690, hx = 452, hy = 540;          // the notes sit on the bare table left of the body; the leaders run from each note to its spot
+  const ex = mx - 112, ey = my + 8;          // the pen loop's left side
   return <Clock.Provider value={t}><AbsoluteFill style={{background: BONE}}>
     <OffthreadVideo src={staticFile(file)} muted style={{width: W, height: H}}/>
     <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
-      <g opacity={1 - after(t, V.easy + 1.8, 0.4) + after(t, V.end - 0.6, 0.4)}><text x={1856} y={92} fontFamily={SANS} fontSize={36} fontWeight={600} fill={INK} textAnchor="end">Objective 1 / Tool: generative design</text></g>
+      <g opacity={1 - after(t, 1.0, 0.4) + after(t, V.filters + 1.6, 0.4)}><text x={1856} y={92} fontFamily={SANS} fontSize={36} fontWeight={600} fill={INK} textAnchor="end">Objective 1 / Tool: generative design</text></g>
       <g opacity={pocketNotes}>
-        <Note x={ax} y={ay} size={46} at={V.shape + 1.2} anchor="end" rot={-2}>{"the pocket's shape →"}</Note>
-        {lead > 0 && <line x1={lx + 16} y1={ly - 12} x2={lx + 16 + (px - 20 - lx - 16) * lead} y2={ly - 12 + (py + 4 - ly + 12) * lead} stroke={DARK} strokeWidth={3} strokeLinecap="round"/>}
-        <Note x={lx} y={ly} size={50} at={V.hinge + 1.5} anchor="end" rot={-2}>must grip here</Note>
-        <Ink x={lx} y={ly + 46} size={28} at={V.hinge + 2.3} anchor="end" w={420}>the hinge · Met84</Ink>
+        {l1 > 0 && <line x1={nx + 14} y1={ny - 14} x2={nx + 14 + (qx - 60 - nx - 14) * l1} y2={ny - 14 + (qy + 40 - ny + 14) * l1} stroke={DARK} strokeWidth={3} strokeLinecap="round"/>}
+        <Note x={nx} y={ny} size={46} at={V.shape + 2.0} anchor="end" rot={-2}>the pocket's shape</Note>
+        <PenLoop x={mx + 4} y={my + 4} rx={118} ry={190} at={V.hinge + 0.4}/>
+        {l2 > 0 && <line x1={hx + 14} y1={hy - 14} x2={hx + 14 + (ex - hx - 14) * l2} y2={hy - 14 + (ey - hy + 14) * l2} stroke={DARK} strokeWidth={3} strokeLinecap="round"/>}
+        <Note x={hx} y={hy} size={50} at={V.hinge + 1.5} anchor="end" rot={-2}>must grip here</Note>
+        <Ink x={hx} y={hy + 46} size={28} at={V.hinge + 2.3} anchor="end" w={420}>the hinge · Met84</Ink>
       </g>
       <g opacity={after(t, V.toss + 0.6, 0.3) * (1 - after(t, V.score - 0.2, 0.4))}>
-        <Note x={96} y={150} size={46} at={V.toss + 0.6} rot={-1.5}>out: reactive or possibly toxic groups</Note>
+        <Note x={96} y={100} size={44} at={V.toss + 0.6} rot={-1.5}>out: reactive or possibly toxic groups</Note>
       </g>
       <g opacity={1 - after(t, V.end - 2.2, 0.5)}>
-        <Note x={96} y={150} size={46} at={V.score + 0.4} rot={-1.5}>scored: drug-like? easy to make?</Note>
+        <Note x={96} y={100} size={44} at={V.score + 0.4} rot={-1.5}>scored: drug-like? easy to make?</Note>
       </g>
       {review && <text x={64} y={1018} fontFamily={SANS} fontSize={24} fontWeight={500} fill={SOFT}>VO (B): {[...HZ_LINES].reverse().find(([a]) => t >= a)[1]}</text>}
       <g>
