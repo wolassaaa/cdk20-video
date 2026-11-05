@@ -897,8 +897,8 @@ const S4K = ({file = "fusion_s1/s4_hk_1.mp4", fps = 30, review = true}) => {
         <Pen from={[hx - 10, hy + 10]} to={[dot[0] + 14, dot[1] - 12]} at={V.hinge + 0.5} fill={BLUE}/>
         <Note x={hx} y={hy - 66} size={44} at={3.9} dur={0.7} rot={-2}>every key must grip it</Note>
       </g>
-      <g opacity={win(V.filters, V.toss + 0.4)}>
-        <Note x={1180} y={120} size={46} at={V.filters - 0.1} dur={0.6} rot={-1.5}>keys the AI designs</Note>
+      <g opacity={win(V.filters - 0.5, V.toss + 0.4)}>
+        <Note x={1110} y={120} size={46} at={V.filters - 0.45} dur={0.6} rot={-1.5}>the AI makes a key in each lit ring</Note>
       </g>
       <g opacity={win(V.toss, 9.45)}>          {/* gone before the camera leaves the gate at 9.6, or the line runs off the left edge */}
         <Note x={gx} y={gy} size={44} at={7.85} dur={0.8} rot={-1.5}>red group: reactive or possibly toxic</Note>
@@ -936,7 +936,7 @@ const S4K = ({file = "fusion_s1/s4_hk_1.mp4", fps = 30, review = true}) => {
     </svg>
   </AbsoluteFill></Clock.Provider>;
 };
-const HK_SRC_LOW = (t) => after(t, HZ.filters - 0.4, 0.3);          // top right while CDK20 and then the plate and the screen's rings fill the bottom; bottom right once over the belt
+const HK_SRC_LOW = (t) => after(t, HZ.filters - 0.75, 0.3);          // top right while CDK20 and then the plate and the screen's rings fill the bottom; bottom right once over the belt
 
 /** S3 test boards: the beats that have to read in five seconds. Numbers are Feng 2011's; the grid's cells are drawn, so its source line says Illustration. */
 const Tally = () => <g transform="translate(0 110)">

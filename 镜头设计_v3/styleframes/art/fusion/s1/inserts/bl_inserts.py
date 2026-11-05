@@ -6117,7 +6117,7 @@ def shot_hk(sc, sky):
 
     # the tubes behind each key that is left
     glass = B.clear_glass()
-    fill_m = [P.gloss(ink_c, 0.3, 0.6), P.gloss((0.3, 0.29, 0.27), 0.3, 0.6)]          # drug-like dark, easy to make lighter, so the two tubes of a pair tell apart
+    fill_m = [P.gloss(ink_c, 0.3, 0.6), P.gloss((0.55, 0.54, 0.5), 0.3, 0.6)]          # drug-like dark, easy to make light grey (blind read 5 still could not tell 0.3 grey from ink)
     TR, TUH = 0.0075, 0.1
     t_y = by + BWD / 2 + 0.03
     T_STOP = 10.3
@@ -6155,6 +6155,44 @@ def shot_hk(sc, sky):
     Z_HOV = [ZR + 0.05 + 0.014 * (i % 2) for i in range(NK)]
     T_POP = [3.35] + [V["filters"] - 0.3 + 0.04 * n for n in range(NK - 1)]
     T_HOP = 0.55
+    # blind read 4 could not see how a ring makes a key: as each key comes up, its ring flashes a halo and the key itself glows the screen's blue, then cools to bone.
+    # Both run on the object colour (Object Info), since the keys share one material and the rings are one mesh.
+    st_n = steel.node_tree.nodes
+    st_b = next(n for n in st_n if n.type == "BSDF_PRINCIPLED")
+    oi = st_n.new("ShaderNodeObjectInfo")
+    sp = st_n.new("ShaderNodeSeparateColor")
+    mu = st_n.new("ShaderNodeMath")
+    mu.operation = "MULTIPLY"
+    mu.inputs[1].default_value = 3.0
+    steel.node_tree.links.new(oi.outputs["Color"], sp.inputs[0])
+    steel.node_tree.links.new(sp.outputs[0], mu.inputs[0])
+    steel.node_tree.links.new(mu.outputs[0], st_b.inputs["Emission Strength"])
+    st_b.inputs["Emission Color"].default_value = (0.15, 0.3, 1.0, 1)
+    for kd in keys:
+        for o in kd["obj"].children:
+            o.color = (0, 0, 0, 1)
+    ping_m, ping_n, ping_o = gk._mat("hk_ping")
+    p_em = ping_n.nodes.new("ShaderNodeEmission")
+    p_em.inputs["Color"].default_value = (0.55, 0.7, 1.0, 1)
+    p_em.inputs["Strength"].default_value = 4.0
+    p_tr = ping_n.nodes.new("ShaderNodeBsdfTransparent")
+    p_mx = ping_n.nodes.new("ShaderNodeMixShader")
+    p_oi = ping_n.nodes.new("ShaderNodeObjectInfo")
+    p_sp = ping_n.nodes.new("ShaderNodeSeparateColor")
+    ping_n.links.new(p_oi.outputs["Color"], p_sp.inputs[0])
+    ping_n.links.new(p_sp.outputs[0], p_mx.inputs[0])
+    ping_n.links.new(p_tr.outputs[0], p_mx.inputs[1])
+    ping_n.links.new(p_em.outputs[0], p_mx.inputs[2])
+    ping_n.links.new(p_mx.outputs[0], ping_o.inputs["Surface"])
+    rm_, rt_ = (HOLE + OUTR) / 2, (OUTR - HOLE) / 2 * 1.3          # a halo just round the ring's own tube
+    halo_pf = [(rm_ + rt_ * math.cos(2 * math.pi * j / 16), rt_ * math.sin(2 * math.pi * j / 16)) for j in range(17)]
+    pings = []
+    for i in range(NK):
+        o = lathe(halo_pf, ping_m, "hk_ping%d" % i, None, 64)
+        o.location = (float(RC[RING[i]][0]), float(RC[RING[i]][1]), float(RC[RING[i]][2]))
+        o.color = (0, 0, 0, 1)
+        o.hide_render = True
+        pings.append(o)
     q_belt = Quaternion((0, 0, 1), math.pi / 2)
     rest_z = BH + KH + 0.0003
     land = lambda i: Vector((XS, by, rest_z))
@@ -6418,6 +6456,15 @@ def shot_hk(sc, sky):
                 continue
             loc, q, s_ = ps
             e.location, e.rotation_quaternion, e.scale = loc, q, (KS * s_,) * 3
+            g_ = 1.0 - smooth((t - T_POP[i] - 0.35) / 0.7)          # made in the ring: glowing as it comes up, cool by the time it hovers
+            for o in e.children:
+                o.color = (g_, 0, 0, 1)
+        for i, o in enumerate(pings):
+            x = (t - T_POP[i] + 0.12) / 0.6
+            o.hide_render = not (0 <= x < 1)
+            if 0 <= x < 1:
+                o.color = (math.sin(math.pi * min(1.0, x * 1.6)) if x < 0.3125 else 1.0 - smooth((x - 0.3125) / 0.6875), 0, 0, 1)
+                o.scale = (1 + 0.15 * x, 1 + 0.15 * x, 1.0)
         # the belt runs while keys are on it
         travel = VB * (min(max(t, TL[0]), T_STOP) - TL[0])
         mp.inputs["Location"].default_value[0] = -travel
