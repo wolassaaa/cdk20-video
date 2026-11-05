@@ -4976,6 +4976,26 @@ def shot_lp(sc, sky):
     sp_from = g_.integers(0, 42, NSP)
     sp_t = V["invent"] + 0.5 + np.sort(g_.uniform(0, 6.0, NSP))
     sp_good = g_.uniform(0, 1, NSP) < 0.3          # how it scored: a few blue, most red
+    # the director's 11-05 note: a spark that scores well makes CDK20 shake as it reaches the pocket. A twist about the body's upright axis through its middle (so it can
+    # never dip into the table), with a small hop; 0.35 s each, back at rest after the last, so shot hz starts from the same body.
+    hits = [float(sp_t[k]) + 0.9 for k in range(NSP) if sp_good[k]]
+    core_rest = core.matrix_world.copy()
+    piv = Matrix.Translation(P0)
+    SH_A, SH_HOP, SH_LEN = math.radians(5.0), 0.004, 0.35
+
+    def shake(t):
+        ang, up = 0.0, 0.0
+        for h in hits:
+            x = t - h
+            if 0 <= x < SH_LEN:
+                env = math.exp(-x / 0.1) * (1 - x / SH_LEN)
+                ang += SH_A * env * math.sin(2 * math.pi * 9.0 * x)
+                up = max(up, SH_HOP * math.sin(math.pi * x / SH_LEN))
+        return ang, up
+    rr = float(np.max(np.hypot(wv[:, 0] - P0.x, wv[:, 1] - P0.y)))
+    peak = max(abs(shake(h + x)[0]) for h in hits for x in np.linspace(0, SH_LEN, 60))
+    print("4-07 shake: %d good sparks, %d shakes; at most %.1f degrees, so the body's far edge (%.3f out) moves %.4f sideways and lifts %.3f; it never goes down" % (
+        int(np.sum(sp_good)), len(hits), math.degrees(peak), rr, 2 * rr * math.sin(peak / 2), SH_HOP))
     way = ob["cdk20_small"].matrix_world.to_3x3() @ Vector((np.array(q0.to_matrix()) @ np.asarray(full["mouth"])).tolist())
     nrm = np.array(tuple(way.normalized()))                  # the way out of the pocket (cdk20.npz "mouth"), as S3's keyhole used it
     tgt = [0.04]
@@ -5223,6 +5243,8 @@ def shot_lp(sc, sky):
         set_attr(sparks_me, np.concatenate(pc), np.concatenate(pg))
         sparks_me.update()
         sparks.hide_render = bool(t < V["invent"])
+        ang_, up_ = shake(t)          # a good score: CDK20 shakes
+        core.matrix_world = Matrix.Translation((0, 0, up_)) @ piv @ Matrix.Rotation(ang_, 4, "Z") @ piv.inverted() @ core_rest
         # the emoji: watches, nods, goes round with the laps, falls over, then splits and splits
         h_e = drop(t, V["think"] + 3.1)
         E = E_rest
