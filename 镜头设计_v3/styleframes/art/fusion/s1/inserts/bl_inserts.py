@@ -4981,21 +4981,36 @@ def shot_lp(sc, sky):
     hits = [float(sp_t[k]) + 0.9 for k in range(NSP) if sp_good[k]]
     core_rest = core.matrix_world.copy()
     piv = Matrix.Translation(P0)
-    SH_A, SH_HOP, SH_LEN = math.radians(5.0), 0.004, 0.35
+    SH_A, SH_HOP, SH_LEN = math.radians(13.0), 0.012, 0.5          # the director asked for a bigger shake (11-05)
 
     def shake(t):
         ang, up = 0.0, 0.0
         for h in hits:
             x = t - h
             if 0 <= x < SH_LEN:
-                env = math.exp(-x / 0.1) * (1 - x / SH_LEN)
-                ang += SH_A * env * math.sin(2 * math.pi * 9.0 * x)
+                env = math.exp(-x / 0.16) * (1 - x / SH_LEN)
+                ang += SH_A * env * math.sin(2 * math.pi * 6.5 * x)
                 up = max(up, SH_HOP * math.sin(math.pi * x / SH_LEN))
         return ang, up
     rr = float(np.max(np.hypot(wv[:, 0] - P0.x, wv[:, 1] - P0.y)))
     peak = max(abs(shake(h + x)[0]) for h in hits for x in np.linspace(0, SH_LEN, 60))
     print("4-07 shake: %d good sparks, %d shakes; at most %.1f degrees, so the body's far edge (%.3f out) moves %.4f sideways and lifts %.3f; it never goes down" % (
         int(np.sum(sp_good)), len(hits), math.degrees(peak), rr, 2 * rr * math.sin(peak / 2), SH_HOP))
+    from mathutils.bvhtree import BVHTree as BVH_
+    rim_o = min((o for o in bpy.data.objects if o.name.startswith("cell") and o.type == "MESH"),
+                key=lambda o: ((o.matrix_world @ Vector(o.bound_box[0]) + o.matrix_world @ Vector(o.bound_box[6])) / 2 - P0).to_2d().length)
+    dg = bpy.context.evaluated_depsgraph_get()
+    rim_e = rim_o.evaluated_get(dg)
+    rim_me = rim_e.to_mesh()
+    rim_tree = BVH_.FromPolygons([tuple(rim_e.matrix_world @ v.co) for v in rim_me.vertices], [tuple(p_.vertices) for p_ in rim_me.polygons])
+    sub = wv[::7]
+
+    def rim_gap(a_, up):
+        R_ = np.array(Matrix.Rotation(a_, 3, "Z"))
+        q = (sub - np.array(P0)) @ R_.T + np.array(P0) + np.array((0, 0, up))
+        return min(rim_tree.find_nearest(Vector(tuple(v)))[3] for v in q)
+    print("4-07 shake: the body's closest approach to its red cell rim (%s): %.4f at rest, %.4f / %.4f twisted either way at the peak (want > 0.003)" % (
+        rim_o.name, rim_gap(0.0, 0.0), rim_gap(peak, 0.0), rim_gap(-peak, 0.0)))
     way = ob["cdk20_small"].matrix_world.to_3x3() @ Vector((np.array(q0.to_matrix()) @ np.asarray(full["mouth"])).tolist())
     nrm = np.array(tuple(way.normalized()))                  # the way out of the pocket (cdk20.npz "mouth"), as S3's keyhole used it
     tgt = [0.04]
@@ -5106,6 +5121,19 @@ def shot_lp(sc, sky):
         q_ = lambda p_: (lambda q: (q.x * 1920, (1 - q.y) * 1080))(world_to_camera_view(sc, c, Vector((p_[0], p_[1], 0.03))))
         print("4-06/07 emoji t %.1f: head %.0f %.0f" % (tt, *q_(E_rest)))
 
+    near_s = 9.0                     # the sparks do not twist with the body: while it shakes, how close does any spark in flight come to the twisted surface?
+    for h in hits:
+        for tt in np.arange(h, h + SH_LEN, 1 / FPS):
+            ang_, up_ = shake(tt)
+            inv = (Matrix.Translation((0, 0, up_)) @ piv @ Matrix.Rotation(ang_, 4, "Z") @ piv.inverted()).inverted()
+            for k in range(NSP):
+                x = tt - sp_t[k]
+                if 0 <= x < 1.8:
+                    u = smooth(x / 0.9) if x < 0.9 else smooth(2 - x / 0.9)
+                    if u < 0.85:          # the way in at the mouth, where it is meant to touch, is left out as before
+                        q = inv @ Vector(tuple(spark_at(np.array((*GRID[sp_from[k]], 0.03)), u)))
+                        near_s = min(near_s, tree.find_nearest(q)[3] - 0.016 * 0.5)
+    print("4-07 shake: closest any spark in flight comes to the shaking body, less its own radius: %.4f (want > 0)" % near_s)
     things = [disc, track, card, vial_root, plate, hinge, pivot, bolt] + st
 
     def drop(t, at):
