@@ -765,7 +765,7 @@ const S4C = ({file = "fusion_s1/s4_lp_1.mp4", fps = 30, review = true}) => {
       </g>
       <Note x={96} y={992} size={50} at={V.hours + 2.4} rot={-1.5}>new structures within hours, says its maker</Note>
       {review && <text x={64} y={t > V.hours + 1.6 ? 1066 : 1018} fontFamily={SANS} fontSize={24} fontWeight={500} fill={SOFT}>VO (A): {[...LP_LINES].reverse().find(([a]) => t >= a)[1]}</text>}
-      <g>
+      <g opacity={1 - after(t, V.hours - 0.6, 0.3) + after(t, V.hours + 1.4, 0.4)}>{/* dips while the camera rounds the clock, when the rings pass under it */}
         <circle cx={W - 72 - tagW - 26} cy={1018 - 10} r={14} fill="none" stroke={INK} strokeWidth={2.5} strokeDasharray="6 5"/>
         <text x={W - 72} y={1018} fontFamily={SANS} fontSize={28} fontWeight={600} fill={INK} textAnchor="end">AlphaFold DB v6 · predicted</text>
         <text x={W - 72} y={1056} fontFamily={SANS} fontSize={22} fontWeight={500} fill={SOFT} textAnchor="end">{t < V.ai ? "Illustration · lab rounds: Lengauer 2007" : "Illustration · Chemistry42: Ivanenkov 2023 · Ren 2023 · structure AlphaFold DB v6"}</text>

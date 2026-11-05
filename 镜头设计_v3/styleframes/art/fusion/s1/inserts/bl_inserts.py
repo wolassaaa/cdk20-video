@@ -4778,6 +4778,117 @@ def shot_lp(sc, sky):
         o.location = (coin_at[0] + 0.003 * (i % 2), coin_at[1] - 0.002 * i, Z0)
         coins.append(o)
 
+    # the director's note of 11-05: a 3D dizzy emoji beside the turntable, standing in for the chemist. It nods at each step; through the two paid laps its head goes round
+    # with the turntable, its eyes turn to crosses, stars circle and it falls over on its side; as the turntable spins up inside the computer it pops up and splits, again
+    # and again, each one smaller, and the last 32 pop away as the turntable goes. Drawn: the face is ours, no emoji font.
+    import bmesh
+    yel = P.gloss((1.0, 0.6, 0.02), 0.28, 0.5)
+    fv = Vector((math.cos(front), math.sin(front), 0.0))          # towards the camera
+    lv = Vector((-math.sin(front), math.cos(front), 0.0))         # screen right
+    cam_yaw = front + math.pi / 2                                  # turns the face (local -y) to the camera
+
+    def emo_mesh(name, dizzy):
+        bm = bmesh.new()
+
+        def put(kind, M, mi):
+            if kind == "s":
+                r_ = bmesh.ops.create_uvsphere(bm, u_segments=40 if mi == 0 else 12, v_segments=20 if mi == 0 else 8, radius=1.0, matrix=M)
+            else:
+                r_ = bmesh.ops.create_cube(bm, size=1.0, matrix=M)
+            for f_ in {f for v in r_["verts"] for f in v.link_faces}:
+                f_.material_index = mi
+                f_.smooth = kind == "s"
+
+        def frame(d, at, sx, sy, sz, spin=0.0):
+            n = Vector(d).normalized()
+            t1 = Vector((0, 0, 1)).cross(n).normalized()
+            t2 = n.cross(t1)
+            a = t1 * math.cos(spin) + t2 * math.sin(spin)
+            b = n.cross(a)
+            M = Matrix((a * sx, b * sy, n * sz)).transposed().to_4x4()
+            M.translation = n * at
+            return M
+        put("s", Matrix.Identity(4), 0)
+        for sx_ in (-1, 1):
+            eye = (0.36 * sx_, -0.9, 0.24)
+            if dizzy:
+                for sp in (math.pi / 4, -math.pi / 4):
+                    put("c", frame(eye, 0.985, 0.36, 0.085, 0.09, sp), 1)
+            else:
+                put("s", frame(eye, 0.975, 0.085, 0.14, 0.06), 1)
+        if dizzy:
+            put("s", frame((0, -0.93, -0.38), 0.975, 0.14, 0.12, 0.06), 1)          # a small round "o"
+        else:
+            for x in np.linspace(-0.3, 0.3, 9):
+                put("s", frame((x, -0.93, -0.34 - 0.9 * (0.09 - x * x)), 0.99, 0.05, 0.05, 0.05), 1)
+        me = bpy.data.meshes.new(name)
+        bm.to_mesh(me)
+        bm.free()
+        me.materials.append(yel)
+        me.materials.append(ink)
+        return me
+    me_happy, me_dizzy = emo_mesh("emo_happy", False), emo_mesh("emo_dizzy", True)
+
+    def emo_obj(name, me):
+        o = bpy.data.objects.new(name, me)
+        bpy.context.scene.collection.objects.link(o)
+        o.rotation_mode = "XYZ"
+        o.hide_render = True
+        return o
+    orbit = empty("emo_orbit")
+    orbit.rotation_mode = "XYZ"
+    star_poly = [((0.016 if i % 2 == 0 else 0.007) * math.cos(math.pi / 2 + math.pi * i / 5), (0.016 if i % 2 == 0 else 0.007) * math.sin(math.pi / 2 + math.pi * i / 5)) for i in range(10)]
+    stars = []
+    for k in range(3):
+        a_ = 2 * math.pi * k / 3
+        s_o = B.extrude([star_poly], 0.005, 0.0012, name="emo_star", mat=yel)
+        s_o.parent, s_o.rotation_mode = orbit, "XYZ"
+        s_o.location, s_o.rotation_euler = (0.06 * math.cos(a_), 0.06 * math.sin(a_), 0.0), (math.pi / 2, 0, a_ + math.pi / 2)
+        stars.append(s_o)
+
+    R_E = [0.05 * 0.7071 ** g for g in range(6)]                 # each split halves the face's area
+    T_SPLIT = [V["ai"] + 2.8, V["ai"] + 3.5, V["ai"] + 4.1, V["ai"] + 4.6, V["ai"] + 5.0]          # faster and faster, with the turntable
+    T_POP = V["ai"] + 5.5
+    cnr = max([Vector((cx + sx_ * 0.38, cy + sy_ * 0.29, 0.0)) for sx_ in (-1, 1) for sy_ in (-1, 1)], key=lambda q: (q - C).to_2d().dot((lv - 0.6 * fv).to_2d()))          # the back right corner: clear of the pen notes along the bottom
+    ac = math.atan2(cnr.y - C.y, cnr.x - C.x)
+
+    def room(p, r):
+        """How far a head of radius r at p stays clear of the turntable, the cell's rim, the coins and the clock (want >= 0)."""
+        return min(math.hypot(p[0] - C.x, p[1] - C.y) - 0.275 - r - 0.008, 0.405 - r - abs(p[0] - cx), 0.32 - r - abs(p[1] - cy),
+                   math.hypot(p[0] - coin_at[0], p[1] - coin_at[1]) - 0.03 - r - 0.008, math.hypot(p[0] - clock_at[0], p[1] - clock_at[1]) - 0.057 - r - 0.008)
+    cand = [(C.x + rr * math.cos(ac + aa), C.y + rr * math.sin(ac + aa)) for rr in np.arange(0.29, 0.5, 0.004) for aa in np.radians(np.arange(-45, 45.1, 1.0))]
+    hub = cnr + (C - cnr).normalized() * 0.09          # the cluster's middle, in from the corner
+    cand = np.array([p for p in cand if room(p, R_E[5]) >= 0 and math.hypot(p[0] - hub.x, p[1] - hub.y) <= 0.11])
+    pick = [int(np.argmin(np.hypot(cand[:, 0] - hub.x, cand[:, 1] - hub.y)))]
+    dmin = np.hypot(cand[:, 0] - cand[pick[0], 0], cand[:, 1] - cand[pick[0], 1])
+    for _ in range(31):                                             # spread out: each next leaf is the candidate farthest from those picked
+        pick.append(int(np.argmax(dmin)))
+        dmin = np.minimum(dmin, np.hypot(cand[:, 0] - cand[pick[-1], 0], cand[:, 1] - cand[pick[-1], 1]))
+    leaves = cand[pick]
+    nodes = []
+
+    def build(idx, g, parent):
+        pts = leaves[idx]
+        nd = dict(g=g, pos=pts.mean(0), parent=parent, k=len([n_ for n_ in nodes if n_["g"] == g]))
+        nodes.append(nd)
+        if len(idx) > 1:
+            c0 = pts - pts.mean(0)
+            order = np.argsort(c0 @ np.linalg.svd(c0)[2][0])
+            h = len(idx) // 2
+            build([idx[i] for i in order[:h]], g + 1, nd)
+            build([idx[i] for i in order[h:]], g + 1, nd)
+    build(list(range(32)), 0, None)
+    rng_e = np.random.default_rng(11)
+    for nd in nodes:
+        nd["yaw"], nd["ph"] = float(rng_e.uniform(-0.3, 0.3)), float(rng_e.uniform(0, 2 * math.pi))
+        nd["obj"] = emo_obj("emo_%d" % nd["g"], me_dizzy)
+    root = nodes[0]
+    root_happy = emo_obj("emo_happy", me_happy)
+    worst = min(room(nd["pos"], R_E[nd["g"]]) for nd in nodes)
+    worst_path = min(room(nd["parent"]["pos"] + (nd["pos"] - nd["parent"]["pos"]) * u, R_E[nd["g"]]) for nd in nodes[1:] for u in np.linspace(0, 1, 12))
+    sib = min(float(np.hypot(*(a["pos"] - b["pos"]))) - R_E[a["g"]] - R_E[b["g"]] for a in nodes for b in nodes if a is not b and a["g"] == b["g"])
+    print("4-06/07 emoji: corner %.2f %.2f, room to spare at rest %.3f, on the way %.3f, closest two of one generation %.3f (all want >= 0)" % (cnr.x - cx, cnr.y - cy, worst, worst_path, sib))
+
     # the screen: the cell's own floor, dark with a blue glow once the loop goes inside the computer
     scr_m, nt, out_ = gk._mat("lp_screen")
     sb = nt.nodes.new("ShaderNodeBsdfPrincipled")
@@ -4905,6 +5016,12 @@ def shot_lp(sc, sky):
         f = round((tt - LP_T0) * FPS)
         sc.frame_set(f)
         print("4-06/07 t %.1f:" % tt, ", ".join("%s %.0f %.0f" % (k, *(lambda q: (q.x * 1920, (1 - q.y) * 1080))(world_to_camera_view(sc, c, Vector(p_)))) for k, p_ in spots.items()))
+    for tt in (8.0, 14.0, 19.0, V["ai"] + 3.7, V["ai"] + 5.3):
+        f = round((tt - LP_T0) * FPS)
+        sc.frame_set(f)
+        q_ = lambda p_: (lambda q: (q.x * 1920, (1 - q.y) * 1080))(world_to_camera_view(sc, c, Vector((p_[0], p_[1], 0.03))))
+        xs = [q_(nd["pos"]) for nd in nodes if nd["g"] == 5]
+        print("4-06/07 emoji t %.1f: head %.0f %.0f, the last 32 span x %.0f-%.0f y %.0f-%.0f" % (tt, *q_(root["pos"]), min(a for a, b in xs), max(a for a, b in xs), min(b for a, b in xs), max(b for a, b in xs)))
 
     things = [disc, track, card, vial_root, plate, hinge, pivot, bolt] + st
 
@@ -5039,6 +5156,49 @@ def shot_lp(sc, sky):
         set_attr(sparks_me, np.concatenate(pc), np.concatenate(pg))
         sparks_me.update()
         sparks.hide_render = bool(t < V["invent"])
+        # the emoji: watches, nods, goes round with the laps, falls over, then splits and splits
+        h_e = drop(t, V["think"] + 3.1)
+        E = root["pos"]
+        tg = C + R0 * fv
+        dyaw = (math.atan2(tg.x - E[0], -(tg.y - E[1])) - cam_yaw + math.pi) % (2 * math.pi) - math.pi
+        yaw = cam_yaw + 0.6 * dyaw + turn_angle(min(max(t, V["every"]), laps[1][1])) - turn_angle(V["every"])
+        nod = sum(0.22 * math.sin(math.pi * min(1.0, max(0.0, (t - ts) / 0.35))) for ts in steps)
+        t_d, t_f, t_u = laps[0][1], laps[1][1], T_SPLIT[0] - 0.35
+        wob = smooth((t - t_d) / 0.6) * (1 - smooth((t - t_f) / 0.2))
+        x_f = (t - t_f) / 0.4
+        fall = (smooth(x_f) - 0.1 * math.sin(math.pi * min(1.0, max(0.0, (t - t_f - 0.4) / 0.3)))) * (1 - smooth((t - t_u) / 0.3))
+        roll = 0.22 * wob * math.sin(2 * math.pi * 1.7 * (t - t_d)) + math.radians(88) * fall
+        hop = 0.03 * math.sin(math.pi * min(1.0, max(0.0, (t - t_u) / 0.3)))
+        dizzy = t >= t_d
+        for o, on in ((root_happy, not dizzy), (root["obj"], dizzy)):
+            o.hide_render = bool(not on or h_e >= 1.2 or t >= T_SPLIT[0])
+            o.location = (E[0], E[1], Z0 + R_E[0] + h_e + hop)
+            o.scale = (R_E[0],) * 3
+            o.rotation_euler = (nod, roll, yaw)
+        s_st = smooth((t - t_d) / 0.3) * (1 - smooth((t - T_SPLIT[0] + 0.4) / 0.3))
+        orbit.location = (E[0], E[1], Z0 + 2.15 * R_E[0] + hop)
+        orbit.scale = (max(s_st, 1e-3),) * 3
+        orbit.rotation_euler = (0, 0, 2 * math.pi * 1.2 * (t - t_d))
+        for s_o in stars:
+            s_o.hide_render = bool(s_st <= 0)
+        for nd in nodes[1:]:
+            g, o = nd["g"], nd["obj"]
+            tb = T_SPLIT[g - 1]
+            te = T_SPLIT[g] if g < 5 else T_POP + 0.02 * nd["k"] + 0.15
+            o.hide_render = bool(not (tb <= t < te))
+            if o.hide_render:
+                continue
+            x = min(1.0, (t - tb) / 0.22)
+            u = smooth(x)
+            pp = nd["parent"]["pos"]
+            p_ = pp + (nd["pos"] - pp) * u
+            r = R_E[g - 1] * 0.85 + (R_E[g] - R_E[g - 1] * 0.85) * u
+            if g == 5:
+                y = max(0.0, (t - T_POP - 0.02 * nd["k"]) / 0.15)
+                r *= (1 + 0.4 * y) * (1 - min(y, 1.0)) + 1e-3
+            o.location = (p_[0], p_[1], Z0 + r + 1.2 * R_E[g] * math.sin(math.pi * x))
+            o.scale = (r,) * 3
+            o.rotation_euler = (0, 0.25 * math.sin(2 * math.pi * 1.7 * t + nd["ph"]), cam_yaw + nd["yaw"])
         sky(0.2)
     return update
 
