@@ -31,8 +31,8 @@ import world as W      # noqa: E402
 P, gk = B.P, B.gk
 argv = sys.argv[sys.argv.index("--") + 1:]
 SHOT, OUT = argv[0], argv[1]
-START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0, r=412.0, s=412.0, n=412.0, o=412.0, m=412.0, j=412.0, l=412.0, e=412.0, d=412.0, i=437.0, i2=463.0, i3=480.0, i4=505.0, lp=508.5, hz=557.0)[SHOT]
-FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6, r=6, s=6, n=4, o=3, m=1171, j=1055, l=1055, e=1055, d=1517, i=1560, i2=1020, i3=1080, i4=210, lp=2490, hz=1020)[SHOT]
+START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0, r=412.0, s=412.0, n=412.0, o=412.0, m=412.0, j=412.0, l=412.0, e=412.0, d=412.0, i=437.0, i2=463.0, i3=480.0, i4=505.0, lp=508.5, hz=557.0, hk=557.0)[SHOT]
+FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6, r=6, s=6, n=4, o=3, m=1171, j=1055, l=1055, e=1055, d=1517, i=1560, i2=1020, i3=1080, i4=210, lp=2490, hz=1020, hk=1020)[SHOT]
 FIRST = int(argv[2]) if len(argv) > 2 else 0
 LAST = min(int(argv[3]), FRAMES - 1) if len(argv) > 3 else FRAMES - 1
 SAMPLES = int(argv[4]) if len(argv) > 4 else 64
@@ -64,7 +64,7 @@ def stage():
     nt = sc.world.node_tree
     pick = lambda kind: [n for n in nt.nodes if n.type == kind]
     dot, win = pick("VECT_MATH")[0], pick("MAP_RANGE")[1]
-    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2, t=0.2, r=0.2, s=0.2, n=0.2, o=0.2, m=0.2, j=0.2, l=0.2, e=0.2, d=0.2, i=0.2, i2=0.2, i3=0.2, i4=0.2, lp=0.2, hz=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9, t=0.9, r=0.9, s=0.9, n=0.9, o=0.9, m=0.9, j=0.9, l=0.9, e=0.9, d=0.9, i=0.9, i2=0.9, i3=0.9, i4=0.9, lp=0.9, hz=0.9)[SHOT]
+    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2, t=0.2, r=0.2, s=0.2, n=0.2, o=0.2, m=0.2, j=0.2, l=0.2, e=0.2, d=0.2, i=0.2, i2=0.2, i3=0.2, i4=0.2, lp=0.2, hz=0.2, hk=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9, t=0.9, r=0.9, s=0.9, n=0.9, o=0.9, m=0.9, j=0.9, l=0.9, e=0.9, d=0.9, i=0.9, i2=0.9, i3=0.9, i4=0.9, lp=0.9, hz=0.9, hk=0.9)[SHOT]
 
     def sky(x):
         dot.inputs[1].default_value = lerp((-0.22, 0.92, 0.32), P.WINDOW, x)
@@ -5815,8 +5815,634 @@ def shot_hz(sc, sky):
     return update
 
 
+HK_HINGE_I = 104               # the outline point nearest Met84's backbone (0.7 A off it; Met84 lies 2.0 A off the cut's plane), from the kept cut of pocket_outline.py
+HK_C = (-3.643, 5.65)          # the centre the outline was drawn about, in A (across, out) from the pocket's centre: pocket_outline.json is that outline less this, over its half size
+
+
+def shot_hk(sc, sky):
+    """4-09 version K (the director's 11-06 note: everyone must follow it, not only someone who has read the notes; the A version's small molecules and rings did not read).
+    Built on the storyboard that read best in a blind test: the pocket is a keyhole and each design is a key, as the voice-over itself says ("every key").
+    "The team gave it the pocket's shape": over CDK20 the pocket's outline (the hollow cut through the AlphaFold DB v6 model, pocket_outline.py, as S3's keyhole) lifts off
+    and flies to the AI's screen, where a plate grows behind it: the outline becomes a keyhole. "And one rule: every key must grip a spot called the hinge": the outline carries
+    a blue dot at Met84 (the hinge residue in Ren 2023), and one key comes up out of the screen and rests its tip on the dot. "Its filters are built to toss designs with
+    reactive or possibly toxic groups": nine more keys come up out of the screen's rings and hop onto a belt in the next cell; it runs them through a gate with a warning sign,
+    and the four carrying a red group are tossed into a bin. "And to score how drug-like and easy to make each one is": behind each key that is left two glass tubes fill,
+    one capped with a pill, one with a flask. The keys, the groups and the scores are drawn; the pocket's outline and Met84 are the v6 model.
+    Run: blender -b -P bl_inserts.py -- hk <out dir> 0 1019 16 0.5 2"""
+    global START
+    from mathutils.bvhtree import BVHTree
+    import bmesh
+    upd_lp = shot_lp(sc, sky)
+    lp_off = LP_VO["end"] - LP_T0
+    START = HZ_START
+    V = HZ_VO
+    ob = bpy.data.objects
+    core = ob["core"]
+    held = polar((127.55, -4.55, 1.75), (127.0, -2.3, 0.24), 60)
+    bpy.context.view_layer.update()
+    wv = np.array([tuple(core.matrix_world @ v.co) for v in core.data.vertices])
+    P0 = Vector(wv.mean(0).tolist())
+    full = np.load(HERE + "frames/cdk20.npz")
+    q0 = Vector(full["mouth"].tolist()).rotation_difference(Vector((0, -math.cos(P_UP), math.sin(P_UP))))
+    smw = ob["cdk20_small"].matrix_world
+    q0m = np.array(q0.to_matrix())
+    to_w = lambda x: smw @ Vector((np.asarray(x) @ q0m.T * P_S).tolist())
+    dir_w = lambda d: (smw.to_3x3() @ Vector((q0m @ np.asarray(d, float)).tolist())).normalized()
+    mid = to_w(full["pocket"])
+    unit = (to_w(np.asarray(full["pocket"]) + (1.0, 0, 0)) - mid).length
+    nrm = dir_w(full["mouth"])
+    tree = BVHTree.FromPolygons([tuple(v) for v in wv], [tuple(p_.vertices) for p_ in core.data.polygons])
+    cx, cy = cell_at(31)
+    c2x, c2y = cell_at(32)
+    C = Vector((cx, cy + 0.02, 0.002))
+
+    ink_c = (0.012, 0.012, 0.014)
+    ink = gk.surface(ink_c, 0.3)
+    card_m = gk.surface((0.93, 0.925, 0.89), 0.6, 0.15)
+    steel = P.gloss((0.6, 0.59, 0.57), 0.22, 0.5)
+    gate_m = P.gloss((0.1, 0.1, 0.105), 0.35, 0.4)
+    bin_m = gk.surface((0.62, 0.6, 0.56), 0.6, 0.1)
+
+    def glow_m(name, col, st):
+        m_, n_, o_ = gk._mat(name)
+        b_ = n_.nodes.new("ShaderNodeBsdfPrincipled")
+        b_.inputs["Base Color"].default_value = b_.inputs["Emission Color"].default_value = (*col, 1)
+        b_.inputs["Emission Strength"].default_value = st
+        b_.inputs["Roughness"].default_value = 0.3
+        n_.links.new(b_.outputs[0], o_.inputs["Surface"])
+        return m_, b_
+    hot_m, hot_b = glow_m("hk_hot", P.RED, 0.4)
+    blue_m, blue_b = glow_m("hk_blue", P.BLUE, 1.0)
+    sign_m, sign_b = glow_m("hk_sign", P.RED, 0.3)
+
+    # the pocket's patch turns to paper, from the centre out (as in version A)
+    dist = np.linalg.norm(wv - np.array(tuple(mid)), axis=1)
+    m = core.active_material
+    if m.users > 1:
+        m = m.copy()
+        core.active_material = m
+    nt = m.node_tree
+    cb = next(n for n in nt.nodes if n.type == "BSDF_PRINCIPLED")
+    core.data.attributes.new("pk", "FLOAT", "POINT")
+    core.data.attributes["pk"].data.foreach_set("value", (dist / unit).astype(np.float32))
+    at_ = nt.nodes.new("ShaderNodeAttribute")
+    at_.attribute_name = "pk"
+    reveal = nt.nodes.new("ShaderNodeMapRange")
+    reveal.clamp = True
+    nt.links.new(at_.outputs["Fac"], reveal.inputs["Value"])
+    reveal.inputs["To Min"].default_value, reveal.inputs["To Max"].default_value = 1.0, 0.0
+    mx = nt.nodes.new("ShaderNodeMix")
+    mx.data_type = "RGBA"
+    if cb.inputs["Base Color"].is_linked:
+        nt.links.new(cb.inputs["Base Color"].links[0].from_socket, mx.inputs[6])
+    else:
+        mx.inputs[6].default_value = cb.inputs["Base Color"].default_value
+    mx.inputs[7].default_value = (0.9, 0.885, 0.84, 1)
+    nt.links.new(reveal.outputs[0], mx.inputs[0])
+    nt.links.new(mx.outputs[2], cb.inputs["Base Color"])
+    RMAX = 15.0
+
+    # 4-07's 42 rings, where shot lp left them
+    upd_lp(HZ_START + lp_off)
+    cme_ = bpy.data.meshes["lp_comets"]
+    nR = len(cme_.vertices) // 42
+    rco = np.zeros(len(cme_.vertices) * 3)
+    cme_.vertices.foreach_get("co", rco)
+    rco = rco.reshape(42, nR, 3)
+    RC = rco.mean(1)
+    ZR = float(RC[:, 2].mean())
+    rad = np.hypot(rco[..., 0] - RC[:, None, 0], rco[..., 1] - RC[:, None, 1])
+    HOLE, OUTR, RT = float(rad.min()), float(rad.max()), float((rco[..., 2] - RC[:, None, 2]).max())
+    scr = ob["lp_screen"]
+    sbb = np.array([tuple(scr.matrix_world @ Vector(b_)) for b_ in scr.bound_box])
+    SCR = float(sbb[:, 2].max())
+    print("4-09K rings: plane %.4f hole %.4f outer %.4f tube %.4f | rings x %.3f..%.3f y %.3f..%.3f | screen x %.3f..%.3f y %.3f..%.3f top %.4f | cell 31 %.3f %.3f" % (
+        ZR, HOLE, OUTR, RT, RC[1:, 0].min(), RC[1:, 0].max(), RC[1:, 1].min(), RC[1:, 1].max(), sbb[:, 0].min(), sbb[:, 0].max(), sbb[:, 1].min(), sbb[:, 1].max(), SCR, cx, cy))
+
+    # ---------------------------------------------------------------- the keyhole plate on the far edge of the screen
+    OL = json.load(open(HERE + "frames/pocket_outline.json"))
+    olp = np.array(OL["points"], float)
+    HR, HC = 0.05, 0.088                     # the hole's half size and its centre's height on the plate
+    PW, PH, TH = 0.15, 0.17, 0.014           # the plate's width, height and thickness
+    hole2 = olp * HR + (0.0, HC)
+    hinge2 = hole2[HK_HINGE_I]
+    y_back = float(sbb[:, 1].max()) - 0.012
+    px_c = float(np.clip(RC[1:, 0].max() - 0.1, cx - 0.3, cx + 0.3))
+    plate = empty("hk_plate")
+    plate.location = (px_c, y_back, SCR)
+    plate.rotation_quaternion = Quaternion((1, 0, 0), math.pi / 2)
+    y_f = y_back - TH
+    pl_poly = box(-PW / 2, PW / 2, PH, 0.0, 0.02)
+    front = B.extrude([pl_poly, [tuple(p) for p in hole2[::-1]]], TH - 0.004, 0.0015, z=0.004, name="hk_plate_front", mat=card_m)
+    back = B.extrude([pl_poly], 0.004, 0.001, z=0.0, name="hk_plate_back", mat=ink)
+    for o in (front, back):
+        o.parent = plate
+    room_pl = min(float(np.hypot(*(RC[k][:2] - (px_c + x_, y_f)))) - OUTR for k in range(1, 42) for x_ in np.linspace(-PW / 2, PW / 2, 15))
+    print("4-09K plate: back %.3f, front %.3f, x %.3f; from its front edge to the nearest ring's outside %.4f (want > 0); screen far edge %.3f" % (
+        y_back, y_f, px_c, room_pl, sbb[:, 1].max()))
+
+    # the outline that flies there, with the hinge dot on it, in the plate's own units
+    def poly_tube(pts, r, mat, name, cyclic=True):
+        cu = bpy.data.curves.new(name, "CURVE")
+        cu.dimensions = "3D"
+        cu.bevel_depth, cu.bevel_resolution = r, 4
+        cu.use_fill_caps = True
+        s = cu.splines.new("POLY")
+        s.points.add(len(pts) - 1)
+        for q, p in zip(s.points, pts):
+            q.co = (*p, 1)
+        s.use_cyclic_u = cyclic
+        o = bpy.data.objects.new(name, cu)
+        sc.collection.objects.link(o)
+        cu.materials.append(mat)
+        return o
+    ol = empty("hk_outline")
+    R_OL = 0.0016
+    line = poly_tube([(x, y, 0.0) for x, y in hole2], R_OL, ink, "hk_outline_line")
+    line.parent = ol
+    line.data.bevel_factor_mapping_end = "SPLINE"
+    dot = lathe([(0, -0.001), (0.0062, -0.001), (0.0065, 0.0), (0.0062, 0.001), (0, 0.001)], blue_m, "hk_dot", ol, 48)
+    dot.location = (float(hinge2[0]), float(hinge2[1]), 0.0)
+    # where it starts: the real outline over the pocket's mouth, at its real size
+    th = math.radians(OL["deg"])
+    m0 = np.asarray(full["mouth"], float) / np.linalg.norm(full["mouth"])
+    a0 = np.cross(m0, [0, 0, 1.0])
+    a0 /= np.linalg.norm(a0)
+    b0 = np.cross(m0, a0)
+    U_w, M_w = dir_w(math.cos(th) * a0 + math.sin(th) * b0), dir_w(m0)
+    N_w = U_w.cross(M_w).normalized()
+    kk = unit * OL["angstrom"] / HR
+    Rm = Matrix((U_w, M_w, N_w)).transposed()
+    q_pk = Rm.to_quaternion()
+    base = mid + unit * (HK_C[0] * U_w + HK_C[1] * M_w) - kk * HC * M_w
+
+    def ol_world(loc, q, s_):
+        R_ = np.array(q.to_matrix())
+        return np.c_[hole2, np.zeros(len(hole2))] @ R_.T * s_ + np.array(tuple(loc))
+
+    lift = 0.0
+    for lift in [float(x_) for x_ in range(60)]:
+        w_ = ol_world(base + lift * unit * M_w, q_pk, kk)
+        if min(tree.find_nearest(Vector(tuple(p)))[3] for p in w_[::2]) > 2.5 * unit:
+            break
+    ol_a = base + (lift + 1.0) * unit * M_w
+    q_pl = plate.rotation_quaternion.copy()
+    ol_b = Vector((px_c, y_f - R_OL - 0.0002, SCR))
+    print("4-09K outline: real half size %.1f A = %.4f table units; lifted %.0f A off the pocket to clear the body by 2.5 A; scale at the pocket %.3f" % (
+        OL["angstrom"], unit * OL["angstrom"], lift + 1.0, kk))
+    T_OL0, T_OL1, T_FLY0, T_FLY1 = 0.8, 1.5, 1.9, 2.9
+    T_PL0, T_PL1 = 2.5, 3.0
+
+    def ol_pose(t):
+        x = smooth((t - T_FLY0) / (T_FLY1 - T_FLY0))
+        p_a, p_b = ol_a, ol_b          # up off the pocket first, then down in front of where the plate will stand
+        c1, c2 = p_a + 0.12 * M_w + Vector((0, 0, 0.26)), p_b + Vector((0, -0.2, 0.22))
+        loc = (1 - x) ** 3 * p_a + 3 * (1 - x) ** 2 * x * c1 + 3 * (1 - x) * x ** 2 * c2 + x ** 3 * p_b
+        return loc, q_pk.slerp(q_pl, x), math.exp(math.log(kk) * (1 - x))
+
+    # ---------------------------------------------------------------- the keys
+    KS = 0.056 / 3.25
+    KH = 0.12 * KS
+
+    def key_parts(bad):
+        parts = [B.extrude([B.round_poly(B.key_blade(-0.075, 0.0, start=0.14), 0.03)], 0.2, 0.04, z=-0.1, name="hk_blade", mat=steel)]
+        ring_ = [(-0.875 + 0.75 * math.cos(2 * math.pi * i / 96), 0.75 * math.sin(2 * math.pi * i / 96)) for i in range(96)]
+        parts.append(B.extrude([ring_], 0.24, 0.05, z=-0.12, name="hk_bow", mat=steel))
+        bm = bmesh.new()
+
+        def tag(r_, mi):
+            for f_ in {f for v in r_["verts"] for f in v.link_faces}:
+                f_.material_index = mi
+                f_.smooth = True
+
+        def ball(c_, r, mi=0):
+            tag(bmesh.ops.create_uvsphere(bm, u_segments=16, v_segments=10, radius=r, matrix=Matrix.Translation(c_)), mi)
+
+        def stick(a_, b_, r=0.04, mi=0):
+            d_ = b_ - a_
+            M = (Matrix.Translation((a_ + b_) / 2) @ Vector((0, 0, 1)).rotation_difference(d_.normalized()).to_matrix().to_4x4())
+            tag(bmesh.ops.create_cone(bm, cap_ends=True, segments=10, radius1=r, radius2=r, depth=d_.length, matrix=M), mi)
+        bc = Vector((-0.875, 0.0, 0.14))
+        hexa = [bc + Vector((0.42 * math.cos(math.radians(30 + 60 * i)), 0.42 * math.sin(math.radians(30 + 60 * i)), 0.0)) for i in range(6)]
+        for c_ in hexa:
+            ball(c_, 0.085)
+        for i in range(6):
+            stick(hexa[i], hexa[(i + 1) % 6])
+        if bad:          # the reactive group: off the ring's top atom, out past the bow's edge
+            top = bc + Vector((0, 0.42, 0))
+            stick(top, bc + Vector((0, 1.0, 0)), 0.06, 1)
+            ball(bc + Vector((0, 1.2, 0.06)), 0.3, 1)          # its bottom stays above the key's underside
+        me = bpy.data.meshes.new("hk_hex")
+        bm.to_mesh(me)
+        bm.free()
+        me.materials.append(ink)
+        me.materials.append(hot_m)
+        o = bpy.data.objects.new("hk_hex", me)
+        sc.collection.objects.link(o)
+        parts.append(o)
+        pts = []
+        for o in parts:
+            v_ = np.zeros(len(o.data.vertices) * 3)
+            o.data.vertices.foreach_get("co", v_)
+            pts.append(v_.reshape(-1, 3))
+        pts = np.concatenate(pts)
+        return parts, pts
+    tmpl = {False: key_parts(False), True: key_parts(True)}
+    for parts, _ in tmpl.values():
+        for o in parts:
+            o.hide_render = True
+            o.location = (0, 0, -5)
+    NK = 10
+    BAD = (2, 4, 6, 8)
+    g_ = np.random.default_rng(7)
+    keys = []
+    for i in range(NK):
+        e = empty("hk_key")
+        for o in tmpl[i in BAD][0]:
+            c_ = o.copy()
+            sc.collection.objects.link(c_)
+            c_.location = (0, 0, 0)
+            c_.hide_render = False
+            c_.parent = e
+        pts = tmpl[i in BAD][1]
+        sub = pts[np.random.default_rng(i).choice(len(pts), min(400, len(pts)), replace=False)]
+        keys.append(dict(obj=e, pts=sub * KS, yaw=float(g_.uniform(-0.6, 0.6))))
+    for o in bpy.context.selected_objects:          # B.extrude applies transforms to whatever is selected; the key parts now share their meshes
+        o.select_set(False)
+    ext_k = float(np.hypot(keys[3]["pts"][:, 0], keys[3]["pts"][:, 1]).max())
+    print("4-09K key: %.4f long, reaches %.4f from its centre, %.4f thick" % (3.25 * KS, ext_k, 2 * KH))
+
+    # the belt in the next cell, its gate with a warning sign, the bin
+    BWD, BH = 0.09, 0.012
+    bx0, bx1 = c2x - 0.40, c2x + 0.40
+    by = c2y + 0.05
+    belt = B.extrude([box(bx0, bx1, by + BWD / 2, by - BWD / 2, 0.012)], BH, 0.003, name="hk_belt", mat=ink)
+    bm_, bnt, bout = gk._mat("hk_belt")
+    bb_ = bnt.nodes.new("ShaderNodeBsdfPrincipled")
+    bb_.inputs["Roughness"].default_value = 0.6
+    tc = bnt.nodes.new("ShaderNodeTexCoord")
+    mp = bnt.nodes.new("ShaderNodeMapping")
+    bnt.links.new(tc.outputs["Object"], mp.inputs["Vector"])
+    wvt = bnt.nodes.new("ShaderNodeTexWave")
+    wvt.wave_type, wvt.bands_direction = "BANDS", "X"
+    wvt.inputs["Scale"].default_value = 2 * math.pi / (20 * 0.02)
+    bnt.links.new(mp.outputs["Vector"], wvt.inputs["Vector"])
+    ramp = bnt.nodes.new("ShaderNodeValToRGB")
+    ramp.color_ramp.elements[0].position, ramp.color_ramp.elements[1].position = 0.45, 0.55
+    ramp.color_ramp.elements[0].color, ramp.color_ramp.elements[1].color = (0.05, 0.05, 0.055, 1), (0.16, 0.16, 0.17, 1)
+    bnt.links.new(wvt.outputs["Fac"], ramp.inputs["Fac"])
+    bnt.links.new(ramp.outputs["Color"], bb_.inputs["Base Color"])
+    bnt.links.new(bb_.outputs[0], bout.inputs["Surface"])
+    belt.data.materials.clear()
+    belt.data.materials.append(bm_)
+    VB = 0.22                                 # the belt's speed
+    XS = bx0 + 0.035                          # where the keys land on it
+    S_G, S_T = 0.10, 0.16                     # the gate, and where a bad key is tossed
+    gx = XS + S_G
+    GH, GP = 0.11, 0.012
+    gy0, gy1 = by - BWD / 2 - 0.014, by + BWD / 2 + 0.014
+    gate = [B.extrude([box(gx - GP / 2, gx + GP / 2, y_ + GP / 2, y_ - GP / 2, 0.003)], GH, 0.002, name="hk_post", mat=gate_m) for y_ in (gy1,)]          # one post, behind: nothing stands between the camera and the keys
+    gate.append(B.extrude([box(gx - GP / 2, gx + GP / 2, gy1 + GP / 2, gy0 - GP / 2, 0.003)], 0.014, 0.002, z=GH, name="hk_lintel", mat=gate_m))
+    sign = empty("hk_sign")
+    sign.location = (gx, gy0, GH + 0.014)          # standing on the lintel, over the near post
+    sign.rotation_quaternion = Quaternion((1, 0, 0), math.pi / 2)
+    tri = [(0.032 * math.cos(math.radians(90 + 120 * i)), 0.032 * math.sin(math.radians(90 + 120 * i)) + 0.016) for i in range(3)]
+    B.extrude([B.round_poly(tri, 0.006)], 0.004, 0.001, z=0.0, name="hk_sign_tri", mat=sign_m).parent = sign
+    B.extrude([box(-0.0028, 0.0028, 0.03, 0.0125, 0.0025)], 0.002, 0.0005, z=0.004, name="hk_sign_bar", mat=card_m).parent = sign
+    B.extrude([box(-0.003, 0.003, 0.0095, 0.0035, 0.0028)], 0.002, 0.0005, z=0.004, name="hk_sign_dot", mat=card_m).parent = sign
+    BIN_RI0, BIN_RI1, BIN_H, BIN_W = 0.043, 0.052, 0.07, 0.003
+    bin_c = Vector((XS + S_T, by + BWD / 2 + BIN_RI1 + BIN_W + 0.012, 0.0))          # behind the belt, so it hides neither the belt nor the gate
+    binn = lathe([(0, 0), (BIN_RI0 + BIN_W, 0), (BIN_RI1 + BIN_W, BIN_H), (BIN_RI1, BIN_H), (BIN_RI0, BIN_W), (0, BIN_W)], bin_m, "hk_bin")
+    binn.location = bin_c
+
+    # the tubes behind each key that is left
+    glass = B.clear_glass()
+    fill_m = [P.gloss(ink_c, 0.3, 0.6), P.gloss((0.3, 0.29, 0.27), 0.3, 0.6)]          # drug-like dark, easy to make lighter, so the two tubes of a pair tell apart
+    TR, TUH = 0.0075, 0.1
+    t_y = by + BWD / 2 + 0.03
+    T_STOP = 10.3
+    TL = [6.9 + 0.25 * i for i in range(NK)]          # 0.055 apart on the belt: room for a red group between two keys
+    kept = [i for i in range(NK) if i not in BAD]
+    s_end = {i: VB * (T_STOP - TL[i]) for i in kept}
+    pill_m, flask_m = P.gloss((0.93, 0.925, 0.89), 0.3, 0.6), B.clear_glass()
+    tubes = {}
+    g_s = np.random.default_rng(31)
+    for i in kept:
+        for j in range(2):
+            x_ = XS + s_end[i] + (2 * j - 1) * 0.0125
+            o = lathe([(0, 0), (TR, 0), (TR, TUH), (0.0, TUH + 0.0005)], glass, "hk_tube", None, 32)
+            o.location = (x_, t_y, 0.0)
+            o.visible_shadow = False
+            f_ = lathe([(0, 0.0008), (TR - 0.0012, 0.0008), (TR - 0.0012, 1.0), (0, 1.0)], fill_m[j], "hk_fill", None, 32)
+            f_.location = (x_, t_y, 0.0)
+            if j == 0:          # a pill lying across the tube's top
+                cap = lathe([(0, -0.012), (0.0036, -0.0112), (0.0052, -0.009), (0.0058, -0.006), (0.0058, 0.006), (0.0052, 0.009), (0.0036, 0.0112), (0, 0.012)], pill_m, "hk_pill", None, 24)
+                cap.rotation_mode = "XYZ"
+                cap.rotation_euler = (0, math.pi / 2, 0.0)
+                cap.location = (x_, t_y, TUH + 0.0005 + 0.0058)
+            else:              # a small flask standing on it
+                cap = lathe([(0, 0), (0.0088, 0), (0.0093, 0.0011), (0.003, 0.0125), (0.003, 0.0185), (0.0037, 0.0192), (0, 0.0192)], flask_m, "hk_flask", None, 24)
+                cap.location = (x_, t_y, TUH + 0.0005)
+            tubes[(i, j)] = dict(fill=f_, tube=o, cap=cap, cz=float(cap.location.z), score=float(g_s.uniform(0.45, 0.95)), x=x_)
+    T_FILL = [{i: V["score"] + 0.3 + 0.12 * n for n, i in enumerate(kept)}, {i: V["easy"] + 0.1 + 0.12 * n for n, i in enumerate(kept)}]
+
+    # the rings the keys come out of: key 0 from the ring nearest the plate, the rest from the screen's right-hand rings, nearest the belt first
+    live = list(range(1, 42))
+    r0 = min(live, key=lambda k: math.hypot(RC[k][0] - px_c, RC[k][1] - y_f))
+    rest = sorted([k for k in live if k != r0], key=lambda k: -RC[k][0])[:NK - 1]
+    rest.sort(key=lambda k: math.hypot(RC[k][0] - XS, RC[k][1] - by))
+    RING = [r0] + rest
+    Z_HOV = [ZR + 0.05 + 0.014 * (i % 2) for i in range(NK)]
+    T_POP = [3.35] + [V["filters"] - 0.3 + 0.04 * n for n in range(NK - 1)]
+    T_HOP = 0.55
+    q_belt = Quaternion((0, 0, 1), math.pi / 2)
+    rest_z = BH + KH + 0.0003
+    land = lambda i: Vector((XS, by, rest_z))
+    # the grip: key 0 upright in front of the plate, its tip on the dot
+    hc2 = olp.mean(0) * HR + (0.0, HC)
+    d2 = (hinge2 - hc2) / np.linalg.norm(hinge2 - hc2)
+    Xw, Zw = Vector((float(d2[0]), 0.0, float(d2[1]))), Vector((0, -1, 0))
+    Yw = Zw.cross(Xw)
+    q_grip = Matrix((Xw, Yw, Zw)).transposed().to_quaternion()
+    y_key = y_f - R_OL * 2 - 0.0002 - 0.0005 - KH
+    tip_l = Vector((1.625 * KS, 0.0, 0.0))
+    dot_w = Vector((px_c + float(hinge2[0]), y_key, SCR + float(hinge2[1])))
+    p_grip = dot_w - (q_grip @ tip_l)
+    p_grip.y = y_key
+    T_G0, T_G1, T_G2 = 3.9, 4.6, 5.4
+    BAD_T = {i: TL[i] + S_T / VB for i in BAD}
+    BIN_Z = {i: BIN_W + KH + 0.0003 + n * 0.0115 for n, i in enumerate(BAD)}          # a key with its red group stands 10 mm tall
+
+    def bez(a_, c_, b_, x):
+        return (1 - x) ** 2 * a_ + 2 * (1 - x) * x * c_ + x ** 2 * b_
+
+    def key_pose(i, t):
+        """Where key i is at t: location, turn and scale, or None before it shows."""
+        kd = keys[i]
+        if t < T_POP[i]:
+            return None
+        rc = Vector((float(RC[RING[i]][0]), float(RC[RING[i]][1]), ZR))
+        q_h = Quaternion((0, 0, 1), kd["yaw"])
+        x = (t - T_POP[i]) / 0.5
+        hov = Vector((rc.x, rc.y, Z_HOV[i] + 0.0015 * math.sin(2 * math.pi * 0.6 * t + i)))
+        if x < 1:          # up out of the ring, small while it is level with the ring's tube
+            zz = ZR + (Z_HOV[i] - ZR) * smooth(min(1.0, x * 1.6))
+            s_ = 0.25 * smooth(x / 0.25) + 1e-3 if x < 0.25 else 0.25 + 0.75 * smooth((x - 0.25) / 0.75)
+            return Vector((rc.x, rc.y, zz)), q_h, s_
+        if i == 0 and t < TL[0]:
+            if t < T_G0:
+                return hov, q_h, 1.0
+            if t < T_G1:          # over to the plate, standing up as it comes
+                y = smooth((t - T_G0) / (T_G1 - T_G0))
+                ctrl = Vector((p_grip.x, p_grip.y - 0.12, max(p_grip.z, hov.z) + 0.04))
+                return bez(hov, ctrl, p_grip, y), q_h.slerp(q_grip, y), 1.0
+            if t < T_G2:
+                nud = 0.0006 * math.sin(math.pi * min(1.0, max(0.0, (t - T_G1 - 0.05) / 0.25)))
+                return p_grip + Xw * nud, q_grip, 1.0
+            y = smooth((t - T_G2) / (TL[0] - T_G2))
+            p_a = p_grip + Vector((0, -0.03, 0))
+            ctrl = Vector(((p_grip.x + XS) / 2, min(p_grip.y, by) - 0.15, 0.26))
+            if t < T_G2 + 0.25:
+                return p_grip + (p_a - p_grip) * smooth((t - T_G2) / 0.25), q_grip, 1.0
+            y = smooth((t - T_G2 - 0.25) / (TL[0] - T_G2 - 0.25))
+            return bez(p_a, ctrl, land(0), y), q_grip.slerp(q_belt, y), 1.0
+        if t < TL[i] - T_HOP:
+            return hov, q_h, 1.0
+        if t < TL[i]:
+            y = smooth((t - TL[i] + T_HOP) / T_HOP)
+            ctrl = Vector(((hov.x + XS) / 2, (hov.y + by) / 2, 0.15))
+            return bez(hov, ctrl, land(i), y), q_h.slerp(q_belt, y), 1.0
+        s_ = VB * (min(t, T_STOP) - TL[i])
+        on = Vector((XS + s_, by, rest_z))
+        if i in BAD and t >= BAD_T[i]:
+            ta = BAD_T[i]
+            p_a = Vector((XS + S_T, by, rest_z))
+            top_ = Vector((bin_c.x, bin_c.y, BIN_H + 0.045))
+            bot_ = Vector((bin_c.x, bin_c.y, BIN_Z[i]))
+            q_bin = Quaternion((0, 0, 1), math.pi / 2 + 0.25 * (i - 5))
+            y = (t - ta) / 0.5
+            if y < 1:          # tossed up and over the bin's rim, turning over once on the way
+                yy = smooth(y)
+                ctrl = Vector((p_a.x, (p_a.y + top_.y) / 2, 0.21))
+                spin = Quaternion((1, 0, 0), 2 * math.pi * smooth((y - 0.15) / 0.7))          # turns over once once it is clear of the belt
+                return bez(p_a, ctrl, top_, yy), q_belt.slerp(q_bin, smooth((y - 0.5) / 0.5)) @ spin, 1.0
+            y2 = min(1.0, (t - ta - 0.5) / 0.22)
+            return top_ + (bot_ - top_) * (y2 * y2), q_bin, 1.0
+        return on, q_belt, 1.0
+
+    def key_world(i, t):
+        ps = key_pose(i, t)
+        if ps is None:
+            return None
+        loc, q, s_ = ps
+        return keys[i]["pts"] @ np.array(q.to_matrix()).T * s_ + np.array(tuple(loc))
+
+    # ---------------------------------------------------------------- checks
+    rims = []
+    for i_ in (30, 31, 32, 22, 23):
+        x_, y_ = cell_at(i_)
+        rims.append((x_, y_))
+
+    def in_rim(p):
+        """True where a point lies inside a cell's raised rim (outer box less inner box, 0.016 high)."""
+        out_ = np.zeros(len(p), bool)
+        for x_, y_ in rims:
+            dx, dy = np.abs(p[:, 0] - x_), np.abs(p[:, 1] - y_)
+            out_ |= (dx < 0.437) & (dy < 0.352) & ~((dx < 0.418) & (dy < 0.333)) & (p[:, 2] < 0.0175)
+        return out_
+
+    bad_hits = {}
+
+    def hit(name, t):
+        bad_hits.setdefault(name, []).append(round(t, 2))
+    tube_xy = np.array([[v_["x"], t_y] for v_ in tubes.values()])
+    for f in range(0, FRAMES, 2):
+        t = f / FPS
+        W_ = {i: key_world(i, t) for i in range(NK)}
+        for i, w_ in W_.items():
+            if w_ is None:
+                continue
+            ps = key_pose(i, t)
+            # its own ring's tube, and every ring's tube, while level with them
+            for k in range(1, 42):
+                r_ = np.hypot(w_[:, 0] - RC[k][0], w_[:, 1] - RC[k][1])
+                band = (np.abs(w_[:, 2] - ZR) < RT + 0.0005) & (r_ > HOLE - 0.0005) & (r_ < OUTR + 0.0005)
+                if band.any():
+                    hit("key %d / ring %d" % (i, k), t)
+            if (w_[:, 2] < SCR - 1e-4).any() and (np.abs(w_[:, 0] - cx) < 0.42).all():
+                hit("key %d / screen" % i, t)
+            if in_rim(w_).any():
+                hit("key %d / cell rim" % i, t)
+            onb = (np.abs(w_[:, 0] - (bx0 + bx1) / 2) < (bx1 - bx0) / 2) & (np.abs(w_[:, 1] - by) < BWD / 2)
+            if (onb & (w_[:, 2] < BH - 1e-4)).any():
+                hit("key %d / belt" % i, t)
+            if ((np.abs(w_[:, 0] - gx) < GP / 2 + 0.0005) & (((np.abs(w_[:, 1] - gy1) < GP / 2 + 0.0005) & (w_[:, 2] < GH + 0.0145)) | ((w_[:, 1] > gy0 - GP / 2 - 0.0005) & (w_[:, 1] < gy1 + GP / 2 + 0.0005) & (w_[:, 2] > GH - 0.0005) & (w_[:, 2] < GH + 0.0145)))).any():
+                hit("key %d / gate" % i, t)
+            rb = np.hypot(w_[:, 0] - bin_c.x, w_[:, 1] - bin_c.y)
+            zb = w_[:, 2]
+            r_in = BIN_RI0 + (BIN_RI1 - BIN_RI0) * np.clip(zb / BIN_H, 0, 1)
+            if (((rb > r_in - 0.0005) & (rb < r_in + BIN_W + 0.0005) & (zb < BIN_H + 0.0005)) | ((rb < r_in) & (zb < BIN_W + 1e-4))).any():
+                hit("key %d / bin" % i, t)
+            if ((np.abs(w_[:, 0] - px_c) < PW / 2 + 0.0005) & (w_[:, 1] > y_f - 0.0003) & (w_[:, 1] < y_back + 0.0005) & (w_[:, 2] < SCR + PH + 0.0005)).any():
+                hit("key %d / plate" % i, t)
+            if t > T_FLY1 and i == 0:
+                lw = np.c_[hole2[:, 0] + px_c, np.full(len(hole2), ol_b.y), hole2[:, 1] + SCR]
+                dmin = min(float(np.linalg.norm(lw - p_, axis=1).min()) for p_ in w_[::4])
+                if dmin < R_OL + 0.0002:
+                    hit("key 0 / outline", t)
+            if len(tube_xy) and (np.hypot(w_[:, None, 0] - tube_xy[None, :, 0], w_[:, None, 1] - tube_xy[None, :, 1]) < TR + 0.0005).any() and (w_[:, 2] < TUH + 0.01).any():
+                hit("key %d / tube" % i, t)
+            if (w_[:, 2] < 1e-4).any():
+                hit("key %d / table" % i, t)
+        for i in range(NK):
+            for j in range(i + 1, NK):
+                if W_[i] is None or W_[j] is None:
+                    continue
+                a_, b_ = W_[i], W_[j]
+                if np.linalg.norm(a_.mean(0) - b_.mean(0)) > 0.08:
+                    continue
+                dmin = np.sqrt(((a_[::2, None, :] - b_[None, ::2, :]) ** 2).sum(-1)).min()
+                if dmin < 0.0015:
+                    hit("key %d / key %d" % (i, j), t)
+    # the outline in flight, against the body, the plate and the rings
+    for f in range(round(T_OL0 * FPS), round(T_FLY1 * FPS) + 1, 2):
+        t = f / FPS
+        loc, q, s_ = ol_pose(t)
+        w_ = ol_world(loc, q, s_)
+        if min(tree.find_nearest(Vector(tuple(p)))[3] for p in w_[::3]) < R_OL * s_ + 0.0005:
+            hit("outline / body", t)
+        if (w_[:, 2] < SCR + 0.002).any():
+            hit("outline / screen", t)
+        gr = smooth((t - T_PL0) / (T_PL1 - T_PL0))
+        if gr > 0 and ((np.abs(w_[:, 0] - px_c) < PW / 2 * gr) & (w_[:, 1] > y_f - R_OL * s_) & (w_[:, 2] < SCR + PH * gr)).any():
+            hit("outline / plate", t)
+    print("4-09K clashes:", "none" if not bad_hits else "; ".join("%s at %s" % (k, v[:4]) for k, v in sorted(bad_hits.items())))
+    print("4-09K times: tossed at %s; kept keys end at s %s; belt end %.3f" % (
+        {i: round(v, 2) for i, v in BAD_T.items()}, {i: round(v, 3) for i, v in s_end.items()}, bx1 - XS))
+
+    # ---------------------------------------------------------------- the camera
+    pocket_v = dict(at=tuple(lerp(tuple(mid), tuple(ol_a), 0.8)), az=held["az"] - math.radians(6), el=math.radians(50), d=1.25, mm=45.0)
+    fly_v = dict(at=tuple(lerp(tuple(ol_a), (px_c, y_f, SCR + 0.15), 0.6)), az=math.radians(4), el=math.radians(34), d=1.5, mm=45.0)
+    start_v = dict(pocket_v, d=1.7, el=math.radians(48), az=held["az"] + math.radians(10))
+    plate_v = dict(at=(px_c, y_f, SCR + 0.085), az=math.radians(6), el=math.radians(14), d=0.62, mm=45.0)
+    grip_v = dict(plate_v, at=(px_c + 0.012, y_f, SCR + 0.075), d=0.4)
+    belt_a = dict(at=(cx + 0.38, (cy + by) / 2 - 0.04, 0.03), az=math.radians(4), el=math.radians(48), d=0.85, mm=45.0)
+    belt_b = dict(at=(XS + 0.17, by + 0.01, 0.03), az=math.radians(8), el=math.radians(44), d=0.74, mm=45.0)
+    row_a = dict(at=(XS + 0.5, by + 0.035, 0.065), az=math.radians(8), el=math.radians(32), d=0.74, mm=45.0)
+    row_b = dict(row_a, at=(XS + 0.48, by + 0.035, 0.068), az=math.radians(1), d=0.7)
+    wide = dict(at=((cx + c2x) / 2, (cy + P0.y) / 2 - 0.05, 0.1), az=held["az"] + math.radians(2), el=math.radians(40), d=3.0, mm=45.0)
+    toss_v = dict(at=(XS + S_T - 0.02, by + 0.035, 0.045), az=math.radians(6), el=math.radians(38), d=0.46, mm=45.0)          # in close on the first two tossed
+    cams = [(0.0, start_v), (1.3, pocket_v), (1.9, pocket_v), (2.45, fly_v), (3.1, plate_v), (T_G1 - 0.2, grip_v), (T_G2, grip_v), (V["filters"] - 0.2, belt_a), (7.4, belt_a),
+            (7.95, toss_v), (8.9, toss_v), (9.4, belt_b), (9.75, belt_b), (V["score"] + 0.2, row_a), (V["end"] - 2.2, row_b), (V["end"] - 0.2, wide)]
+
+    def mix(p, q, x):
+        log = lambda k: math.exp(math.log(p[k]) + (math.log(q[k]) - math.log(p[k])) * x)
+        return dict(at=lerp(p["at"], q["at"], x), az=p["az"] + (q["az"] - p["az"]) * x, el=p["el"] + (q["el"] - p["el"]) * x, d=log("d"), mm=log("mm"))
+
+    def view(t):
+        for (ta, a), (tb, b) in zip(cams, cams[1:]):
+            if t < tb:
+                return mix(a, b, smooth((t - ta) / (tb - ta)))
+        return cams[-1][1]
+    c = sc.camera
+    c.animation_data_clear()
+    c.data.animation_data_clear()
+    last_q[0] = None
+    for f in range(FRAMES):
+        v = view(f / FPS)
+        shoot(c, f, v, v["at"])
+    from bpy_extras.object_utils import world_to_camera_view
+    px_ = lambda p_: (lambda q: (q.x * 1920, (1 - q.y) * 1080, q.z))(world_to_camera_view(sc, c, Vector(tuple(p_))))
+
+    # for the overlay: where the things the notes point at sit on screen, every 0.1 s
+    def anchors(t):
+        loc, q, s_ = ol_pose(min(max(t, T_OL0), T_FLY1))
+        olc = Vector(tuple(ol_world(loc, q, s_).mean(0)))
+        dw = loc + q @ Vector((float(hinge2[0]), float(hinge2[1]), 0.0)) * s_
+        tip = key_world(0, t)
+        return dict(pk=mid, ol=olc, dot=dw, scr=Vector((cx + 0.15, cy - 0.12, SCR)), sign=sign.matrix_world.translation + Vector((0, 0, 0.016)),
+                    bin=bin_c + Vector((0, 0, BIN_H)), tube0=Vector((tubes[(kept[2], 0)]["x"], t_y, TUH + 0.009)), tube1=Vector((tubes[(kept[2], 1)]["x"], t_y, TUH + 0.02)),
+                    red=red_at(t),
+                    cdk=P0)
+    def red_at(t):          # the red ball of the first key tossed
+        ps = key_pose(BAD[0], t)
+        if ps is None:
+            return Vector((0, 0, 0))
+        loc, q, s_ = ps
+        return loc + q @ (Vector((-0.875, 1.2, 0.2)) * KS * s_)
+    track = []
+    for f in range(0, FRAMES, 6):
+        sc.frame_set(f)
+        a = anchors(f / FPS)
+        track.append([round(f / FPS, 1)] + [round(v_) for k in ("ol", "dot", "scr", "sign", "bin", "tube0", "tube1", "red", "cdk", "pk") for v_ in px_(a[k])[:2]])
+    json.dump(dict(keys=["ol", "dot", "scr", "sign", "bin", "tube0", "tube1", "red", "cdk", "pk"], track=track), open(HERE + "frames/hk_track.json", "w"), separators=(",", ":"))
+    for tt in (1.4, 3.0, 4.8, 6.6, 8.0, 9.0, 12.0, 14.5, 16.9):
+        sc.frame_set(round(tt * FPS))
+        a = anchors(tt)
+        print("4-09K t %.1f:" % tt, ", ".join("%s %.0f %.0f" % (k, *px_(p_)[:2]) for k, p_ in a.items()))
+
+    def update(t):
+        t = t - START
+        upd_lp(START + lp_off + t)
+        cme_.vertices.foreach_get("co", co0)
+        c3 = co0.reshape(42, nR, 3)
+        c3[0] = RC[17]
+        cme_.vertices.foreach_set("co", co0)
+        cme_.update()
+        grow = smooth((t - 0.3) / 1.2) * (1 - smooth((t - V["end"] + 2.4) / 1.4))
+        R = 0.5 + (RMAX - 0.5) * grow
+        reveal.inputs["From Min"].default_value, reveal.inputs["From Max"].default_value = R - 1.6, R
+        # the outline: drawn round over the pocket, then off to the plate
+        dr = smooth((t - T_OL0) / (T_OL1 - T_OL0))
+        line.data.bevel_factor_end = max(dr, 1e-3)
+        line.hide_render = dr <= 0
+        loc, q, s_ = ol_pose(t)
+        ol.location, ol.rotation_quaternion, ol.scale = loc, q, (s_,) * 3
+        dot.hide_render = t < T_OL1 - 0.1
+        dsc = smooth((t - T_OL1 + 0.1) / 0.3) * (1 + 0.35 * sum(math.sin(math.pi * (t - tp) / 0.3) for tp in (V["hinge"] + 0.1, V["hinge"] + 0.6, T_G1 + 0.05) if 0 <= t - tp < 0.3))
+        dot.scale = (max(dsc, 1e-3), max(dsc, 1e-3), 1.0)
+        blue_b.inputs["Emission Strength"].default_value = 1.0 + 3.0 * (dsc > 1.01)
+        # the plate grows up behind the outline from its base
+        gr = smooth((t - T_PL0) / (T_PL1 - T_PL0))
+        plate.scale = (max(gr, 1e-3), max(gr, 1e-3), 1.0)
+        for o in plate.children:
+            o.hide_render = gr <= 0
+        # the keys
+        for i, kd in enumerate(keys):
+            ps = key_pose(i, t)
+            e = kd["obj"]
+            for o in e.children:
+                o.hide_render = ps is None
+            if ps is None:
+                e.scale = (1e-4,) * 3
+                continue
+            loc, q, s_ = ps
+            e.location, e.rotation_quaternion, e.scale = loc, q, (KS * s_,) * 3
+        # the belt runs while keys are on it
+        travel = VB * (min(max(t, TL[0]), T_STOP) - TL[0])
+        mp.inputs["Location"].default_value[0] = -travel
+        # the warning: the red groups light as the filters are named, the sign flashes as each bad key reaches the gate
+        hot_b.inputs["Emission Strength"].default_value = 0.4 + (3.0 * max(0.0, math.sin(2 * math.pi * 1.6 * (t - V["toss"]))) if 0 <= t - V["toss"] < 1.25 else 0.0) + (1.5 if t >= V["toss"] + 1.25 else 0.0)
+        sign_b.inputs["Emission Strength"].default_value = 0.3 + sum(4.0 * math.sin(math.pi * (t - BAD_T[i] + 0.15) / 0.45) for i in BAD if 0 <= t - BAD_T[i] + 0.15 < 0.45)
+        # the score tubes fill
+        for (i, j), tb in tubes.items():
+            up = smooth((t - V["score"] + 0.6 - 0.06 * kept.index(i)) / 0.5)          # the empty tubes grow up from the table as the scoring starts, then the caps sit on
+            tb["tube"].scale = (1.0, 1.0, max(up, 1e-3))
+            tb["tube"].hide_render = up <= 0
+            cu_ = smooth((t - V["score"] - 0.1 - 0.06 * kept.index(i)) / 0.3)
+            tb["cap"].scale = (max(cu_, 1e-3),) * 3
+            tb["cap"].location.z = TUH + 0.0005 + (tb["cz"] - TUH - 0.0005) * max(cu_, 1e-3)
+            tb["cap"].hide_render = cu_ <= 0
+            h = (TUH - 0.002) * tb["score"] * smooth((t - T_FILL[j][i]) / 0.6)
+            tb["fill"].scale = (1.0, 1.0, max(h, 1e-4))
+            tb["fill"].hide_render = h <= 1e-4
+        sky(0.2)
+    co0 = np.zeros(len(cme_.vertices) * 3, np.float32)
+    return update
+
+
 sc, sky = stage()
-update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t, r=shot_r, s=shot_s, n=shot_n, o=shot_o, m=shot_m, j=shot_j, l=shot_l, e=shot_e, d=shot_d, i=shot_i, i2=shot_i2, i3=shot_i3, i4=shot_i4, lp=shot_lp, hz=shot_hz)[SHOT](sc, sky)
+update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t, r=shot_r, s=shot_s, n=shot_n, o=shot_o, m=shot_m, j=shot_j, l=shot_l, e=shot_e, d=shot_d, i=shot_i, i2=shot_i2, i3=shot_i3, i4=shot_i4, lp=shot_lp, hz=shot_hz, hk=shot_hk)[SHOT](sc, sky)
 sc.frame_start, sc.frame_end = 0, FRAMES
 for f in range(FIRST, LAST + 1, STEP):
     sc.frame_set(f)

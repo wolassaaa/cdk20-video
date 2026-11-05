@@ -5,6 +5,7 @@ import React from "react";
 import {registerRoot, Composition, AbsoluteFill, OffthreadVideo, Sequence, staticFile, useCurrentFrame, continueRender, delayRender} from "remotion";
 import TL from "./s1_timeline.json";
 import W3C from "./w3_count.json";
+import HK from "./hk_track.json";
 
 const FPS = TL.fps, N = TL.n, W = 1920, H = 1080;
 const INK = "#111113", SOFT = "#545458", RED = "#E8190F", DARK = "#9A0E08", KLEIN = "#002FA7", BONE = "#EDEBE4";
@@ -846,6 +847,97 @@ const S4D = ({file = "fusion_s1/s4_hz_1.mp4", fps = 30, review = true}) => {
   </AbsoluteFill></Clock.Provider>;
 };
 
+/** 4-09 version K (the director's 11-06 note: everyone must follow it), over shot hk. Same clock and voice-over as S4D. The pocket's outline flies off CDK20 and becomes a
+ * keyhole on a plate; its blue dot is Met84, the hinge, and one key rests its tip there; keys from the AI's screen ride a belt through a gate, the ones with a red group go
+ * in the bin; two tubes behind each key left fill with its scores. Blue is only the hinge, red only the warning. HK is what shot hk writes (frames/hk_track.json):
+ * every 0.1 s, the screen position of each anchor. Sources as S4D; the keys, groups and scores are drawn. */
+const HK_AT = (t, k) => {
+  const i0 = HK.keys.indexOf(k) * 2 + 1, tr = HK.track;
+  const i = Math.max(0, tr.findIndex(r => r[0] > t) - 1), a = tr[i], b = tr[Math.min(i + 1, tr.length - 1)];
+  const u = b[0] > a[0] ? Math.min(1, Math.max(0, (t - a[0]) / (b[0] - a[0]))) : 0;
+  return [a[i0] + (b[i0] - a[i0]) * u, a[i0 + 1] + (b[i0 + 1] - a[i0 + 1]) * u];
+};
+const BLUE = "#1F3BFF";
+/** A pen line from a note to the thing it names, drawn after the note starts. */
+const Pen = ({from, to, at, fill = DARK, dur = 0.35}) => {
+  const t = useT(), p = smooth((t - at) / dur);
+  if (p <= 0) return null;
+  return <line x1={from[0]} y1={from[1]} x2={from[0] + (to[0] - from[0]) * p} y2={from[1] + (to[1] - from[1]) * p} stroke={fill} strokeWidth={3} strokeLinecap="round"/>;
+};
+/** A dashed pen arrow: the outline came up off the pocket. */
+const Lift = ({from, to, at, fill = DARK}) => {
+  const t = useT(), p = smooth((t - at) / 0.5);
+  if (p <= 0) return null;
+  const x = from[0] + (to[0] - from[0]) * p, y = from[1] + (to[1] - from[1]) * p, a = Math.atan2(to[1] - from[1], to[0] - from[0]), k = 18;
+  return <g stroke={fill} strokeWidth={3.5} strokeLinecap="round" fill="none">
+    <line x1={from[0]} y1={from[1]} x2={x} y2={y} strokeDasharray="12 10"/>
+    {p > 0.95 && <path d={`M${x - k * Math.cos(a - 0.45)} ${y - k * Math.sin(a - 0.45)} L${x} ${y} L${x - k * Math.cos(a + 0.45)} ${y - k * Math.sin(a + 0.45)}`}/>}
+  </g>;
+};
+const S4K = ({file = "fusion_s1/s4_hk_1.mp4", fps = 30, review = true}) => {
+  const t = useCurrentFrame() / fps, V = HZ;
+  ruler.font = `600 28px "${SANS}"`;
+  const tagW = ruler.measureText("AlphaFold DB v6 · predicted").width;
+  const red = HK_AT(t, "red"), pk = HK_AT(t, "pk"), ol = HK_AT(t, "ol"), dot = HK_AT(t, "dot"), sign = HK_AT(t, "sign"), bin = HK_AT(t, "bin"), t0 = HK_AT(t, "tube0"), t1 = HK_AT(t, "tube1");
+  const win = (a, b, d = 0.3) => after(t, a, d) * (1 - after(t, b, d));
+  // note spots: beside what they name, on bare table
+  const sx = ol[0] - 300, sy = ol[1] + 10;
+  const hx = 1410, hy = dot[1] - 150;          // right of the plate, on bare table: the plate is the figure
+  const gx = 170, gy = 112;          // top left, over bare table: in close on the gate the sign, the bin and the belt fill the rest
+  return <Clock.Provider value={t}><AbsoluteFill style={{background: BONE}}>
+    <OffthreadVideo src={staticFile(file)} muted style={{width: W, height: H}}/>
+    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
+      <g opacity={win(0.9, 2.2)}>
+        <Note x={sx} y={sy} size={48} at={1.0} anchor="end" rot={-2}>the pocket's shape</Note>
+        <Pen from={[sx + 14, sy - 14]} to={[ol[0] - 70, ol[1]]} at={1.5}/>
+        <Lift from={pk} to={[ol[0] + 10, ol[1] + 70]} at={1.1}/>
+      </g>
+      <g opacity={win(V.hinge, V.filters - 0.5)}>
+        <Note x={hx} y={hy} size={48} at={V.hinge + 0.2} fill={BLUE} rot={-2}>the hinge · Met84</Note>
+        <Pen from={[hx - 10, hy + 10]} to={[dot[0] + 14, dot[1] - 12]} at={V.hinge + 0.5} fill={BLUE}/>
+        <Note x={hx} y={hy - 66} size={44} at={3.9} dur={0.7} rot={-2}>every key must grip it</Note>
+      </g>
+      <g opacity={win(V.filters, V.toss + 0.4)}>
+        <Note x={1180} y={120} size={46} at={V.filters - 0.1} dur={0.6} rot={-1.5}>keys the AI designs</Note>
+      </g>
+      <g opacity={win(V.toss, 9.45)}>          {/* gone before the camera leaves the gate at 9.6, or the line runs off the left edge */}
+        <Note x={gx} y={gy} size={44} at={7.85} dur={0.8} rot={-1.5}>red group: reactive or possibly toxic</Note>
+        <Note x={gx + 40} y={gy + 58} size={44} at={8.15} dur={0.5} rot={-1.5}>→ out, into the bin</Note>
+        <g opacity={1 - after(t, 8.05, 0.15)}>          {/* the first key with a red group, circled until it leaves the belt (the track is too coarse to follow the toss) */}
+          <PenLoop x={red[0]} y={red[1]} rx={30} ry={26} at={V.toss + 0.1} dur={0.4} fill={DARK}/>
+        </g>
+      </g>
+      <g opacity={win(V.score + 0.3, V.end - 1.6)}>
+        {/* blind read 4: two labels with leaders meeting in a V were hard to pair with their tubes, so each label now sits at its own height and drops straight onto its own cap */}
+        <Note x={t0[0] - 14} y={t0[1] - 196} size={44} at={V.score + 0.4} dur={0.4} anchor="end" rot={-1.5}>drug-like?</Note>
+        <Pen from={[t0[0] - 6, t0[1] - 182]} to={[t0[0], t0[1] - 18]} at={V.score + 1.0}/>
+        <Note x={t1[0] + 16} y={t1[1] - 104} size={44} at={V.easy} dur={0.5} rot={-1.5}>easy to make?</Note>
+        <Pen from={[t1[0] + 8, t1[1] - 92]} to={[t1[0], t1[1] - 18]} at={V.easy + 0.6}/>
+        <Note x={t1[0] + 30} y={t1[1] - 56} size={36} at={V.easy + 1.2} dur={0.5} rot={-1.5}>fuller = better</Note>
+      </g>
+      <g opacity={win(V.score + 0.2, V.end - 0.9) + after(t, V.end - 0.6, 0.4)}><text x={1856} y={92} fontFamily={SANS} fontSize={36} fontWeight={600} fill={INK} textAnchor="end">Objective 1 / Tool: generative design</text></g>
+      {review && <text x={64} y={1018} fontFamily={SANS} fontSize={24} fontWeight={500} fill={SOFT}>VO (B): {[...HZ_LINES].reverse().find(([a]) => t >= a)[1]}</text>}
+      <g opacity={1 - after(t, 2.2, 0.3)}>          {/* over the pocket CDK20 fills the bottom of the frame, so the tag sits top right */}
+        <circle cx={1856 - tagW - 26} cy={92 - 10} r={14} fill="none" stroke={INK} strokeWidth={2.5} strokeDasharray="6 5"/>
+        <text x={1856} y={92} fontFamily={SANS} fontSize={28} fontWeight={600} fill={INK} textAnchor="end">AlphaFold DB v6 · predicted</text>
+      </g>
+      <g opacity={after(t, V.end - 0.5, 0.3)}>
+        <circle cx={W - 72 - tagW - 26} cy={986 - 10} r={14} fill="none" stroke={INK} strokeWidth={2.5} strokeDasharray="6 5"/>
+        <text x={W - 72} y={986} fontFamily={SANS} fontSize={28} fontWeight={600} fill={INK} textAnchor="end">AlphaFold DB v6 · predicted</text>
+      </g>
+      <g opacity={HK_SRC_LOW(t) * (1 - win(7.75, 9.45, 0.2))}>          {/* off while the camera is in close on the gate, where the belt fills the bottom */}
+        <text x={W - 72} y={1024} fontFamily={SANS} fontSize={22} fontWeight={500} fill={SOFT} textAnchor="end">Illustration · pocket and hinge Met84: Ren 2023</text>
+        <text x={W - 72} y={1054} fontFamily={SANS} fontSize={22} fontWeight={500} fill={SOFT} textAnchor="end">filters: Ivanenkov 2023 · structure AlphaFold DB v6</text>
+      </g>
+      <g opacity={1 - HK_SRC_LOW(t)}>
+        <text x={1856} y={136} fontFamily={SANS} fontSize={22} fontWeight={500} fill={SOFT} textAnchor="end">Illustration · pocket and hinge Met84: Ren 2023</text>
+        <text x={1856} y={166} fontFamily={SANS} fontSize={22} fontWeight={500} fill={SOFT} textAnchor="end">filters: Ivanenkov 2023 · structure AlphaFold DB v6</text>
+      </g>
+    </svg>
+  </AbsoluteFill></Clock.Provider>;
+};
+const HK_SRC_LOW = (t) => after(t, HZ.filters - 0.4, 0.3);          // top right while CDK20 and then the plate and the screen's rings fill the bottom; bottom right once over the belt
+
 /** S3 test boards: the beats that have to read in five seconds. Numbers are Feng 2011's; the grid's cells are drawn, so its source line says Illustration. */
 const Tally = () => <g transform="translate(0 110)">
   {Array.from({length: 52}, (_, i) => <rect key={i} x={250 + (i % 26) * 54} y={i < 26 ? 300 : 450} width={26} height={120} rx={13} fill={i < 36 ? RED : "#D4D1C8"}/>)}
@@ -904,6 +996,7 @@ const Root = () => <>
   <Composition id="S4B" component={S4B} durationInFrames={855} fps={30} width={W} height={H}/>
   <Composition id="S4C" component={S4C} durationInFrames={1245} fps={30} width={W} height={H}/>
   <Composition id="S4D" component={S4D} durationInFrames={510} fps={30} width={W} height={H}/>
+  <Composition id="S4K" component={S4K} durationInFrames={510} fps={30} width={W} height={H}/>
   <Composition id="Loop" component={Loop} durationInFrames={1620} fps={60} width={W} height={H}/>
 </>;
 registerRoot(Root);
