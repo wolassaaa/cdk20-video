@@ -1,0 +1,1080 @@
+1
+00:00:02,000 --> 00:00:07,960
+Every day in Hong Kong,
+about four people die of liver cancer.
+
+2
+00:00:08,000 --> 00:00:10,821
+That's 1,412 people in 2022 alone.
+
+3
+00:00:10,861 --> 00:00:17,302
+Here, it's one of the three deadliest
+cancers, alongside lung and colorectal.
+
+4
+00:00:17,342 --> 00:00:19,069
+And it's not just us.
+
+5
+00:00:19,109 --> 00:00:24,960
+Worldwide, it's the sixth most common
+cancer, and the third deadliest.
+
+6
+00:00:25,000 --> 00:00:28,731
+Here's the thing.
+We already have medicines.
+
+7
+00:00:28,771 --> 00:00:30,960
+Just not good enough ones.
+
+8
+00:00:31,000 --> 00:00:37,707
+The standard first treatment for advanced
+liver cancer has already changed once,
+
+9
+00:00:37,747 --> 00:00:42,346
+from Nexavar to a combo,
+atezolizumab plus bevacizumab.
+
+10
+00:00:42,386 --> 00:00:47,996
+But here, only about three in ten
+patients are alive five years on.
+
+11
+00:00:48,036 --> 00:00:51,960
+The study we follow calls
+it a huge unmet need.
+
+12
+00:00:52,000 --> 00:00:54,960
+So... why not just make a better one?
+
+13
+00:00:55,000 --> 00:00:57,960
+Because that's way harder than it sounds.
+
+14
+00:00:58,000 --> 00:00:59,960
+Like, ten-to-seventeen-years hard.
+
+15
+00:01:00,000 --> 00:01:06,101
+Start the search the year we were born,
+and it might only be ready now.
+
+16
+00:01:06,141 --> 00:01:09,733
+It can cost almost 2.8 billion US dollars.
+
+17
+00:01:09,773 --> 00:01:15,960
+And of drugs tested in people,
+only about one in ten reaches the market.
+
+18
+00:01:16,000 --> 00:01:19,384
+To see why,
+let's follow one drug's journey.
+
+19
+00:01:19,424 --> 00:01:22,108
+Every medicine walks the same road.
+
+20
+00:01:22,148 --> 00:01:26,855
+Find a target. Find a hit,
+a first molecule that works on it.
+
+21
+00:01:26,895 --> 00:01:30,201
+Improve it.
+Test it in cells, then animals.
+
+22
+00:01:30,241 --> 00:01:33,392
+Then human trials: phase one, two, three.
+
+23
+00:01:33,432 --> 00:01:35,960
+Then approval. Any step can fail.
+
+24
+00:01:36,000 --> 00:01:39,286
+Now here's where it gets interesting.
+
+25
+00:01:39,326 --> 00:01:40,286
+In 2024,
+
+26
+00:01:40,326 --> 00:01:47,117
+part of the Nobel Prize in Chemistry
+went to Demis Hassabis and John Jumper,
+
+27
+00:01:47,157 --> 00:01:51,960
+for AlphaFold,
+an AI that predicts the shape of proteins.
+
+28
+00:01:52,000 --> 00:01:54,765
+So can AI walk the first steps faster?
+
+29
+00:01:54,805 --> 00:01:59,490
+Let's follow one real case,
+where AI tools took on liver cancer.
+
+30
+00:01:59,530 --> 00:02:02,960
+And part of it starts right here,
+in Hong Kong.
+
+31
+00:02:21,000 --> 00:02:28,451
+Hong Kong first. In 2011, a team at the
+Chinese University of Hong Kong studied
+
+32
+00:02:28,491 --> 00:02:34,141
+liver tumours from patients at
+the Prince of Wales Hospital.
+
+33
+00:02:34,181 --> 00:02:39,831
+One protein kept showing up raised:
+CCRK, also called CDK20.
+
+34
+00:02:39,871 --> 00:02:47,132
+Fast forward to 2023: an AI drug-discovery
+study goes after the same protein,
+
+35
+00:02:47,172 --> 00:02:53,960
+with co-authors at Insilico Medicine's
+Hong Kong office in Science Park.
+
+36
+00:02:54,000 --> 00:03:00,008
+So our research question is: how can
+computer-aided methods help scientists
+
+37
+00:03:00,048 --> 00:03:03,960
+find and assess potential
+cancer drug candidates?
+
+38
+00:03:04,000 --> 00:03:09,960
+And we'll answer it with one case study:
+CDK20 in liver cancer.
+
+39
+00:03:10,000 --> 00:03:12,960
+We set ourselves two objectives.
+
+40
+00:03:13,000 --> 00:03:20,322
+One: to identify the major computer-aided
+methods used in cancer drug discovery.
+
+41
+00:03:20,362 --> 00:03:23,911
+Two: to evaluate how these methods help
+
+42
+00:03:23,951 --> 00:03:27,960
+scientists assess
+potential drug candidates.
+
+43
+00:03:28,000 --> 00:03:31,433
+So how did we check all this? We read.
+
+44
+00:03:31,473 --> 00:03:36,826
+A lot. No lab work of our own:
+this is a literature review.
+
+45
+00:03:36,866 --> 00:03:43,772
+At the centre, one original study by
+Ren and colleagues in Chemical Science,
+
+46
+00:03:43,812 --> 00:03:46,879
+2023, with its supplementary data.
+
+47
+00:03:46,919 --> 00:03:50,444
+Around it, the earlier Hong Kong study,
+
+48
+00:03:50,484 --> 00:03:54,283
+papers behind two AI tools, a 2023 review,
+
+49
+00:03:54,323 --> 00:03:58,852
+a textbook chapter,
+and a 2026 expert Perspective,
+
+50
+00:03:58,892 --> 00:04:01,960
+which we read only as an abstract.
+
+51
+00:04:02,000 --> 00:04:05,580
+For every source,
+we asked: what kind is it,
+
+52
+00:04:05,620 --> 00:04:09,941
+how much did we read,
+and how strong is the evidence?
+
+53
+00:04:09,981 --> 00:04:14,055
+Who did the work?
+Were there controls and repeats?
+
+54
+00:04:14,095 --> 00:04:16,030
+One thing worth knowing:
+
+55
+00:04:16,070 --> 00:04:20,802
+most authors of the main study
+work for Insilico Medicine,
+
+56
+00:04:20,842 --> 00:04:24,504
+which built its AI tools.
+They say so openly.
+
+57
+00:04:24,544 --> 00:04:27,960
+Useful evidence, not an independent check.
+
+58
+00:04:28,000 --> 00:04:31,284
+So here's where we're going.
+First, the lock.
+
+59
+00:04:31,324 --> 00:04:33,943
+Then how AI helped cut a key for it.
+
+60
+00:04:33,983 --> 00:04:36,159
+Then what happened in the lab.
+
+61
+00:04:36,199 --> 00:04:40,960
+And finally, the big one:
+how much did the computers really help?
+
+62
+00:04:43,000 --> 00:04:46,960
+Okay.
+To get this, picture a lock and a key.
+
+63
+00:04:47,000 --> 00:04:50,754
+Inside your cells,
+proteins do a lot of the work.
+
+64
+00:04:50,794 --> 00:04:55,399
+Most drugs grab one protein
+tightly and change what it does,
+
+65
+00:04:55,439 --> 00:04:58,960
+slotting into a pocket
+like a key into a lock.
+
+66
+00:04:59,000 --> 00:05:04,719
+Scientists call the lock the target,
+and the key a candidate molecule.
+
+67
+00:05:04,759 --> 00:05:09,821
+A good key fits its own lock tightly,
+and opens no one else's.
+
+68
+00:05:09,861 --> 00:05:11,960
+That's called selectivity.
+
+69
+00:05:12,000 --> 00:05:17,531
+Our lock is CDK20. It's an enzyme,
+a protein with a chemical job.
+
+70
+00:05:17,571 --> 00:05:24,046
+Its keyhole is a pocket where it normally
+grabs a small molecule called ATP.
+
+71
+00:05:24,086 --> 00:05:29,960
+Plug that pocket with the right key,
+and the enzyme can't do its job.
+
+72
+00:05:30,000 --> 00:05:33,775
+Why this lock?
+Remember the Hong Kong team.
+
+73
+00:05:33,815 --> 00:05:40,605
+In 36 of 52 liver tumours, CDK20 was
+higher than in nearby non-tumour tissue.
+
+74
+00:05:40,645 --> 00:05:46,194
+High levels went with later-stage
+tumours and shorter survival.
+
+75
+00:05:46,234 --> 00:05:51,960
+And turning CDK20 down in liver
+cancer cells slowed their growth.
+
+76
+00:05:52,000 --> 00:05:53,775
+So: a strong suspect.
+
+77
+00:05:53,815 --> 00:05:58,960
+Not the only cause of liver cancer,
+but a lock worth trying.
+
+78
+00:05:59,000 --> 00:06:04,177
+In 2023, an AI platform called
+PandaOmics backed that hunch.
+
+79
+00:06:04,217 --> 00:06:07,395
+It combed ten liver cancer data sets,
+
+80
+00:06:07,435 --> 00:06:12,612
+over a thousand tumour samples
+and hundreds of healthy ones,
+
+81
+00:06:12,652 --> 00:06:14,438
+plus research papers.
+
+82
+00:06:14,478 --> 00:06:19,743
+People checked its top 20 by hand,
+and CDK20 came out on top,
+
+83
+00:06:19,783 --> 00:06:22,960
+with no approved drug against it yet.
+
+84
+00:06:23,000 --> 00:06:28,194
+But here's the problem.
+To design a key, you need to see the lock.
+
+85
+00:06:28,234 --> 00:06:31,208
+And no one had measured CDK20's shape.
+
+86
+00:06:31,248 --> 00:06:33,905
+That takes a lot of hard lab work,
+
+87
+00:06:33,945 --> 00:06:38,822
+and only a small fraction of
+proteins have ever been measured.
+
+88
+00:06:38,862 --> 00:06:40,329
+Without a 3D shape,
+
+89
+00:06:40,369 --> 00:06:45,960
+even computer predictions of binding
+get expensive, slow and difficult.
+
+90
+00:06:46,000 --> 00:06:49,090
+So you've got a lock nobody can see.
+
+91
+00:06:49,130 --> 00:06:51,960
+How do you cut a key in the dark?
+
+92
+00:07:17,000 --> 00:07:21,775
+So the team did something that
+once sounded like science fiction.
+
+93
+00:07:21,815 --> 00:07:24,441
+They asked an AI to guess the shape.
+
+94
+00:07:24,481 --> 00:07:29,997
+Imagine a protein as a chain of building
+blocks that folds into a 3D shape.
+
+95
+00:07:30,037 --> 00:07:32,960
+The order of the blocks is the sequence.
+
+96
+00:07:33,000 --> 00:07:37,330
+AlphaFold learned from known
+structures how sequences fold.
+
+97
+00:07:37,370 --> 00:07:42,960
+Give it one, and it predicts the shape,
+plus how sure it is about each part.
+
+98
+00:07:43,000 --> 00:07:46,439
+Before,
+you'd need a lab-measured structure.
+
+99
+00:07:46,479 --> 00:07:47,439
+Now?
+
+100
+00:07:47,479 --> 00:07:53,132
+The team just downloaded a prediction,
+for free, from a public database.
+
+101
+00:07:53,172 --> 00:07:54,951
+According to the paper,
+
+102
+00:07:54,991 --> 00:07:59,960
+this was the first time AlphaFold had
+been used to find a hit like this.
+
+103
+00:08:00,000 --> 00:08:01,186
+But look closer.
+
+104
+00:08:01,226 --> 00:08:06,164
+One end of the protein, a floppy tail,
+had really low confidence.
+
+105
+00:08:06,204 --> 00:08:09,534
+And in the model,
+it lay across the keyhole,
+
+106
+00:08:09,574 --> 00:08:13,671
+with one building block
+sitting inside the ATP pocket.
+
+107
+00:08:13,711 --> 00:08:17,960
+Trust it blindly,
+and you'd cut keys for a blocked door.
+
+108
+00:08:18,000 --> 00:08:19,960
+So what did they do?
+
+109
+00:08:20,000 --> 00:08:23,085
+They cut the tail off.
+The AI made the guess.
+
+110
+00:08:23,125 --> 00:08:24,960
+A human caught the problem.
+
+111
+00:08:25,000 --> 00:08:28,393
+And this next part honestly blew my mind.
+
+112
+00:08:28,433 --> 00:08:32,495
+Think about how chemists
+have always found a key.
+
+113
+00:08:32,535 --> 00:08:35,593
+Imagine a molecule. Make it. Test it.
+
+114
+00:08:35,633 --> 00:08:38,104
+It fails. Tweak it. Try again.
+
+115
+00:08:38,144 --> 00:08:42,960
+And every single round in a
+real lab costs time and money.
+
+116
+00:08:43,000 --> 00:08:48,290
+Generative AI takes that loop
+and moves it inside a computer.
+
+117
+00:08:48,330 --> 00:08:50,999
+The platform here, Chemistry42,
+
+118
+00:08:51,039 --> 00:08:56,591
+runs dozens of AI models side by side,
+built on known chemistry.
+
+119
+00:08:56,631 --> 00:09:00,873
+They invent new molecules
+for this exact keyhole,
+
+120
+00:09:00,913 --> 00:09:05,067
+score them, learn from the scores,
+and go again.
+
+121
+00:09:05,107 --> 00:09:09,960
+Its makers say it turns out
+new structures within hours.
+
+122
+00:09:10,000 --> 00:09:12,366
+AI didn't replace the scientists.
+
+123
+00:09:12,406 --> 00:09:16,960
+It ran their trial and error
+inside a computer, at light speed.
+
+124
+00:09:17,000 --> 00:09:20,646
+The team gave it the
+pocket's shape and one rule:
+
+125
+00:09:20,686 --> 00:09:23,956
+every key must grip a
+spot called the hinge.
+
+126
+00:09:23,996 --> 00:09:29,748
+Its filters are built to toss designs
+with reactive or possibly toxic groups,
+
+127
+00:09:29,788 --> 00:09:33,960
+and to score how drug-like
+and easy to make each one is.
+
+128
+00:09:49,000 --> 00:09:52,581
+It came back with 8,918 brand-new designs.
+
+129
+00:09:52,621 --> 00:09:58,012
+Way too many to make.
+So each key gets tried in a virtual lock.
+
+130
+00:09:58,052 --> 00:10:04,650
+That's docking: the computer predicts
+how a molecule might sit in the pocket,
+
+131
+00:10:04,690 --> 00:10:10,770
+and scores the fit. Similar designs
+get grouped, 54 make the shortlist,
+
+132
+00:10:10,810 --> 00:10:13,960
+and chemists pick just seven to make.
+
+133
+00:10:14,000 --> 00:10:16,960
+Wait. So the computer picked the winners?
+
+134
+00:10:17,000 --> 00:10:21,074
+Not quite.
+A docking score is a clue, not proof.
+
+135
+00:10:21,114 --> 00:10:22,960
+Only the lab can tell.
+
+136
+00:10:25,000 --> 00:10:30,627
+So, the moment of truth.
+Seven real molecules, made in a real lab.
+
+137
+00:10:30,667 --> 00:10:35,778
+Do any actually grab CDK20?
+Grip is measured as Kd: roughly,
+
+138
+00:10:35,818 --> 00:10:40,243
+how much molecule it takes
+to grab half the protein.
+
+139
+00:10:40,283 --> 00:10:41,960
+Lower means tighter.
+
+140
+00:10:42,000 --> 00:10:46,560
+Six of them barely held on.
+But one stood out.
+
+141
+00:10:46,600 --> 00:10:47,960
+Its name? 001.
+
+142
+00:10:48,000 --> 00:10:51,216
+001's Kd: 9.2 micromolar. The other six?
+
+143
+00:10:51,256 --> 00:10:55,448
+All above 30. Much weaker.
+And here's the wild part.
+
+144
+00:10:55,488 --> 00:10:57,727
+The clock read just 30 days,
+
+145
+00:10:57,767 --> 00:11:01,960
+from picking the target to
+this first confirmed hit.
+
+146
+00:11:02,000 --> 00:11:04,772
+But then came a second test.
+
+147
+00:11:04,812 --> 00:11:10,094
+Because grabbing a lock
+isn't the same as jamming it.
+
+148
+00:11:10,134 --> 00:11:14,311
+Does 001 actually stop CDK20 from working?
+
+149
+00:11:14,351 --> 00:11:22,345
+That's measured as IC50: how much you
+need to cut the enzyme's activity in half.
+
+150
+00:11:22,385 --> 00:11:25,458
+For 001? Above 6,000 nanomolar.
+
+151
+00:11:25,498 --> 00:11:25,960
+Weak.
+
+152
+00:11:26,000 --> 00:11:29,960
+The key went into the lock.
+But it barely turned.
+
+153
+00:11:30,000 --> 00:11:32,960
+So was that it? Back to square one?
+
+154
+00:11:33,000 --> 00:11:33,960
+Not at all.
+
+155
+00:11:34,000 --> 00:11:39,832
+This is where the loop kicks in again,
+now with real lab data inside.
+
+156
+00:11:39,872 --> 00:11:46,386
+The results went back in, with a predicted
+pose of how 001 sat in the pocket.
+
+157
+00:11:46,426 --> 00:11:49,875
+Sixteen new designs. Six made and tested.
+
+158
+00:11:49,915 --> 00:11:52,960
+All within 30 days of that first hit.
+
+159
+00:11:53,000 --> 00:11:59,230
+And one of them, 048,
+grabbed about fifteen times tighter.
+
+160
+00:11:59,270 --> 00:12:06,690
+Then the enzyme test. Remember,
+001 needed more than 6,000 nanomolar.
+
+161
+00:12:06,730 --> 00:12:08,960
+048 needed just 33.4.
+
+162
+00:12:09,000 --> 00:12:09,960
+This time, the key turned.
+
+163
+00:12:18,000 --> 00:12:21,389
+Then, the big step: living cells.
+
+164
+00:12:21,429 --> 00:12:28,661
+After three days with 048, Huh7 liver
+cancer cells, packed with CDK20,
+
+165
+00:12:28,701 --> 00:12:34,687
+lost half their living-cell
+signal at about 210 nanomolar.
+
+166
+00:12:34,727 --> 00:12:39,363
+Comparison cells, HEK293,
+needed about 1,700.
+
+167
+00:12:39,403 --> 00:12:41,960
+Roughly eight times more.
+
+168
+00:12:44,000 --> 00:12:48,753
+So, the big question.
+How much did the computers actually help?
+
+169
+00:12:48,793 --> 00:12:50,960
+Let's line up before and now.
+
+170
+00:12:51,000 --> 00:12:56,759
+Seeing the lock. Before: hard lab
+experiments, and without a 3D shape,
+
+171
+00:12:56,799 --> 00:13:00,155
+design was expensive, slow and difficult.
+
+172
+00:13:00,195 --> 00:13:04,960
+Now: a free prediction,
+downloaded from a public database.
+
+173
+00:13:05,000 --> 00:13:11,457
+Finding a hit. Before:
+screening real compounds by the millions,
+
+174
+00:13:11,497 --> 00:13:17,447
+an approach a 2023 review says
+has hit a costly bottleneck.
+
+175
+00:13:17,487 --> 00:13:24,960
+Now: 8,918 designs inside a computer,
+and just 13 molecules actually made.
+
+176
+00:13:25,000 --> 00:13:26,926
+Millions of compounds screened before.
+
+177
+00:13:26,966 --> 00:13:27,960
+Here? Thirteen made.
+
+178
+00:13:28,000 --> 00:13:30,960
+Thirteen. That's honestly wild.
+
+179
+00:13:31,000 --> 00:13:34,614
+Time.
+Before: a ten-to-seventeen-year road,
+
+180
+00:13:34,654 --> 00:13:38,352
+with finding a hit just
+the opening stretch.
+
+181
+00:13:38,392 --> 00:13:43,960
+Now: 30 days to the first hit,
+and a better key within another 30.
+
+182
+00:13:44,000 --> 00:13:49,452
+Improving the key. Before: every
+change meant another costly lab round.
+
+183
+00:13:49,492 --> 00:13:54,479
+Now: a predicted picture of the
+first key guided sixteen designs,
+
+184
+00:13:54,519 --> 00:13:57,960
+and the grip got about
+fifteen times tighter.
+
+185
+00:13:58,000 --> 00:14:01,868
+To be fair,
+these pairs come from different studies:
+
+186
+00:14:01,908 --> 00:14:06,376
+they compare scale and speed,
+not one race run side by side.
+
+187
+00:14:06,416 --> 00:14:10,960
+But the paper itself calls the
+work cost- and time-efficient.
+
+188
+00:14:11,000 --> 00:14:15,250
+Now imagine this keeps
+working further down the road.
+
+189
+00:14:15,290 --> 00:14:21,484
+Fewer failed molecules, lower costs,
+fewer animal tests, less chemical waste.
+
+190
+00:14:21,524 --> 00:14:24,074
+Computing costs electricity too.
+
+191
+00:14:24,114 --> 00:14:27,960
+And the real prize?
+New treatments for patients.
+
+192
+00:14:28,000 --> 00:14:30,982
+So where's 048 on the road? Target: found.
+
+193
+00:14:31,022 --> 00:14:33,428
+Hit: found. Improving it: started.
+
+194
+00:14:33,468 --> 00:14:37,960
+Cells: first tests, done.
+Animals and clinical trials: not yet.
+
+195
+00:14:38,000 --> 00:14:42,381
+And here's what the end of
+that road can look like.
+
+196
+00:14:42,421 --> 00:14:47,149
+Some AI-assisted cancer drugs
+have walked much further.
+
+197
+00:14:47,189 --> 00:14:51,223
+In September 2026,
+one of them, lirafugratinib,
+
+198
+00:14:51,263 --> 00:14:55,211
+was approved in the US
+for a bile duct cancer.
+
+199
+00:14:55,251 --> 00:14:58,418
+Others failed along the way. And 048?
+
+200
+00:14:58,458 --> 00:15:02,059
+Its makers chose not to take it to trials,
+
+201
+00:15:02,099 --> 00:15:05,960
+and shared it with other
+researchers instead.
+
+202
+00:15:06,000 --> 00:15:08,870
+048 is at the very start of the road.
+
+203
+00:15:08,910 --> 00:15:12,960
+But for this case,
+that start took weeks, not years.
+
+204
+00:15:15,000 --> 00:15:17,960
+So, what should happen next?
+We'd suggest three things.
+
+205
+00:15:18,000 --> 00:15:22,895
+One: walk 048 further.
+It's public now, so anyone could try.
+
+206
+00:15:22,935 --> 00:15:27,666
+Test it in more liver cancer
+cells and normal liver cells,
+
+207
+00:15:27,706 --> 00:15:33,423
+then animals, and check how the body
+handles it and what else it hits.
+
+208
+00:15:33,463 --> 00:15:36,960
+The authors had already
+listed these steps.
+
+209
+00:15:37,000 --> 00:15:42,434
+Two: check the AlphaFold model
+against a lab-measured structure,
+
+210
+00:15:42,474 --> 00:15:43,802
+once one exists.
+
+211
+00:15:43,842 --> 00:15:49,960
+And feed every result, including the
+failures, back into the next round.
+
+212
+00:15:50,000 --> 00:15:54,901
+Three: race them. An AI route
+and a classic route, same target,
+
+213
+00:15:54,941 --> 00:15:57,882
+same budget, same definition of a hit.
+
+214
+00:15:57,922 --> 00:16:01,960
+Then we'd know exactly how
+much faster AI really is.
+
+215
+00:16:04,000 --> 00:16:05,960
+So, back to where we started.
+
+216
+00:16:06,000 --> 00:16:09,578
+How can computer-aided
+methods help scientists
+
+217
+00:16:09,618 --> 00:16:12,645
+find and assess cancer drug candidates?
+
+218
+00:16:12,685 --> 00:16:17,129
+In this case, at four points.
+Picking a target from data.
+
+219
+00:16:17,169 --> 00:16:20,904
+Predicting the lock's shape.
+Designing new keys.
+
+220
+00:16:20,944 --> 00:16:23,342
+And ranking which ones to make.
+
+221
+00:16:23,382 --> 00:16:26,960
+That's our first objective,
+met for this case.
+
+222
+00:16:27,000 --> 00:16:32,268
+And our second? These methods helped
+the team assess candidates fast.
+
+223
+00:16:32,308 --> 00:16:36,652
+Screening by the millions
+became thirteen molecules made.
+
+224
+00:16:36,692 --> 00:16:39,114
+And on a road measured in years,
+
+225
+00:16:39,154 --> 00:16:43,960
+the first hit came in 30 days,
+and round two made the key turn.
+
+226
+00:16:44,000 --> 00:16:46,804
+This works in cells, not yet in people.
+
+227
+00:16:46,844 --> 00:16:49,137
+The computer narrows the search.
+
+228
+00:16:49,177 --> 00:16:50,960
+Experiments still decide.
+
+229
+00:16:51,000 --> 00:16:55,960
+So next time you see a headline
+like 'AI discovers a cancer drug'...
+
+230
+00:16:56,000 --> 00:16:59,089
+...ask where it really is on the road:
+
+231
+00:16:59,129 --> 00:17:02,960
+computer, protein, cells,
+animals, or patients?
+
+232
+00:17:03,000 --> 00:17:05,341
+AI didn't replace the scientists.
+
+233
+00:17:05,381 --> 00:17:08,517
+It gave them trial and
+error at light speed.
+
+234
+00:17:08,557 --> 00:17:09,960
+Thanks for watching.
