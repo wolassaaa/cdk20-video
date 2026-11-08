@@ -31,8 +31,8 @@ import world as W      # noqa: E402
 P, gk = B.P, B.gk
 argv = sys.argv[sys.argv.index("--") + 1:]
 SHOT, OUT = argv[0], argv[1]
-START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0, r=412.0, s=412.0, n=412.0, o=412.0, m=412.0, j=412.0, l=412.0, e=412.0, d=412.0, i=437.0, i2=463.0, i3=480.0, i4=505.0, lp=508.5, hz=557.0, hk=557.0)[SHOT]
-FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6, r=6, s=6, n=4, o=3, m=1171, j=1055, l=1055, e=1055, d=1517, i=1560, i2=1020, i3=1080, i4=210, lp=2490, hz=1020, hk=1020)[SHOT]
+START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0, r=412.0, s=412.0, n=412.0, o=412.0, m=412.0, j=412.0, l=412.0, e=412.0, d=412.0, i=437.0, i2=463.0, i3=480.0, i4=505.0, lp=508.5, hz=557.0, hk=557.0, w3=574.0)[SHOT]
+FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6, r=6, s=6, n=4, o=3, m=1171, j=1055, l=1055, e=1055, d=1517, i=1560, i2=1020, i3=1080, i4=210, lp=2490, hz=1020, hk=1020, w3=952)[SHOT]
 FIRST = int(argv[2]) if len(argv) > 2 else 0
 LAST = min(int(argv[3]), FRAMES - 1) if len(argv) > 3 else FRAMES - 1
 SAMPLES = int(argv[4]) if len(argv) > 4 else 64
@@ -64,7 +64,7 @@ def stage():
     nt = sc.world.node_tree
     pick = lambda kind: [n for n in nt.nodes if n.type == kind]
     dot, win = pick("VECT_MATH")[0], pick("MAP_RANGE")[1]
-    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2, t=0.2, r=0.2, s=0.2, n=0.2, o=0.2, m=0.2, j=0.2, l=0.2, e=0.2, d=0.2, i=0.2, i2=0.2, i3=0.2, i4=0.2, lp=0.2, hz=0.2, hk=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9, t=0.9, r=0.9, s=0.9, n=0.9, o=0.9, m=0.9, j=0.9, l=0.9, e=0.9, d=0.9, i=0.9, i2=0.9, i3=0.9, i4=0.9, lp=0.9, hz=0.9, hk=0.9)[SHOT]
+    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2, t=0.2, r=0.2, s=0.2, n=0.2, o=0.2, m=0.2, j=0.2, l=0.2, e=0.2, d=0.2, i=0.2, i2=0.2, i3=0.2, i4=0.2, lp=0.2, hz=0.2, hk=0.2, w3=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9, t=0.9, r=0.9, s=0.9, n=0.9, o=0.9, m=0.9, j=0.9, l=0.9, e=0.9, d=0.9, i=0.9, i2=0.9, i3=0.9, i4=0.9, lp=0.9, hz=0.9, hk=0.9, w3=0.9)[SHOT]
 
     def sky(x):
         dot.inputs[1].default_value = lerp((-0.22, 0.92, 0.32), P.WINDOW, x)
@@ -6413,7 +6413,8 @@ def shot_hk(sc, sky):
         sc.frame_set(f)
         a = anchors(f / FPS)
         track.append([round(f / FPS, 1)] + [round(v_) for k in ("ol", "dot", "scr", "sign", "bin", "tube0", "tube1", "red", "cdk", "pk") for v_ in px_(a[k])[:2]])
-    json.dump(dict(keys=["ol", "dot", "scr", "sign", "bin", "tube0", "tube1", "red", "cdk", "pk"], track=track), open(HERE + "frames/hk_track.json", "w"), separators=(",", ":"))
+    if SHOT == "hk":          # W3 builds on this shot and must not overwrite 4-09's track
+        json.dump(dict(keys=["ol", "dot", "scr", "sign", "bin", "tube0", "tube1", "red", "cdk", "pk"], track=track), open(HERE + "frames/hk_track.json", "w"), separators=(",", ":"))
     for tt in (1.4, 3.0, 4.8, 6.6, 8.0, 9.0, 12.0, 14.5, 16.9):
         sc.frame_set(round(tt * FPS))
         a = anchors(tt)
@@ -6485,16 +6486,549 @@ def shot_hk(sc, sky):
             tb["fill"].hide_render = h <= 1e-4
         sky(0.2)
     co0 = np.zeros(len(cme_.vertices) * 3, np.float32)
+    update.ctx = dict(locals())          # W3 picks up from here
+    return update
+
+
+W3_START = 574.0               # 4-09 ends at 09:34
+W3_BEAT = 60.0 / 121.0          # Take My Breath, bar 104 (207.711 s into the track) lands on 09:34
+W3_BAR = 4 * W3_BEAT
+
+
+def shot_w3(sc, sky):
+    """W3 (09:34-09:50, 8 bars of The Weeknd - Take My Breath from bar 104, no voice-over): the music window between 4-09 and 4-10. Storyboard W3_storyboard_1.png.
+    It picks up 4-09's last frame. Bar 0: the camera pushes in on the keyhole plate at the screen's far edge. Bar 1: the plate lifts off and grows into a lock, three
+    tick rings coming up round the keyhole; the outline and its blue Met84 dot are the ones from 4-09. Bars 2-3: one key hovers over the lock and changes its cut on
+    every beat while the rings click round a step each beat, alternate ways. Bars 4-5: the screen's rings send up more and more keys (half beats, then quarter beats),
+    each one glowing as it comes up, and they circle the lock in three lanes. Bar 6: the circling runs up until the keys smear (real motion blur, keyframed). Bar 7: on
+    the downbeat it all stops, and the keys rain down into the two empty cells on the left (21 and 30) as an even carpet, with more falling in from above, while the
+    camera climbs to look down on them: 4-10 starts from that carpet. No key ever goes into the lock. The keys and the lock are drawn; the outline and Met84 are
+    the AlphaFold DB v6 model's, as in 4-09.
+    Run: blender -b -P bl_inserts.py -- w3 <out dir> 0 951 16 0.5 2"""
+    global START
+    import bmesh
+    upd_hk = shot_hk(sc, sky)
+    X = upd_hk.ctx
+    START = HZ_START
+    upd_hk(HZ_START + HZ_VO["end"])          # 4-09's last frame, held: nothing of it moves again
+    START = W3_START
+    ob = bpy.data.objects
+    ob["lp_sparks"].hide_render = True          # 4-07's sparks, shrunk to 0.1 mm points in the rings' centres since 4-07: the keys come up through them
+    plate, ol, keys, tmpl = X["plate"], X["ol"], X["keys"], X["tmpl"]
+    RC, ZR, HOLE, OUTR, RT, SCR = X["RC"], X["ZR"], X["HOLE"], X["OUTR"], X["RT"], X["SCR"]
+    px_c, y_f, y_back, TH, HC, PW, PH = X["px_c"], X["y_f"], X["y_back"], X["TH"], X["HC"], X["PW"], X["PH"]
+    KS, KH, cx, cy, sbb, tree = X["KS"], X["KH"], X["cx"], X["cy"], X["sbb"], X["tree"]
+    steel, ink, hot_m, ping_m, halo_pf = X["steel"], X["ink"], X["hot_m"], X["ping_m"], X["halo_pf"]
+    BEAT, BAR = W3_BEAT, W3_BAR
+
+    # ---------------------------------------------------------------- the lock: the plate and its outline on one pivot at the keyhole's centre
+    L0 = Vector((px_c, y_back - TH / 2, SCR + HC))
+    GS = 2.6                                  # how much the plate grows
+    LZ = 1.0                                  # the keyhole's centre ends this high over the screen
+    Lc = Vector((px_c, y_back - TH / 2, SCR + LZ))
+    lk = empty("w3_lock")
+    lk.location = L0
+    bpy.context.view_layer.update()
+    for o in (plate, ol):
+        o.parent = lk
+        o.matrix_parent_inverse = lk.matrix_world.inverted()
+    T_LIFT0, T_LIFT1 = BAR + 0.05, 2 * BAR - 0.25
+
+    def lock_pose(t):
+        x = smooth((t - T_LIFT0) / (T_LIFT1 - T_LIFT0))
+        s_ = 1 + (GS - 1) * smooth((t - T_LIFT0 - 0.35) / (T_LIFT1 - T_LIFT0 - 0.35))          # it lifts first and grows once it is clear
+        return L0 + (Lc - L0) * x, s_
+
+    # three dials round the keyhole, in front of the plate, in the plate's units (the lock scales them)
+    DIAL = [(0.098, 36), (0.116, 24), (0.134, 16)]
+    TR_D = 0.0032
+    DY = -(TH / 2 + 0.0045)                   # in front of the plate's face and the outline
+    T_DIAL = [BAR + 2 * BEAT + 0.1 * n for n in range(3)]          # beats 6, 6 and a bit: they open out as the lock finishes growing
+
+    def dial(r, n, k):
+        e = empty("w3_dial%d" % k)
+        e.parent = lk
+        e.location = (0.0, DY, 0.0)
+        rg = lathe([(r + TR_D * math.cos(2 * math.pi * j / 16), TR_D * math.sin(2 * math.pi * j / 16)) for j in range(17)], steel, "w3_ring%d" % k, e, 160)
+        rg.color = (0, 0, 0, 1)          # the keys' steel glows by object colour (4-09); the dials never glow
+        for nm, mat, sel in (("w3_ticks%d" % k, ink, range(1, n)), ("w3_notch%d" % k, hot_m, range(0, 1))):
+            bm = bmesh.new()
+            for i in sel:
+                a = 2 * math.pi * i / n
+                M = Matrix.Rotation(a, 4, "Z") @ Matrix.Translation((r + TR_D + 0.0045, 0, 0)) @ Matrix.Diagonal((0.008 if nm[3] == "t" else 0.011, 0.0022, 0.0035, 1))
+                bmesh.ops.create_cube(bm, size=1.0, matrix=M)
+            me = bpy.data.meshes.new(nm)
+            bm.to_mesh(me)
+            bm.free()
+            me.materials.append(mat)
+            o = bpy.data.objects.new(nm, me)
+            sc.collection.objects.link(o)
+            o.parent = e
+        return e
+    dials = [dial(r, n, k) for k, (r, n) in enumerate(DIAL)]
+    D_OUT = DIAL[-1][0] + TR_D + 0.0045 + 0.0055          # the dials' outer reach, plate units
+
+    def dial_turn(k, t):
+        """Each dial clicks round one tick on every beat from bar 2, the middle one the other way; faster from bar 4."""
+        if t < 2 * BAR:
+            return 0.0
+        n_ = DIAL[k][1]
+        b_ = (t - 2 * BAR) / BEAT
+        steps = math.floor(b_) + smooth((b_ % 1) / 0.25)
+        if t > 4 * BAR:
+            b2 = (t - 4 * BAR) / (BEAT / 2)
+            steps = 8 + math.floor(b2) + smooth((b2 % 1) / 0.3)
+        return (1 if k != 1 else -1) * (k + 1) * steps * 2 * math.pi / n_
+
+    # ---------------------------------------------------------------- key shapes: the 4-09 key with a new cut for every beat
+    rng = np.random.default_rng(104)
+    cuts = []
+    for v_ in range(24):
+        n_t = 3 + v_ % 2
+        xs_ = np.linspace(0.5, 1.36, n_t)
+        teeth = tuple((float(x_), float(rng.uniform(0.05, 0.36))) for x_ in xs_)
+        o = B.extrude([B.round_poly(B.key_blade(-0.075, 0.0, teeth=teeth, start=0.14), 0.03)], 0.2, 0.04, z=-0.1, name="w3_blade%d" % v_, mat=steel)
+        o.hide_render = True
+        o.location = (0, 0, -5)
+        cuts.append(o.data)
+    for o in bpy.context.selected_objects:
+        o.select_set(False)
+    parts0 = tmpl[False][0]                   # blade, bow, the ring of six on the bow
+    pts0 = tmpl[False][1]
+    sub0 = pts0[np.random.default_rng(3).choice(len(pts0), min(160, len(pts0)), replace=False)]
+
+    def make_key(name, cut):
+        e = empty(name)
+        for n_, o in enumerate(parts0):
+            c_ = o.copy()
+            sc.collection.objects.link(c_)
+            c_.location = (0, 0, 0)
+            c_.hide_render = False
+            c_.parent = e
+            c_.color = (0, 0, 0, 1)
+            if n_ == 0:
+                c_.data = cuts[cut % len(cuts)]
+        e.scale = (1e-4,) * 3
+        for o in e.children:
+            o.hide_render = True
+        return e
+
+    def show(e, on):
+        for o in e.children:
+            o.hide_render = not on
+
+    def glow(e, g_):
+        for o in e.children:
+            o.color = (g_, 0, 0, 1)
+
+    # ---------------------------------------------------------------- the hovering key
+    hov = make_key("w3_hover", 0)
+    KSH = 3.2
+    T_HOV = 2 * BAR
+    HOV_L = Vector((0.0, -0.085, 0.0))        # in the lock's frame, scaled by it: in front of the circling lanes
+    HOV_Z = 0.2                             # its centre over the keyhole's centre, lock units
+    q_down = Quaternion((1, 0, 0), math.pi / 2) @ Quaternion((0, 0, 1), -math.pi / 2)          # standing in the lock's plane, tip down at the keyhole
+
+    def hover_cut(t):
+        if t < 4 * BAR:
+            return int((t - T_HOV) / BEAT)
+        if t < 6 * BAR:
+            return 8 + int((t - 4 * BAR) / (BEAT / 2))
+        return 24 + int((t - 6 * BAR) / (BEAT / 4))
+
+    # ---------------------------------------------------------------- the circling keys
+    NO = 40
+    POP = [4 * BAR + i * BEAT / 2 for i in range(4)] + [4 * BAR + 2 * BEAT + i * BEAT / 4 for i in range(8)] + [5 * BAR + i * BEAT / 8 for i in range(28)]          # half beats, quarter beats, eighth beats
+    RISE = 0.8
+    JOIN = [p + RISE for p in POP]
+    KSO = 2.6
+    LANE_R = [0.47, 0.54, 0.61]
+    LANE_Y = [-0.08, -0.115, -0.15]          # world offsets from the lock's mid plane, toward the camera
+    DELTA = 2 * math.pi / 42
+    ZQ = SCR + 0.2                            # the height the keys cross at, under every lane
+    TH_E = -math.pi / 2                       # they join at the bottom of the circle, moving right
+    T_STOP = 7 * BAR
+    W_MAX = 13.0
+    t_last, th_last = JOIN[-1], (NO - 1) * DELTA
+    w_last = DELTA / (JOIN[-1] - JOIN[-2])
+
+    def Theta(t):
+        """How far the lanes have turned. Each key joins as the lanes come round by one step, so lane-mates keep three steps apart; after the last join it runs up to W_MAX."""
+        if t <= JOIN[0]:
+            return (t - JOIN[0]) * DELTA / (JOIN[1] - JOIN[0])
+        if t <= t_last:
+            k = max(i for i in range(NO) if JOIN[i] <= t)
+            if k == NO - 1:
+                return th_last
+            return k * DELTA + (t - JOIN[k]) / (JOIN[k + 1] - JOIN[k]) * DELTA
+        tt = min(t, T_STOP) - t_last
+        T_ = T_STOP - t_last
+        return th_last + w_last * tt + (W_MAX - w_last) * tt ** 3 / (3 * T_ ** 2)          # the speed climbs as tt squared
+
+    by_x = sorted(range(1, 42), key=lambda k: RC[k][0])
+    band = [by_x[27:], by_x[14:27], by_x[:14]]          # lane 0 takes its keys in furthest right, lane 2 furthest left: each takes them from its own third of the screen, so the paths up never cross
+    band = [sorted(b_, key=lambda k: (-RC[k][1], -RC[k][0])) for b_ in band]          # the far rows first: their keys have the least way to go
+    ORB = []
+    for i in range(NO):
+        ORB.append(dict(obj=make_key("w3_orb%d" % i, 3 + 5 * i), ring=band[i % 3][i // 3], lane=i % 3, yaw=float(rng.uniform(-0.6, 0.6))))
+    pings = []
+    for i in range(NO):
+        o = lathe(halo_pf, ping_m, "w3_ping%d" % i, None, 64)
+        r_ = ORB[i]["ring"]
+        o.location = (float(RC[r_][0]), float(RC[r_][1]), float(RC[r_][2]))
+        o.color = (0, 0, 0, 1)
+        o.hide_render = True
+        pings.append(o)
+
+    def lane_pt(L, th):
+        return Vector((Lc.x + LANE_R[L] * math.cos(th), Lc.y + LANE_Y[L], Lc.z + LANE_R[L] * math.sin(th)))
+
+    def q_lane(th):
+        return Quaternion((1, 0, 0), math.pi / 2) @ Quaternion((0, 0, 1), th + math.pi / 2)
+
+    def bez3(a_, b_, c_, d_, x):
+        return (1 - x) ** 3 * a_ + 3 * (1 - x) ** 2 * x * b_ + 3 * (1 - x) * x ** 2 * c_ + x ** 3 * d_
+
+    def orb_air(i, t):
+        """Key i circling, or on its way up: location, turn, scale; None before it comes up."""
+        kd = ORB[i]
+        if t < POP[i]:
+            return None
+        rc = Vector((float(RC[kd["ring"]][0]), float(RC[kd["ring"]][1]), ZR))
+        q_h = Quaternion((0, 0, 1), kd["yaw"])
+        L = kd["lane"]
+        te = TH_E - 0.3 * L          # the lanes take their keys in at three points, so the keys coming up spread out
+        if t < JOIN[i]:
+            x = (t - POP[i]) / RISE
+            if x < 0.25:          # 1: up out of its ring, small while it is level with the ring's tube
+                y = x / 0.25
+                s_ = KSO * (0.25 * smooth(y / 0.4) if y < 0.4 else 0.25 + 0.75 * smooth((y - 0.4) / 0.6))
+                return Vector((rc.x, rc.y, ZR + 0.06 * smooth(y))), q_h, max(s_, 1e-3)
+            j_ = lane_pt(L, te)
+            q_ = Vector((j_.x, j_.y, ZQ))
+            p0 = Vector((rc.x, rc.y, ZR + 0.06))
+            if x < 0.6:          # 2: across, under every lane, to below its way in, standing up into its lane's plane as it goes
+                y = (x - 0.25) / 0.35
+                return bez3(p0, p0 + Vector((0, 0, 0.05)), q_ - Vector((0, 0, 0.05)), q_, smooth(y)), q_h.slerp(q_lane(te), smooth(y)), KSO
+            y = (x - 0.6) / 0.4          # 3: up in that plane, past the outer lanes' keys, and into its lane at about the lane's speed
+            tg = Vector((-math.sin(te), 0, math.cos(te)))
+            return bez3(q_, q_ + Vector((0, 0, 0.08)), j_ - 0.12 * tg, j_, y * y * (2 - y)), q_lane(te), KSO
+        th = te + Theta(t) - i * DELTA
+        return lane_pt(L, th), q_lane(th), KSO
+
+    # ---------------------------------------------------------------- the carpet: two empty cells, ten keys across and fourteen down in each
+    CELLS = (21, 30)
+    NX, NY = 10, 14
+    slots = []
+    for c_ in CELLS:
+        x0_, y0_ = cell_at(c_)
+        for r_ in range(NY):
+            for k_ in range(NX):
+                slots.append(Vector((x0_ - 0.34 + 0.0755 * k_ + (0.018 if r_ % 2 else 0.0), y0_ + 0.29 - 0.0446 * r_, KH + 0.0003)))
+    NS = len(slots)
+    q_flat = Quaternion((0, 0, 1), 0.0)
+    T_RAIN = T_STOP + BEAT / 2                # held still for half a beat, then they come down
+    # the circling keys and the hovering one land in the cell nearer the lock, nearest slot first; the rest fall in from above
+    near = sorted(range(NS), key=lambda s: (slots[s] - Vector((Lc.x, Lc.y, 0.0))).length)
+    fliers = list(range(NO)) + ["h"]
+    stop_pos = {i: orb_air(i, T_STOP)[0] for i in range(NO)}
+    stop_pos["h"] = None
+    fl_slot = {}
+    free = set(range(NS))
+    # slots for the fliers: the leftmost flier takes the leftmost of the nearest free slots
+    front = [s for s in near if s >= NX * NY and (s - NX * NY) // NX >= 3]          # cell 30's rows from the fourth on: in front of the lock's plane, so a path there never crosses the lock
+    cand = sorted(front[:NO + 1], key=lambda s: (slots[s].x, -slots[s].y))
+    order_f = sorted(range(NO), key=lambda i: (stop_pos[i].x, stop_pos[i].z))
+    for i, s in zip(order_f, cand[:NO]):
+        fl_slot[i] = s
+        free.discard(s)
+    fl_slot["h"] = cand[NO]
+    free.discard(cand[NO])
+    FL_T = {i: T_RAIN + 1.0 * BEAT * (n / NO) for n, i in enumerate(order_f)}
+    FL_T["h"] = T_RAIN + 0.3 * BEAT
+    FL_D = 0.95
+    rest_s = sorted(free, key=lambda s: (slots[s] - Vector((Lc.x, Lc.y, 0.0))).length)
+    NR = len(rest_s)
+    rain = []
+    for n, s in enumerate(rest_s):
+        rain.append(dict(obj=make_key("w3_rain%d" % n, 7 + 11 * n), slot=s, t0=T_RAIN + 0.05 + 0.6 * n / NR + float(rng.uniform(0, 0.06)),
+                         yaw=float(rng.uniform(-0.2, 0.2)), tilt=float(rng.uniform(-0.5, 0.5))))
+    R_H, R_D = 1.6, 0.62                      # they fall from 1.6 above the table, 0.62 s to land
+
+    def settle(dt):
+        """A small hop after landing."""
+        if dt < 0 or dt > 0.3:
+            return 0.0
+        return 0.004 * math.sin(math.pi * dt / 0.15) if dt < 0.15 else 0.0012 * math.sin(math.pi * (dt - 0.15) / 0.15)
+
+    def flier_pose(i, t):
+        """A circling key (or the hovering one) after the stop: held, then an arc down onto its slot."""
+        if i == "h":
+            lp_, ls_ = lock_pose(t)
+            p_a = lp_ + Vector((HOV_L.x * ls_, HOV_L.y * ls_, HOV_Z * ls_))
+            q_a, s_a = q_down, KSH
+        else:
+            p_a, q_a, s_a = orb_air(i, T_STOP)
+        s_b = Vector(slots[fl_slot[i]])
+        x = (t - FL_T[i]) / FL_D
+        if x <= 0:
+            return p_a, q_a, s_a
+        if x >= 1:
+            return s_b + Vector((0, 0, settle(t - FL_T[i] - FL_D))), q_flat, 1.0
+        pos = bez3(p_a, p_a + Vector((0, -0.3, 0.2)), s_b + Vector((0, 0, 0.55)), s_b, min(1.0, max(0.0, x)))          # toward the camera first, clear of the lock
+        return pos, q_a.slerp(q_flat, smooth(min(1.0, x / 0.85))), s_a + (1.0 - s_a) * smooth(x / 0.4)          # down to carpet size early, so they have room in the air
+
+    def rain_pose(d, t):
+        x = (t - d["t0"]) / R_D
+        if x < 0:
+            return None
+        s_b = Vector(slots[d["slot"]])
+        if x >= 1:
+            return s_b + Vector((0, 0, settle(t - d["t0"] - R_D))), q_flat, 1.0
+        z = R_H * (1 - x * x)
+        w_ = 1 - x
+        q = Quaternion((0, 0, 1), d["yaw"] * w_) @ Quaternion((1, 0, 0), d["tilt"] * w_)
+        return s_b + Vector((0, 0, z)), q, 1.0
+
+    def hover_pose(t):
+        if t < T_HOV:
+            return None
+        if t >= FL_T["h"]:
+            return flier_pose("h", t)
+        lp_, ls_ = lock_pose(t)
+        x = (t - T_HOV) / 0.35
+        s_ = KSH * (smooth(x) if x < 1 else 1.0)
+        bob = 0.004 * math.sin(2 * math.pi * (t - T_HOV) / (2 * BEAT))
+        return lp_ + Vector((HOV_L.x * ls_, HOV_L.y * ls_, (HOV_Z + bob) * ls_)), q_down, max(s_, 1e-3)
+
+    def key_pose(i, t):
+        if i == "h":
+            return hover_pose(t)
+        if isinstance(i, int):
+            if t >= T_STOP:
+                return flier_pose(i, t)
+            return orb_air(i, t)
+        return rain_pose(rain[i[1]], t)
+
+    ALL = ["h"] + list(range(NO)) + [("r", n) for n in range(NR)]
+    obj_of = lambda i: hov if i == "h" else (ORB[i]["obj"] if isinstance(i, int) else rain[i[1]]["obj"])
+    T_SET = max(max(d["t0"] for d in rain) + R_D, max(FL_T.values()) + FL_D) + 0.31          # every key lies still from here
+    print("W3: lock to %.3f over the screen at x %.3f y %.3f, %.2fx; lanes %s; %d circling, %d raining, %d slots in cells %s" % (LZ, Lc.x, Lc.y, GS, LANE_R, NO, NR, NS, CELLS))
+
+    # ---------------------------------------------------------------- the camera
+    wide = X["wide"]
+    push_v = dict(at=(px_c, y_f, SCR + 0.1), az=math.radians(5), el=math.radians(26), d=1.15, mm=45.0)
+    lock_v = dict(at=(Lc.x, Lc.y, Lc.z + 0.08), az=math.radians(3), el=math.radians(10), d=2.7, mm=45.0)
+    key_v = dict(lock_v, at=(Lc.x, Lc.y, Lc.z + 0.1), d=2.6, el=math.radians(8))
+    orbit_a = dict(at=(Lc.x, Lc.y, Lc.z - 0.05), az=math.radians(-6), el=math.radians(14), d=3.6, mm=45.0)
+    orbit_b = dict(orbit_a, az=math.radians(9), d=3.4)
+    c21, c30 = cell_at(21), cell_at(30)
+    high = dict(at=((c30[0] + c21[0]) / 2 + 0.55, (c30[1] + c21[1]) / 2 - 0.05, 0.15), az=math.radians(4), el=math.radians(58), d=4.6, mm=45.0)
+    cams = [(0.0, wide), (BAR - 0.1, push_v), (BAR + 0.3, push_v), (2 * BAR, lock_v), (3 * BAR, key_v), (4 * BAR - 0.1, key_v), (5 * BAR, orbit_a), (T_STOP, orbit_b),
+            (T_RAIN, orbit_b), (T_RAIN + 1.4, high)]
+
+    def mix(p, q, x):
+        log = lambda k: math.exp(math.log(p[k]) + (math.log(q[k]) - math.log(p[k])) * x)
+        return dict(at=lerp(p["at"], q["at"], x), az=p["az"] + (q["az"] - p["az"]) * x, el=p["el"] + (q["el"] - p["el"]) * x, d=log("d"), mm=log("mm"))
+
+    def view(t):
+        for (ta, a), (tb, b) in zip(cams, cams[1:]):
+            if t < tb:
+                return mix(a, b, smooth((t - ta) / (tb - ta)))
+        return cams[-1][1]
+    c = sc.camera
+    c.animation_data_clear()
+    c.data.animation_data_clear()
+    last_q[0] = None
+    for f in range(FRAMES):
+        v = view(f / FPS)
+        shoot(c, f, v, v["at"])
+
+    # ---------------------------------------------------------------- checks, every other frame, nothing rendered
+    sub = sub0 * KS
+    dial_pts = []
+    for k, (r, n) in enumerate(DIAL):
+        a_ = np.linspace(0, 2 * np.pi, 90, endpoint=False)
+        rr = r + TR_D + 0.0045 + 0.0055
+        dial_pts.append(np.c_[rr * np.cos(a_), np.full(90, DY), rr * np.sin(a_)])
+    dial_pts = np.concatenate(dial_pts)
+    pl_pts = np.array([(x_, y_, z_) for x_ in np.linspace(-PW / 2, PW / 2, 9) for y_ in (-TH / 2, TH / 2) for z_ in np.linspace(-HC, PH - HC, 9)])          # the plate's faces about the pivot
+
+    def lock_world(t):
+        loc, s_ = lock_pose(t)
+        g_ = smooth((t - T_DIAL[0]) / 0.45)
+        return (np.concatenate([dial_pts * g_, pl_pts]) if g_ > 0 else pl_pts) * s_ + np.array(tuple(loc))
+
+    def kw(i, t):
+        ps = key_pose(i, t)
+        if ps is None:
+            return None
+        loc, q, s_ = ps
+        return sub @ np.array(q.to_matrix()).T * s_ + np.array(tuple(loc))
+
+    def in_rims(p):
+        out_ = np.zeros(len(p), bool)
+        for i_ in (12, 13, 14, 20, 21, 22, 23, 29, 30, 31, 32, 38, 39, 40):
+            x_, y_ = cell_at(i_)
+            dx, dy = np.abs(p[:, 0] - x_), np.abs(p[:, 1] - y_)
+            out_ |= (dx < 0.437) & (dy < 0.352) & ~((dx < 0.418) & (dy < 0.333)) & (p[:, 2] < 0.0175)
+        return out_
+    bad = {}
+
+    def hit(name, t):
+        bad.setdefault(name, []).append(round(t, 2))
+    others = [o for o in ob if o.type == "MESH" and not o.name.startswith(("w3_", "hk_", "floor", "lp_comets", "core", "cell")) and not o.hide_render]
+    obb = []
+    for o in others:
+        bb = np.array([tuple(o.matrix_world @ Vector(b_)) for b_ in o.bound_box])
+        if (bb.max(0) - bb.min(0))[:2].max() < 1.5:          # the table and its rims are checked on their own
+            obb.append((o.name, bb.min(0), bb.max(0)))
+    for name, lo, hi in obb:          # what stands in the carpet's cells already
+        for c_ in CELLS:
+            x_, y_ = cell_at(c_)
+            if lo[0] < x_ + 0.42 and hi[0] > x_ - 0.42 and lo[1] < y_ + 0.33 and hi[1] > y_ - 0.33 and lo[2] < 0.3 and hi[2] > 0.0001:
+                hit("cell %d holds %s" % (c_, name), 0.0)
+    scr_lo, scr_hi = sbb.min(0), sbb.max(0)
+    from mathutils.bvhtree import BVHTree
+    _bvh = {}
+
+    def bvh_of(name):
+        if name not in _bvh:
+            o = ob[name]
+            dg = bpy.context.evaluated_depsgraph_get()
+            me = o.evaluated_get(dg).to_mesh()
+            mw = o.matrix_world
+            _bvh[name] = BVHTree.FromPolygons([tuple(mw @ v.co) for v in me.vertices], [tuple(p_.vertices) for p_ in me.polygons]) if len(me.polygons) else BVHTree.FromPolygons([tuple(mw @ v.co) for v in me.vertices] or [(0, 0, -9), (0, 0.001, -9), (0.001, 0, -9)], [(0, 1, 2)] if not len(me.vertices) else [(i, i, i) for i in range(len(me.vertices))])
+        return _bvh[name]
+    for f in range(0, FRAMES, 2):
+        t = f / FPS
+        lw = lock_world(t)
+        if ((lw[:, 2] < SCR - 0.001) & (lw[:, 0] > scr_lo[0]) & (lw[:, 0] < scr_hi[0]) & (lw[:, 1] > scr_lo[1]) & (lw[:, 1] < scr_hi[1])).any():
+            hit("lock / screen", t)
+        if t > T_LIFT0 and min(tree.find_nearest(Vector(tuple(p)))[3] for p in lw[::7]) < 0.004:
+            hit("lock / CDK20", t)
+        Wd = {}
+        for i in ALL:
+            w_ = kw(i, t)
+            if w_ is None:
+                continue
+            Wd[i] = w_
+            if (w_[:, 2] < 1e-4).any():
+                hit("key %s / table" % (i,), t)
+            if in_rims(w_).any():
+                hit("key %s / cell rim" % (i,), t)
+            if ((w_[:, 2] < SCR - 1e-4) & (w_[:, 0] > scr_lo[0]) & (w_[:, 0] < scr_hi[0]) & (w_[:, 1] > scr_lo[1]) & (w_[:, 1] < scr_hi[1])).any():
+                hit("key %s / screen" % (i,), t)
+            for k in range(1, 42):
+                r_ = np.hypot(w_[:, 0] - RC[k][0], w_[:, 1] - RC[k][1])
+                if ((np.abs(w_[:, 2] - ZR) < RT + 0.0005) & (r_ > HOLE - 0.0005) & (r_ < OUTR + 0.0005)).any():
+                    hit("key %s / ring %d" % (i, k), t)
+            # the lock: within its outer reach and its slab
+            loc, s_ = lock_pose(t)
+            d_ = w_ - np.array(tuple(loc))
+            rr = np.hypot(d_[:, 0], d_[:, 2])
+            if ((rr < D_OUT * s_ + 0.002) & (d_[:, 1] > (DY - TR_D - 0.002) * s_ - 0.001) & (d_[:, 1] < TH / 2 * s_ + 0.001)).any():
+                hit("key %s / lock" % (i,), t)
+            if ((np.abs(d_[:, 0]) < PW / 2 * s_ + 0.001) & (d_[:, 2] > -HC * s_ - 0.001) & (d_[:, 2] < (PH - HC) * s_ + 0.001) & (np.abs(d_[:, 1]) < TH / 2 * s_ + 0.002)).any():
+                hit("key %s / plate" % (i,), t)
+            if w_[:, 2].min() < 0.6 and min(tree.find_nearest(Vector(tuple(p)))[3] for p in w_[::10]) < 0.003:
+                hit("key %s / CDK20" % (i,), t)
+            for name, lo, hi in obb:
+                inb = ((w_ > lo - 0.001) & (w_ < hi + 0.001)).all(1)
+                if inb.any() and min(bvh_of(name).find_nearest(Vector(tuple(p)))[3] for p in w_[inb][::2]) < 0.001:
+                    hit("key %s / %s" % (i, name), t)
+        ks_ = list(Wd)
+        cen = np.array([Wd[i].mean(0) for i in ks_])
+        dd = np.sqrt(((cen[:, None] - cen[None]) ** 2).sum(-1)) if len(ks_) else np.zeros((0, 0))
+        for a in range(len(ks_)):
+            for b in range(a + 1, len(ks_)):
+                if dd[a, b] > 0.16:
+                    continue
+                ia, ib = ks_[a], ks_[b]
+                if t > T_SET and not isinstance(ia, int) and not isinstance(ib, int) and ia != "h" and ib != "h":
+                    continue          # both lying in their slots
+                if np.sqrt(((Wd[ia][::2, None] - Wd[ib][None, ::2]) ** 2).sum(-1)).min() < 0.0012:
+                    hit("key %s / key %s" % (ia, ib), t)
+    kinds = {}
+    for k, v in bad.items():
+        kinds.setdefault(k.split(" / ")[-1].split(" ")[0] if " / " in k else k, []).append((k, v[0]))
+    print("W3 clashes:", "none" if not bad else "")
+    for kd, l_ in sorted(kinds.items()):
+        print("W3 clash %s: %d, first %s" % (kd, len(l_), sorted(l_, key=lambda z: z[1])[:5]))
+    print("W3 times: last join %.2f, stop %.2f, rain %.2f-%.2f, last flier lands %.2f, clip end %.2f" % (
+        JOIN[-1], T_STOP, T_RAIN, max(d["t0"] for d in rain) + R_D, max(FL_T[i] for i in FL_T) + FL_D, FRAMES / FPS))
+    from bpy_extras.object_utils import world_to_camera_view
+    for tt in (0.0, BAR, 2 * BAR + 0.5, 4 * BAR + 1.0, 6 * BAR, T_STOP, FRAMES / FPS - 0.05):
+        sc.frame_set(round(tt * FPS))
+        q_ = world_to_camera_view(sc, c, Lc)
+        print("W3 t %.2f: lock on screen %.0f %.0f" % (tt, q_.x * 1920, (1 - q_.y) * 1080))
+
+    # ---------------------------------------------------------------- per frame
+    def place(e, ps, f):
+        if ps is None:
+            show(e, False)
+            e.scale = (1e-4,) * 3
+            return
+        show(e, True)
+        e.location, e.rotation_quaternion, e.scale = ps[0], ps[1], (KS * ps[2],) * 3
+
+    def keyed(e, i, t, f):
+        """Pose at f - 1, f, f + 1 as keys, so the render's motion blur sees how it moves."""
+        e.animation_data_clear()
+        for df in (-1, 0, 1):
+            ps = key_pose(i, t + df / FPS)
+            if ps is None:
+                continue
+            e.location, e.rotation_quaternion, e.scale = ps[0], ps[1], (KS * ps[2],) * 3
+            e.keyframe_insert("location", frame=f + df)
+            e.keyframe_insert("rotation_quaternion", frame=f + df)
+            e.keyframe_insert("scale", frame=f + df)
+        place(e, key_pose(i, t), f)
+
+    def update(t):
+        t = t - START
+        f = round(t * FPS)
+        loc, s_ = lock_pose(t)
+        lk.location, lk.scale = loc, (s_,) * 3
+        for k, e in enumerate(dials):
+            g_ = smooth((t - T_DIAL[k]) / 0.45)
+            e.scale = (max(g_, 1e-3),) * 3
+            for o in e.children:
+                o.hide_render = g_ <= 0
+            e.rotation_quaternion = Quaternion((1, 0, 0), math.pi / 2) @ Quaternion((0, 0, 1), dial_turn(k, t))
+        ch = hover_cut(t) if t >= T_HOV else 0
+        hov.children[0].data = cuts[ch % len(cuts)]
+        for i in ALL:
+            e = obj_of(i)
+            ps = key_pose(i, t)
+            moving = ps is not None and (key_pose(i, t + 1 / FPS) is None or (key_pose(i, t + 1 / FPS)[0] - ps[0]).length > 1e-5)
+            if moving:
+                keyed(e, i, t, f)
+            else:
+                e.animation_data_clear()
+                place(e, ps, f)
+        for i in range(NO):
+            g_ = 1.0 - smooth((t - POP[i] - 0.25) / 0.6) if t >= POP[i] else 0.0
+            glow(ORB[i]["obj"], g_)
+            x = (t - POP[i] + 0.12) / 0.6
+            o = pings[i]
+            o.hide_render = not (0 <= x < 1)
+            if 0 <= x < 1:
+                o.color = (math.sin(math.pi * min(1.0, x * 1.6)) if x < 0.3125 else 1.0 - smooth((x - 0.3125) / 0.6875), 0, 0, 1)
+                o.scale = (1 + 0.15 * x, 1 + 0.15 * x, 1.0)
+        sky(0.2)
     return update
 
 
 sc, sky = stage()
-update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t, r=shot_r, s=shot_s, n=shot_n, o=shot_o, m=shot_m, j=shot_j, l=shot_l, e=shot_e, d=shot_d, i=shot_i, i2=shot_i2, i3=shot_i3, i4=shot_i4, lp=shot_lp, hz=shot_hz, hk=shot_hk)[SHOT](sc, sky)
+update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t, r=shot_r, s=shot_s, n=shot_n, o=shot_o, m=shot_m, j=shot_j, l=shot_l, e=shot_e, d=shot_d, i=shot_i, i2=shot_i2, i3=shot_i3, i4=shot_i4, lp=shot_lp, hz=shot_hz, hk=shot_hk, w3=shot_w3)[SHOT](sc, sky)
 sc.frame_start, sc.frame_end = 0, FRAMES
 EXT = "png"
 if os.environ.get("BL_JPEG"):          # the 4K 60 fps passes: a 4K PNG is ~10 MB, a JPEG at 95 ~2 MB, and the take re-encodes to H.264 anyway
     sc.render.image_settings.file_format, sc.render.image_settings.color_mode, sc.render.image_settings.quality, EXT = "JPEG", "RGB", 95, "jpg"
-for f in range(FIRST, LAST + 1, STEP):
+if os.environ.get("BL_CPU"):          # a quick look while the card is busy
+    sc.cycles.device = "CPU"
+for f in ([int(x_) for x_ in os.environ["BL_FRAMES"].split(",")] if os.environ.get("BL_FRAMES") else range(FIRST, LAST + 1, STEP)):
     sc.frame_set(f)
     update(START + f / FPS)
     gk.render("%s/%s_%04d.%s" % (OUT, SHOT, f, EXT))

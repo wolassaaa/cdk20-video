@@ -12,7 +12,7 @@ SRC, OUT = sys.argv[1], sys.argv[2]
 SHOT = sys.argv[3] if len(sys.argv) > 3 else "i"
 RATE = sys.argv[4] if len(sys.argv) > 4 else "30"          # 60 for the 4K pass, from every frame
 files = sorted(glob.glob(SRC + "/%s_*.png" % SHOT) + glob.glob(SRC + "/%s_*.jpg" % SHOT))
-assert len(files) == dict(i=780, i2=510, i3=540, i4=105, lp=1245, hz=510, hk=510)[SHOT] * (2 if RATE == "60" else 1), len(files)          # 4-01 26 s, 4-02 17 s, 4-03 18 s, back after 4-05 3.5 s, 4-06/07 41.5 s, 4-09 17 s
+assert len(files) == dict(i=780, i2=510, i3=540, i4=105, lp=1245, hz=510, hk=510, w3=476)[SHOT] * (2 if RATE == "60" else 1), len(files)          # 4-01 26 s, 4-02 17 s, 4-03 18 s, back after 4-05 3.5 s, 4-06/07 41.5 s, 4-09 17 s
 
 p = subprocess.Popen([FF, "-y", "-loglevel", "error", "-f", "image2pipe", "-c:v", "png", "-r", RATE, "-i", "-", "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p", "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709", OUT], stdin=subprocess.PIPE)
 jumps, last = [], None
