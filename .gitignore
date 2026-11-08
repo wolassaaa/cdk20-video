@@ -89,3 +89,6 @@ teacher_requirements_check/
 镜头设计_v2/tests/T4_remotion/.s2bundle/
 镜头设计_v2/tests/T4_remotion/.s2mbundle/
 镜头设计_v2/tests/T4_remotion/.artbundle_*/
+
+# 渲染临时文件夹（Remotion 的 ffmpeg 只能写在项目里，11-09）
+_render_tmp/
