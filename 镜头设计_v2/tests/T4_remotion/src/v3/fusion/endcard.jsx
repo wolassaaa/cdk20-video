@@ -50,10 +50,10 @@ const PAGES = [
     "All other drawings, 3D scenes and animation: made by our team. Scenes marked *Illustration* are drawn, not measured.",
   ]},
   {dur: 4.0, head: "Music", size: 38, lead: "Short excerpts, used for this coursework only. All rights belong to their owners.", items: [
-    "NewJeans — *Supernatural* (Instrumental)",
+    "NewJeans — *Supernatural*",
     "Daft Punk — *Harder, Better, Faster, Stronger*",
     "Holly Herndon — *Godmother* (feat. Jlin and Spawn)",
-    "The Weeknd — *Dancing in the Flames* (Instrumental)",
+    "The Weeknd — *Dancing in the Flames*",
     "The Weeknd — *Wake Me Up* (feat. Justice)",
   ]},
   {dur: 4.0, head: "Made with", size: 38, items: [

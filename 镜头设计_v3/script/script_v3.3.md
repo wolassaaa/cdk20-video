@@ -96,10 +96,10 @@ Draft v3.3, 2026-10-28: v3.2 rewritten in an explainer-channel voice. The story 
 | Window | Time (conservative) | Length | Where | Music (from music_curation.md; director to confirm by listening) |
 |---|---|---|---|---|
 | W0 | 00:00–00:02 | 2 s | S1 | Opening hits (per storyboard) |
-| W1 | 02:03–02:21 | 18 s | S1 | NewJeans - Supernatural (Instrumental), intro 8 bars (~17.6 s) |
+| W1 | 02:03–02:21 | 18 s | S1 | NewJeans - Supernatural (vocal version, director 11-09), 8 bars of a sung section (~17.6 s, picked after the beat scan) |
 | W2 | 06:52–07:17 | 25 s | S4 | Daft Punk - Harder, Better, Faster, Stronger, from 50.446 s (director's pick, 11-04; was Emerald Rush) |
 | W3 | 09:34–09:49 | 15 s | S4 | Holly Herndon & Jlin - Godmother, 8 bars (~15.7 s) |
-| W4 | 12:10–12:18 | 8 s | S5 | The Weeknd - Dancing in the Flames (Instrumental), 4 bars (~8.2 s), full level after one empty beat |
+| W4 | 12:10–12:18 | 8 s | S5 | The Weeknd - Dancing in the Flames (vocal version, director 11-09), 4 bars (~8.2 s), full level after one empty beat |
 | W5 | 17:10–17:43 | 33 s | S8 | The Weeknd - Wake Me Up (feat. Justice), instrumental tail 4:16.9-4:49.7 |
 
 All time codes use the conservative estimate. Re-time everything from the recorded voice before editing.
@@ -260,7 +260,7 @@ Every member stays at 3.5 minutes or more on both estimates. C keeps both turnin
 **W1 · 02:03–02:21 · MUSIC-ONLY WINDOW** (18 s, no narration)
 
 - Visual: TITLE CARD. Half a beat of silence, then the title slams in: "WORTH TESTING? How computers help find cancer drug candidates: the CDK20 story", with section, group and member names. The road map draws itself faintly under the title. Ink splashes break into rain that carries into S2.
-- Music: NewJeans - Supernatural (Instrumental), intro 8 bars (~17.6 s)
+- Music: NewJeans - Supernatural (vocal version, director 11-09), 8 bars of a sung section (~17.6 s, picked after the beat scan)
 
 ### S2 · The question: Hong Kong, our question, how we checked · 02:21–04:43 · lead A
 
@@ -561,7 +561,7 @@ Every member stays at 3.5 minutes or more on both estimates. C keeps both turnin
 **W4 · 12:10–12:18 · MUSIC-ONLY WINDOW** (8 s, no narration)
 
 - Visual: EMOTIONAL PEAK 3, the key turns. 048 slides into the pocket in our re-docked pose (label "OUR RE-DOCKING"); the ink key completes its turn; the road-map station "Improve" flares vermilion.
-- Music: The Weeknd - Dancing in the Flames (Instrumental), 4 bars (~8.2 s), full level after one empty beat
+- Music: The Weeknd - Dancing in the Flames (vocal version, director 11-09), 4 bars (~8.2 s), full level after one empty beat
 
 **5-10 · 12:18–12:42 · C · VO** (37 words)
 
