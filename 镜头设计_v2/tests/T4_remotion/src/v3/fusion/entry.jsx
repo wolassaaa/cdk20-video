@@ -692,13 +692,13 @@ const S403 = ({file = "fusion_s1/s4_403_1.mp4", fps = 30, review = true}) => {
 
 /** Piece 2 of S4's second half in one review clip (08:00-08:28.5): 4-03 over shot i3, a card where C and B go on camera (4-04, 4-05; footage comes 11-12), then shot i4,
  * back on the table as 4-06 starts: the see-through tail breaks into its blocks and they drift away ("they cut the tail off"). */
-const S4B = () => {
-  const f = useCurrentFrame(), t = f / 30;
+const S4B = ({fps = 30, review = true, f403 = "fusion_s1/s4_403_1.mp4", f404 = "fusion_s1/s4_404_1.mp4"}) => {
+  const f = useCurrentFrame(), t = f / fps;
   ruler.font = `600 28px "${SANS}"`;
   const tagW = ruler.measureText("AlphaFold DB v6 · predicted").width;
   return <AbsoluteFill style={{background: BONE}}>
-    <Sequence durationInFrames={540}><S403/></Sequence>
-    <Sequence from={540} durationInFrames={210}><Clock.Provider value={t - 18}><AbsoluteFill style={{background: BONE}}>
+    <Sequence durationInFrames={18 * fps}><S403 file={f403} fps={fps} review={review}/></Sequence>
+    <Sequence from={18 * fps} durationInFrames={7 * fps}><Clock.Provider value={t - 18}><AbsoluteFill style={{background: BONE}}>
       <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`}>
         <text x={160} y={380} fontFamily={SANS} fontSize={30} fontWeight={600} fill={SOFT}>08:18 · 4-04 · C on camera (footage comes 11-12)</text>
         <text x={160} y={450} fontFamily={SERIF} fontSize={64} fill={INK}>“So what did they do?”</text>
@@ -707,11 +707,11 @@ const S4B = () => {
         <text x={160} y={745} fontFamily={SERIF} fontSize={64} fill={INK}>A human caught the problem.”</text>
       </svg>
     </AbsoluteFill></Clock.Provider></Sequence>
-    <Sequence from={750} durationInFrames={105}><AbsoluteFill>
-      <OffthreadVideo src={staticFile("fusion_s1/s4_404_1.mp4")} muted style={{width: W, height: H}}/>
+    <Sequence from={25 * fps} durationInFrames={3.5 * fps}><AbsoluteFill>
+      <OffthreadVideo src={staticFile(f404)} muted style={{width: W, height: H}}/>
       <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
         <text x={1856} y={92} fontFamily={SANS} fontSize={36} fontWeight={600} fill={INK} textAnchor="end">Objective 1 / Tool: structure prediction</text>
-        <text x={64} y={1018} fontFamily={SANS} fontSize={24} fontWeight={500} fill={SOFT}>VO (A): And this next part honestly blew my mind.</text>
+        {review && <text x={64} y={1018} fontFamily={SANS} fontSize={24} fontWeight={500} fill={SOFT}>VO (A): And this next part honestly blew my mind.</text>}
         <circle cx={W - 72 - tagW - 26} cy={1018 - 10} r={14} fill="none" stroke={INK} strokeWidth={2.5} strokeDasharray="6 5"/>
         <text x={W - 72} y={1018} fontFamily={SANS} fontSize={28} fontWeight={600} fill={INK} textAnchor="end">AlphaFold DB v6 · predicted</text>
         <text x={W - 72} y={1056} fontFamily={SANS} fontSize={22} fontWeight={500} fill={SOFT} textAnchor="end">Illustration · blocks drawn · structure AlphaFold DB v6 · Ren 2023</text>
@@ -997,6 +997,11 @@ const Root = () => <>
   <Composition id="S4C" component={S4C} durationInFrames={1245} fps={30} width={W} height={H}/>
   <Composition id="S4D" component={S4D} durationInFrames={510} fps={30} width={W} height={H}/>
   <Composition id="S4K" component={S4K} durationInFrames={510} fps={30} width={W} height={H}/>
+  {/* 4K 60 fps passes of S4's 4-01 to 4-07 (render with --scale=2): every Blender frame, no voice-over line, since the narration comes as sound and the subtitles as an SRT */}
+  <Composition id="S401-4K" component={S401} durationInFrames={1560} fps={60} width={W} height={H} defaultProps={{file: "fusion_s1/s4_401_4k.mp4", fps: 60, review: false}}/>
+  <Composition id="S402-4K" component={S402} durationInFrames={1020} fps={60} width={W} height={H} defaultProps={{file: "fusion_s1/s4_402_4k.mp4", fps: 60, review: false}}/>
+  <Composition id="S4B-4K" component={S4B} durationInFrames={1710} fps={60} width={W} height={H} defaultProps={{f403: "fusion_s1/s4_403_4k.mp4", f404: "fusion_s1/s4_404_4k.mp4", fps: 60, review: false}}/>
+  <Composition id="S4C-4K" component={S4C} durationInFrames={2490} fps={60} width={W} height={H} defaultProps={{file: "fusion_s1/s4_lp_4k.mp4", fps: 60, review: false}}/>
   <Composition id="Loop" component={Loop} durationInFrames={1620} fps={60} width={W} height={H}/>
 </>;
 registerRoot(Root);

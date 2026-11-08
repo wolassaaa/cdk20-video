@@ -6491,8 +6491,11 @@ def shot_hk(sc, sky):
 sc, sky = stage()
 update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t, r=shot_r, s=shot_s, n=shot_n, o=shot_o, m=shot_m, j=shot_j, l=shot_l, e=shot_e, d=shot_d, i=shot_i, i2=shot_i2, i3=shot_i3, i4=shot_i4, lp=shot_lp, hz=shot_hz, hk=shot_hk)[SHOT](sc, sky)
 sc.frame_start, sc.frame_end = 0, FRAMES
+EXT = "png"
+if os.environ.get("BL_JPEG"):          # the 4K 60 fps passes: a 4K PNG is ~10 MB, a JPEG at 95 ~2 MB, and the take re-encodes to H.264 anyway
+    sc.render.image_settings.file_format, sc.render.image_settings.color_mode, sc.render.image_settings.quality, EXT = "JPEG", "RGB", 95, "jpg"
 for f in range(FIRST, LAST + 1, STEP):
     sc.frame_set(f)
     update(START + f / FPS)
-    gk.render("%s/%s_%04d.png" % (OUT, SHOT, f))
+    gk.render("%s/%s_%04d.%s" % (OUT, SHOT, f, EXT))
 print("INSERT_OK", SHOT, FIRST, LAST)
