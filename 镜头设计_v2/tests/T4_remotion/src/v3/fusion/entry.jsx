@@ -1002,6 +1002,7 @@ const Root = () => <>
   <Composition id="S402-4K" component={S402} durationInFrames={1020} fps={60} width={W} height={H} defaultProps={{file: "fusion_s1/s4_402_4k.mp4", fps: 60, review: false}}/>
   <Composition id="S4B-4K" component={S4B} durationInFrames={1710} fps={60} width={W} height={H} defaultProps={{f403: "fusion_s1/s4_403_4k.mp4", f404: "fusion_s1/s4_404_4k.mp4", fps: 60, review: false}}/>
   <Composition id="S4C-4K" component={S4C} durationInFrames={2490} fps={60} width={W} height={H} defaultProps={{file: "fusion_s1/s4_lp_4k.mp4", fps: 60, review: false}}/>
+  <Composition id="S4K-4K" component={S4K} durationInFrames={1020} fps={60} width={W} height={H} defaultProps={{file: "fusion_s1/s4_hk_4k.mp4", fps: 60, review: false}}/>
   <Composition id="Loop" component={Loop} durationInFrames={1620} fps={60} width={W} height={H}/>
 </>;
 registerRoot(Root);
