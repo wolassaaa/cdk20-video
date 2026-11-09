@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=3840, height=2160" />
+    <script src="./vendor/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 3840px; height: 2160px; overflow: hidden; background: #ECEAE4; }
+      #root { position: absolute; left: 0; top: 0; width: 3840px; height: 2160px; overflow: hidden; background: #ECEAE4; }
+      #cam { position: absolute; left: 0; top: 0; width: 3840px; height: 2160px; transform-origin: 0 0; }
+      #bone { position: absolute; left: -6000px; top: -3000px; width: 16000px; height: 8000px; background: #ECEAE4; }
+      #filmwrap { position: absolute; left: 0; top: 0; width: 3840px; height: 2160px; }
+      #film, #full { position: absolute; left: 0; top: 0; width: 3840px; height: 2160px; object-fit: contain; }
+      #print { position: absolute; left: 0; top: 0; transform-origin: 50% 50%; opacity: 0; }
+      #shade { position: absolute; left: 0; top: 0; background: #3C3228; filter: blur(28px); transform-origin: 50% 50%; opacity: 0; }
+      #paper { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #F7F3EA; }
+      #window { position: absolute; left: 40px; top: 40px; overflow: hidden; background: #C9BAA2; }
+      #win { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; }
+      #fullwrap { position: absolute; left: 0; top: 0; width: 3840px; height: 2160px; opacity: 0; }
+    </style>
+  </head>
+  <body>
+    <!-- HKBU SCIE1007 coursework video: on-camera transition, option A (push into the print), sample 1-02 -> 1-03 -> 1-04.
+         Composition time t is film time 22 + t. film.mp4 is S1S2_table_2.mp4 22.0-32.5 s; standin_A.mp4 is the grey stand-in
+         until the real clip arrives (11-12), starting at film 24.5 s. -->
+    <div id="root" data-composition-id="main" data-start="0" data-duration="10.5" data-width="3840" data-height="2160"
+         data-layout-allow-overflow data-layout-allow-overlap>
+      <div id="cam">
+        <div id="bone"></div>
+        <div id="filmwrap">
+          <video id="film" class="clip" data-start="0" data-duration="10.5" data-media-start="0" data-track-index="0"
+                 src="assets/film.mp4" muted playsinline></video>
+        </div>
+        <div id="shade"></div>
+        <div id="print">
+          <div id="paper"></div>
+          <div id="window">
+            <video id="win" class="clip" data-start="2.5" data-duration="8" data-media-start="0" data-track-index="1"
+                   src="assets/standin_A.mp4" muted playsinline></video>
+          </div>
+        </div>
+      </div>
+      <div id="fullwrap">
+        <video id="full" class="clip" data-start="4.9" data-duration="2.75" data-media-start="2.4" data-track-index="2"
+               src="assets/standin_A.mp4" muted playsinline></video>
+      </div>
+    </div>
+    <script>
+      // Everything is a function of film time F; numbers are 4K pixels.
+      // The print copies entry.jsx Print at={25.05}: x=ST1+72 y=168 w=620 h=744 rot=0.9 in 1080 units, so in 4K
+      // its centre is (764, 1080), 1240 x 1488, a 40 px paper border, and it drops in over 0.5 s with out() = 1-(1-x)^3.
+      const T0 = 22.0, DUR = 10.5;
+      const CX = 764, CY = 1080, PW = 1240, PH = 1488, ROT = 0.9, BORDER = 40, R = CX + PW / 2;
+      const DROP = 25.05;
+      const WIN_H = PH - 2 * BORDER, WIDE = WIN_H * 16 / 9 + 2 * BORDER;      // the print opened out to 16:9
+      const S1 = 3840 / (WIDE - 2 * BORDER), C1 = R - WIDE / 2;                 // camera at the end of the push
+      const PUSH = [25.70, 26.95], OPEN = [25.85, 26.80];                      // push in, print opens away from the liver
+      const PULL = [29.58, 30.60], CLOSE = [29.68, 30.48];                     // back out, done before the film starts its pan (frame 1837, 30.617 s)
+      // camera x of the film (s1_timeline.json cam[f][0], 1080 units) for frames 1837-1900; 2880 before (y 540, zoom 1 throughout)
+      const PAN0 = 1837;
+      const PAN = [2880.032,2880.25,2880.828,2881.928,2883.696,2886.269,2889.769,2894.307,2899.983,2906.885,2915.091,2924.667,2935.671,2948.148,2962.137,2977.664,2994.749,3013.402,3033.625,3055.412,3078.75,3103.618,3129.989,3157.827,3187.093,3217.74,3249.716,3282.963,3317.419,3353.017,3389.686,3427.35,3465.931,3505.345,3545.509,3586.334,3627.73,3669.605,3711.865,3754.415,3797.159,3840,3882.841,3925.585,3968.135,4010.395,4052.27,4093.666,4134.491,4174.655,4214.069,4252.65,4290.314,4326.983,4362.581,4397.037,4430.284,4462.26,4492.907,4522.173,4550.011,4576.382,4601.25,4624.588];
+      const clamp = x => Math.min(1, Math.max(0, x));
+      const smoother = x => { x = clamp(x); return x * x * x * (x * (6 * x - 15) + 10); };   // eases in and out, no overshoot
+      const out3 = x => 1 - Math.pow(1 - clamp(x), 3);
+      const span = (F, a) => (F - a[0]) / (a[1] - a[0]);
+      const $ = id => document.getElementById(id);
+
+      function camX(F) {
+        const f = Math.round(F * 60);
+        if (f < PAN0) return 2880;
+        if (f - PAN0 < PAN.length) return PAN[f - PAN0];
+        return PAN[PAN.length - 1];
+      }
+
+      function renderAt(t) {
+        const F = T0 + t;
+        let s = 1, cx = 1920, w = 0, lift = 0, op = 0, blur = 0, full = 0, dx = 0;
+        if (F >= DROP) { lift = 1 - out3((F - DROP) / 0.5); op = clamp((F - DROP) / 0.08); }
+        if (F >= PUSH[0] && F < PULL[1]) {
+          const k = F < PULL[0] ? smoother(span(F, PUSH)) : 1 - smoother(span(F, PULL));
+          w = F < PULL[0] ? smoother(span(F, OPEN)) : 1 - smoother(span(F, CLOSE));
+          s = Math.exp(Math.log(S1) * k);
+          cx = 1920 + (C1 - 1920) * k;
+          blur = 18 * k;
+          full = F >= PUSH[1] && F < PULL[0] ? 1 : 0;
+        }
+        if (F >= PULL[1]) dx = -(camX(F) - 2880) * 2;                          // ride along with the film's pan
+        const pw = PW + (WIDE - PW) * w, pcx = R - pw / 2 + dx;
+        const rot = ROT * (1 - w) + 5 * lift, sc = 1 + 0.05 * lift;
+        const px = pcx - 120 * lift, py = CY + 260 * lift;
+        $("cam").style.transform = `translate(${1920 - s * cx}px, ${1080 - s * CY}px) scale(${s})`;
+        $("filmwrap").style.filter = blur > 0.05 ? `blur(${blur.toFixed(2)}px)` : "none";
+        const p = $("print");
+        p.style.width = pw + "px"; p.style.height = PH + "px";
+        p.style.transform = `translate(${px - pw / 2}px, ${py - PH / 2}px) rotate(${rot}deg) scale(${sc})`;
+        p.style.opacity = (F >= DROP && pcx + pw / 2 > -120) ? op : 0;
+        const win = $("window");
+        win.style.width = (pw - 2 * BORDER) + "px"; win.style.height = WIN_H + "px";
+        const sh = $("shade");                                               // the film already has the print's own shadow; this one covers the opened part
+        sh.style.width = pw + "px"; sh.style.height = PH + "px";
+        sh.style.transform = `translate(${px - pw / 2 + 24}px, ${py - PH / 2 + 32}px) rotate(${rot}deg)`;
+        sh.style.opacity = 0.3 * w;
+        $("fullwrap").style.opacity = full;
+      }
+
+      window.addEventListener("hf-seek", e => renderAt(e.detail.time));
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true, onUpdate: () => renderAt(tl.time()) });
+      tl.to({}, { duration: DUR }, 0);
+      window.__timelines["main"] = tl;
+      renderAt(0);
+    </script>
+  </body>
+</html>
