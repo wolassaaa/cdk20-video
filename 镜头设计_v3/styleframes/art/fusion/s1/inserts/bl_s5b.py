@@ -14,7 +14,7 @@ import os
 import bpy
 from mathutils import Quaternion, Vector
 
-META = {"s501": (625.0, 1020, 0.2, 0.9), "s507": (693.0, 1200, 0.2, 0.9)}   # 5-01 10:25-10:42，17 秒；5-07 11:33-11:53，20 秒
+META = {"s501": (625.0, 1020, 0.2, 0.9), "s507": (693.0, 1200, 0.2, 0.9), "s510": (738.0, 1440, 0.2, 0.9)}   # 5-01 10:25-10:42，17 秒；5-07 11:33-11:53，20 秒；5-10 12:18-12:42，24 秒
 MY_META = dict(META)                        # bl_s5.py 读进来时会把 META 换成它自己的
 
 _here = os.path.dirname(os.path.abspath(XFILE))
@@ -174,7 +174,7 @@ def shot_s501(sc, sky):
             print("S501 clash %s: %s" % (k, v[:3]))
         print("S501 card gap %.4f, cell margin x %.3f y %.3f" % (gap, half_x - max(abs((home[i] + qm @ k).x - c39.x) for i in range(7) for k in corners),
                                                               half_y - max(abs((home[i] + qm @ k).y - c39.y) for i in range(7) for k in corners)))
-    if os.environ.get("BL_S5B_PROJ"):
+    if os.environ.get("BL_S5B_PROJ") and SHOT == "s501":
         from bpy_extras.object_utils import world_to_camera_view
         tp = float(os.environ["BL_S5B_PROJ"])
         sc.frame_set(int(round(tp * FPS)))
@@ -230,15 +230,17 @@ def shot_s507(sc, sky):
     c20 = Vector((*cell_at(20), 0.0))
     c21 = Vector((*cell_at(21), 0.0))
     yaw = Quaternion((0, 0, 1), math.radians(90.0)) @ Quaternion(src.rotation_quaternion)
-    grid = [Vector((c20.x + (cx - 1.5) * 0.14, c20.y + 0.08 + (1.5 - cy) * 0.12, ZK)) for cy in range(4) for cx in range(4)]
+    GX = c20.x + 0.15                                  # 钥匙靠格子 20 的右半边，离试管近一点，镜头能推近一档
+    grid = [Vector((GX + (cx - 1.5) * 0.14, c20.y + 0.03 + (1.5 - cy) * 0.12, ZK)) for cy in range(4) for cx in range(4)]
     TESTED = [1, 2, 5, 6, 9, 10]                       # 中间两列的 6 把留下（只往前直走，路线互不相交）
-    slot = {k: Vector((c20.x + (j - 2.5) * 0.075, c20.y - 0.25, ZK)) for j, k in enumerate(sorted(TESTED, key=lambda k: (grid[k].x, -grid[k].y)))}
+    slot = {k: Vector((GX + (j - 2.5) * 0.075, c20.y - 0.25, ZK)) for j, k in enumerate(sorted(TESTED, key=lambda k: (grid[k].x, -grid[k].y)))}
     new = [copy_key(sc, src, "s507_key%02d" % i) for i in range(16)]
     T_M, T_ME = 1.0, 3.2
-    T_GROW, T_GSTAG, T_GDUR = 9.6, 0.07, 0.4
-    T_SHRINK, T_SDUR = 11.3, 0.5
+    T_GROW, T_GSTAG, T_GDUR = 9.6, 0.07, 0.5          # 第 2 版：一把把从画面上方直落进格子（原来是原地长出来）
+    T_SHRINK, T_SDUR = 11.3, 0.8                       # 第 2 版：没留下的 10 把整批升出画外（原来是原地缩没，06 第 5 节不许）
+    Z_HI = 1.0
     T_SLIDE, T_SLIDE_E = 11.8, 12.9
-    mid_v = dict(at=(c20.x + 0.18, c20.y - 0.02, 0.0), az=0.0, el=math.radians(42.0), d=1.6, mm=45.0)
+    mid_v = dict(at=(c20.x + 0.13, c20.y - 0.04, 0.0), az=0.0, el=math.radians(56.0), d=1.3, mm=45.0)          # 第 2 版：推近一档；试管放到画面右边缘，玻璃顶不再从右上标题后面过
 
     def mix(p, q, x):
         log = lambda k: math.exp(math.log(p[k]) + (math.log(q[k]) - math.log(p[k])) * x)
@@ -254,20 +256,29 @@ def shot_s507(sc, sky):
     def focus(t):
         return Vector(v_end["at"]).lerp(Vector(mid_v["at"]), smooth((t - T_M) / (T_ME - T_M)))
 
+    out_order = [i for i in range(16) if i not in TESTED]
+
     def size(i, t):
-        g = smooth((t - (T_GROW + T_GSTAG * i)) / T_GDUR)
-        if i not in TESTED:
-            g *= 1.0 - smooth((t - T_SHRINK) / T_SDUR)
-        return g
+        """大小不变；只是落下之前、升走之后不在台面上（返回 0 当作不在）。"""
+        if t < T_GROW + T_GSTAG * i:
+            return 0.0
+        if i not in TESTED and t > T_SHRINK + 0.03 * out_order.index(i) + T_SDUR:
+            return 0.0
+        return 1.0
 
     def where(i, t):
+        p_ = Vector(grid[i])
+        t0 = T_GROW + T_GSTAG * i
+        p_.z = ZK + (Z_HI - ZK) * (1.0 - smooth((t - t0) / T_GDUR))          # 直落，末速为零，不弹
         if i in TESTED:
-            return grid[i].lerp(slot[i], smooth((t - T_SLIDE) / (T_SLIDE_E - T_SLIDE)))
-        return grid[i]
+            q_ = grid[i].lerp(slot[i], smooth((t - T_SLIDE) / (T_SLIDE_E - T_SLIDE)))
+            return Vector((q_.x, q_.y, p_.z))
+        t1 = T_SHRINK + 0.03 * out_order.index(i)
+        p_.z += (Z_HI - ZK) * smooth((t - t1) / T_SDUR)                        # 整批升走，出画上方
+        return p_
 
     def glow(i, t):
-        t0 = T_GROW + T_GSTAG * i
-        return 0.0 if t < t0 else max(0.0, 1.0 - (t - t0) / 0.6)
+        return 0.0
 
     c = sc.camera
     c.animation_data_clear()
@@ -340,13 +351,13 @@ def shot_s507(sc, sky):
         for k, v in bad.items():
             print("S507 clash %s: %d, first %s" % (k, len(v), v[0]))
         print("S507 closest two keys come: %.4f" % near[0])
-    if os.environ.get("BL_S5B_PROJ"):
+    if os.environ.get("BL_S5B_PROJ") and SHOT == "s507":
         from bpy_extras.object_utils import world_to_camera_view
         tp = float(os.environ["BL_S5B_PROJ"])
         update(T5 + tp)
         bpy.context.view_layer.update()
         tube = ob.get("s504_tube")
-        for nm, p_ in [("c20", c20), ("c21", c21), ("tube", Vector(tube.location) if tube else c21)] + [("slot%d" % k, v) for k, v in sorted(slot.items())] + [("grid%d" % i, grid[i]) for i in (0, 3, 12, 15)]:
+        for nm, p_ in [("c20", c20), ("c21", c21), ("tube", Vector(tube.location) if tube else c21), ("tube_top", Vector(tube.location) + Vector((0, 0, 0.30)))] + [("slot%d" % k, v) for k, v in sorted(slot.items())] + [("grid%d" % i, grid[i]) for i in (0, 3, 12, 15)]:
             v = world_to_camera_view(sc, c, p_)
             print("S507 proj %s %.0f %.0f" % (nm, v.x * 1920, (1 - v.y) * 1080))
         import sys
@@ -355,3 +366,188 @@ def shot_s507(sc, sky):
 
 
 SHOTS["s507"] = shot_s507
+
+
+IC50_HUH7, IC50_HEK, DOSE_MAX = 208.7, 1706.7, 1800.0          # nM，Ren 2023 p1448 / Fig. 9B；剂量尺 0-1,800 nM 线性，不标数
+
+
+def clamp01(x):
+    return 0.0 if x < 0 else 1.0 if x > 1 else x
+
+
+def shot_s510(sc, sky):
+    """5-10（12:18-12:42，C 画外音）。先接 5-07 的最后一帧（W4 还没做；W4 做的时候让它停在这一帧，或者这一段改接 W4）。
+    0-1 s 不动；1.0-3.4 s 镜头往前落到格子 29：两只玻璃培养皿，后排 Huh7、前排 HEK293，每只 40 个细胞；
+    各带一条墨线剂量尺和一个钢滑块（5-04 的做法，尺子 0-1,800 nM 线性，不标数），尺上一道长一点的墨线是各自的 IC50。
+    9.6-16.0 s 两个滑块一起走：Huh7 皿里的细胞在滑块走到 208.7 那道线以前就缩没一半（很快），HEK293 一路慢慢缩，到 1,706.7 那道才缩没一半。之后不动。"""
+    import bmesh
+    import random
+    upd = shot_s507(sc, sky)
+    v_end = upd.view(1199 / FPS)
+    upd(MY_META["s507"][0] + 1199 / FPS)
+    for o in bpy.data.objects:
+        o.animation_data_clear()
+    T5 = MY_META["s510"][0]
+    ob = bpy.data.objects
+    ink = ob["s504_axis"].material_slots[0].material
+    steel = ob["s504_marker"].material_slots[0].material
+    glass = ob["s504_tube"].material_slots[0].material
+    pink = P.gloss((0.86, 0.50, 0.50), 0.35, 0.6)          # 和 S7 7-02 培养皿同一组颜色
+    pale = P.gloss((0.93, 0.87, 0.72), 0.35, 0.6)
+    c29 = Vector((*cell_at(29), 0.0))
+    R_D, H_D, WL, GEL = 0.085, 0.016, 0.0018, 0.005
+    RC, NC = 0.0085, 40
+    AXH, MK = 0.0016, 0.028
+    L0, L1 = c29.x - 0.12, c29.x + 0.34
+    rows = [dict(name="huh7", y=c29.y + 0.16, med=pale, cell=pink, ic=IC50_HUH7), dict(name="hek", y=c29.y - 0.15, med=pale, cell=pale, ic=IC50_HEK)]
+    T_M, T_ME = 1.0, 3.4
+    T_D0, T_D1 = 9.6, 16.0
+    view = dict(at=(c29.x + 0.06, c29.y - 0.02, 0.0), az=0.0, el=math.radians(44.0), d=1.35, mm=45.0)
+
+    def box(name, lo, hi, mat):
+        bm = bmesh.new()
+        bmesh.ops.create_cube(bm, size=1.0, matrix=Matrix.Translation(((lo[0] + hi[0]) / 2, (lo[1] + hi[1]) / 2, (lo[2] + hi[2]) / 2)) @ Matrix.Diagonal((hi[0] - lo[0], hi[1] - lo[1], hi[2] - lo[2], 1)))
+        me = bpy.data.meshes.new(name)
+        bm.to_mesh(me)
+        bm.free()
+        me.materials.append(mat)
+        o = bpy.data.objects.new(name, me)
+        sc.collection.objects.link(o)
+        return o
+
+    rnd = random.Random(510)
+    for r in rows:
+        r["dx"] = c29.x - 0.27
+        e = bpy.data.objects.new("s510_dish_" + r["name"], None)
+        sc.collection.objects.link(e)
+        e.location = (r["dx"], r["y"], 0.0)
+        lathe([(0, 0), (R_D, 0), (R_D, H_D), (R_D - WL, H_D), (R_D - WL, WL), (0, WL)], glass, "s510_base_" + r["name"], e, 64)
+        lathe([(0, WL), (R_D - WL - 0.0004, WL), (R_D - WL - 0.0004, WL + GEL), (0, WL + GEL + 0.0004)], r["med"], "s510_gel_" + r["name"], e, 64)
+        pts = []          # 细胞：胶面上的小扁圆，彼此不叠
+        while len(pts) < NC:
+            a_, rr = rnd.uniform(0, 2 * math.pi), (R_D - WL - RC - 0.004) * math.sqrt(rnd.random())
+            q = (rr * math.cos(a_), rr * math.sin(a_))
+            if all(math.hypot(q[0] - p_[0], q[1] - p_[1]) > 2 * RC + 0.003 for p_ in pts):
+                pts.append(q)
+        cells = []
+        for k, q in enumerate(pts):
+            c_ = lathe([(0, 0), (RC, 0), (RC * 0.92, RC * 0.35), (RC * 0.55, RC * 0.62), (0, RC * 0.7)], r["cell"], "s510_cell_%s_%02d" % (r["name"], k), e, 24)
+            c_.location = (q[0], q[1], WL + GEL)
+            cells.append(c_)
+        r["cells"], r["pts"] = cells, pts
+        order = list(range(NC))
+        rnd.shuffle(order)
+        r["die"] = order[:NC // 2]                       # 到 IC50 时没了的一半
+        AY = r["y"]
+        box("s510_axis_" + r["name"], (L0, AY - 0.003, 0.0), (L1, AY + 0.003, AXH), ink)
+        for i in range(7):
+            x_ = L0 + (L1 - L0) * i / 6
+            box("s510_tick_%s%d" % (r["name"], i), (x_ - 0.0025, AY - 0.022, 0.0), (x_ + 0.0025, AY - 0.003, AXH), ink)
+        xm = L0 + (L1 - L0) * r["ic"] / DOSE_MAX
+        r["xm"] = xm
+        box("s510_ic50_" + r["name"], (xm - 0.003, AY - 0.040, 0.0), (xm + 0.003, AY - 0.003, AXH * 1.5), ink)
+        r["marker"] = box("s510_marker_" + r["name"], (-MK / 2, -MK / 2, 0.0), (MK / 2, MK / 2, 0.018), steel)
+        r["mk_y"] = AY + 0.020
+        r["t_ic"] = T_D0 + (T_D1 - T_D0) * r["ic"] / DOSE_MAX
+
+    def mix(p, q, x):
+        log = lambda k: math.exp(math.log(p[k]) + (math.log(q[k]) - math.log(p[k])) * x)
+        return dict(at=lerp(p["at"], q["at"], x), az=p["az"] + (q["az"] - p["az"]) * x, el=p["el"] + (q["el"] - p["el"]) * x, d=log("d"), mm=log("mm"))
+
+    def cam(t):
+        if t < T_M:
+            return dict(v_end)
+        if t < T_ME:
+            return mix(v_end, view, smooth((t - T_M) / (T_ME - T_M)))
+        return dict(view)
+
+    def focus(t):
+        return Vector(v_end["at"]).lerp(Vector(view["at"]), smooth((t - T_M) / (T_ME - T_M)))
+
+    def dose_x(t):
+        return L0 + (L1 - L0) * clamp01((t - T_D0) / (T_D1 - T_D0))
+
+    def cell_size(r, k, t):
+        """死的那一半，在滑块从 0 走到自己 IC50 的这段时间里一个个缩没（顺序打乱）；活的一直在。"""
+        if k not in r["die"]:
+            return 1.0
+        j = r["die"].index(k)
+        t_end = T_D0 + (r["t_ic"] - T_D0) * (j + 1) / len(r["die"])
+        return 1.0 - smooth((t - (t_end - 0.35)) / 0.35)
+
+    c = sc.camera
+    c.animation_data_clear()
+    c.data.animation_data_clear()
+    last_q[0] = None
+
+    def update(t_abs):
+        t = t_abs - T5
+        f = int(round(t * FPS))
+        shoot(c, f, cam(t), focus(t))
+        moving = T_D0 - 0.05 <= t <= T_D1 + 0.05
+        for r in rows:
+            mk = r["marker"]
+            mk.animation_data_clear()
+            if moving:
+                for df in (-1, 0, 1):
+                    mk.location = (dose_x(t + df / FPS), r["mk_y"], 0.0)
+                    mk.keyframe_insert("location", frame=f + df)
+            mk.location = (dose_x(t), r["mk_y"], 0.0)
+            for k, c_ in enumerate(r["cells"]):
+                c_.animation_data_clear()
+                s_ = cell_size(r, k, t)
+                if moving and k in r["die"]:
+                    for df in (-1, 0, 1):
+                        sz = max(cell_size(r, k, t + df / FPS), 1e-4)
+                        c_.scale = (sz, sz, sz)
+                        c_.keyframe_insert("scale", frame=f + df)
+                c_.scale = (max(s_, 1e-4),) * 3
+                c_.hide_render = s_ <= 1e-3
+        sky(0.2)
+
+    update.view = cam
+    update.ctx = dict(rows=rows, view=view)
+    print("S510 c29 %s marks huh7 %.3f at %.2fs, hek %.3f at %.2fs" % (tuple(round(v, 3) for v in c29), rows[0]["xm"], rows[0]["t_ic"], rows[1]["xm"], rows[1]["t_ic"]))
+
+    # ---------------------------------------------------------------- 穿模检查（解析）：皿、尺、滑块都在格子 29 内沿里，滑块不碰尺子和皿，细胞在皿里不叠
+    if SHOT == "s510" and not os.environ.get("BL_NOCHECK"):
+        bad = {}
+        half_x, half_y = 0.95 / 2 - 0.06, 0.84 / 2 - 0.06
+        for r in rows:
+            ext = [(r["dx"] - R_D, r["y"] - R_D), (r["dx"] + R_D, r["y"] + R_D), (L1 + MK / 2, r["mk_y"] + MK / 2), (L0, r["y"] - 0.040)]
+            for (x_, y_) in ext:
+                if abs(x_ - c29.x) > half_x or abs(y_ - c29.y) > half_y:
+                    bad.setdefault("%s / cell wall" % r["name"], []).append((round(x_, 3), round(y_, 3)))
+            if r["mk_y"] - MK / 2 < r["y"] + 0.003 + 0.001:
+                bad.setdefault("marker / rule", []).append(r["name"])
+            if L0 - MK / 2 < r["dx"] + R_D + 0.002:
+                bad.setdefault("marker / dish", []).append(r["name"])
+            for i, p_ in enumerate(r["pts"]):
+                if math.hypot(*p_) + RC > R_D - WL:
+                    bad.setdefault("cell / dish wall", []).append(i)
+        if rows[0]["y"] - R_D < rows[1]["mk_y"] + MK / 2 + 0.01 and False:
+            bad["row / row"] = [1]
+        gap_rows = (rows[0]["y"] - 0.040) - (rows[1]["mk_y"] + MK / 2)
+        dish_gap = (rows[0]["y"] - R_D) - (rows[1]["y"] + R_D)
+        if gap_rows < 0.005 or dish_gap < 0.005:
+            bad["row / row"] = [round(gap_rows, 3), round(dish_gap, 3)]
+        print("S510 clashes:", "none" if not bad else "")
+        for k, v in bad.items():
+            print("S510 clash %s: %s" % (k, v[:3]))
+        print("S510 rows gap %.3f, dishes gap %.3f" % (gap_rows, dish_gap))
+    if os.environ.get("BL_S5B_PROJ") and SHOT == "s510":
+        from bpy_extras.object_utils import world_to_camera_view
+        tp = float(os.environ["BL_S5B_PROJ"])
+        update(T5 + tp)
+        bpy.context.view_layer.update()
+        for r in rows:
+            for nm, p_ in [("dish", Vector((r["dx"], r["y"], 0.0))), ("dish_back", Vector((r["dx"], r["y"] + R_D, 0.0))), ("dish_front", Vector((r["dx"], r["y"] - R_D, 0.0))),
+                           ("rule0", Vector((L0, r["y"], 0.0))), ("rule1", Vector((L1, r["y"], 0.0))), ("mark", Vector((r["xm"], r["y"] - 0.04, 0.0)))]:
+                v = world_to_camera_view(sc, c, p_)
+                print("S510 proj %s %s %.0f %.0f" % (r["name"], nm, v.x * 1920, (1 - v.y) * 1080))
+        import sys
+        sys.exit(0)
+    return update
+
+
+SHOTS["s510"] = shot_s510

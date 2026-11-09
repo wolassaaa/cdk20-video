@@ -149,8 +149,8 @@ const S501 = ({file = "fusion_s5b/s501_3d.mp4", fps = 30, review = true}) => {
 };
 
 // ================================================================ 5-07 · round two (11:33-11:53, 20 s)
-// bl_s5b.py s507: from 5-04's last frame (the enzyme tube, close) the camera pulls back to cell 20; 16 new keys grow there (9.6 s), 10 shrink away, 6 slide into a row (12.9 s).
-// Where things sit while it holds (BL_S5B_PROJ=15): the tube at 1591, 444; the 4x4 keys x 352-1007, y 289-621; the row of six at y 796, x 342-973.
+// bl_s5b.py s507: from 5-04's last frame (the enzyme tube, close) the camera pulls back to cell 20; 16 new keys drop in from above (9.6 s), 10 lift away out of the frame, 6 slide into a row (12.9 s).
+// Where things sit while it holds (v2, BL_S5B_PROJ=15): the tube at the right edge (1820, 365); the 4x4 keys x 591-1406, y 192-714; the row of six at y 891, x 619-1382.
 const S507_LINES = [[0, "Not at all."], [1.0, "This is where the loop kicks in again, now with real lab data inside."], [5.0, "The results went back in, with a predicted pose of how 001 sat in the pocket."], [9.6, "Sixteen new designs."], [11.3, "Six made and tested."], [13.2, "All within 30 days of that first hit."]];
 /** A pen arc from the tube back to the design cell: drawn along its length, with an arrowhead once it arrives. */
 const Loop = ({d, at, dur = 0.9, end, ang}) => {
@@ -164,23 +164,26 @@ const Loop = ({d, at, dur = 0.9, end, ang}) => {
 const S507 = ({file = "fusion_s5b/s507_3d.mp4", fps = 30, review = true}) => {
   const t = useCurrentFrame() / fps;
   const notes = 1 - after(t, 9.2, 0.4);
-  ruler.font = `400 60px "${SERIF}"`;
-  const w1 = ruler.measureText("Round 2: 16 designed ").width, w2 = ruler.measureText("→ ").width, w3 = ruler.measureText("6 tested").width;
+  ruler.font = `400 72px "${SERIF}"`;
+  const w3 = ruler.measureText("6 tested").width, w2 = ruler.measureText("→ ").width;
   const red = smooth((t - 11.9) / 0.5);
   return <Clock.Provider value={t}><AbsoluteFill style={{background: BONE}}>
     <OffthreadVideo src={staticFile(file)} muted style={{width: W, height: H}}/>
     <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
       <Title t={t}/>
-      {/* the loop: the tube's result goes back to the design side */}
-      <Loop d="M1560 250 Q1310 90 1060 290" at={5.2} end={[1060, 290]} ang={-2.2}/>
+      {/* the loop: the tube's result (right edge) goes back over to the design side */}
+      <Loop d="M1780 290 Q1640 120 1470 190" at={5.2} end={[1470, 190]} ang={-2.75}/>
       {notes > 0 && <g opacity={notes}>
-        <Note x={420} y={430} size={48} at={5.6} rot={-1.5}>lab results back in</Note>
-        <Note x={420} y={500} size={48} at={7.0} rot={-1.5}>+ a predicted pose of 001</Note>
+        <Note x={140} y={360} size={48} at={5.6} rot={-1.5}>lab results back in</Note>
+        <Note x={140} y={430} size={48} at={7.0} rot={-1.5}>+ a predicted pose of 001</Note>
       </g>}
-      <Ink x={220} y={185} size={60} at={9.6} font={SERIF} w={w1 + 30} dur={0.6}>Round 2: 16 designed</Ink>
-      <Ink x={220 + w1} y={185} size={60} at={11.3} font={SERIF} w={w2 + w3 + 30} dur={0.5}>→ 6 tested</Ink>
-      {red > 0 && <rect x={220 + w1 + w2} y={198} width={w3 * red} height={5} fill={RED}/>}
-      <Ink x={226} y={340} size={30} at={13.3} w={520}>within 30 days of the first hit</Ink>
+      {/* the left strip of cell 20 stays empty: Round 2 is set there */}
+      <Ink x={142} y={330} size={30} at={9.4} w={200}>Round 2</Ink>
+      <Ink x={140} y={420} size={72} at={9.6} font={SERIF} w={380} dur={0.6}>16 designed</Ink>
+      <Ink x={140} y={505} size={72} at={11.3} font={SERIF} w={380} dur={0.5}>→ 6 tested</Ink>
+      {red > 0 && <rect x={140 + w2} y={520} width={w3 * red} height={5} fill={RED}/>}
+      <Ink x={142} y={580} size={28} at={13.3} w={440}>within 30 days</Ink>
+      <Ink x={142} y={618} size={28} at={13.6} w={440}>of the first hit</Ink>
       <VO t={t} lines={S507_LINES} review={review}/>
       <SourceR t={t} lines={["Illustration · 16 designed, 6 made and tested, within 30 days: Ren 2023, p. 1448", "predicted binding mode as the guide: p. 1444 · keys, tube and loop drawn"]}/>
     </svg>
