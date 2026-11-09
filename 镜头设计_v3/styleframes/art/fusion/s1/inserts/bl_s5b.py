@@ -14,7 +14,7 @@ import os
 import bpy
 from mathutils import Quaternion, Vector
 
-META = {"s501": (625.0, 1020, 0.2, 0.9)}   # 5-01 10:25-10:42，17 秒
+META = {"s501": (625.0, 1020, 0.2, 0.9), "s507": (693.0, 1200, 0.2, 0.9)}   # 5-01 10:25-10:42，17 秒；5-07 11:33-11:53，20 秒
 MY_META = dict(META)                        # bl_s5.py 读进来时会把 META 换成它自己的
 
 _here = os.path.dirname(os.path.abspath(XFILE))
@@ -191,3 +191,167 @@ def shot_s501(sc, sky):
 
 
 SHOTS["s501"] = shot_s501
+
+
+def copy_key(sc, src, name):
+    """拷一把 4-10 的钢钥匙：空物体和它下面的网格都拷，网格数据共用。"""
+    e = src.copy()
+    e.name = name
+    e.animation_data_clear()
+    sc.collection.objects.link(e)
+    for ch in src.children:
+        c2 = ch.copy()
+        c2.animation_data_clear()
+        c2.parent = e
+        c2.matrix_parent_inverse = ch.matrix_parent_inverse.copy()
+        sc.collection.objects.link(c2)
+        c2.hide_render = False
+    e.rotation_mode = "QUATERNION"
+    return e
+
+
+def shot_s507(sc, sky):
+    """5-07（11:33-11:53，C 画外音）。接 5-04 的最后一帧（格子 21 的酶活试管和剂量尺，特写）。
+    0-1 s 不动；1.0-3.2 s 镜头退成中景，左边空着的格子 20 进画（"loop kicks in again"）；
+    9.6 s 起格子 20 里 16 把新钥匙一把把长出来（4×4，W3 那一下提示光 0.6 秒内退掉；"Sixteen new designs"）；
+    11.3 s 其中 10 把缩没，11.8-12.9 s 剩下 6 把贴着台面滑到格子前沿排成一行（"Six made and tested"，4-10 挑 7 把的同一个做法）；之后不动。
+    回路（试管里的实验数据回到设计这边）、Round 2 的字在 Remotion 里画。"""
+    upd = shot_s504(sc, sky)
+    T504 = META["s504"][0]
+    v_end = upd.view(1439 / FPS)
+    upd(T504 + 1439 / FPS)
+    for o in bpy.data.objects:
+        o.animation_data_clear()
+    T5 = MY_META["s507"][0]
+    ob = bpy.data.objects
+    seven = [o for o in ob if o.type == "EMPTY" and o.name.startswith(("w3_rain", "w3_orb")) and len(o.children) and not all(ch.hide_render for ch in o.children)]
+    src = min(seven, key=lambda o: o.location.z)
+    KS, ZK = src.scale[0], src.location.z
+    c20 = Vector((*cell_at(20), 0.0))
+    c21 = Vector((*cell_at(21), 0.0))
+    yaw = Quaternion((0, 0, 1), math.radians(90.0)) @ Quaternion(src.rotation_quaternion)
+    grid = [Vector((c20.x + (cx - 1.5) * 0.14, c20.y + 0.08 + (1.5 - cy) * 0.12, ZK)) for cy in range(4) for cx in range(4)]
+    TESTED = [1, 2, 5, 6, 9, 10]                       # 中间两列的 6 把留下（只往前直走，路线互不相交）
+    slot = {k: Vector((c20.x + (j - 2.5) * 0.075, c20.y - 0.25, ZK)) for j, k in enumerate(sorted(TESTED, key=lambda k: (grid[k].x, -grid[k].y)))}
+    new = [copy_key(sc, src, "s507_key%02d" % i) for i in range(16)]
+    T_M, T_ME = 1.0, 3.2
+    T_GROW, T_GSTAG, T_GDUR = 9.6, 0.07, 0.4
+    T_SHRINK, T_SDUR = 11.3, 0.5
+    T_SLIDE, T_SLIDE_E = 11.8, 12.9
+    mid_v = dict(at=(c20.x + 0.18, c20.y - 0.02, 0.0), az=0.0, el=math.radians(42.0), d=1.6, mm=45.0)
+
+    def mix(p, q, x):
+        log = lambda k: math.exp(math.log(p[k]) + (math.log(q[k]) - math.log(p[k])) * x)
+        return dict(at=lerp(p["at"], q["at"], x), az=p["az"] + (q["az"] - p["az"]) * x, el=p["el"] + (q["el"] - p["el"]) * x, d=log("d"), mm=log("mm"))
+
+    def cam(t):
+        if t < T_M:
+            return dict(v_end)
+        if t < T_ME:
+            return mix(v_end, mid_v, smooth((t - T_M) / (T_ME - T_M)))
+        return dict(mid_v)
+
+    def focus(t):
+        return Vector(v_end["at"]).lerp(Vector(mid_v["at"]), smooth((t - T_M) / (T_ME - T_M)))
+
+    def size(i, t):
+        g = smooth((t - (T_GROW + T_GSTAG * i)) / T_GDUR)
+        if i not in TESTED:
+            g *= 1.0 - smooth((t - T_SHRINK) / T_SDUR)
+        return g
+
+    def where(i, t):
+        if i in TESTED:
+            return grid[i].lerp(slot[i], smooth((t - T_SLIDE) / (T_SLIDE_E - T_SLIDE)))
+        return grid[i]
+
+    def glow(i, t):
+        t0 = T_GROW + T_GSTAG * i
+        return 0.0 if t < t0 else max(0.0, 1.0 - (t - t0) / 0.6)
+
+    c = sc.camera
+    c.animation_data_clear()
+    c.data.animation_data_clear()
+    last_q[0] = None
+
+    def place(e, i, t):
+        s_ = size(i, t)
+        e.location, e.rotation_quaternion, e.scale = where(i, t), yaw, (KS * max(s_, 1e-4),) * 3
+
+    def update(t_abs):
+        t = t_abs - T5
+        f = int(round(t * FPS))
+        shoot(c, f, cam(t), focus(t))
+        for i, e in enumerate(new):
+            moving = T_GROW + T_GSTAG * i - 0.05 <= t <= T_SLIDE_E + 0.05
+            e.animation_data_clear()
+            if moving:
+                for df in (-1, 0, 1):
+                    place(e, i, t + df / FPS)
+                    for path in ("location", "rotation_quaternion", "scale"):
+                        e.keyframe_insert(path, frame=f + df)
+            place(e, i, t)
+            vis = size(i, t) > 1e-3
+            g_ = glow(i, t)
+            for ch in e.children:
+                ch.hide_render = not vis
+                ch.color = (g_, 0, 0, 1)
+        sky(0.2)
+
+    update.view = cam
+    update.ctx = dict(keys16=new, tested=TESTED, slot=slot, mid_v=mid_v)
+    print("S507 c20 %s src %s KS %.5f ZK %.4f" % (tuple(round(v, 3) for v in c20), src.name, KS, ZK))
+
+    # ---------------------------------------------------------------- 穿模检查（每两帧）：钥匙的点云对格子内沿、对彼此、对台面
+    if SHOT == "s507" and not os.environ.get("BL_NOCHECK"):
+        import numpy as np
+        bpy.context.view_layer.update()
+        inv = src.matrix_world.inverted()
+        pts = np.array([tuple(inv @ (ch.matrix_world @ v.co)) for ch in src.children if not ch.hide_render for v in ch.data.vertices])
+        pts = pts[np.linspace(0, len(pts) - 1, min(500, len(pts))).astype(int)]
+        R = np.array(yaw.to_matrix())
+        bad, near = {}, [9.0]
+        half_x, half_y = 0.95 / 2 - 0.06, 0.84 / 2 - 0.06
+        for f in range(0, FRAMES, 2):
+            t = f / FPS
+            ws = []
+            for i in range(16):
+                s_ = size(i, t)
+                if s_ <= 1e-3:
+                    ws.append(None)
+                    continue
+                w_ = pts @ R.T * (KS * s_) + np.array(tuple(where(i, t)))
+                ws.append(w_)
+                if (w_[:, 2] < 1e-4).any():
+                    bad.setdefault("key / table", []).append(t)
+                if (np.abs(w_[:, 0] - c20.x) > half_x).any() or (np.abs(w_[:, 1] - c20.y) > half_y).any():
+                    bad.setdefault("key / cell wall", []).append(t)
+            for i in range(16):
+                for j in range(i + 1, 16):
+                    if ws[i] is None or ws[j] is None:
+                        continue
+                    d_ = np.sqrt(((ws[i][::4, None] - ws[j][None, ::4]) ** 2).sum(-1)).min()
+                    near[0] = min(near[0], d_)
+                    if d_ < 0.002:
+                        bad.setdefault("key / key", []).append((t, i, j))
+        ext = pts * KS
+        print("S507 key size %.3f x %.3f x %.3f" % tuple(ext.max(0) - ext.min(0)))
+        print("S507 clashes:", "none" if not bad else "")
+        for k, v in bad.items():
+            print("S507 clash %s: %d, first %s" % (k, len(v), v[0]))
+        print("S507 closest two keys come: %.4f" % near[0])
+    if os.environ.get("BL_S5B_PROJ"):
+        from bpy_extras.object_utils import world_to_camera_view
+        tp = float(os.environ["BL_S5B_PROJ"])
+        update(T5 + tp)
+        bpy.context.view_layer.update()
+        tube = ob.get("s504_tube")
+        for nm, p_ in [("c20", c20), ("c21", c21), ("tube", Vector(tube.location) if tube else c21)] + [("slot%d" % k, v) for k, v in sorted(slot.items())] + [("grid%d" % i, grid[i]) for i in (0, 3, 12, 15)]:
+            v = world_to_camera_view(sc, c, p_)
+            print("S507 proj %s %.0f %.0f" % (nm, v.x * 1920, (1 - v.y) * 1080))
+        import sys
+        sys.exit(0)
+    return update
+
+
+SHOTS["s507"] = shot_s507
