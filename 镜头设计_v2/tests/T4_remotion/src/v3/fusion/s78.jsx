@@ -223,7 +223,7 @@ const S7_LINES = [[0, "So, what should happen next? We'd suggest three things.",
 const R7 = {x: 2300, y: 560, gap: 330};          // the road as S6 leaves it
 const S7_CAM = [[0, 960, 540, 1], [2.95, 960, 540, 1], [3.6, 1010, 560, 2.2], [4.3, 3125, 540, 1], [6.6, 3125, 540, 1], [7.3, 5040, 540, 1], [21.6, 5040, 540, 1], [22.5, 6960, 540, 1],
   [34.7, 6960, 540, 1], [35.2, 8960, 540, 1], [46.8, 8960, 540, 1], [48.2, 5000, 560, 0.19], [49, 5000, 560, 0.19]];
-const S7_INS = {dish: [6.8, 11.5], bin: [29.4, 34.8], watch: [36.3, 39.6]};
+const S7_INS = {dish: [6.8, 11.5], bin: [29.4, 34.6], watch: [36.3, 39.4]};          // each Blender pass starts 0.3 s before its insert (bl_s78.py META)
 const DISH_ROWS = [["liver cancer cells", 380, "#E9B9B4"], ["normal liver cells", 620, "#F4F1EA"]];
 
 const S7World = () => {
@@ -297,7 +297,7 @@ const S7World = () => {
       {t > S7_INS.watch[1] - 0.3 && <g transform={`translate(8520 ${y + 60})`} opacity={after(t, S7_INS.watch[1] - 0.3, 0.3)}>
         <circle r={44} fill="#F7F3EA" stroke={INK} strokeWidth={4}/>
         <rect x={-8} y={-62} width={16} height={14} fill={INK}/>
-        <line x1={0} y1={0} x2={0} y2={-34} stroke={RED} strokeWidth={4} strokeLinecap="round" transform={`rotate(${hand(S7_INS.watch[0] + 1.2)})`}/>
+        <line x1={0} y1={0} x2={0} y2={-34} stroke={RED} strokeWidth={4} strokeLinecap="round" transform={`rotate(${hand(S7_INS.watch[0] - 0.3 + 0.68, 2)})`}/>
         <circle r={4} fill={INK}/>
       </g>}
     </g>)}
@@ -309,7 +309,7 @@ const S7World = () => {
   </g>;
 };
 
-const S7 = ({review = true, fps = 30, dish = "", bin = "", watch = ""}) => {
+const S7 = ({review = true, fps = 30, dish = "fusion_s78/s702.mp4", bin = "fusion_s78/s703.mp4", watch = "fusion_s78/s704.mp4"}) => {
   const t = useCurrentFrame() / fps, [cx, cy, z] = cam(S7_CAM, t);
   return <Clock.Provider value={t}><AbsoluteFill style={{background: BONE}}>
     <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute"}}>
@@ -322,10 +322,10 @@ const S7 = ({review = true, fps = 30, dish = "", bin = "", watch = ""}) => {
     <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute"}}>
       {/* notes over the inserts, on the bare table they leave at the top */}
       <g opacity={win(t, S7_INS.dish[0] + 0.6, S7_INS.dish[1] - 0.4)}>
-        <Note x={120} y={150} size={52} at={S7_INS.dish[0] + 0.8}>liver cancer cells · normal liver cells</Note>
+        <Note x={120} y={900} size={52} at={S7_INS.dish[0] + 0.8}>liver cancer cells · normal liver cells</Note>
       </g>
       <g opacity={win(t, S7_INS.bin[0] + 0.4, S7_INS.bin[1] - 0.3)}>
-        <Note x={120} y={150} size={52} at={S7_INS.bin[0] + 0.6}>every result, failures too → back in</Note>
+        <Note x={1100} y={150} size={52} at={S7_INS.bin[0] + 0.6}>every result, failures too → back in</Note>
       </g>
       <g opacity={win(t, S7_INS.watch[0] + 0.4, S7_INS.watch[1] - 0.3)}>
         <Note x={120} y={150} size={52} at={S7_INS.watch[0] + 0.6}>AI route · classic route</Note>
