@@ -3,7 +3,7 @@
 #   test: every second frame at half size, joined at 30 fps, Remotion's W3 overlay (w3.jsx, its review line on) on top, then the song under it (Take My Breath from
 #         bar 104, 207.711 s, 15.87 s): fusion/w3/W3_B_test_1.mp4.
 #   4k:   every frame at 4K 60 fps, JPEG 95 to C:, Remotion's W3-4K at twice the size, no sound like every other film clip: fusion/w3/W3_B_4k60_1.mp4.
-# Two Blenders, each through gpu_slot.sh, in chunks short enough (under 15 minutes) that gpu_slot never takes a slot back from a live one; each chunk builds the whole
+# Two Blenders, each through gpu_slot.sh, in chunks short enough (under 15 minutes; 4K chunks are 80 frames, about 10 minutes when the card is shared) that gpu_slot never takes a slot back from a live one; each chunk builds the whole
 # table first (about 2-3 minutes). A chunk whose frames are there is skipped, so running it again picks up after a stop. The Blender PIDs go to $WORK/pids.txt:
 # stop only those, never Blender by name (other renders share the card).
 # Run: bash render_w3l.sh test [take]   |   bash render_w3l.sh 4k. Take 1 was half size; from take 2 on the review clip is rendered at 1080p (W3L_SIZE overrides).
@@ -18,7 +18,7 @@ SONG="D:/。hkbu/molecular science/镜头设计_v3/音乐/原曲/Take My Breath 
 FF="D:/。hkbu/molecular science/镜头设计_v2/tests/T4_remotion/node_modules/@remotion/compositor-win32-x64-msvc/ffmpeg.exe"
 BLENDER=D:/software/tools/blender.exe
 export BL_JPEG=1 BL_EXTRA="$HERE/bl_w3x.py"
-if [ "$MODE" = 4k ]; then WORK=C:/render_tmp/w3x/w3l_4k; SIZE=2; STEP=1; CHUNK=120; RATE=60; CLIP=w3l_4k
+if [ "$MODE" = 4k ]; then WORK=C:/render_tmp/w3x/w3l_4k; SIZE=2; STEP=1; CHUNK=80; RATE=60; CLIP=w3l_4k
 elif [ "$TAKE" = 1 ]; then WORK=C:/render_tmp/w3x/w3l_test; SIZE=0.5; STEP=2; CHUNK=476; RATE=30; CLIP=w3l_test_1
 else WORK=C:/render_tmp/w3x/w3l_test_$TAKE; SIZE=1; STEP=2; CHUNK=238; RATE=30; CLIP=w3l_test_$TAKE; fi
 SIZE="${W3L_SIZE:-$SIZE}"
