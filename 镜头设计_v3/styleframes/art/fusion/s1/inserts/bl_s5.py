@@ -453,7 +453,16 @@ def shot_s504(sc, sky):
     # ---------------------------------------------------------------- 格子 21：一管酶活、一条剂量尺、一个滑块（材质都拿台面上现成的）
     mat_of = lambda name: ob[name].material_slots[0].material
     glass = mat_of("hk_tube")
-    steel = next(c_ for c_ in mov.children if c_.name.startswith("hk_bow")).material_slots[0].material
+    steel = next(c_ for c_ in mov.children if c_.name.startswith("hk_bow")).material_slots[0].material.copy()
+    # 钥匙的材质带 W3 那种"点亮"的自发光（跟着物体颜色走），滑块用一份不发光的拷贝（04 第 2 节不新加发光）
+    steel.name = "s504_steel"
+    for nd in steel.node_tree.nodes:
+        for k in ("Emission Strength", "Strength"):
+            if k in nd.inputs and (nd.type == "BSDF_PRINCIPLED" or nd.type == "EMISSION"):
+                for ln in list(nd.inputs[k].links):
+                    steel.node_tree.links.remove(ln)
+                nd.inputs[k].default_value = 0.0
+    steel.node_tree.animation_data_clear()
     ink = mat_of("w3_ticks0")
     blue = next(o for o in ob if o.type == "MESH" and len(o.material_slots) and (o.name == "core" or (o.parent is not None and o.parent.name == "core"))).material_slots[0].material
     c21 = Vector((*cell_at(21), 0.0))
@@ -487,7 +496,7 @@ def shot_s504(sc, sky):
     MK = 0.028
     marker = box("s504_marker", (-MK / 2, -MK / 2, 0.0), (MK / 2, MK / 2, 0.018), steel)
     MK_Y = AY + 0.020                                           # 滑块走在尺子后面一点，贴着台面，不压尺子
-    MK_END = c21.x + 0.418 - MK / 2 - 0.004                     # 格子边以内
+    MK_END = c21.x + 0.35                                       # 过了尺子头（AX1 = +0.28），停在格子里，不压格子边
     marker.location = (AX0, MK_Y, 0.0)
 
     # ---------------------------------------------------------------- 时刻

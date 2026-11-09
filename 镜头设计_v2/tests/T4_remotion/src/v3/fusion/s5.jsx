@@ -404,10 +404,10 @@ const S504_3D = ({file = "fusion_s1/s5_504_3d.mp4", fps = 30, review = true}) =>
         <Note x={84} y={478} size={46} at={6.3} rot={-2}>not switching it off</Note>
       </g>}
       {assay > 0 && <g opacity={assay}>
-        <Ink x={600} y={176} size={28} at={12.6} anchor="middle" w={300}>enzyme activity</Ink>
-        <Ink x={684} y={446} size={24} at={13.0} w={120}>half</Ink>
-        <Ink x={729} y={852} size={24} at={13.4} anchor="middle" w={160}>little</Ink>
-        <Ink x={1585} y={852} size={24} at={13.6} anchor="middle" w={220}>a lot of 001</Ink>
+        <Ink x={600} y={156} size={34} at={12.6} anchor="middle" w={340}>enzyme activity</Ink>
+        <Ink x={684} y={450} size={34} at={13.0} w={130}>half</Ink>
+        <Ink x={729} y={860} size={34} at={13.4} anchor="middle" w={160}>little</Ink>
+        <Ink x={1585} y={860} size={34} at={13.6} anchor="middle" w={280}>a lot of 001</Ink>
         <Ink x={64} y={300} size={30} at={12.8} w={430}>IC50 = how much it takes</Ink>
         <Ink x={64} y={342} size={30} at={13.1} w={430}>to cut the enzyme's</Ink>
         <Ink x={64} y={384} size={30} at={13.4} w={430}>activity in half</Ink>
