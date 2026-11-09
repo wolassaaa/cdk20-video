@@ -92,3 +92,7 @@ teacher_requirements_check/
 
 # 渲染临时文件夹（Remotion 的 ffmpeg 只能写在项目里，11-09）
 _render_tmp/
+
+# 生成物（11-09 文件整理）
+镜头设计_v3/hyperframes/test/.hyperframes/
+*.hf-transaction-*/
