@@ -13,6 +13,8 @@ q: 330.0-412.0 s. Further along the same table: 52 sample tubes, 36 of them rise
 
 Times are seconds on the film's clock. Table units are the plates': 200 px to the unit, y flipped.
 Run: blender.exe -b -t 4 -P bl_inserts.py -- <a|w|b|c> <out dir> [first] [last] [samples] [size] [step] [model]
+Shots kept in another file: set BL_EXTRA=<file.py>. That file starts with META = {"<shot>": (start s, frames, sky low, sky high)} as a plain literal, defines shot_<name>(sc, sky)
+like the ones here and adds it with SHOTS["<name>"] = shot_<name>; it runs inside this script, so every function here is in reach. w3_end(sc, sky) gives the table as W3 leaves it.
 """
 import json
 import math
@@ -31,8 +33,14 @@ import world as W      # noqa: E402
 P, gk = B.P, B.gk
 argv = sys.argv[sys.argv.index("--") + 1:]
 SHOT, OUT = argv[0], argv[1]
-START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0, r=412.0, s=412.0, n=412.0, o=412.0, m=412.0, j=412.0, l=412.0, e=412.0, d=412.0, i=437.0, i2=463.0, i3=480.0, i4=505.0, lp=508.5, hz=557.0, hk=557.0, w3=574.0)[SHOT]
-FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6, r=6, s=6, n=4, o=3, m=1171, j=1055, l=1055, e=1055, d=1517, i=1560, i2=1020, i3=1080, i4=210, lp=2490, hz=1020, hk=1020, w3=952)[SHOT]
+XFILE = os.environ.get("BL_EXTRA")    # shots kept in another file; see the note at the top
+XMETA = {}
+if XFILE:
+    import ast
+    XMETA = next(ast.literal_eval(n.value) for n in ast.parse(open(XFILE, encoding="utf-8").read()).body
+                 if isinstance(n, ast.Assign) and getattr(n.targets[0], "id", "") == "META")
+START = dict(a=32.1, w=35.12, b=35.15, c=43.35, f=78.8, g=146.0, h=224.5, k=285.8, p=312.0, q=330.0, x=330.0, y=412.0, z=437.0, v=412.0, u=412.0, t=412.0, r=412.0, s=412.0, n=412.0, o=412.0, m=412.0, j=412.0, l=412.0, e=412.0, d=412.0, i=437.0, i2=463.0, i3=480.0, i4=505.0, lp=508.5, hz=557.0, hk=557.0, w3=574.0, **{k: v[0] for k, v in XMETA.items()})[SHOT]
+FRAMES = dict(a=198, w=24, b=218, c=310, f=960, g=414, h=654, k=1644, p=1080, q=4920, x=4920, y=1501, z=721, v=6, u=2551, t=6, r=6, s=6, n=4, o=3, m=1171, j=1055, l=1055, e=1055, d=1517, i=1560, i2=1020, i3=1080, i4=210, lp=2490, hz=1020, hk=1020, w3=952, **{k: v[1] for k, v in XMETA.items()})[SHOT]
 FIRST = int(argv[2]) if len(argv) > 2 else 0
 LAST = min(int(argv[3]), FRAMES - 1) if len(argv) > 3 else FRAMES - 1
 SAMPLES = int(argv[4]) if len(argv) > 4 else 64
@@ -64,7 +72,7 @@ def stage():
     nt = sc.world.node_tree
     pick = lambda kind: [n for n in nt.nodes if n.type == kind]
     dot, win = pick("VECT_MATH")[0], pick("MAP_RANGE")[1]
-    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2, t=0.2, r=0.2, s=0.2, n=0.2, o=0.2, m=0.2, j=0.2, l=0.2, e=0.2, d=0.2, i=0.2, i2=0.2, i3=0.2, i4=0.2, lp=0.2, hz=0.2, hk=0.2, w3=0.2)[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9, t=0.9, r=0.9, s=0.9, n=0.9, o=0.9, m=0.9, j=0.9, l=0.9, e=0.9, d=0.9, i=0.9, i2=0.9, i3=0.9, i4=0.9, lp=0.9, hz=0.9, hk=0.9, w3=0.9)[SHOT]
+    low, high = dict(a=0.2, w=0.2, b=0.1, c=0.04, f=0.25, g=0.2, h=0.2, k=0.2, p=0.2, q=0.2, x=0.2, y=0.2, z=0.2, v=0.2, u=0.2, t=0.2, r=0.2, s=0.2, n=0.2, o=0.2, m=0.2, j=0.2, l=0.2, e=0.2, d=0.2, i=0.2, i2=0.2, i3=0.2, i4=0.2, lp=0.2, hz=0.2, hk=0.2, w3=0.2, **{k: v[2] for k, v in XMETA.items()})[SHOT], dict(a=1.25, w=1.25, b=2.0, c=2.6, f=2.0, g=2.0, h=2.0, k=0.9, p=0.9, q=0.9, x=0.9, y=0.9, z=0.9, v=0.9, u=0.9, t=0.9, r=0.9, s=0.9, n=0.9, o=0.9, m=0.9, j=0.9, l=0.9, e=0.9, d=0.9, i=0.9, i2=0.9, i3=0.9, i4=0.9, lp=0.9, hz=0.9, hk=0.9, w3=0.9, **{k: v[3] for k, v in XMETA.items()})[SHOT]
 
     def sky(x):
         dot.inputs[1].default_value = lerp((-0.22, 0.92, 0.32), P.WINDOW, x)
@@ -6845,123 +6853,124 @@ def shot_w3(sc, sky):
         shoot(c, f, v, v["at"])
 
     # ---------------------------------------------------------------- checks, every other frame, nothing rendered
-    sub = sub0 * KS
-    dial_pts = []
-    for k, (r, n) in enumerate(DIAL):
-        a_ = np.linspace(0, 2 * np.pi, 90, endpoint=False)
-        rr = r + TR_D + 0.0045 + 0.0055
-        dial_pts.append(np.c_[rr * np.cos(a_), np.full(90, DY), rr * np.sin(a_)])
-    dial_pts = np.concatenate(dial_pts)
-    pl_pts = np.array([(x_, y_, z_) for x_ in np.linspace(-PW / 2, PW / 2, 9) for y_ in (-TH / 2, TH / 2) for z_ in np.linspace(-HC, PH - HC, 9)])          # the plate's faces about the pivot
+    if SHOT == "w3":          # only when W3 itself renders; w3_end() skips them
+        sub = sub0 * KS
+        dial_pts = []
+        for k, (r, n) in enumerate(DIAL):
+            a_ = np.linspace(0, 2 * np.pi, 90, endpoint=False)
+            rr = r + TR_D + 0.0045 + 0.0055
+            dial_pts.append(np.c_[rr * np.cos(a_), np.full(90, DY), rr * np.sin(a_)])
+        dial_pts = np.concatenate(dial_pts)
+        pl_pts = np.array([(x_, y_, z_) for x_ in np.linspace(-PW / 2, PW / 2, 9) for y_ in (-TH / 2, TH / 2) for z_ in np.linspace(-HC, PH - HC, 9)])          # the plate's faces about the pivot
 
-    def lock_world(t):
-        loc, s_ = lock_pose(t)
-        g_ = smooth((t - T_DIAL[0]) / 0.45)
-        return (np.concatenate([dial_pts * g_, pl_pts]) if g_ > 0 else pl_pts) * s_ + np.array(tuple(loc))
-
-    def kw(i, t):
-        ps = key_pose(i, t)
-        if ps is None:
-            return None
-        loc, q, s_ = ps
-        return sub @ np.array(q.to_matrix()).T * s_ + np.array(tuple(loc))
-
-    def in_rims(p):
-        out_ = np.zeros(len(p), bool)
-        for i_ in (12, 13, 14, 20, 21, 22, 23, 29, 30, 31, 32, 38, 39, 40):
-            x_, y_ = cell_at(i_)
-            dx, dy = np.abs(p[:, 0] - x_), np.abs(p[:, 1] - y_)
-            out_ |= (dx < 0.437) & (dy < 0.352) & ~((dx < 0.418) & (dy < 0.333)) & (p[:, 2] < 0.0175)
-        return out_
-    bad = {}
-
-    def hit(name, t):
-        bad.setdefault(name, []).append(round(t, 2))
-    others = [o for o in ob if o.type == "MESH" and not o.name.startswith(("w3_", "hk_", "floor", "lp_comets", "core", "cell")) and not o.hide_render]
-    obb = []
-    for o in others:
-        bb = np.array([tuple(o.matrix_world @ Vector(b_)) for b_ in o.bound_box])
-        if (bb.max(0) - bb.min(0))[:2].max() < 1.5:          # the table and its rims are checked on their own
-            obb.append((o.name, bb.min(0), bb.max(0)))
-    for name, lo, hi in obb:          # what stands in the carpet's cells already
-        for c_ in CELLS:
-            x_, y_ = cell_at(c_)
-            if lo[0] < x_ + 0.42 and hi[0] > x_ - 0.42 and lo[1] < y_ + 0.33 and hi[1] > y_ - 0.33 and lo[2] < 0.3 and hi[2] > 0.0001:
-                hit("cell %d holds %s" % (c_, name), 0.0)
-    scr_lo, scr_hi = sbb.min(0), sbb.max(0)
-    from mathutils.bvhtree import BVHTree
-    _bvh = {}
-
-    def bvh_of(name):
-        if name not in _bvh:
-            o = ob[name]
-            dg = bpy.context.evaluated_depsgraph_get()
-            me = o.evaluated_get(dg).to_mesh()
-            mw = o.matrix_world
-            _bvh[name] = BVHTree.FromPolygons([tuple(mw @ v.co) for v in me.vertices], [tuple(p_.vertices) for p_ in me.polygons]) if len(me.polygons) else BVHTree.FromPolygons([tuple(mw @ v.co) for v in me.vertices] or [(0, 0, -9), (0, 0.001, -9), (0.001, 0, -9)], [(0, 1, 2)] if not len(me.vertices) else [(i, i, i) for i in range(len(me.vertices))])
-        return _bvh[name]
-    for f in range(0, FRAMES, 2):
-        t = f / FPS
-        lw = lock_world(t)
-        if ((lw[:, 2] < SCR - 0.001) & (lw[:, 0] > scr_lo[0]) & (lw[:, 0] < scr_hi[0]) & (lw[:, 1] > scr_lo[1]) & (lw[:, 1] < scr_hi[1])).any():
-            hit("lock / screen", t)
-        if t > T_LIFT0 and min(tree.find_nearest(Vector(tuple(p)))[3] for p in lw[::7]) < 0.004:
-            hit("lock / CDK20", t)
-        Wd = {}
-        for i in ALL:
-            w_ = kw(i, t)
-            if w_ is None:
-                continue
-            Wd[i] = w_
-            if (w_[:, 2] < 1e-4).any():
-                hit("key %s / table" % (i,), t)
-            if in_rims(w_).any():
-                hit("key %s / cell rim" % (i,), t)
-            if ((w_[:, 2] < SCR - 1e-4) & (w_[:, 0] > scr_lo[0]) & (w_[:, 0] < scr_hi[0]) & (w_[:, 1] > scr_lo[1]) & (w_[:, 1] < scr_hi[1])).any():
-                hit("key %s / screen" % (i,), t)
-            for k in range(1, 42):
-                r_ = np.hypot(w_[:, 0] - RC[k][0], w_[:, 1] - RC[k][1])
-                if ((np.abs(w_[:, 2] - ZR) < RT + 0.0005) & (r_ > HOLE - 0.0005) & (r_ < OUTR + 0.0005)).any():
-                    hit("key %s / ring %d" % (i, k), t)
-            # the lock: within its outer reach and its slab
+        def lock_world(t):
             loc, s_ = lock_pose(t)
-            d_ = w_ - np.array(tuple(loc))
-            rr = np.hypot(d_[:, 0], d_[:, 2])
-            if ((rr < D_OUT * s_ + 0.002) & (d_[:, 1] > (DY - TR_D - 0.002) * s_ - 0.001) & (d_[:, 1] < TH / 2 * s_ + 0.001)).any():
-                hit("key %s / lock" % (i,), t)
-            if ((np.abs(d_[:, 0]) < PW / 2 * s_ + 0.001) & (d_[:, 2] > -HC * s_ - 0.001) & (d_[:, 2] < (PH - HC) * s_ + 0.001) & (np.abs(d_[:, 1]) < TH / 2 * s_ + 0.002)).any():
-                hit("key %s / plate" % (i,), t)
-            if w_[:, 2].min() < 0.6 and min(tree.find_nearest(Vector(tuple(p)))[3] for p in w_[::10]) < 0.003:
-                hit("key %s / CDK20" % (i,), t)
-            for name, lo, hi in obb:
-                inb = ((w_ > lo - 0.001) & (w_ < hi + 0.001)).all(1)
-                if inb.any() and min(bvh_of(name).find_nearest(Vector(tuple(p)))[3] for p in w_[inb][::2]) < 0.001:
-                    hit("key %s / %s" % (i, name), t)
-        ks_ = list(Wd)
-        cen = np.array([Wd[i].mean(0) for i in ks_])
-        dd = np.sqrt(((cen[:, None] - cen[None]) ** 2).sum(-1)) if len(ks_) else np.zeros((0, 0))
-        for a in range(len(ks_)):
-            for b in range(a + 1, len(ks_)):
-                if dd[a, b] > 0.16:
+            g_ = smooth((t - T_DIAL[0]) / 0.45)
+            return (np.concatenate([dial_pts * g_, pl_pts]) if g_ > 0 else pl_pts) * s_ + np.array(tuple(loc))
+
+        def kw(i, t):
+            ps = key_pose(i, t)
+            if ps is None:
+                return None
+            loc, q, s_ = ps
+            return sub @ np.array(q.to_matrix()).T * s_ + np.array(tuple(loc))
+
+        def in_rims(p):
+            out_ = np.zeros(len(p), bool)
+            for i_ in (12, 13, 14, 20, 21, 22, 23, 29, 30, 31, 32, 38, 39, 40):
+                x_, y_ = cell_at(i_)
+                dx, dy = np.abs(p[:, 0] - x_), np.abs(p[:, 1] - y_)
+                out_ |= (dx < 0.437) & (dy < 0.352) & ~((dx < 0.418) & (dy < 0.333)) & (p[:, 2] < 0.0175)
+            return out_
+        bad = {}
+
+        def hit(name, t):
+            bad.setdefault(name, []).append(round(t, 2))
+        others = [o for o in ob if o.type == "MESH" and not o.name.startswith(("w3_", "hk_", "floor", "lp_comets", "core", "cell")) and not o.hide_render]
+        obb = []
+        for o in others:
+            bb = np.array([tuple(o.matrix_world @ Vector(b_)) for b_ in o.bound_box])
+            if (bb.max(0) - bb.min(0))[:2].max() < 1.5:          # the table and its rims are checked on their own
+                obb.append((o.name, bb.min(0), bb.max(0)))
+        for name, lo, hi in obb:          # what stands in the carpet's cells already
+            for c_ in CELLS:
+                x_, y_ = cell_at(c_)
+                if lo[0] < x_ + 0.42 and hi[0] > x_ - 0.42 and lo[1] < y_ + 0.33 and hi[1] > y_ - 0.33 and lo[2] < 0.3 and hi[2] > 0.0001:
+                    hit("cell %d holds %s" % (c_, name), 0.0)
+        scr_lo, scr_hi = sbb.min(0), sbb.max(0)
+        from mathutils.bvhtree import BVHTree
+        _bvh = {}
+
+        def bvh_of(name):
+            if name not in _bvh:
+                o = ob[name]
+                dg = bpy.context.evaluated_depsgraph_get()
+                me = o.evaluated_get(dg).to_mesh()
+                mw = o.matrix_world
+                _bvh[name] = BVHTree.FromPolygons([tuple(mw @ v.co) for v in me.vertices], [tuple(p_.vertices) for p_ in me.polygons]) if len(me.polygons) else BVHTree.FromPolygons([tuple(mw @ v.co) for v in me.vertices] or [(0, 0, -9), (0, 0.001, -9), (0.001, 0, -9)], [(0, 1, 2)] if not len(me.vertices) else [(i, i, i) for i in range(len(me.vertices))])
+            return _bvh[name]
+        for f in range(0, FRAMES, 2):
+            t = f / FPS
+            lw = lock_world(t)
+            if ((lw[:, 2] < SCR - 0.001) & (lw[:, 0] > scr_lo[0]) & (lw[:, 0] < scr_hi[0]) & (lw[:, 1] > scr_lo[1]) & (lw[:, 1] < scr_hi[1])).any():
+                hit("lock / screen", t)
+            if t > T_LIFT0 and min(tree.find_nearest(Vector(tuple(p)))[3] for p in lw[::7]) < 0.004:
+                hit("lock / CDK20", t)
+            Wd = {}
+            for i in ALL:
+                w_ = kw(i, t)
+                if w_ is None:
                     continue
-                ia, ib = ks_[a], ks_[b]
-                if t > T_SET and not isinstance(ia, int) and not isinstance(ib, int) and ia != "h" and ib != "h":
-                    continue          # both lying in their slots
-                if np.sqrt(((Wd[ia][::2, None] - Wd[ib][None, ::2]) ** 2).sum(-1)).min() < 0.0012:
-                    hit("key %s / key %s" % (ia, ib), t)
-    kinds = {}
-    for k, v in bad.items():
-        kinds.setdefault(k.split(" / ")[-1].split(" ")[0] if " / " in k else k, []).append((k, v[0]))
-    print("W3 clashes:", "none" if not bad else "")
-    for kd, l_ in sorted(kinds.items()):
-        print("W3 clash %s: %d, first %s" % (kd, len(l_), sorted(l_, key=lambda z: z[1])[:5]))
-    print("W3 times: last join %.2f, stop %.2f, rain %.2f-%.2f, last flier lands %.2f, clip end %.2f" % (
-        JOIN[-1], T_STOP, T_RAIN, max(d["t0"] for d in rain) + R_D, max(FL_T[i] for i in FL_T) + FL_D, FRAMES / FPS))
-    from bpy_extras.object_utils import world_to_camera_view
-    for tt in (0.0, BAR, 2 * BAR + 0.5, 4 * BAR + 1.0, 6 * BAR, T_STOP, FRAMES / FPS - 0.05):
-        sc.frame_set(round(tt * FPS))
-        q_ = world_to_camera_view(sc, c, Lc)
-        print("W3 t %.2f: lock on screen %.0f %.0f" % (tt, q_.x * 1920, (1 - q_.y) * 1080))
+                Wd[i] = w_
+                if (w_[:, 2] < 1e-4).any():
+                    hit("key %s / table" % (i,), t)
+                if in_rims(w_).any():
+                    hit("key %s / cell rim" % (i,), t)
+                if ((w_[:, 2] < SCR - 1e-4) & (w_[:, 0] > scr_lo[0]) & (w_[:, 0] < scr_hi[0]) & (w_[:, 1] > scr_lo[1]) & (w_[:, 1] < scr_hi[1])).any():
+                    hit("key %s / screen" % (i,), t)
+                for k in range(1, 42):
+                    r_ = np.hypot(w_[:, 0] - RC[k][0], w_[:, 1] - RC[k][1])
+                    if ((np.abs(w_[:, 2] - ZR) < RT + 0.0005) & (r_ > HOLE - 0.0005) & (r_ < OUTR + 0.0005)).any():
+                        hit("key %s / ring %d" % (i, k), t)
+                # the lock: within its outer reach and its slab
+                loc, s_ = lock_pose(t)
+                d_ = w_ - np.array(tuple(loc))
+                rr = np.hypot(d_[:, 0], d_[:, 2])
+                if ((rr < D_OUT * s_ + 0.002) & (d_[:, 1] > (DY - TR_D - 0.002) * s_ - 0.001) & (d_[:, 1] < TH / 2 * s_ + 0.001)).any():
+                    hit("key %s / lock" % (i,), t)
+                if ((np.abs(d_[:, 0]) < PW / 2 * s_ + 0.001) & (d_[:, 2] > -HC * s_ - 0.001) & (d_[:, 2] < (PH - HC) * s_ + 0.001) & (np.abs(d_[:, 1]) < TH / 2 * s_ + 0.002)).any():
+                    hit("key %s / plate" % (i,), t)
+                if w_[:, 2].min() < 0.6 and min(tree.find_nearest(Vector(tuple(p)))[3] for p in w_[::10]) < 0.003:
+                    hit("key %s / CDK20" % (i,), t)
+                for name, lo, hi in obb:
+                    inb = ((w_ > lo - 0.001) & (w_ < hi + 0.001)).all(1)
+                    if inb.any() and min(bvh_of(name).find_nearest(Vector(tuple(p)))[3] for p in w_[inb][::2]) < 0.001:
+                        hit("key %s / %s" % (i, name), t)
+            ks_ = list(Wd)
+            cen = np.array([Wd[i].mean(0) for i in ks_])
+            dd = np.sqrt(((cen[:, None] - cen[None]) ** 2).sum(-1)) if len(ks_) else np.zeros((0, 0))
+            for a in range(len(ks_)):
+                for b in range(a + 1, len(ks_)):
+                    if dd[a, b] > 0.16:
+                        continue
+                    ia, ib = ks_[a], ks_[b]
+                    if t > T_SET and not isinstance(ia, int) and not isinstance(ib, int) and ia != "h" and ib != "h":
+                        continue          # both lying in their slots
+                    if np.sqrt(((Wd[ia][::2, None] - Wd[ib][None, ::2]) ** 2).sum(-1)).min() < 0.0012:
+                        hit("key %s / key %s" % (ia, ib), t)
+        kinds = {}
+        for k, v in bad.items():
+            kinds.setdefault(k.split(" / ")[-1].split(" ")[0] if " / " in k else k, []).append((k, v[0]))
+        print("W3 clashes:", "none" if not bad else "")
+        for kd, l_ in sorted(kinds.items()):
+            print("W3 clash %s: %d, first %s" % (kd, len(l_), sorted(l_, key=lambda z: z[1])[:5]))
+        print("W3 times: last join %.2f, stop %.2f, rain %.2f-%.2f, last flier lands %.2f, clip end %.2f" % (
+            JOIN[-1], T_STOP, T_RAIN, max(d["t0"] for d in rain) + R_D, max(FL_T[i] for i in FL_T) + FL_D, FRAMES / FPS))
+        from bpy_extras.object_utils import world_to_camera_view
+        for tt in (0.0, BAR, 2 * BAR + 0.5, 4 * BAR + 1.0, 6 * BAR, T_STOP, FRAMES / FPS - 0.05):
+            sc.frame_set(round(tt * FPS))
+            q_ = world_to_camera_view(sc, c, Lc)
+            print("W3 t %.2f: lock on screen %.0f %.0f" % (tt, q_.x * 1920, (1 - q_.y) * 1080))
 
     # ---------------------------------------------------------------- per frame
     def place(e, ps, f):
@@ -7017,11 +7026,34 @@ def shot_w3(sc, sky):
                 o.color = (math.sin(math.pi * min(1.0, x * 1.6)) if x < 0.3125 else 1.0 - smooth((x - 0.3125) / 0.6875), 0, 0, 1)
                 o.scale = (1 + 0.15 * x, 1 + 0.15 * x, 1.0)
         sky(0.2)
+    update.view = view          # w3_end() reads W3's last camera from it
     return update
 
 
+def w3_end(sc, sky):
+    """The table exactly as W3 leaves it: W3 built and posed at its last frame, then held still, no keyframes left, the camera at W3's last view and unkeyed. For shots in other
+    files (BL_EXTRA) that pick up from W3; 4-10 starts there. Returns W3's update, in case a shot wants to move W3's keys or lock on from there."""
+    global START
+    keep = START
+    upd = shot_w3(sc, sky)
+    upd(W3_START + 951 / FPS)
+    for o in bpy.data.objects:
+        o.animation_data_clear()
+    c = sc.camera
+    c.data.animation_data_clear()
+    v = upd.view(951 / FPS)          # W3's last camera, set once and left unkeyed: the new shot moves it from here
+    shoot(c, 0, v, v["at"])
+    c.animation_data_clear()
+    c.data.animation_data_clear()
+    START = keep
+    return upd
+
+
 sc, sky = stage()
-update = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t, r=shot_r, s=shot_s, n=shot_n, o=shot_o, m=shot_m, j=shot_j, l=shot_l, e=shot_e, d=shot_d, i=shot_i, i2=shot_i2, i3=shot_i3, i4=shot_i4, lp=shot_lp, hz=shot_hz, hk=shot_hk, w3=shot_w3)[SHOT](sc, sky)
+SHOTS = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t, r=shot_r, s=shot_s, n=shot_n, o=shot_o, m=shot_m, j=shot_j, l=shot_l, e=shot_e, d=shot_d, i=shot_i, i2=shot_i2, i3=shot_i3, i4=shot_i4, lp=shot_lp, hz=shot_hz, hk=shot_hk, w3=shot_w3)
+if XFILE:          # the other file's shots run here, with every function above in reach; it adds them to SHOTS
+    exec(compile(open(XFILE, encoding="utf-8").read(), XFILE, "exec"))
+update = SHOTS[SHOT](sc, sky)
 sc.frame_start, sc.frame_end = 0, FRAMES
 EXT = "png"
 if os.environ.get("BL_JPEG"):          # the 4K 60 fps passes: a 4K PNG is ~10 MB, a JPEG at 95 ~2 MB, and the take re-encodes to H.264 anyway
