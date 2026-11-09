@@ -6,9 +6,10 @@
 # Two Blenders, each through gpu_slot.sh, in chunks short enough (under 15 minutes) that gpu_slot never takes a slot back from a live one; each chunk builds the whole
 # table first (about 2-3 minutes). A chunk whose frames are there is skipped, so running it again picks up after a stop. The Blender PIDs go to $WORK/pids.txt:
 # stop only those, never Blender by name (other renders share the card).
-# Run: bash render_w3l.sh test   |   bash render_w3l.sh 4k
+# Run: bash render_w3l.sh test [take]   |   bash render_w3l.sh 4k. Take 1 was half size; from take 2 on the review clip is rendered at 1080p (W3L_SIZE overrides).
 set -o pipefail
 MODE="${1:-test}"
+TAKE="${2:-1}"
 HERE="$(cygpath -m "$(cd "$(dirname "$0")" && pwd)")"
 INS="$HERE/../s1/inserts"
 ART="$(cygpath -m "$(cd "$HERE/../.." && pwd)")"
@@ -18,7 +19,9 @@ FF="D:/。hkbu/molecular science/镜头设计_v2/tests/T4_remotion/node_modules/
 BLENDER=D:/software/tools/blender.exe
 export BL_JPEG=1 BL_EXTRA="$HERE/bl_w3x.py"
 if [ "$MODE" = 4k ]; then WORK=C:/render_tmp/w3x/w3l_4k; SIZE=2; STEP=1; CHUNK=120; RATE=60; CLIP=w3l_4k
-else WORK=C:/render_tmp/w3x/w3l_test; SIZE=0.5; STEP=2; CHUNK=476; RATE=30; CLIP=w3l_test_1; fi
+elif [ "$TAKE" = 1 ]; then WORK=C:/render_tmp/w3x/w3l_test; SIZE=0.5; STEP=2; CHUNK=476; RATE=30; CLIP=w3l_test_1
+else WORK=C:/render_tmp/w3x/w3l_test_$TAKE; SIZE=1; STEP=2; CHUNK=238; RATE=30; CLIP=w3l_test_$TAKE; fi
+SIZE="${W3L_SIZE:-$SIZE}"
 mkdir -p "$WORK/queue" "$WORK/log" "$WORK/f"
 echo "start $MODE $(date '+%H:%M:%S')"
 
@@ -58,7 +61,7 @@ npx remotion bundle src/v3/fusion/w3.jsx --out-dir="$BUNDLE" --public-dir="$PUB"
 if [ "$MODE" = 4k ]; then
   npx remotion render "$BUNDLE" W3-4K "$HERE/W3_B_4k60_1.mp4" --props="{\"file\":\"fusion_s1/$CLIP.mp4\",\"fps\":60,\"review\":false}" --scale=2 --image-format=jpeg --jpeg-quality=95 --crf=16 --color-space=bt709 --concurrency=4 > "$WORK/log/remotion.log" 2>&1 || { tail -20 "$WORK/log/remotion.log"; echo CHAIN_FAILED remotion; exit 1; }
 else
-  npx remotion render "$BUNDLE" W3 "$TEMP/W3_B_test_1_silent.mp4" --props="{\"file\":\"fusion_s1/$CLIP.mp4\"}" --crf=18 --color-space=bt709 --concurrency=4 > "$WORK/log/remotion.log" 2>&1 || { tail -20 "$WORK/log/remotion.log"; echo CHAIN_FAILED remotion; exit 1; }
-  "$FF" -y -v error -i "$TEMP/W3_B_test_1_silent.mp4" -ss 207.711 -t 15.867 -i "$SONG" -map 0:v -map 1:a -c:v copy -c:a aac -b:a 256k -af "volume='if(lt(t,0.05),t/0.05,1)':eval=frame" -shortest -f mp4 "$HERE/W3_B_test_1.mp4" || { echo CHAIN_FAILED mux; exit 1; }
+  npx remotion render "$BUNDLE" W3 "$TEMP/W3_B_test_${TAKE}_silent.mp4" --props="{\"file\":\"fusion_s1/$CLIP.mp4\"}" --crf=18 --color-space=bt709 --concurrency=4 > "$WORK/log/remotion.log" 2>&1 || { tail -20 "$WORK/log/remotion.log"; echo CHAIN_FAILED remotion; exit 1; }
+  "$FF" -y -v error -i "$TEMP/W3_B_test_${TAKE}_silent.mp4" -ss 207.711 -t 15.867 -i "$SONG" -map 0:v -map 1:a -c:v copy -c:a aac -b:a 256k -af "volume='if(lt(t,0.05),t/0.05,1)':eval=frame" -shortest -f mp4 "$HERE/W3_B_test_$TAKE.mp4" || { echo CHAIN_FAILED mux; exit 1; }
 fi
 echo "CHAIN_OK $MODE $(date '+%H:%M:%S')"

@@ -510,6 +510,186 @@ def x_cells(fn):
     return dict(zip(fn.__code__.co_freevars, fn.__closure__ or ()))
 
 
+# ---------------------------------------------------------------- test 2 (11-09): many kinds of key, not one flat key with new cuts
+# Every key is drawn in the 4-09 key's own units: the tip at x = XK_T (pointing down at the lock), the key running up toward -x, cuts on -y, z its thickness.
+# Each kind is a test "is this point inside", filled with balls on a grid; flat parts are one sheet of balls (z = 0), rods and tubes are round.
+XK_T = 1.625
+XK_N = 400
+
+
+def xk_poly(poly, h=0.0):
+    poly = np.asarray(poly, float)
+    return lambda P: x_inside(P[:, :2], poly) & (np.abs(P[:, 2]) <= h + 1e-9)
+
+
+def xk_box(x0, x1, y0, y1, h=0.0):
+    return lambda P: (P[:, 0] >= x0) & (P[:, 0] <= x1) & (P[:, 1] >= y0) & (P[:, 1] <= y1) & (np.abs(P[:, 2]) <= h + 1e-9)
+
+
+def xk_rod(x0, x1, r, r_in=0.0):
+    """A round rod (or, with r_in, a tube) along the key's axis."""
+    def f(P):
+        q = P[:, 1] ** 2 + P[:, 2] ** 2
+        return (P[:, 0] >= x0) & (P[:, 0] <= x1) & (q <= r * r) & (q >= r_in * r_in)
+    return f
+
+
+def xk_or(*fs):
+    return lambda P: np.logical_or.reduce([f(P) for f in fs])
+
+
+def xk_not(f, *cuts):
+    return lambda P: f(P) & ~np.logical_or.reduce([c(P) for c in cuts])
+
+
+def xk_bow(kind, cx, R, hole, h=0.0):
+    """A key's head in the key's plane, centred on cx: round, six sided, rounded square, three lobed, an old key's ring with three loops, or a long grip."""
+    def f(P):
+        dx, dy = P[:, 0] - cx, P[:, 1]
+        a, r = np.arctan2(dy, dx), np.hypot(dx, dy)
+        flat = np.abs(P[:, 2]) <= h + 1e-9
+        if kind == "loops":
+            out = (r <= R * 0.6) & (r >= R * 0.36)
+            for b in (math.pi - 1.25, math.pi, math.pi + 1.25):
+                rr = np.hypot(dx - R * 0.72 * math.cos(b), dy - R * 0.72 * math.sin(b))
+                out |= (rr <= R * 0.3) & (rr >= R * 0.13)
+            return out & flat
+        if kind == "round":
+            out = r <= R
+        elif kind == "hex":
+            out = r <= R * math.cos(math.pi / 6) / np.cos((a + math.pi / 6) % (math.pi / 3) - math.pi / 6)
+        elif kind == "square":
+            out = r <= R * 0.92 / (np.abs(np.cos(a)) ** 5 + np.abs(np.sin(a)) ** 5) ** 0.2
+        elif kind == "trefoil":
+            out = r <= R * (0.78 + 0.22 * np.cos(3 * a))
+        else:
+            out = (np.abs(dx) / (R * 0.5)) ** 4 + (np.abs(dy) / R) ** 4 <= 1
+        return out & (r >= hole) & flat
+    return f
+
+
+def xk_blade(tip, top, w, lo=(), hi=(), tw=0.1, yc=0.0):
+    """A flat blade from top to tip (either way up), w wide, its tip bevelled, with teeth standing out of its lower (-y) and upper (+y) edges: (where along it 0-1, height)."""
+    s = 1.0 if tip > top else -1.0
+    n = abs(tip - top)
+    X = lambda u: top + s * u * n
+    pts = [(X(0), yc + w / 2)]
+    for u, d in sorted(hi):
+        pts += [(X(u) - s * tw, yc + w / 2), (X(u) - s * tw * 0.4, yc + w / 2 + d), (X(u) + s * tw * 0.4, yc + w / 2 + d), (X(u) + s * tw, yc + w / 2)]
+    pts += [(tip - s * w * 0.6, yc + w / 2), (tip, yc - w * 0.1), (tip - s * w * 0.2, yc - w / 2)]
+    for u, d in sorted(lo, reverse=True):
+        pts += [(X(u) + s * tw, yc - w / 2), (X(u) + s * tw * 0.4, yc - w / 2 - d), (X(u) - s * tw * 0.4, yc - w / 2 - d), (X(u) - s * tw, yc - w / 2)]
+    pts.append((X(0), yc - w / 2))
+    return np.array(B.round_poly(pts, min(0.03, w * 0.15)))
+
+
+XK_KINDS = ["pin", "double", "skeleton", "cross", "tube", "dimple", "fork", "long", "stub", "wave"]
+
+
+def x_key3(g, kind):
+    """One key of the given kind, very different from kind to kind: returns its inside test and its reach (length up from the tip, half width, half thickness)."""
+    T, u = XK_T, g.uniform
+    teeth = lambda n, a, b, lo_=0.12, hi_=0.88: [(float(x), float(u(a, b))) for x in np.linspace(lo_, hi_, n)]
+    if kind == "pin":          # an ordinary flat key, cut on one edge, now and then on both
+        L, R, w = u(2.6, 3.3), u(0.55, 0.72), u(0.26, 0.36)
+        top = T - L + 1.8 * R
+        f = xk_or(xk_poly(xk_blade(T, top, w, teeth(int(g.integers(3, 6)), 0.08, 0.34), teeth(3, 0.06, 0.2) if g.random() < 0.4 else ())),
+                  xk_bow(str(g.choice(["round", "hex", "square", "trefoil"])), T - L + R, R, R * u(0.2, 0.4)))
+        return f, (L, max(R, w / 2 + 0.36), 0.0)
+    if kind == "double":       # two blades, one each way, cut on both edges, the head in the middle
+        L, R, w = u(2.8, 3.4), u(0.32, 0.42), u(0.24, 0.3)
+        xm = T - L / 2
+        f = xk_or(xk_poly(xk_blade(T, xm + R * 0.7, w, teeth(3, 0.1, 0.3), teeth(3, 0.1, 0.3))),
+                  xk_poly(xk_blade(T - L, xm - R * 0.7, w, teeth(3, 0.1, 0.3), teeth(3, 0.1, 0.3))),
+                  xk_bow("round", xm, R, R * 0.45))
+        return f, (L, max(R, w / 2 + 0.3), 0.0)
+    if kind == "skeleton":     # an old key: a round shank, a flag of a bit cut with wards, an ornate ring
+        L, R, r = u(2.9, 3.4), u(0.5, 0.66), u(0.07, 0.095)
+        bl, bw = u(0.45, 0.65), u(0.38, 0.55)
+        wards = [xk_box(T - bl + bl * x - 0.035, T - bl + bl * x + 0.035, -r - bw - 0.1, -r - bw * u(0.25, 0.6)) for x in (0.3, 0.55, 0.8)[:int(g.integers(2, 4))]]
+        f = xk_or(xk_rod(T - L + 1.6 * R, T, r), xk_rod(T - L + 1.75 * R, T - L + 1.95 * R, r * 1.9),
+                  xk_not(xk_box(T - bl, T - 0.03, -r - bw, 0.0), *wards),
+                  xk_bow(str(g.choice(["loops", "trefoil"])), T - L + R, R, R * 0.45))
+        return f, (L, R + 0.05, r * 1.9)
+    if kind == "cross":        # a cross key: two cut fins at right angles, a thick square grip
+        L, R, w, bl = u(1.9, 2.5), u(0.5, 0.62), u(0.2, 0.28), u(0.8, 1.1)
+        nA = [xk_box(T - bl * x - 0.05, T - bl * x + 0.05, -w - 0.1, -w + u(0.06, 0.16)) for x in (0.25, 0.5, 0.75)]
+        nB = [(lambda x0, d0: (lambda P: (np.abs(P[:, 0] - x0) <= 0.05) & (P[:, 2] >= w - d0)))(T - bl * x, u(0.06, 0.16)) for x in (0.35, 0.65)]
+        finA = xk_not(xk_box(T - bl, T - 0.02, -w, w), *nA)
+        finB = xk_not(lambda P: (P[:, 0] >= T - bl) & (P[:, 0] <= T - 0.02) & (np.abs(P[:, 1]) <= 1e-6) & (np.abs(P[:, 2]) <= w), *nB)
+        f = xk_or(finA, finB, xk_rod(T - L + 1.6 * R, T - bl, 0.09), xk_bow("square", T - L + R, R, 0.0, h=0.1))
+        return f, (L, max(R, w) + 0.05, max(w, 0.1))
+    if kind == "tube":         # a tubular key: a short hollow tube notched round its end, a neck, a wide flat head
+        L, R, ro, tl = u(1.7, 2.3), u(0.55, 0.75), u(0.3, 0.38), u(0.5, 0.65)
+        notch = [(lambda b, d: (lambda P: (P[:, 0] >= T - d) & (np.abs(((np.arctan2(P[:, 2], P[:, 1]) - b + math.pi) % (2 * math.pi)) - math.pi) <= 0.32)))(b, u(0.08, 0.22))
+                 for b in np.linspace(0, 2 * math.pi, int(g.integers(4, 7)), endpoint=False) + u(0, 1)]
+        f = xk_or(xk_not(xk_rod(T - tl, T, ro, ro * 0.62), *notch), xk_rod(T - L + 1.7 * R, T - tl, 0.12),
+                  xk_bow(str(g.choice(["round", "grip"])), T - L + R, R, 0.0, h=0.05))
+        return f, (L, R + 0.05, ro)
+    if kind == "dimple":       # a thick wide blade with rows of round dimples through it, a broad head
+        L, R, w = u(2.3, 2.9), u(0.5, 0.62), u(0.5, 0.62)
+        top = T - L + 1.8 * R
+        holes = [(lambda cx, cy: (lambda P: np.hypot(P[:, 0] - cx, P[:, 1] - cy) <= 0.12))(top + (T - top) * x, s_ * w * 0.24)
+                 for x in np.linspace(0.18, 0.78, int(g.integers(3, 5))) for s_ in (-1, 1)]
+        f = xk_or(xk_not(xk_poly(xk_blade(T, top, w), h=0.07), *holes), xk_bow(str(g.choice(["square", "grip"])), T - L + R, R, R * 0.3, h=0.07))
+        return f, (L, max(R, w / 2) + 0.05, 0.07)
+    if kind == "fork":         # a shank that splits into three or four prongs
+        L, R, w, pl = u(2.4, 3.1), u(0.42, 0.55), u(0.3, 0.4), u(0.6, 0.9)
+        n, sp = int(g.integers(3, 5)), u(0.35, 0.55)
+        x0 = T - pl
+
+        def prong(yt, tip_):
+            return lambda P: (P[:, 0] >= x0 - 0.05) & (P[:, 0] <= tip_) & (np.abs(P[:, 1] - yt * np.clip((P[:, 0] - x0) / pl, 0, 1)) <= 0.05) & (np.abs(P[:, 2]) <= 1e-9)
+        f = xk_or(xk_box(T - L + 1.8 * R, x0, -w / 2, w / 2), *[prong(y_, T - u(0, 0.18)) for y_ in np.linspace(-sp, sp, n)],
+                  xk_bow("round", T - L + R, R, R * 0.55))
+        return f, (L, max(R, sp + 0.06), 0.0)
+    if kind == "long":         # absurdly long and thin, a tiny head, many small cuts
+        L, R, w = u(3.3, 3.6), u(0.24, 0.3), u(0.12, 0.16)
+        f = xk_or(xk_poly(xk_blade(T, T - L + 1.8 * R, w, teeth(int(g.integers(7, 10)), 0.05, 0.16), tw=0.06)), xk_bow("round", T - L + R, R, R * 0.45))
+        return f, (L, max(R, w / 2 + 0.16), 0.0)
+    if kind == "stub":         # short and fat: a thick slab of a blade, two or three big cuts, a chunky head
+        L, w = u(1.2, 1.45), u(0.5, 0.62)
+        R = min(u(0.45, 0.55), (L - 0.55) / 1.8)
+        top = T - L + 1.8 * R
+        f = xk_or(xk_poly(xk_blade(T, top, w, teeth(int(g.integers(2, 4)), 0.18, 0.32, 0.2, 0.75), tw=0.09), h=0.08), xk_bow("square", T - L + R, R, R * 0.25, h=0.08))
+        return f, (L, max(R, w / 2 + 0.32), 0.08)
+    # wave: a blade that snakes from side to side, a six sided head
+    L, R, w = u(2.4, 3.1), u(0.48, 0.62), u(0.24, 0.3)
+    A, lam = u(0.12, 0.2), u(0.6, 0.9)
+    top = T - L + 1.8 * R
+    xs = np.linspace(top - 0.1, T - 0.15, 40)
+    yc_ = A * np.sin(2 * math.pi * (xs - T) / lam) * np.clip((T - xs) / 0.4, 0, 1)
+    poly = np.r_[np.c_[xs, yc_ + w / 2], [[T, 0.0]], np.c_[xs[::-1], yc_[::-1] - w / 2]]
+    f = xk_or(xk_poly(poly), xk_bow("hex", T - L + R, R, R * 0.35))
+    return f, (L, max(R, A + w / 2) + 0.05, 0.0)
+
+
+def x_fill3(inside, reach, n, g):
+    """n balls on a grid over a key, the grid's middle row and layer on the key's middle line and plane (so one-sheet parts get one sheet), ordered up the key so that
+    ball i of one key flows to ball i of the next. Returns the balls and their spacing."""
+    L, Y, H = reach
+
+    def grid(s):
+        dy = s * 0.866
+        ys = dy * np.arange(-math.ceil(Y / dy), math.ceil(Y / dy) + 1)
+        zs = s * np.arange(-math.floor(H / s), math.floor(H / s) + 1)
+        xs = np.arange(XK_T + 0.02, XK_T - L - 0.05, -s)
+        X_, Y_, Z_ = np.meshgrid(xs, ys, zs, indexing="ij")
+        X_ = X_ - (np.round(Y_ / dy).astype(int) % 2) * s / 2
+        p = np.c_[X_.ravel(), Y_.ravel(), Z_.ravel()]
+        return p[inside(p)]
+    s_lo, s_hi = 0.005, 0.5
+    for _ in range(26):
+        s = (s_lo + s_hi) / 2
+        if len(grid(s)) > n:
+            s_lo = s
+        else:
+            s_hi = s
+    p = grid(s_lo)
+    p = p[np.sort(g.choice(len(p), n, replace=False))]
+    return p[np.lexsort((np.arctan2(p[:, 2], p[:, 1]), p[:, 1], np.round(p[:, 0] / (1.5 * s_lo))))], s_lo
+
+
 def shot_w3l(sc, sky):
     """W3 (09:34-09:50, 8 bars of Take My Breath from bar 104), direction B. It is shot_w3 with three things swapped through its closures, so the first two bars (the push
     in from 4-09's last frame, the plate lifting into the lock) and the last bar (everything stops, the keys rain into the carpet, the camera climbs) are W3's own frames
@@ -567,36 +747,75 @@ def shot_w3l(sc, sky):
         return [f_(q) for q in shape[0]], [f_(q) for q in shape[1]]
     # when each shape lands: the beat in bars 2-4, half beats in bar 5, sixteenths in bar 6; bar 7's downbeat brings the last, W3's own key
     LAND = [T_HOV + BEAT * k for k in range(0, 12)] + [T_HOV + 12 * BEAT + BEAT / 2 * k for k in range(8)] + [T_HOV + 16 * BEAT + BEAT / 4 * k for k in range(16)] + [T_STOP]
-    AMP = [0.6 if t_ < 3 * BAR else 0.85 if t_ < 4 * BAR else 1.0 if t_ < 5 * BAR else 1.15 if t_ < 6 * BAR else 1.3 for t_ in LAND]
-    HOLD = [0.35 if t_ < 4 * BAR else 0.3 if t_ < 5 * BAR else 0.22 if t_ < 6 * BAR else 0.12 for t_ in LAND]
-    SH = []
+    AMP = [0.7 if t_ < 3 * BAR else 0.9 if t_ < 4 * BAR else 1.05 if t_ < 5 * BAR else 1.2 if t_ < 6 * BAR else 0.55 for t_ in LAND]
+    # bar 6 keeps the sixteenths but each key holds half its sixteenth (about 4 frames at 60 fps) and the change between is a quick snap, not a full melt:
+    # the keys there are told apart by being different kinds, not by each one settling
+    HOLD = [0.35 if t_ < 4 * BAR else 0.3 if t_ < 5 * BAR else 0.25 if t_ < 6 * BAR else 0.5 for t_ in LAND]
+    # test 2 (11-09, the director: the changes must be far bigger, not one simple key): every landing is a different kind of key, 1.2 to 3.6 long, thin to fat,
+    # flat to round; the order runs from plain kinds to the busy ones, then from a shuffled bag of all ten (each kind about as often, never twice in a row)
+    gk3 = np.random.default_rng(2026)
+    KINDS = ["pin", "stub", "long", "double", "tube", "skeleton", "cross", "dimple", "fork", "wave", "stub", "skeleton"]
+    while len(KINDS) < len(LAND) - 1:
+        bag = list(gk3.permutation(XK_KINDS))
+        if bag[0] == KINDS[-1]:
+            bag = bag[1:] + bag[:1]
+        KINDS += [str(k_) for k_ in bag]
+    KINDS = KINDS[:len(LAND) - 1]
+    tgt = xk_or(*[xk_poly(q) for q in target[0]])
+    s_old = x_fill(target, XL_N, g)[1]
+    SH, RK, REACH = [], [], []
     for k in range(len(LAND)):
-        p_, _ = x_fill(target if k == len(LAND) - 1 else to_key(x_key_shape(g)), XL_N, g)
-        SH.append(np.c_[p_, np.zeros(len(p_))])
+        f_, reach = (tgt, (3.25, 0.8, 0.0)) if k == len(LAND) - 1 else x_key3(gk3, KINDS[k])
+        p_, s_ = x_fill3(f_, reach, XK_N, gk3)
+        SH.append(p_)
+        RK.append(0.0042 * XL_S * 1.3 * 1.1 * s_ / s_old)          # the first W3 B's ball size to spacing, a tenth bigger: chrome shows every dimple
+        REACH.append(reach)
+    print("W3L kinds:", " ".join(KINDS), "| lengths %.2f-%.2f" % (min(r_[0] for r_ in REACH), max(r_[0] for r_ in REACH)))
+    # how each key melts into the next: stretched up from the tip, twisted about its own axis, split into forks down its middle, clumps left behind as strands
+    MODE = []
+    for k in range(len(LAND)):
+        busy = min(1.0, k / 20)
+        MODE.append(dict(stretch=float(gk3.uniform(0.0, 0.35)), twist=float(gk3.choice([-1, 1]) * gk3.uniform(0.6, 1.6 + 1.6 * busy)),
+                         split=float(gk3.uniform(0.0, 0.25) if gk3.random() < 0.3 + 0.4 * busy else 0.0), strands=gk3.random() < 0.6))
     KF = g.normal(0, 150 / XL_S, (3, 3))
     PH = g.uniform(0, 6.3, 3)
     WF = g.uniform(5, 9, 3)
-    R0 = 0.0042 * XL_S
+    LAG = np.zeros((len(LAND), XK_N))
+    for k in range(len(LAND)):
+        if MODE[k]["strands"]:          # three to five clumps of about a dozen balls each let go late and are drawn out into strands
+            A_ = SH[k - 1] if k else SH[0]
+            for c_ in gk3.choice(XK_N, int(gk3.integers(3, 6)), replace=False):
+                near = np.argsort(((A_ - A_[c_]) ** 2).sum(1))[:12]
+                LAG[k, near] = gk3.uniform(0.3, 0.5)
 
     def balls(t):
-        """Shape k lands on LAND[k], rings once as one body and holds, melts, swells across the key and flows into shape k + 1."""
+        """Key k lands on LAND[k], rings once as one body and holds; then it is stretched, twisted and split as it flows into key k + 1, a few clumps trailing."""
         if t < LAND[0]:
-            return SH[0], R0 * 1.3
+            return SH[0], RK[0]
         k = len(LAND) - 1 if t >= LAND[-1] else max(j for j in range(len(LAND)) if LAND[j] <= t)
         A_, since = SH[k], t - LAND[k]
-        still = A_ + 0.064 * math.exp(-since / 0.08) * math.sin(2 * math.pi * since / 0.13) * np.sin(A_ @ KF.T + WF * t + PH)
+        still = A_ + 0.05 * math.exp(-since / 0.06) * math.sin(2 * math.pi * since / 0.11) * np.sin(A_ @ KF.T + WF * t + PH)
         if k == len(LAND) - 1:
-            return still, R0 * 1.3
+            return still, RK[k]
         w = (t - LAND[k]) / (LAND[k + 1] - LAND[k])
         hold = HOLD[k + 1]
         if w < hold:
-            return still, R0 * 1.3
-        x = smooth((w - hold) / (1 - hold))
+            return still, RK[k]
+        u_ = (w - hold) / (1 - hold)
+        x = smooth(u_)
+        lag = LAG[k + 1]
+        xi = np.array([smooth(v_) for v_ in np.clip((u_ - lag) / (1 - lag), 0, 1)])
         melt = math.sin(math.pi * x) ** 0.8 * AMP[k + 1]
-        pos = A_ + (SH[k + 1] - A_) * x
-        c_ = pos.mean(0)
-        pos = pos + (pos - c_) * np.array([0.0, 0.3, 0.0]) * melt + 0.13 * melt * np.sin(pos @ KF.T + WF * t + PH)
-        return pos, R0 * (1.3 + 0.3 * melt)
+        md = MODE[k + 1]
+        pos = A_ + (SH[k + 1] - A_) * xi[:, None]
+        st_ = min(md["stretch"] * melt, max(0.0, 3.5 / max(REACH[k][0], REACH[k + 1][0]) - 1))          # never longer than 3.5: the top stays in the picture
+        pos[:, 0] = XK_T - (XK_T - pos[:, 0]) * (1 + st_)          # drawn up from the tip, never down toward the lock
+        th = md["twist"] * melt * (XK_T - pos[:, 0]) / 3.25
+        y_, z_ = pos[:, 1].copy(), pos[:, 2].copy()
+        pos[:, 1], pos[:, 2] = y_ * np.cos(th) - z_ * np.sin(th), y_ * np.sin(th) + z_ * np.cos(th)
+        pos[:, 1] += md["split"] * melt * np.tanh(pos[:, 1] / 0.08)
+        pos = pos + 0.07 * melt * np.sin(pos @ KF.T + WF * t + PH)
+        return pos, (RK[k] + (RK[k + 1] - RK[k]) * x) * (1 + 0.15 * melt)
 
     def chaos(t):
         """A turn about the upright that grows through bars 5 and 6 and is gone by the stop: the wilder bars swing the key a little."""
@@ -608,16 +827,21 @@ def shot_w3l(sc, sky):
     els = []
     for p_ in SH[0]:
         e_ = mbd.elements.new()
-        e_.co, e_.radius = tuple(p_), R0
+        e_.co, e_.radius = tuple(p_), RK[0]
         els.append(e_)
-    liq, lb = x_steel("w3l_liquid", (0.006, 0.006, 0.007), 0.04)          # W2's black mirror fluid: a dark dielectric, no clear coat
-    lb.inputs["Metallic"].default_value = 0.0
+    # test 2: more metal in the reflections. A dark chrome (metallic, not a coat of lacquer), roughness down to 0.015; W3L_MAT=black gives test 1's black mirror back
+    MAT = os.environ.get("W3L_MAT", "chrome")
+    LIQ0, ROUGH0 = ((0.006, 0.006, 0.007), 0.04) if MAT == "black" else ((0.2, 0.2, 0.21), 0.015)
+    liq, lb = x_steel("w3l_liquid", LIQ0, ROUGH0)
+    lb.inputs["Metallic"].default_value = 0.0 if MAT == "black" else 1.0
     mbd.materials.append(liq)
     mb = bpy.data.objects.new("w3l_mb", mbd)
     sc.collection.objects.link(mb)
     mb.rotation_mode = "QUATERNION"
     mb.hide_render = True
     STEEL, T_TURN = (0.6, 0.59, 0.57), FL_T["h"]
+
+    LQ = {}
 
     def liquid(t):
         ps = key_pose0("h", t)          # W3's own hovering key: hover, then carried down to its slot
@@ -631,8 +855,9 @@ def shot_w3l(sc, sky):
         for e_, p_ in zip(els, pos):
             e_.co, e_.radius = tuple(p_), r
         x = smooth((t - T_TURN) / (T_SWAP - T_TURN))          # turning to steel as it is carried down
-        lb.inputs["Base Color"].default_value = (*lerp((0.006, 0.006, 0.007), STEEL, x), 1)
-        lb.inputs["Roughness"].default_value = 0.04 + 0.18 * x
+        lb.inputs["Base Color"].default_value = (*lerp(LIQ0, STEEL, x), 1)
+        lb.inputs["Roughness"].default_value = ROUGH0 + (0.22 - ROUGH0) * x
+        LQ.update(pos=pos, r=r, loc=Vector(loc), q=mb.rotation_quaternion.copy(), s=KS * s_)
         return True
 
     # 4. the camera: W3's own until bar 2, in close on the liquid key through bar 6, back onto W3's own path by the end of the climb
@@ -643,9 +868,9 @@ def shot_w3l(sc, sky):
     my = [(2 * BAR, view0(2 * BAR)),
           (2 * BAR + 2 * BEAT, dict(at=tuple(Kc + Vector((0, 0, -0.1))), az=math.radians(-4), el=math.radians(9), d=1.15, mm=45.0)),
           (3 * BAR, dict(at=tuple(Kc + Vector((0, 0, -0.08))), az=math.radians(-2), el=math.radians(8.5), d=1.0, mm=45.0)),
-          (4.5 * BAR, dict(at=tuple(Kc + Vector((0, 0, -0.03))), az=math.radians(6), el=math.radians(7), d=0.78, mm=50.0)),
-          (6 * BAR, dict(at=tuple(Kc), az=math.radians(12), el=math.radians(6), d=0.62, mm=50.0)),
-          (T_STOP, dict(at=tuple(Kc), az=math.radians(16), el=math.radians(6.5), d=0.58, mm=50.0))]
+          (4.5 * BAR, dict(at=tuple(Kc + Vector((0, 0, -0.02))), az=math.radians(6), el=math.radians(7), d=0.86, mm=50.0)),          # test 2: a tenth further back and
+          (6 * BAR, dict(at=tuple(Kc + Vector((0, 0, 0.01))), az=math.radians(12), el=math.radians(6), d=0.69, mm=50.0)),          # a little higher, room for the
+          (T_STOP, dict(at=tuple(Kc + Vector((0, 0, 0.01))), az=math.radians(16), el=math.radians(6.5), d=0.64, mm=50.0))]          # longest keys
 
     def mixv(p, q, x):
         log = lambda k: math.exp(math.log(p[k]) + (math.log(q[k]) - math.log(p[k])) * x)
@@ -696,6 +921,35 @@ def shot_w3l(sc, sky):
         card.location = Kc + 2.6 * d_ + Vector((0, 0, 1.1))          # behind and above the camera, as seen from the key
         card.rotation_quaternion = (Kc - card.location).to_track_quat("Z", "Y")          # its face toward the key, its gradient bright at the top
 
+    # test 2: a dome only reflections see (W3L_DOME=0 leaves it out): dark, with two tall strip lights, a line of light round the horizon and a soft glow overhead,
+    # so the chrome carries long highlights and a world in it. It fades with the soft box, so the last frame is W3's.
+    nu, nv = 192, 96
+    PHI, ELV = np.meshgrid(np.linspace(-math.pi, math.pi, nu, endpoint=False), np.linspace(-math.pi / 2 + 0.02, math.pi / 2 - 0.02, nv), indexing="ij")
+    soft = lambda x, a, b, e: np.clip(np.minimum((x - a) / e, (b - x) / e) + 0.5, 0, 1)          # 1 between a and b, soft edges e wide
+    phd, eld = np.degrees(PHI), np.degrees(ELV)
+    lum = 0.03 + 0.5 * soft(eld, 60, 95, 15) + 1.6 * soft(eld, 4, 8, 1.5)
+    for c_ in (-48.0, 38.0):          # degrees round from the camera's side
+        lum = lum + 8.0 * soft(phd - c_, -5.0, 5.0, 1.5) * soft(eld, -8, 58, 4)
+    dirs = np.stack([np.sin(PHI) * np.cos(ELV), -np.cos(PHI) * np.cos(ELV), np.sin(ELV)], -1)
+    dverts = [tuple(v_) for v_ in (np.array(tuple(Kc))[None, None] + 5.0 * dirs).reshape(-1, 3)]
+    dfaces = [(i * nv + j, ((i + 1) % nu) * nv + j, ((i + 1) % nu) * nv + j + 1, i * nv + j + 1) for i in range(nu) for j in range(nv - 1)]
+    dm, dnt, dout = gk._mat("w3l_dome")
+    dem = dnt.nodes.new("ShaderNodeEmission")
+    dat = dnt.nodes.new("ShaderNodeAttribute")
+    dat.attribute_name = "lum"
+    dnt.links.new(dat.outputs["Color"], dem.inputs["Color"])
+    dnt.links.new(dem.outputs[0], dout.inputs["Surface"])
+    dome = mesh("w3l_dome", dverts, dfaces, dm)
+    ca = dome.data.color_attributes.new("lum", "FLOAT_COLOR", "POINT")
+    ca.data.foreach_set("color", np.repeat(lum.reshape(-1, 1), 4, 1).ravel().astype(np.float32))
+    dome.visible_camera = dome.visible_diffuse = dome.visible_shadow = dome.visible_transmission = dome.visible_volume_scatter = False
+    USE_DOME = os.environ.get("W3L_DOME", "1") != "0"
+
+    def domelight(t):
+        a_ = smooth((t - 2 * BAR + 0.4) / 0.8) * (1 - smooth((t - T_STOP) / 0.45))
+        dome.hide_render = not USE_DOME or a_ <= 0
+        dem.inputs["Strength"].default_value = a_
+
     def fstop(t):
         near = smooth((t - 2 * BAR) / BAR) * (1 - smooth((t - B0) / (B1 - B0)))
         return math.exp(math.log(f0) + (math.log(4.0) - math.log(f0)) * near)
@@ -717,11 +971,12 @@ def shot_w3l(sc, sky):
             o.hide_render = True
         liquid(t - START)
         softbox(t - START)
+        domelight(t - START)
     update.view = view
 
     if X_CHECK:
         mbd.resolution = mbd.render_resolution
-        skip = {mb.name}
+        skip = {mb.name, dome.name, card.name}
         for e_ in [hov] + [d_["obj"] for d_ in ORB] + [d_["obj"] for d_ in rain]:
             skip |= {o.name for o in e_.children_recursive} | {e_.name}
         upd(START + T_HOV + 1.0)
@@ -746,12 +1001,22 @@ def shot_w3l(sc, sky):
             print("INSERT_OK", SHOT, "gap")
             sys.exit(0)
         pair = None
-        best = dict(liq_lock=(9.0, 0), liq_key=(9.0, 0), liq_floor=(9.0, 0), orb_lock=(9.0, 0), orb_key=(9.0, 0))
+        best = dict(liq_lock=(9.0, 0), liq_key=(9.0, 0), liq_floor=(9.0, 0), orb_lock=(9.0, 0), orb_key=(9.0, 0), liq_edge=(9.0, 0))
+        STEP = int(os.environ.get("W3X_STEP", "1"))          # every n-th frame, for a quick look while tuning; the reported check is every frame
+
+        def edge(lv, t):
+            """How far the liquid's surface stays inside the picture, as a share of the picture's height (negative: out of the frame)."""
+            v = view(t)
+            eye = Vector(eye_of(v))
+            R_ = np.array((Vector(v["at"]) - eye).to_track_quat("-Z", "Y").to_matrix())
+            pc = (lv - np.array(tuple(eye))) @ R_
+            nx, ny = pc[:, 0] / -pc[:, 2] * v["mm"] / 36.0, pc[:, 1] / -pc[:, 2] * v["mm"] / 36.0
+            return float(min((0.5 - np.abs(nx)).min(), (0.28125 - np.abs(ny)).min())) / 0.5625
         ids = ["h"] + list(range(NO)) + [("r", n) for n in range(len(rain))]
         RAIN_ONLY = bool(os.environ.get("W3X_RAIN"))          # only the frames of the fall, keys only (the liquid is gone by then)
         for f in range(FRAMES):
             t = f / FPS
-            if RAIN_ONLY and not T_RAIN - 0.1 <= t <= T_ORB + 1.0:
+            if RAIN_ONLY and not T_RAIN - 0.1 <= t <= T_ORB + 1.0 or f % STEP:
                 continue
             on = False if RAIN_ONLY else liquid(t)
             moving = {}
@@ -767,6 +1032,7 @@ def shot_w3l(sc, sky):
             if on and len(lv):          # empty while the drop is still a speck
                 best["liq_lock"] = min(best["liq_lock"], (min(tree.find_nearest(Vector(tuple(p_)))[3] for p_ in lv), f))
                 best["liq_floor"] = min(best["liq_floor"], (float(lv[:, 2].min()), f))
+                best["liq_edge"] = min(best["liq_edge"], (edge(lv, t), f))
                 for w_ in moving.values():
                     if np.linalg.norm(w_.mean(0) - lv.mean(0)) < 0.4:
                         best["liq_key"] = min(best["liq_key"], (float(np.sqrt(((lv[::4, None] - w_[None, ::4]) ** 2).sum(-1)).min()), f))
