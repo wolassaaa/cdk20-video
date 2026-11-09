@@ -1,0 +1,10 @@
+{
+  "name": "scie1007-hyperframes-test",
+  "private": true,
+  "version": "0.0.0",
+  "description": "HKBU SCIE1007 coursework video: Hyperframes transition tool test",
+  "dependencies": {
+    "gsap": "3.15.0",
+    "hyperframes": "0.9.26"
+  }
+}

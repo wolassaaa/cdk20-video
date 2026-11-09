@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=3840, height=2160" />
+    <script src="./vendor/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 3840px; height: 2160px; overflow: hidden; background: #000; }
+      video { position: absolute; left: 0; top: 0; width: 3840px; height: 2160px; object-fit: contain; transform-origin: 50% 50%; }
+    </style>
+  </head>
+  <body>
+    <!-- HKBU SCIE1007 coursework video: Hyperframes transition tool test (not a final transition).
+         0-2 s: last 2 s of S4_401 (source 24-26 s). 1-3 s: first 2 s of W3. 1-2 s overlap = dissolve + push-in. -->
+    <div id="root" data-composition-id="main" data-start="0" data-duration="3" data-width="3840" data-height="2160">
+      <video id="vA" class="clip" data-start="0" data-duration="2" data-media-start="24" data-track-index="0"
+             src="../../styleframes/art/fusion/s4/S4_401_4k60_1.mp4" muted playsinline style="z-index:1"></video>
+      <video id="vB" class="clip" data-start="1" data-duration="2" data-media-start="0" data-track-index="1"
+             src="../../styleframes/art/fusion/w3/W3_4k60_1.mp4" muted playsinline style="z-index:2"></video>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      // A: pure until 1 s, then pushes in to 1.06 while it dissolves out
+      tl.fromTo("#vA", { scale: 1 }, { scale: 1.06, duration: 1, ease: "power2.inOut" }, 1);
+      // B: arrives slightly zoomed in, settles to 1.0 and dissolves in; pure and unscaled from 2 s on
+      tl.fromTo("#vB", { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 1, ease: "power2.inOut" }, 1);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
