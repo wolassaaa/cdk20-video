@@ -123,11 +123,12 @@ def shot_s410(sc, sky):
     RISE, RISE_H = 0.9, 3.0
 
     # ---------------------------------------------------------------- 相机
-    lock_v = dict(at=(LC.x - 0.30, LC.y - 0.15, LC.z - 0.30), az=math.radians(26.0), el=math.radians(30.0), d=4.2, mm=45.0)
-    end_v = dict(at=(126.35, -3.12, 0.2), az=math.radians(20.0), el=math.radians(21.0), d=2.8, mm=45.0)
+    # 第 3 版（SilverHawk 第 3 轮建议）：锁近景 at 往左后挪，4-09 传送带九成出画、不压右下出处行；结尾 el 21→24、d 2.8→2.9，看 7 把的视线 25.4°→28.2°
+    lock_v = dict(at=(LC.x - 0.40, LC.y - 0.05, LC.z - 0.20), az=math.radians(26.0), el=math.radians(30.0), d=4.2, mm=45.0)
+    end_v = dict(at=(126.35, -3.12, 0.2), az=math.radians(20.0), el=math.radians(24.0), d=2.9, mm=45.0)
     if os.environ.get("BL_S410_END"):          # 备选结尾取景，只出静帧给导演挑："x,y,z,az,el,d"
         _e = [float(v) for v in os.environ["BL_S410_END"].split(",")]
-        end_v = dict(at=tuple(_e[:3]), az=math.radians(_e[3]), el=math.radians(_e[4]), d=_e[5], mm=45.0)
+        end_v = dict(at=tuple(_e[:3]), az=math.radians(_e[3]), el=math.radians(_e[4]), d=_e[5], mm=float(_e[6]) if len(_e) > 6 else 45.0)
 
     def mix(p, q, x):
         log = lambda k: math.exp(math.log(p[k]) + (math.log(q[k]) - math.log(p[k])) * x)
@@ -497,6 +498,7 @@ def shot_s504(sc, sky):
     T_DOSE0, T_DOSE1 = 13.4, 17.8     # 滑块走过 6 格
     T_PAST0, T_PAST1 = 17.8, 19.4     # 滑过尺子头，到格子边；蓝液落到一半
     assay_v = dict(at=(125.95, -2.2, 0.05), az=math.radians(0.0), el=math.radians(32.0), d=1.6, mm=45.0)
+    LEAD = float(os.environ.get("BL_S504_LEAD", "0.6"))   # 退到格子 21 时 at 先走完的比例
 
     def mix(p, q, x):
         log = lambda k: math.exp(math.log(p[k]) + (math.log(q[k]) - math.log(p[k])) * x)
@@ -510,7 +512,11 @@ def shot_s504(sc, sky):
         if t < T_M2:
             return dict(lock_v)
         if t < T_M2E:
-            return mix(lock_v, assay_v, smooth((t - T_M2) / (T_M2E - T_M2)))
+            # 先往左摇、再推近：锁从画面右边出去，不从右上标题框后面扫过
+            x = (t - T_M2) / (T_M2E - T_M2)
+            v = mix(lock_v, assay_v, smooth(x))
+            v["at"] = lerp(lock_v["at"], assay_v["at"], smooth(min(1.0, x / LEAD)))
+            return v
         return dict(assay_v)
 
     def focus(t):
