@@ -3,7 +3,7 @@ then reads every frame at 480x270 and lists the biggest jumps from one frame to 
 not be there), the stretches where the picture moves fast for a while (a camera move that may be too quick), and saves a sheet of five frames.
 With --ref <png>, it also compares the clip's first frame with that picture (the last frame of the segment before it), so a joint that does not line up shows.
 Works on finished 4K 60 fps clips and on 1080p 30 fps review clips; only a 4K clip is marked OK or CHECK on size and rate. Uses Remotion's ffmpeg and ffprobe.
-Run: python check_4k.py <clip.mp4> [<clip.mp4> ...] [--ref <previous last frame.png>]   (sheets go next to each clip as <name>_check.png)"""
+Run: python check_4k.py <clip.mp4 or frame.png> [...] [--ref <previous last frame.png>]   (a single PNG gets the joint check only)   (sheets go next to each clip as <name>_check.png)"""
 import io
 import json
 import os
@@ -53,6 +53,11 @@ for path in args:
           " (want %d)" % EXPECT[name] if name in EXPECT else "", v.get("pix_fmt"), v.get("color_primaries", "?"), "yes" if aud else "none",
           ("OK" if ok else "CHECK") if big else ("review clip, no audio" if not aud else "CHECK: has audio")))
     fr = frames(path)
+    if len(fr) < 2:          # a single still (a Blender frame 0, say): only the joint
+        if ref is not None:
+            e = np.abs(fr[0] - ref).mean()
+            print("  first frame vs --ref: mean difference %.2f of 255 -> %s" % (e, "lines up" if e < 3 else "CHECK the joint"))
+        continue
     d = np.array([np.abs(fr[k] - fr[k - 1]).mean() for k in range(1, len(fr))])
     d60 = d * fps / 60                                        # per 1/60 s, so review clips and finished clips read on the same scale
     med = float(np.median(d60))

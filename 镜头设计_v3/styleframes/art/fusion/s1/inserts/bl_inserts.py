@@ -15,6 +15,7 @@ Times are seconds on the film's clock. Table units are the plates': 200 px to th
 Run: blender.exe -b -t 4 -P bl_inserts.py -- <a|w|b|c> <out dir> [first] [last] [samples] [size] [step] [model]
 Shots kept in another file: set BL_EXTRA=<file.py>. That file starts with META = {"<shot>": (start s, frames, sky low, sky high)} as a plain literal, defines shot_<name>(sc, sky)
 like the ones here and adds it with SHOTS["<name>"] = shot_<name>; it runs inside this script, so every function here is in reach. w3_end(sc, sky) gives the table as W3 leaves it.
+BL_CAMCHECK=<step> renders nothing and measures the camera and framing every <step> frames instead (see cam_check()).
 """
 import json
 import math
@@ -7049,12 +7050,147 @@ def w3_end(sc, sky):
     return upd
 
 
+def cam_check(sc, update, frames):
+    """BL_CAMCHECK=<step>: renders nothing. Every <step> frames it poses the shot and measures what the camera sees, against 04_美术约束_v1.md sections 3 and 5:
+    camera elevation (14-58 deg, or the 600 mm overhead view), how close the top of the frame comes to the horizon, each camera move (how long, how far,
+    whether it is still going in the first or last second), and for every thing on the table: cut by the frame edge, inside a text area (BL_KEEPOUT,
+    "x0,y0,x1,y1;..." in 1920x1080 pixels, default the title box and the bottom 10%), standing off the table while still, seen edge-on (a flat thing whose
+    face turns more than 70 deg from the camera reads as a line; a long thing whose length points within 35 deg of the lens shows only its end), and growing or shrinking since the last checked frame. Only things taller than 4% of the frame
+    count; the table and its cells are left out. Music windows may move faster on the beat (section 3), so read their move lines against the beat.
+    It does not look for clashes: each shot keeps its own clash check."""
+    from bpy_extras.object_utils import world_to_camera_view as w2c
+    c = sc.camera
+    keep = [tuple(float(v) for v in z_.split(",")) for z_ in os.environ.get("BL_KEEPOUT", "1300,50,1880,115;0,972,1920,1080").split(";") if z_]
+    vl = bpy.context.view_layer
+
+    def shown(o):
+        while o is not None:
+            if o.hide_render:
+                return False
+            o = o.parent
+        return True
+
+    def tops():
+        out = {}
+        for o in bpy.data.objects:
+            if o.type != "MESH" or not shown(o) or o.name.startswith(("floor", "cell")):          # the table and its cells are the ground, not things on it
+                continue
+            t_ = o
+            while t_.parent is not None:
+                t_ = t_.parent
+            out.setdefault(t_.name, []).append(o)
+        return out
+    rows, prev, scale0, cam = [], {}, {}, []
+    for f in frames:
+        sc.frame_set(f)
+        update(START + f / FPS)
+        vl.update()
+        eye = c.matrix_world.translation.copy()
+        fwd = (c.matrix_world.to_3x3() @ Vector((0, 0, -1))).normalized()
+        el = math.degrees(math.asin(max(-1.0, min(1.0, -fwd.z))))
+        mm = c.data.lens
+        half_v = math.degrees(math.atan(36 * 9 / 16 / 2 / mm))
+        cam.append((f, eye, fwd, c.data.dof.focus_distance))
+        flags = []
+        if not (13.5 <= el <= 58.5) and not (el > 85 and mm >= 300):
+            flags.append("camera elevation %.0f deg (14-58)" % el)
+        if el - half_v < 6 and not (el > 85):
+            flags.append("top of frame %.0f deg above the horizon line" % (el - half_v))
+        cut, inbox, floating, edge, grow = [], [], [], [], []
+        for name, ms in tops().items():
+            top = bpy.data.objects[name]
+            pts = [m.matrix_world @ Vector(b_) for m in ms for b_ in m.bound_box]
+            if max(p.x for p in pts) - min(p.x for p in pts) > 3 or max(p.y for p in pts) - min(p.y for p in pts) > 3:
+                continue          # the table, its cells and anything as big: not things on it
+            sp = [w2c(sc, c, p) for p in pts]
+            if any(s_.z <= 0 for s_ in sp):
+                continue
+            x0, x1 = min(s_.x for s_ in sp) * 1920, max(s_.x for s_ in sp) * 1920
+            y0, y1 = (1 - max(s_.y for s_ in sp)) * 1080, (1 - min(s_.y for s_ in sp)) * 1080
+            if x1 < 0 or x0 > 1920 or y1 < 0 or y0 > 1080:
+                continue
+            w_, h_ = x1 - x0, y1 - y0
+            big = h_ > 1080 * 0.04
+            sides = [s for s, out_ in (("left", x0 < -0.03 * w_), ("right", x1 > 1920 + 0.03 * w_), ("top", y0 < -0.03 * h_), ("bottom", y1 > 1080 + 0.03 * h_)) if out_]
+            if sides and big and w_ * h_ < 0.6 * 1920 * 1080:
+                cut.append("%s (%s)" % (name, "/".join(sides)))
+            for z_ in keep:
+                ix = max(0.0, min(x1, z_[2]) - max(x0, z_[0])) * max(0.0, min(y1, z_[3]) - max(y0, z_[1]))
+                if ix > 0.25 * w_ * h_ and big:
+                    inbox.append(name)
+                    break
+            zmin = min(p.z for p in pts)
+            mw = top.matrix_world.copy()
+            still = name in prev and all(abs(a - b) < 1e-5 for ra, rb in zip(mw, prev[name]) for a, b in zip(ra, rb))
+            prev[name] = mw
+            if still and zmin > 0.03 and big:
+                floating.append("%s %.2f up" % (name, zmin))
+            inv = top.matrix_world.inverted()
+            lp = [inv @ p for p in pts]
+            dims = [max(p[k] for p in lp) - min(p[k] for p in lp) for k in range(3)]
+            order = sorted(range(3), key=lambda k: dims[k])
+            if big and dims[order[0]] < 0.3 * dims[order[1]]:
+                ax = Vector((0, 0, 0))
+                ax[order[0]] = 1
+                n_ = (top.matrix_world.to_3x3() @ ax).normalized()
+                ctr = sum(pts, Vector()) / len(pts)
+                face = math.degrees(math.acos(min(1.0, abs(n_.dot((eye - ctr).normalized())))))
+                if face > 70:
+                    edge.append("%s %.0f deg" % (name, face))
+            if big and dims[order[2]] > 1.5 * dims[order[1]]:          # a long thing pointing at the lens shows only its end
+                ax = Vector((0, 0, 0))
+                ax[order[2]] = 1
+                n_ = (top.matrix_world.to_3x3() @ ax).normalized()
+                ctr = sum(pts, Vector()) / len(pts)
+                along = math.degrees(math.acos(min(1.0, abs(n_.dot((eye - ctr).normalized())))))
+                if along < 35:
+                    edge.append("%s end-on %.0f deg" % (name, along))
+            s_now = top.matrix_world.to_scale().length          # size against the last checked frame: is it growing or shrinking right now
+            s0 = scale0.get(name, s_now)
+            scale0[name] = s_now
+            if big and abs(s_now / max(s0, 1e-6) - 1) > 0.05:
+                grow.append("%s x%.2f" % (name, s_now / max(s0, 1e-6)))
+        for label, l_ in (("cut by the frame", cut), ("in a text area", inbox), ("off the table while still", floating), ("seen edge-on", edge), ("changing size", grow)):
+            if l_:
+                flags.append("%s: %d, %s%s" % (label, len(l_), ", ".join(l_[:4]), " ..." if len(l_) > 4 else ""))
+        rows.append((f, el, mm, flags))
+        print("CAM f%d %.2fs el %.0f mm %.0f%s" % (f, f / FPS, el, mm, "" if not flags else " | " + " | ".join(flags)), flush=True)
+    moves, run = [], None          # camera moves: turning faster than 4 deg/s or travelling faster than 15% of the focus distance per second
+    for (fa, ea, da, ka), (fb, eb, db, kb) in zip(cam, cam[1:]):
+        dt = (fb - fa) / FPS
+        turn = math.degrees(math.acos(min(1.0, da.dot(db)))) / dt
+        go = (eb - ea).length / max(ka, 1e-3) / dt
+        if turn > 4 or go > 0.15:
+            run = [fa, fb, 0.0, 0.0] if run is None else run
+            run[1], run[2], run[3] = fb, run[2] + turn * dt, run[3] + go * dt
+        elif run is not None:
+            moves.append(run)
+            run = None
+    if run is not None:
+        moves.append(run)
+    print("CAMCHECK moves:", "none" if not moves else "")
+    first_f, last_f = frames[0], frames[-1]
+    for a, b, turn, go in moves:
+        dur = (b - a) / FPS
+        bigm = turn > 10 or go > 0.3
+        note = [w for w, on in (("big move under 1 s", bigm and dur < 1.0), ("still moving in the last second", last_f == FRAMES - 1 and b > FRAMES - 1 - FPS),
+                                ("moving in the first second", first_f == 0 and a < FPS)) if on]
+        print("  %.2f-%.2f s (%.1f s): turns %.0f deg, travels %.2f of the focus distance%s" % (a / FPS, b / FPS, dur, turn, go, " <- " + ", ".join(note) if note else ""))
+    nb = sum(1 for m in moves if m[2] > 10 or m[3] > 0.3)
+    print("CAMCHECK big moves: %d%s" % (nb, " (more than 2)" if nb > 2 else ""))
+    print("CAMCHECK flagged frames: %d of %d" % (sum(1 for r in rows if r[3]), len(rows)))
+
+
 sc, sky = stage()
 SHOTS = dict(a=shot_a, w=shot_w, b=shot_b, c=shot_c, f=shot_f, g=shot_g, h=shot_h, k=shot_k, p=shot_p, q=shot_q, x=shot_x, y=shot_y, z=shot_z, v=shot_v, u=shot_u, t=shot_t, r=shot_r, s=shot_s, n=shot_n, o=shot_o, m=shot_m, j=shot_j, l=shot_l, e=shot_e, d=shot_d, i=shot_i, i2=shot_i2, i3=shot_i3, i4=shot_i4, lp=shot_lp, hz=shot_hz, hk=shot_hk, w3=shot_w3)
 if XFILE:          # the other file's shots run here, with every function above in reach; it adds them to SHOTS
     exec(compile(open(XFILE, encoding="utf-8").read(), XFILE, "exec"))
 update = SHOTS[SHOT](sc, sky)
 sc.frame_start, sc.frame_end = 0, FRAMES
+if os.environ.get("BL_CAMCHECK"):          # measure the camera and framing instead of rendering; see cam_check()
+    cam_check(sc, update, list(range(FIRST, LAST + 1, max(1, int(os.environ["BL_CAMCHECK"])))) + ([LAST] if (LAST - FIRST) % max(1, int(os.environ["BL_CAMCHECK"])) else []))
+    print("INSERT_OK", SHOT, FIRST, LAST, "camcheck")
+    sys.exit(0)
 EXT = "png"
 if os.environ.get("BL_JPEG"):          # the 4K 60 fps passes: a 4K PNG is ~10 MB, a JPEG at 95 ~2 MB, and the take re-encodes to H.264 anyway
     sc.render.image_settings.file_format, sc.render.image_settings.color_mode, sc.render.image_settings.quality, EXT = "JPEG", "RGB", 95, "jpg"
