@@ -6,12 +6,12 @@ import subprocess
 
 from PIL import Image, ImageDraw, ImageFont
 
-PICK = [("S7_test_1.mp4", 2.9, "7-01 · 15:17.9 · A on camera, 1 2 3"), ("S7_test_1.mp4", 5.9, "7-02 · 15:20.9 · flag, next, public"),
-        ("S7_test_1.mp4", 9.3, "7-02 · 15:24.3 · 3D dishes double"), ("S7_test_1.mp4", 18.0, "7-02 · 15:33 · mouse, ADME, selectivity"),
-        ("S7_test_1.mp4", 27.5, "7-03 · 15:42.5 · predicted vs measured?"), ("S7_test_1.mp4", 32.4, "7-03 · 15:47.4 · 3D bin pours keys back"),
-        ("S7_test_1.mp4", 37.6, "7-04 · 15:52.6 · 3D two stopwatches"), ("S7_test_1.mp4", 45.0, "7-04 · 16:00 · same ..., dashed finish"),
-        ("S8_test_1.mp4", 20.0, "8-02 · 16:24 · four points, Objective 1 tick"), ("S8_test_1.mp4", 38.9, "8-03 · 16:42.9 · millions → 13, 30 days"),
-        ("S8_test_1.mp4", 50.6, "8-05 · 16:54.6 · B, drawn phone"), ("S8_test_1.mp4", 64.0, "8-07 · 17:08 · 2x2, then the blank sheet")]
+PICK = [("S7_test_2.mp4", 0.0, "7-01 · 15:15 · = S6 last frame"), ("S7_test_2.mp4", 2.9, "7-01 · 15:17.9 · A under the road, 1 2 3"),
+        ("S7_test_2.mp4", 5.9, "7-02 · 15:20.9 · S6 road, next, public"), ("S7_test_2.mp4", 18.0, "7-02 · 15:33 · mouse, ADME, selectivity"),
+        ("S7_test_2.mp4", 27.5, "7-03 · 15:42.5 · predicted vs measured?"), ("S7_test_2.mp4", 32.4, "7-03 · 15:47.4 · 3D bin pours keys back"),
+        ("S7_test_2.mp4", 37.6, "7-04 · 15:52.6 · 3D two stopwatches"), ("S7_test_2.mp4", 45.0, "7-04 · 16:00 · same ..., dashed finish"),
+        ("S8_test_2.mp4", 20.0, "8-02 · 16:24 · four points, Objective 1 tick"), ("S8_test_2.mp4", 38.9, "8-03 · 16:42.9 · millions → 13, 30 days"),
+        ("S8_test_2.mp4", 50.6, "8-05 · 16:54.6 · B, drawn phone"), ("S8_test_2.mp4", 64.0, "8-07 · 17:08 · 2x2, then the blank sheet")]
 FF = r"D:/。hkbu/molecular science/_render_tmp/hf/bin/ffmpeg.exe"
 w, h = 640, 360
 sheet = Image.new("RGB", (w * 4, (h + 34) * 3), "white")

@@ -7,7 +7,7 @@ import React from "react";
 import {registerRoot, Composition, AbsoluteFill, OffthreadVideo, Sequence, Img, staticFile, useCurrentFrame, continueRender, delayRender} from "remotion";
 import OUTLINE from "./s78_cdk20_outline.json";
 
-const W = 1920, H = 1080;
+const W = 1920, H = 1080, TABLE6 = "#EEEAE3";          // S6's table as its last frame shows it (237.5, 233.5, 226.5)
 const INK = "#111113", SOFT = "#545458", RED = "#E8190F", DARK = "#9A0E08", KLEIN = "#002FA7", BONE = "#EDEBE4", GREY = "#9A9AA0", SHEET = "#EEE9E4";
 const SERIF = "Instrument Serif", SANS = "Inter Tight", HAND = "Caveat";
 
@@ -146,33 +146,31 @@ const Print = ({who, x, y, w, h, at, rot = 0, until = 1e9, from, slide = 0.7}) =
   </g>;
 };
 
-// ---------------------------------------------------------------- the road: six glass bulbs, red filled to where 048 stands (F6: three full, the fourth half)
-const STATIONS = ["Target", "Hit", "Improve", "Cells & animals", "Clinical trials", "Approval"];
-const Road = ({x, y, gap, r = 46, fill = 3.5, labels = true, size = 34, at = -1, id = "rd"}) => {
-  const t = useT(), a = after(t, at, 0.6);
+// ---------------------------------------------------------------- the road: S6's 3D route as it ends (bl_s6.py's last frame), red to the half of station 4
+// s6_route.png is that frame's strip, cut round the bulbs; the words and the dashed circles are S6's own (s6_body.jsx Road6), at S6's scale: 277.3 px between
+// stations, 26 px type 97 px under the bulbs. x, y: the first bulb; gap: the space between stations, which scales the rest.
+const STATIONS = ["Target", "Hit", "Improving", "Cells & animals", "Clinical trials", "Approval"];
+const K6 = 0.86666, GAP6 = 277.333, RR6 = 62 * K6;
+const Road = ({x, y, gap = GAP6, labels = true, bare = false, at = -1}) => {
+  const t = useT(), a = after(t, at, 0.6), s = gap / GAP6, k = K6 * s, rr = 62;
   if (a <= 0) return null;
-  const xs = STATIONS.map((_, k) => x + gap * k), xr = x + gap * (fill - 0.5) + (fill % 1 ? 0.5 * gap - r * 0 : 0);
-  const redEnd = fill % 1 ? x + gap * Math.floor(fill) : x + gap * (fill - 1);
   return <g opacity={a}>
-    <defs>
-      <radialGradient id={`${id}g`} cx="0.38" cy="0.32" r="0.75"><stop offset="0" stopColor="#FFFFFF"/><stop offset="0.6" stopColor="#ECEAE4"/><stop offset="1" stopColor="#CFCCC4"/></radialGradient>
-      <radialGradient id={`${id}r`} cx="0.38" cy="0.32" r="0.75"><stop offset="0" stopColor="#FF8A80"/><stop offset="0.35" stopColor={RED}/><stop offset="1" stopColor="#8E0A05"/></radialGradient>
-    </defs>
-    <line x1={x - gap * 0.6} y1={y} x2={xs[5] + gap * 0.3} y2={y} stroke="#CFCCC4" strokeWidth={r * 0.14}/>
-    <line x1={x - gap * 0.6} y1={y} x2={redEnd} y2={y} stroke={RED} strokeWidth={r * 0.2} strokeLinecap="round"/>
-    {xs.map((cx, k) => {
-      const full = k + 1 <= fill, half = !full && k < fill, cid = `${id}c${k}`;
-      return <g key={k}>
-        <ellipse cx={cx + r * 0.18} cy={y + r * 0.95} rx={r * 0.9} ry={r * 0.22} fill="#3C3228" opacity={0.12} style={{filter: "blur(4px)"}}/>
-        <circle cx={cx} cy={y} r={r} fill={`url(#${id}g)`}/>
-        {full && <circle cx={cx} cy={y} r={r * 0.86} fill={`url(#${id}r)`}/>}
-        {half && <g><clipPath id={cid}><rect x={cx - r} y={y - r} width={r} height={2 * r}/></clipPath><circle cx={cx} cy={y} r={r * 0.86} fill={`url(#${id}r)`} clipPath={`url(#${cid})`}/></g>}
-        <circle cx={cx} cy={y} r={r} fill="none" stroke="#2E2E31" strokeWidth={r * 0.13}/>
-        <ellipse cx={cx - r * 0.3} cy={y - r * 0.42} rx={r * 0.26} ry={r * 0.13} fill="#FFFFFF" opacity={0.85} transform={`rotate(-25 ${cx - r * 0.3} ${y - r * 0.42})`}/>
-        {labels && <text x={cx} y={y + r + size * 1.4} textAnchor="middle" fontFamily={SANS} fontSize={size} fontWeight={600} fill={INK}>{STATIONS[k]}</text>}
-      </g>;
-    })}
+    {!bare && <image href={staticFile("fusion_s78/s6_route.png")} x={x - 171.67 * s} y={y - 80.33 * s} width={1680 * s} height={165 * s}/>}
+    {[0, 1, 2, 3, 4, 5].map(i => <g key={i} transform={`translate(${x + i * gap} ${y}) scale(${k})`}>
+      {i > 3 && <circle r={rr} fill="none" stroke={GREY} strokeWidth={4} strokeDasharray="12 10"/>}
+      {i === 3 && <path d={`M0 ${-rr} A${rr} ${rr} 0 0 1 0 ${rr}`} fill="none" stroke={GREY} strokeWidth={4} strokeDasharray="12 10"/>}
+      {labels && <text x={0} y={112} fontFamily={SANS} fontSize={30} fontWeight={600} fill={i < 4 ? INK : SOFT} textAnchor="middle">{STATIONS[i]}</text>}
+    </g>)}
   </g>;
+};
+/** S6's 048 tag on its stem over station 4 (x, y: that bulb), at S6's scale times s. */
+const Tag048 = ({x, y, s = 1, at = -1}) => {
+  const t = useT(), a = after(t, at, 0.4);
+  return a > 0 ? <g transform={`translate(${x} ${y - 0.95 * 200 * K6 * s}) scale(${K6 * s})`} opacity={a}>
+    <line x1={0} y1={44} x2={0} y2={0.95 * 200 - 62 - 8} stroke={INK} strokeWidth={2.5}/>
+    <rect x={-78} y={-44} width={156} height={88} rx={12} fill="#FBFAF6" stroke={INK} strokeWidth={3}/>
+    <text x={0} y={22} fontFamily={SERIF} fontSize={64} fill={RED} textAnchor="middle">048</text>
+  </g> : null;
 };
 
 /** A photo-like object made from a frame of S3 or S4, laid on the table. It slides in from dx, dy. */
@@ -192,14 +190,8 @@ const cam = (keys, t) => {
   return keys[keys.length - 1].slice(1);
 };
 
-/** The bone table under everything: a flat colour, a faint grain and a soft fall-off at the edges, in screen space. */
-const Table = () => <>
-  <rect width={W} height={H} fill={BONE}/>
-  <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7"/><feColorMatrix values="0 0 0 0 0.25  0 0 0 0 0.22  0 0 0 0 0.18  0 0 0 0.05 0"/></filter>
-  <rect width={W} height={H} filter="url(#grain)"/>
-  <radialGradient id="fall" cx="0.5" cy="0.45" r="0.8"><stop offset="0.6" stopColor="#000" stopOpacity="0"/><stop offset="1" stopColor="#3C3228" stopOpacity="0.07"/></radialGradient>
-  <rect width={W} height={H} fill="url(#fall)"/>
-</>;
+/** The table under everything: S6's flat colour, so its last frame and the route strip join without a seam (no grain, no fall-off, as in S6). */
+const Table = () => <rect width={W} height={H} fill={TABLE6}/>;
 
 /** A 3D insert over the whole frame: the Blender pass when there is one, a grey card until then. */
 const Insert = ({from, to, file, label, fps}) => {
@@ -219,10 +211,10 @@ const Line = ({lines, who}) => {
 
 // ================================================================ S7 · next steps (15:15-16:04, 49 s). t = 0 at 15:15.
 const S7_LINES = [[0, "So, what should happen next? We'd suggest three things.", "A · on camera"], [3.0, "One: walk 048 further."], [5.2, "It's public now, so anyone could try."], [7.6, "Test it in more liver cancer cells and normal liver cells,"], [11.4, "then animals,"], [12.6, "and check how the body handles it and what else it hits."], [16.6, "The authors had already listed these steps."], [22.0, "Two: check the AlphaFold model against a lab-measured structure, once one exists."], [28.6, "And feed every result, including the failures, back into the next round."], [35.0, "Three: race them."], [36.4, "An AI route and a classic route, same target, same budget, same definition of a hit."], [42.6, "Then we'd know exactly how much faster AI really is."], [47.0, "(music breath)", "-"]];
-// the table: 7-01 at x 0-1920, the first step at 2200-5900 (the road, then the dishes), the second at 6000-7900, the third at 8000-9900
-const R7 = {x: 2300, y: 560, gap: 330};          // the road as S6 leaves it
-const S7_CAM = [[0, 960, 540, 1], [2.95, 960, 540, 1], [3.6, 1010, 560, 2.2], [4.3, 3125, 540, 1], [6.6, 3125, 540, 1], [7.3, 5040, 540, 1], [21.6, 5040, 540, 1], [22.5, 6960, 540, 1],
-  [34.7, 6960, 540, 1], [35.2, 8960, 540, 1], [46.8, 8960, 540, 1], [48.2, 5000, 560, 0.19], [49, 5000, 560, 0.19]];
+// the table: S6's last frame at x 2165-4085 (the road, 7-01 under it), the dishes at 4180-5600, the second step at 6000-7900, the third at 8000-9900
+const S6X = 2165, R7 = {x: S6X + 266.67, y: 505.33, gap: GAP6};          // S6's road where its last frame leaves it, in this world
+const S7_CAM = [[0, 3125, 540, 1], [0.8, 3125, 540, 1], [1.5, 3125, 900, 1], [2.95, 3125, 900, 1], [3.6, 3125, 540, 1], [6.6, 3125, 540, 1], [7.3, 5040, 540, 1], [21.6, 5040, 540, 1], [22.5, 6960, 540, 1],
+  [34.7, 6960, 540, 1], [35.2, 8960, 540, 1], [46.8, 8960, 540, 1], [48.2, 6030, 560, 0.235], [49, 6030, 560, 0.235]];
 const S7_INS = {dish: [6.8, 11.5], bin: [29.4, 34.6], watch: [36.3, 39.4]};          // each Blender pass starts 0.3 s before its insert (bl_s78.py META)
 const DISH_ROWS = [["liver cancer cells", 380, "#E9B9B4"], ["normal liver cells", 620, "#F4F1EA"]];
 
@@ -230,26 +222,27 @@ const S7World = () => {
   const t = useT(), r = R7, x4 = r.x + 3 * r.gap;
   const hand = (t0, k = 1) => (t > t0 ? (t - t0) * 60 * k : 0);
   return <g>
-    {/* 7-01: A's print on the left; the pen writes 1, 2, 3 on the bare table */}
-    <Print who="A" x={96} y={168} w={760} h={912 - 168} at={0.05} rot={-0.8}/>
-    {[1, 2, 3].map((n, i) => <Note key={n} x={1060 + i * 280} y={620} size={170} at={1.9 + i * 0.35} dur={0.3} fill={RED} rot={-3}>{n}</Note>)}
+    {/* frame 0 is S6's last frame (s6_end_comp.png, rendered with review off). Under it: the same frame without its words, and S6's station words, dashed
+        circles and 048 tag drawn again in place; the top copy fades, so the lines, notes and B's print go and the road stays */}
+    <image href={staticFile("fusion_s78/s6_end_base.png")} x={S6X} y={0} width={W} height={H}/>
+    <Road {...r} bare/>
+    <Tag048 x={x4} y={r.y}/>
+    {t < 0.9 && <image href={staticFile("fusion_s78/s6_end_comp.png")} x={S6X} y={0} width={W} height={H} opacity={1 - smooth((t - 0.15) / 0.6)}/>}
 
-    {/* 7-02 · the road as S6 left it; a flag on station 4, its empty half ringed in dashes */}
-    <Road {...r} fill={3.5} id="r7"/>
-    <Note x={r.x - 140} y={250} size={150} at={3.6} dur={0.25} fill={RED} rot={-3}>1</Note>
-    <g opacity={after(t, 3.9, 0.4)}>
-      <line x1={x4} y1={r.y - 50} x2={x4} y2={r.y - 50 - 210 * smooth((t - 3.9) / 0.5)} stroke={INK} strokeWidth={5}/>
-      <path d={`M${x4} ${r.y - 260} L${x4 + 100 * smooth((t - 4.3) / 0.4)} ${r.y - 232} L${x4} ${r.y - 204} Z`} fill={RED}/>
-    </g>
-    {t > 4.4 && <path d={`M${x4} ${r.y - 58} A58 58 0 0 1 ${x4} ${r.y + 58}`} fill="none" stroke={RED} strokeWidth={5} strokeDasharray="12 9" pathLength={100} opacity={after(t, 4.4)}/>}
-    <Note x={x4 + 74} y={r.y - 92} size={54} at={4.6}>next</Note>
-    <Ink x={x4 - 64} y={r.y - 300} size={96} at={3.4} font={SERIF} fill={RED} anchor="end" w={300}>048</Ink>
+    {/* 7-01: the camera drops below the road; A's print and the pen's 1, 2, 3 on the bare table there */}
+    <Print who="A" x={S6X + 96} y={680} w={745} h={730} at={0.9} rot={-0.8} until={3.0}/>
+    <g opacity={1 - after(t, 3.0, 0.4)}>{[1, 2, 3].map((n, i) => <Note key={n} x={S6X + 1060 + i * 280} y={1060} size={170} at={1.9 + i * 0.35} dur={0.3} fill={RED} rot={-3}>{n}</Note>)}</g>
+
+    {/* 7-02 · back up on the road: 1 where B's print was, 048's empty half ringed in red dashes, "next", and a public stamp beside the tag */}
+    <Note x={S6X + 130} y={300} size={150} at={3.5} dur={0.25} fill={RED} rot={-3}>1</Note>
+    {t > 4.0 && <path d={`M${x4} ${r.y - 66} A66 66 0 0 1 ${x4} ${r.y + 66}`} fill="none" stroke={RED} strokeWidth={5} strokeDasharray="12 9" opacity={after(t, 4.0)}/>}
+    <Note x={x4 + 82} y={446} size={54} at={4.3}>next</Note>
     {/* "It's public now": a stamp by 048's tag */}
-    {t > 5.4 && <g transform={`translate(${x4 - 230} ${r.y - 400}) rotate(-6) scale(${1 + 0.06 * (1 - out((t - 5.4) / 0.3))})`} opacity={clamp((t - 5.4) / 0.1)}>
+    {t > 5.4 && <g transform={`translate(${x4 + 192} ${330}) rotate(-6) scale(${1 + 0.06 * (1 - out((t - 5.4) / 0.3))})`} opacity={clamp((t - 5.4) / 0.1)}>
       <rect x={-92} y={-32} width={184} height={64} fill="none" stroke={RED} strokeWidth={4}/>
       <text x={0} y={13} textAnchor="middle" fontFamily={SANS} fontSize={36} fontWeight={700} fill={RED}>public</text>
     </g>}
-    <Source x={R7.x - 120} y={1062} at={3.4} until={7.0}>Illustration · Ren 2023 (Results, Conclusions) · GEN 2023</Source>
+    <Source x={S6X + 96} y={1062} at={3.4} until={7.0}>Illustration · Ren 2023 (Results, Conclusions) · GEN 2023</Source>
 
     {/* the dishes as the 3D insert leaves them: two rows of four, seen from above; then a mouse drawn in ink, and the two checks */}
     {DISH_ROWS.map(([name, y, tint], j) => <g key={j} opacity={after(t, S7_INS.dish[1] - 0.3, 0.2)}>
@@ -311,7 +304,7 @@ const S7World = () => {
 
 const S7 = ({review = true, fps = 30, dish = "fusion_s78/s702.mp4", bin = "fusion_s78/s703.mp4", watch = "fusion_s78/s704.mp4"}) => {
   const t = useCurrentFrame() / fps, [cx, cy, z] = cam(S7_CAM, t);
-  return <Clock.Provider value={t}><AbsoluteFill style={{background: BONE}}>
+  return <Clock.Provider value={t}><AbsoluteFill style={{background: TABLE6}}>
     <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute"}}>
       <Table/>
       <g transform={`translate(${W / 2} ${H / 2}) scale(${z}) translate(${-cx} ${-cy})`}><S7World/></g>
@@ -343,7 +336,7 @@ const S8_LINES = [[0, "So, back to where we started.", "C · on camera"], [2.0, 
   [23.0, "And our second?", "VO (C)"], [24.4, "These methods helped the team assess candidates fast.", "VO (C)"], [27.8, "Screening by the millions became thirteen molecules made.", "VO (C)"], [31.8, "And on a road measured in years, the first hit came in 30 days,", "VO (C)"], [36.4, "and round two made the key turn.", "VO (C)"],
   [40.0, "This works in cells, not yet in people. The computer narrows the search. Experiments still decide.", "C · on camera"], [47.0, "So next time you see a headline like 'AI discovers a cancer drug'...", "B · on camera"], [52.0, "...ask where it really is on the road: computer, protein, cells, animals, or patients?", "D · on camera"],
   [59.0, "AI didn't replace the scientists. It gave them trial and error at light speed. Thanks for watching.", "A · on camera"]];
-const R8 = {x: 330, y: 760, gap: 270, r: 40};
+const R8 = {x: 330, y: 760, gap: 270, r: 52};          // r: the bulb's radius at this scale
 const S8_CAM = [[0, 1100, 640, 0.62], [0.4, 1100, 640, 0.62], [2.0, 960, 540, 1], [22.6, 960, 540, 1], [23.6, 960, 860, 1], [39.4, 960, 860, 1], [40.0, 2880 + 960, 540, 1],
   [46.6, 2880 + 960, 540, 1], [47.2, 4800 + 960, 540, 1], [51.6, 4800 + 960, 540, 1], [52.2, 6720 + 960, 540, 1], [58.6, 6720 + 960, 540, 1], [59.2, 8640 + 960, 540, 1],
   [64.4, 8640 + 960, 540, 1], [65.8, 8640 + 1585, 570, 5.0], [66.0, 8640 + 1585, 570, 5.0]];
@@ -369,8 +362,8 @@ const S8World = () => {
       </g>)}
       <Note x={1310} y={560} size={48} at={8.0} rot={-2}>at four points</Note>
     </g>
-    <Road {...r} fill={3.5} id="r8"/>
-    <Ink x={r.x + 3 * r.gap} y={r.y + 150} size={56} at={-1} font={SERIF} fill={RED} anchor="middle" w={160}>048</Ink>
+    <Road x={r.x} y={r.y} gap={r.gap}/>
+    <Ink x={r.x + 3 * r.gap} y={r.y + 168} size={56} at={-1} font={SERIF} fill={RED} anchor="middle" w={160}>048</Ink>
     {/* 8-01: C's print on the right, clear of the card and the road; it goes when C's voice-over starts */}
     <Print who="C" x={1400} y={110} w={420} h={504} at={0.0} rot={1.2} until={1.9}/>
 
@@ -387,9 +380,9 @@ const S8World = () => {
     {/* 10-17 years over the whole road, 30 days under its first stretch */}
     <Stroke at={32.2} dur={0.6} fill={INK} w={3} d={`M${r.x - 30} ${r.y - 90} L${r.x - 30} ${r.y - 110} L${r.x + 5 * r.gap + 30} ${r.y - 110} L${r.x + 5 * r.gap + 30} ${r.y - 90}`}/>
     <Ink x={r.x + 2.5 * r.gap} y={r.y - 130} size={50} at={32.6} font={SERIF} anchor="middle" w={400}>10–17 years</Ink>
-    <Stroke at={33.6} dur={0.5} w={6} d={`M${r.x} ${r.y + 110} L${r.x} ${r.y + 128} L${r.x + r.gap} ${r.y + 128} L${r.x + r.gap} ${r.y + 110}`}/>
-    <Note x={r.x - 10} y={r.y + 186} size={50} at={34.0}>first hit in 30 days</Note>
-    <Note x={r.x + 3 * r.gap + 90} y={r.y + 186} size={44} at={36.6} rot={-1.5}>round two → the key turns</Note>
+    <Stroke at={33.6} dur={0.5} w={6} d={`M${r.x} ${r.y + 118} L${r.x} ${r.y + 136} L${r.x + r.gap} ${r.y + 136} L${r.x + r.gap} ${r.y + 118}`}/>
+    <Note x={r.x - 10} y={r.y + 196} size={50} at={34.0}>first hit in 30 days</Note>
+    <Note x={r.x + 3 * r.gap + 90} y={r.y + 196} size={44} at={36.6} rot={-1.5}>round two → the key turns</Note>
     <Source x={180} y={1378} at={27.8} until={39.6}>Illustration · Ren 2023 · Wang 2023 p.1 · dots drawn</Source>
 
     {/* 8-04 · C alone; nothing moves */}
@@ -407,9 +400,9 @@ const S8World = () => {
     {/* 8-06 · D, and the road: each word lights its place; 048's red stops at cells */}
     <Print who="D" x={6720 + 80} y={60} w={520} h={624} at={52.0} rot={-1}/>
     {(() => {
-      const rr = {x: 6720 + 760, y: 880, gap: 200, r: 34};
+      const rr = {x: 6720 + 760, y: 880, gap: 200, r: 39};
       return <g>
-        <Road {...rr} fill={3.5} labels={false} id="r86"/>
+        <Road x={rr.x} y={rr.y} gap={rr.gap} labels={false}/>
         <Ink x={rr.x + 3 * rr.gap + 50} y={rr.y + 92} size={50} at={-1} font={SERIF} fill={RED} anchor="start" w={140}>048</Ink>
         {ROAD_WORDS.map(([word, k, at], i) => {
           const x = rr.x + k * rr.gap, top = rr.y - 60 - (i % 2 ? 150 : 70), flash = Math.max(0, 1 - Math.abs(t - at - 0.15) / 0.4);
@@ -443,7 +436,7 @@ const S8 = ({review = true, fps = 30}) => {
   const m0 = 28.7, mv = t > m0 - 0.1 && t < 39.6;
   const sx = (x, y) => [(x - cx) * z + W / 2, (y - cy) * z + H / 2];
   const [vx, vy] = sx(826, 1010);
-  return <Clock.Provider value={t}><AbsoluteFill style={{background: BONE}}>
+  return <Clock.Provider value={t}><AbsoluteFill style={{background: TABLE6}}>
     <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute"}}>
       <Table/>
       <g transform={`translate(${W / 2} ${H / 2}) scale(${z}) translate(${-cx} ${-cy})`}><S8World/></g>
