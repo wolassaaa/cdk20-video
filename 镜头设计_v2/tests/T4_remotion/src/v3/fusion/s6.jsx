@@ -1109,10 +1109,19 @@ const Board6 = ({t}) => {
     {/* row 4 */}
     <RowName r={3} at={S6.row4} lines={["improving", "the key"]}/>
     <On x={b + 0.22} y={R[3]}><Note x={0} y={-12} size={34} at={S6.round} fill={DARK}>every change =</Note><Note x={0} y={30} size={34} at={S6.round + 0.6} fill={DARK}>another lab round</Note></On>
-    <On x={n} y={R[3]} fade={after(t, S6.slot, 0.4)}>
-      <rect x={-cw / 2 + 22} y={-78} width={cw - 44} height={156} rx={10} fill="none" stroke={RED} strokeWidth={3} strokeDasharray="14 10"/>
-      <text x={0} y={-12} fontFamily={SANS} fontSize={22} fontWeight={600} fill={RED} textAnchor="middle">slot · teammate fills this cell</text>
-      <text x={0} y={22} fontFamily={SANS} fontSize={20} fontWeight={500} fill={RED} textAnchor="middle">from Ren 2023's figure (16 designs, ~15× tighter)</text>
+    {/* now: the predicted pose of the first key, sixteen designs from it, the grip about fifteen times tighter */}
+    <On x={n} y={R[3]}>
+      <g opacity={after(t, S6.slot, 0.4)}>
+        <circle cx={-186} cy={-14} r={42} fill="none" stroke={INK} strokeWidth={2.5} strokeDasharray="6 5"/>
+        <KeyMark x={-186} y={-14}/>
+        <text x={-186} y={64} fontFamily={SANS} fontSize={20} fontWeight={500} fill={SOFT} textAnchor="middle">predicted</text>
+      </g>
+      <Note x={-134} y={-4} size={40} at={S6.slot + 2.0} fill={INK} rot={0}>→</Note>
+      {Array.from({length: 16}, (_, i) => <circle key={i} cx={-90 + 20 * (i % 4)} cy={-44 + 20 * Math.floor(i / 4)} r={6.5 * after(t, S6.slot + 2.5 + 0.07 * i, 0.25)} fill={INK}/>)}
+      <text x={-60} y={64} fontFamily={SANS} fontSize={20} fontWeight={500} fill={SOFT} textAnchor="middle" opacity={after(t, S6.slot + 3.0, 0.4)}>16 designs</text>
+      <Note x={-12} y={-4} size={40} at={S6.slot + 4.3} fill={INK} rot={0}>→</Note>
+      <Keyed x={48} y={12} size={84} at={S6.slot + 4.7} dur={0.6} w={240} parts={["", "~15×", ""]}/>
+      <text x={120} y={64} fontFamily={SANS} fontSize={20} fontWeight={500} fill={SOFT} textAnchor="middle" opacity={after(t, S6.slot + 5.3, 0.4)}>tighter grip</text>
     </On>
 
     {/* 6-08 */}
@@ -1125,9 +1134,31 @@ const Board6 = ({t}) => {
   </g>;
 };
 
-const Plug = () => <g stroke={INK} strokeWidth={4} fill="none" strokeLinecap="round" strokeLinejoin="round">
-  <rect x={0} y={-26} width={50} height={52} rx={8}/><line x1={50} y1={-12} x2={74} y2={-12}/><line x1={50} y1={12} x2={74} y2={12}/>
+/** A small key in ink: bow, shaft, two teeth. */
+const KeyMark = ({x, y}) => <g transform={`translate(${x} ${y})`} stroke={INK} strokeWidth={4} fill="none" strokeLinecap="round" strokeLinejoin="round">
+  <circle cx={-15} cy={0} r={10}/><path d="M-5 0 H25 M13 0 V9 M22 0 V9"/>
 </g>;
+
+/** The plug at the end of the screen's wire and the socket it goes to: a ring with a red bolt, so it reads as mains power. */
+const Plug = ({at}) => {
+  const t = useT(), ring = smooth((t - at - 0.3) / 0.5), L = 2 * Math.PI * 38;
+  return <g strokeLinecap="round" strokeLinejoin="round">
+    <g stroke={INK} strokeWidth={4} fill="none" opacity={after(t, at, 0.3)}><rect x={0} y={-26} width={50} height={52} rx={8}/><line x1={50} y1={-12} x2={74} y2={-12}/><line x1={50} y1={12} x2={74} y2={12}/></g>
+    {ring > 0 && <circle cx={134} cy={0} r={38} fill="none" stroke={INK} strokeWidth={4} strokeDasharray={`${L * ring} ${L}`} transform="rotate(180 134 0)"/>}
+    <path d="M141 -25 L119 5 H132 L127 25 L149 -5 H136 Z" fill={RED} opacity={after(t, at + 0.7, 0.25)}/>
+  </g>;
+};
+
+/** Current on the wire: a short red stroke runs from the plug to the screen, three times. */
+const Current = ({w, at, n = 3, every = 0.9}) => {
+  const t = useT();
+  return <g>{Array.from({length: n}, (_, i) => {
+    const q = (t - at - every * i) / every;
+    if (q <= 0 || q >= 1) return null;
+    const x = w * (1 - smooth(q));
+    return <line key={i} x1={x - 23} y1={0} x2={x + 23} y2={0} stroke={RED} strokeWidth={5} strokeLinecap="round" opacity={Math.sin(Math.PI * q)}/>;
+  })}</g>;
+};
 
 const Corner6 = ({t}) => {
   const E = G6.EX, B6 = S6.boxes, words = ["health", "cost", "animals", "waste"];
@@ -1135,8 +1166,9 @@ const Corner6 = ({t}) => {
     {words.map((w, i) => <On key={i} x={E - 4.2 + 2.0 * i} y={-1.3}><DrawBox w={340} h={150} at={B6[i]} dashed><text x={0} y={16} fontFamily={SERIF} fontSize={52} fill={INK} textAnchor="middle">{w}</text></DrawBox></On>)}
     <On x={E - 5.1} y={-2.25}><Note x={0} y={0} size={40} at={S6.maybe} fill={DARK}>dashed = possible, not yet measured</Note></On>
     <On x={E - 2.55} y={1.0}><Pen from={[0, 0]} to={[560, 0]} at={S6.plug} fill={INK} dur={0.5}/></On>
-    <On x={E + 0.25} y={1.0} fade={after(t, S6.plug + 0.4, 0.3)}><Plug/></On>
-    <On x={E + 0.75} y={1.0}><Note x={0} y={14} size={42} at={S6.power} fill={DARK}>computing costs electricity too</Note></On>
+    <On x={E - 2.55} y={1.0}><Current w={560} at={S6.plug + 1.3}/></On>
+    <On x={E + 0.25} y={1.0}><Plug at={S6.plug + 0.4}/></On>
+    <On x={E + 1.22} y={1.0}><Note x={0} y={14} size={42} at={S6.power + 0.5} fill={DARK}>computing costs electricity too</Note></On>
     <On x={E + 3.8} y={-1.3}><DrawBox w={420} h={170} at={S6.prize}><text x={0} y={-8} fontFamily={SERIF} fontSize={46} fill={INK} textAnchor="middle">new treatments</text><text x={0} y={40} fontFamily={SERIF} fontSize={46} fill={INK} textAnchor="middle">for patients</text></DrawBox></On>
   </g>;
 };
@@ -1235,6 +1267,6 @@ const S6Scene = ({file = "fusion_s1/s6_take.mp4", review = true, from = 0}) => {
 };
 
 const Root = () => <>
-  <Composition id="S6" component={S6Scene} durationInFrames={4530} fps={30} width={W} height={H} defaultProps={{file: "fusion_s1/s6_take.mp4", review: true}}/>
+  <Composition id="S6" component={S6Scene} durationInFrames={4530} fps={30} width={W} height={H} defaultProps={{file: "fusion_s1/s6_take.mp4", review: false}}/>
 </>;
 registerRoot(Root);

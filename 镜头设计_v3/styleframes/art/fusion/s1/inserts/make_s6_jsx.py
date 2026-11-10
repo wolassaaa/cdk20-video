@@ -11,7 +11,7 @@ s = s[:last_import + 1] + 'import TRK6 from "./s6_track.json";\n' + s[last_impor
 s += open(A + "s6_body.jsx", encoding="utf8").read()
 s += '''
 const Root = () => <>
-  <Composition id="S6" component={S6Scene} durationInFrames={4530} fps={30} width={W} height={H} defaultProps={{file: "fusion_s1/s6_take.mp4", review: true}}/>
+  <Composition id="S6" component={S6Scene} durationInFrames={4530} fps={30} width={W} height={H} defaultProps={{file: "fusion_s1/s6_take.mp4", review: false}}/>
 </>;
 registerRoot(Root);
 '''
