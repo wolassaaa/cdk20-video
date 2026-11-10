@@ -231,7 +231,35 @@ def land(x):
     """第一次移动的缓动：前段快一些、后段慢慢落定（x 的 LAND 次方再 smooth）。落进口袋那一段 CDK20 一下铺满画面，放慢它，整段的快慢更匀。"""
     x = min(1.0, max(0.0, x))
     return smooth(x ** LAND)
-S503 = dict(m1=(1.0, float(os.environ.get("S5C_M1", "3.6"))), lift=(1.0, 0.07, 1.1), m2=(6.6, 2.6), kd=1.4, six=3.0, tag=4.8, out=6.4, cal=9.4, cal_end=12.6)
+S503 = dict(m1=(1.0, float(os.environ.get("S5C_M1", "4.0"))), lift=(1.0, 0.07, 1.1), m2=(7.0, 2.6), kd=1.4, six=3.0, tag=5.2, out=6.8, cal=9.7, cal_end=12.6,
+            road=(9.7, 0.9), fill=(10.8, 1.0), rise=(12.0, 0.9))          # 路线：落下、红到 Hit、升走（第 2 版，协调方要补 ROAD MAP）
+
+
+def small_road(cx, cy, n=6, gap=0.14, rad=0.045):
+    """S6 第 3 行那种小路线，缩到一格的一半：一根玻璃管串 n 个玻璃泡（黑圈），红液从第一站往后流（照 bl_s6.py 的 row 3）。
+    所有东西挂在一个空物体上，只上下动。返回 dict(e, xs, wet, fluid=[第一、第二站的红液])。"""
+    glass, red, ink = B.clear_glass(), B.fluid(P.RED, (0.9, 0.05, 0.03)), gk.surface((0.012, 0.012, 0.014), 0.3)
+    sz = W.SURFACE_Z / K
+    xs = [cx + (i - (n - 1) / 2) * gap for i in range(n)]
+    e = empty("s503_road")
+    g = pipe([(xs[0] * K, -cy * K), (xs[-1] * K, -cy * K)], 1.1, glass, "s503_road_glass")
+    g.visible_shadow, g.visible_diffuse = False, False
+    kids = [g]
+    for x in xs:
+        before = set(bpy.data.objects)
+        B.bulb(x, cy, sz, rad, ink, None, width=0.004)
+        kids += list(set(bpy.data.objects) - before)
+    wet = pipe([(xs[0] * K, -cy * K), (xs[-1] * K, -cy * K)], 0.8, red, "s503_road_wet")
+    wet.visible_diffuse = False
+    wet.data.bevel_factor_mapping_end = "SPLINE"
+    fluid = [Bulb(x, red, cy, sz, rad * 0.92) for x in xs[:2]]
+    kids += [wet] + [b.o for b in fluid]
+    from mathutils import Matrix
+    for o in kids:
+        o.parent = e
+        o.matrix_parent_inverse = Matrix.Translation((0, 0, 0))
+    e.location = (0, 0, 0)
+    return dict(e=e, xs=xs, wet=wet, fluid=fluid, kids=kids, rad=rad)
 
 
 def cards_501(sc):
@@ -264,6 +292,8 @@ def shot_s503(sc, sky):
     upd504 = table_at_504(sc, sky)
     end_v = upd504.view(0.0)
     cards, home, q_row, card_v = cards_501(sc)
+    c30 = Vector((*cell_at(30), 0.0))
+    road = small_road(c30.x, c30.y + 0.24)          # 格子 30 后半格；前半格是 7 把钥匙那一行
     f = to_core()
     P = json.load(open(POSES))
     pose = P["poses"]["001"]
@@ -309,6 +339,24 @@ def shot_s503(sc, sky):
     def alpha(t):
         return 1.0 - smooth((t - b0 - 0.2) / 1.4)
 
+    def road_z(t):
+        """路线：从画面上方竖直落下、缓停（不弹）；红液流到第二站；再竖直升出画外（5-04 第 0 帧这格是空的）。None = 不在台面上。"""
+        r0, rd = S503["road"]
+        u0, ud = S503["rise"]
+        if t < r0 or t >= u0 + ud:
+            return None
+        if t < r0 + rd:
+            return 1.2 * (1 - smooth((t - r0) / rd))
+        if t < u0:
+            return 0.0
+        x = (t - u0) / ud
+        return 1.6 * 2 * smooth(x * 0.5)
+
+    def road_front(t):
+        f0, fd = S503["fill"]
+        xs, r = road["xs"], road["rad"]
+        return xs[0] - r - 0.01 + (xs[1] + r - (xs[0] - r - 0.01)) * smooth((t - f0) / fd)
+
     mats = list({o.material_slots[0].material.name: o.material_slots[0].material for _, _, o in parts}.values())
     alpha_in = [next(n for n in m.node_tree.nodes if n.type == "BSDF_PRINCIPLED").inputs["Alpha"] for m in mats]
     shell = see_core()
@@ -338,19 +386,34 @@ def shot_s503(sc, sky):
         shell(shell_a(t))
         for _, _, o in parts:
             o.hide_render = a <= 0.001
+        z = road_z(t)
+        road["e"].location = (0, 0, -50 if z is None else z)
+        fx = road_front(t)
+        xs = road["xs"]
+        road["wet"].data.bevel_factor_end = max(0.0, (fx - xs[0]) / (xs[-1] - xs[0]))
+        for o in road["kids"]:
+            o.hide_render = z is None
+        road["wet"].hide_render = z is None or fx <= xs[0]
+        for b in road["fluid"]:
+            b.update(fx)
+            b.o.hide_render = b.o.hide_render or z is None
         sky(0.2)
 
     def sig(t_abs):
         t = t_abs - T5
+        if t >= b0 + bd:
+            z = road_z(t)
+            return ("end", None if z is None else round(z, 5), round(road_front(t), 5))
         if t < a0:
             return "card"
         if a0 + ad + 0.4 <= t < b0:          # 外壳变透明比镜头多走 0.4 秒
             return "pocket"
-        if t >= b0 + bd:
-            return "end"
         return ("move", round(t, 4))
 
     update.view, update.sig = cam, sig
+    if os.environ.get("S5C_PROBE"):
+        v = end_v
+        print("S503 road px", [tuple(round(x) for x in project(v, (x_, c30.y + 0.24, 0.0))) for x_ in road["xs"]])
     print("S503 card_v %s pocket_v %s end_v %s" % (card_v, pocket_v, end_v))
     if os.environ.get("S5C_CLASH"):
         clash_cards(home, q_row, card_z, cam)
