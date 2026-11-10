@@ -379,7 +379,8 @@ def shot_s510(sc, sky):
     """5-10（12:18-12:42，C 画外音）。先接 5-07 的最后一帧（W4 还没做；W4 做的时候让它停在这一帧，或者这一段改接 W4）。
     0-1 s 不动；1.0-3.4 s 镜头往前落到格子 29：两只玻璃培养皿，后排 Huh7、前排 HEK293，每只 40 个细胞；
     各带一条墨线剂量尺和一个钢滑块（5-04 的做法，尺子 0-1,800 nM 线性，不标数），尺上一道长一点的墨线是各自的 IC50。
-    9.6-16.0 s 两个滑块一起走：Huh7 皿里的细胞在滑块走到 208.7 那道线以前就缩没一半（很快），HEK293 一路慢慢缩，到 1,706.7 那道才缩没一半。之后不动。"""
+    9.6-16.0 s 两个滑块一起走：Huh7 皿里的细胞在滑块走到 208.7 那道线以前就沉进胶里一半（很快），HEK293 一路慢慢沉，到 1,706.7 那道才沉下一半。
+    细胞不变大小（06 第 5 节不许原地缩没），是 0.4 s 竖直沉进胶面以下，胶不透明，沉到底不碰皿底玻璃。之后不动。"""
     import bmesh
     import random
     upd = shot_s507(sc, sky)
@@ -395,8 +396,8 @@ def shot_s510(sc, sky):
     pink = P.gloss((0.86, 0.50, 0.50), 0.35, 0.6)          # 和 S7 7-02 培养皿同一组颜色
     pale = P.gloss((0.93, 0.87, 0.72), 0.35, 0.6)
     c29 = Vector((*cell_at(29), 0.0))
-    R_D, H_D, WL, GEL = 0.085, 0.016, 0.0018, 0.005
-    RC, NC = 0.0085, 40
+    R_D, H_D, WL, GEL = 0.085, 0.016, 0.0018, 0.008
+    RC, NC = 0.0075, 30                                    # 40 个 0.0085 的在皿里随机摆不下（死循环），改小改少
     AXH, MK = 0.0016, 0.028
     L0, L1 = c29.x - 0.12, c29.x + 0.34
     rows = [dict(name="huh7", y=c29.y + 0.16, med=pale, cell=pink, ic=IC50_HUH7), dict(name="hek", y=c29.y - 0.15, med=pale, cell=pale, ic=IC50_HEK)]
@@ -424,7 +425,10 @@ def shot_s510(sc, sky):
         lathe([(0, 0), (R_D, 0), (R_D, H_D), (R_D - WL, H_D), (R_D - WL, WL), (0, WL)], glass, "s510_base_" + r["name"], e, 64)
         lathe([(0, WL), (R_D - WL - 0.0004, WL), (R_D - WL - 0.0004, WL + GEL), (0, WL + GEL + 0.0004)], r["med"], "s510_gel_" + r["name"], e, 64)
         pts = []          # 细胞：胶面上的小扁圆，彼此不叠
+        tries = 0
         while len(pts) < NC:
+            tries += 1
+            assert tries < 200000, "s510 cells do not fit"
             a_, rr = rnd.uniform(0, 2 * math.pi), (R_D - WL - RC - 0.004) * math.sqrt(rnd.random())
             q = (rr * math.cos(a_), rr * math.sin(a_))
             if all(math.hypot(q[0] - p_[0], q[1] - p_[1]) > 2 * RC + 0.003 for p_ in pts):
@@ -467,13 +471,15 @@ def shot_s510(sc, sky):
     def dose_x(t):
         return L0 + (L1 - L0) * clamp01((t - T_D0) / (T_D1 - T_D0))
 
-    def cell_size(r, k, t):
-        """死的那一半，在滑块从 0 走到自己 IC50 的这段时间里一个个缩没（顺序打乱）；活的一直在。"""
+    SINK, T_SK = RC * 0.7 + 0.0006, 0.4                  # 细胞高 0.7 RC，沉到顶面低于胶面 0.6 mm；底还在皿底玻璃上方
+
+    def cell_sink(r, k, t):
+        """死的那一半，在滑块从 0 走到自己 IC50 的这段时间里一个个沉进胶里（顺序打乱）；活的一直在。返回 0-1。"""
         if k not in r["die"]:
-            return 1.0
+            return 0.0
         j = r["die"].index(k)
         t_end = T_D0 + (r["t_ic"] - T_D0) * (j + 1) / len(r["die"])
-        return 1.0 - smooth((t - (t_end - 0.35)) / 0.35)
+        return smooth((t - (t_end - T_SK)) / T_SK)
 
     c = sc.camera
     c.animation_data_clear()
@@ -495,14 +501,14 @@ def shot_s510(sc, sky):
             mk.location = (dose_x(t), r["mk_y"], 0.0)
             for k, c_ in enumerate(r["cells"]):
                 c_.animation_data_clear()
-                s_ = cell_size(r, k, t)
+                q = r["pts"][k]
+                s_ = cell_sink(r, k, t)
                 if moving and k in r["die"]:
                     for df in (-1, 0, 1):
-                        sz = max(cell_size(r, k, t + df / FPS), 1e-4)
-                        c_.scale = (sz, sz, sz)
-                        c_.keyframe_insert("scale", frame=f + df)
-                c_.scale = (max(s_, 1e-4),) * 3
-                c_.hide_render = s_ <= 1e-3
+                        c_.location = (q[0], q[1], WL + GEL - SINK * cell_sink(r, k, t + df / FPS))
+                        c_.keyframe_insert("location", frame=f + df)
+                c_.location = (q[0], q[1], WL + GEL - SINK * s_)
+                c_.hide_render = s_ >= 1.0
         sky(0.2)
 
     update.view = cam
@@ -525,6 +531,8 @@ def shot_s510(sc, sky):
             for i, p_ in enumerate(r["pts"]):
                 if math.hypot(*p_) + RC > R_D - WL:
                     bad.setdefault("cell / dish wall", []).append(i)
+        if WL + GEL - SINK < WL + 0.0005:
+            bad["cell / dish floor"] = [round(GEL - SINK, 4)]
         if rows[0]["y"] - R_D < rows[1]["mk_y"] + MK / 2 + 0.01 and False:
             bad["row / row"] = [1]
         gap_rows = (rows[0]["y"] - 0.040) - (rows[1]["mk_y"] + MK / 2)
