@@ -20,6 +20,10 @@ W3K_CHECK=1：不渲染，逐帧摆好以后量钥匙表面离锁最近多少、
 金属从正面沿着杆漫出来裹住整把钥匙（这些金属和钥匙是同一团金属球，真的并成一体），再整团收回锁里，正面拉平，原来锁口的位置透一下蓝光。
 排斥的鼓包改成只跟位置有关的一整个软包，锁口加了圆角，钥匙化形先收成杆再长出来。三次靠近改在第 4、6、8 拍。
 
+全长第 1 版（11-11 凌晨）：铺到 W3 全长 8 小节 = 32 拍 = 952 帧。第 1 小节锁浮起、锁口打开；第 2-6 小节九把钥匙一把一把靠近、被推回去，越来越密
+（最近的那一下在第 6、9、12、14、16、18、19.5、21、22.5 拍）；第 7 小节两边定下来，钥匙进去，锁口一路贴着它收；第 8 小节金属薄薄地漫过钥匙、拉平，
+原来锁口的位置透半拍淡蓝光，停住。镜头两次缓推：第 1 小节和第 7 小节。
+
 运行（和 bl_inserts.py 同一目录）：
   BL_EXTRA=../../w3/bl_w3k.py BL_JPEG=1 blender.exe -b -t 2 -P bl_inserts.py -- w3k C:/render_tmp/w3k/f 0 475 32 1 2
 """
@@ -27,7 +31,7 @@ META = {"w3k": (574.0, 952, 0.2, 0.9)}          # 起点和帧数照 W3（shot_w
 
 exec(compile(open(HERE + "../../w3/bl_w3x.py", encoding="utf-8").read(), HERE + "../../w3/bl_w3x.py", "exec"))          # 借 shot_w3l：液体金属钥匙、暗铬、只给反射看的灯
 
-K_FRAMES = 476
+K_FRAMES = 952
 K_KSC = 0.1                  # 钥匙自己的 1 个单位 = 台面的 0.1：钥匙长 3 个单位上下，约 0.3，是锁正面宽度的六七成
 K_N = int(os.environ.get("W3K_N", "600"))          # 金属球的个数
 
@@ -146,13 +150,16 @@ def shot_w3k(sc, sky):
     nt2.links.new(mu2.outputs[0], cb2.inputs["Emission Strength"])
 
     # ---------------------------------------------------------------- 时间表（拍）
-    HITS = [4.0, 6.0, 8.0]                                 # 三次靠近，最近的那一下落在拍子上
-    T_FIT = 9.0                                            # 从这一拍起两边一起慢下来
+    HITS = [6.0, 9.0, 12.0, 14.0, 16.0, 18.0, 19.5, 21.0, 22.5]          # 九次靠近，越来越密；靠到最近、鼓包最大的那一下落在这些拍上
+    GAPS = [HITS[i + 1] - HITS[i] for i in range(len(HITS) - 1)]
+    AP = [1.0] + [min(1.0, 0.5 * g_) for g_ in GAPS]          # 每次靠近用几拍
+    PB = [min(1.0, 0.5 * g_) for g_ in GAPS] + [1.0]          # 每次被推回去用几拍
+    T_FIT = 24.0                                            # 从这一拍起两边一起慢下来
     T_BEAN = T_FIT + 0.8                                   # 乱变收到一个豆子形（口袋轮廓只留最低几圈波）
-    T_POCKET = 11.0                                        # 豆子长出细节，落回口袋轮廓
-    INS0, INS1 = 11.0, 12.4                                # 钥匙直着进去
-    T_SWAP = 12.45                                         # 钥匙的齿板和锁芯正面齐平了：从这里起是融合
-    MELT = [(1.4, 2.6), (4.4, 5.4), (6.4, 7.4), (T_FIT, 10.6)]          # 第几拍到第几拍，从一种流成下一种
+    T_POCKET = 26.0                                        # 豆子长出细节，落回口袋轮廓
+    INS0, INS1 = 26.0, 27.6                                # 钥匙直着进去
+    T_SWAP = 27.65                                         # 钥匙的齿板和锁芯正面齐平了：从这里起是融合
+    MELT = [(1.4, 2.6)] + [(HITS[i] + 0.5 * g_ - min(0.4 * g_, 0.7), HITS[i] + 0.5 * g_ + min(0.3 * g_, 0.45)) for i, g_ in enumerate(GAPS)] + [(T_FIT, T_FIT + 1.6)]          # 第几拍到第几拍，从一种流成下一种
 
     # ---------------------------------------------------------------- 锁口的轮廓
     OLP = np.array(json.load(open(HERE + "frames/pocket_outline.json"))["points"], float)
@@ -236,7 +243,7 @@ def shot_w3k(sc, sky):
 
     def tighten(tb):
         """钥匙进去时锁口收紧多少（0-1）：钥匙尖离正面 10 厘米时开始，2 厘米时已经贴住。"""
-        return smooth((0.10 - dist(tb)) / 0.08) if tb >= INS0 else 0.0
+        return smooth((D1 - dist(tb)) / (D1 - 0.07)) if tb >= INS0 else 0.0          # 钥匙一动身锁口就跟着收，尖离正面 7 厘米时已经贴住
 
     def hole(tb, tt):
         """这一拍的锁口：(轮廓, 种类)。"polar" 从中心往外的乱变；"flat" 口袋轮廓那一段；没开口时轮廓是 None。"""
@@ -345,7 +352,7 @@ def shot_w3k(sc, sky):
     S2 = np.array([0.004, 0.02, 0.04, 0.065, 0.095, 0.13, 0.17, 0.215, 0.265, 0.32, 0.38, 0.45, 0.53, 0.62, 0.72, 0.82, 0.91, 1.0])
     cpl, cme = ring_mesh("w3k_cplate", len(S2) + 1, chrome2)
     CXY = [C0 + (RIMC - C0) * s_ for s_ in S2]
-    FUSE_A = float(os.environ.get("W3K_FUSE", "0.022"))          # 融合时钥匙根上鼓多高（锁的单位）
+    FUSE_A = float(os.environ.get("W3K_FUSE", "0.005"))          # 融合时钥匙根上鼓多高（锁的单位）
     FUSE_S = 0.03
     fdome = lambda xy: np.exp(-((xy - C0) ** 2).sum(1) / FUSE_S ** 2) * dome(xy)
 
@@ -462,7 +469,7 @@ def shot_w3k(sc, sky):
         return p[np.lexsort((np.arctan2(p[:, 2], p[:, 1]), p[:, 1], np.round(p[:, 0] / (1.5 * hi))))], hi, len(bit)
 
     SH, RK = [], []
-    for name in os.environ.get("W3K_KEYS", "long,skeleton,pin,double").split(","):
+    for name in os.environ.get("W3K_KEYS", "long,skeleton,pin,double,wave,stub,dimple,fork,cross,tube").split(","):
         f_, reach = x_key3(g3, name)
         p, s = x_fill3(f_, reach, K_N, g3)
         r = np.full(K_N, CR * s)
@@ -531,10 +538,10 @@ def shot_w3k(sc, sky):
         float(np.linalg.norm(tp - POCKET, axis=1).max()) * GS))
     # 裹住钥匙的金属：围着杆和圆头的一圈球，从锁芯正面往外一截一截冒出来
     rest_ = SH[-1][SH[-1][:, 0] < T - 0.3]
-    CT = rest_[g3.integers(0, len(rest_), N_C)] + np.c_[g3.normal(0, 0.03, N_C), g3.normal(0, 0.06, N_C), g3.normal(0, 0.06, N_C)]
-    CRAD = 0.5          # 球大、叠得密，裹上去是光滑的一团
+    CT = rest_[np.arange(N_C) % len(rest_)] + g3.normal(0, 0.012, (N_C, 3))          # 就贴在钥匙自己的球上：薄薄一层，裹上去还看得出钥匙的轮廓
+    CRAD = 1.28 * float(RK[-1][0])
 
-    TW = [0.5, -0.6, 0.5, -0.4]
+    TW = [float(g3.choice([-1, 1]) * g3.uniform(0.3, 0.6)) for _ in MELT]
     ROD = 0.17          # 化形中间收成的那根圆杆的球半径
 
     def balls(tb, tt):
@@ -561,10 +568,10 @@ def shot_w3k(sc, sky):
     def dist(tb):
         for i, h in enumerate(HITS):
             back = D1 if i == len(HITS) - 1 else D0
-            if h - 1.0 <= tb < h:
-                return DMIN + (D0 - DMIN) * (1 - (tb - h + 1.0)) ** 2.4          # 越近越慢
-            if h <= tb < h + 1.0:
-                return DMIN + (back - DMIN) * smooth(tb - h) ** 0.8              # 被缓缓推回去
+            if h - AP[i] <= tb < h:
+                return DMIN + (D0 - DMIN) * (1 - (tb - h + AP[i]) / AP[i]) ** 2.4          # 越近越慢
+            if h <= tb < h + PB[i]:
+                return DMIN + (back - DMIN) * smooth((tb - h) / PB[i]) ** 0.8              # 被缓缓推回去
         if tb < HITS[0]:
             return D0
         if tb >= HITS[-1]:
@@ -573,12 +580,12 @@ def shot_w3k(sc, sky):
 
     def bulge(tb):
         """锁芯正面鼓起多少（0-1）：钥匙越近鼓得越高，钥匙退开后慢慢落回。"""
-        return max(smooth((tb - h + 0.9) / 0.9) ** 1.6 * (1 - smooth((tb - h - 0.05) / 1.0)) for h in HITS)
+        return max(smooth((tb - h + 0.9 * AP[i]) / (0.9 * AP[i])) ** 1.6 * (1 - smooth((tb - h - 0.05) / max(PB[i], 0.7))) for i, h in enumerate(HITS))
 
     def fuse(tb):
         """融合：钥匙根上的包鼓多高（0-1）、裹上来的金属漫到离正面多远（钥匙的单位）、整团往锁里收了多少（0-1）、蓝光多亮。"""
-        return (smooth((tb - T_SWAP) / 0.9) * (1 - smooth((tb - 14.0) / 1.2)), -0.3 + 3.9 * smooth((tb - 12.55) / 1.45), smooth((tb - 13.8) / 1.35),
-                float(os.environ.get("W3K_HINT", "0.6")) * smooth((tb - T_SWAP + 0.1) / 0.3) * (1 - smooth((tb - 12.8) / 1.0)))
+        return (smooth((tb - 28.0) / 1.0) * (1 - smooth((tb - 29.6) / 1.0)), -0.3 + 3.9 * smooth((tb - 28.0) / 1.6), smooth((tb - 29.4) / 1.2),
+                float(os.environ.get("W3K_HINT", "0.28")) * smooth((tb - 30.45) / 0.2) * (1 - smooth((tb - 30.75) / 0.45)))          # 拉平以后才透半拍淡蓝光
 
     def all_balls(tb, tt):
         pos, rad, k = balls(tb, tt)
@@ -590,8 +597,8 @@ def shot_w3k(sc, sky):
             cp = CT + np.c_[0.6 * (1 - a_), np.zeros(N_C), np.zeros(N_C)]          # 从靠锁的一侧流过来
             cr = np.maximum(CRAD * a_, 0.001)
             pos, rad = pos.copy(), rad.copy()
-            sink = lambda p_, r_: (np.c_[XFACE - np.maximum(XFACE - p_[:, 0], 0) * (1 - q) ** 1.3 + 0.7 * q, p_[:, 1] * (1 - 0.55 * q), p_[:, 2] * (1 - 0.55 * q)],
-                                   np.maximum(r_ * (1 - smooth((q - 0.5) / 0.5)), 0.001))
+            sink = lambda p_, r_: (np.c_[XFACE - np.maximum(XFACE - p_[:, 0], 0) * (1 - q) ** 1.5, p_[:, 1] * (1 + 0.4 * q), p_[:, 2] * (1 + 0.4 * q)],          # 整团贴着正面摊开、变薄
+                                   np.maximum(r_ * (1 - smooth((q - 0.4) / 0.6)), 0.001))
             inside = pos[:, 0] > XFACE - 0.25                      # 齿板：已经在锁里，被那张没有口的面板盖住，收小
             pos, rad = sink(pos, rad)
             rad[inside] = np.maximum(rad[inside] * (1 - smooth((tb - T_SWAP) / 0.5)), 0.001)
@@ -615,7 +622,8 @@ def shot_w3k(sc, sky):
     arr = np.empty(nu * nv * 4, np.float32)
     ca.data.foreach_get("color", arr)
     dphi = (np.degrees(PHI) - math.degrees(AZ)) % 360 - 180          # 0 = 镜头正对的方向
-    lum = arr.reshape(-1, 4)[:, 0].reshape(nu, nv) + float(os.environ.get("W3K_FILL", "0.3")) * soft(dphi, -75, 75, 25) * soft(np.degrees(ELV), 2, 50, 8)
+    lum = arr.reshape(-1, 4)[:, 0].reshape(nu, nv) + float(os.environ.get("W3K_FILL", "0.3")) * soft(dphi, -75, 75, 25) * soft(np.degrees(ELV), 2, 50, 8) \
+        + float(os.environ.get("W3K_FILL2", "3.5")) * (1 - soft(dphi, -100, 100, 20)) * soft(np.degrees(ELV), 16, 85, 10)          # 镜头这一侧的上方也补一片柔光：鼓包朝上的那一面原来照到暗场，是一块黑月牙
     ca.data.foreach_set("color", np.repeat(lum.reshape(-1, 1), 4, 1).ravel().astype(np.float32))
 
     def card(name, verts, axis, lo, hi, v0, v1):
@@ -651,8 +659,10 @@ def shot_w3k(sc, sky):
     close = dict(at=(LC.x - 0.21, LC.y - 0.15, LC.z - 0.01), az=AZ, el=EL, d=float(os.environ.get("W3K_D", "2.05")), mm=45.0)
 
     def view(tb):
-        x = smooth((tb - 0.5) / 3.5)
-        return dict(at=lerp(wide["at"], close["at"], x), az=AZ, el=EL, d=math.exp(math.log(wide["d"]) + (math.log(close["d"]) - math.log(wide["d"])) * x), mm=45.0)
+        x = smooth((tb - 0.5) / 3.5)          # 第一次缓推：第 1 小节，到小节线停
+        y = smooth((tb - 24.0) / 4.0)         # 第二次缓推：第 7 小节，再近一点看钥匙进去
+        at = lerp(lerp(wide["at"], close["at"], x), (LC.x - 0.14, LC.y - 0.12, LC.z - 0.005), y)
+        return dict(at=at, az=AZ, el=EL, d=math.exp(math.log(wide["d"]) + (math.log(close["d"]) - math.log(wide["d"])) * x + math.log(float(os.environ.get("W3K_D2", "0.86"))) * y), mm=45.0)
 
     def update(t):
         tt = t - START
@@ -673,7 +683,7 @@ def shot_w3k(sc, sky):
         fz = fuse(tb)
         a_ = BULGE * bulge(tb) if kind == "polar" else FUSE_A * fz[0] if kind == "closed" else 0.0
         set_plate(hp, kind, a_, w)
-        bb_.inputs[1].default_value = GLOW * (1 - 0.85 * w)          # 口被钥匙堵上，里面的光跟着暗下去
+        bb_.inputs[1].default_value = GLOW * (1 - w) ** 1.5          # 口被钥匙堵上，里面的光跟着暗下去
         mu2.inputs[1].default_value = fz[3] if kind == "closed" else 0.0
         v = view(tb)
         eye = Vector(eye_of(v))
