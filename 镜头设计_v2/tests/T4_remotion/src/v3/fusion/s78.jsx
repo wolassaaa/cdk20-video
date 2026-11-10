@@ -342,7 +342,8 @@ const S8_CAM = [[0, 1100, 640, 0.62], [0.4, 1100, 640, 0.62], [2.0, 960, 540, 1]
   [64.4, 8640 + 960, 540, 1], [65.8, 8640 + 1585, 570, 5.0], [66.0, 8640 + 1585, 570, 5.0]];
 const OBJ8 = [["obj_rack.png", 250, 470, 300, 10.0, "target from data"], ["obj_cdk20.png", 580, 400, 230, 12.2, "the lock's shape"], ["obj_key.png", 860, 450, 200, 14.2, "new keys"], ["obj_tubes.png", 1150, 400, 130, 16.0, "ranking"]];
 const TICK = (x, y, s = 1) => `M${x} ${y} L${x + 18 * s} ${y + 22 * s} L${x + 58 * s} ${y - 30 * s}`;
-const ROAD_WORDS = [["computer", 0.5, 55.0], ["protein", 1, 55.8], ["cells", 2.8, 56.6], ["animals", 3.2, 57.4], ["patients", 4, 58.2]];
+// each word rings a station of the road (k), its note sits dx stations to the side: cells and animals share station 4
+const ROAD_WORDS = [["computer", 0, 55.0, 0], ["protein", 1, 55.8, 0], ["cells", 3, 56.6, -0.3], ["animals", 3, 57.4, 0.3], ["patients", 4, 58.2, 0.25]];
 
 const S8World = () => {
   const t = useT(), r = R8;
@@ -404,12 +405,12 @@ const S8World = () => {
       return <g>
         <Road x={rr.x} y={rr.y} gap={rr.gap} labels={false}/>
         <Ink x={rr.x + 3 * rr.gap + 50} y={rr.y + 92} size={50} at={-1} font={SERIF} fill={RED} anchor="start" w={140}>048</Ink>
-        {ROAD_WORDS.map(([word, k, at], i) => {
+        {ROAD_WORDS.map(([word, k, at, dx], i) => {
           const x = rr.x + k * rr.gap, top = rr.y - 60 - (i % 2 ? 150 : 70), flash = Math.max(0, 1 - Math.abs(t - at - 0.15) / 0.4);
           return <g key={i}>
             {flash > 0 && <circle cx={x} cy={rr.y} r={rr.r + 18} fill="none" stroke={RED} strokeWidth={4} opacity={flash}/>}
-            <Stroke at={at} dur={0.25} fill={DARK} w={3} d={`M${x} ${rr.y - rr.r - 12} L${x} ${top + 12}`}/>
-            <Note x={x} y={top} size={46} at={at + 0.1} anchor="middle" dur={0.35}>{word}</Note>
+            <Stroke at={at} dur={0.25} fill={DARK} w={3} d={`M${x} ${rr.y - rr.r - 12} L${x + dx * rr.gap} ${top + 12}`}/>
+            <Note x={x + dx * rr.gap} y={top} size={46} at={at + 0.1} anchor="middle" dur={0.35}>{word}</Note>
           </g>;
         })}
       </g>;
