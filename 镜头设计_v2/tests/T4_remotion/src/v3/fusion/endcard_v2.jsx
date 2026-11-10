@@ -1,10 +1,12 @@
-// HKBU SCIE1007 coursework science video. End card for W5, test version 2: the same words as endcard.jsx (not one letter changed), but each page change is its own move, tied to the drawn liver cells of the background layer.
-// Page 1 to 2 "carried": a cell is drifting to the right under the page; the lines leave to the right one after another, starting next to that cell, and the next page's lines arrive from the left.
-// Page 2 to 3 "parting": three pressed cells let go of each other; the page opens along the seam between them and the next page shows in the gap. Later page changes still use the old upward glide (not designed yet).
-// The cells themselves come from 镜头设计_v3/styleframes/art/fusion/end/bl_w5cells.py and are multiplied under this layer by comp_w5cells.py. Numbers marked "from the sim" are read off w5cells_sim.py.
-// Render: npx remotion bundle src/v3/fusion/endcard_v2.jsx, then render W5CellsTest (30 fps, first three pages) as a png sequence.
+// HKBU SCIE1007 coursework science video. End card for W5, version 2: the same words as endcard.jsx (not one letter changed), but each of the six page changes is its own move, tied to the drawn liver cells of the background layer.
+// 1 to 2 "carried": the lines leave with a cell that drifts right under the page, moving exactly as far as it moves.  2 to 3 "parting": three pressed cells let go; the page opens along the gap between them.
+// 3 to 4 "ripple": the outline of one cell spreads out as a ring; the next page is inside it.  4 to 5 "closing": two cells meet; the page shuts along the line where they touch and opens again as the next page.
+// 5 to 6 "pushed": a cell rises from below and the page goes up and out with it.  6 to 7 "turned": a cell is set turning; the page turns about that cell and the next one turns in. Every move is 0.8 s; a page that has arrived does not move.
+// The cells come from 镜头设计_v3/styleframes/art/fusion/end/bl_w5cells2.py and are multiplied under this layer by comp_w5cells2.py. Where the cells are is read from w5cells2_moves.json, written by w5cells2_sim.py.
+// Render: npx remotion bundle src/v3/fusion/endcard_v2.jsx, then render W5Cells2 (30 fps, 33 s) as a png sequence; W5End2 is the same at 60 fps.
 import React from "react";
 import {registerRoot, Composition, AbsoluteFill, staticFile, useCurrentFrame, useVideoConfig, continueRender, delayRender} from "remotion";
+import MV from "./w5cells2_moves.json";
 
 const FPS = 60, W = 1920, H = 1080;
 const INK = "#111113", SOFT = "#545458", RED = "#E8190F", BONE = "#EDEBE4";
@@ -72,28 +74,18 @@ const PAGES = [
 const STARTS = PAGES.reduce((a, p) => [...a, a[a.length - 1] + p.dur], [0]);
 const TOTAL = STARTS[STARTS.length - 1];
 const GLIDE = 0.8;
-const TEST_SECONDS = 14;
-const LINE_INK = "#B4B2B3";                       // the cells' pen line after the layer is paled
-
-// from the sim: cell C drifts right and a little up under page 1 between 4.2 and 5.0 s
-const CARRY = {dx: 0.99, dy: -0.15, out: 84, into: 56};
-// from the sim: at 9.2 s cell E lets go of F and G; the gap between them runs through these points (top to bottom)
-const SEAM = [[1296, -60], [1262, 150], [1228, 330], [1262, 470], [1302, 600], [1262, 760], [1236, 900], [1270, 1140]];
+const LINE_INK = "#B4B2B3";                       // the pen line of the cells after the layer is paled
 
 const ease = x => { x = clamp(x); return x * x * (3 - 2 * x); };
-
-/** Points along a smooth curve through the seam, shifted sideways by dx; top to bottom. */
-const seamPts = dx => {
-  const pts = [[SEAM[0][0] + dx, SEAM[0][1]]];
-  for (let i = 0; i < SEAM.length - 1; i++) for (let s = 1; s <= 12; s++) {
-    const p0 = SEAM[Math.max(0, i - 1)], p1 = SEAM[i], p2 = SEAM[i + 1], p3 = SEAM[Math.min(SEAM.length - 1, i + 2)], t = s / 12, m = 1 - t;
-    const c1 = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6], c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
-    pts.push([m * m * m * p1[0] + 3 * m * m * t * c1[0] + 3 * m * t * t * c2[0] + t * t * t * p2[0] + dx, m * m * m * p1[1] + 3 * m * m * t * c1[1] + 3 * m * t * t * c2[1] + t * t * t * p2[1]]);
-  }
-  return pts;
+/** Where a cell is at film time t (s): centre in px and turn in rad, read from the motion file. */
+const cellAt = (name, t) => {
+  const i = MV.names.indexOf(name), x = Math.min(MV.pos.length - 1, Math.max(0, t * MV.fps)), f = Math.floor(x), g = Math.min(MV.pos.length - 1, f + 1), a = x - f;
+  return {x: MV.pos[f][i][0] * (1 - a) + MV.pos[g][i][0] * a, y: MV.pos[f][i][1] * (1 - a) + MV.pos[g][i][1] * a, psi: MV.psi[f][i] * (1 - a) + MV.psi[g][i] * a};
 };
-const poly = pts => `polygon(${pts.map(([x, y]) => `${x.toFixed(1)}px ${y.toFixed(1)}px`).join(", ")})`;
-const line = pts => "M " + pts.map(([x, y]) => `${x.toFixed(1)} ${y.toFixed(1)}`).join(" L ");
+const poly = (pts, rule) => `polygon(${rule ? rule + ", " : ""}${pts.map(([x, y]) => `${x.toFixed(1)}px ${y.toFixed(1)}px`).join(", ")})`;
+const line = (pts, close) => "M " + pts.map(([x, y]) => `${x.toFixed(1)} ${y.toFixed(1)}`).join(" L ") + (close ? " Z" : "");
+const Pen = ({d, o}) => <path d={d} fill="none" stroke={LINE_INK} strokeWidth={2.6} strokeLinecap="round" strokeLinejoin="round" opacity={o}/>;
+const Ink = ({children}) => <svg width={W} height={H} style={{position: "absolute", left: 0, top: 0}}>{children}</svg>;
 
 /** One page. lineStyle(k, n) may move or fade each block: k = 0 is the heading, then the lead, the entries and the foot. */
 const Page = ({p, lineStyle}) => {
@@ -116,16 +108,18 @@ const Page = ({p, lineStyle}) => {
   </div>;
 };
 
-/** Page 1 to 2. u runs 0 to 1 over GLIDE seconds. The blocks nearest the cell (the bottom ones) go first. */
-const Carried = ({a, b, u}) => {
+/** Page 1 to 2. u runs 0 to 1 over GLIDE seconds. Each block lets go a little later than the one below it (the bottom ones are nearest the cell) and from then on moves exactly as the cell moves, fading. */
+const Carried = ({a, b, u, t0}) => {
+  const at = v => cellAt("C", t0 + v * GLIDE);
   const order = (k, n) => (n - 1 - k) / Math.max(1, n - 1);              // 0 for the bottom block, 1 for the heading
+  const end = at(1), bef = at(0.8), sp = Math.hypot(end.x - bef.x, end.y - bef.y) || 1, dir = [(end.x - bef.x) / sp, (end.y - bef.y) / sp];
   const out = (k, n) => {
-    const q = ease((u - order(k, n) * 0.18) / 0.32);
-    return {transform: `translate(${CARRY.dx * CARRY.out * q * q}px, ${CARRY.dy * CARRY.out * q * q}px)`, opacity: 1 - q};
+    const uk = order(k, n) * 0.22, c0 = at(Math.min(u, uk)), c1 = at(u);
+    return {transform: `translate(${(c1.x - c0.x).toFixed(2)}px, ${(c1.y - c0.y).toFixed(2)}px)`, opacity: 1 - ease((u - uk - 0.08) / 0.42)};
   };
   const into = (k, n) => {
-    const q = ease((u - 0.46 - order(k, n) * 0.18) / 0.36);
-    return {transform: `translate(${-CARRY.dx * CARRY.into * (1 - q) * (1 - q)}px, ${-CARRY.dy * CARRY.into * (1 - q) * (1 - q)}px)`, opacity: q};
+    const q = ease((u - 0.42 - order(k, n) * 0.2) / 0.38), back = 64 * (1 - q) * (1 - q);
+    return {transform: `translate(${(-dir[0] * back).toFixed(2)}px, ${(-dir[1] * back).toFixed(2)}px)`, opacity: q};
   };
   return <>
     <Page p={a} lineStyle={out}/>
@@ -133,32 +127,66 @@ const Carried = ({a, b, u}) => {
   </>;
 };
 
-/** Page 2 to 3. The page splits along the seam; the two halves go the way the cells go and fade first, then the next page comes up, standing still, in the gap. */
+/** Page 2 to 3. The seam is the real gap between cell E and cells F and G when they let go. The old page fades first, then the two pieces go apart whole (nothing is cut after the first split) and the next page shows in the opening. */
 const Parting = ({a, b, u}) => {
-  const q = ease(u);
-  const dl = -1420 * q - 4 * u, dr = 780 * q + 4 * u;                    // the seam sits right of the middle, so the left edge has further to go
-  const L = seamPts(dl), R = seamPts(dr);
-  const fade = 1 - ease((u - 0.04) / 0.46), rise = ease((u - 0.34) / 0.5), lineA = ease(u / 0.12) * (1 - ease((u - 0.8) / 0.2));
+  const q = Math.pow(ease(u), 1.5);
+  const dl = -1920 * q, dr = 460 * q;
+  const L = MV.seam.map(([x, y]) => [x + dl, y]), R = MV.seam.map(([x, y]) => [x + dr, y]);
+  const fade = 1 - ease(u / 0.42), rise = ease((u - 0.2) / 0.4), lineA = ease(u / 0.1) * (1 - ease((u - 0.85) / 0.15));
   return <>
     <AbsoluteFill style={{clipPath: poly([...L, ...R.slice().reverse()]), opacity: rise}}><Page p={b}/></AbsoluteFill>
-    <AbsoluteFill style={{clipPath: poly([...L, [-80, 1140], [-80, -60]]), opacity: fade}}><div style={{position: "absolute", inset: 0, transform: `translateX(${dl * 0.10}px)`}}><Page p={a}/></div></AbsoluteFill>
-    <AbsoluteFill style={{clipPath: poly([...R, [2000, 1140], [2000, -60]]), opacity: fade}}><div style={{position: "absolute", inset: 0, transform: `translateX(${dr * 0.10}px)`}}><Page p={a}/></div></AbsoluteFill>
-    <svg width={W} height={H} style={{position: "absolute", left: 0, top: 0, opacity: lineA}}>
-      <path d={line(L)} fill="none" stroke={LINE_INK} strokeWidth={2.6} strokeLinecap="round"/>
-      <path d={line(R)} fill="none" stroke={LINE_INK} strokeWidth={2.6} strokeLinecap="round"/>
-    </svg>
+    <AbsoluteFill style={{clipPath: poly([...L, [-2100, 1160], [-2100, -80]]), opacity: fade}}><div style={{position: "absolute", inset: 0, transform: `translateX(${dl.toFixed(2)}px)`}}><Page p={a}/></div></AbsoluteFill>
+    <AbsoluteFill style={{clipPath: poly([...R, [2600, 1160], [2600, -80]]), opacity: fade}}><div style={{position: "absolute", inset: 0, transform: `translateX(${dr.toFixed(2)}px)`}}><Page p={a}/></div></AbsoluteFill>
+    <Ink><Pen d={line(L)} o={lineA}/><Pen d={line(R)} o={lineA}/></Ink>
   </>;
 };
 
-/** Old glide, kept for the page changes that have no move of their own yet. */
-const Glide = ({a, b, u}) => {
-  const y = smooth(u);
+/** Page 3 to 4. The outline of cell B (as it is at the start of the move) spreads out from the cell as two rings; the old page is outside the first, the next page inside the second, clean paper between. */
+const Ripple = ({a, b, u, t}) => {
+  const c = cellAt("B", t), d1 = 1460 * (0.35 * u + 0.65 * u * u), d2 = d1 - 90;
+  const ring = d => MV.ripple.th.map((th, i) => { const r = Math.max(0, MV.ripple.r[i] + d); return [c.x + r * Math.cos(th), c.y + r * Math.sin(th)]; });
+  const r1 = ring(d1), r2 = ring(d2), box = [[-10, -10], [W + 10, -10], [W + 10, H + 10], [-10, H + 10], [-10, -10]];
+  const lineA = ease(u / 0.08) * (1 - ease((u - 0.55) / 0.4));
   return <>
-    <div style={{position: "absolute", inset: 0, transform: `translateY(${-y * H}px)`}}><Page p={a}/></div>
-    <div style={{position: "absolute", inset: 0, transform: `translateY(${(1 - y) * H}px)`}}><Page p={b}/></div>
+    <AbsoluteFill style={{clipPath: poly([...box, ...r1, r1[0], box[0]], "evenodd")}}><Page p={a}/></AbsoluteFill>
+    <AbsoluteFill style={{clipPath: poly(r2)}}><Page p={b}/></AbsoluteFill>
+    <Ink><Pen d={line(r1, true)} o={lineA}/>{d2 > 0 && <Pen d={line(r2, true)} o={lineA * 0.7}/>}</Ink>
   </>;
 };
-const MOVES = [Carried, Parting];
+
+/** Page 4 to 5. Cells F and G come together; the line where they touch is the line the page shuts on. The old page is only seen between two bowed edges that close onto that line, then they open again on the next page. */
+const Closing = ({a, b, u}) => {
+  const {p, d} = MV.close, n = [-d[1], d[0]], A = 760;
+  const gap = u < 0.5 ? A * (1 - ease(u / 0.46)) : A * ease((u - 0.54) / 0.46);
+  // each edge is bowed like the rim of a very large cell: nearest the line where F and G touch, further off to the sides; the bow flattens to that line as the edges meet
+  const edge = s => Array.from({length: 49}, (_, i) => { const x = (i - 24) * 100, off = gap * s * (1 + 0.5 * (x / 900) * (x / 900)); return [p[0] + d[0] * x + n[0] * off, p[1] + d[1] * x + n[1] * off]; });
+  const up = edge(-1), dn = edge(1), lineA = ease(u / 0.1) * (1 - ease((u - 0.86) / 0.14));
+  return <>
+    <AbsoluteFill style={{clipPath: poly([...up, ...dn.slice().reverse()])}}><Page p={u < 0.5 ? a : b}/></AbsoluteFill>
+    <Ink><Pen d={line(up)} o={lineA}/><Pen d={line(dn)} o={lineA}/></Ink>
+  </>;
+};
+
+/** Page 5 to 6. Cell U rises from the bottom edge; the page goes up and out ahead of it and the next page comes up behind. */
+const Pushed = ({a, b, u}) => {
+  const y = smooth(u);
+  return <>
+    <div style={{position: "absolute", inset: 0, transform: `translateY(${(-y * H).toFixed(2)}px)`}}><Page p={a}/></div>
+    <div style={{position: "absolute", inset: 0, transform: `translateY(${((1 - y) * H).toFixed(2)}px)`}}><Page p={b}/></div>
+  </>;
+};
+
+/** Page 6 to 7. Cell W brushes cell U and sets it turning. The page turns about the centre of U, the same way and at a fixed share of the turn of U, and fades; the next page turns in to level. */
+const Turned = ({a, b, u, t0}) => {
+  const c = cellAt("U", t0), SHARE = 0.42;
+  const turn = v => cellAt("U", t0 + v * GLIDE).psi - c.psi;
+  const origin = `${c.x.toFixed(1)}px ${c.y.toFixed(1)}px`;
+  return <>
+    <div style={{position: "absolute", inset: 0, transformOrigin: origin, transform: `rotate(${(SHARE * turn(u)).toFixed(5)}rad)`, opacity: 1 - ease(u / 0.6)}}><Page p={a}/></div>
+    <div style={{position: "absolute", inset: 0, transformOrigin: origin, transform: `rotate(${(-SHARE * (turn(1) - turn(u))).toFixed(5)}rad)`, opacity: ease((u - 0.3) / 0.62)}}><Page p={b}/></div>
+  </>;
+};
+const MOVES = [Carried, Parting, Ripple, Closing, Pushed, Turned];
 
 const W5End2 = () => {
   const {fps} = useVideoConfig();
@@ -166,17 +194,17 @@ const W5End2 = () => {
   let i = 0;
   while (i < PAGES.length - 1 && t >= STARTS[i + 1]) i++;
   const u = i < PAGES.length - 1 ? (t - (STARTS[i + 1] - GLIDE)) / GLIDE : -1;
-  const Move = MOVES[i] || Glide;
+  const Move = MOVES[i];
   return <AbsoluteFill style={{background: BONE, overflow: "hidden"}}>
     {t < GLIDE ? <div style={{position: "absolute", inset: 0, transform: `translateY(${(1 - smooth(t / GLIDE)) * H}px)`}}><Page p={PAGES[0]}/></div>
-      : u > 0 ? <Move a={PAGES[i]} b={PAGES[i + 1]} u={u}/>
+      : u > 0 ? <Move a={PAGES[i]} b={PAGES[i + 1]} u={u} t={t} t0={STARTS[i + 1] - GLIDE}/>
       : <Page p={PAGES[i]}/>}
     <div style={{position: "absolute", left: 210, bottom: 46, fontFamily: SANS, fontSize: 20, fontWeight: 500, color: SOFT, letterSpacing: "0.06em"}}>WORTH TESTING? · HKBU SCIE1007 · 2026</div>
   </AbsoluteFill>;
 };
 
 const Root = () => <>
-  <Composition id="W5CellsTest" component={W5End2} durationInFrames={TEST_SECONDS * 30} fps={30} width={W} height={H}/>
+  <Composition id="W5Cells2" component={W5End2} durationInFrames={Math.round(TOTAL * 30)} fps={30} width={W} height={H}/>
   <Composition id="W5End2" component={W5End2} durationInFrames={Math.round(TOTAL * FPS)} fps={FPS} width={W} height={H}/>
 </>;
 registerRoot(Root);
