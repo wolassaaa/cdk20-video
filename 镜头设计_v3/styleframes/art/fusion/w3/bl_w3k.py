@@ -24,6 +24,9 @@ W3K_CHECK=1：不渲染，逐帧摆好以后量钥匙表面离锁最近多少、
 （最近的那一下在第 6、9、12、14、16、18、19.5、21、22.5 拍）；第 7 小节两边定下来，钥匙进去，锁口一路贴着它收；第 8 小节金属薄薄地漫过钥匙、拉平，
 原来锁口的位置透半拍淡蓝光，停住。镜头两次缓推：第 1 小节和第 7 小节。
 
+全长第 2 版（11-11 凌晨）：编排和拍点不动。融合时钥匙先绕着根倒下去、平贴在锁面上（圆头不再立着），再薄下去被吞掉；
+钥匙进去时锁口等齿板到了面板跟前才收，齿板和面板齐平时正好贴住；带孔的那把换成梳齿钥匙，短粗的那把放大；第二次推近少推一点。
+
 运行（和 bl_inserts.py 同一目录）：
   BL_EXTRA=../../w3/bl_w3k.py BL_JPEG=1 blender.exe -b -t 2 -P bl_inserts.py -- w3k C:/render_tmp/w3k/f 0 475 32 1 2
 """
@@ -243,7 +246,7 @@ def shot_w3k(sc, sky):
 
     def tighten(tb):
         """钥匙进去时锁口收紧多少（0-1）：钥匙尖离正面 10 厘米时开始，2 厘米时已经贴住。"""
-        return smooth((D1 - dist(tb)) / (D1 - 0.07)) if tb >= INS0 else 0.0          # 钥匙一动身锁口就跟着收，尖离正面 7 厘米时已经贴住
+        return smooth((0.02 - (dist(tb) - FIT_OFF)) / 0.02) if tb >= INS0 else 0.0          # 齿板的正面离面板 2 厘米时开始收，和面板齐平时正好贴住：口不会先收好了等钥匙
 
     def hole(tb, tt):
         """这一拍的锁口：(轮廓, 种类)。"polar" 从中心往外的乱变；"flat" 口袋轮廓那一段；没开口时轮廓是 None。"""
@@ -472,6 +475,18 @@ def shot_w3k(sc, sky):
     for name in os.environ.get("W3K_KEYS", "long,skeleton,pin,double,wave,stub,dimple,fork,cross,tube").split(","):
         f_, reach = x_key3(g3, name)
         p, s = x_fill3(f_, reach, K_N, g3)
+        if name == "dimple":          # 带孔的那把像带窟窿的疙瘩：换成梳齿钥匙（一排六根等长的长齿、长条形的头）。上面两行照跑，后面几把的随机数不变
+            gq = np.random.default_rng(77)
+            Lq, Rq, wq = 3.0, 0.62, 0.3
+            fq = xk_or(xk_poly(xk_blade(T, T - Lq + 1.1 * Rq, wq, [(float(u_), 0.5) for u_ in np.linspace(0.2, 0.92, 6)], tw=0.07)), xk_bow("grip", T - Lq + 0.5 * Rq, Rq, 0.16))
+            p, s = x_fill3(fq, (Lq, Rq + 0.25, 0.0), K_N, gq)
+            name = "comb (in place of dimple)"
+        if name == "stub":            # 短粗的那把是一块厚板，放大了只是一坨：换成锯齿钥匙（刀身上下两排大齿、六角头），和别的一样长
+            Lq, Rq, wq = 2.7, 0.6, 0.34
+            fq = xk_or(xk_poly(xk_blade(T, T - Lq + 1.8 * Rq, wq, [(float(u_), 0.3) for u_ in (0.2, 0.44, 0.68, 0.9)], [(float(u_), 0.3) for u_ in (0.32, 0.56, 0.8)], tw=0.09)),
+                       xk_bow("hex", T - Lq + Rq, Rq, 0.27))
+            p, s = x_fill3(fq, (Lq, Rq + 0.1, 0.0), K_N, np.random.default_rng(78))
+            name = "saw (in place of stub)"
         r = np.full(K_N, CR * s)
         put(p, r)
         v = surface()
@@ -575,7 +590,7 @@ def shot_w3k(sc, sky):
         if tb < HITS[0]:
             return D0
         if tb >= HITS[-1]:
-            return D1 + (D_SEAT - D1) * smooth((tb - INS0) / (INS1 - INS0))
+            return D1 + (D_SEAT - D1) * (1 - (1 - min(1.0, max(0.0, (tb - INS0) / (INS1 - INS0)))) ** 2.2)          # 先快后慢，最后两厘米走得最慢
         return D0
 
     def bulge(tb):
@@ -584,7 +599,7 @@ def shot_w3k(sc, sky):
 
     def fuse(tb):
         """融合：钥匙根上的包鼓多高（0-1）、裹上来的金属漫到离正面多远（钥匙的单位）、整团往锁里收了多少（0-1）、蓝光多亮。"""
-        return (smooth((tb - 28.0) / 1.0) * (1 - smooth((tb - 29.6) / 1.0)), -0.3 + 3.9 * smooth((tb - 28.0) / 1.6), smooth((tb - 29.4) / 1.2),
+        return (smooth((tb - 28.0) / 0.8) * (1 - smooth((tb - 29.2) / 0.9)), -0.3 + 3.9 * smooth((tb - 28.0) / 1.3), smooth((tb - 29.0) / 1.1),
                 float(os.environ.get("W3K_HINT", "0.28")) * smooth((tb - 30.45) / 0.2) * (1 - smooth((tb - 30.75) / 0.45)))          # 拉平以后才透半拍淡蓝光
 
     def all_balls(tb, tt):
@@ -597,8 +612,17 @@ def shot_w3k(sc, sky):
             cp = CT + np.c_[0.6 * (1 - a_), np.zeros(N_C), np.zeros(N_C)]          # 从靠锁的一侧流过来
             cr = np.maximum(CRAD * a_, 0.001)
             pos, rad = pos.copy(), rad.copy()
-            sink = lambda p_, r_: (np.c_[XFACE - np.maximum(XFACE - p_[:, 0], 0) * (1 - q) ** 1.5, p_[:, 1] * (1 + 0.4 * q), p_[:, 2] * (1 + 0.4 * q)],          # 整团贴着正面摊开、变薄
-                                   np.maximum(r_ * (1 - smooth((q - 0.4) / 0.6)), 0.001))
+            q2 = smooth((tb - 29.9) / 0.6)
+            th_, sc_ = 0.5 * math.pi * q, 1 - 0.5 * q
+
+            def sink(p_, r_):
+                """露在外面的那一截绕着根倒向一侧、同时缩短一半，平贴在锁面上（圆头的面贴着锁面）；然后整片薄下去、沉进锁面。"""
+                u2 = np.maximum(XFACE - p_[:, 0], 0) * sc_
+                out = p_[:, 0] < XFACE
+                un = u2 * math.cos(th_) + p_[:, 2] * math.sin(th_)
+                zn = -u2 * math.sin(th_) + p_[:, 2] * math.cos(th_)
+                return (np.c_[np.where(out, XFACE - un + 0.3 * q2, p_[:, 0]), p_[:, 1], np.where(out, zn, p_[:, 2])],
+                        np.maximum(r_ * (1 - smooth((q2 - 0.15) / 0.85)), 0.001))
             inside = pos[:, 0] > XFACE - 0.25                      # 齿板：已经在锁里，被那张没有口的面板盖住，收小
             pos, rad = sink(pos, rad)
             rad[inside] = np.maximum(rad[inside] * (1 - smooth((tb - T_SWAP) / 0.5)), 0.001)
@@ -623,7 +647,7 @@ def shot_w3k(sc, sky):
     ca.data.foreach_get("color", arr)
     dphi = (np.degrees(PHI) - math.degrees(AZ)) % 360 - 180          # 0 = 镜头正对的方向
     lum = arr.reshape(-1, 4)[:, 0].reshape(nu, nv) + float(os.environ.get("W3K_FILL", "0.3")) * soft(dphi, -75, 75, 25) * soft(np.degrees(ELV), 2, 50, 8) \
-        + float(os.environ.get("W3K_FILL2", "3.5")) * (1 - soft(dphi, -100, 100, 20)) * soft(np.degrees(ELV), 16, 85, 10)          # 镜头这一侧的上方也补一片柔光：鼓包朝上的那一面原来照到暗场，是一块黑月牙
+        + float(os.environ.get("W3K_FILL2", "4.5")) * (1 - soft(dphi, -100, 100, 20)) * soft(np.degrees(ELV), 16, 85, 10)          # 镜头这一侧的上方也补一片柔光：鼓包朝上的那一面原来照到暗场，是一块黑月牙
     ca.data.foreach_set("color", np.repeat(lum.reshape(-1, 1), 4, 1).ravel().astype(np.float32))
 
     def card(name, verts, axis, lo, hi, v0, v1):
@@ -661,8 +685,8 @@ def shot_w3k(sc, sky):
     def view(tb):
         x = smooth((tb - 0.5) / 3.5)          # 第一次缓推：第 1 小节，到小节线停
         y = smooth((tb - 24.0) / 4.0)         # 第二次缓推：第 7 小节，再近一点看钥匙进去
-        at = lerp(lerp(wide["at"], close["at"], x), (LC.x - 0.14, LC.y - 0.12, LC.z - 0.005), y)
-        return dict(at=at, az=AZ, el=EL, d=math.exp(math.log(wide["d"]) + (math.log(close["d"]) - math.log(wide["d"])) * x + math.log(float(os.environ.get("W3K_D2", "0.86"))) * y), mm=45.0)
+        at = lerp(lerp(wide["at"], close["at"], x), (LC.x - 0.14, LC.y - 0.12, LC.z + 0.035), y)
+        return dict(at=at, az=AZ, el=EL, d=math.exp(math.log(wide["d"]) + (math.log(close["d"]) - math.log(wide["d"])) * x + math.log(float(os.environ.get("W3K_D2", "0.91"))) * y), mm=45.0)
 
     def update(t):
         tt = t - START
@@ -712,11 +736,15 @@ def shot_w3k(sc, sky):
     # ---------------------------------------------------------------- 穿模检查：融合开始以前逐帧摆好，量钥匙表面离锁最近多少，数有没有点在金属里；钥匙进去那几帧量锁口和钥匙之间的缝
     if os.environ.get("W3K_CHECK"):
         step = int(os.environ.get("W3K_STEP", "2"))
-        rows, tot_in, floor_min, gaps, n_fuse = {}, 0, 9.0, [], 0
+        rows, tot_in, floor_min, gaps, n_fuse, proud = {}, 0, 9.0, [], 0, []
         for f in range(0, K_FRAMES, step):
             tb = f / FPS / BEAT
             if tb >= T_SWAP:
                 n_fuse += 1
+                update(START + f / FPS)
+                bpy.context.view_layer.update()
+                kv = np.array(x_world_tris([mb])[0])
+                proud.append((f, tb, float(YF - kv[:, 1].min()) if len(kv) else 0.0))          # 钥匙那团金属最高的一点高出锁芯正面（没鼓时）多少
                 continue
             update(START + f / FPS)
             bpy.context.view_layer.update()
@@ -763,6 +791,12 @@ def shot_w3k(sc, sky):
         fa = min(rows, key=lambda f: rows[f][0])
         print("W3K CHECK before the merge, %d frames (table units): nearest %.4f at frame %d; points in metal %d; key lowest %.3f above the table. Merge: %d frames from frame %d, not checked for clipping" % (
             len(rows), rows[fa][0], fa, tot_in, floor_min, n_fuse, max(rows) + step))
+        hs = [max(0.0, h_[2]) for h_ in proud]
+        print("W3K proud (frame:height):", " ".join("%d:%.3f" % (h_[0], max(0.0, h_[2])) for h_ in proud))
+        up = [(proud[i + 1][0], hs[i + 1] - hs[i]) for i in range(len(hs) - 1) if hs[i + 1] > hs[i] + 0.0005]
+        zero = next((h_[0] for h_, v_ in zip(proud, hs) if v_ <= 0.0005), None)
+        print("W3K CHECK merge, %d frames: key stands %.3f proud at the start, highest %.3f; it rises again on %s; at 0 from frame %s to the end: %s" % (
+            len(hs), hs[0], max(hs), ["%d (+%.4f)" % u_ for u_ in up] or "no frame", zero, zero is not None and all(v_ <= 0.0005 for h_, v_ in zip(proud, hs) if h_[0] >= zero)))
         print("INSERT_OK", SHOT, "check")
         sys.exit(0)
     return update

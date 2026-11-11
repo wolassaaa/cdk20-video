@@ -2,15 +2,18 @@
 # Same method as w5cells_sim.py (which stays as the record of the three-page test): a cell is a rounded polygon; where two cells meet, both are cut along the same straight line with a small gap, so one can never be inside the other.
 # This file is the motion only. bl_w5cells2.py draws from it; endcard_v2.jsx reads w5cells2_moves.json (written here) so the page changes follow the real cells.
 # Run: python w5cells2_sim.py      writes C:/render_tmp/w5cells2/sim.npz, sim_preview.png and <T4_remotion>/src/v3/fusion/w5cells2_moves.json
+# For the 60 fps film: W5_FPS=60 python w5cells2_sim.py   (writes to C:/render_tmp/w5cells4k/). The motion is stepped 180 times a second either way, so a 60 fps frame at an even number is the same state as the 30 fps frame at half that number, and the frames between are real in-between states.
 import json, os
 import numpy as np
 import w5cells_sim as V1
 
-W, H, FPS, NF, SUB = 1920, 1080, 30, 990, 6
+FPS = int(os.environ.get("W5_FPS", "30"))                  # 30 for the review film, 60 for the finished film
+W, H, NF, SUB = 1920, 1080, 33 * FPS, 180 // FPS
+SHIFT = FPS // 30 - 1                                      # the 30 fps film shows, at film time t, the state at t + 1/30 s; the 60 fps film keeps exactly that
 GAP = 7.0                       # px of paper left between two pressed cells
 TAU_V, TAU_R = 0.45, 0.7        # s: how slowly a cell changes speed, how slowly a dent fills back
 PUSH, RC = 2.6, 0.93
-TMP = "C:/render_tmp/w5cells2/"
+TMP = "C:/render_tmp/w5cells2/" if FPS == 30 else "C:/render_tmp/w5cells4k/"
 MOVES_JSON = "D:/。hkbu/molecular science/镜头设计_v2/tests/T4_remotion/src/v3/fusion/w5cells2_moves.json"
 PAGE_STARTS = [0, 5, 10, 14.5, 19, 23, 27, 33]
 GLIDE = 0.8
@@ -74,9 +77,10 @@ def run():
     psi = np.zeros(n)
     S = np.tile(R[:, None], (1, n)) * 1.2
     idx = {c[0]: i for i, c in enumerate(CAST)}
-    out = dict(pos=np.zeros((NF, n, 2)), psi=np.zeros((NF, n)), bulge=np.ones((NF, n)), cphi=np.zeros((NF, n, n)), cdist=np.full((NF, n, n), np.inf))
+    NFS = NF + SHIFT
+    out = dict(pos=np.zeros((NFS, n, 2)), psi=np.zeros((NFS, n)), bulge=np.ones((NFS, n)), cphi=np.zeros((NFS, n, n)), cdist=np.full((NFS, n, n), np.inf))
     dt = 1.0 / FPS / SUB
-    for f in range(NF):
+    for f in range(NFS):
         for s in range(SUB):
             t = (f + s / SUB) / FPS
             on = (t >= ton) & ~gone
@@ -137,7 +141,7 @@ def run():
                 if idx[name] == i:
                     b = min(1.075, b + amp * bump(t, t0, t1))
             out["bulge"][f, i] = b
-    return R, out
+    return R, {k: v[SHIFT:] for k, v in out.items()}
 
 
 def outline(i, R, out, f, N=120):
@@ -198,7 +202,7 @@ if __name__ == "__main__":
     print("first frame: cells cover %.1f%% of the whole picture" % (100 * raster(0).mean()))
 
     # numbers the page changes need
-    fr_of = lambda t: int(round(t * FPS))                          # picture frame f (time f / FPS in the film) shows sim state f
+    fr_of = lambda t: int(round(t * 30)) * (FPS // 30)             # picture frame f (time f / FPS in the film) shows sim state f; moments are taken on the 30 fps grid so both frame rates read the same state
     f2 = fr_of(9.2)
     E, F, G = idx["E"], idx["F"], idx["G"]
     (pa, da), (pb, db) = mid_plane(R, out, f2, E, F), mid_plane(R, out, f2, E, G)
