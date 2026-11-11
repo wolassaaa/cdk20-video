@@ -1,13 +1,19 @@
 # HKBU SCIE1007 coursework video: API keys for the footage pipeline. This file stays on this machine: _env/ is in .gitignore.
-# Fill in the three GLM lines and save. Nothing else needs changing.
-# 导演：在等号后面填上，保存即可。这个文件不会进 GitHub。
+# 导演：在等号后面填上，保存即可。这个文件不会进 GitHub。不要把钥匙发在聊天里。
 
-# GLM (the cheaper model for chores: checking transcripts against the script, picking takes, tidy-up work)
-GLM_API_KEY=
+# ---- 素材管理员用的模型（中转站）----
+# 接口是哪一种：填 anthropic 或 openai
+#   anthropic = 中转站给的是 Anthropic / Claude Code 标准的地址
+#   openai    = 中转站给的是 OpenAI / Codex 标准的地址
+GLM_API_STYLE=anthropic
+# 中转站的地址，例如 https://xxx.com 或 https://xxx.com/v1 （照中转站的说明填）
 GLM_BASE_URL=
+# 中转站给的钥匙
+GLM_API_KEY=
+# 模型的名字，照中转站列表里的写
 GLM_MODEL=
 
-# Optional, only if you want them used
+# ---- 可选：别的模型，不用就空着 ----
 DEEPSEEK_API_KEY=
 DEEPSEEK_BASE_URL=https://api.deepseek.com
 DEEPSEEK_MODEL=
