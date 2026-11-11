@@ -18,12 +18,18 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import s410k_keys as K  # noqa: E402
 
-SEVEN = ((1, 1), (3, 2), (6, 0), (8, 1), (11, 2), (14, 0), (16, 1))
-COLS, ROWS = 18, 3
+# 第 3 版：54 把排成 9 列 6 排（片子里它们飞到镜头前就是这个队形，(列, 排)，排从近到远 0-5，画面上 5 在最上）。
+# 留下的 7 把：上面四把、下面三把；(4, 0) 是片中慢慢演、配上的那一把。
+SEVEN = ((0, 4), (3, 4), (5, 5), (8, 4), (1, 1), (4, 0), (7, 1))
+COLS, ROWS = 9, 6
+LS7 = (2.8, 2.45, 2.8, 2.45, 2.45, 2.8, 2.45)          # 7 把的杆只用两种长的，长短拉近（最短的不小于最长的 75%）
 
 
 def specs_of(grid):
-    return {p: K.make(b, t, p[0] + COLS * p[1]) for p, (b, t) in grid.items()}
+    sp = {p: K.make(b, t, p[0] + COLS * p[1]) for p, (b, t) in grid.items()}
+    for p, ls in zip(SEVEN, LS7):
+        sp[p]["ls"] = ls
+    return sp
 
 
 def worst(sp):
@@ -57,7 +63,7 @@ def main():
         if best is None or score < best[0]:
             best = (score, seed, grid, sp, w, w7)
     _, seed, grid, sp, w, w7 = best
-    num = {p: 1 + p[0] + COLS * (ROWS - 1 - p[1]) for p in sp}          # 序号：照画面，最远一排从左到右 1-18，中间 19-36，最近 37-54
+    num = {p: 1 + p[0] + COLS * (ROWS - 1 - p[1]) for p in sp}          # 序号：照画面，最上一排从左到右 1-9，往下每排接着数，最下一排 46-54
     lk = np.array([v[0] for v in w])
     print("layout seed %d: 54 keys, %d distinct (bow, bit) pairs, %d bow kinds, %d bit kinds" % (seed, len(set(grid.values())), len({v[0] for v in grid.values()}), len({v[1] for v in grid.values()})))
     print("likeness over all %d pairs: mean %.3f, median %.3f, highest %.3f" % (len(lk), lk.mean(), np.median(lk), lk.max()))
@@ -77,11 +83,11 @@ def main():
       json.dump(dict(seed=seed, cols=COLS, rows=ROWS, seven=[list(p) for p in SEVEN], block=[dict(i=p[0], j=p[1], no=num[p], spec=sp[p]) for p in sorted(sp)], field=field),
                 open(os.path.join(HERE, "s410k_block.json"), "w", encoding="utf-8"), indent=0)
     # 对照图
-    cell, cw, ch = 0.0125, 150, 330
+    cell, cw, ch = 0.0125, 190, 330
     im = Image.new("RGB", (COLS * cw + 60, ROWS * ch + 110), (237, 235, 228))
     dr = ImageDraw.Draw(im)
     f, f2 = ImageFont.truetype("arial.ttf", 22), ImageFont.truetype("arial.ttf", 26)
-    dr.text((30, 18), "4-10: the 54 shortlisted keys, outlines seen from above (red ring = the seven that stay). Outlines only: an illustration, not real structures.", fill=(17, 17, 19), font=f2)
+    dr.text((30, 18), "4-10: the 54 shortlisted keys, outlines (red ring = the seven that stay). An illustration, not real structures.", fill=(17, 17, 19), font=f2)
     for p, s in sp.items():
         pic = picture(s, cell)
         cx, cy = 30 + p[0] * cw + cw // 2, 70 + (ROWS - 1 - p[1]) * ch + ch // 2 + 8

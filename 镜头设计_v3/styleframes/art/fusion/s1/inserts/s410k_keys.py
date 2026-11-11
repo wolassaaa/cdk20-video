@@ -18,8 +18,8 @@ TIP = 1.6
 NBOW, NBIT = 10, 11
 BOWS = ["ring", "tall oval", "square", "trefoil", "disc", "diamond", "long oval", "T-bar", "hexagon", "twin rings"]
 BITS = ["comb", "double comb", "wave", "stairs", "fork", "flag", "paddle", "saw", "cross", "arrow", "hook"]
-TK = 0.17          # 半厚
-RR = 0.17          # 边的圆角
+TK = 0.20          # 最厚处的半厚（第 3 版加厚：圆杆、鼓起的头，不像一片冲压的平板）
+RR = 0.30          # 从边往里多远鼓到最厚：比杆的半宽大得多，所以杆的截面接近圆，宽的头中间鼓起来
 
 
 def _smin(a, b, k=0.07):
@@ -111,11 +111,14 @@ def sdf(s, X, Y):
             b_ = _box(X, Y, xt - 0.13 - i * 0.24, sg * (ws + h / 2 - 0.03), 0.07, h / 2 + 0.03, 0.04)
             bit = b_ if bit is None else np.minimum(bit, b_)
     elif t == 2:        # 波浪
-        lam, amp, ln = 0.5 + 0.12 * r[0], 0.17, 1.15
-        ph = 2 * math.pi * (X - xt) / lam
-        w = (np.abs(Y - amp * np.sin(ph)) - (ws + 0.035)) / np.sqrt(1 + (amp * 2 * math.pi / lam * np.cos(ph)) ** 2)
-        bit = np.maximum(w, np.abs(X - (xt - ln / 2)) - ln / 2)
-        x1 = xt - ln + 0.05
+        # 第 3 版：波浪是一条正弦线加粗（48 小段圆头线段取最近的），两头收圆、从杆上缓缓起波，边是干净的
+        lam, amp, ln = 0.52 + 0.12 * r[0], 0.16, 1.15
+        xs_ = np.linspace(xt - ln, xt - 0.10, 49)
+        ys_ = amp * np.sin(2 * math.pi * (xs_ - xt) / lam) * np.clip((xs_ - (xt - ln)) / 0.3, 0, 1) ** 2
+        for i in range(48):
+            b_ = _cap(X, Y, xs_[i], ys_[i], xs_[i + 1], ys_[i + 1], ws + 0.03)
+            bit = b_ if bit is None else np.minimum(bit, b_)
+        x1 = xt - ln + 0.02
     elif t == 3:        # 阶梯
         for i in range(3):
             h = 0.50 - 0.17 * i + 0.05 * r[1 + i]          # 靠杆的一级最高，往尖一级级矮下去（和方齿板分得开）
@@ -201,7 +204,7 @@ def build(s, cell=0.02):
     return verts, faces
 
 
-def choose_block(seed=0, cols=18, rows=3, seven=((1, 1), (3, 2), (6, 0), (8, 1), (11, 2), (14, 0), (16, 1))):
+def choose_block(seed=0, cols=9, rows=6, seven=((0, 4), (3, 4), (5, 5), (8, 4), (1, 1), (4, 0), (7, 1))):
     """54 把怎么排：54 种（头型, 齿型）互不相同；左右、前后相邻的两把头型和齿型都不一样；留下的 7 把头型七种、齿型七种。
     返回 {(列, 排): (头型, 齿型)}。"""
     g = np.random.default_rng(seed)
