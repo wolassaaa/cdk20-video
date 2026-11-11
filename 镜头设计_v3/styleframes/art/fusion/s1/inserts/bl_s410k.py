@@ -115,7 +115,7 @@ def shot_s410k(sc, sky):
         q = (np.c_[sec[:, 2], sec[:, 1]] - cen) * kk
         raw = polar_of(q, 0.0012)
         hard = raw + 0.0012                                      # 至少留 0.0012（锁的单位，约 3 毫米）
-        fit = np.maximum(blur(np.maximum(raw, np.roll(raw, 1), np.roll(raw, -1))) + 0.0030, hard + 0.0008)          # 配上时停在这里：口和钥匙之间留一圈约 8 毫米的匀缝，蓝光从缝里出来
+        fit = np.maximum(blur(np.maximum(raw, np.roll(raw, 1), np.roll(raw, -1))) + 0.0036, hard + 0.0008)          # 配上时停在这里：口和钥匙之间留一圈约 8 毫米的匀缝，蓝光从缝里出来
         fit = np.minimum(fit, RMAX)
         hp = CB + hard[:, None] * UV
         inside = float(k_sdist(q + CB, hp).min()) * GS
@@ -161,7 +161,7 @@ def shot_s410k(sc, sky):
                 else:
                     p, yaw = swoop(1 - smooth((t - e["t4"]) / (e["t5"] - e["t4"])), D_HOV)
                     return k, p, yaw, 0.0, 0.0, 0.0, 1.0, D_HOV
-                return k, F + Vector((0, -d, 0)), 0.0, w, 0.0, 0.0, 1.0 + 4.0 * w ** 2, d
+                return k, F + Vector((0, -d, 0)), 0.0, w, 0.0, 0.0, 1.0 + 7.0 * w ** 2, d
             if t < e["t2"]:
                 x = smooth((t - e["t1"]) / (e["t2"] - e["t1"]))
                 return k, F + Vector((0, -(D_HOV + (D_BAD - D_HOV) * x), 0)), 0.0, 0.45 * x, x, 0.0, 1.0 - 0.7 * x, D_HOV + (D_BAD - D_HOV) * x
@@ -207,7 +207,7 @@ def shot_s410k(sc, sky):
     kv = {}
     for k in KINDS:
         v, ts = SURF[k]
-        kv[k] = (np.c_[-v[:, 1], v[:, 0], v[:, 2]], ts)   # 平躺：钥匙尖朝 +y（远离镜头），厚度朝上
+        kv[k] = (np.c_[-v[:, 1], v[:, 0], v[:, 2] * 2.5], ts)   # 平躺：钥匙尖朝 +y（远离镜头），厚度朝上；片状的钥匙缩小以后太薄（1 毫米），厚度做成 2.5 倍，近看才有分量
     LEN = max(float(np.ptp(v[:, 1])) for v, _ in kv.values())
     WID = max(float(np.ptp(v[:, 0])) for v, _ in kv.values())
     lo_, hi_ = 0.005, 0.08
@@ -309,7 +309,7 @@ def shot_s410k(sc, sky):
     sgrid = grid[sidx] - np.array([i0, j0])
     seven = [int(np.where((sgrid[:, 0] == c_) & (sgrid[:, 1] == r_))[0][0]) for c_, r_ in zip(cols, rows7)]
     pcx, pcy = cell_at(PCELL)
-    P7 = 1.75 * PX
+    P7 = 1.45 * PX
     row_at = {n_: Vector((pcx + (i_ - 3) * P7, pcy, ZREST)) for i_, n_ in enumerate(seven)}
     home7 = {n_: Vector((float(pos[sidx[n_], 0]), float(pos[sidx[n_], 1]), ZREST)) for n_ in seven}
     t47 = {}
@@ -351,7 +351,7 @@ def shot_s410k(sc, sky):
     old = [o for o in ob if o.type == "EMPTY" and len(o.children) and o.name.startswith(("w3_rain", "w3_orb", "w3_hover"))]
     old_home = {o.name: Vector(o.location) for o in old}
     od = np.array([math.hypot(old_home[o.name].x - eye0[0], old_home[o.name].y - eye0[1]) for o in old]) if old else np.zeros(0)
-    old_t = {o.name: T_OLD + 0.5 * r_ for o, r_ in zip(old, (np.argsort(np.argsort(-od)) / max(1.0, len(old) - 1.0)))}
+    old_t = {o.name: T_OLD + 0.5 * float(r_) for o, r_ in zip(old, (np.argsort(np.argsort(-od)) / max(1.0, len(old) - 1.0)))}
     old_state = [None]
 
     def old_keys(t):
@@ -361,14 +361,14 @@ def shot_s410k(sc, sky):
         old_state[0] = ph
         for o in old:
             x = (t - old_t[o.name]) / 0.8
-            gone = x >= 1
+            gone = bool(x >= 1)
             for ch in o.children:
                 ch.hide_render = gone
             o.location = old_home[o.name] + Vector((0, 0, 3.6 * min(1.0, max(0.0, x)) ** 2))
 
     # ---------------------------------------------------------------- 机位
-    VC = dict(at=(pcx, pcy + 0.004, 0.0), az=0.0, el=math.radians(float(os.environ.get("S410K_EL", "50"))), d=(18 * PX + 0.03) / 2 / 0.4 * float(os.environ.get("S410K_DC", "1.0")), mm=45.0)
-    VE = dict(VC, at=(pcx, pcy + 0.002, 0.0), d=VC["d"] * float(os.environ.get("S410K_DE", "0.60")))
+    VC = dict(at=(pcx, pcy + 0.004, 0.0), az=0.0, el=math.radians(float(os.environ.get("S410K_EL", "50"))), d=(18 * PX + 0.03) / 2 / 0.4 * float(os.environ.get("S410K_DC", "1.12")), mm=45.0)
+    VE = dict(VC, at=(pcx, pcy + 0.002, 0.0), d=VC["d"] * float(os.environ.get("S410K_DE", "0.50")))
 
     def mix(p, q, x):
         log = lambda k_: math.exp(math.log(p[k_]) + (math.log(q[k_]) - math.log(p[k_])) * x)
@@ -440,7 +440,7 @@ def shot_s410k(sc, sky):
         for t_ in (0.0, 8.8, 12.2, 20.5, 24.9):
             update(START + t_)
             rowp = [px(tuple(o.location)) for n_, o in enumerate(SOBJ) if n_ in seven]
-            allp = np.array([px(tuple(o.location) + Vector((0, dy_, 0))) for o in SOBJ for dy_ in (-KL / 2, KL / 2)])
+            allp = np.array([px(o.location + Vector((0, dy_, 0))) for o in SOBJ for dy_ in (-KL / 2, KL / 2)])
             print("S410K px t %.1f: lock corners %s; mouth %s; field cells %s; shortlist block x %d-%d y %d-%d; the seven %s" % (
                 t_, [px(tuple(LC + Vector((sx * AW * GS, 0, sz * AH * GS)))) for sx in (-1, 1) for sz in (-1, 1)], px(tuple(F)),
                 {ci: px((*cell_at(ci), 0)) for ci in CELLS}, allp[:, 0].min(), allp[:, 0].max(), allp[:, 1].min(), allp[:, 1].max(), rowp))
