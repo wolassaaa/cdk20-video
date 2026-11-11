@@ -96,3 +96,11 @@ _render_tmp/
 # 生成物（11-09 文件整理）
 镜头设计_v3/hyperframes/test/.hyperframes/
 *.hf-transaction-*/
+
+# 真人素材处理流程：环境和产物（可重建，11-12）
+_env/
+素材流程_out/
+# member footage and personal details (names, student numbers): never in the public repo
+人员素材啊/
+keys.env
+*.key

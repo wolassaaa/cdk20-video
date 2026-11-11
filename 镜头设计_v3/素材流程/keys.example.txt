@@ -1,0 +1,13 @@
+# HKBU SCIE1007 coursework video: API keys for the footage pipeline. This file stays on this machine: _env/ is in .gitignore.
+# Fill in the three GLM lines and save. Nothing else needs changing.
+# 导演：在等号后面填上，保存即可。这个文件不会进 GitHub。
+
+# GLM (the cheaper model for chores: checking transcripts against the script, picking takes, tidy-up work)
+GLM_API_KEY=
+GLM_BASE_URL=
+GLM_MODEL=
+
+# Optional, only if you want them used
+DEEPSEEK_API_KEY=
+DEEPSEEK_BASE_URL=https://api.deepseek.com
+DEEPSEEK_MODEL=
