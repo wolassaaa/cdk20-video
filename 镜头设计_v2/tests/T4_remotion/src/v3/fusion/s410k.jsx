@@ -64,12 +64,13 @@ const Note = ({x, y, size, at, fill = INK, rot = -2, children}) => {
 const LINES = [[0, "It came back with 8,918 brand-new designs."], [3.1, "Way too many to make."], [5.3, "So each key gets tried in a virtual lock."], [10.4, "That's docking: the computer predicts how a molecule might sit in the pocket, and scores the fit."], [17.1, "Similar designs get grouped,"], [18.9, "54 make the shortlist,"], [20.9, "and chemists pick just seven to make."]];
 const wrap = (s, n = 44) => s.split(" ").reduce((l, w) => { if ((l[l.length - 1] + " " + w).trim().length > n) l.push(w); else l[l.length - 1] = (l[l.length - 1] + " " + w).trim(); return l; }, [""]);
 
-/** 0-17.9 s the lock close-up (W3 K's last view): the field of 8,918 small keys lands on the left, then keys are tried in the lock. 17.9-19.9 s the camera comes down
- * onto the 54 that stay; 47 leave, seven slide into a row and the camera closes in. Red: only the 7. */
+/** Second version (11-11): every key is different, and the keys tried in the lock rise out of the field. 0-18.2 s the lock close-up (W3 K's last view): the field of
+ * 8,918 small keys lands on the left, then four of them are tried in the lock. 18.0-21.0 s the camera comes down onto the 54 that stay; 47 leave, seven slide into a
+ * row and the camera closes in (the cell's rim runs through the bottom right, clear of the source line). Red: only the 7. */
 const S410K = ({file = "fusion_s410k/s410k_3d.mp4", fps = 30, review = true}) => {
   const t = useCurrentFrame() / fps;
   const count = Math.round(8918 * smooth((t - 1.6) / 1.9));          // counts up while the keys land (1.5-3.5 s)
-  const first = 1 - after(t, 17.7, 0.4);                             // the lock view's type leaves as the camera does
+  const first = 1 - after(t, 17.9, 0.4);                             // the lock view's type leaves as the camera does
   const early = 1 - after(t, 5.0, 0.4), fit = after(t, 5.4, 0.1);    // the two opening notes make room for the two about the fit
   const vo = wrap("VO (A): " + [...LINES].reverse().find(([a]) => t >= a)[1]);
   return <Clock.Provider value={t}><AbsoluteFill style={{background: BONE}}>
@@ -85,13 +86,13 @@ const S410K = ({file = "fusion_s410k/s410k_3d.mp4", fps = 30, review = true}) =>
         </g>}
         {fit > 0 && <g>
           <Note x={540} y={128} size={46} at={8.3} rot={-1.5}>good fit → bright</Note>
-          <Note x={540} y={198} size={46} at={12.3} rot={-2}>poor fit → pushed back</Note>
+          <Note x={540} y={198} size={46} at={12.6} rot={-2}>poor fit → pushed back</Note>
         </g>}
       </g>}
-      <Ink x={104} y={178} size={104} at={19.7} font={SERIF} w={220} dur={0.45}>54</Ink>
-      <Ink x={108} y={222} size={28} at={20.1} w={300}>make the shortlist</Ink>
-      <Ink x={540} y={178} size={104} at={21.0} font={SERIF} fill={RED} w={120} dur={0.45}>7</Ink>
-      <Ink x={544} y={222} size={28} at={21.4} w={200}>to make</Ink>
+      <Ink x={104} y={178} size={104} at={20.3} font={SERIF} w={220} dur={0.45}>54</Ink>
+      <Ink x={108} y={222} size={28} at={20.7} w={300}>make the shortlist</Ink>
+      <Ink x={540} y={178} size={104} at={21.4} font={SERIF} fill={RED} w={120} dur={0.45}>7</Ink>
+      <Ink x={544} y={222} size={28} at={21.8} w={200}>to make</Ink>
       {review && t >= 1.0 && vo.map((l, i) => <text key={i} x={64} y={990 - (vo.length - 1 - i) * 36} fontFamily={SANS} fontSize={28} fontWeight={500} fill={SOFT}>{l}</text>)}
       <g opacity={after(t, 1.0)}><text x={64} y={1046} fontFamily={SANS} fontSize={22} fontWeight={500} fill={SOFT}>Illustration · Ren 2023, pp. 1444, 1447</text></g>
     </svg>
