@@ -27,6 +27,9 @@ W3K_CHECK=1：不渲染，逐帧摆好以后量钥匙表面离锁最近多少、
 全长第 2 版（11-11 凌晨）：编排和拍点不动。融合时钥匙先绕着根倒下去、平贴在锁面上（圆头不再立着），再薄下去被吞掉；
 钥匙进去时锁口等齿板到了面板跟前才收，齿板和面板齐平时正好贴住；带孔的那把换成梳齿钥匙，短粗的那把放大；第二次推近少推一点。
 
+全长第 3 版（11-11 上午）：只改钥匙进去那一段。锁口在齿板到面板前 3 厘米就收成齿板的截面，并且挪到从镜头看正好被齿板挡住的位置，
+齿板越近挪得越少，齐平时对正。别的不动。
+
 运行（和 bl_inserts.py 同一目录）：
   BL_EXTRA=../../w3/bl_w3k.py BL_JPEG=1 blender.exe -b -t 2 -P bl_inserts.py -- w3k C:/render_tmp/w3k/f 0 475 32 1 2
 """
@@ -246,7 +249,18 @@ def shot_w3k(sc, sky):
 
     def tighten(tb):
         """钥匙进去时锁口收紧多少（0-1）：钥匙尖离正面 10 厘米时开始，2 厘米时已经贴住。"""
-        return smooth((0.02 - (dist(tb) - FIT_OFF)) / 0.02) if tb >= INS0 else 0.0          # 齿板的正面离面板 2 厘米时开始收，和面板齐平时正好贴住：口不会先收好了等钥匙
+        return smooth((0.075 - (dist(tb) - FIT_OFF)) / 0.045) if tb >= INS0 else 0.0          # 齿板的正面离面板 7.5 厘米时开始收，3 厘米时已经收成齿板的截面
+
+    def behind(tb):
+        """收紧的锁口往哪边挪多少（锁的单位）：齿板还在面板前面时，从镜头看过去它挡住的是面板上偏一点的地方，口就挪到那里，
+        躲在齿板正后面；齿板越近挪得越少，齐平时正好对上。这样从这个机位看，进去的全过程口都被钥匙挡着，露不出成块的蓝。"""
+        e = max(0.0, dist(tb) - FIT_OFF)
+        F = Vector((LC.x + C0[0] * GS, YF, LC.z + C0[1] * GS))
+        Pk = F - Vector((0.0, e, 0.0))
+        r_ = Pk - Vector(eye_of(view(tb)))
+        hit = Pk + r_ * (e / r_.y)
+        return np.array([(hit.x - F.x) / GS, (hit.z - F.z) / GS])
+
 
     def hole(tb, tt):
         """这一拍的锁口：(轮廓, 种类)。"polar" 从中心往外的乱变；"flat" 口袋轮廓那一段；没开口时轮廓是 None。"""
@@ -255,7 +269,7 @@ def shot_w3k(sc, sky):
         if tb >= T_BEAN:
             hp = fourier(smooth((tb - T_BEAN) / (T_POCKET - T_BEAN)))
             w = tighten(tb)
-            return (hp + (TIGHT[0] - hp) * w if w > 0 else hp), "flat"
+            return (hp + (TIGHT[0] + behind(tb) - hp) * w if w > 0 else hp), "flat"
         op = smooth((tb - 1.6) / 1.0)
         if op < 0.12:
             return None, "flat"
