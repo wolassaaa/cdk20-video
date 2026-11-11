@@ -37,6 +37,6 @@ else
   CLAUDE_CONFIG_DIR="$ROOT/_env/glm_home" ANTHROPIC_BASE_URL="$BASE" ANTHROPIC_AUTH_TOKEN="$KEY" ANTHROPIC_MODEL="$MODEL" ANTHROPIC_SMALL_FAST_MODEL="$MODEL" \
     claude -p "$PROMPT" --model "$MODEL" --permission-mode acceptEdits \
     --allowedTools "Read" "Glob" "Grep" "Write" "Edit" "Bash(*/_env/footage/Scripts/python.exe *)" "Bash(*/_env/ffmpeg/*)" "Bash(ls *)" "Bash(cat *)" "Bash(nvidia-smi*)" \
-    --disallowedTools "Bash(rm *)" "Bash(git *)" "Bash(mv *)" "Bash(del *)" "WebFetch" "WebSearch" 2>&1 | tee "$LOG"
+    --disallowedTools "Bash(rm *)" "Bash(git *)" "Bash(mv *)" "Bash(del *)" "WebFetch" "WebSearch" < /dev/null 2>&1 | tee "$LOG"
 fi
 echo "log: $LOG"
