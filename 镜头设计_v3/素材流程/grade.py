@@ -30,11 +30,11 @@ import common as C  # noqa: E402
 
 RULES = {
     "skin_L": (52, 74),            # face skin lightness: not murky, not blown
-    "skin_hue": (45, 62),          # degrees in a*b*: below = pink/magenta, above = yellow/green
+    "skin_hue": (30, 62),          # degrees in a*b*: below = pink/magenta, above = yellow/green (30: A is pink-skinned under neutral light, 11-13)
     "skin_chroma": (18, 30),       # below = grey, lifeless; above = orange, over-saturated (set on the four members, 11-13)
     "neutral_cast": 2.5,           # |a*| and |b*| of the near-grey clothes, when they cover >= 3 % of the person
     "neutral_min_share": 0.03,
-    "member_skin_hue_spread": 8,   # degrees between the most different members (same film, same light feel)
+    "member_skin_hue_spread": 20,  # degrees between the most different members (people differ: A is pinker, 11-13)
     "member_skin_chroma_spread": 6,
 }
 TW, TH = 390, 468                  # thumbnail in the sheet (step 5's 1560 x 1872 / 4)
