@@ -22,12 +22,16 @@ class RVM:
         self.rec = [None] * 4
 
     @torch.inference_mode()
-    def frame(self, bgr):
-        h, w = bgr.shape[:2]
-        x = torch.from_numpy(bgr[:, :, ::-1].copy()).cuda().permute(2, 0, 1)[None].half() / 255
+    def alpha_t(self, rgb):
+        """rgb: 1x3xHxW float 0..1 on the GPU -> HxW float alpha 0..1 on the GPU (nothing leaves the card)."""
+        h, w = rgb.shape[-2:]
         ratio = min(1.0, 512 / max(h, w))          # the authors' advice: inner resolution around 512 px
-        fgr, pha, *self.rec = self.model(x, *self.rec, downsample_ratio=ratio)
-        return (pha[0, 0].float().clamp(0, 1) * 255).round().byte().cpu().numpy()
+        fgr, pha, *self.rec = self.model(rgb.half(), *self.rec, downsample_ratio=ratio)
+        return pha[0, 0].float().clamp(0, 1)
+
+    def frame(self, bgr):
+        x = torch.from_numpy(bgr[:, :, ::-1].copy()).cuda().permute(2, 0, 1)[None].float() / 255
+        return (self.alpha_t(x) * 255).round().byte().cpu().numpy()
 
 
 class BiRefNet:
@@ -45,14 +49,18 @@ class BiRefNet:
         pass
 
     @torch.inference_mode()
-    def frame(self, bgr):
-        h, w = bgr.shape[:2]
-        x = torch.from_numpy(bgr[:, :, ::-1].copy()).cuda().permute(2, 0, 1)[None].float() / 255
-        x = torch.nn.functional.interpolate(x, (self.size, self.size), mode="bilinear", antialias=True)
+    def alpha_t(self, rgb):
+        """rgb: 1x3xHxW float 0..1 on the GPU -> HxW float alpha 0..1 on the GPU."""
+        h, w = rgb.shape[-2:]
+        x = torch.nn.functional.interpolate(rgb.float(), (self.size, self.size), mode="bilinear", antialias=True)
         x = ((x - self.mean) / self.std).half()
         p = self.model(x)[-1].sigmoid().float()
         p = torch.nn.functional.interpolate(p, (h, w), mode="bilinear")
-        return (p[0, 0].clamp(0, 1) * 255).round().byte().cpu().numpy()
+        return p[0, 0].clamp(0, 1)
+
+    def frame(self, bgr):
+        x = torch.from_numpy(bgr[:, :, ::-1].copy()).cuda().permute(2, 0, 1)[None].float() / 255
+        return (self.alpha_t(x) * 255).round().byte().cpu().numpy()
 
 
 class BiRefNetHR(BiRefNet):
