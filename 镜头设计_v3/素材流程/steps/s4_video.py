@@ -250,6 +250,8 @@ def _run(ctx, out, cv2, torch, M):
              "frames": n, "frames_expected": expect, "person_share": [round(min(share), 3), round(float(np.mean(share)), 3), round(max(share), 3)],
              "edge_change": round(float(np.mean(flick)), 4), "flip": round(float(np.mean(flips)), 5), "flip_max_frame": round(float(np.max(flips)), 4),
              "face_found": round(len(faces) / max(1, measured), 3),
+             # while the line is spoken; a member may turn away before or after it (the face model misses profiles)
+             "face_found_spoken": round(len(spoken) / max(1, sum(1 for i in range(0, n, FACE_EVERY) if any(a <= i / FPS <= b for a, b in spans))), 3) if spans else None,
              "crop": crop, "crop_wanted": wanted, "crop_cut_px": max(0, wanted[3] - H) if wanted else None,
              "skin_bgr": [round(float(v), 1) for v in skin] if skin is not None else None, "skin_lab": lab,
              "seconds": round(time.time() - t_start, 1), "ms_per_frame": round((time.time() - t_start) * 1000 / max(1, n)), "source_color": kind, "stamp": stamp}
@@ -260,8 +262,9 @@ def _run(ctx, out, cv2, torch, M):
             fails.append(f"有帧抠出来的人只占 {min(share):.1%}")
         if max(share) > CHECK["person_max"]:
             fails.append(f"有帧抠出来的占 {max(share):.0%}，可能把背景也抠进来了")
-        if c["face_found"] < CHECK["face_found_min"] and "_ext_" not in name:      # clips outside the script may hide the face (drinking)
-            fails.append(f"只有 {c['face_found']:.0%} 的帧找到脸")
+        found = c["face_found"] if c["face_found_spoken"] is None else c["face_found_spoken"]
+        if found < CHECK["face_found_min"] and "_ext_" not in name:      # clips outside the script may hide the face (drinking)
+            fails.append(f"说话那一段只有 {found:.0%} 的帧找到脸")
         if c["flip"] > CHECK["flip_max"]:
             fails.append(f"蒙版边缘来回跳 {c['flip']:.2%}")
         c["fails"] = fails
@@ -269,7 +272,7 @@ def _run(ctx, out, cv2, torch, M):
         outputs += [std, mat, sheet]
         C.write_json(out / "index.json", {"person": ctx.person, "clips": index})
         print(f"  {name:16} {n} 帧 {c['seconds']:.0f} 秒（每帧 {c['ms_per_frame']} 毫秒） 人占 {c['person_share'][1]:.0%} 来回跳 {c['flip']:.3%} "
-              f"脸 {c['face_found']:.0%}  {'过' if not fails else '没过：' + '；'.join(fails)}", flush=True)
+              f"脸 {found:.0%}  {'过' if not fails else '没过：' + '；'.join(fails)}", flush=True)
 
     C.write_json(out / "index.json", {"person": ctx.person, "made": time.strftime("%Y-%m-%d %H:%M") + " 韩国时间", "clips": index})
     ok = sum(1 for c in index if not c["fails"])
