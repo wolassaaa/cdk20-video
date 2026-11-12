@@ -1,0 +1,39 @@
+{
+ "_about": "HKBU SCIE1007 coursework video: settings of the phone-footage pipeline. Changing a value makes the steps that read it run again.",
+ "audio": {
+  "target_lufs": -16.0,
+  "true_peak_db": -1.5,
+  "sample_rate": 48000,
+  "enhance_model": null,
+  "_enhance_model_note": "null until the director picks one from 01_两处对比.md (deepfilternet3 | mossformer2_se_48k | ffmpeg_afftdn)"
+ },
+ "ident": {
+  "asr_model": "large-v3",
+  "asr_device": "cuda",
+  "asr_compute_type": "float16",
+  "asr_boost_to_lufs": -20.0,
+  "accept_score": 0.6,
+  "unsure_score": 0.4,
+  "cut_pad_in": 0.3,
+  "cut_pad_out": 0.4,
+  "llm_assist": false,
+  "_llm_assist_note": "true = ask the text model (keys in _env/keys.env) about the unsure items; the rules still decide, the model's opinion is stored next to them"
+ },
+ "video": {
+  "print_aspect_w": 5,
+  "print_aspect_h": 6,
+  "print_px": [520, 624],
+  "framing": "chest_up",
+  "fps": 60,
+  "backdrop": "#E2CDB0",
+  "_backdrop_note": "placeholder beige, the director has not picked the colour yet",
+  "backdrop_cells": {"use": "candidate", "seed_per_clip": true, "speed": 0.5, "contrast": 0.6, "defocus": true, "clear_around_face": true,
+                     "_note": "11-12 director idea: the end-card hand-drawn cell collisions (fusion/end, w5cells2_sim.py + bl_w5cells2.py) behind on-camera clips only, a new seed per clip, length = clip length; not for the whole film. Sample (D, slow vs normal) waits until rendering resumes"},
+  "matte_model": null,
+  "_matte_model_note": "null until the director picks one from 01_两处对比.md (rvm_resnet50 | birefnet | ...)",
+  "tonemap": "zscale HLG -> linear -> bt709, hable",
+  "beauty": {"level": "light", "smooth": true, "blemish": true, "_levels": "off | light | medium; face only, never reshapes"},
+  "white_balance": {"target_kelvin": null, "per_person_shift": {"A": null, "B": null, "C": null, "D": null},
+                    "_note": "each person corrected separately onto one shared target; target set once all four have delivered"}
+ }
+}
