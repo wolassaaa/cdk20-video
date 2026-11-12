@@ -39,13 +39,31 @@ FPS = 60
 DW, DH = 1300, 1560                       # design px the cells are laid out in (5:6); the end card used 1920 x 1080
 FACE = (0.5, 0.36, 0.25, 0.24)            # centre x, y and half-width, half-height of the face area, as shares of the frame
 FACE_COVER_MAX = 0.08                     # mean share of the face area cells may cover before the cast is redrawn
+FREE_SHOWN_MIN = 0.18                     # mean share of the open background (where the person is not) cells must fill
+                                          # (11-13: on D the first casts drifted behind the shoulders and almost nothing showed)
 SPEED = {"slow": 0.5, "normal": 1.0}      # 1.0 = the end card's drift, scaled to this frame
 PAPER = (237, 235, 228)
 
 
-def cast(seed, seconds, speed):
+def free_area(item, pdir):
+    """Where the background shows in this take: mean matte of 12 frames at design size, True where it is open."""
+    import cv2
+    W, H = item["size"]
+    sec = item["frames"] / FPS
+    acc = np.zeros((DH, DW), np.float32)
+    for k in range(12):
+        b = subprocess.run([C.FFMPEG, "-v", "error", "-ss", f"{sec * (k + 0.5) / 12:.3f}", "-i", str(pdir / item["alpha"]), "-frames:v", "1",
+                            "-f", "rawvideo", "-pix_fmt", "gray", "-"], capture_output=True).stdout
+        if len(b) == W * H:
+            acc += cv2.resize(np.frombuffer(b, np.uint8).reshape(H, W), (DW, DH), interpolation=cv2.INTER_AREA).astype(np.float32) / 255
+    return acc / 12 < 0.2
+
+
+def cast(seed, seconds, speed, free):
     """Cells for one take: (name, radius, x, y, vx, vy, sides, turn, tint, nuclei, enters at)."""
     rng = np.random.default_rng(seed)
+    fy_, fx_ = np.nonzero(free[::8, ::8])
+    spots = np.stack([fx_ * 8, fy_ * 8], 1).astype(float) if len(fx_) else np.array([[0.0, 0.0], [DW, 0.0]])
     fx, fy, fw, fh = FACE[0] * DW, FACE[1] * DH, FACE[2] * DW, FACE[3] * DH
     inside = lambda x, y, m=1.0: ((x - fx) / (fw * m)) ** 2 + ((y - fy) / (fh * m)) ** 2 < 1
 
@@ -58,23 +76,24 @@ def cast(seed, seconds, speed):
         return True
 
     cells = []
-    n_start, n_later = int(rng.integers(4, 6)), max(2, int(round(seconds / 2.2)))
+    n_start, n_later = int(rng.integers(5, 8)), max(3, int(round(seconds / 1.8)))
     tries = 0
     while len(cells) < n_start + n_later and tries < 4000:
         tries += 1
-        r = float(rng.uniform(100, 160))
+        r = float(rng.uniform(90, 145))
         v = float(rng.uniform(38, 62)) * speed
         k = len(cells)
-        if k < n_start:                                   # in the picture from the first frame, off the face
-            x, y = float(rng.uniform(-0.05, 1.05) * DW), float(rng.uniform(-0.02, 1.02) * DH)
-            ang = float(rng.uniform(0, 2 * np.pi))
+        if k < n_start:                                   # in the open background from the first frame, off the face
+            x, y = (float(v) for v in spots[rng.integers(len(spots))])
+            tx, ty = spots[rng.integers(len(spots))]
+            ang = float(np.arctan2(ty - y, tx - x)) if np.hypot(tx - x, ty - y) > 50 else float(rng.uniform(0, 2 * np.pi))
             t_on = 0.0
             if inside(x, y, 1.6) or any(np.hypot(x - c[2], y - c[3]) < 1.05 * (r + c[1]) for c in cells):
                 continue
         else:                                             # comes in over an edge later on
             edge = int(rng.integers(0, 4))
             x, y = [(-r - 20, rng.uniform(0, DH)), (DW + r + 20, rng.uniform(0, DH)), (rng.uniform(0, DW), -r - 20), (rng.uniform(0, DW), DH + r + 20)][edge]
-            tx, ty = rng.uniform(0, DW), rng.uniform(0, DH)
+            tx, ty = spots[rng.integers(len(spots))]            # aimed into the open background
             ang = float(np.arctan2(ty - y, tx - x))
             t_on = float(rng.uniform(0, max(0.5, seconds - 1.5)))
         vx, vy = v * np.cos(ang), v * np.sin(ang)
@@ -86,8 +105,9 @@ def cast(seed, seconds, speed):
     return cells
 
 
-def simulate(cells, seconds, tmp):
-    """Run the end card's simulation on this cast; -> (R, out, share of the face area covered, averaged over the take)."""
+def simulate(cells, seconds, tmp, free):
+    """Run the end card's simulation on this cast; -> (share of the face area covered, share of the open background
+    filled), both averaged over the take."""
     sys.path.insert(0, str(END))
     import w5cells2_sim as S
     S.FPS, S.SUB, S.SHIFT = FPS, 180 // FPS, 0
@@ -96,17 +116,19 @@ def simulate(cells, seconds, tmp):
     R, out = S.run()
     import cv2
     fx, fy, fw, fh = FACE[0] * DW, FACE[1] * DH, FACE[2] * DW, FACE[3] * DH
-    cover = []
+    cover, shown = [], []
+    free4 = cv2.resize(free.astype(np.uint8), (DW // 4, DH // 4), interpolation=cv2.INTER_NEAREST) > 0
     for f in range(0, S.NF, 6):
         im = np.zeros((DH // 4, DW // 4), np.uint8)
         for i in range(len(cells)):
             if out["pos"][f, i, 0] > -5000:
                 cv2.fillPoly(im, [(S.poly(i, R, out, f) / 4).astype(np.int32)], 255)
         cover.append(im[int((fy - fh) / 4):int((fy + fh) / 4), int((fx - fw) / 4):int((fx + fw) / 4)].mean() / 255)
+        shown.append(im[free4].mean() / 255 if free4.any() else 0.0)
     tmp.mkdir(parents=True, exist_ok=True)
     np.savez(str(tmp / "sim.npz"), R=R, **out)
     C.write_json(tmp / "cast.json", {"W": DW, "H": DH, "FPS": FPS, "NF": S.NF, "CAST": cells, "TMP": str(tmp).replace("\\", "/") + "/"})
-    return float(np.mean(cover))
+    return float(np.mean(cover)), float(np.mean(shown))
 
 
 def render(tmp, frames, scale):
@@ -203,7 +225,7 @@ def main():
         key = it["name"] + ("_" + a.tag if a.tag else "")
         dst = pdir / f"{key.replace(it['name'], it['name'] + '_cells')}.mp4"
         pl = dst.with_name(dst.stem.replace("_cells", "_cellplate") + ".mp4")
-        stamp = {"speed": speed, "look": look, "frames": it["frames"], "fg_size": (pdir / it["fg"]).stat().st_size}
+        stamp = {"cast": 2, "speed": speed, "look": look, "frames": it["frames"], "fg_size": (pdir / it["fg"]).stat().st_size}
         if log.get(key, {}).get("stamp") == stamp and dst.exists():
             print(f"  {key:22} 已做过，跳过")
             continue
@@ -224,22 +246,31 @@ def main():
         shutil.rmtree(tmp, ignore_errors=True)
         base = int(hashlib.md5(it["name"].encode()).hexdigest()[:8], 16)
         seconds = it["frames"] / FPS
+        free = free_area(it, pdir)
+        best = None
         for attempt in range(12):
-            cells = cast(base + attempt, seconds, speed)
-            cover = simulate(cells, seconds, tmp)
-            if cover <= FACE_COVER_MAX:
+            cells = cast(base + attempt, seconds, speed, free)
+            cover, shown = simulate(cells, seconds, tmp, free)
+            if cover <= FACE_COVER_MAX and (best is None or shown > best[0]):
+                best = (shown, attempt)
+            if cover <= FACE_COVER_MAX and shown >= FREE_SHOWN_MIN:
                 break
+        else:
+            if best:                                          # none reached the minimum: the fullest one that keeps off the face
+                attempt = best[1]
+                cells = cast(base + attempt, seconds, speed, free)
+                cover, shown = simulate(cells, seconds, tmp, free)
         t_r = render(tmp, it["frames"], it["size"][1] / DH)
         n_pl = plate(tmp, it, look, pl)
         n, keep = composite(it, pdir, pl, dst)
         if keep is not None:
             C.imwrite(pdir / f"{dst.stem}.jpg", keep, 90)
         shutil.rmtree(tmp, ignore_errors=True)
-        log[key] = {"file": dst.name, "plate": pl.name, "plate_frames": n_pl, "seed": base + attempt, "cells": len(cells), "face_cover": round(cover, 3), "frames": n, "frames_expected": it["frames"],
+        log[key] = {"file": dst.name, "plate": pl.name, "plate_frames": n_pl, "seed": base + attempt, "cells": len(cells), "face_cover": round(cover, 3), "free_shown": round(shown, 3), "frames": n, "frames_expected": it["frames"],
                     "render_seconds": round(t_r, 1), "seconds": round(time.time() - t0, 1), "stamp": stamp, "ok": n == it["frames"]}
         C.write_json(pdir / "cells.json", log)
-        print(f"  {key:22} {len(cells)} 个细胞，脸周围平均盖住 {cover:.1%}；{n} 帧，画 {t_r:.0f} 秒（每帧 {t_r / max(1, n) * 1000:.0f} 毫秒），共 {time.time() - t0:.0f} 秒  "
-              f"{'过' if n == it['frames'] else '没过：帧数不对'}", flush=True)
+        print(f"  {key:22} {len(cells)} 个细胞，脸周围平均盖住 {cover:.1%}，露出的背景里细胞占 {shown:.0%}；{n} 帧，画 {t_r:.0f} 秒（每帧 {t_r / max(1, n) * 1000:.0f} 毫秒），共 {time.time() - t0:.0f} 秒  "
+              f"{'过' if n == it['frames'] and shown >= FREE_SHOWN_MIN else '没过：帧数不对' if n != it['frames'] else '提醒：细胞偏少'}", flush=True)
 
 
 if __name__ == "__main__":
