@@ -140,6 +140,10 @@ def write_manifest(step_dir, step, inputs, params, outputs, seconds):
     return m
 
 
+def read_json(path):
+    return json.loads(Path(path).read_text(encoding="utf-8"))
+
+
 def write_json(path, obj):
     Path(path).write_text(json.dumps(obj, ensure_ascii=False, indent=1), encoding="utf-8", newline="\n")
 
