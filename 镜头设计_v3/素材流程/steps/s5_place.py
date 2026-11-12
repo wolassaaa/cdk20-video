@@ -41,7 +41,7 @@ def inputs(ctx):
 
 def params(ctx):
     v = ctx.cfg["video"]
-    return {"size": [OUT_W, OUT_H], "beauty": v["beauty"], "match": v.get("match"), "sharpen": v.get("sharpen"), "backdrop": v["backdrop"],
+    return {"size": [OUT_W, OUT_H], "beauty": v["beauty"], "match": v.get("match"), "grade": v.get("grade"), "sharpen": v.get("sharpen"), "backdrop": v["backdrop"],
             "band": BAND, "unmix": DEFG_R, "alpha_curve": ALPHA_CURVE, "version": 2}
 
 
@@ -136,7 +136,9 @@ def run(ctx, out):
             for a in c["assets"]:
                 clips[a] = c
     skins = skin_reference(ctx.cfg)
-    g = torch.tensor(gains(P, skins, cfg["match"]) if P in skins else [1.0, 1.0, 1.0], device="cuda").float().view(1, 3, 1, 1)
+    grade = (cfg.get("grade") or {}).get(P)              # the neutral grade (G6, checked by grade.py) replaces the skin match when set
+    g = torch.tensor(grade["gain"] if grade else gains(P, skins, cfg["match"]) if P in skins else [1.0, 1.0, 1.0], device="cuda").float().view(1, 3, 1, 1)
+    sat = float(grade.get("sat", 1.0)) if grade else 1.0
     k_beauty = BEAUTY[cfg["beauty"]["level"]]
     sharpen = float((cfg.get("sharpen") or {}).get(P, 0.0))
     backdrop = torch.tensor(M.hex_bgr(cfg["backdrop"])[::-1].copy(), device="cuda").view(1, 3, 1, 1) / 255
@@ -170,6 +172,9 @@ def run(ctx, out):
                     a = torch.frombuffer(bytearray(b2), dtype=torch.uint8).cuda().view(1, 1, OUT_H, OUT_W).float() / 255
                     a = ((a - ALPHA_CURVE[0]) / (ALPHA_CURVE[1] - ALPHA_CURVE[0])).clamp(0, 1)      # soft grey band over dark backgrounds gone, strands kept
                     x = (x0.clamp(min=1e-4) ** 2.2 * g).clamp(0, 1) ** (1 / 2.2)                    # colour match, linear light
+                    if sat != 1.0:
+                        y = (x * torch.tensor([0.2126, 0.7152, 0.0722], device="cuda").view(1, 3, 1, 1)).sum(1, keepdim=True)
+                        x = (y + sat * (x - y)).clamp(0, 1)
                     if k_beauty:
                         small = (F.interpolate(x, (OUT_H // 4, OUT_W // 4), mode="area")[0].permute(1, 2, 0) * 255).round().byte().cpu().numpy()
                         mpi = seg.mp.Image(image_format=seg.mp.ImageFormat.SRGB, data=np.ascontiguousarray(small))
@@ -217,7 +222,7 @@ def run(ctx, out):
     cams = [i for i in items if i["class"] == "cam"]
     L = [f"# {P} 的上片验收（第 5 步）", "",
          f"HKBU SCIE1007 课程作业的科普视频。{info['made']}。出镜 {len(cams)} 段、画外音 {len(items) - len(cams)} 段。",
-         f"色彩：向标杆 {cfg['match']['reference']} 靠 {cfg['match']['strength']:.0%}，红绿蓝增益 {info['gains_rgb']}；美颜 {info['beauty']}；锐化 {sharpen}；"
+         (f"色彩：中正调色（config.json video.grade），红绿蓝增益 {info['gains_rgb']}，饱和度 {sat}；" if grade else f"色彩：向标杆 {cfg['match']['reference']} 靠 {cfg['match']['strength']:.0%}，红绿蓝增益 {info['gains_rgb']}；") + f"美颜 {info['beauty']}；锐化 {sharpen}；"
          f"{'画面用的是修复后的' if info['restored'] else '画面没做修复'}。底色是占位的米色，细胞背景渲好后换上。`上片对比.jpg` 左边处理前、右边处理后。", "",
          "| 名字 | 段号 | 类 | 时长 秒 | 帧数 / 应有 | 结果 |", "|---|---|---|---|---|---|"]
     for i in items:
