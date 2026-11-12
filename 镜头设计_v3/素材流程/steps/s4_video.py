@@ -29,6 +29,7 @@ FPS = 60
 FACE_EVERY = 6            # frames between face measurements (10 per second)
 FACE_W = 960              # width of the copy the face model sees
 SHRINK_AT_1080 = 7        # px the BiRefNet core is shrunk by, at 1080p; scaled with the frame
+GATE_AT_1080 = 12         # px around BiRefNet's person inside which RVM's matte counts (hair wisps yes, the shelf behind no)
 # flip: share of the person's pixels (on a 1/8 grid) that are in-out-in or out-in-out over three frames, mean per frame.
 # Real movement does not flip back within 1/30 s; a boiling matte edge does.
 CHECK = {"frames_tol": 2, "person_min": 0.03, "person_max": 0.75, "face_found_min": 0.9, "flip_max": 0.004}
@@ -50,7 +51,7 @@ def inputs(ctx):
 def params(ctx):
     v = ctx.cfg["video"]
     return {"fps": FPS, "matte": v["matte_model"], "color": "gpu_color table of common.SDR_VF", "face_every": FACE_EVERY,
-            "aspect": [v["print_aspect_w"], v["print_aspect_h"]], "check": CHECK, "version": 2}
+            "aspect": [v["print_aspect_w"], v["print_aspect_h"]], "check": CHECK, "gate": GATE_AT_1080, "version": 3}
 
 
 class Faces:
@@ -141,6 +142,7 @@ def _run(ctx, out, cv2, torch, M):
     backdrop = torch.tensor(M.hex_bgr(cfg["backdrop"])[::-1].copy(), device="cuda").view(1, 3, 1, 1) / 255
     # RGB (0..1) -> limited-range Rec.709 Y'CbCr, the planes the encoder takes as they are
     to_y = torch.tensor([0.2126, 0.7152, 0.0722], device="cuda").view(1, 3, 1, 1)
+    adir = ctx.out / C.STEP_DIRS[2] / "align"
     old = C.read_json(out / "index.json")["clips"] if (out / "index.json").exists() else []
     old = {c["name"]: c for c in old}
     index, outputs = [], []
@@ -162,6 +164,7 @@ def _run(ctx, out, cv2, torch, M):
         w_std, w_mat = writer(std, W, H, 19, "yuv420p"), writer(mat, W, H, 18, "gray")
         rvm.reset()
         k = 2 * round(SHRINK_AT_1080 * H / 1080) + 1
+        gate_k = 2 * round(GATE_AT_1080 * H / 1080) + 1
         sigma = 2 * H / 1080
         gx = torch.arange(-int(3 * sigma), int(3 * sigma) + 1, device="cuda").float()
         gk = torch.exp(-gx ** 2 / (2 * sigma ** 2))
@@ -179,7 +182,11 @@ def _run(ctx, out, cv2, torch, M):
                 core = -F.max_pool2d(-a_b[None, None], k, 1, k // 2)                   # shrink BiRefNet's matte
                 core = F.conv2d(F.conv2d(F.pad(core, (gk.shape[-1] // 2,) * 2 + (0, 0), mode="replicate"), gk),
                                 gk.transpose(2, 3), padding=(gk.shape[-1] // 2, 0))
-                alpha = torch.maximum(a_r, core[0, 0])
+                # RVM also lets through bits of the room next to the person (a shelf behind the shoulder) and stray
+                # specks; keep its matte only within GATE px of what BiRefNet calls the person
+                gate = F.max_pool2d(a_b[None, None], gate_k, 1, gate_k // 2)
+                gate = F.avg_pool2d(gate, gate_k, 1, gate_k // 2, count_include_pad=False)
+                alpha = torch.maximum(a_r * gate[0, 0], core[0, 0])
                 yp = (rgb * to_y).sum(1, keepdim=True)
                 cb = F.avg_pool2d((rgb[:, 2:3] - yp) / 1.8556, 2)
                 cr = F.avg_pool2d((rgb[:, 0:1] - yp) / 1.5748, 2)
@@ -206,14 +213,17 @@ def _run(ctx, out, cv2, torch, M):
             if n % FACE_EVERY == 0:
                 m = faces_model.measure(face_in, W / FACE_W)
                 if m:
-                    faces.append(m)
+                    faces.append(m | {"t": n / FPS})
             n += 1
         reader.wait()
         for w in (w_std, w_mat):
             w.stdin.close()
             w.wait()
         measured = (n + FACE_EVERY - 1) // FACE_EVERY
-        crop, wanted = crop_box(faces, W, H, aw, ah) if faces else (None, None)
+        # the crop follows the face while the line is spoken (step 2's cut), not while a hand reaches for the phone
+        spans = [(t["in"], t["out"]) for t in map(lambda nm: C.read_json(adir / f"{nm}.json") if (adir / f"{nm}.json").exists() else None, names) if t]
+        spoken = [f for f in faces if any(a <= f["t"] <= b for a, b in spans)] if spans else []
+        crop, wanted = crop_box(spoken or faces, W, H, aw, ah) if faces else (None, None)
         skins = [m["skin_bgr"] for m in faces if m["skin_bgr"]]
         skin = np.median(np.array(skins), axis=0) if skins else None
         lab = cv2.cvtColor(np.uint8([[skin]]), cv2.COLOR_BGR2LAB)[0, 0].astype(int).tolist() if skin is not None else None
@@ -241,7 +251,7 @@ def _run(ctx, out, cv2, torch, M):
             fails.append(f"有帧抠出来的人只占 {min(share):.1%}")
         if max(share) > CHECK["person_max"]:
             fails.append(f"有帧抠出来的占 {max(share):.0%}，可能把背景也抠进来了")
-        if c["face_found"] < CHECK["face_found_min"]:
+        if c["face_found"] < CHECK["face_found_min"] and "_ext_" not in name:      # clips outside the script may hide the face (drinking)
             fails.append(f"只有 {c['face_found']:.0%} 的帧找到脸")
         if c["flip"] > CHECK["flip_max"]:
             fails.append(f"蒙版边缘来回跳 {c['flip']:.2%}")
