@@ -113,6 +113,22 @@ def run(ctx, out):
     if not torch.cuda.is_available():
         raise RuntimeError("第 4 步要 5080：现在找不到显卡，先停下")
     cv2.setNumThreads(C.CPU_THREADS)
+    # one process per person at a time (two people may run side by side on the 5080)
+    import os
+    lock = out / "running.lock"
+    if lock.exists():
+        pid = lock.read_text().strip()
+        alive = pid.isdigit() and pid in subprocess.run(["tasklist", "/FI", f"PID eq {pid}", "/NH"], capture_output=True, text=True).stdout
+        if alive:
+            raise RuntimeError(f"{ctx.person} 的第 4 步已经有一个进程在跑（{pid}），这一个不跑")
+    lock.write_text(str(os.getpid()))
+    try:
+        return _run(ctx, out, cv2, torch, M)
+    finally:
+        lock.unlink(missing_ok=True)
+
+
+def _run(ctx, out, cv2, torch, M):
     cfg = ctx.cfg["video"]
     aw, ah = cfg["print_aspect_w"], cfg["print_aspect_h"]
     probe = {f["file"]: f for f in C.read_json(ctx.out / C.STEP_DIRS[0] / "probe.json")["files"]}
