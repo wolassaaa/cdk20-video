@@ -24,7 +24,7 @@ if [ "$TASK" = check ]; then
   PROMPT="Reply with exactly: ready"
 else
   [ -n "$WHO" ] || { echo "用法：bash glm_worker.sh <G0..G8> <A|B|C|D>"; exit 2; }
-  PROMPT="HKBU SCIE1007 课程作业的科普视频。现在是 $(date '+%Y-%m-%d %H:%M') 韩国时间，写时间就用它。你是这个项目的素材管理员。先完整读一遍 $FLOW/03_素材管理员手册.md 和 $FLOW/04_命名规则.md，然后只做手册里的 $TASK 这一件活，对象是组员 $WHO（原件在 $ROOT/人员素材啊/$WHO/）。照手册写的命令、标准和写回的文件做；拿不准的标存疑；做完按手册 G8 写日报到 $FLOW/日报/。不删任何东西，不改原件，不运行 git。跑流程只用这几条命令（工作目录已经是项目根）：bash _env/ft.sh run $WHO <步号，如 0 或 1>；bash _env/ft.sh ffprobe <ffprobe 的参数>；bash _env/ft.sh help。别的 python、ffmpeg 写法都会被拦。"
+  PROMPT="HKBU SCIE1007 课程作业的科普视频。现在是 $(date '+%Y-%m-%d %H:%M') 韩国时间，写时间就用它。你是这个项目的素材管理员。先完整读一遍 $FLOW/03_素材管理员手册.md 和 $FLOW/04_命名规则.md，然后只做手册里的 $TASK 这一件活，对象是组员 $WHO（原件在 $ROOT/人员素材啊/$WHO/）。照手册写的命令、标准和写回的文件做；拿不准的标存疑；做完按手册 G8 写日报到 $FLOW/日报/。不删任何东西，不改原件，不运行 git。跑流程只用这几条命令（工作目录已经是项目根）：bash _env/ft.sh run $WHO <步号，如 0 或 1>；bash _env/ft.sh listen $WHO（第 3 步之后的听检）；bash _env/ft.sh ffprobe <ffprobe 的参数>；bash _env/ft.sh help。别的 python、ffmpeg 写法都会被拦。"
 fi
 case "$TASK" in G1|G4|G5) MODEL=$VISION ;; G3|G6|G7) MODEL=$HEAVY ;; *) MODEL=$LIGHT ;; esac
 [ -n "$GLM_MODEL_OVERRIDE" ] && MODEL=$GLM_MODEL_OVERRIDE
@@ -41,8 +41,10 @@ case "$1" in
   run) case "$2" in A|B|C|D) ;; *) echo "member must be A, B, C or D"; exit 2 ;; esac
        case "$3" in *[!0-9,]*|"") echo "steps must look like 0 or 0,1"; exit 2 ;; esac
        exec "$PY" "$FLOW/run.py" "$ROOT/人员素材啊/$2" --steps "$3" ;;
+  listen) case "$2" in A|B|C|D) ;; *) echo "member must be A, B, C or D"; exit 2 ;; esac
+       exec "$PY" "$FLOW/listen.py" "$2" ;;
   ffprobe) shift; exec "$ROOT/_env/ffmpeg/ffprobe.exe" "$@" ;;
-  *) echo "bash _env/ft.sh run <A|B|C|D> <steps>   |   bash _env/ft.sh ffprobe <args>"; "$PY" "$FLOW/run.py" --help ;;
+  *) echo "bash _env/ft.sh run <A|B|C|D> <steps>   |   bash _env/ft.sh listen <A|B|C|D>   |   bash _env/ft.sh ffprobe <args>"; "$PY" "$FLOW/run.py" --help ;;
 esac
 FT
 if [ "$STYLE" = openai ]; then
