@@ -28,8 +28,9 @@ def _mono48(path):
     return y
 
 
-def deepfilternet3(path):
-    """DeepFilterNet3 (noise suppression, 48 kHz, tiny and fast)."""
+def deepfilternet3(path, atten_lim_db=None):
+    """DeepFilterNet3 (noise suppression, 48 kHz, tiny and fast; runs on the CPU too). atten_lim_db caps how much
+    it takes off, so the gaps keep faint room tone instead of digital silence."""
     import torch
     if "df" not in _cache:
         # deepfilternet 0.5.6 imports a class that newer torchaudio no longer has; it only uses it as a type hint
@@ -50,7 +51,7 @@ def deepfilternet3(path):
     from df.enhance import enhance
     model, state = _cache["df"]
     y = _mono48(path)
-    out = enhance(model, state, torch.from_numpy(y)[None])
+    out = enhance(model, state, torch.from_numpy(y)[None], atten_lim_db=atten_lim_db)
     return out[0].cpu().numpy().astype(np.float32), SR
 
 

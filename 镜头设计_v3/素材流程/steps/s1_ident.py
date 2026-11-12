@@ -110,9 +110,11 @@ def transcribe_all(ctx, out, probe, hint):
     wdir.mkdir(exist_ok=True)
     tmp = C.ENV / "tmp"
     tmp.mkdir(exist_ok=True)
-    C.wait_for_gpu(6000)
-    model = WhisperModel(cfg["asr_model"], device=cfg["asr_device"], compute_type=cfg["asr_compute_type"],
-                         cpu_threads=C.CPU_THREADS, download_root=str(C.ENV / "cache" / "whisper"))
+    import torch
+    device, ctype = cfg["asr_device"], cfg["asr_compute_type"]
+    if device == "cuda" and not torch.cuda.is_available():      # 5080 not attached: same model on the CPU, slower
+        device, ctype = "cpu", "int8"
+    model = None
     res = {}
     for p in ctx.videos + ctx.audios:
         pr = probe[p.name]
@@ -120,6 +122,22 @@ def transcribe_all(ctx, out, probe, hint):
         if a is None:
             res[p.name] = {"file": p.name, "words": [], "text": "", "gain_db": 0, "note": "no audio track"}
             continue
+        # reuse an earlier transcript of the same file with the same settings (a new file in the folder
+        # should not re-transcribe everything); transcripts from before this check count if newer than the file
+        stamp = {"size": p.stat().st_size, "mtime": int(p.stat().st_mtime), "model": cfg["asr_model"],
+                 "boost": cfg["asr_boost_to_lufs"], "hint": hint}
+        wj = wdir / (p.name + ".words.json")
+        if wj.exists():
+            old = C.read_json(wj)
+            if old.get("stamp") == stamp or ("stamp" not in old and wj.stat().st_mtime > p.stat().st_mtime):
+                res[p.name] = old
+                continue
+        if model is None:
+            if device == "cuda":
+                C.wait_for_gpu(6000)
+            model = WhisperModel(cfg["asr_model"], device=device, compute_type=ctype,
+                                 cpu_threads=C.CPU_THREADS, download_root=str(C.ENV / "cache" / "whisper"))
+            print(f"  转文字用 {device}（{ctype}）")
         gain = 0.0 if a["lufs"] is None else max(0.0, min(30.0, cfg["asr_boost_to_lufs"] - a["lufs"]))
         wav = tmp / "asr_in.wav"
         C.ffmpeg("-i", p, "-map", "0:a:0", "-ac", "1", "-ar", "16000",
@@ -133,7 +151,7 @@ def transcribe_all(ctx, out, probe, hint):
             nsp.append(round(s.no_speech_prob, 3))
             for w in s.words or []:
                 words.append({"w": w.word.strip(), "t0": round(w.start, 3), "t1": round(w.end, 3), "p": round(w.probability, 3)})
-        r = {"file": p.name, "gain_db": round(gain, 1), "no_speech_prob": nsp,
+        r = {"file": p.name, "stamp": stamp, "device": device, "gain_db": round(gain, 1), "no_speech_prob": nsp,
              "text": " ".join(w["w"] for w in words), "words": words}
         C.write_json(wdir / (p.name + ".words.json"), r)
         res[p.name] = r

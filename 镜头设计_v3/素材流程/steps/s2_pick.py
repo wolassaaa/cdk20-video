@@ -67,14 +67,16 @@ def inputs(ctx):
 
 
 def params(ctx):
-    return {"pad": [PAD_BEFORE, PAD_AFTER], "cut": [IN_LEAD, OUT_TAIL], "weak": WEAK, "version": 1}
+    return {"pad": [PAD_BEFORE, PAD_AFTER], "cut": [IN_LEAD, OUT_TAIL], "weak": WEAK, "version": 2}
 
 
 def load_audio(path, t0, t1):
+    """16 kHz mono of [t0, t1] of any media file, levelled for the aligner. Cut after decoding: seeking an m4a
+    before decoding lands about 0.04 s off."""
     import soundfile as sf
     wav = C.ENV / "tmp" / "align_in.wav"
     wav.parent.mkdir(exist_ok=True)
-    C.ffmpeg("-ss", f"{t0:.3f}", "-t", f"{t1 - t0:.3f}", "-i", path, "-map", "0:a:0", "-ac", "1", "-ar", str(SR),
+    C.ffmpeg("-i", path, "-ss", f"{t0:.3f}", "-t", f"{t1 - t0:.3f}", "-map", "0:a:0", "-ac", "1", "-ar", str(SR),
              "-af", "highpass=f=70,dynaudnorm=f=150:g=15", "-c:a", "pcm_s16le", wav)
     y, _ = sf.read(str(wav), dtype="float32")
     return y
@@ -100,40 +102,31 @@ def srt(words, max_chars=42):
                      for i, c in enumerate(cues, 1))
 
 
-def run(ctx, out):
-    import torch
-    import torchaudio
-    ident = C.read_json(ctx.out / C.STEP_DIRS[1] / "ident.json")
-    beats = {b["beat"]: b for b in ident["script_beats"]}
-    durs = {f["file"]: f["duration"] for f in C.read_json(ctx.out / C.STEP_DIRS[0] / "probe.json")["files"]}
-    wdir = ctx.out / C.STEP_DIRS[1] / "words"
-    adir = out / "align"
-    adir.mkdir(exist_ok=True)
-    dev = "cuda" if torch.cuda.is_available() else "cpu"
-    if dev == "cuda":
-        C.wait_for_gpu(3000)
-    else:
-        torch.set_num_threads(C.CPU_THREADS)
-    bundle = torchaudio.pipelines.MMS_FA
-    model = bundle.get_model(with_star=False).to(dev).eval()
-    tokenizer, aligner = bundle.get_tokenizer(), bundle.get_aligner()
-    outputs, takes = [], []
-    for a in ident["assets"]:
-        b = beats.get(a["beat"])
-        if not b or a["cls"] not in ("cam", "vo"):
-            continue
-        src = ctx.src / a["file"]
-        dur = durs[a["file"]]
-        w0, w1 = max(0.0, a["t0"] - PAD_BEFORE), min(dur, a["t1"] + PAD_AFTER)
-        y = load_audio(src, w0, w1)
-        toks = b["text"].split()
+class Aligner:
+    """MMS_FA forced alignment of a given text: GPU when there is one, else CPU. Also used by step 3."""
+
+    def __init__(self):
+        import torch
+        import torchaudio
+        self.torch = torch
+        self.dev = "cuda" if torch.cuda.is_available() else "cpu"
+        if self.dev == "cuda":
+            C.wait_for_gpu(3000)
+        else:
+            torch.set_num_threads(C.CPU_THREADS)
+        bundle = torchaudio.pipelines.MMS_FA
+        self.model = bundle.get_model(with_star=False).to(self.dev).eval()
+        self.tokenizer, self.aligner = bundle.get_tokenizer(), bundle.get_aligner()
+
+    def words(self, y, text, w0=0.0):
+        """y: 16 kHz mono; text: the script line. -> [{"w" (as written), "t0", "t1", "score"}], times + w0."""
+        toks = text.split()
         groups = [spoken(t) for t in toks]
         flat = [w for g in groups for w in g]
-        with torch.inference_mode():
-            em, _ = model(torch.from_numpy(y)[None].to(dev))
-            spans = aligner(em[0], tokenizer(flat))
+        with self.torch.inference_mode():
+            em, _ = self.model(self.torch.from_numpy(y)[None].to(self.dev))
+            spans = self.aligner(em[0], self.tokenizer(flat))
         sec = len(y) / SR / em.shape[1]
-        heard = C.read_json(wdir / (a["file"] + ".words.json"))["words"]
         words, k = [], 0
         for tok, g in zip(toks, groups):
             if not g:                              # punctuation only: rides on the previous word
@@ -142,10 +135,31 @@ def run(ctx, out):
                 continue
             sp = [s for w in spans[k:k + len(g)] for s in w]
             k += len(g)
-            t0, t1 = w0 + sp[0].start * sec, w0 + sp[-1].end * sec
-            score = float(np.mean([s.score for s in sp]))
-            near = [h["w"] for h in heard if h["t1"] > t0 - 0.05 and h["t0"] < t1 + 0.05]
-            words.append({"w": tok, "t0": round(t0, 3), "t1": round(t1, 3), "score": round(score, 3), "heard": " ".join(near)})
+            words.append({"w": tok, "t0": round(w0 + sp[0].start * sec, 3), "t1": round(w0 + sp[-1].end * sec, 3),
+                          "score": round(float(np.mean([s.score for s in sp])), 3)})
+        return words
+
+
+def run(ctx, out):
+    ident = C.read_json(ctx.out / C.STEP_DIRS[1] / "ident.json")
+    beats = {b["beat"]: b for b in ident["script_beats"]}
+    durs = {f["file"]: f["duration"] for f in C.read_json(ctx.out / C.STEP_DIRS[0] / "probe.json")["files"]}
+    wdir = ctx.out / C.STEP_DIRS[1] / "words"
+    adir = out / "align"
+    adir.mkdir(exist_ok=True)
+    fa = Aligner()
+    outputs, takes = [], []
+    for a in ident["assets"]:
+        b = beats.get(a["beat"])
+        if not b or a["cls"] not in ("cam", "vo"):
+            continue
+        src = ctx.src / a["file"]
+        dur = durs[a["file"]]
+        w0, w1 = max(0.0, a["t0"] - PAD_BEFORE), min(dur, a["t1"] + PAD_AFTER)
+        words = fa.words(load_audio(src, w0, w1), b["text"], w0)
+        heard = C.read_json(wdir / (a["file"] + ".words.json"))["words"]
+        for w in words:
+            w["heard"] = " ".join(h["w"] for h in heard if h["t1"] > w["t0"] - 0.05 and h["t0"] < w["t1"] + 0.05)
         weak = [w for w in words if w["score"] < WEAK]
         first, last = words[0]["t0"], words[-1]["t1"]
         cut_in, cut_out = round(max(0.0, first - IN_LEAD), 2), round(min(dur, last + OUT_TAIL), 2)
