@@ -24,7 +24,7 @@ KEYS = ENV / "keys.env"
 
 VIDEO_EXT = {".mp4", ".mov", ".m4v", ".mkv", ".avi", ".3gp", ".mts", ".webm"}
 AUDIO_EXT = {".m4a", ".wav", ".mp3", ".aac", ".flac", ".ogg", ".opus"}
-CPU_THREADS = 4
+CPU_THREADS = 6                             # director, 11-12: six threads, normal priority
 
 # HLG / PQ -> Rec.709 8 bit (tried three on D's footage 11-12: this one keeps the window and the white shirt from blowing out)
 SDR_VF = ("zscale=t=linear:npl=100,format=gbrpf32le,zscale=p=bt709,tonemap=tonemap=hable:desat=0,"
@@ -34,7 +34,7 @@ STEP_DIRS = {0: "0_probe", 1: "1_ident", 2: "2_pick", 3: "3_audio", 4: "4_video"
 
 
 def setup_env():
-    """Caches on D:, at most 4 CPU threads, this process (and the children it starts) below normal priority."""
+    """Caches on D:, at most CPU_THREADS CPU threads, this process (and the children it starts) at normal priority."""
     cache = ENV / "cache"
     # set, not setdefault: this machine has HF_HOME / TORCH_HOME pointing at a drive that is not there
     os.environ["HF_HOME"] = str(cache / "hf")
@@ -55,8 +55,8 @@ def setup_env():
         except (OSError, AttributeError):
             pass
     if os.name == "nt":
-        BELOW_NORMAL = 0x00004000  # child processes inherit this class
-        ctypes.windll.kernel32.SetPriorityClass(ctypes.windll.kernel32.GetCurrentProcess(), BELOW_NORMAL)
+        NORMAL = 0x00000020  # child processes inherit this class (was below normal until 11-12)
+        ctypes.windll.kernel32.SetPriorityClass(ctypes.windll.kernel32.GetCurrentProcess(), NORMAL)
     for st in (sys.stdout, sys.stderr):
         if hasattr(st, "reconfigure"):
             st.reconfigure(encoding="utf-8")
