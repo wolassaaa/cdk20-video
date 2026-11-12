@@ -19,7 +19,7 @@ from steps.s1_ident import load_script  # noqa: E402
 
 PEOPLE = ["A", "B", "C", "D"]
 STEPS = [(0, "量规格"), (1, "认片"), (2, "对稿"), (3, "声音"), (4, "抠像"), (5, "上片"), (6, "质检")]
-BUILT = {0, 1, 2, 3, 4}                   # steps that exist as code
+BUILT = {0, 1, 2, 3, 4, 5}                   # steps that exist as code
 E = html.escape
 
 
