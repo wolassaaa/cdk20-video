@@ -104,7 +104,17 @@ def wait_for_gpu(need_mb=6000, tries=30, pause=20):
 
 def media_files(folder):
     """Media files of one person's folder, videos then recordings. Other files (names etc.) are never read."""
-    fs = [p for p in sorted(Path(folder).iterdir()) if p.is_file()]
+    fs, seen = [], set()
+    for p in sorted(Path(folder).iterdir(), key=lambda p: (len(p.name), p.name)):
+        if not p.is_file() or p.suffix.lower() not in VIDEO_EXT | AUDIO_EXT:
+            continue
+        key = (p.stat().st_size, hashlib.md5(p.read_bytes()).hexdigest())     # a second download, "x(1).mp4": same bytes, skipped
+        if key in seen:
+            print(f"  重复下载的文件，跳过：{p.name}")
+            continue
+        seen.add(key)
+        fs.append(p)
+    fs.sort()
     return ([p for p in fs if p.suffix.lower() in VIDEO_EXT], [p for p in fs if p.suffix.lower() in AUDIO_EXT])
 
 
