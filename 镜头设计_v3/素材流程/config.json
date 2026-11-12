@@ -4,8 +4,9 @@
   "target_lufs": -16.0,
   "true_peak_db": -1.5,
   "sample_rate": 48000,
-  "enhance_model": null,
-  "_enhance_model_note": "null until the director picks one from 01_两处对比.md (deepfilternet3 | mossformer2_se_48k | ffmpeg_afftdn)"
+  "enhance_model": "deepfilternet3",
+  "enhance_atten_lim_db": 18,
+  "_enhance_model_note": "picked 11-12 by the manager from round 2 in 01_两处对比.md (most script words heard, least change to the voice, gaps keep faint room tone); the director can still overrule by ear"
  },
  "ident": {
   "asr_model": "large-v3",
@@ -29,8 +30,8 @@
   "_backdrop_note": "placeholder beige, the director has not picked the colour yet",
   "backdrop_cells": {"use": "candidate", "seed_per_clip": true, "speed": 0.5, "contrast": 0.6, "defocus": true, "clear_around_face": true,
                      "_note": "11-12 director idea: the end-card hand-drawn cell collisions (fusion/end, w5cells2_sim.py + bl_w5cells2.py) behind on-camera clips only, a new seed per clip, length = clip length; not for the whole film. Sample (D, slow vs normal) waits until rendering resumes"},
-  "matte_model": null,
-  "_matte_model_note": "null until the director picks one from 01_两处对比.md (rvm_resnet50 | birefnet | ...)",
+  "matte_model": "fused",
+  "_matte_model_note": "picked 11-12 by the manager from round 2 in 01_两处对比.md: max(RVM, BiRefNet shrunk 7 px); RVM hair, BiRefNet fills the hand holes; costs both models (~112 ms per 1080p frame on the 5080)",
   "tonemap": "zscale HLG -> linear -> bt709, hable",
   "beauty": {"level": "light", "smooth": true, "blemish": true, "_levels": "off | light | medium; face only, never reshapes"},
   "white_balance": {"target_kelvin": null, "per_person_shift": {"A": null, "B": null, "C": null, "D": null},
