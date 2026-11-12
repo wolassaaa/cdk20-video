@@ -108,7 +108,7 @@ def transcribe_all(ctx, out, probe, hint):
     cfg = ctx.cfg["ident"]
     wdir = out / "words"
     wdir.mkdir(exist_ok=True)
-    tmp = C.ENV / "tmp"
+    tmp = C.tmp()
     tmp.mkdir(exist_ok=True)
     import torch
     device, ctype = cfg["asr_device"], cfg["asr_compute_type"]

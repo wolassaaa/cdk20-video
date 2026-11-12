@@ -62,6 +62,22 @@ def setup_env():
             st.reconfigure(encoding="utf-8")
 
 
+_TMP = None
+
+
+def tmp():
+    """This process's own scratch folder under _env/tmp (removed on exit). Two pipeline runs at once used to
+    overwrite each other's temporary WAVs when they shared one folder."""
+    global _TMP
+    if _TMP is None:
+        import atexit
+        import shutil
+        _TMP = ENV / "tmp" / f"p{os.getpid()}"
+        _TMP.mkdir(parents=True, exist_ok=True)
+        atexit.register(shutil.rmtree, _TMP, True)
+    return _TMP
+
+
 def load_config():
     return json.loads(CONFIG.read_text(encoding="utf-8"))
 

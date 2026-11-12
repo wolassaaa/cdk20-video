@@ -67,7 +67,7 @@ def mossformer2_se_48k(path):
             _cache["cv"] = ClearVoice(task="speech_enhancement", model_names=["MossFormer2_SE_48K"])
         finally:
             os.chdir(cwd)
-    tmp = C.ENV / "tmp" / "cv_in.wav"                        # it wants a file path, mono 48 kHz
+    tmp = C.tmp() / "cv_in.wav"                        # it wants a file path, mono 48 kHz
     tmp.parent.mkdir(exist_ok=True)
     sf.write(tmp, _mono48(path), SR)
     cwd = os.getcwd()
@@ -83,7 +83,7 @@ def mossformer2_se_48k(path):
 
 def ffmpeg_afftdn(path):
     """Reference without any model: ffmpeg high-pass + FFT denoiser tracking the noise floor."""
-    tmp = C.ENV / "tmp" / "afftdn_out.wav"
+    tmp = C.tmp() / "afftdn_out.wav"
     tmp.parent.mkdir(exist_ok=True)
     C.ffmpeg("-i", path, "-ac", "1", "-ar", str(SR), "-af", "highpass=f=70,afftdn=nr=18:nf=-45:tn=1", tmp)
     return _mono48(tmp), SR

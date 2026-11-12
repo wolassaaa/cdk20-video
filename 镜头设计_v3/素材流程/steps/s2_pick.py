@@ -20,6 +20,7 @@ import common as C
 
 PAD_BEFORE, PAD_AFTER = 2.5, 1.0        # s searched around step 1's first/last word
 IN_LEAD, OUT_TAIL = 0.3, 0.45           # suggested cut: before the first word, after the last (handbook G7: 0.2–0.4, 0.3–0.6)
+CHAIN_GAP = 0.5                         # s: heard words closer than this to the line belong to the same breath
 WEAK = 0.35                             # mean token probability under this: the word may be missing or said differently
 SR = 16000
 
@@ -67,14 +68,14 @@ def inputs(ctx):
 
 
 def params(ctx):
-    return {"pad": [PAD_BEFORE, PAD_AFTER], "cut": [IN_LEAD, OUT_TAIL], "weak": WEAK, "version": 2}
+    return {"pad": [PAD_BEFORE, PAD_AFTER], "cut": [IN_LEAD, OUT_TAIL], "weak": WEAK, "chain_gap": CHAIN_GAP, "version": 3}
 
 
 def load_audio(path, t0, t1):
     """16 kHz mono of [t0, t1] of any media file, levelled for the aligner. Cut after decoding: seeking an m4a
     before decoding lands about 0.04 s off."""
     import soundfile as sf
-    wav = C.ENV / "tmp" / "align_in.wav"
+    wav = C.tmp() / "align_in.wav"
     wav.parent.mkdir(exist_ok=True)
     C.ffmpeg("-i", path, "-ss", f"{t0:.3f}", "-t", f"{t1 - t0:.3f}", "-map", "0:a:0", "-ac", "1", "-ar", str(SR),
              "-af", "highpass=f=70,dynaudnorm=f=150:g=15", "-c:a", "pcm_s16le", wav)
@@ -109,10 +110,9 @@ class Aligner:
         import torch
         import torchaudio
         self.torch = torch
-        self.dev = "cuda" if torch.cuda.is_available() else "cpu"
-        if self.dev == "cuda":
-            C.wait_for_gpu(3000)
-        else:
+        # on the card when it has room; when a matting run fills it, the CPU does this in about the same time
+        self.dev = "cuda" if torch.cuda.is_available() and (C.gpu_free_mb() or 0) >= 3000 else "cpu"
+        if self.dev == "cpu":
             torch.set_num_threads(C.CPU_THREADS)
         bundle = torchaudio.pipelines.MMS_FA
         self.model = bundle.get_model(with_star=False).to(self.dev).eval()
@@ -162,9 +162,18 @@ def run(ctx, out):
             w["heard"] = " ".join(h["w"] for h in heard if h["t1"] > w["t0"] - 0.05 and h["t0"] < w["t1"] + 0.05)
         weak = [w for w in words if w["score"] < WEAK]
         first, last = words[0]["t0"], words[-1]["t1"]
-        cut_in, cut_out = round(max(0.0, first - IN_LEAD), 2), round(min(dur, last + OUT_TAIL), 2)
+        # what the member actually said can run past the script line (extra words, a longer ending): the cut and
+        # the "nobody speaks" regions follow the heard words that run on from the line with gaps under CHAIN_GAP
+        s0, s1 = first, last
+        for h in heard:
+            if h["t1"] > first - CHAIN_GAP and h["t0"] < s1 + CHAIN_GAP:
+                s1 = max(s1, h["t1"])
+        for h in reversed(heard):
+            if h["t0"] < last + CHAIN_GAP and h["t1"] > s0 - CHAIN_GAP:
+                s0 = min(s0, h["t0"])
+        cut_in, cut_out = round(max(0.0, s0 - IN_LEAD), 2), round(min(dur, s1 + OUT_TAIL), 2)
         rec = {"name": a["name"], "file": a["file"], "beat": a["beat"], "class": a["cls"], "take": a["take"],
-               "script": b["text"], "first_word": first, "last_word": last, "in": cut_in, "out": cut_out,
+               "script": b["text"], "first_word": first, "last_word": last, "speech": [round(s0, 3), round(s1, 3)], "in": cut_in, "out": cut_out,
                "spoken_seconds": round(last - first, 2), "script_seconds": b["secs"], "step1_score": a["score"],
                "mean_score": round(float(np.mean([w["score"] for w in words])), 3),
                "weak_words": [w["w"] for w in weak], "words": words,

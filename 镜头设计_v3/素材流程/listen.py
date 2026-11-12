@@ -47,7 +47,7 @@ def main():
     rows = C.read_json(out / "results.json")["rows"]
     lj = out / "listen.json"
     old = {r["name"]: r for r in C.read_json(lj)["rows"]} if lj.exists() else {}
-    tmp = C.ENV / "tmp"
+    tmp = C.tmp()
     # who gets listened to (director, 11-12: the numbers are the gate, so only the flagged takes and a random sample)
     why = {}
     for r in rows:

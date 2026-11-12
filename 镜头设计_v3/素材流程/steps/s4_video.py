@@ -159,8 +159,14 @@ def _run(ctx, out, cv2, torch, M):
             continue
         t_start = time.time()
         expect = round(pr["duration"] * FPS)
+        # phones that record HDR give HLG (converted with the table); phones that record plain SDR (C's: 8-bit
+        # Rec.709) need no conversion, ffmpeg hands over RGB as it is
+        kind = pr["video"]["transfer_kind"]
+        if kind not in ("HLG", "SDR"):
+            raise RuntimeError(f"{src.name} 是 {kind}，第 4 步只认 HLG 和普通色彩")
         reader = subprocess.Popen([C.FFMPEG, "-v", "error", "-hwaccel", "cuda", "-i", str(src), "-vf", f"fps={FPS}", "-an",
-                                   "-f", "rawvideo", "-pix_fmt", "p010le", "-"], stdout=subprocess.PIPE, bufsize=W * H * 3)
+                                   "-f", "rawvideo", "-pix_fmt", "p010le" if kind == "HLG" else "rgb24", "-"],
+                                  stdout=subprocess.PIPE, bufsize=W * H * 3)
         w_std, w_mat = writer(std, W, H, 19, "yuv420p"), writer(mat, W, H, 18, "gray")
         rvm.reset()
         k = 2 * round(SHRINK_AT_1080 * H / 1080) + 1
@@ -176,8 +182,11 @@ def _run(ctx, out, cv2, torch, M):
             if len(buf) < W * H * 3:
                 break
             with torch.inference_mode():
-                y, uv = G.read_p010(buf, W, H)
-                rgb = G.apply(lut, y, uv)                                              # 1x3xHxW, 0..1
+                if kind == "HLG":
+                    y, uv = G.read_p010(buf, W, H)
+                    rgb = G.apply(lut, y, uv)                                          # 1x3xHxW, 0..1
+                else:
+                    rgb = torch.frombuffer(bytearray(buf), dtype=torch.uint8).cuda().view(H, W, 3).permute(2, 0, 1)[None].float() / 255
                 a_r, a_b = rvm.alpha_t(rgb), bir.alpha_t(rgb)
                 core = -F.max_pool2d(-a_b[None, None], k, 1, k // 2)                   # shrink BiRefNet's matte
                 core = F.conv2d(F.conv2d(F.pad(core, (gk.shape[-1] // 2,) * 2 + (0, 0), mode="replicate"), gk),
@@ -243,7 +252,7 @@ def _run(ctx, out, cv2, torch, M):
              "face_found": round(len(faces) / max(1, measured), 3),
              "crop": crop, "crop_wanted": wanted, "crop_cut_px": max(0, wanted[3] - H) if wanted else None,
              "skin_bgr": [round(float(v), 1) for v in skin] if skin is not None else None, "skin_lab": lab,
-             "seconds": round(time.time() - t_start, 1), "ms_per_frame": round((time.time() - t_start) * 1000 / max(1, n)), "stamp": stamp}
+             "seconds": round(time.time() - t_start, 1), "ms_per_frame": round((time.time() - t_start) * 1000 / max(1, n)), "source_color": kind, "stamp": stamp}
         fails = []
         if abs(n - expect) > CHECK["frames_tol"]:
             fails.append(f"帧数 {n}，应有 {expect}")
