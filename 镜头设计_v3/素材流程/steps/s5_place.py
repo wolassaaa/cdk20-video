@@ -30,6 +30,8 @@ OUT_W, OUT_H = 1560, 1872             # 5:6, 1.5x the print's size in the 4K fil
 BEAUTY = {"off": 0.0, "light": 0.45, "medium": 0.7}       # how much of the mid-size skin unevenness is taken out
 BAND = (1.5, 9.0)                     # px at output size: detail between these two blur widths is "mid-size"
 GAIN_LIMIT = (0.75, 1.45)             # per-channel gain in linear light
+ALPHA_CURVE = (0.15, 0.85)            # matte below / above these counts as clear / solid (picked on A's hair over a black TV, 11-13)
+DEFG_R = (60, 4)                      # px at output size: the two passes of the foreground estimate
 
 
 def inputs(ctx):
@@ -40,7 +42,7 @@ def inputs(ctx):
 def params(ctx):
     v = ctx.cfg["video"]
     return {"size": [OUT_W, OUT_H], "beauty": v["beauty"], "match": v.get("match"), "sharpen": v.get("sharpen"), "backdrop": v["backdrop"],
-            "band": BAND, "version": 1}
+            "band": BAND, "unmix": DEFG_R, "alpha_curve": ALPHA_CURVE, "version": 2}
 
 
 def skin_reference(cfg):
@@ -71,6 +73,30 @@ def blur(x, sigma, F, torch):
     k = (k / k.sum()).view(1, 1, 1, -1).repeat(x.shape[1], 1, 1, 1)
     x = F.conv2d(F.pad(x, (r, r, 0, 0), mode="replicate"), k, groups=x.shape[1])
     return F.conv2d(F.pad(x, (0, 0, r, r), mode="replicate"), k.transpose(2, 3), groups=x.shape[1])
+
+
+def box(x, r, F):
+    """Mean over a (2r+1) square, edges replicated; cost does not grow with r."""
+    x = F.pad(x, (r + 1, r, r + 1, r), mode="replicate")
+    c = x.cumsum(-1)
+    x = c[..., 2 * r + 1:] - c[..., :-(2 * r + 1)]
+    c = x.cumsum(-2)
+    return (c[..., 2 * r + 1:, :] - c[..., :-(2 * r + 1), :]) / (2 * r + 1) ** 2
+
+
+def unmix(img, a, F):
+    """Colour of the person where the matte is part-way (hair strands): the old background showing through
+    (A's black TV, 11-13) would otherwise come along as a dark rim. Blur-fusion foreground estimate
+    (Forte & Pitie 2021), a wide pass then a narrow one."""
+    fg, bg = img, img
+    for r in DEFG_R:
+        ba, bb = box(a, r, F), box(1 - a, r, F)
+        bf = box(fg * a, r, F) / (ba + 1e-5)
+        bbk = box(bg * (1 - a), r, F) / (bb + 1e-5)
+        fg = (bf + a * (img - a * bf - (1 - a) * bbk)).clamp(0, 1)
+        bg = bbk
+    solid = (a > 0.98).float()                         # inside the person the picture stays as it was
+    return solid * img + (1 - solid) * fg
 
 
 def reader(path, t0, dur, crop, pix):
@@ -142,6 +168,7 @@ def run(ctx, out):
                 with torch.inference_mode():
                     x0 = torch.frombuffer(bytearray(b1), dtype=torch.uint8).cuda().view(OUT_H, OUT_W, 3).permute(2, 0, 1)[None].float() / 255
                     a = torch.frombuffer(bytearray(b2), dtype=torch.uint8).cuda().view(1, 1, OUT_H, OUT_W).float() / 255
+                    a = ((a - ALPHA_CURVE[0]) / (ALPHA_CURVE[1] - ALPHA_CURVE[0])).clamp(0, 1)      # soft grey band over dark backgrounds gone, strands kept
                     x = (x0.clamp(min=1e-4) ** 2.2 * g).clamp(0, 1) ** (1 / 2.2)                    # colour match, linear light
                     if k_beauty:
                         small = (F.interpolate(x, (OUT_H // 4, OUT_W // 4), mode="area")[0].permute(1, 2, 0) * 255).round().byte().cpu().numpy()
@@ -156,6 +183,7 @@ def run(ctx, out):
                         x = (luma + chroma + 0.5 * k_beauty * skin * (blur(chroma, BAND[1], F, torch) - chroma)).clamp(0, 1)   # skin colour evened
                     if sharpen:
                         x = (x + sharpen * (x - blur(x, 1.2, F, torch))).clamp(0, 1)
+                    x = unmix(x, a, F)
                     comp = x * a + backdrop * (1 - a)
                     to8 = lambda v: (v[0].permute(1, 2, 0) * 255).round().byte().cpu().numpy().tobytes()
                     d_fg, d_pr, d_al = to8(x), to8(comp), (a[0, 0] * 255).round().byte().cpu().numpy().tobytes()

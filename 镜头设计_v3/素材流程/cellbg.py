@@ -15,7 +15,8 @@ Per take (5_place/place.json):
      through bl_cellbg.py, which only changes the frame size
   4. composite on the card: cells pulled toward the paper colour (contrast), softened (defocus), the person from
      step 5 on top -> 5_place/<name>_cells[_tag].mp4 with the take's sound
-Settings: config.json video.backdrop_cells (speed, contrast, defocus). The drawn frames are temporary and deleted.
+Settings: config.json video.backdrop_cells (speed, contrast, defocus). The drawn frames are deleted; the toned-down cells are kept as <name>_cellplate.mp4,
+so after step 5 is redone `--recomp` only puts the person on again.
 """
 import argparse
 import hashlib
@@ -122,8 +123,35 @@ def render(tmp, frames, scale):
     return time.time() - t
 
 
-def composite(item, pdir, tmp, look, dst):
-    """Cells (softened, toned down) under the person from step 5; the take's sound; h264_nvenc."""
+def plate(tmp, item, look, dst):
+    """The drawn cells, toned down and softened, as <name>_cellplate.mp4: kept so the person can be put on again
+    (step 5 redone) without drawing the cells again."""
+    import torch
+    from steps.s5_place import blur
+    import torch.nn.functional as F
+    W, H = item["size"]
+    w = subprocess.Popen([C.FFMPEG, "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-",
+                          "-c:v", "h264_nvenc", "-preset", "p5", "-rc", "vbr", "-cq", "14", "-b:v", "0", "-pix_fmt", "yuv420p", "-color_primaries", "bt709",
+                          "-color_trc", "bt709", "-colorspace", "bt709", "-movflags", "+faststart", str(dst)], stdin=subprocess.PIPE)
+    paper = torch.tensor(PAPER, device="cuda").float().view(1, 3, 1, 1) / 255
+    n = 0
+    while (png := tmp / "png" / f"c_{n:04d}.png").exists():
+        with torch.inference_mode():
+            g = torch.from_numpy(C.imread(png)[:, :, ::-1].copy()).cuda().permute(2, 0, 1)[None].float() / 255
+            if g.shape[-2:] != (H, W):
+                g = F.interpolate(g, (H, W), mode="bilinear")
+            g = paper + look["contrast"] * (g - paper)
+            if look.get("defocus"):
+                g = blur(g, float(look.get("defocus_px", 3.0)), F, torch)
+            w.stdin.write(g[0].permute(1, 2, 0).mul(255).round().byte().cpu().numpy().tobytes())
+        n += 1
+    w.stdin.close()
+    w.wait()
+    return n
+
+
+def composite(item, pdir, plate_path, dst):
+    """The person from step 5 on the cell plate; the take's sound; h264_nvenc."""
     import cv2
     import torch
     from steps.s5_place import blur
@@ -134,21 +162,14 @@ def composite(item, pdir, tmp, look, dst):
     w = subprocess.Popen([C.FFMPEG, "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-", "-i", str(pdir / item["wav"]),
                           "-c:v", "h264_nvenc", "-preset", "p5", "-rc", "vbr", "-cq", "17", "-b:v", "0", "-pix_fmt", "yuv420p", "-color_primaries", "bt709",
                           "-color_trc", "bt709", "-colorspace", "bt709", "-c:a", "aac", "-b:a", "192k", "-shortest", "-movflags", "+faststart", str(dst)], stdin=subprocess.PIPE)
-    paper = torch.tensor(PAPER, device="cuda").float().view(1, 3, 1, 1) / 255
+    r_bg = rd(plate_path.name, "rgb24")
     n, keep = 0, None
     while True:
-        b1, b2 = r_fg.stdout.read(W * H * 3), r_a.stdout.read(W * H)
-        png = tmp / "png" / f"c_{n:04d}.png"
-        if len(b1) < W * H * 3 or len(b2) < W * H or not png.exists():
+        b1, b2, b3 = r_fg.stdout.read(W * H * 3), r_a.stdout.read(W * H), r_bg.stdout.read(W * H * 3)
+        if len(b1) < W * H * 3 or len(b2) < W * H or len(b3) < W * H * 3:
             break
-        bg = C.imread(png)[:, :, ::-1]
         with torch.inference_mode():
-            g = torch.from_numpy(bg.copy()).cuda().permute(2, 0, 1)[None].float() / 255
-            if g.shape[-2:] != (H, W):
-                g = F.interpolate(g, (H, W), mode="bilinear")
-            g = paper + look["contrast"] * (g - paper)
-            if look.get("defocus"):
-                g = blur(g, float(look.get("defocus_px", 3.0)), F, torch)
+            g = torch.frombuffer(bytearray(b3), dtype=torch.uint8).cuda().view(H, W, 3).permute(2, 0, 1)[None].float() / 255
             x = torch.frombuffer(bytearray(b1), dtype=torch.uint8).cuda().view(H, W, 3).permute(2, 0, 1)[None].float() / 255
             a = torch.frombuffer(bytearray(b2), dtype=torch.uint8).cuda().view(1, 1, H, W).float() / 255
             out = (x * a + g * (1 - a))[0].permute(1, 2, 0).mul(255).round().byte().cpu().numpy()
@@ -156,7 +177,7 @@ def composite(item, pdir, tmp, look, dst):
         if n == item["frames"] // 2:
             keep = out[:, :, ::-1]
         n += 1
-    for p in (r_fg, r_a):
+    for p in (r_fg, r_a, r_bg):
         p.stdout.close()
         p.wait()
     w.stdin.close()
@@ -171,6 +192,7 @@ def main():
     ap.add_argument("takes", nargs="*", help="names of takes; none = every on-camera take of the person")
     ap.add_argument("--variant", default=None, help="slow | normal (default: from config speed)")
     ap.add_argument("--tag", default="", help="suffix of the output name, for samples")
+    ap.add_argument("--recomp", action="store_true", help="only put the person (step 5 redone) on the kept cell plates again")
     a = ap.parse_args()
     look = {k: v for k, v in C.load_config()["video"]["backdrop_cells"].items() if not k.startswith("_")}
     speed = SPEED[a.variant] if a.variant else float(look.get("speed", 0.5))
@@ -180,9 +202,22 @@ def main():
     for it in items:
         key = it["name"] + ("_" + a.tag if a.tag else "")
         dst = pdir / f"{key.replace(it['name'], it['name'] + '_cells')}.mp4"
+        pl = dst.with_name(dst.stem.replace("_cells", "_cellplate") + ".mp4")
         stamp = {"speed": speed, "look": look, "frames": it["frames"], "fg_size": (pdir / it["fg"]).stat().st_size}
         if log.get(key, {}).get("stamp") == stamp and dst.exists():
             print(f"  {key:22} 已做过，跳过")
+            continue
+        if pl.exists() and {k: v for k, v in log.get(key, {}).get("stamp", {}).items() if k != "fg_size"} == {k: v for k, v in stamp.items() if k != "fg_size"}:
+            t0 = time.time()
+            n, keep = composite(it, pdir, pl, dst)
+            if keep is not None:
+                C.imwrite(pdir / f"{dst.stem}.jpg", keep, 90)
+            log[key] |= {"frames": n, "stamp": stamp, "ok": n == it["frames"], "recomp_seconds": round(time.time() - t0, 1)}
+            C.write_json(pdir / "cells.json", log)
+            print(f"  {key:22} 细胞底片已有，只重新合成人像 {time.time() - t0:.0f} 秒  {'过' if n == it['frames'] else '没过：帧数不对'}", flush=True)
+            continue
+        if a.recomp:
+            print(f"  {key:22} 没有细胞底片，跳过")
             continue
         t0 = time.time()
         tmp = C.ENV / "tmp" / "cellbg" / key
@@ -195,11 +230,12 @@ def main():
             if cover <= FACE_COVER_MAX:
                 break
         t_r = render(tmp, it["frames"], it["size"][1] / DH)
-        n, keep = composite(it, pdir, tmp, look, dst)
+        n_pl = plate(tmp, it, look, pl)
+        n, keep = composite(it, pdir, pl, dst)
         if keep is not None:
             C.imwrite(pdir / f"{dst.stem}.jpg", keep, 90)
         shutil.rmtree(tmp, ignore_errors=True)
-        log[key] = {"file": dst.name, "seed": base + attempt, "cells": len(cells), "face_cover": round(cover, 3), "frames": n, "frames_expected": it["frames"],
+        log[key] = {"file": dst.name, "plate": pl.name, "plate_frames": n_pl, "seed": base + attempt, "cells": len(cells), "face_cover": round(cover, 3), "frames": n, "frames_expected": it["frames"],
                     "render_seconds": round(t_r, 1), "seconds": round(time.time() - t0, 1), "stamp": stamp, "ok": n == it["frames"]}
         C.write_json(pdir / "cells.json", log)
         print(f"  {key:22} {len(cells)} 个细胞，脸周围平均盖住 {cover:.1%}；{n} 帧，画 {t_r:.0f} 秒（每帧 {t_r / max(1, n) * 1000:.0f} 毫秒），共 {time.time() - t0:.0f} 秒  "
