@@ -68,7 +68,7 @@ def inputs(ctx):
 
 
 def params(ctx):
-    return {"pad": [PAD_BEFORE, PAD_AFTER], "cut": [IN_LEAD, OUT_TAIL], "weak": WEAK, "chain_gap": CHAIN_GAP, "version": 3}
+    return {"pad": [PAD_BEFORE, PAD_AFTER], "cut": [IN_LEAD, OUT_TAIL], "weak": WEAK, "chain_gap": CHAIN_GAP, "prefer": (ctx.cfg.get("pick_prefer") or {}).get(ctx.person), "version": 3}
 
 
 def load_audio(path, t0, t1):
@@ -185,10 +185,13 @@ def run(ctx, out):
         print(f"  {a['name']:16} {len(words):3d} 词  {first:6.2f}–{last:6.2f}  弱 {len(weak)}")
 
     # one suggested take per line
+    prefer = (ctx.cfg.get("pick_prefer") or {}).get(ctx.person, {})
     picks = []
     for beat in sorted({t["beat"] for t in takes}):
         ts = sorted((t for t in takes if t["beat"] == beat),
                     key=lambda t: (-(t["step1_score"] or 0) - 100 * t["mean_score"], abs(t["spoken_seconds"] - t["script_seconds"])))
+        want = prefer.get(beat)                            # the director's choice wins (e.g. a reshoot over the old take)
+        ts.sort(key=lambda t: t["name"] != want)
         picks.append({"beat": beat, "pick": ts[0]["name"], "others": [t["name"] for t in ts[1:]],
                       "in": ts[0]["in"], "out": ts[0]["out"], "confirmed": False})
     C.write_json(out / "picks.json", {"person": ctx.person, "made": time.strftime("%Y-%m-%d %H:%M") + " 韩国时间",
