@@ -31,7 +31,14 @@ BEAUTY = {"off": 0.0, "light": 0.45, "medium": 0.7}       # how much of the mid-
 BAND = (1.5, 9.0)                     # px at output size: detail between these two blur widths is "mid-size"
 GAIN_LIMIT = (0.75, 1.45)             # per-channel gain in linear light
 ALPHA_CURVE = (0.15, 0.85)            # matte below / above these counts as clear / solid (picked on A's hair over a black TV, 11-13)
-DEFG_R = (60, 4)                      # px at output size: the two passes of the foreground estimate
+DEFG_R = (60, 4)
+SHINE = {"off": 0.0, "light": 0.5, "medium": 0.75, "strong": 0.9}   # how much of the shine is taken off
+EYE_L = (33, 7, 163, 144, 145, 153, 154, 155, 133, 173, 157, 158, 159, 160, 161, 246)
+EYE_R = (362, 382, 381, 380, 374, 373, 390, 249, 263, 466, 388, 387, 386, 385, 384, 398)
+LIPS = (61, 146, 91, 181, 84, 17, 314, 405, 321, 375, 291, 409, 270, 269, 267, 0, 37, 39, 40, 185)
+SHINE_TINT = 0.9                      # how far the colour of a shiny spot is pulled toward the skin around: a white spot only made darker turns grey (C, 11-13)
+SHINE_SIGMA = 60.0                    # px at output size: the skin around a spot (C's cheek shine is ~100 px wide)
+SHINE_START, SHINE_RANGE = 0.05, 0.20   # brighter than the skin around by 8 % starts to count, by 33 % counts fully                      # px at output size: the two passes of the foreground estimate
 
 
 def inputs(ctx):
@@ -41,7 +48,7 @@ def inputs(ctx):
 
 def params(ctx):
     v = ctx.cfg["video"]
-    return {"size": [OUT_W, OUT_H], "beauty": v["beauty"], "match": v.get("match"), "grade": v.get("grade"), "sharpen": v.get("sharpen"), "backdrop": v["backdrop"],
+    return {"size": [OUT_W, OUT_H], "beauty": v["beauty"], "shine": SHINE_TINT, "match": v.get("match"), "grade": v.get("grade"), "sharpen": v.get("sharpen"), "backdrop": v["backdrop"],
             "band": BAND, "unmix": DEFG_R, "alpha_curve": ALPHA_CURVE, "version": 2}
 
 
@@ -99,6 +106,43 @@ def unmix(img, a, F):
     return solid * img + (1 - solid) * fg
 
 
+def features_mask(lm, h, w):
+    """Eyes and mouth from the face landmarks (normalised x, y), filled, as an HxW float mask to keep out of deshine."""
+    import cv2
+    m = np.zeros((h, w), np.uint8)
+    for idx in (EYE_L, EYE_R, LIPS):
+        pts = np.array([(lm[i].x * w, lm[i].y * h) for i in idx], np.int32)
+        cv2.fillPoly(m, [cv2.convexHull(pts)], 255)
+    m = cv2.dilate(m, np.ones((max(3, w // 60),) * 2, np.uint8))
+    return m.astype(np.float32) / 255
+
+
+def deshine(x, skin, k, F, torch):
+    """Shine on the skin (oily forehead, nose tip) toned down (director 11-13, C's reshoot and the others): a spot that is
+    brighter than the skin around it and whiter than it gets its extra light taken off and its colour pulled back toward
+    that surrounding skin. Surroundings = skin blurred SHINE_SIGMA px with the shiny spots left out; texture stays."""
+    w = (0.2126, 0.7152, 0.0722)
+    lum = lambda v: v[:, 0:1] * w[0] + v[:, 1:2] * w[1] + v[:, 2:3] * w[2]
+    lin = x.clamp(min=1e-4) ** 2.2
+    y = lum(lin)
+    m = (blur((skin > 0.5).float(), 4.0, F, torch) > 0.97).float()  # well inside the skin: eyes, teeth, lips and edges left out
+    base = blur(lin * m, SHINE_SIGMA, F, torch) / (blur(m, SHINE_SIGMA, F, torch) + 1e-4)
+    yb = lum(base)
+    excess = (y / (yb + 1e-4) - 1)                                  # how much brighter than the skin around, as a share
+    ratio = ((lin - y).abs().sum(1, keepdim=True) / (y + 1e-4)) / ((base - yb).abs().sum(1, keepdim=True) / (yb + 1e-4) + 1e-4)
+    white = ((1 - ratio) / 0.3).clamp(0, 1)                        # colour 30 % paler than the skin around counts fully
+    h = ((excess - SHINE_START) / SHINE_RANGE).clamp(0, 1) * white * m
+    h = blur(h, 2.0, F, torch)
+    for _ in range(1):                                              # surroundings again, without the shiny spots
+        mm = m * (1 - h)
+        base = blur(lin * mm, SHINE_SIGMA, F, torch) / (blur(mm, SHINE_SIGMA, F, torch) + 1e-4)
+        yb = lum(base)
+    target = lin / (y + 1e-4) * torch.minimum(y, yb * (1 + SHINE_START))   # extra light off, detail kept
+    target = target + SHINE_TINT * (base / (yb + 1e-4) - lin / (y + 1e-4)) * torch.minimum(y, yb * (1 + SHINE_START))   # colour toward the skin around
+    out = lin + k * h * (target - lin)
+    return out.clamp(0, 1) ** (1 / 2.2), h
+
+
 def reader(path, t0, dur, crop, pix):
     x0, y0, x1, y1 = crop
     return subprocess.Popen([C.FFMPEG, "-v", "error", "-ss", f"{t0:.4f}", "-i", str(path), "-t", f"{dur:.4f}",
@@ -140,6 +184,7 @@ def run(ctx, out):
     g = torch.tensor(grade["gain"] if grade else gains(P, skins, cfg["match"]) if P in skins else [1.0, 1.0, 1.0], device="cuda").float().view(1, 3, 1, 1)
     sat = float(grade.get("sat", 1.0)) if grade else 1.0
     k_beauty = BEAUTY[cfg["beauty"]["level"]]
+    k_shine = SHINE[cfg["beauty"].get("shine", "off")]
     sharpen = float((cfg.get("sharpen") or {}).get(P, 0.0))
     backdrop = torch.tensor(M.hex_bgr(cfg["backdrop"])[::-1].copy(), device="cuda").view(1, 3, 1, 1) / 255
     seg = Faces()
@@ -175,12 +220,16 @@ def run(ctx, out):
                     if sat != 1.0:
                         y = (x * torch.tensor([0.2126, 0.7152, 0.0722], device="cuda").view(1, 3, 1, 1)).sum(1, keepdim=True)
                         x = (y + sat * (x - y)).clamp(0, 1)
-                    if k_beauty:
+                    if k_beauty or k_shine:
                         small = (F.interpolate(x, (OUT_H // 4, OUT_W // 4), mode="area")[0].permute(1, 2, 0) * 255).round().byte().cpu().numpy()
                         mpi = seg.mp.Image(image_format=seg.mp.ImageFormat.SRGB, data=np.ascontiguousarray(small))
                         cat = torch.from_numpy(np.squeeze(seg.seg.segment(mpi).category_mask.numpy_view()).copy()).cuda()
                         skin = ((cat == 3) | (cat == 2)).float()[None, None]                        # face skin, body skin (neck, hands)
                         skin = blur(F.interpolate(skin, (OUT_H, OUT_W), mode="bilinear"), 6.0, F, torch) * a
+                        if k_shine:
+                            lm = seg.fl.detect(mpi).face_landmarks
+                            keep = skin * (1 - torch.from_numpy(features_mask(lm[0], OUT_H, OUT_W)).cuda()[None, None]) if lm else skin
+                            x = deshine(x, keep, k_shine, F, torch)[0]                              # shine down before the smoothing
                         lo1, lo2 = blur(x, BAND[0], F, torch), blur(x, BAND[1], F, torch)
                         yv = x - k_beauty * skin * (lo1 - lo2)                                      # mid-size unevenness down
                         luma = (yv * torch.tensor([0.2126, 0.7152, 0.0722], device="cuda").view(1, 3, 1, 1)).sum(1, keepdim=True)

@@ -60,7 +60,8 @@
       "level": "light",
       "smooth": true,
       "blemish": true,
-      "_levels": "off | light | medium; face only, never reshapes"
+      "_levels": "off | light | medium; face only, never reshapes",
+      "shine": "medium"
     },
     "white_balance": {
       "target_kelvin": null,
