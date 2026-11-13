@@ -125,7 +125,7 @@ def main():
         vf = f"tpad=stop_mode=clone:stop_duration={pad:.3f}" if pad > 0 else "null"
         if pic:
             ff("-ss", bt["start"], "-t", slot, "-i", BASE, "-i", pic, "-filter_complex",
-               f"[0:v]{vf}[b];[1:v]fps=30,scale=-2:{PERSON_H}[p];[b][p]overlay=(W-w)/2:(H-h)/2:eof_action=pass[v]",
+               f"[0:v]{vf}[b];[1:v]fps=30,scale=-2:{PERSON_H}[p];[b][p]overlay=(W-w)/2:(H-h)/2:eof_action=repeat[v]",
                "-map", "[v]", "-t", f"{need:.3f}", *NV, "-an", seg)
         else:
             ff("-ss", bt["start"], "-t", slot, "-i", BASE, "-vf", vf, "-t", f"{need:.3f}", *NV, "-an", seg)
