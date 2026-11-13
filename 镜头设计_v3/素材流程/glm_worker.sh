@@ -24,10 +24,13 @@ TASK=${1:-check}; WHO=${2:-}
 if [ "$TASK" = check ]; then
   PROMPT="Reply with exactly: ready"
 else
-  [ -n "$WHO" ] || { echo "用法：bash glm_worker.sh <G0..G8> <A|B|C|D>"; exit 2; }
+  [ -n "$WHO" ] || { echo "用法：bash glm_worker.sh <G0..G8> <A|B|C|D>  或  bash glm_worker.sh CUT all"; exit 2; }
   PROMPT="HKBU SCIE1007 课程作业的科普视频。现在是 $(date '+%Y-%m-%d %H:%M') 韩国时间，写时间就用它。你是这个项目的素材管理员。先完整读一遍 $FLOW/03_素材管理员手册.md 和 $FLOW/04_命名规则.md，然后只做手册里的 $TASK 这一件活，对象是组员 $WHO（原件在 $ROOT/人员素材啊/$WHO/）。照手册写的命令、标准和写回的文件做；拿不准的标存疑；做完按手册 G8 写日报到 $FLOW/日报/。不删任何东西，不改原件，不运行 git。跑流程只用这几条命令（工作目录已经是项目根）：bash _env/ft.sh run $WHO <步号，如 0 或 1>；bash _env/ft.sh listen $WHO（第 3 步之后的听检）；bash _env/ft.sh ffprobe <ffprobe 的参数>；bash _env/ft.sh grade（G6 调色）；bash _env/ft.sh help。别的 python、ffmpeg 写法都会被拦。"
 fi
-case "$TASK" in G1|G4|G5|G6) MODEL=$VISION ;; G3|G7) MODEL=$HEAVY ;; *) MODEL=$LIGHT ;; esac
+if [ "$TASK" = CUT ]; then
+  PROMPT="HKBU SCIE1007 课程作业的科普视频。现在是 $(date '+%Y-%m-%d %H:%M') 韩国时间，写时间就用它。你是这个项目的剪辑助理。先完整读一遍 $ROOT/镜头设计_v3/粗剪/粗剪规则.md，再读 $ROOT/镜头设计_v3/粗剪/cut_v2_report.md 和 cut_v2.json，然后照规则第二节 C1–C6 逐条检查，按第四节交 粗剪检查.md。看图用 Read 打开 _check 里的 jpg。只用这两条命令：bash _env/ft.sh cutframe <秒>；bash _env/ft.sh help。不删任何东西，不运行 git，不改规则和程序。"
+fi
+case "$TASK" in G1|G4|G5|G6|CUT) MODEL=$VISION ;; G3|G7) MODEL=$HEAVY ;; *) MODEL=$LIGHT ;; esac
 [ -n "$GLM_MODEL_OVERRIDE" ] && MODEL=$GLM_MODEL_OVERRIDE
 case " $ALLOWED " in *" $MODEL "*) ;; *) echo "不允许的模型：$MODEL（只许 $ALLOWED）"; exit 2 ;; esac
 echo "model: $MODEL"
@@ -46,6 +49,10 @@ case "$1" in
        exec "$PY" "$FLOW/listen.py" "$2" ;;
   ffprobe) shift; exec "$ROOT/_env/ffmpeg/ffprobe.exe" "$@" ;;
   grade) exec "$PY" "$FLOW/grade.py" --try "$ROOT/素材流程_out/调色/grade_try.json" ;;
+  cut) exec "$PY" "$ROOT/镜头设计_v3/粗剪/build_cut.py" ;;
+  cutframe) case "$2" in *[!0-9.]*|"") echo "seconds must be a number"; exit 2 ;; esac
+       mkdir -p "$ROOT/镜头设计_v3/粗剪/_check"
+       exec "$ROOT/_env/ffmpeg/ffmpeg.exe" -v error -y -ss "$2" -i "$ROOT/镜头设计_v3/粗剪/cut_v2.mp4" -frames:v 1 -update 1 "$ROOT/镜头设计_v3/粗剪/_check/$2.jpg" ;;
   *) echo "bash _env/ft.sh run <A|B|C|D> <steps>   |   bash _env/ft.sh listen <A|B|C|D>   |   bash _env/ft.sh ffprobe <args>   |   bash _env/ft.sh grade"; "$PY" "$FLOW/run.py" --help ;;
 esac
 FT

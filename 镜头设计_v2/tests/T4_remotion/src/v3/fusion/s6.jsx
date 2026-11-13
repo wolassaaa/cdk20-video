@@ -1228,8 +1228,8 @@ const SRC6 = [
   [881.5, 915.0, "Illustration · Wang 2023 Table 8 · FDA 2026 · Business Wire 2023 · GEN 2023"],
 ];
 
-const S6Scene = ({file = "fusion_s1/s6_take.mp4", review = true, from = 0}) => {
-  const f = useCurrentFrame() + from, t = S6.start + f / 30, cam = camera6(f);
+const S6Scene = ({file = "fusion_s1/s6_take.mp4", review = true, from = 0, fps = 30}) => {          // fps 60 with the 60 fps track (S6_STEP=1) for the 4K pass
+  const f = useCurrentFrame() + from, t = S6.start + f / fps, cam = camera6(Math.round(f * (TRK6.fps || 30) / fps));
   const line = [...S6_LINES].reverse().find(l => t >= l[0]);
   return <Clock.Provider value={t}><Cam6.Provider value={cam}><AbsoluteFill style={{background: BONE}}>
     <OffthreadVideo src={staticFile(file)} muted style={{width: W, height: H}} startFrom={from}/>

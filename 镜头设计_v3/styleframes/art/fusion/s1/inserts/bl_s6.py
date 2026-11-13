@@ -519,26 +519,29 @@ def shot_s6(sc, sky):
     return update
 
 
+STEP6 = int(os.environ.get("S6_STEP", "2"))          # 2: the 30 fps review take; 1: the 4K 60 fps pass
+
+
 def s6_plan(update, path):
     """Every other frame (30 fps): the ones whose picture changes. The take holds each one until the next."""
     keep, last = [], None
-    for f in range(0, FRAMES - 1, 2):
+    for f in range(0, FRAMES - 1, STEP6):                                   # S6_STEP=1: every 60 fps frame, for the 4K pass
         s_ = update.sig(START + f / FPS)
         if s_ != last:
             keep.append(f)
         last = s_
     json.dump(dict(frames=keep), open(path, "w"))
-    print("PLAN_OK %d of %d frames change" % (len(keep), len(range(0, FRAMES, 2))))
+    print("PLAN_OK %d of %d frames change" % (len(keep), len(range(0, FRAMES - 1, STEP6))))
 
 
 def s6_track(path):
     """The camera every other frame, for Remotion to put the words on the table: eye, the point it looks at, lens mm. Times too, so both read one set."""
     cam = []
-    for f in range(0, FRAMES - 1, 2):
+    for f in range(0, FRAMES - 1, STEP6):
         v = s6_view(START + f / FPS)
         cam.append([round(a, 4) for a in eye_of(v)] + [round(a, 4) for a in v["at"]] + [round(v["mm"], 3)])
     geo = dict(BC=BC, CW=CW, CH=CH, COLS=COLS, ROWS=ROWS, EX=EX, RX=RX, ST=ST, RR=RR)
-    json.dump(dict(fps=30, start=T["start"], cam=cam, T=T, geo=geo), open(path, "w"), separators=(",", ":"))
+    json.dump(dict(fps=60 // STEP6, start=T["start"], cam=cam, T=T, geo=geo), open(path, "w"), separators=(",", ":"))
     print("TRACK_OK", path, len(cam))
 
 

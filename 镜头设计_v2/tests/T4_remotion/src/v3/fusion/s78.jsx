@@ -467,5 +467,8 @@ const S8 = ({review = true, fps = 30}) => {
 const Root78 = () => <>
   <Composition id="S7" component={S7} durationInFrames={1470} fps={30} width={W} height={H}/>
   <Composition id="S8" component={S8} durationInFrames={1980} fps={30} width={W} height={H}/>
+  {/* 4K 60 fps passes (render with --scale=2): no review line, 3D inserts from render_s678_4k.sh */}
+  <Composition id="S7-4K" component={S7} durationInFrames={2940} fps={60} width={W} height={H} defaultProps={{review: false, fps: 60, dish: "fusion_s78/s702_4k.mp4", bin: "fusion_s78/s703_4k.mp4", watch: "fusion_s78/s704_4k.mp4"}}/>
+  <Composition id="S8-4K" component={S8} durationInFrames={3960} fps={60} width={W} height={H} defaultProps={{review: false, fps: 60}}/>
 </>;
 registerRoot(Root78);
