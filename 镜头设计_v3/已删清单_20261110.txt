@@ -348,3 +348,4 @@ D:/。hkbu/molecular science/_render_tmp/w3_bundle 1974MB
 D:/。hkbu/molecular science/_render_tmp/s5cut_s410 1102MB
 D:/。hkbu/molecular science/_render_tmp/s5cut_s504 759MB
 C:/render_tmp/w5cells4k/cells+type 9500MB (11-11, 成片已出)
+C:/render_tmp/w3k/4k/f 1000MB (11-11, W3 4K 成片已批准)

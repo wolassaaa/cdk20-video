@@ -159,7 +159,7 @@ def main():
         else:
             H.append(f'<li><span class="num">{p["P"]}</span>　全部 {p["lines"]} 段都还没到</li>')
     H.append("</ul></div></div>")
-    H.append("<footer>总进度 = 台词到货占四成，处理步骤占六成。第 5 步上片（美颜、色温对齐、细胞背景、接进片子）和第 6 步质检的程序还没写。"
+    H.append("<footer>总进度 = 台词到货占四成，处理步骤占六成。第 6 步质检的程序还没写。"
              "过不过关看每步量出来的数；听检只是提醒。这一页由总管在每次有变化后重新发布，不会自己刷新。</footer></div>")
     out = C.OUT / "看板.html"
     C.write_text(out, "\n".join(H) + "\n")

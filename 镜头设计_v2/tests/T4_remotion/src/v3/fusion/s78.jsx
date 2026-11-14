@@ -151,11 +151,12 @@ const Print = ({who, x, y, w, h, at, rot = 0, until = 1e9, from, slide = 0.7}) =
 // stations, 26 px type 97 px under the bulbs. x, y: the first bulb; gap: the space between stations, which scales the rest.
 const STATIONS = ["Target", "Hit", "Improving", "Cells & animals", "Clinical trials", "Approval"];
 const K6 = 0.86666, GAP6 = 277.333, RR6 = 62 * K6;
+let JOIN_SFX = "";   // "_4k" in S7-4K join pass: the S6 join images rendered at 3840x2160 (set at the top of S7)
 const Road = ({x, y, gap = GAP6, labels = true, bare = false, at = -1}) => {
   const t = useT(), a = after(t, at, 0.6), s = gap / GAP6, k = K6 * s, rr = 62;
   if (a <= 0) return null;
   return <g opacity={a}>
-    {!bare && <image href={staticFile("fusion_s78/s6_route.png")} x={x - 171.67 * s} y={y - 80.33 * s} width={1680 * s} height={165 * s}/>}
+    {!bare && <image href={staticFile(`fusion_s78/s6_route${JOIN_SFX}.png`)} x={x - 171.67 * s} y={y - 80.33 * s} width={1680 * s} height={165 * s}/>}
     {[0, 1, 2, 3, 4, 5].map(i => <g key={i} transform={`translate(${x + i * gap} ${y}) scale(${k})`}>
       {i > 3 && <circle r={rr} fill="none" stroke={GREY} strokeWidth={4} strokeDasharray="12 10"/>}
       {i === 3 && <path d={`M0 ${-rr} A${rr} ${rr} 0 0 1 0 ${rr}`} fill="none" stroke={GREY} strokeWidth={4} strokeDasharray="12 10"/>}
@@ -224,10 +225,10 @@ const S7World = () => {
   return <g>
     {/* frame 0 is S6's last frame (s6_end_comp.png, rendered with review off). Under it: the same frame without its words, and S6's station words, dashed
         circles and 048 tag drawn again in place; the top copy fades, so the lines, notes and B's print go and the road stays */}
-    <image href={staticFile("fusion_s78/s6_end_base.png")} x={S6X} y={0} width={W} height={H}/>
+    <image href={staticFile(`fusion_s78/s6_end_base${JOIN_SFX}.png`)} x={S6X} y={0} width={W} height={H}/>
     <Road {...r} bare/>
     <Tag048 x={x4} y={r.y}/>
-    {t < 0.9 && <image href={staticFile("fusion_s78/s6_end_comp.png")} x={S6X} y={0} width={W} height={H} opacity={1 - smooth((t - 0.15) / 0.6)}/>}
+    {t < 0.9 && <image href={staticFile(`fusion_s78/s6_end_comp${JOIN_SFX}.png`)} x={S6X} y={0} width={W} height={H} opacity={1 - smooth((t - 0.15) / 0.6)}/>}
 
     {/* 7-01: the camera drops below the road; A's print and the pen's 1, 2, 3 on the bare table there */}
     <Print who="A" x={S6X + 96} y={680} w={745} h={730} at={0.9} rot={-0.8} until={3.0}/>
@@ -302,7 +303,8 @@ const S7World = () => {
   </g>;
 };
 
-const S7 = ({review = true, fps = 30, dish = "fusion_s78/s702.mp4", bin = "fusion_s78/s703.mp4", watch = "fusion_s78/s704.mp4"}) => {
+const S7 = ({review = true, fps = 30, dish = "fusion_s78/s702.mp4", bin = "fusion_s78/s703.mp4", watch = "fusion_s78/s704.mp4", join4k = false}) => {
+  JOIN_SFX = join4k ? "_4k" : "";
   const t = useCurrentFrame() / fps, [cx, cy, z] = cam(S7_CAM, t);
   return <Clock.Provider value={t}><AbsoluteFill style={{background: TABLE6}}>
     <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute"}}>
@@ -431,7 +433,7 @@ const S8World = () => {
   </g>;
 };
 
-const S8 = ({review = true, fps = 30}) => {
+const S8 = ({review = true, fps = 30, m13 = "fusion_s78/millions13.mp4"}) => {
   const t = useCurrentFrame() / fps, [cx, cy, z] = cam(S8_CAM, t);
   // the TD dot print for "millions → 13", inside its paper, at twice its speed: 8 s in 4
   const m0 = 28.7, mv = t > m0 - 0.1 && t < 39.6;
@@ -444,7 +446,7 @@ const S8 = ({review = true, fps = 30}) => {
     </svg>
     {mv && <Sequence from={Math.round(m0 * fps)} layout="none">
       <div style={{position: "absolute", left: vx, top: vy, width: 560 * z, height: 315 * z, overflow: "hidden", opacity: after(t, m0, 0.3) * (1 - after(t, 39.0, 0.4))}}>
-        <OffthreadVideo src={staticFile("fusion_s78/millions13.mp4")} playbackRate={2} muted style={{width: "100%", height: "100%"}}/>
+        <OffthreadVideo src={staticFile(m13)} playbackRate={2} muted style={{width: "100%", height: "100%"}}/>
       </div>
     </Sequence>}
     <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute"}}>
@@ -468,7 +470,7 @@ const Root78 = () => <>
   <Composition id="S7" component={S7} durationInFrames={1470} fps={30} width={W} height={H}/>
   <Composition id="S8" component={S8} durationInFrames={1980} fps={30} width={W} height={H}/>
   {/* 4K 60 fps passes (render with --scale=2): no review line, 3D inserts from render_s678_4k.sh */}
-  <Composition id="S7-4K" component={S7} durationInFrames={2940} fps={60} width={W} height={H} defaultProps={{review: false, fps: 60, dish: "fusion_s78/s702_4k.mp4", bin: "fusion_s78/s703_4k.mp4", watch: "fusion_s78/s704_4k.mp4"}}/>
-  <Composition id="S8-4K" component={S8} durationInFrames={3960} fps={60} width={W} height={H} defaultProps={{review: false, fps: 60}}/>
+  <Composition id="S7-4K" component={S7} durationInFrames={2940} fps={60} width={W} height={H} defaultProps={{review: false, fps: 60, join4k: true, dish: "fusion_s78/s702_4k.mp4", bin: "fusion_s78/s703_4k.mp4", watch: "fusion_s78/s704_4k.mp4"}}/>
+  <Composition id="S8-4K" component={S8} durationInFrames={3960} fps={60} width={W} height={H} defaultProps={{review: false, fps: 60, m13: "fusion_s78/millions13_4k.mp4"}}/>
 </>;
 registerRoot(Root78);

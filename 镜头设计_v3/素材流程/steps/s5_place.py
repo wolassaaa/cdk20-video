@@ -26,7 +26,11 @@ import numpy as np
 import common as C
 
 FPS = 60
-OUT_W, OUT_H = 1560, 1872             # 5:6, 1.5x the print's size in the 4K film (1040 x 1248): room for a slow push-in
+OUT_W, OUT_H = 3328, 1872             # 16:9 (11-14: was 4:3, which cut C 1-07's hand with a straight line mid-frame; the person stands at one side of the full 16:9
+                                      # frame, so the box is widened around step 4's crop and the shoulders are no longer cut straight)
+CHOKE_PX, FEATHER_PX = 1, 1.5         # Fable 11-14: every matte edge pulled in 1 px and softened, so no light rim shows on the paper
+ISLAND_MIN = 0.02                      # matte pieces smaller than this share of the person (D 1-05's white flecks by the cheek) are dropped
+EDGE_FADE = 0.04                      # share of the width at each side where the matte fades out (shoulders past a narrow source)
 BEAUTY = {"off": 0.0, "light": 0.45, "medium": 0.7}       # how much of the mid-size skin unevenness is taken out
 BAND = (1.5, 9.0)                     # px at output size: detail between these two blur widths is "mid-size"
 GAIN_LIMIT = (0.75, 1.45)             # per-channel gain in linear light
@@ -49,7 +53,7 @@ def inputs(ctx):
 def params(ctx):
     v = ctx.cfg["video"]
     return {"size": [OUT_W, OUT_H], "beauty": v["beauty"], "shine": SHINE_TINT, "match": v.get("match"), "grade": v.get("grade"), "sharpen": v.get("sharpen"), "backdrop": v["backdrop"],
-            "band": BAND, "unmix": DEFG_R, "alpha_curve": ALPHA_CURVE, "version": 2}
+            "band": BAND, "unmix": DEFG_R, "alpha_curve": ALPHA_CURVE, "edge_fade": EDGE_FADE, "choke": [CHOKE_PX, FEATHER_PX], "islands": ISLAND_MIN, "version": 5}
 
 
 def skin_reference(cfg):
@@ -143,10 +147,37 @@ def deshine(x, skin, k, F, torch):
     return out.clamp(0, 1) ** (1 / 2.2), h
 
 
-def reader(path, t0, dur, crop, pix):
+def widen(crop, W):
+    """Step 4's chest-up box widened to 4:3 around its centre, kept inside the source; -> (box, width to pad to, left pad)."""
     x0, y0, x1, y1 = crop
+    h = y1 - y0
+    want = round(h * OUT_W / OUT_H)
+    w = min(want, W)
+    nx0 = min(max(0, round((x0 + x1) / 2 - w / 2)), W - w)
+    pad_l = min(max(0, round(want / 2 - ((x0 + x1) / 2 - nx0))), want - w)      # the person stays in the middle of the box
+    return [nx0, y0, nx0 + w, y1], want, pad_l
+
+
+def islands(a, F, torch):
+    """Drop matte pieces not joined to the person: components of the quarter-size matte smaller than ISLAND_MIN of the largest."""
+    import cv2
+    H, W = a.shape[-2:]
+    small = (F.interpolate(a, (H // 4, W // 4), mode="area")[0, 0] > 0.3).byte().cpu().numpy()
+    n, lab, st, _ = cv2.connectedComponentsWithStats(small, connectivity=8)
+    if n <= 2:
+        return a
+    big = st[1:, cv2.CC_STAT_AREA].max()
+    keep = np.isin(lab, [i for i in range(1, n) if st[i, cv2.CC_STAT_AREA] >= ISLAND_MIN * big]).astype(np.uint8)
+    keep = cv2.dilate(keep, np.ones((5, 5), np.uint8))
+    m = torch.from_numpy(keep).cuda().float()[None, None]
+    return a * F.interpolate(m, (H, W), mode="bilinear")
+
+
+def reader(path, t0, dur, crop, pix, W):
+    (x0, y0, x1, y1), want, pad_l = widen(crop, W)
+    pad = f",pad={want}:{y1 - y0}:{pad_l}:0:black" if want > x1 - x0 else ""
     return subprocess.Popen([C.FFMPEG, "-v", "error", "-ss", f"{t0:.4f}", "-i", str(path), "-t", f"{dur:.4f}",
-                             "-vf", f"crop={x1 - x0}:{y1 - y0}:{x0}:{y0},scale={OUT_W}:{OUT_H}:flags=lanczos", "-an",
+                             "-vf", f"crop={x1 - x0}:{y1 - y0}:{x0}:{y0}{pad},scale={OUT_W}:{OUT_H}:flags=lanczos", "-an",
                              "-f", "rawvideo", "-pix_fmt", pix, "-"], stdout=subprocess.PIPE, bufsize=OUT_W * OUT_H * 3)
 
 
@@ -187,6 +218,8 @@ def run(ctx, out):
     k_shine = SHINE[cfg["beauty"].get("shine", "off")]
     sharpen = float((cfg.get("sharpen") or {}).get(P, 0.0))
     backdrop = torch.tensor(M.hex_bgr(cfg["backdrop"])[::-1].copy(), device="cuda").view(1, 3, 1, 1) / 255
+    ramp = torch.linspace(0, 1, OUT_W, device="cuda")
+    edge = (torch.minimum(ramp, 1 - ramp) / EDGE_FADE).clamp(0, 1).view(1, 1, 1, OUT_W) ** 0.5
     seg = Faces()
     items, outputs, before_after = [], [], None
     for pk in picks:
@@ -204,7 +237,7 @@ def run(ctx, out):
             t_start = time.time()
             src = vdir / (c.get("std_restored") or c["std"])
             fg, al, pr = out / f"{name}_fg.mp4", out / f"{name}_a.mp4", out / f"{name}_print.mp4"
-            r_std, r_mat = reader(src, t_in, dur, c["crop"], "rgb24"), reader(vdir / c["mat"], t_in, dur, c["crop"], "gray")
+            r_std, r_mat = reader(src, t_in, dur, c["crop"], "rgb24", c["size"][0]), reader(vdir / c["mat"], t_in, dur, c["crop"], "gray", c["size"][0])
             w_fg, w_al, w_pr = writer(fg, "rgb24"), writer(al, "gray"), writer(pr, "rgb24", wav)
             n = 0
             want = round(dur * FPS)
@@ -216,6 +249,9 @@ def run(ctx, out):
                     x0 = torch.frombuffer(bytearray(b1), dtype=torch.uint8).cuda().view(OUT_H, OUT_W, 3).permute(2, 0, 1)[None].float() / 255
                     a = torch.frombuffer(bytearray(b2), dtype=torch.uint8).cuda().view(1, 1, OUT_H, OUT_W).float() / 255
                     a = ((a - ALPHA_CURVE[0]) / (ALPHA_CURVE[1] - ALPHA_CURVE[0])).clamp(0, 1)      # soft grey band over dark backgrounds gone, strands kept
+                    a = a * edge                                                                    # no straight cut where the box ends
+                    a = islands(a, F, torch)
+                    a = blur(-F.max_pool2d(-a, 2 * CHOKE_PX + 1, 1, CHOKE_PX), FEATHER_PX, F, torch)  # choke, then feather
                     x = (x0.clamp(min=1e-4) ** 2.2 * g).clamp(0, 1) ** (1 / 2.2)                    # colour match, linear light
                     if sat != 1.0:
                         y = (x * torch.tensor([0.2126, 0.7152, 0.0722], device="cuda").view(1, 3, 1, 1)).sum(1, keepdim=True)
@@ -255,7 +291,7 @@ def run(ctx, out):
                 w.stdin.close()
                 w.wait()
             item |= {"fg": fg.name, "alpha": al.name, "print": pr.name, "frames": n, "frames_expected": want, "size": [OUT_W, OUT_H],
-                     "source": src.name, "crop": c["crop"], "process_seconds": round(time.time() - t_start, 1)}
+                     "source": src.name, "crop": c["crop"], "box": widen(c["crop"], c["size"][0])[0], "process_seconds": round(time.time() - t_start, 1)}
             item["fails"] = [f"帧数 {n}，应有 {want}"] if abs(n - want) > 1 else []
             outputs += [fg, al, pr]
             print(f"  {name:16} {n} 帧 {time.time() - t_start:.0f} 秒  {'过' if not item['fails'] else '没过：' + item['fails'][0]}", flush=True)
