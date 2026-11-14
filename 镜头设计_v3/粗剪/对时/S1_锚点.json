@@ -1,0 +1,1098 @@
+{
+ "note": "HKBU SCIE1007 课程作业的科普视频。时间都是 cut_v3.mp4 的秒；src 是 S1S2_table_2.mp4 文件内的秒（= old_start + cut − new_start）。",
+ "segments": {
+  "1-02": {
+   "new_start": 8.0,
+   "src_start": 8,
+   "src_end": 25,
+   "picture_end_cut": 25.0,
+   "audio_first_word": 8.15,
+   "audio_end_cut": 25.207,
+   "mean_offset": -1.35,
+   "mean_abs_offset": 1.55,
+   "max_offset": -3.92,
+   "actions": [
+    {
+     "action": "肝脏淡入",
+     "cut_t": 8.5,
+     "src_t": 8.5,
+     "word": "That's",
+     "word_t": 8.15,
+     "offset": 0.35,
+     "anchor": true
+    },
+    {
+     "action": "大字 1,412 写出",
+     "cut_t": 9.1,
+     "src_t": 9.1,
+     "word": "1,412",
+     "word_t": 8.59,
+     "offset": 0.51,
+     "anchor": true
+    },
+    {
+     "action": "deaths in Hong Kong, 2022 出现",
+     "cut_t": 10.0,
+     "src_t": 10.0,
+     "word": "2022",
+     "word_t": 11.113,
+     "offset": -1.11,
+     "anchor": true
+    },
+    {
+     "action": "四个小人依次变红（about four a day）",
+     "cut_t": 10.4,
+     "src_t": 10.4,
+     "word": "alone.",
+     "word_t": 12.074,
+     "offset": -1.67,
+     "anchor": true
+    },
+    {
+     "action": "门静脉开始充红",
+     "cut_t": 12.9,
+     "src_t": 12.9,
+     "word": "Here,",
+     "word_t": 13.075,
+     "offset": -0.17,
+     "anchor": true
+    },
+    {
+     "action": "Top 3 deadliest in HK 出现",
+     "cut_t": 12.9,
+     "src_t": 12.9,
+     "word": "three",
+     "word_t": 14.056,
+     "offset": -1.16,
+     "anchor": true
+    },
+    {
+     "action": "lung · colorectal · liver 出现",
+     "cut_t": 13.1,
+     "src_t": 13.1,
+     "word": "lung",
+     "word_t": 17.019,
+     "offset": -3.92,
+     "anchor": true
+    },
+    {
+     "action": "肝静脉变蓝 + hepatic veins 标签",
+     "cut_t": 16.6,
+     "src_t": 16.6,
+     "word": "not",
+     "word_t": 19.341,
+     "offset": -2.74,
+     "anchor": true
+    },
+    {
+     "action": "World: 6th most common 出现",
+     "cut_t": 20.0,
+     "src_t": 20.0,
+     "word": "sixth",
+     "word_t": 21.964,
+     "offset": -1.96,
+     "anchor": true
+    },
+    {
+     "action": "3rd deadliest 出现",
+     "cut_t": 21.0,
+     "src_t": 21.0,
+     "word": "third",
+     "word_t": 24.206,
+     "offset": -3.21,
+     "anchor": true
+    },
+    {
+     "action": "放大镜圆圈出现",
+     "cut_t": 21.7,
+     "src_t": 21.7,
+     "word": null,
+     "word_t": null,
+     "offset": null,
+     "anchor": false
+    },
+    {
+     "action": "整段字淡出",
+     "cut_t": 24.8,
+     "src_t": 24.8,
+     "word": "deadliest.",
+     "word_t": 24.527,
+     "offset": 0.27,
+     "anchor": true
+    }
+   ],
+   "tail_cut_src": 0,
+   "retime": [
+    {
+     "src0": 8,
+     "src1": 8.5,
+     "out0": 8.0,
+     "out1": 8.15,
+     "speed": 3.33,
+     "flag": "快，看得出赶"
+    },
+    {
+     "src0": 8.5,
+     "src1": 9.1,
+     "out0": 8.15,
+     "out1": 8.59,
+     "speed": 1.36,
+     "flag": ""
+    },
+    {
+     "src0": 9.1,
+     "src1": 10.0,
+     "out0": 8.59,
+     "out1": 11.11,
+     "speed": 0.36,
+     "flag": "慢，60 fps 交片要补帧"
+    },
+    {
+     "src0": 10.0,
+     "src1": 10.4,
+     "out0": 11.11,
+     "out1": 12.07,
+     "speed": 0.42,
+     "flag": "慢，60 fps 交片要补帧"
+    },
+    {
+     "src0": 10.4,
+     "src1": 12.9,
+     "out0": 12.07,
+     "out1": 13.07,
+     "speed": 2.5,
+     "flag": "快，看得出赶"
+    },
+    {
+     "src0": 12.9,
+     "src1": 13.1,
+     "out0": 13.07,
+     "out1": 17.02,
+     "speed": 0.05,
+     "flag": "慢，60 fps 交片要补帧"
+    },
+    {
+     "src0": 13.1,
+     "src1": 16.6,
+     "out0": 17.02,
+     "out1": 19.34,
+     "speed": 1.51,
+     "flag": ""
+    },
+    {
+     "src0": 16.6,
+     "src1": 20.0,
+     "out0": 19.34,
+     "out1": 21.96,
+     "speed": 1.3,
+     "flag": ""
+    },
+    {
+     "src0": 20.0,
+     "src1": 21.0,
+     "out0": 21.96,
+     "out1": 24.21,
+     "speed": 0.45,
+     "flag": "慢，60 fps 交片要补帧"
+    },
+    {
+     "src0": 21.0,
+     "src1": 24.8,
+     "out0": 24.21,
+     "out1": 24.53,
+     "speed": 11.84,
+     "flag": "快，看得出赶"
+    },
+    {
+     "src0": 24.8,
+     "src1": 25,
+     "out0": 24.53,
+     "out1": 25.46,
+     "speed": 0.22,
+     "flag": "慢，60 fps 交片要补帧"
+    }
+   ]
+  },
+  "1-04": {
+   "new_start": 31.26,
+   "src_start": 31,
+   "src_end": 52,
+   "picture_end_cut": 52.26,
+   "audio_first_word": 31.41,
+   "audio_end_cut": 52.128,
+   "mean_offset": -1.98,
+   "mean_abs_offset": 2.08,
+   "max_offset": -4.72,
+   "actions": [
+    {
+     "action": "药板落进画面",
+     "cut_t": 32.9,
+     "src_t": 32.64,
+     "word": "treatment",
+     "word_t": 32.411,
+     "offset": 0.49,
+     "anchor": true
+    },
+    {
+     "action": "药片顶破铝箔",
+     "cut_t": 33.9,
+     "src_t": 33.64,
+     "word": "changed",
+     "word_t": 35.313,
+     "offset": -1.41,
+     "anchor": false
+    },
+    {
+     "action": "叠字 Nexavar",
+     "cut_t": 33.3,
+     "src_t": 33.04,
+     "word": "Nexavar",
+     "word_t": 36.915,
+     "offset": -3.62,
+     "anchor": true
+    },
+    {
+     "action": "药瓶贴镜头落下盖全屏",
+     "cut_t": 35.5,
+     "src_t": 35.24,
+     "word": "to",
+     "word_t": 37.515,
+     "offset": -2.02,
+     "anchor": true
+    },
+    {
+     "action": "atezolizumab 写出",
+     "cut_t": 35.8,
+     "src_t": 35.54,
+     "word": "atezolizumab",
+     "word_t": 39.277,
+     "offset": -3.48,
+     "anchor": true
+    },
+    {
+     "action": "+ bevacizumab 写出",
+     "cut_t": 36.3,
+     "src_t": 36.04,
+     "word": "bevacizumab.",
+     "word_t": 41.018,
+     "offset": -4.72,
+     "anchor": true
+    },
+    {
+     "action": "镜头升回全景（两图标 + 箭头）",
+     "cut_t": 38.1,
+     "src_t": 37.84,
+     "word": "But",
+     "word_t": 42.64,
+     "offset": -4.54,
+     "anchor": true
+    },
+    {
+     "action": "十个人从左依次变红",
+     "cut_t": 41.6,
+     "src_t": 41.34,
+     "word": "ten",
+     "word_t": 44.882,
+     "offset": -3.28,
+     "anchor": true
+    },
+    {
+     "action": "镜头落进人排，人立起",
+     "cut_t": 44.0,
+     "src_t": 43.74,
+     "word": "patients",
+     "word_t": 45.182,
+     "offset": -1.18,
+     "anchor": true
+    },
+    {
+     "action": "七个灰的躺下",
+     "cut_t": 45.3,
+     "src_t": 45.04,
+     "word": "alive",
+     "word_t": 46.263,
+     "offset": -0.96,
+     "anchor": true
+    },
+    {
+     "action": "~3 in 10 写出",
+     "cut_t": 46.8,
+     "src_t": 46.54,
+     "word": "five",
+     "word_t": 46.683,
+     "offset": 0.12,
+     "anchor": true
+    },
+    {
+     "action": "镜头升回全景",
+     "cut_t": 47.8,
+     "src_t": 47.54,
+     "word": "The",
+     "word_t": 48.105,
+     "offset": -0.3,
+     "anchor": true
+    },
+    {
+     "action": "画面左移出场",
+     "cut_t": 51.0,
+     "src_t": 50.74,
+     "word": "need.",
+     "word_t": 51.868,
+     "offset": -0.87,
+     "anchor": true
+    }
+   ],
+   "tail_cut_src": 0.75,
+   "retime": [
+    {
+     "src0": 31,
+     "src1": 32.64,
+     "out0": 31.26,
+     "out1": 32.41,
+     "speed": 1.42,
+     "flag": ""
+    },
+    {
+     "src0": 32.64,
+     "src1": 33.04,
+     "out0": 32.41,
+     "out1": 36.91,
+     "speed": 0.09,
+     "flag": "慢，60 fps 交片要补帧"
+    },
+    {
+     "src0": 33.04,
+     "src1": 35.24,
+     "out0": 36.91,
+     "out1": 37.52,
+     "speed": 3.67,
+     "flag": "快，看得出赶"
+    },
+    {
+     "src0": 35.24,
+     "src1": 35.54,
+     "out0": 37.52,
+     "out1": 39.28,
+     "speed": 0.17,
+     "flag": "慢，60 fps 交片要补帧"
+    },
+    {
+     "src0": 35.54,
+     "src1": 36.04,
+     "out0": 39.28,
+     "out1": 41.02,
+     "speed": 0.29,
+     "flag": "慢，60 fps 交片要补帧"
+    },
+    {
+     "src0": 36.04,
+     "src1": 37.84,
+     "out0": 41.02,
+     "out1": 42.64,
+     "speed": 1.11,
+     "flag": ""
+    },
+    {
+     "src0": 37.84,
+     "src1": 41.34,
+     "out0": 42.64,
+     "out1": 44.88,
+     "speed": 1.56,
+     "flag": ""
+    },
+    {
+     "src0": 41.34,
+     "src1": 43.74,
+     "out0": 44.88,
+     "out1": 45.18,
+     "speed": 8.0,
+     "flag": "快，看得出赶"
+    },
+    {
+     "src0": 43.74,
+     "src1": 45.04,
+     "out0": 45.18,
+     "out1": 46.26,
+     "speed": 1.2,
+     "flag": ""
+    },
+    {
+     "src0": 45.04,
+     "src1": 46.54,
+     "out0": 46.26,
+     "out1": 46.68,
+     "speed": 3.57,
+     "flag": "快，看得出赶"
+    },
+    {
+     "src0": 46.54,
+     "src1": 47.54,
+     "out0": 46.68,
+     "out1": 48.1,
+     "speed": 0.7,
+     "flag": ""
+    },
+    {
+     "src0": 47.54,
+     "src1": 50.74,
+     "out0": 48.1,
+     "out1": 51.87,
+     "speed": 0.85,
+     "flag": ""
+    },
+    {
+     "src0": 50.74,
+     "src1": 51.25,
+     "out0": 51.87,
+     "out1": 52.38,
+     "speed": 1.0,
+     "flag": ""
+    }
+   ]
+  },
+  "1-08": {
+   "new_start": 60.65,
+   "src_start": 60,
+   "src_end": 76,
+   "picture_end_cut": 76.65,
+   "audio_first_word": 60.8,
+   "audio_end_cut": 75.898,
+   "mean_offset": 0.24,
+   "mean_abs_offset": 0.51,
+   "max_offset": 1.55,
+   "actions": [
+    {
+     "action": "三张人形纸卡（另一人在删，可裁）",
+     "cut_t": 60.7,
+     "src_t": 60.05,
+     "word": "Start",
+     "word_t": 60.8,
+     "offset": -0.1,
+     "anchor": true
+    },
+    {
+     "action": "时间轴刻度 10 出现",
+     "cut_t": 64.0,
+     "src_t": 63.35,
+     "word": "might",
+     "word_t": 64.184,
+     "offset": -0.18,
+     "anchor": true
+    },
+    {
+     "action": "四个人形小人在 17 处立起",
+     "cut_t": 64.8,
+     "src_t": 64.15,
+     "word": "ready",
+     "word_t": 65.005,
+     "offset": -0.2,
+     "anchor": true
+    },
+    {
+     "action": "10–17 years 标注",
+     "cut_t": 66.7,
+     "src_t": 66.05,
+     "word": "now.",
+     "word_t": 65.306,
+     "offset": 1.39,
+     "anchor": true
+    },
+    {
+     "action": "十个圆点出现",
+     "cut_t": 67.7,
+     "src_t": 67.05,
+     "word": "It",
+     "word_t": 66.147,
+     "offset": 1.55,
+     "anchor": true
+    },
+    {
+     "action": "~US$2.8 billion 写出",
+     "cut_t": 68.2,
+     "src_t": 67.55,
+     "word": "2.8",
+     "word_t": 67.608,
+     "offset": 0.59,
+     "anchor": true
+    },
+    {
+     "action": "圆点依次变红",
+     "cut_t": 70.4,
+     "src_t": 69.75,
+     "word": "drugs",
+     "word_t": 70.812,
+     "offset": -0.41,
+     "anchor": true
+    },
+    {
+     "action": "九个点褪成灰",
+     "cut_t": 73.2,
+     "src_t": 72.55,
+     "word": "one",
+     "word_t": 73.575,
+     "offset": -0.38,
+     "anchor": true
+    },
+    {
+     "action": "about 1 in 10 写出",
+     "cut_t": 73.9,
+     "src_t": 73.25,
+     "word": "ten",
+     "word_t": 73.976,
+     "offset": -0.08,
+     "anchor": true
+    },
+    {
+     "action": "reaches the market 写出",
+     "cut_t": 74.7,
+     "src_t": 74.05,
+     "word": "reaches",
+     "word_t": 74.456,
+     "offset": 0.24,
+     "anchor": true
+    }
+   ],
+   "tail_cut_src": 0.26,
+   "retime": [
+    {
+     "src0": 63.4,
+     "src1": 64.15,
+     "out0": 60.65,
+     "out1": 65.0,
+     "speed": 0.17,
+     "flag": "慢，60 fps 交片要补帧"
+    },
+    {
+     "src0": 64.15,
+     "src1": 66.05,
+     "out0": 65.0,
+     "out1": 65.31,
+     "speed": 6.31,
+     "flag": "快，看得出赶"
+    },
+    {
+     "src0": 66.05,
+     "src1": 67.05,
+     "out0": 65.31,
+     "out1": 66.15,
+     "speed": 1.19,
+     "flag": ""
+    },
+    {
+     "src0": 67.05,
+     "src1": 67.55,
+     "out0": 66.15,
+     "out1": 67.61,
+     "speed": 0.34,
+     "flag": "慢，60 fps 交片要补帧"
+    },
+    {
+     "src0": 67.55,
+     "src1": 69.75,
+     "out0": 67.61,
+     "out1": 70.81,
+     "speed": 0.69,
+     "flag": ""
+    },
+    {
+     "src0": 69.75,
+     "src1": 72.55,
+     "out0": 70.81,
+     "out1": 73.58,
+     "speed": 1.01,
+     "flag": ""
+    },
+    {
+     "src0": 72.55,
+     "src1": 73.25,
+     "out0": 73.58,
+     "out1": 73.98,
+     "speed": 1.75,
+     "flag": "快，看得出赶"
+    },
+    {
+     "src0": 73.25,
+     "src1": 74.05,
+     "out0": 73.98,
+     "out1": 74.46,
+     "speed": 1.67,
+     "flag": "快，看得出赶"
+    },
+    {
+     "src0": 74.05,
+     "src1": 75.74,
+     "out0": 74.46,
+     "out1": 76.15,
+     "speed": 1.0,
+     "flag": ""
+    }
+   ]
+  },
+  "1-09": {
+   "new_start": 76.65,
+   "src_start": 76,
+   "src_end": 96,
+   "picture_end_cut": 96.65,
+   "audio_first_word": 76.8,
+   "audio_end_cut": 100.51,
+   "mean_offset": -3.54,
+   "mean_abs_offset": 3.59,
+   "max_offset": -6.01,
+   "actions": [
+    {
+     "action": "六站路线图出现",
+     "cut_t": 77.1,
+     "src_t": 76.45,
+     "word": "To",
+     "word_t": 76.8,
+     "offset": 0.3,
+     "anchor": true
+    },
+    {
+     "action": "红液走到第一站",
+     "cut_t": 78.7,
+     "src_t": 78.05,
+     "word": "journey.",
+     "word_t": 79.381,
+     "offset": -0.68,
+     "anchor": true
+    },
+    {
+     "action": "镜头落到台面（3D 玻璃泡）",
+     "cut_t": 79.9,
+     "src_t": 79.25,
+     "word": "Every",
+     "word_t": 80.482,
+     "offset": -0.58,
+     "anchor": true
+    },
+    {
+     "action": "Target 标签",
+     "cut_t": 81.6,
+     "src_t": 80.95,
+     "word": "target.",
+     "word_t": 83.963,
+     "offset": -2.36,
+     "anchor": true
+    },
+    {
+     "action": "Hit 标签 + 第二泡变红",
+     "cut_t": 82.8,
+     "src_t": 82.15,
+     "word": "hit,",
+     "word_t": 85.344,
+     "offset": -2.54,
+     "anchor": true
+    },
+    {
+     "action": "Improve 标签",
+     "cut_t": 85.2,
+     "src_t": 84.55,
+     "word": "Improve",
+     "word_t": 89.207,
+     "offset": -4.01,
+     "anchor": true
+    },
+    {
+     "action": "Cells & animals 标签",
+     "cut_t": 86.5,
+     "src_t": 85.85,
+     "word": "cells,",
+     "word_t": 91.207,
+     "offset": -4.71,
+     "anchor": true
+    },
+    {
+     "action": "Clinical trials 1-2-3 标签",
+     "cut_t": 89.0,
+     "src_t": 88.35,
+     "word": "trials:",
+     "word_t": 94.749,
+     "offset": -5.75,
+     "anchor": true
+    },
+    {
+     "action": "Approval 标签",
+     "cut_t": 92.5,
+     "src_t": 91.85,
+     "word": "approval.",
+     "word_t": 98.51,
+     "offset": -6.01,
+     "anchor": true
+    },
+    {
+     "action": "镜头升回全景",
+     "cut_t": 93.5,
+     "src_t": 92.85,
+     "word": "Any",
+     "word_t": 99.45,
+     "offset": -5.95,
+     "anchor": true
+    },
+    {
+     "action": "Any step can fail. 出现",
+     "cut_t": 94.0,
+     "src_t": 93.35,
+     "word": "can",
+     "word_t": 99.99,
+     "offset": -5.99,
+     "anchor": true
+    },
+    {
+     "action": "红液退回第一站",
+     "cut_t": 96.0,
+     "src_t": 95.35,
+     "word": "fail.",
+     "word_t": 100.23,
+     "offset": -4.23,
+     "anchor": true
+    }
+   ],
+   "tail_cut_src": 0.12,
+   "retime": [
+    {
+     "src0": 76,
+     "src1": 76.45,
+     "out0": 76.65,
+     "out1": 76.8,
+     "speed": 3.0,
+     "flag": "快，看得出赶"
+    },
+    {
+     "src0": 76.45,
+     "src1": 78.05,
+     "out0": 76.8,
+     "out1": 79.38,
+     "speed": 0.62,
+     "flag": ""
+    },
+    {
+     "src0": 78.05,
+     "src1": 79.25,
+     "out0": 79.38,
+     "out1": 80.48,
+     "speed": 1.09,
+     "flag": ""
+    },
+    {
+     "src0": 79.25,
+     "src1": 80.95,
+     "out0": 80.48,
+     "out1": 83.96,
+     "speed": 0.49,
+     "flag": "慢，60 fps 交片要补帧"
+    },
+    {
+     "src0": 80.95,
+     "src1": 82.15,
+     "out0": 83.96,
+     "out1": 85.34,
+     "speed": 0.87,
+     "flag": ""
+    },
+    {
+     "src0": 82.15,
+     "src1": 84.55,
+     "out0": 85.34,
+     "out1": 89.21,
+     "speed": 0.62,
+     "flag": ""
+    },
+    {
+     "src0": 84.55,
+     "src1": 85.85,
+     "out0": 89.21,
+     "out1": 91.21,
+     "speed": 0.65,
+     "flag": ""
+    },
+    {
+     "src0": 85.85,
+     "src1": 88.35,
+     "out0": 91.21,
+     "out1": 94.75,
+     "speed": 0.71,
+     "flag": ""
+    },
+    {
+     "src0": 88.35,
+     "src1": 91.85,
+     "out0": 94.75,
+     "out1": 98.51,
+     "speed": 0.93,
+     "flag": ""
+    },
+    {
+     "src0": 91.85,
+     "src1": 92.85,
+     "out0": 98.51,
+     "out1": 99.45,
+     "speed": 1.06,
+     "flag": ""
+    },
+    {
+     "src0": 92.85,
+     "src1": 93.35,
+     "out0": 99.45,
+     "out1": 99.99,
+     "speed": 0.93,
+     "flag": ""
+    },
+    {
+     "src0": 93.35,
+     "src1": 95.35,
+     "out0": 99.99,
+     "out1": 100.23,
+     "speed": 8.33,
+     "flag": "快，看得出赶"
+    },
+    {
+     "src0": 95.35,
+     "src1": 95.88,
+     "out0": 100.23,
+     "out1": 100.76,
+     "speed": 1.0,
+     "flag": ""
+    }
+   ]
+  },
+  "1-10": {
+   "new_start": 100.95,
+   "src_start": 96,
+   "src_end": 112,
+   "picture_end_cut": 116.95,
+   "audio_first_word": 101.1,
+   "audio_end_cut": 114.522,
+   "mean_offset": -3.82,
+   "mean_abs_offset": 3.95,
+   "max_offset": -9.22,
+   "actions": [
+    {
+     "action": "路线重画成一条 L 线",
+     "cut_t": 101.0,
+     "src_t": 96.05,
+     "word": "Now",
+     "word_t": 101.1,
+     "offset": -0.1,
+     "anchor": true
+    },
+    {
+     "action": "CDK20 模型开始长出",
+     "cut_t": 102.3,
+     "src_t": 97.35,
+     "word": "AlphaFold,",
+     "word_t": 111.137,
+     "offset": -8.84,
+     "anchor": false
+    },
+    {
+     "action": "predicted 标签",
+     "cut_t": 103.7,
+     "src_t": 98.75,
+     "word": "predicts",
+     "word_t": 112.919,
+     "offset": -9.22,
+     "anchor": false
+    },
+    {
+     "action": "Nobel Prize 写出",
+     "cut_t": 104.0,
+     "src_t": 99.05,
+     "word": "Nobel",
+     "word_t": 106.229,
+     "offset": -2.23,
+     "anchor": true
+    },
+    {
+     "action": "in Chemistry",
+     "cut_t": 104.4,
+     "src_t": 99.45,
+     "word": "Chemistry",
+     "word_t": 106.95,
+     "offset": -2.55,
+     "anchor": true
+    },
+    {
+     "action": "2024",
+     "cut_t": 104.8,
+     "src_t": 99.85,
+     "word": "2024,",
+     "word_t": 104.205,
+     "offset": 0.59,
+     "anchor": false
+    },
+    {
+     "action": "Demis Hassabis",
+     "cut_t": 106.4,
+     "src_t": 101.45,
+     "word": "Demis",
+     "word_t": 108.332,
+     "offset": -1.93,
+     "anchor": true
+    },
+    {
+     "action": "John Jumper",
+     "cut_t": 106.9,
+     "src_t": 101.95,
+     "word": "John",
+     "word_t": 109.995,
+     "offset": -3.09,
+     "anchor": true
+    },
+    {
+     "action": "红色尾链长出",
+     "cut_t": 107.0,
+     "src_t": 102.05,
+     "word": "proteins.",
+     "word_t": 114.001,
+     "offset": -7.0,
+     "anchor": true
+    }
+   ],
+   "tail_cut_src": 5.27,
+   "retime": [
+    {
+     "src0": 96,
+     "src1": 99.05,
+     "out0": 100.95,
+     "out1": 106.23,
+     "speed": 0.58,
+     "flag": "慢，60 fps 交片要补帧"
+    },
+    {
+     "src0": 99.05,
+     "src1": 99.45,
+     "out0": 106.23,
+     "out1": 106.95,
+     "speed": 0.55,
+     "flag": "慢，60 fps 交片要补帧"
+    },
+    {
+     "src0": 99.45,
+     "src1": 101.45,
+     "out0": 106.95,
+     "out1": 108.33,
+     "speed": 1.45,
+     "flag": ""
+    },
+    {
+     "src0": 101.45,
+     "src1": 101.95,
+     "out0": 108.33,
+     "out1": 110.0,
+     "speed": 0.3,
+     "flag": "慢，60 fps 交片要补帧"
+    },
+    {
+     "src0": 101.95,
+     "src1": 106.73,
+     "out0": 110.0,
+     "out1": 114.77,
+     "speed": 1.0,
+     "flag": ""
+    }
+   ]
+  },
+  "1-11": {
+   "new_start": 114.92,
+   "src_start": 112,
+   "src_end": 123,
+   "picture_end_cut": 125.92,
+   "audio_first_word": 115.07,
+   "audio_end_cut": 126.188,
+   "mean_offset": -1.51,
+   "mean_abs_offset": 1.51,
+   "max_offset": -2.38,
+   "actions": [
+    {
+     "action": "香港地图出现",
+     "cut_t": 115.0,
+     "src_t": 112.08,
+     "word": "So",
+     "word_t": 115.07,
+     "offset": -0.07,
+     "anchor": true
+    },
+    {
+     "action": "红线开始画",
+     "cut_t": 116.5,
+     "src_t": 113.58,
+     "word": "follow",
+     "word_t": 118.876,
+     "offset": -2.38,
+     "anchor": true
+    },
+    {
+     "action": "镜头推近",
+     "cut_t": 120.6,
+     "src_t": 117.68,
+     "word": "And",
+     "word_t": 122.682,
+     "offset": -2.08,
+     "anchor": true
+    },
+    {
+     "action": "Sha Tin 标签",
+     "cut_t": 122.6,
+     "src_t": 119.68,
+     "word": "here,",
+     "word_t": 124.685,
+     "offset": -2.09,
+     "anchor": true
+    },
+    {
+     "action": "Pak Shek Kok 标签",
+     "cut_t": 125.0,
+     "src_t": 122.08,
+     "word": "Kong.",
+     "word_t": 125.907,
+     "offset": -0.91,
+     "anchor": true
+    }
+   ],
+   "tail_cut_src": 0.39,
+   "retime": [
+    {
+     "src0": 112,
+     "src1": 113.58,
+     "out0": 114.92,
+     "out1": 118.88,
+     "speed": 0.4,
+     "flag": "慢，60 fps 交片要补帧"
+    },
+    {
+     "src0": 113.58,
+     "src1": 117.68,
+     "out0": 118.88,
+     "out1": 122.68,
+     "speed": 1.08,
+     "flag": ""
+    },
+    {
+     "src0": 117.68,
+     "src1": 119.68,
+     "out0": 122.68,
+     "out1": 124.69,
+     "speed": 1.0,
+     "flag": ""
+    },
+    {
+     "src0": 119.68,
+     "src1": 122.08,
+     "out0": 124.69,
+     "out1": 125.91,
+     "speed": 1.96,
+     "flag": "快，看得出赶"
+    },
+    {
+     "src0": 122.08,
+     "src1": 122.61,
+     "out0": 125.91,
+     "out1": 126.44,
+     "speed": 1.0,
+     "flag": ""
+    }
+   ]
+  }
+ }
+}
