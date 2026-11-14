@@ -107,6 +107,13 @@ def condense(it, dst, pmax=None, pkeep=None, head=None, pause=True, tail=None):
     return len(y) / sr, pc
 
 
+def frames(path):
+    """Frames in a piece that ffmpeg has just written."""
+    out = subprocess.run([R.FFPROBE, "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=nb_frames", "-of", "csv=p=0", str(path)],
+                         capture_output=True, text=True).stdout
+    return int(out.strip().split(",")[0])
+
+
 def main():
     (TMP / "aud").mkdir(parents=True, exist_ok=True)
     beats = R.read_script()
@@ -190,13 +197,14 @@ def main():
         else:
             ff("-ss", bt["start"], "-t", slot, "-i", BASE, "-vf", vf, "-t", f"{need:.3f}", *NV, "-an", seg)
         segs.append(seg)
+        need = frames(seg) / 30          # 11-15: the sound follows the frames really written; rounding each piece up let the picture run 0.39 s late by the end
         t_new += need
         row |= dict(new_end=round(t_new, 2), new_len=round(need, 2))
         if gap_after > 0:
             g = TMP / f"{i:03d}_gap.mp4"          # 11-14：不出字，前段末帧停住 breath 秒
             ff("-sseof", "-0.04", "-i", seg, "-vf", f"tpad=stop_mode=clone:stop_duration={RULES['breath']}", "-t", RULES["breath"], *NV, "-an", g)
             segs.append(g)
-            t_new += RULES["breath"]
+            t_new += frames(g) / 30
             HITS["R4_breath"].append(bt["seg"])
             row["breath_after"] = RULES["breath"]
         rows.append(row)
