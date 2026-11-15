@@ -11,7 +11,7 @@
   2. 每段从这段的开头放录音；录音加 tail 秒比剧本这段长，就把这段拉长：画面停在这段最后一帧补够，
      后面所有段一起往后推（顺延）。录音短的不缩，留着给画面。
   3. 段与段之间剧本原有的空隙（呼吸）照留。
-出：cut_v3.mp4、cut_v3.json（每段新旧时间、录音、余量）、cut_v3_report.md、cut_v3_节奏表.md（按真实录音的新时间码）。
+出：cut_v4.mp4、cut_v4.json（每段新旧时间、录音、余量）、cut_v4_report.md、cut_v4_节奏表.md（按真实录音的新时间码）。
 
 用法：_env/footage/Scripts/python.exe 镜头设计_v3/粗剪/build_cut.py
 全部走 _env/ffmpeg（NVENC）；分段临时文件在 _render_tmp/cut/，出片后可删。
@@ -33,7 +33,7 @@ ROOT = R.ROOT
 FFMPEG = str(ROOT / "_env/ffmpeg/ffmpeg.exe")
 OUT = ROOT / "素材流程_out"
 BASE = HERE / "rough_v0.mp4"
-NAME = "cut_v3"                        # 11-14: on-camera beats from oncam2_beats (motion graphics); v2 kept
+NAME = "cut_v4"                        # 11-15: no stand-in cards, no oncam2 beats (v2 rejected), sound follows real frame counts
 TMP = ROOT / "_render_tmp/cut"
 PERSON_H = 1000                       # 出镜的人在 1080 画面里的高度（第 5 步出的是 5:6）
 RULES = {"pause_max": 1.2, "pause_keep": 0.7, "tail": 0.25, "xfade": 0.02,
