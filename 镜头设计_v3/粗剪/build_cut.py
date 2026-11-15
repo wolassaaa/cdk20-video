@@ -41,6 +41,9 @@ RULES = {"pause_max": 1.2, "pause_keep": 0.7, "tail": 0.25, "xfade": 0.02,
 # 11-14 收紧（见 粗剪规则.md 第五节）
 PAUSE_TIGHT = {"1-09", "5-10", "6-10", "6-11"}           # pause_max 0.9, keep 0.5
 SQUEEZE = {"W1": (8.0, 14.0)}                            # 标题卡静止段：删掉这一段（秒，段内），18 s → 12 s
+# 11-15: no re-recording. Where a take does not start with the script's first words, the forced word times at its head are wrong;
+# give the second at which the usable speech really starts (measured on the take with silencedetect) and what was done instead.
+SPEECH_FROM = {"6-09": 1.91}                             # B opens with a stray "The road," then pauses 1.0 s; start at "Fewer failed molecules"
 DIALOGUE = [["1-05", "1-06", "1-07"], ["4-04", "4-05"], ["5-05", "5-06"], ["6-04", "6-05"], ["8-04", "8-05", "8-06", "8-07"]]
 DLG_FIRST = {s for g in DIALOGUE for s in g[:-1]}
 DLG_FOLLOW = {s for g in DIALOGUE for s in g[1:]}
@@ -130,6 +133,11 @@ def main():
         elif bt["kind"] in ("ON-CAM", "VO"):
             cand = avail.get(bt["seg"], [])
             it = next((c for c in cand if c["person"] == bt["who"]), cand[0] if cand else None)
+            if it and bt["seg"] in SPEECH_FROM:
+                t0 = SPEECH_FROM[bt["seg"]]
+                kept = [dict(w) for w in it["words"] if w["t1"] > t0]
+                kept[0]["t0"] = t0
+                it = it | dict(words=kept)
             if not it:
                 row["state"] = "缺录音"
             else:
