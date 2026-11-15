@@ -1,0 +1,156 @@
+{
+ "cut_from": 30,
+ "frames": 576,
+ "paper_luma": 232.2,
+ "min_luma": 177.4,
+ "min_luma_frame_timeline": 561,
+ "min_ratio": 0.764,
+ "person_full": 108,
+ "okay": 123,
+ "gap_person_to_okay": 15,
+ "last_word_end": 439,
+ "push_start": 443,
+ "landings": [
+  {
+   "action": "第一站红半球亮起升高",
+   "word": "Okay",
+   "word_frame": 123,
+   "land": 123,
+   "diff": 0
+  },
+  {
+   "action": "其余五站向后滑远，第一站放大移到中央",
+   "word": "To",
+   "word_frame": 173,
+   "land": 173,
+   "diff": 0
+  },
+  {
+   "action": "第一站落回台面",
+   "word": "this",
+   "word_frame": 202,
+   "land": 202,
+   "diff": 0
+  },
+  {
+   "action": "红半球压平，当前格朱红边升起",
+   "word": "picture",
+   "word_frame": 268,
+   "land": 268,
+   "diff": 0
+  },
+  {
+   "action": "锁落进朱红格",
+   "word": "lock",
+   "word_frame": 314,
+   "land": 314,
+   "diff": 0
+  },
+  {
+   "action": "锁转回朝向钥匙",
+   "word": "and",
+   "word_frame": 376,
+   "land": 376,
+   "diff": 0
+  },
+  {
+   "action": "钥匙递入、滑到锁槽前",
+   "word": "key",
+   "word_frame": 424,
+   "land": 424,
+   "diff": 0
+  }
+ ],
+ "window": 60,
+ "object_gaps": [
+  [
+   84,
+   86,
+   2
+  ],
+  [
+   130,
+   151,
+   21
+  ],
+  [
+   173,
+   175,
+   2
+  ],
+  [
+   205,
+   220,
+   15
+  ],
+  [
+   242,
+   252,
+   10
+  ],
+  [
+   268,
+   298,
+   30
+  ],
+  [
+   314,
+   320,
+   6
+  ],
+  [
+   330,
+   332,
+   2
+  ],
+  [
+   362,
+   364,
+   2
+  ],
+  [
+   376,
+   406,
+   30
+  ],
+  [
+   424,
+   430,
+   6
+  ],
+  [
+   440,
+   443,
+   3
+  ],
+  [
+   520,
+   562,
+   42
+  ]
+ ],
+ "max_object_gap": 42,
+ "max_still_run_px_tray": 54,
+ "max_still_run_end_timeline": 84,
+ "join_diff_push_end": {
+  "464": 1.42,
+  "465": 0.97,
+  "466": 0.54,
+  "467": 1.26,
+  "468": 0.12,
+  "469": 0.15,
+  "470": 0.27
+ },
+ "join_diff_s3": {
+  "559": 1.94,
+  "560": 1.83,
+  "561": 1.94,
+  "562": 2.11,
+  "563": 2.34,
+  "564": 2.53,
+  "565": 2.93
+ },
+ "objects_x_lt_860_before_push": [],
+ "clash_frames_before_handoff": [],
+ "clash_frames_after_520_inherited_from_shot_k": 0
+}

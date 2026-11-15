@@ -121,9 +121,10 @@ const PERSON = (() => {
 })();
 
 /** The stand-in until the real clips come on 11-12. Warm, because people are warm; it lands on the table like a thrown print. */
+const NO_CARDS = true;   // 11-15 director: no person prints on the table; false brings them back
 const Print = ({who, x, y, w, h, at, rot}) => {
   const t = useT(), p = out((t - at) / 0.5);
-  if (t < at) return null;
+  if (NO_CARDS || t < at) return null;
   const lift = 1 - p, cx = x + w / 2, cy = y + h / 2, k = (w - 40) / 760, id = `photo${who}${at}`;
   const talk = Math.sin(t * 2.1 + at) * 3;
   return <g transform={`translate(${cx - 60 * lift} ${cy + 130 * lift}) rotate(${rot + 5 * lift}) scale(${1 + 0.05 * lift})`} opacity={clamp((t - at) / 0.08)}>

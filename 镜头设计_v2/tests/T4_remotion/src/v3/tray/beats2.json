@@ -1,0 +1,131 @@
+{
+ "_note": "HKBU SCIE1007 课程作业的科普视频。托盘试片 1 第 2 版节拍表：帧号是完整时间线帧（60 fps），成片从 cut_from 起剪、到 frames 止，成片帧 = 时间线帧 - cut_from；3-01 片内帧 = 时间线帧 - 92。",
+ "fps": 60,
+ "frames": 606,
+ "t301": 92,
+ "vo302": 466,
+ "words_301": {
+  "Okay": 31,
+  "To": 81,
+  "this": 110,
+  "picture": 176,
+  "lock": 222,
+  "and": 284,
+  "key": 332,
+  "end": 347
+ },
+ "word_208_last_end": 80,
+ "pull": [
+  84,
+  108
+ ],
+ "person_in": [
+  92,
+  108
+ ],
+ "push": [
+  443,
+  467
+ ],
+ "person_out": [
+  443,
+  455
+ ],
+ "s3_in": [
+  554,
+  562
+ ],
+ "actions": [
+  {
+   "name": "红液从左流进第一站",
+   "word": null,
+   "start": 86,
+   "land": 112
+  },
+  {
+   "name": "Hit/Improve 外环收回",
+   "word": null,
+   "start": 110,
+   "land": 130
+  },
+  {
+   "name": "第一站红半球亮起升高",
+   "word": "Okay",
+   "start": 117,
+   "land": 123
+  },
+  {
+   "name": "其余五站向后滑远，第一站放大移到中央",
+   "word": "To",
+   "start": 151,
+   "land": 173
+  },
+  {
+   "name": "笔写 station 1: target（朱红）",
+   "word": null,
+   "start": 175,
+   "land": 205
+  },
+  {
+   "name": "第一站落回台面",
+   "word": "this",
+   "start": 196,
+   "land": 202
+  },
+  {
+   "name": "灰色格边从台面升起",
+   "word": null,
+   "start": 220,
+   "land": 242
+  },
+  {
+   "name": "红半球压平，当前格朱红边升起",
+   "word": "picture",
+   "start": 252,
+   "land": 268
+  },
+  {
+   "name": "锁落进朱红格",
+   "word": "lock",
+   "start": 298,
+   "land": 314
+  },
+  {
+   "name": "字 lock",
+   "word": null,
+   "start": 320,
+   "land": 330
+  },
+  {
+   "name": "锁转 25° 露锁槽",
+   "word": null,
+   "start": 332,
+   "land": 362
+  },
+  {
+   "name": "锁转回朝向钥匙",
+   "word": "and",
+   "start": 364,
+   "land": 376
+  },
+  {
+   "name": "钥匙递入、滑到锁槽前",
+   "word": "key",
+   "start": 406,
+   "land": 424
+  },
+  {
+   "name": "字 key",
+   "word": null,
+   "start": 430,
+   "land": 440
+  },
+  {
+   "name": "推近，格边和路线沉回台面，钥匙继续向锁走",
+   "word": null,
+   "start": 443,
+   "land": 520
+  }
+ ],
+ "cut_from": 30
+}
