@@ -1,0 +1,137 @@
+{
+ "frames": 742,
+ "paper_luma": 232.2,
+ "min_luma": 177.4,
+ "min_luma_frame": 561,
+ "min_ratio": 0.764,
+ "person_full": 108,
+ "okay": 123,
+ "gap_person_to_okay": 15,
+ "last_word_end": 439,
+ "push_start": 443,
+ "landings": [
+  {
+   "action": "Target 亮起、升起",
+   "word": "Okay",
+   "word_frame": 123,
+   "land": 123,
+   "diff": 0
+  },
+  {
+   "action": "路线退后沿缩 40%，Target 移到中央",
+   "word": "To",
+   "word_frame": 173,
+   "land": 173,
+   "diff": 0
+  },
+  {
+   "action": "Target 落回台面",
+   "word": "this",
+   "word_frame": 202,
+   "land": 202,
+   "diff": 0
+  },
+  {
+   "action": "Target 压平，外环展开成锁座",
+   "word": "picture",
+   "word_frame": 268,
+   "land": 268,
+   "diff": 0
+  },
+  {
+   "action": "锁落下",
+   "word": "lock",
+   "word_frame": 314,
+   "land": 314,
+   "diff": 0
+  },
+  {
+   "action": "锁转回朝向钥匙",
+   "word": "and",
+   "word_frame": 376,
+   "land": 376,
+   "diff": 0
+  },
+  {
+   "action": "钥匙递入、滑到锁槽前",
+   "word": "key",
+   "word_frame": 424,
+   "land": 424,
+   "diff": 0
+  }
+ ],
+ "object_gaps": [
+  [
+   84,
+   110,
+   26
+  ],
+  [
+   130,
+   151,
+   21
+  ],
+  [
+   173,
+   175,
+   2
+  ],
+  [
+   205,
+   252,
+   47
+  ],
+  [
+   268,
+   298,
+   30
+  ],
+  [
+   314,
+   320,
+   6
+  ],
+  [
+   330,
+   332,
+   2
+  ],
+  [
+   362,
+   364,
+   2
+  ],
+  [
+   376,
+   406,
+   30
+  ],
+  [
+   424,
+   430,
+   6
+  ],
+  [
+   440,
+   443,
+   3
+  ],
+  [
+   520,
+   562,
+   42
+  ]
+ ],
+ "max_object_gap": 47,
+ "max_still_run_px_tray": 84,
+ "max_still_run_end": 84,
+ "objects_x_lt_860_before_push": [
+  [
+   415,
+   "key",
+   859
+  ]
+ ],
+ "clash_frames_before_handoff": [],
+ "clash_frames_after_520_inherited_from_shot_k": 0
+}
