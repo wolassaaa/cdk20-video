@@ -126,9 +126,10 @@ const PERSON = (() => {
 })();
 
 /** from: where it slides in from, as an offset (a print that slides, not one that is thrown); otherwise it lands like a thrown print. */
+const NO_CARDS = true;   // 11-15 director: no person prints on the table; false brings them back
 const Print = ({who, x, y, w, h, at, rot = 0, until = 1e9, from, slide = 0.7}) => {
   const t = useT();
-  if (t < at || t > until + 0.4) return null;
+  if (NO_CARDS || t < at || t > until + 0.4) return null;
   const p = out((t - at) / (from ? slide : 0.5)), lift = from ? 0 : 1 - p, gone = after(t, until, 0.4);
   const ox = from ? from[0] * (1 - smooth((t - at) / slide)) : -60 * lift, oy = from ? from[1] * (1 - smooth((t - at) / slide)) : 130 * lift;
   const cx = x + w / 2 + ox, cy = y + h / 2 + oy, k = (w - 40) / 760, id = `photo${who}${at}`;
@@ -228,7 +229,7 @@ const S7World = () => {
     <image href={staticFile(`fusion_s78/s6_end_base${JOIN_SFX}.png`)} x={S6X} y={0} width={W} height={H}/>
     <Road {...r} bare/>
     <Tag048 x={x4} y={r.y}/>
-    {t < 0.9 && <image href={staticFile(`fusion_s78/s6_end_comp${JOIN_SFX}.png`)} x={S6X} y={0} width={W} height={H} opacity={1 - smooth((t - 0.15) / 0.6)}/>}
+    {t < 0.9 && <image href={staticFile(`fusion_s78/s6_end_comp${JOIN_SFX}${NO_CARDS ? "_nocards" : ""}.png`)} x={S6X} y={0} width={W} height={H} opacity={1 - smooth((t - 0.15) / 0.6)}/>}
 
     {/* 7-01: the camera drops below the road; A's print and the pen's 1, 2, 3 on the bare table there */}
     <Print who="A" x={S6X + 96} y={680} w={745} h={730} at={0.9} rot={-0.8} until={3.0}/>
