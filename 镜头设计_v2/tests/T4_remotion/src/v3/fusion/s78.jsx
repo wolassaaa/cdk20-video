@@ -9,9 +9,9 @@ import OUTLINE from "./s78_cdk20_outline.json";
 
 const W = 1920, H = 1080, TABLE6 = "#EEEAE3";          // S6's table as its last frame shows it (237.5, 233.5, 226.5)
 const INK = "#111113", SOFT = "#545458", RED = "#E8190F", DARK = "#9A0E08", KLEIN = "#002FA7", BONE = "#EDEBE4", GREY = "#9A9AA0", SHEET = "#EEE9E4";
-const SERIF = "Instrument Serif", SANS = "Inter Tight", HAND = "Caveat";
+const SERIF = "Instrument Serif", SANS = "Instrument Serif Label", HAND = "Caveat";
 
-const faces = [new FontFace(SERIF, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Regular.ttf")})`), new FontFace(SERIF, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Italic.ttf")})`, {style: "italic"}), new FontFace(SANS, `url(${staticFile("fusion_s1/fonts/InterTight.ttf")})`, {weight: "100 900"}), new FontFace(HAND, `url(${staticFile("fusion_s1/fonts/Caveat.ttf")})`, {weight: "400 700"})];
+const faces = [new FontFace(SERIF, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Regular.ttf")})`), new FontFace(SERIF, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Italic.ttf")})`, {style: "italic"}), new FontFace(SANS, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Regular.ttf")})`, {weight: "100 900"}), new FontFace(SANS, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Italic.ttf")})`, {weight: "100 900", style: "italic"}), new FontFace(HAND, `url(${staticFile("fusion_s1/fonts/Caveat.ttf")})`, {weight: "400 700"})];
 const fontHandle = delayRender("fonts");
 Promise.all(faces.map(f => f.load())).then(l => { l.forEach(f => document.fonts.add(f)); continueRender(fontHandle); });
 
@@ -327,7 +327,7 @@ const S7 = ({review = true, fps = 30, dish = "fusion_s78/s702.mp4", bin = "fusio
         <Note x={120} y={150} size={52} at={S7_INS.watch[0] + 0.6}>AI route · classic route</Note>
       </g>
       {[S7_INS.dish, S7_INS.bin, S7_INS.watch].map(([a, b], i) => <g key={i} opacity={win(t, a + 0.3, b - 0.2)}>
-        <text x={W - 72} y={1054} textAnchor="end" fontFamily={SANS} fontSize={22} fontWeight={500} fill={SOFT}>{["Illustration · Ren 2023 (Conclusions)", "Illustration · our proposal · E09, E30", "Illustration · our proposal (T2 worksheet Q3)"][i]}</text>
+        <text x={W - 72} y={1054} textAnchor="end" fontFamily={SANS} fontSize={22} fontWeight={500} fill={SOFT}>{["Illustration · Ren 2023 (Conclusions)", "Illustration · our proposal", "Illustration · our proposal"][i]}</text>
       </g>)}
       {review && <Line lines={S7_LINES} who="VO (A)"/>}
     </svg>
@@ -418,7 +418,7 @@ const S8World = () => {
         })}
       </g>;
     })()}
-    <Source x={6720 + 760} y={1062} at={52.6} until={58.6}>Illustration · T2 worksheet Q5</Source>
+    <Source x={6720 + 760} y={1062} at={52.6} until={58.6}>Illustration</Source>
 
     {/* 8-07 · A, then all four slide into a 2x2 with a gap of 2% between; then the camera goes down onto the blank sheet: W5 starts on it */}
     {grid.map(([i, who, from]) => {
@@ -461,7 +461,7 @@ const S8 = ({review = true, fps = 30, m13 = "fusion_s78/millions13.mp4"}) => {
         <text x={1780} y={92} fontFamily={SANS} fontSize={36} fontWeight={600} fill={INK} textAnchor="end"><tspan fill={RED}>2</tspan> Evaluate candidates</text>
         <Stroke at={38.6} dur={0.35} d={TICK(1800, 70)} w={7}/>
       </g>
-      <Source x={W - 72} y={1054} at={2.2} until={22.6} size={22} anchor="end">Ren 2023 · T2 worksheet Q1 · objects from S3 and S4</Source>
+      <Source x={W - 72} y={1054} at={2.2} until={22.6} size={22} anchor="end">Illustration · Ren 2023</Source>
       {review && <Line lines={S8_LINES}/>}
     </svg>
   </AbsoluteFill></Clock.Provider>;

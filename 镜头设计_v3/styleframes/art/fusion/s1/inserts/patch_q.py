@@ -33,8 +33,8 @@ const S3Q = ({review = true}) => {
         <circle cx={px} cy={py} r={R} fill="none" stroke={BONE} strokeWidth={5}/>
         <Leader pts={[[px - R, py], [772, py]]} at={319.2} onColour/>
         <Note x={760} y={py + 15} size={58} at={319.5} fill={KLEIN} anchor="end">ATP pocket</Note>
-        <Note x={760} y={py + 87} size={58} at={326.5} fill={DARK} anchor="end">the right key</Note>
-        <Ink x={760} y={py + 170} size={58} at={327.2} font={SERIF} anchor="end" w={500}>can't do its job</Ink>
+        <Note x={760} y={py + 87} size={58} at={326.5} fill={DARK} anchor="end">plugged by the right key</Note>
+        <Ink x={760} y={py + 170} size={58} at={327.2} font={SERIF} anchor="end" w={760}>the enzyme can't do its job</Ink>
         <Tag x={96} y={1000} at={315.2} size={36}>predicted model (AlphaFold DB v6)</Tag>
         <Source x={96} y={1062} at={315.2}>Illustration · Ren et al. 2023</Source>
       </g>
