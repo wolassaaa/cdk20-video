@@ -1,0 +1,51 @@
+{
+ "样板1_3-01": {
+  "frames": 383,
+  "seconds": 6.38,
+  "min_luma_ratio": 0.89,
+  "join_in": 1.83,
+  "join_out": 4.92,
+  "landing_max_diff": 0,
+  "max_object_gap": 30,
+  "person_to_first_word": 15,
+  "last_word_to_push": 4,
+  "objects_in_person_half": 0,
+  "objects_below_930": 0,
+  "clash_frames": 0,
+  "min_text_px": 60,
+  "fails": []
+ },
+ "样板2_4-11_4-12": {
+  "frames": 639,
+  "seconds": 10.65,
+  "min_luma_ratio": 0.86,
+  "join_in": 1.11,
+  "join_out": 1.25,
+  "landing_max_diff": 0,
+  "max_object_gap": 73,
+  "person_to_first_word": 6,
+  "last_word_to_push": 5,
+  "cut_to_A_first_word": 7,
+  "objects_in_person_half": 0,
+  "objects_below_930": 0,
+  "clash_frames": 0,
+  "min_text_px": 60,
+  "fails": []
+ },
+ "样板3_3-09": {
+  "frames": 340,
+  "seconds": 5.67,
+  "min_luma_ratio": 0.461,
+  "join_in": 3.16,
+  "join_out": 2.58,
+  "landing_max_diff": 0,
+  "max_object_gap": 45,
+  "person_to_first_word": 8,
+  "last_word_to_push": 5,
+  "objects_in_person_half": 0,
+  "objects_below_930": 0,
+  "clash_frames": 0,
+  "min_text_px": 60,
+  "fails": []
+ }
+}

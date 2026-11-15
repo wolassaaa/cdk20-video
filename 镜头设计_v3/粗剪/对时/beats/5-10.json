@@ -1,0 +1,686 @@
+{
+ "seg": "5-10",
+ "fps": 60,
+ "speaker": "C",
+ "audio": {
+  "kind": "VO",
+  "head": 0.15,
+  "tail": 0.25,
+  "pmax": 0.9,
+  "pkeep": 0.5,
+  "wav": "D:\\。hkbu\\molecular science\\_render_tmp\\beats\\5-10.wav",
+  "seconds": 29.089
+ },
+ "events": [
+  {
+   "id": "step",
+   "word": "step:",
+   "kind": "keyed",
+   "x": 120,
+   "y": 170,
+   "size": 72,
+   "parts": [
+    "the big step: ",
+    "living cells",
+    ""
+   ],
+   "dur": 40,
+   "f_land": 74,
+   "f_start": 74,
+   "f_end": 114
+  },
+  {
+   "id": "dishes",
+   "word": "cells.",
+   "kind": "ring",
+   "cx": 0,
+   "cy": 0,
+   "rx": 120,
+   "ry": 95,
+   "at_pt": "huh7_dish",
+   "dur": 18,
+   "f_land": 148,
+   "f_start": 148,
+   "f_end": 166
+  },
+  {
+   "id": "cal3",
+   "word": "After",
+   "kind": "minical",
+   "x": 1600,
+   "y": 170,
+   "dur": 12,
+   "f_land": 219,
+   "f_start": 219,
+   "f_end": 231
+  },
+  {
+   "id": "p1",
+   "word": "three",
+   "kind": "minipage",
+   "n": 1,
+   "f_land": 250,
+   "f_start": 250,
+   "f_end": 250
+  },
+  {
+   "id": "p2",
+   "word": "days",
+   "kind": "minipage",
+   "n": 2,
+   "f_land": 267,
+   "f_start": 267,
+   "f_end": 267
+  },
+  {
+   "id": "p3",
+   "word": "with",
+   "kind": "minipage",
+   "n": 3,
+   "f_land": 291,
+   "f_start": 291,
+   "f_end": 291
+  },
+  {
+   "id": "w048",
+   "word": "048,",
+   "kind": "note",
+   "x": 1540,
+   "y": 330,
+   "size": 48,
+   "text": "3 days with 048",
+   "dur": 24,
+   "f_land": 321,
+   "f_start": 321,
+   "f_end": 345
+  },
+  {
+   "id": "add",
+   "word": "048,",
+   "lag": 50,
+   "kind": "leader",
+   "pts_at": [
+    "huh7_dish",
+    "hek_dish"
+   ],
+   "tx": 0,
+   "ty": 0,
+   "text": "",
+   "dur": 20,
+   "f_land": 371,
+   "f_start": 371,
+   "f_end": 391
+  },
+  {
+   "id": "huh7",
+   "word": "Huh7",
+   "kind": "ink",
+   "font": "serif",
+   "x": 0,
+   "y": 0,
+   "size": 44,
+   "text": "Huh7",
+   "at_pt": "huh7_lbl",
+   "dur": 12,
+   "f_land": 417,
+   "f_start": 417,
+   "f_end": 429
+  },
+  {
+   "id": "liver",
+   "word": "cancer",
+   "kind": "ink",
+   "x": 0,
+   "y": 0,
+   "size": 28,
+   "text": "liver cancer cells",
+   "at_pt": "huh7_sub",
+   "dur": 20,
+   "f_land": 499,
+   "f_start": 499,
+   "f_end": 519
+  },
+  {
+   "id": "packed",
+   "word": "packed",
+   "kind": "note",
+   "x": 0,
+   "y": 0,
+   "size": 44,
+   "text": "packed with CDK20",
+   "at_pt": "huh7_note",
+   "dur": 30,
+   "f_land": 552,
+   "f_start": 552,
+   "f_end": 582
+  },
+  {
+   "id": "ulcdk",
+   "word": "CDK20,",
+   "kind": "ul",
+   "x": 0,
+   "y": 0,
+   "size": 44,
+   "before": "packed with ",
+   "key": "CDK20",
+   "font": "hand",
+   "at_pt": "huh7_note",
+   "dur": 12,
+   "f_land": 614,
+   "f_start": 614,
+   "f_end": 626
+  },
+  {
+   "id": "cdk_dots",
+   "word": "CDK20,",
+   "lag": 40,
+   "kind": "dots",
+   "at_pt": "huh7_dish",
+   "dur": 18,
+   "fill": "blue",
+   "f_land": 654,
+   "f_start": 654,
+   "f_end": 672
+  },
+  {
+   "id": "lost",
+   "word": "lost",
+   "lag": 8,
+   "kind": "ink",
+   "x": 110,
+   "y": 478,
+   "size": 32,
+   "text": "dose of 048 →",
+   "dur": 20,
+   "f_land": 715,
+   "f_start": 715,
+   "f_end": 735
+  },
+  {
+   "id": "slide0",
+   "word": "lost",
+   "layer": "3d",
+   "obj": "slider",
+   "f_land": 707,
+   "f_start": 707,
+   "f_end": 707
+  },
+  {
+   "id": "half",
+   "word": "half",
+   "kind": "note",
+   "x": 110,
+   "y": 540,
+   "size": 46,
+   "text": "half the living-cell signal gone",
+   "dur": 36,
+   "f_land": 765,
+   "f_start": 765,
+   "f_end": 801
+  },
+  {
+   "id": "sig1",
+   "word": "living-cell",
+   "kind": "ul",
+   "x": 110,
+   "y": 540,
+   "size": 46,
+   "before": "half the ",
+   "key": "living-cell",
+   "font": "hand",
+   "dur": 12,
+   "f_land": 816,
+   "f_start": 816,
+   "f_end": 828
+  },
+  {
+   "id": "sig2",
+   "word": "signal",
+   "kind": "ul",
+   "x": 110,
+   "y": 540,
+   "size": 46,
+   "before": "half the living-cell ",
+   "key": "signal",
+   "font": "hand",
+   "dur": 12,
+   "f_land": 859,
+   "f_start": 859,
+   "f_end": 871
+  },
+  {
+   "id": "about",
+   "word": "about",
+   "kind": "pen",
+   "at_pt": "huh7_ic",
+   "dur": 10,
+   "f_land": 930,
+   "f_start": 930,
+   "f_end": 940
+  },
+  {
+   "id": "huh7_stop",
+   "word": "210",
+   "layer": "3d",
+   "obj": "slider",
+   "f_land": 996,
+   "f_start": 996,
+   "f_end": 996
+  },
+  {
+   "id": "v210",
+   "word": "210",
+   "lag": 6,
+   "kind": "keyed",
+   "x": 0,
+   "y": 0,
+   "size": 48,
+   "parts": [
+    "",
+    "208.7",
+    " ± 3.3 nM"
+   ],
+   "at_pt": "huh7_val",
+   "dur": 20,
+   "f_land": 1002,
+   "f_start": 1002,
+   "f_end": 1022
+  },
+  {
+   "id": "nm1",
+   "word": "nanomolar.",
+   "kind": "ul",
+   "x": 0,
+   "y": 0,
+   "size": 48,
+   "before": "",
+   "key": "208.7",
+   "at_pt": "huh7_val",
+   "dur": 1,
+   "f_land": 1068,
+   "f_start": 1068,
+   "f_end": 1069
+  },
+  {
+   "id": "cmp",
+   "word": "Comparison",
+   "kind": "ink",
+   "font": "serif",
+   "x": 0,
+   "y": 0,
+   "size": 44,
+   "text": "HEK293",
+   "at_pt": "hek_lbl",
+   "dur": 14,
+   "f_land": 1157,
+   "f_start": 1157,
+   "f_end": 1171
+  },
+  {
+   "id": "cmp2",
+   "word": "cells,#2",
+   "kind": "ink",
+   "x": 0,
+   "y": 0,
+   "size": 28,
+   "text": "comparison cells",
+   "at_pt": "hek_sub",
+   "dur": 16,
+   "f_land": 1203,
+   "f_start": 1203,
+   "f_end": 1219
+  },
+  {
+   "id": "hek",
+   "word": "HEK293,",
+   "kind": "ul",
+   "x": 0,
+   "y": 0,
+   "size": 44,
+   "before": "",
+   "key": "HEK293",
+   "at_pt": "hek_lbl",
+   "dur": 12,
+   "f_land": 1252,
+   "f_start": 1252,
+   "f_end": 1264
+  },
+  {
+   "id": "hek2",
+   "word": "HEK293,",
+   "lag": 8,
+   "kind": "ring",
+   "cx": 0,
+   "cy": 0,
+   "rx": 125,
+   "ry": 100,
+   "at_pt": "hek_dish",
+   "dur": 18,
+   "f_land": 1260,
+   "f_start": 1260,
+   "f_end": 1278
+  },
+  {
+   "id": "hek_go",
+   "after": "hek2",
+   "gap": 90,
+   "kind": "note",
+   "x": 0,
+   "y": 0,
+   "size": 40,
+   "text": "still going…",
+   "at_pt": "hek_note",
+   "dur": 20,
+   "out": "hekhalf",
+   "f_land": 1350,
+   "f_start": 1350,
+   "f_end": 1370
+  },
+  {
+   "id": "needed",
+   "word": "needed",
+   "kind": "pen",
+   "at_pt": "hek_ic",
+   "dur": 10,
+   "f_land": 1412,
+   "f_start": 1412,
+   "f_end": 1422
+  },
+  {
+   "id": "hek_stop",
+   "word": "1,700.",
+   "layer": "3d",
+   "obj": "slider",
+   "f_land": 1474,
+   "f_start": 1474,
+   "f_end": 1474
+  },
+  {
+   "id": "v1700",
+   "word": "1,700.",
+   "lag": 6,
+   "kind": "keyed",
+   "x": 0,
+   "y": 0,
+   "size": 48,
+   "parts": [
+    "",
+    "1,706.7",
+    " ± 670.0 nM"
+   ],
+   "at_pt": "hek_val",
+   "dur": 20,
+   "f_land": 1480,
+   "f_start": 1480,
+   "f_end": 1500
+  },
+  {
+   "id": "link",
+   "after": "v1700",
+   "gap": 60,
+   "kind": "pen",
+   "from_pt": "huh7_ic",
+   "to_pt": "hek_ic",
+   "dash": true,
+   "dur": 24,
+   "f_land": 1540,
+   "f_start": 1540,
+   "f_end": 1564
+  },
+  {
+   "id": "hekhalf",
+   "after": "link",
+   "gap": 50,
+   "kind": "note",
+   "x": 0,
+   "y": 0,
+   "size": 40,
+   "text": "half gone, at last",
+   "at_pt": "hek_note2",
+   "dur": 24,
+   "f_land": 1590,
+   "f_start": 1590,
+   "f_end": 1614
+  },
+  {
+   "id": "roughly",
+   "word": "Roughly",
+   "kind": "bracket",
+   "at_pt": "bracket",
+   "dur": 20,
+   "f_land": 1636,
+   "f_start": 1636,
+   "f_end": 1656
+  },
+  {
+   "id": "eight",
+   "word": "eight",
+   "kind": "note",
+   "x": 0,
+   "y": 0,
+   "size": 52,
+   "text": "~8× (our calculation)",
+   "at_pt": "eight",
+   "dur": 26,
+   "fill": "red",
+   "f_land": 1672,
+   "f_start": 1672,
+   "f_end": 1698
+  },
+  {
+   "id": "foot",
+   "word": "more.",
+   "kind": "ink",
+   "x": 120,
+   "y": 930,
+   "size": 26,
+   "text": "HEK293 is not normal liver tissue",
+   "dur": 20,
+   "f_land": 1713,
+   "f_start": 1713,
+   "f_end": 1733
+  }
+ ],
+ "fade_end": 1725,
+ "source": [
+  [
+   0,
+   "Illustration · Huh7 208.7 ± 3.3 nM, HEK293 1,706.7 ± 670.0 nM: Ren 2023, Fig. 9B, p. 1448",
+   "cell viability assay · dishes and cells drawn · ~8× is our calculation"
+  ]
+ ],
+ "words": [
+  {
+   "w": "Then,",
+   "t0": 0.15,
+   "t1": 0.39
+  },
+  {
+   "w": "the",
+   "t0": 0.831,
+   "t1": 0.911
+  },
+  {
+   "w": "big",
+   "t0": 0.991,
+   "t1": 1.151
+  },
+  {
+   "w": "step:",
+   "t0": 1.231,
+   "t1": 1.471
+  },
+  {
+   "w": "living",
+   "t0": 2.131,
+   "t1": 2.432
+  },
+  {
+   "w": "cells.",
+   "t0": 2.472,
+   "t1": 2.792
+  },
+  {
+   "w": "After",
+   "t0": 3.652,
+   "t1": 4.013
+  },
+  {
+   "w": "three",
+   "t0": 4.173,
+   "t1": 4.393
+  },
+  {
+   "w": "days",
+   "t0": 4.453,
+   "t1": 4.673
+  },
+  {
+   "w": "with",
+   "t0": 4.853,
+   "t1": 5.053
+  },
+  {
+   "w": "048,",
+   "t0": 5.354,
+   "t1": 6.955
+  },
+  {
+   "w": "Huh7",
+   "t0": 6.955,
+   "t1": 7.855
+  },
+  {
+   "w": "liver",
+   "t0": 7.995,
+   "t1": 8.215
+  },
+  {
+   "w": "cancer",
+   "t0": 8.315,
+   "t1": 8.616
+  },
+  {
+   "w": "cells,",
+   "t0": 8.696,
+   "t1": 8.996
+  },
+  {
+   "w": "packed",
+   "t0": 9.196,
+   "t1": 9.636
+  },
+  {
+   "w": "with",
+   "t0": 9.796,
+   "t1": 10.017
+  },
+  {
+   "w": "CDK20,",
+   "t0": 10.237,
+   "t1": 11.017
+  },
+  {
+   "w": "lost",
+   "t0": 11.778,
+   "t1": 12.118
+  },
+  {
+   "w": "half",
+   "t0": 12.758,
+   "t1": 13.018
+  },
+  {
+   "w": "their",
+   "t0": 13.139,
+   "t1": 13.339
+  },
+  {
+   "w": "living-cell",
+   "t0": 13.599,
+   "t1": 14.139
+  },
+  {
+   "w": "signal",
+   "t0": 14.319,
+   "t1": 14.7
+  },
+  {
+   "w": "at",
+   "t0": 15.2,
+   "t1": 15.38
+  },
+  {
+   "w": "about",
+   "t0": 15.5,
+   "t1": 15.82
+  },
+  {
+   "w": "210",
+   "t0": 16.601,
+   "t1": 17.621
+  },
+  {
+   "w": "nanomolar.",
+   "t0": 17.802,
+   "t1": 18.622
+  },
+  {
+   "w": "Comparison",
+   "t0": 19.283,
+   "t1": 20.003
+  },
+  {
+   "w": "cells,",
+   "t0": 20.043,
+   "t1": 20.343
+  },
+  {
+   "w": "HEK293,",
+   "t0": 20.864,
+   "t1": 23.525
+  },
+  {
+   "w": "needed",
+   "t0": 23.525,
+   "t1": 23.665
+  },
+  {
+   "w": "about",
+   "t0": 23.765,
+   "t1": 24.086
+  },
+  {
+   "w": "1,700.",
+   "t0": 24.566,
+   "t1": 26.788
+  },
+  {
+   "w": "Roughly",
+   "t0": 27.268,
+   "t1": 27.628
+  },
+  {
+   "w": "eight",
+   "t0": 27.868,
+   "t1": 28.008
+  },
+  {
+   "w": "times",
+   "t0": 28.048,
+   "t1": 28.529
+  },
+  {
+   "w": "more.",
+   "t0": 28.549,
+   "t1": 28.969
+  }
+ ],
+ "frames": {
+  "len": 1745,
+  "first_word": 9,
+  "last_word_end": 1738
+ },
+ "check": "ok",
+ "hash": "5fb8553e52c8"
+}

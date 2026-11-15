@@ -17,6 +17,8 @@ FF = "C:/Program Files/digiKam/ffmpeg.exe"
 BONE = np.array([237, 235, 228], np.float32)
 NUC_FADE = 0.55
 W, H, NF, FPS = 3840, 2160, 1980, 60
+if os.environ.get("W5_1080"):          # 11-16: 1080p review pass, cells scaled down from the 4K cells-only film
+    W, H = 1920, 1080
 KEEP = (150, 276, 420, 564, 720, 846, 990, 1116, 1230, 1356, 1470, 1596, 1800)   # frames also saved as PNG in chk/: one per page, one in the middle of each page change
 
 
@@ -51,7 +53,7 @@ def encoder(path, cq):
 
 def bg_frames():
     """The cell frames back out of the cells-only film, one uint8 RGB array at a time."""
-    p = subprocess.Popen([FF, "-v", "error", "-i", BG, "-vf", "scale=in_color_matrix=bt709:in_range=tv:flags=accurate_rnd+full_chroma_int,format=rgb24", "-f", "rawvideo", "-"], stdout=subprocess.PIPE)
+    p = subprocess.Popen([FF, "-v", "error", "-i", BG, "-vf", "scale=%d:%d:in_color_matrix=bt709:in_range=tv:flags=accurate_rnd+full_chroma_int,format=rgb24" % (W, H), "-f", "rawvideo", "-"], stdout=subprocess.PIPE)
     n = W * H * 3
     while True:
         b = p.stdout.read(n)

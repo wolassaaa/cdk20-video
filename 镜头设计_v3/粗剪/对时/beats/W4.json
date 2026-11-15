@@ -1,0 +1,264 @@
+{
+ "seg": "W4",
+ "fps": 60,
+ "speaker": "C",
+ "audio": {
+  "kind": "MUSIC",
+  "head": 0.15,
+  "tail": 0.25,
+  "pmax": 1.2,
+  "pkeep": 0.7,
+  "song": "Sacrifice - The Weeknd[Dawn FM].flac",
+  "start": 103.27,
+  "beat": 0.49178,
+  "beats": 16,
+  "fade": 0.25,
+  "wav": "D:\\。hkbu\\molecular science\\_render_tmp\\beats\\W4.wav",
+  "seconds": 7.868
+ },
+ "events": [
+  {
+   "id": "shell",
+   "word": "b2",
+   "layer": "3d",
+   "obj": "shell",
+   "f_land": 59,
+   "f_start": 59,
+   "f_end": 59
+  },
+  {
+   "id": "cam1",
+   "word": "b4",
+   "lead": 88,
+   "layer": "3d",
+   "obj": "cam",
+   "f_land": 118,
+   "f_start": 30,
+   "f_end": 118
+  },
+  {
+   "id": "tag",
+   "word": "b4",
+   "lag": 8,
+   "kind": "tag",
+   "x": 480,
+   "y": 748,
+   "leader": [
+    [
+     745,
+     600
+    ],
+    [
+     640,
+     700
+    ]
+   ],
+   "text": "OUR RE-DOCKING (AutoDock Vina)",
+   "sub": "",
+   "out": "b12f",
+   "f_land": 126,
+   "f_start": 126,
+   "f_end": 126
+  },
+  {
+   "id": "turn0",
+   "word": "b5",
+   "kind": "keyturn",
+   "step": 1,
+   "obj": "key",
+   "out": "b12f",
+   "f_land": 148,
+   "f_start": 148,
+   "f_end": 148
+  },
+  {
+   "id": "turn1",
+   "word": "b6",
+   "kind": "keyturn",
+   "step": 2,
+   "obj": "key",
+   "out": "b12f",
+   "f_land": 177,
+   "f_start": 177,
+   "f_end": 177
+  },
+  {
+   "id": "turn2",
+   "word": "b7",
+   "kind": "keyturn",
+   "step": 3,
+   "obj": "key",
+   "out": "b12f",
+   "f_land": 207,
+   "f_start": 207,
+   "f_end": 207
+  },
+  {
+   "id": "turn3",
+   "word": "b8",
+   "kind": "keyturn",
+   "step": 4,
+   "obj": "key",
+   "out": "b12f",
+   "f_land": 236,
+   "f_start": 236,
+   "f_end": 236
+  },
+  {
+   "id": "glow",
+   "word": "b9",
+   "kind": "ring",
+   "cx": 950,
+   "cy": 520,
+   "rx": 300,
+   "ry": 200,
+   "dur": 16,
+   "fill": "red",
+   "out": "b12f",
+   "f_land": 266,
+   "f_start": 266,
+   "f_end": 282
+  },
+  {
+   "id": "improve",
+   "word": "b11",
+   "kind": "road",
+   "x": 1180,
+   "y": 900,
+   "dur": 18,
+   "out": "b12f",
+   "f_land": 325,
+   "f_start": 325,
+   "f_end": 343
+  },
+  {
+   "id": "b12f",
+   "word": "b12",
+   "lag": -16,
+   "kind": "fade",
+   "dur": 20,
+   "f_land": 338,
+   "f_start": 338,
+   "f_end": 358
+  },
+  {
+   "id": "next",
+   "word": "b14",
+   "kind": "note",
+   "x": 150,
+   "y": 200,
+   "size": 52,
+   "text": "next: living cells",
+   "dur": 24,
+   "f_land": 413,
+   "f_start": 413,
+   "f_end": 437
+  },
+  {
+   "id": "cam2",
+   "at": 7.85,
+   "lead": 118,
+   "layer": "3d",
+   "obj": "cam",
+   "f_land": 471,
+   "f_start": 353,
+   "f_end": 471
+  }
+ ],
+ "source": [
+  [
+   0,
+   "Illustration · our re-docking (AutoDock Vina) · music: stand-in",
+   ""
+  ]
+ ],
+ "words": [
+  {
+   "w": "b0",
+   "t0": 0.0,
+   "t1": 0.492
+  },
+  {
+   "w": "b1",
+   "t0": 0.492,
+   "t1": 0.984
+  },
+  {
+   "w": "b2",
+   "t0": 0.984,
+   "t1": 1.475
+  },
+  {
+   "w": "b3",
+   "t0": 1.475,
+   "t1": 1.967
+  },
+  {
+   "w": "b4",
+   "t0": 1.967,
+   "t1": 2.459
+  },
+  {
+   "w": "b5",
+   "t0": 2.459,
+   "t1": 2.951
+  },
+  {
+   "w": "b6",
+   "t0": 2.951,
+   "t1": 3.442
+  },
+  {
+   "w": "b7",
+   "t0": 3.442,
+   "t1": 3.934
+  },
+  {
+   "w": "b8",
+   "t0": 3.934,
+   "t1": 4.426
+  },
+  {
+   "w": "b9",
+   "t0": 4.426,
+   "t1": 4.918
+  },
+  {
+   "w": "b10",
+   "t0": 4.918,
+   "t1": 5.41
+  },
+  {
+   "w": "b11",
+   "t0": 5.41,
+   "t1": 5.901
+  },
+  {
+   "w": "b12",
+   "t0": 5.901,
+   "t1": 6.393
+  },
+  {
+   "w": "b13",
+   "t0": 6.393,
+   "t1": 6.885
+  },
+  {
+   "w": "b14",
+   "t0": 6.885,
+   "t1": 7.377
+  },
+  {
+   "w": "b15",
+   "t0": 7.377,
+   "t1": 7.868
+  }
+ ],
+ "frames": {
+  "len": 472,
+  "first_word": 0,
+  "last_word_end": 472
+ },
+ "check": "ok",
+ "hash": "0c0d057ad92f"
+}

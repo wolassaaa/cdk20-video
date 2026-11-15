@@ -1,0 +1,619 @@
+{
+ "seg": "5-07",
+ "fps": 60,
+ "speaker": "C",
+ "audio": {
+  "kind": "VO",
+  "head": 0.15,
+  "tail": 0.25,
+  "pmax": 1.2,
+  "pkeep": 0.7,
+  "wav": "D:\\。hkbu\\molecular science\\_render_tmp\\beats\\5-07.wav",
+  "seconds": 21.309
+ },
+ "events": [
+  {
+   "id": "not",
+   "word": "all.",
+   "kind": "note",
+   "x": 140,
+   "y": 300,
+   "size": 52,
+   "text": "not at all",
+   "lead": 10,
+   "dur": 20,
+   "out": "loop",
+   "f_land": 38,
+   "f_start": 28,
+   "f_end": 48
+  },
+  {
+   "id": "cam1",
+   "word": "This",
+   "lead": 106,
+   "layer": "3d",
+   "obj": "cam",
+   "f_land": 106,
+   "f_start": 0,
+   "f_end": 106
+  },
+  {
+   "id": "loop",
+   "word": "This",
+   "lag": 10,
+   "kind": "loop",
+   "d": "M1740 300 Q1590 120 1400 190",
+   "end": [
+    1400,
+    190
+   ],
+   "ang": -2.75,
+   "dur": 40,
+   "out": "never",
+   "f_land": 116,
+   "f_start": 116,
+   "f_end": 156
+  },
+  {
+   "id": "again",
+   "word": "loop",
+   "kind": "note",
+   "x": 1180,
+   "y": 150,
+   "size": 46,
+   "text": "the loop, again",
+   "dur": 24,
+   "out": "keys_in",
+   "f_land": 187,
+   "f_start": 187,
+   "f_end": 211
+  },
+  {
+   "id": "ulagain",
+   "word": "again,",
+   "kind": "ul",
+   "x": 1180,
+   "y": 150,
+   "size": 46,
+   "before": "the loop, ",
+   "key": "again",
+   "font": "hand",
+   "dur": 12,
+   "out": "keys_in",
+   "f_land": 264,
+   "f_start": 264,
+   "f_end": 276
+  },
+  {
+   "id": "now",
+   "word": "now",
+   "kind": "note",
+   "x": 140,
+   "y": 360,
+   "size": 48,
+   "text": "now with real lab data",
+   "dur": 30,
+   "out": "keys_in",
+   "f_land": 316,
+   "f_start": 316,
+   "f_end": 346
+  },
+  {
+   "id": "bead1",
+   "word": "lab",
+   "lead": 50,
+   "kind": "bead",
+   "along": "loop",
+   "dur": 50,
+   "f_land": 397,
+   "f_start": 347,
+   "f_end": 397
+  },
+  {
+   "id": "bead2",
+   "word": "in,",
+   "lead": 60,
+   "kind": "bead",
+   "along": "loop",
+   "dur": 60,
+   "f_land": 564,
+   "f_start": 504,
+   "f_end": 564
+  },
+  {
+   "id": "tube",
+   "word": "inside.",
+   "kind": "ring",
+   "cx": 0,
+   "cy": 0,
+   "rx": 90,
+   "ry": 150,
+   "at_pt": "tube",
+   "dur": 16,
+   "out": "keys_in",
+   "f_land": 434,
+   "f_start": 434,
+   "f_end": 450
+  },
+  {
+   "id": "results",
+   "word": "results",
+   "kind": "note",
+   "x": 140,
+   "y": 430,
+   "size": 48,
+   "text": "results back in",
+   "dur": 24,
+   "out": "keys_in",
+   "f_land": 498,
+   "f_start": 498,
+   "f_end": 522
+  },
+  {
+   "id": "pred",
+   "word": "predicted",
+   "kind": "note",
+   "x": 140,
+   "y": 500,
+   "size": 48,
+   "text": "+ a predicted pose of 001",
+   "dur": 34,
+   "out": "keys_in",
+   "f_land": 651,
+   "f_start": 651,
+   "f_end": 685
+  },
+  {
+   "id": "pocket",
+   "word": "pose",
+   "kind": "pocket",
+   "x": 980,
+   "y": 430,
+   "w": 560,
+   "h": 360,
+   "dur": 30,
+   "out": "keys_in",
+   "f_land": 691,
+   "f_start": 691,
+   "f_end": 721
+  },
+  {
+   "id": "mol",
+   "word": "001",
+   "kind": "molink",
+   "x": 1000,
+   "y": 470,
+   "dur": 26,
+   "out": "keys_in",
+   "f_land": 776,
+   "f_start": 776,
+   "f_end": 802
+  },
+  {
+   "id": "plbl",
+   "word": "pocket.",
+   "kind": "ink",
+   "font": "serif",
+   "x": 980,
+   "y": 760,
+   "size": 40,
+   "text": "pocket (predicted)",
+   "anchor": "middle",
+   "dur": 16,
+   "out": "keys_in",
+   "f_land": 841,
+   "f_start": 841,
+   "f_end": 857
+  },
+  {
+   "id": "keys_in",
+   "word": "Sixteen",
+   "layer": "3d",
+   "obj": "keys",
+   "lead": 30,
+   "f_land": 905,
+   "f_start": 875,
+   "f_end": 905
+  },
+  {
+   "id": "r2",
+   "word": "Sixteen",
+   "lag": 6,
+   "kind": "ink",
+   "x": 142,
+   "y": 330,
+   "size": 34,
+   "text": "Round 2",
+   "dur": 12,
+   "f_land": 911,
+   "f_start": 911,
+   "f_end": 923
+  },
+  {
+   "id": "d16",
+   "word": "new",
+   "kind": "ink",
+   "font": "serif",
+   "x": 140,
+   "y": 420,
+   "size": 72,
+   "text": "16 designed",
+   "dur": 24,
+   "f_land": 935,
+   "f_start": 935,
+   "f_end": 959
+  },
+  {
+   "id": "keys_in_end",
+   "word": "designs.",
+   "layer": "3d",
+   "obj": "keys",
+   "f_land": 944,
+   "f_start": 944,
+   "f_end": 944
+  },
+  {
+   "id": "keys_out",
+   "word": "Six",
+   "layer": "3d",
+   "obj": "keys2",
+   "lead": 0,
+   "dur": 48,
+   "f_land": 990,
+   "f_start": 990,
+   "f_end": 1038
+  },
+  {
+   "id": "t6",
+   "word": "Six",
+   "lag": 6,
+   "kind": "ink",
+   "font": "serif",
+   "x": 140,
+   "y": 505,
+   "size": 72,
+   "text": "→ 6 tested",
+   "dur": 24,
+   "f_land": 996,
+   "f_start": 996,
+   "f_end": 1020
+  },
+  {
+   "id": "ul6",
+   "word": "tested.",
+   "kind": "ul",
+   "x": 140,
+   "y": 505,
+   "size": 72,
+   "before": "→ ",
+   "key": "6 tested",
+   "dur": 14,
+   "f_land": 1041,
+   "f_start": 1041,
+   "f_end": 1055
+  },
+  {
+   "id": "slide",
+   "word": "tested.",
+   "lag": 12,
+   "lead": 60,
+   "layer": "3d",
+   "obj": "keys",
+   "f_land": 1053,
+   "f_start": 993,
+   "f_end": 1053
+  },
+  {
+   "id": "within",
+   "word": "within",
+   "kind": "ink",
+   "x": 142,
+   "y": 580,
+   "size": 32,
+   "text": "within 30 days",
+   "dur": 20,
+   "f_land": 1116,
+   "f_start": 1116,
+   "f_end": 1136
+  },
+  {
+   "id": "ul30",
+   "word": "30",
+   "kind": "ul",
+   "x": 142,
+   "y": 580,
+   "size": 32,
+   "before": "within ",
+   "key": "30 days",
+   "dur": 12,
+   "f_land": 1146,
+   "f_start": 1146,
+   "f_end": 1158
+  },
+  {
+   "id": "first",
+   "word": "first",
+   "kind": "ink",
+   "x": 142,
+   "y": 622,
+   "size": 32,
+   "text": "of the first hit",
+   "dur": 16,
+   "f_land": 1230,
+   "f_start": 1230,
+   "f_end": 1246
+  },
+  {
+   "id": "hitring",
+   "word": "hit.",
+   "kind": "ring",
+   "cx": 0,
+   "cy": 0,
+   "rx": 46,
+   "ry": 40,
+   "at_pt": "key0",
+   "dur": 14,
+   "fill": "red",
+   "f_land": 1250,
+   "f_start": 1250,
+   "f_end": 1264
+  }
+ ],
+ "fade_end": 1262,
+ "source": [
+  [
+   0,
+   "Illustration · 16 designed, 6 made and tested, within 30 days: Ren 2023, p. 1448",
+   "predicted binding mode as the guide: p. 1444 · keys, tube and loop drawn"
+  ]
+ ],
+ "words": [
+  {
+   "w": "Not",
+   "t0": 0.15,
+   "t1": 0.31
+  },
+  {
+   "w": "at",
+   "t0": 0.43,
+   "t1": 0.53
+  },
+  {
+   "w": "all.",
+   "t0": 0.63,
+   "t1": 0.73
+  },
+  {
+   "w": "This",
+   "t0": 1.771,
+   "t1": 2.031
+  },
+  {
+   "w": "is",
+   "t0": 2.071,
+   "t1": 2.211
+  },
+  {
+   "w": "where",
+   "t0": 2.291,
+   "t1": 2.551
+  },
+  {
+   "w": "the",
+   "t0": 2.931,
+   "t1": 3.011
+  },
+  {
+   "w": "loop",
+   "t0": 3.111,
+   "t1": 3.351
+  },
+  {
+   "w": "kicks",
+   "t0": 3.691,
+   "t1": 4.072
+  },
+  {
+   "w": "in",
+   "t0": 4.192,
+   "t1": 4.312
+  },
+  {
+   "w": "again,",
+   "t0": 4.392,
+   "t1": 4.672
+  },
+  {
+   "w": "now",
+   "t0": 5.272,
+   "t1": 5.472
+  },
+  {
+   "w": "with",
+   "t0": 5.732,
+   "t1": 6.173
+  },
+  {
+   "w": "real",
+   "t0": 6.333,
+   "t1": 6.553
+  },
+  {
+   "w": "lab",
+   "t0": 6.613,
+   "t1": 6.793
+  },
+  {
+   "w": "data",
+   "t0": 6.853,
+   "t1": 7.093
+  },
+  {
+   "w": "inside.",
+   "t0": 7.233,
+   "t1": 7.653
+  },
+  {
+   "w": "The",
+   "t0": 8.093,
+   "t1": 8.173
+  },
+  {
+   "w": "results",
+   "t0": 8.293,
+   "t1": 8.714
+  },
+  {
+   "w": "went",
+   "t0": 8.834,
+   "t1": 9.014
+  },
+  {
+   "w": "back",
+   "t0": 9.094,
+   "t1": 9.314
+  },
+  {
+   "w": "in,",
+   "t0": 9.394,
+   "t1": 9.474
+  },
+  {
+   "w": "with",
+   "t0": 10.234,
+   "t1": 10.454
+  },
+  {
+   "w": "a",
+   "t0": 10.554,
+   "t1": 10.574
+  },
+  {
+   "w": "predicted",
+   "t0": 10.854,
+   "t1": 11.435
+  },
+  {
+   "w": "pose",
+   "t0": 11.515,
+   "t1": 11.815
+  },
+  {
+   "w": "of",
+   "t0": 11.935,
+   "t1": 12.075
+  },
+  {
+   "w": "how",
+   "t0": 12.175,
+   "t1": 12.395
+  },
+  {
+   "w": "001",
+   "t0": 12.935,
+   "t1": 13.375
+  },
+  {
+   "w": "sat",
+   "t0": 13.375,
+   "t1": 13.576
+  },
+  {
+   "w": "in",
+   "t0": 13.716,
+   "t1": 13.816
+  },
+  {
+   "w": "the",
+   "t0": 13.856,
+   "t1": 13.916
+  },
+  {
+   "w": "pocket.",
+   "t0": 14.016,
+   "t1": 14.436
+  },
+  {
+   "w": "Sixteen",
+   "t0": 15.076,
+   "t1": 15.496
+  },
+  {
+   "w": "new",
+   "t0": 15.576,
+   "t1": 15.656
+  },
+  {
+   "w": "designs.",
+   "t0": 15.736,
+   "t1": 16.237
+  },
+  {
+   "w": "Six",
+   "t0": 16.497,
+   "t1": 16.657
+  },
+  {
+   "w": "made",
+   "t0": 16.817,
+   "t1": 17.097
+  },
+  {
+   "w": "and",
+   "t0": 17.197,
+   "t1": 17.317
+  },
+  {
+   "w": "tested.",
+   "t0": 17.357,
+   "t1": 17.757
+  },
+  {
+   "w": "All",
+   "t0": 18.318,
+   "t1": 18.498
+  },
+  {
+   "w": "within",
+   "t0": 18.598,
+   "t1": 18.938
+  },
+  {
+   "w": "30",
+   "t0": 19.098,
+   "t1": 19.338
+  },
+  {
+   "w": "days",
+   "t0": 19.398,
+   "t1": 19.638
+  },
+  {
+   "w": "of",
+   "t0": 19.918,
+   "t1": 20.038
+  },
+  {
+   "w": "that",
+   "t0": 20.138,
+   "t1": 20.338
+  },
+  {
+   "w": "first",
+   "t0": 20.498,
+   "t1": 20.839
+  },
+  {
+   "w": "hit.",
+   "t0": 20.839,
+   "t1": 21.059
+  }
+ ],
+ "frames": {
+  "len": 1279,
+  "first_word": 9,
+  "last_word_end": 1264
+ },
+ "check": "ok",
+ "hash": "0adeaaf1cc06"
+}

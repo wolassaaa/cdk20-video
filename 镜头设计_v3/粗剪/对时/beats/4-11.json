@@ -1,0 +1,98 @@
+{
+ "seg": "4-11",
+ "fps": 60,
+ "speaker": "D",
+ "audio": {
+  "kind": "ONCAM",
+  "take": "D_cam_4-11_t1",
+  "wav": "D:\\。hkbu\\molecular science\\素材流程_out\\D\\5_place\\D_cam_4-11_t1.wav",
+  "seconds": 4.15
+ },
+ "note": "托盘样板（11-16，托盘子代理）：落点是录音里的帧；成片里录音从 样板 的哪一帧起见 src/v3/tray/sample3.json / beats2.json",
+ "events": [
+  {
+   "id": "hop1",
+   "word": "Wait.",
+   "obj": "coins",
+   "f_land": 30,
+   "f_start": 30,
+   "f_end": 30
+  },
+  {
+   "id": "hop2",
+   "word": "So",
+   "obj": "coins",
+   "f_land": 113,
+   "f_start": 113,
+   "f_end": 113
+  },
+  {
+   "id": "note",
+   "word": "computer",
+   "obj": "note",
+   "f_land": 133,
+   "f_start": 133,
+   "f_end": 133
+  },
+  {
+   "id": "step",
+   "word": "picked",
+   "obj": "coins",
+   "f_land": 163,
+   "f_start": 163,
+   "f_end": 163
+  },
+  {
+   "id": "note2",
+   "word": "winners?",
+   "obj": "note2",
+   "f_land": 192,
+   "f_start": 192,
+   "f_end": 192
+  }
+ ],
+ "words": [
+  {
+   "w": "Wait.",
+   "t0": 0.504,
+   "t1": 0.805
+  },
+  {
+   "w": "So",
+   "t0": 1.89,
+   "t1": 1.97
+  },
+  {
+   "w": "the",
+   "t0": 2.091,
+   "t1": 2.171
+  },
+  {
+   "w": "computer",
+   "t0": 2.211,
+   "t1": 2.653
+  },
+  {
+   "w": "picked",
+   "t0": 2.713,
+   "t1": 2.934
+  },
+  {
+   "w": "the",
+   "t0": 2.954,
+   "t1": 3.035
+  },
+  {
+   "w": "winners?",
+   "t0": 3.195,
+   "t1": 3.697
+  }
+ ],
+ "frames": {
+  "len": 249,
+  "first_word": 30,
+  "last_word_end": 222
+ },
+ "check": "ok",
+ "hash": "84bb842b4a35"
+}

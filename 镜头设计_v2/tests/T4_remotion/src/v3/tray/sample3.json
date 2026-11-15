@@ -1,0 +1,44 @@
+{
+ "_note": "HKBU SCIE1007 课程作业的科普视频。托盘样板 2、3 的节拍（60 fps 成片帧）。词帧 = 录音词开口秒 × 60 + 录音在成片里的起点；bl_tray3.py 读 blender，Tray3.jsx 读其余。",
+ "t309": {
+  "frames": 340, "pull": [0, 24], "person_in": [8, 24], "push": [316, 340], "box": [900, 220, 1780, 820], "person_side": "left",
+  "audio": [{"take": "B_cam_3-09_t1", "who": "B", "at": 0, "from": 0.0}],
+  "words": {"So": 32, "lock": 83, "nobody": 115, "see.": 148, "How": 223, "cut": 245, "key": 259, "dark?": 293, "end": 311},
+  "blender": {"lock": 83, "key": 259},
+  "dark": [[115, 0.0], [148, 0.55], [293, 0.75]],
+  "start_img": "start309.png", "end_video": "w2.mp4",
+  "notes": [
+   {"word": "lock", "kind": "serif", "text": "lock", "x": 1440, "y": 742, "size": 60, "d": 10, "light": true},
+   {"word": "see.", "kind": "pen", "text": "nobody can see it", "x": 1000, "y": 250, "size": 66, "d": 30, "light": true},
+   {"word": "How", "kind": "pen", "text": "how do you cut a key", "x": 1000, "y": 330, "size": 66, "d": 30, "light": true},
+   {"word": "key", "kind": "serif", "text": "key", "x": 990, "y": 668, "size": 60, "d": 10, "light": true},
+   {"word": "dark?", "kind": "pen", "text": "…in the dark?", "x": 1000, "y": 410, "size": 66, "d": 24, "red": true}
+  ],
+  "actions": [["pull", 0, 24], ["lock", 67, 83], ["dark", 115, 148], ["note see", 148, 178], ["note how", 223, 253], ["key", 241, 259], ["note dark", 293, 317], ["push", 316, 340]],
+  "landings": [["lock", "lock", 83], ["dark", "see.", 148], ["key", "key", 259], ["note dark", "dark?", 293]]
+ },
+ "t411": {
+  "frames": 639, "pull": [0, 24], "person_in": [8, 24], "cut": 224, "push": [615, 639],
+  "parts": [{"take": "D_cam_4-11_t1", "who": "D", "at": 0, "from": 0.0, "until": 224, "box": [140, 220, 1020, 820], "person_side": "right"},
+            {"take": "A_cam_4-12_t1", "who": "A", "at": 224, "from": 0.39, "until": 639, "box": [900, 220, 1780, 820], "person_side": "left"}],
+  "words": {"Wait.": 30, "So": 113, "computer": 133, "picked": 163, "winners?": 191, "end411": 222,
+            "Not": 231, "quite.": 244, "docking": 310, "score": 336, "clue,": 421, "not": 467, "proof.": 481, "Only": 546, "lab": 567, "tell.": 591, "end": 610},
+  "blender": {"wait": 30, "so": 113, "picked": 163, "cut": 224, "not": 231, "quite": 244, "only": 546, "lab": 567, "tell": 591},
+  "start_img": "start411.png", "end_img": "end411.png",
+  "notes": [
+   {"word": "computer", "kind": "pen", "text": "the computer's 7 picks", "x": 130, "y": 250, "size": 60, "d": 30, "until": 224},
+   {"word": "winners?", "kind": "pen", "text": "winners?", "x": 520, "y": 760, "size": 64, "d": 20, "red": true, "until": 224},
+   {"word": "docking", "kind": "pen", "text": "docking score", "x": 1000, "y": 250, "size": 62, "d": 26},
+   {"word": "score", "kind": "strike", "under": true, "text": "docking score", "x": 1000, "y": 250, "size": 62, "d": 12, "pen": true},
+   {"word": "clue,", "kind": "serif", "text": "= a clue", "x": 1000, "y": 330, "size": 64, "d": 16},
+   {"word": "not", "kind": "serif", "text": "≠ proof", "x": 1000, "y": 410, "size": 64, "d": 14},
+   {"word": "proof.", "kind": "strike", "text": "≠ proof", "x": 1000, "y": 410, "size": 64, "d": 12},
+   {"word": "Only", "kind": "serif", "text": "the lab", "x": 1560, "y": 470, "size": 60, "d": 14},
+   {"word": "tell.", "kind": "pen", "text": "only the lab can tell", "x": 1000, "y": 760, "size": 60, "d": 24, "red": true}
+  ],
+  "actions": [["pull", 0, 24], ["hop", 10, 30], ["hop", 93, 113], ["note computer", 133, 163], ["step fwd", 143, 163], ["note winners", 191, 211], ["hop", 215, 231], ["step back", 226, 244],
+              ["note docking", 310, 336], ["underline score", 336, 348], ["note clue", 421, 437], ["note proof", 467, 481], ["strike", 481, 493], ["tube drop", 528, 546], ["slide", 545, 567], ["fill", 567, 591], ["note tell", 591, 615], ["push", 615, 639]],
+  "landings": [["hop", "Wait.", 30], ["hop", "So", 113], ["note", "computer", 133], ["step fwd", "picked", 163], ["note", "winners?", 191], ["hop", "Not", 231], ["step back", "quite.", 244],
+               ["note", "docking", 310], ["underline", "score", 336], ["note", "clue,", 421], ["note", "not", 467], ["strike", "proof.", 481], ["tube", "Only", 546], ["slide", "lab", 567], ["fill", "tell.", 591]]
+ }
+}

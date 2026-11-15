@@ -1,0 +1,551 @@
+{
+ "seg": "5-08",
+ "fps": 60,
+ "speaker": "C",
+ "audio": {
+  "kind": "VO",
+  "head": 0.15,
+  "tail": 0.25,
+  "pmax": 1.2,
+  "pkeep": 0.7,
+  "wav": "D:\\。hkbu\\molecular science\\_render_tmp\\beats\\5-08.wav",
+  "seconds": 18.347
+ },
+ "events": [
+  {
+   "id": "one",
+   "word": "one",
+   "kind": "ring",
+   "cx": 0,
+   "cy": 0,
+   "rx": 46,
+   "ry": 40,
+   "at_pt": "key0",
+   "dur": 14,
+   "fill": "red",
+   "out": "k_off",
+   "f_land": 33,
+   "f_start": 33,
+   "f_end": 47
+  },
+  {
+   "id": "n048",
+   "word": "048,",
+   "kind": "note",
+   "x": 0,
+   "y": 0,
+   "size": 48,
+   "text": "048",
+   "at_pt": "key0",
+   "dy": -70,
+   "dur": 14,
+   "out": "k_off",
+   "f_land": 105,
+   "f_start": 105,
+   "f_end": 119
+  },
+  {
+   "id": "k_off",
+   "word": "048,",
+   "lag": 4,
+   "kind": "mark",
+   "f_land": 109,
+   "f_start": 109,
+   "f_end": 109
+  },
+  {
+   "id": "cam1",
+   "word": "fifteen",
+   "lead": 133,
+   "layer": "3d",
+   "obj": "cam",
+   "f_land": 243,
+   "f_start": 110,
+   "f_end": 243
+  },
+  {
+   "id": "kd",
+   "word": "grabbed",
+   "kind": "ink",
+   "font": "serif",
+   "x": 80,
+   "y": 232,
+   "size": 76,
+   "text": "Kd = 566.7 ± 256.2 nM",
+   "dur": 40,
+   "out": "m2s",
+   "f_land": 180,
+   "f_start": 180,
+   "f_end": 220
+  },
+  {
+   "id": "lbl",
+   "word": "grabbed",
+   "lag": 8,
+   "kind": "ink",
+   "x": 84,
+   "y": 150,
+   "size": 30,
+   "text": "048 · binding to CDK20",
+   "dur": 14,
+   "out": "m2s",
+   "f_land": 188,
+   "f_start": 188,
+   "f_end": 202
+  },
+  {
+   "id": "fold",
+   "word": "fifteen",
+   "lag": 8,
+   "kind": "ink",
+   "font": "serif",
+   "x": 84,
+   "y": 300,
+   "size": 52,
+   "text": "about 15× tighter than 001",
+   "dur": 30,
+   "out": "m2s",
+   "f_land": 251,
+   "f_start": 251,
+   "f_end": 281
+  },
+  {
+   "id": "tag",
+   "word": "times",
+   "kind": "tag",
+   "x": 480,
+   "y": 748,
+   "leader": [
+    [
+     745,
+     600
+    ],
+    [
+     640,
+     700
+    ]
+   ],
+   "text": "OUR RE-DOCKING (AutoDock Vina)",
+   "sub": "not the authors' coordinates",
+   "out": "m2s",
+   "f_land": 279,
+   "f_start": 279,
+   "f_end": 279
+  },
+  {
+   "id": "ul15",
+   "word": "tighter.",
+   "kind": "ul",
+   "x": 84,
+   "y": 300,
+   "size": 52,
+   "before": "about ",
+   "key": "15×",
+   "dur": 12,
+   "out": "m2s",
+   "f_land": 304,
+   "f_start": 304,
+   "f_end": 316
+  },
+  {
+   "id": "lys",
+   "word": "Then",
+   "kind": "leader",
+   "pts": [
+    [
+     1232,
+     352
+    ],
+    [
+     1300,
+     250
+    ]
+   ],
+   "text": "Lys33",
+   "tx": 1310,
+   "ty": 244,
+   "size": 36,
+   "dur": 20,
+   "out": "m2s",
+   "f_land": 350,
+   "f_start": 350,
+   "f_end": 370
+  },
+  {
+   "id": "hb",
+   "word": "the",
+   "lag": -12,
+   "kind": "note",
+   "x": 1310,
+   "y": 150,
+   "size": 46,
+   "text": "hydrogen bond",
+   "dur": 24,
+   "out": "m2s",
+   "f_land": 389,
+   "f_start": 389,
+   "f_end": 413
+  },
+  {
+   "id": "f049",
+   "word": "enzyme",
+   "lag": -20,
+   "kind": "ink",
+   "x": 84,
+   "y": 900,
+   "size": 28,
+   "text": "049: 360.0 ± 14.1 nM — also tighter than 001; the cell test went to 048",
+   "dur": 40,
+   "out": "m2s",
+   "f_land": 409,
+   "f_start": 409,
+   "f_end": 449
+  },
+  {
+   "id": "m2s",
+   "word": "test.",
+   "lag": -20,
+   "kind": "fade",
+   "dur": 20,
+   "f_land": 438,
+   "f_start": 438,
+   "f_end": 458
+  },
+  {
+   "id": "m2",
+   "word": "needed",
+   "lead": 156,
+   "layer": "3d",
+   "obj": "cam",
+   "f_land": 606,
+   "f_start": 450,
+   "f_end": 606
+  },
+  {
+   "id": "test",
+   "word": "test.",
+   "kind": "ink",
+   "font": "serif",
+   "x": 64,
+   "y": 250,
+   "size": 40,
+   "text": "enzyme test (IC50)",
+   "dur": 20,
+   "f_land": 458,
+   "f_start": 458,
+   "f_end": 478
+  },
+  {
+   "id": "halves",
+   "word": "Remember,",
+   "kind": "ink",
+   "x": 64,
+   "y": 294,
+   "size": 30,
+   "text": "the dose that halves its activity",
+   "dur": 26,
+   "f_land": 517,
+   "f_start": 517,
+   "f_end": 543
+  },
+  {
+   "id": "l001",
+   "word": "001",
+   "kind": "ink",
+   "font": "serif",
+   "x": 30,
+   "y": 420,
+   "size": 48,
+   "text": "001",
+   "dur": 10,
+   "f_land": 566,
+   "f_start": 566,
+   "f_end": 576
+  },
+  {
+   "id": "bar1",
+   "word": "more",
+   "lead": 60,
+   "kind": "bar",
+   "which": 0,
+   "f_land": 629,
+   "f_start": 569,
+   "f_end": 629
+  },
+  {
+   "id": "t001",
+   "word": "6,000",
+   "kind": "ink",
+   "font": "serif",
+   "x": 100,
+   "y": 490,
+   "size": 58,
+   "text": "> 6,000 nM",
+   "dur": 20,
+   "f_land": 689,
+   "f_start": 689,
+   "f_end": 709
+  },
+  {
+   "id": "ul001",
+   "word": "nanomolar.",
+   "kind": "ul",
+   "x": 100,
+   "y": 490,
+   "size": 58,
+   "before": "> ",
+   "key": "6,000 nM",
+   "dur": 12,
+   "f_land": 750,
+   "f_start": 750,
+   "f_end": 762
+  },
+  {
+   "id": "scale",
+   "word": "nanomolar.",
+   "lag": 50,
+   "kind": "ink",
+   "x": 64,
+   "y": 700,
+   "size": 28,
+   "text": "bars to the same scale · lower = stronger",
+   "dur": 24,
+   "f_land": 800,
+   "f_start": 800,
+   "f_end": 824
+  },
+  {
+   "id": "l048",
+   "word": "048",
+   "kind": "ink",
+   "font": "serif",
+   "x": 30,
+   "y": 620,
+   "size": 48,
+   "text": "048",
+   "dur": 10,
+   "f_land": 852,
+   "f_start": 852,
+   "f_end": 862
+  },
+  {
+   "id": "r048",
+   "after": "l048",
+   "gap": 45,
+   "kind": "ring",
+   "cx": 75,
+   "cy": 604,
+   "rx": 62,
+   "ry": 42,
+   "dur": 24,
+   "fill": "red",
+   "f_land": 897,
+   "f_start": 897,
+   "f_end": 921
+  },
+  {
+   "id": "ul048",
+   "word": "needed#2",
+   "kind": "ul",
+   "x": 30,
+   "y": 620,
+   "size": 48,
+   "before": "",
+   "key": "048",
+   "dur": 10,
+   "f_land": 928,
+   "f_start": 928,
+   "f_end": 938
+  },
+  {
+   "id": "bar2",
+   "word": "just",
+   "lead": 50,
+   "kind": "bar",
+   "which": 1,
+   "f_land": 961,
+   "f_start": 911,
+   "f_end": 961
+  },
+  {
+   "id": "t048",
+   "word": "33.4.",
+   "kind": "keyed",
+   "x": 130,
+   "y": 620,
+   "size": 58,
+   "parts": [
+    "= ",
+    "33.4",
+    " ± 22.6 nM"
+   ],
+   "dur": 30,
+   "f_land": 980,
+   "f_start": 980,
+   "f_end": 1010
+  },
+  {
+   "id": "end",
+   "word": "33.4.",
+   "lag": 60,
+   "kind": "ring",
+   "cx": 0,
+   "cy": 0,
+   "rx": 60,
+   "ry": 46,
+   "at_pt": "tube",
+   "dur": 16,
+   "fill": "red",
+   "f_land": 1040,
+   "f_start": 1040,
+   "f_end": 1056
+  }
+ ],
+ "fade_end": 1060,
+ "source": [
+  [
+   0,
+   "Kd, 15×, 049: Ren 2023, p. 1448 · pose and Lys33 bond: our AutoDock Vina re-docking into the AlphaFold model",
+   "predicted · CDK20 surface shown see-through"
+  ],
+  [
+   "m2s",
+   "Illustration · IC50: 001 > 6,000 nM, Ren 2023, p. 1447 · 048 = 33.4 ± 22.6 nM (n = 3), p. 1448",
+   "kinase activity assay · tube and dose rule drawn"
+  ]
+ ],
+ "words": [
+  {
+   "w": "And",
+   "t0": 0.15,
+   "t1": 0.31
+  },
+  {
+   "w": "one",
+   "t0": 0.55,
+   "t1": 0.69
+  },
+  {
+   "w": "of",
+   "t0": 0.73,
+   "t1": 0.85
+  },
+  {
+   "w": "them,",
+   "t0": 0.91,
+   "t1": 1.071
+  },
+  {
+   "w": "048,",
+   "t0": 1.751,
+   "t1": 2.612
+  },
+  {
+   "w": "grabbed",
+   "t0": 2.992,
+   "t1": 3.452
+  },
+  {
+   "w": "about",
+   "t0": 3.573,
+   "t1": 3.853
+  },
+  {
+   "w": "fifteen",
+   "t0": 4.053,
+   "t1": 4.573
+  },
+  {
+   "w": "times",
+   "t0": 4.654,
+   "t1": 4.994
+  },
+  {
+   "w": "tighter.",
+   "t0": 5.074,
+   "t1": 5.474
+  },
+  {
+   "w": "Then",
+   "t0": 5.835,
+   "t1": 6.075
+  },
+  {
+   "w": "the",
+   "t0": 6.676,
+   "t1": 6.796
+  },
+  {
+   "w": "enzyme",
+   "t0": 7.156,
+   "t1": 7.556
+  },
+  {
+   "w": "test.",
+   "t0": 7.636,
+   "t1": 7.997
+  },
+  {
+   "w": "Remember,",
+   "t0": 8.617,
+   "t1": 9.018
+  },
+  {
+   "w": "001",
+   "t0": 9.438,
+   "t1": 10.019
+  },
+  {
+   "w": "needed",
+   "t0": 10.099,
+   "t1": 10.399
+  },
+  {
+   "w": "more",
+   "t0": 10.479,
+   "t1": 10.699
+  },
+  {
+   "w": "than",
+   "t0": 10.759,
+   "t1": 10.9
+  },
+  {
+   "w": "6,000",
+   "t0": 11.48,
+   "t1": 12.201
+  },
+  {
+   "w": "nanomolar.",
+   "t0": 12.501,
+   "t1": 13.582
+  },
+  {
+   "w": "048",
+   "t0": 14.203,
+   "t1": 15.124
+  },
+  {
+   "w": "needed",
+   "t0": 15.464,
+   "t1": 15.824
+  },
+  {
+   "w": "just",
+   "t0": 16.024,
+   "t1": 16.305
+  },
+  {
+   "w": "33.4.",
+   "t0": 16.325,
+   "t1": 18.126
+  }
+ ],
+ "frames": {
+  "len": 1101,
+  "first_word": 9,
+  "last_word_end": 1088
+ },
+ "check": "ok",
+ "hash": "e372acf7a6de"
+}

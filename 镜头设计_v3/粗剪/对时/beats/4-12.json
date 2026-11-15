@@ -1,0 +1,178 @@
+{
+ "seg": "4-12",
+ "fps": 60,
+ "speaker": "A",
+ "audio": {
+  "kind": "ONCAM",
+  "take": "A_cam_4-12_t1",
+  "wav": "D:\\。hkbu\\molecular science\\素材流程_out\\A\\5_place\\A_cam_4-12_t1.wav",
+  "seconds": 7.27
+ },
+ "note": "托盘样板（11-16，托盘子代理）：落点是录音里的帧；成片里录音从 样板 的哪一帧起见 src/v3/tray/sample3.json / beats2.json",
+ "events": [
+  {
+   "id": "hop",
+   "word": "Not",
+   "obj": "coins",
+   "f_land": 31,
+   "f_start": 31,
+   "f_end": 31
+  },
+  {
+   "id": "back",
+   "word": "quite.",
+   "obj": "coins",
+   "f_land": 44,
+   "f_start": 44,
+   "f_end": 44
+  },
+  {
+   "id": "n1",
+   "word": "docking",
+   "obj": "note",
+   "f_land": 110,
+   "f_start": 110,
+   "f_end": 110
+  },
+  {
+   "id": "ul",
+   "word": "score",
+   "obj": "note_ul",
+   "f_land": 135,
+   "f_start": 135,
+   "f_end": 135
+  },
+  {
+   "id": "n2",
+   "word": "clue,",
+   "obj": "note2",
+   "f_land": 221,
+   "f_start": 221,
+   "f_end": 221
+  },
+  {
+   "id": "n3",
+   "word": "not",
+   "obj": "note3",
+   "f_land": 266,
+   "f_start": 266,
+   "f_end": 266
+  },
+  {
+   "id": "strike",
+   "word": "proof.",
+   "obj": "note3s",
+   "f_land": 281,
+   "f_start": 281,
+   "f_end": 281
+  },
+  {
+   "id": "tube",
+   "word": "Only",
+   "obj": "tube",
+   "f_land": 345,
+   "f_start": 345,
+   "f_end": 345
+  },
+  {
+   "id": "slide",
+   "word": "lab",
+   "obj": "coins",
+   "f_land": 366,
+   "f_start": 366,
+   "f_end": 366
+  },
+  {
+   "id": "fill",
+   "word": "tell.",
+   "obj": "tube",
+   "f_land": 390,
+   "f_start": 390,
+   "f_end": 390
+  }
+ ],
+ "words": [
+  {
+   "w": "Not",
+   "t0": 0.512,
+   "t1": 0.673
+  },
+  {
+   "w": "quite.",
+   "t0": 0.733,
+   "t1": 1.233
+  },
+  {
+   "w": "A",
+   "t0": 1.674,
+   "t1": 1.694
+  },
+  {
+   "w": "docking",
+   "t0": 1.834,
+   "t1": 2.194
+  },
+  {
+   "w": "score",
+   "t0": 2.254,
+   "t1": 2.595
+  },
+  {
+   "w": "is",
+   "t0": 2.995,
+   "t1": 3.436
+  },
+  {
+   "w": "a",
+   "t0": 3.556,
+   "t1": 3.576
+  },
+  {
+   "w": "clue,",
+   "t0": 3.676,
+   "t1": 4.036
+  },
+  {
+   "w": "not",
+   "t0": 4.437,
+   "t1": 4.617
+  },
+  {
+   "w": "proof.",
+   "t0": 4.677,
+   "t1": 5.157
+  },
+  {
+   "w": "Only",
+   "t0": 5.758,
+   "t1": 5.938
+  },
+  {
+   "w": "the",
+   "t0": 6.038,
+   "t1": 6.098
+  },
+  {
+   "w": "lab",
+   "t0": 6.098,
+   "t1": 6.219
+  },
+  {
+   "w": "can",
+   "t0": 6.279,
+   "t1": 6.439
+  },
+  {
+   "w": "tell.",
+   "t0": 6.499,
+   "t1": 6.819
+  }
+ ],
+ "frames": {
+  "len": 436,
+  "first_word": 31,
+  "last_word_end": 409
+ },
+ "check": "ok",
+ "hash": "52993c54b549"
+}

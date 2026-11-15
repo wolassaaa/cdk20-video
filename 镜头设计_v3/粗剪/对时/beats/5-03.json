@@ -1,0 +1,501 @@
+{
+ "seg": "5-03",
+ "fps": 60,
+ "speaker": "C",
+ "audio": {
+  "kind": "VO",
+  "head": 0.15,
+  "tail": 0.25,
+  "pmax": 1.2,
+  "pkeep": 0.7,
+  "wav": "D:\\。hkbu\\molecular science\\_render_tmp\\beats\\5-03.wav",
+  "seconds": 16.934
+ },
+ "events": [
+  {
+   "id": "hl001",
+   "word": "001's",
+   "kind": "ring",
+   "cx": 299.0,
+   "cy": 630,
+   "rx": 110,
+   "ry": 95,
+   "dur": 20,
+   "fill": "red",
+   "out": "cam1s",
+   "f_land": 9,
+   "f_start": 9,
+   "f_end": 29
+  },
+  {
+   "id": "kd",
+   "word": "9.2",
+   "kind": "keyed",
+   "x": 80,
+   "y": 236,
+   "size": 84,
+   "parts": [
+    "Kd = ",
+    "9.2",
+    " ± 0.5 µM"
+   ],
+   "dur": 36,
+   "out": "pocket_out",
+   "f_land": 59,
+   "f_start": 59,
+   "f_end": 95
+  },
+  {
+   "id": "lbl",
+   "word": "9.2",
+   "lag": 6,
+   "kind": "ink",
+   "x": 84,
+   "y": 150,
+   "size": 30,
+   "text": "001 · binding to CDK20",
+   "dur": 14,
+   "out": "pocket_out",
+   "f_land": 65,
+   "f_start": 65,
+   "f_end": 79
+  },
+  {
+   "id": "n3",
+   "word": "micromolar.",
+   "kind": "ink",
+   "x": 84,
+   "y": 290,
+   "size": 30,
+   "text": "(n = 3)",
+   "dur": 12,
+   "out": "pocket_out",
+   "f_land": 150,
+   "f_start": 150,
+   "f_end": 162
+  },
+  {
+   "id": "cam1s",
+   "word": "micromolar.",
+   "lag": -70,
+   "kind": "mark",
+   "f_land": 80,
+   "f_start": 80,
+   "f_end": 80
+  },
+  {
+   "id": "lift",
+   "word": "micromolar.",
+   "lag": -60,
+   "layer": "3d",
+   "obj": "cards",
+   "lead": 0,
+   "dur": 66,
+   "f_land": 90,
+   "f_start": 90,
+   "f_end": 156
+  },
+  {
+   "id": "cards_gone",
+   "word": "micromolar.",
+   "lag": 25,
+   "layer": "3d",
+   "obj": "cards",
+   "f_land": 175,
+   "f_start": 175,
+   "f_end": 175
+  },
+  {
+   "id": "cam1",
+   "word": "other",
+   "lead": 180,
+   "layer": "3d",
+   "obj": "cam",
+   "f_land": 260,
+   "f_start": 80,
+   "f_end": 260
+  },
+  {
+   "id": "tag",
+   "word": "six?",
+   "kind": "tag",
+   "x": 560,
+   "y": 748,
+   "leader": [
+    [
+     760,
+     610
+    ],
+    [
+     700,
+     700
+    ]
+   ],
+   "text": "OUR RE-DOCKING (AutoDock Vina)",
+   "sub": "not the authors' coordinates",
+   "out": "pocket_out",
+   "f_land": 278,
+   "f_start": 278,
+   "f_end": 278
+  },
+  {
+   "id": "six",
+   "word": "All",
+   "kind": "ink",
+   "font": "serif",
+   "x": 84,
+   "y": 362,
+   "size": 40,
+   "text": "the other six: Kd > 30 µM",
+   "dur": 30,
+   "out": "pocket_out",
+   "f_land": 331,
+   "f_start": 331,
+   "f_end": 361
+  },
+  {
+   "id": "ul30",
+   "word": "30.",
+   "kind": "ul",
+   "x": 84,
+   "y": 362,
+   "size": 40,
+   "before": "the other six: Kd ",
+   "key": "> 30 µM",
+   "dur": 12,
+   "out": "pocket_out",
+   "f_land": 377,
+   "f_start": 377,
+   "f_end": 389
+  },
+  {
+   "id": "weaker",
+   "word": "weaker.",
+   "kind": "note",
+   "x": 88,
+   "y": 430,
+   "size": 52,
+   "text": "much weaker",
+   "lead": 20,
+   "dur": 26,
+   "out": "pocket_out",
+   "f_land": 446,
+   "f_start": 426,
+   "f_end": 452
+  },
+  {
+   "id": "pocket_out",
+   "word": "And",
+   "kind": "fade",
+   "dur": 20,
+   "f_land": 510,
+   "f_start": 510,
+   "f_end": 530
+  },
+  {
+   "id": "m2",
+   "word": "part.",
+   "lead": 136,
+   "layer": "3d",
+   "obj": "cam",
+   "f_land": 576,
+   "f_start": 440,
+   "f_end": 576
+  },
+  {
+   "id": "cal",
+   "word": "clock",
+   "kind": "calendar",
+   "x": 94,
+   "y": 560,
+   "c": 56,
+   "cross_to": "days,",
+   "dur": 36,
+   "out": "end",
+   "f_land": 653,
+   "f_start": 653,
+   "f_end": 689
+  },
+  {
+   "id": "days30",
+   "word": "30",
+   "kind": "keyed",
+   "x": 90,
+   "y": 470,
+   "size": 110,
+   "parts": [
+    "",
+    "30",
+    " days"
+   ],
+   "dur": 30,
+   "out": "end",
+   "f_land": 733,
+   "f_start": 733,
+   "f_end": 763
+  },
+  {
+   "id": "from",
+   "word": "from",
+   "kind": "ink",
+   "x": 94,
+   "y": 520,
+   "size": 30,
+   "text": "from picking the target to the first confirmed hit",
+   "dur": 40,
+   "out": "end",
+   "f_land": 790,
+   "f_start": 790,
+   "f_end": 830
+  },
+  {
+   "id": "road",
+   "word": "picking",
+   "layer": "3d",
+   "obj": "road",
+   "lead": 54,
+   "f_land": 810,
+   "f_start": 756,
+   "f_end": 810
+  },
+  {
+   "id": "target",
+   "word": "target",
+   "kind": "ink",
+   "x": 0,
+   "y": 0,
+   "size": 34,
+   "text": "Target",
+   "anchor": "middle",
+   "at_pt": "st0",
+   "dur": 12,
+   "obj": "roadlbl",
+   "f_land": 852,
+   "f_start": 852,
+   "f_end": 864
+  },
+  {
+   "id": "arrow",
+   "word": "first",
+   "kind": "pen",
+   "from_pt": "st0",
+   "to_pt": "st1",
+   "head": 14,
+   "dur": 20,
+   "obj": "roadlbl",
+   "f_land": 917,
+   "f_start": 917,
+   "f_end": 937
+  },
+  {
+   "id": "fill",
+   "word": "hit.",
+   "lead": 150,
+   "layer": "3d",
+   "obj": "road",
+   "f_land": 989,
+   "f_start": 839,
+   "f_end": 989
+  },
+  {
+   "id": "hit",
+   "word": "hit.",
+   "lag": 6,
+   "kind": "ink",
+   "x": 0,
+   "y": 0,
+   "size": 34,
+   "text": "Hit",
+   "anchor": "middle",
+   "at_pt": "st1",
+   "dur": 12,
+   "fill": "red",
+   "obj": "roadlbl",
+   "f_land": 995,
+   "f_start": 995,
+   "f_end": 1007
+  }
+ ],
+ "fade_end": 998,
+ "source": [
+  [
+   0,
+   "Kd: Ren 2023, Fig. 5, p. 1447 · pose: our AutoDock Vina re-docking into the AlphaFold model",
+   "predicted · CDK20 surface shown see-through"
+  ],
+  [
+   "pocket_out",
+   "Illustration · 30 days: Ren 2023, pp. 1443, 1447",
+   ""
+  ]
+ ],
+ "words": [
+  {
+   "w": "001's",
+   "t0": 0.15,
+   "t1": 0.671
+  },
+  {
+   "w": "Kd:",
+   "t0": 0.711,
+   "t1": 0.951
+  },
+  {
+   "w": "9.2",
+   "t0": 0.991,
+   "t1": 2.492
+  },
+  {
+   "w": "micromolar.",
+   "t0": 2.492,
+   "t1": 3.693
+  },
+  {
+   "w": "The",
+   "t0": 4.134,
+   "t1": 4.214
+  },
+  {
+   "w": "other",
+   "t0": 4.334,
+   "t1": 4.514
+  },
+  {
+   "w": "six?",
+   "t0": 4.634,
+   "t1": 4.894
+  },
+  {
+   "w": "All",
+   "t0": 5.515,
+   "t1": 5.715
+  },
+  {
+   "w": "above",
+   "t0": 5.855,
+   "t1": 6.215
+  },
+  {
+   "w": "30.",
+   "t0": 6.276,
+   "t1": 6.636
+  },
+  {
+   "w": "Much",
+   "t0": 7.096,
+   "t1": 7.336
+  },
+  {
+   "w": "weaker.",
+   "t0": 7.436,
+   "t1": 7.777
+  },
+  {
+   "w": "And",
+   "t0": 8.497,
+   "t1": 8.637
+  },
+  {
+   "w": "here's",
+   "t0": 8.758,
+   "t1": 9.058
+  },
+  {
+   "w": "the",
+   "t0": 9.098,
+   "t1": 9.178
+  },
+  {
+   "w": "wild",
+   "t0": 9.258,
+   "t1": 9.558
+  },
+  {
+   "w": "part.",
+   "t0": 9.598,
+   "t1": 9.838
+  },
+  {
+   "w": "The",
+   "t0": 10.699,
+   "t1": 10.779
+  },
+  {
+   "w": "clock",
+   "t0": 10.879,
+   "t1": 11.22
+  },
+  {
+   "w": "read",
+   "t0": 11.56,
+   "t1": 11.72
+  },
+  {
+   "w": "just",
+   "t0": 11.86,
+   "t1": 12.16
+  },
+  {
+   "w": "30",
+   "t0": 12.22,
+   "t1": 12.441
+  },
+  {
+   "w": "days,",
+   "t0": 12.501,
+   "t1": 12.781
+  },
+  {
+   "w": "from",
+   "t0": 13.161,
+   "t1": 13.341
+  },
+  {
+   "w": "picking",
+   "t0": 13.501,
+   "t1": 13.922
+  },
+  {
+   "w": "the",
+   "t0": 14.042,
+   "t1": 14.182
+  },
+  {
+   "w": "target",
+   "t0": 14.202,
+   "t1": 14.462
+  },
+  {
+   "w": "to",
+   "t0": 14.702,
+   "t1": 14.783
+  },
+  {
+   "w": "this",
+   "t0": 14.943,
+   "t1": 15.143
+  },
+  {
+   "w": "first",
+   "t0": 15.283,
+   "t1": 15.643
+  },
+  {
+   "w": "confirmed",
+   "t0": 15.944,
+   "t1": 16.444
+  },
+  {
+   "w": "hit.",
+   "t0": 16.484,
+   "t1": 16.684
+  }
+ ],
+ "frames": {
+  "len": 1016,
+  "first_word": 9,
+  "last_word_end": 1001
+ },
+ "check": "ok",
+ "hash": "626ce3180685"
+}

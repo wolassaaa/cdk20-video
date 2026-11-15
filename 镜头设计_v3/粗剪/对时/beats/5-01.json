@@ -1,0 +1,751 @@
+{
+ "seg": "5-01",
+ "fps": 60,
+ "speaker": "C",
+ "audio": {
+  "kind": "VO",
+  "head": 0.15,
+  "tail": 0.25,
+  "pmax": 1.2,
+  "pkeep": 0.7,
+  "wav": "D:\\。hkbu\\molecular science\\_render_tmp\\beats\\5-01.wav",
+  "seconds": 19.697
+ },
+ "events": [
+  {
+   "id": "cam1",
+   "word": "truth.",
+   "lead": 74,
+   "layer": "3d",
+   "obj": "cam",
+   "f_land": 74,
+   "f_start": 0,
+   "f_end": 74
+  },
+  {
+   "id": "card0",
+   "word": "Seven",
+   "lag": 0,
+   "layer": "3d",
+   "obj": "cards",
+   "f_land": 138,
+   "f_start": 138,
+   "f_end": 138
+  },
+  {
+   "id": "card1",
+   "word": "Seven",
+   "lag": 28,
+   "layer": "3d",
+   "obj": "cards",
+   "f_land": 166,
+   "f_start": 166,
+   "f_end": 166
+  },
+  {
+   "id": "card2",
+   "word": "Seven",
+   "lag": 57,
+   "layer": "3d",
+   "obj": "cards",
+   "f_land": 195,
+   "f_start": 195,
+   "f_end": 195
+  },
+  {
+   "id": "card3",
+   "word": "Seven",
+   "lag": 85,
+   "layer": "3d",
+   "obj": "cards",
+   "f_land": 223,
+   "f_start": 223,
+   "f_end": 223
+  },
+  {
+   "id": "card4",
+   "word": "Seven",
+   "lag": 113,
+   "layer": "3d",
+   "obj": "cards",
+   "f_land": 251,
+   "f_start": 251,
+   "f_end": 251
+  },
+  {
+   "id": "card5",
+   "word": "Seven",
+   "lag": 142,
+   "layer": "3d",
+   "obj": "cards",
+   "f_land": 280,
+   "f_start": 280,
+   "f_end": 280
+  },
+  {
+   "id": "card6",
+   "word": "Seven",
+   "lag": 170,
+   "layer": "3d",
+   "obj": "cards",
+   "f_land": 308,
+   "f_start": 308,
+   "f_end": 308
+  },
+  {
+   "id": "num0",
+   "word": "Seven",
+   "lag": 4,
+   "kind": "ink",
+   "x": 299.0,
+   "y": 548,
+   "size": 30,
+   "text": "001",
+   "anchor": "middle",
+   "dur": 14,
+   "obj": "cards",
+   "out": "up_s",
+   "f_land": 142,
+   "f_start": 142,
+   "f_end": 156
+  },
+  {
+   "id": "num1",
+   "word": "Seven",
+   "lag": 32,
+   "kind": "ink",
+   "x": 536.5,
+   "y": 548,
+   "size": 30,
+   "text": "004",
+   "anchor": "middle",
+   "dur": 14,
+   "obj": "cards",
+   "out": "up_s",
+   "f_land": 170,
+   "f_start": 170,
+   "f_end": 184
+  },
+  {
+   "id": "num2",
+   "word": "Seven",
+   "lag": 61,
+   "kind": "ink",
+   "x": 774.0,
+   "y": 548,
+   "size": 30,
+   "text": "007",
+   "anchor": "middle",
+   "dur": 14,
+   "obj": "cards",
+   "out": "up_s",
+   "f_land": 199,
+   "f_start": 199,
+   "f_end": 213
+  },
+  {
+   "id": "num3",
+   "word": "Seven",
+   "lag": 89,
+   "kind": "ink",
+   "x": 1011.5,
+   "y": 548,
+   "size": 30,
+   "text": "009",
+   "anchor": "middle",
+   "dur": 14,
+   "obj": "cards",
+   "out": "up_s",
+   "f_land": 227,
+   "f_start": 227,
+   "f_end": 241
+  },
+  {
+   "id": "num4",
+   "word": "Seven",
+   "lag": 117,
+   "kind": "ink",
+   "x": 1249.0,
+   "y": 548,
+   "size": 30,
+   "text": "015",
+   "anchor": "middle",
+   "dur": 14,
+   "obj": "cards",
+   "out": "up_s",
+   "f_land": 255,
+   "f_start": 255,
+   "f_end": 269
+  },
+  {
+   "id": "num5",
+   "word": "Seven",
+   "lag": 146,
+   "kind": "ink",
+   "x": 1486.5,
+   "y": 548,
+   "size": 30,
+   "text": "019",
+   "anchor": "middle",
+   "dur": 14,
+   "obj": "cards",
+   "out": "up_s",
+   "f_land": 284,
+   "f_start": 284,
+   "f_end": 298
+  },
+  {
+   "id": "num6",
+   "word": "Seven",
+   "lag": 174,
+   "kind": "ink",
+   "x": 1724.0,
+   "y": 548,
+   "size": 30,
+   "text": "025",
+   "anchor": "middle",
+   "dur": 14,
+   "obj": "cards",
+   "out": "up_s",
+   "f_land": 312,
+   "f_start": 312,
+   "f_end": 326
+  },
+  {
+   "id": "made",
+   "word": "made",
+   "lag": 14,
+   "kind": "note",
+   "x": 150,
+   "y": 250,
+   "size": 50,
+   "text": "seven real molecules, made in a lab",
+   "dur": 40,
+   "out": "up_s",
+   "f_land": 263,
+   "f_start": 263,
+   "f_end": 303
+  },
+  {
+   "id": "q",
+   "word": "Do",
+   "kind": "note",
+   "x": 150,
+   "y": 330,
+   "size": 50,
+   "text": "do any grab CDK20?",
+   "dur": 30,
+   "out": "down_s",
+   "f_land": 364,
+   "f_start": 364,
+   "f_end": 394
+  },
+  {
+   "id": "up",
+   "word": "grab",
+   "lead": 79,
+   "layer": "3d",
+   "obj": "cam",
+   "f_land": 443,
+   "f_start": 364,
+   "f_end": 443
+  },
+  {
+   "id": "up_s",
+   "word": "grab",
+   "lag": -79,
+   "kind": "mark",
+   "f_land": 364,
+   "f_start": 364,
+   "f_end": 364
+  },
+  {
+   "id": "down_s",
+   "word": "Grip",
+   "lag": -76,
+   "kind": "mark",
+   "f_land": 500,
+   "f_start": 500,
+   "f_end": 500
+  },
+  {
+   "id": "ring",
+   "word": "CDK20?",
+   "kind": "ring",
+   "cx": 1275,
+   "cy": 262,
+   "rx": 190,
+   "ry": 170,
+   "dur": 24,
+   "out": "down_s",
+   "f_land": 483,
+   "f_start": 483,
+   "f_end": 507
+  },
+  {
+   "id": "ringlbl",
+   "word": "CDK20?",
+   "lag": 8,
+   "kind": "ink",
+   "x": 1060,
+   "y": 280,
+   "size": 48,
+   "text": "CDK20",
+   "anchor": "end",
+   "dur": 14,
+   "out": "down_s",
+   "f_land": 491,
+   "f_start": 491,
+   "f_end": 505
+  },
+  {
+   "id": "down",
+   "word": "Grip",
+   "lead": 76,
+   "layer": "3d",
+   "obj": "cam",
+   "f_land": 576,
+   "f_start": 500,
+   "f_end": 576
+  },
+  {
+   "id": "kd0",
+   "word": "Kd:",
+   "lag": 0,
+   "kind": "ink",
+   "x": 299.0,
+   "y": 734,
+   "size": 28,
+   "text": "Kd 9.2 µM",
+   "anchor": "middle",
+   "dur": 16,
+   "obj": "kdlab",
+   "f_land": 666,
+   "f_start": 666,
+   "f_end": 682
+  },
+  {
+   "id": "kd1",
+   "word": "Kd:",
+   "lag": 3,
+   "kind": "ink",
+   "x": 536.5,
+   "y": 734,
+   "size": 28,
+   "text": "Kd > 30 µM",
+   "anchor": "middle",
+   "dur": 16,
+   "obj": "kdlab",
+   "f_land": 669,
+   "f_start": 669,
+   "f_end": 685
+  },
+  {
+   "id": "kd2",
+   "word": "Kd:",
+   "lag": 6,
+   "kind": "ink",
+   "x": 774.0,
+   "y": 734,
+   "size": 28,
+   "text": "Kd > 30 µM",
+   "anchor": "middle",
+   "dur": 16,
+   "obj": "kdlab",
+   "f_land": 672,
+   "f_start": 672,
+   "f_end": 688
+  },
+  {
+   "id": "kd3",
+   "word": "Kd:",
+   "lag": 9,
+   "kind": "ink",
+   "x": 1011.5,
+   "y": 734,
+   "size": 28,
+   "text": "Kd > 30 µM",
+   "anchor": "middle",
+   "dur": 16,
+   "obj": "kdlab",
+   "f_land": 675,
+   "f_start": 675,
+   "f_end": 691
+  },
+  {
+   "id": "kd4",
+   "word": "Kd:",
+   "lag": 12,
+   "kind": "ink",
+   "x": 1249.0,
+   "y": 734,
+   "size": 28,
+   "text": "Kd > 30 µM",
+   "anchor": "middle",
+   "dur": 16,
+   "obj": "kdlab",
+   "f_land": 678,
+   "f_start": 678,
+   "f_end": 694
+  },
+  {
+   "id": "kd5",
+   "word": "Kd:",
+   "lag": 15,
+   "kind": "ink",
+   "x": 1486.5,
+   "y": 734,
+   "size": 28,
+   "text": "Kd > 30 µM",
+   "anchor": "middle",
+   "dur": 16,
+   "obj": "kdlab",
+   "f_land": 681,
+   "f_start": 681,
+   "f_end": 697
+  },
+  {
+   "id": "kd6",
+   "word": "Kd:",
+   "lag": 18,
+   "kind": "ink",
+   "x": 1724.0,
+   "y": 734,
+   "size": 28,
+   "text": "Kd > 30 µM",
+   "anchor": "middle",
+   "dur": 16,
+   "obj": "kdlab",
+   "f_land": 684,
+   "f_start": 684,
+   "f_end": 700
+  },
+  {
+   "id": "def1",
+   "word": "measured",
+   "kind": "ink",
+   "font": "serif",
+   "x": 150,
+   "y": 210,
+   "size": 40,
+   "text": "Kd ≈ how much molecule it takes",
+   "dur": 40,
+   "f_land": 618,
+   "f_start": 618,
+   "f_end": 658
+  },
+  {
+   "id": "ulmol",
+   "word": "molecule",
+   "kind": "ul",
+   "x": 150,
+   "y": 210,
+   "size": 40,
+   "before": "Kd ≈ how much ",
+   "key": "molecule",
+   "dur": 12,
+   "f_land": 804,
+   "f_start": 804,
+   "f_end": 816
+  },
+  {
+   "id": "ulhow",
+   "word": "how",
+   "kind": "ul",
+   "x": 150,
+   "y": 210,
+   "size": 40,
+   "before": "Kd ≈ ",
+   "key": "how much",
+   "dur": 12,
+   "f_land": 769,
+   "f_start": 769,
+   "f_end": 781
+  },
+  {
+   "id": "pile",
+   "after": "ulmol",
+   "gap": 48,
+   "kind": "dots",
+   "x": 449.0,
+   "y": 520,
+   "n": 14,
+   "dur": 24,
+   "f_land": 852,
+   "f_start": 852,
+   "f_end": 876
+  },
+  {
+   "id": "def2",
+   "word": "it",
+   "kind": "ink",
+   "font": "serif",
+   "x": 150,
+   "y": 262,
+   "size": 40,
+   "text": "to grab half the protein",
+   "dur": 30,
+   "f_land": 906,
+   "f_start": 906,
+   "f_end": 936
+  },
+  {
+   "id": "ulhalf",
+   "word": "half",
+   "kind": "ul",
+   "x": 150,
+   "y": 262,
+   "size": 40,
+   "before": "to grab ",
+   "key": "half",
+   "dur": 10,
+   "f_land": 989,
+   "f_start": 989,
+   "f_end": 999
+  },
+  {
+   "id": "ulprot",
+   "word": "protein.",
+   "kind": "ul",
+   "x": 150,
+   "y": 262,
+   "size": 40,
+   "before": "to grab half the ",
+   "key": "protein",
+   "dur": 12,
+   "f_land": 1041,
+   "f_start": 1041,
+   "f_end": 1053
+  },
+  {
+   "id": "lower",
+   "word": "Lower",
+   "kind": "keyed",
+   "x": 150,
+   "y": 370,
+   "size": 64,
+   "parts": [
+    "Kd: lower = ",
+    "tighter",
+    ""
+   ],
+   "dur": 40,
+   "f_land": 1094,
+   "f_start": 1094,
+   "f_end": 1134
+  },
+  {
+   "id": "gauge",
+   "word": "tighter.",
+   "kind": "gauge",
+   "x": 150,
+   "y": 412,
+   "dur": 30,
+   "f_land": 1142,
+   "f_start": 1142,
+   "f_end": 1172
+  }
+ ],
+ "fade_end": 1150,
+ "source": [
+  [
+   0,
+   "Illustration · structures and Kd: Ren 2023, Fig. 5, p. 1447",
+   "binding assay · cards cut from the paper's figure, not redrawn"
+  ]
+ ],
+ "words": [
+  {
+   "w": "So,",
+   "t0": 0.15,
+   "t1": 0.23
+  },
+  {
+   "w": "the",
+   "t0": 0.59,
+   "t1": 0.67
+  },
+  {
+   "w": "moment",
+   "t0": 0.73,
+   "t1": 1.011
+  },
+  {
+   "w": "of",
+   "t0": 1.051,
+   "t1": 1.131
+  },
+  {
+   "w": "truth.",
+   "t0": 1.231,
+   "t1": 1.631
+  },
+  {
+   "w": "Seven",
+   "t0": 2.292,
+   "t1": 2.592
+  },
+  {
+   "w": "real",
+   "t0": 2.652,
+   "t1": 2.872
+  },
+  {
+   "w": "molecules,",
+   "t0": 2.992,
+   "t1": 3.693
+  },
+  {
+   "w": "made",
+   "t0": 4.153,
+   "t1": 4.374
+  },
+  {
+   "w": "in",
+   "t0": 4.534,
+   "t1": 4.594
+  },
+  {
+   "w": "a",
+   "t0": 4.674,
+   "t1": 4.694
+  },
+  {
+   "w": "real",
+   "t0": 4.854,
+   "t1": 5.074
+  },
+  {
+   "w": "lab.",
+   "t0": 5.134,
+   "t1": 5.355
+  },
+  {
+   "w": "Do",
+   "t0": 6.075,
+   "t1": 6.175
+  },
+  {
+   "w": "any",
+   "t0": 6.435,
+   "t1": 6.676
+  },
+  {
+   "w": "actually",
+   "t0": 6.816,
+   "t1": 7.236
+  },
+  {
+   "w": "grab",
+   "t0": 7.376,
+   "t1": 7.677
+  },
+  {
+   "w": "CDK20?",
+   "t0": 8.057,
+   "t1": 8.858
+  },
+  {
+   "w": "Grip",
+   "t0": 9.598,
+   "t1": 9.859
+  },
+  {
+   "w": "is",
+   "t0": 10.079,
+   "t1": 10.199
+  },
+  {
+   "w": "measured",
+   "t0": 10.299,
+   "t1": 10.719
+  },
+  {
+   "w": "as",
+   "t0": 10.819,
+   "t1": 11.0
+  },
+  {
+   "w": "Kd:",
+   "t0": 11.1,
+   "t1": 11.38
+  },
+  {
+   "w": "roughly,",
+   "t0": 11.9,
+   "t1": 12.241
+  },
+  {
+   "w": "how",
+   "t0": 12.821,
+   "t1": 13.022
+  },
+  {
+   "w": "much",
+   "t0": 13.102,
+   "t1": 13.342
+  },
+  {
+   "w": "molecule",
+   "t0": 13.402,
+   "t1": 13.982
+  },
+  {
+   "w": "it",
+   "t0": 15.103,
+   "t1": 15.204
+  },
+  {
+   "w": "takes",
+   "t0": 15.364,
+   "t1": 15.664
+  },
+  {
+   "w": "to",
+   "t0": 15.724,
+   "t1": 15.824
+  },
+  {
+   "w": "grab",
+   "t0": 15.924,
+   "t1": 16.224
+  },
+  {
+   "w": "half",
+   "t0": 16.485,
+   "t1": 16.825
+  },
+  {
+   "w": "the",
+   "t0": 17.045,
+   "t1": 17.165
+  },
+  {
+   "w": "protein.",
+   "t0": 17.345,
+   "t1": 17.826
+  },
+  {
+   "w": "Lower",
+   "t0": 18.226,
+   "t1": 18.567
+  },
+  {
+   "w": "means",
+   "t0": 18.687,
+   "t1": 18.947
+  },
+  {
+   "w": "tighter.",
+   "t0": 19.027,
+   "t1": 19.447
+  }
+ ],
+ "frames": {
+  "len": 1182,
+  "first_word": 9,
+  "last_word_end": 1167
+ },
+ "check": "ok",
+ "hash": "cb3e846fc1c1"
+}

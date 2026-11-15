@@ -10,9 +10,9 @@ import MV from "./w5cells2_moves.json";
 
 const FPS = 60, W = 1920, H = 1080;
 const INK = "#111113", SOFT = "#545458", RED = "#E8190F", BONE = "#EDEBE4";
-const SERIF = "Instrument Serif", SANS = "Inter Tight";
+const SERIF = "Instrument Serif", SANS = "Instrument Serif";          // 11-16: all type Instrument Serif (问题清单 176, 237)
 
-const faces = [new FontFace(SERIF, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Regular.ttf")})`), new FontFace(SERIF, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Italic.ttf")})`, {style: "italic"}), new FontFace(SANS, `url(${staticFile("fusion_s1/fonts/InterTight.ttf")})`, {weight: "100 900"})];
+const faces = [new FontFace(SERIF, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Regular.ttf")})`), new FontFace(SERIF, `url(${staticFile("fusion_s1/fonts/InstrumentSerif-Italic.ttf")})`, {style: "italic"})];
 const fontHandle = delayRender("fonts");
 Promise.all(faces.map(f => f.load())).then(l => { l.forEach(f => document.fonts.add(f)); continueRender(fontHandle); });
 
@@ -62,7 +62,7 @@ const PAGES = [
   ]},
   {dur: 4.0, head: "Made with", size: 38, items: [
     "Blender, Remotion, TouchDesigner, FFmpeg.",
-    "Fonts: Instrument Serif, Inter Tight and Caveat, under the SIL Open Font License 1.1.",
+    "Fonts: Instrument Serif and Caveat, under the SIL Open Font License 1.1.",
     "Footage: filmed by each of us on our own phones.",
   ]},
   {dur: 6.0, head: "Use of generative AI", size: 40, prose: true, items: [

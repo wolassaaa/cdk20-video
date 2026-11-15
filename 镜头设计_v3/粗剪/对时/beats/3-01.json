@@ -1,0 +1,129 @@
+{
+ "seg": "3-01",
+ "fps": 60,
+ "speaker": "D",
+ "audio": {
+  "kind": "ONCAM",
+  "take": "D_cam_3-01_t1",
+  "wav": "D:\\。hkbu\\molecular science\\素材流程_out\\D\\5_place\\D_cam_3-01_t1.wav",
+  "seconds": 6.23
+ },
+ "note": "托盘样板（11-16，托盘子代理）：落点是录音里的帧；成片里录音从 样板 的哪一帧起见 src/v3/tray/sample3.json / beats2.json",
+ "events": [
+  {
+   "id": "target_up",
+   "word": "Okay.",
+   "obj": "target",
+   "f_land": 31,
+   "f_start": 31,
+   "f_end": 31
+  },
+  {
+   "id": "route_back",
+   "word": "To",
+   "obj": "route",
+   "f_land": 81,
+   "f_start": 81,
+   "f_end": 81
+  },
+  {
+   "id": "target_down",
+   "word": "this,",
+   "obj": "target",
+   "f_land": 110,
+   "f_start": 110,
+   "f_end": 110
+  },
+  {
+   "id": "press",
+   "word": "picture",
+   "obj": "target",
+   "f_land": 176,
+   "f_start": 176,
+   "f_end": 176
+  },
+  {
+   "id": "lock_drop",
+   "word": "lock",
+   "obj": "lock",
+   "f_land": 222,
+   "f_start": 222,
+   "f_end": 222
+  },
+  {
+   "id": "lock_turn",
+   "word": "and",
+   "obj": "lock",
+   "f_land": 284,
+   "f_start": 284,
+   "f_end": 284
+  },
+  {
+   "id": "key_in",
+   "word": "key.",
+   "obj": "key",
+   "f_land": 332,
+   "f_start": 332,
+   "f_end": 332
+  }
+ ],
+ "words": [
+  {
+   "w": "Okay.",
+   "t0": 0.513,
+   "t1": 0.833
+  },
+  {
+   "w": "To",
+   "t0": 1.354,
+   "t1": 1.434
+  },
+  {
+   "w": "get",
+   "t0": 1.534,
+   "t1": 1.754
+  },
+  {
+   "w": "this,",
+   "t0": 1.834,
+   "t1": 2.115
+  },
+  {
+   "w": "picture",
+   "t0": 2.936,
+   "t1": 3.396
+  },
+  {
+   "w": "a",
+   "t0": 3.536,
+   "t1": 3.556
+  },
+  {
+   "w": "lock",
+   "t0": 3.696,
+   "t1": 4.017
+  },
+  {
+   "w": "and",
+   "t0": 4.738,
+   "t1": 4.998
+  },
+  {
+   "w": "a",
+   "t0": 5.399,
+   "t1": 5.419
+  },
+  {
+   "w": "key.",
+   "t0": 5.539,
+   "t1": 5.779
+  }
+ ],
+ "frames": {
+  "len": 374,
+  "first_word": 31,
+  "last_word_end": 347
+ },
+ "check": "ok",
+ "hash": "868b43432ea7"
+}
