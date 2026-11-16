@@ -1,0 +1,155 @@
+<!doctype html><meta charset="utf-8"><title>渲染提速_20261116</title><style>body{font-family:"Microsoft YaHei",sans-serif;max-width:900px;margin:24px auto;padding:0 16px;line-height:1.7;color:#222;background:#fff}
+table{border-collapse:collapse;margin:12px 0}td,th{border:1px solid #ccc;padding:6px 10px}th{background:#f2f2f2}
+code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1px solid #ddd;padding-bottom:4px}a{color:#0a58ca}</style><h1>渲染提速与 Blender 5.3 试用（11-16）</h1>
+<p>HKBU SCIE1007 课程作业的科普视频（英文，讲 Ren et al. 2023 的公开案例，不是科研）。这一页是渲染工具的说明：快速渲染模板怎么用，以及几种渲染方式的速度和画质对比。不改正在出的成片。</p>
+<h2>1. 用法（现在就能用）</h2>
+<p>模板：<code>镜头设计_v3/styleframes/art/fusion/s1/inserts/fast_render.py</code>。用系统 Python 调用，它自己去开 Blender。</p>
+<pre><code class="language-bash">FR=&quot;D:/。hkbu/molecular science/镜头设计_v3/styleframes/art/fusion/s1/inserts/fast_render.py&quot;
+# 正式档，Cycles，Blender 5.3，帧 0–929，显卡吃不满时自动开第二路
+python &quot;$FR&quot; 场景.blend --out 输出目录 --f0 0 --f1 929 --blender G:/software/blender-5.3/blender.exe
+# 预览档（半分辨率，Cycles 8 采样 / EEVEE 16）
+python &quot;$FR&quot; 场景.blend --out 输出目录 --f0 0 --f1 929 --profile preview
+# EEVEE
+python &quot;$FR&quot; 场景.blend --out 输出目录 --engine eevee
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>默认</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--engine cycles/eevee</code></td>
+<td>cycles</td>
+<td>同一个 .blend 直接切换</td>
+</tr>
+<tr>
+<td><code>--profile final/preview</code></td>
+<td>final</td>
+<td>final：100% 分辨率，Cycles 用场景里的采样（没设就 24），EEVEE 64；preview：50%，Cycles 8 / EEVEE 16</td>
+</tr>
+<tr>
+<td><code>--samples N</code>、<code>--pct P</code></td>
+<td>—</td>
+<td>覆盖采样数、分辨率百分比</td>
+</tr>
+<tr>
+<td><code>--blender</code></td>
+<td>D:/software/tools/blender.exe（5.1.2）</td>
+<td>5.3 在 G:/software/blender-5.3/blender.exe</td>
+</tr>
+<tr>
+<td><code>--split auto/1/2</code></td>
+<td>auto</td>
+<td>auto：第一帧出图后看 25 秒显卡占用，平均低于 70%、机器上只有这一个 Blender、而且 GPU 槽还空着，才开第二路</td>
+</tr>
+<tr>
+<td><code>--no-bake</code>、<code>--rebake</code></td>
+<td>烘焙开</td>
+<td>关掉烘焙，或强制重烘</td>
+</tr>
+</tbody>
+</table>
+<p>输出：<code>输出目录/f_0000.png …</code>，另有 <code>_way1.log</code>、<code>_way2.log</code>，以及 <code>_fast_render.json</code>（每路用时、秒/帧、显卡占用、等槽时间）。已经出了的帧会跳过，所以中断后重跑同一条命令就是续渲。</p>
+<p>它做的事：
+1. <strong>烘焙</strong>：在帧段里抽 16 帧比较几何，找出几何在变的物体（shape key、修改器、几何节点、曲线 bevel 生长、字），把这些物体烘成一个 Alembic，再换成 Mesh Sequence Cache 读取，另存为 <code>baked.blend</code>。缓存放在 <code>G:/cdk20/work/fast_render/</code>，可以用环境变量 <code>FAST_RENDER_CACHE</code> 改位置。物体的移动、旋转、显隐还用原来的关键帧。
+2. <strong>整段一次渲</strong>：<code>blender -b baked.blend -P fast_render.py -s f0 -e f1 -a</code>，打开 persistent_data，不再每帧调一次 <code>render(write_still)</code>。
+3. <strong>两路</strong>：两个 Blender 渲同一个帧段，靠占位文件（不覆盖 + placeholder）各自领帧。GPU 槽和 <code>styleframes/art/gpu_slot.sh</code> 共用同一组（<code>.slots/1</code>、<code>.slots/2</code>），所以全机最多两个 Blender；槽都占着时就排队等。</p>
+<p>接入要求：
+- <strong>场景得先存成 .blend。</strong> 现在不少脚本是在内存里建好场景、逐帧渲染。接入时先用它们的 <code>build</code> 模式存一份 .blend，或者用 <code>blender -b -P inserts/fast_render_build.py -- 镜头脚本.py 输出.blend</code>：它执行镜头脚本但不跑 main()，调用 build() 后另存。
+- <strong>注意：样板 A 存成 .blend 再渲，和内存里直接渲的画面不一样。</strong> 底模上的药格和钞票格会多出一圈轮廓，第 445 帧平均差 24/255。用 5.1.2 照旧方式逐帧渲这份 .blend，结果和模板出的一致（差 0.36），所以差别来自"存盘"这一步，和模板无关。比较可能的原因是 <code>mold_kit_v1.Plate.build</code> 手工拼网格，加的 <code>pocket</code>/<code>runner</code> 点属性在存盘读回后有变化，这一点还没查实。样板 A 改用模板之前，要先确认哪一版是想要的画面。
+- Alembic 在 Windows 上读不了带中文或全角字符的路径（能写出来，读回来是空的），所以缓存一律放在纯 ASCII 目录。
+- 导出器会跳过隐藏的物体，所以烘焙时会暂时静音显隐关键帧，导出完再恢复。</p>
+<h2>2. Blender 5.3</h2>
+<ul>
+<li>版本：<strong>Blender 5.3.0（hash 02f0899d78e3，2026-11-10 构建）</strong>，来自 download.blender.org/release/Blender5.3/blender-5.3.0-windows-x64.zip，sha256 和官方一致。</li>
+<li>装在 <code>G:/software/blender-5.3/</code>（D 盘空间不够，原来装在 D 的那份已经移走）。5.1.2 没动，仍在 <code>D:/software/tools/blender.exe</code>。</li>
+</ul>
+<h2>3. 对比测试（还没测完）</h2>
+<p>测试段是样板 A 的第 420–479 帧（钞票落下、"$2.8" 长出），1080p，Cycles 24 采样，OptiX 降噪，开运动模糊。场景用 <code>fast_render_build.py</code> 从当前脚本存成 <code>G:/cdk20/work/speedtest/src/s108_fresh.blend</code>，每种方式都只开一路。</p>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>秒/帧（出图间隔）</th>
+<th>显卡占用</th>
+<th>测的时候</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A1 旧脚本 bl_s108_money_v1.py render（5.1.2，内存里建场景后逐帧 render）</td>
+<td><strong>1.01</strong>（上午短测 12 帧 0.75；样板 A 正式渲染 log 里是 0.78）</td>
+<td>—</td>
+<td>另有 1 个 Blender 在跑</td>
+<td>已测</td>
+</tr>
+<tr>
+<td>A2 旧逐帧法渲存好的 .blend（5.1.2，frame_set + render(write_still)）</td>
+<td><strong>24.5</strong></td>
+<td>—</td>
+<td>另有 1 个 Blender 在跑</td>
+<td>跑到第 47/60 帧时记录</td>
+</tr>
+<tr>
+<td>B 新模板 5.1.2 Cycles</td>
+<td>1.57</td>
+<td>81%</td>
+<td>另有 3 个 Blender 在跑，数不准</td>
+<td>要重测</td>
+</tr>
+<tr>
+<td>C 新模板 5.3 Cycles</td>
+<td>1.24</td>
+<td>88%</td>
+<td>同上，数不准</td>
+<td>要重测</td>
+</tr>
+<tr>
+<td>D 新模板 5.3 EEVEE（64 采样）</td>
+<td>0.86</td>
+<td>68%</td>
+<td>同上，数不准</td>
+<td>要重测</td>
+</tr>
+<tr>
+<td>E 5.3 Cycles，两路自动</td>
+<td>1.05，探测到占用 73%，没有开第二路</td>
+<td>—</td>
+<td>同上</td>
+<td>要重测</td>
+</tr>
+<tr>
+<td>F 5.3 Cycles 不烘焙</td>
+<td>1.24</td>
+<td>—</td>
+<td>同上</td>
+<td>要重测</td>
+</tr>
+<tr>
+<td>G 5.3 Cycles 预览档</td>
+<td>0.81</td>
+<td>—</td>
+<td>同上</td>
+<td>要重测</td>
+</tr>
+<tr>
+<td>画质并排图、Fable 判断 EEVEE 够不够用</td>
+<td>未测</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>目前能下的结论：
+- <strong>慢的根源是"渲存好的 .blend 时逐帧调用 render(write_still)"，同一个文件逐帧调要 24.5 秒/帧。</strong> 改成整段 <code>-a</code>，同一份文件在显卡被别人占着的情况下也只要 1.2–1.6 秒/帧，快了大约 15–20 倍。上面说的"7 秒/帧"走的就是这条慢路。旧脚本在内存里建好场景后逐帧渲，本来就快（约 0.8–1.0 秒/帧），这时候换模板主要是换来续渲和两路，速度差不多。
+- 样板 A 这一段里，几何在动的物体只有 3 个（bill_6、bill_7、letter_5），所以烘不烘焙速度差不多（F 和 C 一样）。烘焙在几何节点或 shape key 很重的镜头上才划得来。
+- 5.3 打开 5.1.2 存的文件、跑模板都没有报错，Alembic 和缓存修改器正常。
+- 已知问题：Alembic 读不了中文路径，已经绕开；样板 A 存盘前后画面不一样，见第 1 节。</p>
+<p>后台测试：<code>bash D:/render_tmp/fr_tools/run_tests2.sh</code>，日志和结果在 <code>G:/cdk20/work/speedtest/</code>（<code>times.txt</code> 记每项开始时间，<code>&lt;方式&gt;/_fast_render.json</code> 是数字，<code>A_old_*.log</code>、<code>B.log</code>…<code>G.log</code> 是日志）。它会等机器上的 Blender 不超过 1 个才开下一项，并重测 B–G。</p>
+<p>暂定建议：以后一律用 <code>fast_render.py</code> 整段渲，不再在脚本里逐帧调 <code>render(write_still)</code>；默认用 Cycles 正式档，版本先用 5.1.2，等 B 和 C 在显卡空闲时重测完再决定换不换 5.3；EEVEE 等看过画质再说。</p>
