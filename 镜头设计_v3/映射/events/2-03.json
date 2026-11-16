@@ -1,0 +1,14 @@
+{
+ "group": "2-03",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频。接入验证用的手写事件表（不是成片设计）：台词 \"And we'll answer it with one case study: CDK20 in liver cancer.\" 每个实词一个画面事件，动作从 answer 一直接到句尾。词用总表 wid（剧本锚定）。",
+ "holds": [],
+ "events": [
+  {"eid": "runner_flow", "obj": "runner", "verb": "flow", "means": "answer：红料开始沿流道走", "land": {"word": "2-03.w003"}, "lead": 4, "until": {"word": "2-03.w008"}},
+  {"eid": "cavity_one", "obj": "cavity", "verb": "grow", "means": "one：只长出一个腔", "land": {"word": "2-03.w006"}, "lead": 10},
+  {"eid": "tag_case", "obj": "tag", "verb": "eject", "means": "case study：标签被顶出贴到腔上", "land": {"word": "2-03.w007"}, "lead": 8, "until": {"word": "2-03.w008"}},
+  {"eid": "part_cdk20", "obj": "cdk20", "verb": "grow", "means": "CDK20：克莱因蓝的件在腔里长满", "land": {"word": "2-03.w009"}, "lead": 14, "until": {"word": "2-03.w009"}},
+  {"eid": "liver_in", "obj": "liver", "verb": "grow", "means": "liver：肝的轮廓长出来托住它", "land": {"word": "2-03.w011"}, "lead": 8},
+  {"eid": "cancer_red", "obj": "liver", "verb": "flow", "means": "cancer：红料灌进肝轮廓，持续到句尾", "land": {"word": "2-03.w012"}, "lead": 4, "until": {"sentence_end": "2-03.s1"}}
+ ]
+}

@@ -1,0 +1,629 @@
+{
+ "words": "D:\\。hkbu\\molecular science\\镜头设计_v3\\映射\\master_v1.json#1-08",
+ "frames": 930,
+ "events": [
+  {
+   "id": "bill0",
+   "obj": "bill_0",
+   "word": "cost",
+   "frame": 350,
+   "kind": "land"
+  },
+  {
+   "id": "bill1",
+   "obj": "bill_1",
+   "word": "almost",
+   "frame": 388,
+   "kind": "land"
+  },
+  {
+   "id": "bill2",
+   "obj": "bill_2",
+   "word": null,
+   "frame": 430,
+   "kind": "land"
+  },
+  {
+   "id": "bill3",
+   "obj": "bill_3",
+   "word": "billion",
+   "frame": 462,
+   "kind": "land"
+  },
+  {
+   "id": "bill4",
+   "obj": "bill_4",
+   "word": null,
+   "frame": 472,
+   "kind": "land"
+  },
+  {
+   "id": "bill5",
+   "obj": "bill_5",
+   "word": null,
+   "frame": 482,
+   "kind": "land"
+  },
+  {
+   "id": "bill6",
+   "obj": "bill_6",
+   "word": "US",
+   "frame": 499,
+   "kind": "land"
+  },
+  {
+   "id": "bill7",
+   "obj": "bill_7",
+   "word": null,
+   "frame": 508,
+   "kind": "land"
+  },
+  {
+   "id": "bill8",
+   "obj": "bill_8",
+   "word": "dollars",
+   "frame": 516,
+   "kind": "land"
+  },
+  {
+   "id": "well0",
+   "obj": "well_0",
+   "word": "year",
+   "frame": 80,
+   "kind": "grow"
+  },
+  {
+   "id": "well1",
+   "obj": "well_1",
+   "word": "born",
+   "frame": 133,
+   "kind": "grow"
+  },
+  {
+   "id": "well2",
+   "obj": "well_2",
+   "word": "might",
+   "frame": 212,
+   "kind": "grow"
+  },
+  {
+   "id": "well3",
+   "obj": "well_3",
+   "word": "ready",
+   "frame": 261,
+   "kind": "grow"
+  },
+  {
+   "id": "head_now",
+   "obj": "flow",
+   "word": "now",
+   "frame": 279,
+   "kind": "head",
+   "s": 1.9058397703551777
+  },
+  {
+   "id": "head_and",
+   "obj": "flow",
+   "word": "and#2",
+   "frame": 577,
+   "kind": "head",
+   "s": 2.7037985280485217
+  },
+  {
+   "id": "text_28",
+   "obj": "letter_3",
+   "word": "2.8",
+   "frame": 417,
+   "kind": "grow"
+  },
+  {
+   "id": "pill0",
+   "obj": "pill_0",
+   "word": "drugs",
+   "frame": 610,
+   "kind": "grow"
+  },
+  {
+   "id": "pillx0",
+   "obj": "pill_0",
+   "word": "only#2",
+   "frame": 726,
+   "kind": "start"
+  },
+  {
+   "id": "pill1",
+   "obj": "pill_1",
+   "word": null,
+   "frame": 622,
+   "kind": "grow"
+  },
+  {
+   "id": "pillx1",
+   "obj": "pill_1",
+   "word": null,
+   "frame": 732,
+   "kind": "start"
+  },
+  {
+   "id": "pill2",
+   "obj": "pill_2",
+   "word": null,
+   "frame": 634,
+   "kind": "grow"
+  },
+  {
+   "id": "pillx2",
+   "obj": "pill_2",
+   "word": null,
+   "frame": 738,
+   "kind": "start"
+  },
+  {
+   "id": "pill3",
+   "obj": "pill_3",
+   "word": null,
+   "frame": 646,
+   "kind": "grow"
+  },
+  {
+   "id": "pillx3",
+   "obj": "pill_3",
+   "word": null,
+   "frame": 744,
+   "kind": "start"
+  },
+  {
+   "id": "pill4",
+   "obj": "pill_4",
+   "word": null,
+   "frame": 658,
+   "kind": "grow"
+  },
+  {
+   "id": "pillx4",
+   "obj": "pill_4",
+   "word": null,
+   "frame": 750,
+   "kind": "start"
+  },
+  {
+   "id": "pill5",
+   "obj": "pill_5",
+   "word": null,
+   "frame": 670,
+   "kind": "grow"
+  },
+  {
+   "id": "pillx5",
+   "obj": "pill_5",
+   "word": null,
+   "frame": 765,
+   "kind": "start"
+  },
+  {
+   "id": "pill6",
+   "obj": "pill_6",
+   "word": null,
+   "frame": 682,
+   "kind": "grow"
+  },
+  {
+   "id": "pill7",
+   "obj": "pill_7",
+   "word": null,
+   "frame": 694,
+   "kind": "grow"
+  },
+  {
+   "id": "pillx7",
+   "obj": "pill_7",
+   "word": null,
+   "frame": 771,
+   "kind": "start"
+  },
+  {
+   "id": "pill8",
+   "obj": "pill_8",
+   "word": null,
+   "frame": 706,
+   "kind": "grow"
+  },
+  {
+   "id": "pillx8",
+   "obj": "pill_8",
+   "word": null,
+   "frame": 777,
+   "kind": "start"
+  },
+  {
+   "id": "pill9",
+   "obj": "pill_9",
+   "word": null,
+   "frame": 718,
+   "kind": "grow"
+  },
+  {
+   "id": "pillx9",
+   "obj": "pill_9",
+   "word": null,
+   "frame": 783,
+   "kind": "start"
+  },
+  {
+   "id": "keep_up",
+   "obj": "pill_6",
+   "word": "one",
+   "frame": 775,
+   "kind": "lift",
+   "z": 0.01582
+  },
+  {
+   "id": "keep_hop",
+   "obj": "pill_6",
+   "word": "reaches",
+   "frame": 828,
+   "kind": "start"
+  },
+  {
+   "id": "keep_land",
+   "obj": "pill_6",
+   "word": "market",
+   "frame": 886,
+   "kind": "land"
+  }
+ ],
+ "bills": [
+  {
+   "i": 0,
+   "cav": "A",
+   "word": "cost",
+   "land": 350,
+   "grow": 290,
+   "eject": 308,
+   "fly": 314,
+   "top": 0.00016577584542583286
+  },
+  {
+   "i": 1,
+   "cav": "B",
+   "word": "almost",
+   "land": 388,
+   "grow": 328,
+   "eject": 346,
+   "fly": 352,
+   "top": 0.0039157759534592515
+  },
+  {
+   "i": 2,
+   "cav": "C",
+   "word": null,
+   "land": 430,
+   "grow": 370,
+   "eject": 388,
+   "fly": 394,
+   "top": 0.00766577606149267
+  },
+  {
+   "i": 3,
+   "cav": "A",
+   "word": "billion",
+   "land": 462,
+   "grow": 402,
+   "eject": 420,
+   "fly": 426,
+   "top": 0.01141577616952609
+  },
+  {
+   "i": 4,
+   "cav": "B",
+   "word": null,
+   "land": 472,
+   "grow": 412,
+   "eject": 430,
+   "fly": 436,
+   "top": 0.015165776277559509
+  },
+  {
+   "i": 5,
+   "cav": "C",
+   "word": null,
+   "land": 482,
+   "grow": 422,
+   "eject": 440,
+   "fly": 446,
+   "top": 0.018915776385592928
+  },
+  {
+   "i": 6,
+   "cav": "A",
+   "word": "US",
+   "land": 499,
+   "grow": 439,
+   "eject": 457,
+   "fly": 463,
+   "top": 0.022665776493626347
+  },
+  {
+   "i": 7,
+   "cav": "B",
+   "word": null,
+   "land": 508,
+   "grow": 448,
+   "eject": 466,
+   "fly": 472,
+   "top": 0.026415776601659766
+  },
+  {
+   "i": 8,
+   "cav": "C",
+   "word": "dollars",
+   "land": 516,
+   "grow": 456,
+   "eject": 474,
+   "fly": 480,
+   "top": 0.030165776709693184
+  }
+ ],
+ "pills": [
+  {
+   "k": 0,
+   "grow": 594,
+   "land": 610,
+   "retract_end": 742,
+   "retract": 722
+  },
+  {
+   "k": 1,
+   "grow": 606,
+   "land": 622,
+   "retract_end": 748,
+   "retract": 728
+  },
+  {
+   "k": 2,
+   "grow": 618,
+   "land": 634,
+   "retract_end": 754,
+   "retract": 734
+  },
+  {
+   "k": 3,
+   "grow": 630,
+   "land": 646,
+   "retract_end": 760,
+   "retract": 740
+  },
+  {
+   "k": 4,
+   "grow": 642,
+   "land": 658,
+   "retract_end": 766,
+   "retract": 746
+  },
+  {
+   "k": 5,
+   "grow": 654,
+   "land": 670,
+   "retract_end": 781,
+   "retract": 761
+  },
+  {
+   "k": 6,
+   "grow": 666,
+   "land": 682
+  },
+  {
+   "k": 7,
+   "grow": 678,
+   "land": 694,
+   "retract_end": 787,
+   "retract": 767
+  },
+  {
+   "k": 8,
+   "grow": 690,
+   "land": 706,
+   "retract_end": 793,
+   "retract": 773
+  },
+  {
+   "k": 9,
+   "grow": 702,
+   "land": 718,
+   "retract_end": 799,
+   "retract": 779
+  }
+ ],
+ "keep": {
+  "lift": 769,
+  "lifted": 775,
+  "hop": 828,
+  "land": 886,
+  "settle": 912
+ },
+ "head": [
+  [
+   9,
+   0.0
+  ],
+  [
+   279,
+   1.9058397703551777
+  ],
+  [
+   299,
+   2.0938395314753513
+  ],
+  [
+   319,
+   2.2838394493793737
+  ],
+  [
+   577,
+   2.7037985280485217
+  ],
+  [
+   589,
+   2.739797644136581
+  ],
+  [
+   601,
+   2.777797219736157
+  ],
+  [
+   613,
+   2.817797045905699
+  ],
+  [
+   625,
+   2.8577968693658624
+  ],
+  [
+   637,
+   2.897796820432038
+  ],
+  [
+   649,
+   2.937796820432038
+  ],
+  [
+   661,
+   2.977796820432038
+  ],
+  [
+   673,
+   3.017796820432038
+  ],
+  [
+   685,
+   3.057796820432038
+  ],
+  [
+   695,
+   3.0891194789283953
+  ]
+ ],
+ "letters": [
+  {
+   "j": 0,
+   "ch": "$",
+   "done": 408
+  },
+  {
+   "j": 1,
+   "ch": "2",
+   "done": 411
+  },
+  {
+   "j": 2,
+   "ch": ".",
+   "done": 414
+  },
+  {
+   "j": 3,
+   "ch": "8",
+   "done": 417
+  },
+  {
+   "j": 5,
+   "ch": "b",
+   "done": 462
+  },
+  {
+   "j": 6,
+   "ch": "i",
+   "done": 466
+  },
+  {
+   "j": 7,
+   "ch": "l",
+   "done": 470
+  },
+  {
+   "j": 8,
+   "ch": "l",
+   "done": 474
+  },
+  {
+   "j": 9,
+   "ch": "i",
+   "done": 478
+  },
+  {
+   "j": 10,
+   "ch": "o",
+   "done": 482
+  },
+  {
+   "j": 11,
+   "ch": "n",
+   "done": 486
+  }
+ ],
+ "wells": [
+  {
+   "k": 0,
+   "word": "year",
+   "land": 80,
+   "grow": 63,
+   "gate": 59,
+   "s": 0.3529332908065144,
+   "root": [
+    -0.9200504760513202,
+    0.052207911079456826
+   ],
+   "c": [
+    -0.8840608680476774,
+    0.05134297423544713
+   ]
+  },
+  {
+   "k": 1,
+   "word": "born",
+   "land": 133,
+   "grow": 116,
+   "gate": 112,
+   "s": 0.7270425790614197,
+   "root": [
+    -0.7833693992613392,
+    -0.10085629552979296
+   ],
+   "c": [
+    -0.8152451315386878,
+    -0.11758763414279079
+   ]
+  },
+  {
+   "k": 2,
+   "word": "might",
+   "land": 212,
+   "grow": 195,
+   "gate": 191,
+   "s": 1.2846771785357125,
+   "root": [
+    -0.5592776421023112,
+    -0.027106619201286097
+   ],
+   "c": [
+    -0.5952058791568715,
+    -0.029378574779927995
+   ]
+  },
+  {
+   "k": 3,
+   "word": "ready",
+   "land": 261,
+   "grow": 244,
+   "gate": 240,
+   "s": 1.6305518035260964,
+   "root": [
+    -0.4322866428199483,
+    0.056747833420120714
+   ],
+   "c": [
+    -0.4651664451715434,
+    0.07140793564759648
+   ]
+  }
+ ]
+}

@@ -1,0 +1,192 @@
+{
+ "schema": "cdk20.wordmap/1",
+ "built": "2026-11-17 02:19:23 +09:00",
+ "cut": "cut_v8",
+ "group": "2-03",
+ "fps": 60,
+ "len_f": 344,
+ "cut_start_s": 177.4,
+ "holds": [],
+ "words": [
+  {
+   "wid": "2-03.w001",
+   "w": "And",
+   "key": "and#1",
+   "sid": "2-03.s1",
+   "f0": 9,
+   "f1": 19
+  },
+  {
+   "wid": "2-03.w002",
+   "w": "we'll",
+   "key": "we'll#1",
+   "sid": "2-03.s1",
+   "f0": 26,
+   "f1": 41
+  },
+  {
+   "wid": "2-03.w003",
+   "w": "answer",
+   "key": "answer#1",
+   "sid": "2-03.s1",
+   "f0": 47,
+   "f1": 67
+  },
+  {
+   "wid": "2-03.w004",
+   "w": "it",
+   "key": "it#1",
+   "sid": "2-03.s1",
+   "f0": 68,
+   "f1": 76
+  },
+  {
+   "wid": "2-03.w005",
+   "w": "with",
+   "key": "with#1",
+   "sid": "2-03.s1",
+   "f0": 85,
+   "f1": 97
+  },
+  {
+   "wid": "2-03.w006",
+   "w": "one",
+   "key": "one#1",
+   "sid": "2-03.s1",
+   "f0": 114,
+   "f1": 123
+  },
+  {
+   "wid": "2-03.w007",
+   "w": "case",
+   "key": "case#1",
+   "sid": "2-03.s1",
+   "f0": 127,
+   "f1": 145
+  },
+  {
+   "wid": "2-03.w008",
+   "w": "study:",
+   "key": "study#1",
+   "sid": "2-03.s1",
+   "f0": 146,
+   "f1": 165
+  },
+  {
+   "wid": "2-03.w009",
+   "w": "CDK20",
+   "key": "cdk20#1",
+   "sid": "2-03.s1",
+   "f0": 206,
+   "f1": 263
+  },
+  {
+   "wid": "2-03.w010",
+   "w": "in",
+   "key": "in#1",
+   "sid": "2-03.s1",
+   "f0": 277,
+   "f1": 282
+  },
+  {
+   "wid": "2-03.w011",
+   "w": "liver",
+   "key": "liver#1",
+   "sid": "2-03.s1",
+   "f0": 288,
+   "f1": 306
+  },
+  {
+   "wid": "2-03.w012",
+   "w": "cancer.",
+   "key": "cancer#1",
+   "sid": "2-03.s1",
+   "f0": 312,
+   "f1": 341
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "2-03.s1",
+   "text": "And we'll answer it with one case study: CDK20 in liver cancer.",
+   "w_first": "2-03.w001",
+   "w_last": "2-03.w012",
+   "f0": 9,
+   "f1": 341
+  }
+ ],
+ "events": [
+  {
+   "eid": "runner_flow",
+   "obj": "runner",
+   "verb": "flow",
+   "means": "answer：红料开始沿流道走",
+   "word": "2-03.w003",
+   "f_start": 43,
+   "f_land": 47,
+   "f_end": 165,
+   "role": "primary",
+   "tool": "remotion"
+  },
+  {
+   "eid": "cavity_one",
+   "obj": "cavity",
+   "verb": "grow",
+   "means": "one：只长出一个腔",
+   "word": "2-03.w006",
+   "f_start": 104,
+   "f_land": 114,
+   "f_end": 114,
+   "role": "primary",
+   "tool": "remotion"
+  },
+  {
+   "eid": "tag_case",
+   "obj": "tag",
+   "verb": "eject",
+   "means": "case study：标签被顶出贴到腔上",
+   "word": "2-03.w007",
+   "f_start": 119,
+   "f_land": 127,
+   "f_end": 165,
+   "role": "primary",
+   "tool": "remotion"
+  },
+  {
+   "eid": "part_cdk20",
+   "obj": "cdk20",
+   "verb": "grow",
+   "means": "CDK20：克莱因蓝的件在腔里长满",
+   "word": "2-03.w009",
+   "f_start": 192,
+   "f_land": 206,
+   "f_end": 263,
+   "role": "primary",
+   "tool": "remotion"
+  },
+  {
+   "eid": "liver_in",
+   "obj": "liver",
+   "verb": "grow",
+   "means": "liver：肝的轮廓长出来托住它",
+   "word": "2-03.w011",
+   "f_start": 280,
+   "f_land": 288,
+   "f_end": 288,
+   "role": "primary",
+   "tool": "remotion"
+  },
+  {
+   "eid": "cancer_red",
+   "obj": "liver",
+   "verb": "flow",
+   "means": "cancer：红料灌进肝轮廓，持续到句尾",
+   "word": "2-03.w012",
+   "f_start": 308,
+   "f_land": 312,
+   "f_end": 341,
+   "role": "primary",
+   "tool": "remotion"
+  }
+ ]
+}
