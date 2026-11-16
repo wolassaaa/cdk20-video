@@ -90,17 +90,17 @@ python &quot;$FR&quot; 场景.blend --out 输出目录 --engine eevee
 </tr>
 <tr>
 <td>A2 旧逐帧法渲存好的 .blend（5.1.2，frame_set + render(write_still)）</td>
-<td><strong>24.5</strong></td>
+<td><strong>24.3</strong></td>
 <td>—</td>
 <td>另有 1 个 Blender 在跑</td>
-<td>跑到第 47/60 帧时记录</td>
+<td>已测（60 帧）</td>
 </tr>
 <tr>
 <td>B 新模板 5.1.2 Cycles</td>
-<td>1.57</td>
-<td>81%</td>
-<td>另有 3 个 Blender 在跑，数不准</td>
-<td>要重测</td>
+<td><strong>0.79</strong></td>
+<td>51%</td>
+<td>另有 1 个 Blender 在跑（17:24 重测）</td>
+<td>已测</td>
 </tr>
 <tr>
 <td>C 新模板 5.3 Cycles</td>
@@ -151,5 +151,5 @@ python &quot;$FR&quot; 场景.blend --out 输出目录 --engine eevee
 - 样板 A 这一段里，几何在动的物体只有 3 个（bill_6、bill_7、letter_5），所以烘不烘焙速度差不多（F 和 C 一样）。烘焙在几何节点或 shape key 很重的镜头上才划得来。
 - 5.3 打开 5.1.2 存的文件、跑模板都没有报错，Alembic 和缓存修改器正常。
 - 已知问题：Alembic 读不了中文路径，已经绕开；样板 A 存盘前后画面不一样，见第 1 节。</p>
-<p>后台测试：<code>bash D:/render_tmp/fr_tools/run_tests2.sh</code>，日志和结果在 <code>G:/cdk20/work/speedtest/</code>（<code>times.txt</code> 记每项开始时间，<code>&lt;方式&gt;/_fast_render.json</code> 是数字，<code>A_old_*.log</code>、<code>B.log</code>…<code>G.log</code> 是日志）。它会等机器上的 Blender 不超过 1 个才开下一项，并重测 B–G。</p>
+<p>后台测试：<code>bash D:/render_tmp/fr_tools/run_tests2.sh</code>，日志和结果在 <code>G:/cdk20/work/speedtest/</code>（<code>times.txt</code> 记每项开始时间，<code>&lt;方式&gt;/_fast_render.json</code> 是数字，<code>A_old_*.log</code>、<code>B.log</code>…<code>G.log</code> 是日志）。17:25 已经跑完，但 C–G 的输出目录里已经有帧，模板把它们当成续渲全部跳过了，所以没有重测。要重测，先删掉 <code>G:/cdk20/work/speedtest/{C,D,E,F,G}_*</code> 再跑这个脚本，每项一路，大约 1–2 分钟。</p>
 <p>暂定建议：以后一律用 <code>fast_render.py</code> 整段渲，不再在脚本里逐帧调 <code>render(write_still)</code>；默认用 Cycles 正式档，版本先用 5.1.2，等 B 和 C 在显卡空闲时重测完再决定换不换 5.3；EEVEE 等看过画质再说。</p>
