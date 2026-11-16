@@ -1,0 +1,555 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "7-04",
+ "segs": [
+  "7-04"
+ ],
+ "tool": "warp_source",
+ "fps": 60,
+ "len_f": 792,
+ "cut": "cut_v8",
+ "cut_start_f": 57446,
+ "cut_start_s": 957.43,
+ "master_built": "2026-11-17 02:29:10 +09:00",
+ "words_hash": "9f0e7ec9dcd2",
+ "events_src": "镜头设计_v3/映射/events/7-04.json",
+ "words": [
+  {
+   "wid": "7-04.w001",
+   "w": "Three:",
+   "key": "three#1",
+   "sid": "7-04.s1",
+   "f0": 9,
+   "f1": 27,
+   "F0": 57455,
+   "F1": 57473
+  },
+  {
+   "wid": "7-04.w002",
+   "w": "race",
+   "key": "race#1",
+   "sid": "7-04.s1",
+   "f0": 63,
+   "f1": 80,
+   "F0": 57509,
+   "F1": 57526
+  },
+  {
+   "wid": "7-04.w003",
+   "w": "them.",
+   "key": "them#1",
+   "sid": "7-04.s1",
+   "f0": 81,
+   "f1": 91,
+   "F0": 57527,
+   "F1": 57537
+  },
+  {
+   "wid": "7-04.w004",
+   "w": "An",
+   "key": "an#1",
+   "sid": "7-04.s2",
+   "f0": 127,
+   "f1": 132,
+   "F0": 57573,
+   "F1": 57578
+  },
+  {
+   "wid": "7-04.w005",
+   "w": "AI",
+   "key": "ai#1",
+   "sid": "7-04.s2",
+   "f0": 138,
+   "f1": 147,
+   "F0": 57584,
+   "F1": 57593
+  },
+  {
+   "wid": "7-04.w006",
+   "w": "route",
+   "key": "route#1",
+   "sid": "7-04.s2",
+   "f0": 157,
+   "f1": 175,
+   "F0": 57603,
+   "F1": 57621
+  },
+  {
+   "wid": "7-04.w007",
+   "w": "and",
+   "key": "and#1",
+   "sid": "7-04.s2",
+   "f0": 194,
+   "f1": 203,
+   "F0": 57640,
+   "F1": 57649
+  },
+  {
+   "wid": "7-04.w008",
+   "w": "a",
+   "key": "a#1",
+   "sid": "7-04.s2",
+   "f0": 210,
+   "f1": 211,
+   "F0": 57656,
+   "F1": 57657
+  },
+  {
+   "wid": "7-04.w009",
+   "w": "classic",
+   "key": "classic#1",
+   "sid": "7-04.s2",
+   "f0": 217,
+   "f1": 243,
+   "F0": 57663,
+   "F1": 57689
+  },
+  {
+   "wid": "7-04.w010",
+   "w": "route,",
+   "key": "route#2",
+   "sid": "7-04.s2",
+   "f0": 251,
+   "f1": 272,
+   "F0": 57697,
+   "F1": 57718
+  },
+  {
+   "wid": "7-04.w011",
+   "w": "same",
+   "key": "same#1",
+   "sid": "7-04.s2",
+   "f0": 308,
+   "f1": 321,
+   "F0": 57754,
+   "F1": 57767
+  },
+  {
+   "wid": "7-04.w012",
+   "w": "target,",
+   "key": "target#1",
+   "sid": "7-04.s2",
+   "f0": 323,
+   "f1": 351,
+   "F0": 57769,
+   "F1": 57797
+  },
+  {
+   "wid": "7-04.w013",
+   "w": "same",
+   "key": "same#2",
+   "sid": "7-04.s2",
+   "f0": 377,
+   "f1": 389,
+   "F0": 57823,
+   "F1": 57835
+  },
+  {
+   "wid": "7-04.w014",
+   "w": "budget,",
+   "key": "budget#1",
+   "sid": "7-04.s2",
+   "f0": 391,
+   "f1": 415,
+   "F0": 57837,
+   "F1": 57861
+  },
+  {
+   "wid": "7-04.w015",
+   "w": "same",
+   "key": "same#3",
+   "sid": "7-04.s2",
+   "f0": 453,
+   "f1": 468,
+   "F0": 57899,
+   "F1": 57914
+  },
+  {
+   "wid": "7-04.w016",
+   "w": "definition",
+   "key": "definition#1",
+   "sid": "7-04.s2",
+   "f0": 469,
+   "f1": 503,
+   "F0": 57915,
+   "F1": 57949
+  },
+  {
+   "wid": "7-04.w017",
+   "w": "of",
+   "key": "of#1",
+   "sid": "7-04.s2",
+   "f0": 507,
+   "f1": 513,
+   "F0": 57953,
+   "F1": 57959
+  },
+  {
+   "wid": "7-04.w018",
+   "w": "a",
+   "key": "a#2",
+   "sid": "7-04.s2",
+   "f0": 517,
+   "f1": 518,
+   "F0": 57963,
+   "F1": 57964
+  },
+  {
+   "wid": "7-04.w019",
+   "w": "hit.",
+   "key": "hit#1",
+   "sid": "7-04.s2",
+   "f0": 523,
+   "f1": 539,
+   "F0": 57969,
+   "F1": 57985
+  },
+  {
+   "wid": "7-04.w020",
+   "w": "Then",
+   "key": "then#1",
+   "sid": "7-04.s3",
+   "f0": 584,
+   "f1": 593,
+   "F0": 58030,
+   "F1": 58039
+  },
+  {
+   "wid": "7-04.w021",
+   "w": "we'd",
+   "key": "we'd#1",
+   "sid": "7-04.s3",
+   "f0": 598,
+   "f1": 610,
+   "F0": 58044,
+   "F1": 58056
+  },
+  {
+   "wid": "7-04.w022",
+   "w": "know",
+   "key": "know#1",
+   "sid": "7-04.s3",
+   "f0": 613,
+   "f1": 623,
+   "F0": 58059,
+   "F1": 58069
+  },
+  {
+   "wid": "7-04.w023",
+   "w": "exactly",
+   "key": "exactly#1",
+   "sid": "7-04.s3",
+   "f0": 629,
+   "f1": 662,
+   "F0": 58075,
+   "F1": 58108
+  },
+  {
+   "wid": "7-04.w024",
+   "w": "how",
+   "key": "how#1",
+   "sid": "7-04.s3",
+   "f0": 670,
+   "f1": 679,
+   "F0": 58116,
+   "F1": 58125
+  },
+  {
+   "wid": "7-04.w025",
+   "w": "much",
+   "key": "much#1",
+   "sid": "7-04.s3",
+   "f0": 684,
+   "f1": 695,
+   "F0": 58130,
+   "F1": 58141
+  },
+  {
+   "wid": "7-04.w026",
+   "w": "faster",
+   "key": "faster#1",
+   "sid": "7-04.s3",
+   "f0": 700,
+   "f1": 724,
+   "F0": 58146,
+   "F1": 58170
+  },
+  {
+   "wid": "7-04.w027",
+   "w": "AI",
+   "key": "ai#2",
+   "sid": "7-04.s3",
+   "f0": 731,
+   "f1": 738,
+   "F0": 58177,
+   "F1": 58184
+  },
+  {
+   "wid": "7-04.w028",
+   "w": "really",
+   "key": "really#1",
+   "sid": "7-04.s3",
+   "f0": 746,
+   "f1": 764,
+   "F0": 58192,
+   "F1": 58210
+  },
+  {
+   "wid": "7-04.w029",
+   "w": "is.",
+   "key": "is#1",
+   "sid": "7-04.s3",
+   "f0": 773,
+   "f1": 788,
+   "F0": 58219,
+   "F1": 58234
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "7-04.s1",
+   "text": "Three: race them.",
+   "w_first": "7-04.w001",
+   "w_last": "7-04.w003",
+   "f0": 9,
+   "f1": 91
+  },
+  {
+   "sid": "7-04.s2",
+   "text": "An AI route and a classic route, same target, same budget, same definition of a hit.",
+   "w_first": "7-04.w004",
+   "w_last": "7-04.w019",
+   "f0": 127,
+   "f1": 539
+  },
+  {
+   "sid": "7-04.s3",
+   "text": "Then we'd know exactly how much faster AI really is.",
+   "w_first": "7-04.w020",
+   "w_last": "7-04.w029",
+   "f0": 584,
+   "f1": 788
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "footage00",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 0.00→0.73 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 0,
+   "f_land": 0,
+   "f_end": 63,
+   "until": null,
+   "word": "7-04.w001",
+   "w": "Three:",
+   "key": "three#1",
+   "sid": "7-04.s1",
+   "word_f0": 9,
+   "value": [
+    0.0,
+    0.733
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 57446,
+   "F_land": 57446,
+   "F_end": 57509
+  },
+  {
+   "id": "footage01",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 0.73→1.28 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 63,
+   "f_land": 63,
+   "f_end": 81,
+   "until": null,
+   "word": "7-04.w002",
+   "w": "race",
+   "key": "race#1",
+   "sid": "7-04.s1",
+   "word_f0": 63,
+   "value": [
+    0.733,
+    1.283
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 57509,
+   "F_land": 57509,
+   "F_end": 57527
+  },
+  {
+   "id": "footage02",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 1.28→2.68 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 81,
+   "f_land": 81,
+   "f_end": 157,
+   "until": null,
+   "word": "7-04.w003",
+   "w": "them.",
+   "key": "them#1",
+   "sid": "7-04.s1",
+   "word_f0": 81,
+   "value": [
+    1.283,
+    2.683
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 57527,
+   "F_land": 57527,
+   "F_end": 57603
+  },
+  {
+   "id": "footage03",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 2.68→3.67 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 157,
+   "f_land": 157,
+   "f_end": 217,
+   "until": null,
+   "word": "7-04.w006",
+   "w": "route",
+   "key": "route#1",
+   "sid": "7-04.s2",
+   "word_f0": 157,
+   "value": [
+    2.683,
+    3.667
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 57603,
+   "F_land": 57603,
+   "F_end": 57663
+  },
+  {
+   "id": "footage04",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 3.67→4.02 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 217,
+   "f_land": 217,
+   "f_end": 250,
+   "until": null,
+   "word": "7-04.w009",
+   "w": "classic",
+   "key": "classic#1",
+   "sid": "7-04.s2",
+   "word_f0": 217,
+   "value": [
+    3.667,
+    4.017
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 57663,
+   "F_land": 57663,
+   "F_end": 57696
+  },
+  {
+   "id": "footage05",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 4.02→4.97 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 250,
+   "f_land": 250,
+   "f_end": 308,
+   "until": null,
+   "word": "7-04.w010",
+   "w": "route,",
+   "key": "route#2",
+   "sid": "7-04.s2",
+   "word_f0": 251,
+   "value": [
+    4.017,
+    4.967
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 57696,
+   "F_land": 57696,
+   "F_end": 57754
+  },
+  {
+   "id": "footage06",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 4.97→5.65 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 308,
+   "f_land": 308,
+   "f_end": 376,
+   "until": null,
+   "word": "7-04.w011",
+   "w": "same",
+   "key": "same#1",
+   "sid": "7-04.s2",
+   "word_f0": 308,
+   "value": [
+    4.967,
+    5.65
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 57754,
+   "F_land": 57754,
+   "F_end": 57822
+  },
+  {
+   "id": "footage07",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 5.65→11.83 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 376,
+   "f_land": 376,
+   "f_end": 746,
+   "until": null,
+   "word": "7-04.w013",
+   "w": "same",
+   "key": "same#2",
+   "sid": "7-04.s2",
+   "word_f0": 377,
+   "value": [
+    5.65,
+    11.833
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 57822,
+   "F_land": 57822,
+   "F_end": 58192
+  },
+  {
+   "id": "footage08",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 11.83→12.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 746,
+   "f_land": 746,
+   "f_end": 788,
+   "until": null,
+   "word": "7-04.w028",
+   "w": "really",
+   "key": "really#1",
+   "sid": "7-04.s3",
+   "word_f0": 746,
+   "value": [
+    11.833,
+    12.45
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 58192,
+   "F_land": 58192,
+   "F_end": 58234
+  }
+ ],
+ "problems": []
+}

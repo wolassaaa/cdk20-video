@@ -1,0 +1,411 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "6-01",
+ "segs": [
+  "6-01"
+ ],
+ "tool": "warp_source",
+ "fps": 60,
+ "len_f": 436,
+ "cut": "cut_v8",
+ "cut_start_f": 46832,
+ "cut_start_s": 780.53,
+ "master_built": "2026-11-17 02:29:10 +09:00",
+ "words_hash": "e5d57f4d2bc0",
+ "events_src": "镜头设计_v3/映射/events/6-01.json",
+ "words": [
+  {
+   "wid": "6-01.w001",
+   "w": "So,",
+   "key": "so#1",
+   "sid": "6-01.s1",
+   "f0": 9,
+   "f1": 14,
+   "F0": 46841,
+   "F1": 46846
+  },
+  {
+   "wid": "6-01.w002",
+   "w": "the",
+   "key": "the#1",
+   "sid": "6-01.s1",
+   "f0": 43,
+   "f1": 46,
+   "F0": 46875,
+   "F1": 46878
+  },
+  {
+   "wid": "6-01.w003",
+   "w": "big",
+   "key": "big#1",
+   "sid": "6-01.s1",
+   "f0": 50,
+   "f1": 57,
+   "F0": 46882,
+   "F1": 46889
+  },
+  {
+   "wid": "6-01.w004",
+   "w": "question.",
+   "key": "question#1",
+   "sid": "6-01.s1",
+   "f0": 61,
+   "f1": 86,
+   "F0": 46893,
+   "F1": 46918
+  },
+  {
+   "wid": "6-01.w005",
+   "w": "How",
+   "key": "how#1",
+   "sid": "6-01.s2",
+   "f0": 123,
+   "f1": 133,
+   "F0": 46955,
+   "F1": 46965
+  },
+  {
+   "wid": "6-01.w006",
+   "w": "much",
+   "key": "much#1",
+   "sid": "6-01.s2",
+   "f0": 137,
+   "f1": 151,
+   "F0": 46969,
+   "F1": 46983
+  },
+  {
+   "wid": "6-01.w007",
+   "w": "did",
+   "key": "did#1",
+   "sid": "6-01.s2",
+   "f0": 156,
+   "f1": 167,
+   "F0": 46988,
+   "F1": 46999
+  },
+  {
+   "wid": "6-01.w008",
+   "w": "the",
+   "key": "the#2",
+   "sid": "6-01.s2",
+   "f0": 168,
+   "f1": 174,
+   "F0": 47000,
+   "F1": 47006
+  },
+  {
+   "wid": "6-01.w009",
+   "w": "computers",
+   "key": "computers#1",
+   "sid": "6-01.s2",
+   "f0": 179,
+   "f1": 217,
+   "F0": 47011,
+   "F1": 47049
+  },
+  {
+   "wid": "6-01.w010",
+   "w": "actually",
+   "key": "actually#1",
+   "sid": "6-01.s2",
+   "f0": 229,
+   "f1": 252,
+   "F0": 47061,
+   "F1": 47084
+  },
+  {
+   "wid": "6-01.w011",
+   "w": "help?",
+   "key": "help#1",
+   "sid": "6-01.s2",
+   "f0": 257,
+   "f1": 274,
+   "F0": 47089,
+   "F1": 47106
+  },
+  {
+   "wid": "6-01.w012",
+   "w": "Let's",
+   "key": "let's#1",
+   "sid": "6-01.s3",
+   "f0": 310,
+   "f1": 321,
+   "F0": 47142,
+   "F1": 47153
+  },
+  {
+   "wid": "6-01.w013",
+   "w": "line",
+   "key": "line#1",
+   "sid": "6-01.s3",
+   "f0": 327,
+   "f1": 344,
+   "F0": 47159,
+   "F1": 47176
+  },
+  {
+   "wid": "6-01.w014",
+   "w": "up",
+   "key": "up#1",
+   "sid": "6-01.s3",
+   "f0": 350,
+   "f1": 357,
+   "F0": 47182,
+   "F1": 47189
+  },
+  {
+   "wid": "6-01.w015",
+   "w": "before",
+   "key": "before#1",
+   "sid": "6-01.s3",
+   "f0": 377,
+   "f1": 398,
+   "F0": 47209,
+   "F1": 47230
+  },
+  {
+   "wid": "6-01.w016",
+   "w": "and",
+   "key": "and#1",
+   "sid": "6-01.s3",
+   "f0": 401,
+   "f1": 407,
+   "F0": 47233,
+   "F1": 47239
+  },
+  {
+   "wid": "6-01.w017",
+   "w": "now.",
+   "key": "now#1",
+   "sid": "6-01.s3",
+   "f0": 409,
+   "f1": 421,
+   "F0": 47241,
+   "F1": 47253
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "6-01.s1",
+   "text": "So, the big question.",
+   "w_first": "6-01.w001",
+   "w_last": "6-01.w004",
+   "f0": 9,
+   "f1": 86
+  },
+  {
+   "sid": "6-01.s2",
+   "text": "How much did the computers actually help?",
+   "w_first": "6-01.w005",
+   "w_last": "6-01.w011",
+   "f0": 123,
+   "f1": 274
+  },
+  {
+   "sid": "6-01.s3",
+   "text": "Let's line up before and now.",
+   "w_first": "6-01.w012",
+   "w_last": "6-01.w017",
+   "f0": 310,
+   "f1": 421
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "footage00",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 0.00→0.33 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 0,
+   "f_land": 0,
+   "f_end": 6,
+   "until": null,
+   "word": "6-01.w001",
+   "w": "So,",
+   "key": "so#1",
+   "sid": "6-01.s1",
+   "word_f0": 9,
+   "value": [
+    0.0,
+    0.333
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 46832,
+   "F_land": 46832,
+   "F_end": 46838
+  },
+  {
+   "id": "footage01",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 0.33→1.42 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 6,
+   "f_land": 6,
+   "f_end": 61,
+   "until": null,
+   "word": "6-01.w001",
+   "w": "So,",
+   "key": "so#1",
+   "sid": "6-01.s1",
+   "word_f0": 9,
+   "value": [
+    0.333,
+    1.417
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 46838,
+   "F_land": 46838,
+   "F_end": 46893
+  },
+  {
+   "id": "footage02",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 1.42→1.93 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 61,
+   "f_land": 61,
+   "f_end": 136,
+   "until": null,
+   "word": "6-01.w004",
+   "w": "question.",
+   "key": "question#1",
+   "sid": "6-01.s1",
+   "word_f0": 61,
+   "value": [
+    1.417,
+    1.933
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 46893,
+   "F_land": 46893,
+   "F_end": 46968
+  },
+  {
+   "id": "footage03",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 1.93→3.00 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 136,
+   "f_land": 136,
+   "f_end": 179,
+   "until": null,
+   "word": "6-01.w006",
+   "w": "much",
+   "key": "much#1",
+   "sid": "6-01.s2",
+   "word_f0": 137,
+   "value": [
+    1.933,
+    3.0
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 46968,
+   "F_land": 46968,
+   "F_end": 47011
+  },
+  {
+   "id": "footage04",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 3.00→4.37 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 179,
+   "f_land": 179,
+   "f_end": 229,
+   "until": null,
+   "word": "6-01.w009",
+   "w": "computers",
+   "key": "computers#1",
+   "sid": "6-01.s2",
+   "word_f0": 179,
+   "value": [
+    3.0,
+    4.367
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 47011,
+   "F_land": 47011,
+   "F_end": 47061
+  },
+  {
+   "id": "footage05",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 4.37→4.88 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 229,
+   "f_land": 229,
+   "f_end": 257,
+   "until": null,
+   "word": "6-01.w010",
+   "w": "actually",
+   "key": "actually#1",
+   "sid": "6-01.s2",
+   "word_f0": 229,
+   "value": [
+    4.367,
+    4.883
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 47061,
+   "F_land": 47061,
+   "F_end": 47089
+  },
+  {
+   "id": "footage06",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 4.88→7.00 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 257,
+   "f_land": 257,
+   "f_end": 377,
+   "until": null,
+   "word": "6-01.w011",
+   "w": "help?",
+   "key": "help#1",
+   "sid": "6-01.s2",
+   "word_f0": 257,
+   "value": [
+    4.883,
+    7.0
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 47089,
+   "F_land": 47089,
+   "F_end": 47209
+  },
+  {
+   "id": "footage07",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 7.00→7.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 377,
+   "f_land": 377,
+   "f_end": 420,
+   "until": null,
+   "word": "6-01.w015",
+   "w": "before",
+   "key": "before#1",
+   "sid": "6-01.s3",
+   "word_f0": 377,
+   "value": [
+    7.0,
+    7.45
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 47209,
+   "F_land": 47209,
+   "F_end": 47252
+  }
+ ],
+ "problems": []
+}

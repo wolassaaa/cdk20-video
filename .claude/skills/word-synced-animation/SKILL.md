@@ -19,7 +19,10 @@ segment → sentence → word (start/end from step-2 word timings, as used in th
 
 - Every keyframe in Blender and Remotion is computed from this table. No time is hard-coded.
 - If the audio is trimmed or changes, regenerate the table and re-render only the segments whose frames moved.
-- One table per segment, `粗剪/对时/beats_v8/<seg>.json`, resolved through `beats_resolve.py` (the same `condense` as the cut builder). The model to copy is `inserts/bl_s108_money_v4.py`: `schedule() → build() → check()`.
+- Everything lives in `镜头设计_v3/映射/` (read its `README.md`). The master table `master_v1.json` (built by `build_master.py`, the same `condense` as the cut, word times measured in the cut audio) holds segment → sentence → word with stable word IDs.
+- One event table per segment, `映射/events/<seg>.json` (format: `映射/事件表格式.md`): object, verb, `at` word + offset frames, `lead`, `until` word / sentence end / dur. `validate_events.py` checks it; `resolve.py` turns it into `映射/keys/<seg>.json` (native 60 fps frames, in-segment and in-film).
+- Blender reads frames through `映射/bl_maptable.py` (or keys json); Remotion through `src/v3/map/mapTable.mjs`. After rendering, run `映射/check_sync.py <video> <seg>` (event vs word, end vs sentence end, 1.5 s windows, frame-rate integrity). GLM: `ft.sh mapbuild`, `ft.sh mapcheck <seg> [video]`.
+- The old `粗剪/对时/beats_v8/` tables were migrated by `migrate_beats_v8.py`; 38 segments only have retime anchors and still need hand-written semantic events (`映射/_reports/迁移清单.md`). The model to copy is 1-08: `events/1-08.json` + `inserts/bl_s108_money_v5.py`: `schedule() → build() → check()`.
 
 ## Director's rules (all must hold)
 

@@ -21,7 +21,7 @@
 | `verify_render.py` | 在渲好的画面上量：每个事件真的在表里那一帧动了（≤2 帧） |
 | `inserts/bl_s108_money_v5.py` | 样板 A 的总表驱动版。v4 原样保留作回退 |
 
-另外两个文件不是本阶段写的：`resolve.py`、`validate_events.py`，11-17 02:24 前后由另一个会话写入，本阶段没有用，也没有核对过。
+`resolve.py`、`validate_events.py`、`migrate_beats_v8.py`、`check_sync.py`、`事件表格式.md`、`keys/` 是第二阶段写的，见第 6 节。
 
 ## 2. 总表格式（`schema: cdk20.wordmap/1`）
 
@@ -106,3 +106,49 @@ _env/footage/Scripts/python.exe 镜头设计_v3/映射/verify_render.py <out.mov
 - 样板 A v4：已批准，但没接进 cut_v8。原生片片头 2–8 帧被判成疑似混帧，可能是流料起步的柔边造成的误报，要人看。
 - W2/W3 是批准成片，不动；W0、W1、W5 没有词。
 - 帧完整性检测的局限：柔边慢长、透明度渐变在数学上就像混帧。表里声明 flow/fade 的会排除；其余的列为疑似，要人看。
+
+
+## 6. 第二阶段（11-17 02:25 起）：事件表 → 帧号、校验、迁移、对片检查
+
+HKBU SCIE1007 课程作业的科普视频。第一阶段建了总表，第二阶段让事件表成为时间的唯一来源。
+
+| 文件 | 作用 |
+|---|---|
+| `事件表格式.md` | 事件表怎么写：`at`（起于哪个词 + 偏移帧）、`lead`、`until`（词 / 句尾 / dur / 另一个事件）、七个动词、ease。第一阶段的 `land/lead/start/until` 写法照样认 |
+| `validate_events.py` | 校验：V1 格式，V2 词存在，V3 顺序和越界，V4 每句说话期间无事件 ≤90 帧（1.5 s），V5 末事件到句尾 |
+| `resolve.py` | 事件表 + 总表 → `keys/<段>.json`：每个事件的段内帧 `f_start/f_land/f_end` 和片内帧 `F_*`（原生 60 fps），附这段的词、句和 `words_hash`（录音或剪辑一改，hash 变了就知道这段要重渲） |
+| `migrate_beats_v8.py` | 把 45 段 `粗剪/对时/beats_v8` 转成事件表，写 `_reports/迁移清单.md/.json` |
+| `check_sync.py` | 对一段渲好的视频查：S1 事件帧和词帧（表内偏差、事件起点 ±2 帧画面有没有动），S2 动作到句尾，S3 句内 1.5 s 没有动作，S4 帧率完整性（调用 `frame_integrity.classify`，判断"像 30 帧"） |
+
+`build_master.py` 的手写事件导入改成调用 `resolve.resolve_doc`，所以两边算出的帧是同一套。1-08 有了 `events/1-08.json` 以后，就不再从 `s108_events_v4.json` 导入。其它迁移表和 beats、托盘导入的是同一来源，不重复导入。改完 C1–C7 的结果和第一阶段一样：C5、C6 还是那 1 处托盘问题，没有新增不过项。
+
+### 怎么加一段
+1. 照 `事件表格式.md` 写 `events/<段>.json`。每个画面事件挂在一个词上，动作一直接到句尾。
+2. 跑 `validate_events.py <段>`，不过就改表。
+3. 跑 `resolve.py <段>`，得到 `keys/<段>.json`。
+4. Blender 用 `bl_maptable.py`，或直接读 keys 的 `events[*].f_*`；Remotion 用 `mapTable.mjs`（`export_remotion.py` 出的表里事件帧号相同）。原生 60 fps 渲。
+5. 渲出来后跑 `check_sync.py <片> <段>`。验证用的片出 ProRes 4444，x264 会误报 2–4 帧。
+
+### 怎么改时间
+- 想让动作提前或推后，改事件的 `off` 或 `lead`，不要改帧号。
+- 录音或剪辑改了：先跑 `build_master.py`，再跑 `resolve.py`。比较新旧 `keys/<段>.json` 的 `words_hash` 和事件帧，变了的段才重渲。
+
+### GLM 能跑的命令（只读，或只写 映射/）
+```
+bash _env/ft.sh mapbuild                      # 依次跑 总表 → C1–C7 检查 → keys → 全部校验（_reports/validate.json）
+bash _env/ft.sh mapcheck 1-08                 # 校验一段事件表
+bash _env/ft.sh mapcheck 1-08 <片.mp4>        # 再加一段渲好的片做对片检查
+bash _env/ft.sh mapcheck 1-08 镜头设计_v3/粗剪/cut_v8.mp4 61.47 15.5   # 从整片里截出这段来查
+```
+
+### 本次结果（11-17）
+- 迁移：45 段全部转出事件表，结构校验全过。其中 2-03 是第一阶段的手写表，没有覆盖。
+  - 1-08：完整转好，47 个事件。机位、压实、收料、1 in 10 这些 v4 里写死的时间也都进了表。
+  - 第 5 章 5 段（5-01、5-03、5-07、5-08、5-10）：语义事件 + 变速锚点。
+  - 其余 38 段：只有变速锚点，转成 `footage` 事件。这些段能原生重渲旧动画，但"说到哪个词、哪个东西出现"要手写，名单在 `_reports/迁移清单.md`。
+  - 注意：只有锚点的段校验能过，是因为 footage 事件把整句都盖住了，不代表语义上已经对上词。
+- 1-08 事件表解出的帧和 v4 的事件帧比：38 个里 37 个一致；keep_up 早 1 帧（775，对上实测 "one" 的开口，v4 用的是预测时刻）。和 v5 比：33 个一致，5 个差 1 帧（bill1 和 pillx5/7/8/9）。差别来自 v5 自己重算的错开逻辑，表里是按词 + 偏移。
+- check_sync 演示，两条都是 x264：
+  - cut_v8 里的 1-08（30 fps）：表内对词偏差 0；事件起点 ±2 帧有动 44/47（cam_push、pill0、head_and 这三个时刻画面没动，因为 cut_v8 放的还是旧动画）；到句尾过；最长静止 32 帧；帧率判"像 30 帧"。不过。
+  - 样板 A v4（60 fps）：表内偏差 0；有动 46/47（stack_press 起点 ±2 帧量不到明显变化，压实只有 5 mm）；到句尾过；最长静止 14 帧；混帧 7（片头 2–8 帧流料柔边，第一阶段已标疑似误报），判原生 60。S1 因为这 1 个事件不过。
+- 第二阶段没有新做 Blender 渲染。1-08 端到端（v5，120 帧 0 重复 0 混帧）是第一阶段做的。

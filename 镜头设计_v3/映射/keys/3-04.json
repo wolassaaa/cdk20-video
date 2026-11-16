@@ -1,0 +1,683 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "3-04",
+ "segs": [
+  "3-04"
+ ],
+ "tool": "warp_source",
+ "fps": 60,
+ "len_f": 1030,
+ "cut": "cut_v8",
+ "cut_start_f": 18698,
+ "cut_start_s": 311.63,
+ "master_built": "2026-11-17 02:29:10 +09:00",
+ "words_hash": "929bb25c982d",
+ "events_src": "镜头设计_v3/映射/events/3-04.json",
+ "words": [
+  {
+   "wid": "3-04.w001",
+   "w": "Our",
+   "key": "our#1",
+   "sid": "3-04.s1",
+   "f0": 9,
+   "f1": 25,
+   "F0": 18707,
+   "F1": 18723
+  },
+  {
+   "wid": "3-04.w002",
+   "w": "lock",
+   "key": "lock#1",
+   "sid": "3-04.s1",
+   "f0": 28,
+   "f1": 43,
+   "F0": 18726,
+   "F1": 18741
+  },
+  {
+   "wid": "3-04.w003",
+   "w": "is",
+   "key": "is#1",
+   "sid": "3-04.s1",
+   "f0": 48,
+   "f1": 55,
+   "F0": 18746,
+   "F1": 18753
+  },
+  {
+   "wid": "3-04.w004",
+   "w": "CDK20.",
+   "key": "cdk20#1",
+   "sid": "3-04.s1",
+   "f0": 60,
+   "f1": 110,
+   "F0": 18758,
+   "F1": 18808
+  },
+  {
+   "wid": "3-04.w005",
+   "w": "It's",
+   "key": "it's#1",
+   "sid": "3-04.s2",
+   "f0": 145,
+   "f1": 151,
+   "F0": 18843,
+   "F1": 18849
+  },
+  {
+   "wid": "3-04.w006",
+   "w": "an",
+   "key": "an#1",
+   "sid": "3-04.s2",
+   "f0": 154,
+   "f1": 162,
+   "F0": 18852,
+   "F1": 18860
+  },
+  {
+   "wid": "3-04.w007",
+   "w": "enzyme,",
+   "key": "enzyme#1",
+   "sid": "3-04.s2",
+   "f0": 167,
+   "f1": 199,
+   "F0": 18865,
+   "F1": 18897
+  },
+  {
+   "wid": "3-04.w008",
+   "w": "a",
+   "key": "a#1",
+   "sid": "3-04.s2",
+   "f0": 235,
+   "f1": 236,
+   "F0": 18933,
+   "F1": 18934
+  },
+  {
+   "wid": "3-04.w009",
+   "w": "protein",
+   "key": "protein#1",
+   "sid": "3-04.s2",
+   "f0": 240,
+   "f1": 263,
+   "F0": 18938,
+   "F1": 18961
+  },
+  {
+   "wid": "3-04.w010",
+   "w": "with",
+   "key": "with#1",
+   "sid": "3-04.s2",
+   "f0": 267,
+   "f1": 277,
+   "F0": 18965,
+   "F1": 18975
+  },
+  {
+   "wid": "3-04.w011",
+   "w": "a",
+   "key": "a#2",
+   "sid": "3-04.s2",
+   "f0": 279,
+   "f1": 281,
+   "F0": 18977,
+   "F1": 18979
+  },
+  {
+   "wid": "3-04.w012",
+   "w": "chemical",
+   "key": "chemical#1",
+   "sid": "3-04.s2",
+   "f0": 289,
+   "f1": 315,
+   "F0": 18987,
+   "F1": 19013
+  },
+  {
+   "wid": "3-04.w013",
+   "w": "job.",
+   "key": "job#1",
+   "sid": "3-04.s2",
+   "f0": 319,
+   "f1": 337,
+   "F0": 19017,
+   "F1": 19035
+  },
+  {
+   "wid": "3-04.w014",
+   "w": "Its",
+   "key": "its#1",
+   "sid": "3-04.s3",
+   "f0": 368,
+   "f1": 374,
+   "F0": 19066,
+   "F1": 19072
+  },
+  {
+   "wid": "3-04.w015",
+   "w": "keyhole",
+   "key": "keyhole#1",
+   "sid": "3-04.s3",
+   "f0": 379,
+   "f1": 413,
+   "F0": 19077,
+   "F1": 19111
+  },
+  {
+   "wid": "3-04.w016",
+   "w": "is",
+   "key": "is#2",
+   "sid": "3-04.s3",
+   "f0": 433,
+   "f1": 439,
+   "F0": 19131,
+   "F1": 19137
+  },
+  {
+   "wid": "3-04.w017",
+   "w": "a",
+   "key": "a#3",
+   "sid": "3-04.s3",
+   "f0": 442,
+   "f1": 443,
+   "F0": 19140,
+   "F1": 19141
+  },
+  {
+   "wid": "3-04.w018",
+   "w": "pocket",
+   "key": "pocket#1",
+   "sid": "3-04.s3",
+   "f0": 449,
+   "f1": 476,
+   "F0": 19147,
+   "F1": 19174
+  },
+  {
+   "wid": "3-04.w019",
+   "w": "where",
+   "key": "where#1",
+   "sid": "3-04.s3",
+   "f0": 482,
+   "f1": 498,
+   "F0": 19180,
+   "F1": 19196
+  },
+  {
+   "wid": "3-04.w020",
+   "w": "it",
+   "key": "it#1",
+   "sid": "3-04.s3",
+   "f0": 504,
+   "f1": 510,
+   "F0": 19202,
+   "F1": 19208
+  },
+  {
+   "wid": "3-04.w021",
+   "w": "normally",
+   "key": "normally#1",
+   "sid": "3-04.s3",
+   "f0": 517,
+   "f1": 541,
+   "F0": 19215,
+   "F1": 19239
+  },
+  {
+   "wid": "3-04.w022",
+   "w": "grabs",
+   "key": "grabs#1",
+   "sid": "3-04.s3",
+   "f0": 544,
+   "f1": 567,
+   "F0": 19242,
+   "F1": 19265
+  },
+  {
+   "wid": "3-04.w023",
+   "w": "a",
+   "key": "a#4",
+   "sid": "3-04.s3",
+   "f0": 571,
+   "f1": 573,
+   "F0": 19269,
+   "F1": 19271
+  },
+  {
+   "wid": "3-04.w024",
+   "w": "small",
+   "key": "small#1",
+   "sid": "3-04.s3",
+   "f0": 577,
+   "f1": 595,
+   "F0": 19275,
+   "F1": 19293
+  },
+  {
+   "wid": "3-04.w025",
+   "w": "molecule",
+   "key": "molecule#1",
+   "sid": "3-04.s3",
+   "f0": 599,
+   "f1": 628,
+   "F0": 19297,
+   "F1": 19326
+  },
+  {
+   "wid": "3-04.w026",
+   "w": "called",
+   "key": "called#1",
+   "sid": "3-04.s3",
+   "f0": 631,
+   "f1": 649,
+   "F0": 19329,
+   "F1": 19347
+  },
+  {
+   "wid": "3-04.w027",
+   "w": "ATP.",
+   "key": "atp#1",
+   "sid": "3-04.s3",
+   "f0": 657,
+   "f1": 678,
+   "F0": 19355,
+   "F1": 19376
+  },
+  {
+   "wid": "3-04.w028",
+   "w": "Plug",
+   "key": "plug#1",
+   "sid": "3-04.s4",
+   "f0": 731,
+   "f1": 746,
+   "F0": 19429,
+   "F1": 19444
+  },
+  {
+   "wid": "3-04.w029",
+   "w": "that",
+   "key": "that#1",
+   "sid": "3-04.s4",
+   "f0": 750,
+   "f1": 765,
+   "F0": 19448,
+   "F1": 19463
+  },
+  {
+   "wid": "3-04.w030",
+   "w": "pocket",
+   "key": "pocket#2",
+   "sid": "3-04.s4",
+   "f0": 777,
+   "f1": 800,
+   "F0": 19475,
+   "F1": 19498
+  },
+  {
+   "wid": "3-04.w031",
+   "w": "with",
+   "key": "with#2",
+   "sid": "3-04.s4",
+   "f0": 806,
+   "f1": 815,
+   "F0": 19504,
+   "F1": 19513
+  },
+  {
+   "wid": "3-04.w032",
+   "w": "the",
+   "key": "the#1",
+   "sid": "3-04.s4",
+   "f0": 816,
+   "f1": 821,
+   "F0": 19514,
+   "F1": 19519
+  },
+  {
+   "wid": "3-04.w033",
+   "w": "right",
+   "key": "right#1",
+   "sid": "3-04.s4",
+   "f0": 837,
+   "f1": 851,
+   "F0": 19535,
+   "F1": 19549
+  },
+  {
+   "wid": "3-04.w034",
+   "w": "key,",
+   "key": "key#1",
+   "sid": "3-04.s4",
+   "f0": 852,
+   "f1": 862,
+   "F0": 19550,
+   "F1": 19560
+  },
+  {
+   "wid": "3-04.w035",
+   "w": "and",
+   "key": "and#1",
+   "sid": "3-04.s4",
+   "f0": 901,
+   "f1": 907,
+   "F0": 19599,
+   "F1": 19605
+  },
+  {
+   "wid": "3-04.w036",
+   "w": "the",
+   "key": "the#2",
+   "sid": "3-04.s4",
+   "f0": 907,
+   "f1": 910,
+   "F0": 19605,
+   "F1": 19608
+  },
+  {
+   "wid": "3-04.w037",
+   "w": "enzyme",
+   "key": "enzyme#2",
+   "sid": "3-04.s4",
+   "f0": 915,
+   "f1": 944,
+   "F0": 19613,
+   "F1": 19642
+  },
+  {
+   "wid": "3-04.w038",
+   "w": "can't",
+   "key": "can't#1",
+   "sid": "3-04.s4",
+   "f0": 950,
+   "f1": 971,
+   "F0": 19648,
+   "F1": 19669
+  },
+  {
+   "wid": "3-04.w039",
+   "w": "do",
+   "key": "do#1",
+   "sid": "3-04.s4",
+   "f0": 971,
+   "f1": 976,
+   "F0": 19669,
+   "F1": 19674
+  },
+  {
+   "wid": "3-04.w040",
+   "w": "its",
+   "key": "its#2",
+   "sid": "3-04.s4",
+   "f0": 985,
+   "f1": 993,
+   "F0": 19683,
+   "F1": 19691
+  },
+  {
+   "wid": "3-04.w041",
+   "w": "job.",
+   "key": "job#2",
+   "sid": "3-04.s4",
+   "f0": 997,
+   "f1": 1015,
+   "F0": 19695,
+   "F1": 19713
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "3-04.s1",
+   "text": "Our lock is CDK20.",
+   "w_first": "3-04.w001",
+   "w_last": "3-04.w004",
+   "f0": 9,
+   "f1": 110
+  },
+  {
+   "sid": "3-04.s2",
+   "text": "It's an enzyme, a protein with a chemical job.",
+   "w_first": "3-04.w005",
+   "w_last": "3-04.w013",
+   "f0": 145,
+   "f1": 337
+  },
+  {
+   "sid": "3-04.s3",
+   "text": "Its keyhole is a pocket where it normally grabs a small molecule called ATP.",
+   "w_first": "3-04.w014",
+   "w_last": "3-04.w027",
+   "f0": 368,
+   "f1": 678
+  },
+  {
+   "sid": "3-04.s4",
+   "text": "Plug that pocket with the right key, and the enzyme can't do its job.",
+   "w_first": "3-04.w028",
+   "w_last": "3-04.w041",
+   "f0": 731,
+   "f1": 1015
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "footage00",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 0.00→0.28 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 0,
+   "f_land": 0,
+   "f_end": 28,
+   "until": null,
+   "word": "3-04.w001",
+   "w": "Our",
+   "key": "our#1",
+   "sid": "3-04.s1",
+   "word_f0": 9,
+   "value": [
+    0.0,
+    0.283
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 18698,
+   "F_land": 18698,
+   "F_end": 18726
+  },
+  {
+   "id": "footage01",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 0.28→0.62 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 28,
+   "f_land": 28,
+   "f_end": 59,
+   "until": null,
+   "word": "3-04.w002",
+   "w": "lock",
+   "key": "lock#1",
+   "sid": "3-04.s1",
+   "word_f0": 28,
+   "value": [
+    0.283,
+    0.617
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 18726,
+   "F_land": 18726,
+   "F_end": 18757
+  },
+  {
+   "id": "footage02",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 0.62→1.78 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 59,
+   "f_land": 59,
+   "f_end": 166,
+   "until": null,
+   "word": "3-04.w004",
+   "w": "CDK20.",
+   "key": "cdk20#1",
+   "sid": "3-04.s1",
+   "word_f0": 60,
+   "value": [
+    0.617,
+    1.783
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 18757,
+   "F_land": 18757,
+   "F_end": 18864
+  },
+  {
+   "id": "footage03",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 1.78→3.87 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 166,
+   "f_land": 166,
+   "f_end": 240,
+   "until": null,
+   "word": "3-04.w007",
+   "w": "enzyme,",
+   "key": "enzyme#1",
+   "sid": "3-04.s2",
+   "word_f0": 167,
+   "value": [
+    1.783,
+    3.867
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 18864,
+   "F_land": 18864,
+   "F_end": 18938
+  },
+  {
+   "id": "footage04",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 3.87→4.27 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 240,
+   "f_land": 240,
+   "f_end": 267,
+   "until": null,
+   "word": "3-04.w009",
+   "w": "protein",
+   "key": "protein#1",
+   "sid": "3-04.s2",
+   "word_f0": 240,
+   "value": [
+    3.867,
+    4.267
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 18938,
+   "F_land": 18938,
+   "F_end": 18965
+  },
+  {
+   "id": "footage05",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 4.27→14.30 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 267,
+   "f_land": 267,
+   "f_end": 777,
+   "until": null,
+   "word": "3-04.w010",
+   "w": "with",
+   "key": "with#1",
+   "sid": "3-04.s2",
+   "word_f0": 267,
+   "value": [
+    4.267,
+    14.3
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 18965,
+   "F_land": 18965,
+   "F_end": 19475
+  },
+  {
+   "id": "footage06",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 14.30→15.35 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 777,
+   "f_land": 777,
+   "f_end": 837,
+   "until": null,
+   "word": "3-04.w030",
+   "w": "pocket",
+   "key": "pocket#2",
+   "sid": "3-04.s4",
+   "word_f0": 777,
+   "value": [
+    14.3,
+    15.35
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 19475,
+   "F_land": 19475,
+   "F_end": 19535
+  },
+  {
+   "id": "footage07",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 15.35→17.97 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 837,
+   "f_land": 837,
+   "f_end": 950,
+   "until": null,
+   "word": "3-04.w033",
+   "w": "right",
+   "key": "right#1",
+   "sid": "3-04.s4",
+   "word_f0": 837,
+   "value": [
+    15.35,
+    17.967
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 19535,
+   "F_land": 19535,
+   "F_end": 19648
+  },
+  {
+   "id": "footage08",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 17.97→18.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 950,
+   "f_land": 950,
+   "f_end": 1014,
+   "until": null,
+   "word": "3-04.w038",
+   "w": "can't",
+   "key": "can't#1",
+   "sid": "3-04.s4",
+   "word_f0": 950,
+   "value": [
+    17.967,
+    18.45
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 19648,
+   "F_land": 19648,
+   "F_end": 19712
+  }
+ ],
+ "problems": []
+}

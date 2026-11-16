@@ -1,0 +1,623 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "1-04",
+ "segs": [
+  "1-04"
+ ],
+ "tool": "warp_source",
+ "fps": 60,
+ "len_f": 1256,
+ "cut": "cut_v8",
+ "cut_start_f": 1836,
+ "cut_start_s": 30.6,
+ "master_built": "2026-11-17 02:29:10 +09:00",
+ "words_hash": "9aba3c77165c",
+ "events_src": "镜头设计_v3/映射/events/1-04.json",
+ "words": [
+  {
+   "wid": "1-04.w001",
+   "w": "The",
+   "key": "the#1",
+   "sid": "1-04.s1",
+   "f0": 9,
+   "f1": 14,
+   "F0": 1845,
+   "F1": 1850
+  },
+  {
+   "wid": "1-04.w002",
+   "w": "standard",
+   "key": "standard#1",
+   "sid": "1-04.s1",
+   "f0": 17,
+   "f1": 47,
+   "F0": 1853,
+   "F1": 1883
+  },
+  {
+   "wid": "1-04.w003",
+   "w": "first",
+   "key": "first#1",
+   "sid": "1-04.s1",
+   "f0": 50,
+   "f1": 65,
+   "F0": 1886,
+   "F1": 1901
+  },
+  {
+   "wid": "1-04.w004",
+   "w": "treatment",
+   "key": "treatment#1",
+   "sid": "1-04.s1",
+   "f0": 69,
+   "f1": 93,
+   "F0": 1905,
+   "F1": 1929
+  },
+  {
+   "wid": "1-04.w005",
+   "w": "for",
+   "key": "for#1",
+   "sid": "1-04.s1",
+   "f0": 97,
+   "f1": 105,
+   "F0": 1933,
+   "F1": 1941
+  },
+  {
+   "wid": "1-04.w006",
+   "w": "advanced",
+   "key": "advanced#1",
+   "sid": "1-04.s1",
+   "f0": 110,
+   "f1": 138,
+   "F0": 1946,
+   "F1": 1974
+  },
+  {
+   "wid": "1-04.w007",
+   "w": "liver",
+   "key": "liver#1",
+   "sid": "1-04.s1",
+   "f0": 140,
+   "f1": 156,
+   "F0": 1976,
+   "F1": 1992
+  },
+  {
+   "wid": "1-04.w008",
+   "w": "cancer",
+   "key": "cancer#1",
+   "sid": "1-04.s1",
+   "f0": 159,
+   "f1": 184,
+   "F0": 1995,
+   "F1": 2020
+  },
+  {
+   "wid": "1-04.w009",
+   "w": "has",
+   "key": "has#1",
+   "sid": "1-04.s1",
+   "f0": 207,
+   "f1": 217,
+   "F0": 2043,
+   "F1": 2053
+  },
+  {
+   "wid": "1-04.w010",
+   "w": "already",
+   "key": "already#1",
+   "sid": "1-04.s1",
+   "f0": 219,
+   "f1": 240,
+   "F0": 2055,
+   "F1": 2076
+  },
+  {
+   "wid": "1-04.w011",
+   "w": "changed",
+   "key": "changed#1",
+   "sid": "1-04.s1",
+   "f0": 243,
+   "f1": 261,
+   "F0": 2079,
+   "F1": 2097
+  },
+  {
+   "wid": "1-04.w012",
+   "w": "once,",
+   "key": "once#1",
+   "sid": "1-04.s1",
+   "f0": 264,
+   "f1": 282,
+   "F0": 2100,
+   "F1": 2118
+  },
+  {
+   "wid": "1-04.w013",
+   "w": "from",
+   "key": "from#1",
+   "sid": "1-04.s1",
+   "f0": 325,
+   "f1": 336,
+   "F0": 2161,
+   "F1": 2172
+  },
+  {
+   "wid": "1-04.w014",
+   "w": "Nexavar",
+   "key": "nexavar#1",
+   "sid": "1-04.s1",
+   "f0": 339,
+   "f1": 369,
+   "F0": 2175,
+   "F1": 2205
+  },
+  {
+   "wid": "1-04.w015",
+   "w": "to",
+   "key": "to#1",
+   "sid": "1-04.s1",
+   "f0": 375,
+   "f1": 388,
+   "F0": 2211,
+   "F1": 2224
+  },
+  {
+   "wid": "1-04.w016",
+   "w": "a",
+   "key": "a#1",
+   "sid": "1-04.s1",
+   "f0": 394,
+   "f1": 396,
+   "F0": 2230,
+   "F1": 2232
+  },
+  {
+   "wid": "1-04.w017",
+   "w": "combo,",
+   "key": "combo#1",
+   "sid": "1-04.s1",
+   "f0": 402,
+   "f1": 422,
+   "F0": 2238,
+   "F1": 2258
+  },
+  {
+   "wid": "1-04.w018",
+   "w": "atezolizumab",
+   "key": "atezolizumab#1",
+   "sid": "1-04.s1",
+   "f0": 481,
+   "f1": 546,
+   "F0": 2317,
+   "F1": 2382
+  },
+  {
+   "wid": "1-04.w019",
+   "w": "plus",
+   "key": "plus#1",
+   "sid": "1-04.s1",
+   "f0": 555,
+   "f1": 578,
+   "F0": 2391,
+   "F1": 2414
+  },
+  {
+   "wid": "1-04.w020",
+   "w": "bevacizumab.",
+   "key": "bevacizumab#1",
+   "sid": "1-04.s1",
+   "f0": 585,
+   "f1": 646,
+   "F0": 2421,
+   "F1": 2482
+  },
+  {
+   "wid": "1-04.w021",
+   "w": "But",
+   "key": "but#1",
+   "sid": "1-04.s2",
+   "f0": 683,
+   "f1": 691,
+   "F0": 2519,
+   "F1": 2527
+  },
+  {
+   "wid": "1-04.w022",
+   "w": "here,",
+   "key": "here#1",
+   "sid": "1-04.s2",
+   "f0": 697,
+   "f1": 718,
+   "F0": 2533,
+   "F1": 2554
+  },
+  {
+   "wid": "1-04.w023",
+   "w": "only",
+   "key": "only#1",
+   "sid": "1-04.s2",
+   "f0": 749,
+   "f1": 761,
+   "F0": 2585,
+   "F1": 2597
+  },
+  {
+   "wid": "1-04.w024",
+   "w": "about",
+   "key": "about#1",
+   "sid": "1-04.s2",
+   "f0": 764,
+   "f1": 784,
+   "F0": 2600,
+   "F1": 2620
+  },
+  {
+   "wid": "1-04.w025",
+   "w": "three",
+   "key": "three#1",
+   "sid": "1-04.s2",
+   "f0": 788,
+   "f1": 803,
+   "F0": 2624,
+   "F1": 2639
+  },
+  {
+   "wid": "1-04.w026",
+   "w": "in",
+   "key": "in#1",
+   "sid": "1-04.s2",
+   "f0": 807,
+   "f1": 813,
+   "F0": 2643,
+   "F1": 2649
+  },
+  {
+   "wid": "1-04.w027",
+   "w": "ten",
+   "key": "ten#1",
+   "sid": "1-04.s2",
+   "f0": 817,
+   "f1": 832,
+   "F0": 2653,
+   "F1": 2668
+  },
+  {
+   "wid": "1-04.w028",
+   "w": "patients",
+   "key": "patients#1",
+   "sid": "1-04.s2",
+   "f0": 835,
+   "f1": 867,
+   "F0": 2671,
+   "F1": 2703
+  },
+  {
+   "wid": "1-04.w029",
+   "w": "are",
+   "key": "are#1",
+   "sid": "1-04.s2",
+   "f0": 887,
+   "f1": 895,
+   "F0": 2723,
+   "F1": 2731
+  },
+  {
+   "wid": "1-04.w030",
+   "w": "alive",
+   "key": "alive#1",
+   "sid": "1-04.s2",
+   "f0": 900,
+   "f1": 922,
+   "F0": 2736,
+   "F1": 2758
+  },
+  {
+   "wid": "1-04.w031",
+   "w": "five",
+   "key": "five#1",
+   "sid": "1-04.s2",
+   "f0": 925,
+   "f1": 941,
+   "F0": 2761,
+   "F1": 2777
+  },
+  {
+   "wid": "1-04.w032",
+   "w": "years",
+   "key": "years#1",
+   "sid": "1-04.s2",
+   "f0": 943,
+   "f1": 959,
+   "F0": 2779,
+   "F1": 2795
+  },
+  {
+   "wid": "1-04.w033",
+   "w": "on.",
+   "key": "on#1",
+   "sid": "1-04.s2",
+   "f0": 965,
+   "f1": 973,
+   "F0": 2801,
+   "F1": 2809
+  },
+  {
+   "wid": "1-04.w034",
+   "w": "The",
+   "key": "the#2",
+   "sid": "1-04.s3",
+   "f0": 1011,
+   "f1": 1016,
+   "F0": 2847,
+   "F1": 2852
+  },
+  {
+   "wid": "1-04.w035",
+   "w": "study",
+   "key": "study#1",
+   "sid": "1-04.s3",
+   "f0": 1019,
+   "f1": 1037,
+   "F0": 2855,
+   "F1": 2873
+  },
+  {
+   "wid": "1-04.w036",
+   "w": "we",
+   "key": "we#1",
+   "sid": "1-04.s3",
+   "f0": 1041,
+   "f1": 1046,
+   "F0": 2877,
+   "F1": 2882
+  },
+  {
+   "wid": "1-04.w037",
+   "w": "follow",
+   "key": "follow#1",
+   "sid": "1-04.s3",
+   "f0": 1052,
+   "f1": 1074,
+   "F0": 2888,
+   "F1": 2910
+  },
+  {
+   "wid": "1-04.w038",
+   "w": "calls",
+   "key": "calls#1",
+   "sid": "1-04.s3",
+   "f0": 1115,
+   "f1": 1130,
+   "F0": 2951,
+   "F1": 2966
+  },
+  {
+   "wid": "1-04.w039",
+   "w": "it",
+   "key": "it#1",
+   "sid": "1-04.s3",
+   "f0": 1134,
+   "f1": 1140,
+   "F0": 2970,
+   "F1": 2976
+  },
+  {
+   "wid": "1-04.w040",
+   "w": "a",
+   "key": "a#2",
+   "sid": "1-04.s3",
+   "f0": 1145,
+   "f1": 1146,
+   "F0": 2981,
+   "F1": 2982
+  },
+  {
+   "wid": "1-04.w041",
+   "w": "huge",
+   "key": "huge#1",
+   "sid": "1-04.s3",
+   "f0": 1158,
+   "f1": 1180,
+   "F0": 2994,
+   "F1": 3016
+  },
+  {
+   "wid": "1-04.w042",
+   "w": "unmet",
+   "key": "unmet#1",
+   "sid": "1-04.s3",
+   "f0": 1186,
+   "f1": 1215,
+   "F0": 3022,
+   "F1": 3051
+  },
+  {
+   "wid": "1-04.w043",
+   "w": "need.",
+   "key": "need#1",
+   "sid": "1-04.s3",
+   "f0": 1236,
+   "f1": 1252,
+   "F0": 3072,
+   "F1": 3088
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "1-04.s1",
+   "text": "The standard first treatment for advanced liver cancer has already changed once, from Nexavar to a combo, atezolizumab plus bevacizumab.",
+   "w_first": "1-04.w001",
+   "w_last": "1-04.w020",
+   "f0": 9,
+   "f1": 646
+  },
+  {
+   "sid": "1-04.s2",
+   "text": "But here, only about three in ten patients are alive five years on.",
+   "w_first": "1-04.w021",
+   "w_last": "1-04.w033",
+   "f0": 683,
+   "f1": 973
+  },
+  {
+   "sid": "1-04.s3",
+   "text": "The study we follow calls it a huge unmet need.",
+   "w_first": "1-04.w034",
+   "w_last": "1-04.w043",
+   "f0": 1011,
+   "f1": 1252
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "footage00",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 0.00→1.64 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 0,
+   "f_land": 0,
+   "f_end": 69,
+   "until": null,
+   "word": "1-04.w001",
+   "w": "The",
+   "key": "the#1",
+   "sid": "1-04.s1",
+   "word_f0": 9,
+   "value": [
+    0.0,
+    1.64
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 1836,
+   "F_land": 1836,
+   "F_end": 1905
+  },
+  {
+   "id": "footage01",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 1.64→2.64 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 69,
+   "f_land": 69,
+   "f_end": 243,
+   "until": null,
+   "word": "1-04.w004",
+   "w": "treatment",
+   "key": "treatment#1",
+   "sid": "1-04.s1",
+   "word_f0": 69,
+   "value": [
+    1.64,
+    2.64
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 1905,
+   "F_land": 1905,
+   "F_end": 2079
+  },
+  {
+   "id": "footage02",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 2.64→4.24 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 243,
+   "f_land": 243,
+   "f_end": 375,
+   "until": null,
+   "word": "1-04.w011",
+   "w": "changed",
+   "key": "changed#1",
+   "sid": "1-04.s1",
+   "word_f0": 243,
+   "value": [
+    2.64,
+    4.24
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 2079,
+   "F_land": 2079,
+   "F_end": 2211
+  },
+  {
+   "id": "footage03",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 4.24→12.74 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 375,
+   "f_land": 375,
+   "f_end": 835,
+   "until": null,
+   "word": "1-04.w015",
+   "w": "to",
+   "key": "to#1",
+   "sid": "1-04.s1",
+   "word_f0": 375,
+   "value": [
+    4.24,
+    12.74
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 2211,
+   "F_land": 2211,
+   "F_end": 2671
+  },
+  {
+   "id": "footage04",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 12.74→14.04 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 835,
+   "f_land": 835,
+   "f_end": 900,
+   "until": null,
+   "word": "1-04.w028",
+   "w": "patients",
+   "key": "patients#1",
+   "sid": "1-04.s2",
+   "word_f0": 835,
+   "value": [
+    12.74,
+    14.04
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 2671,
+   "F_land": 2671,
+   "F_end": 2736
+  },
+  {
+   "id": "footage05",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 14.04→20.73 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 900,
+   "f_land": 900,
+   "f_end": 1252,
+   "until": null,
+   "word": "1-04.w030",
+   "w": "alive",
+   "key": "alive#1",
+   "sid": "1-04.s2",
+   "word_f0": 900,
+   "value": [
+    14.04,
+    20.733
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 2736,
+   "F_land": 2736,
+   "F_end": 3088
+  }
+ ],
+ "problems": []
+}

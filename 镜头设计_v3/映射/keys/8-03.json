@@ -1,0 +1,649 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "8-03",
+ "segs": [
+  "8-03"
+ ],
+ "tool": "warp_source",
+ "fps": 60,
+ "len_f": 1116,
+ "cut": "cut_v8",
+ "cut_start_f": 59810,
+ "cut_start_s": 996.83,
+ "master_built": "2026-11-17 02:29:10 +09:00",
+ "words_hash": "869d2adbe83f",
+ "events_src": "镜头设计_v3/映射/events/8-03.json",
+ "words": [
+  {
+   "wid": "8-03.w001",
+   "w": "And",
+   "key": "and#1",
+   "sid": "8-03.s1",
+   "f0": 9,
+   "f1": 20,
+   "F0": 59819,
+   "F1": 59830
+  },
+  {
+   "wid": "8-03.w002",
+   "w": "our",
+   "key": "our#1",
+   "sid": "8-03.s1",
+   "f0": 26,
+   "f1": 37,
+   "F0": 59836,
+   "F1": 59847
+  },
+  {
+   "wid": "8-03.w003",
+   "w": "second?",
+   "key": "second#1",
+   "sid": "8-03.s1",
+   "f0": 42,
+   "f1": 67,
+   "F0": 59852,
+   "F1": 59877
+  },
+  {
+   "wid": "8-03.w004",
+   "w": "These",
+   "key": "these#1",
+   "sid": "8-03.s2",
+   "f0": 92,
+   "f1": 109,
+   "F0": 59902,
+   "F1": 59919
+  },
+  {
+   "wid": "8-03.w005",
+   "w": "methods",
+   "key": "methods#1",
+   "sid": "8-03.s2",
+   "f0": 114,
+   "f1": 138,
+   "F0": 59924,
+   "F1": 59948
+  },
+  {
+   "wid": "8-03.w006",
+   "w": "helped",
+   "key": "helped#1",
+   "sid": "8-03.s2",
+   "f0": 147,
+   "f1": 165,
+   "F0": 59957,
+   "F1": 59975
+  },
+  {
+   "wid": "8-03.w007",
+   "w": "the",
+   "key": "the#1",
+   "sid": "8-03.s2",
+   "f0": 191,
+   "f1": 198,
+   "F0": 60001,
+   "F1": 60008
+  },
+  {
+   "wid": "8-03.w008",
+   "w": "team",
+   "key": "team#1",
+   "sid": "8-03.s2",
+   "f0": 211,
+   "f1": 225,
+   "F0": 60021,
+   "F1": 60035
+  },
+  {
+   "wid": "8-03.w009",
+   "w": "assess",
+   "key": "assess#1",
+   "sid": "8-03.s2",
+   "f0": 235,
+   "f1": 257,
+   "F0": 60045,
+   "F1": 60067
+  },
+  {
+   "wid": "8-03.w010",
+   "w": "candidates",
+   "key": "candidates#1",
+   "sid": "8-03.s2",
+   "f0": 260,
+   "f1": 293,
+   "F0": 60070,
+   "F1": 60103
+  },
+  {
+   "wid": "8-03.w011",
+   "w": "fast.",
+   "key": "fast#1",
+   "sid": "8-03.s2",
+   "f0": 302,
+   "f1": 329,
+   "F0": 60112,
+   "F1": 60139
+  },
+  {
+   "wid": "8-03.w012",
+   "w": "Screening",
+   "key": "screening#1",
+   "sid": "8-03.s3",
+   "f0": 386,
+   "f1": 418,
+   "F0": 60196,
+   "F1": 60228
+  },
+  {
+   "wid": "8-03.w013",
+   "w": "by",
+   "key": "by#1",
+   "sid": "8-03.s3",
+   "f0": 424,
+   "f1": 436,
+   "F0": 60234,
+   "F1": 60246
+  },
+  {
+   "wid": "8-03.w014",
+   "w": "the",
+   "key": "the#2",
+   "sid": "8-03.s3",
+   "f0": 452,
+   "f1": 458,
+   "F0": 60262,
+   "F1": 60268
+  },
+  {
+   "wid": "8-03.w015",
+   "w": "millions",
+   "key": "millions#1",
+   "sid": "8-03.s3",
+   "f0": 464,
+   "f1": 497,
+   "F0": 60274,
+   "F1": 60307
+  },
+  {
+   "wid": "8-03.w016",
+   "w": "became",
+   "key": "became#1",
+   "sid": "8-03.s3",
+   "f0": 503,
+   "f1": 532,
+   "F0": 60313,
+   "F1": 60342
+  },
+  {
+   "wid": "8-03.w017",
+   "w": "thirteen",
+   "key": "thirteen#1",
+   "sid": "8-03.s3",
+   "f0": 564,
+   "f1": 589,
+   "F0": 60374,
+   "F1": 60399
+  },
+  {
+   "wid": "8-03.w018",
+   "w": "molecules",
+   "key": "molecules#1",
+   "sid": "8-03.s3",
+   "f0": 593,
+   "f1": 627,
+   "F0": 60403,
+   "F1": 60437
+  },
+  {
+   "wid": "8-03.w019",
+   "w": "made.",
+   "key": "made#1",
+   "sid": "8-03.s3",
+   "f0": 630,
+   "f1": 645,
+   "F0": 60440,
+   "F1": 60455
+  },
+  {
+   "wid": "8-03.w020",
+   "w": "And",
+   "key": "and#2",
+   "sid": "8-03.s4",
+   "f0": 700,
+   "f1": 713,
+   "F0": 60510,
+   "F1": 60523
+  },
+  {
+   "wid": "8-03.w021",
+   "w": "on",
+   "key": "on#1",
+   "sid": "8-03.s4",
+   "f0": 729,
+   "f1": 736,
+   "F0": 60539,
+   "F1": 60546
+  },
+  {
+   "wid": "8-03.w022",
+   "w": "a",
+   "key": "a#1",
+   "sid": "8-03.s4",
+   "f0": 741,
+   "f1": 742,
+   "F0": 60551,
+   "F1": 60552
+  },
+  {
+   "wid": "8-03.w023",
+   "w": "road",
+   "key": "road#1",
+   "sid": "8-03.s4",
+   "f0": 750,
+   "f1": 761,
+   "F0": 60560,
+   "F1": 60571
+  },
+  {
+   "wid": "8-03.w024",
+   "w": "measured",
+   "key": "measured#1",
+   "sid": "8-03.s4",
+   "f0": 764,
+   "f1": 795,
+   "F0": 60574,
+   "F1": 60605
+  },
+  {
+   "wid": "8-03.w025",
+   "w": "in",
+   "key": "in#1",
+   "sid": "8-03.s4",
+   "f0": 800,
+   "f1": 804,
+   "F0": 60610,
+   "F1": 60614
+  },
+  {
+   "wid": "8-03.w026",
+   "w": "years,",
+   "key": "years#1",
+   "sid": "8-03.s4",
+   "f0": 809,
+   "f1": 832,
+   "F0": 60619,
+   "F1": 60642
+  },
+  {
+   "wid": "8-03.w027",
+   "w": "the",
+   "key": "the#3",
+   "sid": "8-03.s4",
+   "f0": 863,
+   "f1": 869,
+   "F0": 60673,
+   "F1": 60679
+  },
+  {
+   "wid": "8-03.w028",
+   "w": "first",
+   "key": "first#1",
+   "sid": "8-03.s4",
+   "f0": 875,
+   "f1": 892,
+   "F0": 60685,
+   "F1": 60702
+  },
+  {
+   "wid": "8-03.w029",
+   "w": "hit",
+   "key": "hit#1",
+   "sid": "8-03.s4",
+   "f0": 894,
+   "f1": 904,
+   "F0": 60704,
+   "F1": 60714
+  },
+  {
+   "wid": "8-03.w030",
+   "w": "came",
+   "key": "came#1",
+   "sid": "8-03.s4",
+   "f0": 911,
+   "f1": 926,
+   "F0": 60721,
+   "F1": 60736
+  },
+  {
+   "wid": "8-03.w031",
+   "w": "in",
+   "key": "in#2",
+   "sid": "8-03.s4",
+   "f0": 932,
+   "f1": 938,
+   "F0": 60742,
+   "F1": 60748
+  },
+  {
+   "wid": "8-03.w032",
+   "w": "30",
+   "key": "30#1",
+   "sid": "8-03.s4",
+   "f0": 946,
+   "f1": 961,
+   "F0": 60756,
+   "F1": 60771
+  },
+  {
+   "wid": "8-03.w033",
+   "w": "days,",
+   "key": "days#1",
+   "sid": "8-03.s4",
+   "f0": 964,
+   "f1": 980,
+   "F0": 60774,
+   "F1": 60790
+  },
+  {
+   "wid": "8-03.w034",
+   "w": "and",
+   "key": "and#3",
+   "sid": "8-03.s4",
+   "f0": 999,
+   "f1": 1007,
+   "F0": 60809,
+   "F1": 60817
+  },
+  {
+   "wid": "8-03.w035",
+   "w": "round",
+   "key": "round#1",
+   "sid": "8-03.s4",
+   "f0": 1018,
+   "f1": 1030,
+   "F0": 60828,
+   "F1": 60840
+  },
+  {
+   "wid": "8-03.w036",
+   "w": "two",
+   "key": "two#1",
+   "sid": "8-03.s4",
+   "f0": 1034,
+   "f1": 1045,
+   "F0": 60844,
+   "F1": 60855
+  },
+  {
+   "wid": "8-03.w037",
+   "w": "made",
+   "key": "made#2",
+   "sid": "8-03.s4",
+   "f0": 1055,
+   "f1": 1071,
+   "F0": 60865,
+   "F1": 60881
+  },
+  {
+   "wid": "8-03.w038",
+   "w": "the",
+   "key": "the#4",
+   "sid": "8-03.s4",
+   "f0": 1071,
+   "f1": 1076,
+   "F0": 60881,
+   "F1": 60886
+  },
+  {
+   "wid": "8-03.w039",
+   "w": "key",
+   "key": "key#1",
+   "sid": "8-03.s4",
+   "f0": 1081,
+   "f1": 1093,
+   "F0": 60891,
+   "F1": 60903
+  },
+  {
+   "wid": "8-03.w040",
+   "w": "turn.",
+   "key": "turn#1",
+   "sid": "8-03.s4",
+   "f0": 1097,
+   "f1": 1113,
+   "F0": 60907,
+   "F1": 60923
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "8-03.s1",
+   "text": "And our second?",
+   "w_first": "8-03.w001",
+   "w_last": "8-03.w003",
+   "f0": 9,
+   "f1": 67
+  },
+  {
+   "sid": "8-03.s2",
+   "text": "These methods helped the team assess candidates fast.",
+   "w_first": "8-03.w004",
+   "w_last": "8-03.w011",
+   "f0": 92,
+   "f1": 329
+  },
+  {
+   "sid": "8-03.s3",
+   "text": "Screening by the millions became thirteen molecules made.",
+   "w_first": "8-03.w012",
+   "w_last": "8-03.w019",
+   "f0": 386,
+   "f1": 645
+  },
+  {
+   "sid": "8-03.s4",
+   "text": "And on a road measured in years, the first hit came in 30 days, and round two made the key turn.",
+   "w_first": "8-03.w020",
+   "w_last": "8-03.w040",
+   "f0": 700,
+   "f1": 1113
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "footage00",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 0.00→4.88 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 0,
+   "f_land": 0,
+   "f_end": 302,
+   "until": null,
+   "word": "8-03.w001",
+   "w": "And",
+   "key": "and#1",
+   "sid": "8-03.s1",
+   "word_f0": 9,
+   "value": [
+    0.0,
+    4.883
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 59810,
+   "F_land": 59810,
+   "F_end": 60112
+  },
+  {
+   "id": "footage01",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 4.88→5.75 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 302,
+   "f_land": 302,
+   "f_end": 386,
+   "until": null,
+   "word": "8-03.w011",
+   "w": "fast.",
+   "key": "fast#1",
+   "sid": "8-03.s2",
+   "word_f0": 302,
+   "value": [
+    4.883,
+    5.75
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 60112,
+   "F_land": 60112,
+   "F_end": 60196
+  },
+  {
+   "id": "footage02",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 5.75→6.85 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 386,
+   "f_land": 386,
+   "f_end": 464,
+   "until": null,
+   "word": "8-03.w012",
+   "w": "Screening",
+   "key": "screening#1",
+   "sid": "8-03.s3",
+   "word_f0": 386,
+   "value": [
+    5.75,
+    6.85
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 60196,
+   "F_land": 60196,
+   "F_end": 60274
+  },
+  {
+   "id": "footage03",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 6.85→7.53 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 464,
+   "f_land": 464,
+   "f_end": 503,
+   "until": null,
+   "word": "8-03.w015",
+   "w": "millions",
+   "key": "millions#1",
+   "sid": "8-03.s3",
+   "word_f0": 464,
+   "value": [
+    6.85,
+    7.533
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 60274,
+   "F_land": 60274,
+   "F_end": 60313
+  },
+  {
+   "id": "footage04",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 7.53→8.27 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 503,
+   "f_land": 503,
+   "f_end": 564,
+   "until": null,
+   "word": "8-03.w016",
+   "w": "became",
+   "key": "became#1",
+   "sid": "8-03.s3",
+   "word_f0": 503,
+   "value": [
+    7.533,
+    8.267
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 60313,
+   "F_land": 60313,
+   "F_end": 60374
+  },
+  {
+   "id": "footage05",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 8.27→9.83 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 564,
+   "f_land": 564,
+   "f_end": 630,
+   "until": null,
+   "word": "8-03.w017",
+   "w": "thirteen",
+   "key": "thirteen#1",
+   "sid": "8-03.s3",
+   "word_f0": 564,
+   "value": [
+    8.267,
+    9.833
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 60374,
+   "F_land": 60374,
+   "F_end": 60440
+  },
+  {
+   "id": "footage06",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 9.83→16.40 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 630,
+   "f_land": 630,
+   "f_end": 1097,
+   "until": null,
+   "word": "8-03.w019",
+   "w": "made.",
+   "key": "made#1",
+   "sid": "8-03.s3",
+   "word_f0": 630,
+   "value": [
+    9.833,
+    16.4
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 60440,
+   "F_land": 60440,
+   "F_end": 60907
+  },
+  {
+   "id": "footage07",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 16.40→16.80 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 1097,
+   "f_land": 1097,
+   "f_end": 1113,
+   "until": null,
+   "word": "8-03.w040",
+   "w": "turn.",
+   "key": "turn#1",
+   "sid": "8-03.s4",
+   "word_f0": 1097,
+   "value": [
+    16.4,
+    16.8
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 60907,
+   "F_land": 60907,
+   "F_end": 60923
+  }
+ ],
+ "problems": []
+}

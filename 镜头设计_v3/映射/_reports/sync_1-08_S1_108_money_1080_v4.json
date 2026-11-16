@@ -1,0 +1,455 @@
+{
+ "video": "镜头设计_v3/styleframes/art/fusion/s1/inserts/S1_108_money_1080_v4.mp4",
+ "group": "1-08",
+ "fps": 60.0,
+ "frames": 929,
+ "offset_f": 0,
+ "S1": {
+  "word_events": 23,
+  "table_dev_max_f": 0,
+  "video_checked": 47,
+  "video_no_motion": [
+   "stack_press"
+  ],
+  "pass_": false
+ },
+ "S2": {
+  "pass_": true,
+  "early": []
+ },
+ "S3": {
+  "pass_": true,
+  "longest_still_f": 14,
+  "bad": []
+ },
+ "S4": {
+  "pass_": true,
+  "looks_like_30": false,
+  "dup_frames": 63,
+  "stepped_dups": 0,
+  "stepped_ratio": 0.0,
+  "blend_frames": 7,
+  "blend_first": [
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "design_fade": 0,
+  "verdict": "有混帧（变速慢放）"
+ },
+ "sentences": [
+  {
+   "sid": "1-08.s1",
+   "f0": 9,
+   "f1": 292,
+   "last_motion_f": 292,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "1-08.s2",
+   "f0": 330,
+   "f1": 541,
+   "last_motion_f": 538,
+   "end_dev": -3,
+   "longest_still_f": 8,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "1-08.s3",
+   "f0": 577,
+   "f1": 915,
+   "last_motion_f": 915,
+   "end_dev": 0,
+   "longest_still_f": 14,
+   "s2": true,
+   "s3": true
+  }
+ ],
+ "events": [
+  {
+   "id": "head_start",
+   "verb": "flow",
+   "w": "Start",
+   "f_land": 9,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "well0",
+   "verb": "grow",
+   "w": "year",
+   "f_land": 80,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "well1",
+   "verb": "grow",
+   "w": "born,",
+   "f_land": 133,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "well2",
+   "verb": "grow",
+   "w": "might",
+   "f_land": 212,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "well3",
+   "verb": "grow",
+   "w": "ready",
+   "f_land": 261,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "head_now",
+   "verb": "flow",
+   "w": "now.",
+   "f_land": 279,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_follow",
+   "verb": "camera_to",
+   "w": "ready",
+   "f_land": 262,
+   "table_dev": 1,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "bill0",
+   "verb": "eject",
+   "w": "cost",
+   "f_land": 350,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "bill1",
+   "verb": "eject",
+   "w": "almost",
+   "f_land": 389,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "bill2",
+   "verb": "eject",
+   "w": "2.8",
+   "f_land": 430,
+   "table_dev": 13,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "bill3",
+   "verb": "eject",
+   "w": "billion",
+   "f_land": 462,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "bill4",
+   "verb": "eject",
+   "w": "billion",
+   "f_land": 472,
+   "table_dev": 10,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "bill5",
+   "verb": "eject",
+   "w": "US",
+   "f_land": 482,
+   "table_dev": -17,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "bill6",
+   "verb": "eject",
+   "w": "US",
+   "f_land": 499,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "bill7",
+   "verb": "eject",
+   "w": "dollars.",
+   "f_land": 508,
+   "table_dev": -8,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "bill8",
+   "verb": "eject",
+   "w": "dollars.",
+   "f_land": 516,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "text_28",
+   "verb": "grow",
+   "w": "2.8",
+   "f_land": 417,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "text_billion",
+   "verb": "grow",
+   "w": "billion",
+   "f_land": 462,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "stack_press",
+   "verb": "move",
+   "w": "dollars.",
+   "f_land": 522,
+   "table_dev": 6,
+   "video_motion_near_start": false
+  },
+  {
+   "id": "cam_push",
+   "verb": "camera_to",
+   "w": "And",
+   "f_land": 577,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "pill0",
+   "verb": "grow",
+   "w": "drugs",
+   "f_land": 610,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "pill1",
+   "verb": "grow",
+   "w": "drugs",
+   "f_land": 622,
+   "table_dev": 12,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "pill2",
+   "verb": "grow",
+   "w": "drugs",
+   "f_land": 634,
+   "table_dev": 24,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "pill3",
+   "verb": "grow",
+   "w": "drugs",
+   "f_land": 646,
+   "table_dev": 36,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "pill4",
+   "verb": "grow",
+   "w": "drugs",
+   "f_land": 658,
+   "table_dev": 48,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "pill5",
+   "verb": "grow",
+   "w": "drugs",
+   "f_land": 670,
+   "table_dev": 60,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "pill6",
+   "verb": "grow",
+   "w": "drugs",
+   "f_land": 682,
+   "table_dev": 72,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "pill7",
+   "verb": "grow",
+   "w": "drugs",
+   "f_land": 694,
+   "table_dev": 84,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "pill8",
+   "verb": "grow",
+   "w": "drugs",
+   "f_land": 706,
+   "table_dev": 96,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "pill9",
+   "verb": "grow",
+   "w": "drugs",
+   "f_land": 718,
+   "table_dev": 108,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "head_and",
+   "verb": "flow",
+   "w": "And",
+   "f_land": 577,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "pillx0",
+   "verb": "retract",
+   "w": "only",
+   "f_land": 726,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "pillx1",
+   "verb": "retract",
+   "w": "only",
+   "f_land": 732,
+   "table_dev": 6,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "pillx2",
+   "verb": "retract",
+   "w": "only",
+   "f_land": 738,
+   "table_dev": 12,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "pillx3",
+   "verb": "retract",
+   "w": "only",
+   "f_land": 744,
+   "table_dev": 18,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "pillx4",
+   "verb": "retract",
+   "w": "only",
+   "f_land": 750,
+   "table_dev": 24,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "pillx5",
+   "verb": "retract",
+   "w": "only",
+   "f_land": 766,
+   "table_dev": 40,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "pillx7",
+   "verb": "retract",
+   "w": "only",
+   "f_land": 772,
+   "table_dev": 46,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "pillx8",
+   "verb": "retract",
+   "w": "only",
+   "f_land": 778,
+   "table_dev": 52,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "pillx9",
+   "verb": "retract",
+   "w": "only",
+   "f_land": 784,
+   "table_dev": 58,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "keep_up",
+   "verb": "eject",
+   "w": "one",
+   "f_land": 775,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "label_1in10",
+   "verb": "grow",
+   "w": "one",
+   "f_land": 775,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "keep_hop",
+   "verb": "move",
+   "w": "reaches",
+   "f_land": 828,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_pull",
+   "verb": "camera_to",
+   "w": "reaches",
+   "f_land": 822,
+   "table_dev": -6,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "keep_land",
+   "verb": "move",
+   "w": "market.",
+   "f_land": 886,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "gates_retract",
+   "verb": "retract",
+   "w": "market.",
+   "f_land": 886,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_settle",
+   "verb": "camera_to",
+   "w": "market.",
+   "f_land": 886,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  }
+ ],
+ "pass": false
+}

@@ -1,0 +1,81 @@
+<!doctype html><meta charset="utf-8"><title>事件表格式</title><style>body{font-family:"Microsoft YaHei",sans-serif;max-width:900px;margin:24px auto;padding:0 16px;line-height:1.7;color:#222;background:#fff}
+table{border-collapse:collapse;margin:12px 0}td,th{border:1px solid #ccc;padding:6px 10px}th{background:#f2f2f2}
+code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1px solid #ddd;padding-bottom:4px}a{color:#0a58ca}</style><h1>事件表格式（events/&lt;段&gt;.json）</h1>
+<p>HKBU SCIE1007 课程作业的科普视频。这一页说明"词 → 画面事件"表怎么写。表只写"哪个东西、做什么、从哪个词起、到哪个词停"，不写帧号。帧号由 <code>resolve.py</code> 按总表（<code>master_v1.json</code>，录音实测的词时间）算出来，写到 <code>keys/&lt;段&gt;.json</code>。</p>
+<h2>文件</h2>
+<ul>
+<li>一段一个文件：<code>映射/events/&lt;段&gt;.json</code>。出镜对话组的文件名把 <code>+</code> 换成 <code>_</code>，例如 <code>1-05_1-06_1-07.json</code>。</li>
+<li>顶层字段：<code>schema</code>（固定 <code>cdk20.events/1</code>）、<code>group</code>（段号）、<code>tool</code>（blender / remotion）、<code>note</code>、<code>holds</code>（有意停住的段内帧区间，可空）、<code>events</code>（列表）。</li>
+</ul>
+<h2>一个事件</h2>
+<pre><code class="language-json">{&quot;id&quot;: &quot;bill0&quot;, &quot;obj&quot;: &quot;bill_0&quot;, &quot;verb&quot;: &quot;eject&quot;,
+ &quot;at&quot;: {&quot;word&quot;: &quot;cost&quot;, &quot;off&quot;: 0}, &quot;lead&quot;: 60,
+ &quot;until&quot;: {&quot;dur&quot;: 0}, &quot;ease&quot;: &quot;out&quot;, &quot;means&quot;: &quot;cost：第 1 张钞票顶出落下&quot;}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>必填</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>是</td>
+<td>段内唯一，程序用它取帧</td>
+</tr>
+<tr>
+<td>obj</td>
+<td>是</td>
+<td>动的东西（Blender 物体名或 Remotion 图层名）</td>
+</tr>
+<tr>
+<td>verb</td>
+<td>是</td>
+<td>flow / grow / eject / retract / appear / move / camera_to 七个之一</td>
+</tr>
+<tr>
+<td>at</td>
+<td>是</td>
+<td>落点，也就是这个词说出口、东西到位的那一刻。<code>{"word": 词, "off": 偏移帧}</code>；词可以写 wid（<code>1-08.w018</code>）、原词（<code>cost</code>）或第几次（<code>and#2</code>）。也可以写 <code>{"event": 前面某个事件的 id, "off": n}</code>，跟在前一个事件后面</td>
+</tr>
+<tr>
+<td>lead</td>
+<td>否</td>
+<td>落点前提前多少帧起动，默认 0</td>
+</tr>
+<tr>
+<td>until</td>
+<td>否</td>
+<td>动作持续到哪里。<code>{"word": 词}</code> 是那个词说完，加 <code>"edge": "start"</code> 就改成那个词开口；<code>{"sentence_end": true}</code> 到本句句尾，也可以写句号 <code>"1-08.s3"</code>；<code>{"dur": 帧数}</code> 从落点起算持续多少帧；<code>{"event": id}</code> 和那个事件同时结束。都可以带 <code>off</code>。不写就在落点结束</td>
+</tr>
+<tr>
+<td>ease</td>
+<td>否</td>
+<td>linear / in / out / inout / hold，默认 inout</td>
+</tr>
+<tr>
+<td>means</td>
+<td>否</td>
+<td>一句话说明它在讲什么，给人看</td>
+</tr>
+<tr>
+<td>seg</td>
+<td>否</td>
+<td>多段组里只在这一段找词</td>
+</tr>
+</tbody>
+</table>
+<p>算出的帧：<code>f_land = 词开口帧 + off</code>，<code>f_start = f_land − lead</code>，<code>f_end</code> 由 until 决定。三个都是段内 60 fps 帧。<code>keys/</code> 里另给片内帧 <code>F_* = 段在片里的起点帧 + f_*</code>。</p>
+<h2>规则（validate_events.py 检查）</h2>
+<ol>
+<li>格式：id 唯一，verb 和 ease 只能用上表里的值。</li>
+<li>引用的词在总表这段里存在。</li>
+<li>顺序：<code>f_start ≤ f_land ≤ f_end</code>，都在段内；until 不能早于 at；<code>at.event</code> 只能引用写在前面的事件。</li>
+<li>每句说话期间，没有任何事件在动的时间不超过 90 帧（1.5 s）。</li>
+<li>每句最后一个事件结束不早于句尾前 2 帧（动作不早停）。</li>
+</ol>
+<h2>迁移来的表</h2>
+<p><code>migrate_beats_v8.py</code> 自动写的表顶层带 <code>"migrated": "migrate_beats_v8"</code>。其中 <code>obj: footage</code> 的事件是旧动画的变速锚点：<code>value=[源片起秒, 源片止秒]</code>，意思是这段帧里播放源片的这一截。它们可以用来原生重渲旧动画，但不算语义事件，要按剧本补写"说到哪个词、哪个东西出现"。重新迁移不会覆盖没有这个标记的手写表。</p>

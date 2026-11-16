@@ -1,0 +1,1214 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "5-01",
+ "tool": "blender",
+ "migrated": "migrate_beats_v8",
+ "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），另有第 5 章语义事件。",
+ "source": "镜头设计_v3/粗剪/对时/beats_v8/5-01.json",
+ "holds": [],
+ "events": [
+  {
+   "id": "cam1",
+   "obj": "cam",
+   "verb": "eject",
+   "at": {
+    "word": "5-01.w005",
+    "off": 0
+   },
+   "lead": 74,
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic"
+  },
+  {
+   "id": "card0",
+   "obj": "cards",
+   "verb": "eject",
+   "at": {
+    "word": "5-01.w006",
+    "off": 0
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic"
+  },
+  {
+   "id": "card1",
+   "obj": "cards",
+   "verb": "eject",
+   "at": {
+    "word": "5-01.w006",
+    "off": 28
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic"
+  },
+  {
+   "id": "card2",
+   "obj": "cards",
+   "verb": "eject",
+   "at": {
+    "word": "5-01.w006",
+    "off": 57
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic"
+  },
+  {
+   "id": "card3",
+   "obj": "cards",
+   "verb": "eject",
+   "at": {
+    "word": "5-01.w006",
+    "off": 85
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic"
+  },
+  {
+   "id": "card4",
+   "obj": "cards",
+   "verb": "eject",
+   "at": {
+    "word": "5-01.w006",
+    "off": 113
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic"
+  },
+  {
+   "id": "card5",
+   "obj": "cards",
+   "verb": "eject",
+   "at": {
+    "word": "5-01.w006",
+    "off": 142
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic"
+  },
+  {
+   "id": "card6",
+   "obj": "cards",
+   "verb": "eject",
+   "at": {
+    "word": "5-01.w006",
+    "off": 170
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic"
+  },
+  {
+   "id": "num0",
+   "obj": "cards",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w006",
+    "off": 4
+   },
+   "until": {
+    "dur": 14
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic",
+   "verb_was": "ink"
+  },
+  {
+   "id": "num1",
+   "obj": "cards",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w006",
+    "off": 32
+   },
+   "until": {
+    "dur": 14
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic",
+   "verb_was": "ink"
+  },
+  {
+   "id": "num2",
+   "obj": "cards",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w006",
+    "off": 61
+   },
+   "until": {
+    "dur": 14
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic",
+   "verb_was": "ink"
+  },
+  {
+   "id": "num3",
+   "obj": "cards",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w006",
+    "off": 89
+   },
+   "until": {
+    "dur": 14
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic",
+   "verb_was": "ink"
+  },
+  {
+   "id": "num4",
+   "obj": "cards",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w006",
+    "off": 117
+   },
+   "until": {
+    "dur": 14
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic",
+   "verb_was": "ink"
+  },
+  {
+   "id": "num5",
+   "obj": "cards",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w006",
+    "off": 146
+   },
+   "until": {
+    "dur": 14
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic",
+   "verb_was": "ink"
+  },
+  {
+   "id": "num6",
+   "obj": "cards",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w006",
+    "off": 174
+   },
+   "until": {
+    "dur": 14
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic",
+   "verb_was": "ink"
+  },
+  {
+   "id": "made",
+   "obj": "made",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w009",
+    "off": 14
+   },
+   "until": {
+    "dur": 40
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic",
+   "verb_was": "note"
+  },
+  {
+   "id": "q",
+   "obj": "q",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w014",
+    "off": 0
+   },
+   "until": {
+    "dur": 30
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic",
+   "verb_was": "note"
+  },
+  {
+   "id": "up",
+   "obj": "cam",
+   "verb": "eject",
+   "at": {
+    "word": "5-01.w017",
+    "off": 0
+   },
+   "lead": 79,
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic"
+  },
+  {
+   "id": "up_s",
+   "obj": "up_s",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w017",
+    "off": -79
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic"
+  },
+  {
+   "id": "down_s",
+   "obj": "down_s",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w019",
+    "off": -76
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic"
+  },
+  {
+   "id": "ring",
+   "obj": "ring",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w018",
+    "off": 0
+   },
+   "until": {
+    "dur": 24
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic"
+  },
+  {
+   "id": "ringlbl",
+   "obj": "ringlbl",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w018",
+    "off": 8
+   },
+   "until": {
+    "dur": 14
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic",
+   "verb_was": "ink"
+  },
+  {
+   "id": "down",
+   "obj": "cam",
+   "verb": "eject",
+   "at": {
+    "word": "5-01.w019",
+    "off": 0
+   },
+   "lead": 76,
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic"
+  },
+  {
+   "id": "kd0",
+   "obj": "kdlab",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w023",
+    "off": 0
+   },
+   "until": {
+    "dur": 16
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic",
+   "verb_was": "ink"
+  },
+  {
+   "id": "kd1",
+   "obj": "kdlab",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w023",
+    "off": 3
+   },
+   "until": {
+    "dur": 16
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic",
+   "verb_was": "ink"
+  },
+  {
+   "id": "kd2",
+   "obj": "kdlab",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w023",
+    "off": 6
+   },
+   "until": {
+    "dur": 16
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic",
+   "verb_was": "ink"
+  },
+  {
+   "id": "kd3",
+   "obj": "kdlab",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w023",
+    "off": 9
+   },
+   "until": {
+    "dur": 16
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic",
+   "verb_was": "ink"
+  },
+  {
+   "id": "kd4",
+   "obj": "kdlab",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w023",
+    "off": 12
+   },
+   "until": {
+    "dur": 16
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic",
+   "verb_was": "ink"
+  },
+  {
+   "id": "kd5",
+   "obj": "kdlab",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w023",
+    "off": 15
+   },
+   "until": {
+    "dur": 16
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic",
+   "verb_was": "ink"
+  },
+  {
+   "id": "kd6",
+   "obj": "kdlab",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w023",
+    "off": 18
+   },
+   "until": {
+    "dur": 16
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic",
+   "verb_was": "ink"
+  },
+  {
+   "id": "def1",
+   "obj": "def1",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w021",
+    "off": 0
+   },
+   "until": {
+    "dur": 40
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic",
+   "verb_was": "ink"
+  },
+  {
+   "id": "ulmol",
+   "obj": "ulmol",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w027",
+    "off": 0
+   },
+   "until": {
+    "dur": 12
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic",
+   "verb_was": "ul"
+  },
+  {
+   "id": "ulhow",
+   "obj": "ulhow",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w025",
+    "off": 0
+   },
+   "until": {
+    "dur": 12
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic",
+   "verb_was": "ul"
+  },
+  {
+   "id": "pile",
+   "obj": "pile",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w027",
+    "off": 48
+   },
+   "until": {
+    "dur": 24
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic",
+   "verb_was": "dots"
+  },
+  {
+   "id": "def2",
+   "obj": "def2",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w028",
+    "off": 0
+   },
+   "until": {
+    "dur": 30
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic",
+   "verb_was": "ink"
+  },
+  {
+   "id": "ulhalf",
+   "obj": "ulhalf",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w032",
+    "off": 0
+   },
+   "until": {
+    "dur": 10
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic",
+   "verb_was": "ul"
+  },
+  {
+   "id": "ulprot",
+   "obj": "ulprot",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w034",
+    "off": 0
+   },
+   "until": {
+    "dur": 12
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic",
+   "verb_was": "ul"
+  },
+  {
+   "id": "lower",
+   "obj": "lower",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w035",
+    "off": 0
+   },
+   "until": {
+    "dur": 40
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic"
+  },
+  {
+   "id": "gauge",
+   "obj": "gauge",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w037",
+    "off": 0
+   },
+   "until": {
+    "dur": 30
+   },
+   "ease": "inout",
+   "migrated": "migrate_beats_v8:semantic",
+   "verb_was": "gauge"
+  },
+  {
+   "id": "footage00",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w001",
+    "off": -9
+   },
+   "until": {
+    "dur": 138
+   },
+   "ease": "linear",
+   "means": "旧动画源片 0.00→2.30 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    0.0,
+    2.3
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage01",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w006",
+    "off": 0
+   },
+   "until": {
+    "dur": 4
+   },
+   "ease": "linear",
+   "means": "旧动画源片 2.30→2.37 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    2.3,
+    2.367
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage02",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w006",
+    "off": 4
+   },
+   "until": {
+    "dur": 24
+   },
+   "ease": "linear",
+   "means": "旧动画源片 2.37→2.77 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    2.367,
+    2.767
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage03",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w007",
+    "off": 7
+   },
+   "until": {
+    "dur": 4
+   },
+   "ease": "linear",
+   "means": "旧动画源片 2.77→2.83 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    2.767,
+    2.833
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage04",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w008",
+    "off": -10
+   },
+   "until": {
+    "dur": 25
+   },
+   "ease": "linear",
+   "means": "旧动画源片 2.83→3.25 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    2.833,
+    3.25
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage05",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w008",
+    "off": 15
+   },
+   "until": {
+    "dur": 4
+   },
+   "ease": "linear",
+   "means": "旧动画源片 3.25→3.32 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    3.25,
+    3.317
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage06",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w008",
+    "off": 19
+   },
+   "until": {
+    "dur": 24
+   },
+   "ease": "linear",
+   "means": "旧动画源片 3.32→3.72 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    3.317,
+    3.717
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage07",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w009",
+    "off": -26
+   },
+   "until": {
+    "dur": 4
+   },
+   "ease": "linear",
+   "means": "旧动画源片 3.72→3.78 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    3.717,
+    3.783
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage08",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w009",
+    "off": -22
+   },
+   "until": {
+    "dur": 24
+   },
+   "ease": "linear",
+   "means": "旧动画源片 3.78→4.18 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    3.783,
+    4.183
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage09",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w009",
+    "off": 2
+   },
+   "until": {
+    "dur": 4
+   },
+   "ease": "linear",
+   "means": "旧动画源片 4.18→4.25 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    4.183,
+    4.25
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage10",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w009",
+    "off": 6
+   },
+   "until": {
+    "dur": 8
+   },
+   "ease": "linear",
+   "means": "旧动画源片 4.25→4.38 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    4.25,
+    4.383
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage11",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w010",
+    "off": -9
+   },
+   "until": {
+    "dur": 17
+   },
+   "ease": "linear",
+   "means": "旧动画源片 4.38→4.67 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    4.383,
+    4.667
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage12",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w011",
+    "off": 0
+   },
+   "until": {
+    "dur": 4
+   },
+   "ease": "linear",
+   "means": "旧动画源片 4.67→4.73 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    4.667,
+    4.733
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage13",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w011",
+    "off": 4
+   },
+   "until": {
+    "dur": 24
+   },
+   "ease": "linear",
+   "means": "旧动画源片 4.73→5.13 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    4.733,
+    5.133
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage14",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w013",
+    "off": 0
+   },
+   "until": {
+    "dur": 4
+   },
+   "ease": "linear",
+   "means": "旧动画源片 5.13→5.20 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    5.133,
+    5.2
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage15",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w013",
+    "off": 4
+   },
+   "until": {
+    "dur": 52
+   },
+   "ease": "linear",
+   "means": "旧动画源片 5.20→6.07 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    5.2,
+    6.067
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage16",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w014",
+    "off": 0
+   },
+   "until": {
+    "dur": 119
+   },
+   "ease": "linear",
+   "means": "旧动画源片 6.07→8.05 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    6.067,
+    8.05
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage17",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w018",
+    "off": 0
+   },
+   "until": {
+    "dur": 8
+   },
+   "ease": "linear",
+   "means": "旧动画源片 8.05→8.18 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    8.05,
+    8.183
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage18",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w018",
+    "off": 8
+   },
+   "until": {
+    "dur": 9
+   },
+   "ease": "linear",
+   "means": "旧动画源片 8.18→8.33 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    8.183,
+    8.333
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage19",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w018",
+    "off": 17
+   },
+   "until": {
+    "dur": 118
+   },
+   "ease": "linear",
+   "means": "旧动画源片 8.33→10.30 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    8.333,
+    10.3
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage20",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w021",
+    "off": 0
+   },
+   "until": {
+    "dur": 48
+   },
+   "ease": "linear",
+   "means": "旧动画源片 10.30→11.10 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    10.3,
+    11.1
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage21",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w023",
+    "off": 0
+   },
+   "until": {
+    "dur": 3
+   },
+   "ease": "linear",
+   "means": "旧动画源片 11.10→11.15 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    11.1,
+    11.15
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage22",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w023",
+    "off": 3
+   },
+   "until": {
+    "dur": 3
+   },
+   "ease": "linear",
+   "means": "旧动画源片 11.15→11.20 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    11.15,
+    11.2
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage23",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w023",
+    "off": 6
+   },
+   "until": {
+    "dur": 3
+   },
+   "ease": "linear",
+   "means": "旧动画源片 11.20→11.25 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    11.2,
+    11.25
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage24",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w023",
+    "off": 9
+   },
+   "until": {
+    "dur": 3
+   },
+   "ease": "linear",
+   "means": "旧动画源片 11.25→11.30 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    11.25,
+    11.3
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage25",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w023",
+    "off": 12
+   },
+   "until": {
+    "dur": 3
+   },
+   "ease": "linear",
+   "means": "旧动画源片 11.30→11.35 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    11.3,
+    11.35
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage26",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w023",
+    "off": 15
+   },
+   "until": {
+    "dur": 3
+   },
+   "ease": "linear",
+   "means": "旧动画源片 11.35→11.40 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    11.35,
+    11.4
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage27",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w023",
+    "off": 18
+   },
+   "until": {
+    "dur": 85
+   },
+   "ease": "linear",
+   "means": "旧动画源片 11.40→12.82 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    11.4,
+    12.817
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage28",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w025",
+    "off": 0
+   },
+   "until": {
+    "dur": 35
+   },
+   "ease": "linear",
+   "means": "旧动画源片 12.82→13.40 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    12.817,
+    13.4
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage29",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w027",
+    "off": 0
+   },
+   "until": {
+    "dur": 102
+   },
+   "ease": "linear",
+   "means": "旧动画源片 13.40→15.10 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    13.4,
+    15.1
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage30",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w028",
+    "off": 0
+   },
+   "until": {
+    "dur": 83
+   },
+   "ease": "linear",
+   "means": "旧动画源片 15.10→16.48 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    15.1,
+    16.483
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage31",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w032",
+    "off": 0
+   },
+   "until": {
+    "dur": 52
+   },
+   "ease": "linear",
+   "means": "旧动画源片 16.48→17.35 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    16.483,
+    17.35
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage32",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w034",
+    "off": 0
+   },
+   "until": {
+    "dur": 53
+   },
+   "ease": "linear",
+   "means": "旧动画源片 17.35→18.23 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    17.35,
+    18.233
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage33",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w035",
+    "off": 0
+   },
+   "until": {
+    "dur": 48
+   },
+   "ease": "linear",
+   "means": "旧动画源片 18.23→19.03 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    18.233,
+    19.033
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage34",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w037",
+    "off": 0
+   },
+   "until": {
+    "dur": 25
+   },
+   "ease": "linear",
+   "means": "旧动画源片 19.03→19.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    19.033,
+    19.447
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  }
+ ]
+}

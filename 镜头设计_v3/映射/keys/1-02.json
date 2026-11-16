@@ -1,0 +1,565 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "1-02",
+ "segs": [
+  "1-02"
+ ],
+ "tool": "warp_source",
+ "fps": 60,
+ "len_f": 1036,
+ "cut": "cut_v8",
+ "cut_start_f": 474,
+ "cut_start_s": 7.9,
+ "master_built": "2026-11-17 02:29:10 +09:00",
+ "words_hash": "b371f1246df5",
+ "events_src": "镜头设计_v3/映射/events/1-02.json",
+ "words": [
+  {
+   "wid": "1-02.w001",
+   "w": "That's",
+   "key": "that's#1",
+   "sid": "1-02.s1",
+   "f0": 9,
+   "f1": 27,
+   "F0": 483,
+   "F1": 501
+  },
+  {
+   "wid": "1-02.w002",
+   "w": "1,412",
+   "key": "1,412#1",
+   "sid": "1-02.s1",
+   "f0": 35,
+   "f1": 141,
+   "F0": 509,
+   "F1": 615
+  },
+  {
+   "wid": "1-02.w003",
+   "w": "people",
+   "key": "people#1",
+   "sid": "1-02.s1",
+   "f0": 146,
+   "f1": 168,
+   "F0": 620,
+   "F1": 642
+  },
+  {
+   "wid": "1-02.w004",
+   "w": "in",
+   "key": "in#1",
+   "sid": "1-02.s1",
+   "f0": 175,
+   "f1": 181,
+   "F0": 649,
+   "F1": 655
+  },
+  {
+   "wid": "1-02.w005",
+   "w": "2022",
+   "key": "2022#1",
+   "sid": "1-02.s1",
+   "f0": 187,
+   "f1": 238,
+   "F0": 661,
+   "F1": 712
+  },
+  {
+   "wid": "1-02.w006",
+   "w": "alone.",
+   "key": "alone#1",
+   "sid": "1-02.s1",
+   "f0": 244,
+   "f1": 262,
+   "F0": 718,
+   "F1": 736
+  },
+  {
+   "wid": "1-02.w007",
+   "w": "Here,",
+   "key": "here#1",
+   "sid": "1-02.s2",
+   "f0": 304,
+   "f1": 316,
+   "F0": 778,
+   "F1": 790
+  },
+  {
+   "wid": "1-02.w008",
+   "w": "it's",
+   "key": "it's#1",
+   "sid": "1-02.s2",
+   "f0": 320,
+   "f1": 326,
+   "F0": 794,
+   "F1": 800
+  },
+  {
+   "wid": "1-02.w009",
+   "w": "one",
+   "key": "one#1",
+   "sid": "1-02.s2",
+   "f0": 334,
+   "f1": 342,
+   "F0": 808,
+   "F1": 816
+  },
+  {
+   "wid": "1-02.w010",
+   "w": "of",
+   "key": "of#1",
+   "sid": "1-02.s2",
+   "f0": 344,
+   "f1": 350,
+   "F0": 818,
+   "F1": 824
+  },
+  {
+   "wid": "1-02.w011",
+   "w": "the",
+   "key": "the#1",
+   "sid": "1-02.s2",
+   "f0": 354,
+   "f1": 359,
+   "F0": 828,
+   "F1": 833
+  },
+  {
+   "wid": "1-02.w012",
+   "w": "three",
+   "key": "three#1",
+   "sid": "1-02.s2",
+   "f0": 363,
+   "f1": 378,
+   "F0": 837,
+   "F1": 852
+  },
+  {
+   "wid": "1-02.w013",
+   "w": "deadliest",
+   "key": "deadliest#1",
+   "sid": "1-02.s2",
+   "f0": 381,
+   "f1": 416,
+   "F0": 855,
+   "F1": 890
+  },
+  {
+   "wid": "1-02.w014",
+   "w": "cancers,",
+   "key": "cancers#1",
+   "sid": "1-02.s2",
+   "f0": 419,
+   "f1": 457,
+   "F0": 893,
+   "F1": 931
+  },
+  {
+   "wid": "1-02.w015",
+   "w": "alongside",
+   "key": "alongside#1",
+   "sid": "1-02.s2",
+   "f0": 480,
+   "f1": 521,
+   "F0": 954,
+   "F1": 995
+  },
+  {
+   "wid": "1-02.w016",
+   "w": "lung",
+   "key": "lung#1",
+   "sid": "1-02.s2",
+   "f0": 541,
+   "f1": 557,
+   "F0": 1015,
+   "F1": 1031
+  },
+  {
+   "wid": "1-02.w017",
+   "w": "and",
+   "key": "and#1",
+   "sid": "1-02.s2",
+   "f0": 571,
+   "f1": 578,
+   "F0": 1045,
+   "F1": 1052
+  },
+  {
+   "wid": "1-02.w018",
+   "w": "colorectal.",
+   "key": "colorectal#1",
+   "sid": "1-02.s2",
+   "f0": 581,
+   "f1": 622,
+   "F0": 1055,
+   "F1": 1096
+  },
+  {
+   "wid": "1-02.w019",
+   "w": "And",
+   "key": "and#2",
+   "sid": "1-02.s3",
+   "f0": 659,
+   "f1": 666,
+   "F0": 1133,
+   "F1": 1140
+  },
+  {
+   "wid": "1-02.w020",
+   "w": "it's",
+   "key": "it's#2",
+   "sid": "1-02.s3",
+   "f0": 668,
+   "f1": 677,
+   "F0": 1142,
+   "F1": 1151
+  },
+  {
+   "wid": "1-02.w021",
+   "w": "not",
+   "key": "not#1",
+   "sid": "1-02.s3",
+   "f0": 680,
+   "f1": 690,
+   "F0": 1154,
+   "F1": 1164
+  },
+  {
+   "wid": "1-02.w022",
+   "w": "just",
+   "key": "just#1",
+   "sid": "1-02.s3",
+   "f0": 692,
+   "f1": 706,
+   "F0": 1166,
+   "F1": 1180
+  },
+  {
+   "wid": "1-02.w023",
+   "w": "us.",
+   "key": "us#1",
+   "sid": "1-02.s3",
+   "f0": 708,
+   "f1": 720,
+   "F0": 1182,
+   "F1": 1194
+  },
+  {
+   "wid": "1-02.w024",
+   "w": "Worldwide,",
+   "key": "worldwide#1",
+   "sid": "1-02.s4",
+   "f0": 751,
+   "f1": 786,
+   "F0": 1225,
+   "F1": 1260
+  },
+  {
+   "wid": "1-02.w025",
+   "w": "it's",
+   "key": "it's#3",
+   "sid": "1-02.s4",
+   "f0": 807,
+   "f1": 815,
+   "F0": 1281,
+   "F1": 1289
+  },
+  {
+   "wid": "1-02.w026",
+   "w": "the",
+   "key": "the#2",
+   "sid": "1-02.s4",
+   "f0": 821,
+   "f1": 826,
+   "F0": 1295,
+   "F1": 1300
+  },
+  {
+   "wid": "1-02.w027",
+   "w": "sixth",
+   "key": "sixth#1",
+   "sid": "1-02.s4",
+   "f0": 838,
+   "f1": 858,
+   "F0": 1312,
+   "F1": 1332
+  },
+  {
+   "wid": "1-02.w028",
+   "w": "most",
+   "key": "most#1",
+   "sid": "1-02.s4",
+   "f0": 867,
+   "f1": 882,
+   "F0": 1341,
+   "F1": 1356
+  },
+  {
+   "wid": "1-02.w029",
+   "w": "common",
+   "key": "common#1",
+   "sid": "1-02.s4",
+   "f0": 886,
+   "f1": 906,
+   "F0": 1360,
+   "F1": 1380
+  },
+  {
+   "wid": "1-02.w030",
+   "w": "cancer,",
+   "key": "cancer#1",
+   "sid": "1-02.s4",
+   "f0": 910,
+   "f1": 939,
+   "F0": 1384,
+   "F1": 1413
+  },
+  {
+   "wid": "1-02.w031",
+   "w": "and",
+   "key": "and#3",
+   "sid": "1-02.s4",
+   "f0": 953,
+   "f1": 960,
+   "F0": 1427,
+   "F1": 1434
+  },
+  {
+   "wid": "1-02.w032",
+   "w": "the",
+   "key": "the#3",
+   "sid": "1-02.s4",
+   "f0": 962,
+   "f1": 965,
+   "F0": 1436,
+   "F1": 1439
+  },
+  {
+   "wid": "1-02.w033",
+   "w": "third",
+   "key": "third#1",
+   "sid": "1-02.s4",
+   "f0": 972,
+   "f1": 987,
+   "F0": 1446,
+   "F1": 1461
+  },
+  {
+   "wid": "1-02.w034",
+   "w": "deadliest.",
+   "key": "deadliest#2",
+   "sid": "1-02.s4",
+   "f0": 992,
+   "f1": 1032,
+   "F0": 1466,
+   "F1": 1506
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "1-02.s1",
+   "text": "That's 1,412 people in 2022 alone.",
+   "w_first": "1-02.w001",
+   "w_last": "1-02.w006",
+   "f0": 9,
+   "f1": 262
+  },
+  {
+   "sid": "1-02.s2",
+   "text": "Here, it's one of the three deadliest cancers, alongside lung and colorectal.",
+   "w_first": "1-02.w007",
+   "w_last": "1-02.w018",
+   "f0": 304,
+   "f1": 622
+  },
+  {
+   "sid": "1-02.s3",
+   "text": "And it's not just us.",
+   "w_first": "1-02.w019",
+   "w_last": "1-02.w023",
+   "f0": 659,
+   "f1": 720
+  },
+  {
+   "sid": "1-02.s4",
+   "text": "Worldwide, it's the sixth most common cancer, and the third deadliest.",
+   "w_first": "1-02.w024",
+   "w_last": "1-02.w034",
+   "f0": 751,
+   "f1": 1032
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "footage00",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 0.00→1.10 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 0,
+   "f_land": 0,
+   "f_end": 35,
+   "until": null,
+   "word": "1-02.w001",
+   "w": "That's",
+   "key": "that's#1",
+   "sid": "1-02.s1",
+   "word_f0": 9,
+   "value": [
+    0.0,
+    1.1
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 474,
+   "F_land": 474,
+   "F_end": 509
+  },
+  {
+   "id": "footage01",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 1.10→2.00 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 35,
+   "f_land": 35,
+   "f_end": 187,
+   "until": null,
+   "word": "1-02.w002",
+   "w": "1,412",
+   "key": "1,412#1",
+   "sid": "1-02.s1",
+   "word_f0": 35,
+   "value": [
+    1.1,
+    2.0
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 509,
+   "F_land": 509,
+   "F_end": 661
+  },
+  {
+   "id": "footage02",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 2.00→2.40 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 187,
+   "f_land": 187,
+   "f_end": 244,
+   "until": null,
+   "word": "1-02.w005",
+   "w": "2022",
+   "key": "2022#1",
+   "sid": "1-02.s1",
+   "word_f0": 187,
+   "value": [
+    2.0,
+    2.4
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 661,
+   "F_land": 661,
+   "F_end": 718
+  },
+  {
+   "id": "footage03",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 2.40→4.90 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 244,
+   "f_land": 244,
+   "f_end": 363,
+   "until": null,
+   "word": "1-02.w006",
+   "w": "alone.",
+   "key": "alone#1",
+   "sid": "1-02.s1",
+   "word_f0": 244,
+   "value": [
+    2.4,
+    4.9
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 718,
+   "F_land": 718,
+   "F_end": 837
+  },
+  {
+   "id": "footage04",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 4.90→8.60 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 363,
+   "f_land": 363,
+   "f_end": 680,
+   "until": null,
+   "word": "1-02.w012",
+   "w": "three",
+   "key": "three#1",
+   "sid": "1-02.s2",
+   "word_f0": 363,
+   "value": [
+    4.9,
+    8.6
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 837,
+   "F_land": 837,
+   "F_end": 1154
+  },
+  {
+   "id": "footage05",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 8.60→12.00 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 680,
+   "f_land": 680,
+   "f_end": 838,
+   "until": null,
+   "word": "1-02.w021",
+   "w": "not",
+   "key": "not#1",
+   "sid": "1-02.s3",
+   "word_f0": 680,
+   "value": [
+    8.6,
+    12.0
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 1154,
+   "F_land": 1154,
+   "F_end": 1312
+  },
+  {
+   "id": "footage06",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 12.00→16.85 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 838,
+   "f_land": 838,
+   "f_end": 1032,
+   "until": null,
+   "word": "1-02.w027",
+   "w": "sixth",
+   "key": "sixth#1",
+   "sid": "1-02.s4",
+   "word_f0": 838,
+   "value": [
+    12.0,
+    16.85
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 1312,
+   "F_land": 1312,
+   "F_end": 1506
+  }
+ ],
+ "problems": []
+}

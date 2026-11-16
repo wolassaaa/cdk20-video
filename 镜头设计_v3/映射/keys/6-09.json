@@ -1,0 +1,383 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "6-09",
+ "segs": [
+  "6-09"
+ ],
+ "tool": "warp_source",
+ "fps": 60,
+ "len_f": 722,
+ "cut": "cut_v8",
+ "cut_start_f": 51740,
+ "cut_start_s": 862.33,
+ "master_built": "2026-11-17 02:29:10 +09:00",
+ "words_hash": "3151ddfeadc8",
+ "events_src": "镜头设计_v3/映射/events/6-09.json",
+ "words": [
+  {
+   "wid": "6-09.w006",
+   "w": "further",
+   "key": "further#1",
+   "sid": "6-09.s1",
+   "f0": 9,
+   "f1": 15,
+   "F0": 51749,
+   "F1": 51755
+  },
+  {
+   "wid": "6-09.w007",
+   "w": "down",
+   "key": "down#1",
+   "sid": "6-09.s1",
+   "f0": 15,
+   "f1": 21,
+   "F0": 51755,
+   "F1": 51761
+  },
+  {
+   "wid": "6-09.w008",
+   "w": "the",
+   "key": "the#1",
+   "sid": "6-09.s1",
+   "f0": 22,
+   "f1": 26,
+   "F0": 51762,
+   "F1": 51766
+  },
+  {
+   "wid": "6-09.w009",
+   "w": "road.",
+   "key": "road#1",
+   "sid": "6-09.s1",
+   "f0": 26,
+   "f1": 35,
+   "F0": 51766,
+   "F1": 51775
+  },
+  {
+   "wid": "6-09.w010",
+   "w": "Fewer",
+   "key": "fewer#1",
+   "sid": "6-09.s2",
+   "f0": 35,
+   "f1": 41,
+   "F0": 51775,
+   "F1": 51781
+  },
+  {
+   "wid": "6-09.w011",
+   "w": "failed",
+   "key": "failed#1",
+   "sid": "6-09.s2",
+   "f0": 41,
+   "f1": 48,
+   "F0": 51781,
+   "F1": 51788
+  },
+  {
+   "wid": "6-09.w012",
+   "w": "molecules,",
+   "key": "molecules#1",
+   "sid": "6-09.s2",
+   "f0": 48,
+   "f1": 80,
+   "F0": 51788,
+   "F1": 51820
+  },
+  {
+   "wid": "6-09.w013",
+   "w": "lower",
+   "key": "lower#1",
+   "sid": "6-09.s2",
+   "f0": 104,
+   "f1": 119,
+   "F0": 51844,
+   "F1": 51859
+  },
+  {
+   "wid": "6-09.w014",
+   "w": "costs,",
+   "key": "costs#1",
+   "sid": "6-09.s2",
+   "f0": 123,
+   "f1": 146,
+   "F0": 51863,
+   "F1": 51886
+  },
+  {
+   "wid": "6-09.w015",
+   "w": "fewer",
+   "key": "fewer#2",
+   "sid": "6-09.s2",
+   "f0": 175,
+   "f1": 193,
+   "F0": 51915,
+   "F1": 51933
+  },
+  {
+   "wid": "6-09.w016",
+   "w": "animal",
+   "key": "animal#1",
+   "sid": "6-09.s2",
+   "f0": 196,
+   "f1": 214,
+   "F0": 51936,
+   "F1": 51954
+  },
+  {
+   "wid": "6-09.w017",
+   "w": "tests,",
+   "key": "tests#1",
+   "sid": "6-09.s2",
+   "f0": 215,
+   "f1": 240,
+   "F0": 51955,
+   "F1": 51980
+  },
+  {
+   "wid": "6-09.w018",
+   "w": "less",
+   "key": "less#1",
+   "sid": "6-09.s2",
+   "f0": 264,
+   "f1": 274,
+   "F0": 52004,
+   "F1": 52014
+  },
+  {
+   "wid": "6-09.w019",
+   "w": "chemical",
+   "key": "chemical#1",
+   "sid": "6-09.s2",
+   "f0": 278,
+   "f1": 303,
+   "F0": 52018,
+   "F1": 52043
+  },
+  {
+   "wid": "6-09.w020",
+   "w": "waste.",
+   "key": "waste#1",
+   "sid": "6-09.s2",
+   "f0": 307,
+   "f1": 327,
+   "F0": 52047,
+   "F1": 52067
+  },
+  {
+   "wid": "6-09.w021",
+   "w": "Computing",
+   "key": "computing#1",
+   "sid": "6-09.s3",
+   "f0": 369,
+   "f1": 399,
+   "F0": 52109,
+   "F1": 52139
+  },
+  {
+   "wid": "6-09.w022",
+   "w": "costs",
+   "key": "costs#2",
+   "sid": "6-09.s3",
+   "f0": 401,
+   "f1": 417,
+   "F0": 52141,
+   "F1": 52157
+  },
+  {
+   "wid": "6-09.w023",
+   "w": "electricity",
+   "key": "electricity#1",
+   "sid": "6-09.s3",
+   "f0": 421,
+   "f1": 458,
+   "F0": 52161,
+   "F1": 52198
+  },
+  {
+   "wid": "6-09.w024",
+   "w": "too.",
+   "key": "too#1",
+   "sid": "6-09.s3",
+   "f0": 464,
+   "f1": 476,
+   "F0": 52204,
+   "F1": 52216
+  },
+  {
+   "wid": "6-09.w025",
+   "w": "And",
+   "key": "and#1",
+   "sid": "6-09.s4",
+   "f0": 541,
+   "f1": 546,
+   "F0": 52281,
+   "F1": 52286
+  },
+  {
+   "wid": "6-09.w026",
+   "w": "the",
+   "key": "the#2",
+   "sid": "6-09.s4",
+   "f0": 546,
+   "f1": 550,
+   "F0": 52286,
+   "F1": 52290
+  },
+  {
+   "wid": "6-09.w027",
+   "w": "real",
+   "key": "real#1",
+   "sid": "6-09.s4",
+   "f0": 552,
+   "f1": 563,
+   "F0": 52292,
+   "F1": 52303
+  },
+  {
+   "wid": "6-09.w028",
+   "w": "prize?",
+   "key": "prize#1",
+   "sid": "6-09.s4",
+   "f0": 565,
+   "f1": 595,
+   "F0": 52305,
+   "F1": 52335
+  },
+  {
+   "wid": "6-09.w029",
+   "w": "New",
+   "key": "new#1",
+   "sid": "6-09.s5",
+   "f0": 647,
+   "f1": 655,
+   "F0": 52387,
+   "F1": 52395
+  },
+  {
+   "wid": "6-09.w030",
+   "w": "treatments",
+   "key": "treatments#1",
+   "sid": "6-09.s5",
+   "f0": 661,
+   "f1": 687,
+   "F0": 52401,
+   "F1": 52427
+  },
+  {
+   "wid": "6-09.w031",
+   "w": "for",
+   "key": "for#1",
+   "sid": "6-09.s5",
+   "f0": 689,
+   "f1": 696,
+   "F0": 52429,
+   "F1": 52436
+  },
+  {
+   "wid": "6-09.w032",
+   "w": "patients.",
+   "key": "patients#1",
+   "sid": "6-09.s5",
+   "f0": 699,
+   "f1": 721,
+   "F0": 52439,
+   "F1": 52461
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "6-09.s1",
+   "text": "Now imagine this keeps working further down the road.",
+   "w_first": "6-09.w006",
+   "w_last": "6-09.w009",
+   "f0": 9,
+   "f1": 35
+  },
+  {
+   "sid": "6-09.s2",
+   "text": "Fewer failed molecules, lower costs, fewer animal tests, less chemical waste.",
+   "w_first": "6-09.w010",
+   "w_last": "6-09.w020",
+   "f0": 35,
+   "f1": 327
+  },
+  {
+   "sid": "6-09.s3",
+   "text": "Computing costs electricity too.",
+   "w_first": "6-09.w021",
+   "w_last": "6-09.w024",
+   "f0": 369,
+   "f1": 476
+  },
+  {
+   "sid": "6-09.s4",
+   "text": "And the real prize?",
+   "w_first": "6-09.w025",
+   "w_last": "6-09.w028",
+   "f0": 541,
+   "f1": 595
+  },
+  {
+   "sid": "6-09.s5",
+   "text": "New treatments for patients.",
+   "w_first": "6-09.w029",
+   "w_last": "6-09.w032",
+   "f0": 647,
+   "f1": 721
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "footage00",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 0.00→16.68 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 0,
+   "f_land": 0,
+   "f_end": 698,
+   "until": null,
+   "word": "6-09.w006",
+   "w": "further",
+   "key": "further#1",
+   "sid": "6-09.s1",
+   "word_f0": 9,
+   "value": [
+    0.0,
+    16.683
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 51740,
+   "F_land": 51740,
+   "F_end": 52438
+  },
+  {
+   "id": "footage01",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 16.68→17.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 698,
+   "f_land": 698,
+   "f_end": 721,
+   "until": null,
+   "word": "6-09.w032",
+   "w": "patients.",
+   "key": "patients#1",
+   "sid": "6-09.s5",
+   "word_f0": 699,
+   "value": [
+    16.683,
+    17.45
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 52438,
+   "F_land": 52438,
+   "F_end": 52461
+  }
+ ],
+ "problems": []
+}

@@ -1,0 +1,595 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "6-03",
+ "segs": [
+  "6-03"
+ ],
+ "tool": "warp_source",
+ "fps": 60,
+ "len_f": 896,
+ "cut": "cut_v8",
+ "cut_start_f": 48036,
+ "cut_start_s": 800.6,
+ "master_built": "2026-11-17 02:29:10 +09:00",
+ "words_hash": "462282498014",
+ "events_src": "镜头设计_v3/映射/events/6-03.json",
+ "words": [
+  {
+   "wid": "6-03.w001",
+   "w": "Finding",
+   "key": "finding#1",
+   "sid": "6-03.s1",
+   "f0": 9,
+   "f1": 25,
+   "F0": 48045,
+   "F1": 48061
+  },
+  {
+   "wid": "6-03.w002",
+   "w": "a",
+   "key": "a#1",
+   "sid": "6-03.s1",
+   "f0": 27,
+   "f1": 28,
+   "F0": 48063,
+   "F1": 48064
+  },
+  {
+   "wid": "6-03.w003",
+   "w": "hit.",
+   "key": "hit#1",
+   "sid": "6-03.s1",
+   "f0": 33,
+   "f1": 47,
+   "F0": 48069,
+   "F1": 48083
+  },
+  {
+   "wid": "6-03.w004",
+   "w": "Before:",
+   "key": "before#1",
+   "sid": "6-03.s2",
+   "f0": 68,
+   "f1": 88,
+   "F0": 48104,
+   "F1": 48124
+  },
+  {
+   "wid": "6-03.w005",
+   "w": "screening",
+   "key": "screening#1",
+   "sid": "6-03.s2",
+   "f0": 92,
+   "f1": 117,
+   "F0": 48128,
+   "F1": 48153
+  },
+  {
+   "wid": "6-03.w006",
+   "w": "real",
+   "key": "real#1",
+   "sid": "6-03.s2",
+   "f0": 121,
+   "f1": 134,
+   "F0": 48157,
+   "F1": 48170
+  },
+  {
+   "wid": "6-03.w007",
+   "w": "compounds",
+   "key": "compounds#1",
+   "sid": "6-03.s2",
+   "f0": 138,
+   "f1": 165,
+   "F0": 48174,
+   "F1": 48201
+  },
+  {
+   "wid": "6-03.w008",
+   "w": "by",
+   "key": "by#1",
+   "sid": "6-03.s2",
+   "f0": 168,
+   "f1": 175,
+   "F0": 48204,
+   "F1": 48211
+  },
+  {
+   "wid": "6-03.w009",
+   "w": "the",
+   "key": "the#1",
+   "sid": "6-03.s2",
+   "f0": 176,
+   "f1": 180,
+   "F0": 48212,
+   "F1": 48216
+  },
+  {
+   "wid": "6-03.w010",
+   "w": "millions,",
+   "key": "millions#1",
+   "sid": "6-03.s2",
+   "f0": 181,
+   "f1": 205,
+   "F0": 48217,
+   "F1": 48241
+  },
+  {
+   "wid": "6-03.w011",
+   "w": "an",
+   "key": "an#1",
+   "sid": "6-03.s2",
+   "f0": 236,
+   "f1": 244,
+   "F0": 48272,
+   "F1": 48280
+  },
+  {
+   "wid": "6-03.w012",
+   "w": "approach",
+   "key": "approach#1",
+   "sid": "6-03.s2",
+   "f0": 248,
+   "f1": 272,
+   "F0": 48284,
+   "F1": 48308
+  },
+  {
+   "wid": "6-03.w013",
+   "w": "a",
+   "key": "a#2",
+   "sid": "6-03.s2",
+   "f0": 274,
+   "f1": 276,
+   "F0": 48310,
+   "F1": 48312
+  },
+  {
+   "wid": "6-03.w014",
+   "w": "2023",
+   "key": "2023#1",
+   "sid": "6-03.s2",
+   "f0": 276,
+   "f1": 336,
+   "F0": 48312,
+   "F1": 48372
+  },
+  {
+   "wid": "6-03.w015",
+   "w": "review",
+   "key": "review#1",
+   "sid": "6-03.s2",
+   "f0": 336,
+   "f1": 355,
+   "F0": 48372,
+   "F1": 48391
+  },
+  {
+   "wid": "6-03.w016",
+   "w": "says",
+   "key": "says#1",
+   "sid": "6-03.s2",
+   "f0": 360,
+   "f1": 380,
+   "F0": 48396,
+   "F1": 48416
+  },
+  {
+   "wid": "6-03.w017",
+   "w": "has",
+   "key": "has#1",
+   "sid": "6-03.s2",
+   "f0": 402,
+   "f1": 411,
+   "F0": 48438,
+   "F1": 48447
+  },
+  {
+   "wid": "6-03.w018",
+   "w": "hit",
+   "key": "hit#2",
+   "sid": "6-03.s2",
+   "f0": 415,
+   "f1": 426,
+   "F0": 48451,
+   "F1": 48462
+  },
+  {
+   "wid": "6-03.w019",
+   "w": "a",
+   "key": "a#3",
+   "sid": "6-03.s2",
+   "f0": 428,
+   "f1": 429,
+   "F0": 48464,
+   "F1": 48465
+  },
+  {
+   "wid": "6-03.w020",
+   "w": "costly",
+   "key": "costly#1",
+   "sid": "6-03.s2",
+   "f0": 439,
+   "f1": 466,
+   "F0": 48475,
+   "F1": 48502
+  },
+  {
+   "wid": "6-03.w021",
+   "w": "bottleneck.",
+   "key": "bottleneck#1",
+   "sid": "6-03.s2",
+   "f0": 470,
+   "f1": 499,
+   "F0": 48506,
+   "F1": 48535
+  },
+  {
+   "wid": "6-03.w022",
+   "w": "Now:",
+   "key": "now#1",
+   "sid": "6-03.s3",
+   "f0": 529,
+   "f1": 541,
+   "F0": 48565,
+   "F1": 48577
+  },
+  {
+   "wid": "6-03.w023",
+   "w": "8,918",
+   "key": "8,918#1",
+   "sid": "6-03.s3",
+   "f0": 557,
+   "f1": 636,
+   "F0": 48593,
+   "F1": 48672
+  },
+  {
+   "wid": "6-03.w024",
+   "w": "designs",
+   "key": "designs#1",
+   "sid": "6-03.s3",
+   "f0": 639,
+   "f1": 672,
+   "F0": 48675,
+   "F1": 48708
+  },
+  {
+   "wid": "6-03.w025",
+   "w": "inside",
+   "key": "inside#1",
+   "sid": "6-03.s3",
+   "f0": 692,
+   "f1": 715,
+   "F0": 48728,
+   "F1": 48751
+  },
+  {
+   "wid": "6-03.w026",
+   "w": "a",
+   "key": "a#4",
+   "sid": "6-03.s3",
+   "f0": 717,
+   "f1": 719,
+   "F0": 48753,
+   "F1": 48755
+  },
+  {
+   "wid": "6-03.w027",
+   "w": "computer,",
+   "key": "computer#1",
+   "sid": "6-03.s3",
+   "f0": 722,
+   "f1": 752,
+   "F0": 48758,
+   "F1": 48788
+  },
+  {
+   "wid": "6-03.w028",
+   "w": "and",
+   "key": "and#1",
+   "sid": "6-03.s3",
+   "f0": 757,
+   "f1": 763,
+   "F0": 48793,
+   "F1": 48799
+  },
+  {
+   "wid": "6-03.w029",
+   "w": "just",
+   "key": "just#1",
+   "sid": "6-03.s3",
+   "f0": 764,
+   "f1": 779,
+   "F0": 48800,
+   "F1": 48815
+  },
+  {
+   "wid": "6-03.w030",
+   "w": "13",
+   "key": "13#1",
+   "sid": "6-03.s3",
+   "f0": 785,
+   "f1": 801,
+   "F0": 48821,
+   "F1": 48837
+  },
+  {
+   "wid": "6-03.w031",
+   "w": "molecules",
+   "key": "molecules#1",
+   "sid": "6-03.s3",
+   "f0": 804,
+   "f1": 834,
+   "F0": 48840,
+   "F1": 48870
+  },
+  {
+   "wid": "6-03.w032",
+   "w": "actually",
+   "key": "actually#1",
+   "sid": "6-03.s3",
+   "f0": 838,
+   "f1": 859,
+   "F0": 48874,
+   "F1": 48895
+  },
+  {
+   "wid": "6-03.w033",
+   "w": "made.",
+   "key": "made#1",
+   "sid": "6-03.s3",
+   "f0": 862,
+   "f1": 880,
+   "F0": 48898,
+   "F1": 48916
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "6-03.s1",
+   "text": "Finding a hit.",
+   "w_first": "6-03.w001",
+   "w_last": "6-03.w003",
+   "f0": 9,
+   "f1": 47
+  },
+  {
+   "sid": "6-03.s2",
+   "text": "Before: screening real compounds by the millions, an approach a 2023 review says has hit a costly bottleneck.",
+   "w_first": "6-03.w004",
+   "w_last": "6-03.w021",
+   "f0": 68,
+   "f1": 499
+  },
+  {
+   "sid": "6-03.s3",
+   "text": "Now: 8,918 designs inside a computer, and just 13 molecules actually made.",
+   "w_first": "6-03.w022",
+   "w_last": "6-03.w033",
+   "f0": 529,
+   "f1": 880
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "footage00",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 0.00→1.47 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 0,
+   "f_land": 0,
+   "f_end": 68,
+   "until": null,
+   "word": "6-03.w001",
+   "w": "Finding",
+   "key": "finding#1",
+   "sid": "6-03.s1",
+   "word_f0": 9,
+   "value": [
+    0.0,
+    1.467
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 48036,
+   "F_land": 48036,
+   "F_end": 48104
+  },
+  {
+   "id": "footage01",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 1.47→3.17 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 68,
+   "f_land": 68,
+   "f_end": 138,
+   "until": null,
+   "word": "6-03.w004",
+   "w": "Before:",
+   "key": "before#1",
+   "sid": "6-03.s2",
+   "word_f0": 68,
+   "value": [
+    1.467,
+    3.167
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 48104,
+   "F_land": 48104,
+   "F_end": 48174
+  },
+  {
+   "id": "footage02",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 3.17→4.17 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 138,
+   "f_land": 138,
+   "f_end": 181,
+   "until": null,
+   "word": "6-03.w007",
+   "w": "compounds",
+   "key": "compounds#1",
+   "sid": "6-03.s2",
+   "word_f0": 138,
+   "value": [
+    3.167,
+    4.167
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 48174,
+   "F_land": 48174,
+   "F_end": 48217
+  },
+  {
+   "id": "footage03",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 4.17→7.57 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 181,
+   "f_land": 181,
+   "f_end": 336,
+   "until": null,
+   "word": "6-03.w010",
+   "w": "millions,",
+   "key": "millions#1",
+   "sid": "6-03.s2",
+   "word_f0": 181,
+   "value": [
+    4.167,
+    7.567
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 48217,
+   "F_land": 48217,
+   "F_end": 48372
+  },
+  {
+   "id": "footage04",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 7.57→9.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 336,
+   "f_land": 336,
+   "f_end": 439,
+   "until": null,
+   "word": "6-03.w015",
+   "w": "review",
+   "key": "review#1",
+   "sid": "6-03.s2",
+   "word_f0": 336,
+   "value": [
+    7.567,
+    9.45
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 48372,
+   "F_land": 48372,
+   "F_end": 48475
+  },
+  {
+   "id": "footage05",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 9.45→10.55 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 439,
+   "f_land": 439,
+   "f_end": 470,
+   "until": null,
+   "word": "6-03.w020",
+   "w": "costly",
+   "key": "costly#1",
+   "sid": "6-03.s2",
+   "word_f0": 439,
+   "value": [
+    9.45,
+    10.55
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 48475,
+   "F_land": 48475,
+   "F_end": 48506
+  },
+  {
+   "id": "footage06",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 10.55→15.47 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 470,
+   "f_land": 470,
+   "f_end": 639,
+   "until": null,
+   "word": "6-03.w021",
+   "w": "bottleneck.",
+   "key": "bottleneck#1",
+   "sid": "6-03.s2",
+   "word_f0": 470,
+   "value": [
+    10.55,
+    15.467
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 48506,
+   "F_land": 48506,
+   "F_end": 48675
+  },
+  {
+   "id": "footage07",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 15.47→19.60 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 639,
+   "f_land": 639,
+   "f_end": 838,
+   "until": null,
+   "word": "6-03.w024",
+   "w": "designs",
+   "key": "designs#1",
+   "sid": "6-03.s3",
+   "word_f0": 639,
+   "value": [
+    15.467,
+    19.6
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 48675,
+   "F_land": 48675,
+   "F_end": 48874
+  },
+  {
+   "id": "footage08",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 19.60→20.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 838,
+   "f_land": 838,
+   "f_end": 880,
+   "until": null,
+   "word": "6-03.w032",
+   "w": "actually",
+   "key": "actually#1",
+   "sid": "6-03.s3",
+   "word_f0": 838,
+   "value": [
+    19.6,
+    20.45
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 48874,
+   "F_land": 48874,
+   "F_end": 48916
+  }
+ ],
+ "problems": []
+}

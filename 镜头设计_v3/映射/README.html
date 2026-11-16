@@ -62,7 +62,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 </tr>
 </tbody>
 </table>
-<p>另外两个文件不是本阶段写的：<code>resolve.py</code>、<code>validate_events.py</code>，11-17 02:24 前后由另一个会话写入，本阶段没有用，也没有核对过。</p>
+<p><code>resolve.py</code>、<code>validate_events.py</code>、<code>migrate_beats_v8.py</code>、<code>check_sync.py</code>、<code>事件表格式.md</code>、<code>keys/</code> 是第二阶段写的，见第 6 节。</p>
 <h2>2. 总表格式（<code>schema: cdk20.wordmap/1</code>）</h2>
 <ul>
 <li>顶层：<code>fps</code>=60；<code>cut</code>（cut_v8.mp4 的路径、大小、修改时间）；<code>script</code>（剧本 v3.3，已锁定）；<code>rules</code>；<code>missing_script_words</code>；<code>groups</code>（70 段，和 cut_v8.json 一一对应，出镜对话组写成 <code>1-05+1-06+1-07</code>）。</li>
@@ -179,4 +179,69 @@ _env/footage/Scripts/python.exe 镜头设计_v3/映射/verify_render.py &lt;out.
 <li>样板 A v4：已批准，但没接进 cut_v8。原生片片头 2–8 帧被判成疑似混帧，可能是流料起步的柔边造成的误报，要人看。</li>
 <li>W2/W3 是批准成片，不动；W0、W1、W5 没有词。</li>
 <li>帧完整性检测的局限：柔边慢长、透明度渐变在数学上就像混帧。表里声明 flow/fade 的会排除；其余的列为疑似，要人看。</li>
+</ul>
+<h2>6. 第二阶段（11-17 02:25 起）：事件表 → 帧号、校验、迁移、对片检查</h2>
+<p>HKBU SCIE1007 课程作业的科普视频。第一阶段建了总表，第二阶段让事件表成为时间的唯一来源。</p>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>事件表格式.md</code></td>
+<td>事件表怎么写：<code>at</code>（起于哪个词 + 偏移帧）、<code>lead</code>、<code>until</code>（词 / 句尾 / dur / 另一个事件）、七个动词、ease。第一阶段的 <code>land/lead/start/until</code> 写法照样认</td>
+</tr>
+<tr>
+<td><code>validate_events.py</code></td>
+<td>校验：V1 格式，V2 词存在，V3 顺序和越界，V4 每句说话期间无事件 ≤90 帧（1.5 s），V5 末事件到句尾</td>
+</tr>
+<tr>
+<td><code>resolve.py</code></td>
+<td>事件表 + 总表 → <code>keys/&lt;段&gt;.json</code>：每个事件的段内帧 <code>f_start/f_land/f_end</code> 和片内帧 <code>F_*</code>（原生 60 fps），附这段的词、句和 <code>words_hash</code>（录音或剪辑一改，hash 变了就知道这段要重渲）</td>
+</tr>
+<tr>
+<td><code>migrate_beats_v8.py</code></td>
+<td>把 45 段 <code>粗剪/对时/beats_v8</code> 转成事件表，写 <code>_reports/迁移清单.md/.json</code></td>
+</tr>
+<tr>
+<td><code>check_sync.py</code></td>
+<td>对一段渲好的视频查：S1 事件帧和词帧（表内偏差、事件起点 ±2 帧画面有没有动），S2 动作到句尾，S3 句内 1.5 s 没有动作，S4 帧率完整性（调用 <code>frame_integrity.classify</code>，判断"像 30 帧"）</td>
+</tr>
+</tbody>
+</table>
+<p><code>build_master.py</code> 的手写事件导入改成调用 <code>resolve.resolve_doc</code>，所以两边算出的帧是同一套。1-08 有了 <code>events/1-08.json</code> 以后，就不再从 <code>s108_events_v4.json</code> 导入。其它迁移表和 beats、托盘导入的是同一来源，不重复导入。改完 C1–C7 的结果和第一阶段一样：C5、C6 还是那 1 处托盘问题，没有新增不过项。</p>
+<h3>怎么加一段</h3>
+<ol>
+<li>照 <code>事件表格式.md</code> 写 <code>events/&lt;段&gt;.json</code>。每个画面事件挂在一个词上，动作一直接到句尾。</li>
+<li>跑 <code>validate_events.py &lt;段&gt;</code>，不过就改表。</li>
+<li>跑 <code>resolve.py &lt;段&gt;</code>，得到 <code>keys/&lt;段&gt;.json</code>。</li>
+<li>Blender 用 <code>bl_maptable.py</code>，或直接读 keys 的 <code>events[*].f_*</code>；Remotion 用 <code>mapTable.mjs</code>（<code>export_remotion.py</code> 出的表里事件帧号相同）。原生 60 fps 渲。</li>
+<li>渲出来后跑 <code>check_sync.py &lt;片&gt; &lt;段&gt;</code>。验证用的片出 ProRes 4444，x264 会误报 2–4 帧。</li>
+</ol>
+<h3>怎么改时间</h3>
+<ul>
+<li>想让动作提前或推后，改事件的 <code>off</code> 或 <code>lead</code>，不要改帧号。</li>
+<li>录音或剪辑改了：先跑 <code>build_master.py</code>，再跑 <code>resolve.py</code>。比较新旧 <code>keys/&lt;段&gt;.json</code> 的 <code>words_hash</code> 和事件帧，变了的段才重渲。</li>
+</ul>
+<h3>GLM 能跑的命令（只读，或只写 映射/）</h3>
+<pre><code>bash _env/ft.sh mapbuild                      # 依次跑 总表 → C1–C7 检查 → keys → 全部校验（_reports/validate.json）
+bash _env/ft.sh mapcheck 1-08                 # 校验一段事件表
+bash _env/ft.sh mapcheck 1-08 &lt;片.mp4&gt;        # 再加一段渲好的片做对片检查
+bash _env/ft.sh mapcheck 1-08 镜头设计_v3/粗剪/cut_v8.mp4 61.47 15.5   # 从整片里截出这段来查
+</code></pre>
+<h3>本次结果（11-17）</h3>
+<ul>
+<li>迁移：45 段全部转出事件表，结构校验全过。其中 2-03 是第一阶段的手写表，没有覆盖。</li>
+<li>1-08：完整转好，47 个事件。机位、压实、收料、1 in 10 这些 v4 里写死的时间也都进了表。</li>
+<li>第 5 章 5 段（5-01、5-03、5-07、5-08、5-10）：语义事件 + 变速锚点。</li>
+<li>其余 38 段：只有变速锚点，转成 <code>footage</code> 事件。这些段能原生重渲旧动画，但"说到哪个词、哪个东西出现"要手写，名单在 <code>_reports/迁移清单.md</code>。</li>
+<li>注意：只有锚点的段校验能过，是因为 footage 事件把整句都盖住了，不代表语义上已经对上词。</li>
+<li>1-08 事件表解出的帧和 v4 的事件帧比：38 个里 37 个一致；keep_up 早 1 帧（775，对上实测 "one" 的开口，v4 用的是预测时刻）。和 v5 比：33 个一致，5 个差 1 帧（bill1 和 pillx5/7/8/9）。差别来自 v5 自己重算的错开逻辑，表里是按词 + 偏移。</li>
+<li>check_sync 演示，两条都是 x264：</li>
+<li>cut_v8 里的 1-08（30 fps）：表内对词偏差 0；事件起点 ±2 帧有动 44/47（cam_push、pill0、head_and 这三个时刻画面没动，因为 cut_v8 放的还是旧动画）；到句尾过；最长静止 32 帧；帧率判"像 30 帧"。不过。</li>
+<li>样板 A v4（60 fps）：表内偏差 0；有动 46/47（stack_press 起点 ±2 帧量不到明显变化，压实只有 5 mm）；到句尾过；最长静止 14 帧；混帧 7（片头 2–8 帧流料柔边，第一阶段已标疑似误报），判原生 60。S1 因为这 1 个事件不过。</li>
+<li>第二阶段没有新做 Blender 渲染。1-08 端到端（v5，120 帧 0 重复 0 混帧）是第一阶段做的。</li>
 </ul>

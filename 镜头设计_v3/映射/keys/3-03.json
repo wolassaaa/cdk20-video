@@ -1,0 +1,521 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "3-03",
+ "segs": [
+  "3-03"
+ ],
+ "tool": "warp_source",
+ "fps": 60,
+ "len_f": 732,
+ "cut": "cut_v8",
+ "cut_start_f": 17966,
+ "cut_start_s": 299.43,
+ "master_built": "2026-11-17 02:29:10 +09:00",
+ "words_hash": "6d8a5042f6e9",
+ "events_src": "镜头设计_v3/映射/events/3-03.json",
+ "words": [
+  {
+   "wid": "3-03.w001",
+   "w": "Scientists",
+   "key": "scientists#1",
+   "sid": "3-03.s1",
+   "f0": 9,
+   "f1": 51,
+   "F0": 17975,
+   "F1": 18017
+  },
+  {
+   "wid": "3-03.w002",
+   "w": "call",
+   "key": "call#1",
+   "sid": "3-03.s1",
+   "f0": 61,
+   "f1": 78,
+   "F0": 18027,
+   "F1": 18044
+  },
+  {
+   "wid": "3-03.w003",
+   "w": "the",
+   "key": "the#1",
+   "sid": "3-03.s1",
+   "f0": 80,
+   "f1": 85,
+   "F0": 18046,
+   "F1": 18051
+  },
+  {
+   "wid": "3-03.w004",
+   "w": "lock",
+   "key": "lock#1",
+   "sid": "3-03.s1",
+   "f0": 98,
+   "f1": 112,
+   "F0": 18064,
+   "F1": 18078
+  },
+  {
+   "wid": "3-03.w005",
+   "w": "the",
+   "key": "the#2",
+   "sid": "3-03.s1",
+   "f0": 117,
+   "f1": 122,
+   "F0": 18083,
+   "F1": 18088
+  },
+  {
+   "wid": "3-03.w006",
+   "w": "target,",
+   "key": "target#1",
+   "sid": "3-03.s1",
+   "f0": 127,
+   "f1": 157,
+   "F0": 18093,
+   "F1": 18123
+  },
+  {
+   "wid": "3-03.w007",
+   "w": "and",
+   "key": "and#1",
+   "sid": "3-03.s1",
+   "f0": 193,
+   "f1": 200,
+   "F0": 18159,
+   "F1": 18166
+  },
+  {
+   "wid": "3-03.w008",
+   "w": "the",
+   "key": "the#3",
+   "sid": "3-03.s1",
+   "f0": 201,
+   "f1": 205,
+   "F0": 18167,
+   "F1": 18171
+  },
+  {
+   "wid": "3-03.w009",
+   "w": "key",
+   "key": "key#1",
+   "sid": "3-03.s1",
+   "f0": 210,
+   "f1": 227,
+   "F0": 18176,
+   "F1": 18193
+  },
+  {
+   "wid": "3-03.w010",
+   "w": "a",
+   "key": "a#1",
+   "sid": "3-03.s1",
+   "f0": 228,
+   "f1": 229,
+   "F0": 18194,
+   "F1": 18195
+  },
+  {
+   "wid": "3-03.w011",
+   "w": "candidate",
+   "key": "candidate#1",
+   "sid": "3-03.s1",
+   "f0": 237,
+   "f1": 269,
+   "F0": 18203,
+   "F1": 18235
+  },
+  {
+   "wid": "3-03.w012",
+   "w": "molecule.",
+   "key": "molecule#1",
+   "sid": "3-03.s1",
+   "f0": 272,
+   "f1": 301,
+   "F0": 18238,
+   "F1": 18267
+  },
+  {
+   "wid": "3-03.w013",
+   "w": "A",
+   "key": "a#2",
+   "sid": "3-03.s2",
+   "f0": 330,
+   "f1": 331,
+   "F0": 18296,
+   "F1": 18297
+  },
+  {
+   "wid": "3-03.w014",
+   "w": "good",
+   "key": "good#1",
+   "sid": "3-03.s2",
+   "f0": 338,
+   "f1": 351,
+   "F0": 18304,
+   "F1": 18317
+  },
+  {
+   "wid": "3-03.w015",
+   "w": "key",
+   "key": "key#2",
+   "sid": "3-03.s2",
+   "f0": 356,
+   "f1": 369,
+   "F0": 18322,
+   "F1": 18335
+  },
+  {
+   "wid": "3-03.w016",
+   "w": "fits",
+   "key": "fits#1",
+   "sid": "3-03.s2",
+   "f0": 374,
+   "f1": 389,
+   "F0": 18340,
+   "F1": 18355
+  },
+  {
+   "wid": "3-03.w017",
+   "w": "its",
+   "key": "its#1",
+   "sid": "3-03.s2",
+   "f0": 396,
+   "f1": 403,
+   "F0": 18362,
+   "F1": 18369
+  },
+  {
+   "wid": "3-03.w018",
+   "w": "own",
+   "key": "own#1",
+   "sid": "3-03.s2",
+   "f0": 413,
+   "f1": 425,
+   "F0": 18379,
+   "F1": 18391
+  },
+  {
+   "wid": "3-03.w019",
+   "w": "lock",
+   "key": "lock#2",
+   "sid": "3-03.s2",
+   "f0": 430,
+   "f1": 443,
+   "F0": 18396,
+   "F1": 18409
+  },
+  {
+   "wid": "3-03.w020",
+   "w": "tightly,",
+   "key": "tightly#1",
+   "sid": "3-03.s2",
+   "f0": 448,
+   "f1": 478,
+   "F0": 18414,
+   "F1": 18444
+  },
+  {
+   "wid": "3-03.w021",
+   "w": "and",
+   "key": "and#2",
+   "sid": "3-03.s2",
+   "f0": 493,
+   "f1": 503,
+   "F0": 18459,
+   "F1": 18469
+  },
+  {
+   "wid": "3-03.w022",
+   "w": "opens",
+   "key": "opens#1",
+   "sid": "3-03.s2",
+   "f0": 512,
+   "f1": 535,
+   "F0": 18478,
+   "F1": 18501
+  },
+  {
+   "wid": "3-03.w023",
+   "w": "no",
+   "key": "no#1",
+   "sid": "3-03.s2",
+   "f0": 535,
+   "f1": 541,
+   "F0": 18501,
+   "F1": 18507
+  },
+  {
+   "wid": "3-03.w024",
+   "w": "one",
+   "key": "one#1",
+   "sid": "3-03.s2",
+   "f0": 551,
+   "f1": 559,
+   "F0": 18517,
+   "F1": 18525
+  },
+  {
+   "wid": "3-03.w025",
+   "w": "else's.",
+   "key": "else's#1",
+   "sid": "3-03.s2",
+   "f0": 563,
+   "f1": 592,
+   "F0": 18529,
+   "F1": 18558
+  },
+  {
+   "wid": "3-03.w026",
+   "w": "That's",
+   "key": "that's#1",
+   "sid": "3-03.s3",
+   "f0": 634,
+   "f1": 646,
+   "F0": 18600,
+   "F1": 18612
+  },
+  {
+   "wid": "3-03.w027",
+   "w": "called",
+   "key": "called#1",
+   "sid": "3-03.s3",
+   "f0": 651,
+   "f1": 667,
+   "F0": 18617,
+   "F1": 18633
+  },
+  {
+   "wid": "3-03.w028",
+   "w": "selectivity.",
+   "key": "selectivity#1",
+   "sid": "3-03.s3",
+   "f0": 673,
+   "f1": 718,
+   "F0": 18639,
+   "F1": 18684
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "3-03.s1",
+   "text": "Scientists call the lock the target, and the key a candidate molecule.",
+   "w_first": "3-03.w001",
+   "w_last": "3-03.w012",
+   "f0": 9,
+   "f1": 301
+  },
+  {
+   "sid": "3-03.s2",
+   "text": "A good key fits its own lock tightly, and opens no one else's.",
+   "w_first": "3-03.w013",
+   "w_last": "3-03.w025",
+   "f0": 330,
+   "f1": 592
+  },
+  {
+   "sid": "3-03.s3",
+   "text": "That's called selectivity.",
+   "w_first": "3-03.w026",
+   "w_last": "3-03.w028",
+   "f0": 634,
+   "f1": 718
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "footage00",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 0.00→5.25 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 0,
+   "f_land": 0,
+   "f_end": 6,
+   "until": null,
+   "word": "3-03.w001",
+   "w": "Scientists",
+   "key": "scientists#1",
+   "sid": "3-03.s1",
+   "word_f0": 9,
+   "value": [
+    0.0,
+    5.25
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 17966,
+   "F_land": 17966,
+   "F_end": 17972
+  },
+  {
+   "id": "footage01",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 5.25→5.65 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 6,
+   "f_land": 6,
+   "f_end": 61,
+   "until": null,
+   "word": "3-03.w001",
+   "w": "Scientists",
+   "key": "scientists#1",
+   "sid": "3-03.s1",
+   "word_f0": 9,
+   "value": [
+    5.25,
+    5.65
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 17972,
+   "F_land": 17972,
+   "F_end": 18027
+  },
+  {
+   "id": "footage02",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 5.65→6.75 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 61,
+   "f_land": 61,
+   "f_end": 127,
+   "until": null,
+   "word": "3-03.w002",
+   "w": "call",
+   "key": "call#1",
+   "sid": "3-03.s1",
+   "word_f0": 61,
+   "value": [
+    5.65,
+    6.75
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 18027,
+   "F_land": 18027,
+   "F_end": 18093
+  },
+  {
+   "id": "footage03",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 6.75→7.70 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 127,
+   "f_land": 127,
+   "f_end": 237,
+   "until": null,
+   "word": "3-03.w006",
+   "w": "target,",
+   "key": "target#1",
+   "sid": "3-03.s1",
+   "word_f0": 127,
+   "value": [
+    6.75,
+    7.7
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 18093,
+   "F_land": 18093,
+   "F_end": 18203
+  },
+  {
+   "id": "footage04",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 7.70→8.57 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 237,
+   "f_land": 237,
+   "f_end": 272,
+   "until": null,
+   "word": "3-03.w011",
+   "w": "candidate",
+   "key": "candidate#1",
+   "sid": "3-03.s1",
+   "word_f0": 237,
+   "value": [
+    7.7,
+    8.567
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 18203,
+   "F_land": 18203,
+   "F_end": 18238
+  },
+  {
+   "id": "footage05",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 8.57→9.28 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 272,
+   "f_land": 272,
+   "f_end": 338,
+   "until": null,
+   "word": "3-03.w012",
+   "w": "molecule.",
+   "key": "molecule#1",
+   "sid": "3-03.s1",
+   "word_f0": 272,
+   "value": [
+    8.567,
+    9.283
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 18238,
+   "F_land": 18238,
+   "F_end": 18304
+  },
+  {
+   "id": "footage06",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 9.28→12.98 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 338,
+   "f_land": 338,
+   "f_end": 673,
+   "until": null,
+   "word": "3-03.w014",
+   "w": "good",
+   "key": "good#1",
+   "sid": "3-03.s2",
+   "word_f0": 338,
+   "value": [
+    9.283,
+    12.983
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 18304,
+   "F_land": 18304,
+   "F_end": 18639
+  },
+  {
+   "id": "footage07",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 12.98→13.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 673,
+   "f_land": 673,
+   "f_end": 718,
+   "until": null,
+   "word": "3-03.w028",
+   "w": "selectivity.",
+   "key": "selectivity#1",
+   "sid": "3-03.s3",
+   "word_f0": 673,
+   "value": [
+    12.983,
+    13.45
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 18639,
+   "F_land": 18639,
+   "F_end": 18684
+  }
+ ],
+ "problems": []
+}

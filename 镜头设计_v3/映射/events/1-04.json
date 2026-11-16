@@ -1,0 +1,125 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "1-04",
+ "tool": "warp_source",
+ "migrated": "migrate_beats_v8",
+ "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
+ "source": "镜头设计_v3/粗剪/对时/beats_v8/1-04.json",
+ "holds": [],
+ "events": [
+  {
+   "id": "footage00",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "1-04.w001",
+    "off": -9
+   },
+   "until": {
+    "dur": 69
+   },
+   "ease": "linear",
+   "means": "旧动画源片 0.00→1.64 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    0.0,
+    1.64
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage01",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "1-04.w004",
+    "off": 0
+   },
+   "until": {
+    "dur": 174
+   },
+   "ease": "linear",
+   "means": "旧动画源片 1.64→2.64 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    1.64,
+    2.64
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage02",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "1-04.w011",
+    "off": 0
+   },
+   "until": {
+    "dur": 132
+   },
+   "ease": "linear",
+   "means": "旧动画源片 2.64→4.24 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    2.64,
+    4.24
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage03",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "1-04.w015",
+    "off": 0
+   },
+   "until": {
+    "dur": 460
+   },
+   "ease": "linear",
+   "means": "旧动画源片 4.24→12.74 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    4.24,
+    12.74
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage04",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "1-04.w028",
+    "off": 0
+   },
+   "until": {
+    "dur": 65
+   },
+   "ease": "linear",
+   "means": "旧动画源片 12.74→14.04 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    12.74,
+    14.04
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage05",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "1-04.w030",
+    "off": 0
+   },
+   "until": {
+    "dur": 352
+   },
+   "ease": "linear",
+   "means": "旧动画源片 14.04→20.73 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    14.04,
+    20.733
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  }
+ ]
+}

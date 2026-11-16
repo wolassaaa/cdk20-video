@@ -1,0 +1,258 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "2-07",
+ "tool": "warp_source",
+ "migrated": "migrate_beats_v8",
+ "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
+ "source": "镜头设计_v3/粗剪/对时/beats_v8/2-07.json",
+ "holds": [],
+ "events": [
+  {
+   "id": "footage00",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "2-07.w001",
+    "off": -9
+   },
+   "until": {
+    "dur": 6
+   },
+   "ease": "linear",
+   "means": "旧动画源片 0.00→0.62 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    0.0,
+    0.617
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage01",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "2-07.w001",
+    "off": -3
+   },
+   "until": {
+    "dur": 52
+   },
+   "ease": "linear",
+   "means": "旧动画源片 0.62→1.58 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    0.617,
+    1.583
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage02",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "2-07.w003",
+    "off": 0
+   },
+   "until": {
+    "dur": 130
+   },
+   "ease": "linear",
+   "means": "旧动画源片 1.58→3.10 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    1.583,
+    3.1
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage03",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "2-07.w006",
+    "off": 0
+   },
+   "until": {
+    "dur": 114
+   },
+   "ease": "linear",
+   "means": "旧动画源片 3.10→4.55 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    3.1,
+    4.55
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage04",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "2-07.w011",
+    "off": 0
+   },
+   "until": {
+    "dur": 48
+   },
+   "ease": "linear",
+   "means": "旧动画源片 4.55→4.93 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    4.55,
+    4.933
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage05",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "2-07.w014",
+    "off": 0
+   },
+   "until": {
+    "dur": 64
+   },
+   "ease": "linear",
+   "means": "旧动画源片 4.93→5.75 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    4.933,
+    5.75
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage06",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "2-07.w017",
+    "off": 0
+   },
+   "until": {
+    "dur": 43
+   },
+   "ease": "linear",
+   "means": "旧动画源片 5.75→6.27 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    5.75,
+    6.267
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage07",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "2-07.w020",
+    "off": 0
+   },
+   "until": {
+    "dur": 133
+   },
+   "ease": "linear",
+   "means": "旧动画源片 6.27→8.02 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    6.267,
+    8.017
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage08",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "2-07.w024",
+    "off": 0
+   },
+   "until": {
+    "dur": 52
+   },
+   "ease": "linear",
+   "means": "旧动画源片 8.02→9.28 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    8.017,
+    9.283
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage09",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "2-07.w025",
+    "off": 0
+   },
+   "until": {
+    "dur": 33
+   },
+   "ease": "linear",
+   "means": "旧动画源片 9.28→9.98 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    9.283,
+    9.983
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage10",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "2-07.w027",
+    "off": 0
+   },
+   "until": {
+    "dur": 172
+   },
+   "ease": "linear",
+   "means": "旧动画源片 9.98→12.48 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    9.983,
+    12.483
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage11",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "2-07.w031",
+    "off": 0
+   },
+   "until": {
+    "dur": 782
+   },
+   "ease": "linear",
+   "means": "旧动画源片 12.48→24.47 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    12.483,
+    24.467
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage12",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "2-07.w054",
+    "off": 0
+   },
+   "until": {
+    "dur": 152
+   },
+   "ease": "linear",
+   "means": "旧动画源片 24.47→26.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    24.467,
+    26.45
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  }
+ ]
+}

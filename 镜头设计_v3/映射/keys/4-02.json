@@ -1,0 +1,653 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "4-02",
+ "segs": [
+  "4-02"
+ ],
+ "tool": "warp_source",
+ "fps": 60,
+ "len_f": 1120,
+ "cut": "cut_v8",
+ "cut_start_f": 27636,
+ "cut_start_s": 460.6,
+ "master_built": "2026-11-17 02:29:10 +09:00",
+ "words_hash": "d3ea8bf01598",
+ "events_src": "镜头设计_v3/映射/events/4-02.json",
+ "words": [
+  {
+   "wid": "4-02.w001",
+   "w": "Before,",
+   "key": "before#1",
+   "sid": "4-02.s1",
+   "f0": 2,
+   "f1": 23,
+   "F0": 27638,
+   "F1": 27659
+  },
+  {
+   "wid": "4-02.w002",
+   "w": "you'd",
+   "key": "you'd#1",
+   "sid": "4-02.s1",
+   "f0": 47,
+   "f1": 56,
+   "F0": 27683,
+   "F1": 27692
+  },
+  {
+   "wid": "4-02.w003",
+   "w": "need",
+   "key": "need#1",
+   "sid": "4-02.s1",
+   "f0": 56,
+   "f1": 65,
+   "F0": 27692,
+   "F1": 27701
+  },
+  {
+   "wid": "4-02.w004",
+   "w": "a",
+   "key": "a#1",
+   "sid": "4-02.s1",
+   "f0": 67,
+   "f1": 68,
+   "F0": 27703,
+   "F1": 27704
+  },
+  {
+   "wid": "4-02.w005",
+   "w": "lab-measured",
+   "key": "lab-measured#1",
+   "sid": "4-02.s1",
+   "f0": 76,
+   "f1": 114,
+   "F0": 27712,
+   "F1": 27750
+  },
+  {
+   "wid": "4-02.w006",
+   "w": "structure.",
+   "key": "structure#1",
+   "sid": "4-02.s1",
+   "f0": 119,
+   "f1": 148,
+   "F0": 27755,
+   "F1": 27784
+  },
+  {
+   "wid": "4-02.w007",
+   "w": "Now?",
+   "key": "now#1",
+   "sid": "4-02.s2",
+   "f0": 206,
+   "f1": 221,
+   "F0": 27842,
+   "F1": 27857
+  },
+  {
+   "wid": "4-02.w008",
+   "w": "The",
+   "key": "the#1",
+   "sid": "4-02.s3",
+   "f0": 259,
+   "f1": 263,
+   "F0": 27895,
+   "F1": 27899
+  },
+  {
+   "wid": "4-02.w009",
+   "w": "team",
+   "key": "team#1",
+   "sid": "4-02.s3",
+   "f0": 267,
+   "f1": 280,
+   "F0": 27903,
+   "F1": 27916
+  },
+  {
+   "wid": "4-02.w010",
+   "w": "just",
+   "key": "just#1",
+   "sid": "4-02.s3",
+   "f0": 286,
+   "f1": 298,
+   "F0": 27922,
+   "F1": 27934
+  },
+  {
+   "wid": "4-02.w011",
+   "w": "downloaded",
+   "key": "downloaded#1",
+   "sid": "4-02.s3",
+   "f0": 301,
+   "f1": 334,
+   "F0": 27937,
+   "F1": 27970
+  },
+  {
+   "wid": "4-02.w012",
+   "w": "a",
+   "key": "a#2",
+   "sid": "4-02.s3",
+   "f0": 342,
+   "f1": 343,
+   "F0": 27978,
+   "F1": 27979
+  },
+  {
+   "wid": "4-02.w013",
+   "w": "prediction,",
+   "key": "prediction#1",
+   "sid": "4-02.s3",
+   "f0": 349,
+   "f1": 388,
+   "F0": 27985,
+   "F1": 28024
+  },
+  {
+   "wid": "4-02.w014",
+   "w": "for",
+   "key": "for#1",
+   "sid": "4-02.s3",
+   "f0": 420,
+   "f1": 427,
+   "F0": 28056,
+   "F1": 28063
+  },
+  {
+   "wid": "4-02.w015",
+   "w": "free,",
+   "key": "free#1",
+   "sid": "4-02.s3",
+   "f0": 431,
+   "f1": 445,
+   "F0": 28067,
+   "F1": 28081
+  },
+  {
+   "wid": "4-02.w016",
+   "w": "from",
+   "key": "from#1",
+   "sid": "4-02.s3",
+   "f0": 474,
+   "f1": 483,
+   "F0": 28110,
+   "F1": 28119
+  },
+  {
+   "wid": "4-02.w017",
+   "w": "a",
+   "key": "a#3",
+   "sid": "4-02.s3",
+   "f0": 485,
+   "f1": 486,
+   "F0": 28121,
+   "F1": 28122
+  },
+  {
+   "wid": "4-02.w018",
+   "w": "public",
+   "key": "public#1",
+   "sid": "4-02.s3",
+   "f0": 491,
+   "f1": 514,
+   "F0": 28127,
+   "F1": 28150
+  },
+  {
+   "wid": "4-02.w019",
+   "w": "database.",
+   "key": "database#1",
+   "sid": "4-02.s3",
+   "f0": 533,
+   "f1": 573,
+   "F0": 28169,
+   "F1": 28209
+  },
+  {
+   "wid": "4-02.w020",
+   "w": "According",
+   "key": "according#1",
+   "sid": "4-02.s4",
+   "f0": 637,
+   "f1": 658,
+   "F0": 28273,
+   "F1": 28294
+  },
+  {
+   "wid": "4-02.w021",
+   "w": "to",
+   "key": "to#1",
+   "sid": "4-02.s4",
+   "f0": 659,
+   "f1": 663,
+   "F0": 28295,
+   "F1": 28299
+  },
+  {
+   "wid": "4-02.w022",
+   "w": "the",
+   "key": "the#2",
+   "sid": "4-02.s4",
+   "f0": 665,
+   "f1": 669,
+   "F0": 28301,
+   "F1": 28305
+  },
+  {
+   "wid": "4-02.w023",
+   "w": "paper,",
+   "key": "paper#1",
+   "sid": "4-02.s4",
+   "f0": 671,
+   "f1": 691,
+   "F0": 28307,
+   "F1": 28327
+  },
+  {
+   "wid": "4-02.w024",
+   "w": "this",
+   "key": "this#1",
+   "sid": "4-02.s4",
+   "f0": 764,
+   "f1": 773,
+   "F0": 28400,
+   "F1": 28409
+  },
+  {
+   "wid": "4-02.w025",
+   "w": "was",
+   "key": "was#1",
+   "sid": "4-02.s4",
+   "f0": 778,
+   "f1": 789,
+   "F0": 28414,
+   "F1": 28425
+  },
+  {
+   "wid": "4-02.w026",
+   "w": "the",
+   "key": "the#3",
+   "sid": "4-02.s4",
+   "f0": 791,
+   "f1": 797,
+   "F0": 28427,
+   "F1": 28433
+  },
+  {
+   "wid": "4-02.w027",
+   "w": "first",
+   "key": "first#1",
+   "sid": "4-02.s4",
+   "f0": 806,
+   "f1": 821,
+   "F0": 28442,
+   "F1": 28457
+  },
+  {
+   "wid": "4-02.w028",
+   "w": "time",
+   "key": "time#1",
+   "sid": "4-02.s4",
+   "f0": 824,
+   "f1": 839,
+   "F0": 28460,
+   "F1": 28475
+  },
+  {
+   "wid": "4-02.w029",
+   "w": "AlphaFold",
+   "key": "alphafold#1",
+   "sid": "4-02.s4",
+   "f0": 851,
+   "f1": 881,
+   "F0": 28487,
+   "F1": 28517
+  },
+  {
+   "wid": "4-02.w030",
+   "w": "had",
+   "key": "had#1",
+   "sid": "4-02.s4",
+   "f0": 910,
+   "f1": 922,
+   "F0": 28546,
+   "F1": 28558
+  },
+  {
+   "wid": "4-02.w031",
+   "w": "been",
+   "key": "been#1",
+   "sid": "4-02.s4",
+   "f0": 927,
+   "f1": 936,
+   "F0": 28563,
+   "F1": 28572
+  },
+  {
+   "wid": "4-02.w032",
+   "w": "used",
+   "key": "used#1",
+   "sid": "4-02.s4",
+   "f0": 947,
+   "f1": 966,
+   "F0": 28583,
+   "F1": 28602
+  },
+  {
+   "wid": "4-02.w033",
+   "w": "to",
+   "key": "to#2",
+   "sid": "4-02.s4",
+   "f0": 1006,
+   "f1": 1012,
+   "F0": 28642,
+   "F1": 28648
+  },
+  {
+   "wid": "4-02.w034",
+   "w": "find",
+   "key": "find#1",
+   "sid": "4-02.s4",
+   "f0": 1019,
+   "f1": 1035,
+   "F0": 28655,
+   "F1": 28671
+  },
+  {
+   "wid": "4-02.w035",
+   "w": "a",
+   "key": "a#4",
+   "sid": "4-02.s4",
+   "f0": 1037,
+   "f1": 1038,
+   "F0": 28673,
+   "F1": 28674
+  },
+  {
+   "wid": "4-02.w036",
+   "w": "hit",
+   "key": "hit#1",
+   "sid": "4-02.s4",
+   "f0": 1047,
+   "f1": 1064,
+   "F0": 28683,
+   "F1": 28700
+  },
+  {
+   "wid": "4-02.w037",
+   "w": "like",
+   "key": "like#1",
+   "sid": "4-02.s4",
+   "f0": 1079,
+   "f1": 1090,
+   "F0": 28715,
+   "F1": 28726
+  },
+  {
+   "wid": "4-02.w038",
+   "w": "this.",
+   "key": "this#2",
+   "sid": "4-02.s4",
+   "f0": 1090,
+   "f1": 1106,
+   "F0": 28726,
+   "F1": 28742
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "4-02.s1",
+   "text": "Before, you'd need a lab-measured structure.",
+   "w_first": "4-02.w001",
+   "w_last": "4-02.w006",
+   "f0": 2,
+   "f1": 148
+  },
+  {
+   "sid": "4-02.s2",
+   "text": "Now?",
+   "w_first": "4-02.w007",
+   "w_last": "4-02.w007",
+   "f0": 206,
+   "f1": 221
+  },
+  {
+   "sid": "4-02.s3",
+   "text": "The team just downloaded a prediction, for free, from a public database.",
+   "w_first": "4-02.w008",
+   "w_last": "4-02.w019",
+   "f0": 259,
+   "f1": 573
+  },
+  {
+   "sid": "4-02.s4",
+   "text": "According to the paper, this was the first time AlphaFold had been used to find a hit like this.",
+   "w_first": "4-02.w020",
+   "w_last": "4-02.w038",
+   "f0": 637,
+   "f1": 1106
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "footage00",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 0.00→0.88 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 0,
+   "f_land": 0,
+   "f_end": 119,
+   "until": null,
+   "word": "4-02.w001",
+   "w": "Before,",
+   "key": "before#1",
+   "sid": "4-02.s1",
+   "word_f0": 2,
+   "value": [
+    0.0,
+    0.883
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 27636,
+   "F_land": 27636,
+   "F_end": 27755
+  },
+  {
+   "id": "footage01",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 0.88→2.62 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 119,
+   "f_land": 119,
+   "f_end": 431,
+   "until": null,
+   "word": "4-02.w006",
+   "w": "structure.",
+   "key": "structure#1",
+   "sid": "4-02.s1",
+   "word_f0": 119,
+   "value": [
+    0.883,
+    2.617
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 27755,
+   "F_land": 27755,
+   "F_end": 28067
+  },
+  {
+   "id": "footage02",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 2.62→4.57 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 431,
+   "f_land": 431,
+   "f_end": 764,
+   "until": null,
+   "word": "4-02.w015",
+   "w": "free,",
+   "key": "free#1",
+   "sid": "4-02.s3",
+   "word_f0": 431,
+   "value": [
+    2.617,
+    4.567
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 28067,
+   "F_land": 28067,
+   "F_end": 28400
+  },
+  {
+   "id": "footage03",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 4.57→5.00 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 764,
+   "f_land": 764,
+   "f_end": 806,
+   "until": null,
+   "word": "4-02.w024",
+   "w": "this",
+   "key": "this#1",
+   "sid": "4-02.s4",
+   "word_f0": 764,
+   "value": [
+    4.567,
+    5.0
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 28400,
+   "F_land": 28400,
+   "F_end": 28442
+  },
+  {
+   "id": "footage04",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 5.00→5.30 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 806,
+   "f_land": 806,
+   "f_end": 824,
+   "until": null,
+   "word": "4-02.w027",
+   "w": "first",
+   "key": "first#1",
+   "sid": "4-02.s4",
+   "word_f0": 806,
+   "value": [
+    5.0,
+    5.3
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 28442,
+   "F_land": 28442,
+   "F_end": 28460
+  },
+  {
+   "id": "footage05",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 5.30→5.57 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 824,
+   "f_land": 824,
+   "f_end": 851,
+   "until": null,
+   "word": "4-02.w028",
+   "w": "time",
+   "key": "time#1",
+   "sid": "4-02.s4",
+   "word_f0": 824,
+   "value": [
+    5.3,
+    5.567
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 28460,
+   "F_land": 28460,
+   "F_end": 28487
+  },
+  {
+   "id": "footage06",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 5.57→6.20 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 851,
+   "f_land": 851,
+   "f_end": 927,
+   "until": null,
+   "word": "4-02.w029",
+   "w": "AlphaFold",
+   "key": "alphafold#1",
+   "sid": "4-02.s4",
+   "word_f0": 851,
+   "value": [
+    5.567,
+    6.2
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 28487,
+   "F_land": 28487,
+   "F_end": 28563
+  },
+  {
+   "id": "footage07",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 6.20→6.55 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 927,
+   "f_land": 927,
+   "f_end": 947,
+   "until": null,
+   "word": "4-02.w031",
+   "w": "been",
+   "key": "been#1",
+   "sid": "4-02.s4",
+   "word_f0": 927,
+   "value": [
+    6.2,
+    6.55
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 28563,
+   "F_land": 28563,
+   "F_end": 28583
+  },
+  {
+   "id": "footage08",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 6.55→8.03 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 947,
+   "f_land": 947,
+   "f_end": 1106,
+   "until": null,
+   "word": "4-02.w032",
+   "w": "used",
+   "key": "used#1",
+   "sid": "4-02.s4",
+   "word_f0": 947,
+   "value": [
+    6.55,
+    8.033
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 28583,
+   "F_land": 28583,
+   "F_end": 28742
+  }
+ ],
+ "problems": []
+}

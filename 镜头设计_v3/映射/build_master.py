@@ -215,23 +215,25 @@ def ev(eid, obj, verb, seg, word, f_start, f_land, f_end, tool, native, source, 
 
 
 def imp_authored(G):
-    """手写事件表 映射/events/<段>.json：land.word（wid）+ lag 是落点；lead 帧前起动（或 start.word）；
-    until.word 说完 / until.sentence_end 句尾 / dur 帧数 定结束。全部按总表的词算，不写死帧号。"""
+    """手写事件表 映射/events/<段>.json（格式见 映射/事件表格式.md）。解析统一交给 resolve.resolve_doc（新写法 at/until 和
+    第一阶段的 land/lead/start/until 都认）。migrate_beats_v8 自动迁移的表只认 1-08（完整转好，替代 s108 导入）；
+    其余迁移表的事件和下面 beats / 托盘导入是同一来源，不重复导入。"""
+    import resolve as RS
     f = HERE / "events" / f"{G['group'].replace('+', '_')}.json"
     if not f.exists():
         return [], None
     D = json.loads(f.read_text(encoding="utf-8"))
-    W = {w["wid"]: w for w in G["words"]}
-    S = {s["sid"]: s for s in G["sentences"]}
+    if D.get("migrated") and G["group"] != "1-08":
+        return [], None
+    g = M.Group(G)
+    evs, probs = RS.resolve_doc(g, D)
+    if probs:
+        G["issues"] += [f"events/{f.name}: {x}" for x in probs]
     out = []
-    for e in D["events"]:
-        lw = W[e["land"]["word"]]
-        land = lw["f0"] + e.get("lag", 0)
-        start = W[e["start"]["word"]]["f0"] if "start" in e else land - e.get("lead", 0)
-        u = e.get("until", {})
-        end = (W[u["word"]]["f1"] if "word" in u else S[u["sentence_end"]]["f1"] if "sentence_end" in u else land + e.get("dur", 0))
-        out.append(ev(e["eid"], e["obj"], e["verb"], lw["seg"], lw["wid"], start, land, max(end, land), D.get("tool", "any"), True,
-                      str(f.relative_to(ROOT)), means=e.get("means", ""), until=u.get("word") or u.get("sentence_end"), ref_mode="wid"))
+    for e in evs:
+        out.append(ev(e["id"], e["obj"], e["verb"], G["group"] if "+" not in G["group"] else None, e["word"], e["f_start"], e["f_land"], e["f_end"],
+                      D.get("tool", "any"), True, str(f.relative_to(ROOT)), means=e.get("means", ""), until=e.get("until"), ref_mode="wid",
+                      lag=e["f_land"] - (e.get("word_f0") or e["f_land"])))
     G["holds"] = D.get("holds", [])
     return out, dict(file=str(f.relative_to(ROOT)), tool=D.get("tool"), note=D.get("note", ""))
 
@@ -390,7 +392,7 @@ def main():
         evs, src = imp_authored(G)
         if src:
             imports.append((evs, src))
-        if gname == "1-08":
+        if gname == "1-08" and not src:
             imports.append(imp_s108())
         if gname in CH5 or gname == "W4":
             imports.append(imp_beats(gname))

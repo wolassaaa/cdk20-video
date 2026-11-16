@@ -1,5 +1,5 @@
 {
- "built": "2026-11-17 02:24:50 +09:00",
+ "built": "2026-11-17 02:29:10 +09:00",
  "checks": {
   "C1_time_base": {
    "pass": true,
@@ -209,15 +209,15 @@
   },
   "C6_event_word_2f": {
    "pass": false,
-   "primary_events": 264,
+   "primary_events": 274,
    "primary_over_2f": 1,
    "unresolved_word_refs": 0,
-   "stagger_events": 232,
+   "stagger_events": 252,
    "by_group": {
     "1-01 (1-01.json)": "0/4 超 2 帧",
     "1-03 (1-03.json)": "0/6 超 2 帧",
     "1-05+1-06+1-07 (1-05_1-06_1-07.json)": "0/10 超 2 帧",
-    "1-08 (s108_events_v4.json)": "0/17 超 2 帧",
+    "1-08 (1-08.json)": "0/27 超 2 帧",
     "2-02 (2-02.json)": "0/8 超 2 帧",
     "2-03 (2-03.json)": "0/6 超 2 帧",
     "2-04 (2-04.json)": "0/3 超 2 帧",
@@ -256,20 +256,18 @@
    "sentences": 243,
    "speech_s": 831.2,
    "covered_native_in_cut_pct": 0.1,
-   "covered_any_source_pct": 5.9,
+   "covered_any_source_pct": 7.0,
    "by_status": {
     "部分": 160.4,
     "无事件": 612.6,
-    "覆盖（源片原生，cut_v8 未原生）；样板 A v4 原生，未接进 cut_v8": 4.7,
-    "部分；样板 A v4 原生，未接进 cut_v8": 9.2,
+    "覆盖（源片原生，cut_v8 未原生）；样板 A v4 原生，未接进 cut_v8": 13.9,
     "覆盖（源片原生，cut_v8 未原生）": 43.4,
     "覆盖": 1.2
    },
    "sentences_by_status": {
     "部分": 60,
     "无事件": 166,
-    "覆盖（源片原生，cut_v8 未原生）；样板 A v4 原生，未接进 cut_v8": 1,
-    "部分；样板 A v4 原生，未接进 cut_v8": 2,
+    "覆盖（源片原生，cut_v8 未原生）；样板 A v4 原生，未接进 cut_v8": 3,
     "覆盖（源片原生，cut_v8 未原生）": 13,
     "覆盖": 1
    }
@@ -450,9 +448,9 @@
    "text": "Start the search the year we were born, and it might only be ready now.",
    "t": 4.73,
    "picture": "warp",
-   "events": 6,
-   "landings": 5,
-   "gap_f": 62,
+   "events": 8,
+   "landings": 7,
+   "gap_f": 0,
    "reach_end": true,
    "status": "覆盖（源片原生，cut_v8 未原生）；样板 A v4 原生，未接进 cut_v8"
   },
@@ -462,11 +460,11 @@
    "text": "It can cost almost 2.8 billion US dollars.",
    "t": 3.52,
    "picture": "warp",
-   "events": 10,
-   "landings": 6,
-   "gap_f": 25,
-   "reach_end": false,
-   "status": "部分；样板 A v4 原生，未接进 cut_v8"
+   "events": 13,
+   "landings": 9,
+   "gap_f": 0,
+   "reach_end": true,
+   "status": "覆盖（源片原生，cut_v8 未原生）；样板 A v4 原生，未接进 cut_v8"
   },
   {
    "group": "1-08",
@@ -474,11 +472,11 @@
    "text": "And of drugs tested in people, only about one in ten reaches the market.",
    "t": 5.63,
    "picture": "warp",
-   "events": 23,
-   "landings": 6,
-   "gap_f": 58,
-   "reach_end": false,
-   "status": "部分；样板 A v4 原生，未接进 cut_v8"
+   "events": 29,
+   "landings": 11,
+   "gap_f": 22,
+   "reach_end": true,
+   "status": "覆盖（源片原生，cut_v8 未原生）；样板 A v4 原生，未接进 cut_v8"
   },
   {
    "group": "1-09",

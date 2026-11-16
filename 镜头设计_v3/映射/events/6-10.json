@@ -1,0 +1,68 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "6-10",
+ "tool": "warp_source",
+ "migrated": "migrate_beats_v8",
+ "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
+ "source": "镜头设计_v3/粗剪/对时/beats_v8/6-10.json",
+ "holds": [],
+ "events": [
+  {
+   "id": "footage00",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "6-10.w001",
+    "off": -9
+   },
+   "until": {
+    "dur": 258
+   },
+   "ease": "linear",
+   "means": "旧动画源片 0.00→1.47 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    0.0,
+    1.467
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage01",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "6-10.w008",
+    "off": 1
+   },
+   "until": {
+    "dur": 374
+   },
+   "ease": "linear",
+   "means": "旧动画源片 1.47→3.75 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    1.467,
+    3.75
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  },
+  {
+   "id": "footage02",
+   "obj": "footage",
+   "verb": "move",
+   "at": {
+    "word": "6-10.w015",
+    "off": 0
+   },
+   "until": {
+    "dur": 267
+   },
+   "ease": "linear",
+   "means": "旧动画源片 3.75→5.42 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "value": [
+    3.75,
+    5.417
+   ],
+   "migrated": "migrate_beats_v8:anchor"
+  }
+ ]
+}

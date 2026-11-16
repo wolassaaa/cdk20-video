@@ -1,0 +1,869 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "3-08",
+ "segs": [
+  "3-08"
+ ],
+ "tool": "warp_source",
+ "fps": 60,
+ "len_f": 1170,
+ "cut": "cut_v8",
+ "cut_start_f": 22928,
+ "cut_start_s": 382.13,
+ "master_built": "2026-11-17 02:29:10 +09:00",
+ "words_hash": "747f3bb8c7e3",
+ "events_src": "镜头设计_v3/映射/events/3-08.json",
+ "words": [
+  {
+   "wid": "3-08.w001",
+   "w": "But",
+   "key": "but#1",
+   "sid": "3-08.s1",
+   "f0": 9,
+   "f1": 13,
+   "F0": 22937,
+   "F1": 22941
+  },
+  {
+   "wid": "3-08.w002",
+   "w": "here's",
+   "key": "here's#1",
+   "sid": "3-08.s1",
+   "f0": 13,
+   "f1": 21,
+   "F0": 22941,
+   "F1": 22949
+  },
+  {
+   "wid": "3-08.w003",
+   "w": "the",
+   "key": "the#1",
+   "sid": "3-08.s1",
+   "f0": 21,
+   "f1": 26,
+   "F0": 22949,
+   "F1": 22954
+  },
+  {
+   "wid": "3-08.w004",
+   "w": "problem.",
+   "key": "problem#1",
+   "sid": "3-08.s1",
+   "f0": 30,
+   "f1": 42,
+   "F0": 22958,
+   "F1": 22970
+  },
+  {
+   "wid": "3-08.w005",
+   "w": "To",
+   "key": "to#1",
+   "sid": "3-08.s2",
+   "f0": 42,
+   "f1": 45,
+   "F0": 22970,
+   "F1": 22973
+  },
+  {
+   "wid": "3-08.w006",
+   "w": "design",
+   "key": "design#1",
+   "sid": "3-08.s2",
+   "f0": 48,
+   "f1": 55,
+   "F0": 22976,
+   "F1": 22983
+  },
+  {
+   "wid": "3-08.w007",
+   "w": "a",
+   "key": "a#1",
+   "sid": "3-08.s2",
+   "f0": 57,
+   "f1": 58,
+   "F0": 22985,
+   "F1": 22986
+  },
+  {
+   "wid": "3-08.w008",
+   "w": "key,",
+   "key": "key#1",
+   "sid": "3-08.s2",
+   "f0": 58,
+   "f1": 63,
+   "F0": 22986,
+   "F1": 22991
+  },
+  {
+   "wid": "3-08.w009",
+   "w": "you",
+   "key": "you#1",
+   "sid": "3-08.s2",
+   "f0": 67,
+   "f1": 73,
+   "F0": 22995,
+   "F1": 23001
+  },
+  {
+   "wid": "3-08.w010",
+   "w": "need",
+   "key": "need#1",
+   "sid": "3-08.s2",
+   "f0": 74,
+   "f1": 81,
+   "F0": 23002,
+   "F1": 23009
+  },
+  {
+   "wid": "3-08.w011",
+   "w": "to",
+   "key": "to#2",
+   "sid": "3-08.s2",
+   "f0": 81,
+   "f1": 84,
+   "F0": 23009,
+   "F1": 23012
+  },
+  {
+   "wid": "3-08.w012",
+   "w": "see",
+   "key": "see#1",
+   "sid": "3-08.s2",
+   "f0": 103,
+   "f1": 112,
+   "F0": 23031,
+   "F1": 23040
+  },
+  {
+   "wid": "3-08.w013",
+   "w": "the",
+   "key": "the#2",
+   "sid": "3-08.s2",
+   "f0": 116,
+   "f1": 122,
+   "F0": 23044,
+   "F1": 23050
+  },
+  {
+   "wid": "3-08.w014",
+   "w": "lock.",
+   "key": "lock#1",
+   "sid": "3-08.s2",
+   "f0": 126,
+   "f1": 131,
+   "F0": 23054,
+   "F1": 23059
+  },
+  {
+   "wid": "3-08.w015",
+   "w": "And",
+   "key": "and#1",
+   "sid": "3-08.s3",
+   "f0": 134,
+   "f1": 146,
+   "F0": 23062,
+   "F1": 23074
+  },
+  {
+   "wid": "3-08.w016",
+   "w": "no",
+   "key": "no#1",
+   "sid": "3-08.s3",
+   "f0": 150,
+   "f1": 152,
+   "F0": 23078,
+   "F1": 23080
+  },
+  {
+   "wid": "3-08.w017",
+   "w": "one",
+   "key": "one#1",
+   "sid": "3-08.s3",
+   "f0": 153,
+   "f1": 158,
+   "F0": 23081,
+   "F1": 23086
+  },
+  {
+   "wid": "3-08.w018",
+   "w": "had",
+   "key": "had#1",
+   "sid": "3-08.s3",
+   "f0": 158,
+   "f1": 162,
+   "F0": 23086,
+   "F1": 23090
+  },
+  {
+   "wid": "3-08.w019",
+   "w": "measured",
+   "key": "measured#1",
+   "sid": "3-08.s3",
+   "f0": 163,
+   "f1": 173,
+   "F0": 23091,
+   "F1": 23101
+  },
+  {
+   "wid": "3-08.w020",
+   "w": "CDK20's",
+   "key": "cdk20's#1",
+   "sid": "3-08.s3",
+   "f0": 173,
+   "f1": 185,
+   "F0": 23101,
+   "F1": 23113
+  },
+  {
+   "wid": "3-08.w021",
+   "w": "shape.",
+   "key": "shape#1",
+   "sid": "3-08.s3",
+   "f0": 187,
+   "f1": 205,
+   "F0": 23115,
+   "F1": 23133
+  },
+  {
+   "wid": "3-08.w022",
+   "w": "That",
+   "key": "that#1",
+   "sid": "3-08.s4",
+   "f0": 246,
+   "f1": 265,
+   "F0": 23174,
+   "F1": 23193
+  },
+  {
+   "wid": "3-08.w023",
+   "w": "takes",
+   "key": "takes#1",
+   "sid": "3-08.s4",
+   "f0": 287,
+   "f1": 299,
+   "F0": 23215,
+   "F1": 23227
+  },
+  {
+   "wid": "3-08.w024",
+   "w": "a",
+   "key": "a#2",
+   "sid": "3-08.s4",
+   "f0": 302,
+   "f1": 303,
+   "F0": 23230,
+   "F1": 23231
+  },
+  {
+   "wid": "3-08.w025",
+   "w": "lot",
+   "key": "lot#1",
+   "sid": "3-08.s4",
+   "f0": 308,
+   "f1": 321,
+   "F0": 23236,
+   "F1": 23249
+  },
+  {
+   "wid": "3-08.w026",
+   "w": "of",
+   "key": "of#1",
+   "sid": "3-08.s4",
+   "f0": 326,
+   "f1": 332,
+   "F0": 23254,
+   "F1": 23260
+  },
+  {
+   "wid": "3-08.w027",
+   "w": "hard",
+   "key": "hard#1",
+   "sid": "3-08.s4",
+   "f0": 336,
+   "f1": 348,
+   "F0": 23264,
+   "F1": 23276
+  },
+  {
+   "wid": "3-08.w028",
+   "w": "lab",
+   "key": "lab#1",
+   "sid": "3-08.s4",
+   "f0": 350,
+   "f1": 361,
+   "F0": 23278,
+   "F1": 23289
+  },
+  {
+   "wid": "3-08.w029",
+   "w": "work,",
+   "key": "work#1",
+   "sid": "3-08.s4",
+   "f0": 364,
+   "f1": 377,
+   "F0": 23292,
+   "F1": 23305
+  },
+  {
+   "wid": "3-08.w030",
+   "w": "and",
+   "key": "and#2",
+   "sid": "3-08.s4",
+   "f0": 421,
+   "f1": 427,
+   "F0": 23349,
+   "F1": 23355
+  },
+  {
+   "wid": "3-08.w031",
+   "w": "only",
+   "key": "only#1",
+   "sid": "3-08.s4",
+   "f0": 431,
+   "f1": 440,
+   "F0": 23359,
+   "F1": 23368
+  },
+  {
+   "wid": "3-08.w032",
+   "w": "a",
+   "key": "a#3",
+   "sid": "3-08.s4",
+   "f0": 445,
+   "f1": 446,
+   "F0": 23373,
+   "F1": 23374
+  },
+  {
+   "wid": "3-08.w033",
+   "w": "small",
+   "key": "small#1",
+   "sid": "3-08.s4",
+   "f0": 452,
+   "f1": 469,
+   "F0": 23380,
+   "F1": 23397
+  },
+  {
+   "wid": "3-08.w034",
+   "w": "fraction",
+   "key": "fraction#1",
+   "sid": "3-08.s4",
+   "f0": 472,
+   "f1": 496,
+   "F0": 23400,
+   "F1": 23424
+  },
+  {
+   "wid": "3-08.w035",
+   "w": "of",
+   "key": "of#2",
+   "sid": "3-08.s4",
+   "f0": 500,
+   "f1": 504,
+   "F0": 23428,
+   "F1": 23432
+  },
+  {
+   "wid": "3-08.w036",
+   "w": "proteins",
+   "key": "proteins#1",
+   "sid": "3-08.s4",
+   "f0": 508,
+   "f1": 541,
+   "F0": 23436,
+   "F1": 23469
+  },
+  {
+   "wid": "3-08.w037",
+   "w": "have",
+   "key": "have#1",
+   "sid": "3-08.s4",
+   "f0": 565,
+   "f1": 576,
+   "F0": 23493,
+   "F1": 23504
+  },
+  {
+   "wid": "3-08.w038",
+   "w": "ever",
+   "key": "ever#1",
+   "sid": "3-08.s4",
+   "f0": 580,
+   "f1": 592,
+   "F0": 23508,
+   "F1": 23520
+  },
+  {
+   "wid": "3-08.w039",
+   "w": "been",
+   "key": "been#1",
+   "sid": "3-08.s4",
+   "f0": 594,
+   "f1": 604,
+   "F0": 23522,
+   "F1": 23532
+  },
+  {
+   "wid": "3-08.w040",
+   "w": "measured.",
+   "key": "measured#2",
+   "sid": "3-08.s4",
+   "f0": 624,
+   "f1": 653,
+   "F0": 23552,
+   "F1": 23581
+  },
+  {
+   "wid": "3-08.w041",
+   "w": "Without",
+   "key": "without#1",
+   "sid": "3-08.s5",
+   "f0": 694,
+   "f1": 712,
+   "F0": 23622,
+   "F1": 23640
+  },
+  {
+   "wid": "3-08.w042",
+   "w": "a",
+   "key": "a#4",
+   "sid": "3-08.s5",
+   "f0": 714,
+   "f1": 715,
+   "F0": 23642,
+   "F1": 23643
+  },
+  {
+   "wid": "3-08.w043",
+   "w": "3D",
+   "key": "3d#1",
+   "sid": "3-08.s5",
+   "f0": 717,
+   "f1": 733,
+   "F0": 23645,
+   "F1": 23661
+  },
+  {
+   "wid": "3-08.w044",
+   "w": "shape,",
+   "key": "shape#2",
+   "sid": "3-08.s5",
+   "f0": 743,
+   "f1": 762,
+   "F0": 23671,
+   "F1": 23690
+  },
+  {
+   "wid": "3-08.w045",
+   "w": "even",
+   "key": "even#1",
+   "sid": "3-08.s5",
+   "f0": 786,
+   "f1": 797,
+   "F0": 23714,
+   "F1": 23725
+  },
+  {
+   "wid": "3-08.w046",
+   "w": "computer",
+   "key": "computer#1",
+   "sid": "3-08.s5",
+   "f0": 802,
+   "f1": 833,
+   "F0": 23730,
+   "F1": 23761
+  },
+  {
+   "wid": "3-08.w047",
+   "w": "predictions",
+   "key": "predictions#1",
+   "sid": "3-08.s5",
+   "f0": 836,
+   "f1": 870,
+   "F0": 23764,
+   "F1": 23798
+  },
+  {
+   "wid": "3-08.w048",
+   "w": "of",
+   "key": "of#3",
+   "sid": "3-08.s5",
+   "f0": 902,
+   "f1": 906,
+   "F0": 23830,
+   "F1": 23834
+  },
+  {
+   "wid": "3-08.w049",
+   "w": "binding",
+   "key": "binding#1",
+   "sid": "3-08.s5",
+   "f0": 912,
+   "f1": 941,
+   "F0": 23840,
+   "F1": 23869
+  },
+  {
+   "wid": "3-08.w050",
+   "w": "get",
+   "key": "get#1",
+   "sid": "3-08.s5",
+   "f0": 976,
+   "f1": 989,
+   "F0": 23904,
+   "F1": 23917
+  },
+  {
+   "wid": "3-08.w051",
+   "w": "expensive,",
+   "key": "expensive#1",
+   "sid": "3-08.s5",
+   "f0": 993,
+   "f1": 1031,
+   "F0": 23921,
+   "F1": 23959
+  },
+  {
+   "wid": "3-08.w052",
+   "w": "slow",
+   "key": "slow#1",
+   "sid": "3-08.s5",
+   "f0": 1067,
+   "f1": 1085,
+   "F0": 23995,
+   "F1": 24013
+  },
+  {
+   "wid": "3-08.w053",
+   "w": "and",
+   "key": "and#3",
+   "sid": "3-08.s5",
+   "f0": 1105,
+   "f1": 1111,
+   "F0": 24033,
+   "F1": 24039
+  },
+  {
+   "wid": "3-08.w054",
+   "w": "difficult.",
+   "key": "difficult#1",
+   "sid": "3-08.s5",
+   "f0": 1112,
+   "f1": 1143,
+   "F0": 24040,
+   "F1": 24071
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "3-08.s1",
+   "text": "But here's the problem.",
+   "w_first": "3-08.w001",
+   "w_last": "3-08.w004",
+   "f0": 9,
+   "f1": 42
+  },
+  {
+   "sid": "3-08.s2",
+   "text": "To design a key, you need to see the lock.",
+   "w_first": "3-08.w005",
+   "w_last": "3-08.w014",
+   "f0": 42,
+   "f1": 131
+  },
+  {
+   "sid": "3-08.s3",
+   "text": "And no one had measured CDK20's shape.",
+   "w_first": "3-08.w015",
+   "w_last": "3-08.w021",
+   "f0": 134,
+   "f1": 205
+  },
+  {
+   "sid": "3-08.s4",
+   "text": "That takes a lot of hard lab work, and only a small fraction of proteins have ever been measured.",
+   "w_first": "3-08.w022",
+   "w_last": "3-08.w040",
+   "f0": 246,
+   "f1": 653
+  },
+  {
+   "sid": "3-08.s5",
+   "text": "Without a 3D shape, even computer predictions of binding get expensive, slow and difficult.",
+   "w_first": "3-08.w041",
+   "w_last": "3-08.w054",
+   "f0": 694,
+   "f1": 1143
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "footage00",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 0.00→5.50 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 0,
+   "f_land": 0,
+   "f_end": 336,
+   "until": null,
+   "word": "3-08.w001",
+   "w": "But",
+   "key": "but#1",
+   "sid": "3-08.s1",
+   "word_f0": 9,
+   "value": [
+    0.0,
+    5.5
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 22928,
+   "F_land": 22928,
+   "F_end": 23264
+  },
+  {
+   "id": "footage01",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 5.50→5.78 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 336,
+   "f_land": 336,
+   "f_end": 363,
+   "until": null,
+   "word": "3-08.w027",
+   "w": "hard",
+   "key": "hard#1",
+   "sid": "3-08.s4",
+   "word_f0": 336,
+   "value": [
+    5.5,
+    5.783
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 23264,
+   "F_land": 23264,
+   "F_end": 23291
+  },
+  {
+   "id": "footage02",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 5.78→9.77 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 363,
+   "f_land": 363,
+   "f_end": 565,
+   "until": null,
+   "word": "3-08.w029",
+   "w": "work,",
+   "key": "work#1",
+   "sid": "3-08.s4",
+   "word_f0": 364,
+   "value": [
+    5.783,
+    9.767
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 23291,
+   "F_land": 23291,
+   "F_end": 23493
+  },
+  {
+   "id": "footage03",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 9.77→10.25 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 565,
+   "f_land": 565,
+   "f_end": 594,
+   "until": null,
+   "word": "3-08.w037",
+   "w": "have",
+   "key": "have#1",
+   "sid": "3-08.s4",
+   "word_f0": 565,
+   "value": [
+    9.767,
+    10.25
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 23493,
+   "F_land": 23493,
+   "F_end": 23522
+  },
+  {
+   "id": "footage04",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 10.25→15.18 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 594,
+   "f_land": 594,
+   "f_end": 743,
+   "until": null,
+   "word": "3-08.w039",
+   "w": "been",
+   "key": "been#1",
+   "sid": "3-08.s4",
+   "word_f0": 594,
+   "value": [
+    10.25,
+    15.183
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 23522,
+   "F_land": 23522,
+   "F_end": 23671
+  },
+  {
+   "id": "footage05",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 15.18→16.02 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 743,
+   "f_land": 743,
+   "f_end": 786,
+   "until": null,
+   "word": "3-08.w044",
+   "w": "shape,",
+   "key": "shape#2",
+   "sid": "3-08.s5",
+   "word_f0": 743,
+   "value": [
+    15.183,
+    16.017
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 23671,
+   "F_land": 23671,
+   "F_end": 23714
+  },
+  {
+   "id": "footage06",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 16.02→16.32 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 786,
+   "f_land": 786,
+   "f_end": 802,
+   "until": null,
+   "word": "3-08.w045",
+   "w": "even",
+   "key": "even#1",
+   "sid": "3-08.s5",
+   "word_f0": 786,
+   "value": [
+    16.017,
+    16.317
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 23714,
+   "F_land": 23714,
+   "F_end": 23730
+  },
+  {
+   "id": "footage07",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 16.32→17.02 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 802,
+   "f_land": 802,
+   "f_end": 835,
+   "until": null,
+   "word": "3-08.w046",
+   "w": "computer",
+   "key": "computer#1",
+   "sid": "3-08.s5",
+   "word_f0": 802,
+   "value": [
+    16.317,
+    17.017
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 23730,
+   "F_land": 23730,
+   "F_end": 23763
+  },
+  {
+   "id": "footage08",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 17.02→18.98 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 835,
+   "f_land": 835,
+   "f_end": 993,
+   "until": null,
+   "word": "3-08.w047",
+   "w": "predictions",
+   "key": "predictions#1",
+   "sid": "3-08.s5",
+   "word_f0": 836,
+   "value": [
+    17.017,
+    18.983
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 23763,
+   "F_land": 23763,
+   "F_end": 23921
+  },
+  {
+   "id": "footage09",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 18.98→20.15 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 993,
+   "f_land": 993,
+   "f_end": 1067,
+   "until": null,
+   "word": "3-08.w051",
+   "w": "expensive,",
+   "key": "expensive#1",
+   "sid": "3-08.s5",
+   "word_f0": 993,
+   "value": [
+    18.983,
+    20.15
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 23921,
+   "F_land": 23921,
+   "F_end": 23995
+  },
+  {
+   "id": "footage10",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 20.15→21.65 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 1067,
+   "f_land": 1067,
+   "f_end": 1143,
+   "until": null,
+   "word": "3-08.w052",
+   "w": "slow",
+   "key": "slow#1",
+   "sid": "3-08.s5",
+   "word_f0": 1067,
+   "value": [
+    20.15,
+    21.65
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 23995,
+   "F_land": 23995,
+   "F_end": 24071
+  }
+ ],
+ "problems": []
+}
