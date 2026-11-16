@@ -1,0 +1,274 @@
+{
+ "name": "8-01",
+ "frames": 178,
+ "pull": [
+  0,
+  24
+ ],
+ "person_in": [
+  8,
+  24
+ ],
+ "push": [
+  154,
+  178
+ ],
+ "fade_out": null,
+ "prev": "7-04",
+ "next": "8-02",
+ "parts": [
+  {
+   "seg": "8-01",
+   "take": "C_cam_8-01_t2",
+   "who": "C",
+   "at": 0,
+   "src0": 0.0,
+   "pad": 1,
+   "until": 154,
+   "person_side": "left",
+   "tray": "right",
+   "person_cx": 841,
+   "box": [
+    477,
+    537,
+    2886,
+    1623
+   ],
+   "dx": -281
+  }
+ ],
+ "words": {
+  "0:So,": 32,
+  "0:back": 69,
+  "0:to": 88,
+  "0:where": 100,
+  "0:we": 113,
+  "0:started.": 124
+ },
+ "objects": {
+  "p0": {
+   "lib": "pawn",
+   "at": [
+    0.14,
+    0.42
+   ]
+  },
+  "p1": {
+   "lib": "pawn",
+   "at": [
+    0.22,
+    0.42
+   ]
+  },
+  "p2": {
+   "lib": "pawn",
+   "at": [
+    0.3,
+    0.42
+   ]
+  },
+  "p3": {
+   "lib": "pawn",
+   "at": [
+    0.38,
+    0.42
+   ]
+  },
+  "p4": {
+   "lib": "pawn",
+   "at": [
+    0.46,
+    0.42
+   ]
+  },
+  "p5": {
+   "lib": "pawn",
+   "at": [
+    0.54,
+    0.42
+   ]
+  },
+  "p6": {
+   "lib": "pawn",
+   "at": [
+    0.62,
+    0.42
+   ]
+  },
+  "p7": {
+   "lib": "pawn",
+   "at": [
+    0.7,
+    0.42
+   ]
+  },
+  "p8": {
+   "lib": "pawn",
+   "at": [
+    0.78,
+    0.42
+   ]
+  },
+  "p9": {
+   "lib": "pawn",
+   "at": [
+    0.86,
+    0.42
+   ]
+  }
+ },
+ "events": [
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "p0",
+   "f_land": 51,
+   "f_start": 35,
+   "word": "0:back"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "p1",
+   "f_land": 53,
+   "f_start": 37,
+   "word": "0:back"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "p2",
+   "f_land": 55,
+   "f_start": 39,
+   "word": "0:back"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "p3",
+   "f_land": 57,
+   "f_start": 41,
+   "word": "0:back"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "p4",
+   "f_land": 59,
+   "f_start": 43,
+   "word": "0:back"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "p5",
+   "f_land": 61,
+   "f_start": 45,
+   "word": "0:back"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "p6",
+   "f_land": 63,
+   "f_start": 47,
+   "word": "0:back"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "p7",
+   "f_land": 65,
+   "f_start": 49,
+   "word": "0:back"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "p8",
+   "f_land": 67,
+   "f_start": 51,
+   "word": "0:back"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "p9",
+   "f_land": 69,
+   "f_start": 53,
+   "word": "0:back"
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "p3",
+   "f_land": 115,
+   "f_start": 115,
+   "word": "0:started."
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "p4",
+   "f_land": 118,
+   "f_start": 118,
+   "word": "0:started."
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "p5",
+   "f_land": 121,
+   "f_start": 121,
+   "word": "0:started."
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "p6",
+   "f_land": 124,
+   "f_start": 124,
+   "word": "0:started."
+  }
+ ],
+ "lockkey": {},
+ "notes": [
+  {
+   "word": "0:where",
+   "kind": "pen",
+   "text": "back to the start",
+   "x": 0.06,
+   "y": 0.06,
+   "size": 62,
+   "d": 22,
+   "at": 100
+  },
+  {
+   "word": "0:started.",
+   "kind": "serif",
+   "text": "about 4 a day",
+   "x": 0.06,
+   "y": 0.18,
+   "size": 60,
+   "d": 16,
+   "red": true,
+   "at": 124
+  }
+ ],
+ "landings": [
+  51,
+  53,
+  55,
+  57,
+  59,
+  61,
+  63,
+  65,
+  67,
+  69,
+  100,
+  124
+ ],
+ "start_from": "7-04.mp4",
+ "end_from": "8-02.mp4"
+}

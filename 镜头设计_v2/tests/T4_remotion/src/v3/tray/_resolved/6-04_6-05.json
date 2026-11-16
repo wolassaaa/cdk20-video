@@ -1,0 +1,1600 @@
+{
+ "name": "6-04_6-05",
+ "frames": 532,
+ "pull": [
+  0,
+  24
+ ],
+ "person_in": [
+  8,
+  24
+ ],
+ "push": [
+  508,
+  532
+ ],
+ "fade_out": null,
+ "prev": "6-03",
+ "next": "6-06",
+ "parts": [
+  {
+   "seg": "6-04",
+   "take": "D_cam_6-04_t1",
+   "who": "D",
+   "at": 0,
+   "src0": 0.0,
+   "pad": 2,
+   "until": 342,
+   "person_side": "right",
+   "tray": "left",
+   "person_cx": 1088,
+   "box": [
+    1100,
+    330,
+    3254,
+    1830
+   ],
+   "dx": 272
+  },
+  {
+   "seg": "6-05",
+   "take": "B_cam_6-05_t1",
+   "who": "B",
+   "at": 342,
+   "src0": 0.315,
+   "pad": 0,
+   "until": 508,
+   "person_side": "left",
+   "tray": "right",
+   "person_cx": 630,
+   "box": [
+    -647,
+    378,
+    3168,
+    1782
+   ],
+   "dx": -70
+  }
+ ],
+ "words": {
+  "0:Millions": 32,
+  "0:of": 62,
+  "0:compounds": 74,
+  "0:screened": 108,
+  "0:before.": 127,
+  "0:Here?": 207,
+  "0:Thirteen": 297,
+  "0:made.": 321,
+  "1:Thirteen.": 349,
+  "1:That's": 437,
+  "1:honestly": 448,
+  "1:wild.": 473
+ },
+ "objects": {
+  "g0": {
+   "lib": "bead",
+   "at": [
+    0.14,
+    0.22
+   ],
+   "size": 0.016
+  },
+  "g1": {
+   "lib": "bead",
+   "at": [
+    0.2055,
+    0.22
+   ],
+   "size": 0.016
+  },
+  "g2": {
+   "lib": "bead",
+   "at": [
+    0.2709,
+    0.22
+   ],
+   "size": 0.016
+  },
+  "g3": {
+   "lib": "bead",
+   "at": [
+    0.3364,
+    0.22
+   ],
+   "size": 0.016
+  },
+  "g4": {
+   "lib": "bead",
+   "at": [
+    0.4018,
+    0.22
+   ],
+   "size": 0.016
+  },
+  "g5": {
+   "lib": "bead",
+   "at": [
+    0.4673,
+    0.22
+   ],
+   "size": 0.016
+  },
+  "g6": {
+   "lib": "bead",
+   "at": [
+    0.5327,
+    0.22
+   ],
+   "size": 0.016
+  },
+  "g7": {
+   "lib": "bead",
+   "at": [
+    0.5982,
+    0.22
+   ],
+   "size": 0.016
+  },
+  "g8": {
+   "lib": "bead",
+   "at": [
+    0.6636,
+    0.22
+   ],
+   "size": 0.016
+  },
+  "g9": {
+   "lib": "bead",
+   "at": [
+    0.7291,
+    0.22
+   ],
+   "size": 0.016
+  },
+  "g10": {
+   "lib": "bead",
+   "at": [
+    0.7945,
+    0.22
+   ],
+   "size": 0.016
+  },
+  "g11": {
+   "lib": "bead",
+   "at": [
+    0.86,
+    0.22
+   ],
+   "size": 0.016
+  },
+  "g12": {
+   "lib": "bead",
+   "at": [
+    0.14,
+    0.32
+   ],
+   "size": 0.016
+  },
+  "g13": {
+   "lib": "bead",
+   "at": [
+    0.2055,
+    0.32
+   ],
+   "size": 0.016
+  },
+  "g14": {
+   "lib": "bead",
+   "at": [
+    0.2709,
+    0.32
+   ],
+   "size": 0.016
+  },
+  "g15": {
+   "lib": "bead",
+   "at": [
+    0.3364,
+    0.32
+   ],
+   "size": 0.016
+  },
+  "g16": {
+   "lib": "bead",
+   "at": [
+    0.4018,
+    0.32
+   ],
+   "size": 0.016
+  },
+  "g17": {
+   "lib": "bead",
+   "at": [
+    0.4673,
+    0.32
+   ],
+   "size": 0.016
+  },
+  "g18": {
+   "lib": "bead",
+   "at": [
+    0.5327,
+    0.32
+   ],
+   "size": 0.016
+  },
+  "g19": {
+   "lib": "bead",
+   "at": [
+    0.5982,
+    0.32
+   ],
+   "size": 0.016
+  },
+  "g20": {
+   "lib": "bead",
+   "at": [
+    0.6636,
+    0.32
+   ],
+   "size": 0.016
+  },
+  "g21": {
+   "lib": "bead",
+   "at": [
+    0.7291,
+    0.32
+   ],
+   "size": 0.016
+  },
+  "g22": {
+   "lib": "bead",
+   "at": [
+    0.7945,
+    0.32
+   ],
+   "size": 0.016
+  },
+  "g23": {
+   "lib": "bead",
+   "at": [
+    0.86,
+    0.32
+   ],
+   "size": 0.016
+  },
+  "g24": {
+   "lib": "bead",
+   "at": [
+    0.14,
+    0.42
+   ],
+   "size": 0.016
+  },
+  "g25": {
+   "lib": "bead",
+   "at": [
+    0.2055,
+    0.42
+   ],
+   "size": 0.016
+  },
+  "g26": {
+   "lib": "bead",
+   "at": [
+    0.2709,
+    0.42
+   ],
+   "size": 0.016
+  },
+  "g27": {
+   "lib": "bead",
+   "at": [
+    0.3364,
+    0.42
+   ],
+   "size": 0.016
+  },
+  "g28": {
+   "lib": "bead",
+   "at": [
+    0.4018,
+    0.42
+   ],
+   "size": 0.016
+  },
+  "g29": {
+   "lib": "bead",
+   "at": [
+    0.4673,
+    0.42
+   ],
+   "size": 0.016
+  },
+  "g30": {
+   "lib": "bead",
+   "at": [
+    0.5327,
+    0.42
+   ],
+   "size": 0.016
+  },
+  "g31": {
+   "lib": "bead",
+   "at": [
+    0.5982,
+    0.42
+   ],
+   "size": 0.016
+  },
+  "g32": {
+   "lib": "bead",
+   "at": [
+    0.6636,
+    0.42
+   ],
+   "size": 0.016
+  },
+  "g33": {
+   "lib": "bead",
+   "at": [
+    0.7291,
+    0.42
+   ],
+   "size": 0.016
+  },
+  "g34": {
+   "lib": "bead",
+   "at": [
+    0.7945,
+    0.42
+   ],
+   "size": 0.016
+  },
+  "g35": {
+   "lib": "bead",
+   "at": [
+    0.86,
+    0.42
+   ],
+   "size": 0.016
+  },
+  "g36": {
+   "lib": "bead",
+   "at": [
+    0.14,
+    0.52
+   ],
+   "size": 0.016
+  },
+  "g37": {
+   "lib": "bead",
+   "at": [
+    0.2055,
+    0.52
+   ],
+   "size": 0.016
+  },
+  "g38": {
+   "lib": "bead",
+   "at": [
+    0.2709,
+    0.52
+   ],
+   "size": 0.016
+  },
+  "g39": {
+   "lib": "bead",
+   "at": [
+    0.3364,
+    0.52
+   ],
+   "size": 0.016
+  },
+  "g40": {
+   "lib": "bead",
+   "at": [
+    0.4018,
+    0.52
+   ],
+   "size": 0.016
+  },
+  "g41": {
+   "lib": "bead",
+   "at": [
+    0.4673,
+    0.52
+   ],
+   "size": 0.016
+  },
+  "g42": {
+   "lib": "bead",
+   "at": [
+    0.5327,
+    0.52
+   ],
+   "size": 0.016
+  },
+  "g43": {
+   "lib": "bead",
+   "at": [
+    0.5982,
+    0.52
+   ],
+   "size": 0.016
+  },
+  "g44": {
+   "lib": "bead",
+   "at": [
+    0.6636,
+    0.52
+   ],
+   "size": 0.016
+  },
+  "g45": {
+   "lib": "bead",
+   "at": [
+    0.7291,
+    0.52
+   ],
+   "size": 0.016
+  },
+  "g46": {
+   "lib": "bead",
+   "at": [
+    0.7945,
+    0.52
+   ],
+   "size": 0.016
+  },
+  "g47": {
+   "lib": "bead",
+   "at": [
+    0.86,
+    0.52
+   ],
+   "size": 0.016
+  }
+ },
+ "events": [
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g0",
+   "f_land": 32,
+   "f_start": 16,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g1",
+   "f_land": 34,
+   "f_start": 18,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g2",
+   "f_land": 36,
+   "f_start": 20,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g3",
+   "f_land": 38,
+   "f_start": 22,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g4",
+   "f_land": 40,
+   "f_start": 24,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g5",
+   "f_land": 42,
+   "f_start": 26,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g6",
+   "f_land": 44,
+   "f_start": 28,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g7",
+   "f_land": 46,
+   "f_start": 30,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g8",
+   "f_land": 48,
+   "f_start": 32,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g9",
+   "f_land": 50,
+   "f_start": 34,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g10",
+   "f_land": 52,
+   "f_start": 36,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g11",
+   "f_land": 54,
+   "f_start": 38,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g12",
+   "f_land": 56,
+   "f_start": 40,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g13",
+   "f_land": 58,
+   "f_start": 42,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g14",
+   "f_land": 60,
+   "f_start": 44,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g15",
+   "f_land": 62,
+   "f_start": 46,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g16",
+   "f_land": 64,
+   "f_start": 48,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g17",
+   "f_land": 66,
+   "f_start": 50,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g18",
+   "f_land": 68,
+   "f_start": 52,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g19",
+   "f_land": 70,
+   "f_start": 54,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g20",
+   "f_land": 72,
+   "f_start": 56,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g21",
+   "f_land": 74,
+   "f_start": 58,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g22",
+   "f_land": 76,
+   "f_start": 60,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g23",
+   "f_land": 78,
+   "f_start": 62,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g24",
+   "f_land": 81,
+   "f_start": 65,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g25",
+   "f_land": 83,
+   "f_start": 67,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g26",
+   "f_land": 85,
+   "f_start": 69,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g27",
+   "f_land": 87,
+   "f_start": 71,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g28",
+   "f_land": 89,
+   "f_start": 73,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g29",
+   "f_land": 91,
+   "f_start": 75,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g30",
+   "f_land": 93,
+   "f_start": 77,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g31",
+   "f_land": 95,
+   "f_start": 79,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g32",
+   "f_land": 97,
+   "f_start": 81,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g33",
+   "f_land": 99,
+   "f_start": 83,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g34",
+   "f_land": 101,
+   "f_start": 85,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g35",
+   "f_land": 103,
+   "f_start": 87,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g36",
+   "f_land": 105,
+   "f_start": 89,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g37",
+   "f_land": 107,
+   "f_start": 91,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g38",
+   "f_land": 109,
+   "f_start": 93,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g39",
+   "f_land": 111,
+   "f_start": 95,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g40",
+   "f_land": 113,
+   "f_start": 97,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g41",
+   "f_land": 115,
+   "f_start": 99,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g42",
+   "f_land": 117,
+   "f_start": 101,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g43",
+   "f_land": 119,
+   "f_start": 103,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g44",
+   "f_land": 121,
+   "f_start": 105,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g45",
+   "f_land": 123,
+   "f_start": 107,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g46",
+   "f_land": 125,
+   "f_start": 109,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "g47",
+   "f_land": 127,
+   "f_start": 111,
+   "word": "0:Millions"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g0",
+   "f_land": 173,
+   "f_start": 157,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g2",
+   "f_land": 174,
+   "f_start": 158,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g3",
+   "f_land": 175,
+   "f_start": 159,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g5",
+   "f_land": 176,
+   "f_start": 160,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g6",
+   "f_land": 177,
+   "f_start": 161,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g8",
+   "f_land": 178,
+   "f_start": 162,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g9",
+   "f_land": 179,
+   "f_start": 163,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g11",
+   "f_land": 180,
+   "f_start": 164,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g12",
+   "f_land": 181,
+   "f_start": 165,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g14",
+   "f_land": 182,
+   "f_start": 166,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g15",
+   "f_land": 183,
+   "f_start": 167,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g16",
+   "f_land": 184,
+   "f_start": 168,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g17",
+   "f_land": 185,
+   "f_start": 169,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g19",
+   "f_land": 186,
+   "f_start": 170,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g20",
+   "f_land": 187,
+   "f_start": 171,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g22",
+   "f_land": 188,
+   "f_start": 172,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g23",
+   "f_land": 189,
+   "f_start": 173,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g24",
+   "f_land": 190,
+   "f_start": 174,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g25",
+   "f_land": 191,
+   "f_start": 175,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g27",
+   "f_land": 192,
+   "f_start": 176,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g28",
+   "f_land": 193,
+   "f_start": 177,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g30",
+   "f_land": 194,
+   "f_start": 178,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g31",
+   "f_land": 195,
+   "f_start": 179,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g32",
+   "f_land": 196,
+   "f_start": 180,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g33",
+   "f_land": 197,
+   "f_start": 181,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g35",
+   "f_land": 198,
+   "f_start": 182,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g36",
+   "f_land": 199,
+   "f_start": 183,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g38",
+   "f_land": 200,
+   "f_start": 184,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g39",
+   "f_land": 201,
+   "f_start": 185,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g40",
+   "f_land": 202,
+   "f_start": 186,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g41",
+   "f_land": 203,
+   "f_start": 187,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g43",
+   "f_land": 204,
+   "f_start": 188,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g44",
+   "f_land": 205,
+   "f_start": 189,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g46",
+   "f_land": 206,
+   "f_start": 190,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "g47",
+   "f_land": 207,
+   "f_start": 191,
+   "word": "0:Here?"
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "g1",
+   "f_land": 273,
+   "f_start": 273,
+   "word": "0:Thirteen"
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "g4",
+   "f_land": 275,
+   "f_start": 275,
+   "word": "0:Thirteen"
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "g7",
+   "f_land": 277,
+   "f_start": 277,
+   "word": "0:Thirteen"
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "g10",
+   "f_land": 279,
+   "f_start": 279,
+   "word": "0:Thirteen"
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "g13",
+   "f_land": 281,
+   "f_start": 281,
+   "word": "0:Thirteen"
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "g18",
+   "f_land": 283,
+   "f_start": 283,
+   "word": "0:Thirteen"
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "g21",
+   "f_land": 285,
+   "f_start": 285,
+   "word": "0:Thirteen"
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "g26",
+   "f_land": 287,
+   "f_start": 287,
+   "word": "0:Thirteen"
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "g29",
+   "f_land": 289,
+   "f_start": 289,
+   "word": "0:Thirteen"
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "g34",
+   "f_land": 291,
+   "f_start": 291,
+   "word": "0:Thirteen"
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "g37",
+   "f_land": 293,
+   "f_start": 293,
+   "word": "0:Thirteen"
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "g42",
+   "f_land": 295,
+   "f_start": 295,
+   "word": "0:Thirteen"
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "g45",
+   "f_land": 297,
+   "f_start": 297,
+   "word": "0:Thirteen"
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "g1",
+   "f_land": 337,
+   "f_start": 325,
+   "word": "1:Thirteen."
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "g4",
+   "f_land": 338,
+   "f_start": 326,
+   "word": "1:Thirteen."
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "g7",
+   "f_land": 339,
+   "f_start": 327,
+   "word": "1:Thirteen."
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "g10",
+   "f_land": 340,
+   "f_start": 328,
+   "word": "1:Thirteen."
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "g13",
+   "f_land": 341,
+   "f_start": 329,
+   "word": "1:Thirteen."
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "g18",
+   "f_land": 342,
+   "f_start": 330,
+   "word": "1:Thirteen."
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "g21",
+   "f_land": 343,
+   "f_start": 331,
+   "word": "1:Thirteen."
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "g26",
+   "f_land": 344,
+   "f_start": 332,
+   "word": "1:Thirteen."
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "g29",
+   "f_land": 345,
+   "f_start": 333,
+   "word": "1:Thirteen."
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "g34",
+   "f_land": 346,
+   "f_start": 334,
+   "word": "1:Thirteen."
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "g37",
+   "f_land": 347,
+   "f_start": 335,
+   "word": "1:Thirteen."
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "g42",
+   "f_land": 348,
+   "f_start": 336,
+   "word": "1:Thirteen."
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "g45",
+   "f_land": 349,
+   "f_start": 337,
+   "word": "1:Thirteen."
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "h": 0.5,
+   "obj": "g1",
+   "f_land": 461,
+   "f_start": 449,
+   "word": "1:wild."
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "h": 0.5,
+   "obj": "g4",
+   "f_land": 462,
+   "f_start": 450,
+   "word": "1:wild."
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "h": 0.5,
+   "obj": "g7",
+   "f_land": 463,
+   "f_start": 451,
+   "word": "1:wild."
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "h": 0.5,
+   "obj": "g10",
+   "f_land": 464,
+   "f_start": 452,
+   "word": "1:wild."
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "h": 0.5,
+   "obj": "g13",
+   "f_land": 465,
+   "f_start": 453,
+   "word": "1:wild."
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "h": 0.5,
+   "obj": "g18",
+   "f_land": 466,
+   "f_start": 454,
+   "word": "1:wild."
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "h": 0.5,
+   "obj": "g21",
+   "f_land": 467,
+   "f_start": 455,
+   "word": "1:wild."
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "h": 0.5,
+   "obj": "g26",
+   "f_land": 468,
+   "f_start": 456,
+   "word": "1:wild."
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "h": 0.5,
+   "obj": "g29",
+   "f_land": 469,
+   "f_start": 457,
+   "word": "1:wild."
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "h": 0.5,
+   "obj": "g34",
+   "f_land": 470,
+   "f_start": 458,
+   "word": "1:wild."
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "h": 0.5,
+   "obj": "g37",
+   "f_land": 471,
+   "f_start": 459,
+   "word": "1:wild."
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "h": 0.5,
+   "obj": "g42",
+   "f_land": 472,
+   "f_start": 460,
+   "word": "1:wild."
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "h": 0.5,
+   "obj": "g45",
+   "f_land": 473,
+   "f_start": 461,
+   "word": "1:wild."
+  }
+ ],
+ "lockkey": {},
+ "notes": [
+  {
+   "word": "0:screened",
+   "kind": "pen",
+   "text": "millions screened",
+   "x": 0.06,
+   "y": 0.06,
+   "size": 62,
+   "d": 24,
+   "at": 108
+  },
+  {
+   "word": "0:made.",
+   "kind": "serif",
+   "text": "13 made",
+   "x": 0.06,
+   "y": 0.18,
+   "size": 72,
+   "d": 14,
+   "red": true,
+   "at": 321
+  },
+  {
+   "word": "1:honestly",
+   "kind": "pen",
+   "text": "honestly wild",
+   "x": 0.55,
+   "y": 0.06,
+   "size": 60,
+   "d": 20,
+   "at": 448
+  }
+ ],
+ "landings": [
+  32,
+  34,
+  36,
+  38,
+  40,
+  42,
+  44,
+  46,
+  48,
+  50,
+  52,
+  54,
+  56,
+  58,
+  60,
+  62,
+  64,
+  66,
+  68,
+  70,
+  72,
+  74,
+  76,
+  78,
+  81,
+  83,
+  85,
+  87,
+  89,
+  91,
+  93,
+  95,
+  97,
+  99,
+  101,
+  103,
+  105,
+  107,
+  108,
+  109,
+  111,
+  113,
+  115,
+  117,
+  119,
+  121,
+  123,
+  125,
+  127,
+  173,
+  174,
+  175,
+  176,
+  177,
+  178,
+  179,
+  180,
+  181,
+  182,
+  183,
+  184,
+  185,
+  186,
+  187,
+  188,
+  189,
+  190,
+  191,
+  192,
+  193,
+  194,
+  195,
+  196,
+  197,
+  198,
+  199,
+  200,
+  201,
+  202,
+  203,
+  204,
+  205,
+  206,
+  207,
+  321,
+  337,
+  338,
+  339,
+  340,
+  341,
+  342,
+  343,
+  344,
+  345,
+  346,
+  347,
+  348,
+  349,
+  448,
+  461,
+  462,
+  463,
+  464,
+  465,
+  466,
+  467,
+  468,
+  469,
+  470,
+  471,
+  472,
+  473
+ ],
+ "start_from": "6-03.mp4",
+ "end_from": "6-06.mp4"
+}

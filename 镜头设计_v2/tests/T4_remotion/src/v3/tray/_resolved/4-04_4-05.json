@@ -1,0 +1,398 @@
+{
+ "name": "4-04_4-05",
+ "frames": 403,
+ "pull": [
+  0,
+  24
+ ],
+ "person_in": [
+  8,
+  24
+ ],
+ "push": [
+  379,
+  403
+ ],
+ "fade_out": null,
+ "prev": "4-03",
+ "next": "4-06",
+ "parts": [
+  {
+   "seg": "4-04",
+   "take": "C_cam_4-04_t2",
+   "who": "C",
+   "at": 0,
+   "src0": 0.0,
+   "pad": 4,
+   "until": 107,
+   "person_side": "left",
+   "tray": "right",
+   "person_cx": 646,
+   "box": [
+    -431,
+    465,
+    3013,
+    1695
+   ],
+   "dx": -86
+  },
+  {
+   "seg": "4-05",
+   "take": "B_cam_4-05_t1",
+   "who": "B",
+   "at": 107,
+   "src0": 0.351,
+   "pad": 0,
+   "until": 379,
+   "person_side": "left",
+   "tray": "right",
+   "person_cx": 599,
+   "box": [
+    -703,
+    418,
+    3098,
+    1742
+   ],
+   "dx": -39
+  }
+ ],
+ "words": {
+  "0:So": 32,
+  "0:what": 68,
+  "0:did": 80,
+  "0:they": 87,
+  "0:do?": 99,
+  "1:They": 114,
+  "1:cut": 123,
+  "1:the": 132,
+  "1:tail": 139,
+  "1:off.": 165,
+  "1:The": 194,
+  "1:AI": 203,
+  "1:made": 216,
+  "1:the#2": 227,
+  "1:guess.": 234,
+  "1:A": 294,
+  "1:human": 301,
+  "1:caught": 326,
+  "1:the#3": 343,
+  "1:problem.": 351
+ },
+ "objects": {
+  "body": {
+   "lib": "coin",
+   "at": [
+    0.3,
+    0.36
+   ]
+  },
+  "b0": {
+   "lib": "bead",
+   "at": [
+    0.4,
+    0.36
+   ]
+  },
+  "b1": {
+   "lib": "bead",
+   "at": [
+    0.45,
+    0.37
+   ]
+  },
+  "b2": {
+   "lib": "bead",
+   "at": [
+    0.5,
+    0.38
+   ]
+  },
+  "b3": {
+   "lib": "bead",
+   "at": [
+    0.55,
+    0.37
+   ]
+  },
+  "b4": {
+   "lib": "bead",
+   "at": [
+    0.6,
+    0.36
+   ]
+  },
+  "b5": {
+   "lib": "bead",
+   "at": [
+    0.65,
+    0.35
+   ]
+  },
+  "ai": {
+   "lib": "coin",
+   "at": [
+    0.2,
+    0.2
+   ]
+  },
+  "hu": {
+   "lib": "pawn",
+   "at": [
+    0.8,
+    0.22
+   ]
+  }
+ },
+ "events": [
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "body",
+   "f_land": 68,
+   "f_start": 54,
+   "word": "0:what"
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "b0",
+   "f_land": 89,
+   "f_start": 75,
+   "word": "0:do?"
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "b1",
+   "f_land": 91,
+   "f_start": 77,
+   "word": "0:do?"
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "b2",
+   "f_land": 93,
+   "f_start": 79,
+   "word": "0:do?"
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "b3",
+   "f_land": 95,
+   "f_start": 81,
+   "word": "0:do?"
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "b4",
+   "f_land": 97,
+   "f_start": 83,
+   "word": "0:do?"
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "b5",
+   "f_land": 99,
+   "f_start": 85,
+   "word": "0:do?"
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "b0",
+   "f_land": 103,
+   "f_start": 103,
+   "word": "0:do?"
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "b1",
+   "f_land": 103,
+   "f_start": 103,
+   "word": "0:do?"
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "b2",
+   "f_land": 103,
+   "f_start": 103,
+   "word": "0:do?"
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "b3",
+   "f_land": 103,
+   "f_start": 103,
+   "word": "0:do?"
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "b4",
+   "f_land": 103,
+   "f_start": 103,
+   "word": "0:do?"
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "b5",
+   "f_land": 103,
+   "f_start": 103,
+   "word": "0:do?"
+  },
+  {
+   "verb": "lift",
+   "lead": 20,
+   "obj": "b0",
+   "f_land": 155,
+   "f_start": 135,
+   "word": "1:off."
+  },
+  {
+   "verb": "lift",
+   "lead": 20,
+   "obj": "b1",
+   "f_land": 157,
+   "f_start": 137,
+   "word": "1:off."
+  },
+  {
+   "verb": "lift",
+   "lead": 20,
+   "obj": "b2",
+   "f_land": 159,
+   "f_start": 139,
+   "word": "1:off."
+  },
+  {
+   "verb": "lift",
+   "lead": 20,
+   "obj": "b3",
+   "f_land": 161,
+   "f_start": 141,
+   "word": "1:off."
+  },
+  {
+   "verb": "lift",
+   "lead": 20,
+   "obj": "b4",
+   "f_land": 163,
+   "f_start": 143,
+   "word": "1:off."
+  },
+  {
+   "verb": "lift",
+   "lead": 20,
+   "obj": "b5",
+   "f_land": 165,
+   "f_start": 145,
+   "word": "1:off."
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "ai",
+   "f_land": 203,
+   "f_start": 189,
+   "word": "1:AI"
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "ai",
+   "f_land": 234,
+   "f_start": 222,
+   "word": "1:guess."
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "hu",
+   "f_land": 301,
+   "f_start": 287,
+   "word": "1:human"
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "hu",
+   "f_land": 326,
+   "f_start": 314,
+   "word": "1:caught"
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "body",
+   "f_land": 351,
+   "f_start": 339,
+   "word": "1:problem."
+  }
+ ],
+ "lockkey": {},
+ "notes": [
+  {
+   "word": "1:cut",
+   "kind": "pen",
+   "text": "cut the tail off",
+   "x": 0.06,
+   "y": 0.06,
+   "size": 62,
+   "d": 22,
+   "red": true,
+   "at": 123
+  },
+  {
+   "word": "1:made",
+   "kind": "serif",
+   "text": "AI: the guess",
+   "x": 0.06,
+   "y": 0.18,
+   "size": 52,
+   "d": 16,
+   "at": 216
+  },
+  {
+   "word": "1:human",
+   "kind": "serif",
+   "text": "human: the check",
+   "x": 0.52,
+   "y": 0.18,
+   "size": 52,
+   "d": 16,
+   "at": 301
+  }
+ ],
+ "landings": [
+  68,
+  89,
+  91,
+  93,
+  95,
+  97,
+  99,
+  123,
+  155,
+  157,
+  159,
+  161,
+  163,
+  165,
+  203,
+  216,
+  234,
+  301,
+  326,
+  351
+ ],
+ "start_from": "4-03.mp4",
+ "end_from": "4-06.mp4"
+}

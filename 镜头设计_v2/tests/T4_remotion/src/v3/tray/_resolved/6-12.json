@@ -1,0 +1,268 @@
+{
+ "name": "6-12",
+ "frames": 429,
+ "pull": [
+  0,
+  24
+ ],
+ "person_in": [
+  8,
+  24
+ ],
+ "push": null,
+ "fade_out": [
+  405,
+  419
+ ],
+ "prev": "6-11",
+ "next": "7-01",
+ "parts": [
+  {
+   "seg": "6-12",
+   "take": "B_cam_6-12_t1",
+   "who": "B",
+   "at": 0,
+   "src0": 0.0,
+   "pad": 6,
+   "until": 405,
+   "person_side": "left",
+   "tray": "right",
+   "person_cx": 600,
+   "box": [
+    -725,
+    401,
+    3127,
+    1759
+   ],
+   "dx": -40
+  }
+ ],
+ "words": {
+  "0:048": 32,
+  "0:is": 72,
+  "0:at": 81,
+  "0:the": 86,
+  "0:very": 94,
+  "0:start": 111,
+  "0:of": 131,
+  "0:the#2": 137,
+  "0:road.": 144,
+  "0:But": 198,
+  "0:for": 204,
+  "0:this": 215,
+  "0:case,": 227,
+  "0:that": 292,
+  "0:start#2": 299,
+  "0:took": 308,
+  "0:weeks,": 324,
+  "0:not": 364,
+  "0:years.": 377
+ },
+ "objects": {
+  "s0": {
+   "lib": "coin",
+   "at": [
+    0.18,
+    0.3
+   ]
+  },
+  "s1": {
+   "lib": "coin",
+   "at": [
+    0.31,
+    0.3
+   ]
+  },
+  "s2": {
+   "lib": "coin",
+   "at": [
+    0.44,
+    0.3
+   ]
+  },
+  "s3": {
+   "lib": "coin",
+   "at": [
+    0.57,
+    0.3
+   ]
+  },
+  "s4": {
+   "lib": "coin",
+   "at": [
+    0.7,
+    0.3
+   ]
+  },
+  "s5": {
+   "lib": "coin",
+   "at": [
+    0.83,
+    0.3
+   ]
+  },
+  "k": {
+   "lib": "bead",
+   "at": [
+    0.18,
+    0.14
+   ],
+   "size": 0.016
+  }
+ },
+ "events": [
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "k",
+   "f_land": 32,
+   "f_start": 18,
+   "word": "0:048"
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "k",
+   "f_land": 32,
+   "f_start": 32,
+   "word": "0:048"
+  },
+  {
+   "verb": "drop",
+   "lead": 18,
+   "obj": "s0",
+   "f_land": 84,
+   "f_start": 66,
+   "word": "0:very"
+  },
+  {
+   "verb": "drop",
+   "lead": 18,
+   "obj": "s1",
+   "f_land": 86,
+   "f_start": 68,
+   "word": "0:very"
+  },
+  {
+   "verb": "drop",
+   "lead": 18,
+   "obj": "s2",
+   "f_land": 88,
+   "f_start": 70,
+   "word": "0:very"
+  },
+  {
+   "verb": "drop",
+   "lead": 18,
+   "obj": "s3",
+   "f_land": 90,
+   "f_start": 72,
+   "word": "0:very"
+  },
+  {
+   "verb": "drop",
+   "lead": 18,
+   "obj": "s4",
+   "f_land": 92,
+   "f_start": 74,
+   "word": "0:very"
+  },
+  {
+   "verb": "drop",
+   "lead": 18,
+   "obj": "s5",
+   "f_land": 94,
+   "f_start": 76,
+   "word": "0:very"
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "s0",
+   "f_land": 111,
+   "f_start": 99,
+   "word": "0:start"
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "k",
+   "f_land": 227,
+   "f_start": 215,
+   "word": "0:case,"
+  },
+  {
+   "verb": "slide",
+   "lead": 24,
+   "to": [
+    0.25,
+    0.14
+   ],
+   "obj": "k",
+   "f_land": 324,
+   "f_start": 300,
+   "word": "0:weeks,"
+  }
+ ],
+ "lockkey": {},
+ "notes": [
+  {
+   "word": "0:road.",
+   "kind": "pen",
+   "text": "start of the road",
+   "x": 0.06,
+   "y": 0.06,
+   "size": 60,
+   "d": 22,
+   "at": 144
+  },
+  {
+   "word": "0:took",
+   "kind": "serif",
+   "text": "weeks",
+   "x": 0.06,
+   "y": 0.18,
+   "size": 68,
+   "d": 12,
+   "red": true,
+   "at": 308
+  },
+  {
+   "word": "0:not",
+   "kind": "serif",
+   "text": "years",
+   "x": 0.3,
+   "y": 0.18,
+   "size": 68,
+   "d": 10,
+   "at": 364
+  },
+  {
+   "word": "0:years.",
+   "kind": "strike",
+   "text": "years",
+   "x": 0.3,
+   "y": 0.18,
+   "size": 68,
+   "d": 12,
+   "at": 377
+  }
+ ],
+ "landings": [
+  32,
+  84,
+  86,
+  88,
+  90,
+  92,
+  94,
+  111,
+  144,
+  227,
+  308,
+  324,
+  364,
+  377
+ ],
+ "start_from": "6-11.mp4"
+}

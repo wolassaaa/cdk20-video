@@ -1,0 +1,220 @@
+{
+ "name": "2-02",
+ "frames": 646,
+ "pull": [
+  0,
+  24
+ ],
+ "person_in": [
+  8,
+  24
+ ],
+ "push": [
+  622,
+  646
+ ],
+ "fade_out": null,
+ "prev": "2-01",
+ "next": "2-03",
+ "parts": [
+  {
+   "seg": "2-02",
+   "take": "A_cam_2-02_t1",
+   "who": "A",
+   "at": 0,
+   "src0": 0.0,
+   "pad": 4,
+   "until": 622,
+   "person_side": "left",
+   "tray": "right",
+   "person_cx": 627,
+   "box": [
+    -485,
+    476,
+    2994,
+    1684
+   ],
+   "dx": -67
+  }
+ ],
+ "words": {
+  "0:So": 32,
+  "0:our": 49,
+  "0:research": 65,
+  "0:question": 93,
+  "0:is:": 124,
+  "0:how": 168,
+  "0:can": 181,
+  "0:computer-aided": 192,
+  "0:methods": 266,
+  "0:help": 322,
+  "0:scientists": 336,
+  "0:find": 401,
+  "0:and": 431,
+  "0:assess": 443,
+  "0:potential": 472,
+  "0:cancer": 517,
+  "0:drug": 549,
+  "0:candidates?": 571
+ },
+ "objects": {
+  "c0": {
+   "lib": "coin",
+   "at": [
+    0.2,
+    0.3
+   ]
+  },
+  "p0": {
+   "lib": "pawn",
+   "at": [
+    0.32,
+    0.3
+   ]
+  },
+  "t0": {
+   "lib": "tube",
+   "at": [
+    0.8,
+    0.42
+   ]
+  },
+  "q0": {
+   "lib": "card",
+   "at": [
+    0.6,
+    0.32
+   ]
+  }
+ },
+ "events": [
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "q0",
+   "f_land": 93,
+   "f_start": 79,
+   "word": "0:question"
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "c0",
+   "f_land": 192,
+   "f_start": 178,
+   "word": "0:computer-aided"
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "c0",
+   "f_land": 266,
+   "f_start": 254,
+   "word": "0:methods"
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "p0",
+   "f_land": 336,
+   "f_start": 322,
+   "word": "0:scientists"
+  },
+  {
+   "verb": "slide",
+   "lead": 22,
+   "to": [
+    0.46,
+    0.3
+   ],
+   "obj": "p0",
+   "f_land": 401,
+   "f_start": 379,
+   "word": "0:find"
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "q0",
+   "f_land": 443,
+   "f_start": 431,
+   "word": "0:assess"
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "t0",
+   "f_land": 517,
+   "f_start": 503,
+   "word": "0:cancer"
+  },
+  {
+   "verb": "fill",
+   "lead": 16,
+   "level": 0.55,
+   "obj": "t0",
+   "f_land": 571,
+   "f_start": 555,
+   "word": "0:candidates?"
+  }
+ ],
+ "lockkey": {},
+ "notes": [
+  {
+   "word": "0:research",
+   "kind": "pen",
+   "text": "our research question",
+   "x": 0.05,
+   "y": 0.04,
+   "size": 58,
+   "d": 26,
+   "at": 65
+  },
+  {
+   "word": "0:how",
+   "kind": "serif",
+   "text": "How can computer-aided methods",
+   "x": 0.05,
+   "y": 0.15,
+   "size": 44,
+   "d": 40,
+   "at": 168
+  },
+  {
+   "word": "0:help",
+   "kind": "serif",
+   "text": "help scientists find and assess",
+   "x": 0.05,
+   "y": 0.235,
+   "size": 44,
+   "d": 40,
+   "at": 322
+  },
+  {
+   "word": "0:potential",
+   "kind": "serif",
+   "text": "potential cancer drug candidates?",
+   "x": 0.05,
+   "y": 0.32,
+   "size": 44,
+   "d": 40,
+   "at": 472
+  }
+ ],
+ "landings": [
+  65,
+  93,
+  168,
+  192,
+  266,
+  322,
+  336,
+  401,
+  443,
+  472,
+  517,
+  571
+ ],
+ "start_from": "2-01.mp4",
+ "end_from": "2-03.mp4"
+}

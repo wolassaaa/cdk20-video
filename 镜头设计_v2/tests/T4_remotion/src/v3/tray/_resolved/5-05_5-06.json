@@ -1,0 +1,154 @@
+{
+ "name": "5-05_5-06",
+ "frames": 477,
+ "pull": [
+  0,
+  24
+ ],
+ "person_in": [
+  8,
+  24
+ ],
+ "push": [
+  453,
+  477
+ ],
+ "fade_out": null,
+ "prev": "5-04",
+ "next": "5-07",
+ "parts": [
+  {
+   "seg": "5-05",
+   "take": "C_cam_5-05_t2",
+   "who": "C",
+   "at": 0,
+   "src0": 0.0,
+   "pad": 2,
+   "until": 245,
+   "person_side": "left",
+   "tray": "right",
+   "person_cx": 654,
+   "box": [
+    -464,
+    428,
+    3078,
+    1732
+   ],
+   "dx": -94
+  },
+  {
+   "seg": "5-06",
+   "take": "B_cam_5-06_t1",
+   "who": "B",
+   "at": 245,
+   "src0": 0.332,
+   "pad": 0,
+   "until": 453,
+   "person_side": "right",
+   "tray": "left",
+   "person_cx": 1057,
+   "box": [
+    969,
+    327,
+    3260,
+    1833
+   ],
+   "dx": 303
+  }
+ ],
+ "words": {
+  "0:The": 32,
+  "0:key": 42,
+  "0:went": 69,
+  "0:into": 95,
+  "0:the": 112,
+  "0:lock.": 122,
+  "0:But": 155,
+  "0:it": 166,
+  "0:barely": 183,
+  "0:turned.": 224,
+  "1:So": 252,
+  "1:was": 261,
+  "1:that": 353,
+  "1:it?": 368,
+  "1:Back": 393,
+  "1:to": 401,
+  "1:square": 409,
+  "1:one?": 431
+ },
+ "objects": {},
+ "events": [
+  {
+   "verb": "turn",
+   "lead": 30,
+   "deg": 6,
+   "back": true,
+   "hold": 10,
+   "back_dur": 16,
+   "obj": "lock",
+   "f_land": 224,
+   "f_start": 194,
+   "word": "0:turned."
+  },
+  {
+   "verb": "turn",
+   "lead": 14,
+   "deg": -3,
+   "back": true,
+   "hold": 4,
+   "back_dur": 12,
+   "obj": "lock",
+   "f_land": 431,
+   "f_start": 417,
+   "word": "1:one?"
+  }
+ ],
+ "lockkey": {
+  "lock": 32,
+  "key": 122,
+  "lock_used": true,
+  "key_used": true
+ },
+ "notes": [
+  {
+   "word": "0:into",
+   "kind": "pen",
+   "text": "key into the lock",
+   "x": 0.06,
+   "y": 0.06,
+   "size": 60,
+   "d": 22,
+   "at": 95
+  },
+  {
+   "word": "0:barely",
+   "kind": "pen",
+   "text": "barely turned",
+   "x": 0.06,
+   "y": 0.18,
+   "size": 64,
+   "d": 22,
+   "red": true,
+   "at": 183
+  },
+  {
+   "word": "1:Back",
+   "kind": "pen",
+   "text": "back to square one?",
+   "x": 0.06,
+   "y": 0.3,
+   "size": 60,
+   "d": 22,
+   "at": 393
+  }
+ ],
+ "landings": [
+  95,
+  183,
+  224,
+  393,
+  431
+ ],
+ "start_from": "5-04.mp4",
+ "end_from": "S5_507_beats_v3.mp4"
+}

@@ -1,0 +1,94 @@
+{
+ "name": "5-09",
+ "frames": 200,
+ "pull": [
+  0,
+  24
+ ],
+ "person_in": [
+  8,
+  24
+ ],
+ "push": [
+  176,
+  200
+ ],
+ "fade_out": null,
+ "prev": "5-08",
+ "next": "W4",
+ "parts": [
+  {
+   "seg": "5-09",
+   "take": "C_cam_5-09_t1",
+   "who": "C",
+   "at": 0,
+   "src0": 0.0,
+   "pad": 4,
+   "until": 176,
+   "person_side": "left",
+   "tray": "right",
+   "person_cx": 642,
+   "box": [
+    -417,
+    482,
+    2984,
+    1678
+   ],
+   "dx": -82
+  }
+ ],
+ "words": {
+  "0:This": 32,
+  "0:time,": 47,
+  "0:the": 77,
+  "0:key": 89,
+  "0:turned.": 142
+ },
+ "objects": {},
+ "events": [
+  {
+   "verb": "turn",
+   "lead": 26,
+   "deg": 40,
+   "obj": "lock",
+   "f_land": 142,
+   "f_start": 116,
+   "word": "0:turned."
+  }
+ ],
+ "lockkey": {
+  "lock": 32,
+  "key": 89,
+  "lock_used": true,
+  "key_used": true
+ },
+ "notes": [
+  {
+   "word": "0:time,",
+   "kind": "pen",
+   "text": "this time",
+   "x": 0.06,
+   "y": 0.06,
+   "size": 64,
+   "d": 18,
+   "at": 47
+  },
+  {
+   "word": "0:turned.",
+   "kind": "pen",
+   "text": "it turned",
+   "x": 0.06,
+   "y": 0.18,
+   "size": 70,
+   "d": 18,
+   "red": true,
+   "at": 142
+  }
+ ],
+ "landings": [
+  47,
+  142
+ ],
+ "start_from": "S5_508_beats_v6.mp4",
+ "end_from": "S5_W4_beats_v2.mp4"
+}

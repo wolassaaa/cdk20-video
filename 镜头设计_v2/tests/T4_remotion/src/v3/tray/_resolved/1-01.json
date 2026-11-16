@@ -1,0 +1,427 @@
+{
+ "name": "1-01",
+ "frames": 338,
+ "pull": [
+  0,
+  24
+ ],
+ "person_in": [
+  8,
+  24
+ ],
+ "push": [
+  314,
+  338
+ ],
+ "fade_out": null,
+ "prev": "W0",
+ "next": "1-02",
+ "parts": [
+  {
+   "seg": "1-01",
+   "take": "A_cam_1-01_t1",
+   "who": "A",
+   "at": 0,
+   "src0": 0.0,
+   "pad": 2,
+   "until": 314,
+   "person_side": "left",
+   "tray": "right",
+   "person_cx": 632,
+   "box": [
+    -410,
+    508,
+    2936,
+    1652
+   ],
+   "dx": -72
+  }
+ ],
+ "words": {
+  "0:Every": 32,
+  "0:day": 52,
+  "0:in": 72,
+  "0:Hong": 82,
+  "0:Kong,": 97,
+  "0:about": 146,
+  "0:four": 164,
+  "0:people": 180,
+  "0:die": 215,
+  "0:of": 236,
+  "0:liver": 254,
+  "0:cancer.": 278
+ },
+ "objects": {
+  "p0": {
+   "lib": "pawn",
+   "at": [
+    0.14,
+    0.42
+   ]
+  },
+  "p1": {
+   "lib": "pawn",
+   "at": [
+    0.22,
+    0.42
+   ]
+  },
+  "p2": {
+   "lib": "pawn",
+   "at": [
+    0.3,
+    0.42
+   ]
+  },
+  "p3": {
+   "lib": "pawn",
+   "at": [
+    0.38,
+    0.42
+   ]
+  },
+  "p4": {
+   "lib": "pawn",
+   "at": [
+    0.46,
+    0.42
+   ]
+  },
+  "p5": {
+   "lib": "pawn",
+   "at": [
+    0.54,
+    0.42
+   ]
+  },
+  "p6": {
+   "lib": "pawn",
+   "at": [
+    0.62,
+    0.42
+   ]
+  },
+  "p7": {
+   "lib": "pawn",
+   "at": [
+    0.7,
+    0.42
+   ]
+  },
+  "p8": {
+   "lib": "pawn",
+   "at": [
+    0.78,
+    0.42
+   ]
+  },
+  "p9": {
+   "lib": "pawn",
+   "at": [
+    0.86,
+    0.42
+   ]
+  }
+ },
+ "events": [
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "p0",
+   "f_land": 14,
+   "f_start": -2,
+   "word": "0:Every"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "p1",
+   "f_land": 16,
+   "f_start": 0,
+   "word": "0:Every"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "p2",
+   "f_land": 18,
+   "f_start": 2,
+   "word": "0:Every"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "p3",
+   "f_land": 20,
+   "f_start": 4,
+   "word": "0:Every"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "p4",
+   "f_land": 22,
+   "f_start": 6,
+   "word": "0:Every"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "p5",
+   "f_land": 24,
+   "f_start": 8,
+   "word": "0:Every"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "p6",
+   "f_land": 26,
+   "f_start": 10,
+   "word": "0:Every"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "p7",
+   "f_land": 28,
+   "f_start": 12,
+   "word": "0:Every"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "p8",
+   "f_land": 30,
+   "f_start": 14,
+   "word": "0:Every"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "p9",
+   "f_land": 32,
+   "f_start": 16,
+   "word": "0:Every"
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "h": 0.4,
+   "obj": "p0",
+   "f_land": 88,
+   "f_start": 76,
+   "word": "0:Kong,"
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "h": 0.4,
+   "obj": "p1",
+   "f_land": 89,
+   "f_start": 77,
+   "word": "0:Kong,"
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "h": 0.4,
+   "obj": "p2",
+   "f_land": 90,
+   "f_start": 78,
+   "word": "0:Kong,"
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "h": 0.4,
+   "obj": "p3",
+   "f_land": 91,
+   "f_start": 79,
+   "word": "0:Kong,"
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "h": 0.4,
+   "obj": "p4",
+   "f_land": 92,
+   "f_start": 80,
+   "word": "0:Kong,"
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "h": 0.4,
+   "obj": "p5",
+   "f_land": 93,
+   "f_start": 81,
+   "word": "0:Kong,"
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "h": 0.4,
+   "obj": "p6",
+   "f_land": 94,
+   "f_start": 82,
+   "word": "0:Kong,"
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "h": 0.4,
+   "obj": "p7",
+   "f_land": 95,
+   "f_start": 83,
+   "word": "0:Kong,"
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "h": 0.4,
+   "obj": "p8",
+   "f_land": 96,
+   "f_start": 84,
+   "word": "0:Kong,"
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "h": 0.4,
+   "obj": "p9",
+   "f_land": 97,
+   "f_start": 85,
+   "word": "0:Kong,"
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "p3",
+   "f_land": 155,
+   "f_start": 155,
+   "word": "0:four"
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "p4",
+   "f_land": 158,
+   "f_start": 158,
+   "word": "0:four"
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "p5",
+   "f_land": 161,
+   "f_start": 161,
+   "word": "0:four"
+  },
+  {
+   "verb": "red",
+   "lead": 0,
+   "obj": "p6",
+   "f_land": 164,
+   "f_start": 164,
+   "word": "0:four"
+  },
+  {
+   "verb": "tip",
+   "lead": 14,
+   "obj": "p3",
+   "f_land": 206,
+   "f_start": 192,
+   "word": "0:die"
+  },
+  {
+   "verb": "tip",
+   "lead": 14,
+   "obj": "p4",
+   "f_land": 209,
+   "f_start": 195,
+   "word": "0:die"
+  },
+  {
+   "verb": "tip",
+   "lead": 14,
+   "obj": "p5",
+   "f_land": 212,
+   "f_start": 198,
+   "word": "0:die"
+  },
+  {
+   "verb": "tip",
+   "lead": 14,
+   "obj": "p6",
+   "f_land": 215,
+   "f_start": 201,
+   "word": "0:die"
+  }
+ ],
+ "lockkey": {},
+ "notes": [
+  {
+   "word": "0:Hong",
+   "kind": "pen",
+   "text": "Hong Kong",
+   "x": 0.06,
+   "y": 0.06,
+   "size": 64,
+   "d": 24,
+   "at": 82
+  },
+  {
+   "word": "0:about",
+   "kind": "serif",
+   "text": "about 4 a day",
+   "x": 0.06,
+   "y": 0.2,
+   "size": 60,
+   "d": 20,
+   "at": 146
+  },
+  {
+   "word": "0:liver",
+   "kind": "pen",
+   "text": "liver cancer",
+   "x": 0.55,
+   "y": 0.2,
+   "size": 60,
+   "d": 22,
+   "red": true,
+   "at": 254
+  }
+ ],
+ "landings": [
+  14,
+  16,
+  18,
+  20,
+  22,
+  24,
+  26,
+  28,
+  30,
+  32,
+  82,
+  88,
+  89,
+  90,
+  91,
+  92,
+  93,
+  94,
+  95,
+  96,
+  97,
+  146,
+  206,
+  209,
+  212,
+  215,
+  254
+ ],
+ "start_from": "rough_v0.mp4",
+ "end_from": "1-02.mp4"
+}

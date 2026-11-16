@@ -1,0 +1,131 @@
+{
+ "name": "2-04",
+ "frames": 217,
+ "pull": [
+  0,
+  24
+ ],
+ "person_in": [
+  8,
+  24
+ ],
+ "push": [
+  193,
+  217
+ ],
+ "fade_out": null,
+ "prev": "2-03",
+ "next": "2-05",
+ "parts": [
+  {
+   "seg": "2-04",
+   "take": "C_cam_2-04_t2",
+   "who": "C",
+   "at": 0,
+   "src0": 0.0,
+   "pad": 5,
+   "until": 193,
+   "person_side": "left",
+   "tray": "right",
+   "person_cx": 668,
+   "box": [
+    -522,
+    364,
+    3194,
+    1796
+   ],
+   "dx": -108
+  }
+ ],
+ "words": {
+  "0:We": 32,
+  "0:set": 45,
+  "0:ourselves": 69,
+  "0:two": 113,
+  "0:objectives.": 138
+ },
+ "objects": {
+  "q0": {
+   "lib": "card",
+   "at": [
+    0.34,
+    0.34
+   ]
+  },
+  "q1": {
+   "lib": "card",
+   "at": [
+    0.62,
+    0.34
+   ]
+  }
+ },
+ "events": [
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "q0",
+   "f_land": 45,
+   "f_start": 31,
+   "word": "0:set"
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "q0",
+   "f_land": 113,
+   "f_start": 101,
+   "word": "0:two"
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "q1",
+   "f_land": 138,
+   "f_start": 124,
+   "word": "0:objectives."
+  }
+ ],
+ "lockkey": {},
+ "notes": [
+  {
+   "word": "0:ourselves",
+   "kind": "pen",
+   "text": "two objectives",
+   "x": 0.06,
+   "y": 0.06,
+   "size": 64,
+   "d": 24,
+   "at": 69
+  },
+  {
+   "word": "0:two",
+   "kind": "serif",
+   "text": "1",
+   "x": 0.33,
+   "y": 0.22,
+   "size": 84,
+   "d": 8,
+   "at": 113
+  },
+  {
+   "word": "0:objectives.",
+   "kind": "serif",
+   "text": "2",
+   "x": 0.61,
+   "y": 0.22,
+   "size": 84,
+   "d": 8,
+   "red": true,
+   "at": 138
+  }
+ ],
+ "landings": [
+  45,
+  69,
+  113,
+  138
+ ],
+ "start_from": "2-03.mp4",
+ "end_from": "2-05.mp4"
+}

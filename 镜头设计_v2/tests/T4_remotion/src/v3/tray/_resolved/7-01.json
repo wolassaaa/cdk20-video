@@ -1,0 +1,127 @@
+{
+ "name": "7-01",
+ "frames": 297,
+ "pull": null,
+ "person_in": [
+  0,
+  16
+ ],
+ "push": [
+  273,
+  297
+ ],
+ "fade_out": null,
+ "prev": "6-12",
+ "next": "7-02",
+ "parts": [
+  {
+   "seg": "7-01",
+   "take": "A_cam_7-01_t1",
+   "who": "A",
+   "at": 0,
+   "src0": 0.0,
+   "pad": 0,
+   "until": 273,
+   "person_side": "left",
+   "tray": "right",
+   "person_cx": 848,
+   "box": [
+    279,
+    408,
+    3114,
+    1752
+   ],
+   "dx": -288
+  }
+ ],
+ "words": {
+  "0:So,": 28,
+  "0:what": 40,
+  "0:should": 53,
+  "0:happen": 66,
+  "0:next?": 92,
+  "0:We'd": 165,
+  "0:suggest": 182,
+  "0:three": 211,
+  "0:things.": 237
+ },
+ "objects": {
+  "q0": {
+   "lib": "card",
+   "at": [
+    0.28,
+    0.34
+   ]
+  },
+  "q1": {
+   "lib": "card",
+   "at": [
+    0.5,
+    0.34
+   ]
+  },
+  "q2": {
+   "lib": "card",
+   "at": [
+    0.72,
+    0.34
+   ]
+  }
+ },
+ "events": [
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "q0",
+   "f_land": 182,
+   "f_start": 168,
+   "word": "0:suggest"
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "q1",
+   "f_land": 211,
+   "f_start": 197,
+   "word": "0:three"
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "q2",
+   "f_land": 237,
+   "f_start": 223,
+   "word": "0:things."
+  }
+ ],
+ "lockkey": {},
+ "notes": [
+  {
+   "word": "0:what",
+   "kind": "pen",
+   "text": "what next?",
+   "x": 0.06,
+   "y": 0.06,
+   "size": 66,
+   "d": 30,
+   "at": 40
+  },
+  {
+   "word": "0:three",
+   "kind": "serif",
+   "text": "1     2     3",
+   "x": 0.25,
+   "y": 0.22,
+   "size": 72,
+   "d": 30,
+   "at": 211
+  }
+ ],
+ "landings": [
+  40,
+  182,
+  211,
+  237
+ ],
+ "end_from": "7-02.mp4"
+}

@@ -1,0 +1,304 @@
+{
+ "_note": "HKBU SCIE1007 课程作业的科普视频。托盘出镜模板（cut_v6）的节拍表。词写成 \"<第几段>:<词原文>[#第几次]\"；lead = 提前起动帧数，落点 = 词开口帧 + lag。物件位置是托盘坐标 (u 左→右, v 前→后)；字的位置是托盘框的比例 (x, y，y 从后沿往前)。prep4.py 解成帧号写 _resolved/<名>.json，bl_tray4.py 和 Tray4.jsx 读解好的那份。",
+ "1-01": {
+  "parts": ["1-01"],
+  "objects": {"p0": {"lib": "pawn", "at": [0.14, 0.42]}, "p1": {"lib": "pawn", "at": [0.22, 0.42]}, "p2": {"lib": "pawn", "at": [0.30, 0.42]}, "p3": {"lib": "pawn", "at": [0.38, 0.42]},
+              "p4": {"lib": "pawn", "at": [0.46, 0.42]}, "p5": {"lib": "pawn", "at": [0.54, 0.42]}, "p6": {"lib": "pawn", "at": [0.62, 0.42]}, "p7": {"lib": "pawn", "at": [0.70, 0.42]},
+              "p8": {"lib": "pawn", "at": [0.78, 0.42]}, "p9": {"lib": "pawn", "at": [0.86, 0.42]}},
+  "events": [
+   {"verb": "drop", "obj": "p*", "word": "0:Every", "lead": 16, "stagger": 2},
+   {"verb": "hop", "obj": "p*", "word": "0:Kong,", "lead": 12, "stagger": 1, "h": 0.4},
+   {"verb": "red", "obj": "p3,p4,p5,p6", "word": "0:four", "lead": 0, "stagger": 3},
+   {"verb": "tip", "obj": "p3,p4,p5,p6", "word": "0:die", "lead": 14, "stagger": 3}
+  ],
+  "notes": [
+   {"word": "0:Hong", "kind": "pen", "text": "Hong Kong", "x": 0.06, "y": 0.06, "size": 64, "d": 24},
+   {"word": "0:about", "kind": "serif", "text": "about 4 a day", "x": 0.06, "y": 0.2, "size": 60, "d": 20},
+   {"word": "0:liver", "kind": "pen", "text": "liver cancer", "x": 0.55, "y": 0.2, "size": 60, "d": 22, "red": true}
+  ]
+ },
+ "1-03": {
+  "parts": ["1-03"],
+  "objects": {"t0": {"lib": "tube", "at": [0.36, 0.40]}, "t1": {"lib": "tube", "at": [0.56, 0.40]}, "c0": {"lib": "coin", "at": [0.20, 0.30]}},
+  "events": [
+   {"verb": "drop", "obj": "c0", "word": "0:Here's", "lead": 14},
+   {"verb": "hop", "obj": "c0", "word": "0:thing.", "lead": 12},
+   {"verb": "drop", "obj": "t0", "word": "0:already", "lead": 16},
+   {"verb": "drop", "obj": "t1", "word": "0:medicines.", "lead": 16},
+   {"verb": "fill", "obj": "t0", "word": "0:not", "lead": 14, "level": 0.25},
+   {"verb": "fill", "obj": "t1", "word": "0:good", "lead": 14, "level": 0.2}
+  ],
+  "notes": [
+   {"word": "0:We", "kind": "pen", "text": "today's medicines", "x": 0.06, "y": 0.06, "size": 62, "d": 26},
+   {"word": "0:enough", "kind": "pen", "text": "not good enough", "x": 0.06, "y": 0.18, "size": 62, "d": 22, "red": true}
+  ]
+ },
+ "1-05_1-06_1-07": {
+  "parts": ["1-05", "1-06", "1-07"],
+  "objects": {"t0": {"lib": "tube", "at": [0.24, 0.42]},
+              "s0": {"lib": "coin", "at": [0.36, 0.30]}, "s1": {"lib": "coin", "at": [0.46, 0.30]}, "s2": {"lib": "coin", "at": [0.56, 0.30]},
+              "s3": {"lib": "coin", "at": [0.66, 0.30]}, "s4": {"lib": "coin", "at": [0.76, 0.30]}, "s5": {"lib": "coin", "at": [0.86, 0.30]}},
+  "events": [
+   {"verb": "drop", "obj": "t0", "word": "0:why", "lead": 16},
+   {"verb": "fill", "obj": "t0", "word": "0:make", "lead": 10, "level": 0.4},
+   {"verb": "hop", "obj": "t0", "word": "0:better", "lead": 12},
+   {"verb": "drop", "obj": "s0", "word": "1:Because", "lead": 14},
+   {"verb": "drop", "obj": "s1", "word": "1:way", "lead": 12},
+   {"verb": "drop", "obj": "s2", "word": "1:harder", "lead": 12},
+   {"verb": "drop", "obj": "s3", "word": "1:sounds.", "lead": 12},
+   {"verb": "drop", "obj": "s4", "word": "2:Like,", "lead": 12},
+   {"verb": "drop", "obj": "s5", "word": "2:ten-to-seventeen-years", "lead": 12},
+   {"verb": "hop", "obj": "s*", "word": "2:hard.", "lead": 14, "stagger": 2}
+  ],
+  "notes": [
+   {"word": "0:one?", "kind": "pen", "text": "a better one?", "x": 0.06, "y": 0.06, "size": 64, "d": 18, "until": "1:Because"},
+   {"word": "1:harder", "kind": "pen", "text": "way harder", "x": 0.06, "y": 0.06, "size": 64, "d": 18},
+   {"word": "2:ten-to-seventeen-years", "kind": "serif", "text": "10–17 years", "x": 0.40, "y": 0.18, "size": 72, "d": 26, "red": true}
+  ]
+ },
+ "2-02": {
+  "parts": ["2-02"],
+  "objects": {"c0": {"lib": "coin", "at": [0.20, 0.30]}, "p0": {"lib": "pawn", "at": [0.32, 0.30]}, "t0": {"lib": "tube", "at": [0.80, 0.42]}, "q0": {"lib": "card", "at": [0.60, 0.32]}},
+  "events": [
+   {"verb": "drop", "obj": "q0", "word": "0:question", "lead": 14},
+   {"verb": "drop", "obj": "c0", "word": "0:computer-aided", "lead": 14},
+   {"verb": "hop", "obj": "c0", "word": "0:methods", "lead": 12},
+   {"verb": "drop", "obj": "p0", "word": "0:scientists", "lead": 14},
+   {"verb": "slide", "obj": "p0", "word": "0:find", "lead": 22, "to": [0.46, 0.30]},
+   {"verb": "hop", "obj": "q0", "word": "0:assess", "lead": 12},
+   {"verb": "drop", "obj": "t0", "word": "0:cancer", "lead": 14},
+   {"verb": "fill", "obj": "t0", "word": "0:candidates?", "lead": 16, "level": 0.55}
+  ],
+  "notes": [
+   {"word": "0:research", "kind": "pen", "text": "our research question", "x": 0.05, "y": 0.04, "size": 58, "d": 26},
+   {"word": "0:how", "kind": "serif", "text": "How can computer-aided methods", "x": 0.05, "y": 0.15, "size": 44, "d": 40},
+   {"word": "0:help", "kind": "serif", "text": "help scientists find and assess", "x": 0.05, "y": 0.235, "size": 44, "d": 40},
+   {"word": "0:potential", "kind": "serif", "text": "potential cancer drug candidates?", "x": 0.05, "y": 0.32, "size": 44, "d": 40}
+  ]
+ },
+ "2-04": {
+  "parts": ["2-04"],
+  "objects": {"q0": {"lib": "card", "at": [0.34, 0.34]}, "q1": {"lib": "card", "at": [0.62, 0.34]}},
+  "events": [
+   {"verb": "drop", "obj": "q0", "word": "0:set", "lead": 14},
+   {"verb": "hop", "obj": "q0", "word": "0:two", "lead": 12},
+   {"verb": "drop", "obj": "q1", "word": "0:objectives.", "lead": 14}
+  ],
+  "notes": [
+   {"word": "0:ourselves", "kind": "pen", "text": "two objectives", "x": 0.06, "y": 0.06, "size": 64, "d": 24},
+   {"word": "0:two", "kind": "serif", "text": "1", "x": 0.33, "y": 0.22, "size": 84, "d": 8},
+   {"word": "0:objectives.", "kind": "serif", "text": "2", "x": 0.61, "y": 0.22, "size": 84, "d": 8, "red": true}
+  ]
+ },
+ "3-06": {
+  "parts": ["3-06"],
+  "lockkey": {"lock": "0:So:", "key": "0:trying."},
+  "objects": {"c0": {"lib": "coin", "at": [0.14, 0.24]}, "c1": {"lib": "coin", "at": [0.24, 0.24]}, "c2": {"lib": "coin", "at": [0.34, 0.24]}},
+  "events": [
+   {"verb": "drop", "obj": "c*", "word": "0:Not", "lead": 16, "stagger": 4},
+   {"verb": "hop", "obj": "c*", "word": "0:cause", "lead": 12, "stagger": 3},
+   {"verb": "lift", "obj": "c*", "word": "0:but", "lead": 18, "stagger": 3}
+  ],
+  "notes": [
+   {"word": "0:strong", "kind": "pen", "text": "a strong suspect", "x": 0.06, "y": 0.06, "size": 64, "d": 26},
+   {"word": "0:only", "kind": "pen", "text": "not the only cause", "x": 0.06, "y": 0.18, "size": 58, "d": 26},
+   {"word": "0:cause", "kind": "strike", "text": "not the only cause", "x": 0.06, "y": 0.18, "size": 58, "d": 1, "pen": true, "hide": true},
+   {"word": "0:worth", "kind": "pen", "text": "worth trying", "x": 0.06, "y": 0.30, "size": 64, "d": 22, "red": true}
+  ]
+ },
+ "4-04_4-05": {
+  "parts": ["4-04", "4-05"],
+  "objects": {"body": {"lib": "coin", "at": [0.30, 0.36]},
+              "b0": {"lib": "bead", "at": [0.40, 0.36]}, "b1": {"lib": "bead", "at": [0.45, 0.37]}, "b2": {"lib": "bead", "at": [0.50, 0.38]},
+              "b3": {"lib": "bead", "at": [0.55, 0.37]}, "b4": {"lib": "bead", "at": [0.60, 0.36]}, "b5": {"lib": "bead", "at": [0.65, 0.35]},
+              "ai": {"lib": "coin", "at": [0.20, 0.20]}, "hu": {"lib": "pawn", "at": [0.80, 0.22]}},
+  "events": [
+   {"verb": "drop", "obj": "body", "word": "0:what", "lead": 14},
+   {"verb": "drop", "obj": "b*", "word": "0:do?", "lead": 14, "stagger": 2},
+   {"verb": "red", "obj": "b*", "word": "0:do?", "lead": 0, "lag": 4},
+   {"verb": "lift", "obj": "b*", "word": "1:off.", "lead": 20, "stagger": 2},
+   {"verb": "drop", "obj": "ai", "word": "1:AI", "lead": 14},
+   {"verb": "hop", "obj": "ai", "word": "1:guess.", "lead": 12},
+   {"verb": "drop", "obj": "hu", "word": "1:human", "lead": 14},
+   {"verb": "hop", "obj": "hu", "word": "1:caught", "lead": 12},
+   {"verb": "hop", "obj": "body", "word": "1:problem.", "lead": 12}
+  ],
+  "notes": [
+   {"word": "1:cut", "kind": "pen", "text": "cut the tail off", "x": 0.06, "y": 0.06, "size": 62, "d": 22, "red": true},
+   {"word": "1:made", "kind": "serif", "text": "AI: the guess", "x": 0.06, "y": 0.18, "size": 52, "d": 16},
+   {"word": "1:human", "kind": "serif", "text": "human: the check", "x": 0.52, "y": 0.18, "size": 52, "d": 16}
+  ]
+ },
+ "4-08": {
+  "parts": ["4-08"],
+  "objects": {"p0": {"lib": "pawn", "at": [0.16, 0.30]}, "r0": {"lib": "ring", "at": [0.58, 0.40], "size": 0.13}, "o0": {"lib": "bead", "at": [0.58, 0.27], "size": 0.016}, "c0": {"lib": "coin", "at": [0.58, 0.40]}},
+  "events": [
+   {"verb": "drop", "obj": "p0", "word": "0:AI", "lead": 14},
+   {"verb": "hop", "obj": "p0", "word": "0:scientists.", "lead": 12},
+   {"verb": "drop", "obj": "r0", "word": "0:It", "lead": 14},
+   {"verb": "drop", "obj": "o0", "word": "0:trial", "lead": 14},
+   {"verb": "orbit", "obj": "o0", "ring": "r0", "word": "0:error", "lead": 0, "w": 0.06, "fast": "0:light", "w2": 0.22},
+   {"verb": "drop", "obj": "c0", "word": "0:computer,", "lead": 14}
+  ],
+  "notes": [
+   {"word": "0:replace", "kind": "pen", "text": "didn't replace", "x": 0.06, "y": 0.06, "size": 62, "d": 20},
+   {"word": "0:trial", "kind": "serif", "text": "trial and error", "x": 0.45, "y": 0.06, "size": 56, "d": 22},
+   {"word": "0:speed.", "kind": "pen", "text": "at light speed", "x": 0.45, "y": 0.18, "size": 62, "d": 18, "red": true}
+  ]
+ },
+ "5-02": {
+  "parts": ["5-02"],
+  "objects": {"c0": {"lib": "coin", "at": [0.20, 0.36]}, "c1": {"lib": "coin", "at": [0.30, 0.36]}, "c2": {"lib": "coin", "at": [0.40, 0.36]}, "c3": {"lib": "coin", "at": [0.50, 0.36]},
+              "c4": {"lib": "coin", "at": [0.60, 0.36]}, "c5": {"lib": "coin", "at": [0.70, 0.36]}, "c6": {"lib": "coin", "at": [0.80, 0.36]}},
+  "events": [
+   {"verb": "drop", "obj": "c*", "word": "0:Six", "lead": 16, "stagger": 2},
+   {"verb": "hop", "obj": "c0,c1,c2,c4,c5,c6", "word": "0:barely", "lead": 10, "stagger": 1, "h": 0.3},
+   {"verb": "slide", "obj": "c3", "word": "0:stood", "lead": 22, "to": [0.50, 0.18]},
+   {"verb": "hop", "obj": "c3", "word": "0:name?", "lead": 12}
+  ],
+  "notes": [
+   {"word": "0:held", "kind": "pen", "text": "barely held on", "x": 0.06, "y": 0.06, "size": 62, "d": 22},
+   {"word": "0:one", "kind": "pen", "text": "one stood out", "x": 0.55, "y": 0.06, "size": 62, "d": 22, "red": true},
+   {"word": "0:001.", "kind": "serif", "text": "001", "x": 0.46, "y": 0.62, "size": 72, "d": 10}
+  ]
+ },
+ "5-05_5-06": {
+  "parts": ["5-05", "5-06"],
+  "lockkey": {"lock": "0:The", "key": "0:lock."},
+  "objects": {},
+  "events": [
+   {"verb": "turn", "obj": "lock", "word": "0:turned.", "lead": 30, "deg": 6, "back": true, "hold": 10, "back_dur": 16},
+   {"verb": "turn", "obj": "lock", "word": "1:one?", "lead": 14, "deg": -3, "back": true, "hold": 4, "back_dur": 12}
+  ],
+  "notes": [
+   {"word": "0:into", "kind": "pen", "text": "key into the lock", "x": 0.06, "y": 0.06, "size": 60, "d": 22},
+   {"word": "0:barely", "kind": "pen", "text": "barely turned", "x": 0.06, "y": 0.18, "size": 64, "d": 22, "red": true},
+   {"word": "1:Back", "kind": "pen", "text": "back to square one?", "x": 0.06, "y": 0.30, "size": 60, "d": 22}
+  ]
+ },
+ "5-09": {
+  "parts": ["5-09"],
+  "lockkey": {"lock": "0:This", "key": "0:key"},
+  "objects": {},
+  "events": [
+   {"verb": "turn", "obj": "lock", "word": "0:turned.", "lead": 26, "deg": 40}
+  ],
+  "notes": [
+   {"word": "0:time,", "kind": "pen", "text": "this time", "x": 0.06, "y": 0.06, "size": 64, "d": 18},
+   {"word": "0:turned.", "kind": "pen", "text": "it turned", "x": 0.06, "y": 0.18, "size": 70, "d": 18, "red": true}
+  ]
+ },
+ "6-04_6-05": {
+  "parts": ["6-04", "6-05"],
+  "grid": {"prefix": "g", "lib": "bead", "cols": 12, "rows": 4, "u0": 0.14, "u1": 0.86, "v0": 0.22, "v1": 0.52, "size": 0.016, "keep": [1, 4, 7, 10, 13, 18, 21, 26, 29, 34, 37, 42, 45]},
+  "objects": {},
+  "events": [
+   {"verb": "drop", "obj": "g*", "word": "0:Millions", "lead": 16, "stagger": 1, "spread": "0:before."},
+   {"verb": "lift", "obj": "g-drop", "word": "0:Here?", "lead": 16, "stagger": 1},
+   {"verb": "red", "obj": "g-keep", "word": "0:Thirteen", "lead": 0, "stagger": 2},
+   {"verb": "hop", "obj": "g-keep", "word": "1:Thirteen.", "lead": 12, "stagger": 1},
+   {"verb": "hop", "obj": "g-keep", "word": "1:wild.", "lead": 12, "stagger": 1, "h": 0.5}
+  ],
+  "notes": [
+   {"word": "0:screened", "kind": "pen", "text": "millions screened", "x": 0.06, "y": 0.06, "size": 62, "d": 24},
+   {"word": "0:made.", "kind": "serif", "text": "13 made", "x": 0.06, "y": 0.18, "size": 72, "d": 14, "red": true},
+   {"word": "1:honestly", "kind": "pen", "text": "honestly wild", "x": 0.55, "y": 0.06, "size": 60, "d": 20}
+  ]
+ },
+ "6-12": {
+  "parts": ["6-12"],
+  "objects": {"s0": {"lib": "coin", "at": [0.18, 0.30]}, "s1": {"lib": "coin", "at": [0.31, 0.30]}, "s2": {"lib": "coin", "at": [0.44, 0.30]}, "s3": {"lib": "coin", "at": [0.57, 0.30]},
+              "s4": {"lib": "coin", "at": [0.70, 0.30]}, "s5": {"lib": "coin", "at": [0.83, 0.30]}, "k": {"lib": "bead", "at": [0.18, 0.14], "size": 0.016}},
+  "events": [
+   {"verb": "drop", "obj": "k", "word": "0:048", "lead": 14},
+   {"verb": "red", "obj": "k", "word": "0:048", "lead": 0},
+   {"verb": "drop", "obj": "s*", "word": "0:very", "lead": 18, "stagger": 2},
+   {"verb": "hop", "obj": "s0", "word": "0:start", "lead": 12},
+   {"verb": "hop", "obj": "k", "word": "0:case,", "lead": 12},
+   {"verb": "slide", "obj": "k", "word": "0:weeks,", "lead": 24, "to": [0.25, 0.14]}
+  ],
+  "notes": [
+   {"word": "0:road.", "kind": "pen", "text": "start of the road", "x": 0.06, "y": 0.06, "size": 60, "d": 22},
+   {"word": "0:took", "kind": "serif", "text": "weeks", "x": 0.06, "y": 0.18, "size": 68, "d": 12, "red": true},
+   {"word": "0:not", "kind": "serif", "text": "years", "x": 0.30, "y": 0.18, "size": 68, "d": 10},
+   {"word": "0:years.", "kind": "strike", "text": "years", "x": 0.30, "y": 0.18, "size": 68, "d": 12}
+  ]
+ },
+ "7-01": {
+  "parts": ["7-01"],
+  "objects": {"q0": {"lib": "card", "at": [0.28, 0.34]}, "q1": {"lib": "card", "at": [0.50, 0.34]}, "q2": {"lib": "card", "at": [0.72, 0.34]}},
+  "events": [
+   {"verb": "drop", "obj": "q0", "word": "0:suggest", "lead": 14},
+   {"verb": "drop", "obj": "q1", "word": "0:three", "lead": 14},
+   {"verb": "drop", "obj": "q2", "word": "0:things.", "lead": 14},
+   {"verb": "hop", "obj": "q*", "word": "0:happen", "lead": 1, "h": 0.0, "skip": true}
+  ],
+  "notes": [
+   {"word": "0:what", "kind": "pen", "text": "what next?", "x": 0.06, "y": 0.06, "size": 66, "d": 30},
+   {"word": "0:three", "kind": "serif", "text": "1     2     3", "x": 0.25, "y": 0.22, "size": 72, "d": 30}
+  ]
+ },
+ "8-01": {
+  "parts": ["8-01"],
+  "objects": {"p0": {"lib": "pawn", "at": [0.14, 0.42]}, "p1": {"lib": "pawn", "at": [0.22, 0.42]}, "p2": {"lib": "pawn", "at": [0.30, 0.42]}, "p3": {"lib": "pawn", "at": [0.38, 0.42]},
+              "p4": {"lib": "pawn", "at": [0.46, 0.42]}, "p5": {"lib": "pawn", "at": [0.54, 0.42]}, "p6": {"lib": "pawn", "at": [0.62, 0.42]}, "p7": {"lib": "pawn", "at": [0.70, 0.42]},
+              "p8": {"lib": "pawn", "at": [0.78, 0.42]}, "p9": {"lib": "pawn", "at": [0.86, 0.42]}},
+  "events": [
+   {"verb": "drop", "obj": "p*", "word": "0:back", "lead": 16, "stagger": 2},
+   {"verb": "red", "obj": "p3,p4,p5,p6", "word": "0:started.", "lead": 0, "stagger": 3}
+  ],
+  "notes": [
+   {"word": "0:where", "kind": "pen", "text": "back to the start", "x": 0.06, "y": 0.06, "size": 62, "d": 22},
+   {"word": "0:started.", "kind": "serif", "text": "about 4 a day", "x": 0.06, "y": 0.18, "size": 60, "d": 16, "red": true}
+  ]
+ },
+ "8-04_8-05_8-06_8-07": {
+  "parts": ["8-04", "8-05", "8-06", "8-07"],
+  "objects": {"t0": {"lib": "tube", "at": [0.14, 0.44]}, "pp": {"lib": "pawn", "at": [0.26, 0.44]},
+              "c0": {"lib": "coin", "at": [0.30, 0.24]}, "c1": {"lib": "coin", "at": [0.40, 0.24]}, "c2": {"lib": "coin", "at": [0.50, 0.24]}, "c3": {"lib": "coin", "at": [0.60, 0.24]},
+              "c4": {"lib": "coin", "at": [0.70, 0.24]}, "c5": {"lib": "coin", "at": [0.80, 0.24]}, "c6": {"lib": "coin", "at": [0.90, 0.24]},
+              "hd": {"lib": "card", "at": [0.50, 0.50]},
+              "r0": {"lib": "coin", "at": [0.18, 0.20]}, "r1": {"lib": "coin", "at": [0.34, 0.20]}, "r2": {"lib": "coin", "at": [0.50, 0.20]}, "r3": {"lib": "coin", "at": [0.66, 0.20]}, "r4": {"lib": "coin", "at": [0.82, 0.20]},
+              "ring": {"lib": "ring", "at": [0.62, 0.42], "size": 0.12}, "ob": {"lib": "bead", "at": [0.62, 0.30], "size": 0.016}, "sci": {"lib": "pawn", "at": [0.30, 0.44]}},
+  "events": [
+   {"verb": "drop", "obj": "t0", "word": "0:works", "lead": 14},
+   {"verb": "fill", "obj": "t0", "word": "0:cells,", "lead": 16, "level": 0.5},
+   {"verb": "drop", "obj": "pp", "word": "0:not", "lead": 14},
+   {"verb": "hop", "obj": "pp", "word": "0:people.", "lead": 12},
+   {"verb": "drop", "obj": "c*", "word": "0:computer", "lead": 16, "stagger": 2},
+   {"verb": "lift", "obj": "c0,c1,c2,c4,c5,c6", "word": "0:search.", "lead": 18, "stagger": 2},
+   {"verb": "hop", "obj": "c3", "word": "0:Experiments", "lead": 12},
+   {"verb": "hop", "obj": "t0", "word": "0:decide.", "lead": 12},
+   {"verb": "lift", "obj": "t0,pp,c3", "word": "1:So", "lead": 18, "stagger": 2},
+   {"verb": "drop", "obj": "hd", "word": "1:headline", "lead": 14},
+   {"verb": "hop", "obj": "hd", "word": "1:discovers", "lead": 12},
+   {"verb": "lift", "obj": "hd", "word": "2:where", "lead": 16},
+   {"verb": "drop", "obj": "r0", "word": "2:computer,", "lead": 14},
+   {"verb": "drop", "obj": "r1", "word": "2:protein,", "lead": 14},
+   {"verb": "drop", "obj": "r2", "word": "2:cells,", "lead": 14},
+   {"verb": "drop", "obj": "r3", "word": "2:animals,", "lead": 14},
+   {"verb": "drop", "obj": "r4", "word": "2:patients?", "lead": 14},
+   {"verb": "lift", "obj": "r*", "word": "3:AI", "lead": 16, "stagger": 2},
+   {"verb": "drop", "obj": "sci", "word": "3:scientists.", "lead": 14},
+   {"verb": "drop", "obj": "ring", "word": "3:gave", "lead": 14},
+   {"verb": "drop", "obj": "ob", "word": "3:trial", "lead": 14},
+   {"verb": "orbit", "obj": "ob", "ring": "ring", "word": "3:error", "lead": 0, "w": 0.06, "fast": "3:light", "w2": 0.22},
+   {"verb": "hop", "obj": "sci", "word": "3:Thanks", "lead": 12}
+  ],
+  "notes": [
+   {"word": "0:cells,", "kind": "serif", "text": "cells: yes", "x": 0.06, "y": 0.06, "size": 56, "d": 14, "until": "1:So"},
+   {"word": "0:people.", "kind": "serif", "text": "people: not yet", "x": 0.06, "y": 0.16, "size": 56, "d": 14, "until": "1:So"},
+   {"word": "0:narrows", "kind": "pen", "text": "the computer narrows", "x": 0.45, "y": 0.06, "size": 56, "d": 22, "until": "1:So"},
+   {"word": "0:decide.", "kind": "pen", "text": "experiments decide", "x": 0.45, "y": 0.16, "size": 58, "d": 20, "red": true, "until": "1:So"},
+   {"word": "1:like", "kind": "pen", "text": "'AI discovers a cancer drug'", "x": 0.06, "y": 0.08, "size": 56, "d": 30, "until": "2:where"},
+   {"word": "2:road:", "kind": "pen", "text": "where on the road?", "x": 0.06, "y": 0.04, "size": 58, "d": 20, "until": "3:AI"},
+   {"word": "2:computer,", "kind": "serif", "text": "computer", "x": 0.10, "y": 0.62, "size": 40, "d": 10, "until": "3:AI"},
+   {"word": "2:protein,", "kind": "serif", "text": "protein", "x": 0.28, "y": 0.62, "size": 40, "d": 10, "until": "3:AI"},
+   {"word": "2:cells,", "kind": "serif", "text": "cells", "x": 0.46, "y": 0.62, "size": 40, "d": 10, "until": "3:AI"},
+   {"word": "2:animals,", "kind": "serif", "text": "animals", "x": 0.60, "y": 0.62, "size": 40, "d": 10, "until": "3:AI"},
+   {"word": "2:patients?", "kind": "serif", "text": "patients", "x": 0.76, "y": 0.62, "size": 40, "d": 10, "until": "3:AI"},
+   {"word": "3:replace", "kind": "pen", "text": "didn't replace", "x": 0.06, "y": 0.06, "size": 60, "d": 20},
+   {"word": "3:light", "kind": "pen", "text": "trial and error at light speed", "x": 0.06, "y": 0.18, "size": 54, "d": 26, "red": true}
+  ]
+ }
+}

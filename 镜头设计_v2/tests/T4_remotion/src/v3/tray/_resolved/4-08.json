@@ -1,0 +1,191 @@
+{
+ "name": "4-08",
+ "frames": 503,
+ "pull": [
+  0,
+  24
+ ],
+ "person_in": [
+  8,
+  24
+ ],
+ "push": [
+  479,
+  503
+ ],
+ "fade_out": null,
+ "prev": "4-07",
+ "next": "4-09",
+ "parts": [
+  {
+   "seg": "4-08",
+   "take": "A_cam_4-08_t1",
+   "who": "A",
+   "at": 0,
+   "src0": 0.0,
+   "pad": 0,
+   "until": 479,
+   "person_side": "left",
+   "tray": "right",
+   "person_cx": 647,
+   "box": [
+    -366,
+    498,
+    2955,
+    1662
+   ],
+   "dx": -87
+  }
+ ],
+ "words": {
+  "0:AI": 32,
+  "0:didn't": 45,
+  "0:replace": 61,
+  "0:the": 88,
+  "0:scientists.": 98,
+  "0:It": 180,
+  "0:ran": 213,
+  "0:their": 231,
+  "0:trial": 263,
+  "0:and": 291,
+  "0:error": 308,
+  "0:inside": 331,
+  "0:a": 355,
+  "0:computer,": 357,
+  "0:at": 425,
+  "0:light": 434,
+  "0:speed.": 450
+ },
+ "objects": {
+  "p0": {
+   "lib": "pawn",
+   "at": [
+    0.16,
+    0.3
+   ]
+  },
+  "r0": {
+   "lib": "ring",
+   "at": [
+    0.58,
+    0.4
+   ],
+   "size": 0.13
+  },
+  "o0": {
+   "lib": "bead",
+   "at": [
+    0.58,
+    0.27
+   ],
+   "size": 0.016
+  },
+  "c0": {
+   "lib": "coin",
+   "at": [
+    0.58,
+    0.4
+   ]
+  }
+ },
+ "events": [
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "p0",
+   "f_land": 32,
+   "f_start": 18,
+   "word": "0:AI"
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "p0",
+   "f_land": 98,
+   "f_start": 86,
+   "word": "0:scientists."
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "r0",
+   "f_land": 180,
+   "f_start": 166,
+   "word": "0:It"
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "o0",
+   "f_land": 263,
+   "f_start": 249,
+   "word": "0:trial"
+  },
+  {
+   "verb": "orbit",
+   "ring": "r0",
+   "lead": 0,
+   "w": 0.06,
+   "fast": 434,
+   "w2": 0.22,
+   "obj": "o0",
+   "f_land": 308,
+   "f_start": 308,
+   "word": "0:error"
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "c0",
+   "f_land": 357,
+   "f_start": 343,
+   "word": "0:computer,"
+  }
+ ],
+ "lockkey": {},
+ "notes": [
+  {
+   "word": "0:replace",
+   "kind": "pen",
+   "text": "didn't replace",
+   "x": 0.06,
+   "y": 0.06,
+   "size": 62,
+   "d": 20,
+   "at": 61
+  },
+  {
+   "word": "0:trial",
+   "kind": "serif",
+   "text": "trial and error",
+   "x": 0.45,
+   "y": 0.06,
+   "size": 56,
+   "d": 22,
+   "at": 263
+  },
+  {
+   "word": "0:speed.",
+   "kind": "pen",
+   "text": "at light speed",
+   "x": 0.45,
+   "y": 0.18,
+   "size": 62,
+   "d": 18,
+   "red": true,
+   "at": 450
+  }
+ ],
+ "landings": [
+  32,
+  61,
+  98,
+  180,
+  263,
+  308,
+  357,
+  450
+ ],
+ "start_from": "4-07.mp4",
+ "end_from": "4-09.mp4"
+}

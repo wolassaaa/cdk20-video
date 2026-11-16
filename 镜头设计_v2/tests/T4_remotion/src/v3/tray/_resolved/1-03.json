@@ -1,0 +1,165 @@
+{
+ "name": "1-03",
+ "frames": 311,
+ "pull": [
+  0,
+  24
+ ],
+ "person_in": [
+  8,
+  24
+ ],
+ "push": [
+  287,
+  311
+ ],
+ "fade_out": null,
+ "prev": "1-02",
+ "next": "1-04",
+ "parts": [
+  {
+   "seg": "1-03",
+   "take": "A_cam_1-03_t1",
+   "who": "A",
+   "at": 0,
+   "src0": 0.0,
+   "pad": 3,
+   "until": 287,
+   "person_side": "left",
+   "tray": "right",
+   "person_cx": 636,
+   "box": [
+    -426,
+    489,
+    2971,
+    1671
+   ],
+   "dx": -76
+  }
+ ],
+ "words": {
+  "0:Here's": 32,
+  "0:the": 51,
+  "0:thing.": 60,
+  "0:We": 107,
+  "0:already": 121,
+  "0:have": 145,
+  "0:medicines.": 159,
+  "0:Just": 209,
+  "0:not": 224,
+  "0:good": 237,
+  "0:enough": 248,
+  "0:ones.": 273
+ },
+ "objects": {
+  "t0": {
+   "lib": "tube",
+   "at": [
+    0.36,
+    0.4
+   ]
+  },
+  "t1": {
+   "lib": "tube",
+   "at": [
+    0.56,
+    0.4
+   ]
+  },
+  "c0": {
+   "lib": "coin",
+   "at": [
+    0.2,
+    0.3
+   ]
+  }
+ },
+ "events": [
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "c0",
+   "f_land": 32,
+   "f_start": 18,
+   "word": "0:Here's"
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "c0",
+   "f_land": 60,
+   "f_start": 48,
+   "word": "0:thing."
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "t0",
+   "f_land": 121,
+   "f_start": 105,
+   "word": "0:already"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "t1",
+   "f_land": 159,
+   "f_start": 143,
+   "word": "0:medicines."
+  },
+  {
+   "verb": "fill",
+   "lead": 14,
+   "level": 0.25,
+   "obj": "t0",
+   "f_land": 224,
+   "f_start": 210,
+   "word": "0:not"
+  },
+  {
+   "verb": "fill",
+   "lead": 14,
+   "level": 0.2,
+   "obj": "t1",
+   "f_land": 237,
+   "f_start": 223,
+   "word": "0:good"
+  }
+ ],
+ "lockkey": {},
+ "notes": [
+  {
+   "word": "0:We",
+   "kind": "pen",
+   "text": "today's medicines",
+   "x": 0.06,
+   "y": 0.06,
+   "size": 62,
+   "d": 26,
+   "at": 107
+  },
+  {
+   "word": "0:enough",
+   "kind": "pen",
+   "text": "not good enough",
+   "x": 0.06,
+   "y": 0.18,
+   "size": 62,
+   "d": 22,
+   "red": true,
+   "at": 248
+  }
+ ],
+ "landings": [
+  32,
+  60,
+  107,
+  121,
+  159,
+  224,
+  237,
+  248
+ ],
+ "start_from": "1-02.mp4",
+ "end_from": "1-04.mp4"
+}

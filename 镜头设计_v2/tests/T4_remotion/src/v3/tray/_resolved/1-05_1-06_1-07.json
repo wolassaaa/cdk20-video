@@ -1,0 +1,327 @@
+{
+ "name": "1-05_1-06_1-07",
+ "frames": 512,
+ "pull": [
+  0,
+  24
+ ],
+ "person_in": [
+  8,
+  24
+ ],
+ "push": [
+  488,
+  512
+ ],
+ "fade_out": null,
+ "prev": "1-04",
+ "next": "1-08",
+ "parts": [
+  {
+   "seg": "1-05",
+   "take": "D_cam_1-05_t1",
+   "who": "D",
+   "at": 0,
+   "src0": 0.0,
+   "pad": 0,
+   "until": 196,
+   "person_side": "right",
+   "tray": "left",
+   "person_cx": 1052,
+   "box": [
+    1382,
+    571,
+    2825,
+    1589
+   ],
+   "dx": 308
+  },
+  {
+   "seg": "1-06",
+   "take": "B_cam_1-06_t1",
+   "who": "B",
+   "at": 196,
+   "src0": 0.39,
+   "pad": 0,
+   "until": 315,
+   "person_side": "left",
+   "tray": "right",
+   "person_cx": 636,
+   "box": [
+    -622,
+    378,
+    3168,
+    1782
+   ],
+   "dx": -76
+  },
+  {
+   "seg": "1-07",
+   "take": "C_cam_1-07_t1",
+   "who": "C",
+   "at": 315,
+   "src0": 0.426,
+   "pad": 0,
+   "until": 488,
+   "person_side": "left",
+   "tray": "right",
+   "person_cx": 667,
+   "box": [
+    -519,
+    367,
+    3188,
+    1793
+   ],
+   "dx": -107
+  }
+ ],
+ "words": {
+  "0:So...": 32,
+  "0:why": 94,
+  "0:not": 104,
+  "0:just": 127,
+  "0:make": 143,
+  "0:a": 155,
+  "0:better": 164,
+  "0:one?": 185,
+  "1:Because": 203,
+  "1:that's": 221,
+  "1:way": 237,
+  "1:harder": 253,
+  "1:than": 272,
+  "1:it": 281,
+  "1:sounds.": 289,
+  "2:Like,": 322,
+  "2:ten-to-seventeen-years": 370,
+  "2:hard.": 464
+ },
+ "objects": {
+  "t0": {
+   "lib": "tube",
+   "at": [
+    0.24,
+    0.42
+   ]
+  },
+  "s0": {
+   "lib": "coin",
+   "at": [
+    0.36,
+    0.3
+   ]
+  },
+  "s1": {
+   "lib": "coin",
+   "at": [
+    0.46,
+    0.3
+   ]
+  },
+  "s2": {
+   "lib": "coin",
+   "at": [
+    0.56,
+    0.3
+   ]
+  },
+  "s3": {
+   "lib": "coin",
+   "at": [
+    0.66,
+    0.3
+   ]
+  },
+  "s4": {
+   "lib": "coin",
+   "at": [
+    0.76,
+    0.3
+   ]
+  },
+  "s5": {
+   "lib": "coin",
+   "at": [
+    0.86,
+    0.3
+   ]
+  }
+ },
+ "events": [
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "t0",
+   "f_land": 94,
+   "f_start": 78,
+   "word": "0:why"
+  },
+  {
+   "verb": "fill",
+   "lead": 10,
+   "level": 0.4,
+   "obj": "t0",
+   "f_land": 143,
+   "f_start": 133,
+   "word": "0:make"
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "t0",
+   "f_land": 164,
+   "f_start": 152,
+   "word": "0:better"
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "s0",
+   "f_land": 203,
+   "f_start": 189,
+   "word": "1:Because"
+  },
+  {
+   "verb": "drop",
+   "lead": 12,
+   "obj": "s1",
+   "f_land": 237,
+   "f_start": 225,
+   "word": "1:way"
+  },
+  {
+   "verb": "drop",
+   "lead": 12,
+   "obj": "s2",
+   "f_land": 253,
+   "f_start": 241,
+   "word": "1:harder"
+  },
+  {
+   "verb": "drop",
+   "lead": 12,
+   "obj": "s3",
+   "f_land": 289,
+   "f_start": 277,
+   "word": "1:sounds."
+  },
+  {
+   "verb": "drop",
+   "lead": 12,
+   "obj": "s4",
+   "f_land": 322,
+   "f_start": 310,
+   "word": "2:Like,"
+  },
+  {
+   "verb": "drop",
+   "lead": 12,
+   "obj": "s5",
+   "f_land": 370,
+   "f_start": 358,
+   "word": "2:ten-to-seventeen-years"
+  },
+  {
+   "verb": "hop",
+   "lead": 14,
+   "obj": "s0",
+   "f_land": 454,
+   "f_start": 440,
+   "word": "2:hard."
+  },
+  {
+   "verb": "hop",
+   "lead": 14,
+   "obj": "s1",
+   "f_land": 456,
+   "f_start": 442,
+   "word": "2:hard."
+  },
+  {
+   "verb": "hop",
+   "lead": 14,
+   "obj": "s2",
+   "f_land": 458,
+   "f_start": 444,
+   "word": "2:hard."
+  },
+  {
+   "verb": "hop",
+   "lead": 14,
+   "obj": "s3",
+   "f_land": 460,
+   "f_start": 446,
+   "word": "2:hard."
+  },
+  {
+   "verb": "hop",
+   "lead": 14,
+   "obj": "s4",
+   "f_land": 462,
+   "f_start": 448,
+   "word": "2:hard."
+  },
+  {
+   "verb": "hop",
+   "lead": 14,
+   "obj": "s5",
+   "f_land": 464,
+   "f_start": 450,
+   "word": "2:hard."
+  }
+ ],
+ "lockkey": {},
+ "notes": [
+  {
+   "word": "0:one?",
+   "kind": "pen",
+   "text": "a better one?",
+   "x": 0.06,
+   "y": 0.06,
+   "size": 64,
+   "d": 18,
+   "until": 203,
+   "at": 185
+  },
+  {
+   "word": "1:harder",
+   "kind": "pen",
+   "text": "way harder",
+   "x": 0.06,
+   "y": 0.06,
+   "size": 64,
+   "d": 18,
+   "at": 253
+  },
+  {
+   "word": "2:ten-to-seventeen-years",
+   "kind": "serif",
+   "text": "10–17 years",
+   "x": 0.4,
+   "y": 0.18,
+   "size": 72,
+   "d": 26,
+   "red": true,
+   "at": 370
+  }
+ ],
+ "landings": [
+  94,
+  143,
+  164,
+  185,
+  203,
+  237,
+  253,
+  289,
+  322,
+  370,
+  454,
+  456,
+  458,
+  460,
+  462,
+  464
+ ],
+ "start_from": "1-04.mp4",
+ "end_from": "1-08.mp4"
+}

@@ -1,0 +1,811 @@
+{
+ "name": "8-04_8-05_8-06_8-07",
+ "frames": 1868,
+ "pull": [
+  0,
+  24
+ ],
+ "person_in": [
+  8,
+  24
+ ],
+ "push": [
+  1844,
+  1868
+ ],
+ "fade_out": null,
+ "prev": "8-03",
+ "next": "W5",
+ "parts": [
+  {
+   "seg": "8-04",
+   "take": "C_cam_8-04_t2",
+   "who": "C",
+   "at": 0,
+   "src0": 0.0,
+   "pad": 5,
+   "until": 562,
+   "person_side": "left",
+   "tray": "right",
+   "person_cx": 580,
+   "box": [
+    -250,
+    713,
+    2572,
+    1447
+   ],
+   "dx": -20
+  },
+  {
+   "seg": "8-05",
+   "take": "B_cam_8-05_t1",
+   "who": "B",
+   "at": 562,
+   "src0": 0.302,
+   "pad": 0,
+   "until": 824,
+   "person_side": "left",
+   "tray": "right",
+   "person_cx": 634,
+   "box": [
+    -645,
+    372,
+    3179,
+    1788
+   ],
+   "dx": -74
+  },
+  {
+   "seg": "8-06",
+   "take": "D_cam_8-06_t1",
+   "who": "D",
+   "at": 824,
+   "src0": 0.0,
+   "pad": 1,
+   "until": 1421,
+   "person_side": "right",
+   "tray": "left",
+   "person_cx": 1042,
+   "box": [
+    1362,
+    581,
+    2807,
+    1579
+   ],
+   "dx": 318
+  },
+  {
+   "seg": "8-07",
+   "take": "A_cam_8-07_t1",
+   "who": "A",
+   "at": 1421,
+   "src0": 0.392,
+   "pad": 0,
+   "until": 1844,
+   "person_side": "left",
+   "tray": "right",
+   "person_cx": 650,
+   "box": [
+    -512,
+    410,
+    3110,
+    1750
+   ],
+   "dx": -90
+  }
+ ],
+ "words": {
+  "0:This": 32,
+  "0:works": 62,
+  "0:in": 80,
+  "0:cells,": 90,
+  "0:not": 132,
+  "0:yet": 149,
+  "0:in#2": 189,
+  "0:people.": 198,
+  "0:The": 277,
+  "0:computer": 285,
+  "0:narrows": 317,
+  "0:the": 344,
+  "0:search.": 366,
+  "0:Experiments": 468,
+  "0:still": 523,
+  "0:decide.": 545,
+  "1:So": 569,
+  "1:next": 578,
+  "1:time": 590,
+  "1:you": 611,
+  "1:see": 619,
+  "1:a": 628,
+  "1:headline": 633,
+  "1:like": 687,
+  "1:'AI": 714,
+  "1:discovers": 728,
+  "1:a#2": 759,
+  "1:cancer": 772,
+  "1:drug'...": 799,
+  "2:...ask": 831,
+  "2:where": 854,
+  "2:it": 886,
+  "2:really": 921,
+  "2:is": 939,
+  "2:on": 951,
+  "2:the": 958,
+  "2:road:": 967,
+  "2:computer,": 1043,
+  "2:protein,": 1123,
+  "2:cells,": 1207,
+  "2:animals,": 1294,
+  "2:or": 1370,
+  "2:patients?": 1382,
+  "3:AI": 1428,
+  "3:didn't": 1444,
+  "3:replace": 1458,
+  "3:the": 1485,
+  "3:scientists.": 1492,
+  "3:It": 1575,
+  "3:gave": 1584,
+  "3:them": 1602,
+  "3:trial": 1619,
+  "3:and": 1650,
+  "3:error": 1665,
+  "3:at": 1691,
+  "3:light": 1701,
+  "3:speed.": 1715,
+  "3:Thanks": 1784,
+  "3:for": 1801,
+  "3:watching.": 1813
+ },
+ "objects": {
+  "t0": {
+   "lib": "tube",
+   "at": [
+    0.14,
+    0.44
+   ]
+  },
+  "pp": {
+   "lib": "pawn",
+   "at": [
+    0.26,
+    0.44
+   ]
+  },
+  "c0": {
+   "lib": "coin",
+   "at": [
+    0.3,
+    0.24
+   ]
+  },
+  "c1": {
+   "lib": "coin",
+   "at": [
+    0.4,
+    0.24
+   ]
+  },
+  "c2": {
+   "lib": "coin",
+   "at": [
+    0.5,
+    0.24
+   ]
+  },
+  "c3": {
+   "lib": "coin",
+   "at": [
+    0.6,
+    0.24
+   ]
+  },
+  "c4": {
+   "lib": "coin",
+   "at": [
+    0.7,
+    0.24
+   ]
+  },
+  "c5": {
+   "lib": "coin",
+   "at": [
+    0.8,
+    0.24
+   ]
+  },
+  "c6": {
+   "lib": "coin",
+   "at": [
+    0.9,
+    0.24
+   ]
+  },
+  "hd": {
+   "lib": "card",
+   "at": [
+    0.5,
+    0.5
+   ]
+  },
+  "r0": {
+   "lib": "coin",
+   "at": [
+    0.18,
+    0.2
+   ]
+  },
+  "r1": {
+   "lib": "coin",
+   "at": [
+    0.34,
+    0.2
+   ]
+  },
+  "r2": {
+   "lib": "coin",
+   "at": [
+    0.5,
+    0.2
+   ]
+  },
+  "r3": {
+   "lib": "coin",
+   "at": [
+    0.66,
+    0.2
+   ]
+  },
+  "r4": {
+   "lib": "coin",
+   "at": [
+    0.82,
+    0.2
+   ]
+  },
+  "ring": {
+   "lib": "ring",
+   "at": [
+    0.62,
+    0.42
+   ],
+   "size": 0.12
+  },
+  "ob": {
+   "lib": "bead",
+   "at": [
+    0.62,
+    0.3
+   ],
+   "size": 0.016
+  },
+  "sci": {
+   "lib": "pawn",
+   "at": [
+    0.3,
+    0.44
+   ]
+  }
+ },
+ "events": [
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "t0",
+   "f_land": 62,
+   "f_start": 48,
+   "word": "0:works"
+  },
+  {
+   "verb": "fill",
+   "lead": 16,
+   "level": 0.5,
+   "obj": "t0",
+   "f_land": 90,
+   "f_start": 74,
+   "word": "0:cells,"
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "pp",
+   "f_land": 132,
+   "f_start": 118,
+   "word": "0:not"
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "pp",
+   "f_land": 198,
+   "f_start": 186,
+   "word": "0:people."
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "c0",
+   "f_land": 273,
+   "f_start": 257,
+   "word": "0:computer"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "c1",
+   "f_land": 275,
+   "f_start": 259,
+   "word": "0:computer"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "c2",
+   "f_land": 277,
+   "f_start": 261,
+   "word": "0:computer"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "c3",
+   "f_land": 279,
+   "f_start": 263,
+   "word": "0:computer"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "c4",
+   "f_land": 281,
+   "f_start": 265,
+   "word": "0:computer"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "c5",
+   "f_land": 283,
+   "f_start": 267,
+   "word": "0:computer"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "c6",
+   "f_land": 285,
+   "f_start": 269,
+   "word": "0:computer"
+  },
+  {
+   "verb": "lift",
+   "lead": 18,
+   "obj": "c0",
+   "f_land": 356,
+   "f_start": 338,
+   "word": "0:search."
+  },
+  {
+   "verb": "lift",
+   "lead": 18,
+   "obj": "c1",
+   "f_land": 358,
+   "f_start": 340,
+   "word": "0:search."
+  },
+  {
+   "verb": "lift",
+   "lead": 18,
+   "obj": "c2",
+   "f_land": 360,
+   "f_start": 342,
+   "word": "0:search."
+  },
+  {
+   "verb": "lift",
+   "lead": 18,
+   "obj": "c4",
+   "f_land": 362,
+   "f_start": 344,
+   "word": "0:search."
+  },
+  {
+   "verb": "lift",
+   "lead": 18,
+   "obj": "c5",
+   "f_land": 364,
+   "f_start": 346,
+   "word": "0:search."
+  },
+  {
+   "verb": "lift",
+   "lead": 18,
+   "obj": "c6",
+   "f_land": 366,
+   "f_start": 348,
+   "word": "0:search."
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "c3",
+   "f_land": 468,
+   "f_start": 456,
+   "word": "0:Experiments"
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "t0",
+   "f_land": 545,
+   "f_start": 533,
+   "word": "0:decide."
+  },
+  {
+   "verb": "lift",
+   "lead": 18,
+   "obj": "t0",
+   "f_land": 565,
+   "f_start": 547,
+   "word": "1:So"
+  },
+  {
+   "verb": "lift",
+   "lead": 18,
+   "obj": "pp",
+   "f_land": 567,
+   "f_start": 549,
+   "word": "1:So"
+  },
+  {
+   "verb": "lift",
+   "lead": 18,
+   "obj": "c3",
+   "f_land": 569,
+   "f_start": 551,
+   "word": "1:So"
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "hd",
+   "f_land": 633,
+   "f_start": 619,
+   "word": "1:headline"
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "hd",
+   "f_land": 728,
+   "f_start": 716,
+   "word": "1:discovers"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "hd",
+   "f_land": 854,
+   "f_start": 838,
+   "word": "2:where"
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "r0",
+   "f_land": 1043,
+   "f_start": 1029,
+   "word": "2:computer,"
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "r1",
+   "f_land": 1123,
+   "f_start": 1109,
+   "word": "2:protein,"
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "r2",
+   "f_land": 1207,
+   "f_start": 1193,
+   "word": "2:cells,"
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "r3",
+   "f_land": 1294,
+   "f_start": 1280,
+   "word": "2:animals,"
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "r4",
+   "f_land": 1382,
+   "f_start": 1368,
+   "word": "2:patients?"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "r0",
+   "f_land": 1420,
+   "f_start": 1404,
+   "word": "3:AI"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "r1",
+   "f_land": 1422,
+   "f_start": 1406,
+   "word": "3:AI"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "r2",
+   "f_land": 1424,
+   "f_start": 1408,
+   "word": "3:AI"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "r3",
+   "f_land": 1426,
+   "f_start": 1410,
+   "word": "3:AI"
+  },
+  {
+   "verb": "lift",
+   "lead": 16,
+   "obj": "r4",
+   "f_land": 1428,
+   "f_start": 1412,
+   "word": "3:AI"
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "sci",
+   "f_land": 1492,
+   "f_start": 1478,
+   "word": "3:scientists."
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "ring",
+   "f_land": 1584,
+   "f_start": 1570,
+   "word": "3:gave"
+  },
+  {
+   "verb": "drop",
+   "lead": 14,
+   "obj": "ob",
+   "f_land": 1619,
+   "f_start": 1605,
+   "word": "3:trial"
+  },
+  {
+   "verb": "orbit",
+   "ring": "ring",
+   "lead": 0,
+   "w": 0.06,
+   "fast": 1701,
+   "w2": 0.22,
+   "obj": "ob",
+   "f_land": 1665,
+   "f_start": 1665,
+   "word": "3:error"
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "sci",
+   "f_land": 1784,
+   "f_start": 1772,
+   "word": "3:Thanks"
+  }
+ ],
+ "lockkey": {},
+ "notes": [
+  {
+   "word": "0:cells,",
+   "kind": "serif",
+   "text": "cells: yes",
+   "x": 0.06,
+   "y": 0.06,
+   "size": 56,
+   "d": 14,
+   "until": 569,
+   "at": 90
+  },
+  {
+   "word": "0:people.",
+   "kind": "serif",
+   "text": "people: not yet",
+   "x": 0.06,
+   "y": 0.16,
+   "size": 56,
+   "d": 14,
+   "until": 569,
+   "at": 198
+  },
+  {
+   "word": "0:narrows",
+   "kind": "pen",
+   "text": "the computer narrows",
+   "x": 0.45,
+   "y": 0.06,
+   "size": 56,
+   "d": 22,
+   "until": 569,
+   "at": 317
+  },
+  {
+   "word": "0:decide.",
+   "kind": "pen",
+   "text": "experiments decide",
+   "x": 0.45,
+   "y": 0.16,
+   "size": 58,
+   "d": 20,
+   "red": true,
+   "until": 569,
+   "at": 545
+  },
+  {
+   "word": "1:like",
+   "kind": "pen",
+   "text": "'AI discovers a cancer drug'",
+   "x": 0.06,
+   "y": 0.08,
+   "size": 56,
+   "d": 30,
+   "until": 854,
+   "at": 687
+  },
+  {
+   "word": "2:road:",
+   "kind": "pen",
+   "text": "where on the road?",
+   "x": 0.06,
+   "y": 0.04,
+   "size": 58,
+   "d": 20,
+   "until": 1428,
+   "at": 967
+  },
+  {
+   "word": "2:computer,",
+   "kind": "serif",
+   "text": "computer",
+   "x": 0.1,
+   "y": 0.62,
+   "size": 40,
+   "d": 10,
+   "until": 1428,
+   "at": 1043
+  },
+  {
+   "word": "2:protein,",
+   "kind": "serif",
+   "text": "protein",
+   "x": 0.28,
+   "y": 0.62,
+   "size": 40,
+   "d": 10,
+   "until": 1428,
+   "at": 1123
+  },
+  {
+   "word": "2:cells,",
+   "kind": "serif",
+   "text": "cells",
+   "x": 0.46,
+   "y": 0.62,
+   "size": 40,
+   "d": 10,
+   "until": 1428,
+   "at": 1207
+  },
+  {
+   "word": "2:animals,",
+   "kind": "serif",
+   "text": "animals",
+   "x": 0.6,
+   "y": 0.62,
+   "size": 40,
+   "d": 10,
+   "until": 1428,
+   "at": 1294
+  },
+  {
+   "word": "2:patients?",
+   "kind": "serif",
+   "text": "patients",
+   "x": 0.76,
+   "y": 0.62,
+   "size": 40,
+   "d": 10,
+   "until": 1428,
+   "at": 1382
+  },
+  {
+   "word": "3:replace",
+   "kind": "pen",
+   "text": "didn't replace",
+   "x": 0.06,
+   "y": 0.06,
+   "size": 60,
+   "d": 20,
+   "at": 1458
+  },
+  {
+   "word": "3:light",
+   "kind": "pen",
+   "text": "trial and error at light speed",
+   "x": 0.06,
+   "y": 0.18,
+   "size": 54,
+   "d": 26,
+   "red": true,
+   "at": 1701
+  }
+ ],
+ "landings": [
+  62,
+  90,
+  132,
+  198,
+  273,
+  275,
+  277,
+  279,
+  281,
+  283,
+  285,
+  317,
+  356,
+  358,
+  360,
+  362,
+  364,
+  366,
+  468,
+  545,
+  565,
+  567,
+  569,
+  633,
+  687,
+  728,
+  854,
+  967,
+  1043,
+  1123,
+  1207,
+  1294,
+  1382,
+  1420,
+  1422,
+  1424,
+  1426,
+  1428,
+  1458,
+  1492,
+  1584,
+  1619,
+  1665,
+  1701,
+  1784
+ ],
+ "start_from": "8-03.mp4",
+ "end_from": "rough_v0.mp4"
+}

@@ -1,0 +1,294 @@
+{
+ "name": "5-02",
+ "frames": 367,
+ "pull": [
+  0,
+  24
+ ],
+ "person_in": [
+  8,
+  24
+ ],
+ "push": [
+  343,
+  367
+ ],
+ "fade_out": null,
+ "prev": "5-01",
+ "next": "5-03",
+ "parts": [
+  {
+   "seg": "5-02",
+   "take": "C_cam_5-02_t2",
+   "who": "C",
+   "at": 0,
+   "src0": 0.0,
+   "pad": 0,
+   "until": 343,
+   "person_side": "left",
+   "tray": "right",
+   "person_cx": 648,
+   "box": [
+    -443,
+    452,
+    3037,
+    1708
+   ],
+   "dx": -88
+  }
+ ],
+ "words": {
+  "0:Six": 32,
+  "0:of": 49,
+  "0:them": 56,
+  "0:barely": 80,
+  "0:held": 102,
+  "0:on.": 119,
+  "0:But": 154,
+  "0:one": 170,
+  "0:stood": 208,
+  "0:out.": 223,
+  "0:Its": 260,
+  "0:name?": 270,
+  "0:001.": 330
+ },
+ "objects": {
+  "c0": {
+   "lib": "coin",
+   "at": [
+    0.2,
+    0.36
+   ]
+  },
+  "c1": {
+   "lib": "coin",
+   "at": [
+    0.3,
+    0.36
+   ]
+  },
+  "c2": {
+   "lib": "coin",
+   "at": [
+    0.4,
+    0.36
+   ]
+  },
+  "c3": {
+   "lib": "coin",
+   "at": [
+    0.5,
+    0.36
+   ]
+  },
+  "c4": {
+   "lib": "coin",
+   "at": [
+    0.6,
+    0.36
+   ]
+  },
+  "c5": {
+   "lib": "coin",
+   "at": [
+    0.7,
+    0.36
+   ]
+  },
+  "c6": {
+   "lib": "coin",
+   "at": [
+    0.8,
+    0.36
+   ]
+  }
+ },
+ "events": [
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "c0",
+   "f_land": 20,
+   "f_start": 4,
+   "word": "0:Six"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "c1",
+   "f_land": 22,
+   "f_start": 6,
+   "word": "0:Six"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "c2",
+   "f_land": 24,
+   "f_start": 8,
+   "word": "0:Six"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "c3",
+   "f_land": 26,
+   "f_start": 10,
+   "word": "0:Six"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "c4",
+   "f_land": 28,
+   "f_start": 12,
+   "word": "0:Six"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "c5",
+   "f_land": 30,
+   "f_start": 14,
+   "word": "0:Six"
+  },
+  {
+   "verb": "drop",
+   "lead": 16,
+   "obj": "c6",
+   "f_land": 32,
+   "f_start": 16,
+   "word": "0:Six"
+  },
+  {
+   "verb": "hop",
+   "lead": 10,
+   "h": 0.3,
+   "obj": "c0",
+   "f_land": 75,
+   "f_start": 65,
+   "word": "0:barely"
+  },
+  {
+   "verb": "hop",
+   "lead": 10,
+   "h": 0.3,
+   "obj": "c1",
+   "f_land": 76,
+   "f_start": 66,
+   "word": "0:barely"
+  },
+  {
+   "verb": "hop",
+   "lead": 10,
+   "h": 0.3,
+   "obj": "c2",
+   "f_land": 77,
+   "f_start": 67,
+   "word": "0:barely"
+  },
+  {
+   "verb": "hop",
+   "lead": 10,
+   "h": 0.3,
+   "obj": "c4",
+   "f_land": 78,
+   "f_start": 68,
+   "word": "0:barely"
+  },
+  {
+   "verb": "hop",
+   "lead": 10,
+   "h": 0.3,
+   "obj": "c5",
+   "f_land": 79,
+   "f_start": 69,
+   "word": "0:barely"
+  },
+  {
+   "verb": "hop",
+   "lead": 10,
+   "h": 0.3,
+   "obj": "c6",
+   "f_land": 80,
+   "f_start": 70,
+   "word": "0:barely"
+  },
+  {
+   "verb": "slide",
+   "lead": 22,
+   "to": [
+    0.5,
+    0.18
+   ],
+   "obj": "c3",
+   "f_land": 208,
+   "f_start": 186,
+   "word": "0:stood"
+  },
+  {
+   "verb": "hop",
+   "lead": 12,
+   "obj": "c3",
+   "f_land": 270,
+   "f_start": 258,
+   "word": "0:name?"
+  }
+ ],
+ "lockkey": {},
+ "notes": [
+  {
+   "word": "0:held",
+   "kind": "pen",
+   "text": "barely held on",
+   "x": 0.06,
+   "y": 0.06,
+   "size": 62,
+   "d": 22,
+   "at": 102
+  },
+  {
+   "word": "0:one",
+   "kind": "pen",
+   "text": "one stood out",
+   "x": 0.55,
+   "y": 0.06,
+   "size": 62,
+   "d": 22,
+   "red": true,
+   "at": 170
+  },
+  {
+   "word": "0:001.",
+   "kind": "serif",
+   "text": "001",
+   "x": 0.46,
+   "y": 0.62,
+   "size": 72,
+   "d": 10,
+   "at": 330
+  }
+ ],
+ "landings": [
+  20,
+  22,
+  24,
+  26,
+  28,
+  30,
+  32,
+  75,
+  76,
+  77,
+  78,
+  79,
+  80,
+  102,
+  170,
+  208,
+  270,
+  330
+ ],
+ "start_from": "S5_501_beats_v4.mp4",
+ "end_from": "S5_503_beats_v2.mp4"
+}
