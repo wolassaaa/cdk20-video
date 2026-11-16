@@ -1,0 +1,142 @@
+{
+ "version": "v3",
+ "words": "D:\\。hkbu\\molecular science\\镜头设计_v3\\粗剪\\对时\\beats_v8\\1-08.json",
+ "frames": 930,
+ "clash_frames": [],
+ "clash_pairs": [],
+ "clash_n": 0,
+ "landing": [
+  {
+   "id": "bill0",
+   "word": "cost",
+   "word_frame": 350,
+   "measured": 350,
+   "diff": 0
+  },
+  {
+   "id": "bill1",
+   "word": "almost",
+   "word_frame": 389,
+   "measured": 389,
+   "diff": 0
+  },
+  {
+   "id": "bill3",
+   "word": "billion",
+   "word_frame": 462,
+   "measured": 462,
+   "diff": 0
+  },
+  {
+   "id": "bill6",
+   "word": "US",
+   "word_frame": 499,
+   "measured": 499,
+   "diff": 0
+  },
+  {
+   "id": "bill8",
+   "word": "dollars",
+   "word_frame": 516,
+   "measured": 516,
+   "diff": 0
+  },
+  {
+   "id": "well0",
+   "word": "year",
+   "word_frame": 80,
+   "measured": 80,
+   "diff": 0
+  },
+  {
+   "id": "well1",
+   "word": "born",
+   "word_frame": 133,
+   "measured": 133,
+   "diff": 0
+  },
+  {
+   "id": "well2",
+   "word": "might",
+   "word_frame": 212,
+   "measured": 212,
+   "diff": 0
+  },
+  {
+   "id": "well3",
+   "word": "ready",
+   "word_frame": 261,
+   "measured": 261,
+   "diff": 0
+  },
+  {
+   "id": "head_now",
+   "word": "now",
+   "word_frame": 279,
+   "measured": 278,
+   "diff": -1
+  },
+  {
+   "id": "head_and",
+   "word": "and#2",
+   "word_frame": 577,
+   "measured": 575,
+   "diff": -2
+  },
+  {
+   "id": "text_28",
+   "word": "2.8",
+   "word_frame": 417,
+   "measured": 417,
+   "diff": 0
+  },
+  {
+   "id": "pill0",
+   "word": "drugs",
+   "word_frame": 610,
+   "measured": 610,
+   "diff": 0
+  },
+  {
+   "id": "pillx0",
+   "word": "only#2",
+   "word_frame": 726,
+   "measured": 726,
+   "diff": 0
+  },
+  {
+   "id": "keep_up",
+   "word": "one",
+   "word_frame": 776,
+   "measured": 776,
+   "diff": 0
+  },
+  {
+   "id": "keep_hop",
+   "word": "reaches",
+   "word_frame": 828,
+   "measured": 828,
+   "diff": 0
+  },
+  {
+   "id": "keep_land",
+   "word": "market",
+   "word_frame": 886,
+   "measured": 886,
+   "diff": 0
+  }
+ ],
+ "landing_max_abs": 2,
+ "longest_still_frames": 8,
+ "still_runs_ge_30": [],
+ "last_word_end": 915,
+ "last_motion": 925,
+ "hover": [],
+ "hover_n": 0,
+ "pass": {
+  "clash": true,
+  "landing": true,
+  "motion": true,
+  "hover": true
+ }
+}

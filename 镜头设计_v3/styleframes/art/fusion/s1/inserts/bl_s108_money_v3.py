@@ -214,7 +214,7 @@ def build():
         a, b = (x, PILL_Y - PILL_H / 2), (x, PILL_Y + PILL_H / 2)
         plate.pocket_capsule(a, b, PILL_R + 0.0005)
         plate.runner([(x, PILL_RUN_Y), (x, PILL_Y + PILL_H / 2 + PILL_R + 0.0012)], R_GATE)
-    plate.pin_hole((PILLS_X[KEEP], PILL_Y), 0.0017, 0.012)
+    plate.pin_hole((PILLS_X[KEEP], PILL_Y), 0.0024, 0.04)
     # 外圈 3 cm 斜到 −0.3 mm，接一张大底板（同材质），看不到边
     X, Y = plate.X, plate.Y
     e = np.minimum.reduce([X - X.min(), X.max() - X, Y - Y.min(), Y.max() - Y])
@@ -264,7 +264,7 @@ def build():
         p.location = (cx, cy, -T_BILL - 0.00008)
         pins[c] = p
     kx = PILLS_X[KEEP]
-    kpin = MK.pin_obj("pin_pill", 0.0014, 0.03, M["chrome"])
+    kpin = MK.pin_obj("pin_pill", 0.0016, 0.03, M["chrome"])
     kpin.location = (kx, PILL_Y, -(PILL_R + 0.0005) - 0.00008)
 
     # 钞票
@@ -420,7 +420,7 @@ def build():
     t_now = wf("now")
     for f in range(NF):
         follow = min(max(head_x[f] + 0.12, -0.95), 0.035)        # 机位跟料头走（领先 12 cm），到 now 停在格子区
-        u = MK.ease_in_out((f - (t_now - 50)) / 50)
+        u = MK.ease_in_out((f - (wf("ready") + 1)) / 30)          # ready 圆饼鼓完（261）才起步，30 帧到格子区
         tx = follow * (1 - u) + 0.035 * u
         if f > 560:
             tx = 0.035 + 0.01 * MK.ease_in_out((f - 560) / 60)
