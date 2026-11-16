@@ -34,6 +34,7 @@ MW, MH = 160, 90
 
 
 # v6 审片后：4-10 换 11-11 的 4-10k 版（钥匙逐把试进锁，动作多）
+HARD_END = {"4-03"}  # 源片在 fout 处接占位卡，尾巴不得越过 fout
 SRC_OVERRIDE = {"4-10": (R.P / "styleframes/art/fusion/s4/S4_410k_novo_1080_v1.mp4", 0.0, 25.0, "")}   # s410k.jsx review=false 重出，不带测试台词字幕
 
 
@@ -168,7 +169,7 @@ def retime(seg, it, L, words, piece_len, out, src=None, fin=None, fout=None):
     fin = A["fin"] if fin is None else fin
     fout = A["fout"] if fout is None else fout
     dur_file = R.probe_duration(src)
-    avail = min(dur_file - fin, fout - fin + 0.5)      # v6 审片：不播到这段文件内时间之后（后面是别的段或占位卡）
+    avail = min(dur_file - fin, fout - fin + (0.0 - 1 / 60 if seg in HARD_END else 0.5))      # v6 审片：不播到这段文件内时间之后（后面是别的段或占位卡）
     d = motion(src, fin, min(avail, max(fout - fin, piece_len) + 4))
     ev = onsets(d)
     slot = fout - fin
