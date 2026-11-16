@@ -10,7 +10,7 @@
   "piece": 23.258
  },
  "source": {
-  "file": "styleframes\\art\\fusion\\s4\\S4_410k_novo_1080_v1.mp4",
+  "file": "styleframes\\art\\fusion\\s4\\S4_410k_novo_1080_v2.mp4",
   "fin": 0.0,
   "fout": 25.0
  },
@@ -285,8 +285,8 @@
  "motion_onsets": [
   1.033,
   1.8,
-  2.467,
-  2.733,
+  2.4,
+  2.667,
   3.467,
   3.733,
   4.0,

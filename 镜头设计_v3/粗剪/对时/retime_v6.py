@@ -34,8 +34,9 @@ MW, MH = 160, 90
 
 
 # v6 审片后：4-10 换 11-11 的 4-10k 版（钥匙逐把试进锁，动作多）
-HARD_END = {"4-03"}  # 源片在 fout 处接占位卡，尾巴不得越过 fout
-SRC_OVERRIDE = {"4-10": (R.P / "styleframes/art/fusion/s4/S4_410k_novo_1080_v1.mp4", 0.0, 25.0, "")}   # s410k.jsx review=false 重出，不带测试台词字幕
+HARD_END = {"4-03"}
+TAIL_AFTER = {"2-01": (31.667, "Park.", 0.15)}  # v7：这个源秒起的擦走动作等最后一个词说完再开始（源秒, 词, 词尾后留秒）  # 源片在 fout 处接占位卡，尾巴不得越过 fout
+SRC_OVERRIDE = {"4-10": (R.P / "styleframes/art/fusion/s4/S4_410k_novo_1080_v2.mp4", 0.0, 25.0, "")}   # s410k.jsx review=false 重出，不带测试台词字幕
 
 
 def assets():
@@ -193,6 +194,10 @@ def retime(seg, it, L, words, piece_len, out, src=None, fin=None, fout=None):
                     if dev <= 2.5:
                         cands.append((round(e, 3), x["t0"], dev))
     chain = plan_dp(cands, L, avail, d, cam_thr)
+    if seg in TAIL_AFTER:
+        s_, w_, pad_ = TAIL_AFTER[seg]
+        t_ = [x for x in words if x["w"] == w_][-1]["t1"] + pad_
+        chain = [c for c in chain if c[0] < s_ - 1e-3 and c[1] < t_ - 0.3] + [(s_, t_, 0.0)]
     if hand:
         sp_forced = forced_speeds(cands)
     else:
@@ -236,7 +241,7 @@ def retime(seg, it, L, words, piece_len, out, src=None, fin=None, fout=None):
              anchor_mode="手量（S1_锚点.json）" if hand else "帧差自动",
              words=words, motion_onsets=[round(e, 3) for e in ev],
              anchors=[[round(a, 3), round(b, 3)] for a, b, _ in chain[1:]],
-             events=[dict(id=f"a{k}", word=next(x["w"] for x in words if abs(x["t0"] - b) < 1e-6), src=round(a, 3), f_land=int(round(b * 60))) for k, (a, b, _) in enumerate(chain[1:])],
+             events=[dict(id=f"a{k}", word=next((x["w"] for x in words if abs(x["t0"] - b) < 1e-6), "(after last word)"), src=round(a, 3), f_land=int(round(b * 60))) for k, (a, b, _) in enumerate(chain[1:])],
              frames=dict(len=int(round(L * 60)), first_word=int(round(words[0]["t0"] * 60)), last_word_end=int(round(words[-1]["t1"] * 60))),
              retime=plan, forced_speeds=[round(s, 3) for s in sp_forced], gaps_1p5s=gaps, verdict=v,
              min_speed=round(min(p["speed"] for p in plan), 3), max_speed=round(max(p["speed"] for p in plan), 3))

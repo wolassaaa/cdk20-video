@@ -21,7 +21,7 @@ sys.path.insert(0, str(HERE))
 ROOT = Path("D:/。hkbu/molecular science")
 CUT = ROOT / "镜头设计_v3/粗剪"
 sys.path.insert(0, str(CUT))
-import build_cut_v5 as BC  # noqa: E402
+import build_cut_v7 as BC  # v7：第 5 章新版本  # noqa: E402
 import build_rough as R  # noqa: E402
 
 FF = BC.FFMPEG

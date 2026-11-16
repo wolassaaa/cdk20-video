@@ -23,7 +23,7 @@ const after = (t, at, d = 0.5) => out((t - at) / d);
 
 let wipeId = 0;
 /** Words that print left to right, as if a press ran over them. */
-const Ink = ({x, y, size, at, font = SANS, weight = 600, fill = INK, w, dur = 0.5, children}) => {
+const Ink = ({x, y, size, at, font = SERIF, weight = 600, fill = INK, w, dur = 0.5, children}) => {
   const t = useT(), p = smooth((t - at) / dur);
   const id = React.useMemo(() => `wipe${wipeId++}`, []);
   if (p <= 0) return null;
@@ -79,7 +79,7 @@ const S410K = ({file = "fusion_s410k/s410k_3d.mp4", fps = 30, review = true}) =>
       <g opacity={after(t, 1.0)}><text x={1856} y={92} fontFamily={SANS} fontSize={36} fontWeight={600} fill={INK} textAnchor="end">Objective 1 / Tool: docking / virtual screening</text></g>
       {first > 0 && <g opacity={first}>
         <Ink x={104} y={178} size={120} at={1.6} font={SERIF} w={380} dur={0.5}>{count.toLocaleString("en-US")}</Ink>
-        <Ink x={108} y={222} size={28} at={2.2} w={480}>designs came back from the AI</Ink>
+        <Ink x={108} y={222} size={36} at={2.2} w={560}>designs came back from the AI</Ink>
         {early > 0 && <g opacity={early}>
           <Note x={540} y={128} size={46} at={2.6} rot={-1.5}>one design = one key</Note>
           <Note x={540} y={198} size={46} at={3.3} rot={-2}>way too many to make</Note>
@@ -90,9 +90,9 @@ const S410K = ({file = "fusion_s410k/s410k_3d.mp4", fps = 30, review = true}) =>
         </g>}
       </g>}
       <Ink x={104} y={178} size={104} at={20.3} font={SERIF} w={220} dur={0.45}>54</Ink>
-      <Ink x={108} y={222} size={28} at={20.7} w={300}>make the shortlist</Ink>
+      <Ink x={108} y={222} size={36} at={20.7} w={340}>make the shortlist</Ink>
       <Ink x={540} y={178} size={104} at={21.4} font={SERIF} fill={RED} w={120} dur={0.45}>7</Ink>
-      <Ink x={544} y={222} size={28} at={21.8} w={200}>to make</Ink>
+      <Ink x={544} y={222} size={36} at={21.8} w={220}>to make</Ink>
       {review && t >= 1.0 && vo.map((l, i) => <text key={i} x={64} y={990 - (vo.length - 1 - i) * 36} fontFamily={SANS} fontSize={28} fontWeight={500} fill={SOFT}>{l}</text>)}
       <g opacity={after(t, 1.0)}><text x={64} y={1046} fontFamily={SANS} fontSize={22} fontWeight={500} fill={SOFT}>Illustration · Ren 2023, pp. 1444, 1447</text></g>
     </svg>

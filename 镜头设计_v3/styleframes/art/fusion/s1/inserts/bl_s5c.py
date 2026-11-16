@@ -102,7 +102,47 @@ def ball_stick(name, pose, f, mats):
         bm = bmesh.new()
         bmesh.ops.create_cone(bm, cap_ends=True, segments=16, radius1=BOND_R * s, radius2=BOND_R * s, depth=(b - a).length)
         parts.append(("b", (i, j), solid("%s_b%d" % (name, k), bm, mats["C"], (a + b) / 2, Vector((0, 0, 1)).rotation_difference(b - a))))
+    carve_core(W, els, pose, f)
     return root, parts, W
+
+
+CARVE_PAD = float(os.environ.get("S5C_CARVE_PAD", "0.6"))      # 埃：口袋表面离原子球至少留这么多（球间距 1.5 埃时也盖住棍）
+
+
+def carve_core(W, els, pose, f):
+    """11-16 cut_v7：外壳是平滑包络，比真实分子表面鼓，重对接姿态有一部分落在包络里面（穿模）。
+    分子不动（姿态是对接结果），改外壳：用 原子半径+CARVE_PAD 的一串球从 core 上布尔减掉，压出口袋。只改 core 网格。"""
+    import bmesh
+    core = bpy.data.objects.get("core")
+    if core is None or core.get("carved"):
+        return
+    s = f.scale
+    bm = bmesh.new()
+    for p, e in zip(W, els):
+        bmesh.ops.create_icosphere(bm, subdivisions=3, radius=(atom_r(e) + CARVE_PAD) * s, matrix=Matrix.Translation(Vector(tuple(p))))
+    me = bpy.data.meshes.new("s5c_cutter")
+    bm.to_mesh(me)
+    bm.free()
+    cut = bpy.data.objects.new("s5c_cutter", me)
+    bpy.context.scene.collection.objects.link(cut)
+    md = core.modifiers.new("carve", "BOOLEAN")
+    md.operation = "DIFFERENCE"
+    md.object = cut
+    md.solver = "EXACT"
+    md.use_self = True
+    n0 = len(core.data.vertices)
+    dg = bpy.context.evaluated_depsgraph_get()
+    ev = core.evaluated_get(dg)
+    new = bpy.data.meshes.new_from_object(ev)
+    core.modifiers.remove(md)
+    old = core.data
+    core.data = new
+    for m in old.materials:
+        if m.name not in [x.name for x in new.materials if x]:
+            new.materials.append(m)
+    bpy.data.objects.remove(cut)
+    core["carved"] = 1
+    print("S5C carve: verts", n0, "->", len(new.vertices))
 
 
 def mol_mats():
