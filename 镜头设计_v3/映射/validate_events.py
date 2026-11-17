@@ -1,7 +1,7 @@
 """HKBU SCIE1007 课程作业的科普视频：事件表校验（映射/events/<段>.json，格式见 映射/事件表格式.md）。
 
 逐段检查，任何一项不过退出码 1：
-  V1 格式    schema、id 唯一、verb 在 flow/grow/eject/retract/appear/move/camera_to 里、ease 合法
+  V1 格式    schema、id 唯一、verb 在 flow/grow/eject/retract/appear/move/camera_to/morph/snap 里、ease 合法
   V2 词存在  at / until 引用的词都在总表这段里（wid、'cost'、'and#2' 都行）
   V3 顺序    f_start ≤ f_land ≤ f_end，都在 0..段长−1；until 不早于 at；at.event 只能引用前面的事件
   V4 空档    每句说话期间（首词开口 → 末词说完），没有任何事件在动的连续时间 ≤ 90 帧（1.5 s）

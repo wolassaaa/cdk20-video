@@ -24,7 +24,7 @@ FPS = 60
 EVENTS = HERE / "events"
 KEYS = HERE / "keys"
 RM_KEYS = ROOT / "镜头设计_v2/tests/T4_remotion/src/v3/map/keys"
-VERBS = ("flow", "grow", "eject", "retract", "appear", "move", "camera_to")
+VERBS = ("flow", "grow", "eject", "retract", "appear", "move", "camera_to", "morph", "snap")   # morph＝变，snap＝拼（11-17 加）
 EASES = ("linear", "in", "out", "inout", "hold")
 SCHEMA = "cdk20.events/1"
 
