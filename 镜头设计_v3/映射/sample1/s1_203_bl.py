@@ -27,19 +27,20 @@ K = json.loads((MAP / "keys" / "2-03.json").read_text(encoding="utf-8"))
 EV = {e["id"]: e for e in K["events"]}
 W = {w["wid"]: w for w in K["words"]}
 S1 = K["sentences"][0]
+CDK20_NPZ = Path("G:/cdk20/work/sample1/cdk20.npz")   # make_cdk20_mesh.py 生成
 FONTS = Path("D:/。hkbu/molecular science/镜头设计_v3/remotion_public/fusion_s1/fonts")
 
 PAPER, SHADE, BONE, INK, RED, KLEIN = "#EDE9DF", "#D9D6CC", "#F6F3EC", "#1F1E1C", "#C8102E", "#002FA7"
 
 T_TOP = 0.02                      # 模板顶面
-CAV_X = [-0.22, -0.11, 0.0, 0.11, 0.22]
-CAV_Y, CAV_R = 0.005, 0.018
-RUN_Y = -0.07
-GATE_Y = -0.05
-LIVER_PTS = [(0.06, -0.12), (0.15, -0.08), (0.38, -0.03), (0.5, 0.03), (0.42, 0.13), (0.2, 0.26), (-0.05, 0.33),
-             (-0.3, 0.34), (-0.46, 0.24), (-0.5, 0.05), (-0.48, -0.16), (-0.36, -0.3), (-0.15, -0.32), (-0.04, -0.2)]
-LIVER_S, LIVER_DY = 0.15, 0.012
-INLET = Vector((0.0, -0.022, T_TOP))
+CAV_X = [-0.24, -0.12, 0.0, 0.12, 0.24]
+CAV_Y, CAV_R = 0.005, 0.021
+RUN_Y = 0.07                      # 主流道在模板后侧，前沿留给字幕带
+GATE_Y = 0.052
+LIVER_PTS = [(-0.5, 0.1), (-0.44, 0.24), (-0.28, 0.33), (-0.04, 0.33), (0.18, 0.27), (0.36, 0.18), (0.5, 0.08),
+             (0.42, 0.04), (0.24, 0.0), (0.1, -0.05), (0.03, -0.1), (-0.06, -0.17), (-0.22, -0.29), (-0.38, -0.3), (-0.48, -0.14)]
+LIVER_S, LIVER_DY = 0.17, -0.002
+INLET = Vector((-0.045, 0.047, T_TOP))
 
 
 def lin(h):
@@ -118,6 +119,68 @@ def smooth_loop(pts, n=8):
             t = j / n
             out.append(0.5 * ((2 * p1) + (-p0 + p2) * t + (2 * p0 - 5 * p1 + 4 * p2 - p3) * t * t + (-p0 + 3 * p1 - 3 * p2 + p3) * t ** 3))
     return out
+
+
+def prism(name, pts, z0, z1, m):
+    bm = bmesh.new()
+    lo = [bm.verts.new((p.x, p.y, z0)) for p in pts]
+    hi = [bm.verts.new((p.x, p.y, z1)) for p in pts]
+    bm.faces.new(hi); bm.faces.new(list(reversed(lo)))
+    n = len(pts)
+    for i in range(n):
+        j = (i + 1) % n
+        bm.faces.new((lo[i], lo[j], hi[j], hi[i]))
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
+    me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
+    o = link(bpy.data.objects.new(name, me))
+    o.data.materials.append(m)
+    return o
+
+
+def inset(pts, d):
+    c = sum(pts, Vector((0, 0))) / len(pts)
+    out = []
+    n = len(pts)
+    for i, p in enumerate(pts):
+        t = (pts[(i + 1) % n] - pts[i - 1]).normalized()
+        nrm = Vector((t.y, -t.x))
+        if nrm.dot(p - c) < 0:
+            nrm = -nrm
+        out.append(p - nrm * d)
+    return out
+
+
+def cdk20_part(m):
+    """CDK20 外形：make_cdk20_mesh.py 出的 npz（AlphaFold v6 平滑包络），口袋朝上偏前；缩到 PART_SIZE；
+    原点放在浇口一侧（-y）的底面，灌注时从这一侧长；带一圈分型线（材质里的凹线）。"""
+    import numpy as np
+    d = np.load(str(CDK20_NPZ))
+    v = d["verts"] - d["verts"].mean(0)
+    q = Vector(d["mouth"].tolist()).rotation_difference(Vector((0, -0.5, 0.866)))
+    R = np.array(q.to_matrix())
+    v = v @ R.T
+    v *= PART_SIZE / float((v.max(0) - v.min(0)).max())
+    v[:, 1] -= PART_HALF                      # 浇口在 +y（后侧）
+    v[:, 2] -= v[:, 2].min()
+    me = bpy.data.meshes.new("cdk20_part")
+    me.from_pydata(v.tolist(), [], d["quads"].tolist())
+    o = link(bpy.data.objects.new("cdk20_part", me))
+    for f in me.polygons:
+        f.use_smooth = True
+    o.data.materials.append(m)
+    zmid = float(v[:, 2].min() + 0.42 * (v[:, 2].max() - v[:, 2].min()))
+    nt = m.node_tree; N, L = nt.nodes, nt.links
+    tc = N.new("ShaderNodeTexCoord"); sep = N.new("ShaderNodeSeparateXYZ")
+    band = N.new("ShaderNodeMapRange"); band.interpolation_type = "SMOOTHSTEP"
+    sub = N.new("ShaderNodeMath"); sub.operation = "SUBTRACT"; sub.inputs[1].default_value = zmid
+    ab = N.new("ShaderNodeMath"); ab.operation = "ABSOLUTE"
+    band.inputs["From Min"].default_value = 0.00022; band.inputs["From Max"].default_value = 0.0001
+    L.new(tc.outputs["Object"], sep.inputs[0]); L.new(sep.outputs["Z"], sub.inputs[0]); L.new(sub.outputs[0], ab.inputs[0])
+    L.new(ab.outputs[0], band.inputs["Value"])
+    bmp = N.new("ShaderNodeBump"); bmp.inputs["Strength"].default_value = 0.6; bmp.inputs["Distance"].default_value = 0.0003
+    bmp.invert = True
+    L.new(band.outputs["Result"], bmp.inputs["Height"]); L.new(bmp.outputs["Normal"], P(m).inputs["Normal"])
+    return o
 
 
 def poly_curve(name, pts3, depth, m, closed=False):
@@ -217,11 +280,17 @@ def build(out_blend, samples=32):
     for v in tpl.data.vertices:                 # 拔模角：顶面每边内收 1.5 mm
         if v.co.z > 0:
             v.co.x -= math.copysign(0.0015, v.co.x); v.co.y -= math.copysign(0.0015, v.co.y)
-    # 型腔：模板上挖 6 mm 深的圆坑
+    # 型腔：模板上挖 12 mm 深的圆坑；肝形浅浮雕型腔（2.5 mm 深，liver 这个词时由刻线压下去）
+    cutters = []
     for i, x in enumerate(CAV_X):
-        c = cyl(f"cut_{i}", CAV_R, 0.012, (x, CAV_Y, T_TOP), m_bone, bevel=0)
+        c = cyl(f"cut_{i}", CAV_R, 0.024, (x, CAV_Y, T_TOP), m_bone, bevel=0)
         c.modifiers.clear()
-        bo = tpl.modifiers.new(f"cav{i}", "BOOLEAN"); bo.object = c; bo.operation = "DIFFERENCE"; bo.solver = "EXACT"
+        cutters.append(c)
+    lv = smooth_loop(liver_xy())
+    liver_cut = prism("liver_cut", lv, 0.0, 0.02, m_bone)
+    liver_cut.location.z = T_TOP + 0.00002
+    for i, c in enumerate(cutters + [liver_cut]):
+        bo = tpl.modifiers.new(f"cut{i}", "BOOLEAN"); bo.object = c; bo.operation = "DIFFERENCE"; bo.solver = "EXACT"
         c.hide_render = c.hide_viewport = True
     tpl.modifiers.move(tpl.modifiers.find("bevel"), len(tpl.modifiers) - 1)
     bpy.context.view_layer.objects.active = tpl
@@ -229,34 +298,39 @@ def build(out_blend, samples=32):
     # 分模线：模板侧面中线一圈细缝
     cube("parting_line", (0.6012, 0.1812, 0.0005), (0, 0, T_TOP * 0.55), m_groove, bevel=0)
     # 顶针印：模板顶面浅圆印
-    for x, y in ((-0.27, 0.06), (-0.27, -0.035), (0.27, 0.06), (0.27, -0.035), (-0.165, 0.065), (0.165, 0.065)):
+    for x, y in ((-0.27, 0.06), (-0.27, -0.035), (0.27, 0.06), (0.27, -0.035), (-0.18, -0.065), (0.18, -0.065)):
         cyl("ejector_mark", 0.0045, 0.0003, (x, y, T_TOP + 0.00005), m_scar, bevel=0)
     # 主流道沟
-    cube("runner_groove", (0.585, 0.013, 0.0004), (-0.0, RUN_Y, T_TOP + 0.0001), m_groove, bevel=0)
+    cube("runner_groove", (0.585, 0.011, 0.0004), (-0.0, RUN_Y, T_TOP + 0.0001), m_groove, bevel=0)
     # 浇口通道（流道 → 型腔）和浇口针
     pins = []
     for i, x in enumerate(CAV_X):
-        cube(f"gate_ch_{i}", (0.006, abs(RUN_Y - (CAV_Y - CAV_R)), 0.0004), (x, (RUN_Y + CAV_Y - CAV_R) / 2, T_TOP + 0.0001), m_groove, bevel=0)
+        if i != 2:
+            cube(f"gate_ch_{i}", (0.006, abs(RUN_Y - (CAV_Y + CAV_R)), 0.0004), (x, (RUN_Y + CAV_Y + CAV_R) / 2, T_TOP + 0.0001), m_groove, bevel=0)
         pins.append(cyl(f"gate_pin_{i}", 0.0032, 0.006, (x, GATE_Y, T_TOP - 0.001), m_bone, bevel=0.0005))
         if i != 2:
-            cyl(f"gate_scar_{i}", 0.0012, 0.0008, (x, GATE_Y + 0.008, T_TOP + 0.0004), m_scar, bevel=0.0002)
-    # 磨砂盖
-    lids = [cyl(f"lid_{i}", CAV_R + 0.0025, 0.0035, (x, CAV_Y, T_TOP + 0.00175), m_lid, bevel=0.0009) for i, x in enumerate(CAV_X)]
+            cyl(f"gate_scar_{i}", 0.0012, 0.0008, (x, GATE_Y - 0.008, T_TOP + 0.0004), m_scar, bevel=0.0002)
+    pins[2].hide_render = True                      # 第 3 个浇口：主流道直接弯进型腔，针藏在弯头下
+    # 磨砂盖：半透明的矮穹顶
+    lids = []
+    for i, x in enumerate(CAV_X):
+        bpy.ops.mesh.primitive_uv_sphere_add(radius=1, segments=96, ring_count=48, location=(x, CAV_Y, T_TOP))
+        d = bpy.context.object; d.name = f"lid_{i}"
+        bm = bmesh.new(); bm.from_mesh(d.data)
+        bmesh.ops.delete(bm, geom=[v for v in bm.verts if v.co.z < -1e-4], context="VERTS")
+        bm.to_mesh(d.data); bm.free()
+        d.scale = (CAV_R + 0.003, CAV_R + 0.003, LID_H)
+        sol = d.modifiers.new("sol", "SOLIDIFY"); sol.thickness = 0.04; sol.offset = -1
+        bpy.ops.object.shade_smooth(); d.data.materials.append(m_lid)
+        lids.append(d)
 
-    # 肝形浅刻线 + 矮墙（开口留在浇口通道处）
-    lv = smooth_loop(liver_xy())
+    # 肝形刻线（liver 之前只是一条很淡的线）
     groove = poly_curve("liver_groove", [(p.x, p.y, T_TOP - 0.0002) for p in lv] + [(lv[0].x, lv[0].y, T_TOP - 0.0002)], 0.00045, m_etch)
-    wall = poly_curve("liver_wall", [(p.x, p.y, T_TOP) for p in lv], 0.002, m_bone)
-    wall.data.bevel_factor_mapping_end = "SPLINE"
-    # 肝里的红料：填满轮廓的薄片，按到入口的距离揭开
-    bm = bmesh.new()
-    vs = [bm.verts.new((p.x, p.y, T_TOP + 0.0004)) for p in lv]
-    bm.faces.new(vs)
-    bmesh.ops.triangulate(bm, faces=bm.faces[:])
-    me = bpy.data.meshes.new("liver_red"); bm.to_mesh(me); bm.free()
-    lr = link(bpy.data.objects.new("liver_red", me))
-    sol = lr.modifiers.new("sol", "SOLIDIFY"); sol.thickness = 0.0008; sol.offset = 1
-    lr.data.materials.append(m_red_liv)
+    # 肝里的红料：硬塑料灌满浅型腔，边界就是型腔边，按到入口的距离推进
+    lr = prism("liver_red", inset(lv, 0.0003), T_TOP - 0.0026, T_TOP - 0.0005, m_red_liv)
+    hole = cyl("cut_red_hole", CAV_R + 0.0006, 0.03, (0.0, CAV_Y, T_TOP), m_bone, bevel=0)
+    hole.modifiers.clear(); hole.hide_render = hole.hide_viewport = True
+    bo = lr.modifiers.new("hole", "BOOLEAN"); bo.object = hole; bo.operation = "DIFFERENCE"; bo.solver = "EXACT"
     nt = m_red_liv.node_tree
     N, L = nt.nodes, nt.links
     tc = N.new("ShaderNodeTexCoord")
@@ -265,71 +339,54 @@ def build(out_blend, samples=32):
     rad = N.new("ShaderNodeValue"); rad.name = rad.label = "radius"
     sub = N.new("ShaderNodeMath"); sub.operation = "SUBTRACT"
     ss = N.new("ShaderNodeMapRange"); ss.interpolation_type = "SMOOTHSTEP"
-    ss.inputs["From Min"].default_value = 0.002; ss.inputs["From Max"].default_value = -0.002
+    ss.inputs["From Min"].default_value = 0.0004; ss.inputs["From Max"].default_value = -0.0004
     tr = N.new("ShaderNodeBsdfTransparent"); mix = N.new("ShaderNodeMixShader")
-    nz2 = N.new("ShaderNodeTexNoise"); nz2.inputs["Scale"].default_value = 60; nz2.inputs["Detail"].default_value = 3
-    wob = N.new("ShaderNodeMath"); wob.operation = "MULTIPLY_ADD"
-    wob.inputs[1].default_value = 0.012; wob.inputs[2].default_value = -0.006
-    add = N.new("ShaderNodeMath"); add.operation = "ADD"
-    L.new(tc.outputs["Object"], nz2.inputs["Vector"]); L.new(nz2.outputs["Fac"], wob.inputs[0])
-    L.new(tc.outputs["Object"], dist.inputs[0]); L.new(dist.outputs["Value"], add.inputs[0]); L.new(wob.outputs[0], add.inputs[1])
-    L.new(add.outputs[0], sub.inputs[0]); L.new(rad.outputs[0], sub.inputs[1])
+    L.new(tc.outputs["Object"], dist.inputs[0]); L.new(dist.outputs["Value"], sub.inputs[0]); L.new(rad.outputs[0], sub.inputs[1])
     L.new(sub.outputs[0], ss.inputs["Value"]); L.new(ss.outputs["Result"], mix.inputs["Fac"])
     L.new(tr.outputs[0], mix.inputs[1]); L.new(P(m_red_liv).outputs[0], mix.inputs[2])
     L.new(mix.outputs[0], N["Material Output"].inputs["Surface"])
     r_liv = rad.outputs[0]
 
-    # 红料：主流道（到第 3 个浇口）+ 料头鼓包 + 支流（流道 → 型腔 3）
-    run = poly_curve("runner_red", [(-0.3, RUN_Y, T_TOP), (0.0, RUN_Y, T_TOP)], 0.0055, m_red_run)
-    head = cyl("runner_head", 0.0058, 0.002, (-0.3, RUN_Y, T_TOP), m_red_run, bevel=0)
-    head.modifiers.clear()
-    bpy.ops.object.select_all(action="DESELECT")
-    bpy.ops.mesh.primitive_uv_sphere_add(radius=0.0058, location=(-0.3, RUN_Y, T_TOP), segments=48, ring_count=24)
-    bpy.data.objects.remove(head)
-    head = bpy.context.object; head.name = "runner_head"; head.scale = (1.25, 1, 0.75)
+    # 红料：一条主流道，到第 3 个型腔处用圆角弯头拐进去（不再有凸出的端头）
+    rb = 0.009
+    path = [(-0.3, RUN_Y)] + [(-rb + rb * math.sin(t), RUN_Y - rb + rb * math.cos(t))
+                              for t in [k * (math.pi / 2) / 12 for k in range(13)]] + [(0.0, CAV_Y + CAV_R - 0.0015)]
+    run = poly_curve("runner_red", [(x, y, T_TOP) for x, y in path], 0.0045, m_red_run)
+    run.data.bevel_factor_mapping_end = "SPLINE"
+    seglen = [math.dist(path[k], path[k + 1]) for k in range(len(path) - 1)]
+    RUN_FRAC_ELBOW = sum(seglen[:7]) / sum(seglen)            # 弯头中点
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=0.0047, location=(-0.3, RUN_Y, T_TOP), segments=48, ring_count=24)
+    head = bpy.context.object; head.name = "runner_head"; head.scale = (1.2, 1, 0.85)
     bpy.ops.object.shade_smooth(); head.data.materials.append(m_red_run)
-    branch = poly_curve("branch_red", [(0.0, RUN_Y, T_TOP), (0.0, CAV_Y - CAV_R + 0.002, T_TOP)], 0.0028, m_red_run)
-    branch2 = poly_curve("inlet_red", [(0.0, RUN_Y, T_TOP), (0.0, INLET.y, T_TOP)], 0.0032, m_red_liv)
+    # 支口：主流道上另一处通向肝形型腔
+    inlet_red = poly_curve("inlet_red", [(INLET.x, RUN_Y, T_TOP), (INLET.x, INLET.y, T_TOP - 0.0012)], 0.0028, m_red_liv)
+    cube("inlet_ch", (0.0058, abs(RUN_Y - INLET.y), 0.0004), (INLET.x, (RUN_Y + INLET.y) / 2, T_TOP + 0.0001), m_groove, bevel=0)
 
-    # CDK20 件：克莱因蓝的块状件（示意，不是结构），在型腔里由红料灌出
-    bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=5, radius=1.0, location=(0, 0, 0))
-    part = bpy.context.object; part.name = "cdk20_part"
-    part.scale = (CAV_R * 0.93, CAV_R * 0.93, CAV_R * 0.6)
-    bpy.ops.object.transform_apply(scale=True)
-    tex = bpy.data.textures.new("lumps", "CLOUDS"); tex.noise_scale = 0.022
-    dm = part.modifiers.new("lumps", "DISPLACE"); dm.texture = tex; dm.strength = 0.0025; dm.mid_level = 0.5
-    bpy.ops.object.shade_smooth()
-    part.data.materials.append(m_part)
-    bpy.ops.mesh.primitive_torus_add(major_radius=CAV_R * 0.93, minor_radius=0.00035, major_segments=128, minor_segments=8,
-                                     location=(0, 0, 0))
-    seam = bpy.context.object; seam.name = "part_parting_line"; seam.data.materials.append(m_part)
-    bpy.ops.object.shade_smooth()
-    # 原点放在浇口一侧（-y），灌注时从这一侧向另一侧长
-    for v in part.data.vertices:
-        v.co.y += CAV_R * 0.93
-    for v in seam.data.vertices:
-        v.co.y += CAV_R * 0.93
-    part_z0 = T_TOP - 0.004
-    seam.parent = part
-    part.location = (0.0, CAV_Y - CAV_R * 0.93, part_z0)
+    # CDK20 件：项目里的 CDK20 外形（AlphaFold v6 模型的平滑包络，make_cdk20_mesh.py），克莱因蓝注塑件
+    part = cdk20_part(m_part)
+    part_z0 = T_TOP - 0.0115
+    import numpy as np
+    pv = np.array([v.co[:] for v in part.data.vertices])
+    near = np.hypot(pv[:, 0], pv[:, 1] + PART_HALF) < 0.0065
+    part_zb = float(pv[near, 2].min())             # 顶针处件的底面高度（件底不平）
+    part.location = (0.0, CAV_Y + PART_HALF, part_z0)
     # 顶针（三根）
-    ej = [cyl(f"ej_pin_{k}", 0.0016, 0.02, (0.009 * math.cos(a), CAV_Y + 0.009 * math.sin(a), T_TOP - 0.02), m_pin, bevel=0.0002)
+    ej = [cyl(f"ej_pin_{k}", 0.0016, 0.02, (0.005 * math.cos(a), CAV_Y + 0.005 * math.sin(a), T_TOP - 0.012 - 0.01), m_pin, bevel=0.0002)
           for k, a in enumerate((math.radians(90), math.radians(210), math.radians(330)))]
-
     # 小标牌（Case study），从型腔左侧的槽里顶出
-    plate_x, plate_y = 0.0, 0.0745
+    plate_x, plate_y = -0.125, -0.0735
     plate = cube("plate", (0.084, 0.02, 0.002), (plate_x, plate_y, T_TOP - 0.0012), m_bone, bevel=0.0004)
     m_t1, a_t1 = fade_mat("ink_case", INK)
     t_case = stamp_text("t_case", "Case study", FONTS / "InstrumentSerif-Italic.ttf", 0.0155, (0, -0.0005, 0.00101), m_t1)
     t_case.parent = plate
     # CDK20 字：型腔下方
     m_t2, a_t2 = fade_mat("ink_cdk20", INK)
-    t_cdk = stamp_text("t_cdk20", "CDK20", FONTS / "InstrumentSerif-Regular.ttf", 0.0125, (0.024, 0.024, T_TOP + 0.0006), m_t2, align="LEFT")
+    t_cdk = stamp_text("t_cdk20", "CDK20", FONTS / "InstrumentSerif-Regular.ttf", 0.0125, (-0.017, -0.042, T_TOP + 0.0006), m_t2, align="LEFT")
     # liver cancer：肝形下方（模板前沿外的桌面上）
     m_t3, a_t3 = fade_mat("ink_liver", INK)
     m_t4, a_t4 = fade_mat("ink_cancer", RED, rough=0.4)
-    t_liv = stamp_text("t_liver", "liver", FONTS / "InstrumentSerif-Italic.ttf", 0.013, (-0.003, -0.0815, T_TOP + 0.0006), m_t3, align="RIGHT")
-    t_can = stamp_text("t_cancer", "cancer", FONTS / "InstrumentSerif-Italic.ttf", 0.013, (0.003, -0.0815, T_TOP + 0.0006), m_t4, align="LEFT")
+    t_liv = stamp_text("t_liver", "liver", FONTS / "InstrumentSerif-Italic.ttf", 0.013, (0.117, -0.0745, T_TOP + 0.0006), m_t3, align="RIGHT")
+    t_can = stamp_text("t_cancer", "cancer", FONTS / "InstrumentSerif-Italic.ttf", 0.013, (0.123, -0.0745, T_TOP + 0.0006), m_t4, align="LEFT")
 
     # ---------------- 光 ----------------
     bpy.ops.object.light_add(type="AREA", location=(-2.2, 2.2, 3.0))
@@ -356,8 +413,8 @@ def build(out_blend, samples=32):
         return (target[0], target[1] - dist * math.cos(e), target[2] + dist * math.sin(e))
 
     B_T, B_D, B_E = (0.0, -0.035, T_TOP), 0.86, 40       # 全景：五个型腔都在
-    P_T, P_D, P_E = (0.0, -0.022, T_TOP), 0.30, 28       # 推到第 3 个型腔
-    L_T, L_D, L_E = (0.0, -0.042, T_TOP), 0.47, 40       # 略拉远，整个肝形进画
+    P_T, P_D, P_E = (0.0, -0.004, T_TOP + 0.008), 0.24, 24       # 推到第 3 个型腔
+    L_T, L_D, L_E = (0.0, -0.03, T_TOP), 0.53, 40       # 略拉远，整个肝形进画
 
     # ---------------- 关键帧：全部取 keys/2-03.json ----------------
     f_first = 0
@@ -372,7 +429,7 @@ def build(out_blend, samples=32):
     e = EV["flow_in"]
     rd = run.data
     rd.bevel_factor_end = 0.0; rd.keyframe_insert("bevel_factor_end", frame=e["f_start"])
-    rd.bevel_factor_end = 1.0; rd.keyframe_insert("bevel_factor_end", frame=e["f_end"])
+    rd.bevel_factor_end = RUN_FRAC_ELBOW; rd.keyframe_insert("bevel_factor_end", frame=e["f_end"])
     key(head, "location", e["f_start"], (-0.3, RUN_Y, T_TOP), "LINEAR")
     key(head, "location", e["f_end"], (0.0, RUN_Y, T_TOP), "LINEAR")
     for fc in BM._fcurves(rd):
@@ -391,13 +448,11 @@ def build(out_blend, samples=32):
     # gate_one：第 3 个浇口针缩回，料头拐进去
     e = EV["gate_one"]; p = pins[2]; z = p.location.z
     key(p, "location", e["f_start"], (0.0, GATE_Y, z)); key(p, "location", e["f_land"], (0.0, GATE_Y, z - 0.0045))
-    # head 拐进支流后藏进支流料（缩小）
-    key(head, "scale", e["f_land"], (1.25, 1, 0.75)); key(head, "scale", e["f_land"] + 10, (0.6, 0.6, 0.5))
+    # 料头进弯头后收进料里
+    key(head, "scale", e["f_land"] - 4, (1.2, 1, 0.85)); key(head, "scale", e["f_land"] + 2, (0.01, 0.01, 0.01))
     # fill：支流长到型腔，型腔里从浇口一侧向另一侧漫开（磨砂盖下看是一团变大的暖红）
     e = EV["fill"]
-    bd = branch.data
-    bd.bevel_factor_end = 0.0; bd.keyframe_insert("bevel_factor_end", frame=e["f_start"])
-    bd.bevel_factor_end = 1.0; bd.keyframe_insert("bevel_factor_end", frame=e["f_start"] + 14)
+    rd.bevel_factor_end = 1.0; rd.keyframe_insert("bevel_factor_end", frame=e["f_start"] + 14)
     f_fill0 = e["f_start"] + 12
     key(part, "scale", e["f_start"], (0.001, 0.001, 0.4)); key(part, "scale", f_fill0, (0.15, 0.12, 0.6))
     key(part, "scale", e["f_end"], (1, 1, 1))
@@ -407,7 +462,7 @@ def build(out_blend, samples=32):
     e = EV["cdk20_eject"]
     lid = lids[2]; lz = lid.location.z
     key(lid, "location", e["f_start"], (0.0, CAV_Y, lz))
-    key(lid, "location", e["f_start"] + 7, (0.0, CAV_Y + 0.004, lz + 0.032))
+    key(lid, "location", e["f_start"] + 7, (0.0, CAV_Y + 0.004, lz + 0.05))
     key(lid, "location", e["f_start"] + 22, (0.0, 0.16, lz + 0.09))
     key(lid, "location", e["f_start"] + 32, (0.0, 0.32, lz + 0.2))
     col = P(m_part).inputs["Base Color"]
@@ -418,7 +473,7 @@ def build(out_blend, samples=32):
     key(part, "location", e["f_start"] + 5, (px, py, part_z0)); key(part, "location", e["f_land"], (px, py, part_z0 + lift))
     for p in ej:
         x, y, z = p.location
-        key(p, "location", e["f_start"], (x, y, z)); key(p, "location", e["f_land"], (x, y, z + lift + 0.0005))
+        key(p, "location", e["f_start"], (x, y, z)); key(p, "location", e["f_land"], (x, y, z + lift + 0.0005 + part_zb))
     # 旋转绕件中心：父到一个在型腔中心的空物体
     bpy.ops.object.empty_add(location=(0.0, CAV_Y, 0)); piv = bpy.context.object; piv.name = "part_pivot"
     part.parent = piv; part.location = (px, py - CAV_Y, part.location.z)
@@ -443,21 +498,23 @@ def build(out_blend, samples=32):
 
     # liver_grow：刻线长成矮墙（从浇口一侧沿轮廓到另一侧）
     e = EV["liver_grow"]
-    wd = wall.data
-    wd.bevel_factor_end = 0.0; wd.keyframe_insert("bevel_factor_end", frame=e["f_start"])
-    wd.bevel_factor_end = 0.62; wd.keyframe_insert("bevel_factor_end", frame=e["f_land"])
-    wd.bevel_factor_end = 1.0; wd.keyframe_insert("bevel_factor_end", frame=e["f_end"])
-    key(wall, "scale", e["f_start"], (1, 1, 0.2)); key(wall, "scale", e["f_land"], (1, 1, 1))
+    lc = bpy.data.objects["liver_cut"]
+    key(lc, "location", e["f_start"], (0, 0, T_TOP + 0.00002))
+    key(lc, "location", e["f_land"], (0, 0, T_TOP - 0.0018))
+    key(lc, "location", e["f_end"], (0, 0, T_TOP - 0.0025))
 
     # cancer_red：红料从入口漫进肝里，绕着蓝件铺开，句尾停
     e = EV["cancer_red"]
-    b2 = branch2.data
+    b2 = inlet_red.data
     b2.bevel_factor_end = 0.0; b2.keyframe_insert("bevel_factor_end", frame=e["f_start"])
     b2.bevel_factor_end = 1.0; b2.keyframe_insert("bevel_factor_end", frame=e["f_land"])
-    kv(r_liv, e["f_start"], 0.0); kv(r_liv, e["f_land"], 0.012)
+    kv(r_liv, e["f_start"], 0.0); kv(r_liv, e["f_land"], 0.008)
+    lr = bpy.data.objects["liver_red"]
+    lr.hide_render = True; lr.keyframe_insert("hide_render", frame=e["f_start"] - 1)
+    lr.hide_render = False; lr.keyframe_insert("hide_render", frame=e["f_start"])
     kv(r_liv, e["f_end"], R_LIVER_MAX)
     kv(P(m_red_liv).inputs["Roughness"], e["f_end"], 0.15)
-    kv(P(m_red_liv).inputs["Roughness"], sc.frame_end, 0.3)
+    kv(P(m_red_liv).inputs["Roughness"], sc.frame_end, 0.22)
     # ink_cancer
     e = EV["ink_cancer"]
     stamp(t_liv, a_t3, e["f_land"], T_TOP + 0.0006)
@@ -467,7 +524,10 @@ def build(out_blend, samples=32):
     print("S1_203_BUILT", out_blend, sc.frame_start, sc.frame_end, r.fps)
 
 
-R_LIVER_MAX = 0.044
+R_LIVER_MAX = 0.2
+LID_H = 0.031
+PART_SIZE = 0.034
+PART_HALF = PART_SIZE / 2
 KEY_W, WORLD_S = 170.0, 0.06
 
 
