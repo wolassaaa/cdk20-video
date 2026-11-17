@@ -2,6 +2,8 @@
 46 种零件，每种一个生成函数，函数名带清单编号（p03_person、p19_cdk20 …）。零件都画在一格里：
 板面是 XY 平面，Z 是厚度，原点在格子中心，零件不超出 ±26 × ±16 mm；每件登记自己的浇口点（大件 2–3 个，小件 1 个），
 挂到格子外圈的料杆上，浇口是细锥，尖头在零件一侧，拔下来时在这里断。
+器官（肝、肝内血管、肺、气管支气管、结肠直肠）是真实解剖网格：BodyParts3D, © The Database Center for Life Science, CC BY 4.0
+（kit_organs.py 整理成 G:/cdk20/work/kit/organs.npz）。片尾 credits 要写这一条，kit_data.json 的 credits 里也有。
 材质只有三类：亮面实色（红、克莱因蓝、绿、骨白、黑）、香槟金电镀、透明（淡粉 / 无色 / 淡黄 / 磨砂）。
     blender -b --factory-startup -P kit_parts.py -- catalog 1|2 OUT.png [采样] [百分比]
     blender -b --factory-startup -P kit_parts.py -- board pano|z1|z34|z5 OUT.png [采样] [百分比]
@@ -108,6 +110,8 @@ class Kit:
         self.dishpink = mat_clear("kit_dish_pink", rgb=(1.0, 0.30, 0.48), density=520.0)
         self.gold_satin = mat_plated("kit_gold_satin", rough=0.32)
         self.blue_hi = mat_solid("kit_blue_hi", "#3D6BE6", rough=0.12)
+        self.organ = mat_clear("kit_organ_glass", rgb=(1.0, 0.42, 0.40), density=26.0)          # 器官：淡红通透玻璃（大件）
+        self.organ_s = mat_clear("kit_organ_glass_small", rgb=(1.0, 0.42, 0.40), density=150.0)   # 同一种玻璃，小件厚度小，浓一点
         self.nuc_grey = mat_clear("kit_nucleus_grey", rgb=(0.62, 0.62, 0.66), density=110.0)
         self.ink = mat_solid("kit_ink_dark", "#1F1E1C", rough=0.3, coat=0.2, sss=0)       # 印在浅色件上的字
         self.inkw = mat_solid("kit_ink_white", "#F7F4EE", rough=0.25, coat=0.2, sss=0)    # 印在深色件上的字
@@ -115,7 +119,7 @@ class Kit:
 
     def cat(self, key):
         return {"red": self.red, "blue": self.blue, "green": self.green, "white": self.white, "black": self.black,
-                "gold": self.gold, "clear": self.clear0}[key]
+                "gold": self.gold, "clear": self.clear0, "organ": self.organ_s}[key]
 
 
 # ---------------------------------------------------------------- 造型工具（都用毫米）
@@ -178,6 +182,29 @@ def smooth_path(pts, n=8):
 
 
 DATA = json.loads((Path(__file__).parent / "kit_data.json").read_text(encoding="utf-8"))     # kit_mols.py 生成：001、048、ATP 的原子坐标，香港轮廓
+
+
+_ORG = {}
+
+
+def organ(key):
+    """真实解剖网格（BodyParts3D, CC BY 4.0），kit_organs.py 整理好的：顶点（毫米，真实大小，板面坐标）和三角形。"""
+    import numpy as np
+    if not _ORG:
+        d = np.load("G:/cdk20/work/kit/organs.npz")
+        _ORG.update({k: d[k] for k in d.files})
+    return _ORG[key + "_v"], _ORG[key + "_f"]
+
+
+def organ_gates(P, v, s, dirs):
+    """器官件的浇口：板面附近（|z| < 1.5 mm）最靠外的点。"""
+    import numpy as np
+    w = v * np.array(s)
+    near = np.abs(w[:, 2]) < 1.5
+    for d in dirs:
+        dv = {"-x": (-1, 0), "+x": (1, 0), "-y": (0, -1), "+y": (0, 1)}[d]
+        k = int(np.argmax((w[:, 0] * dv[0] + w[:, 1] * dv[1]) * near - 1e6 * (~near)))
+        P.gate(w[k, 0] - dv[0] * 0.5, w[k, 1] - dv[1] * 0.5, d, w[k, 2])
 
 
 def clip_line(pts, p0, p1, gap):
@@ -295,6 +322,23 @@ class Part:
         o.data.materials.append(m)
         return o
 
+
+    def mesh(self, v, f, m, s=(1.0, 1.0, 1.0), x=0.0, y=0.0, z=0.0):
+        """现成的三角网格（毫米），按 s 缩放后放到 (x, y, z)。"""
+        import numpy as np
+        name = self.nm("m")
+        w = (np.asarray(v, dtype=float) * np.array(s) + np.array([x + self.ox, y + self.oy, z])) * MM
+        me = bpy.data.meshes.new(name)
+        me.from_pydata(w.tolist(), [], np.asarray(f).tolist())
+        for p in me.polygons:
+            p.use_smooth = True
+        o = link(bpy.data.objects.new(name, me), self.root)
+        o.data.materials.append(m)
+        return o
+
+    def capsule(self, x, y0, y1, r, m, z=0.0):
+        """两头圆的圆棒，轴沿 Y。"""
+        return self.lathe([(0.02, y0), (r * 0.5, y0 + r * 0.13), (r * 0.87, y0 + r * 0.5), (r, y0 + r), (r, y1 - r), (r * 0.87, y1 - r * 0.5), (r * 0.5, y1 - r * 0.13), (0.02, y1)], m, x, 0, z)
 
     def inkbox(self, cx, cy, hx, hy, m, z):
         """印上去的色块：0.3 mm 厚，贴在 z 这个面上。"""
@@ -466,13 +510,14 @@ def p02_stations(K):
 
 
 def person(P, m, ox):
+    """玩具小人，全是回转体：圆头、上宽下窄的身子、两条圆胳膊、两条圆腿。"""
     P.at(ox, 0)
-    P.ball(0, 11.0, 0, 4.3, m)
-    P.slab([(-6.2, 6.0), (6.2, 6.0), (4.6, -4.0), (-4.6, -4.0)], 5.0, m, bevel=1.4)
+    P.ball(0, 10.6, 0, 4.3, m)
+    P.lathe([(0.02, 6.6), (3.6, 6.5), (5.4, 5.4), (5.8, 3.6), (5.0, -1.0), (4.3, -3.6), (3.0, -4.6), (0.02, -4.7)], m, 0, 0)
     for s in (-1, 1):
-        P.box(s * 8.3, 1.2, 1.5, 5.0, 4.0, m, r=1.5, bevel=1.0)
-        P.box(s * 2.5, -9.6, 1.9, 5.6, 4.6, m, r=1.6, bevel=1.1)
-    P.gate(-2.5, -14.8, "-y")
+        P.capsule(s * 6.9, -4.2, 5.6, 1.7, m)
+        P.capsule(s * 2.35, -15.2, -2.6, 2.1, m)
+    P.gate(-2.35, -15.0, "-y")
     P.at()
 
 
@@ -486,65 +531,80 @@ LIVER = [(-0.5, 0.1), (-0.44, 0.24), (-0.28, 0.33), (-0.04, 0.33), (0.18, 0.27),
 
 
 LIVER_SOCKET = (-13.0, 3.5)
+LIVER_SOCKET_MM = (-50.0, 12.0)        # 真实肝网格上凸台的位置（毫米，乘零件比例）
+LIVER_DEPTH = 0.42                      # 肝前后方向的厚度压到多少
 
 
-def p04_liver(K):
-    """肝：鼓起来的大右叶和小而尖的左叶，中间一道斜的分界沟（镰状韧带的位置）；下沿露出胆囊；
-    右叶上有给 CDK20 定位销用的凸台和孔。两叶都是厚料大圆角，斜着看是鼓的。"""
-    P = Part(K, "p04_liver", "red"); m = K.red
-    s = 50.0
-    lv = smooth_loop([(x * s, y * s - 1.0) for x, y in LIVER])
-    P.slab(lv, 2.6, m, bevel=0.8)
-    sx, sy = LIVER_SOCKET
-    a, b = (9.5, 17.0), (1.5, -8.0)                      # 分界沟
-    P.slab(clip_line(lv, a, b, 0.9), 9.0, m, bevel=3.8, seg=8, holes=[(sx, sy, 2.3)])
-    P.slab(clip_line(lv, b, a, 0.9), 6.6, m, bevel=2.9, seg=8)
-    P.ball(-0.5, -9.4, 0.4, 2.5, m, sc=(0.85, 1.5, 0.9))                 # 胆囊
-    P.slab(circle(sx, sy, 4.4), 1.6, m, z=4.5 + 0.6, bevel=0.5, holes=[(sx, sy, 2.3)])
-    P.gate(-23.5, -3.0, "-x"); P.gate(24.0, 3.0, "+x"); P.gate(-15.0, -15.4, "-y")
+def p04_liver(K, big=False):
+    """玻璃肝（复合件，透明壳和红血管同时长）：外壳是真实的肝网格，淡红通透玻璃；里面是实色红的肝内血管树
+    （门静脉、肝动脉、肝静脉）。右叶上有给 CDK20 定位销用的玻璃凸台和孔。3 个浇口。
+    big=True 是大板上的主角尺寸，占 2 × 2 格；默认是一格大小。前后方向的厚度按 DEPTH 压过（真肝前后有 16 cm，原样放不进板）。"""
+    import numpy as np
+    P = Part(K, "p04_liver", "organ")
+    v, f = organ("liver"); vv, vf = organ("vessel")
+    k = 0.47 if big else 0.214
+    s = (k, k, k * LIVER_DEPTH)
+    shell = P.mesh(v, f, K.organ if big else K.organ_s, s)
+    P.mesh(vv, vf, K.red, s)
+    sx, sy = LIVER_SOCKET_MM[0] * k, LIVER_SOCKET_MM[1] * k
+    w = v * np.array(s)
+    top = float(w[np.hypot(w[:, 0] - sx, w[:, 1] - sy) < 4.5, 2].max())
+    bpy.ops.mesh.primitive_cylinder_add(radius=2.3 * MM, depth=0.2, vertices=40, location=(sx * MM, sy * MM, 0))
+    c = bpy.context.object; c.hide_render = c.hide_viewport = True; c.parent = P.root; c.name = "p04_liver_hole"
+    bo = shell.modifiers.new("hole", "BOOLEAN"); bo.object = c; bo.operation = "DIFFERENCE"; bo.solver = "EXACT"
+    P.ring(sx, sy, 4.4, 2.3, 3.2, K.organ_s, z=top - 0.2, bevel=0.5)
+    organ_gates(P, v, s, ("-x", "+x", "-y"))
+    if big:
+        P.root["span"] = (2, 2)
+    P.root["socket"] = (sx, sy, top + 1.4)
     return P.done()
 
 
 def p05_lung_gut(K):
-    P = Part(K, "p05_lung_gut", "red"); m = K.red
-    P.at(-13.5, 0)
-    lobe = [(1.6, 8), (4, 11), (8, 9), (11, 3), (12, -5), (10, -11), (5, -10), (2.6, -7), (1.6, -1)]
-    P.slab(smooth_loop(lobe), 5.0, m, bevel=1.6)
-    P.slab(smooth_loop([(-x, y) for x, y in lobe]), 5.0, m, bevel=1.6)
-    P.tube([(0, 15.5), (0, 7.5)], 1.2, m)
-    P.tube([(0, 7.5), (3.5, 4.5)], 0.9, m); P.tube([(0, 7.5), (-3.5, 4.5)], 0.9, m)
-    P.gate(-11.6, -3, "-x")
-    P.at(13.5, 0.5)
-    P.tube([(-7.5, -10.5), (-8.2, -2), (-7.6, 6.5), (-3.5, 9.6), (3.5, 9.6), (7.6, 6.5), (8.2, -2), (7.5, -10.5)], 2.3, m, smooth=True)
-    P.tube([(-4.6, 5.2), (4.4, 5.2), (5.2, 3.5), (4.4, 1.8), (-4.4, 1.8), (-5.2, 0), (-4.4, -1.8), (4.4, -1.8), (5.2, -3.6), (4.4, -5.4),
-            (-4.4, -5.4), (-5.0, -7.4), (-1.5, -9.5), (0, -13.5)], 1.45, m, smooth=True)
-    P.gate(10.2, -2, "+x")
+    """肺和肠：真实网格。左右两肺（五叶）是淡红玻璃，里面的气管和支气管树是实色红；结肠加直肠也是淡红玻璃。和肝同一种材质。"""
+    P = Part(K, "p05_lung_gut", "organ"); g = K.organ_s
+    v, f = organ("lung"); av, af = organ("airway")
+    k = 0.098; s = (k, k, k * 0.6)
+    P.at(-13.5, -2.0)
+    P.mesh(v, f, g, s); P.mesh(av, af, K.red, s)
+    organ_gates(P, v, s, ("-x",))
+    v, f = organ("colon")
+    k = 0.097; s = (k, k, k * 0.6)
+    P.at(14.0, 0.0)
+    P.mesh(v, f, g, s)
+    organ_gates(P, v, s, ("+x",))
     P.at()
     return P.done()
 
 
 def p06_globe(K):
+    """地球仪：球面上的陆地是真实海岸线（Natural Earth 1:10m 的陆地栅格，kit_data.json 的 LAND），高出海面 0.45 mm；
+    朝观众的一面是亚洲和太平洋。地轴斜 23°，外面一道弧形支架和底座。"""
+    import base64
+    import numpy as np
     P = Part(K, "p06_globe", "white"); m = K.white
     cx, cy, R, tilt = 0.0, 2.8, 10.0, math.radians(-23)
-    P.ball(cx, cy, 0, R, m, seg=64)
+    L = DATA["LAND"]
+    mask = np.unpackbits(np.frombuffer(base64.b64decode(L["bits"]), dtype=np.uint8))[: L["w"] * L["h"]].reshape(L["h"], L["w"]).astype(float)
+    bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=7, radius=1.0, location=(0, 0, 0))
+    o = bpy.context.object; o.name = P.nm("globe"); me = o.data
+    co = np.empty(len(me.vertices) * 3); me.vertices.foreach_get("co", co); co = co.reshape(-1, 3)
+    lat = np.degrees(np.arcsin(np.clip(co[:, 1], -1, 1))); lon = (np.degrees(np.arctan2(co[:, 0], co[:, 2])) + 115.0 + 180.0) % 360.0 - 180.0
+    px = np.clip(((lon + 180.0) / 360.0 * L["w"]).astype(int), 0, L["w"] - 1); py = np.clip(((90.0 - lat) / 180.0 * L["h"]).astype(int), 0, L["h"] - 1)
+    co *= ((R + 0.45 * mask[py, px]) * MM)[:, None]
+    me.vertices.foreach_set("co", co.ravel()); me.update()
+    o.matrix_world = Matrix.Translation((cx * MM, cy * MM, 0)) @ Matrix.Rotation(tilt, 4, "Z")
+    bpy.ops.object.shade_smooth(); o.data.materials.append(m); o.parent = P.root
     ax = (math.sin(-tilt), math.cos(tilt))                     # 地轴方向（板面内）
-    rot_par = (math.radians(90), 0, tilt)
-    for lat in (-50, -25, 0, 25, 50):
-        la = math.radians(lat)
-        P.torus(cx + ax[0] * R * math.sin(la), cy + ax[1] * R * math.sin(la), 0, R * math.cos(la) + 0.12, 0.3, m, rot=rot_par)
-    for k in range(4):                                         # 经线
-        bpy.ops.mesh.primitive_torus_add(major_radius=(R + 0.12) * MM, minor_radius=0.3 * MM, major_segments=64, minor_segments=12, location=(cx * MM, cy * MM, 0))
-        o = bpy.context.object; o.name = P.nm("mer")
-        o.matrix_world = Matrix.Translation((cx * MM, cy * MM, 0)) @ Matrix.Rotation(tilt, 4, "Z") @ Matrix.Rotation(math.radians(45 * k), 4, "Y")
-        bpy.ops.object.shade_smooth(); o.data.materials.append(m); o.parent = P.root
     a_top = 90 + math.degrees(tilt)
-    P.tube(arc(cx, cy, R + 2.2, a_top, a_top + 215, 40), 1.0, m)
+    P.tube(arc(cx, cy, R + 2.4, a_top, a_top + 215, 40), 1.0, m)
     for sgn in (1, -1):
-        P.cyl(cx + sgn * ax[0] * (R + 1.1), cy + sgn * ax[1] * (R + 1.1), 0, 0.8, 2.6, m, axis="y", bevel=0)
-    P.tube([(0, cy - R - 2.2), (0, -14.0)], 1.3, m)
-    P.box(0, -14.6, 7.5, 1.5, 5.0, m, r=1.2, bevel=0.6)
-    P.gate(-7.5, -14.6, "-x"); P.gate(7.5, -14.6, "+x")
+        P.ball(cx + sgn * ax[0] * (R + 1.5), cy + sgn * ax[1] * (R + 1.5), 0, 1.1, m, seg=16)
+    P.tube([(0, cy - R - 2.4), (0, -14.0)], 1.3, m)
+    P.lathe([(0.02, -16.0), (7.0, -16.0), (7.0, -15.0), (2.2, -13.4), (0.02, -13.4)], m, 0, 0)
+    P.gate(-6.9, -15.5, "-x"); P.gate(6.9, -15.5, "+x")
     return P.done()
+
 
 HK_LAND = [
     [(8, 22), (10, 27), (15, 30), (20, 33), (27, 36), (33, 37), (38, 35), (41, 32), (39, 28), (34, 27), (36, 24), (42, 26), (46, 24),
@@ -661,28 +721,28 @@ def p13_chip(K, label="AI"):
 def p14_buildings(K):
     P = Part(K, "p14_buildings", "white"); m = K.white
     P.at(-18, 0)                                    # 大学：台阶、四根柱子、三角山墙
-    P.box(0, -5.0, 7.2, 7.0, 2.0, m, z=-0.8, r=0.3, bevel=0.2)
-    P.box(0, -13.0, 8.4, 1.3, 4.4, m, r=0.4, bevel=0.3)
+    P.box(0, -5.0, 7.2, 7.0, 6.0, m, z=-1.0, r=0.3, bevel=0.2)
+    P.box(0, -13.0, 8.4, 1.3, 9.0, m, r=0.4, bevel=0.3)
     for x in (-5.4, -1.8, 1.8, 5.4):
-        P.box(x, -5.0, 1.0, 6.8, 3.6, m, r=0.9, bevel=0.6)
-    P.box(0, 2.9, 8.2, 1.1, 4.2, m, r=0.3, bevel=0.3)
-    P.slab([(-8.6, 4.0), (8.6, 4.0), (0, 10.5)], 4.2, m, bevel=0.5)
+        P.box(x, -5.0, 1.0, 6.8, 8.0, m, r=0.9, bevel=0.6)
+    P.box(0, 2.9, 8.2, 1.1, 9.0, m, r=0.3, bevel=0.3)
+    P.slab([(-8.6, 4.0), (8.6, 4.0), (0, 10.5)], 9.0, m, bevel=0.5)
     P.gate(0, -14.2, "-y")
     P.at(0, 0)                                      # 医院：方楼、十字、窗、门
-    P.box(0, -2.8, 7.5, 11.5, 4.0, m, r=0.8)
-    P.inkbox(0, 4.6, 2.7, 0.95, K.ink, 2.0); P.inkbox(0, 4.6, 0.95, 2.7, K.ink, 2.0)
+    P.box(0, -2.8, 7.5, 11.5, 9.0, m, r=0.8)
+    P.inkbox(0, 4.6, 2.7, 0.95, K.ink, 4.5); P.inkbox(0, 4.6, 0.95, 2.7, K.ink, 4.5)
     for x in (-3.8, 3.8):
         for y in (-1.8, -6.0, -10.2):
-            P.inkbox(x, y, 1.4, 1.2, K.ink, 2.0)
-    P.inkbox(0, -11.6, 1.3, 2.6, K.ink, 2.0)
+            P.inkbox(x, y, 1.4, 1.2, K.ink, 4.5)
+    P.inkbox(0, -11.6, 1.3, 2.6, K.ink, 4.5)
     P.gate(0, -14.2, "-y")
     P.at(18, 0)                                     # 科学园：高塔、矮楼、圆顶
-    P.box(-3.6, -1.2, 3.6, 13.0, 4.0, m, r=0.8)
+    P.box(-3.6, -1.2, 3.6, 13.0, 9.0, m, r=0.8)
     for y in (8.0, 4.4, 0.8, -2.8, -6.4, -10.0):
-        P.inkbox(-3.6, y, 2.3, 0.7, K.ink, 2.0)
-    P.disc(4.2, -5.6, 4.0, 3.4, m, bevel=0.8)
-    P.box(4.2, -9.8, 4.2, 4.4, 3.8, m, r=0.6)
-    P.inkbox(4.2, -11.4, 2.6, 1.0, K.ink, 1.9)
+        P.inkbox(-3.6, y, 2.3, 0.7, K.ink, 4.5)
+    P.disc(4.2, -5.6, 4.0, 7.6, m, bevel=0.8)
+    P.box(4.2, -9.8, 4.2, 4.4, 8.0, m, r=0.6)
+    P.inkbox(4.2, -11.4, 2.6, 1.0, K.ink, 4.0)
     P.tube([(-3.6, 11.8), (-3.6, 15.6)], 0.5, m)
     P.gate(0, -14.2, "-y")
     P.at()
@@ -798,7 +858,7 @@ def p22_key(K, seed=1):
 def cell(P, K, ox, kind, r=10.5):
     P.at(ox, 0)
     bpy.ops.mesh.primitive_ico_sphere_add(subdivisions=4, radius=r * MM, location=(ox * MM, 0, 0))
-    c = bpy.context.object; c.name = P.nm("cell"); c.scale = (1, 1, 0.62)
+    c = bpy.context.object; c.name = P.nm("cell"); c.scale = (1, 1, 0.9)
     tx = bpy.data.textures.new(c.name, "CLOUDS"); tx.noise_scale = 0.006
     dm = c.modifiers.new("d", "DISPLACE"); dm.texture = tx; dm.strength = 0.0012
     bpy.ops.object.shade_smooth(); c.data.materials.append(K.cellpink if kind == "cancer" else K.clear0); c.parent = P.root
@@ -1137,11 +1197,11 @@ def p44_plug_bin(K):
     P.gate(-3.0, -14.2, "-y")
     P.at(15.5, 0)
     k = K.black
-    P.slab([(-7, 6.4), (7, 6.4), (5.6, -14.5), (-5.6, -14.5)], 5.0, k, bevel=0.9)
-    for x in (-3.2, 0, 3.2):
-        P.box(x * 0.92, -4.2, 0.55, 8.0, 1.0, k, z=3.0, r=0.5, bevel=0.3)
-    P.box(0, 8.4, 8.6, 1.5, 5.8, k, r=0.8, bevel=0.5)
-    P.box(0, 10.8, 2.6, 0.9, 3.0, k, r=0.6, bevel=0.3)
+    P.lathe([(0.02, -14.5), (5.2, -14.5), (5.7, -14.0), (7.0, 6.4), (0.02, 6.4)], k, 0, 0)         # 上大下小的圆桶
+    for y in (-8.0, -1.5, 4.0):
+        P.lathe([(0.02, y - 0.5), (6.2 + (y + 14) * 0.064, y - 0.5), (6.2 + (y + 14) * 0.064, y + 0.5), (0.02, y + 0.5)], k, 0, 0)
+    P.lathe([(0.02, 6.8), (8.3, 6.8), (8.3, 9.0), (7.4, 9.8), (0.02, 9.8)], k, 0, 0)
+    P.lathe([(0.02, 9.8), (2.4, 9.8), (2.4, 11.6), (0.02, 11.6)], k, 0, 0)
     P.gate(6.6, -1.0, "+x")
     P.at()
     return P.done()
@@ -1241,10 +1301,13 @@ def make_cell(K, part, x, y, z=0.0, name="cell"):
     """一格：外圈一圈按类别上色的料杆，零件用自己登记的浇口挂在里面。x、y、z 是毫米。"""
     root = link(bpy.data.objects.new(name, None))
     m = K.cat(part["cat"])
-    tube_w(name + "_loop", rrect(0, 0, CX, CY, 5.0), R_LOOP, m, root, cyclic=True)
+    nx, ny = part.get("span", (1, 1))                  # 跨几格（肝是 2 × 2）；x、y 是左上那一格的中心
+    hx, hy = CX + (nx - 1) * PX / 2, CY + (ny - 1) * PY / 2
+    x, y = x + (nx - 1) * PX / 2, y - (ny - 1) * PY / 2
+    tube_w(name + "_loop", rrect(0, 0, hx, hy, 5.0), R_LOOP, m, root, cyclic=True)
     part.parent = root
     for i, (gx, gy, d, gz) in enumerate(json.loads(part["gates"])):
-        end = {"+x": (CX, gy), "-x": (-CX, gy), "+y": (gx, CY), "-y": (gx, -CY)}[d]
+        end = {"+x": (hx, gy), "-x": (-hx, gy), "+y": (gx, hy), "-y": (gx, -hy)}[d]
         gate_geo(f"{name}_g{i}", (end[0] * MM, end[1] * MM, 0), (gx * MM, gy * MM, gz * MM), m, root)
     root.location = (x * MM, y * MM, z * MM)
     return root
@@ -1363,8 +1426,8 @@ def ZONES(K):
     c = lambda s: (lambda K: p13_chip(K, s))
     pl = lambda s: (lambda K: p16_plate(K, s))
     return [
-        (1, [[p03_person, p04_liver, p05_lung_gut, p11_bill, p10_calendar, p12_medal],
-             [p06_globe, p07_hk_map, pl("Liver cancer"), p08_capsule, p09_iv_bag, c("AlphaFold")]]),
+        (1, [[p03_person, lambda K: p04_liver(K, big=True), None, p11_bill, p10_calendar, p12_medal],     # None：被玻璃肝（2 × 2）占着的格
+             [p06_globe, None, None, p05_lung_gut, p07_hk_map, p09_iv_bag]]),
         (2, [[p14_buildings, pl("Case study"), p17_paper_book, p18_loupe_checklist, p15_sample_tube, pl("Research question")]]),
         (3, [[p19_cdk20, p20_pocket, p21_lock, lambda K: p22_key(K, 2), p24_atp, lambda K: p23_cell(K, "cancer")],
              [p29_cdk20_unknown, p28_top20, p26_survival, p25_tumour_chips, p27_data_disks, c("PandaOmics")]]),
@@ -1381,23 +1444,29 @@ ROWS = [123.0, 77.0, 31.0, -31.0, -77.0, -123.0]
 ZGAP, BAY_W, HY_F = 8.0, 100.0, 150.0
 
 
-def build_board(view, out, samples=256, pct=100):
-    sc = scene_base(samples)
-    K = Kit()
-    backdrop()
-    zones = ZONES(K)
+def make_board(K, zones=None, skip_feet=()):
+    """搭整块大板，不放灯和相机。zones 不给就用 ZONES(K)；skip_feet 是不要的支脚 (第几根, 前/后/中 = -1/1/0)。
+    返回 board、zone_x（各区中心 x，mm）、colx（每列的区号和 x）、zb（板面离台面的高度，mm）、xl/xr（外框左右）。"""
+    zones = zones or ZONES(K)
     ncol = sum(len(z[1]) for z in zones)
     total = ncol * PX + (len(zones)) * ZGAP + BAY_W
     x = -total / 2 + PX / 2
     zb = 30.0
     board = link(bpy.data.objects.new("board", None))
     W = K.white
-    colx, zone_x = [], {}
+    colx, zone_x, own = [], {}, {}
     for zi, cols in zones:
         xs = []
         for col in cols:
             for r, fn in enumerate(col):
-                make_cell(K, fn(K), x, ROWS[r], 0, name=f"z{zi}_c{len(colx)}_r{r}").parent = board
+                if fn is None:
+                    continue
+                part = fn(K)
+                nx, ny = part.get("span", (1, 1))
+                for dx in range(nx):
+                    for dy in range(ny):
+                        own[(len(colx) + dx, r + dy)] = (len(colx), r)
+                make_cell(K, part, x, ROWS[r], 0, name=f"z{zi}_c{len(colx)}_r{r}").parent = board
             colx.append((zi, x)); xs.append(x)
             x += PX
         zone_x[zi] = sum(xs) / len(xs)
@@ -1413,9 +1482,9 @@ def build_board(view, out, samples=256, pct=100):
     # 格子之间、格子到外框和主料杆的短连杆
     for i, (zi, cx) in enumerate(colx):
         for r, y in enumerate(ROWS):
-            if i + 1 < len(colx):
+            if i + 1 < len(colx) and own.get((i, r)) != own.get((i + 1, r)):
                 tube_w("lk", [(cx + CX, y), (colx[i + 1][1] - CX, y)], 1.2, W, board)
-            if r in (0, 1, 3, 4):
+            if r in (0, 1, 3, 4) and own.get((i, r)) != own.get((i, r + 1)):
                 tube_w("lk", [(cx, y - CY), (cx, ROWS[r + 1] + CY)], 1.2, W, board)
         tube_w("lk", [(cx, ROWS[0] + CY), (cx, HY_F)], 1.2, W, board)
         tube_w("lk", [(cx, ROWS[-1] - CY), (cx, -HY_F)], 1.2, W, board)
@@ -1439,11 +1508,12 @@ def build_board(view, out, samples=256, pct=100):
     # 最右端：成品位（空的底板，留四个带孔的定位凸台）
     BP = Part(K, "bay", "white"); BP.root.parent = board
     bw, bh = BAY_W / 2 - 8, 104.0
-    lvs = smooth_loop([(bay_c + x * 50.0, 52.0 + y * 50.0) for x, y in LIVER])
-    seats = [(lvs, 1.8, 1.5), (circle(bay_c, 8.0, 19.5), 1.8, 1.5), (rrect(bay_c + 6, -27.0, 17.0, 2.9, 1.0), 1.8, 1.5),
+    organ("liver")
+    lvs = [(bay_c + float(x) * 0.33, 52.0 + float(y) * 0.33) for x, y in _ORG["liver_outline"]]
+    seats = [(lvs, 1.8, 1.5), (circle(bay_c, 4.0, 19.5), 1.8, 1.5), (rrect(bay_c + 6, -27.0, 17.0, 2.9, 1.0), 1.8, 1.5),
              (circle(bay_c - 19, -27.0, 8.0, ry=6.4), 1.8, 1.5), (circle(bay_c - 17, -52.0, 12.0), 1.8, 1.5), (circle(bay_c + 17, -52.0, 12.0), 1.8, 1.5),
              (rrect(bay_c, -80.0, 34.0, 4.6, 4.6), 1.8, 1.5)]
-    pins = [(bay_c - 13, 55.5, 2.3), (bay_c, 8.0, 2.3), (bay_c - 19, -27.0, 1.8), (bay_c - 17, -52.0, 1.6), (bay_c + 17, -52.0, 1.6)] + \
+    pins = [(bay_c + LIVER_SOCKET_MM[0] * 0.33, 52.0 + LIVER_SOCKET_MM[1] * 0.33, 2.3), (bay_c, 4.0, 2.3), (bay_c - 19, -27.0, 1.8), (bay_c - 17, -52.0, 1.6), (bay_c + 17, -52.0, 1.6)] + \
            [(bay_c - 30 + 10 * i, -80.0, 1.3) for i in range(7)]
     BP.slab(rrect(bay_c, 0, bw, bh, 6.0), 3.0, W, bevel=0.6, holes=pins, cuts=seats)
     for (x_, y_, w_, h_) in ((bay_c, bh - 0.5, bw - 5, 1.0), (bay_c, -bh + 0.5, bw - 5, 1.0), (bay_c - bw + 0.5, 0, 1.0, bh - 5), (bay_c + bw - 0.5, 0, 1.0, bh - 5)):
@@ -1465,12 +1535,34 @@ def build_board(view, out, samples=256, pct=100):
             bpy.ops.mesh.primitive_cylinder_add(radius=0.0032, depth=h * MM, vertices=32, location=(fx * MM, fy * MM, -(zb - h / 2 - 0.0) * MM + (zb - h) / 2 * MM * 0 - (h / 2) * MM * 0))
             o = bpy.context.object; o.name = "foot"; o.location = (fx * MM, fy * MM, (-zb + h / 2) * MM)
             bpy.ops.object.shade_smooth(); o.data.materials.append(W); o.parent = board
+            if (i, (fy > 0) - (fy < 0)) in skip_feet:
+                bpy.data.objects.remove(o)
     board.location = (0, 0, zb * MM)
     bpy.context.view_layer.update()
+    return dict(board=board, zone_x=zone_x, colx=colx, zb=zb, xl=xl, xr=xr)
+
+
+def build_board(view, out, samples=256, pct=100):
+    sc = scene_base(samples)
+    K = Kit()
+    backdrop()
+    B = make_board(K)
+    zone_x, zb = B["zone_x"], B["zb"]
     zc = lambda zi, y=0.0, z=0.0: (zone_x[zi] * MM, y * MM, (zb + z) * MM)
     if view == "pano":
         lights(0, 0, 1.6)
         camera(sc, (0.005, -0.012, zb * MM), 1.44, 46, -18, lens=45, fstop=11, focus=(0, -0.05, zb * MM))
+    elif view == "liver":
+        # 玻璃肝近景：低机位、长焦、浅景深，对着占 2 × 2 格的玻璃肝
+        lv = bpy.data.objects["p04_liver"].matrix_world.translation
+        t = (lv.x - 0.004, lv.y - 0.004, lv.z + 0.006)
+        lights(t[0], 0.03, 1.0)
+        camera(sc, t, 0.43, 34, -24, lens=85, fstop=4.0, focus=(lv.x - 0.01, lv.y - 0.012, lv.z + 0.012))
+    elif view.startswith("zone"):
+        # 分区检查图：从正前上方看一个区，全清晰
+        t = zc(int(view[4:]), 0, 4)
+        lights(t[0], 0, 1.0)
+        camera(sc, t, 0.80, 62, 0, lens=50, fstop=16)
     else:
         if view == "z1":
             t = zc(1, 40, 4); dist, f = 0.36, 4.0
