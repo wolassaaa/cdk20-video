@@ -106,12 +106,14 @@ class Kit:
         self.tail = mat_clear("kit_tail", rgb=(0.22, 0.42, 1.0), density=520.0, rough=0.15)   # 淡蓝半透明
         self.liquid = mat_clear("kit_liquid", rgb=(0.97, 0.38, 0.52), density=120.0)
         self.nuc_red = mat_clear("kit_nucleus_red", rgb=(0.8, 0.05, 0.12), density=160.0)
-        self.liq_yellow = mat_clear("kit_liquid_yellow", rgb=(1.0, 0.88, 0.25), density=110.0)
+        self.liq_blue = mat_clear("kit_liquid_blue", rgb=(0.30, 0.68, 1.0), density=120.0)
+        self.land = mat_solid("kit_land", "#B9B2A4", rough=0.22, coat=0.3)
+        self.organ_m = mat_clear("kit_organ_glass_mid", rgb=(1.0, 0.36, 0.34), density=330.0)   # 一格大小的肝：再浓一档，小了也看得出外形
         self.dishpink = mat_clear("kit_dish_pink", rgb=(1.0, 0.30, 0.48), density=520.0)
         self.gold_satin = mat_plated("kit_gold_satin", rough=0.32)
         self.blue_hi = mat_solid("kit_blue_hi", "#3D6BE6", rough=0.12)
         self.organ = mat_clear("kit_organ_glass", rgb=(1.0, 0.42, 0.40), density=26.0)          # 器官：淡红通透玻璃（大件）
-        self.organ_s = mat_clear("kit_organ_glass_small", rgb=(1.0, 0.42, 0.40), density=150.0)   # 同一种玻璃，小件厚度小，浓一点
+        self.organ_s = mat_clear("kit_organ_glass_small", rgb=(1.0, 0.40, 0.38), density=230.0)   # 同一种玻璃，小件厚度小，浓一点
         self.nuc_grey = mat_clear("kit_nucleus_grey", rgb=(0.62, 0.62, 0.66), density=110.0)
         self.ink = mat_solid("kit_ink_dark", "#1F1E1C", rough=0.3, coat=0.2, sss=0)       # 印在浅色件上的字
         self.inkw = mat_solid("kit_ink_white", "#F7F4EE", rough=0.25, coat=0.2, sss=0)    # 印在深色件上的字
@@ -462,7 +464,7 @@ def cdk20_body(P, m, size=36.0, peg=True):
         P.cyl(0, 0, zmin - 2.0, 2.0, 6.0, m, bevel=0.4)
     for dv, d_ in (((-1, 0), "-x"), ((1, 0), "+x"), ((0, -1), "-y")):
         k = int(np.argmax((v[:, 0] * dv[0] + v[:, 1] * dv[1]) * (np.abs(v[:, 2]) < 4 * MM)))
-        P.gate(v[k, 0] / MM - dv[0] * 0.6, v[k, 1] / MM - dv[1] * 0.6, d_)
+        P.gate(v[k, 0] / MM - dv[0] * 0.4, v[k, 1] / MM - dv[1] * 0.4, d_, v[k, 2] / MM)
     return o
 
 
@@ -544,7 +546,7 @@ def p04_liver(K, big=False):
     v, f = organ("liver"); vv, vf = organ("vessel")
     k = 0.47 if big else 0.214
     s = (k, k, k * LIVER_DEPTH)
-    shell = P.mesh(v, f, K.organ if big else K.organ_s, s)
+    shell = P.mesh(v, f, K.organ if big else K.organ_m, s)
     P.mesh(vv, vf, K.red, s)
     sx, sy = LIVER_SOCKET_MM[0] * k, LIVER_SOCKET_MM[1] * k
     w = v * np.array(s)
@@ -594,7 +596,9 @@ def p06_globe(K):
     co *= ((R + 0.45 * mask[py, px]) * MM)[:, None]
     me.vertices.foreach_set("co", co.ravel()); me.update()
     o.matrix_world = Matrix.Translation((cx * MM, cy * MM, 0)) @ Matrix.Rotation(tilt, 4, "Z")
-    bpy.ops.object.shade_smooth(); o.data.materials.append(m); o.parent = P.root
+    bpy.ops.object.shade_smooth(); o.data.materials.append(m); o.data.materials.append(K.land); o.parent = P.root
+    tri = np.empty(len(me.polygons) * 3, dtype=np.int64); me.polygons.foreach_get("vertices", tri)
+    me.polygons.foreach_set("material_index", (mask[py, px][tri.reshape(-1, 3)].mean(1) > 0.5).astype(np.int32))      # 陆地用浅暖灰，和骨白的海分开
     ax = (math.sin(-tilt), math.cos(tilt))                     # 地轴方向（板面内）
     a_top = 90 + math.degrees(tilt)
     P.tube(arc(cx, cy, R + 2.4, a_top, a_top + 215, 40), 1.0, m)
@@ -649,7 +653,7 @@ def p08_capsule(K):
 def p09_iv_bag(K):
     P = Part(K, "p09_iv_bag", "clear"); m = K.clear0
     P.box(0, 2.5, 9.5, 10.5, 7.0, m, r=3.0, bevel=2.6)
-    P.slab(rrect(0, 0.6, 8.2, 7.6, 2.4), 5.0, K.liq_yellow, z=0, bevel=2.0)        # 袋里淡黄的药液
+    P.slab(rrect(0, 0.6, 8.2, 7.6, 2.4), 5.0, K.liq_blue, z=0, bevel=2.0)        # 袋里淡蓝的药液
     P.slab(rrect(0, 14.3, 3.2, 1.9, 1.2), 2.0, m, holes=[(0, 14.6, 1.0)])
     P.cyl(0, -9.2, 0, 1.3, 3.0, m, axis="y")
     P.cyl(0, -12.3, 0, 2.0, 3.6, m, axis="y")
@@ -989,7 +993,7 @@ def p32_nippers(K):
         P.slab([(1, 0.25 * s), (13.5, 0.25 * s), (15.5, 1.6 * s), (9.0, 7.2 * s), (1, 5.6 * s)], 3.4, m, bevel=0.7)
     P.cyl(3.6, 0, 0, 3.1, 4.8, m, bevel=0.6)
     P.cyl(3.6, 0, 2.5, 1.1, 0.4, K.inkw, bevel=0)
-    P.gate(-25.6, 9.0, "-x"); P.gate(-25.6, -9.0, "-x")
+    P.gate(-24.6, 9.0, "-x"); P.gate(-24.6, -9.0, "-x")
     return P.done()
 
 
@@ -1197,11 +1201,12 @@ def p44_plug_bin(K):
     P.gate(-3.0, -14.2, "-y")
     P.at(15.5, 0)
     k = K.black
-    P.lathe([(0.02, -14.5), (5.2, -14.5), (5.7, -14.0), (7.0, 6.4), (0.02, 6.4)], k, 0, 0)         # 上大下小的圆桶
-    for y in (-8.0, -1.5, 4.0):
-        P.lathe([(0.02, y - 0.5), (6.2 + (y + 14) * 0.064, y - 0.5), (6.2 + (y + 14) * 0.064, y + 0.5), (0.02, y + 0.5)], k, 0, 0)
-    P.lathe([(0.02, 6.8), (8.3, 6.8), (8.3, 9.0), (7.4, 9.8), (0.02, 9.8)], k, 0, 0)
-    P.lathe([(0.02, 9.8), (2.4, 9.8), (2.4, 11.6), (0.02, 11.6)], k, 0, 0)
+    P.lathe([(0.02, -14.5), (5.0, -14.5), (5.5, -14.0), (6.9, 6.2), (0.02, 6.2)], k, 0, 0)         # 上大下小的圆桶
+    for phi in range(-75, 76, 25):                                                                # 桶身一圈竖条纹
+        sn, cs = math.sin(math.radians(phi)), math.cos(math.radians(phi))
+        P.tube([(5.62 * sn, -13.0, 5.62 * cs), (6.82 * sn, 5.2, 6.82 * cs)], 0.5, k)
+    P.lathe([(0.02, 6.2), (8.3, 6.2), (8.5, 6.6), (8.5, 7.8), (7.6, 8.8), (3.0, 9.6), (0.02, 9.7)], k, 0, 0)     # 盖子：比桶口大一圈，顶上微鼓
+    P.tube([(-2.6, 9.2, 0)] + [(2.6 * math.cos(math.radians(a_)), 9.4 + 2.4 * math.sin(math.radians(a_)), 0) for a_ in range(180, -1, -20)] + [(2.6, 9.2, 0)], 0.6, k)   # 提手
     P.gate(6.6, -1.0, "+x")
     P.at()
     return P.done()
@@ -1362,7 +1367,7 @@ def lights(cx=0.0, cy=0.0, k=1.0):
         o = bpy.context.object; o.name = name
         o.data.shape = "RECTANGLE"; o.data.size = size * k; o.data.size_y = (sy or size) * k; o.data.energy = energy * k * k; o.data.color = (1, 0.97, 0.93)
         o.rotation_euler = (-loc + Vector((0, 0, 0.08))).to_track_quat("-Z", "Y").to_euler()
-    for nm, loc, rot, sz in (("refl_top", (0, -0.2, 1.3), (0, 0, 0), 1.6), ("refl_left", (-1.0, -0.8, 0.5), (math.radians(70), 0, math.radians(-50)), 1.2)):
+    for nm, loc, rot, sz in (("refl_top", (0, 0.2, 1.3), (0, 0, 0), 5.0), ("refl_left", (-1.0, -0.8, 0.5), (math.radians(70), 0, math.radians(-50)), 1.2)):
         bpy.ops.mesh.primitive_plane_add(size=sz * k, location=c + Vector(loc) * k, rotation=rot)
         rp = bpy.context.object; rp.name = nm
         em = bpy.data.materials.new(nm); em.use_nodes = True
@@ -1427,7 +1432,8 @@ def ZONES(K):
     pl = lambda s: (lambda K: p16_plate(K, s))
     return [
         (1, [[p03_person, lambda K: p04_liver(K, big=True), None, p11_bill, p10_calendar, p12_medal],     # None：被玻璃肝（2 × 2）占着的格
-             [p06_globe, None, None, p05_lung_gut, p07_hk_map, p09_iv_bag]]),
+             [p06_globe, None, None, p05_lung_gut, p07_hk_map, p09_iv_bag],
+             [pl("Liver cancer"), p08_capsule, p03_person, p03_person, p11_bill, c("AlphaFold")]]),
         (2, [[p14_buildings, pl("Case study"), p17_paper_book, p18_loupe_checklist, p15_sample_tube, pl("Research question")]]),
         (3, [[p19_cdk20, p20_pocket, p21_lock, lambda K: p22_key(K, 2), p24_atp, lambda K: p23_cell(K, "cancer")],
              [p29_cdk20_unknown, p28_top20, p26_survival, p25_tumour_chips, p27_data_disks, c("PandaOmics")]]),
@@ -1542,6 +1548,48 @@ def make_board(K, zones=None, skip_feet=()):
     return dict(board=board, zone_x=zone_x, colx=colx, zb=zb, xl=xl, xr=xr)
 
 
+def part_of(cell):
+    """格子里的零件根（空物体，带 gates、cat 属性）。"""
+    return next(c for c in cell.children if "gates" in c.keys())
+
+
+def loop_of(cell):
+    """格子外圈那一圈料杆。"""
+    return bpy.data.objects[cell.name + "_loop"]
+
+
+def gates_of(cell):
+    """格子里所有的浇口物体（细锥 name_g0…，远的还有一段支杆 name_g0_spur）。"""
+    return [c for c in cell.children if c.name.startswith(cell.name + "_g")]
+
+
+def check_gates(board, tol=0.8):
+    """每个浇口的尖头离自己那件零件的表面不超过 tol 毫米（不悬空）。返回不合格的 (格子, 第几个浇口, 距离)。"""
+    from mathutils.bvhtree import BVHTree
+    dg = bpy.context.evaluated_depsgraph_get()
+    bad = []
+    for cell in [c for c in board.children if c.name.startswith("z") and "_c" in c.name]:
+        part = part_of(cell)
+        trees = []
+        stack = list(part.children)
+        while stack:
+            o = stack.pop(); stack += list(o.children)
+            if o.hide_render or o.type not in ("MESH", "CURVE", "FONT"):
+                continue
+            ev = o.evaluated_get(dg); me = ev.to_mesh()
+            if len(me.polygons):
+                bm = bmesh.new(); bm.from_mesh(me); bm.transform(ev.matrix_world)
+                bmesh.ops.triangulate(bm, faces=bm.faces[:])
+                trees.append(BVHTree.FromBMesh(bm)); bm.free()
+            ev.to_mesh_clear()
+        for i, (gx, gy, d, gz) in enumerate(json.loads(part["gates"])):
+            tip = cell.matrix_world @ Vector((gx * MM, gy * MM, gz * MM))
+            dist = min((9.0 if (r := t.find_nearest(tip)[3]) is None else r) for t in trees) / MM
+            if dist > tol:
+                bad.append((cell.name, i, round(dist, 2)))
+    return bad
+
+
 def build_board(view, out, samples=256, pct=100):
     sc = scene_base(samples)
     K = Kit()
@@ -1549,9 +1597,16 @@ def build_board(view, out, samples=256, pct=100):
     B = make_board(K)
     zone_x, zb = B["zone_x"], B["zb"]
     zc = lambda zi, y=0.0, z=0.0: (zone_x[zi] * MM, y * MM, (zb + z) * MM)
+    if view == "save":                                # 定版：存成 .blend（全景的灯和相机），顺便跑浇口检查
+        lights(0, 0, 1.6)
+        camera(sc, (0.005, -0.012, zb * MM), 1.53, 46, -18, lens=45, fstop=11, focus=(0, -0.05, zb * MM))
+        bad = check_gates(B["board"])
+        print("KIT_GATE_CHECK cells", len([c for c in B["board"].children if "_c" in c.name]), "bad", bad)
+        bpy.ops.wm.save_as_mainfile(filepath=out)
+        return
     if view == "pano":
         lights(0, 0, 1.6)
-        camera(sc, (0.005, -0.012, zb * MM), 1.44, 46, -18, lens=45, fstop=11, focus=(0, -0.05, zb * MM))
+        camera(sc, (0.005, -0.012, zb * MM), 1.53, 46, -18, lens=45, fstop=11, focus=(0, -0.05, zb * MM))
     elif view == "liver":
         # 玻璃肝近景：低机位、长焦、浅景深，对着占 2 × 2 格的玻璃肝
         lv = bpy.data.objects["p04_liver"].matrix_world.translation
