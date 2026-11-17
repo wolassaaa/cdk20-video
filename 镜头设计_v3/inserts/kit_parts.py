@@ -62,8 +62,9 @@ def mat_plated(name, col="#E2CFA0", rough=0.06):
     return m
 
 
-def mat_clear(name, rgb=(0.95, 0.55, 0.62), density=18.0, rough=0.02):
-    """透明：折射 + 体积吸收（厚处颜色深、薄处近乎无色）。rough 调高就是磨砂。"""
+def mat_clear(name, rgb=(0.95, 0.55, 0.62), density=18.0, rough=0.02, coat=0.0):
+    """透明：折射 + 体积吸收（厚处颜色深、薄处近乎无色）。rough 调高就是磨砂，coat 给磨砂件一层亮的清漆高光。
+    影子射线直接穿过去（只被体积染色），不然透明件会把自己身下的台面压成一团灰。"""
     m = bpy.data.materials.new(name); m.use_nodes = True
     nt = m.node_tree; nt.nodes.clear()
     out = nt.nodes.new("ShaderNodeOutputMaterial")
@@ -71,7 +72,14 @@ def mat_clear(name, rgb=(0.95, 0.55, 0.62), density=18.0, rough=0.02):
     b.inputs["Roughness"].default_value = rough
     b.inputs["IOR"].default_value = 1.49
     b.inputs["Transmission Weight"].default_value = 1.0
-    nt.links.new(b.outputs[0], out.inputs["Surface"])
+    b.inputs["Coat Weight"].default_value = coat
+    b.inputs["Coat Roughness"].default_value = 0.03
+    tr = nt.nodes.new("ShaderNodeBsdfTransparent")
+    tr.inputs["Color"].default_value = (0.97, 0.97, 0.97, 1)
+    lp = nt.nodes.new("ShaderNodeLightPath")
+    mx = nt.nodes.new("ShaderNodeMixShader")
+    nt.links.new(lp.outputs["Is Shadow Ray"], mx.inputs[0]); nt.links.new(b.outputs[0], mx.inputs[1]); nt.links.new(tr.outputs[0], mx.inputs[2])
+    nt.links.new(mx.outputs[0], out.inputs["Surface"])
     va = nt.nodes.new("ShaderNodeVolumeAbsorption")
     va.inputs["Color"].default_value = (*rgb, 1)
     va.inputs["Density"].default_value = density
@@ -89,14 +97,18 @@ class Kit:
         self.black = mat_solid("kit_black", "#1E1E20", rough=0.14)
         self.gold = mat_plated("kit_gold")
         self.clear = mat_clear("kit_clear_pink")                                   # 淡粉透明
-        self.clear0 = mat_clear("kit_clear", rgb=(0.82, 0.93, 0.95), density=6.0)   # 无色透明
-        self.yellow = mat_clear("kit_clear_yellow", rgb=(1.0, 0.74, 0.05), density=280.0)
+        self.clear0 = mat_clear("kit_clear", rgb=(0.90, 0.97, 0.98), density=3.0)   # 无色透明
+        self.yellow = mat_clear("kit_clear_yellow", rgb=(1.0, 0.90, 0.05), density=420.0)
         self.cellpink = mat_clear("kit_cell_pink", rgb=(0.96, 0.42, 0.55), density=55.0)
-        self.frost = mat_clear("kit_frost", rgb=(0.62, 0.76, 1.0), density=45.0, rough=0.22)
+        self.frost = mat_clear("kit_frost", rgb=(0.50, 0.75, 1.0), density=42.0, rough=0.16, coat=1.0)
         self.tail = mat_clear("kit_tail", rgb=(0.22, 0.42, 1.0), density=520.0, rough=0.15)   # 淡蓝半透明
         self.liquid = mat_clear("kit_liquid", rgb=(0.97, 0.38, 0.52), density=120.0)
         self.nuc_red = mat_clear("kit_nucleus_red", rgb=(0.8, 0.05, 0.12), density=160.0)
-        self.nuc_grey = mat_clear("kit_nucleus_grey", rgb=(0.45, 0.45, 0.47), density=160.0)
+        self.liq_yellow = mat_clear("kit_liquid_yellow", rgb=(1.0, 0.88, 0.25), density=110.0)
+        self.dishpink = mat_clear("kit_dish_pink", rgb=(1.0, 0.30, 0.48), density=520.0)
+        self.gold_satin = mat_plated("kit_gold_satin", rough=0.32)
+        self.blue_hi = mat_solid("kit_blue_hi", "#3D6BE6", rough=0.12)
+        self.nuc_grey = mat_clear("kit_nucleus_grey", rgb=(0.62, 0.62, 0.66), density=110.0)
         self.ink = mat_solid("kit_ink_dark", "#1F1E1C", rough=0.3, coat=0.2, sss=0)       # 印在浅色件上的字
         self.inkw = mat_solid("kit_ink_white", "#F7F4EE", rough=0.25, coat=0.2, sss=0)    # 印在深色件上的字
         self.inkg = mat_solid("kit_ink_grey", "#9A968C", rough=0.3, coat=0.2, sss=0)
@@ -165,6 +177,37 @@ def smooth_path(pts, n=8):
     return out
 
 
+DATA = json.loads((Path(__file__).parent / "kit_data.json").read_text(encoding="utf-8"))     # kit_mols.py 生成：001、048、ATP 的原子坐标，香港轮廓
+
+
+def clip_line(pts, p0, p1, gap):
+    """多边形裁到直线 p0→p1 左侧、离线 gap 以外的部分。"""
+    d = Vector((p1[0] - p0[0], p1[1] - p0[1])).normalized(); n = Vector((-d.y, d.x))
+    f = lambda p: (p[0] - p0[0]) * n.x + (p[1] - p0[1]) * n.y - gap
+    out = []
+    N = len(pts)
+    for i in range(N):
+        a, b = pts[i], pts[(i + 1) % N]
+        fa, fb = f(a), f(b)
+        if fa >= 0:
+            out.append(a)
+        if (fa >= 0) != (fb >= 0):
+            t = fa / (fa - fb)
+            out.append((a[0] + t * (b[0] - a[0]), a[1] + t * (b[1] - a[1])))
+    return out
+
+
+def mol_part(P, key, s, m, ra, rb, big=(), cx=0.0, cy=0.0):
+    """按真实原子坐标做球棍：一个原子一个球，一根键一根棍。s 是毫米每埃。返回原子的毫米坐标。"""
+    d = DATA[key]
+    xyz = [(cx + a[1] * s, cy + a[2] * s, a[3] * s) for a in d["atoms"]]
+    for i, j in d["bonds"]:
+        P.tube([xyz[i], xyz[j]], rb, m)
+    for a, p in zip(d["atoms"], xyz):
+        P.ball(p[0], p[1], p[2], ra * (1.45 if a[0] in big else 1.0), m, seg=20)
+    return xyz
+
+
 def clip_x(pts, x0, keep_less):
     """多边形裁到 x<x0（或 x>x0）一侧。"""
     out = []
@@ -195,7 +238,7 @@ class Part:
         self.ox, self.oy = ox, oy
         return self
 
-    def slab(self, pts, t, m, z=0.0, bevel=0.5, holes=()):
+    def slab(self, pts, t, m, z=0.0, bevel=0.5, holes=(), seg=3, cuts=()):
         name = self.nm("s")
         bm = bmesh.new()
         vs = [bm.verts.new(((p[0] + self.ox) * MM, (p[1] + self.oy) * MM, (z - t / 2) * MM)) for p in pts]
@@ -213,8 +256,12 @@ class Part:
             bpy.ops.mesh.primitive_cylinder_add(radius=hr * MM, depth=(t * 4 + 2) * MM, vertices=40, location=((hx + self.ox) * MM, (hy + self.oy) * MM, z * MM))
             c = bpy.context.object; c.hide_render = c.hide_viewport = True; c.parent = self.root; c.name = name + "_cut"
             bo = o.modifiers.new("hole", "BOOLEAN"); bo.object = c; bo.operation = "DIFFERENCE"; bo.solver = "EXACT"
+        for cp in cuts:                          # 压出来的浅槽：拿一块同形状的料去减
+            c = self.slab(cp[0], cp[1], m, z=cp[2], bevel=0)
+            c.hide_render = c.hide_viewport = True; c.name = name + "_cut"
+            bo = o.modifiers.new("cut", "BOOLEAN"); bo.object = c; bo.operation = "DIFFERENCE"; bo.solver = "EXACT"
         if bevel:
-            b = o.modifiers.new("bv", "BEVEL"); b.width = bevel * MM; b.segments = 3; b.limit_method = "ANGLE"
+            b = o.modifiers.new("bv", "BEVEL"); b.width = bevel * MM; b.segments = seg; b.limit_method = "ANGLE"
             o.modifiers.new("wn", "WEIGHTED_NORMAL")
         for p in me.polygons:
             p.use_smooth = bool(bevel)
@@ -310,7 +357,7 @@ class Part:
         o.data.materials.append(m)
         return o
 
-    def text(self, body, size, x, y, z, m, italic=False, align="CENTER"):
+    def text(self, body, size, x, y, z, m, italic=False, align="CENTER", rot=0.0):
         name = self.nm("tx")
         cu = bpy.data.curves.new(name, "FONT")
         cu.body = body
@@ -318,12 +365,13 @@ class Part:
         cu.size = size * MM; cu.align_x = align; cu.align_y = "CENTER"; cu.extrude = 0.15 * MM
         o = link(bpy.data.objects.new(name, cu), self.root)
         o.location = ((x + self.ox) * MM, (y + self.oy) * MM, (z + 0.15) * MM)
+        o.rotation_euler = (0, 0, math.radians(rot))
         o.data.materials.append(m)
         return o
 
-    def gate(self, x, y, d):
-        """登记一个浇口：零件边上的点（mm）和朝外的方向 '+x' '-x' '+y' '-y'。"""
-        self.gates.append((float(x + self.ox), float(y + self.oy), d))
+    def gate(self, x, y, d, z=0.0):
+        """登记一个浇口：零件边上的点（mm）、朝外的方向 '+x' '-x' '+y' '-y'，和这个点离板面的高度。"""
+        self.gates.append((float(x + self.ox), float(y + self.oy), d, float(z)))
 
     def done(self):
         self.root["gates"] = json.dumps(self.gates)
@@ -441,16 +489,18 @@ LIVER_SOCKET = (-13.0, 3.5)
 
 
 def p04_liver(K):
-    """肝：大的右叶、小而尖的左叶，中间一道沟；下沿露出胆囊；右叶上有给 CDK20 定位销用的凸台和孔。"""
+    """肝：鼓起来的大右叶和小而尖的左叶，中间一道斜的分界沟（镰状韧带的位置）；下沿露出胆囊；
+    右叶上有给 CDK20 定位销用的凸台和孔。两叶都是厚料大圆角，斜着看是鼓的。"""
     P = Part(K, "p04_liver", "red"); m = K.red
     s = 50.0
     lv = smooth_loop([(x * s, y * s - 1.0) for x, y in LIVER])
-    P.slab(lv, 3.0, m, bevel=0.8)
+    P.slab(lv, 2.6, m, bevel=0.8)
     sx, sy = LIVER_SOCKET
-    P.slab(clip_x(lv, 5.2, True), 6.4, m, bevel=1.8, holes=[(sx, sy, 2.3)])
-    P.slab(clip_x(lv, 6.8, False), 5.4, m, bevel=1.6)
-    P.ball(1.5, -8.6, 0.6, 2.4, m, sc=(0.8, 1.5, 0.9))                 # 胆囊
-    P.slab(circle(sx, sy, 4.4), 1.6, m, z=3.2 + 0.8, bevel=0.5, holes=[(sx, sy, 2.3)])
+    a, b = (9.5, 17.0), (1.5, -8.0)                      # 分界沟
+    P.slab(clip_line(lv, a, b, 0.9), 9.0, m, bevel=3.8, seg=8, holes=[(sx, sy, 2.3)])
+    P.slab(clip_line(lv, b, a, 0.9), 6.6, m, bevel=2.9, seg=8)
+    P.ball(-0.5, -9.4, 0.4, 2.5, m, sc=(0.85, 1.5, 0.9))                 # 胆囊
+    P.slab(circle(sx, sy, 4.4), 1.6, m, z=4.5 + 0.6, bevel=0.5, holes=[(sx, sy, 2.3)])
     P.gate(-23.5, -3.0, "-x"); P.gate(24.0, 3.0, "+x"); P.gate(-15.0, -15.4, "-y")
     return P.done()
 
@@ -505,13 +555,20 @@ HK_LAND = [
 
 
 def p07_hk_map(K):
+    """香港地图片：轮廓是 Natural Earth 1:10m 的公开边界（kit_data.json 的 HK）。海面印细横线，陆地高出 3.4 mm。"""
     P = Part(K, "p07_hk_map", "white"); m = K.white
-    P.box(0, 0, 24, 16, 1.6, m, r=2.0)
-    for land in HK_LAND:
-        P.slab(smooth_loop([((x - 24.5) * 0.9, (y - 20.5) * 0.9 - 0.5) for x, y in land], 3), 3.4, m, z=0.8 + 1.7, bevel=0.7)
-    P.text("Hong Kong", 3.6, -13.5, 12.2, 0.8, K.ink, italic=True)
-    P.cyl(4.6, -7.2, 4.6, 0.9, 1.0, K.ink, bevel=0)             # 九龙一带的图钉点
-    P.gate(-24, 0, "-x"); P.gate(24, 0, "+x")
+    P.box(0, 0, 25, 16.5, 1.6, m, r=2.0)
+    polys = DATA["HK"]
+    xs = [p[0] for poly in polys for p in poly]; ys = [p[1] for poly in polys for p in poly]
+    mx, my = (min(xs) + max(xs)) / 2, (min(ys) + max(ys)) / 2
+    k = min(44.0 / (max(xs) - min(xs)), 29.0 / (max(ys) - min(ys)))
+    for i in range(13):
+        P.inkbox(0, -14.4 + 2.4 * i, 23.0, 0.12, K.inkg, 0.8)
+    for poly in polys:
+        P.slab([((x - mx) * k + 1.5, (y - my) * k - 0.6) for x, y in poly], 3.4, m, z=0.8 + 1.7, bevel=0.5)
+    P.box(-16.0, 12.6, 8.2, 2.5, 1.2, m, z=0.8 + 0.6, r=1.0, bevel=0.3)
+    P.text("Hong Kong", 3.5, -16.0, 12.5, 2.0, K.ink, italic=True)
+    P.gate(-25, 0, "-x"); P.gate(25, 0, "+x")
     return P.done()
 
 
@@ -531,14 +588,14 @@ def p08_capsule(K):
 
 def p09_iv_bag(K):
     P = Part(K, "p09_iv_bag", "clear"); m = K.clear0
-    P.box(0, 2.5, 9.5, 10.5, 5.0, m, r=3.0, bevel=2.0)
-    P.slab(rrect(0, -1.2, 8.0, 5.6, 2.4), 3.4, K.cellpink, z=0, bevel=1.4)        # 袋里的药液
+    P.box(0, 2.5, 9.5, 10.5, 7.0, m, r=3.0, bevel=2.6)
+    P.slab(rrect(0, 0.6, 8.2, 7.6, 2.4), 5.0, K.liq_yellow, z=0, bevel=2.0)        # 袋里淡黄的药液
     P.slab(rrect(0, 14.3, 3.2, 1.9, 1.2), 2.0, m, holes=[(0, 14.6, 1.0)])
     P.cyl(0, -9.2, 0, 1.3, 3.0, m, axis="y")
     P.cyl(0, -12.3, 0, 2.0, 3.6, m, axis="y")
     P.tube([(0, -14), (0, -16)], 0.6, m)
     for i in range(4):
-        P.inkbox(6.2, 8.5 - i * 3.2, 1.6, 0.25, K.ink, 2.5)
+        P.inkbox(6.2, 8.5 - i * 3.2, 1.6, 0.25, K.ink, 3.5)
     P.gate(-9.3, 2.5, "-x"); P.gate(9.3, 2.5, "+x")
     return P.done()
 
@@ -702,19 +759,19 @@ def p19_cdk20(K):
 
 
 def p20_pocket(K, with_key=False):
-    """CDK20 的口袋近景件：两叶之间一道开口，里面是放钥匙的腔，腔底三个小柱是铰链位。"""
+    """CDK20 的口袋近景件：两叶之间一道开口，里面是放钥匙的腔；腔底一块凸起的亮蓝卡扣是铰链位（hinge）。"""
     P = Part(K, "p20_pocket", "blue"); m = K.blue
-    cx = -8.0 if with_key else 0.0
+    cx = -5.0 if with_key else 2.0
     P.at(cx, 0)
     a = math.degrees(math.asin(2.6 / 6.4))
-    body = [(17, 2.6)] + arc(-1, 0, 6.4, a, 360 - a, 28) + [(17, -2.6), (17, -11), (14, -14), (-14, -14), (-17, -11), (-17, 11), (-14, 14), (14, 14), (17, 11)]
+    body = [(17, 2.6)] + arc(-1, 0, 6.4, a, 360 - a, 28) + [(17, -2.6), (17, -11), (14, -14), (-18, -14), (-21, -11), (-21, 11), (-18, 14), (14, 14), (17, 11)]
     P.slab(body, 6.0, m, bevel=0.9)
-    P.slab(smooth_loop([(-13, 5.5), (-6, 11.5), (6, 12), (14, 9.5), (14.5, 5.2), (7, 7.2), (-3, 8.2), (-9, 5.2)]), 1.6, m, z=3.0 + 0.6, bevel=0.6)      # N 叶
-    P.slab(smooth_loop([(-13, -5.5), (-9, -5.2), (-3, -8.4), (7, -7.4), (14.5, -5.2), (14, -10.5), (6, -12.4), (-6, -11.8)]), 2.2, m, z=3.0 + 0.9, bevel=0.7)   # C 叶
-    for y in (-2.6, 0, 2.6):
-        P.cyl(-9.6, y, 3.6, 1.0, 1.4, m)
-    P.text("hinge", 2.6, -13.2, 0, 3.0, K.inkw, italic=True)
-    P.gate(-17, 0, "-x"); P.gate(0, -14, "-y"); P.gate(0, 14, "+y")
+    P.slab(smooth_loop([(-9, 6.5), (-4, 11.5), (6, 12), (14, 9.5), (14.5, 5.2), (7, 7.2), (-2, 8.4)]), 1.6, m, z=3.0 + 0.6, bevel=0.6)      # N 叶
+    P.slab(smooth_loop([(-9, -6.5), (-2, -8.6), (7, -7.4), (14.5, -5.2), (14, -10.5), (6, -12.4), (-4, -11.8)]), 2.2, m, z=3.0 + 0.9, bevel=0.7)   # C 叶
+    P.box(-9.6, 0, 1.9, 4.6, 3.4, K.blue_hi, z=3.0 + 1.7, r=0.9, bevel=0.6)      # 卡扣
+    P.box(-8.2, 0, 0.9, 2.4, 1.2, K.blue_hi, z=3.0 + 3.4 + 0.6, r=0.5, bevel=0.3)
+    P.text("hinge", 4.6, -16.2, 0, 3.0, K.inkw, italic=True, rot=90)
+    P.gate(-21, 0, "-x"); P.gate(0, -14, "-y"); P.gate(0, 14, "+y")
     P.at()
     if with_key:
         key_shape(P, cx + 2.0, -0.2, 0.42, K.gold, seed=48)
@@ -763,16 +820,11 @@ def p23_cell(K, kind="both"):
 
 
 def p24_atp(K):
+    """ATP：真实结构（腺嘌呤、核糖、三个磷酸），坐标由 RDKit 从 SMILES 生成；磷原子的球大一号。"""
     P = Part(K, "p24_atp", "clear"); m = K.yellow
-    P.slab(ngon(-18.5, 4.0, 4.6, 6, 30), 3.6, m, bevel=0.8)
-    P.slab(ngon(-11.6, 4.0, 3.9, 5, 0), 3.6, m, bevel=0.8)
-    P.tube([(-9.0, 1.2), (-5.0, -2.0)], 0.9, m)
-    P.slab(ngon(-2.4, -3.6, 4.2, 5, 90), 3.6, m, bevel=0.8)
-    xs = (7.0, 14.5, 22.0)
-    P.tube([(1.5, -3.6), (xs[-1], -3.6)], 0.9, m)
-    for x in xs:
-        P.ball(x, -3.6, 0, 3.1, m)
-    P.gate(-22.4, 4.0, "-x"); P.gate(24.9, -3.6, "+x")
+    xyz = mol_part(P, "ATP", 3.3, m, 1.9, 0.9, big=("P",))
+    l = min(xyz, key=lambda p: p[0]); r = max(xyz, key=lambda p: p[0])
+    P.gate(l[0] - 1.0, l[1], "-x", l[2]); P.gate(r[0] + 1.0, r[1], "+x", r[2])
     return P.done()
 
 
@@ -939,39 +991,29 @@ def p36_sieve(K):
     return P.done()
 
 
+def mini_key(P, x, y, up, m, seed):
+    """一把竖着的小钥匙（长 7.2 mm）：圆柄带孔、杆、一排齿。up=1 柄在下、尖朝上。"""
+    rnd = random.Random(seed)
+    P.ring(x, y, 1.75, 0.7, 1.1, m, bevel=0.25, n=32)
+    pts = [(-0.55, 1.4), (-0.55, 5.0), (-0.15, 5.5), (0.55, 5.5)]
+    for i in range(3):
+        t = rnd.choice((0.55, 0.85, 1.15)); y0 = 4.6 - 1.05 * i
+        pts += [(0.55, y0 + 0.2), (0.55 + t, y0 + 0.2), (0.55 + t, y0 - 0.45), (0.55, y0 - 0.45)]
+    pts += [(0.55, 1.4)]
+    P.slab([(x + px, y + up * py) for px, py in pts], 1.0, m, bevel=0.2)
+
+
 def p37_key_heap(K):
-    """小钥匙堆（8,918 把那一堆的代表，成片时用实例铺）。"""
+    """小钥匙阵列（8,918 把那一堆的代表，成片时用实例铺）：6 × 4 整齐排在两根细料条上，每把齿形不同，互不相碰。"""
     P = Part(K, "p37_key_heap", "gold"); m = K.gold
-    P.box(0, 0, 24, 14, 1.2, m, z=-0.6, r=2.5)
-    rnd = random.Random(8918)
-    proto = Part(K, "minikey", "gold")
-    proto.ring(-5.0, 0, 3.3, 1.3, 1.2, m, bevel=0.3, n=32)
-    proto.slab([(-2.2, 0.9), (8.5, 0.9), (9.5, 0.2), (9.5, -0.9), (8, -0.9), (8, -2.2), (6.6, -2.2), (6.6, -0.9), (5.4, -0.9), (5.4, -1.8), (4, -1.8),
-                (4, -0.9), (2.6, -0.9), (2.6, -2.4), (1.4, -2.4), (1.4, -0.9), (-2.2, -0.9)], 1.1, m, bevel=0.25)
-    kids = list(proto.root.children)
     n = 0
-    for lay in range(4):
-        ang = math.radians(lay * 55 + 8)
-        ca, sa = math.cos(ang), math.sin(ang)
-        Rx, Ry = 15.5 - 3.0 * lay, 11.0 - 2.2 * lay
-        for i in range(-3, 4):
-            for j in range(-4, 5):
-                u, v = i * 19.0 + (9.5 if j % 2 else 0), j * 7.2
-                x, y = u * ca - v * sa, u * sa + v * ca
-                if (x / Rx) ** 2 + (y / Ry) ** 2 > 1.0:
-                    continue
-                e = link(bpy.data.objects.new(P.nm("k"), None), P.root)
-                e.matrix_local = Matrix.Translation((x * MM, y * MM, (0.9 + 1.45 * lay) * MM)) @ Matrix.Rotation(ang + (math.pi if rnd.random() < 0.5 else 0), 4, "Z")
-                n += 1
-                for c in kids:
-                    d = c.copy(); link(d, e)
-                    for md in d.modifiers:
-                        if md.type == "BOOLEAN":
-                            cut = md.object.copy(); link(cut, e); md.object = cut
-    for c in kids:
-        bpy.data.objects.remove(c)
-    bpy.data.objects.remove(proto.root)
-    P.gate(-24, 0, "-x"); P.gate(24, 0, "+x")
+    for rail in (8.0, -8.0):
+        P.tube([(-25.0, rail), (25.0, rail)], 0.55, m)
+        for up in (1, -1):
+            for i in range(6):
+                x = (i - 2.5) * 8.2
+                mini_key(P, x, rail + up * 2.2, up, m, 8918 + n); n += 1
+        P.gate(-25.0, rail, "-x"); P.gate(25.0, rail, "+x")
     return P.done()
 
 
@@ -993,44 +1035,23 @@ def p38_dial(K, label="Score"):
     return P.done()
 
 
-def molecule(P, m, rings, extra, tag, K):
-    """示意的球棍小分子件（不是论文结构的精确画法），下面挂一块编号牌。"""
-    atoms, bonds = {}, set()
-
-    def A(p):
-        k = (round(p[0], 1), round(p[1], 1))
-        atoms.setdefault(k, p)
-        return k
-    for (cx, cy, n, r, rot) in rings:
-        ks = [A(p) for p in ngon(cx, cy, r, n, rot)]
-        for i in range(n):
-            bonds.add(tuple(sorted((ks[i], ks[(i + 1) % n]))))
-    for a, b in extra:
-        bonds.add(tuple(sorted((A(a), A(b)))))
-    for a, b in bonds:
-        P.tube([atoms[a], atoms[b]], 0.6, m)
-    for p in atoms.values():
-        P.ball(p[0], p[1], 0, 1.35, m, seg=20)
-    P.tube([(0, -3.0), (0, -8.0)], 0.7, m)
-    P.box(0, -11.2, 7.0, 3.2, 1.8, m, r=1.2, bevel=0.4)
-    P.text(tag, 4.6, 0, -11.3, 0.9, K.ink)
-    P.gate(0, -14.4, "-y")
+def molecule(P, key, K, s, ra, rb):
+    """论文里的化合物（001 或 048）：按真实结构的原子坐标做球棍，香槟金电镀；下面挂一块缎面金的编号牌，深色字。"""
+    xyz = mol_part(P, key, s, K.gold, ra, rb, cy=5.2)
+    low = min((p for p in xyz if abs(p[0]) < 2.6 * s), key=lambda p: p[1])
+    P.tube([low, (0, -7.6, 0)], rb * 1.15, K.gold)
+    P.box(0, -11.2, 8.0, 3.6, 1.8, K.gold_satin, r=1.2, bevel=0.4)
+    P.text(key, 6.0, 0, -11.35, 0.9, K.ink)
+    P.gate(0, -14.8, "-y")
 
 
 def p39_molecules(K, which="both"):
-    P = Part(K, "p39_molecules", "gold"); m = K.gold
-    r = 3.6; d = r * math.sqrt(3)
-    if which in ("both", "001"):
-        P.at(-13.5 if which == "both" else 0, 0)
-        molecule(P, m, [(-d / 2, 3.5, 6, r, 30), (d / 2, 3.5, 6, r, 30)],
-                 [((d, 5.3), (d + 2.8, 7.2)), ((-d, 1.7), (-d - 2.8, 0.0)), ((-d / 2, -0.1), (0, -3.0)), ((d / 2, -0.1), (0, -3.0))], "001", K)
-    if which in ("both", "048"):
-        P.at(13.5 if which == "both" else 0, 0)
-        c3 = (d / 2 + 5.4, 9.6)
-        molecule(P, m, [(-d / 2, 3.5, 6, r, 30), (d / 2, 3.5, 6, r, 30), (c3[0], c3[1], 5, 2.9, 198)],
-                 [((d / 2, 7.1), (c3[0] + 2.9 * math.cos(math.radians(198)), c3[1] + 2.9 * math.sin(math.radians(198)))),
-                  ((-d, 5.3), (-d - 2.6, 7.4)), ((-d - 2.6, 7.4), (-d - 2.6, 10.6)), ((-d, 1.7), (-d - 2.8, 0.0)),
-                  ((-d / 2, -0.1), (0, -3.0)), ((d / 2, -0.1), (0, -3.0))], "048", K)
+    P = Part(K, "p39_molecules", "gold")
+    if which == "both":
+        P.at(-13.5, 0); molecule(P, "001", K, 1.62, 0.95, 0.42)
+        P.at(13.5, 0); molecule(P, "048", K, 1.62, 0.95, 0.42)
+    else:
+        molecule(P, which, K, 3.0, 1.45, 0.62)
     P.at()
     return P.done()
 
@@ -1039,7 +1060,7 @@ def p40_dish(K):
     P = Part(K, "p40_dish", "clear"); m = K.clear0
     P.ring(0, 0, 14.0, 12.8, 5.0, m, bevel=0.5)
     P.disc(0, 0, 14.0, 1.0, m, z=-2.0, bevel=0.3)
-    P.disc(0, 0, 12.6, 1.6, K.cellpink, z=-0.7, bevel=0.3)
+    P.disc(0, 0, 12.6, 2.2, K.dishpink, z=-0.4, bevel=0.3)
     rnd = random.Random(40)
     for _ in range(9):
         r = 9.5 * math.sqrt(rnd.random()); a = rnd.uniform(0, 6.28)
@@ -1222,9 +1243,9 @@ def make_cell(K, part, x, y, z=0.0, name="cell"):
     m = K.cat(part["cat"])
     tube_w(name + "_loop", rrect(0, 0, CX, CY, 5.0), R_LOOP, m, root, cyclic=True)
     part.parent = root
-    for i, (gx, gy, d) in enumerate(json.loads(part["gates"])):
+    for i, (gx, gy, d, gz) in enumerate(json.loads(part["gates"])):
         end = {"+x": (CX, gy), "-x": (-CX, gy), "+y": (gx, CY), "-y": (gx, -CY)}[d]
-        gate_geo(f"{name}_g{i}", (end[0] * MM, end[1] * MM, 0), (gx * MM, gy * MM, 0), m, root)
+        gate_geo(f"{name}_g{i}", (end[0] * MM, end[1] * MM, 0), (gx * MM, gy * MM, gz * MM), m, root)
     root.location = (x * MM, y * MM, z * MM)
     return root
 
@@ -1357,7 +1378,7 @@ def ZONES(K):
     ]
 
 ROWS = [123.0, 77.0, 31.0, -31.0, -77.0, -123.0]
-ZGAP, BAY_W, HY_F = 8.0, 124.0, 150.0
+ZGAP, BAY_W, HY_F = 8.0, 100.0, 150.0
 
 
 def build_board(view, out, samples=256, pct=100):
@@ -1386,7 +1407,7 @@ def build_board(view, out, samples=256, pct=100):
     xl, xr = colx[0][1] - CX - 6, bay_c + BAY_W / 2 + 2
     # 外框、主料杆
     tube_w("frame", rrect((xl + xr) / 2, 0, (xr - xl) / 2, HY_F, 10.0), R_FRAME, W, board, cyclic=True)
-    tube_w("main_runner", [(xl, 0), (bay_c - BAY_W / 2 + 6, 0)], R_MAIN, W, board)
+    tube_w("main_runner", [(xl, 0), (bay_c - BAY_W / 2 + 8, 0)], R_MAIN, W, board)
     bpy.ops.mesh.primitive_cone_add(radius1=5.5 * MM, radius2=2.6 * MM, depth=10 * MM, vertices=48, location=(xl * MM, 0, 5 * MM))
     cn = bpy.context.object; cn.name = "sprue_cone"; bpy.ops.object.shade_smooth(); cn.data.materials.append(W); cn.parent = board
     # 格子之间、格子到外框和主料杆的短连杆
@@ -1402,7 +1423,7 @@ def build_board(view, out, samples=256, pct=100):
         tube_w("lk", [(cx, ROWS[3] + CY), (cx, -R_MAIN + 0.5)], 1.2, W, board)
     for y in ROWS:
         tube_w("lk", [(xl, y), (colx[0][1] - CX, y)], 1.2, W, board)
-        tube_w("lk", [(x_cells_r, y), (bay_c - BAY_W / 2 + 6, y)], 1.2, W, board)
+        tube_w("lk", [(x_cells_r, y), ((bay_c - BAY_W / 2 + 8) if abs(y) < 100 else xr, y)], 1.2, W, board)
     # 主料杆上的 7 个站点牌（零件 02）
     SP = Part(K, "stations", "white"); SP.root.parent = board
     x0, x1 = colx[0][1] - 6, colx[-1][1] + 6
@@ -1417,21 +1438,24 @@ def build_board(view, out, samples=256, pct=100):
         ZP.text(str(zi), 6.4, zx, HY_F - 0.2, R_FRAME + 0.9, K.ink)
     # 最右端：成品位（空的底板，留四个带孔的定位凸台）
     BP = Part(K, "bay", "white"); BP.root.parent = board
-    BP.box(bay_c, 0, BAY_W / 2 - 8, HY_F - 14, 2.4, W, r=6.0, bevel=0.6)
-    for hx_, hy_ in ((BAY_W / 2 - 9, 1.0), (1.0, HY_F - 15)):
-        for s in (-1, 1):
-            if hy_ == 1.0:
-                BP.box(bay_c + s * hx_, 0, 1.0, HY_F - 14, 3.0, W, z=2.0, r=0.9, bevel=0.4)
-            else:
-                BP.box(bay_c, s * hy_, BAY_W / 2 - 8, 1.0, 3.0, W, z=2.0, r=0.9, bevel=0.4)
-    for sx in (-1, 1):
-        for sy in (-1, 1):
-            BP.slab(circle(bay_c + sx * 28, sy * 62, 5.0), 3.0, W, z=1.2 + 1.5, bevel=0.6, holes=[(bay_c + sx * 28, sy * 62, 2.3)])
-    BP.box(bay_c, HY_F - 26, 30, 5.2, 1.4, W, z=1.2 + 0.7, r=1.4, bevel=0.3)
-    BP.text("Finished model", 6.4, bay_c, HY_F - 26.2, 2.6, K.ink, italic=True)
-    for s in (-1, 1):
-        tube_w("lk", [(bay_c, s * (HY_F - 14)), (bay_c, s * HY_F)], 1.4, W, board)
-    tube_w("lk", [(bay_c + BAY_W / 2 - 8, 0), (xr, 0)], 1.4, W, board)
+    bw, bh = BAY_W / 2 - 8, 104.0
+    lvs = smooth_loop([(bay_c + x * 50.0, 52.0 + y * 50.0) for x, y in LIVER])
+    seats = [(lvs, 1.8, 1.5), (circle(bay_c, 8.0, 19.5), 1.8, 1.5), (rrect(bay_c + 6, -27.0, 17.0, 2.9, 1.0), 1.8, 1.5),
+             (circle(bay_c - 19, -27.0, 8.0, ry=6.4), 1.8, 1.5), (circle(bay_c - 17, -52.0, 12.0), 1.8, 1.5), (circle(bay_c + 17, -52.0, 12.0), 1.8, 1.5),
+             (rrect(bay_c, -80.0, 34.0, 4.6, 4.6), 1.8, 1.5)]
+    pins = [(bay_c - 13, 55.5, 2.3), (bay_c, 8.0, 2.3), (bay_c - 19, -27.0, 1.8), (bay_c - 17, -52.0, 1.6), (bay_c + 17, -52.0, 1.6)] + \
+           [(bay_c - 30 + 10 * i, -80.0, 1.3) for i in range(7)]
+    BP.slab(rrect(bay_c, 0, bw, bh, 6.0), 3.0, W, bevel=0.6, holes=pins, cuts=seats)
+    for (x_, y_, w_, h_) in ((bay_c, bh - 0.5, bw - 5, 1.0), (bay_c, -bh + 0.5, bw - 5, 1.0), (bay_c - bw + 0.5, 0, 1.0, bh - 5), (bay_c + bw - 0.5, 0, 1.0, bh - 5)):
+        BP.box(x_, y_, w_, h_, 2.0, W, z=1.5 + 1.0, r=0.9, bevel=0.4)
+    BP.box(bay_c, bh - 12, 26, 4.8, 1.2, W, z=1.5 + 0.6, r=1.4, bevel=0.3)
+    BP.text("Finished model", 6.0, bay_c, bh - 12.2, 2.7, K.ink, italic=True)
+    for s_ in (-1, 1):
+        for dx in (-22, 22):
+            tube_w("lk", [(bay_c + dx, s_ * bh), (bay_c + dx, s_ * HY_F)], 1.6, W, board)
+    tube_w("lk", [(bay_c + bw, 0), (xr, 0)], 1.6, W, board)
+    for y in (-60, 60):
+        tube_w("lk", [(bay_c + bw, y), (xr, y)], 1.4, W, board)
     # 支脚
     nfeet = 7
     for i in range(nfeet):
