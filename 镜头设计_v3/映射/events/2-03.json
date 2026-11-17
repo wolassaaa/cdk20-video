@@ -1,14 +1,23 @@
 {
+ "schema": "cdk20.events/1",
  "group": "2-03",
- "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频。接入验证用的手写事件表（不是成片设计）：台词 \"And we'll answer it with one case study: CDK20 in liver cancer.\" 每个实词一个画面事件，动作从 answer 一直接到句尾。词用总表 wid（剧本锚定）。",
+ "tool": "blender",
+ "note": "HKBU SCIE1007 课程作业的科普视频。样片一（设计语言_v1 第 11 节）：一条红料沿模板主流道流过，挑中第 3 个型腔（one case study），顶出克莱因蓝 CDK20 件，肝形矮墙长出，红料漫进肝里（cancer）。11-17 技术选型用的旧表备份在 _cache/2-03_events_tech_backup.json。",
  "holds": [],
  "events": [
-  {"eid": "runner_flow", "obj": "runner", "verb": "flow", "means": "answer：红料开始沿流道走", "land": {"word": "2-03.w003"}, "lead": 4, "until": {"word": "2-03.w008"}},
-  {"eid": "cavity_one", "obj": "cavity", "verb": "grow", "means": "one：只长出一个腔", "land": {"word": "2-03.w006"}, "lead": 10},
-  {"eid": "tag_case", "obj": "tag", "verb": "eject", "means": "case study：标签被顶出贴到腔上", "land": {"word": "2-03.w007"}, "lead": 8, "until": {"word": "2-03.w008"}},
-  {"eid": "part_cdk20", "obj": "cdk20", "verb": "grow", "means": "CDK20：克莱因蓝的件在腔里长满", "land": {"word": "2-03.w009"}, "lead": 14, "until": {"word": "2-03.w009"}},
-  {"eid": "liver_in", "obj": "liver", "verb": "grow", "means": "liver：肝的轮廓长出来托住它", "land": {"word": "2-03.w011"}, "lead": 8},
-  {"eid": "cancer_red", "obj": "liver", "verb": "flow", "means": "cancer：红料灌进肝轮廓，持续到句尾", "land": {"word": "2-03.w012"}, "lead": 4, "until": {"sentence_end": "2-03.s1"}}
+  {"id": "flow_in", "obj": "runner_red", "verb": "flow", "means": "And…with：红料头从左沿流进主流道，匀速向右", "at": {"word": "2-03.w001"}, "until": {"word": "2-03.w006", "edge": "start"}, "ease": "linear"},
+  {"id": "pass_1", "obj": "gate_pin_1", "verb": "move", "means": "answer：料头经过第 1 个浇口，浇口针点一下，没开", "at": {"word": "2-03.w003"}, "lead": 4, "until": {"dur": 6}},
+  {"id": "pass_2", "obj": "gate_pin_2", "verb": "move", "means": "with：经过第 2 个浇口，同样点一下", "at": {"word": "2-03.w005"}, "lead": 4, "until": {"dur": 6}},
+  {"id": "cam_push", "obj": "camera", "verb": "camera_to", "means": "with…CDK20：镜头从机位 B 推向第 3 个型腔，CDK20 时停稳", "at": {"word": "2-03.w009"}, "start": {"word": "2-03.w005"}},
+  {"id": "gate_one", "obj": "gate_pin_3", "verb": "retract", "means": "one：第 3 个浇口打开，料头拐进去", "at": {"word": "2-03.w006"}, "lead": 10},
+  {"id": "plate_case", "obj": "plate", "verb": "eject", "means": "case study：小标牌顶出落平，印 Case study", "at": {"word": "2-03.w007"}, "lead": 8, "until": {"word": "2-03.w008"}},
+  {"id": "fill", "obj": "cavity_fill", "verb": "flow", "means": "one…（停顿）：磨砂盖下红色漫开灌满，保压", "at": {"word": "2-03.w006"}, "until": {"dur": 86}, "ease": "out"},
+  {"id": "source_line", "obj": "source_line", "verb": "appear", "means": "study：左下角出处行", "at": {"word": "2-03.w008"}, "until": {"dur": 12}, "tool": "remotion"},
+  {"id": "cdk20_eject", "obj": "cdk20_part", "verb": "eject", "means": "CDK20：盖子移开，蓝件被三根顶针顶起，再慢转 20°", "at": {"word": "2-03.w009"}, "lead": 14, "until": {"word": "2-03.w009"}},
+  {"id": "ink_cdk20", "obj": "ink_cdk20", "verb": "appear", "means": "CDK20：型腔下方盖印 CDK20", "at": {"word": "2-03.w009"}, "until": {"dur": 6}, "tool": "remotion"},
+  {"id": "cam_pull", "obj": "camera", "verb": "camera_to", "means": "in liver：镜头略拉远，让整个肝形进画", "at": {"word": "2-03.w011", "off": 12}, "lead": 36},
+  {"id": "liver_grow", "obj": "liver_wall", "verb": "grow", "means": "liver：肝形刻线长成骨白矮墙", "at": {"word": "2-03.w011"}, "lead": 8, "until": {"word": "2-03.w011"}},
+  {"id": "cancer_red", "obj": "liver_red", "verb": "flow", "means": "cancer：红料漫进肝形矮墙里，绕着蓝件铺开，到句尾", "at": {"word": "2-03.w012"}, "lead": 4, "until": {"sentence_end": "2-03.s1"}},
+  {"id": "ink_cancer", "obj": "ink_cancer", "verb": "appear", "means": "cancer：肝形下方盖印 liver cancer（cancer 红色斜体）", "at": {"word": "2-03.w012"}, "until": {"dur": 6}, "tool": "remotion"}
  ]
 }
