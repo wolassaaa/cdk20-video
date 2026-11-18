@@ -1,0 +1,144 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "5-02",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜 5-02（C）讲解卡：七个小瓶；Six 的六个瓶变灰往下沉，one stood out 剩下一个往上浮、发亮；Its name? 问号，001 标签写出；页面 OnCam502.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "frame",
+   "obj": "frame",
+   "verb": "grow",
+   "at": {
+    "word": "5-02.w001",
+    "off": 0
+   },
+   "means": "Six：讲解卡外框画出",
+   "tool": "remotion",
+   "lead": 22,
+   "until": {
+    "word": "5-02.w001"
+   }
+  },
+  {
+   "id": "vials",
+   "obj": "vials",
+   "verb": "grow",
+   "at": {
+    "word": "5-02.w001",
+    "off": 0
+   },
+   "means": "Six：七个小瓶长出",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "5-02.w001"
+   }
+  },
+  {
+   "id": "grey",
+   "obj": "grey",
+   "verb": "morph",
+   "at": {
+    "word": "5-02.w004",
+    "off": 0
+   },
+   "means": "barely：六个瓶变灰",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "5-02.w004"
+   }
+  },
+  {
+   "id": "sink",
+   "obj": "sink",
+   "verb": "move",
+   "at": {
+    "word": "5-02.w006",
+    "off": 0
+   },
+   "means": "on：六个瓶往下沉",
+   "tool": "remotion",
+   "lead": 28,
+   "until": {
+    "word": "5-02.w006"
+   }
+  },
+  {
+   "id": "rise",
+   "obj": "rise",
+   "verb": "move",
+   "at": {
+    "word": "5-02.w008",
+    "off": 0
+   },
+   "means": "one：剩下一个往上浮",
+   "tool": "remotion",
+   "lead": 22,
+   "until": {
+    "word": "5-02.w008"
+   }
+  },
+  {
+   "id": "glow",
+   "obj": "glow",
+   "verb": "morph",
+   "at": {
+    "word": "5-02.w009",
+    "off": 0
+   },
+   "means": "stood：发亮，红色光线",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "5-02.w009"
+   }
+  },
+  {
+   "id": "big",
+   "obj": "big",
+   "verb": "morph",
+   "at": {
+    "word": "5-02.w010",
+    "off": 0
+   },
+   "means": "out：瓶放大并轻抖",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "5-02.w010"
+   }
+  },
+  {
+   "id": "q",
+   "obj": "q",
+   "verb": "appear",
+   "at": {
+    "word": "5-02.w012",
+    "off": 0
+   },
+   "means": "name：红问号",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "5-02.w012"
+   }
+  },
+  {
+   "id": "tag",
+   "obj": "tag",
+   "verb": "appear",
+   "at": {
+    "word": "5-02.w013",
+    "off": 0
+   },
+   "means": "001：问号换成标签 001",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "5-02.w013"
+   }
+  }
+ ]
+}
