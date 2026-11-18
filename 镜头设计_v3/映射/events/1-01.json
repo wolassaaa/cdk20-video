@@ -1,0 +1,99 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "1-01",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜 1-01（A），版式照 2-02：人在左，右边讲解位是说明书零件。香港地图、四个小人（说到 die 变红）、肝。跟踪：讲解位随头 0.2 倍。页面 src/v3/manual/OnCam101.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "note_day",
+   "obj": "note_day",
+   "verb": "appear",
+   "at": {
+    "word": "1-01.w002",
+    "off": 0
+   },
+   "means": "day：红笔 every day",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "1-01.w005"
+   }
+  },
+  {
+   "id": "hk",
+   "obj": "hk_map",
+   "verb": "grow",
+   "at": {
+    "word": "1-01.w004",
+    "off": 0
+   },
+   "means": "Hong Kong：香港地图长出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "1-01.w005"
+   }
+  },
+  {
+   "id": "people",
+   "obj": "people",
+   "verb": "grow",
+   "at": {
+    "word": "1-01.w007",
+    "off": 0
+   },
+   "means": "four：四个小人依次长出",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "1-01.w008"
+   }
+  },
+  {
+   "id": "plate",
+   "obj": "plate_4",
+   "verb": "appear",
+   "at": {
+    "word": "1-01.w007",
+    "off": 0
+   },
+   "means": "four：数字牌 ~4 a day",
+   "tool": "remotion",
+   "until": {
+    "word": "1-01.w008"
+   }
+  },
+  {
+   "id": "die",
+   "obj": "people",
+   "verb": "morph",
+   "at": {
+    "word": "1-01.w009",
+    "off": 0
+   },
+   "means": "die：四个小人流成红色",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "1-01.w009",
+    "off": 10
+   }
+  },
+  {
+   "id": "liver",
+   "obj": "liver",
+   "verb": "grow",
+   "at": {
+    "word": "1-01.w011",
+    "off": 0
+   },
+   "means": "liver cancer：肝长出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "sentence_end": true
+   }
+  }
+ ]
+}

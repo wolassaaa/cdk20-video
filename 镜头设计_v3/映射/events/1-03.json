@@ -1,0 +1,100 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "1-03",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜 1-03（A）。讲解位：一个量杯式的刻度框；我们已经有药（胶囊、输液袋）；药效柱升到 good enough 线下面就停，红括号标出差距。页面 src/v3/manual/OnCam103.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "frame",
+   "obj": "gauge",
+   "verb": "grow",
+   "at": {
+    "word": "1-03.w003",
+    "off": 0
+   },
+   "means": "thing：刻度框画出",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "word": "1-03.w003",
+    "off": 12
+   }
+  },
+  {
+   "id": "caps",
+   "obj": "capsule",
+   "verb": "grow",
+   "at": {
+    "word": "1-03.w005",
+    "off": 0
+   },
+   "means": "already：胶囊长出",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "1-03.w006"
+   }
+  },
+  {
+   "id": "bag",
+   "obj": "ivbag",
+   "verb": "grow",
+   "at": {
+    "word": "1-03.w007",
+    "off": 0
+   },
+   "means": "medicines：输液袋长出",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "bar",
+   "obj": "bar",
+   "verb": "grow",
+   "at": {
+    "word": "1-03.w008",
+    "off": 0
+   },
+   "means": "Just not：药效柱升起，到 not 停在线下",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "1-03.w009"
+   }
+  },
+  {
+   "id": "target",
+   "obj": "target_line",
+   "verb": "appear",
+   "at": {
+    "word": "1-03.w010",
+    "off": 0
+   },
+   "means": "good enough：虚线和字 good enough 画出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "1-03.w011"
+   }
+  },
+  {
+   "id": "gap",
+   "obj": "gap_bracket",
+   "verb": "appear",
+   "at": {
+    "word": "1-03.w011",
+    "off": 0
+   },
+   "means": "enough ones：红括号标出差距",
+   "tool": "remotion",
+   "lead": 2,
+   "until": {
+    "sentence_end": true
+   }
+  }
+ ]
+}
