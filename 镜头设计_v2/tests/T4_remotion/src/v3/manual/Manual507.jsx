@@ -91,6 +91,7 @@ const Scene = () => {
         let [x, y] = gpos(i);
         x = ND[0] + (x - ND[0]) * t; y = ND[1] + (y - ND[1]) * t - Math.sin(Math.PI * t) * 60;
         if (k >= 0) { const p = span(six, k * 0.08, k * 0.08 + 0.6); x += (1110 + 100 * k - x) * p; y += (640 - y) * p; }
+        else { const r = i - PICK.filter((q) => q < i).length, p = span(six, 0.3, 1); x += (1110 + 125 * (r % 5) - x) * p; y += (300 + 90 * Math.floor(r / 5) - y) * p; }
         const dim = k < 0 ? 1 - 0.65 * six : 1;
         return <div key={i} style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, opacity: dim * span(t, 0, 0.3)}}>
           <Part name="key" cx={x} cy={y} w={k >= 0 ? 92 : 104} at={E.s16.s + i} f={f} gate={[0, 0.5]} flood={10} />
