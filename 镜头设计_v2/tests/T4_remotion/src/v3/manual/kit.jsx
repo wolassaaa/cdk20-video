@@ -2,6 +2,7 @@
 // 零件图由 镜头设计_v3/inserts/manual_parts.py 从零件库正上方图做出（<名>_c.png 平涂、<名>_l.png 线稿、meta.json 尺寸）。
 import React from "react";
 import {Easing, Img, staticFile, continueRender, delayRender} from "remotion";
+import META from "./parts_meta.json";   // 零件图真实宽高（manual_parts.py 写的 meta.json 的拷贝）
 
 export const PAPER = "#EDE9DF", INK = "#1F1E1C", SOFT = "#6E6B63", RED = "#C8102E";
 export const ease = Easing.bezier(0.33, 0, 0.2, 1);
@@ -16,7 +17,9 @@ if (typeof window !== "undefined") {
 }
 
 // 零件：线稿先画出（左→右），平涂色从浇口点漫开，前沿一圈亮料，长满轻微过冲
-export const Part = ({name, cx, cy, w, ar, at, gate = [0.5, 1], f, wipe = 12, flood = 24, children}) => {
+export const Part = ({name, cx, cy, w, ar: arGiven, at, gate = [0.5, 1], f, wipe = 12, flood = 24, children}) => {
+  // 宽高比一律按零件图实际尺寸，页面传的 ar 只在尺寸表里没有这个零件时才用
+  const ar = META[name] ? META[name][0] / META[name][1] : arGiven;
   const h = w / ar;
   const pl = span(f, at - 2, at - 2 + wipe, out);
   const pc = span(f, at + 3, at + 3 + flood, Easing.inOut(Easing.quad));

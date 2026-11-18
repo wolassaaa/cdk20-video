@@ -1,220 +1,219 @@
 {
  "schema": "cdk20.events/1",
  "group": "3-08",
- "tool": "warp_source",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/3-08.json",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 3-08（B）：看不见的锁。设计钥匙要看见锁；CDK20 只剩虚线轮廓和问号、never measured；测结构很难，只有一小部分蛋白测过（点阵，不写比例）；没有三维形状，电脑预测也贵、慢、难。页面 Manual308.jsx。",
  "holds": [],
  "events": [
   {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
+   "id": "title",
+   "obj": "title",
+   "verb": "appear",
    "at": {
-    "word": "3-08.w001",
-    "off": -9
+    "word": "3-08.w004",
+    "off": 0
    },
+   "means": "problem：标题",
+   "tool": "remotion",
+   "lead": 10,
    "until": {
-    "dur": 336
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.00→5.50 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.0,
-    5.5
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage01",
-   "obj": "footage",
-   "verb": "move",
+   "id": "key",
+   "obj": "key",
+   "verb": "grow",
+   "at": {
+    "word": "3-08.w006",
+    "off": 0
+   },
+   "means": "design a key：钥匙长出",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "3-08.w009"
+   }
+  },
+  {
+   "id": "eye",
+   "obj": "eye",
+   "verb": "appear",
+   "at": {
+    "word": "3-08.w012",
+    "off": 0
+   },
+   "means": "see the lock：眼睛和视线",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "3-08.w014"
+   }
+  },
+  {
+   "id": "hide",
+   "obj": "cdk_ghost",
+   "verb": "morph",
+   "at": {
+    "word": "3-08.w016",
+    "off": 0
+   },
+   "means": "no one had measured：CDK20 变成虚线轮廓加问号",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "3-08.w020"
+   }
+  },
+  {
+   "id": "stamp",
+   "obj": "stamp",
+   "verb": "snap",
+   "at": {
+    "word": "3-08.w021",
+    "off": 0
+   },
+   "means": "shape：盖章 never measured",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "lab",
+   "obj": "flask",
+   "verb": "grow",
    "at": {
     "word": "3-08.w027",
     "off": 0
    },
+   "means": "hard lab work：烧瓶和日历",
+   "tool": "remotion",
+   "lead": 10,
    "until": {
-    "dur": 27
-   },
-   "ease": "linear",
-   "means": "旧动画源片 5.50→5.78 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    5.5,
-    5.783
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "3-08.w029"
+   }
   },
   {
-   "id": "footage02",
-   "obj": "footage",
-   "verb": "move",
+   "id": "cal",
+   "obj": "cal",
+   "verb": "grow",
    "at": {
     "word": "3-08.w029",
-    "off": -1
-   },
-   "until": {
-    "dur": 202
-   },
-   "ease": "linear",
-   "means": "旧动画源片 5.78→9.77 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    5.783,
-    9.767
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage03",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "3-08.w037",
     "off": 0
    },
+   "means": "work：日历翻页",
+   "tool": "remotion",
+   "lead": 6,
    "until": {
-    "dur": 29
-   },
-   "ease": "linear",
-   "means": "旧动画源片 9.77→10.25 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    9.767,
-    10.25
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "3-08.w031"
+   }
   },
   {
-   "id": "footage04",
-   "obj": "footage",
-   "verb": "move",
+   "id": "dots",
+   "obj": "dots",
+   "verb": "grow",
    "at": {
-    "word": "3-08.w039",
+    "word": "3-08.w036",
     "off": 0
    },
+   "means": "proteins：一大片蛋白点",
+   "tool": "remotion",
+   "lead": 40,
    "until": {
-    "dur": 149
-   },
-   "ease": "linear",
-   "means": "旧动画源片 10.25→15.18 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    10.25,
-    15.183
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "3-08.w037"
+   }
   },
   {
-   "id": "footage05",
-   "obj": "footage",
-   "verb": "move",
+   "id": "few",
+   "obj": "dots_few",
+   "verb": "appear",
    "at": {
-    "word": "3-08.w044",
+    "word": "3-08.w040",
     "off": 0
    },
+   "means": "measured：只有少数点变实",
+   "tool": "remotion",
+   "lead": 20,
    "until": {
-    "dur": 43
-   },
-   "ease": "linear",
-   "means": "旧动画源片 15.18→16.02 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    15.183,
-    16.017
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage06",
-   "obj": "footage",
-   "verb": "move",
+   "id": "no3d",
+   "obj": "cdk_ghost",
+   "verb": "appear",
    "at": {
-    "word": "3-08.w045",
+    "word": "3-08.w043",
     "off": 0
    },
+   "means": "Without a 3D shape：虚线轮廓闪一下、标 no 3D shape",
+   "tool": "remotion",
+   "lead": 20,
    "until": {
-    "dur": 16
-   },
-   "ease": "linear",
-   "means": "旧动画源片 16.02→16.32 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    16.017,
-    16.317
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "3-08.w045"
+   }
   },
   {
-   "id": "footage07",
-   "obj": "footage",
-   "verb": "move",
+   "id": "chip",
+   "obj": "chip",
+   "verb": "grow",
    "at": {
     "word": "3-08.w046",
     "off": 0
    },
+   "means": "computer predictions：芯片",
+   "tool": "remotion",
+   "lead": 10,
    "until": {
-    "dur": 33
-   },
-   "ease": "linear",
-   "means": "旧动画源片 16.32→17.02 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    16.317,
-    17.017
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "3-08.w048"
+   }
   },
   {
-   "id": "footage08",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "3-08.w047",
-    "off": -1
-   },
-   "until": {
-    "dur": 158
-   },
-   "ease": "linear",
-   "means": "旧动画源片 17.02→18.98 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    17.017,
-    18.983
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage09",
-   "obj": "footage",
-   "verb": "move",
+   "id": "exp",
+   "obj": "w_exp",
+   "verb": "appear",
    "at": {
     "word": "3-08.w051",
     "off": 0
    },
+   "means": "expensive",
+   "tool": "remotion",
+   "lead": 6,
    "until": {
-    "dur": 74
-   },
-   "ease": "linear",
-   "means": "旧动画源片 18.98→20.15 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    18.983,
-    20.15
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "3-08.w052"
+   }
   },
   {
-   "id": "footage10",
-   "obj": "footage",
-   "verb": "move",
+   "id": "slow",
+   "obj": "w_slow",
+   "verb": "appear",
    "at": {
     "word": "3-08.w052",
     "off": 0
    },
+   "means": "slow",
+   "tool": "remotion",
+   "lead": 6,
    "until": {
-    "dur": 76
+    "word": "3-08.w053"
+   }
+  },
+  {
+   "id": "diff",
+   "obj": "w_diff",
+   "verb": "appear",
+   "at": {
+    "word": "3-08.w054",
+    "off": 0
    },
-   "ease": "linear",
-   "means": "旧动画源片 20.15→21.65 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    20.15,
-    21.65
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "means": "difficult",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   }
   }
  ]
 }

@@ -1,182 +1,204 @@
 {
  "schema": "cdk20.events/1",
  "group": "3-04",
- "tool": "warp_source",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/3-04.json",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 3-04（D）：锁就是 CDK20；酶有化学工作（齿轮）；口袋放大，ATP 进去；钥匙顶走 ATP 占住口袋，齿轮停。页面 Manual304.jsx。",
  "holds": [],
  "events": [
   {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
+   "id": "title",
+   "obj": "title",
+   "verb": "appear",
    "at": {
     "word": "3-04.w001",
-    "off": -9
+    "off": 0
    },
+   "means": "Our：标题写出",
+   "tool": "remotion",
+   "lead": 4,
    "until": {
-    "dur": 28
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.00→0.28 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.0,
-    0.283
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "3-04.w002"
+   }
   },
   {
-   "id": "footage01",
-   "obj": "footage",
-   "verb": "move",
+   "id": "lock",
+   "obj": "lock",
+   "verb": "grow",
    "at": {
     "word": "3-04.w002",
     "off": 0
    },
+   "means": "lock：锁长出",
+   "tool": "remotion",
+   "lead": 8,
    "until": {
-    "dur": 31
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.28→0.62 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.283,
-    0.617
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "3-04.w003"
+   }
   },
   {
-   "id": "footage02",
-   "obj": "footage",
-   "verb": "move",
+   "id": "cdk",
+   "obj": "cdk20",
+   "verb": "grow",
    "at": {
     "word": "3-04.w004",
-    "off": -1
+    "off": 0
    },
+   "means": "CDK20：CDK20 长出，锁上画等号",
+   "tool": "remotion",
+   "lead": 10,
    "until": {
-    "dur": 107
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.62→1.78 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.617,
-    1.783
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage03",
-   "obj": "footage",
-   "verb": "move",
+   "id": "enz",
+   "obj": "label_enzyme",
+   "verb": "appear",
    "at": {
     "word": "3-04.w007",
-    "off": -1
+    "off": 0
    },
+   "means": "enzyme：标签 an enzyme",
+   "tool": "remotion",
+   "lead": 4,
    "until": {
-    "dur": 74
-   },
-   "ease": "linear",
-   "means": "旧动画源片 1.78→3.87 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    1.783,
-    3.867
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "3-04.w008"
+   }
   },
   {
-   "id": "footage04",
-   "obj": "footage",
-   "verb": "move",
+   "id": "prot",
+   "obj": "label_job",
+   "verb": "appear",
    "at": {
     "word": "3-04.w009",
     "off": 0
    },
+   "means": "protein with a chemical job：标签写出",
+   "tool": "remotion",
+   "lead": 4,
    "until": {
-    "dur": 27
-   },
-   "ease": "linear",
-   "means": "旧动画源片 3.87→4.27 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    3.867,
-    4.267
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "3-04.w012"
+   }
   },
   {
-   "id": "footage05",
-   "obj": "footage",
-   "verb": "move",
+   "id": "gear",
+   "obj": "gear",
+   "verb": "grow",
    "at": {
-    "word": "3-04.w010",
+    "word": "3-04.w013",
     "off": 0
    },
+   "means": "job：齿轮长出开始转",
+   "tool": "remotion",
+   "lead": 10,
    "until": {
-    "dur": 510
-   },
-   "ease": "linear",
-   "means": "旧动画源片 4.27→14.30 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    4.267,
-    14.3
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage06",
-   "obj": "footage",
+   "id": "hole",
+   "obj": "pocket_ring",
+   "verb": "appear",
+   "at": {
+    "word": "3-04.w015",
+    "off": 0
+   },
+   "means": "keyhole：口袋处红圈",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "3-04.w016"
+   }
+  },
+  {
+   "id": "inset",
+   "obj": "inset",
+   "verb": "grow",
+   "at": {
+    "word": "3-04.w018",
+    "off": 0
+   },
+   "means": "pocket：放大圈长出，画出口袋",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "3-04.w021"
+   }
+  },
+  {
+   "id": "atp",
+   "obj": "atp",
+   "verb": "move",
+   "at": {
+    "word": "3-04.w027",
+    "off": 0
+   },
+   "means": "grabs a small molecule called ATP：ATP 滑进口袋",
+   "tool": "remotion",
+   "lead": 110,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "out",
+   "obj": "atp",
    "verb": "move",
    "at": {
     "word": "3-04.w030",
     "off": 0
    },
+   "means": "plug that pocket：ATP 被顶出去",
+   "tool": "remotion",
+   "lead": 30,
    "until": {
-    "dur": 60
-   },
-   "ease": "linear",
-   "means": "旧动画源片 14.30→15.35 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    14.3,
-    15.35
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "3-04.w031"
+   }
   },
   {
-   "id": "footage07",
-   "obj": "footage",
+   "id": "key",
+   "obj": "key",
    "verb": "move",
    "at": {
-    "word": "3-04.w033",
+    "word": "3-04.w034",
     "off": 0
    },
+   "means": "right key：钥匙插进口袋",
+   "tool": "remotion",
+   "lead": 50,
    "until": {
-    "dur": 113
-   },
-   "ease": "linear",
-   "means": "旧动画源片 15.35→17.97 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    15.35,
-    17.967
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "3-04.w035"
+   }
   },
   {
-   "id": "footage08",
-   "obj": "footage",
-   "verb": "move",
+   "id": "stop",
+   "obj": "gear",
+   "verb": "appear",
    "at": {
     "word": "3-04.w038",
     "off": 0
    },
+   "means": "can't：齿轮停、红叉",
+   "tool": "remotion",
+   "lead": 4,
    "until": {
-    "dur": 64
+    "word": "3-04.w039"
+   }
+  },
+  {
+   "id": "plate",
+   "obj": "plate",
+   "verb": "appear",
+   "at": {
+    "word": "3-04.w041",
+    "off": 0
    },
-   "ease": "linear",
-   "means": "旧动画源片 17.97→18.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    17.967,
-    18.45
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "means": "job：字牌 blocked",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   }
   }
  ]
 }

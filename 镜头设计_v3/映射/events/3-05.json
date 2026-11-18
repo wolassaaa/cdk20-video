@@ -1,163 +1,189 @@
 {
  "schema": "cdk20.events/1",
  "group": "3-05",
- "tool": "warp_source",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/3-05.json",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 3-05（D）：为什么是 CDK20。香港团队；52 个肿瘤样本点阵 36 个变红；高水平 → 晚期、生存短（因果链，不画曲线）；调低 CDK20 细胞长得慢。页面 Manual305.jsx。",
  "holds": [],
  "events": [
   {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
+   "id": "title",
+   "obj": "title",
+   "verb": "appear",
    "at": {
     "word": "3-05.w001",
-    "off": -9
-   },
-   "until": {
-    "dur": 218
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.00→3.95 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.0,
-    3.95
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage01",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "3-05.w012",
     "off": 0
    },
+   "means": "Why this lock：标题",
+   "tool": "remotion",
+   "lead": 4,
    "until": {
-    "dur": 40
-   },
-   "ease": "linear",
-   "means": "旧动画源片 3.95→4.60 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    3.95,
-    4.6
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "3-05.w003"
+   }
   },
   {
-   "id": "footage02",
-   "obj": "footage",
-   "verb": "move",
+   "id": "hk",
+   "obj": "hk",
+   "verb": "grow",
    "at": {
-    "word": "3-05.w013",
+    "word": "3-05.w006",
     "off": 0
    },
+   "means": "Hong Kong team：香港地图和中大",
+   "tool": "remotion",
+   "lead": 10,
    "until": {
-    "dur": 24
-   },
-   "ease": "linear",
-   "means": "旧动画源片 4.60→4.90 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    4.6,
-    4.9
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage03",
-   "obj": "footage",
-   "verb": "move",
+   "id": "grid",
+   "obj": "grid",
+   "verb": "grow",
    "at": {
-    "word": "3-05.w014",
+    "word": "3-05.w010",
     "off": 0
    },
+   "means": "36：52 个点阵画出",
+   "tool": "remotion",
+   "lead": 8,
    "until": {
-    "dur": 48
-   },
-   "ease": "linear",
-   "means": "旧动画源片 4.90→5.90 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    4.9,
-    5.9
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "3-05.w012"
+   }
   },
   {
-   "id": "footage04",
-   "obj": "footage",
-   "verb": "move",
+   "id": "red",
+   "obj": "grid_red",
+   "verb": "appear",
    "at": {
     "word": "3-05.w015",
     "off": 0
    },
+   "means": "CDK20 was higher：36 个点逐个变红，计数跳到 36",
+   "tool": "remotion",
+   "lead": 60,
    "until": {
-    "dur": 65
-   },
-   "ease": "linear",
-   "means": "旧动画源片 5.90→6.70 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    5.9,
-    6.7
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "3-05.w022"
+   }
   },
   {
-   "id": "footage05",
-   "obj": "footage",
-   "verb": "move",
+   "id": "cmp",
+   "obj": "compare",
+   "verb": "appear",
    "at": {
-    "word": "3-05.w017",
+    "word": "3-05.w021",
     "off": 0
    },
+   "means": "non-tumour tissue：tumour vs nearby tissue 两个小柱",
+   "tool": "remotion",
+   "lead": 6,
    "until": {
-    "dur": 25
-   },
-   "ease": "linear",
-   "means": "旧动画源片 6.70→6.98 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    6.7,
-    6.983
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage06",
-   "obj": "footage",
-   "verb": "move",
+   "id": "high",
+   "obj": "chain1",
+   "verb": "appear",
    "at": {
-    "word": "3-05.w018",
+    "word": "3-05.w023",
     "off": 0
    },
+   "means": "High levels：链头 high CDK20",
+   "tool": "remotion",
+   "lead": 4,
    "until": {
-    "dur": 631
-   },
-   "ease": "linear",
-   "means": "旧动画源片 6.98→20.52 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    6.983,
-    20.517
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "3-05.w024"
+   }
   },
   {
-   "id": "footage07",
-   "obj": "footage",
+   "id": "late",
+   "obj": "chain_late",
    "verb": "move",
    "at": {
-    "word": "3-05.w040",
+    "word": "3-05.w027",
     "off": 0
    },
+   "means": "later-stage tumours：箭头到 later stage",
+   "tool": "remotion",
+   "lead": 10,
    "until": {
-    "dur": 61
+    "word": "3-05.w028"
+   }
+  },
+  {
+   "id": "surv",
+   "obj": "chain_surv",
+   "verb": "move",
+   "at": {
+    "word": "3-05.w031",
+    "off": 0
    },
-   "ease": "linear",
-   "means": "旧动画源片 20.52→21.68 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    20.517,
-    21.683
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "means": "shorter survival：箭头到 shorter survival",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "knob",
+   "obj": "knob",
+   "verb": "grow",
+   "at": {
+    "word": "3-05.w033",
+    "off": 0
+   },
+   "means": "turning：旋钮长出",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "3-05.w034"
+   }
+  },
+  {
+   "id": "down",
+   "obj": "knob",
+   "verb": "move",
+   "at": {
+    "word": "3-05.w035",
+    "off": 0
+   },
+   "means": "down：旋钮拧低",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "3-05.w036"
+   }
+  },
+  {
+   "id": "cells",
+   "obj": "cells",
+   "verb": "grow",
+   "at": {
+    "word": "3-05.w039",
+    "off": 0
+   },
+   "means": "cells：两团细胞并排长",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "3-05.w040"
+   }
+  },
+  {
+   "id": "slow",
+   "obj": "cells_slow",
+   "verb": "morph",
+   "at": {
+    "word": "3-05.w042",
+    "off": 0
+   },
+   "means": "slowed their growth：右边一团长得慢，红批注",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "sentence_end": true
+   }
   }
  ]
 }

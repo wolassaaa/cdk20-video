@@ -30,11 +30,20 @@ fi
 if [ "$TASK" = CUT ]; then
   PROMPT="HKBU SCIE1007 课程作业的科普视频。现在是 $(date '+%Y-%m-%d %H:%M') 韩国时间，写时间就用它。你是这个项目的剪辑助理。先完整读一遍 $ROOT/镜头设计_v3/粗剪/粗剪规则.md，再读 $ROOT/镜头设计_v3/粗剪/cut_v4_report.md 和 cut_v4.json，然后照规则第二节 C1–C6 逐条检查，按第四节交 粗剪检查.md。看图用 Read 打开 _check 里的 jpg。只用这两条命令：bash _env/ft.sh cutframe <秒>；bash _env/ft.sh help。不删任何东西，不运行 git，不改规则和程序。"
 fi
+if [ "$TASK" = WATCH ]; then
+  PROMPT="HKBU SCIE1007 课程作业的科普视频。现在是 $(date '+%Y-%m-%d %H:%M') 韩国时间。你是渲染监督员。先读 $ROOT/镜头设计_v3/00_下次开工.md 最后一节和 $ROOT/镜头设计_v3/工作记录.md 最后 15 行。然后：1) 运行 bash _env/ft.sh status 看机器状态。2) 如果 blender 数为 0、而工作记录或 00_下次开工 里写着还有没渲完的任务，运行 bash _env/ft.sh resume 续跑（它自己会判断，已渲的帧会跳过）。3) D 盘或 C 盘剩余少于 10 GB 时，在报告第一行写【磁盘告急】。4) 把一段简短中文状态（时间、在跑什么、显卡占用、磁盘、有无报错、是否续跑过）追加到 $FLOW/日报/渲染监督_$(date +%Y%m%d).md；再把 $ROOT/素材流程_out/now.json 的 notes 第一条改成 '监督 HH:MM：<一句话状态>'（保持合法 JSON，不要写反斜杠），然后运行 bash _env/ft.sh board。只用 bash _env/ft.sh status / resume / board 和 Read/Write/Edit；不删任何东西，不杀进程，不运行 git，不改程序和工作记录。"
+fi
 # CUT <1..8>: one chapter per run (the relay answers 502 on the whole film in one go)
 if [ "$TASK" = CUT ] && [ "$WHO" != all ]; then
   PROMPT="$PROMPT 这一次只检查段号以 $WHO- 开头的段（第 $WHO 章），别的段不看；结果写到 粗剪检查_S$WHO.md（不要写 粗剪检查.md），抽帧不超过 12 张。"
 fi
-case "$TASK" in G1|G4|G5|G6|CUT) MODEL=$VISION ;; G3|G7) MODEL=$HEAVY ;; *) MODEL=$LIGHT ;; esac
+if [ "$TASK" = PAGE ]; then
+  PROMPT="HKBU SCIE1007 课程作业的科普视频。现在是 $(date '+%Y-%m-%d %H:%M') 韩国时间。你是二维页面助理。先完整读 $ROOT/镜头设计_v3/映射/GLM页面手册.md，再读 $ROOT/镜头设计_v3/映射/GLM页面任务.md 里段 $WHO 那一节，然后只做段 $WHO：写事件表、写页面、跑检查，改到检查表全过，最后按手册第 7 节写报告。如果这段目录里已有 look_report.md 且第一行是'看图：不过'，这次就照它逐条改页面，再跑 pagecheck。只用这几条命令：bash _env/ft.sh pageprep $WHO；bash _env/ft.sh pagecheck $WHO；bash _env/ft.sh pagestills $WHO；bash _env/ft.sh help。只许写手册第 2 节列出的文件。不删任何东西，不运行 git，不改别的段的文件、不改 kit.jsx 和 oncam.jsx。"
+fi
+if [ "$TASK" = PAGELOOK ]; then
+  PROMPT="HKBU SCIE1007 课程作业的科普视频。现在是 $(date '+%Y-%m-%d %H:%M') 韩国时间。你是二维页面的看片员。先读 $ROOT/镜头设计_v3/映射/GLM页面手册.md 第 3、5 节和 $ROOT/镜头设计_v3/映射/GLM页面任务.md 里段 $WHO 那一节。再读这段的 report.md（在 $ROOT/镜头设计_v3/映射/_cache/pages/ 下，合成名见手册第 1 节），用 Read 逐张打开里面列出的静帧 png。对每张图查：字或零件有没有互相重叠、压线、出框、被裁掉；出镜页图形有没有挡到人；字是不是太小看不清；画面是不是空、和任务单说的内容对不对；有没有错字。把结果写到同一目录的 look_report.md：第一行写 '看图：过' 或 '看图：不过'，下面逐张列问题（写清在哪个位置、哪个元素、建议怎么挪）。只用 Read 和 Write，只写 look_report.md。不删任何东西，不运行 git，不改页面代码。"
+fi
+case "$TASK" in G1|G4|G5|G6|CUT|PAGELOOK) MODEL=$VISION ;; PAGE) MODEL=$HEAVY ;; G3|G7) MODEL=$HEAVY ;; *) MODEL=$LIGHT ;; esac
 [ -n "$GLM_MODEL_OVERRIDE" ] && MODEL=$GLM_MODEL_OVERRIDE
 case " $ALLOWED " in *" $MODEL "*) ;; *) echo "不允许的模型：$MODEL（只许 $ALLOWED）"; exit 2 ;; esac
 echo "model: $MODEL"
@@ -57,6 +66,14 @@ case "$1" in
   cutframe) case "$2" in *[!0-9.]*|"") echo "seconds must be a number"; exit 2 ;; esac
        mkdir -p "$ROOT/镜头设计_v3/粗剪/_check"
        exec "$ROOT/_env/ffmpeg/ffmpeg.exe" -v error -y -ss "$2" -i "$ROOT/镜头设计_v3/粗剪/cut_v4.mp4" -frames:v 1 -update 1 "$ROOT/镜头设计_v3/粗剪/_check/$2.jpg" ;;
+  cutbuild) case "$2" in v[0-9]*) ;; *) echo "version like v8"; exit 2 ;; esac
+       PYTHONIOENCODING=utf-8 exec "$PY" "$ROOT/镜头设计_v3/粗剪/build_cut_$2.py" ;;
+  cutcheck) case "$2" in v[0-9]*) ;; *) echo "version like v8"; exit 2 ;; esac
+       PYTHONIOENCODING=utf-8 exec "$PY" "$ROOT/镜头设计_v3/粗剪/_check/check_$2.py" "cut_$2" ;;
+  frame) case "$2" in v[0-9]*) ;; *) echo "version like v8"; exit 2 ;; esac
+       case "$3" in *[!0-9.]*|"") echo "seconds must be a number"; exit 2 ;; esac
+       mkdir -p "$ROOT/镜头设计_v3/粗剪/_check/glm"
+       exec "$ROOT/_env/ffmpeg/ffmpeg.exe" -v error -y -ss "$3" -i "$ROOT/镜头设计_v3/粗剪/cut_$2.mp4" -frames:v 1 -update 1 -vf scale=960:-1 "$ROOT/镜头设计_v3/粗剪/_check/glm/$2_$3.jpg" ;;
   mapbuild) M="$ROOT/镜头设计_v3/映射"; export PYTHONIOENCODING=utf-8
        "$PY" "$M/build_master.py" && "$PY" "$M/check_master.py"; "$PY" "$M/resolve.py" && exec "$PY" "$M/validate_events.py" --json "$M/_reports/validate.json" ;;
   mapcheck) case "$2" in [0-9]-[0-9][0-9]|W[0-9]) ;; *) echo "segment like 1-08"; exit 2 ;; esac
@@ -64,6 +81,13 @@ case "$1" in
        "$PY" "$M/validate_events.py" "$2" || exit 1
        case "$3" in "") exit 0 ;; *.mp4|*.mov) ;; *) echo "video must be .mp4 or .mov"; exit 2 ;; esac
        case "$4" in "") exec "$PY" "$M/check_sync.py" "$3" "$2" ;; *[!0-9.]*) echo "t0 must be seconds"; exit 2 ;; *) exec "$PY" "$M/check_sync.py" "$3" "$2" --t0 "$4" --dur "${5:-30}" ;; esac ;;
+  status) exec bash "$ROOT/_env/jobs/watch_status.sh" ;;
+  resume) exec bash "$ROOT/_env/jobs/resume_renders.sh" ;;
+  board) PYTHONIOENCODING=utf-8 exec "$PY" "$FLOW/board.py" ;;
+  pageprep|pagecheck|pagestills)
+       case "$2" in [0-9]-[0-9][0-9]|[0-9]-[0-9][0-9]+[0-9]-[0-9][0-9]|[0-9]-[0-9][0-9]+[0-9]-[0-9][0-9]+[0-9]-[0-9][0-9]+[0-9]-[0-9][0-9]) ;; *) echo "segment like 3-02 or 4-04+4-05"; exit 2 ;; esac
+       export PYTHONIOENCODING=utf-8; T="$ROOT/镜头设计_v3/映射/page_tool.py"
+       case "$1" in pageprep) exec "$PY" "$T" prep "$2" ;; pagecheck) exec "$PY" "$T" check "$2" ;; pagestills) exec "$PY" "$T" check "$2" --stills-only ;; esac ;;
   *) echo "bash _env/ft.sh run <A|B|C|D> <steps>   |   bash _env/ft.sh listen <A|B|C|D>   |   bash _env/ft.sh ffprobe <args>   |   bash _env/ft.sh grade"; "$PY" "$FLOW/run.py" --help ;;
 esac
 FT
