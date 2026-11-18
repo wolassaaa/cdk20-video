@@ -1,87 +1,215 @@
 {
  "schema": "cdk20.events/1",
  "group": "1-11",
- "tool": "warp_source",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/1-11.json",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 1 章二维说明书页。上方七站的路（线稿，和三维主料杆同一条），芯片快步走过前三站；下方两个框：一个真实案例（芯片和肝拼上）、香港（地图上红点）。出处 Ren et al., Chem. Sci. 2023。页面 src/v3/manual/Manual111.jsx。",
  "holds": [],
  "events": [
   {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
+   "id": "road",
+   "obj": "road",
+   "verb": "grow",
    "at": {
     "word": "1-11.w001",
-    "off": -9
+    "off": 0
    },
+   "means": "So：路的线稿从左画到右，七个站点圈依次落下",
+   "tool": "remotion",
+   "lead": 4,
    "until": {
-    "dur": 237
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.00→1.58 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.0,
-    1.58
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "1-11.w003"
+   }
   },
   {
-   "id": "footage01",
-   "obj": "footage",
+   "id": "chip",
+   "obj": "chip",
+   "verb": "grow",
+   "at": {
+    "word": "1-11.w003",
+    "off": 0
+   },
+   "means": "AI：芯片长在起点",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "dur": 24
+   }
+  },
+  {
+   "id": "chip_walk",
+   "obj": "chip",
    "verb": "move",
    "at": {
-    "word": "1-11.w010",
-    "off": -1
+    "word": "1-11.w008",
+    "off": 0
    },
+   "means": "walk the first steps faster：芯片快步走过前三站，带速度线",
+   "tool": "remotion",
+   "lead": 66,
    "until": {
-    "dur": 229
-   },
-   "ease": "linear",
-   "means": "旧动画源片 1.58→5.68 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    1.58,
-    5.68
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage02",
-   "obj": "footage",
-   "verb": "move",
+   "id": "q",
+   "obj": "question",
+   "verb": "appear",
+   "at": {
+    "word": "1-11.w008",
+    "off": 0
+   },
+   "means": "faster?：路上方手写问号 faster?",
+   "tool": "remotion",
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "step1",
+   "obj": "step_1",
+   "verb": "grow",
+   "at": {
+    "word": "1-11.w009",
+    "off": 0
+   },
+   "means": "Let's：第 1 步框画出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "dur": 30
+   }
+  },
+  {
+   "id": "title1",
+   "obj": "title_1",
+   "verb": "appear",
+   "at": {
+    "word": "1-11.w011",
+    "off": 0
+   },
+   "means": "one real case：标题 One real case 写出",
+   "tool": "remotion",
+   "until": {
+    "word": "1-11.w013"
+   }
+  },
+  {
+   "id": "chip2",
+   "obj": "chip_case",
+   "verb": "grow",
+   "at": {
+    "word": "1-11.w015",
+    "off": 0
+   },
+   "means": "AI tools：芯片零件长出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "1-11.w016"
+   }
+  },
+  {
+   "id": "liver",
+   "obj": "liver",
+   "verb": "grow",
+   "at": {
+    "word": "1-11.w019",
+    "off": 0
+   },
+   "means": "liver cancer：肝长出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "1-11.w020"
+   }
+  },
+  {
+   "id": "case_snap",
+   "obj": "chip_case",
+   "verb": "snap",
+   "at": {
+    "word": "1-11.w020",
+    "off": 18
+   },
+   "means": "芯片卡到肝上（拼），留接缝",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "step2",
+   "obj": "step_2",
+   "verb": "grow",
    "at": {
     "word": "1-11.w021",
     "off": 0
    },
+   "means": "And：第 2 步框画出",
+   "tool": "remotion",
+   "lead": 4,
    "until": {
-    "dur": 120
-   },
-   "ease": "linear",
-   "means": "旧动画源片 5.68→7.68 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    5.68,
-    7.68
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "dur": 30
+   }
   },
   {
-   "id": "footage03",
-   "obj": "footage",
-   "verb": "move",
+   "id": "title2",
+   "obj": "title_2",
+   "verb": "appear",
+   "at": {
+    "word": "1-11.w022",
+    "off": 0
+   },
+   "means": "part of it：标题 Starts here 写出",
+   "tool": "remotion",
+   "until": {
+    "word": "1-11.w025"
+   }
+  },
+  {
+   "id": "hk",
+   "obj": "hk_map",
+   "verb": "grow",
+   "at": {
+    "word": "1-11.w025",
+    "off": 0
+   },
+   "means": "starts：香港地图长出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "1-11.w027"
+   }
+  },
+  {
+   "id": "pin",
+   "obj": "pin",
+   "verb": "snap",
    "at": {
     "word": "1-11.w027",
     "off": 0
    },
+   "means": "here：红点落在地图上（沙田）",
+   "tool": "remotion",
+   "lead": 6,
    "until": {
-    "dur": 90
+    "dur": 16
+   }
+  },
+  {
+   "id": "hk_label",
+   "obj": "hk_label",
+   "verb": "appear",
+   "at": {
+    "word": "1-11.w029",
+    "off": 0
    },
-   "ease": "linear",
-   "means": "旧动画源片 7.68→11.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    7.68,
-    11.45
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "means": "Hong Kong：地图下印 Hong Kong",
+   "tool": "remotion",
+   "until": {
+    "sentence_end": true
+   }
   }
  ]
 }

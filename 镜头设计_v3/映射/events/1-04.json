@@ -1,125 +1,336 @@
 {
  "schema": "cdk20.events/1",
  "group": "1-04",
- "tool": "warp_source",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/1-04.json",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 1 章二维说明书页。三个步骤框：治疗换过一次（Nexavar → atezolizumab + bevacizumab）、五年后约三成在世、论文原话 huge unmet need。框下零件说明栏，出处行 Ren et al. 2023；HKCaR 2022。页面代码 src/v3/manual/Manual104.jsx。",
  "holds": [],
  "events": [
   {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
+   "id": "step1",
+   "obj": "step_1",
+   "verb": "grow",
    "at": {
     "word": "1-04.w001",
-    "off": -9
-   },
-   "until": {
-    "dur": 69
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.00→1.64 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.0,
-    1.64
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage01",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "1-04.w004",
     "off": 0
    },
+   "means": "The：第 1 步框一笔画出，步骤号落章",
+   "tool": "remotion",
+   "lead": 4,
    "until": {
-    "dur": 174
-   },
-   "ease": "linear",
-   "means": "旧动画源片 1.64→2.64 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    1.64,
-    2.64
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "dur": 30
+   }
   },
   {
-   "id": "footage02",
-   "obj": "footage",
-   "verb": "move",
+   "id": "title1",
+   "obj": "title_1",
+   "verb": "appear",
+   "at": {
+    "word": "1-04.w002",
+    "off": 0
+   },
+   "means": "standard first treatment：框标题写出",
+   "tool": "remotion",
+   "until": {
+    "word": "1-04.w004"
+   }
+  },
+  {
+   "id": "liver",
+   "obj": "liver",
+   "verb": "grow",
+   "at": {
+    "word": "1-04.w007",
+    "off": 0
+   },
+   "means": "liver cancer：肝零件线稿画出、红色从浇口漫开",
+   "tool": "remotion",
+   "lead": 2,
+   "until": {
+    "word": "1-04.w008",
+    "off": 24
+   }
+  },
+  {
+   "id": "note_changed",
+   "obj": "note_changed",
+   "verb": "appear",
    "at": {
     "word": "1-04.w011",
     "off": 0
    },
+   "means": "changed once：红笔笔记写出",
+   "tool": "remotion",
    "until": {
-    "dur": 132
-   },
-   "ease": "linear",
-   "means": "旧动画源片 2.64→4.24 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    2.64,
-    4.24
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "1-04.w012",
+    "off": 30
+   }
   },
   {
-   "id": "footage03",
-   "obj": "footage",
-   "verb": "move",
+   "id": "nexavar",
+   "obj": "capsule",
+   "verb": "grow",
+   "at": {
+    "word": "1-04.w014",
+    "off": 0
+   },
+   "means": "Nexavar：胶囊长出，下方印名字",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "dur": 24
+   }
+  },
+  {
+   "id": "arrow1",
+   "obj": "arrow_1",
+   "verb": "appear",
    "at": {
     "word": "1-04.w015",
     "off": 0
    },
+   "means": "to：手画箭头从胶囊指向右边",
+   "tool": "remotion",
+   "lead": 2,
    "until": {
-    "dur": 460
-   },
-   "ease": "linear",
-   "means": "旧动画源片 4.24→12.74 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    4.24,
-    12.74
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "1-04.w017",
+    "edge": "start"
+   }
   },
   {
-   "id": "footage04",
-   "obj": "footage",
-   "verb": "move",
+   "id": "nexavar_dim",
+   "obj": "capsule",
+   "verb": "morph",
    "at": {
-    "word": "1-04.w028",
+    "word": "1-04.w017",
     "off": 0
    },
+   "means": "combo：旧药褪成线稿（被换掉）",
+   "tool": "remotion",
+   "lead": 6,
    "until": {
-    "dur": 65
-   },
-   "ease": "linear",
-   "means": "旧动画源片 12.74→14.04 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    12.74,
-    14.04
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "dur": 30
+   }
   },
   {
-   "id": "footage05",
-   "obj": "footage",
-   "verb": "move",
+   "id": "bag1",
+   "obj": "ivbag_1",
+   "verb": "grow",
+   "at": {
+    "word": "1-04.w018",
+    "off": 0
+   },
+   "means": "atezolizumab：第一只输液袋长出，印名字",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "1-04.w018"
+   }
+  },
+  {
+   "id": "plus",
+   "obj": "plus",
+   "verb": "appear",
+   "at": {
+    "word": "1-04.w019",
+    "off": 0
+   },
+   "means": "plus：加号落下",
+   "tool": "remotion",
+   "until": {
+    "dur": 10
+   }
+  },
+  {
+   "id": "bag2",
+   "obj": "ivbag_2",
+   "verb": "grow",
+   "at": {
+    "word": "1-04.w020",
+    "off": 0
+   },
+   "means": "bevacizumab：第二只输液袋长出，印名字",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "1-04.w020"
+   }
+  },
+  {
+   "id": "combo_snap",
+   "obj": "ivbag_2",
+   "verb": "snap",
+   "at": {
+    "word": "1-04.w020",
+    "off": 34
+   },
+   "means": "两只袋子靠拢卡在一起，留接缝（合用）",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "step2",
+   "obj": "step_2",
+   "verb": "grow",
+   "at": {
+    "word": "1-04.w021",
+    "off": 0
+   },
+   "means": "But：第 2 步框画出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "dur": 30
+   }
+  },
+  {
+   "id": "people",
+   "obj": "people",
+   "verb": "grow",
+   "at": {
+    "word": "1-04.w023",
+    "off": 0
+   },
+   "means": "only about：十个小人依次长出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "1-04.w027"
+   }
+  },
+  {
+   "id": "three",
+   "obj": "people_3",
+   "verb": "morph",
+   "at": {
+    "word": "1-04.w025",
+    "off": 0
+   },
+   "means": "three：前三个小人亮起（实色），其余还是线稿",
+   "tool": "remotion",
+   "lead": 2,
+   "until": {
+    "word": "1-04.w027"
+   }
+  },
+  {
+   "id": "plate_3in10",
+   "obj": "plate_3in10",
+   "verb": "appear",
+   "at": {
+    "word": "1-04.w025",
+    "off": 0
+   },
+   "means": "three in ten：大号数字牌 ~3 in 10",
+   "tool": "remotion",
+   "until": {
+    "word": "1-04.w027",
+    "off": 10
+   }
+  },
+  {
+   "id": "rest_fade",
+   "obj": "people_7",
+   "verb": "morph",
    "at": {
     "word": "1-04.w030",
     "off": 0
    },
+   "means": "alive：其余七个褪成灰线",
+   "tool": "remotion",
+   "lead": 4,
    "until": {
-    "dur": 352
+    "word": "1-04.w030",
+    "off": 20
+   }
+  },
+  {
+   "id": "title2",
+   "obj": "title_2",
+   "verb": "appear",
+   "at": {
+    "word": "1-04.w031",
+    "off": 0
    },
-   "ease": "linear",
-   "means": "旧动画源片 14.04→20.73 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    14.04,
-    20.733
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "means": "five years on：框标题写出",
+   "tool": "remotion",
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "step3",
+   "obj": "step_3",
+   "verb": "grow",
+   "at": {
+    "word": "1-04.w034",
+    "off": 0
+   },
+   "means": "The：第 3 步框画出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "dur": 30
+   }
+  },
+  {
+   "id": "paper",
+   "obj": "paper",
+   "verb": "grow",
+   "at": {
+    "word": "1-04.w035",
+    "off": 0
+   },
+   "means": "study：论文零件长出",
+   "tool": "remotion",
+   "lead": 2,
+   "until": {
+    "word": "1-04.w037"
+   }
+  },
+  {
+   "id": "title3",
+   "obj": "title_3",
+   "verb": "appear",
+   "at": {
+    "word": "1-04.w038",
+    "off": 0
+   },
+   "means": "calls it：框标题 In the study's words 写出",
+   "tool": "remotion",
+   "until": {
+    "word": "1-04.w040"
+   }
+  },
+  {
+   "id": "quote",
+   "obj": "quote",
+   "verb": "appear",
+   "at": {
+    "word": "1-04.w041",
+    "off": 0
+   },
+   "means": "huge unmet need：引文逐字写出",
+   "tool": "remotion",
+   "until": {
+    "word": "1-04.w043"
+   }
+  },
+  {
+   "id": "underline",
+   "obj": "underline",
+   "verb": "appear",
+   "at": {
+    "word": "1-04.w043",
+    "off": 0
+   },
+   "means": "need：红线划在引文下",
+   "tool": "remotion",
+   "until": {
+    "sentence_end": true
+   }
   }
  ]
 }
