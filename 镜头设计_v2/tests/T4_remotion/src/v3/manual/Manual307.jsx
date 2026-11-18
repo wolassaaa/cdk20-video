@@ -112,8 +112,8 @@ const Scene = () => {
       </svg>
       {/* 行号（固定）和 CDK20 字 */}
       {[...Array(N)].map((_, i) => (
-        <div key={i} style={{position: "absolute", left: TX + 14, top: TY + i * RH + 4, width: 40, textAlign: "right", fontSize: 20, color: SOFT,
-                             opacity: span(f, E.twenty.s + i * 3, E.twenty.s + i * 3 + 8)}}>{i + 1}</div>
+        <div key={i} style={{position: "absolute", left: TX + 8, top: TY + i * RH + 1, width: 56, textAlign: "right", fontSize: 25, lineHeight: "31px", color: INK,
+                             opacity: span(f, E.twenty.s + i * 3, E.twenty.s + i * 3 + 8)}}>#{i + 1}</div>
       ))}
       {f >= E.cdk.s && (
         <div style={{position: "absolute", left: TX + 80 + 24 * pop, top: TY + slot(C0) * RH + 1, fontSize: 27, lineHeight: "31px", color: INK,
