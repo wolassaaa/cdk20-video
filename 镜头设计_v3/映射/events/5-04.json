@@ -1,87 +1,264 @@
 {
  "schema": "cdk20.events/1",
  "group": "5-04",
- "tool": "warp_source",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/5-04.json",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 5 章二维说明书页 5-04（C 画外音）：左边锁（CDK20）和钥匙 001，钥匙插进去（grabbing），想转却只是晃（jamming），旁边齿轮一直在转（还在工作）；右边一张示意图：activity 对 how much you need，一条普通曲线在一半处标 IC50；For 001 一条红线一直很高，一半在图外，写 above 6,000 nanomolar，红批注 weak。页面 Manual504.jsx。",
  "holds": [],
  "events": [
   {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
+   "id": "title",
+   "obj": "title",
+   "verb": "appear",
    "at": {
-    "word": "5-04.w001",
-    "off": -9
-   },
-   "until": {
-    "dur": 6
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.00→1.80 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.0,
-    1.8
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage01",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-04.w001",
-    "off": -3
-   },
-   "until": {
-    "dur": 297
-   },
-   "ease": "linear",
-   "means": "旧动画源片 1.80→5.13 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    1.8,
-    5.133
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage02",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-04.w013",
+    "word": "5-04.w005",
     "off": 0
    },
+   "means": "second test：标题 A second test",
+   "tool": "remotion",
+   "lead": 14,
    "until": {
-    "dur": 450
-   },
-   "ease": "linear",
-   "means": "旧动画源片 5.13→10.40 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    5.133,
-    10.4
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "5-04.w006"
+   }
   },
   {
-   "id": "footage03",
-   "obj": "footage",
+   "id": "grab",
+   "obj": "grab",
    "verb": "move",
    "at": {
-    "word": "5-04.w024",
+    "word": "5-04.w008",
     "off": 0
    },
+   "means": "grabbing：钥匙滑进锁，写 grabbing",
+   "tool": "remotion",
+   "lead": 20,
    "until": {
-    "dur": 663
+    "word": "5-04.w008"
+   }
+  },
+  {
+   "id": "lock",
+   "obj": "lock",
+   "verb": "snap",
+   "at": {
+    "word": "5-04.w010",
+    "off": 0
    },
-   "ease": "linear",
-   "means": "旧动画源片 10.40→18.40 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    10.4,
-    18.4
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "means": "lock：锁一颤",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "5-04.w010"
+   }
+  },
+  {
+   "id": "neq",
+   "obj": "neq",
+   "verb": "appear",
+   "at": {
+    "word": "5-04.w011",
+    "off": 0
+   },
+   "means": "isn't the same：红色不等号",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "5-04.w013"
+   }
+  },
+  {
+   "id": "jam",
+   "obj": "jam",
+   "verb": "appear",
+   "at": {
+    "word": "5-04.w015",
+    "off": 0
+   },
+   "means": "jamming：写 jamming，钥匙想转只是晃，晃动线",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "k001",
+   "obj": "k001",
+   "verb": "appear",
+   "at": {
+    "word": "5-04.w018",
+    "off": 0
+   },
+   "means": "001：钥匙上标 001",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "5-04.w018"
+   }
+  },
+  {
+   "id": "stop",
+   "obj": "stop",
+   "verb": "grow",
+   "at": {
+    "word": "5-04.w020",
+    "off": 0
+   },
+   "means": "stop：锁旁长出齿轮",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "5-04.w020"
+   }
+  },
+  {
+   "id": "cdk",
+   "obj": "cdk",
+   "verb": "appear",
+   "at": {
+    "word": "5-04.w021",
+    "off": 0
+   },
+   "means": "CDK20：锁下写 CDK20",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "5-04.w021"
+   }
+  },
+  {
+   "id": "work",
+   "obj": "work",
+   "verb": "move",
+   "at": {
+    "word": "5-04.w023",
+    "off": 0
+   },
+   "means": "working：齿轮转起来，红问号",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "axes",
+   "obj": "axes",
+   "verb": "grow",
+   "at": {
+    "word": "5-04.w025",
+    "off": 0
+   },
+   "means": "measured：右边画出坐标轴，写 activity",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "5-04.w026"
+   }
+  },
+  {
+   "id": "ic",
+   "obj": "ic",
+   "verb": "appear",
+   "at": {
+    "word": "5-04.w027",
+    "off": 0
+   },
+   "means": "IC50：图上写 IC50，一条普通曲线画出",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "5-04.w027"
+   }
+  },
+  {
+   "id": "much",
+   "obj": "much",
+   "verb": "move",
+   "at": {
+    "word": "5-04.w029",
+    "off": 0
+   },
+   "means": "how much you need：横轴箭头往右，写 how much you need",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "5-04.w031"
+   }
+  },
+  {
+   "id": "cut",
+   "obj": "cut",
+   "verb": "morph",
+   "at": {
+    "word": "5-04.w033",
+    "off": 0
+   },
+   "means": "cut the enzyme's activity：曲线上的点往下滑",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "5-04.w035"
+   }
+  },
+  {
+   "id": "half",
+   "obj": "half",
+   "verb": "appear",
+   "at": {
+    "word": "5-04.w038",
+    "off": 0
+   },
+   "means": "in half：一半处虚线，落到横轴标 IC50",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "q",
+   "obj": "q",
+   "verb": "appear",
+   "at": {
+    "word": "5-04.w040",
+    "off": 0
+   },
+   "means": "For 001：红问号，001 的红线开始画",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "above",
+   "obj": "above",
+   "verb": "move",
+   "at": {
+    "word": "5-04.w041",
+    "off": 0
+   },
+   "means": "Above 6,000 nanomolar：红线一直很高，箭头伸出图外，写 above 6,000 nanomolar",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "5-04.w042"
+   }
+  },
+  {
+   "id": "weak",
+   "obj": "weak",
+   "verb": "appear",
+   "at": {
+    "word": "5-04.w044",
+    "off": 0
+   },
+   "means": "Weak：红批注 weak，齿轮还在转",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "sentence_end": true
+   }
   }
  ]
 }
