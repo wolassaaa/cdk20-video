@@ -86,7 +86,6 @@ const Scene = () => {
       <div style={{position: "absolute", left: 0, top: 0, transformOrigin: "430px 720px", transform: `scaleY(${1 - 0.25 * Math.sin(Math.PI * flipP)})`}}>
         <Part name="cal" cx={430} cy={790} w={150} at={E.cal.s + 2} f={f} gate={[0.5, 0.2]} />
       </div>
-      {f > E.cal.l && <div style={{position: "absolute", left: 510, top: 700, fontSize: 30, color: RED, opacity: span(f, E.cal.l, E.cal.l + 8)}}>+{Math.min(flips + 1, 9)}</div>}
       <Label x={325} y={900} w={360} size={30} italic p={span(f, E.lab.l, E.cal.e)}>hard lab work</Label>
 
       {/* 下排中：一大片蛋白，只有少数测过 */}

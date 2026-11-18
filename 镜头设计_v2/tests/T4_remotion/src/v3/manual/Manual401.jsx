@@ -159,7 +159,7 @@ const Scene = () => {
       <Label x={1650} y={514} w={300} size={26} italic p={span(f, E.sure.s - 10, E.sure.e)}>how sure it is</Label>
       <Label x={1566} y={582} w={220} size={28} align="left" p={span(f, E.sure.s, E.sure.l + 6)}>sure</Label>
       <Label x={1566} y={634} w={220} size={28} align="left" color={RED} p={span(f, E.sure.l, E.sure.l + 16)}>less sure</Label>
-      <Label x={FX + 10} y={FY + 200} w={460} size={24} italic color={SOFT} p={span(f, E.each.l - 20, E.each.e)}>about each part</Label>
+      <Label x={1650} y={706} w={300} size={24} italic color={SOFT} p={span(f, E.each.l - 20, E.each.e)}>about each part</Label>
 
       <Source p={span(f, E.title.l, E.title.l + 20)}>Jumper et al., Nature 2021; Ren et al., Chem. Sci. 2023 · Illustration (not to scale)</Source>
       <Bead K={bead} f={f} />

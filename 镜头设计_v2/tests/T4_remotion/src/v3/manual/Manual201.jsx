@@ -58,6 +58,7 @@ const Scene = () => {
       <Step n="2" x={BX[1]} y={BY} w={BW} h={BH} at={E.step2.l} f={f}>
         <Title p={span(f, E.title2.s, E.title2.e)} size={56}>2023</Title>
         <Part name="chip" cx={160} cy={270} w={130} ar={AR.chip} at={E.chip.s + 2} f={f} gate={[0.5, 1]} />
+        <div style={{position: "absolute", left: 160 - 30, top: 270 - 10, width: 60, height: 20, background: "#2B2B2D", color: "#C9C6BE", fontSize: 14, textAlign: "center", lineHeight: "20px", opacity: span(f, E.chip.s + 6, E.chip.s + 14)}}>AI</div>
         <Label x={160} y={350} w={250} size={22} p={span(f, E.chip.s, E.chip.e)}>AI drug-discovery study</Label>
         <Tag n="13" x={250} y={200} at={E.chip.l + 16} f={f} />
         <Label x={650} y={110} w={300} size={22} color={SOFT} italic p={span(f, E.coauth.s, E.coauth.e)}>co-authors at</Label>
@@ -79,7 +80,7 @@ const Scene = () => {
         </div>
       )}
 
-      <Legend x={BX[0]} y={820} w={BW} at={E.tubes.l} f={f} rows={[[["15", "liver tumour samples", E.tubes.l + 16], ["19", "CDK20, first called CCRK", E.cdk20.l + 16]]]} />
+      <Legend x={BX[0]} y={820} w={BW} at={E.tubes.l} f={f} rows={[[["15", "liver tumour samples", E.tubes.l + 16], ["19", "CCRK, also called CDK20", E.cdk20.l + 16]]]} />
       <Legend x={BX[1]} y={820} w={BW} at={E.chip.l} f={f} rows={[[["13", "AI study, Ren et al. 2023", E.chip.l + 16], ["14", "Insilico Medicine", E.tower.l + 16]]]} />
       <Source p={span(f, E.hk.l, E.hk.l + 20)}>Feng et al., J. Clin. Invest. 2011; Ren et al., Chem. Sci. 2023 · Illustration</Source>
       <Bead K={bead} f={f} />

@@ -18,7 +18,7 @@ const Scene = () => {
   const route = span(f, E.route.s, E.route.e, ease);
   const big = span(f, E.big.s, E.big.s + 16, out);
   const bead = [
-    [0, RX0 - 120, RY], [E.road.l, RX0 - 60, RY - 40], [E.lock.l, sx(0), RY - 280], [E.chip.l, sx(1) - 60, RY - 250], [E.key.l, sx(1) + 40, RY - 190],
+    [0, RX0 - 120, RY], [E.road.l, RX0 - 60, RY - 40], [E.lock.l, sx(0) + 10, RY - 330], [E.chip.l, sx(1) - 60, RY - 250], [E.key.l, sx(1) + 40, RY - 190],
     [E.flask.l, sx(2), RY - 290], [E.route.l, sx(1), RY + 110], [E.big.l, 1500, 850], [K.len_f, 1502, 852],
   ];
   return (
@@ -38,7 +38,7 @@ const Scene = () => {
       {ST.map((s, i) => (
         <Label key={s} x={sx(i)} y={RY + 30} w={180} size={30} color={i < 3 ? INK : "#8A867C"} p={span(road, (i + 0.6) / (ST.length + 0.6), (i + 1.4) / (ST.length + 0.6))}>{s}</Label>
       ))}
-      <Part name="lock" cx={sx(0)} cy={RY - 170} w={150} ar={AR.lock} at={E.lock.s + 2} f={f} gate={[0.5, 1]} />
+      <Part name="lock" cx={sx(0)} cy={RY - 192} w={140} ar={AR.lock} at={E.lock.s + 2} f={f} gate={[0.5, 1]} />
       <Label x={sx(0)} y={RY - 80} w={200} size={24} italic p={span(f, E.lock.l, E.lock.l + 20)}>the lock</Label>
       <Part name="chip" cx={sx(1) - 60} cy={RY - 230} w={90} ar={1} at={E.chip.s + 2} f={f} gate={[0.5, 1]} flood={16} />
       <Part name="key" cx={sx(1) + 30} cy={RY - 140} w={210} ar={AR.key} at={E.key.s + 2} f={f} gate={[0, 0.5]} />
@@ -47,7 +47,7 @@ const Scene = () => {
       <Part name="flask" cx={sx(2)} cy={RY - 180} w={140} ar={AR.flask} at={E.flask.s + 2} f={f} gate={[0.5, 1]} />
       <Label x={sx(2)} y={RY - 80} w={240} size={24} italic p={span(f, E.flask.l, E.flask.l + 20)}>in the lab</Label>
       <Pen x={sx(2) + 120} y={RY - 360} p={span(f, E.route.s + 10, E.route.e + 10)} size={46}>today's route</Pen>
-      <Tag n="21" x={sx(0) - 55} y={RY - 300} at={E.lock.l + 16} f={f} />
+      <Tag n="21" x={sx(0) - 62} y={RY - 318} at={E.lock.l + 16} f={f} />
       <Tag n="22" x={sx(1) + 150} y={RY - 210} at={E.key.l + 16} f={f} />
       <Tag n="34" x={sx(2) + 54} y={RY - 300} at={E.flask.l + 16} f={f} />
       <Plate x={260} y={790} w={1400} p={big}><span style={{fontSize: 60, fontStyle: "italic"}}>How much did the computers really help?</span></Plate>
