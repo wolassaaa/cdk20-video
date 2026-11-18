@@ -1,258 +1,339 @@
 {
  "schema": "cdk20.events/1",
  "group": "4-09",
- "tool": "warp_source",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/4-09.json",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 4-09（VO）：团队把锁口袋的形状和一条规则（must grip the hinge）交给芯片 Chemistry42；芯片吐出一串钥匙（designs）沿传送线过三道筛子：reactive or possibly toxic 的打叉掉进 toss 槽，其余到右下排成一列，按 drug-like 和 easy to make 打分、逐个打勾。只画示意，不画分子结构。页面 Manual409.jsx。",
  "holds": [],
  "events": [
   {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
+   "id": "title",
+   "obj": "title",
+   "verb": "appear",
    "at": {
-    "word": "4-09.w001",
-    "off": -9
+    "word": "4-09.w002",
+    "off": 0
    },
+   "means": "team：标题，小人长出",
+   "tool": "remotion",
+   "lead": 8,
    "until": {
-    "dur": 6
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.00→0.40 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.0,
-    0.4
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage01",
-   "obj": "footage",
-   "verb": "move",
+   "id": "gave",
+   "obj": "gave",
+   "verb": "grow",
    "at": {
-    "word": "4-09.w001",
-    "off": -3
+    "word": "4-09.w003",
+    "off": 0
    },
+   "means": "gave it：芯片长出，盖牌 Chemistry42",
+   "tool": "remotion",
+   "lead": 16,
    "until": {
-    "dur": 74
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.40→1.88 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.4,
-    1.883
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage02",
-   "obj": "footage",
-   "verb": "move",
+   "id": "pocket",
+   "obj": "pocket",
+   "verb": "grow",
    "at": {
     "word": "4-09.w006",
     "off": 0
    },
+   "means": "pocket's：锁长出",
+   "tool": "remotion",
+   "lead": 14,
    "until": {
-    "dur": 36
-   },
-   "ease": "linear",
-   "means": "旧动画源片 1.88→2.47 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    1.883,
-    2.467
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage03",
-   "obj": "footage",
-   "verb": "move",
+   "id": "shape",
+   "obj": "shape",
+   "verb": "appear",
    "at": {
     "word": "4-09.w007",
     "off": 0
    },
+   "means": "shape：锁外描一圈虚线，写 the pocket's shape",
+   "tool": "remotion",
+   "lead": 12,
    "until": {
-    "dur": 71
-   },
-   "ease": "linear",
-   "means": "旧动画源片 2.47→3.15 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    2.467,
-    3.15
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage04",
-   "obj": "footage",
+   "id": "one",
+   "obj": "one",
    "verb": "move",
+   "at": {
+    "word": "4-09.w009",
+    "off": 0
+   },
+   "means": "one：虚线外形复制一份飞进芯片",
+   "tool": "remotion",
+   "lead": 24,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "rule",
+   "obj": "rule",
+   "verb": "appear",
    "at": {
     "word": "4-09.w010",
     "off": 0
    },
+   "means": "rule：规则卡片画出，写 one rule",
+   "tool": "remotion",
+   "lead": 10,
    "until": {
-    "dur": 58
-   },
-   "ease": "linear",
-   "means": "旧动画源片 3.15→4.03 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    3.15,
-    4.033
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage05",
-   "obj": "footage",
-   "verb": "move",
+   "id": "key",
+   "obj": "key",
+   "verb": "grow",
    "at": {
-    "word": "4-09.w011",
-    "off": -1
+    "word": "4-09.w012",
+    "off": 0
    },
+   "means": "key：锁左边长出一把钥匙",
+   "tool": "remotion",
+   "lead": 12,
    "until": {
-    "dur": 51
-   },
-   "ease": "linear",
-   "means": "旧动画源片 4.03→5.40 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    4.033,
-    5.4
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage06",
-   "obj": "footage",
+   "id": "grip",
+   "obj": "grip",
    "verb": "move",
    "at": {
     "word": "4-09.w014",
     "off": 0
    },
+   "means": "grip：钥匙插进锁",
+   "tool": "remotion",
+   "lead": 14,
    "until": {
-    "dur": 20
-   },
-   "ease": "linear",
-   "means": "旧动画源片 5.40→6.12 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    5.4,
-    6.117
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage07",
-   "obj": "footage",
-   "verb": "move",
+   "id": "spot",
+   "obj": "spot",
+   "verb": "appear",
    "at": {
     "word": "4-09.w016",
     "off": 0
    },
+   "means": "spot：钥匙尖旁红点，引线",
+   "tool": "remotion",
+   "lead": 8,
    "until": {
-    "dur": 27
-   },
-   "ease": "linear",
-   "means": "旧动画源片 6.12→6.37 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    6.117,
-    6.367
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage08",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "4-09.w017",
-    "off": 0
-   },
-   "until": {
-    "dur": 31
-   },
-   "ease": "linear",
-   "means": "旧动画源片 6.37→6.68 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    6.367,
-    6.683
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage09",
-   "obj": "footage",
-   "verb": "move",
+   "id": "hinge",
+   "obj": "hinge",
+   "verb": "appear",
    "at": {
     "word": "4-09.w019",
     "off": 0
    },
+   "means": "hinge：写 hinge，卡片写 must grip the hinge，卡片到芯片虚线箭头",
+   "tool": "remotion",
+   "lead": 10,
    "until": {
-    "dur": 75
-   },
-   "ease": "linear",
-   "means": "旧动画源片 6.68→7.43 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    6.683,
-    7.433
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage10",
-   "obj": "footage",
-   "verb": "move",
+   "id": "filters",
+   "obj": "filters",
+   "verb": "grow",
    "at": {
     "word": "4-09.w021",
-    "off": -1
-   },
-   "until": {
-    "dur": 182
-   },
-   "ease": "linear",
-   "means": "旧动画源片 7.43→9.88 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    7.433,
-    9.883
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage11",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "4-09.w027",
     "off": 0
    },
+   "means": "filters：右边三道筛子画出，写 filters，芯片出口传送线",
+   "tool": "remotion",
+   "lead": 14,
    "until": {
-    "dur": 311
-   },
-   "ease": "linear",
-   "means": "旧动画源片 9.88→14.87 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    9.883,
-    14.867
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage12",
-   "obj": "footage",
+   "id": "built",
+   "obj": "built",
    "verb": "move",
+   "at": {
+    "word": "4-09.w023",
+    "off": 0
+   },
+   "means": "built：芯片开始吐钥匙，沿线往右走",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "toss",
+   "obj": "toss",
+   "verb": "move",
+   "at": {
+    "word": "4-09.w025",
+    "off": 0
+   },
+   "means": "toss：第一把钥匙在第一道筛子打叉，掉进 toss 槽",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "designs",
+   "obj": "designs",
+   "verb": "appear",
+   "at": {
+    "word": "4-09.w026",
+    "off": 0
+   },
+   "means": "designs：钥匙流下写 designs",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "reactive",
+   "obj": "reactive",
+   "verb": "appear",
+   "at": {
+    "word": "4-09.w028",
+    "off": 0
+   },
+   "means": "reactive：第一道筛子上写 reactive or",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "possibly",
+   "obj": "possibly",
+   "verb": "move",
+   "at": {
+    "word": "4-09.w030",
+    "off": 0
+   },
+   "means": "possibly：又一把钥匙打叉掉进槽",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "toxic",
+   "obj": "toxic",
+   "verb": "appear",
+   "at": {
+    "word": "4-09.w031",
+    "off": 0
+   },
+   "means": "toxic：写 possibly toxic",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "groups",
+   "obj": "groups",
+   "verb": "morph",
+   "at": {
+    "word": "4-09.w032",
+    "off": 0
+   },
+   "means": "groups：toss 槽一颤，写 toss",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "score",
+   "obj": "score",
+   "verb": "appear",
+   "at": {
+    "word": "4-09.w035",
+    "off": 0
+   },
+   "means": "score：右下一列钥匙旁画分数条框，写 score",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "drug",
+   "obj": "drug",
+   "verb": "morph",
+   "at": {
+    "word": "4-09.w037",
+    "off": 0
+   },
+   "means": "drug-like：第二道筛子写 drug-like?，分数条涨第一段",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "easy",
+   "obj": "easy",
+   "verb": "morph",
    "at": {
     "word": "4-09.w039",
     "off": 0
    },
+   "means": "easy：第三道筛子写 easy to make?，分数条涨第二段",
+   "tool": "remotion",
+   "lead": 10,
    "until": {
-    "dur": 98
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "each",
+   "obj": "each",
+   "verb": "appear",
+   "at": {
+    "word": "4-09.w042",
+    "off": 0
    },
-   "ease": "linear",
-   "means": "旧动画源片 14.87→16.60 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    14.867,
-    16.6
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "means": "each：每行逐个打勾",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   }
   }
  ]
 }
