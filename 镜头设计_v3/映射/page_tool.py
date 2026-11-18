@@ -60,6 +60,40 @@ def comp(name, g):
     return ("OnCam" if g["kind"] == "ON-CAM" else "Manual") + first.replace("-", "")
 
 
+def _hl(a, b):
+    try:
+        os.link(a, b)
+    except OSError:
+        shutil.copy2(a, b)
+
+
+def slim_public(name):
+    """只含本段要用的东西的 public（声音、零件图、字体，加本段用到的 person_ 帧），
+    用硬链接和目录联接搭在 G 盘，免得 Remotion 每次复制 6 G 的整个 public。"""
+    d = RTMP.parent / "pub_slim" / safe(name)
+    d.mkdir(parents=True, exist_ok=True)
+    need = set()
+    oc = MAN / f"oncam_{safe(name)}.json"
+    if oc.exists():
+        need = {f"person_{c['seg']}" for c in json.loads(oc.read_text(encoding="utf-8")).get("clips", [])}
+    for e in PUB.iterdir():
+        if e.name.startswith("person_") and e.name not in need:
+            continue
+        t = d / e.name
+        if e.is_dir():                              # Remotion 复制时碰到联接会报 EPERM，目录要真复制（文件用硬链接）
+            if t.is_junction():
+                os.rmdir(t)
+            shutil.copytree(e, t, dirs_exist_ok=True, copy_function=lambda a, b: None if Path(b).exists() and Path(b).stat().st_size == Path(a).stat().st_size else _hl(a, b))
+        elif not t.exists() or t.stat().st_mtime < e.stat().st_mtime:
+            if t.exists():
+                t.unlink()
+            try:
+                os.link(e, t)
+            except OSError:
+                shutil.copy2(e, t)
+    return d
+
+
 def run(cmd, **kw):
     print("  $", " ".join(str(c) for c in cmd)[:200])
     if not any("remotion" in str(c) for c in cmd[:2]):
@@ -160,12 +194,21 @@ def check(name, stills_only=False):
     marks = sorted({min(L - 1, e["f_land"] + 12) for e in K["events"]} | {L - 1})
     cli = [ "node", REM / "node_modules/@remotion/cli/remotion-cli.js"]
     rep = [f"# {C}（{name}）检查报告", "", f"段长 {L} 帧（{L / 60:.2f} 秒），事件 {len(K['events'])} 个。", ""]
+    sp = slim_public(name)
     if stills_only:
-        for f in marks:
-            run(cli + ["still", f"src/v3/manual/{C}.jsx", C, od / f"f{f:04d}.png", f"--frame={f}", f"--public-dir={PUB}", "--log=error"], cwd=REM)
+        # 打包一次，所有静帧都从这个包出
+        import tempfile
+        b = Path(tempfile.mkdtemp(dir=RTMP)) / "bundle"
+        if run(cli + ["bundle", f"src/v3/manual/{C}.jsx", f"--public-dir={sp}", f"--out-dir={b}", "--log=error"], cwd=REM).returncode:
+            sys.exit("Remotion 打包出错，看上面的报错")
+        try:
+            for f in marks:
+                run(cli + ["still", b, C, od / f"f{f:04d}.png", f"--frame={f}", "--log=error"], cwd=REM)
+        finally:
+            shutil.rmtree(b.parent, ignore_errors=True)
     else:
         fr = HERE / "_cache/ch2render" / f"fr_{C}"
-        r = run(cli + ["render", f"src/v3/manual/{C}.jsx", C, fr, "--sequence", "--image-format=png", f"--public-dir={PUB}", "--concurrency=6", "--log=error"], cwd=REM)
+        r = run(cli + ["render", f"src/v3/manual/{C}.jsx", C, fr, "--sequence", "--image-format=png", f"--public-dir={sp}", "--concurrency=6", "--log=error"], cwd=REM)
         if r.returncode:
             sys.exit("Remotion 渲染出错，看上面的报错（多半是页面代码写错）")
         first = sorted(os.listdir(fr))[0]
