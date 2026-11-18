@@ -11,7 +11,7 @@ import {PAPER, INK, RED, SOFT, ease, out, span, Part, Write, Pen} from "./kit.js
 import {OnCamFrame, useOnCam} from "./oncam.jsx";
 
 const FX1 = 1440, FY1 = 150, FX2 = 1870, FY2 = 960;      // 讲解卡
-const RX = 1500, IX = 1565, LX = 1610;                     // 路、图标、站名
+const RX = 1488, IX = 1548, LX = 1600;                     // 路、图标、站名
 const SY = [330, 460, 590, 720, 850];
 const ST = ["computer", "protein", "cells", "animals", "patients"];
 const NP = {cx: 1655, cy: 520, w: 380, h: 250}, NPS = {cx: 1655, cy: 222, s: 0.42};   // 报纸：大、缩小后
@@ -120,24 +120,24 @@ const Scene = () => {
             const a = spin - k * 28;
             return (
               <g key={k} transform={`rotate(${a} ${IX} ${SY[0]})`} opacity={ghost} fill="none" stroke={k === 0 ? INK : RED} strokeWidth={4} strokeLinecap="round" strokeLinejoin="round">
-                <path d={`M${IX + 42},${SY[0]} A42,42 0 1 1 ${IX + 42 * Math.cos(-0.6)},${SY[0] + 42 * Math.sin(-0.6)}`} pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - loopP} />
-                {loopP > 0.9 && (() => { const x = IX + 42 * Math.cos(-0.6), y = SY[0] + 42 * Math.sin(-0.6); return <path d={`M${x - 14},${y - 9} L${x},${y} L${x - 15},${y + 8}`} transform={`rotate(58 ${x} ${y})`} />; })()}
+                <path d={`M${IX + 38},${SY[0]} A38,38 0 1 1 ${IX + 38 * Math.cos(-0.6)},${SY[0] + 38 * Math.sin(-0.6)}`} pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - loopP} />
+                {loopP > 0.9 && (() => { const x = IX + 38 * Math.cos(-0.6), y = SY[0] + 38 * Math.sin(-0.6); return <path d={`M${x - 14},${y - 9} L${x},${y} L${x - 15},${y + 8}`} transform={`rotate(58 ${x} ${y})`} />; })()}
               </g>
             );
           })}
         </svg>
-        <Part name="cdk20" cx={IX} cy={SY[1]} w={58} at={E.card.s + 30} f={f} gate={[0.5, 0.5]} flood={14} />
-        <Part name="person_w" cx={IX} cy={SY[4] - 2} w={32} at={E.card.s + 44} f={f} gate={[0.5, 1]} flood={14} />
+        <Part name="cdk20" cx={IX} cy={SY[1]} w={62} at={E.card.s + 30} f={f} gate={[0.5, 0.5]} flood={14} />
+        <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, filter: "drop-shadow(0 0 1.2px #1F1E1C)"}}><Part name="person_w" cx={IX} cy={SY[4] - 2} w={34} at={E.card.s + 44} f={f} gate={[0.5, 1]} flood={14} /></div>
         <Part name="flask" cx={1825} cy={590} w={40} at={E.exp.s} f={f} gate={[0.5, 1]} flood={14} />
         <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, opacity: sciP, transform: `translateY(${10 * (1 - sciP)}px)`}}>
-          <Part name="person_w" cx={1812} cy={328} w={40} at={E.sci.s} f={f} gate={[0.5, 1]} flood={12} />
+          <Part name="person_r" cx={1812} cy={326} w={44} at={E.sci.s} f={f} gate={[0.5, 1]} flood={12} />
         </div>
         {ST.map((s, i) => (
-          <div key={s} style={{position: "absolute", left: LX, top: SY[i] - 21, fontSize: 32, lineHeight: "40px", color: col(i), whiteSpace: "nowrap"}}>
+          <div key={s} style={{position: "absolute", left: LX, top: SY[i] - 25, fontSize: 40, lineHeight: "48px", color: col(i), whiteSpace: "nowrap"}}>
             <Write p={span(route, i * 0.15 + 0.06, i * 0.15 + 0.3)}>{s}</Write>
           </div>
         ))}
-        <Pen x={LX} y={SY[4] + 26} size={38} p={span(f, E.noty.s, E.noty.e)}>not yet</Pen>
+        <Pen x={LX} y={SY[4] + 28} size={44} p={span(f, E.noty.s, E.noty.e)}>not yet</Pen>
 
         {/* 报纸 */}
         {f >= E.see.s && (
