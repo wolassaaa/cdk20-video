@@ -26,7 +26,8 @@ const Scene = () => {
   const f = useCurrentFrame();
   const div = span(f, E.before.s, E.before.l + 30, ease);
   // 左条：从 need 起一直慢慢爬，structure 时挪一小格，到段尾也只到 14%
-  const crawl = f < E.need.l ? 0 : 0.015 + 0.09 * span(f, E.need.l, K.len_f) + 0.035 * span(f, E.struct.s, E.struct.l + 6, out);
+  const pop = f > E.need.l ? 0.05 * Math.exp(-(f - E.need.l) / 9) * Math.cos((f - E.need.l) / 3) : 0;
+  const crawl = f < E.need.s ? 0 : 0.015 * span(f, E.need.s, E.need.l, out) + pop + 0.09 * span(f, E.need.l, K.len_f) + 0.035 * span(f, E.struct.s, E.struct.l + 6, out);
   const full = span(f, E.down.l - 6, E.down.l + 4, Easing.out(Easing.quad));
   const fly = span(f, E.down.s, E.down.l, io);
   const fx = RC + (FX - RC) * fly, fy = DY + (FY - DY) * fly - Math.sin(Math.PI * fly) * 40, fs = 0.4 + 0.6 * fly;
@@ -34,8 +35,8 @@ const Scene = () => {
   const pm = span(f, E.this1.s, E.this1.l, io);
   const px = 960 + (1250 - 960) * pm;
   const box = span(f, E.this.s, E.this.l + 8, ease);
-  const bead = [[0, 300, 250], [E.before.l, 300, 250], [E.need.l, 860, 760], [E.lab.l, 720, 420], [E.struct.l, 260, 610], [E.now.l, 1700, 175],
-                [E.down.l, 1650, 300], [E.pred.l, 1250, 650], [E.free.l, 1770, 610], [E.public.l, 1720, 320], [E.accord.l, 760, 940],
+  const bead = [[0, 300, 250], [E.before.l, 300, 250], [E.you.l, 860, 900], [E.need.l, 860, 760], [E.lab.l, 720, 420], [E.struct.l, 260, 610], [E.now.l, 1700, 175],
+                [E.down.l, 1650, 300], [E.pred.l, 1250, 650], [E.free.l, 1770, 610], [E.public.l, 1720, 320], [E.db.l, 1840, 880], [E.accord.l, 760, 940],
                 [E.paper.l, 760, 900], [E.this1.l, 1100, 980], [E.first.l, 1800, 430], [E.af.l, 1080, 420], [E.used.l, 1300, 770],
                 [E.hit.l, 1060, 700], [E.this.l, 1790, 780], [K.len_f, 1791, 781]];
   return (
@@ -44,8 +45,10 @@ const Scene = () => {
       <PageFrame />
       <svg width={1920} height={1080} style={{position: "absolute", left: 0, top: 0}}>
         <line x1={960} y1={90} x2={960} y2={90 + (880 - 90) * div} stroke={SOFT} strokeWidth={2.5} />
-        <Bar cx={LC} p={span(f, E.need.s, E.need.l, ease)} fill={crawl} f={f} />
+        <Bar cx={LC} p={span(f, E.you.s, E.you.l, ease)} fill={Math.max(0, crawl)} f={f} />
         <Bar cx={RC} p={span(f, E.now.s, E.now.l + 6, ease)} fill={full} f={f} />
+        {f >= E.db.s && f < E.db.l + 34 && (() => { const t = span(f, E.db.s, E.db.l + 30, Easing.inOut(Easing.quad)); return (
+          <rect x={RC - BW / 2 + 5 + (BW - 70) * t} y={BY - BH / 2 + 5} width={60} height={BH - 10} fill="#FFFFFF" opacity={0.55 * Math.sin(Math.PI * t)} />); })()}
         {/* 文件 → 钥匙 的虚线 */}
         {f >= E.used.s && <line x1={FX} y1={FY + 50} x2={FX} y2={FY + 50 + 110 * span(f, E.used.s, E.used.l + 6, ease)} stroke={SOFT} strokeWidth={2.5} strokeDasharray="6 7" />}
         {/* 芯片 → 文件 */}

@@ -21,16 +21,31 @@
    }
   },
   {
+   "id": "you",
+   "obj": "you",
+   "verb": "grow",
+   "at": {
+    "word": "4-02.w002",
+    "off": 0
+   },
+   "means": "you'd：左栏进度条框画出",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
    "id": "need",
    "obj": "need",
-   "verb": "grow",
+   "verb": "morph",
    "at": {
     "word": "4-02.w003",
     "off": 0
    },
-   "means": "need：左栏进度条框，开始慢慢爬",
+   "means": "need：左条红色起头跳一下，开始慢慢爬",
    "tool": "remotion",
-   "lead": 12,
+   "lead": 6,
    "until": {
     "sentence_end": true
    }
@@ -134,6 +149,21 @@
     "off": 0
    },
    "means": "public：数据库下写 public database",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "db",
+   "obj": "db",
+   "verb": "morph",
+   "at": {
+    "word": "4-02.w019",
+    "off": 0
+   },
+   "means": "database：右条满格上一道亮光扫过",
    "tool": "remotion",
    "lead": 8,
    "until": {
