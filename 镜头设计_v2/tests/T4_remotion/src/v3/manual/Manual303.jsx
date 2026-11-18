@@ -40,6 +40,27 @@ const keyAt = (f) => {
   return hop([at3[0] - 20, at3[1]], in1, span(f, E.back.s, E.back.l, io), 330);
 };
 
+// 另两把锁换掉锁孔：第二把是十字锁孔，第三把是密码转盘（盖在原锁孔上，锁身色补底）
+const BODY = "#2D41A4";
+const Hole = ({kind, x, p}) => {
+  if (p <= 0) return null;
+  const cy = LY + 0.16 * LH;
+  return (
+    <svg width={1920} height={1080} style={{position: "absolute", left: 0, top: 0, opacity: p}}>
+      <rect x={x - 30} y={LY + 0.04 * LH} width={60} height={0.3 * LH} rx={10} fill={BODY} />
+      {kind === 1 ? (
+        <path d={`M${x - 7},${cy - 24} h14 v17 h17 v14 h-17 v17 h-14 v-17 h-17 v-14 h17 Z`} fill="#1E1E22" stroke="#5A6FD0" strokeWidth={1.5} />
+      ) : (
+        <g>
+          <circle cx={x} cy={cy} r={27} fill="#1E1E22" stroke="#C9CCD8" strokeWidth={3} />
+          {[...Array(12)].map((_, k) => { const a = k * 30 * Math.PI / 180; return <line key={k} x1={x + 19 * Math.cos(a)} y1={cy + 19 * Math.sin(a)} x2={x + 25 * Math.cos(a)} y2={cy + 25 * Math.sin(a)} stroke="#C9CCD8" strokeWidth={2} />; })}
+          <circle cx={x} cy={cy} r={8} fill="#C9CCD8" />
+          <line x1={x} y1={cy} x2={x} y2={cy - 16} stroke="#C9CCD8" strokeWidth={3} strokeLinecap="round" />
+        </g>
+      )}
+    </svg>
+  );
+};
 const Check = ({x, y, p}) => p <= 0 ? null : (
   <path d={`M${x - 24},${y} L${x - 6},${y + 20} L${x + 28},${y - 26}`} fill="none" stroke={RED} strokeWidth={6} strokeLinecap="round" strokeLinejoin="round"
         pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - p} />
@@ -62,7 +83,7 @@ const Scene = () => {
   const box = span(f, E.back.s, E.back.l, ease);
   const bead = [[0, 130, 96], [E.title.l, 560, 96], [E.lock.l, 930, 520], [E.target.l, 940, 760], [E.key.l, 250, 450], [E.cand.l, 230, 680],
                 [E.good.l, 1390, 790], [E.fits.l, 450, 450], [E.tight.l, 820, 300], [E.opens.l, 1160, 210], [E.no.l, 1290, 320],
-                [E.else.l, 1770, 330], [E.back.l, 960, 210], [E.sel.l, 1560, 850], [K.len_f, 1561, 851]];
+                [E.else.l, 1770, 330], [E.back.l, 960, 210], [E.sel.l, 1100, 830], [K.len_f, 1101, 831]];
   return (
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("3-03.wav")} />
@@ -78,6 +99,7 @@ const Scene = () => {
       {LOCK.map((L, i) => (
         <div key={i} style={{position: "absolute", left: 0, top: 0, transform: `rotate(${rot[i]}deg) scale(${L.sx}, ${L.sy})`, transformOrigin: `${L.x}px ${LY}px`}}>
           <Part name="lock" cx={L.x} cy={LY} w={LW} at={i === 0 ? E.lock.s : E.good.s + 10 * (i - 1)} f={f} gate={[0.5, 1]} />
+          {i > 0 && <Hole kind={i} x={L.x} p={span(f, E.good.s + 10 * (i - 1) + 6, E.good.s + 10 * (i - 1) + 26)} />}
         </div>
       ))}
 
@@ -98,7 +120,8 @@ const Scene = () => {
       <Label x={700} y={692} w={260} size={30} italic color={RED} p={span(f, E.target.s, E.target.l + 8)}>the target</Label>
       <Label x={450} y={606} w={320} size={26} italic p={span(f, E.cand.s, E.cand.l + 18)}>a candidate molecule</Label>
       <Pen x={1270} y={700} p={span(f, E.else.l, E.else.e)} size={40} rot={-3}>no one else's</Pen>
-      <Plate x={860} y={790} w={600} p={span(f, E.sel.s, E.sel.l, out)} style={{fontSize: 76, lineHeight: "90px"}}>selectivity</Plate>
+      <Plate x={120} y={790} w={560} p={span(f, E.sel.s, E.sel.l, out)} style={{fontSize: 76, lineHeight: "90px", textAlign: "left"}}>selectivity</Plate>
+      <Label x={126} y={900} w={900} size={32} italic color={SOFT} align="left" p={span(f, E.sel.l, E.sel.e)}>fits its own lock tightly, and opens no one else's</Label>
 
       <Source p={span(f, E.title.l, E.title.l + 20)}>Lengauer 2007 · Illustration</Source>
       <Bead K={bead} f={f} />
