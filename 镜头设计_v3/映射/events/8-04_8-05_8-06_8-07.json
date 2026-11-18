@@ -1,0 +1,399 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "8-04+8-05+8-06+8-07",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜 8-04 组（C、B、D、A 轮流）讲解卡（右侧纸色卡片，x≥1440，避开 B 举手机的手）：一条竖着的五站路 computer、protein、cells、animals、patients；cells 打勾，patients 写 not yet；computer 旁漏斗；报纸标题 AI discovers a cancer drug 盖下来，再缩到卡顶；五站依次闪；科学家站到 computer 旁，循环快转；Thanks 全线亮。页面 OnCam804.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "card",
+   "obj": "card",
+   "verb": "grow",
+   "at": {
+    "word": "8-04.w001",
+    "off": 0
+   },
+   "means": "This works：讲解卡外框画出，五站路从上往下画出",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "word": "8-04.w002"
+   }
+  },
+  {
+   "id": "cells",
+   "obj": "cells",
+   "verb": "snap",
+   "at": {
+    "word": "8-04.w004",
+    "off": 0
+   },
+   "means": "cells：cells 站变红打勾",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "8-04.w004"
+   }
+  },
+  {
+   "id": "noty",
+   "obj": "noty",
+   "verb": "appear",
+   "at": {
+    "word": "8-04.w005",
+    "off": 0
+   },
+   "means": "not yet：patients 旁红批注 not yet",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "8-04.w006"
+   }
+  },
+  {
+   "id": "ppl",
+   "obj": "ppl",
+   "verb": "morph",
+   "at": {
+    "word": "8-04.w008",
+    "off": 0
+   },
+   "means": "people：patients 站变灰虚线",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "8-04.w008"
+   }
+  },
+  {
+   "id": "comp",
+   "obj": "comp",
+   "verb": "snap",
+   "at": {
+    "word": "8-04.w010",
+    "off": 0
+   },
+   "means": "computer：computer 站跳一下",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "8-04.w010"
+   }
+  },
+  {
+   "id": "narr",
+   "obj": "narr",
+   "verb": "grow",
+   "at": {
+    "word": "8-04.w011",
+    "off": 0
+   },
+   "means": "narrows：computer 旁长出漏斗，一片点落进去",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "8-04.w012"
+   }
+  },
+  {
+   "id": "srch",
+   "obj": "srch",
+   "verb": "morph",
+   "at": {
+    "word": "8-04.w013",
+    "off": 0
+   },
+   "means": "search：漏斗底下只漏出两三个点",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "exp",
+   "obj": "exp",
+   "verb": "grow",
+   "at": {
+    "word": "8-04.w014",
+    "off": 0
+   },
+   "means": "Experiments：cells 旁长出 flask",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "8-04.w015"
+   }
+  },
+  {
+   "id": "dec",
+   "obj": "dec",
+   "verb": "appear",
+   "at": {
+    "word": "8-04.w016",
+    "off": 0
+   },
+   "means": "decide：flask 往下的红虚线箭头指到 animals、patients",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "see",
+   "obj": "see",
+   "verb": "move",
+   "at": {
+    "word": "8-05.w005",
+    "off": 0
+   },
+   "means": "see：报纸从卡外滑进来",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "8-05.w006"
+   }
+  },
+  {
+   "id": "head",
+   "obj": "head",
+   "verb": "snap",
+   "at": {
+    "word": "8-05.w007",
+    "off": 0
+   },
+   "means": "headline：报纸盖下来，一颤",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "8-05.w008"
+   }
+  },
+  {
+   "id": "hl1",
+   "obj": "hl1",
+   "verb": "appear",
+   "at": {
+    "word": "8-05.w009",
+    "off": 0
+   },
+   "means": "'AI discovers：标题前半写出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "8-05.w010"
+   }
+  },
+  {
+   "id": "hl2",
+   "obj": "hl2",
+   "verb": "appear",
+   "at": {
+    "word": "8-05.w012",
+    "off": 0
+   },
+   "means": "a cancer drug：标题后半写出，下面划红线",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "ask",
+   "obj": "ask",
+   "verb": "appear",
+   "at": {
+    "word": "8-06.w001",
+    "off": 0
+   },
+   "means": "ask：报纸上红问号",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "8-06.w003"
+   }
+  },
+  {
+   "id": "shr",
+   "obj": "shr",
+   "verb": "move",
+   "at": {
+    "word": "8-06.w004",
+    "off": 0
+   },
+   "means": "really is：报纸缩小移到卡顶",
+   "tool": "remotion",
+   "lead": 40,
+   "until": {
+    "word": "8-06.w005"
+   }
+  },
+  {
+   "id": "road",
+   "obj": "road",
+   "verb": "grow",
+   "at": {
+    "word": "8-06.w008",
+    "off": 0
+   },
+   "means": "road：红光沿路从上扫到下",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "8-06.w008"
+   }
+  },
+  {
+   "id": "s1",
+   "obj": "s1",
+   "verb": "snap",
+   "at": {
+    "word": "8-06.w009",
+    "off": 0
+   },
+   "means": "computer：computer 站闪",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "8-06.w009"
+   }
+  },
+  {
+   "id": "s2",
+   "obj": "s2",
+   "verb": "snap",
+   "at": {
+    "word": "8-06.w010",
+    "off": 0
+   },
+   "means": "protein：protein 站闪",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "8-06.w010"
+   }
+  },
+  {
+   "id": "s3",
+   "obj": "s3",
+   "verb": "snap",
+   "at": {
+    "word": "8-06.w011",
+    "off": 0
+   },
+   "means": "cells：cells 站闪",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "8-06.w011"
+   }
+  },
+  {
+   "id": "s4",
+   "obj": "s4",
+   "verb": "snap",
+   "at": {
+    "word": "8-06.w012",
+    "off": 0
+   },
+   "means": "animals：animals 站闪",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "8-06.w012"
+   }
+  },
+  {
+   "id": "s5",
+   "obj": "s5",
+   "verb": "snap",
+   "at": {
+    "word": "8-06.w014",
+    "off": 0
+   },
+   "means": "patients：patients 站闪",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "rep",
+   "obj": "rep",
+   "verb": "morph",
+   "at": {
+    "word": "8-07.w003",
+    "off": 0
+   },
+   "means": "replace：漏斗淡出",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "8-07.w003"
+   }
+  },
+  {
+   "id": "sci",
+   "obj": "sci",
+   "verb": "grow",
+   "at": {
+    "word": "8-07.w005",
+    "off": 0
+   },
+   "means": "scientists：科学家站到 computer 旁",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "loop",
+   "obj": "loop",
+   "verb": "grow",
+   "at": {
+    "word": "8-07.w009",
+    "off": 0
+   },
+   "means": "trial and error：computer 外画一个循环箭头，转起来",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "8-07.w011"
+   }
+  },
+  {
+   "id": "fast",
+   "obj": "fast",
+   "verb": "move",
+   "at": {
+    "word": "8-07.w013",
+    "off": 0
+   },
+   "means": "light speed：循环快转，速度线",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "8-07.w014"
+   }
+  },
+  {
+   "id": "thx",
+   "obj": "thx",
+   "verb": "grow",
+   "at": {
+    "word": "8-07.w015",
+    "off": 0
+   },
+   "means": "Thanks：五站从上往下全亮，路变红",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   }
+  }
+ ]
+}
