@@ -1,239 +1,234 @@
 {
  "schema": "cdk20.events/1",
  "group": "3-02",
- "tool": "warp_source",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/3-02.json",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 3-02（VO）：细胞大框里三个带小齿轮在转的蛋白；药（钥匙）飞来抓住一个，它变灰、齿轮停；口袋红圈；这个蛋白连钥匙滑到右边放大，变成锁，写 key = drug、lock = protein。页面 Manual302.jsx。",
  "holds": [],
  "events": [
   {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
+   "id": "title",
+   "obj": "title",
+   "verb": "appear",
    "at": {
     "word": "3-02.w001",
-    "off": -9
+    "off": 0
    },
+   "means": "Inside：标题 Inside your cells",
+   "tool": "remotion",
+   "lead": 8,
    "until": {
-    "dur": 51
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.00→1.05 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.0,
-    1.05
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage01",
-   "obj": "footage",
-   "verb": "move",
+   "id": "cell",
+   "obj": "cell",
+   "verb": "grow",
    "at": {
     "word": "3-02.w003",
     "off": 0
    },
+   "means": "cells：细胞圆角大框（双线膜）画出",
+   "tool": "remotion",
+   "lead": 20,
    "until": {
-    "dur": 219
-   },
-   "ease": "linear",
-   "means": "旧动画源片 1.05→3.78 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    1.05,
-    3.783
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage02",
-   "obj": "footage",
-   "verb": "move",
+   "id": "prot",
+   "obj": "prot",
+   "verb": "grow",
    "at": {
-    "word": "3-02.w011",
+    "word": "3-02.w004",
     "off": 0
    },
+   "means": "proteins：三个蛋白长出，标签 proteins",
+   "tool": "remotion",
+   "lead": 16,
    "until": {
-    "dur": 41
-   },
-   "ease": "linear",
-   "means": "旧动画源片 3.78→4.82 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    3.783,
-    4.817
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage03",
-   "obj": "footage",
+   "id": "lot",
+   "obj": "lot",
+   "verb": "appear",
+   "at": {
+    "word": "3-02.w007",
+    "off": 0
+   },
+   "means": "lot：每个蛋白上长出一个小齿轮，开始慢转",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "work",
+   "obj": "work",
+   "verb": "morph",
+   "at": {
+    "word": "3-02.w010",
+    "off": 0
+   },
+   "means": "work：三个齿轮加速",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "drug",
+   "obj": "drug",
+   "verb": "move",
+   "at": {
+    "word": "3-02.w012",
+    "off": 0
+   },
+   "means": "drugs：钥匙从右边飞进来，挂字牌 drugs",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "grab",
+   "obj": "grab",
    "verb": "move",
    "at": {
     "word": "3-02.w013",
     "off": 0
    },
+   "means": "grab：钥匙竖起来俯冲进细胞，贴住中间的蛋白，字牌淡出",
+   "tool": "remotion",
+   "lead": 20,
    "until": {
-    "dur": 44
-   },
-   "ease": "linear",
-   "means": "旧动画源片 4.82→5.23 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    4.817,
-    5.233
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage04",
-   "obj": "footage",
-   "verb": "move",
+   "id": "tight",
+   "obj": "tight",
+   "verb": "morph",
    "at": {
-    "word": "3-02.w015",
+    "word": "3-02.w016",
     "off": 0
    },
+   "means": "tightly：蛋白一侧收紧夹住钥匙",
+   "tool": "remotion",
+   "lead": 10,
    "until": {
-    "dur": 89
-   },
-   "ease": "linear",
-   "means": "旧动画源片 5.23→7.13 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    5.233,
-    7.133
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage05",
-   "obj": "footage",
-   "verb": "move",
+   "id": "change",
+   "obj": "change",
+   "verb": "morph",
    "at": {
     "word": "3-02.w018",
     "off": 0
    },
+   "means": "change：这个蛋白变灰微歪，齿轮停转变灰",
+   "tool": "remotion",
+   "lead": 12,
    "until": {
-    "dur": 29
-   },
-   "ease": "linear",
-   "means": "旧动画源片 7.13→7.48 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    7.133,
-    7.483
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage06",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "3-02.w019",
-    "off": 0
-   },
-   "until": {
-    "dur": 23
-   },
-   "ease": "linear",
-   "means": "旧动画源片 7.48→7.75 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    7.483,
-    7.75
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage07",
-   "obj": "footage",
-   "verb": "move",
+   "id": "does",
+   "obj": "does",
+   "verb": "appear",
    "at": {
     "word": "3-02.w021",
     "off": 0
    },
+   "means": "does：停住的齿轮打红叉，写 change what it does",
+   "tool": "remotion",
+   "lead": 8,
    "until": {
-    "dur": 69
-   },
-   "ease": "linear",
-   "means": "旧动画源片 7.75→8.42 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    7.75,
-    8.417
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage08",
-   "obj": "footage",
+   "id": "slot",
+   "obj": "slot",
    "verb": "move",
    "at": {
     "word": "3-02.w022",
     "off": 0
    },
+   "means": "slotting：钥匙再压下去到底，带回弹",
+   "tool": "remotion",
+   "lead": 12,
    "until": {
-    "dur": 33
-   },
-   "ease": "linear",
-   "means": "旧动画源片 8.42→8.75 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    8.417,
-    8.75
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage09",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "3-02.w023",
-    "off": 0
-   },
-   "until": {
-    "dur": 37
-   },
-   "ease": "linear",
-   "means": "旧动画源片 8.75→9.52 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    8.75,
-    9.517
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage10",
-   "obj": "footage",
-   "verb": "move",
+   "id": "pocket",
+   "obj": "pocket",
+   "verb": "appear",
    "at": {
     "word": "3-02.w025",
     "off": 0
    },
+   "means": "pocket：口袋红圈，标签 pocket",
+   "tool": "remotion",
+   "lead": 12,
    "until": {
-    "dur": 28
-   },
-   "ease": "linear",
-   "means": "旧动画源片 9.52→10.40 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    9.517,
-    10.4
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage11",
-   "obj": "footage",
+   "id": "like",
+   "obj": "like",
    "verb": "move",
    "at": {
     "word": "3-02.w026",
     "off": 0
    },
+   "means": "like：这个蛋白连钥匙复制一份，沿虚线滑到右边放大，钥匙转成横的",
+   "tool": "remotion",
+   "lead": 26,
    "until": {
-    "dur": 98
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "key",
+   "obj": "key",
+   "verb": "appear",
+   "at": {
+    "word": "3-02.w028",
+    "off": 0
    },
-   "ease": "linear",
-   "means": "旧动画源片 10.40→11.53 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    10.4,
-    11.533
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "means": "key：写 key = drug",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "lock",
+   "obj": "lock",
+   "verb": "morph",
+   "at": {
+    "word": "3-02.w031",
+    "off": 0
+   },
+   "means": "lock：右边的蛋白变成锁，钥匙插在锁孔里，写 lock = protein",
+   "tool": "remotion",
+   "lead": 16,
+   "until": {
+    "sentence_end": true
+   }
   }
  ]
 }
