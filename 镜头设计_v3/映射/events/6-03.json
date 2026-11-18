@@ -1,182 +1,234 @@
 {
  "schema": "cdk20.events/1",
  "group": "6-03",
- "tool": "warp_source",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/6-03.json",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 6 章记分板第二行 6-03（画外音）：Finding a hit；左格一大片点（millions）挤进瓶颈（costly bottleneck），右格 8,918 点计数，收缩成 13 个。页面 Manual603.jsx。",
  "holds": [],
  "events": [
   {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
+   "id": "lbl",
+   "obj": "lbl",
+   "verb": "appear",
    "at": {
-    "word": "6-03.w001",
-    "off": -9
-   },
-   "until": {
-    "dur": 68
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.00→1.47 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.0,
-    1.467
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage01",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "6-03.w004",
+    "word": "6-03.w003",
     "off": 0
    },
+   "means": "Finding a hit：行标题",
+   "tool": "remotion",
+   "lead": 26,
    "until": {
-    "dur": 70
-   },
-   "ease": "linear",
-   "means": "旧动画源片 1.47→3.17 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    1.467,
-    3.167
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "6-03.w003"
+   }
   },
   {
-   "id": "footage02",
-   "obj": "footage",
-   "verb": "move",
+   "id": "scr",
+   "obj": "scr",
+   "verb": "appear",
    "at": {
-    "word": "6-03.w007",
+    "word": "6-03.w005",
     "off": 0
    },
+   "means": "screening real compounds：标签",
+   "tool": "remotion",
+   "lead": 10,
    "until": {
-    "dur": 43
-   },
-   "ease": "linear",
-   "means": "旧动画源片 3.17→4.17 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    3.167,
-    4.167
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "6-03.w007"
+   }
   },
   {
-   "id": "footage03",
-   "obj": "footage",
-   "verb": "move",
+   "id": "mil",
+   "obj": "mil",
+   "verb": "grow",
    "at": {
     "word": "6-03.w010",
     "off": 0
    },
+   "means": "millions：一大片点长出",
+   "tool": "remotion",
+   "lead": 30,
    "until": {
-    "dur": 155
-   },
-   "ease": "linear",
-   "means": "旧动画源片 4.17→7.57 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    4.167,
-    7.567
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "6-03.w010"
+   }
   },
   {
-   "id": "footage04",
-   "obj": "footage",
-   "verb": "move",
+   "id": "fun",
+   "obj": "fun",
+   "verb": "grow",
+   "at": {
+    "word": "6-03.w012",
+    "off": 0
+   },
+   "means": "approach：瓶颈漏斗轮廓画出",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "6-03.w012"
+   }
+  },
+  {
+   "id": "rev",
+   "obj": "rev",
+   "verb": "appear",
    "at": {
     "word": "6-03.w015",
     "off": 0
    },
+   "means": "review：标签 2023 review",
+   "tool": "remotion",
+   "lead": 24,
    "until": {
-    "dur": 103
-   },
-   "ease": "linear",
-   "means": "旧动画源片 7.57→9.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    7.567,
-    9.45
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "6-03.w015"
+   }
   },
   {
-   "id": "footage05",
-   "obj": "footage",
+   "id": "sq",
+   "obj": "sq",
    "verb": "move",
+   "at": {
+    "word": "6-03.w018",
+    "off": 0
+   },
+   "means": "hit：点挤进瓶颈",
+   "tool": "remotion",
+   "lead": 40,
+   "until": {
+    "word": "6-03.w021"
+   }
+  },
+  {
+   "id": "cost",
+   "obj": "cost",
+   "verb": "appear",
    "at": {
     "word": "6-03.w020",
     "off": 0
    },
+   "means": "costly bottleneck：红批注",
+   "tool": "remotion",
+   "lead": 8,
    "until": {
-    "dur": 31
-   },
-   "ease": "linear",
-   "means": "旧动画源片 9.45→10.55 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    9.45,
-    10.55
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "6-03.w021"
+   }
   },
   {
-   "id": "footage06",
-   "obj": "footage",
-   "verb": "move",
+   "id": "now",
+   "obj": "now",
+   "verb": "appear",
    "at": {
-    "word": "6-03.w021",
+    "word": "6-03.w022",
     "off": 0
    },
+   "means": "Now：右栏亮起",
+   "tool": "remotion",
+   "lead": 8,
    "until": {
-    "dur": 169
-   },
-   "ease": "linear",
-   "means": "旧动画源片 10.55→15.47 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    10.55,
-    15.467
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "6-03.w022"
+   }
   },
   {
-   "id": "footage07",
-   "obj": "footage",
-   "verb": "move",
+   "id": "cnt",
+   "obj": "cnt",
+   "verb": "grow",
+   "at": {
+    "word": "6-03.w023",
+    "off": 0
+   },
+   "means": "8,918：点阵长出，计数跳到 8,918",
+   "tool": "remotion",
+   "lead": 26,
+   "until": {
+    "word": "6-03.w023"
+   }
+  },
+  {
+   "id": "des",
+   "obj": "des",
+   "verb": "appear",
    "at": {
     "word": "6-03.w024",
     "off": 0
    },
+   "means": "designs：标签",
+   "tool": "remotion",
+   "lead": 8,
    "until": {
-    "dur": 199
-   },
-   "ease": "linear",
-   "means": "旧动画源片 15.47→19.60 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    15.467,
-    19.6
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "6-03.w024"
+   }
   },
   {
-   "id": "footage08",
-   "obj": "footage",
-   "verb": "move",
+   "id": "scrn",
+   "obj": "scrn",
+   "verb": "grow",
    "at": {
-    "word": "6-03.w032",
+    "word": "6-03.w025",
     "off": 0
    },
+   "means": "inside：屏幕框画出",
+   "tool": "remotion",
+   "lead": 14,
    "until": {
-    "dur": 42
+    "word": "6-03.w025"
+   }
+  },
+  {
+   "id": "shr",
+   "obj": "shr",
+   "verb": "move",
+   "at": {
+    "word": "6-03.w029",
+    "off": 0
    },
-   "ease": "linear",
-   "means": "旧动画源片 19.60→20.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    19.6,
-    20.45
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "means": "just：点收缩",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "word": "6-03.w030"
+   }
+  },
+  {
+   "id": "thr",
+   "obj": "thr",
+   "verb": "appear",
+   "at": {
+    "word": "6-03.w030",
+    "off": 0
+   },
+   "means": "13：数字 13 跳一下",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "6-03.w030"
+   }
+  },
+  {
+   "id": "mol",
+   "obj": "mol",
+   "verb": "appear",
+   "at": {
+    "word": "6-03.w031",
+    "off": 0
+   },
+   "means": "molecules：标签",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-03.w031"
+   }
+  },
+  {
+   "id": "made",
+   "obj": "made",
+   "verb": "morph",
+   "at": {
+    "word": "6-03.w033",
+    "off": 0
+   },
+   "means": "made：13 个点变红实心",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "sentence_end": true
+   }
   }
  ]
 }
