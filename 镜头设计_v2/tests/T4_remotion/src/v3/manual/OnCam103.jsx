@@ -50,7 +50,7 @@ const Scene = () => {
           <Write p={span(f, E.bag.l, E.bag.e)}>medicines we already have</Write>
         </div>
       </div>
-      <div style={{position: "absolute", left: 44, top: 1046, fontSize: 17, color: SOFT}}>Ren et al., Chem. Sci. 2023 · Illustration</div>
+      <div style={{position: "absolute", right: 44, top: 1046, fontSize: 17, color: SOFT}}>Ren et al., Chem. Sci. 2023 · Illustration</div>
     </OnCamFrame>
   );
 };

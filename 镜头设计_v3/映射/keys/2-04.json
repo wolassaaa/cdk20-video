@@ -1,0 +1,163 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "2-04",
+ "segs": [
+  "2-04"
+ ],
+ "tool": "remotion",
+ "fps": 60,
+ "len_f": 238,
+ "cut": "cut_v8",
+ "cut_start_f": 10988,
+ "cut_start_s": 183.13,
+ "master_built": "2026-11-18 02:33:56 +09:00",
+ "words_hash": "dc59d6a36fde",
+ "events_src": "镜头设计_v3/映射/events/2-04.json",
+ "words": [
+  {
+   "wid": "2-04.w001",
+   "w": "We",
+   "key": "we#1",
+   "sid": "2-04.s1",
+   "f0": 32,
+   "f1": 37,
+   "F0": 11020,
+   "F1": 11025
+  },
+  {
+   "wid": "2-04.w002",
+   "w": "set",
+   "key": "set#1",
+   "sid": "2-04.s1",
+   "f0": 45,
+   "f1": 60,
+   "F0": 11033,
+   "F1": 11048
+  },
+  {
+   "wid": "2-04.w003",
+   "w": "ourselves",
+   "key": "ourselves#1",
+   "sid": "2-04.s1",
+   "f0": 69,
+   "f1": 104,
+   "F0": 11057,
+   "F1": 11092
+  },
+  {
+   "wid": "2-04.w004",
+   "w": "two",
+   "key": "two#1",
+   "sid": "2-04.s1",
+   "f0": 114,
+   "f1": 128,
+   "F0": 11102,
+   "F1": 11116
+  },
+  {
+   "wid": "2-04.w005",
+   "w": "objectives.",
+   "key": "objectives#1",
+   "sid": "2-04.s1",
+   "f0": 138,
+   "f1": 187,
+   "F0": 11126,
+   "F1": 11175
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "2-04.s1",
+   "text": "We set ourselves two objectives.",
+   "w_first": "2-04.w001",
+   "w_last": "2-04.w005",
+   "f0": 32,
+   "f1": 187
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "board",
+   "obj": "board",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "set：一张便签纸写出 Our goals",
+   "f_start": 35,
+   "f_land": 45,
+   "f_end": 104,
+   "until": "2-04.w003",
+   "word": "2-04.w002",
+   "w": "set",
+   "key": "set#1",
+   "sid": "2-04.s1",
+   "word_f0": 45,
+   "tool": "remotion",
+   "F_start": 11023,
+   "F_land": 11033,
+   "F_end": 11092
+  },
+  {
+   "id": "one",
+   "obj": "num1",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "two：圈号 1 钉上",
+   "f_start": 108,
+   "f_land": 114,
+   "f_end": 134,
+   "until": "2-04.w004",
+   "word": "2-04.w004",
+   "w": "two",
+   "key": "two#1",
+   "sid": "2-04.s1",
+   "word_f0": 114,
+   "tool": "remotion",
+   "F_start": 11096,
+   "F_land": 11102,
+   "F_end": 11122
+  },
+  {
+   "id": "two",
+   "obj": "num2",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "two：圈号 2 钉上",
+   "f_start": 118,
+   "f_land": 124,
+   "f_end": 187,
+   "until": "2-04.w005",
+   "word": "2-04.w004",
+   "w": "two",
+   "key": "two#1",
+   "sid": "2-04.s1",
+   "word_f0": 114,
+   "tool": "remotion",
+   "F_start": 11106,
+   "F_land": 11112,
+   "F_end": 11175
+  },
+  {
+   "id": "slots",
+   "obj": "slots",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "objectives：两条签条拉开，空白等下一段",
+   "f_start": 132,
+   "f_land": 138,
+   "f_end": 187,
+   "until": "2-04.s1",
+   "word": "2-04.w005",
+   "w": "objectives.",
+   "key": "objectives#1",
+   "sid": "2-04.s1",
+   "word_f0": 138,
+   "tool": "remotion",
+   "F_start": 11120,
+   "F_land": 11126,
+   "F_end": 11175
+  }
+ ],
+ "problems": []
+}

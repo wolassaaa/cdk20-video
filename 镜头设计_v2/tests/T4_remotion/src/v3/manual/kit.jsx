@@ -137,3 +137,25 @@ export const Bead = ({K, f}) => (
 
 // 事件表：keys/<段>.json → E.id = {s, l, e}（f_start, f_land, f_end）
 export const evMap = (K) => Object.fromEntries(K.events.map((e) => [e.id, {s: e.f_start, l: e.f_land, e: e.f_end}]));
+
+// 步骤框标题、零件旁的印字、还没讲到的步骤的虚线占位框（第 2 章起各页共用）
+export const Title = ({p, children, size = 48}) => (
+  <div style={{position: "absolute", left: 112, top: 14, fontSize: size, lineHeight: "64px", whiteSpace: "nowrap"}}><Write p={p}>{children}</Write></div>
+);
+export const Label = ({x, y, w = 260, p, children, size = 26, color = INK, italic, align = "center"}) => (
+  <div style={{position: "absolute", left: align === "left" ? x : x - w / 2, top: y, width: w, textAlign: align, fontSize: size, color, fontStyle: italic ? "italic" : "normal"}}>
+    <Write p={p}>{children}</Write>
+  </div>
+);
+export const Pen = ({x, y, p, children, size = 40, rot = -4, color = RED}) => (
+  <div style={{position: "absolute", left: x, top: y, font: `${size}px Hand`, color, transform: `rotate(${rot}deg)`, whiteSpace: "nowrap"}}><Write p={p}>{children}</Write></div>
+);
+export const Placeholder = ({x, y, w, h, show, hide}) => (
+  <div style={{position: "absolute", left: x, top: y, width: w, height: h, border: "2px dashed rgba(31,30,28,0.16)", borderRadius: 10, boxSizing: "border-box", opacity: show * (1 - hide)}} />
+);
+export const PageFrame = () => <div style={{position: "absolute", inset: "34px 40px 44px 40px", border: "1.5px solid rgba(31,30,28,0.22)", borderRadius: 4}} />;
+export const Source = ({children, p = 1}) => <div style={{position: "absolute", left: 44, top: 1046, fontSize: 17, color: SOFT, opacity: p}}>{children}</div>;
+// 字牌：盖章一样落下，轻微放大回落
+export const Plate = ({x, y, w, p, children, style}) => (
+  <div style={{position: "absolute", left: x, top: y, width: w, textAlign: "center", opacity: p, transform: `scale(${1.08 - 0.08 * p})`, ...style}}>{children}</div>
+);

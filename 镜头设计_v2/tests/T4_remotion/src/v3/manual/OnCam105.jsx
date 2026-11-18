@@ -59,7 +59,7 @@ const Scene = () => {
           <path d={`M${RX0 + 110},${RY + 260 + sink} C${RX0 + 260},${RY + 252 + sink} ${RX1 - 260},${RY + 266 + sink} ${RX1 - 110},${RY + 256 + sink}`} stroke={RED} strokeWidth={5} fill="none" strokeLinecap="round" pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - ul} />
         </svg>
       </div>
-      <div style={{position: "absolute", left: 44, top: 1046, fontSize: 17, color: SOFT}}>Wang et al., Pharmaceuticals 2023 · Illustration</div>
+      <div style={{position: "absolute", right: 44, top: 1046, fontSize: 17, color: SOFT}}>Wang et al., Pharmaceuticals 2023 · Illustration</div>
     </OnCamFrame>
   );
 };

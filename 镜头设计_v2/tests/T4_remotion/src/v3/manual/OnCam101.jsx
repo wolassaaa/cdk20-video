@@ -42,7 +42,7 @@ const Scene = () => {
         <Part name="liver" cx={1752} cy={640} w={190} ar={AR.liver} at={E.liver.s + 2} f={f} gate={[1, 0.45]} />
         <Tag n="04" x={1838} y={540} at={E.liver.l + 16} f={f} />
       </div>
-      <div style={{position: "absolute", left: 44, top: 1046, fontSize: 17, color: "#6E6B63"}}>Hong Kong Cancer Registry, 2022 · Illustration</div>
+      <div style={{position: "absolute", right: 44, top: 1046, fontSize: 17, color: "#6E6B63"}}>Hong Kong Cancer Registry, 2022 · Illustration</div>
     </OnCamFrame>
   );
 };

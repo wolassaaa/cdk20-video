@@ -1,353 +1,260 @@
 {
  "schema": "cdk20.events/1",
  "group": "2-01",
- "tool": "warp_source",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/2-01.json",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 2 章二维说明书页。两个步骤框按年份：2011（中大、威尔斯亲王医院、肝肿瘤样本、CCRK = CDK20 升高）→ 2023（AI 研究、同一个蛋白搬过来、英矽智能科学园办公室）。出处 Feng et al. 2011；Ren et al. 2023。页面 Manual201.jsx。",
  "holds": [],
  "events": [
   {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
+   "id": "hk",
+   "obj": "hk_map",
+   "verb": "grow",
    "at": {
     "word": "2-01.w001",
-    "off": -9
-   },
-   "until": {
-    "dur": 6
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.00→0.42 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.0,
-    0.417
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage01",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "2-01.w001",
-    "off": -3
-   },
-   "until": {
-    "dur": 35
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.42→0.93 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.417,
-    0.933
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage02",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "2-01.w003",
     "off": 0
    },
+   "means": "Hong Kong first：页头小香港地图长出",
+   "tool": "remotion",
+   "lead": 4,
    "until": {
-    "dur": 57
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.93→2.30 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.933,
-    2.3
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage03",
-   "obj": "footage",
-   "verb": "move",
+   "id": "step1",
+   "obj": "step_1",
+   "verb": "grow",
+   "at": {
+    "word": "2-01.w004",
+    "off": 0
+   },
+   "means": "In：第 1 步框画出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "dur": 30
+   }
+  },
+  {
+   "id": "title1",
+   "obj": "title_1",
+   "verb": "appear",
    "at": {
     "word": "2-01.w005",
     "off": 0
    },
+   "means": "2011：标题 2011",
+   "tool": "remotion",
    "until": {
-    "dur": 80
-   },
-   "ease": "linear",
-   "means": "旧动画源片 2.30→3.07 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    2.3,
-    3.067
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "2-01.w005",
+    "off": 20
+   }
   },
   {
-   "id": "footage04",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "2-01.w007",
-    "off": 0
-   },
-   "until": {
-    "dur": 36
-   },
-   "ease": "linear",
-   "means": "旧动画源片 3.07→4.32 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    3.067,
-    4.317
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage05",
-   "obj": "footage",
-   "verb": "move",
+   "id": "univ",
+   "obj": "univ",
+   "verb": "grow",
    "at": {
     "word": "2-01.w010",
     "off": 0
    },
+   "means": "Chinese University：大学楼长出，印校名",
+   "tool": "remotion",
+   "lead": 4,
    "until": {
-    "dur": 26
-   },
-   "ease": "linear",
-   "means": "旧动画源片 4.32→5.03 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    4.317,
-    5.033
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "2-01.w014"
+   }
   },
   {
-   "id": "footage06",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "2-01.w011",
-    "off": 1
-   },
-   "until": {
-    "dur": 63
-   },
-   "ease": "linear",
-   "means": "旧动画源片 5.03→5.95 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    5.033,
-    5.95
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage07",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "2-01.w014",
-    "off": 0
-   },
-   "until": {
-    "dur": 37
-   },
-   "ease": "linear",
-   "means": "旧动画源片 5.95→6.35 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    5.95,
-    6.35
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage08",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "2-01.w015",
-    "off": 0
-   },
-   "until": {
-    "dur": 27
-   },
-   "ease": "linear",
-   "means": "旧动画源片 6.35→6.68 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    6.35,
-    6.683
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage09",
-   "obj": "footage",
-   "verb": "move",
+   "id": "tubes",
+   "obj": "tubes",
+   "verb": "grow",
    "at": {
     "word": "2-01.w016",
     "off": 0
    },
+   "means": "liver tumours：三支样本管依次长出",
+   "tool": "remotion",
+   "lead": 4,
    "until": {
-    "dur": 67
-   },
-   "ease": "linear",
-   "means": "旧动画源片 6.68→8.70 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    6.683,
-    8.7
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "2-01.w019"
+   }
   },
   {
-   "id": "footage10",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "2-01.w019",
-    "off": 0
-   },
-   "until": {
-    "dur": 60
-   },
-   "ease": "linear",
-   "means": "旧动画源片 8.70→9.37 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    8.7,
-    9.367
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage11",
-   "obj": "footage",
-   "verb": "move",
+   "id": "hospital",
+   "obj": "hospital",
+   "verb": "grow",
    "at": {
     "word": "2-01.w022",
     "off": 0
    },
+   "means": "Prince of Wales Hospital：医院长出，印名字",
+   "tool": "remotion",
+   "lead": 4,
    "until": {
-    "dur": 41
-   },
-   "ease": "linear",
-   "means": "旧动画源片 9.37→9.98 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    9.367,
-    9.983
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage12",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "2-01.w024",
-    "off": 0
-   },
-   "until": {
-    "dur": 22
-   },
-   "ease": "linear",
-   "means": "旧动画源片 9.98→10.63 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    9.983,
-    10.633
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage13",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "2-01.w025",
-    "off": 1
-   },
-   "until": {
-    "dur": 91
-   },
-   "ease": "linear",
-   "means": "旧动画源片 10.63→11.57 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    10.633,
-    11.567
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage14",
-   "obj": "footage",
-   "verb": "move",
+   "id": "cdk20",
+   "obj": "cdk20",
+   "verb": "grow",
    "at": {
     "word": "2-01.w027",
     "off": 0
    },
+   "means": "protein：CDK20 长出",
+   "tool": "remotion",
+   "lead": 4,
    "until": {
-    "dur": 24
-   },
-   "ease": "linear",
-   "means": "旧动画源片 11.57→12.15 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    11.567,
-    12.15
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "2-01.w029"
+   }
   },
   {
-   "id": "footage15",
-   "obj": "footage",
-   "verb": "move",
+   "id": "raised",
+   "obj": "arrow_up",
+   "verb": "appear",
    "at": {
-    "word": "2-01.w028",
+    "word": "2-01.w031",
     "off": 0
    },
+   "means": "raised：红色上升箭头",
+   "tool": "remotion",
+   "lead": 6,
    "until": {
-    "dur": 344
-   },
-   "ease": "linear",
-   "means": "旧动画源片 12.15→18.52 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    12.15,
-    18.517
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "2-01.w031"
+   }
   },
   {
-   "id": "footage16",
-   "obj": "footage",
-   "verb": "move",
+   "id": "plate",
+   "obj": "plate_ccrk",
+   "verb": "appear",
+   "at": {
+    "word": "2-01.w032",
+    "off": 0
+   },
+   "means": "CCRK also called CDK20：字牌 CCRK = CDK20",
+   "tool": "remotion",
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "step2",
+   "obj": "step_2",
+   "verb": "grow",
    "at": {
     "word": "2-01.w036",
     "off": 0
    },
+   "means": "Fast forward：第 2 步框画出",
+   "tool": "remotion",
+   "lead": 4,
    "until": {
-    "dur": 19
-   },
-   "ease": "linear",
-   "means": "旧动画源片 18.52→18.80 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    18.517,
-    18.8
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "dur": 30
+   }
   },
   {
-   "id": "footage17",
-   "obj": "footage",
+   "id": "title2",
+   "obj": "title_2",
+   "verb": "appear",
+   "at": {
+    "word": "2-01.w039",
+    "off": 0
+   },
+   "means": "2023：标题 2023",
+   "tool": "remotion",
+   "until": {
+    "word": "2-01.w039",
+    "off": 30
+   }
+  },
+  {
+   "id": "chip",
+   "obj": "chip",
+   "verb": "grow",
+   "at": {
+    "word": "2-01.w041",
+    "off": 0
+   },
+   "means": "AI drug-discovery study：芯片长出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "2-01.w043"
+   }
+  },
+  {
+   "id": "same",
+   "obj": "cdk20_copy",
    "verb": "move",
    "at": {
-    "word": "2-01.w037",
-    "off": 1
+    "word": "2-01.w047",
+    "off": 0
    },
+   "means": "same protein：CDK20 从 2011 框飞到 2023 框",
+   "tool": "remotion",
+   "lead": 40,
    "until": {
-    "dur": 598
+    "word": "2-01.w048"
+   }
+  },
+  {
+   "id": "coauth",
+   "obj": "label_coauthors",
+   "verb": "appear",
+   "at": {
+    "word": "2-01.w050",
+    "off": 0
    },
-   "ease": "linear",
-   "means": "旧动画源片 18.80→31.67 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    18.8,
-    31.667
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "means": "co-authors：小字 co-authors",
+   "tool": "remotion",
+   "until": {
+    "word": "2-01.w051"
+   }
+  },
+  {
+   "id": "tower",
+   "obj": "tower",
+   "verb": "grow",
+   "at": {
+    "word": "2-01.w052",
+    "off": 0
+   },
+   "means": "Insilico Medicine：科学园高楼长出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "2-01.w055"
+   }
+  },
+  {
+   "id": "label_ins",
+   "obj": "label_insilico",
+   "verb": "appear",
+   "at": {
+    "word": "2-01.w052",
+    "off": 0
+   },
+   "means": "Insilico Medicine's Hong Kong office：印名字",
+   "tool": "remotion",
+   "until": {
+    "word": "2-01.w056"
+   }
+  },
+  {
+   "id": "park",
+   "obj": "label_park",
+   "verb": "appear",
+   "at": {
+    "word": "2-01.w058",
+    "off": 0
+   },
+   "means": "Science Park：印 Hong Kong Science Park",
+   "tool": "remotion",
+   "until": {
+    "sentence_end": true
+   }
   }
  ]
 }

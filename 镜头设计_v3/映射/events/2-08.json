@@ -1,30 +1,114 @@
 {
  "schema": "cdk20.events/1",
  "group": "2-08",
- "tool": "warp_source",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/2-08.json",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 2 章二维说明书页：路线图回来，前三站（Target、Hit、Improve）是今天要走的路，上面依次落锁、钥匙（带芯片）、烧瓶；最后一个大问题。出处 课程笔记 T2 p.14（结构）。页面 Manual208.jsx。",
  "holds": [],
  "events": [
   {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
+   "id": "road",
+   "obj": "road",
+   "verb": "grow",
    "at": {
     "word": "2-08.w001",
-    "off": -9
+    "off": 0
    },
+   "means": "So here's where we're going：七站的路画出",
+   "tool": "remotion",
+   "lead": 4,
    "until": {
-    "dur": 917
+    "word": "2-08.w005"
+   }
+  },
+  {
+   "id": "lock",
+   "obj": "lock",
+   "verb": "grow",
+   "at": {
+    "word": "2-08.w008",
+    "off": 0
    },
-   "ease": "linear",
-   "means": "旧动画源片 0.00→2.70 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.0,
-    2.7
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "means": "First, the lock：锁长在 Target 上方",
+   "tool": "remotion",
+   "lead": 40,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "chip",
+   "obj": "chip",
+   "verb": "grow",
+   "at": {
+    "word": "2-08.w011",
+    "off": 0
+   },
+   "means": "AI：芯片长出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "2-08.w012"
+   }
+  },
+  {
+   "id": "key",
+   "obj": "key",
+   "verb": "grow",
+   "at": {
+    "word": "2-08.w015",
+    "off": 0
+   },
+   "means": "cut a key：钥匙长在 Hit 上方",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "flask",
+   "obj": "flask",
+   "verb": "grow",
+   "at": {
+    "word": "2-08.w023",
+    "off": 0
+   },
+   "means": "in the lab：烧瓶长在 Improve 上方",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "route",
+   "obj": "route",
+   "verb": "appear",
+   "at": {
+    "word": "2-08.w025",
+    "off": 0
+   },
+   "means": "finally：前三站红线框起来 today's route",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "2-08.w028"
+   }
+  },
+  {
+   "id": "big",
+   "obj": "plate_big",
+   "verb": "appear",
+   "at": {
+    "word": "2-08.w029",
+    "off": 0
+   },
+   "means": "how much did the computers really help：大问题字牌",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   }
   }
  ]
 }

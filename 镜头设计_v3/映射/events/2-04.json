@@ -1,0 +1,13 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "2-04",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜 2-04（C），一句 We set ourselves two objectives。人在左，讲解位：靶纸画出，两枚红色圈号 1、2 依次钉上（two），下面两条空白签条拉出等着下一段填字（objectives）。页面 src/v3/manual/OnCam204.jsx。",
+ "holds": [],
+ "events": [
+  {"id": "board", "obj": "board", "verb": "grow", "at": {"word": "2-04.w002", "off": 0}, "means": "set：一张便签纸写出 Our goals", "tool": "remotion", "lead": 10, "until": {"word": "2-04.w003"}},
+  {"id": "one", "obj": "num1", "verb": "snap", "at": {"word": "2-04.w004", "off": 0}, "means": "two：圈号 1 钉上", "tool": "remotion", "lead": 6, "until": {"word": "2-04.w004", "off": 6}},
+  {"id": "two", "obj": "num2", "verb": "snap", "at": {"word": "2-04.w004", "off": 10}, "means": "two：圈号 2 钉上", "tool": "remotion", "lead": 6, "until": {"word": "2-04.w005"}},
+  {"id": "slots", "obj": "slots", "verb": "grow", "at": {"word": "2-04.w005", "off": 0}, "means": "objectives：两条签条拉开，空白等下一段", "tool": "remotion", "lead": 6, "until": {"sentence_end": true}}
+ ]
+}
