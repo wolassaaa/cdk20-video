@@ -10,7 +10,9 @@ import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, Bead, evMap, Label,
 const E = evMap(K);
 const BX = 320, U = 80, BH = 34;                    // 条起点、一格宽、条高
 const YA = [300, 380], YB = [670, 770];             // 上半两行、下半两行（条的中线）
-const ROW = [740, 820, 900, 980, 1060, 1140], PICKK = 3;   // 开头一排六把钥匙
+const ROW = [740, 820, 900, 980, 1060, 1140], PICKK = 3;
+const ST = ["Target", "Hit", "Improve", "Cells", "Animals", "Trials", "Approval"], RY2 = 935;
+const sx = (i) => 230 + (1460 * i) / 6;   // 开头一排六把钥匙
 
 const Scene = () => {
   const f = useCurrentFrame();
@@ -24,11 +26,12 @@ const Scene = () => {
   const need = span(f, E.need.s, E.big.l + 20, Easing.in(Easing.quad));
   const big = span(f, E.big.s, E.big.l + 16, ease);
   const n48 = span(f, E.n48.s, E.just.l, Easing.out(Easing.cubic));
+  const imp = span(f, E.just.s, E.just.l + 10, ease);
   const jj = f > E.just.l ? Math.exp(-(f - E.just.l) / 7) * Math.sin((f - E.just.l) / 1.8) * 4 : 0;
   const kx = ROW[PICKK] + (150 - ROW[PICKK]) * mv, ky = 240 - 40 * one + (YA[1] - 200) * mv;
   const bead = [[0, 600, 200], [E.one.l, 1260, 240], [E.k48.l, 600, 210], [E.grab.l, 520, 470], [E.fif.l, 1720, 300], [E.tig.l, 1720, 470],
                 [E.enz.l, 1000, 560], [E.r001.l, 120, 600], [E.need.l, 1000, 600], [E.big.l, 1820, 720], [E.r048.l, 120, 840],
-                [E.n48.l, 600, 840], [E.just.l, 700, 900], [K.len_f, 701, 901]];
+                [E.n48.l, 600, 840], [E.just.l, 760, 860], [K.len_f, 761, 861]];
   const rowLab = (txt, y, p, col = INK) => (
     <div style={{position: "absolute", left: 212, top: y - 24, fontSize: 40, lineHeight: "48px", color: col, opacity: p}}>{txt}</div>
   );
@@ -40,7 +43,7 @@ const Scene = () => {
 
       {/* 开头一排六把钥匙（接 5-07），048 抬起来落到第二行 */}
       {ROW.map((x, i) => i !== PICKK && (
-        <div key={i} style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, opacity: 1 - span(f, E.k48.s, E.k48.l)}}>
+        <div key={i} style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, opacity: 1 - 0.6 * span(f, E.k48.s, E.k48.l)}}>
           <Part name="key" cx={x} cy={240} w={70} at={0} f={f} gate={[0, 0.5]} />
         </div>
       ))}
@@ -79,6 +82,14 @@ const Scene = () => {
       </div>
       <div style={{position: "absolute", left: BX + 40, top: YB[1] - 26, fontSize: 44, color: RED}}><Write p={span(f, E.just.s - 10, E.just.l + 20)}>just 33.4</Write></div>
 
+      {/* 七站路：Improve 在 just 33.4 时亮 */}
+      <svg width={1920} height={1080} style={{position: "absolute", left: 0, top: 0}}>
+        <path d={`M120,${RY2} L1750,${RY2}`} stroke={INK} strokeWidth={5} strokeLinecap="round" />
+        <path d={`M120,${RY2} L${sx(1) + (sx(2) - sx(1)) * imp},${RY2}`} stroke={RED} strokeWidth={5} strokeLinecap="round" />
+        {ST.map((n, i) => { const on = i < 2 || (i === 2 && imp > 0.9); const j = i === 2 ? 1 + 0.5 * Math.exp(-Math.max(0, f - E.just.l - 10) / 8) * (f > E.just.l ? 1 : 0) : 1;
+          return <circle key={n} cx={sx(i)} cy={RY2} r={12 * j} fill={on ? RED : PAPER} stroke={i < 3 ? INK : "#9A968C"} strokeWidth={3.5} />; })}
+      </svg>
+      {ST.map((n, i) => <Label key={n} x={sx(i)} y={RY2 + 18} w={160} size={24} color={i === 2 && imp > 0.9 ? RED : i < 3 ? INK : "#8A867C"} p={1}>{n}</Label>)}
       <Source p={span(f, E.grab.l, E.grab.l + 20)}>Ren et al., Chem. Sci. 2023 · Illustration</Source>
       <Bead K={bead} f={f} />
     </AbsoluteFill>
