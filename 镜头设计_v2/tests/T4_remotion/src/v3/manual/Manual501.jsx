@@ -32,6 +32,8 @@ const Scene = () => {
   const snap = span(f, E.grab2.s, E.grab2.l + 4, out);
   // 第一个瓶：molecule 起慢慢倾向 CDK20（it 时到位），贴住后回正
   const tilt = 24 * span(f, E.molec.s, E.it.l, io) * (1 - span(f, E.grab2.s, E.grab2.l + 24, ease));
+  // 倾斜后的瓶口（绕瓶底 (TX0, TY+60) 转）
+  const mouth = [TX(0) + (TY + 60 - TTOP) * Math.sin(tilt * Math.PI / 180), TY + 60 - (TY + 60 - TTOP) * Math.cos(tilt * Math.PI / 180)];
   const bead = [[0, 130, 96], [E.title.l, 700, 96], [E.sub.l, 1100, 96], [E.seven.l, 120, 650], [E.mol.l, 900, 880], [E.made.l, 760, 560],
                 [E.lab.l, 760, 480], [E.any.l, 1250, 300], [E.grab.l, 1300, 430], [E.cdk.l, 1250, 600], [E.grip.l, 1250, 650], [E.meas.l, 1480, 330],
                 [E.kd.l, 1720, 300], [E.rough.l, 1720, 560], [E.how.l, 420, 560], [E.molec.l, 900, 330], [E.it.l, 120, 560], [E.takes.l, 300, 600], [E.grab2.l, 1260, 520],
@@ -52,7 +54,7 @@ const Scene = () => {
         {[...Array(7)].map((_, i) => {
           const p = lineP(i);
           if (p <= 0) return null;
-          const [ex, ey] = end(i), x0 = TX(i), y0 = TTOP;
+          const [ex, ey] = end(i), x0 = i === 0 ? mouth[0] : TX(i), y0 = i === 0 ? mouth[1] : TTOP;
           const t = i === 0 ? thick : 0;
           return <line key={i} x1={x0} y1={y0} x2={x0 + (ex - x0) * p} y2={y0 + (ey - y0) * p} stroke={t > 0.5 ? RED : INK} strokeWidth={2.5 + 4 * t + 2 * flash}
                        strokeDasharray={t > 0.5 ? "none" : "7 8"} opacity={0.75 + 0.25 * Math.max(flash, t)} />;
@@ -80,7 +82,7 @@ const Scene = () => {
           const r = d.r - 14 * snap;
           const tx = PX + r * Math.cos(d.a), ty = PY + r * Math.sin(d.a) * 0.8;
           let x, y;
-          if (t < 0.7) { const u = t / 0.7; x = TX(0) + (ex - TX(0)) * u; y = TTOP + (ey - TTOP) * u; }
+          if (t < 0.7) { const u = t / 0.7; x = mouth[0] + (ex - mouth[0]) * u; y = mouth[1] + (ey - mouth[1]) * u; }
           else { const u = (t - 0.7) / 0.3; x = ex + (tx - ex) * u; y = ey + (ty - ey) * u; }
           return <circle key={k} cx={x} cy={y} r={6} fill={INK} />;
         })}
