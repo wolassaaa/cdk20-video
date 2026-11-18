@@ -1,163 +1,204 @@
 {
  "schema": "cdk20.events/1",
  "group": "3-03",
- "tool": "warp_source",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/3-03.json",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 3-03（VO）：一把锁标 the target，一把钥匙标 a candidate molecule，旁边另两把不同的锁；钥匙滑进自己的锁打勾，再去试另两把，各弹回一次打叉；最后钥匙回到自己的锁，字牌 selectivity。页面 Manual303.jsx。",
  "holds": [],
  "events": [
   {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
+   "id": "title",
+   "obj": "title",
+   "verb": "appear",
    "at": {
     "word": "3-03.w001",
-    "off": -9
-   },
-   "until": {
-    "dur": 6
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.00→5.25 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.0,
-    5.25
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage01",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "3-03.w001",
-    "off": -3
-   },
-   "until": {
-    "dur": 55
-   },
-   "ease": "linear",
-   "means": "旧动画源片 5.25→5.65 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    5.25,
-    5.65
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage02",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "3-03.w002",
     "off": 0
    },
+   "means": "Scientists：标题",
+   "tool": "remotion",
+   "lead": 8,
    "until": {
-    "dur": 66
-   },
-   "ease": "linear",
-   "means": "旧动画源片 5.65→6.75 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    5.65,
-    6.75
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage03",
-   "obj": "footage",
-   "verb": "move",
+   "id": "lock",
+   "obj": "lock",
+   "verb": "grow",
+   "at": {
+    "word": "3-03.w004",
+    "off": 0
+   },
+   "means": "lock：左边第一把锁长出",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "target",
+   "obj": "target",
+   "verb": "appear",
    "at": {
     "word": "3-03.w006",
     "off": 0
    },
+   "means": "target：锁下写 the target，锁上方画红色准星圈",
+   "tool": "remotion",
+   "lead": 8,
    "until": {
-    "dur": 110
-   },
-   "ease": "linear",
-   "means": "旧动画源片 6.75→7.70 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    6.75,
-    7.7
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage04",
-   "obj": "footage",
-   "verb": "move",
+   "id": "key",
+   "obj": "key",
+   "verb": "grow",
+   "at": {
+    "word": "3-03.w009",
+    "off": 0
+   },
+   "means": "key：钥匙在锁左边长出",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "cand",
+   "obj": "cand",
+   "verb": "appear",
    "at": {
     "word": "3-03.w011",
     "off": 0
    },
+   "means": "candidate：钥匙下写 a candidate molecule",
+   "tool": "remotion",
+   "lead": 8,
    "until": {
-    "dur": 35
-   },
-   "ease": "linear",
-   "means": "旧动画源片 7.70→8.57 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    7.7,
-    8.567
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage05",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "3-03.w012",
-    "off": 0
-   },
-   "until": {
-    "dur": 66
-   },
-   "ease": "linear",
-   "means": "旧动画源片 8.57→9.28 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    8.567,
-    9.283
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage06",
-   "obj": "footage",
-   "verb": "move",
+   "id": "good",
+   "obj": "good",
+   "verb": "grow",
    "at": {
     "word": "3-03.w014",
     "off": 0
    },
+   "means": "good：右边另两把不同的锁长出",
+   "tool": "remotion",
+   "lead": 20,
    "until": {
-    "dur": 335
-   },
-   "ease": "linear",
-   "means": "旧动画源片 9.28→12.98 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    9.283,
-    12.983
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage07",
-   "obj": "footage",
+   "id": "fits",
+   "obj": "fits",
    "verb": "move",
+   "at": {
+    "word": "3-03.w016",
+    "off": 0
+   },
+   "means": "fits：钥匙滑进第一把锁",
+   "tool": "remotion",
+   "lead": 24,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "tight",
+   "obj": "tight",
+   "verb": "morph",
+   "at": {
+    "word": "3-03.w020",
+    "off": 0
+   },
+   "means": "tightly：锁一颤，上方打红勾",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "opens",
+   "obj": "opens",
+   "verb": "move",
+   "at": {
+    "word": "3-03.w022",
+    "off": 0
+   },
+   "means": "opens：钥匙拔出，跳到第二把锁左边",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "no",
+   "obj": "no",
+   "verb": "move",
+   "at": {
+    "word": "3-03.w023",
+    "off": 0
+   },
+   "means": "no：钥匙撞第二把锁弹回，打叉",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "else",
+   "obj": "else",
+   "verb": "move",
+   "at": {
+    "word": "3-03.w025",
+    "off": 0
+   },
+   "means": "else's：钥匙跳到第三把锁，弹回，打叉，批注 no one else's",
+   "tool": "remotion",
+   "lead": 18,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "back",
+   "obj": "back",
+   "verb": "move",
+   "at": {
+    "word": "3-03.w026",
+    "off": 0
+   },
+   "means": "That's：钥匙回到自己的锁，三个结果下连一条线收成一行",
+   "tool": "remotion",
+   "lead": 26,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "sel",
+   "obj": "sel",
+   "verb": "appear",
    "at": {
     "word": "3-03.w028",
     "off": 0
    },
+   "means": "selectivity：字牌落下",
+   "tool": "remotion",
+   "lead": 10,
    "until": {
-    "dur": 45
-   },
-   "ease": "linear",
-   "means": "旧动画源片 12.98→13.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    12.983,
-    13.45
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   }
  ]
 }
