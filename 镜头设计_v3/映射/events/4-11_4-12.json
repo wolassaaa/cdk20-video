@@ -1,0 +1,249 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "4-11+4-12",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜 4-11+4-12（D）讲解卡：排名表前三行，picked the winners 依次打勾；Not quite 三个勾变成问号；docking score / a clue, not proof 字牌；Only the lab 长出 flask，三行都连一条线到 flask；页面 OnCam411.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "frame",
+   "obj": "frame",
+   "verb": "grow",
+   "at": {
+    "word": "4-11.w001",
+    "off": 0
+   },
+   "means": "Wait：讲解卡外框画出",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "4-11.w001"
+   }
+  },
+  {
+   "id": "table",
+   "obj": "table",
+   "verb": "grow",
+   "at": {
+    "word": "4-11.w004",
+    "off": 0
+   },
+   "means": "computer：排名表三行画出，标签 computer",
+   "tool": "remotion",
+   "lead": 24,
+   "until": {
+    "word": "4-11.w004"
+   }
+  },
+  {
+   "id": "tick1",
+   "obj": "tick1",
+   "verb": "appear",
+   "at": {
+    "word": "4-11.w005",
+    "off": 0
+   },
+   "means": "picked：第一行打勾",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-11.w005"
+   }
+  },
+  {
+   "id": "tick2",
+   "obj": "tick2",
+   "verb": "appear",
+   "at": {
+    "word": "4-11.w006",
+    "off": 0
+   },
+   "means": "the：第二行打勾",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "4-11.w006"
+   }
+  },
+  {
+   "id": "tick3",
+   "obj": "tick3",
+   "verb": "appear",
+   "at": {
+    "word": "4-11.w007",
+    "off": 0
+   },
+   "means": "winners：第三行打勾",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-11.w007"
+   }
+  },
+  {
+   "id": "q1",
+   "obj": "q1",
+   "verb": "morph",
+   "at": {
+    "word": "4-12.w001",
+    "off": 0
+   },
+   "means": "Not：第一个勾变问号",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "4-12.w001"
+   }
+  },
+  {
+   "id": "q2",
+   "obj": "q2",
+   "verb": "morph",
+   "at": {
+    "word": "4-12.w002",
+    "off": 0
+   },
+   "means": "quite：第二个勾变问号",
+   "tool": "remotion",
+   "lead": 16,
+   "until": {
+    "word": "4-12.w002"
+   }
+  },
+  {
+   "id": "q3",
+   "obj": "q3",
+   "verb": "morph",
+   "at": {
+    "word": "4-12.w002",
+    "off": 0
+   },
+   "means": "quite：第三个勾变问号",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "4-12.w002"
+   }
+  },
+  {
+   "id": "dock",
+   "obj": "dock",
+   "verb": "appear",
+   "at": {
+    "word": "4-12.w004",
+    "off": 0
+   },
+   "means": "docking：标签 docking score 写出",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-12.w004"
+   }
+  },
+  {
+   "id": "score",
+   "obj": "score",
+   "verb": "morph",
+   "at": {
+    "word": "4-12.w005",
+    "off": 0
+   },
+   "means": "score：三根分数条轻跳",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-12.w005"
+   }
+  },
+  {
+   "id": "clue",
+   "obj": "clue",
+   "verb": "appear",
+   "at": {
+    "word": "4-12.w008",
+    "off": 0
+   },
+   "means": "clue：字牌 a clue,",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "4-12.w008"
+   }
+  },
+  {
+   "id": "proof",
+   "obj": "proof",
+   "verb": "appear",
+   "at": {
+    "word": "4-12.w009",
+    "off": 0
+   },
+   "means": "not proof：字牌 not proof 红线",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-12.w010"
+   }
+  },
+  {
+   "id": "flask",
+   "obj": "flask",
+   "verb": "grow",
+   "at": {
+    "word": "4-12.w013",
+    "off": 0
+   },
+   "means": "lab：烧瓶长出",
+   "tool": "remotion",
+   "lead": 18,
+   "until": {
+    "word": "4-12.w013"
+   }
+  },
+  {
+   "id": "l1",
+   "obj": "l1",
+   "verb": "move",
+   "at": {
+    "word": "4-12.w014",
+    "off": 0
+   },
+   "means": "can：第一行连线到烧瓶",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "4-12.w014"
+   }
+  },
+  {
+   "id": "l2",
+   "obj": "l2",
+   "verb": "move",
+   "at": {
+    "word": "4-12.w014",
+    "off": 0
+   },
+   "means": "can：第二行连线到烧瓶",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "4-12.w014"
+   }
+  },
+  {
+   "id": "l3",
+   "obj": "l3",
+   "verb": "move",
+   "at": {
+    "word": "4-12.w015",
+    "off": 0
+   },
+   "means": "tell：第三行连线到烧瓶",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "4-12.w015"
+   }
+  }
+ ]
+}
