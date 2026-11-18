@@ -89,6 +89,31 @@ const Step = ({n, x, y, w, h, at, f, children}) => {
   );
 };
 
+// 零件说明栏（导演 11-18：图要有文字配合）：说明书的零件表，圈号对上框里的圈号，跟着零件出现
+const Legend = ({x, y, w, at, rows, f}) => {
+  const p = span(f, at - 4, at + 26, ease);
+  return (
+    <div style={{position: "absolute", left: x, top: y, width: w}}>
+      <svg width={w} height={4} style={{position: "absolute", left: 0, top: 0}}>
+        <path d={`M0,2 L${w},2`} stroke={INK} strokeWidth={1.5} opacity={0.5} pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - p} />
+      </svg>
+      {rows.map((row, r) => (
+        <div key={r} style={{position: "absolute", left: 0, top: 22 + r * 62, display: "flex", gap: 38, whiteSpace: "nowrap"}}>
+          {row.map(([n, text, a]) => {
+            const q = span(f, a, a + 14, out);
+            return (
+              <div key={n} style={{display: "flex", alignItems: "center", gap: 12, opacity: q, transform: `translateY(${8 * (1 - q)}px)`}}>
+                <div style={{width: 40, height: 40, borderRadius: 20, border: `2px solid ${INK}`, boxSizing: "border-box", font: "24px/36px Serif", textAlign: "center"}}>{n}</div>
+                <Write p={span(f, a + 2, a + 18)} style={{font: "32px Serif", color: INK}}>{text}</Write>
+              </div>
+            );
+          })}
+        </div>
+      ))}
+    </div>
+  );
+};
+
 // 料珠：红色的一小颗料，沿页面一路走，说到哪到哪；每样东西都在它到的那一帧开始长。位置只由词帧决定。
 const beadKeys = () => [
   [0, 150, 60], [W[1].f0, 188, 130], [W[3].f0, 216, 414], [W[5].f0, 311, 302], [W[6].f0, 521, 312], [W[7].f0, 731, 321],
@@ -230,6 +255,18 @@ const Scene = () => {
         </div>
         <Tag n="37" x={768} y={500} at={W[24].f0 + 4} f={f} />
       </Step>
+      <Legend x={96} y={830} w={836} at={W[5].f0} f={f} rows={[
+        [["13", "AI structure prediction", W[5].f0 + 20], ["33", "biological databases", W[6].f0 + 20]],
+        [["36", "virtual screening", W[7].f0 + 20], ["04", "liver cancer", W[10].f0 + 18], ["22", "drug candidate", W[11].f0 + 14]],
+      ]} />
+      <Legend x={988} y={830} w={836} at={W[15].f0} f={f} rows={[
+        [["38", "score", W[15].f0 + 22], ["03", "scientists", W[20].f0 + 22]],
+        [["37", "potential drug candidates", W[24].f0 + 4]],
+      ]} />
+      {/* 红柱旁的笔记：分数最高 */}
+      <div style={{position: "absolute", left: 1700, top: 452, font: "30px Hand", color: RED, transform: "rotate(-4deg)"}}>
+        <Write p={span(f, W[24].f0 + 22, W[24].f0 + 40)}>top score</Write>
+      </div>
       <Bead f={f} />
     </AbsoluteFill>
   );

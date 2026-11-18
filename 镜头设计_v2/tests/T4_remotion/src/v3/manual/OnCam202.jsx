@@ -31,6 +31,14 @@ const at = (arr, f) => {                       // 素材坐标 → 画面坐标�
   const a = g(Math.floor(c)), b = g(Math.ceil(c)), t = c - Math.floor(c);
   return [mix(a[0], b[0], t) * SC + PX, mix(a[1], b[1], t) * SC + PY];
 };
+// 跟踪平滑：先补齐丢点，再做高斯平滑（导演 11-18：跟得太灵敏，手一动幅度太大）
+const fill = (arr) => { const o = []; let last = arr.find(Boolean); for (const p of arr) { if (p) last = p; o.push(last); } return o; };
+const gauss = (arr, sig) => { const a = fill(arr), n = a.length, R = Math.ceil(sig * 3), o = [];
+  for (let i = 0; i < n; i++) { let x = 0, y = 0, w = 0; for (let k = -R; k <= R; k++) { const j = Math.max(0, Math.min(n - 1, i + k)), g = Math.exp(-(k * k) / (2 * sig * sig)); x += a[j][0] * g; y += a[j][1] * g; w += g; } o.push([x / w, y / w]); }
+  return o; };
+const NOSE_S = gauss(T.nose, 10), PALM_S = gauss(T.palm_l, 8), SH_S = gauss(T.shoulder_l, 14);
+const PALM_M = (() => { const a = PALM_S.slice(T.words[13].f0); let x = 0, y = 0; for (const p of a) { x += p[0]; y += p[1]; } return [x / a.length, y / a.length]; })();
+const FOLLOW = 0.6, HEAD = 0.2;
 const NOSE0 = (() => { let x = 0, y = 0, n = 0; for (const p of T.nose) if (p) { x += p[0]; y += p[1]; n++; } return [(x / n) * SC + PX, (y / n) * SC + PY]; })();
 
 const Tag = ({n, x, y, at: a, f}) => {
@@ -44,8 +52,8 @@ const Tag = ({n, x, y, at: a, f}) => {
 const Scene = () => {
   const f = useCurrentFrame();
   // ---- 跟头：讲解位的东西按头的摆动带一点（0.35 倍），像和人处在同一个空间 ----
-  const nose = at(T.nose, f - 3);
-  const hx = (nose[0] - NOSE0[0]) * 0.35, hy = (nose[1] - NOSE0[1]) * 0.35;
+  const nose = at(NOSE_S, f);
+  const hx = (nose[0] - NOSE0[0]) * HEAD, hy = (nose[1] - NOSE0[1]) * HEAD;
 
   // ---- 字牌：research question ----
   const pl = span(f, W[3].f0 - 2, W[3].f0 + 14, out);
@@ -60,8 +68,9 @@ const Scene = () => {
   const bob = Math.sin(f / 31) * 5;
 
   // ---- 钥匙：find 时从肩后出来，assess 时落到手心上方并跟着手走 ----
-  const sh = at(T.shoulder_l, f);
-  const palm = at(T.palm_l, f - 2);
+  const sh = at(SH_S, f);
+  const pr = at(PALM_S, f), pm = [PALM_M[0] * SC + PX, PALM_M[1] * SC + PY];
+  const palm = [mix(pm[0], pr[0], FOLLOW), mix(pm[1], pr[1], FOLLOW)];
   const k0 = [sh[0] - 70, sh[1] + 40];                          // 藏在肩后
   const k1 = [1255 + hx, 452 + hy + Math.sin(f / 23) * 6];      // 浮在讲解位，和眼睛差不多高
   const k2 = [palm[0] + 6, palm[1] - 235 + Math.sin(f / 19) * 4];   // 手心上方
