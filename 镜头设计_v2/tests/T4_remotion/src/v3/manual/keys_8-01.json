@@ -1,0 +1,173 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "8-01",
+ "segs": [
+  "8-01"
+ ],
+ "tool": "remotion",
+ "fps": 60,
+ "len_f": 194,
+ "cut": "cut_v8",
+ "cut_start_f": 58238,
+ "cut_start_s": 970.63,
+ "master_built": "2026-11-18 02:33:56 +09:00",
+ "words_hash": "bd66a30a1cbf",
+ "events_src": "镜头设计_v3/映射/events/8-01.json",
+ "words": [
+  {
+   "wid": "8-01.w001",
+   "w": "So,",
+   "key": "so#1",
+   "sid": "8-01.s1",
+   "f0": 33,
+   "f1": 39,
+   "F0": 58271,
+   "F1": 58277
+  },
+  {
+   "wid": "8-01.w002",
+   "w": "back",
+   "key": "back#1",
+   "sid": "8-01.s1",
+   "f0": 69,
+   "f1": 83,
+   "F0": 58307,
+   "F1": 58321
+  },
+  {
+   "wid": "8-01.w003",
+   "w": "to",
+   "key": "to#1",
+   "sid": "8-01.s1",
+   "f0": 88,
+   "f1": 94,
+   "F0": 58326,
+   "F1": 58332
+  },
+  {
+   "wid": "8-01.w004",
+   "w": "where",
+   "key": "where#1",
+   "sid": "8-01.s1",
+   "f0": 100,
+   "f1": 111,
+   "F0": 58338,
+   "F1": 58349
+  },
+  {
+   "wid": "8-01.w005",
+   "w": "we",
+   "key": "we#1",
+   "sid": "8-01.s1",
+   "f0": 113,
+   "f1": 118,
+   "F0": 58351,
+   "F1": 58356
+  },
+  {
+   "wid": "8-01.w006",
+   "w": "started.",
+   "key": "started#1",
+   "sid": "8-01.s1",
+   "f0": 124,
+   "f1": 148,
+   "F0": 58362,
+   "F1": 58386
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "8-01.s1",
+   "text": "So, back to where we started.",
+   "w_first": "8-01.w001",
+   "w_last": "8-01.w006",
+   "f0": 33,
+   "f1": 148
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "frame",
+   "obj": "frame",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "back：讲解卡外框画出",
+   "f_start": 19,
+   "f_land": 33,
+   "f_end": 83,
+   "until": "8-01.w002",
+   "word": "8-01.w001",
+   "w": "So,",
+   "key": "so#1",
+   "sid": "8-01.s1",
+   "word_f0": 33,
+   "tool": "remotion",
+   "F_start": 58257,
+   "F_land": 58271,
+   "F_end": 58321
+  },
+  {
+   "id": "note",
+   "obj": "note",
+   "verb": "move",
+   "ease": "inout",
+   "means": "back：便签纸从上方落回",
+   "f_start": 39,
+   "f_land": 69,
+   "f_end": 83,
+   "until": "8-01.w002",
+   "word": "8-01.w002",
+   "w": "back",
+   "key": "back#1",
+   "sid": "8-01.s1",
+   "word_f0": 69,
+   "tool": "remotion",
+   "F_start": 58277,
+   "F_land": 58307,
+   "F_end": 58321
+  },
+  {
+   "id": "n1",
+   "obj": "n1",
+   "verb": "morph",
+   "ease": "inout",
+   "means": "we：圈号 1 亮起",
+   "f_start": 103,
+   "f_land": 113,
+   "f_end": 118,
+   "until": "8-01.w005",
+   "word": "8-01.w005",
+   "w": "we",
+   "key": "we#1",
+   "sid": "8-01.s1",
+   "word_f0": 113,
+   "tool": "remotion",
+   "F_start": 58341,
+   "F_land": 58351,
+   "F_end": 58356
+  },
+  {
+   "id": "n2",
+   "obj": "n2",
+   "verb": "morph",
+   "ease": "inout",
+   "means": "started：圈号 2 亮起",
+   "f_start": 116,
+   "f_land": 124,
+   "f_end": 148,
+   "until": "8-01.w006",
+   "word": "8-01.w006",
+   "w": "started.",
+   "key": "started#1",
+   "sid": "8-01.s1",
+   "word_f0": 124,
+   "tool": "remotion",
+   "F_start": 58354,
+   "F_land": 58362,
+   "F_end": 58386
+  }
+ ],
+ "problems": []
+}
