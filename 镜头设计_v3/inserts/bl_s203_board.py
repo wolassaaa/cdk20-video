@@ -8,9 +8,14 @@
       长满时过冲 3% 再回落。玻璃肝是复合件，玻璃壳和红血管同时长，血管晚两帧。
   拔  先绷 3 帧（零件被往上带，浇口拉细），断开那一帧不缓动，换成短一截的残根和白色断口；
       自己那一格和周围几格跟着颤几下再静下来。零件弹起时带转动，慢慢稳住。
-  讲  CDK20 浮着慢慢转，然后自己飞向第 1 区的玻璃肝，镜头跟着它往回走；等在岔口的半个鼓包同时沿主料杆往左跑去喂肝。
-  变  一道波从肝的一头扫到另一头，波到的地方玻璃变软发亮、鼓起来；波扫过定位孔的位置，凸台就已经长出来了。
-  拼  CDK20 的定位销对准孔，最后几毫米加速，卡到底硬停，两件一起下沉再回位；接缝处有一圈料流动着贴合一下，随后收干，留下看得见的缝。
+  讲  CDK20 拔起后自己飘着（没有定位销，下面什么也不顶着）：轻轻上下浮动，自转慢下来带一点余振；
+      然后自己飞向第 1 区的玻璃肝，路上缩到能整个装进肝里，镜头跟着它往回走；等在岔口的半个鼓包同时沿主料杆往左跑去喂肝。
+  变  一道波从肝的左头扫到右头，波到的地方玻璃变软发亮；先扫过 CDK20 要进去的地方，CDK20 顶下来之前已经走远。
+  挤  （11-18 导演改，替换原来的"拼"）CDK20 顶到肝表面，表面被压得凹下去、越压越慢，整只肝往下让一点；CDK20 被软软推回一点，
+      再用力往下挤：顶面上预留的入口（平时收成一点）张开、包着它的腰，它整个滑进透明的肝里，周围的血管被挤开；
+      进去以后入口和凹陷流动着合拢，荡开一圈很浅的波纹，隔着玻璃看得见 CDK20 在肝里。
+      不穿模是靠几何保证的：肝壳和血管每帧按 CDK20 的外形包络沿射线往外推（cavity()），推完一定在包络以外，
+      且推的映射是一一对应的，壳和血管的里外关系不变；每帧的结果存成形状键。
   滑  镜头是一条连续的曲线（位置、距离、对焦都平滑过），全程不停死；焦点比镜头先到下一个零件；开运动模糊。
 
 所有帧号都从 映射/keys/2-03.json 读（映射/events/2-03.json 经 resolve.py 算出），脚本里不写帧号。
@@ -18,7 +23,7 @@
     blender -b --factory-startup -P bl_s203_board.py -- build OUT.blend [采样]     搭场景、打关键帧、存盘、跑三项自检
     blender -b --factory-startup -P bl_s203_board.py -- frames IN.blend OUTDIR 0,120,300 [采样] [百分比]   抽帧预览
 整段渲染：bash render_s203.sh（断点续渲）；合成出片：bash finish_s203.sh。
-自检写到 OUT.check.json：穿模（逐帧 BVH）、丝滑检查表（审片/总管/动效打磨要点_v1.md 第四节）、主角在画面里的位置。
+自检写到 OUT.check.json：穿模（逐帧 BVH，含 CDK20 对肝壳、血管，肝壳对血管）、丝滑检查表（审片/总管/动效打磨要点_v1.md 第四节）、主角在画面里的位置。
 """
 import json
 import math
@@ -29,7 +34,7 @@ from pathlib import Path
 import bpy
 import bmesh
 import numpy as np
-from mathutils import Vector
+from mathutils import Euler, Vector
 from mathutils.bvhtree import BVHTree
 
 HERE = Path(__file__).resolve().parent
@@ -42,12 +47,19 @@ BOARD = "G:/cdk20/work/kit/board_final.blend"
 
 # ---- 设计参数（长度都是毫米；时间一律来自 keys）
 H_CDK, H_LIVER = 20.0, 8.0    # 拔起后浮空的高度
-PEG_IN, HOVER = 3.0, 3.0      # 定位销插进孔的深度；插入前销尖悬在凸台上方多高
-SINK = 1.6                    # 卡入瞬间整体下沉
 YAW_RATE = 0.7                # 浮空自转，度每帧
 LENS, FSTOP, AZ, EL = 50, 16.0, -8.0, 38.0
 SHAKE = 0.5                   # 拔的一瞬间，那一格料杆弹回去的幅度
 TURN = 0.62                   # 第一段鼓包：前六成时间走主料杆，到岔口
+# 11-18 导演改：不要定位销；CDK20 飘起来，飞到玻璃肝上，顶一下被推回，再挤进肝里
+S_IN = 0.62                   # 飞向肝的路上缩到原来的几成（肝最厚处约 28 mm，要整个装进去）
+GAP = 0.6                     # 肝的表面、血管让开 CDK20 外形包络的距离
+A_CAV = 2.5                   # 腔变形影响到包络半径的几倍（≥ 2 才保证推到包络以外；大一点凹得宽、软）
+R_HOLE, R_CL, R_TOP = 2.0, 7.0, 18.0     # 顶面入口挖多大；入口收拢时带动多大一圈；顶面波纹的范围
+TOP_COVER = 3.5               # 进去以后 CDK20 最高处上面还盖着多厚的玻璃
+CLEAR, DENT, BACK = 6.0, 5.0, 3.0        # 悬在肝表面上方多高；第一次顶压下去多深；被推回多少
+BOB, BOB_T = 0.9, 40.0        # 飘着时上下浮动的幅度（mm）和周期（帧）
+CAM_LAND, CAM_END = 0.226, 0.204     # 镜头到肝时、句尾时离入口多远（米）：推近到看得清凹下去、挤进去
 
 
 def lerp(a, b, t):
@@ -74,17 +86,6 @@ def pop(t):
     return 1 - math.exp(-5.0 * t) * math.cos(2 * math.pi * 1.1 * t) * (1 - t) ** 2
 
 
-def dip(t):
-    """拼：卡到底的一瞬间往下一沉，再回位。t 0→1，返回 0→1→0。"""
-    t = clamp(t)
-    return t * (1 - t) ** 2 / (4 / 27)
-
-
-def back_out(t, c=1.6):
-    t = clamp(t) - 1
-    return 1 + (c + 1) * t ** 3 + c * t ** 2
-
-
 def track(knots, n, sigma):
     """几个 (帧, 值) 连成折线，再做高斯平滑：得到每帧一个值，速度、加速度都连续，中间不停死。"""
     fs = np.array([k[0] for k in knots], float); vs = np.array([k[1] for k in knots], float)
@@ -101,8 +102,9 @@ def track(knots, n, sigma):
 # ---------------------------------------------------------------- 零件：合成一个网格、生长、材质
 
 
-def fuse(root, name, mat, voxel=None):
-    """零件的各块料合成一个网格（字留着不动）。voxel（mm）给了就重新布线成均匀小格，生长的台阶和变形要用。"""
+def fuse(root, name, mat, voxel=None, skip=None):
+    """零件的各块料合成一个网格（字留着不动）。voxel（mm）给了就重新布线成均匀小格，生长的台阶和变形要用。
+    skip(o) 为真的那块料直接删掉（CDK20 的定位销）。"""
     bpy.context.view_layer.update()
     dg = bpy.context.evaluated_depsgraph_get()
     bm = bmesh.new()
@@ -111,7 +113,7 @@ def fuse(root, name, mat, voxel=None):
         if o.type == "FONT":
             continue
         gone.append(o)
-        if o.hide_render:
+        if o.hide_render or (skip and o.type == "MESH" and skip(o)):
             continue
         me = bpy.data.meshes.new_from_object(o.evaluated_get(dg))
         me.transform(o.matrix_local)
@@ -400,6 +402,176 @@ def make_pulse(name, mat):
     return o
 
 
+# ---------------------------------------------------------------- 挤进肝：外形包络、选入口、开口、合拢、腔变形
+
+
+def smoothv(t):
+    t = np.clip(t, 0.0, 1.0)
+    return t * t * (3 - 2 * t)
+
+
+class Envelope:
+    """CDK20 的外形包络：从零件中心往每个方向，最远的表面点多远（毫米，零件自己的坐标，未缩放）。
+    每个方向取 12° 锥里所有顶点的最远距离，比真外形略大一圈，三角面也包在里面。查表时双线性插值。"""
+    def __init__(self, co, nt=91, nph=180, alpha=12.0):
+        r = np.linalg.norm(co, axis=1)
+        u = co / r[:, None]
+        th = np.linspace(0, math.pi, nt)
+        ph = np.linspace(0, 2 * math.pi, nph, endpoint=False)
+        T, P = np.meshgrid(th, ph, indexing="ij")
+        G = np.stack([np.sin(T) * np.cos(P), np.sin(T) * np.sin(P), np.cos(T)], -1).reshape(-1, 3)
+        ca = math.cos(math.radians(alpha))
+        rho = np.zeros(len(G))
+        for i in range(0, len(G), 256):
+            d = G[i:i + 256] @ u.T
+            rho[i:i + 256] = np.where(d > ca, r[None, :], 0.0).max(1)
+        self.tab = rho.reshape(nt, nph)
+        self.nt, self.nph = nt, nph
+
+    def __call__(self, d):
+        d = d / np.linalg.norm(d, axis=1)[:, None]
+        th = np.arccos(np.clip(d[:, 2], -1, 1)) / math.pi * (self.nt - 1)
+        ph = (np.arctan2(d[:, 1], d[:, 0]) % (2 * math.pi)) / (2 * math.pi) * self.nph
+        i0 = np.clip(np.floor(th).astype(int), 0, self.nt - 2); ft = th - i0
+        j0 = np.floor(ph).astype(int) % self.nph; fp = ph - np.floor(ph); j1 = (j0 + 1) % self.nph
+        t = self.tab
+        return t[i0, j0] * (1 - ft) * (1 - fp) + t[i0 + 1, j0] * ft * (1 - fp) + t[i0, j1] * (1 - ft) * fp + t[i0 + 1, j1] * ft * fp
+
+
+def cavity(P, c, R, s, env):
+    """CDK20 在肝里撑出的腔：以它的中心为原点，沿每条射线把点往外推，推到包络（乘缩放、加 GAP）以外，
+    离得越远推得越少，到包络半径的 A_CAV 倍处为零。r' = r + ρ(1 − r/(aρ))²，a ≥ 2 时 r' ≥ ρ 且沿射线单调，
+    所以：肝的壳和血管都不会进到 CDK20 里（不穿模）；不同射线上的点不会挤到一起，壳和血管的里外关系不变。"""
+    d = P - c
+    r = np.linalg.norm(d, axis=1)
+    sel = r < A_CAV * (s * float(env.tab.max()) + GAP)
+    out = P.copy()
+    if sel.any():
+        rr = r[sel]
+        u = d[sel] / rr[:, None]
+        rho = s * env(u @ R) + GAP                                  # u @ R：世界方向转回 CDK20 自己的方向（R 的转置）
+        k = np.clip(1 - rr / (A_CAV * rho), 0, None)
+        out[sel] = c + u * (rr + rho * k * k)[:, None]
+    return out
+
+
+def closure(P, mask, Ex, Ey, r_h, z_c, m):
+    """肝顶面入口：m = 1 时开口的一圈收成一点（看不出有口），m = 0 时是原来的开口。只动顶面入口附近（mask）。"""
+    Q = P.copy()
+    if m <= 0:
+        return Q
+    dx, dy = P[:, 0] - Ex, P[:, 1] - Ey
+    rl = np.hypot(dx, dy)
+    w = np.where(rl <= r_h, 1.0, 1 - smoothv((rl - r_h) / (R_CL - r_h))) * mask
+    r2 = np.sqrt(np.maximum(0.0, rl ** 2 - m * r_h ** 2 * w))      # 沿半径单调：收拢不会让面折叠
+    k = np.where(rl > 1e-9, r2 / np.maximum(rl, 1e-9), 0.0)
+    Q[:, 0] = Ex + dx * k
+    Q[:, 1] = Ey + dy * k
+    wz = m * (1 - smoothv((rl - r_h) / 2.0)) * mask                # 口沿那一圈高度拉平，收成一点时不起棱
+    Q[:, 2] = P[:, 2] + wz * (z_c - P[:, 2])
+    return Q
+
+
+def _bvh_part(P, o):
+    return BVHTree.FromPolygons([tuple(v) for v in P], [tuple(p.vertices) for p in o.data.polygons])
+
+
+def _hits(bvh, x, y, down=True):
+    """沿竖线打穿，返回所有交点的 z（从上往下或从下往上排）。"""
+    out = []
+    o = Vector((x, y, 300.0 if down else -300.0))
+    d = Vector((0, 0, -1.0 if down else 1.0))
+    for _ in range(20):
+        h = bvh.ray_cast(o, d)
+        if h[0] is None:
+            break
+        out.append(h[0].z)
+        o = h[0] + d * 0.01
+    return out
+
+
+def choose_entry(P_sh, shell, P_vs, vessel, sx, sy, r_up, r_dn, r_max):
+    """在原定位孔附近找 CDK20 挤进去的地方：整个包络（缩小后）放进肝里，上面盖着至少 TOP_COVER 的玻璃、下面留 3 mm；
+    中心往下走的那条竖线（和旁边 0.8 mm 的四条）上不能有血管（中心要是穿过血管，血管就会被捅穿）。
+    满足的里面挑肝最厚的，离原定位孔近一点的优先。"""
+    bs, bv = _bvh_part(P_sh, shell), _bvh_part(P_vs, vessel)
+    best = None
+    for gx in np.arange(-10, 10.1, 2.0):
+        for gy in np.arange(-10, 10.1, 2.0):
+            x, y = sx + gx, sy + gy
+            top, bot = _hits(bs, x, y), _hits(bs, x, y, down=False)
+            if not top or not bot:
+                continue
+            zt, zb_ = top[0], bot[0]
+            c_fin = zt - TOP_COVER - r_up
+            if c_fin - r_dn < zb_ + 3.0:
+                continue
+            thin = []
+            for a in np.linspace(0, 2 * math.pi, 12, endpoint=False):
+                for rr in (0.5 * r_max, 0.95 * r_max):
+                    t2, b2 = _hits(bs, x + rr * math.cos(a), y + rr * math.sin(a)), _hits(bs, x + rr * math.cos(a), y + rr * math.sin(a), down=False)
+                    thin.append((t2[0] - b2[0]) if t2 and b2 else 0.0)
+            ok = True
+            for ox, oy in ((0, 0), (0.8, 0), (-0.8, 0), (0, 0.8), (0, -0.8)):
+                hv = [z for z in _hits(bv, x + ox, y + oy) if c_fin - 1.0 < z < zt]
+                if hv:
+                    ok = False
+                    break
+            if not ok:
+                continue
+            score = min(thin) - 0.3 * math.hypot(gx, gy)
+            if best is None or score > best[0]:
+                best = (score, dict(x=round(float(x), 2), y=round(float(y), 2), z_top=round(float(zt), 2), z_bottom=round(float(zb_), 2),
+                                    c_final=round(float(c_fin), 2), min_thick=round(float(min(thin)), 2)))
+    assert best is not None, "原定位孔附近找不到能把 CDK20 整个装进去、又不捅穿血管的地方"
+    return best[1]
+
+
+def refine(o, M_, Ex, Ey, rad, lmax):
+    """入口附近（离入口竖线 rad 以内）的长边对半切，直到都短于 lmax（毫米）。挤的时候网格被撑开好几倍，
+    长三角形会从 CDK20 的包络上横着切过去；切短以后每条边撑开后还贴着包络。只加点，不改形状。"""
+    me = o.data
+    bm = bmesh.new(); bm.from_mesh(me)
+    A = M_[:3, :3] / MM; b = M_[:3, 3] / MM
+    n0 = len(bm.verts)
+    for _ in range(8):
+        long_ = []
+        for e in bm.edges:
+            p0, p1 = A @ np.array(e.verts[0].co) + b, A @ np.array(e.verts[1].co) + b
+            if np.linalg.norm(p1 - p0) > lmax and math.hypot((p0[0] + p1[0]) / 2 - Ex, (p0[1] + p1[1]) / 2 - Ey) < rad:
+                long_.append(e)
+        if not long_:
+            break
+        r = bmesh.ops.subdivide_edges(bm, edges=long_, cuts=1, use_grid_fill=False)
+        bmesh.ops.triangulate(bm, faces=[f for f in bm.faces if len(f.verts) > 3])
+    bm.to_mesh(me); bm.free()
+    for p in me.polygons:
+        p.use_smooth = True
+    return dict(verts_before=n0, verts_after=len(me.vertices), left_long=len(long_))
+
+
+def cut_entry(shell, Ms, Ex, Ey, z_top):
+    """在肝顶面入口处挖一个 R_HOLE 的小口（只挖顶面一层）。平时由 closure() 收成一点，挤的时候张开包住 CDK20 的腰。"""
+    me = shell.data
+    bm = bmesh.new(); bm.from_mesh(me)
+    A = Ms[:3, :3] / MM; b = Ms[:3, 3] / MM
+    part = lambda v: A @ np.array(v.co) + b                         # noqa: E731
+    gone = []
+    for fc in bm.faces:
+        p = A @ np.array(fc.calc_center_median()) + b
+        if math.hypot(p[0] - Ex, p[1] - Ey) < R_HOLE and p[2] > z_top - 3.0:
+            gone.append(fc)
+    bmesh.ops.delete(bm, geom=gone, context="FACES")
+    rim = [part(v) for v in bm.verts if v.is_boundary]
+    rim = [p for p in rim if math.hypot(p[0] - Ex, p[1] - Ey) < R_HOLE + 2.0]
+    bm.to_mesh(me); bm.free()
+    for p in me.polygons:
+        p.use_smooth = True
+    rl = [math.hypot(p[0] - Ex, p[1] - Ey) for p in rim]
+    assert rim and len(gone) > 0, "入口没挖出来"
+    return dict(faces=len(gone), rim_verts=len(rim), r_h=round(max(rl), 3), r_min=round(min(rl), 3), z_rim=round(float(np.mean([p[2] for p in rim])), 3))
+
+
 # ---------------------------------------------------------------- 搭场景、打关键帧
 
 
@@ -452,6 +624,11 @@ def build(out_blend, samples=64):
     bpy.context.preferences.edit.keyframe_new_interpolation_type = "LINEAR"
     M = bpy.data.materials
     cell, all_cells = find_cells()
+    c_k = cell["cdk"].matrix_world.translation
+    legs = [o for o in bpy.data.objects["board"].children if o.name.startswith("foot") and (o.matrix_world.translation.xy - c_k.xy).length < 45 * MM]
+    for o in legs:                                             # 11-18：CDK20 那一格后面的一根板脚，从空格里看过去像一根柱子把 CDK20 顶起来，这一镜去掉
+        bpy.data.objects.remove(o)
+    print("S203 去掉板脚", len(legs))
     zb = bpy.data.objects["board"].location.z / MM
     cx = {k: c.matrix_world.translation.x / MM for k, c in cell.items()}
     cy = {k: c.matrix_world.translation.y / MM for k, c in cell.items()}
@@ -465,7 +642,8 @@ def build(out_blend, samples=64):
     m_gl = hero_mat("hero_glass", M["kit_organ_glass"], "#FF8A8A", emit=1.6)
     m_vs = hero_mat("hero_vessel", M["kit_red"], "#FF6A70", emit=1.8)
     plate = fuse(r_pl, "hero_plate", m_pl, voxel=0.2)
-    cdk = fuse(r_ck, "hero_cdk20", m_ck)
+    # 11-18 导演改：CDK20 不要定位销（那根细圆柱），拔起来以后是自己飘着的
+    cdk = fuse(r_ck, "hero_cdk20", m_ck, skip=lambda o: len(o.data.vertices) < 1000)
     txt = next(o for o in r_pl.children if o.type == "FONT")
     half_pl = float(np.abs(coords(plate)[:, 0]).max()) / MM
     txt.data.materials.clear(); txt.data.materials.append(ink_reveal(M["kit_ink_dark"], cell["plate"].matrix_world.translation.x, half_pl))
@@ -473,28 +651,43 @@ def build(out_blend, samples=64):
     shell = next(o for o in kids if o.data.materials[0].name.startswith("kit_organ_glass") and len(o.data.vertices) > 5000)
     vessel = next(o for o in kids if o.data.materials[0].name.startswith("kit_red"))
     ring = next(o for o in kids if o not in (shell, vessel))
-    bake_mesh(shell, subdiv=1); bake_mesh(ring)
-    shell.name = "hero_liver_shell"; vessel.name = "hero_liver_vessel"; ring.name = "hero_liver_boss"
+    bpy.data.objects.remove(ring)                                  # 凸台是给定位销的，销没了，凸台也不要
+    for md in [md for md in shell.modifiers if md.type == "BOOLEAN"]:
+        shell.modifiers.remove(md)                                 # 定位孔原来上下打穿；不要它，入口自己在顶面开
+    bake_mesh(shell, subdiv=1)
+    shell.name = "hero_liver_shell"; vessel.name = "hero_liver_vessel"
     shell.data.materials.clear(); shell.data.materials.append(m_gl)
     vessel.data.materials.clear(); vessel.data.materials.append(m_vs)
     sx, sy = (float(v) for v in r_lv["socket"][:2])
-    rz = (np.array(ring.matrix_local)[:3, :3] @ coords(ring).T).T[:, 2] / MM + ring.matrix_local.translation.z / MM
-    boss_top, boss_h = float(rz.max()), float(rz.max() - rz.min())
 
+    # ---- 挤进肝：CDK20 的外形包络、入口位置、肝顶面上的入口（平时合拢成一点）
     cc = coords(cdk) / MM
-    peg_tip = float(cc[:, 2].min()); body_min = float(cc[np.hypot(cc[:, 0], cc[:, 1]) > 2.6, 2].min())
+    env = Envelope(cc)
+    rho_dn, rho_up = (float(env(np.array([[0, 0, k]]))[0]) for k in (-1.0, 1.0))
+    Ms, Mv = np.array(shell.matrix_local), np.array(vessel.matrix_local)
+    to_part = lambda o, M_: (coords(o) / MM) @ M_[:3, :3].T + M_[:3, 3] / MM      # noqa: E731  物体坐标（米）→ 肝零件坐标（毫米）
+    P_sh, P_vs = to_part(shell, Ms), to_part(vessel, Mv)
+    ent = choose_entry(P_sh, shell, P_vs, vessel, sx, sy, S_IN * rho_up + GAP, S_IN * rho_dn + GAP, S_IN * float(env.tab.max()) + GAP)
+    Ex, Ey, z_top, c_fin = ent["x"], ent["y"], ent["z_top"], ent["c_final"]
+    hole = cut_entry(shell, Ms, Ex, Ey, z_top)
+    rf = dict(shell=refine(shell, Ms, Ex, Ey, 34.0, 0.5), vessel=refine(vessel, Mv, Ex, Ey, 34.0, 0.4))
+    P_vs = to_part(vessel, Mv)
+    P_sh = to_part(shell, Ms)
+    top_mask = (np.hypot(P_sh[:, 0] - Ex, P_sh[:, 1] - Ey) < R_TOP) & (P_sh[:, 2] > z_top - 4.0)
+    print(f"S203 entry: CDK20 包络 下 {rho_dn:.2f} 上 {rho_up:.2f} 最大 {env.tab.max():.2f} mm（未缩放）; 入口 {ent}; 开口 {hole}; 加密 {rf}")
+
     G = dict(plate=add_grow(plate, g_pl, 0.7, 0.62, "grow_plate"),
              cdk=add_grow(cdk, g_ck, 1.6, 0.62, "grow_cdk20"),
              shell=add_grow(shell, g_lv, 2.6, 0.62, "grow_liver_shell"),
              vessel=add_grow(vessel, g_lv, 2.6, 0.62, "grow_liver_vessel"))
     wave_c = KP.link(bpy.data.objects.new("wave_x", None)); wave_c.location.x = 1.0
     wm = shell.modifiers.new("wave", "NODES"); wm.node_group = gn_wave("liver_wave", wave_c, 1.3, 7.0)
-    print(f"S203 geometry: cdk verts {len(cc)} z {peg_tip:.2f}..{cc[:, 2].max():.2f} body_min {body_min:.2f}; shell verts {len(shell.data.vertices)} vessel {len(vessel.data.vertices)}; "
-          f"socket ({sx:.1f}, {sy:.1f}) boss top {boss_top:.2f} h {boss_h:.2f}; plate verts {len(plate.data.vertices)}")
+    print(f"S203 geometry: cdk verts {len(cc)} z {cc[:, 2].min():.2f}..{cc[:, 2].max():.2f}; shell verts {len(shell.data.vertices)} vessel {len(vessel.data.vertices)}; "
+          f"socket ({sx:.1f}, {sy:.1f}); plate verts {len(plate.data.vertices)}")
     print("S203 grow", {k: {a: (round(b, 3) if isinstance(b, float) else b) for a, b in v.items() if a != "ctrl"} for k, v in G.items()})
 
     # ---- 拔：浇口残根和白色断口；预备时浇口被拉细
-    e_ej, e_fly, e_sn, e_sm = EV["cdk_eject"], EV["cdk_fly"], EV["cdk_snap"], EV["seam_flow"]
+    e_ej, e_fly, e_pr, e_in, e_cl = EV["cdk_eject"], EV["cdk_fly"], EV["cdk_press"], EV["cdk_enter"], EV["liver_close"]
     l_ej, l_mo = EV["liver_eject"], EV["liver_morph"]
     scar = KP.mat_solid("scar_white", "#FFFFFF", rough=0.5, coat=0.0, sss=0)
     brk = dict(cdk=break_gates(cell["cdk"], cdk, scar, e_ej["f_land"]), liver=break_gates(cell["liver"], shell, scar, l_ej["f_land"]))
@@ -504,15 +697,51 @@ def build(out_blend, samples=64):
             cone.scale = (1, 1, 1); cone.keyframe_insert("scale", frame=e["f_start"])
             cone.scale = (0.5, 0.5, 1.04); cone.keyframe_insert("scale", frame=e["f_land"] - 1)
 
-    # ---- 路径：从零件几何算
-    z_seat = H_LIVER + boss_top - PEG_IN - peg_tip                 # CDK20 卡到底时原点的高度（肝浮在 H_LIVER）
-    z_hover = z_seat + PEG_IN + HOVER                              # 销尖悬在凸台上方 HOVER
-    dxs, dys = cx["liver"] + sx - cx["cdk"], cy["liver"] + sy - cy["cdk"]       # 从 CDK20 的框到肝上的孔
-    seam = z_seat + body_min - (H_LIVER + boss_top)                # 卡到底后 CDK20 身子最低处离凸台顶面多高（看得见的缝）
-    print(f"S203 path: z_seat {z_seat:.2f} z_hover {z_hover:.2f} travel x {dxs:.1f} y {dys:.1f}; seam {seam:.2f} mm; peg/hole radial gap 0.30 mm")
+    # ---- 路径：从零件几何算（肝零件坐标，毫米）
+    rd = S_IN * rho_dn + GAP                                       # 缩小后，CDK20 中心到最低处（含让开的距离）
+    c_touch = z_top + rd                                           # CDK20 最低处刚碰到肝顶面时，中心的高度
+    c_app = c_touch + CLEAR                                        # 飞到时悬在这里
+    z_rim = float(hole["z_rim"])
+    print(f"S203 path: 碰到 {c_touch:.2f} 悬停 {c_app:.2f} 第一次压到 {c_touch - DENT:.2f} 推回到 {c_touch - DENT + BACK:.2f} 最后 {c_fin:.2f}（肝顶面 {z_top:.2f}）")
+
+    def spring(t):
+        """从静止出发、过冲一点再停稳的 0→1。"""
+        t = clamp(t)
+        w = 2 * math.pi * 0.85
+        return 1 - math.exp(-4.5 * t) * (math.cos(w * t) + 4.5 / w * math.sin(w * t))
+
+    def cz(f):
+        """CDK20 中心在肝零件坐标里的高度（入口那条竖线上）。"""
+        if f <= e_pr["f_start"]:
+            return c_app
+        if f <= e_pr["f_land"]:                                    # 顶：越压越慢，阻力
+            t = (f - e_pr["f_start"]) / (e_pr["f_land"] - e_pr["f_start"])
+            return c_app - (CLEAR + DENT) * (1 - (1 - t) ** 2.4)
+        z1 = c_touch - DENT + BACK
+        if f <= e_in["f_start"]:                                   # 被软软推回
+            t = (f - e_pr["f_land"]) / (e_in["f_start"] - e_pr["f_land"])
+            return c_touch - DENT + BACK * spring(t)
+        if f <= e_in["f_land"]:                                    # 再用力挤：先往上一缩，然后越来越快地滑进去，最后收住
+            t = (f - e_in["f_start"]) / (e_in["f_land"] - e_in["f_start"])
+            a = 0.9 * math.sin(math.pi * min(t / 0.22, 1.0)) ** 2 if t < 0.22 else 0.0
+            u = clamp((t - 0.1) / 0.9)
+            return z1 + a - (z1 - c_fin) * smoother(u ** 1.35)
+        t = (f - e_in["f_land"]) / max(1, e_in["f_end"] - e_in["f_land"])
+        return c_fin - 0.8 * math.sin(math.pi * clamp(t)) * (1 - clamp(t)) ** 0.5       # 到底一沉再回位
+
+    def press(f):
+        """肝被顶的程度（毫米）：第一次顶的时候按 CDK20 压下去多深，挤进去以后慢慢放掉。"""
+        if f <= e_in["f_start"]:
+            return max(0.0, c_touch - cz(f))
+        return max(0.0, c_touch - cz(e_in["f_start"])) * (1 - smooth((f - e_in["f_start"]) / 10.0))
 
     def sink(f):
-        return -SINK * dip((f - e_sn["f_land"]) / max(1, e_sn["f_end"] - e_sn["f_land"])) if f > e_sn["f_land"] else 0.0
+        """整只肝被顶得往下让一点；挤进去那一下再沉一下、回位。"""
+        s = -0.22 * press(f)
+        if e_in["f_start"] < f:
+            t = (f - e_in["f_start"]) / (e_in["f_end"] + 4 - e_in["f_start"])
+            s -= 1.1 * math.sin(math.pi * clamp(t)) ** 2 * (1 - clamp(t))
+        return s
 
     def shake(f, e, k=1.0, lag=0):
         """拔的前后，那一格料杆的上下：先被零件带起来一点，断开的一帧弹回去，颤几下静下来。"""
@@ -526,31 +755,8 @@ def build(out_blend, samples=64):
     for f in range(NF):
         r = 0.0
         if f > e_ej["f_land"]:
-            r = YAW_RATE * (1 + 3.0 * math.exp(-(f - e_ej["f_land"]) / 9.0)) * (1 - smoother((f - e_fly["f_start"]) / (e_sn["f_land"] - e_fly["f_start"])))
+            r = YAW_RATE * (1 + 3.0 * math.exp(-(f - e_ej["f_land"]) / 9.0)) * (1 - smoother((f - e_fly["f_start"]) / (e_in["f_land"] - e_fly["f_start"])))
         yaw_acc.append(yaw_acc[-1] + r)
-
-    def cdk_pose(f):
-        """返回 (x, y, z, 低头, 侧倾, 自转)，毫米和度，相对 CDK20 自己那一格的中心（不含格子的颤动）。"""
-        if f < e_ej["f_start"]:
-            return 0.0, 0.0, 0.0, 0.0, 0.0, 0.0
-        if f < e_ej["f_land"]:                                     # 预备：往上绷
-            return 0.0, 0.0, 0.7 * ((f - e_ej["f_start"] + 1) / (e_ej["f_land"] - e_ej["f_start"])) ** 2, 0.0, 0.0, 0.0
-        D = e_ej["f_end"] - e_ej["f_land"]
-        t = (f - e_ej["f_land"]) / D
-        z = H_CDK * pop(t)
-        tilt = 13.0 * smooth(t)                                    # 浮起来以后朝镜头低一点头
-        roll = 7.0 * math.exp(-4.0 * t) * math.sin(2 * math.pi * 1.6 * t)       # 弹起时带的晃
-        x = y = 0.0
-        if f > e_fly["f_start"]:
-            t = (f - e_fly["f_start"]) / (e_fly["f_land"] - e_fly["f_start"])
-            x, y = dxs * smoother(t), dys * smoother(t)
-            z = lerp(z, z_hover, smooth(t / 0.38))                 # 先升够高，越过板上所有东西，再平移到孔的上方
-            tilt *= 1 - smooth((t - 0.3) / 0.6)
-            roll += 9.0 * math.sin(2 * math.pi * clamp(t)) * (1 - clamp(t)) ** 0.5     # 起步身子往后仰，刹车往前倾
-        if f > e_sn["f_start"]:
-            t = clamp((f - e_sn["f_start"]) / (e_sn["f_land"] - e_sn["f_start"]))
-            z = lerp(z_hover, z_seat, t ** 3)                      # 被吸过去：最后几毫米加速，到底硬停
-        return x, y, z + sink(f), tilt, roll, yaw_acc[f]
 
     def liver_z(f):
         if f < l_ej["f_start"]:
@@ -558,6 +764,47 @@ def build(out_blend, samples=64):
         if f < l_ej["f_land"]:
             return 0.5 * ((f - l_ej["f_start"] + 1) / (l_ej["f_land"] - l_ej["f_start"])) ** 2
         return H_LIVER * pop((f - l_ej["f_land"]) / (l_ej["f_end"] - l_ej["f_land"])) + sink(f)
+
+    def bob(f):
+        """飘着：轻轻上下浮动。"""
+        t = f - e_ej["f_land"] - 6
+        return BOB * math.sin(2 * math.pi * t / BOB_T) * smooth(t / 16.0) if t > 0 else 0.0
+
+    liver0 = (cx["liver"], cy["liver"], zb)
+
+    def cdk_world(f):
+        """CDK20 中心的世界坐标（毫米）和姿态：(x, y, z, 低头, 侧倾, 自转, 缩放)。"""
+        ox, oy = cx["cdk"], cy["cdk"]
+        yaw = yaw_acc[f]
+        if f < e_ej["f_start"]:
+            return ox, oy, zb, 0.0, 0.0, 0.0, 1.0
+        if f < e_ej["f_land"]:                                     # 预备：往上绷
+            return ox, oy, zb + 0.7 * ((f - e_ej["f_start"] + 1) / (e_ej["f_land"] - e_ej["f_start"])) ** 2, 0.0, 0.0, 0.0, 1.0
+        D = e_ej["f_end"] - e_ej["f_land"]
+        t = (f - e_ej["f_land"]) / D
+        z = zb + H_CDK * pop(t) + bob(f)
+        tilt = 13.0 * smooth(t)                                    # 浮起来以后朝镜头低一点头
+        roll = 7.0 * math.exp(-4.0 * t) * math.sin(2 * math.pi * 1.6 * t)       # 弹起时带的晃
+        yaw += 6.0 * math.exp(-(f - e_ej["f_land"]) / 16.0) * math.sin(2 * math.pi * (f - e_ej["f_land"]) / 23.0)   # 自转的余振
+        x, y, s = ox, oy, 1.0
+        if f > e_fly["f_start"]:
+            t = clamp((f - e_fly["f_start"]) / (e_fly["f_land"] - e_fly["f_start"]))
+            lz = lerp(H_LIVER, liver_z(f), smooth((t - 0.6) / 0.4))
+            ax, ay, az = liver0[0] + Ex, liver0[1] + Ey, zb + lz + c_app
+            x, y = lerp(ox, ax, smoother(t)), lerp(oy, ay, smoother(t))
+            z = lerp(z, az, smooth(t / 0.38))                      # 先升够高，越过板上所有东西，再平移到入口上方
+            tilt *= 1 - smooth((t - 0.3) / 0.6)
+            roll += 9.0 * math.sin(2 * math.pi * t) * (1 - t) ** 0.5     # 起步身子往后仰，刹车往前倾
+            s = lerp(1.0, S_IN, smoother(t))
+        if f > e_fly["f_land"]:                                    # 到了以后跟着肝走（肝坐标里沿入口竖线上下）
+            x, y, z = liver0[0] + Ex, liver0[1] + Ey, zb + liver_z(f) + cz(f)
+            tilt = 0.0
+            roll = 2.5 * math.sin(math.pi * clamp((f - e_pr["f_start"]) / (e_in["f_start"] - e_pr["f_start"]))) * math.sin(2 * math.pi * (f - e_pr["f_start"]) / 9.0)
+            if e_in["f_start"] < f:
+                t = (f - e_in["f_start"]) / (e_in["f_end"] - e_in["f_start"])
+                yaw += 5.0 * math.sin(2 * math.pi * 1.5 * t) * (1 - clamp(t)) ** 1.5     # 往里挤的时候扭一扭
+            s = S_IN
+        return x, y, z, tilt, roll, yaw, s
 
     # ---- 鼓包走的路（板面坐标）
     RM, RL, RK = KP.R_MAIN, KP.R_LOOP, 1.2
@@ -609,15 +856,14 @@ def build(out_blend, samples=64):
     c1, c2, c3 = EV["cam_plate"], EV["cam_cdk"], EV["cam_liver"]
     lx, ly = cx["liver"], cy["liver"]
     fa = lambda u: e_fly["f_start"] + u * (e_fly["f_land"] - e_fly["f_start"])  # noqa: E731  CDK20 飞到几成的那一帧
-    fa = lambda u: e_fly["f_start"] + u * (e_fly["f_land"] - e_fly["f_start"])  # noqa: E731  CDK20 飞到几成的那一帧
     fj = e_pa["f_start"] + TURN * (e_pa["f_land"] - e_pa["f_start"])          # 鼓包到岔口的那一帧
     kn_x = [(0, px - 97), (c1["f_start"], px - 95), (fj, px - 30), (c1["f_land"], px - 18), (c2["f_start"], px - 10), (c2["f_land"], kx - 26),
-            (c3["f_start"], kx - 30), (fa(0.28), kx - 118), (fa(0.53), lx + 30), (fa(0.72), lx + 12), (c3["f_land"], lx), (NF - 1, lx - 4)]
+            (c3["f_start"], kx - 30), (fa(0.28), kx - 118), (fa(0.53), lx + 30), (fa(0.80), lx + 6 + 0.4 * Ex), (c3["f_land"], lx + 0.9 * Ex), (NF - 1, lx + Ex)]
     kn_y = [(0, 34), (c1["f_land"], 38), (c2["f_start"], 44), (c2["f_land"], ky - 24), (c3["f_start"], ky - 26), (fa(0.28), ky - 36),
-            (fa(0.53), ly - 4), (c3["f_land"], ly - 16), (NF - 1, ly - 18)]
-    kn_z = [(0, 4), (c2["f_start"], 6), (c2["f_land"], 13), (c3["f_start"], 16), (fa(0.28), 28), (fa(0.53), 24), (c3["f_land"], 18), (NF - 1, 18)]
+            (fa(0.53), ly - 4), (c3["f_land"], ly - 7 + 0.5 * Ey), (NF - 1, ly - 6 + 0.6 * Ey)]
+    kn_z = [(0, 4), (c2["f_start"], 6), (c2["f_land"], 13), (c3["f_start"], 16), (fa(0.28), 28), (fa(0.53), 24), (c3["f_land"], H_LIVER + z_top - 1), (NF - 1, H_LIVER + z_top - 3)]
     kn_d = [(0, 0.252), (c1["f_land"], 0.240), (c2["f_start"], 0.237), (c2["f_land"], 0.226), (c3["f_start"], 0.230), (fa(0.28), 0.296),
-            (fa(0.53), 0.294), (c3["f_land"], 0.288), (NF - 1, 0.278)]
+            (fa(0.53), 0.294), (c3["f_land"], CAM_LAND), (NF - 1, CAM_END)]
     TX, TY, TZ, TD = (track(k, NF, 9.0) for k in (kn_x, kn_y, kn_z, kn_d))
     cam = KP.camera(sc, (0, 0, 0), 1.0, EL, AZ, lens=LENS, fstop=FSTOP)
     cdir = cam.location.normalized()
@@ -626,7 +872,7 @@ def build(out_blend, samples=64):
     def world(k, p):
         return Vector(((cx[k] + p[0]) * MM, (cy[k] + p[1]) * MM, (zb + p[2]) * MM))
 
-    # 对焦：先到。镜头还在路上，焦点已经落到下一个零件上
+    # 对焦：先到。镜头还在路上，焦点已经落到下一个零件上；最后落在肝里的 CDK20 上
     w_ck = track([(0, 0), (c2["f_start"] - 4, 0), (c2["f_start"] + 22, 1), (NF - 1, 1)], NF, 5.0)
     w_lv = track([(0, 0), (c3["f_start"] + 6, 0), (c3["f_start"] + 36, 0.6), (e_fly["f_land"] - 12, 0.6), (e_fly["f_land"], 1.0), (NF - 1, 1.0)], NF, 5.0)
     cam_pos = []
@@ -635,10 +881,84 @@ def build(out_blend, samples=64):
         cam.location = tgt + cdir * float(TD[f])
         cam.keyframe_insert("location", frame=f)
         cam_pos.append(tuple(cam.location))
-        x, y, z, tilt, roll, yaw = cdk_pose(f)
-        p = world("plate", (0, 0, 1.4)).lerp(world("cdk", (x, y, z)), clamp(float(w_ck[f]))).lerp(world("liver", (sx, sy, liver_z(f) + boss_top)), clamp(float(w_lv[f])))
+        X, Y, Z = cdk_world(f)[:3]
+        p = world("plate", (0, 0, 1.4)).lerp(Vector((X * MM, Y * MM, Z * MM)), clamp(float(w_ck[f]))).lerp(
+            world("liver", (Ex, Ey, liver_z(f) + min(z_top - 2.0, cz(f) + 3.0))), clamp(float(w_lv[f])))
         cam.data.dof.focus_distance = (p - cam.location).dot(-cdir)
         cam.data.dof.keyframe_insert("focus_distance", frame=f)
+
+    # ---- 挤进肝：每帧把肝的壳和血管按 CDK20 的位置算好，存成形状键（只在 CDK20 挨近以后才有）
+    def rim_m(f):
+        """入口合拢的程度：1 = 合成一点（平时），0 = 开着（CDK20 中心经过顶面的那几帧）。"""
+        if f <= e_in["f_start"]:
+            return 1.0
+        m_open = 1 - smooth((f - e_in["f_start"]) / 4.0)
+        d = z_rim - cz(f)
+        m_close = smooth((d - 3.0) / 4.0) if d > 0 else 0.0
+        return max(m_open, m_close)
+
+    def ripple(f):
+        """合拢以后荡开一圈很浅的波纹：(振幅 mm, 走了多远 mm)。"""
+        if f < e_cl["f_start"]:
+            return 0.0, 0.0
+        t = (f - e_cl["f_start"]) / max(1, NF - 1 - e_cl["f_start"])
+        return 0.35 * smooth((f - e_cl["f_start"]) / 3.0) * (1 - smooth(t)), 0.9 * (f - e_cl["f_start"])
+
+    def pre_shell(f):
+        """形变前先做的两件事（只动顶面入口附近）：入口合拢、波纹。"""
+        m = rim_m(f)
+        Q = closure(P_sh, top_mask, Ex, Ey, hole["r_h"], z_rim, m)
+        a, run = ripple(f)
+        if a > 0:
+            rl = np.hypot(Q[:, 0] - Ex, Q[:, 1] - Ey)
+            env_r = np.exp(-((rl - run - 2.0) / 3.0) ** 2) * (1 - smoothv((rl - (R_TOP - 4)) / 4.0)) * smoothv((P_sh[:, 2] - (z_top - 6.0)) / 2.5)
+            Q[:, 2] += a * env_r * np.sin(2 * math.pi * (rl - run) / 5.0)
+        return Q, m
+
+    def cdk_part(f):
+        """CDK20 的中心（肝零件坐标）、转动矩阵、缩放。"""
+        X, Y, Z, tilt, roll, yaw, s = cdk_world(f)
+        c = np.array([X - liver0[0], Y - liver0[1], Z - zb - liver_z(f)])
+        R = np.array(Euler((math.radians(tilt), math.radians(roll), math.radians(yaw)), "ZYX").to_matrix())
+        return c, R, s
+
+    rest_sh, _ = pre_shell(0)
+    f_def0 = None
+    defs = {}
+    for f in range(e_fly["f_start"], NF):
+        c, R, s = cdk_part(f)
+        Q, m = pre_shell(f)
+        Qs = cavity(Q, c, R, s, env)
+        Qv = cavity(P_vs, c, R, s, env)
+        moved = max(float(np.abs(Qs - rest_sh).max()), float(np.abs(Qv - P_vs).max()))
+        if f_def0 is None and moved < 1e-4:
+            continue
+        if f_def0 is None:
+            f_def0 = f
+        if abs(c[2] - z_rim) < 2.5 and np.hypot(c[0] - Ex, c[1] - Ey) < 0.5:
+            assert m < 0.05, f"第 {f} 帧 CDK20 中心离入口 {c[2] - z_rim:.2f} mm 时入口还没张开（m={m:.2f}）"
+        defs[f] = (Qs, Qv)
+    assert f_def0 is not None and f_def0 > e_fly["f_start"], "形变一开始就不是零，往前多算几帧"
+
+    def add_keys(o, M_, rest, frames_pos):
+        Mi = np.linalg.inv(M_)
+        tobj = lambda P: ((P * MM) @ Mi[:3, :3].T + Mi[:3, 3]).ravel()      # noqa: E731
+        o.shape_key_add(name="Basis", from_mix=False)
+        kr = o.shape_key_add(name="rest", from_mix=False); kr.data.foreach_set("co", tobj(rest))
+        kr.value = 1.0; kr.keyframe_insert("value", frame=f_def0 - 1)
+        kr.value = 0.0; kr.keyframe_insert("value", frame=f_def0)
+        for f, P in frames_pos:
+            k = o.shape_key_add(name=f"f{f:04d}", from_mix=False); k.data.foreach_set("co", tobj(P))
+            k.value = 0.0; k.keyframe_insert("value", frame=f - 1)
+            if f + 1 < NF:
+                k.keyframe_insert("value", frame=f + 1)
+            k.value = 1.0; k.keyframe_insert("value", frame=f)
+        o.data.shape_keys.use_relative = True
+
+    add_keys(shell, Ms, rest_sh, [(f, d[0]) for f, d in sorted(defs.items())])
+    add_keys(vessel, Mv, P_vs, [(f, d[1]) for f, d in sorted(defs.items())])
+    # 肝壳上的修改器顺序：形状键先算，再生长、变的那道波（这两样到挤的时候都已经是原样）
+    print(f"S203 形状键：第 {f_def0}–{NF - 1} 帧，共 {len(defs)} 帧；入口最早张开在第 {next((f for f in range(NF) if rim_m(f) < 0.5), None)} 帧")
 
     # ---- 逐帧关键帧（全部由 keys 的事件帧算出）
     r_ck.rotation_mode = "ZYX"                 # 先自转再低头：低头的方向一直朝镜头，不跟着转
@@ -647,12 +967,6 @@ def build(out_blend, samples=64):
         c0 = cell[k].matrix_world.translation
         near[k] = [c for c in all_cells if c not in cell.values() and (c.matrix_world.translation - c0).length < reach * MM]
     base_z = {c.name: c.location.z for c in all_cells}
-    ring_z = ring.location.z
-    bpy.ops.mesh.primitive_torus_add(major_radius=2.9 * MM, minor_radius=max(0.5, seam * 0.62) * MM, major_segments=48, minor_segments=16,
-                                     location=(sx * MM, sy * MM, (boss_top + seam * 0.5) * MM))
-    seam_o = bpy.context.object; seam_o.name = "seam_flow"; bpy.ops.object.shade_smooth(); seam_o.parent = r_lv
-    m_seam = hero_mat("seam_melt", M["kit_blue"], "#9DB6FF", emit=2.6); m_seam.node_tree.nodes["soft"].outputs[0].default_value = 0.8
-    seam_o.data.materials.append(m_seam)
     grow_ev = dict(plate="plate_grow", cdk="cdk_grow", shell="liver_grow", vessel="liver_grow")
     grown = dict(plate=plate, cdk=cdk, shell=shell, vessel=vessel)
     for f in range(NF):
@@ -667,11 +981,12 @@ def build(out_blend, samples=64):
                 nz[c.name] = nz.get(c.name, 0.0) + shake(f, e, 0.45, lag=2)
         for n, v in nz.items():
             c = bpy.data.objects[n]; c.location.z = base_z[n] + v * MM; c.keyframe_insert("location", frame=f)
-        x, y, z, tilt, roll, yaw = cdk_pose(f)
-        zc = z - (sh["cdk"] if f >= e_ej["f_land"] else 0.0)       # 断开以后零件不再跟着格子颤
-        r_ck.location = (x * MM, y * MM, zc * MM)
+        X, Y, Z, tilt, roll, yaw, s = cdk_world(f)
+        zc = Z - zb - (sh["cdk"] if f >= e_ej["f_land"] else 0.0)  # 断开以前零件跟着格子动；断开以后格子颤，零件不颤
+        r_ck.location = ((X - cx["cdk"]) * MM, (Y - cy["cdk"]) * MM, zc * MM)
         r_ck.rotation_euler = (math.radians(tilt), math.radians(roll), math.radians(yaw))
-        r_ck.keyframe_insert("location", frame=f); r_ck.keyframe_insert("rotation_euler", frame=f)
+        r_ck.scale = (s, s, s)
+        r_ck.keyframe_insert("location", frame=f); r_ck.keyframe_insert("rotation_euler", frame=f); r_ck.keyframe_insert("scale", frame=f)
         r_lv.location = (0, 0, (liver_z(f) - (sh["liver"] if f >= l_ej["f_land"] else 0.0)) * MM)
         r_lv.keyframe_insert("location", frame=f)
         for k, eid in grow_ev.items():
@@ -688,37 +1003,26 @@ def build(out_blend, samples=64):
         rv = txt.data.materials[0].node_tree.nodes["reveal"].outputs[0]
         rv.default_value = max(0.0, g["amax"] * (g["ctrl"].location.x - (1 - g["s"]) - 0.5 * g["tau"]) / g["s"]) * MM
         rv.keyframe_insert("default_value", frame=f)
-        # 变：波从 +x 一头扫到 −x 一头，f_land 时正好扫过定位孔
-        v = (60.0 - sx) / (l_mo["f_land"] - l_mo["f_start"])
-        xw = 60.0 - v * (f - l_mo["f_start"])
-        wave_c.location.x = xw * MM if (l_mo["f_start"] <= f and xw > -75) else 1.0
+        # 变：波从 −x 一头扫到 +x 一头，f_land 时正好扫过入口；CDK20 顶下来之前已经走远
+        v = (Ex + 60.0) / (l_mo["f_land"] - l_mo["f_start"])
+        xw = -60.0 + v * (f - l_mo["f_start"])
+        wave_c.location.x = xw * MM if (l_mo["f_start"] <= f and xw < 75) else 1.0
         wave_c.keyframe_insert("location", frame=f)
-        tb = (f - (l_mo["f_land"] - 5)) / 10.0                     # 凸台：波峰到之前 5 帧开始鼓，过冲，f_land 后几帧坐稳
-        ring.location.z = ring_z - boss_h * (1 - back_out(tb)) * MM
-        ring.scale = (1, 1, max(0.02, back_out(tb)))
-        ring.hide_render = tb <= 0
-        for dp in ("location", "scale", "hide_render"):
-            ring.keyframe_insert(dp, frame=f)
-        # 拼：接缝处一圈料流动着贴合，再收干
-        if f < e_sm["f_start"] or f >= e_sm["f_end"]:
-            ks = 0.0
-        elif f <= e_sm["f_land"]:
-            ks = smooth((f - e_sm["f_start"] + 1) / (e_sm["f_land"] - e_sm["f_start"] + 1))
-        else:
-            ks = 1 - smooth((f - e_sm["f_land"]) / (e_sm["f_end"] - e_sm["f_land"]))
-        seam_o.scale = (0.75 + 0.25 * ks, 0.75 + 0.25 * ks, ks)
-        seam_o.hide_render = ks <= 0
-        seam_o.keyframe_insert("scale", frame=f); seam_o.keyframe_insert("hide_render", frame=f)
+        # 挤的时候肝壳有点发软发亮（阻力），进去以后凝回
+        sv = m_gl.node_tree.nodes["soft"].outputs[0]
+        sv.default_value = 0.16 * smooth((f - e_pr["f_start"]) / 4.0) * (1 - smooth((f - e_cl["f_land"]) / 8.0))
+        sv.keyframe_insert("default_value", frame=f)
     sc.frame_set(0)
     Path(out_blend).parent.mkdir(parents=True, exist_ok=True)
     bpy.ops.wm.save_as_mainfile(filepath=str(out_blend))
     print(f"S203 saved {out_blend} in {time.time() - t0:.0f}s")
     rep = dict(keys=str(KEYS), words_hash=Kd["words_hash"], events={k: [e["f_start"], e["f_land"], e["f_end"]] for k, e in EV.items()},
-               gates=brk, seam_mm=round(seam, 2), peg_hole_gap_mm=0.3, z_seat=round(z_seat, 2), z_hover=round(z_hover, 2))
+               gates=brk, entry=ent, hole=hole, scale_in_liver=S_IN, gap_mm=GAP, shape_keys=[f_def0, NF - 1],
+               cdk_z=dict(touch=round(c_touch, 2), hover=round(c_app, 2), dent=round(c_touch - DENT, 2), final=round(c_fin, 2)))
     rep["smooth"] = smooth_check(sc, Kd, cam_pos, S0, S1)
     rep["layout"] = layout_check(sc, cam, dict(plate=(plate, EV["plate_grow"]["f_end"]), cdk=(cdk, EV["cdk_grow"]["f_end"]), liver=(shell, EV["liver_grow"]["f_end"])))
-    rep["clip"] = clip_check(sc, EV, cell, cdk, dict(shell=shell, vessel=vessel, boss=ring))
-    rep["pass"] = bool(rep["smooth"]["pass"] and rep["clip"]["hits"] == 0)
+    rep["clip"] = clip_check(sc, EV, cell, cdk, dict(shell=shell, vessel=vessel), f_def0)
+    rep["pass"] = bool(rep["smooth"]["pass"] and rep["clip"]["hits"] == 0 and rep["clip"]["vessel_new"] == 0)
     rp = Path(out_blend).with_suffix(".check.json")
     rp.write_text(json.dumps(rep, ensure_ascii=False, indent=1), encoding="utf-8")
     print("S203 report", rp, "总判", "过" if rep["pass"] else "不过")
@@ -793,10 +1097,11 @@ def world_bvh(o, dg):
     return BVHTree.FromPolygons(co.tolist(), polys), co.min(0), co.max(0)
 
 
-def clip_check(sc, EV, cell, cdk, liver):
+def clip_check(sc, EV, cell, cdk, liver, f_def0):
     """逐帧穿模检查（BVH 面面相交）：CDK20 对 一路飞过的所有东西（框、料杆、浇口残根、别的格子里的零件、站点牌），
-    CDK20 对 玻璃肝的壳、血管、凸台，玻璃肝的壳 对 板上不动的东西。没拔之前零件和自己的浇口本来就连着，只在拔之后查浇口。
-    鼓包、白色断口、接缝处那一圈流动的料是有意贴着或包着别的东西的，不查。"""
+    CDK20 对 玻璃肝的壳、血管（挤进去的全过程），玻璃肝的壳 对 板上不动的东西。没拔之前零件和自己的浇口本来就连着，只在拔之后查浇口。
+    肝开始变形（f_def0）以后，再查肝壳对血管：相交的面对数不能比变形前一帧多（血管被挤开时不能顶出肝壳）。
+    鼓包、白色断口是有意贴着或包着别的东西的，不查。"""
     t0 = time.time()
     f_ej = {"cdk20": EV["cdk_eject"]["f_land"], "liver": EV["liver_eject"]["f_land"]}
     own = {"cdk20": cell["cdk"].name + "_g", "liver": cell["liver"].name + "_g"}
@@ -820,6 +1125,7 @@ def clip_check(sc, EV, cell, cdk, liver):
         if b:
             statics[o.name] = b
     hits, nchk = [], 0
+    vs_base, vs_new, vs_touch = None, [], 0
     for f in range(fa, sc.frame_end + 1):
         sc.frame_set(f)
         dg = bpy.context.evaluated_depsgraph_get()
@@ -850,13 +1156,39 @@ def clip_check(sc, EV, cell, cdk, liver):
                 nchk += 1
                 if ta.overlap(h2[0]):
                     hits.append((f, "cdk20", "liver_" + k2))
+        if f >= f_def0 and H.get("liver"):
+            hv = world_bvh(liver["vessel"], dg)
+            dv = {b for a, b in H["liver"][0].overlap(hv[0])} if hv else set()
+            for o in liver.values():                               # 同一帧不加形状键（只留原形）再查一次，做对照
+                o.show_only_shape_key = True; o.active_shape_key_index = 0
+            dg2 = bpy.context.evaluated_depsgraph_get(); dg2.update()
+            hs0, hv0 = world_bvh(liver["shell"], dg2), world_bvh(liver["vessel"], dg2)
+            rv = {b for a, b in hs0[0].overlap(hv0[0])} if hs0 and hv0 else set()
+            new = dv - rv                                          # 原形里不碰肝壳、挤的时候被顶到肝壳上的血管面
+            far = 0
+            if new:                                                # 原形里本来就贴着肝壳（0.3 mm 以内）的不算，那是两张面一起被推、插值差一点
+                ev0 = liver["vessel"].evaluated_get(dg2); me0 = ev0.to_mesh()
+                M0 = np.array(ev0.matrix_world)
+                for b in new:
+                    dmin = min(hs0[0].find_nearest(Vector(M0[:3, :3] @ np.array(me0.vertices[vi].co) + M0[:3, 3]))[3] for vi in me0.polygons[b].vertices)
+                    far += dmin > 0.3 * MM
+                ev0.to_mesh_clear()
+            for o in liver.values():
+                o.show_only_shape_key = False
+            bpy.context.evaluated_depsgraph_get().update()
+            vs_base = max(vs_base or 0, len(rv))
+            if far:
+                vs_new.append((f, far))
+            vs_touch += len(new) - far
     by = {}
     for f, a, b in hits:
         by.setdefault(f"{a} × {b}", []).append(f)
     summ = {k: dict(frames=len(v), first=v[0], last=v[-1]) for k, v in by.items()}
-    print(f"S203 穿模检查：第 {fa}–{sc.frame_end} 帧，不动的物体 {len(statics)} 个，做了 {nchk} 次 BVH 相交，穿模 {len(hits)} 处 {summ if hits else ''}（{time.time() - t0:.0f}s）")
+    print(f"S203 穿模检查：第 {fa}–{sc.frame_end} 帧，不动的物体 {len(statics)} 个，做了 {nchk} 次 BVH 相交，穿模 {len(hits)} 处 {summ if hits else ''}；"
+          f"肝壳对血管：原形里本来就碰到肝壳的血管面最多 {vs_base} 个，挤的时候新碰到的帧 {len(vs_new)} {vs_new[:6] if vs_new else ''}（原本贴着肝壳、插值擦到的 {vs_touch} 面次不算）（{time.time() - t0:.0f}s）")
     sc.frame_set(0)
-    return dict(f0=fa, f1=sc.frame_end, statics=len(statics), tests=nchk, hits=len(hits), by_pair=summ)
+    return dict(f0=fa, f1=sc.frame_end, statics=len(statics), tests=nchk, hits=len(hits), by_pair=summ,
+                vessel_base=vs_base, vessel_new=len(vs_new), vessel_new_frames=vs_new[:20], vessel_already_touching=vs_touch)
 
 
 def frames(blend, outdir, flist, samples=None, pct=None):

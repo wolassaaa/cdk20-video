@@ -2,7 +2,7 @@
  "schema": "cdk20.events/1",
  "group": "2-03",
  "tool": "blender",
- "note": "HKBU SCIE1007 课程作业的科普视频。大板样片（全局统筹_板件与资产_v1、动效打磨要点_v1），定版大板排位不动，一镜到底：一个鼓包沿主料杆流到第 2 区，拐上去喂 Case study 字牌，再走到 CDK20 的框；CDK20 长出来、拔起、浮着转，然后自己飞向第 1 区的玻璃肝，镜头跟着往回走；留在岔口的半个鼓包同时沿主料杆去喂肝；肝（玻璃壳加红血管）长出来、拔起，一道波扫过去鼓出定位凸台；CDK20 卡进去，接缝处流动着贴合一下，留缝。Blender 脚本 inserts/bl_s203_board.py，字幕和出处行是 Remotion（src/v3/map/Sample203.jsx）。动作的起帧互相错开至少 2 帧，止帧也是（丝滑检查表）。",
+ "note": "HKBU SCIE1007 课程作业的科普视频。大板样片（全局统筹_板件与资产_v1、动效打磨要点_v1），定版大板排位不动，一镜到底：一个鼓包沿主料杆流到第 2 区，拐上去喂 Case study 字牌，再走到 CDK20 的框；CDK20 长出来、拔起、浮着转，然后自己飞向第 1 区的玻璃肝，镜头跟着往回走；留在岔口的半个鼓包同时沿主料杆去喂肝；肝（玻璃壳加红血管）长出来、拔起，一道波扫过去玻璃变软；CDK20 顶到肝表面，表面凹下去、有阻力，被软软推回一点，再用力挤进去，整个进到透明的肝里，隔着玻璃看得见它，表面的凹陷流动着合拢（11-18 导演改：去掉定位销，不再卡入凸台）。Blender 脚本 inserts/bl_s203_board.py，字幕和出处行是 Remotion（src/v3/map/Sample203.jsx）。动作的起帧互相错开至少 2 帧，止帧也是（丝滑检查表）。",
  "holds": [],
  "events": [
   {"id": "pulse_a", "obj": "pulse_1", "verb": "flow", "means": "And…case：鼓包沿主料杆向右滑到第 2 区的岔口，拐上支杆，分两股到字牌的两个浇口；岔口留下半个鼓包", "at": {"word": "2-03.w007", "off": -8}, "start": {"word": "2-03.w001"}},
@@ -14,15 +14,16 @@
   {"id": "pulse_b", "obj": "pulse_1", "verb": "flow", "means": "（停顿）：鼓包从字牌接着走，绕过口袋件的框，到 CDK20 的框", "at": {"word": "2-03.w009", "off": -28}, "lead": 26},
   {"id": "cdk_grow", "obj": "cdk20", "verb": "grow", "means": "CDK20：从三个浇口同时漫开、一层层长出来，前沿是亮的浅蓝热料，长满过冲一下", "at": {"word": "2-03.w009"}, "lead": 26, "until": {"dur": 8}, "ease": "linear"},
   {"id": "sub_b", "obj": "subtitle_b", "verb": "appear", "means": "字幕第二行：CDK20 in liver cancer.", "at": {"word": "2-03.w009"}, "until": {"sentence_end": true, "off": 2}, "tool": "remotion"},
-  {"id": "cdk_eject", "obj": "cdk20", "verb": "eject", "means": "CDK20 长满就拔：绷 3 帧，三个浇口同时断开，弹起 2 cm 带着转，慢慢稳住；格子和旁边几格跟着颤；断口留白茬", "at": {"event": "cdk_grow", "off": 12}, "lead": 3, "until": {"dur": 30}},
-  {"id": "cdk_spin", "obj": "cdk20", "verb": "move", "means": "CDK20 浮在板上方慢慢自转", "at": {"event": "cdk_eject", "off": 2}, "until": {"dur": 32}, "ease": "linear"},
+  {"id": "cdk_eject", "obj": "cdk20", "verb": "eject", "means": "CDK20 长满就拔：绷 3 帧，三个浇口同时断开，弹起 2 cm 带着转，慢慢稳住；格子和旁边几格跟着颤；断口留白茬。没有定位销，下面什么也不顶着", "at": {"event": "cdk_grow", "off": 12}, "lead": 3, "until": {"dur": 30}},
+  {"id": "cdk_spin", "obj": "cdk20", "verb": "move", "means": "CDK20 自己飘在板上方：轻轻上下浮动，自转慢下来带一点余振", "at": {"event": "cdk_eject", "off": 2}, "until": {"dur": 32}, "ease": "linear"},
   {"id": "pulse_c", "obj": "pulse_2", "verb": "flow", "means": "…in：等在岔口的半个鼓包沿主料杆往左跑到第 1 区，拐进肝的框", "at": {"word": "2-03.w011", "off": -30}, "lead": 28},
-  {"id": "cam_liver", "obj": "camera", "verb": "camera_to", "means": "…in liver：镜头跟着飞起来的 CDK20 往回走到玻璃肝，拉开一点装下两件，之后慢慢推近，不停死", "at": {"word": "2-03.w012", "off": 6}, "lead": 78, "until": {"sentence_end": true, "off": 2}},
-  {"id": "cdk_fly", "obj": "cdk20", "verb": "move", "means": "…in liver can-：CDK20 升高，越过板面飞到肝的定位孔上方，起步后仰、刹车前倾", "at": {"word": "2-03.w012", "off": 10}, "lead": 72},
+  {"id": "cam_liver", "obj": "camera", "verb": "camera_to", "means": "…in liver：镜头跟着飞起来的 CDK20 往回走到玻璃肝，拉开一点装下两件，之后慢慢推近到挤入的地方，不停死", "at": {"word": "2-03.w011", "off": 22}, "lead": 70, "until": {"sentence_end": true, "off": 2}},
+  {"id": "cdk_fly", "obj": "cdk20", "verb": "move", "means": "…in liver：CDK20 升高，越过板面飞到肝的上方，路上缩小到能装进肝里，起步后仰、刹车前倾，停在肝表面上方", "at": {"word": "2-03.w011", "off": 14}, "lead": 52},
   {"id": "liver_grow", "obj": "liver", "verb": "grow", "means": "liver：玻璃肝从三个浇口漫开长出来，玻璃壳和红血管同时长，血管晚两帧", "at": {"word": "2-03.w011"}, "lead": 28, "until": {"dur": 4}, "ease": "linear"},
   {"id": "liver_eject", "obj": "liver", "verb": "eject", "means": "肝长满后拔起浮空：绷 3 帧，断开，弹起，周围几格跟着颤", "at": {"event": "liver_grow", "off": 8}, "lead": 3, "until": {"dur": 18}},
-  {"id": "liver_morph", "obj": "liver", "verb": "morph", "means": "cancer：一道波从肝的一头扫到另一头，波到处玻璃变软发亮；扫过定位孔时凸台已经鼓出来，波过去凝回硬玻璃", "at": {"word": "2-03.w012"}, "lead": 14, "until": {"dur": 8}},
-  {"id": "cdk_snap", "obj": "cdk20", "verb": "snap", "means": "cancer：定位销被吸进孔，最后几毫米加速，卡到底硬停；两件一起下沉再回位，落在句尾", "at": {"event": "cdk_fly", "off": 7}, "lead": 7, "until": {"sentence_end": true}},
-  {"id": "seam_flow", "obj": "seam", "verb": "morph", "means": "卡到底后接缝处一圈料流动着贴合一下，随后收干，留下看得见的缝，两件还是两件", "at": {"event": "cdk_snap", "off": 3}, "lead": 3, "until": {"dur": 6}}
+  {"id": "liver_morph", "obj": "liver", "verb": "morph", "means": "liver：一道波从肝的左头扫到右头，波到处玻璃变软发亮，波过去凝回硬玻璃；先扫过 CDK20 要进去的地方", "at": {"word": "2-03.w011", "off": 14}, "lead": 6, "until": {"dur": 14}},
+  {"id": "cdk_press", "obj": "cdk20", "verb": "move", "means": "liver 尾：CDK20 往下顶到肝表面，表面被压得凹下去、越压越慢（阻力），然后被软软推回一点", "at": {"word": "2-03.w011", "off": 23}, "lead": 7, "until": {"dur": 7}},
+  {"id": "cdk_enter", "obj": "cdk20", "verb": "move", "means": "cancer：再一次用力往下挤，肝表面让开一个口包着它的腰，它整个滑进透明的肝里，周围的血管被挤开；到底后轻轻一沉再回位，落在句尾", "at": {"word": "2-03.w012", "off": 22}, "lead": 15, "until": {"sentence_end": true}},
+  {"id": "liver_close", "obj": "liver", "verb": "morph", "means": "CDK20 进去以后，肝表面的口子和凹陷流动着合拢，荡开一圈很浅的波纹，隔着玻璃看得见 CDK20 在肝里", "at": {"event": "cdk_enter", "off": -2}, "lead": 4, "until": {"dur": 6}}
  ]
 }
