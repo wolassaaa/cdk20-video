@@ -29,7 +29,18 @@ PLACE = ROOT / "素材流程_out"
 TRACK = Path("G:/cdk20/work/track")
 FLOW = ROOT / "镜头设计_v3/素材流程"
 PY = sys.executable
-ENV = dict(os.environ, PYTHONIOENCODING="utf-8")
+# Remotion 每次渲染都把 6 G 的 public 复制成一个临时包，放 G 盘，旧包（3 小时以上）开跑前清掉
+RTMP = Path("G:/cdk20/work/remotion_tmp")
+RTMP.mkdir(parents=True, exist_ok=True)
+ENV = dict(os.environ, PYTHONIOENCODING="utf-8", TEMP=str(RTMP), TMP=str(RTMP))
+
+
+def clean_bundles(hours=1):
+    import time
+    for d in list(RTMP.glob("remotion-webpack-bundle-*")) + list(RTMP.glob("tmp*")):
+        if time.time() - d.stat().st_mtime > hours * 3600:
+            shutil.rmtree(d, ignore_errors=True)
+            print("  清旧临时包", d)
 
 
 def group(name):
@@ -51,7 +62,20 @@ def comp(name, g):
 
 def run(cmd, **kw):
     print("  $", " ".join(str(c) for c in cmd)[:200])
-    return subprocess.run([str(c) for c in cmd], env=ENV, **kw)
+    if not any("remotion" in str(c) for c in cmd[:2]):
+        return subprocess.run([str(c) for c in cmd], env=ENV, **kw)
+    # 每次 Remotion 调用用自己的临时目录，跑完整个删掉（里面只有这次复制的 public 包）
+    import tempfile
+    t = Path(tempfile.mkdtemp(dir=RTMP))
+    try:
+        return subprocess.run([str(c) for c in cmd], env=dict(ENV, TEMP=str(t), TMP=str(t)), **kw)
+    finally:
+        import time
+        for _ in range(5):                     # Chrome 退出慢，文件可能还锁着，等一下再删
+            shutil.rmtree(t, ignore_errors=True)
+            if not t.exists():
+                break
+            time.sleep(2)
 
 
 # ---------- prep ----------
@@ -132,6 +156,7 @@ def check(name, stills_only=False):
         L = K["len_f"]
     od = OUT / C
     od.mkdir(parents=True, exist_ok=True)
+    clean_bundles()
     marks = sorted({min(L - 1, e["f_land"] + 12) for e in K["events"]} | {L - 1})
     cli = [ "node", REM / "node_modules/@remotion/cli/remotion-cli.js"]
     rep = [f"# {C}（{name}）检查报告", "", f"段长 {L} 帧（{L / 60:.2f} 秒），事件 {len(K['events'])} 个。", ""]
