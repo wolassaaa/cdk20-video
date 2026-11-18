@@ -1,144 +1,264 @@
 {
  "schema": "cdk20.events/1",
  "group": "7-02",
- "tool": "warp_source",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/7-02.json",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 7 章页 7-02（画外音）：048 小牌子和路；048 往前走一步；public 牌子上的小锁打开；三张清单卡依次飞到路边（liver cancer cells and normal liver cells / animals / how the body handles it, what else it hits）；already listed 三张卡一起打勾。页面 Manual702.jsx。",
  "holds": [],
  "events": [
   {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
+   "id": "title",
+   "obj": "title",
+   "verb": "appear",
    "at": {
     "word": "7-02.w001",
-    "off": -9
+    "off": 0
    },
+   "means": "One: walk 048 further：标题",
+   "tool": "remotion",
+   "lead": 8,
    "until": {
-    "dur": 146
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.00→3.62 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.0,
-    3.617
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "7-02.w004"
+   }
   },
   {
-   "id": "footage01",
-   "obj": "footage",
+   "id": "road",
+   "obj": "road",
+   "verb": "grow",
+   "at": {
+    "word": "7-02.w002",
+    "off": 0
+   },
+   "means": "walk：路和 048 小牌子（在 Cells）",
+   "tool": "remotion",
+   "lead": 40,
+   "until": {
+    "word": "7-02.w002"
+   }
+  },
+  {
+   "id": "walk",
+   "obj": "walk",
    "verb": "move",
    "at": {
     "word": "7-02.w004",
     "off": 0
    },
+   "means": "further：048 往前走一步",
+   "tool": "remotion",
+   "lead": 26,
    "until": {
-    "dur": 67
-   },
-   "ease": "linear",
-   "means": "旧动画源片 3.62→4.48 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    3.617,
-    4.483
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "7-02.w004"
+   }
   },
   {
-   "id": "footage02",
-   "obj": "footage",
-   "verb": "move",
+   "id": "pub",
+   "obj": "pub",
+   "verb": "morph",
    "at": {
     "word": "7-02.w006",
     "off": 0
    },
+   "means": "public：小锁打开",
+   "tool": "remotion",
+   "lead": 14,
    "until": {
-    "dur": 99
-   },
-   "ease": "linear",
-   "means": "旧动画源片 4.48→5.78 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    4.483,
-    5.783
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "7-02.w006"
+   }
   },
   {
-   "id": "footage03",
-   "obj": "footage",
-   "verb": "move",
+   "id": "any",
+   "obj": "any",
+   "verb": "appear",
    "at": {
-    "word": "7-02.w010",
+    "word": "7-02.w009",
     "off": 0
    },
+   "means": "anyone：三个小人",
+   "tool": "remotion",
+   "lead": 10,
    "until": {
-    "dur": 147
-   },
-   "ease": "linear",
-   "means": "旧动画源片 5.78→8.48 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    5.783,
-    8.483
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "7-02.w009"
+   }
   },
   {
-   "id": "footage04",
-   "obj": "footage",
-   "verb": "move",
+   "id": "try",
+   "obj": "try",
+   "verb": "grow",
    "at": {
-    "word": "7-02.w017",
+    "word": "7-02.w011",
     "off": 0
    },
+   "means": "try：箭头从小人指向 048 牌子",
+   "tool": "remotion",
+   "lead": 14,
    "until": {
-    "dur": 542
-   },
-   "ease": "linear",
-   "means": "旧动画源片 8.48→18.63 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    8.483,
-    18.633
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "7-02.w011"
+   }
   },
   {
-   "id": "footage05",
-   "obj": "footage",
+   "id": "c1",
+   "obj": "c1",
    "verb": "move",
+   "at": {
+    "word": "7-02.w016",
+    "off": 0
+   },
+   "means": "liver：第一张卡飞到路边",
+   "tool": "remotion",
+   "lead": 40,
+   "until": {
+    "word": "7-02.w016"
+   }
+  },
+  {
+   "id": "c1a",
+   "obj": "c1a",
+   "verb": "appear",
+   "at": {
+    "word": "7-02.w018",
+    "off": 0
+   },
+   "means": "cells：写 liver cancer cells",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "7-02.w018"
+   }
+  },
+  {
+   "id": "c1b",
+   "obj": "c1b",
+   "verb": "appear",
+   "at": {
+    "word": "7-02.w022",
+    "off": 0
+   },
+   "means": "cells：写 and normal liver cells",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "7-02.w022"
+   }
+  },
+  {
+   "id": "c2",
+   "obj": "c2",
+   "verb": "move",
+   "at": {
+    "word": "7-02.w024",
+    "off": 0
+   },
+   "means": "animals：第二张卡飞来，写 animals",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "word": "7-02.w024"
+   }
+  },
+  {
+   "id": "c3",
+   "obj": "c3",
+   "verb": "move",
+   "at": {
+    "word": "7-02.w026",
+    "off": 0
+   },
+   "means": "check：第三张卡飞来",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "word": "7-02.w026"
+   }
+  },
+  {
+   "id": "c3a",
+   "obj": "c3a",
+   "verb": "appear",
+   "at": {
+    "word": "7-02.w031",
+    "off": 0
+   },
+   "means": "it：写 how the body handles it",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "7-02.w031"
+   }
+  },
+  {
+   "id": "c3b",
+   "obj": "c3b",
+   "verb": "appear",
+   "at": {
+    "word": "7-02.w036",
+    "off": 0
+   },
+   "means": "hits：写 and what else it hits",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "7-02.w036"
+   }
+  },
+  {
+   "id": "auth",
+   "obj": "auth",
+   "verb": "grow",
+   "at": {
+    "word": "7-02.w038",
+    "off": 0
+   },
+   "means": "authors：论文图标和 the authors",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "7-02.w038"
+   }
+  },
+  {
+   "id": "al",
+   "obj": "al",
+   "verb": "appear",
+   "at": {
+    "word": "7-02.w040",
+    "off": 0
+   },
+   "means": "already：红批注 already listed",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "7-02.w040"
+   }
+  },
+  {
+   "id": "ticks",
+   "obj": "ticks",
+   "verb": "grow",
    "at": {
     "word": "7-02.w041",
     "off": 0
    },
+   "means": "listed：三张卡一起打勾",
+   "tool": "remotion",
+   "lead": 14,
    "until": {
-    "dur": 43
-   },
-   "ease": "linear",
-   "means": "旧动画源片 18.63→18.88 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    18.633,
-    18.883
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "7-02.w041"
+   }
   },
   {
-   "id": "footage06",
-   "obj": "footage",
-   "verb": "move",
+   "id": "step",
+   "obj": "step",
+   "verb": "morph",
    "at": {
     "word": "7-02.w043",
     "off": 0
    },
+   "means": "steps：三张卡红框",
+   "tool": "remotion",
+   "lead": 10,
    "until": {
-    "dur": 28
-   },
-   "ease": "linear",
-   "means": "旧动画源片 18.88→19.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    18.883,
-    19.45
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   }
  ]
 }
