@@ -67,7 +67,8 @@ export const Arrow = ({d, tip, ang, a, b, f, color = INK, sw = 4, dash}) => {
 export const Write = ({p, children, style}) => {
   const x = -8 + 116 * p;
   const m = `linear-gradient(90deg,#000 ${x - 6}%,transparent ${x}%)`;
-  return <span style={{...style, WebkitMaskImage: m, maskImage: m, display: "inline-block", whiteSpace: "pre"}}>{children}</span>;
+  // 左右各留 0.3em 的遮罩余量再用负外边距抵消：斜体 d、f 之类出头的笔画不会被遮罩切掉，排版位置不变
+  return <span style={{padding: "0 0.3em", margin: "0 -0.3em", ...style, WebkitMaskImage: m, maskImage: m, display: "inline-block", whiteSpace: "pre"}}>{children}</span>;
 };
 
 // 步骤框：边框一笔画出，步骤号落章

@@ -9,7 +9,7 @@ fail=0
 for s in "$@"; do
   C="Manual${s//-/}"; [ -f "$M/$C.jsx" ] || C="OnCam${s//-/}"; C="${C%%+*}"
   mp4="_cache/pages/$C.mp4"
-  if [ -f "$mp4" ] && [ "$mp4" -nt "$M/$C.jsx" ] && [ "$mp4" -nt "keys/${s//+/_}.json" ]; then echo "SKIP $s"; continue; fi
+  if [ -f "$mp4" ] && [ "$mp4" -nt "$M/$C.jsx" ] && [ "$mp4" -nt "keys/${s//+/_}.json" ] && [ "$mp4" -nt "$M/kit.jsx" ]; then echo "SKIP $s"; continue; fi
   echo "== $s ($C) $(date +%H:%M)"
   python -X utf8 page_tool.py check "$s" || { echo "FAIL $s"; fail=1; }
 done
