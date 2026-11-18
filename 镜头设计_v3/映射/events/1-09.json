@@ -1,182 +1,45 @@
 {
  "schema": "cdk20.events/1",
  "group": "1-09",
- "tool": "warp_source",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/1-09.json",
+ "tool": "blender",
+ "note": "HKBU SCIE1007 课程作业的科普视频。第 1 章 1-09，药的路。定版大板的主料杆就是路，上面本来就有 7 个站点牌（Target / Hit / Improve / Cells / Animals / Trials / Approval，和二维页一字不差）。一粒红白胶囊从左端注料口长出来，沿主料杆一站一站跳过去，落在每个站点牌右边，落地那一帧对着说到的词；站点牌落地时亮一下。Any step can fail：后面三站各出现一粒灰的透明胶囊，说到 fail 时裂成两半。字幕和出处行是 Remotion（src/v3/map/Ch1Board.jsx）。Blender 脚本 inserts/bl_ch1_board.py。",
  "holds": [],
  "events": [
-  {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "1-09.w001",
-    "off": -9
-   },
-   "until": {
-    "dur": 164
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.00→2.05 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.0,
-    2.05
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage01",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "1-09.w008",
-    "off": 0
-   },
-   "until": {
-    "dur": 66
-   },
-   "ease": "linear",
-   "means": "旧动画源片 2.05→3.25 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    2.05,
-    3.25
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage02",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "1-09.w009",
-    "off": 0
-   },
-   "until": {
-    "dur": 209
-   },
-   "ease": "linear",
-   "means": "旧动画源片 3.25→4.95 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    3.25,
-    4.95
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage03",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "1-09.w017",
-    "off": 0
-   },
-   "until": {
-    "dur": 83
-   },
-   "ease": "linear",
-   "means": "旧动画源片 4.95→6.15 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    4.95,
-    6.15
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage04",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "1-09.w020",
-    "off": 1
-   },
-   "until": {
-    "dur": 231
-   },
-   "ease": "linear",
-   "means": "旧动画源片 6.15→8.55 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    6.15,
-    8.55
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage05",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "1-09.w028",
-    "off": 0
-   },
-   "until": {
-    "dur": 120
-   },
-   "ease": "linear",
-   "means": "旧动画源片 8.55→9.85 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    8.55,
-    9.85
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage06",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "1-09.w033",
-    "off": 0
-   },
-   "until": {
-    "dur": 213
-   },
-   "ease": "linear",
-   "means": "旧动画源片 9.85→12.35 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    9.85,
-    12.35
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage07",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "1-09.w038",
-    "off": 0
-   },
-   "until": {
-    "dur": 226
-   },
-   "ease": "linear",
-   "means": "旧动画源片 12.35→15.85 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    12.35,
-    15.85
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage08",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "1-09.w044",
-    "off": 1
-   },
-   "until": {
-    "dur": 120
-   },
-   "ease": "linear",
-   "means": "旧动画源片 15.85→20.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    15.85,
-    20.45
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  }
+  {"id": "cam_a", "obj": "camera", "verb": "camera_to", "means": "To see why…follow：镜头慢慢推近主料杆左端的注料口", "at": {"word": "1-09.w005"}, "lead": 97},
+  {"id": "cap_grow", "obj": "capsule", "verb": "grow", "means": "one drug's journey：一粒红白胶囊在注料口顶上长出来", "at": {"word": "1-09.w006"}, "lead": 20, "until": {"word": "1-09.w008"}, "ease": "linear"},
+  {"id": "cam_wide", "obj": "camera", "verb": "camera_to", "means": "Every medicine walks the same road：镜头升高拉远，看到主料杆和站点牌", "at": {"word": "1-09.w014"}, "lead": 130, "until": {"sentence_end": true}},
+  {"id": "road_glint", "obj": "pulse_1", "verb": "flow", "means": "walks the same road：一个白的鼓包从左到右沿主料杆走一遍，经过的站点牌轻轻弹一下", "at": {"word": "1-09.w014"}, "lead": 70},
+  {"id": "cam_t", "obj": "camera", "verb": "camera_to", "means": "Find a target：镜头回到 Target", "at": {"word": "1-09.w017"}, "lead": 50},
+  {"id": "hop_0", "obj": "capsule", "verb": "move", "means": "target：胶囊从注料口跳到 Target 牌右边落下", "at": {"word": "1-09.w017"}, "lead": 30, "until": {"dur": 16}},
+  {"id": "st_0", "obj": "station_Target", "verb": "morph", "means": "target：Target 牌亮一下", "at": {"word": "1-09.w017", "off": 2}, "until": {"dur": 24}},
+  {"id": "cam_h", "obj": "camera", "verb": "camera_to", "means": "Find a hit：镜头跟着去 Hit", "at": {"word": "1-09.w020"}, "lead": 70},
+  {"id": "hop_1", "obj": "capsule", "verb": "move", "means": "hit：跳到 Hit", "at": {"word": "1-09.w020"}, "lead": 50, "until": {"dur": 16}},
+  {"id": "st_1", "obj": "station_Hit", "verb": "morph", "means": "hit：Hit 牌亮一下", "at": {"word": "1-09.w020", "off": 2}, "until": {"dur": 24}},
+  {"id": "cap_glow", "obj": "capsule", "verb": "morph", "means": "a first molecule：胶囊表面亮一下（这是第一个有用的分子）", "at": {"word": "1-09.w023"}, "lead": 6, "until": {"dur": 20}},
+  {"id": "cap_nod", "obj": "capsule", "verb": "move", "means": "works on it：胶囊原地轻轻一跳，落稳", "at": {"word": "1-09.w025"}, "lead": 4, "until": {"dur": 14}},
+  {"id": "cam_h2", "obj": "camera", "verb": "camera_to", "means": "on it：镜头开始往 Improve 那边带", "at": {"word": "1-09.w027"}, "lead": 40, "until": {"sentence_end": true}},
+  {"id": "hop_2", "obj": "capsule", "verb": "move", "means": "Improve：跳到 Improve", "at": {"word": "1-09.w028"}, "lead": 40, "until": {"dur": 14}},
+  {"id": "cam_i", "obj": "camera", "verb": "camera_to", "means": "Improve：镜头到 Improve", "at": {"word": "1-09.w028", "off": 6}, "lead": 50},
+  {"id": "st_2", "obj": "station_Improve", "verb": "morph", "means": "Improve：Improve 牌亮一下", "at": {"word": "1-09.w028", "off": 2}, "until": {"dur": 24}},
+  {"id": "improve", "obj": "capsule_band", "verb": "morph", "means": "it：胶囊接缝上长出一圈金色的箍，胶囊被它托高一点（改进过了）", "at": {"word": "1-09.w029"}, "lead": 10, "until": {"dur": 14}},
+  {"id": "cam_c", "obj": "camera", "verb": "camera_to", "means": "Test it in cells：镜头去 Cells", "at": {"word": "1-09.w033"}, "lead": 60},
+  {"id": "hop_3", "obj": "capsule", "verb": "move", "means": "cells：跳到 Cells", "at": {"word": "1-09.w033"}, "lead": 45, "until": {"dur": 14}},
+  {"id": "st_3", "obj": "station_Cells", "verb": "morph", "means": "cells：Cells 牌亮一下", "at": {"word": "1-09.w033", "off": 2}, "until": {"dur": 24}},
+  {"id": "cam_an", "obj": "camera", "verb": "camera_to", "means": "then animals：镜头去 Animals", "at": {"word": "1-09.w035"}, "lead": 60},
+  {"id": "hop_4", "obj": "capsule", "verb": "move", "means": "animals：跳到 Animals", "at": {"word": "1-09.w035"}, "lead": 45, "until": {"dur": 14}},
+  {"id": "st_4", "obj": "station_Animals", "verb": "morph", "means": "animals：Animals 牌亮一下", "at": {"word": "1-09.w035", "off": 2}, "until": {"sentence_end": true}},
+  {"id": "cam_tr", "obj": "camera", "verb": "camera_to", "means": "Then human trials：镜头去 Trials", "at": {"word": "1-09.w038"}, "lead": 70},
+  {"id": "hop_5", "obj": "capsule", "verb": "move", "means": "trials：跳到 Trials", "at": {"word": "1-09.w038"}, "lead": 50, "until": {"dur": 14}},
+  {"id": "st_5", "obj": "station_Trials", "verb": "morph", "means": "trials：Trials 牌亮一下", "at": {"word": "1-09.w038", "off": 2}, "until": {"dur": 24}},
+  {"id": "phase_1", "obj": "capsule", "verb": "move", "means": "phase one：胶囊往前小跳一下，落下时料杆上荡开一圈亮", "at": {"word": "1-09.w040"}, "lead": 12, "until": {"dur": 14}},
+  {"id": "phase_2", "obj": "capsule", "verb": "move", "means": "two：再小跳一下", "at": {"word": "1-09.w041"}, "lead": 12, "until": {"dur": 14}},
+  {"id": "phase_3", "obj": "capsule", "verb": "move", "means": "three：第三下", "at": {"word": "1-09.w042"}, "lead": 12, "until": {"dur": 18}},
+  {"id": "cam_ap", "obj": "camera", "verb": "camera_to", "means": "Then approval：镜头去 Approval", "at": {"word": "1-09.w044"}, "lead": 60},
+  {"id": "hop_6", "obj": "capsule", "verb": "move", "means": "approval：最后一跳，落到 Approval", "at": {"word": "1-09.w044"}, "lead": 40, "until": {"dur": 14}},
+  {"id": "st_6", "obj": "station_Approval", "verb": "morph", "means": "approval：Approval 牌亮一下，亮得久一点", "at": {"word": "1-09.w044", "off": 2}, "until": {"sentence_end": true}},
+  {"id": "cam_end", "obj": "camera", "verb": "camera_to", "means": "Any step can fail：镜头往后拉，看到后面四站", "at": {"word": "1-09.w045"}, "lead": 30, "until": {"sentence_end": true}},
+  {"id": "ghost_in", "obj": "ghosts", "verb": "grow", "means": "Any step：Cells、Animals、Trials 三站上各长出一粒灰的透明胶囊（别的药）", "at": {"word": "1-09.w046"}, "lead": 10, "until": {"dur": 16}, "ease": "linear"},
+  {"id": "ghost_fail", "obj": "ghosts", "verb": "move", "means": "fail：三粒灰胶囊裂成两半，两半往两边滑开", "at": {"word": "1-09.w048"}, "lead": 6, "until": {"dur": 20}},
+  {"id": "source_line", "obj": "source_line", "verb": "appear", "means": "Every medicine：左下角出处行 Illustration", "at": {"word": "1-09.w009"}, "until": {"dur": 12}, "tool": "remotion"}
  ]
 }

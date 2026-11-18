@@ -1,87 +1,25 @@
 {
  "schema": "cdk20.events/1",
  "group": "1-10",
- "tool": "warp_source",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/1-10.json",
+ "tool": "blender",
+ "note": "HKBU SCIE1007 课程作业的科普视频。第 1 章 1-10，2024 年诺贝尔化学奖的一部分和 AlphaFold。定版大板第 1 区最下面两排：日历（这一镜印 2024）、奖章（普通奖章，没有诺贝尔奖章的图案，也没有真人的样子）、名字牌（换掉输液袋那一格：Nobel Prize in Chemistry 2024 (part): / Demis Hassabis, John Jumper）、AlphaFold 芯片。说到 predicts the shape 时一串蓝色珠链从芯片角上的口子出来，沿一条事先算好、不自交的路一圈圈绕成一团，最后外面长出一层透明的表面，是一个蛋白的样子。字幕和出处行是 Remotion（src/v3/map/Ch1Board.jsx）。Blender 脚本 inserts/bl_ch1_board.py。",
  "holds": [],
  "events": [
-  {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "1-10.w001",
-    "off": -9
-   },
-   "until": {
-    "dur": 317
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.00→3.05 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.0,
-    3.05
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage01",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "1-10.w012",
-    "off": 0
-   },
-   "until": {
-    "dur": 43
-   },
-   "ease": "linear",
-   "means": "旧动画源片 3.05→3.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    3.05,
-    3.45
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage02",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "1-10.w015",
-    "off": 0
-   },
-   "until": {
-    "dur": 83
-   },
-   "ease": "linear",
-   "means": "旧动画源片 3.45→5.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    3.45,
-    5.45
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage03",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "1-10.w018",
-    "off": 0
-   },
-   "until": {
-    "dur": 371
-   },
-   "ease": "linear",
-   "means": "旧动画源片 5.45→16.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    5.45,
-    16.45
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  }
+  {"id": "cam_a", "obj": "camera", "verb": "camera_to", "means": "Now here's where it gets interesting：镜头从第 1 区全景滑到左下角", "at": {"word": "1-10.w006"}, "lead": 104, "until": {"sentence_end": true}},
+  {"id": "pulse_a", "obj": "pulse_1", "verb": "flow", "means": "interesting…In：鼓包从注料口沿主料杆走，拐下去穿过一格，到日历的浇口", "at": {"word": "1-10.w008", "off": -6}, "lead": 150},
+  {"id": "cal_grow", "obj": "calendar", "verb": "grow", "means": "2024：日历长出来，印着 2024", "at": {"word": "1-10.w008"}, "lead": 6, "until": {"dur": 50}, "ease": "linear"},
+  {"id": "cam_medal", "obj": "camera", "verb": "camera_to", "means": "part of the Nobel：镜头到奖章那一格", "at": {"word": "1-10.w012"}, "lead": 60},
+  {"id": "medal_grow", "obj": "medal", "verb": "grow", "means": "Nobel Prize in Chemistry：金色奖章长出来", "at": {"word": "1-10.w012"}, "lead": 8, "until": {"word": "1-10.w015"}, "ease": "linear"},
+  {"id": "cam_names", "obj": "camera", "verb": "camera_to", "means": "went to Demis：镜头往右带上名字牌", "at": {"word": "1-10.w018"}, "lead": 50},
+  {"id": "medal_eject", "obj": "medal", "verb": "eject", "means": "went：奖章拔起来浮着，朝镜头抬起一点", "at": {"word": "1-10.w016"}, "lead": 3, "until": {"dur": 30}},
+  {"id": "medal_spin", "obj": "medal", "verb": "move", "means": "奖章浮着慢慢转", "at": {"event": "medal_eject", "off": 2}, "until": {"dur": 220}, "ease": "linear"},
+  {"id": "names_grow", "obj": "names_plate", "verb": "grow", "means": "Demis Hassabis…John Jumper：名字牌长出来，字跟着印出来", "at": {"word": "1-10.w018"}, "lead": 6, "until": {"word": "1-10.w022"}, "ease": "linear"},
+  {"id": "cam_chip", "obj": "camera", "verb": "camera_to", "means": "for AlphaFold：镜头到 AlphaFold 芯片", "at": {"word": "1-10.w024"}, "lead": 60},
+  {"id": "chip_grow", "obj": "chip", "verb": "grow", "means": "AlphaFold：黑色芯片长出来，印着 AlphaFold", "at": {"word": "1-10.w024"}, "lead": 8, "until": {"dur": 50}, "ease": "linear"},
+  {"id": "chain_out", "obj": "chain", "verb": "flow", "means": "predicts：一串蓝色珠链从芯片角上的口子一颗颗冒出来往上走", "at": {"word": "1-10.w028"}, "lead": 4, "until": {"word": "1-10.w030", "edge": "start"}},
+  {"id": "cam_fold", "obj": "camera", "verb": "camera_to", "means": "the shape of proteins：镜头抬起来看芯片上方", "at": {"word": "1-10.w032"}, "lead": 60, "until": {"sentence_end": true, "off": 2}},
+  {"id": "chain_fold", "obj": "chain", "verb": "morph", "means": "shape：珠链一圈圈绕成一团（折叠）", "at": {"word": "1-10.w030"}, "lead": 6, "until": {"word": "1-10.w032", "edge": "start", "off": 8}},
+  {"id": "surface", "obj": "protein_surface", "verb": "appear", "means": "proteins：折好的珠链外面长出一层透明的表面，是一个蛋白的形状", "at": {"word": "1-10.w032", "off": 10}, "lead": 0, "until": {"sentence_end": true}},
+  {"id": "source_line", "obj": "source_line", "verb": "appear", "means": "2024：左下角出处行", "at": {"word": "1-10.w008"}, "until": {"dur": 12}, "tool": "remotion"}
  ]
 }

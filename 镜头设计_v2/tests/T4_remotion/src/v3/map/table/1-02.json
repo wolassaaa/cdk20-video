@@ -1,0 +1,608 @@
+{
+ "schema": "cdk20.wordmap/1",
+ "built": "2026-11-18 02:33:56 +09:00",
+ "cut": "cut_v8",
+ "group": "1-02",
+ "fps": 60,
+ "len_f": 1036,
+ "cut_start_s": 7.9,
+ "holds": [],
+ "words": [
+  {
+   "wid": "1-02.w001",
+   "w": "That's",
+   "key": "that's#1",
+   "sid": "1-02.s1",
+   "f0": 9,
+   "f1": 27
+  },
+  {
+   "wid": "1-02.w002",
+   "w": "1,412",
+   "key": "1,412#1",
+   "sid": "1-02.s1",
+   "f0": 35,
+   "f1": 141
+  },
+  {
+   "wid": "1-02.w003",
+   "w": "people",
+   "key": "people#1",
+   "sid": "1-02.s1",
+   "f0": 146,
+   "f1": 168
+  },
+  {
+   "wid": "1-02.w004",
+   "w": "in",
+   "key": "in#1",
+   "sid": "1-02.s1",
+   "f0": 175,
+   "f1": 181
+  },
+  {
+   "wid": "1-02.w005",
+   "w": "2022",
+   "key": "2022#1",
+   "sid": "1-02.s1",
+   "f0": 187,
+   "f1": 238
+  },
+  {
+   "wid": "1-02.w006",
+   "w": "alone.",
+   "key": "alone#1",
+   "sid": "1-02.s1",
+   "f0": 244,
+   "f1": 262
+  },
+  {
+   "wid": "1-02.w007",
+   "w": "Here,",
+   "key": "here#1",
+   "sid": "1-02.s2",
+   "f0": 304,
+   "f1": 316
+  },
+  {
+   "wid": "1-02.w008",
+   "w": "it's",
+   "key": "it's#1",
+   "sid": "1-02.s2",
+   "f0": 320,
+   "f1": 326
+  },
+  {
+   "wid": "1-02.w009",
+   "w": "one",
+   "key": "one#1",
+   "sid": "1-02.s2",
+   "f0": 334,
+   "f1": 342
+  },
+  {
+   "wid": "1-02.w010",
+   "w": "of",
+   "key": "of#1",
+   "sid": "1-02.s2",
+   "f0": 344,
+   "f1": 350
+  },
+  {
+   "wid": "1-02.w011",
+   "w": "the",
+   "key": "the#1",
+   "sid": "1-02.s2",
+   "f0": 354,
+   "f1": 359
+  },
+  {
+   "wid": "1-02.w012",
+   "w": "three",
+   "key": "three#1",
+   "sid": "1-02.s2",
+   "f0": 363,
+   "f1": 378
+  },
+  {
+   "wid": "1-02.w013",
+   "w": "deadliest",
+   "key": "deadliest#1",
+   "sid": "1-02.s2",
+   "f0": 381,
+   "f1": 416
+  },
+  {
+   "wid": "1-02.w014",
+   "w": "cancers,",
+   "key": "cancers#1",
+   "sid": "1-02.s2",
+   "f0": 419,
+   "f1": 457
+  },
+  {
+   "wid": "1-02.w015",
+   "w": "alongside",
+   "key": "alongside#1",
+   "sid": "1-02.s2",
+   "f0": 480,
+   "f1": 521
+  },
+  {
+   "wid": "1-02.w016",
+   "w": "lung",
+   "key": "lung#1",
+   "sid": "1-02.s2",
+   "f0": 541,
+   "f1": 557
+  },
+  {
+   "wid": "1-02.w017",
+   "w": "and",
+   "key": "and#1",
+   "sid": "1-02.s2",
+   "f0": 571,
+   "f1": 578
+  },
+  {
+   "wid": "1-02.w018",
+   "w": "colorectal.",
+   "key": "colorectal#1",
+   "sid": "1-02.s2",
+   "f0": 581,
+   "f1": 622
+  },
+  {
+   "wid": "1-02.w019",
+   "w": "And",
+   "key": "and#2",
+   "sid": "1-02.s3",
+   "f0": 659,
+   "f1": 666
+  },
+  {
+   "wid": "1-02.w020",
+   "w": "it's",
+   "key": "it's#2",
+   "sid": "1-02.s3",
+   "f0": 668,
+   "f1": 677
+  },
+  {
+   "wid": "1-02.w021",
+   "w": "not",
+   "key": "not#1",
+   "sid": "1-02.s3",
+   "f0": 680,
+   "f1": 690
+  },
+  {
+   "wid": "1-02.w022",
+   "w": "just",
+   "key": "just#1",
+   "sid": "1-02.s3",
+   "f0": 692,
+   "f1": 706
+  },
+  {
+   "wid": "1-02.w023",
+   "w": "us.",
+   "key": "us#1",
+   "sid": "1-02.s3",
+   "f0": 708,
+   "f1": 720
+  },
+  {
+   "wid": "1-02.w024",
+   "w": "Worldwide,",
+   "key": "worldwide#1",
+   "sid": "1-02.s4",
+   "f0": 751,
+   "f1": 786
+  },
+  {
+   "wid": "1-02.w025",
+   "w": "it's",
+   "key": "it's#3",
+   "sid": "1-02.s4",
+   "f0": 807,
+   "f1": 815
+  },
+  {
+   "wid": "1-02.w026",
+   "w": "the",
+   "key": "the#2",
+   "sid": "1-02.s4",
+   "f0": 821,
+   "f1": 826
+  },
+  {
+   "wid": "1-02.w027",
+   "w": "sixth",
+   "key": "sixth#1",
+   "sid": "1-02.s4",
+   "f0": 838,
+   "f1": 858
+  },
+  {
+   "wid": "1-02.w028",
+   "w": "most",
+   "key": "most#1",
+   "sid": "1-02.s4",
+   "f0": 867,
+   "f1": 882
+  },
+  {
+   "wid": "1-02.w029",
+   "w": "common",
+   "key": "common#1",
+   "sid": "1-02.s4",
+   "f0": 886,
+   "f1": 906
+  },
+  {
+   "wid": "1-02.w030",
+   "w": "cancer,",
+   "key": "cancer#1",
+   "sid": "1-02.s4",
+   "f0": 910,
+   "f1": 939
+  },
+  {
+   "wid": "1-02.w031",
+   "w": "and",
+   "key": "and#3",
+   "sid": "1-02.s4",
+   "f0": 953,
+   "f1": 960
+  },
+  {
+   "wid": "1-02.w032",
+   "w": "the",
+   "key": "the#3",
+   "sid": "1-02.s4",
+   "f0": 962,
+   "f1": 965
+  },
+  {
+   "wid": "1-02.w033",
+   "w": "third",
+   "key": "third#1",
+   "sid": "1-02.s4",
+   "f0": 972,
+   "f1": 987
+  },
+  {
+   "wid": "1-02.w034",
+   "w": "deadliest.",
+   "key": "deadliest#2",
+   "sid": "1-02.s4",
+   "f0": 992,
+   "f1": 1032
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "1-02.s1",
+   "text": "That's 1,412 people in 2022 alone.",
+   "w_first": "1-02.w001",
+   "w_last": "1-02.w006",
+   "f0": 9,
+   "f1": 262
+  },
+  {
+   "sid": "1-02.s2",
+   "text": "Here, it's one of the three deadliest cancers, alongside lung and colorectal.",
+   "w_first": "1-02.w007",
+   "w_last": "1-02.w018",
+   "f0": 304,
+   "f1": 622
+  },
+  {
+   "sid": "1-02.s3",
+   "text": "And it's not just us.",
+   "w_first": "1-02.w019",
+   "w_last": "1-02.w023",
+   "f0": 659,
+   "f1": 720
+  },
+  {
+   "sid": "1-02.s4",
+   "text": "Worldwide, it's the sixth most common cancer, and the third deadliest.",
+   "w_first": "1-02.w024",
+   "w_last": "1-02.w034",
+   "f0": 751,
+   "f1": 1032
+  }
+ ],
+ "events": [
+  {
+   "eid": "pulse_a",
+   "obj": "pulse_1",
+   "verb": "flow",
+   "means": "That's：一个鼓包从左端的注料口沿主料杆走到第 1 列，拐下去绕到字牌的两个浇口",
+   "word": "1-02.w002",
+   "f_start": 0,
+   "f_land": 31,
+   "f_end": 31,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "cam_a",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "开场：镜头从 1,412 的字牌慢慢滑开，带上右边的小人",
+   "word": "1-02.w003",
+   "f_start": 26,
+   "f_land": 146,
+   "f_end": 146,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "num_grow",
+   "obj": "num_plate",
+   "verb": "grow",
+   "means": "1,412：白色字牌从两头浇口漫开长满，字跟着印出来",
+   "word": "1-02.w002",
+   "f_start": 31,
+   "f_land": 35,
+   "f_end": 137,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "ppl_1",
+   "obj": "people_1",
+   "verb": "grow",
+   "means": "people：第一格两个小人长出来",
+   "word": "1-02.w003",
+   "f_start": 138,
+   "f_land": 146,
+   "f_end": 172,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "ppl_2",
+   "obj": "people_2",
+   "verb": "grow",
+   "means": "people：第二格两个小人晚一点长出来",
+   "word": "1-02.w003",
+   "f_start": 148,
+   "f_land": 156,
+   "f_end": 182,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "cal_grow",
+   "obj": "calendar",
+   "verb": "grow",
+   "means": "2022：日历长出来，印着 2022",
+   "word": "1-02.w005",
+   "f_start": 181,
+   "f_land": 187,
+   "f_end": 244,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "num_eject",
+   "obj": "num_plate",
+   "verb": "eject",
+   "means": "alone：1,412 的字牌拔起来浮在板上，朝镜头低一点头",
+   "word": "1-02.w006",
+   "f_start": 241,
+   "f_land": 244,
+   "f_end": 274,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "cam_b",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "Here：镜头往上滑到香港地图和玻璃肝之间",
+   "word": "1-02.w007",
+   "f_start": 264,
+   "f_land": 314,
+   "f_end": 314,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "hk_grow",
+   "obj": "hk_map",
+   "verb": "grow",
+   "means": "Here：香港地图长出来",
+   "word": "1-02.w007",
+   "f_start": 298,
+   "f_land": 304,
+   "f_end": 334,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "pulse_b",
+   "obj": "pulse_2",
+   "verb": "flow",
+   "means": "one of the：鼓包沿主料杆走到玻璃肝的框",
+   "word": "1-02.w012",
+   "f_start": 317,
+   "f_land": 357,
+   "f_end": 357,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "liver_grow",
+   "obj": "liver",
+   "verb": "grow",
+   "means": "three deadliest：玻璃肝从三个浇口漫开长出来，玻璃壳和红血管同时长，血管晚两帧",
+   "word": "1-02.w012",
+   "f_start": 343,
+   "f_land": 363,
+   "f_end": 416,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "liver_eject",
+   "obj": "liver",
+   "verb": "eject",
+   "means": "cancers：玻璃肝拔起来浮着",
+   "word": "1-02.w014",
+   "f_start": 416,
+   "f_land": 419,
+   "f_end": 443,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "cam_c",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "alongside：镜头往下带上肺和肠那一格",
+   "word": "1-02.w015",
+   "f_start": 440,
+   "f_land": 480,
+   "f_end": 480,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "lung_grow",
+   "obj": "lung",
+   "verb": "grow",
+   "means": "lung：玻璃肺和红色气管长出来",
+   "word": "1-02.w016",
+   "f_start": 531,
+   "f_land": 541,
+   "f_end": 571,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "colon_grow",
+   "obj": "colon",
+   "verb": "grow",
+   "means": "colorectal：玻璃结肠长出来",
+   "word": "1-02.w018",
+   "f_start": 571,
+   "f_land": 581,
+   "f_end": 611,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "organ_eject",
+   "obj": "lung_gut",
+   "verb": "eject",
+   "means": "colorectal 尾：肺和肠一起拔起来浮着，和肝一起是三种最致命的癌",
+   "word": "1-02.w018",
+   "f_start": 612,
+   "f_land": 615,
+   "f_end": 639,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "cam_d",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "And it's not just us：镜头往后上方滑到地球仪那一排",
+   "word": "1-02.w023",
+   "f_start": 648,
+   "f_land": 708,
+   "f_end": 720,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "pulse_c",
+   "obj": "pulse_3",
+   "verb": "flow",
+   "means": "not just us：鼓包沿料杆绕过肝的框，走到地球仪的框",
+   "word": "1-02.w024",
+   "f_start": 677,
+   "f_land": 747,
+   "f_end": 747,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "globe_grow",
+   "obj": "globe",
+   "verb": "grow",
+   "means": "Worldwide：地球仪长出来",
+   "word": "1-02.w024",
+   "f_start": 743,
+   "f_land": 751,
+   "f_end": 781,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "globe_eject",
+   "obj": "globe",
+   "verb": "eject",
+   "means": "地球仪拔起来浮着",
+   "word": "1-02.w024",
+   "f_start": 782,
+   "f_land": 785,
+   "f_end": 815,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "globe_spin",
+   "obj": "globe",
+   "verb": "move",
+   "means": "地球仪浮着慢慢自转，到段尾不停",
+   "word": "1-02.w024",
+   "f_start": 787,
+   "f_land": 787,
+   "f_end": 1035,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "six_grow",
+   "obj": "rank_common",
+   "verb": "grow",
+   "means": "sixth most common：左边长出字牌 6th most common",
+   "word": "1-02.w027",
+   "f_start": 832,
+   "f_land": 838,
+   "f_end": 906,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "third_grow",
+   "obj": "rank_deadly",
+   "verb": "grow",
+   "means": "third deadliest：右边长出字牌 3rd deadliest",
+   "word": "1-02.w033",
+   "f_start": 966,
+   "f_land": 972,
+   "f_end": 1032,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "source_line",
+   "obj": "source_line",
+   "verb": "appear",
+   "means": "1,412：左下角出处行 Hong Kong Cancer Registry 2022; GLOBOCAN 2022 (Bray et al. 2024) · Illustration",
+   "word": "1-02.w002",
+   "f_start": 35,
+   "f_land": 35,
+   "f_end": 47,
+   "role": null,
+   "tool": "remotion"
+  }
+ ]
+}

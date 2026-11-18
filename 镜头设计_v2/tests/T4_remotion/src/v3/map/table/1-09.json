@@ -1,0 +1,904 @@
+{
+ "schema": "cdk20.wordmap/1",
+ "built": "2026-11-18 02:33:56 +09:00",
+ "cut": "cut_v8",
+ "group": "1-09",
+ "fps": 60,
+ "len_f": 1458,
+ "cut_start_s": 76.97,
+ "holds": [],
+ "words": [
+  {
+   "wid": "1-09.w001",
+   "w": "To",
+   "key": "to#1",
+   "sid": "1-09.s1",
+   "f0": 9,
+   "f1": 15
+  },
+  {
+   "wid": "1-09.w002",
+   "w": "see",
+   "key": "see#1",
+   "sid": "1-09.s1",
+   "f0": 21,
+   "f1": 29
+  },
+  {
+   "wid": "1-09.w003",
+   "w": "why,",
+   "key": "why#1",
+   "sid": "1-09.s1",
+   "f0": 32,
+   "f1": 48
+  },
+  {
+   "wid": "1-09.w004",
+   "w": "let's",
+   "key": "let's#1",
+   "sid": "1-09.s1",
+   "f0": 92,
+   "f1": 101
+  },
+  {
+   "wid": "1-09.w005",
+   "w": "follow",
+   "key": "follow#1",
+   "sid": "1-09.s1",
+   "f0": 106,
+   "f1": 124
+  },
+  {
+   "wid": "1-09.w006",
+   "w": "one",
+   "key": "one#1",
+   "sid": "1-09.s1",
+   "f0": 130,
+   "f1": 138
+  },
+  {
+   "wid": "1-09.w007",
+   "w": "drug's",
+   "key": "drug's#1",
+   "sid": "1-09.s1",
+   "f0": 142,
+   "f1": 159
+  },
+  {
+   "wid": "1-09.w008",
+   "w": "journey.",
+   "key": "journey#1",
+   "sid": "1-09.s1",
+   "f0": 164,
+   "f1": 185
+  },
+  {
+   "wid": "1-09.w009",
+   "w": "Every",
+   "key": "every#1",
+   "sid": "1-09.s2",
+   "f0": 230,
+   "f1": 241
+  },
+  {
+   "wid": "1-09.w010",
+   "w": "medicine",
+   "key": "medicine#1",
+   "sid": "1-09.s2",
+   "f0": 247,
+   "f1": 281
+  },
+  {
+   "wid": "1-09.w011",
+   "w": "walks",
+   "key": "walks#1",
+   "sid": "1-09.s2",
+   "f0": 290,
+   "f1": 313
+  },
+  {
+   "wid": "1-09.w012",
+   "w": "the",
+   "key": "the#1",
+   "sid": "1-09.s2",
+   "f0": 326,
+   "f1": 332
+  },
+  {
+   "wid": "1-09.w013",
+   "w": "same",
+   "key": "same#1",
+   "sid": "1-09.s2",
+   "f0": 339,
+   "f1": 356
+  },
+  {
+   "wid": "1-09.w014",
+   "w": "road.",
+   "key": "road#1",
+   "sid": "1-09.s2",
+   "f0": 359,
+   "f1": 379
+  },
+  {
+   "wid": "1-09.w015",
+   "w": "Find",
+   "key": "find#1",
+   "sid": "1-09.s3",
+   "f0": 416,
+   "f1": 428
+  },
+  {
+   "wid": "1-09.w016",
+   "w": "a",
+   "key": "a#1",
+   "sid": "1-09.s3",
+   "f0": 430,
+   "f1": 431
+  },
+  {
+   "wid": "1-09.w017",
+   "w": "target.",
+   "key": "target#1",
+   "sid": "1-09.s3",
+   "f0": 439,
+   "f1": 466
+  },
+  {
+   "wid": "1-09.w018",
+   "w": "Find",
+   "key": "find#2",
+   "sid": "1-09.s4",
+   "f0": 495,
+   "f1": 509
+  },
+  {
+   "wid": "1-09.w019",
+   "w": "a",
+   "key": "a#2",
+   "sid": "1-09.s4",
+   "f0": 512,
+   "f1": 513
+  },
+  {
+   "wid": "1-09.w020",
+   "w": "hit,",
+   "key": "hit#1",
+   "sid": "1-09.s4",
+   "f0": 521,
+   "f1": 538
+  },
+  {
+   "wid": "1-09.w021",
+   "w": "a",
+   "key": "a#3",
+   "sid": "1-09.s4",
+   "f0": 567,
+   "f1": 568
+  },
+  {
+   "wid": "1-09.w022",
+   "w": "first",
+   "key": "first#1",
+   "sid": "1-09.s4",
+   "f0": 578,
+   "f1": 600
+  },
+  {
+   "wid": "1-09.w023",
+   "w": "molecule",
+   "key": "molecule#1",
+   "sid": "1-09.s4",
+   "f0": 606,
+   "f1": 638
+  },
+  {
+   "wid": "1-09.w024",
+   "w": "that",
+   "key": "that#1",
+   "sid": "1-09.s4",
+   "f0": 643,
+   "f1": 656
+  },
+  {
+   "wid": "1-09.w025",
+   "w": "works",
+   "key": "works#1",
+   "sid": "1-09.s4",
+   "f0": 670,
+   "f1": 691
+  },
+  {
+   "wid": "1-09.w026",
+   "w": "on",
+   "key": "on#1",
+   "sid": "1-09.s4",
+   "f0": 696,
+   "f1": 703
+  },
+  {
+   "wid": "1-09.w027",
+   "w": "it.",
+   "key": "it#1",
+   "sid": "1-09.s4",
+   "f0": 708,
+   "f1": 718
+  },
+  {
+   "wid": "1-09.w028",
+   "w": "Improve",
+   "key": "improve#1",
+   "sid": "1-09.s5",
+   "f0": 753,
+   "f1": 781
+  },
+  {
+   "wid": "1-09.w029",
+   "w": "it.",
+   "key": "it#2",
+   "sid": "1-09.s5",
+   "f0": 783,
+   "f1": 796
+  },
+  {
+   "wid": "1-09.w030",
+   "w": "Test",
+   "key": "test#1",
+   "sid": "1-09.s6",
+   "f0": 825,
+   "f1": 842
+  },
+  {
+   "wid": "1-09.w031",
+   "w": "it",
+   "key": "it#3",
+   "sid": "1-09.s6",
+   "f0": 848,
+   "f1": 854
+  },
+  {
+   "wid": "1-09.w032",
+   "w": "in",
+   "key": "in#1",
+   "sid": "1-09.s6",
+   "f0": 862,
+   "f1": 868
+  },
+  {
+   "wid": "1-09.w033",
+   "w": "cells,",
+   "key": "cells#1",
+   "sid": "1-09.s6",
+   "f0": 873,
+   "f1": 897
+  },
+  {
+   "wid": "1-09.w034",
+   "w": "then",
+   "key": "then#1",
+   "sid": "1-09.s6",
+   "f0": 934,
+   "f1": 948
+  },
+  {
+   "wid": "1-09.w035",
+   "w": "animals.",
+   "key": "animals#1",
+   "sid": "1-09.s6",
+   "f0": 952,
+   "f1": 982
+  },
+  {
+   "wid": "1-09.w036",
+   "w": "Then",
+   "key": "then#2",
+   "sid": "1-09.s7",
+   "f0": 1026,
+   "f1": 1037
+  },
+  {
+   "wid": "1-09.w037",
+   "w": "human",
+   "key": "human#1",
+   "sid": "1-09.s7",
+   "f0": 1045,
+   "f1": 1069
+  },
+  {
+   "wid": "1-09.w038",
+   "w": "trials:",
+   "key": "trials#1",
+   "sid": "1-09.s7",
+   "f0": 1086,
+   "f1": 1112
+  },
+  {
+   "wid": "1-09.w039",
+   "w": "phase",
+   "key": "phase#1",
+   "sid": "1-09.s7",
+   "f0": 1141,
+   "f1": 1158
+  },
+  {
+   "wid": "1-09.w040",
+   "w": "one,",
+   "key": "one#2",
+   "sid": "1-09.s7",
+   "f0": 1167,
+   "f1": 1183
+  },
+  {
+   "wid": "1-09.w041",
+   "w": "two,",
+   "key": "two#1",
+   "sid": "1-09.s7",
+   "f0": 1214,
+   "f1": 1230
+  },
+  {
+   "wid": "1-09.w042",
+   "w": "three.",
+   "key": "three#1",
+   "sid": "1-09.s7",
+   "f0": 1254,
+   "f1": 1273
+  },
+  {
+   "wid": "1-09.w043",
+   "w": "Then",
+   "key": "then#3",
+   "sid": "1-09.s8",
+   "f0": 1295,
+   "f1": 1305
+  },
+  {
+   "wid": "1-09.w044",
+   "w": "approval.",
+   "key": "approval#1",
+   "sid": "1-09.s8",
+   "f0": 1311,
+   "f1": 1339
+  },
+  {
+   "wid": "1-09.w045",
+   "w": "Any",
+   "key": "any#1",
+   "sid": "1-09.s9",
+   "f0": 1368,
+   "f1": 1376
+  },
+  {
+   "wid": "1-09.w046",
+   "w": "step",
+   "key": "step#1",
+   "sid": "1-09.s9",
+   "f0": 1382,
+   "f1": 1397
+  },
+  {
+   "wid": "1-09.w047",
+   "w": "can",
+   "key": "can#1",
+   "sid": "1-09.s9",
+   "f0": 1400,
+   "f1": 1410
+  },
+  {
+   "wid": "1-09.w048",
+   "w": "fail.",
+   "key": "fail#1",
+   "sid": "1-09.s9",
+   "f0": 1415,
+   "f1": 1431
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "1-09.s1",
+   "text": "To see why, let's follow one drug's journey.",
+   "w_first": "1-09.w001",
+   "w_last": "1-09.w008",
+   "f0": 9,
+   "f1": 185
+  },
+  {
+   "sid": "1-09.s2",
+   "text": "Every medicine walks the same road.",
+   "w_first": "1-09.w009",
+   "w_last": "1-09.w014",
+   "f0": 230,
+   "f1": 379
+  },
+  {
+   "sid": "1-09.s3",
+   "text": "Find a target.",
+   "w_first": "1-09.w015",
+   "w_last": "1-09.w017",
+   "f0": 416,
+   "f1": 466
+  },
+  {
+   "sid": "1-09.s4",
+   "text": "Find a hit, a first molecule that works on it.",
+   "w_first": "1-09.w018",
+   "w_last": "1-09.w027",
+   "f0": 495,
+   "f1": 718
+  },
+  {
+   "sid": "1-09.s5",
+   "text": "Improve it.",
+   "w_first": "1-09.w028",
+   "w_last": "1-09.w029",
+   "f0": 753,
+   "f1": 796
+  },
+  {
+   "sid": "1-09.s6",
+   "text": "Test it in cells, then animals.",
+   "w_first": "1-09.w030",
+   "w_last": "1-09.w035",
+   "f0": 825,
+   "f1": 982
+  },
+  {
+   "sid": "1-09.s7",
+   "text": "Then human trials: phase one, two, three.",
+   "w_first": "1-09.w036",
+   "w_last": "1-09.w042",
+   "f0": 1026,
+   "f1": 1273
+  },
+  {
+   "sid": "1-09.s8",
+   "text": "Then approval.",
+   "w_first": "1-09.w043",
+   "w_last": "1-09.w044",
+   "f0": 1295,
+   "f1": 1339
+  },
+  {
+   "sid": "1-09.s9",
+   "text": "Any step can fail.",
+   "w_first": "1-09.w045",
+   "w_last": "1-09.w048",
+   "f0": 1368,
+   "f1": 1431
+  }
+ ],
+ "events": [
+  {
+   "eid": "cam_a",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "To see why…follow：镜头慢慢推近主料杆左端的注料口",
+   "word": "1-09.w005",
+   "f_start": 9,
+   "f_land": 106,
+   "f_end": 106,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "cap_grow",
+   "obj": "capsule",
+   "verb": "grow",
+   "means": "one drug's journey：一粒红白胶囊在注料口顶上长出来",
+   "word": "1-09.w006",
+   "f_start": 110,
+   "f_land": 130,
+   "f_end": 185,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "cam_wide",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "Every medicine walks the same road：镜头升高拉远，看到主料杆和站点牌",
+   "word": "1-09.w014",
+   "f_start": 229,
+   "f_land": 359,
+   "f_end": 379,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "road_glint",
+   "obj": "pulse_1",
+   "verb": "flow",
+   "means": "walks the same road：一个白的鼓包从左到右沿主料杆走一遍，经过的站点牌轻轻弹一下",
+   "word": "1-09.w014",
+   "f_start": 289,
+   "f_land": 359,
+   "f_end": 359,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "cam_t",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "Find a target：镜头回到 Target",
+   "word": "1-09.w017",
+   "f_start": 389,
+   "f_land": 439,
+   "f_end": 439,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "hop_0",
+   "obj": "capsule",
+   "verb": "move",
+   "means": "target：胶囊从注料口跳到 Target 牌右边落下",
+   "word": "1-09.w017",
+   "f_start": 409,
+   "f_land": 439,
+   "f_end": 455,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "st_0",
+   "obj": "station_Target",
+   "verb": "morph",
+   "means": "target：Target 牌亮一下",
+   "word": "1-09.w017",
+   "f_start": 441,
+   "f_land": 441,
+   "f_end": 465,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "cam_h",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "Find a hit：镜头跟着去 Hit",
+   "word": "1-09.w020",
+   "f_start": 451,
+   "f_land": 521,
+   "f_end": 521,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "hop_1",
+   "obj": "capsule",
+   "verb": "move",
+   "means": "hit：跳到 Hit",
+   "word": "1-09.w020",
+   "f_start": 471,
+   "f_land": 521,
+   "f_end": 537,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "st_1",
+   "obj": "station_Hit",
+   "verb": "morph",
+   "means": "hit：Hit 牌亮一下",
+   "word": "1-09.w020",
+   "f_start": 523,
+   "f_land": 523,
+   "f_end": 547,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "cap_glow",
+   "obj": "capsule",
+   "verb": "morph",
+   "means": "a first molecule：胶囊表面亮一下（这是第一个有用的分子）",
+   "word": "1-09.w023",
+   "f_start": 600,
+   "f_land": 606,
+   "f_end": 626,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "cap_nod",
+   "obj": "capsule",
+   "verb": "move",
+   "means": "works on it：胶囊原地轻轻一跳，落稳",
+   "word": "1-09.w025",
+   "f_start": 666,
+   "f_land": 670,
+   "f_end": 684,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "cam_h2",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "on it：镜头开始往 Improve 那边带",
+   "word": "1-09.w027",
+   "f_start": 668,
+   "f_land": 708,
+   "f_end": 718,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "hop_2",
+   "obj": "capsule",
+   "verb": "move",
+   "means": "Improve：跳到 Improve",
+   "word": "1-09.w028",
+   "f_start": 713,
+   "f_land": 753,
+   "f_end": 767,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "cam_i",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "Improve：镜头到 Improve",
+   "word": "1-09.w028",
+   "f_start": 709,
+   "f_land": 759,
+   "f_end": 759,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "st_2",
+   "obj": "station_Improve",
+   "verb": "morph",
+   "means": "Improve：Improve 牌亮一下",
+   "word": "1-09.w028",
+   "f_start": 755,
+   "f_land": 755,
+   "f_end": 779,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "improve",
+   "obj": "capsule_band",
+   "verb": "morph",
+   "means": "it：胶囊接缝上长出一圈金色的箍，胶囊被它托高一点（改进过了）",
+   "word": "1-09.w029",
+   "f_start": 773,
+   "f_land": 783,
+   "f_end": 797,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "cam_c",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "Test it in cells：镜头去 Cells",
+   "word": "1-09.w033",
+   "f_start": 813,
+   "f_land": 873,
+   "f_end": 873,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "hop_3",
+   "obj": "capsule",
+   "verb": "move",
+   "means": "cells：跳到 Cells",
+   "word": "1-09.w033",
+   "f_start": 828,
+   "f_land": 873,
+   "f_end": 887,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "st_3",
+   "obj": "station_Cells",
+   "verb": "morph",
+   "means": "cells：Cells 牌亮一下",
+   "word": "1-09.w033",
+   "f_start": 875,
+   "f_land": 875,
+   "f_end": 899,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "cam_an",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "then animals：镜头去 Animals",
+   "word": "1-09.w035",
+   "f_start": 892,
+   "f_land": 952,
+   "f_end": 952,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "hop_4",
+   "obj": "capsule",
+   "verb": "move",
+   "means": "animals：跳到 Animals",
+   "word": "1-09.w035",
+   "f_start": 907,
+   "f_land": 952,
+   "f_end": 966,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "st_4",
+   "obj": "station_Animals",
+   "verb": "morph",
+   "means": "animals：Animals 牌亮一下",
+   "word": "1-09.w035",
+   "f_start": 954,
+   "f_land": 954,
+   "f_end": 982,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "cam_tr",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "Then human trials：镜头去 Trials",
+   "word": "1-09.w038",
+   "f_start": 1016,
+   "f_land": 1086,
+   "f_end": 1086,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "hop_5",
+   "obj": "capsule",
+   "verb": "move",
+   "means": "trials：跳到 Trials",
+   "word": "1-09.w038",
+   "f_start": 1036,
+   "f_land": 1086,
+   "f_end": 1100,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "st_5",
+   "obj": "station_Trials",
+   "verb": "morph",
+   "means": "trials：Trials 牌亮一下",
+   "word": "1-09.w038",
+   "f_start": 1088,
+   "f_land": 1088,
+   "f_end": 1112,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "phase_1",
+   "obj": "capsule",
+   "verb": "move",
+   "means": "phase one：胶囊往前小跳一下，落下时料杆上荡开一圈亮",
+   "word": "1-09.w040",
+   "f_start": 1155,
+   "f_land": 1167,
+   "f_end": 1181,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "phase_2",
+   "obj": "capsule",
+   "verb": "move",
+   "means": "two：再小跳一下",
+   "word": "1-09.w041",
+   "f_start": 1202,
+   "f_land": 1214,
+   "f_end": 1228,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "phase_3",
+   "obj": "capsule",
+   "verb": "move",
+   "means": "three：第三下",
+   "word": "1-09.w042",
+   "f_start": 1242,
+   "f_land": 1254,
+   "f_end": 1272,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "cam_ap",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "Then approval：镜头去 Approval",
+   "word": "1-09.w044",
+   "f_start": 1251,
+   "f_land": 1311,
+   "f_end": 1311,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "hop_6",
+   "obj": "capsule",
+   "verb": "move",
+   "means": "approval：最后一跳，落到 Approval",
+   "word": "1-09.w044",
+   "f_start": 1271,
+   "f_land": 1311,
+   "f_end": 1325,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "st_6",
+   "obj": "station_Approval",
+   "verb": "morph",
+   "means": "approval：Approval 牌亮一下，亮得久一点",
+   "word": "1-09.w044",
+   "f_start": 1313,
+   "f_land": 1313,
+   "f_end": 1339,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "cam_end",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "Any step can fail：镜头往后拉，看到后面四站",
+   "word": "1-09.w045",
+   "f_start": 1338,
+   "f_land": 1368,
+   "f_end": 1431,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "ghost_in",
+   "obj": "ghosts",
+   "verb": "grow",
+   "means": "Any step：Cells、Animals、Trials 三站上各长出一粒灰的透明胶囊（别的药）",
+   "word": "1-09.w046",
+   "f_start": 1372,
+   "f_land": 1382,
+   "f_end": 1398,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "ghost_fail",
+   "obj": "ghosts",
+   "verb": "move",
+   "means": "fail：三粒灰胶囊裂成两半，两半往两边滑开",
+   "word": "1-09.w048",
+   "f_start": 1409,
+   "f_land": 1415,
+   "f_end": 1435,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "source_line",
+   "obj": "source_line",
+   "verb": "appear",
+   "means": "Every medicine：左下角出处行 Illustration",
+   "word": "1-09.w009",
+   "f_start": 230,
+   "f_land": 230,
+   "f_end": 242,
+   "role": null,
+   "tool": "remotion"
+  }
+ ]
+}

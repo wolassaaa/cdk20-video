@@ -1,144 +1,325 @@
 {
  "schema": "cdk20.events/1",
  "group": "1-02",
- "tool": "warp_source",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/1-02.json",
+ "tool": "blender",
+ "note": "HKBU SCIE1007 课程作业的科普视频。第 1 章 1-02，大板开场（定版大板，只在第 1 区）。和样片 2-03 同一套做法：料沿料杆走、零件从浇口长出来、拔起浮着。这一镜里有几格换了内容：c0_r3 的钞票换成写着 1,412 的字牌，c0_r4 的日历印上 2022，c0_r0、c2_r0 换成 6th most common、3rd deadliest 两块字牌。字幕和出处行是 Remotion（src/v3/map/Ch1Board.jsx）。数字和排名来自 Hong Kong Cancer Registry 2022、GLOBOCAN 2022（Bray et al. 2024）。Blender 脚本 inserts/bl_ch1_board.py。",
  "holds": [],
  "events": [
   {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "1-02.w001",
-    "off": -9
-   },
-   "until": {
-    "dur": 35
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.00→1.10 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.0,
-    1.1
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage01",
-   "obj": "footage",
-   "verb": "move",
+   "id": "pulse_a",
+   "obj": "pulse_1",
+   "verb": "flow",
+   "means": "That's：一个鼓包从左端的注料口沿主料杆走到第 1 列，拐下去绕到字牌的两个浇口",
    "at": {
     "word": "1-02.w002",
-    "off": 0
+    "off": -4
    },
-   "until": {
-    "dur": 152
-   },
-   "ease": "linear",
-   "means": "旧动画源片 1.10→2.00 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    1.1,
-    2.0
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "lead": 31
   },
   {
-   "id": "footage02",
-   "obj": "footage",
-   "verb": "move",
+   "id": "cam_a",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "开场：镜头从 1,412 的字牌慢慢滑开，带上右边的小人",
    "at": {
+    "word": "1-02.w003"
+   },
+   "lead": 120
+  },
+  {
+   "id": "num_grow",
+   "obj": "num_plate",
+   "verb": "grow",
+   "means": "1,412：白色字牌从两头浇口漫开长满，字跟着印出来",
+   "at": {
+    "word": "1-02.w002"
+   },
+   "lead": 4,
+   "until": {
+    "word": "1-02.w002",
+    "off": -4
+   },
+   "ease": "linear"
+  },
+  {
+   "id": "ppl_1",
+   "obj": "people_1",
+   "verb": "grow",
+   "means": "people：第一格两个小人长出来",
+   "at": {
+    "word": "1-02.w003"
+   },
+   "lead": 8,
+   "until": {
+    "dur": 26
+   },
+   "ease": "linear"
+  },
+  {
+   "id": "ppl_2",
+   "obj": "people_2",
+   "verb": "grow",
+   "means": "people：第二格两个小人晚一点长出来",
+   "at": {
+    "word": "1-02.w003",
+    "off": 10
+   },
+   "lead": 8,
+   "until": {
+    "dur": 26
+   },
+   "ease": "linear"
+  },
+  {
+   "id": "cal_grow",
+   "obj": "calendar",
+   "verb": "grow",
+   "means": "2022：日历长出来，印着 2022",
+   "at": {
+    "word": "1-02.w005"
+   },
+   "lead": 6,
+   "until": {
     "word": "1-02.w005",
-    "off": 0
+    "off": 6
    },
-   "until": {
-    "dur": 57
-   },
-   "ease": "linear",
-   "means": "旧动画源片 2.00→2.40 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    2.0,
-    2.4
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "ease": "linear"
   },
   {
-   "id": "footage03",
-   "obj": "footage",
-   "verb": "move",
+   "id": "num_eject",
+   "obj": "num_plate",
+   "verb": "eject",
+   "means": "alone：1,412 的字牌拔起来浮在板上，朝镜头低一点头",
    "at": {
-    "word": "1-02.w006",
-    "off": 0
+    "word": "1-02.w006"
    },
+   "lead": 3,
    "until": {
-    "dur": 119
-   },
-   "ease": "linear",
-   "means": "旧动画源片 2.40→4.90 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    2.4,
-    4.9
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "dur": 30
+   }
   },
   {
-   "id": "footage04",
-   "obj": "footage",
-   "verb": "move",
+   "id": "cam_b",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "Here：镜头往上滑到香港地图和玻璃肝之间",
+   "at": {
+    "word": "1-02.w007",
+    "off": 10
+   },
+   "lead": 50
+  },
+  {
+   "id": "hk_grow",
+   "obj": "hk_map",
+   "verb": "grow",
+   "means": "Here：香港地图长出来",
+   "at": {
+    "word": "1-02.w007"
+   },
+   "lead": 6,
+   "until": {
+    "dur": 30
+   },
+   "ease": "linear"
+  },
+  {
+   "id": "pulse_b",
+   "obj": "pulse_2",
+   "verb": "flow",
+   "means": "one of the：鼓包沿主料杆走到玻璃肝的框",
    "at": {
     "word": "1-02.w012",
-    "off": 0
+    "off": -6
    },
-   "until": {
-    "dur": 317
-   },
-   "ease": "linear",
-   "means": "旧动画源片 4.90→8.60 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    4.9,
-    8.6
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "lead": 40
   },
   {
-   "id": "footage05",
-   "obj": "footage",
-   "verb": "move",
+   "id": "liver_grow",
+   "obj": "liver",
+   "verb": "grow",
+   "means": "three deadliest：玻璃肝从三个浇口漫开长出来，玻璃壳和红血管同时长，血管晚两帧",
    "at": {
-    "word": "1-02.w021",
-    "off": 0
+    "word": "1-02.w012"
    },
+   "lead": 20,
    "until": {
-    "dur": 158
+    "word": "1-02.w013"
    },
-   "ease": "linear",
-   "means": "旧动画源片 8.60→12.00 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    8.6,
-    12.0
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "ease": "linear"
   },
   {
-   "id": "footage06",
-   "obj": "footage",
-   "verb": "move",
+   "id": "liver_eject",
+   "obj": "liver",
+   "verb": "eject",
+   "means": "cancers：玻璃肝拔起来浮着",
    "at": {
-    "word": "1-02.w027",
-    "off": 0
+    "word": "1-02.w014"
+   },
+   "lead": 3,
+   "until": {
+    "dur": 24
+   }
+  },
+  {
+   "id": "cam_c",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "alongside：镜头往下带上肺和肠那一格",
+   "at": {
+    "word": "1-02.w015"
+   },
+   "lead": 40
+  },
+  {
+   "id": "lung_grow",
+   "obj": "lung",
+   "verb": "grow",
+   "means": "lung：玻璃肺和红色气管长出来",
+   "at": {
+    "word": "1-02.w016"
+   },
+   "lead": 10,
+   "until": {
+    "dur": 30
+   },
+   "ease": "linear"
+  },
+  {
+   "id": "colon_grow",
+   "obj": "colon",
+   "verb": "grow",
+   "means": "colorectal：玻璃结肠长出来",
+   "at": {
+    "word": "1-02.w018"
+   },
+   "lead": 10,
+   "until": {
+    "dur": 30
+   },
+   "ease": "linear"
+  },
+  {
+   "id": "organ_eject",
+   "obj": "lung_gut",
+   "verb": "eject",
+   "means": "colorectal 尾：肺和肠一起拔起来浮着，和肝一起是三种最致命的癌",
+   "at": {
+    "word": "1-02.w018",
+    "off": 34
+   },
+   "lead": 3,
+   "until": {
+    "dur": 24
+   }
+  },
+  {
+   "id": "cam_d",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "And it's not just us：镜头往后上方滑到地球仪那一排",
+   "at": {
+    "word": "1-02.w023"
+   },
+   "lead": 60,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "pulse_c",
+   "obj": "pulse_3",
+   "verb": "flow",
+   "means": "not just us：鼓包沿料杆绕过肝的框，走到地球仪的框",
+   "at": {
+    "word": "1-02.w024",
+    "off": -4
+   },
+   "lead": 70
+  },
+  {
+   "id": "globe_grow",
+   "obj": "globe",
+   "verb": "grow",
+   "means": "Worldwide：地球仪长出来",
+   "at": {
+    "word": "1-02.w024"
+   },
+   "lead": 8,
+   "until": {
+    "dur": 30
+   },
+   "ease": "linear"
+  },
+  {
+   "id": "globe_eject",
+   "obj": "globe",
+   "verb": "eject",
+   "means": "地球仪拔起来浮着",
+   "at": {
+    "event": "globe_grow",
+    "off": 34
+   },
+   "lead": 3,
+   "until": {
+    "dur": 30
+   }
+  },
+  {
+   "id": "globe_spin",
+   "obj": "globe",
+   "verb": "move",
+   "means": "地球仪浮着慢慢自转，到段尾不停",
+   "at": {
+    "event": "globe_eject",
+    "off": 2
    },
    "until": {
-    "dur": 194
+    "sentence_end": true,
+    "off": 3
    },
-   "ease": "linear",
-   "means": "旧动画源片 12.00→16.85 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    12.0,
-    16.85
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "ease": "linear"
+  },
+  {
+   "id": "six_grow",
+   "obj": "rank_common",
+   "verb": "grow",
+   "means": "sixth most common：左边长出字牌 6th most common",
+   "at": {
+    "word": "1-02.w027"
+   },
+   "lead": 6,
+   "until": {
+    "word": "1-02.w029"
+   },
+   "ease": "linear"
+  },
+  {
+   "id": "third_grow",
+   "obj": "rank_deadly",
+   "verb": "grow",
+   "means": "third deadliest：右边长出字牌 3rd deadliest（30 帧长完，留 1 秒冷却，结尾字是清楚的）",
+   "at": {
+    "word": "1-02.w033"
+   },
+   "lead": 6,
+   "until": {
+    "dur": 30
+   },
+   "ease": "linear"
+  },
+  {
+   "id": "source_line",
+   "obj": "source_line",
+   "verb": "appear",
+   "means": "1,412：左下角出处行 Hong Kong Cancer Registry 2022; GLOBOCAN 2022 (Bray et al. 2024) · Illustration",
+   "at": {
+    "word": "1-02.w002"
+   },
+   "until": {
+    "dur": 12
+   },
+   "tool": "remotion"
   }
  ]
 }

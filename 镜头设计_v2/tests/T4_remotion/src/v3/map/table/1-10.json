@@ -1,0 +1,480 @@
+{
+ "schema": "cdk20.wordmap/1",
+ "built": "2026-11-18 02:33:56 +09:00",
+ "cut": "cut_v8",
+ "group": "1-10",
+ "fps": 60,
+ "len_f": 838,
+ "cut_start_s": 101.27,
+ "holds": [],
+ "words": [
+  {
+   "wid": "1-10.w001",
+   "w": "Now",
+   "key": "now#1",
+   "sid": "1-10.s1",
+   "f0": 9,
+   "f1": 23
+  },
+  {
+   "wid": "1-10.w002",
+   "w": "here's",
+   "key": "here's#1",
+   "sid": "1-10.s1",
+   "f0": 52,
+   "f1": 70
+  },
+  {
+   "wid": "1-10.w003",
+   "w": "where",
+   "key": "where#1",
+   "sid": "1-10.s1",
+   "f0": 73,
+   "f1": 83
+  },
+  {
+   "wid": "1-10.w004",
+   "w": "it",
+   "key": "it#1",
+   "sid": "1-10.s1",
+   "f0": 85,
+   "f1": 87
+  },
+  {
+   "wid": "1-10.w005",
+   "w": "gets",
+   "key": "gets#1",
+   "sid": "1-10.s1",
+   "f0": 94,
+   "f1": 106
+  },
+  {
+   "wid": "1-10.w006",
+   "w": "interesting.",
+   "key": "interesting#1",
+   "sid": "1-10.s1",
+   "f0": 113,
+   "f1": 147
+  },
+  {
+   "wid": "1-10.w007",
+   "w": "In",
+   "key": "in#1",
+   "sid": "1-10.s2",
+   "f0": 188,
+   "f1": 193
+  },
+  {
+   "wid": "1-10.w008",
+   "w": "2024,",
+   "key": "2024#1",
+   "sid": "1-10.s2",
+   "f0": 195,
+   "f1": 255
+  },
+  {
+   "wid": "1-10.w009",
+   "w": "part",
+   "key": "part#1",
+   "sid": "1-10.s2",
+   "f0": 291,
+   "f1": 302
+  },
+  {
+   "wid": "1-10.w010",
+   "w": "of",
+   "key": "of#1",
+   "sid": "1-10.s2",
+   "f0": 303,
+   "f1": 307
+  },
+  {
+   "wid": "1-10.w011",
+   "w": "the",
+   "key": "the#1",
+   "sid": "1-10.s2",
+   "f0": 308,
+   "f1": 313
+  },
+  {
+   "wid": "1-10.w012",
+   "w": "Nobel",
+   "key": "nobel#1",
+   "sid": "1-10.s2",
+   "f0": 317,
+   "f1": 332
+  },
+  {
+   "wid": "1-10.w013",
+   "w": "Prize",
+   "key": "prize#1",
+   "sid": "1-10.s2",
+   "f0": 335,
+   "f1": 351
+  },
+  {
+   "wid": "1-10.w014",
+   "w": "in",
+   "key": "in#2",
+   "sid": "1-10.s2",
+   "f0": 351,
+   "f1": 356
+  },
+  {
+   "wid": "1-10.w015",
+   "w": "Chemistry",
+   "key": "chemistry#1",
+   "sid": "1-10.s2",
+   "f0": 360,
+   "f1": 386
+  },
+  {
+   "wid": "1-10.w016",
+   "w": "went",
+   "key": "went#1",
+   "sid": "1-10.s2",
+   "f0": 417,
+   "f1": 431
+  },
+  {
+   "wid": "1-10.w017",
+   "w": "to",
+   "key": "to#1",
+   "sid": "1-10.s2",
+   "f0": 432,
+   "f1": 437
+  },
+  {
+   "wid": "1-10.w018",
+   "w": "Demis",
+   "key": "demis#1",
+   "sid": "1-10.s2",
+   "f0": 443,
+   "f1": 462
+  },
+  {
+   "wid": "1-10.w019",
+   "w": "Hassabis",
+   "key": "hassabis#1",
+   "sid": "1-10.s2",
+   "f0": 468,
+   "f1": 502
+  },
+  {
+   "wid": "1-10.w020",
+   "w": "and",
+   "key": "and#1",
+   "sid": "1-10.s2",
+   "f0": 533,
+   "f1": 540
+  },
+  {
+   "wid": "1-10.w021",
+   "w": "John",
+   "key": "john#1",
+   "sid": "1-10.s2",
+   "f0": 543,
+   "f1": 556
+  },
+  {
+   "wid": "1-10.w022",
+   "w": "Jumper,",
+   "key": "jumper#1",
+   "sid": "1-10.s2",
+   "f0": 559,
+   "f1": 581
+  },
+  {
+   "wid": "1-10.w023",
+   "w": "for",
+   "key": "for#1",
+   "sid": "1-10.s2",
+   "f0": 598,
+   "f1": 605
+  },
+  {
+   "wid": "1-10.w024",
+   "w": "AlphaFold,",
+   "key": "alphafold#1",
+   "sid": "1-10.s2",
+   "f0": 611,
+   "f1": 642
+  },
+  {
+   "wid": "1-10.w025",
+   "w": "an",
+   "key": "an#1",
+   "sid": "1-10.s2",
+   "f0": 683,
+   "f1": 688
+  },
+  {
+   "wid": "1-10.w026",
+   "w": "AI",
+   "key": "ai#1",
+   "sid": "1-10.s2",
+   "f0": 690,
+   "f1": 706
+  },
+  {
+   "wid": "1-10.w027",
+   "w": "that",
+   "key": "that#1",
+   "sid": "1-10.s2",
+   "f0": 708,
+   "f1": 717
+  },
+  {
+   "wid": "1-10.w028",
+   "w": "predicts",
+   "key": "predicts#1",
+   "sid": "1-10.s2",
+   "f0": 718,
+   "f1": 744
+  },
+  {
+   "wid": "1-10.w029",
+   "w": "the",
+   "key": "the#2",
+   "sid": "1-10.s2",
+   "f0": 747,
+   "f1": 752
+  },
+  {
+   "wid": "1-10.w030",
+   "w": "shape",
+   "key": "shape#1",
+   "sid": "1-10.s2",
+   "f0": 756,
+   "f1": 771
+  },
+  {
+   "wid": "1-10.w031",
+   "w": "of",
+   "key": "of#2",
+   "sid": "1-10.s2",
+   "f0": 774,
+   "f1": 780
+  },
+  {
+   "wid": "1-10.w032",
+   "w": "proteins.",
+   "key": "proteins#1",
+   "sid": "1-10.s2",
+   "f0": 783,
+   "f1": 814
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "1-10.s1",
+   "text": "Now here's where it gets interesting.",
+   "w_first": "1-10.w001",
+   "w_last": "1-10.w006",
+   "f0": 9,
+   "f1": 147
+  },
+  {
+   "sid": "1-10.s2",
+   "text": "In 2024, part of the Nobel Prize in Chemistry went to Demis Hassabis and John Jumper, for AlphaFold, an AI that predicts the shape of proteins.",
+   "w_first": "1-10.w007",
+   "w_last": "1-10.w032",
+   "f0": 188,
+   "f1": 814
+  }
+ ],
+ "events": [
+  {
+   "eid": "cam_a",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "Now here's where it gets interesting：镜头从第 1 区全景滑到左下角",
+   "word": "1-10.w006",
+   "f_start": 9,
+   "f_land": 113,
+   "f_end": 147,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "pulse_a",
+   "obj": "pulse_1",
+   "verb": "flow",
+   "means": "interesting…In：鼓包从注料口沿主料杆走，拐下去穿过一格，到日历的浇口",
+   "word": "1-10.w008",
+   "f_start": 39,
+   "f_land": 189,
+   "f_end": 189,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "cal_grow",
+   "obj": "calendar",
+   "verb": "grow",
+   "means": "2024：日历长出来，印着 2024",
+   "word": "1-10.w008",
+   "f_start": 189,
+   "f_land": 195,
+   "f_end": 245,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "cam_medal",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "part of the Nobel：镜头到奖章那一格",
+   "word": "1-10.w012",
+   "f_start": 257,
+   "f_land": 317,
+   "f_end": 317,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "medal_grow",
+   "obj": "medal",
+   "verb": "grow",
+   "means": "Nobel Prize in Chemistry：金色奖章长出来",
+   "word": "1-10.w012",
+   "f_start": 309,
+   "f_land": 317,
+   "f_end": 386,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "cam_names",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "went to Demis：镜头往右带上名字牌",
+   "word": "1-10.w018",
+   "f_start": 393,
+   "f_land": 443,
+   "f_end": 443,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "medal_eject",
+   "obj": "medal",
+   "verb": "eject",
+   "means": "went：奖章拔起来浮着，朝镜头抬起一点",
+   "word": "1-10.w016",
+   "f_start": 414,
+   "f_land": 417,
+   "f_end": 447,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "medal_spin",
+   "obj": "medal",
+   "verb": "move",
+   "means": "奖章浮着慢慢转",
+   "word": "1-10.w016",
+   "f_start": 419,
+   "f_land": 419,
+   "f_end": 639,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "names_grow",
+   "obj": "names_plate",
+   "verb": "grow",
+   "means": "Demis Hassabis…John Jumper：名字牌长出来，字跟着印出来",
+   "word": "1-10.w018",
+   "f_start": 437,
+   "f_land": 443,
+   "f_end": 581,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "cam_chip",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "for AlphaFold：镜头到 AlphaFold 芯片",
+   "word": "1-10.w024",
+   "f_start": 551,
+   "f_land": 611,
+   "f_end": 611,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "chip_grow",
+   "obj": "chip",
+   "verb": "grow",
+   "means": "AlphaFold：黑色芯片长出来，印着 AlphaFold",
+   "word": "1-10.w024",
+   "f_start": 603,
+   "f_land": 611,
+   "f_end": 661,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "chain_out",
+   "obj": "chain",
+   "verb": "flow",
+   "means": "predicts：一串蓝色珠链从芯片角上的口子一颗颗冒出来往上走",
+   "word": "1-10.w028",
+   "f_start": 714,
+   "f_land": 718,
+   "f_end": 756,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "cam_fold",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "the shape of proteins：镜头抬起来看芯片上方",
+   "word": "1-10.w032",
+   "f_start": 723,
+   "f_land": 783,
+   "f_end": 816,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "chain_fold",
+   "obj": "chain",
+   "verb": "morph",
+   "means": "shape：珠链一圈圈绕成一团（折叠）",
+   "word": "1-10.w030",
+   "f_start": 750,
+   "f_land": 756,
+   "f_end": 791,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "surface",
+   "obj": "protein_surface",
+   "verb": "appear",
+   "means": "proteins：折好的珠链外面长出一层透明的表面，是一个蛋白的形状",
+   "word": "1-10.w032",
+   "f_start": 793,
+   "f_land": 793,
+   "f_end": 814,
+   "role": null,
+   "tool": null
+  },
+  {
+   "eid": "source_line",
+   "obj": "source_line",
+   "verb": "appear",
+   "means": "2024：左下角出处行",
+   "word": "1-10.w008",
+   "f_start": 195,
+   "f_land": 195,
+   "f_end": 207,
+   "role": null,
+   "tool": "remotion"
+  }
+ ]
+}
