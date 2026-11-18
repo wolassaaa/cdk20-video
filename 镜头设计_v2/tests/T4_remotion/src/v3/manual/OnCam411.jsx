@@ -5,7 +5,7 @@ import React from "react";
 import {Composition, Easing, registerRoot, useCurrentFrame} from "remotion";
 import D from "./oncam_4-11_4-12.json";
 import {PAPER, INK, RED, SOFT, ease, out, span, Part, Label, Write} from "./kit.jsx";
-import {OnCamFrame, useOnCam} from "./oncam.jsx";
+import {OnCamFrame, useOnCam, PersonFront} from "./oncam.jsx";
 
 const FX1 = 1290, FY1 = 200, FX2 = 1870, FY2 = 900;
 const RX1 = 1322, RX2 = 1722, RH = 64, RY = [330, 410, 490];
@@ -46,7 +46,14 @@ const Scene = () => {
           {/* 三行各连一条线到烧瓶 */}
           {RY.map((y, i) => {
             const p = span(f, L[i].s, L[i].l + 10, ease);
-            return p > 0 ? <path key={i} d={`M${RX2},${y} H1775 V${FL.cy} H1766`} fill="none" stroke={INK} strokeWidth={4} strokeLinecap="round" strokeLinejoin="round" pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - p} /> : null;
+            // 三条线各走各的（套着的 L 形，不交叉），各自落到烧瓶上不同的高度
+            const vx = [1846, 1816, 1786][i], ey = [790, 755, 720][i], ex = [1758, 1752, 1738][i];
+            return p > 0 ? (
+              <g key={i}>
+                <path d={`M${RX2},${y} H${vx - 14} Q${vx},${y} ${vx},${y + 14} V${ey - 14} Q${vx},${ey} ${vx - 14},${ey} H${ex}`} fill="none" stroke={INK} strokeWidth={4} strokeLinecap="round" strokeLinejoin="round" pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - p} />
+                {p > 0.97 && <path d={`M${ex + 13},${ey - 9} L${ex},${ey} L${ex + 13},${ey + 9}`} fill="none" stroke={INK} strokeWidth={4} strokeLinecap="round" strokeLinejoin="round" />}
+              </g>
+            ) : null;
           })}
         </svg>
         <Label x={RX1} y={245} w={200} align="left" p={span(f, E.table.l, E.table.l + 16)} size={28} italic color={INK}>computer</Label>
@@ -57,6 +64,7 @@ const Scene = () => {
         </div>
         <Part name="flask" cx={FL.cx} cy={FL.cy} w={FL.w} at={E.flask.l} f={f} gate={[0.5, 1]} />
       </div>
+      <PersonFront D={D} f={f} x0={FX1} />
       <div style={{position: "absolute", right: 44, top: 1046, fontSize: 17, color: SOFT}}>Illustration</div>
     </OnCamFrame>
   );

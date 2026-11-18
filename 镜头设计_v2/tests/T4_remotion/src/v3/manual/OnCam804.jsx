@@ -113,15 +113,15 @@ const Scene = () => {
               {dec > 0.9 && <path d="M1813,816 L1825,830 L1837,816" />}
             </g>
           )}
-          {/* 循环：computer 外 */}
+          {/* 循环：computer 外（半径 30，箭头不碰站名） */}
           {loopP > 0 && [0, 1, 2].map((k) => {
             const ghost = k === 0 ? 1 : fastP * (0.35 - 0.12 * k);
             if (ghost <= 0) return null;
             const a = spin - k * 28;
             return (
               <g key={k} transform={`rotate(${a} ${IX} ${SY[0]})`} opacity={ghost} fill="none" stroke={k === 0 ? INK : RED} strokeWidth={4} strokeLinecap="round" strokeLinejoin="round">
-                <path d={`M${IX + 38},${SY[0]} A38,38 0 1 1 ${IX + 38 * Math.cos(-0.6)},${SY[0] + 38 * Math.sin(-0.6)}`} pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - loopP} />
-                {loopP > 0.9 && (() => { const x = IX + 38 * Math.cos(-0.6), y = SY[0] + 38 * Math.sin(-0.6); return <path d={`M${x - 14},${y - 9} L${x},${y} L${x - 15},${y + 8}`} transform={`rotate(58 ${x} ${y})`} />; })()}
+                <path d={`M${IX + 30},${SY[0]} A30,30 0 1 1 ${IX + 30 * Math.cos(-0.6)},${SY[0] + 30 * Math.sin(-0.6)}`} pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - loopP} />
+                {loopP > 0.9 && (() => { const x = IX + 30 * Math.cos(-0.6), y = SY[0] + 30 * Math.sin(-0.6); return <path d={`M${x - 11},${y - 7} L${x},${y} L${x - 12},${y + 6}`} transform={`rotate(58 ${x} ${y})`} />; })()}
               </g>
             );
           })}

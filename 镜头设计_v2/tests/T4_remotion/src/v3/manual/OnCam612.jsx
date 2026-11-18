@@ -5,7 +5,7 @@ import React from "react";
 import {Composition, Easing, registerRoot, useCurrentFrame} from "remotion";
 import D from "./oncam_6-12.json";
 import {PAPER, INK, RED, SOFT, ease, out, span, Write} from "./kit.jsx";
-import {OnCamFrame, useOnCam} from "./oncam.jsx";
+import {OnCamFrame, useOnCam, PersonFront} from "./oncam.jsx";
 
 const FX1 = 1290, FY1 = 200, FX2 = 1870, FY2 = 900;
 const SEG = [[[1405, 740], [1560, 780], [1560, 610], [1650, 570]], [[1650, 570], [1740, 530], [1800, 440], [1765, 355]], [[1765, 355], [1745, 305], [1790, 270], [1820, 240]]];
@@ -34,7 +34,7 @@ const Scene = () => {
   const px = 1580 + (S0[0] - 1580) * mv, py = 420 + (S0[1] - 76 - 420) * mv - Math.sin(Math.PI * mv) * 40;
   const B = [...Array(13)].map((_, i) => braceAt(0.2 + 0.5 * i / 12, -50));
   const bracePath = `M${braceAt(0.2, -30)} L${B[0]} ` + B.slice(1).map((p) => `L${p}`).join(" ") + ` L${braceAt(0.7, -30)}`;
-  const mid = braceAt(0.45, -50 - 40);
+  const mid = braceAt(0.45, -50 - 78);                    // weeks 离括号远一点，不压括号
   return (
     <OnCamFrame D={D} f={f} wav="6-12.wav">
       <div style={{position: "absolute", left: hx, top: hy, width: 1920, height: 1080}}>
@@ -59,6 +59,7 @@ const Scene = () => {
           <Write p={yr}><span style={{position: "relative"}}>years<span style={{position: "absolute", left: -6, top: 24, height: 6, width: `${st * 116}%`, background: RED, borderRadius: 3}} /></span></Write>
         </div>
       </div>
+      <PersonFront D={D} f={f} x0={FX1} />
       <div style={{position: "absolute", right: 44, top: 1046, fontSize: 17, color: SOFT}}>Ren et al., Chem. Sci. 2023 · Illustration</div>
     </OnCamFrame>
   );

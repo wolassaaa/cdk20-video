@@ -5,11 +5,11 @@ import React from "react";
 import {Composition, Easing, registerRoot, useCurrentFrame} from "remotion";
 import D from "./oncam_4-08.json";
 import {PAPER, INK, RED, SOFT, ease, out, span, Part, Label, Arrow} from "./kit.jsx";
-import {OnCamFrame, useOnCam} from "./oncam.jsx";
+import {OnCamFrame, useOnCam, PersonFront} from "./oncam.jsx";
 
 const FX1 = 1290, FY1 = 200, FX2 = 1870, FY2 = 900;
 const PL = {cx: 1400, cy: 290, w: 130, h: 70};          // AI 牌
-const PER = {cx: 1400, cy: 715, w: 150};                 // 小人
+const PER = {cx: 1400, cy: 610, w: 150};                 // 小人（结尾 A 的手伸到卡片左下，小人和字牌放高一点让开）
 const LC = [1667, 555], LR = 95;                         // 循环中心、半径
 const SX1 = 1497, SX2 = 1837, SY1 = 330, SY2 = 780;      // 屏幕框
 const back = Easing.out(Easing.back(1.6));
@@ -50,11 +50,11 @@ const Scene = () => {
           {fr > 0 && <rect x={FX1} y={FY1} width={FX2 - FX1} height={FY2 - FY1} rx={26} fill="none" stroke={INK} strokeWidth={3.5} pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - fr} />}
           {/* AI 牌的箭头和红叉 */}
           <g opacity={fadeA}>
-            <Arrow d="M1400,340 L1400,622" tip={[1400, 622]} ang={90} a={E.arrow.s} b={E.arrow.l + 10} f={f} sw={5} />
+            <Arrow d="M1400,340 L1400,520" tip={[1400, 520]} ang={90} a={E.arrow.s} b={E.arrow.l + 10} f={f} sw={5} />
             {cr > 0 && (
               <g stroke={RED} strokeWidth={9} strokeLinecap="round">
-                <line x1={1376} y1={456} x2={1376 + 48 * Math.min(1, cr * 2)} y2={456 + 48 * Math.min(1, cr * 2)} />
-                {cr > 0.5 && <line x1={1424} y1={456} x2={1424 - 48 * (cr - 0.5) * 2} y2={456 + 48 * (cr - 0.5) * 2} />}
+                <line x1={1376} y1={406} x2={1376 + 48 * Math.min(1, cr * 2)} y2={406 + 48 * Math.min(1, cr * 2)} />
+                {cr > 0.5 && <line x1={1424} y1={406} x2={1424 - 48 * (cr - 0.5) * 2} y2={406 + 48 * (cr - 0.5) * 2} />}
               </g>
             )}
           </g>
@@ -84,11 +84,12 @@ const Scene = () => {
         <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `scale(${1 + bump})`, transformOrigin: `${PER.cx}px ${PER.cy}px`}}>
           <Part name="person" cx={PER.cx} cy={PER.cy} w={PER.w} at={E.person.l} f={f} gate={[0.5, 1]} />
         </div>
-        <Label x={PER.cx} y={790} w={220} p={span(f, E.person.l, E.person.l + 16)} size={28} italic color={INK}>scientists</Label>
+        <Label x={PER.cx} y={PER.cy + 75} w={220} p={span(f, E.person.l, E.person.l + 16)} size={28} italic color={INK}>scientists</Label>
         <Label x={LC[0]} y={348} w={200} p={span(f, E.trial.l - 4, E.trial.l + 14)} size={28} italic color={INK}>trial</Label>
         <Label x={LC[0]} y={708} w={200} p={span(f, E.error.l - 4, E.error.l + 14)} size={28} italic color={INK}>error</Label>
         <Label x={LC[0]} y={826} w={220} p={span(f, E.comp.l - 4, E.comp.l + 14)} size={28} italic color={INK}>computer</Label>
       </div>
+      <PersonFront D={D} f={f} x0={FX1} />
       <div style={{position: "absolute", right: 44, top: 1046, fontSize: 17, color: SOFT}}>Illustration</div>
     </OnCamFrame>
   );

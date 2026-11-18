@@ -5,7 +5,7 @@ import React from "react";
 import {Composition, Easing, registerRoot, useCurrentFrame} from "remotion";
 import D from "./oncam_4-04_4-05.json";
 import {PAPER, INK, RED, SOFT, ease, out, span, Write} from "./kit.jsx";
-import {OnCamFrame, useOnCam} from "./oncam.jsx";
+import {OnCamFrame, useOnCam, PersonFront} from "./oncam.jsx";
 
 const FX1 = 1290, FY1 = 200, FX2 = 1870, FY2 = 900;
 const CX = 1530, CY = 440, SC = 1.7, BR = 22, BLUE = "#2C40A6";
@@ -37,7 +37,7 @@ const Scene = () => {
   const TC = [(P[10][0] + P[12][0]) / 2, (P[10][1] + P[12][1]) / 2];
   const ux = -0.72, uy = 0.70;                                                  // 沿链方向到切口：切口法线
   const px = 0.72, py = -0.70;
-  const pivot = [MID[0] + px * 125, MID[1] + py * 125];
+  const pivot = [MID[0] + px * 92, MID[1] + py * 92];       // 刀尖合拢时正好落在切口上
   const ang = Math.atan2(-py, -px) * 180 / Math.PI;
   const l1 = span(f, E.ai.l, E.ai.e), l2 = span(f, E.human.l, E.human.e), ul = span(f, E.under.s, E.under.e, ease);
   const link = (i, extra) => {
@@ -71,12 +71,12 @@ const Scene = () => {
           {cutP > 0 && (
             <g opacity={sci}>
               <line x1={MID[0] - px * 50} y1={MID[1] - py * 50} x2={MID[0] - px * 50 + px * 100 * cutP} y2={MID[1] - py * 50 + py * 100 * cutP} stroke={RED} strokeWidth={4.5} strokeDasharray="9 7" strokeLinecap="round" />
-              <g transform={`translate(${pivot[0]},${pivot[1]}) rotate(${ang}) scale(1.3)`} stroke={INK} strokeWidth={4.5} strokeLinecap="round" fill="none">
+              <g transform={`translate(${pivot[0]},${pivot[1]}) rotate(${ang}) scale(1.45)`} stroke={INK} strokeWidth={4.5} strokeLinecap="round" fill="none">
                 {[1, -1].map((s) => (
                   <g key={s} transform={`rotate(${s * sciA * 180 / Math.PI * 0.5})`}>
-                    <line x1={0} y1={0} x2={64} y2={0} />
-                    <line x1={0} y1={0} x2={-22} y2={0} />
-                    <circle cx={-36} cy={s * 4} r={13} />
+                    <path d={`M-2,${-6 * s} C24,${-8 * s} 50,${-5 * s} 70,0 C48,${1 * s} 22,${2 * s} -2,${2 * s} Z`} fill={INK} stroke="none" />
+                    <line x1={0} y1={0} x2={-22} y2={s * 3} />
+                    <ellipse cx={-36} cy={s * 7} rx={15} ry={11} fill={PAPER} />
                   </g>
                 ))}
                 <circle cx={0} cy={0} r={4} fill={INK} />
@@ -92,6 +92,7 @@ const Scene = () => {
           </Write>
         </div>
       </div>
+      <PersonFront D={D} f={f} x0={FX1} />
       <div style={{position: "absolute", right: 44, top: 1046, fontSize: 17, color: SOFT}}>Illustration</div>
     </OnCamFrame>
   );

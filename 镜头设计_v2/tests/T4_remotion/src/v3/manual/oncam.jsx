@@ -48,3 +48,16 @@ export const OnCamFrame = ({D, f, wav, children}) => {
     </AbsoluteFill>
   );
 };
+
+// 手在卡片前面（opt-in）：人物逐帧图再画一层，只留 x ≥ x0 - 24 的部分（多留 24 px 盖住跟头位移后的卡片描边），放在讲解卡之后。
+// 人的身体到不了卡片，伸进卡片的只有手，所以这一层只是把手放回卡片前面（审片 11-19：卡片不许盖住手）。
+export const PersonFront = ({D, f, x0}) => {
+  let clip = D.clips[0];
+  for (const c of D.clips) if (f >= c.cut) clip = c;
+  const k = Math.max(0, Math.min(clip.n - 1, f - clip.off));
+  return (
+    <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, clipPath: `inset(0 0 0 ${x0 - 24}px)`}}>
+      <Img src={staticFile(`person_${clip.seg}/${String(k).padStart(4, "0")}.png`)} style={{position: "absolute", left: PX, top: PY, width: 1728, height: 972, WebkitMaskImage: EDGE, maskImage: EDGE}} />
+    </div>
+  );
+};

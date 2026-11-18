@@ -7,7 +7,7 @@ import D from "./oncam_5-02.json";
 import {PAPER, INK, RED, SOFT, ease, out, span, Write} from "./kit.jsx";
 import {OnCamFrame, useOnCam} from "./oncam.jsx";
 
-const FX1 = 1290, FY1 = 200, FX2 = 1870, FY2 = 900;
+const FX1 = 1290, FY1 = 215, FX2 = 1870, FY2 = 750;      // 卡片收到内容的高度（下半截原来空着）
 const X0 = 1390, DX = 68, Y0 = 520, PICK = 3;
 const back = Easing.out(Easing.back(1.8));
 const mix = (a, b, t) => `rgb(${a.map((v, i) => Math.round(v + (b[i] - v) * t)).join(",")})`;

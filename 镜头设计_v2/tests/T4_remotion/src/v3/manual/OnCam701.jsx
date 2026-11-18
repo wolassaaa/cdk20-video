@@ -5,7 +5,7 @@ import React from "react";
 import {Composition, Easing, registerRoot, useCurrentFrame} from "remotion";
 import D from "./oncam_7-01.json";
 import {PAPER, INK, RED, SOFT, ease, out, span} from "./kit.jsx";
-import {OnCamFrame, useOnCam} from "./oncam.jsx";
+import {OnCamFrame, useOnCam, PersonFront} from "./oncam.jsx";
 
 const FX1 = 1290, FY1 = 200, FX2 = 1870, FY2 = 900;
 const ROWS = [400, 560, 720];
@@ -39,6 +39,7 @@ const Scene = () => {
           );
         })}
       </div>
+      <PersonFront D={D} f={f} x0={FX1} />
       <div style={{position: "absolute", right: 44, top: 1046, fontSize: 17, color: SOFT}}>Illustration</div>
     </OnCamFrame>
   );

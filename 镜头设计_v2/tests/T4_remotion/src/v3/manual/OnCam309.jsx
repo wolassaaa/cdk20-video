@@ -24,7 +24,7 @@ const Scene = () => {
   const pr = span(f, E.probe.s, E.probe.e, Easing.inOut(Easing.quad));
   const kx = 1405 + 150 * pr + (pr > 0 && pr < 1 ? 7 * Math.sin(pr * 22) : 0);
   const ky = 625 + (pr > 0 && pr < 1 ? 5 * Math.sin(pr * 17) : 0);
-  const kmask = "linear-gradient(90deg,#000 1560px,transparent 1700px)";
+  const kmask = `linear-gradient(90deg,#000 ${PX1 - 2}px,transparent ${PX1 + 4}px)`;   // 钥匙尖进黑幕就看不见（不盖在黑幕上）
   return (
     <OnCamFrame D={D} f={f} wav="3-09.wav">
       <div style={{position: "absolute", left: hx, top: hy, width: 1920, height: 1080}}>
