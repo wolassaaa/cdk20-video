@@ -1,163 +1,144 @@
 {
  "schema": "cdk20.events/1",
  "group": "6-01",
- "tool": "warp_source",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/6-01.json",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 6 章记分板开场页 6-01（画外音）：字牌 The big question 落在中央，How much did the computers actually help? 写出后缩小上移成标题，记分板从中缝向两边推开，Before / Now 表头写出，空行一行行画出。页面 Manual601.jsx。",
  "holds": [],
  "events": [
   {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
+   "id": "bigq",
+   "obj": "bigq",
+   "verb": "appear",
    "at": {
-    "word": "6-01.w001",
-    "off": -9
-   },
-   "until": {
-    "dur": 6
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.00→0.33 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.0,
-    0.333
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage01",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "6-01.w001",
-    "off": -3
-   },
-   "until": {
-    "dur": 55
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.33→1.42 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.333,
-    1.417
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage02",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "6-01.w004",
+    "word": "6-01.w003",
     "off": 0
    },
+   "means": "big question：字牌 The big question",
+   "tool": "remotion",
+   "lead": 10,
    "until": {
-    "dur": 75
-   },
-   "ease": "linear",
-   "means": "旧动画源片 1.42→1.93 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    1.417,
-    1.933
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "6-01.w004"
+   }
   },
   {
-   "id": "footage03",
-   "obj": "footage",
-   "verb": "move",
+   "id": "how",
+   "obj": "how",
+   "verb": "appear",
    "at": {
-    "word": "6-01.w006",
-    "off": -1
+    "word": "6-01.w005",
+    "off": 0
    },
+   "means": "How much did the：大问题第二行开写",
+   "tool": "remotion",
+   "lead": 6,
    "until": {
-    "dur": 43
-   },
-   "ease": "linear",
-   "means": "旧动画源片 1.93→3.00 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    1.933,
-    3.0
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "6-01.w008"
+   }
   },
   {
-   "id": "footage04",
-   "obj": "footage",
+   "id": "shrink",
+   "obj": "shrink",
    "verb": "move",
    "at": {
     "word": "6-01.w009",
     "off": 0
    },
+   "means": "computers：问句缩小上移成标题",
+   "tool": "remotion",
+   "lead": 20,
    "until": {
-    "dur": 50
-   },
-   "ease": "linear",
-   "means": "旧动画源片 3.00→4.37 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    3.0,
-    4.367
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "6-01.w009"
+   }
   },
   {
-   "id": "footage05",
-   "obj": "footage",
-   "verb": "move",
+   "id": "help",
+   "obj": "help",
+   "verb": "appear",
    "at": {
     "word": "6-01.w010",
     "off": 0
    },
+   "means": "actually help?：问句收尾",
+   "tool": "remotion",
+   "lead": 6,
    "until": {
-    "dur": 28
-   },
-   "ease": "linear",
-   "means": "旧动画源片 4.37→4.88 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    4.367,
-    4.883
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "6-01.w011"
+   }
   },
   {
-   "id": "footage06",
-   "obj": "footage",
-   "verb": "move",
+   "id": "seam",
+   "obj": "seam",
+   "verb": "grow",
    "at": {
-    "word": "6-01.w011",
+    "word": "6-01.w013",
     "off": 0
    },
+   "means": "line up：中缝竖线长出",
+   "tool": "remotion",
+   "lead": 14,
    "until": {
-    "dur": 120
-   },
-   "ease": "linear",
-   "means": "旧动画源片 4.88→7.00 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    4.883,
-    7.0
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "6-01.w013"
+   }
   },
   {
-   "id": "footage07",
-   "obj": "footage",
-   "verb": "move",
+   "id": "frame",
+   "obj": "frame",
+   "verb": "grow",
+   "at": {
+    "word": "6-01.w014",
+    "off": 0
+   },
+   "means": "up：外框从中缝向两边推开",
+   "tool": "remotion",
+   "lead": 24,
+   "until": {
+    "word": "6-01.w014"
+   }
+  },
+  {
+   "id": "bef",
+   "obj": "bef",
+   "verb": "appear",
    "at": {
     "word": "6-01.w015",
     "off": 0
    },
+   "means": "before：表头 Before",
+   "tool": "remotion",
+   "lead": 8,
    "until": {
-    "dur": 43
+    "word": "6-01.w015"
+   }
+  },
+  {
+   "id": "rows",
+   "obj": "rows",
+   "verb": "grow",
+   "at": {
+    "word": "6-01.w016",
+    "off": 0
    },
-   "ease": "linear",
-   "means": "旧动画源片 7.00→7.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    7.0,
-    7.45
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "means": "and：空行横线一行行画出",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "word": "6-01.w016"
+   }
+  },
+  {
+   "id": "now",
+   "obj": "now",
+   "verb": "appear",
+   "at": {
+    "word": "6-01.w017",
+    "off": 0
+   },
+   "means": "now：表头 Now",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   }
   }
  ]
 }
