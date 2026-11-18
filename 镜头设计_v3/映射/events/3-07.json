@@ -1,125 +1,354 @@
 {
  "schema": "cdk20.events/1",
  "group": "3-07",
- "tool": "warp_source",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/3-07.json",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 3-07（VO）：PandaOmics 是一个漏斗（芯片盖牌），十张数据集卡片落进漏斗口，卡片上点数跳成肿瘤和健康样本，论文也飞进去；漏斗吐出 top 20 排名表，小人逐行打勾，CDK20 那一行升到第一，红批注 no approved drug yet。页面 Manual307.jsx。",
  "holds": [],
  "events": [
   {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
+   "id": "title",
+   "obj": "title",
+   "verb": "appear",
    "at": {
-    "word": "3-07.w001",
-    "off": -9
-   },
-   "until": {
-    "dur": 170
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.00→3.95 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.0,
-    3.95
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage01",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "3-07.w006",
+    "word": "3-07.w002",
     "off": 0
    },
+   "means": "2023：标题 In 2023, an AI platform",
+   "tool": "remotion",
+   "lead": 10,
    "until": {
-    "dur": 26
-   },
-   "ease": "linear",
-   "means": "旧动画源片 3.95→4.35 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    3.95,
-    4.35
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage02",
-   "obj": "footage",
-   "verb": "move",
+   "id": "ai",
+   "obj": "ai",
+   "verb": "grow",
+   "at": {
+    "word": "3-07.w004",
+    "off": 0
+   },
+   "means": "AI：漏斗画出，芯片在漏斗颈长出",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "panda",
+   "obj": "panda",
+   "verb": "appear",
    "at": {
     "word": "3-07.w007",
     "off": 0
    },
+   "means": "PandaOmics：芯片盖深色牌写 PandaOmics",
+   "tool": "remotion",
+   "lead": 10,
    "until": {
-    "dur": 268
-   },
-   "ease": "linear",
-   "means": "旧动画源片 4.35→8.67 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    4.35,
-    8.667
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage03",
-   "obj": "footage",
+   "id": "backed",
+   "obj": "backed",
+   "verb": "morph",
+   "at": {
+    "word": "3-07.w008",
+    "off": 0
+   },
+   "means": "backed：芯片亮一下，漏斗口的梳齿画出",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "ten",
+   "obj": "ten",
    "verb": "move",
+   "at": {
+    "word": "3-07.w013",
+    "off": 0
+   },
+   "means": "ten：卡片开始一张张落进漏斗口，计数跳",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "sets",
+   "obj": "sets",
+   "verb": "appear",
    "at": {
     "word": "3-07.w017",
     "off": 0
    },
+   "means": "data sets：第 10 张落定，写 10 data sets",
+   "tool": "remotion",
+   "lead": 6,
    "until": {
-    "dur": 218
-   },
-   "ease": "linear",
-   "means": "旧动画源片 8.67→12.28 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    8.667,
-    12.283
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage04",
-   "obj": "footage",
-   "verb": "move",
+   "id": "thou",
+   "obj": "thou",
+   "verb": "morph",
+   "at": {
+    "word": "3-07.w020",
+    "off": 0
+   },
+   "means": "thousand：卡片上实心点长满，计数跳到 1,133",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "samp",
+   "obj": "samp",
+   "verb": "appear",
+   "at": {
+    "word": "3-07.w022",
+    "off": 0
+   },
+   "means": "samples：写 tumour",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "hund",
+   "obj": "hund",
+   "verb": "morph",
+   "at": {
+    "word": "3-07.w024",
+    "off": 0
+   },
+   "means": "hundreds：卡片上空心点长出，计数跳到 674",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "healthy",
+   "obj": "healthy",
+   "verb": "appear",
    "at": {
     "word": "3-07.w026",
-    "off": -1
+    "off": 0
    },
+   "means": "healthy：写 healthy",
+   "tool": "remotion",
+   "lead": 6,
    "until": {
-    "dur": 622
-   },
-   "ease": "linear",
-   "means": "旧动画源片 12.28→23.63 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    12.283,
-    23.633
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage05",
-   "obj": "footage",
+   "id": "plus",
+   "obj": "plus",
+   "verb": "appear",
+   "at": {
+    "word": "3-07.w028",
+    "off": 0
+   },
+   "means": "plus：写 + papers 的加号",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "papers",
+   "obj": "papers",
    "verb": "move",
    "at": {
-    "word": "3-07.w048",
-    "off": -1
+    "word": "3-07.w030",
+    "off": 0
    },
+   "means": "papers：一叠纸飞进漏斗，沉进芯片",
+   "tool": "remotion",
+   "lead": 24,
    "until": {
-    "dur": 48
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "people",
+   "obj": "people",
+   "verb": "grow",
+   "at": {
+    "word": "3-07.w031",
+    "off": 0
    },
-   "ease": "linear",
-   "means": "旧动画源片 23.63→24.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    23.633,
-    24.45
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "means": "People：小人长出",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "checked",
+   "obj": "checked",
+   "verb": "appear",
+   "at": {
+    "word": "3-07.w032",
+    "off": 0
+   },
+   "means": "checked：漏斗出口到排名表的箭头",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "top",
+   "obj": "top",
+   "verb": "grow",
+   "at": {
+    "word": "3-07.w034",
+    "off": 0
+   },
+   "means": "top：排名表框和表头 top 20",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "twenty",
+   "obj": "twenty",
+   "verb": "appear",
+   "at": {
+    "word": "3-07.w035",
+    "off": 0
+   },
+   "means": "20：20 行一行行画出",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "hand",
+   "obj": "hand",
+   "verb": "appear",
+   "at": {
+    "word": "3-07.w037",
+    "off": 0
+   },
+   "means": "by hand：小人逐行打红勾",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "cdk",
+   "obj": "cdk",
+   "verb": "appear",
+   "at": {
+    "word": "3-07.w039",
+    "off": 0
+   },
+   "means": "CDK20：中间一行写 CDK20，加深",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "came",
+   "obj": "came",
+   "verb": "move",
+   "at": {
+    "word": "3-07.w040",
+    "off": 0
+   },
+   "means": "came：这一行往左探出",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "top2",
+   "obj": "top2",
+   "verb": "move",
+   "at": {
+    "word": "3-07.w043",
+    "off": 0
+   },
+   "means": "on top：这一行升到第一，别的行往下让",
+   "tool": "remotion",
+   "lead": 24,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "no",
+   "obj": "no",
+   "verb": "appear",
+   "at": {
+    "word": "3-07.w045",
+    "off": 0
+   },
+   "means": "no：红批注 no approved drug yet",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "drug",
+   "obj": "drug",
+   "verb": "appear",
+   "at": {
+    "word": "3-07.w047",
+    "off": 0
+   },
+   "means": "drug：药丸图标打红斜杠",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "yet",
+   "obj": "yet",
+   "verb": "appear",
+   "at": {
+    "word": "3-07.w050",
+    "off": 0
+   },
+   "means": "yet：第一行红框框住",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   }
   }
  ]
 }
