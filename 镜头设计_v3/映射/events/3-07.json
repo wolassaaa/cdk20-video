@@ -171,6 +171,21 @@
    }
   },
   {
+   "id": "research",
+   "obj": "research",
+   "verb": "grow",
+   "at": {
+    "word": "3-07.w029",
+    "off": 0
+   },
+   "means": "research：左下长出一叠论文，写 research papers",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
    "id": "papers",
    "obj": "papers",
    "verb": "move",

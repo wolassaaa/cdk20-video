@@ -765,6 +765,26 @@
    "F_end": 22381
   },
   {
+   "id": "research",
+   "obj": "research",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "research：左下长出一叠论文，写 research papers",
+   "f_start": 758,
+   "f_land": 770,
+   "f_end": 821,
+   "until": "3-07.s2",
+   "word": "3-07.w029",
+   "w": "research",
+   "key": "research#1",
+   "sid": "3-07.s2",
+   "word_f0": 770,
+   "tool": "remotion",
+   "F_start": 22318,
+   "F_land": 22330,
+   "F_end": 22381
+  },
+  {
    "id": "papers",
    "obj": "papers",
    "verb": "move",

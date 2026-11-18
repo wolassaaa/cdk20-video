@@ -39,7 +39,7 @@ const Scene = () => {
   const tickAt = (k) => E.hand.l + k * 3;           // 按位置逐行打勾
   const yetBox = span(f, E.yet.s, E.yet.l + 6, ease);
   const bead = [[0, 130, 96], [E.title.l, 800, 96], [E.ai.l, 1000, 420], [E.panda.l, 720, 560], [E.backed.l, 360, 640], [E.ten.l, 930, 300],
-                [E.sets.l, 940, 200], [E.thou.l, 930, 420], [E.hund.l, 980, 300], [E.papers.l, 230, 560], [E.people.l, 760, 900], [E.checked.l, 800, 760],
+                [E.sets.l, 940, 200], [E.thou.l, 930, 420], [E.hund.l, 980, 300], [E.research.l, 400, 880], [E.papers.l, 230, 560], [E.people.l, 760, 900], [E.checked.l, 800, 760],
                 [E.top.l, 1000, 190], [E.twenty.l, 1820, 600], [E.hand.l, 1000, 700], [E.cdk.l, 1820, 520], [E.top2.l, 1820, 257],
                 [E.no.l, 1000, 205], [E.drug.l, 1810, 150], [E.yet.l, 1820, 330], [K.len_f, 1821, 331]];
   return (
@@ -130,10 +130,12 @@ const Scene = () => {
       <div style={{position: "absolute", left: CX - 74, top: CY - 17, width: 148, textAlign: "center", font: "22px/34px Serif", color: "#E8E4DA"}}>
         <Write p={span(f, E.panda.s + 2, E.panda.l + 8)}>PandaOmics</Write></div>
 
-      {/* 论文 */}
+      {/* 论文：左下一叠，一张飞进漏斗 */}
+      {[0, 1, 2].map((k) => <Part key={k} name="paper1" cx={226 + 12 * k} cy={870 - 8 * k} w={80} at={E.research.s + 4 * k} f={f} gate={[0.5, 1]} />)}
+      <Label x={250} y={935} w={300} size={26} italic p={span(f, E.research.s + 6, E.papers.l)}>research papers</Label>
       {f >= E.papers.s && sink < 1 && (
         <div style={{position: "absolute", left: 0, top: 0, opacity: 1 - span(sink, 0.6, 1),
-                     transform: `translate(${(60 - CX) * (1 - pap)}px, ${(820 - 440) * (1 - pap) + 80 * sink}px) scale(${1 - 0.6 * sink})`, transformOrigin: `${CX}px 440px`}}>
+                     transform: `translate(${(250 - CX) * (1 - pap)}px, ${(850 - 440) * (1 - pap) + 80 * sink}px) scale(${1 - 0.6 * sink})`, transformOrigin: `${CX}px 440px`}}>
           <Part name="paper1" cx={CX} cy={440} w={70} at={-100} f={0} />
           <Part name="paper1" cx={CX + 10} cy={432} w={70} at={-100} f={0} />
         </div>
