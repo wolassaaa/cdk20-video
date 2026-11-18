@@ -1,467 +1,309 @@
 {
  "schema": "cdk20.events/1",
  "group": "4-06",
- "tool": "warp_source",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/4-06.json",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 4-06（VO）：化学家一直以来的试错循环。一把钥匙沿循环走：Imagine → Make → Test → fails（打叉）→ Tweak → Try again；最后每转一圈掉一张钞票、日历翻一页（costs time and money）。循环位置和 4-07 开头一致，两页剪在一起连得上。页面 Manual406.jsx。",
  "holds": [],
  "events": [
   {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
+   "id": "tease",
+   "obj": "tease",
+   "verb": "grow",
    "at": {
-    "word": "4-06.w001",
-    "off": -9
-   },
-   "until": {
-    "dur": 6
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.00→0.27 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.0,
-    0.267
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage01",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "4-06.w001",
-    "off": -3
-   },
-   "until": {
-    "dur": 29
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.27→0.70 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.267,
-    0.7
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage02",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "4-06.w003",
+    "word": "4-06.w004",
     "off": 0
    },
+   "means": "next part：淡虚线圈预告",
+   "tool": "remotion",
+   "lead": 20,
    "until": {
-    "dur": 81
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.70→2.12 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.7,
-    2.117
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "4-06.w008"
+   }
   },
   {
-   "id": "footage03",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "4-06.w006",
-    "off": 0
-   },
-   "until": {
-    "dur": 25
-   },
-   "ease": "linear",
-   "means": "旧动画源片 2.12→2.37 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    2.117,
-    2.367
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage04",
-   "obj": "footage",
-   "verb": "move",
+   "id": "mind",
+   "obj": "mind",
+   "verb": "appear",
    "at": {
     "word": "4-06.w008",
     "off": 0
    },
+   "means": "blew my mind：圈外闪线",
+   "tool": "remotion",
+   "lead": 6,
    "until": {
-    "dur": 75
-   },
-   "ease": "linear",
-   "means": "旧动画源片 2.37→4.30 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    2.367,
-    4.3
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage05",
-   "obj": "footage",
-   "verb": "move",
+   "id": "title",
+   "obj": "title",
+   "verb": "appear",
    "at": {
-    "word": "4-06.w010",
+    "word": "4-06.w009",
     "off": 0
    },
+   "means": "Think：标题写出",
+   "tool": "remotion",
+   "lead": 6,
    "until": {
-    "dur": 32
-   },
-   "ease": "linear",
-   "means": "旧动画源片 4.30→5.20 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    4.3,
-    5.2
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage06",
-   "obj": "footage",
-   "verb": "move",
+   "id": "chem",
+   "obj": "chem",
+   "verb": "grow",
    "at": {
     "word": "4-06.w012",
     "off": 0
    },
+   "means": "chemists：圈中心两个小人",
+   "tool": "remotion",
+   "lead": 8,
    "until": {
-    "dur": 36
-   },
-   "ease": "linear",
-   "means": "旧动画源片 5.20→6.08 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    5.2,
-    6.083
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "4-06.w014"
+   }
   },
   {
-   "id": "footage07",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "4-06.w013",
-    "off": 0
-   },
-   "until": {
-    "dur": 18
-   },
-   "ease": "linear",
-   "means": "旧动画源片 6.08→6.55 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    6.083,
-    6.55
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage08",
-   "obj": "footage",
-   "verb": "move",
+   "id": "always",
+   "obj": "always",
+   "verb": "grow",
    "at": {
     "word": "4-06.w014",
     "off": 0
    },
+   "means": "always：实线循环画出",
+   "tool": "remotion",
+   "lead": 10,
    "until": {
-    "dur": 25
-   },
-   "ease": "linear",
-   "means": "旧动画源片 6.55→6.98 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    6.55,
-    6.983
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "4-06.w017"
+   }
   },
   {
-   "id": "footage09",
-   "obj": "footage",
-   "verb": "move",
+   "id": "key",
+   "obj": "key",
+   "verb": "appear",
    "at": {
-    "word": "4-06.w015",
+    "word": "4-06.w017",
     "off": 0
    },
+   "means": "key：右上虚影钥匙 + a key",
+   "tool": "remotion",
+   "lead": 8,
    "until": {
-    "dur": 88
-   },
-   "ease": "linear",
-   "means": "旧动画源片 6.98→7.88 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    6.983,
-    7.883
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage10",
-   "obj": "footage",
-   "verb": "move",
+   "id": "imagine",
+   "obj": "imagine",
+   "verb": "appear",
    "at": {
     "word": "4-06.w018",
     "off": 0
    },
+   "means": "Imagine：顶站亮",
+   "tool": "remotion",
+   "lead": 6,
    "until": {
-    "dur": 34
-   },
-   "ease": "linear",
-   "means": "旧动画源片 7.88→8.35 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    7.883,
-    8.35
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "4-06.w020"
+   }
   },
   {
-   "id": "footage11",
-   "obj": "footage",
-   "verb": "move",
+   "id": "mol",
+   "obj": "mol",
+   "verb": "grow",
    "at": {
     "word": "4-06.w020",
     "off": 0
    },
+   "means": "molecule：顶站出现虚线小钥匙",
+   "tool": "remotion",
+   "lead": 8,
    "until": {
-    "dur": 63
-   },
-   "ease": "linear",
-   "means": "旧动画源片 8.35→9.20 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    8.35,
-    9.2
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage12",
-   "obj": "footage",
+   "id": "make",
+   "obj": "make",
    "verb": "move",
    "at": {
     "word": "4-06.w021",
     "off": 0
    },
+   "means": "Make：小钥匙走到右站、变实",
+   "tool": "remotion",
+   "lead": 18,
    "until": {
-    "dur": 51
-   },
-   "ease": "linear",
-   "means": "旧动画源片 9.20→9.52 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    9.2,
-    9.517
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage13",
-   "obj": "footage",
+   "id": "test",
+   "obj": "test",
    "verb": "move",
    "at": {
     "word": "4-06.w023",
     "off": 0
    },
+   "means": "Test：走到底站",
+   "tool": "remotion",
+   "lead": 18,
    "until": {
-    "dur": 72
-   },
-   "ease": "linear",
-   "means": "旧动画源片 9.52→11.50 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    9.517,
-    11.5
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage14",
-   "obj": "footage",
-   "verb": "move",
+   "id": "fails",
+   "obj": "fails",
+   "verb": "morph",
    "at": {
     "word": "4-06.w026",
     "off": 0
    },
+   "means": "fails：钥匙变灰、红叉",
+   "tool": "remotion",
+   "lead": 6,
    "until": {
-    "dur": 66
-   },
-   "ease": "linear",
-   "means": "旧动画源片 11.50→11.87 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    11.5,
-    11.867
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage15",
-   "obj": "footage",
+   "id": "tweak",
+   "obj": "tweak",
    "verb": "move",
    "at": {
     "word": "4-06.w027",
     "off": 0
    },
+   "means": "Tweak：走到左站、改形、恢复颜色",
+   "tool": "remotion",
+   "lead": 20,
    "until": {
-    "dur": 72
-   },
-   "ease": "linear",
-   "means": "旧动画源片 11.87→13.83 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    11.867,
-    13.833
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage16",
-   "obj": "footage",
+   "id": "try",
+   "obj": "try",
    "verb": "move",
+   "at": {
+    "word": "4-06.w029",
+    "off": 0
+   },
+   "means": "Try：往顶站走",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "4-06.w030"
+   }
+  },
+  {
+   "id": "again",
+   "obj": "again",
+   "verb": "morph",
    "at": {
     "word": "4-06.w030",
     "off": 0
    },
+   "means": "again：回到顶站，循环快转一圈",
+   "tool": "remotion",
+   "lead": 6,
    "until": {
-    "dur": 74
-   },
-   "ease": "linear",
-   "means": "旧动画源片 13.83→14.65 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    13.833,
-    14.65
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage17",
-   "obj": "footage",
-   "verb": "move",
+   "id": "every",
+   "obj": "every",
+   "verb": "appear",
    "at": {
     "word": "4-06.w032",
     "off": 0
    },
+   "means": "every single round：右边标签和圈数",
+   "tool": "remotion",
+   "lead": 8,
    "until": {
-    "dur": 17
-   },
-   "ease": "linear",
-   "means": "旧动画源片 14.65→14.93 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    14.65,
-    14.933
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "4-06.w034"
+   }
   },
   {
-   "id": "footage18",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "4-06.w033",
-    "off": 0
-   },
-   "until": {
-    "dur": 24
-   },
-   "ease": "linear",
-   "means": "旧动画源片 14.93→15.22 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    14.933,
-    15.217
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage19",
-   "obj": "footage",
-   "verb": "move",
+   "id": "round",
+   "obj": "round",
+   "verb": "morph",
    "at": {
     "word": "4-06.w034",
     "off": 0
    },
+   "means": "round：开始一圈圈转，计数跳",
+   "tool": "remotion",
+   "lead": 6,
    "until": {
-    "dur": 36
-   },
-   "ease": "linear",
-   "means": "旧动画源片 15.22→15.77 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    15.217,
-    15.767
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "4-06.w038"
+   }
   },
   {
-   "id": "footage20",
-   "obj": "footage",
-   "verb": "move",
+   "id": "lab",
+   "obj": "lab",
+   "verb": "grow",
    "at": {
-    "word": "4-06.w037",
+    "word": "4-06.w038",
     "off": 0
    },
+   "means": "real lab：烧瓶",
+   "tool": "remotion",
+   "lead": 8,
    "until": {
-    "dur": 33
-   },
-   "ease": "linear",
-   "means": "旧动画源片 15.77→16.78 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    15.767,
-    16.783
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "4-06.w039"
+   }
   },
   {
-   "id": "footage21",
-   "obj": "footage",
-   "verb": "move",
+   "id": "costs",
+   "obj": "costs",
+   "verb": "appear",
    "at": {
     "word": "4-06.w039",
     "off": 0
    },
+   "means": "costs：字牌",
+   "tool": "remotion",
+   "lead": 6,
    "until": {
-    "dur": 25
-   },
-   "ease": "linear",
-   "means": "旧动画源片 16.78→17.43 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    16.783,
-    17.433
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "4-06.w040"
+   }
   },
   {
-   "id": "footage22",
-   "obj": "footage",
-   "verb": "move",
+   "id": "time",
+   "obj": "time",
+   "verb": "morph",
    "at": {
     "word": "4-06.w040",
     "off": 0
    },
+   "means": "time：日历翻页、字下划线",
+   "tool": "remotion",
+   "lead": 6,
    "until": {
-    "dur": 48
-   },
-   "ease": "linear",
-   "means": "旧动画源片 17.43→17.98 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    17.433,
-    17.983
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "4-06.w042"
+   }
   },
   {
-   "id": "footage23",
-   "obj": "footage",
-   "verb": "move",
+   "id": "money",
+   "obj": "money",
+   "verb": "morph",
    "at": {
     "word": "4-06.w042",
     "off": 0
    },
+   "means": "money：钞票叠起、字下划线",
+   "tool": "remotion",
+   "lead": 6,
    "until": {
-    "dur": 17
-   },
-   "ease": "linear",
-   "means": "旧动画源片 17.98→18.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    17.983,
-    18.45
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   }
  ]
 }
