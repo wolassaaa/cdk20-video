@@ -221,6 +221,21 @@
    "until": {
     "sentence_end": true
    }
+  },
+  {
+   "id": "magdown",
+   "obj": "magnifier",
+   "verb": "move",
+   "at": {
+    "word": "2-07.w030",
+    "off": 0
+   },
+   "means": "One thing：放大镜滑到下半页利益声明",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "2-07.w033"
+   }
   }
  ]
 }

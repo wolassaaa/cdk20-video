@@ -270,6 +270,51 @@
    "until": {
     "sentence_end": true
    }
+  },
+  {
+   "id": "journal",
+   "obj": "cite_ul",
+   "verb": "grow",
+   "at": {
+    "word": "2-06.w034",
+    "off": 0
+   },
+   "means": "Chemical Science, 2023：引用下面画红线",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "2-06.w036"
+   }
+  },
+  {
+   "id": "persp",
+   "obj": "c6",
+   "verb": "appear",
+   "at": {
+    "word": "2-06.w062",
+    "off": 0
+   },
+   "means": "expert Perspective：c6 卡亮一下",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "2-06.w063"
+   }
+  },
+  {
+   "id": "half",
+   "obj": "c6_cover",
+   "verb": "grow",
+   "at": {
+    "word": "2-06.w070",
+    "off": 0
+   },
+   "means": "abstract：c6 下半盖灰，只读了摘要",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   }
   }
  ]
 }

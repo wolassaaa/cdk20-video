@@ -255,6 +255,36 @@
    "until": {
     "sentence_end": true
    }
+  },
+  {
+   "id": "alias",
+   "obj": "plate_b",
+   "verb": "move",
+   "at": {
+    "word": "2-01.w034",
+    "off": 0
+   },
+   "means": "also called：= CDK20 后半块滑入",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "2-01.w035"
+   }
+  },
+  {
+   "id": "pulse",
+   "obj": "cdk20",
+   "verb": "appear",
+   "at": {
+    "word": "2-01.w035",
+    "off": 0
+   },
+   "means": "CDK20：蛋白跳一下",
+   "tool": "remotion",
+   "lead": 2,
+   "until": {
+    "sentence_end": true
+   }
   }
  ]
 }

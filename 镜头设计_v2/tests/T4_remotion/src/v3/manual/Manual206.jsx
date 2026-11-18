@@ -24,12 +24,15 @@ const Card = ({id, pos, kind, name, f}) => {
   const p = span(f, ev.s, ev.l, Easing.out(Easing.back(1.4)));
   if (p <= 0) return null;
   const x = CEN[0] + (pos[0] - CEN[0]) * p, y = CEN[1] + (pos[1] - CEN[1]) * p;
-  const nameP = span(f, ev.l, ev.l + 20);
+  const nameP = span(f, ev.l, Math.max(ev.l + 20, ev.e));
+  const glow = id === "c6" ? span(f, E.persp.s, E.persp.s + 8) * (1 - span(f, E.persp.e + 20, E.persp.e + 50)) : 0;
+  const half = id === "c6" ? span(f, E.half.s, E.half.l + 10, out) : 0;
   return (
     <div style={{position: "absolute", left: x - 175, top: y - 55, width: 350, height: 110, background: "#F6F3EC", border: `2px solid ${INK}`, borderRadius: 8,
-                 boxSizing: "border-box", padding: "10px 14px", transform: `scale(${0.4 + 0.6 * Math.min(1, p)})`, boxShadow: "0 6px 14px rgba(31,30,28,0.12)"}}>
+                 boxSizing: "border-box", padding: "10px 14px", transform: `scale(${0.4 + 0.6 * Math.min(1, p)})`, boxShadow: `0 6px 14px rgba(31,30,28,0.12), 0 0 0 ${4 * glow}px rgba(200,16,46,0.45)`, overflow: "hidden"}}>
       <div style={{fontSize: 22, fontStyle: "italic", color: SOFT}}>{kind}</div>
       <div style={{fontSize: 22, marginTop: 6, whiteSpace: "nowrap"}}><Write p={nameP}>{name}</Write></div>
+      {half > 0 && <div style={{position: "absolute", left: 0, right: 0, bottom: 0, height: 36 * half, background: "repeating-linear-gradient(135deg, rgba(31,30,28,0.10) 0 6px, rgba(31,30,28,0.20) 6px 12px)", borderTop: `2px dashed ${SOFT}`}} />}
     </div>
   );
 };
@@ -39,7 +42,8 @@ const Scene = () => {
   const cross = span(f, E.cross.s, E.cross.s + 20, ease);
   const review = span(f, E.review.s, E.review.s + 14, out);
   const stamp = span(f, E.stamp.s, E.stamp.s + 8, out);
-  const ring = span(f, E.ring.s, E.ring.e, ease);
+  const ring = span(f, E.ring.s, E.ring.s + 60, ease);
+  const lift = span(f, E.centre.l, E.cite.e, Easing.inOut(Easing.sin));
   const absP = span(f, E.abs.s, E.abs.s + 30);
   const bead = [
     [0, 120, 80], [E.title.l, 420, 90], [E.books.l, 240, 300], [E.alot.l, 380, 250], [E.flask.l, 240, 560], [E.review.l, 330, 780],
@@ -59,18 +63,24 @@ const Scene = () => {
       <svg width={1920} height={1080} style={{position: "absolute", left: 0, top: 0}}>
         <path d="M150,480 L330,660" stroke={RED} strokeWidth={8} strokeLinecap="round" pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - span(cross, 0, 0.5)} />
         <path d="M330,480 L150,660" stroke={RED} strokeWidth={8} strokeLinecap="round" pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - span(cross, 0.5, 1)} />
-        <circle cx={CEN[0]} cy={CEN[1]} r={360} fill="none" stroke={INK} strokeWidth={2} strokeDasharray="10 10" opacity={0.35} pathLength={1000} style={{strokeDashoffset: 0, clipPath: `inset(0 0 ${100 - ring * 100}% 0)`}} />
+        <path d={`M${CEN[0] - 140},${CEN[1] + 222} C${CEN[0] - 50},${CEN[1] + 217} ${CEN[0] + 50},${CEN[1] + 227} ${CEN[0] + 140},${CEN[1] + 220}`} stroke={RED} strokeWidth={4} fill="none" strokeLinecap="round" pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - span(f, E.journal.s, E.journal.e, ease)} />
+        {[...Array(72)].map((_, i) => {
+          const a0 = -Math.PI / 2 + (i / 72) * Math.PI * 2, a1 = a0 + Math.PI / 72;
+          return i / 72 < ring ? <path key={i} d={`M${CEN[0] + 360 * Math.cos(a0)},${CEN[1] + 360 * Math.sin(a0)} A360,360 0 0 1 ${CEN[0] + 360 * Math.cos(a1)},${CEN[1] + 360 * Math.sin(a1)}`} stroke={INK} strokeWidth={2} fill="none" opacity={0.35} /> : null;
+        })}
       </svg>
       <Label x={360} y={668} w={300} size={24} italic color={SOFT} p={span(f, E.cross.s + 10, E.cross.e)} align="left">no lab work of our own</Label>
       <Plate x={96} y={740} w={520} p={review}><span style={{fontSize: 46, fontStyle: "italic"}}>a literature review</span></Plate>
 
       {/* 中间：主论文 */}
+      <div style={{position: "absolute", inset: 0, transform: `scale(${1 + 0.05 * Math.sin(Math.PI * lift)}) rotate(${-1.2 * Math.sin(Math.PI * lift)}deg)`, transformOrigin: `${CEN[0]}px ${CEN[1]}px`}}>
       <Part name="paper1" cx={CEN[0]} cy={CEN[1]} w={250} ar={AR.paper1} at={E.centre.s + 2} f={f} gate={[0.5, 1]} />
       {stamp > 0 && (
         <div style={{position: "absolute", left: CEN[0] - 150, top: CEN[1] + 10, padding: "6px 14px", border: `4px solid ${RED}`, color: RED, borderRadius: 6, fontSize: 30,
                      fontStyle: "italic", transform: `rotate(-8deg) scale(${1.4 - 0.4 * stamp})`, opacity: stamp, background: "rgba(246,243,236,0.85)"}}>original research</div>
       )}
-      <Label x={CEN[0]} y={CEN[1] + 186} w={420} size={24} p={span(f, E.cite.s, E.cite.e)}>Ren et al., Chemical Science, 2023</Label>
+      </div>
+      <Label x={CEN[0]} y={CEN[1] + 186} w={340} size={22} p={span(f, E.cite.s, E.cite.e)}>Ren et al., Chemical Science, 2023</Label>
       <Part name="disks" cx={CEN[0] + 200} cy={CEN[1] + 20} w={100} ar={AR.disks} at={E.si.s + 2} f={f} gate={[0, 0.5]} flood={16} />
       <Label x={CEN[0] + 200} y={CEN[1] + 66} w={220} size={20} color={SOFT} italic p={span(f, E.si.l, E.si.e)}>supplementary data</Label>
       <Tag n="17" x={CEN[0] - 105} y={CEN[1] - 190} at={E.centre.l + 16} f={f} />

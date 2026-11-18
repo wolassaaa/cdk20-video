@@ -16,7 +16,8 @@ const QX = 700, QY = 200;
 const Scene = () => {
   const f = useCurrentFrame();
   const mv = span(f, E.mag.s, E.mag.e, Easing.inOut(Easing.sin));
-  const mx = 150 + 400 * mv, my = 250 + Math.sin(mv * Math.PI * 2) * 120 + 120 * mv;
+  const md = span(f, E.magdown.s, E.magdown.e, Easing.inOut(Easing.cubic));
+  const mx = 150 + 400 * mv + (660 - 550) * md, my = 250 + Math.sin(mv * Math.PI * 2) * 120 + 120 * mv + (640 - 370) * md - Math.sin(Math.PI * md) * 40;
   const coi = span(f, E.coi.s, E.coi.e);
   const stamp = span(f, E.open.s, E.open.s + 8, out);
   const u1 = span(f, E.useful.s, E.useful.s + 14, out), u2 = span(f, E.notind.s, E.notind.s + 14, out);
@@ -40,7 +41,7 @@ const Scene = () => {
           </div>
         );
       })}
-      <div style={{position: "absolute", left: mx - 60, top: my - 60, transform: `rotate(${-20 + 30 * mv}deg)`, opacity: span(f, E.mag.s, E.mag.s + 10) * (1 - span(f, E.mag.e + 30, E.mag.e + 50))}}>
+      <div style={{position: "absolute", left: mx - 60, top: my - 60, transform: `rotate(${-20 + 30 * mv - 25 * md}deg)`, opacity: span(f, E.mag.s, E.mag.s + 10)}}>
         <Part name="magnifier1" cx={60} cy={90} w={120} ar={AR.magnifier1} at={E.mag.s} f={f} gate={[0.5, 1]} flood={14} />
       </div>
 

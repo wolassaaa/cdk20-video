@@ -18,6 +18,8 @@ const Scene = () => {
   const lift = Math.sin(Math.PI * mv) * -120;
   const cx = C1[0] + (C2[0] - C1[0]) * mv, cy = C1[1] + (C2[1] - C1[1]) * mv + lift, cw = 190 - 40 * mv;
   const fly = f >= E.same.s;
+  const alias = span(f, E.alias.s, E.alias.l + 8, out);
+  const pulse = f >= E.pulse.s ? Math.exp(-(f - E.pulse.s) / 7) * Math.sin(Math.min(Math.PI, (f - E.pulse.s) / 3)) : 0;
   const land = f > E.same.l ? Math.exp(-(f - E.same.l) / 5) * Math.cos((f - E.same.l) / 2.6) * 5 : 0;
   const bead = [
     [0, 120, 96], [E.hk.l, 250, 96], [E.step1.l, BX[0] + 46, BY + 46], [E.univ.l, BX[0] + 150, BY + 200], [E.tubes.l, BX[0] + 410, BY + 210],
@@ -49,7 +51,7 @@ const Scene = () => {
         </svg>
         <Tag n="15" x={530} y={196} at={E.tubes.l + 16} f={f} />
         <Tag n="19" x={180} y={430} at={E.cdk20.l + 16} f={f} />
-        <Plate x={450} y={490} w={360} p={plate}><span style={{fontSize: 52}}>CCRK</span><span style={{fontSize: 40, fontStyle: "italic"}}> = </span><span style={{fontSize: 52}}>CDK20</span></Plate>
+        <Plate x={450} y={490} w={360} p={plate}><span style={{fontSize: 52}}>CCRK</span><span style={{display: "inline-block", marginLeft: 14, opacity: alias, transform: `translateX(${50 * (1 - alias)}px)`}}><span style={{fontSize: 40, fontStyle: "italic"}}>=&nbsp;</span><span style={{fontSize: 52}}>CDK20</span></span></Plate>
         <Label x={630} y={562} w={360} size={22} color={SOFT} italic p={span(f, E.plate.l + 20, E.plate.e)}>raised in liver tumours</Label>
       </Step>
 
@@ -68,7 +70,9 @@ const Scene = () => {
       </Step>
 
       {/* CDK20：2011 框里长出并留在那里；说到 same protein 时飞出一个同样的件到 2023 框 */}
-      <Part name="cdk20" cx={C1[0]} cy={C1[1]} w={190} ar={1} at={E.cdk20.s + 2} f={f} gate={[0.5, 1]} />
+      <div style={{position: "absolute", inset: 0, transform: `scale(${1 + 0.1 * pulse})`, transformOrigin: `${C1[0]}px ${C1[1]}px`}}>
+        <Part name="cdk20" cx={C1[0]} cy={C1[1]} w={190} ar={1} at={E.cdk20.s + 2} f={f} gate={[0.5, 1]} />
+      </div>
       {fly && (
         <div style={{position: "absolute", left: cx - cw / 2, top: cy - cw / 2 + land, width: cw, height: cw, filter: `drop-shadow(0 ${18 * Math.sin(Math.PI * mv)}px 14px rgba(40,40,80,0.25))`}}>
           <Part name="cdk20" cx={cw / 2} cy={cw / 2} w={cw} ar={1} at={-100} f={f} gate={[0.5, 1]} />

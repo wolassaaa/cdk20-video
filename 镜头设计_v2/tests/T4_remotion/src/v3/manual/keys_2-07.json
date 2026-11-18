@@ -947,6 +947,26 @@
    "F_start": 15784,
    "F_land": 15784,
    "F_end": 15869
+  },
+  {
+   "id": "magdown",
+   "obj": "magnifier",
+   "verb": "move",
+   "ease": "inout",
+   "means": "One thing：放大镜滑到下半页利益声明",
+   "f_start": 825,
+   "f_land": 835,
+   "f_end": 907,
+   "until": "2-07.w033",
+   "word": "2-07.w030",
+   "w": "One",
+   "key": "one#1",
+   "sid": "2-07.s4",
+   "word_f0": 835,
+   "tool": "remotion",
+   "F_start": 14913,
+   "F_land": 14923,
+   "F_end": 14995
   }
  ],
  "problems": []
