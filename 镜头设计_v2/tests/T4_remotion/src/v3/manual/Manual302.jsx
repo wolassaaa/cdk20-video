@@ -71,7 +71,7 @@ const Scene = () => {
   const line = span(f, E.like.s, E.like.l + 6, ease);
   const ring = span(f, E.pocket.s, E.pocket.l, out);
   const cross = span(f, E.does.s, E.does.l + 6, out);
-  const bead = [[0, 130, 96], [E.title.l, 560, 96], [E.cell.l, 980, 230], [E.prot.l, 680, 872], [E.lot.l, 990, 400], [E.work.l, 990, 640],
+  const bead = [[0, 130, 96], [E.title.l, 560, 96], [E.cell.l, 980, 230], [E.prot.l, 1000, 860], [E.lot.l, 990, 400], [E.work.l, 990, 640],
                 [E.drug.l, 1300, 240], [E.grab.l, 820, 250], [E.tight.l, 1000, 420], [E.change.l, 820, 662], [E.does.l, 1000, 560],
                 [E.slot.l, 790, 300], [E.pocket.l, 1000, 330], [E.like.l, 1100, 380], [E.key.l, 1000, 640], [E.lock.l, 1680, 440], [K.len_f, 1681, 441]];
   return (
@@ -124,7 +124,11 @@ const Scene = () => {
       <Label x={kx0} y={ky0 + 34} w={160} size={28} italic color={SOFT} p={span(f, E.drug.s + 6, E.drug.s + 22) * (1 - span(f, E.grab.s, E.grab.s + 10))}>drugs</Label>
 
       {/* 字（全部取自旁白） */}
-      <Label x={525} y={846} w={300} size={30} p={span(f, E.prot.l, E.prot.l + 20)}>proteins</Label>
+      {/* 细胞下方两行，取自旁白：proteins 时写第一个词，work 时写完；tightly 时写第二行 */}
+      <div style={{position: "absolute", left: 140, top: 850, width: 770, textAlign: "center", fontSize: 34, whiteSpace: "nowrap"}}>
+        <Write p={span(f, E.prot.l, E.prot.l + 16)}>proteins</Write><Write p={span(f, E.work.s, E.work.l + 16)}> do a lot of the work</Write></div>
+      <div style={{position: "absolute", left: 140, top: 910, width: 770, textAlign: "center", fontSize: 34, whiteSpace: "nowrap", color: SOFT}}>
+        <Write p={span(f, E.grab.s, E.grab.l + 14)}>drugs grab one protein</Write><Write p={span(f, E.tight.s, E.tight.l + 10)} style={{color: RED}}> tightly</Write></div>
       <Label x={640} y={572} w={320} size={24} italic p={span(f, E.does.s, E.does.l + 14)}>change what it does</Label>
       <Label x={730} y={392} w={140} size={26} italic color={RED} align="left" p={span(f, E.pocket.l - 4, E.pocket.l + 12)}>pocket</Label>
       <Label x={RX - 60} y={690} w={360} size={44} p={span(f, E.key.s, E.key.l + 14)}>key = drug</Label>
