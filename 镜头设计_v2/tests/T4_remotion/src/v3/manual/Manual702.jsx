@@ -44,7 +44,7 @@ const Scene = () => {
         {ST.map((s, i) => {
           const p = span(road, (i + 0.4) / (ST.length + 0.6), (i + 1.2) / (ST.length + 0.6), out);
           const grey = i >= 4 && !(i === 4 && f >= E.walk.l);
-          return <circle key={s} cx={sx(i)} cy={RY} r={16 * p} fill={i < 3 ? RED : PAPER} stroke={grey ? "#9A968C" : INK} strokeWidth={4} />;
+          return <circle key={s} cx={sx(i)} cy={RY} r={16 * p} fill={i < 4 ? RED : PAPER} stroke={grey ? "#9A968C" : INK} strokeWidth={4} />;
         })}
         {/* 三张清单卡 */}
         {CARD.map((c, k) => {
@@ -80,7 +80,7 @@ const Scene = () => {
       {ST.map((s, i) => (
         <Label key={s} x={sx(i)} y={RY + 30} w={180} size={30} color={i >= 5 || (i === 4 && f < E.walk.l) ? GREY : INK} p={span(road, (i + 0.6) / (ST.length + 0.6), (i + 1.4) / (ST.length + 0.6))}>{s}</Label>
       ))}
-      <Label x={sx(4)} y={RY + 84} w={160} size={30} italic p={span(f, E.pub.s, E.pub.e)}>public</Label>
+      <Label x={sx(4) - 225} y={RY - 90} w={160} size={30} italic p={span(f, E.pub.s, E.pub.e)}>public</Label>
       {[0, 1, 2].map((i) => <Part key={i} name="person_w" cx={1330 + 46 * i} cy={RY - 80} w={42} at={E.any.s + 5 * i} f={f} gate={[0.5, 0.5]} />)}
       {/* 卡片上的字 */}
       {CARD.map((c, k) => {

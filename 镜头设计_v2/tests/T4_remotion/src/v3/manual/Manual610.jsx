@@ -41,7 +41,7 @@ const Scene = () => {
         <path d={`M${RX0 - 110},${RY} L${RX1 + 60},${RY}`} fill="none" stroke={INK} strokeWidth={7} strokeLinecap="round" {...draw(road)} />
         {ST.map((s, i) => {
           const p = span(road, (i + 0.4) / (ST.length + 0.6), (i + 1.2) / (ST.length + 0.6), out);
-          return <circle key={s} cx={sx(i)} cy={RY} r={16 * p} fill={i < 3 && f >= [E.tgt, E.hit, E.imp][i].l ? RED : PAPER} stroke={grey[i] ? "#9A968C" : INK} strokeWidth={4} />;
+          return <circle key={s} cx={sx(i)} cy={RY} r={16 * p} fill={i < 4 && f >= [E.tgt, E.hit, E.imp, E.done][i].l ? RED : PAPER} stroke={grey[i] ? "#9A968C" : INK} strokeWidth={4} />;
         })}
         <Tick x={sx(0)} y={RY + 148} p={tk.tgt} />
         <Tick x={sx(1)} y={RY + 148} p={tk.hit} />
