@@ -11,7 +11,7 @@ const E = evMap(K);
 const TX = (i) => 220 + 80 * i, TY = 380;                 // 七个小瓶
 const AX = 860, AY0 = 220, AY1 = 640, Y92 = 600, Y30 = 440;  // Kd 刻度：越往上越弱
 const SIX = [[920, 330], [975, 372], [1030, 306], [1085, 352], [1140, 318], [1195, 384]];
-const CK = [1520, 380], CR = 110;                          // 钟
+const CK = [1520, 470], CR = 110;                          // 钟
 const ST = ["Target", "Hit", "Improve", "Cells", "Animals", "Trials", "Approval"];
 const RX0 = 230, RX1 = 1690, RY = 820;
 const sx = (i) => RX0 + ((RX1 - RX0) * i) / (ST.length - 1);
@@ -35,7 +35,7 @@ const Scene = () => {
   const lab = [TX(0) + (sx(1) - TX(0)) * fly, 446 + (662 - 446) * fly - Math.sin(Math.PI * fly) * 120];
   const vp = [TX(0) + (AX + 25 - TX(0)) * val, 324 + (Y92 - 324) * val - Math.sin(Math.PI * val) * 90];
   const bead = [[0, 700, 200], [E.t001.l, 140, 300], [E.kd.l, 780, 200], [E.val.l, 1190, 650], [E.six.l, 770, 470], [E.line.l, 1290, 440],
-                [E.up.l, 1260, 330], [E.weak.l, 1250, 235], [E.wild.l, 1720, 230], [E.clock.l, 1700, 500], [E.d30.l, 1690, 640],
+                [E.up.l, 1260, 330], [E.weak.l, 1250, 235], [E.wild.l, 1720, 320], [E.clock.l, 1720, 560], [E.d30.l, 1760, 700],
                 [E.road.l, 1790, 760], [E.tgt.l, 160, 760], [E.fly.l, 360, 700], [E.hit.l, 660, 960], [K.len_f, 661, 961]];
   return (
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
@@ -52,7 +52,7 @@ const Scene = () => {
         {/* 六个灰点：从各自的瓶飞到虚线上面 */}
         {f >= E.up.s && SIX.map(([x, y], k) => {
           const p = span(f, E.up.s + 3 * k, E.up.l + 18 + 3 * k, io);
-          const x0 = TX(k + 1), y0 = 324 + 22 * weak;
+          const x0 = TX(k + 1) - 80 * fly, y0 = 324 + 22 * weak;
           return <circle key={k} cx={x0 + (x - x0) * p} cy={y0 + (y - y0) * p - Math.sin(Math.PI * p) * 70} r={11} fill={SOFT} stroke={INK} strokeWidth={2} />;
         })}
         {/* 001 的红点 */}
@@ -87,7 +87,7 @@ const Scene = () => {
       {/* 六个瓶：变灰下沉 */}
       {[1, 2, 3, 4, 5, 6].map((i) => (
         <div key={i} style={{position: "absolute", left: 0, top: 22 * weak, width: 1920, height: 1080, opacity: 1 - 0.55 * weak, filter: `grayscale(${weak})`}}>
-          <Part name="tube" cx={TX(i)} cy={TY} w={40} at={E.six.s + 3 * i} f={f} gate={[0.5, 1]} flood={14} />
+          <Part name="tube" cx={TX(i) - 80 * fly} cy={TY} w={40} at={E.six.s + 3 * i} f={f} gate={[0.5, 1]} flood={14} />
         </div>
       ))}
       {/* 001 小瓶 */}
@@ -97,8 +97,8 @@ const Scene = () => {
       </div>
       <Label x={lab[0]} y={lab[1]} w={100} size={32} color={RED} p={span(f, E.t001.s + 4, E.t001.l + 20)}>001</Label>
 
-      <Pen x={1420} y={196} size={44} p={span(f, E.wild.s, E.wild.e)}>the wild part</Pen>
-      <div style={{position: "absolute", left: CK[0] - 160, top: 512, width: 320, textAlign: "center", fontSize: 64, color: RED, opacity: span(f, E.clock.s, E.clock.s + 10),
+      <Pen x={1420} y={290} size={44} p={span(f, E.wild.s, E.wild.e)}>the wild part</Pen>
+      <div style={{position: "absolute", left: CK[0] - 160, top: 600, width: 320, textAlign: "center", fontSize: 64, color: RED, opacity: span(f, E.clock.s, E.clock.s + 10),
                    transform: `scale(${1 + 0.18 * (f > E.d30.l ? Math.exp(-(f - E.d30.l) / 7) : 0)})`}}>{cnt} days</div>
 
       {ST.map((s, i) => <Label key={s} x={sx(i)} y={RY + 30} w={180} size={30} color={i < 2 ? INK : "#8A867C"} p={span(road, (i + 0.5) / 7.6, (i + 1.3) / 7.6)}>{s}</Label>)}
