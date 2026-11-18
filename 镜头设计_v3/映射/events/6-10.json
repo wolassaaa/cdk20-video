@@ -1,68 +1,234 @@
 {
  "schema": "cdk20.events/1",
  "group": "6-10",
- "tool": "warp_source",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/6-10.json",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 6 章七站路线页 6-10（画外音）：where's 048 on the road；七站路，048 小牌子逐站走到 Cells，前几站打勾，Improve 写 started，Cells 写 first tests，Animals 和 Trials 变灰写 not yet。页面 Manual610.jsx。",
  "holds": [],
  "events": [
   {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
+   "id": "title",
+   "obj": "title",
+   "verb": "appear",
    "at": {
-    "word": "6-10.w001",
-    "off": -9
-   },
-   "until": {
-    "dur": 258
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.00→1.47 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.0,
-    1.467
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage01",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "6-10.w008",
-    "off": 1
-   },
-   "until": {
-    "dur": 374
-   },
-   "ease": "linear",
-   "means": "旧动画源片 1.47→3.75 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    1.467,
-    3.75
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage02",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "6-10.w015",
+    "word": "6-10.w002",
     "off": 0
    },
+   "means": "where's 048 on the road：标题",
+   "tool": "remotion",
+   "lead": 12,
    "until": {
-    "dur": 267
+    "word": "6-10.w006"
+   }
+  },
+  {
+   "id": "tag",
+   "obj": "tag",
+   "verb": "grow",
+   "at": {
+    "word": "6-10.w003",
+    "off": 0
    },
-   "ease": "linear",
-   "means": "旧动画源片 3.75→5.42 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    3.75,
-    5.417
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "means": "048：小牌子落在起点",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "6-10.w003"
+   }
+  },
+  {
+   "id": "road",
+   "obj": "road",
+   "verb": "grow",
+   "at": {
+    "word": "6-10.w006",
+    "off": 0
+   },
+   "means": "road：七站路画出",
+   "tool": "remotion",
+   "lead": 60,
+   "until": {
+    "word": "6-10.w006"
+   }
+  },
+  {
+   "id": "tgt",
+   "obj": "tgt",
+   "verb": "move",
+   "at": {
+    "word": "6-10.w007",
+    "off": 0
+   },
+   "means": "Target：牌子走到 Target",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "word": "6-10.w007"
+   }
+  },
+  {
+   "id": "tgtk",
+   "obj": "tgtk",
+   "verb": "appear",
+   "at": {
+    "word": "6-10.w008",
+    "off": 0
+   },
+   "means": "found：Target 打勾",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-10.w008"
+   }
+  },
+  {
+   "id": "hit",
+   "obj": "hit",
+   "verb": "move",
+   "at": {
+    "word": "6-10.w009",
+    "off": 0
+   },
+   "means": "Hit：牌子走到 Hit",
+   "tool": "remotion",
+   "lead": 24,
+   "until": {
+    "word": "6-10.w009"
+   }
+  },
+  {
+   "id": "hitk",
+   "obj": "hitk",
+   "verb": "appear",
+   "at": {
+    "word": "6-10.w010",
+    "off": 0
+   },
+   "means": "found：Hit 打勾",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-10.w010"
+   }
+  },
+  {
+   "id": "imp",
+   "obj": "imp",
+   "verb": "move",
+   "at": {
+    "word": "6-10.w011",
+    "off": 0
+   },
+   "means": "Improving：牌子走到 Improve",
+   "tool": "remotion",
+   "lead": 24,
+   "until": {
+    "word": "6-10.w011"
+   }
+  },
+  {
+   "id": "st",
+   "obj": "st",
+   "verb": "appear",
+   "at": {
+    "word": "6-10.w013",
+    "off": 0
+   },
+   "means": "started：Improve 写 started",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "6-10.w013"
+   }
+  },
+  {
+   "id": "cells",
+   "obj": "cells",
+   "verb": "move",
+   "at": {
+    "word": "6-10.w014",
+    "off": 0
+   },
+   "means": "Cells：牌子走到 Cells",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "word": "6-10.w014"
+   }
+  },
+  {
+   "id": "ft",
+   "obj": "ft",
+   "verb": "appear",
+   "at": {
+    "word": "6-10.w016",
+    "off": 0
+   },
+   "means": "tests：写 first tests",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "6-10.w016"
+   }
+  },
+  {
+   "id": "done",
+   "obj": "done",
+   "verb": "appear",
+   "at": {
+    "word": "6-10.w017",
+    "off": 0
+   },
+   "means": "done：Cells 打勾",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-10.w017"
+   }
+  },
+  {
+   "id": "g1",
+   "obj": "g1",
+   "verb": "morph",
+   "at": {
+    "word": "6-10.w018",
+    "off": 0
+   },
+   "means": "Animals：Animals 变灰",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "6-10.w018"
+   }
+  },
+  {
+   "id": "g2",
+   "obj": "g2",
+   "verb": "morph",
+   "at": {
+    "word": "6-10.w021",
+    "off": 0
+   },
+   "means": "trials：Trials 变灰",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "6-10.w021"
+   }
+  },
+  {
+   "id": "ny",
+   "obj": "ny",
+   "verb": "appear",
+   "at": {
+    "word": "6-10.w022",
+    "off": 0
+   },
+   "means": "not yet：写 not yet",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   }
   }
  ]
 }
