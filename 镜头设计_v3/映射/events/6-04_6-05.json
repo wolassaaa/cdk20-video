@@ -1,0 +1,174 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "6-04+6-05",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜 6-04+6-05（D）讲解卡：满卡小点；screened 红线扫过变灰；Here? 红问号；Thirteen 点收缩成 13 个；made 13 个点变红；写出 13，That's honestly wild 数字 13 和点一起跳；页面 OnCam604.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "frame",
+   "obj": "frame",
+   "verb": "grow",
+   "at": {
+    "word": "6-04.w001",
+    "off": 0
+   },
+   "means": "Millions：讲解卡外框画出",
+   "tool": "remotion",
+   "lead": 22,
+   "until": {
+    "word": "6-04.w001"
+   }
+  },
+  {
+   "id": "dots",
+   "obj": "dots",
+   "verb": "grow",
+   "at": {
+    "word": "6-04.w003",
+    "off": 0
+   },
+   "means": "compounds：满卡小点从左上漫开",
+   "tool": "remotion",
+   "lead": 44,
+   "until": {
+    "word": "6-04.w004"
+   }
+  },
+  {
+   "id": "scan",
+   "obj": "scan",
+   "verb": "move",
+   "at": {
+    "word": "6-04.w004",
+    "off": 0
+   },
+   "means": "screened：红线扫过，点变灰",
+   "tool": "remotion",
+   "lead": 36,
+   "until": {
+    "word": "6-04.w004"
+   }
+  },
+  {
+   "id": "before",
+   "obj": "before",
+   "verb": "morph",
+   "at": {
+    "word": "6-04.w005",
+    "off": 0
+   },
+   "means": "before：全部点变浅灰",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "6-04.w005"
+   }
+  },
+  {
+   "id": "here",
+   "obj": "here",
+   "verb": "appear",
+   "at": {
+    "word": "6-04.w006",
+    "off": 0
+   },
+   "means": "Here：红问号",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-04.w006"
+   }
+  },
+  {
+   "id": "thirteen",
+   "obj": "thirteen",
+   "verb": "morph",
+   "at": {
+    "word": "6-04.w007",
+    "off": 0
+   },
+   "means": "Thirteen：点收缩，只剩 13 个聚成一团",
+   "tool": "remotion",
+   "lead": 40,
+   "until": {
+    "word": "6-04.w007"
+   }
+  },
+  {
+   "id": "made",
+   "obj": "made",
+   "verb": "morph",
+   "at": {
+    "word": "6-04.w008",
+    "off": 0
+   },
+   "means": "made：13 个点变红轻跳",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "6-04.w008"
+   }
+  },
+  {
+   "id": "num",
+   "obj": "num",
+   "verb": "appear",
+   "at": {
+    "word": "6-05.w001",
+    "off": 0
+   },
+   "means": "Thirteen：写出数字 13",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "6-05.w001"
+   }
+  },
+  {
+   "id": "wave",
+   "obj": "wave",
+   "verb": "morph",
+   "at": {
+    "word": "6-05.w002",
+    "off": 0
+   },
+   "means": "That's：13 个点起一阵波",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-05.w002"
+   }
+  },
+  {
+   "id": "under",
+   "obj": "under",
+   "verb": "grow",
+   "at": {
+    "word": "6-05.w003",
+    "off": 0
+   },
+   "means": "honestly：13 下面画红线",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-05.w003"
+   }
+  },
+  {
+   "id": "wild",
+   "obj": "wild",
+   "verb": "morph",
+   "at": {
+    "word": "6-05.w004",
+    "off": 0
+   },
+   "means": "wild：13 和点一起跳一下",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "6-05.w004"
+   }
+  }
+ ]
+}
