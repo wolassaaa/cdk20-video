@@ -1,144 +1,369 @@
 {
  "schema": "cdk20.events/1",
  "group": "8-02",
- "tool": "warp_source",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/8-02.json",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 8-02（VO）：总结目标 1。七站路线（照 2-08）回来，find / assess 两段标出；路起点上方四个格子依次填进四个工具的小动图（从数据挑靶点、预测锁的形状、设计新钥匙、排出该做哪些）；最后 Our objectives 便签落下，1 打勾，写 for this case。页面 Manual802.jsx。",
  "holds": [],
  "events": [
   {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
+   "id": "q",
+   "obj": "q",
+   "verb": "appear",
    "at": {
-    "word": "8-02.w001",
-    "off": -9
+    "word": "8-02.w003",
+    "off": 0
    },
+   "means": "computer-aided：问题第一行",
+   "tool": "remotion",
+   "lead": 8,
    "until": {
-    "dur": 6
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.00→7.98 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.0,
-    7.983
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "8-02.w004"
+   }
   },
   {
-   "id": "footage01",
-   "obj": "footage",
-   "verb": "move",
+   "id": "q2",
+   "obj": "q2",
+   "verb": "appear",
    "at": {
-    "word": "8-02.w001",
-    "off": -3
+    "word": "8-02.w004",
+    "off": 0
    },
+   "means": "methods：问题第二行",
+   "tool": "remotion",
+   "lead": 6,
    "until": {
-    "dur": 203
-   },
-   "ease": "linear",
-   "means": "旧动画源片 7.98→10.18 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    7.983,
-    10.183
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "8-02.w005"
+   }
   },
   {
-   "id": "footage02",
-   "obj": "footage",
-   "verb": "move",
+   "id": "help",
+   "obj": "help",
+   "verb": "appear",
+   "at": {
+    "word": "8-02.w005",
+    "off": 0
+   },
+   "means": "help：help 下划线",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "8-02.w006"
+   }
+  },
+  {
+   "id": "road",
+   "obj": "road",
+   "verb": "grow",
+   "at": {
+    "word": "8-02.w006",
+    "off": 0
+   },
+   "means": "scientists：七站路画出",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "word": "8-02.w007"
+   }
+  },
+  {
+   "id": "find",
+   "obj": "find",
+   "verb": "appear",
    "at": {
     "word": "8-02.w007",
     "off": 0
    },
+   "means": "find：前两站括号",
+   "tool": "remotion",
+   "lead": 6,
    "until": {
-    "dur": 44
-   },
-   "ease": "linear",
-   "means": "旧动画源片 10.18→10.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    10.183,
-    10.45
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "8-02.w009"
+   }
   },
   {
-   "id": "footage03",
-   "obj": "footage",
-   "verb": "move",
+   "id": "assess",
+   "obj": "assess",
+   "verb": "appear",
    "at": {
     "word": "8-02.w009",
-    "off": 1
-   },
-   "until": {
-    "dur": 169
-   },
-   "ease": "linear",
-   "means": "旧动画源片 10.45→12.18 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    10.45,
-    12.183
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage04",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "8-02.w014",
     "off": 0
    },
+   "means": "assess：中间两站括号",
+   "tool": "remotion",
+   "lead": 6,
    "until": {
-    "dur": 193
-   },
-   "ease": "linear",
-   "means": "旧动画源片 12.18→14.02 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    12.183,
-    14.017
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "8-02.w012"
+   }
   },
   {
-   "id": "footage05",
-   "obj": "footage",
-   "verb": "move",
+   "id": "cand",
+   "obj": "cand",
+   "verb": "grow",
    "at": {
-    "word": "8-02.w022",
+    "word": "8-02.w012",
     "off": 0
    },
+   "means": "candidates：起点三把小钥匙",
+   "tool": "remotion",
+   "lead": 8,
    "until": {
-    "dur": 705
-   },
-   "ease": "linear",
-   "means": "旧动画源片 14.02→20.67 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    14.017,
-    20.667
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage06",
-   "obj": "footage",
-   "verb": "move",
+   "id": "case",
+   "obj": "case",
+   "verb": "appear",
    "at": {
-    "word": "8-02.w043",
+    "word": "8-02.w015",
     "off": 0
    },
+   "means": "this case：标签",
+   "tool": "remotion",
+   "lead": 8,
    "until": {
-    "dur": 41
+    "word": "8-02.w017"
+   }
+  },
+  {
+   "id": "four",
+   "obj": "four",
+   "verb": "grow",
+   "at": {
+    "word": "8-02.w017",
+    "off": 0
    },
-   "ease": "linear",
-   "means": "旧动画源片 20.67→21.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    20.667,
-    21.45
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "means": "four：四个空格子",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "8-02.w018"
+   }
+  },
+  {
+   "id": "points",
+   "obj": "points",
+   "verb": "appear",
+   "at": {
+    "word": "8-02.w018",
+    "off": 0
+   },
+   "means": "points：格子编号",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "pick",
+   "obj": "pick",
+   "verb": "grow",
+   "at": {
+    "word": "8-02.w019",
+    "off": 0
+   },
+   "means": "Picking：格 1 漏斗",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "8-02.w021"
+   }
+  },
+  {
+   "id": "target",
+   "obj": "target",
+   "verb": "morph",
+   "at": {
+    "word": "8-02.w021",
+    "off": 0
+   },
+   "means": "target：漏斗下落出 CDK20",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "8-02.w023"
+   }
+  },
+  {
+   "id": "data",
+   "obj": "data",
+   "verb": "move",
+   "at": {
+    "word": "8-02.w023",
+    "off": 0
+   },
+   "means": "data：数据卡片落进漏斗",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "pred",
+   "obj": "pred",
+   "verb": "grow",
+   "at": {
+    "word": "8-02.w024",
+    "off": 0
+   },
+   "means": "Predicting：格 2 珠子串",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "8-02.w026"
+   }
+  },
+  {
+   "id": "shape",
+   "obj": "shape",
+   "verb": "morph",
+   "at": {
+    "word": "8-02.w027",
+    "off": 0
+   },
+   "means": "shape：珠子折起来",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "design",
+   "obj": "design",
+   "verb": "grow",
+   "at": {
+    "word": "8-02.w028",
+    "off": 0
+   },
+   "means": "Designing：格 3 循环",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "8-02.w029"
+   }
+  },
+  {
+   "id": "keys",
+   "obj": "keys",
+   "verb": "appear",
+   "at": {
+    "word": "8-02.w030",
+    "off": 0
+   },
+   "means": "keys：小钥匙冒出",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "rank",
+   "obj": "rank",
+   "verb": "grow",
+   "at": {
+    "word": "8-02.w032",
+    "off": 0
+   },
+   "means": "ranking：格 4 长条",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "8-02.w034"
+   }
+  },
+  {
+   "id": "make",
+   "obj": "make",
+   "verb": "morph",
+   "at": {
+    "word": "8-02.w036",
+    "off": 0
+   },
+   "means": "make：长条排序，前两条打勾",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "obj",
+   "obj": "obj",
+   "verb": "grow",
+   "at": {
+    "word": "8-02.w038",
+    "off": 0
+   },
+   "means": "our：便签落下",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "8-02.w039"
+   }
+  },
+  {
+   "id": "first",
+   "obj": "first",
+   "verb": "appear",
+   "at": {
+    "word": "8-02.w039",
+    "off": 0
+   },
+   "means": "first：圈号 1",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "8-02.w040"
+   }
+  },
+  {
+   "id": "objtxt",
+   "obj": "objtxt",
+   "verb": "appear",
+   "at": {
+    "word": "8-02.w040",
+    "off": 0
+   },
+   "means": "objective：第 1 条文字",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "8-02.w041"
+   }
+  },
+  {
+   "id": "met",
+   "obj": "met",
+   "verb": "snap",
+   "at": {
+    "word": "8-02.w041",
+    "off": 0
+   },
+   "means": "met：红勾",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "8-02.w042"
+   }
+  },
+  {
+   "id": "thiscase",
+   "obj": "thiscase",
+   "verb": "appear",
+   "at": {
+    "word": "8-02.w044",
+    "off": 0
+   },
+   "means": "this case：红批注 for this case",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   }
   }
  ]
 }
