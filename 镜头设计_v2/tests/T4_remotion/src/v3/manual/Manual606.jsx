@@ -73,7 +73,7 @@ const Row1 = ({f, E}) => {
         {fp > 0 && <g transform={`translate(1050 ${t + 78 - 150 * (1 - fp)})`} opacity={Math.min(1, fp * 2)} strokeLinejoin="round">
           <path d="M-26,-34 L10,-34 L26,-18 L26,34 L-26,34 Z" fill={PAPER2} stroke={INK} strokeWidth={3} />
           <path d="M10,-34 L10,-18 L26,-18 M-14,-4 H14 M-14,8 H14 M-14,20 H6" fill="none" stroke={INK} strokeWidth={2.5} /></g>}
-        <Arrow d={`M1400,${c} L1560,${c}`} tip={[1560, c]} ang={0} a={E.dl.s} b={E.dl.l} f={f} sw={3.5} />
+        <Arrow d={`M1560,${c} L1400,${c}`} tip={[1400, c]} ang={180} a={E.dl.s} b={E.dl.l} f={f} sw={3.5} />
         {pub > 0 && <g transform={`translate(1655 ${c - 6}) scale(${pub})`} stroke={INK} strokeWidth={3} fill={PAPER2}>
           <path d="M-42,-30 V30 A42,14 0 0 0 42,30 V-30" /><ellipse cy={-30} rx={42} ry={14} /><path d="M-42,0 A42,14 0 0 0 42,0" fill="none" /></g>}
       </Svg>
@@ -99,8 +99,8 @@ const Row2 = ({f, E}) => {
       <Tint x={372} y={t + 3} w={576} h={RH - 6} p={span(f, E.lbl.s, E.lbl.l)} />
       <Tint x={972} y={t + 3} w={836} h={RH - 6} p={span(f, E.now.s, E.now.l + 10)} />
       <Label x={110} y={t + 12} w={250} align="left" size={32} p={span(f, E.lbl.s, E.lbl.l)}>Finding a hit</Label>
-      <Label x={378} y={t + 10} w={230} align="left" size={22} italic color={SOFT} p={span(f, E.scr.s, E.scr.e)}>screening real compounds</Label>
-      <Label x={612} y={t + 10} w={110} align="left" size={22} italic color={SOFT} p={span(f, E.rev.s, E.rev.l + 12)}>2023 review</Label>
+      <Label x={378} y={t + 10} w={210} align="left" size={20} italic color={SOFT} p={span(f, E.scr.s, E.scr.e)}>screening real compounds</Label>
+      <Label x={596} y={t + 10} w={130} align="left" size={20} italic color={SOFT} p={span(f, E.rev.s, E.rev.l + 12)}>(2023 review)</Label>
       <Pen x={745} y={t + 4} size={28} rot={-2} p={span(f, E.cost.s, E.cost.e)}>costly bottleneck&nbsp;</Pen>
       <Svg>
         {fun > 0 && <path d={`M${FUN.mx},${cy - FUN.hm} L${FUN.nx},${cy - FUN.hn} L${FUN.ex},${cy - FUN.hn} M${FUN.mx},${cy + FUN.hm} L${FUN.nx},${cy + FUN.hn} L${FUN.ex},${cy + FUN.hn}`}
@@ -129,6 +129,7 @@ const Row2 = ({f, E}) => {
                    transform: `scale(${thrJ})`, transformOrigin: "0 50%", whiteSpace: "nowrap"}}>{num}</div>
       <div style={{opacity: 1 - span(f, E.mol.s, E.mol.s + 8)}}><Label x={1400} y={t + 96} w={160} align="left" size={28} p={span(f, E.des.s, E.des.e)}>designs</Label></div>
       <Label x={1400} y={t + 96} w={200} align="left" size={28} p={span(f, E.mol.s, E.mol.e)}>molecules</Label>
+      <Label x={1580} y={t + 40} w={220} align="left" size={26} italic color={SOFT} p={span(f, E.thr.l + 4, E.thr.l + 24)}>8,918 designs</Label>
       <Label x={1400} y={t + 126} w={200} align="left" size={24} italic color={SOFT} p={span(f, E.made.s, E.made.e)}>actually made</Label>
     </>
   );

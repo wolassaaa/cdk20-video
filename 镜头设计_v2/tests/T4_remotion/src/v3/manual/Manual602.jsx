@@ -73,7 +73,7 @@ const Row1 = ({f, E}) => {
         {fp > 0 && <g transform={`translate(1050 ${t + 78 - 150 * (1 - fp)})`} opacity={Math.min(1, fp * 2)} strokeLinejoin="round">
           <path d="M-26,-34 L10,-34 L26,-18 L26,34 L-26,34 Z" fill={PAPER2} stroke={INK} strokeWidth={3} />
           <path d="M10,-34 L10,-18 L26,-18 M-14,-4 H14 M-14,8 H14 M-14,20 H6" fill="none" stroke={INK} strokeWidth={2.5} /></g>}
-        <Arrow d={`M1400,${c} L1560,${c}`} tip={[1560, c]} ang={0} a={E.dl.s} b={E.dl.l} f={f} sw={3.5} />
+        <Arrow d={`M1560,${c} L1400,${c}`} tip={[1400, c]} ang={180} a={E.dl.s} b={E.dl.l} f={f} sw={3.5} />
         {pub > 0 && <g transform={`translate(1655 ${c - 6}) scale(${pub})`} stroke={INK} strokeWidth={3} fill={PAPER2}>
           <path d="M-42,-30 V30 A42,14 0 0 0 42,30 V-30" /><ellipse cy={-30} rx={42} ry={14} /><path d="M-42,0 A42,14 0 0 0 42,0" fill="none" /></g>}
       </Svg>

@@ -99,8 +99,8 @@ const Row2 = ({f, E}) => {
       <Tint x={372} y={t + 3} w={576} h={RH - 6} p={span(f, E.lbl.s, E.lbl.l)} />
       <Tint x={972} y={t + 3} w={836} h={RH - 6} p={span(f, E.now.s, E.now.l + 10)} />
       <Label x={110} y={t + 12} w={250} align="left" size={32} p={span(f, E.lbl.s, E.lbl.l)}>Finding a hit</Label>
-      <Label x={378} y={t + 10} w={230} align="left" size={22} italic color={SOFT} p={span(f, E.scr.s, E.scr.e)}>screening real compounds</Label>
-      <Label x={612} y={t + 10} w={110} align="left" size={22} italic color={SOFT} p={span(f, E.rev.s, E.rev.l + 12)}>2023 review</Label>
+      <Label x={378} y={t + 10} w={210} align="left" size={20} italic color={SOFT} p={span(f, E.scr.s, E.scr.e)}>screening real compounds</Label>
+      <Label x={596} y={t + 10} w={130} align="left" size={20} italic color={SOFT} p={span(f, E.rev.s, E.rev.l + 12)}>(2023 review)</Label>
       <Pen x={745} y={t + 4} size={28} rot={-2} p={span(f, E.cost.s, E.cost.e)}>costly bottleneck&nbsp;</Pen>
       <Svg>
         {fun > 0 && <path d={`M${FUN.mx},${cy - FUN.hm} L${FUN.nx},${cy - FUN.hn} L${FUN.ex},${cy - FUN.hn} M${FUN.mx},${cy + FUN.hm} L${FUN.nx},${cy + FUN.hn} L${FUN.ex},${cy + FUN.hn}`}
@@ -129,6 +129,7 @@ const Row2 = ({f, E}) => {
                    transform: `scale(${thrJ})`, transformOrigin: "0 50%", whiteSpace: "nowrap"}}>{num}</div>
       <div style={{opacity: 1 - span(f, E.mol.s, E.mol.s + 8)}}><Label x={1400} y={t + 96} w={160} align="left" size={28} p={span(f, E.des.s, E.des.e)}>designs</Label></div>
       <Label x={1400} y={t + 96} w={200} align="left" size={28} p={span(f, E.mol.s, E.mol.e)}>molecules</Label>
+      <Label x={1580} y={t + 40} w={220} align="left" size={26} italic color={SOFT} p={span(f, E.thr.l + 4, E.thr.l + 24)}>8,918 designs</Label>
       <Label x={1400} y={t + 126} w={200} align="left" size={24} italic color={SOFT} p={span(f, E.made.s, E.made.e)}>actually made</Label>
     </>
   );
