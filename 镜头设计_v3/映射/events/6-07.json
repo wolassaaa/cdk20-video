@@ -1,163 +1,219 @@
 {
  "schema": "cdk20.events/1",
  "group": "6-07",
- "tool": "warp_source",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/6-07.json",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 6 章记分板第四行 6-07（画外音）：Improving the key；左格钞票掉进循环箭头（costly lab round），右格钥匙在锁里的小图，散出 16 张小卡，刻度条跳到 15×。页面 Manual607.jsx。",
  "holds": [],
  "events": [
   {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
+   "id": "lbl",
+   "obj": "lbl",
+   "verb": "appear",
    "at": {
-    "word": "6-07.w001",
-    "off": -9
-   },
-   "until": {
-    "dur": 80
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.00→1.33 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.0,
-    1.333
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage01",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "6-07.w004",
+    "word": "6-07.w003",
     "off": 0
    },
+   "means": "Improving the key：行标题",
+   "tool": "remotion",
+   "lead": 26,
    "until": {
-    "dur": 48
-   },
-   "ease": "linear",
-   "means": "旧动画源片 1.33→2.57 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    1.333,
-    2.567
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "6-07.w003"
+   }
   },
   {
-   "id": "footage02",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "6-07.w005",
-    "off": 0
-   },
-   "until": {
-    "dur": 20
-   },
-   "ease": "linear",
-   "means": "旧动画源片 2.57→2.88 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    2.567,
-    2.883
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage03",
-   "obj": "footage",
-   "verb": "move",
+   "id": "loop",
+   "obj": "loop",
+   "verb": "grow",
    "at": {
     "word": "6-07.w006",
     "off": 0
    },
+   "means": "change：循环箭头画出",
+   "tool": "remotion",
+   "lead": 20,
    "until": {
-    "dur": 39
-   },
-   "ease": "linear",
-   "means": "旧动画源片 2.88→3.67 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    2.883,
-    3.667
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "6-07.w006"
+   }
   },
   {
-   "id": "footage04",
-   "obj": "footage",
-   "verb": "move",
+   "id": "spin",
+   "obj": "spin",
+   "verb": "morph",
    "at": {
     "word": "6-07.w008",
     "off": 0
    },
+   "means": "another：循环转一圈",
+   "tool": "remotion",
+   "lead": 10,
    "until": {
-    "dur": 29
-   },
-   "ease": "linear",
-   "means": "旧动画源片 3.67→4.08 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    3.667,
-    4.083
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "6-07.w008"
+   }
   },
   {
-   "id": "footage05",
-   "obj": "footage",
+   "id": "bank",
+   "obj": "bank",
    "verb": "move",
    "at": {
     "word": "6-07.w009",
     "off": 0
    },
+   "means": "costly：钞票掉进循环",
+   "tool": "remotion",
+   "lead": 40,
    "until": {
-    "dur": 53
-   },
-   "ease": "linear",
-   "means": "旧动画源片 4.08→5.15 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    4.083,
-    5.15
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "6-07.w009"
+   }
   },
   {
-   "id": "footage06",
-   "obj": "footage",
-   "verb": "move",
+   "id": "lab",
+   "obj": "lab",
+   "verb": "appear",
    "at": {
-    "word": "6-07.w011",
-    "off": 1
-   },
-   "until": {
-    "dur": 455
-   },
-   "ease": "linear",
-   "means": "旧动画源片 5.15→13.70 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    5.15,
-    13.7
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage07",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "6-07.w029",
+    "word": "6-07.w010",
     "off": 0
    },
+   "means": "lab round：标签",
+   "tool": "remotion",
+   "lead": 8,
    "until": {
-    "dur": 47
+    "word": "6-07.w011"
+   }
+  },
+  {
+   "id": "now",
+   "obj": "now",
+   "verb": "appear",
+   "at": {
+    "word": "6-07.w012",
+    "off": 0
    },
-   "ease": "linear",
-   "means": "旧动画源片 13.70→14.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    13.7,
-    14.45
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "means": "Now：右栏亮起",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-07.w012"
+   }
+  },
+  {
+   "id": "pic",
+   "obj": "pic",
+   "verb": "grow",
+   "at": {
+    "word": "6-07.w014",
+    "off": 0
+   },
+   "means": "predicted：钥匙在锁里的小图",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "6-07.w014"
+   }
+  },
+  {
+   "id": "plbl",
+   "obj": "plbl",
+   "verb": "appear",
+   "at": {
+    "word": "6-07.w015",
+    "off": 0
+   },
+   "means": "picture：标签 predicted picture",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-07.w015"
+   }
+  },
+  {
+   "id": "fk",
+   "obj": "fk",
+   "verb": "appear",
+   "at": {
+    "word": "6-07.w019",
+    "off": 0
+   },
+   "means": "key：红圈标 first key",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "6-07.w019"
+   }
+  },
+  {
+   "id": "fan",
+   "obj": "fan",
+   "verb": "grow",
+   "at": {
+    "word": "6-07.w021",
+    "off": 0
+   },
+   "means": "sixteen：16 张小卡扇形散出",
+   "tool": "remotion",
+   "lead": 24,
+   "until": {
+    "word": "6-07.w021"
+   }
+  },
+  {
+   "id": "dl",
+   "obj": "dl",
+   "verb": "appear",
+   "at": {
+    "word": "6-07.w022",
+    "off": 0
+   },
+   "means": "designs：标签 sixteen designs",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-07.w022"
+   }
+  },
+  {
+   "id": "gp",
+   "obj": "gp",
+   "verb": "grow",
+   "at": {
+    "word": "6-07.w025",
+    "off": 0
+   },
+   "means": "grip：刻度条出现在 1x",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "6-07.w025"
+   }
+  },
+  {
+   "id": "up",
+   "obj": "up",
+   "verb": "morph",
+   "at": {
+    "word": "6-07.w028",
+    "off": 0
+   },
+   "means": "fifteen：刻度指针跳到 15x",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "word": "6-07.w029"
+   }
+  },
+  {
+   "id": "tt",
+   "obj": "tt",
+   "verb": "appear",
+   "at": {
+    "word": "6-07.w030",
+    "off": 0
+   },
+   "means": "tighter：红字 15x tighter",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   }
   }
  ]
 }
