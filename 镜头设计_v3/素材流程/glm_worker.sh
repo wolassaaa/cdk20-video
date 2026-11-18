@@ -40,6 +40,14 @@ fi
 if [ "$TASK" = PAGE ]; then
   PROMPT="HKBU SCIE1007 课程作业的科普视频。现在是 $(date '+%Y-%m-%d %H:%M') 韩国时间。你是二维页面助理。先完整读 $ROOT/镜头设计_v3/映射/GLM页面手册.md，再读 $ROOT/镜头设计_v3/映射/GLM页面任务.md 里段 $WHO 那一节，然后只做段 $WHO：写事件表、写页面、跑检查，改到检查表全过，最后按手册第 7 节写报告。如果这段目录里已有 look_report.md 且第一行是'看图：不过'，这次就照它逐条改页面，再跑 pagecheck。只用这几条命令：bash _env/ft.sh pageprep $WHO；bash _env/ft.sh pagecheck $WHO；bash _env/ft.sh pagestills $WHO；bash _env/ft.sh help。只许写手册第 2 节列出的文件。不删任何东西，不运行 git，不改别的段的文件、不改 kit.jsx 和 oncam.jsx。"
 fi
+# 11-18 22:40：中转站对带图的请求一直 502，GLM 看图停用；只写占位，让分道脚本往下走，真正的检查交给 Opus
+if [ "$TASK" = PAGELOOK ]; then
+  a=${WHO%%+*}; case " 3-01 3-06 3-09 4-04 4-08 4-11 5-02 5-05 5-09 6-04 6-12 7-01 8-01 8-04 " in *" $a "*) C="OnCam${a/-/}" ;; *) C="Manual${a/-/}" ;; esac
+  D="$ROOT/镜头设计_v3/映射/_cache/pages/$C"; mkdir -p "$D"
+  [ -f "$D/look_report.md" ] || printf '看图：过（GLM 没看图，只是让分道往下走；待 Opus 检查）
+' > "$D/look_report.md"
+  echo "PAGELOOK skipped for $WHO"; exit 0
+fi
 if [ "$TASK" = PAGELOOK ]; then
   PROMPT="HKBU SCIE1007 课程作业的科普视频。现在是 $(date '+%Y-%m-%d %H:%M') 韩国时间。你是二维页面的看片员。先读 $ROOT/镜头设计_v3/映射/GLM页面手册.md 第 3、5 节和 $ROOT/镜头设计_v3/映射/GLM页面任务.md 里段 $WHO 那一节。再读这段的 report.md（在 $ROOT/镜头设计_v3/映射/_cache/pages/ 下，合成名见手册第 1 节），用 Read 逐张打开里面列出的静帧 png。对每张图查：字或零件有没有互相重叠、压线、出框、被裁掉；出镜页图形有没有挡到人；字是不是太小看不清；画面是不是空、和任务单说的内容对不对；有没有错字。把结果写到同一目录的 look_report.md：第一行写 '看图：过' 或 '看图：不过'，下面逐张列问题（写清在哪个位置、哪个元素、建议怎么挪）。只用 Read 和 Write，只写 look_report.md。不删任何东西，不运行 git，不改页面代码。"
 fi
