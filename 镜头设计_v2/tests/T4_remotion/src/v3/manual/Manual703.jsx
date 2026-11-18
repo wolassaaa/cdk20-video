@@ -8,12 +8,12 @@ import K from "./keys_7-03.json";
 import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, Bead, evMap, Label, Pen, PageFrame, Source} from "./kit.jsx";
 
 const E = evMap(K);
-const LF = {x: 130, y: 250, w: 520, h: 370}, RF = {x: 1270, y: 250, w: 520, h: 370};
+const LF = {x: 130, y: 300, w: 520, h: 370}, RF = {x: 1270, y: 300, w: 520, h: 370};
 const FOLD = [[-80, 50], [-40, 70], [0, 54], [22, 16], [-14, -14], [-54, -24], [-86, -58], [-46, -92], [-4, -72], [36, -48], [74, -10], [112, 28]];
 const NUDGE = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [6, 8], [10, 12], [8, 10], [-6, 8], [-10, 4]];   // next round：形状微调
-const SC = 1.45, MC = [440, 470], DC = [1580, 470], CHIP = [215, 330];
-const PV = [960, 330], ARM = 170, STR = 70;                       // 天平
-const LC = [960, 845], LR = 95;                                    // 循环
+const SC = 1.45, MC = [440, 520], DC = [1580, 520], CHIP = [215, 380];
+const PV = [960, 380], ARM = 170, STR = 70;                       // 天平
+const LC = [960, 870], LR = 95, CR = LR + 36;                                    // 循环
 const CARDS = [{a: -150, src: "L"}, {a: -95, src: "R"}, {a: -40, src: "L"}, {a: 25, src: "R"}, {a: 145, src: "F"}];
 
 const Frame = ({b, p, dash}) => (
@@ -44,15 +44,15 @@ const Scene = () => {
     const c = CARDS[k];
     const ev = c.src === "F" ? E.inc : E.every;
     const t = span(f, ev.s + 4 * (k % 4), ev.l + 16 + 4 * (k % 4), ease);
-    const src = c.src === "L" ? [LF.x + LF.w - 60, LF.y + LF.h - 20] : c.src === "R" ? [RF.x + 60, RF.y + LF.h - 20] : [1240, 700];
+    const src = c.src === "L" ? [LF.x + LF.w - 60, LF.y + LF.h - 20] : c.src === "R" ? [RF.x + 60, RF.y + LF.h - 20] : [1240, 740];
     const a = (c.a + 360 * rnd) * Math.PI / 180;
-    const dst = [LC[0] + LR * Math.cos(a), LC[1] + LR * Math.sin(a)];
+    const dst = [LC[0] + CR * Math.cos(a), LC[1] + CR * Math.sin(a)];
     return {x: src[0] + (dst[0] - src[0]) * t, y: src[1] + (dst[1] - src[1]) * t - Math.sin(Math.PI * t) * 60, t, show: f >= ev.s};
   };
-  const bead = [[0, 760, 220], [E.two.l, 720, 100], [E.bal.l, 1150, 230], [E.af.l, 690, 215], [E.mdl.l, 240, 720], [E.ag.l, 720, 545],
-                [E.lab.l, 1220, 205], [E.str.l, 1800, 700], [E.once.l, 1730, 200], [E.ex.l, 1070, 240], [E.feed.l, 780, 960],
-                [E.every.l, 1150, 960], [E.res.l, 1460, 790], [E.inc.l, 1200, 700], [E.fail.l, 1480, 865], [E.back.l, 480, 760],
-                [E.nx.l, 640, 900], [E.rnd.l, 1250, 960], [K.len_f, 1251, 961]];
+  const bead = [[0, 760, 220], [E.two.l, 720, 100], [E.bal.l, 1150, 230], [E.af.l, 690, 215], [E.mdl.l, 240, 760], [E.ag.l, 720, 600],
+                [E.lab.l, 1220, 205], [E.str.l, 1800, 740], [E.once.l, 1730, 200], [E.ex.l, 1070, 290], [E.feed.l, 760, 980],
+                [E.every.l, 1180, 985], [E.res.l, 1480, 815], [E.inc.l, 1200, 740], [E.fail.l, 1560, 890], [E.back.l, 480, 800],
+                [E.nx.l, 560, 965], [E.rnd.l, 1300, 975], [K.len_f, 1301, 976]];
   return (
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("7-03.wav")} />
@@ -64,8 +64,8 @@ const Scene = () => {
         <Frame b={RF} p={span(f, E.lab.s, E.lab.l + 10, ease)} dash />
         {/* 天平 */}
         <g stroke={INK} strokeWidth={4} strokeLinecap="round" fill="none" opacity={span(bal, 0, 0.2)}>
-          <path d={`M${PV[0]},600 L${PV[0]},${600 - (600 - PV[1]) * span(bal, 0, 0.5)}`} />
-          <path d={`M${PV[0] - 60},600 L${PV[0] + 60},600`} />
+          <path d={`M${PV[0]},650 L${PV[0]},${650 - (650 - PV[1]) * span(bal, 0, 0.5)}`} />
+          <path d={`M${PV[0] - 60},650 L${PV[0] + 60},650`} />
           {bal > 0.4 && <path d={`M${endL[0]},${endL[1]} L${endR[0]},${endR[1]}`} style={{clipPath: `inset(0 ${50 - 50 * span(bal, 0.4, 0.8)}% 0 ${50 - 50 * span(bal, 0.4, 0.8)}%)`}} />}
           {bal > 0.75 && [endL, endR].map(([x, y], i) => (
             <g key={i} opacity={span(bal, 0.75, 1)}>
@@ -76,7 +76,7 @@ const Scene = () => {
           <circle cx={PV[0]} cy={PV[1]} r={9} fill={INK} stroke="none" opacity={span(bal, 0.4, 0.6)} />
         </g>
         {/* 两框连到两个盘 */}
-        {[[E.ag, [LF.x + LF.w, 470], endL], [E.str, [RF.x, 470], endR]].map(([ev, a, b], i) => {
+        {[[E.ag, [LF.x + LF.w, 520], endL], [E.str, [RF.x, 520], endR]].map(([ev, a, b], i) => {
           const p = span(f, ev.s + 4, ev.l + 20, ease), bx = b[0] + (i ? 40 : -40) * 0, by = b[1] + STR + 14;
           return p > 0 && <path key={i} d={`M${a[0]},${a[1]} L${a[0] + (bx - a[0]) * p},${a[1] + (by - a[1]) * p}`} stroke={SOFT} strokeWidth={3} strokeDasharray="8 8" fill="none" />;
         })}
@@ -105,17 +105,17 @@ const Scene = () => {
         {/* 回到左框的箭头 */}
         {back > 0 && (
           <g fill="none" stroke={RED} strokeWidth={4.5} strokeLinecap="round" strokeLinejoin="round">
-            <path d={`M${LC[0] - LR - 8},${LC[1] + 5} C720,850 610,780 600,${LF.y + LF.h + 16}`} pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - back} />
+            <path d={`M${LC[0] - LR - 8},${LC[1] + 5} C720,875 610,810 600,${LF.y + LF.h + 16}`} pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - back} />
             {back > 0.85 && <path d={`M588,${LF.y + LF.h + 34} L600,${LF.y + LF.h + 16} L614,${LF.y + LF.h + 32}`} />}
           </g>
         )}
       </svg>
       <Part name="chip" cx={CHIP[0]} cy={CHIP[1]} w={100} at={E.af.s + 6} f={f} gate={[0.5, 1]} flood={16} />
-      <Part name="flask" cx={1350} cy={335} w={84} at={E.lab.s + 4} f={f} gate={[0.5, 1]} flood={16} />
+      <Part name="flask" cx={1350} cy={385} w={84} at={E.lab.s + 4} f={f} gate={[0.5, 1]} flood={16} />
       <Label x={LF.x + LF.w / 2} y={LF.y + LF.h + 18} w={400} size={32} italic p={span(f, E.mdl.s, E.mdl.e + 10)}>AlphaFold model</Label>
       <Label x={RF.x + RF.w / 2} y={RF.y + RF.h + 18} w={440} size={32} italic p={span(f, E.str.s, E.str.e)}>lab-measured structure</Label>
-      <Pen x={1440} y={182} size={42} p={span(f, E.once.s, E.ex.l + 10)}>once one exists</Pen>
-      <div style={{position: "absolute", left: PV[0] - 50, top: 200, width: 100, textAlign: "center", fontSize: 96, lineHeight: "100px", color: RED, opacity: q,
+      <Pen x={1440} y={232} size={42} p={span(f, E.once.s, E.ex.l + 10)}>once one exists</Pen>
+      <div style={{position: "absolute", left: PV[0] - 50, top: 250, width: 100, textAlign: "center", fontSize: 96, lineHeight: "100px", color: RED, opacity: q,
                    transform: `scale(${1.3 - 0.3 * q})`}}>?</div>
       {/* 结果卡：每张一个勾，最后一张打红叉 */}
       {CARDS.map((c, k) => {
@@ -131,9 +131,9 @@ const Scene = () => {
           </div>
         );
       })}
-      <Label x={1092} y={790} w={340} size={32} italic align="left" p={span(f, E.res.s, E.res.e)}>every result</Label>
-      <Label x={1092} y={836} w={360} size={32} italic align="left" color={RED} p={span(f, E.fail.s, E.fail.e)}>including the failures</Label>
-      <Label x={760} y={872} w={180} size={32} italic color={RED} p={span(f, E.nx.s, E.rnd.l + 10)}>next round</Label>
+      <Label x={1140} y={820} w={340} size={32} italic align="left" p={span(f, E.res.s, E.res.e)}>every result</Label>
+      <Label x={1140} y={866} w={360} size={32} italic align="left" color={RED} p={span(f, E.fail.s, E.fail.e)}>including the failures</Label>
+      <Label x={720} y={930} w={180} size={32} italic color={RED} p={span(f, E.nx.s, E.rnd.l + 10)}>next round</Label>
 
       <Source p={span(f, E.af.l, E.af.l + 20)}>Our proposal · Illustration</Source>
       <Bead K={bead} f={f} />
