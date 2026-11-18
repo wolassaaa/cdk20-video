@@ -56,8 +56,10 @@ S_IN = 0.62                   # 飞向肝的路上缩到原来的几成（肝最
 GAP = 0.6                     # 肝的表面、血管让开 CDK20 外形包络的距离
 A_CAV = 2.5                   # 腔变形影响到包络半径的几倍（≥ 2 才保证推到包络以外；大一点凹得宽、软）
 R_HOLE, R_CL, R_TOP = 2.0, 7.0, 18.0     # 顶面入口挖多大；入口收拢时带动多大一圈；顶面波纹的范围
-TOP_COVER = 3.5               # 进去以后 CDK20 最高处上面还盖着多厚的玻璃
+MIN_THICK = 11.0              # 选入口时，CDK20 脚印范围内肝最薄处至少多厚（量在包络外圈，比 CDK20 本身宽，边上本来就薄）
+COVERS = (3.5, 2.5, 1.5)      # 进去以后 CDK20 最高处上面盖着多厚的玻璃（选入口时一起挑）
 CLEAR, DENT, BACK = 6.0, 5.0, 3.0        # 悬在肝表面上方多高；第一次顶压下去多深；被推回多少
+GLOW_IN = 0.3                 # 进到肝里以后 CDK20 的蓝色混进多少亮的热料（hero_mat 的 soft，同一种蓝）
 BOB, BOB_T = 0.9, 40.0        # 飘着时上下浮动的幅度（mm）和周期（帧）
 CAM_LAND, CAM_END = 0.226, 0.204     # 镜头到肝时、句尾时离入口多远（米）：推近到看得清凹下去、挤进去
 
@@ -490,39 +492,52 @@ def _hits(bvh, x, y, down=True):
     return out
 
 
-def choose_entry(P_sh, shell, P_vs, vessel, sx, sy, r_up, r_dn, r_max):
-    """在原定位孔附近找 CDK20 挤进去的地方：整个包络（缩小后）放进肝里，上面盖着至少 TOP_COVER 的玻璃、下面留 3 mm；
-    中心往下走的那条竖线（和旁边 0.8 mm 的四条）上不能有血管（中心要是穿过血管，血管就会被捅穿）。
-    满足的里面挑肝最厚的，离原定位孔近一点的优先。"""
+AXIS_RAYS = [(0.0, 0.0)] + [(r * math.cos(t), r * math.sin(t)) for r in (0.8, 1.8, R_HOLE + 1.5) for t in np.linspace(0, 2 * math.pi, 10, endpoint=False)]
+
+
+def choose_entry(P_sh, shell, P_vs, vessel, sx, sy, r_up, r_dn, r_max, env, s, cam_dir):
+    """在原定位孔附近找 CDK20 挤进去的地方：整个包络（缩小后）放进肝里，上面盖着 COVERS 里某一档厚度的玻璃、下面留 3 mm；
+    中心往下走的那条竖线周围（开口半径再加 1.5 mm 以内，AXIS_RAYS）不能有血管：中心要是穿过血管，血管就会被捅穿；
+    血管要是在开口底下，开口张开、合拢时会被肝壳夹住。
+    11-18 第 3 版加一条：进去以后从镜头看过去，CDK20 前面不能挡着血管。从包络上 80 个点朝镜头（cam_dir，镜头离它约 0.2 m）打线，
+    数打到血管的条数，越少越好。血管先按 CDK20 在那里撑出的腔推开再数（推开的血管可能正好挪到它前面）。
+    顶上盖的玻璃厚度在 COVERS 里一起挑：条数一样时挑盖得厚的，再挑肝最厚、离原定位孔近的。"""
     bs, bv = _bvh_part(P_sh, shell), _bvh_part(P_vs, vessel)
+    polys = [tuple(p.vertices) for p in vessel.data.polygons]
+    g = np.random.default_rng(1).normal(size=(80, 3)); g /= np.linalg.norm(g, axis=1)[:, None]
+    rho = s * env(g) * 0.85                                       # 包络比真外形大一圈，取八成五，点落在 CDK20 表面附近
     best = None
-    for gx in np.arange(-10, 10.1, 2.0):
-        for gy in np.arange(-10, 10.1, 2.0):
+    for gx in np.arange(-18, 18.1, 2.0):
+        for gy in np.arange(-18, 18.1, 2.0):
             x, y = sx + gx, sy + gy
             top, bot = _hits(bs, x, y), _hits(bs, x, y, down=False)
             if not top or not bot:
                 continue
             zt, zb_ = top[0], bot[0]
-            c_fin = zt - TOP_COVER - r_up
-            if c_fin - r_dn < zb_ + 3.0:
-                continue
             thin = []
             for a in np.linspace(0, 2 * math.pi, 12, endpoint=False):
                 for rr in (0.5 * r_max, 0.95 * r_max):
                     t2, b2 = _hits(bs, x + rr * math.cos(a), y + rr * math.sin(a)), _hits(bs, x + rr * math.cos(a), y + rr * math.sin(a), down=False)
                     thin.append((t2[0] - b2[0]) if t2 and b2 else 0.0)
-            ok = True
-            for ox, oy in ((0, 0), (0.8, 0), (-0.8, 0), (0, 0.8), (0, -0.8)):
-                hv = [z for z in _hits(bv, x + ox, y + oy) if c_fin - 1.0 < z < zt]
-                if hv:
-                    ok = False
-                    break
-            if not ok:
+            if min(thin) < MIN_THICK:                                 # 脚印里有一处太薄（靠肝边），CDK20 会把肝撑破相
                 continue
-            score = min(thin) - 0.3 * math.hypot(gx, gy)
-            if best is None or score > best[0]:
-                best = (score, dict(x=round(float(x), 2), y=round(float(y), 2), z_top=round(float(zt), 2), z_bottom=round(float(zb_), 2),
-                                    c_final=round(float(c_fin), 2), min_thick=round(float(min(thin)), 2)))
+            for cover in COVERS:
+                c_fin = zt - cover - r_up
+                if c_fin - r_dn < zb_ + 3.0:
+                    continue
+                if any([z for z in _hits(bv, x + ox, y + oy) if c_fin - 1.0 < z < zt] for ox, oy in AXIS_RAYS):
+                    continue
+                c = np.array([x, y, c_fin])
+                bvd = BVHTree.FromPolygons(cavity(P_vs, c, np.eye(3), s, env).tolist(), polys)
+                cam = c + np.array(cam_dir) * 205.0
+                blocked = 0
+                for p in c + g * rho[:, None]:
+                    d = cam - p; L = float(np.linalg.norm(d))
+                    blocked += bvd.ray_cast(Vector(p), Vector(d / L), L)[0] is not None
+                score = (-blocked, cover, min(thin) - 0.3 * math.hypot(gx, gy))
+                if best is None or score > best[0]:
+                    best = (score, dict(x=round(float(x), 2), y=round(float(y), 2), z_top=round(float(zt), 2), z_bottom=round(float(zb_), 2), cover=cover,
+                                        c_final=round(float(c_fin), 2), min_thick=round(float(min(thin)), 2), sight_blocked=f"{blocked}/80"))
     assert best is not None, "原定位孔附近找不到能把 CDK20 整个装进去、又不捅穿血管的地方"
     return best[1]
 
@@ -667,7 +682,9 @@ def build(out_blend, samples=64):
     Ms, Mv = np.array(shell.matrix_local), np.array(vessel.matrix_local)
     to_part = lambda o, M_: (coords(o) / MM) @ M_[:3, :3].T + M_[:3, 3] / MM      # noqa: E731  物体坐标（米）→ 肝零件坐标（毫米）
     P_sh, P_vs = to_part(shell, Ms), to_part(vessel, Mv)
-    ent = choose_entry(P_sh, shell, P_vs, vessel, sx, sy, S_IN * rho_up + GAP, S_IN * rho_dn + GAP, S_IN * float(env.tab.max()) + GAP)
+    e_, a_ = math.radians(EL), math.radians(AZ)
+    cam_dir = (math.cos(e_) * math.sin(a_), -math.cos(e_) * math.cos(a_), math.sin(e_))      # 从场景指向镜头（KP.camera 的机位方向）
+    ent = choose_entry(P_sh, shell, P_vs, vessel, sx, sy, S_IN * rho_up + GAP, S_IN * rho_dn + GAP, S_IN * float(env.tab.max()) + GAP, env, S_IN, cam_dir)
     Ex, Ey, z_top, c_fin = ent["x"], ent["y"], ent["z_top"], ent["c_final"]
     hole = cut_entry(shell, Ms, Ex, Ey, z_top)
     rf = dict(shell=refine(shell, Ms, Ex, Ey, 34.0, 0.5), vessel=refine(vessel, Mv, Ex, Ey, 34.0, 0.4))
@@ -960,6 +977,9 @@ def build(out_blend, samples=64):
     # 肝壳上的修改器顺序：形状键先算，再生长、变的那道波（这两样到挤的时候都已经是原样）
     print(f"S203 形状键：第 {f_def0}–{NF - 1} 帧，共 {len(defs)} 帧；入口最早张开在第 {next((f for f in range(NF) if rim_m(f) < 0.5), None)} 帧")
 
+    f_inside = next(f for f in range(e_in["f_start"], NF) if cz(f) + S_IN * rho_up + GAP < z_top)       # CDK20 最高处没进顶面的那一帧
+    print(f"S203 完全进肝：第 {f_inside} 帧，之后 8 帧内 CDK20 亮到 {GLOW_IN}")
+
     # ---- 逐帧关键帧（全部由 keys 的事件帧算出）
     r_ck.rotation_mode = "ZYX"                 # 先自转再低头：低头的方向一直朝镜头，不跟着转
     near = {}
@@ -1012,6 +1032,10 @@ def build(out_blend, samples=64):
         sv = m_gl.node_tree.nodes["soft"].outputs[0]
         sv.default_value = 0.16 * smooth((f - e_pr["f_start"]) / 4.0) * (1 - smooth((f - e_cl["f_land"]) / 8.0))
         sv.keyframe_insert("default_value", frame=f)
+        # 11-18 第 3 版：完全进到肝里以后，CDK20 自己的蓝色亮一点（同一种亮面蓝的热料，少量），隔着红玻璃也认得出
+        bv_ = m_ck.node_tree.nodes["soft"].outputs[0]
+        bv_.default_value = GLOW_IN * smooth((f - f_inside) / 8.0)
+        bv_.keyframe_insert("default_value", frame=f)
     sc.frame_set(0)
     Path(out_blend).parent.mkdir(parents=True, exist_ok=True)
     bpy.ops.wm.save_as_mainfile(filepath=str(out_blend))
