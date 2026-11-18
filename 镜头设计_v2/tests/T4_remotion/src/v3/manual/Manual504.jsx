@@ -9,10 +9,10 @@ import K from "./keys_5-04.json";
 import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, Bead, evMap, Label, Pen, PageFrame, Source} from "./kit.jsx";
 
 const E = evMap(K);
-const LK = {cx: 440, cy: 540, w: 220};
-const KY = 600, KS = 120, KE = 320;              // 钥匙：从 cx 120 滑到 320（尖端在锁后面）
-const GR = [640, 420];                            // 齿轮
-const OX = 960, OY = 800, XR = 1700, TOP = 360, HALF = 580;   // 图
+const LK = {cx: 450, cy: 600, w: 280};
+const KY = 660, KS = 140, KE = 330;              // 钥匙：从 cx 120 滑到 320（尖端在锁后面）
+const GR = [690, 470];                            // 齿轮
+const OX = 960, OY = 850, XR = 1700, TOP = 360, HALF = 605;   // 图
 const gen = (x) => TOP + (OY - TOP) / (1 + Math.exp(-(x - 1250) / 55));
 const red = (x) => TOP - 16 + (OY - TOP) / (1 + Math.exp(-(x - 1960) / 55));
 const pathOf = (fn, x0, x1) => [...Array(61)].map((_, i) => { const x = x0 + (x1 - x0) * i / 60; return `${i ? "L" : "M"}${x.toFixed(1)},${fn(x).toFixed(1)}`; }).join(" ");
@@ -42,9 +42,9 @@ const Scene = () => {
   const rc = span(f, E.q.s + 6, E.above.l + 10, ease);
   const arr = span(f, E.above.l, E.above.l + 20, ease);
   const dx = 980 + (1250 - 980) * dot;
-  const bead = [[0, 800, 200], [E.title.l, 760, 100], [E.grab.l, 120, 760], [E.lock.l, 600, 760], [E.neq.l, 800, 240], [E.jam.l, 110, 480],
-                [E.k001.l, 330, 770], [E.stop.l, 770, 430], [E.cdk.l, 620, 770], [E.work.l, 780, 560], [E.axes.l, 900, 870],
-                [E.ic.l, 1520, 225], [E.much.l, 1790, 800], [E.cut.l, 1100, 660], [E.half.l, 880, 660], [E.q.l, 1800, 540],
+  const bead = [[0, 800, 200], [E.title.l, 760, 100], [E.grab.l, 120, 880], [E.lock.l, 650, 880], [E.neq.l, 800, 240], [E.jam.l, 110, 480],
+                [E.k001.l, 300, 880], [E.stop.l, 820, 470], [E.cdk.l, 660, 900], [E.work.l, 820, 620], [E.axes.l, 900, 940],
+                [E.ic.l, 1520, 225], [E.much.l, 1790, 860], [E.cut.l, 1100, 740], [E.half.l, 880, 720], [E.q.l, 1800, 540],
                 [E.above.l, 1810, 240], [E.weak.l, 1800, 620], [K.len_f, 1801, 621]];
   return (
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
@@ -54,8 +54,8 @@ const Scene = () => {
 
       {/* 钥匙在锁后面 */}
       {f >= E.grab.s - 10 && (
-        <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transformOrigin: `${kx + 120}px ${KY}px`, transform: `rotate(${jam}deg)`, opacity: span(f, E.grab.s - 10, E.grab.s)}}>
-          <Part name="key" cx={kx} cy={KY} w={260} at={E.grab.s - 10} f={f} gate={[0, 0.5]} flood={14} />
+        <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transformOrigin: `${kx + 150}px ${KY}px`, transform: `rotate(${jam}deg)`, opacity: span(f, E.grab.s - 10, E.grab.s)}}>
+          <Part name="key" cx={kx} cy={KY} w={320} at={E.grab.s - 10} f={f} gate={[0, 0.5]} flood={14} />
         </div>
       )}
       <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transformOrigin: `${LK.cx}px ${LK.cy}px`, transform: `rotate(${lockJ + jam * 0.25}deg)`}}>
@@ -64,7 +64,7 @@ const Scene = () => {
       <svg width={1920} height={1080} style={{position: "absolute", left: 0, top: 0}}>
         {/* 晃动线 */}
         {wob > 0 && [0, 1, 2].map((k) => (
-          <path key={k} d={`M${150 - 14 * k},${560 - 10 * k} q-16,40 0,80`} fill="none" stroke={RED} strokeWidth={3.5} strokeLinecap="round" opacity={wob * (1 - 0.25 * k)} transform={`translate(${-3 * Math.sin(f / 3 + k)} 0)`} />
+          <path key={k} d={`M${130 - 14 * k},${620 - 10 * k} q-16,40 0,80`} fill="none" stroke={RED} strokeWidth={3.5} strokeLinecap="round" opacity={wob * (1 - 0.25 * k)} transform={`translate(${-3 * Math.sin(f / 3 + k)} 0)`} />
         ))}
         {/* 不等号 */}
         {f >= E.neq.s && <g stroke={RED} strokeWidth={5} strokeLinecap="round">
@@ -93,15 +93,15 @@ const Scene = () => {
       </svg>
       <Label x={300} y={212} w={220} size={40} p={span(f, E.grab.s, E.grab.e + 10)}>grabbing</Label>
       <Label x={630} y={212} w={220} size={40} p={span(f, E.jam.s, E.jam.e)}>jamming</Label>
-      <Label x={228} y={650} w={120} size={34} color={RED} p={span(f, E.k001.s, E.k001.l + 14)}>001</Label>
-      <Label x={LK.cx} y={712} w={200} size={34} p={span(f, E.cdk.s, E.cdk.e)}>CDK20</Label>
-      <div style={{position: "absolute", left: 694, top: 300, fontSize: 72, lineHeight: "72px", color: RED, opacity: span(f, E.work.s, E.work.l + 8)}}>?</div>
+      <Label x={225} y={712} w={120} size={34} color={RED} p={span(f, E.k001.s, E.k001.l + 14)}>001</Label>
+      <Label x={LK.cx} y={812} w={200} size={34} p={span(f, E.cdk.s, E.cdk.e)}>CDK20</Label>
+      <div style={{position: "absolute", left: 744, top: 350, fontSize: 72, lineHeight: "72px", color: RED, opacity: span(f, E.work.s, E.work.l + 8)}}>?</div>
 
       <Label x={OX} y={256} w={200} size={32} italic p={span(f, E.axes.s, E.axes.e)}>activity</Label>
       <Label x={1330} y={210} w={220} size={46} p={span(f, E.ic.s, E.ic.e)}>IC50</Label>
-      <Label x={1500} y={818} w={300} size={32} italic p={span(f, E.much.s, E.much.e)}>how much you need</Label>
+      <Label x={1500} y={OY + 18} w={300} size={32} italic p={span(f, E.much.s, E.much.e)}>how much you need</Label>
       <Label x={880} y={HALF - 20} w={120} size={30} italic p={span(f, E.half.s, E.half.e)}>in half</Label>
-      <Label x={1250} y={818} w={120} size={30} p={span(f, E.half.l, E.half.l + 16)}>IC50</Label>
+      <Label x={1250} y={OY + 18} w={120} size={30} p={span(f, E.half.l, E.half.l + 16)}>IC50</Label>
       <div style={{position: "absolute", left: 1740, top: 400, fontSize: 72, lineHeight: "72px", color: RED, opacity: span(f, E.q.s, E.q.l + 6)}}>?</div>
       <div style={{position: "absolute", left: 1400, top: 290, width: 390, textAlign: "right", fontSize: 34, color: RED}}><Write p={span(f, E.above.s, E.above.e)}>above 6,000 nanomolar</Write></div>
       <Pen x={1560} y={440} size={56} p={span(f, E.weak.s, E.weak.l + 6)}>weak</Pen>
