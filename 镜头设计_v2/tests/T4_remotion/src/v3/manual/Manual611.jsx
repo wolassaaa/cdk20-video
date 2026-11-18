@@ -14,7 +14,7 @@ const ST = ["Target", "Hit", "Improve", "Cells", "Animals", "Trials", "Approval"
 const RX0 = 230, RX1 = 1690, RY = 600;
 const sx = (i) => RX0 + ((RX1 - RX0) * i) / (ST.length - 1);
 // 镜头：V0 = 6-10 的取景；V1 = 平移到远端；V2 = 全景（缩到 0.8，远端的字也在画里）
-const V0 = [1, 0, 0], V1 = [1, -420, 0], V2 = [0.8, 8, 140];
+const V0 = [1, 0, 0], V1 = [1, -420, 0], V2 = [0.9, 45, 140];
 const mix = (a, b, t) => a.map((v, i) => v + (b[i] - v) * t);
 const LA = RY - 300, LB = RY - 200, L48 = RY - 110;   // 牌子 A、B、048 的高度（各走各的道）
 
@@ -89,7 +89,7 @@ const Scene = () => {
             return <path key={i} d={`M${x0},${y0} L${x0 + (x - x0) * p},${y0 + (y1 - y0) * p}`} stroke={red > 0.5 ? RED : INK} strokeWidth={3.5} strokeLinecap="round" />;
           })}
         </svg>
-        {ST.map((st, i) => <Label key={st} x={sx(i)} y={RY + 32} w={180} size={30} color={i >= 4 && !(i === 6 && appr > 0.5) ? SOFT : INK} p={1}>{st}</Label>)}
+        {ST.map((st, i) => <Label key={st} x={sx(i)} y={RY + 32} w={190} size={32} color={i >= 4 && !(i === 6 && appr > 0.5) ? SOFT : INK} p={1}>{st}</Label>)}
 
         {/* 牌子 B：AI-assisted，半路倒下变灰 */}
         {tin > 0 && (
@@ -116,25 +116,25 @@ const Scene = () => {
             {fx > 0.5 && <path d={`M1353,504 L${1353 - 56 * span(fx, 0.5, 1)},${504 + 52 * span(fx, 0.5, 1)}`} />}
           </g>}
         </svg>
-        <Label x={1300} y={700} w={340} size={30} italic color={SOFT} p={span(f, E.fail.l, E.fail.e)}>failed along the way</Label>
+        <Label x={1300} y={700} w={360} size={32} italic color={SOFT} p={span(f, E.fail.l, E.fail.e)}>failed along the way</Label>
 
         {/* 远端的字 */}
         <div style={{position: "absolute", left: 1560, top: 700, whiteSpace: "nowrap", lineHeight: 1}}>
-          <div style={{fontSize: 30, color: SOFT}}><Write p={span(f, E.date.s, E.date.e)}>September 2026</Write></div>
+          <div style={{fontSize: 32, color: SOFT}}><Write p={span(f, E.date.s, E.date.e)}>September 2026</Write></div>
           <div style={{fontSize: 46, marginTop: 8, fontStyle: "italic"}}><Write p={span(f, E.name.s, E.name.l + 30)}>lirafugratinib</Write></div>
           <div style={{fontSize: 34, marginTop: 10, color: RED}}><Write p={span(f, E.appr.s, E.appr.e)}>approved in the US</Write></div>
-          <div style={{fontSize: 30, marginTop: 10}}><Write p={span(f, E.bile.s, E.bile.e)}>for a bile duct cancer</Write></div>
+          <div style={{fontSize: 32, marginTop: 10}}><Write p={span(f, E.bile.s, E.bile.e)}>for a bile duct cancer</Write></div>
         </div>
 
         {/* 048 */}
         <div style={{position: "absolute", left: 958.5, top: L48 + 42, width: 3, height: RY - L48 - 42, background: INK}} />
         <div style={{position: "absolute", left: 860, top: L48 - 42, width: 200, height: 84, background: INK, color: PAPER, borderRadius: 12, textAlign: "center",
                      fontSize: 60, lineHeight: "86px", transform: `scale(${pulse})`}}>048</div>
-        <Part name="person_r" cx={820} cy={500} w={44} at={E.mk.s} f={f} gate={[0.5, 1]} flood={14} />
-        <Label x={820} y={544} w={160} size={24} italic color={SOFT} p={span(f, E.mk.l, E.mk.e)}>its makers</Label>
-        <Pen x={1078} y={384} size={40} p={span(f, E.nott.l, E.nott.e)}>not to trials</Pen>
-        {RES.map(([x, y], i) => <Part key={i} name="person_w" cx={x} cy={y} w={48} at={E.sh.s + 4 * i} f={f} gate={[0.5, 1]} flood={14} />)}
-        <Label x={960} y={150} w={560} size={34} italic p={span(f, E.res.s, E.res.e)}>shared with other researchers</Label>
+        <Part name="person_r" cx={800} cy={498} w={46} at={E.mk.s} f={f} gate={[0.5, 1]} flood={14} />
+        <Label x={800} y={540} w={170} size={30} italic color={SOFT} p={span(f, E.mk.l, E.mk.e)}>its makers</Label>
+        <Pen x={1076} y={372} size={44} p={span(f, E.nott.l, E.nott.e)}>not to trials</Pen>
+        {RES.map(([x, y], i) => <Part key={i} name="person_w" cx={x} cy={y} w={54} at={E.sh.s + 4 * i} f={f} gate={[0.5, 1]} flood={14} />)}
+        <Label x={960} y={150} w={600} size={38} italic p={span(f, E.res.s, E.res.e)}>shared with other researchers</Label>
         <Bead K={bead} f={f} />
       </div>
       <div style={{position: "absolute", left: 96, top: 62, fontSize: 56}}><Write p={span(f, E.title.s, E.title.e)}>The end of that road</Write></div>
