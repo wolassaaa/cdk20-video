@@ -12,13 +12,13 @@ const E = evMap(K);
 const io = Easing.inOut(Easing.cubic);
 const LX = 480, LY = 430, LW = 170, LH = LW * 743 / 520, HOLE = LY + 0.143 * LH;
 const CX = 820, CY = 430;                        // 芯片
-const LINE = 430, X0 = 900, XEND = 1760, V = 4;  // 传送线
+const LINE = 430, X0 = 960, XEND = 1760, V = 5;  // 传送线
 const GATE = [1100, 1380, 1660];
-const KW = 90, KH = KW * 312 / 1096;
+const KW = 130, KH = KW * 312 / 1096;
 const REJ = new Set([0, 5]);
 const SURV = [1, 2, 3, 4, 6, 7];
 const SC1 = [0.45, 0.3, 0.5, 0.25, 0.4, 0.35], SC2 = [0.35, 0.4, 0.2, 0.45, 0.3, 0.4];
-const SX = 1540, SY = (j) => 640 + 48 * j, BX = 1600, BW = 160;
+const SX = 1490, SY = (j) => 640 + 50 * j, BX = 1590, BW = 160;
 
 const Gate = ({x, p, glow}) => p <= 0 ? null : (
   <g opacity={p}>
@@ -29,7 +29,7 @@ const Gate = ({x, p, glow}) => p <= 0 ? null : (
 
 const Scene = () => {
   const f = useCurrentFrame();
-  const t0 = (k) => E.built.s + 30 * k;
+  const t0 = (k) => E.built.s + 32 * k;
   const rejT = (k) => (k === 0 ? E.toss.l : E.possibly.l);
   // 钥匙 k 的位置、转角、透明度、是否打叉
   const keyState = (k) => {
@@ -41,7 +41,7 @@ const Scene = () => {
       if (f < arrive) return {x, y: LINE, r: 0};
       const fall = span(f, rejT(k), rejT(k) + 22, Easing.in(Easing.quad));
       const slot = k === 0 ? -26 : 26;
-      return {x: GATE[0] - 30 + slot * fall, y: LINE + (790 - LINE) * fall, r: 70 * fall * (k ? 1 : -1), x_: span(f, rejT(k) - 6, rejT(k) + 2)};
+      return {x: GATE[0] - 30 + slot * fall, y: LINE + (880 - LINE) * fall, r: 70 * fall * (k ? 1 : -1), x_: span(f, rejT(k) - 6, rejT(k) + 2)};
     }
     const end = s + (XEND - X0) / V;
     if (f < end) return {x, y: LINE, r: 0};
@@ -59,15 +59,15 @@ const Scene = () => {
   const binShake = f > E.groups.s ? 3 * Math.exp(-(f - E.groups.s) / 8) * Math.sin((f - E.groups.s) / 2) : 0;
   const lineP = span(f, E.filters.s, E.filters.l + 10, ease);
   const bead = [[0, 130, 96], [E.title.l, 700, 96], [E.gave.l, 820, 300], [E.pocket.l, 640, 300], [E.shape.l, 300, 230], [E.one.l, 680, 560],
-                [E.rule.l, 700, 700], [E.key.l, 240, 560], [E.grip.l, 620, 560], [E.spot.l, 250, 640], [E.hinge.l, 720, 820],
+                [E.rule.l, 880, 640], [E.key.l, 240, 560], [E.grip.l, 620, 560], [E.spot.l, 250, 640], [E.hinge.l, 880, 900],
                 [E.filters.l, 1240, 220], [E.built.l, 960, 330], [E.toss.l, 1240, 640], [E.designs.l, 1000, 560], [E.reactive.l, 950, 280],
-                [E.possibly.l, 1260, 760], [E.toxic.l, 950, 330], [E.groups.l, 1260, 860], [E.score.l, 1480, 580], [E.drug.l, 1520, 300],
+                [E.possibly.l, 1260, 760], [E.toxic.l, 950, 330], [E.groups.l, 1300, 900], [E.score.l, 1480, 580], [E.drug.l, 1520, 300],
                 [E.easy.l, 1800, 300], [E.each.l, 1840, 950], [K.len_f, 1841, 951]];
   return (
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("4-09.wav")} />
       <PageFrame />
-      <div style={{position: "absolute", left: 96, top: 62, fontSize: 56}}><Write p={span(f, E.title.s, E.title.e)}>One rule, and filters</Write></div>
+      <div style={{position: "absolute", left: 96, top: 62, fontSize: 56}}><Write p={span(f, E.title.s, E.title.e)}>The pocket's shape and one rule</Write></div>
 
       {/* 团队、锁、芯片 */}
       <Part name="person_w" cx={160} cy={330} w={90} at={E.title.s + 4} f={f} gate={[0.5, 1]} />
@@ -96,12 +96,12 @@ const Scene = () => {
             <line x1={LX - 58} y1={HOLE + 8} x2={LX - 58 - (LX - 58 - 360) * span(f, E.spot.l, E.hinge.l, ease)} y2={HOLE + 8 + (586 - HOLE - 8) * span(f, E.spot.l, E.hinge.l, ease)} stroke={RED} strokeWidth={2} />
           </g>); })()}
         {/* 规则卡片 */}
-        {f >= E.rule.s && <rect x={300} y={640} width={360} height={120} rx={10} fill="#F4F1EA" stroke={INK} strokeWidth={2.5} pathLength={1} strokeDasharray="1 1"
+        {f >= E.rule.s && <rect x={200} y={700} width={560} height={180} rx={10} fill="#F4F1EA" stroke={INK} strokeWidth={2.5} pathLength={1} strokeDasharray="1 1"
                                 strokeDashoffset={1 - span(f, E.rule.s, E.rule.l + 10, ease)} />}
         {/* 卡片 → 芯片 */}
         {f >= E.hinge.l && (() => { const p = span(f, E.hinge.l, E.hinge.l + 20, ease); return (
           <g stroke={SOFT} strokeWidth={2.5} fill="none" strokeLinecap="round">
-            <path d={`M664,690 Q760,680 ${664 + (800 - 664) * p},${690 + (512 - 690) * p}`} strokeDasharray="6 7" />
+            <path d={`M764,790 Q850,720 ${764 + (812 - 764) * p},${790 + (512 - 790) * p}`} strokeDasharray="6 7" />
             {p > 0.95 && <path d="M790,522 L800,510 L810,524" />}
           </g>); })()}
         {/* 传送线和三道筛子 */}
@@ -109,7 +109,7 @@ const Scene = () => {
         {GATE.map((x, g) => <Gate key={g} x={x} p={span(f, E.filters.s + 6 * g, E.filters.l + 6 * g + 10, ease)} glow={gateGlow(g)} />)}
         {/* toss 槽 */}
         {f >= E.filters.s && (() => { const p = span(f, E.filters.s + 10, E.filters.l + 20, ease); return (
-          <path d={`M1010,${770 + binShake} L1030,${830 + binShake} L1170,${830 + binShake} L1190,${770 + binShake}`} fill="none" stroke={INK} strokeWidth={3} strokeLinejoin="round"
+          <path d={`M1000,${860 + binShake} L1022,${930 + binShake} L1178,${930 + binShake} L1200,${860 + binShake}`} fill="none" stroke={INK} strokeWidth={3} strokeLinejoin="round"
                 pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - p} />); })()}
         {/* 分数条 */}
         {f >= E.score.s && SURV.map((k, j) => {
@@ -144,8 +144,8 @@ const Scene = () => {
 
       {/* 字（全部取自旁白） */}
       <Label x={LX} y={250} w={300} size={26} italic color={RED} p={span(f, E.shape.s, E.shape.l + 12)}>the pocket's shape</Label>
-      <Label x={480} y={652} w={300} size={24} italic color={SOFT} p={span(f, E.rule.s + 4, E.rule.l + 12)}>one rule</Label>
-      <Label x={480} y={694} w={340} size={32} p={span(f, E.hinge.s, E.hinge.l + 16)}>must grip the hinge</Label>
+      <Label x={480} y={720} w={300} size={30} italic color={SOFT} p={span(f, E.rule.s + 4, E.rule.l + 12)}>one rule</Label>
+      <Label x={480} y={780} w={520} size={48} p={span(f, E.hinge.s, E.hinge.l + 16)}>must grip the hinge</Label>
       <Label x={360} y={586} w={120} size={28} color={RED} p={span(f, E.hinge.s, E.hinge.l + 8)}>hinge</Label>
       <Label x={1380} y={200} w={300} size={32} italic p={span(f, E.filters.s, E.filters.l + 12)}>filters</Label>
       <Label x={GATE[0]} y={268} w={260} size={26} p={span(f, E.reactive.s, E.reactive.l + 10)}>reactive or</Label>
@@ -153,7 +153,7 @@ const Scene = () => {
       <Label x={GATE[1]} y={300} w={240} size={26} p={span(f, E.drug.s, E.drug.l + 10)}>drug-like?</Label>
       <Label x={GATE[2]} y={300} w={240} size={26} p={span(f, E.easy.s, E.easy.l + 10)}>easy to make?</Label>
       <Label x={980} y={462} w={200} size={24} italic color={SOFT} p={span(f, E.designs.s, E.designs.l + 10)}>designs</Label>
-      <Label x={1100} y={848} w={160} size={28} color={RED} p={span(f, E.groups.s, E.groups.l + 10)}>toss</Label>
+      <Label x={1100} y={944} w={160} size={30} color={RED} p={span(f, E.groups.s, E.groups.l + 10)}>toss</Label>
       <Label x={BX + BW / 2} y={588} w={200} size={28} italic p={span(f, E.score.s, E.score.l + 10)}>score</Label>
 
       <Source p={span(f, E.title.l, E.title.l + 20)}>Ren et al., Chem. Sci. 2023; Ivanenkov et al., J. Chem. Inf. Model. 2023 · Illustration</Source>
