@@ -17,8 +17,8 @@ const PROT = [
   {cx: 380, cy: 680, w: 170, g: [312, 624]},
 ];
 const KW = 140, KAR = 1096 / 312;            // 钥匙长度、宽高比
-const RX = 1440, RY = 500, RS = 1.6;         // 右边放大的那份
-const LW = 200, LH = LW * 743 / 520, LY = RY - 0.143 * LH;   // 锁：锁孔落在 RY
+const RX = 1440, RY = 530, RS = 1.7;         // 右边放大的那份
+const LW = 210, LH = LW * 743 / 520, LY = RY - 0.143 * LH;   // 锁：锁孔落在 RY
 
 // 齿轮：8 个齿
 const Gear = ({x, y, r, ang, p, color, fill = "#F4F1EA"}) => {
@@ -66,8 +66,8 @@ const Scene = () => {
   const m = span(f, E.like.s, E.like.l, io);
   const cx = 640 + (RX - 640) * m, cy = 480 + (RY - 480) * m - Math.sin(Math.PI * m) * 70, s = 1 + (RS - 1) * m;
   const lk = span(f, E.lock.s, E.lock.l, ease);
-  const ckx = 680 + (1228 - 680) * m + 112 * lk, cky = 365 + (RY - 365) * m - Math.sin(Math.PI * m) * 70;
-  const ckw = KW * (1 + (RS - 1) * m), ckrot = 90 * (1 - m);
+  const ckx = 680 + (1199 - 680) * m + 82 * lk, cky = 365 + (RY - 365) * m - Math.sin(Math.PI * m) * 70;
+  const ckw = KW * (1 + (RS - 1) * m) + 80 * lk, ckrot = 90 * (1 - m);
   const line = span(f, E.like.s, E.like.l + 6, ease);
   const ring = span(f, E.pocket.s, E.pocket.l, out);
   const cross = span(f, E.does.s, E.does.l + 6, out);
@@ -85,7 +85,7 @@ const Scene = () => {
         <rect x={140} y={190} width={770} height={640} rx={110} fill="none" stroke={INK} strokeWidth={4} pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - cellP} opacity={0.9} />
         <rect x={156} y={206} width={738} height={608} rx={96} fill="none" stroke={INK} strokeWidth={2} pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - cellP2} opacity={0.35} />
         {/* 原蛋白到右边那份的虚线 */}
-        {line > 0 && <path d={`M745,480 L${745 + (1080 + 120 * lk - 745) * line},${480 + 15 * line}`} stroke={SOFT} strokeWidth={2.5} strokeDasharray="7 8" fill="none" />}
+        {line > 0 && <path d={`M745,480 L${745 + (1066 + 42 * lk - 745) * line},${480 + 50 * line}`} stroke={SOFT} strokeWidth={2.5} strokeDasharray="7 8" fill="none" />}
       </svg>
 
       {/* 三个蛋白；被抓的那个夹紧、变灰、微歪 */}
@@ -127,8 +127,8 @@ const Scene = () => {
       <Label x={525} y={846} w={300} size={30} p={span(f, E.prot.l, E.prot.l + 20)}>proteins</Label>
       <Label x={640} y={572} w={320} size={24} italic p={span(f, E.does.s, E.does.l + 14)}>change what it does</Label>
       <Label x={730} y={392} w={140} size={26} italic color={RED} align="left" p={span(f, E.pocket.l - 4, E.pocket.l + 12)}>pocket</Label>
-      <Label x={1150} y={560} w={220} size={28} p={span(f, E.key.s, E.key.l + 14)}>key = drug</Label>
-      <Label x={RX} y={616} w={260} size={28} p={span(f, E.lock.l - 6, E.lock.l + 14)}>lock = protein</Label>
+      <Label x={RX - 60} y={690} w={360} size={44} p={span(f, E.key.s, E.key.l + 14)}>key = drug</Label>
+      <Label x={RX - 60} y={760} w={360} size={44} p={span(f, E.lock.l - 6, E.lock.l + 14)}>lock = protein</Label>
 
       <Source p={span(f, E.title.l, E.title.l + 20)}>Lengauer 2007 · Illustration</Source>
       <Bead K={bead} f={f} />
