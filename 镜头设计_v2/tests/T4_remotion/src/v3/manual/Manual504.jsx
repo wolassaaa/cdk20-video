@@ -100,7 +100,7 @@ const Scene = () => {
       <Label x={OX} y={256} w={200} size={32} italic p={span(f, E.axes.s, E.axes.e)}>activity</Label>
       <Label x={1330} y={210} w={220} size={46} p={span(f, E.ic.s, E.ic.e)}>IC50</Label>
       <Label x={1500} y={OY + 18} w={300} size={32} italic p={span(f, E.much.s, E.much.e)}>how much you need</Label>
-      <Label x={880} y={HALF - 20} w={120} size={30} italic p={span(f, E.half.s, E.half.e)}>in half</Label>
+      <Label x={884} y={HALF - 20} w={128} size={30} italic p={span(f, E.half.s, E.half.e)}>in half&nbsp;</Label>
       <Label x={1250} y={OY + 18} w={120} size={30} p={span(f, E.half.l, E.half.l + 16)}>IC50</Label>
       <div style={{position: "absolute", left: 1740, top: 400, fontSize: 72, lineHeight: "72px", color: RED, opacity: span(f, E.q.s, E.q.l + 6)}}>?</div>
       <div style={{position: "absolute", left: 1400, top: 290, width: 390, textAlign: "right", fontSize: 34, color: RED}}><Write p={span(f, E.above.s, E.above.e)}>above 6,000 nanomolar</Write></div>

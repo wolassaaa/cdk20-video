@@ -70,7 +70,7 @@ const Scene = () => {
         </g>}
         {n48 > 0 && <rect x={BX} y={YB[1] - BH / 2} width={10 * n48} height={BH} fill={RED} transform={`translate(${jj} 0)`} />}
       </svg>
-      <Label x={BX} y={210} w={300} size={34} italic align="left" p={span(f, E.grab.s, E.grab.e + 10)}>grabbed</Label>
+      <Label x={BX} y={210} w={300} size={34} italic align="left" p={span(f, E.grab.s, E.grab.e + 10)}>grabbed&nbsp;</Label>
       <div style={{position: "absolute", left: BX + 15 * U - 560, top: YA[1] + 34, width: 560, textAlign: "right", fontSize: 36, color: RED}}>
         <Write p={span(f, E.tig.s, E.tig.e + 10)}>about fifteen times tighter</Write>
       </div>
