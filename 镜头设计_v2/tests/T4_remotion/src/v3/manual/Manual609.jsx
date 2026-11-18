@@ -12,7 +12,7 @@ const E = evMap(K);
 const L0 = [300, 1000], L1 = [1545, 330], R0 = [820, 1000], R1 = [1575, 330], C0 = [560, 1000], C1 = [1560, 330];
 const lerp = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
 const DASH = [0, 0.2, 0.36, 0.49, 0.6, 0.69, 0.765, 0.83, 0.88, 0.92, 0.95, 0.975];
-const END = {x: 1560, y: 288, r: 64};
+const END = {x: 1560, y: 282, r: 84};
 
 // 四个路边框：中心、宽高、标签、缩放（越远越小）
 const BOX = [
@@ -72,7 +72,7 @@ const Scene = () => {
                 [E.c_box.l, 450, 520], [E.c_d.l, 620, 470], [E.a_box.l, 1760, 470], [E.a_x.l, 1580, 455], [E.a_d.l, 1760, 700],
                 [E.w_box.l, 890, 340], [E.w_x.l, 1060, 305], [E.w_d.l, 1220, 290], [E.srv.l, 200, 520], [E.cost2.l, 790, 245],
                 [E.plug.l, 660, 450], [E.too.l, 640, 300], [E.prize.l, 1720, 200], [E.hosp.l, 1730, 330], [E.treat.l, 1700, 420],
-                [E.pat.l, 1780, 390], [K.len_f, 1781, 391]];
+                [E.pat.l, 1790, 410], [K.len_f, 1791, 411]];
   const keyOp = (i) => (i === 1 ? 1 : 1 - span(dn[0], 0, 0.8));
   const keyDy = (i) => (i === 1 ? 0 : 34 * dn[0]);
   return (
@@ -155,10 +155,10 @@ const Scene = () => {
       {/* 路尽头：问号 → 医院和病人 */}
       <div style={{position: "absolute", left: END.x - 40, top: END.y - 52, width: 80, textAlign: "center", fontSize: 92, lineHeight: "100px", color: RED, opacity: q,
                    transform: `scale(${1.3 - 0.3 * span(f, E.prize.s + 8, E.prize.l + 6, out)})`}}>?</div>
-      <Part name="hospital" cx={END.x} cy={END.y + 4} w={68} at={E.hosp.s + 4} f={f} gate={[0.5, 1]} flood={16} />
-      <Part name="person_w" cx={1666} cy={312} w={44} at={E.pat.s} f={f} gate={[0.5, 1]} flood={12} />
-      <Part name="person_w" cx={1720} cy={312} w={44} at={E.pat.s + 5} f={f} gate={[0.5, 1]} flood={12} />
-      <div style={{position: "absolute", left: 1080, top: 214, width: 400, textAlign: "right", fontSize: 34, lineHeight: "42px", fontStyle: "italic"}}>
+      <Part name="hospital" cx={END.x} cy={END.y - 4} w={74} at={E.hosp.s + 4} f={f} gate={[0.5, 1]} flood={16} />
+      <Part name="person_w" cx={1688} cy={318} w={44} at={E.pat.s} f={f} gate={[0.5, 1]} flood={12} />
+      <Part name="person_w" cx={1740} cy={318} w={44} at={E.pat.s + 5} f={f} gate={[0.5, 1]} flood={12} />
+      <div style={{position: "absolute", left: 1056, top: 206, width: 400, textAlign: "right", fontSize: 34, lineHeight: "42px", fontStyle: "italic"}}>
         <div><Write p={span(f, E.treat.s - 6, E.treat.e)}>new treatments</Write></div>
         <div style={{color: RED}}><Write p={span(f, E.pat.s, E.pat.e)}>for patients</Write></div>
       </div>
