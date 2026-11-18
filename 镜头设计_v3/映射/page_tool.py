@@ -172,7 +172,8 @@ def check(name, stills_only=False):
         digits = len("".join(ch for ch in first if ch.isdigit()))
         mp4 = OUT / f"{C}.mp4"
         run([FF, "-y", "-loglevel", "error", "-framerate", "60", "-i", fr / f"element-%0{digits}d.png", "-i", PUB / f"{safe(name)}.wav",
-             "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "16", "-c:a", "aac", "-b:a", "192k", "-shortest", mp4], check=True)
+             "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "16", "-c:a", "aac", "-b:a", "192k", "-shortest", ROOT / "_tmp" / mp4.name], check=True)
+        shutil.move(ROOT / "_tmp" / mp4.name, mp4)          # ffmpeg 直接写 G 盘会被拒（_cache 在 G 盘），先写 D 盘再挪
         for f in marks:
             src = fr / f"element-{f:0{digits}d}.png"
             if src.exists():
