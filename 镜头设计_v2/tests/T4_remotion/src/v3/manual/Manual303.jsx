@@ -11,7 +11,7 @@ import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, Bead, evMap, Label,
 const E = evMap(K);
 const io = Easing.inOut(Easing.cubic);
 const LY = 520, LW = 190, LH = LW * 743 / 520;
-const LOCK = [{x: 700, sx: 1, sy: 1}, {x: 1160, sx: 0.82, sy: 1.12}, {x: 1620, sx: 1.22, sy: 0.84}];
+const LOCK = [{x: 700, sx: 1, sy: 1}, {x: 1160, sx: 0.82, sy: 1.12}, {x: 1620, sx: 0.85, sy: 0.85}];
 const hole = (i) => LY + 0.143 * LH * LOCK[i].sy;                 // 锁孔高度
 const left = (i) => LOCK[i].x - LW * LOCK[i].sx / 2;              // 锁身左边
 const KW = 240, KH = KW * 312 / 1096;
