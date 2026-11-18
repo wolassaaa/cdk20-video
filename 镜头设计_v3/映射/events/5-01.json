@@ -231,6 +231,21 @@
    }
   },
   {
+   "id": "it",
+   "obj": "it",
+   "verb": "morph",
+   "at": {
+    "word": "5-01.w028",
+    "off": 0
+   },
+   "means": "it：第一个瓶慢慢朝 CDK20 倾过去，像在倒",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
    "id": "takes",
    "obj": "takes",
    "verb": "move",

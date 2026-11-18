@@ -731,6 +731,26 @@
    "F_end": 38540
   },
   {
+   "id": "it",
+   "obj": "it",
+   "verb": "morph",
+   "ease": "inout",
+   "means": "it：第一个瓶慢慢朝 CDK20 倾过去，像在倒",
+   "f_start": 886,
+   "f_land": 906,
+   "f_end": 1070,
+   "until": "5-01.s4",
+   "word": "5-01.w028",
+   "w": "it",
+   "key": "it#1",
+   "sid": "5-01.s4",
+   "word_f0": 906,
+   "tool": "remotion",
+   "F_start": 38356,
+   "F_land": 38376,
+   "F_end": 38540
+  },
+  {
    "id": "takes",
    "obj": "takes",
    "verb": "move",

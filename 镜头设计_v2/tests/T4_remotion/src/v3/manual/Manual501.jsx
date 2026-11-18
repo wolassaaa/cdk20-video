@@ -30,9 +30,11 @@ const Scene = () => {
   const ptr = span(f, E.kd.s, E.kd.l, Easing.out(Easing.back(1.5)));
   const thick = span(f, E.tight.s, E.tight.l + 6, ease);
   const snap = span(f, E.grab2.s, E.grab2.l + 4, out);
+  // 第一个瓶：molecule 起慢慢倾向 CDK20（it 时到位），贴住后回正
+  const tilt = 24 * span(f, E.molec.s, E.it.l, io) * (1 - span(f, E.grab2.s, E.grab2.l + 24, ease));
   const bead = [[0, 130, 96], [E.title.l, 700, 96], [E.sub.l, 1100, 96], [E.seven.l, 120, 650], [E.mol.l, 900, 880], [E.made.l, 760, 560],
                 [E.lab.l, 760, 480], [E.any.l, 1250, 300], [E.grab.l, 1300, 430], [E.cdk.l, 1250, 600], [E.grip.l, 1250, 650], [E.meas.l, 1480, 330],
-                [E.kd.l, 1720, 300], [E.rough.l, 1720, 560], [E.how.l, 420, 560], [E.molec.l, 900, 330], [E.takes.l, 300, 600], [E.grab2.l, 1260, 520],
+                [E.kd.l, 1720, 300], [E.rough.l, 1720, 560], [E.how.l, 420, 560], [E.molec.l, 900, 330], [E.it.l, 120, 560], [E.takes.l, 300, 600], [E.grab2.l, 1260, 520],
                 [E.half.l, 1250, 380], [E.prot.l, 1300, 610], [E.lower.l, 1740, 850], [E.means.l, 1480, 880], [E.tight.l, 1800, 880], [K.len_f, 1801, 881]];
   return (
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
@@ -89,7 +91,8 @@ const Scene = () => {
         const t = span(f, landT(i) - 12, landT(i), Easing.in(Easing.quad));
         const bump = f > landT(i) ? 6 * Math.exp(-(f - landT(i)) / 5) * Math.sin((f - landT(i)) / 2) : 0;
         return t <= 0 ? null : (
-          <div key={i} style={{position: "absolute", left: 0, top: -110 * (1 - t) + bump, opacity: span(t, 0, 0.4)}}>
+          <div key={i} style={{position: "absolute", left: 0, top: -110 * (1 - t) + bump, opacity: span(t, 0, 0.4),
+                               transform: i === 0 ? `rotate(${tilt}deg)` : undefined, transformOrigin: `${TX(0)}px ${TY + 60}px`}}>
             <Part name="tube" cx={TX(i)} cy={TY} w={TW} at={-100} f={0} />
           </div>
         );
