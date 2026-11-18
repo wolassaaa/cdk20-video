@@ -43,7 +43,7 @@ fi
 if [ "$TASK" = PAGELOOK ]; then
   PROMPT="HKBU SCIE1007 课程作业的科普视频。现在是 $(date '+%Y-%m-%d %H:%M') 韩国时间。你是二维页面的看片员。先读 $ROOT/镜头设计_v3/映射/GLM页面手册.md 第 3、5 节和 $ROOT/镜头设计_v3/映射/GLM页面任务.md 里段 $WHO 那一节。再读这段的 report.md（在 $ROOT/镜头设计_v3/映射/_cache/pages/ 下，合成名见手册第 1 节），用 Read 逐张打开里面列出的静帧 png。对每张图查：字或零件有没有互相重叠、压线、出框、被裁掉；出镜页图形有没有挡到人；字是不是太小看不清；画面是不是空、和任务单说的内容对不对；有没有错字。把结果写到同一目录的 look_report.md：第一行写 '看图：过' 或 '看图：不过'，下面逐张列问题（写清在哪个位置、哪个元素、建议怎么挪）。只用 Read 和 Write，只写 look_report.md。不删任何东西，不运行 git，不改页面代码。"
 fi
-case "$TASK" in G1|G4|G5|G6|CUT|PAGELOOK) MODEL=$VISION ;; PAGE) MODEL=$HEAVY ;; G3|G7) MODEL=$HEAVY ;; *) MODEL=$LIGHT ;; esac
+case "$TASK" in G1|G4|G5|G6|CUT|PAGELOOK) MODEL=$VISION ;; PAGE) MODEL=$LIGHT ;; G3|G7) MODEL=$HEAVY ;; *) MODEL=$LIGHT ;; esac
 [ -n "$GLM_MODEL_OVERRIDE" ] && MODEL=$GLM_MODEL_OVERRIDE
 case " $ALLOWED " in *" $MODEL "*) ;; *) echo "不允许的模型：$MODEL（只许 $ALLOWED）"; exit 2 ;; esac
 echo "model: $MODEL"
@@ -87,7 +87,7 @@ case "$1" in
   pageprep|pagecheck|pagestills)
        case "$2" in [0-9]-[0-9][0-9]|[0-9]-[0-9][0-9]+[0-9]-[0-9][0-9]|[0-9]-[0-9][0-9]+[0-9]-[0-9][0-9]+[0-9]-[0-9][0-9]+[0-9]-[0-9][0-9]) ;; *) echo "segment like 3-02 or 4-04+4-05"; exit 2 ;; esac
        export PYTHONIOENCODING=utf-8; T="$ROOT/镜头设计_v3/映射/page_tool.py"
-       case "$1" in pageprep) exec "$PY" "$T" prep "$2" ;; pagecheck) exec "$PY" "$T" check "$2" ;; pagestills) exec "$PY" "$T" check "$2" --stills-only ;; esac ;;
+       mkdir -p "$ROOT/_env/tmp"; export TEMP="$ROOT/_env/tmp" TMP="$ROOT/_env/tmp" TMPDIR="$ROOT/_env/tmp"; L="$ROOT/_env/tmp/render_lock"; until mkdir "$L" 2>/dev/null; do sleep 10; done; trap 'rmdir "$L"' EXIT; case "$1" in pageprep) "$PY" "$T" prep "$2" ;; pagecheck) "$PY" "$T" check "$2" ;; pagestills) "$PY" "$T" check "$2" --stills-only ;; esac ;;
   *) echo "bash _env/ft.sh run <A|B|C|D> <steps>   |   bash _env/ft.sh listen <A|B|C|D>   |   bash _env/ft.sh ffprobe <args>   |   bash _env/ft.sh grade"; "$PY" "$FLOW/run.py" --help ;;
 esac
 FT

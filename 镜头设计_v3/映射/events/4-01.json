@@ -1,277 +1,384 @@
 {
  "schema": "cdk20.events/1",
  "group": "4-01",
- "tool": "warp_source",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/4-01.json",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 4-01（VO）：目标 1，结构预测。团队 → 科幻云；问 AI 猜形状；一串积木折成三维；顺序 = 序列；AlphaFold 从已知结构学；给序列 → 预测形状 + 每部分多有把握。页面 Manual401.jsx。",
  "holds": [],
  "events": [
   {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
+   "id": "title",
+   "obj": "title",
+   "verb": "appear",
    "at": {
-    "word": "4-01.w001",
-    "off": -3
+    "word": "4-01.w003",
+    "off": 0
    },
+   "means": "team：标题 Objective 1",
+   "tool": "remotion",
+   "lead": 10,
    "until": {
-    "dur": 246
-   },
-   "ease": "linear",
-   "means": "旧动画源片 1.37→4.75 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    1.367,
-    4.75
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage01",
-   "obj": "footage",
-   "verb": "move",
+   "id": "people",
+   "obj": "people",
+   "verb": "grow",
+   "at": {
+    "word": "4-01.w005",
+    "off": 0
+   },
+   "means": "something：三个小人",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "cloud",
+   "obj": "cloud",
+   "verb": "grow",
+   "at": {
+    "word": "4-01.w007",
+    "off": 0
+   },
+   "means": "once：想法云",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "like",
+   "obj": "like",
+   "verb": "appear",
+   "at": {
+    "word": "4-01.w009",
+    "off": 0
+   },
+   "means": "like：云边闪线",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "fic",
+   "obj": "fic",
+   "verb": "appear",
    "at": {
     "word": "4-01.w011",
     "off": 0
    },
+   "means": "science fiction：红批注",
+   "tool": "remotion",
+   "lead": 10,
    "until": {
-    "dur": 263
-   },
-   "ease": "linear",
-   "means": "旧动画源片 4.75→7.38 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    4.75,
-    7.383
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage02",
-   "obj": "footage",
-   "verb": "move",
+   "id": "ai",
+   "obj": "ai",
+   "verb": "grow",
    "at": {
-    "word": "4-01.w020",
+    "word": "4-01.w015",
     "off": 0
    },
+   "means": "AI：芯片长出，小人到芯片的箭头",
+   "tool": "remotion",
+   "lead": 10,
    "until": {
-    "dur": 210
-   },
-   "ease": "linear",
-   "means": "旧动画源片 7.38→10.30 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    7.383,
-    10.3
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "4-01.w018"
+   }
   },
   {
-   "id": "footage03",
-   "obj": "footage",
-   "verb": "move",
+   "id": "guess",
+   "obj": "guess",
+   "verb": "morph",
+   "at": {
+    "word": "4-01.w019",
+    "off": 0
+   },
+   "means": "guess the shape：虚线泡泡加问号",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "prot",
+   "obj": "prot",
+   "verb": "appear",
+   "at": {
+    "word": "4-01.w022",
+    "off": 0
+   },
+   "means": "protein：标签",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-01.w025"
+   }
+  },
+  {
+   "id": "chain",
+   "obj": "chain",
+   "verb": "grow",
+   "at": {
+    "word": "4-01.w025",
+    "off": 0
+   },
+   "means": "chain：一串珠子",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "word": "4-01.w027"
+   }
+  },
+  {
+   "id": "blocks",
+   "obj": "blocks",
+   "verb": "appear",
+   "at": {
+    "word": "4-01.w028",
+    "off": 0
+   },
+   "means": "building blocks：标签",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "4-01.w029"
+   }
+  },
+  {
+   "id": "fold",
+   "obj": "fold",
+   "verb": "morph",
    "at": {
     "word": "4-01.w030",
     "off": 0
    },
+   "means": "folds：珠子折起来",
+   "tool": "remotion",
+   "lead": 6,
    "until": {
-    "dur": 321
-   },
-   "ease": "linear",
-   "means": "旧动画源片 10.30→13.72 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    10.3,
-    13.717
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "4-01.w033"
+   }
   },
   {
-   "id": "footage04",
-   "obj": "footage",
-   "verb": "move",
+   "id": "d3",
+   "obj": "d3",
+   "verb": "appear",
+   "at": {
+    "word": "4-01.w034",
+    "off": 0
+   },
+   "means": "3D shape：标签",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "order",
+   "obj": "order",
+   "verb": "appear",
+   "at": {
+    "word": "4-01.w036",
+    "off": 0
+   },
+   "means": "order：珠子编号 1–12",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "4-01.w039"
+   }
+  },
+  {
+   "id": "seq",
+   "obj": "seq",
+   "verb": "appear",
+   "at": {
+    "word": "4-01.w042",
+    "off": 0
+   },
+   "means": "sequence：括号和标签",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "af",
+   "obj": "af",
+   "verb": "appear",
    "at": {
     "word": "4-01.w043",
     "off": 0
    },
+   "means": "AlphaFold：芯片名",
+   "tool": "remotion",
+   "lead": 8,
    "until": {
-    "dur": 45
-   },
-   "ease": "linear",
-   "means": "旧动画源片 13.72→14.33 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    13.717,
-    14.333
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "4-01.w044"
+   }
   },
   {
-   "id": "footage05",
-   "obj": "footage",
-   "verb": "move",
+   "id": "lrn",
+   "obj": "lrn",
+   "verb": "appear",
    "at": {
     "word": "4-01.w044",
     "off": 0
    },
+   "means": "learned：芯片亮一下",
+   "tool": "remotion",
+   "lead": 6,
    "until": {
-    "dur": 30
-   },
-   "ease": "linear",
-   "means": "旧动画源片 14.33→15.02 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    14.333,
-    15.017
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "4-01.w046"
+   }
   },
   {
-   "id": "footage06",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "4-01.w045",
-    "off": 0
-   },
-   "until": {
-    "dur": 15
-   },
-   "ease": "linear",
-   "means": "旧动画源片 15.02→15.40 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    15.017,
-    15.4
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage07",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "4-01.w046",
-    "off": 0
-   },
-   "until": {
-    "dur": 19
-   },
-   "ease": "linear",
-   "means": "旧动画源片 15.40→15.83 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    15.4,
-    15.833
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage08",
-   "obj": "footage",
-   "verb": "move",
+   "id": "known",
+   "obj": "known",
+   "verb": "grow",
    "at": {
     "word": "4-01.w047",
     "off": 0
    },
+   "means": "known structures：三个小结构",
+   "tool": "remotion",
+   "lead": 12,
    "until": {
-    "dur": 92
-   },
-   "ease": "linear",
-   "means": "旧动画源片 15.83→16.38 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    15.833,
-    16.383
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "4-01.w048"
+   }
   },
   {
-   "id": "footage09",
-   "obj": "footage",
-   "verb": "move",
+   "id": "how",
+   "obj": "how",
+   "verb": "appear",
    "at": {
-    "word": "4-01.w049",
+    "word": "4-01.w048",
     "off": 0
    },
+   "means": "how：结构到芯片的箭头",
+   "tool": "remotion",
+   "lead": 6,
    "until": {
-    "dur": 25
-   },
-   "ease": "linear",
-   "means": "旧动画源片 16.38→16.68 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    16.383,
-    16.683
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "4-01.w049"
+   }
   },
   {
-   "id": "footage10",
-   "obj": "footage",
+   "id": "learn",
+   "obj": "learn",
    "verb": "move",
    "at": {
     "word": "4-01.w050",
     "off": 0
    },
+   "means": "fold：小结构飞进芯片",
+   "tool": "remotion",
+   "lead": 30,
    "until": {
-    "dur": 49
-   },
-   "ease": "linear",
-   "means": "旧动画源片 16.68→17.95 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    16.683,
-    17.95
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage11",
-   "obj": "footage",
+   "id": "give",
+   "obj": "give",
    "verb": "move",
    "at": {
-    "word": "4-01.w051",
+    "word": "4-01.w053",
     "off": 0
    },
+   "means": "give it one：序列条飞进芯片",
+   "tool": "remotion",
+   "lead": 20,
    "until": {
-    "dur": 195
-   },
-   "ease": "linear",
-   "means": "旧动画源片 17.95→20.25 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    17.95,
-    20.25
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "4-01.w054"
+   }
   },
   {
-   "id": "footage12",
-   "obj": "footage",
-   "verb": "move",
+   "id": "pred",
+   "obj": "pred",
+   "verb": "appear",
+   "at": {
+    "word": "4-01.w056",
+    "off": 0
+   },
+   "means": "predicts：芯片到形状的箭头",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "4-01.w057"
+   }
+  },
+  {
+   "id": "shape",
+   "obj": "shape",
+   "verb": "appear",
+   "at": {
+    "word": "4-01.w058",
+    "off": 0
+   },
+   "means": "shape：预测框",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-01.w059"
+   }
+  },
+  {
+   "id": "plus",
+   "obj": "plus",
+   "verb": "appear",
    "at": {
     "word": "4-01.w059",
     "off": 0
    },
+   "means": "plus：图例框",
+   "tool": "remotion",
+   "lead": 6,
    "until": {
-    "dur": 114
-   },
-   "ease": "linear",
-   "means": "旧动画源片 20.25→21.38 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    20.25,
-    21.383
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "4-01.w060"
+   }
   },
   {
-   "id": "footage13",
-   "obj": "footage",
-   "verb": "move",
+   "id": "sure",
+   "obj": "sure",
+   "verb": "appear",
    "at": {
-    "word": "4-01.w064",
+    "word": "4-01.w061",
     "off": 0
    },
+   "means": "how sure：图例",
+   "tool": "remotion",
+   "lead": 8,
    "until": {
-    "dur": 56
+    "word": "4-01.w064"
+   }
+  },
+  {
+   "id": "each",
+   "obj": "each",
+   "verb": "morph",
+   "at": {
+    "word": "4-01.w066",
+    "off": 0
    },
-   "ease": "linear",
-   "means": "旧动画源片 21.38→21.93 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    21.383,
-    21.933
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "means": "each part：珠子按把握程度上色",
+   "tool": "remotion",
+   "lead": 50,
+   "until": {
+    "sentence_end": true
+   }
   }
  ]
 }
