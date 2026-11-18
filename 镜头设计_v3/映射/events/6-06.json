@@ -1,49 +1,204 @@
 {
  "schema": "cdk20.events/1",
  "group": "6-06",
- "tool": "warp_source",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/6-06.json",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 6 章记分板第三行 6-06（画外音）：Time；左格一条很长的路 10–17 years，开头一小段画红；右格短路 30 days，再接一段 another 30。页面 Manual606.jsx。",
  "holds": [],
  "events": [
   {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
+   "id": "lbl",
+   "obj": "lbl",
+   "verb": "appear",
    "at": {
     "word": "6-06.w001",
-    "off": -9
+    "off": 0
    },
+   "means": "Time：行标题",
+   "tool": "remotion",
+   "lead": 8,
    "until": {
-    "dur": 639
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.00→12.70 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.0,
-    12.7
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "6-06.w001"
+   }
   },
   {
-   "id": "footage01",
-   "obj": "footage",
-   "verb": "move",
+   "id": "road",
+   "obj": "road",
+   "verb": "grow",
+   "at": {
+    "word": "6-06.w004",
+    "off": 0
+   },
+   "means": "ten-to-seventeen-year：长路画出",
+   "tool": "remotion",
+   "lead": 50,
+   "until": {
+    "word": "6-06.w004"
+   }
+  },
+  {
+   "id": "yrs",
+   "obj": "yrs",
+   "verb": "appear",
+   "at": {
+    "word": "6-06.w005",
+    "off": 0
+   },
+   "means": "road：标签 10–17 years",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-06.w005"
+   }
+  },
+  {
+   "id": "hitl",
+   "obj": "hitl",
+   "verb": "appear",
+   "at": {
+    "word": "6-06.w009",
+    "off": 0
+   },
+   "means": "hit：路起点标 finding a hit",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "6-06.w009"
+   }
+  },
+  {
+   "id": "brk",
+   "obj": "brk",
+   "verb": "grow",
+   "at": {
+    "word": "6-06.w010",
+    "off": 0
+   },
+   "means": "just：括号框住开头一段",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-06.w010"
+   }
+  },
+  {
+   "id": "red",
+   "obj": "red",
+   "verb": "morph",
+   "at": {
+    "word": "6-06.w012",
+    "off": 0
+   },
+   "means": "opening：开头一段画红",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "6-06.w013"
+   }
+  },
+  {
+   "id": "now",
+   "obj": "now",
+   "verb": "appear",
+   "at": {
+    "word": "6-06.w014",
+    "off": 0
+   },
+   "means": "Now：右栏亮起",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-06.w014"
+   }
+  },
+  {
+   "id": "r1",
+   "obj": "r1",
+   "verb": "grow",
+   "at": {
+    "word": "6-06.w015",
+    "off": 0
+   },
+   "means": "30：短路第一段画出",
+   "tool": "remotion",
+   "lead": 24,
+   "until": {
+    "word": "6-06.w015"
+   }
+  },
+  {
+   "id": "d30",
+   "obj": "d30",
+   "verb": "appear",
+   "at": {
+    "word": "6-06.w016",
+    "off": 0
+   },
+   "means": "days：标签 30 days",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "6-06.w016"
+   }
+  },
+  {
+   "id": "fh",
+   "obj": "fh",
+   "verb": "appear",
+   "at": {
+    "word": "6-06.w020",
+    "off": 0
+   },
+   "means": "hit：第一段终点小旗",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-06.w020"
+   }
+  },
+  {
+   "id": "bk",
+   "obj": "bk",
+   "verb": "appear",
+   "at": {
+    "word": "6-06.w024",
+    "off": 0
+   },
+   "means": "key：钥匙落在第一段终点",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-06.w024"
+   }
+  },
+  {
+   "id": "r2",
+   "obj": "r2",
+   "verb": "grow",
    "at": {
     "word": "6-06.w026",
     "off": 0
    },
+   "means": "another：短路再接一段",
+   "tool": "remotion",
+   "lead": 20,
    "until": {
-    "dur": 39
+    "word": "6-06.w026"
+   }
+  },
+  {
+   "id": "a30",
+   "obj": "a30",
+   "verb": "move",
+   "at": {
+    "word": "6-06.w027",
+    "off": 0
    },
-   "ease": "linear",
-   "means": "旧动画源片 12.70→13.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    12.7,
-    13.45
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "means": "30：标签 another 30，钥匙滑到终点",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   }
   }
  ]
 }
