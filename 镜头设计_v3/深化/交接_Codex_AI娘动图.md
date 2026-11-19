@@ -60,3 +60,22 @@ HKBU SCIE1007 课程作业的科普视频。片中有一段 30–50 秒的小插
 > Character: "DeepSeek". Long straight hair with a gradient from deep navy (#1F3A8A) at the roots to bright sky blue (#5FA8FF) at the tips, one ahoge strand, two small smooth whale-fin shaped head fins (blue, like little ears) on top of the head, a white maid headband with frills. Blue eyes (#2F6BFF). Outfit: deep-navy maid dress with puffed short sleeves, white frilled apron with a small cute cartoon whale print on the pocket, a blue ribbon bow at the collar. A big glossy blue whale tail visible behind her at hip height. Bright, slightly smug smile. Personality: earnest genius, a little tsundere, loves snacks.
 
 输出覆盖到 `G:/cdk20/work/mascots/codex/gpt/` 和 `deepseek/`（旧图先改名加 `_v0` 后缀保留，不要删）。README 补上这两位的来源：GPT after ZipZipPipe (Bilibili)；DeepSeek after 'Mingyue' by Shangshan Wuxing (CC BY-NC-SA 4.0), maid-whale version by ZipZipPipe。
+
+## 11-21 第三批（导演：前两批不像，必须一比一照参考图）—— 取代上面所有角色描述
+导演看过：Q 版重画和凭文字描述生成的都不行。**这一批必须把参考图作为输入图（图生图 / 参考图编辑），一比一保持原设定**：脸型、发型、发色、眼睛、每一件服装和配饰的形状、颜色、位置都和参考图一致，画风也照参考图（精致二次元立绘，细线、柔和上色），**不要 Q 版、不要简化、不要自己发挥**。
+
+参考图（正 / 侧 / 背三视图，取最左边的正面）：
+- Claude：`G:/cdk20/work/mascots/refs/claude.png` —— 橙色超长直发，头顶右侧橙色放射状花朵加黑丝带发饰，米白泡泡袖长礼服、黑色束腰、胸前黑领结、裙身橙色侧片和黑色层叠下摆、裙摆橙色刺绣花纹，胸前和腰侧橙色花朵加黑蝴蝶结。
+- GPT：`G:/cdk20/work/mascots/refs/gpt.png` —— 白色长卷发、白色弯龙角、尖耳、头侧白色绳结花饰、淡紫眼，白色露肩高开衩长礼服、荷叶边长袖、腰间绳结链和流苏、裙上绳结图案，背后白色龙翼，白色带鳞龙尾。
+- DeepSeek：`G:/cdk20/work/mascots/refs/deepseek.png` —— 蓝色渐变长卷发、呆毛、白色女仆头饰加蓝蝴蝶结、头两侧蓝色鲸鳍耳，蓝眼，深蓝女仆长裙、白色荷叶边围裙（围裙上小鲸鱼图案）、黑色领结、金色刺绣，身后深蓝鲸鱼尾。
+
+每个角色出 6 张，**取参考图正面，构图改成膝盖以上的正面立绘**，人物占画面高度 90%，居中，透明背景（做不到就纯 #00FF00）：
+1. open：与参考图正面表情一致（Claude 平静微笑、GPT 浅笑、DeepSeek 开心张嘴可改成闭嘴微笑）。
+2. blink：双眼闭。
+3. wink：一只眼闭（Claude 右眼、GPT 左眼、DeepSeek 右眼），另一只睁，俏皮笑。
+4. talk_a：嘴张开"啊"。
+5. talk_o：嘴圆"哦"。
+6. wave：一只手抬到脸旁挥手，其余不变。
+做法：先以参考图正面为输入出 open；其余 5 张以 open 为输入图做局部编辑，只改眼、嘴、手，其他像素保持一致。每张出来先和参考图并排自查：发饰、配饰、服装纹样少一样或变形就重出。wink GIF 同前（open 5 帧、wink 4 帧、open 3 帧）。
+
+输出到 `G:/cdk20/work/mascots/codex/v3/<claude|gpt|deepseek>/`（新目录，旧图不动不删），并出一张三人 open 和参考图正面的并排对比图 `v3/compare.png`。README 写清每张用了哪张输入图。高推理强度，一次出对。
