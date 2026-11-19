@@ -5,9 +5,10 @@
 import React from "react";
 import {AbsoluteFill, Audio, Composition, Easing, registerRoot, staticFile, useCurrentFrame} from "remotion";
 import K from "./keys_2-07.json";
-import {PAPER, INK, SOFT, RED, ease, out, span, Part, Tag, Arrow, Bead, evMap, Label, Pen, PageFrame, Source, Plate, Write} from "./kit.jsx";
+import {PAPER, INK, SOFT, RED, ease, out, span, Part, Tag, Arrow, evMap, Label, Pen, PageFrame, Source, Plate, Write, Lens, guidePlan} from "./kit.jsx";
 
 const E = evMap(K);
+const GP = guidePlan(K);   // 视线引导（11-20，替代红色料珠）：事件表 guide 字段 → resolve.py → keys.guides
 const AR = {magnifier1: 458 / 688, tower: 184 / 677, chip: 1};
 const KINDS = ["original study", "method paper", "method paper", "review", "book chapter", "Perspective"];
 const Q = [["q1", "What kind of source is it?"], ["q2", "How much of it did we read?"], ["q3", "How strong is the evidence?"], ["q4", "Who did the work?"], ["q5", "Were there controls and repeats?"]];
@@ -21,11 +22,8 @@ const Scene = () => {
   const coi = span(f, E.coi.s, E.coi.e);
   const stamp = span(f, E.open.s, E.open.s + 8, out);
   const u1 = span(f, E.useful.s, E.useful.s + 14, out), u2 = span(f, E.notind.s, E.notind.s + 14, out);
-  const bead = [
-    [0, 140, 120], [E.cards.l, 160, 170], [E.head.l, QX, QY - 20], ...Q.map(([id], i) => [E[id].l, QX - 40, QY + 70 + i * 64]),
-    [E.note.l, 200, 640], [E.coi.l, 520, 660], [E.tower.l, 560, 760], [E.chip.l, 300, 800], [E.open.l, 700, 860], [E.useful.l, 1240, 720], [E.notind.l, 1080, 900], [K.len_f, 1082, 902],
-  ];
   return (
+    <Lens plan={GP} f={f}>
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("2-07.wav")} />
       <PageFrame />
@@ -82,8 +80,8 @@ const Scene = () => {
       <Plate x={1010} y={780} w={820} p={u2}><span style={{fontSize: 56, fontStyle: "italic"}}>not an independent check.</span></Plate>
 
       <Source p={span(f, E.cards.l, E.cards.l + 20)}>Ren et al., Chem. Sci. 2023, author affiliations and Conflicts of interest · Illustration</Source>
-      <Bead K={bead} f={f} />
     </AbsoluteFill>
+    </Lens>
   );
 };
 

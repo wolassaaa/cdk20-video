@@ -664,6 +664,9 @@
    "sid": "2-07.s1",
    "word_f0": 26,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 14110,
    "F_land": 14114,
    "F_end": 14171
@@ -684,9 +687,25 @@
    "sid": "2-07.s1",
    "word_f0": 112,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "magnifier1"
+    ]
+   },
    "F_start": 14170,
    "F_land": 14200,
-   "F_end": 14337
+   "F_end": 14337,
+   "g_start": 86,
+   "g_on": 104,
+   "g_end": 232,
+   "g_off": 262,
+   "g_tick": 108,
+   "G_start": 14174,
+   "G_on": 14192,
+   "G_end": 14320,
+   "G_off": 14350,
+   "G_tick": 14196
   },
   {
    "id": "head",
@@ -704,6 +723,9 @@
    "sid": "2-07.s1",
    "word_f0": 58,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 14146,
    "F_land": 14146,
    "F_end": 14235
@@ -724,6 +746,9 @@
    "sid": "2-07.s1",
    "word_f0": 188,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 14276,
    "F_land": 14276,
    "F_end": 14337
@@ -744,6 +769,9 @@
    "sid": "2-07.s1",
    "word_f0": 289,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 14377,
    "F_land": 14377,
    "F_end": 14457
@@ -764,6 +792,9 @@
    "sid": "2-07.s1",
    "word_f0": 399,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 14487,
    "F_land": 14487,
    "F_end": 14576
@@ -784,6 +815,9 @@
    "sid": "2-07.s2",
    "word_f0": 552,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 14640,
    "F_land": 14640,
    "F_end": 14698
@@ -804,6 +838,9 @@
    "sid": "2-07.s3",
    "word_f0": 675,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 14743,
    "F_land": 14763,
    "F_end": 14857
@@ -824,6 +861,9 @@
    "sid": "2-07.s4",
    "word_f0": 847,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 14935,
    "F_land": 14935,
    "F_end": 14995
@@ -844,6 +884,9 @@
    "sid": "2-07.s4",
    "word_f0": 940,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 15022,
    "F_land": 15028,
    "F_end": 15223
@@ -864,9 +907,25 @@
    "sid": "2-07.s4",
    "word_f0": 1163,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "tower"
+    ]
+   },
    "F_start": 15247,
    "F_land": 15251,
-   "F_end": 15328
+   "F_end": 15328,
+   "g_start": 1137,
+   "g_on": 1155,
+   "g_end": 1240,
+   "g_off": 1270,
+   "g_tick": 1159,
+   "G_start": 15225,
+   "G_on": 15243,
+   "G_end": 15328,
+   "G_off": 15358,
+   "G_tick": 15247
   },
   {
    "id": "chip",
@@ -884,9 +943,25 @@
    "sid": "2-07.s4",
    "word_f0": 1306,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chip"
+    ]
+   },
    "F_start": 15390,
    "F_land": 15394,
-   "F_end": 15513
+   "F_end": 15513,
+   "g_start": 1280,
+   "g_on": 1298,
+   "g_end": 1425,
+   "g_off": 1455,
+   "g_tick": 1302,
+   "G_start": 15368,
+   "G_on": 15386,
+   "G_end": 15513,
+   "G_off": 15543,
+   "G_tick": 15390
   },
   {
    "id": "open",
@@ -904,6 +979,9 @@
    "sid": "2-07.s5",
    "word_f0": 1523,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 15605,
    "F_land": 15611,
    "F_end": 15634
@@ -924,6 +1002,9 @@
    "sid": "2-07.s6",
    "word_f0": 1573,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 15661,
    "F_land": 15661,
    "F_end": 15747
@@ -944,6 +1025,9 @@
    "sid": "2-07.s6",
    "word_f0": 1696,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 15784,
    "F_land": 15784,
    "F_end": 15869
@@ -964,9 +1048,89 @@
    "sid": "2-07.s4",
    "word_f0": 835,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 14913,
    "F_land": 14923,
    "F_end": 14995
+  }
+ ],
+ "guides": [
+  {
+   "id": "mag",
+   "target": [
+    "magnifier1"
+   ],
+   "kind": "focus",
+   "gs": 86,
+   "gon": 104,
+   "land": 112,
+   "gend": 232,
+   "goff": 262,
+   "tick": 108,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 82,
+   "events": [
+    "mag"
+   ],
+   "G_start": 14174,
+   "G_on": 14192,
+   "G_land": 14200,
+   "G_end": 14320,
+   "G_off": 14350,
+   "G_tick": 14196
+  },
+  {
+   "id": "tower",
+   "target": [
+    "tower"
+   ],
+   "kind": "focus",
+   "gs": 1137,
+   "gon": 1155,
+   "land": 1163,
+   "gend": 1240,
+   "goff": 1270,
+   "tick": 1159,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 1159,
+   "events": [
+    "tower"
+   ],
+   "G_start": 15225,
+   "G_on": 15243,
+   "G_land": 15251,
+   "G_end": 15328,
+   "G_off": 15358,
+   "G_tick": 15247
+  },
+  {
+   "id": "chip",
+   "target": [
+    "chip"
+   ],
+   "kind": "focus",
+   "gs": 1280,
+   "gon": 1298,
+   "land": 1306,
+   "gend": 1425,
+   "goff": 1455,
+   "tick": 1302,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 1302,
+   "events": [
+    "chip"
+   ],
+   "G_start": 15368,
+   "G_on": 15386,
+   "G_land": 15394,
+   "G_end": 15513,
+   "G_off": 15543,
+   "G_tick": 15390
   }
  ],
  "problems": []

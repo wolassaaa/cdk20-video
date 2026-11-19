@@ -1,7 +1,7 @@
 // HKBU SCIE1007 课程作业的科普视频：二维说明书页共用部件（从 Manual205.jsx 提出来，第 1 章起各页共用）。
 // 零件图由 镜头设计_v3/inserts/manual_parts.py 从零件库正上方图做出（<名>_c.png 平涂、<名>_l.png 线稿、meta.json 尺寸）。
-import React from "react";
-import {Easing, Img, staticFile, continueRender, delayRender} from "remotion";
+import React, {createContext, useContext} from "react";
+import {Easing, Img, staticFile, continueRender, delayRender, getInputProps} from "remotion";
 import META from "./parts_meta.json";   // 零件图真实宽高（manual_parts.py 写的 meta.json 的拷贝）
 
 export const PAPER = "#EDE9DF", INK = "#1F1E1C", SOFT = "#6E6B63", RED = "#C8102E";
@@ -17,10 +17,14 @@ if (typeof window !== "undefined") {
 }
 
 // 零件：线稿先画出（左→右），平涂色从浇口点漫开，前沿一圈亮料，长满轻微过冲
-export const Part = ({name, cx, cy, w, ar: arGiven, at, gate = [0.5, 1], f, wipe = 12, flood = 24, children}) => {
+// gid：视线引导里的目标名（不给就用 name）。在 <Lens> 里、又不在 <Layer> 里时，零件自己读引导：没被点名就略虚，被点名加轮廓光和预颤。
+export const Part = ({name, gid, cx, cy, w, ar: arGiven, at, gate = [0.5, 1], f, wipe = 12, flood = 24, children}) => {
   // 宽高比一律按零件图实际尺寸，页面传的 ar 只在尺寸表里没有这个零件时才用
   const ar = META[name] ? META[name][0] / META[name][1] : arGiven;
   const h = w / ar;
+  const C = useContext(GuideCtx);
+  const L = C && !C.layered ? guideLook(C, [gid ?? name], at) : null;
+  const ndg = L && L.nudge ? nudge(f, L.nudge.land, {dir: [gate[0] - 0.5, gate[1] - 0.5], R: Math.hypot(w, h) / 2}) + " " : "";
   const pl = span(f, at - 2, at - 2 + wipe, out);
   const pc = span(f, at + 3, at + 3 + flood, Easing.inOut(Easing.quad));
   const r = pc * 150;
@@ -32,7 +36,7 @@ export const Part = ({name, cx, cy, w, ar: arGiven, at, gate = [0.5, 1], f, wipe
   const mRing = `radial-gradient(circle at ${g},transparent ${r - 16}%,#000 ${r - 5}%,transparent ${r}%)`;
   const box = {position: "absolute", left: 0, top: 0, width: w, height: h};
   return (
-    <div style={{position: "absolute", left: cx - w / 2, top: cy - h / 2, width: w, height: h, transform: `scale(${1 + bump})`}}>
+    <div style={{position: "absolute", left: cx - w / 2, top: cy - h / 2, width: w, height: h, transform: `${ndg}scale(${1 + bump})`, ...(L ? L.style : null)}}>
       <Img src={staticFile(`parts/${name}_c.png`)} style={{...box, WebkitMaskImage: mCol, maskImage: mCol}} />
       {pc > 0 && pc < 1 && <Img src={staticFile(`parts/${name}_c.png`)} style={{...box, WebkitMaskImage: mRing, maskImage: mRing, filter: "brightness(1.7) saturate(0.55)"}} />}
       <Img src={staticFile(`parts/${name}_l.png`)} style={{...box, opacity: 1 - 0.55 * pc, WebkitMaskImage: mLine, maskImage: mLine}} />
@@ -154,6 +158,151 @@ const BeadOld = ({K, f}) => {
 
 // 事件表：keys/<段>.json → E.id = {s, l, e}（f_start, f_land, f_end）
 export const evMap = (K) => Object.fromEntries(K.events.map((e) => [e.id, {s: e.f_start, l: e.f_land, e: e.f_end}]));
+
+// ---------------- 视线引导（替代红色料珠，设计见 镜头设计_v3/深化/05_视线引导.md，11-20）----------------
+// 画面上不多出东西：说到哪个零件，别的图层先略虚、变淡，被点名的那个保持清楚并带一点轮廓光；必要时在浇口方向预颤一下；
+// 远距离换场时沿页面上已有的线走一段"鼓包"。时间全从事件表来（resolve.py 写进 keys 的 guides；没有时这里按同一规则算）。
+// 出片时传 --props='{"noguide":true}' 可整页关掉引导（检查脚本用它做对照，量亮度变化）。
+const GDEF = {gOn: 8, pull: 18, minGap: 36, hold: 120, relax: 30, travel: 32, arrive: 4, sameGap: 120};
+const G_VERBS = ["grow", "eject", "snap", "move"], SELF_PREP = ["grow", "eject", "snap"];
+const ss = (x) => (x <= 0 ? 0 : x >= 1 ? 1 : x * x * (3 - 2 * x));
+const noGuide = () => { try { return !!(getInputProps() || {}).noguide; } catch (e) { return false; } };
+
+const sidAt = (S, f) => {
+  let best = null;
+  for (const s of S || []) {
+    if (s.f0 <= f && f <= s.f1) return s.sid;
+    const d = Math.min(Math.abs(f - s.f0), Math.abs(f - s.f1));
+    if (!best || d < best[0]) best = [d, s.sid];
+  }
+  return best ? best[1] : null;
+};
+// K = keys/<段>.json → [{id, target:[…], kind, gs, gon, land, gend, goff, tick, nudge, rim, ev_s, box?}]
+export const guidePlan = (K, opts = {}) => {
+  const P = {...GDEF, ...opts};
+  if (K.guides && !opts.recompute) return K.guides.map((g) => ({...g, target: [].concat(g.target)}));
+  const items = [];
+  for (const e of [...K.events].sort((a, b) => a.f_land - b.f_land)) {
+    const g = e.guide || {};
+    const kind = g.kind || (G_VERBS.includes(e.verb) ? "focus" : "none");
+    if (kind === "none" || e.obj === "footage") continue;   // 迁移来的变速锚点不是语义事件
+    const tg = [].concat(g.target ?? e.obj ?? e.id), land = e.f_land;
+    const gon = kind === "runner" ? land - (g.arrive ?? P.arrive) : land - (g.g_on ?? P.gOn);
+    const gs = kind === "runner" ? gon - (g.travel ?? P.travel) : gon - (g.pull ?? P.pull);
+    if (gs < 0) continue;
+    const gend = Math.max(land, Math.min(e.f_end, land + P.hold));
+    const selfprep = SELF_PREP.includes(e.verb) && land - e.f_start <= 34;
+    const it = {id: e.id, target: tg, kind, gs, gon, land, gend, goff: gend + P.relax, tick: land - 4, nudge: g.nudge ?? !selfprep,
+                rim: g.rim ?? true, ev_s: e.f_start, box: g.box, dist: g.dist, path: g.path, events: [e.id]};
+    const p = items[items.length - 1];
+    if (p) {
+      if (p.target.length === tg.length && tg.every((t) => p.target.includes(t)) && gs < p.goff + P.sameGap) { p.events.push(e.id); continue; }
+      if (gon - p.gon < P.minGap) {
+        p.target = [...p.target, ...tg.filter((t) => !p.target.includes(t))];
+        p.gend = Math.max(p.gend, gend); p.goff = p.gend + P.relax; p.events.push(e.id); continue;
+      }
+      const sid = sidAt(K.sentences, land);
+      if ((K.sentences && items.filter((q) => sidAt(K.sentences, q.land) === sid).length >= 3) || items.filter((q) => q.gon > gon - 600).length >= 5) { p.events.push(e.id); continue; }
+    }
+    items.push(it);
+  }
+  for (let i = 0; i + 1 < items.length; i++) {
+    const p = items[i], n = items[i + 1];
+    if (p.goff > n.gs) { p.gend = Math.max(p.land, Math.min(p.gend, n.gs)); p.goff = Math.max(p.gend, Math.min(p.goff, n.gon)); p.handoff = n.id; }
+  }
+  for (const it of items) { it.goff = Math.min(it.goff, K.len_f - 1); it.gend = Math.min(it.gend, it.goff); }
+  return items;
+};
+
+// 一个引导的"景深"包络（gs→gon 拉焦，gend→goff 退回）和轮廓光包络（gs 起亮，land 峰值，gend 起退）
+const gEnv = (it, f) => (f < it.gs ? 0 : f < it.gon ? ss((f - it.gs) / Math.max(1, it.gon - it.gs)) : f <= it.gend ? 1 : f < it.goff ? 1 - ss((f - it.gend) / Math.max(1, it.goff - it.gend)) : 0);
+const gRim = (it, f) => (!it.rim || f < it.gs ? 0 : f < it.land ? ss((f - it.gs) / Math.max(1, it.land - it.gs)) : f <= it.gend ? 1 : f < it.goff ? 1 - ss((f - it.gend) / Math.max(1, it.goff - it.gend)) : 0);
+
+const GuideCtx = createContext(null);
+
+// 给一组目标名（和零件自己的 at）算当前帧的样子：{style:{filter, opacity}, nudge: 正在预颤的引导项或 null, sharp, amt}
+export const guideLook = (C, ids, at) => {
+  if (!C || C.off) return null;
+  const {plan, f} = C;
+  const hit = (it) => it.target.some((t) => ids.includes(t)) || (at != null && at >= it.ev_s - 4 && at <= it.land + 4 && C.byAt);
+  let tot = 0, sharp = 0, rim = 0, nud = null, last = null;
+  for (const it of plan) {
+    const e = gEnv(it, f), h = hit(it);
+    tot += e;
+    if (h) { sharp += e; rim = Math.max(rim, gRim(it, f)); if (it.nudge && f >= it.land - 6 && f <= it.land) nud = it; }
+    if (it.gs <= f) last = it;
+  }
+  tot = Math.min(1, tot); sharp = Math.min(1, sharp);
+  const amt = Math.max(0, tot - sharp);
+  // 出镜段：零件等待时略虚（idle px），最近一次被点名的那个留在焦点上
+  const kept = last && hit(last) ? ss((f - last.gs) / Math.max(1, last.gon - last.gs)) : 0;
+  const bpx = Math.max(C.blur * amt, C.idle * (1 - kept));
+  const fl = [];
+  if (bpx > 0.05) fl.push(`blur(${bpx.toFixed(2)}px)`);
+  if (amt > 0.002) fl.push(`saturate(${(1 - (1 - C.desat) * amt).toFixed(3)})`);
+  if (rim > 0.002) fl.push(`drop-shadow(${C.rimDx}px 0 ${C.rimPx}px rgba(255,250,235,${(C.rimA * rim).toFixed(3)}))`);
+  const style = {};
+  if (fl.length) style.filter = fl.join(" ");
+  if (amt > 0.002) style.opacity = 1 - (1 - C.dim) * amt;
+  return {style, nudge: nud, sharp, amt, rim};
+};
+
+// 页面自带零件组件时（如 Manual205）用这个钩子读引导：返回 {style, nudge} 或 null
+export const useGuideLook = (ids, at) => {
+  const C = useContext(GuideCtx);
+  return C && !C.layered ? guideLook(C, [].concat(ids), at) : null;
+};
+
+// 页面景深：plan = guidePlan(K)。blur/dim/desat 是没被点名的图层到底时的样子（V13：模糊 ≤ 2.5 px、不透明度 ≥ 0.75、饱和度 ≥ 0.7）。
+// idle：出镜段零件等待时的模糊（2–4 px）；说明书页为 0。byAt：没有 Layer 的老页面，零件按"它长出的帧落在这次引导的事件里"认领目标。
+export const Lens = ({plan, f, blur = 2.2, dim = 0.82, desat = 0.75, rimPx = 6, rimA = 0.9, rimDx = 0, idle = 0, byAt = false, children}) => {
+  const v = {plan: plan || [], f, blur: Math.min(2.5, blur), dim: Math.max(0.75, dim), desat: Math.max(0.7, desat), rimPx, rimA, rimDx, idle, byAt, off: noGuide()};
+  return <GuideCtx.Provider value={v}>{children}</GuideCtx.Provider>;
+};
+
+// 一个图层（整页大小的绝对定位层）。exempt：标题、标签、批注、出处行，永远不虚。dir：预颤方向（指向浇口）。
+export const Layer = ({id, exempt, dir = [0, 1], children, style}) => {
+  const C = useContext(GuideCtx);
+  const L = exempt || !C ? null : guideLook(C, [].concat(id));
+  let tf, org;
+  if (L && L.nudge && L.nudge.box) {
+    const [x, y, w, h] = L.nudge.box;
+    org = `${x + w / 2}px ${y + h / 2}px`;
+    tf = nudge(C.f, L.nudge.land, {dir, R: Math.hypot(w, h) / 2});
+  }
+  return (
+    <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, ...(L ? L.style : null), transform: tf, transformOrigin: org, ...style}}>
+      <GuideCtx.Provider value={C ? {...C, layered: true} : null}>{children}</GuideCtx.Provider>
+    </div>
+  );
+};
+
+// 浇口预颤：land−pre 到 land，沿 dir 拉出 amp 像素、转 rot 度再回来（3 帧出 3 帧回，缓入缓出）。
+// R = 物体到转心的最远距离：转动会把边缘带出 R·rot 的位移，这里把转角压到总位移 ≤ 6 px（V5）。
+export const nudge = (f, land, {pre = 6, amp = 4, rot = 1.2, dir = [0, 1], R = 0} = {}) => {
+  if (noGuide() || f < land - pre || f > land) return "";
+  const u = (f - (land - pre)) / pre, k = (1 - Math.cos(2 * Math.PI * u)) / 2;
+  let [dx, dy] = dir; const n = Math.hypot(dx, dy);
+  [dx, dy] = n > 1e-6 ? [dx / n, dy / n] : [0, 1];
+  const r = R > 0 ? Math.min(rot, ((6 - amp - 0.5) / R) * 180 / Math.PI) : 0;
+  return `translate(${(dx * amp * k).toFixed(2)}px, ${(dy * amp * k).toFixed(2)}px) rotate(${(r * k).toFixed(3)}deg)`;
+};
+
+// 走料：沿页面上已经画好的线（d）走一段比原线粗一点、颜色是原线色七成加纸色三成的"鼓包"，a 出发、b 到达，b 后 6 帧被吃掉。不画圆点，不用红色。
+const mix = (c1, c2, t) => {
+  const p = (c) => [1, 3, 5].map((i) => parseInt(c.slice(i, i + 2), 16));
+  const a = p(c1), b = p(c2);
+  return "#" + a.map((v, i) => Math.round(v * t + b[i] * (1 - t)).toString(16).padStart(2, "0")).join("");
+};
+export const RunnerPulse = ({d, a, b, f, sw = 4, color = INK, len = 0.08}) => {
+  if (noGuide() || f < a || f > b + 6) return null;
+  const head = span(f, a, b, Easing.inOut(Easing.sin));
+  const L = len * (f > b ? 1 - (f - b) / 6 : 1) * Math.min(1, span(f, a, a + 6) + 0.25);
+  const tail = Math.max(0, head - L);
+  if (head - tail < 0.002) return null;
+  return <path d={d} pathLength={1} fill="none" stroke={mix(color, PAPER, 0.7)} strokeWidth={sw + 2} strokeLinecap="round"
+               strokeDasharray={`${(head - tail).toFixed(4)} 3`} strokeDashoffset={(-tail).toFixed(4)} />;
+};
 
 // 步骤框标题、零件旁的印字、还没讲到的步骤的虚线占位框（第 2 章起各页共用）
 export const Title = ({p, children, size = 48}) => (

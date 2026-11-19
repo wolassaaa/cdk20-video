@@ -390,6 +390,9 @@
    "sid": "6-03.s1",
    "word_f0": 33,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 48043,
    "F_land": 48069,
    "F_end": 48083
@@ -410,6 +413,9 @@
    "sid": "6-03.s2",
    "word_f0": 92,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 48118,
    "F_land": 48128,
    "F_end": 48201
@@ -430,6 +436,9 @@
    "sid": "6-03.s2",
    "word_f0": 181,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 48187,
    "F_land": 48217,
    "F_end": 48241
@@ -450,6 +459,9 @@
    "sid": "6-03.s2",
    "word_f0": 248,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 48270,
    "F_land": 48284,
    "F_end": 48308
@@ -470,6 +482,9 @@
    "sid": "6-03.s2",
    "word_f0": 336,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 48348,
    "F_land": 48372,
    "F_end": 48391
@@ -490,6 +505,9 @@
    "sid": "6-03.s2",
    "word_f0": 415,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 48411,
    "F_land": 48451,
    "F_end": 48535
@@ -510,6 +528,9 @@
    "sid": "6-03.s2",
    "word_f0": 439,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 48467,
    "F_land": 48475,
    "F_end": 48535
@@ -530,6 +551,9 @@
    "sid": "6-03.s3",
    "word_f0": 529,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 48557,
    "F_land": 48565,
    "F_end": 48577
@@ -550,6 +574,9 @@
    "sid": "6-03.s3",
    "word_f0": 557,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 48567,
    "F_land": 48593,
    "F_end": 48672
@@ -570,6 +597,9 @@
    "sid": "6-03.s3",
    "word_f0": 639,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 48667,
    "F_land": 48675,
    "F_end": 48708
@@ -590,6 +620,9 @@
    "sid": "6-03.s3",
    "word_f0": 692,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 48714,
    "F_land": 48728,
    "F_end": 48751
@@ -610,6 +643,9 @@
    "sid": "6-03.s3",
    "word_f0": 764,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 48770,
    "F_land": 48800,
    "F_end": 48837
@@ -630,6 +666,9 @@
    "sid": "6-03.s3",
    "word_f0": 785,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 48815,
    "F_land": 48821,
    "F_end": 48837
@@ -650,6 +689,9 @@
    "sid": "6-03.s3",
    "word_f0": 804,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 48832,
    "F_land": 48840,
    "F_end": 48870
@@ -670,10 +712,14 @@
    "sid": "6-03.s3",
    "word_f0": 862,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 48884,
    "F_land": 48898,
    "F_end": 48916
   }
  ],
+ "guides": [],
  "problems": []
 }

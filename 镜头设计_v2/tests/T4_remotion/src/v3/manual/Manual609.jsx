@@ -5,9 +5,10 @@
 import React from "react";
 import {AbsoluteFill, Audio, Composition, Easing, registerRoot, staticFile, useCurrentFrame} from "remotion";
 import K from "./keys_6-09.json";
-import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, Bead, evMap, Label, Pen, PageFrame, Source} from "./kit.jsx";
+import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, evMap, Label, Pen, PageFrame, Source, Lens, guidePlan} from "./kit.jsx";
 
 const E = evMap(K);
+const GP = guidePlan(K);   // 视线引导（11-20，替代红色料珠）：事件表 guide 字段 → resolve.py → keys.guides
 // 透视路：左边线、右边线、中线，近端 y=1000，远端 y=330
 const L0 = [300, 1000], L1 = [1545, 330], R0 = [820, 1000], R1 = [1575, 330], C0 = [560, 1000], C1 = [1560, 330];
 const lerp = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
@@ -68,14 +69,10 @@ const Scene = () => {
   const zap = f >= E.too.s ? Math.exp(-Math.max(0, f - E.too.l) / 10) * span(f, E.too.s, E.too.l) : 0;
   const ring = span(f, E.prize.s, E.prize.l, ease);
   const q = span(f, E.prize.s + 8, E.prize.l + 10) * (1 - span(f, E.hosp.s, E.hosp.l));
-  const bead = [[0, 150, 600], [E.road.l, 230, 960], [E.m_box.l, 1520, 960], [E.m_x.l, 1500, 720], [E.m_d.l, 1600, 860],
-                [E.c_box.l, 450, 520], [E.c_d.l, 620, 470], [E.a_box.l, 1760, 470], [E.a_x.l, 1580, 455], [E.a_d.l, 1760, 700],
-                [E.w_box.l, 890, 340], [E.w_x.l, 1060, 305], [E.w_d.l, 1220, 290], [E.srv.l, 200, 520], [E.cost2.l, 790, 245],
-                [E.plug.l, 660, 450], [E.too.l, 640, 300], [E.prize.l, 1720, 200], [E.hosp.l, 1730, 330], [E.treat.l, 1700, 420],
-                [E.pat.l, 1790, 410], [K.len_f, 1791, 411]];
   const keyOp = (i) => (i === 1 ? 1 : 1 - span(dn[0], 0, 0.8));
   const keyDy = (i) => (i === 1 ? 0 : 34 * dn[0]);
   return (
+    <Lens plan={GP} f={f}>
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("6-09.wav")} />
       <PageFrame />
@@ -164,8 +161,8 @@ const Scene = () => {
       </div>
 
       <Source p={span(f, E.road.l, E.road.l + 20)}>Illustration</Source>
-      <Bead K={bead} f={f} />
     </AbsoluteFill>
+    </Lens>
   );
 };
 

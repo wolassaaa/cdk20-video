@@ -340,6 +340,9 @@
    "sid": "3-03.s1",
    "word_f0": 9,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 17967,
    "F_land": 17975,
    "F_end": 18267
@@ -360,9 +363,25 @@
    "sid": "3-03.s1",
    "word_f0": 98,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "lock"
+    ]
+   },
    "F_start": 18044,
    "F_land": 18064,
-   "F_end": 18267
+   "F_end": 18267,
+   "g_start": 72,
+   "g_on": 90,
+   "g_end": 184,
+   "g_off": 202,
+   "g_tick": 94,
+   "G_start": 18038,
+   "G_on": 18056,
+   "G_end": 18150,
+   "G_off": 18168,
+   "G_tick": 18060
   },
   {
    "id": "target",
@@ -380,6 +399,9 @@
    "sid": "3-03.s1",
    "word_f0": 127,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 18085,
    "F_land": 18093,
    "F_end": 18267
@@ -400,9 +422,25 @@
    "sid": "3-03.s1",
    "word_f0": 210,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "key"
+    ]
+   },
    "F_start": 18156,
    "F_land": 18176,
-   "F_end": 18267
+   "F_end": 18267,
+   "g_start": 184,
+   "g_on": 202,
+   "g_end": 301,
+   "g_off": 331,
+   "g_tick": 206,
+   "G_start": 18150,
+   "G_on": 18168,
+   "G_end": 18267,
+   "G_off": 18297,
+   "G_tick": 18172
   },
   {
    "id": "cand",
@@ -420,6 +458,9 @@
    "sid": "3-03.s1",
    "word_f0": 237,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 18195,
    "F_land": 18203,
    "F_end": 18267
@@ -440,6 +481,9 @@
    "sid": "3-03.s2",
    "word_f0": 338,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 18284,
    "F_land": 18304,
    "F_end": 18558
@@ -460,6 +504,9 @@
    "sid": "3-03.s2",
    "word_f0": 374,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 18316,
    "F_land": 18340,
    "F_end": 18558
@@ -480,6 +527,9 @@
    "sid": "3-03.s2",
    "word_f0": 448,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 18406,
    "F_land": 18414,
    "F_end": 18558
@@ -500,6 +550,9 @@
    "sid": "3-03.s2",
    "word_f0": 512,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 18458,
    "F_land": 18478,
    "F_end": 18558
@@ -520,6 +573,9 @@
    "sid": "3-03.s2",
    "word_f0": 535,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 18487,
    "F_land": 18501,
    "F_end": 18558
@@ -540,6 +596,9 @@
    "sid": "3-03.s2",
    "word_f0": 563,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 18511,
    "F_land": 18529,
    "F_end": 18558
@@ -560,6 +619,9 @@
    "sid": "3-03.s3",
    "word_f0": 634,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 18574,
    "F_land": 18600,
    "F_end": 18684
@@ -580,9 +642,65 @@
    "sid": "3-03.s3",
    "word_f0": 673,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 18629,
    "F_land": 18639,
    "F_end": 18684
+  }
+ ],
+ "guides": [
+  {
+   "id": "lock",
+   "target": [
+    "lock"
+   ],
+   "kind": "focus",
+   "gs": 72,
+   "gon": 90,
+   "land": 98,
+   "gend": 184,
+   "goff": 202,
+   "tick": 94,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 78,
+   "events": [
+    "lock"
+   ],
+   "handoff": "key",
+   "G_start": 18038,
+   "G_on": 18056,
+   "G_land": 18064,
+   "G_end": 18150,
+   "G_off": 18168,
+   "G_tick": 18060
+  },
+  {
+   "id": "key",
+   "target": [
+    "key"
+   ],
+   "kind": "focus",
+   "gs": 184,
+   "gon": 202,
+   "land": 210,
+   "gend": 301,
+   "goff": 331,
+   "tick": 206,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 190,
+   "events": [
+    "key"
+   ],
+   "G_start": 18150,
+   "G_on": 18168,
+   "G_land": 18176,
+   "G_end": 18267,
+   "G_off": 18297,
+   "G_tick": 18172
   }
  ],
  "problems": []

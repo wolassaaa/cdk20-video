@@ -616,6 +616,9 @@
    "sid": "3-08.s1",
    "word_f0": 30,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 22948,
    "F_land": 22958,
    "F_end": 22970
@@ -636,9 +639,25 @@
    "sid": "3-08.s2",
    "word_f0": 48,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "key"
+    ]
+   },
    "F_start": 22970,
    "F_land": 22976,
-   "F_end": 23001
+   "F_end": 23001,
+   "g_start": 22,
+   "g_on": 40,
+   "g_end": 73,
+   "g_off": 103,
+   "g_tick": 44,
+   "G_start": 22950,
+   "G_on": 22968,
+   "G_end": 23001,
+   "G_off": 23031,
+   "G_tick": 22972
   },
   {
    "id": "eye",
@@ -656,6 +675,9 @@
    "sid": "3-08.s2",
    "word_f0": 103,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 23023,
    "F_land": 23031,
    "F_end": 23059
@@ -676,6 +698,9 @@
    "sid": "3-08.s3",
    "word_f0": 150,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 23072,
    "F_land": 23078,
    "F_end": 23113
@@ -696,6 +721,9 @@
    "sid": "3-08.s3",
    "word_f0": 187,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 23111,
    "F_land": 23115,
    "F_end": 23133
@@ -716,9 +744,25 @@
    "sid": "3-08.s4",
    "word_f0": 336,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "flask"
+    ]
+   },
    "F_start": 23254,
    "F_land": 23264,
-   "F_end": 23305
+   "F_end": 23305,
+   "g_start": 310,
+   "g_on": 328,
+   "g_end": 440,
+   "g_off": 470,
+   "g_tick": 332,
+   "G_start": 23238,
+   "G_on": 23256,
+   "G_end": 23368,
+   "G_off": 23398,
+   "G_tick": 23260
   },
   {
    "id": "cal",
@@ -736,9 +780,16 @@
    "sid": "3-08.s4",
    "word_f0": 364,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "cal"
+    ]
+   },
    "F_start": 23286,
    "F_land": 23292,
-   "F_end": 23368
+   "F_end": 23368,
+   "guide_into": "lab"
   },
   {
    "id": "dots",
@@ -756,6 +807,9 @@
    "sid": "3-08.s4",
    "word_f0": 508,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 23396,
    "F_land": 23436,
    "F_end": 23504
@@ -776,6 +830,9 @@
    "sid": "3-08.s4",
    "word_f0": 624,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 23532,
    "F_land": 23552,
    "F_end": 23581
@@ -796,6 +853,9 @@
    "sid": "3-08.s5",
    "word_f0": 717,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 23625,
    "F_land": 23645,
    "F_end": 23725
@@ -816,9 +876,25 @@
    "sid": "3-08.s5",
    "word_f0": 802,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chip"
+    ]
+   },
    "F_start": 23720,
    "F_land": 23730,
-   "F_end": 23834
+   "F_end": 23834,
+   "g_start": 776,
+   "g_on": 794,
+   "g_end": 906,
+   "g_off": 936,
+   "g_tick": 798,
+   "G_start": 23704,
+   "G_on": 23722,
+   "G_end": 23834,
+   "G_off": 23864,
+   "G_tick": 23726
   },
   {
    "id": "exp",
@@ -836,6 +912,9 @@
    "sid": "3-08.s5",
    "word_f0": 993,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 23915,
    "F_land": 23921,
    "F_end": 24013
@@ -856,6 +935,9 @@
    "sid": "3-08.s5",
    "word_f0": 1067,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 23989,
    "F_land": 23995,
    "F_end": 24039
@@ -876,9 +958,91 @@
    "sid": "3-08.s5",
    "word_f0": 1112,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 24034,
    "F_land": 24040,
    "F_end": 24071
+  }
+ ],
+ "guides": [
+  {
+   "id": "key",
+   "target": [
+    "key"
+   ],
+   "kind": "focus",
+   "gs": 22,
+   "gon": 40,
+   "land": 48,
+   "gend": 73,
+   "goff": 103,
+   "tick": 44,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 42,
+   "events": [
+    "key"
+   ],
+   "G_start": 22950,
+   "G_on": 22968,
+   "G_land": 22976,
+   "G_end": 23001,
+   "G_off": 23031,
+   "G_tick": 22972
+  },
+  {
+   "id": "lab",
+   "target": [
+    "flask",
+    "cal"
+   ],
+   "kind": "focus",
+   "gs": 310,
+   "gon": 328,
+   "land": 336,
+   "gend": 440,
+   "goff": 470,
+   "tick": 332,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 326,
+   "events": [
+    "lab",
+    "cal"
+   ],
+   "G_start": 23238,
+   "G_on": 23256,
+   "G_land": 23264,
+   "G_end": 23368,
+   "G_off": 23398,
+   "G_tick": 23260
+  },
+  {
+   "id": "chip",
+   "target": [
+    "chip"
+   ],
+   "kind": "focus",
+   "gs": 776,
+   "gon": 794,
+   "land": 802,
+   "gend": 906,
+   "goff": 936,
+   "tick": 798,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 792,
+   "events": [
+    "chip"
+   ],
+   "G_start": 23704,
+   "G_on": 23722,
+   "G_land": 23730,
+   "G_end": 23834,
+   "G_off": 23864,
+   "G_tick": 23726
   }
  ],
  "problems": []

@@ -314,6 +314,9 @@
    "sid": "6-10.s1",
    "word_f0": 62,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 52512,
    "F_land": 52524,
    "F_end": 52635
@@ -334,6 +337,9 @@
    "sid": "6-10.s1",
    "word_f0": 105,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 52553,
    "F_land": 52567,
    "F_end": 52593
@@ -354,6 +360,9 @@
    "sid": "6-10.s1",
    "word_f0": 160,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 52562,
    "F_land": 52622,
    "F_end": 52635
@@ -374,9 +383,25 @@
    "sid": "6-10.s2",
    "word_f0": 202,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "lock"
+    ]
+   },
    "F_start": 52634,
    "F_land": 52664,
-   "F_end": 52691
+   "F_end": 52691,
+   "g_start": 176,
+   "g_on": 194,
+   "g_end": 229,
+   "g_off": 259,
+   "g_tick": 198,
+   "G_start": 52638,
+   "G_on": 52656,
+   "G_end": 52691,
+   "G_off": 52721,
+   "G_tick": 52660
   },
   {
    "id": "tgtk",
@@ -394,6 +419,9 @@
    "sid": "6-10.s2",
    "word_f0": 257,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 52711,
    "F_land": 52719,
    "F_end": 52741
@@ -414,9 +442,25 @@
    "sid": "6-10.s3",
    "word_f0": 325,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "key"
+    ]
+   },
    "F_start": 52763,
    "F_land": 52787,
-   "F_end": 52801
+   "F_end": 52801,
+   "g_start": 299,
+   "g_on": 317,
+   "g_end": 339,
+   "g_off": 369,
+   "g_tick": 321,
+   "G_start": 52761,
+   "G_on": 52779,
+   "G_end": 52801,
+   "G_off": 52831,
+   "G_tick": 52783
   },
   {
    "id": "hitk",
@@ -434,6 +478,9 @@
    "sid": "6-10.s3",
    "word_f0": 364,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 52818,
    "F_land": 52826,
    "F_end": 52850
@@ -454,9 +501,25 @@
    "sid": "6-10.s4",
    "word_f0": 417,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "flask"
+    ]
+   },
    "F_start": 52855,
    "F_land": 52879,
-   "F_end": 52906
+   "F_end": 52906,
+   "g_start": 391,
+   "g_on": 409,
+   "g_end": 444,
+   "g_off": 474,
+   "g_tick": 413,
+   "G_start": 52853,
+   "G_on": 52871,
+   "G_end": 52906,
+   "G_off": 52936,
+   "G_tick": 52875
   },
   {
    "id": "st",
@@ -474,6 +537,9 @@
    "sid": "6-10.s4",
    "word_f0": 494,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 52946,
    "F_land": 52956,
    "F_end": 52984
@@ -494,9 +560,25 @@
    "sid": "6-10.s5",
    "word_f0": 575,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "tubes"
+    ]
+   },
    "F_start": 53007,
    "F_land": 53037,
-   "F_end": 53059
+   "F_end": 53059,
+   "g_start": 549,
+   "g_on": 567,
+   "g_end": 597,
+   "g_off": 627,
+   "g_tick": 571,
+   "G_start": 53011,
+   "G_on": 53029,
+   "G_end": 53059,
+   "G_off": 53089,
+   "G_tick": 53033
   },
   {
    "id": "ft",
@@ -514,6 +596,9 @@
    "sid": "6-10.s5",
    "word_f0": 651,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 53103,
    "F_land": 53113,
    "F_end": 53149
@@ -534,6 +619,9 @@
    "sid": "6-10.s5",
    "word_f0": 689,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 53143,
    "F_land": 53151,
    "F_end": 53166
@@ -554,6 +642,9 @@
    "sid": "6-10.s6",
    "word_f0": 733,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 53185,
    "F_land": 53195,
    "F_end": 53220
@@ -574,6 +665,9 @@
    "sid": "6-10.s6",
    "word_f0": 808,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 53260,
    "F_land": 53270,
    "F_end": 53297
@@ -594,9 +688,114 @@
    "sid": "6-10.s6",
    "word_f0": 871,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 53323,
    "F_land": 53333,
    "F_end": 53361
+  }
+ ],
+ "guides": [
+  {
+   "id": "tgt",
+   "target": [
+    "lock"
+   ],
+   "kind": "focus",
+   "gs": 176,
+   "gon": 194,
+   "land": 202,
+   "gend": 229,
+   "goff": 259,
+   "tick": 198,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 172,
+   "events": [
+    "tgt"
+   ],
+   "G_start": 52638,
+   "G_on": 52656,
+   "G_land": 52664,
+   "G_end": 52691,
+   "G_off": 52721,
+   "G_tick": 52660
+  },
+  {
+   "id": "hit",
+   "target": [
+    "key"
+   ],
+   "kind": "focus",
+   "gs": 299,
+   "gon": 317,
+   "land": 325,
+   "gend": 339,
+   "goff": 369,
+   "tick": 321,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 301,
+   "events": [
+    "hit"
+   ],
+   "G_start": 52761,
+   "G_on": 52779,
+   "G_land": 52787,
+   "G_end": 52801,
+   "G_off": 52831,
+   "G_tick": 52783
+  },
+  {
+   "id": "imp",
+   "target": [
+    "flask"
+   ],
+   "kind": "focus",
+   "gs": 391,
+   "gon": 409,
+   "land": 417,
+   "gend": 444,
+   "goff": 474,
+   "tick": 413,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 393,
+   "events": [
+    "imp"
+   ],
+   "G_start": 52853,
+   "G_on": 52871,
+   "G_land": 52879,
+   "G_end": 52906,
+   "G_off": 52936,
+   "G_tick": 52875
+  },
+  {
+   "id": "cells",
+   "target": [
+    "tubes"
+   ],
+   "kind": "focus",
+   "gs": 549,
+   "gon": 567,
+   "land": 575,
+   "gend": 597,
+   "goff": 627,
+   "tick": 571,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 545,
+   "events": [
+    "cells"
+   ],
+   "G_start": 53011,
+   "G_on": 53029,
+   "G_land": 53037,
+   "G_end": 53059,
+   "G_off": 53089,
+   "G_tick": 53033
   }
  ],
  "problems": []

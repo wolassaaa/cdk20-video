@@ -5,9 +5,10 @@
 import React from "react";
 import {AbsoluteFill, Audio, Composition, Easing, registerRoot, staticFile, useCurrentFrame} from "remotion";
 import K from "./keys_7-03.json";
-import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, Bead, evMap, Label, Pen, PageFrame, Source} from "./kit.jsx";
+import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, evMap, Label, Pen, PageFrame, Source, Lens, guidePlan} from "./kit.jsx";
 
 const E = evMap(K);
+const GP = guidePlan(K);   // 视线引导（11-20，替代红色料珠）：事件表 guide 字段 → resolve.py → keys.guides
 const LF = {x: 130, y: 300, w: 520, h: 370}, RF = {x: 1270, y: 300, w: 520, h: 370};
 const FOLD = [[-80, 50], [-40, 70], [0, 54], [22, 16], [-14, -14], [-54, -24], [-86, -58], [-46, -92], [-4, -72], [36, -48], [74, -10], [112, 28]];
 const NUDGE = [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [6, 8], [10, 12], [8, 10], [-6, 8], [-10, 4]];   // next round：形状微调
@@ -49,11 +50,8 @@ const Scene = () => {
     const dst = [LC[0] + CR * Math.cos(a), LC[1] + CR * Math.sin(a)];
     return {x: src[0] + (dst[0] - src[0]) * t, y: src[1] + (dst[1] - src[1]) * t - Math.sin(Math.PI * t) * 60, t, show: f >= ev.s};
   };
-  const bead = [[0, 760, 220], [E.two.l, 720, 100], [E.bal.l, 1150, 230], [E.af.l, 690, 215], [E.mdl.l, 240, 760], [E.ag.l, 720, 600],
-                [E.lab.l, 1220, 205], [E.str.l, 1800, 740], [E.once.l, 1730, 200], [E.ex.l, 1070, 290], [E.feed.l, 760, 980],
-                [E.every.l, 1180, 985], [E.res.l, 1480, 815], [E.inc.l, 1200, 740], [E.fail.l, 1560, 890], [E.back.l, 480, 800],
-                [E.nx.l, 560, 965], [E.rnd.l, 1300, 975], [K.len_f, 1301, 976]];
   return (
+    <Lens plan={GP} f={f}>
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("7-03.wav")} />
       <PageFrame />
@@ -136,8 +134,8 @@ const Scene = () => {
       <Label x={720} y={930} w={180} size={32} italic color={RED} p={span(f, E.nx.s, E.rnd.l + 10)}>next round</Label>
 
       <Source p={span(f, E.af.l, E.af.l + 20)}>Our proposal · Illustration</Source>
-      <Bead K={bead} f={f} />
     </AbsoluteFill>
+    </Lens>
   );
 };
 

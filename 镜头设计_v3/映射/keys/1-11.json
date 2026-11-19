@@ -360,6 +360,9 @@
    "sid": "1-11.s1",
    "word_f0": 9,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 6919,
    "F_land": 6923,
    "F_end": 6982
@@ -380,9 +383,25 @@
    "sid": "1-11.s1",
    "word_f0": 55,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chip"
+    ]
+   },
    "F_start": 6965,
    "F_land": 6969,
-   "F_end": 6993
+   "F_end": 6993,
+   "g_start": 29,
+   "g_on": 47,
+   "g_end": 79,
+   "g_off": 109,
+   "g_tick": 51,
+   "G_start": 6943,
+   "G_on": 6961,
+   "G_end": 6993,
+   "G_off": 7023,
+   "G_tick": 6965
   },
   {
    "id": "chip_walk",
@@ -400,9 +419,16 @@
    "sid": "1-11.s1",
    "word_f0": 139,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chip"
+    ]
+   },
    "F_start": 6987,
    "F_land": 7053,
-   "F_end": 7082
+   "F_end": 7082,
+   "guide_into": "chip"
   },
   {
    "id": "q",
@@ -420,6 +446,9 @@
    "sid": "1-11.s1",
    "word_f0": 139,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 7053,
    "F_land": 7053,
    "F_end": 7082
@@ -440,6 +469,9 @@
    "sid": "1-11.s2",
    "word_f0": 222,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 7132,
    "F_land": 7136,
    "F_end": 7166
@@ -460,6 +492,9 @@
    "sid": "1-11.s2",
    "word_f0": 263,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 7177,
    "F_land": 7177,
    "F_end": 7218
@@ -480,9 +515,25 @@
    "sid": "1-11.s2",
    "word_f0": 341,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chip"
+    ]
+   },
    "F_start": 7251,
    "F_land": 7255,
-   "F_end": 7290
+   "F_end": 7290,
+   "g_start": 315,
+   "g_on": 333,
+   "g_end": 376,
+   "g_off": 403,
+   "g_tick": 337,
+   "G_start": 7229,
+   "G_on": 7247,
+   "G_end": 7290,
+   "G_off": 7317,
+   "G_tick": 7251
   },
   {
    "id": "liver",
@@ -500,9 +551,25 @@
    "sid": "1-11.s2",
    "word_f0": 411,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "liver"
+    ]
+   },
    "F_start": 7321,
    "F_land": 7325,
-   "F_end": 7365
+   "F_end": 7365,
+   "g_start": 385,
+   "g_on": 403,
+   "g_end": 451,
+   "g_off": 481,
+   "g_tick": 407,
+   "G_start": 7299,
+   "G_on": 7317,
+   "G_end": 7365,
+   "G_off": 7395,
+   "G_tick": 7321
   },
   {
    "id": "case_snap",
@@ -520,6 +587,9 @@
    "sid": "1-11.s2",
    "word_f0": 429,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 7349,
    "F_land": 7361,
    "F_end": 7365
@@ -540,6 +610,9 @@
    "sid": "1-11.s3",
    "word_f0": 466,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 7376,
    "F_land": 7380,
    "F_end": 7410
@@ -560,6 +633,9 @@
    "sid": "1-11.s3",
    "word_f0": 484,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 7398,
    "F_land": 7398,
    "F_end": 7477
@@ -580,9 +656,25 @@
    "sid": "1-11.s3",
    "word_f0": 545,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "hk"
+    ]
+   },
    "F_start": 7455,
    "F_land": 7459,
-   "F_end": 7516
+   "F_end": 7516,
+   "g_start": 519,
+   "g_on": 537,
+   "g_end": 602,
+   "g_off": 632,
+   "g_tick": 541,
+   "G_start": 7433,
+   "G_on": 7451,
+   "G_end": 7516,
+   "G_off": 7546,
+   "G_tick": 7455
   },
   {
    "id": "pin",
@@ -600,6 +692,9 @@
    "sid": "1-11.s3",
    "word_f0": 586,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 7494,
    "F_land": 7500,
    "F_end": 7516
@@ -620,9 +715,116 @@
    "sid": "1-11.s3",
    "word_f0": 644,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 7558,
    "F_land": 7558,
    "F_end": 7590
+  }
+ ],
+ "guides": [
+  {
+   "id": "chip",
+   "target": [
+    "chip"
+   ],
+   "kind": "focus",
+   "gs": 29,
+   "gon": 47,
+   "land": 55,
+   "gend": 79,
+   "goff": 109,
+   "tick": 51,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 51,
+   "events": [
+    "chip",
+    "chip_walk"
+   ],
+   "G_start": 6943,
+   "G_on": 6961,
+   "G_land": 6969,
+   "G_end": 6993,
+   "G_off": 7023,
+   "G_tick": 6965
+  },
+  {
+   "id": "chip2",
+   "target": [
+    "chip"
+   ],
+   "kind": "focus",
+   "gs": 315,
+   "gon": 333,
+   "land": 341,
+   "gend": 376,
+   "goff": 403,
+   "tick": 337,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 337,
+   "events": [
+    "chip2"
+   ],
+   "handoff": "liver",
+   "G_start": 7229,
+   "G_on": 7247,
+   "G_land": 7255,
+   "G_end": 7290,
+   "G_off": 7317,
+   "G_tick": 7251
+  },
+  {
+   "id": "liver",
+   "target": [
+    "liver"
+   ],
+   "kind": "focus",
+   "gs": 385,
+   "gon": 403,
+   "land": 411,
+   "gend": 451,
+   "goff": 481,
+   "tick": 407,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 407,
+   "events": [
+    "liver"
+   ],
+   "G_start": 7299,
+   "G_on": 7317,
+   "G_land": 7325,
+   "G_end": 7365,
+   "G_off": 7395,
+   "G_tick": 7321
+  },
+  {
+   "id": "hk",
+   "target": [
+    "hk"
+   ],
+   "kind": "focus",
+   "gs": 519,
+   "gon": 537,
+   "land": 545,
+   "gend": 602,
+   "goff": 632,
+   "tick": 541,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 541,
+   "events": [
+    "hk"
+   ],
+   "G_start": 7433,
+   "G_on": 7451,
+   "G_land": 7459,
+   "G_end": 7516,
+   "G_off": 7546,
+   "G_tick": 7455
   }
  ],
  "problems": []

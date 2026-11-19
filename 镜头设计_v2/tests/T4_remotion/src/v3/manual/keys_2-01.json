@@ -658,6 +658,12 @@
    "sid": "2-01.s1",
    "word_f0": 9,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "hk"
+    ]
+   },
    "F_start": 8331,
    "F_land": 8335,
    "F_end": 8390
@@ -678,6 +684,9 @@
    "sid": "2-01.s2",
    "word_f0": 89,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 8411,
    "F_land": 8415,
    "F_end": 8445
@@ -698,6 +707,9 @@
    "sid": "2-01.s2",
    "word_f0": 98,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 8424,
    "F_land": 8424,
    "F_end": 8492
@@ -718,9 +730,25 @@
    "sid": "2-01.s2",
    "word_f0": 214,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "univ"
+    ]
+   },
    "F_start": 8536,
    "F_land": 8540,
-   "F_end": 8645
+   "F_end": 8645,
+   "g_start": 188,
+   "g_on": 206,
+   "g_end": 319,
+   "g_off": 349,
+   "g_tick": 210,
+   "G_start": 8514,
+   "G_on": 8532,
+   "G_end": 8645,
+   "G_off": 8675,
+   "G_tick": 8536
   },
   {
    "id": "tubes",
@@ -738,9 +766,25 @@
    "sid": "2-01.s2",
    "word_f0": 367,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "tube"
+    ]
+   },
    "F_start": 8689,
    "F_land": 8693,
-   "F_end": 8791
+   "F_end": 8791,
+   "g_start": 341,
+   "g_on": 359,
+   "g_end": 465,
+   "g_off": 486,
+   "g_tick": 363,
+   "G_start": 8667,
+   "G_on": 8685,
+   "G_end": 8791,
+   "G_off": 8812,
+   "G_tick": 8689
   },
   {
    "id": "hospital",
@@ -758,9 +802,25 @@
    "sid": "2-01.s2",
    "word_f0": 494,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "hospital"
+    ]
+   },
    "F_start": 8816,
    "F_land": 8820,
-   "F_end": 8912
+   "F_end": 8912,
+   "g_start": 468,
+   "g_on": 486,
+   "g_end": 586,
+   "g_off": 616,
+   "g_tick": 490,
+   "G_start": 8794,
+   "G_on": 8812,
+   "G_end": 8912,
+   "G_off": 8942,
+   "G_tick": 8816
   },
   {
    "id": "cdk20",
@@ -778,9 +838,25 @@
    "sid": "2-01.s3",
    "word_f0": 648,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "cdk20"
+    ]
+   },
    "F_start": 8970,
    "F_land": 8974,
-   "F_end": 9035
+   "F_end": 9035,
+   "g_start": 622,
+   "g_on": 640,
+   "g_end": 709,
+   "g_off": 739,
+   "g_tick": 644,
+   "G_start": 8948,
+   "G_on": 8966,
+   "G_end": 9035,
+   "G_off": 9065,
+   "G_tick": 8970
   },
   {
    "id": "raised",
@@ -798,6 +874,9 @@
    "sid": "2-01.s3",
    "word_f0": 726,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 9046,
    "F_land": 9052,
    "F_end": 9073
@@ -818,6 +897,9 @@
    "sid": "2-01.s3",
    "word_f0": 773,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 9099,
    "F_land": 9099,
    "F_end": 9289
@@ -838,6 +920,9 @@
    "sid": "2-01.s4",
    "word_f0": 1016,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 9338,
    "F_land": 9342,
    "F_end": 9372
@@ -858,6 +943,9 @@
    "sid": "2-01.s4",
    "word_f0": 1058,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 9384,
    "F_land": 9384,
    "F_end": 9468
@@ -878,9 +966,25 @@
    "sid": "2-01.s4",
    "word_f0": 1151,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chip"
+    ]
+   },
    "F_start": 9473,
    "F_land": 9477,
-   "F_end": 9562
+   "F_end": 9562,
+   "g_start": 1125,
+   "g_on": 1143,
+   "g_end": 1236,
+   "g_off": 1266,
+   "g_tick": 1147,
+   "G_start": 9451,
+   "G_on": 9469,
+   "G_end": 9562,
+   "G_off": 9592,
+   "G_tick": 9473
   },
   {
    "id": "same",
@@ -898,6 +1002,9 @@
    "sid": "2-01.s4",
    "word_f0": 1291,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 9577,
    "F_land": 9617,
    "F_end": 9659
@@ -918,6 +1025,9 @@
    "sid": "2-01.s4",
    "word_f0": 1371,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 9697,
    "F_land": 9697,
    "F_end": 9748
@@ -938,9 +1048,25 @@
    "sid": "2-01.s4",
    "word_f0": 1431,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "tower"
+    ]
+   },
    "F_start": 9753,
    "F_land": 9757,
-   "F_end": 9859
+   "F_end": 9859,
+   "g_start": 1405,
+   "g_on": 1423,
+   "g_end": 1533,
+   "g_off": 1563,
+   "g_tick": 1427,
+   "G_start": 9731,
+   "G_on": 9749,
+   "G_end": 9859,
+   "G_off": 9889,
+   "G_tick": 9753
   },
   {
    "id": "label_ins",
@@ -958,6 +1084,9 @@
    "sid": "2-01.s4",
    "word_f0": 1431,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 9757,
    "F_land": 9757,
    "F_end": 9889
@@ -978,6 +1107,9 @@
    "sid": "2-01.s4",
    "word_f0": 1581,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 9907,
    "F_land": 9907,
    "F_end": 9950
@@ -998,6 +1130,9 @@
    "sid": "2-01.s3",
    "word_f0": 869,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 9189,
    "F_land": 9195,
    "F_end": 9289
@@ -1018,9 +1153,166 @@
    "sid": "2-01.s3",
    "word_f0": 899,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 9223,
    "F_land": 9225,
    "F_end": 9289
+  }
+ ],
+ "guides": [
+  {
+   "id": "univ",
+   "target": [
+    "univ"
+   ],
+   "kind": "focus",
+   "gs": 188,
+   "gon": 206,
+   "land": 214,
+   "gend": 319,
+   "goff": 349,
+   "tick": 210,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 210,
+   "events": [
+    "univ"
+   ],
+   "handoff": "tubes",
+   "G_start": 8514,
+   "G_on": 8532,
+   "G_land": 8540,
+   "G_end": 8645,
+   "G_off": 8675,
+   "G_tick": 8536
+  },
+  {
+   "id": "tubes",
+   "target": [
+    "tube"
+   ],
+   "kind": "focus",
+   "gs": 341,
+   "gon": 359,
+   "land": 367,
+   "gend": 465,
+   "goff": 486,
+   "tick": 363,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 363,
+   "events": [
+    "tubes"
+   ],
+   "handoff": "hospital",
+   "G_start": 8667,
+   "G_on": 8685,
+   "G_land": 8693,
+   "G_end": 8791,
+   "G_off": 8812,
+   "G_tick": 8689
+  },
+  {
+   "id": "hospital",
+   "target": [
+    "hospital"
+   ],
+   "kind": "focus",
+   "gs": 468,
+   "gon": 486,
+   "land": 494,
+   "gend": 586,
+   "goff": 616,
+   "tick": 490,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 490,
+   "events": [
+    "hospital"
+   ],
+   "G_start": 8794,
+   "G_on": 8812,
+   "G_land": 8820,
+   "G_end": 8912,
+   "G_off": 8942,
+   "G_tick": 8816
+  },
+  {
+   "id": "cdk20",
+   "target": [
+    "cdk20"
+   ],
+   "kind": "focus",
+   "gs": 622,
+   "gon": 640,
+   "land": 648,
+   "gend": 709,
+   "goff": 739,
+   "tick": 644,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 644,
+   "events": [
+    "cdk20"
+   ],
+   "G_start": 8948,
+   "G_on": 8966,
+   "G_land": 8974,
+   "G_end": 9035,
+   "G_off": 9065,
+   "G_tick": 8970
+  },
+  {
+   "id": "chip",
+   "target": [
+    "chip"
+   ],
+   "kind": "focus",
+   "gs": 1125,
+   "gon": 1143,
+   "land": 1151,
+   "gend": 1236,
+   "goff": 1266,
+   "tick": 1147,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 1147,
+   "events": [
+    "chip"
+   ],
+   "G_start": 9451,
+   "G_on": 9469,
+   "G_land": 9477,
+   "G_end": 9562,
+   "G_off": 9592,
+   "G_tick": 9473
+  },
+  {
+   "id": "tower",
+   "target": [
+    "tower"
+   ],
+   "kind": "focus",
+   "gs": 1405,
+   "gon": 1423,
+   "land": 1431,
+   "gend": 1533,
+   "goff": 1563,
+   "tick": 1427,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 1427,
+   "events": [
+    "tower"
+   ],
+   "G_start": 9731,
+   "G_on": 9749,
+   "G_land": 9757,
+   "G_end": 9859,
+   "G_off": 9889,
+   "G_tick": 9753
   }
  ],
  "problems": []

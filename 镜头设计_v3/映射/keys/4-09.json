@@ -492,6 +492,9 @@
    "sid": "4-09.s1",
    "word_f0": 18,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 33486,
    "F_land": 33494,
    "F_end": 33875
@@ -512,9 +515,25 @@
    "sid": "4-09.s1",
    "word_f0": 55,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chip"
+    ]
+   },
    "F_start": 33515,
    "F_land": 33531,
-   "F_end": 33875
+   "F_end": 33875,
+   "g_start": 29,
+   "g_on": 47,
+   "g_end": 200,
+   "g_off": 230,
+   "g_tick": 51,
+   "G_start": 33505,
+   "G_on": 33523,
+   "G_end": 33676,
+   "G_off": 33706,
+   "G_tick": 33527
   },
   {
    "id": "pocket",
@@ -532,9 +551,16 @@
    "sid": "4-09.s1",
    "word_f0": 80,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "lock"
+    ]
+   },
    "F_start": 33542,
    "F_land": 33556,
-   "F_end": 33875
+   "F_end": 33875,
+   "guide_into": "gave"
   },
   {
    "id": "shape",
@@ -552,6 +578,9 @@
    "sid": "4-09.s1",
    "word_f0": 116,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 33580,
    "F_land": 33592,
    "F_end": 33875
@@ -572,6 +601,9 @@
    "sid": "4-09.s1",
    "word_f0": 175,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 33627,
    "F_land": 33651,
    "F_end": 33875
@@ -592,6 +624,9 @@
    "sid": "4-09.s1",
    "word_f0": 187,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 33653,
    "F_land": 33663,
    "F_end": 33875
@@ -612,9 +647,25 @@
    "sid": "4-09.s1",
    "word_f0": 264,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "key"
+    ]
+   },
    "F_start": 33728,
    "F_land": 33740,
-   "F_end": 33875
+   "F_end": 33875,
+   "g_start": 238,
+   "g_on": 256,
+   "g_end": 384,
+   "g_off": 414,
+   "g_tick": 260,
+   "G_start": 33714,
+   "G_on": 33732,
+   "G_end": 33860,
+   "G_off": 33890,
+   "G_tick": 33736
   },
   {
    "id": "grip",
@@ -632,6 +683,9 @@
    "sid": "4-09.s1",
    "word_f0": 296,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 33758,
    "F_land": 33772,
    "F_end": 33875
@@ -652,6 +706,9 @@
    "sid": "4-09.s1",
    "word_f0": 316,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 33784,
    "F_land": 33792,
    "F_end": 33875
@@ -672,6 +729,9 @@
    "sid": "4-09.s1",
    "word_f0": 374,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 33840,
    "F_land": 33850,
    "F_end": 33875
@@ -692,6 +752,9 @@
    "sid": "4-09.s2",
    "word_f0": 450,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 33912,
    "F_land": 33926,
    "F_end": 34516
@@ -712,6 +775,9 @@
    "sid": "4-09.s2",
    "word_f0": 504,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 33970,
    "F_land": 33980,
    "F_end": 34516
@@ -732,6 +798,9 @@
    "sid": "4-09.s2",
    "word_f0": 553,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 34021,
    "F_land": 34029,
    "F_end": 34516
@@ -752,6 +821,9 @@
    "sid": "4-09.s2",
    "word_f0": 577,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 34045,
    "F_land": 34053,
    "F_end": 34516
@@ -772,6 +844,9 @@
    "sid": "4-09.s2",
    "word_f0": 644,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 34110,
    "F_land": 34120,
    "F_end": 34516
@@ -792,6 +867,9 @@
    "sid": "4-09.s2",
    "word_f0": 702,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 34170,
    "F_land": 34178,
    "F_end": 34516
@@ -812,6 +890,9 @@
    "sid": "4-09.s2",
    "word_f0": 741,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 34207,
    "F_land": 34217,
    "F_end": 34516
@@ -832,6 +913,9 @@
    "sid": "4-09.s2",
    "word_f0": 763,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 34231,
    "F_land": 34239,
    "F_end": 34516
@@ -852,6 +936,9 @@
    "sid": "4-09.s2",
    "word_f0": 845,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 34311,
    "F_land": 34321,
    "F_end": 34516
@@ -872,6 +959,9 @@
    "sid": "4-09.s2",
    "word_f0": 887,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 34353,
    "F_land": 34363,
    "F_end": 34516
@@ -892,6 +982,9 @@
    "sid": "4-09.s2",
    "word_f0": 942,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 34408,
    "F_land": 34418,
    "F_end": 34516
@@ -912,9 +1005,66 @@
    "sid": "4-09.s2",
    "word_f0": 999,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 34465,
    "F_land": 34475,
    "F_end": 34516
+  }
+ ],
+ "guides": [
+  {
+   "id": "gave",
+   "target": [
+    "chip",
+    "lock"
+   ],
+   "kind": "focus",
+   "gs": 29,
+   "gon": 47,
+   "land": 55,
+   "gend": 200,
+   "goff": 230,
+   "tick": 51,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 39,
+   "events": [
+    "gave",
+    "pocket"
+   ],
+   "G_start": 33505,
+   "G_on": 33523,
+   "G_land": 33531,
+   "G_end": 33676,
+   "G_off": 33706,
+   "G_tick": 33527
+  },
+  {
+   "id": "key",
+   "target": [
+    "key"
+   ],
+   "kind": "focus",
+   "gs": 238,
+   "gon": 256,
+   "land": 264,
+   "gend": 384,
+   "goff": 414,
+   "tick": 260,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 252,
+   "events": [
+    "key"
+   ],
+   "G_start": 33714,
+   "G_on": 33732,
+   "G_land": 33740,
+   "G_end": 33860,
+   "G_off": 33890,
+   "G_tick": 33736
   }
  ],
  "problems": []

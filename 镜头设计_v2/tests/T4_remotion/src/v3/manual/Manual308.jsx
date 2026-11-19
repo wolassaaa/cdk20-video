@@ -6,9 +6,10 @@
 import React from "react";
 import {AbsoluteFill, Audio, Composition, Easing, registerRoot, staticFile, useCurrentFrame} from "remotion";
 import K from "./keys_3-08.json";
-import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, Bead, evMap, Label, PageFrame, Source} from "./kit.jsx";
+import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, evMap, Label, PageFrame, Source, Lens, guidePlan} from "./kit.jsx";
 
 const E = evMap(K);
+const GP = guidePlan(K);   // 视线引导（11-20，替代红色料珠）：事件表 guide 字段 → resolve.py → keys.guides
 const GX = 1000, GY = 380;                      // CDK20 / 虚线轮廓中心
 const CHX = 1640, CHY = 330, CHW = 220;          // 芯片
 const COLS = 22, ROWS = 7, DX0 = 676, DY0 = 690, DS = 26, DR = 26;
@@ -39,10 +40,8 @@ const Scene = () => {
   const flash = f >= E.no3d.s && f < E.no3d.l + 40 ? 0.5 + 0.5 * Math.cos((f - E.no3d.s) / 6) : 0;
   const arrow = span(f, E.chip.s, E.chip.l + 6, ease);
   const words = [["expensive", E.exp], ["slow", E.slow], ["difficult", E.diff]];
-  const bead = [[0, 130, 96], [E.title.l, 470, 96], [E.key.l, 260, 290], [E.eye.l, 560, 300], [E.hide.l, GX, 210], [E.stamp.l, 1180, 250],
-                [E.lab.l, 230, 660], [E.cal.l, 430, 676], [E.dots.l, DX0 - 24, 650], [E.few.l, DX0 + COLS * DS + 6, 650], [E.no3d.l, 830, 560],
-                [E.chip.l, CHX, CHY - CHW / 2 - 34], [E.exp.l, 1470, 562], [E.slow.l, 1470, 642], [E.diff.l, 1470, 722], [K.len_f, 1471, 723]];
   return (
+    <Lens plan={GP} f={f}>
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("3-08.wav")} />
       <PageFrame />
@@ -113,8 +112,8 @@ const Scene = () => {
       ))}
 
       <Source p={span(f, E.title.l, E.title.l + 20)}>Ren et al., Chem. Sci. 2023; Wang et al., Pharmaceuticals 2023 · Illustration</Source>
-      <Bead K={bead} f={f} />
     </AbsoluteFill>
+    </Lens>
   );
 };
 

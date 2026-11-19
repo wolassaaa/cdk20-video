@@ -5,9 +5,10 @@
 import React from "react";
 import {AbsoluteFill, Audio, Composition, Easing, registerRoot, staticFile, useCurrentFrame} from "remotion";
 import K from "./keys_3-05.json";
-import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, Step, Bead, evMap, Title, Label, Pen, PageFrame, Source} from "./kit.jsx";
+import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, Step, evMap, Title, Label, Pen, PageFrame, Source, Lens, guidePlan} from "./kit.jsx";
 
 const E = evMap(K);
+const GP = guidePlan(K);   // 视线引导（11-20，替代红色料珠）：事件表 guide 字段 → resolve.py → keys.guides
 const BY = 180, BH = 640, BW = 560, BX = [96, 680, 1264];
 // 52 个样本点：13 列 × 4 行；变红的 36 个按固定的乱序选出
 const DOTS = [...Array(52)].map((_, i) => ({c: i % 13, r: Math.floor(i / 13)}));
@@ -26,10 +27,8 @@ const Scene = () => {
   const turn = span(f, E.down.s, E.down.e, Easing.inOut(Easing.cubic));
   const cells = span(f, E.cells.s, E.cells.e, out);
   const slow = span(f, E.slow.s, E.slow.e, ease);
-  const bead = [[0, 130, 96], [E.title.l, 440, 96], [E.hk.l, 1500, 96], [E.grid.l, BX[0] + 46, BY + 46], [E.red.l, BX[0] + 280, BY + 420],
-                [E.cmp.l, BX[0] + 280, BY + 560], [E.high.l, BX[1] + 46, BY + 46], [E.late.l, BX[1] + 280, BY + 330], [E.surv.l, BX[1] + 280, BY + 520],
-                [E.knob.l, BX[2] + 46, BY + 46], [E.down.l, BX[2] + 140, BY + 160], [E.cells.l, BX[2] + 280, BY + 360], [E.slow.l, BX[2] + 520, BY + 480], [K.len_f, BX[2] + 521, BY + 481]];
   return (
+    <Lens plan={GP} f={f}>
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("3-05.wav")} />
       <PageFrame />
@@ -110,8 +109,8 @@ const Scene = () => {
       </Step>
 
       <Source p={span(f, E.title.l, E.title.l + 20)}>Feng et al., J. Clin. Invest. 2011 · Illustration (dots and cells not to scale)</Source>
-      <Bead K={bead} f={f} />
     </AbsoluteFill>
+    </Lens>
   );
 };
 

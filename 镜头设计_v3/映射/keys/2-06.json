@@ -784,6 +784,9 @@
    "sid": "2-06.s1",
    "word_f0": 9,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 12071,
    "F_land": 12071,
    "F_end": 12190
@@ -804,9 +807,25 @@
    "sid": "2-06.s2",
    "word_f0": 175,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "book"
+    ]
+   },
    "F_start": 12233,
    "F_land": 12237,
-   "F_end": 12284
+   "F_end": 12284,
+   "g_start": 149,
+   "g_on": 167,
+   "g_end": 222,
+   "g_off": 252,
+   "g_tick": 171,
+   "G_start": 12211,
+   "G_on": 12229,
+   "G_end": 12284,
+   "G_off": 12314,
+   "G_tick": 12233
   },
   {
    "id": "alot",
@@ -824,6 +843,9 @@
    "sid": "2-06.s3",
    "word_f0": 210,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 12272,
    "F_land": 12272,
    "F_end": 12284
@@ -844,9 +866,25 @@
    "sid": "2-06.s4",
    "word_f0": 279,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "flask"
+    ]
+   },
    "F_start": 12337,
    "F_land": 12341,
-   "F_end": 12369
+   "F_end": 12369,
+   "g_start": 253,
+   "g_on": 271,
+   "g_end": 307,
+   "g_off": 337,
+   "g_tick": 275,
+   "G_start": 12315,
+   "G_on": 12333,
+   "G_end": 12369,
+   "G_off": 12399,
+   "G_tick": 12337
   },
   {
    "id": "cross",
@@ -864,6 +902,9 @@
    "sid": "2-06.s4",
    "word_f0": 330,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 12388,
    "F_land": 12392,
    "F_end": 12472
@@ -884,6 +925,9 @@
    "sid": "2-06.s4",
    "word_f0": 410,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 12472,
    "F_land": 12472,
    "F_end": 12516
@@ -904,9 +948,25 @@
    "sid": "2-06.s5",
    "word_f0": 523,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "paper1"
+    ]
+   },
    "F_start": 12565,
    "F_land": 12585,
-   "F_end": 12685
+   "F_end": 12685,
+   "g_start": 497,
+   "g_on": 515,
+   "g_end": 623,
+   "g_off": 653,
+   "g_tick": 519,
+   "G_start": 12559,
+   "G_on": 12577,
+   "G_end": 12685,
+   "G_off": 12715,
+   "G_tick": 12581
   },
   {
    "id": "stamp",
@@ -924,6 +984,9 @@
    "sid": "2-06.s5",
    "word_f0": 580,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 12652,
    "F_land": 12652,
    "F_end": 12719
@@ -944,6 +1007,9 @@
    "sid": "2-06.s5",
    "word_f0": 645,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 12707,
    "F_land": 12707,
    "F_end": 12956
@@ -964,9 +1030,25 @@
    "sid": "2-06.s5",
    "word_f0": 930,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "disks"
+    ]
+   },
    "F_start": 12982,
    "F_land": 12992,
-   "F_end": 13048
+   "F_end": 13048,
+   "g_start": 904,
+   "g_on": 922,
+   "g_end": 986,
+   "g_off": 1016,
+   "g_tick": 926,
+   "G_start": 12966,
+   "G_on": 12984,
+   "G_end": 13048,
+   "G_off": 13078,
+   "G_tick": 12988
   },
   {
    "id": "ring",
@@ -984,6 +1066,9 @@
    "sid": "2-06.s6",
    "word_f0": 1027,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 13085,
    "F_land": 13089,
    "F_end": 13124
@@ -1004,6 +1089,9 @@
    "sid": "2-06.s6",
    "word_f0": 1133,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 13189,
    "F_land": 13195,
    "F_end": 13269
@@ -1024,6 +1112,9 @@
    "sid": "2-06.s6",
    "word_f0": 1247,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 13303,
    "F_land": 13309,
    "F_end": 13366
@@ -1044,6 +1135,9 @@
    "sid": "2-06.s6",
    "word_f0": 1310,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 13366,
    "F_land": 13372,
    "F_end": 13419
@@ -1064,6 +1158,9 @@
    "sid": "2-06.s6",
    "word_f0": 1361,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 13417,
    "F_land": 13423,
    "F_end": 13544
@@ -1084,6 +1181,9 @@
    "sid": "2-06.s6",
    "word_f0": 1537,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 13593,
    "F_land": 13599,
    "F_end": 13662
@@ -1104,6 +1204,9 @@
    "sid": "2-06.s6",
    "word_f0": 1673,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 13729,
    "F_land": 13735,
    "F_end": 13874
@@ -1124,6 +1227,9 @@
    "sid": "2-06.s6",
    "word_f0": 1853,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 13911,
    "F_land": 13915,
    "F_end": 14071
@@ -1144,6 +1250,9 @@
    "sid": "2-06.s5",
    "word_f0": 743,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 12801,
    "F_land": 12805,
    "F_end": 12956
@@ -1164,6 +1273,9 @@
    "sid": "2-06.s6",
    "word_f0": 1745,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 13803,
    "F_land": 13807,
    "F_end": 13874
@@ -1184,9 +1296,114 @@
    "sid": "2-06.s6",
    "word_f0": 1979,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 14035,
    "F_land": 14041,
    "F_end": 14071
+  }
+ ],
+ "guides": [
+  {
+   "id": "books",
+   "target": [
+    "book"
+   ],
+   "kind": "focus",
+   "gs": 149,
+   "gon": 167,
+   "land": 175,
+   "gend": 222,
+   "goff": 252,
+   "tick": 171,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 171,
+   "events": [
+    "books"
+   ],
+   "G_start": 12211,
+   "G_on": 12229,
+   "G_land": 12237,
+   "G_end": 12284,
+   "G_off": 12314,
+   "G_tick": 12233
+  },
+  {
+   "id": "flask",
+   "target": [
+    "flask"
+   ],
+   "kind": "focus",
+   "gs": 253,
+   "gon": 271,
+   "land": 279,
+   "gend": 307,
+   "goff": 337,
+   "tick": 275,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 275,
+   "events": [
+    "flask"
+   ],
+   "G_start": 12315,
+   "G_on": 12333,
+   "G_land": 12341,
+   "G_end": 12369,
+   "G_off": 12399,
+   "G_tick": 12337
+  },
+  {
+   "id": "centre",
+   "target": [
+    "paper1"
+   ],
+   "kind": "focus",
+   "gs": 497,
+   "gon": 515,
+   "land": 523,
+   "gend": 623,
+   "goff": 653,
+   "tick": 519,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 503,
+   "events": [
+    "centre"
+   ],
+   "G_start": 12559,
+   "G_on": 12577,
+   "G_land": 12585,
+   "G_end": 12685,
+   "G_off": 12715,
+   "G_tick": 12581
+  },
+  {
+   "id": "si",
+   "target": [
+    "disks"
+   ],
+   "kind": "focus",
+   "gs": 904,
+   "gon": 922,
+   "land": 930,
+   "gend": 986,
+   "goff": 1016,
+   "tick": 926,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 920,
+   "events": [
+    "si"
+   ],
+   "G_start": 12966,
+   "G_on": 12984,
+   "G_land": 12992,
+   "G_end": 13048,
+   "G_off": 13078,
+   "G_tick": 12988
   }
  ],
  "problems": []

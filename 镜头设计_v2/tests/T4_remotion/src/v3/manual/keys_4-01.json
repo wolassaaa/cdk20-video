@@ -744,6 +744,9 @@
    "sid": "4-01.s1",
    "word_f0": 41,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 25969,
    "F_land": 25979,
    "F_end": 26209
@@ -764,9 +767,25 @@
    "sid": "4-01.s1",
    "word_f0": 74,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "person"
+    ]
+   },
    "F_start": 26002,
    "F_land": 26012,
-   "F_end": 26209
+   "F_end": 26209,
+   "g_start": 48,
+   "g_on": 66,
+   "g_end": 194,
+   "g_off": 224,
+   "g_tick": 70,
+   "G_start": 25986,
+   "G_on": 26004,
+   "G_end": 26132,
+   "G_off": 26162,
+   "G_tick": 26008
   },
   {
    "id": "cloud",
@@ -784,6 +803,9 @@
    "sid": "4-01.s1",
    "word_f0": 141,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 26069,
    "F_land": 26079,
    "F_end": 26209
@@ -804,6 +826,9 @@
    "sid": "4-01.s1",
    "word_f0": 201,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 26133,
    "F_land": 26139,
    "F_end": 26209
@@ -824,6 +849,9 @@
    "sid": "4-01.s1",
    "word_f0": 247,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 26175,
    "F_land": 26185,
    "F_end": 26209
@@ -844,9 +872,25 @@
    "sid": "4-01.s2",
    "word_f0": 381,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chip"
+    ]
+   },
    "F_start": 26309,
    "F_land": 26319,
-   "F_end": 26371
+   "F_end": 26371,
+   "g_start": 355,
+   "g_on": 373,
+   "g_end": 433,
+   "g_off": 463,
+   "g_tick": 377,
+   "G_start": 26293,
+   "G_on": 26311,
+   "G_end": 26371,
+   "G_off": 26401,
+   "G_tick": 26315
   },
   {
    "id": "guess",
@@ -864,6 +908,9 @@
    "sid": "4-01.s2",
    "word_f0": 439,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 26365,
    "F_land": 26377,
    "F_end": 26396
@@ -884,6 +931,9 @@
    "sid": "4-01.s3",
    "word_f0": 544,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 26474,
    "F_land": 26482,
    "F_end": 26555
@@ -904,6 +954,9 @@
    "sid": "4-01.s3",
    "word_f0": 602,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 26520,
    "F_land": 26540,
    "F_end": 26588
@@ -924,6 +977,9 @@
    "sid": "4-01.s3",
    "word_f0": 650,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 26582,
    "F_land": 26588,
    "F_end": 26654
@@ -944,6 +1000,9 @@
    "sid": "4-01.s3",
    "word_f0": 720,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 26652,
    "F_land": 26658,
    "F_end": 26720
@@ -964,6 +1023,9 @@
    "sid": "4-01.s3",
    "word_f0": 794,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 26724,
    "F_land": 26732,
    "F_end": 26749
@@ -984,6 +1046,9 @@
    "sid": "4-01.s4",
    "word_f0": 871,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 26799,
    "F_land": 26809,
    "F_end": 26866
@@ -1004,6 +1069,9 @@
    "sid": "4-01.s4",
    "word_f0": 955,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 26885,
    "F_land": 26893,
    "F_end": 26924
@@ -1024,6 +1092,9 @@
    "sid": "4-01.s5",
    "word_f0": 1041,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 26971,
    "F_land": 26979,
    "F_end": 27045
@@ -1044,6 +1115,9 @@
    "sid": "4-01.s5",
    "word_f0": 1086,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 27018,
    "F_land": 27024,
    "F_end": 27085
@@ -1064,6 +1138,9 @@
    "sid": "4-01.s5",
    "word_f0": 1150,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 27076,
    "F_land": 27088,
    "F_end": 27174
@@ -1084,6 +1161,9 @@
    "sid": "4-01.s5",
    "word_f0": 1226,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 27158,
    "F_land": 27164,
    "F_end": 27204
@@ -1104,6 +1184,9 @@
    "sid": "4-01.s5",
    "word_f0": 1267,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 27175,
    "F_land": 27205,
    "F_end": 27223
@@ -1124,6 +1207,9 @@
    "sid": "4-01.s6",
    "word_f0": 1338,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 27256,
    "F_land": 27276,
    "F_end": 27354
@@ -1144,6 +1230,9 @@
    "sid": "4-01.s6",
    "word_f0": 1424,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 27352,
    "F_land": 27362,
    "F_end": 27395
@@ -1164,6 +1253,9 @@
    "sid": "4-01.s6",
    "word_f0": 1460,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 27390,
    "F_land": 27398,
    "F_end": 27470
@@ -1184,6 +1276,9 @@
    "sid": "4-01.s6",
    "word_f0": 1511,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 27443,
    "F_land": 27449,
    "F_end": 27510
@@ -1204,6 +1299,9 @@
    "sid": "4-01.s6",
    "word_f0": 1577,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 27507,
    "F_land": 27515,
    "F_end": 27582
@@ -1224,9 +1322,64 @@
    "sid": "4-01.s6",
    "word_f0": 1664,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 27552,
    "F_land": 27602,
    "F_end": 27619
+  }
+ ],
+ "guides": [
+  {
+   "id": "people",
+   "target": [
+    "person"
+   ],
+   "kind": "focus",
+   "gs": 48,
+   "gon": 66,
+   "land": 74,
+   "gend": 194,
+   "goff": 224,
+   "tick": 70,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 64,
+   "events": [
+    "people"
+   ],
+   "G_start": 25986,
+   "G_on": 26004,
+   "G_land": 26012,
+   "G_end": 26132,
+   "G_off": 26162,
+   "G_tick": 26008
+  },
+  {
+   "id": "ai",
+   "target": [
+    "chip"
+   ],
+   "kind": "focus",
+   "gs": 355,
+   "gon": 373,
+   "land": 381,
+   "gend": 433,
+   "goff": 463,
+   "tick": 377,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 371,
+   "events": [
+    "ai"
+   ],
+   "G_start": 26293,
+   "G_on": 26311,
+   "G_land": 26319,
+   "G_end": 26371,
+   "G_off": 26401,
+   "G_tick": 26315
   }
  ],
  "problems": []

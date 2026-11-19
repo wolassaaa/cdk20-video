@@ -5,9 +5,10 @@
 import React from "react";
 import {AbsoluteFill, Audio, Composition, Easing, registerRoot, staticFile, useCurrentFrame} from "remotion";
 import K from "./keys_6-10.json";
-import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, Bead, evMap, Label, Pen, PageFrame, Source} from "./kit.jsx";
+import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, evMap, Label, Pen, PageFrame, Source, Lens, guidePlan} from "./kit.jsx";
 
 const E = evMap(K);
+const GP = guidePlan(K);   // 视线引导（11-20，替代红色料珠）：事件表 guide 字段 → resolve.py → keys.guides
 const ST = ["Target", "Hit", "Improve", "Cells", "Animals", "Trials", "Approval"];
 const RX0 = 230, RX1 = 1690, RY = 660;
 const sx = (i) => RX0 + ((RX1 - RX0) * i) / (ST.length - 1);
@@ -29,10 +30,8 @@ const Scene = () => {
   const g1 = f >= E.g1.l, g2 = f >= E.g2.l;
   const grey = [false, false, false, false, g1, g2, false];
   const bracket = span(f, E.ny.s, E.ny.l + 8, ease);
-  const bead = [[0, 130, 96], [E.title.l, 700, 96], [E.tag.l, 140, RY - 170], [E.road.l, 1760, RY - 120], [E.tgt.l, sx(0) + 110, RY - 200], [E.tgtk.l, sx(0) + 80, RY + 150],
-                [E.hit.l, sx(1) + 120, RY - 200], [E.hitk.l, sx(1) + 80, RY + 150], [E.imp.l, sx(2) + 120, RY - 200], [E.st.l, sx(2) + 110, RY + 150], [E.cells.l, sx(3) + 120, RY - 200],
-                [E.ft.l, sx(3) + 100, RY + 105], [E.done.l, sx(3) + 80, RY + 150], [E.g1.l, sx(4), RY - 150], [E.g2.l, sx(5), RY - 150], [E.ny.l, 1325, RY + 190], [K.len_f, 1326, RY + 191]];
   return (
+    <Lens plan={GP} f={f}>
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("6-10.wav")} />
       <PageFrame />
@@ -68,8 +67,8 @@ const Scene = () => {
       <Label x={sx(3)} y={RY + 84} w={200} size={28} italic color={SOFT} p={span(f, E.ft.s, E.ft.e)}>first tests</Label>
       <Pen x={sx(4) + 62} y={RY + 118} size={44} rot={-2} p={span(f, E.ny.s, E.ny.e)}>not yet&nbsp;</Pen>
       <Source p={span(f, E.title.l, E.title.l + 20)}>Ren et al., Chem. Sci. 2023 · Illustration</Source>
-      <Bead K={bead} f={f} />
     </AbsoluteFill>
+    </Lens>
   );
 };
 

@@ -5,9 +5,10 @@
 import React from "react";
 import {AbsoluteFill, Audio, Composition, Easing, registerRoot, staticFile, useCurrentFrame} from "remotion";
 import K from "./keys_4-01.json";
-import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, Bead, evMap, Label, Pen, PageFrame, Source} from "./kit.jsx";
+import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, evMap, Label, Pen, PageFrame, Source, Lens, guidePlan} from "./kit.jsx";
 
 const E = evMap(K);
+const GP = guidePlan(K);   // 视线引导（11-20，替代红色料珠）：事件表 guide 字段 → resolve.py → keys.guides
 const N = 12, RX = 160, RY = 768, RS = 58, BR = 19;               // 一串珠子
 const FX = 1170, FY = 590;                                          // 折好后的中心
 const FOLD = [[-80, 50], [-40, 70], [0, 54], [22, 16], [-14, -14], [-54, -24], [-86, -58], [-46, -92], [-4, -72], [36, -48], [74, -10], [112, 28]];
@@ -36,11 +37,8 @@ const Scene = () => {
   };
   const P = [...Array(N)].map((_, i) => pos(i));
   const shown = (i) => span(chainIn, i / N * 0.8, i / N * 0.8 + 0.2);
-  const bead = [[0, 130, 96], [E.title.l, 420, 96], [E.people.l, 200, 330], [E.fic.l, 420, 190], [E.ai.l, CHX, CHY - 110], [E.guess.l, 820, 230],
-                [E.chain.l, RX - 40, RY], [E.fold.l, 860, 640], [E.d3.l, FX - 120, FY + 150], [E.order.l, RX - 40, RY + 40], [E.seq.l, 620, RY + 66],
-                [E.af.l, CHX + 120, CHY + 110], [E.known.l, 980, KY], [E.learn.l, CHX + 110, CHY - 90], [E.give.l, 420, 640], [E.pred.l, 860, 470],
-                [E.shape.l, 950, 430], [E.sure.l, 1470, 520], [E.each.l, 1820, 760], [K.len_f, 1821, 761]];
   return (
+    <Lens plan={GP} f={f}>
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("4-01.wav")} />
       <PageFrame />
@@ -162,8 +160,8 @@ const Scene = () => {
       <Label x={1650} y={706} w={300} size={24} italic color={SOFT} p={span(f, E.each.l - 20, E.each.e)}>about each part</Label>
 
       <Source p={span(f, E.title.l, E.title.l + 20)}>Jumper et al., Nature 2021; Ren et al., Chem. Sci. 2023 · Illustration (not to scale)</Source>
-      <Bead K={bead} f={f} />
     </AbsoluteFill>
+    </Lens>
   );
 };
 

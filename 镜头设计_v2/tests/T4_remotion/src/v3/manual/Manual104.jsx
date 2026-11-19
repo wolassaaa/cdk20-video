@@ -5,9 +5,10 @@
 import React from "react";
 import {AbsoluteFill, Audio, Composition, Easing, registerRoot, staticFile, useCurrentFrame} from "remotion";
 import K from "./keys_1-04.json";
-import {PAPER, INK, SOFT, RED, ease, out, span, Part, Tag, Arrow, Write, Step, Legend, Bead, evMap} from "./kit.jsx";
+import {PAPER, INK, SOFT, RED, ease, out, span, Part, Tag, Arrow, Write, Step, Legend, evMap, Lens, guidePlan} from "./kit.jsx";
 
 const E = evMap(K);
+const GP = guidePlan(K);   // 视线引导（11-20，替代红色料珠）：事件表 guide 字段 → resolve.py → keys.guides
 const AR = {liver: 1052 / 792, capsule: 530 / 229, ivbag: 474 / 773, person_w: 413 / 682, paper1: 441 / 582};
 const BX = [96, 686, 1276], BY = 84, BW = 548, BH = 640;
 
@@ -40,15 +41,9 @@ const Scene = () => {
   const ul = span(f, E.underline.s, E.underline.s + 22, ease);
 
   // 料珠路线：每一站落在对应事件的落点帧
-  const bead = [
-    [0, 150, 60], [E.step1.l, 150, 128], [E.liver.l, BX[0] + 150, BY + 210], [E.note_changed.l, BX[0] + 380, BY + 196],
-    [E.nexavar.l, BX[0] + 110, BY + 420], [E.bag1.l, BX[0] + 330, BY + 420], [E.bag2.l, BX[0] + 452, BY + 420],
-    [E.step2.l, BX[1] + 46, BY + 46], [E.people.l, BX[1] + PEOPLE[0][0], BY + 200], [E.three.l, BX[1] + PEOPLE[2][0], BY + 200],
-    [E.plate_3in10.e, BX[1] + 274, BY + 560], [E.step3.l, BX[2] + 46, BY + 46], [E.paper.l, BX[2] + 274, BY + 270],
-    [E.quote.l, BX[2] + 120, BY + 488], [E.underline.e, BX[2] + 440, BY + 532], [K.len_f, BX[2] + 444, BY + 532],
-  ];
 
   return (
+    <Lens plan={GP} f={f}>
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("1-04.wav")} />
       <div style={{position: "absolute", inset: "34px 40px 44px 40px", border: `1.5px solid rgba(31,30,28,0.22)`, borderRadius: 4}} />
@@ -135,8 +130,8 @@ const Scene = () => {
       <div style={{position: "absolute", left: 44, top: 1046, fontSize: 17, color: SOFT, opacity: span(f, E.step1.l, E.step1.l + 20)}}>
         Ren et al., Chem. Sci. 2023; Hong Kong Cancer Registry, 2022 (5-year relative survival, 2010–2021) · Illustration
       </div>
-      <Bead K={bead} f={f} />
     </AbsoluteFill>
+    </Lens>
   );
 };
 

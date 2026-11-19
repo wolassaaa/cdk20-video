@@ -18,6 +18,9 @@
    "lead": 8,
    "until": {
     "word": "7-03.w001"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -33,6 +36,9 @@
    "lead": 12,
    "until": {
     "word": "7-03.w003"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -48,6 +54,12 @@
    "lead": 14,
    "until": {
     "word": "7-03.w004"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chip"
+    ]
    }
   },
   {
@@ -63,6 +75,9 @@
    "lead": 16,
    "until": {
     "word": "7-03.w005"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -78,6 +93,9 @@
    "lead": 10,
    "until": {
     "word": "7-03.w007"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -93,6 +111,12 @@
    "lead": 12,
    "until": {
     "word": "7-03.w008"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "flask"
+    ]
    }
   },
   {
@@ -108,6 +132,9 @@
    "lead": 14,
    "until": {
     "word": "7-03.w009"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -123,6 +150,9 @@
    "lead": 8,
    "until": {
     "word": "7-03.w011"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -138,6 +168,9 @@
    "lead": 6,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -153,6 +186,9 @@
    "lead": 14,
    "until": {
     "word": "7-03.w014"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -168,6 +204,9 @@
    "lead": 10,
    "until": {
     "word": "7-03.w015"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -183,6 +222,9 @@
    "lead": 6,
    "until": {
     "word": "7-03.w016"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -198,6 +240,9 @@
    "lead": 10,
    "until": {
     "word": "7-03.w018"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -213,6 +258,9 @@
    "lead": 6,
    "until": {
     "word": "7-03.w019"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -228,6 +276,9 @@
    "lead": 10,
    "until": {
     "word": "7-03.w021"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -243,6 +294,9 @@
    "lead": 8,
    "until": {
     "word": "7-03.w023"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -258,6 +312,9 @@
    "lead": 10,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   }
  ]

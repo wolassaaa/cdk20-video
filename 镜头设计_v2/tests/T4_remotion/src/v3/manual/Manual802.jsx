@@ -5,9 +5,10 @@
 import React from "react";
 import {AbsoluteFill, Audio, Composition, Easing, registerRoot, staticFile, useCurrentFrame} from "remotion";
 import K from "./keys_8-02.json";
-import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, Bead, evMap, Label, Pen, PageFrame, Source} from "./kit.jsx";
+import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, evMap, Label, Pen, PageFrame, Source, Lens, guidePlan} from "./kit.jsx";
 
 const E = evMap(K);
+const GP = guidePlan(K);   // 视线引导（11-20，替代红色料珠）：事件表 guide 字段 → resolve.py → keys.guides
 const ST = ["Target", "Hit", "Improve", "Cells", "Animals", "Trials", "Approval"];
 const RX0 = 230, RX1 = 1690, RY = 720;
 const sx = (i) => RX0 + ((RX1 - RX0) * i) / (ST.length - 1);
@@ -26,10 +27,8 @@ const Scene = () => {
   let rot = 0;
   for (let t = E.design.s; t <= f; t++) rot += 3;
   const note = span(f, E.obj.s, E.obj.l + 8, Easing.out(Easing.back(1.3)));
-  const bead = [[0, 130, 170], [E.q.l, 1000, 120], [E.road.l, RX0 - 80, RY - 40], [E.find.l, sx(0) - 30, RY + 120], [E.assess.l, sx(3) + 70, RY + 120],
-                [E.case.l, 100, 300], [E.pick.l, CXS[0] - 70, CY - 110], [E.pred.l, CXS[1] - 70, CY - 110], [E.design.l, CXS[2] - 70, CY - 110],
-                [E.rank.l, CXS[3] - 70, CY - 110], [E.obj.l, 1200, 250], [E.met.l, 1790, 340], [E.thiscase.l, 1800, 560], [K.len_f, 1801, 561]];
   return (
+    <Lens plan={GP} f={f}>
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("8-02.wav")} />
       <PageFrame />
@@ -130,8 +129,8 @@ const Scene = () => {
       <Pen x={1300} y={530} p={span(f, E.thiscase.s, E.thiscase.e)} size={40}>(for this case)</Pen>
 
       <Source p={span(f, E.q.l, E.q.l + 20)}>Ren et al., Chem. Sci. 2023 · Illustration</Source>
-      <Bead K={bead} f={f} />
     </AbsoluteFill>
+    </Lens>
   );
 };
 

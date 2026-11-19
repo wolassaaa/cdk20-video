@@ -350,6 +350,9 @@
    "sid": "7-04.s1",
    "word_f0": 9,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 57447,
    "F_land": 57455,
    "F_end": 57537
@@ -370,6 +373,9 @@
    "sid": "7-04.s1",
    "word_f0": 81,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 57497,
    "F_land": 57527,
    "F_end": 57537
@@ -390,6 +396,9 @@
    "sid": "7-04.s2",
    "word_f0": 138,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 57572,
    "F_land": 57584,
    "F_end": 57593
@@ -410,6 +419,9 @@
    "sid": "7-04.s2",
    "word_f0": 217,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 57649,
    "F_land": 57663,
    "F_end": 57689
@@ -430,6 +442,9 @@
    "sid": "7-04.s2",
    "word_f0": 251,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 57683,
    "F_land": 57697,
    "F_end": 57718
@@ -450,6 +465,9 @@
    "sid": "7-04.s2",
    "word_f0": 323,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 57749,
    "F_land": 57769,
    "F_end": 57797
@@ -470,6 +488,9 @@
    "sid": "7-04.s2",
    "word_f0": 391,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 57817,
    "F_land": 57837,
    "F_end": 57861
@@ -490,6 +511,9 @@
    "sid": "7-04.s2",
    "word_f0": 469,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 57895,
    "F_land": 57915,
    "F_end": 57964
@@ -510,6 +534,9 @@
    "sid": "7-04.s2",
    "word_f0": 523,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 57961,
    "F_land": 57969,
    "F_end": 57985
@@ -530,6 +557,9 @@
    "sid": "7-04.s3",
    "word_f0": 629,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 58061,
    "F_land": 58075,
    "F_end": 58108
@@ -550,6 +580,9 @@
    "sid": "7-04.s3",
    "word_f0": 670,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 58076,
    "F_land": 58116,
    "F_end": 58141
@@ -570,10 +603,14 @@
    "sid": "7-04.s3",
    "word_f0": 700,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 58138,
    "F_land": 58146,
    "F_end": 58234
   }
  ],
+ "guides": [],
  "problems": []
 }

@@ -362,6 +362,9 @@
    "sid": "6-08.s1",
    "word_f0": 83,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 51043,
    "F_land": 51063,
    "F_end": 51088
@@ -382,6 +385,9 @@
    "sid": "6-08.s1",
    "word_f0": 145,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 51105,
    "F_land": 51125,
    "F_end": 51174
@@ -402,6 +408,9 @@
    "sid": "6-08.s1",
    "word_f0": 251,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 51217,
    "F_land": 51231,
    "F_end": 51263
@@ -422,6 +431,9 @@
    "sid": "6-08.s1",
    "word_f0": 285,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 51255,
    "F_land": 51265,
    "F_end": 51284
@@ -442,6 +454,9 @@
    "sid": "6-08.s1",
    "word_f0": 362,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 51334,
    "F_land": 51342,
    "F_end": 51360
@@ -462,6 +477,9 @@
    "sid": "6-08.s1",
    "word_f0": 433,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 51399,
    "F_land": 51413,
    "F_end": 51431
@@ -482,9 +500,25 @@
    "sid": "6-08.s2",
    "word_f0": 499,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "paper1"
+    ]
+   },
    "F_start": 51465,
    "F_land": 51479,
-   "F_end": 51500
+   "F_end": 51500,
+   "g_start": 473,
+   "g_on": 491,
+   "g_end": 520,
+   "g_off": 550,
+   "g_tick": 495,
+   "G_start": 51453,
+   "G_on": 51471,
+   "G_end": 51500,
+   "G_off": 51530,
+   "G_tick": 51475
   },
   {
    "id": "call",
@@ -502,6 +536,9 @@
    "sid": "6-08.s2",
    "word_f0": 561,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 51531,
    "F_land": 51541,
    "F_end": 51597
@@ -522,6 +559,9 @@
    "sid": "6-08.s2",
    "word_f0": 621,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 51591,
    "F_land": 51601,
    "F_end": 51627
@@ -542,9 +582,39 @@
    "sid": "6-08.s2",
    "word_f0": 695,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 51665,
    "F_land": 51675,
    "F_end": 51724
+  }
+ ],
+ "guides": [
+  {
+   "id": "pap",
+   "target": [
+    "paper1"
+   ],
+   "kind": "focus",
+   "gs": 473,
+   "gon": 491,
+   "land": 499,
+   "gend": 520,
+   "goff": 550,
+   "tick": 495,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 485,
+   "events": [
+    "pap"
+   ],
+   "G_start": 51453,
+   "G_on": 51471,
+   "G_land": 51479,
+   "G_end": 51500,
+   "G_off": 51530,
+   "G_tick": 51475
   }
  ],
  "problems": []

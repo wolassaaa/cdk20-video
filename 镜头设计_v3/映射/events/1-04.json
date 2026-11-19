@@ -18,6 +18,9 @@
    "lead": 4,
    "until": {
     "dur": 30
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -32,6 +35,9 @@
    "tool": "remotion",
    "until": {
     "word": "1-04.w004"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -48,6 +54,12 @@
    "until": {
     "word": "1-04.w008",
     "off": 24
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "liver"
+    ]
    }
   },
   {
@@ -63,6 +75,9 @@
    "until": {
     "word": "1-04.w012",
     "off": 30
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -78,6 +93,12 @@
    "lead": 4,
    "until": {
     "dur": 24
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "capsule"
+    ]
    }
   },
   {
@@ -94,6 +115,9 @@
    "until": {
     "word": "1-04.w017",
     "edge": "start"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -109,6 +133,9 @@
    "lead": 6,
    "until": {
     "dur": 30
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -124,6 +151,12 @@
    "lead": 4,
    "until": {
     "word": "1-04.w018"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "ivbag"
+    ]
    }
   },
   {
@@ -138,6 +171,9 @@
    "tool": "remotion",
    "until": {
     "dur": 10
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -153,6 +189,12 @@
    "lead": 4,
    "until": {
     "word": "1-04.w020"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "ivbag"
+    ]
    }
   },
   {
@@ -168,6 +210,9 @@
    "lead": 10,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -183,6 +228,9 @@
    "lead": 4,
    "until": {
     "dur": 30
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -198,6 +246,9 @@
    "lead": 4,
    "until": {
     "word": "1-04.w027"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -213,6 +264,9 @@
    "lead": 2,
    "until": {
     "word": "1-04.w027"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -228,6 +282,9 @@
    "until": {
     "word": "1-04.w027",
     "off": 10
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -244,6 +301,9 @@
    "until": {
     "word": "1-04.w030",
     "off": 20
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -258,6 +318,9 @@
    "tool": "remotion",
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -273,6 +336,9 @@
    "lead": 4,
    "until": {
     "dur": 30
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -288,6 +354,12 @@
    "lead": 2,
    "until": {
     "word": "1-04.w037"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "paper1"
+    ]
    }
   },
   {
@@ -302,6 +374,9 @@
    "tool": "remotion",
    "until": {
     "word": "1-04.w040"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -316,6 +391,9 @@
    "tool": "remotion",
    "until": {
     "word": "1-04.w043"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -330,6 +408,9 @@
    "tool": "remotion",
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   }
  ]

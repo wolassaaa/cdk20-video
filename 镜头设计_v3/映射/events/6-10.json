@@ -18,6 +18,9 @@
    "lead": 12,
    "until": {
     "word": "6-10.w006"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -33,6 +36,9 @@
    "lead": 14,
    "until": {
     "word": "6-10.w003"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -48,6 +54,9 @@
    "lead": 60,
    "until": {
     "word": "6-10.w006"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -63,6 +72,12 @@
    "lead": 30,
    "until": {
     "word": "6-10.w007"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "lock"
+    ]
    }
   },
   {
@@ -78,6 +93,9 @@
    "lead": 8,
    "until": {
     "word": "6-10.w008"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -93,6 +111,12 @@
    "lead": 24,
    "until": {
     "word": "6-10.w009"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "key"
+    ]
    }
   },
   {
@@ -108,6 +132,9 @@
    "lead": 8,
    "until": {
     "word": "6-10.w010"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -123,6 +150,12 @@
    "lead": 24,
    "until": {
     "word": "6-10.w011"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "flask"
+    ]
    }
   },
   {
@@ -138,6 +171,9 @@
    "lead": 10,
    "until": {
     "word": "6-10.w013"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -153,6 +189,12 @@
    "lead": 30,
    "until": {
     "word": "6-10.w014"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "tubes"
+    ]
    }
   },
   {
@@ -168,6 +210,9 @@
    "lead": 10,
    "until": {
     "word": "6-10.w016"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -183,6 +228,9 @@
    "lead": 8,
    "until": {
     "word": "6-10.w017"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -198,6 +246,9 @@
    "lead": 10,
    "until": {
     "word": "6-10.w018"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -213,6 +264,9 @@
    "lead": 10,
    "until": {
     "word": "6-10.w021"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -228,6 +282,9 @@
    "lead": 10,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   }
  ]

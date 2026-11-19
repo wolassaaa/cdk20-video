@@ -152,6 +152,9 @@
    "sid": "3-01.s1",
    "word_f0": 39,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 16837,
    "F_land": 16845,
    "F_end": 16864
@@ -172,6 +175,9 @@
    "sid": "3-01.s2",
    "word_f0": 118,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 16904,
    "F_land": 16924,
    "F_end": 16941
@@ -192,9 +198,29 @@
    "sid": "3-01.s2",
    "word_f0": 184,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": "card",
+    "box": [
+     1290,
+     230,
+     580,
+     650
+    ]
+   },
    "F_start": 16966,
    "F_land": 16990,
-   "F_end": 17027
+   "F_end": 17027,
+   "g_start": 158,
+   "g_on": 176,
+   "g_end": 221,
+   "g_off": 251,
+   "g_tick": 180,
+   "G_start": 16964,
+   "G_on": 16982,
+   "G_end": 17027,
+   "G_off": 17057,
+   "G_tick": 16986
   },
   {
    "id": "lock",
@@ -212,9 +238,20 @@
    "sid": "3-01.s2",
    "word_f0": 230,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": "card",
+    "box": [
+     1290,
+     230,
+     580,
+     650
+    ]
+   },
    "F_start": 17022,
    "F_land": 17036,
-   "F_end": 17055
+   "F_end": 17055,
+   "guide_into": "frame"
   },
   {
    "id": "key",
@@ -232,6 +269,9 @@
    "sid": "3-01.s2",
    "word_f0": 332,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 17114,
    "F_land": 17138,
    "F_end": 17139
@@ -252,9 +292,46 @@
    "sid": "3-01.s2",
    "word_f0": 340,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 17146,
    "F_land": 17146,
    "F_end": 17161
+  }
+ ],
+ "guides": [
+  {
+   "id": "frame",
+   "target": [
+    "card"
+   ],
+   "kind": "focus",
+   "gs": 158,
+   "gon": 176,
+   "land": 184,
+   "gend": 221,
+   "goff": 251,
+   "tick": 180,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 160,
+   "events": [
+    "frame",
+    "lock"
+   ],
+   "box": [
+    1290,
+    230,
+    580,
+    650
+   ],
+   "G_start": 16964,
+   "G_on": 16982,
+   "G_land": 16990,
+   "G_end": 17027,
+   "G_off": 17057,
+   "G_tick": 16986
   }
  ],
  "problems": []

@@ -6,9 +6,10 @@
 import React from "react";
 import {AbsoluteFill, Audio, Composition, Easing, registerRoot, staticFile, useCurrentFrame} from "remotion";
 import K from "./keys_5-04.json";
-import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, Bead, evMap, Label, Pen, PageFrame, Source} from "./kit.jsx";
+import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, evMap, Label, Pen, PageFrame, Source, Lens, guidePlan} from "./kit.jsx";
 
 const E = evMap(K);
+const GP = guidePlan(K);   // 视线引导（11-20，替代红色料珠）：事件表 guide 字段 → resolve.py → keys.guides
 const LK = {cx: 450, cy: 600, w: 280};
 const KY = 660, KS = 140, KE = 330;              // 钥匙：从 cx 120 滑到 320（尖端在锁后面）
 const GR = [690, 470];                            // 齿轮
@@ -42,11 +43,8 @@ const Scene = () => {
   const rc = span(f, E.q.s + 6, E.above.l + 10, ease);
   const arr = span(f, E.above.l, E.above.l + 20, ease);
   const dx = 980 + (1250 - 980) * dot;
-  const bead = [[0, 800, 200], [E.title.l, 760, 100], [E.grab.l, 120, 880], [E.lock.l, 650, 880], [E.neq.l, 800, 240], [E.jam.l, 110, 480],
-                [E.k001.l, 300, 880], [E.stop.l, 820, 470], [E.cdk.l, 660, 900], [E.work.l, 820, 620], [E.axes.l, 900, 940],
-                [E.ic.l, 1520, 225], [E.much.l, 1790, 860], [E.cut.l, 1100, 740], [E.half.l, 880, 720], [E.q.l, 1800, 540],
-                [E.above.l, 1810, 240], [E.weak.l, 1800, 620], [K.len_f, 1801, 621]];
   return (
+    <Lens plan={GP} f={f}>
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("5-04.wav")} />
       <PageFrame />
@@ -107,8 +105,8 @@ const Scene = () => {
       <Pen x={1560} y={440} size={56} p={span(f, E.weak.s, E.weak.l + 6)}>weak</Pen>
 
       <Source p={span(f, E.grab.l, E.grab.l + 20)}>Ren et al., Chem. Sci. 2023 · Illustration</Source>
-      <Bead K={bead} f={f} />
     </AbsoluteFill>
+    </Lens>
   );
 };
 

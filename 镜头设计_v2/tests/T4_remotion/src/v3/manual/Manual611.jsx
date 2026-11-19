@@ -7,9 +7,10 @@
 import React from "react";
 import {AbsoluteFill, Audio, Composition, Easing, registerRoot, staticFile, useCurrentFrame} from "remotion";
 import K from "./keys_6-11.json";
-import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, Bead, evMap, Label, Pen, PageFrame, Source} from "./kit.jsx";
+import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, evMap, Label, Pen, PageFrame, Source, Lens, guidePlan} from "./kit.jsx";
 
 const E = evMap(K);
+const GP = guidePlan(K);   // 视线引导（11-20，替代红色料珠）：事件表 guide 字段 → resolve.py → keys.guides
 const ST = ["Target", "Hit", "Improve", "Cells", "Animals", "Trials", "Approval"];
 const RX0 = 230, RX1 = 1690, RY = 600;
 const sx = (i) => RX0 + ((RX1 - RX0) * i) / (ST.length - 1);
@@ -47,12 +48,9 @@ const Scene = () => {
   const nott = span(f, E.nott.s, E.nott.l + 14, ease), bar = span(f, E.nott.l + 10, E.nott.l + 22, out);
   const lines = span(f, E.sh.s + 10, E.sh.l + 30, ease), red = span(f, E.res.s, E.res.l + 10);
   const RES = [[800, 300], [960, 250], [1120, 300]];
-  const bead = [[0, 600, 800], [E.title.l, 700, 820], [E.pan.l, 1560, 960], [E.ring.l, 1800, 560], [E.tags.l, 700, 820], [E.ai.l, 820, 760],
-                [E.walk1.l, 1000, 800], [E.walk2.l, 1500, 440], [E.date.l, 1490, 720], [E.ago.l, 1860, 300], [E.name.l, 1500, 770],
-                [E.appr.l, 1880, 640], [E.bile.l, 1880, 930], [E.oth.l, 1300, 330], [E.fail.l, 1300, 790], [E.back.l, 1090, 560],
-                [E.mk.l, 720, 470], [E.nott.l, 1300, 470], [E.sh.l, 680, 240], [E.res.l, 1260, 220], [K.len_f, 1261, 221]];
   const atA = f >= E.ago.l;
   return (
+    <Lens plan={GP} f={f}>
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK, overflow: "hidden"}}>
       <Audio src={staticFile("6-11.wav")} />
       <PageFrame />
@@ -135,11 +133,11 @@ const Scene = () => {
         <Pen x={1076} y={372} size={44} p={span(f, E.nott.l, E.nott.e)}>not to trials</Pen>
         {RES.map(([x, y], i) => <Part key={i} name="person_w" cx={x} cy={y} w={54} at={E.sh.s + 4 * i} f={f} gate={[0.5, 1]} flood={14} />)}
         <Label x={960} y={150} w={600} size={38} italic p={span(f, E.res.s, E.res.e)}>shared with other researchers</Label>
-        <Bead K={bead} f={f} />
       </div>
       <div style={{position: "absolute", left: 96, top: 62, fontSize: 56}}><Write p={span(f, E.title.s, E.title.e)}>The end of that road</Write></div>
       <Source p={1}>Wang et al., Pharmaceuticals 2023; FDA, Sep 2026; GEN, Jan 2023 · Illustration</Source>
     </AbsoluteFill>
+    </Lens>
   );
 };
 

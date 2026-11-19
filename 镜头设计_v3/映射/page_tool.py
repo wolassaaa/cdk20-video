@@ -165,7 +165,7 @@ def write_oncam(name):
     kp = HERE / "keys" / f"{safe(name)}.json"
     K = json.loads(kp.read_text(encoding="utf-8")) if kp.exists() else dict(events=[], words=[], sentences=[], len_f=g["len_f"])
     out = dict(group=name, len_f=end, len_f_group=g["len_f"], src=[3328, 1872], clips=clips, nose=nose,
-               events=K.get("events", []), words=K.get("words", []), sentences=K.get("sentences", []))
+               events=K.get("events", []), guides=K.get("guides", []), words=K.get("words", []), sentences=K.get("sentences", []))
     (MAN / f"oncam_{safe(name)}.json").write_text(json.dumps(out, ensure_ascii=False), encoding="utf-8")
     miss = sum(p is None for p in nose)
     print(f"{name}：出镜，clips={clips}，出片 {end} 帧（段长 {g['len_f']}），缺头 {miss} 帧")

@@ -404,6 +404,12 @@
    "sid": "5-03.s1",
    "word_f0": 9,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "tube"
+    ]
+   },
    "F_start": 39069,
    "F_land": 39077,
    "F_end": 39108
@@ -424,6 +430,9 @@
    "sid": "5-03.s1",
    "word_f0": 43,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 39101,
    "F_land": 39111,
    "F_end": 39125
@@ -444,6 +453,9 @@
    "sid": "5-03.s1",
    "word_f0": 60,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 39114,
    "F_land": 39128,
    "F_end": 39290
@@ -464,9 +476,25 @@
    "sid": "5-03.s2",
    "word_f0": 260,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "tube"
+    ]
+   },
    "F_start": 39316,
    "F_land": 39328,
-   "F_end": 39362
+   "F_end": 39362,
+   "g_start": 234,
+   "g_on": 252,
+   "g_end": 294,
+   "g_off": 324,
+   "g_tick": 256,
+   "G_start": 39302,
+   "G_on": 39320,
+   "G_end": 39362,
+   "G_off": 39392,
+   "G_tick": 39324
   },
   {
    "id": "line",
@@ -484,6 +512,9 @@
    "sid": "5-03.s3",
    "word_f0": 351,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 39411,
    "F_land": 39419,
    "F_end": 39441
@@ -504,6 +535,9 @@
    "sid": "5-03.s3",
    "word_f0": 377,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 39439,
    "F_land": 39445,
    "F_end": 39466
@@ -524,6 +558,9 @@
    "sid": "5-03.s4",
    "word_f0": 426,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 39486,
    "F_land": 39494,
    "F_end": 39535
@@ -544,6 +581,9 @@
    "sid": "5-03.s5",
    "word_f0": 556,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 39612,
    "F_land": 39624,
    "F_end": 39658
@@ -564,6 +604,9 @@
    "sid": "5-03.s6",
    "word_f0": 653,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 39711,
    "F_land": 39721,
    "F_end": 39771
@@ -584,6 +627,9 @@
    "sid": "5-03.s6",
    "word_f0": 733,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 39789,
    "F_land": 39801,
    "F_end": 39835
@@ -604,6 +650,9 @@
    "sid": "5-03.s6",
    "word_f0": 810,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 39864,
    "F_land": 39878,
    "F_end": 39919
@@ -624,6 +673,9 @@
    "sid": "5-03.s6",
    "word_f0": 852,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 39914,
    "F_land": 39920,
    "F_end": 39936
@@ -644,6 +696,9 @@
    "sid": "5-03.s6",
    "word_f0": 897,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 39945,
    "F_land": 39965,
    "F_end": 40007
@@ -664,9 +719,39 @@
    "sid": "5-03.s6",
    "word_f0": 957,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 40019,
    "F_land": 40025,
    "F_end": 40069
+  }
+ ],
+ "guides": [
+  {
+   "id": "six",
+   "target": [
+    "tube"
+   ],
+   "kind": "focus",
+   "gs": 234,
+   "gon": 252,
+   "land": 260,
+   "gend": 294,
+   "goff": 324,
+   "tick": 256,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 248,
+   "events": [
+    "six"
+   ],
+   "G_start": 39302,
+   "G_on": 39320,
+   "G_land": 39328,
+   "G_end": 39362,
+   "G_off": 39392,
+   "G_tick": 39324
   }
  ],
  "problems": []

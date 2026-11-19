@@ -6,9 +6,10 @@
 import React from "react";
 import {AbsoluteFill, Audio, Composition, Easing, registerRoot, staticFile, useCurrentFrame} from "remotion";
 import K from "./keys_4-09.json";
-import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, Bead, evMap, Label, PageFrame, Source} from "./kit.jsx";
+import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, evMap, Label, PageFrame, Source, Lens, guidePlan} from "./kit.jsx";
 
 const E = evMap(K);
+const GP = guidePlan(K);   // 视线引导（11-20，替代红色料珠）：事件表 guide 字段 → resolve.py → keys.guides
 const io = Easing.inOut(Easing.cubic);
 const LX = 480, LY = 430, LW = 170, LH = LW * 743 / 520, HOLE = LY + 0.143 * LH;
 const CX = 820, CY = 430;                        // 芯片
@@ -58,12 +59,8 @@ const Scene = () => {
   const kIn = span(f, E.grip.s, E.grip.l, io);
   const binShake = f > E.groups.s ? 3 * Math.exp(-(f - E.groups.s) / 8) * Math.sin((f - E.groups.s) / 2) : 0;
   const lineP = span(f, E.filters.s, E.filters.l + 10, ease);
-  const bead = [[0, 130, 96], [E.title.l, 700, 96], [E.gave.l, 820, 300], [E.pocket.l, 640, 300], [E.shape.l, 300, 230], [E.one.l, 680, 560],
-                [E.rule.l, 880, 640], [E.key.l, 240, 560], [E.grip.l, 620, 560], [E.spot.l, 250, 640], [E.hinge.l, 880, 900],
-                [E.filters.l, 1240, 220], [E.built.l, 960, 330], [E.toss.l, 1240, 640], [E.designs.l, 1000, 560], [E.reactive.l, 950, 280],
-                [E.possibly.l, 1260, 760], [E.toxic.l, 950, 330], [E.groups.l, 1300, 900], [E.score.l, 1480, 580], [E.drug.l, 1520, 300],
-                [E.easy.l, 1800, 300], [E.each.l, 1840, 950], [K.len_f, 1841, 951]];
   return (
+    <Lens plan={GP} f={f}>
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("4-09.wav")} />
       <PageFrame />
@@ -157,8 +154,8 @@ const Scene = () => {
       <Label x={BX + BW / 2} y={588} w={200} size={28} italic p={span(f, E.score.s, E.score.l + 10)}>score</Label>
 
       <Source p={span(f, E.title.l, E.title.l + 20)}>Ren et al., Chem. Sci. 2023; Ivanenkov et al., J. Chem. Inf. Model. 2023 · Illustration</Source>
-      <Bead K={bead} f={f} />
     </AbsoluteFill>
+    </Lens>
   );
 };
 

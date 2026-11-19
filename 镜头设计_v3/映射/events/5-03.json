@@ -18,6 +18,12 @@
    "lead": 8,
    "until": {
     "word": "5-03.w001"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "tube"
+    ]
    }
   },
   {
@@ -33,6 +39,9 @@
    "lead": 10,
    "until": {
     "word": "5-03.w002"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -48,6 +57,9 @@
    "lead": 14,
    "until": {
     "word": "5-03.w004"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -63,6 +75,12 @@
    "lead": 12,
    "until": {
     "word": "5-03.w007"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "tube"
+    ]
    }
   },
   {
@@ -78,6 +96,9 @@
    "lead": 8,
    "until": {
     "word": "5-03.w009"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -93,6 +114,9 @@
    "lead": 6,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -108,6 +132,9 @@
    "lead": 8,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -123,6 +150,9 @@
    "lead": 12,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -138,6 +168,9 @@
    "lead": 10,
    "until": {
     "word": "5-03.w020"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -153,6 +186,9 @@
    "lead": 12,
    "until": {
     "word": "5-03.w023"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -168,6 +204,9 @@
    "lead": 14,
    "until": {
     "word": "5-03.w026"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -183,6 +222,9 @@
    "lead": 6,
    "until": {
     "word": "5-03.w027"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -198,6 +240,9 @@
    "lead": 20,
    "until": {
     "word": "5-03.w030"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -213,6 +258,9 @@
    "lead": 6,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   }
  ]

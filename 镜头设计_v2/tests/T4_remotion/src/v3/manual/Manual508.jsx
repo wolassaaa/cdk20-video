@@ -5,9 +5,10 @@
 import React from "react";
 import {AbsoluteFill, Audio, Composition, Easing, registerRoot, staticFile, useCurrentFrame} from "remotion";
 import K from "./keys_5-08.json";
-import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, Bead, evMap, Label, PageFrame, Source} from "./kit.jsx";
+import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, evMap, Label, PageFrame, Source, Lens, guidePlan} from "./kit.jsx";
 
 const E = evMap(K);
+const GP = guidePlan(K);   // 视线引导（11-20，替代红色料珠）：事件表 guide 字段 → resolve.py → keys.guides
 const BX = 320, U = 80, BH = 34;                    // 条起点、一格宽、条高
 const YA = [300, 380], YB = [670, 770];             // 上半两行、下半两行（条的中线）
 const ROW = [740, 820, 900, 980, 1060, 1140], PICKK = 3;
@@ -29,13 +30,11 @@ const Scene = () => {
   const imp = span(f, E.just.s, E.just.l + 10, ease);
   const jj = f > E.just.l ? Math.exp(-(f - E.just.l) / 7) * Math.sin((f - E.just.l) / 1.8) * 4 : 0;
   const kx = ROW[PICKK] + (150 - ROW[PICKK]) * mv, ky = 240 - 40 * one + (YA[1] - 200) * mv;
-  const bead = [[0, 600, 200], [E.one.l, 1260, 240], [E.k48.l, 600, 210], [E.grab.l, 520, 470], [E.fif.l, 1720, 300], [E.tig.l, 1720, 470],
-                [E.enz.l, 1000, 560], [E.r001.l, 120, 600], [E.need.l, 1000, 600], [E.big.l, 1820, 720], [E.r048.l, 120, 840],
-                [E.n48.l, 600, 840], [E.just.l, 760, 860], [K.len_f, 761, 861]];
   const rowLab = (txt, y, p, col = INK) => (
     <div style={{position: "absolute", left: 212, top: y - 24, fontSize: 40, lineHeight: "48px", color: col, opacity: p}}>{txt}</div>
   );
   return (
+    <Lens plan={GP} f={f}>
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("5-08.wav")} />
       <PageFrame />
@@ -91,8 +90,8 @@ const Scene = () => {
       </svg>
       {ST.map((n, i) => <Label key={n} x={sx(i)} y={RY2 + 18} w={160} size={24} color={i === 2 && imp > 0.9 ? RED : i < 3 ? INK : "#8A867C"} p={1}>{n}</Label>)}
       <Source p={span(f, E.grab.l, E.grab.l + 20)}>Ren et al., Chem. Sci. 2023 · Illustration</Source>
-      <Bead K={bead} f={f} />
     </AbsoluteFill>
+    </Lens>
   );
 };
 

@@ -5,9 +5,10 @@
 import React from "react";
 import {AbsoluteFill, Audio, Composition, Easing, registerRoot, staticFile, useCurrentFrame} from "remotion";
 import K from "./keys_2-06.json";
-import {PAPER, INK, SOFT, RED, ease, out, span, Part, Tag, Bead, evMap, Label, Pen, PageFrame, Source, Plate, Write} from "./kit.jsx";
+import {PAPER, INK, SOFT, RED, ease, out, span, Part, Tag, evMap, Label, Pen, PageFrame, Source, Plate, Write, Lens, guidePlan} from "./kit.jsx";
 
 const E = evMap(K);
+const GP = guidePlan(K);   // 视线引导（11-20，替代红色料珠）：事件表 guide 字段 → resolve.py → keys.guides
 const AR = {book: 554 / 506, flask: 1, paper1: 441 / 582, disks: 1};
 const CEN = [1200, 500];
 const CARDS = [
@@ -45,12 +46,8 @@ const Scene = () => {
   const ring = span(f, E.ring.s, E.ring.s + 60, ease);
   const lift = span(f, E.centre.l, E.cite.e, Easing.inOut(Easing.sin));
   const absP = span(f, E.abs.s, E.abs.s + 30);
-  const bead = [
-    [0, 120, 80], [E.title.l, 420, 90], [E.books.l, 240, 300], [E.alot.l, 380, 250], [E.flask.l, 240, 560], [E.review.l, 330, 780],
-    [E.centre.l, CEN[0], CEN[1] - 200], [E.stamp.l, CEN[0] + 40, CEN[1] + 40], [E.si.l, CEN[0] + 190, CEN[1] - 50], [E.ring.l, CEN[0] - 330, CEN[1]],
-    ...CARDS.map(([id, pos]) => [E[id].l, pos[0], pos[1] - 70]), [E.abs.l, 735, 790], [K.len_f, 737, 792],
-  ];
   return (
+    <Lens plan={GP} f={f}>
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("2-06.wav")} />
       <PageFrame />
@@ -89,8 +86,8 @@ const Scene = () => {
       {absP > 0 && <Pen x={760} y={748} p={absP} size={34} rot={-3}>abstract only</Pen>}
 
       <Source p={span(f, E.title.l, E.title.l + 20)}>Ren et al., Chem. Sci. 2023 (and supplementary information); Feng et al. 2011; Jumper et al. 2021; Ivanenkov et al. 2023; Wang et al. 2023; Lengauer 2007; Bender et al. 2026 (abstract) · Illustration</Source>
-      <Bead K={bead} f={f} />
     </AbsoluteFill>
+    </Lens>
   );
 };
 

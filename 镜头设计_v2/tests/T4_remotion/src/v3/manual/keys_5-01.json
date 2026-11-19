@@ -446,6 +446,9 @@
    "sid": "5-01.s1",
    "word_f0": 44,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 37504,
    "F_land": 37514,
    "F_end": 37568
@@ -466,6 +469,9 @@
    "sid": "5-01.s1",
    "word_f0": 74,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 37536,
    "F_land": 37544,
    "F_end": 37568
@@ -486,6 +492,9 @@
    "sid": "5-01.s2",
    "word_f0": 138,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 37598,
    "F_land": 37608,
    "F_end": 37791
@@ -506,6 +515,9 @@
    "sid": "5-01.s2",
    "word_f0": 180,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 37642,
    "F_land": 37650,
    "F_end": 37791
@@ -526,9 +538,25 @@
    "sid": "5-01.s2",
    "word_f0": 249,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "flask"
+    ]
+   },
    "F_start": 37703,
    "F_land": 37719,
-   "F_end": 37791
+   "F_end": 37791,
+   "g_start": 223,
+   "g_on": 241,
+   "g_end": 321,
+   "g_off": 351,
+   "g_tick": 245,
+   "G_start": 37693,
+   "G_on": 37711,
+   "G_end": 37791,
+   "G_off": 37821,
+   "G_tick": 37715
   },
   {
    "id": "lab",
@@ -546,6 +574,9 @@
    "sid": "5-01.s2",
    "word_f0": 308,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 37770,
    "F_land": 37778,
    "F_end": 37791
@@ -566,6 +597,9 @@
    "sid": "5-01.s3",
    "word_f0": 386,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 37848,
    "F_land": 37856,
    "F_end": 38001
@@ -586,6 +620,9 @@
    "sid": "5-01.s3",
    "word_f0": 443,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 37899,
    "F_land": 37913,
    "F_end": 38001
@@ -606,6 +643,9 @@
    "sid": "5-01.s3",
    "word_f0": 483,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 37941,
    "F_land": 37953,
    "F_end": 38001
@@ -626,6 +666,9 @@
    "sid": "5-01.s4",
    "word_f0": 576,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 38040,
    "F_land": 38046,
    "F_end": 38540
@@ -646,6 +689,9 @@
    "sid": "5-01.s4",
    "word_f0": 618,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 38074,
    "F_land": 38088,
    "F_end": 38540
@@ -666,6 +712,9 @@
    "sid": "5-01.s4",
    "word_f0": 666,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 38128,
    "F_land": 38136,
    "F_end": 38540
@@ -686,6 +735,9 @@
    "sid": "5-01.s4",
    "word_f0": 714,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 38176,
    "F_land": 38184,
    "F_end": 38540
@@ -706,6 +758,9 @@
    "sid": "5-01.s4",
    "word_f0": 769,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 38229,
    "F_land": 38239,
    "F_end": 38540
@@ -726,6 +781,9 @@
    "sid": "5-01.s4",
    "word_f0": 804,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 38264,
    "F_land": 38274,
    "F_end": 38540
@@ -746,6 +804,9 @@
    "sid": "5-01.s4",
    "word_f0": 906,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 38356,
    "F_land": 38376,
    "F_end": 38540
@@ -766,6 +827,9 @@
    "sid": "5-01.s4",
    "word_f0": 922,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 38382,
    "F_land": 38392,
    "F_end": 38540
@@ -786,6 +850,9 @@
    "sid": "5-01.s4",
    "word_f0": 955,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 38419,
    "F_land": 38425,
    "F_end": 38540
@@ -806,6 +873,9 @@
    "sid": "5-01.s4",
    "word_f0": 989,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 38449,
    "F_land": 38459,
    "F_end": 38540
@@ -826,6 +896,9 @@
    "sid": "5-01.s4",
    "word_f0": 1041,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 38503,
    "F_land": 38511,
    "F_end": 38540
@@ -846,6 +919,9 @@
    "sid": "5-01.s5",
    "word_f0": 1094,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 38550,
    "F_land": 38564,
    "F_end": 38637
@@ -866,6 +942,9 @@
    "sid": "5-01.s5",
    "word_f0": 1121,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 38583,
    "F_land": 38591,
    "F_end": 38637
@@ -886,9 +965,39 @@
    "sid": "5-01.s5",
    "word_f0": 1142,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 38604,
    "F_land": 38612,
    "F_end": 38637
+  }
+ ],
+ "guides": [
+  {
+   "id": "made",
+   "target": [
+    "flask"
+   ],
+   "kind": "focus",
+   "gs": 223,
+   "gon": 241,
+   "land": 249,
+   "gend": 321,
+   "goff": 351,
+   "tick": 245,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 233,
+   "events": [
+    "made"
+   ],
+   "G_start": 37693,
+   "G_on": 37711,
+   "G_land": 37719,
+   "G_end": 37791,
+   "G_off": 37821,
+   "G_tick": 37715
   }
  ],
  "problems": []

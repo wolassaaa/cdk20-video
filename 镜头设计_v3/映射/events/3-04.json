@@ -18,6 +18,9 @@
    "lead": 4,
    "until": {
     "word": "3-04.w002"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -33,6 +36,9 @@
    "lead": 8,
    "until": {
     "word": "3-04.w003"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -48,6 +54,16 @@
    "lead": 10,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "cdk",
+    "box": [
+     250,
+     200,
+     440,
+     530
+    ]
    }
   },
   {
@@ -63,6 +79,9 @@
    "lead": 4,
    "until": {
     "word": "3-04.w008"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -78,6 +97,9 @@
    "lead": 4,
    "until": {
     "word": "3-04.w012"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -93,6 +115,16 @@
    "lead": 10,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "gear",
+    "box": [
+     740,
+     200,
+     120,
+     120
+    ]
    }
   },
   {
@@ -108,6 +140,16 @@
    "lead": 4,
    "until": {
     "word": "3-04.w016"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "cdk",
+    "box": [
+     250,
+     200,
+     440,
+     530
+    ]
    }
   },
   {
@@ -123,6 +165,21 @@
    "lead": 12,
    "until": {
     "word": "3-04.w021"
+   },
+   "guide": {
+    "kind": "runner",
+    "target": "inset",
+    "from": "cdk",
+    "travel": 32,
+    "arrive": 4,
+    "dist": 0.41,
+    "path": 0.26,
+    "box": [
+     990,
+     300,
+     520,
+     520
+    ]
    }
   },
   {
@@ -138,6 +195,16 @@
    "lead": 110,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "inset",
+    "box": [
+     990,
+     300,
+     520,
+     520
+    ]
    }
   },
   {
@@ -153,6 +220,16 @@
    "lead": 30,
    "until": {
     "word": "3-04.w031"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "inset",
+    "box": [
+     990,
+     300,
+     520,
+     520
+    ]
    }
   },
   {
@@ -168,6 +245,16 @@
    "lead": 50,
    "until": {
     "word": "3-04.w035"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "inset",
+    "box": [
+     990,
+     300,
+     520,
+     520
+    ]
    }
   },
   {
@@ -183,6 +270,16 @@
    "lead": 4,
    "until": {
     "word": "3-04.w039"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "gear",
+    "box": [
+     740,
+     200,
+     120,
+     120
+    ]
    }
   },
   {
@@ -198,6 +295,9 @@
    "lead": 8,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   }
  ]

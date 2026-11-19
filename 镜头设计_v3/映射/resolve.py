@@ -120,7 +120,7 @@ def resolve_doc(G, D):
                 raise ResolveError(f"{eid}: until 要有 word / sentence_end / dur / event")
             r = dict(id=eid, obj=e.get("obj", eid), verb=e.get("verb"), ease=e.get("ease", "inout"), means=e.get("means", ""),
                      f_start=int(start), f_land=int(land), f_end=int(max(end, land)), until=until, **anchor)
-            for k2 in ("value", "to", "migrated", "role", "tool"):
+            for k2 in ("value", "to", "migrated", "role", "tool", "guide"):
                 if k2 in e:
                     r[k2] = e[k2]
             if end < land:
@@ -130,6 +130,84 @@ def resolve_doc(G, D):
         except ResolveError as x:
             probs.append(str(x))
     return out, probs
+
+
+# ---------- 视线引导（05_视线引导.md，11-20）----------
+# 事件可带可选字段 guide：{"kind": "focus"|"runner"|"none", "target": 图层id或列表, "g_on": 8, "pull": 18,
+#   "travel": 32（走料时长）, "arrive": 4（走料比落点早几帧到浇口）, "nudge": true/false（预颤）, "rim": true/false（轮廓光）,
+#   "box": [x, y, w, h]（目标在画面上的框，预颤的转心和亮度检查用）, "dist": 0.41（走料距离占画面宽）, "from": 起点}
+# 不写 guide 时：grow / eject / snap / move → focus，目标 = obj；其余动词（appear、camera_to、flow、morph、retract）不引导。
+# kit.jsx 的 guidePlan() 照同一套规则（有 K.guides 时直接用这里算好的）。
+GUIDE = dict(gOn=8, pull=18, minGap=36, hold=120, relax=30, travel=32, arrive=4, sameGap=120)
+GUIDE_VERBS = ("grow", "eject", "snap", "move")
+SELF_PREP = ("grow", "eject", "snap")      # 这一拍零件自己在长 / 拔 / 拼，它的预备就是预颤，不另加
+
+
+def _sid_at(sents, f):
+    """f 落在哪一句（不在句里就取最近的一句）。"""
+    best = None
+    for s in sents or []:
+        if s["f0"] <= f <= s["f1"]:
+            return s["sid"]
+        d = min(abs(f - s["f0"]), abs(f - s["f1"]))
+        if best is None or d < best[0]:
+            best = (d, s["sid"])
+    return best[1] if best else None
+
+
+def guide_plan(evs, len_f=None, P=GUIDE, sentences=None):
+    """evs：resolve_doc 的事件（带 f_start/f_land/f_end，原 guide 字段在 e['guide']）。返回按时间排好的引导列表。
+    V2 的上限也在这里守住：每句最多 3 次、任意 10 秒最多 5 次，超出的并进前一个（不点）。"""
+    items = []
+    for e in sorted(evs, key=lambda x: x["f_land"]):
+        g = e.get("guide") or {}
+        kind = g.get("kind") or ("focus" if e.get("verb") in GUIDE_VERBS else "none")
+        if kind == "none" or e.get("obj") == "footage":      # 迁移来的变速锚点不是语义事件
+            continue
+        tg = g.get("target", e.get("obj", e["id"]))
+        tg = list(tg) if isinstance(tg, (list, tuple)) else [tg]
+        land = e["f_land"]
+        if kind == "runner":
+            gon = land - int(g.get("arrive", P["arrive"]))
+            gs = gon - int(g.get("travel", P["travel"]))
+        else:
+            gon = land - int(g.get("g_on", P["gOn"]))
+            gs = gon - int(g.get("pull", P["pull"]))
+        if gs < 0:                       # 开场第一拍来不及提前，就不引导（定场）
+            continue
+        gend = max(land, min(e["f_end"], land + P["hold"]))
+        selfprep = e.get("verb") in SELF_PREP and land - e["f_start"] <= 34
+        it = dict(id=e["id"], target=tg, kind=kind, gs=gs, gon=gon, land=land, gend=gend, goff=gend + P["relax"], tick=land - 4,
+                  nudge=bool(g.get("nudge", not selfprep)), rim=bool(g.get("rim", True)), ev_s=e["f_start"], events=[e["id"]])
+        for k in ("box", "dist", "path", "from"):
+            if k in g:
+                it[k] = g[k]
+        if items:
+            p = items[-1]
+            if set(p["target"]) == set(tg) and gs < p["goff"] + P["sameGap"]:
+                p["events"].append(e["id"])            # 同一个东西刚点过，不再点
+                continue
+            if gon - p["gon"] < P["minGap"]:           # 两次点名太近：并进前一个，只点一次
+                p["target"] = p["target"] + [t for t in tg if t not in p["target"]]
+                p["gend"] = max(p["gend"], gend)
+                p["goff"] = p["gend"] + P["relax"]
+                p["events"].append(e["id"])
+                continue
+            sid = _sid_at(sentences, land)
+            if (sentences and sum(_sid_at(sentences, q["land"]) == sid for q in items) >= 3) or sum(q["gon"] > gon - 600 for q in items) >= 5:
+                p["events"].append(e["id"])            # 这一句 / 这 10 秒已经够密了
+                continue
+        items.append(it)
+    for p, n in zip(items, items[1:]):                 # 前一个还没退完，下一个就开始拉：交接，焦点从前一个滑到下一个
+        if p["goff"] > n["gs"]:
+            p["gend"] = max(p["land"], min(p["gend"], n["gs"]))
+            p["goff"] = max(p["gend"], min(p["goff"], n["gon"]))
+            p["handoff"] = n["id"]
+    if len_f:
+        for it in items:
+            it["goff"] = min(it["goff"], len_f - 1)
+            it["gend"] = min(it["gend"], it["goff"])
+    return items
 
 
 def words_hash(G):
@@ -145,13 +223,25 @@ def keys_for(group, T=None):
     F0 = G.d["cut_start_f"]
     for e in evs:
         e.update(F_start=F0 + e["f_start"], F_land=F0 + e["f_land"], F_end=F0 + e["f_end"])
+    guides = guide_plan(evs, G.len_f, sentences=[dict(sid=x["sid"], f0=x["f0"], f1=x["f1"]) for x in G.sentences])
+    owner = {it["id"]: it for it in guides}
+    into = {x: it["id"] for it in guides for x in it["events"][1:]}
+    for e in evs:
+        it = owner.get(e["id"])
+        if it:
+            e.update(g_start=it["gs"], g_on=it["gon"], g_end=it["gend"], g_off=it["goff"], g_tick=it["tick"],
+                     G_start=F0 + it["gs"], G_on=F0 + it["gon"], G_end=F0 + it["gend"], G_off=F0 + it["goff"], G_tick=F0 + it["tick"])
+        elif e["id"] in into:
+            e["guide_into"] = into[e["id"]]
+    for it in guides:
+        it.update(G_start=F0 + it["gs"], G_on=F0 + it["gon"], G_land=F0 + it["land"], G_end=F0 + it["gend"], G_off=F0 + it["goff"], G_tick=F0 + it["tick"])
     K = dict(schema="cdk20.keys/1", note="HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
              group=G.name, segs=G.segs, tool=D.get("tool"), fps=FPS, len_f=G.len_f, cut=T.d["cut"]["name"], cut_start_f=F0,
              cut_start_s=G.d["cut_start_s"], master_built=T.d["built"], words_hash=words_hash(G),
              events_src=str(events_path(G.name).relative_to(ROOT)).replace("\\", "/"),
              words=[dict(wid=w["wid"], w=w["w"], key=w["key"], sid=w["sid"], f0=w["f0"], f1=w["f1"], F0=F0 + w["f0"], F1=F0 + w["f1"]) for w in G.words],
              sentences=[dict(sid=s["sid"], text=s["text"], w_first=s["w_first"], w_last=s["w_last"], f0=s["f0"], f1=s["f1"]) for s in G.sentences],
-             holds=D.get("holds", []), events=evs, problems=probs)
+             holds=D.get("holds", []), events=evs, guides=guides, problems=probs)
     return K
 
 

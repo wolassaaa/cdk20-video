@@ -18,6 +18,9 @@
    "lead": 4,
    "until": {
     "dur": 30
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -32,6 +35,9 @@
    "tool": "remotion",
    "until": {
     "word": "1-08.w005"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -47,6 +53,12 @@
    "lead": 4,
    "until": {
     "word": "1-08.w007"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "cal"
+    ]
    }
   },
   {
@@ -62,6 +74,9 @@
    "lead": 2,
    "until": {
     "dur": 20
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -77,6 +92,9 @@
    "lead": 60,
    "until": {
     "word": "1-08.w014"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -91,6 +109,9 @@
    "tool": "remotion",
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -106,6 +127,9 @@
    "lead": 4,
    "until": {
     "dur": 30
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -120,6 +144,9 @@
    "tool": "remotion",
    "until": {
     "word": "1-08.w018"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -135,6 +162,12 @@
    "lead": 4,
    "until": {
     "word": "1-08.w021"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "banknote"
+    ]
    }
   },
   {
@@ -149,6 +182,9 @@
    "tool": "remotion",
    "until": {
     "word": "1-08.w023"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -164,6 +200,9 @@
    "lead": 8,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -179,6 +218,9 @@
    "lead": 4,
    "until": {
     "dur": 30
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -193,6 +235,9 @@
    "tool": "remotion",
    "until": {
     "word": "1-08.w029"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -208,6 +253,12 @@
    "lead": 4,
    "until": {
     "word": "1-08.w029"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "capsule"
+    ]
    }
   },
   {
@@ -223,6 +274,9 @@
    "lead": 6,
    "until": {
     "word": "1-08.w034"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -238,6 +292,9 @@
    "until": {
     "word": "1-08.w034",
     "off": 10
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -253,6 +310,9 @@
    "lead": 40,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   }
  ]

@@ -5,9 +5,10 @@
 import React from "react";
 import {AbsoluteFill, Audio, Composition, Easing, registerRoot, staticFile, useCurrentFrame} from "remotion";
 import K from "./keys_7-04.json";
-import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, Bead, evMap, Label, Pen, PageFrame, Source} from "./kit.jsx";
+import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, evMap, Label, Pen, PageFrame, Source, Lens, guidePlan} from "./kit.jsx";
 
 const E = evMap(K);
+const GP = guidePlan(K);   // 视线引导（11-20，替代红色料珠）：事件表 guide 字段 → resolve.py → keys.guides
 const LA = 390, LB = 710, LH = 200;                  // 两条跑道的中线、跑道高度
 const IX = [420, 680, 940];                          // 三个图标（和上面的字）的 x
 const SL = 1180, FIN = 1700;                         // 起跑线、终点线
@@ -20,9 +21,8 @@ const Scene = () => {
   const ring = span(f, E.hit.s, E.hit.l + 10, ease);
   const run = span(f, E.run.s, K.len_f - 40, Easing.inOut(Easing.quad));
   const tagAi = 1140 + 460 * run, tagCl = 1110 + 220 * run;
-  const bead = [[0, 130, 96], [E.title.l, 760, 96], [E.lanes.l, 1830, 240], [E.ai.l, 330, 262], [E.cl.l, 230, 560], [E.start.l, SL, 262], [E.tgt.l, IX[0], 510], [E.bud.l, IX[1], 510],
-                [E.def.l, IX[2], 510], [E.hit.l, 1120, 510], [E.fin.l, 1800, 550], [E.run.l, 1250, 560], [E.qm.l, 1500, 545], [K.len_f, 1501, 546]];
   return (
+    <Lens plan={GP} f={f}>
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("7-04.wav")} />
       <PageFrame />
@@ -53,8 +53,8 @@ const Scene = () => {
       <div style={{position: "absolute", left: FIN - 50, top: 502, width: 100, textAlign: "center", fontSize: 100, lineHeight: "100px", color: RED, opacity: fin, transform: `scale(${0.6 + 0.4 * fin})`}}>?</div>
       <Pen x={1150} y={516} size={46} rot={-2} p={span(f, E.qm.s, E.qm.e)}>how much faster?&nbsp;</Pen>
       <Source p={span(f, E.title.l, E.title.l + 20)}>Our proposal · Illustration</Source>
-      <Bead K={bead} f={f} />
     </AbsoluteFill>
+    </Lens>
   );
 };
 

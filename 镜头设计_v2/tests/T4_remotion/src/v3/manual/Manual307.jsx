@@ -6,9 +6,10 @@
 import React from "react";
 import {AbsoluteFill, Audio, Composition, Easing, registerRoot, staticFile, useCurrentFrame} from "remotion";
 import K from "./keys_3-07.json";
-import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, Bead, evMap, Label, Pen, PageFrame, Source} from "./kit.jsx";
+import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, evMap, Label, Pen, PageFrame, Source, Lens, guidePlan} from "./kit.jsx";
 
 const E = evMap(K);
+const GP = guidePlan(K);   // 视线引导（11-20，替代红色料珠）：事件表 guide 字段 → resolve.py → keys.guides
 const io = Easing.inOut(Easing.cubic);
 // 漏斗
 const MY = 360, ML = 130, MR = 830, NY = 600, NL = 440, NR = 520, SY = 690;
@@ -38,11 +39,8 @@ const Scene = () => {
   const slot = (r) => (r === C0 ? C0 - C0 * rise : r < C0 ? r + rise : r);
   const tickAt = (k) => E.hand.l + k * 3;           // 按位置逐行打勾
   const yetBox = span(f, E.yet.s, E.yet.l + 6, ease);
-  const bead = [[0, 130, 96], [E.title.l, 800, 96], [E.ai.l, 1000, 420], [E.panda.l, 720, 560], [E.backed.l, 360, 640], [E.ten.l, 930, 300],
-                [E.sets.l, 940, 200], [E.thou.l, 930, 420], [E.hund.l, 980, 300], [E.research.l, 400, 880], [E.papers.l, 230, 560], [E.people.l, 760, 900], [E.checked.l, 800, 760],
-                [E.top.l, 1000, 190], [E.twenty.l, 1820, 600], [E.hand.l, 1000, 700], [E.cdk.l, 1820, 520], [E.top2.l, 1820, 257],
-                [E.no.l, 1000, 205], [E.drug.l, 1810, 150], [E.yet.l, 1820, 330], [K.len_f, 1821, 331]];
   return (
+    <Lens plan={GP} f={f}>
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("3-07.wav")} />
       <PageFrame />
@@ -155,8 +153,8 @@ const Scene = () => {
       )}
 
       <Source p={span(f, E.title.l, E.title.l + 20)}>Ren et al., Chem. Sci. 2023 · Illustration</Source>
-      <Bead K={bead} f={f} />
     </AbsoluteFill>
+    </Lens>
   );
 };
 

@@ -5,9 +5,10 @@
 import React from "react";
 import {AbsoluteFill, Audio, Composition, Easing, registerRoot, staticFile, useCurrentFrame} from "remotion";
 import K from "./keys_8-03.json";
-import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, Bead, evMap, Label, PageFrame, Source} from "./kit.jsx";
+import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, evMap, Label, PageFrame, Source, Lens, guidePlan} from "./kit.jsx";
 
 const E = evMap(K);
+const GP = guidePlan(K);   // 视线引导（11-20，替代红色料珠）：事件表 guide 字段 → resolve.py → keys.guides
 const ST = ["Target", "Hit", "Improve", "Cells", "Animals", "Trials", "Approval"];
 const RX0 = 230, RX1 = 1690, RY = 720;
 const sx = (i) => RX0 + ((RX1 - RX0) * i) / (ST.length - 1);
@@ -25,10 +26,8 @@ const Scene = () => {
   const hitJ = f > E.hit.s ? Math.exp(-(f - E.hit.s) / 8) * Math.sin((f - E.hit.s) / 2.2) : 0;
   const turn = span(f, E.turn.s, E.turn.l, Easing.out(Easing.back(1.4)));
   const flash = f >= E.road.s && f < E.road.e ? 0.5 - 0.5 * Math.cos((f - E.road.s) / 5) : 0;
-  const bead = [[0, 1180, 560], [E.second.l, 1200, 400], [E.assess.l, 1800, 420], [E.cands.l, sx(3) + 90, RY - 80], [E.screen.l, 110, 210],
-                [E.thirteen.l, 1040, 300], [E.made.l, 1040, 560], [E.years.l, RX1 + 40, RY + 120], [E.days.l, (sx(0) + sx(1)) / 2, RY - 140],
-                [E.round.l, sx(2) + 90, RY - 170], [E.turn.l, sx(2) + 100, RY - 60], [K.len_f, sx(2) + 101, RY - 59]];
   return (
+    <Lens plan={GP} f={f}>
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("8-03.wav")} />
       <PageFrame />
@@ -98,8 +97,8 @@ const Scene = () => {
       <Label x={1170} y={650} w={160} size={22} italic color={SOFT} p={span(f, E.team.s, E.team.e)}>the team</Label>
 
       <Source p={1}>Ren et al., Chem. Sci. 2023; Bender et al., Nat. Rev. Drug Discov. 2026 · Illustration</Source>
-      <Bead K={bead} f={f} />
     </AbsoluteFill>
+    </Lens>
   );
 };
 

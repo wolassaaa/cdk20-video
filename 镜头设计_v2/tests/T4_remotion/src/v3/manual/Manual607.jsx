@@ -4,9 +4,10 @@
 import React from "react";
 import {AbsoluteFill, Audio, Composition, Easing, registerRoot, staticFile, useCurrentFrame} from "remotion";
 import K from "./keys_6-07.json";
-import {PAPER, INK, SOFT, RED, ease, out, span, Part, Arrow, Write, Bead, evMap, Label, Pen, PageFrame, Source, Plate} from "./kit.jsx";
+import {PAPER, INK, SOFT, RED, ease, out, span, Part, Arrow, Write, evMap, Label, Pen, PageFrame, Source, Plate, Lens, guidePlan} from "./kit.jsx";
 
 const E = evMap(K);
+const GP = guidePlan(K);   // 视线引导（11-20，替代红色料珠）：事件表 guide 字段 → resolve.py → keys.guides
 const FZ = new Proxy({}, {get: () => ({s: 0, l: 0, e: 0})});   // 前几段已经画完的内容：时间全 0，f 取很大，直接是画完的样子
 const DONE = 1e6;
 const RT0 = 245, RH = 165, T = (i) => RT0 + RH * i;          // 记分板四行：行顶 245 / 410 / 575 / 740，行高 165
@@ -230,10 +231,8 @@ const Row4 = ({f, E}) => {
 const Scene = () => {
   const f = useCurrentFrame();
   const t = T(3);
-  const bead = [[0, 1601, 666], [E.lbl.l, 235, t + 110], [E.loop.l, 700, t + 30], [E.spin.l, 700, t + 130], [E.bank.l, 640, t + 30], [E.lab.l, 910, t + 120], [E.now.l, 985, t + 40],
-                [E.pic.l, 1195, t + 25], [E.plbl.l, 1195, t + 148], [E.fk.l, 985, t + 66], [E.fan.l, 1590, t + 60], [E.dl.l, 1620, t + 140], [E.gp.l, 1640, t + 150],
-                [E.up.l, 1760, t + 150], [E.tt.l, 1800, t + 150], [K.len_f, 1801, t + 151]];
   return (
+    <Lens plan={GP} f={f}>
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("6-07.wav")} />
       <PageFrame />
@@ -244,8 +243,8 @@ const Scene = () => {
       <Row3 f={DONE} E={FZ} />
       <Row4 f={f} E={E} />
       <Source p={span(f, E.lbl.l, E.lbl.l + 20)}>Lengauer 2007; Ren et al., Chem. Sci. 2023 · Illustration</Source>
-      <Bead K={bead} f={f} />
     </AbsoluteFill>
+    </Lens>
   );
 };
 

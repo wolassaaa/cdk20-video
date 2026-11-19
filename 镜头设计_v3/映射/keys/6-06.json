@@ -330,6 +330,9 @@
    "sid": "6-06.s1",
    "word_f0": 9,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 49501,
    "F_land": 49509,
    "F_end": 49528
@@ -350,6 +353,9 @@
    "sid": "6-06.s2",
    "word_f0": 111,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 49561,
    "F_land": 49611,
    "F_end": 49690
@@ -370,6 +376,9 @@
    "sid": "6-06.s2",
    "word_f0": 200,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 49692,
    "F_land": 49700,
    "F_end": 49718
@@ -390,6 +399,9 @@
    "sid": "6-06.s2",
    "word_f0": 289,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 49777,
    "F_land": 49789,
    "F_end": 49805
@@ -410,6 +422,9 @@
    "sid": "6-06.s2",
    "word_f0": 324,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 49816,
    "F_land": 49824,
    "F_end": 49839
@@ -430,6 +445,9 @@
    "sid": "6-06.s2",
    "word_f0": 354,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 49844,
    "F_land": 49854,
    "F_end": 49909
@@ -450,6 +468,9 @@
    "sid": "6-06.s3",
    "word_f0": 422,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 49914,
    "F_land": 49922,
    "F_end": 49934
@@ -470,6 +491,9 @@
    "sid": "6-06.s3",
    "word_f0": 446,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 49922,
    "F_land": 49946,
    "F_end": 49962
@@ -490,6 +514,9 @@
    "sid": "6-06.s3",
    "word_f0": 466,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 49956,
    "F_land": 49966,
    "F_end": 49979
@@ -510,6 +537,9 @@
    "sid": "6-06.s3",
    "word_f0": 520,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 50012,
    "F_land": 50020,
    "F_end": 50034
@@ -530,6 +560,9 @@
    "sid": "6-06.s3",
    "word_f0": 594,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 50086,
    "F_land": 50094,
    "F_end": 50107
@@ -550,6 +583,9 @@
    "sid": "6-06.s3",
    "word_f0": 639,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 50119,
    "F_land": 50139,
    "F_end": 50158
@@ -570,10 +606,14 @@
    "sid": "6-06.s3",
    "word_f0": 660,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 50152,
    "F_land": 50160,
    "F_end": 50178
   }
  ],
+ "guides": [],
  "problems": []
 }

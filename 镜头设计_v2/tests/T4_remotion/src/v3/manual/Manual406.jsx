@@ -6,9 +6,10 @@
 import React from "react";
 import {AbsoluteFill, Audio, Composition, Easing, registerRoot, staticFile, useCurrentFrame} from "remotion";
 import K from "./keys_4-06.json";
-import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, Bead, evMap, Label, PageFrame, Source, Plate} from "./kit.jsx";
+import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, evMap, Label, PageFrame, Source, Plate, Lens, guidePlan} from "./kit.jsx";
 
 const E = evMap(K);
+const GP = guidePlan(K);   // 视线引导（11-20，替代红色料珠）：事件表 guide 字段 → resolve.py → keys.guides
 const CX = 300, CY = 590, R = 120;
 const NAMES = ["Imagine", "Make", "Test", "Tweak"], ANG = [-90, 0, 90, 180];
 const LAP = 50;                                                        // 最后几圈每圈帧数
@@ -32,10 +33,8 @@ const Scene = () => {
   const ghost = 1 - span(f, E.make.s, E.make.l);
   const squash = f > E.tweak.l ? 1 - 0.25 * Math.exp(-(f - E.tweak.l) / 6) * Math.cos((f - E.tweak.l) / 2.5) : 1;
   const kx = CX + R * Math.cos(ang * Math.PI / 180), ky = CY + R * Math.sin(ang * Math.PI / 180);
-  const bead = [[0, 130, 96], [E.tease.l, CX - 170, CY - 150], [E.title.l, 1090, 96], [E.chem.l, CX + 90, CY + 70], [E.key.l, 840, 330],
-                [E.imagine.l, CX + 90, CY - R - 60], [E.make.l, CX + R + 60, CY - 60], [E.test.l, CX + 90, CY + R + 70], [E.tweak.l, CX - R - 60, CY + 60],
-                [E.again.l, CX - 110, CY - R - 40], [E.every.l, 1080, 300], [E.lab.l, 860, 600], [E.costs.l, 1000, 960], [E.money.l, 1820, 960], [K.len_f, 1821, 961]];
   return (
+    <Lens plan={GP} f={f}>
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("4-06.wav")} />
       <PageFrame />
@@ -113,8 +112,8 @@ const Scene = () => {
       </Plate>
 
       <Source p={span(f, E.title.l, E.title.l + 20)}>Lengauer 2007 · Illustration</Source>
-      <Bead K={bead} f={f} />
     </AbsoluteFill>
+    </Lens>
   );
 };
 

@@ -18,6 +18,9 @@
    "lead": 8,
    "until": {
     "word": "3-01.w001"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -33,6 +36,9 @@
    "lead": 20,
    "until": {
     "word": "3-01.w004"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -48,6 +54,16 @@
    "lead": 24,
    "until": {
     "word": "3-01.w006"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "card",
+    "box": [
+     1290,
+     230,
+     580,
+     650
+    ]
    }
   },
   {
@@ -63,6 +79,16 @@
    "lead": 14,
    "until": {
     "word": "3-01.w007"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "card",
+    "box": [
+     1290,
+     230,
+     580,
+     650
+    ]
    }
   },
   {
@@ -78,6 +104,9 @@
    "lead": 24,
    "until": {
     "word": "3-01.w009"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -93,6 +122,9 @@
    "lead": 0,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   }
  ]

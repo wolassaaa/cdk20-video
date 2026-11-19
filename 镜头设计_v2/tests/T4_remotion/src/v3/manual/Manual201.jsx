@@ -4,9 +4,10 @@
 import React from "react";
 import {AbsoluteFill, Audio, Composition, Easing, registerRoot, staticFile, useCurrentFrame} from "remotion";
 import K from "./keys_2-01.json";
-import {PAPER, INK, SOFT, RED, ease, out, span, Part, Tag, Arrow, Step, Legend, Bead, evMap, Title, Label, Pen, Placeholder, PageFrame, Source, Plate} from "./kit.jsx";
+import {PAPER, INK, SOFT, RED, ease, out, span, Part, Tag, Arrow, Step, Legend, evMap, Title, Label, Pen, Placeholder, PageFrame, Source, Plate, Lens, guidePlan} from "./kit.jsx";
 
 const E = evMap(K);
+const GP = guidePlan(K);   // 视线引导（11-20，替代红色料珠）：事件表 guide 字段 → resolve.py → keys.guides
 const AR = {hk: 1174 / 791, univ: 394 / 580, tube: 218 / 610, hospital: 347 / 544, cdk20: 1, chip: 1, tower: 184 / 677};
 const BX = [96, 988], BY = 150, BW = 836, BH = 640;
 const C1 = [BX[0] + 290, BY + 520], C2 = [BX[1] + 400, BY + 300];
@@ -21,12 +22,8 @@ const Scene = () => {
   const alias = span(f, E.alias.s, E.alias.l + 8, out);
   const pulse = f >= E.pulse.s ? Math.exp(-(f - E.pulse.s) / 7) * Math.sin(Math.min(Math.PI, (f - E.pulse.s) / 3)) : 0;
   const land = f > E.same.l ? Math.exp(-(f - E.same.l) / 5) * Math.cos((f - E.same.l) / 2.6) * 5 : 0;
-  const bead = [
-    [0, 120, 96], [E.hk.l, 250, 96], [E.step1.l, BX[0] + 46, BY + 46], [E.univ.l, BX[0] + 150, BY + 200], [E.tubes.l, BX[0] + 410, BY + 210],
-    [E.hospital.l, BX[0] + 640, BY + 200], [E.cdk20.l, C1[0], C1[1] - 120], [E.plate.l, BX[0] + 620, BY + 480], [E.step2.l, BX[1] + 46, BY + 46],
-    [E.chip.l, BX[1] + 160, BY + 200], [E.same.l, C2[0], C2[1] - 100], [E.tower.l, BX[1] + 650, BY + 140], [E.park.l, BX[1] + 650, BY + 560], [K.len_f, BX[1] + 652, BY + 562],
-  ];
   return (
+    <Lens plan={GP} f={f}>
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("2-01.wav")} />
       <PageFrame />
@@ -83,8 +80,8 @@ const Scene = () => {
       <Legend x={BX[0]} y={820} w={BW} at={E.tubes.l} f={f} rows={[[["15", "liver tumour samples", E.tubes.l + 16], ["19", "CCRK, also called CDK20", E.cdk20.l + 16]]]} />
       <Legend x={BX[1]} y={820} w={BW} at={E.chip.l} f={f} rows={[[["13", "AI study, Ren et al. 2023", E.chip.l + 16], ["14", "Insilico Medicine", E.tower.l + 16]]]} />
       <Source p={span(f, E.hk.l, E.hk.l + 20)}>Feng et al., J. Clin. Invest. 2011; Ren et al., Chem. Sci. 2023 · Illustration</Source>
-      <Bead K={bead} f={f} />
     </AbsoluteFill>
+    </Lens>
   );
 };
 

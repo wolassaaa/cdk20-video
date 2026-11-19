@@ -6,6 +6,7 @@
 import React from "react";
 import {AbsoluteFill, Audio, Composition, Easing, Img, registerRoot, staticFile, useCurrentFrame, continueRender, delayRender} from "remotion";
 import T from "./words_2-05.json";
+import {Lens, guidePlan, useGuideLook, nudge} from "./kit.jsx";
 
 const PAPER = "#EDE9DF", INK = "#1F1E1C", SOFT = "#6E6B63", RED = "#C8102E";
 const W = Object.fromEntries(T.words.map((w, i) => [i + 1, w]));      // W[3].f0 = identify
@@ -21,8 +22,10 @@ if (typeof window !== "undefined") {
 }
 
 // 零件：线稿先画出（左→右），平涂色从浇口点漫开，前沿一圈亮料，长满轻微过冲
-const Part = ({name, cx, cy, w, ar, at, gate = [0.5, 1], f, wipe = 12, flood = 24, children}) => {
+const Part = ({name, gid, cx, cy, w, ar, at, gate = [0.5, 1], f, wipe = 12, flood = 24, children}) => {
   const h = w / ar;
+  const L = useGuideLook(gid ?? name, at);            // 视线引导（11-20）：没被点名略虚，被点名带轮廓光
+  const ndg = L && L.nudge ? nudge(f, L.nudge.land, {dir: [gate[0] - 0.5, gate[1] - 0.5], R: Math.hypot(w, h) / 2}) + " " : "";
   const pl = span(f, at - 2, at - 2 + wipe, out);
   const pc = span(f, at + 3, at + 3 + flood, Easing.inOut(Easing.quad));
   const r = pc * 150;
@@ -34,7 +37,7 @@ const Part = ({name, cx, cy, w, ar, at, gate = [0.5, 1], f, wipe = 12, flood = 2
   const mRing = `radial-gradient(circle at ${g},transparent ${r - 16}%,#000 ${r - 5}%,transparent ${r}%)`;
   const box = {position: "absolute", left: 0, top: 0, width: w, height: h};
   return (
-    <div style={{position: "absolute", left: cx - w / 2, top: cy - h / 2, width: w, height: h, transform: `scale(${1 + bump})`}}>
+    <div style={{position: "absolute", left: cx - w / 2, top: cy - h / 2, width: w, height: h, transform: `${ndg}scale(${1 + bump})`, ...(L ? L.style : null)}}>
       <Img src={staticFile(`parts/${name}_c.png`)} style={{...box, WebkitMaskImage: mCol, maskImage: mCol}} />
       {pc > 0 && pc < 1 && <Img src={staticFile(`parts/${name}_c.png`)} style={{...box, WebkitMaskImage: mRing, maskImage: mRing, filter: "brightness(1.7) saturate(0.55)"}} />}
       <Img src={staticFile(`parts/${name}_l.png`)} style={{...box, opacity: 1 - 0.55 * pc, WebkitMaskImage: mLine, maskImage: mLine}} />
@@ -147,6 +150,12 @@ const Bead = ({f}) => (
 
 const AR = {chip: 1, racks: 935 / 736, sieve: 959 / 654, magnifier: 483 / 735, liver: 1055 / 795, key: 1099 / 315, dial: 617 / 751, person: 438 / 729, keys: 1179 / 758, mol: 566 / 635};
 
+// 视线引导（11-20，替代红色料珠）：这页没有事件表，按"零件长出的那个词"生成同样规则的引导（grow → focus，太近的合并、每句最多 3 次）
+const GP = guidePlan({len_f: T.len_f, sentences: T.sentences, events: [
+  ["tools1", "chip", 5], ["tools2", "racks", 6], ["tools3", "sieve", 7], ["liver", "liver", 10], ["key", "key", 11],
+  ["dial", "dial", 15], ["ref", "ref", 17], ["person", "person", 20],
+].map(([id, t, n]) => ({id, obj: t, verb: "grow", f_start: W[n].f0 - 4, f_land: W[n].f0, f_end: W[n].f0 + 60, guide: {kind: "focus", target: t}}))});
+
 const Scene = () => {
   const f = useCurrentFrame();
   const S1 = T.sentences[0], S2 = T.sentences[1];
@@ -169,6 +178,7 @@ const Scene = () => {
   const pick = span(f, W[24].f0 + 14, S2.f1 - 2, out);
 
   return (
+    <Lens plan={GP} f={f}>
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("2-05.wav")} />
       {/* 纸页：细边和装订角标 */}
@@ -229,7 +239,7 @@ const Scene = () => {
           </svg>
           <div style={{position: "absolute", left: -2, top: -2, width: 44, height: 44, background: INK, color: PAPER, font: "36px/42px Serif", textAlign: "center", borderRadius: "8px 0 8px 0"}}>1</div>
           {[["chip", 66, 78, 82], ["racks", 170, 70, 96], ["sieve", 122, 140, 104]].map(([n, x, y, w], i) => (
-            <Part key={n} name={n} cx={x} cy={y} w={w} ar={AR[n]} at={W[17].f0 + 4 + i * 9} f={f} gate={[0.5, 0]} wipe={8} flood={14} />
+            <Part key={n} name={n} gid="ref" cx={x} cy={y} w={w} ar={AR[n]} at={W[17].f0 + 4 + i * 9} f={f} gate={[0.5, 0]} wipe={8} flood={14} />
           ))}
         </div>
         <Part name="person" cx={160} cy={560} w={132} ar={AR.person} at={W[20].f0} f={f} gate={[0.5, 0]} />
@@ -267,8 +277,9 @@ const Scene = () => {
       <div style={{position: "absolute", left: 1700, top: 452, font: "30px Hand", color: RED, transform: "rotate(-4deg)"}}>
         <Write p={span(f, W[24].f0 + 22, W[24].f0 + 40)}>top score</Write>
       </div>
-      <Bead f={f} />
+      {/* 11-20：红色料珠去掉（导演：全片不要带路红点），换成上面的视线引导 */}
     </AbsoluteFill>
+    </Lens>
   );
 };
 

@@ -5,9 +5,10 @@
 import React from "react";
 import {AbsoluteFill, Audio, Composition, Easing, registerRoot, staticFile, useCurrentFrame} from "remotion";
 import K from "./keys_7-02.json";
-import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, Bead, evMap, Label, Pen, PageFrame, Source} from "./kit.jsx";
+import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, evMap, Label, Pen, PageFrame, Source, Lens, guidePlan} from "./kit.jsx";
 
 const E = evMap(K);
+const GP = guidePlan(K);   // 视线引导（11-20，替代红色料珠）：事件表 guide 字段 → resolve.py → keys.guides
 const ST = ["Target", "Hit", "Improve", "Cells", "Animals", "Trials", "Approval"];
 const RX0 = 230, RX1 = 1690, RY = 700;
 const sx = (i) => RX0 + ((RX1 - RX0) * i) / (ST.length - 1);
@@ -31,10 +32,8 @@ const Scene = () => {
   const red = f >= E.step.s ? span(f, E.step.s, E.step.l + 6) : 0;
   const tryP = span(f, E.try.s, E.try.l + 8, ease);
   const auth = span(f, E.auth.s, E.auth.l + 10);
-  const bead = [[0, 130, 96], [E.title.l, 800, 96], [E.road.l, 1700, RY - 130], [E.walk.l, 1203, RY + 190], [E.pub.l, 1340, RY + 120], [E.any.l, 1500, RY - 80], [E.try.l, 1500, RY - 130],
-                [E.c1.l, 760, RY - 260], [E.c1a.l, 760, RY - 300], [E.c1b.l, 760, RY - 220], [E.c2.l, 1203, CY - CH / 2 - 30], [E.c3.l, 1447, CY - CH / 2 - 30], [E.c3a.l, 1520, CY - CH / 2 - 30],
-                [E.c3b.l, 1590, CY - CH / 2 - 30], [E.auth.l, 1590, 330], [E.al.l, 1700, 570], [E.ticks.l, 1830, 430], [E.step.l, 1820, 600], [K.len_f, 1821, 601]];
   return (
+    <Lens plan={GP} f={f}>
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("7-02.wav")} />
       <PageFrame />
@@ -98,8 +97,8 @@ const Scene = () => {
       <Label x={1700} y={410} w={160} size={26} italic color={SOFT} p={span(f, E.auth.s + 4, E.auth.e)}>the authors</Label>
       <Pen x={1585} y={465} size={44} rot={-3} p={span(f, E.al.s, E.al.e)}>already listed&nbsp;</Pen>
       <Source p={span(f, E.title.l, E.title.l + 20)}>Ren et al., Chem. Sci. 2023 · Illustration</Source>
-      <Bead K={bead} f={f} />
     </AbsoluteFill>
+    </Lens>
   );
 };
 

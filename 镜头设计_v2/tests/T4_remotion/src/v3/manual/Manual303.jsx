@@ -6,9 +6,10 @@
 import React from "react";
 import {AbsoluteFill, Audio, Composition, Easing, registerRoot, staticFile, useCurrentFrame} from "remotion";
 import K from "./keys_3-03.json";
-import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, Bead, evMap, Label, Pen, PageFrame, Source, Plate} from "./kit.jsx";
+import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, evMap, Label, Pen, PageFrame, Source, Plate, Lens, guidePlan} from "./kit.jsx";
 
 const E = evMap(K);
+const GP = guidePlan(K);   // 视线引导（11-20，替代红色料珠）：事件表 guide 字段 → resolve.py → keys.guides
 const io = Easing.inOut(Easing.cubic);
 const LY = 520, LW = 190, LH = LW * 743 / 520;
 const LOCK = [{x: 700, sx: 1, sy: 1}, {x: 1160, sx: 0.82, sy: 1.12}, {x: 1620, sx: 0.85, sy: 0.85}];
@@ -81,10 +82,8 @@ const Scene = () => {
   const ringOut = span(f, E.target.l + 30, E.target.l + 60);
   const pulse = f > E.cand.l ? 0.08 * Math.exp(-(f - E.cand.l) / 8) * Math.cos((f - E.cand.l) / 3) : 0;
   const box = span(f, E.back.s, E.back.l, ease);
-  const bead = [[0, 130, 96], [E.title.l, 560, 96], [E.lock.l, 930, 520], [E.target.l, 940, 760], [E.key.l, 250, 450], [E.cand.l, 230, 680],
-                [E.good.l, 1390, 790], [E.fits.l, 450, 450], [E.tight.l, 820, 300], [E.opens.l, 1160, 210], [E.no.l, 1290, 320],
-                [E.else.l, 1770, 330], [E.back.l, 960, 210], [E.sel.l, 1100, 830], [K.len_f, 1101, 831]];
   return (
+    <Lens plan={GP} f={f}>
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("3-03.wav")} />
       <PageFrame />
@@ -124,8 +123,8 @@ const Scene = () => {
       <Label x={126} y={900} w={900} size={32} italic color={SOFT} align="left" p={span(f, E.sel.l, E.sel.e)}>fits its own lock tightly, and opens no one else's</Label>
 
       <Source p={span(f, E.title.l, E.title.l + 20)}>Lengauer 2007 · Illustration</Source>
-      <Bead K={bead} f={f} />
     </AbsoluteFill>
+    </Lens>
   );
 };
 

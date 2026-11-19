@@ -18,6 +18,9 @@
    "lead": 8,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -33,6 +36,12 @@
    "lead": 20,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "lock"
+    ]
    }
   },
   {
@@ -48,6 +57,9 @@
    "lead": 8,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -63,6 +75,12 @@
    "lead": 20,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "key"
+    ]
    }
   },
   {
@@ -78,6 +96,9 @@
    "lead": 8,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -93,6 +114,9 @@
    "lead": 20,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -108,6 +132,9 @@
    "lead": 24,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -123,6 +150,9 @@
    "lead": 8,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -138,6 +168,9 @@
    "lead": 20,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -153,6 +186,9 @@
    "lead": 14,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -168,6 +204,9 @@
    "lead": 18,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -183,6 +222,9 @@
    "lead": 26,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -198,6 +240,9 @@
    "lead": 10,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   }
  ]

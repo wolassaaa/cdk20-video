@@ -490,6 +490,9 @@
    "sid": "1-04.s1",
    "word_f0": 9,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 1841,
    "F_land": 1845,
    "F_end": 1875
@@ -510,6 +513,9 @@
    "sid": "1-04.s1",
    "word_f0": 17,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 1853,
    "F_land": 1853,
    "F_end": 1929
@@ -530,9 +536,25 @@
    "sid": "1-04.s1",
    "word_f0": 140,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "liver"
+    ]
+   },
    "F_start": 1974,
    "F_land": 1976,
-   "F_end": 2044
+   "F_end": 2044,
+   "g_start": 114,
+   "g_on": 132,
+   "g_end": 208,
+   "g_off": 238,
+   "g_tick": 136,
+   "G_start": 1950,
+   "G_on": 1968,
+   "G_end": 2044,
+   "G_off": 2074,
+   "G_tick": 1972
   },
   {
    "id": "note_changed",
@@ -550,6 +572,9 @@
    "sid": "1-04.s1",
    "word_f0": 243,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 2079,
    "F_land": 2079,
    "F_end": 2148
@@ -570,9 +595,25 @@
    "sid": "1-04.s1",
    "word_f0": 339,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "capsule"
+    ]
+   },
    "F_start": 2171,
    "F_land": 2175,
-   "F_end": 2199
+   "F_end": 2199,
+   "g_start": 313,
+   "g_on": 331,
+   "g_end": 363,
+   "g_off": 393,
+   "g_tick": 335,
+   "G_start": 2149,
+   "G_on": 2167,
+   "G_end": 2199,
+   "G_off": 2229,
+   "G_tick": 2171
   },
   {
    "id": "arrow1",
@@ -590,6 +631,9 @@
    "sid": "1-04.s1",
    "word_f0": 375,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 2209,
    "F_land": 2211,
    "F_end": 2238
@@ -610,6 +654,9 @@
    "sid": "1-04.s1",
    "word_f0": 402,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 2232,
    "F_land": 2238,
    "F_end": 2268
@@ -630,9 +677,25 @@
    "sid": "1-04.s1",
    "word_f0": 481,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "ivbag"
+    ]
+   },
    "F_start": 2313,
    "F_land": 2317,
-   "F_end": 2382
+   "F_end": 2382,
+   "g_start": 455,
+   "g_on": 473,
+   "g_end": 546,
+   "g_off": 576,
+   "g_tick": 477,
+   "G_start": 2291,
+   "G_on": 2309,
+   "G_end": 2382,
+   "G_off": 2412,
+   "G_tick": 2313
   },
   {
    "id": "plus",
@@ -650,6 +713,9 @@
    "sid": "1-04.s1",
    "word_f0": 555,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 2391,
    "F_land": 2391,
    "F_end": 2401
@@ -670,9 +736,16 @@
    "sid": "1-04.s1",
    "word_f0": 585,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "ivbag"
+    ]
+   },
    "F_start": 2417,
    "F_land": 2421,
-   "F_end": 2482
+   "F_end": 2482,
+   "guide_into": "bag1"
   },
   {
    "id": "combo_snap",
@@ -690,6 +763,9 @@
    "sid": "1-04.s1",
    "word_f0": 585,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 2445,
    "F_land": 2455,
    "F_end": 2482
@@ -710,6 +786,9 @@
    "sid": "1-04.s2",
    "word_f0": 683,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 2515,
    "F_land": 2519,
    "F_end": 2549
@@ -730,6 +809,9 @@
    "sid": "1-04.s2",
    "word_f0": 749,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 2581,
    "F_land": 2585,
    "F_end": 2668
@@ -750,6 +832,9 @@
    "sid": "1-04.s2",
    "word_f0": 788,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 2622,
    "F_land": 2624,
    "F_end": 2668
@@ -770,6 +855,9 @@
    "sid": "1-04.s2",
    "word_f0": 788,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 2624,
    "F_land": 2624,
    "F_end": 2678
@@ -790,6 +878,9 @@
    "sid": "1-04.s2",
    "word_f0": 900,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 2732,
    "F_land": 2736,
    "F_end": 2778
@@ -810,6 +901,9 @@
    "sid": "1-04.s2",
    "word_f0": 925,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 2761,
    "F_land": 2761,
    "F_end": 2809
@@ -830,6 +924,9 @@
    "sid": "1-04.s3",
    "word_f0": 1011,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 2843,
    "F_land": 2847,
    "F_end": 2877
@@ -850,9 +947,25 @@
    "sid": "1-04.s3",
    "word_f0": 1019,
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "paper1"
+    ]
+   },
    "F_start": 2853,
    "F_land": 2855,
-   "F_end": 2910
+   "F_end": 2910,
+   "g_start": 993,
+   "g_on": 1011,
+   "g_end": 1074,
+   "g_off": 1104,
+   "g_tick": 1015,
+   "G_start": 2829,
+   "G_on": 2847,
+   "G_end": 2910,
+   "G_off": 2940,
+   "G_tick": 2851
   },
   {
    "id": "title3",
@@ -870,6 +983,9 @@
    "sid": "1-04.s3",
    "word_f0": 1115,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 2951,
    "F_land": 2951,
    "F_end": 2982
@@ -890,6 +1006,9 @@
    "sid": "1-04.s3",
    "word_f0": 1158,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 2994,
    "F_land": 2994,
    "F_end": 3088
@@ -910,9 +1029,115 @@
    "sid": "1-04.s3",
    "word_f0": 1236,
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "F_start": 3072,
    "F_land": 3072,
    "F_end": 3088
+  }
+ ],
+ "guides": [
+  {
+   "id": "liver",
+   "target": [
+    "liver"
+   ],
+   "kind": "focus",
+   "gs": 114,
+   "gon": 132,
+   "land": 140,
+   "gend": 208,
+   "goff": 238,
+   "tick": 136,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 138,
+   "events": [
+    "liver"
+   ],
+   "G_start": 1950,
+   "G_on": 1968,
+   "G_land": 1976,
+   "G_end": 2044,
+   "G_off": 2074,
+   "G_tick": 1972
+  },
+  {
+   "id": "nexavar",
+   "target": [
+    "capsule"
+   ],
+   "kind": "focus",
+   "gs": 313,
+   "gon": 331,
+   "land": 339,
+   "gend": 363,
+   "goff": 393,
+   "tick": 335,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 335,
+   "events": [
+    "nexavar"
+   ],
+   "G_start": 2149,
+   "G_on": 2167,
+   "G_land": 2175,
+   "G_end": 2199,
+   "G_off": 2229,
+   "G_tick": 2171
+  },
+  {
+   "id": "bag1",
+   "target": [
+    "ivbag"
+   ],
+   "kind": "focus",
+   "gs": 455,
+   "gon": 473,
+   "land": 481,
+   "gend": 546,
+   "goff": 576,
+   "tick": 477,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 477,
+   "events": [
+    "bag1",
+    "bag2"
+   ],
+   "G_start": 2291,
+   "G_on": 2309,
+   "G_land": 2317,
+   "G_end": 2382,
+   "G_off": 2412,
+   "G_tick": 2313
+  },
+  {
+   "id": "paper",
+   "target": [
+    "paper1"
+   ],
+   "kind": "focus",
+   "gs": 993,
+   "gon": 1011,
+   "land": 1019,
+   "gend": 1074,
+   "goff": 1104,
+   "tick": 1015,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 1017,
+   "events": [
+    "paper"
+   ],
+   "G_start": 2829,
+   "G_on": 2847,
+   "G_land": 2855,
+   "G_end": 2910,
+   "G_off": 2940,
+   "G_tick": 2851
   }
  ],
  "problems": []

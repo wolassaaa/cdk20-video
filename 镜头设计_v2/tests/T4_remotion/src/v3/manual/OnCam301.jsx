@@ -6,13 +6,15 @@
 import React from "react";
 import {Composition, Easing, registerRoot, useCurrentFrame} from "remotion";
 import D from "./oncam_3-01.json";
-import {PAPER, INK, RED, SOFT, ease, out, span, Part, Label} from "./kit.jsx";
+import {PAPER, INK, RED, SOFT, ease, out, span, Part, Label, Lens, Layer, guidePlan} from "./kit.jsx";
 import {OnCamFrame, useOnCam} from "./oncam.jsx";
 
 const FX1 = 1290, FY1 = 230, FX2 = 1870, FY2 = 880;       // 讲解卡
 const LOCK = {cx: 1700, cy: 520, w: 240};                  // 锁，约 1580–1820 × 348–692
 const KW = 240, KS = {cx: 1425, cy: 770}, KE = {cx: 1585, cy: 575};   // 钥匙：起点、终点（尖端 x≈1705，在锁后面）
 const SLIDE = 34;
+
+const GP = guidePlan(D);
 
 const Scene = () => {
   const f = useCurrentFrame();
@@ -31,21 +33,28 @@ const Scene = () => {
   const klab = span(f, E.key.l, E.key.l + 16, out);
   return (
     <OnCamFrame D={D} f={f} wav="3-01.wav">
+      {/* 视线引导（05 文档 8.1）：只作用在讲解卡上，人不进 Lens。卡、锁、钥匙同一层 card：picture 时点名一次，lock 不再点，key 由手带眼睛 */}
+      <Lens plan={GP} f={f} idle={3} rimDx={4} rimA={0.7}>
       <div style={{position: "absolute", left: hx, top: hy, width: 1920, height: 1080}}>
+        <Layer id="card">
         <svg width={1920} height={1080} style={{position: "absolute", left: 0, top: 0}}>
           <rect x={FX1} y={FY1} width={FX2 - FX1} height={FY2 - FY1} rx={26} fill={PAPER} opacity={0.96 * span(fr, 0.2, 0.9)} />
           {fr > 0 && <rect x={FX1} y={FY1} width={FX2 - FX1} height={FY2 - FY1} rx={26} fill="none" stroke={INK} strokeWidth={3.5}
                            pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - fr} />}
-          {dotA > 0 && <circle cx={dx} cy={dy} r={9 * dotA} fill={RED} />}
+          {/* 11-20：红点只为带路存在（V9 不许），去掉；dot/dot2 事件不再画东西 */}
         </svg>
         {/* 钥匙在锁后面：锁面挡住尖端 */}
         <Part name="key" cx={kcx} cy={kcy} w={KW} at={E.key.l} f={f} gate={[0, 0.5]} flood={14} />
-        <Label x={kcx - 85} y={kcy + 52} w={200} p={klab} size={28} italic color={INK}>a key</Label>
         <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `rotate(${wob}deg)`, transformOrigin: `${LOCK.cx}px ${LOCK.cy}px`}}>
           <Part name="lock" cx={LOCK.cx} cy={LOCK.cy} w={LOCK.w} at={E.lock.l} f={f} gate={[0.5, 1]} />
         </div>
-        <Label x={LOCK.cx} y={715} w={220} p={llab} size={28} italic color={INK}>a lock</Label>
+        </Layer>
+        <Layer exempt>
+          <Label x={kcx - 85} y={kcy + 52} w={200} p={klab} size={28} italic color={INK}>a key</Label>
+          <Label x={LOCK.cx} y={715} w={220} p={llab} size={28} italic color={INK}>a lock</Label>
+        </Layer>
       </div>
+      </Lens>
       <div style={{position: "absolute", right: 44, top: 1046, fontSize: 17, color: SOFT}}>Lengauer 2007 · Illustration</div>
     </OnCamFrame>
   );

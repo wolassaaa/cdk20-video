@@ -6,9 +6,10 @@
 import React from "react";
 import {AbsoluteFill, Audio, Composition, Easing, registerRoot, staticFile, useCurrentFrame} from "remotion";
 import K from "./keys_1-11.json";
-import {PAPER, INK, SOFT, RED, ease, out, span, Part, Tag, Write, Step, Legend, Bead, evMap} from "./kit.jsx";
+import {PAPER, INK, SOFT, RED, ease, out, span, Part, Tag, Write, Step, Legend, evMap, Lens, guidePlan} from "./kit.jsx";
 
 const E = evMap(K);
+const GP = guidePlan(K);   // 视线引导（11-20，替代红色料珠）：事件表 guide 字段 → resolve.py → keys.guides
 const AR = {chip: 696 / 696, liver: 1052 / 792, hk: 1174 / 791};
 const ST = ["Target", "Hit", "Improve", "Cells", "Animals", "Trials", "Approval"];
 const RX0 = 230, RX1 = 1690, RY = 236;
@@ -37,14 +38,8 @@ const Scene = () => {
   const pinK = f > E.pin.l ? Math.exp(-(f - E.pin.l) / 5) * Math.cos((f - E.pin.l) / 2.4) : 0;
   const PIN = [BX[1] + 418 + 50, BY + 250 - 20];
 
-  const bead = [
-    [0, RX0 - 120, RY], [E.road.l, RX0 - 70, RY - 70], [E.chip.l, RX0 - 70, RY - 72], [E.chip_walk.l, sx(2) + 20, RY - 72],
-    [E.step1.l, BX[0] + 46, BY + 46], [E.chip2.l, BX[0] + 300, BY + 170], [E.liver.l, BX[0] + 560, BY + 160],
-    [E.case_snap.l, BX[0] + 440, BY + 360], [E.step2.l, BX[1] + 46, BY + 46], [E.hk.l, BX[1] + 300, BY + 180],
-    [E.pin.s, PIN[0], PIN[1] - 60], [K.len_f, PIN[0] + 136, PIN[1] + 66],
-  ];
-
   return (
+    <Lens plan={GP} f={f}>
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("1-11.wav")} />
       <div style={{position: "absolute", inset: "34px 40px 44px 40px", border: `1.5px solid rgba(31,30,28,0.22)`, borderRadius: 4}} />
@@ -111,8 +106,8 @@ const Scene = () => {
       <div style={{position: "absolute", left: 44, top: 1046, fontSize: 17, color: SOFT, opacity: span(f, E.road.l, E.road.l + 20)}}>
         Ren et al., Chem. Sci. 2023 · Illustration
       </div>
-      <Bead K={bead} f={f} />
     </AbsoluteFill>
+    </Lens>
   );
 };
 

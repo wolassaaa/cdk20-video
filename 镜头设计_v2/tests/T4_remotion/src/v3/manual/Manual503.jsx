@@ -5,9 +5,10 @@
 import React from "react";
 import {AbsoluteFill, Audio, Composition, Easing, registerRoot, staticFile, useCurrentFrame} from "remotion";
 import K from "./keys_5-03.json";
-import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, Bead, evMap, Label, Pen, PageFrame, Source} from "./kit.jsx";
+import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, evMap, Label, Pen, PageFrame, Source, Lens, guidePlan} from "./kit.jsx";
 
 const E = evMap(K);
+const GP = guidePlan(K);   // 视线引导（11-20，替代红色料珠）：事件表 guide 字段 → resolve.py → keys.guides
 const TX = (i) => 220 + 80 * i, TY = 380;                 // 七个小瓶
 const AX = 860, AY0 = 220, AY1 = 640, Y92 = 600, Y30 = 440;  // Kd 刻度：越往上越弱
 const SIX = [[920, 330], [975, 372], [1030, 306], [1085, 352], [1140, 318], [1195, 384]];
@@ -34,10 +35,8 @@ const Scene = () => {
   const t0 = [TX(0) + (sx(1) - TX(0)) * fly, TY + (742 - TY) * fly - Math.sin(Math.PI * fly) * 120], tw = 40 - 10 * fly;
   const lab = [TX(0) + (sx(1) - TX(0)) * fly, 446 + (662 - 446) * fly - Math.sin(Math.PI * fly) * 120];
   const vp = [TX(0) + (AX + 25 - TX(0)) * val, 324 + (Y92 - 324) * val - Math.sin(Math.PI * val) * 90];
-  const bead = [[0, 700, 200], [E.t001.l, 140, 300], [E.kd.l, 780, 200], [E.val.l, 1190, 650], [E.six.l, 770, 470], [E.line.l, 1290, 440],
-                [E.up.l, 1260, 330], [E.weak.l, 1250, 235], [E.wild.l, 1720, 320], [E.clock.l, 1720, 560], [E.d30.l, 1760, 700],
-                [E.road.l, 1790, 760], [E.tgt.l, 160, 760], [E.fly.l, 360, 700], [E.hit.l, 660, 960], [K.len_f, 661, 961]];
   return (
+    <Lens plan={GP} f={f}>
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("5-03.wav")} />
       <PageFrame />
@@ -106,8 +105,8 @@ const Scene = () => {
       <Label x={510} y={724} w={330} size={32} italic align="left" color={RED} p={span(f, E.hit.s, E.hit.e)}>first confirmed hit</Label>
 
       <Source p={span(f, E.kd.l, E.kd.l + 20)}>Ren et al., Chem. Sci. 2023 · Illustration</Source>
-      <Bead K={bead} f={f} />
     </AbsoluteFill>
+    </Lens>
   );
 };
 

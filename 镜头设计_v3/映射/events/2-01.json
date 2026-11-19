@@ -18,6 +18,12 @@
    "lead": 4,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "hk"
+    ]
    }
   },
   {
@@ -33,6 +39,9 @@
    "lead": 4,
    "until": {
     "dur": 30
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -48,6 +57,9 @@
    "until": {
     "word": "2-01.w005",
     "off": 20
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -63,6 +75,12 @@
    "lead": 4,
    "until": {
     "word": "2-01.w014"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "univ"
+    ]
    }
   },
   {
@@ -78,6 +96,12 @@
    "lead": 4,
    "until": {
     "word": "2-01.w019"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "tube"
+    ]
    }
   },
   {
@@ -93,6 +117,12 @@
    "lead": 4,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "hospital"
+    ]
    }
   },
   {
@@ -108,6 +138,12 @@
    "lead": 4,
    "until": {
     "word": "2-01.w029"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "cdk20"
+    ]
    }
   },
   {
@@ -123,6 +159,9 @@
    "lead": 6,
    "until": {
     "word": "2-01.w031"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -137,6 +176,9 @@
    "tool": "remotion",
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -152,6 +194,9 @@
    "lead": 4,
    "until": {
     "dur": 30
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -167,6 +212,9 @@
    "until": {
     "word": "2-01.w039",
     "off": 30
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -182,6 +230,12 @@
    "lead": 4,
    "until": {
     "word": "2-01.w043"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chip"
+    ]
    }
   },
   {
@@ -197,6 +251,9 @@
    "lead": 40,
    "until": {
     "word": "2-01.w048"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -211,6 +268,9 @@
    "tool": "remotion",
    "until": {
     "word": "2-01.w051"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -226,6 +286,12 @@
    "lead": 4,
    "until": {
     "word": "2-01.w055"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "tower"
+    ]
    }
   },
   {
@@ -240,6 +306,9 @@
    "tool": "remotion",
    "until": {
     "word": "2-01.w056"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -254,6 +323,9 @@
    "tool": "remotion",
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -269,6 +341,9 @@
    "lead": 6,
    "until": {
     "word": "2-01.w035"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -284,6 +359,9 @@
    "lead": 2,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   }
  ]

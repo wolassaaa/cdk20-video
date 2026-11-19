@@ -5,9 +5,10 @@
 import React from "react";
 import {AbsoluteFill, Audio, Composition, Easing, registerRoot, staticFile, useCurrentFrame} from "remotion";
 import K from "./keys_1-08.json";
-import {PAPER, INK, SOFT, RED, ease, out, span, Part, Tag, Write, Step, Legend, Bead, evMap} from "./kit.jsx";
+import {PAPER, INK, SOFT, RED, ease, out, span, Part, Tag, Write, Step, Legend, evMap, Lens, guidePlan} from "./kit.jsx";
 
 const E = evMap(K);
+const GP = guidePlan(K);   // 视线引导（11-20，替代红色料珠）：事件表 guide 字段 → resolve.py → keys.guides
 const AR = {cal: 520 / 511, ruler: 1130 / 150, banknote: 1040 / 520, capsule: 530 / 229};
 const BX = [96, 686, 1276], BY = 84, BW = 548, BH = 640;
 const CAPS = [...Array(10)].map((_, i) => [78 + (i % 5) * 98, 262 + Math.floor(i / 5) * 72]);
@@ -40,14 +41,9 @@ const Scene = () => {
   const land = f > E.market.l ? Math.exp(-(f - E.market.l) / 5) * Math.cos((f - E.market.l) / 2.6) * 5 : 0;
 
   const tl0 = BX[0] + 44, tl1 = BX[0] + 504, tly = BY + 420;
-  const bead = [
-    [0, 150, 60], [E.step1.l, 150, 128], [E.calendar.l, BX[0] + 274, BY + 160], [E.tl_born.l, tl0 + 8, tly - 34],
-    [E.tl_run.s, tl0 + 40, tly - 34], [E.tl_run.l, tl1 - 12, tly - 34], [E.step2.l, BX[1] + 46, BY + 46], [E.bills.l, BX[1] + 274, BY + 200],
-    [E.plate_cost.l, BX[1] + 160, BY + 500], [E.step3.l, BX[2] + 46, BY + 46], [E.caps.l, BX[2] + CAPS[0][0], BY + 220],
-    [E.caps_fade.l, BX[2] + CAPS[KEEP][0], BY + 222], [E.market.l, BX[2] + TRAY[0] + 90, BY + TRAY[1] - 10], [K.len_f, BX[2] + TRAY[0] + 92, BY + TRAY[1] - 10],
-  ];
 
   return (
+    <Lens plan={GP} f={f}>
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
       <Audio src={staticFile("1-08.wav")} />
       <div style={{position: "absolute", inset: "34px 40px 44px 40px", border: `1.5px solid rgba(31,30,28,0.22)`, borderRadius: 4}} />
@@ -116,8 +112,8 @@ const Scene = () => {
       <div style={{position: "absolute", left: 44, top: 1046, fontSize: 17, color: SOFT, opacity: span(f, E.step1.l, E.step1.l + 20)}}>
         Wang et al., Pharmaceuticals 2023 · Illustration
       </div>
-      <Bead K={bead} f={f} />
     </AbsoluteFill>
+    </Lens>
   );
 };
 

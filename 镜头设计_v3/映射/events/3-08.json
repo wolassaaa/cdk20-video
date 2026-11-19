@@ -18,6 +18,9 @@
    "lead": 10,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -33,6 +36,12 @@
    "lead": 6,
    "until": {
     "word": "3-08.w009"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "key"
+    ]
    }
   },
   {
@@ -48,6 +57,9 @@
    "lead": 8,
    "until": {
     "word": "3-08.w014"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -63,6 +75,9 @@
    "lead": 6,
    "until": {
     "word": "3-08.w020"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -78,6 +93,9 @@
    "lead": 4,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -93,6 +111,12 @@
    "lead": 10,
    "until": {
     "word": "3-08.w029"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "flask"
+    ]
    }
   },
   {
@@ -108,6 +132,12 @@
    "lead": 6,
    "until": {
     "word": "3-08.w031"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "cal"
+    ]
    }
   },
   {
@@ -123,6 +153,9 @@
    "lead": 40,
    "until": {
     "word": "3-08.w037"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -138,6 +171,9 @@
    "lead": 20,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -153,6 +189,9 @@
    "lead": 20,
    "until": {
     "word": "3-08.w045"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -168,6 +207,12 @@
    "lead": 10,
    "until": {
     "word": "3-08.w048"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chip"
+    ]
    }
   },
   {
@@ -183,6 +228,9 @@
    "lead": 6,
    "until": {
     "word": "3-08.w052"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -198,6 +246,9 @@
    "lead": 6,
    "until": {
     "word": "3-08.w053"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -213,6 +264,9 @@
    "lead": 6,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   }
  ]

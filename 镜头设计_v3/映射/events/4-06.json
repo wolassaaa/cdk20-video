@@ -18,6 +18,9 @@
    "lead": 20,
    "until": {
     "word": "4-06.w008"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -33,6 +36,9 @@
    "lead": 6,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -48,6 +54,9 @@
    "lead": 6,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -63,6 +72,12 @@
    "lead": 8,
    "until": {
     "word": "4-06.w014"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "person"
+    ]
    }
   },
   {
@@ -78,6 +93,9 @@
    "lead": 10,
    "until": {
     "word": "4-06.w017"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -93,6 +111,9 @@
    "lead": 8,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -108,6 +129,9 @@
    "lead": 6,
    "until": {
     "word": "4-06.w020"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -123,6 +147,12 @@
    "lead": 8,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "key"
+    ]
    }
   },
   {
@@ -138,6 +168,9 @@
    "lead": 18,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -153,6 +186,9 @@
    "lead": 18,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -168,6 +204,9 @@
    "lead": 6,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -183,6 +222,9 @@
    "lead": 20,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -198,6 +240,9 @@
    "lead": 10,
    "until": {
     "word": "4-06.w030"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -213,6 +258,9 @@
    "lead": 6,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -228,6 +276,9 @@
    "lead": 8,
    "until": {
     "word": "4-06.w034"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -243,6 +294,9 @@
    "lead": 6,
    "until": {
     "word": "4-06.w038"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -258,6 +312,12 @@
    "lead": 8,
    "until": {
     "word": "4-06.w039"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "flask"
+    ]
    }
   },
   {
@@ -273,6 +333,9 @@
    "lead": 6,
    "until": {
     "word": "4-06.w040"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -288,6 +351,9 @@
    "lead": 6,
    "until": {
     "word": "4-06.w042"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
@@ -303,6 +369,9 @@
    "lead": 6,
    "until": {
     "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
    }
   }
  ]
