@@ -62,9 +62,14 @@ LENS = F_PX * 36.0 / OUT_W                            # Blender 焦距（36 mm �
 SHIFT = ((OUT_W / 2 - AXIS[0]) / OUT_W, (AXIS[1] - OUT_H / 2) / OUT_W)
 D_PERSON = 0.62                                       # 人卡片离相机（脸宽约 300 px ≈ 0.17 m 反推）
 PIVOT_PX = (AXIS[0], AXIS[1])                         # 微动轴心：人卡片中心
-FSTOP = 1.6                                           # 等待时零件弥散圆 2–4 px、点名后背景板 6–14 px（05 文档三、V7）
-BASE_FOCUS = 1.2                                      # 没点名时焦点（零件略虚）
-BOARD_S, BOARD_D = 9.2, 3.6                           # 大板放大倍数、离相机（格距 66 mm → 出片约 210 px，同 bg.jpg）
+FSTOP = 0.9                                           # 11-20 验收：背景零件虚到认得出颜色轮廓、看不清字（大板弥散圆 18–25 px）；等待时锁 2–4 px
+BASE_FOCUS = 1.3                                      # 没点名时焦点（零件略虚）
+BOARD_D = 8.0                                         # 11-20 验收：大板推远（原 3.6 m），纵深更大、焦外更虚
+BOARD_S = 9.2 * BOARD_D / 3.6                         # 大板放大倍数：出片上的版式不变（格距约 210 px，同 bg.jpg）
+WALL_DIM = 0.7                                        # 板后墙的底色倍数
+BG_DIM = 0.82                                         # 大板亮度目标 = bg.jpg 的 82%（验收：背景降 15–20%）
+HAZE_DENSITY = 0.05                                   # 零件和大板之间的薄雾（体积散射）：压背景对比，托住斜进来的暖光
+SHAFT_W = 250000.0                                    # 左上斜进来的暖色光（聚光灯，照雾也扫过大板）
 MICRO = (0.3, 0.2)                                    # 微动：左右、上下（度）
 SAMPLES = 32
 GLOSSY_WORLD = 0.9                                    # 镜面光线看见的世界亮度（金属件不发黑）
@@ -361,9 +366,14 @@ def board_setup():
     # 板后面一堵浅色墙（bg.jpg 里板挂在白墙上），用原来 sweep 的材质
     bpy.ops.mesh.primitive_plane_add(size=1.0, location=(px_to_world(960, 540, BOARD_D + 0.35)[0], BOARD_D + 0.35, 0.0), rotation=(math.radians(90), 0, 0))
     wall = bpy.context.object; wall.name = "ONCAM_wall"
-    wall.scale = (14.0, 9.0, 1.0)
+    wall.scale = (14.0 * BOARD_D / 3.6, 9.0 * BOARD_D / 3.6, 1.0)
     if wall_mat:
-        wall.data.materials.append(wall_mat)
+        wm = wall_mat.copy(); wm.name = "ONCAM_wall_dim"          # 11-20 验收：背景整体压暗，板后的墙最亮，单独压到 70%
+        pb = next((n for n in wm.node_tree.nodes if n.type == "BSDF_PRINCIPLED"), None) if wm.use_nodes else None
+        if pb is not None:
+            c = pb.inputs["Base Color"].default_value
+            pb.inputs["Base Color"].default_value = (c[0] * WALL_DIM, c[1] * WALL_DIM, c[2] * WALL_DIM, 1)
+        wall.data.materials.append(wm)
     coll = bpy.data.collections.new("ONCAM_board_lit")
     sc.collection.children.link(coll)
     for m in [board, wall] + list(board.children_recursive):
@@ -373,6 +383,48 @@ def board_setup():
             # 镜面里照样看得见大板，亮面塑料上有板的反射
             m.visible_diffuse = False
     return board, coll
+
+
+def haze_setup(light):
+    """零件（1.3–1.6 m）和大板之间一盒薄雾 + 一盏只照雾的暖色聚光灯从画面左上斜进来（体积光）。
+    雾把远处的大板压灰、对比降下来，人和零件跳出来。返回雾的集合（主光、补光、顶光排除它，洗墙光本来只照大板）。"""
+    coll = bpy.data.collections.new("ONCAM_haze")
+    bpy.context.scene.collection.children.link(coll)
+    y0, y1 = 2.4, BOARD_D - 0.3
+    ym = (y0 + y1) / 2
+    c = Vector(px_to_world(OUT_W / 2, OUT_H / 2, ym))
+    wx = OUT_W / F_PX * y1 * 1.4
+    wz = OUT_H / F_PX * y1 * 1.4
+    bpy.ops.mesh.primitive_cube_add(size=1.0, location=(c.x, ym, c.z))
+    hz = bpy.context.object; hz.name = "ONCAM_haze_box"
+    hz.scale = (wx, y1 - y0, wz)
+    for cl in list(hz.users_collection):
+        cl.objects.unlink(hz)
+    coll.objects.link(hz)
+    m = bpy.data.materials.new("oncam_haze"); m.use_nodes = True
+    nt = m.node_tree
+    for n in list(nt.nodes):
+        if n.type != "OUTPUT_MATERIAL":
+            nt.nodes.remove(n)
+    vs = nt.nodes.new("ShaderNodeVolumeScatter")
+    vs.inputs["Color"].default_value = (1.0, 0.97, 0.92, 1)
+    vs.inputs["Density"].default_value = HAZE_DENSITY
+    vs.inputs["Anisotropy"].default_value = 0.45
+    nt.links.new(vs.outputs[0], nt.nodes["Material Output"].inputs["Volume"])
+    hz.data.materials.append(m)
+    hz.visible_shadow = False
+    sd = bpy.data.lights.new("shaft", "SPOT")
+    sd.energy = SHAFT_W
+    sd.color = kelvin_rgb(3600)
+    sd.spot_size = math.radians(16)
+    sd.spot_blend = 0.6
+    sd.shadow_soft_size = 0.25
+    sh = link_obj(bpy.data.objects.new("shaft", sd))
+    sh.location = Vector(px_to_world(-500, -650, 4.2))
+    aim = Vector(px_to_world(1250, 420, 6.5))
+    sh.rotation_euler = (aim - sh.location).to_track_quat("-Z", "Y").to_euler()
+    # 不做灯光链接（体积对灯光链接不起作用，实测只链雾时一点光柱都没有）：这盏暖光也斜扫过大板左上和锁的上沿
+    return coll
 
 
 def make_light(name, kind, loc, aim, size, energy, color, size_y=None):
@@ -403,12 +455,15 @@ def light_rig(light, fit, subject, board_coll):
     fill = make_light("fill", "AREA", s + df * 3.0, s, 2.6, fit["fill_w"], col)
     top = make_light("top", "AREA", s + Vector((0.2, -0.3, 1.4)), s, 1.2, fit["key_w"] * 0.12, col, size_y=0.25)
     bc = bpy.data.objects["ONCAM_board_xf"].location
-    wash = make_light("wash", "AREA", Vector((bc.x - 1.0, BOARD_D - 2.4, 1.6)), Vector(px_to_world(1100, 520, BOARD_D)), 4.0, fit["wash_w"], col)
+    kd = BOARD_D / 3.6
+    wash = make_light("wash", "AREA", Vector((bc.x - 1.0 * kd, BOARD_D - 2.4 * kd, 1.6 * kd)), Vector(px_to_world(1100, 520, BOARD_D)), 4.0 * kd, fit["wash_w"], col)
     wash.light_linking.receiver_collection = board_coll
     # 主光、补光、顶光不照大板和墙（大板亮度只由洗墙光定，和别的段的 bg.jpg 对齐）
     notb = bpy.data.collections.new("ONCAM_not_board")
     notb.children.link(board_coll)
-    notb.collection_children[0].light_linking.link_state = "EXCLUDE"
+    notb.children.link(haze_setup(light))
+    for cc in notb.collection_children:
+        cc.light_linking.link_state = "EXCLUDE"
     for o in (key, fill, top):
         o.light_linking.receiver_collection = notb
     # 反射卡（只给镜面看，不照明、不投影）：金钥匙、电镀件、亮面塑料要有东西可反射，不然朝相机的面全黑
@@ -599,7 +654,7 @@ def build_world(cfg, fit, samples=SAMPLES):
 
 
 def default_fit(light):
-    return dict(az_deg=min(60.0, max(30.0, light["az_deg"])), el_deg=15.0, key_w=900.0, fill_w=260.0, wash_w=900.0, world=0.35)
+    return dict(az_deg=min(60.0, max(30.0, light["az_deg"])), el_deg=15.0, key_w=900.0, fill_w=260.0, wash_w=900.0 * (BOARD_D / 3.6) ** 2, world=0.35)
 
 
 def load_fit(cfg, light):
@@ -682,7 +737,7 @@ def calib(seg):
         bpy.ops.object.shade_smooth(); o.data.materials.append(m)
         balls[name] = (o, c)
     bg_ref = _load(Path(cfg["person"]).parent / "bg.jpg")[..., :3]
-    t_board = float(np.median(_lum(_lin(bg_ref[100:1000, 1250:1900]))))
+    t_board = float(np.median(_lum(_lin(bg_ref[100:1000, 1250:1900])))) * BG_DIM
     t_white = light["shirt_lin_p90"] * 0.9          # 白球 80% 对白 T 恤（约 90%）
     t_ratio = light["key_fill_ratio_mean"]
     hist = []
@@ -798,7 +853,8 @@ def fg_wipe(K, nf_wipe=17, depth=0.24):
 
 
 # ---------------------------------------------------------------- 3-01 的 recipe：销子锁 H06 + 钥匙 H02
-SL = 21.5                         # 零件放大倍数（锁宽 20 mm → 0.4 m，在 1.4 m 处约 360 px 宽、高约 450 px，F1 ≥ 380）
+SL = 19.35                        # 零件放大倍数（锁宽 20 mm → 0.4 m，在 1.4 m 处约 360 px 宽、高约 450 px，F1 ≥ 380）
+KEY_RIM_W = 30.0                  # 只照钥匙的小面光（W）
 KEY_YAW = -65.0                   # 钥匙亮出时侧转的角度（度）：正对相机只看见圆柄，侧过来才看得出是钥匙
 PIN_DROP = 0.5                    # 没钥匙时下销落下的量（mm）
 
@@ -834,6 +890,15 @@ def _visible_meshes(root, ignore_anim=False):
             if o.type in ("MESH", "CURVE") and o not in cutters and (ignore_anim or not o.hide_render)]
 
 
+def key_rim_keys(kl, f_on, f_off):
+    """钥匙小面光只在钥匙亮出到插进去这段亮：插进去以后关掉（推进时镜头贴近钥匙柄，不关会烧成一团白，实测 380–382 帧）。"""
+    w = kl.data.energy
+    for f, e in ((f_on - 12, 0.0), (f_on, w), (f_off, w), (f_off + 6, 0.0)):
+        kl.data.energy = e
+        kl.data.keyframe_insert("energy", frame=f)
+    kl.data.energy = w
+
+
 def recipe_lock_key(W):
     """3-01 "Okay. To get this, picture a lock and a key."（D，384 帧）。事件 id 沿用 events/3-01.json（二维版同一张表），三维里的意思：
       dot   Okay   挂在料杆框里的锁点一下头（落在词上）
@@ -867,7 +932,7 @@ def recipe_lock_key(W):
     hx = max(abs(lo.x), abs(hi.x)) / MM + 3.5
     z0, z1 = lo.z / MM - 3.0, hi.z / MM + 3.0
     zc, hz = (z0 + z1) / 2, (z1 - z0) / 2
-    loop = KP.tube_w("hang_cell_loop", [(x, 3.0, z) for x, z in KP.rrect(0, zc, hx, hz, 5.0)], KP.R_LOOP, K.blue, hang, cyclic=True)
+    KP.tube_w("hang_cell_loop", [(x, 3.0, z) for x, z in KP.rrect(0, zc, hx, hz, 5.0)], KP.R_LOOP, K.blue, hang, cyclic=True)
     for i, (gx, gy, d, gz) in enumerate(json.loads(lock["gates"])):
         KP.gate_geo(f"hang_cell_g{i}", ((hx if gx > 0 else -hx) * MM, gy * MM, gz * MM), (gx * MM, gy * MM, gz * MM), K.blue, hang)
     gates = [o for o in hang.children if o.name.startswith("hang_cell_g")]
@@ -935,16 +1000,28 @@ def recipe_lock_key(W):
         fo, fy = float_off(f, f_pop + 20)
         return c + fo, Quaternion((0, 0, 1), math.radians(fy)) @ q
 
+    # 11-20 验收：出镜段零件不带料框。框只在 Okay 那一下从浇口"咔"地断开：往后弹开锁的厚度、再按重力掉出画面，之后藏掉
+    f_snap = f_ok
+    f_gone = f_snap + 40
+
     def cell_state(f):
-        c, q = hang_state(min(f, f_pop + 16))
-        k = ease_inout_cubic((f - f_pop - 4) / 46)
-        kick = -pop_dir * (y_len + 0.05) * ease_out_cubic((f - f_pop) / 8) if f > f_pop else Vector()   # 浇口断开时框往反方向弹一下（反作用），浇口头立刻离开锁体
-        return c + kick + Vector((0.45, 0.7, -2.0)) * k, q        # 空框往下沉出画面（不在锁后面晃）
+        c, q = hang_state(min(f, f_snap))
+        if f <= f_snap:
+            return c, q
+        t = (f - f_snap) / FPS
+        kick = -pop_dir * (y_len + 0.05) * ease_out_cubic((f - f_snap) / 8)
+        fall = Vector((0.15 * t, 0.2 * t, -4.9 * t * t))            # 重力 9.8 m/s²：0.6 s 掉 1.8 m，出画
+        tumble = Quaternion(pop_dir.cross(Vector((0, 0, 1))).normalized(), math.radians(-70 * t * t))
+        return c + kick + fall, tumble @ q
 
     LM = [mat_center(*lock_state(f)) for f in range(nf)]
     for f in range(nf):
         key_matrix(lock, f, LM[f])
-        key_matrix(hang, f, mat_center(*cell_state(f)))
+        key_matrix(hang, f, mat_center(*cell_state(min(f, f_gone))))
+    for o in [hang] + list(hang.children_recursive):
+        for fk, hid in ((f_gone - 1, False), (f_gone, True)):
+            o.hide_render = hid
+            o.keyframe_insert("hide_render", frame=fk)
     # 钥匙：挂在锁下面（父子），锁芯转时跟着转
     key = D.h02_key(K, which="048", scale=1.3)
     key.parent = lock
@@ -964,9 +1041,9 @@ def recipe_lock_key(W):
         return Matrix.Translation((w * Wv + du * Uv + dv * Vv) * MM) @ Kin @ Matrix.Diagonal((s, s, s, 1))
 
     tip_local = Vector((6.5 * MM, 0, 0))
-    # 手边的位置：钥匙尖落在出片 (1225, 790)，钥匙柄在 D 的手指后面（人在合成里整个在最前，F3）。
+    # 手边的位置：钥匙尖落在出片 (1330, 715)，在锁下方、D 的右手右边（11-20 验收：钥匙不要被手指盖住）。
     # 离锁 13 mm（放大后 0.28 m）：再往相机凑就太大、出画、离焦外太远；上下左右用 du、dv 两个方向解
-    tgt = (1225.0, 790.0)
+    tgt = (1330.0, 715.0)
     Mc = cam_matrix_micro(f_k1)
     w_hand = 13.0
     du_, dv_ = -12.0, 0.0
@@ -1077,12 +1154,12 @@ def recipe_lock_key(W):
     import bl_guide as BG
     sc.frame_set(f_pop - 6)
     rot = BG.tick_rot_cap(W["cam"], sc, lock, cam_matrix_micro(f_pop).translation, 4.0)
-    tick = BG.guide_tick(lock, gates, loop, f_pop, amp_mm=4.0, rot_deg=rot, dir=pop_dir)
+    tick = BG.guide_tick(lock, [], None, f_pop, amp_mm=4.0, rot_deg=rot, dir=pop_dir)   # 框已在 Okay 断掉，只剩锁本体预颤
     # 浇口在锁体表面断开：断的那一帧锥头缩回 40%（粗端连料杆不动），断口留在框上，不再插在锁体侧面里（穿模检查 184–186 帧）
     for g in gates:
         L = g.dimensions.z / max(1e-9, g.scale.z)
         ax = g.rotation_euler.to_matrix() @ Vector((0, 0, 1))
-        for fk, sz in ((f_pop, 1.0), (f_pop + 1, 0.6)):
+        for fk, sz in ((f_snap, 1.0), (f_snap + 1, 0.6)):
             g.delta_scale = (1.0, 1.0, sz)
             g.delta_location = -ax * L * (1 - sz) / 2
             g.keyframe_insert("delta_scale", frame=fk)
@@ -1112,6 +1189,16 @@ def recipe_lock_key(W):
     # 钥匙侧着亮出时，正对镜头那面要有东西可反射（金色才亮），一张只给镜面看的卡放在相机左上方对着钥匙
     kp = key_pts[f_k1]
     refl_card("refl_key", -kp.normalized() * 0.35 + Vector((-0.15, 0, 0.12)), kp, (1.6, 1.1), kelvin_rgb(W["light"]["kelvin"]), 3.0)   # 相机身后、钥匙—相机连线上
+    # 11-20 验收：金钥匙在 340 帧读成深褐。加一盏只照钥匙的小面光（灯光链接），从右上前方打，金色读成亮金
+    kcol = bpy.data.collections.new("ONCAM_key_lit")
+    sc.collection.children.link(kcol)
+    for o in [key] + list(key.children_recursive):
+        if o.type in ("MESH", "CURVE"):
+            kcol.objects.link(o)
+    kl = make_light("key_rim", "AREA", kp + Vector((0.32, -0.38, 0.42)), kp, 0.35, KEY_RIM_W, kelvin_rgb(4300))
+    kl.light_linking.receiver_collection = kcol
+    key_rim_keys(kl, f_k0, f_i1)
+
 
     def checks():
         """穿模：弹出时锁和框、浇口；钥匙进锁时钥匙和锁体（外壳、套筒、轴承、口环、螺丝）、锁芯；钥匙和下销只许贴着。"""
@@ -1125,7 +1212,7 @@ def recipe_lock_key(W):
         moving = set(rotor) | set(o for i in range(5) for o in _visible_meshes(j[f"pin_{i}"])) | set(_visible_meshes(j["shackle"]))
         statics = [o for o in lock_objs if o not in moving]
         hits = []
-        for f in range(f_pop + 2, f_r1 + 20, 2):
+        for f in range(f_snap + 1, f_gone):
             sc.frame_set(f)
             a, b = _tree(lock_objs), _tree(cell_objs)
             if a and b and a.overlap(b):
@@ -1637,10 +1724,10 @@ def report(seg, html_path=None, extra=None):
     f2 = cc["F2_hero_xmin_min_px"]
     sync_ok = cc.get("check_sync_rc") == 0
     self_rows = [
-        ["F1 大小", f"锁（含锁梁）的投影高度最小 {f1:.0f} px（段首淡入后到推进前逐帧量）", "≥ 380 px", ok(f1 >= 380)],
+        ["F1 大小", f"锁（含锁梁）的投影高度最小 {f1:.0f} px（段首淡入后到推进前逐帧量）", "≥ 380 px（11-20 验收要求锁再小 10%，以验收为准）", ok(f1 >= 380) if f1 >= 380 else "<b>按验收调小</b>"],
         ["F2 位置", f"锁的左边最小 x = {f2:.0f}", "≥ 1250，不碰脸", ok(f2 >= 1250)],
-        ["F3 遮挡", "钥匙从 D 抬起的手指后面亮出（人整个在最前）", "至少一处", ok(True)],
-        ["F4 光", f"主光从画面左边来（量得 lr = {L['lr']:.2f}，方位 {fit['az_deg']:.0f}°），{L['kelvin']:.0f} K 暖白；锁先挂在蓝色料杆框的浇口上", "同侧、同暖、有料杆", ok(True)],
+        ["F3 遮挡", "11-20 验收改为钥匙避开手：钥匙在锁下方、D 右手的右边亮出，不被手指盖住（人仍整个在最前）", "验收优先", "<b>按验收改</b>"],
+        ["F4 光", f"主光从画面左边来（量得 lr = {L['lr']:.2f}，方位 {fit['az_deg']:.0f}°），{L['kelvin']:.0f} K 暖白；锁开场挂在蓝色料杆框的浇口上，Okay 时框断开掉出画面", "同侧、同暖、有料杆", ok(True)],
         ["F5 进出", f"人第 {cfg['fade_in'][1]} 帧完全露出，第 {K['words'][0]['f0']} 帧开口；推进从第 {chk['push_t0']} 帧开始，最后一个词在第 {K['sentences'][-1]['f1']} 帧说完；黑场 {cc['black_frames']} 帧",
          "露出 ≥ 6 帧后开口；说完才转场；无黑场", ok(K['words'][0]['f0'] - cfg['fade_in'][1] >= 6 and chk['push_t0'] >= K['sentences'][-1]['f1'] and cc['black_frames'] == 0)],
         ["人不动", f"推进前合成里人的像素位移最大 {cc['person_drift_max_px_before_push']} px（人用原像素直接贴，镜头微动只让大板和锁有视差）", "0 px", ok(cc['person_drift_max_px_before_push'] <= 1)],
@@ -1648,17 +1735,17 @@ def report(seg, html_path=None, extra=None):
         ["穿模", f"锁弹出时碰框：{len(clip.get('lock_vs_cell_frames', []))} 帧；钥匙碰锁体：{len(clip.get('key_vs_lockbody_frames', []))} 帧；钥匙碰锁芯：{len(clip.get('key_vs_core_frames', []))} 帧；钥匙贴下销（允许）：{len(clip.get('key_vs_lowerpins_touch', []))} 帧",
          "0 / 0 / 0", ok(not clip.get('lock_vs_cell_frames') and not clip.get('key_vs_lockbody_frames') and not clip.get('key_vs_core_frames'))],
         ["景深", "；".join(f"f{k}: 焦 {v['focus']} m，锁 {v['lock']} px，大板 {v['board']} px" for k, v in coc.items()),
-         "等待时锁 2–4 px；点名后锁 ≤ 1 px、大板 6–14 px", ""],
+         "等待时锁 2–4 px；点名后锁 ≤ 1 px、大板 18–25 px", ""],
         ["颗粒", f"成片里 T 恤平坦块 {cc['grain_person_shirt']}，左边墙平坦块（零件层） {cc['grain_cg_wall_left']}（8 位高频残差）", "同一量级", ok(abs(cc['grain_person_shirt'] - cc['grain_cg_wall_left']) < 0.8)],
         ["亮度跳", f"相邻帧平均亮度最大跳 {cc['max_frame_jump']}（第 {cc['max_frame_jump_at']} 帧，推进/擦除处）", "无闪", ""],
     ]
     beat_rows = [
         ["0–16", "—", "T5 焦点擦除：近处两根白料杆（全虚）从画面正中往左扫出，人 0–14 帧淡入", "上一段 2-08 结尾接同一组料杆从右边扫进（深 0.24 m、每帧 0.021 m、倾 14°）"],
-        [f"{ev['dot']['f_start']}→{ev['dot']['f_land']}", "Okay", "挂在蓝色料杆框里的锁（背面朝镜头，看不见剖口）点一下头", "待机微动一直在"],
+        [f"{ev['dot']['f_start']}→{ev['dot']['f_land']}", "Okay", "浇口\"咔\"地断开：蓝色料杆框往后弹开、按重力掉出画面（40 帧后藏掉），锁留在空中点一下头", "11-20 验收：出镜段零件不带料框"],
         [f"{ev['dot2']['f_start']}→{ev['dot2']['f_land']}", "this", "锁连框转 8°", ""],
         ["158→176", "（picture 前）", f"焦点从 {BASE_FOCUS} m 拉到锁上，轮廓光起亮（bl_guide 焦点点名）", "V4：到位在词前 8 帧"],
-        [f"178→{ev['frame']['f_land']}", "", "A1 预颤：锁往外绷 4 mm、浇口拉细、框颤", "bl_guide.guide_tick"],
-        [f"{ev['frame']['f_land']}", "picture", "A1 浇口弹下：锁弹出、转正（16 帧 easeOutBack + 12 帧回弹），框退回板的方向", ""],
+        [f"178→{ev['frame']['f_land']}", "", "A1 预颤：锁往外绷 4 mm", "bl_guide.guide_tick"],
+        [f"{ev['frame']['f_land']}", "picture", "A1 弹出：锁往前飞、转正（16 帧 easeOutBack + 12 帧回弹）", ""],
         [f"{ev['lock']['f_start']}→{ev['lock']['f_land']}", "lock", f"锁转 {info['poses']['pick'][0] - info['poses']['show'][0]:.0f}° 露出剖开的四分之一，一排弹子销（过冲回弹）", "06 文档：3-01 仍是销子锁"],
         [f"{ev['key']['f_start']}→{ev['key']['f_land']}", "a", "A7：金钥匙从 D 抬起的手指后面亮出，侧着露出齿形；焦点借给钥匙", "F3 手指在钥匙前"],
         [f"{info['frames']['approach'][0]}→{info['frames']['insert'][1]}", "key", "钥匙绕尖转正、对准锁孔、滑进去；五根下销被齿顶起、最后齐在分界线上；焦点回到锁", "销高由 h02 齿形逐帧算"],
@@ -1671,7 +1758,7 @@ def report(seg, html_path=None, extra=None):
     params = [
         ["相机", f"焦距 {LENS:.2f} mm（36 mm 传感器，等于手机前摄 {HFOV_EQ_MM:.0f} mm 等效），镜头偏移 {SHIFT[0]:.4f} / {SHIFT[1]:.4f}，光圈 f/{FSTOP}，叶片 6，没点名时焦点 {BASE_FOCUS} m"],
         ["人卡片", f"深 {D_PERSON} m，四角落在出片 x {PERSON['x']}–{PERSON['x'] + PERSON['w']}、y {PERSON['y']}–{PERSON['y'] + PERSON['h']}；只投影"],
-        ["大板", f"board_final.blend 竖起来，放大 {BOARD_S} 倍，离相机 {BOARD_D} m；第 3 区挂锁那一格藏起来（就是飞到人旁边的这把）"],
+        ["大板", f"board_final.blend 竖起来，放大 {BOARD_S:.1f} 倍，离相机 {BOARD_D} m；板前一层薄雾（散射密度 {HAZE_DENSITY}），左上一盏暖色聚光 {SHAFT_W:.0f} W 斜穿过雾；板后墙底色 ×{WALL_DIM}；第 3 区挂锁那一格藏起来（就是飞到人旁边的这把）"],
         ["零件", f"H06 销子锁（kit_deep_r3，剖开版）+ H02 钥匙 048（1.3 倍，和锁的检具同一配法），整体放大 {SL:.0f} 倍；锁在 1.40–1.55 m"],
         ["主光", f"面光 1.6 m，方位 {fit['az_deg']:.0f}°（相对零件看相机的方向，画面左）、仰 {fit['el_deg']:.0f}°，离零件 2.6 m，{fit['key_w']:.0f} W，{L['kelvin']:.0f} K"],
         ["补光/顶光", f"补光 2.6 m 面光在右 {fit['fill_w']:.1f} W；顶光 = 主光 12%；世界光 {fit.get('world', 0.35)}"],
@@ -1698,6 +1785,18 @@ th{background:rgba(127,127,127,.08)} .ok{color:var(--ok)} .bad{color:var(--bad)}
              f"成片 <code>{esc(vid.name)}</code>（1080p60，{cfg['nf']} 帧 = {cfg['nf'] / FPS:.1f} 秒，带原声）。代码 <code>镜头设计_v3/inserts/shot_oncam.py</code>（所有出镜段共用，各段只写一个 recipe）。"
              f"生成于 {time.strftime('%Y-%m-%d %H:%M')}（韩国时间）。</p>")
     h.append("<div class=lead>" + "".join(f"<p>{x}</p>" for x in (extra or [])) + "</div>")
+    v1 = [(n, work / f"v1_{n:04d}.png") for n in (60, 200, 340)]
+    if all(p.exists() for _, p in v1):
+        h.append("<h2>11-20 验收三处改动：前后对比（第 60 / 200 / 340 帧，左旧右新）</h2>"
+                 "<ol><li>背景：大板从 3.6 m 推到 8 m、光圈 f/1.6 → f/0.9，大板焦外约 19–21 px（看得出颜色轮廓、看不清字）；"
+                 "零件和大板之间一层薄雾压对比；大板亮度目标降到 bg.jpg 的 82%，板后的墙压到 70%；一盏暖色聚光从左上斜穿过雾。</li>"
+                 "<li>料框：只在 Okay 那一下从浇口断开、弹开后按重力掉出画面；锁再小 10%。</li>"
+                 "<li>钥匙：加一盏只照钥匙的小面光（灯光链接）+ 镜面看得见的亮环境，金色读成亮金；钥匙挪到锁下方、手的右边，不被手指盖住。</li></ol>")
+        for n, p in v1:
+            new = _video_frame(vid, n)
+            old = Image.open(p)
+            h.append("<div class=row>" + "".join(f"<figure><img src='{_jpg_b64(im, 960)}'><figcaption>第 {n} 帧 {t}</figcaption></figure>"
+                                                 for t, im in (("旧", old), ("新", new))) + "</div>")
     h.append("<h2>逐拍</h2>" + table(beat_rows, ["帧", "词", "画面", "备注"]))
     h.append(f"<img src='{_jpg_b64(sheet, 1280)}' alt='拍点抽帧'>")
     h.append("<h2>自检</h2>" + table(self_rows, ["项", "实测", "标准", "结论"]))
