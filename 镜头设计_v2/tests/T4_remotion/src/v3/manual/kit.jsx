@@ -126,18 +126,29 @@ export const beadAt = (K, f) => {
   }
   return [K[K.length - 1][1], K[K.length - 1][2]];
 };
-// 到站后不停死：绕落点轻轻悬停（约 4 px），像浮着的料
-const hover = (f) => [Math.sin(f / 23) * 3.2 + Math.sin(f / 9.7) * 0.9, Math.cos(f / 29) * 2.6 + Math.sin(f / 13.3) * 0.8];
+// 11-20 导演：红点看久了晃眼。改为：颜色压暗压饱和；停站时几乎不动（只留约 1 px、6 秒一周的慢漂）；
+// 拖尾只在移动时出现；停站约 1 秒后淡到 70% 并略缩小，不再一直抢眼。
+const BEAD = "#A8423A";
+const hover = (f) => [Math.sin(f / 57) * 1.0, Math.cos(f / 71) * 0.8];
 const beadPos = (K, f) => { const [x, y] = beadAt(K, f), [hx, hy] = hover(f); return [x + hx, y + hy]; };
-export const Bead = ({K, f}) => (
-  <svg width={1920} height={1080} style={{position: "absolute", left: 0, top: 0}}>
-    {[...Array(14)].map((_, i) => {
-      const [x, y] = beadPos(K, f - (13 - i) * 0.75);
-      return <circle key={i} cx={x} cy={y} r={2 + (i / 13) * 6} fill={RED} opacity={i === 13 ? 1 : 0.05 + 0.03 * i} />;
-    })}
-    {(() => { const [x, y] = beadPos(K, f); return <circle cx={x - 2.2} cy={y - 2.4} r={2.2} fill="#fff" opacity={0.75} />; })()}
-  </svg>
-);
+const beadSpeed = (K, f) => { const [a, b] = beadAt(K, f), [c, d] = beadAt(K, f - 1); return Math.hypot(a - c, b - d); };
+const beadRest = (K, f) => { let n = 0; while (n < 60 && beadSpeed(K, f - n) < 0.3) n++; return n; };
+export const Bead = ({K, f}) => {
+  const mv = Math.min(1, beadSpeed(K, f) / 6);
+  const rest = Math.min(1, Math.max(0, (beadRest(K, f) - 30) / 30));
+  const op = 1 - 0.3 * rest, r = 7 - 1 * rest;
+  const [x, y] = beadPos(K, f);
+  return (
+    <svg width={1920} height={1080} style={{position: "absolute", left: 0, top: 0}}>
+      {mv > 0.02 && [...Array(10)].map((_, i) => {
+        const [tx, ty] = beadPos(K, f - (10 - i) * 0.8);
+        return <circle key={i} cx={tx} cy={ty} r={2 + (i / 10) * 4} fill={BEAD} opacity={mv * (0.04 + 0.025 * i)} />;
+      })}
+      <circle cx={x} cy={y} r={r} fill={BEAD} opacity={op} />
+      <circle cx={x - r * 0.3} cy={y - r * 0.33} r={r * 0.28} fill="#fff" opacity={0.35 * op} />
+    </svg>
+  );
+};
 
 // 事件表：keys/<段>.json → E.id = {s, l, e}（f_start, f_land, f_end）
 export const evMap = (K) => Object.fromEntries(K.events.map((e) => [e.id, {s: e.f_start, l: e.f_land, e: e.f_end}]));
