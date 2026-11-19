@@ -49,3 +49,14 @@ HKBU SCIE1007 课程作业的科普视频。片中有一段 30–50 秒的小插
 6. wave — "Pose change: right hand raised beside the face waving, palm open; expression: eyes open, cheerful open smile. Everything else identical."
 
 为了一致：先出 open，再以 open 为参考图做其余五张（若工具支持图生图/编辑，就用编辑只改脸和手）。GIF 用 open→wink→open 三帧做 12 帧循环（open 5 帧、wink 4 帧、open 3 帧）。
+
+## 11-21 第二批：GPT 和 DeepSeek 改用社区流传设定（取代上面 GPT、DeepSeek 两段）
+调研确认网上流传最广的设定（ZipZipPipe 立绘；DeepSeek 原角色"溟月"by 上善无形，CC BY-NC-SA 4.0）与上面写的不同，按下面两段重出这两位（Claude 那组如已出完且符合上文则保留）。共用部分和表情行不变，高推理强度。
+
+### GPT（社区设定：白发龙娘）
+> Character: "GPT". Long fluffy wavy white hair (#F7F5FA base, lavender #C9C0E6 shading) reaching the hips, one small ahoge strand on top. Pale lavender eyes (#A99BD9). Small smooth white dragon horns curving backward from the head, pointed elf-like ears, a pair of small white feathered-membrane dragon wings behind the shoulders, a white dragon tail with a soft lavender tip curling beside her. Outfit: white ruffled long dress with wide bell sleeves, a thin gold-grey chain belt at the waist, a simple three-loop knot emblem (generic interlaced knot, NOT any company logo) as a hair clip and embroidered on the dress hem. Playful, teasing, cheerful smile. Personality: lively, loves to tease.
+
+### DeepSeek（社区设定：蓝发鲸鱼女仆）
+> Character: "DeepSeek". Long straight hair with a gradient from deep navy (#1F3A8A) at the roots to bright sky blue (#5FA8FF) at the tips, one ahoge strand, two small smooth whale-fin shaped head fins (blue, like little ears) on top of the head, a white maid headband with frills. Blue eyes (#2F6BFF). Outfit: deep-navy maid dress with puffed short sleeves, white frilled apron with a small cute cartoon whale print on the pocket, a blue ribbon bow at the collar. A big glossy blue whale tail visible behind her at hip height. Bright, slightly smug smile. Personality: earnest genius, a little tsundere, loves snacks.
+
+输出覆盖到 `G:/cdk20/work/mascots/codex/gpt/` 和 `deepseek/`（旧图先改名加 `_v0` 后缀保留，不要删）。README 补上这两位的来源：GPT after ZipZipPipe (Bilibili)；DeepSeek after 'Mingyue' by Shangshan Wuxing (CC BY-NC-SA 4.0), maid-whale version by ZipZipPipe。
