@@ -626,3 +626,97 @@ def h03_loop_track(K, lod="hero"):
     for i,(x,y) in enumerate(((9,-3.5),(-9,-3.5),(-9,3.5),(9,3.5))):
         _tray(P,i,x,y)
     return P.done()
+
+
+def _screen(P, screen_seq, z):
+    from pathlib import Path
+
+    K = P.K
+    mat = K.black
+    if screen_seq is not None:
+        path = Path(screen_seq)
+        files = sorted(path.glob("*.png")) if path.is_dir() else [path]
+        if not files or not files[0].is_file() or files[0].suffix.lower() != ".png":
+            raise ValueError("screen_seq must be a PNG file or a directory of numbered PNGs")
+        mat = bpy.data.materials.get("kit_screen") or bpy.data.materials.new("kit_screen")
+        mat.use_nodes = True
+        nodes, links = mat.node_tree.nodes, mat.node_tree.links
+        nodes.clear()
+        tex = nodes.new("ShaderNodeTexImage")
+        tex.image = bpy.data.images.load(str(files[0]), check_existing=True)
+        if len(files) > 1:
+            tex.image.source = "SEQUENCE"
+            tex.image_user.frame_duration = len(files)
+            tex.image_user.use_auto_refresh = True
+        em = nodes.new("ShaderNodeEmission")
+        em.inputs["Strength"].default_value = 1.
+        links.new(tex.outputs["Color"], em.inputs["Color"])
+        links.new(em.outputs["Emission"], nodes.new("ShaderNodeOutputMaterial").inputs["Surface"])
+    o = _mesh(P,"screen",[(-19,-11,z),(19,-11,z),(19,11,z),(-19,11,z)],[(0,1,2,3)],mat)
+    uv = o.data.uv_layers.new(name="UVMap")
+    for loop in o.data.loops:
+        c = o.data.vertices[loop.vertex_index].co
+        uv.data[loop.index].uv = (c.x/(38*MM)+.5,c.y/(22*MM)+.5)
+    o["role"] = "screen"
+    return o
+
+
+def _counter(P):
+    K = P.K
+    y_positions = (-3.45,-1.15,1.15,3.45)
+    zaxis = Vector((0,0,1))
+    xaxis = Vector((1,0,0))
+    yaxis = Vector((0,1,0))
+    for j, y in enumerate(y_positions):
+        co = Vector((19.12,y,2.22))
+        axis = _move(P,f"odo_{j}","rot",(0,360),pivot=co,axis=yaxis)
+        drum = _cyl(P,co,yaxis,1.5,2.,K.black,.11)
+        objects = [drum]
+        for i in range(10):
+            turn = Matrix.Rotation(math.radians(-36*i),3,"Y")
+            normal = turn @ zaxis
+            center = co + 1.49*normal
+            o = _label(P,str(i),1.,0,0,0,K.inkw)
+            o.matrix_basis = Matrix.Translation(_mm(center+.012*normal)) @ Matrix(
+                (yaxis,turn@(-xaxis),normal)).transposed().to_4x4()
+            objects.append(o)
+        _adopt(axis,*objects)
+    for x in (18.02,20.22):
+        P.box(x,0,.55,4.94,.26,K.black,z=3.89,r=.18,bevel=.12)
+    for y in (-4.9,4.9):
+        P.box(19.12,y,.96,.20,.30,K.black,z=3.83,r=.15,bevel=.1)
+
+
+def h04_chem42_chip(K, screen_seq=None):
+    P = Part(K,"h04_chem42_chip","black")
+    body = P.box(0,0,22,14,4,K.black,z=2,r=1.3,bevel=.38)
+    _boolean(body,P.box(0,0,19.02,11.02,7,K.black,z=4.098,r=.24,bevel=0))
+    _boolean(body,P.box(19.1,0,1.85,4.93,3.95,K.black,z=2.35,r=.25,bevel=0))
+    _boolean(body,P.box(22,7.4,1.80,3.05,2.1,K.black,z=2.,r=.14,bevel=0))
+    # 引脚长 3，1 mm 埋入本体；±Y 外缘保持 ±16 mm。
+    for sign in (-1,1):
+        for i in range(10):
+            P.box((i-4.5)*4.12,sign*14.5,.5,1.5,.4,K.gold_satin,z=.68,r=.12,bevel=.18)
+            P.box(sign*22.5,(i-4.5)*2.62,1.5,.5,.4,K.gold_satin,z=.68,r=.12,bevel=.18)
+    lid = _move(P,"lid","rot",(0,120),pivot=(0,-14,4.15),axis=(1,0,0))
+    objs = [P.box(0,0,22,14,1.2,K.black,z=4.75,r=1.3,bevel=.34),
+            _label(P,"Chemistry42",2.4,0,0,5.35,K.inkw),
+            P.cyl(-18,-10.1,5.37,.6,.16,K.inkw,bevel=.045)]
+    for x in (-20,20):
+        for y in (-11.95,11.95):
+            objs.append(_screw(P,(x,y,5.35),(0,0,1),.4,K.gold_satin))
+    _adopt(lid,*objs)
+    _screen(P,screen_seq,.6)
+    socket = P.box(0,0,3,3,3,K.blue,z=2.101,r=.45,bevel=.25)
+    socket.name = f"{P.name}__socket"
+    _boolean(socket,P.cyl(0,0,3.25,1.0,2.4,K.blue,bevel=0))
+    P.torus(0,0,3.65,1.28,.14,K.red)
+    _counter(P)
+    flap = _move(P,"mouth","rot",(0,70),pivot=(22.08,7.4,3.0),axis=(0,-1,0))
+    panel = _local_box(P,(22.08,7.4,2.),(0,1,0),(0,0,1),3,1,.6,K.black,.22)
+    _adopt(flap,panel)
+    # 6x6 去四格为 32，且 9x5.4 的板脚比格距大。保留空腔待拍板。
+    P.root["preview_status"] = "track array and return lines pending count and pitch decision"
+    P.gate(-22,0,"-x",2)
+    P.gate(22,-9,"+x",2)
+    return P.done()
