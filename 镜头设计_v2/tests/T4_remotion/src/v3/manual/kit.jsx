@@ -133,7 +133,9 @@ const hover = (f) => [Math.sin(f / 57) * 1.0, Math.cos(f / 71) * 0.8];
 const beadPos = (K, f) => { const [x, y] = beadAt(K, f), [hx, hy] = hover(f); return [x + hx, y + hy]; };
 const beadSpeed = (K, f) => { const [a, b] = beadAt(K, f), [c, d] = beadAt(K, f - 1); return Math.hypot(a - c, b - d); };
 const beadRest = (K, f) => { let n = 0; while (n < 60 && beadSpeed(K, f - n) < 0.3) n++; return n; };
-export const Bead = ({K, f}) => {
+// 11-20 导演：不要红点这类带路标记，全片去掉。保留旧实现备查，直接返回 null。
+export const Bead = () => null;
+const BeadOld = ({K, f}) => {
   const mv = Math.min(1, beadSpeed(K, f) / 6);
   const rest = Math.min(1, Math.max(0, (beadRest(K, f) - 30) / 30));
   const op = 1 - 0.3 * rest, r = 7 - 1 * rest;
