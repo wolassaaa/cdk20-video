@@ -755,10 +755,16 @@ def _counter(P):
     zaxis = Vector((0,0,1))
     xaxis = Vector((1,0,0))
     yaxis = Vector((0,1,0))
+    spindle = _cyl(P,(19.12,0,2.22),yaxis,.23,9.95,K.black,.04)
+    spindle.name = P.nm("counter_spindle")
+    for y in (-4.77,4.77):
+        holder = P.box(19.12,y,.49,.23,1.15,K.black,z=1.82,r=.09,bevel=.08)
+        holder.name = P.nm("counter_bearing")
     for j, y in enumerate(y_positions):
         co = Vector((19.12,y,2.22))
         axis = _move(P,f"odo_{j}","rot",(0,360),pivot=co,axis=yaxis)
         drum = _cyl(P,co,yaxis,1.5,2.,K.black,.11)
+        _boolean(drum,_cyl(P,co,yaxis,.27,2.36,K.black,0))
         objects = [drum]
         for i in range(10):
             turn = Matrix.Rotation(math.radians(-36*i),3,"Y")
@@ -793,6 +799,18 @@ def h04_chem42_chip(K, screen_seq=None):
     for x in (-20,20):
         for y in (-11.95,11.95):
             objs.append(_screw(P,(x,y,5.35),(0,0,1),.4,K.gold_satin))
+    for x in (-15,0,15):
+        knuckle = _tube_axis(P,(x,-14,4.15),(1,0,0),.45,.255,2.8,K.black,n=32)
+        knuckle.name = P.nm("lid_moving_knuckle")
+        objs.append(knuckle)
+        _boolean(body,_cyl(P,(x,-14,4.15),(1,0,0),.48,2.93,K.black,0))
+    for x in (-17,-13,-2,2,13,17):
+        knuckle = _tube_axis(P,(x,-14,4.15),(1,0,0),.45,.255,1.0,K.black,n=32)
+        knuckle.name = P.nm("lid_fixed_knuckle")
+        _boolean(objs[0],_cyl(P,(x,-14,4.15),(1,0,0),.49,1.08,K.black,0))
+    spindle = _cyl(P,(0,-14,4.15),(1,0,0),.21,36,K.black,.035)
+    spindle.name = P.nm("lid_spindle")
+    _boolean(objs[0],_cyl(P,(0,-14,4.15),(1,0,0),.247,36.26,K.black,0))
     _adopt(lid,*objs)
     _screen(P,screen_seq,.6)
     socket = P.box(0,0,3,3,3,K.blue,z=2.101,r=.45,bevel=.25)
@@ -802,7 +820,16 @@ def h04_chem42_chip(K, screen_seq=None):
     _counter(P)
     flap = _move(P,"mouth","rot",(0,70),pivot=(22.08,7.4,3.0),axis=(0,-1,0))
     panel = _local_box(P,(22.08,7.4,2.),(0,1,0),(0,0,1),3,1,.6,K.black,.22)
-    _adopt(flap,panel)
+    axle = _cyl(P,(22.08,7.4,3),(0,1,0),.105,6.36,K.black,.025)
+    axle.name = P.nm("mouth_spindle")
+    _boolean(body,_cyl(P,(22.08,7.4,3),(0,1,0),.209,6.16,K.black,0))
+    for y in (4.12,10.68):
+        tab = P.box(21.92,y,.43,.20,.45,K.black,z=3.0,r=.071,bevel=.075)
+        tab.name = P.nm("mouth_bearing")
+    _boolean(panel,_cyl(P,(22.08,7.4,3),(0,1,0),.137,6.33,K.black,0))
+    cuffs = [_tube_axis(P,(22.08,y,3),(0,1,0),.185,.132,.8,K.black,n=24)
+             for y in (5.03,9.77)]
+    _adopt(flap,panel,*cuffs)
     # 6x6 去四格为 32，且 9x5.4 的板脚比格距大。保留空腔待拍板。
     P.root["preview_status"] = "track array and return lines pending count and pitch decision"
     P.gate(-22,0,"-x",2)

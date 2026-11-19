@@ -208,6 +208,9 @@ if name == "h04_chem42_chip":
     plate = next(o for o in root.children if o.get("role")=="screen")
     data["screen_uv"] = [list(u.uv) for u in plate.data.uv_layers.active.data]
     data["count_of_loop_cars"] = sum(r.startswith("loop_") for r in rig)
+    data["r1_attached_axles"] = [o.name for o in root.children
+                                if any(k in o.name for k in
+                                       ("counter_spindle","lid_spindle","mouth_spindle"))]
     data["layout_check_mm"] = {"mini_footprint":[9.,5.4], "pitch":[5.6,3.4],
                              "neighbor_overlap":[3.4,2.0], "grid_slots":36,
                              "empty_center":4,"remaining_slots":32}
@@ -489,7 +492,7 @@ detail = {
     "h02_key": ((-.0035,-.0023,.0307),.028,161,87,0),
     "h03_loop_track": ((.0092,-.0035,.0365),.028,105,58,160),
     "h06_pin_lock": ((.0005,-.0052,.0340),.028,112,13,91),
-    "h04_chem42_chip": ((.004,0,.031),.029,49,59,0),
+    "h04_chem42_chip": ((.0013,0,.0336),.029,96,66,0),
 }[name]
 target, distance, focal, el, az = detail
 pic("detail", target, distance, lens=focal, fstop=8, angle=el, az=az)
@@ -498,6 +501,8 @@ if name == "h02_key":
     root.rotation_euler.x = math.pi
     pic("detail_reverse", (.0037,-.00025,.0304), .029, lens=261, fstop=8, angle=88, az=0)
     root.rotation_euler.x = 0
+if name == "h04_chem42_chip":
+    pic("detail_hinge", (0,-.014,.0341), .028, lens=124, fstop=8, angle=45, az=147)
 if name in ("h01_cdk20_lockworks", "h06_pin_lock", "h04_chem42_chip"):
     for role in rj:
         if rig[role]["type"] in ("rot", "loc") and role not in ("shell", "lid"):
