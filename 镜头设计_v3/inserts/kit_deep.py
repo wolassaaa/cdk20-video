@@ -342,8 +342,9 @@ def h02_key(K, which="048", scale=1.0, spiky=False, seed=None):
     if which not in ("048", "001", "blank") or scale <= 0:
         raise ValueError("unknown key or nonpositive scale")
     P = Part(K, "h02_key", "gold")
-    # 以最长下销为零基准，预览只画相对高差；不声明插入或剪切线通过。
-    profile = [round(2.8 - x, 3) for x in _PIN_LENGTHS]
+    # 钥匙杆 X 朝 −W、齿缘朝 +U。杆中心沿 +U 移 .2 时，
+    # 齿面的 U = .2 + 1.3 − 齿槽深 = 2.3 − 下销长。
+    profile = [round(x - min(_PIN_LENGTHS), 3) for x in _PIN_LENGTHS]
     bow = "round"
     if seed is not None:
         rng = random.Random(seed)
@@ -351,7 +352,7 @@ def h02_key(K, which="048", scale=1.0, spiky=False, seed=None):
         bow = rng.choice(("round", "hex", "trilobe"))
     elif which == "001":
         for i in (2, 4):
-            profile[i] = round(profile[i] - .6, 3)
+            profile[i] = round(profile[i] + .6, 3)
     elif which == "blank":
         profile = [0.] * 5
     # 从尖端读齿；把相对高度画进杆自身，不在槽外另加凸齿。
@@ -394,10 +395,74 @@ def h02_key(K, which="048", scale=1.0, spiky=False, seed=None):
         marker.location = _mm(position)
         marker["locator"] = n
     P.root["rig"] = "{}"
+    P.root["insertion_offset_u_mm"] = .2*scale
     P.root["tooth_profile"] = profile
     P.root["tooth_profile_modelled"] = [min(x, 2.15) for x in profile]
     P.root["bow_form"] = bow
     P.root["turn_limit_deg"] = 0 if seed is not None else {"048":90, "001":12, "blank":0}[which]
     P.root.scale = (scale,) * 3
     P.gate((min(x for x, _ in outline)+.1)*scale, 0, "-x")
+    return P.done()
+
+
+_LOCK_PRESETS = {
+    "own": (1.56, 2.86, 1.04, 3.64, 2.08),
+    "other_a": (2.86, 1.04, 3.64, 1.56, 2.08),
+    "other_b": (1.04, 3.64, 2.08, 2.86, 1.56),
+}
+
+
+def _lock_case(P, cut):
+    K = P.K
+    body = P.box(0, 0, 10, 8, 8, K.blue, r=2, bevel=.6)
+    for x in (-5.75, 5.75):
+        _boolean(body, P.cyl(x, 0, 3, 1.025, 8.5, K.blue, bevel=0))
+    if cut:
+        _boolean(body, P.box(15, -15, 15, 15, 30, K.blue, r=0, bevel=0))
+    for x, z, a, b in ((0., -2.9, 8., .16), (0., 2.9, 8., .16),
+                       (-8., 0., .16, 2.9), (8., 0., .16, 2.9)):
+        _boolean(body, _local_box(P, (x, -8, z), (1,0,0), (0,0,1),
+                                  a,b,.4,K.blue,0))
+    for x in (-7.4, -5.25, 5.25, 7.4):
+        if cut and x > 0:
+            continue
+        _screw(P, (x,-8,-1.95), (0,-1,0), .5, K.gold_satin)
+    d = 5.75
+    shackle = P.tube([(-d, 0, -.8)] +
+                    [(x, 0, z) for x, z in arc(0, 6.3, d, 180, 0, 32)] +
+                    [(d, 0, 1.8)], .95, K.gold_satin)
+    # 6.3 + 5.75 + .95 = 13，露出顶面 9 mm。
+    return body, shackle
+
+
+def _screw(P, point, axis, radius, mat):
+    n = Vector(axis)
+    c = Vector(point)
+    x = n.cross(Vector((0,1,0)))
+    if x.length < .1:
+        x = n.cross(Vector((0,0,1)))
+    x.normalize()
+    y = n.cross(x)
+    head = _cyl(P, c+.065*n, n, radius, .26, mat, .08)
+    _boolean(head, _local_box(P, c+.2*n, x, y, radius*.85, .105, .26, mat, 0))
+    return head
+
+
+def h06_pin_lock(K, preset="own", cut=True):
+    P = Part(K, "h06_pin_lock", "blue")
+    body, shackle = _lock_case(P, cut)
+    w, u, v = map(Vector, ((0,-1,0),(0,0,1),(1,0,0)))
+    seed = Vector((0, -1.5, -.55))
+    q = lambda a, b, c: seed + a*w + b*u + c*v
+    # 套筒用实际孔腔；正面口与水平轴同轴。精确保留跨格的预览尺寸。
+    _boolean(body, _cyl(P, q(2.5,0,0), w, 4.62, 9.0, K.blue, 0))
+    for i in range(5):
+        _boolean(body, _cyl(P, q((.5+i)*1.3, 3.5, 0), u, .67, 8.4, K.blue, 0))
+    _barrel(P, q, w, u, v, _LOCK_PRESETS[preset], 1.3)
+    j = _move(P, "shackle", "loc", (0,4), pivot=(-5.75,0,-.8), axis=(0,0,1))
+    _adopt(j, shackle)
+    P.root["preset"] = preset
+    P.root["lower_pins_mm"] = _LOCK_PRESETS[preset]
+    P.gate(-10, 3, "-x")
+    P.gate(10, 3, "+x")
     return P.done()
