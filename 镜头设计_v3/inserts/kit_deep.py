@@ -543,7 +543,10 @@ def _trolley(P, s, lift=0):
     clip = [P.box(0,y*s,1.15*s,.25*s,.32*s,K.blue_hi,z=base+2.82*s,
                   r=.1*s,bevel=.06*s) for y in (-.57,.57)]
     deck = P.box(0,0,1.55*s,1.12*s,1.03*s,K.white,z=base+2.10*s,r=.28*s,bevel=.20*s)
-    return [car, deck, *wheels, *clip]
+    tongue = P.box(0,0,.35*s,.095*s,.70*s,K.blue_hi,
+                   z=3.38*s+lift,r=.06*s,bevel=.02*s)
+    tongue.name = P.nm("car_guide_tongue")
+    return [car, deck, tongue, *wheels, *clip]
 
 
 def _ellipse_path(s, pos=(0,0,0)):
@@ -562,13 +565,32 @@ def _trolley_joint(P, s):
     return j
 
 
-def _plate(P, title, x, y, rot):
+def _plate(P, title, x, y, rot, bottom):
     K = P.K
-    o = P.slab(rrect(0,0,3.5,1.4,1),1,K.white,bevel=.2)
-    o.location = _mm((x,y,2.54))
+    o = P.slab(rrect(0,0,6,2.5,1),1,K.white,bevel=.2)
+    o.name = P.nm("station_plate")
+    o.location = _mm((x,y,bottom+.5))
     o.rotation_euler.z = math.radians(rot)
-    text = _label(P, title, 1.4, x,y,3.04,K.ink)
+    o["station"] = title
+    text = _label(P,title,2.4,x,y,bottom+1,K.ink)
+    # 用实字形高度（而非字体的软件字号）做 2.4 mm 测量。
+    bpy.context.view_layer.update()
+    dg = bpy.context.evaluated_depsgraph_get()
+    te = text.evaluated_get(dg)
+    me = te.to_mesh()
+    xs, ys = [[v.co[a] for v in me.vertices] for a in (0,1)]
+    te.to_mesh_clear()
+    k = 2.4*MM/(max(ys)-min(ys))
+    text.scale.x = min(k, 10.8*MM/(max(xs)-min(xs)))
+    text.scale.y = k
     text.rotation_euler.z = math.radians(rot)
+    text["station_label"] = title
+    if abs(rot) == 90:
+        mounts = [(x+(1.65 if x>0 else -1.65),y+d) for d in (-2.7,2.7)]
+    else:
+        mounts = [(x+d,y+(1.70 if y>0 else -1.70)) for d in (-4.7,4.7)]
+    for xx,yy in mounts:
+        P.box(xx,yy,.41,.32,bottom-1.98,K.white,z=(bottom+1.98)/2,r=.13,bevel=.13)
 
 
 def _tray(P, station, x, y):
@@ -584,7 +606,13 @@ def _tray(P, station, x, y):
             disc = P.cyl(px,y,z,1.2,t,mat,bevel=.20)
             if label == "coin":
                 # 浅环压在面上，不高于硬币外缘。
-                _boolean(disc,P.torus(px,y,z+t/2+.01,.76,.06,mat))
+                # 同样半径／槽深，布尔刀具只沿圆周降采样，不改硬币轮廓。
+                bpy.ops.mesh.primitive_torus_add(major_radius=.76*MM,minor_radius=.06*MM,
+                                                major_segments=56,minor_segments=10,
+                                                location=_mm((px,y,z+t/2+.01)))
+                groove = bpy.context.object
+                groove.parent = P.root
+                _boolean(disc,groove)
                 _adopt(j,disc)
             else:
                 shape = [(-.45,-.07),(.07,-.07),(.07,.41),(-.07,.41),
@@ -598,13 +626,20 @@ def _tray(P, station, x, y):
                         _boolean(disc,part)
                     else:
                         _adopt(j,disc,part)
+    # 三条细立轨把每个双叠层夹在托盘内，贯穿原 +6 mm 导向行程；
+    # 两组共用中间一条，端点保留径向间隙，不改变币／钟的片形。
+    for dx in (-2.68, 0, 2.68):
+        height = 12.42 if dx >= 0 else 9.99
+        rail = P.slab(rrect(x+dx,y,.09,.51,.07,n=2),height,K.white,z=2.96+height/2,bevel=.035,seg=1)
+        rail.name = P.nm("token_guide")
     # 斜槽留在托盘外缘，不伪造未给出的机械链。
     s = 1 if y>0 else -1
     slope = Vector((0,s*1.75,2))
     _local_box(P,(x,y+s*2.975,7.86),(1,0,0),slope.normalized(),
                .80,slope.length/2,.32,K.white,.16)
     for dx in (-.79,.79):
-        P.tube([(x+dx,y+s*2.1,7),(x+dx,y+s*3.85,9)],.18,K.white)
+        edge = P.tube([(x+dx,y+s*2.1,7),(x+dx,y+s*3.85,9)],.18,K.white)
+        edge.data.bevel_resolution = 2
 
 
 def h03_loop_track(K, lod="hero"):
@@ -615,6 +650,7 @@ def h03_loop_track(K, lod="hero"):
     base = P.box(0,0,25*s,15*s,2*s,K.white,z=s,r=3*s,bevel=.28*s)
     _oval(P,s)
     _trolley_joint(P,s)
+    base.name = P.nm("engraved_base")
     P.gate(-25*s,0,"-x",s)
     P.gate(25*s,0,"+x",s)
     if lod == "mini":
@@ -622,15 +658,22 @@ def h03_loop_track(K, lod="hero"):
         _adopt(lamp,P.ball(0,0,2*s+.31,.3,K.white,seg=12))
         return P.done()
     for x in range(-22,23,2):
-        _boolean(base,P.box(x,0,.15,13.9,.35,K.white,z=2.025,r=0,bevel=0))
+        _boolean(base,P.box(x,0,.15,13.9,.35,K.white,z=1.875,r=0,bevel=0))
     for y in range(-12,13,2):
-        _boolean(base,P.box(0,y,23.7,.15,.35,K.white,z=2.025,r=0,bevel=0))
-    for cfg in (("Imagine",23.1,0,90),("Make",0,-13.52,0),
-                ("Test",-23.1,0,90),("Tweak",0,13.52,0)):
+        _boolean(base,P.box(0,y,23.7,.15,.35,K.white,z=1.875,r=0,bevel=0))
+    for x in (-23,23):
+        for y in (-13,13):
+            _screw(P,(x,y,2),(0,0,1),.55,K.gold_satin)
+    for cfg in (("Imagine",22.5,0,90,6.43),("Make",0,-12.5,0,13.04),
+                ("Test",-22.5,0,90,6.43),("Tweak",0,12.5,0,6.43)):
         _plate(P,*cfg)
     # Imagine：键坯与凹槽保留明确的行程；Tip 朝向轨道切线。
     slot = P.box(23.25,6.7,1.65,3.05,1.45,K.white,z=2.725,r=.36,bevel=.2)
     _boolean(slot,P.box(23.25,6.7,1.55,2.77,1.44,K.white,z=3.32,r=.08,bevel=0))
+    for side in (-1,1):
+        rail = P.box(23.25+side*1.53,6.7,.095,1.09,3.2,K.white,
+                     z=4.86,r=.06,bevel=.045)
+        rail.name = P.nm("blank_vertical_guide")
     blank = h02_key(K,which="blank",scale=.35)
     blank.parent = P.root
     blank.rotation_euler.z = math.pi/2
@@ -653,8 +696,11 @@ def h03_loop_track(K, lod="hero"):
     test_lamp = _move(P,"test_lamp","material",(0,0))
     _adopt(test_lamp,P.ball(-15.5,0,6.95,.41,K.white,seg=16))
     P.ball(-15.5,0,6.95,.6,K.clear0,seg=20)
-    j = _move(P,"test_push","loc",(0,1.5),pivot=(-17.9,0,4.6),axis=(-1,0,0))
-    _adopt(j,_cyl(P,(-17.87,0,4.6),(-1,0,0),.35,1.05,K.blue_hi,.07))
+    j = _move(P,"test_push","loc",(0,1.5),pivot=(-17.9,.78,4.6),axis=(-1,0,0))
+    _adopt(j,_cyl(P,(-17.37,.78,4.6),(-1,0,0),.35,2.05,K.blue_hi,.07))
+    _boolean(body,_cyl(lock,(-9.1,3.12,5.48),(-1,0,0),1.48,12.18,K.blue,0))
+    guide = _tube_axis(P,(-17.97,.78,4.6),(-1,0,0),.48,.375,.58,K.white,n=32)
+    guide.name = P.nm("test_push_guide")
     # Tweak：可动锉，实模浅斜槽。
     j = _move(P,"file","loc",(-1.5,1.5),pivot=(0,7.88,4.3),axis=(1,0,0))
     fl = P.box(0,7.88,3,.4,.4,K.gold_satin,z=4.3,r=.18,bevel=.2)
@@ -662,6 +708,9 @@ def h03_loop_track(K, lod="hero"):
         c = _local_box(P,(x,7.88,4.51),(.8,.6,0),(-.6,.8,0),.085,.50,.20,K.white,0)
         _boolean(fl,c)
     _adopt(j,fl)
+    for y in (7.36,8.40):
+        rail = P.box(0,y,.57,.11,2.52,K.white,z=3.25,r=.09,bevel=.09)
+        rail.name = P.nm("file_guide")
     for i,(x,y) in enumerate(((9,-3.5),(-9,-3.5),(-9,3.5),(9,3.5))):
         _tray(P,i,x,y)
     return P.done()

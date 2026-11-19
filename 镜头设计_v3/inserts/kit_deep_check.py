@@ -153,6 +153,22 @@ if rj and "quick" not in opts:
     D.rest(root)
 
 if name == "h03_loop_track" and "quick" not in opts:
+    dg = bpy.context.evaluated_depsgraph_get()
+    def span(obj, axes):
+        ev = obj.evaluated_get(dg)
+        mesh = ev.to_mesh()
+        sizes = [round((max(v.co[i] for v in mesh.vertices)-min(v.co[i] for v in mesh.vertices))
+                       *obj.scale[i]/D.MM, 4) for i in axes]
+        ev.to_mesh_clear()
+        return sizes
+    base = next(o for o in root.children if "_engraved_base" in o.name)
+    tree = D._tree(base)
+    def floor_z(x,y):
+        return round(tree.ray_cast(D._mm((x,y,9)),Vector((0,0,-1)))[0].z/D.MM,4)
+    data["r1_station_plates_mm"] = {o["station"]:span(o,(0,1)) for o in root.children if "station" in o}
+    data["r1_station_glyph_height_mm"] = {o["station_label"]:span(o,(1,))[0]
+                                           for o in root.children if "station_label" in o}
+    data["r1_grid_cut_mm"] = [floor_z(12.8,-8.8),floor_z(12,-8.8)]
     D.rest(root)
     bpy.context.view_layer.update()
     cache = geom(collect(root))
@@ -294,6 +310,8 @@ def focus_camera(cam, suffix):
     # 相机中央射线击中可见主体的实网格。把测得的表面点设为对焦空物体原点；
     # 镜头与感光宽度按同比缩短，保住构图，同时压低宏观近景的散焦量。
     gs = collect(root)
+    if suffix == "press_fit":
+        gs.update({f"key_{k}": v for k,v in collect(carried).items()})
     vs, fs = [], []
     for group in gs.values():
         for _, vertices, faces, _ in group:
@@ -457,6 +475,7 @@ if name == "h02_key":
         if not ob.hide_viewport:
             ob.hide_render = False
 if name == "h03_loop_track":
+    pic("station_labels", (0,0,.0345), .080, lens=48, angle=87, az=1)
     D.pose(root, "press", -2.5)
     D.pose(root, "blank_up", 3)
     D.pose(root, "car", .33)
@@ -468,7 +487,7 @@ if name == "h01_cdk20_lockworks":
 detail = {
     "h01_cdk20_lockworks": (t,.029,52,38,-12),
     "h02_key": ((-.0035,-.0023,.0307),.028,161,87,0),
-    "h03_loop_track": ((.007,-.004,.034),.029,57,66,0),
+    "h03_loop_track": ((.0092,-.0035,.0365),.028,105,58,160),
     "h06_pin_lock": ((.0005,-.0052,.0340),.028,112,13,91),
     "h04_chem42_chip": ((.004,0,.031),.029,49,59,0),
 }[name]
@@ -497,7 +516,7 @@ if name=="h03_loop_track":
     for ob in carried.children_recursive:
         if not ob.hide_viewport:
             ob.hide_render = False
-    pic("press_fit", (0,-.010,.036), .027, lens=130, fstop=8, angle=32, az=17)
+    pic("press_fit", (0,-.010,.03655), .028, lens=145, fstop=8, angle=22, az=90)
     for ob in carried.children_recursive:
         ob.hide_render = True
     for role, value in (("blank_up",3),("press",-2.5),("test_push",1.5),("file",1),("car",1)):
