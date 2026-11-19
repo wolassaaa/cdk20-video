@@ -26,7 +26,7 @@ HKBU SCIE1007 课程作业的科普视频。片中有一段 30–50 秒的小插
 
 ## 11-21 更新：照下面的完整提示词直接出图，不要自己再构思
 
-推理强度用中档即可，按提示词逐张生成，不要反复推敲。每张都是同一角色、同一姿势，只换"表情行"。
+（11-21 再更新：导演要求用高推理强度，一次出对，宁可每张多想一点也不要返工。）按提示词逐张生成。每张都是同一角色、同一姿势，只换"表情行"。
 
 ### 共用部分（每张提示词都以这段开头）
 > Cute anime chibi-proportion girl (head-to-body 1:3.5), half-body portrait from the waist up, facing the viewer straight on, centered, character fills 85% of the image height, both shoulders level, arms relaxed at the sides unless stated. Clean crisp lineart (dark brown lines, uniform 3px weight), flat cel shading with one soft shadow tone and one small highlight, bright saturated but soft pastel-leaning palette, large glossy anime eyes with two white catchlights, small blush marks on the cheeks. Plain transparent background (if transparency is impossible use flat pure #00FF00 green, no gradient, no shadow on the ground). No text, no logos, no watermark, no frame. 1536×1536.
