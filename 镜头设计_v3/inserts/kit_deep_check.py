@@ -6,6 +6,7 @@ import random
 import sys
 from pathlib import Path
 import math
+import time
 
 os.environ["PYTHONDONTWRITEBYTECODE"] = "1"
 sys.dont_write_bytecode = True
@@ -358,8 +359,10 @@ def focus_camera(cam, suffix):
 def pic(suffix, target, dist, lens=50, fstop=None, angle=35, az=-25):
     sc.render.resolution_x, sc.render.resolution_y = 1600, 900
     sc.render.use_border = sc.render.use_crop_to_border = False
-    if any(Path("D:/。hkbu/molecular science/_env/queue", m).exists() for m in ("GPU_HOLD", "GPU_PAUSED")):
-        raise RuntimeError("GPU hold before next render")
+    qdir = Path(__file__).resolve().parents[2] / "_env" / "queue"
+    while any((qdir/m).exists() for m in ("GPU_HOLD", "GPU_PAUSED")):
+        print(f"{name}: waiting for GPU hold before {suffix}", flush=True)
+        time.sleep(12)
     cam = KP.camera(sc, target, dist, angle, az, lens=lens, fstop=fstop)
     cam.data.clip_start = .001
     if fstop is not None:
@@ -399,6 +402,11 @@ for c in (cell, oldcell):
 cell.location.x = 0
 plinth("sheet_base",0,0,68 if name=="h01_cdk20_lockworks" else 56,
        68 if name in ("h01_cdk20_lockworks","h04_chem42_chip") else 36,minimum_z(root))
+if name == "h06_pin_lock":
+    # 下露的外套保留净空，锁体两侧分别落到实物托座上。
+    perch = D.Part(K,"lock_perch","white")
+    for x in (-6,6):
+        perch.box(x,0,2.2,6.2,1.1,K.white,z=25.45,r=.32,bevel=.12)
 box = data["bounds_mm"]
 cx, cy, cz = [(a+b)/2*D.MM for a,b in zip(*box)]
 t = (cx, cy, cz+.030)
@@ -461,7 +469,7 @@ detail = {
     "h01_cdk20_lockworks": (t,.029,52,38,-12),
     "h02_key": ((-.0035,-.0023,.0307),.028,161,87,0),
     "h03_loop_track": ((.007,-.004,.034),.029,57,66,0),
-    "h06_pin_lock": ((.001,-.004,.031),.029,98,35,37),
+    "h06_pin_lock": ((.0005,-.0052,.0340),.028,112,13,91),
     "h04_chem42_chip": ((.004,0,.031),.029,49,59,0),
 }[name]
 target, distance, focal, el, az = detail

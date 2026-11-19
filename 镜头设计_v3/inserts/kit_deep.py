@@ -288,12 +288,14 @@ def _tube_axis(P, pos, axis, ro, ri, t, mat, bevel=.0, n=48):
 _PIN_LENGTHS = (1.2, 2.2, .8, 2.8, 1.6)
 
 
-def _barrel(P, q, w, u, v, lengths, scale=1.):
+def _barrel(P, q, w, u, v, lengths, scale=1., cutaway=False):
     K = P.K
     s = scale
     core = _cyl(P, q(2*s, 0, 0), w, 2.3*s, 6*s, K.gold_satin, .2)
     _boolean(core, _local_box(P, q(2.55*s, 0, 0), w, u, 2.55*s, 1.5*s, 1*s, K.white, 0))
     sleeve = _tube_axis(P, q(2*s, 0, 0), w, 3.5*s, 2.35*s, 6*s, K.white)
+    if cutaway:
+        _boolean(sleeve, P.box(12,-12,12,12,24,K.white,r=0,bevel=0))
     plug = _move(P, "plug", "rot", (0, 90), pivot=q(0, 0, 0), axis=w)
     _adopt(plug, core)
     for i, length in enumerate(lengths):
@@ -306,7 +308,7 @@ def _barrel(P, q, w, u, v, lengths, scale=1.):
                   pivot=q(a, 2.3*s, 0), axis=u)
         lo = _cyl(P, q(a, 2.3*s-length/2, 0), u, .45*s, length, K.gold, .12*s)
         hi = _cyl(P, q(a, 3.3*s, 0), u, .45*s, 2*s, K.white, .12*s)
-        spring = P.tube([q(a+.39*s*math.cos(t*math.tau/10), (4.4+t/55)*s,
+        spring = P.tube([q(a+.39*s*math.cos(t*math.tau/10), ((4.35 if cutaway else 4.4)+t/55)*s,
                            .39*s*math.sin(t*math.tau/10)) for t in range(61)], .06*s, K.white)
         spring.data.bevel_resolution = 2
         _adopt(p, lo, hi, spring)
@@ -491,7 +493,18 @@ def h06_pin_lock(K, preset="own", cut=True):
     _boolean(body, _cyl(P, q(2.5,0,0), w, 4.62, 9.0, K.blue, 0))
     for i in range(5):
         _boolean(body, _cyl(P, q((.5+i)*1.3, 3.5, 0), u, .67, 8.4, K.blue, 0))
-    _barrel(P, q, w, u, v, _LOCK_PRESETS[preset], 1.3)
+    _barrel(P, q, w, u, v, _LOCK_PRESETS[preset], 1.3, cutaway=cut)
+    if cut:
+        # 剖开版本显示各销的导套；与原外套的销孔同轴。
+        # 口沿顶到 z=5.05，最短下销在 +3.1 mm 时仍有导向重叠。
+        for i in range(5):
+            guide = _tube_axis(P, q((.5+i)*1.3, 4.825, 0), u,
+                               .700, .642, 1.55, K.white, n=32)
+            guide.name = f"{P.name}__pin_guide_{i}"
+        # 锁梁一侧抬升仍留在孔内；把该固定导孔的口沿显示出来。
+        guide = _tube_axis(P, (-5.75,0,3.87), (0,0,1),
+                           1.20, 1.025, .29, K.blue, n=40)
+        guide.name = f"{P.name}__shackle_guide"
     j = _move(P, "shackle", "loc", (0,4), pivot=(-5.75,0,-.8), axis=(0,0,1))
     _adopt(j, shackle)
     P.root["preset"] = preset
