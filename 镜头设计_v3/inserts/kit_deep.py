@@ -336,3 +336,68 @@ def _stampworks(P, q, w, u, v, lod):
         _cyl(P, q(-4, -8.62, k), w, 1.5, 4, K.white)
     bead = _move(P, "bead", "loc", (-12, 0), pivot=q(0, 0, 0), axis=w, initial=-12)
     _adopt(bead, P.ball(*q(0, 0, 0), 1.8, K.yellow, seg=24))
+
+
+def h02_key(K, which="048", scale=1.0, spiky=False, seed=None):
+    if which not in ("048", "001", "blank") or scale <= 0:
+        raise ValueError("unknown key or nonpositive scale")
+    P = Part(K, "h02_key", "gold")
+    # 以最长下销为零基准，预览只画相对高差；不声明插入或剪切线通过。
+    profile = [round(2.8 - x, 3) for x in _PIN_LENGTHS]
+    bow = "round"
+    if seed is not None:
+        rng = random.Random(seed)
+        profile = [rng.randrange(2, 15) / 5 for _ in range(5)]
+        bow = rng.choice(("round", "hex", "trilobe"))
+    elif which == "001":
+        for i in (2, 4):
+            profile[i] = round(profile[i] - .6, 3)
+    elif which == "blank":
+        profile = [0.] * 5
+    # 从尖端读齿；把相对高度画进杆自身，不在槽外另加凸齿。
+    pts = [(1.5, 1.3), (5.85, 1.3), (6.5, .65), (6.5, -1.3)]
+    # 定义的多档随机值可达 2.8；先把超出 2.6 杆高的档位标入元数据，
+    # 轮廓只显示可做的范围，并留 0.30 mm 顶缘。
+    for i, h in enumerate(profile):
+        c = 6.-i
+        yy = -1.3 + min(h, 2.15)
+        pts += [(c+.28, yy), (c-.28, yy)]
+    pts += [(1.5, -1.3)]
+    blade = P.slab(pts, .9, K.gold, bevel=.2)
+    _boolean(blade, P.box(3.83, .41, 1.93, .15, .35, K.gold,
+                          z=.425, r=0, bevel=0))
+    P.box(.60, 0, .9, 1.8, 1.15, K.gold, r=.35, bevel=.25)
+    if bow == "round":
+        outline = circle(-3.5, 0, 4)
+    elif bow == "hex":
+        outline = ngon(-3.5, 0, 4, 6)
+    else:
+        outline = [(-3.5 + (3.6+.4*math.cos(3*a))*math.cos(a),
+                    (3.6+.4*math.cos(3*a))*math.sin(a))
+                   for a in (i*math.tau/72 for i in range(72))]
+    handle = P.slab(outline, 1.4, K.gold, bevel=.25, holes=[(-3.5, 0, 1.2)])
+    for z in (-.7, .7):
+        # 柄的正反两面共用孔缘浅压圈，不另开材质。
+        rim = P.ring(-3.5, 0, 1.57, 1.23, .2, K.gold, z=z, bevel=.06, n=48)
+    if seed is None and which != "blank":
+        _label(P, which, 1.6, -3.5, -2.65, .7, K.ink)
+    if spiky:
+        for x, y in ((-5.7, .6), (-4.25, 2.1), (-2.55, 2.12)):
+            bpy.ops.mesh.primitive_cone_add(vertices=24, radius1=.4*MM, radius2=0,
+                                           depth=MM, location=_mm((x, y, 1.2)))
+            o = bpy.context.object
+            o.parent = P.root
+            o.name = P.nm("spike")
+            o.data.materials.append(K.red)
+    for n, position in (("tip", (6.5, 0, 0)), ("bow", (-3.5, 0, 0))):
+        marker = _empty(n, P.root)
+        marker.location = _mm(position)
+        marker["locator"] = n
+    P.root["rig"] = "{}"
+    P.root["tooth_profile"] = profile
+    P.root["tooth_profile_modelled"] = [min(x, 2.15) for x in profile]
+    P.root["bow_form"] = bow
+    P.root["turn_limit_deg"] = 0 if seed is not None else {"048":90, "001":12, "blank":0}[which]
+    P.root.scale = (scale,) * 3
+    P.gate((min(x for x, _ in outline)+.1)*scale, 0, "-x")
+    return P.done()
