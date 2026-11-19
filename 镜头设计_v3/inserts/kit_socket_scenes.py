@@ -17,15 +17,30 @@ import kit_socket as S
 import kit_socket_render as R
 
 K = None
+EXPO_DELTA = -0.2
 
 
-def build_scene(samples=64, fill=6.0):
+KEY_SCALE = 0.6
+WORLD_STRENGTH = 0.6
+
+
+def key_scale(f):
+    """主光、顶光、轮廓光和补光整体缩放（开盖舱内的白件不过曝用）。"""
+    for n in ("key", "fill", "strip", "rim"):
+        if n in bpy.data.objects:
+            bpy.data.objects[n].data.energy *= f
+
+
+def build_scene(samples=64, fill=1.1):
     global K
     sc = R.start(samples)
     K = R.K
     root = S.h01b_cdk20_socket(K)
     R.plinth(root)
     R.fill_light(root, fill)
+    sc.view_settings.exposure += EXPO_DELTA          # 开盖舱内的白件不过曝；合盖图单独恢复
+    key_scale(KEY_SCALE)
+    sc.world.node_tree.nodes["Background"].inputs[1].default_value = WORLD_STRENGTH
     return sc, root
 
 
@@ -53,13 +68,19 @@ def power(root, on=True, piston=0.0, cell=1.0, flow=0.5):
 
 
 C10 = dict(tgt=(-10, 0, -7), az=65, el=35, dist=66)
+CMP = dict(tgt=(-8, 4, -9), az=75, el=52, dist=74)    # 开盖对比用机位：能同时看到接线柱、铜线、接线盒、光管、活塞、小细胞
 
 
 def overview():
     sc, root = build_scene()
+    power(root, False, 0.0, 1.0, 0)
     S.pose(root, "lid", 0)
+    sc.view_settings.exposure -= EXPO_DELTA
+    key_scale(1 / KEY_SCALE)
     R.cam_at(sc, (-5, 0, -2), 65, 35, 165)
     R.shoot(sc, "h01b_closed_1080", (1920, 1080))
+    sc.view_settings.exposure += EXPO_DELTA
+    key_scale(KEY_SCALE)
     S.pose(root, "lid", 110)
     R.cam_at(sc, (-12, 0, 2), 90, 18, 175)
     R.shoot(sc, "h01b_open_front_1080", (1920, 1080))
@@ -70,10 +91,27 @@ def overview():
         R.cam_at(sc, (-10, 0, 0), 65, 35, 170)
         R.shoot(sc, f"h01b_s5_lid{a:03d}")
     S.pose(root, "lid", 110)
-    for nm, on, pis, cl in (("power_on", True, 3.0, 1.3), ("power_off", False, 5.0, 1.45)):
+    for nm, on, pis, cl in (("power_on", True, 4.5, 1.4), ("power_off", False, 2.5, 1.15)):
         power(root, on, pis, cl, .55)
         R.cam_at(sc, C10["tgt"], 90, 55, 130)
         R.shoot(sc, f"h01b_{nm}")
+
+
+def compare():
+    """同机位（CMP）对比：空壳待机 → ATP 插入通电 → 048 拧死断电。"""
+    sc, root = build_scene()
+    S.pose(root, "lid", 110)
+    power(root, False, 0.0, 1.0, 0)
+    R.cam_at(sc, CMP["tgt"], CMP["az"], CMP["el"], CMP["dist"])
+    R.shoot(sc, "h01b_cmp1_open_idle", (1920, 1080))
+    p = plug_on(root, "ATP")
+    power(root, True, 4.5, 1.4, .5)
+    R.shoot(sc, "h01b_cmp2_atp_power_on", (1920, 1080))
+    hide(p)
+    q = plug_on(root, "048", 0.0, twist=90.0)
+    S.pose(root, "tab", -25)
+    power(root, False, 2.5, 1.15, 0)
+    R.shoot(sc, "h01b_cmp3_048_clamped_power_off", (1920, 1080))
 
 
 def plugs_group():
@@ -184,7 +222,7 @@ def close_cam(sc, tgt, az, el, dist, focus=None, width=22.0):
 
 
 def close_group():
-    sc, root = build_scene(64, 3.0)
+    sc, root = build_scene(64)
     S.pose(root, "lid", 110)
 
     def shoot_close(tgt, az, el, dist, name, focus=None, width=22.0):
@@ -215,7 +253,7 @@ def close_group():
     hide(p)
     # C5 光管和光包
     power(root, True, 2.0, 1.2, .45)
-    shoot_close((-8.0, 5.0, -13.0), 90, 84, 34, "h01b_c5_light_pipe_packets", width=22.0)
+    shoot_close((-7.5, 11.5, -8.0), 75, 50, 34, "h01b_c5_light_pipe_packets", width=24.0)
     # C6 三个鼓大阶段
     for nm, pis, cl in (("100", 0.0, 1.0), ("125", 2.5, 1.25), ("145", 5.0, 1.45)):
         power(root, True, pis, cl, .5)
@@ -228,7 +266,7 @@ def close_group():
     S.pose(root, "lid", 110)
     for nm, on in (("on", 1), ("off", 0)):
         S.pose(root, "lamp_in", on)
-        shoot_close((-3.0, -9.5, -1.0), 60, 45, 22, f"h01b_c7_lamp_in_{nm}", width=16.0)
+        shoot_close((-3.0, 13.9, -7.35), 70, 40, 24, f"h01b_c7_lamp_in_{nm}", width=14.0)
     S.pose(root, "lamp_in", 1)
     shoot_close((-6.0, -7.0, -16.0), 90, 84, 40, "h01b_c8_back_plate", width=34.0)
     plug_on(root, "001", 0.0, tilt=1.7)
@@ -272,6 +310,8 @@ def id_group():
                     ob.color = (0, 1, 0, 1)
                     if not lid_visible:
                         ob.hide_render = True
+                elif ob.data.materials and ob.data.materials[0] and ob.data.materials[0].name.startswith("kit_white_warm"):
+                    ob.color = (1, 1, 0, 1)
                 elif lay in cls:
                     ob.color = (1, 0, 0, 1)
                 elif lay == "shell":
@@ -296,15 +336,16 @@ def id_group():
                 p = p.parent
     paint(True)
     views = {"c10": (C10["tgt"], C10["az"], C10["el"], C10["dist"])}
-    for i, (t_, d_) in enumerate((((-9, 0, -8), 70), ((-10, 0, -6), 62), ((-9, 0, -9), 58), ((-10, 0, -7), 66), ((-11, 0, -8), 60))):
-        views[f"cand{i}"] = (t_, 65, 35, d_)
+    views["cmp"] = (CMP["tgt"], CMP["az"], CMP["el"], CMP["dist"])
     for a in (0, 55, 110):
         views[f"lid{a:03d}"] = ((-10, 0, 0), 65, 35, 170)
     # Cycles 图的亮度，先出 c10（开盖）
     S.pose(root, "lid", 110)
-    R.cam_at(sc, *views["c10"])
-    R.shoot(sc, "tmp_id_beauty_c10", (1920, 1080))
-    beauty = pix(R.OUT / "tmp_id_beauty_c10.png") if not R.PREVIEW else pix(R.OUT / "tmp" / "tmp_id_beauty_c10.png")
+    beauties = {}
+    for nm_ in ("c10", "cmp"):
+        R.cam_at(sc, *views[nm_])
+        R.shoot(sc, f"tmp_id_beauty_{nm_}", (1920, 1080))
+        beauties[nm_] = pix(R.OUT / f"tmp_id_beauty_{nm_}.png") if not R.PREVIEW else pix(R.OUT / "tmp" / f"tmp_id_beauty_{nm_}.png")
     sc.render.engine = "BLENDER_WORKBENCH"
     sc.display.shading.light = "FLAT"
     sc.display.shading.color_type = "OBJECT"
@@ -315,7 +356,7 @@ def id_group():
     sc.world.color = (0, 0, 0)
     for nm, (tgt, az, el, dist) in views.items():
         for vis in (True, False):
-            a_ = 110 if nm.startswith(("c10", "cand")) else int(nm[3:])
+            a_ = 110 if nm in ("c10", "cmp") else int(nm[3:])
             S.pose(root, "lid", a_)
             for ob in lid_objs:
                 ob.hide_render = False
@@ -327,17 +368,25 @@ def id_group():
             sc.render.filepath = str(out)
             bpy.ops.render.render(write_still=True)
             a = pix(out)
-            red = (a[:, 0] > .9) & (a[:, 1] < .1) & (a[:, 2] < .1)
+            yel = (a[:, 0] > .9) & (a[:, 1] > .9) & (a[:, 2] < .1)
+            red = ((a[:, 0] > .9) & (a[:, 1] < .1) & (a[:, 2] < .1)) | yel
             grn = (a[:, 1] > .9) & (a[:, 0] < .1) & (a[:, 2] < .1)
             blu = (a[:, 2] > .9) & (a[:, 0] < .1) & (a[:, 1] < .1)
             res[f"{nm}_{'lid' if vis else 'nolid'}"] = dict(interior=int(red.sum()), lid=int(grn.sum()), shell=int(blu.sum()), total=len(a),
                                                             interior_frac=float(red.sum() / len(a)))
-            if nm == "c10" and vis:
+            if nm in ("c10", "cmp") and vis:
+                beauty = beauties[nm]
                 lum = .2126 * beauty[:, 0] + .7152 * beauty[:, 1] + .0722 * beauty[:, 2]
-                res["S4_interior_p5_luminance"] = float(np.percentile(lum[red], 5))
-                res["S4_interior_mean_luminance"] = float(lum[red].mean())
-                res["S4_shell_mean_luminance"] = float(lum[blu].mean())
-                res["S4_black_pixels_in_interior_frac"] = float(((lum < .02) & red).sum() / max(red.sum(), 1))
+                res[f"{nm}_S4_interior_p5_luminance"] = float(np.percentile(lum[red], 5))
+                res[f"{nm}_S4_interior_mean_luminance"] = float(lum[red].mean())
+                res[f"{nm}_S4_shell_mean_luminance"] = float(lum[blu].mean())
+                mx = beauty[:, :3].max(1)
+                res[f"{nm}_white_parts_max_channel"] = float(mx[yel].max())
+                res[f"{nm}_white_parts_p99_9"] = float(np.percentile(mx[yel], 99.9))
+                res[f"{nm}_white_parts_p99"] = float(np.percentile(mx[yel], 99))
+                res[f"{nm}_white_parts_mean"] = float(mx[yel].mean())
+                res[f"{nm}_white_parts_frac_ge_0p98"] = float((mx[yel] >= .98).mean())
+                res[f"{nm}_S4_black_pixels_in_interior_frac"] = float(((lum < .02) & red).sum() / max(red.sum(), 1))
     for nm in views:
         l, n = res.get(f"{nm}_lid"), res.get(f"{nm}_nolid")
         if l and n:
@@ -348,7 +397,7 @@ def id_group():
 
 if __name__ == "__main__":
     flags = R.flags
-    groups = [f for f in flags if f in ("overview", "plugs", "mini", "close", "id")]
-    table = {"overview": overview, "plugs": plugs_group, "mini": mini_group, "close": close_group, "id": id_group}
+    groups = [f for f in flags if f in ("overview", "plugs", "mini", "close", "id", "compare")]
+    table = {"overview": overview, "plugs": plugs_group, "mini": mini_group, "close": close_group, "id": id_group, "compare": compare}
     for g in groups or ["overview"]:
         table[g]()

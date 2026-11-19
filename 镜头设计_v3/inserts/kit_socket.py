@@ -15,7 +15,7 @@ from mathutils import Matrix, Vector
 from mathutils.bvhtree import BVHTree
 
 import kit_deep as D
-from kit_parts import CDK20_NPZ, circle, smooth_path
+from kit_parts import CDK20_NPZ, circle, smooth_path, mat_solid
 
 MM = D.MM
 SEAM = 0.075          # 分件缝半宽：下半壳顶面 Z=-0.075，上半壳底面 Z=+0.075
@@ -33,7 +33,8 @@ PLATE = dict(c=(-5.4, -0.25, -16.8), s=(30.0, 33.5, 1.6))     # 顶面 Z=-16.0
 MECH_W, MECH_Z = -13.5, -3.3
 BARREL_U0, BARREL_U1 = 4.0, 15.0
 PAD_REST_U = 1.8
-PIPE = [(-4, 0, -6.4), (-4, 0, -13.2), (-7.0, 0, -13.2), (-7.0, 10.0, -13.2), (MECH_W, 10.0, -13.2), (MECH_W, 10.0, -6.5)]
+PIPE = [(-4.5, 11.5, -12.5), (-7.5, 11.5, -12.5), (-7.5, 11.5, -3.3), (-10.4, 11.5, -3.3)]
+BOX_C = (-3.0, 12.5, -12.5)      # POWER 接线盒中心
 
 
 # ------------------------------------------------------------------ 基本工具
@@ -229,7 +230,7 @@ def rig(root):
     return {o["role"]: o for o in root.children_recursive if o.type == "EMPTY" and o.get("role") in spec}
 
 
-def _lerp_path(pts, s, trim=1.3):
+def _lerp_path(pts, s, trim=2.5):
     L = [0.]
     for a, b in zip(pts, pts[1:]):
         L.append(L[-1] + (b - a).length)
@@ -267,7 +268,7 @@ def pose(root, role, value):
         for ch in j.children:
             if "ball_i" not in ch:
                 continue
-            s = v - .12 * ch["ball_i"]
+            s = v - .2 * ch["ball_i"]
             ch.hide_render = ch.hide_viewport = s < 0 or v <= 0
             ch.location = _lerp_path(pts, s) * MM
     j["pose_value"] = v
@@ -424,7 +425,7 @@ def _tags(ob, layer):
     return ob
 
 
-def _glow(K, strength=2.0):
+def _glow(K, strength=4.0):
     """灯珠和光包用 K.yellow 的一份拷贝（kit_clear_yellow_lit），在暗处自发光；K.yellow 本身不动（真插头 ATP 仍是纯透明黄）。"""
     if getattr(K, "yellow_lit", None) is not None:
         return K.yellow_lit
@@ -445,8 +446,97 @@ def _glow(K, strength=2.0):
     return m
 
 
+def _plaque(P, K, text, c, rot, size, w, h, mat=None):
+    """小标：凸起的小牌（厚 0.3）加字，字贴在牌面上。c 是牌面中心。"""
+    mat = mat or K.blue_hi
+    label(P, text, size, c, rot, K.white)
+
+
+def _network(P, K, F, L, blocks):
+    """从插孔到输出端的通路：触点块 → 铜线 → POWER 接线盒（灯座）→ 光管 → 活塞 → 小细胞。"""
+    # 接线盒
+    bx = box(P, "power_box", BOX_C, (5.0, 5.0, 5.0), K.blue_hi, .3)
+    for c in ((-4.0, 11.2, -9.9), (-4.0, 13.8, -9.9)):
+        cut(bx, box(P, "box_vent", c, (2.4, .7, .6), K.blue_hi, 0))
+    F(bx, "mid")
+    for fx, fy in ((-5.0, 10.8), (-1.0, 10.8), (-5.0, 14.2), (-1.0, 14.2)):
+        F(cyl(P, "box_foot", (fx, fy, -15.5), (0, 0, 1), .9, 1.0, K.blue_hi, .15), "mid")
+    for fy in (10.9, 14.1):
+        F(D._screw(P, (-.48, fy, -11.0), (1, 0, 0), .55, K.gold_satin), "mid")
+        F(D._screw(P, (-.48, fy, -14.0), (1, 0, 0), .55, K.gold_satin), "mid")
+    # 铜线：触点块 +U 面的两个接线柱 → 接线盒顶的两个接线柱
+    for lug, tail in (((-4.6, 6.3, -2.5), (-4.6, 12.0, -9.6)), ((-1.4, 6.3, -2.5), (-1.4, 13.0, -9.6))):
+        F(box(P, "block_lug", lug, (1.4, 1.2, 1.4), K.gold_satin, .15), "front")
+        F(D._screw(P, (lug[0], lug[1] + .62, lug[2]), (0, 1, 0), .45, K.gold), "front")
+        pts = rounded_path([(lug[0], lug[1] - .3, lug[2]), (tail[0], tail[1], lug[2]), tail], 1.6)
+        w = P.tube([tuple(p) for p in pts], .45, K.gold)
+        w.name = P.nm("copper_wire")
+        F(w, "front")
+        F(cyl(P, "box_terminal", (tail[0], tail[1], -9.6), (0, 0, 1), .75, .8, K.gold_satin, .1), "mid")
+    # 灯座：金色座圈、三道螺纹，两根引线回到接线柱
+    lx, ly, lz = -3.0, 13.9, -7.35
+    F(tube(P, "lamp_base", (lx, ly, -9.1), (0, 0, 1), 1.35, .5, 1.8, K.gold_satin, .1), "mid")
+    for dz in (-9.6, -9.1, -8.6):
+        F(tube(P, "lamp_thread", (lx, ly, dz), (0, 0, 1), 1.5, 1.3, .25, K.gold, .05), "mid")
+    for tail in ((-4.6, 12.0), (-1.4, 13.0)):
+        ld = P.tube([(lx, ly, -9.2), (lx, ly, -9.75), (tail[0], tail[1], -9.75)], .22, K.gold)
+        ld.name = P.nm("lamp_lead")
+        F(ld, "mid")
+    # 光管端口
+    F(tube(P, "pipe_port", (-5.75, 11.5, -12.5), (1, 0, 0), 1.9, 1.15, .5, K.gold_satin, .1), "mid")
+    F(tube(P, "pipe_port", (-9.9, 11.5, -3.3), (1, 0, 0), 1.9, 1.15, .5, K.gold_satin, .1), "mid")
+    # 小标：IN / CONTACT / POWER / OUT
+    label(P, "IN", 1.3, (FACE_W + .32, -9.5, -3.0), (math.radians(90), 0, math.radians(90)), K.white)
+    F(box(P, "tag_in", (FACE_W + .15, -9.5, -3.0), (.3, 3.2, 1.9), K.blue_hi, .06), "shell")
+    label(P, "CONTACT", 1.2, (-3.0, 0, -.06), (0, 0, math.radians(90)), K.black)
+    F(box(P, "tag_power", (-.35, 12.5, -12.5), (.3, 4.0, 1.7), K.blue, .06), "mid")
+    label(P, "POWER", 1.0, (-.18, 12.5, -12.5), (math.radians(90), 0, math.radians(90)), K.white)
+    label(P, "OUT", 1.5, (MECH_W - 4.0, -13.5, -10.19), (0, 0, math.radians(90)), K.black)
+    # 触点块侧面：散热槽
+    for ww in (-4.5, -1.5):
+        cut(blocks[-1], box(P, "block_vent", (ww, -5.7, -2.8), (1.0, 1.2, 2.4), K.white, 0))
+    # 壳内壁的加强筋（后壁和两侧）
+    outline, cen = shell_outline()
+    c0 = Vector((cen[0], cen[1], 0))
+    pl = PLATE
+    pw0, pw1 = pl["c"][0] - pl["s"][0] / 2 - 1.0, pl["c"][0] + pl["s"][0] / 2 + 1.0
+    pu0, pu1 = pl["c"][1] - pl["s"][1] / 2 - 1.0, pl["c"][1] + pl["s"][1] / 2 + 1.0
+    for i in range(0, len(outline), 9):
+        p = Vector((outline[i][0], outline[i][1], 0))
+        if p.x > 6.0:
+            continue
+        n = (c0 - p)
+        n.z = 0
+        n.normalize()
+        q = p + n * 1.2
+        ctr = q + n * .35
+        if pw0 < ctr.x < pw1 and pu0 < ctr.y < pu1:
+            continue
+        tg = Vector((-n.y, n.x, 0))
+        rb = D._local_box(P, (ctr.x, ctr.y, -11.0), n, tg, .4, .6, 10.0, K.blue_hi, .15)
+        rb.name = P.nm("wall_rib")
+        F(rb, "shell")
+
+
+
+
+class _WarmKit:
+    """把 K.white 换成略带暖灰的亮面塑料（不是纯白），其余材质原样转给 K。"""
+    def __init__(self, k):
+        self._k = k
+        if getattr(k, "_warm", None) is None:
+            k._warm = mat_solid("kit_white_warm", "#BDB5A8", rough=.14, coat=.3, sss=.03)
+            bs = [n for n in k._warm.node_tree.nodes if n.type == "BSDF_PRINCIPLED"][0]
+            bs.inputs["Coat Roughness"].default_value = .22
+        self.white = k._warm
+
+    def __getattr__(self, n):
+        return getattr(self._k, n)
+
+
 def h01b_cdk20_socket(K, lod="hero", pattern="round"):
     _glow(K)
+    K = _WarmKit(K)
     if lod == "mini":
         return _mini(K, pattern)
     if lod != "hero":
@@ -525,6 +615,11 @@ def h01b_cdk20_socket(K, lod="hero", pattern="round"):
         cut(plate, cyl(P, "ejector_pit", (c[0], c[1], -16.0), (0, 0, 1), .4, .2, K.white, 0))
     F(plate, "back")
     F(box(P, "data_plate", (-13.0, 12.2, -15.95), (6.0, 2.6, .3), K.blue_hi, .08), "back")
+    for c, s_ in (((-13.5, -7.5, -15.2), (1.0, 13.0, 1.6)), ((-3.0, -10.0, -15.2), (8.0, 1.0, 1.6)), ((-8.0, -13.2, -15.2), (7.0, 1.0, 1.6))):
+        F(box(P, "rib", c, s_, K.white, .15), "back")
+    label(P, "SOCKET 01", 1.4, (-3.5, -13.6, -15.98), (0, 0, 0), K.black)
+    for c in ((-11.5, -3.0), (-6.0, -5.0), (-2.0, -6.5)):
+        F(D._screw(P, (c[0], c[1], -15.9), (0, 0, 1), .6, K.gold_satin), "back")
     label(P, "01", 1.4, (-13.0, 12.2, -15.62), (0, 0, 0), K.white)
     label(P, "CDK20-01", 1.0, (7.0, -10.0, -15.98), (0, 0, 0), K.black).parent = P.root
     for sx in (-17.0, 6.0):
@@ -554,7 +649,6 @@ def h01b_cdk20_socket(K, lod="hero", pattern="round"):
 
     # ---- 中层：搭桥板、立柱、活塞筒、光管
     bridge = box(P, "bridge_plate", (MECH_W, 9.5, -9.0), (8.0, 14.0, 1.2), K.blue_hi, .25)   # U 2.5..16.5
-    cut(bridge, cyl(P, "pipe_hole", (MECH_W, 10.0, -9.0), (0, 0, 1), 1.8, 3, K.white, 0))
     F(bridge, "mid")
     cut(bridge, box(P, "bridge_slot", (MECH_W, 5.0, -9.0), (4.0, 1.4, 3), K.blue_hi, 0))
     cut(bridge, box(P, "bridge_slot", (MECH_W, 14.4, -9.0), (4.0, 1.4, 3), K.blue_hi, 0))
@@ -566,13 +660,13 @@ def h01b_cdk20_socket(K, lod="hero", pattern="round"):
     barrel_t = tube(P, "piston_barrel", (MECH_W, (BARREL_U0 + BARREL_U1) / 2, MECH_Z), (0, 1, 0), 3.0, 2.8, BARREL_U1 - BARREL_U0, K.white, .1)
     cut(barrel_t, box(P, "view_window", (MECH_W, 9.5, MECH_Z + 2.0), (3.2, 9.0, 4.0), K.white, 0))
     F(barrel_t, "mid")
-    F(tube(P, "barrel_band", (MECH_W, 9.5, MECH_Z), (0, 1, 0), 3.2, 2.95, .6, K.gold_satin, .08), "mid")
-    F(tube(P, "barrel_band_red", (MECH_W, 14.2, MECH_Z), (0, 1, 0), 3.15, 2.95, .5, K.red, .06), "mid")
+    F(tube(P, "barrel_band", (MECH_W, 7.6, MECH_Z), (0, 1, 0), 3.2, 2.95, .6, K.gold_satin, .08), "mid")
+    F(tube(P, "barrel_band_red", (MECH_W, 9.2, MECH_Z), (0, 1, 0), 3.15, 2.95, .5, K.red, .06), "mid")
     F(cyl(P, "barrel_cap", (MECH_W, BARREL_U1 + .3, MECH_Z), (0, 1, 0), 3.2, .6, K.white, .15), "mid")
     F(tube(P, "rod_bushing", (MECH_W, BARREL_U0 - .45, MECH_Z), (0, 1, 0), 3.5, .9, .88, K.gold_satin, .1), "mid")
     F(tube(P, "rod_washer", (MECH_W, BARREL_U0 - .95, MECH_Z), (0, 1, 0), 1.7, .9, .3, K.gold_satin, .05), "mid")
-    for su in (6.0, 13.0):
-        sd = box(P, "barrel_saddle", (MECH_W, su, (MECH_Z - 5.1 + -8.4) / 2 + 2.4), (8.0, 1.2, 5.0), K.white, .2)
+    for su in (5.6, 14.2):
+        sd = box(P, "barrel_saddle", (MECH_W, su, -5.125), (8.0, 1.2, 6.55), K.white, .2)
         cut(sd, cyl(P, "saddle_hole", (MECH_W, su, MECH_Z), (0, 1, 0), 3.05, 4, K.white, 0))
         F(sd, "mid")
     # 小细胞托盘
@@ -590,11 +684,11 @@ def h01b_cdk20_socket(K, lod="hero", pattern="round"):
     pipe = sweep_tube(P, "light_pipe", path, 1.1, .95, K.clear)
     F(pipe, "mid")
     P.root["pipe_path_mm"] = json.dumps([list(p) for p in path])
-    for c, ax in (((-4, 0, -9.5), (0, 0, 1)), ((-7.0, 5, -13.2), (0, 1, 0)), ((-10.5, 10, -13.2), (1, 0, 0))):
-        F(tube(P, "pipe_clip", c, ax, 1.7, 1.15, 1.2, K.white, .1), "mid")
+    F(tube(P, "pipe_clip", (-7.5, 11.5, -8.0), (0, 0, 1), 1.7, 1.15, 1.2, K.blue_hi, .1), "mid")
+    F(cyl(P, "pipe_post", (-7.5, 11.5, -14.8), (0, 0, 1), .8, 2.2, K.blue_hi, .15), "mid")
 
     # ---- 前层：支撑、触点叶、卡扣
-    F(tube(P, "pipe_port", (-4, 0, -6.0), (0, 0, 1), 1.9, 1.15, .8, K.gold_satin, .1), "front")
+    _network(P, K, F, L, blocks)
     for su in (-4.3, 4.3):
         F(cyl(P, "block_pillar", (-3.0, su, -10.8), (0, 0, 1), 1.3, 10.8, K.blue_hi, .15), "front")
     for sw in (1.8, 8.4):
@@ -622,7 +716,7 @@ def h01b_cdk20_socket(K, lod="hero", pattern="round"):
     cut(tab_body, cyl(P, "tab_hole", (TAB[0], TAB[1], 0), (0, 0, 1), .78, 4, K.red, 0))
     # 灯
     lamp_out_c = (-4.0, 0.0, TOP_Z + .3)
-    lamp_in_c = (-3.0, -9.5, -1.0)
+    lamp_in_c = (-3.0, 13.9, -7.35)
 
     # ---- 角色
     outline, _c = shell_outline()
@@ -649,6 +743,12 @@ def h01b_cdk20_socket(K, lod="hero", pattern="round"):
     label(P, "CDK20", 1.4, (-14.0, 0, TOP_Z + .42), (0, 0, 0), K.white)
     for u in (-6.0, 6.0):
         L(box(P, "lid_rib", (-10.0, u, TOP_Z - 2.2), (22.0, 1.0, 2.0), K.blue, .15), "shell")
+    for u in (-13.0, 13.0):
+        L(box(P, "lid_rib", (-9.0, u, TOP_Z - 2.2), (18.0, 1.0, 2.0), K.blue_hi, .15), "shell")
+    for w_ in (-21.0, -1.0):
+        L(box(P, "lid_cross_rib", (w_, 0, TOP_Z - 2.2), (1.0, 24.0, 2.0), K.blue_hi, .15), "shell")
+    for w_, u in ((-21.0, -10.0), (-21.0, 10.0), (-1.0, -10.0), (-1.0, 10.0)):
+        L(D._screw(P, (w_, u, TOP_Z - 3.3), (0, 0, -1), .7, K.gold_satin), "shell")
     L(bezel, "shell"); L(lbl, "shell")
     adopt(j_lid, *[o for o in lid])
     # 标签文字随盖
@@ -671,8 +771,8 @@ def h01b_cdk20_socket(K, lod="hero", pattern="round"):
     adopt(j_pis, rod, head, pad)
     j_cell = joint(P, "cell", "scale", 1.0, 1.45, pivot=(MECH_W, PAD_REST_U - .1, MECH_Z), axis=(1, 0, 0), rest=1.0, parent=j_pis)
     cc = (MECH_W, PAD_REST_U - .1 - 4.5, MECH_Z)
-    shell_c = ball(P, "cell_shell", cc, 4.5, K.clear0, 48)
-    nuc = ball(P, "cell_nucleus", cc, 1.6, K.cellpink, 32)
+    shell_c = ball(P, "cell_shell", cc, 4.5, K.clear, 48)
+    nuc = ball(P, "cell_nucleus", cc, 2.0, K.nuc_red, 32)
     adopt(j_cell, shell_c, nuc)
 
     # 光包
@@ -691,10 +791,9 @@ def h01b_cdk20_socket(K, lod="hero", pattern="round"):
     lif = ball(P, "lamp_in_off", lamp_in_c, .8, K.clear0, 20)
     lif["lamp"] = "off"
     lif.hide_render = lif.hide_viewport = True
-    F(box(P, "lamp_in_bracket", (-3.0, -9.5, -9.05), (1.4, 1.4, 14.1), K.white, .15), "front")
     j_li = joint(P, "lamp_in", "switch", 0, 1, pivot=lamp_in_c, axis=(1, 0, 0), rest=1)
     adopt(j_li, li, lif)
-    for j, c, w in ((j_lo, lamp_out_c, .4), (j_li, lamp_in_c, .4)):
+    for j, c, w in ((j_lo, lamp_out_c, .03), (j_li, lamp_in_c, .03)):
         ld = bpy.data.lights.new(j.name + "_light", "POINT")
         ld.energy = w
         ld.shadow_soft_size = .0004
@@ -724,6 +823,8 @@ def h01b_cdk20_socket(K, lod="hero", pattern="round"):
 def _mini(K, pattern):
     if pattern not in ("round", "slots", "tri"):
         raise ValueError(pattern)
+    _glow(K)
+    K = _WarmKit(K)
     P = D.Part(K, "h01b_mini_" + pattern, "blue")
     halves = shell_halves(P, K, 4)
     low, up = halves["lower"], halves["upper"]
@@ -780,11 +881,11 @@ def _mini(K, pattern):
     j_lo = joint(P, "lamp_out", "switch", 0, 1, pivot=lamp_c, axis=(1, 0, 0), rest=1)
     adopt(j_lo, lo, lof)
     ld = bpy.data.lights.new(j_lo.name + "_light", "POINT")
-    ld.energy = .4
+    ld.energy = .03
     ld.shadow_soft_size = .0004
     lt = D.link(bpy.data.objects.new(ld.name, ld))
     lt.location = _mm(lamp_c)
-    lt["watts"] = .4
+    lt["watts"] = .03
     lt.visible_camera = False
     adopt(j_lo, lt)
     if pattern == "slots":     # 输出端：齿轮，绕 W 转

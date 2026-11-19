@@ -49,18 +49,28 @@ def setup(samples=64):
     return sc
 
 
-def fill_light(root, energy=2.5):
-    """舱内补光：60×40 毫米面光，放在分件面上方前侧，仰角 30°，对着机舱。"""
+def fill_light(root, energy=2.5, side=None):
+    """舱内补光：60×40 毫米面光，放在分件面上方前侧，仰角 30°，对着机舱；再加一盏从 -U 侧来的低角度侧光，让面和面有明暗差。"""
+    off = Vector((0, 0, root.location.z))
+    tgt = Vector((-9, 0, -8)) * D.MM + off
     ld = bpy.data.lights.new("fill_cabin", "AREA")
     ld.shape = "RECTANGLE"
     ld.size, ld.size_y = 60 * D.MM, 40 * D.MM
     ld.energy = energy
     ld.color = (1, .98, .95)
     ob = D.link(bpy.data.objects.new("fill_cabin", ld))
-    tgt = Vector((-9, 0, -8)) * D.MM
     el = math.radians(30)
     ob.location = tgt + Vector((math.cos(el), 0, math.sin(el))) * .12
     ob.rotation_euler = (tgt - ob.location).to_track_quat("-Z", "Y").to_euler()
+    sd = 0.8 if side is None else side
+    ls = bpy.data.lights.new("side_cabin", "AREA")
+    ls.shape = "RECTANGLE"
+    ls.size, ls.size_y = 40 * D.MM, 30 * D.MM
+    ls.energy = sd
+    ls.color = (.92, .96, 1.0)
+    o2 = D.link(bpy.data.objects.new("side_cabin", ls))
+    o2.location = tgt + Vector((-.01, -.09, .05))
+    o2.rotation_euler = (tgt - o2.location).to_track_quat("-Z", "Y").to_euler()
     return ob
 
 
