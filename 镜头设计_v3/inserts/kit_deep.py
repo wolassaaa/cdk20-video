@@ -371,9 +371,12 @@ def h02_key(K, which="048", scale=1.0, spiky=False, seed=None):
         yy = -1.3 + min(h, 2.15)
         pts += [(c+.28, yy), (c-.28, yy)]
     pts += [(1.5, -1.3)]
-    blade = P.slab(pts, .9, K.gold, bevel=.2)
-    _boolean(blade, P.box(3.83, .41, 1.93, .15, .35, K.gold,
-                          z=.425, r=0, bevel=0))
+    blade = P.slab(pts, .9, K.gold, bevel=.2, seg=1)
+    blade.name = P.nm("bevelled_blade")
+    for sign in (-1, 1):
+        groove = P.box(3.83, .41, 1.93, .15, .30, K.gold,
+                       z=sign*.40, r=0, bevel=0)
+        _boolean(blade, groove)
     P.box(.60, 0, .9, 1.8, 1.15, K.gold, r=.35, bevel=.25)
     if bow == "round":
         outline = circle(-3.5, 0, 4)
@@ -383,12 +386,35 @@ def h02_key(K, which="048", scale=1.0, spiky=False, seed=None):
         outline = [(-3.5 + (3.6+.4*math.cos(3*a))*math.cos(a),
                     (3.6+.4*math.cos(3*a))*math.sin(a))
                    for a in (i*math.tau/72 for i in range(72))]
-    handle = P.slab(outline, 1.4, K.gold, bevel=.25, holes=[(-3.5, 0, 1.2)])
+    # 细滚花直接做进柄侧轮廓；未改变三种柄的外包络。
+    flank = []
+    for i, a in enumerate(outline):
+        b = outline[(i+1) % len(outline)]
+        n = max(1, round(math.dist(a, b)/.32))
+        for j in range(n):
+            for phase, inset in ((0, 0), (.34, .07), (.66, .07)):
+                t = (j+phase)/n
+                x, y = (a[k]+t*(b[k]-a[k]) for k in (0,1))
+                r = math.hypot(x+3.5,y)
+                flank.append((x-inset*(x+3.5)/r,y-inset*y/r))
+    handle = P.slab(flank, 1.4, K.gold, bevel=0, holes=[(-3.5, 0, 1.2)])
+    handle.name = P.nm("knurled_bow")
+    # 刻槽到 z=.40：从正面 z=.70 实切 0.30 mm，不用贴线假装。
+    _boolean(handle, P.ring(-3.5, 0, 2.27, 1.96, .40, K.gold,
+                            z=.60, bevel=0, n=72))
+    # 只倒柄面的水平边，不倒会把细滚花抹平的纵边。
+    weight = handle.data.attributes.new("bevel_weight_edge", "FLOAT", "EDGE")
+    for e in handle.data.edges:
+        weight.data[e.index].value = float(abs(handle.data.vertices[e.vertices[0]].co.z -
+                                               handle.data.vertices[e.vertices[1]].co.z) < 1e-7)
+    b = handle.modifiers.new("bow rim bevel", "BEVEL")
+    b.width, b.segments, b.limit_method = .20*MM, 2, "WEIGHT"
     for z in (-.7, .7):
         # 柄的正反两面共用孔缘浅压圈，不另开材质。
         rim = P.ring(-3.5, 0, 1.57, 1.23, .2, K.gold, z=z, bevel=.06, n=48)
     if seed is None and which != "blank":
         _label(P, which, 1.6, -3.5, -2.65, .7, K.ink)
+        P.box(-3.5,-3.54,.71,.13,.025,K.ink,z=.707,r=.1,bevel=.012)
     if spiky:
         for x, y in ((-5.7, .6), (-4.25, 2.1), (-2.55, 2.12)):
             bpy.ops.mesh.primitive_cone_add(vertices=24, radius1=.4*MM, radius2=0,

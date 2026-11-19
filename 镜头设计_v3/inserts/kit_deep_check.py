@@ -201,6 +201,19 @@ if name in ("h01_cdk20_lockworks", "h03_loop_track"):
     for obj in [probe] + probe.children_recursive:
         obj.hide_render = True
 if name == "h02_key":
+    # 射线量成品（未挂框、scale=1），不是布尔刀具公称值。
+    def face_z(obj, x, y, side):
+        hit = D._tree(obj).ray_cast(D._mm((x,y,side*3)), Vector((0,0,-side)))[0]
+        return None if hit is None else round(hit.z/D.MM, 4)
+    handle = next(o for o in root.children if "__knurled_bow" in o.name or "_knurled_bow" in o.name)
+    blade = next(o for o in root.children if "_bevelled_blade" in o.name)
+    data["r1_key_cut_surfaces_mm"] = {
+        "bow_outer_face": face_z(handle,-6.2,0,1),
+        "bow_ring_floor": face_z(handle,-5.60,0,1),
+        "blade_faces": [face_z(blade,4.0,.65,z) for z in (1,-1)],
+        "blade_guide_floors": [face_z(blade,4.0,.41,z) for z in (1,-1)],
+        "blade_bevel_nominal": .20,
+    }
     keys = [f(K, seed=i) for i in range(50)]
     data["seed_unique_count"] = len({(tuple(o["tooth_profile"]), o["bow_form"]) for o in keys})
     data["seed_geometry_profile_unique_count"] = len({(tuple(o["tooth_profile_modelled"]), o["bow_form"]) for o in keys})
@@ -304,12 +317,21 @@ def focus_camera(cam, suffix):
     cam.data.dof.focus_object = empty
     cam.data.dof.focus_distance = (hit-origin).length
     cam.data.dof.aperture_fstop = 8
-    # 1 mm 短焦 + 对应的感光尺寸；不靠关闭景深伪造清晰度。
+    # 宽幅采集仅渲染中央有效视窗；构图不变，但有效光圈直径更小。
+    # 这使毫米级零件的前后缘仍能在实打实的 f/8 景深内。
     lens0 = cam.data.lens
-    cam.data.lens = 1.1
-    cam.data.sensor_width *= cam.data.lens/lens0
+    effective = max(1., lens0/36.)
+    crop = max(1,int(effective))
+    cam.data.sensor_width = 1.0
+    cam.data.lens = effective/crop
+    sc.render.resolution_x, sc.render.resolution_y = 1600*crop, 900*crop
+    sc.render.use_border = sc.render.use_crop_to_border = crop > 1
+    lo_crop, hi_crop = (.5-.5/crop)+1e-7, (.5+.5/crop)+1e-7
+    sc.render.border_min_x = sc.render.border_min_y = lo_crop
+    sc.render.border_max_x = sc.render.border_max_y = min(1,hi_crop)
     bpy.context.view_layer.update()
-    fr = list(cam.data.view_frame(scene=sc))
+    fr = [Vector((v.x/crop,v.y/crop,v.z))
+          for v in cam.data.view_frame(scene=sc)]
     lo = [min(x[i] for x in fr) for i in (0,1)]
     hi = [max(x[i] for x in fr) for i in (0,1)]
     rays, depths = 0, []
@@ -326,14 +348,16 @@ def focus_camera(cam, suffix):
     sensor = cam.data.sensor_width/1000
     d0 = (hit-origin).length
     # 薄透镜的采样最大散焦直径，报告中另作肉眼检查。
-    coc = max((f*f*abs(d-d0)/(8*d*(d0-f))*1600/sensor for d in depths), default=None)
+    coc = max((f*f*abs(d-d0)/(8*d*(d0-f))*1600*crop/sensor for d in depths), default=None)
     data.setdefault("detail_optics", {})[suffix] = dict(
         fstop=8, lens_mm=cam.data.lens, sensor_mm=cam.data.sensor_width,
         focus_mm=d0/D.MM, focus_point_mm=list(hit/D.MM),
-        subject_fraction=len(depths)/rays, samples=rays, blur_diameter_px=coc)
+        subject_fraction=len(depths)/rays, samples=rays, blur_diameter_px=coc, crop=crop)
 
 
 def pic(suffix, target, dist, lens=50, fstop=None, angle=35, az=-25):
+    sc.render.resolution_x, sc.render.resolution_y = 1600, 900
+    sc.render.use_border = sc.render.use_crop_to_border = False
     if any(Path("D:/。hkbu/molecular science/_env/queue", m).exists() for m in ("GPU_HOLD", "GPU_PAUSED")):
         raise RuntimeError("GPU hold before next render")
     cam = KP.camera(sc, target, dist, angle, az, lens=lens, fstop=fstop)
@@ -349,6 +373,7 @@ KP.lights(0, 0, 1)
 
 def plinth(label, x, y, w, h, z):
     pp = D.Part(K,label,"white")
+    bpy.data.objects["sweep"].location.z = (z-1.61)*D.MM
     return pp.box(x, y, w/2,h/2,1.6,K.white,z=z-.8,r=2,bevel=.24)
 
 def minimum_z(r):
@@ -415,8 +440,8 @@ if name == "h02_key":
         if not ob.hide_viewport:
             ob.hide_render = True
     for i, item in enumerate(trio):
-        item.location = D._mm((0,(i-1)*5.3,30))
-    pic("variants", (0,0,.03), .042, lens=50, angle=66, az=0)
+        item.location = D._mm((0,(i-1)*9.0,30))
+    pic("variants", (0,0,.03), .070, lens=49, angle=77, az=0)
     for item in trio:
         for ob in item.children_recursive:
             ob.hide_render = True
@@ -434,13 +459,18 @@ if name == "h01_cdk20_lockworks":
     D.pose(root, "latch", -25)
 detail = {
     "h01_cdk20_lockworks": (t,.029,52,38,-12),
-    "h02_key": ((-.0035,0,.0307),.028,135,66,0),
+    "h02_key": ((-.0035,-.0023,.0307),.028,161,87,0),
     "h03_loop_track": ((.007,-.004,.034),.029,57,66,0),
     "h06_pin_lock": ((.001,-.004,.031),.029,98,35,37),
     "h04_chem42_chip": ((.004,0,.031),.029,49,59,0),
 }[name]
 target, distance, focal, el, az = detail
 pic("detail", target, distance, lens=focal, fstop=8, angle=el, az=az)
+if name == "h02_key":
+    pic("detail_teeth", (.0037,.00025,.0304), .029, lens=261, fstop=8, angle=88, az=0)
+    root.rotation_euler.x = math.pi
+    pic("detail_reverse", (.0037,-.00025,.0304), .029, lens=261, fstop=8, angle=88, az=0)
+    root.rotation_euler.x = 0
 if name in ("h01_cdk20_lockworks", "h06_pin_lock", "h04_chem42_chip"):
     for role in rj:
         if rig[role]["type"] in ("rot", "loc") and role not in ("shell", "lid"):
