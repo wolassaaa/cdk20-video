@@ -70,7 +70,14 @@ def _path_frame(points, value):
     i = min(max(bisect.bisect_right(lengths, s) - 1, 0), len(track) - 2)
     fraction = (s - lengths[i]) / (lengths[i + 1] - lengths[i])
     p = track[i].lerp(track[i + 1], fraction)
-    delta = track[i + 1] - track[i]
+    closed = (track[0] - track[-1]).length < 1e-6
+    if closed:
+        n = len(track) - 1
+        a = track[(i + 1) % n] - track[(i - 1) % n]
+        b = track[(i + 2) % n] - track[i % n]
+        delta = a.lerp(b, fraction)
+    else:
+        delta = track[i + 1] - track[i]
     return Matrix.Translation(p * MM) @ Matrix.Rotation(math.atan2(delta.y, delta.x), 4, "Z")
 
 
@@ -465,4 +472,157 @@ def h06_pin_lock(K, preset="own", cut=True):
     P.root["lower_pins_mm"] = _LOCK_PRESETS[preset]
     P.gate(-10, 3, "-x")
     P.gate(10, 3, "+x")
+    return P.done()
+
+
+def _oval(P, scale):
+    # 圆法向偏移，不把 2.4 mm 误写成两个轴的放大。
+    dims = [(0,-1.2),(0,1.2),(1.2,1.2),(1.2,.15),(.98,.15),
+            (.98,-.15),(1.2,-.15),(1.2,-1.2)]
+    vs, fs, n = [], [], 192
+    for z, off in dims:
+        for i in range(n):
+            a = -i*math.tau/n
+            x,y = math.cos(a),math.sin(a)
+            normal = Vector((x/20,y/10)).normalized()
+            vs.append((scale*(20*x+off*normal.x),scale*(10*y+off*normal.y),(2+z)*scale))
+    for j in range(len(dims)):
+        for i in range(n):
+            fs.append((j*n+i,j*n+(i+1)%n,((j+1)%len(dims))*n+(i+1)%n,
+                       ((j+1)%len(dims))*n+i))
+    _mesh(P,"oval_guide",vs,fs,P.K.white,True)
+
+
+def _trolley(P, s, lift=0):
+    K = P.K
+    # 车轮切线与轨道略有净空，避免表面重叠。
+    base = 3.22*s+lift
+    car = P.box(0,0,2.5*s,1.2*s,1.25*s,K.white,z=base+1.07*s,
+                r=.36*s,bevel=.21*s)
+    wheels = [_cyl(P, (x*s,y*s,base+.60*s),(0,1,0),.6*s,.36*s,K.black,.1*s)
+              for x in (-1.7,1.7) for y in (-1.32,1.32)]
+    clip = [P.box(0,y*s,1.15*s,.25*s,.32*s,K.blue_hi,z=base+2.82*s,
+                  r=.1*s,bevel=.06*s) for y in (-.57,.57)]
+    deck = P.box(0,0,1.55*s,1.12*s,1.03*s,K.white,z=base+2.10*s,r=.28*s,bevel=.20*s)
+    return [car, deck, *wheels, *clip]
+
+
+def _ellipse_path(s, pos=(0,0,0)):
+    return [[pos[0]+20*s*math.cos(-2*math.pi*i/768),
+             pos[1]+10*s*math.sin(-2*math.pi*i/768), pos[2]]
+            for i in range(769)]
+
+
+def _trolley_joint(P, s):
+    path = _ellipse_path(s)
+    j = _move(P, "car", "path", (0., 1.), path=path)
+    j.matrix_parent_inverse = _path_frame(path, 0)
+    # 小车直接在行进坐标建模，不把初始路径矩阵抵消掉。
+    for o in _trolley(P, s):
+        o.parent = j
+    return j
+
+
+def _plate(P, title, x, y, rot):
+    K = P.K
+    o = P.slab(rrect(0,0,3.5,1.4,1),1,K.white,bevel=.2)
+    o.location = _mm((x,y,2.54))
+    o.rotation_euler.z = math.radians(rot)
+    text = _label(P, title, 1.4, x,y,3.04,K.ink)
+    text.rotation_euler.z = math.radians(rot)
+
+
+def _tray(P, station, x, y):
+    K = P.K
+    tray = P.box(x,y,3,2,1,K.white,z=2.5,r=.55,bevel=.2)
+    for shift in (-1.38,1.38):
+        _boolean(tray,P.cyl(x+shift,y,3.0,1.28,.30,K.white,bevel=0))
+    for k in range(8):
+        for label, shift, t, mat in (("coin",-1.38,.5,K.gold),("clock",1.38,.8,K.white)):
+            px = x+shift
+            z = 3.01+t*(k+.5)+.003*k
+            j = _move(P,f"{label}_s{station}_{k}","loc",(0,6),pivot=(px,y,z),axis=(0,0,1))
+            disc = P.cyl(px,y,z,1.2,t,mat,bevel=.20)
+            if label == "coin":
+                # 浅环压在面上，不高于硬币外缘。
+                _boolean(disc,P.torus(px,y,z+t/2+.01,.76,.06,mat))
+                _adopt(j,disc)
+            else:
+                shape = [(-.45,-.07),(.07,-.07),(.07,.41),(-.07,.41),
+                         (-.07,.07),(-.45,.07)]
+                for label2, factor, thick, zz, material in (
+                    ("cutter",1.08,.16,z+t/2+.01,K.white),
+                    ("hands",1.,.018,z+t/2-.027,K.ink)):
+                    part = P.slab([(px+factor*a,y+factor*b) for a,b in shape],
+                                  thick,material,z=zz,bevel=0)
+                    if label2 == "cutter":
+                        _boolean(disc,part)
+                    else:
+                        _adopt(j,disc,part)
+    # 斜槽留在托盘外缘，不伪造未给出的机械链。
+    s = 1 if y>0 else -1
+    slope = Vector((0,s*1.75,2))
+    _local_box(P,(x,y+s*2.975,7.86),(1,0,0),slope.normalized(),
+               .80,slope.length/2,.32,K.white,.16)
+    for dx in (-.79,.79):
+        P.tube([(x+dx,y+s*2.1,7),(x+dx,y+s*3.85,9)],.18,K.white)
+
+
+def h03_loop_track(K, lod="hero"):
+    if lod not in ("hero", "mini"):
+        raise ValueError(lod)
+    P = Part(K,"h03_loop_track","white")
+    s = .18 if lod=="mini" else 1.
+    base = P.box(0,0,25*s,15*s,2*s,K.white,z=s,r=3*s,bevel=.28*s)
+    _oval(P,s)
+    _trolley_joint(P,s)
+    P.gate(-25*s,0,"-x",s)
+    P.gate(25*s,0,"+x",s)
+    if lod == "mini":
+        lamp = _move(P,"lamp","material",(0,0))
+        _adopt(lamp,P.ball(0,0,2*s+.31,.3,K.white,seg=12))
+        return P.done()
+    for x in range(-22,23,2):
+        _boolean(base,P.box(x,0,.15,13.9,.35,K.white,z=2.025,r=0,bevel=0))
+    for y in range(-12,13,2):
+        _boolean(base,P.box(0,y,23.7,.15,.35,K.white,z=2.025,r=0,bevel=0))
+    for cfg in (("Imagine",23.1,0,90),("Make",0,-13.52,0),
+                ("Test",-23.1,0,90),("Tweak",0,13.52,0)):
+        _plate(P,*cfg)
+    # Imagine：键坯与凹槽保留明确的行程；Tip 朝向轨道切线。
+    slot = P.box(23.25,6.7,1.65,3.05,1.45,K.white,z=2.725,r=.36,bevel=.2)
+    _boolean(slot,P.box(23.25,6.7,1.55,2.77,1.44,K.white,z=3.32,r=.08,bevel=0))
+    blank = h02_key(K,which="blank",scale=.35)
+    blank.parent = P.root
+    blank.rotation_euler.z = math.pi/2
+    blank.location = _mm((23.25,6.7,2.91))
+    j = _move(P,"blank_up","loc",(0,3),pivot=(23.25,6.7,2.91),axis=(0,0,1))
+    _adopt(j,blank)
+    # Make：两支柱在切向搭门，冲头与车的通行层分开。
+    for y in (-12.19,-7.81):
+        P.box(0,y,1.13,.32,7.,K.white,z=5.5,r=.16,bevel=.2)
+    bridge = P.box(0,-10,1.42,2.53,1.15,K.white,z=9.075,r=.21,bevel=.2)
+    _boolean(bridge,P.box(0,-10,1.05,1.05,2.3,K.white,z=9.10,r=0,bevel=0))
+    j = _move(P,"press","loc",(-2.5,0),pivot=(0,-10,9),axis=(0,0,1))
+    _adopt(j,P.box(0,-10,1,1,4,K.gold_satin,z=10.9,r=.16,bevel=.22))
+    # Test：仅复用 h06 外形，不递归加入其锁芯 rig。
+    lock = Part(K,"h03_test_shell","blue")
+    body, bow = _lock_case(lock,False)
+    lock.root.parent = P.root
+    lock.root.scale=(.25,)*3
+    lock.root.location=_mm((-15.5,0,3.23))
+    test_lamp = _move(P,"test_lamp","material",(0,0))
+    _adopt(test_lamp,P.ball(-15.5,0,6.95,.41,K.white,seg=16))
+    P.ball(-15.5,0,6.95,.6,K.clear0,seg=20)
+    j = _move(P,"test_push","loc",(0,1.5),pivot=(-17.9,0,4.6),axis=(-1,0,0))
+    _adopt(j,_cyl(P,(-17.87,0,4.6),(-1,0,0),.35,1.05,K.blue_hi,.07))
+    # Tweak：可动锉，实模浅斜槽。
+    j = _move(P,"file","loc",(-1.5,1.5),pivot=(0,7.88,4.3),axis=(1,0,0))
+    fl = P.box(0,7.88,3,.4,.4,K.gold_satin,z=4.3,r=.18,bevel=.2)
+    for x in (-2.4,-1.6,-.8,0,.8,1.6,2.4):
+        c = _local_box(P,(x,7.88,4.51),(.8,.6,0),(-.6,.8,0),.085,.50,.20,K.white,0)
+        _boolean(fl,c)
+    _adopt(j,fl)
+    for i,(x,y) in enumerate(((9,-3.5),(-9,-3.5),(-9,3.5),(9,3.5))):
+        _tray(P,i,x,y)
     return P.done()
