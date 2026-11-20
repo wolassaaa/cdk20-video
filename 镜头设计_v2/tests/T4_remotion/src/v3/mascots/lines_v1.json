@@ -1,0 +1,78 @@
+{
+ "voices": {
+  "Claude": {
+   "voice": "en-US-EmmaNeural",
+   "rate": "+4%",
+   "pitch": "+2Hz"
+  },
+  "GPT": {
+   "voice": "en-US-AnaNeural",
+   "rate": "+22%",
+   "pitch": "+0Hz"
+  },
+  "DeepSeek": {
+   "voice": "en-GB-MaisieNeural",
+   "rate": "+6%",
+   "pitch": "-4Hz"
+  }
+ },
+ "lines": [
+  {
+   "id": "c1",
+   "who": "Claude",
+   "text": "Hi, I'm Claude! Here's what AI can really do in drug discovery right now.",
+   "card": 0
+  },
+  {
+   "id": "g1",
+   "who": "GPT",
+   "text": "I'm GPT. AlphaFold 3, in 2024, predicts how proteins fit with small molecules.",
+   "card": 1
+  },
+  {
+   "id": "d1",
+   "who": "DeepSeek",
+   "text": "I'm DeepSeek. In 2024, the Chemistry Nobel honoured protein structure prediction and design.",
+   "card": 2
+  },
+  {
+   "id": "c2",
+   "who": "Claude",
+   "text": "In 2025, rentosertib, designed with generative AI, reported phase 2a results in seventy-one patients.",
+   "card": 3
+  },
+  {
+   "id": "g2",
+   "who": "GPT",
+   "text": "Claude, you always add the warning label.",
+   "card": 3,
+   "wink": "GPT"
+  },
+  {
+   "id": "c3",
+   "who": "Claude",
+   "text": "Somebody has to.",
+   "card": 3,
+   "wink": "Claude"
+  },
+  {
+   "id": "d2",
+   "who": "DeepSeek",
+   "text": "In September, the FDA approved lirafugratinib, a bile duct cancer drug from a platform mixing computing with lab work.",
+   "card": 4
+  },
+  {
+   "id": "c4",
+   "who": "Claude",
+   "text": "But scientists still choose, make and test every molecule.",
+   "card": 5
+  },
+  {
+   "id": "g3",
+   "who": "GPT",
+   "text": "Experiments still decide!",
+   "card": 5,
+   "wink": "GPT"
+  }
+ ]
+}

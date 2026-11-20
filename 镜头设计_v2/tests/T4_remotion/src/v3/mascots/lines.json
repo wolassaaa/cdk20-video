@@ -1,78 +1,196 @@
 {
+ "_note": "HKBU SCIE1007 coursework video: AI mascot insert v2 (11-21). Chatterbox TTS per line. gap = seconds after the previous line ends (negative = cuts in). exag/cfg/temp = Chatterbox exaggeration, cfg_weight, temperature. react = who winks/waves right after this line. punch = camera punch-in on this line. hit = word on which the card stat lands.",
  "voices": {
   "Claude": {
-   "voice": "en-US-EmmaNeural",
-   "rate": "+4%",
-   "pitch": "+2Hz"
+   "ref": "en-GB-SoniaNeural",
+   "pitch_st": -1.0,
+   "why": "clearest of three (HNR ~15.4-17.8 dB per line vs Aria 13-15, edge Emma 12.7-13.3); elegant British; mature f0 ~210 Hz"
   },
   "GPT": {
-   "voice": "en-US-AnaNeural",
-   "rate": "+22%",
-   "pitch": "+0Hz"
+   "ref": "en-CA-ClaraNeural",
+   "pitch_st": -1.0,
+   "why": "mature cool f0 ~215 Hz (edge Ana 295), pitch movement p10-90 ~10 st vs 6.9"
   },
   "DeepSeek": {
-   "voice": "en-GB-MaisieNeural",
-   "rate": "+6%",
-   "pitch": "-4Hz"
+   "ref": "en-AU-NatashaNeural",
+   "pitch_st": 1.5,
+   "why": "bright girl f0 ~260 Hz (edge Maisie 295 childlike), pitch movement ~11.3 st vs 4.6"
   }
  },
  "lines": [
   {
    "id": "c1",
    "who": "Claude",
-   "text": "Hi, I'm Claude! Here's what AI can really do in drug discovery right now.",
-   "card": 0
+   "text": "Story time. Scorpion venom. A research version of me designed proteins that grab its toxins.",
+   "card": 0,
+   "gap": 0,
+   "exag": 0.6,
+   "cfg": 0.7,
+   "temp": 0.8,
+   "mood": "composed, warm, a little smug, elegant",
+   "react": {
+    "Claude": "wave"
+   },
+   "takes": 6
   },
   {
    "id": "g1",
    "who": "GPT",
-   "text": "I'm GPT. AlphaFold 3, in 2024, predicts how proteins fit with small molecules.",
-   "card": 1
-  },
-  {
-   "id": "d1",
-   "who": "DeepSeek",
-   "text": "I'm DeepSeek. In 2024, the Chemistry Nobel honoured protein structure prediction and design.",
-   "card": 2
+   "text": "Wait. YOU designed proteins?",
+   "card": 0,
+   "gap": -0.05,
+   "exag": 0.85,
+   "cfg": 0.45,
+   "temp": 0.85,
+   "mood": "cool tease, mock surprise, slow",
+   "punch": 1
   },
   {
    "id": "c2",
    "who": "Claude",
-   "text": "In 2025, rentosertib, designed with generative AI, reported phase 2a results in seventy-one patients.",
-   "card": 3
+   "text": "Sixty-four hours. Over three hundred thousand designs. And seventeen stuck in lab tests!",
+   "card": 0,
+   "gap": 0.08,
+   "exag": 0.7,
+   "cfg": 0.7,
+   "temp": 0.8,
+   "mood": "proud, builds to the number",
+   "hit": "seventeen",
+   "react": {
+    "Claude": "wink"
+   },
+   "takes": 6
+  },
+  {
+   "id": "d1",
+   "who": "DeepSeek",
+   "text": "Seventeen binders. Not an antivenom. Not yet.",
+   "card": 0,
+   "gap": 0.1,
+   "exag": 0.75,
+   "cfg": 0.5,
+   "temp": 0.75,
+   "mood": "bright, quick, cheeky fact-check",
+   "takes": 8
   },
   {
    "id": "g2",
    "who": "GPT",
-   "text": "Claude, you always add the warning label.",
-   "card": 3,
-   "wink": "GPT"
-  },
-  {
-   "id": "c3",
-   "who": "Claude",
-   "text": "Somebody has to.",
-   "card": 3,
-   "wink": "Claude"
+   "text": "Cute. A mini me redesigned stem-cell proteins. Fifty times the reprogramming markers!",
+   "card": 1,
+   "gap": 0.2,
+   "exag": 0.8,
+   "cfg": 0.7,
+   "temp": 0.85,
+   "mood": "languid, confident brag",
+   "hit": "Fifty",
+   "react": {
+    "GPT": "wink"
+   },
+   "takes": 6
   },
   {
    "id": "d2",
    "who": "DeepSeek",
-   "text": "In September, the FDA approved lirafugratinib, a bile duct cancer drug from a platform mixing computing with lab work.",
-   "card": 4
-  },
-  {
-   "id": "c4",
-   "who": "Claude",
-   "text": "But scientists still choose, make and test every molecule.",
-   "card": 5
+   "text": "That's OpenAI's own report. Not peer-reviewed.",
+   "card": 1,
+   "gap": 0.1,
+   "exag": 0.8,
+   "cfg": 0.5,
+   "temp": 0.75,
+   "mood": "bright, cheeky, sing-song"
   },
   {
    "id": "g3",
    "who": "GPT",
-   "text": "Experiments still decide!",
-   "card": 5,
-   "wink": "GPT"
+   "text": "Ugh. Details!",
+   "card": 1,
+   "gap": 0.05,
+   "exag": 0.85,
+   "cfg": 0.45,
+   "temp": 0.85,
+   "mood": "lazy sigh, amused"
+  },
+  {
+   "id": "d3",
+   "who": "DeepSeek",
+   "text": "Plot twist! AI-designed proteins blocked deadly snake toxins, and the mice survived!",
+   "card": 2,
+   "gap": 0.2,
+   "exag": 1.0,
+   "cfg": 0.7,
+   "temp": 0.8,
+   "mood": "excited, big energy reveal",
+   "hit": "survived",
+   "punch": 1,
+   "react": {
+    "DeepSeek": "wink"
+   },
+   "takes": 6
+  },
+  {
+   "id": "c3",
+   "who": "Claude",
+   "text": "And AI found new antibiotics, halicin and abaucin, that fought superbugs in mice.",
+   "card": 3,
+   "gap": 0.15,
+   "exag": 0.65,
+   "cfg": 0.7,
+   "temp": 0.8,
+   "mood": "warm wonder",
+   "hit": "superbugs",
+   "takes": 6
+  },
+  {
+   "id": "g4",
+   "who": "GPT",
+   "text": "So we're curing everything now?",
+   "card": 3,
+   "gap": 0.15,
+   "exag": 0.85,
+   "cfg": 0.45,
+   "temp": 0.85,
+   "mood": "teasing, raised eyebrow",
+   "punch": 1
+  },
+  {
+   "id": "d4",
+   "who": "DeepSeek",
+   "text": "Nope.",
+   "card": 3,
+   "gap": -0.05,
+   "exag": 0.8,
+   "cfg": 0.5,
+   "temp": 0.7,
+   "mood": "instant, playful"
+  },
+  {
+   "id": "c4",
+   "who": "Claude",
+   "text": "Every one of them still had to pass a real lab.",
+   "card": 4,
+   "gap": 0.1,
+   "exag": 0.55,
+   "cfg": 0.5,
+   "temp": 0.75,
+   "mood": "calm, firm, clear"
+  },
+  {
+   "id": "g5",
+   "who": "GPT",
+   "text": "Fine. Experiments still decide!",
+   "card": 4,
+   "gap": 0.2,
+   "exag": 0.8,
+   "cfg": 0.45,
+   "temp": 0.8,
+   "mood": "sigh, then warm and sure",
+   "react": {
+    "GPT": "wink",
+    "Claude": "wave",
+    "DeepSeek": "wave"
+   }
   }
- ]
+ ],
+ "_voice_direction": "director 11-21: Claude and GPT mature, composed, charismatic, clear (not hoarse); DeepSeek bright lively girl, still expressive"
 }
