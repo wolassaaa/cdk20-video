@@ -36,9 +36,10 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 MAPD = HERE.parent / "映射"
 RM = ROOT / "镜头设计_v2/tests/T4_remotion/src/v3/manual"
-WORK = Path("G:/cdk20/work/oncam")
+WORK_ROOT = Path(os.environ.get("CDK20_WORK", "G:/cdk20/work"))   # 11-20 晚：帧、缓存一律写 G（D 是系统盘，大量写入会卡）；D:/cdk20_work 是指向这里的目录联接
+WORK = WORK_ROOT / "oncam"
 FF = str(Path(__file__).resolve().parents[2] / "_env/ffmpeg/ffmpeg.exe")   # TouchDesigner 带的 ffmpeg 没有 h264_nvenc，用项目里的
-BOARD = "G:/cdk20/work/kit/board_final.blend"
+BOARD = str(WORK_ROOT / "kit/board_final.blend")
 QUEUE = (ROOT / "_env" / "queue", Path.home() / "cdk20_guard")
 sys.path.insert(0, str(HERE))
 sys.path.insert(0, str(MAPD))
@@ -86,10 +87,10 @@ def world_to_px(p):
 
 
 SEGS = {
-    "3-01": dict(person="G:/cdk20/work/pub_slim/3-01/person_3-01", n=373, off=8,
-                 wav="G:/cdk20/work/pub_slim/3-01/3-01.wav", oncam=RM / "oncam_3-01.json",
-                 keys=MAPD / "keys/3-01.json", recipe="lock_key", who="D",
-                 head="T5", tail="T1", fade_in=(0, 14),
+    "3-01": dict(person=str(WORK_ROOT / "pub_slim/3-01/person_3-01"), n=373, off=8,
+                 wav=str(WORK_ROOT / "pub_slim/3-01/3-01.wav"), oncam=RM / "oncam_3-01.json",
+                 keys=MAPD / "keys/3-01.json", recipe="lock_key_v2", who="D",
+                 head="lock", tail="lock", fade_in=None, version=2,
                  out=ROOT / "导演检查_20261120/10_出镜3D样片_3-01.mp4"),
 }
 
@@ -1244,7 +1245,610 @@ def recipe_lock_key(W):
                           poses=dict(hang=[140, 8, 1555, 455, 1.57], pick=[65, 10, 1565, 470, 1.42], show=[-50, 14, 1575, 480, 1.40])))
 
 
-RECIPES = {"lock_key": recipe_lock_key}
+# ================================================================ 3-01 重做（11-20 下午，深化/10_出镜3-01_重做.md）
+# 锁自己当段首段尾转场（相机不推，人永远原像素）；锁在人前的帧另渲一层透明通道（front）把人挡住。
+V2 = dict(
+    LOCK_PX=(1505.0, 470.0), LOCK_D=1.45,       # 落位：出片像素中心、深度（米）
+    LOCK_H_PX=392.0,                             # 锁连锁梁的投影高（F1 ≥ 380）
+    REST1=(-58.0, 9.0), REST2=(-70.0, 12.0), PIC=(-84.0, 12.0), PINS=(-92.0, 10.0),   # (yaw, tilt) 度
+    TAIL_D=0.05,                                 # 段尾销子中心离镜头（米）；段首锁孔离镜头 HEAD_D_KH
+    HEAD_D_KH=0.17, HEAD_CTRL=(2350.0, 330.0, 0.95), TAIL_CTRL=(1880.0, 420.0, 0.80), TAIL_PX=(260.0, 560.0),
+    BOARD_K=1.27, BOARD_HIDE=("stations", "zone_tags", "z1_c0_r0"),                                # 大板再放大（铺满画面）
+    HEAD_BOX=(300, 90, 820, 680), LOCK_BOX=(1230, 60, 1940, 960),   # 这两块里的大板零件拿掉（出片像素）
+    KEY_YAW=-12.0, KEY_HAND=(1250.0, 770.0), KEY_START=(1150.0, 935.0),   # 钥匙平面基本正对镜头（齿形看得见）；柄在 D 右手指尖右上
+    RIM_W=60.0, SAMPLES=16,          # 11-20 导演：1080p60 一律 16 采样 + OptiX 降噪，之后统一 GPU 放大到 4K
+)
+
+
+def board_fill(board):
+    """大板铺满画面：在 board_setup 的基础上再放大 BOARD_K，左上角挪到画外（留微动和焦外余量）。
+    D 头后面、锁后面的零件格藏掉，只留料杆网格（10_ 文档第一节第 13、14、16 条）。"""
+    xf = bpy.data.objects["ONCAM_board_xf"]
+    k = V2["BOARD_K"]
+    xf.scale = tuple(s * k for s in xf.scale)
+    bpy.context.view_layer.update()
+    lo, hi = mesh_bounds([board])
+    yb = lo.y
+    xf.location.x += px_to_world(-120, 0, yb)[0] - lo.x
+    xf.location.z += px_to_world(0, -80, yb)[2] - hi.z
+    bpy.context.view_layer.update()
+    lo, hi = mesh_bounds([board])
+    edges = dict(left=world_to_px((lo.x, lo.y, 0))[0], right=world_to_px((hi.x, lo.y, 0))[0],
+                 top=world_to_px((0, lo.y, hi.z))[1], bottom=world_to_px((0, lo.y, lo.z))[1])
+    hidden = []
+    for nm in V2["BOARD_HIDE"]:
+        o = bpy.data.objects.get(nm)
+        if o is not None:
+            for m in [o] + list(o.children_recursive):
+                m.hide_render = True
+            hidden.append(nm)
+
+    def hit(b, B):
+        return not (b[2] < B[0] or b[0] > B[2] or b[3] < B[1] or b[1] > B[3])
+    for o in board.children:
+        if not (o.name.startswith("z") and "_c" in o.name and "_r" in o.name) or o.name in hidden:
+            continue
+        l, h = mesh_bounds([o])
+        ps = [world_to_px((x, l.y, z)) for x in (l.x, h.x) for z in (l.z, h.z)]
+        b = (min(p[0] for p in ps), min(p[1] for p in ps), max(p[0] for p in ps), max(p[1] for p in ps))
+        if hit(b, V2["HEAD_BOX"]) or hit(b, V2["LOCK_BOX"]):
+            for m in [o] + list(o.children_recursive):
+                m.hide_render = True
+            hidden.append(o.name)
+    return dict(edges=edges, hidden=hidden)
+
+
+def make_cover(K):
+    """剖开那一块外壳：用不剖版的锁，和剖开版同样的刀具做 INTERSECT，得到被剖掉的几块（外壳、外套、口环、轴承、锁芯）。
+    两把锁都在原点搭，坐标就是锁自己的坐标。返回 (cover 空物体, 烘好的网格列表)。"""
+    import kit_deep as D
+    import kit_deep_r2 as R
+    import kit_deep_r3 as M3
+    B = M3.h06_pin_lock(K, cut=False)
+    D.rest(B)
+    Pt = D.Part(K, "h06_cover_tools", "blue")
+
+    def quad(y0, y1, edge=0.0):
+        return R._box(Pt, "q", (10 + edge, (y0 + y1) / 2, 9.45), 10, (y1 - y0) / 2, 20, K.blue, 0, 0)
+    bpy.context.view_layer.update()
+    kids = list(B.children_recursive)
+
+    def find(key):
+        return [o for o in kids if o.type == "MESH" and key in o.name and not o.hide_render]
+
+    def front_bearing(o):
+        ys = [(o.matrix_world @ Vector(c)).y for c in o.bound_box]
+        return min(ys) < -0.006
+    pick = [(o, quad(-9, .88)) for o in find("inset_housing")]
+    pick += [(o, quad(-9, -.36)) for o in find("sleeve_9p10")]
+    pick += [(o, quad(-9, -6)) for o in find("front_bevel_ring")]
+    pick += [(o, quad(-9, -6)) for o in find("sleeve_centering_bearing") if front_bearing(o)]
+    pick += [(o, quad(-7.62, -1.72, .016)) for o in find("turning_core")]
+    cover = link_obj(bpy.data.objects.new("lock_cover", None))
+    made = []
+    for o, cut in pick:
+        cut.hide_render = cut.hide_viewport = True
+        mod = o.modifiers.new("cover_int", "BOOLEAN")
+        mod.object, mod.operation, mod.solver = cut, "INTERSECT", "EXACT"
+        o.modifiers.move(len(o.modifiers) - 1, 0)
+        bpy.context.view_layer.update()
+        dg = bpy.context.evaluated_depsgraph_get()
+        me = bpy.data.meshes.new_from_object(o.evaluated_get(dg))
+        if len(me.vertices) == 0:
+            continue
+        n = link_obj(bpy.data.objects.new("lock_cover_" + o.name.split("__")[-1], me))
+        n.parent = cover
+        n.matrix_parent_inverse = Matrix.Identity(4)
+        n.matrix_world = o.matrix_world.copy()
+        made.append(n)
+    for o in [B] + kids + [Pt.root] + list(Pt.root.children_recursive):
+        try:
+            bpy.data.objects.remove(o, do_unlink=True)
+        except (ReferenceError, RuntimeError):
+            pass
+    return cover, made
+
+
+def recipe_lock_key_v2(W):
+    """3-01 重做（10_出镜3-01_重做.md 第二节逐拍）。事件 id 见 events/3-01.json（11-20 重写）：
+      arrive  Okay     锁从镜头前退回人右侧落位（段首 T5：锁盖满画面那一帧是切点）
+      turn    this     锁转 12°、抬头，把锁孔那面亮给观众
+      call    picture  焦点点名（g_start→g_on）、预颤 6 帧、浮起靠前转出右侧
+      reveal  lock     剖口那块外壳弹开、旋转着飞出画，五根销被震一下
+      key     a        金钥匙从 D 右手后面升起（手在前），A7 弹出
+      slide   key      钥匙飞到锁孔前、转正、滑进去，销被顶齐（f_land 落到底）
+      open    （说完）  锁芯转 32°、锁梁弹起
+      dive    （说完）  锁带钥匙冲向镜头，剖口朝镜头（段尾 T1，相机不动）"""
+    import kit_deep as D
+    import kit_deep_r3 as M3
+    import kit_parts as KP
+    sc, K, cfg = W["sc"], W["kit"], W["cfg"]
+    nf = cfg["nf"]
+    E = {e["id"]: e for e in cfg["K"]["events"]}
+    cell = bpy.data.objects.get("z3_c4_r2")
+    if cell is not None:
+        for m in [KP.part_of(cell)] + list(KP.part_of(cell).children_recursive):
+            m.hide_render = True
+    print("ONCAM step r0", flush=True)
+    lock = M3.h06_pin_lock(K)
+    print("ONCAM step r1 lock built", flush=True)
+    D.rest(lock)
+    bpy.context.view_layer.update()
+    lo, hi = mesh_bounds([lock])
+    c0 = (lo + hi) / 2
+    cover, cover_parts = None, []       # 不再做"飞出去的外壳块"：剖开那一角被锁销、外套前后夹住，整体怎么拔都穿模（11-20 BVH 逐方向实测），改成剖切面从上往下扫开
+    def _ext(o, i):
+        return (max(c[i] for c in o.bound_box) - min(c[i] for c in o.bound_box)) * abs(o.scale[i])
+    # kit_deep 的 _boolean 会把刀具改名成 "<零件>_cut.nnn"，按名字找不到；剖切象限刀具是 20 × ? × 20 mm 的盒子（kit_deep_r3.quadrant，右上象限）
+    # 模型小毛病：最前一根销的座孔（r .701，y -7.35）和上导套（r .76）顶破锁正面（y -8.0），整锁时正面露出一条白缝（11-20 test f20）。
+    # 座孔刀具径向缩到 .61（销 r .586 仍有间隙；.64 时正面只剩 0.01 mm，EXACT 布尔在某些位姿下直接崩，11-20 实测），最前导套（名字是 _4xx）往里挪 0.12 mm；都在锁壳里面，剖开后看不出。
+    for o in lock.children_recursive:
+        for m in getattr(o, "modifiers", []):
+            c = m.object if m.type == "BOOLEAN" else None
+            if c is not None and "inset_housing" in o.name and abs(c.location.y + 7.35 * MM) < 0.05 * MM and abs(c.location.x) < 0.05 * MM:
+                c.scale.x *= 0.61 / 0.701
+                c.scale.y *= 0.61 / 0.701
+        if o.type == "MESH" and "upper_fixed_guide_" in o.name and min(c[1] for c in o.bound_box) + o.location.y < -8.0 * MM:
+            o.location.y += 0.12 * MM          # 最前那根（销 4，y -7.35）
+    cutters = list({m.object for o in lock.children_recursive for m in getattr(o, "modifiers", [])
+                    if m.type == "BOOLEAN" and m.operation == "DIFFERENCE" and m.object is not None
+                    and abs(_ext(m.object, 0) - 20 * MM) < 0.3 * MM and abs(_ext(m.object, 2) - 20 * MM) < 0.3 * MM})
+    assert len(cutters) >= 4, f"剖切刀具只找到 {len(cutters)} 个"
+    print("ONCAM step r2 cutters", flush=True)
+    bpy.context.view_layer.update()
+    SLv = V2["LOCK_H_PX"] * V2["LOCK_D"] / (F_PX * (hi.z - lo.z)) * 0.86   # 0.86：3/4 角度和锁梁让投影比竖直高度高，F1 由 check 实测
+    print("ONCAM step r3", flush=True)
+    j = D.rig(lock)
+    print("ONCAM step r4 rig", flush=True)
+    lock.rotation_mode = "XYZ"
+
+    def Rq(yaw, tilt, roll=0.0):
+        return (Matrix.Rotation(math.radians(tilt), 4, "X") @ Matrix.Rotation(math.radians(roll), 4, "Y") @ Matrix.Rotation(math.radians(yaw), 4, "Z")).to_quaternion()
+
+    def M_of(center, q):
+        R4 = q.to_matrix().to_4x4()
+        return Matrix.Translation(center - R4 @ (c0 * SLv)) @ R4 @ Matrix.Diagonal((SLv, SLv, SLv, 1))
+
+    def qpow(qa, qb, p):
+        dq = qa.rotation_difference(qb)
+        ax, ang = dq.to_axis_angle()
+        return Quaternion(ax, ang * p) @ qa
+
+    def bez(a, b, c, t):
+        return a * (1 - t) ** 2 + b * 2 * (1 - t) * t + c * t * t
+
+    P_rest = Vector(px_to_world(*V2["LOCK_PX"], V2["LOCK_D"]))
+    e_a, e_t, e_c, e_r = E["arrive"], E["turn"], E["call"], E["reveal"]
+    e_k, e_s, e_o, e_d = E["key"], E["slide"], E["open"], E["dive"]
+    f_ok, f_ok_end = e_a["f_land"], e_a["f_end"]
+    q_head = Rq(0.0, 4.0)                                      # 段首：锁孔正对镜头、在画面正中，离镜头 HEAD_D_KH（锁体盖满画面）
+    kh = Vector((0.0, -8.0, -0.55)) * MM
+    P_head = Vector(px_to_world(1010, 540, V2["HEAD_D_KH"])) - q_head.to_matrix() @ ((kh - c0) * SLv)
+    P_ctrl = Vector(px_to_world(*V2["HEAD_CTRL"]))
+    q_r1, q_r2, q_pic, q_pins = Rq(*V2["REST1"]), Rq(*V2["REST2"]), Rq(*V2["PIC"]), Rq(*V2["PINS"])
+    P_pic_d = Vector((-0.06, -0.04, 0.05))     # 点名时靠前、抬高，同时往左让：转出 3/4 侧面后锁变宽，不让右沿出画（M3，11-20 实测 2006 px）
+
+    def bez_at_depth(A, C, B, y):
+        """二次贝塞尔上深度（相机看 +Y，深度 = y）等于 y 的那一点（深度沿曲线单调，二分）。"""
+        lo_, hi_ = 0.0, 1.0
+        inc = B.y > A.y
+        for _ in range(40):
+            m = (lo_ + hi_) / 2
+            if (bez(A, C, B, m).y < y) == inc:
+                lo_ = m
+            else:
+                hi_ = m
+        return bez(A, C, B, (lo_ + hi_) / 2)
+
+    def log_depth(y0, y1, e):
+        """深度按对数插值：贴镜头时屏幕大小每帧按同一比例变，盖满画面那几帧不会一下子黑掉（11-20 实测段尾相邻帧亮度跳 60）。"""
+        return math.exp(math.log(y0) + (math.log(y1) - math.log(y0)) * e)
+
+    def hover(f):
+        b = smooth((f - 30) / 40)
+        return Vector((0.0, 0.0, 0.0055 * math.sin(2 * math.pi * f / 230) * b)), 1.4 * math.sin(2 * math.pi * f / 310 + 0.6) * b
+
+    def base_pose(f):
+        if f <= f_ok:
+            t = f / max(1, f_ok)
+            p = ease_out_back(t, 0.9)
+            c = bez_at_depth(P_head, P_ctrl, P_rest, log_depth(P_head.y, P_rest.y, ease_out_cubic(t)))
+            q = qpow(q_head, q_r1, smooth(t) * 0.35 + p * 0.65)
+        else:
+            s = (f - f_ok) / FPS                               # 落位后回弹两下
+            c = P_rest + Vector((0.004, 0.006, -0.008)) * spring(s, 0.45, 20.0) * (1 - clamp01((f - f_ok) / max(1, f_ok_end + 12 - f_ok)))
+            q = q_r1.copy()
+        u = ease_inout_cubic((f - e_t["f_start"]) / max(1, e_t["f_land"] - e_t["f_start"]))
+        if u > 0 and f > f_ok:
+            q = qpow(q, q_r2, u)
+        fl = e_c["f_land"]
+        if fl - 6 <= f < fl:                                   # 预颤：往下沉 3 mm
+            c = c + Vector((0, 0, -0.003 * math.sin(math.pi * (f - fl + 6) / 6) ** 2))
+        p = ease_out_back((f - fl) / 18.0, 1.2) if f >= fl else 0.0
+        if p > 0:
+            c = c + P_pic_d * p
+            q = qpow(q, q_pic, p)
+        fr = e_r["f_land"]
+        if f >= fr:                                            # 外壳弹开：锁本体反冲；之后慢慢转，让销子正对观众
+            rec = -0.6 * math.exp(-(f - fr) / 5.0) * math.sin(math.pi * min(1.0, (f - fr) / 8.0))
+            c = c + q.to_matrix() @ Vector((rec * MM * SLv, 0, 0))
+            q = qpow(q, q_pins, ease_inout_cubic((f - (fr + 20)) / 50.0))
+        fo = e_o["f_start"] + 4                                # 锁梁弹起：锁本体被顶一下（T7 落位冲击，相机不震，人不动）
+        if f >= fo:
+            c = c + Vector((0, 0, -0.004)) * math.exp(-(f - fo) / 4.0) * math.sin(math.pi * min(1.0, (f - fo) / 4.0))
+        ho, hy = hover(f)
+        return c + ho, Quaternion((0, 0, 1), math.radians(hy)) @ q
+
+    f_d0, f_d1 = e_d["f_start"], nf - 1
+    pins_mid = Vector((1.8, -4.75, 2.6)) * MM
+    q_tail = Rq(-90.0, 6.0)
+    tgt_tail = Vector(px_to_world(*V2["TAIL_PX"], V2["TAIL_D"]))
+    c1_tail = tgt_tail - q_tail.to_matrix() @ ((pins_mid - c0) * SLv)
+
+    def pose(f):
+        c, q = base_pose(f)
+        if f > f_d0:
+            t = (f - f_d0) / (f_d1 - f_d0)
+            ctrl = Vector(px_to_world(*V2["TAIL_CTRL"]))
+            c = bez_at_depth(c, ctrl, c1_tail, log_depth(c.y, c1_tail.y, smooth(t) * 0.7 + 0.3 * ease_in_cubic(t)))
+            q = qpow(q, q_tail, smooth(t))
+        return c, q
+
+    LM = []
+    for f in range(nf):
+        c, q = pose(f)
+        LM.append(M_of(c, q))
+        key_matrix(lock, f, LM[f])
+    # ---- 剖开：五个剖切刀具（外壳、外套、口环、轴承、锁芯）一起从锁顶上方往下扫到位，"lock" 这个词说出时扫过一半，
+    #      剖面从销子开始露、扫到锁芯为止（刀具本来就是布尔，动它就是动剖面；没有任何零件移动，不可能穿模）
+    fr = e_r["f_land"]
+    SW0, SW1, DZ = fr - 6, fr + 10, 26.0
+    for o in cutters:
+        z0 = o.location.z
+        for f in sorted({0, SW0, *range(SW0, SW1 + 1), SW1, nf - 1}):
+            o.location.z = z0 + DZ * MM * (1.0 - smooth((f - SW0) / (SW1 - SW0)))
+            o.keyframe_insert("location", index=2, frame=f)
+        o.location.z = z0
+        linear_keys(o)
+    f_hide = SW1
+    info_cutters = sorted(o.name for o in cutters)
+    # ---- 钥匙：挂在锁下面（父子），锁芯转时跟着转（插入几何沿用旧版）
+    print("ONCAM step r5 lock anim", flush=True)
+    key = D.h02_key(K, which="048", scale=1.3)
+    print("ONCAM step r6 key", flush=True)
+    key.parent = lock
+    key.matrix_parent_inverse = Matrix.Identity(4)
+    key.rotation_mode = "QUATERNION"
+    Wv, Uv, Vv = Vector((0, -1, 0)), Vector((0, 0, 1)), Vector((1, 0, 0))
+    origin = Vector((0, -1.5, -0.55))
+    rot3 = Matrix((-Wv, -Uv, -Vv)).transposed()
+    koff = float(key["insertion_offset_u_mm"])
+    Kin = Matrix.Translation(((origin + koff * Uv) - rot3 @ Vector((6.5 * 1.3, 0, 0))) * MM) @ rot3.to_4x4() @ Matrix.Diagonal((1.3, 1.3, 1.3, 1))
+    pivot = origin * MM
+
+    def Rplug(deg):
+        return Matrix.Translation(pivot) @ Matrix.Rotation(math.radians(deg), 4, Wv) @ Matrix.Translation(-pivot)
+
+    def Kt(w, du=0.0, dv=0.0, s=1.0):
+        return Matrix.Translation((w * Wv + du * Uv + dv * Vv) * MM) @ Kin @ Matrix.Diagonal((s, s, s, 1))
+
+    tip_local = Vector((6.5 * MM, 0, 0))
+    bow_local = Vector((-3.5 * MM, 0, 0))
+    f_k0, f_k1 = e_k["f_start"], e_k["f_land"]
+    f_a0, f_a1 = e_k["f_land"], e_s["f_start"]
+    f_i0, f_i1 = e_s["f_start"], e_s["f_land"]
+    f_t0, f_t1 = e_o["f_start"], e_o["f_land"]
+    KEYY = V2["KEY_YAW"]
+
+    def kmat(w, du, dv, s, yaw, deg=0.0):
+        Mk = Rplug(deg) @ Kt(w, du, dv, s)
+        tl = Mk @ tip_local
+        return Matrix.Translation(tl) @ Matrix.Rotation(math.radians(yaw), 4, Uv) @ Matrix.Translation(-tl) @ Mk
+
+    def solve(fr_, tgt, w, du0, dv0, s=1.0, yaw=0.0):
+        """钥匙柄中心落在出片 tgt：解 du、dv（锁坐标，mm）。"""
+        Mc = cam_matrix_micro(fr_)
+        du_, dv_ = du0, dv0
+        for _ in range(40):
+            def scr(du, dv):
+                x, y, _z = project(Mc, SHIFT, LM[fr_] @ (kmat(w, du, dv, s, yaw) @ bow_local))
+                return x, y
+            x0, y0 = scr(du_, dv_)
+            xa, ya = scr(du_ + 0.1, dv_)
+            xb, yb = scr(du_, dv_ + 0.1)
+            J = Matrix(((xa - x0, xb - x0), (ya - y0, yb - y0))) * 10
+            try:
+                d = J.inverted() @ Vector((tgt[0] - x0, tgt[1] - y0))
+            except ValueError:
+                break
+            if d.length > 20.0:                       # 阻尼：一步最多走 20 mm（不阻尼时换个锁位姿就发散成 NaN，Blender 求值布尔直接崩，11-20 实测）
+                d = d * (20.0 / d.length)
+            du_, dv_ = du_ + d.x, dv_ + d.y
+            if math.hypot(tgt[0] - x0, tgt[1] - y0) < 0.05:
+                break
+        assert math.isfinite(du_) and math.isfinite(dv_) and abs(du_) < 400 and abs(dv_) < 400, f"钥匙位置解不出来：{tgt} → du {du_} dv {dv_}"
+        return du_, dv_
+    W_HAND = 16.0
+    du_h, dv_h = solve(f_k1, V2["KEY_HAND"], W_HAND, -12.0, 0.0, 1.0, KEYY)
+    du_s, dv_s = solve(f_k0, V2["KEY_START"], W_HAND + 2.0, du_h, dv_h, 0.6, KEYY)
+
+    def key_state(f):
+        """(w, du, dv, scale, yaw, 锁芯角, 可见)"""
+        if f < f_k0:
+            return W_HAND + 2, du_s, dv_s, 0.6, KEYY, 0.0, False
+        if f < f_k1:
+            e = (f - f_k0) / max(1, f_k1 - f_k0)
+            eo = ease_out_cubic(e)
+            s = 0.6 + 0.4 * ease_out_back(e, 2.2)
+            return W_HAND + 2 * (1 - eo), du_s + (du_h - du_s) * eo, dv_s + (dv_h - dv_s) * eo, s, KEYY, 0.0, True
+        if f < f_a1:
+            e = ease_inout_cubic((f - f_a0) / max(1, f_a1 - f_a0))
+            arc = math.sin(math.pi * e) * 2.2
+            return W_HAND + (7.5 - W_HAND) * e, du_h * (1 - e) + arc, dv_h * (1 - e), 1.0, KEYY * (1 - e), 0.0, True
+        if f < f_i1:
+            e = ease_inout_cubic((f - f_i0) / max(1, f_i1 - f_i0))
+            return 7.5 * (1 - e), 0.0, 0.0, 1.0, 0.0, 0.0, True
+        return 0.0, 0.0, 0.0, 1.0, 0.0, 32.0 * pop_curve(f, f_t0, max(4, f_t1 - f_t0), 10), True
+
+    prof = list(key["tooth_profile_modelled"])
+    chain = [(6.5, -1.3)]
+    for i, h in enumerate(prof):
+        cc = 6.0 - i
+        chain += [(cc + 0.28, -1.3 + h), (cc - 0.28, -1.3 + h)]
+    chain += [(1.5, -1.3)]
+    chain = sorted(chain)
+
+    def surf(x):
+        if x > 6.5:
+            return koff + 1.3 * 1.3 - (x - 6.5) / 0.5 * 3.0 if x < 7.0 else -99
+        if x < 1.5:
+            return -99
+        for (xa, ya), (xb, yb) in zip(chain, chain[1:]):
+            if xa <= x <= xb:
+                t = 0 if xb == xa else (x - xa) / (xb - xa)
+                return koff + (-(ya + (yb - ya) * t)) * 1.3
+        return -99
+
+    def foot(i, w):
+        a = (0.5 + i) * 1.3
+        x = 6.5 - (a - w) / 1.3
+        return max(surf(x + dx) for dx in (-0.45, -0.3, -0.15, 0, 0.15, 0.3, 0.45))
+
+    rest_u = [foot(i, 0.0) for i in range(5)]
+    lifts_max = 0.0
+    hide_prev = None
+    f_sh = f_t0 + 4
+    cutters = {m.object for o in bpy.data.objects for m in getattr(o, "modifiers", []) if m.type == "BOOLEAN" and m.object}
+    key_show = [o for o in [key] + list(key.children_recursive) if not o.hide_render and o not in cutters]
+    print("ONCAM step r7 key loop", flush=True)
+    for f in range(nf):
+        w, du, dv, s, yaw, deg, vis = key_state(f)
+        key.matrix_basis = kmat(w, du, dv, s, yaw, deg)
+        key.keyframe_insert("location", frame=f)
+        key.keyframe_insert("rotation_quaternion", frame=f)
+        key.keyframe_insert("scale", frame=f)
+        if vis != hide_prev:
+            for o in key_show:                         # 只切本来就出像的（布尔刀具一直藏着：旧版的"白圆柱"就是钥匙孔刀具被打开了）
+                o.hide_render = not vis
+                o.keyframe_insert("hide_render", frame=f)
+            hide_prev = vis
+        inside = vis and du == 0.0 and dv == 0.0 and w <= 7.0
+        for i in range(5):
+            if inside:
+                lift = max(-PIN_DROP, foot(i, w) - rest_u[i])
+            elif f < fr + 2 + 2 * i:
+                lift = 0.0
+            else:                                              # 外壳弹开时销被震一下，落到没钥匙的位置
+                lift = -PIN_DROP * (1 - spring((f - fr - 2 - 2 * i) / FPS, 0.35, 26.0))
+            lifts_max = max(lifts_max, lift)
+            j[f"pin_{i}"].location.z = lift * MM
+            j[f"pin_{i}"].keyframe_insert("location", index=2, frame=f)
+        j["plug"].rotation_euler.x = math.radians(deg)
+        j["plug"].keyframe_insert("rotation_euler", index=0, frame=f)
+        j["shackle"].location.z = 3.6 * ease_out_back((f - f_sh) / 10) * MM if f >= f_sh else 0.0
+        j["shackle"].keyframe_insert("location", index=2, frame=f)
+    for o in [lock, key] + [j[f"pin_{i}"] for i in range(5)] + [j["plug"], j["shackle"]]:
+        linear_keys(o)
+    print("ONCAM step r8 lights", flush=True)
+    # ---- 零件集合：轮廓光只照它们；front 层只渲它们
+    hero_objs = [o for o in [lock] + list(lock.children_recursive) if o.type in ("MESH", "CURVE")]
+    hcol = bpy.data.collections.new("ONCAM_hero")
+    sc.collection.children.link(hcol)
+    for o in hero_objs:
+        hcol.objects.link(o)
+    for o in [lock] + list(lock.children_recursive):
+        o["hero"] = 1
+    s_c = P_rest
+    rim = make_light("hero_rim", "AREA", s_c + Vector((0.75, 0.85, 0.75)), s_c, 0.7, V2["RIM_W"], kelvin_rgb(6800))
+    rim.light_linking.receiver_collection = hcol
+    for fk, en in ((0, 0.6), (e_c.get("g_start", e_c["f_start"]), 0.6), (e_c["f_land"], 1.5), (e_c["f_land"] + 60, 1.0), (nf - 1, 1.0)):
+        rim.data.energy = V2["RIM_W"] * en
+        rim.data.keyframe_insert("energy", frame=fk)
+    col = kelvin_rgb(W["light"]["kelvin"])
+    refl_card("refl_softbox", s_c + Vector((-0.95, -0.75, 0.85)), s_c, (1.5, 1.0), col, 5.0)
+    refl_card("refl_strip", s_c + Vector((0.85, -0.35, 0.25)), s_c, (0.22, 1.3), kelvin_rgb(6500), 6.0)
+    refl_card("refl_camside", Vector((0.55, -0.55, 0.25)), s_c, (2.6, 1.8), col, 1.6)       # 相机这一侧的大柔光（朝镜头的金面、蓝面有东西可反射，不发黑）
+    refl_card("refl_behind", Vector((0.0, -0.30, 0.08)), Vector((0.0, 1.0, 0.0)), (3.2, 2.0), col, 6.0)   # 相机正后方：正对镜头的钥匙柄（金属）反射到它，不再是黑轮胎
+    refl_card("refl_left", Vector((-0.75, -0.20, 0.10)), s_c, (2.0, 2.0), col, 5.0)                       # 开锁时钥匙柄转向画面左边，反射落在这里（11-20 test f372 柄发黑）
+    for nm, z in (("refl_up", 0.95), ("refl_down", -0.75)):                                               # 锁芯转 32° 时柄面朝上/朝下翻：上下各一张，转到哪都有东西可反射
+        refl_card(nm, Vector((0.35, -0.30, z)), s_c, (2.4, 1.6), col, 4.0)
+    # 世界只在"镜面反射看到"时换成暖灰（相机看不到世界：大板挡满；漫反射照明不变）。金属件转到哪个角度都不会反射出一片死黑（11-20 test f372 钥匙柄）
+    wnt = sc.world.node_tree
+    wout = next(n for n in wnt.nodes if n.type == "OUTPUT_WORLD")
+    wsrc = wout.inputs["Surface"].links[0].from_socket
+    lp = wnt.nodes.new("ShaderNodeLightPath")
+    bg2 = wnt.nodes.new("ShaderNodeBackground")
+    bg2.inputs["Color"].default_value = (*col[:3], 1)
+    bg2.inputs["Strength"].default_value = 0.9
+    mx = wnt.nodes.new("ShaderNodeMixShader")
+    wnt.links.new(lp.outputs["Is Glossy Ray"], mx.inputs[0])
+    wnt.links.new(wsrc, mx.inputs[1])
+    wnt.links.new(bg2.outputs[0], mx.inputs[2])
+    wnt.links.new(mx.outputs[0], wout.inputs["Surface"])
+    hf = make_light("hero_fill", "AREA", s_c + Vector((0.95, -1.0, 0.15)), s_c, 1.1, V2["RIM_W"] * 0.9, kelvin_rgb(6000))
+    hf.light_linking.receiver_collection = hcol                                                # 只照零件：锁朝画面右边那一面不再死黑
+    print("ONCAM step r9 framekey", flush=True)
+    sc.frame_set(f_k1)
+    kp = key.matrix_world.translation.copy()
+    refl_card("refl_key", kp + Vector((-0.45, -0.55, 0.35)), kp, (0.9, 0.7), col, 4.0)
+
+    def lock_center(f):
+        return LM[max(0, min(nf - 1, int(f)))] @ c0
+
+    def pins_point(f):
+        return LM[max(0, min(nf - 1, int(f)))] @ pins_mid
+
+    key_pts = {}
+    print("ONCAM step r10 keypts", flush=True)
+    for f in range(f_k0 - 10, f_i0 + 14):
+        sc.frame_set(f)
+        key_pts[f] = key.matrix_world @ Vector((-1.0 * MM, 0, 0))
+    sc.frame_set(0)
+    hero_box = [Vector((x, y, z)) for x in (lo.x, hi.x) for y in (lo.y, hi.y) for z in (lo.z, hi.z)]
+
+    def bbox_pts(f):
+        return [LM[f] @ p for p in hero_box]
+
+    gs, gon = e_c.get("g_start", 158), e_c.get("g_on", 176)
+
+    def focus_plan(f, Mcam):
+        """焦点（米，沿视线）：段首跟锁拉回；等待时在锁前 0.10 m（略虚）；picture 前点名；钥匙亮出借焦点；段尾跟销子。"""
+        loc = Mcam.translation
+        fwd = (Mcam.to_3x3() @ Vector((0, 0, -1))).normalized()
+        p = lock_center(f)
+        if f > f_d0:
+            p = p.lerp(pins_point(f), smooth((f - f_d0) / 6.0))
+        d = (p - loc).dot(fwd)
+        d -= 0.10 * smooth((f - 24) / 14.0) * (1 - smooth((f - gs) / max(1, gon - gs)))
+        if f_k0 - 8 <= f <= f_i0 + 10:
+            u = smooth((f - (f_k0 - 8)) / 10.0) * smooth((f_i0 + 10 - f) / 10.0)
+            kp_ = key_pts.get(f, key_pts[min(key_pts)])
+            d = d * (1 - u) + (kp_ - loc).dot(fwd) * u
+        return max(0.03, d)
+
+    def fstop_plan(f):
+        a = 4.0 + (FSTOP - 4.0) * smooth(f / 30.0)
+        if f > f_d0:
+            a = a + (8.0 - a) * smooth((f - f_d0) / (nf - 1 - f_d0))
+        return a
+
+    def checks():
+        out = {}
+        kset = set([key] + list(key.children_recursive))
+        cset = set(cover_parts)
+        lock_objs = [o for o in _visible_meshes(lock, ignore_anim=True) if o not in kset and o not in cset]
+        rotor = set(_visible_meshes(j["plug"]))
+        pins_low = [o for o in rotor if "lower_pin" in o.name]
+        core = [o for o in rotor if o not in pins_low]
+        moving = set(rotor) | set(o for i in range(5) for o in _visible_meshes(j[f"pin_{i}"])) | set(_visible_meshes(j["shackle"]))
+        statics = [o for o in lock_objs if o not in moving]
+        hk, hc, hp, hcov = [], [], [], []
+        key_objs = _visible_meshes(key, ignore_anim=True)
+        for f in range(fr + 1, min(nf, f_hide)):
+            sc.frame_set(f)
+            a, b = _tree(cover_parts), _tree(lock_objs)
+            if a and b and a.overlap(b):
+                hcov.append(f)
+        for f in range(f_k1, nf):
+            sc.frame_set(f)
+            kt = _tree(key_objs)
+            if kt.overlap(_tree(statics)):
+                hk.append(f)
+            if kt.overlap(_tree(core)):
+                hc.append(f)
+            n = len(kt.overlap(_tree(pins_low)))
+            if n:
+                hp.append([f, n])
+        out["cover_vs_lock_frames_after_pop"] = hcov
+        out["key_vs_lockbody_frames"] = hk
+        out["key_vs_core_frames"] = hc
+        out["key_vs_lowerpins_touch"] = hp
+        out["cover_hidden_from"] = f_hide
+        return out
+
+    handoff = dict(note="相机坐标（相机在原点看 +Y，+Z 向上；镜头 %.2f mm / 36 mm 传感器，偏移 %s）；锁 = kit_deep_r3.h06_pin_lock 放大 %.3f 倍" % (LENS, list(SHIFT), SLv),
+                   head_pose=dict(frame=0, center_m=list(LM[0] @ c0), matrix=[list(r) for r in LM[0]]),
+                   tail_pose=dict(frame=nf - 1, center_m=list(LM[nf - 1] @ c0), pins_mid_m=list(LM[nf - 1] @ pins_mid), matrix=[list(r) for r in LM[nf - 1]]))
+    return dict(targets={"card": lock_center}, hero=lock, bbox=bbox_pts, key=key, cover_parts=cover_parts,
+                focus=focus_plan, fstop=fstop_plan, tail_t0=f_d0, checks=checks, handoff=handoff,
+                info=dict(SL=round(SLv, 3), pin_drop=PIN_DROP, lifts_max_mm=round(lifts_max, 3), key_w_hand=W_HAND,
+                          du_h=round(du_h, 2), dv_h=round(dv_h, 2), cover_parts=[o.name for o in cover_parts], cutters=info_cutters,
+                          frames=dict(okay=f_ok, turn=[e_t["f_start"], e_t["f_land"]], call=e_c["f_land"], reveal=fr,
+                                      key=[f_k0, f_k1], approach=[f_a0, f_a1], insert=[f_i0, f_i1], open=[f_t0, f_t1], dive=[f_d0, nf - 1]),
+                          V2={k: v for k, v in V2.items()}))
+
+
+def build_v2(seg, samples=None):
+    """v2 搭整段：相机只有微动（不推）；焦点、光圈由 recipe 给；导出每帧人卡片四角（不动）、零件包围框和深度范围（front 层用）。"""
+    cfg = seg_cfg(seg)
+    light = json.loads((cfg["work"] / "light.json").read_text(encoding="utf-8"))
+    fit = load_fit(cfg, light)
+    W = build_world(cfg, fit, samples or V2["SAMPLES"])
+    sc, cam, nf = W["sc"], W["cam"], cfg["nf"]
+    sc.cycles.adaptive_threshold = 0.01
+    sc.cycles.use_animated_seed = True                 # 降噪斑块不再钉在画面上（旧版第 15 条）
+    print("ONCAM step world ok", flush=True)
+    bf = board_fill(W["board"])
+    print("ONCAM step board ok", flush=True)
+    R = RECIPES[cfg["recipe"]](W)
+    print("ONCAM step recipe ok", flush=True)
+    CM = []
+    for f in range(nf):
+        M = cam_matrix_micro(f)
+        CM.append(M)
+        key_matrix(cam, f, M)
+    linear_keys(cam)
+    FD, FS = [], []
+    for f in range(nf):
+        d = R["focus"](f, CM[f])
+        cam.data.dof.focus_distance = d
+        cam.data.dof.keyframe_insert("focus_distance", frame=f)
+        a = R["fstop"](f)
+        cam.data.dof.aperture_fstop = a
+        cam.data.dof.keyframe_insert("aperture_fstop", frame=f)
+        FD.append(d); FS.append(a)
+    linear_keys(cam.data)
+    chk = dict(seg=seg, recipe=cfg["recipe"], version=2, info=R["info"], board=dict(S=BOARD_S * V2["BOARD_K"], D=BOARD_D, **bf),
+               lens=round(LENS, 3), shift=SHIFT, f_px=F_PX, d_person=D_PERSON, micro_deg=MICRO, samples=samples or V2["SAMPLES"], fit=fit)
+
+    def coc(S, D_, N):
+        fl = LENS * MM
+        c = fl * fl / (N * (S - fl)) * abs(D_ - S) / D_
+        return c / (36 * MM) * OUT_W
+    for f in (0, 20, 60, 150, 176, 240, 330, 360, nf - 1):
+        fwd = (CM[f].to_3x3() @ Vector((0, 0, -1))).normalized()
+        dl = (R["targets"]["card"](f) - CM[f].translation).dot(fwd)
+        chk.setdefault("coc_px", {})[f] = dict(focus=round(FD[f], 3), fstop=round(FS[f], 2), lock=round(coc(FD[f], dl, FS[f]), 2), board=round(coc(FD[f], BOARD_D, FS[f]), 2))
+    chk["clip"] = R["checks"]()
+    corners = card_corners()
+    frames_ = []
+    front = []
+    for f in range(nf):
+        sc.frame_set(f)
+        bb = [project(CM[f], SHIFT, p) for p in R["bbox"](f)]
+        zs = [p[2] for p in bb]
+        # 钥匙也算进深度范围（亮出时比锁近）
+        kd = []
+        if not R["key"].hide_render:
+            l2, h2 = mesh_bounds([R["key"]])
+            kd = [project(CM[f], SHIFT, (x, y, z))[2] for x in (l2.x, h2.x) for y in (l2.y, h2.y) for z in (l2.z, h2.z)]
+        zmin = min(zs + kd)
+        zmax = max(zs + kd)
+        if zmin < D_PERSON + 0.02 or f >= R["tail_t0"]:
+            front.append(f)            # 段尾冲镜头那一段一律在人前面：锁从人身后穿到人前面那一下就是"穿过人"（11-20 test 377–379）
+        frames_.append(dict(card=[[list(project(CM[f], SHIFT, c)) for c in corners]] * 5,
+                            hero=[min(p[0] for p in bb), min(p[1] for p in bb), max(p[0] for p in bb), max(p[1] for p in bb)],
+                            zmin=zmin, zmax=zmax, focus=FD[f], fstop=FS[f]))
+    cfg["work"].mkdir(parents=True, exist_ok=True)
+    (cfg["work"] / "cam.json").write_text(json.dumps(dict(seg=seg, nf=nf, version=2, push_t0=R["tail_t0"], fg_last=-1, front=front, frames=frames_)), encoding="utf-8")
+    (cfg["work"] / "handoff.json").write_text(json.dumps(R["handoff"], ensure_ascii=False, indent=1), encoding="utf-8")
+    sc.frame_set(0)
+    bpy.ops.wm.save_as_mainfile(filepath=str(cfg["work"] / "scene.blend"))
+    (cfg["work"] / "check.json").write_text(json.dumps(chk, ensure_ascii=False, indent=1, default=str), encoding="utf-8")
+    print("ONCAM build_v2", json.dumps(dict(clip=chk["clip"], coc=chk["coc_px"], info=R["info"], front=front, board=bf["edges"]), default=str)[:4000], flush=True)
+
+
+RECIPES = {"lock_key": recipe_lock_key, "lock_key_v2": recipe_lock_key_v2}
 
 
 # ---------------------------------------------------------------- 搭整段
@@ -1350,6 +1954,15 @@ def _open(seg):
 
 def _pass(sc, which, cfg):
     fg = [o for o in sc.objects if o.get("fg")]
+    if which == "front":
+        # v2：只有零件（锁、外壳块、钥匙）的透明通道，锁比人近的帧用它把人挡住。别的东西不出像，但照样投影/反射（Holdout 不要）
+        for o in sc.objects:
+            if o.type in ("MESH", "CURVE", "FONT") and not o.get("hero"):
+                o.visible_camera = False
+        sc.render.film_transparent = True
+        sc.render.image_settings.color_mode = "RGBA"
+        sc.cycles.samples = min(24, sc.cycles.samples)
+        return
     if which == "fg":
         keep = set(fg) | {o for o in sc.objects if o.type in ("LIGHT", "CAMERA")}
         for o in sc.objects:
@@ -1372,8 +1985,19 @@ def render(seg, which="bg"):
     out.mkdir(parents=True, exist_ok=True)
     sc.render.use_overwrite = False
     sc.render.use_placeholder = True
-    sc.render.filepath = str(out / ("b_" if which == "bg" else "f_"))
+    sc.render.filepath = str(out / {"bg": "b_", "fg": "f_", "front": "r_"}[which])
     t = time.time()
+    if which == "front":
+        cam = json.loads((cfg["work"] / "cam.json").read_text(encoding="utf-8"))
+        for f in cam["front"]:
+            p = out / f"r_{f:04d}.png"
+            if p.exists():
+                continue
+            sc.frame_set(f)
+            sc.render.filepath = str(p)
+            bpy.ops.render.render(write_still=True)
+        print("ONCAM render front", len(cam["front"]), round(time.time() - t, 1), "s", flush=True)
+        return
     bpy.ops.render.render(animation=True)
     print("ONCAM render", which, round(time.time() - t, 1), "s", flush=True)
 
@@ -1401,12 +2025,60 @@ def rimcal(seg):
 
 
 # ================================================================ 合成（纯 numpy + PIL，CPU，不用 Blender）
-GRAIN_GAIN = 1.4       # 颗粒强度倍数（σ 从 T 恤量，见 measure）
+GRAIN_GAIN = 1.7       # 颗粒强度倍数（σ 从 T 恤量，见 measure）。1.4 时成片零件层只有人的 0.60，1.7 → 约 0.73
 LW_STRENGTH = 0.28      # 光包边强度（08 文档第八节 0.15–0.35）
 LW_BLUR = 26            # 背景取色模糊（px）
 LW_BAND = 9             # 人物遮罩内沿带宽（px）
 CG_SOFT = 0.6           # 零件层轻高斯（px，08 文档 0.4–0.8）
 CG_SAT = 0.94           # 零件层饱和度向人看齐
+
+
+def _dilate(m, r):
+    """布尔图方形膨胀 r 像素（纯 numpy，可分离的滑动最大值）。"""
+    import numpy as np
+    out = m.copy()
+    for ax in (0, 1):
+        acc = out.copy()
+        for s in range(1, r + 1):
+            acc |= np.roll(out, s, ax) | np.roll(out, -s, ax)
+        out = acc
+    return out
+
+
+MATTE_LEAK = dict(head_y=560, lum=0.28, blue_over_red=0.03, edge_px=14, grow=2)
+
+
+def matte_leak_mask(a):
+    """抠像漏进来的背景暗块（手指边上的深蓝/黑色碎片，3-01 第 322、355–358 帧）：
+    头发以下、离抠像边缘 edge_px 以内、很暗且偏蓝（皮肤红大于蓝，衣服印花在内部不贴边）的像素。返回布尔图。"""
+    import numpy as np
+    A = a[..., 3] > 0.5
+    L = a[..., :3].mean(-1)
+    m = (a[..., 3] > 0.06) & (L < MATTE_LEAK["lum"]) & (a[..., 2] > a[..., 0] + MATTE_LEAK["blue_over_red"])
+    m[:MATTE_LEAK["head_y"], :] = False
+    if not m.any():
+        return m
+    near_edge = _dilate(~A, MATTE_LEAK["edge_px"])
+    m &= near_edge
+    return _dilate(m, MATTE_LEAK["grow"]) & (a[..., 3] > 0) if m.any() else m
+
+
+def matte_leak_keep(a):
+    """抠像透明度乘数：漏进来的暗块置 0（边缘 1 px 软化）。"""
+    import numpy as np
+    m = matte_leak_mask(a)
+    if not m.any():
+        return 1.0
+    b = a.copy()
+    for _ in range(4):                          # 剥掉一层以后，里面一层又贴边了：剥到没有为止（最多 4 层）
+        b[..., 3] = np.where(m, 0.0, a[..., 3])
+        m2 = matte_leak_mask(b) | m
+        if (m2 == m).all():
+            break
+        m = m2
+    soft = m.astype(np.float32)
+    soft = np.maximum(soft, 0.5 * (_dilate(m, 1) & ~m))
+    return 1.0 - soft
 
 
 def _persp_coeffs(src, dst):
@@ -1446,12 +2118,14 @@ class Comp:
         ramp[P["w"] - EDGE_FEATHER:] = np.linspace(1, 0, EDGE_FEATHER, dtype=np.float32)
         self.ramp = ramp
         self.Image = Image
+        self.front = set(self.cam.get("front", []))
 
     def person_rgba(self, f):
         import numpy as np
         im = self.Image.open(Path(self.cfg["person"]) / f"{person_k(self.cfg, f):04d}.png").convert("RGBA")
         a = np.asarray(im, dtype=np.float32) / 255.0
         a = a.copy()
+        a[..., 3] *= matte_leak_keep(a)
         a[..., 3] *= self.ramp[None, :]
         return a
 
@@ -1468,13 +2142,13 @@ class Comp:
             return full, float("inf")              # 卡片有角到了镜头后面（推进穿过去），人不在画里
         dev = max(ds)
         t0 = self.cam["push_t0"]
-        if f < t0 or dev < 0.75:                   # 推进前人一律原像素不动（微动只是背景的视差；卡片投影的几像素偏移只影响影子）
+        if self.cam.get("version") == 2 or f < t0 or dev < 0.75:   # v2 相机不推进：人永远原像素                   # 推进前人一律原像素不动（微动只是背景的视差；卡片投影的几像素偏移只影响影子）
             x0, y0 = P["x"], P["y"]
             sx = max(0, -x0)
             w = min(OUT_W - max(0, x0), P["w"] - sx)
             h = min(OUT_H - y0, P["h"])
             full[y0:y0 + h, max(0, x0):max(0, x0) + w] = a[:h, sx:sx + w]
-            return full, 0.0 if f < t0 else dev
+            return full, 0.0 if (f < t0 or self.cam.get("version") == 2) else dev
         if any(c[2] < 0.05 for s in subs for c in s):
             return full, float("inf")                       # 卡片已经在镜头后面（推进穿过去以后），人不在画里
         pre = a.copy()
@@ -1500,6 +2174,32 @@ class Comp:
         rgb = acc[..., :3] / np.maximum(1e-4, acc[..., 3:4])
         return np.concatenate([np.clip(rgb, 0, 1), acc[..., 3:4]], -1), dev
 
+    def v2_person(self, P, f):
+        """v2：焦点比人近时（段首段尾锁贴镜头）按焦距差把人虚掉；锁比人近的帧用 front 层的透明通道挡住人。"""
+        import numpy as np
+        from PIL import ImageFilter
+        S = self.cam["frames"][f]["focus"]
+        r = 0.0 if S >= D_PERSON else min(40.0, 30.0 * (D_PERSON / max(S, 1e-3) - 1.0))
+        if r > 0.6:
+            pre = P.copy()
+            pre[..., :3] *= pre[..., 3:4]
+            for k in range(4):
+                im = self.Image.fromarray(np.clip(pre[..., k] * 255, 0, 255).astype(np.uint8))
+                pre[..., k] = np.asarray(im.filter(ImageFilter.GaussianBlur(r / 2)), dtype=np.float32) / 255
+            rgb = pre[..., :3] / np.maximum(1e-4, pre[..., 3:4])
+            P = np.concatenate([np.clip(rgb, 0, 1), pre[..., 3:4]], -1)
+        fp = self.work / "fr_front" / f"r_{f:04d}.png"
+        if f in self.front and fp.exists():
+            A = np.asarray(self.Image.open(fp).convert("RGBA"), dtype=np.float32)[..., 3:4] / 255
+            A = np.clip((A - 0.3) / 0.55, 0, 1)
+            A = A * A * (3 - 2 * A)                 # 贴镜头的锁边缘被景深虚成半透明（段尾实测最低 0.69）：挡人按 0.3–0.85 拉满，段首段尾那一帧不透出人影
+            if r > 0.6:                             # 拉满会让挡人的边变硬（人像从一扇"窗"里露出来，3-01 第 376–382 帧）：
+                im = self.Image.fromarray(np.clip(A[..., 0] * 255, 0, 255).astype(np.uint8))   # 按人虚的程度把挡人边一起虚开，和零件盖在大板上的软边一致
+                A = (np.asarray(im.filter(ImageFilter.GaussianBlur(r / 2)), dtype=np.float32) / 255)[..., None]
+            P = P.copy()
+            P[..., 3:4] *= (1 - A)
+        return P
+
     def frame(self, f, lw=True, grain=True, soft=True):
         import numpy as np
         from PIL import ImageFilter
@@ -1515,6 +2215,8 @@ class Comp:
             rng = np.random.default_rng(1000 + f)
             B = B + _grain(rng, B.shape) * self.sig[None, None, :]
         P, dev = self.person_layer(f)
+        if self.cam.get("version") == 2:
+            P = self.v2_person(P, f)
         fi = self.cfg.get("fade_in")
         if fi and f < fi[1]:
             P[..., 3] *= smooth((f - fi[0]) / max(1, fi[1] - fi[0]))
@@ -1584,6 +2286,10 @@ def check(seg):
     res = {}
     hero = [fr["hero"] for fr in cam["frames"]]
     rng = range(cfg["fade_in"][1] if cfg.get("fade_in") else 0, t0)
+    if cam.get("version") == 2:                      # v2：零件停在人旁边的帧段 = 第一个事件落位 → 最后一个事件开始（段首段尾零件贴镜头不算）
+        ev = cfg["K"]["events"]
+        rng = range(ev[0]["f_land"], ev[-1]["f_start"])
+        t0 = cfg["nf"]
     res["F1_hero_h_min_px"] = round(min(h[3] - h[1] for h in (hero[f] for f in rng)), 1)
     res["F2_hero_xmin_min_px"] = round(min(hero[f][0] for f in rng), 1)
     res["person_drift_max_px_before_push"] = round(max(compj["card_dev_px"][:t0]), 3)
@@ -1847,7 +2553,10 @@ if __name__ == "__main__":
         if a[0] == "calib":
             calib(a[1])
         elif a[0] == "build":
-            build(a[1], int(a[2]) if len(a) > 2 else SAMPLES)
+            if SEGS[a[1]].get("version") == 2:
+                build_v2(a[1], int(a[2]) if len(a) > 2 else None)
+            else:
+                build(a[1], int(a[2]) if len(a) > 2 else SAMPLES)
         elif a[0] == "render":
             render(a[1], a[2] if len(a) > 2 else "bg")
         elif a[0] == "frames":

@@ -24,6 +24,7 @@
     render IN.blend OUTDIR         整段一次渲完（持久数据，已有的帧跳过）
 """
 import json
+import os
 import math
 import sys
 from pathlib import Path
@@ -380,7 +381,7 @@ def guide_runner(pts, f_from, f_to, zb_mm, mat, name="GUIDE_pulse", eat=6, ease=
 
 # ---------------------------------------------------------------- 10 秒测试（定版大板，点名 3 个零件）
 
-BOARD = "G:/cdk20/work/kit/board_final.blend"
+BOARD = os.environ.get("CDK20_WORK", "G:/cdk20/work") + "/kit/board_final.blend"
 FPS, NF = 60, 600
 LENS, FSTOP, AZ, EL = 50, 5.0, -6.0, 40.0
 

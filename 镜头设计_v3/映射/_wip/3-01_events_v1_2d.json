@@ -1,0 +1,131 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "3-01",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜 3-01（D）讲解卡：picture 外框一笔画出，lock 锁长出，key 钥匙长出后滑进锁孔（钥匙尖藏到锁后面，锁一颤）；页面 OnCam301.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "dot",
+   "obj": "dot",
+   "verb": "appear",
+   "at": {
+    "word": "3-01.w001",
+    "off": 0
+   },
+   "means": "Okay：笔尖红点落下",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "3-01.w001"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "dot2",
+   "obj": "dot2",
+   "verb": "move",
+   "at": {
+    "word": "3-01.w004",
+    "off": 0
+   },
+   "means": "this：红点移到画框起点",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "word": "3-01.w004"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "frame",
+   "obj": "frame",
+   "verb": "grow",
+   "at": {
+    "word": "3-01.w005",
+    "off": 0
+   },
+   "means": "picture：讲解卡外框一笔画出",
+   "tool": "remotion",
+   "lead": 24,
+   "until": {
+    "word": "3-01.w006"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "card",
+    "box": [
+     1290,
+     230,
+     580,
+     650
+    ]
+   }
+  },
+  {
+   "id": "lock",
+   "obj": "lock",
+   "verb": "grow",
+   "at": {
+    "word": "3-01.w007",
+    "off": 0
+   },
+   "means": "lock：锁长出，字牌 a lock",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "3-01.w007"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "card",
+    "box": [
+     1290,
+     230,
+     580,
+     650
+    ]
+   }
+  },
+  {
+   "id": "key",
+   "obj": "key",
+   "verb": "grow",
+   "at": {
+    "word": "3-01.w009",
+    "off": 0
+   },
+   "means": "a key：钥匙在左下长出，字牌 a key",
+   "tool": "remotion",
+   "lead": 24,
+   "until": {
+    "word": "3-01.w009"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "slide",
+   "obj": "slide",
+   "verb": "move",
+   "at": {
+    "word": "3-01.w010",
+    "off": 0
+   },
+   "means": "key：钥匙滑进锁孔，尖端藏到锁后面，锁一颤",
+   "tool": "remotion",
+   "lead": 0,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  }
+ ]
+}

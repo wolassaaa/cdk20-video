@@ -1,60 +1,60 @@
 {
  "schema": "cdk20.events/1",
  "group": "3-01",
- "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：出镜 3-01（D）讲解卡：picture 外框一笔画出，lock 锁长出，key 钥匙长出后滑进锁孔（钥匙尖藏到锁后面，锁一颤）；页面 OnCam301.jsx。",
+ "tool": "blender",
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜 3-01（D）三维重做（深化/10_出镜3-01_重做.md）：人在前，销子锁和金钥匙在 D 右侧；锁自己做段首段尾转场。Blender：inserts/shot_oncam.py recipe lock_key_v2。旧二维版事件表存 _wip/3-01_events_v1_2d.json。",
  "holds": [],
  "events": [
   {
-   "id": "dot",
-   "obj": "dot",
-   "verb": "appear",
+   "id": "arrive",
+   "obj": "lock",
+   "verb": "move",
    "at": {
     "word": "3-01.w001",
     "off": 0
    },
-   "means": "Okay：笔尖红点落下",
-   "tool": "remotion",
-   "lead": 8,
+   "lead": 39,
    "until": {
     "word": "3-01.w001"
    },
+   "ease": "out",
+   "means": "Okay：锁从镜头前（段首 T5，盖满画面）退回 D 的右侧落位，过冲回弹停在词上",
    "guide": {
     "kind": "none"
    }
   },
   {
-   "id": "dot2",
-   "obj": "dot2",
+   "id": "turn",
+   "obj": "lock",
    "verb": "move",
    "at": {
     "word": "3-01.w004",
     "off": 0
    },
-   "means": "this：红点移到画框起点",
-   "tool": "remotion",
-   "lead": 20,
+   "lead": 28,
    "until": {
     "word": "3-01.w004"
    },
+   "ease": "inout",
+   "means": "To get this：锁转 12°、抬头，把锁孔那面亮给观众",
    "guide": {
     "kind": "none"
    }
   },
   {
-   "id": "frame",
-   "obj": "frame",
-   "verb": "grow",
+   "id": "call",
+   "obj": "lock",
+   "verb": "move",
    "at": {
     "word": "3-01.w005",
     "off": 0
    },
-   "means": "picture：讲解卡外框一笔画出",
-   "tool": "remotion",
-   "lead": 24,
+   "lead": 6,
    "until": {
-    "word": "3-01.w006"
+    "word": "3-01.w005"
    },
+   "ease": "out",
+   "means": "picture：焦点点名 + 预颤 6 帧，锁浮起靠前、转出右侧",
    "guide": {
     "kind": "focus",
     "target": "card",
@@ -67,28 +67,21 @@
    }
   },
   {
-   "id": "lock",
-   "obj": "lock",
-   "verb": "grow",
+   "id": "reveal",
+   "obj": "lock_cover",
+   "verb": "eject",
    "at": {
     "word": "3-01.w007",
     "off": 0
    },
-   "means": "lock：锁长出，字牌 a lock",
-   "tool": "remotion",
-   "lead": 14,
+   "lead": 4,
    "until": {
     "word": "3-01.w007"
    },
+   "ease": "out",
+   "means": "lock：剖口那块外壳弹开、旋转着飞出画，露出五根弹子销",
    "guide": {
-    "kind": "focus",
-    "target": "card",
-    "box": [
-     1290,
-     230,
-     580,
-     650
-    ]
+    "kind": "none"
    }
   },
   {
@@ -99,30 +92,67 @@
     "word": "3-01.w009",
     "off": 0
    },
-   "means": "a key：钥匙在左下长出，字牌 a key",
-   "tool": "remotion",
-   "lead": 24,
+   "lead": 20,
    "until": {
-    "word": "3-01.w009"
+    "word": "3-01.w010",
+    "edge": "start"
    },
+   "ease": "out",
+   "means": "a (key)：金钥匙从 D 右手后面升起（手在前），0.6→1.08→1.0",
    "guide": {
     "kind": "none"
    }
   },
   {
    "id": "slide",
-   "obj": "slide",
-   "verb": "move",
+   "obj": "key",
+   "verb": "snap",
    "at": {
     "word": "3-01.w010",
-    "off": 0
+    "off": 18
    },
-   "means": "key：钥匙滑进锁孔，尖端藏到锁后面，锁一颤",
-   "tool": "remotion",
-   "lead": 0,
+   "lead": 12,
    "until": {
-    "sentence_end": true
+    "dur": 4
    },
+   "ease": "inout",
+   "means": "key：钥匙对准锁孔滑进去，五根销被齿顶齐，到底",
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "open",
+   "obj": "lock",
+   "verb": "move",
+   "at": {
+    "event": "slide",
+    "off": 14
+   },
+   "lead": 10,
+   "until": {
+    "dur": 0
+   },
+   "ease": "out",
+   "means": "（说完）锁芯转 32°，锁梁咔地弹起",
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "dive",
+   "obj": "lock",
+   "verb": "move",
+   "at": {
+    "event": "open",
+    "off": 11
+   },
+   "lead": 15,
+   "until": {
+    "dur": 0
+   },
+   "ease": "in",
+   "means": "（说完）锁带钥匙冲向镜头，剖口朝镜头（段尾 T1，接 3-02）",
    "guide": {
     "kind": "none"
    }

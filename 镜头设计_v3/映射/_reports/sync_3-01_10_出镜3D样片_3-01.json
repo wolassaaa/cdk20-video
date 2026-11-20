@@ -1,0 +1,122 @@
+{
+ "video": "D:\\。hkbu\\molecular science\\导演检查_20261120\\10_出镜3D样片_3-01.mp4",
+ "group": "3-01",
+ "fps": 60.0,
+ "frames": 384,
+ "offset_f": 0,
+ "S1": {
+  "word_events": 5,
+  "table_dev_max_f": 0,
+  "video_checked": 7,
+  "video_no_motion": [],
+  "pass_": true
+ },
+ "S2": {
+  "pass_": true,
+  "early": []
+ },
+ "S3": {
+  "pass_": true,
+  "longest_still_f": 0,
+  "bad": []
+ },
+ "S4": {
+  "pass_": true,
+  "looks_like_30": false,
+  "dup_frames": 0,
+  "stepped_dups": 0,
+  "stepped_ratio": 0.0,
+  "blend_frames": 0,
+  "blend_first": [],
+  "design_fade": 0,
+  "verdict": "原生（无变速重复/混帧）"
+ },
+ "sentences": [
+  {
+   "sid": "3-01.s1",
+   "f0": 39,
+   "f1": 58,
+   "last_motion_f": 58,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "3-01.s2",
+   "f0": 89,
+   "f1": 355,
+   "last_motion_f": 355,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  }
+ ],
+ "events": [
+  {
+   "id": "arrive",
+   "verb": "move",
+   "w": "Okay.",
+   "f_land": 39,
+   "table_dev": 0
+  },
+  {
+   "id": "turn",
+   "verb": "move",
+   "w": "this,",
+   "f_land": 118,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "call",
+   "verb": "move",
+   "w": "picture",
+   "f_land": 184,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "reveal",
+   "verb": "eject",
+   "w": "lock",
+   "f_land": 230,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "key",
+   "verb": "grow",
+   "w": "a",
+   "f_land": 332,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "slide",
+   "verb": "snap",
+   "w": "key.",
+   "f_land": 358,
+   "table_dev": 18,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "open",
+   "verb": "move",
+   "w": "key.",
+   "f_land": 372,
+   "table_dev": 32,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "dive",
+   "verb": "move",
+   "w": "key.",
+   "f_land": 383,
+   "table_dev": 43,
+   "video_motion_near_start": true
+  }
+ ],
+ "pass": true
+}

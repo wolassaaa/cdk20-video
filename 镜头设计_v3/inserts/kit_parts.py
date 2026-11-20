@@ -11,6 +11,7 @@
 """
 
 import json
+import os
 import math
 import random
 import sys
@@ -22,8 +23,9 @@ from mathutils import Vector, Matrix
 
 MM = 0.001
 FONTS = Path("D:/。hkbu/molecular science/镜头设计_v3/remotion_public/fusion_s1/fonts")
-CDK20_NPZ = Path("G:/cdk20/work/kit/cdk20.npz")       # styleframes/art/fusion/s1/inserts/make_cdk20_mesh.py 生成
-HDRI = Path("G:/software/blender-5.3/5.3/datafiles/studiolights/world/studio.exr")
+WORK_ROOT = Path(os.environ.get("CDK20_WORK", "G:/cdk20/work"))   # 11-20 晚：帧、缓存一律写 G（D 是系统盘）；D:/cdk20_work 是指向这里的目录联接
+CDK20_NPZ = WORK_ROOT / "kit/cdk20.npz"       # styleframes/art/fusion/s1/inserts/make_cdk20_mesh.py 生成
+HDRI = Path(os.environ.get("CDK20_BLENDER_DIR", "D:/software/blender-5.3")) / "5.3/datafiles/studiolights/world/studio.exr"
 EXPO = -3.85
 CX, CY = 30.0, 20.0            # 一格外圈料杆的半宽、半高（mm）
 PX, PY = 66.0, 46.0            # 格距
@@ -193,7 +195,7 @@ def organ(key):
     """真实解剖网格（BodyParts3D, CC BY 4.0），kit_organs.py 整理好的：顶点（毫米，真实大小，板面坐标）和三角形。"""
     import numpy as np
     if not _ORG:
-        d = np.load("G:/cdk20/work/kit/organs.npz")
+        d = np.load(str(WORK_ROOT / "kit/organs.npz"))
         _ORG.update({k: d[k] for k in d.files})
     return _ORG[key + "_v"], _ORG[key + "_f"]
 
