@@ -1,18 +1,20 @@
-"""HKBU SCIE1007 课程作业的科普视频：片头 W0（2.96 s）和大标题 W1（16.79 s）两段三维镜头，连同 1-11 最后 2 秒、2-01 开头 2 秒的衔接。
+"""HKBU SCIE1007 课程作业的科普视频：片头 W0（2.80 s）和大标题 W1（16.83 s）两段三维镜头，连同 1-11 最后 2 秒、2-01 开头 2 秒的衔接。
 
 依据：镜头设计_v3/深化/04_片头与大标题重做.md（逐拍镜头表、验收表）、05_视线引导.md（引导手法，用 bl_guide.py）、
 导演意见_1120.md（不硬切、不用红点）。盒盖 h20 来自 kit_h20.py（已验收），大板用 kit_h20_render.py 的缓存 .blend。
 
-时间一律按拍子算（schedule()）：W1 暂按 Godmother 第 64–71 小节排拍（121.483 BPM，一拍 0.4939 s），W0 三下打击在第 0、1、2 拍。
-换歌时只改 BPM（或 --bpm），整张镜头表按"第几拍"重算，动作顺序不变。
+时间一律按拍子算：歌的速度、每个大动作落在第几拍都写在卡点表里（音乐/卡点/<段名>_<歌名>.json，beat_sheet.py 读；
+环境变量 CDK20_SEG、CDK20_SONG 选表，默认 w0w1 + Blinding Lights 171.007 BPM，一拍 0.3509 s）。
+换歌时画面设计不动，只写一张新表，做法见 .claude/skills/beat-retime/SKILL.md。
+盒盖版 w1x 是留给 W5 的旧镜头，仍按它原来的 Godmother 拍长（BPM_L）。
 
 两个部分：
-  w0    W0 冷开场 178 帧：三下打击点出玻璃肝 → CDK20 → 钥匙 048（焦点点名 + 只照它的轮廓光），全板灯 3% → 100%，焦点拉到镜头前 0.3 m；
+  w0    W0 冷开场 168 帧：三下打击点出玻璃肝 → CDK20 → 钥匙 048（焦点点名 + 只照它的轮廓光），全板灯 3% → 100%，焦点拉到镜头前 0.3 m；
         结尾按 07 第二节 T5 焦点擦除接 1-01：一本白色"纸和书"零件贴着镜头（40 mm）从右往左飞过、完全虚掉，
-        盖满画面的那几帧里换到 1-01（换点在第 178 帧，正好在盖满的中间）；
-  w0wipe 只渲这本书（透明底，第 160–193 帧），合成时叠在 W0 尾和 1-01 头上，两边是同一个动作。
+        盖满画面的那几帧里换到 1-01（换点在第 168 帧，正好在盖满的中间）；
+  w0wipe 只渲这本书（透明底，第 150–183 帧），合成时叠在 W0 尾和 1-01 头上，两边是同一个动作。
   w1z   11-21 定的《零重力开箱》（07 第一节），代码在 shot_w1z.py；w1x 盒盖版留给 W5 结尾。
-  w1x   1-11 最后 120 帧（镜头在香港地图上，"Kong." 说完起升）+ W1 1007 帧（盒盖落下、片名、课程牌、Section 牌、八块牌、盒盖翻开）
+  w1x   1-11 最后 120 帧（镜头在香港地图上，"Kong." 说完起升）+ W1 1007 帧（旧拍长；盒盖落下、片名、课程牌、Section 牌、八块牌、盒盖翻开）
         + 2-01 开头 120 帧（镜头落在第 2 区楼群），一镜到底。
 
 名字和学号：只有 --final 时，在这个 Blender 进程里由 title_names.load_members() 读到内存，直接生成文字网格；
@@ -20,10 +22,11 @@
 
     blender -b --factory-startup --python-exit-code 1 -P shot_w0w1.py -- w0|w1x [--final] [--samples 24] [--pct 100]
             [--frames all|a-b|f1,f2,…] [--out DIR] [--save X.blend] [--check-only]
-渲染一律 Cycles + OPTIX GPU + OptiX 降噪，不回落 CPU（bl_guide._gpu）。帧写在 G:/cdk20/work/w1/<部分>/。
+渲染一律 Cycles + OPTIX GPU + OptiX 降噪，不回落 CPU（bl_guide._gpu）。帧写在 $CDK20_WORK/w1/<部分>/（默认 D:/cdk20_work）。
 """
 import json
 import math
+import os
 import random
 import sys
 import time
@@ -40,20 +43,25 @@ from bpy_extras.object_utils import world_to_camera_view
 import kit_deep as D
 import kit_h20 as H
 import bl_guide as BG
+import beat_sheet as BS
 
 MM = 0.001
 FPS = 60
 ROOT = HERE.parents[1]
-WORK = Path("G:/cdk20/work/w1")
-CACHE = Path("G:/cdk20/work/kit_deep/tmp/h20_board_cache.blend")
+WORK_ROOT = Path(os.environ.get("CDK20_WORK", "D:/cdk20_work"))    # 11-20：G 盘拔走了，工作目录可配置
+WORK = WORK_ROOT / "w1"
+CACHE = WORK_ROOT / "kit_deep" / "tmp" / "h20_board_cache.blend"
 GODMOTHER = ROOT / "镜头设计_v3" / "音乐" / "拍子" / "Godmother.json"
 CAVEAT = ROOT / "镜头设计_v2" / "tests" / "T4_remotion" / "public" / "oncam2" / "fonts" / "Caveat.ttf"
 QUEUE = (ROOT / "_env" / "queue", Path.home() / "cdk20_guard")
 
 # ---------------------------------------------------------------- 拍子和镜头表（全部按"第几拍"写）
 
-BPM = json.loads(GODMOTHER.read_text(encoding="utf-8"))["bpm"]
-LEAD = 2                 # W1 前面空 2 拍，b0 = 盒盖落地
+SHEET = BS.load()                                   # 卡点表：现在用的歌
+BPM = SHEET["bpm"]
+BPM_L = json.loads(GODMOTHER.read_text(encoding="utf-8"))["bpm"]    # 盒盖版 w1x 的旧拍长（留给 W5，不跟着换歌）
+W0B = SHEET["w0"]["beats"]                          # W0：三下、灯亮、拉虚、换到 1-01 各在第几拍
+LEAD = 2                 # w1x：W1 前面空 2 拍，b0 = 盒盖落地
 TAIL, HEAD = 120, 120    # 1-11 最后 2 秒、2-01 开头 2 秒
 L111 = 691               # 1-11 在粗剪 v9 里的帧数
 W111 = {"Hong": 644, "Kong_end": 676}     # 1-11 段内帧（master_v1：Hong t0 10.73 s，Kong. t1 11.271 s）
@@ -69,15 +77,16 @@ def w0_f(n):
 
 
 def w1_f(n):
-    """W1 里第 n 拍的帧（b0 = 盒盖落地，前面空 LEAD 拍）。"""
-    return round(FPS * beat_s() * (LEAD + n))
+    """盒盖版 w1x 里第 n 拍的帧（b0 = 盒盖落地，前面空 LEAD 拍；旧拍长）。"""
+    return round(FPS * 60.0 / BPM_L * (LEAD + n))
 
 
-NF_W0 = round(FPS * beat_s() * 6)            # 178
-WIPE = (160, 171, 193)                        # T5 擦除：进画、开始盖满、离开（W0 帧号，178 起是 1-01 的第 0 帧）
+NF_W0 = w0_f(W0B["cut"])                     # 168（第 8 拍 = 1-01 的第 0 帧）
+WIPE = (NF_W0 - 18, NF_W0 - 7, NF_W0 + 15)    # T5 擦除：进画、开始盖满、离开（W0 帧号，NF_W0 起是 1-01 的第 0 帧）
 W0_LENS = 20.0                                # W0 广角（11-21 第二轮：贴近零件）
-NF_W1 = int(FPS * beat_s() * (LEAD + 32))    # 1007（b32 = 2-01 第一帧）
-NF_W1X = TAIL + NF_W1 + HEAD
+NF_W1 = BS.f_of_beat(SHEET, SHEET["w1"]["nbeats"])        # 1010（第 48 拍 = 2-01 第一帧），w1z 用
+NF_W1L = int(FPS * 60.0 / BPM_L * (LEAD + 32))            # 1007：盒盖版 w1x 的旧长度
+NF_W1X = TAIL + NF_W1L + HEAD
 
 
 def F_w1(n):
@@ -87,11 +96,12 @@ def F_w1(n):
 
 def schedule():
     """镜头表：每个动作的接触帧 = 它的拍点。返回 {部分: [事件]}，事件帧是各自序列里的帧。"""
-    w0 = [dict(id="hit1_liver", beat=0, f=w0_f(0), what="第 1 下：引导 → 第 1 区玻璃肝，肝跳 0.8 mm"),
-          dict(id="hit2_cdk20", beat=1, f=w0_f(1), what="第 2 下：引导 → 第 3 区 CDK20，跳 0.8 mm"),
-          dict(id="hit3_key048", beat=2, f=w0_f(2), what="第 3 下：引导 → 第 8 区钥匙 048，跳 1.0 mm 转 4°"),
-          dict(id="lights_up", beat=3, f=w0_f(3), f_end=w0_f(5), what="全板灯 3% → 100%，待机微动起"),
-          dict(id="defocus", beat=4, f=w0_f(4), f_end=NF_W0, what="焦点拉到镜头前 0.3 m"),
+    b = W0B
+    w0 = [dict(id="hit1_liver", beat=b["hit1"], f=w0_f(b["hit1"]), what="第 1 下：引导 → 第 1 区玻璃肝，肝跳 0.8 mm"),
+          dict(id="hit2_cdk20", beat=b["hit2"], f=w0_f(b["hit2"]), what="第 2 下：引导 → 第 3 区 CDK20，跳 0.8 mm"),
+          dict(id="hit3_key048", beat=b["hit3"], f=w0_f(b["hit3"]), what="第 3 下：引导 → 第 8 区钥匙 048，跳 1.0 mm 转 4°"),
+          dict(id="lights_up", beat=b["lights_up"], f=w0_f(b["lights_up"]), f_end=w0_f(b["lights_full"]), what="全板灯 3% → 100%，待机微动起"),
+          dict(id="defocus", beat=b["defocus"], f=w0_f(b["defocus"]), f_end=NF_W0, what="焦点拉到镜头前 0.3 m"),
           dict(id="wipe_T5", f=WIPE[0], f_cover=WIPE[1], f_cut=NF_W0, f_end=WIPE[2],
                what="T5 焦点擦除：白色零件贴镜头飞过，盖满时换到 1-01（合成里叠透明层）")]
     w1 = [dict(id="rise", f=W111["Kong_end"] - (L111 - TAIL), what="1-11 \"Kong.\" 说完，镜头起升"),
@@ -109,7 +119,7 @@ def schedule():
         w1.append(dict(id=f"art_{i}", beat=b, f=F_w1(b), what=("肝", "CDK20", "钥匙")[i] + " 轻跳 3 mm"))
     w1 += [dict(id="lid_lift", beat=28, f=F_w1(28), what="盒盖抬起 80 mm"),
            dict(id="lid_open", beat=29, f=F_w1(29), f_end=F_w1(31), what="盒盖翻开 0→104→100°（引导 → 第 2 区区号牌和楼群）"),
-           dict(id="land_2_01", beat=32, f=TAIL + NF_W1, what="镜头落在第 2 区楼群，2-01 开始")]
+           dict(id="land_2_01", beat=32, f=TAIL + NF_W1L, what="镜头落在第 2 区楼群，2-01 开始")]
     return dict(w0=w0, w1x=w1)
 
 
@@ -378,8 +388,8 @@ def build_w0(sc, args):
     sc.frame_start, sc.frame_end = 0, nf - 1
     liver_c, cdk_c, key_c = cells["z1_c0_r1"], cells["z3_c4_r0"], cells["z8_c11_r4"]
     parts = {"liver": D.part_of(liver_c), "cdk20": D.part_of(cdk_c), "key048": D.part_of(key_c)}
-    hits = {"liver": w0_f(0), "cdk20": w0_f(1), "key048": w0_f(2)}
-    up0, up1 = w0_f(3), w0_f(5)
+    hits = {"liver": w0_f(W0B["hit1"]), "cdk20": w0_f(W0B["hit2"]), "key048": w0_f(W0B["hit3"])}
+    up0, up1 = w0_f(W0B["lights_up"]), w0_f(W0B["lights_full"])
 
     # 全板灯 3% → 100%（第 4–5 拍）：所有灯、世界光、反光卡一起乘 m(f)
     m = [0.03 + 0.97 * smooth((f - up0) / (up1 - up0)) for f in range(nf)]
@@ -429,7 +439,7 @@ def build_w0(sc, args):
     # 焦点点名：第 0 帧在肝上；第 2、3 下前 8 帧到位（起拉 18 帧）；第 4 拍起拉到镜头前 0.3 m
     order = [("liver", hits["liver"]), ("cdk20", hits["cdk20"]), ("key048", hits["key048"])]
     focus = []
-    f_out0 = w0_f(4)
+    f_out0 = w0_f(W0B["defocus"])
     for f in range(nf):
         p = P["liver"]
         for name, land in order[1:]:
@@ -447,9 +457,10 @@ def build_w0(sc, args):
     linearize(cam.data)
 
     # 轮廓光：每下打击点亮一件（爬升 12 帧，第 1 下在第 0 帧已经亮着），下一件起来时退；第 3 下的一直留到全板灯亮起
+    f_out0_plan = w0_f(W0B["defocus"])
     items = [plan_item("w0_liver", "liver", hits["liver"], hits["cdk20"] - 10, rise=0, gon_lead=0, relax=18),
              plan_item("w0_cdk20", "cdk20", hits["cdk20"], hits["key048"] - 10, relax=18),
-             plan_item("w0_key", "key048", hits["key048"], w0_f(4), relax=w0_f(5) - w0_f(4))]
+             plan_item("w0_key", "key048", hits["key048"], f_out0_plan, relax=up1 - f_out0_plan)]
     rims = {}
     for it in items:
         ang, el = (162.0, 32.0) if it["id"] == "w0_key" else (120.0, 50.0)      # 金钥匙平躺，灯放在镜面反射方向才亮得起来
@@ -502,7 +513,7 @@ def build_w0(sc, args):
 
     clear = board_clear(poses)
     wiper, wipe_cov = add_wiper(sc, cam, poses)
-    chk = dict(part="w0", nf=nf, bpm=BPM, hits=hits, lights_up=[up0, up1], defocus=[f_out0, nf - 1], wipe=WIPE,
+    chk = dict(part="w0", nf=nf, bpm=BPM, beat_s=beat_s(), song=SHEET["song"], beats=W0B, hits=hits, lights_up=[up0, up1], defocus=[f_out0, nf - 1], wipe=WIPE,
                wipe_cover_frames=wipe_cov, lens_mm=W0_LENS, cam_clear_mm=clear,
                focus_m=[round(v, 4) for v in fd], rims={k: v.name for k, v in rims.items()},
                plan=items, cam_loc_mm=[[round(c / MM, 2) for c in p[0]] for p in poses])
@@ -535,7 +546,7 @@ def board_clear(poses):
 
 def add_wiper(sc, cam, poses):
     """T5 焦点擦除用的前景零件：零件库的"纸和书"（白），放大到宽约 100 mm，贴着镜头 40 mm 从右往左横穿。
-    位置按镜头坐标系算（镜头在 W0 里只慢推），第 178 帧之后镜头停在最后一个姿态。返回盖满整个画面的帧。"""
+    位置按镜头坐标系算（镜头在 W0 里只慢推），W0 最后一帧之后镜头停在最后一个姿态。返回盖满整个画面的帧。"""
     K = D.Kit()
     P = D.Part(K, "w0_wiper_part", "white")                 # 一块白色亮面料牌（实心，虚掉以后整块不透）
     P.box(0, 0, 105, 48, 6.0, K.white, r=8, bevel=1.2)   # 20 mm 广角画面宽：料牌加宽到 210 mm 才盖得满
@@ -785,7 +796,7 @@ def build_w1x(sc, args):
             (fb[16], state((tag_x(6), tags_y, 65.8), 75.0, 0.0, 328.0, lens), "stop"),
             (fb[20], full(), "stop"),
             (fb[28], full(0.97), "stop"),
-            (TAIL + NF_W1, state(z2t, 30.0, -15.0, 235.0, lens), "pass"),
+            (TAIL + NF_W1L, state(z2t, 30.0, -15.0, 235.0, lens), "pass"),
             (nf - 1, state((z2t[0] + 2.0, z2t[1], z2t[2]), 30.5, -15.5, 235.0 * 0.95, lens), "stop")]
     tr = Track(keys)
     poses = []
@@ -865,7 +876,7 @@ def build_w1x(sc, args):
 
     # ---- 检查数
     sc.frame_set(0)
-    chk = dict(part="w1x", nf=nf, bpm=BPM, tail=TAIL, head=HEAD, nf_w1=NF_W1, lid_start_mm=h0,
+    chk = dict(part="w1x", nf=nf, bpm=BPM_L, tail=TAIL, head=HEAD, nf_w1=NF_W1L, lid_start_mm=h0,
                beats={str(n): fb[n] for n in fb}, events=schedule()["w1x"], plan=items, tick=tick,
                roster=ros_info, roster_geom=ros_geom, final=bool(args.final),
                focus_m=[round(v, 4) for v in fd], cam_loc_mm=[[round(c / MM, 2) for c in p[0]] for p in poses])
@@ -1009,7 +1020,7 @@ def main():
     args.part = a[0]
     args.final = "--final" in a
     opt = lambda k, d=None: a[a.index(k) + 1] if k in a else d          # noqa: E731
-    args.samples = int(opt("--samples", 24))
+    args.samples = int(opt("--samples", 16))      # 11-20 导演：一律 16 + OptiX 降噪，看得出噪点的镜头才加，最多 24
     args.pct = int(opt("--pct", 100))
     args.frames = opt("--frames", "none")
     args.step = int(opt("--step", 1))

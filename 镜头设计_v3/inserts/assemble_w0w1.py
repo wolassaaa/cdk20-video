@@ -2,19 +2,21 @@
 导演检查_20261120/09_片头W0_大标题W1.mp4。
 
 两段（审片文件里两段之间隔 0.5 秒黑，只是审片文件的拼法，不是片子里的衔接）：
-  A  W0（178 帧，含 T5 焦点擦除）→ 1-01 开头 2 秒（v9 2.00–4.00 s）；擦除那块白料牌的透明层（w0wipe）叠在 1-01 头 16 帧上。
-  B  1-11（v9）最后 4 秒里的前 2 秒 →（T6 光扫）→ 我们渲的 1-11 尾 2 秒（三维地图）+ W1 1007 帧 + 2-01 头 2 秒（三维第 2 区）
+  A  W0（帧数见 w0 的 check.json，含 T5 焦点擦除）→ 1-01 开头 2 秒（v9 2.00–4.00 s）；擦除那块白料牌的透明层（w0wipe）叠在 1-01 头上。
+  B  1-11（v9）最后 4 秒里的前 2 秒 →（T6 光扫）→ 我们渲的 1-11 尾 2 秒（三维地图）+ W1 + 2-01 头 2 秒（三维第 2 区）
      →（T6 光扫）→ 2-01（v9）第 2–4 秒。
-声音：W0 三下自己合成的打击（软底鼓 + 塑料"嗒"）；1-11、1-01、2-01 用 v9 原声；W1 用 Godmother 第 64 小节起
-（第 64 小节的第一拍对在 W1 的拍单位 1 = 大板断开那一帧），2-01 人声进来前压低再淡出；W1 里加大板断开的闷响、剪字的"咔"、
-落位的"嗒"、CDK20 插回去的一声。
+声音：歌、选段、每段的淡入淡出和低通全读卡点表（beat_sheet.py，音乐/卡点/<段名>_<歌名>.json，默认 w0w1 + Blinding Lights）：
+  W0 用歌里鼓进来的头两小节，三下点名各加一声塑料"嗒"，第 6 拍起边压低边低通，1-01 第一个词前淡没；
+  W1 从 1-11 最后一句下面低通淡入，大板断开 = 鼓进来，片名落位 = riff 进来，吸回大板以后边压低边低通，2-01 第一个词前压到 0.2、随后淡没；
+  1-11、1-01、2-01 用 v9 原声；W1 里加大板断开的闷响、剪字的"咔"、落位的"嗒"、CDK20 插回去的一声。
 
-    python assemble_w0w1.py draft|final
-draft：读 G:/cdk20/work/w1/*_prev（1080p30 隔帧渲），出 30 fps；final：读 *_final，出 60 fps。
-帧和中间文件都在 G 盘或系统临时目录，成片写 D 盘（项目目录）。名字不经过这里（正式版名字已经在渲染帧里）。
+    [CDK20_SONG="歌名"] [CDK20_SEG=w0w1] python assemble_w0w1.py draft|final
+draft：读 $CDK20_WORK/w1/*_prev（1080p30 隔帧渲），出 30 fps；final：读 *_final，出 60 fps；audio：只出 _tmp/w0w1_asm/mix.wav（读 *_plan 的 check.json）。
+帧在 $CDK20_WORK（默认 D:/cdk20_work），中间文件在项目 _tmp，成片写 导演检查_20261120。名字不经过这里（正式版名字已经在渲染帧里）。
 """
 import json
 import math
+import os
 import subprocess
 import sys
 import tempfile
@@ -25,23 +27,23 @@ import numpy as np
 from PIL import Image
 
 HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+import beat_sheet as BS                           # noqa: E402
+
 ROOT = HERE.parents[1]
 FF = str(Path(__file__).resolve().parents[2] / "_env/ffmpeg/ffmpeg.exe")   # TouchDesigner 带的 ffmpeg 没有 h264_nvenc
 V9 = ROOT / "导演检查_20261119" / "1_粗剪_v9.mp4"
-SONG = ROOT / "镜头设计_v3" / "音乐" / "原曲" / "Godmother - Holly Herndon[PROTO].flac"
-GOD = json.loads((ROOT / "镜头设计_v3" / "音乐" / "拍子" / "Godmother.json").read_text(encoding="utf-8"))
+SHEET = BS.load()
+SONG = BS.song_file(SHEET)
+BEAT = SHEET["beat_s"]
 OUT = ROOT / "导演检查_20261120" / "09_片头W0_大标题W1.mp4"
-WORK = Path("G:/cdk20/work/w1")
+WORK = Path(os.environ.get("CDK20_WORK", "D:/cdk20_work")) / "w1"
 W, H, SR = 1920, 1080, 48000
 
 # v9 里的时间（秒）：W0 0–2.00，1-01 从 2.00；1-11 从 114.2667（691 帧），W1 槽 125.7833，2-01 从 137.7833
 T_101 = 2.0
 T_111_END = 125.7833
 T_201 = 137.7833
-NF_W0, TAIL, NF_W1, HEAD = 178, 120, 1007, 120
-WIPE = (160, 171, 193)
-BEAT = 60.0 / GOD["bpm"]
-U = 2 * BEAT
 SWEEP = 14                                   # T6 光扫总长（60 fps 帧），换点在正中
 
 
@@ -164,6 +166,53 @@ def fade(a, t_in=0.0, t_out=0.0):
     return a
 
 
+def lowpass_var(a, fc):
+    """随时间变的低通（4 阶巴特沃斯幅度响应，STFT 2048 点、半重叠、sqrt-Hann 分析/合成）。fc(t 秒) → 截止频率 Hz。
+    淡出时和音量一起往下扫，听起来是"走远、闷下去"，不是音量硬拧。"""
+    N, hop = 2048, 1024
+    win = np.sqrt(np.hanning(N + 1)[:N]).astype(np.float32)
+    n = len(a)
+    pad = np.vstack([np.zeros((N, 2), np.float32), a, np.zeros((2 * N, 2), np.float32)])
+    out = np.zeros_like(pad)
+    freqs = np.fft.rfftfreq(N, 1 / SR)
+    for i in range(0, len(pad) - N, hop):
+        t = (i + N / 2 - N) / SR
+        c = fc(t)
+        if c >= 17000:
+            g = None
+        else:
+            g = (1.0 / np.sqrt(1.0 + (freqs / max(20.0, c)) ** 8)).astype(np.float32)
+        seg = pad[i:i + N] * win[:, None]
+        if g is not None:
+            seg = np.fft.irfft(np.fft.rfft(seg, axis=0) * g[:, None], N, axis=0).astype(np.float32)
+        out[i:i + N] += seg * win[:, None]
+    return out[N:N + n]
+
+
+def log_interp(points, t):
+    """[[秒, Hz], …] 在对数频率上 smoothstep 插值。"""
+    pts = [[p[0], math.log(p[1])] for p in points]
+    return math.exp(BS.envelope(pts, t))
+
+
+def song_part(part, b_from, b_to):
+    """卡点表里 part（w0 / w1）这一段的歌：从第 b_from 拍到第 b_to 拍，已乘包络、过低通、乘增益。
+    返回 (立体声数组, 第 b_from 拍相对该段第 0 拍的秒数)。"""
+    mix = SHEET[part]["mix"]
+    pre = mix.get("pre_roll_s", 0.0)
+    t_song0 = BS.song_t(SHEET, part, b_from) - pre
+    dur = (b_to - b_from) * BEAT + pre
+    a = dec_audio(SONG, t_song0, dur)
+    tt = (np.arange(len(a)) / SR - pre) / BEAT + b_from              # 每个采样在这一段里是第几拍
+    env_pts = mix["env_beats"]
+    env = np.array([BS.envelope(env_pts, b) for b in tt[::64]], np.float32)
+    env = np.interp(np.arange(len(a)), np.arange(0, len(a), 64), env).astype(np.float32)
+    lp = mix.get("lowpass_beats")
+    if lp:
+        a = lowpass_var(a, lambda t: log_interp(lp, t / BEAT + b_from - pre / BEAT))
+    return a * env[:, None] * mix.get("gain", 1.0), b_from * BEAT - pre
+
+
 def write_wav(p, a):
     a = np.clip(a, -1, 1)
     with wave.open(str(p), "wb") as w:
@@ -180,8 +229,17 @@ def main():
     mode = sys.argv[1] if len(sys.argv) > 1 else "draft"
     fps = 30 if mode == "draft" else 60
     step = 60 // fps
-    d_w0, d_wipe, d_w1 = frames_dir("w0", mode), frames_dir("w0wipe", mode), frames_dir("w1z", mode)
+    if mode == "audio":                              # 只出混音（用 run_w0w1.sh plan 的 check.json），渲染前先看包络和卡点
+        d_w0, d_wipe, d_w1 = WORK / "w0_plan", None, WORK / "w1z_plan"
+    else:
+        d_w0, d_wipe, d_w1 = frames_dir("w0", mode), frames_dir("w0wipe", mode), frames_dir("w1z", mode)
     chk = json.loads((d_w1 / "check.json").read_text(encoding="utf-8"))
+    c0 = json.loads((d_w0 / "check.json").read_text(encoding="utf-8"))
+    NF_W0, WIPE = c0["nf"], c0["wipe"]
+    TAIL, NF_W1, HEAD = chk["tail"], chk["nf_w1"], chk["head"]
+    for c, nm in ((c0, "w0"), (chk, "w1z")):
+        if abs(c.get("bpm", 0) - SHEET["bpm"]) > 1e-3:
+            raise SystemExit(f"{nm} frames were built for {c.get('bpm')} BPM, beat sheet says {SHEET['bpm']}: re-render first")
     tmp = ROOT / "_tmp" / "w0w1_asm"                 # 系统临时目录 ffmpeg 写不进去，放项目 _tmp（不进 git）
     tmp.mkdir(parents=True, exist_ok=True)
     gap = 0.5
@@ -192,7 +250,7 @@ def main():
     tB = dur_A + gap
     dur_B = 2.0 + (TAIL + NF_W1 + HEAD) / 60 + 2.0
     total = tB + dur_B
-    tl = dict(mode=mode, fps=fps, gap_s=gap,
+    tl = dict(mode=mode, fps=fps, gap_s=gap, song=SHEET["song"], bpm=SHEET["bpm"], sheet=Path(SHEET["path"]).name,
               A=dict(start=tA, w0=[0, NF_W0 / 60], s101=[NF_W0 / 60, dur_A], cut_w0_101=NF_W0 / 60, transition="T5"),
               B=dict(start=tB, s111=[tB, tB + 2.0], w1z=[tB + 2.0, tB + 2.0 + (TAIL + NF_W1 + HEAD) / 60],
                      cut_111_3d=tB + 2.0, w1_start=tB + 2.0 + TAIL / 60, w1_end=tB + 2.0 + (TAIL + NF_W1) / 60,
@@ -201,47 +259,56 @@ def main():
 
     # ---- 声音
     mix = np.zeros((int(total * SR) + SR, 2), np.float32)
-    for k in range(3):                                           # W0 三下：第 0、1、2 拍
-        put(mix, tA + round(60 * BEAT * k) / 60, kick(gain=0.75))
-        put(mix, tA + round(60 * BEAT * k) / 60 + 0.004, click(freq=2600 + 500 * k, gain=0.3, seed=k))
+    # W0：歌（鼓进来的头两小节），三下点名各一声塑料"嗒"（底鼓歌里有，不再自己合成）
+    m0 = SHEET["w0"]["mix"]
+    a0, off0 = song_part("w0", 0.0, m0["env_beats"][-1][0])
+    put(mix, tA + off0, a0)
+    for k, f in enumerate(c0["hits"].values()):
+        put(mix, tA + f / 60 + 0.004, click(freq=2600 + 500 * k, gain=0.22, seed=k))
     sw = np.random.default_rng(5).standard_normal(int(1.0 * SR)).astype(np.float32) * 0.03   # 全板灯亮起：一口很轻的气声
     sw = fade(np.stack([sw, sw], 1), 0.8, 0.2)
-    put(mix, tA + 89 / 60, sw)
+    put(mix, tA + (c0["lights_up"][0] - 16) / 60, sw)
     put(mix, tA + (WIPE[1] - 4) / 60, fade(np.random.default_rng(6).standard_normal((int(0.35 * SR), 2)).astype(np.float32) * 0.05, 0.15, 0.2))  # 擦过镜头的风声
     put(mix, tA + NF_W0 / 60, fade(dec_audio(V9, T_101, 2.0), 0.02, 0.05))          # 1-01 原声
     put(mix, tB, fade(dec_audio(V9, T_111_END - 4.0, 4.0), 0.05, 0.0))               # 1-11 最后 4 秒原声（后 2 秒画面是我们的三维尾）
+    # W1：从 1-11 最后一句下面低通淡入（start_beat 起），第 2 拍 = 鼓进来 = 大板断开；2-01 第一个词前压低、随后淡没
     t_w1 = tB + 2.0 + TAIL / 60
-    bar64 = GOD["bars_s"][64]
-    t_down = t_w1 + round(60 * U) / 60                            # W1 拍单位 1 = 大板断开
-    song_t0 = bar64 - (t_down - t_w1)
-    song = dec_audio(SONG, song_t0, NF_W1 / 60 + 3.0)
-    n_end = int((NF_W1 / 60) * SR)
-    env = np.ones(len(song), np.float32)
-    env[:int(0.35 * SR)] = np.linspace(0, 1, int(0.35 * SR))
-    duck0, duck1 = n_end - int(0.25 * SR), n_end + int(0.6 * SR)
-    env[duck0:duck1] = np.linspace(1, 0.16, duck1 - duck0)
-    env[duck1:] = np.linspace(0.16, 0, len(env) - duck1)
-    put(mix, t_w1, song * env[:, None], 0.8)
+    m1 = SHEET["w1"]["mix"]
+    a1, off1 = song_part("w1", m1["start_beat"], m1["env_beats"][-1][0])
+    put(mix, t_w1 + off1, a1)
     put(mix, tB + 2.0 + (TAIL + NF_W1) / 60, fade(dec_audio(V9, T_201, 4.0), 0.02, 0.1))   # 2-01 原声
     t_seq = tB + 2.0                                              # w1z 第 0 帧
+    seen = set()                                                  # 成对剪字、成对转牌：同一帧同一种声音只放一下（叠两下会爆音）
     for e in chk["events"]:
         t = t_seq + e["f"] / 60
+        kind = e["id"].split("_")[0]
+        if (kind, e["f"]) in seen:
+            continue
+        seen.add((kind, e["f"]))
         if e["id"] == "break":
-            put(mix, t, thump(0.75))
+            put(mix, t, thump(0.6))
         elif e["id"].startswith("cut_"):
-            put(mix, t, click(0.05, 4200, 0.28, seed=e["f"], pan=0.0))
+            put(mix, t, click(0.05, 4200, 0.24, seed=e["f"], pan=0.0))
         elif e["id"].startswith("land_L"):
-            put(mix, t, click(0.07, 1900, 0.32, seed=e["f"] + 1))
+            put(mix, t, click(0.07, 1900, 0.26, seed=e["f"] + 1))
         elif e["id"].startswith("tag_"):
-            put(mix, t, click(0.06, 2300, 0.2, seed=e["f"] + 2))
+            put(mix, t, click(0.06, 2300, 0.18, seed=e["f"] + 2))
         elif e["id"] == "cdk_last":
-            put(mix, t, kick(0.25, 140, 60, 0.45))
-            put(mix, t, click(0.08, 1700, 0.4, seed=99))
+            put(mix, t, kick(0.25, 140, 60, 0.4))
+            put(mix, t, click(0.08, 1700, 0.34, seed=99))
+    tl["music"] = dict(w0_song_s=[round(BS.song_t(SHEET, "w0", 0.0), 3), round(BS.song_t(SHEET, "w0", m0["env_beats"][-1][0]), 3)],
+                       w1_song_s=[round(BS.song_t(SHEET, "w1", m1["start_beat"]), 3), round(BS.song_t(SHEET, "w1", m1["env_beats"][-1][0]), 3)],
+                       w1_song_start_out_s=round(t_w1 + off1, 3))
     wav = tmp / "mix.wav"
     peak = float(np.abs(mix).max())
-    if peak > 0.98:
-        mix *= 0.98 / peak
+    knee = 0.85                                                   # 软限幅：0.85 以上用 tanh 压，不整体拉低（旁白不跟着变小）
+    over_ = np.abs(mix) > knee
+    mix[over_] = np.sign(mix[over_]) * (knee + (1 - knee) * np.tanh((np.abs(mix[over_]) - knee) / (1 - knee)))
     write_wav(wav, mix[:int(total * SR)])
+    (tmp / "timeline.json").write_text(json.dumps(tl, ensure_ascii=False, indent=1), encoding="utf-8")
+    if mode == "audio":
+        print(f"W1_AUDIO {wav} {total:.2f} s peak {peak:.3f}")
+        return
 
     # ---- 画面
     OUT.parent.mkdir(parents=True, exist_ok=True)

@@ -1,12 +1,15 @@
 """HKBU SCIE1007 课程作业的科普视频：片头 W0、大标题 W1（零重力开箱）的验收量数。
 
-读 assemble_w0w1.py 出的 09_片头W0_大标题W1.mp4 和时间线 json、渲染目录里的 check.json，按 04 文档第七节 T1–T13
-（W1 部分按 07 文档第一、三节改过的版本）逐条量，写 导演检查_20261120/09_片头_检查.md 和 .html，另存一张接点帧条 png。
+读 assemble_w0w1.py 出的 09_片头W0_大标题W1.mp4 和时间线 json、渲染目录里的 check.json、卡点表（beat_sheet.py），
+按 04 文档第七节 T1–T13（W1 部分按 07 文档第一、三节改过的版本）逐条量，写 导演检查_20261120/09_片头_检查.md 和 .html，
+另存一张接点帧条 png、一张按拍抽帧的帧条 jpg（html 里内嵌）。换歌以后还量成片声音里的鼓和画面拍点差多少（T7b）。
 名字只出现在正式版的渲染帧里；这里不读名字文件，T11 只调 title_names.leak_scan 报"通过/不通过"。
 
     python check_w0w1.py draft|final
 """
+import base64
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -17,10 +20,11 @@ from PIL import Image, ImageDraw
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 sys.path.insert(0, str(HERE))
+import beat_sheet as BS                             # noqa: E402
 FF = str(Path(__file__).resolve().parents[2] / "_env/ffmpeg/ffmpeg.exe")   # TouchDesigner 带的 ffmpeg 没有 h264_nvenc
 REV = ROOT / "导演检查_20261120"
 VID = REV / "09_片头W0_大标题W1.mp4"
-WORK = Path("G:/cdk20/work/w1")
+WORK = Path(os.environ.get("CDK20_WORK", "D:/cdk20_work")) / "w1"
 W, H = 1920, 1080
 FPS60 = 60
 
@@ -85,9 +89,14 @@ def main():
     d0 = WORK / ("w0_prev" if mode == "draft" else "w0_final")
     c1 = json.loads((d1 / "check.json").read_text(encoding="utf-8"))
     c0 = json.loads((d0 / "check.json").read_text(encoding="utf-8"))
-    U = c1["unit_s"]
+    SH = BS.load()
+    BEAT = SH["beat_s"]
     TAIL = c1["tail"]
-    Fu = lambda u: TAIL + round(60 * U * u)          # noqa: E731
+    TB = c1["tl_beat"]                               # 镜头表里每个动作落在第几拍（W1 第 0 帧 = 第 0 拍）
+    Fb = lambda b: TAIL + round(60 * BEAT * b)       # noqa: E731
+
+    def Fk(k, i=None):
+        return Fb(TB[k][i] if i is not None else TB[k])
 
     # ---- 逐帧过一遍成片：平均亮度；接点前后各几帧留下来
     A, B = tl["A"], tl["B"]
@@ -141,30 +150,36 @@ def main():
     # T7 卡拍：事件帧 vs 拍点
     beat_rows = []
     TL = c1["tl"]
-    exp = {"break": Fu(TL["brk"])}
+    exp = {"break": Fk("brk"), "cdk_last": Fk("suck_end")}
     for e in c1["events"]:
         if e["id"].startswith("tag_"):
             k = int(e["id"].split("_")[1])
-            exp[e["id"]] = Fu(TL["tags"][k // 2])
-    cut_us = TL["cuts"]
+            exp[e["id"]] = Fk("tags", k // 2)
+    cut_bs = TB["cuts"] + [TB["q_cut"]]
     letters = [e for e in c1["events"] if e["id"].startswith("cut_")]
     for e in c1["events"]:
         if e["id"] in exp:
             beat_rows.append((e["id"], e["f"], exp[e["id"]], e["f"] - exp[e["id"]]))
-    lettercut_ok = all(any(abs(e["f"] - Fu(u)) <= 1 for u in cut_us + [TL["q_cut"]]) for e in letters)
+    lettercut_ok = all(any(abs(e["f"] - Fb(b)) <= 1 for b in cut_bs) for e in letters)
     lands = [e for e in c1["events"] if e["id"].startswith("land_L")]
-    half = round(60 * U * 0.5)
-    land_ok = all(any(abs(e["f"] - (Fu(u) + half)) <= 1 for u in cut_us) or abs(e["f"] - Fu(TL["q_land"])) <= 1 for e in lands)
-    t7_ok = all(abs(r[3]) <= 1 for r in beat_rows) and lettercut_ok and land_ok
+    land_ok = all(any(abs(e["f"] - Fb(b + 2)) <= 1 for b in TB["cuts"]) or abs(e["f"] - Fk("q_land")) <= 1 for e in lands)
+    # 每个点了名的动作都在八分音符网格上（卡点表里的拍数 × 2 是整数）
+    grid_ok = all(abs(2 * b - round(2 * b)) < 1e-6 for v in SH["w1"]["beats"].values() for b in (v if isinstance(v, list) else [v]))
+    t7_ok = all(abs(r[3]) <= 1 for r in beat_rows) and lettercut_ok and land_ok and grid_ok
     w0_hits = c0["hits"]
-    w0_ok = all(abs(v - round(60 * U / 2 * n)) <= 1 for n, v in enumerate(w0_hits.values()))
+    w0b = SH["w0"]["beats"]
+    w0_ok = all(abs(v - BS.f_of_beat(SH, w0b[k])) <= 1 for k, v in zip(("hit1", "hit2", "hit3"), w0_hits.values()))
+
+    # T7b 声音和画面对齐：成片音轨里量歌的军鼓/镲片起音（6–11 kHz），和"歌的拍子落在成片哪一帧"比
+    t7b = audio_beat_offsets(tl, SH, TAIL)
+    t7b_ok = t7b["n"] >= 8 and abs(t7b["median_ms"]) <= 17 and t7b["p90_abs_ms"] <= 25
 
     # T1：信息出齐（从 W1 第一帧算，秒）
     s = lambda f: (f - TAIL) / 60.0                    # noqa: E731
     flip = 0                                           # 11-21 第二轮：牌落位那一帧正好转到正面
-    t1 = dict(title=s(Fu(TL["q_land"])), subtitle=s(Fu(TL["sub_land"])), course=s(Fu(TL["sat_land"][0])),
-              section=s(Fu(TL["sat_land"][1])), group=s(Fu(TL["sat_land"][2])), roster=s(Fu(TL["sat_land"][3])),
-              tag8_on=s(Fu(TL["tags"][3]) + flip), all_read=s(Fu(TL["read"])))
+    t1 = dict(title=s(Fk("q_land")), subtitle=s(Fk("sub_land")), course=s(Fk("sat_land", 0)),
+              section=s(Fk("sat_land", 1)), group=s(Fk("sat_land", 2)), roster=s(Fk("sat_land", 3)),
+              tag8_on=s(Fk("tags", 3) + flip), all_read=s(Fk("read")))
     t1_ok = max(t1.values()) <= 10.0
 
     # T3 字号
@@ -187,7 +202,7 @@ def main():
     tb_ok = bool(bright) and all(b[1] < 0.95 for b in bright)
 
     # 11-21 第二轮：背景色（读字帧里最暗的 30% 像素的中位数）、三层纵深、三拍、镜头冲击
-    fr_bg = Fu(TL["read"]) + 120
+    fr_bg = Fk("read") + 120
     fr_bg -= fr_bg % step
     bg_hex, bg_ok = "-", False
     pbg = d1 / f"f_{fr_bg:04d}.png"
@@ -254,26 +269,95 @@ def main():
     sheet.save(sheet_p)
 
     ok = lambda b: "通过" if b else "**没过**"        # noqa: E731
+    w1_len = c1["nf_w1"] / 60.0
+    rtime = {k: render_time(WORK / f"{k}_{'prev' if mode == 'draft' else 'final'}") for k in ("w0", "w0wipe", "w1z")}
+    strip_p = beat_strip(c0, c1, d0, d1, SH, Fb, TB, step)
     L_ = []
-    L_.append("# 片头 W0 + 大标题 W1（零重力开箱）：验收")
+    L_.append("# 片头 W0 + 大标题 W1（零重力开箱）：验收（换歌 Blinding Lights 版）")
     L_.append("")
-    L_.append("HKBU SCIE1007 课程作业的科普视频。按 04 文档第七节 T1–T13 逐条量（W1 按 07 文档第一节《零重力开箱》重做后，"
+    L_.append("HKBU SCIE1007 课程作业的科普视频。画面设计照导演认可的版本不动，只把歌从 Godmother 换成 " + SH["song"] + f"（{SH['bpm']} BPM，{SH['key']}），"
+              "按新歌的拍子重新卡点、重新渲染。按 04 文档第七节 T1–T13 逐条量（W1 按 07 文档第一节《零重力开箱》重做后，"
               "T1、T3、T7、T12 换成 07 文档第三节的要求）。成片：`09_片头W0_大标题W1.mp4`"
-              f"（{'草稿 1080p30，名字是灰条' if mode == 'draft' else '正式版 1080p60，名字在渲染进程里读进来'}）；接点帧条：`09_片头_接点帧条.png`。")
+              f"（{'草稿 1080p30，名字是灰条' if mode == 'draft' else '正式版 1080p60，名字在渲染进程里读进来'}）；旧版（Godmother）留作 `09_片头W0_大标题W1_v1.mp4`；接点帧条：`09_片头_接点帧条.png`。")
     L_.append("")
-    L_.append("审片文件分两段，中间 0.5 秒黑只是审片文件的拼法：A = W0 → 1-01 头 2 秒；B = 1-11 页面 2 秒 → 三维 1-11 尾 2 秒 + W1 16.79 秒 + 三维 2-01 头 2 秒 → 2-01 页面 2 秒。")
+    L_.append(f"审片文件分两段，中间 0.5 秒黑只是审片文件的拼法：A = W0（{c0['nf'] / 60:.2f} 秒）→ 1-01 头 2 秒；B = 1-11 页面 2 秒 → 三维 1-11 尾 2 秒 + W1 {w1_len:.2f} 秒 + 三维 2-01 头 2 秒 → 2-01 页面 2 秒。")
+    L_.append("")
+    L_.append("## 选段：为什么是这一段")
+    L_.append("")
+    L_.append(f"- **W0（歌 {BS.song_t(SH, 'w0', 0):.2f}–{BS.song_t(SH, 'w0', SH['w0']['nbeats']):.2f} s）**：{SH['w0']['why']}")
+    L_.append(f"- **W1（歌 {BS.song_t(SH, 'w1', SH['w1']['mix']['start_beat']):.2f}–{BS.song_t(SH, 'w1', SH['w1']['nbeats']):.2f} s）**：{SH['w1']['why']}")
+    for k, v in SH["w1"].get("notes", {}).items():
+        L_.append(f"- {k}：{v}")
+    L_.append(f"- 拍网格：{SH['grid_fix_note']}")
+    L_.append("- 我们听不了歌，选段全靠 `音乐/beat_pick.py` 的数：逐小节低/中/高三段能量和底鼓强度、6–11 kHz 起音对拍网格的偏差。前奏几段的能量（相对全曲前 45 s 最大值）：")
+    L_.append("")
+    L_.append("| 段落 | 歌里秒 | 低频（鼓、贝斯） | 中频（合成器） | 高频（镲片） | 用在 |")
+    L_.append("|---|---|---|---|---|---|")
+    for row in section_energy(SH):
+        L_.append("| " + " | ".join(str(x) for x in row) + " |")
+    L_.append("")
+    L_.append("## 拍点表：每个大动作落在第几拍")
+    L_.append("")
+    L_.append(f"一拍 = {BEAT * 1000:.1f} ms = {60 * BEAT:.2f} 帧（60 fps）；W1 第 0 拍 = 1-11 结束那一帧，W0 第 0 拍 = 片子第一帧。"
+              "W0 的帧是 W0 里的帧，W1 的帧是 w1z 序列帧（含 1-11 尾 120 帧）；\"实测\"是渲染脚本 check.json 里事件真正发生的帧。")
+    L_.append("")
+    L_.append("| 段 | 动作 | 第几拍 | 段内秒 | 歌里秒 | 歌里位置 | 帧 | 实测 |")
+    L_.append("|---|---|---|---|---|---|---|---|")
+    ev_f = {e["id"]: e["f"] for e in c1["events"]}
+    names0 = dict(hit1="第 1 下：点名玻璃肝", hit2="第 2 下：点名 CDK20", hit3="第 3 下：点名钥匙 048", lights_up="全板灯起亮",
+                  defocus="焦点拉到镜头前", lights_full="全板灯亮满", cut="T5 擦除换到 1-01")
+    for k, bt in SH["w0"]["beats"].items():
+        hit = {"hit1": "liver", "hit2": "cdk20", "hit3": "key048"}.get(k)
+        meas = c0["hits"].get(hit) if hit else (c0["nf"] if k == "cut" else "")
+        L_.append(f"| W0 | {names0.get(k, k)} | {bt} | {bt * BEAT:.2f} | {BS.song_t(SH, 'w0', bt):.3f} | {song_pos(SH, BS.song_t(SH, 'w0', bt))} | {BS.f_of_beat(SH, bt)} | {meas} |")
+    names1 = dict(skim="镜头贴着板面往前推", brk="大板断开（震 4 帧、闷响）", bt_in="子弹时间开始", bt_out="子弹时间结束", rod_set="镀铬料杆挂字母到位、扫光",
+                  cuts="剪字（成对，一拍一刀）", q_cut="红色 ? 剪下", q_land="片名落齐（? 落位）= ①英雄帧", sub_land="副标题落位",
+                  sweep2="硬高光扫过片名", hero_end="②镜头绕开、课程牌等飞进来", sat_land="课程 / Section / Group / 名单落位",
+                  tags="八块章节牌成对转正", read="③读字全景定格", suck="重力反转，零件吸回大板", suck_end="CDK20 插回、落位微震", land="落到第 2 区 = 2-01 开始")
+    meas1 = dict(brk=ev_f.get("break"), suck_end=ev_f.get("cdk_last"), land=ev_f.get("land_2_01"),
+                 q_cut=next((v for k_, v in ev_f.items() if k_.startswith("cut_") and k_.endswith("?")), ""),
+                 q_land=next((v for k_, v in ev_f.items() if k_.startswith("land_L") and k_.endswith("?")), ""))
+    tag_ev = sorted(e["f"] for e in c1["events"] if e["id"].startswith("tag_"))
+    cut_ev = sorted(e["f"] for e in c1["events"] if e["id"].startswith("cut_"))
+    for k, bt in SH["w1"]["beats"].items():
+        bl = bt if isinstance(bt, list) else [bt]
+        for i, b_ in enumerate(bl):
+            m = meas1.get(k, "")
+            if k == "tags":
+                m = ", ".join(str(f) for f in tag_ev[2 * i:2 * i + 2])
+            elif k == "cuts":
+                m = ", ".join(str(f) for f in sorted({f for f in cut_ev if abs(f - Fb(b_)) <= 1}))
+            nm = names1.get(k, k) + (f" {i + 1}" if len(bl) > 1 else "")
+            L_.append(f"| W1 | {nm} | {b_} | {b_ * BEAT:.2f} | {BS.song_t(SH, 'w1', b_):.3f} | {song_pos(SH, BS.song_t(SH, 'w1', b_))} | {Fb(b_)} | {m} |")
+    L_.append("")
+    L_.append(f"![按拍抽帧]({strip_p.name})")
+    L_.append("")
+    L_.append("## 混音：淡入淡出")
+    L_.append("")
+    for part, txt in (("w0", "W0"), ("w1", "W1")):
+        mx = SH[part]["mix"]
+        env = "，".join(f"第 {b} 拍 {g:g}" for b, g in mx["env_beats"])
+        lp = "，".join(f"第 {b} 拍 {hz} Hz" for b, hz in mx.get("lowpass_beats", []))
+        L_.append(f"- {txt}：歌整体 ×{mx.get('gain', 1.0)}（原曲这段 -8.8 LUFS，压到和旁白差不多响）；音量包络 {env}（中间 smoothstep，没有折角）；低通 {lp}（对数频率上平滑扫）。")
+    L_.append("- W0 尾：第 8 拍换到 1-01 时歌已经压到 0.42、闷到 2.5 kHz，1-01 第一个词 \"Every\"（1-01 第 0.54 s）之前淡没。")
+    L_.append("- W1 头：歌从 1-11 最后一句下面就低通淡入（\"Kong.\" 说完时 0.35、1.8 kHz），第 2 拍鼓进来时打开到全频；W1 尾：吸回大板以后边压低边闷，2-01 第一个词 \"Hong\"（2-01 第 0.15 s）时只剩 0.2、1 kHz，再过 1.8 s 淡没。")
+    L_.append("- 另加的音效：W0 每下一声塑料\"嗒\"（底鼓用歌里的），全板灯亮起一口气声，擦除过镜头一阵风；W1 大板断开闷响、剪字\"咔\"、落位\"嗒\"、牌转正、CDK20 插回。")
+    L_.append("")
+    L_.append("## 验收")
     L_.append("")
     L_.append("| 条 | 要求 | 量到的 | 结果 |")
     L_.append("|---|---|---|---|")
     L_.append(f"| T1 10 秒出齐 | 片名、副标题、课程、Section、Group、名单、八块牌都在 W1 开始后 10 s 内可读 | 片名 {t1['title']:.2f} s，副标题 {t1['subtitle']:.2f} s，课程 {t1['course']:.2f} s，"
-              f"Section {t1['section']:.2f} s，Group {t1['group']:.2f} s，名单 {t1['roster']:.2f} s，第八块牌转正 {t1['tag8_on']:.2f} s；全景定格从 {t1['all_read']:.2f} s 起 4 拍单位（3.95 s） | {ok(t1_ok)} |")
+              f"Section {t1['section']:.2f} s，Group {t1['group']:.2f} s，名单 {t1['roster']:.2f} s，第八块牌转正 {t1['tag8_on']:.2f} s；全景定格从 {t1['all_read']:.2f} s 起 {TB['suck'] - TB['read']:g} 拍（{(Fk('suck') - Fk('read')) / 60:.2f} s） | {ok(t1_ok)} |")
     L_.append(f"| T2 信息齐全 | 读字定格那一帧里同时看得到全部信息 | 片名、副标题全文、SCIE1007 + 课程名、Section 20007、Group 3B、名单牌（四人名字 + 学号）、八块章节牌（章名 + 主讲人）同在一帧（见检查帧 W1 {t1['all_read'] + 1:.1f} s） | {'通过（正式版有真名）' if mode == 'final' else '草稿是灰条，正式版再看'} |")
     L_.append(f"| T3 字号 | 片名 ≥ 90 px（07），其他 ≥ 28 px（1080p，全景定格机位） | 片名 {px['title']} px；副标题 {px['subtitle']}；课程牌 {px['course']}；Section {px['section']}；Group {px['group']}；"
               f"章名最小 {px['tags_min']}；牌上名字最小 {px['tag_names_min']}" + (f"；名单 {px['roster']}" if 'roster' in px else "") + f" | {ok(t3_ok)} |")
     L_.append("| T4 不硬切 | 接点相邻两帧平均亮度差 ≤ 15%，SSIM ≥ 0.5 | " + "；".join(f"{k}：亮度差 {d}%，SSIM {sv}" for k, c, d, sv in t4) + f" | {ok(t4_ok)} |")
     L_.append(f"| T5 不黑 | 每帧平均亮度 ≥ 前一秒平均的 40% | 最低 {worst5[0] * 100:.0f}%（成片第 {worst5[1]} 帧） | {ok(t5_ok)} |")
     L_.append("| T6 视线引导 | 不用红点；点名用焦点 + 轮廓光 | 画面里没有红点、红珠；W0 三下各一盏只照该零件的轮廓光 + 焦点点名；W1 八块牌转正时各一盏只照它的轮廓光；1-11 尾\"Hong\"上地图预颤 | 通过（目视） |")
-    L_.append(f"| T7 卡拍 | 动作接触帧离拍点 ≤ 1 帧（07） | 大板断开、八块牌转正：偏差 {', '.join(str(r[3]) for r in beat_rows)} 帧；13 刀剪字全在八分音符上，落位都在剪后半拍，\"?\" 晚半拍落位；W0 三下 {list(w0_hits.values())} | {ok(t7_ok and w0_ok)} |")
+    L_.append(f"| T7 卡拍 | 动作接触帧离拍点 ≤ 1 帧（07） | 大板断开、八块牌转正、CDK20 插回：偏差 {', '.join(str(r[3]) for r in beat_rows)} 帧；13 刀剪字全在拍上，落位都在剪后 2 拍，\"?\" 剪后 2 拍落位；"
+              f"卡点表里每个动作都在八分音符网格上：{'是' if grid_ok else '否'}；W0 三下 {list(w0_hits.values())} 帧（第 0、2、4 拍） | {ok(t7_ok and w0_ok)} |")
+    L_.append(f"| T7b 声画对齐 | 成片音轨里歌的军鼓/镲片起音离画面拍点 ≤ 1 帧（17 ms） | 量了 {t7b['n']} 下（W0 和 W1 里避开音效的军鼓拍）：中位 {t7b['median_ms']:+.1f} ms，90% 在 ±{t7b['p90_abs_ms']:.1f} ms 内 | {ok(t7b_ok)} |")
     L_.append(f"| T8 人先露出再开口 | 1-01 第一个词前 A 完全露出 | 擦除的白料牌在 1-01 第 {c0['wipe'][2] - c0['nf']} 帧（{wipe_gone:.2f} s）离开画面，\"Every\" 在 0.54 s | {ok(t8_ok)} |")
     L_.append(f"| T9 不穿模 | 零穿模 | 会动的 {c1['bodies']} 件（{c1['parts']} 个零件 + 13 个字母 + 牌）逐 2 帧查凸包相交（字母用真网格）：{len(clip)} 处；镜头离任何物体最近 {c1['cam_clear_mm']['min_mm']} mm | {ok(not clip and c1['cam_clear_mm']['min_mm'] >= 20)} |")
     L_.append(f"| T10 镜头不死 | 没有超过 0.5 s 的完全静止 | W1 最长静止 {best} 帧，W0 {best0} 帧（读字定格段有 2.5% 慢推 + ≤ 0.3° 手持感） | {ok(t10_ok)} |")
@@ -287,56 +371,162 @@ def main():
     L_.append("|---|---|---|---|")
     L_.append(f"| 1 不灰不闷 | 近黑深蓝背景（#0B1020 左右）、强逆光和轮廓光、片名高光白亮面带扫光、红问号亮面带自发光、片名区最大亮度 < 0.95 | 读字帧最暗 30% 像素中位色 {bg_hex}；背后两盏逆光 + 每块牌一盏轮廓光；英雄帧一道硬高光扫过片名（只照字）；问号自发光 0.8；片名亮度见上表 | {ok(bg_ok and tb_ok)} |")
     L_.append(f"| 2 三层纵深 | 前景大零件占画面 15–30%、强虚化；中景一圈零件围着片名；远景小零件和尘粒 | 英雄帧：前景 {lay.get('hero', {}).get('fg_cover_pct')}%，中景零件 {lay.get('hero', {}).get('mid_parts')} 块，远景 {lay.get('hero', {}).get('far_parts')} 块；读字帧：前景 {lay.get('read', {}).get('fg_cover_pct')}%（退到四角），中景 {lay.get('read', {}).get('mid_parts')} 块，远景 {lay.get('read', {}).get('far_parts')} 块；另有 260 粒尘（只在片名后面）；零件浮起后放大到 3.1 倍 | {ok(fg_ok)} |")
-    L_.append(f"| 3 分三拍 | ①英雄帧只有片名（≥ 140 px）+ 副标题 + 零件群，停 1.5 s；②课程、Section、Group 依次入画；③拉开读字全景、八块牌上环 | ①{t1['title']:.2f}–{s(Fu(TL['hero_end'])):.2f} s（{lay.get('hero_window_s')} s），片名 {pxh.get('title')} px，这段里进画的其他牌：{lay.get('hero_extra_items') or '无'}；②课程 {t1['course']:.2f} s、Section {t1['section']:.2f} s、Group {t1['group']:.2f} s；③名单 {t1['roster']:.2f} s，八块牌 {s(Fu(TL['tags'][0])):.2f}–{t1['tag8_on']:.2f} s，读字 {t1['all_read']:.2f} s | {ok(hero_ok)} |")
+    L_.append(f"| 3 分三拍 | ①英雄帧只有片名（≥ 140 px）+ 副标题 + 零件群，停 1.5 s；②课程、Section、Group 依次入画；③拉开读字全景、八块牌上环 | ①{t1['title']:.2f}–{s(Fk('hero_end')):.2f} s（{lay.get('hero_window_s')} s），片名 {pxh.get('title')} px，这段里进画的其他牌：{lay.get('hero_extra_items') or '无'}；②课程 {t1['course']:.2f} s、Section {t1['section']:.2f} s、Group {t1['group']:.2f} s；③名单 {t1['roster']:.2f} s，八块牌 {s(Fk('tags', 0)):.2f}–{t1['tag8_on']:.2f} s，读字 {t1['all_read']:.2f} s | {ok(hero_ok)} |")
     L_.append("| 4 章节牌 | 厚 3 mm、倒角、边缘高光的亮面塑料牌，挂在小浇口上，翻转时有反光扫过 | 牌厚 3 mm、倒角 1 mm、清漆 0.9；顶边一个镀铬细浇口 + 一截料杆头；一块只照牌的大灯放在镜头左前方、和牌同高，牌转面时反光扫过 | 通过（目视） |")
     L_.append("| 5 去掉空白占位牌 | 画面里没有空白的 \"No.\" 牌 | 背面的 \"No.\" 字删了，背面改成大号红色章节号；牌不再先背面朝前停着等，飞进来时一边转、落位那一帧转到正面 | 通过（目视） |")
     L_.append(f"| 6 镜头冲击 | W0 和大板断开用广角贴近零件、轻震；子弹时间镜头在零件间穿行（< 60 mm） | W0：{c0.get('lens_mm')} mm 广角，三下各停在零件前约 13 cm，两下之间甩过去，每下震 4 帧，镜头离板最近 {w0c.get('min_mm')} mm；W1：断开时 24 mm、离零件约 15 cm，震 4 帧；子弹时间沿零件层中间横穿，离零件凸包最近 {btc.get('min_hull_mm')} mm，{btc.get('frames_lt60')}/{btc.get('frames')} 帧在 60 mm 以内 | {ok(bt_ok)} |")
     L_.append("")
-    L_.append("## 逐拍（1 拍单位 = 2 个音乐拍 = 0.988 s，W1 从 1-11 结束那一帧算）")
+    L_.append("## 渲染")
     L_.append("")
-    L_.append("| 拍单位 | W1 秒 | 画面 |")
-    L_.append("|---|---|---|")
-    rows_ = [(0, "镜头贴着板面往前推（1-11 尾的三维地图升起接上来）"),
-             (TL["brk"], "鼓点：大板断开，零件从浇口脱落，重力关掉；24 mm 广角贴着零件，镜头震 4 帧，浇口迸出细灰；影棚灯压暗，背景变近黑深蓝"),
-             (TL["bt_in"], "子弹时间（10%）：镜头沿零件层中间横穿，离零件几厘米，f/2，慢慢歪 6°"),
-             (TL["resume"], "时间恢复，零件飞向片名四周并放大；远景小零件、尘粒从暗处显出来；镀铬料杆从右边滑进来，挂着 14 个字母（背面朝前）"),
-             (TL["sweep"], "镜头升到料杆、换回 50 mm；扫光从左到右扫过字背"),
-             (TL["cuts"][0], "每拍两刀（八分音符）：字母从外往里成对剪下，翻半圈，从片名上方绕到正前方插进位置"),
-             (TL["q_cut"], "红色 ? 剪下，晚半拍（{:.2f}）落位".format(TL["q_land"])),
-             (TL["sub_in"], "深色副标题长牌从后面转进来，{:.2f} 落在片名下".format(TL["sub_land"])),
-             (TL["hero"], "①英雄帧：只有片名 + 副标题 + 零件群（前景大零件虚着慢慢漂、中景一圈零件、远景小零件和尘粒），红问号亮起，1.5 s 慢推"),
-             (TL["sweep2"], "一道硬高光从左到右扫过亮面片名"),
-             (TL["hero_end"], "②镜头往下、往左绕一点，零件环跟着涨开；课程牌（红）、Section、Group 依次从画外螺旋绕进来，拖着细光迹落位"),
-             (TL["tags"][0], "③镜头拉开；名单牌落位；八块章节牌每拍一对从暗处飞进环里、一边飞一边转，落位那一帧转到正面，反光扫过，各打一盏轮廓光"),
-             (TL["read"], "读字全景：片名在零件环正中，定格 4 拍单位，2.5% 慢推"),
-             (TL["suck"], "鼓点：重力反过来——标题件全部往后退进暗处，零件从低到高一件件吸回大板、插回浇口"),
-             (TL["suck_end"], "CDK20 最后插回去，镜头跟着它俯冲，落位微震 2 帧；灯亮回影棚"),
-             (TL["land"], "贴着料杆落到第 2 区楼群 = 2-01 开始")]
-    for u, txt in rows_:
-        L_.append(f"| {u} | {u * U:.2f} | {txt} |")
+    L_.append("| 部分 | 帧数 | 采样 | 搭场景 | 渲染（第一帧到最后一帧落盘） | 每帧 |")
+    L_.append("|---|---|---|---|---|---|")
+    for k, cc in (("w0", c0), ("w0wipe", None), ("w1z", c1)):
+        r = rtime[k]
+        L_.append(f"| {k} | {r['n']} | {(cc or c0).get('samples', '-')} + OptiX 降噪 | {(cc or {}).get('build_s', '-')} s | {r['span_s'] / 60:.1f} min | {r['per_frame_s']:.2f} s |")
+    L_.append("")
+    L_.append("1080p60，Cycles + OPTIX GPU（RTX 5080），Blender 5.3；同机另一条线的 Blender 同时在跑（最多 2 个）。11-20 导演定：一律 16 采样 + OptiX 降噪，之后统一 GPU 放大到 4K。")
     L_.append("")
     L_.append("## 衔接（07 第二节工具箱）")
     L_.append("")
     L_.append("| 接点 | 代号 | 做法 |")
     L_.append("|---|---|---|")
-    L_.append(f"| W0 → 1-01 | T5 焦点擦除 | 一块白色亮面料牌贴着镜头（40 mm）从右往左飞过，完全虚掉；第 {c0['wipe_cover_frames'][0]}–{c0['wipe_cover_frames'][1]} 帧整块盖满，换点在第 178 帧；透明层叠到 1-01 头 15 帧 |")
-    L_.append("| 1-11 页面 → 三维地图 | T6 光扫 | 14 帧，一道斜光带扫过、整体提亮到 0.93（不过曝），最亮那帧换场 |")
+    L_.append(f"| W0 → 1-01 | T5 焦点擦除 | 一块白色亮面料牌贴着镜头（40 mm）从右往左飞过，完全虚掉；第 {c0['wipe_cover_frames'][0]}–{c0['wipe_cover_frames'][1]} 帧整块盖满，换点在第 {c0['nf']} 帧（W0 第 8 拍）；透明层叠到 1-01 头 {c0['wipe'][2] - c0['nf']} 帧；声音同时淡出 |")
+    L_.append("| 1-11 页面 → 三维地图 | T6 光扫 | 14 帧，一道斜光带扫过、整体提亮到 0.93（不过曝），最亮那帧换场；歌已经在下面低通淡入 |")
     L_.append("| 1-11 尾 → W1 → 2-01 头 | 一镜到底（T7 落位冲击在大板断开和 CDK20 插回两处） | 镜头不剪 |")
-    L_.append("| 三维第 2 区 → 2-01 页面 | T6 光扫 | 同上 |")
+    L_.append("| 三维第 2 区 → 2-01 页面 | T6 光扫 | 同上；歌这时已经淡没 |")
     L_.append("")
     L_.append("## 说明")
     L_.append("")
     L_.append("- 1-11、2-01 在粗剪 v9 里是二维说明书页。审片文件里 1-11 最后 2 秒、2-01 开头 2 秒的画面换成我们渲的三维镜头（声音照 v9），所以页面和三维之间各有一次 T6 光扫；接回粗剪时这两处照这个做。")
-    L_.append(f"- W1 比 v9 的 12 秒槽长到 16.79 秒（04 文档定的），W0 从 2.00 秒变 2.96 秒，1-01 在 W0 结束那一帧开始。")
-    L_.append("- 声音：W0 三下自己合成；W1 用 Godmother 第 64 小节起（第一拍对大板断开），2-01 人声前压低淡出；剪字、落位、牌转正、CDK20 插回各有一声塑料音。")
+    L_.append(f"- W1 {w1_len:.2f} 秒（{SH['w1']['nbeats']} 拍 = {SH['w1']['nbeats'] // 4} 小节），W0 {c0['nf'] / 60:.2f} 秒（{SH['w0']['nbeats']} 拍），1-01 在 W0 结束那一帧开始。")
+    L_.append("- 换歌的做法写成了项目技能 `.claude/skills/beat-retime/SKILL.md`；卡点表 `镜头设计_v3/音乐/卡点/" + Path(SH["path"]).name + "`。")
     md = REV / "09_片头_检查.md"
     md.write_text("\n".join(L_) + "\n", encoding="utf-8")
     # 导演检查_* 整个目录不进 git，检查表另存一份到 深化/ 里随代码提交（只有量出来的数，没有名字）
     (ROOT / "镜头设计_v3" / "深化" / "09_片头_检查.md").write_text("\n".join(L_) + "\n", encoding="utf-8")
     subprocess.run([sys.executable, str(ROOT / "_env" / "tools" / "md2html.py"), str(md)], check=True)
-    print("W1_CHECK", json.dumps(dict(t1=t1_ok, t3=t3_ok, t4=t4_ok, t5=t5_ok, t7=t7_ok and w0_ok, t8=t8_ok, t9=not clip,
+    hp = md.with_suffix(".html")                      # 抽帧图内嵌进 html（导演单开 html 也看得到）
+    h = hp.read_text(encoding="utf-8")
+    b64 = base64.b64encode(strip_p.read_bytes()).decode()
+    h = h.replace(f'src="{strip_p.name}"', f'style="max-width:100%" src="data:image/jpeg;base64,{b64}"')
+    hp.write_text(h, encoding="utf-8")
+    print("W1_CHECK", json.dumps(dict(t1=t1_ok, t3=t3_ok, t4=t4_ok, t5=t5_ok, t7=t7_ok and w0_ok, t7b=t7b, t8=t8_ok, t9=not clip,
                                       r1_bg=bg_hex, r1=bg_ok, r2=fg_ok, r3=hero_ok, r6=bt_ok,
-                                      t10=t10_ok, t11=t11_ok, bright=tb_ok, t4_rows=t4, bright_rows=bright), ensure_ascii=False, default=str))
+                                      t10=t10_ok, t11=t11_ok, bright=tb_ok, t4_rows=t4, bright_rows=bright, render=rtime), ensure_ascii=False, default=str))
+
+
+def song_pos(SH, t):
+    """歌里第 t 秒在哪一段的第几小节第几拍（段落起点来自卡点表 sections_s，都在小节线上；phrase_N 算进前一个段落）。"""
+    names = dict(pad_intro="垫音", riser_in="上扬", drums_in="鼓", riff_in="riff", vocal_in="人声")
+    beat = SH["beat_s"]
+    secs = sorted(((k, v) for k, v in SH["sections_s"].items() if not k.startswith("phrase")), key=lambda kv: kv[1])
+    cur = secs[0]
+    for k, v in secs:
+        if v <= t + 1e-3:
+            cur = (k, v)
+    m = round((t - cur[1]) / beat * 2) / 2
+    bar, b_in = int(m // 4) + 1, m % 4 + 1
+    return f"{names.get(cur[0], cur[0])}第 {bar} 小节第 {b_in:g} 拍"
+
+
+def section_energy(SH):
+    p = HERE.parent / "音乐" / "拍子" / f"{SH['song']}_pick.json"
+    if not p.exists():
+        return []
+    pk = json.loads(p.read_text(encoding="utf-8"))
+    secs = sorted(SH["sections_s"].items(), key=lambda kv: kv[1])
+    use = SH.get("sections_use", {})
+    rows = []
+    for i, (k, t0) in enumerate(secs):
+        t1 = secs[i + 1][1] if i + 1 < len(secs) else t0 + 5.6
+        bars = [b for b in pk["bars"] if t0 - 0.2 <= b["t"] < t1 - 0.2]
+        if not bars:
+            continue
+        mean = lambda key: sum(b[key] for b in bars) / len(bars)       # noqa: E731
+        rows.append((k, f"{t0:.2f}–{t1:.2f}", f"{mean('low'):.2f}", f"{mean('mid'):.2f}", f"{mean('high'):.2f}", use.get(k, "")))
+    return rows
+
+
+def render_time(d):
+    fs = sorted(d.glob("f_*.png"))
+    if len(fs) < 2:
+        return dict(n=len(fs), span_s=0.0, per_frame_s=0.0)
+    mt = sorted(f.stat().st_mtime for f in fs)
+    span = mt[-1] - mt[0]
+    return dict(n=len(fs), span_s=round(span, 1), per_frame_s=round(span / (len(fs) - 1), 2))
+
+
+def audio_beat_offsets(tl, SH, TAIL):
+    """成片音轨里歌的军鼓/镲片（6–11 kHz）起音时间 − 画面上同一拍的帧时间（毫秒）。
+    只量军鼓拍（鼓进来以后的奇数拍），避开音效 60 ms 以内的拍。"""
+    SR = 44100
+    r = subprocess.run([FF, "-v", "error", "-i", str(VID), "-vn", "-ac", "1", "-ar", str(SR), "-f", "f32le", "-"], capture_output=True, check=True)
+    x = np.frombuffer(r.stdout, np.float32).astype(np.float64)
+    X = np.fft.rfft(x)
+    f = np.fft.rfftfreq(len(x), 1 / SR)
+    y = np.abs(np.fft.irfft(X * ((f >= 6000) & (f < 11000)), len(x)))
+    k = int(0.003 * SR)
+    env = np.convolve(y, np.ones(k) / k, "same")
+    beat = SH["beat_s"]
+    sub = "prev" if tl["mode"] == "draft" else "final"
+    c1 = json.loads((WORK / f"w1z_{sub}" / "check.json").read_text(encoding="utf-8"))
+    c0 = json.loads((WORK / f"w0_{sub}" / "check.json").read_text(encoding="utf-8"))
+    t_seq = tl["B"]["start"] + 2.0
+    sfx = [t_seq + e["f"] / 60 for e in c1["events"]] + [tl["A"]["start"] + v / 60 for v in c0["hits"].values()]
+    cand = []
+    b0 = SH["w0"]["song_t_at_beat"][0]                                   # W0：鼓从第 b0 拍进来，军鼓在之后的奇数拍
+    for b in range(int(b0) + 1, SH["w0"]["nbeats"] - 1, 2):
+        cand.append(tl["A"]["start"] + round(60 * beat * b) / 60)
+    bw = SH["w1"]["song_t_at_beat"][0]                                   # W1：鼓从第 bw 拍进来
+    for b in range(int(bw) + 1, int(SH["w1"]["beats"]["suck_end"]), 2):
+        cand.append(tl["B"]["w1_start"] + round(60 * beat * b) / 60)
+    offs = []
+    for t in cand:
+        if any(abs(t - s_) < 0.06 for s_ in sfx):
+            continue
+        i0, i1 = int((t - 0.06) * SR), int((t + 0.08) * SR)
+        seg = env[i0:i1]
+        if len(seg) == 0:
+            continue
+        pk = int(np.argmax(seg))
+        base = float(np.median(env[int((t - 0.15) * SR):int((t - 0.07) * SR)]))
+        thr = base + 0.3 * (seg[pk] - base)
+        j = int(np.argmax(seg[:pk + 1] > thr))
+        offs.append(((i0 + j) / SR - t) * 1000)
+    if not offs:
+        return dict(n=0, median_ms=0.0, p90_abs_ms=0.0)
+    offs = np.array(offs)
+    return dict(n=len(offs), median_ms=round(float(np.median(offs)), 1), p90_abs_ms=round(float(np.percentile(np.abs(offs), 90)), 1))
+
+
+def beat_strip(c0, c1, d0, d1, SH, Fb, TB, step):
+    """按拍抽帧：W0 三下 + W1 每个大动作，各取一帧拼成一张 jpg（480×270 一格，下面写第几拍和动作）。"""
+    picks = []
+    for k, lbl in (("hit1", "liver"), ("hit2", "CDK20"), ("hit3", "key 048"), ("defocus", "defocus")):
+        b = SH["w0"]["beats"][k]
+        picks.append((d0, BS.f_of_beat(SH, b) + 2, f"W0 beat {b:g} {lbl}"))
+    for k, i, lbl, off in (("brk", None, "break", 3), ("bt_in", None, "bullet time", 20), ("cuts", 2, "letter cut", 0),
+                           ("q_land", None, "title lands (riff in)", 20), ("sweep2", None, "highlight sweep", 20),
+                           ("sat_land", 3, "roster lands", 2), ("tags", 3, "8th tag face-on", 2), ("read", None, "read", 60),
+                           ("suck", None, "suck back", 25), ("suck_end", None, "CDK20 back in", 2), ("land", None, "land = 2-01", 0)):
+        b = TB[k][i] if i is not None else TB[k]
+        picks.append((d1, Fb(b) + off, f"W1 beat {b:g} {lbl}"))
+    tw, th = 480, 270
+    cols = 5
+    rows = (len(picks) + cols - 1) // cols
+    sheet = Image.new("RGB", (tw * cols, (th + 22) * rows), (16, 16, 20))
+    dr = ImageDraw.Draw(sheet)
+    for n, (d, f, lbl) in enumerate(picks):
+        f = min(f, (c0["nf"] if d == d0 else c1["nf"]) - 1)
+        f -= f % step
+        p = d / f"f_{f:04d}.png"
+        x, y = (n % cols) * tw, (n // cols) * (th + 22)
+        if p.exists():
+            sheet.paste(Image.open(p).convert("RGB").resize((tw, th)), (x, y))
+        dr.text((x + 6, y + th + 4), f"{lbl}  (frame {f})", fill=(255, 220, 120))
+    out = REV / "09_片头_抽帧.jpg"
+    sheet.save(out, quality=85)
+    return out
 
 
 if __name__ == "__main__":

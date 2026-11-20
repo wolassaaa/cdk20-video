@@ -6,8 +6,10 @@
 八块章节牌在环里一对一对转到正面（主讲人名字）；定格让观众读；最后零件被吸回大板一个个插回浇口，
 镜头跟着最后一块 CDK20 俯冲，贴着料杆落到第 2 区楼群，接 2-01。
 
-时间单位：一"拍单位" u = 2 个音乐拍（Godmother 121.483 BPM，0.9878 s）。W1 从 1-11 结束那一帧算，共 17 u = 16.79 s。
-07 文档的逐拍表按 04 的"10 秒内信息出齐"整体前移（见 TL 表和报告），定格从 1 u 延长到 4 u。
+时间：TL 表是"设计刻度" u（动作的先后和相对位置，原来 1 u = Godmother 的 2 拍 = 0.9878 s）；每个大动作真正落在
+新歌的第几拍写在卡点表里（音乐/卡点/w0w1_<歌名>.json 的 w1.beats），beat_sheet.Warp 把 u 换成拍：点了名的动作正好在拍上，
+"某动作 + 0.3 u" 这种小偏移跟着所在那一段伸缩。换歌只改卡点表，这里的动作设计不动。
+现在的歌 Blinding Lights 171.007 BPM：W1 从 1-11 结束那一帧算，共 48 拍 = 12 小节 = 16.84 s。
 物理：零重力下的运动是解析的（匀速漂、缓停、慢转），逐帧烘焙成关键帧；不穿模由凸包逐帧检查保证（check 里的 clip_pairs）。
 名字：只有 --final 时在本进程里由 title_names 读进内存直接生成文字，不打印、不落盘。
 """
@@ -29,10 +31,11 @@ import kit_deep as D
 import bl_guide as BG
 import kit_h20 as H
 import shot_w0w1 as S
+import beat_sheet as BS
 
 MM = 0.001
 FPS = 60
-U = 2 * 60.0 / S.BPM                       # 一个拍单位（秒）
+BEAT = S.beat_s()                          # 新歌一拍（秒）
 TAIL, HEAD = S.TAIL, S.HEAD
 NF_W1 = S.NF_W1
 NF = TAIL + NF_W1 + HEAD
@@ -55,9 +58,22 @@ TL = dict(skim=0.0, brk=1.0, bt_in=1.5, bt_out=2.5, resume=2.6, rod_in=2.4, rod_
           tags=[8.5, 8.75, 9.0, 9.25], read=9.5, read_end=13.5, suck=13.5, suck_end=15.0, land=17.0)
 
 
+WARP = BS.warp_from(S.SHEET, "w1", TL)     # 设计刻度 → 新歌的拍（锚点 = 卡点表里点了名的动作）
+
+
+def Bu(u):
+    """设计刻度 → 第几拍（W1 第 0 帧 = 第 0 拍）。"""
+    return WARP.beat(u)
+
+
 def Fu(u):
-    """拍单位 → w1z 序列帧。"""
-    return TAIL + round(FPS * U * u)
+    """设计刻度 → w1z 序列帧。"""
+    return TAIL + round(FPS * BEAT * WARP.beat(u))
+
+
+def u_of(F):
+    """w1z 序列帧 → 设计刻度（Fu 的反函数，不取整）。"""
+    return WARP.u((F - TAIL) / (FPS * BEAT))
 
 
 def hero_pos(p):
@@ -624,7 +640,7 @@ def build(sc, args):
     # ---- 时间：子弹时间（τ 是零件自己的"物理时间"）
     tau = np.zeros(NF)
     for F in range(1, NF):
-        u = (F - TAIL) / (FPS * U)
+        u = u_of(F)
         s = 1.0
         if TL["bt_in"] <= u <= TL["resume"]:
             ramp_in = smooth((u - TL["bt_in"]) / 0.15)
@@ -739,11 +755,12 @@ def build(sc, args):
         pairs.append([L[lo]] + ([L[hi]] if hi != lo else []))
         lo += 1
         hi -= 1
-    cut_f = {}
+    cut_u = {}
     for i, grp_ in enumerate(pairs):
         for b in grp_:
-            cut_f[b.name] = Fu(TL["cuts"][min(i, len(TL["cuts"]) - 1)])
-    cut_f[letters[-1].name] = Fu(TL["q_cut"])
+            cut_u[b.name] = TL["cuts"][min(i, len(TL["cuts"]) - 1)]
+    cut_u[letters[-1].name] = TL["q_cut"]
+    cut_f = {k: Fu(v) for k, v in cut_u.items()}
     q_face = Quaternion((1, 0, 0), math.radians(90))
     q_rev = Quaternion((0, 0, 1), math.pi) @ q_face
     flash_specs = []
@@ -751,7 +768,7 @@ def build(sc, args):
         b.cen = np.zeros((NF, 3))
         b.quat = np.zeros((NF, 4))
         fc = cut_f[b.name]
-        fl = fc + (round(FPS * U * (TL["q_land"] - TL["q_cut"])) if b.ch == "?" else round(FPS * U * 0.5))
+        fl = Fu(TL["q_land"]) if b.ch == "?" else Fu(cut_u[b.name] + 0.5)      # 落位：剪后 0.5 u（新歌里是剪后 2 拍）
         b.cut, b.land = fc, fl
         top_off = Quaternion(q_rev) @ b.c_local / MM
         f_off0 = Fu(TL["suck"])
@@ -957,7 +974,7 @@ def build(sc, args):
     # 光圈：1-11 尾 f/8（跟原来的板面镜头一样深），断开 f/2.8，子弹时间 f/2，读字 f/4，回板面 f/8
     fs = []
     for F in range(NF):
-        u = (F - TAIL) / (FPS * U)
+        u = u_of(F)
         v = 8.0
         for (ua, ub, a, b_) in ((0.2, 1.0, 8.0, 2.8), (1.2, 1.6, 2.8, 2.0), (2.5, 3.6, 2.0, 4.0), (13.5, 15.5, 4.0, 8.0)):
             if u >= ua:
@@ -970,9 +987,12 @@ def build(sc, args):
     # 镜头贴近零件时零件让一让（让完重新烘焙）
     av = [b for b in list(parts.values()) + tags + far]
     n_av = avoid_camera(av, poses)
+    # 让开的零件可能顶到旁边的零件（11-20 换歌后子弹时间里出现过一对）：让开的那件当"固定"，其余的再推开一遍
+    dodged = [b for b in av if getattr(b, "avoided", False)]
+    n_sep2 = separate([b for b in av if b not in dodged], f_brk, Fu(TL["read"]), fixed=dodged + letters + sats + [subb]) if dodged else 0
     for b in av:
         b.bake()
-    print(f"W1_AVOID moved={n_av}", flush=True)
+    print(f"W1_AVOID moved={n_av} re-separate pushes={n_sep2}", flush=True)
     # ---- 扫光：料杆到位时扫一次字背；英雄帧里一条硬高光从左到右扫过亮面片名
     sweep_light(sc, Fu(TL["sweep"]), Fu(TL["sweep"] + 0.5), "w1_sweep", 260.0, -0.9)
     sweep_light(sc, Fu(TL["sweep2"]), Fu(TL["sweep2"] + 0.7), "w1_sweep2", SWEEP2_W, -1.05, only=[b.o for b in letters])
@@ -994,7 +1014,8 @@ def build(sc, args):
     sc.render.motion_blur_shutter = 0.5
     sc.frame_set(0)
     # ---- 检查
-    chk = dict(part="w1z", nf=NF, bpm=S.BPM, unit_s=U, tl=TL, tail=TAIL, head=HEAD, nf_w1=NF_W1, final=bool(args.final),
+    chk = dict(part="w1z", nf=NF, bpm=S.BPM, beat_s=BEAT, song=S.SHEET["song"], tl=TL, beats=S.SHEET["w1"]["beats"],
+               tl_beat={k: ([round(Bu(x), 3) for x in v] if isinstance(v, list) else round(Bu(v), 3)) for k, v in TL.items()}, tail=TAIL, head=HEAD, nf_w1=NF_W1, final=bool(args.final),
                bodies=len(bodies), parts=len(parts), ring_width_mm=round(ring_w, 1),
                events=events_table(letters, tags, sats, subb, cdk, f_brk),
                focus_m=[round(v, 4) for v in fd], cam_loc_mm=[[round(c / MM, 2) for c in p[0]] for p in poses],
@@ -1015,7 +1036,7 @@ TAG_FLY = 40
 
 def lens_at(F):
     """逐帧焦距：50 → 24（起身到大板断开）→ 24（子弹时间）→ 50（升到料杆）。"""
-    u = (F - TAIL) / (FPS * U)
+    u = u_of(F)
     if u < 0.3:
         return 50.0
     if u < 1.0:
@@ -1054,6 +1075,7 @@ def avoid_camera(movers, poses, margin=24.0, decay=0.9):
         if dfc.max() <= 0:
             continue
         moved += 1
+        b.avoided = True
         sf, sb = dfc.copy(), dfc.copy()
         for F in range(1, NF):
             sf[F] = max(sf[F], sf[F - 1] * decay)
