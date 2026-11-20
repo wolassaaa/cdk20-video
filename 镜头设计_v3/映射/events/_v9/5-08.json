@@ -1,0 +1,228 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "5-08",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 5 章二维说明书页 5-08（C 画外音）：一排钥匙里一把抬起来标 048；上半 grabbed 两条横条，048 的条一格一格长到 15 格（about fifteen times tighter）；下半 the enzyme test，001 的条长出图外（more than 6,000 nanomolar），048 只有很短一截（just 33.4）。页面 Manual508.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "one",
+   "obj": "one",
+   "verb": "appear",
+   "at": {
+    "word": "5-08.w002",
+    "off": 0
+   },
+   "means": "one of them：一排六把钥匙里一把抬起来",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "5-08.w004"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "k48",
+   "obj": "k48",
+   "verb": "move",
+   "at": {
+    "word": "5-08.w005",
+    "off": 0
+   },
+   "means": "048：这把钥匙标 048，移到第二行，其余淡出",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "word": "5-08.w005"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "grab",
+   "obj": "grab",
+   "verb": "grow",
+   "at": {
+    "word": "5-08.w006",
+    "off": 0
+   },
+   "means": "grabbed：写 grabbed，001 和 048 两条长出",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "5-08.w006"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "key"
+    ]
+   }
+  },
+  {
+   "id": "fif",
+   "obj": "fif",
+   "verb": "grow",
+   "at": {
+    "word": "5-08.w008",
+    "off": 0
+   },
+   "means": "fifteen times：048 的条一格一格长到 15 格",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "5-08.w009"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "tig",
+   "obj": "tig",
+   "verb": "appear",
+   "at": {
+    "word": "5-08.w010",
+    "off": 0
+   },
+   "means": "tighter：写 about fifteen times tighter",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "enz",
+   "obj": "enz",
+   "verb": "appear",
+   "at": {
+    "word": "5-08.w013",
+    "off": 0
+   },
+   "means": "enzyme test：下半写 the enzyme test，两行画出",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "r001",
+   "obj": "r001",
+   "verb": "appear",
+   "at": {
+    "word": "5-08.w016",
+    "off": 0
+   },
+   "means": "001：001 行亮",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "5-08.w016"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "need",
+   "obj": "need",
+   "verb": "grow",
+   "at": {
+    "word": "5-08.w017",
+    "off": 0
+   },
+   "means": "needed more：001 的条往右长",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "5-08.w019"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "big",
+   "obj": "big",
+   "verb": "move",
+   "at": {
+    "word": "5-08.w020",
+    "off": 0
+   },
+   "means": "6,000 nanomolar：条长出图外带箭头，写 more than 6,000 nanomolar",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "r048",
+   "obj": "r048",
+   "verb": "appear",
+   "at": {
+    "word": "5-08.w022",
+    "off": 0
+   },
+   "means": "048：048 行亮",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "5-08.w022"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "n48",
+   "obj": "n48",
+   "verb": "grow",
+   "at": {
+    "word": "5-08.w023",
+    "off": 0
+   },
+   "means": "needed：048 的条起步",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "5-08.w023"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "just",
+   "obj": "just",
+   "verb": "snap",
+   "at": {
+    "word": "5-08.w025",
+    "off": 0
+   },
+   "means": "just 33.4：条停在很短一截，红字 just 33.4，一颤",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  }
+ ]
+}

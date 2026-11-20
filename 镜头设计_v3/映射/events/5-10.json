@@ -1,1137 +1,373 @@
 {
  "schema": "cdk20.events/1",
  "group": "5-10",
- "tool": "blender",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），另有第 5 章语义事件。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/5-10.json",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 5-10（Remotion + SVG + GSAP，页面 btier/B510.jsx）。路上三站，048 插头跳到第三站（big step），第三站的培养皿变成 Huh7 皿；三天、048 投进皿里；皿里细胞插满 CDK20 小插座；信号表掉一半；剂量条滚到 210 nM。HEK293 皿从右边进来，剂量条长到 1,700 nM；八段 Huh7 长度铺满 HEK 的条（roughly eight times）。",
+ "tier": "B",
+ "zone": 5,
+ "trans_in": "T5 socket（上一段 W4 是 A 段）",
+ "trans_out": "T2 甩镜往左（下一段 6-01 是 B 页）",
  "holds": [],
  "events": [
   {
-   "id": "step",
-   "obj": "step",
-   "verb": "appear",
+   "id": "road",
+   "obj": "road",
+   "verb": "grow",
    "at": {
-    "word": "5-10.w004",
+    "word": "then#1",
     "off": 0
    },
-   "until": {
-    "dur": 40
-   },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic"
-  },
-  {
-   "id": "dishes",
-   "obj": "dishes",
-   "verb": "appear",
-   "at": {
-    "word": "5-10.w006",
-    "off": -1
+   "lead": 9,
+   "means": "Then：路和三站从料杆上长出来（前两站打勾）",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
    },
    "until": {
-    "dur": 18
-   },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic"
+    "word": "step#1"
+   }
   },
   {
-   "id": "cal3",
-   "obj": "cal3",
-   "verb": "appear",
+   "id": "hop",
+   "obj": "hop",
+   "verb": "move",
    "at": {
-    "word": "5-10.w007",
+    "word": "step#1",
     "off": 0
    },
-   "until": {
-    "dur": 12
-   },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic",
-   "verb_was": "minical"
-  },
-  {
-   "id": "p1",
-   "obj": "p1",
-   "verb": "appear",
-   "at": {
-    "word": "5-10.w008",
-    "off": -1
-   },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic",
-   "verb_was": "minipage"
-  },
-  {
-   "id": "p2",
-   "obj": "p2",
-   "verb": "appear",
-   "at": {
-    "word": "5-10.w009",
-    "off": 0
-   },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic",
-   "verb_was": "minipage"
-  },
-  {
-   "id": "p3",
-   "obj": "p3",
-   "verb": "appear",
-   "at": {
-    "word": "5-10.w010",
-    "off": 0
-   },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic",
-   "verb_was": "minipage"
-  },
-  {
-   "id": "w048",
-   "obj": "w048",
-   "verb": "appear",
-   "at": {
-    "word": "5-10.w011",
-    "off": 0
+   "lead": 30,
+   "means": "big step：048 插头从第二站一大步跳到第三站",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
    },
    "until": {
-    "dur": 24
-   },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic",
-   "verb_was": "note"
+    "word": "step#1"
+   }
   },
   {
-   "id": "add",
-   "obj": "add",
-   "verb": "appear",
+   "id": "cells",
+   "obj": "cells",
+   "verb": "grow",
    "at": {
-    "word": "5-10.w011",
-    "off": 50
+    "word": "living#1",
+    "off": 0
+   },
+   "lead": 7,
+   "means": "living cells：第三站的培养皿长出来，里面是活细胞",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "huh7"
+    ]
    },
    "until": {
-    "dur": 20
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "shift",
+   "obj": "shift",
+   "verb": "move",
+   "at": {
+    "word": "after#1",
+    "off": 0
    },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic",
-   "verb_was": "leader"
+   "lead": 24,
+   "means": "After：路往左滑走，第三站的皿移到画面中间当 Huh7 皿",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "days#1"
+   }
+  },
+  {
+   "id": "cal",
+   "obj": "cal",
+   "verb": "appear",
+   "at": {
+    "word": "three#1",
+    "off": 0
+   },
+   "lead": 16,
+   "means": "three days：日历进来，翻三下，落在 days",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "days#1"
+   }
+  },
+  {
+   "id": "dose",
+   "obj": "dose",
+   "verb": "move",
+   "at": {
+    "word": "048#1",
+    "off": 0
+   },
+   "lead": 36,
+   "means": "048：048 插头插进皿里",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "plug"
+    ]
+   },
+   "until": {
+    "word": "048#1"
+   }
   },
   {
    "id": "huh7",
    "obj": "huh7",
    "verb": "appear",
    "at": {
-    "word": "5-10.w012",
+    "word": "huh7#1",
     "off": 0
    },
-   "until": {
-    "dur": 12
+   "lead": 10,
+   "means": "Huh7：皿上方标 Huh7",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
    },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic",
-   "verb_was": "ink"
+   "until": {
+    "word": "cells#2"
+   }
   },
   {
    "id": "liver",
    "obj": "liver",
    "verb": "appear",
    "at": {
-    "word": "5-10.w014",
+    "word": "liver#1",
     "off": 0
    },
-   "until": {
-    "dur": 20
+   "lead": 0,
+   "means": "liver cancer cells：手写批注",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
    },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic",
-   "verb_was": "ink"
+   "until": {
+    "word": "cells#2"
+   }
   },
   {
    "id": "packed",
    "obj": "packed",
-   "verb": "appear",
+   "verb": "grow",
    "at": {
-    "word": "5-10.w016",
+    "word": "packed#1",
     "off": 0
    },
-   "until": {
-    "dur": 30
-   },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic",
-   "verb_was": "note"
-  },
-  {
-   "id": "ulcdk",
-   "obj": "ulcdk",
-   "verb": "appear",
-   "at": {
-    "word": "5-10.w018",
-    "off": 0
+   "lead": 7,
+   "means": "packed with CDK20：皿里的细胞一个个插满小插座",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
    },
    "until": {
-    "dur": 12
-   },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic",
-   "verb_was": "ul"
-  },
-  {
-   "id": "cdk_dots",
-   "obj": "cdk_dots",
-   "verb": "appear",
-   "at": {
-    "word": "5-10.w018",
-    "off": 40
-   },
-   "until": {
-    "dur": 18
-   },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic",
-   "verb_was": "dots"
+    "word": "cdk20#1"
+   }
   },
   {
    "id": "lost",
    "obj": "lost",
    "verb": "appear",
    "at": {
-    "word": "5-10.w019",
-    "off": 8
-   },
-   "until": {
-    "dur": 20
-   },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic",
-   "verb_was": "ink"
-  },
-  {
-   "id": "slide0",
-   "obj": "slider",
-   "verb": "eject",
-   "at": {
-    "word": "5-10.w019",
+    "word": "lost#1",
     "off": 0
    },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic"
+   "lead": 13,
+   "means": "lost：信号表开始往下掉，细胞一半变灰",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "gauge"
+    ]
+   },
+   "until": {
+    "word": "their#1"
+   }
   },
   {
    "id": "half",
    "obj": "half",
-   "verb": "appear",
+   "verb": "move",
    "at": {
-    "word": "5-10.w020",
-    "off": -1
-   },
-   "until": {
-    "dur": 36
-   },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic",
-   "verb_was": "note"
-  },
-  {
-   "id": "sig1",
-   "obj": "sig1",
-   "verb": "appear",
-   "at": {
-    "word": "5-10.w022",
+    "word": "half#1",
     "off": 0
    },
-   "until": {
-    "dur": 12
+   "lead": 0,
+   "means": "half：信号表停在一半，标 half；living-cell signal 手写",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
    },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic",
-   "verb_was": "ul"
+   "until": {
+    "word": "signal#1"
+   }
   },
   {
-   "id": "sig2",
-   "obj": "sig2",
-   "verb": "appear",
+   "id": "d210",
+   "obj": "d210",
+   "verb": "grow",
    "at": {
-    "word": "5-10.w023",
+    "word": "210#1",
     "off": 0
    },
-   "until": {
-    "dur": 12
+   "lead": 60,
+   "means": "at about 210：剂量条长出来，数字轮停在 210",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "bars"
+    ]
    },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic",
-   "verb_was": "ul"
+   "until": {
+    "word": "nanomolar#1"
+   }
   },
   {
-   "id": "about",
-   "obj": "about",
+   "id": "nm",
+   "obj": "nm",
    "verb": "appear",
    "at": {
-    "word": "5-10.w025",
+    "word": "nanomolar#1",
     "off": 0
    },
-   "until": {
-    "dur": 10
-   },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic",
-   "verb_was": "pen"
-  },
-  {
-   "id": "huh7_stop",
-   "obj": "slider",
-   "verb": "eject",
-   "at": {
-    "word": "5-10.w026",
-    "off": 0
-   },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic"
-  },
-  {
-   "id": "v210",
-   "obj": "v210",
-   "verb": "appear",
-   "at": {
-    "word": "5-10.w026",
-    "off": 6
+   "lead": 8,
+   "means": "nanomolar：数字后面刻上 nM",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
    },
    "until": {
-    "dur": 20
-   },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic"
-  },
-  {
-   "id": "nm1",
-   "obj": "nm1",
-   "verb": "appear",
-   "at": {
-    "word": "5-10.w027",
-    "off": 0
-   },
-   "until": {
-    "dur": 1
-   },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic",
-   "verb_was": "ul"
-  },
-  {
-   "id": "cmp",
-   "obj": "cmp",
-   "verb": "appear",
-   "at": {
-    "word": "5-10.w028",
-    "off": 0
-   },
-   "until": {
-    "dur": 14
-   },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic",
-   "verb_was": "ink"
-  },
-  {
-   "id": "cmp2",
-   "obj": "cmp2",
-   "verb": "appear",
-   "at": {
-    "word": "5-10.w029",
-    "off": 0
-   },
-   "until": {
-    "dur": 16
-   },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic",
-   "verb_was": "ink"
+    "sentence_end": true
+   }
   },
   {
    "id": "hek",
    "obj": "hek",
-   "verb": "appear",
+   "verb": "move",
    "at": {
-    "word": "5-10.w030",
+    "word": "comparison#1",
     "off": 0
    },
-   "until": {
-    "dur": 12
-   },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic",
-   "verb_was": "ul"
-  },
-  {
-   "id": "hek2",
-   "obj": "hek2",
-   "verb": "appear",
-   "at": {
-    "word": "5-10.w030",
-    "off": 8
+   "lead": 30,
+   "means": "Comparison cells：Huh7 一组往左让，HEK293 皿从右边滑进来",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "hek"
+    ]
    },
    "until": {
-    "dur": 18
-   },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic"
+    "word": "cells#3"
+   }
   },
   {
-   "id": "hek_go",
-   "obj": "hek_go",
+   "id": "hekl",
+   "obj": "hekl",
    "verb": "appear",
    "at": {
-    "word": "5-10.w031",
-    "off": -62
-   },
-   "until": {
-    "dur": 20
-   },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic",
-   "verb_was": "note"
-  },
-  {
-   "id": "needed",
-   "obj": "needed",
-   "verb": "appear",
-   "at": {
-    "word": "5-10.w031",
+    "word": "hek293#1",
     "off": 0
    },
-   "until": {
-    "dur": 10
+   "lead": 10,
+   "means": "HEK293：标 HEK293",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
    },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic",
-   "verb_was": "pen"
+   "until": {
+    "word": "hek293#1"
+   }
   },
   {
-   "id": "hek_stop",
-   "obj": "slider",
-   "verb": "eject",
+   "id": "hneed",
+   "obj": "hneed",
+   "verb": "move",
    "at": {
-    "word": "5-10.w033",
+    "word": "needed#1",
     "off": 0
    },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic"
-  },
-  {
-   "id": "v1700",
-   "obj": "v1700",
-   "verb": "appear",
-   "at": {
-    "word": "5-10.w033",
-    "off": 6
+   "lead": 36,
+   "means": "needed：048 插进 HEK 皿，它的信号表也掉到一半",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
    },
    "until": {
-    "dur": 20
-   },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic"
+    "word": "about#2"
+   }
   },
   {
-   "id": "link",
-   "obj": "link",
-   "verb": "appear",
+   "id": "d1700",
+   "obj": "d1700",
+   "verb": "grow",
    "at": {
-    "word": "5-10.w033",
-    "off": 66
-   },
-   "until": {
-    "dur": 24
-   },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic",
-   "verb_was": "pen"
-  },
-  {
-   "id": "hekhalf",
-   "obj": "hekhalf",
-   "verb": "appear",
-   "at": {
-    "word": "5-10.w034",
-    "off": -46
-   },
-   "until": {
-    "dur": 24
-   },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic",
-   "verb_was": "note"
-  },
-  {
-   "id": "roughly",
-   "obj": "roughly",
-   "verb": "appear",
-   "at": {
-    "word": "5-10.w034",
+    "word": "1,700#1",
     "off": 0
    },
-   "until": {
-    "dur": 20
+   "lead": 90,
+   "means": "about 1,700：HEK 的剂量条长到 1,700",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "bars"
+    ]
    },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic",
-   "verb_was": "bracket"
+   "until": {
+    "sentence_end": true
+   }
   },
   {
    "id": "eight",
    "obj": "eight",
+   "verb": "grow",
+   "at": {
+    "word": "eight#1",
+    "off": 0
+   },
+   "lead": 30,
+   "means": "eight：八段 Huh7 的长度依次铺满 HEK 的条",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "times#1"
+   }
+  },
+  {
+   "id": "more",
+   "obj": "more",
    "verb": "appear",
    "at": {
-    "word": "5-10.w035",
+    "word": "times#1",
     "off": 0
    },
-   "until": {
-    "dur": 26
-   },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic",
-   "verb_was": "note"
-  },
-  {
-   "id": "foot",
-   "obj": "foot",
-   "verb": "appear",
-   "at": {
-    "word": "5-10.w037",
-    "off": 0
+   "lead": 0,
+   "means": "times more：手写 ≈ 8×",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
    },
    "until": {
-    "dur": 20
-   },
-   "ease": "inout",
-   "migrated": "migrate_beats_v8:semantic",
-   "verb_was": "ink"
-  },
-  {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w001",
-    "off": -9
-   },
-   "until": {
-    "dur": 74
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.00→1.23 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.0,
-    1.233
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage01",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w004",
-    "off": 0
-   },
-   "until": {
-    "dur": 74
-   },
-   "ease": "linear",
-   "means": "旧动画源片 1.23→2.47 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    1.233,
-    2.467
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage02",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w006",
-    "off": -1
-   },
-   "until": {
-    "dur": 71
-   },
-   "ease": "linear",
-   "means": "旧动画源片 2.47→3.65 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    2.467,
-    3.65
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage03",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w007",
-    "off": 0
-   },
-   "until": {
-    "dur": 31
-   },
-   "ease": "linear",
-   "means": "旧动画源片 3.65→4.17 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    3.65,
-    4.167
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage04",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w008",
-    "off": -1
-   },
-   "until": {
-    "dur": 17
-   },
-   "ease": "linear",
-   "means": "旧动画源片 4.17→4.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    4.167,
-    4.45
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage05",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w009",
-    "off": 0
-   },
-   "until": {
-    "dur": 24
-   },
-   "ease": "linear",
-   "means": "旧动画源片 4.45→4.85 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    4.45,
-    4.85
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage06",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w010",
-    "off": 0
-   },
-   "until": {
-    "dur": 30
-   },
-   "ease": "linear",
-   "means": "旧动画源片 4.85→5.35 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    4.85,
-    5.35
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage07",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w011",
-    "off": 0
-   },
-   "until": {
-    "dur": 50
-   },
-   "ease": "linear",
-   "means": "旧动画源片 5.35→6.18 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    5.35,
-    6.183
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage08",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w012",
-    "off": -46
-   },
-   "until": {
-    "dur": 46
-   },
-   "ease": "linear",
-   "means": "旧动画源片 6.18→6.95 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    6.183,
-    6.95
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage09",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w012",
-    "off": 0
-   },
-   "until": {
-    "dur": 82
-   },
-   "ease": "linear",
-   "means": "旧动画源片 6.95→8.32 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    6.95,
-    8.317
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage10",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w014",
-    "off": 0
-   },
-   "until": {
-    "dur": 53
-   },
-   "ease": "linear",
-   "means": "旧动画源片 8.32→9.20 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    8.317,
-    9.2
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage11",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w016",
-    "off": 0
-   },
-   "until": {
-    "dur": 62
-   },
-   "ease": "linear",
-   "means": "旧动画源片 9.20→10.23 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    9.2,
-    10.233
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage12",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w018",
-    "off": 0
-   },
-   "until": {
-    "dur": 40
-   },
-   "ease": "linear",
-   "means": "旧动画源片 10.23→10.90 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    10.233,
-    10.9
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage13",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w018",
-    "off": 40
-   },
-   "until": {
-    "dur": 53
-   },
-   "ease": "linear",
-   "means": "旧动画源片 10.90→11.78 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    10.9,
-    11.783
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage14",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w019",
-    "off": 0
-   },
-   "until": {
-    "dur": 8
-   },
-   "ease": "linear",
-   "means": "旧动画源片 11.78→11.92 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    11.783,
-    11.917
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage15",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w019",
-    "off": 8
-   },
-   "until": {
-    "dur": 50
-   },
-   "ease": "linear",
-   "means": "旧动画源片 11.92→12.75 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    11.917,
-    12.75
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage16",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w020",
-    "off": -1
-   },
-   "until": {
-    "dur": 51
-   },
-   "ease": "linear",
-   "means": "旧动画源片 12.75→13.60 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    12.75,
-    13.6
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage17",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w022",
-    "off": 0
-   },
-   "until": {
-    "dur": 43
-   },
-   "ease": "linear",
-   "means": "旧动画源片 13.60→14.32 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    13.6,
-    14.317
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage18",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w023",
-    "off": 0
-   },
-   "until": {
-    "dur": 71
-   },
-   "ease": "linear",
-   "means": "旧动画源片 14.32→15.50 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    14.317,
-    15.5
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage19",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w025",
-    "off": 0
-   },
-   "until": {
-    "dur": 66
-   },
-   "ease": "linear",
-   "means": "旧动画源片 15.50→16.60 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    15.5,
-    16.6
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage20",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w026",
-    "off": 0
-   },
-   "until": {
-    "dur": 6
-   },
-   "ease": "linear",
-   "means": "旧动画源片 16.60→16.70 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    16.6,
-    16.7
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage21",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w026",
-    "off": 6
-   },
-   "until": {
-    "dur": 66
-   },
-   "ease": "linear",
-   "means": "旧动画源片 16.70→17.80 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    16.7,
-    17.8
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage22",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w027",
-    "off": 0
-   },
-   "until": {
-    "dur": 89
-   },
-   "ease": "linear",
-   "means": "旧动画源片 17.80→19.28 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    17.8,
-    19.283
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage23",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w028",
-    "off": 0
-   },
-   "until": {
-    "dur": 46
-   },
-   "ease": "linear",
-   "means": "旧动画源片 19.28→20.05 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    19.283,
-    20.05
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage24",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w029",
-    "off": 0
-   },
-   "until": {
-    "dur": 49
-   },
-   "ease": "linear",
-   "means": "旧动画源片 20.05→20.87 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    20.05,
-    20.867
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage25",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w030",
-    "off": 0
-   },
-   "until": {
-    "dur": 8
-   },
-   "ease": "linear",
-   "means": "旧动画源片 20.87→21.00 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    20.867,
-    21.0
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage26",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w030",
-    "off": 8
-   },
-   "until": {
-    "dur": 152
-   },
-   "ease": "linear",
-   "means": "旧动画源片 21.00→23.53 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    21.0,
-    23.533
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage27",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w031",
-    "off": 0
-   },
-   "until": {
-    "dur": 62
-   },
-   "ease": "linear",
-   "means": "旧动画源片 23.53→24.57 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    23.533,
-    24.567
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage28",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w033",
-    "off": 0
-   },
-   "until": {
-    "dur": 6
-   },
-   "ease": "linear",
-   "means": "旧动画源片 24.57→24.67 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    24.567,
-    24.667
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage29",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w033",
-    "off": 6
-   },
-   "until": {
-    "dur": 156
-   },
-   "ease": "linear",
-   "means": "旧动画源片 24.67→27.27 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    24.667,
-    27.267
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage30",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w034",
-    "off": 0
-   },
-   "until": {
-    "dur": 36
-   },
-   "ease": "linear",
-   "means": "旧动画源片 27.27→27.87 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    27.267,
-    27.867
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage31",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w035",
-    "off": 0
-   },
-   "until": {
-    "dur": 41
-   },
-   "ease": "linear",
-   "means": "旧动画源片 27.87→28.55 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    27.867,
-    28.55
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage32",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "5-10.w037",
-    "off": 0
-   },
-   "until": {
-    "dur": 25
-   },
-   "ease": "linear",
-   "means": "旧动画源片 28.55→28.97 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    28.55,
-    28.969
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "sentence_end": true
+   }
   }
  ]
 }

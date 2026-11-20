@@ -1,0 +1,1 @@
+旁白讲 AlphaFold 预测模型不可全信：左边预测模型（按可信度上色），放大镜扣到红色低可信度尾巴；右边插座左上角长出一串红珠子（尾巴），floppy 时晃，标 low confidence；模型里尾巴横搭过插孔，一颗珠子落进 ATP pocket；trust it blindly 时模型收走，冲出三个金插头，一个飞向插孔被尾巴挡回（T7，手写 blocked）。

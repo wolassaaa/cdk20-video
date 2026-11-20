@@ -1,0 +1,426 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "5-01",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 5-01（VO）：七个小瓶一排落下，烧瓶在后面；问号变成 CDK20，七个瓶各连虚线；右边 Kd 刻度，指针；一个瓶里的小点流向 CDK20，抓住一半时左半边变实；指针往下走，lower = tighter，一条连线变粗。页面 Manual501.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "title",
+   "obj": "title",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w003",
+    "off": 0
+   },
+   "means": "moment：标题 The moment of truth",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "sub",
+   "obj": "sub",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w005",
+    "off": 0
+   },
+   "means": "truth：副标题 Objective 2 · Results",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "seven",
+   "obj": "seven",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w006",
+    "off": 0
+   },
+   "means": "Seven：七个小瓶依次落下，计数跳到 7",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "mol",
+   "obj": "mol",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w008",
+    "off": 0
+   },
+   "means": "molecules：写 real molecules",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "made",
+   "obj": "made",
+   "verb": "grow",
+   "at": {
+    "word": "5-01.w009",
+    "off": 0
+   },
+   "means": "made：烧瓶在瓶后长出",
+   "tool": "remotion",
+   "lead": 16,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "flask"
+    ]
+   }
+  },
+  {
+   "id": "lab",
+   "obj": "lab",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w013",
+    "off": 0
+   },
+   "means": "lab：写 made in a real lab",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "any",
+   "obj": "any",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w015",
+    "off": 0
+   },
+   "means": "any：右边红问号",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "grab",
+   "obj": "grab",
+   "verb": "morph",
+   "at": {
+    "word": "5-01.w017",
+    "off": 0
+   },
+   "means": "grab：问号变成虚的 CDK20",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "cdk",
+   "obj": "cdk",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w018",
+    "off": 0
+   },
+   "means": "CDK20：七个瓶各连虚线到 CDK20，写 CDK20",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "grip",
+   "obj": "grip",
+   "verb": "morph",
+   "at": {
+    "word": "5-01.w019",
+    "off": 0
+   },
+   "means": "Grip：七条线闪一下",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "meas",
+   "obj": "meas",
+   "verb": "grow",
+   "at": {
+    "word": "5-01.w021",
+    "off": 0
+   },
+   "means": "measured：右边量杯式刻度长出",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "kd",
+   "obj": "kd",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w023",
+    "off": 0
+   },
+   "means": "Kd：刻度上写 Kd，指针落下",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "rough",
+   "obj": "rough",
+   "verb": "morph",
+   "at": {
+    "word": "5-01.w024",
+    "off": 0
+   },
+   "means": "roughly：指针晃一下",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "how",
+   "obj": "how",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w025",
+    "off": 0
+   },
+   "means": "how much：第一个瓶的小点沿线流向 CDK20",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "molec",
+   "obj": "molec",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w027",
+    "off": 0
+   },
+   "means": "molecule：小点围到 CDK20 左边",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "it",
+   "obj": "it",
+   "verb": "morph",
+   "at": {
+    "word": "5-01.w028",
+    "off": 0
+   },
+   "means": "it：第一个瓶慢慢朝 CDK20 倾过去，像在倒",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "takes",
+   "obj": "takes",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w029",
+    "off": 0
+   },
+   "means": "takes：第二波小点",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "grab2",
+   "obj": "grab2",
+   "verb": "snap",
+   "at": {
+    "word": "5-01.w031",
+    "off": 0
+   },
+   "means": "grab：小点贴住 CDK20",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "half",
+   "obj": "half",
+   "verb": "morph",
+   "at": {
+    "word": "5-01.w032",
+    "off": 0
+   },
+   "means": "half：CDK20 左半边变实，右半边还是虚的",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "prot",
+   "obj": "prot",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w034",
+    "off": 0
+   },
+   "means": "protein：写 half the protein",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "lower",
+   "obj": "lower",
+   "verb": "move",
+   "at": {
+    "word": "5-01.w035",
+    "off": 0
+   },
+   "means": "Lower：指针往下走",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "means",
+   "obj": "means",
+   "verb": "appear",
+   "at": {
+    "word": "5-01.w036",
+    "off": 0
+   },
+   "means": "means：向下箭头和 lower = tighter",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "tight",
+   "obj": "tight",
+   "verb": "morph",
+   "at": {
+    "word": "5-01.w037",
+    "off": 0
+   },
+   "means": "tighter：第一个瓶到 CDK20 的线变粗变红",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  }
+ ]
+}

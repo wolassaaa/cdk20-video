@@ -1,0 +1,228 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "3-05",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 3-05（D）：为什么是 CDK20。香港团队；52 个肿瘤样本点阵 36 个变红；高水平 → 晚期、生存短（因果链，不画曲线）；调低 CDK20 细胞长得慢。页面 Manual305.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "title",
+   "obj": "title",
+   "verb": "appear",
+   "at": {
+    "word": "3-05.w001",
+    "off": 0
+   },
+   "means": "Why this lock：标题",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "3-05.w003"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "hk",
+   "obj": "hk",
+   "verb": "grow",
+   "at": {
+    "word": "3-05.w006",
+    "off": 0
+   },
+   "means": "Hong Kong team：香港地图和中大",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "hk"
+    ]
+   }
+  },
+  {
+   "id": "grid",
+   "obj": "grid",
+   "verb": "grow",
+   "at": {
+    "word": "3-05.w010",
+    "off": 0
+   },
+   "means": "36：52 个点阵画出",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "3-05.w012"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "red",
+   "obj": "grid_red",
+   "verb": "appear",
+   "at": {
+    "word": "3-05.w015",
+    "off": 0
+   },
+   "means": "CDK20 was higher：36 个点逐个变红，计数跳到 36",
+   "tool": "remotion",
+   "lead": 60,
+   "until": {
+    "word": "3-05.w022"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "cmp",
+   "obj": "compare",
+   "verb": "appear",
+   "at": {
+    "word": "3-05.w021",
+    "off": 0
+   },
+   "means": "non-tumour tissue：tumour vs nearby tissue 两个小柱",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "high",
+   "obj": "chain1",
+   "verb": "appear",
+   "at": {
+    "word": "3-05.w023",
+    "off": 0
+   },
+   "means": "High levels：链头 high CDK20",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "3-05.w024"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "late",
+   "obj": "chain_late",
+   "verb": "move",
+   "at": {
+    "word": "3-05.w027",
+    "off": 0
+   },
+   "means": "later-stage tumours：箭头到 later stage",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "3-05.w028"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "surv",
+   "obj": "chain_surv",
+   "verb": "move",
+   "at": {
+    "word": "3-05.w031",
+    "off": 0
+   },
+   "means": "shorter survival：箭头到 shorter survival",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "knob",
+   "obj": "knob",
+   "verb": "grow",
+   "at": {
+    "word": "3-05.w033",
+    "off": 0
+   },
+   "means": "turning：旋钮长出",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "3-05.w034"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "down",
+   "obj": "knob",
+   "verb": "move",
+   "at": {
+    "word": "3-05.w035",
+    "off": 0
+   },
+   "means": "down：旋钮拧低",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "3-05.w036"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "cells",
+   "obj": "cells",
+   "verb": "grow",
+   "at": {
+    "word": "3-05.w039",
+    "off": 0
+   },
+   "means": "cells：两团细胞并排长",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "3-05.w040"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "slow",
+   "obj": "cells_slow",
+   "verb": "morph",
+   "at": {
+    "word": "3-05.w042",
+    "off": 0
+   },
+   "means": "slowed their growth：右边一团长得慢，红批注",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  }
+ ]
+}

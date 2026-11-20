@@ -2,64 +2,89 @@
  "schema": "cdk20.events/1",
  "group": "5-08",
  "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：第 5 章二维说明书页 5-08（C 画外音）：一排钥匙里一把抬起来标 048；上半 grabbed 两条横条，048 的条一格一格长到 15 格（about fifteen times tighter）；下半 the enzyme test，001 的条长出图外（more than 6,000 nanomolar），048 只有很短一截（just 33.4）。页面 Manual508.jsx。",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 5-08（页面 btier/B508.jsx）。料杆上一排金插头，一个抬起来，变成 048（标 048）；grabbed：048 飞到 Kd 横尺上 0.6 处（001 在 9.2）；fifteen times：0 到 9.2 之间铺出 15 段，每段一个 048 的距离；enzyme test：十个小插座（灯亮 = 酶在干活）；001 needed more than 6,000：对数表盘的针一路转到 6,000 以外；048 needed just 33.4：新针只转到 33.4，十个里五个插座被 048 卡死（拧 90°、红卡扣、灯灭），T7 一抖。",
+ "tier": "B",
+ "zone": 5,
+ "trans_in": "T2 甩进（上一段 5-07 是 B 页）",
+ "trans_out": "T5 runner（下一段 5-09 是出镜段）",
  "holds": [],
  "events": [
   {
-   "id": "one",
-   "obj": "one",
-   "verb": "appear",
+   "id": "row",
+   "obj": "row",
+   "verb": "grow",
    "at": {
-    "word": "5-08.w002",
+    "word": "and#1",
     "off": 0
    },
-   "means": "one of them：一排六把钥匙里一把抬起来",
+   "lead": 9,
+   "means": "And：料杆上一排金插头和 Kd 横尺（001 在 9.2）",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "5-08.w004"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "them#1"
+   }
+  },
+  {
+   "id": "one",
+   "obj": "one",
+   "verb": "move",
+   "at": {
+    "word": "one#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "one of them：一个插头抬起来",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "them#1"
    }
   },
   {
    "id": "k48",
    "obj": "k48",
-   "verb": "move",
+   "verb": "morph",
    "at": {
-    "word": "5-08.w005",
+    "word": "048#1",
     "off": 0
    },
-   "means": "048：这把钥匙标 048，移到第二行，其余淡出",
+   "lead": 6,
+   "means": "048：抬起的插头刻上 048，标 048",
    "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "word": "5-08.w005"
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "row"
+    ]
+   },
+   "until": {
+    "word": "048#1"
    }
   },
   {
    "id": "grab",
    "obj": "grab",
-   "verb": "grow",
+   "verb": "move",
    "at": {
-    "word": "5-08.w006",
+    "word": "grabbed#1",
     "off": 0
    },
-   "means": "grabbed：写 grabbed，001 和 048 两条长出",
+   "lead": 40,
+   "means": "grabbed：048 飞到 Kd 横尺 0.6 处",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "5-08.w006"
-   },
    "guide": {
     "kind": "focus",
     "target": [
-     "key"
+     "rail"
     ]
+   },
+   "until": {
+    "word": "about#1"
    }
   },
   {
@@ -67,17 +92,17 @@
    "obj": "fif",
    "verb": "grow",
    "at": {
-    "word": "5-08.w008",
+    "word": "fifteen#1",
     "off": 0
    },
-   "means": "fifteen times：048 的条一格一格长到 15 格",
+   "lead": 60,
+   "means": "fifteen times：0 到 9.2 之间铺出 15 段",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "5-08.w009"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "times#1"
    }
   },
   {
@@ -85,143 +110,206 @@
    "obj": "tig",
    "verb": "appear",
    "at": {
-    "word": "5-08.w010",
+    "word": "tighter#1",
     "off": 0
    },
-   "means": "tighter：写 about fifteen times tighter",
+   "lead": 0,
+   "means": "tighter：手写 ≈ 15× tighter",
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "clear",
+   "obj": "clear",
+   "verb": "move",
+   "at": {
+    "word": "then#1",
+    "off": 0
+   },
    "lead": 6,
-   "until": {
-    "sentence_end": true
-   },
+   "means": "Then：尺和料杆往左滑走",
+   "tool": "remotion",
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "the#1"
    }
   },
   {
-   "id": "enz",
-   "obj": "enz",
-   "verb": "appear",
+   "id": "grid",
+   "obj": "grid",
+   "verb": "grow",
    "at": {
-    "word": "5-08.w013",
+    "word": "enzyme#1",
     "off": 0
    },
-   "means": "enzyme test：下半写 the enzyme test，两行画出",
+   "lead": 7,
+   "means": "enzyme：十个小插座依次落位，灯亮",
    "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "grid"
+    ]
+   },
+   "until": {
+    "word": "test#1"
    }
   },
   {
-   "id": "r001",
-   "obj": "r001",
+   "id": "lab",
+   "obj": "lab",
    "verb": "appear",
    "at": {
-    "word": "5-08.w016",
+    "word": "test#1",
     "off": 0
    },
-   "means": "001：001 行亮",
+   "lead": 10,
+   "means": "test：标 enzyme test",
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "dial",
+   "obj": "dial",
+   "verb": "grow",
+   "at": {
+    "word": "remember#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "Remember：对数表盘落位",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "001#1"
+   }
+  },
+  {
+   "id": "p001",
+   "obj": "p001",
+   "verb": "appear",
+   "at": {
+    "word": "001#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "001：001 插头靠到表盘边",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "needed#1"
+   }
+  },
+  {
+   "id": "sweep",
+   "obj": "sweep",
+   "verb": "move",
+   "at": {
+    "word": "6,000#1",
+    "off": 0
+   },
+   "lead": 83,
+   "means": "needed more than 6,000：针一路转到 6,000 以外，数字轮停在 6,000",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "dial"
+    ]
+   },
+   "until": {
+    "word": "6,000#1"
+   }
+  },
+  {
+   "id": "nm",
+   "obj": "nm",
+   "verb": "appear",
+   "at": {
+    "word": "nanomolar#1",
+    "off": 0
+   },
    "lead": 8,
-   "until": {
-    "word": "5-08.w016"
-   },
+   "means": "nanomolar：刻 nM",
+   "tool": "remotion",
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "p48",
+   "obj": "p48",
+   "verb": "appear",
+   "at": {
+    "word": "048#2",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "048：001 的针变灰留着，048 插头换上来",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "048#2"
    }
   },
   {
    "id": "need",
    "obj": "need",
-   "verb": "grow",
-   "at": {
-    "word": "5-08.w017",
-    "off": 0
-   },
-   "means": "needed more：001 的条往右长",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "5-08.w019"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "big",
-   "obj": "big",
    "verb": "move",
    "at": {
-    "word": "5-08.w020",
+    "word": "33.4#1",
     "off": 0
    },
-   "means": "6,000 nanomolar：条长出图外带箭头，写 more than 6,000 nanomolar",
+   "lead": 52,
+   "means": "needed just 33.4：新针只转一点，停在 33.4",
    "tool": "remotion",
-   "lead": 8,
+   "guide": {
+    "kind": "none"
+   },
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
    }
   },
   {
-   "id": "r048",
-   "obj": "r048",
-   "verb": "appear",
-   "at": {
-    "word": "5-08.w022",
-    "off": 0
-   },
-   "means": "048：048 行亮",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "5-08.w022"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "n48",
-   "obj": "n48",
-   "verb": "grow",
-   "at": {
-    "word": "5-08.w023",
-    "off": 0
-   },
-   "means": "needed：048 的条起步",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "5-08.w023"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "just",
-   "obj": "just",
+   "id": "clamp",
+   "obj": "clamp",
    "verb": "snap",
    "at": {
-    "word": "5-08.w025",
+    "word": "33.4#1",
     "off": 0
    },
-   "means": "just 33.4：条停在很短一截，红字 just 33.4，一颤",
+   "lead": 0,
+   "means": "33.4：十个里五个插座被卡死，灯灭，T7 一抖",
    "tool": "remotion",
-   "lead": 6,
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "grid"
+    ]
+   },
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
    }
   }
  ]

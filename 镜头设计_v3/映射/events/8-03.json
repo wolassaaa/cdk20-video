@@ -2,121 +2,107 @@
  "schema": "cdk20.events/1",
  "group": "8-03",
  "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 8-03（VO）：总结目标 2。接着 8-02 的路和便签：圈号 2 亮起，写 assess candidates fast；一大片点（millions）收缩成 13 个，变成 13 个小瓶；路下标 years，Target 到 Hit 标 30 days，Improve 上方钥匙在锁里转动（round two）。页面 Manual803.jsx。",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 8-03（页面 btier/B803.jsx）。our second?：目标牌 2 落位加红色问号；These methods：目标牌缩到左上角，三块芯片（PandaOmics、Chemistry42、AlphaFold）依次落位，候选插头在下面的料杆上快速走过（fast）；Screening by the millions：一大盘料珠，手写 millions；became thirteen：十三个插头掉进盘里，数字轮停在 13，标 molecules made；a road measured in years：一条长路带刻度，手写 years；first hit in 30 days：001 落在路的起点附近，标 30 days；round two made the key turn：048 插进小插座、拧 90°、红卡扣、灯灭（T7），左上角目标牌 2 打勾。",
+ "tier": "B",
+ "zone": 8,
+ "trans_in": "T2 甩进（上一段 8-02 是 B 页）",
+ "trans_out": "T5 runner（下一段 8-04–07 是出镜段）",
  "holds": [],
  "events": [
   {
-   "id": "second",
-   "obj": "second",
-   "verb": "appear",
+   "id": "goal",
+   "obj": "goal",
+   "verb": "grow",
    "at": {
-    "word": "8-03.w003",
+    "word": "second#1",
     "off": 0
    },
-   "means": "second：标题 Objective 2，圈号 2 亮",
+   "lead": 7,
+   "means": "our second：目标牌 2 落位",
    "tool": "remotion",
-   "lead": 8,
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "goal"
+    ]
+   },
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
    }
   },
   {
-   "id": "methods",
-   "obj": "methods",
+   "id": "q",
+   "obj": "q",
    "verb": "appear",
    "at": {
-    "word": "8-03.w005",
+    "word": "second#1",
     "off": 0
    },
-   "means": "methods：assess 括号变红",
+   "lead": 0,
+   "means": "second?：红色问号",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "8-03.w006"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
-   "id": "helped",
-   "obj": "helped",
-   "verb": "appear",
+   "id": "badge",
+   "obj": "badge",
+   "verb": "move",
    "at": {
-    "word": "8-03.w006",
+    "word": "these#1",
     "off": 0
    },
-   "means": "helped：便签第 2 行虚线变实",
+   "lead": 13,
+   "means": "These：目标牌缩到左上角",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "8-03.w008"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "methods#1"
    }
   },
   {
-   "id": "team",
-   "obj": "team",
+   "id": "chips",
+   "obj": "chips",
    "verb": "grow",
    "at": {
-    "word": "8-03.w008",
+    "word": "methods#1",
     "off": 0
    },
-   "means": "team：小人",
+   "lead": 13,
+   "means": "methods：三块芯片依次落位",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "8-03.w009"
-   },
    "guide": {
     "kind": "focus",
     "target": [
-     "person"
+     "chips"
     ]
+   },
+   "until": {
+    "word": "helped#1"
    }
   },
   {
-   "id": "assess",
-   "obj": "assess",
-   "verb": "appear",
+   "id": "conv",
+   "obj": "conv",
+   "verb": "move",
    "at": {
-    "word": "8-03.w009",
+    "word": "assess#1",
     "off": 0
    },
-   "means": "assess：第 2 行文字",
+   "lead": 20,
+   "means": "assess candidates：候选插头在料杆上走过芯片",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "8-03.w010"
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "cands",
-   "obj": "cands",
-   "verb": "grow",
-   "at": {
-    "word": "8-03.w010",
-    "off": 0
    },
-   "means": "candidates：Cells 上方三把小钥匙",
-   "tool": "remotion",
-   "lead": 8,
    "until": {
-    "word": "8-03.w011"
-   },
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "key"
-    ]
+    "word": "candidates#1"
    }
   },
   {
@@ -124,107 +110,74 @@
    "obj": "fast",
    "verb": "appear",
    "at": {
-    "word": "8-03.w011",
+    "word": "fast#1",
     "off": 0
    },
-   "means": "fast：速度线",
+   "lead": 0,
+   "means": "fast：手写 fast",
    "tool": "remotion",
-   "lead": 6,
+   "guide": {
+    "kind": "none"
+   },
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
    }
   },
   {
-   "id": "screen",
-   "obj": "screen",
+   "id": "pile",
+   "obj": "pile",
    "verb": "grow",
    "at": {
-    "word": "8-03.w012",
+    "word": "screening#1",
     "off": 0
    },
-   "means": "Screening：一大片点",
+   "lead": 13,
+   "means": "Screening：芯片出去，一大盘料珠长出来",
    "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "word": "8-03.w015"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "by#1"
    }
   },
   {
-   "id": "millions",
-   "obj": "millions",
+   "id": "mil",
+   "obj": "mil",
    "verb": "appear",
    "at": {
-    "word": "8-03.w015",
+    "word": "millions#1",
     "off": 0
    },
-   "means": "millions：标签",
+   "lead": 0,
+   "means": "millions：手写 millions",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "8-03.w016"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "became#1"
    }
   },
   {
-   "id": "became",
-   "obj": "became",
-   "verb": "morph",
+   "id": "n13",
+   "obj": "n13",
+   "verb": "grow",
    "at": {
-    "word": "8-03.w016",
+    "word": "thirteen#1",
     "off": 0
    },
-   "means": "became：点开始收缩",
+   "lead": 52,
+   "means": "became thirteen：十三个插头掉进盘里，数字轮停在 13",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "8-03.w017"
-   },
    "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "thirteen",
-   "obj": "thirteen",
-   "verb": "morph",
-   "at": {
-    "word": "8-03.w017",
-    "off": 0
+    "kind": "focus",
+    "target": [
+     "tray"
+    ]
    },
-   "means": "thirteen：收成 13 个，数字 13",
-   "tool": "remotion",
-   "lead": 30,
    "until": {
-    "word": "8-03.w018"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "mols",
-   "obj": "mols",
-   "verb": "morph",
-   "at": {
-    "word": "8-03.w018",
-    "off": 0
-   },
-   "means": "molecules：点变成小瓶",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "8-03.w019"
-   },
-   "guide": {
-    "kind": "none"
+    "word": "molecules#1"
    }
   },
   {
@@ -232,129 +185,131 @@
    "obj": "made",
    "verb": "appear",
    "at": {
-    "word": "8-03.w019",
+    "word": "made#1",
     "off": 0
    },
-   "means": "made：标签 13 made",
+   "lead": 10,
+   "means": "molecules made：标 molecules made",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
    "id": "road",
    "obj": "road",
-   "verb": "appear",
+   "verb": "grow",
    "at": {
-    "word": "8-03.w023",
+    "word": "and#2",
     "off": 0
    },
-   "means": "road：路闪一下",
+   "lead": 6,
+   "means": "And on a road：料珠和盘出去，一条长路带刻度",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "8-03.w024"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "road#1"
    }
   },
   {
    "id": "years",
    "obj": "years",
-   "verb": "grow",
+   "verb": "appear",
    "at": {
-    "word": "8-03.w026",
+    "word": "years#1",
     "off": 0
    },
-   "means": "years：路下长括号 years",
+   "lead": 0,
+   "means": "years：手写 years",
    "tool": "remotion",
-   "lead": 30,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "years#1"
    }
   },
   {
    "id": "hit",
    "obj": "hit",
-   "verb": "morph",
+   "verb": "move",
    "at": {
-    "word": "8-03.w029",
+    "word": "hit#1",
     "off": 0
    },
-   "means": "hit：Hit 站跳一下",
+   "lead": 7,
+   "means": "the first hit：001 落在路的起点附近",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "8-03.w030"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "days",
-   "obj": "days",
-   "verb": "appear",
-   "at": {
-    "word": "8-03.w033",
-    "off": 0
-   },
-   "means": "30 days：Target 到 Hit 的红括号",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "round",
-   "obj": "round",
-   "verb": "grow",
-   "at": {
-    "word": "8-03.w035",
-    "off": 0
-   },
-   "means": "round two：Improve 上方锁和钥匙",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "8-03.w037"
-   },
    "guide": {
     "kind": "focus",
     "target": [
-     "key",
-     "lock"
+     "road"
     ]
+   },
+   "until": {
+    "word": "came#1"
+   }
+  },
+  {
+   "id": "d30",
+   "obj": "d30",
+   "verb": "appear",
+   "at": {
+    "word": "30#1",
+    "off": 0
+   },
+   "lead": 10,
+   "means": "30 days：标 30 days",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "days#1"
+   }
+  },
+  {
+   "id": "r2",
+   "obj": "r2",
+   "verb": "move",
+   "at": {
+    "word": "made#2",
+    "off": 0
+   },
+   "lead": 50,
+   "means": "round two made：048 飞进小插座口",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "socket"
+    ]
+   },
+   "until": {
+    "word": "key#1"
    }
   },
   {
    "id": "turn",
    "obj": "turn",
-   "verb": "morph",
+   "verb": "snap",
    "at": {
-    "word": "8-03.w040",
+    "word": "turn#1",
     "off": 0
    },
-   "means": "key turn：钥匙转动，红弧箭头",
+   "lead": 12,
+   "means": "the key turn：048 拧 90°、红卡扣、灯灭（T7），目标牌 2 打勾",
    "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   }
  ]

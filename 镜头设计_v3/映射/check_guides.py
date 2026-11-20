@@ -4,6 +4,7 @@
   python 镜头设计_v3/映射/check_guides.py 3-04 2-08 3-01      keys + 成片全查（会另渲一版关掉引导的对照片，半分辨率）
   python 镜头设计_v3/映射/check_guides.py --keys-only 1-04 …   只查能从 keys 算的（V1–V5、V8、V10、V14），渲染前用
   python 镜头设计_v3/映射/check_guides.py --film               全片 V14（所有 keys 的引导次数）
+  python 镜头设计_v3/映射/check_guides.py --b 5-10             B 档页（src/v3/btier/B<段>.jsx，成片 导演检查_20261120/14_B档_<段>.mp4，b_page.py 出的）
 
 成片：映射/_cache/pages/<合成>.mp4（page_tool.py check 出的）。对照片：同一页传 --props {"noguide":true} 渲成半分辨率 jpg 序列（G 盘），
 亮度差（V6）、预颤位移（V5）都拿"开引导"减"关引导"算，内容本身的变化抵掉。报告写 映射/_reports/guides_<段>.md。不删任何东西。
@@ -22,6 +23,10 @@ MAN = ROOT / "镜头设计_v2/tests/T4_remotion/src/v3/manual"
 REM = ROOT / "镜头设计_v2/tests/T4_remotion"
 FF = str(ROOT / "_env/ffmpeg/ffmpeg.exe")
 NG = HERE / "_cache/guide_noguide"          # _cache 联到 G 盘
+BT = ROOT / "镜头设计_v2/tests/T4_remotion/src/v3/btier"
+B_MODE = "--b" in sys.argv                    # B 档页：页面在 btier/，成片在导演检查文件夹，ffmpeg 用 CipherTalk 的（_env/ffmpeg 写不了文件）
+if B_MODE:
+    FF = "D:/software/tools/CipherTalk/resources/app.asar.unpacked/node_modules/ffmpeg-static/ffmpeg.exe"
 REP = HERE / "_reports"
 W = 1920
 
@@ -32,6 +37,8 @@ def load(seg):
 
 
 def page_of(seg):
+    if B_MODE:
+        return "B" + seg.replace("-", ""), {"kind": "B"}
     import page_tool as PT
     g = PT.group(seg)
     return PT.comp(seg, g), g
@@ -122,7 +129,7 @@ def keys_checks(seg, K, oncam):
 
 def page_checks(seg, C, K, oncam):
     R = {}
-    src = (MAN / f"{C}.jsx").read_text(encoding="utf-8")
+    src = ((BT if B_MODE else MAN) / f"{C}.jsx").read_text(encoding="utf-8")
     kit = (MAN / "kit.jsx").read_text(encoding="utf-8")
     # V9：没有只为引导存在的点、圈、箭头（Bead 已是 null，页面不再调用；RunnerPulse 走完就消失）
     used = bool(re.search(r"<Bead\b", src))
@@ -171,6 +178,26 @@ def yavg(src, pattern=None):
 
 
 def render_noguide(seg, C, L):
+    if B_MODE:
+        import os
+        import tempfile
+        import b_page as BP
+        d = BP.WORK / "bnoguide" / C
+        d.mkdir(parents=True, exist_ok=True)
+        have = sorted(d.glob("element-*.jpeg"))
+        if len(have) >= L and have[0].stat().st_mtime > (BT / f"{C}.jsx").stat().st_mtime and have[0].stat().st_mtime > (BT / "bkit.jsx").stat().st_mtime:
+            return d
+        for x in have:
+            x.unlink()
+        sp, _, _ = BP.slim_public(seg, (BT / f"{C}.jsx").read_text(encoding="utf-8"))
+        BP.RTMP.mkdir(parents=True, exist_ok=True)
+        t = tempfile.mkdtemp(dir=BP.RTMP)
+        r = subprocess.run(["node", str(REM / "node_modules/@remotion/cli/remotion-cli.js"), "render", f"src/v3/btier/{C}.jsx", C, str(d), "--sequence",
+                            "--image-format=jpeg", "--jpeg-quality=95", "--scale=0.5", '--props={"noguide":true}', f"--public-dir={sp}", "--gl=angle",
+                            "--concurrency=2", "--log=error"], cwd=REM, env=dict(os.environ, TEMP=t, TMP=t))
+        if r.returncode:
+            sys.exit("对照片渲染出错")
+        return d
     import page_tool as PT
     d = NG / C
     d.mkdir(parents=True, exist_ok=True)
@@ -212,7 +239,7 @@ def film_checks(seg, C, K, oncam):
     from PIL import Image
     gray = lambda p: np.asarray(Image.open(p).convert("L"), dtype=np.float32)
     R = {}
-    mp4 = HERE / "_cache/pages" / f"{C}.mp4"
+    mp4 = ROOT / "导演检查_20261120" / f"14_B档_{seg}.mp4" if B_MODE else HERE / "_cache/pages" / f"{C}.mp4"
     if not mp4.exists():
         return {"V6": (False, f"没有成片 {mp4}")}
     G = K.get("guides", [])
@@ -240,7 +267,7 @@ def film_checks(seg, C, K, oncam):
     ramp = all(g["land"] - g["gs"] >= 12 and (g["goff"] - g["gend"] >= 12 or g["goff"] == g["gend"]) for g in G)
     # 局部：落点那一帧，目标框里平均亮度 开/关 之比
     loc, disp = [], []
-    tmp = ROOT / "_tmp" / "guide_chk"
+    tmp = Path("G:/cdk20/work/bcheck/_guide") if B_MODE else ROOT / "_tmp" / "guide_chk"
     tmp.mkdir(parents=True, exist_ok=True)
     cap = 2 ** 0.2 if oncam else 1.08
     for g in G:

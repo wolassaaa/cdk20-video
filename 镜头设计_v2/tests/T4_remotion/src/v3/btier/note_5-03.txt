@@ -1,0 +1,1 @@
+旁白讲 001 的 Kd 9.2 µM：横尺 0–60 µM，001 走到 9.2，数字轮停 9.2；另外六个落到 30 立柱右边并变灰（much weaker）；清场后日历落下（T7），数字轮 30 days；PandaOmics 芯片弹出小插座沿路走到 001，打勾 first confirmed hit。左上角分子图标 OUR RE-DOCKING (AutoDock Vina)。

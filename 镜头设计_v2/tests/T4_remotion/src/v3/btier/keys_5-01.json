@@ -1,0 +1,1034 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "5-01",
+ "segs": [
+  "5-01"
+ ],
+ "tool": "remotion",
+ "fps": 60,
+ "len_f": 1182,
+ "cut": "cut_v8",
+ "cut_start_f": 37470,
+ "cut_start_s": 624.5,
+ "master_built": "2026-11-18 02:33:56 +09:00",
+ "words_hash": "7dcf3e930074",
+ "events_src": "镜头设计_v3/映射/events/5-01.json",
+ "words": [
+  {
+   "wid": "5-01.w001",
+   "w": "So,",
+   "key": "so#1",
+   "sid": "5-01.s1",
+   "f0": 9,
+   "f1": 14,
+   "F0": 37479,
+   "F1": 37484
+  },
+  {
+   "wid": "5-01.w002",
+   "w": "the",
+   "key": "the#1",
+   "sid": "5-01.s1",
+   "f0": 35,
+   "f1": 40,
+   "F0": 37505,
+   "F1": 37510
+  },
+  {
+   "wid": "5-01.w003",
+   "w": "moment",
+   "key": "moment#1",
+   "sid": "5-01.s1",
+   "f0": 44,
+   "f1": 61,
+   "F0": 37514,
+   "F1": 37531
+  },
+  {
+   "wid": "5-01.w004",
+   "w": "of",
+   "key": "of#1",
+   "sid": "5-01.s1",
+   "f0": 63,
+   "f1": 68,
+   "F0": 37533,
+   "F1": 37538
+  },
+  {
+   "wid": "5-01.w005",
+   "w": "truth.",
+   "key": "truth#1",
+   "sid": "5-01.s1",
+   "f0": 74,
+   "f1": 98,
+   "F0": 37544,
+   "F1": 37568
+  },
+  {
+   "wid": "5-01.w006",
+   "w": "Seven",
+   "key": "seven#1",
+   "sid": "5-01.s2",
+   "f0": 138,
+   "f1": 156,
+   "F0": 37608,
+   "F1": 37626
+  },
+  {
+   "wid": "5-01.w007",
+   "w": "real",
+   "key": "real#1",
+   "sid": "5-01.s2",
+   "f0": 159,
+   "f1": 172,
+   "F0": 37629,
+   "F1": 37642
+  },
+  {
+   "wid": "5-01.w008",
+   "w": "molecules,",
+   "key": "molecules#1",
+   "sid": "5-01.s2",
+   "f0": 180,
+   "f1": 222,
+   "F0": 37650,
+   "F1": 37692
+  },
+  {
+   "wid": "5-01.w009",
+   "w": "made",
+   "key": "made#1",
+   "sid": "5-01.s2",
+   "f0": 249,
+   "f1": 262,
+   "F0": 37719,
+   "F1": 37732
+  },
+  {
+   "wid": "5-01.w010",
+   "w": "in",
+   "key": "in#1",
+   "sid": "5-01.s2",
+   "f0": 272,
+   "f1": 276,
+   "F0": 37742,
+   "F1": 37746
+  },
+  {
+   "wid": "5-01.w011",
+   "w": "a",
+   "key": "a#1",
+   "sid": "5-01.s2",
+   "f0": 280,
+   "f1": 282,
+   "F0": 37750,
+   "F1": 37752
+  },
+  {
+   "wid": "5-01.w012",
+   "w": "real",
+   "key": "real#2",
+   "sid": "5-01.s2",
+   "f0": 291,
+   "f1": 304,
+   "F0": 37761,
+   "F1": 37774
+  },
+  {
+   "wid": "5-01.w013",
+   "w": "lab.",
+   "key": "lab#1",
+   "sid": "5-01.s2",
+   "f0": 308,
+   "f1": 321,
+   "F0": 37778,
+   "F1": 37791
+  },
+  {
+   "wid": "5-01.w014",
+   "w": "Do",
+   "key": "do#1",
+   "sid": "5-01.s3",
+   "f0": 364,
+   "f1": 370,
+   "F0": 37834,
+   "F1": 37840
+  },
+  {
+   "wid": "5-01.w015",
+   "w": "any",
+   "key": "any#1",
+   "sid": "5-01.s3",
+   "f0": 386,
+   "f1": 401,
+   "F0": 37856,
+   "F1": 37871
+  },
+  {
+   "wid": "5-01.w016",
+   "w": "actually",
+   "key": "actually#1",
+   "sid": "5-01.s3",
+   "f0": 409,
+   "f1": 434,
+   "F0": 37879,
+   "F1": 37904
+  },
+  {
+   "wid": "5-01.w017",
+   "w": "grab",
+   "key": "grab#1",
+   "sid": "5-01.s3",
+   "f0": 443,
+   "f1": 461,
+   "F0": 37913,
+   "F1": 37931
+  },
+  {
+   "wid": "5-01.w018",
+   "w": "CDK20?",
+   "key": "cdk20#1",
+   "sid": "5-01.s3",
+   "f0": 483,
+   "f1": 531,
+   "F0": 37953,
+   "F1": 38001
+  },
+  {
+   "wid": "5-01.w019",
+   "w": "Grip",
+   "key": "grip#1",
+   "sid": "5-01.s4",
+   "f0": 576,
+   "f1": 592,
+   "F0": 38046,
+   "F1": 38062
+  },
+  {
+   "wid": "5-01.w020",
+   "w": "is",
+   "key": "is#1",
+   "sid": "5-01.s4",
+   "f0": 605,
+   "f1": 612,
+   "F0": 38075,
+   "F1": 38082
+  },
+  {
+   "wid": "5-01.w021",
+   "w": "measured",
+   "key": "measured#1",
+   "sid": "5-01.s4",
+   "f0": 618,
+   "f1": 643,
+   "F0": 38088,
+   "F1": 38113
+  },
+  {
+   "wid": "5-01.w022",
+   "w": "as",
+   "key": "as#1",
+   "sid": "5-01.s4",
+   "f0": 649,
+   "f1": 660,
+   "F0": 38119,
+   "F1": 38130
+  },
+  {
+   "wid": "5-01.w023",
+   "w": "Kd:",
+   "key": "kd#1",
+   "sid": "5-01.s4",
+   "f0": 666,
+   "f1": 683,
+   "F0": 38136,
+   "F1": 38153
+  },
+  {
+   "wid": "5-01.w024",
+   "w": "roughly,",
+   "key": "roughly#1",
+   "sid": "5-01.s4",
+   "f0": 714,
+   "f1": 734,
+   "F0": 38184,
+   "F1": 38204
+  },
+  {
+   "wid": "5-01.w025",
+   "w": "how",
+   "key": "how#1",
+   "sid": "5-01.s4",
+   "f0": 769,
+   "f1": 781,
+   "F0": 38239,
+   "F1": 38251
+  },
+  {
+   "wid": "5-01.w026",
+   "w": "much",
+   "key": "much#1",
+   "sid": "5-01.s4",
+   "f0": 786,
+   "f1": 801,
+   "F0": 38256,
+   "F1": 38271
+  },
+  {
+   "wid": "5-01.w027",
+   "w": "molecule",
+   "key": "molecule#1",
+   "sid": "5-01.s4",
+   "f0": 804,
+   "f1": 839,
+   "F0": 38274,
+   "F1": 38309
+  },
+  {
+   "wid": "5-01.w028",
+   "w": "it",
+   "key": "it#1",
+   "sid": "5-01.s4",
+   "f0": 906,
+   "f1": 912,
+   "F0": 38376,
+   "F1": 38382
+  },
+  {
+   "wid": "5-01.w029",
+   "w": "takes",
+   "key": "takes#1",
+   "sid": "5-01.s4",
+   "f0": 922,
+   "f1": 940,
+   "F0": 38392,
+   "F1": 38410
+  },
+  {
+   "wid": "5-01.w030",
+   "w": "to",
+   "key": "to#1",
+   "sid": "5-01.s4",
+   "f0": 943,
+   "f1": 949,
+   "F0": 38413,
+   "F1": 38419
+  },
+  {
+   "wid": "5-01.w031",
+   "w": "grab",
+   "key": "grab#2",
+   "sid": "5-01.s4",
+   "f0": 955,
+   "f1": 973,
+   "F0": 38425,
+   "F1": 38443
+  },
+  {
+   "wid": "5-01.w032",
+   "w": "half",
+   "key": "half#1",
+   "sid": "5-01.s4",
+   "f0": 989,
+   "f1": 1010,
+   "F0": 38459,
+   "F1": 38480
+  },
+  {
+   "wid": "5-01.w033",
+   "w": "the",
+   "key": "the#2",
+   "sid": "5-01.s4",
+   "f0": 1023,
+   "f1": 1030,
+   "F0": 38493,
+   "F1": 38500
+  },
+  {
+   "wid": "5-01.w034",
+   "w": "protein.",
+   "key": "protein#1",
+   "sid": "5-01.s4",
+   "f0": 1041,
+   "f1": 1070,
+   "F0": 38511,
+   "F1": 38540
+  },
+  {
+   "wid": "5-01.w035",
+   "w": "Lower",
+   "key": "lower#1",
+   "sid": "5-01.s5",
+   "f0": 1094,
+   "f1": 1114,
+   "F0": 38564,
+   "F1": 38584
+  },
+  {
+   "wid": "5-01.w036",
+   "w": "means",
+   "key": "means#1",
+   "sid": "5-01.s5",
+   "f0": 1121,
+   "f1": 1137,
+   "F0": 38591,
+   "F1": 38607
+  },
+  {
+   "wid": "5-01.w037",
+   "w": "tighter.",
+   "key": "tighter#1",
+   "sid": "5-01.s5",
+   "f0": 1142,
+   "f1": 1167,
+   "F0": 38612,
+   "F1": 38637
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "5-01.s1",
+   "text": "So, the moment of truth.",
+   "w_first": "5-01.w001",
+   "w_last": "5-01.w005",
+   "f0": 9,
+   "f1": 98
+  },
+  {
+   "sid": "5-01.s2",
+   "text": "Seven real molecules, made in a real lab.",
+   "w_first": "5-01.w006",
+   "w_last": "5-01.w013",
+   "f0": 138,
+   "f1": 321
+  },
+  {
+   "sid": "5-01.s3",
+   "text": "Do any actually grab CDK20?",
+   "w_first": "5-01.w014",
+   "w_last": "5-01.w018",
+   "f0": 364,
+   "f1": 531
+  },
+  {
+   "sid": "5-01.s4",
+   "text": "Grip is measured as Kd: roughly, how much molecule it takes to grab half the protein.",
+   "w_first": "5-01.w019",
+   "w_last": "5-01.w034",
+   "f0": 576,
+   "f1": 1070
+  },
+  {
+   "sid": "5-01.s5",
+   "text": "Lower means tighter.",
+   "w_first": "5-01.w035",
+   "w_last": "5-01.w037",
+   "f0": 1094,
+   "f1": 1167
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "sweep",
+   "obj": "sweep",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "So：T6 光扫过",
+   "f_start": 0,
+   "f_land": 9,
+   "f_end": 39,
+   "until": null,
+   "word": "5-01.w001",
+   "w": "So,",
+   "key": "so#1",
+   "sid": "5-01.s1",
+   "word_f0": 9,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 37470,
+   "F_land": 37479,
+   "F_end": 37509
+  },
+  {
+   "id": "sock",
+   "obj": "sock",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "the moment of truth：CDK20 插座落位，灯一闪",
+   "f_start": 31,
+   "f_land": 44,
+   "f_end": 98,
+   "until": "5-01.w005",
+   "word": "5-01.w003",
+   "w": "moment",
+   "key": "moment#1",
+   "sid": "5-01.s1",
+   "word_f0": 44,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 37501,
+   "F_land": 37514,
+   "F_end": 37568
+  },
+  {
+   "id": "rack",
+   "obj": "rack",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "Seven real molecules：插座让到右边，料杆上七个金插头依次落位",
+   "f_start": 125,
+   "f_land": 138,
+   "f_end": 222,
+   "until": "5-01.w008",
+   "word": "5-01.w006",
+   "w": "Seven",
+   "key": "seven#1",
+   "sid": "5-01.s2",
+   "word_f0": 138,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "rack"
+    ]
+   },
+   "F_start": 37595,
+   "F_land": 37608,
+   "F_end": 37692,
+   "g_start": 112,
+   "g_on": 130,
+   "g_end": 222,
+   "g_off": 252,
+   "g_tick": 134,
+   "G_start": 37582,
+   "G_on": 37600,
+   "G_end": 37692,
+   "G_off": 37722,
+   "G_tick": 37604
+  },
+  {
+   "id": "made",
+   "obj": "made",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "made in a real lab：手写批注",
+   "f_start": 249,
+   "f_land": 249,
+   "f_end": 321,
+   "until": "5-01.w013",
+   "word": "5-01.w009",
+   "w": "made",
+   "key": "made#1",
+   "sid": "5-01.s2",
+   "word_f0": 249,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 37719,
+   "F_land": 37719,
+   "F_end": 37791
+  },
+  {
+   "id": "flask",
+   "obj": "flask",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "lab：烧瓶长出来",
+   "f_start": 295,
+   "f_land": 308,
+   "f_end": 321,
+   "until": "5-01.s2",
+   "word": "5-01.w013",
+   "w": "lab.",
+   "key": "lab#1",
+   "sid": "5-01.s2",
+   "word_f0": 308,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "flask"
+    ]
+   },
+   "F_start": 37765,
+   "F_land": 37778,
+   "F_end": 37791,
+   "g_start": 282,
+   "g_on": 300,
+   "g_end": 321,
+   "g_off": 351,
+   "g_tick": 304,
+   "G_start": 37752,
+   "G_on": 37770,
+   "G_end": 37791,
+   "G_off": 37821,
+   "G_tick": 37774
+  },
+  {
+   "id": "any",
+   "obj": "any",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "any：七个插头挨个抖一下",
+   "f_start": 380,
+   "f_land": 386,
+   "f_end": 434,
+   "until": "5-01.w016",
+   "word": "5-01.w015",
+   "w": "any",
+   "key": "any#1",
+   "sid": "5-01.s3",
+   "word_f0": 386,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 37850,
+   "F_land": 37856,
+   "F_end": 37904
+  },
+  {
+   "id": "try",
+   "obj": "try",
+   "verb": "move",
+   "ease": "inout",
+   "means": "grab：001 从料杆上掰下来，飞到插座口前停住",
+   "f_start": 353,
+   "f_land": 443,
+   "f_end": 531,
+   "until": "5-01.w018",
+   "word": "5-01.w017",
+   "w": "grab",
+   "key": "grab#1",
+   "sid": "5-01.s3",
+   "word_f0": 443,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "sock"
+    ]
+   },
+   "F_start": 37823,
+   "F_land": 37913,
+   "F_end": 38001,
+   "g_start": 417,
+   "g_on": 435,
+   "g_end": 531,
+   "g_off": 561,
+   "g_tick": 439,
+   "G_start": 37887,
+   "G_on": 37905,
+   "G_end": 38001,
+   "G_off": 38031,
+   "G_tick": 37909
+  },
+  {
+   "id": "q",
+   "obj": "q",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "CDK20?：红色问号",
+   "f_start": 483,
+   "f_land": 483,
+   "f_end": 531,
+   "until": "5-01.s3",
+   "word": "5-01.w018",
+   "w": "CDK20?",
+   "key": "cdk20#1",
+   "sid": "5-01.s3",
+   "word_f0": 483,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 37953,
+   "F_land": 37953,
+   "F_end": 38001
+  },
+  {
+   "id": "clear",
+   "obj": "clear",
+   "verb": "move",
+   "ease": "inout",
+   "means": "Grip：插座和料杆出去，烧瓶移到左边",
+   "f_start": 566,
+   "f_land": 576,
+   "f_end": 612,
+   "until": "5-01.w020",
+   "word": "5-01.w019",
+   "w": "Grip",
+   "key": "grip#1",
+   "sid": "5-01.s4",
+   "word_f0": 576,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 38036,
+   "F_land": 38046,
+   "F_end": 38082
+  },
+  {
+   "id": "kd",
+   "obj": "kd",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "Kd：刻 Kd 和刻度",
+   "f_start": 656,
+   "f_land": 666,
+   "f_end": 734,
+   "until": "5-01.w024",
+   "word": "5-01.w023",
+   "w": "Kd:",
+   "key": "kd#1",
+   "sid": "5-01.s4",
+   "word_f0": 666,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 38126,
+   "F_land": 38136,
+   "F_end": 38204
+  },
+  {
+   "id": "grid",
+   "obj": "grid",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "roughly：十个小插座依次落位",
+   "f_start": 701,
+   "f_land": 714,
+   "f_end": 781,
+   "until": "5-01.w025",
+   "word": "5-01.w024",
+   "w": "roughly,",
+   "key": "roughly#1",
+   "sid": "5-01.s4",
+   "word_f0": 714,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "grid"
+    ]
+   },
+   "F_start": 38171,
+   "F_land": 38184,
+   "F_end": 38251,
+   "g_start": 688,
+   "g_on": 706,
+   "g_end": 760,
+   "g_off": 778,
+   "g_tick": 710,
+   "G_start": 38158,
+   "G_on": 38176,
+   "G_end": 38230,
+   "G_off": 38248,
+   "G_tick": 38180
+  },
+  {
+   "id": "much",
+   "obj": "much",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "how much molecule：烧瓶抖一下，瓶口冒出插头",
+   "f_start": 773,
+   "f_land": 786,
+   "f_end": 839,
+   "until": "5-01.w027",
+   "word": "5-01.w026",
+   "w": "much",
+   "key": "much#1",
+   "sid": "5-01.s4",
+   "word_f0": 786,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "flask"
+    ]
+   },
+   "F_start": 38243,
+   "F_land": 38256,
+   "F_end": 38309,
+   "g_start": 760,
+   "g_on": 778,
+   "g_end": 839,
+   "g_off": 869,
+   "g_tick": 782,
+   "G_start": 38230,
+   "G_on": 38248,
+   "G_end": 38309,
+   "G_off": 38339,
+   "G_tick": 38252
+  },
+  {
+   "id": "fly",
+   "obj": "fly",
+   "verb": "move",
+   "ease": "inout",
+   "means": "it takes to grab：插头一个个飞进小插座",
+   "f_start": 909,
+   "f_land": 989,
+   "f_end": 1030,
+   "until": "5-01.w033",
+   "word": "5-01.w032",
+   "w": "half",
+   "key": "half#1",
+   "sid": "5-01.s4",
+   "word_f0": 989,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 38379,
+   "F_land": 38459,
+   "F_end": 38500
+  },
+  {
+   "id": "half",
+   "obj": "half",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "half：第五个插上（十个里五个），T7 一抖，手写 half",
+   "f_start": 989,
+   "f_land": 989,
+   "f_end": 1070,
+   "until": "5-01.w034",
+   "word": "5-01.w032",
+   "w": "half",
+   "key": "half#1",
+   "sid": "5-01.s4",
+   "word_f0": 989,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "grid"
+    ]
+   },
+   "F_start": 38459,
+   "F_land": 38459,
+   "F_end": 38540,
+   "g_start": 963,
+   "g_on": 981,
+   "g_end": 1070,
+   "g_off": 1100,
+   "g_tick": 985,
+   "G_start": 38433,
+   "G_on": 38451,
+   "G_end": 38540,
+   "G_off": 38570,
+   "G_tick": 38455
+  },
+  {
+   "id": "lower",
+   "obj": "lower",
+   "verb": "move",
+   "ease": "inout",
+   "means": "Lower：Kd 刻度上的标往下走",
+   "f_start": 1081,
+   "f_land": 1094,
+   "f_end": 1137,
+   "until": "5-01.w036",
+   "word": "5-01.w035",
+   "w": "Lower",
+   "key": "lower#1",
+   "sid": "5-01.s5",
+   "word_f0": 1094,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 38551,
+   "F_land": 38564,
+   "F_end": 38607
+  },
+  {
+   "id": "tight",
+   "obj": "tight",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "tighter：插上的五个压紧一下，手写 lower = tighter",
+   "f_start": 1136,
+   "f_land": 1142,
+   "f_end": 1167,
+   "until": "5-01.s5",
+   "word": "5-01.w037",
+   "w": "tighter.",
+   "key": "tighter#1",
+   "sid": "5-01.s5",
+   "word_f0": 1142,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 38606,
+   "F_land": 38612,
+   "F_end": 38637
+  }
+ ],
+ "guides": [
+  {
+   "id": "rack",
+   "target": [
+    "rack"
+   ],
+   "kind": "focus",
+   "gs": 112,
+   "gon": 130,
+   "land": 138,
+   "gend": 222,
+   "goff": 252,
+   "tick": 134,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 125,
+   "events": [
+    "rack"
+   ],
+   "G_start": 37582,
+   "G_on": 37600,
+   "G_land": 37608,
+   "G_end": 37692,
+   "G_off": 37722,
+   "G_tick": 37604
+  },
+  {
+   "id": "flask",
+   "target": [
+    "flask"
+   ],
+   "kind": "focus",
+   "gs": 282,
+   "gon": 300,
+   "land": 308,
+   "gend": 321,
+   "goff": 351,
+   "tick": 304,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 295,
+   "events": [
+    "flask"
+   ],
+   "G_start": 37752,
+   "G_on": 37770,
+   "G_land": 37778,
+   "G_end": 37791,
+   "G_off": 37821,
+   "G_tick": 37774
+  },
+  {
+   "id": "try",
+   "target": [
+    "sock"
+   ],
+   "kind": "focus",
+   "gs": 417,
+   "gon": 435,
+   "land": 443,
+   "gend": 531,
+   "goff": 561,
+   "tick": 439,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 353,
+   "events": [
+    "try"
+   ],
+   "G_start": 37887,
+   "G_on": 37905,
+   "G_land": 37913,
+   "G_end": 38001,
+   "G_off": 38031,
+   "G_tick": 37909
+  },
+  {
+   "id": "grid",
+   "target": [
+    "grid"
+   ],
+   "kind": "focus",
+   "gs": 688,
+   "gon": 706,
+   "land": 714,
+   "gend": 760,
+   "goff": 778,
+   "tick": 710,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 701,
+   "events": [
+    "grid"
+   ],
+   "handoff": "much",
+   "G_start": 38158,
+   "G_on": 38176,
+   "G_land": 38184,
+   "G_end": 38230,
+   "G_off": 38248,
+   "G_tick": 38180
+  },
+  {
+   "id": "much",
+   "target": [
+    "flask"
+   ],
+   "kind": "focus",
+   "gs": 760,
+   "gon": 778,
+   "land": 786,
+   "gend": 839,
+   "goff": 869,
+   "tick": 782,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 773,
+   "events": [
+    "much"
+   ],
+   "G_start": 38230,
+   "G_on": 38248,
+   "G_land": 38256,
+   "G_end": 38309,
+   "G_off": 38339,
+   "G_tick": 38252
+  },
+  {
+   "id": "half",
+   "target": [
+    "grid"
+   ],
+   "kind": "focus",
+   "gs": 963,
+   "gon": 981,
+   "land": 989,
+   "gend": 1070,
+   "goff": 1100,
+   "tick": 985,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 989,
+   "events": [
+    "half"
+   ],
+   "G_start": 38433,
+   "G_on": 38451,
+   "G_land": 38459,
+   "G_end": 38540,
+   "G_off": 38570,
+   "G_tick": 38455
+  }
+ ],
+ "problems": []
+}

@@ -1,0 +1,215 @@
+"""HKBU SCIE1007 课程作业的科普视频：B 档第一批 7 页的事件表，一处写全，生成 映射/events/<段>.json。
+
+改动作时只改这里，再跑：python 镜头设计_v3/映射/b_events.py [段 ...]（不给段就全写），然后 b_page.py render <段>。
+旧的 v9 说明书页事件表留在 events/_v9/（resolve 不读子文件夹）。
+每行：(id, verb, 词, off, lead, until, 意思, 引导目标)
+  until："w:词" 到那个词说完；"s" 到句尾；"d:N" 落点后 N 帧；None 在落点结束。
+  引导目标：页面上 <Layer id=…> 的名字，None 不引导。
+lead 的习惯（gsapFrame.RULE）：落位动作 13（预备 6 + back.out 第一次到位 7），计数 36–60，淡入 10。
+"""
+import json
+import sys
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+
+PAGES = {
+    "5-10": dict(
+        note="HKBU SCIE1007 课程作业的科普视频：B 档 5-10（Remotion + SVG + GSAP，页面 btier/B510.jsx）。路上三站，048 插头跳到第三站（big step），"
+             "第三站的培养皿变成 Huh7 皿；三天、048 投进皿里；皿里细胞插满 CDK20 小插座；信号表掉一半；剂量条滚到 210 nM。"
+             "HEK293 皿从右边进来，剂量条长到 1,700 nM；八段 Huh7 长度铺满 HEK 的条（roughly eight times）。",
+        zone=5, trans_in="T5 socket（上一段 W4 是 A 段）", trans_out="T2 甩镜往左（下一段 6-01 是 B 页）",
+        ev=[
+            ("road", "grow", "then#1", 0, 9, "w:step#1", "Then：路和三站从料杆上长出来（前两站打勾）", None),
+            ("hop", "move", "step#1", 0, 30, "w:step#1", "big step：048 插头从第二站一大步跳到第三站", None),
+            ("cells", "grow", "living#1", 0, 7, "s", "living cells：第三站的培养皿长出来，里面是活细胞", "huh7"),
+            ("shift", "move", "after#1", 0, 24, "w:days#1", "After：路往左滑走，第三站的皿移到画面中间当 Huh7 皿", None),
+            ("cal", "appear", "three#1", 0, 16, "w:days#1", "three days：日历进来，翻三下，落在 days", None),
+            ("dose", "move", "048#1", 0, 36, "w:048#1", "048：048 插头插进皿里", "plug"),
+            ("huh7", "appear", "huh7#1", 0, 10, "w:cells#2", "Huh7：皿上方标 Huh7", None),
+            ("liver", "appear", "liver#1", 0, 0, "w:cells#2", "liver cancer cells：手写批注", None),
+            ("packed", "grow", "packed#1", 0, 7, "w:cdk20#1", "packed with CDK20：皿里的细胞一个个插满小插座", None),
+            ("lost", "appear", "lost#1", 0, 13, "w:their#1", "lost：信号表开始往下掉，细胞一半变灰", "gauge"),
+            ("half", "move", "half#1", 0, 0, "w:signal#1", "half：信号表停在一半，标 half；living-cell signal 手写", None),
+            ("d210", "grow", "210#1", 0, 60, "w:nanomolar#1", "at about 210：剂量条长出来，数字轮停在 210", "bars"),
+            ("nm", "appear", "nanomolar#1", 0, 8, "s", "nanomolar：数字后面刻上 nM", None),
+            ("hek", "move", "comparison#1", 0, 30, "w:cells#3", "Comparison cells：Huh7 一组往左让，HEK293 皿从右边滑进来", "hek"),
+            ("hekl", "appear", "hek293#1", 0, 10, "w:hek293#1", "HEK293：标 HEK293", None),
+            ("hneed", "move", "needed#1", 0, 36, "w:about#2", "needed：048 插进 HEK 皿，它的信号表也掉到一半", None),
+            ("d1700", "grow", "1,700#1", 0, 90, "s", "about 1,700：HEK 的剂量条长到 1,700", "bars"),
+            ("eight", "grow", "eight#1", 0, 30, "w:times#1", "eight：八段 Huh7 的长度依次铺满 HEK 的条", None),
+            ("more", "appear", "times#1", 0, 0, "s", "times more：手写 ≈ 8×", None),
+        ]),
+    "3-05": dict(
+        note="HKBU SCIE1007 课程作业的科普视频：B 档 3-05（页面 btier/B305.jsx）。Why this lock：CDK20 插座加红色问号；香港地图（Hong Kong team）；"
+             "52 个样本孔，36 个变蓝，计数停在 36，of 52；玻璃肝；肿瘤和旁边正常组织两根条，肿瘤高；两块牌子 later-stage tumours、shorter survival；"
+             "最后小插座的旋钮往下拧，肝癌细胞的分裂节拍从 60 帧变 120 帧（灯一直亮，不是药堵住）。",
+        zone=3, trans_in="T5 socket（上一段 3-04 是 A 段插座）", trans_out="T5 runner（下一段 3-06 是出镜段，段首是料杆擦除）",
+        ev=[
+            ("sock", "grow", "why#1", 0, 9, "w:lock#1", "Why this lock：CDK20 插座落位", None),
+            ("q", "appear", "lock#1", 0, 0, "s", "lock?：红色问号手写", None),
+            ("rem", "move", "remember#1", 0, 13, "w:the#1", "Remember：插座缩到左边让位", None),
+            ("hk", "move", "hong#1", 0, 13, "w:team#1", "Hong Kong team：香港地图滑进来，标 Hong Kong team", "hk"),
+            ("tray", "move", "in#1", 0, 24, "w:36#1", "In：样本盘从右边滑进来，地图和插座出去", None),
+            ("n36", "grow", "36#1", 0, 34, "w:of#1", "36：样本孔一个个变蓝，计数停在 36", None),
+            ("of52", "appear", "52#1", 0, 8, "w:52#1", "of 52：刻上 of 52，剩下的孔亮一下", None),
+            ("liver", "grow", "liver#1", 0, 7, "w:tumours#1", "liver tumours：玻璃肝长出来", "liver"),
+            ("hi", "grow", "higher#1", 0, 60, "w:than#1", "CDK20 was higher：肿瘤那根蓝条长高", "bars"),
+            ("near", "grow", "nearby#1", 0, 13, "s", "nearby non-tumour tissue：旁边正常组织的灰条（矮）", None),
+            ("high", "appear", "high#1", 0, 6, "w:levels#1", "High levels：蓝条亮一下", None),
+            ("late", "eject", "later-stage#1", 0, 13, "w:tumours#2", "later-stage tumours：第一块牌子从料杆上弹下来", "plaques"),
+            ("surv", "eject", "shorter#1", 0, 7, "s", "shorter survival：第二块牌子", None),
+            ("clear", "move", "and#2", 0, 20, "w:turning#1", "And：前面的东西往左滑走", None),
+            ("knob", "grow", "turning#1", 0, 13, "w:cdk20#2", "turning CDK20：小插座和旋钮进来，右边肝癌细胞照常分裂（60 帧一拍）", None),
+            ("down", "move", "down#1", 0, 30, "w:down#1", "down：旋钮往下拧", "knob"),
+            ("cellsL", "appear", "liver#2", 0, 10, "w:cells#1", "liver cancer cells：标 liver cancer cells", "cells"),
+            ("slow", "move", "slowed#1", 0, 0, "s", "slowed their growth：分裂节拍变 120 帧，手写 slowed", None),
+        ]),
+    "5-01": dict(
+        note="HKBU SCIE1007 课程作业的科普视频：B 档 5-01（页面 btier/B501.jsx，第 5 章第一页，T6 光扫）。moment of truth：CDK20 插座落位；"
+             "seven real molecules：料杆上挂着七个金插头（001 和 A–F，字母只是画面代号）；real lab：烧瓶；Do any grab：001 飞到插座口前停住，红色问号；"
+             "Kd：十个小插座，烧瓶里的插头一个个飞进去，第五个插上时是 half；Lower means tighter：Kd 刻度往下，插上的五个压紧。",
+        zone=5, trans_in="T5 runner（上一段 4-11+12 是出镜段）+ T6 光扫（第 5 章第一页）", trans_out="T5 runner（下一段 5-02 是出镜段）",
+        ev=[
+            ("sweep", "appear", "so#1", 0, 9, "d:30", "So：T6 光扫过", None),
+            ("sock", "grow", "moment#1", 0, 13, "w:truth#1", "the moment of truth：CDK20 插座落位，灯一闪", None),
+            ("rack", "grow", "seven#1", 0, 13, "w:molecules#1", "Seven real molecules：插座让到右边，料杆上七个金插头依次落位", "rack"),
+            ("made", "appear", "made#1", 0, 0, "w:lab#1", "made in a real lab：手写批注", None),
+            ("flask", "grow", "lab#1", 0, 13, "s", "lab：烧瓶长出来", "flask"),
+            ("any", "appear", "any#1", 0, 6, "w:actually#1", "any：七个插头挨个抖一下", None),
+            ("try", "move", "grab#1", 0, 90, "w:cdk20#1", "grab：001 从料杆上掰下来，飞到插座口前停住", "sock"),
+            ("q", "appear", "cdk20#1", 0, 0, "s", "CDK20?：红色问号", None),
+            ("clear", "move", "grip#1", 0, 10, "w:is#1", "Grip：插座和料杆出去，烧瓶移到左边", None),
+            ("kd", "appear", "kd#1", 0, 10, "w:roughly#1", "Kd：刻 Kd 和刻度", None),
+            ("grid", "grow", "roughly#1", 0, 13, "w:how#1", "roughly：十个小插座依次落位", "grid"),
+            ("much", "grow", "much#1", 0, 13, "w:molecule#1", "how much molecule：烧瓶抖一下，瓶口冒出插头", "flask"),
+            ("fly", "move", "half#1", 0, 80, "w:the#2", "it takes to grab：插头一个个飞进小插座", None),
+            ("half", "snap", "half#1", 0, 0, "w:protein#1", "half：第五个插上（十个里五个），T7 一抖，手写 half", "grid"),
+            ("lower", "move", "lower#1", 0, 13, "w:means#1", "Lower：Kd 刻度上的标往下走", None),
+            ("tight", "snap", "tighter#1", 0, 6, "s", "tighter：插上的五个压紧一下，手写 lower = tighter", None),
+        ]),
+    "5-03": dict(
+        note="HKBU SCIE1007 课程作业的科普视频：B 档 5-03（页面 btier/B503.jsx）。Kd 横尺（左低右高，越往左越紧）：001 的真分子（我们的重对接图）和金插头，"
+             "插头沿尺走到 9.2，数字轮停在 9.2 µM；另外六个插头在右上角排开，30 的立柱升起，六个都落在 30 右边，变灰往下沉（much weaker）；"
+             "wild part：尺往左滑走，日历落下（T7）；30 days：数字轮停在 30；从 PandaOmics 芯片（选靶）弹出一个小插座，沿路走到 001（第一个确认的命中），打勾。",
+        zone=5, trans_in="T5 runner（上一段 5-02 是出镜段）", trans_out="T5 socket（下一段 5-04 是 A 段插座）",
+        ev=[
+            ("mol", "appear", "001's#1", 0, 9, "w:kd#1", "001's：001 的分子和金插头出现", None),
+            ("p001", "move", "9.2#1", 0, 50, "w:9.2#1", "Kd 9.2：插头沿尺走到 9.2，数字轮停在 9.2", "p001"),
+            ("um", "appear", "micromolar#1", 0, 8, "s", "micromolar：刻 µM", None),
+            ("six", "grow", "six#1", 0, 13, "s", "The other six：右上角六个插头依次落位", "six"),
+            ("post", "grow", "above#1", 0, 13, "w:30#1", "above 30：30 的立柱升起", None),
+            ("drop", "move", "30#1", 0, 13, "s", "30：六个插头落到尺上 30 右边", None),
+            ("weak", "move", "weaker#1", 0, 13, "s", "Much weaker：六个变灰、往下沉，手写 much weaker", None),
+            ("clear", "move", "and#1", 0, 6, "w:here's#1", "And：尺和插头往左滑走，001 留下", None),
+            ("wild", "snap", "wild#1", 0, 13, "s", "wild part：日历落下，T7 一抖", "cal"),
+            ("clock", "appear", "clock#1", 0, 6, "w:read#1", "The clock：日历翻一下", None),
+            ("n30", "grow", "30#2", 0, 60, "w:days#1", "30 days：数字轮停在 30，刻 days", None),
+            ("pick", "eject", "picking#1", 0, 13, "w:the#4", "picking：PandaOmics 芯片弹出一个小插座", None),
+            ("target", "appear", "target#1", 0, 13, "w:target#1", "the target：标 target", "road"),
+            ("travel", "move", "hit#1", 0, 110, "s", "to this first confirmed hit：小插座沿路走到 001", None),
+            ("hit", "snap", "hit#1", 0, 0, "s", "hit：001 打勾，标 first confirmed hit", "hit"),
+        ]),
+    "5-08": dict(
+        note="HKBU SCIE1007 课程作业的科普视频：B 档 5-08（页面 btier/B508.jsx）。料杆上一排金插头，一个抬起来，变成 048（标 048）；"
+             "grabbed：048 飞到 Kd 横尺上 0.6 处（001 在 9.2）；fifteen times：0 到 9.2 之间铺出 15 段，每段一个 048 的距离；"
+             "enzyme test：十个小插座（灯亮 = 酶在干活）；001 needed more than 6,000：对数表盘的针一路转到 6,000 以外；"
+             "048 needed just 33.4：新针只转到 33.4，十个里五个插座被 048 卡死（拧 90°、红卡扣、灯灭），T7 一抖。",
+        zone=5, trans_in="T2 甩进（上一段 5-07 是 B 页）", trans_out="T5 runner（下一段 5-09 是出镜段）",
+        ev=[
+            ("row", "grow", "and#1", 0, 9, "w:them#1", "And：料杆上一排金插头和 Kd 横尺（001 在 9.2）", None),
+            ("one", "move", "one#1", 0, 13, "w:them#1", "one of them：一个插头抬起来", None),
+            ("k48", "morph", "048#1", 0, 6, "w:048#1", "048：抬起的插头刻上 048，标 048", "row"),
+            ("grab", "move", "grabbed#1", 0, 40, "w:about#1", "grabbed：048 飞到 Kd 横尺 0.6 处", "rail"),
+            ("fif", "grow", "fifteen#1", 0, 60, "w:times#1", "fifteen times：0 到 9.2 之间铺出 15 段", None),
+            ("tig", "appear", "tighter#1", 0, 0, "s", "tighter：手写 ≈ 15× tighter", None),
+            ("clear", "move", "then#1", 0, 6, "w:the#1", "Then：尺和料杆往左滑走", None),
+            ("grid", "grow", "enzyme#1", 0, 7, "w:test#1", "enzyme：十个小插座依次落位，灯亮", "grid"),
+            ("lab", "appear", "test#1", 0, 10, "s", "test：标 enzyme test", None),
+            ("dial", "grow", "remember#1", 0, 13, "w:001#1", "Remember：对数表盘落位", None),
+            ("p001", "appear", "001#1", 0, 13, "w:needed#1", "001：001 插头靠到表盘边", None),
+            ("sweep", "move", "6,000#1", 0, 83, "w:6,000#1", "needed more than 6,000：针一路转到 6,000 以外，数字轮停在 6,000", "dial"),
+            ("nm", "appear", "nanomolar#1", 0, 8, "s", "nanomolar：刻 nM", None),
+            ("p48", "appear", "048#2", 0, 13, "w:048#2", "048：001 的针变灰留着，048 插头换上来", None),
+            ("need", "move", "33.4#1", 0, 52, "s", "needed just 33.4：新针只转一点，停在 33.4", None),
+            ("clamp", "snap", "33.4#1", 0, 0, "s", "33.4：十个里五个插座被卡死，灯灭，T7 一抖", "grid"),
+        ]),
+    "8-03": dict(
+        note="HKBU SCIE1007 课程作业的科普视频：B 档 8-03（页面 btier/B803.jsx）。our second?：目标牌 2 落位加红色问号；"
+             "These methods：目标牌缩到左上角，三块芯片（PandaOmics、Chemistry42、AlphaFold）依次落位，候选插头在下面的料杆上快速走过（fast）；"
+             "Screening by the millions：一大盘料珠，手写 millions；became thirteen：十三个插头掉进盘里，数字轮停在 13，标 molecules made；"
+             "a road measured in years：一条长路带刻度，手写 years；first hit in 30 days：001 落在路的起点附近，标 30 days；"
+             "round two made the key turn：048 插进小插座、拧 90°、红卡扣、灯灭（T7），左上角目标牌 2 打勾。",
+        zone=8, trans_in="T2 甩进（上一段 8-02 是 B 页）", trans_out="T5 runner（下一段 8-04–07 是出镜段）",
+        ev=[
+            ("goal", "grow", "second#1", 0, 7, "s", "our second：目标牌 2 落位", "goal"),
+            ("q", "appear", "second#1", 0, 0, "s", "second?：红色问号", None),
+            ("badge", "move", "these#1", 0, 13, "w:methods#1", "These：目标牌缩到左上角", None),
+            ("chips", "grow", "methods#1", 0, 13, "w:helped#1", "methods：三块芯片依次落位", "chips"),
+            ("conv", "move", "assess#1", 0, 20, "w:candidates#1", "assess candidates：候选插头在料杆上走过芯片", None),
+            ("fast", "appear", "fast#1", 0, 0, "s", "fast：手写 fast", None),
+            ("pile", "grow", "screening#1", 0, 13, "w:by#1", "Screening：芯片出去，一大盘料珠长出来", None),
+            ("mil", "appear", "millions#1", 0, 0, "w:became#1", "millions：手写 millions", None),
+            ("n13", "grow", "thirteen#1", 0, 52, "w:molecules#1", "became thirteen：十三个插头掉进盘里，数字轮停在 13", "tray"),
+            ("made", "appear", "made#1", 0, 10, "s", "molecules made：标 molecules made", None),
+            ("road", "grow", "and#2", 0, 6, "w:road#1", "And on a road：料珠和盘出去，一条长路带刻度", None),
+            ("years", "appear", "years#1", 0, 0, "w:years#1", "years：手写 years", None),
+            ("hit", "move", "hit#1", 0, 7, "w:came#1", "the first hit：001 落在路的起点附近", "road"),
+            ("d30", "appear", "30#1", 0, 10, "w:days#1", "30 days：标 30 days", None),
+            ("r2", "move", "made#2", 0, 50, "w:key#1", "round two made：048 飞进小插座口", "socket"),
+            ("turn", "snap", "turn#1", 0, 12, "s", "the key turn：048 拧 90°、红卡扣、灯灭（T7），目标牌 2 打勾", None),
+        ]),
+    "4-03": dict(
+        note="HKBU SCIE1007 课程作业的科普视频：B 档 4-03（页面 btier/B403.jsx）。左边 AlphaFold 预测模型（按可信度上色，红色是低可信度的尾巴），"
+             "look closer：放大镜扣到尾巴上（放大镜里是同一张贴图按原图分辨率显示，不做位图推拉）；右边 CDK20 插座正面，"
+             "One end：插座边上长出一串红珠子（尾巴），floppy 时晃；low confidence：标；in the model it lay across the keyhole：尾巴横搭过插孔；"
+             "one building block sitting inside the ATP pocket：一颗珠子落进孔里，标 ATP pocket；cut keys for a blocked door：左下冲出三个金插头，"
+             "一个飞向插孔被尾巴挡回来（T7）。",
+        zone=4, trans_in="T2 甩进（上一段 4-02 是 B 页）", trans_out="T5 runner（下一段 4-04+05 是出镜段）",
+        ev=[
+            ("af", "appear", "but#1", 0, 9, "w:look#1", "But：预测模型", None),
+            ("closer", "move", "closer#1", 0, 13, "s", "look closer：放大镜扣到红色尾巴上", "af"),
+            ("sock", "move", "one#1", 0, 7, "w:end#1", "One：插座正面从右边滑进来", None),
+            ("tail", "grow", "end#1", 0, 13, "w:protein#1", "One end of the protein：插座边上长出一串红珠子", "tail"),
+            ("floppy", "move", "floppy#1", 0, 6, "w:tail#1", "a floppy tail：尾巴晃", None),
+            ("low", "appear", "confidence#1", 0, 10, "s", "really low confidence：标 low confidence", None),
+            ("model", "appear", "model#1", 0, 10, "w:model#1", "in the model：放大镜里的尾巴亮一下", None),
+            ("lay", "move", "keyhole#1", 0, 46, "w:keyhole#1", "lay across the keyhole：尾巴横搭过插孔", "tail"),
+            ("block", "appear", "block#1", 0, 13, "w:block#1", "one building block：一颗珠子鼓一下", None),
+            ("inside", "snap", "inside#1", 0, 28, "w:the#4", "sitting inside：这颗珠子落进孔里", None),
+            ("atp", "appear", "pocket#1", 0, 10, "s", "the ATP pocket：标 ATP pocket", "socket"),
+            ("trust", "move", "trust#1", 0, 6, "w:blindly#1", "Trust it blindly：放大镜收起", None),
+            ("cut", "grow", "cut#1", 0, 7, "w:keys#1", "cut keys：左下冲出三个金插头", "keys"),
+            ("go", "snap", "blocked#1", 0, 46, "s", "for a blocked door：一个插头飞向插孔，被尾巴挡回来（T7）", None),
+        ]),
+}
+
+
+def until(u):
+    if u is None:
+        return None
+    if u == "s":
+        return {"sentence_end": True}
+    k, v = u.split(":", 1)
+    return {"word": v} if k == "w" else {"dur": int(v)}
+
+
+def build(seg):
+    P = PAGES[seg]
+    evs = []
+    for (i, verb, w, off, lead, u, means, g) in P["ev"]:
+        e = {"id": i, "obj": i, "verb": verb, "at": {"word": w, "off": off}, "lead": lead, "means": means, "tool": "remotion",
+             "guide": {"kind": "focus", "target": [g]} if g else {"kind": "none"}}
+        if u:
+            e["until"] = until(u)
+        evs.append(e)
+    doc = {"schema": "cdk20.events/1", "group": seg, "tool": "remotion", "note": P["note"], "tier": "B", "zone": P["zone"],
+           "trans_in": P["trans_in"], "trans_out": P["trans_out"], "holds": [], "events": evs}
+    out = HERE / "events" / f"{seg}.json"
+    out.write_text(json.dumps(doc, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    print("→", out)
+
+
+if __name__ == "__main__":
+    for s in sys.argv[1:] or list(PAGES):
+        build(s)

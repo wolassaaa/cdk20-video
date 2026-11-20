@@ -2,118 +2,107 @@
  "schema": "cdk20.events/1",
  "group": "5-01",
  "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 5-01（VO）：七个小瓶一排落下，烧瓶在后面；问号变成 CDK20，七个瓶各连虚线；右边 Kd 刻度，指针；一个瓶里的小点流向 CDK20，抓住一半时左半边变实；指针往下走，lower = tighter，一条连线变粗。页面 Manual501.jsx。",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 5-01（页面 btier/B501.jsx，第 5 章第一页，T6 光扫）。moment of truth：CDK20 插座落位；seven real molecules：料杆上挂着七个金插头（001 和 A–F，字母只是画面代号）；real lab：烧瓶；Do any grab：001 飞到插座口前停住，红色问号；Kd：十个小插座，烧瓶里的插头一个个飞进去，第五个插上时是 half；Lower means tighter：Kd 刻度往下，插上的五个压紧。",
+ "tier": "B",
+ "zone": 5,
+ "trans_in": "T5 runner（上一段 4-11+12 是出镜段）+ T6 光扫（第 5 章第一页）",
+ "trans_out": "T5 runner（下一段 5-02 是出镜段）",
  "holds": [],
  "events": [
   {
-   "id": "title",
-   "obj": "title",
+   "id": "sweep",
+   "obj": "sweep",
    "verb": "appear",
    "at": {
-    "word": "5-01.w003",
+    "word": "so#1",
     "off": 0
    },
-   "means": "moment：标题 The moment of truth",
+   "lead": 9,
+   "means": "So：T6 光扫过",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "dur": 30
    }
   },
   {
-   "id": "sub",
-   "obj": "sub",
-   "verb": "appear",
+   "id": "sock",
+   "obj": "sock",
+   "verb": "grow",
    "at": {
-    "word": "5-01.w005",
+    "word": "moment#1",
     "off": 0
    },
-   "means": "truth：副标题 Objective 2 · Results",
+   "lead": 13,
+   "means": "the moment of truth：CDK20 插座落位，灯一闪",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "truth#1"
    }
   },
   {
-   "id": "seven",
-   "obj": "seven",
-   "verb": "move",
+   "id": "rack",
+   "obj": "rack",
+   "verb": "grow",
    "at": {
-    "word": "5-01.w006",
+    "word": "seven#1",
     "off": 0
    },
-   "means": "Seven：七个小瓶依次落下，计数跳到 7",
+   "lead": 13,
+   "means": "Seven real molecules：插座让到右边，料杆上七个金插头依次落位",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "mol",
-   "obj": "mol",
-   "verb": "appear",
-   "at": {
-    "word": "5-01.w008",
-    "off": 0
+    "kind": "focus",
+    "target": [
+     "rack"
+    ]
    },
-   "means": "molecules：写 real molecules",
-   "tool": "remotion",
-   "lead": 8,
    "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
+    "word": "molecules#1"
    }
   },
   {
    "id": "made",
    "obj": "made",
-   "verb": "grow",
+   "verb": "appear",
    "at": {
-    "word": "5-01.w009",
+    "word": "made#1",
     "off": 0
    },
-   "means": "made：烧瓶在瓶后长出",
+   "lead": 0,
+   "means": "made in a real lab：手写批注",
    "tool": "remotion",
-   "lead": 16,
-   "until": {
-    "sentence_end": true
+   "guide": {
+    "kind": "none"
    },
+   "until": {
+    "word": "lab#1"
+   }
+  },
+  {
+   "id": "flask",
+   "obj": "flask",
+   "verb": "grow",
+   "at": {
+    "word": "lab#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "lab：烧瓶长出来",
+   "tool": "remotion",
    "guide": {
     "kind": "focus",
     "target": [
      "flask"
     ]
-   }
-  },
-  {
-   "id": "lab",
-   "obj": "lab",
-   "verb": "appear",
-   "at": {
-    "word": "5-01.w013",
-    "off": 0
    },
-   "means": "lab：写 made in a real lab",
-   "tool": "remotion",
-   "lead": 8,
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
    }
   },
   {
@@ -121,89 +110,74 @@
    "obj": "any",
    "verb": "appear",
    "at": {
-    "word": "5-01.w015",
+    "word": "any#1",
     "off": 0
    },
-   "means": "any：右边红问号",
+   "lead": 6,
+   "means": "any：七个插头挨个抖一下",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "actually#1"
    }
   },
   {
-   "id": "grab",
-   "obj": "grab",
-   "verb": "morph",
+   "id": "try",
+   "obj": "try",
+   "verb": "move",
    "at": {
-    "word": "5-01.w017",
+    "word": "grab#1",
     "off": 0
    },
-   "means": "grab：问号变成虚的 CDK20",
+   "lead": 90,
+   "means": "grab：001 从料杆上掰下来，飞到插座口前停住",
    "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "sock"
+    ]
+   },
+   "until": {
+    "word": "cdk20#1"
    }
   },
   {
-   "id": "cdk",
-   "obj": "cdk",
+   "id": "q",
+   "obj": "q",
    "verb": "appear",
    "at": {
-    "word": "5-01.w018",
+    "word": "cdk20#1",
     "off": 0
    },
-   "means": "CDK20：七个瓶各连虚线到 CDK20，写 CDK20",
+   "lead": 0,
+   "means": "CDK20?：红色问号",
    "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
-   "id": "grip",
-   "obj": "grip",
-   "verb": "morph",
+   "id": "clear",
+   "obj": "clear",
+   "verb": "move",
    "at": {
-    "word": "5-01.w019",
+    "word": "grip#1",
     "off": 0
    },
-   "means": "Grip：七条线闪一下",
+   "lead": 10,
+   "means": "Grip：插座和料杆出去，烧瓶移到左边",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "meas",
-   "obj": "meas",
-   "verb": "grow",
-   "at": {
-    "word": "5-01.w021",
-    "off": 0
    },
-   "means": "measured：右边量杯式刻度长出",
-   "tool": "remotion",
-   "lead": 14,
    "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
+    "word": "is#1"
    }
   },
   {
@@ -211,161 +185,98 @@
    "obj": "kd",
    "verb": "appear",
    "at": {
-    "word": "5-01.w023",
+    "word": "kd#1",
     "off": 0
    },
-   "means": "Kd：刻度上写 Kd，指针落下",
+   "lead": 10,
+   "means": "Kd：刻 Kd 和刻度",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "roughly#1"
    }
   },
   {
-   "id": "rough",
-   "obj": "rough",
-   "verb": "morph",
+   "id": "grid",
+   "obj": "grid",
+   "verb": "grow",
    "at": {
-    "word": "5-01.w024",
+    "word": "roughly#1",
     "off": 0
    },
-   "means": "roughly：指针晃一下",
+   "lead": 13,
+   "means": "roughly：十个小插座依次落位",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "grid"
+    ]
+   },
+   "until": {
+    "word": "how#1"
    }
   },
   {
-   "id": "how",
-   "obj": "how",
+   "id": "much",
+   "obj": "much",
+   "verb": "grow",
+   "at": {
+    "word": "much#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "how much molecule：烧瓶抖一下，瓶口冒出插头",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "flask"
+    ]
+   },
+   "until": {
+    "word": "molecule#1"
+   }
+  },
+  {
+   "id": "fly",
+   "obj": "fly",
    "verb": "move",
    "at": {
-    "word": "5-01.w025",
+    "word": "half#1",
     "off": 0
    },
-   "means": "how much：第一个瓶的小点沿线流向 CDK20",
+   "lead": 80,
+   "means": "it takes to grab：插头一个个飞进小插座",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "molec",
-   "obj": "molec",
-   "verb": "move",
-   "at": {
-    "word": "5-01.w027",
-    "off": 0
    },
-   "means": "molecule：小点围到 CDK20 左边",
-   "tool": "remotion",
-   "lead": 10,
    "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "it",
-   "obj": "it",
-   "verb": "morph",
-   "at": {
-    "word": "5-01.w028",
-    "off": 0
-   },
-   "means": "it：第一个瓶慢慢朝 CDK20 倾过去，像在倒",
-   "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "takes",
-   "obj": "takes",
-   "verb": "move",
-   "at": {
-    "word": "5-01.w029",
-    "off": 0
-   },
-   "means": "takes：第二波小点",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "grab2",
-   "obj": "grab2",
-   "verb": "snap",
-   "at": {
-    "word": "5-01.w031",
-    "off": 0
-   },
-   "means": "grab：小点贴住 CDK20",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
+    "word": "the#2"
    }
   },
   {
    "id": "half",
    "obj": "half",
-   "verb": "morph",
+   "verb": "snap",
    "at": {
-    "word": "5-01.w032",
+    "word": "half#1",
     "off": 0
    },
-   "means": "half：CDK20 左半边变实，右半边还是虚的",
+   "lead": 0,
+   "means": "half：第五个插上（十个里五个），T7 一抖，手写 half",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "prot",
-   "obj": "prot",
-   "verb": "appear",
-   "at": {
-    "word": "5-01.w034",
-    "off": 0
+    "kind": "focus",
+    "target": [
+     "grid"
+    ]
    },
-   "means": "protein：写 half the protein",
-   "tool": "remotion",
-   "lead": 8,
    "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
+    "word": "protein#1"
    }
   },
   {
@@ -373,53 +284,35 @@
    "obj": "lower",
    "verb": "move",
    "at": {
-    "word": "5-01.w035",
+    "word": "lower#1",
     "off": 0
    },
-   "means": "Lower：指针往下走",
+   "lead": 13,
+   "means": "Lower：Kd 刻度上的标往下走",
    "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "means",
-   "obj": "means",
-   "verb": "appear",
-   "at": {
-    "word": "5-01.w036",
-    "off": 0
    },
-   "means": "means：向下箭头和 lower = tighter",
-   "tool": "remotion",
-   "lead": 8,
    "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
+    "word": "means#1"
    }
   },
   {
    "id": "tight",
    "obj": "tight",
-   "verb": "morph",
+   "verb": "snap",
    "at": {
-    "word": "5-01.w037",
+    "word": "tighter#1",
     "off": 0
    },
-   "means": "tighter：第一个瓶到 CDK20 的线变粗变红",
+   "lead": 6,
+   "means": "tighter：插上的五个压紧一下，手写 lower = tighter",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   }
  ]

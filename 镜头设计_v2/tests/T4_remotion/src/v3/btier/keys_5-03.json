@@ -1,0 +1,930 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "5-03",
+ "segs": [
+  "5-03"
+ ],
+ "tool": "remotion",
+ "fps": 60,
+ "len_f": 1016,
+ "cut": "cut_v8",
+ "cut_start_f": 39068,
+ "cut_start_s": 651.13,
+ "master_built": "2026-11-18 02:33:56 +09:00",
+ "words_hash": "f61280543a4a",
+ "events_src": "镜头设计_v3/映射/events/5-03.json",
+ "words": [
+  {
+   "wid": "5-03.w001",
+   "w": "001's",
+   "key": "001's#1",
+   "sid": "5-03.s1",
+   "f0": 9,
+   "f1": 40,
+   "F0": 39077,
+   "F1": 39108
+  },
+  {
+   "wid": "5-03.w002",
+   "w": "Kd:",
+   "key": "kd#1",
+   "sid": "5-03.s1",
+   "f0": 43,
+   "f1": 57,
+   "F0": 39111,
+   "F1": 39125
+  },
+  {
+   "wid": "5-03.w003",
+   "w": "9.2",
+   "key": "9.2#1",
+   "sid": "5-03.s1",
+   "f0": 60,
+   "f1": 150,
+   "F0": 39128,
+   "F1": 39218
+  },
+  {
+   "wid": "5-03.w004",
+   "w": "micromolar.",
+   "key": "micromolar#1",
+   "sid": "5-03.s1",
+   "f0": 150,
+   "f1": 222,
+   "F0": 39218,
+   "F1": 39290
+  },
+  {
+   "wid": "5-03.w005",
+   "w": "The",
+   "key": "the#1",
+   "sid": "5-03.s2",
+   "f0": 248,
+   "f1": 253,
+   "F0": 39316,
+   "F1": 39321
+  },
+  {
+   "wid": "5-03.w006",
+   "w": "other",
+   "key": "other#1",
+   "sid": "5-03.s2",
+   "f0": 260,
+   "f1": 271,
+   "F0": 39328,
+   "F1": 39339
+  },
+  {
+   "wid": "5-03.w007",
+   "w": "six?",
+   "key": "six#1",
+   "sid": "5-03.s2",
+   "f0": 278,
+   "f1": 294,
+   "F0": 39346,
+   "F1": 39362
+  },
+  {
+   "wid": "5-03.w008",
+   "w": "All",
+   "key": "all#1",
+   "sid": "5-03.s3",
+   "f0": 331,
+   "f1": 343,
+   "F0": 39399,
+   "F1": 39411
+  },
+  {
+   "wid": "5-03.w009",
+   "w": "above",
+   "key": "above#1",
+   "sid": "5-03.s3",
+   "f0": 351,
+   "f1": 373,
+   "F0": 39419,
+   "F1": 39441
+  },
+  {
+   "wid": "5-03.w010",
+   "w": "30.",
+   "key": "30#1",
+   "sid": "5-03.s3",
+   "f0": 377,
+   "f1": 398,
+   "F0": 39445,
+   "F1": 39466
+  },
+  {
+   "wid": "5-03.w011",
+   "w": "Much",
+   "key": "much#1",
+   "sid": "5-03.s4",
+   "f0": 426,
+   "f1": 440,
+   "F0": 39494,
+   "F1": 39508
+  },
+  {
+   "wid": "5-03.w012",
+   "w": "weaker.",
+   "key": "weaker#1",
+   "sid": "5-03.s4",
+   "f0": 446,
+   "f1": 467,
+   "F0": 39514,
+   "F1": 39535
+  },
+  {
+   "wid": "5-03.w013",
+   "w": "And",
+   "key": "and#1",
+   "sid": "5-03.s5",
+   "f0": 510,
+   "f1": 518,
+   "F0": 39578,
+   "F1": 39586
+  },
+  {
+   "wid": "5-03.w014",
+   "w": "here's",
+   "key": "here's#1",
+   "sid": "5-03.s5",
+   "f0": 526,
+   "f1": 544,
+   "F0": 39594,
+   "F1": 39612
+  },
+  {
+   "wid": "5-03.w015",
+   "w": "the",
+   "key": "the#2",
+   "sid": "5-03.s5",
+   "f0": 546,
+   "f1": 551,
+   "F0": 39614,
+   "F1": 39619
+  },
+  {
+   "wid": "5-03.w016",
+   "w": "wild",
+   "key": "wild#1",
+   "sid": "5-03.s5",
+   "f0": 556,
+   "f1": 574,
+   "F0": 39624,
+   "F1": 39642
+  },
+  {
+   "wid": "5-03.w017",
+   "w": "part.",
+   "key": "part#1",
+   "sid": "5-03.s5",
+   "f0": 576,
+   "f1": 590,
+   "F0": 39644,
+   "F1": 39658
+  },
+  {
+   "wid": "5-03.w018",
+   "w": "The",
+   "key": "the#3",
+   "sid": "5-03.s6",
+   "f0": 642,
+   "f1": 647,
+   "F0": 39710,
+   "F1": 39715
+  },
+  {
+   "wid": "5-03.w019",
+   "w": "clock",
+   "key": "clock#1",
+   "sid": "5-03.s6",
+   "f0": 653,
+   "f1": 673,
+   "F0": 39721,
+   "F1": 39741
+  },
+  {
+   "wid": "5-03.w020",
+   "w": "read",
+   "key": "read#1",
+   "sid": "5-03.s6",
+   "f0": 694,
+   "f1": 703,
+   "F0": 39762,
+   "F1": 39771
+  },
+  {
+   "wid": "5-03.w021",
+   "w": "just",
+   "key": "just#1",
+   "sid": "5-03.s6",
+   "f0": 712,
+   "f1": 730,
+   "F0": 39780,
+   "F1": 39798
+  },
+  {
+   "wid": "5-03.w022",
+   "w": "30",
+   "key": "30#2",
+   "sid": "5-03.s6",
+   "f0": 733,
+   "f1": 747,
+   "F0": 39801,
+   "F1": 39815
+  },
+  {
+   "wid": "5-03.w023",
+   "w": "days,",
+   "key": "days#1",
+   "sid": "5-03.s6",
+   "f0": 750,
+   "f1": 767,
+   "F0": 39818,
+   "F1": 39835
+  },
+  {
+   "wid": "5-03.w024",
+   "w": "from",
+   "key": "from#1",
+   "sid": "5-03.s6",
+   "f0": 790,
+   "f1": 801,
+   "F0": 39858,
+   "F1": 39869
+  },
+  {
+   "wid": "5-03.w025",
+   "w": "picking",
+   "key": "picking#1",
+   "sid": "5-03.s6",
+   "f0": 810,
+   "f1": 835,
+   "F0": 39878,
+   "F1": 39903
+  },
+  {
+   "wid": "5-03.w026",
+   "w": "the",
+   "key": "the#4",
+   "sid": "5-03.s6",
+   "f0": 843,
+   "f1": 851,
+   "F0": 39911,
+   "F1": 39919
+  },
+  {
+   "wid": "5-03.w027",
+   "w": "target",
+   "key": "target#1",
+   "sid": "5-03.s6",
+   "f0": 852,
+   "f1": 868,
+   "F0": 39920,
+   "F1": 39936
+  },
+  {
+   "wid": "5-03.w028",
+   "w": "to",
+   "key": "to#1",
+   "sid": "5-03.s6",
+   "f0": 882,
+   "f1": 887,
+   "F0": 39950,
+   "F1": 39955
+  },
+  {
+   "wid": "5-03.w029",
+   "w": "this",
+   "key": "this#1",
+   "sid": "5-03.s6",
+   "f0": 897,
+   "f1": 909,
+   "F0": 39965,
+   "F1": 39977
+  },
+  {
+   "wid": "5-03.w030",
+   "w": "first",
+   "key": "first#1",
+   "sid": "5-03.s6",
+   "f0": 917,
+   "f1": 939,
+   "F0": 39985,
+   "F1": 40007
+  },
+  {
+   "wid": "5-03.w031",
+   "w": "confirmed",
+   "key": "confirmed#1",
+   "sid": "5-03.s6",
+   "f0": 957,
+   "f1": 987,
+   "F0": 40025,
+   "F1": 40055
+  },
+  {
+   "wid": "5-03.w032",
+   "w": "hit.",
+   "key": "hit#1",
+   "sid": "5-03.s6",
+   "f0": 989,
+   "f1": 1001,
+   "F0": 40057,
+   "F1": 40069
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "5-03.s1",
+   "text": "001's Kd: 9.2 micromolar.",
+   "w_first": "5-03.w001",
+   "w_last": "5-03.w004",
+   "f0": 9,
+   "f1": 222
+  },
+  {
+   "sid": "5-03.s2",
+   "text": "The other six?",
+   "w_first": "5-03.w005",
+   "w_last": "5-03.w007",
+   "f0": 248,
+   "f1": 294
+  },
+  {
+   "sid": "5-03.s3",
+   "text": "All above 30.",
+   "w_first": "5-03.w008",
+   "w_last": "5-03.w010",
+   "f0": 331,
+   "f1": 398
+  },
+  {
+   "sid": "5-03.s4",
+   "text": "Much weaker.",
+   "w_first": "5-03.w011",
+   "w_last": "5-03.w012",
+   "f0": 426,
+   "f1": 467
+  },
+  {
+   "sid": "5-03.s5",
+   "text": "And here's the wild part.",
+   "w_first": "5-03.w013",
+   "w_last": "5-03.w017",
+   "f0": 510,
+   "f1": 590
+  },
+  {
+   "sid": "5-03.s6",
+   "text": "The clock read just 30 days, from picking the target to this first confirmed hit.",
+   "w_first": "5-03.w018",
+   "w_last": "5-03.w032",
+   "f0": 642,
+   "f1": 1001
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "mol",
+   "obj": "mol",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "001's：001 的分子和金插头出现",
+   "f_start": 0,
+   "f_land": 9,
+   "f_end": 57,
+   "until": "5-03.w002",
+   "word": "5-03.w001",
+   "w": "001's",
+   "key": "001's#1",
+   "sid": "5-03.s1",
+   "word_f0": 9,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 39068,
+   "F_land": 39077,
+   "F_end": 39125
+  },
+  {
+   "id": "p001",
+   "obj": "p001",
+   "verb": "move",
+   "ease": "inout",
+   "means": "Kd 9.2：插头沿尺走到 9.2，数字轮停在 9.2",
+   "f_start": 10,
+   "f_land": 60,
+   "f_end": 150,
+   "until": "5-03.w003",
+   "word": "5-03.w003",
+   "w": "9.2",
+   "key": "9.2#1",
+   "sid": "5-03.s1",
+   "word_f0": 60,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "p001"
+    ]
+   },
+   "F_start": 39078,
+   "F_land": 39128,
+   "F_end": 39218,
+   "g_start": 34,
+   "g_on": 52,
+   "g_end": 150,
+   "g_off": 180,
+   "g_tick": 56,
+   "G_start": 39102,
+   "G_on": 39120,
+   "G_end": 39218,
+   "G_off": 39248,
+   "G_tick": 39124
+  },
+  {
+   "id": "um",
+   "obj": "um",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "micromolar：刻 µM",
+   "f_start": 142,
+   "f_land": 150,
+   "f_end": 222,
+   "until": "5-03.s1",
+   "word": "5-03.w004",
+   "w": "micromolar.",
+   "key": "micromolar#1",
+   "sid": "5-03.s1",
+   "word_f0": 150,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 39210,
+   "F_land": 39218,
+   "F_end": 39290
+  },
+  {
+   "id": "six",
+   "obj": "six",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "The other six：右上角六个插头依次落位",
+   "f_start": 265,
+   "f_land": 278,
+   "f_end": 294,
+   "until": "5-03.s2",
+   "word": "5-03.w007",
+   "w": "six?",
+   "key": "six#1",
+   "sid": "5-03.s2",
+   "word_f0": 278,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "six"
+    ]
+   },
+   "F_start": 39333,
+   "F_land": 39346,
+   "F_end": 39362,
+   "g_start": 252,
+   "g_on": 270,
+   "g_end": 294,
+   "g_off": 324,
+   "g_tick": 274,
+   "G_start": 39320,
+   "G_on": 39338,
+   "G_end": 39362,
+   "G_off": 39392,
+   "G_tick": 39342
+  },
+  {
+   "id": "post",
+   "obj": "post",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "above 30：30 的立柱升起",
+   "f_start": 338,
+   "f_land": 351,
+   "f_end": 398,
+   "until": "5-03.w010",
+   "word": "5-03.w009",
+   "w": "above",
+   "key": "above#1",
+   "sid": "5-03.s3",
+   "word_f0": 351,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 39406,
+   "F_land": 39419,
+   "F_end": 39466
+  },
+  {
+   "id": "drop",
+   "obj": "drop",
+   "verb": "move",
+   "ease": "inout",
+   "means": "30：六个插头落到尺上 30 右边",
+   "f_start": 364,
+   "f_land": 377,
+   "f_end": 398,
+   "until": "5-03.s3",
+   "word": "5-03.w010",
+   "w": "30.",
+   "key": "30#1",
+   "sid": "5-03.s3",
+   "word_f0": 377,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 39432,
+   "F_land": 39445,
+   "F_end": 39466
+  },
+  {
+   "id": "weak",
+   "obj": "weak",
+   "verb": "move",
+   "ease": "inout",
+   "means": "Much weaker：六个变灰、往下沉，手写 much weaker",
+   "f_start": 433,
+   "f_land": 446,
+   "f_end": 467,
+   "until": "5-03.s4",
+   "word": "5-03.w012",
+   "w": "weaker.",
+   "key": "weaker#1",
+   "sid": "5-03.s4",
+   "word_f0": 446,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 39501,
+   "F_land": 39514,
+   "F_end": 39535
+  },
+  {
+   "id": "clear",
+   "obj": "clear",
+   "verb": "move",
+   "ease": "inout",
+   "means": "And：尺和插头往左滑走，001 留下",
+   "f_start": 504,
+   "f_land": 510,
+   "f_end": 544,
+   "until": "5-03.w014",
+   "word": "5-03.w013",
+   "w": "And",
+   "key": "and#1",
+   "sid": "5-03.s5",
+   "word_f0": 510,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 39572,
+   "F_land": 39578,
+   "F_end": 39612
+  },
+  {
+   "id": "wild",
+   "obj": "wild",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "wild part：日历落下，T7 一抖",
+   "f_start": 543,
+   "f_land": 556,
+   "f_end": 590,
+   "until": "5-03.s5",
+   "word": "5-03.w016",
+   "w": "wild",
+   "key": "wild#1",
+   "sid": "5-03.s5",
+   "word_f0": 556,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "cal"
+    ]
+   },
+   "F_start": 39611,
+   "F_land": 39624,
+   "F_end": 39658,
+   "g_start": 530,
+   "g_on": 548,
+   "g_end": 590,
+   "g_off": 620,
+   "g_tick": 552,
+   "G_start": 39598,
+   "G_on": 39616,
+   "G_end": 39658,
+   "G_off": 39688,
+   "G_tick": 39620
+  },
+  {
+   "id": "clock",
+   "obj": "clock",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "The clock：日历翻一下",
+   "f_start": 647,
+   "f_land": 653,
+   "f_end": 703,
+   "until": "5-03.w020",
+   "word": "5-03.w019",
+   "w": "clock",
+   "key": "clock#1",
+   "sid": "5-03.s6",
+   "word_f0": 653,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 39715,
+   "F_land": 39721,
+   "F_end": 39771
+  },
+  {
+   "id": "n30",
+   "obj": "n30",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "30 days：数字轮停在 30，刻 days",
+   "f_start": 673,
+   "f_land": 733,
+   "f_end": 767,
+   "until": "5-03.w023",
+   "word": "5-03.w022",
+   "w": "30",
+   "key": "30#2",
+   "sid": "5-03.s6",
+   "word_f0": 733,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 39741,
+   "F_land": 39801,
+   "F_end": 39835
+  },
+  {
+   "id": "pick",
+   "obj": "pick",
+   "verb": "eject",
+   "ease": "inout",
+   "means": "picking：PandaOmics 芯片弹出一个小插座",
+   "f_start": 797,
+   "f_land": 810,
+   "f_end": 851,
+   "until": "5-03.w026",
+   "word": "5-03.w025",
+   "w": "picking",
+   "key": "picking#1",
+   "sid": "5-03.s6",
+   "word_f0": 810,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 39865,
+   "F_land": 39878,
+   "F_end": 39919
+  },
+  {
+   "id": "target",
+   "obj": "target",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "the target：标 target",
+   "f_start": 839,
+   "f_land": 852,
+   "f_end": 868,
+   "until": "5-03.w027",
+   "word": "5-03.w027",
+   "w": "target",
+   "key": "target#1",
+   "sid": "5-03.s6",
+   "word_f0": 852,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "road"
+    ]
+   },
+   "F_start": 39907,
+   "F_land": 39920,
+   "F_end": 39936,
+   "g_start": 826,
+   "g_on": 844,
+   "g_end": 868,
+   "g_off": 898,
+   "g_tick": 848,
+   "G_start": 39894,
+   "G_on": 39912,
+   "G_end": 39936,
+   "G_off": 39966,
+   "G_tick": 39916
+  },
+  {
+   "id": "travel",
+   "obj": "travel",
+   "verb": "move",
+   "ease": "inout",
+   "means": "to this first confirmed hit：小插座沿路走到 001",
+   "f_start": 879,
+   "f_land": 989,
+   "f_end": 1001,
+   "until": "5-03.s6",
+   "word": "5-03.w032",
+   "w": "hit.",
+   "key": "hit#1",
+   "sid": "5-03.s6",
+   "word_f0": 989,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 39947,
+   "F_land": 40057,
+   "F_end": 40069
+  },
+  {
+   "id": "hit",
+   "obj": "hit",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "hit：001 打勾，标 first confirmed hit",
+   "f_start": 989,
+   "f_land": 989,
+   "f_end": 1001,
+   "until": "5-03.s6",
+   "word": "5-03.w032",
+   "w": "hit.",
+   "key": "hit#1",
+   "sid": "5-03.s6",
+   "word_f0": 989,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "hit"
+    ]
+   },
+   "F_start": 40057,
+   "F_land": 40057,
+   "F_end": 40069,
+   "g_start": 963,
+   "g_on": 981,
+   "g_end": 1001,
+   "g_off": 1015,
+   "g_tick": 985,
+   "G_start": 40031,
+   "G_on": 40049,
+   "G_end": 40069,
+   "G_off": 40083,
+   "G_tick": 40053
+  }
+ ],
+ "guides": [
+  {
+   "id": "p001",
+   "target": [
+    "p001"
+   ],
+   "kind": "focus",
+   "gs": 34,
+   "gon": 52,
+   "land": 60,
+   "gend": 150,
+   "goff": 180,
+   "tick": 56,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 10,
+   "events": [
+    "p001"
+   ],
+   "G_start": 39102,
+   "G_on": 39120,
+   "G_land": 39128,
+   "G_end": 39218,
+   "G_off": 39248,
+   "G_tick": 39124
+  },
+  {
+   "id": "six",
+   "target": [
+    "six"
+   ],
+   "kind": "focus",
+   "gs": 252,
+   "gon": 270,
+   "land": 278,
+   "gend": 294,
+   "goff": 324,
+   "tick": 274,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 265,
+   "events": [
+    "six"
+   ],
+   "G_start": 39320,
+   "G_on": 39338,
+   "G_land": 39346,
+   "G_end": 39362,
+   "G_off": 39392,
+   "G_tick": 39342
+  },
+  {
+   "id": "wild",
+   "target": [
+    "cal"
+   ],
+   "kind": "focus",
+   "gs": 530,
+   "gon": 548,
+   "land": 556,
+   "gend": 590,
+   "goff": 620,
+   "tick": 552,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 543,
+   "events": [
+    "wild"
+   ],
+   "G_start": 39598,
+   "G_on": 39616,
+   "G_land": 39624,
+   "G_end": 39658,
+   "G_off": 39688,
+   "G_tick": 39620
+  },
+  {
+   "id": "target",
+   "target": [
+    "road"
+   ],
+   "kind": "focus",
+   "gs": 826,
+   "gon": 844,
+   "land": 852,
+   "gend": 868,
+   "goff": 898,
+   "tick": 848,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 839,
+   "events": [
+    "target"
+   ],
+   "G_start": 39894,
+   "G_on": 39912,
+   "G_land": 39920,
+   "G_end": 39936,
+   "G_off": 39966,
+   "G_tick": 39916
+  },
+  {
+   "id": "hit",
+   "target": [
+    "hit"
+   ],
+   "kind": "focus",
+   "gs": 963,
+   "gon": 981,
+   "land": 989,
+   "gend": 1001,
+   "goff": 1015,
+   "tick": 985,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 989,
+   "events": [
+    "hit"
+   ],
+   "G_start": 40031,
+   "G_on": 40049,
+   "G_land": 40057,
+   "G_end": 40069,
+   "G_off": 40083,
+   "G_tick": 40053
+  }
+ ],
+ "problems": []
+}

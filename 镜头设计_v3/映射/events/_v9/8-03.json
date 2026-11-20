@@ -1,0 +1,361 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "8-03",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 8-03（VO）：总结目标 2。接着 8-02 的路和便签：圈号 2 亮起，写 assess candidates fast；一大片点（millions）收缩成 13 个，变成 13 个小瓶；路下标 years，Target 到 Hit 标 30 days，Improve 上方钥匙在锁里转动（round two）。页面 Manual803.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "second",
+   "obj": "second",
+   "verb": "appear",
+   "at": {
+    "word": "8-03.w003",
+    "off": 0
+   },
+   "means": "second：标题 Objective 2，圈号 2 亮",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "methods",
+   "obj": "methods",
+   "verb": "appear",
+   "at": {
+    "word": "8-03.w005",
+    "off": 0
+   },
+   "means": "methods：assess 括号变红",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "8-03.w006"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "helped",
+   "obj": "helped",
+   "verb": "appear",
+   "at": {
+    "word": "8-03.w006",
+    "off": 0
+   },
+   "means": "helped：便签第 2 行虚线变实",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "8-03.w008"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "team",
+   "obj": "team",
+   "verb": "grow",
+   "at": {
+    "word": "8-03.w008",
+    "off": 0
+   },
+   "means": "team：小人",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "8-03.w009"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "person"
+    ]
+   }
+  },
+  {
+   "id": "assess",
+   "obj": "assess",
+   "verb": "appear",
+   "at": {
+    "word": "8-03.w009",
+    "off": 0
+   },
+   "means": "assess：第 2 行文字",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "8-03.w010"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "cands",
+   "obj": "cands",
+   "verb": "grow",
+   "at": {
+    "word": "8-03.w010",
+    "off": 0
+   },
+   "means": "candidates：Cells 上方三把小钥匙",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "8-03.w011"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "key"
+    ]
+   }
+  },
+  {
+   "id": "fast",
+   "obj": "fast",
+   "verb": "appear",
+   "at": {
+    "word": "8-03.w011",
+    "off": 0
+   },
+   "means": "fast：速度线",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "screen",
+   "obj": "screen",
+   "verb": "grow",
+   "at": {
+    "word": "8-03.w012",
+    "off": 0
+   },
+   "means": "Screening：一大片点",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "word": "8-03.w015"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "millions",
+   "obj": "millions",
+   "verb": "appear",
+   "at": {
+    "word": "8-03.w015",
+    "off": 0
+   },
+   "means": "millions：标签",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "8-03.w016"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "became",
+   "obj": "became",
+   "verb": "morph",
+   "at": {
+    "word": "8-03.w016",
+    "off": 0
+   },
+   "means": "became：点开始收缩",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "8-03.w017"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "thirteen",
+   "obj": "thirteen",
+   "verb": "morph",
+   "at": {
+    "word": "8-03.w017",
+    "off": 0
+   },
+   "means": "thirteen：收成 13 个，数字 13",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "word": "8-03.w018"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "mols",
+   "obj": "mols",
+   "verb": "morph",
+   "at": {
+    "word": "8-03.w018",
+    "off": 0
+   },
+   "means": "molecules：点变成小瓶",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "8-03.w019"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "made",
+   "obj": "made",
+   "verb": "appear",
+   "at": {
+    "word": "8-03.w019",
+    "off": 0
+   },
+   "means": "made：标签 13 made",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "road",
+   "obj": "road",
+   "verb": "appear",
+   "at": {
+    "word": "8-03.w023",
+    "off": 0
+   },
+   "means": "road：路闪一下",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "8-03.w024"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "years",
+   "obj": "years",
+   "verb": "grow",
+   "at": {
+    "word": "8-03.w026",
+    "off": 0
+   },
+   "means": "years：路下长括号 years",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "hit",
+   "obj": "hit",
+   "verb": "morph",
+   "at": {
+    "word": "8-03.w029",
+    "off": 0
+   },
+   "means": "hit：Hit 站跳一下",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "8-03.w030"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "days",
+   "obj": "days",
+   "verb": "appear",
+   "at": {
+    "word": "8-03.w033",
+    "off": 0
+   },
+   "means": "30 days：Target 到 Hit 的红括号",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "round",
+   "obj": "round",
+   "verb": "grow",
+   "at": {
+    "word": "8-03.w035",
+    "off": 0
+   },
+   "means": "round two：Improve 上方锁和钥匙",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "8-03.w037"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "key",
+     "lock"
+    ]
+   }
+  },
+  {
+   "id": "turn",
+   "obj": "turn",
+   "verb": "morph",
+   "at": {
+    "word": "8-03.w040",
+    "off": 0
+   },
+   "means": "key turn：钥匙转动，红弧箭头",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  }
+ ]
+}

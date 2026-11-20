@@ -1,0 +1,267 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "5-03",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 5 章二维说明书页 5-03（C 画外音）：七个小瓶和一根 Kd 刻度；001 的红点落到 9.2 micromolar，另外六个落在 30 那条虚线上面、变灰（much weaker）；右边一个钟转起来，计数跳到 30 days；下方路画出，Target 亮，001 小瓶飞到 Hit，Hit 变红，Target 到 Hit 红括号 30 days。页面 Manual503.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "t001",
+   "obj": "t001",
+   "verb": "grow",
+   "at": {
+    "word": "5-03.w001",
+    "off": 0
+   },
+   "means": "001's：001 小瓶长出，标 001",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "5-03.w001"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "tube"
+    ]
+   }
+  },
+  {
+   "id": "kd",
+   "obj": "kd",
+   "verb": "appear",
+   "at": {
+    "word": "5-03.w002",
+    "off": 0
+   },
+   "means": "Kd：Kd 刻度轴画出",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "5-03.w002"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "val",
+   "obj": "val",
+   "verb": "move",
+   "at": {
+    "word": "5-03.w003",
+    "off": 0
+   },
+   "means": "9.2 micromolar：红点从小瓶落到刻度上，写 9.2 micromolar",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "5-03.w004"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "six",
+   "obj": "six",
+   "verb": "grow",
+   "at": {
+    "word": "5-03.w006",
+    "off": 0
+   },
+   "means": "other six：另外六个小瓶长出",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "5-03.w007"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "tube"
+    ]
+   }
+  },
+  {
+   "id": "line",
+   "obj": "line",
+   "verb": "appear",
+   "at": {
+    "word": "5-03.w009",
+    "off": 0
+   },
+   "means": "above：刻度上画 30 的虚线",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "5-03.w009"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "up",
+   "obj": "up",
+   "verb": "move",
+   "at": {
+    "word": "5-03.w010",
+    "off": 0
+   },
+   "means": "30：六个灰点飞到虚线上面",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "weak",
+   "obj": "weak",
+   "verb": "morph",
+   "at": {
+    "word": "5-03.w011",
+    "off": 0
+   },
+   "means": "much weaker：六个小瓶变灰下沉，写 much weaker",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "wild",
+   "obj": "wild",
+   "verb": "appear",
+   "at": {
+    "word": "5-03.w016",
+    "off": 0
+   },
+   "means": "wild part：右边画出一个钟",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "clock",
+   "obj": "clock",
+   "verb": "move",
+   "at": {
+    "word": "5-03.w019",
+    "off": 0
+   },
+   "means": "clock read：钟的指针转起来",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "5-03.w020"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "d30",
+   "obj": "d30",
+   "verb": "morph",
+   "at": {
+    "word": "5-03.w022",
+    "off": 0
+   },
+   "means": "30 days：计数跳到 30 days",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "5-03.w023"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "road",
+   "obj": "road",
+   "verb": "grow",
+   "at": {
+    "word": "5-03.w025",
+    "off": 0
+   },
+   "means": "picking：下方路画出",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "5-03.w026"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "tgt",
+   "obj": "tgt",
+   "verb": "snap",
+   "at": {
+    "word": "5-03.w027",
+    "off": 0
+   },
+   "means": "target：Target 站变红",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "5-03.w027"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "fly",
+   "obj": "fly",
+   "verb": "move",
+   "at": {
+    "word": "5-03.w029",
+    "off": 0
+   },
+   "means": "this first：001 小瓶飞到 Hit",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "word": "5-03.w030"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "hit",
+   "obj": "hit",
+   "verb": "snap",
+   "at": {
+    "word": "5-03.w031",
+    "off": 0
+   },
+   "means": "confirmed hit：Hit 变红，Target 到 Hit 红括号 30 days，写 first confirmed hit",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  }
+ ]
+}

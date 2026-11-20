@@ -2,154 +2,275 @@
  "schema": "cdk20.events/1",
  "group": "3-05",
  "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 3-05（D）：为什么是 CDK20。香港团队；52 个肿瘤样本点阵 36 个变红；高水平 → 晚期、生存短（因果链，不画曲线）；调低 CDK20 细胞长得慢。页面 Manual305.jsx。",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 3-05（页面 btier/B305.jsx）。Why this lock：CDK20 插座加红色问号；香港地图（Hong Kong team）；52 个样本孔，36 个变蓝，计数停在 36，of 52；玻璃肝；肿瘤和旁边正常组织两根条，肿瘤高；两块牌子 later-stage tumours、shorter survival；最后小插座的旋钮往下拧，肝癌细胞的分裂节拍从 60 帧变 120 帧（灯一直亮，不是药堵住）。",
+ "tier": "B",
+ "zone": 3,
+ "trans_in": "T5 socket（上一段 3-04 是 A 段插座）",
+ "trans_out": "T5 runner（下一段 3-06 是出镜段，段首是料杆擦除）",
  "holds": [],
  "events": [
   {
-   "id": "title",
-   "obj": "title",
-   "verb": "appear",
+   "id": "sock",
+   "obj": "sock",
+   "verb": "grow",
    "at": {
-    "word": "3-05.w001",
+    "word": "why#1",
     "off": 0
    },
-   "means": "Why this lock：标题",
+   "lead": 9,
+   "means": "Why this lock：CDK20 插座落位",
    "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "word": "3-05.w003"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "lock#1"
+   }
+  },
+  {
+   "id": "q",
+   "obj": "q",
+   "verb": "appear",
+   "at": {
+    "word": "lock#1",
+    "off": 0
+   },
+   "lead": 0,
+   "means": "lock?：红色问号手写",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "rem",
+   "obj": "rem",
+   "verb": "move",
+   "at": {
+    "word": "remember#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "Remember：插座缩到左边让位",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "the#1"
    }
   },
   {
    "id": "hk",
    "obj": "hk",
-   "verb": "grow",
+   "verb": "move",
    "at": {
-    "word": "3-05.w006",
+    "word": "hong#1",
     "off": 0
    },
-   "means": "Hong Kong team：香港地图和中大",
+   "lead": 13,
+   "means": "Hong Kong team：香港地图滑进来，标 Hong Kong team",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "focus",
     "target": [
      "hk"
     ]
+   },
+   "until": {
+    "word": "team#1"
    }
   },
   {
-   "id": "grid",
-   "obj": "grid",
+   "id": "tray",
+   "obj": "tray",
+   "verb": "move",
+   "at": {
+    "word": "in#1",
+    "off": 0
+   },
+   "lead": 24,
+   "means": "In：样本盘从右边滑进来，地图和插座出去",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "36#1"
+   }
+  },
+  {
+   "id": "n36",
+   "obj": "n36",
    "verb": "grow",
    "at": {
-    "word": "3-05.w010",
+    "word": "36#1",
     "off": 0
    },
-   "means": "36：52 个点阵画出",
+   "lead": 34,
+   "means": "36：样本孔一个个变蓝，计数停在 36",
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "of#1"
+   }
+  },
+  {
+   "id": "of52",
+   "obj": "of52",
+   "verb": "appear",
+   "at": {
+    "word": "52#1",
+    "off": 0
+   },
    "lead": 8,
-   "until": {
-    "word": "3-05.w012"
-   },
+   "means": "of 52：刻上 of 52，剩下的孔亮一下",
+   "tool": "remotion",
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "52#1"
    }
   },
   {
-   "id": "red",
-   "obj": "grid_red",
-   "verb": "appear",
+   "id": "liver",
+   "obj": "liver",
+   "verb": "grow",
    "at": {
-    "word": "3-05.w015",
+    "word": "liver#1",
     "off": 0
    },
-   "means": "CDK20 was higher：36 个点逐个变红，计数跳到 36",
+   "lead": 7,
+   "means": "liver tumours：玻璃肝长出来",
    "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "liver"
+    ]
+   },
+   "until": {
+    "word": "tumours#1"
+   }
+  },
+  {
+   "id": "hi",
+   "obj": "hi",
+   "verb": "grow",
+   "at": {
+    "word": "higher#1",
+    "off": 0
+   },
    "lead": 60,
-   "until": {
-    "word": "3-05.w022"
-   },
+   "means": "CDK20 was higher：肿瘤那根蓝条长高",
+   "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "bars"
+    ]
+   },
+   "until": {
+    "word": "than#1"
    }
   },
   {
-   "id": "cmp",
-   "obj": "compare",
-   "verb": "appear",
+   "id": "near",
+   "obj": "near",
+   "verb": "grow",
    "at": {
-    "word": "3-05.w021",
+    "word": "nearby#1",
     "off": 0
    },
-   "means": "non-tumour tissue：tumour vs nearby tissue 两个小柱",
+   "lead": 13,
+   "means": "nearby non-tumour tissue：旁边正常组织的灰条（矮）",
    "tool": "remotion",
-   "lead": 6,
+   "guide": {
+    "kind": "none"
+   },
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
    }
   },
   {
    "id": "high",
-   "obj": "chain1",
+   "obj": "high",
    "verb": "appear",
    "at": {
-    "word": "3-05.w023",
+    "word": "high#1",
     "off": 0
    },
-   "means": "High levels：链头 high CDK20",
+   "lead": 6,
+   "means": "High levels：蓝条亮一下",
    "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "word": "3-05.w024"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "levels#1"
    }
   },
   {
    "id": "late",
-   "obj": "chain_late",
-   "verb": "move",
+   "obj": "late",
+   "verb": "eject",
    "at": {
-    "word": "3-05.w027",
+    "word": "later-stage#1",
     "off": 0
    },
-   "means": "later-stage tumours：箭头到 later stage",
+   "lead": 13,
+   "means": "later-stage tumours：第一块牌子从料杆上弹下来",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "3-05.w028"
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "plaques"
+    ]
+   },
+   "until": {
+    "word": "tumours#2"
    }
   },
   {
    "id": "surv",
-   "obj": "chain_surv",
-   "verb": "move",
+   "obj": "surv",
+   "verb": "eject",
    "at": {
-    "word": "3-05.w031",
+    "word": "shorter#1",
     "off": 0
    },
-   "means": "shorter survival：箭头到 shorter survival",
+   "lead": 7,
+   "means": "shorter survival：第二块牌子",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "clear",
+   "obj": "clear",
+   "verb": "move",
+   "at": {
+    "word": "and#2",
+    "off": 0
+   },
+   "lead": 20,
+   "means": "And：前面的东西往左滑走",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "turning#1"
    }
   },
   {
@@ -157,71 +278,77 @@
    "obj": "knob",
    "verb": "grow",
    "at": {
-    "word": "3-05.w033",
+    "word": "turning#1",
     "off": 0
    },
-   "means": "turning：旋钮长出",
+   "lead": 13,
+   "means": "turning CDK20：小插座和旋钮进来，右边肝癌细胞照常分裂（60 帧一拍）",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "3-05.w034"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "cdk20#2"
    }
   },
   {
    "id": "down",
-   "obj": "knob",
+   "obj": "down",
    "verb": "move",
    "at": {
-    "word": "3-05.w035",
+    "word": "down#1",
     "off": 0
    },
-   "means": "down：旋钮拧低",
+   "lead": 30,
+   "means": "down：旋钮往下拧",
    "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "3-05.w036"
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "knob"
+    ]
+   },
+   "until": {
+    "word": "down#1"
    }
   },
   {
-   "id": "cells",
-   "obj": "cells",
-   "verb": "grow",
+   "id": "cellsL",
+   "obj": "cellsL",
+   "verb": "appear",
    "at": {
-    "word": "3-05.w039",
+    "word": "liver#2",
     "off": 0
    },
-   "means": "cells：两团细胞并排长",
-   "tool": "remotion",
    "lead": 10,
-   "until": {
-    "word": "3-05.w040"
-   },
+   "means": "liver cancer cells：标 liver cancer cells",
+   "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "cells"
+    ]
+   },
+   "until": {
+    "word": "cells#1"
    }
   },
   {
    "id": "slow",
-   "obj": "cells_slow",
-   "verb": "morph",
+   "obj": "slow",
+   "verb": "move",
    "at": {
-    "word": "3-05.w042",
+    "word": "slowed#1",
     "off": 0
    },
-   "means": "slowed their growth：右边一团长得慢，红批注",
+   "lead": 0,
+   "means": "slowed their growth：分裂节拍变 120 帧，手写 slowed",
    "tool": "remotion",
-   "lead": 30,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   }
  ]

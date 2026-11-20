@@ -1,0 +1,444 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "4-03",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 4 章二维说明书页 4-03（画外音）：锁上有一段软塌的尾巴、把握很低，它压在锁孔上，ATP 口袋里坐着一块积木；照它配钥匙，门是堵住的。页面 Manual403.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "title",
+   "obj": "title",
+   "verb": "appear",
+   "at": {
+    "word": "4-03.w002",
+    "off": 0
+   },
+   "means": "look closer：标题",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-03.w003"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "lock",
+   "obj": "lock",
+   "verb": "grow",
+   "at": {
+    "word": "4-03.w001",
+    "off": 0
+   },
+   "means": "But：锁（蛋白）长出",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-03.w003"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "zoom",
+   "obj": "zoom",
+   "verb": "grow",
+   "at": {
+    "word": "4-03.w003",
+    "off": 0
+   },
+   "means": "closer：放大圈罩住锁孔",
+   "tool": "remotion",
+   "lead": 18,
+   "until": {
+    "word": "4-03.w003"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "lock"
+    ]
+   }
+  },
+  {
+   "id": "end",
+   "obj": "end",
+   "verb": "appear",
+   "at": {
+    "word": "4-03.w005",
+    "off": 0
+   },
+   "means": "end：尾巴起点，标签 one end",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "4-03.w006"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "protein",
+   "obj": "protein",
+   "verb": "appear",
+   "at": {
+    "word": "4-03.w008",
+    "off": 0
+   },
+   "means": "protein：标签 the protein",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-03.w008"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "floppy",
+   "obj": "floppy",
+   "verb": "morph",
+   "at": {
+    "word": "4-03.w010",
+    "off": 0
+   },
+   "means": "floppy：尾巴软塌坠下",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "4-03.w011"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "tail",
+   "obj": "tail",
+   "verb": "appear",
+   "at": {
+    "word": "4-03.w011",
+    "off": 0
+   },
+   "means": "tail：标签 a floppy tail，尾巴出现结",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-03.w012"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "had",
+   "obj": "had",
+   "verb": "morph",
+   "at": {
+    "word": "4-03.w012",
+    "off": 0
+   },
+   "means": "had：尾巴再往下坠一段",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "4-03.w013"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "low",
+   "obj": "low",
+   "verb": "morph",
+   "at": {
+    "word": "4-03.w014",
+    "off": 0
+   },
+   "means": "low：尾巴变红虚线，表示把握很低",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "4-03.w014"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "conf",
+   "obj": "conf",
+   "verb": "appear",
+   "at": {
+    "word": "4-03.w015",
+    "off": 0
+   },
+   "means": "confidence：红笔批注 really low confidence",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "model",
+   "obj": "model",
+   "verb": "appear",
+   "at": {
+    "word": "4-03.w019",
+    "off": 0
+   },
+   "means": "model：标签 in the model",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-03.w020"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "across",
+   "obj": "across",
+   "verb": "move",
+   "at": {
+    "word": "4-03.w022",
+    "off": 0
+   },
+   "means": "across：尾巴扫过去压在锁孔上",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "word": "4-03.w022"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "keyhole",
+   "obj": "keyhole",
+   "verb": "appear",
+   "at": {
+    "word": "4-03.w024",
+    "off": 0
+   },
+   "means": "keyhole：锁孔红圈加标签",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-03.w024"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "with",
+   "obj": "with",
+   "verb": "appear",
+   "at": {
+    "word": "4-03.w025",
+    "off": 0
+   },
+   "means": "with：口袋里出现虚线座",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-03.w025"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "block",
+   "obj": "block",
+   "verb": "grow",
+   "at": {
+    "word": "4-03.w027",
+    "off": 0
+   },
+   "means": "building：一块积木长进口袋",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "4-03.w028"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "sitting",
+   "obj": "sitting",
+   "verb": "move",
+   "at": {
+    "word": "4-03.w029",
+    "off": 0
+   },
+   "means": "sitting：积木坐实",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "4-03.w029"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "pocket",
+   "obj": "pocket",
+   "verb": "appear",
+   "at": {
+    "word": "4-03.w033",
+    "off": 0
+   },
+   "means": "pocket：标签 the ATP pocket",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "trust",
+   "obj": "trust",
+   "verb": "appear",
+   "at": {
+    "word": "4-03.w034",
+    "off": 0
+   },
+   "means": "Trust：红笔起笔 Trust it blindly",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-03.w035"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "blindly",
+   "obj": "blindly",
+   "verb": "morph",
+   "at": {
+    "word": "4-03.w036",
+    "off": 0
+   },
+   "means": "blindly：批注写完，锁孔红圈闪",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "4-03.w036"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "and",
+   "obj": "and",
+   "verb": "move",
+   "at": {
+    "word": "4-03.w037",
+    "off": 0
+   },
+   "means": "and：虚线箭头指向下面配钥匙",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "4-03.w038"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "cut",
+   "obj": "cut",
+   "verb": "grow",
+   "at": {
+    "word": "4-03.w039",
+    "off": 0
+   },
+   "means": "cut：第一把钥匙切出来",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "4-03.w039"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "keys",
+   "obj": "keys",
+   "verb": "grow",
+   "at": {
+    "word": "4-03.w040",
+    "off": 0
+   },
+   "means": "keys：再切两把",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "4-03.w040"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "blocked",
+   "obj": "blocked",
+   "verb": "morph",
+   "at": {
+    "word": "4-03.w043",
+    "off": 0
+   },
+   "means": "blocked：锁孔打红叉，钥匙也打叉",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "4-03.w043"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "door",
+   "obj": "door",
+   "verb": "appear",
+   "at": {
+    "word": "4-03.w044",
+    "off": 0
+   },
+   "means": "door：标签 for a blocked door",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  }
+ ]
+}

@@ -1,0 +1,1095 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "5-10",
+ "segs": [
+  "5-10"
+ ],
+ "tool": "remotion",
+ "fps": 60,
+ "len_f": 1746,
+ "cut": "cut_v8",
+ "cut_start_f": 45086,
+ "cut_start_s": 751.43,
+ "master_built": "2026-11-18 02:33:56 +09:00",
+ "words_hash": "18967979b61e",
+ "events_src": "镜头设计_v3/映射/events/5-10.json",
+ "words": [
+  {
+   "wid": "5-10.w001",
+   "w": "Then,",
+   "key": "then#1",
+   "sid": "5-10.s1",
+   "f0": 9,
+   "f1": 24,
+   "F0": 45095,
+   "F1": 45110
+  },
+  {
+   "wid": "5-10.w002",
+   "w": "the",
+   "key": "the#1",
+   "sid": "5-10.s1",
+   "f0": 50,
+   "f1": 55,
+   "F0": 45136,
+   "F1": 45141
+  },
+  {
+   "wid": "5-10.w003",
+   "w": "big",
+   "key": "big#1",
+   "sid": "5-10.s1",
+   "f0": 60,
+   "f1": 69,
+   "F0": 45146,
+   "F1": 45155
+  },
+  {
+   "wid": "5-10.w004",
+   "w": "step:",
+   "key": "step#1",
+   "sid": "5-10.s1",
+   "f0": 74,
+   "f1": 88,
+   "F0": 45160,
+   "F1": 45174
+  },
+  {
+   "wid": "5-10.w005",
+   "w": "living",
+   "key": "living#1",
+   "sid": "5-10.s1",
+   "f0": 128,
+   "f1": 146,
+   "F0": 45214,
+   "F1": 45232
+  },
+  {
+   "wid": "5-10.w006",
+   "w": "cells.",
+   "key": "cells#1",
+   "sid": "5-10.s1",
+   "f0": 149,
+   "f1": 168,
+   "F0": 45235,
+   "F1": 45254
+  },
+  {
+   "wid": "5-10.w007",
+   "w": "After",
+   "key": "after#1",
+   "sid": "5-10.s2",
+   "f0": 219,
+   "f1": 241,
+   "F0": 45305,
+   "F1": 45327
+  },
+  {
+   "wid": "5-10.w008",
+   "w": "three",
+   "key": "three#1",
+   "sid": "5-10.s2",
+   "f0": 251,
+   "f1": 264,
+   "F0": 45337,
+   "F1": 45350
+  },
+  {
+   "wid": "5-10.w009",
+   "w": "days",
+   "key": "days#1",
+   "sid": "5-10.s2",
+   "f0": 267,
+   "f1": 281,
+   "F0": 45353,
+   "F1": 45367
+  },
+  {
+   "wid": "5-10.w010",
+   "w": "with",
+   "key": "with#1",
+   "sid": "5-10.s2",
+   "f0": 291,
+   "f1": 303,
+   "F0": 45377,
+   "F1": 45389
+  },
+  {
+   "wid": "5-10.w011",
+   "w": "048,",
+   "key": "048#1",
+   "sid": "5-10.s2",
+   "f0": 321,
+   "f1": 417,
+   "F0": 45407,
+   "F1": 45503
+  },
+  {
+   "wid": "5-10.w012",
+   "w": "Huh7",
+   "key": "huh7#1",
+   "sid": "5-10.s2",
+   "f0": 417,
+   "f1": 471,
+   "F0": 45503,
+   "F1": 45557
+  },
+  {
+   "wid": "5-10.w013",
+   "w": "liver",
+   "key": "liver#1",
+   "sid": "5-10.s2",
+   "f0": 480,
+   "f1": 493,
+   "F0": 45566,
+   "F1": 45579
+  },
+  {
+   "wid": "5-10.w014",
+   "w": "cancer",
+   "key": "cancer#1",
+   "sid": "5-10.s2",
+   "f0": 499,
+   "f1": 517,
+   "F0": 45585,
+   "F1": 45603
+  },
+  {
+   "wid": "5-10.w015",
+   "w": "cells,",
+   "key": "cells#2",
+   "sid": "5-10.s2",
+   "f0": 522,
+   "f1": 540,
+   "F0": 45608,
+   "F1": 45626
+  },
+  {
+   "wid": "5-10.w016",
+   "w": "packed",
+   "key": "packed#1",
+   "sid": "5-10.s2",
+   "f0": 552,
+   "f1": 578,
+   "F0": 45638,
+   "F1": 45664
+  },
+  {
+   "wid": "5-10.w017",
+   "w": "with",
+   "key": "with#2",
+   "sid": "5-10.s2",
+   "f0": 588,
+   "f1": 601,
+   "F0": 45674,
+   "F1": 45687
+  },
+  {
+   "wid": "5-10.w018",
+   "w": "CDK20,",
+   "key": "cdk20#1",
+   "sid": "5-10.s2",
+   "f0": 614,
+   "f1": 661,
+   "F0": 45700,
+   "F1": 45747
+  },
+  {
+   "wid": "5-10.w019",
+   "w": "lost",
+   "key": "lost#1",
+   "sid": "5-10.s2",
+   "f0": 707,
+   "f1": 727,
+   "F0": 45793,
+   "F1": 45813
+  },
+  {
+   "wid": "5-10.w020",
+   "w": "half",
+   "key": "half#1",
+   "sid": "5-10.s2",
+   "f0": 766,
+   "f1": 781,
+   "F0": 45852,
+   "F1": 45867
+  },
+  {
+   "wid": "5-10.w021",
+   "w": "their",
+   "key": "their#1",
+   "sid": "5-10.s2",
+   "f0": 789,
+   "f1": 801,
+   "F0": 45875,
+   "F1": 45887
+  },
+  {
+   "wid": "5-10.w022",
+   "w": "living-cell",
+   "key": "living-cell#1",
+   "sid": "5-10.s2",
+   "f0": 816,
+   "f1": 849,
+   "F0": 45902,
+   "F1": 45935
+  },
+  {
+   "wid": "5-10.w023",
+   "w": "signal",
+   "key": "signal#1",
+   "sid": "5-10.s2",
+   "f0": 859,
+   "f1": 882,
+   "F0": 45945,
+   "F1": 45968
+  },
+  {
+   "wid": "5-10.w024",
+   "w": "at",
+   "key": "at#1",
+   "sid": "5-10.s2",
+   "f0": 912,
+   "f1": 923,
+   "F0": 45998,
+   "F1": 46009
+  },
+  {
+   "wid": "5-10.w025",
+   "w": "about",
+   "key": "about#1",
+   "sid": "5-10.s2",
+   "f0": 930,
+   "f1": 949,
+   "F0": 46016,
+   "F1": 46035
+  },
+  {
+   "wid": "5-10.w026",
+   "w": "210",
+   "key": "210#1",
+   "sid": "5-10.s2",
+   "f0": 996,
+   "f1": 1057,
+   "F0": 46082,
+   "F1": 46143
+  },
+  {
+   "wid": "5-10.w027",
+   "w": "nanomolar.",
+   "key": "nanomolar#1",
+   "sid": "5-10.s2",
+   "f0": 1068,
+   "f1": 1118,
+   "F0": 46154,
+   "F1": 46204
+  },
+  {
+   "wid": "5-10.w028",
+   "w": "Comparison",
+   "key": "comparison#1",
+   "sid": "5-10.s3",
+   "f0": 1157,
+   "f1": 1200,
+   "F0": 46243,
+   "F1": 46286
+  },
+  {
+   "wid": "5-10.w029",
+   "w": "cells,",
+   "key": "cells#3",
+   "sid": "5-10.s3",
+   "f0": 1203,
+   "f1": 1221,
+   "F0": 46289,
+   "F1": 46307
+  },
+  {
+   "wid": "5-10.w030",
+   "w": "HEK293,",
+   "key": "hek293#1",
+   "sid": "5-10.s3",
+   "f0": 1252,
+   "f1": 1412,
+   "F0": 46338,
+   "F1": 46498
+  },
+  {
+   "wid": "5-10.w031",
+   "w": "needed",
+   "key": "needed#1",
+   "sid": "5-10.s3",
+   "f0": 1412,
+   "f1": 1420,
+   "F0": 46498,
+   "F1": 46506
+  },
+  {
+   "wid": "5-10.w032",
+   "w": "about",
+   "key": "about#2",
+   "sid": "5-10.s3",
+   "f0": 1426,
+   "f1": 1445,
+   "F0": 46512,
+   "F1": 46531
+  },
+  {
+   "wid": "5-10.w033",
+   "w": "1,700.",
+   "key": "1,700#1",
+   "sid": "5-10.s3",
+   "f0": 1474,
+   "f1": 1607,
+   "F0": 46560,
+   "F1": 46693
+  },
+  {
+   "wid": "5-10.w034",
+   "w": "Roughly",
+   "key": "roughly#1",
+   "sid": "5-10.s4",
+   "f0": 1636,
+   "f1": 1658,
+   "F0": 46722,
+   "F1": 46744
+  },
+  {
+   "wid": "5-10.w035",
+   "w": "eight",
+   "key": "eight#1",
+   "sid": "5-10.s4",
+   "f0": 1672,
+   "f1": 1681,
+   "F0": 46758,
+   "F1": 46767
+  },
+  {
+   "wid": "5-10.w036",
+   "w": "times",
+   "key": "times#1",
+   "sid": "5-10.s4",
+   "f0": 1683,
+   "f1": 1712,
+   "F0": 46769,
+   "F1": 46798
+  },
+  {
+   "wid": "5-10.w037",
+   "w": "more.",
+   "key": "more#1",
+   "sid": "5-10.s4",
+   "f0": 1713,
+   "f1": 1738,
+   "F0": 46799,
+   "F1": 46824
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "5-10.s1",
+   "text": "Then, the big step: living cells.",
+   "w_first": "5-10.w001",
+   "w_last": "5-10.w006",
+   "f0": 9,
+   "f1": 168
+  },
+  {
+   "sid": "5-10.s2",
+   "text": "After three days with 048, Huh7 liver cancer cells, packed with CDK20, lost half their living-cell signal at about 210 nanomolar.",
+   "w_first": "5-10.w007",
+   "w_last": "5-10.w027",
+   "f0": 219,
+   "f1": 1118
+  },
+  {
+   "sid": "5-10.s3",
+   "text": "Comparison cells, HEK293, needed about 1,700.",
+   "w_first": "5-10.w028",
+   "w_last": "5-10.w033",
+   "f0": 1157,
+   "f1": 1607
+  },
+  {
+   "sid": "5-10.s4",
+   "text": "Roughly eight times more.",
+   "w_first": "5-10.w034",
+   "w_last": "5-10.w037",
+   "f0": 1636,
+   "f1": 1738
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "road",
+   "obj": "road",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "Then：路和三站从料杆上长出来（前两站打勾）",
+   "f_start": 0,
+   "f_land": 9,
+   "f_end": 88,
+   "until": "5-10.w004",
+   "word": "5-10.w001",
+   "w": "Then,",
+   "key": "then#1",
+   "sid": "5-10.s1",
+   "word_f0": 9,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 45086,
+   "F_land": 45095,
+   "F_end": 45174
+  },
+  {
+   "id": "hop",
+   "obj": "hop",
+   "verb": "move",
+   "ease": "inout",
+   "means": "big step：048 插头从第二站一大步跳到第三站",
+   "f_start": 44,
+   "f_land": 74,
+   "f_end": 88,
+   "until": "5-10.w004",
+   "word": "5-10.w004",
+   "w": "step:",
+   "key": "step#1",
+   "sid": "5-10.s1",
+   "word_f0": 74,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 45130,
+   "F_land": 45160,
+   "F_end": 45174
+  },
+  {
+   "id": "cells",
+   "obj": "cells",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "living cells：第三站的培养皿长出来，里面是活细胞",
+   "f_start": 121,
+   "f_land": 128,
+   "f_end": 168,
+   "until": "5-10.s1",
+   "word": "5-10.w005",
+   "w": "living",
+   "key": "living#1",
+   "sid": "5-10.s1",
+   "word_f0": 128,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "huh7"
+    ]
+   },
+   "F_start": 45207,
+   "F_land": 45214,
+   "F_end": 45254,
+   "g_start": 102,
+   "g_on": 120,
+   "g_end": 168,
+   "g_off": 198,
+   "g_tick": 124,
+   "G_start": 45188,
+   "G_on": 45206,
+   "G_end": 45254,
+   "G_off": 45284,
+   "G_tick": 45210
+  },
+  {
+   "id": "shift",
+   "obj": "shift",
+   "verb": "move",
+   "ease": "inout",
+   "means": "After：路往左滑走，第三站的皿移到画面中间当 Huh7 皿",
+   "f_start": 195,
+   "f_land": 219,
+   "f_end": 281,
+   "until": "5-10.w009",
+   "word": "5-10.w007",
+   "w": "After",
+   "key": "after#1",
+   "sid": "5-10.s2",
+   "word_f0": 219,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 45281,
+   "F_land": 45305,
+   "F_end": 45367
+  },
+  {
+   "id": "cal",
+   "obj": "cal",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "three days：日历进来，翻三下，落在 days",
+   "f_start": 235,
+   "f_land": 251,
+   "f_end": 281,
+   "until": "5-10.w009",
+   "word": "5-10.w008",
+   "w": "three",
+   "key": "three#1",
+   "sid": "5-10.s2",
+   "word_f0": 251,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 45321,
+   "F_land": 45337,
+   "F_end": 45367
+  },
+  {
+   "id": "dose",
+   "obj": "dose",
+   "verb": "move",
+   "ease": "inout",
+   "means": "048：048 插头插进皿里",
+   "f_start": 285,
+   "f_land": 321,
+   "f_end": 417,
+   "until": "5-10.w011",
+   "word": "5-10.w011",
+   "w": "048,",
+   "key": "048#1",
+   "sid": "5-10.s2",
+   "word_f0": 321,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "plug"
+    ]
+   },
+   "F_start": 45371,
+   "F_land": 45407,
+   "F_end": 45503,
+   "g_start": 295,
+   "g_on": 313,
+   "g_end": 417,
+   "g_off": 447,
+   "g_tick": 317,
+   "G_start": 45381,
+   "G_on": 45399,
+   "G_end": 45503,
+   "G_off": 45533,
+   "G_tick": 45403
+  },
+  {
+   "id": "huh7",
+   "obj": "huh7",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "Huh7：皿上方标 Huh7",
+   "f_start": 407,
+   "f_land": 417,
+   "f_end": 540,
+   "until": "5-10.w015",
+   "word": "5-10.w012",
+   "w": "Huh7",
+   "key": "huh7#1",
+   "sid": "5-10.s2",
+   "word_f0": 417,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 45493,
+   "F_land": 45503,
+   "F_end": 45626
+  },
+  {
+   "id": "liver",
+   "obj": "liver",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "liver cancer cells：手写批注",
+   "f_start": 480,
+   "f_land": 480,
+   "f_end": 540,
+   "until": "5-10.w015",
+   "word": "5-10.w013",
+   "w": "liver",
+   "key": "liver#1",
+   "sid": "5-10.s2",
+   "word_f0": 480,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 45566,
+   "F_land": 45566,
+   "F_end": 45626
+  },
+  {
+   "id": "packed",
+   "obj": "packed",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "packed with CDK20：皿里的细胞一个个插满小插座",
+   "f_start": 545,
+   "f_land": 552,
+   "f_end": 661,
+   "until": "5-10.w018",
+   "word": "5-10.w016",
+   "w": "packed",
+   "key": "packed#1",
+   "sid": "5-10.s2",
+   "word_f0": 552,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 45631,
+   "F_land": 45638,
+   "F_end": 45747
+  },
+  {
+   "id": "lost",
+   "obj": "lost",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "lost：信号表开始往下掉，细胞一半变灰",
+   "f_start": 694,
+   "f_land": 707,
+   "f_end": 801,
+   "until": "5-10.w021",
+   "word": "5-10.w019",
+   "w": "lost",
+   "key": "lost#1",
+   "sid": "5-10.s2",
+   "word_f0": 707,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "gauge"
+    ]
+   },
+   "F_start": 45780,
+   "F_land": 45793,
+   "F_end": 45887,
+   "g_start": 681,
+   "g_on": 699,
+   "g_end": 801,
+   "g_off": 831,
+   "g_tick": 703,
+   "G_start": 45767,
+   "G_on": 45785,
+   "G_end": 45887,
+   "G_off": 45917,
+   "G_tick": 45789
+  },
+  {
+   "id": "half",
+   "obj": "half",
+   "verb": "move",
+   "ease": "inout",
+   "means": "half：信号表停在一半，标 half；living-cell signal 手写",
+   "f_start": 766,
+   "f_land": 766,
+   "f_end": 882,
+   "until": "5-10.w023",
+   "word": "5-10.w020",
+   "w": "half",
+   "key": "half#1",
+   "sid": "5-10.s2",
+   "word_f0": 766,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 45852,
+   "F_land": 45852,
+   "F_end": 45968
+  },
+  {
+   "id": "d210",
+   "obj": "d210",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "at about 210：剂量条长出来，数字轮停在 210",
+   "f_start": 936,
+   "f_land": 996,
+   "f_end": 1118,
+   "until": "5-10.w027",
+   "word": "5-10.w026",
+   "w": "210",
+   "key": "210#1",
+   "sid": "5-10.s2",
+   "word_f0": 996,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "bars"
+    ]
+   },
+   "F_start": 46022,
+   "F_land": 46082,
+   "F_end": 46204,
+   "g_start": 970,
+   "g_on": 988,
+   "g_end": 1116,
+   "g_off": 1146,
+   "g_tick": 992,
+   "G_start": 46056,
+   "G_on": 46074,
+   "G_end": 46202,
+   "G_off": 46232,
+   "G_tick": 46078
+  },
+  {
+   "id": "nm",
+   "obj": "nm",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "nanomolar：数字后面刻上 nM",
+   "f_start": 1060,
+   "f_land": 1068,
+   "f_end": 1118,
+   "until": "5-10.s2",
+   "word": "5-10.w027",
+   "w": "nanomolar.",
+   "key": "nanomolar#1",
+   "sid": "5-10.s2",
+   "word_f0": 1068,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 46146,
+   "F_land": 46154,
+   "F_end": 46204
+  },
+  {
+   "id": "hek",
+   "obj": "hek",
+   "verb": "move",
+   "ease": "inout",
+   "means": "Comparison cells：Huh7 一组往左让，HEK293 皿从右边滑进来",
+   "f_start": 1127,
+   "f_land": 1157,
+   "f_end": 1221,
+   "until": "5-10.w029",
+   "word": "5-10.w028",
+   "w": "Comparison",
+   "key": "comparison#1",
+   "sid": "5-10.s3",
+   "word_f0": 1157,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "hek"
+    ]
+   },
+   "F_start": 46213,
+   "F_land": 46243,
+   "F_end": 46307,
+   "g_start": 1131,
+   "g_on": 1149,
+   "g_end": 1221,
+   "g_off": 1251,
+   "g_tick": 1153,
+   "G_start": 46217,
+   "G_on": 46235,
+   "G_end": 46307,
+   "G_off": 46337,
+   "G_tick": 46239
+  },
+  {
+   "id": "hekl",
+   "obj": "hekl",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "HEK293：标 HEK293",
+   "f_start": 1242,
+   "f_land": 1252,
+   "f_end": 1412,
+   "until": "5-10.w030",
+   "word": "5-10.w030",
+   "w": "HEK293,",
+   "key": "hek293#1",
+   "sid": "5-10.s3",
+   "word_f0": 1252,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 46328,
+   "F_land": 46338,
+   "F_end": 46498
+  },
+  {
+   "id": "hneed",
+   "obj": "hneed",
+   "verb": "move",
+   "ease": "inout",
+   "means": "needed：048 插进 HEK 皿，它的信号表也掉到一半",
+   "f_start": 1376,
+   "f_land": 1412,
+   "f_end": 1445,
+   "until": "5-10.w032",
+   "word": "5-10.w031",
+   "w": "needed",
+   "key": "needed#1",
+   "sid": "5-10.s3",
+   "word_f0": 1412,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 46462,
+   "F_land": 46498,
+   "F_end": 46531
+  },
+  {
+   "id": "d1700",
+   "obj": "d1700",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "about 1,700：HEK 的剂量条长到 1,700",
+   "f_start": 1384,
+   "f_land": 1474,
+   "f_end": 1607,
+   "until": "5-10.s3",
+   "word": "5-10.w033",
+   "w": "1,700.",
+   "key": "1,700#1",
+   "sid": "5-10.s3",
+   "word_f0": 1474,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "bars"
+    ]
+   },
+   "F_start": 46470,
+   "F_land": 46560,
+   "F_end": 46693,
+   "g_start": 1448,
+   "g_on": 1466,
+   "g_end": 1594,
+   "g_off": 1624,
+   "g_tick": 1470,
+   "G_start": 46534,
+   "G_on": 46552,
+   "G_end": 46680,
+   "G_off": 46710,
+   "G_tick": 46556
+  },
+  {
+   "id": "eight",
+   "obj": "eight",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "eight：八段 Huh7 的长度依次铺满 HEK 的条",
+   "f_start": 1642,
+   "f_land": 1672,
+   "f_end": 1712,
+   "until": "5-10.w036",
+   "word": "5-10.w035",
+   "w": "eight",
+   "key": "eight#1",
+   "sid": "5-10.s4",
+   "word_f0": 1672,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 46728,
+   "F_land": 46758,
+   "F_end": 46798
+  },
+  {
+   "id": "more",
+   "obj": "more",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "times more：手写 ≈ 8×",
+   "f_start": 1683,
+   "f_land": 1683,
+   "f_end": 1738,
+   "until": "5-10.s4",
+   "word": "5-10.w036",
+   "w": "times",
+   "key": "times#1",
+   "sid": "5-10.s4",
+   "word_f0": 1683,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 46769,
+   "F_land": 46769,
+   "F_end": 46824
+  }
+ ],
+ "guides": [
+  {
+   "id": "cells",
+   "target": [
+    "huh7"
+   ],
+   "kind": "focus",
+   "gs": 102,
+   "gon": 120,
+   "land": 128,
+   "gend": 168,
+   "goff": 198,
+   "tick": 124,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 121,
+   "events": [
+    "cells"
+   ],
+   "G_start": 45188,
+   "G_on": 45206,
+   "G_land": 45214,
+   "G_end": 45254,
+   "G_off": 45284,
+   "G_tick": 45210
+  },
+  {
+   "id": "dose",
+   "target": [
+    "plug"
+   ],
+   "kind": "focus",
+   "gs": 295,
+   "gon": 313,
+   "land": 321,
+   "gend": 417,
+   "goff": 447,
+   "tick": 317,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 285,
+   "events": [
+    "dose"
+   ],
+   "G_start": 45381,
+   "G_on": 45399,
+   "G_land": 45407,
+   "G_end": 45503,
+   "G_off": 45533,
+   "G_tick": 45403
+  },
+  {
+   "id": "lost",
+   "target": [
+    "gauge"
+   ],
+   "kind": "focus",
+   "gs": 681,
+   "gon": 699,
+   "land": 707,
+   "gend": 801,
+   "goff": 831,
+   "tick": 703,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 694,
+   "events": [
+    "lost"
+   ],
+   "G_start": 45767,
+   "G_on": 45785,
+   "G_land": 45793,
+   "G_end": 45887,
+   "G_off": 45917,
+   "G_tick": 45789
+  },
+  {
+   "id": "d210",
+   "target": [
+    "bars"
+   ],
+   "kind": "focus",
+   "gs": 970,
+   "gon": 988,
+   "land": 996,
+   "gend": 1116,
+   "goff": 1146,
+   "tick": 992,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 936,
+   "events": [
+    "d210"
+   ],
+   "handoff": "hek",
+   "G_start": 46056,
+   "G_on": 46074,
+   "G_land": 46082,
+   "G_end": 46202,
+   "G_off": 46232,
+   "G_tick": 46078
+  },
+  {
+   "id": "hek",
+   "target": [
+    "hek"
+   ],
+   "kind": "focus",
+   "gs": 1131,
+   "gon": 1149,
+   "land": 1157,
+   "gend": 1221,
+   "goff": 1251,
+   "tick": 1153,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 1127,
+   "events": [
+    "hek"
+   ],
+   "G_start": 46217,
+   "G_on": 46235,
+   "G_land": 46243,
+   "G_end": 46307,
+   "G_off": 46337,
+   "G_tick": 46239
+  },
+  {
+   "id": "d1700",
+   "target": [
+    "bars"
+   ],
+   "kind": "focus",
+   "gs": 1448,
+   "gon": 1466,
+   "land": 1474,
+   "gend": 1594,
+   "goff": 1624,
+   "tick": 1470,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 1384,
+   "events": [
+    "d1700"
+   ],
+   "G_start": 46534,
+   "G_on": 46552,
+   "G_land": 46560,
+   "G_end": 46680,
+   "G_off": 46710,
+   "G_tick": 46556
+  }
+ ],
+ "problems": []
+}

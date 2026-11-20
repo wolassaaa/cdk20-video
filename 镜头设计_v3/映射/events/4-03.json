@@ -1,87 +1,280 @@
 {
  "schema": "cdk20.events/1",
  "group": "4-03",
- "tool": "warp_source",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/4-03.json",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 4-03（页面 btier/B403.jsx）。左边 AlphaFold 预测模型（按可信度上色，红色是低可信度的尾巴），look closer：放大镜扣到尾巴上（放大镜里是同一张贴图按原图分辨率显示，不做位图推拉）；右边 CDK20 插座正面，One end：插座边上长出一串红珠子（尾巴），floppy 时晃；low confidence：标；in the model it lay across the keyhole：尾巴横搭过插孔；one building block sitting inside the ATP pocket：一颗珠子落进孔里，标 ATP pocket；cut keys for a blocked door：左下冲出三个金插头，一个飞向插孔被尾巴挡回来（T7）。",
+ "tier": "B",
+ "zone": 4,
+ "trans_in": "T2 甩进（上一段 4-02 是 B 页）",
+ "trans_out": "T5 runner（下一段 4-04+05 是出镜段）",
  "holds": [],
  "events": [
   {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
+   "id": "af",
+   "obj": "af",
+   "verb": "appear",
    "at": {
-    "word": "4-03.w001",
-    "off": -9
-   },
-   "until": {
-    "dur": 6
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.00→1.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.0,
-    1.45
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage01",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "4-03.w001",
-    "off": -3
-   },
-   "until": {
-    "dur": 950
-   },
-   "ease": "linear",
-   "means": "旧动画源片 1.45→7.10 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    1.45,
-    7.1
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage02",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "4-03.w034",
+    "word": "but#1",
     "off": 0
    },
-   "until": {
-    "dur": 24
+   "lead": 9,
+   "means": "But：预测模型",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
    },
-   "ease": "linear",
-   "means": "旧动画源片 7.10→7.42 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    7.1,
-    7.417
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "until": {
+    "word": "look#1"
+   }
   },
   {
-   "id": "footage03",
-   "obj": "footage",
+   "id": "closer",
+   "obj": "closer",
    "verb": "move",
    "at": {
-    "word": "4-03.w036",
+    "word": "closer#1",
     "off": 0
    },
-   "until": {
-    "dur": 204
+   "lead": 13,
+   "means": "look closer：放大镜扣到红色尾巴上",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "af"
+    ]
    },
-   "ease": "linear",
-   "means": "旧动画源片 7.42→9.73 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    7.417,
-    9.733
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "sock",
+   "obj": "sock",
+   "verb": "move",
+   "at": {
+    "word": "one#1",
+    "off": 0
+   },
+   "lead": 7,
+   "means": "One：插座正面从右边滑进来",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "end#1"
+   }
+  },
+  {
+   "id": "tail",
+   "obj": "tail",
+   "verb": "grow",
+   "at": {
+    "word": "end#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "One end of the protein：插座边上长出一串红珠子",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "tail"
+    ]
+   },
+   "until": {
+    "word": "protein#1"
+   }
+  },
+  {
+   "id": "floppy",
+   "obj": "floppy",
+   "verb": "move",
+   "at": {
+    "word": "floppy#1",
+    "off": 0
+   },
+   "lead": 6,
+   "means": "a floppy tail：尾巴晃",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "tail#1"
+   }
+  },
+  {
+   "id": "low",
+   "obj": "low",
+   "verb": "appear",
+   "at": {
+    "word": "confidence#1",
+    "off": 0
+   },
+   "lead": 10,
+   "means": "really low confidence：标 low confidence",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "model",
+   "obj": "model",
+   "verb": "appear",
+   "at": {
+    "word": "model#1",
+    "off": 0
+   },
+   "lead": 10,
+   "means": "in the model：放大镜里的尾巴亮一下",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "model#1"
+   }
+  },
+  {
+   "id": "lay",
+   "obj": "lay",
+   "verb": "move",
+   "at": {
+    "word": "keyhole#1",
+    "off": 0
+   },
+   "lead": 46,
+   "means": "lay across the keyhole：尾巴横搭过插孔",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "tail"
+    ]
+   },
+   "until": {
+    "word": "keyhole#1"
+   }
+  },
+  {
+   "id": "block",
+   "obj": "block",
+   "verb": "appear",
+   "at": {
+    "word": "block#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "one building block：一颗珠子鼓一下",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "block#1"
+   }
+  },
+  {
+   "id": "inside",
+   "obj": "inside",
+   "verb": "snap",
+   "at": {
+    "word": "inside#1",
+    "off": 0
+   },
+   "lead": 28,
+   "means": "sitting inside：这颗珠子落进孔里",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "the#4"
+   }
+  },
+  {
+   "id": "atp",
+   "obj": "atp",
+   "verb": "appear",
+   "at": {
+    "word": "pocket#1",
+    "off": 0
+   },
+   "lead": 10,
+   "means": "the ATP pocket：标 ATP pocket",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "socket"
+    ]
+   },
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "trust",
+   "obj": "trust",
+   "verb": "move",
+   "at": {
+    "word": "trust#1",
+    "off": 0
+   },
+   "lead": 6,
+   "means": "Trust it blindly：放大镜收起",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "blindly#1"
+   }
+  },
+  {
+   "id": "cut",
+   "obj": "cut",
+   "verb": "grow",
+   "at": {
+    "word": "cut#1",
+    "off": 0
+   },
+   "lead": 7,
+   "means": "cut keys：左下冲出三个金插头",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "keys"
+    ]
+   },
+   "until": {
+    "word": "keys#1"
+   }
+  },
+  {
+   "id": "go",
+   "obj": "go",
+   "verb": "snap",
+   "at": {
+    "word": "blocked#1",
+    "off": 0
+   },
+   "lead": 46,
+   "means": "for a blocked door：一个插头飞向插孔，被尾巴挡回来（T7）",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
+   }
   }
  ]
 }

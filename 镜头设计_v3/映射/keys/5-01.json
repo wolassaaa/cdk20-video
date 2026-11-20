@@ -431,15 +431,38 @@
  "holds": [],
  "events": [
   {
-   "id": "title",
-   "obj": "title",
+   "id": "sweep",
+   "obj": "sweep",
    "verb": "appear",
    "ease": "inout",
-   "means": "moment：标题 The moment of truth",
-   "f_start": 34,
+   "means": "So：T6 光扫过",
+   "f_start": 0,
+   "f_land": 9,
+   "f_end": 39,
+   "until": null,
+   "word": "5-01.w001",
+   "w": "So,",
+   "key": "so#1",
+   "sid": "5-01.s1",
+   "word_f0": 9,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 37470,
+   "F_land": 37479,
+   "F_end": 37509
+  },
+  {
+   "id": "sock",
+   "obj": "sock",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "the moment of truth：CDK20 插座落位，灯一闪",
+   "f_start": 31,
    "f_land": 44,
    "f_end": 98,
-   "until": "5-01.s1",
+   "until": "5-01.w005",
    "word": "5-01.w003",
    "w": "moment",
    "key": "moment#1",
@@ -449,43 +472,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 37504,
+   "F_start": 37501,
    "F_land": 37514,
    "F_end": 37568
   },
   {
-   "id": "sub",
-   "obj": "sub",
-   "verb": "appear",
+   "id": "rack",
+   "obj": "rack",
+   "verb": "grow",
    "ease": "inout",
-   "means": "truth：副标题 Objective 2 · Results",
-   "f_start": 66,
-   "f_land": 74,
-   "f_end": 98,
-   "until": "5-01.s1",
-   "word": "5-01.w005",
-   "w": "truth.",
-   "key": "truth#1",
-   "sid": "5-01.s1",
-   "word_f0": 74,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 37536,
-   "F_land": 37544,
-   "F_end": 37568
-  },
-  {
-   "id": "seven",
-   "obj": "seven",
-   "verb": "move",
-   "ease": "inout",
-   "means": "Seven：七个小瓶依次落下，计数跳到 7",
-   "f_start": 128,
+   "means": "Seven real molecules：插座让到右边，料杆上七个金插头依次落位",
+   "f_start": 125,
    "f_land": 138,
-   "f_end": 321,
-   "until": "5-01.s2",
+   "f_end": 222,
+   "until": "5-01.w008",
    "word": "5-01.w006",
    "w": "Seven",
    "key": "seven#1",
@@ -493,45 +493,35 @@
    "word_f0": 138,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "rack"
+    ]
    },
-   "F_start": 37598,
+   "F_start": 37595,
    "F_land": 37608,
-   "F_end": 37791
-  },
-  {
-   "id": "mol",
-   "obj": "mol",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "molecules：写 real molecules",
-   "f_start": 172,
-   "f_land": 180,
-   "f_end": 321,
-   "until": "5-01.s2",
-   "word": "5-01.w008",
-   "w": "molecules,",
-   "key": "molecules#1",
-   "sid": "5-01.s2",
-   "word_f0": 180,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 37642,
-   "F_land": 37650,
-   "F_end": 37791
+   "F_end": 37692,
+   "g_start": 112,
+   "g_on": 130,
+   "g_end": 222,
+   "g_off": 252,
+   "g_tick": 134,
+   "G_start": 37582,
+   "G_on": 37600,
+   "G_end": 37692,
+   "G_off": 37722,
+   "G_tick": 37604
   },
   {
    "id": "made",
    "obj": "made",
-   "verb": "grow",
+   "verb": "appear",
    "ease": "inout",
-   "means": "made：烧瓶在瓶后长出",
-   "f_start": 233,
+   "means": "made in a real lab：手写批注",
+   "f_start": 249,
    "f_land": 249,
    "f_end": 321,
-   "until": "5-01.s2",
+   "until": "5-01.w013",
    "word": "5-01.w009",
    "w": "made",
    "key": "made#1",
@@ -539,32 +529,19 @@
    "word_f0": 249,
    "tool": "remotion",
    "guide": {
-    "kind": "focus",
-    "target": [
-     "flask"
-    ]
+    "kind": "none"
    },
-   "F_start": 37703,
+   "F_start": 37719,
    "F_land": 37719,
-   "F_end": 37791,
-   "g_start": 223,
-   "g_on": 241,
-   "g_end": 321,
-   "g_off": 351,
-   "g_tick": 245,
-   "G_start": 37693,
-   "G_on": 37711,
-   "G_end": 37791,
-   "G_off": 37821,
-   "G_tick": 37715
+   "F_end": 37791
   },
   {
-   "id": "lab",
-   "obj": "lab",
-   "verb": "appear",
+   "id": "flask",
+   "obj": "flask",
+   "verb": "grow",
    "ease": "inout",
-   "means": "lab：写 made in a real lab",
-   "f_start": 300,
+   "means": "lab：烧瓶长出来",
+   "f_start": 295,
    "f_land": 308,
    "f_end": 321,
    "until": "5-01.s2",
@@ -575,22 +552,35 @@
    "word_f0": 308,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "flask"
+    ]
    },
-   "F_start": 37770,
+   "F_start": 37765,
    "F_land": 37778,
-   "F_end": 37791
+   "F_end": 37791,
+   "g_start": 282,
+   "g_on": 300,
+   "g_end": 321,
+   "g_off": 351,
+   "g_tick": 304,
+   "G_start": 37752,
+   "G_on": 37770,
+   "G_end": 37791,
+   "G_off": 37821,
+   "G_tick": 37774
   },
   {
    "id": "any",
    "obj": "any",
    "verb": "appear",
    "ease": "inout",
-   "means": "any：右边红问号",
-   "f_start": 378,
+   "means": "any：七个插头挨个抖一下",
+   "f_start": 380,
    "f_land": 386,
-   "f_end": 531,
-   "until": "5-01.s3",
+   "f_end": 434,
+   "until": "5-01.w016",
    "word": "5-01.w015",
    "w": "any",
    "key": "any#1",
@@ -600,20 +590,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 37848,
+   "F_start": 37850,
    "F_land": 37856,
-   "F_end": 38001
+   "F_end": 37904
   },
   {
-   "id": "grab",
-   "obj": "grab",
-   "verb": "morph",
+   "id": "try",
+   "obj": "try",
+   "verb": "move",
    "ease": "inout",
-   "means": "grab：问号变成虚的 CDK20",
-   "f_start": 429,
+   "means": "grab：001 从料杆上掰下来，飞到插座口前停住",
+   "f_start": 353,
    "f_land": 443,
    "f_end": 531,
-   "until": "5-01.s3",
+   "until": "5-01.w018",
    "word": "5-01.w017",
    "w": "grab",
    "key": "grab#1",
@@ -621,19 +611,32 @@
    "word_f0": 443,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "sock"
+    ]
    },
-   "F_start": 37899,
+   "F_start": 37823,
    "F_land": 37913,
-   "F_end": 38001
+   "F_end": 38001,
+   "g_start": 417,
+   "g_on": 435,
+   "g_end": 531,
+   "g_off": 561,
+   "g_tick": 439,
+   "G_start": 37887,
+   "G_on": 37905,
+   "G_end": 38001,
+   "G_off": 38031,
+   "G_tick": 37909
   },
   {
-   "id": "cdk",
-   "obj": "cdk",
+   "id": "q",
+   "obj": "q",
    "verb": "appear",
    "ease": "inout",
-   "means": "CDK20：七个瓶各连虚线到 CDK20，写 CDK20",
-   "f_start": 471,
+   "means": "CDK20?：红色问号",
+   "f_start": 483,
    "f_land": 483,
    "f_end": 531,
    "until": "5-01.s3",
@@ -646,20 +649,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 37941,
+   "F_start": 37953,
    "F_land": 37953,
    "F_end": 38001
   },
   {
-   "id": "grip",
-   "obj": "grip",
-   "verb": "morph",
+   "id": "clear",
+   "obj": "clear",
+   "verb": "move",
    "ease": "inout",
-   "means": "Grip：七条线闪一下",
-   "f_start": 570,
+   "means": "Grip：插座和料杆出去，烧瓶移到左边",
+   "f_start": 566,
    "f_land": 576,
-   "f_end": 1070,
-   "until": "5-01.s4",
+   "f_end": 612,
+   "until": "5-01.w020",
    "word": "5-01.w019",
    "w": "Grip",
    "key": "grip#1",
@@ -669,43 +672,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 38040,
+   "F_start": 38036,
    "F_land": 38046,
-   "F_end": 38540
-  },
-  {
-   "id": "meas",
-   "obj": "meas",
-   "verb": "grow",
-   "ease": "inout",
-   "means": "measured：右边量杯式刻度长出",
-   "f_start": 604,
-   "f_land": 618,
-   "f_end": 1070,
-   "until": "5-01.s4",
-   "word": "5-01.w021",
-   "w": "measured",
-   "key": "measured#1",
-   "sid": "5-01.s4",
-   "word_f0": 618,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 38074,
-   "F_land": 38088,
-   "F_end": 38540
+   "F_end": 38082
   },
   {
    "id": "kd",
    "obj": "kd",
    "verb": "appear",
    "ease": "inout",
-   "means": "Kd：刻度上写 Kd，指针落下",
-   "f_start": 658,
+   "means": "Kd：刻 Kd 和刻度",
+   "f_start": 656,
    "f_land": 666,
-   "f_end": 1070,
-   "until": "5-01.s4",
+   "f_end": 734,
+   "until": "5-01.w024",
    "word": "5-01.w023",
    "w": "Kd:",
    "key": "kd#1",
@@ -715,20 +695,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 38128,
+   "F_start": 38126,
    "F_land": 38136,
-   "F_end": 38540
+   "F_end": 38204
   },
   {
-   "id": "rough",
-   "obj": "rough",
-   "verb": "morph",
+   "id": "grid",
+   "obj": "grid",
+   "verb": "grow",
    "ease": "inout",
-   "means": "roughly：指针晃一下",
-   "f_start": 706,
+   "means": "roughly：十个小插座依次落位",
+   "f_start": 701,
    "f_land": 714,
-   "f_end": 1070,
-   "until": "5-01.s4",
+   "f_end": 781,
+   "until": "5-01.w025",
    "word": "5-01.w024",
    "w": "roughly,",
    "key": "roughly#1",
@@ -736,137 +716,71 @@
    "word_f0": 714,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "grid"
+    ]
    },
-   "F_start": 38176,
+   "F_start": 38171,
    "F_land": 38184,
-   "F_end": 38540
+   "F_end": 38251,
+   "g_start": 688,
+   "g_on": 706,
+   "g_end": 760,
+   "g_off": 778,
+   "g_tick": 710,
+   "G_start": 38158,
+   "G_on": 38176,
+   "G_end": 38230,
+   "G_off": 38248,
+   "G_tick": 38180
   },
   {
-   "id": "how",
-   "obj": "how",
+   "id": "much",
+   "obj": "much",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "how much molecule：烧瓶抖一下，瓶口冒出插头",
+   "f_start": 773,
+   "f_land": 786,
+   "f_end": 839,
+   "until": "5-01.w027",
+   "word": "5-01.w026",
+   "w": "much",
+   "key": "much#1",
+   "sid": "5-01.s4",
+   "word_f0": 786,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "flask"
+    ]
+   },
+   "F_start": 38243,
+   "F_land": 38256,
+   "F_end": 38309,
+   "g_start": 760,
+   "g_on": 778,
+   "g_end": 839,
+   "g_off": 869,
+   "g_tick": 782,
+   "G_start": 38230,
+   "G_on": 38248,
+   "G_end": 38309,
+   "G_off": 38339,
+   "G_tick": 38252
+  },
+  {
+   "id": "fly",
+   "obj": "fly",
    "verb": "move",
    "ease": "inout",
-   "means": "how much：第一个瓶的小点沿线流向 CDK20",
-   "f_start": 759,
-   "f_land": 769,
-   "f_end": 1070,
-   "until": "5-01.s4",
-   "word": "5-01.w025",
-   "w": "how",
-   "key": "how#1",
-   "sid": "5-01.s4",
-   "word_f0": 769,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 38229,
-   "F_land": 38239,
-   "F_end": 38540
-  },
-  {
-   "id": "molec",
-   "obj": "molec",
-   "verb": "move",
-   "ease": "inout",
-   "means": "molecule：小点围到 CDK20 左边",
-   "f_start": 794,
-   "f_land": 804,
-   "f_end": 1070,
-   "until": "5-01.s4",
-   "word": "5-01.w027",
-   "w": "molecule",
-   "key": "molecule#1",
-   "sid": "5-01.s4",
-   "word_f0": 804,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 38264,
-   "F_land": 38274,
-   "F_end": 38540
-  },
-  {
-   "id": "it",
-   "obj": "it",
-   "verb": "morph",
-   "ease": "inout",
-   "means": "it：第一个瓶慢慢朝 CDK20 倾过去，像在倒",
-   "f_start": 886,
-   "f_land": 906,
-   "f_end": 1070,
-   "until": "5-01.s4",
-   "word": "5-01.w028",
-   "w": "it",
-   "key": "it#1",
-   "sid": "5-01.s4",
-   "word_f0": 906,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 38356,
-   "F_land": 38376,
-   "F_end": 38540
-  },
-  {
-   "id": "takes",
-   "obj": "takes",
-   "verb": "move",
-   "ease": "inout",
-   "means": "takes：第二波小点",
-   "f_start": 912,
-   "f_land": 922,
-   "f_end": 1070,
-   "until": "5-01.s4",
-   "word": "5-01.w029",
-   "w": "takes",
-   "key": "takes#1",
-   "sid": "5-01.s4",
-   "word_f0": 922,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 38382,
-   "F_land": 38392,
-   "F_end": 38540
-  },
-  {
-   "id": "grab2",
-   "obj": "grab2",
-   "verb": "snap",
-   "ease": "inout",
-   "means": "grab：小点贴住 CDK20",
-   "f_start": 949,
-   "f_land": 955,
-   "f_end": 1070,
-   "until": "5-01.s4",
-   "word": "5-01.w031",
-   "w": "grab",
-   "key": "grab#2",
-   "sid": "5-01.s4",
-   "word_f0": 955,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 38419,
-   "F_land": 38425,
-   "F_end": 38540
-  },
-  {
-   "id": "half",
-   "obj": "half",
-   "verb": "morph",
-   "ease": "inout",
-   "means": "half：CDK20 左半边变实，右半边还是虚的",
-   "f_start": 979,
+   "means": "it takes to grab：插头一个个飞进小插座",
+   "f_start": 909,
    "f_land": 989,
-   "f_end": 1070,
-   "until": "5-01.s4",
+   "f_end": 1030,
+   "until": "5-01.w033",
    "word": "5-01.w032",
    "w": "half",
    "key": "half#1",
@@ -876,43 +790,56 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 38449,
+   "F_start": 38379,
    "F_land": 38459,
-   "F_end": 38540
+   "F_end": 38500
   },
   {
-   "id": "prot",
-   "obj": "prot",
-   "verb": "appear",
+   "id": "half",
+   "obj": "half",
+   "verb": "snap",
    "ease": "inout",
-   "means": "protein：写 half the protein",
-   "f_start": 1033,
-   "f_land": 1041,
+   "means": "half：第五个插上（十个里五个），T7 一抖，手写 half",
+   "f_start": 989,
+   "f_land": 989,
    "f_end": 1070,
-   "until": "5-01.s4",
-   "word": "5-01.w034",
-   "w": "protein.",
-   "key": "protein#1",
+   "until": "5-01.w034",
+   "word": "5-01.w032",
+   "w": "half",
+   "key": "half#1",
    "sid": "5-01.s4",
-   "word_f0": 1041,
+   "word_f0": 989,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "grid"
+    ]
    },
-   "F_start": 38503,
-   "F_land": 38511,
-   "F_end": 38540
+   "F_start": 38459,
+   "F_land": 38459,
+   "F_end": 38540,
+   "g_start": 963,
+   "g_on": 981,
+   "g_end": 1070,
+   "g_off": 1100,
+   "g_tick": 985,
+   "G_start": 38433,
+   "G_on": 38451,
+   "G_end": 38540,
+   "G_off": 38570,
+   "G_tick": 38455
   },
   {
    "id": "lower",
    "obj": "lower",
    "verb": "move",
    "ease": "inout",
-   "means": "Lower：指针往下走",
-   "f_start": 1080,
+   "means": "Lower：Kd 刻度上的标往下走",
+   "f_start": 1081,
    "f_land": 1094,
-   "f_end": 1167,
-   "until": "5-01.s5",
+   "f_end": 1137,
+   "until": "5-01.w036",
    "word": "5-01.w035",
    "w": "Lower",
    "key": "lower#1",
@@ -922,40 +849,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 38550,
+   "F_start": 38551,
    "F_land": 38564,
-   "F_end": 38637
-  },
-  {
-   "id": "means",
-   "obj": "means",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "means：向下箭头和 lower = tighter",
-   "f_start": 1113,
-   "f_land": 1121,
-   "f_end": 1167,
-   "until": "5-01.s5",
-   "word": "5-01.w036",
-   "w": "means",
-   "key": "means#1",
-   "sid": "5-01.s5",
-   "word_f0": 1121,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 38583,
-   "F_land": 38591,
-   "F_end": 38637
+   "F_end": 38607
   },
   {
    "id": "tight",
    "obj": "tight",
-   "verb": "morph",
+   "verb": "snap",
    "ease": "inout",
-   "means": "tighter：第一个瓶到 CDK20 的线变粗变红",
-   "f_start": 1134,
+   "means": "tighter：插上的五个压紧一下，手写 lower = tighter",
+   "f_start": 1136,
    "f_land": 1142,
    "f_end": 1167,
    "until": "5-01.s5",
@@ -968,36 +872,162 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 38604,
+   "F_start": 38606,
    "F_land": 38612,
    "F_end": 38637
   }
  ],
  "guides": [
   {
-   "id": "made",
+   "id": "rack",
+   "target": [
+    "rack"
+   ],
+   "kind": "focus",
+   "gs": 112,
+   "gon": 130,
+   "land": 138,
+   "gend": 222,
+   "goff": 252,
+   "tick": 134,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 125,
+   "events": [
+    "rack"
+   ],
+   "G_start": 37582,
+   "G_on": 37600,
+   "G_land": 37608,
+   "G_end": 37692,
+   "G_off": 37722,
+   "G_tick": 37604
+  },
+  {
+   "id": "flask",
    "target": [
     "flask"
    ],
    "kind": "focus",
-   "gs": 223,
-   "gon": 241,
-   "land": 249,
+   "gs": 282,
+   "gon": 300,
+   "land": 308,
    "gend": 321,
    "goff": 351,
-   "tick": 245,
+   "tick": 304,
    "nudge": false,
    "rim": true,
-   "ev_s": 233,
+   "ev_s": 295,
    "events": [
-    "made"
+    "flask"
    ],
-   "G_start": 37693,
-   "G_on": 37711,
-   "G_land": 37719,
+   "G_start": 37752,
+   "G_on": 37770,
+   "G_land": 37778,
    "G_end": 37791,
    "G_off": 37821,
-   "G_tick": 37715
+   "G_tick": 37774
+  },
+  {
+   "id": "try",
+   "target": [
+    "sock"
+   ],
+   "kind": "focus",
+   "gs": 417,
+   "gon": 435,
+   "land": 443,
+   "gend": 531,
+   "goff": 561,
+   "tick": 439,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 353,
+   "events": [
+    "try"
+   ],
+   "G_start": 37887,
+   "G_on": 37905,
+   "G_land": 37913,
+   "G_end": 38001,
+   "G_off": 38031,
+   "G_tick": 37909
+  },
+  {
+   "id": "grid",
+   "target": [
+    "grid"
+   ],
+   "kind": "focus",
+   "gs": 688,
+   "gon": 706,
+   "land": 714,
+   "gend": 760,
+   "goff": 778,
+   "tick": 710,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 701,
+   "events": [
+    "grid"
+   ],
+   "handoff": "much",
+   "G_start": 38158,
+   "G_on": 38176,
+   "G_land": 38184,
+   "G_end": 38230,
+   "G_off": 38248,
+   "G_tick": 38180
+  },
+  {
+   "id": "much",
+   "target": [
+    "flask"
+   ],
+   "kind": "focus",
+   "gs": 760,
+   "gon": 778,
+   "land": 786,
+   "gend": 839,
+   "goff": 869,
+   "tick": 782,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 773,
+   "events": [
+    "much"
+   ],
+   "G_start": 38230,
+   "G_on": 38248,
+   "G_land": 38256,
+   "G_end": 38309,
+   "G_off": 38339,
+   "G_tick": 38252
+  },
+  {
+   "id": "half",
+   "target": [
+    "grid"
+   ],
+   "kind": "focus",
+   "gs": 963,
+   "gon": 981,
+   "land": 989,
+   "gend": 1070,
+   "goff": 1100,
+   "tick": 985,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 989,
+   "events": [
+    "half"
+   ],
+   "G_start": 38433,
+   "G_on": 38451,
+   "G_land": 38459,
+   "G_end": 38540,
+   "G_off": 38570,
+   "G_tick": 38455
   }
  ],
  "problems": []

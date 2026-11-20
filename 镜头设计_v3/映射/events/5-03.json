@@ -2,64 +2,68 @@
  "schema": "cdk20.events/1",
  "group": "5-03",
  "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：第 5 章二维说明书页 5-03（C 画外音）：七个小瓶和一根 Kd 刻度；001 的红点落到 9.2 micromolar，另外六个落在 30 那条虚线上面、变灰（much weaker）；右边一个钟转起来，计数跳到 30 days；下方路画出，Target 亮，001 小瓶飞到 Hit，Hit 变红，Target 到 Hit 红括号 30 days。页面 Manual503.jsx。",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 5-03（页面 btier/B503.jsx）。Kd 横尺（左低右高，越往左越紧）：001 的真分子（我们的重对接图）和金插头，插头沿尺走到 9.2，数字轮停在 9.2 µM；另外六个插头在右上角排开，30 的立柱升起，六个都落在 30 右边，变灰往下沉（much weaker）；wild part：尺往左滑走，日历落下（T7）；30 days：数字轮停在 30；从 PandaOmics 芯片（选靶）弹出一个小插座，沿路走到 001（第一个确认的命中），打勾。",
+ "tier": "B",
+ "zone": 5,
+ "trans_in": "T5 runner（上一段 5-02 是出镜段）",
+ "trans_out": "T5 socket（下一段 5-04 是 A 段插座）",
  "holds": [],
  "events": [
   {
-   "id": "t001",
-   "obj": "t001",
-   "verb": "grow",
+   "id": "mol",
+   "obj": "mol",
+   "verb": "appear",
    "at": {
-    "word": "5-03.w001",
+    "word": "001's#1",
     "off": 0
    },
-   "means": "001's：001 小瓶长出，标 001",
+   "lead": 9,
+   "means": "001's：001 的分子和金插头出现",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "5-03.w001"
+   "guide": {
+    "kind": "none"
    },
+   "until": {
+    "word": "kd#1"
+   }
+  },
+  {
+   "id": "p001",
+   "obj": "p001",
+   "verb": "move",
+   "at": {
+    "word": "9.2#1",
+    "off": 0
+   },
+   "lead": 50,
+   "means": "Kd 9.2：插头沿尺走到 9.2，数字轮停在 9.2",
+   "tool": "remotion",
    "guide": {
     "kind": "focus",
     "target": [
-     "tube"
+     "p001"
     ]
+   },
+   "until": {
+    "word": "9.2#1"
    }
   },
   {
-   "id": "kd",
-   "obj": "kd",
+   "id": "um",
+   "obj": "um",
    "verb": "appear",
    "at": {
-    "word": "5-03.w002",
+    "word": "micromolar#1",
     "off": 0
    },
-   "means": "Kd：Kd 刻度轴画出",
+   "lead": 8,
+   "means": "micromolar：刻 µM",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "5-03.w002"
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "val",
-   "obj": "val",
-   "verb": "move",
-   "at": {
-    "word": "5-03.w003",
-    "off": 0
    },
-   "means": "9.2 micromolar：红点从小瓶落到刻度上，写 9.2 micromolar",
-   "tool": "remotion",
-   "lead": 14,
    "until": {
-    "word": "5-03.w004"
-   },
-   "guide": {
-    "kind": "none"
+    "sentence_end": true
    }
   },
   {
@@ -67,182 +71,206 @@
    "obj": "six",
    "verb": "grow",
    "at": {
-    "word": "5-03.w006",
+    "word": "six#1",
     "off": 0
    },
-   "means": "other six：另外六个小瓶长出",
+   "lead": 13,
+   "means": "The other six：右上角六个插头依次落位",
    "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "word": "5-03.w007"
-   },
    "guide": {
     "kind": "focus",
     "target": [
-     "tube"
+     "six"
     ]
-   }
-  },
-  {
-   "id": "line",
-   "obj": "line",
-   "verb": "appear",
-   "at": {
-    "word": "5-03.w009",
-    "off": 0
    },
-   "means": "above：刻度上画 30 的虚线",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "5-03.w009"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "up",
-   "obj": "up",
-   "verb": "move",
-   "at": {
-    "word": "5-03.w010",
-    "off": 0
-   },
-   "means": "30：六个灰点飞到虚线上面",
-   "tool": "remotion",
-   "lead": 6,
    "until": {
     "sentence_end": true
+   }
+  },
+  {
+   "id": "post",
+   "obj": "post",
+   "verb": "grow",
+   "at": {
+    "word": "above#1",
+    "off": 0
    },
+   "lead": 13,
+   "means": "above 30：30 的立柱升起",
+   "tool": "remotion",
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "30#1"
+   }
+  },
+  {
+   "id": "drop",
+   "obj": "drop",
+   "verb": "move",
+   "at": {
+    "word": "30#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "30：六个插头落到尺上 30 右边",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
    "id": "weak",
    "obj": "weak",
-   "verb": "morph",
+   "verb": "move",
    "at": {
-    "word": "5-03.w011",
+    "word": "weaker#1",
     "off": 0
    },
-   "means": "much weaker：六个小瓶变灰下沉，写 much weaker",
+   "lead": 13,
+   "means": "Much weaker：六个变灰、往下沉，手写 much weaker",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "clear",
+   "obj": "clear",
+   "verb": "move",
+   "at": {
+    "word": "and#1",
+    "off": 0
+   },
+   "lead": 6,
+   "means": "And：尺和插头往左滑走，001 留下",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "here's#1"
    }
   },
   {
    "id": "wild",
    "obj": "wild",
-   "verb": "appear",
+   "verb": "snap",
    "at": {
-    "word": "5-03.w016",
+    "word": "wild#1",
     "off": 0
    },
-   "means": "wild part：右边画出一个钟",
+   "lead": 13,
+   "means": "wild part：日历落下，T7 一抖",
    "tool": "remotion",
-   "lead": 12,
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "cal"
+    ]
+   },
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
    }
   },
   {
    "id": "clock",
    "obj": "clock",
-   "verb": "move",
+   "verb": "appear",
    "at": {
-    "word": "5-03.w019",
+    "word": "clock#1",
     "off": 0
    },
-   "means": "clock read：钟的指针转起来",
+   "lead": 6,
+   "means": "The clock：日历翻一下",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "5-03.w020"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "read#1"
    }
   },
   {
-   "id": "d30",
-   "obj": "d30",
-   "verb": "morph",
-   "at": {
-    "word": "5-03.w022",
-    "off": 0
-   },
-   "means": "30 days：计数跳到 30 days",
-   "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "word": "5-03.w023"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "road",
-   "obj": "road",
+   "id": "n30",
+   "obj": "n30",
    "verb": "grow",
    "at": {
-    "word": "5-03.w025",
+    "word": "30#2",
     "off": 0
    },
-   "means": "picking：下方路画出",
+   "lead": 60,
+   "means": "30 days：数字轮停在 30，刻 days",
    "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "5-03.w026"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "days#1"
    }
   },
   {
-   "id": "tgt",
-   "obj": "tgt",
-   "verb": "snap",
+   "id": "pick",
+   "obj": "pick",
+   "verb": "eject",
    "at": {
-    "word": "5-03.w027",
+    "word": "picking#1",
     "off": 0
    },
-   "means": "target：Target 站变红",
+   "lead": 13,
+   "means": "picking：PandaOmics 芯片弹出一个小插座",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "5-03.w027"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "the#4"
    }
   },
   {
-   "id": "fly",
-   "obj": "fly",
+   "id": "target",
+   "obj": "target",
+   "verb": "appear",
+   "at": {
+    "word": "target#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "the target：标 target",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "road"
+    ]
+   },
+   "until": {
+    "word": "target#1"
+   }
+  },
+  {
+   "id": "travel",
+   "obj": "travel",
    "verb": "move",
    "at": {
-    "word": "5-03.w029",
+    "word": "hit#1",
     "off": 0
    },
-   "means": "this first：001 小瓶飞到 Hit",
+   "lead": 110,
+   "means": "to this first confirmed hit：小插座沿路走到 001",
    "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "word": "5-03.w030"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
@@ -250,17 +278,20 @@
    "obj": "hit",
    "verb": "snap",
    "at": {
-    "word": "5-03.w031",
+    "word": "hit#1",
     "off": 0
    },
-   "means": "confirmed hit：Hit 变红，Target 到 Hit 红括号 30 days，写 first confirmed hit",
+   "lead": 0,
+   "means": "hit：001 打勾，标 first confirmed hit",
    "tool": "remotion",
-   "lead": 6,
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "hit"
+    ]
+   },
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
    }
   }
  ]

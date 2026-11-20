@@ -303,12 +303,35 @@
  "holds": [],
  "events": [
   {
+   "id": "row",
+   "obj": "row",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "And：料杆上一排金插头和 Kd 横尺（001 在 9.2）",
+   "f_start": 0,
+   "f_land": 9,
+   "f_end": 64,
+   "until": "5-08.w004",
+   "word": "5-08.w001",
+   "w": "And",
+   "key": "and#1",
+   "sid": "5-08.s1",
+   "word_f0": 9,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 43296,
+   "F_land": 43305,
+   "F_end": 43360
+  },
+  {
    "id": "one",
    "obj": "one",
-   "verb": "appear",
+   "verb": "move",
    "ease": "inout",
-   "means": "one of them：一排六把钥匙里一把抬起来",
-   "f_start": 23,
+   "means": "one of them：一个插头抬起来",
+   "f_start": 20,
    "f_land": 33,
    "f_end": 64,
    "until": "5-08.w004",
@@ -321,17 +344,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 43319,
+   "F_start": 43316,
    "F_land": 43329,
    "F_end": 43360
   },
   {
    "id": "k48",
    "obj": "k48",
-   "verb": "move",
+   "verb": "morph",
    "ease": "inout",
-   "means": "048：这把钥匙标 048，移到第二行，其余淡出",
-   "f_start": 85,
+   "means": "048：抬起的插头刻上 048，标 048",
+   "f_start": 99,
    "f_land": 105,
    "f_end": 157,
    "until": "5-08.w005",
@@ -342,22 +365,35 @@
    "word_f0": 105,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "row"
+    ]
    },
-   "F_start": 43381,
+   "F_start": 43395,
    "F_land": 43401,
-   "F_end": 43453
+   "F_end": 43453,
+   "g_start": 79,
+   "g_on": 97,
+   "g_end": 154,
+   "g_off": 172,
+   "g_tick": 101,
+   "G_start": 43375,
+   "G_on": 43393,
+   "G_end": 43450,
+   "G_off": 43468,
+   "G_tick": 43397
   },
   {
    "id": "grab",
    "obj": "grab",
-   "verb": "grow",
+   "verb": "move",
    "ease": "inout",
-   "means": "grabbed：写 grabbed，001 和 048 两条长出",
-   "f_start": 170,
+   "means": "grabbed：048 飞到 Kd 横尺 0.6 处",
+   "f_start": 140,
    "f_land": 180,
-   "f_end": 207,
-   "until": "5-08.w006",
+   "f_end": 231,
+   "until": "5-08.w007",
    "word": "5-08.w006",
    "w": "grabbed",
    "key": "grabbed#1",
@@ -367,21 +403,21 @@
    "guide": {
     "kind": "focus",
     "target": [
-     "key"
+     "rail"
     ]
    },
-   "F_start": 43466,
+   "F_start": 43436,
    "F_land": 43476,
-   "F_end": 43503,
+   "F_end": 43527,
    "g_start": 154,
    "g_on": 172,
-   "g_end": 207,
-   "g_off": 237,
+   "g_end": 231,
+   "g_off": 261,
    "g_tick": 176,
    "G_start": 43450,
    "G_on": 43468,
-   "G_end": 43503,
-   "G_off": 43533,
+   "G_end": 43527,
+   "G_off": 43557,
    "G_tick": 43472
   },
   {
@@ -389,8 +425,8 @@
    "obj": "fif",
    "verb": "grow",
    "ease": "inout",
-   "means": "fifteen times：048 的条一格一格长到 15 格",
-   "f_start": 237,
+   "means": "fifteen times：0 到 9.2 之间铺出 15 段",
+   "f_start": 183,
    "f_land": 243,
    "f_end": 300,
    "until": "5-08.w009",
@@ -403,7 +439,7 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 43533,
+   "F_start": 43479,
    "F_land": 43539,
    "F_end": 43596
   },
@@ -412,8 +448,8 @@
    "obj": "tig",
    "verb": "appear",
    "ease": "inout",
-   "means": "tighter：写 about fifteen times tighter",
-   "f_start": 298,
+   "means": "tighter：手写 ≈ 15× tighter",
+   "f_start": 304,
    "f_land": 304,
    "f_end": 328,
    "until": "5-08.s1",
@@ -426,20 +462,43 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 43594,
+   "F_start": 43600,
    "F_land": 43600,
    "F_end": 43624
   },
   {
-   "id": "enz",
-   "obj": "enz",
-   "verb": "appear",
+   "id": "clear",
+   "obj": "clear",
+   "verb": "move",
    "ease": "inout",
-   "means": "enzyme test：下半写 the enzyme test，两行画出",
-   "f_start": 417,
+   "means": "Then：尺和料杆往左滑走",
+   "f_start": 344,
+   "f_land": 350,
+   "f_end": 408,
+   "until": "5-08.w012",
+   "word": "5-08.w011",
+   "w": "Then",
+   "key": "then#1",
+   "sid": "5-08.s2",
+   "word_f0": 350,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 43640,
+   "F_land": 43646,
+   "F_end": 43704
+  },
+  {
+   "id": "grid",
+   "obj": "grid",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "enzyme：十个小插座依次落位，灯亮",
+   "f_start": 422,
    "f_land": 429,
    "f_end": 480,
-   "until": "5-08.s2",
+   "until": "5-08.w014",
    "word": "5-08.w013",
    "w": "enzyme",
    "key": "enzyme#1",
@@ -447,22 +506,81 @@
    "word_f0": 429,
    "tool": "remotion",
    "guide": {
+    "kind": "focus",
+    "target": [
+     "grid"
+    ]
+   },
+   "F_start": 43718,
+   "F_land": 43725,
+   "F_end": 43776,
+   "g_start": 403,
+   "g_on": 421,
+   "g_end": 480,
+   "g_off": 510,
+   "g_tick": 425,
+   "G_start": 43699,
+   "G_on": 43717,
+   "G_end": 43776,
+   "G_off": 43806,
+   "G_tick": 43721
+  },
+  {
+   "id": "lab",
+   "obj": "lab",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "test：标 enzyme test",
+   "f_start": 448,
+   "f_land": 458,
+   "f_end": 480,
+   "until": "5-08.s2",
+   "word": "5-08.w014",
+   "w": "test.",
+   "key": "test#1",
+   "sid": "5-08.s2",
+   "word_f0": 458,
+   "tool": "remotion",
+   "guide": {
     "kind": "none"
    },
-   "F_start": 43713,
-   "F_land": 43725,
+   "F_start": 43744,
+   "F_land": 43754,
    "F_end": 43776
   },
   {
-   "id": "r001",
-   "obj": "r001",
-   "verb": "appear",
+   "id": "dial",
+   "obj": "dial",
+   "verb": "grow",
    "ease": "inout",
-   "means": "001：001 行亮",
-   "f_start": 558,
-   "f_land": 566,
+   "means": "Remember：对数表盘落位",
+   "f_start": 504,
+   "f_land": 517,
    "f_end": 601,
    "until": "5-08.w016",
+   "word": "5-08.w015",
+   "w": "Remember,",
+   "key": "remember#1",
+   "sid": "5-08.s3",
+   "word_f0": 517,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 43800,
+   "F_land": 43813,
+   "F_end": 43897
+  },
+  {
+   "id": "p001",
+   "obj": "p001",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "001：001 插头靠到表盘边",
+   "f_start": 553,
+   "f_land": 566,
+   "f_end": 624,
+   "until": "5-08.w017",
    "word": "5-08.w016",
    "w": "001",
    "key": "001#1",
@@ -472,43 +590,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 43854,
+   "F_start": 43849,
    "F_land": 43862,
-   "F_end": 43897
+   "F_end": 43920
   },
   {
-   "id": "need",
-   "obj": "need",
-   "verb": "grow",
-   "ease": "inout",
-   "means": "needed more：001 的条往右长",
-   "f_start": 598,
-   "f_land": 606,
-   "f_end": 654,
-   "until": "5-08.w019",
-   "word": "5-08.w017",
-   "w": "needed",
-   "key": "needed#1",
-   "sid": "5-08.s3",
-   "word_f0": 606,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 43894,
-   "F_land": 43902,
-   "F_end": 43950
-  },
-  {
-   "id": "big",
-   "obj": "big",
+   "id": "sweep",
+   "obj": "sweep",
    "verb": "move",
    "ease": "inout",
-   "means": "6,000 nanomolar：条长出图外带箭头，写 more than 6,000 nanomolar",
-   "f_start": 681,
+   "means": "needed more than 6,000：针一路转到 6,000 以外，数字轮停在 6,000",
+   "f_start": 606,
    "f_land": 689,
-   "f_end": 815,
-   "until": "5-08.s3",
+   "f_end": 732,
+   "until": "5-08.w020",
    "word": "5-08.w020",
    "w": "6,000",
    "key": "6,000#1",
@@ -516,19 +611,55 @@
    "word_f0": 689,
    "tool": "remotion",
    "guide": {
+    "kind": "focus",
+    "target": [
+     "dial"
+    ]
+   },
+   "F_start": 43902,
+   "F_land": 43985,
+   "F_end": 44028,
+   "g_start": 663,
+   "g_on": 681,
+   "g_end": 732,
+   "g_off": 762,
+   "g_tick": 685,
+   "G_start": 43959,
+   "G_on": 43977,
+   "G_end": 44028,
+   "G_off": 44058,
+   "G_tick": 43981
+  },
+  {
+   "id": "nm",
+   "obj": "nm",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "nanomolar：刻 nM",
+   "f_start": 742,
+   "f_land": 750,
+   "f_end": 815,
+   "until": "5-08.s3",
+   "word": "5-08.w021",
+   "w": "nanomolar.",
+   "key": "nanomolar#1",
+   "sid": "5-08.s3",
+   "word_f0": 750,
+   "tool": "remotion",
+   "guide": {
     "kind": "none"
    },
-   "F_start": 43977,
-   "F_land": 43985,
+   "F_start": 44038,
+   "F_land": 44046,
    "F_end": 44111
   },
   {
-   "id": "r048",
-   "obj": "r048",
+   "id": "p48",
+   "obj": "p48",
    "verb": "appear",
    "ease": "inout",
-   "means": "048：048 行亮",
-   "f_start": 844,
+   "means": "048：001 的针变灰留着，048 插头换上来",
+   "f_start": 839,
    "f_land": 852,
    "f_end": 907,
    "until": "5-08.w022",
@@ -541,40 +672,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 44140,
+   "F_start": 44135,
    "F_land": 44148,
    "F_end": 44203
   },
   {
-   "id": "n48",
-   "obj": "n48",
-   "verb": "grow",
+   "id": "need",
+   "obj": "need",
+   "verb": "move",
    "ease": "inout",
-   "means": "needed：048 的条起步",
-   "f_start": 922,
-   "f_land": 928,
-   "f_end": 949,
-   "until": "5-08.w023",
-   "word": "5-08.w023",
-   "w": "needed",
-   "key": "needed#2",
-   "sid": "5-08.s4",
-   "word_f0": 928,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 44218,
-   "F_land": 44224,
-   "F_end": 44245
-  },
-  {
-   "id": "just",
-   "obj": "just",
-   "verb": "snap",
-   "ease": "inout",
-   "means": "just 33.4：条停在很短一截，红字 just 33.4，一颤",
-   "f_start": 974,
+   "means": "needed just 33.4：新针只转一点，停在 33.4",
+   "f_start": 928,
    "f_land": 980,
    "f_end": 1088,
    "until": "5-08.s4",
@@ -587,36 +695,173 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 44270,
+   "F_start": 44224,
    "F_land": 44276,
    "F_end": 44384
+  },
+  {
+   "id": "clamp",
+   "obj": "clamp",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "33.4：十个里五个插座被卡死，灯灭，T7 一抖",
+   "f_start": 980,
+   "f_land": 980,
+   "f_end": 1088,
+   "until": "5-08.s4",
+   "word": "5-08.w025",
+   "w": "33.4.",
+   "key": "33.4#1",
+   "sid": "5-08.s4",
+   "word_f0": 980,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "grid"
+    ]
+   },
+   "F_start": 44276,
+   "F_land": 44276,
+   "F_end": 44384,
+   "g_start": 954,
+   "g_on": 972,
+   "g_end": 1088,
+   "g_off": 1101,
+   "g_tick": 976,
+   "G_start": 44250,
+   "G_on": 44268,
+   "G_end": 44384,
+   "G_off": 44397,
+   "G_tick": 44272
   }
  ],
  "guides": [
   {
+   "id": "k48",
+   "target": [
+    "row"
+   ],
+   "kind": "focus",
+   "gs": 79,
+   "gon": 97,
+   "land": 105,
+   "gend": 154,
+   "goff": 172,
+   "tick": 101,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 99,
+   "events": [
+    "k48"
+   ],
+   "handoff": "grab",
+   "G_start": 43375,
+   "G_on": 43393,
+   "G_land": 43401,
+   "G_end": 43450,
+   "G_off": 43468,
+   "G_tick": 43397
+  },
+  {
    "id": "grab",
    "target": [
-    "key"
+    "rail"
    ],
    "kind": "focus",
    "gs": 154,
    "gon": 172,
    "land": 180,
-   "gend": 207,
-   "goff": 237,
+   "gend": 231,
+   "goff": 261,
    "tick": 176,
-   "nudge": false,
+   "nudge": true,
    "rim": true,
-   "ev_s": 170,
+   "ev_s": 140,
    "events": [
     "grab"
    ],
    "G_start": 43450,
    "G_on": 43468,
    "G_land": 43476,
-   "G_end": 43503,
-   "G_off": 43533,
+   "G_end": 43527,
+   "G_off": 43557,
    "G_tick": 43472
+  },
+  {
+   "id": "grid",
+   "target": [
+    "grid"
+   ],
+   "kind": "focus",
+   "gs": 403,
+   "gon": 421,
+   "land": 429,
+   "gend": 480,
+   "goff": 510,
+   "tick": 425,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 422,
+   "events": [
+    "grid"
+   ],
+   "G_start": 43699,
+   "G_on": 43717,
+   "G_land": 43725,
+   "G_end": 43776,
+   "G_off": 43806,
+   "G_tick": 43721
+  },
+  {
+   "id": "sweep",
+   "target": [
+    "dial"
+   ],
+   "kind": "focus",
+   "gs": 663,
+   "gon": 681,
+   "land": 689,
+   "gend": 732,
+   "goff": 762,
+   "tick": 685,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 606,
+   "events": [
+    "sweep"
+   ],
+   "G_start": 43959,
+   "G_on": 43977,
+   "G_land": 43985,
+   "G_end": 44028,
+   "G_off": 44058,
+   "G_tick": 43981
+  },
+  {
+   "id": "clamp",
+   "target": [
+    "grid"
+   ],
+   "kind": "focus",
+   "gs": 954,
+   "gon": 972,
+   "land": 980,
+   "gend": 1088,
+   "goff": 1101,
+   "tick": 976,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 980,
+   "events": [
+    "clamp"
+   ],
+   "G_start": 44250,
+   "G_on": 44268,
+   "G_land": 44276,
+   "G_end": 44384,
+   "G_off": 44397,
+   "G_tick": 44272
   }
  ],
  "problems": []

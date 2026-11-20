@@ -1,0 +1,1011 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "4-03",
+ "segs": [
+  "4-03"
+ ],
+ "tool": "remotion",
+ "fps": 60,
+ "len_f": 1190,
+ "cut": "cut_v8",
+ "cut_start_f": 28756,
+ "cut_start_s": 479.27,
+ "master_built": "2026-11-18 02:33:56 +09:00",
+ "words_hash": "25b883219fc7",
+ "events_src": "镜头设计_v3/映射/events/4-03.json",
+ "words": [
+  {
+   "wid": "4-03.w001",
+   "w": "But",
+   "key": "but#1",
+   "sid": "4-03.s1",
+   "f0": 9,
+   "f1": 16,
+   "F0": 28765,
+   "F1": 28772
+  },
+  {
+   "wid": "4-03.w002",
+   "w": "look",
+   "key": "look#1",
+   "sid": "4-03.s1",
+   "f0": 18,
+   "f1": 28,
+   "F0": 28774,
+   "F1": 28784
+  },
+  {
+   "wid": "4-03.w003",
+   "w": "closer.",
+   "key": "closer#1",
+   "sid": "4-03.s1",
+   "f0": 30,
+   "f1": 57,
+   "F0": 28786,
+   "F1": 28813
+  },
+  {
+   "wid": "4-03.w004",
+   "w": "One",
+   "key": "one#1",
+   "sid": "4-03.s2",
+   "f0": 117,
+   "f1": 126,
+   "F0": 28873,
+   "F1": 28882
+  },
+  {
+   "wid": "4-03.w005",
+   "w": "end",
+   "key": "end#1",
+   "sid": "4-03.s2",
+   "f0": 132,
+   "f1": 141,
+   "F0": 28888,
+   "F1": 28897
+  },
+  {
+   "wid": "4-03.w006",
+   "w": "of",
+   "key": "of#1",
+   "sid": "4-03.s2",
+   "f0": 144,
+   "f1": 149,
+   "F0": 28900,
+   "F1": 28905
+  },
+  {
+   "wid": "4-03.w007",
+   "w": "the",
+   "key": "the#1",
+   "sid": "4-03.s2",
+   "f0": 152,
+   "f1": 156,
+   "F0": 28908,
+   "F1": 28912
+  },
+  {
+   "wid": "4-03.w008",
+   "w": "protein,",
+   "key": "protein#1",
+   "sid": "4-03.s2",
+   "f0": 178,
+   "f1": 204,
+   "F0": 28934,
+   "F1": 28960
+  },
+  {
+   "wid": "4-03.w009",
+   "w": "a",
+   "key": "a#1",
+   "sid": "4-03.s2",
+   "f0": 248,
+   "f1": 249,
+   "F0": 29004,
+   "F1": 29005
+  },
+  {
+   "wid": "4-03.w010",
+   "w": "floppy",
+   "key": "floppy#1",
+   "sid": "4-03.s2",
+   "f0": 255,
+   "f1": 273,
+   "F0": 29011,
+   "F1": 29029
+  },
+  {
+   "wid": "4-03.w011",
+   "w": "tail,",
+   "key": "tail#1",
+   "sid": "4-03.s2",
+   "f0": 280,
+   "f1": 297,
+   "F0": 29036,
+   "F1": 29053
+  },
+  {
+   "wid": "4-03.w012",
+   "w": "had",
+   "key": "had#1",
+   "sid": "4-03.s2",
+   "f0": 350,
+   "f1": 357,
+   "F0": 29106,
+   "F1": 29113
+  },
+  {
+   "wid": "4-03.w013",
+   "w": "really",
+   "key": "really#1",
+   "sid": "4-03.s2",
+   "f0": 359,
+   "f1": 371,
+   "F0": 29115,
+   "F1": 29127
+  },
+  {
+   "wid": "4-03.w014",
+   "w": "low",
+   "key": "low#1",
+   "sid": "4-03.s2",
+   "f0": 376,
+   "f1": 385,
+   "F0": 29132,
+   "F1": 29141
+  },
+  {
+   "wid": "4-03.w015",
+   "w": "confidence.",
+   "key": "confidence#1",
+   "sid": "4-03.s2",
+   "f0": 389,
+   "f1": 428,
+   "F0": 29145,
+   "F1": 29184
+  },
+  {
+   "wid": "4-03.w016",
+   "w": "And",
+   "key": "and#1",
+   "sid": "4-03.s3",
+   "f0": 490,
+   "f1": 496,
+   "F0": 29246,
+   "F1": 29252
+  },
+  {
+   "wid": "4-03.w017",
+   "w": "in",
+   "key": "in#1",
+   "sid": "4-03.s3",
+   "f0": 497,
+   "f1": 501,
+   "F0": 29253,
+   "F1": 29257
+  },
+  {
+   "wid": "4-03.w018",
+   "w": "the",
+   "key": "the#2",
+   "sid": "4-03.s3",
+   "f0": 501,
+   "f1": 505,
+   "F0": 29257,
+   "F1": 29261
+  },
+  {
+   "wid": "4-03.w019",
+   "w": "model,",
+   "key": "model#1",
+   "sid": "4-03.s3",
+   "f0": 508,
+   "f1": 527,
+   "F0": 29264,
+   "F1": 29283
+  },
+  {
+   "wid": "4-03.w020",
+   "w": "it",
+   "key": "it#1",
+   "sid": "4-03.s3",
+   "f0": 577,
+   "f1": 581,
+   "F0": 29333,
+   "F1": 29337
+  },
+  {
+   "wid": "4-03.w021",
+   "w": "lay",
+   "key": "lay#1",
+   "sid": "4-03.s3",
+   "f0": 584,
+   "f1": 592,
+   "F0": 29340,
+   "F1": 29348
+  },
+  {
+   "wid": "4-03.w022",
+   "w": "across",
+   "key": "across#1",
+   "sid": "4-03.s3",
+   "f0": 596,
+   "f1": 619,
+   "F0": 29352,
+   "F1": 29375
+  },
+  {
+   "wid": "4-03.w023",
+   "w": "the",
+   "key": "the#3",
+   "sid": "4-03.s3",
+   "f0": 622,
+   "f1": 626,
+   "F0": 29378,
+   "F1": 29382
+  },
+  {
+   "wid": "4-03.w024",
+   "w": "keyhole,",
+   "key": "keyhole#1",
+   "sid": "4-03.s3",
+   "f0": 630,
+   "f1": 666,
+   "F0": 29386,
+   "F1": 29422
+  },
+  {
+   "wid": "4-03.w025",
+   "w": "with",
+   "key": "with#1",
+   "sid": "4-03.s3",
+   "f0": 712,
+   "f1": 722,
+   "F0": 29468,
+   "F1": 29478
+  },
+  {
+   "wid": "4-03.w026",
+   "w": "one",
+   "key": "one#2",
+   "sid": "4-03.s3",
+   "f0": 728,
+   "f1": 738,
+   "F0": 29484,
+   "F1": 29494
+  },
+  {
+   "wid": "4-03.w027",
+   "w": "building",
+   "key": "building#1",
+   "sid": "4-03.s3",
+   "f0": 740,
+   "f1": 758,
+   "F0": 29496,
+   "F1": 29514
+  },
+  {
+   "wid": "4-03.w028",
+   "w": "block",
+   "key": "block#1",
+   "sid": "4-03.s3",
+   "f0": 760,
+   "f1": 781,
+   "F0": 29516,
+   "F1": 29537
+  },
+  {
+   "wid": "4-03.w029",
+   "w": "sitting",
+   "key": "sitting#1",
+   "sid": "4-03.s3",
+   "f0": 801,
+   "f1": 824,
+   "F0": 29557,
+   "F1": 29580
+  },
+  {
+   "wid": "4-03.w030",
+   "w": "inside",
+   "key": "inside#1",
+   "sid": "4-03.s3",
+   "f0": 829,
+   "f1": 849,
+   "F0": 29585,
+   "F1": 29605
+  },
+  {
+   "wid": "4-03.w031",
+   "w": "the",
+   "key": "the#4",
+   "sid": "4-03.s3",
+   "f0": 849,
+   "f1": 853,
+   "F0": 29605,
+   "F1": 29609
+  },
+  {
+   "wid": "4-03.w032",
+   "w": "ATP",
+   "key": "atp#1",
+   "sid": "4-03.s3",
+   "f0": 858,
+   "f1": 878,
+   "F0": 29614,
+   "F1": 29634
+  },
+  {
+   "wid": "4-03.w033",
+   "w": "pocket.",
+   "key": "pocket#1",
+   "sid": "4-03.s3",
+   "f0": 890,
+   "f1": 915,
+   "F0": 29646,
+   "F1": 29671
+  },
+  {
+   "wid": "4-03.w034",
+   "w": "Trust",
+   "key": "trust#1",
+   "sid": "4-03.s4",
+   "f0": 956,
+   "f1": 969,
+   "F0": 29712,
+   "F1": 29725
+  },
+  {
+   "wid": "4-03.w035",
+   "w": "it",
+   "key": "it#2",
+   "sid": "4-03.s4",
+   "f0": 972,
+   "f1": 976,
+   "F0": 29728,
+   "F1": 29732
+  },
+  {
+   "wid": "4-03.w036",
+   "w": "blindly,",
+   "key": "blindly#1",
+   "sid": "4-03.s4",
+   "f0": 980,
+   "f1": 1003,
+   "F0": 29736,
+   "F1": 29759
+  },
+  {
+   "wid": "4-03.w037",
+   "w": "and",
+   "key": "and#2",
+   "sid": "4-03.s4",
+   "f0": 1053,
+   "f1": 1059,
+   "F0": 29809,
+   "F1": 29815
+  },
+  {
+   "wid": "4-03.w038",
+   "w": "you'd",
+   "key": "you'd#1",
+   "sid": "4-03.s4",
+   "f0": 1062,
+   "f1": 1072,
+   "F0": 29818,
+   "F1": 29828
+  },
+  {
+   "wid": "4-03.w039",
+   "w": "cut",
+   "key": "cut#1",
+   "sid": "4-03.s4",
+   "f0": 1080,
+   "f1": 1093,
+   "F0": 29836,
+   "F1": 29849
+  },
+  {
+   "wid": "4-03.w040",
+   "w": "keys",
+   "key": "keys#1",
+   "sid": "4-03.s4",
+   "f0": 1101,
+   "f1": 1119,
+   "F0": 29857,
+   "F1": 29875
+  },
+  {
+   "wid": "4-03.w041",
+   "w": "for",
+   "key": "for#1",
+   "sid": "4-03.s4",
+   "f0": 1137,
+   "f1": 1143,
+   "F0": 29893,
+   "F1": 29899
+  },
+  {
+   "wid": "4-03.w042",
+   "w": "a",
+   "key": "a#2",
+   "sid": "4-03.s4",
+   "f0": 1147,
+   "f1": 1148,
+   "F0": 29903,
+   "F1": 29904
+  },
+  {
+   "wid": "4-03.w043",
+   "w": "blocked",
+   "key": "blocked#1",
+   "sid": "4-03.s4",
+   "f0": 1152,
+   "f1": 1170,
+   "F0": 29908,
+   "F1": 29926
+  },
+  {
+   "wid": "4-03.w044",
+   "w": "door.",
+   "key": "door#1",
+   "sid": "4-03.s4",
+   "f0": 1171,
+   "f1": 1184,
+   "F0": 29927,
+   "F1": 29940
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "4-03.s1",
+   "text": "But look closer.",
+   "w_first": "4-03.w001",
+   "w_last": "4-03.w003",
+   "f0": 9,
+   "f1": 57
+  },
+  {
+   "sid": "4-03.s2",
+   "text": "One end of the protein, a floppy tail, had really low confidence.",
+   "w_first": "4-03.w004",
+   "w_last": "4-03.w015",
+   "f0": 117,
+   "f1": 428
+  },
+  {
+   "sid": "4-03.s3",
+   "text": "And in the model, it lay across the keyhole, with one building block sitting inside the ATP pocket.",
+   "w_first": "4-03.w016",
+   "w_last": "4-03.w033",
+   "f0": 490,
+   "f1": 915
+  },
+  {
+   "sid": "4-03.s4",
+   "text": "Trust it blindly, and you'd cut keys for a blocked door.",
+   "w_first": "4-03.w034",
+   "w_last": "4-03.w044",
+   "f0": 956,
+   "f1": 1184
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "af",
+   "obj": "af",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "But：预测模型",
+   "f_start": 0,
+   "f_land": 9,
+   "f_end": 28,
+   "until": "4-03.w002",
+   "word": "4-03.w001",
+   "w": "But",
+   "key": "but#1",
+   "sid": "4-03.s1",
+   "word_f0": 9,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 28756,
+   "F_land": 28765,
+   "F_end": 28784
+  },
+  {
+   "id": "closer",
+   "obj": "closer",
+   "verb": "move",
+   "ease": "inout",
+   "means": "look closer：放大镜扣到红色尾巴上",
+   "f_start": 17,
+   "f_land": 30,
+   "f_end": 57,
+   "until": "4-03.s1",
+   "word": "4-03.w003",
+   "w": "closer.",
+   "key": "closer#1",
+   "sid": "4-03.s1",
+   "word_f0": 30,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "af"
+    ]
+   },
+   "F_start": 28773,
+   "F_land": 28786,
+   "F_end": 28813,
+   "g_start": 4,
+   "g_on": 22,
+   "g_end": 57,
+   "g_off": 87,
+   "g_tick": 26,
+   "G_start": 28760,
+   "G_on": 28778,
+   "G_end": 28813,
+   "G_off": 28843,
+   "G_tick": 28782
+  },
+  {
+   "id": "sock",
+   "obj": "sock",
+   "verb": "move",
+   "ease": "inout",
+   "means": "One：插座正面从右边滑进来",
+   "f_start": 110,
+   "f_land": 117,
+   "f_end": 141,
+   "until": "4-03.w005",
+   "word": "4-03.w004",
+   "w": "One",
+   "key": "one#1",
+   "sid": "4-03.s2",
+   "word_f0": 117,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 28866,
+   "F_land": 28873,
+   "F_end": 28897
+  },
+  {
+   "id": "tail",
+   "obj": "tail",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "One end of the protein：插座边上长出一串红珠子",
+   "f_start": 119,
+   "f_land": 132,
+   "f_end": 204,
+   "until": "4-03.w008",
+   "word": "4-03.w005",
+   "w": "end",
+   "key": "end#1",
+   "sid": "4-03.s2",
+   "word_f0": 132,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "tail"
+    ]
+   },
+   "F_start": 28875,
+   "F_land": 28888,
+   "F_end": 28960,
+   "g_start": 106,
+   "g_on": 124,
+   "g_end": 204,
+   "g_off": 234,
+   "g_tick": 128,
+   "G_start": 28862,
+   "G_on": 28880,
+   "G_end": 28960,
+   "G_off": 28990,
+   "G_tick": 28884
+  },
+  {
+   "id": "floppy",
+   "obj": "floppy",
+   "verb": "move",
+   "ease": "inout",
+   "means": "a floppy tail：尾巴晃",
+   "f_start": 249,
+   "f_land": 255,
+   "f_end": 297,
+   "until": "4-03.w011",
+   "word": "4-03.w010",
+   "w": "floppy",
+   "key": "floppy#1",
+   "sid": "4-03.s2",
+   "word_f0": 255,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 29005,
+   "F_land": 29011,
+   "F_end": 29053
+  },
+  {
+   "id": "low",
+   "obj": "low",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "really low confidence：标 low confidence",
+   "f_start": 379,
+   "f_land": 389,
+   "f_end": 428,
+   "until": "4-03.s2",
+   "word": "4-03.w015",
+   "w": "confidence.",
+   "key": "confidence#1",
+   "sid": "4-03.s2",
+   "word_f0": 389,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 29135,
+   "F_land": 29145,
+   "F_end": 29184
+  },
+  {
+   "id": "model",
+   "obj": "model",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "in the model：放大镜里的尾巴亮一下",
+   "f_start": 498,
+   "f_land": 508,
+   "f_end": 527,
+   "until": "4-03.w019",
+   "word": "4-03.w019",
+   "w": "model,",
+   "key": "model#1",
+   "sid": "4-03.s3",
+   "word_f0": 508,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 29254,
+   "F_land": 29264,
+   "F_end": 29283
+  },
+  {
+   "id": "lay",
+   "obj": "lay",
+   "verb": "move",
+   "ease": "inout",
+   "means": "lay across the keyhole：尾巴横搭过插孔",
+   "f_start": 584,
+   "f_land": 630,
+   "f_end": 666,
+   "until": "4-03.w024",
+   "word": "4-03.w024",
+   "w": "keyhole,",
+   "key": "keyhole#1",
+   "sid": "4-03.s3",
+   "word_f0": 630,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "tail"
+    ]
+   },
+   "F_start": 29340,
+   "F_land": 29386,
+   "F_end": 29422,
+   "g_start": 604,
+   "g_on": 622,
+   "g_end": 666,
+   "g_off": 696,
+   "g_tick": 626,
+   "G_start": 29360,
+   "G_on": 29378,
+   "G_end": 29422,
+   "G_off": 29452,
+   "G_tick": 29382
+  },
+  {
+   "id": "block",
+   "obj": "block",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "one building block：一颗珠子鼓一下",
+   "f_start": 747,
+   "f_land": 760,
+   "f_end": 781,
+   "until": "4-03.w028",
+   "word": "4-03.w028",
+   "w": "block",
+   "key": "block#1",
+   "sid": "4-03.s3",
+   "word_f0": 760,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 29503,
+   "F_land": 29516,
+   "F_end": 29537
+  },
+  {
+   "id": "inside",
+   "obj": "inside",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "sitting inside：这颗珠子落进孔里",
+   "f_start": 801,
+   "f_land": 829,
+   "f_end": 853,
+   "until": "4-03.w031",
+   "word": "4-03.w030",
+   "w": "inside",
+   "key": "inside#1",
+   "sid": "4-03.s3",
+   "word_f0": 829,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 29557,
+   "F_land": 29585,
+   "F_end": 29609
+  },
+  {
+   "id": "atp",
+   "obj": "atp",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "the ATP pocket：标 ATP pocket",
+   "f_start": 880,
+   "f_land": 890,
+   "f_end": 915,
+   "until": "4-03.s3",
+   "word": "4-03.w033",
+   "w": "pocket.",
+   "key": "pocket#1",
+   "sid": "4-03.s3",
+   "word_f0": 890,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "socket"
+    ]
+   },
+   "F_start": 29636,
+   "F_land": 29646,
+   "F_end": 29671,
+   "g_start": 864,
+   "g_on": 882,
+   "g_end": 915,
+   "g_off": 945,
+   "g_tick": 886,
+   "G_start": 29620,
+   "G_on": 29638,
+   "G_end": 29671,
+   "G_off": 29701,
+   "G_tick": 29642
+  },
+  {
+   "id": "trust",
+   "obj": "trust",
+   "verb": "move",
+   "ease": "inout",
+   "means": "Trust it blindly：放大镜收起",
+   "f_start": 950,
+   "f_land": 956,
+   "f_end": 1003,
+   "until": "4-03.w036",
+   "word": "4-03.w034",
+   "w": "Trust",
+   "key": "trust#1",
+   "sid": "4-03.s4",
+   "word_f0": 956,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 29706,
+   "F_land": 29712,
+   "F_end": 29759
+  },
+  {
+   "id": "cut",
+   "obj": "cut",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "cut keys：左下冲出三个金插头",
+   "f_start": 1073,
+   "f_land": 1080,
+   "f_end": 1119,
+   "until": "4-03.w040",
+   "word": "4-03.w039",
+   "w": "cut",
+   "key": "cut#1",
+   "sid": "4-03.s4",
+   "word_f0": 1080,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "keys"
+    ]
+   },
+   "F_start": 29829,
+   "F_land": 29836,
+   "F_end": 29875,
+   "g_start": 1054,
+   "g_on": 1072,
+   "g_end": 1119,
+   "g_off": 1149,
+   "g_tick": 1076,
+   "G_start": 29810,
+   "G_on": 29828,
+   "G_end": 29875,
+   "G_off": 29905,
+   "G_tick": 29832
+  },
+  {
+   "id": "go",
+   "obj": "go",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "for a blocked door：一个插头飞向插孔，被尾巴挡回来（T7）",
+   "f_start": 1106,
+   "f_land": 1152,
+   "f_end": 1184,
+   "until": "4-03.s4",
+   "word": "4-03.w043",
+   "w": "blocked",
+   "key": "blocked#1",
+   "sid": "4-03.s4",
+   "word_f0": 1152,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 29862,
+   "F_land": 29908,
+   "F_end": 29940
+  }
+ ],
+ "guides": [
+  {
+   "id": "closer",
+   "target": [
+    "af"
+   ],
+   "kind": "focus",
+   "gs": 4,
+   "gon": 22,
+   "land": 30,
+   "gend": 57,
+   "goff": 87,
+   "tick": 26,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 17,
+   "events": [
+    "closer"
+   ],
+   "G_start": 28760,
+   "G_on": 28778,
+   "G_land": 28786,
+   "G_end": 28813,
+   "G_off": 28843,
+   "G_tick": 28782
+  },
+  {
+   "id": "tail",
+   "target": [
+    "tail"
+   ],
+   "kind": "focus",
+   "gs": 106,
+   "gon": 124,
+   "land": 132,
+   "gend": 204,
+   "goff": 234,
+   "tick": 128,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 119,
+   "events": [
+    "tail"
+   ],
+   "G_start": 28862,
+   "G_on": 28880,
+   "G_land": 28888,
+   "G_end": 28960,
+   "G_off": 28990,
+   "G_tick": 28884
+  },
+  {
+   "id": "lay",
+   "target": [
+    "tail"
+   ],
+   "kind": "focus",
+   "gs": 604,
+   "gon": 622,
+   "land": 630,
+   "gend": 666,
+   "goff": 696,
+   "tick": 626,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 584,
+   "events": [
+    "lay"
+   ],
+   "G_start": 29360,
+   "G_on": 29378,
+   "G_land": 29386,
+   "G_end": 29422,
+   "G_off": 29452,
+   "G_tick": 29382
+  },
+  {
+   "id": "atp",
+   "target": [
+    "socket"
+   ],
+   "kind": "focus",
+   "gs": 864,
+   "gon": 882,
+   "land": 890,
+   "gend": 915,
+   "goff": 945,
+   "tick": 886,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 880,
+   "events": [
+    "atp"
+   ],
+   "G_start": 29620,
+   "G_on": 29638,
+   "G_land": 29646,
+   "G_end": 29671,
+   "G_off": 29701,
+   "G_tick": 29642
+  },
+  {
+   "id": "cut",
+   "target": [
+    "keys"
+   ],
+   "kind": "focus",
+   "gs": 1054,
+   "gon": 1072,
+   "land": 1080,
+   "gend": 1119,
+   "goff": 1149,
+   "tick": 1076,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 1073,
+   "events": [
+    "cut"
+   ],
+   "G_start": 29810,
+   "G_on": 29828,
+   "G_land": 29836,
+   "G_end": 29875,
+   "G_off": 29905,
+   "G_tick": 29832
+  }
+ ],
+ "problems": []
+}
