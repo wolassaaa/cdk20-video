@@ -24,7 +24,9 @@ FPS = 60
 EVENTS = HERE / "events"
 KEYS = HERE / "keys"
 RM_KEYS = ROOT / "镜头设计_v2/tests/T4_remotion/src/v3/map/keys"
-VERBS = ("flow", "grow", "eject", "retract", "appear", "move", "camera_to", "morph", "snap")   # morph＝变，snap＝拼（11-17 加）
+VERBS = ("flow", "grow", "eject", "retract", "appear", "move", "camera_to", "morph", "snap",   # morph＝变，snap＝拼（11-17 加）
+         "plug_in", "plug_out", "twist", "clamp", "power_on", "power_off", "eject_swap",   # 插座比喻的动作词（06_插座比喻.md 4.0，11-20 登记）
+         "dissolve")   # dissolve＝叠化（11-20，三维钻取到真实结构；frame_integrity 认它是设计渐变）
 EASES = ("linear", "in", "out", "inout", "hold")
 SCHEMA = "cdk20.events/1"
 

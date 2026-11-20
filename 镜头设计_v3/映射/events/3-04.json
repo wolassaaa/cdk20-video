@@ -1,301 +1,598 @@
 {
  "schema": "cdk20.events/1",
  "group": "3-04",
- "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 3-04（D）：锁就是 CDK20；酶有化学工作（齿轮）；口袋放大，ATP 进去；钥匙顶走 ATP 占住口袋，齿轮停。页面 Manual304.jsx。",
+ "tool": "blender",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第一段三维钻取 3-04（钻进 CDK20 插座，06_插座比喻.md 第四节 3-04 的表）。一镜到底：镜头从第 3 区大板沿料杆走到 CDK20，插座弹起转正，开盖进机舱，真插头 ATP 插着通电、活塞推细胞；拔出后合盖，镜头沿插孔轴钻进去，叠化到 AlphaFold DB 的 CDK20 预测模型再退回；ATP 插回通电；假插头 048 顶走 ATP、插到底、拧卡口、卡扣扣上；再开盖看机舱停工。段首 T5 焦点擦除接 3-03，段尾 T2 甩镜接 3-05。场景脚本 inserts/drill_304.py（通用部分 inserts/shot_drill.py），2D 旧表在 映射/_wip/3-04_events_v1_2d.json。",
  "holds": [],
  "events": [
   {
-   "id": "title",
-   "obj": "title",
-   "verb": "appear",
+   "id": "wipe",
+   "obj": "plug048",
+   "verb": "move",
+   "means": "段首 T5 焦点擦除：3-03 留下的金钥匙（已是 048 假插头）从镜头前飞过，完全虚化，遮住接缝",
    "at": {
     "word": "3-04.w001",
-    "off": 0
+    "off": 3
    },
-   "means": "Our：标题写出",
-   "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "word": "3-04.w002"
-   },
+   "lead": 12,
    "guide": {
     "kind": "none"
    }
   },
   {
-   "id": "lock",
-   "obj": "lock",
-   "verb": "grow",
+   "id": "pulse",
+   "obj": "runner_pulse",
+   "verb": "flow",
+   "means": "Our lock is：鼓包从锁那一格沿连杆往上，绕过口袋那一格，走到 CDK20 那一格的浇口",
    "at": {
-    "word": "3-04.w002",
-    "off": 0
+    "word": "3-04.w004",
+    "off": -8
    },
-   "means": "lock：锁长出",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "3-04.w003"
-   },
+   "lead": 52,
    "guide": {
     "kind": "none"
    }
   },
   {
-   "id": "cdk",
-   "obj": "cdk20",
-   "verb": "grow",
+   "id": "cam_board",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "Our lock is：镜头跟着鼓包沿料杆走到 CDK20 那一格，CDK20 时到位，句尾前慢慢收住",
    "at": {
     "word": "3-04.w004",
     "off": 0
    },
-   "means": "CDK20：CDK20 长出，锁上画等号",
-   "tool": "remotion",
-   "lead": 10,
+   "lead": 54,
    "until": {
     "sentence_end": true
    },
    "guide": {
-    "kind": "focus",
-    "target": "cdk",
-    "box": [
-     250,
-     200,
-     440,
-     530
-    ]
+    "kind": "none"
    }
   },
   {
-   "id": "enz",
-   "obj": "label_enzyme",
-   "verb": "appear",
+   "id": "key_follow",
+   "obj": "plug048",
+   "verb": "move",
+   "means": "金色假插头跟在鼓包后面飘来，停在红环前方一个身位",
+   "at": {
+    "word": "3-04.w004",
+    "off": 20
+   },
+   "lead": 66,
+   "until": {
+    "dur": 20
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "sock_eject",
+   "obj": "socket",
+   "verb": "eject",
+   "means": "CDK20.：插座在浇口上绷一下，浇口断开（哒），弹起",
+   "at": {
+    "word": "3-04.w004",
+    "off": 0
+   },
+   "lead": 6,
+   "until": {
+    "dur": 40
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "socket",
+    "nudge": false
+   }
+  },
+  {
+   "id": "sock_turn",
+   "obj": "socket",
+   "verb": "move",
+   "means": "插座在空中转正：躺着的孔口面立起来朝镜头，盖在上面",
+   "at": {
+    "word": "3-04.w004",
+    "off": 44
+   },
+   "lead": 40,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "cam_near",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "句间：镜头慢慢靠近浮着的插座",
+   "at": {
+    "word": "3-04.w007",
+    "off": -24
+   },
+   "lead": 33,
+   "until": {
+    "word": "3-04.w007",
+    "edge": "start"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "lid_prep",
+   "obj": "lid",
+   "verb": "move",
+   "means": "It's an：焦点收到前面的分件线，整台往下沉一点（预备）",
    "at": {
     "word": "3-04.w007",
     "off": 0
    },
-   "means": "enzyme：标签 an enzyme",
-   "tool": "remotion",
-   "lead": 4,
+   "lead": 24,
+   "guide": {
+    "kind": "focus",
+    "target": "seam",
+    "nudge": false
+   }
+  },
+  {
+   "id": "lid_open",
+   "obj": "lid",
+   "verb": "move",
+   "means": "enzyme：盖绕后沿的铰链翻开到 110°，带过冲回落，露出机舱",
+   "at": {
+    "word": "3-04.w007",
+    "off": 36
+   },
+   "lead": 36,
    "until": {
-    "word": "3-04.w008"
+    "dur": 14
    },
    "guide": {
     "kind": "none"
    }
   },
   {
-   "id": "prot",
-   "obj": "label_job",
-   "verb": "appear",
+   "id": "cam_cabin",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "镜头从前上方进到机舱上空，机舱占满画面",
    "at": {
     "word": "3-04.w009",
     "off": 0
    },
-   "means": "protein with a chemical job：标签写出",
-   "tool": "remotion",
-   "lead": 4,
+   "lead": 73,
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "packet",
+   "obj": "packets",
+   "verb": "power_on",
+   "means": "protein：灯亮着，一颗光包从触点块沿透明管流到活塞",
+   "at": {
+    "word": "3-04.w012",
+    "off": 0
+   },
+   "lead": 49,
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "piston_push",
+   "obj": "piston",
+   "verb": "move",
+   "means": "chemical：活塞缩一点再推出，小细胞鼓大一圈；之后每 60 帧推一次",
+   "at": {
+    "word": "3-04.w012",
+    "off": 0
+   },
+   "lead": 6,
    "until": {
-    "word": "3-04.w012"
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "output"
+   }
+  },
+  {
+   "id": "atp_out",
+   "obj": "atp",
+   "verb": "plug_out",
+   "means": "Its keyhole：真插头（ATP）被弹簧顶出，沿轴退出孔口，飘到孔口左前方待着",
+   "at": {
+    "word": "3-04.w015",
+    "off": 0
+   },
+   "lead": 18,
+   "until": {
+    "dur": 41
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "keyhole"
+   }
+  },
+  {
+   "id": "lamp_dim",
+   "obj": "lamp",
+   "verb": "power_off",
+   "means": "真插头一走，灯暗到一半，光包放慢",
+   "at": {
+    "word": "3-04.w015",
+    "off": 0
+   },
+   "lead": 10,
+   "until": {
+    "dur": 20
    },
    "guide": {
     "kind": "none"
    }
   },
   {
-   "id": "gear",
-   "obj": "gear",
-   "verb": "grow",
+   "id": "lid_close",
+   "obj": "lid",
+   "verb": "move",
+   "means": "is：盖合上（落下有一点回弹），镜头绕到正面",
    "at": {
-    "word": "3-04.w013",
+    "word": "3-04.w016",
     "off": 0
    },
-   "means": "job：齿轮长出开始转",
-   "tool": "remotion",
-   "lead": 10,
+   "lead": 40,
    "until": {
-    "sentence_end": true
+    "dur": 10
    },
    "guide": {
-    "kind": "focus",
-    "target": "gear",
-    "box": [
-     740,
-     200,
-     120,
-     120
-    ]
+    "kind": "none"
    }
   },
   {
-   "id": "hole",
-   "obj": "pocket_ring",
+   "id": "cam_front",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "镜头到正面 3/4，空插孔和红环在画面中间",
+   "at": {
+    "word": "3-04.w016",
+    "off": 0
+   },
+   "lead": 72,
+   "until": {
+    "word": "3-04.w017"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "ring_glow",
+   "obj": "ring",
    "verb": "appear",
-   "at": {
-    "word": "3-04.w015",
-    "off": 0
-   },
-   "means": "keyhole：口袋处红圈",
-   "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "word": "3-04.w016"
-   },
-   "guide": {
-    "kind": "focus",
-    "target": "cdk",
-    "box": [
-     250,
-     200,
-     440,
-     530
-    ]
-   }
-  },
-  {
-   "id": "inset",
-   "obj": "inset",
-   "verb": "grow",
+   "means": "pocket：红环亮",
    "at": {
     "word": "3-04.w018",
     "off": 0
    },
-   "means": "pocket：放大圈长出，画出口袋",
-   "tool": "remotion",
-   "lead": 12,
+   "lead": 4,
    "until": {
-    "word": "3-04.w021"
+    "word": "3-04.w024",
+    "edge": "start"
    },
    "guide": {
-    "kind": "runner",
-    "target": "inset",
-    "from": "cdk",
-    "travel": 32,
-    "arrive": 4,
-    "dist": 0.41,
-    "path": 0.26,
-    "box": [
-     990,
-     300,
-     520,
-     520
-    ]
+    "kind": "none"
    }
   },
   {
-   "id": "atp",
+   "id": "drill_in",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "pocket：镜头沿插孔轴推进，红环占满画面",
+   "at": {
+    "word": "3-04.w018",
+    "off": 51
+   },
+   "lead": 51,
+   "until": {
+    "dur": 60
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "real_in",
+   "obj": "real_layer",
+   "verb": "dissolve",
+   "means": "叠化到真实层：AlphaFold DB 的 CDK20 预测模型，口袋墨线圈出",
+   "at": {
+    "word": "3-04.w018",
+    "off": 51
+   },
+   "until": {
+    "dur": 30
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "real_out",
+   "obj": "real_layer",
+   "verb": "dissolve",
+   "means": "对称叠化回玩具",
+   "at": {
+    "word": "3-04.w024",
+    "off": -17
+   },
+   "until": {
+    "dur": 33
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "drill_out",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "镜头从孔口退出来，回到正面 3/4",
+   "at": {
+    "word": "3-04.w024",
+    "off": 43
+   },
+   "lead": 60,
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "atp_free",
    "obj": "atp",
-   "verb": "move",
+   "verb": "eject",
+   "means": "small：真插头绷一下，飞起",
+   "at": {
+    "word": "3-04.w025",
+    "off": 0
+   },
+   "lead": 6,
+   "until": {
+    "dur": 12
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "atp",
+    "rim": false,
+    "nudge": false
+   }
+  },
+  {
+   "id": "atp_plug",
+   "obj": "atp",
+   "verb": "plug_in",
+   "means": "molecule called ATP：真插头沿轴插进插孔，到底小回弹",
    "at": {
     "word": "3-04.w027",
     "off": 0
    },
-   "means": "grabs a small molecule called ATP：ATP 滑进口袋",
-   "tool": "remotion",
-   "lead": 110,
+   "lead": 58,
    "until": {
-    "sentence_end": true
+    "dur": 10
    },
    "guide": {
-    "kind": "focus",
-    "target": "inset",
-    "box": [
-     990,
-     300,
-     520,
-     520
-    ]
+    "kind": "none"
    }
   },
   {
-   "id": "out",
-   "obj": "atp",
+   "id": "power_on",
+   "obj": "lamp",
+   "verb": "power_on",
+   "means": "ATP：灯亮，通电",
+   "at": {
+    "word": "3-04.w027",
+    "off": 2
+   },
+   "lead": 2,
+   "until": {
+    "dur": 18
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "cam_side",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "句间：镜头移到正面偏右，给假插头留出进画的路",
+   "at": {
+    "word": "3-04.w028",
+    "off": 0
+   },
+   "lead": 50,
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "plug_enter",
+   "obj": "plug048",
    "verb": "move",
+   "means": "Plug：金色假插头（柄上刻 048）从右边进画",
+   "at": {
+    "word": "3-04.w028",
+    "off": 0
+   },
+   "lead": 20,
+   "until": {
+    "dur": 12
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "entry"
+   }
+  },
+  {
+   "id": "atp_eject",
+   "obj": "atp",
+   "verb": "eject_swap",
+   "means": "that：真插头被顶出孔口，让开轴线，飘回左前方",
+   "at": {
+    "word": "3-04.w029",
+    "off": 4
+   },
+   "lead": 9,
+   "until": {
+    "dur": 40
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "lamp_dim2",
+   "obj": "lamp",
+   "verb": "power_off",
+   "means": "真插头一离开，灯开始暗",
+   "at": {
+    "word": "3-04.w029",
+    "off": 0
+   },
+   "lead": 3,
+   "until": {
+    "dur": 27
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "plug048_in",
+   "obj": "plug048",
+   "verb": "plug_in",
+   "means": "pocket：假插头插进插孔，到底小回弹，缝只有一条发丝线",
    "at": {
     "word": "3-04.w030",
     "off": 0
    },
-   "means": "plug that pocket：ATP 被顶出去",
-   "tool": "remotion",
-   "lead": 30,
+   "lead": 22,
    "until": {
-    "word": "3-04.w031"
+    "dur": 8
    },
    "guide": {
-    "kind": "focus",
-    "target": "inset",
-    "box": [
-     990,
-     300,
-     520,
-     520
-    ]
+    "kind": "none"
    }
   },
   {
-   "id": "key",
-   "obj": "key",
-   "verb": "move",
+   "id": "twist",
+   "obj": "plug048",
+   "verb": "twist",
+   "means": "with the right key：假插头拧卡口 90°（咔）",
    "at": {
     "word": "3-04.w034",
     "off": 0
    },
-   "means": "right key：钥匙插进口袋",
-   "tool": "remotion",
-   "lead": 50,
+   "lead": 36,
    "until": {
-    "word": "3-04.w035"
+    "dur": 10
    },
    "guide": {
-    "kind": "focus",
-    "target": "inset",
-    "box": [
-     990,
-     300,
-     520,
-     520
-    ]
+    "kind": "none"
+   }
+  },
+  {
+   "id": "clamp",
+   "obj": "tab",
+   "verb": "clamp",
+   "means": "红色卡扣扣上",
+   "at": {
+    "word": "3-04.w034",
+    "off": 2
+   },
+   "lead": 6,
+   "until": {
+    "dur": 10
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "lid_open2",
+   "obj": "lid",
+   "verb": "move",
+   "means": "and the enzyme：盖再翻开，看机舱",
+   "at": {
+    "word": "3-04.w037",
+    "off": 0
+   },
+   "lead": 36,
+   "until": {
+    "dur": 12
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "cam_cabin2",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "镜头回到机舱上空，对着活塞和小细胞",
+   "at": {
+    "word": "3-04.w037",
+    "off": 21
+   },
+   "lead": 57,
+   "guide": {
+    "kind": "none"
    }
   },
   {
    "id": "stop",
-   "obj": "gear",
-   "verb": "appear",
+   "obj": "piston",
+   "verb": "power_off",
+   "means": "can't：光包停在管里，活塞停在半程，细胞停，灯灭",
    "at": {
     "word": "3-04.w038",
     "off": 0
    },
-   "means": "can't：齿轮停、红叉",
-   "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "word": "3-04.w039"
-   },
-   "guide": {
-    "kind": "focus",
-    "target": "gear",
-    "box": [
-     740,
-     200,
-     120,
-     120
-    ]
-   }
-  },
-  {
-   "id": "plate",
-   "obj": "plate",
-   "verb": "appear",
-   "at": {
-    "word": "3-04.w041",
-    "off": 0
-   },
-   "means": "job：字牌 blocked",
-   "tool": "remotion",
-   "lead": 8,
    "until": {
     "sentence_end": true
    },
+   "guide": {
+    "kind": "focus",
+    "target": "output"
+   }
+  },
+  {
+   "id": "pull_back",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "do its job：镜头慢慢后拉，看到整台停住的插座",
+   "at": {
+    "word": "3-04.w041",
+    "off": 18
+   },
+   "lead": 55,
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "whip",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "段尾 T2 甩镜：镜头沿料杆向左快甩，接 3-05 的玻璃肝",
+   "at": {
+    "word": "3-04.w041",
+    "off": 32
+   },
+   "lead": 9,
    "guide": {
     "kind": "none"
    }
