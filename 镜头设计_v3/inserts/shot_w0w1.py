@@ -75,6 +75,7 @@ def w1_f(n):
 
 NF_W0 = round(FPS * beat_s() * 6)            # 178
 WIPE = (160, 171, 193)                        # T5 擦除：进画、开始盖满、离开（W0 帧号，178 起是 1-01 的第 0 帧）
+W0_LENS = 20.0                                # W0 广角（11-21 第二轮：贴近零件）
 NF_W1 = int(FPS * beat_s() * (LEAD + 32))    # 1007（b32 = 2-01 第一帧）
 NF_W1X = TAIL + NF_W1 + HEAD
 
@@ -398,18 +399,34 @@ def build_w0(sc, args):
             st.keyframe_insert("default_value", frame=f)
     linearize(sc.world.node_tree)
 
-    # 镜头：低机位斜角全景（俯角 22°，方位 −18°，45 mm），全程匀速向前推 4%，加极慢的漂
-    lens = 45
-    tgt = Vector((-4.0, 4.0, 36.0))
-    d0 = 1330.0
+    # 镜头（11-21 第二轮）：20 mm 广角贴着板面，三下各停在被点亮的零件跟前（约 13 cm），两下之间甩过去；
+    # 每一下落在拍上时镜头轻震 4 帧；第 4–5 拍全板灯亮起时拉起来看整块大板
+    lens = W0_LENS
+    P = {k: BG.center(v) for k, v in parts.items()}
+    pm = {k: v / MM for k, v in P.items()}
+    st = lambda t, p, a, w: state(t, p, a, w, 36.0)        # noqa: E731  最后一维 ln(画宽)
+    keys = [(hits["liver"], st(pm["liver"] + Vector((0, 0, 10)), 24.0, -28.0, 240.0), "stop"),
+            (hits["cdk20"], st(pm["cdk20"] + Vector((0, 0, 10)), 26.0, -12.0, 240.0), "stop"),
+            (hits["key048"], st(pm["key048"] + Vector((0, 0, 8)), 28.0, 18.0, 220.0), "stop"),
+            (up0, st((150.0, -20.0, 30.0), 30.0, 8.0, 420.0), "pass"),
+            (up1, st((-40.0, 0.0, -10.0), 30.0, -12.0, 1000.0), "pass"),
+            (nf - 1, st((-40.0, 0.0, -10.0), 31.0, -13.0, 940.0), "stop")]
+    tr = Track(keys)
     poses = []
     for f in range(nf):
-        dist = d0 * (1 - 0.04 * f / (nf - 1))
-        loc, q = cam_pose(tgt + Vector((math.sin(f / 37) * 0.6, math.cos(f / 53) * 0.4, 0)), 22, -18, dist)
+        tx, ty, tz, pitch, az, ld = tr.at(f)
+        dist = math.exp(ld) * lens / 36.0
+        drift = Vector((math.sin(f / 37) * 0.4, math.cos(f / 53) * 0.3, math.sin(f / 29) * 0.2))
+        loc, q = cam_pose(Vector((tx, ty, tz)) + drift, pitch, az, dist)
+        for h in hits.values():                              # 落拍微震：4 帧衰减
+            k = f - h
+            if 0 <= k <= 4:
+                a_ = (1, -0.7, 0.4, -0.2, 0.08)[k]
+                loc = loc + Vector((0.5 * a_, 0, 1.4 * a_)) * MM
+                q = q @ Quaternion((1, 0, 0), math.radians(0.35 * a_)) @ Quaternion((0, 0, 1), math.radians(0.25 * a_))
         poses.append((loc, q))
     cam = D.camera(sc, (0, 0, 0), 1, 30, 0)
     # 焦点点名：第 0 帧在肝上；第 2、3 下前 8 帧到位（起拉 18 帧）；第 4 拍起拉到镜头前 0.3 m
-    P = {k: BG.center(v) for k, v in parts.items()}
     order = [("liver", hits["liver"]), ("cdk20", hits["cdk20"]), ("key048", hits["key048"])]
     focus = []
     f_out0 = w0_f(4)
@@ -423,7 +440,7 @@ def build_w0(sc, args):
     fd = bake_camera(cam, sc, poses, lens, 2.8, focus)
     # 拉虚：f_out0 起焦距从当前值缓到 0.3 m（直接改逐帧焦距键）
     for f in range(f_out0, nf):
-        d = fd[f_out0] + (0.30 - fd[f_out0]) * smoother((f - f_out0) / (nf - 1 - f_out0))
+        d = fd[f_out0] + (0.08 - fd[f_out0]) * smoother((f - f_out0) / (nf - 1 - f_out0))   # 20 mm 广角景深深，拉到 8 cm 才虚得开
         cam.data.dof.focus_distance = d
         cam.data.dof.keyframe_insert("focus_distance", frame=f)
         fd[f] = d
@@ -483,12 +500,37 @@ def build_w0(sc, args):
         vals.append((0.0, 0.0, round(a, 7)))
     bake(lp, "delta_rotation_euler", vals)
 
+    clear = board_clear(poses)
     wiper, wipe_cov = add_wiper(sc, cam, poses)
     chk = dict(part="w0", nf=nf, bpm=BPM, hits=hits, lights_up=[up0, up1], defocus=[f_out0, nf - 1], wipe=WIPE,
-               wipe_cover_frames=wipe_cov,
+               wipe_cover_frames=wipe_cov, lens_mm=W0_LENS, cam_clear_mm=clear,
                focus_m=[round(v, 4) for v in fd], rims={k: v.name for k, v in rims.items()},
                plan=items, cam_loc_mm=[[round(c / MM, 2) for c in p[0]] for p in poses])
     return cam, chk
+
+
+def board_clear(poses):
+    """镜头离大板（板、料杆、零件，第 0 帧位置）最近多少 mm：所有可见网格合成一棵 BVH，逐帧查最近点。"""
+    from mathutils.bvhtree import BVHTree
+    dg = bpy.context.evaluated_depsgraph_get()
+    V, Fc = [], []
+    for o in bpy.data.objects:
+        if o.type != "MESH" or o.hide_render or o.name.startswith(("backdrop", "refl_", "w0_wiper")):
+            continue
+        eo = o.evaluated_get(dg)
+        me = eo.to_mesh()
+        base = len(V)
+        M = eo.matrix_world
+        V.extend([tuple(M @ v.co) for v in me.vertices])
+        Fc.extend([[base + i for i in pl.vertices] for pl in me.polygons])
+        eo.to_mesh_clear()
+    tree = BVHTree.FromPolygons(V, Fc)
+    best = (1e9, -1)
+    for f, (loc, q) in enumerate(poses):
+        hit = tree.find_nearest(loc)
+        if hit[0] is not None and hit[3] / MM < best[0]:
+            best = (hit[3] / MM, f)
+    return dict(min_mm=round(best[0], 1), frame=best[1])
 
 
 def add_wiper(sc, cam, poses):
@@ -496,7 +538,7 @@ def add_wiper(sc, cam, poses):
     位置按镜头坐标系算（镜头在 W0 里只慢推），第 178 帧之后镜头停在最后一个姿态。返回盖满整个画面的帧。"""
     K = D.Kit()
     P = D.Part(K, "w0_wiper_part", "white")                 # 一块白色亮面料牌（实心，虚掉以后整块不透）
-    P.box(0, 0, 70, 48, 6.0, K.white, r=8, bevel=1.2)
+    P.box(0, 0, 105, 48, 6.0, K.white, r=8, bevel=1.2)   # 20 mm 广角画面宽：料牌加宽到 210 mm 才盖得满
     root = P.done()
     for o in [root] + list(root.children_recursive):
         if o.type == "MESH":
@@ -511,8 +553,8 @@ def add_wiper(sc, cam, poses):
     ctr = (bb[0] + bb[1]) / 2 - root.matrix_world.translation    # 包围盒中心相对根（已放大、未转）
     f0, f1, f2 = WIPE
     dist = 0.040
-    half_w = dist * 18.0 / 45.0                              # 40 mm 处半个画面宽（45 mm 镜头）
-    W = 0.140
+    half_w = dist * 18.0 / W0_LENS                           # 40 mm 处半个画面宽
+    W = 0.210
     x_in, x_out = half_w + W / 2 + 0.004, -(half_w + W / 2 + 0.004)
     cov = []
     for f in range(f0 - 2, f2 + 2):

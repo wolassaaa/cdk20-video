@@ -161,7 +161,7 @@ def main():
 
     # T1：信息出齐（从 W1 第一帧算，秒）
     s = lambda f: (f - TAIL) / 60.0                    # noqa: E731
-    flip = 16
+    flip = 0                                           # 11-21 第二轮：牌落位那一帧正好转到正面
     t1 = dict(title=s(Fu(TL["q_land"])), subtitle=s(Fu(TL["sub_land"])), course=s(Fu(TL["sat_land"][0])),
               section=s(Fu(TL["sat_land"][1])), group=s(Fu(TL["sat_land"][2])), roster=s(Fu(TL["sat_land"][3])),
               tag8_on=s(Fu(TL["tags"][3]) + flip), all_read=s(Fu(TL["read"])))
@@ -185,6 +185,26 @@ def main():
         mx = im[y0:y1, x0:x1].max() / 255.0
         bright.append((f, round(float(L.max()), 3), round(float(np.percentile(L, 99.9)), 3), round(float(mx), 3)))
     tb_ok = bool(bright) and all(b[1] < 0.95 for b in bright)
+
+    # 11-21 第二轮：背景色（读字帧里最暗的 30% 像素的中位数）、三层纵深、三拍、镜头冲击
+    fr_bg = Fu(TL["read"]) + 120
+    fr_bg -= fr_bg % step
+    bg_hex, bg_ok = "-", False
+    pbg = d1 / f"f_{fr_bg:04d}.png"
+    if pbg.exists():
+        imb = np.asarray(Image.open(pbg).convert("RGB")).reshape(-1, 3).astype(np.float32)
+        Lb = imb @ np.array([0.2126, 0.7152, 0.0722])
+        dark = imb[Lb <= np.percentile(Lb, 30)]
+        med = np.median(dark, axis=0)
+        bg_hex = "#%02X%02X%02X" % tuple(int(v) for v in med)
+        bg_ok = med[2] > med[0] and med.max() < 60
+    lay = c1.get("layers", {})
+    pxh = c1["px"].get("hero", {})
+    hero_ok = pxh.get("title", 0) >= 140 and not lay.get("hero_extra_items") and lay.get("hero_window_s", 0) >= 1.45
+    fg_ok = 15 <= lay.get("hero", {}).get("fg_cover_pct", 0) <= 30
+    btc = c1.get("bullet_time", {})
+    bt_ok = 0 < btc.get("min_hull_mm", 0) < 60 and btc.get("frames_lt60", 0) > 0
+    w0c = c0.get("cam_clear_mm", {})
 
     # T9 不穿模；T10 镜头不死
     clip = c1["clip"]
@@ -261,21 +281,34 @@ def main():
     L_.append("| T12 首尾呼应 | — | 07 文档改成：盒盖留给 W5 结尾，片尾零件群落回盒子、盒盖合上（盒盖镜头代码 build_w1x 保留） | 留给 W5 |")
     L_.append(f"| 片名亮度 | 片名区域最大亮度 < 0.95 | " + "；".join(f"第 {f} 帧 最大 {a}（p99.9 {b}，单通道最大 {c}）" for f, a, b, c in bright) + f" | {ok(tb_ok)} |")
     L_.append("")
+    L_.append("## 11-21 第二轮（总管验收意见六条）")
+    L_.append("")
+    L_.append("| 条 | 要求 | 量到的 | 结果 |")
+    L_.append("|---|---|---|---|")
+    L_.append(f"| 1 不灰不闷 | 近黑深蓝背景（#0B1020 左右）、强逆光和轮廓光、片名高光白亮面带扫光、红问号亮面带自发光、片名区最大亮度 < 0.95 | 读字帧最暗 30% 像素中位色 {bg_hex}；背后两盏逆光 + 每块牌一盏轮廓光；英雄帧一道硬高光扫过片名（只照字）；问号自发光 0.8；片名亮度见上表 | {ok(bg_ok and tb_ok)} |")
+    L_.append(f"| 2 三层纵深 | 前景大零件占画面 15–30%、强虚化；中景一圈零件围着片名；远景小零件和尘粒 | 英雄帧：前景 {lay.get('hero', {}).get('fg_cover_pct')}%，中景零件 {lay.get('hero', {}).get('mid_parts')} 块，远景 {lay.get('hero', {}).get('far_parts')} 块；读字帧：前景 {lay.get('read', {}).get('fg_cover_pct')}%（退到四角），中景 {lay.get('read', {}).get('mid_parts')} 块，远景 {lay.get('read', {}).get('far_parts')} 块；另有 260 粒尘（只在片名后面）；零件浮起后放大到 3.1 倍 | {ok(fg_ok)} |")
+    L_.append(f"| 3 分三拍 | ①英雄帧只有片名（≥ 140 px）+ 副标题 + 零件群，停 1.5 s；②课程、Section、Group 依次入画；③拉开读字全景、八块牌上环 | ①{t1['title']:.2f}–{s(Fu(TL['hero_end'])):.2f} s（{lay.get('hero_window_s')} s），片名 {pxh.get('title')} px，这段里进画的其他牌：{lay.get('hero_extra_items') or '无'}；②课程 {t1['course']:.2f} s、Section {t1['section']:.2f} s、Group {t1['group']:.2f} s；③名单 {t1['roster']:.2f} s，八块牌 {s(Fu(TL['tags'][0])):.2f}–{t1['tag8_on']:.2f} s，读字 {t1['all_read']:.2f} s | {ok(hero_ok)} |")
+    L_.append("| 4 章节牌 | 厚 3 mm、倒角、边缘高光的亮面塑料牌，挂在小浇口上，翻转时有反光扫过 | 牌厚 3 mm、倒角 1 mm、清漆 0.9；顶边一个镀铬细浇口 + 一截料杆头；一块只照牌的大灯放在镜头左前方、和牌同高，牌转面时反光扫过 | 通过（目视） |")
+    L_.append("| 5 去掉空白占位牌 | 画面里没有空白的 \"No.\" 牌 | 背面的 \"No.\" 字删了，背面改成大号红色章节号；牌不再先背面朝前停着等，飞进来时一边转、落位那一帧转到正面 | 通过（目视） |")
+    L_.append(f"| 6 镜头冲击 | W0 和大板断开用广角贴近零件、轻震；子弹时间镜头在零件间穿行（< 60 mm） | W0：{c0.get('lens_mm')} mm 广角，三下各停在零件前约 13 cm，两下之间甩过去，每下震 4 帧，镜头离板最近 {w0c.get('min_mm')} mm；W1：断开时 24 mm、离零件约 15 cm，震 4 帧；子弹时间沿零件层中间横穿，离零件凸包最近 {btc.get('min_hull_mm')} mm，{btc.get('frames_lt60')}/{btc.get('frames')} 帧在 60 mm 以内 | {ok(bt_ok)} |")
+    L_.append("")
     L_.append("## 逐拍（1 拍单位 = 2 个音乐拍 = 0.988 s，W1 从 1-11 结束那一帧算）")
     L_.append("")
     L_.append("| 拍单位 | W1 秒 | 画面 |")
     L_.append("|---|---|---|")
     rows_ = [(0, "镜头贴着板面往前推（1-11 尾的三维地图升起接上来）"),
-             (TL["brk"], "鼓点：大板断开，零件从浇口脱落，重力关掉；镜头震 2 帧，浇口迸出细灰；影棚灯压暗，雾里出现一道侧逆光"),
-             (TL["bt_in"], "子弹时间（10%）：镜头在浮起的零件群里绕 120°，近处虚、f/2"),
-             (TL["resume"], "时间恢复，零件飞向环上的位置并放大；镀铬料杆从右边滑进来，挂着 14 个字母（背面朝前）"),
-             (TL["sweep"], "扫光从左到右扫过字面"),
+             (TL["brk"], "鼓点：大板断开，零件从浇口脱落，重力关掉；24 mm 广角贴着零件，镜头震 4 帧，浇口迸出细灰；影棚灯压暗，背景变近黑深蓝"),
+             (TL["bt_in"], "子弹时间（10%）：镜头沿零件层中间横穿，离零件几厘米，f/2，慢慢歪 6°"),
+             (TL["resume"], "时间恢复，零件飞向片名四周并放大；远景小零件、尘粒从暗处显出来；镀铬料杆从右边滑进来，挂着 14 个字母（背面朝前）"),
+             (TL["sweep"], "镜头升到料杆、换回 50 mm；扫光从左到右扫过字背"),
              (TL["cuts"][0], "每拍两刀（八分音符）：字母从外往里成对剪下，翻半圈，从片名上方绕到正前方插进位置"),
              (TL["q_cut"], "红色 ? 剪下，晚半拍（{:.2f}）落位".format(TL["q_land"])),
              (TL["sub_in"], "深色副标题长牌从后面转进来，{:.2f} 落在片名下".format(TL["sub_land"])),
-             (TL["sat_in"], "课程牌（红）、Section、Group、名单牌绕片名飞一圈，拖着细光迹落位"),
-             (TL["tags"][0], "八块章节牌每拍一对从暗处飞进环里、翻到正面（章名 + 主讲人），各打一盏轮廓光"),
-             (TL["read"], "镜头拉到全景：片名在零件环正中，定格 4 拍单位，2.5% 慢推"),
+             (TL["hero"], "①英雄帧：只有片名 + 副标题 + 零件群（前景大零件虚着慢慢漂、中景一圈零件、远景小零件和尘粒），红问号亮起，1.5 s 慢推"),
+             (TL["sweep2"], "一道硬高光从左到右扫过亮面片名"),
+             (TL["hero_end"], "②镜头往下、往左绕一点，零件环跟着涨开；课程牌（红）、Section、Group 依次从画外螺旋绕进来，拖着细光迹落位"),
+             (TL["tags"][0], "③镜头拉开；名单牌落位；八块章节牌每拍一对从暗处飞进环里、一边飞一边转，落位那一帧转到正面，反光扫过，各打一盏轮廓光"),
+             (TL["read"], "读字全景：片名在零件环正中，定格 4 拍单位，2.5% 慢推"),
              (TL["suck"], "鼓点：重力反过来——标题件全部往后退进暗处，零件从低到高一件件吸回大板、插回浇口"),
              (TL["suck_end"], "CDK20 最后插回去，镜头跟着它俯冲，落位微震 2 帧；灯亮回影棚"),
              (TL["land"], "贴着料杆落到第 2 区楼群 = 2-01 开始")]
@@ -286,7 +319,7 @@ def main():
     L_.append("")
     L_.append("| 接点 | 代号 | 做法 |")
     L_.append("|---|---|---|")
-    L_.append("| W0 → 1-01 | T5 焦点擦除 | 一块白色亮面料牌贴着镜头（40 mm）从右往左飞过，完全虚掉；第 169–184 帧整块盖满，换点在第 178 帧；透明层叠到 1-01 头 15 帧 |")
+    L_.append(f"| W0 → 1-01 | T5 焦点擦除 | 一块白色亮面料牌贴着镜头（40 mm）从右往左飞过，完全虚掉；第 {c0['wipe_cover_frames'][0]}–{c0['wipe_cover_frames'][1]} 帧整块盖满，换点在第 178 帧；透明层叠到 1-01 头 15 帧 |")
     L_.append("| 1-11 页面 → 三维地图 | T6 光扫 | 14 帧，一道斜光带扫过、整体提亮到 0.93（不过曝），最亮那帧换场 |")
     L_.append("| 1-11 尾 → W1 → 2-01 头 | 一镜到底（T7 落位冲击在大板断开和 CDK20 插回两处） | 镜头不剪 |")
     L_.append("| 三维第 2 区 → 2-01 页面 | T6 光扫 | 同上 |")
@@ -302,6 +335,7 @@ def main():
     (ROOT / "镜头设计_v3" / "深化" / "09_片头_检查.md").write_text("\n".join(L_) + "\n", encoding="utf-8")
     subprocess.run([sys.executable, str(ROOT / "_env" / "tools" / "md2html.py"), str(md)], check=True)
     print("W1_CHECK", json.dumps(dict(t1=t1_ok, t3=t3_ok, t4=t4_ok, t5=t5_ok, t7=t7_ok and w0_ok, t8=t8_ok, t9=not clip,
+                                      r1_bg=bg_hex, r1=bg_ok, r2=fg_ok, r3=hero_ok, r6=bt_ok,
                                       t10=t10_ok, t11=t11_ok, bright=tb_ok, t4_rows=t4, bright_rows=bright), ensure_ascii=False, default=str))
 
 
