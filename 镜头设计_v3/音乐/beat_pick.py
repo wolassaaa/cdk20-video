@@ -96,6 +96,8 @@ def main():
     bar0 = b0 + fix + bar_shift * beat
     while bar0 - 4 * beat > a.t0:
         bar0 -= 4 * beat
+    while bar0 < a.t0:                     # --t0 在曲中间时，网格第一小节在窗口前面：往后挪到窗口里（否则窗口外的小节是空的，全表 NaN）
+        bar0 += 4 * beat
     bars = []
     pw = mag ** 2
     lo = pw[:, freqs < 150].sum(1); mid = pw[:, (freqs >= 150) & (freqs < 2000)].sum(1); hi = pw[:, freqs >= 5000].sum(1)

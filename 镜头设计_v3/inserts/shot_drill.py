@@ -59,6 +59,14 @@ def work(seg):
 
 
 def load_keys(seg):
+    """事件帧：默认读 映射/keys/<段>.json（念词段，resolve.py 出的）。音乐段没有念词，配方里给 make_keys() 按拍点表现算同样格式的 keys（不写进 映射/keys/）。"""
+    try:
+        M = seg_mod(seg)
+    except ImportError:
+        M = None
+    if M is not None and hasattr(M, "make_keys"):
+        K = M.make_keys()
+        return K, {e["id"]: e for e in K["events"]}
     K = json.loads((MAPD / "keys" / f"{seg}.json").read_text(encoding="utf-8"))
     EV = {e["id"]: e for e in K["events"]}
     return K, EV
@@ -266,10 +274,11 @@ class CamRig:
     sock 键随零件当帧的位姿换成世界坐标。相邻两键同空间时插值球坐标（绕着走，不穿过零件），跨空间时插值世界位置。
     额外：极慢漂移（不停死）、≤ 0.3° 手持感、落位微震（2 帧）。"""
 
-    def __init__(self, keys, part_mat, scale_mm_to_m):
+    def __init__(self, keys, part_mat, scale_mm_to_m, spaces=None):
         self.keys = sorted(keys, key=lambda k: k["f"])
         self.part_mat = part_mat              # f -> 零件根的世界矩阵（无缩放）
         self.s = scale_mm_to_m                # 零件局部毫米 → 米（含零件缩放）
+        self.spaces = dict(spaces or {})      # 别的零件空间：{名字: (f -> 世界矩阵, 毫米 → 米)}，键里 space=名字（5-04 的料架）
         self.shakes = []
 
     def shake(self, f, amp_deg=0.25, dur=6):
@@ -281,11 +290,12 @@ class CamRig:
             e, a = math.radians(k["el"]), math.radians(k["az"])
             eye = t + Vector((math.cos(e) * math.sin(a), -math.cos(e) * math.cos(a), math.sin(e))) * k["dist"]
             return eye, t
-        M = self.part_mat(f)
+        M, s = self.spaces[k["space"]] if k["space"] in self.spaces else (self.part_mat, self.s)
+        M = M(f)
         t_l = Vector(k["tgt"])
         e, a = math.radians(k["el"]), math.radians(k["az"])
         eye_l = t_l + Vector((math.cos(e) * math.cos(a), math.cos(e) * math.sin(a), math.sin(e))) * k["dist"]
-        return M @ (eye_l * self.s), M @ (t_l * self.s)
+        return M @ (eye_l * s), M @ (t_l * s)
 
     def at(self, f):
         ks = self.keys
@@ -589,18 +599,23 @@ def clip_run(seg):
     plan = M.clip_plan(sc)
     ref = plan.get("ref")
     C = BVHCache(ref)
+    caches = {}                                                          # 组可带第 4 项 = 这组的参考物体（几个各自刚性的东西：插座、料架）
     res = dict(frames=0, hits=[], cam_min_mm=None, cam_min_at=None)
     cam = sc.camera
     t = time.time()
     fl = plan["frames"]
+    f0, f1 = int(os.environ.get("CLIP_F0", -1)), int(os.environ.get("CLIP_F1", 10 ** 6))   # 返修后只复查一段：CLIP_F0=1000 CLIP_F1=1419
+    fl = [f for f in fl if f0 <= f <= f1] if f0 >= 0 or f1 < 10 ** 6 else fl
     for k, f in enumerate(fl):
         sc.frame_set(f)
         dg = bpy.context.evaluated_depsgraph_get()
         res["frames"] += 1
-        for gname, A, B in plan["groups"](f):
+        for g in plan["groups"](f):
+            gname, A, B = g[:3]
             if not A or not B:
                 continue
-            for h in overlaps(C.get(A, dg), C.get(B, dg)):
+            Cg = C if len(g) < 4 else caches.setdefault(g[3].name if g[3] is not None else "_world", BVHCache(g[3]))
+            for h in overlaps(Cg.get(A, dg), Cg.get(B, dg)):
                 res["hits"].append(dict(f=f, group=gname, a=h[0], b=h[1]))
         near = plan.get("cam_near")
         if near:
@@ -619,7 +634,7 @@ def clip_run(seg):
     for h in res["hits"]:
         hs.setdefault(f"{h['group']}:{h['a']}|{h['b']}", []).append(h["f"])
     res["hit_summary"] = {k: [min(v), max(v), len(v)] for k, v in hs.items()}
-    (W / "clip.json").write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
+    (W / ("clip.json" if fl is plan["frames"] else f"clip_{f0}_{f1}.json")).write_text(json.dumps(res, ensure_ascii=False, indent=1), encoding="utf-8")
     print("DRILL clip", json.dumps({k: v for k, v in res.items() if k != "hits"}, ensure_ascii=False)[:3000], flush=True)
 
 
@@ -645,6 +660,10 @@ def draw_text_layer(items, alpha_of):
             continue
         fnt = _font(it["size"], it.get("italic", False), it.get("sans", False), it.get("hand", False))
         c = it.get("color", (255, 255, 255))
+        if it.get("plate"):                                               # 深色底衬（出处行：压在亮板件上也读得出，11-20 Gemini 审 3-04）
+            pc, pa, px_, py_ = it["plate"]
+            x0, y0, x1, y1 = dr.textbbox(it["xy"], it["text"], font=fnt, anchor=it.get("anchor", "ls"))
+            dr.rounded_rectangle([x0 - px_, y0 - py_, x1 + px_, y1 + py_], radius=py_ + 2, fill=(*pc, int(255 * pa * a)))
         if it.get("halo"):                                                # 软光晕（模糊后的粗描边）：字压在花背景上也读得出，又不像硬描边
             hc = it["halo"]
             ds.text(it["xy"], it["text"], font=fnt, fill=(*hc, int(190 * a)), anchor=it.get("anchor", "ls"), stroke_width=4, stroke_fill=(*hc, int(190 * a)))

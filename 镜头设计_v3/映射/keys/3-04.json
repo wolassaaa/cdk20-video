@@ -905,14 +905,80 @@
    "F_end": 19258
   },
   {
+   "id": "real0_in",
+   "obj": "real",
+   "verb": "dissolve",
+   "ease": "inout",
+   "means": "enzyme：先给蛋白本体——叠化到 CDK20 预测模型全貌（口袋染红，对在盒上红环）；11-21 Gemini 必改：先出生物实体再对应玩具",
+   "f_start": 160,
+   "f_land": 160,
+   "f_end": 188,
+   "until": null,
+   "word": "3-04.w007",
+   "w": "enzyme,",
+   "key": "enzyme#1",
+   "sid": "3-04.s2",
+   "word_f0": 167,
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 18858,
+   "F_land": 18858,
+   "F_end": 18886
+  },
+  {
+   "id": "note_protein",
+   "obj": "ink_note",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "protein：手写 CDK20 · a protein 写在蛋白旁边（真实层上，墨线圈圈住口袋）",
+   "f_start": 234,
+   "f_land": 234,
+   "f_end": 254,
+   "until": null,
+   "word": "3-04.w009",
+   "w": "protein",
+   "key": "protein#1",
+   "sid": "3-04.s2",
+   "word_f0": 240,
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 18932,
+   "F_land": 18932,
+   "F_end": 18952
+  },
+  {
+   "id": "real0_out",
+   "obj": "real",
+   "verb": "dissolve",
+   "ease": "inout",
+   "means": "with a chemical job：收回红环，露出开着盖的机舱，活塞推的那一下落在 chemical",
+   "f_start": 280,
+   "f_land": 280,
+   "f_end": 308,
+   "until": null,
+   "word": "3-04.w010",
+   "w": "with",
+   "key": "with#1",
+   "sid": "3-04.s2",
+   "word_f0": 267,
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 18978,
+   "F_land": 18978,
+   "F_end": 19006
+  },
+  {
    "id": "real_in",
    "obj": "real_layer",
    "verb": "dissolve",
    "ease": "inout",
-   "means": "叠化到真实层：AlphaFold DB 的 CDK20 预测模型，口袋墨线圈出",
-   "f_start": 500,
-   "f_land": 500,
-   "f_end": 530,
+   "means": "pocket：钻进去的同时叠化到真实层（AlphaFold DB 的 CDK20 预测模型，口袋染珊瑚红、墨线圈和手写 pocket 落在 pocket 这个词后 0.3 秒内）；11-21 Gemini 必改：真分子停够 3 秒、口袋别比词晚",
+   "f_start": 439,
+   "f_land": 439,
+   "f_end": 469,
    "until": null,
    "word": "3-04.w018",
    "w": "pocket",
@@ -922,17 +988,39 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 19198,
-   "F_land": 19198,
-   "F_end": 19228
+   "F_start": 19137,
+   "F_land": 19137,
+   "F_end": 19167
   },
   {
    "id": "real_out",
    "obj": "real_layer",
    "verb": "dissolve",
    "ease": "inout",
-   "means": "对称叠化回玩具",
-   "f_start": 560,
+   "means": "called→ATP：收回红环，ATP 这个词落地时黄色 ATP 插头正好插进玩具插座；手写 ATP 留在画面上接到插头",
+   "f_start": 628,
+   "f_land": 628,
+   "f_end": 658,
+   "until": null,
+   "word": "3-04.w026",
+   "w": "called",
+   "key": "called#1",
+   "sid": "3-04.s3",
+   "word_f0": 631,
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 19326,
+   "F_land": 19326,
+   "F_end": 19356
+  },
+  {
+   "id": "cam_hold",
+   "obj": "camera",
+   "verb": "camera_to",
+   "ease": "inout",
+   "means": "镜头在孔口正对停住，再退出（11-21 从 real_out 拆出来：玩具层镜头保持原样，真实层叠化另走）",
+   "f_start": 559,
    "f_land": 560,
    "f_end": 593,
    "until": null,
@@ -944,7 +1032,7 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 19258,
+   "F_start": 19257,
    "F_land": 19258,
    "F_end": 19291
   },
@@ -1004,6 +1092,28 @@
    "G_end": 19309,
    "G_off": 19339,
    "G_tick": 19293
+  },
+  {
+   "id": "note_atp",
+   "obj": "ink_note",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "ATP：手写 ATP binds here 和箭头指到插孔，和黄色 ATP 插头落地同一拍（11-21 Gemini 第三轮：原来在 molecule 上写，字比念到 ATP 早 1 秒；我们没有 ATP 的结构文件，也不自己对接，只写字不摆分子）",
+   "f_start": 655,
+   "f_land": 655,
+   "f_end": 675,
+   "until": null,
+   "word": "3-04.w027",
+   "w": "ATP.",
+   "key": "atp#1",
+   "sid": "3-04.s3",
+   "word_f0": 657,
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 19353,
+   "F_land": 19353,
+   "F_end": 19373
   },
   {
    "id": "atp_plug",
@@ -1515,4 +1625,4 @@
   }
  ],
  "problems": []
-}
+}

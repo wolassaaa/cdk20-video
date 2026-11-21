@@ -1,319 +1,83 @@
 {
  "schema": "cdk20.events/1",
  "group": "5-04",
- "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：第 5 章二维说明书页 5-04（C 画外音）：左边锁（CDK20）和钥匙 001，钥匙插进去（grabbing），想转却只是晃（jamming），旁边齿轮一直在转（还在工作）；右边一张示意图：activity 对 how much you need，一条普通曲线在一半处标 IC50；For 001 一条红线一直很高，一半在图外，写 above 6,000 nanomolar，红批注 weak。页面 Manual504.jsx。",
+ "tool": "blender",
+ "note": "HKBU SCIE1007 课程作业的科普视频：三维钻取 5-04（CDK20 插座 + 十台小插座，06_插座比喻.md 第四节 5-04）。一镜到底：段首 T5，5-03 飞来的 001 假插头从镜头前掠过、完全虚化，停在浮着的插座旁；second test 开盖，ATP 插着、灯亮、活塞推细胞；grabbing 时 ATP 被顶出、001 插到底（缝宽、在孔里晃）；jamming 时 001 想拧卡口，只拧 12° 就卡住、抖一下、被弹回，卡扣不扣，灯一直亮；Does 001 时镜头从机舱上方钻到触点块，叠化到我们自己重新对接的 001 姿态（OUR RE-DOCKING，停 3 秒，口袋高亮），working 时退回，细胞照鼓（11-20 晚按 Gemini 审 3-04 的意见：真分子停够 3 秒）；IC50 时镜头移到旁边料架上的十台小插座和剂量旋钮，旋钮往上拧，001 一个个插进小插座，拧过 6,000 的刻线时只关掉 4 台；段尾插座冲进镜头盖满画面（接出镜 5-05+06）。场景脚本 inserts/drill_504.py（引擎 inserts/shot_drill.py），2D 旧表在 映射/_wip/5-04_events_v1_2d.json。",
  "holds": [],
  "events": [
-  {
-   "id": "title",
-   "obj": "title",
-   "verb": "appear",
-   "at": {
-    "word": "5-04.w005",
-    "off": 0
-   },
-   "means": "second test：标题 A second test",
-   "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "5-04.w006"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "grab",
-   "obj": "grab",
-   "verb": "move",
-   "at": {
-    "word": "5-04.w008",
-    "off": 0
-   },
-   "means": "grabbing：钥匙滑进锁，写 grabbing",
-   "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "word": "5-04.w008"
-   },
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "key",
-     "lock"
-    ]
-   }
-  },
-  {
-   "id": "lock",
-   "obj": "lock",
-   "verb": "snap",
-   "at": {
-    "word": "5-04.w010",
-    "off": 0
-   },
-   "means": "lock：锁一颤",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "5-04.w010"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "neq",
-   "obj": "neq",
-   "verb": "appear",
-   "at": {
-    "word": "5-04.w011",
-    "off": 0
-   },
-   "means": "isn't the same：红色不等号",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "5-04.w013"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "jam",
-   "obj": "jam",
-   "verb": "appear",
-   "at": {
-    "word": "5-04.w015",
-    "off": 0
-   },
-   "means": "jamming：写 jamming，钥匙想转只是晃，晃动线",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "k001",
-   "obj": "k001",
-   "verb": "appear",
-   "at": {
-    "word": "5-04.w018",
-    "off": 0
-   },
-   "means": "001：钥匙上标 001",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "5-04.w018"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "stop",
-   "obj": "stop",
-   "verb": "grow",
-   "at": {
-    "word": "5-04.w020",
-    "off": 0
-   },
-   "means": "stop：锁旁长出齿轮",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "5-04.w020"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "cdk",
-   "obj": "cdk",
-   "verb": "appear",
-   "at": {
-    "word": "5-04.w021",
-    "off": 0
-   },
-   "means": "CDK20：锁下写 CDK20",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "5-04.w021"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "work",
-   "obj": "work",
-   "verb": "move",
-   "at": {
-    "word": "5-04.w023",
-    "off": 0
-   },
-   "means": "working：齿轮转起来，红问号",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "axes",
-   "obj": "axes",
-   "verb": "grow",
-   "at": {
-    "word": "5-04.w025",
-    "off": 0
-   },
-   "means": "measured：右边画出坐标轴，写 activity",
-   "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "5-04.w026"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "ic",
-   "obj": "ic",
-   "verb": "appear",
-   "at": {
-    "word": "5-04.w027",
-    "off": 0
-   },
-   "means": "IC50：图上写 IC50，一条普通曲线画出",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "5-04.w027"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "much",
-   "obj": "much",
-   "verb": "move",
-   "at": {
-    "word": "5-04.w029",
-    "off": 0
-   },
-   "means": "how much you need：横轴箭头往右，写 how much you need",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "5-04.w031"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "cut",
-   "obj": "cut",
-   "verb": "morph",
-   "at": {
-    "word": "5-04.w033",
-    "off": 0
-   },
-   "means": "cut the enzyme's activity：曲线上的点往下滑",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "5-04.w035"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "half",
-   "obj": "half",
-   "verb": "appear",
-   "at": {
-    "word": "5-04.w038",
-    "off": 0
-   },
-   "means": "in half：一半处虚线，落到横轴标 IC50",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "q",
-   "obj": "q",
-   "verb": "appear",
-   "at": {
-    "word": "5-04.w040",
-    "off": 0
-   },
-   "means": "For 001：红问号，001 的红线开始画",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "above",
-   "obj": "above",
-   "verb": "move",
-   "at": {
-    "word": "5-04.w041",
-    "off": 0
-   },
-   "means": "Above 6,000 nanomolar：红线一直很高，箭头伸出图外，写 above 6,000 nanomolar",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "5-04.w042"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "weak",
-   "obj": "weak",
-   "verb": "appear",
-   "at": {
-    "word": "5-04.w044",
-    "off": 0
-   },
-   "means": "Weak：红批注 weak，齿轮还在转",
-   "tool": "remotion",
-   "lead": 30,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  }
+  {"id": "wipe", "obj": "plug001", "verb": "move", "means": "段首 T5：5-03 飞来的 001 假插头从镜头前掠过，完全虚化，遮住接缝",
+   "at": {"word": "5-04.w001", "off": 3}, "lead": 12, "guide": {"kind": "none"}},
+  {"id": "key_hover", "obj": "plug001", "verb": "move", "means": "came：001 落到插座右前方的待机位，轻轻浮着",
+   "at": {"word": "5-04.w003", "off": 0}, "lead": 36, "until": {"dur": 16}, "guide": {"kind": "none"}},
+  {"id": "cam_open", "obj": "camera", "verb": "camera_to", "means": "But then came a：镜头慢慢靠近浮着的插座（ATP 插着，盖顶外灯亮）",
+   "at": {"word": "5-04.w005", "off": 0}, "lead": 70, "until": {"sentence_end": true}, "guide": {"kind": "none"}},
+  {"id": "lid_prep", "obj": "lid", "verb": "move", "means": "second：焦点收到分件线，整台往下沉一点（开盖的预备）",
+   "at": {"word": "5-04.w005", "off": 0}, "lead": 20, "guide": {"kind": "focus", "target": "seam", "nudge": false}},
+  {"id": "lid_open", "obj": "lid", "verb": "move", "means": "test：盖绕后沿铰链翻开（过冲回落），露出机舱",
+   "at": {"word": "5-04.w006", "off": 0}, "lead": 30, "until": {"dur": 14}, "guide": {"kind": "none"}},
+  {"id": "cam_cabin", "obj": "camera", "verb": "camera_to", "means": "Because：镜头进机舱（侧上方），ATP 插着，光包在管里走，活塞推细胞",
+   "at": {"word": "5-04.w007", "off": 0}, "lead": 50, "guide": {"kind": "none"}},
+  {"id": "atp_eject", "obj": "atp", "verb": "eject_swap", "means": "Because：001 摆到孔轴上，ATP 被顶出插孔、让到左前方",
+   "at": {"word": "5-04.w007", "off": 6}, "lead": 8, "until": {"dur": 30}, "guide": {"kind": "focus", "target": "keyhole", "nudge": false}},
+  {"id": "plug001_in", "obj": "plug001", "verb": "plug_in", "means": "grabbing：001 沿孔轴插到底（缝 0.30，比 048 宽），到底后在孔里晃",
+   "at": {"word": "5-04.w008", "off": 20}, "lead": 28, "until": {"dur": 12}, "guide": {"kind": "none"}},
+  {"id": "cam_lock", "obj": "camera", "verb": "camera_to", "means": "a lock：镜头往插孔靠近一点，看 001 插在孔里晃（插得进 = 抓住）",
+   "at": {"word": "5-04.w010", "off": 4}, "lead": 34, "until": {"dur": 20}, "guide": {"kind": "focus", "target": "keyhole", "nudge": false}},
+  {"id": "cam_twist", "obj": "camera", "verb": "camera_to", "means": "as：镜头绕到插座侧面，卡口和卡扣进画（准备看拧）",
+   "at": {"word": "5-04.w014", "off": 0}, "lead": 60, "guide": {"kind": "none"}},
+  {"id": "twist_try", "obj": "plug001", "verb": "twist", "means": "jamming：001 想拧卡口，只拧 12° 就卡住、抖一下、被弹簧推回 0°，卡扣不扣，灯一直亮",
+   "at": {"word": "5-04.w015", "off": 0}, "lead": 14, "until": {"sentence_end": true}, "guide": {"kind": "none"}},
+  {"id": "drill_in", "obj": "camera", "verb": "camera_to", "means": "Does：001 弹回 0° 以后，镜头从拧卡口的侧面绕到机舱上方、钻到触点块（001 的针插在半个孔里）",
+   "at": {"word": "5-04.w017", "off": -27}, "lead": 36, "until": {"dur": 22}, "guide": {"kind": "none"}},
+  {"id": "real_in", "obj": "real", "verb": "dissolve", "means": "Does：叠化到我们重新对接的 001 姿态（AutoDock Vina，标 OUR RE-DOCKING），口袋墨线圈出、口袋那一片表面染红；停 3 秒以上",
+   "at": {"word": "5-04.w017", "off": -27}, "until": {"dur": 28}, "guide": {"kind": "none"}},
+  {"id": "name001", "obj": "ink_note", "verb": "move", "means": "001：真实层里配体旁手写的红色 001 落下（Caveat 墨线）",
+   "at": {"word": "5-04.w018", "off": 0}, "lead": 8, "until": {"dur": 20}, "guide": {"kind": "none"}},
+  {"id": "push_stop", "obj": "piston", "verb": "move", "means": "stop：真实层里口袋墨线圈跳一下（底下的玩具照常推，没停）",
+   "at": {"word": "5-04.w020", "off": 0}, "lead": 6, "until": {"dur": 20}, "guide": {"kind": "none"}},
+  {"id": "push_cdk", "obj": "piston", "verb": "move", "means": "CDK20：口袋墨线圈再跳一下",
+   "at": {"word": "5-04.w021", "off": 20}, "lead": 6, "until": {"dur": 20}, "guide": {"kind": "none"}},
+  {"id": "real_out", "obj": "real", "verb": "dissolve", "means": "from：对称叠化退回玩具（真实层整段停 3.0 秒）",
+   "at": {"word": "5-04.w022", "off": -14}, "until": {"dur": 28}, "guide": {"kind": "none"}},
+  {"id": "push_working", "obj": "piston", "verb": "move", "means": "working：回到玩具，活塞照样推一下，细胞鼓大一点，灯亮着，机器照常干活",
+   "at": {"word": "5-04.w023", "off": 0}, "lead": 6, "until": {"sentence_end": true}, "guide": {"kind": "focus", "target": "output", "nudge": false}},
+  {"id": "drill_out", "obj": "camera", "verb": "camera_to", "means": "working：镜头从触点块退回机舱侧上方，输出端进画，活塞照推",
+   "at": {"word": "5-04.w023", "off": 20}, "lead": 52, "guide": {"kind": "none"}},
+  {"id": "p001_out", "obj": "plug001", "verb": "plug_out", "means": "measured：弹簧把 001 顶出插孔，退到孔口前的待机位（抓得住，扣不住）；盖合上",
+   "at": {"word": "5-04.w025", "off": 0}, "lead": 10, "until": {"dur": 34}, "guide": {"kind": "none"}},
+  {"id": "cam_rack", "obj": "camera", "verb": "camera_to", "means": "That's measured as：盖合上，镜头从插座平移到右边料架：十台小插座（两排各五台，都插着 ATP、灯亮）和剂量旋钮",
+   "at": {"word": "5-04.w027", "off": 0}, "lead": 100, "until": {"dur": 30}, "guide": {"kind": "none"}},
+  {"id": "ic50_glow", "obj": "dial_label", "verb": "appear", "means": "IC50：焦点点名剂量旋钮，表盘上刻的 IC50 亮起",
+   "at": {"word": "5-04.w027", "off": 0}, "lead": 6, "until": {"word": "5-04.w027"}, "guide": {"kind": "focus", "target": "dial", "nudge": false}},
+  {"id": "knob_tick", "obj": "knob", "verb": "move", "means": "how：旋钮先往回顶一下（拧的预备）",
+   "at": {"word": "5-04.w028", "off": 0}, "lead": 6, "guide": {"kind": "none"}},
+  {"id": "knob_turn", "obj": "knob", "verb": "move", "means": "how much you need：旋钮一路往上拧，表针跟着走（剂量加大），nanomolar 时顶到头",
+   "at": {"word": "5-04.w031", "off": 0}, "lead": 43, "until": {"word": "5-04.w043", "edge": "start"}, "guide": {"kind": "none"}},
+  {"id": "m1_in", "obj": "mini_1", "verb": "plug_in", "means": "cut：第 1 把 001 飞进上排第 1 台，ATP 被顶出落下",
+   "at": {"word": "5-04.w033", "off": 8}, "lead": 30, "until": {"dur": 10}, "guide": {"kind": "none"}},
+  {"id": "m1_off", "obj": "mini_1", "verb": "power_off", "means": "enzyme's：第 1 台拧到底、红卡扣扣上，灯灭、细胞停（1 台停）",
+   "at": {"word": "5-04.w035", "off": 0}, "lead": 14, "until": {"dur": 10}, "guide": {"kind": "none"}},
+  {"id": "m2_in", "obj": "mini_2", "verb": "plug_in", "means": "activity：第 2 把插进上排第 2 台，只是插着、松着，灯照亮",
+   "at": {"word": "5-04.w036", "off": 0}, "lead": 30, "until": {"dur": 10}, "guide": {"kind": "none"}},
+  {"id": "half_mark", "obj": "half_mark", "verb": "appear", "means": "in half：料架上排上方刻的红色括线和 half 亮起（上排五台 = 十台的一半）",
+   "at": {"word": "5-04.w038", "off": 0}, "lead": 8, "until": {"sentence_end": true}, "guide": {"kind": "focus", "target": "half", "nudge": false}},
+  {"id": "m3_in", "obj": "mini_3", "verb": "plug_in", "means": "half：第 3 把插进上排第 3 台",
+   "at": {"word": "5-04.w038", "off": 6}, "lead": 30, "until": {"dur": 10}, "guide": {"kind": "none"}},
+  {"id": "m3_off", "obj": "mini_3", "verb": "power_off", "means": "For：第 3 台扣上、灯灭（2 台停）",
+   "at": {"word": "5-04.w039", "off": 0}, "lead": 14, "until": {"dur": 10}, "guide": {"kind": "none"}},
+  {"id": "m4_in", "obj": "mini_4", "verb": "plug_in", "means": "001?：第 4 把插进上排第 4 台，松着，灯照亮",
+   "at": {"word": "5-04.w040", "off": 0}, "lead": 30, "until": {"sentence_end": true}, "guide": {"kind": "none"}},
+  {"id": "m5_in", "obj": "mini_5", "verb": "plug_in", "means": "Above：第 5 把插进下排第 1 台",
+   "at": {"word": "5-04.w041", "off": 0}, "lead": 30, "until": {"dur": 10}, "guide": {"kind": "none"}},
+  {"id": "m5_off", "obj": "mini_5", "verb": "power_off", "means": "6,000：表针拧过 6,000 的红刻线，第 5 台扣上、灯灭（3 台停）",
+   "at": {"word": "5-04.w042", "off": 0}, "lead": 14, "until": {"dur": 10}, "guide": {"kind": "none"}},
+  {"id": "m6_in", "obj": "mini_6", "verb": "plug_in", "means": "6,000：第 6 把插进下排第 2 台",
+   "at": {"word": "5-04.w042", "off": 14}, "lead": 30, "until": {"dur": 10}, "guide": {"kind": "none"}},
+  {"id": "m6_off", "obj": "mini_6", "verb": "power_off", "means": "6,000 说完：第 6 台扣上、灯灭（4 台停，不到一半，6 台亮着）",
+   "at": {"word": "5-04.w042", "off": 42}, "lead": 14, "until": {"dur": 10}, "guide": {"kind": "none"}},
+  {"id": "needle_stop", "obj": "needle", "verb": "move", "means": "nanomolar. Weak.：旋钮拧到头，表针顶在尽头抖，6 台还亮着",
+   "at": {"word": "5-04.w043", "off": 0}, "lead": 0, "until": {"sentence_end": "5-04.s7", "off": 3}, "guide": {"kind": "none"}},
+  {"id": "tail_rush", "obj": "socket", "verb": "move", "means": "Weak.：段尾，插座（盖合着，001 已退出）从画面左边冲进镜头，孔口面盖满画面（接出镜 5-05+06 的段首）",
+   "at": {"word": "5-04.w044", "off": 8}, "lead": 18, "guide": {"kind": "none"}}
  ]
 }

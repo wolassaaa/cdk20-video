@@ -16,6 +16,7 @@ molecule called ATP. Plug that pocket with the right key, and the enzyme can't d
 不穿模靠两件事：路径按零件几何设计（插头只沿孔轴进出、两插头错开轴线、转正前先升到包络半径以上），渲染前 clip 逐帧 BVH 查。
 """
 import json
+import os
 import math
 import sys
 from pathlib import Path
@@ -63,6 +64,11 @@ class T:
         self.drill = (g("drill_in", "f_start"), g("drill_in"), g("drill_in", "f_end"))
         self.real_in = (g("real_in"), g("real_in", "f_end"))
         self.real_out = (g("real_out"), g("real_out", "f_end"))
+        self.real0_in = (g("real0_in"), g("real0_in", "f_end"))            # 11-21：enzyme / a protein 上先出一次蛋白全貌（Gemini 必改）
+        self.real0_out = (g("real0_out"), g("real0_out", "f_end"))
+        self.cam_hold = (g("cam_hold"), g("cam_hold", "f_end"))            # 玩具层镜头在孔口停住的那段（原 real_out，玩具帧不重渲）
+        self.note_protein = (g("note_protein"), g("note_protein", "f_end"))
+        self.note_atp = (g("note_atp"), g("note_atp", "f_end"))
         self.drill_out = (g("drill_out", "f_start"), g("drill_out"))
         self.atp_free = (g("atp_free", "f_start"), g("atp_free"))
         self.atp_in = (g("atp_plug", "f_start"), g("atp_plug"), g("atp_plug", "f_end"))
@@ -458,7 +464,7 @@ def build(seg, samples=16):
         dict(f=t.drill[0], space="sock", tgt=(12.0, 0.0, 0.0), az=-20, el=15, dist=122, lens=50),
         dict(f=t.drill[1], space="sock", tgt=(4.0, 0.0, 0.0), az=0, el=0, dist=58, lens=50),
         dict(f=t.drill[2], space="sock", tgt=(4.0, 0.0, 0.0), az=0, el=0, dist=52, lens=50, ease="linear"),
-        dict(f=t.real_out[1], space="sock", tgt=(4.0, 0.0, 0.0), az=0, el=0, dist=58, lens=50),
+        dict(f=t.cam_hold[1], space="sock", tgt=(4.0, 0.0, 0.0), az=0, el=0, dist=58, lens=50),
         dict(f=t.drill_out[1], space="sock", tgt=(12.0, -2.0, 0.0), az=-26, el=16, dist=126, lens=50),
         dict(f=t.atp_in[2], space="sock", tgt=(12.0, -1.0, 0.0), az=-20, el=17, dist=122, lens=50),
         dict(f=EV["cam_side"]["f_land"], space="sock", tgt=(16.0, 5.0, 0.0), az=17, el=17, dist=132, lens=50),
@@ -494,7 +500,7 @@ def build(seg, samples=16):
         fwd = (tgt - eye).normalized()
         right = fwd.cross(Vector((0, 0, 1))).normalized()
         up = right.cross(fwd)
-        k = 1.0 - 0.85 * (ramp(f, t.drill[0], t.drill[1]) * (1 - ramp(f, t.real_out[1], t.drill_out[1])))   # 钻的时候不漂（对位）
+        k = 1.0 - 0.85 * (ramp(f, t.drill[0], t.drill[1]) * (1 - ramp(f, t.cam_hold[1], t.drill_out[1])))   # 钻的时候不漂（对位）
         off = (right * 0.010 * math.sin(f / 97.0) + up * 0.007 * math.cos(f / 131.0)) * d * k
         return off, off * 0.6
     recs = rigc.bake(cam, NF, drift=drift)
@@ -634,7 +640,7 @@ def build(seg, samples=16):
     base = lambda f: Vector(ppos(min(t.pulse[1], max(t.pulse[0], f))))  # noqa: E731
     fpts = BG.focus_track(plan, targets, NF, base=base)
     for f in range(NF):                                                  # 钻：焦点在孔里（红环和触点面之间）
-        w = ramp(f, t.ring[0] - 10, t.drill[1] - 20) * (1 - ramp(f, t.real_out[1], t.atp_in[0] + 20))
+        w = ramp(f, t.ring[0] - 10, t.drill[1] - 20) * (1 - ramp(f, t.cam_hold[1], t.atp_in[0] + 20))
         if w > 0:
             fpts[f] = fpts[f].lerp(to_world(f, (8.0, 0, 0)), w)
         w2 = ramp(f, t.atp_in[1] - 20, t.atp_in[1]) * (1 - ramp(f, t.enter[0] - 6, t.enter[1] - 8))
@@ -816,10 +822,28 @@ def clip_plan(sc):
 PLDDT = [(90, (0.0, 0.325, 0.839)), (70, (0.396, 0.796, 0.953)), (50, (1.0, 0.859, 0.075)), (-1, (1.0, 0.490, 0.271))]   # AlphaFold DB 的四色
 
 
+def windows(t):
+    """真实层出现的两段：(进起, 进止, 出起, 出止, 后退量)。
+    第一段（enzyme, a protein）镜头本来就远，红环小，口袋墨线圈对在红环上时整个蛋白都在画里，不再退；
+    第二段（where it normally grabs ... ATP）钻到孔口，站稳后退一点看全貌，ATP 落地前回到对位。"""
+    return [(t.real0_in[0], t.real0_in[1], t.real0_out[0], t.real0_out[1], 0.0),
+            (t.real_in[0], t.real_in[1], t.real_out[0], t.real_out[1], 0.75)]
+
+
+def window_at(t, f):
+    for w in windows(t):
+        if w[0] - 2 <= f <= w[3] + 1:
+            return w
+    return None
+
+
 def real_pull(t, f):
     """真实层镜头往后退的量（0–1）：叠化快完时开始退，退出叠化开始前回到 0 附近（红环和墨线圈重新对上）。"""
-    a = smooth((f - t.real_in[1]) / 34.0)
-    b = smooth((f - (t.real_out[0] - 8)) / 30.0)
+    w = window_at(t, f)
+    if w is None or w[4] <= 0:
+        return 0.0
+    a = smooth((f - w[1]) / 34.0)
+    b = smooth((f - (w[2] - 8)) / 30.0)
     return clamp(a - b)
 
 
@@ -833,12 +857,13 @@ def build_real(seg, mode="render", *frames):
     K, EV = SD.load_keys(seg)
     t = T(EV)
     camj = json.loads((W / "cam.json").read_text(encoding="utf-8"))["frames"]
-    f0, f1 = t.real_in[0] - 2, t.real_out[1] + 1
+    WS = [(w[0] - 2, w[3] + 1, w[4]) for w in windows(t)]
+    f0, f1 = WS[0][0], WS[-1][1]
     bpy.ops.wm.read_factory_settings(use_empty=True)
     sc = bpy.context.scene
     SD.gpu(sc)
     sc.render.engine = "CYCLES"
-    sc.cycles.samples = 64                                             # 半透明壳 24 采样有颗粒；只渲 97 帧
+    sc.cycles.samples = 64                                             # 半透明壳 24 采样有颗粒；只渲叠化那几秒
     sc.cycles.use_denoising = True
     sc.render.resolution_x, sc.render.resolution_y, sc.render.resolution_percentage = SD.OUT_W, SD.OUT_H, 100
     sc.render.fps = SD.FPS
@@ -863,6 +888,10 @@ def build_real(seg, mode="render", *frames):
     me = bpy.data.meshes.new("cdk20_surface")
     me.from_pydata([tuple(v * A) for v in npz["verts"].astype(float)], [], [tuple(q) for q in npz["quads"].tolist()])
     me.update()
+    dpk = np.linalg.norm(npz["verts"].astype(float) - pocket[None, :], axis=1)
+    pk_w = np.clip((POCKET_HL_R - dpk) / 3.0, 0.0, 1.0)                  # 口袋中心 POCKET_HL_R Å 以内染珊瑚红（11-21 Gemini 必改：标出口袋）
+    at_pk = me.attributes.new("pocket_w", "FLOAT", "POINT")
+    at_pk.data.foreach_set("value", pk_w.astype(np.float32).tolist())
     surf = bpy.data.objects.new("cdk20_surface", me)
     sc.collection.objects.link(surf)
     me.shade_smooth()
@@ -878,7 +907,26 @@ def build_real(seg, mode="render", *frames):
     mr = nt.nodes.new("ShaderNodeMapRange")
     mr.inputs["To Min"].default_value, mr.inputs["To Max"].default_value = 0.05, 0.55
     nt.links.new(lw.outputs["Facing"], mr.inputs["Value"])
-    nt.links.new(mr.outputs["Result"], b.inputs["Alpha"])
+    atn = nt.nodes.new("ShaderNodeAttribute")                         # 口袋高亮：底色、透明度按 pocket_w 混到珊瑚红，略发光（同 5-04）
+    atn.attribute_name = "pocket_w"
+    mixc = nt.nodes.new("ShaderNodeMix")
+    mixc.data_type = "RGBA"
+    mixc.inputs["A"].default_value = (0.70, 0.80, 0.95, 1)
+    mixc.inputs["B"].default_value = (0.95, 0.26, 0.18, 1)
+    nt.links.new(atn.outputs["Fac"], mixc.inputs["Factor"])
+    nt.links.new(mixc.outputs["Result"], b.inputs["Base Color"])
+    b.inputs["Emission Color"].default_value = (0.95, 0.20, 0.12, 1)
+    emm = nt.nodes.new("ShaderNodeMath")
+    emm.operation = "MULTIPLY"
+    emm.inputs[1].default_value = 0.35
+    nt.links.new(atn.outputs["Fac"], emm.inputs[0])
+    nt.links.new(emm.outputs["Value"], b.inputs["Emission Strength"])
+    amx = nt.nodes.new("ShaderNodeMix")
+    amx.data_type = "FLOAT"
+    amx.inputs["B"].default_value = 0.62
+    nt.links.new(atn.outputs["Fac"], amx.inputs["Factor"])
+    nt.links.new(mr.outputs["Result"], amx.inputs["A"])
+    nt.links.new(amx.outputs["Result"], b.inputs["Alpha"])
     surf.data.materials.append(ms)
 
     # 主链管子：按 pLDDT 分段（相邻两段共用一个点，管子不断）
@@ -947,20 +995,21 @@ def build_real(seg, mode="render", *frames):
     fpx = lens / 36.0 * SD.OUT_W
     cam.rotation_mode = "QUATERNION"
     log = []
-    for f in range(f0, f1 + 1):
+    for f in [f_ for a_, b_, _ in WS for f_ in range(a_, b_ + 1)]:
         r = camj[f]["ring"]
         if not r:
             continue
         cx, cy, rp = r
         D0 = R_POCKET * fpx / max(rp, 40.0) * A
         D = D0 * (1.0 + 0.75 * real_pull(t, f))                       # 站稳后退一点看全貌，退出前回到对位
-        u = (f - f0) / max(1, f1 - f0)
+        wa, wb, _ = next(w for w in WS if w[0] <= f <= w[1])
+        u = (f - wa) / max(1, wb - wa)
         q = (-d).to_track_quat("-Z", "Y") @ Quaternion((0, 0, 1), math.radians(-8.0 + 16.0 * u))     # 镜头看 −Z
         cam.location = P + d * D
         cam.rotation_quaternion = q
         cam_d.lens = lens
-        cam_d.shift_x = (cx - SD.OUT_W / 2) / SD.OUT_W
-        cam_d.shift_y = (SD.OUT_H / 2 - cy) / SD.OUT_W
+        cam_d.shift_x = (SD.OUT_W / 2 - cx) / SD.OUT_W                 # 11-21 改正号：shift_x 为正时轴上的点往左走（原来写反，口袋落在红环关于画面中心的镜像处）
+        cam_d.shift_y = (cy - SD.OUT_H / 2) / SD.OUT_W
         for path, ob in (("location", cam), ("rotation_quaternion", cam), ("lens", cam_d), ("shift_x", cam_d), ("shift_y", cam_d)):
             ob.keyframe_insert(path, frame=f)
         log.append(dict(f=f, D_A=round(D / A, 2), k=D0 / D, ring=[round(cx, 1), round(cy, 1), round(rp, 1)]))
@@ -977,16 +1026,59 @@ def build_real(seg, mode="render", *frames):
             bpy.ops.render.render(write_still=True)
             print("DRILL real still", f, flush=True)
         return
-    SD.render_range(W / "real.blend", W / "real", f0, f1, prefix="r_")
+    for a_, b_, _ in WS:
+        if os.environ.get("REAL_F0"):                                   # 返修几帧：REAL_F0=… REAL_F1=… DRILL_OVERWRITE=1
+            a_, b_ = max(a_, int(os.environ["REAL_F0"])), min(b_, int(os.environ["REAL_F1"]))
+            if a_ > b_:
+                continue
+        SD.render_range(W / "real.blend", W / "real", a_, b_, prefix="r_")
 
 
 # ================================================================ 合成：叠化到真实层、墨线圈、出处行、标签
 SRC_TOY = "Illustration (our toy model) · CDK20 case: Ren et al. 2023"
-SRC_REAL = "Structure: AlphaFold DB AF-Q8IZL9-F1 (CDK20), predicted · CC BY 4.0"
-LABEL_REAL = "predicted model (AlphaFold DB)"
+SRC_REAL = "CDK20: AlphaFold DB AF-Q8IZL9-F1 (predicted, CC BY 4.0)"
 INK_RED = (232, 25, 15)
-OUT_DIR = SD.ROOT / "导演检查_20261120"
-OUT_MP4 = OUT_DIR / "13_节点2_3-04.mp4"
+INK_NOTE = (255, 66, 48)                                             # 手写批注：比墨线圈的红亮一档，深色真实层上也醒目（11-21 Gemini 第二轮）
+NOTE_STROKE = (5, (255, 250, 244))
+SRC_SIZE, SRC_XY, PLATE = 30, (96, 1046), ((14, 16, 24), 0.66, 12, 8)   # 11-21 Gemini 必改：出处行 Instrument Serif、放大、深色底衬（同 5-04）
+NOTE_PROTEIN = "CDK20, a protein"
+NOTE_ATP = "ATP binds here"
+POCKET_HL_R = 9.0
+OUT_DIR = SD.ROOT / "导演检查_20261121"
+OUT_MP4 = OUT_DIR / "16_钻取_3-04.mp4"
+
+
+def ink_arrow(p0, p1, bend, k, width=5.0, color=INK_RED, alpha=1.0):
+    """手画箭头：二次曲线从 p0 写到 p1（k = 写到哪，0–1），最后 12% 长出箭头；底下垫一道白，花背景上也看得清。"""
+    from PIL import Image, ImageDraw
+    s = 2
+    lay = Image.new("RGBA", (SD.OUT_W * s, SD.OUT_H * s), (0, 0, 0, 0))
+    dr = ImageDraw.Draw(lay)
+    (x0, y0), (x1, y1) = p0, p1
+    mx, my = (x0 + x1) / 2, (y0 + y1) / 2
+    nx, ny = -(y1 - y0), (x1 - x0)
+    cxp, cyp = mx + nx * bend, my + ny * bend
+    n = 48
+    m = max(2, int(n * clamp(k)))
+    pts = []
+    for i in range(m + 1):
+        u = i / n
+        pts.append(((1 - u) ** 2 * x0 + 2 * (1 - u) * u * cxp + u * u * x1, (1 - u) ** 2 * y0 + 2 * (1 - u) * u * cyp + u * u * y1))
+    P = [(x * s, y * s) for x, y in pts]
+    for wd, col, aa in ((width + 5, (255, 250, 244), 0.55), (width, color, 1.0)):
+        dr.line(P, fill=(*col, int(255 * alpha * aa)), width=int(wd * s), joint="curve")
+    kh = clamp((k - 0.88) / 0.12)
+    if kh > 0 and len(pts) > 2:
+        ex, ey = pts[-1]
+        px, py = pts[-3]
+        ang = math.atan2(ey - py, ex - px)
+        L = 26 * kh
+        for sgn in (-1, 1):
+            a2 = ang + math.pi + sgn * 0.5
+            q = (ex + L * math.cos(a2), ey + L * math.sin(a2))
+            for wd, col, aa in ((width + 5, (255, 250, 244), 0.55), (width, color, 1.0)):
+                dr.line([(ex * s, ey * s), (q[0] * s, q[1] * s)], fill=(*col, int(255 * alpha * aa)), width=int(wd * s))
+    return lay.resize((SD.OUT_W, SD.OUT_H), Image.LANCZOS)
 
 
 def _lum_box(a, box):
@@ -996,7 +1088,11 @@ def _lum_box(a, box):
 
 
 def comp_frames(seg, flist=None):
-    """生成合成后的帧（uint8 RGB）。flist=None 时全段。"""
+    """生成合成后的帧（uint8 RGB）。flist=None 时全段。真实层两段（windows）：
+    第一段 enzyme / a protein：蛋白全貌，口袋染红、墨线圈对在盒上红环，手写 "CDK20, a protein"；
+    第二段 where ... ATP：钻进孔口，口袋墨线圈 + "pocket"，molecule 上手写 "ATP binds here" 和箭头指进口袋，
+    收回红环时黄色 ATP 插头正好落地（ATP 这个词），手写留到通电后再淡出。
+    11-21 Gemini 必改：出处行一律 Instrument Serif、30 号、深色底衬；左上角重复的模型标签删掉。"""
     import numpy as np
     from PIL import Image, ImageFilter
     W = SD.work(seg)
@@ -1004,19 +1100,8 @@ def comp_frames(seg, flist=None):
     t = T(EV)
     NF = K["len_f"]
     camj = json.loads((W / "cam.json").read_text(encoding="utf-8"))["frames"]
-    ri0, ri1, ro0, ro1 = t.real_in[0], t.real_in[1], t.real_out[0], t.real_out[1]
     rk = {c['f']: c['k'] for c in json.loads((W / 'real_cam.json').read_text(encoding='utf-8'))['cam']} if (W / 'real_cam.json').exists() else {}
-    # 出处行底下的亮度 → 字色（先全段量一遍、平滑，免得闪）
-    lum_p = W / "src_lum.json"
-    if lum_p.exists() and len(json.loads(lum_p.read_text())) == NF:
-        lum = json.loads(lum_p.read_text())
-    else:
-        lum = []
-        for f in range(NF):
-            im = Image.open(W / "frames" / f"f_{f:04d}.png").convert("RGB").reduce(4)
-            lum.append(_lum_box(np.asarray(im), (16, 250, 260, 270)))
-        lum_p.write_text(json.dumps(lum))
-    sm = [sum(lum[max(0, f - 20):f + 21]) / len(lum[max(0, f - 20):f + 21]) for f in range(NF)]
+    WIN = windows(t)
     yy, xx = np.mgrid[0:SD.OUT_H, 0:SD.OUT_W].astype(np.float32)
     for f in (flist if flist is not None else range(NF)):
         img = np.asarray(Image.open(W / "frames" / f"f_{f:04d}.png").convert("RGB")).astype(np.float32) / 255
@@ -1024,7 +1109,9 @@ def comp_frames(seg, flist=None):
         a_real = 0.0
         ring = camj[f]["ring"]
         rp = W / "real" / f"r_{f:04d}.png"
-        if ri0 <= f <= ro1 and ring and rp.exists():
+        w = next((w_ for w_ in WIN if w_[0] <= f <= w_[3]), None)
+        if w and ring and rp.exists():
+            ri0, ri1, ro0, ro1 = w[:4]
             rl = np.asarray(Image.open(rp).convert("RGBA")).astype(np.float32) / 255
             cx, cy, r = ring
             dist = np.hypot(xx - cx, yy - cy)
@@ -1043,29 +1130,57 @@ def comp_frames(seg, flist=None):
             real = rl[..., :3] * rl[..., 3:4] + bg * (1 - rl[..., 3:4])
             out = img * (1 - mask[..., None]) + real * mask[..., None]
         pil = Image.fromarray((np.clip(out, 0, 1) * 255).astype(np.uint8)).convert("RGBA")
-        if ring and ri0 <= f <= ro1 and a_real > 0:                      # 墨线圈 + "pocket" + 模型标签（真实层站稳以后）
+        if ring and w and a_real > 0:                                    # 口袋墨线圈（真实层站稳以后）
+            ri0, ri1, ro0, ro1 = w[:4]
             k = ramp(f, ri1 - 10, ri1 + 8) * (1 - ramp(f, ro0 - 8, ro0 + 6))
+            cx, cy, r = ring
+            r = r * rk.get(f, 1.0)
             if k > 0.003:
-                cx, cy, r = ring
-                r = r * rk.get(f, 1.0)                                    # 真实层往后退时，口袋在画面上变小，圈跟着
                 rot = 0.35 * (f - ri0)
-                pil = Image.alpha_composite(pil, SD.dashed_circle(cx, cy, r * 0.98, 9.0, (255, 250, 244), 0.55 * k, rot=rot))   # 白底衬，花背景上也看得清
+                pil = Image.alpha_composite(pil, SD.dashed_circle(cx, cy, r * 0.98, 9.0, (255, 250, 244), 0.55 * k, rot=rot))
                 pil = Image.alpha_composite(pil, SD.dashed_circle(cx, cy, r * 0.98, 5.0, INK_RED, 1.0 * k, rot=rot))
-                items = [dict(text="pocket", xy=(cx + r * 0.74, cy - r * 0.78), size=78, color=INK_RED, hand=True, anchor="ls",
-                              stroke=(3, (255, 250, 244)), shadow=False)]
+            if w is WIN[1] and k > 0.003:
+                items = [dict(text="pocket", xy=(cx + r * 0.74, cy - r * 0.78), size=78, color=INK_NOTE, hand=True, anchor="ls",
+                              stroke=NOTE_STROKE, shadow=False)]
                 pil = Image.alpha_composite(pil, SD.draw_text_layer(items, lambda it: k))
-            kl = ramp(f, ri1 - 16, ri1 + 4) * (1 - ramp(f, ro0 - 2, ro0 + 14))
-            if kl > 0.003:
-                items = [dict(text=LABEL_REAL, xy=(96, 132), size=46, color=(240, 238, 232), anchor="ls", halo=(18, 20, 34))]
-                pil = Image.alpha_composite(pil, SD.draw_text_layer(items, lambda it: kl))
+        # 手写 "CDK20, a protein"：protein 这个词落下，写在口袋圈左边；随第一段真实层收回淡出
+        if ring:
+            kn = ramp(f, t.note_protein[0], t.note_protein[1], ease_out) * (1 - ramp(f, t.real0_out[0] - 4, t.real0_out[0] + 12))
+            if kn > 0.003:
+                cx, cy, r = ring
+                tx, ty = cx - r - 250, cy - r * 0.2 - 14 * (1 - kn)       # 放在蛋白左边的空处（蛋白主要在口袋右下），细箭头指到墨线圈
+                items = [dict(text=NOTE_PROTEIN, xy=(tx, ty), size=74, color=INK_NOTE, hand=True, anchor="rs",
+                              stroke=NOTE_STROKE, shadow=False)]
+                pil = Image.alpha_composite(pil, SD.draw_text_layer(items, lambda it: kn))
+                ke = clamp((f - t.note_protein[0] - 6) / 16.0)
+                if ke > 0:
+                    a_ = math.radians(195)
+                    pil = Image.alpha_composite(pil, ink_arrow((tx + 14, ty - 22), (cx + r * 1.08 * math.cos(a_), cy + r * 1.08 * math.sin(a_)), 0.12,
+                                                              ease_out(ke), width=4.0, color=INK_NOTE, alpha=kn))
+        # 手写 "ATP binds here" + 箭头：ATP 这个词上写（Gemini 第三轮：原来在 molecule 上，字比声音早 1 秒），箭头指进插孔，黄插头落地同拍
+        if ring:
+            ka = ramp(f, t.note_atp[0], t.note_atp[1], ease_out) * (1 - ramp(f, t.enter[0] - 14, t.enter[0] + 4))   # 11-21：ATP 这个词上写，048 插头进场前淡出
+            if ka > 0.003:
+                cx, cy, r = ring
+                r = r * rk.get(f, 1.0)
+                tx, ty = cx - r * 1.05 - 330, cy + r * 0.9 + 70                  # 放到蛋白左下外面的空处，箭头拉长指进口袋
+                tx, ty = max(tx, 260.0), min(ty, SD.OUT_H - 130.0)
+                items = [dict(text=NOTE_ATP, xy=(tx, ty), size=74, color=INK_NOTE, hand=True, anchor="ms",
+                              stroke=NOTE_STROKE, shadow=False)]
+                pil = Image.alpha_composite(pil, SD.draw_text_layer(items, lambda it: clamp(ka * 1.6)))
+                ke = clamp((f - t.note_atp[0] - 8) / (t.note_atp[1] - t.note_atp[0]))
+                p0 = (tx + 150, ty - 52)
+                ang = math.radians(135)
+                p1 = (cx + r * 0.82 * math.cos(ang), cy + r * 0.82 * math.sin(ang))
+                if ke > 0:
+                    pil = Image.alpha_composite(pil, ink_arrow(p0, p1, -0.18, ease_out(ke), width=4.0, color=INK_NOTE, alpha=clamp(ka * 1.6)))
         # 出处行：玩具一行 / 真实一行（叠化时交换）；段首随 T5 淡入，甩镜时淡出
         base_a = ramp(f, 10, 30) * (1 - ramp(f, t.whip[0] - 4, t.whip[0] + 4))
-        dark = sm[f] > 0.55 and a_real < 0.5
-        col = (84, 84, 88) if dark else (236, 234, 228)
-        it_t = dict(text=SRC_TOY, xy=(96, 1046), size=24, color=col, anchor="ls", sans=True, halo=(242, 240, 235) if dark else (18, 20, 34))
-        it_r = dict(text=SRC_REAL, xy=(96, 1046), size=24, color=(236, 234, 228), anchor="ls", sans=True, halo=(18, 20, 34))
-        lay = SD.draw_text_layer([it_t, it_r], lambda it: base_a * (clamp(1 - 2 * a_real) if it is it_t else clamp(2 * a_real - 1)))   # 先淡出一行再淡入另一行，不叠字
-        pil = Image.alpha_composite(pil, lay)
+        it_t = dict(text=SRC_TOY, xy=SRC_XY, size=SRC_SIZE, color=(240, 238, 232), anchor="ls", shadow=False, plate=PLATE)
+        it_r = dict(text=SRC_REAL, xy=SRC_XY, size=SRC_SIZE, color=(240, 238, 232), anchor="ls", shadow=False, plate=PLATE)
+        for it_, a_ in ((it_t, clamp(1 - 2 * a_real)), (it_r, clamp(2 * a_real - 1))):   # 两行各画一层（先淡出一行再淡入另一行，不叠字）
+            if base_a * a_ > 0.003:
+                pil = Image.alpha_composite(pil, SD.draw_text_layer([it_], lambda it, _a=a_: base_a * _a))
         yield f, np.asarray(pil.convert("RGB"))
 
 
@@ -1121,6 +1236,8 @@ def audio(seg):
         hits.append((f, tick(10 + k), pan(f)))
     hits += [(t.clamp[1], snap(20, 0.24), pan(t.clamp[1])), (t.open2[1], thunk(21, 0.12), pan(t.open2[1])), (t.stop, thunk(22, 0.22), pan(t.stop)),
              (0, SD.whoosh(0.28, 0.12, 30, f0=500, f1=3000), 0.65),
+             (t.real0_in[0] - 4, SD.whoosh(0.6, 0.07, 32, f0=250, f1=1800), 0.6),               # 11-21：蛋白全貌进出各一道轻风声
+             (t.real0_out[0], SD.whoosh(0.5, 0.06, 33, f0=1800, f1=300), 0.6),
              (t.whip[0] - 4, SD.whoosh((t.whip[1] - t.whip[0] + 18) / SD.FPS, 0.22, 31), 0.3)]
     SD.mix_audio(seg, hits, W / "mix.wav")
     (W / "audio_hits.json").write_text(json.dumps([[h[0], round(h[2], 2)] for h in hits]), encoding="utf-8")
@@ -1187,9 +1304,8 @@ def sheet(seg, step="6"):
             im.paste(Image.fromarray(fr[i]), (x, y))
             dr.rectangle([x, y, x + 58, y + 22], fill=(0, 0, 0))
             dr.text((x + 4, y + 2), str(i), font=fnt, fill=(255, 255, 255))
-        name = f"13_节点2_抽帧_{len(pages) + 1:02d}.jpg"
+        name = f"16_钻取_3-04_抽帧_{len(pages) + 1:02d}.jpg"
         im.save(SD.work(seg) / name, quality=86)
-        im.save(OUT_DIR / name, quality=86)
         pages.append(name)
     (SD.work(seg) / "sheets.json").write_text(json.dumps(dict(step=step, pages=pages, frames=idx)), encoding="utf-8")
     print("DRILL sheet", pages, flush=True)
