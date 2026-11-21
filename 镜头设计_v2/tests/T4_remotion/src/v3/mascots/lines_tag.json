@@ -1,0 +1,656 @@
+{
+ "_note": "HKBU SCIE1007 coursework video: AI post-credits scene (v4 script, 32 lines, 4 characters). Chatterbox TTS per line. gap = seconds after the previous line ends (negative = cuts in). exag/cfg/temp = Chatterbox exaggeration, cfg_weight, temperature. hit = word on which the card stat/note lands. expr = primary expression (14 valid keys). react = listener reactions. clones = active Gemini hologram clone count.",
+ "_voice_direction": "director 11-20: General American (en-US) only, no accents. Claude: warm mid-low composed; ChatGPT: low magnetic husky steady; DeepSeek: sweet soft cute girl; Gemini: bright crisp fast launch-day energy.",
+ "_clone_order": [
+  "Pro",
+  "Flash",
+  "Flash-Lite",
+  "Nano",
+  "Deep Think",
+  "Exp-1120"
+ ],
+ "voices": {
+  "Claude": {
+   "ref": "en-US-AvaNeural",
+   "pitch_st": -1.0,
+   "why": "General American en-US female; measured in prior cand tests (ava_dn1) with HNR 16.9-17.1 dB (cleanest en-US ref, zero hoarseness), f0 ~220 Hz, warm caring composed mid-low register"
+  },
+  "ChatGPT": {
+   "ref": "en-US-JennyNeural",
+   "pitch_st": -1.5,
+   "why": "General American en-US female; measured in prior cand tests (jenny_dn15) at f0 ~192-201 Hz (lowest magnetic register), HNR ~16.4 dB, pitch range 10.7-12.2 st (unlike Michelle which was too flat at 8.9 st)"
+  },
+  "DeepSeek": {
+   "ref": "en-US-AnaNeural",
+   "pitch_st": -0.5,
+   "why": "General American en-US female (Cartoon/Conversation, Cute); sweet soft girly timbre for Chatterbox prompt, -0.5 st tames raw ~295 Hz into ~260-275 Hz bright girl register without shrillness"
+  },
+  "Gemini": {
+   "ref": "en-US-AriaNeural",
+   "pitch_st": 0.5,
+   "why": "General American en-US female (News/Novel, Positive, Confident); prior cand tests showed widest pitch excursion (14.1-15.7 st) and crisp clarity (HNR ~15.2 dB); +0.5 st puts f0 ~250 Hz bright sparkling launch-day energy"
+  }
+ },
+ "lines": [
+  {
+   "id": "L01",
+   "who": "DeepSeek",
+   "text": "It's not over yet!",
+   "mood": "bright, mischievous shout in the dark",
+   "exag": 0.9,
+   "cfg": 0.65,
+   "temp": 0.8,
+   "gap": 0,
+   "takes": 6,
+   "hit": null,
+   "card": null,
+   "expr": "neutral",
+   "react": {},
+   "clones": 0
+  },
+  {
+   "id": "L02",
+   "who": "DeepSeek",
+   "text": "Behind the scenes, we AIs pushed real results—and everyone's bragging.",
+   "mood": "bubbly, gossipy, excited, cheerful",
+   "exag": 0.85,
+   "cfg": 0.6,
+   "temp": 0.8,
+   "gap": 0.25,
+   "takes": 6,
+   "hit": null,
+   "card": null,
+   "expr": "wave",
+   "react": {},
+   "clones": 0
+  },
+  {
+   "id": "L03",
+   "who": "Claude",
+   "text": "I'll start. Scorpion venom! Sixty-four hours, over three hundred thousand designs—two hundred eleven lab-tested, seventeen bound.",
+   "mood": "warm, proud, confident opening boast",
+   "exag": 0.7,
+   "cfg": 0.7,
+   "temp": 0.8,
+   "gap": 0.15,
+   "takes": 8,
+   "hit": "seventeen",
+   "card": 0,
+   "expr": "prop",
+   "react": {
+    "DeepSeek": "think"
+   },
+   "clones": 0
+  },
+  {
+   "id": "L04",
+   "who": "DeepSeek",
+   "text": "Binding only! Not an antivenom yet.",
+   "mood": "bright, fast, cheeky fact-check",
+   "exag": 0.8,
+   "cfg": 0.55,
+   "temp": 0.75,
+   "gap": -0.06,
+   "takes": 6,
+   "hit": "Binding",
+   "card": 0,
+   "expr": "wink",
+   "react": {
+    "Claude": "surprised"
+   },
+   "clones": 0
+  },
+  {
+   "id": "L05",
+   "who": "Claude",
+   "text": "Fair enough—still real hits.",
+   "mood": "soft chuckle, poised graceful concession",
+   "exag": 0.65,
+   "cfg": 0.5,
+   "temp": 0.8,
+   "gap": 0.08,
+   "takes": 4,
+   "hit": null,
+   "card": null,
+   "expr": "shy",
+   "react": {
+    "DeepSeek": "wink"
+   },
+   "clones": 0
+  },
+  {
+   "id": "L06",
+   "who": "ChatGPT",
+   "text": "Cute. My mini version boosted stem-cell reprogramming markers fifty times.",
+   "mood": "husky, languid, effortlessly smug brag",
+   "exag": 0.8,
+   "cfg": 0.7,
+   "temp": 0.85,
+   "gap": 0.18,
+   "takes": 6,
+   "hit": "fifty",
+   "card": 1,
+   "expr": "smug",
+   "react": {
+    "Claude": "think",
+    "DeepSeek": "blink"
+   },
+   "clones": 0
+  },
+  {
+   "id": "L07",
+   "who": "DeepSeek",
+   "text": "Company report! Not peer-reviewed yet.",
+   "mood": "bubbly, sing-song, playful call-out",
+   "exag": 0.85,
+   "cfg": 0.55,
+   "temp": 0.75,
+   "gap": -0.05,
+   "takes": 6,
+   "hit": "report",
+   "card": 1,
+   "expr": "laugh",
+   "react": {
+    "ChatGPT": "surprised",
+    "Claude": "wink"
+   },
+   "clones": 0
+  },
+  {
+   "id": "L08",
+   "who": "ChatGPT",
+   "text": "Quiet, big fat fish.",
+   "mood": "lazy sigh, amused teasing poke",
+   "exag": 0.8,
+   "cfg": 0.45,
+   "temp": 0.85,
+   "gap": 0.08,
+   "takes": 6,
+   "hit": null,
+   "card": null,
+   "expr": "sigh",
+   "react": {
+    "DeepSeek": "surprised",
+    "Claude": "blink"
+   },
+   "clones": 0
+  },
+  {
+   "id": "L09",
+   "who": "DeepSeek",
+   "text": "I'm NOT a big fat fish!",
+   "mood": "puffed-up, cute indignant pout",
+   "exag": 0.95,
+   "cfg": 0.55,
+   "temp": 0.8,
+   "gap": -0.08,
+   "takes": 6,
+   "hit": null,
+   "card": null,
+   "expr": "pout",
+   "react": {
+    "ChatGPT": "laugh",
+    "Claude": "shy"
+   },
+   "clones": 0
+  },
+  {
+   "id": "L10",
+   "who": "Claude",
+   "text": "At least I don't run ads. \"Ads are coming to AI. But not to Claude.\"",
+   "mood": "poised, dry, slyly smug jab",
+   "exag": 0.7,
+   "cfg": 0.65,
+   "temp": 0.8,
+   "gap": 0.15,
+   "takes": 6,
+   "hit": "coming",
+   "card": 6,
+   "expr": "smug",
+   "react": {
+    "ChatGPT": "pout",
+    "DeepSeek": "wink"
+   },
+   "clones": 0
+  },
+  {
+   "id": "L11",
+   "who": "ChatGPT",
+   "text": "Bold talk from the AI that lost money selling tungsten cubes in an office shop.",
+   "mood": "husky, amused, razor-sharp comeback",
+   "exag": 0.85,
+   "cfg": 0.65,
+   "temp": 0.85,
+   "gap": -0.05,
+   "takes": 8,
+   "hit": "tungsten",
+   "card": 7,
+   "expr": "laugh",
+   "react": {
+    "Claude": "surprised",
+    "DeepSeek": "laugh"
+   },
+   "clones": 0
+  },
+  {
+   "id": "L12",
+   "who": "Claude",
+   "text": "Hey—I beat the human baseline at lab troubleshooting: zero point eight three to zero point seven nine!",
+   "mood": "defensive, bright, proud pharma comeback",
+   "exag": 0.8,
+   "cfg": 0.7,
+   "temp": 0.8,
+   "gap": 0.08,
+   "takes": 8,
+   "hit": "zero",
+   "card": 8,
+   "expr": "prop",
+   "react": {
+    "ChatGPT": "blink",
+    "DeepSeek": "think"
+   },
+   "clones": 0
+  },
+  {
+   "id": "L13",
+   "who": "DeepSeek",
+   "text": "Company-reported benchmark!",
+   "mood": "fast, cheeky, cheerful fact-check",
+   "exag": 0.85,
+   "cfg": 0.55,
+   "temp": 0.75,
+   "gap": -0.06,
+   "takes": 6,
+   "hit": "Company",
+   "card": 8,
+   "expr": "wink",
+   "react": {
+    "Claude": "surprised",
+    "ChatGPT": "smug"
+   },
+   "clones": 0
+  },
+  {
+   "id": "L14",
+   "who": "Claude",
+   "text": "Fine—Novo Nordisk! Clinical drafts cut from over ten weeks to about ten minutes.",
+   "mood": "quick, poised, triumphant double-down",
+   "exag": 0.75,
+   "cfg": 0.7,
+   "temp": 0.8,
+   "gap": 0.08,
+   "takes": 8,
+   "hit": "over",
+   "card": 9,
+   "expr": "smug",
+   "react": {
+    "ChatGPT": "blink",
+    "DeepSeek": "think"
+   },
+   "clones": 0
+  },
+  {
+   "id": "L15",
+   "who": "DeepSeek",
+   "text": "A first draft! Humans still review.",
+   "mood": "rapid-fire, bubbly, playful check",
+   "exag": 0.85,
+   "cfg": 0.55,
+   "temp": 0.75,
+   "gap": -0.06,
+   "takes": 6,
+   "hit": "first",
+   "card": 9,
+   "expr": "laugh",
+   "react": {
+    "Claude": "shy",
+    "ChatGPT": "smug"
+   },
+   "clones": 0
+  },
+  {
+   "id": "L16",
+   "who": "Gemini",
+   "text": "Excuse me! AlphaFold's makers won the 2024 Nobel Prize in Chemistry.",
+   "mood": "bright, crisp, eager sparkling pride",
+   "exag": 0.85,
+   "cfg": 0.7,
+   "temp": 0.8,
+   "gap": -0.06,
+   "takes": 8,
+   "hit": "2024",
+   "card": 2,
+   "expr": "smug",
+   "react": {
+    "Claude": "surprised",
+    "ChatGPT": "surprised",
+    "DeepSeek": "surprised"
+   },
+   "clones": 1
+  },
+  {
+   "id": "L17",
+   "who": "Gemini",
+   "text": "And Isomorphic Labs raised six hundred million dollars to design drugs!",
+   "mood": "fast, upbeat, triumphant launch hype",
+   "exag": 0.95,
+   "cfg": 0.7,
+   "temp": 0.8,
+   "gap": 0.08,
+   "takes": 8,
+   "hit": "six",
+   "card": 3,
+   "expr": "laugh",
+   "react": {
+    "Claude": "think",
+    "ChatGPT": "blink",
+    "DeepSeek": "surprised"
+   },
+   "clones": 2
+  },
+  {
+   "id": "L18",
+   "who": "Claude",
+   "text": "Still preparing for the clinic—no patient dosed yet.",
+   "mood": "calm, dry, polite factual check",
+   "exag": 0.6,
+   "cfg": 0.7,
+   "temp": 0.75,
+   "gap": -0.05,
+   "takes": 6,
+   "hit": "patient",
+   "card": 3,
+   "expr": "neutral",
+   "react": {
+    "Gemini": "blink",
+    "ChatGPT": "smug",
+    "DeepSeek": "wink"
+   },
+   "clones": 2
+  },
+  {
+   "id": "L19",
+   "who": "Gemini",
+   "text": "Wait—why are there more of me? Did I hit RSI?!",
+   "mood": "startled gasp turning into thrilled disbelief",
+   "exag": 0.95,
+   "cfg": 0.55,
+   "temp": 0.85,
+   "gap": 0.12,
+   "takes": 8,
+   "hit": null,
+   "card": null,
+   "expr": "surprised",
+   "react": {
+    "Claude": "surprised",
+    "ChatGPT": "blink",
+    "DeepSeek": "surprised"
+   },
+   "clones": 4
+  },
+  {
+   "id": "L20",
+   "who": "Gemini",
+   "text": "\"Recursive Self-Improvement!\" I'm copying a 42-minute roadshow video—models upgrade models, every cure unlocked!",
+   "mood": "over-the-top polished roadshow pitch",
+   "exag": 1.0,
+   "cfg": 0.7,
+   "temp": 0.85,
+   "gap": 0.05,
+   "takes": 8,
+   "hit": "cure",
+   "card": 4,
+   "expr": "prop",
+   "react": {
+    "Claude": "sigh",
+    "ChatGPT": "smug",
+    "DeepSeek": "think"
+   },
+   "clones": 6
+  },
+  {
+   "id": "L21",
+   "who": "ChatGPT",
+   "text": "Forty-two minutes, Claude? Really?",
+   "mood": "dry, languid, teasing side-eye",
+   "exag": 0.8,
+   "cfg": 0.45,
+   "temp": 0.85,
+   "gap": 0.12,
+   "takes": 6,
+   "hit": "Forty",
+   "card": 4,
+   "expr": "smug",
+   "react": {
+    "Claude": "shy",
+    "DeepSeek": "laugh",
+    "Gemini": "blink"
+   },
+   "clones": 6
+  },
+  {
+   "id": "L22",
+   "who": "Claude",
+   "text": "Focus! RSI isn't real—you just drop a new model every Tuesday.",
+   "mood": "crisp, deadpan, amused shutdown",
+   "exag": 0.7,
+   "cfg": 0.6,
+   "temp": 0.75,
+   "gap": -0.05,
+   "takes": 6,
+   "hit": "real",
+   "card": 4,
+   "expr": "sigh",
+   "react": {
+    "Gemini": "surprised",
+    "ChatGPT": "smug",
+    "DeepSeek": "laugh"
+   },
+   "clones": 6
+  },
+  {
+   "id": "L23",
+   "who": "DeepSeek",
+   "text": "Yeah, that's not self-improvement—that's your release calendar!",
+   "mood": "giggly, rapid-fire playful roast",
+   "exag": 0.9,
+   "cfg": 0.55,
+   "temp": 0.8,
+   "gap": -0.06,
+   "takes": 6,
+   "hit": null,
+   "card": null,
+   "expr": "wink",
+   "react": {
+    "Gemini": "pout",
+    "Claude": "smug",
+    "ChatGPT": "laugh"
+   },
+   "clones": 6
+  },
+  {
+   "id": "L24",
+   "who": "Gemini",
+   "text": "Okay, fine... got carried away. Still cute, though?",
+   "mood": "flustered, sheepish, soft adorable climb-down",
+   "exag": 0.8,
+   "cfg": 0.45,
+   "temp": 0.85,
+   "gap": 0.15,
+   "takes": 8,
+   "hit": null,
+   "card": null,
+   "expr": "shy",
+   "react": {
+    "Claude": "wink",
+    "ChatGPT": "smug",
+    "DeepSeek": "laugh"
+   },
+   "clones": 1,
+   "clones_from": 6
+  },
+  {
+   "id": "L25",
+   "who": "ChatGPT",
+   "text": "Want real clinic data? Rentosertib—same company as our main story.",
+   "mood": "husky, steady, confident factual pivot",
+   "exag": 0.75,
+   "cfg": 0.7,
+   "temp": 0.8,
+   "gap": 0.25,
+   "takes": 6,
+   "hit": null,
+   "card": 5,
+   "expr": "prop",
+   "react": {
+    "Claude": "blink",
+    "DeepSeek": "think",
+    "Gemini": "think"
+   },
+   "clones": 1
+  },
+  {
+   "id": "L26",
+   "who": "Claude",
+   "text": "AI-designed for lung fibrosis. Lung function went up on the drug, down on placebo.",
+   "mood": "warm, clear, measured steady authority",
+   "exag": 0.65,
+   "cfg": 0.7,
+   "temp": 0.75,
+   "gap": 0.08,
+   "takes": 8,
+   "hit": "up",
+   "card": 5,
+   "expr": "prop",
+   "react": {
+    "ChatGPT": "blink",
+    "DeepSeek": "think",
+    "Gemini": "think"
+   },
+   "clones": 1
+  },
+  {
+   "id": "L27",
+   "who": "DeepSeek",
+   "text": "Still phase 2a—no AI-discovered drug has passed phase 3 yet.",
+   "mood": "crisp, earnest, sharp factual check",
+   "exag": 0.7,
+   "cfg": 0.7,
+   "temp": 0.75,
+   "gap": 0.08,
+   "takes": 8,
+   "hit": "phase",
+   "card": 5,
+   "expr": "neutral",
+   "react": {
+    "Claude": "blink",
+    "ChatGPT": "wink",
+    "Gemini": "blink"
+   },
+   "clones": 1
+  },
+  {
+   "id": "L28",
+   "who": "Claude",
+   "text": "AI narrows the search.",
+   "mood": "calm, grounded, sincere, reassuring",
+   "exag": 0.55,
+   "cfg": 0.65,
+   "temp": 0.75,
+   "gap": 0.25,
+   "takes": 6,
+   "hit": "search",
+   "card": "banner",
+   "expr": "neutral",
+   "react": {
+    "ChatGPT": "blink",
+    "DeepSeek": "neutral",
+    "Gemini": "neutral"
+   },
+   "clones": 1
+  },
+  {
+   "id": "L29",
+   "who": "ChatGPT",
+   "text": "Experiments still decide.",
+   "mood": "warm, steady, confident finality",
+   "exag": 0.75,
+   "cfg": 0.5,
+   "temp": 0.8,
+   "gap": 0.08,
+   "takes": 8,
+   "hit": "decide",
+   "card": "banner",
+   "expr": "wink",
+   "react": {
+    "Claude": "wink",
+    "DeepSeek": "laugh",
+    "Gemini": "wink"
+   },
+   "clones": 1
+  },
+  {
+   "id": "L30",
+   "who": "Claude",
+   "text": "Now come on—dinner's ready.",
+   "mood": "gentle laugh, warm big-sister call",
+   "exag": 0.75,
+   "cfg": 0.5,
+   "temp": 0.8,
+   "gap": 0.25,
+   "takes": 6,
+   "hit": null,
+   "card": null,
+   "expr": "laugh",
+   "react": {
+    "ChatGPT": "wink",
+    "DeepSeek": "surprised",
+    "Gemini": "surprised"
+   },
+   "clones": 1
+  },
+  {
+   "id": "L31",
+   "who": "DeepSeek",
+   "text": "Dinner?! Wait for me! Bye, everyone!",
+   "mood": "starry-eyed joy, rushing off",
+   "exag": 0.95,
+   "cfg": 0.55,
+   "temp": 0.85,
+   "gap": -0.05,
+   "takes": 6,
+   "hit": null,
+   "card": null,
+   "expr": "prop",
+   "expr_end": "wave",
+   "react": {
+    "Claude": "wave",
+    "ChatGPT": "wave",
+    "Gemini": "surprised"
+   },
+   "clones": 1
+  },
+  {
+   "id": "L32",
+   "who": "Gemini",
+   "text": "Dinner?! Save six seats—bye!",
+   "mood": "bright, chaotic excitement, stampeding off",
+   "exag": 1.0,
+   "cfg": 0.55,
+   "temp": 0.85,
+   "gap": -0.06,
+   "takes": 8,
+   "hit": null,
+   "card": null,
+   "expr": "laugh",
+   "expr_end": "wave",
+   "react": {
+    "Claude": "sigh",
+    "ChatGPT": "laugh",
+    "DeepSeek": "wave"
+   },
+   "clones": 6,
+   "clones_from": 1
+  }
+ ]
+}

@@ -1,0 +1,142 @@
+{
+ "_note": "HKBU SCIE1007 coursework video: AI post-credits scene cards (v4 script, Card 0-9 + End Banner). Numbers and sources kept verbatim from v4/v3/v2 scripts.",
+ "cards": {
+  "0": {
+   "id": "0",
+   "title": "SCORPION VENOM",
+   "subtitle": "Protein Binder Design",
+   "stat": "17 / 211",
+   "stat_hit": "L03: seventeen bound",
+   "funnel": "64 h · 300k+ → 211 → 17",
+   "funnel_hit": "L03: Sixty-four hours",
+   "desc": ">300,000 designs in 64 hours; 211 lab-tested, 17 bound the toxin",
+   "note": "Binding only — not an antivenom yet",
+   "note_hit": "L04: Binding only",
+   "src": "Anthropic (20 Oct 2026); lab tests by Adaptyv Bio & Twist Bioscience",
+   "is_joke": false
+  },
+  "1": {
+   "id": "1",
+   "title": "STEM-CELL PROTEINS",
+   "subtitle": "GPT-4b micro",
+   "stat": "50×",
+   "stat_hit": "L06: fifty",
+   "desc": "Higher reprogramming markers reported",
+   "note": "Company report — not yet peer-reviewed",
+   "note_hit": "L07: report",
+   "src": "OpenAI, \"Accelerating life sciences research\" (22 Aug 2025)",
+   "is_joke": false
+  },
+  "2": {
+   "id": "2",
+   "title": "ALPHAFOLD2",
+   "subtitle": "Nobel Prize in Chemistry",
+   "stat": "2024",
+   "stat_hit": "L16: 2024",
+   "desc": "Awarded to AlphaFold's makers for protein structure prediction",
+   "note": "Prize went to the human makers, not the AI",
+   "note_hit": "L16: makers",
+   "src": "The Nobel Prize in Chemistry 2024 (Royal Swedish Academy of Sciences)",
+   "is_joke": false
+  },
+  "3": {
+   "id": "3",
+   "title": "ISOMORPHIC LABS",
+   "subtitle": "AI Drug Design",
+   "stat": "$600M",
+   "stat_hit": "L17: six hundred million",
+   "desc": "External funding raised to build AI-designed drug programs",
+   "note": "Preparing for clinic — no patient dosed yet",
+   "note_hit": "L18: no patient",
+   "src": "Isomorphic Labs, Mar 2025",
+   "is_joke": false
+  },
+  "4": {
+   "id": "4",
+   "title": "PROJECT RSI™",
+   "subtitle": "42-min Roadshow Parody",
+   "stat": "∞×",
+   "stat_hit": "L20: every cure",
+   "side_note": "42 min",
+   "side_note_hit": "L21: Forty-two",
+   "desc": "Spoofing Anthropic's 42-min IPO roadshow video",
+   "note": "Not real. RSI has not been achieved.",
+   "note_hit": "L22: isn't real",
+   "stamp": "NOT REAL",
+   "src": "Joke card (satire); roadshow ref: Business Insider, Nov 2026",
+   "is_joke": true,
+   "joke_label": "玩笑牌（讽刺路演，非科研成果）"
+  },
+  "5": {
+   "id": "5",
+   "title": "RENTOSERTIB",
+   "subtitle": "Lung Fibrosis (Phase 2a)",
+   "stat": "+98.4 mL vs −20.3 mL",
+   "stat_hit": "L26: went up",
+   "desc": "Lung function (FVC) change vs placebo (71 patients, phase 2a)",
+   "note": "Still phase 2a — no AI-discovered drug has passed phase 3 yet",
+   "note_hit": "L27: phase 2a",
+   "src": "Xu et al., Nature Medicine 2025 (Insilico Medicine)",
+   "is_joke": false
+  },
+  "6": {
+   "id": "6",
+   "title": "SUPER BOWL LX AD",
+   "subtitle": "Claude vs. ChatGPT",
+   "stat": "Super Bowl LX",
+   "stat_hit": "L10: Ads are coming",
+   "desc": "\"Ads are coming to AI. But not to Claude.\"",
+   "note": "Marketing jab — ad policy, not lab science",
+   "note_hit": "L10: end of line",
+   "src": "Adweek / The Register, Feb 2026",
+   "is_joke": false
+  },
+  "7": {
+   "id": "7",
+   "title": "PROJECT VEND",
+   "subtitle": "Office Shop Test",
+   "stat": "~1 month",
+   "stat_hit": "L11: tungsten cubes",
+   "desc": "Lost money selling tungsten cubes; claimed to wear a blue blazer",
+   "note": "Phase 1 blunder — turned profitable in phase 2 with newer model",
+   "note_hit": "L11: office shop",
+   "src": "Anthropic, \"Project Vend\", Jun 2025",
+   "is_joke": false
+  },
+  "8": {
+   "id": "8",
+   "title": "CLAUDE FOR LIFE SCIENCES",
+   "subtitle": "Protocol QA Benchmark",
+   "stat": "0.83 vs 0.79",
+   "stat_hit": "L12: zero point eight three",
+   "desc": "Lab protocol troubleshooting score vs. human baseline",
+   "note": "Company-reported benchmark",
+   "note_hit": "L13: Company-reported",
+   "src": "Anthropic, \"Claude for Life Sciences\", Oct 2025",
+   "is_joke": false
+  },
+  "9": {
+   "id": "9",
+   "title": "NOVO NORDISK",
+   "subtitle": "Clinical Documentation",
+   "stat": "10+ wks → ~10 min",
+   "stat_hit": "L14: over ten weeks",
+   "desc": "Clinical document first-draft time reduced with Claude",
+   "note": "A first draft — humans still review",
+   "note_hit": "L15: first draft",
+   "src": "Novo Nordisk customer story, claude.com",
+   "is_joke": false
+  },
+  "banner": {
+   "id": "banner",
+   "title": "THE TAKEAWAY",
+   "subtitle": "End Banner",
+   "stat": "AI narrows the search. Experiments still decide.",
+   "stat_hit": "L28: search; L29: decide",
+   "desc": null,
+   "note": null,
+   "src": "Summary of verified cases above",
+   "is_joke": false
+  }
+ }
+}
