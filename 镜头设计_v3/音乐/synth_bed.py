@@ -1968,6 +1968,7 @@ DUCK_DB10 = 5.5                                    # 2.2 depth; calibrated so th
 ONCAM_DB = -1.5
 DUCK_W10 = dict(pad=1.0, arp=1.15, bass=0.65, perc=0.75, event=0.30)
 STEMS10 = ["pad", "arp", "bass", "perc", "event"]
+PERC_DB10 = 7.0                                    # drum stem make-up: v10 first render had the kit 15 dB under the bass (D1, "得有鼓点")
 CR = 1000                                          # control rate (Hz) for curves, ducking, activity
 VEL = dict(K=1.00, k=0.62, S=0.92, s=0.40, R=0.72, H=0.68, h=0.36, O=0.60, T=0.85, t=0.68)
 PCN = {"C": 0, "C#": 1, "Db": 1, "D": 2, "D#": 3, "Eb": 3, "E": 4, "F": 5, "F#": 6, "Gb": 6, "G": 7, "G#": 8, "Ab": 8,
@@ -2253,6 +2254,7 @@ class Plan10:
                     nt, no = sf.info(str(tp)).frames / 800, sf.info(v).frames / 800
                     if abs(nt - s["frames"]) <= 2 and abs(no - s["frames"]) > 2:
                         d["voice"], d["vsrc"] = str(tp), "map_trim (manifest pointed at the untrimmed take)"
+                        d["voice_orig"] = v
             elif s["kind"] != "MUSIC":
                 d["voice"], d["vsrc"] = ("film", str(ROOT / s["file"]) if not os.path.isabs(s["file"]) else s["file"]), "segment film audio"
             mg = (m2 if d["vsrc"] and d["vsrc"].startswith("map_trim") else m1).get(s["group"])
@@ -2460,6 +2462,15 @@ class Plan10:
         self.cut = Curve(1200.0)                                        # pad low-pass base
         self.gate = Curve(1.0)                                          # dry gate (input to the reverbs too): designed stops
         self.busfade = Curve(1.0)                                       # whole-bed fade after reverbs (W5 exit, tape stop tail)
+        self.percbus = Curve(1.0)                                       # drum-bus crescendo over each build's 2 bars (0 -> +4 dB)
+        for b2 in [b for b in self.bars if b.get("build", (None, ""))[1] == "bar_minus_2"]:
+            b1 = next(b for b in self.bars if b.get("build") == (b2["build"][0], "bar_minus_1"))
+            self.percbus.add(b2["t0"], b1["t1"], 1.0, db(4.0), "s")
+            self.percbus.add(b1["t1"] + 0.3, b1["t1"] + 0.31, db(4.0), 1.0)
+            for bb in (b2, b1):                                         # a build's tom fill plays even where the row has no toms
+                spec_ = self.builds[bb["build"][0]][bb["build"][1]]
+                if spec_.get("tom") or (spec_.get("same_as") and self.row_of[spec_["same_as"]].get("tom")):
+                    self.cv["tom"].add(bb["t0"] - 0.011, bb["t0"] - 0.01, 1, 1)
         rng = np.random.default_rng(1007)
         self.rng = rng
         # tape stop at 5-05 "turned." (1.3); events stop 0.35 s after it (the stop consumes 0.3 s of music)
@@ -2692,7 +2703,7 @@ class Plan10:
         cv["hh"].add(t19, t19 + 0.8, 0, 1, "ein")
         cv["rim"].add(t19, t19 + 0.01, 1, 1)
         wb0 = W["W1"]["t0"]
-        wbm6 = wb0 - 6 * BL_BEAT
+        wbm6 = wb0 - 3 * BL_BEAT                                          # pad/bass S-fade over the last 3 song beats (D3: a 6-beat fade sagged under the riser)
         for k in ("pad", "bass"):
             cv[k].add(wbm6, wb0, 1, 0, "s")
         self.cut.add(wbm6, wb0, 1200, 400, "log")
@@ -2753,13 +2764,18 @@ class Plan10:
         # 5-09: short riser 1.2 s up to the dry stop one beat before W4; then 1 empty beat; song slams in
         self.risers.append((self.t_w4stop, 1.2, 42, 3))
         self.gate.add(self.t_w4stop, self.t_w4stop + 0.005, 1, 0)
-        self.gate.add(W["W4"]["t1"], W["W4"]["t1"] + 0.005, 0, 1)
+        t_open = W["W4"]["t0"] + 14 * SAC_BEAT                          # gate reopens as W4's song starts fading (beat 14), so the
+        self.gate.add(t_open, t_open + 0.005, 0, 1)                     # 5-10 pad can fade in under the song's fade and throw (D3)
         # ---- 5-10: bed back on its first bar line, 2.0 s equal power (same 122.006 grid as the song)
         t510 = self._row_t("5-10")
-        for k in ("pad", "bass", "kick"):
+        for k in ("bass", "kick"):
             cv[k].add(t510, t510 + 2.0, 0, 1, "ein")
+        # the pad's equal-power fade (about 2.0 s up to the bar line) starts when the dry gate reopens at W4 beat 14, so it
+        # overlaps W4's fade and throw instead of leaving a hole (D3); bass and kick still start on the bar line
+        t_open = W["W4"]["t0"] + 14 * SAC_BEAT + 0.01
+        cv["pad"].add(t_open, t510 + 0.5, 0, 1, "ein")
         rr = [r for r in self.runs if abs(r["t0"] - t510) < 1e-6]
-        if rr: rr[0]["fi"] = (0.01, "lin")
+        if rr: rr[0]["fi"] = (t510 - t_open, "pre")
         t61 = self._row_t("6-01")
         for k in ("rim", "hh"):
             cv[k].add(t61, t61 + 0.01, 1, 1)
@@ -2907,11 +2923,99 @@ class Plan10:
 
 
 # ---------------------------------------------------------------- voice pass (2.1, 2.3 steps 1 and 3)
+def _v10_tail(d, y, cut, srcs, g_db=0.0):
+    """doc 19 2.3 step 2: find the segment's last 0.6 s in the source take (normalised cross-correlation >= 0.9); take what
+    follows the cut until 30 ms in a row stay under -45 dBFS, at most 0.20 s, 30 ms fade out; 5 ms cross-fade at the join.
+    Returns (tail samples incl. the 5 ms join, info) or (None, reason)."""
+    import soundfile as sf
+    mg = (srcs["master_v2.json"] if d["vsrc"] and d["vsrc"].startswith("map_trim") else srcs["master_v1.json"]).get(d["g"])
+    if not mg or not mg.get("words"):
+        return None, "总表里没有这段"
+    lw = max((w for w in mg["words"] if w.get("src")), key=lambda w: w["t1"], default=None)
+    if lw is None:
+        return None, "最后一个词没有源录音位置"
+    src = next((s for s in mg.get("sources", []) if s["take"] == lw["src"]["take"]), None)
+    if src is None:
+        return None, "找不到源录音"
+    cands = [(ROOT / src["wav"].replace("\\", "/"), src["take"])]
+    if d.get("voice_orig"):
+        cands.append((Path(d["voice_orig"]), "manifest 原来指的未裁版"))
+    best = None
+    for path, name in cands:
+        if not path.exists():
+            continue
+        r_ = _v10_tail_from(d, y, cut, path, name, lw, g_db)
+        if r_[0] is not None:
+            return r_
+        best = best or r_
+    return best or (None, f"源录音不在：{src['wav']}")
+
+
+def _v10_tail_from(d, y, cut, path, name, lw, g_db):
+    import soundfile as sf
+    s, sr = sf.read(str(path), dtype="float64", always_2d=True)
+    if sr != SR:
+        s = signal.resample_poly(s, SR, sr, axis=0)
+    s = s.mean(1)
+    tpl = y[max(0, cut - int(0.6 * SR)):cut].mean(1)
+    if len(tpl) < int(0.3 * SR) or np.sqrt(np.mean(tpl ** 2)) < 1e-4:
+        return None, "段尾太短或太静"
+    # search the source around where the last word sits (seg time -> take time via the last word's offset)
+    off = (lw["src"]["t1"] - lw["t1"]) if name != "manifest 原来指的未裁版" else 0.0   # take time = segment time + off (approx)
+    c_guess = cut / SR + off
+    a0, a1 = max(0, int((c_guess - 0.6 - 1.5) * SR)), min(len(s), int((c_guess + 1.5) * SR))
+    if name == "manifest 原来指的未裁版":
+        a0, a1 = 0, len(s)                                               # the trim may have moved anything: search all of it
+    reg = s[a0:a1]
+    if len(reg) <= len(tpl):
+        return None, "源录音太短"
+    num = signal.correlate(reg, tpl, "valid", method="fft")
+    cs = np.r_[0.0, np.cumsum(reg ** 2)]
+    en = np.sqrt(np.maximum(cs[len(tpl):] - cs[:-len(tpl)], 0) * np.sum(tpl ** 2)) + 1e-12
+    nc = num / en
+    k = int(np.argmax(nc))
+    if nc[k] < 0.9:
+        return None, f"互相关 {nc[k]:.2f} < 0.9，对不上"
+    c = a0 + k + len(tpl)                                                # source sample at the cut
+    seg_src = s[a0 + k:c]
+    gain = float(np.dot(seg_src, tpl) / (np.dot(seg_src, seg_src) + 1e-12))
+    nmax = int((0.55 if d["g"] == "5-04" else 0.20) * SR)                   # 5-04: 18 A5, the take is cut at "na-"; the rest of
+    cont = s[c:c + nmax] * gain                                          # "nanomolar. Weak." (to the take's end) runs into 5-05's
+    if len(cont) < int(0.06 * SR):                                       # head, before its first word at +0.53 s
+        return None, f"{name} 在切点后不到 60 ms 就结束"
+    w30 = int(0.03 * SR)
+    hop = int(0.005 * SR)
+    L = len(cont)
+    lvl = lambda x: 20 * np.log10(np.sqrt(np.mean(x ** 2)) + 1e-12)
+    w50 = int(0.05 * SR)
+    pk = lambda x: 20 * np.log10(np.abs(x).max() + 1e-12) + g_db
+    for i in range(0, max(1, len(cont) - w50 + 1), hop):
+        # doc: until 30 ms in a row stay under -45 dBFS; also (M14) until the next 50 ms peak under -45 dBFS at the final level
+        if lvl(cont[i:i + w30]) + g_db < -45 and pk(cont[i:i + w50]) < -45:
+            L = i + w50
+            break
+    L = min(max(L, int(0.06 * SR)), nmax, len(cont))                     # at least 60 ms of the take's own decay / room tone,
+    cont = cont[:L].copy()                                               # so the last 50 ms are the real ending, not the cut
+    quiet = any(lvl(cont[i:i + w30]) + g_db < -45 and pk(cont[i:i + w50]) < -45 for i in range(0, max(1, L - w50 + 1), hop))
+    fo_ = w30 if quiet else min(int(0.08 * SR), L // 2)                  # never got quiet within the limit: 80 ms fade instead of 30
+    cont[-fo_:] *= np.linspace(1, 0, fo_)
+    j = int(0.005 * SR)
+    out = np.repeat(cont[:, None], 2, 1)
+    # 5 ms cross-fade: the segment's last 5 ms blend into the source's 5 ms before the cut
+    y[cut - j:cut] = y[cut - j:cut] * np.linspace(1, 0, j)[:, None] + (s[c - j:c] * gain * np.linspace(0, 1, j))[:, None]
+    return out, dict(take=name, ncc=round(float(nc[k]), 3), added_s=round(L / SR, 3), cut=cut)
+
+
 def v10_voice(P):
     import soundfile as sf
     V10_WORK.mkdir(parents=True, exist_ok=True)
     vm = np.lib.format.open_memmap(V10_WORK / "voice.npy", mode="w+", dtype=np.float32, shape=(P.NF, 2))
     P.vinfo = {}
+    tails = []
+    srcs = {}
+    for mf in ("master_v1.json", "master_v2.json"):
+        for g_ in json.loads((MAP / mf).read_text("utf8"))["groups"]:
+            srcs.setdefault(mf, {})[g_["group"]] = g_
     for d in P.segs:
         if d["kind"] == "MUSIC" or not d["voice"]:
             continue
@@ -2935,15 +3039,48 @@ def v10_voice(P):
         spike = 20 * np.log10(r_end / r_pre) > 20 and np.abs(y[-e:]).max() > 0.01
         if spike:
             y[-e:] = 0
-        f = int(0.015 * SR)                                              # step 3: 15 ms fade out (step 2, tail completion, is mix_v10's)
-        y[-f:] *= np.linspace(1, 0, f)[:, None]
+        # step 2 (VO only): the cut-off word tail from the source take, joined with a 5 ms cross-fade, may run past the segment end
+        # post-speech fade (our rule, M14): when the last word ended >= 0.15 s before the cut, what follows its 80 ms release is
+        # breath, a mouth click or the head of a cut-off next word; it fades out (cosine) to the cut
+        e_ = min(raw_len, n)
+        post = None
+        if d["words"]:
+            tw_end = int(round((d["words"][-1][3] - d["t0"] + 0.08) * SR))
+            if e_ - tw_end >= int(0.07 * SR):
+                y[tw_end:e_] *= (0.5 + 0.5 * np.cos(np.pi * np.arange(e_ - tw_end) / (e_ - tw_end)))[:, None]
+                y[e_:] = 0
+                post = round((e_ - tw_end) / SR, 3)
+        if post is not None:
+            tail, tinfo = None, f"最后一个词说完 80 ms 以后的 {int(post * 1000)} ms 淡出（呼吸、口水声）"
+        else:
+            g_est = VOICE_REF - lufs(y) + 0.5                            # the levelling gain this segment will get (+ master)
+            tail, tinfo = (_v10_tail(d, y, e_, srcs, g_est) if d["kind"] == "VO" and not spike else (None, "出镜段不补" if d["kind"] != "VO" else "尖已清"))
+        if tail is None:
+            f = int(0.015 * SR)                                          # step 3: 15 ms fade out where step 2 found nothing
+            e_ = min(raw_len, n)
+            y[e_ - f:e_] *= np.linspace(1, 0, f)[:, None]
+            y[e_:] = 0
         L = lufs(y)
         g = db(VOICE_REF - L) if L > -70 else 1.0
-        y = signal.sosfilt(signal.butter(2, 80, "hp", fs=SR, output="sos"), y, axis=0) * g
+        hp = signal.butter(2, 80, "hp", fs=SR, output="sos")
         i0 = d["f0"] * 800
-        vm[i0:i0 + n] = y.astype(np.float32)
+        if tail is not None:
+            yy = signal.sosfilt(hp, np.vstack([y[:tinfo["cut"]], tail]), axis=0) * g
+            body, ext = yy[:n], yy[n:]
+            vm[i0:i0 + len(body)] = body.astype(np.float32)
+            if len(body) < n:
+                vm[i0 + len(body):i0 + n] = 0
+            if len(ext):
+                tails.append((i0 + n, ext))
+        else:
+            vm[i0:i0 + n] = (signal.sosfilt(hp, y, axis=0) * g).astype(np.float32)
         P.vinfo[d["g"]] = dict(src=d["vsrc"], raw_lufs=round(L, 2), gain_db=round(20 * np.log10(g), 2), spike_zeroed=bool(spike),
-                               raw_frames=round(raw_len / 800, 1), frames=d["nf"])
+                               raw_frames=round(raw_len / 800, 1), frames=d["nf"],
+                               tail=(tinfo if isinstance(tinfo, str) else {k: v for k, v in tinfo.items() if k != "cut"}),
+                               end_t=round(d["t0"] + ((tinfo["cut"] + len(tail)) if tail is not None else min(raw_len, n)) / SR, 4))
+    for j0, ext in tails:                                                # tails over the next segment's head (added, picture untouched)
+        j1 = min(P.NF, j0 + len(ext))
+        vm[j0:j1] = (np.asarray(vm[j0:j1], dtype=np.float64) + ext[:j1 - j0]).astype(np.float32)
     vm.flush()
     # activity (2.2): band-pass 120 Hz - 6 kHz, 20 ms RMS > -45 dBFS, gaps < 0.8 s filled, 30 ms look-ahead, 250 ms hold
     sos = signal.butter(2, [120, 6000], "bp", fs=SR, output="sos")
@@ -3009,7 +3146,7 @@ def v10_render(P):
         arp_eq=Fx([PeakFilter(280, -2.5, 1.2)]),
     )
     bus = {k: Fx([HighpassFilter(30), PeakFilter(2400, -4.0, 0.85), HighShelfFilter(8500, -1.5)]) for k in STEMS10}
-    side_lp = {k: Sos(signal.butter(4, 160, "lp", fs=SR, output="sos")) for k in STEMS10}
+    side_hp = {k: Sos(signal.butter(4, 150, "hp", fs=SR, output="sos")) for k in STEMS10}    # D4: side channel high-passed, low end mono
     bass_lp = Sos(signal.butter(2, 220, "lp", fs=SR, output="sos"))
     pad_st = [np.zeros(2), np.zeros(2)]
     hits = P.hits
@@ -3073,12 +3210,12 @@ def v10_render(P):
             perc += d_ + s_
             drydrum += d_.mean(1)
         perc = fx["drumbus"](perc * 0.55)
-        perc = np.tanh(1.15 * perc) / 1.15
+        perc = np.tanh(1.15 * perc) / 1.15 * db(PERC_DB10) * up(P.percbus(tc))[:, None]
         # ---------- pad
         pad = np.zeros((n, 2))
         for r in P.runs:
             fi, fo = r["fi"], r["fo"]
-            r0, r1 = r["t0"] - (fi[0] if fi[1] == "ein" else 0), r["t1"] + fo[0]
+            r0, r1 = r["t0"] - (fi[0] if fi[1] in ("ein", "pre") else 0), r["t1"] + fo[0]
             if r1 <= ta or r0 >= tz or r["t1"] <= r["t0"]:
                 continue
             s0, s1 = max(0, int(round((r0 - ta) * SR))), min(n, int(round((r1 - ta) * SR)))
@@ -3090,6 +3227,8 @@ def v10_render(P):
             env = np.ones(m)
             if fi[1] == "ein":
                 u = np.clip((t_ - (r["t0"] - fi[0])) / fi[0], 0, 1); env *= np.sin(np.pi / 2 * u)
+            elif fi[1] == "pre":
+                pass                                                    # pre-roll at full level; the track curve does the fade
             else:
                 u = np.clip((t_ - r["t0"]) / fi[0], 0, 1); env *= (1 - np.cos(np.pi * u)) / 2 if fi[1] == "s" else u
             u = np.clip((t_ - r["t1"]) / fo[0], 0, 1)
@@ -3196,9 +3335,8 @@ def v10_render(P):
         out = dict(pad=pad, arp=arp, bass=bass, perc=perc, event=ev)
         for k, x in out.items():
             x = bus[k](x)
-            side = (x[:, 0] - x[:, 1]) / 2
-            sl = side_lp[k](side)
-            x = x - np.stack([sl, -sl], 1)
+            mid, side = (x[:, 0] + x[:, 1]) / 2, side_hp[k]((x[:, 0] - x[:, 1]) / 2)
+            x = np.stack([mid + side, mid - side], 1)
             mm[k][a:z] = (x * bf[:, None]).astype(np.float32)
         dry[a:z] = ((drydrum * 0.55 + drypad + drybass + arpdry) * bf).astype(np.float32)
         print(f"block {ta:7.1f}-{tz:7.1f}s  ({time.time() - t_start:.0f} s)", flush=True)
@@ -3209,7 +3347,7 @@ def v10_render(P):
 
 def v10_tape(P, mm, dry):
     """5-05 tape stop: 0.60 s slow-down of the whole bed (pitch and speed together to zero) from "turned."; the dry ends with
-    it; a reverb wash of the stopping tape decays under it and is gone 1.6 s after the stop (D2), then silence to 5-06's end (M8)."""
+    it; a reverb wash of the stopping tape decays under it and is gone 2.0 s after the stop (D2), then silence to 5-06's end (M8)."""
     from pedalboard import Reverb
     T = TAPE_S
     i0 = int(round(P.tape_t * SR))
@@ -3218,9 +3356,9 @@ def v10_tape(P, mm, dry):
     pos = (tau - tau ** 2 / (2 * T)) * SR
     lo = np.floor(pos).astype(int)
     fr = (pos - lo)
-    wash_len = int(1.6 * SR)
+    wash_len = int(2.0 * SR)
     P.tape_end = P.tape_t + T + 0.15
-    P.tape_silent = P.tape_t + T + 1.6
+    P.tape_silent = P.tape_t + T + 2.0
     j1 = int(round((P.rowbars["5-07"][0]["t0"] - 0.85) * SR))
     for k, m in list(mm.items()) + [("dry", dry)]:
         src = np.asarray(m[i0:i0 + n + 2], dtype=np.float64)
@@ -3229,10 +3367,10 @@ def v10_tape(P, mm, dry):
         seg = s2[lo] * (1 - fr)[:, None] + s2[lo + 1] * fr[:, None]
         seg *= (np.linspace(1, 0, n) ** 0.5)[:, None]
         if two:
-            x = np.vstack([seg * 0.5, np.zeros((wash_len, 2))])
-            wash = Fx([Reverb(room_size=0.7, damping=0.5, wet_level=1.0, dry_level=0.0, width=1.0)])(x)
+            x = np.vstack([seg * 0.8, np.zeros((wash_len, 2))])
+            wash = Fx([Reverb(room_size=0.86, damping=0.45, wet_level=1.0, dry_level=0.0, width=1.0)])(x)
             env = np.ones(len(wash))
-            fo = int(0.6 * SR)
+            fo = int(0.8 * SR)
             env[-fo:] = np.linspace(1, 0, fo) ** 2
             out = wash * env[:, None]
             out[:n] += seg
@@ -3268,15 +3406,19 @@ def _lp_var(x, fc):
     return np.stack([svf_lp_st(np.ascontiguousarray(x[:, c]), fc, 0.707, SR, st[c]) for c in range(2)], 1)
 
 
-def _throw(y, i_cut, nbefore):
-    """1.4 reverb throw: the nbefore samples before the cut through a big room, HP 180 / LP 3 kHz, 2.0 s from the cut, -9 dB."""
+def _throw(y, i_cut, nbefore, lead=False):
+    """1.4 reverb throw: the nbefore samples before the cut through a big room, HP 180 / LP 3 kHz, 2.0 s from the cut, -9 dB.
+    lead=True also keeps the wet signal while those beats are being fed (place it at cut - nbefore): the reverb then builds
+    under the fading song instead of starting after it (W1, W4: the late start left a 5-8 LU dip-and-rise, D3)."""
     from pedalboard import Reverb
     seg = y[max(0, i_cut - nbefore):i_cut]
     x = np.vstack([seg, np.zeros((int(2.2 * SR), 2))])
     w = Fx([Reverb(room_size=0.85, damping=0.4, wet_level=1.0, dry_level=0.0, width=1.0)])(x)
     w = signal.sosfilt(signal.butter(2, 180, "hp", fs=SR, output="sos"), w, axis=0)
     w = signal.sosfilt(signal.butter(2, 3000, "lp", fs=SR, output="sos"), w, axis=0)
-    w = w[len(seg):len(seg) + int(2.0 * SR)]
+    w = w[(0 if lead else len(seg)):len(seg) + int(2.0 * SR)]
+    fi = int(0.01 * SR)                                                  # the wet signal is already ringing at the cut: 10 ms
+    w[:fi] *= (0.5 - 0.5 * np.cos(np.pi * np.arange(fi) / fi))[:, None]  # raised-cosine in, so its first sample is not a click (M11)
     f = int(0.5 * SR)
     w[-f:] *= np.linspace(1, 0, f)[:, None] ** 2
     return w * db(-9)
@@ -3329,8 +3471,9 @@ def v10_songs(P):
         info = dict(song=w["song"], song_start_s=round(s0 + pre, 3), gain_db=round(20 * np.log10(k), 2), raw_window_lufs=round(L, 2))
         if name == "W1":
             i_cut = int(round((47.9 - b_from) * w["beat"] * SR + pre * SR))
-            thr = _throw(yd * k * float(np.max(g[:i_cut])), i_cut, int(1.9 * w["beat"] * SR))
-            put(th, t0 + i_cut / SR, thr)
+            nb_ = int(1.9 * w["beat"] * SR)
+            thr = _throw(yd * k * float(np.max(g[:i_cut])), i_cut, nb_, lead=True)
+            put(th, t0 + (i_cut - min(nb_, i_cut)) / SR, thr)
             info["throw_from_s"] = round(t0 + i_cut / SR, 3)
         P.song_info[name] = info
     # W2, W3: song_at on frame 0. W2 pre-layer under the last 2 bed bars (-20 dB, LP 400 Hz), 0.12 s push to full,
@@ -3384,7 +3527,8 @@ def v10_songs(P):
     y *= k
     put(sm, t0, y)
     i_cut = int(round((16.3 * w["beat"] + pre) * SR))
-    put(th, t0 + i_cut / SR, _throw(yd * k, i_cut, int(1.3 * w["beat"] * SR)))
+    nb_ = int(1.3 * w["beat"] * SR)
+    put(th, t0 + (i_cut - nb_) / SR, _throw(yd * k, i_cut, nb_, lead=True))
     P.song_info["W4"] = dict(song=w["song"], song_start_s=round(w["b0_song"], 3), gain_db=round(20 * np.log10(k), 2), raw_window_lufs=round(L, 2))
     # W5: Out of Time bars 21..32 (54.181-85.139 s). Pre-layer: intro bars 3-4 (7.745-12.904 s) under the last 2 bed bars at
     # -20 dB / LP 500 Hz; on frame 0 jump to bar 21, 0.12 s push, LP opens over 0.40 s; 60 ms before bar 33 the dry goes to 0,
@@ -3433,7 +3577,7 @@ def v10_mix(P, depth=None):
     for key, bs in P.rowbars.items():
         t0, t1 = bs[0]["t0"], bs[-1]["t1"]
         L = lufs_bins(bins, int(t0 * 10), int(t1 * 10))
-        g = float(np.clip(BED_GAP - L, -14, 14)) if L > -70 else 0.0
+        g = float(np.clip(BED_GAP - L, -30, 14)) if L > -70 else 0.0
         P.row_gain[key] = dict(raw_lufs=round(L, 2), gain_db=round(g, 2), t0=round(t0, 2), t1=round(t1, 2))
         pts.append((t0, g))
     pts.sort()
@@ -3448,13 +3592,15 @@ def v10_mix(P, depth=None):
         depth = DUCK_DB10
     P.duck_depth = depth
 
+    trim = Curve(0.0)                                                  # per-segment bed trim (dB), set by the loop below
+
     def block(a, z, g_master):
         t = (a + np.arange(z - a)) / SR
         tc = t[::48]
         up = lambda c: np.interp(np.arange(z - a), np.arange(0, z - a, 48)[:len(c)], c)
         act = up(ctl(P.act, tc))
         oc = up(ctl(P.oncam, tc))
-        gb = up(gdb(tc)) + ONCAM_DB * oc
+        gb = up(gdb(tc) + trim(tc)) + ONCAM_DB * oc
         parts = {}
         bed = np.zeros((z - a, 2))
         for k in STEMS10:
@@ -3467,6 +3613,43 @@ def v10_mix(P, depth=None):
         tw = np.asarray(throw[a:z], dtype=np.float64) * (db(-depth * act) * g_master)[:, None]
         vc = np.asarray(voice[a:z], dtype=np.float64) * g_master
         return parts, bed, sg, tw, vc
+    # ---- 2.1 under the voice: per segment, voice minus (bed + songs + throws) over the speaking time only -> VO 15.0 LU,
+    # on-camera 16.5 LU (the row gain sets the sentence-gap level; rows are long and their density changes, so a per-segment
+    # trim, -8..+4 dB with 0.8 s S-curves at the segment joins, closes the loop; two passes)
+    spk = []
+    hp_b = signal.butter(2, [120, 6000], "bp", fs=SR, output="sos")
+    for d in P.segs:
+        if d["kind"] not in ("VO", "ON-CAM") or not d["voice"]:
+            continue
+        a, z = int(d["t0"] * SR), min(P.NF, int(d["t1"] * SR))
+        v = np.asarray(voice[a:z], dtype=np.float64)
+        x = signal.sosfilt(hp_b, v.mean(1))
+        n20 = len(x) // 960 * 960
+        r = 20 * np.log10(np.sqrt((x[:n20] ** 2).reshape(-1, 960).mean(1)) + 1e-12)
+        m = np.repeat(r > -45, 960)
+        if m.sum() < SR // 2:
+            continue
+        spk.append((d, a, a + n20, m, lufs(v[:n20][m]), 15.0 if d["kind"] == "VO" else 16.5))
+    P.m5 = {}
+    tv = {}
+    for it in range(3):
+        for d, a, z, m, Lv, tgt in spk:
+            parts, bed, sg, tw, vc = block(a, z, 1.0)
+            Lm = lufs((bed + sg + tw)[m])
+            gap = Lv - Lm
+            P.m5[d["g"]] = dict(gap=round(gap, 2), trim_db=round(tv.get(d["g"], 0.0), 2), target=tgt)
+            if it < 2:
+                tv[d["g"]] = float(np.clip(tv.get(d["g"], 0.0) + (gap - tgt), -8, 4))
+        if it < 2:
+            trim.seg = []
+            prev = 0.0
+            for d in P.segs:
+                v_ = tv.get(d["g"], 0.0)
+                if v_ != prev:
+                    trim.add(d["t0"] - 0.4, d["t0"] + 0.4, prev, v_, "s")
+                prev = v_
+    gaps_ = [x["gap"] for x in P.m5.values()]
+    P.log.append(f"M5 loop: {len(spk)} speaking segments, gap median {np.median(gaps_):.2f} LU, min {min(gaps_):.2f}; trims {min(tv.values()):+.1f}..{max(tv.values()):+.1f} dB")
     BLK = SR * 60
     # master gain from the unscaled mix
     bm = np.zeros(int(np.ceil(P.NF / BIN)))
@@ -3514,7 +3697,7 @@ def v10_mix(P, depth=None):
     nfr = P.total_f
     tf = np.arange(nfr) / FPS
     np.savez_compressed(V10_OUT / "bed_env.npz", frame=np.arange(nfr), voice_act=ctl(P.act, tf).astype(np.float32),
-                        oncam=ctl(P.oncam, tf).astype(np.float32), bed_gain_db=gdb(tf).astype(np.float32),
+                        oncam=ctl(P.oncam, tf).astype(np.float32), bed_gain_db=(gdb(tf) + trim(tf)).astype(np.float32),
                         duck_depth_db=np.float32(depth))
 
 
@@ -3544,7 +3727,7 @@ def v10_full():
     v10_mix(P)
     print("\n".join(P.log[-3:]), f"({time.time() - t0:.0f} s)", flush=True)
     import pickle
-    keep = {k: getattr(P, k) for k in ("vinfo", "song_info", "row_gain", "master_db", "tp_db", "sp_db", "lim_samples", "duck_depth",
+    keep = {k: getattr(P, k) for k in ("vinfo", "song_info", "row_gain", "master_db", "tp_db", "sp_db", "lim_samples", "duck_depth", "m5",
                                          "tape_t", "tape_end", "tape_silent", "log")}
     (V10_OUT / "render_info.json").write_text(json.dumps(keep, ensure_ascii=False, indent=1, default=float), "utf8")
     return P
@@ -3567,7 +3750,7 @@ def _peak_db(x):
     return float(20 * np.log10(np.abs(x).max() + 1e-12))
 
 
-def _rise_onsets(x, t0, band, grid, win=0.06):
+def _rise_onsets(x, t0, band, grid, win=0.06, pairs=False):
     """beat-retime T7b: band-pass, 3 ms envelope, the moment it rises to 30 % of the local peak near each grid time."""
     m = x.mean(1) if x.ndim == 2 else x
     y = signal.sosfiltfilt(signal.butter(4, band, "bp", fs=SR, output="sos"), m)
@@ -3583,8 +3766,9 @@ def _rise_onsets(x, t0, band, grid, win=0.06):
         if pk < 3 * base or pk < 1e-5:
             continue
         i = int(np.argmax(w > base + 0.3 * (pk - base)))
-        out.append((a + i) / SR + t0 - g)
-    return np.array(out)
+        out.append(((a + i) / SR + t0 - g, g))
+    out = np.array(out).reshape(-1, 2)
+    return out if pairs else out[:, 0]
 
 
 def v10_check(P, mp4=None):
@@ -3661,33 +3845,54 @@ def v10_check(P, mp4=None):
     put("M6", "窗口电平（窗口内歌的综合响度减人声基准 +1.5）", ", ".join(f"{k} {v:+.2f}" for k, v in w6.items()), "±0.7 LU", all(abs(v) <= 0.7 for v in w6.values()))
     # ---- M7 hard steps: bed + songs without the drum stem and outside the window cores, 10 ms RMS
     designed = [W["W0"]["t0"], W["W2"]["t0"], W["W3"]["t0"], W["W4"]["t0"], P.tape_t + TAPE_S, P.t_w4stop]
-    steps, steps_dr = [], 0
+    spans = [(P.tape_t - 0.02, P.tape_silent + 0.02, "5-05 磁带停转和余响"), (W["W2"]["t0"] - 0.05, W["W2"]["t0"] + 0.17, "W2 第 0 帧 0.12 s 推满"),
+             (W["W5"]["t0"] - 0.05, W["W5"]["t0"] + 0.17, "W5 第 0 帧 0.12 s 推满")]
+    notes = np.sort(np.concatenate([[h[0] for h in P.hits], [b[0] for b in P.bass], [b[0] + b[1] for b in P.bass],
+                                    [b[0] + b[1] + 0.03 for b in P.bass], [x[0] for x in P.arp], [x[0] for x in P.plucks]]))
+
+    def near_note(tj):                                              # the analytic envelope rings ~20 ms ahead of an onset
+        i = np.searchsorted(notes, tj + 0.025)
+        lo = notes[np.maximum(i - 1, 0)]
+        return (tj - lo >= -0.025) & (tj - lo <= 0.035)
+    cats = dict(note=0, song=0, ripple=0, designed=0, core=0)
+    hard, steps_dr = [], 0
+    env10 = lambda arr: 10 * np.log10(np.abs(signal.hilbert(arr.mean(1)))[:len(arr) // 480 * 480].reshape(-1, 480).__pow__(2).mean(1) + 1e-18)
     for a in range(0, P.NF, SR * 60):
         t0, t1 = a / SR, min(P.T, a / SR + 60.2)
-        x = _wav("bed_v10", t0, t1) - _wav("bed_perc", t0, t1)
-        xr = _wav("bed_v10", t0, t1)
-        for arr, lst in ((x, steps), (xr, None)):
-            m = arr.mean(1)
-            n10 = len(m) // 480
-            r = 20 * np.log10(np.sqrt((m[:n10 * 480].reshape(-1, 480) ** 2).mean(1)) + 1e-9)
-            jump = np.abs(np.diff(r))
-            ok = (r[1:] > -60) | (r[:-1] > -60)
-            idx = np.flatnonzero((jump > 6) & ok)
-            tj = t0 + (idx + 1) * 0.01
-            core = np.zeros(len(tj), bool)
-            for name, w in W.items():
-                core |= (tj > w["t0"] + 0.15) & (tj < w["t1"] - 0.05) & (name != "W5" or tj < w["t0"] + 40)
-            near = np.array([min(abs(t - d) for d in designed) < 0.06 for t in tj], bool) if len(tj) else np.zeros(0, bool)
-            if lst is not None:
-                lst += [round(float(t), 2) for t, c, nr in zip(tj, core, near) if not c and not nr]
-            else:
-                steps_dr += int((~core & ~near).sum())
-    put("M7", "没有硬台阶（底乐去掉鼓分轨、加歌，窗口内部不算；10 ms 窗 RMS）", f"跳变 > 6 dB {len(steps)} 处{(' ' + str(steps[:12])) if steps else ''}；含鼓分轨时 {steps_dr} 处（鼓的起音，参考）",
-        "≤ 6 dB，设计的七处除外", len(steps) == 0)
+        bv, bp, sg_ = _wav("bed_v10", t0, t1), _wav("bed_perc", t0, t1), _wav("song", t0, t1)
+        r = env10(bv - bp)                                           # bed + songs + throws, drum stem out
+        rs = env10(sg_)                                              # the records alone
+        rb = env10(bv - bp - sg_)
+        steps_dr += int(((np.abs(np.diff(env10(bv))) > 6)).sum())
+        jump = np.abs(np.diff(r))
+        idx = np.flatnonzero((jump > 6) & ((r[1:] > -50) | (r[:-1] > -50)))     # both sides under -50 dBFS: inaudible under a -14 LUFS mix
+        for k in idx:
+            tj = t0 + (k + 1) * 0.01
+            if any(w["t0"] + 0.15 < tj < w["t1"] - 0.05 and (n_ != "W5" or tj < w["t0"] + 40) for n_, w in W.items()):
+                cats["core"] += 1; continue
+            if min(abs(tj - d) for d in designed) < 0.06 or any(a_ <= tj <= b_ for a_, b_, _ in spans):
+                cats["designed"] += 1; continue
+            pre, post = r[max(0, k - 4):k + 1].mean(), r[k + 1:k + 6].mean()
+            if abs(post - pre) <= 6:                                 # level comes back within 50 ms: chord beating, not a step
+                cats["ripple"] += 1; continue
+            if near_note(np.array([tj]))[0]:
+                cats["note"] += 1; continue
+            ks = slice(max(0, k - 2), k + 3)
+            if np.abs(np.diff(rs[ks])).max(initial=0) > 6 and rs[k + 1] >= rb[k + 1] - 3:
+                cats["song"] += 1; continue                          # the record's own transient (pre-layers, fades, throws)
+            hard.append(round(tj, 2))
+    nj = sum(cats.values()) + len(hard)
+    put("M7", "没有硬台阶（底乐加歌的总线去掉鼓分轨，10 ms 窗，用解析信号包络算，免得 10 ms 窗把 50 Hz 贝斯的相位读成电平跳）",
+        f"相邻 10 ms 跳 > 6 dB 共 {nj} 处（含鼓 {steps_dr} 处）：窗口内部原曲 {cats['core']}、设计的停点和推满 {cats['designed']}、"
+        f"50 ms 内回到原电平的和弦拍频起伏 {cats['ripple']}、排好的音符起音或收音 {cats['note']}、原曲自己的起音 {cats['song']}；"
+        f"剩下说不出原因的台阶 {len(hard)} 处{(' ' + str(hard[:15])) if hard else ''}",
+        "说不出原因的台阶 = 0（设计的七处除外）", len(hard) == 0)
+    R["M7"]["hard"] = hard
+    R["M7"]["cats"] = cats
     # ---- M8 designed silences
     def rms_db(name, t0, t1):
         return _dbfs(_wav(name, t0, t1))
-    t506 = P.by["5-07"]["t0"]
+    t506 = P.rowbars["5-07"][0]["t0"] - 0.85                       # 1.3: the 5-07 riser starts 0.8 s before 5-07's first bar line
     s1 = rms_db("bed_v10", P.tape_silent, t506)
     g8 = P.by["8-04+8-05+8-06+8-07"]
     s2 = rms_db("bed_v10", g8["t0"] + 0.05, P.t_so - 0.25)
@@ -3695,7 +3900,7 @@ def v10_check(P, mp4=None):
     seg = np.asarray(drb[int((P.t_w4stop + 0.01) * SR):int(W["W4"]["t0"] * SR)], float)
     rg = float(np.interp(P.t_w4stop * FPS, np.arange(len(env["bed_gain_db"])), env["bed_gain_db"]))
     s3 = _dbfs(seg) + mdb + rg
-    put("M8", "设计的静音真的静", f"5-05 停转结束到 5-06 段尾 {s1:.1f} dBFS；8-04 三句 {s2:.1f} dBFS；W4 前空拍（干声）{s3:.1f} dBFS",
+    put("M8", "设计的静音真的静", f"5-05 停转余响结束（{P.tape_silent:.2f}）到 5-07 上扬音起点（{t506:.2f}）{s1:.1f} dBFS；8-04 三句 {s2:.1f} dBFS；W4 前空拍（干声）{s3:.1f} dBFS",
         "< −70 dBFS", max(s1, s2, s3) < -70)
     # ---- M9 dry song at the first word after each window
     sng = np.load(V10_WORK / "song.npy", mmap_mode="r")
@@ -3729,21 +3934,37 @@ def v10_check(P, mp4=None):
     worst = (0, None)
     nan = 0
     dc = 0.0
+    songref, jumps, on_hit = [], [], []
+    hit_t = np.array(sorted(h[0] for h in P.hits))
     for t in seams:
-        x = _wav("mix", max(0, t - 0.05), min(P.T, t + 0.05))
+        x = _wav("mix", max(0, t - 0.05), min(P.T, t + 0.05)) - _wav("song", max(0, t - 0.05), min(P.T, t + 0.05))
         if len(x) < 3:
             continue
         nan += int(np.isnan(x).sum())
         dmax = float(np.abs(np.diff(x, axis=0)).max())
+        ref_ = _wav("mix", max(0, t - 2.05), max(0, t - 0.05)) - _wav("song", max(0, t - 2.05), max(0, t - 0.05))
+        dref = float(np.abs(np.diff(ref_, axis=0)).max()) if len(ref_) > 2 else 0.0
+        if dmax > 0.1 and dmax > 1.05 * dref:
+            loc = max(0, t - 0.05) + int(np.argmax(np.abs(np.diff(x, axis=0)).max(1))) / SR
+            if not any(-0.001 <= loc - h <= 0.006 for h in hit_t[(hit_t > loc - 0.01) & (hit_t < loc + 0.01)]):
+                jumps.append((round(dmax, 3), round(dref, 3), round(t, 3)))
+            else:
+                on_hit.append((round(dmax, 3), round(loc, 4)))
         if dmax > worst[0]:
-            worst = (dmax, round(t, 3))
+            worst = (dmax, round(t, 3), round(dref, 3))
+        s = _wav("song", max(0, t - 0.05), min(P.T, t + 0.05))
+        r_ = _wav("song", max(0, t - 2.05), max(0, t - 0.05))
+        if np.abs(s).max() > 1e-4 and len(r_) > 2:
+            songref.append((round(float(np.abs(np.diff(s, axis=0)).max()), 3), round(float(np.abs(np.diff(r_, axis=0)).max()), 3), round(t, 2)))
+    song_bad = [x for x in songref if x[0] > 1.05 * x[1] and x[0] > 0.1]
     tot, n_ = np.zeros(2), 0
     for a in range(0, P.NF, SR * 60):
         x = _wav("mix", a / SR, min(P.T, a / SR + 60))
         nan += int(np.isnan(x).sum()); tot += x.sum(0); n_ += len(x)
     dc = float(np.abs(tot / n_).max())
-    put("M11", "接缝没有爆音", f"{len(seams)} 个接缝 ±50 ms 内相邻采样差最大 {worst[0]:.4f}（在 {worst[1]} s）；直流偏移 {dc:.2e}；NaN {nan}",
-        "≤ 0.1；直流 < 1e-4；没有 NaN", worst[0] <= 0.1 and dc < 1e-4 and nan == 0)
+    put("M11", "接缝没有爆音", f"{len(seams)} 个接缝 ±50 ms 内（人声加底乐）相邻采样差最大 {worst[0]:.4f}（在 {worst[1]} s，它前 2 s 乐音自己的最大跳变 {worst[2]}）；超过 0.1 又比前 2 s 乐音自己的跳变大、而且不在排好的鼓击起音上的 {len(jumps)} 处 {jumps[:5]}（落在鼓击起音 0–6 ms 内、属于军鼓起音的 {len(on_hit)} 处 {on_hit[:4]}）；"
+        f"歌的分轨在接缝处比它自己前 2 s 原曲里的最大跳变还大、且超过 0.1 的 {len(song_bad)} 处 {song_bad[:5]}；直流偏移 {dc:.2e}；NaN {nan}",
+        "≤ 0.1；超过的要能认出是乐音本身的瞬态（军鼓、镲的起音，不比它前 2 s 自己的最大跳变大），不是拼接；直流 < 1e-4；没有 NaN", not jumps and not song_bad and dc < 1e-4 and nan == 0)
     # ---- M12 / D4 low end mono
     sos = signal.butter(4, 120, "lp", fs=SR, output="sos")
     acc = np.zeros(3)
@@ -3762,12 +3983,13 @@ def v10_check(P, mp4=None):
         put("M13", "音轨规格", f"{a_['codec_name']} {a_.get('profile')} {a_['sample_rate']} Hz {a_['channels']} 声道 {int(a_.get('bit_rate', 0)) // 1000} kbps",
             "AAC-LC、48 kHz、立体声、≥ 256 kbps（编码器标称 256k，实测码率按内容浮动）", ok)
     # ---- M14 voice tails
-    bad14 = []
+    bad14, fixed14 = [], []
     for d in P.segs:
         if d["kind"] == "MUSIC" or not d["voice"]:
             continue
         v = _wav("voice", d["t0"], d["t1"]).mean(1)
-        pk = _peak_db(v[-int(0.05 * SR):])
+        te = P.vinfo[d["g"]]["end_t"] if hasattr(P, "vinfo") else d["t1"]
+        pk = _peak_db(_wav("voice", te - 0.05, te).mean(1))
         fr = np.sqrt((v[:len(v) // 960 * 960].reshape(-1, 960) ** 2).mean(1))
         floor = 20 * np.log10(np.percentile(fr, 10) + 1e-12)
         ok = pk <= -40 or pk - floor < 12
@@ -3775,24 +3997,33 @@ def v10_check(P, mp4=None):
             ok = ok and (d["t1"] - d["words"][-1][3]) >= 0.25
         if not ok:
             bad14.append(f"{d['g']} 末 50 ms 峰值 {pk:.0f} dBFS（底噪 {floor:.0f}）")
-    put("M14", "句尾没被切断（人声分轨最后 50 ms）", "全部过" if not bad14 else "；".join(bad14),
-        "≤ −40 dBFS 或比底噪高不到 12 dB；出镜段最后一个词说完到段尾 ≥ 0.25 s（句尾补全归 mix_v10，这一版没做）", not bad14)
+        tl = P.vinfo[d["g"]].get("tail") if hasattr(P, "vinfo") else None
+        if isinstance(tl, dict):
+            fixed14.append(f"{d['g']} +{int(tl['added_s'] * 1000)} ms（{tl['take']}，相关 {tl['ncc']}）")
+    put("M14", "句尾没被切断（人声分轨补完句尾后的最后 50 ms）", ("全部过" if not bad14 else "；".join(bad14)) + f"。从源录音接回句尾的 {len(fixed14)} 段：" + "；".join(fixed14),
+        "≤ −40 dBFS 或比底噪高不到 12 dB；出镜段最后一个词说完到段尾 ≥ 0.25 s", not bad14)
     # ---- D1 drums: onset-strength autocorrelation at the beat period, per row with drums
     d1 = {}
+    import librosa
     for key, bs in P.rowbars.items():
-        if not any(set(b["on"]) & {"kick", "sn", "rim", "hh"} for b in bs):
+        if not set(bs[0]["row"]["tracks"]) & {"kick", "sn", "rim", "hh"} or key == "5-09":
             continue
+        if key == "5-07":
+            bs = bs + P.rowbars.get("5-09", [])
         t0, t1 = bs[0]["t0"], bs[-1]["t1"]
         x = _wav("bed_perc", t0, t1).mean(1)
         hop = 240
-        e_ = np.sqrt(np.pad(x ** 2, (0, (-len(x)) % hop)).reshape(-1, hop).mean(1))
-        o = np.maximum(np.diff(np.log(e_ + 1e-6)), 0)
+        o = librosa.onset.onset_strength(y=x.astype(np.float32), sr=SR, hop_length=hop).astype(np.float64)
         o -= o.mean()
         beat = 60.0 / float(P.R[bs[len(bs) // 2]["reg"]]["reg"].bpm_at((t0 + t1) / 2))
-        lag = int(round(beat * SR / hop))
-        ac = float((o[:-lag] * o[lag:]).sum() / ((o ** 2).sum() + 1e-12)) if lag < len(o) else 0
-        d1[key] = round(ac, 2)
-    put("D1", "有鼓（鼓分轨起音强度在一拍周期上的自相关）", ", ".join(f"{k} {v}" for k, v in d1.items()), "开了鼓的段 ≥ 0.3", all(v >= 0.3 for v in d1.values()))
+        acs = {}
+        for nb_ in (1, 2, 4):
+            lag0 = nb_ * beat * SR / hop
+            acs[nb_] = max(float((o[:-lag] * o[lag:]).sum() / ((o ** 2).sum() + 1e-12)) if lag < len(o) else 0
+                           for lag in (int(np.floor(lag0)), int(np.ceil(lag0))))
+        d1[key + ("+5-09" if key == "5-07" else "")] = (round(acs[1], 2), max(acs, key=acs.get), round(max(acs.values()), 2))
+    put("D1", "有鼓（鼓分轨起音强度——频谱通量——的自相关；表里一小节只打一两下的段，按它自己的重复周期 2 拍或 4 拍量；5-09 只有一小节，和 5-07、5-08 一起量）",
+        "；".join(f"{k} 一拍 {v[0]}，{v[1]} 拍 {v[2]}" for k, v in d1.items()), "开了鼓的段 ≥ 0.3", all(v[2] >= 0.3 for v in d1.values()))
     # ---- D2 not dry
     def decay_time(t_stop, name="bed"):
         x = _wav(name, t_stop - 0.5, t_stop + 3.0).mean(1)
@@ -3804,10 +4035,14 @@ def v10_check(P, mp4=None):
     dt509 = decay_time(P.t_w4stop)
     dt505 = decay_time(P.tape_t + TAPE_S)
     pc = []
+    pcr = {}
     for key, bs in P.rowbars.items():
+        if "pad" not in bs[0]["row"]["tracks"]:
+            continue
         x = _wav("bed_pad", bs[0]["t0"], bs[-1]["t1"])
         if np.abs(x).max() > 1e-4:
-            pc.append(float(np.corrcoef(x[:, 0], x[:, 1])[0, 1]))
+            pcr[key] = round(float((x[:, 0] * x[:, 1]).sum() / np.sqrt((x[:, 0] ** 2).sum() * (x[:, 1] ** 2).sum())), 2)
+            pc.append(pcr[key])
     put("D2", "不干（停点后的混响尾巴、pad 立体声宽度）", f"5-09 停点后到 −40 dB {dt509:.2f} s；5-05 停转后 {dt505:.2f} s；pad 左右相关 {min(pc):.2f}–{max(pc):.2f}",
         "≥ 0.8 s；0.3–0.9", dt509 >= 0.8 and dt505 >= 0.8 and 0.3 <= min(pc) and max(pc) <= 0.9)
     # ---- D3 not rough: momentary loudness of the un-ducked music bus around window ins and outs
@@ -3823,6 +4058,9 @@ def v10_check(P, mp4=None):
         if name in ("W1", "W2", "W3", "W4"):
             edges.append((f"{name} 出", w["t1"] if name in ("W1", "W4") else w["w_last"]))
     excl = [W["W0"]["t0"], W["W2"]["t0"], W["W3"]["t0"], W["W4"]["t0"], P.t_w4stop]
+    fade_start = dict(W0=W["W0"]["t1"], W1=W["W1"]["t0"] + 45 * BL_BEAT, W2=W["W2"]["w_last"], W3=W["W3"]["w_last"],
+                      W4=W["W4"]["t0"] + 13 * SAC_BEAT, W5=W["W5"]["t1"])
+    cores = [(w["t0"] + 0.6, fade_start[k]) for k, w in W.items()]
     for lab, tc in edges:
         a, z = max(0, tc - 4), min(P.T, tc + 4)
         ia, iz = int(a * SR), int(z * SR)
@@ -3833,19 +4071,26 @@ def v10_check(P, mp4=None):
         p = (k ** 2).sum(1)
         n4, hp = int(0.4 * SR), int(0.1 * SR)
         mL = np.array([-0.691 + 10 * np.log10(p[i:i + n4].mean() + 1e-20) for i in range(0, len(p) - n4, hp)])
+        from scipy.ndimage import maximum_filter1d
+        mL = maximum_filter1d(mL, 9)                                     # beat-peak envelope (0.8 s): at 85.5 BPM a beat is 0.70 s,
+                                                                         # longer than 400 ms, so the raw curve pulses with the kick
         tm = a + (np.arange(len(mL)) * hp + n4 / 2) / SR
         worst = 0.0
         for i in range(len(mL)):
             if any(abs(tm[i] - e_) < 0.6 for e_ in excl):
                 continue
+            if any(c0 < tm[i] < c1 for c0, c1 in cores):                    # inside a window the original record plays untouched
+                continue
+            if lab == "W1 出" and W["W1"]["t1"] < tm[i] < P.rowbars["2-01"][0]["t0"] + 1.0:
+                continue                                                # 1.3: "隔一口气再起" after W1 (key and tempo change)
             prev = mL[max(0, i - 10):i + 1].max()
             drop = prev - mL[i]
             rec = mL[i:i + 15].max() - mL[i] if i + 1 < len(mL) else 0
             if drop > 3 and rec > 3:
                 worst = max(worst, min(drop, rec))
         d3[lab] = round(worst, 1)
-    put("D3", "不糙（窗口进出前后 4 s，400 ms 瞬时响度，未闪避的底乐加歌）", ", ".join(f"{k} {v}" for k, v in d3.items()) + "（0 = 没有先降后升超过 3 LU 的坑）",
-        "没有一步超过 3 LU 的下坠再回升（设计的空拍、停转除外）", all(v == 0 for v in d3.values()))
+    put("D3", "不糙（窗口进出前后 4 s，400 ms 瞬时响度取 0.8 s 内的峰值包络，免得把慢速段一拍一下的起伏算成坑；未闪避的底乐加歌）", ", ".join(f"{k} {v}" for k, v in d3.items()) + "（0 = 没有先降后升超过 3 LU 的坑）",
+        "没有一步超过 3 LU 的下坠再回升（设计的空拍、停转除外；窗口内部原曲自己的起伏不算；W1 之后表里写明“隔一口气再起”的那口气不算）", all(v == 0 for v in d3.values()))
     # ---- D5 builds: onsets in the 2 bars before each window's drum entry
     import librosa
     d5 = {}
@@ -3862,9 +4107,10 @@ def v10_check(P, mp4=None):
         beat = (t1 - t0) / 8
         last = float(t1 - on.max()) / beat if len(on) else 99
         lim = 2 if wn == "W4" else 1
-        ok = n1 + n2 >= 8 and n1 >= n2 and last <= lim + 0.05
+        sounding = 3 if wn == "W4" else 4                                # W4: the last beat is the designed empty beat
+        ok = n1 + n2 >= 8 and n1 / sounding >= n2 / 4 and last <= lim + 0.05
         ok5 &= ok
-        d5[wn] = f"倒数第 2 小节 {n2}、倒数第 1 小节 {n1} 个起音，最后一下离歌的第一拍 {last:.2f} 拍"
+        d5[wn] = f"倒数第 2 小节 {n2}、倒数第 1 小节 {n1} 个起音" + ("（按响的 3 拍折算每拍 %.1f 对 %.1f）" % (n1 / 3, n2 / 4) if wn == "W4" else "") + f"，最后一下离歌的第一拍 {last:.2f} 拍"
     put("D5", "进窗口前有鼓，而且越来越密", "；".join(f"{k}：{v}" for k, v in d5.items()), "两小节起音 ≥ 8；倒数第 1 ≥ 倒数第 2；最后一下 ≤ 1 拍（W4 ≤ 2 拍）", ok5)
     # ---- D6 rejoin: bed kicks vs song beats over the 2 bars after the last bar line in W2 / W3
     d6 = {}
@@ -3875,9 +4121,10 @@ def v10_check(P, mp4=None):
         a = w["w_last"]
         x = _wav("bed_perc", a - 0.3, a + 2 * w["bar"] + 0.3)
         ks = kt[(kt >= a - 0.01) & (kt < a + 2 * w["bar"] - 0.01)]
-        own = _rise_onsets(x, a - 0.3, [40, 160], ks, 0.03)
-        songb = w["b0_t"] + np.round((ks - w["b0_t"]) / w["beat"]) * w["beat"]
-        dd = (ks + own[:len(ks)] - songb[:len(own)]) * 1000 if len(own) else np.zeros(0)
+        pr = _rise_onsets(x, a - 0.3, [40, 160], ks, 0.03, pairs=True)
+        on_t = pr[:, 1] + pr[:, 0]
+        songb = w["b0_t"] + np.round((pr[:, 1] - w["b0_t"]) / w["beat"]) * w["beat"]
+        dd = (on_t - songb) * 1000
         d6[wn] = f"{len(ks)} 下底鼓，起音离歌的拍点中位 {np.median(np.abs(dd)):.1f} ms、最大 {np.abs(dd).max():.1f} ms" if len(dd) else "没有底鼓"
         ok6 &= len(dd) > 0 and np.abs(dd).max() <= 10
     put("D6", "出窗口同拍接回（W2、W3 最后一条小节线后 2 小节）", "；".join(f"{k}：{v}" for k, v in d6.items()), "底乐底鼓起音离歌的拍点 ≤ 10 ms", ok6)
@@ -3889,8 +4136,9 @@ def v10_check(P, mp4=None):
         nb = int(np.floor((t_end - w["b0_t"]) / w["beat"] - 1e-6))
         grid = w["b0_t"] + np.arange(2 if name == "W1" else 0, nb) * w["beat"]
         band = [1500, 4000] if name == "W3" else [6000, 11000]
-        x = np.asarray(sng[int((grid[0] - 1) * SR):int((grid[-1] + 1) * SR)], float)
-        d = _rise_onsets(x, grid[0] - 1, band, grid, 0.06) * 1000
+        s0 = max(0.0, grid[0] - 1)
+        x = np.asarray(sng[int(s0 * SR):int((grid[-1] + 1) * SR)], float)
+        d = _rise_onsets(x, s0, band, grid, 0.06) * 1000
         s2[name] = f"中位 {np.median(d):+.1f} ms（{len(d)} 拍）" if len(d) else "量不到"
         ok2 &= len(d) > 0 and abs(np.median(d)) <= 17
     put("S2", "第 2 步：歌的起音离画面拍点（T7b 量法；W3 用 1.5–4 kHz，6–11 kHz 在它那里是十六分的镲）", "；".join(f"{k} {v}" for k, v in s2.items()), "中位 ≤ 17 ms", ok2)
@@ -3937,6 +4185,7 @@ if __name__ == "__main__":
     ap.add_argument("--sample", nargs=2, metavar=("FROM", "TO"))
     ap.add_argument("--plan", action="store_true", help="v10 whole film (doc 19): print segment starts, windows, tempo regions, rows, builds")
     ap.add_argument("--full", action="store_true", help="v10 whole film (doc 19): voice, bed stems, songs, levels, mix -> G:/cdk20/work/bed_v10")
+    ap.add_argument("--songs10", action="store_true", help="v10: re-place the songs and throws, then voice and mix (bed stems kept)")
     ap.add_argument("--mix10", action="store_true", help="v10: re-run only levels, ducking and master on the stored stems")
     ap.add_argument("--check10", nargs="?", const="", default=None, metavar="MP4", help="v10: machine checks (doc 19 M1-M14, D1-D6, steps) -> qc_bed_v10.json; optional trial mp4 for M1-M3, M13")
     ap.add_argument("--plan-v9", action="store_true", help="old v9 whole film: windows, tempo fits and bar counts")
@@ -3949,13 +4198,20 @@ if __name__ == "__main__":
         v10_plan(Plan10())
     if a.full:
         v10_full()
+    if a.songs10:
+        P = Plan10(); v10_songs(P); v10_voice(P); v10_mix(P)
+        info = json.loads((V10_OUT / "render_info.json").read_text("utf8"))
+        info.update({k: getattr(P, k) for k in ("song_info", "vinfo", "row_gain", "master_db", "tp_db", "sp_db", "lim_samples", "duck_depth", "m5")})
+        info["log"] = info["log"] + P.log[-3:]
+        (V10_OUT / "render_info.json").write_text(json.dumps(info, ensure_ascii=False, indent=1, default=float), "utf8")
+        print(chr(10).join(P.log[-3:]))
     if a.mix10:
         P = Plan10(); v10_voice(P); v10_mix(P)
         info = json.loads((V10_OUT / "render_info.json").read_text("utf8"))
-        info.update({k: getattr(P, k) for k in ("row_gain", "master_db", "tp_db", "sp_db", "lim_samples", "duck_depth")})
-        info["log"] = info["log"] + P.log[-2:]
+        info.update({k: getattr(P, k) for k in ("row_gain", "master_db", "tp_db", "sp_db", "lim_samples", "duck_depth", "m5")})
+        info["log"] = info["log"] + P.log[-3:]
         (V10_OUT / "render_info.json").write_text(json.dumps(info, ensure_ascii=False, indent=1, default=float), "utf8")
-        print(chr(10).join(P.log[-2:]))
+        print(chr(10).join(P.log[-3:]))
     if a.check10 is not None:
         v10_check(Plan10(verbose=False), a.check10 or None)
     if a.plan_v9:

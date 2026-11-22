@@ -1,0 +1,27 @@
+{
+ "note": "HKBU SCIE1007 课程作业的科普视频：音乐段 W5（片尾，重力打开、盒盖落定）的卡点表。歌是 The Weeknd - Out of Time。格式照 W4_Sacrifice.json；做法见 .claude/skills/beat-retime/SKILL.md。依据：19_声音字幕片尾与整片收口.md 1.4、5.2。",
+ "song": "Out of Time",
+ "file": "Out of Time - The Weeknd[Dawn FM].flac",
+ "bpm": 93.03,
+ "bar_s": 2.579813,
+ "grid_fix_s": 0.059,
+ "grid_fix_note": "音乐/拍子/Out of Time.json 的小节线（first_downbeat 1.881 s）早了一拍，而且网格比真实起音早 59 ms：真实第 n 小节第一拍 = 1.881 + 0.645（一拍）+ 0.059 = 2.585 + (n − 1) × 2.579813 s。11-23 底乐 v10 用 6–11 kHz、3 ms 包络、升到 30% 峰值的时域起音（beat-retime T7b）在第 21–32 小节核对：修正后拍点偏差中位 −2.1 ms（≤ ±2 ms 的要求按四舍五入算在边上，按 −2 ms 记）。",
+ "sections_s": {
+  "bar_21": 54.181,
+  "bar_23": 59.341,
+  "chorus_bar_25": 64.501,
+  "gravity_bar_31": 79.979,
+  "lid_bar_32": 82.559,
+  "bar_33": 85.139
+ },
+ "w5": {
+  "why": "12 小节版：第 21–32 小节（54.181–85.139 s），W5 第 0 帧在小节线上跳到第 21 小节；8-07 最后 2 小节预叠前奏第 3–4 小节（7.745–12.904 s），−20 dB、低通 500 Hz。第 33 小节线前 60 ms 起干声淡到 0，最后 2 拍送甩尾 2.0 s。",
+  "start_s": 54.181,
+  "end_s": 85.139,
+  "beats": 48,
+  "pre_layer_s": [
+   7.745,
+   12.904
+  ]
+ }
+}
