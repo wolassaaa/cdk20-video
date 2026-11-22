@@ -77,7 +77,7 @@
    "at": {"word": "5-04.w042", "off": 42}, "lead": 14, "until": {"dur": 10}, "guide": {"kind": "none"}},
   {"id": "needle_stop", "obj": "needle", "verb": "move", "means": "nanomolar. Weak.：旋钮拧到头，表针顶在尽头抖，6 台还亮着",
    "at": {"word": "5-04.w043", "off": 0}, "lead": 0, "until": {"sentence_end": "5-04.s7", "off": 3}, "guide": {"kind": "none"}},
-  {"id": "tail_rush", "obj": "socket", "verb": "move", "means": "Weak.：段尾，插座（盖合着，001 已退出）从画面左边冲进镜头，孔口面盖满画面（接出镜 5-05+06 的段首）",
-   "at": {"word": "5-04.w044", "off": 8}, "lead": 18, "guide": {"kind": "none"}}
+  {"id": "tail_rush", "obj": "socket", "verb": "move", "means": "Weak.：段尾，插座（盖合着，001 已退出）从画面左边冲进镜头，孔口面盖满画面（接出镜 5-05+06 的段首）。11-23 A5：段尾接长到 1510 帧、Weak. 进片后 off 8 → 26，落点仍是末帧 1509",
+   "at": {"word": "5-04.w044", "off": 26}, "lead": 18, "guide": {"kind": "none"}}
  ]
 }

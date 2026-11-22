@@ -18,7 +18,12 @@
     画面 h264_nvenc 1080p60 yuv420p bt709，声音 48 kHz 立体声 PCM，补静音或截到正好 = 帧数 ÷ 60。
     每段转码时顺便量黑帧（blackdetect d=0.05 pix_th=0.06）和冻帧（freezedetect −60 dB ≥ 0.5 s），结果和缓存放一起。
   - 画面 concat 直接拷贝，声音 wav 接起来（带 --mix <wav> 时改用外面给的整片混音，补齐或截到画面长度），合成 AAC 256k。
-  - 段与段一律硬切（接点的装配叠层、章首光扫、K1–K7 上午由位 1 加，见 17 的 T2b）。
+  - 接点叠层（11-23 审查批 1 rc02 第 ③ 条，位 3 加）：OVERLAY_ON 里的接点照 joints_v10.json 的 overlay 叠擦除层——
+    assembly-left 叠左段最后 17 帧（擦除层入场半段 0–16）、assembly-right 叠右段头 17 帧（退场半段 17–33）、assembly 两边都叠；
+    T2 的接点（J22）左段还是 v9 旧页时，最后 8 帧做甩镜（向左推出 2304 px、横向模糊到 40 px；新做的 3-03 钻取自带甩镜，不再加）。叠好的段单独缓存，声音不动。
+    11-23 T2b（位 1）补全：ASM 表逐接点写死 19 的 6.3 全部"装配叠"（只叠自己不带擦除的那一侧；B 页那一侧页面已画），
+    按两侧这一版实际用的片（v9 / 简版 / 新）选退路做法；四处章首 T6 光扫（SWEEP_ON：3-01、4-01、7-01、8-01 第 0–15 帧）。
+    接点机检 K1–K7 在 粗剪/_check/check_joints_v10.py。
 
 用法（在项目根目录；用 C:/Python314 的 python：_env/footage 的 python 和 _env/ffmpeg 没有写 G 盘的许可）：
   python -X utf8 镜头设计_v3/粗剪/v10/build_v10.py            滚动版 → G:/cdk20/work/v10/rc/v10_rcNN.mp4（NN 自动加 1）
@@ -75,13 +80,137 @@ JWIPE = {  # 用 T5 的接点用哪块擦除层（G:/cdk20/work/bwipe/<名>；w0
     "J09": "runner", "J12": "runner", "J13": "key", "J14": "oncam_2-04",
     "J15": "oncam_2-04", "J18": "runner", "J23": "socket", "J24": "oncam_3-06",
     "J25": "oncam_3-06", "J27": "oncam_3-09", "J28": "runner", "J32": "oncam_4-04_4-05",
-    "J33": "oncam_4-04_4-05", "J35": "oncam_4-08", "J36": "oncam_4-08", "J37": "chip",
+    "J33": "oncam_4-04_4-05", "J35": "oncam_4-08", "J36": "oncam_4-08", "J37": "runner",
     "J38": "key", "J39": "oncam_4-11_4-12", "J40": "oncam_4-11_4-12", "J41": "oncam_5-02",
-    "J42": "oncam_5-02", "J43": "socket", "J44": "socket", "J45": "oncam_5-05_5-06",
-    "J47": "oncam_5-09", "J49": "socket", "J53": "oncam_6-04_6-05", "J54": "oncam_6-04_6-05",
+    "J42": "oncam_5-02", "J43": "socket_bore", "J44": "socket", "J45": "oncam_5-05_5-06",
+    "J47": "oncam_5-09", "J49": "socket_bore", "J53": "oncam_6-04_6-05", "J54": "oncam_6-04_6-05",
     "J58": "runner", "J62": "oncam_7-01", "J65": "oncam_8-01", "J66": "oncam_8-01",
     "J68": "oncam_8-04_8-05_8-06_8-07", "J69": "w0plate",
+    # 11-23 T2b（位 1）：JWIPE 记"成片里实际用的那块"。J37：4-09 页尾自带的是 runner（B409 T5Out runner），不是 19 写的 chip；
+    # J23、J29、J43、J49：B 页 11-23 换了亮版 socket_bore（commit 2595e00）；J29 设计是 T3（4-01 第 0 帧对位 W2 末帧），
+    # 4-01 页面还没改成 T3、段首仍是 socket_bore 退场半段，拼片先把同一块的入场半段补在 W2 尾上（见 ASM），T3 等页面重渲。
+    "J23": "socket_bore", "J29": "socket_bore",
 }
+# 页面（B 档）里自己已经画了的半段：拼片不再叠，只补另一侧（11-23 从 btier/B*.jsx 的 T5In/T5Out 读出来的）
+#   出镜段 ↔ B 页：B 页这一头现在画的是 runner（19 的 6.3：v10 照现状，11-24 重渲时再换 oncam_<组>），所以 B 页那一侧不叠。
+
+# 19 的 6.3 "装配叠"：两边（或一边）不重渲，拼片时叠擦除层。每个接点 (左段尾叠入场半段, 右段头叠退场半段)，只列自己不带擦除的那一侧。
+# 条件是一个函数 (左段 row, 右段 row) → (左, 右, 左段尾甩镜帧数, 说明)；不成立就返回 None。
+def _st(r):
+    return (r or {}).get("state") or ""
+
+
+ASM = {
+    "J02": lambda L, R: (None, "oncam_1-01", 0, "1-01 段尾零件冲镜，1-02（C）头 17 帧叠 oncam_1-01 退场半段"),
+    "J03": lambda L, R: ("oncam_1-03", None, 0, "1-02（C）尾 17 帧叠 oncam_1-03 入场半段"),
+    "J07": lambda L, R: (None, "runner", 0, "1-08 页尾自带 runner 入场半段，1-09（C）头 17 帧叠退场半段"),
+    "J08": lambda L, R: ("liver", "liver", 0, "两边都是 C，装配叠 liver"),
+    "J09": lambda L, R: ("runner", None, 0, "补全：1-11 页首自带 runner 退场半段，1-10（C）尾 17 帧补入场半段（19 写的是页面已写，只有半段就是硬切）"),
+    "J12": lambda L, R: (None, "runner", 0, "补全：2-01 页尾自带 runner 入场半段，2-02（v9 出镜）头 17 帧补退场半段") if _st(R) == "v9" else
+                        (None, "oncam_2-02", 0, "2-02 三维出镜：头上叠自己的 oncam_2-02 退场半段") if (WORK / "bwipe/oncam_2-02").exists() else None,
+    "J13": lambda L, R: ("key", "key", 0, "2-02（v9）、2-03（C）都不重渲，装配叠 key") if _st(L) == "v9" else
+                        (None, "oncam_2-02" if (WORK / "bwipe/oncam_2-02").exists() else "key", 0, "2-02 重做后：T1 加退场半段叠在 2-03 头"),
+    "J14": lambda L, R: ("oncam_2-04", None, 0, "2-03（C）尾 17 帧叠 oncam_2-04 入场半段"),
+    "J19": lambda L, R: ("runner", None, 0, "2-08 是简版长路页：尾 17 帧叠 runner 入场半段（19 的 6.3 简版做法）") if _st(L) == "简版" else None,
+    "J20": lambda L, R: ("key", "key", 0, "3-02 还是 v9 页面：T5 key，装配叠（19 的 6.3 退路）") if _st(R) == "v9" else None,
+    "J21": lambda L, R: (None, None, 8, "3-02 还是 v9 页面：T2，3-02 尾 8 帧甩镜（19 的 6.3 退路）") if _st(L) == "v9" else None,
+    "J22": lambda L, R: (None, None, 8, "3-03 还是 v9 旧页：尾 8 帧甩镜（新钻取版自带）") if _st(L) == "v9" else None,
+    "J28": lambda L, R: (None, "runner", 0, "3-09 段尾钻进磨砂壳；W2 第 0–16 帧叠 runner 第 17–33 帧（18 的 2.6）"),
+    "J29": lambda L, R: ("socket_bore", None, 0, "T3 退路：4-01 页首还是 socket_bore 退场半段，W2 尾 17 帧补入场半段；4-01 改成 T3 后去掉"),
+    "J37": lambda L, R: (None, "runner", 0, "补全：4-09 页尾自带 runner 入场半段，W3 头 17 帧补退场半段"),
+    "J38": lambda L, R: ("key", None, 0, "补全：4-10 页首自带 key 退场半段，W3 尾 17 帧补入场半段"),
+    "J49": lambda L, R: ("socket_bore", None, 0, "补全：5-10 页首自带 socket_bore 退场半段，W4 尾 17 帧补入场半段"),
+    "J68": lambda L, R: (None, "runner", 0, "8-04–07 还不是三维出镜（没有 oncam 擦除层）：8-03 页尾自带 runner 入场半段，8-04–07 头 17 帧补退场半段") if _st(R) == "v9" else None,
+    "J69": lambda L, R: ("w0plate" if _st(L) == "v9" else None, "w0plate", 0,
+                         "W5 第 0–16 帧叠白料牌擦除层第 17–33 帧" + ("；8-04–07 不是三维出镜（段尾没有零件冲镜），尾 17 帧补白料牌入场半段" if _st(L) == "v9" else "")),
+}
+# 章首 T6 光扫（19 的 6.1）：拼片叠在右段第 0–15 帧。第 2、5、6 章做在画面里，不叠。
+SWEEP_ON = {"J19": "3-01", "J29": "4-01", "J61": "7-01", "J65": "8-01"}
+
+OVERLAY_ON = set(ASM) | set(SWEEP_ON)   # 11-23 位 3 先开了六处（J08、J13、J14、J22、J28、J69），T2b（位 1）补全到 6.3 全部装配叠和四处章首光扫
+
+
+def wipe_halves(name):
+    """擦除层 → (入场半段 17 张, 退场半段 17 张)，每张是 PNG 路径或 None（那一帧不叠）。
+    bwipe/<名>/0000–0033.png：入场 0–16、退场 17–33。w0plate：同 J01，退场用 w0wipe_final 第 168–184 帧。
+    bwipe/oncam_<组>/w_<帧>.png 是出镜段段首 16 帧和段尾 16 帧的零件层：入场 = 段首倒放（第 0 帧盖满对着接点），退场 = 段尾倒放。"""
+    if name == "w0plate":
+        d = WORK / "w1/w0wipe_final"      # wipe [150, 161, 183]：入场 151–167（W0 自己的尾巴），退场 168–184（同 J01）
+        return [d / f"f_{151 + i:04d}.png" for i in range(17)], [d / f"f_{168 + i:04d}.png" for i in range(17)]
+    d = WORK / "bwipe" / name
+    if name.startswith("oncam_"):
+        fs = sorted(int(p.stem[2:]) for p in d.glob("w_*.png"))
+        nf = fs[-1] + 1
+        cin = [None] + [d / f"w_{15 - k:04d}.png" for k in range(16)]          # 左段最后 17 帧：第 k 帧叠段首第 16−k 帧
+        cout = [d / f"w_{nf - 1 - i:04d}.png" for i in range(16)] + [None]     # 右段头 17 帧：第 i 帧叠段尾第 nf−1−i 帧
+        return cin, cout
+    return [d / f"{i:04d}.png" for i in range(17)], [d / f"{17 + i:04d}.png" for i in range(17)]
+
+
+def whip(img, t):
+    """T2 甩镜一帧（t 0..1）：画面向左推出 2304·t² px，横向盒式模糊半径 4 → 40 px。"""
+    np, _ = _np()
+    dx = int(round(2304 * t * t)) % W
+    a = np.roll(img[..., :3], -dx, axis=1).astype(np.float32)
+    r = int(4 + 36 * t)
+    c = np.cumsum(np.pad(a, ((0, 0), (r + 1, r), (0, 0)), mode="edge"), axis=1)
+    return ((c[:, 2 * r + 1:] - c[:, :-2 * r - 1]) / (2 * r + 1)).clip(0, 255).astype(np.uint8)
+
+
+_T6_CACHE = {}
+
+
+def t6_sweep(img, k, n=16):
+    """章首 T6 光扫（19 的 6.1，照 btier/bkit.jsx 的 T6Sweep）：240 px 宽、斜 20° 的白色渐变带，n 帧从左扫到右，
+    峰值不透明度 0.55（颜色 255,250,240），screen 叠：out = base + a·c·(1 − base)。k = 0..n−1。"""
+    np, _ = _np()
+    p = k / max(1, n - 1)
+    cx = -400 + p * (1920 + 800)
+    if "g" not in _T6_CACHE:
+        yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
+        _T6_CACHE["g"] = (xx, yy)
+    xx, yy = _T6_CACHE["g"]
+    c, s = math.cos(math.radians(20)), math.sin(math.radians(20))
+    d = (xx - cx) * c + (yy - H / 2) * s                       # 到光带中线的距离（沿带宽方向）
+    a = (0.55 * np.clip(1 - np.abs(d) / 120.0, 0, 1))[..., None]
+    col = np.array([255, 250, 240], np.float32)[None, None, :] / 255.0
+    f = img[..., :3].astype(np.float32) / 255.0
+    return (np.clip(f + a * col * (1 - f), 0, 1) * 255).astype(np.uint8)
+
+
+def piece_overlay(g, pc, head, tail, whip_n, sweep_n=0):
+    """转好的段上叠接点层：head = 头 17 帧的 PNG 列表（退场半段），tail = 尾 17 帧的（入场半段），whip_n = 尾上甩镜帧数，
+    sweep_n = 头上章首 T6 光扫帧数（16，叠在擦除层上面）。"""
+    n = pc["meta"]["frames"]
+    pngs = [p for p in (head or []) + (tail or []) if p is not None and Path(p).exists()]
+    key = sig(pc["v"], *pngs, extra=f"ov|{len(head or [])}|{len(tail or [])}|{whip_n}|t6{sweep_n}")
+    vp, mp = PIECES / f"{g}_ov_{key}.mp4", PIECES / f"{g}_ov_{key}.json"
+    if not (vp.exists() and mp.exists()):
+        def gen():
+            for i, fr in enumerate(decode(pc["v"], n)):
+                if head and i < len(head) and head[i] is not None and Path(head[i]).exists():
+                    fr = over(fr, read_png(head[i]))
+                if sweep_n and i < sweep_n:
+                    fr = t6_sweep(fr, i, sweep_n)
+                k = i - (n - len(tail or []))
+                if tail and k >= 0 and tail[k] is not None and Path(tail[k]).exists():
+                    fr = over(fr, read_png(tail[k]))
+                kw = i - (n - whip_n)
+                if whip_n and kw >= 0:
+                    fr = whip(fr, (kw + 1) / whip_n)
+                yield fr
+        encode_frames(gen(), vp)
+        finish(vp, pc["a"], mp, n, dict(src=pc["meta"].get("src"), base=Path(pc["v"]).name))
+    note = list(pc["note"])
+    if head:
+        note.append("头 17 帧叠接点擦除层（退场半段）")
+    if tail:
+        note.append("尾 17 帧叠接点擦除层（入场半段）")
+    if whip_n:
+        note.append(f"尾 {whip_n} 帧 T2 甩镜")
+    if sweep_n:
+        note.append(f"头 {sweep_n} 帧章首 T6 光扫")
+    return dict(v=vp, a=pc["a"], meta=json.loads(mp.read_text(encoding="utf-8")), note=note)
 
 
 def jwipe(j):
@@ -514,7 +643,7 @@ def main():
         rows.append(row)
 
     # ---- 转码（缓存）
-    def work(row):
+    def base_piece(row):
         e, g = row["entry"], row["group"].replace("+", "_")
         sp = e.get("special")
         if sp == "w0":
@@ -524,6 +653,50 @@ def main():
         if sp in ("w0wipe", "w1tail", "w1head"):
             return piece_neighbor(g, row["src"], row["pr"], e, sp)
         return piece_plain(g, row["src"], row["pr"], e)
+
+    def work(row):
+        pc = base_piece(row)
+        k = rows.index(row)
+        if not joints or row["group"] == "EGG":
+            return pc
+        jl, jr = joints.get(f"J{k:02d}"), joints.get(f"J{k + 1:02d}")
+        if jl and jl.get("right") not in (None, row["group"]):              # 接点表和段序对不上就不叠（不猜）
+            print(f"接点 {jl['id']} 右段 {jl.get('right')} ≠ {row['group']}，不叠", flush=True)
+            jl = None
+        if jr and jr.get("left") not in (None, row["group"]):
+            print(f"接点 {jr['id']} 左段 {jr.get('left')} ≠ {row['group']}，不叠", flush=True)
+            jr = None
+        head = tail = None
+        whip_n = sweep_n = 0
+        # 11-23 T2b：按 ASM 表（19 的 6.3 装配叠，按两侧这一版实际用的片定哪一侧叠）；位 3 原来按 joints 的 overlay 字段叠，
+        # 但 B 页那一侧的半段页面自己已经画了（B*.jsx 的 T5In/T5Out），照 overlay 字段会叠两遍，所以改成逐接点写死。
+        if jl and jl["id"] in ASM:
+            p = ASM[jl["id"]](rows[k - 1] if k > 0 else None, row)
+            if p and p[1]:
+                head = wipe_halves(p[1])[1]
+        if jl and SWEEP_ON.get(jl["id"]) == row["group"]:
+            sweep_n = 16
+        if jr and jr["id"] in ASM:
+            p = ASM[jr["id"]](row, rows[k + 1] if k + 1 < len(rows) else None)
+            if p and p[0]:
+                tail = wipe_halves(p[0])[0]
+            if p and p[2]:
+                whip_n = p[2]
+        if not (head or tail or whip_n or sweep_n):
+            return pc
+        return piece_overlay(row["group"].replace("+", "_"), pc, head, tail, whip_n, sweep_n)
+
+    def joint_notes(k):
+        """接点 J<k> 这一版拼片实际做了什么（写进清单）。"""
+        jid = f"J{k:02d}"
+        out = []
+        if jid in ASM and 0 < k < len(rows):
+            p = ASM[jid](rows[k - 1], rows[k])
+            if p:
+                out.append(p[3])
+        if jid in SWEEP_ON and k < len(rows) and rows[k]["group"] == SWEEP_ON[jid]:
+            out.append(f"{rows[k]['group']} 第 0–15 帧叠章首 T6 光扫")
+        return "；".join(out) or None
 
     if not A.dry:
         with ThreadPoolExecutor(WORKERS) as ex:
@@ -588,8 +761,11 @@ def main():
                          first_word_f=fw, last_word_end_f=lw, subs=subs,
                          state=r["state"], want_f=r["want"], diff_f=(r["frames"] - r["want"]) if r["want"] else None,
                          joint_in=jl, joint_out=jr,
-                         wipe_in=(joints.get(jl, {}).get("wipe") if joints else None) or jwipe(jl) if k > 0 else None,
-                         wipe_out=(joints.get(jr, {}).get("wipe") if joints else None) or jwipe(jr), note="；".join((r["piece"]["note"] if not A.dry else []) + ([r["cand_note"]] if r["cand_note"] else []))))
+                         # 擦除层：JWIPE 记成片里实际用的那块（11-23 T2b），没有再用 joints_v10.json 的设计值
+                         wipe_in=(jwipe(jl) or (joints.get(jl, {}).get("wipe") if joints else None)) if k > 0 else None,
+                         wipe_out=jwipe(jr) or (joints.get(jr, {}).get("wipe") if joints else None),
+                         asm_in=joint_notes(k) if k > 0 and r["group"] != "EGG" else None,
+                         asm_out=joint_notes(k + 1) if r["group"] != "EGG" else None, note="；".join((r["piece"]["note"] if not A.dry else []) + ([r["cand_note"]] if r["cand_note"] else []))))
     man = dict(fps=FPS, built=time.strftime("%Y-%m-%d %H:%M"), master=mname, out=rel(out) if out else None, total_f=total,
                mix=A.mix, joints_src="粗剪/v10/joints_v10.json" if joints else "19 的 6.3（build_v10.JCODE）",
                word_frames_from=mname + "（段内帧，按 master 的段时间；B 档页还没按裁停顿重渲时，和成片差几帧）",
@@ -668,10 +844,10 @@ def md2html(p):
 def write_list(rows, total, out, chk, missing, A, mname, secs):
     new = sum(r["state"] == "新" for r in rows)
     L = ["# v10 整片清单", "",
-         "HKBU SCIE1007 课程作业的科普视频。v10：把各段成片按总表顺序硬切接起来（1080p60），没改任何一段的画面，没烧字幕。",
+         "HKBU SCIE1007 课程作业的科普视频。v10：把各段成片按总表顺序接起来（1080p60），接点照 19 的 6.3 叠装配擦除层和章首光扫，段内画面没改，没烧字幕。",
          f"出片：`{rel(out) if out else '（--dry，没拼）'}`，{time.strftime('%Y-%m-%d %H:%M')}（韩国时间）；"
          f"全长 **{mmss(total)}**（{total} 帧）；声音：{'整片混音 ' + A.mix if A.mix else '各段成片自带的声音接起来'}；用时 {secs:.0f} 秒。",
-         f"段序和“总表”帧数：`映射/{mname}`（W0 168、W1 1010、5-04 1474 照 17 的 1.2 改）。“差”= 实际 − 总表。", ""]
+         f"段序和“总表”帧数：`映射/{mname}`（W0 168、W1 1010 照 17 的 1.2 改；5-04 1510 照 18 的 A5 接长，11-23）。“差”= 实际 − 总表。", ""]
     ok = total <= LIMIT_F
     L.append(f"**时长门槛**（19 的 7.3，≤ 19:55.0 = {LIMIT_F} 帧）：{'过' if ok else '不过'}，"
              f"{'余' if ok else '超'} {abs(LIMIT_F - total)} 帧（{abs(LIMIT_F - total) / FPS:.2f} 秒）。")
@@ -706,7 +882,7 @@ def write_list(rows, total, out, chk, missing, A, mname, secs):
           "- 选文件：`粗剪/v10/sources_v10.json` 每段的候选按先后取第一个存在、读得出、不在 `粗剪/v10/blocklist.txt` 里的。没过验收的片，把文件名写进 blocklist.txt 再拼一次。",
           "- 段长用成片自己的帧数，不拉伸、不冻末帧；30 fps 的源（W5 现成版）按时长换算成 60 fps（复帧）。",
           "- W0、W1 用渲染帧接：W1 三维尾 120 帧盖在 1-11 最后 120 帧上、三维头 120 帧盖在 2-01 头 120 帧上，各一道 14 帧 T6 光扫；W0 的擦除层叠在 1-01 头 16 帧。W1 的歌在 1-11 尾巴下面的淡入这一版没有（W0、W1 的声音按段截自 09_片头W0_大标题W1.mp4），整片混音出来后用 `--mix` 换掉。",
-          "- 接点一律硬切；装配叠层、章首光扫和接点机检 K1–K7 由 17 的 T2b 加。",
+          "- 接点：19 的 6.3 的装配叠层和四处章首 T6 光扫由拼片叠（build_v10.ASM、SWEEP_ON，逐接点做了什么写在 manifest 的 asm_in/asm_out）；其余接点两段自己带转场。接点机检 K1–K7：`粗剪/_check/check_joints_v10.py`。",
           "- W2 取英文押韵字幕版前 1500 帧，没加 ROUGH CUT 角标；W3 4K 版 lanczos 缩到 1080p 取前 900 帧。"]
     md = HERE / "清单_v10.md"
     md.write_text("\n".join(L) + "\n", encoding="utf-8")

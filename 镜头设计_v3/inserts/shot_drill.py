@@ -663,6 +663,8 @@ def draw_text_layer(items, alpha_of):
         if it.get("plate"):                                               # 深色底衬（出处行：压在亮板件上也读得出，11-20 Gemini 审 3-04）
             pc, pa, px_, py_ = it["plate"]
             x0, y0, x1, y1 = dr.textbbox(it["xy"], it["text"], font=fnt, anchor=it.get("anchor", "ls"))
+            if it.get("plate_y"):                                         # 11-23（18 的 A1）：底衬上下沿写死（出处行 886–928），不随字形高低变
+                y0, y1, py_ = it["plate_y"][0] + py_, it["plate_y"][1] - py_, py_
             dr.rounded_rectangle([x0 - px_, y0 - py_, x1 + px_, y1 + py_], radius=py_ + 2, fill=(*pc, int(255 * pa * a)))
         if it.get("halo"):                                                # 软光晕（模糊后的粗描边）：字压在花背景上也读得出，又不像硬描边
             hc = it["halo"]

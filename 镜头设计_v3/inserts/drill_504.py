@@ -1229,13 +1229,15 @@ def build_real(seg, mode="render", *frames, ligand=LIGAND, Tcls=None, lig_motion
 SRC_TOY = "Illustration (our toy model) · CDK20 case: Ren et al. 2023"
 SRC_REAL = "CDK20: AlphaFold DB AF-Q8IZL9-F1 (predicted, CC BY 4.0) · 001 pose: our AutoDock Vina run"
 SRC_SIZE = 30                                         # 出处行：Instrument Serif 30 px，深色底衬（11-20 Gemini 审 3-04：放大、加底衬、统一衬线体）
-LABEL_XY = (96, 990)                                                   # OUR RE-DOCKING 标签：出处行（基线 1046）上面一行
-SRC_XY = (96, 1046)
+# 11-23（18 的 A1）：出处行移出字幕区——底衬左沿 x 64、上下沿 886–928（左中对齐，y 907）；OUR RE-DOCKING 标签底衬上沿 836（836–878）。
+# 字体、字号、底衬颜色不变（3-03 位 2 同一做法；W4 借这里的 comp_frames，重合成时一起变）
+LABEL_XY, LABEL_PLATE_Y = (76, 857), (836, 878)
+SRC_XY, SRC_PLATE_Y = (76, 907), (886, 928)
 PLATE = ((14, 16, 24), 0.66, 12, 8)
 LABEL_REAL = "OUR RE-DOCKING (AutoDock Vina)"
 NOTE_REAL = "001"
 INK_RED = (232, 25, 15)
-OUT_DIR = SD.ROOT / "导演检查_20261121"
+OUT_DIR = SD.ROOT / "导演检查_20261123"          # 11-23 A1/A5 重合成出新片，11-21 的旧片留着
 OUT_MP4 = OUT_DIR / "16_钻取_5-04.mp4"
 
 
@@ -1315,11 +1317,11 @@ def comp_frames(seg, flist=None, *, Tcls=None, src_toy=SRC_TOY, src_real=SRC_REA
                 pil = Image.alpha_composite(pil, SD.draw_text_layer(items, lambda it: kn))
             kl = ramp(f, ri1 - 16, ri1 + 4) * (1 - ramp(f, ro0 - 2, ro0 + 14))
             if kl > 0.003:                                                   # 标签放出处行上面一行、同样深色底衬（11-21 Gemini 审 W4：压在蛋白和墨线圈上挡科学画面）
-                items = [dict(text=label, xy=LABEL_XY, size=36, color=(244, 240, 232), anchor="ls", shadow=False, plate=PLATE)]
+                items = [dict(text=label, xy=LABEL_XY, size=36, color=(244, 240, 232), anchor="lm", shadow=False, plate=PLATE, plate_y=LABEL_PLATE_Y)]
                 pil = Image.alpha_composite(pil, SD.draw_text_layer(items, lambda it: kl))
         base_a = src_alpha(t, f)
-        it_t = dict(text=src_toy, xy=SRC_XY, size=SRC_SIZE, color=(240, 238, 232), anchor="ls", shadow=False, plate=PLATE)
-        it_r = dict(text=src_real, xy=SRC_XY, size=SRC_SIZE, color=(240, 238, 232), anchor="ls", shadow=False, plate=PLATE)
+        it_t = dict(text=src_toy, xy=SRC_XY, size=SRC_SIZE, color=(240, 238, 232), anchor="lm", shadow=False, plate=PLATE, plate_y=SRC_PLATE_Y)
+        it_r = dict(text=src_real, xy=SRC_XY, size=SRC_SIZE, color=(240, 238, 232), anchor="lm", shadow=False, plate=PLATE, plate_y=SRC_PLATE_Y)
         for it_, a_ in ((it_t, clamp(1 - 2 * a_real)), (it_r, clamp(2 * a_real - 1))):   # 两行各画一层（底衬不互相盖掉字）
             if base_a * a_ > 0.003:
                 pil = Image.alpha_composite(pil, SD.draw_text_layer([it_], lambda it, _a=a_: base_a * _a))

@@ -70,6 +70,9 @@ def c1():
         for c in T["trim"]["cuts_list"]:
             keep[int(round(c["v1_g_s"] * BM.SR)):int(round(c["v1_g_e"] * BM.SR))] = False
         A = A[keep]
+        for ins in sorted(T["trim"].get("inserts_list", []), key=lambda c: c["v2_g_s"]):   # 11-23 A5：段尾接长的那一截 cut 声音里没有，补空白
+            at = int(round(ins["v2_g_s"] * BM.SR))
+            A = np.concatenate([A[:at], np.zeros(int(round(ins["add_f"] / FPS * BM.SR)), A.dtype), A[at:]])
     takes = BM.BC.takes()
     by = {it["name"]: it for v in takes.values() for it in v}
     devs, bad, n = [], [], 0
@@ -81,6 +84,8 @@ def c1():
             x = BM.take_audio(it)
             s0, s1 = w["src"]["t0"], w["src"]["t1"]
             snip = x[int(s0 * BM.SR):int(s1 * BM.SR)]
+            if len(snip) < int(0.05 * BM.SR):      # 11-23 A5：5-04 的 Weak. 在放置版录音（5_place）之外，只在 3_audio 原录音里，cut 声音里也没有，不复核
+                continue
             w0 = w["g0"] - 0.1
             k, r = BM.ncc_search(snip, A[int(w0 * BM.SR):int((w["g0"] + (s1 - s0) + 0.1) * BM.SR)])
             found = int(w0 * BM.SR) / BM.SR + k / BM.SR

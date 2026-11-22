@@ -1040,11 +1040,12 @@ SRC_REAL = "CDK20: AlphaFold DB AF-Q8IZL9-F1 (predicted, CC BY 4.0)"
 INK_RED = (232, 25, 15)
 INK_NOTE = (255, 66, 48)                                             # 手写批注：比墨线圈的红亮一档，深色真实层上也醒目（11-21 Gemini 第二轮）
 NOTE_STROKE = (5, (255, 250, 244))
-SRC_SIZE, SRC_XY, PLATE = 30, (96, 1046), ((14, 16, 24), 0.66, 12, 8)   # 11-21 Gemini 必改：出处行 Instrument Serif、放大、深色底衬（同 5-04）
+SRC_SIZE, SRC_XY, PLATE = 30, (76, 907), ((14, 16, 24), 0.66, 12, 8)   # 11-21 Gemini 必改：出处行 Instrument Serif、放大、深色底衬（同 5-04）
+SRC_PLATE_Y = (886, 928)            # 11-23（18 的 A1）：移出字幕区，底衬左沿 x 64、上下沿 886–928，左中对齐
 NOTE_PROTEIN = "CDK20, a protein"
 NOTE_ATP = "ATP binds here"
 POCKET_HL_R = 9.0
-OUT_DIR = SD.ROOT / "导演检查_20261121"
+OUT_DIR = SD.ROOT / "导演检查_20261123"          # 11-23 A1/A5 重合成出新片，11-21 的旧片留着
 OUT_MP4 = OUT_DIR / "16_钻取_3-04.mp4"
 
 
@@ -1176,8 +1177,8 @@ def comp_frames(seg, flist=None):
                     pil = Image.alpha_composite(pil, ink_arrow(p0, p1, -0.18, ease_out(ke), width=4.0, color=INK_NOTE, alpha=clamp(ka * 1.6)))
         # 出处行：玩具一行 / 真实一行（叠化时交换）；段首随 T5 淡入，甩镜时淡出
         base_a = ramp(f, 10, 30) * (1 - ramp(f, t.whip[0] - 4, t.whip[0] + 4))
-        it_t = dict(text=SRC_TOY, xy=SRC_XY, size=SRC_SIZE, color=(240, 238, 232), anchor="ls", shadow=False, plate=PLATE)
-        it_r = dict(text=SRC_REAL, xy=SRC_XY, size=SRC_SIZE, color=(240, 238, 232), anchor="ls", shadow=False, plate=PLATE)
+        it_t = dict(text=SRC_TOY, xy=SRC_XY, size=SRC_SIZE, color=(240, 238, 232), anchor="lm", shadow=False, plate=PLATE, plate_y=SRC_PLATE_Y)
+        it_r = dict(text=SRC_REAL, xy=SRC_XY, size=SRC_SIZE, color=(240, 238, 232), anchor="lm", shadow=False, plate=PLATE, plate_y=SRC_PLATE_Y)
         for it_, a_ in ((it_t, clamp(1 - 2 * a_real)), (it_r, clamp(2 * a_real - 1))):   # 两行各画一层（先淡出一行再淡入另一行，不叠字）
             if base_a * a_ > 0.003:
                 pil = Image.alpha_composite(pil, SD.draw_text_layer([it_], lambda it, _a=a_: base_a * _a))
