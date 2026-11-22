@@ -1,0 +1,132 @@
+{
+ "video": "D:\\。hkbu\\molecular science\\导演检查_20261121\\15_出镜3D_1-03.mp4",
+ "group": "1-03",
+ "fps": 60.0,
+ "frames": 325,
+ "offset_f": 0,
+ "S1": {
+  "word_events": 7,
+  "table_dev_max_f": 0,
+  "video_checked": 7,
+  "video_no_motion": [],
+  "pass_": true
+ },
+ "S2": {
+  "pass_": true,
+  "early": []
+ },
+ "S3": {
+  "pass_": true,
+  "longest_still_f": 0,
+  "bad": []
+ },
+ "S4": {
+  "pass_": true,
+  "looks_like_30": false,
+  "dup_frames": 0,
+  "stepped_dups": 0,
+  "stepped_ratio": 0.0,
+  "blend_frames": 0,
+  "blend_first": [],
+  "design_fade": 0,
+  "verdict": "原生（无变速重复/混帧）"
+ },
+ "sentences": [
+  {
+   "sid": "1-03.s1",
+   "f0": 32,
+   "f1": 75,
+   "last_motion_f": 75,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "1-03.s2",
+   "f0": 107,
+   "f1": 192,
+   "last_motion_f": 192,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "1-03.s3",
+   "f0": 209,
+   "f1": 281,
+   "last_motion_f": 281,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  }
+ ],
+ "events": [
+  {
+   "id": "arrive",
+   "verb": "move",
+   "w": "Here's",
+   "f_land": 32,
+   "table_dev": 0
+  },
+  {
+   "id": "thing",
+   "verb": "move",
+   "w": "thing.",
+   "f_land": 60,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "row",
+   "verb": "grow",
+   "w": "already",
+   "f_land": 121,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "medicine",
+   "verb": "eject",
+   "w": "medicines.",
+   "f_land": 158,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "just",
+   "verb": "move",
+   "w": "Just",
+   "f_land": 209,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "three",
+   "verb": "power_on",
+   "w": "not",
+   "f_land": 223,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "ones",
+   "verb": "move",
+   "w": "ones.",
+   "f_land": 273,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "dive",
+   "verb": "move",
+   "w": "ones.",
+   "f_land": 325,
+   "table_dev": 52,
+   "video_motion_near_start": true
+  }
+ ],
+ "pass": true
+}

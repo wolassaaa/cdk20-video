@@ -5,13 +5,13 @@
  "segs": [
   "6-11"
  ],
- "tool": "remotion",
+ "tool": "blender",
  "fps": 60,
  "len_f": 1494,
  "cut": "cut_v8",
- "cut_start_f": 53384,
- "cut_start_s": 889.73,
- "master_built": "2026-11-18 02:33:56 +09:00",
+ "cut_start_f": 52080,
+ "cut_start_s": 867.9967,
+ "master_built": "2026-11-22 20:33:03 +09:00",
  "words_hash": "d8e9cff9b925",
  "events_src": "镜头设计_v3/映射/events/6-11.json",
  "words": [
@@ -22,8 +22,8 @@
    "sid": "6-11.s1",
    "f0": 4,
    "f1": 9,
-   "F0": 53388,
-   "F1": 53393
+   "F0": 52084,
+   "F1": 52089
   },
   {
    "wid": "6-11.w002",
@@ -32,8 +32,8 @@
    "sid": "6-11.s1",
    "f0": 12,
    "f1": 29,
-   "F0": 53396,
-   "F1": 53413
+   "F0": 52092,
+   "F1": 52109
   },
   {
    "wid": "6-11.w003",
@@ -42,8 +42,8 @@
    "sid": "6-11.s1",
    "f0": 31,
    "f1": 39,
-   "F0": 53415,
-   "F1": 53423
+   "F0": 52111,
+   "F1": 52119
   },
   {
    "wid": "6-11.w004",
@@ -52,8 +52,8 @@
    "sid": "6-11.s1",
    "f0": 41,
    "f1": 46,
-   "F0": 53425,
-   "F1": 53430
+   "F0": 52121,
+   "F1": 52126
   },
   {
    "wid": "6-11.w005",
@@ -62,8 +62,8 @@
    "sid": "6-11.s1",
    "f0": 49,
    "f1": 58,
-   "F0": 53433,
-   "F1": 53442
+   "F0": 52129,
+   "F1": 52138
   },
   {
    "wid": "6-11.w006",
@@ -72,8 +72,8 @@
    "sid": "6-11.s1",
    "f0": 63,
    "f1": 69,
-   "F0": 53447,
-   "F1": 53453
+   "F0": 52143,
+   "F1": 52149
   },
   {
    "wid": "6-11.w007",
@@ -82,8 +82,8 @@
    "sid": "6-11.s1",
    "f0": 72,
    "f1": 82,
-   "F0": 53456,
-   "F1": 53466
+   "F0": 52152,
+   "F1": 52162
   },
   {
    "wid": "6-11.w008",
@@ -92,8 +92,8 @@
    "sid": "6-11.s1",
    "f0": 87,
    "f1": 97,
-   "F0": 53471,
-   "F1": 53481
+   "F0": 52167,
+   "F1": 52177
   },
   {
    "wid": "6-11.w009",
@@ -102,8 +102,8 @@
    "sid": "6-11.s1",
    "f0": 101,
    "f1": 109,
-   "F0": 53485,
-   "F1": 53493
+   "F0": 52181,
+   "F1": 52189
   },
   {
    "wid": "6-11.w010",
@@ -112,8 +112,8 @@
    "sid": "6-11.s1",
    "f0": 113,
    "f1": 121,
-   "F0": 53497,
-   "F1": 53505
+   "F0": 52193,
+   "F1": 52201
   },
   {
    "wid": "6-11.w011",
@@ -122,8 +122,8 @@
    "sid": "6-11.s1",
    "f0": 126,
    "f1": 145,
-   "F0": 53510,
-   "F1": 53529
+   "F0": 52206,
+   "F1": 52225
   },
   {
    "wid": "6-11.w012",
@@ -132,8 +132,8 @@
    "sid": "6-11.s2",
    "f0": 174,
    "f1": 184,
-   "F0": 53558,
-   "F1": 53568
+   "F0": 52254,
+   "F1": 52264
   },
   {
    "wid": "6-11.w013",
@@ -142,8 +142,8 @@
    "sid": "6-11.s2",
    "f0": 191,
    "f1": 240,
-   "F0": 53575,
-   "F1": 53624
+   "F0": 52271,
+   "F1": 52320
   },
   {
    "wid": "6-11.w014",
@@ -152,8 +152,8 @@
    "sid": "6-11.s2",
    "f0": 241,
    "f1": 262,
-   "F0": 53625,
-   "F1": 53646
+   "F0": 52321,
+   "F1": 52342
   },
   {
    "wid": "6-11.w015",
@@ -162,8 +162,8 @@
    "sid": "6-11.s2",
    "f0": 265,
    "f1": 292,
-   "F0": 53649,
-   "F1": 53676
+   "F0": 52345,
+   "F1": 52372
   },
   {
    "wid": "6-11.w016",
@@ -172,8 +172,8 @@
    "sid": "6-11.s2",
    "f0": 304,
    "f1": 314,
-   "F0": 53688,
-   "F1": 53698
+   "F0": 52384,
+   "F1": 52394
   },
   {
    "wid": "6-11.w017",
@@ -182,8 +182,8 @@
    "sid": "6-11.s2",
    "f0": 317,
    "f1": 334,
-   "F0": 53701,
-   "F1": 53718
+   "F0": 52397,
+   "F1": 52414
   },
   {
    "wid": "6-11.w018",
@@ -192,8 +192,8 @@
    "sid": "6-11.s2",
    "f0": 335,
    "f1": 346,
-   "F0": 53719,
-   "F1": 53730
+   "F0": 52415,
+   "F1": 52426
   },
   {
    "wid": "6-11.w019",
@@ -202,8 +202,8 @@
    "sid": "6-11.s2",
    "f0": 350,
    "f1": 370,
-   "F0": 53734,
-   "F1": 53754
+   "F0": 52430,
+   "F1": 52450
   },
   {
    "wid": "6-11.w020",
@@ -212,8 +212,8 @@
    "sid": "6-11.s3",
    "f0": 399,
    "f1": 404,
-   "F0": 53783,
-   "F1": 53788
+   "F0": 52479,
+   "F1": 52484
   },
   {
    "wid": "6-11.w021",
@@ -222,8 +222,8 @@
    "sid": "6-11.s3",
    "f0": 407,
    "f1": 432,
-   "F0": 53791,
-   "F1": 53816
+   "F0": 52487,
+   "F1": 52512
   },
   {
    "wid": "6-11.w022",
@@ -232,8 +232,8 @@
    "sid": "6-11.s3",
    "f0": 436,
    "f1": 503,
-   "F0": 53820,
-   "F1": 53887
+   "F0": 52516,
+   "F1": 52583
   },
   {
    "wid": "6-11.w023",
@@ -242,8 +242,8 @@
    "sid": "6-11.s3",
    "f0": 552,
    "f1": 560,
-   "F0": 53936,
-   "F1": 53944
+   "F0": 52632,
+   "F1": 52640
   },
   {
    "wid": "6-11.w024",
@@ -252,8 +252,8 @@
    "sid": "6-11.s3",
    "f0": 562,
    "f1": 567,
-   "F0": 53946,
-   "F1": 53951
+   "F0": 52642,
+   "F1": 52647
   },
   {
    "wid": "6-11.w025",
@@ -262,8 +262,8 @@
    "sid": "6-11.s3",
    "f0": 569,
    "f1": 581,
-   "F0": 53953,
-   "F1": 53965
+   "F0": 52649,
+   "F1": 52661
   },
   {
    "wid": "6-11.w026",
@@ -272,8 +272,8 @@
    "sid": "6-11.s3",
    "f0": 610,
    "f1": 689,
-   "F0": 53994,
-   "F1": 54073
+   "F0": 52690,
+   "F1": 52769
   },
   {
    "wid": "6-11.w027",
@@ -282,8 +282,8 @@
    "sid": "6-11.s3",
    "f0": 718,
    "f1": 726,
-   "F0": 54102,
-   "F1": 54110
+   "F0": 52798,
+   "F1": 52806
   },
   {
    "wid": "6-11.w028",
@@ -292,8 +292,8 @@
    "sid": "6-11.s3",
    "f0": 731,
    "f1": 761,
-   "F0": 54115,
-   "F1": 54145
+   "F0": 52811,
+   "F1": 52841
   },
   {
    "wid": "6-11.w029",
@@ -302,8 +302,8 @@
    "sid": "6-11.s3",
    "f0": 767,
    "f1": 771,
-   "F0": 54151,
-   "F1": 54155
+   "F0": 52847,
+   "F1": 52851
   },
   {
    "wid": "6-11.w030",
@@ -312,8 +312,8 @@
    "sid": "6-11.s3",
    "f0": 771,
    "f1": 774,
-   "F0": 54155,
-   "F1": 54158
+   "F0": 52851,
+   "F1": 52854
   },
   {
    "wid": "6-11.w031",
@@ -322,8 +322,8 @@
    "sid": "6-11.s3",
    "f0": 784,
    "f1": 808,
-   "F0": 54168,
-   "F1": 54192
+   "F0": 52864,
+   "F1": 52888
   },
   {
    "wid": "6-11.w032",
@@ -332,8 +332,8 @@
    "sid": "6-11.s3",
    "f0": 822,
    "f1": 828,
-   "F0": 54206,
-   "F1": 54212
+   "F0": 52902,
+   "F1": 52908
   },
   {
    "wid": "6-11.w033",
@@ -342,8 +342,8 @@
    "sid": "6-11.s3",
    "f0": 831,
    "f1": 832,
-   "F0": 54215,
-   "F1": 54216
+   "F0": 52911,
+   "F1": 52912
   },
   {
    "wid": "6-11.w034",
@@ -352,8 +352,8 @@
    "sid": "6-11.s3",
    "f0": 838,
    "f1": 854,
-   "F0": 54222,
-   "F1": 54238
+   "F0": 52918,
+   "F1": 52934
   },
   {
    "wid": "6-11.w035",
@@ -362,8 +362,8 @@
    "sid": "6-11.s3",
    "f0": 858,
    "f1": 873,
-   "F0": 54242,
-   "F1": 54257
+   "F0": 52938,
+   "F1": 52953
   },
   {
    "wid": "6-11.w036",
@@ -372,8 +372,8 @@
    "sid": "6-11.s3",
    "f0": 879,
    "f1": 905,
-   "F0": 54263,
-   "F1": 54289
+   "F0": 52959,
+   "F1": 52985
   },
   {
    "wid": "6-11.w037",
@@ -382,8 +382,8 @@
    "sid": "6-11.s4",
    "f0": 934,
    "f1": 960,
-   "F0": 54318,
-   "F1": 54344
+   "F0": 53014,
+   "F1": 53040
   },
   {
    "wid": "6-11.w038",
@@ -392,8 +392,8 @@
    "sid": "6-11.s4",
    "f0": 969,
    "f1": 984,
-   "F0": 54353,
-   "F1": 54368
+   "F0": 53049,
+   "F1": 53064
   },
   {
    "wid": "6-11.w039",
@@ -402,8 +402,8 @@
    "sid": "6-11.s4",
    "f0": 987,
    "f1": 1008,
-   "F0": 54371,
-   "F1": 54392
+   "F0": 53067,
+   "F1": 53088
   },
   {
    "wid": "6-11.w040",
@@ -412,8 +412,8 @@
    "sid": "6-11.s4",
    "f0": 1011,
    "f1": 1017,
-   "F0": 54395,
-   "F1": 54401
+   "F0": 53091,
+   "F1": 53097
   },
   {
    "wid": "6-11.w041",
@@ -422,8 +422,8 @@
    "sid": "6-11.s4",
    "f0": 1024,
    "f1": 1035,
-   "F0": 54408,
-   "F1": 54419
+   "F0": 53104,
+   "F1": 53115
   },
   {
    "wid": "6-11.w042",
@@ -432,8 +432,8 @@
    "sid": "6-11.s5",
    "f0": 1064,
    "f1": 1070,
-   "F0": 54448,
-   "F1": 54454
+   "F0": 53144,
+   "F1": 53150
   },
   {
    "wid": "6-11.w043",
@@ -442,8 +442,8 @@
    "sid": "6-11.s5",
    "f0": 1088,
    "f1": 1115,
-   "F0": 54472,
-   "F1": 54499
+   "F0": 53168,
+   "F1": 53195
   },
   {
    "wid": "6-11.w044",
@@ -452,8 +452,8 @@
    "sid": "6-11.s6",
    "f0": 1144,
    "f1": 1150,
-   "F0": 54528,
-   "F1": 54534
+   "F0": 53224,
+   "F1": 53230
   },
   {
    "wid": "6-11.w045",
@@ -462,8 +462,8 @@
    "sid": "6-11.s6",
    "f0": 1155,
    "f1": 1178,
-   "F0": 54539,
-   "F1": 54562
+   "F0": 53235,
+   "F1": 53258
   },
   {
    "wid": "6-11.w046",
@@ -472,8 +472,8 @@
    "sid": "6-11.s6",
    "f0": 1186,
    "f1": 1207,
-   "F0": 54570,
-   "F1": 54591
+   "F0": 53266,
+   "F1": 53287
   },
   {
    "wid": "6-11.w047",
@@ -482,8 +482,8 @@
    "sid": "6-11.s6",
    "f0": 1210,
    "f1": 1220,
-   "F0": 54594,
-   "F1": 54604
+   "F0": 53290,
+   "F1": 53300
   },
   {
    "wid": "6-11.w048",
@@ -492,8 +492,8 @@
    "sid": "6-11.s6",
    "f0": 1222,
    "f1": 1226,
-   "F0": 54606,
-   "F1": 54610
+   "F0": 53302,
+   "F1": 53306
   },
   {
    "wid": "6-11.w049",
@@ -502,8 +502,8 @@
    "sid": "6-11.s6",
    "f0": 1231,
    "f1": 1246,
-   "F0": 54615,
-   "F1": 54630
+   "F0": 53311,
+   "F1": 53326
   },
   {
    "wid": "6-11.w050",
@@ -512,8 +512,8 @@
    "sid": "6-11.s6",
    "f0": 1249,
    "f1": 1255,
-   "F0": 54633,
-   "F1": 54639
+   "F0": 53329,
+   "F1": 53335
   },
   {
    "wid": "6-11.w051",
@@ -522,8 +522,8 @@
    "sid": "6-11.s6",
    "f0": 1257,
    "f1": 1267,
-   "F0": 54641,
-   "F1": 54651
+   "F0": 53337,
+   "F1": 53347
   },
   {
    "wid": "6-11.w052",
@@ -532,8 +532,8 @@
    "sid": "6-11.s6",
    "f0": 1275,
    "f1": 1309,
-   "F0": 54659,
-   "F1": 54693
+   "F0": 53355,
+   "F1": 53389
   },
   {
    "wid": "6-11.w053",
@@ -542,8 +542,8 @@
    "sid": "6-11.s6",
    "f0": 1337,
    "f1": 1343,
-   "F0": 54721,
-   "F1": 54727
+   "F0": 53417,
+   "F1": 53423
   },
   {
    "wid": "6-11.w054",
@@ -552,8 +552,8 @@
    "sid": "6-11.s6",
    "f0": 1348,
    "f1": 1366,
-   "F0": 54732,
-   "F1": 54750
+   "F0": 53428,
+   "F1": 53446
   },
   {
    "wid": "6-11.w055",
@@ -562,8 +562,8 @@
    "sid": "6-11.s6",
    "f0": 1369,
    "f1": 1375,
-   "F0": 54753,
-   "F1": 54759
+   "F0": 53449,
+   "F1": 53455
   },
   {
    "wid": "6-11.w056",
@@ -572,8 +572,8 @@
    "sid": "6-11.s6",
    "f0": 1387,
    "f1": 1395,
-   "F0": 54771,
-   "F1": 54779
+   "F0": 53467,
+   "F1": 53475
   },
   {
    "wid": "6-11.w057",
@@ -582,8 +582,8 @@
    "sid": "6-11.s6",
    "f0": 1399,
    "f1": 1411,
-   "F0": 54783,
-   "F1": 54795
+   "F0": 53479,
+   "F1": 53491
   },
   {
    "wid": "6-11.w058",
@@ -592,8 +592,8 @@
    "sid": "6-11.s6",
    "f0": 1414,
    "f1": 1449,
-   "F0": 54798,
-   "F1": 54833
+   "F0": 53494,
+   "F1": 53529
   },
   {
    "wid": "6-11.w059",
@@ -602,8 +602,8 @@
    "sid": "6-11.s6",
    "f0": 1454,
    "f1": 1474,
-   "F0": 54838,
-   "F1": 54858
+   "F0": 53534,
+   "F1": 53554
   }
  ],
  "sentences": [
@@ -659,173 +659,58 @@
  "holds": [],
  "events": [
   {
-   "id": "title",
-   "obj": "title",
-   "verb": "appear",
+   "id": "cam_end",
+   "obj": "cam_end",
+   "verb": "camera_to",
    "ease": "inout",
-   "means": "here's what the end of that road：标题写出",
-   "f_start": 4,
-   "f_land": 12,
+   "means": "镜头沿料杆滑到路的尽头，Approval 站入画",
+   "f_start": 9,
+   "f_land": 49,
    "f_end": 145,
    "until": "6-11.w011",
-   "word": "6-11.w002",
-   "w": "here's",
-   "key": "here's#1",
+   "word": "6-11.w005",
+   "w": "end",
+   "key": "end#1",
    "sid": "6-11.s1",
-   "word_f0": 12,
-   "tool": "remotion",
+   "word_f0": 49,
+   "tool": "blender",
    "guide": {
     "kind": "none"
    },
-   "F_start": 53388,
-   "F_land": 53396,
-   "F_end": 53529
+   "F_start": 52089,
+   "F_land": 52129,
+   "F_end": 52225
   },
   {
-   "id": "pan",
-   "obj": "pan",
+   "id": "tagB_run",
+   "obj": "tagB_run",
    "verb": "move",
    "ease": "inout",
-   "means": "end of that road：镜头往右平移到路的远端",
-   "f_start": 48,
-   "f_land": 87,
-   "f_end": 97,
-   "until": "6-11.w008",
-   "word": "6-11.w008",
-   "w": "road",
-   "key": "road#1",
-   "sid": "6-11.s1",
-   "word_f0": 87,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 53432,
-   "F_land": 53471,
-   "F_end": 53481
-  },
-  {
-   "id": "ring",
-   "obj": "ring",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "look like：Approval 站外画红色虚线圈",
-   "f_start": 103,
-   "f_land": 113,
-   "f_end": 145,
-   "until": "6-11.w011",
-   "word": "6-11.w010",
-   "w": "look",
-   "key": "look#1",
-   "sid": "6-11.s1",
-   "word_f0": 113,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 53487,
-   "F_land": 53497,
-   "F_end": 53529
-  },
-  {
-   "id": "tags",
-   "obj": "tags",
-   "verb": "grow",
-   "ease": "inout",
-   "means": "Some：两个小牌子从左边走进画面",
-   "f_start": 160,
-   "f_land": 174,
-   "f_end": 184,
-   "until": "6-11.w012",
-   "word": "6-11.w012",
-   "w": "Some",
-   "key": "some#1",
-   "sid": "6-11.s2",
-   "word_f0": 174,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 53544,
-   "F_land": 53558,
-   "F_end": 53568
-  },
-  {
-   "id": "ai",
-   "obj": "ai",
-   "verb": "morph",
-   "ease": "inout",
-   "means": "AI-assisted：牌子上写 AI-assisted",
-   "f_start": 183,
+   "means": "一块蓝色吊牌（h19，蓝）从起点飞快滑过 048，一路滑到 Trials 站前",
+   "f_start": 181,
    "f_land": 191,
-   "f_end": 240,
-   "until": "6-11.w013",
+   "f_end": 370,
+   "until": "6-11.w019",
    "word": "6-11.w013",
    "w": "AI-assisted",
    "key": "ai-assisted#1",
    "sid": "6-11.s2",
    "word_f0": 191,
-   "tool": "remotion",
+   "tool": "blender",
    "guide": {
     "kind": "none"
    },
-   "F_start": 53567,
-   "F_land": 53575,
-   "F_end": 53624
-  },
-  {
-   "id": "walk1",
-   "obj": "walk1",
-   "verb": "move",
-   "ease": "inout",
-   "means": "cancer drugs：两个牌子一起往前走一段",
-   "f_start": 235,
-   "f_land": 265,
-   "f_end": 292,
-   "until": "6-11.w015",
-   "word": "6-11.w015",
-   "w": "drugs",
-   "key": "drugs#1",
-   "sid": "6-11.s2",
-   "word_f0": 265,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 53619,
-   "F_land": 53649,
-   "F_end": 53676
-  },
-  {
-   "id": "walk2",
-   "obj": "walk2",
-   "verb": "move",
-   "ease": "inout",
-   "means": "walked much further：两个牌子走得更远，过了 048",
-   "f_start": 317,
-   "f_land": 350,
-   "f_end": 370,
-   "until": "6-11.s2",
-   "word": "6-11.w019",
-   "w": "further.",
-   "key": "further#1",
-   "sid": "6-11.s2",
-   "word_f0": 350,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 53701,
-   "F_land": 53734,
-   "F_end": 53754
+   "F_start": 52261,
+   "F_land": 52271,
+   "F_end": 52450
   },
   {
    "id": "date",
    "obj": "date",
    "verb": "appear",
    "ease": "inout",
-   "means": "September 2026：远端写日期",
-   "f_start": 399,
+   "means": "Approval 站旁的小翻牌翻出 `Sep 2026`",
+   "f_start": 401,
    "f_land": 407,
    "f_end": 503,
    "until": "6-11.w022",
@@ -834,135 +719,158 @@
    "key": "september#1",
    "sid": "6-11.s3",
    "word_f0": 407,
-   "tool": "remotion",
+   "tool": "blender",
    "guide": {
     "kind": "none"
    },
-   "F_start": 53783,
-   "F_land": 53791,
-   "F_end": 53887
+   "F_start": 52481,
+   "F_land": 52487,
+   "F_end": 52583
   },
   {
-   "id": "ago",
-   "obj": "ago",
+   "id": "tagB_arrive",
+   "obj": "tagB_arrive",
    "verb": "move",
    "ease": "inout",
-   "means": "one of them：其中一个牌子走到 Approval",
-   "f_start": 440,
-   "f_land": 552,
-   "f_end": 560,
-   "until": "6-11.w023",
-   "word": "6-11.w023",
-   "w": "one",
-   "key": "one#1",
-   "sid": "6-11.s3",
-   "word_f0": 552,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 53824,
-   "F_land": 53936,
-   "F_end": 53944
-  },
-  {
-   "id": "name",
-   "obj": "name",
-   "verb": "morph",
-   "ease": "inout",
-   "means": "lirafugratinib：牌子改写成药名，远端写药名",
-   "f_start": 598,
+   "means": "蓝色吊牌滑进 Approval 站",
+   "f_start": 586,
    "f_land": 610,
-   "f_end": 726,
-   "until": "6-11.w027",
+   "f_end": 620,
+   "until": null,
    "word": "6-11.w026",
    "w": "lirafugratinib,",
    "key": "lirafugratinib#1",
    "sid": "6-11.s3",
    "word_f0": 610,
-   "tool": "remotion",
+   "tool": "blender",
    "guide": {
     "kind": "none"
    },
-   "F_start": 53982,
-   "F_land": 53994,
-   "F_end": 54110
+   "F_start": 52666,
+   "F_land": 52690,
+   "F_end": 52700
   },
   {
-   "id": "appr",
-   "obj": "appr",
+   "id": "label_lira",
+   "obj": "label_lira",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "标签第一行 `lirafugratinib`",
+   "f_start": 608,
+   "f_land": 610,
+   "f_end": 905,
+   "until": "6-11.w036",
+   "word": "6-11.w026",
+   "w": "lirafugratinib,",
+   "key": "lirafugratinib#1",
+   "sid": "6-11.s3",
+   "word_f0": 610,
+   "tool": "blender",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 52688,
+   "F_land": 52690,
+   "F_end": 52985
+  },
+  {
+   "id": "approved",
+   "obj": "approved",
    "verb": "snap",
    "ease": "inout",
-   "means": "approved in the US：Approval 站变红，圈变实，牌子打勾，写 approved in the US",
+   "means": "Approval 站描红，勾扣上",
    "f_start": 725,
    "f_land": 731,
-   "f_end": 808,
-   "until": "6-11.w031",
+   "f_end": 751,
+   "until": null,
    "word": "6-11.w028",
    "w": "approved",
    "key": "approved#1",
    "sid": "6-11.s3",
    "word_f0": 731,
-   "tool": "remotion",
+   "tool": "blender",
    "guide": {
     "kind": "none"
    },
-   "F_start": 54109,
-   "F_land": 54115,
-   "F_end": 54192
+   "F_start": 52805,
+   "F_land": 52811,
+   "F_end": 52831
   },
   {
-   "id": "bile",
-   "obj": "bile",
+   "id": "label_us",
+   "obj": "label_us",
    "verb": "appear",
    "ease": "inout",
-   "means": "bile duct cancer：写 for a bile duct cancer",
-   "f_start": 832,
+   "means": "标签第二行 `approved in the US, Sep 2026`",
+   "f_start": 782,
+   "f_land": 784,
+   "f_end": 905,
+   "until": "6-11.w036",
+   "word": "6-11.w031",
+   "w": "US",
+   "key": "us#1",
+   "sid": "6-11.s3",
+   "word_f0": 784,
+   "tool": "blender",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 52862,
+   "F_land": 52864,
+   "F_end": 52985
+  },
+  {
+   "id": "label_bile",
+   "obj": "label_bile",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "标签第三行 `for a bile duct cancer`",
+   "f_start": 836,
    "f_land": 838,
    "f_end": 905,
-   "until": "6-11.s3",
+   "until": "6-11.w036",
    "word": "6-11.w034",
    "w": "bile",
    "key": "bile#1",
    "sid": "6-11.s3",
    "word_f0": 838,
-   "tool": "remotion",
+   "tool": "blender",
    "guide": {
     "kind": "none"
    },
-   "F_start": 54216,
-   "F_land": 54222,
-   "F_end": 54289
+   "F_start": 52916,
+   "F_land": 52918,
+   "F_end": 52985
   },
   {
-   "id": "oth",
-   "obj": "oth",
-   "verb": "snap",
+   "id": "tagC_run",
+   "obj": "tagC_run",
+   "verb": "move",
    "ease": "inout",
-   "means": "Others：另一个牌子晃一下",
-   "f_start": 928,
+   "means": "第三块蓝色吊牌从起点滑到 Animals 站后面",
+   "f_start": 914,
    "f_land": 934,
-   "f_end": 960,
-   "until": "6-11.w037",
+   "f_end": 969,
+   "until": "6-11.w038",
    "word": "6-11.w037",
    "w": "Others",
    "key": "others#1",
    "sid": "6-11.s4",
    "word_f0": 934,
-   "tool": "remotion",
+   "tool": "blender",
    "guide": {
     "kind": "none"
    },
-   "F_start": 54312,
-   "F_land": 54318,
-   "F_end": 54344
+   "F_start": 52994,
+   "F_land": 53014,
+   "F_end": 53049
   },
   {
-   "id": "fail",
-   "obj": "fail",
-   "verb": "morph",
+   "id": "tagC_fail",
+   "obj": "tagC_fail",
+   "verb": "move",
    "ease": "inout",
-   "means": "failed along the way：牌子倒下变灰，红叉，写 failed along the way",
+   "means": "它从浇口断开，掉进下面的废料桶，变灰",
    "f_start": 961,
    "f_land": 969,
    "f_end": 1035,
@@ -972,21 +880,21 @@
    "key": "failed#1",
    "sid": "6-11.s4",
    "word_f0": 969,
-   "tool": "remotion",
+   "tool": "blender",
    "guide": {
     "kind": "none"
    },
-   "F_start": 54345,
-   "F_land": 54353,
-   "F_end": 54419
+   "F_start": 53041,
+   "F_land": 53049,
+   "F_end": 53115
   },
   {
-   "id": "back",
-   "obj": "back",
-   "verb": "move",
+   "id": "cam_back",
+   "obj": "cam_back",
+   "verb": "camera_to",
    "ease": "inout",
-   "means": "048：镜头拉回全景，048 跳一下",
-   "f_start": 1052,
+   "means": "镜头沿料杆快速退回 Cells 站（24 帧，带运动模糊），048 吊牌在画面中间",
+   "f_start": 1064,
    "f_land": 1088,
    "f_end": 1115,
    "until": "6-11.s5",
@@ -995,116 +903,90 @@
    "key": "048#1",
    "sid": "6-11.s5",
    "word_f0": 1088,
-   "tool": "remotion",
+   "tool": "blender",
    "guide": {
     "kind": "none"
    },
-   "F_start": 54436,
-   "F_land": 54472,
-   "F_end": 54499
+   "F_start": 53144,
+   "F_land": 53168,
+   "F_end": 53195
   },
   {
-   "id": "mk",
-   "obj": "mk",
-   "verb": "grow",
+   "id": "nudge",
+   "obj": "nudge",
+   "verb": "move",
    "ease": "inout",
-   "means": "makers：048 旁长出一个小人",
-   "f_start": 1147,
+   "means": "048 吊牌往前挪半步又退回",
+   "f_start": 1145,
    "f_land": 1155,
-   "f_end": 1207,
-   "until": "6-11.w046",
+   "f_end": 1185,
+   "until": null,
    "word": "6-11.w045",
    "w": "makers",
    "key": "makers#1",
    "sid": "6-11.s6",
    "word_f0": 1155,
-   "tool": "remotion",
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "person_r"
-    ]
-   },
-   "F_start": 54531,
-   "F_land": 54539,
-   "F_end": 54591,
-   "g_start": 1129,
-   "g_on": 1147,
-   "g_end": 1207,
-   "g_off": 1237,
-   "g_tick": 1151,
-   "G_start": 54513,
-   "G_on": 54531,
-   "G_end": 54591,
-   "G_off": 54621,
-   "G_tick": 54535
-  },
-  {
-   "id": "nott",
-   "obj": "nott",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "not to take it to trials：048 往 trials 的虚线箭头被红杠挡住，红批注 not to trials",
-   "f_start": 1198,
-   "f_land": 1210,
-   "f_end": 1309,
-   "until": "6-11.w052",
-   "word": "6-11.w047",
-   "w": "not",
-   "key": "not#1",
-   "sid": "6-11.s6",
-   "word_f0": 1210,
-   "tool": "remotion",
+   "tool": "blender",
    "guide": {
     "kind": "none"
    },
-   "F_start": 54582,
-   "F_land": 54594,
-   "F_end": 54693
+   "F_start": 53225,
+   "F_land": 53235,
+   "F_end": 53265
   },
   {
-   "id": "sh",
-   "obj": "sh",
+   "id": "gate",
+   "obj": "gate",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "Cells 站后面的料杆上落下一个骨白小挡块，048 不再往前",
+   "f_start": 1267,
+   "f_land": 1275,
+   "f_end": 1289,
+   "until": null,
+   "word": "6-11.w052",
+   "w": "trials,",
+   "key": "trials#1",
+   "sid": "6-11.s6",
+   "word_f0": 1275,
+   "tool": "blender",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 53347,
+   "F_land": 53355,
+   "F_end": 53369
+  },
+  {
+   "id": "share",
+   "obj": "share",
    "verb": "grow",
    "ease": "inout",
-   "means": "shared it：三个研究者长出，048 各连一条线",
+   "means": "048 吊牌的浇口上长出三根细料杆，各带一块 048 的小牌",
    "f_start": 1338,
    "f_land": 1348,
-   "f_end": 1395,
-   "until": "6-11.w056",
+   "f_end": 1414,
+   "until": "6-11.w058",
    "word": "6-11.w054",
    "w": "shared",
    "key": "shared#1",
    "sid": "6-11.s6",
    "word_f0": 1348,
-   "tool": "remotion",
+   "tool": "blender",
    "guide": {
-    "kind": "focus",
-    "target": [
-     "person_w"
-    ]
+    "kind": "none"
    },
-   "F_start": 54722,
-   "F_land": 54732,
-   "F_end": 54779,
-   "g_start": 1322,
-   "g_on": 1340,
-   "g_end": 1395,
-   "g_off": 1425,
-   "g_tick": 1344,
-   "G_start": 54706,
-   "G_on": 54724,
-   "G_end": 54779,
-   "G_off": 54809,
-   "G_tick": 54728
+   "F_start": 53418,
+   "F_land": 53428,
+   "F_end": 53494
   },
   {
-   "id": "res",
-   "obj": "res",
-   "verb": "appear",
+   "id": "people",
+   "obj": "people",
+   "verb": "eject",
    "ease": "inout",
-   "means": "other researchers：写 shared with other researchers，连线变红",
-   "f_start": 1404,
+   "means": "三根细料杆的另一头各弹出一个白色小人，接住小牌",
+   "f_start": 1408,
    "f_land": 1414,
    "f_end": 1474,
    "until": "6-11.s6",
@@ -1113,66 +995,38 @@
    "key": "researchers#1",
    "sid": "6-11.s6",
    "word_f0": 1414,
-   "tool": "remotion",
+   "tool": "blender",
    "guide": {
     "kind": "none"
    },
-   "F_start": 54788,
-   "F_land": 54798,
-   "F_end": 54858
-  }
- ],
- "guides": [
-  {
-   "id": "mk",
-   "target": [
-    "person_r"
-   ],
-   "kind": "focus",
-   "gs": 1129,
-   "gon": 1147,
-   "land": 1155,
-   "gend": 1207,
-   "goff": 1237,
-   "tick": 1151,
-   "nudge": false,
-   "rim": true,
-   "ev_s": 1147,
-   "events": [
-    "mk"
-   ],
-   "G_start": 54513,
-   "G_on": 54531,
-   "G_land": 54539,
-   "G_end": 54591,
-   "G_off": 54621,
-   "G_tick": 54535
+   "F_start": 53488,
+   "F_land": 53494,
+   "F_end": 53554
   },
   {
-   "id": "sh",
-   "target": [
-    "person_w"
-   ],
-   "kind": "focus",
-   "gs": 1322,
-   "gon": 1340,
-   "land": 1348,
-   "gend": 1395,
-   "goff": 1425,
-   "tick": 1344,
-   "nudge": false,
-   "rim": true,
-   "ev_s": 1338,
-   "events": [
-    "sh"
-   ],
-   "G_start": 54706,
-   "G_on": 54724,
-   "G_land": 54732,
-   "G_end": 54779,
-   "G_off": 54809,
-   "G_tick": 54728
+   "id": "dive",
+   "obj": "dive",
+   "verb": "move",
+   "ease": "inout",
+   "means": "048 吊牌的金色牌面冲镜头，接 6-12",
+   "f_start": 1473,
+   "f_land": 1493,
+   "f_end": 1493,
+   "until": null,
+   "word": "6-11.w059",
+   "w": "instead.",
+   "key": "instead#1",
+   "sid": "6-11.s6",
+   "word_f0": 1454,
+   "tool": "blender",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 53553,
+   "F_land": 53573,
+   "F_end": 53573
   }
  ],
+ "guides": [],
  "problems": []
 }

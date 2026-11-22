@@ -1,0 +1,304 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "3-04",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 3-04（D）：锁就是 CDK20；酶有化学工作（齿轮）；口袋放大，ATP 进去；钥匙顶走 ATP 占住口袋，齿轮停。页面 Manual304.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "title",
+   "obj": "title",
+   "verb": "appear",
+   "at": {
+    "word": "3-04.w001",
+    "off": 0
+   },
+   "means": "Our：标题写出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "3-04.w002"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "lock",
+   "obj": "lock",
+   "verb": "grow",
+   "at": {
+    "word": "3-04.w002",
+    "off": 0
+   },
+   "means": "lock：锁长出",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "3-04.w003"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "cdk",
+   "obj": "cdk20",
+   "verb": "grow",
+   "at": {
+    "word": "3-04.w004",
+    "off": 0
+   },
+   "means": "CDK20：CDK20 长出，锁上画等号",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "cdk",
+    "box": [
+     250,
+     200,
+     440,
+     530
+    ]
+   }
+  },
+  {
+   "id": "enz",
+   "obj": "label_enzyme",
+   "verb": "appear",
+   "at": {
+    "word": "3-04.w007",
+    "off": 0
+   },
+   "means": "enzyme：标签 an enzyme",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "3-04.w008"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "prot",
+   "obj": "label_job",
+   "verb": "appear",
+   "at": {
+    "word": "3-04.w009",
+    "off": 0
+   },
+   "means": "protein with a chemical job：标签写出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "3-04.w012"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "gear",
+   "obj": "gear",
+   "verb": "grow",
+   "at": {
+    "word": "3-04.w013",
+    "off": 0
+   },
+   "means": "job：齿轮长出开始转",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "gear",
+    "box": [
+     740,
+     200,
+     120,
+     120
+    ]
+   }
+  },
+  {
+   "id": "hole",
+   "obj": "pocket_ring",
+   "verb": "appear",
+   "at": {
+    "word": "3-04.w015",
+    "off": 0
+   },
+   "means": "keyhole：口袋处红圈",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "3-04.w016"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "cdk",
+    "box": [
+     250,
+     200,
+     440,
+     530
+    ]
+   }
+  },
+  {
+   "id": "inset",
+   "obj": "inset",
+   "verb": "grow",
+   "at": {
+    "word": "3-04.w018",
+    "off": 0
+   },
+   "means": "pocket：放大圈长出，画出口袋",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "3-04.w021"
+   },
+   "guide": {
+    "kind": "runner",
+    "target": "inset",
+    "from": "cdk",
+    "travel": 32,
+    "arrive": 4,
+    "dist": 0.41,
+    "path": 0.26,
+    "box": [
+     990,
+     300,
+     520,
+     520
+    ]
+   }
+  },
+  {
+   "id": "atp",
+   "obj": "atp",
+   "verb": "move",
+   "at": {
+    "word": "3-04.w027",
+    "off": 0
+   },
+   "means": "grabs a small molecule called ATP：ATP 滑进口袋",
+   "tool": "remotion",
+   "lead": 110,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "inset",
+    "box": [
+     990,
+     300,
+     520,
+     520
+    ]
+   }
+  },
+  {
+   "id": "out",
+   "obj": "atp",
+   "verb": "move",
+   "at": {
+    "word": "3-04.w030",
+    "off": 0
+   },
+   "means": "plug that pocket：ATP 被顶出去",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "word": "3-04.w031"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "inset",
+    "box": [
+     990,
+     300,
+     520,
+     520
+    ]
+   }
+  },
+  {
+   "id": "key",
+   "obj": "key",
+   "verb": "move",
+   "at": {
+    "word": "3-04.w034",
+    "off": 0
+   },
+   "means": "right key：钥匙插进口袋",
+   "tool": "remotion",
+   "lead": 50,
+   "until": {
+    "word": "3-04.w035"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "inset",
+    "box": [
+     990,
+     300,
+     520,
+     520
+    ]
+   }
+  },
+  {
+   "id": "stop",
+   "obj": "gear",
+   "verb": "appear",
+   "at": {
+    "word": "3-04.w038",
+    "off": 0
+   },
+   "means": "can't：齿轮停、红叉",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "3-04.w039"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "gear",
+    "box": [
+     740,
+     200,
+     120,
+     120
+    ]
+   }
+  },
+  {
+   "id": "plate",
+   "obj": "plate",
+   "verb": "appear",
+   "at": {
+    "word": "3-04.w041",
+    "off": 0
+   },
+   "means": "job：字牌 blocked",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  }
+ ]
+}

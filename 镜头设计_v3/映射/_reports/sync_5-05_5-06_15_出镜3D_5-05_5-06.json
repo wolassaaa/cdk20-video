@@ -1,0 +1,166 @@
+{
+ "video": "D:\\。hkbu\\molecular science\\导演检查_20261121\\15_出镜3D_5-05_5-06.mp4",
+ "group": "5-05+5-06",
+ "fps": 60.0,
+ "frames": 511,
+ "offset_f": 0,
+ "S1": {
+  "word_events": 9,
+  "table_dev_max_f": 0,
+  "video_checked": 10,
+  "video_no_motion": [],
+  "pass_": true
+ },
+ "S2": {
+  "pass_": true,
+  "early": []
+ },
+ "S3": {
+  "pass_": true,
+  "longest_still_f": 0,
+  "bad": []
+ },
+ "S4": {
+  "pass_": true,
+  "looks_like_30": false,
+  "dup_frames": 0,
+  "stepped_dups": 0,
+  "stepped_ratio": 0.0,
+  "blend_frames": 0,
+  "blend_first": [],
+  "design_fade": 0,
+  "verdict": "原生（无变速重复/混帧）"
+ },
+ "sentences": [
+  {
+   "sid": "5-05.s1",
+   "f0": 32,
+   "f1": 135,
+   "last_motion_f": 135,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "5-05.s2",
+   "f0": 156,
+   "f1": 243,
+   "last_motion_f": 243,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "5-06.s1",
+   "f0": 271,
+   "f1": 394,
+   "last_motion_f": 394,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "5-06.s2",
+   "f0": 412,
+   "f1": 466,
+   "last_motion_f": 466,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  }
+ ],
+ "events": [
+  {
+   "id": "arrive",
+   "verb": "move",
+   "w": "The",
+   "f_land": 32,
+   "table_dev": 0
+  },
+  {
+   "id": "key",
+   "verb": "grow",
+   "w": "key",
+   "f_land": 43,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "insert",
+   "verb": "plug_in",
+   "w": "lock.",
+   "f_land": 122,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "twist",
+   "verb": "twist",
+   "w": "turned.",
+   "f_land": 224,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "stuck",
+   "verb": "move",
+   "w": "turned.",
+   "f_land": 228,
+   "table_dev": 4,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "turn2",
+   "verb": "move",
+   "w": "So",
+   "f_land": 271,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "jolt",
+   "verb": "plug_out",
+   "w": "that",
+   "f_land": 372,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "back",
+   "verb": "plug_out",
+   "w": "Back",
+   "f_land": 412,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "loop",
+   "verb": "grow",
+   "w": "square",
+   "f_land": 428,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "arrowhead",
+   "verb": "snap",
+   "w": "one?",
+   "f_land": 451,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "dive",
+   "verb": "move",
+   "w": "one?",
+   "f_land": 511,
+   "table_dev": 60,
+   "video_motion_near_start": true
+  }
+ ],
+ "pass": true
+}

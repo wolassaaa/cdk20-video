@@ -1,4 +1,4 @@
-"""HKBU SCIE1007 课程作业的科普视频：总表（映射/master_v1.json）的机器检查和覆盖/缺项报告。
+"""HKBU SCIE1007 课程作业的科普视频：总表（映射/master_v1.json、master_v2.json）的机器检查和覆盖/缺项报告。
 
 检查项（每项 pass / fail，加明细）：
   C1 时间基准   段首尾相接（≤1 帧）；词按时间排、在段内；全片秒 = 段起点 + 段内秒；每个词都被录音核对过（ncc ≥ 0.6）；
@@ -9,8 +9,9 @@
   C5 帧边界     帧号是整数、在段内；f_start ≤ f_land ≤ f_end；全片帧 = 段起点帧 + 段内帧（±1）
   C6 事件对词   每串事件里挂词的 primary 落点离词开口 ≤2 帧（stagger 是有意错开的跟随拍，单列）
   C7 覆盖       每句：有没有原生按表生成的画面事件、落在这句词上的 primary 数、句内最长没有事件的空档、事件有没有持续到句尾
-用法：_env/footage/Scripts/python.exe 镜头设计_v3/映射/check_master.py
-出：映射/report_v1.json、映射/覆盖与未决_v1.md（再用 _env/tools/md2html.py 出 .html 给导演看）。退出码：C1–C6 全过 0，否则 1。
+用法：_env/footage/Scripts/python.exe 镜头设计_v3/映射/check_master.py [--map master_v1.json] [--out 目录]
+     不给 --map 查 maplib 的默认总表（11-22 起是 master_v2.json）
+出：映射/report_<v>.json、映射/覆盖与未决_<v>.md（再用 _env/tools/md2html.py 出 .html 给导演看）。退出码：C1–C6 全过 0，否则 1。
 """
 import json
 import sys
@@ -24,7 +25,12 @@ sys.path.insert(0, str(HERE))
 import build_master as BM  # noqa: E402
 
 FPS = 60
-T = json.loads((HERE / "master_v1.json").read_text(encoding="utf-8"))
+# 11-22 加 --map：默认查 maplib 的默认总表（现在是 master_v2.json）；报告按总表名出 report_<v>.json、覆盖与未决_<v>.md，不盖别的版本的报告
+MAP = Path(sys.argv[sys.argv.index("--map") + 1]) if "--map" in sys.argv else BM.M.DEFAULT
+MAP = MAP if MAP.is_absolute() else (HERE / MAP)
+TAG = MAP.stem.replace("master_", "")
+OUTDIR = Path(sys.argv[sys.argv.index("--out") + 1]) if "--out" in sys.argv else HERE
+T = json.loads(MAP.read_text(encoding="utf-8"))
 GROUPS = T["groups"]
 NATIVE_IN_CUT = {"native_tray"}                       # cut_v8 里画面就是按事件原生 60 帧出的
 NATIVE_SRC = {"native_tray", "native_blender_rewarped"}  # 源片按事件原生出，但 cut_v8 里可能又重铺过
@@ -59,6 +65,11 @@ def c1():
                 pdev.append(abs(w["pred_dev_f"]))
     # 逐词复核
     A = BM.cut_audio()
+    if T.get("trim"):              # v2：cut 声音照总表里登记的各刀删掉，得到 v2 时间轴上的声音再核
+        keep = np.ones(len(A), bool)
+        for c in T["trim"]["cuts_list"]:
+            keep[int(round(c["v1_g_s"] * BM.SR)):int(round(c["v1_g_e"] * BM.SR))] = False
+        A = A[keep]
     takes = BM.BC.takes()
     by = {it["name"]: it for v in takes.values() for it in v}
     devs, bad, n = [], [], 0
@@ -228,8 +239,8 @@ def c7(fails):
 
 def report(rows):
     cnt = Counter(g["picture_mode"] for g in GROUPS)
-    L = ["# 词→画面映射：覆盖与未决（v1）", "",
-         "HKBU SCIE1007 课程作业的科普视频。本报告由 `映射/check_master.py` 生成，总表 `映射/master_v1.json`，基准 cut_v8（声音实测）。", "",
+    L = [f"# 词→画面映射：覆盖与未决（{TAG}）", "",
+         f"HKBU SCIE1007 课程作业的科普视频。本报告由 `映射/check_master.py` 生成，总表 `映射/{MAP.name}`，基准 cut_v8（声音实测）" + ("，v2 时间轴 = cut_v8 删掉总表 trim 块登记的各刀" if T.get("trim") else "") + "。", "",
          f"生成：{T['built']}。全片 {len(GROUPS)} 段，词 {sum(len(g['words']) for g in GROUPS)}，句 {len(rows)}，事件 {sum(len(g['events']) for g in GROUPS)}。", "",
          "## 检查结果", "", "| 项 | 结果 | 要点 |", "|---|---|---|"]
     for k, v in R.items():
@@ -253,7 +264,7 @@ def report(rows):
     if f6:
         L.append(f"- 事件对词超 2 帧（primary）{len(f6)} 个，前 40 个：" + "；".join(f"{a} {b}→{c} {d:+d} 帧" for a, b, c, d in f6))
     L.append(f"- 画外音 {cnt['warp']} 段画面是变速旧动画，总表里没有语义事件：要按 `events/<段>.json` 写事件、原生出片（见 README 第 4 节）。")
-    (HERE / "覆盖与未决_v1.md").write_text("\n".join(L) + "\n", encoding="utf-8")
+    (OUTDIR / f"覆盖与未决_{TAG}.md").write_text("\n".join(L) + "\n", encoding="utf-8")
 
 
 def main():
@@ -265,10 +276,10 @@ def main():
     fails = c6()
     rows = c7(fails)
     out = dict(built=T["built"], checks={k: {("pass" if a == "pass_" else a): b for a, b in v.items()} for k, v in R.items()}, sentences=rows)
-    (HERE / "report_v1.json").write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
+    (OUTDIR / f"report_{TAG}.json").write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
     report(rows)
     ok = all(v["pass_"] for k, v in R.items() if k != "C7_coverage")
-    print("总判定（C1–C6）：", "全过" if ok else "有不过项（见 report_v1.json / 覆盖与未决_v1.md）")
+    print("总判定（C1–C6）：", "全过" if ok else f"有不过项（见 report_{TAG}.json / 覆盖与未决_{TAG}.md）")
     sys.exit(0 if ok else 1)
 
 

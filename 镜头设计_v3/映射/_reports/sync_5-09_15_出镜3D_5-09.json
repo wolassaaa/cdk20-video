@@ -1,0 +1,104 @@
+{
+ "video": "D:\\。hkbu\\molecular science\\导演检查_20261121\\15_出镜3D_5-09.mp4",
+ "group": "5-09",
+ "fps": 60.0,
+ "frames": 216,
+ "offset_f": 0,
+ "S1": {
+  "word_events": 4,
+  "table_dev_max_f": 0,
+  "video_checked": 6,
+  "video_no_motion": [],
+  "pass_": true
+ },
+ "S2": {
+  "pass_": true,
+  "early": []
+ },
+ "S3": {
+  "pass_": true,
+  "longest_still_f": 0,
+  "bad": []
+ },
+ "S4": {
+  "pass_": true,
+  "looks_like_30": false,
+  "dup_frames": 0,
+  "stepped_dups": 0,
+  "stepped_ratio": 0.0,
+  "blend_frames": 0,
+  "blend_first": [],
+  "design_fade": 0,
+  "verdict": "原生（无变速重复/混帧）"
+ },
+ "sentences": [
+  {
+   "sid": "5-09.s1",
+   "f0": 32,
+   "f1": 170,
+   "last_motion_f": 170,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  }
+ ],
+ "events": [
+  {
+   "id": "arrive",
+   "verb": "move",
+   "w": "This",
+   "f_land": 32,
+   "table_dev": 0
+  },
+  {
+   "id": "key",
+   "verb": "move",
+   "w": "time,",
+   "f_land": 47,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "insert",
+   "verb": "plug_in",
+   "w": "key",
+   "f_land": 89,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "twist",
+   "verb": "twist",
+   "w": "turned.",
+   "f_land": 142,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "clamp",
+   "verb": "clamp",
+   "w": "turned.",
+   "f_land": 148,
+   "table_dev": 6,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "off",
+   "verb": "power_off",
+   "w": "turned.",
+   "f_land": 152,
+   "table_dev": 10,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "dive",
+   "verb": "move",
+   "w": "turned.",
+   "f_land": 215,
+   "table_dev": 73,
+   "video_motion_near_start": true
+  }
+ ],
+ "pass": true
+}

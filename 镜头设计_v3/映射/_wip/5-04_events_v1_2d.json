@@ -1,0 +1,319 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "5-04",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 5 章二维说明书页 5-04（C 画外音）：左边锁（CDK20）和钥匙 001，钥匙插进去（grabbing），想转却只是晃（jamming），旁边齿轮一直在转（还在工作）；右边一张示意图：activity 对 how much you need，一条普通曲线在一半处标 IC50；For 001 一条红线一直很高，一半在图外，写 above 6,000 nanomolar，红批注 weak。页面 Manual504.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "title",
+   "obj": "title",
+   "verb": "appear",
+   "at": {
+    "word": "5-04.w005",
+    "off": 0
+   },
+   "means": "second test：标题 A second test",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "5-04.w006"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "grab",
+   "obj": "grab",
+   "verb": "move",
+   "at": {
+    "word": "5-04.w008",
+    "off": 0
+   },
+   "means": "grabbing：钥匙滑进锁，写 grabbing",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "word": "5-04.w008"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "key",
+     "lock"
+    ]
+   }
+  },
+  {
+   "id": "lock",
+   "obj": "lock",
+   "verb": "snap",
+   "at": {
+    "word": "5-04.w010",
+    "off": 0
+   },
+   "means": "lock：锁一颤",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "5-04.w010"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "neq",
+   "obj": "neq",
+   "verb": "appear",
+   "at": {
+    "word": "5-04.w011",
+    "off": 0
+   },
+   "means": "isn't the same：红色不等号",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "5-04.w013"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "jam",
+   "obj": "jam",
+   "verb": "appear",
+   "at": {
+    "word": "5-04.w015",
+    "off": 0
+   },
+   "means": "jamming：写 jamming，钥匙想转只是晃，晃动线",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "k001",
+   "obj": "k001",
+   "verb": "appear",
+   "at": {
+    "word": "5-04.w018",
+    "off": 0
+   },
+   "means": "001：钥匙上标 001",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "5-04.w018"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "stop",
+   "obj": "stop",
+   "verb": "grow",
+   "at": {
+    "word": "5-04.w020",
+    "off": 0
+   },
+   "means": "stop：锁旁长出齿轮",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "5-04.w020"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "cdk",
+   "obj": "cdk",
+   "verb": "appear",
+   "at": {
+    "word": "5-04.w021",
+    "off": 0
+   },
+   "means": "CDK20：锁下写 CDK20",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "5-04.w021"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "work",
+   "obj": "work",
+   "verb": "move",
+   "at": {
+    "word": "5-04.w023",
+    "off": 0
+   },
+   "means": "working：齿轮转起来，红问号",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "axes",
+   "obj": "axes",
+   "verb": "grow",
+   "at": {
+    "word": "5-04.w025",
+    "off": 0
+   },
+   "means": "measured：右边画出坐标轴，写 activity",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "5-04.w026"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "ic",
+   "obj": "ic",
+   "verb": "appear",
+   "at": {
+    "word": "5-04.w027",
+    "off": 0
+   },
+   "means": "IC50：图上写 IC50，一条普通曲线画出",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "5-04.w027"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "much",
+   "obj": "much",
+   "verb": "move",
+   "at": {
+    "word": "5-04.w029",
+    "off": 0
+   },
+   "means": "how much you need：横轴箭头往右，写 how much you need",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "5-04.w031"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "cut",
+   "obj": "cut",
+   "verb": "morph",
+   "at": {
+    "word": "5-04.w033",
+    "off": 0
+   },
+   "means": "cut the enzyme's activity：曲线上的点往下滑",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "5-04.w035"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "half",
+   "obj": "half",
+   "verb": "appear",
+   "at": {
+    "word": "5-04.w038",
+    "off": 0
+   },
+   "means": "in half：一半处虚线，落到横轴标 IC50",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "q",
+   "obj": "q",
+   "verb": "appear",
+   "at": {
+    "word": "5-04.w040",
+    "off": 0
+   },
+   "means": "For 001：红问号，001 的红线开始画",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "above",
+   "obj": "above",
+   "verb": "move",
+   "at": {
+    "word": "5-04.w041",
+    "off": 0
+   },
+   "means": "Above 6,000 nanomolar：红线一直很高，箭头伸出图外，写 above 6,000 nanomolar",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "5-04.w042"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "weak",
+   "obj": "weak",
+   "verb": "appear",
+   "at": {
+    "word": "5-04.w044",
+    "off": 0
+   },
+   "means": "Weak：红批注 weak，齿轮还在转",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  }
+ ]
+}

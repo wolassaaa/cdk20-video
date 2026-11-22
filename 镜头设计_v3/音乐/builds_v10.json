@@ -1,0 +1,133 @@
+[
+  {
+    "window": "W1",
+    "bar_minus_2": {
+      "same_as": "1-09",
+      "kd": null,
+      "sn": null,
+      "rim": null,
+      "hh": null,
+      "tom": null
+    },
+    "bar_minus_1": {
+      "same_as": null,
+      "kd": "K... K... K... K...",
+      "sn": null,
+      "rim": "R.R. R.R. RRRR RRRR",
+      "hh": null,
+      "tom": ".... .... .... ..Tt",
+      "vel_from": 0.35,
+      "vel_to": 0.9
+    },
+    "source": [
+      "W1（底乐①一小节 = 8 个歌拍，最后一小节跨进 W1 的头两拍）",
+      "照 1-09 的鼓型",
+      "KD `K... K... K... K...`　RIM `R.R. R.R. RRRR RRRR`（力度从 0.35 匀着加到 0.90）　TOM `.... .... .... ..Tt`"
+    ]
+  },
+  {
+    "window": "W2",
+    "bar_minus_2": {
+      "same_as": null,
+      "kd": "k... k... k... k...",
+      "sn": null,
+      "rim": null,
+      "hh": null,
+      "tom": null
+    },
+    "bar_minus_1": {
+      "same_as": null,
+      "kd": "K... K... K... K...",
+      "sn": "S.S. S.S. SSSS SSSS",
+      "rim": null,
+      "hh": null,
+      "tom": null,
+      "vel_from": 0.3,
+      "vel_to": 0.9
+    },
+    "source": [
+      "W2",
+      "KD `k... k... k... k...`",
+      "KD `K... K... K... K...`　SN `S.S. S.S. SSSS SSSS`（力度从 0.30 匀着加到 0.90）"
+    ]
+  },
+  {
+    "window": "W3",
+    "bar_minus_2": {
+      "same_as": "4-06",
+      "kd": null,
+      "sn": null,
+      "rim": null,
+      "hh": null,
+      "tom": null
+    },
+    "bar_minus_1": {
+      "same_as": null,
+      "kd": "K... K... K... K...",
+      "sn": "S.S. S.S. SSSS SSSS",
+      "rim": null,
+      "hh": null,
+      "tom": ".... .... T.t. TTt.",
+      "vel_from": 0.3,
+      "vel_to": 0.9
+    },
+    "source": [
+      "W3",
+      "照 4-06 的鼓型",
+      "KD `K... K... K... K...`　SN `S.S. S.S. SSSS SSSS`（0.30 → 0.90）　TOM `.... .... T.t. TTt.`"
+    ]
+  },
+  {
+    "window": "W4",
+    "bar_minus_2": {
+      "same_as": null,
+      "kd": "K... K... K... K...",
+      "sn": ".... S... .... S...",
+      "rim": null,
+      "hh": null,
+      "tom": null,
+      "hh_same_as": "5-08"
+    },
+    "bar_minus_1": {
+      "same_as": null,
+      "kd": "K... K... K... ....",
+      "sn": "S.S. SSSS SS.. ....",
+      "rim": null,
+      "hh": null,
+      "tom": ".... .... ..Tt ....",
+      "vel_from": 0.3,
+      "vel_to": 0.9,
+      "hh_same_as": "5-08",
+      "hh_until_beat": 3
+    },
+    "source": [
+      "W4（最后一拍是空拍；5-09 自己没有鼓型，镲接着用 5-08 的）",
+      "KD `K... K... K... K...`　SN `.... S... .... S...`　HH 照 5-08 的鼓型",
+      "KD `K... K... K... ....`　SN `S.S. SSSS SS.. ....`（0.30 → 0.90）　TOM `.... .... ..Tt ....`　HH 照 5-08 的鼓型打到第 3 拍为止"
+    ]
+  },
+  {
+    "window": "W5",
+    "bar_minus_2": {
+      "same_as": "8-07",
+      "kd": null,
+      "sn": null,
+      "rim": null,
+      "hh": null,
+      "tom": null
+    },
+    "bar_minus_1": {
+      "same_as": null,
+      "kd": "k... .... k... ....",
+      "sn": ".... .... .... s.ss",
+      "rim": null,
+      "hh": null,
+      "tom": ".... .... ..t. T..."
+    },
+    "source": [
+      "W5",
+      "照 8-07 的鼓型",
+      "KD `k... .... k... ....`　SN `.... .... .... s.ss`　TOM `.... .... ..t. T...`"
+    ]
+  }
+]

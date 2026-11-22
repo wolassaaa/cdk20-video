@@ -8,13 +8,13 @@
   "8-06",
   "8-07"
  ],
- "tool": "remotion",
+ "tool": "blender",
  "fps": 60,
  "len_f": 1960,
  "cut": "cut_v8",
- "cut_start_f": 60926,
- "cut_start_s": 1015.43,
- "master_built": "2026-11-18 02:33:56 +09:00",
+ "cut_start_f": 59505,
+ "cut_start_s": 991.7467,
+ "master_built": "2026-11-22 20:33:03 +09:00",
  "words_hash": "8d5146cb80af",
  "events_src": "镜头设计_v3/映射/events/8-04_8-05_8-06_8-07.json",
  "words": [
@@ -25,8 +25,8 @@
    "sid": "8-04.s1",
    "f0": 32,
    "f1": 49,
-   "F0": 60958,
-   "F1": 60975
+   "F0": 59537,
+   "F1": 59554
   },
   {
    "wid": "8-04.w002",
@@ -35,8 +35,8 @@
    "sid": "8-04.s1",
    "f0": 62,
    "f1": 78,
-   "F0": 60988,
-   "F1": 61004
+   "F0": 59567,
+   "F1": 59583
   },
   {
    "wid": "8-04.w003",
@@ -45,8 +45,8 @@
    "sid": "8-04.s1",
    "f0": 80,
    "f1": 85,
-   "F0": 61006,
-   "F1": 61011
+   "F0": 59585,
+   "F1": 59590
   },
   {
    "wid": "8-04.w004",
@@ -55,8 +55,8 @@
    "sid": "8-04.s1",
    "f0": 90,
    "f1": 114,
-   "F0": 61016,
-   "F1": 61040
+   "F0": 59595,
+   "F1": 59619
   },
   {
    "wid": "8-04.w005",
@@ -65,8 +65,8 @@
    "sid": "8-04.s1",
    "f0": 132,
    "f1": 144,
-   "F0": 61058,
-   "F1": 61070
+   "F0": 59637,
+   "F1": 59649
   },
   {
    "wid": "8-04.w006",
@@ -75,8 +75,8 @@
    "sid": "8-04.s1",
    "f0": 149,
    "f1": 163,
-   "F0": 61075,
-   "F1": 61089
+   "F0": 59654,
+   "F1": 59668
   },
   {
    "wid": "8-04.w007",
@@ -85,8 +85,8 @@
    "sid": "8-04.s1",
    "f0": 190,
    "f1": 194,
-   "F0": 61116,
-   "F1": 61120
+   "F0": 59695,
+   "F1": 59699
   },
   {
    "wid": "8-04.w008",
@@ -95,8 +95,8 @@
    "sid": "8-04.s1",
    "f0": 198,
    "f1": 223,
-   "F0": 61124,
-   "F1": 61149
+   "F0": 59703,
+   "F1": 59728
   },
   {
    "wid": "8-04.w009",
@@ -105,8 +105,8 @@
    "sid": "8-04.s2",
    "f0": 277,
    "f1": 284,
-   "F0": 61203,
-   "F1": 61210
+   "F0": 59782,
+   "F1": 59789
   },
   {
    "wid": "8-04.w010",
@@ -115,8 +115,8 @@
    "sid": "8-04.s2",
    "f0": 286,
    "f1": 311,
-   "F0": 61212,
-   "F1": 61237
+   "F0": 59791,
+   "F1": 59816
   },
   {
    "wid": "8-04.w011",
@@ -125,8 +125,8 @@
    "sid": "8-04.s2",
    "f0": 317,
    "f1": 344,
-   "F0": 61243,
-   "F1": 61270
+   "F0": 59822,
+   "F1": 59849
   },
   {
    "wid": "8-04.w012",
@@ -135,8 +135,8 @@
    "sid": "8-04.s2",
    "f0": 344,
    "f1": 360,
-   "F0": 61270,
-   "F1": 61286
+   "F0": 59849,
+   "F1": 59865
   },
   {
    "wid": "8-04.w013",
@@ -145,8 +145,8 @@
    "sid": "8-04.s2",
    "f0": 366,
    "f1": 389,
-   "F0": 61292,
-   "F1": 61315
+   "F0": 59871,
+   "F1": 59894
   },
   {
    "wid": "8-04.w014",
@@ -155,8 +155,8 @@
    "sid": "8-04.s3",
    "f0": 468,
    "f1": 508,
-   "F0": 61394,
-   "F1": 61434
+   "F0": 59973,
+   "F1": 60013
   },
   {
    "wid": "8-04.w015",
@@ -165,8 +165,8 @@
    "sid": "8-04.s3",
    "f0": 523,
    "f1": 539,
-   "F0": 61449,
-   "F1": 61465
+   "F0": 60028,
+   "F1": 60044
   },
   {
    "wid": "8-04.w016",
@@ -175,8 +175,8 @@
    "sid": "8-04.s3",
    "f0": 545,
    "f1": 561,
-   "F0": 61471,
-   "F1": 61487
+   "F0": 60050,
+   "F1": 60066
   },
   {
    "wid": "8-05.w001",
@@ -185,8 +185,8 @@
    "sid": "8-05.s1",
    "f0": 596,
    "f1": 601,
-   "F0": 61522,
-   "F1": 61527
+   "F0": 60101,
+   "F1": 60106
   },
   {
    "wid": "8-05.w002",
@@ -195,8 +195,8 @@
    "sid": "8-05.s1",
    "f0": 605,
    "f1": 616,
-   "F0": 61531,
-   "F1": 61542
+   "F0": 60110,
+   "F1": 60121
   },
   {
    "wid": "8-05.w003",
@@ -205,8 +205,8 @@
    "sid": "8-05.s1",
    "f0": 617,
    "f1": 635,
-   "F0": 61543,
-   "F1": 61561
+   "F0": 60122,
+   "F1": 60140
   },
   {
    "wid": "8-05.w004",
@@ -215,8 +215,8 @@
    "sid": "8-05.s1",
    "f0": 638,
    "f1": 643,
-   "F0": 61564,
-   "F1": 61569
+   "F0": 60143,
+   "F1": 60148
   },
   {
    "wid": "8-05.w005",
@@ -225,8 +225,8 @@
    "sid": "8-05.s1",
    "f0": 646,
    "f1": 654,
-   "F0": 61572,
-   "F1": 61580
+   "F0": 60151,
+   "F1": 60159
   },
   {
    "wid": "8-05.w006",
@@ -235,8 +235,8 @@
    "sid": "8-05.s1",
    "f0": 655,
    "f1": 657,
-   "F0": 61581,
-   "F1": 61583
+   "F0": 60160,
+   "F1": 60162
   },
   {
    "wid": "8-05.w007",
@@ -245,8 +245,8 @@
    "sid": "8-05.s1",
    "f0": 660,
    "f1": 691,
-   "F0": 61586,
-   "F1": 61617
+   "F0": 60165,
+   "F1": 60196
   },
   {
    "wid": "8-05.w008",
@@ -255,8 +255,8 @@
    "sid": "8-05.s1",
    "f0": 714,
    "f1": 730,
-   "F0": 61640,
-   "F1": 61656
+   "F0": 60219,
+   "F1": 60235
   },
   {
    "wid": "8-05.w009",
@@ -265,8 +265,8 @@
    "sid": "8-05.s1",
    "f0": 741,
    "f1": 751,
-   "F0": 61667,
-   "F1": 61677
+   "F0": 60246,
+   "F1": 60256
   },
   {
    "wid": "8-05.w010",
@@ -275,8 +275,8 @@
    "sid": "8-05.s1",
    "f0": 755,
    "f1": 787,
-   "F0": 61681,
-   "F1": 61713
+   "F0": 60260,
+   "F1": 60292
   },
   {
    "wid": "8-05.w011",
@@ -285,8 +285,8 @@
    "sid": "8-05.s1",
    "f0": 787,
    "f1": 788,
-   "F0": 61713,
-   "F1": 61714
+   "F0": 60292,
+   "F1": 60293
   },
   {
    "wid": "8-05.w012",
@@ -295,8 +295,8 @@
    "sid": "8-05.s1",
    "f0": 799,
    "f1": 820,
-   "F0": 61725,
-   "F1": 61746
+   "F0": 60304,
+   "F1": 60325
   },
   {
    "wid": "8-05.w013",
@@ -305,8 +305,8 @@
    "sid": "8-05.s1",
    "f0": 826,
    "f1": 849,
-   "F0": 61752,
-   "F1": 61775
+   "F0": 60331,
+   "F1": 60354
   },
   {
    "wid": "8-06.w001",
@@ -315,8 +315,8 @@
    "sid": "8-06.s1",
    "f0": 884,
    "f1": 899,
-   "F0": 61810,
-   "F1": 61825
+   "F0": 60389,
+   "F1": 60404
   },
   {
    "wid": "8-06.w002",
@@ -325,8 +325,8 @@
    "sid": "8-06.s1",
    "f0": 907,
    "f1": 925,
-   "F0": 61833,
-   "F1": 61851
+   "F0": 60412,
+   "F1": 60430
   },
   {
    "wid": "8-06.w003",
@@ -335,8 +335,8 @@
    "sid": "8-06.s1",
    "f0": 940,
    "f1": 946,
-   "F0": 61866,
-   "F1": 61872
+   "F0": 60445,
+   "F1": 60451
   },
   {
    "wid": "8-06.w004",
@@ -345,8 +345,8 @@
    "sid": "8-06.s1",
    "f0": 974,
    "f1": 988,
-   "F0": 61900,
-   "F1": 61914
+   "F0": 60479,
+   "F1": 60493
   },
   {
    "wid": "8-06.w005",
@@ -355,8 +355,8 @@
    "sid": "8-06.s1",
    "f0": 992,
    "f1": 998,
-   "F0": 61918,
-   "F1": 61924
+   "F0": 60497,
+   "F1": 60503
   },
   {
    "wid": "8-06.w006",
@@ -365,8 +365,8 @@
    "sid": "8-06.s1",
    "f0": 1004,
    "f1": 1012,
-   "F0": 61930,
-   "F1": 61938
+   "F0": 60509,
+   "F1": 60517
   },
   {
    "wid": "8-06.w007",
@@ -375,8 +375,8 @@
    "sid": "8-06.s1",
    "f0": 1012,
    "f1": 1015,
-   "F0": 61938,
-   "F1": 61941
+   "F0": 60517,
+   "F1": 60520
   },
   {
    "wid": "8-06.w008",
@@ -385,8 +385,8 @@
    "sid": "8-06.s1",
    "f0": 1020,
    "f1": 1039,
-   "F0": 61946,
-   "F1": 61965
+   "F0": 60525,
+   "F1": 60544
   },
   {
    "wid": "8-06.w009",
@@ -395,8 +395,8 @@
    "sid": "8-06.s1",
    "f0": 1096,
    "f1": 1129,
-   "F0": 62022,
-   "F1": 62055
+   "F0": 60601,
+   "F1": 60634
   },
   {
    "wid": "8-06.w010",
@@ -405,8 +405,8 @@
    "sid": "8-06.s1",
    "f0": 1176,
    "f1": 1210,
-   "F0": 62102,
-   "F1": 62136
+   "F0": 60681,
+   "F1": 60715
   },
   {
    "wid": "8-06.w011",
@@ -415,8 +415,8 @@
    "sid": "8-06.s1",
    "f0": 1261,
    "f1": 1287,
-   "F0": 62187,
-   "F1": 62213
+   "F0": 60766,
+   "F1": 60792
   },
   {
    "wid": "8-06.w012",
@@ -425,8 +425,8 @@
    "sid": "8-06.s1",
    "f0": 1347,
    "f1": 1377,
-   "F0": 62273,
-   "F1": 62303
+   "F0": 60852,
+   "F1": 60882
   },
   {
    "wid": "8-06.w013",
@@ -435,8 +435,8 @@
    "sid": "8-06.s1",
    "f0": 1423,
    "f1": 1430,
-   "F0": 62349,
-   "F1": 62356
+   "F0": 60928,
+   "F1": 60935
   },
   {
    "wid": "8-06.w014",
@@ -445,8 +445,8 @@
    "sid": "8-06.s1",
    "f0": 1435,
    "f1": 1472,
-   "F0": 62361,
-   "F1": 62398
+   "F0": 60940,
+   "F1": 60977
   },
   {
    "wid": "8-07.w001",
@@ -455,8 +455,8 @@
    "sid": "8-07.s1",
    "f0": 1501,
    "f1": 1515,
-   "F0": 62427,
-   "F1": 62441
+   "F0": 61006,
+   "F1": 61020
   },
   {
    "wid": "8-07.w002",
@@ -465,8 +465,8 @@
    "sid": "8-07.s1",
    "f0": 1517,
    "f1": 1530,
-   "F0": 62443,
-   "F1": 62456
+   "F0": 61022,
+   "F1": 61035
   },
   {
    "wid": "8-07.w003",
@@ -475,8 +475,8 @@
    "sid": "8-07.s1",
    "f0": 1531,
    "f1": 1558,
-   "F0": 62457,
-   "F1": 62484
+   "F0": 61036,
+   "F1": 61063
   },
   {
    "wid": "8-07.w004",
@@ -485,8 +485,8 @@
    "sid": "8-07.s1",
    "f0": 1558,
    "f1": 1561,
-   "F0": 62484,
-   "F1": 62487
+   "F0": 61063,
+   "F1": 61066
   },
   {
    "wid": "8-07.w005",
@@ -495,8 +495,8 @@
    "sid": "8-07.s1",
    "f0": 1565,
    "f1": 1608,
-   "F0": 62491,
-   "F1": 62534
+   "F0": 61070,
+   "F1": 61113
   },
   {
    "wid": "8-07.w006",
@@ -505,8 +505,8 @@
    "sid": "8-07.s2",
    "f0": 1648,
    "f1": 1653,
-   "F0": 62574,
-   "F1": 62579
+   "F0": 61153,
+   "F1": 61158
   },
   {
    "wid": "8-07.w007",
@@ -515,8 +515,8 @@
    "sid": "8-07.s2",
    "f0": 1658,
    "f1": 1672,
-   "F0": 62584,
-   "F1": 62598
+   "F0": 61163,
+   "F1": 61177
   },
   {
    "wid": "8-07.w008",
@@ -525,8 +525,8 @@
    "sid": "8-07.s2",
    "f0": 1676,
    "f1": 1683,
-   "F0": 62602,
-   "F1": 62609
+   "F0": 61181,
+   "F1": 61188
   },
   {
    "wid": "8-07.w009",
@@ -535,8 +535,8 @@
    "sid": "8-07.s2",
    "f0": 1692,
    "f1": 1715,
-   "F0": 62618,
-   "F1": 62641
+   "F0": 61197,
+   "F1": 61220
   },
   {
    "wid": "8-07.w010",
@@ -545,8 +545,8 @@
    "sid": "8-07.s2",
    "f0": 1724,
    "f1": 1731,
-   "F0": 62650,
-   "F1": 62657
+   "F0": 61229,
+   "F1": 61236
   },
   {
    "wid": "8-07.w011",
@@ -555,8 +555,8 @@
    "sid": "8-07.s2",
    "f0": 1738,
    "f1": 1757,
-   "F0": 62664,
-   "F1": 62683
+   "F0": 61243,
+   "F1": 61262
   },
   {
    "wid": "8-07.w012",
@@ -565,8 +565,8 @@
    "sid": "8-07.s2",
    "f0": 1764,
    "f1": 1770,
-   "F0": 62690,
-   "F1": 62696
+   "F0": 61269,
+   "F1": 61275
   },
   {
    "wid": "8-07.w013",
@@ -575,8 +575,8 @@
    "sid": "8-07.s2",
    "f0": 1774,
    "f1": 1786,
-   "F0": 62700,
-   "F1": 62712
+   "F0": 61279,
+   "F1": 61291
   },
   {
    "wid": "8-07.w014",
@@ -585,8 +585,8 @@
    "sid": "8-07.s2",
    "f0": 1788,
    "f1": 1804,
-   "F0": 62714,
-   "F1": 62730
+   "F0": 61293,
+   "F1": 61309
   },
   {
    "wid": "8-07.w015",
@@ -595,8 +595,8 @@
    "sid": "8-07.s3",
    "f0": 1857,
    "f1": 1871,
-   "F0": 62783,
-   "F1": 62797
+   "F0": 61362,
+   "F1": 61376
   },
   {
    "wid": "8-07.w016",
@@ -605,8 +605,8 @@
    "sid": "8-07.s3",
    "f0": 1874,
    "f1": 1881,
-   "F0": 62800,
-   "F1": 62807
+   "F0": 61379,
+   "F1": 61386
   },
   {
    "wid": "8-07.w017",
@@ -615,8 +615,8 @@
    "sid": "8-07.s3",
    "f0": 1886,
    "f1": 1911,
-   "F0": 62812,
-   "F1": 62837
+   "F0": 61391,
+   "F1": 61416
   }
  ],
  "sentences": [
@@ -688,171 +688,143 @@
  "holds": [],
  "events": [
   {
-   "id": "card",
-   "obj": "card",
-   "verb": "grow",
+   "id": "land",
+   "obj": "road",
+   "verb": "move",
    "ease": "inout",
-   "means": "This works：讲解卡外框画出，五站路从上往下画出",
-   "f_start": 12,
-   "f_land": 32,
-   "f_end": 78,
-   "until": "8-04.w002",
+   "means": "段首：`cells` 牌的骨白牌面从盖满画面退到位，五块牌挂在竖料杆上",
+   "f_start": 2,
+   "f_land": 26,
+   "f_end": 26,
+   "until": null,
    "word": "8-04.w001",
    "w": "This",
    "key": "this#1",
    "sid": "8-04.s1",
    "word_f0": 32,
-   "tool": "remotion",
-   "F_start": 60938,
-   "F_land": 60958,
-   "F_end": 61004
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 59507,
+   "F_land": 59531,
+   "F_end": 59531
   },
   {
-   "id": "cells",
-   "obj": "cells",
+   "id": "cells_tick",
+   "obj": "cells_tick",
    "verb": "snap",
    "ease": "inout",
-   "means": "cells：cells 站变红打勾",
-   "f_start": 82,
+   "means": "`cells` 牌上绿色的勾\"咔\"地扣上，培养皿小件亮",
+   "f_start": 84,
    "f_land": 90,
-   "f_end": 114,
-   "until": "8-04.w004",
+   "f_end": 104,
+   "until": null,
    "word": "8-04.w004",
    "w": "cells,",
    "key": "cells#1",
    "sid": "8-04.s1",
    "word_f0": 90,
-   "tool": "remotion",
-   "F_start": 61008,
-   "F_land": 61016,
-   "F_end": 61040
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 59589,
+   "F_land": 59595,
+   "F_end": 59609
   },
   {
-   "id": "noty",
-   "obj": "noty",
-   "verb": "appear",
+   "id": "notyet",
+   "obj": "notyet",
+   "verb": "eject",
    "ease": "inout",
-   "means": "not yet：patients 旁红批注 not yet",
-   "f_start": 124,
+   "means": "`patients` 牌旁弹下小牌 `not yet`；`patients` 牌保持灰",
+   "f_start": 126,
    "f_land": 132,
-   "f_end": 163,
-   "until": "8-04.w006",
+   "f_end": 223,
+   "until": "8-04.w008",
    "word": "8-04.w005",
    "w": "not",
    "key": "not#1",
    "sid": "8-04.s1",
    "word_f0": 132,
-   "tool": "remotion",
-   "F_start": 61050,
-   "F_land": 61058,
-   "F_end": 61089
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 59631,
+   "F_land": 59637,
+   "F_end": 59728
   },
   {
-   "id": "ppl",
-   "obj": "ppl",
-   "verb": "morph",
+   "id": "chip_glow",
+   "obj": "computer",
+   "verb": "move",
    "ease": "inout",
-   "means": "people：patients 站变灰虚线",
-   "f_start": 190,
-   "f_land": 198,
-   "f_end": 223,
-   "until": "8-04.w008",
-   "word": "8-04.w008",
-   "w": "people.",
-   "key": "people#1",
-   "sid": "8-04.s1",
-   "word_f0": 198,
-   "tool": "remotion",
-   "F_start": 61116,
-   "F_land": 61124,
-   "F_end": 61149
-  },
-  {
-   "id": "comp",
-   "obj": "comp",
-   "verb": "snap",
-   "ease": "inout",
-   "means": "computer：computer 站跳一下",
-   "f_start": 280,
+   "means": "`computer` 牌被点名（焦点加轮廓光），芯片小件亮",
+   "f_start": 278,
    "f_land": 286,
-   "f_end": 311,
-   "until": "8-04.w010",
+   "f_end": 306,
+   "until": null,
    "word": "8-04.w010",
    "w": "computer",
    "key": "computer#1",
    "sid": "8-04.s2",
    "word_f0": 286,
-   "tool": "remotion",
-   "F_start": 61206,
-   "F_land": 61212,
-   "F_end": 61237
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 59783,
+   "F_land": 59791,
+   "F_end": 59811
   },
   {
-   "id": "narr",
-   "obj": "narr",
-   "verb": "grow",
+   "id": "funnel",
+   "obj": "funnel",
+   "verb": "move",
    "ease": "inout",
-   "means": "narrows：computer 旁长出漏斗，一片点落进去",
-   "f_start": 307,
+   "means": "`computer` 牌下的漏斗里 40 颗小珠往下流，出口只漏出 5 颗",
+   "f_start": 297,
    "f_land": 317,
-   "f_end": 360,
-   "until": "8-04.w012",
+   "f_end": 389,
+   "until": "8-04.w013",
    "word": "8-04.w011",
    "w": "narrows",
    "key": "narrows#1",
    "sid": "8-04.s2",
    "word_f0": 317,
-   "tool": "remotion",
-   "F_start": 61233,
-   "F_land": 61243,
-   "F_end": 61286
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 59802,
+   "F_land": 59822,
+   "F_end": 59894
   },
   {
-   "id": "srch",
-   "obj": "srch",
-   "verb": "morph",
+   "id": "flask",
+   "obj": "flask",
+   "verb": "eject",
    "ease": "inout",
-   "means": "search：漏斗底下只漏出两三个点",
-   "f_start": 358,
-   "f_land": 366,
-   "f_end": 389,
-   "until": "8-04.s2",
-   "word": "8-04.w013",
-   "w": "search.",
-   "key": "search#1",
-   "sid": "8-04.s2",
-   "word_f0": 366,
-   "tool": "remotion",
-   "F_start": 61284,
-   "F_land": 61292,
-   "F_end": 61315
-  },
-  {
-   "id": "exp",
-   "obj": "exp",
-   "verb": "grow",
-   "ease": "inout",
-   "means": "Experiments：cells 旁长出 flask",
-   "f_start": 458,
+   "means": "`cells` 牌旁的烧瓶升起，冒泡",
+   "f_start": 462,
    "f_land": 468,
-   "f_end": 539,
-   "until": "8-04.w015",
+   "f_end": 482,
+   "until": null,
    "word": "8-04.w014",
    "w": "Experiments",
    "key": "experiments#1",
    "sid": "8-04.s3",
    "word_f0": 468,
-   "tool": "remotion",
-   "F_start": 61384,
-   "F_land": 61394,
-   "F_end": 61465
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 59967,
+   "F_land": 59973,
+   "F_end": 59987
   },
   {
-   "id": "dec",
-   "obj": "dec",
-   "verb": "appear",
+   "id": "decide",
+   "obj": "flask",
+   "verb": "snap",
    "ease": "inout",
-   "means": "decide：flask 往下的红虚线箭头指到 animals、patients",
+   "means": "烧瓶往牌上一磕，\"咔\"，镜头微震，五块牌齐齐颤一下",
    "f_start": 537,
    "f_land": 545,
    "f_end": 561,
@@ -862,237 +834,217 @@
    "key": "decide#1",
    "sid": "8-04.s3",
    "word_f0": 545,
-   "tool": "remotion",
-   "F_start": 61463,
-   "F_land": 61471,
-   "F_end": 61487
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 60042,
+   "F_land": 60050,
+   "F_end": 60066
   },
   {
-   "id": "see",
-   "obj": "see",
+   "id": "bar_sway",
+   "obj": "road",
    "verb": "move",
    "ease": "inout",
-   "means": "see：报纸从卡外滑进来",
-   "f_start": 634,
-   "f_land": 646,
-   "f_end": 657,
-   "until": "8-05.w006",
-   "word": "8-05.w005",
-   "w": "see",
-   "key": "see#1",
+   "means": "竖料杆轻晃",
+   "f_start": 599,
+   "f_land": 605,
+   "f_end": 635,
+   "until": null,
+   "word": "8-05.w002",
+   "w": "next",
+   "key": "next#1",
    "sid": "8-05.s1",
-   "word_f0": 646,
-   "tool": "remotion",
-   "F_start": 61560,
-   "F_land": 61572,
-   "F_end": 61583
+   "word_f0": 605,
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 60104,
+   "F_land": 60110,
+   "F_end": 60140
   },
   {
-   "id": "head",
-   "obj": "head",
-   "verb": "snap",
+   "id": "paper",
+   "obj": "paper",
+   "verb": "move",
    "ease": "inout",
-   "means": "headline：报纸盖下来，一颤",
-   "f_start": 654,
+   "means": "报纸从上方落下，停在上面两块牌前面（A4）",
+   "f_start": 640,
    "f_land": 660,
-   "f_end": 730,
-   "until": "8-05.w008",
+   "f_end": 672,
+   "until": null,
    "word": "8-05.w007",
    "w": "headline",
    "key": "headline#1",
    "sid": "8-05.s1",
    "word_f0": 660,
-   "tool": "remotion",
-   "F_start": 61580,
-   "F_land": 61586,
-   "F_end": 61656
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 60145,
+   "F_land": 60165,
+   "F_end": 60177
   },
   {
-   "id": "hl1",
-   "obj": "hl1",
+   "id": "headline",
+   "obj": "headline",
    "verb": "appear",
    "ease": "inout",
-   "means": "'AI discovers：标题前半写出",
-   "f_start": 737,
+   "means": "报纸标题逐词亮，跟着念的词；B 举手机的手在报纸前",
+   "f_start": 739,
    "f_land": 741,
-   "f_end": 787,
-   "until": "8-05.w010",
+   "f_end": 849,
+   "until": "8-05.w013",
    "word": "8-05.w009",
    "w": "'AI",
    "key": "ai#1",
    "sid": "8-05.s1",
    "word_f0": 741,
-   "tool": "remotion",
-   "F_start": 61663,
-   "F_land": 61667,
-   "F_end": 61713
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 60244,
+   "F_land": 60246,
+   "F_end": 60354
   },
   {
-   "id": "hl2",
-   "obj": "hl2",
-   "verb": "appear",
+   "id": "paper_away",
+   "obj": "paper",
+   "verb": "move",
    "ease": "inout",
-   "means": "a cancer drug：标题后半写出，下面划红线",
-   "f_start": 795,
-   "f_land": 799,
-   "f_end": 849,
-   "until": "8-05.s1",
-   "word": "8-05.w012",
-   "w": "cancer",
-   "key": "cancer#1",
-   "sid": "8-05.s1",
-   "word_f0": 799,
-   "tool": "remotion",
-   "F_start": 61721,
-   "F_land": 61725,
-   "F_end": 61775
-  },
-  {
-   "id": "ask",
-   "obj": "ask",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "ask：报纸上红问号",
-   "f_start": 878,
+   "means": "报纸缩到 0.45 倍，滑到右上角挂着",
+   "f_start": 868,
    "f_land": 884,
-   "f_end": 946,
-   "until": "8-06.w003",
+   "f_end": 894,
+   "until": null,
    "word": "8-06.w001",
    "w": "...ask",
    "key": "ask#1",
    "sid": "8-06.s1",
    "word_f0": 884,
-   "tool": "remotion",
-   "F_start": 61804,
-   "F_land": 61810,
-   "F_end": 61872
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 60373,
+   "F_land": 60389,
+   "F_end": 60399
   },
   {
-   "id": "shr",
-   "obj": "shr",
-   "verb": "move",
-   "ease": "inout",
-   "means": "really is：报纸缩小移到卡顶",
-   "f_start": 934,
-   "f_land": 974,
-   "f_end": 998,
-   "until": "8-06.w005",
-   "word": "8-06.w004",
-   "w": "really",
-   "key": "really#1",
-   "sid": "8-06.s1",
-   "word_f0": 974,
-   "tool": "remotion",
-   "F_start": 61860,
-   "F_land": 61900,
-   "F_end": 61924
-  },
-  {
-   "id": "road",
+   "id": "pulse",
    "obj": "road",
-   "verb": "grow",
+   "verb": "flow",
    "ease": "inout",
-   "means": "road：红光沿路从上扫到下",
-   "f_start": 1010,
+   "means": "一个鼓包沿竖料杆从上走到下",
+   "f_start": 980,
    "f_land": 1020,
-   "f_end": 1039,
-   "until": "8-06.w008",
+   "f_end": 1026,
+   "until": null,
    "word": "8-06.w008",
    "w": "road:",
    "key": "road#1",
    "sid": "8-06.s1",
    "word_f0": 1020,
-   "tool": "remotion",
-   "F_start": 61936,
-   "F_land": 61946,
-   "F_end": 61965
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 60485,
+   "F_land": 60525,
+   "F_end": 60531
   },
   {
-   "id": "s1",
-   "obj": "s1",
-   "verb": "snap",
+   "id": "st1",
+   "obj": "computer",
+   "verb": "move",
    "ease": "inout",
-   "means": "computer：computer 站闪",
+   "means": "`computer` 牌往前弹出 8 mm、亮起；D 的指尖在牌前",
    "f_start": 1090,
    "f_land": 1096,
-   "f_end": 1129,
-   "until": "8-06.w009",
+   "f_end": 1110,
+   "until": null,
    "word": "8-06.w009",
    "w": "computer,",
    "key": "computer#1",
    "sid": "8-06.s1",
    "word_f0": 1096,
-   "tool": "remotion",
-   "F_start": 62016,
-   "F_land": 62022,
-   "F_end": 62055
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 60595,
+   "F_land": 60601,
+   "F_end": 60615
   },
   {
-   "id": "s2",
-   "obj": "s2",
-   "verb": "snap",
+   "id": "st2",
+   "obj": "protein",
+   "verb": "move",
    "ease": "inout",
-   "means": "protein：protein 站闪",
+   "means": "`protein` 牌同上",
    "f_start": 1170,
    "f_land": 1176,
-   "f_end": 1210,
-   "until": "8-06.w010",
+   "f_end": 1190,
+   "until": null,
    "word": "8-06.w010",
    "w": "protein,",
    "key": "protein#1",
    "sid": "8-06.s1",
    "word_f0": 1176,
-   "tool": "remotion",
-   "F_start": 62096,
-   "F_land": 62102,
-   "F_end": 62136
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 60675,
+   "F_land": 60681,
+   "F_end": 60695
   },
   {
-   "id": "s3",
-   "obj": "s3",
-   "verb": "snap",
+   "id": "st3",
+   "obj": "cells",
+   "verb": "move",
    "ease": "inout",
-   "means": "cells：cells 站闪",
+   "means": "`cells` 牌同上",
    "f_start": 1255,
    "f_land": 1261,
-   "f_end": 1287,
-   "until": "8-06.w011",
+   "f_end": 1275,
+   "until": null,
    "word": "8-06.w011",
    "w": "cells,",
    "key": "cells#1",
    "sid": "8-06.s1",
    "word_f0": 1261,
-   "tool": "remotion",
-   "F_start": 62181,
-   "F_land": 62187,
-   "F_end": 62213
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 60760,
+   "F_land": 60766,
+   "F_end": 60780
   },
   {
-   "id": "s4",
-   "obj": "s4",
-   "verb": "snap",
+   "id": "st4",
+   "obj": "animals",
+   "verb": "move",
    "ease": "inout",
-   "means": "animals：animals 站闪",
+   "means": "`animals` 牌同上",
    "f_start": 1341,
    "f_land": 1347,
-   "f_end": 1377,
-   "until": "8-06.w012",
+   "f_end": 1361,
+   "until": null,
    "word": "8-06.w012",
    "w": "animals,",
    "key": "animals#1",
    "sid": "8-06.s1",
    "word_f0": 1347,
-   "tool": "remotion",
-   "F_start": 62267,
-   "F_land": 62273,
-   "F_end": 62303
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 60846,
+   "F_land": 60852,
+   "F_end": 60866
   },
   {
-   "id": "s5",
-   "obj": "s5",
-   "verb": "snap",
+   "id": "st5",
+   "obj": "patients",
+   "verb": "move",
    "ease": "inout",
-   "means": "patients：patients 站闪",
+   "means": "`patients` 牌亮起后左右晃两下",
    "f_start": 1429,
    "f_land": 1435,
    "f_end": 1472,
@@ -1102,38 +1054,42 @@
    "key": "patients#1",
    "sid": "8-06.s1",
    "word_f0": 1435,
-   "tool": "remotion",
-   "F_start": 62355,
-   "F_land": 62361,
-   "F_end": 62398
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 60934,
+   "F_land": 60940,
+   "F_end": 60977
   },
   {
-   "id": "rep",
-   "obj": "rep",
-   "verb": "morph",
+   "id": "chip2",
+   "obj": "chip",
+   "verb": "move",
    "ease": "inout",
-   "means": "replace：漏斗淡出",
-   "f_start": 1519,
-   "f_land": 1531,
-   "f_end": 1558,
-   "until": "8-07.w003",
-   "word": "8-07.w003",
-   "w": "replace",
-   "key": "replace#1",
+   "means": "芯片小件扫光",
+   "f_start": 1495,
+   "f_land": 1501,
+   "f_end": 1521,
+   "until": null,
+   "word": "8-07.w001",
+   "w": "AI",
+   "key": "ai#1",
    "sid": "8-07.s1",
-   "word_f0": 1531,
-   "tool": "remotion",
-   "F_start": 62445,
-   "F_land": 62457,
-   "F_end": 62484
+   "word_f0": 1501,
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 61000,
+   "F_land": 61006,
+   "F_end": 61026
   },
   {
-   "id": "sci",
-   "obj": "sci",
-   "verb": "grow",
+   "id": "person",
+   "obj": "person",
+   "verb": "eject",
    "ease": "inout",
-   "means": "scientists：科学家站到 computer 旁",
-   "f_start": 1557,
+   "means": "`computer` 牌旁的白色小人跳一下",
+   "f_start": 1559,
    "f_land": 1565,
    "f_end": 1608,
    "until": "8-07.s1",
@@ -1142,17 +1098,19 @@
    "key": "scientists#1",
    "sid": "8-07.s1",
    "word_f0": 1565,
-   "tool": "remotion",
-   "F_start": 62483,
-   "F_land": 62491,
-   "F_end": 62534
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 61064,
+   "F_land": 61070,
+   "F_end": 61113
   },
   {
-   "id": "loop",
+   "id": "loop_on",
    "obj": "loop",
-   "verb": "grow",
+   "verb": "power_on",
    "ease": "inout",
-   "means": "trial and error：computer 外画一个循环箭头，转起来",
+   "means": "`computer` 牌上的小循环轨道转起来",
    "f_start": 1682,
    "f_land": 1692,
    "f_end": 1757,
@@ -1162,18 +1120,20 @@
    "key": "trial#1",
    "sid": "8-07.s2",
    "word_f0": 1692,
-   "tool": "remotion",
-   "F_start": 62608,
-   "F_land": 62618,
-   "F_end": 62683
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 61187,
+   "F_land": 61197,
+   "F_end": 61262
   },
   {
-   "id": "fast",
-   "obj": "fast",
+   "id": "ring",
+   "obj": "ring",
    "verb": "move",
    "ease": "inout",
-   "means": "light speed：循环快转，速度线",
-   "f_start": 1766,
+   "means": "小循环转成一个暖白的光环",
+   "f_start": 1758,
    "f_land": 1774,
    "f_end": 1804,
    "until": "8-07.w014",
@@ -1182,31 +1142,58 @@
    "key": "light#1",
    "sid": "8-07.s2",
    "word_f0": 1774,
-   "tool": "remotion",
-   "F_start": 62692,
-   "F_land": 62700,
-   "F_end": 62730
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 61263,
+   "F_land": 61279,
+   "F_end": 61309
   },
   {
-   "id": "thx",
-   "obj": "thx",
-   "verb": "grow",
+   "id": "allglow",
+   "obj": "road",
+   "verb": "move",
    "ease": "inout",
-   "means": "Thanks：五站从上往下全亮，路变红",
-   "f_start": 1849,
+   "means": "五块牌从上到下依次亮成暖色，各差 6 帧，整条路轻轻摆一下",
+   "f_start": 1847,
    "f_land": 1857,
    "f_end": 1911,
-   "until": "8-07.s3",
+   "until": "8-07.w017",
    "word": "8-07.w015",
    "w": "Thanks",
    "key": "thanks#1",
    "sid": "8-07.s3",
    "word_f0": 1857,
-   "tool": "remotion",
-   "F_start": 62775,
-   "F_land": 62783,
-   "F_end": 62837
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 61352,
+   "F_land": 61362,
+   "F_end": 61416
+  },
+  {
+   "id": "dive",
+   "obj": "computer",
+   "verb": "move",
+   "ease": "inout",
+   "means": "`computer` 牌的骨白牌面冲镜头",
+   "f_start": 1959,
+   "f_land": 1959,
+   "f_end": 1959,
+   "until": null,
+   "word": "8-07.w017",
+   "w": "watching.",
+   "key": "watching#1",
+   "sid": "8-07.s3",
+   "word_f0": 1886,
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 61464,
+   "F_land": 61464,
+   "F_end": 61464
   }
  ],
+ "guides": [],
  "problems": []
 }

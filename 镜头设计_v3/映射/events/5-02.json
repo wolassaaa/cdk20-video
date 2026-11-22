@@ -1,144 +1,155 @@
 {
- "schema": "cdk20.events/1",
- "group": "5-02",
- "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：出镜 5-02（C）讲解卡：七个小瓶；Six 的六个瓶变灰往下沉，one stood out 剩下一个往上浮、发亮；Its name? 问号，001 标签写出；页面 OnCam502.jsx。",
- "holds": [],
- "events": [
-  {
-   "id": "frame",
-   "obj": "frame",
-   "verb": "grow",
-   "at": {
-    "word": "5-02.w001",
-    "off": 0
-   },
-   "means": "Six：讲解卡外框画出",
-   "tool": "remotion",
-   "lead": 22,
-   "until": {
-    "word": "5-02.w001"
-   }
-  },
-  {
-   "id": "vials",
-   "obj": "vials",
-   "verb": "grow",
-   "at": {
-    "word": "5-02.w001",
-    "off": 0
-   },
-   "means": "Six：七个小瓶长出",
-   "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "word": "5-02.w001"
-   }
-  },
-  {
-   "id": "grey",
-   "obj": "grey",
-   "verb": "morph",
-   "at": {
-    "word": "5-02.w004",
-    "off": 0
-   },
-   "means": "barely：六个瓶变灰",
-   "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "5-02.w004"
-   }
-  },
-  {
-   "id": "sink",
-   "obj": "sink",
-   "verb": "move",
-   "at": {
-    "word": "5-02.w006",
-    "off": 0
-   },
-   "means": "on：六个瓶往下沉",
-   "tool": "remotion",
-   "lead": 28,
-   "until": {
-    "word": "5-02.w006"
-   }
-  },
-  {
-   "id": "rise",
-   "obj": "rise",
-   "verb": "move",
-   "at": {
-    "word": "5-02.w008",
-    "off": 0
-   },
-   "means": "one：剩下一个往上浮",
-   "tool": "remotion",
-   "lead": 22,
-   "until": {
-    "word": "5-02.w008"
-   }
-  },
-  {
-   "id": "glow",
-   "obj": "glow",
-   "verb": "morph",
-   "at": {
-    "word": "5-02.w009",
-    "off": 0
-   },
-   "means": "stood：发亮，红色光线",
-   "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "5-02.w009"
-   }
-  },
-  {
-   "id": "big",
-   "obj": "big",
-   "verb": "morph",
-   "at": {
-    "word": "5-02.w010",
-    "off": 0
-   },
-   "means": "out：瓶放大并轻抖",
-   "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "word": "5-02.w010"
-   }
-  },
-  {
-   "id": "q",
-   "obj": "q",
-   "verb": "appear",
-   "at": {
-    "word": "5-02.w012",
-    "off": 0
-   },
-   "means": "name：红问号",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "5-02.w012"
-   }
-  },
-  {
-   "id": "tag",
-   "obj": "tag",
-   "verb": "appear",
-   "at": {
-    "word": "5-02.w013",
-    "off": 0
-   },
-   "means": "001：问号换成标签 001",
-   "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "5-02.w013"
-   }
-  }
- ]
+  "schema": "cdk20.events/1",
+  "group": "5-02",
+  "tool": "blender",
+  "note": "HKBU SCIE1007 课程作业的科普视频：5-02 三维版事件表（Codex 照 18 填）。",
+  "holds": [],
+  "events": [
+    {
+      "id": "land",
+      "obj": "runner",
+      "verb": "move",
+      "at": {
+        "word": "5-02.w001",
+        "off": -6
+      },
+      "lead": 24,
+      "means": "段首：金色柄面从盖满画面退到右区，七把插头挂成一行",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "slip",
+      "obj": "plugs6",
+      "verb": "move",
+      "at": {
+        "word": "5-02.w004",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "dur": 30
+      },
+      "means": "六把往下滑 12 mm，浇口被拉细，各差 3 帧",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "swing",
+      "obj": "plugs6",
+      "verb": "move",
+      "at": {
+        "word": "5-02.w005",
+        "off": 0
+      },
+      "lead": 4,
+      "until": {
+        "sentence_end": true
+      },
+      "means": "六把挂在那里晃，越晃越小",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "rise",
+      "obj": "plug001",
+      "verb": "eject",
+      "at": {
+        "word": "5-02.w008",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "dur": 14
+      },
+      "means": "第 5 把没滑，这时往上升 30 mm，转成 3/4 角，扫光（A1）",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "grey",
+      "obj": "plugs6",
+      "verb": "appear",
+      "at": {
+        "word": "5-02.w009",
+        "off": 0
+      },
+      "lead": 4,
+      "until": {
+        "word": "5-02.w010"
+      },
+      "means": "另外六把逐把换成灰色，各差 3 帧",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "fwd",
+      "obj": "plug001",
+      "verb": "move",
+      "at": {
+        "word": "5-02.w010",
+        "off": 0
+      },
+      "lead": 12,
+      "until": {
+        "sentence_end": true
+      },
+      "means": "那一把朝镜头靠近 40 mm，屏上高到 300 px",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "face",
+      "obj": "plug001",
+      "verb": "move",
+      "at": {
+        "word": "5-02.w012",
+        "off": 0
+      },
+      "lead": 16,
+      "until": {
+        "sentence_end": true
+      },
+      "means": "插头转到柄面朝镜头",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "engrave",
+      "obj": "label001",
+      "verb": "appear",
+      "at": {
+        "word": "5-02.w013",
+        "off": 0
+      },
+      "lead": 2,
+      "until": {
+        "dur": 40
+      },
+      "means": "柄面刻字 `001` 出现，扫光，镜头微震",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "dive",
+      "obj": "plug001",
+      "verb": "move",
+      "at": {
+        "word": "5-02.w013",
+        "off": 85
+      },
+      "means": "`001` 的金色柄面冲镜头",
+      "guide": {
+        "kind": "none"
+      }
+    }
+  ]
 }

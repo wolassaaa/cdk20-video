@@ -1,0 +1,148 @@
+{
+ "video": "D:\\。hkbu\\molecular science\\导演检查_20261123\\15_出镜3D_1-05_1-06_1-07.mp4",
+ "group": "1-05+1-06+1-07",
+ "fps": 60.0,
+ "frames": 596,
+ "offset_f": 0,
+ "S1": {
+  "word_events": 9,
+  "table_dev_max_f": 0,
+  "video_checked": 9,
+  "video_no_motion": [],
+  "pass_": true
+ },
+ "S2": {
+  "pass_": true,
+  "early": []
+ },
+ "S3": {
+  "pass_": true,
+  "longest_still_f": 0,
+  "bad": []
+ },
+ "S4": {
+  "pass_": true,
+  "looks_like_30": false,
+  "dup_frames": 0,
+  "stepped_dups": 0,
+  "stepped_ratio": 0.0,
+  "blend_frames": 0,
+  "blend_first": [],
+  "design_fade": 0,
+  "verdict": "原生（无变速重复/混帧）"
+ },
+ "sentences": [
+  {
+   "sid": "1-05.s1",
+   "f0": 32,
+   "f1": 194,
+   "last_motion_f": 194,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "1-06.s1",
+   "f0": 249,
+   "f1": 359,
+   "last_motion_f": 359,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "1-07.s1",
+   "f0": 391,
+   "f1": 551,
+   "last_motion_f": 551,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  }
+ ],
+ "events": [
+  {
+   "id": "arrive",
+   "verb": "move",
+   "w": "So...",
+   "f_land": 32,
+   "table_dev": 0
+  },
+  {
+   "id": "why",
+   "verb": "move",
+   "w": "why",
+   "f_land": 95,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "make",
+   "verb": "move",
+   "w": "make",
+   "f_land": 143,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "better",
+   "verb": "power_on",
+   "w": "better",
+   "f_land": 164,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "path",
+   "verb": "grow",
+   "w": "Because",
+   "f_land": 249,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "harder",
+   "verb": "move",
+   "w": "harder",
+   "f_land": 299,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "tape",
+   "verb": "grow",
+   "w": "Like,",
+   "f_land": 391,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "extend",
+   "verb": "move",
+   "w": "ten-to-seventeen-years",
+   "f_land": 439,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "lock",
+   "verb": "snap",
+   "w": "hard.",
+   "f_land": 533,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "dive",
+   "verb": "move",
+   "w": "hard.",
+   "f_land": 595,
+   "table_dev": 62,
+   "video_motion_near_start": true
+  }
+ ],
+ "pass": true
+}

@@ -1,0 +1,1370 @@
+<!doctype html><meta charset="utf-8"><title>02_零件建模清单_给GPT</title><style>body{font-family:"Microsoft YaHei",sans-serif;max-width:900px;margin:24px auto;padding:0 16px;line-height:1.7;color:#222;background:#fff}
+table{border-collapse:collapse;margin:12px 0}td,th{border:1px solid #ccc;padding:6px 10px}th{background:#f2f2f2}
+code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1px solid #ddd;padding-bottom:4px}a{color:#0a58ca}</style><h1>零件建模清单（给 GPT / Codex）</h1>
+<p>HKBU SCIE1007 课程作业的科普视频。这份文档把 <code>01_逐段钻取清单.md</code> 里要用的模型归并成 28 个建模任务，每个写到"照做不用猜"：尺寸、内部结构、能动的件、命名、材质、接口、验收。写于 2026-11-19（韩国时间）。</p>
+<p>这是本科小组作业的一条英文科普片，讲已发表论文 Ren et al. 2023 的公开案例。我们不做实验、不设计分子，画面只是示意。</p>
+<hr />
+<h2>零、给执行人的话（先读）</h2>
+<p><strong>你的角色：照图施工。</strong> 外形、内部结构、比例、哪里能动、材质，下面都已经定了。照写的做；遇到写的东西在几何上做不出来（比如装不下、会穿模），<strong>停下来写进报告，给出你量到的数字和两个改法</strong>，不要自己改设计。</p>
+<p><strong>不许做的事：</strong></p>
+<ul>
+<li>不改 <code>kit_parts.py</code>、<code>kit_parts_hd.py</code> 和任何现有文件。新代码只写进新文件 <code>镜头设计_v3/inserts/kit_parts_deep.py</code>。</li>
+<li>内容件（CDK20 外形、器官、分子坐标、AlphaFold 坐标）一律从数据文件读，<strong>不许自己编形状</strong>。</li>
+<li>不新增材质（唯一例外见 h04 的 <code>screen</code>）。</li>
+<li>不删除任何文件或目录（钩子会拦）。</li>
+</ul>
+<p><strong>环境：</strong></p>
+<ul>
+<li>Blender：<code>G:/software/blender-5.3/blender.exe</code>，后台 <code>-b --factory-startup -P 脚本</code>。</li>
+<li>开 Blender 前看 <code>D:/。hkbu/molecular science/_env/queue/</code> 下有没有 <code>GPU_HOLD</code> 或 <code>GPU_PAUSED</code>（不带 <code>.off</code>），有就等。同时最多 1 个你的 Blender。</li>
+<li>检查图用 Cycles 64 采样、1600×900。</li>
+<li>可以用现成的免费插件或几何节点资源（Bool Tool 等），在报告里写名字和许可。</li>
+<li>临时文件放 <code>G:/cdk20/work/kit_deep/tmp/</code>。</li>
+</ul>
+<p><strong>交付：</strong></p>
+<ol>
+<li><code>镜头设计_v3/inserts/kit_parts_deep.py</code></li>
+<li><code>镜头设计_v3/inserts/kit_deep_check.py</code>（验收脚本，见第二节）</li>
+<li>每个模型一张检查图 <code>G:/cdk20/work/kit_deep/&lt;函数名&gt;_sheet.png</code>，一份 <code>G:/cdk20/work/kit_deep/&lt;函数名&gt;_report.json</code></li>
+<li>报告 <code>镜头设计_v3/inserts/kit_deep_报告.md</code>（中文）：每个模型的验收表逐条填实测值；做不到的写清楚。</li>
+<li>提交推送：只 <code>git add</code> 上面两个 .py 和报告 .md，中文提交说明。绝不 <code>git add -A</code> 或 <code>git add .</code>，不提交图片和 .blend。</li>
+</ol>
+<p><strong>顺序：</strong> 严格按第三节的优先级。P0 五个做完、检查图出来后先停，等总管看过再做后面的。</p>
+<hr />
+<h2>一、全体模型共用的规矩</h2>
+<h3>1.1 单位、坐标、格子</h3>
+<p>照 <code>kit_README.md</code>：</p>
+<ul>
+<li>函数里写毫米，建模时乘 <code>MM</code>（0.001）。</li>
+<li>零件原点在格子中心，板面是 XY，Z 向上。</li>
+<li>普通零件不超出 ±26 × ±16 mm（一格）。超出的模型下面单独写了尺寸（比如套件盒）。</li>
+<li>高度（Z）不超过 +22 mm，除非下面另写。</li>
+</ul>
+<h3>1.2 文件和函数写法</h3>
+<pre><code class="language-python"># kit_parts_deep.py
+from kit_parts_hd import *          # 继承 Part、Kit、MM、所有旧零件和工具函数
+import kit_parts as _base
+
+def h01_cdk20_lockworks(K, lod=&quot;hero&quot;):
+    P = Part(K, &quot;h01_cdk20_lockworks&quot;, &quot;blue&quot;)
+    ...
+    return P.done()                 # 返回零件根（空物体），和旧函数一样
+</code></pre>
+<ul>
+<li>每个新函数签名 <code>hNN_名字(K, **选项)</code>，返回零件根。</li>
+<li>用 <code>Part</code> 现有的造型方法（<code>slab box disc ring cyl ball torus tube lathe text gate</code>）；不够用再自己写，写成 <code>Part</code> 外的小函数。</li>
+<li>浇口照旧用 <code>P.gate(x, y, 方向, z)</code> 登记，零件根上的 <code>gates</code> 属性要有。</li>
+<li>要能用 <code>KP.make_cell(K, part, x, y)</code> 挂到板上一格。</li>
+</ul>
+<h3>1.3 能动的件：命名和装配（动画脚本按这个抓）</h3>
+<p>每个能动的件这样装：</p>
+<ol>
+<li>建一个空物体当<strong>转轴/滑轨</strong>，名字 <code>{函数名}__{角色名}</code>，比如 <code>h01_cdk20_lockworks__arm</code>。</li>
+<li>空物体的原点放在真实的铰链点或滑轨起点，<strong>本地轴对齐运动方向</strong>（转动绕本地 X，滑动沿本地 Z，下面每件会写明）。</li>
+<li>这个件的网格都是它的子物体。</li>
+<li>空物体上写自定义属性 <code>role</code>（角色名，字符串）。</li>
+<li>零件根上写自定义属性 <code>rig</code>，一个 JSON 字符串：</li>
+</ol>
+<pre><code class="language-json">{&quot;arm&quot;: {&quot;type&quot;: &quot;rot&quot;, &quot;axis&quot;: &quot;X&quot;, &quot;min&quot;: -32, &quot;max&quot;: 0, &quot;rest&quot;: 0, &quot;unit&quot;: &quot;deg&quot;},
+ &quot;bead&quot;: {&quot;type&quot;: &quot;loc&quot;, &quot;axis&quot;: &quot;Z&quot;, &quot;min&quot;: -12, &quot;max&quot;: 0, &quot;rest&quot;: -12, &quot;unit&quot;: &quot;mm&quot;}}
+</code></pre>
+<ol start="6">
+<li>静止姿态时所有空物体的本地变换为零（<code>rest</code> 就是 0 的那个位置；<code>rest</code> 不为 0 的件，在建模时就把它摆在 0 位置，<code>rest</code> 只是告诉动画脚本开场放在哪）。</li>
+</ol>
+<p>在 <code>kit_parts_deep.py</code> 里加三个公共函数（所有模型共用）：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>rig(root) -&gt; dict</code></td>
+<td>返回 <code>{角色名: 空物体}</code>，按 <code>role</code> 属性找，不按名字找（名字可能被 Blender 加 <code>.001</code>）</td>
+</tr>
+<tr>
+<td><code>pose(root, role, value)</code></td>
+<td>按 <code>rig</code> 里的类型和轴设置值，超出 min/max 时截断并打印警告</td>
+</tr>
+<tr>
+<td><code>rest(root)</code></td>
+<td>所有角色回到 <code>rest</code></td>
+</tr>
+</tbody>
+</table>
+<p>同一个零件里一组同类件（比如五根弹子销）用 <code>pin_0</code>、<code>pin_1</code> … 编号，从 0 起。</p>
+<h3>1.4 打开零件（钻进去用）</h3>
+<p>要钻的零件都有一个角色 <code>shell</code>：前壳沿分件线绕铰链翻开（<code>type rot</code>，0 = 合上，110° = 全开）。</p>
+<ul>
+<li>外壳要有<strong>真实壁厚 1.2 mm</strong>（实心体挖空，不是单面）。切开的断面要封口，断面和外壳同一种材质。</li>
+<li>合上时，内部机构完全在壳里，不露出（凹槽开口除外）。</li>
+<li>分件线在模型上看得到：两半之间留 0.15 mm 缝。</li>
+</ul>
+<h3>1.5 材质</h3>
+<p>只用 <code>Kit</code> 里已有的：<code>red blue green white black gold clear0 clear frost yellow cellpink tail liquid nuc_red nuc_grey blue_hi gold_satin ink inkw inkg organ organ_s organ_m dishpink liq_blue land</code>。</p>
+<ul>
+<li>实色件粗糙度保持 <code>Kit</code> 里的值（≤ 0.16），<strong>不许哑光</strong>。</li>
+<li>刻字用 <code>P.text</code>（Instrument Serif），浅色件上用 <code>K.ink</code>，深色件上用 <code>K.inkw</code>。</li>
+<li>片中出现的字一律英文，只写下面规定的字。</li>
+</ul>
+<h3>1.6 细节密度（导演 11-19："不够精致，细节不行"）</h3>
+<p>每个模型都要做到：</p>
+<ul>
+<li>所有外露边倒角 0.2–0.8 mm。</li>
+<li>至少一条分件线或接缝。</li>
+<li><strong>近景下每个面都有东西可看</strong>：任何一个在近景镜头里会占画面 10% 以上的面，至少有一处细节：刻字、螺丝头、肋条、滚花、顶针印（Ø0.8 mm 浅圆坑）、浇口残痕、加强筋、刻度线。</li>
+<li>最小细节尺寸 0.3 mm（再小在 1080p 近景里也看不见）。</li>
+<li>三角面数：hero 版每个模型不超过 30 万；mini 版不超过 3 万。</li>
+</ul>
+<h3>1.7 数据从哪来（内容件不许自己编）</h3>
+<table>
+<thead>
+<tr>
+<th>数据</th>
+<th>文件</th>
+<th>怎么读</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CDK20 外形</td>
+<td><code>G:/cdk20/work/kit/cdk20.npz</code>：<code>verts</code>、<code>quads</code>、<code>pocket</code>、<code>mouth</code></td>
+<td>照 <code>kit_parts.py</code> 的 <code>cdk20_body</code> 做同样的居中、旋转、缩放；<code>pocket</code> 和 <code>mouth</code> 用<strong>同一个变换</strong></td>
+</tr>
+<tr>
+<td>AlphaFold 坐标和把握值</td>
+<td><code>镜头设计_v3/assets/alphafold/AF-Q8IZL9-F1-model_v6.pdb</code></td>
+<td>取每个残基的 CA 原子坐标；B-factor 列就是把握值（pLDDT）</td>
+</tr>
+<tr>
+<td>001、048、ATP</td>
+<td><code>镜头设计_v3/inserts/kit_data.json</code></td>
+<td>本清单不用分子坐标，只用来对照名字</td>
+</tr>
+<tr>
+<td>器官</td>
+<td><code>G:/cdk20/work/kit/organs.npz</code></td>
+<td>照 <code>kit_organs.py</code></td>
+</tr>
+<tr>
+<td>肿瘤样本哪 16 片是白的</td>
+<td><code>p25_tumour_chips</code> 里 <code>random.Random(52).sample(range(52), 16)</code></td>
+<td>用同一个种子，保证全片一致</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>二、验收（每个模型都跑）</h2>
+<p>写 <code>kit_deep_check.py</code>，命令行 <code>blender -b --factory-startup -P kit_deep_check.py -- h01_cdk20_lockworks</code> 对一个模型做下面这些，结果写进 <code>&lt;函数名&gt;_report.json</code>，检查图写进 <code>&lt;函数名&gt;_sheet.png</code>。</p>
+<h3>2.1 通用验收表</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>条目</th>
+<th>通过标准</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>V1</td>
+<td>外形尺寸</td>
+<td>包围盒在本模型写的尺寸 ±0.5 mm 内；不超出格子限制</td>
+</tr>
+<tr>
+<td>V2</td>
+<td>角色数量</td>
+<td><code>rig</code> 里的角色名和数量与本清单完全一致</td>
+</tr>
+<tr>
+<td>V3</td>
+<td>行程</td>
+<td>每个角色 <code>pose</code> 到 min、max 都能到，数值和本清单一致</td>
+</tr>
+<tr>
+<td>V4</td>
+<td>无穿模</td>
+<td>每个角色从 min 到 max 取 11 个姿态，其余角色在 rest；用 BVHTree 查不同角色的网格之间、角色和固定件之间的相交，<strong>相交数为 0</strong>（本清单写明"允许接触"的配对除外，接触深度 ≤ 0.05 mm）</td>
+</tr>
+<tr>
+<td>V5</td>
+<td>浇口</td>
+<td><code>check_gates</code> 返回空（尖头离表面 ≤ 0.8 mm）</td>
+</tr>
+<tr>
+<td>V6</td>
+<td>外壳</td>
+<td>有 <code>shell</code> 的模型：合上时内部件全部在壳内（射线检查），壳壁厚 1.2 ± 0.1 mm</td>
+</tr>
+<tr>
+<td>V7</td>
+<td>材质</td>
+<td>只出现 1.5 节列出的材质名</td>
+</tr>
+<tr>
+<td>V8</td>
+<td>三角面数</td>
+<td>hero ≤ 30 万，mini ≤ 3 万</td>
+</tr>
+<tr>
+<td>V9</td>
+<td>细节密度</td>
+<td>检查图里近景那一格：每个占画面 10% 以上的面都有一处细节（自己数，在报告里逐面列出：面名 → 细节是什么）</td>
+</tr>
+<tr>
+<td>V10</td>
+<td>倒角</td>
+<td>随机抽 20 条外露边，都有倒角修改器或建模倒角，宽度 0.2–0.8 mm</td>
+</tr>
+<tr>
+<td>V11</td>
+<td>检查图</td>
+<td>同灯同机位（<code>KP.lights(0,0,1)</code>，<code>KP.camera</code> 俯角 35°、方位 −25°）：① 合上全景；② 打开全景；③ 每个角色在 max 的一张；④ 内部近景一张（镜头离主机构 30 mm 内，f/2.8）</td>
+</tr>
+<tr>
+<td>V12</td>
+<td>能挂板</td>
+<td><code>make_cell</code> 后放进一格，渲一张和旁边旧零件并排的图，比例看起来是一家子</td>
+</tr>
+</tbody>
+</table>
+<h3>2.2 每个模型自己的验收</h3>
+<p>写在每个模型那一节的末尾（"专项验收"）。</p>
+<hr />
+<h2>三、清单和优先级</h2>
+<table>
+<thead>
+<tr>
+<th>优先级</th>
+<th>编号</th>
+<th>名字</th>
+<th>用在哪些段</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>P0 样片</strong></td>
+<td>h01</td>
+<td>CDK20 盖章机</td>
+<td>3-04、5-04、5-05、5-09、W4、8-03、IC50 小机器、细胞工坊里的小机器</td>
+</tr>
+<tr>
+<td>P0</td>
+<td>h02</td>
+<td>钥匙组</td>
+<td>几乎所有钥匙镜头</td>
+</tr>
+<tr>
+<td>P0</td>
+<td>h06</td>
+<td>销子锁剖面</td>
+<td>3-01、3-03</td>
+</tr>
+<tr>
+<td>P0</td>
+<td>h03</td>
+<td>试错循环轨道</td>
+<td>4-06、4-08、4-07（mini）、6-07</td>
+</tr>
+<tr>
+<td>P0</td>
+<td>h04</td>
+<td>Chemistry42 芯片</td>
+<td>4-07、W3、5-07、7-03</td>
+</tr>
+<tr>
+<td>P1 第 3 章</td>
+<td>h05</td>
+<td>细胞工坊</td>
+<td>3-02、3-05</td>
+</tr>
+<tr>
+<td>P1</td>
+<td>h09</td>
+<td>肝样本抽屉</td>
+<td>3-05</td>
+</tr>
+<tr>
+<td>P1</td>
+<td>h11</td>
+<td>PandaOmics 芯片</td>
+<td>3-07、8-02</td>
+</tr>
+<tr>
+<td>P1</td>
+<td>h10</td>
+<td>盲盒架</td>
+<td>3-06、3-08</td>
+</tr>
+<tr>
+<td>P2 第 4 章</td>
+<td>h07</td>
+<td>AlphaFold 折叠台</td>
+<td>W2、4-01、4-04/05、7-03、8-02</td>
+</tr>
+<tr>
+<td>P2</td>
+<td>h12</td>
+<td>数据库抽屉</td>
+<td>4-02、6-02</td>
+</tr>
+<tr>
+<td>P2</td>
+<td>h14</td>
+<td>剪钳和尾巴</td>
+<td>4-04/05</td>
+</tr>
+<tr>
+<td>P2</td>
+<td>h13</td>
+<td>口袋模具和筛子</td>
+<td>4-09</td>
+</tr>
+<tr>
+<td>P3 第 5 章</td>
+<td>h08</td>
+<td>Kd 秤</td>
+<td>5-01、5-03、5-08</td>
+</tr>
+<tr>
+<td>P3</td>
+<td>h16</td>
+<td>七瓶架</td>
+<td>5-01、5-02、4-11/12</td>
+</tr>
+<tr>
+<td>P3</td>
+<td>h17</td>
+<td>撕页日历</td>
+<td>1-01、3-08、5-03、5-07、6-06、8-03</td>
+</tr>
+<tr>
+<td>P4 第 6 章</td>
+<td>h15</td>
+<td>翻牌记分板</td>
+<td>6-01 至 6-08；翻牌单元也给 2-01 用</td>
+</tr>
+<tr>
+<td>P4</td>
+<td>h23</td>
+<td>料斗</td>
+<td>6-03、6-04、8-03、8-04</td>
+</tr>
+<tr>
+<td>P4</td>
+<td>h18</td>
+<td>卷尺</td>
+<td>1-07、1-08、6-06、6-12、8-03</td>
+</tr>
+<tr>
+<td>P4</td>
+<td>h19</td>
+<td>路上的吊牌和小旗</td>
+<td>2-08、6-10、6-11、6-12、7-02、8-02</td>
+</tr>
+<tr>
+<td>P5 第 1–2 章</td>
+<td>h24</td>
+<td>带十格窗的胶囊</td>
+<td>1-03、1-04</td>
+</tr>
+<tr>
+<td>P5</td>
+<td>h25</td>
+<td>一线药药座</td>
+<td>1-04</td>
+</tr>
+<tr>
+<td>P5</td>
+<td>h26</td>
+<td>文献料杆树</td>
+<td>2-06、2-07</td>
+</tr>
+<tr>
+<td>P5</td>
+<td>u01</td>
+<td>样本管剖面（改 p15）</td>
+<td>2-01</td>
+</tr>
+<tr>
+<td>P5</td>
+<td>u02</td>
+<td>真镜片放大镜（改 p18）</td>
+<td>2-07</td>
+</tr>
+<tr>
+<td>P5</td>
+<td>h20</td>
+<td>套件盒</td>
+<td>W1、W5</td>
+</tr>
+<tr>
+<td>P6 收尾</td>
+<td>h22</td>
+<td>两条跑道</td>
+<td>7-04</td>
+</tr>
+<tr>
+<td>P6</td>
+<td>h21</td>
+<td>片尾转台</td>
+<td>W5</td>
+</tr>
+</tbody>
+</table>
+<p>共 28 个。</p>
+<hr />
+<h2>四、逐个模型</h2>
+<h3>h01 · CDK20 盖章机 <code>h01_cdk20_lockworks(K, lod="hero")</code></h3>
+<p><strong>用在：</strong> 3-04、5-04、5-05、5-06、5-09、W4、8-03；<code>lod="mini"</code> 用在 5-04/5-08 的十台小机器、h05 细胞工坊、h08 Kd 秤。</p>
+<p><strong>它在片子里讲什么：</strong> CDK20 是一台盖章机。表面一个红圈凹槽（口袋）；料珠落进去它就盖章（干活）；钥匙插进去占住位置；钥匙转到底会拨下一根闩把摆臂卡死（机器停工）。</p>
+<p><strong>外形（hero）：</strong></p>
+<ul>
+<li>外壳 = <code>cdk20_body(P, K.blue, size=36.0, peg=True)</code> 那个外形（XY 最大边 36 mm，背面定位销）。</li>
+<li>凹槽：在 <code>mouth</code> 方向和外壳表面的交点处，沿 <code>mouth</code> 轴挖一个 Ø5.0 mm、深 6.0 mm 的圆孔。孔口外一圈红环：<code>K.red</code> 圆环，环中心半径 3.2 mm，管半径 0.35 mm，贴在表面上（法线对齐 <code>mouth</code>）。</li>
+<li>标签凸台：外壳底部附近一块 6 × 2 mm、高 0.4 mm 的小凸台，刻 <code>CDK20</code>（字高 1.2 mm，<code>K.inkw</code>）。</li>
+<li>顶针印：外壳背面 3 个 Ø0.8 mm、深 0.1 mm 的浅圆坑。</li>
+</ul>
+<p><strong>分件线和打开：</strong></p>
+<ul>
+<li>分件面：过外壳中心、法线垂直于 <code>mouth</code> 轴且水平的平面（即把零件分成"前半"和"后半"，凹槽开口在前半上）。</li>
+<li><code>shell</code>：前半壳，绕分件线上沿的铰链（一条平行于分件面、经过外壳最高点下方 1.5 mm 处的直线）翻开，0°–110°。</li>
+<li>壁厚 1.2 mm，断面封口，同材质 <code>K.blue</code>。两半之间 0.15 mm 缝。</li>
+</ul>
+<p><strong>内部（全部写在"锁坐标系"里）：</strong> 原点 = 料珠座中心；+W 沿 <code>mouth</code> 轴朝外；+U 朝板面上方（与 W 垂直，尽量接近世界 +Z）；+V = U × W。</p>
+<table>
+<thead>
+<tr>
+<th>件</th>
+<th>角色</th>
+<th>形状和尺寸（mm）</th>
+<th>位置（W, U, V）</th>
+<th>材质</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>料珠座</td>
+<td>固定</td>
+<td>杯形，内径 4.2，深 2.0，壁 0.6</td>
+<td>杯口中心在 (0, 0, 0)，开口朝 +W</td>
+<td><code>K.white</code></td>
+</tr>
+<tr>
+<td>锁芯</td>
+<td><code>plug</code></td>
+<td>圆柱 Ø4.6 × 6.0，轴沿 W；前端开一道钥匙槽 1.0 宽 × 3.0 高，从 W=+5 贯通到 W=0；后端连料珠座</td>
+<td>轴从 W=−1 到 W=+5</td>
+<td><code>K.gold_satin</code></td>
+</tr>
+<tr>
+<td>锁芯外套</td>
+<td>固定</td>
+<td>管，内径 4.7，外径 7.0，长 6.0，上方开 5 个 Ø1.0 销孔</td>
+<td>同轴</td>
+<td><code>K.white</code></td>
+</tr>
+<tr>
+<td>弹子销 × 5</td>
+<td><code>pin_0</code> … <code>pin_4</code></td>
+<td>每根：下销 Ø0.9，长度依次 1.2、2.2、0.8、2.8、1.6；上销 Ø0.9 × 2.0；弹簧 6 圈，线径 0.12，外径 0.9</td>
+<td>W = 0.5、1.5、2.5、3.5、4.5；沿 +U 排在锁芯上方</td>
+<td>下销 <code>K.gold</code>，上销 <code>K.white</code>，弹簧 <code>K.white</code></td>
+</tr>
+<tr>
+<td>凸轮</td>
+<td>跟 <code>plug</code> 一起转</td>
+<td>锁芯后端一个 2.0 × 1.0 × 1.0 的拨片</td>
+<td>W = −1.5</td>
+<td><code>K.gold_satin</code></td>
+</tr>
+<tr>
+<td>闩</td>
+<td><code>latch</code></td>
+<td>长条 12 × 1.6 × 1.6，一端是转轴</td>
+<td>转轴在 (−3, +3, 0)，长条沿 −V 伸出</td>
+<td><code>K.red</code></td>
+</tr>
+<tr>
+<td>曲柄轮</td>
+<td><code>crank</code></td>
+<td>齿轮 Ø6.0，8 齿，厚 1.2；正面一颗 Ø0.8 销</td>
+<td>轴在 (−6, −2, −6)，轴沿 W</td>
+<td><code>K.gold_satin</code></td>
+</tr>
+<tr>
+<td>摆臂</td>
+<td><code>arm</code></td>
+<td>杆 14 × 2 × 2，末端印章：圆盘 Ø3.0 × 1.2</td>
+<td>转轴在 (−4, −3, −5)，杆沿 +V 伸出，印章朝 −U</td>
+<td>杆 <code>K.blue_hi</code>，印章 <code>K.black</code></td>
+</tr>
+<tr>
+<td>纸带</td>
+<td><code>strip</code></td>
+<td>带 0.2 厚 × 4.0 宽，在两个滚轮之间绷直；带上预印 12 个章印（2 × 2 的 <code>K.ink</code> 小方片，间距 3.3），子物体名 <code>stamp_0</code> … <code>stamp_11</code></td>
+<td>带面在 U = −7，沿 V 从 −10 到 +10；滚轮 Ø3.0 在 V = ±10</td>
+<td>带 <code>K.white</code>，滚轮 <code>K.white</code></td>
+</tr>
+<tr>
+<td>料珠</td>
+<td><code>bead</code></td>
+<td>球 Ø3.6</td>
+<td>静止在座外：W = −12 是 min（在壳外凹槽前方），0 是坐在座里</td>
+<td><code>K.yellow</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>能动的件（rig）：</strong></p>
+<table>
+<thead>
+<tr>
+<th>角色</th>
+<th>类型</th>
+<th>轴</th>
+<th>范围</th>
+<th>静止</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>shell</code></td>
+<td>rot</td>
+<td>铰链线</td>
+<td>0–110°</td>
+<td>0</td>
+<td>前壳翻开</td>
+</tr>
+<tr>
+<td><code>plug</code></td>
+<td>rot</td>
+<td>W</td>
+<td>0–90°</td>
+<td>0</td>
+<td>钥匙转动；凸轮在 ≥ 80° 时推闩</td>
+</tr>
+<tr>
+<td><code>pin_0</code> … <code>pin_4</code></td>
+<td>loc</td>
+<td>U</td>
+<td>0–2.4</td>
+<td>0</td>
+<td>钥匙插入时被顶起</td>
+</tr>
+<tr>
+<td><code>latch</code></td>
+<td>rot</td>
+<td>闩转轴，绕 W</td>
+<td>0 到 −25°</td>
+<td>0</td>
+<td>−25° 时闩尖挡在摆臂行程里</td>
+</tr>
+<tr>
+<td><code>crank</code></td>
+<td>rot</td>
+<td>W</td>
+<td>0–360°，可连续</td>
+<td>0</td>
+<td>驱动摆臂（视觉上的联动）</td>
+</tr>
+<tr>
+<td><code>arm</code></td>
+<td>rot</td>
+<td>摆臂转轴，绕 W</td>
+<td>−32° 到 0</td>
+<td>0</td>
+<td>−32° 时印章压到纸带</td>
+</tr>
+<tr>
+<td><code>strip</code></td>
+<td>loc</td>
+<td>V</td>
+<td>0–40</td>
+<td>0</td>
+<td>每盖一章走 3.3</td>
+</tr>
+<tr>
+<td><code>bead</code></td>
+<td>loc</td>
+<td>W</td>
+<td>−12 到 0</td>
+<td>−12</td>
+<td>料珠进座</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>要求：<code>latch</code> 在 −25° 时，<code>arm</code> 从 0 往 −32° 走会在 −14° 处碰到闩尖（这就是"卡死"）。验收时记录碰到的角度。</li>
+<li>允许接触：钥匙和锁芯槽、料珠和座、印章和纸带、闩尖和摆臂。</li>
+</ul>
+<p><strong>mini 版（<code>lod="mini"</code>）：</strong> 整体缩到 0.40；外壳不能打开，前半壳换成 <code>K.clear0</code> 透明壳（看得到摆臂）；内部只保留 <code>arm</code>、<code>strip</code>、<code>bead</code>、<code>latch</code> 四个角色和凹槽红环；另加一个角色 <code>lamp</code>：外壳顶上一个 Ø1.2 小灯罩（<code>K.clear0</code>），里面一个 Ø0.8 小球，动画时换成 <code>K.red</code> 表示"在工作"。</p>
+<p><strong>专项验收：</strong></p>
+<table>
+<thead>
+<tr>
+<th>条目</th>
+<th>标准</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>凹槽对准</td>
+<td>凹槽孔轴和 <code>mouth</code> 方向夹角 &lt; 1°</td>
+</tr>
+<tr>
+<td>钥匙能进</td>
+<td>h02 的 <code>048</code> 钥匙沿 −W 插入 5.0 mm，与锁芯槽无相交</td>
+</tr>
+<tr>
+<td>卡死</td>
+<td><code>latch = −25°</code> 时 <code>arm</code> 在 −14° ± 2° 停住（碰撞检测）</td>
+</tr>
+<tr>
+<td>盖章</td>
+<td><code>arm = −32°</code> 时印章底面离纸带 0–0.05 mm</td>
+</tr>
+<tr>
+<td>细节</td>
+<td>内部近景里至少看得到：弹簧圈、齿轮齿、顶针印、锁芯外套上的销孔</td>
+</tr>
+</tbody>
+</table>
+<h3>h02 · 钥匙组 <code>h02_key(K, which="048", scale=1.0, spiky=False, seed=None)</code></h3>
+<p><strong>用在：</strong> 3-01 起几乎所有钥匙镜头；W3 的"每把都不同"。</p>
+<p><strong>外形：</strong></p>
+<ul>
+<li>钥匙杆（插入部分）：长 5.0、高 2.6、厚 0.9，截面和 h01 的钥匙槽配（槽 1.0 × 3.0，四周留 0.05 间隙）。杆上一道纵槽 0.2 深。头部 45° 斜切。</li>
+<li>齿：杆下沿 5 个齿位，位置对应 h01 的 W = 0.5…4.5（插到底时）。齿高 = 把对应的下销顶到分界线需要的高度。</li>
+<li>柄：圆柄 Ø8.0，厚 1.4，中心孔 Ø2.4；柄肩 1.8 × 3.6。柄面刻编号（字高 1.6，<code>K.ink</code>）。</li>
+<li>总长约 14 mm（<code>scale=1</code>）。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><code>which</code></th>
+<th>齿</th>
+<th>柄上刻字</th>
+<th>自定义属性 <code>turn_limit_deg</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"048"</code></td>
+<td>5 个齿全对</td>
+<td><code>048</code></td>
+<td>90</td>
+</tr>
+<tr>
+<td><code>"001"</code></td>
+<td>第 0、1、3 齿对，第 2、4 齿各差 0.6</td>
+<td><code>001</code></td>
+<td>12</td>
+</tr>
+<tr>
+<td><code>"blank"</code></td>
+<td>无齿</td>
+<td>无</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>seed=n</code></td>
+<td>齿高随机（<code>random.Random(n)</code> 从 0.4–2.8 中取，0.2 一档）；柄形从 圆 / 六角 / 三叶 三种里取</td>
+<td>无</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>spiky=True</code>：柄上加 3 个 <code>K.red</code> 小尖锥（底 Ø0.8，高 1.0），给 4-09 "带有害基团" 用。</li>
+<li><code>scale</code>：整体缩放。h06 用 <code>scale=1.3</code>。</li>
+<li>加两个空物体：<code>tip</code>（杆尖端中心）、<code>bow</code>（柄中心），方便对位。</li>
+</ul>
+<p><strong>材质：</strong> 金色 <code>K.gold</code>；刻字 <code>K.ink</code>。</p>
+<p><strong>专项验收：</strong></p>
+<table>
+<thead>
+<tr>
+<th>条目</th>
+<th>标准</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>配合</td>
+<td><code>048</code> 插进 h01 后，<code>pin_0…4</code> 顶起的高度让五根销的上下分界都落在锁芯表面 ± 0.05</td>
+</tr>
+<tr>
+<td>001</td>
+<td>第 2、4 根销的分界偏离锁芯表面 ≥ 0.5</td>
+</tr>
+<tr>
+<td>随机</td>
+<td><code>seed=0…49</code> 生成 50 把，两两不完全相同（齿高序列或柄形至少一个不同）</td>
+</tr>
+</tbody>
+</table>
+<h3>h06 · 销子锁剖面 <code>h06_pin_lock(K, preset="own", cut=True)</code></h3>
+<p><strong>用在：</strong> 3-01（人旁边）、3-03（三把并排）。</p>
+<p><strong>外形：</strong></p>
+<ul>
+<li>挂锁锁体 20 × 16 × 8，圆角 2.0，倒角 0.6，<code>K.blue</code>；锁梁 U 形，管径 1.9，高出锁体 9，<code>K.gold_satin</code>。</li>
+<li>锁体正面刻一圈细框线（0.2 深）和底部 4 颗 Ø1.0 螺丝头。</li>
+<li><code>cut=True</code> 时，锁体右前方四分之一（x &gt; 0 且 y &lt; 0 的部分）切掉，断面同材质封口，露出锁芯。</li>
+</ul>
+<p><strong>内部：</strong> 和 h01 的锁芯、外套、5 根弹子销完全同一结构，整体 × 1.3（锁芯 Ø6.0）。锁芯轴水平，钥匙孔开在锁体正面中下部。</p>
+<p><strong><code>preset</code>（下销长度，单位 mm，已乘 1.3）：</strong></p>
+<table>
+<thead>
+<tr>
+<th>preset</th>
+<th>五根下销长度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"own"</code></td>
+<td>1.56、2.86、1.04、3.64、2.08（和 048 钥匙 × 1.3 配）</td>
+</tr>
+<tr>
+<td><code>"other_a"</code></td>
+<td>2.86、1.04、3.64、1.56、2.08</td>
+</tr>
+<tr>
+<td><code>"other_b"</code></td>
+<td>1.04、3.64、2.08、2.86、1.56</td>
+</tr>
+</tbody>
+</table>
+<p><strong>rig：</strong> <code>plug</code>（rot，0–90°）、<code>pin_0…4</code>（loc，0–3.1）、<code>shackle</code>（loc，沿锁梁轴 0–4，打开）。</p>
+<p><strong>专项验收：</strong> <code>h02_key("048", scale=1.3)</code> 插入 <code>own</code> 后五根销分界齐平（± 0.07）；插入 <code>other_a</code>、<code>other_b</code> 后至少两根偏离 ≥ 0.6。剖面近景里弹簧、销、分界线清楚可见。</p>
+<h3>h03 · 试错循环轨道 <code>h03_loop_track(K, lod="hero")</code></h3>
+<p><strong>用在：</strong> 4-06（hero）、4-08（hero，人旁边）、4-07 里的 36 条（mini）、6-07。</p>
+<p><strong>外形（hero）：</strong> 底板 50 × 30 × 2.0，圆角 3，<code>K.white</code>，底板上刻细格线（0.15 深，间距 2）。椭圆轨道：中心线 40 × 20 的椭圆，轨道宽 2.4、高 1.2，<code>K.white</code>，轨道面上一条 0.3 宽的导槽。</p>
+<p><strong>四个站（沿轨道参数 t，从 0 起顺时针）：</strong></p>
+<table>
+<thead>
+<tr>
+<th>t</th>
+<th>站</th>
+<th>字牌（刻字）</th>
+<th>机构</th>
+<th>角色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.00</td>
+<td>Imagine</td>
+<td><code>Imagine</code></td>
+<td>轨道旁一个槽，钥匙坯（h02 blank，scale 0.35）从槽里升起</td>
+<td><code>blank_up</code>：loc Z 0–3.0</td>
+</tr>
+<tr>
+<td>0.25</td>
+<td>Make</td>
+<td><code>Make</code></td>
+<td>门形支架，冲头 2 × 2 × 4 往下压</td>
+<td><code>press</code>：loc Z 0 到 −2.5</td>
+</tr>
+<tr>
+<td>0.50</td>
+<td>Test</td>
+<td><code>Test</code></td>
+<td>一把小锁（h06 外形，scale 0.25，不剖），顶上一个 Ø1.2 灯罩</td>
+<td><code>test_lamp</code>（换材质用的小球，无运动）、<code>test_push</code>：loc 沿轨道法向 0–1.5（把钥匙推回）</td>
+</tr>
+<tr>
+<td>0.75</td>
+<td>Tweak</td>
+<td><code>Tweak</code></td>
+<td>一把锉刀 6 × 0.8 × 0.4，刀面刻斜纹</td>
+<td><code>file</code>：loc 沿切向 −1.5 到 +1.5</td>
+</tr>
+</tbody>
+</table>
+<p>字牌 7 × 2.8 × 1.0，圆角 1，刻字高 1.4，<code>K.ink</code>。</p>
+<p><strong>小车：</strong> 5 × 3 × 3，四个小轮 Ø1.2，车上一个钥匙夹。角色 <code>car</code>：type <code>path</code>，0–1（沿轨道中心线，<code>pose</code> 时按弧长参数放置，车头朝切向）。</p>
+<p><strong>硬币和小钟：</strong> 每站下方一个斜滑槽和一个托盘（6 × 4 × 1）。每个托盘有 8 枚硬币（<code>K.gold</code> 圆片 Ø2.4 × 0.5，正面压一个浅圆环）和 8 个小钟（<code>K.white</code> 圆片 Ø2.4 × 0.8，正面两根 <code>K.ink</code> 指针）。角色 <code>coin_s{站}_{k}</code>、<code>clock_s{站}_{k}</code>（站 0–3，k 0–7）：loc Z，从滑槽口 +6 落到托盘第 k 层（每层 0.5 或 0.8 叠高）。</p>
+<p><strong>mini 版：</strong> 整体 0.18；只留底板、轨道、小车（<code>car</code>）和一个 Ø0.6 的小灯（<code>lamp</code>）。不要字牌和托盘。</p>
+<p><strong>专项验收：</strong> <code>car</code> 从 0 走到 1 全程不和站上机构相交（机构在 rest）；<code>press</code> 到 −2.5 时冲头底面碰到钥匙坯上表面（接触 ≤ 0.05）；32 个硬币和 32 个小钟落位后互不相交。</p>
+<h3>h04 · Chemistry42 芯片 <code>h04_chem42_chip(K, screen_seq=None)</code></h3>
+<p><strong>用在：</strong> 4-07、W3、5-07、7-03。</p>
+<p><strong>外形：</strong> 芯片体 44 × 28 × 4，<code>K.black</code>，四边各 10 根引脚（1.0 × 0.4 × 3.0，<code>K.gold_satin</code>）。顶盖 <code>lid</code> 同尺寸厚 1.2，盖上刻 <code>Chemistry42</code>（字高 2.4，<code>K.inkw</code>）和一个 Ø1.2 的定位圆点。顶盖四角 4 颗 Ø0.8 螺丝头。</p>
+<p><strong>打开：</strong> <code>lid</code>：rot，铰链在 −Y 长边，0–120°。</p>
+<p><strong>内部：</strong></p>
+<table>
+<thead>
+<tr>
+<th>件</th>
+<th>角色</th>
+<th>形状</th>
+<th>位置</th>
+<th>材质</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>屏幕地面</td>
+<td><code>screen</code>（无运动）</td>
+<td>平面 38 × 22，UV 铺满 0–1</td>
+<td>芯片腔底，z = 0.6</td>
+<td><strong>唯一允许的新材质</strong>：名为 <code>kit_screen</code> 的发光材质。<code>screen_seq</code> 为 None 时用 <code>K.black</code>；给了路径就读这个 PNG 序列（TD 出的画面）当发光贴图，强度 1.0</td>
+</tr>
+<tr>
+<td>小轨道 × 36</td>
+<td><code>loop_{i}__car</code>（i 0–35）</td>
+<td>h03 mini</td>
+<td>6 × 6 网格，间距 5.6 × 3.4，空出中间 2 × 2</td>
+<td><code>K.white</code></td>
+</tr>
+<tr>
+<td>凹槽复制品</td>
+<td><code>socket</code></td>
+<td>蓝色块 6 × 6 × 3，顶面一个 Ø2.0 的孔加 <code>K.red</code> 圆环（同 h01 的红环，缩到 0.4）</td>
+<td>网格正中</td>
+<td><code>K.blue</code>、<code>K.red</code></td>
+</tr>
+<tr>
+<td>回流细管 × 6</td>
+<td>无</td>
+<td><code>K.clear0</code> 管，半径 0.25，从 <code>socket</code> 引到每一行的第一条小轨道</td>
+<td></td>
+<td><code>K.clear0</code></td>
+</tr>
+<tr>
+<td>计数轮 × 4</td>
+<td><code>odo_0</code> … <code>odo_3</code></td>
+<td>圆柱 Ø3.0 × 2.0，柱面刻 0–9（字高 1.0，<code>K.inkw</code>），一个窗框框住</td>
+<td>芯片 +X 端顶面，四个排成一排（千、百、十、个）</td>
+<td><code>K.black</code>、<code>K.inkw</code></td>
+</tr>
+<tr>
+<td>出口</td>
+<td><code>mouth</code></td>
+<td>一块翻板 6 × 2 × 0.6，铰链在上沿</td>
+<td>芯片 +X 侧面</td>
+<td><code>K.black</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>rig：</strong> <code>lid</code>（rot 0–120°）、<code>loop_0__car</code> … <code>loop_35__car</code>（path 0–1）、<code>odo_0…3</code>（rot 0–360°，每 36° 一个数字，0° 显示 0）、<code>mouth</code>（rot 0–70°）。</p>
+<p><strong>专项验收：</strong> <code>odo</code> 四个轮 pose 到 8、9、1、8 时窗口里读出 8918（渲一张近景）；<code>lid</code> 开到 120° 时，从正上方看得到全部 36 条小轨道和 <code>socket</code>；<code>screen_seq</code> 给一张测试图时贴图方向正确（左上角在 −X、+Y）。</p>
+<h3>h05 · 细胞工坊 <code>h05_cell_works(K, kind="cancer")</code></h3>
+<p><strong>用在：</strong> 3-02、3-05。</p>
+<p><strong>外形：</strong> 椭球细胞壳 46 × 30 × 18，壁厚 1.2，材质 <code>kind="cancer"</code> 用 <code>K.cellpink</code>，否则 <code>K.clear0</code>。壳表面加和 <code>cell()</code> 一样的轻微起伏（Displace，强度 1.2 mm 尺度以内）。分件线在 z = 0 赤道。</p>
+<p><strong>打开：</strong> <code>shell</code>：上半壳绕 −Y 侧赤道上的铰链翻开，0–100°。</p>
+<p><strong>内部：</strong></p>
+<table>
+<thead>
+<tr>
+<th>件</th>
+<th>角色</th>
+<th>说明</th>
+<th>位置（x, y, z）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>细胞核</td>
+<td>无</td>
+<td>球 Ø10，<code>K.nuc_red</code>（cancer）或 <code>K.nuc_grey</code></td>
+<td>(−12, 4, 0)</td>
+</tr>
+<tr>
+<td>小机器 m0</td>
+<td><code>m0__gear</code></td>
+<td>一块 <code>K.blue</code> 底座 6 × 4 × 3，上面一个齿轮 Ø4，12 齿，rot 0–360° 连续</td>
+<td>(−2, −7, −2)</td>
+</tr>
+<tr>
+<td>小机器 m1</td>
+<td><code>m1__arm</code>、<code>m1__dimmer</code></td>
+<td>h01 mini（只用外形和 <code>arm</code>、<code>strip</code>、<code>latch</code>）；侧面一个红圈凹槽对着 +y；顶上一个旋钮 Ø3 × 1.5，滚花，<code>K.white</code>，<code>dimmer</code> rot 0 到 −270°</td>
+<td>(8, 2, −2)</td>
+</tr>
+<tr>
+<td>小机器 m2</td>
+<td><code>m2__push</code></td>
+<td>一块 <code>K.blue</code> 底座 6 × 4 × 3 加一根推杆 Ø1 × 5，loc 沿 x 0–2.5</td>
+<td>(14, −7, −2)</td>
+</tr>
+<tr>
+<td>分裂计数轮</td>
+<td><code>counter</code></td>
+<td>齿轮 Ø6，12 齿，侧面刻 12 道刻线，<code>K.white</code>，rot 连续</td>
+<td>(−12, −6, 3)</td>
+</tr>
+<tr>
+<td>入口</td>
+<td><code>port</code></td>
+<td>壳上一个 Ø4 的孔，孔边一圈 0.4 厚的唇边</td>
+<td>上半壳 +y 侧</td>
+</tr>
+</tbody>
+</table>
+<p><strong>专项验收：</strong> 壳合上后三台机器和核都在壳内；h02 钥匙 scale 0.35 能沿 m1 凹槽轴插入 2 mm 不穿模；<code>dimmer</code> 刻线在近景里看得到转动。</p>
+<h3>h09 · 肝样本抽屉 <code>h09_sample_drawer(K)</code></h3>
+<p><strong>用在：</strong> 3-05。挂在玻璃肝那一格（2 × 2 格）下面。</p>
+<p><strong>外形：</strong> 抽屉 96 × 40 × 6，<code>K.white</code>，前面板 96 × 8 × 2 刻 <code>Hong Kong 2011</code>（字高 2.4，<code>K.ink</code>）和一个把手（14 × 2 × 2）。抽屉盒体底面刻细格线。</p>
+<p><strong>位置：</strong> 抽屉在玻璃肝格子中心正下方，z = −8；<code>drawer</code>：loc −Y，0 到 −44（拉出）。</p>
+<p><strong>内部：</strong> 4 行 × 13 列 = 52 格，格距 7.0 × 9.0，格壁 0.6 厚 3 高。每格一对小片：左边肿瘤片（<code>K.cellpink</code>），右边旁边组织片（<code>K.clear0</code>），各 2.6 × 3.4 × 1.0，中间 0.8 间隔。每片里一根竖液柱 Ø1.0，高 0–3.0，<code>K.blue_hi</code>。</p>
+<p><strong>哪 36 格偏高：</strong> 用 1.7 节的种子，<code>white</code> 集合里的 16 格是"不高"，其余 36 格"高"。</p>
+<p><strong>rig：</strong> <code>drawer</code>（loc，0 到 −44）；<code>lvl_{i}_t</code>、<code>lvl_{i}_n</code>（i 0–51，type <code>scale</code>，轴 Z，0–1，rest 0）。另外每格的格框单独一个物体，名 <code>rim_{i}</code>，动画时换成 <code>K.red</code> 表示"高"（不做角色，只要能按名字抓）。</p>
+<p><strong>专项验收：</strong> 抽屉拉满后 52 格全部露在肝的投影外；所有液柱在 <code>scale = 1</code> 时不顶破片的上表面；<code>rim_</code> 物体正好 52 个。</p>
+<h3>h11 · PandaOmics 芯片 <code>h11_pandaomics(K, screen_seq=None)</code></h3>
+<p><strong>用在：</strong> 3-07、8-02。</p>
+<p><strong>外形：</strong> 和 h04 同一个芯片体（44 × 28 × 4、引脚、顶盖、螺丝），盖上刻 <code>PandaOmics</code>。</p>
+<p><strong>内部：</strong> 屏幕地面 <code>screen</code>（同 h04 的 <code>kit_screen</code> 规则）；−X 侧 10 个进口（<code>port_0</code> … <code>port_9</code>，每个 Ø2.4 的圆口加一圈唇边，排成一列）；中间一把梳子 <code>comb</code>：一根轴（Ø1.2，沿 Y）上 10 片梳齿（每片 8 × 0.4 × 3），rot 连续；+X 侧出口 <code>mouth</code>（同 h04）。</p>
+<p><strong>配套 Top 20 牌（升级 p28）：</strong> 函数 <code>h11_top20(K)</code>：牌 44 × 31 × 2.0，刻 <code>Top 20</code>；两列各 10 行，每行是一个独立物体 <code>row_{k}</code>（k 0–19），行条 19.6 × 2.0 × 0.9；第 3 行（k = 3）是 <code>K.blue</code>，其余 <code>K.white</code> 底加 <code>K.inkg</code> 印条。角色 <code>row_{k}</code>：loc Y，用来重排（CDK20 那一行从 k=3 的位置升到 k=0 的位置，其余下移一格）。每行左边一个打勾位 <code>tick_{k}</code>（<code>K.red</code> 勾形 1.2 × 1.2，默认隐藏）。</p>
+<p><strong>专项验收：</strong> 十个进口和数据盘零件（p27 HD）的十个盘一一对齐（同 Y 间距，偏差 &lt; 0.3）；<code>row_3</code> 移到第 0 行位置时不和其他行相交（其他行同时下移）。</p>
+<h3>h10 · 盲盒架 <code>h10_blind_shelf(K, n=24, clear=(3, 11, 19))</code></h3>
+<p><strong>用在：</strong> 3-06、3-08。</p>
+<p><strong>外形：</strong> 一条架子 50 × 12 × 2，上面立一排密封零件袋（每个 8 × 10 × 2，四边压封边 0.8 宽，顶部一个挂孔 Ø1.2）。默认 24 个，分三排（每排 8 个，前后错开 3 mm）。</p>
+<p><strong>材质：</strong> 袋子 <code>K.frost</code>；<code>clear</code> 里的编号用 <code>K.clear0</code>，袋里放一张小卡（5 × 6 × 0.3，<code>K.white</code>），卡上一个 <code>K.red</code> 勾。</p>
+<p><strong>rig：</strong> <code>bag_{i}</code>（loc Z 0–3，弹起用）。</p>
+<p><strong>专项验收：</strong> 磨砂袋从正面看不到后面的东西；透明袋里的勾在近景可读。</p>
+<h3>h07 · AlphaFold 折叠台 <code>h07_fold_jig(K)</code></h3>
+<p><strong>用在：</strong> W2、4-01、4-04/05（只用折好的成品和尾巴）、7-03、8-02。</p>
+<p><strong>外形：</strong> 和 h04 同一个芯片体，盖上刻 <code>AlphaFold</code>。顶盖 <code>lid</code> 同 h04。腔里有屏幕地面 <code>screen</code>（同 h04 规则）。</p>
+<p><strong>链（核心，数据驱动）：</strong></p>
+<ul>
+<li>从 PDB 读 346 个残基的 CA 坐标和 pLDDT。</li>
+<li>折好时的位置 <code>fold</code>：CA 坐标居中、缩放到包围盒最大边 30 mm，放在芯片腔正上方，底面离腔底 2 mm（成品会高出芯片顶面，没关系）。朝向：让 <code>cdk20.npz</code> 的 <code>mouth</code> 方向（同一个蛋白，坐标系不同时先用 Kabsch 把 CA 和 cdk20 网格对齐）朝 +X 偏上 30°。</li>
+<li>没折时的位置 <code>unfold</code>：绕在卷轴上的一条螺旋线：卷轴轴沿 Y，半径 6，螺距 1.1，第 0 块在卷轴最外端。卷轴放在腔的 −X 端。</li>
+<li>每一块是一个小件，形状按序号 i 轮换 4 种（和 p30 一样：i%4 = 0 球 Ø1.0；1 方块 0.9；2 六角柱 Ø1.0 × 0.9；3 圆柱 Ø0.9 × 0.9），相邻块之间一根细连杆（半径 0.15）。</li>
+<li>用几何节点做成一个物体 <code>chain</code>，点云属性：<code>fold</code>（向量）、<code>unfold</code>（向量）、<code>plddt</code>（浮点）、<code>idx</code>（整数）。节点组暴露三个输入：</li>
+<li><code>fold_t</code>（0–1）：idx/346 小于 <code>fold_t</code> 的块在 <code>fold</code> 位置，其余在 <code>unfold</code>；过渡带宽 8 块，中间按平滑插值。</li>
+<li><code>paint_t</code>（0–1）：idx/346 小于 <code>paint_t</code> 的块按把握上色：pLDDT ≥ 70 用 <code>K.blue</code>，&lt; 70 用 <code>K.red</code>；其余用 <code>K.white</code>。</li>
+<li><code>tail_off</code>（向量，mm）：只加在 idx ≥ 302（第 303–346 块，尾巴）上的位移。</li>
+<li>这三个输入在 <code>rig</code> 里登记成 <code>fold_t</code>、<code>paint_t</code>（type <code>attr</code>，0–1）和 <code>tail_off</code>（type <code>attr_vec</code>）。<code>pose()</code> 要能设它们。</li>
+</ul>
+<p><strong>机构：</strong></p>
+<table>
+<thead>
+<tr>
+<th>件</th>
+<th>角色</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>卷轴</td>
+<td><code>spool</code></td>
+<td>圆柱 Ø12 × 10，两侧挡板 Ø14，rot 连续</td>
+</tr>
+<tr>
+<td>卡爪 × 6</td>
+<td><code>claw_0</code> … <code>claw_5</code></td>
+<td>每只：两片夹指 3 × 1 × 0.6，绕一个小轴开合，rot 0–40°；围着成品位置均布在一个 Ø34 的圆上，高度 z = 8</td>
+</tr>
+<tr>
+<td>喷头 × 2</td>
+<td><code>nozzle_0</code>、<code>nozzle_1</code></td>
+<td>一根横梁 34 × 1.5 × 1.5 上挂一个喷嘴（锥 Ø1.2 × 2），loc 沿 X −17 到 +17</td>
+</tr>
+<tr>
+<td>读头</td>
+<td><code>reader</code></td>
+<td>卷轴出口处一个门形支架 4 × 3 × 3，里面一个 Ø0.8 小灯</td>
+</tr>
+<tr>
+<td>后墙架</td>
+<td>无</td>
+<td>腔后壁一排 8 个密封零件袋（同 h10 的袋子，缩到 0.5，<code>K.frost</code>）</td>
+</tr>
+<tr>
+<td>图例牌</td>
+<td><code>legend</code></td>
+<td>8 × 4 × 0.8 小牌，刻两行：<code>sure</code>（前面一个 <code>K.blue</code> 小方块）、<code>not sure</code>（前面一个 <code>K.red</code> 小方块）；loc Z 0–4 弹起</td>
+</tr>
+</tbody>
+</table>
+<p><strong>专项验收：</strong></p>
+<table>
+<thead>
+<tr>
+<th>条目</th>
+<th>标准</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据</td>
+<td><code>chain</code> 的点数 = 346；<code>plddt</code> 和 PDB 的 B-factor 逐个相等</td>
+</tr>
+<tr>
+<td>尾巴颜色</td>
+<td><code>paint_t = 1</code> 时，红色块的序号和 pLDDT &lt; 70 的残基一一对应；在报告里列出红色块的序号区间</td>
+</tr>
+<tr>
+<td>折好</td>
+<td><code>fold_t = 1</code> 时，CA 和 cdk20 外形网格对齐后的 RMSD（报告里写数值）</td>
+</tr>
+<tr>
+<td>相交</td>
+<td><code>fold_t</code> 取 0、0.25、0.5、0.75、1 时，块和卡爪、喷头、芯片体不相交</td>
+</tr>
+</tbody>
+</table>
+<h3>h12 · 数据库抽屉 <code>h12_db_drawer(K)</code></h3>
+<p><strong>用在：</strong> 4-02、6-02。</p>
+<p><strong>外形：</strong> 在 p33 HD 机柜的基础上：两座机柜（各 17 × 30 × 6），每座 5 个抽屉，抽屉面板 14 × 4.4 × 1，带两颗 Ø1.1 指示灯和一条把手槽。</p>
+<p><strong>内部：</strong> 每个抽屉是一个盒子（14 × 4.4 × 5 深），里面立 6 张卡片（5 × 4 × 0.3，<code>K.white</code>）。</p>
+<p><strong>主卡片 <code>card</code>：</strong> 5 × 4 × 0.4，正面一个小浮雕：<code>cdk20_body(size=3.6, peg=False)</code>，<code>K.blue</code>；背面刻 <code>AlphaFold DB</code>（字高 0.5）。卡片上方一个价签 <code>tag</code>：小牌 3 × 1.2 × 0.3，绕上沿翻转 0–180°，正面空白，反面刻 <code>free</code>。</p>
+<p><strong>红章 <code>stamp</code>：</strong> 印章柄 Ø2 × 4（<code>K.black</code>），章面 4 × 1.6 刻 <code>first time</code>（<code>K.red</code>）；loc Z 0 到 −4（落到卡片上）。</p>
+<p><strong>rig：</strong> <code>drawer_{i}</code>（i 0–9，loc 沿抽屉方向 0–9）、<code>card</code>（type <code>path</code>，0–1：从第 0 号抽屉里升起 → 沿抽屉口上方 20 mm 的弧线滑到机柜右侧外 15 mm）、<code>tag</code>（rot 0–180°）、<code>stamp</code>（loc 0 到 −4）。</p>
+<p><strong>专项验收：</strong> <code>drawer_0</code> 拉开 9 mm 时 <code>card</code> 在 path 0 位置不和抽屉壁相交；<code>stamp</code> 落到 −4 时章面和卡片接触 ≤ 0.05。</p>
+<h3>h14 · 剪钳和尾巴 <code>h14_nippers(K)</code></h3>
+<p><strong>用在：</strong> 4-04/05（人旁边）。</p>
+<p><strong>外形：</strong> 在 p32 的外形上做成能开合：两片钳身各自一个物体；钳口刃口内侧做 0.3 宽的刃带（倒角 30°）；转轴 Ø3.1 螺丝头上刻十字槽；手柄套 <code>K.black</code>、手柄端各有 3 道防滑肋。</p>
+<p><strong>rig：</strong> <code>jaw_a</code>、<code>jaw_b</code>（rot，绕转轴，各 0–18°，0 = 张开，18° = 合拢刃口刚好接触）。</p>
+<p><strong>尾巴：</strong> 不另建，用 h07 的 <code>tail_off</code> 做"掉下"；剪的位置在第 302 和第 303 块之间。</p>
+<p><strong>专项验收：</strong> 合拢时两刃接触 ≤ 0.05、不相交；钳口张开 18° 时能套住 h07 成品里第 302/303 块之间的连杆（在报告里给一张对位图）。</p>
+<h3>h13 · 口袋模具和筛子 <code>h13_mold_sieve(K)</code></h3>
+<p><strong>用在：</strong> 4-09。</p>
+<p><strong>模具 <code>mold</code>：</strong> 一块 <code>K.blue</code> 板 30 × 14 × 3，顶面压一个凹槽印：和 h01 的凹槽同尺寸（Ø5.0 × 深 2.0，只做浅印）加红圈；凹槽一侧一个 <code>K.blue_hi</code> 卡扣（照 p20 的卡扣：1.9 × 4.6 × 3.4 加上面一块 0.9 × 2.4 × 1.2），旁边刻 <code>hinge</code>（字高 1.6）。角色 <code>clip</code>：卡扣绕底边 rot 0–15°（被钥匙扣住时弹一下）；<code>mold</code>：loc Z 0 到 −3（压下去）。</p>
+<p><strong>筛子：</strong> 三层圆筛，外径 30，环宽 1.8，环高 4，层间距 5，<code>K.black</code>；网格间距自上而下 2.5、1.8、1.2，网线半径 0.25。角色 <code>tray_0…2</code>：loc X −0.6 到 +0.6（抖动）。筛子侧面两个小表盘（照 p38，缩到 0.4），分别刻 <code>drug-like</code> 和 <code>easy to make</code>，指针角色 <code>dial_0</code>、<code>dial_1</code>：rot −120° 到 +120°。</p>
+<p><strong>专项验收：</strong> <code>h02_key(spiky=True, scale=0.35)</code> 平放在第一层网上时被网托住（尖锥卡在网格里，不掉下）；普通钥匙 scale 0.35 竖放能穿过第一层网格。</p>
+<h3>h08 · Kd 秤 <code>h08_kd_scale(K)</code></h3>
+<p><strong>用在：</strong> 5-01、5-03、5-08。</p>
+<p><strong>外形：</strong> 底座 48 × 30 × 4，<code>K.black</code>，正面倒角 0.8，底座上刻刻度槽一圈。</p>
+<p><strong>部件：</strong></p>
+<table>
+<thead>
+<tr>
+<th>件</th>
+<th>角色</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>转盘</td>
+<td><code>carousel</code></td>
+<td>圆盘 Ø24 × 1.6，<code>K.white</code>，rot 连续；盘边 10 个 h01 mini（只要外形和凹槽红环），均布在半径 9 的圆上，凹槽朝外</td>
+</tr>
+<tr>
+<td>抓住指示</td>
+<td><code>catch_{i}</code>（i 0–9）</td>
+<td>每个 mini 头顶一颗 Ø1.0 小珠，默认隐藏；显示时表示"抓住了"</td>
+</tr>
+<tr>
+<td>料斗</td>
+<td><code>hopper</code> 固定</td>
+<td>透明锥 <code>K.clear0</code>，上口 Ø20，下口 Ø4，高 14，在转盘正上方 4 mm；壁上 10 道刻度环（<code>K.ink</code>，0.2 宽），从下往上标 1–10（字高 1.0）</td>
+</tr>
+<tr>
+<td>料面</td>
+<td><code>fill</code></td>
+<td>料斗里一团金色小珠的填充体（<code>K.gold</code>，表面做成小球堆的起伏），type <code>scale</code> Z 0–1（1 = 满到第 10 道刻度）</td>
+</tr>
+<tr>
+<td>表盘</td>
+<td>固定</td>
+<td>底座正面立一块表盘 Ø18（照 p38 的刻度画法），刻 <code>Kd</code></td>
+</tr>
+<tr>
+<td>表针</td>
+<td><code>needle</code></td>
+<td>rot −120° 到 +120°</td>
+</tr>
+<tr>
+<td>跳闸</td>
+<td><code>trip</code></td>
+<td>表盘边一个小杠杆 6 × 1 × 1，rot 0–20°；落下时压住表针</td>
+</tr>
+</tbody>
+</table>
+<p><strong>专项验收：</strong> <code>fill</code> 从 0 到 1 时料面始终在料斗壁内（不穿出）；<code>trip = 20°</code> 时杠杆头碰到 <code>needle</code> 所在的圆周（接触 ≤ 0.05）。</p>
+<h3>h16 · 七瓶架 <code>h16_vial_rack(K)</code></h3>
+<p><strong>用在：</strong> 4-11/12、5-01、5-02。</p>
+<p><strong>外形：</strong> 架子 48 × 12 × 6，<code>K.white</code>，上面一排 7 个孔 Ø5。小瓶照 p15 HD 的样式：瓶身 Ø4.5 × 14 <code>K.clear0</code>，瓶盖 Ø4.8 × 2.5 带竖滚花，<code>K.white</code>，瓶里液体 <code>K.liquid</code>。只有第 4 个瓶（中间）瓶盖顶面刻 <code>001</code>（字高 1.4，<code>K.ink</code>）。</p>
+<p><strong>rig：</strong> <code>vial_{i}</code>（i 0–6，loc Z −6 到 +6）。</p>
+<p><strong>专项验收：</strong> 7 个瓶插在孔里时不和架子相交；<code>vial_3</code> 升到 +6 时瓶盖刻字在正面近景可读。</p>
+<h3>h17 · 撕页日历 <code>h17_calendar(K, pages=30)</code></h3>
+<p><strong>用在：</strong> 1-01、3-08、5-03、5-07、6-06、8-03。</p>
+<p><strong>外形：</strong> 底座 22 × 16 × 3，<code>K.green</code>（和 p10 同色），顶部一根装订杆 Ø1.6 × 20，<code>K.gold_satin</code>。30 张纸页叠在底座上，每张 20 × 14 × 0.15，<code>K.white</code>，正面印页码 1–30（字高 6，<code>K.ink</code>），从上往下第一张是 1。底座正面刻 <code>days</code>。</p>
+<p><strong>rig：</strong> <code>page_{k}</code>（k 0–29，rot 绕装订杆 0–170°）。</p>
+<p><strong>专项验收：</strong> 任意一张翻到 170° 时不和装订杆、其他已翻过的页相交（翻过的页依次叠在背后，每页多偏 0.15）。</p>
+<h3>h15 · 翻牌记分板 <code>h15_split_flap(K, rows=4)</code></h3>
+<p><strong>用在：</strong> 6-01 至 6-08。翻牌单元另外导出一个函数 <code>h15_flap_unit(K, width, text_a, text_b)</code> 给 2-01 的年份牌用。</p>
+<p><strong>外形：</strong> 板 50 × 30 × 6，<code>K.black</code>，四角 4 颗螺丝头，边框倒角 0.8。顶部标题条 46 × 3.5。表头一行两格（<code>BEFORE</code>、<code>NOW</code>），下面 4 行 × 3 列：行名格 12 × 5.5，BEFORE 格 16 × 5.5，NOW 格 16 × 5.5。两栏之间一条刻出来的虚线槽（0.3 宽，0.2 深，8 段）。</p>
+<p><strong>翻牌单元：</strong> 每格是上下两片翻页（每片高 = 格高的一半，厚 0.3，<code>K.white</code> 底，字 <code>K.ink</code>），绕水平中轴翻；单元里预装 2 个面（A、B）。</p>
+<p><strong>格里的字（照下表，Instrument Serif，字高 1.4–1.8，自动缩到格宽内）：</strong></p>
+<table>
+<thead>
+<tr>
+<th>行</th>
+<th>行名</th>
+<th>BEFORE</th>
+<th>NOW</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>标题</td>
+<td>How much did the computers actually help?</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>Seeing the lock</td>
+<td>hard lab experiments</td>
+<td>a free prediction</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Finding a hit</td>
+<td>millions screened</td>
+<td>8,918 → 13 made</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Time</td>
+<td>10–17 years</td>
+<td>30 days + 30</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Improving the key</td>
+<td>costly lab rounds</td>
+<td>~15× tighter</td>
+</tr>
+</tbody>
+</table>
+<p>每格 A 面空白，B 面是上表的字。</p>
+<p><strong>凹位：</strong> 每行 BEFORE 格和 NOW 格下边各一个凹位 <code>niche_r{行}_{b|n}</code>：6 × 5 × 3 的凹坑，底部一个升降台 <code>lift_r{行}_{b|n}</code>：loc Z −3 到 0（把小零件托出来）。</p>
+<p><strong>rig：</strong> <code>flap_{格名}</code>（rot 0–180°，格名如 <code>t</code>、<code>h_b</code>、<code>h_n</code>、<code>r1_name</code>、<code>r1_b</code>、<code>r1_n</code> …）；<code>lift_r{1-4}_{b|n}</code>；<code>stand</code>（整块板绕底边 rot −90° 到 0：从平躺到立起）。</p>
+<p><strong>专项验收：</strong> 所有字在其格子内（包围盒检查）；任一翻片翻到 180° 时不和相邻翻片相交；正面近景里每格的字在 1080p 下字高 ≥ 28 像素（给出机位）。</p>
+<h3>h23 · 料斗 <code>h23_hopper(K)</code></h3>
+<p><strong>用在：</strong> 6-03、6-04（人旁边）、8-03、8-04。</p>
+<p><strong>外形：</strong> 透明锥形料斗 <code>K.clear0</code>：上口 Ø24，细颈 Ø3，高 20，壁厚 1.0，上口一圈唇边；细颈下方一个托盘 <code>tray</code> 20 × 8 × 2（<code>K.white</code>），托盘上 13 个半球凹坑 Ø1.4 排成一行（<code>slot_0</code> … <code>slot_12</code> 空物体标出凹坑中心）。支架三脚，<code>K.white</code>。</p>
+<p><strong>珠子：</strong> 给一个实例物体 <code>bead_inst</code>（球 Ø0.6，<code>K.white</code>），和一个发射空物体 <code>emit</code>（料斗上口中心）。珠子流由动画脚本用粒子或几何节点做，模型只提供这两个。</p>
+<p><strong>rig：</strong> 无运动件。</p>
+<p><strong>专项验收：</strong> 13 个 <code>slot_</code> 空物体正好在凹坑中心；Ø0.6 的珠子能穿过细颈（细颈内径 ≥ 1.0）。</p>
+<h3>h18 · 卷尺 <code>h18_tape(K, print="years")</code></h3>
+<p><strong>用在：</strong> 1-07（人旁边）、1-08、6-06、6-12、8-03。</p>
+<p><strong>外形：</strong> 卷尺盒 Ø14 × 6，<code>K.green</code>，侧面一圈滚花，正面一个锁扣按钮（3 × 2 × 1.5，<code>K.white</code>）；尺带出口一个金属唇（<code>K.gold_satin</code>）。尺带宽 4、厚 0.15，<code>K.white</code>，带头一个小钩 4 × 1.5（<code>K.gold_satin</code>）。</p>
+<p><strong>刻度（印在尺带上，<code>K.ink</code>）：</strong></p>
+<ul>
+<li><code>print="years"</code>：每 6 mm 一年，0–17 年，每年一根长刻线和数字（字高 1.6），中间 3 根短线。</li>
+<li><code>print="weeks_years"</code>：前 12 mm 印 <code>weeks</code> 两个字和 4 根短线；之后每 6 mm 一年，同上。</li>
+</ul>
+<p><strong>rig：</strong> <code>extend</code>（type <code>attr</code>，0–120 mm：尺带伸出长度；用曲线修剪或几何节点实现，伸出的部分平直，盒里的部分卷着）；<code>lock</code>（loc 0–1.5，按下锁扣）。</p>
+<p><strong>专项验收：</strong> <code>extend = 102</code> 时，第 17 年的刻线正好在出口外；尺带伸出部分无扭曲。</p>
+<h3>h19 · 路上的吊牌和小旗 <code>h19_road_tag(K, text, color="blue")</code> 和 <code>h19_flag(K)</code></h3>
+<p><strong>用在：</strong> 2-08、6-10、6-11、6-12、7-02、8-02。</p>
+<p><strong>吊牌：</strong> 牌子 14 × 5 × 1.2，圆角 1，倒角 0.4；上面一个夹环（内径 10.4，正好卡在主料杆 R_MAIN = 5 mm 上，环宽 2，厚 1.2）。牌面刻 <code>text</code>（字高 2.2）。<code>color</code>：<code>blue</code>→<code>K.blue</code>，<code>gold</code>→<code>K.gold</code>，<code>grey</code>→<code>K.white</code> 加 <code>K.inkg</code> 字。</p>
+<ul>
+<li>角色 <code>swing</code>：牌子绕夹环轴 rot −20° 到 +20°（晃动）。</li>
+<li>角色 <code>strike</code>：一根 <code>K.red</code> 横条 12 × 0.6 × 0.3 盖在字上，type <code>scale</code> X 0–1（划掉）。</li>
+<li>角色 <code>padlock</code>（只在 <code>text="048"</code> 时建）：牌子右下挂一把 p21 HD 小挂锁缩到 0.25，锁梁 <code>shackle</code> loc 0–1.2。</li>
+</ul>
+<p><strong>小旗：</strong> 旗杆 Ø0.8 × 12，旗面 6 × 4 × 0.3（<code>K.red</code>），角色 <code>raise</code>：旗杆从倒伏 rot 90° 到立起 0°。</p>
+<p><strong>专项验收：</strong> 夹环套在主料杆上，沿料杆滑动时不相交（环内壁离料杆 0.2）。</p>
+<h3>h24 · 带十格窗的胶囊 <code>h24_capsule_gauge(K)</code></h3>
+<p><strong>用在：</strong> 1-03（人旁边）、1-04。</p>
+<p><strong>外形：</strong> 胶囊长 30、直径 10（两半：<code>cap_a</code> <code>K.white</code>，<code>cap_b</code> <code>K.red</code>，中间一圈 <code>K.gold</code> 腰带 1.5 宽）。<code>cap_a</code> 侧面一条窗口带：10 个小窗 1.6 × 1.2，间距 2.0，每个窗后面一个小灯珠 <code>win_{k}</code>（<code>K.clear0</code> 小球 Ø1.0，动画时换 <code>K.red</code> 表示亮）。胶囊表面刻一圈细分件线；<code>cap_b</code> 端头一个顶针印。</p>
+<p><strong>rig：</strong> <code>cap_a</code>、<code>cap_b</code>（loc 沿胶囊轴，各 0–2，分开）。</p>
+<p><strong>专项验收：</strong> 十个窗在正面近景里一字排开可数；<code>win_</code> 物体正好 10 个。</p>
+<h3>h25 · 一线药药座 <code>h25_firstline(K)</code></h3>
+<p><strong>用在：</strong> 1-04。</p>
+<p><strong>外形：</strong> 一个转台式药座：底座 40 × 24 × 3，<code>K.white</code>，正面刻 <code>first-line</code>；上面一个转台 Ø20 × 2，两侧各一个卡槽。卡槽 A 放一粒胶囊（p08 的单粒，刻 <code>Nexavar</code>，字高 1.2）；卡槽 B 放两个输液袋（p09 HD，缩到 0.55），两袋下面用一个 Y 形接头（管半径 0.5，<code>K.clear0</code>）连起来，袋上分别刻 <code>atezolizumab</code>、<code>bevacizumab</code>（字高 0.9）。旁边一个空卡槽 <code>empty</code>，槽边一圈 <code>K.red</code> 环。</p>
+<p><strong>rig：</strong> <code>turn</code>（转台 rot 0–180°）。</p>
+<p><strong>专项验收：</strong> 转 180° 过程中胶囊、输液袋不和底座相交；刻字在近景可读。</p>
+<h3>h26 · 文献料杆树 <code>h26_source_tree(K)</code></h3>
+<p><strong>用在：</strong> 2-06、2-07。</p>
+<p><strong>外形：</strong> 中央一块主论文牌 20 × 26 × 1.6（<code>K.white</code>），牌面刻 <code>Ren et al. 2023 · Chemical Science</code>（字高 1.4）和几行印条（<code>K.inkg</code>），背面刻 <code>Conflicts of interest</code>。主牌后面一块薄牌 <code>si</code>（18 × 24 × 0.8）刻 <code>supplementary data</code>。六根支杆（半径 0.8，<code>K.white</code>）从主牌伸出，各挂一块小牌 12 × 8 × 1.2：</p>
+<table>
+<thead>
+<tr>
+<th>小牌</th>
+<th>刻字</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><code>original study</code></td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>method paper</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>method paper</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>review</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>book chapter</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>Perspective</code></td>
+</tr>
+</tbody>
+</table>
+<p>小牌 5 只有上面三分之一印了印条，下面三分之二用 <code>K.frost</code> 一块贴面（"只读了摘要"）。每块小牌右边一条进度槽 <code>bar_{k}</code>（槽 8 × 1 × 0.4，里面一根 <code>K.red</code> 填条，type <code>scale</code> X 0–1）和一个小刻度指针 <code>gauge_{k}</code>（rot −60° 到 +60°）。</p>
+<p><strong>rig：</strong> <code>main_flip</code>（主牌绕竖轴 rot 0–180°）、<code>si</code>（loc Z −2 到 0，插上）、<code>branch_{k}</code>（每块小牌从主牌后弹出：loc 沿支杆 −10 到 0）、<code>bar_{k}</code>、<code>gauge_{k}</code>。</p>
+<p><strong>专项验收：</strong> 六块小牌展开后互不遮挡（正面看）；所有刻字在近景可读。</p>
+<h3>u01 · 样本管剖面（升级 p15）<code>u01_tube_cut(K, level=0.7)</code></h3>
+<p><strong>用在：</strong> 2-01。</p>
+<p><strong>改法：</strong> 在 p15 HD 的单支管基础上，管身沿竖轴剖开一半（−Y 一半去掉，断面封口，同 <code>K.clear0</code>）。管里一片肝组织（<code>K.organ_s</code>，6 × 3 × 1.2 的不规则片，用 <code>organs.npz</code> 的肝网格截一小块，不要自己捏），组织旁一根蓝色液柱 <code>level</code>（Ø1.2，<code>K.blue_hi</code>，type <code>scale</code> Z 0–1；参数 <code>level</code> 是 rest 值）。管盖刻 <code>tumour</code> 或 <code>nearby</code>（由参数 <code>label</code> 决定）。</p>
+<p><strong>专项验收：</strong> 剖面近景看得到组织和液柱；两支管（<code>level</code> 0.7 和 0.3）并排时液柱高差明显（≥ 3 mm）。</p>
+<h3>u02 · 真镜片放大镜（升级 p18）<code>u02_loupe(K)</code></h3>
+<p><strong>用在：</strong> 2-07。</p>
+<p><strong>改法：</strong> p18 HD 的放大镜，镜片换成真的透镜：双凸，直径 9，中心厚 2.4，边厚 0.6，材质 <code>K.clear0</code>（折射要真）。镜框加一圈滚花。角色 <code>loupe</code>：type <code>path</code>，0–1，沿一条在 h26 六块小牌上方 6 mm 的曲线移动，镜片朝下。</p>
+<p><strong>专项验收：</strong> 透过镜片看小牌上的字明显放大（渲一张对比，放大约 1.5–2 倍）。</p>
+<h3>h20 · 套件盒 <code>h20_kit_box(K, title_lines, side_lines)</code></h3>
+<p><strong>用在：</strong> W1、W5。</p>
+<p><strong>尺寸：</strong> 盒盖 = 大板外框（<code>make_board</code> 返回的 <code>xl</code>、<code>xr</code> 和前后外框）每边加 10 mm，高 40，壁厚 2.5，圆角 3，<code>K.white</code>。</p>
+<p><strong>盒面：</strong> 顶面印：
+- <code>title_lines</code>：第一行 <code>WORTH TESTING?</code>（字高 28），第二行副标题（字高 9）；
+- 一条 <code>K.red</code> 细线（1.0 宽）；
+- 顶面右下一个小的大板缩略浮雕（主料杆和外框，0.5 高）。</p>
+<p>侧面印 <code>side_lines</code>（课程、Section、Group、组员名字；字高 6）。<strong>名字由渲染脚本在本地从 <code>名字.txt</code> 读进来传参，不写进代码和仓库。</strong></p>
+<p><strong>rig：</strong> <code>lid</code>：先 loc Z 0–60（抬起），再 rot 绕后边 0–100°（翻开）。用两个空物体串起来：<code>lid_lift</code>（loc）在外，<code>lid_hinge</code>（rot）在里。</p>
+<p><strong>专项验收：</strong> 盒盖合上时完全罩住大板（含站牌和支脚），离任何板上物体 ≥ 2 mm；字在全景镜头 1080p 下：片名字高 ≥ 80 像素。</p>
+<h3>h22 · 两条跑道 <code>h22_race(K)</code></h3>
+<p><strong>用在：</strong> 7-04。</p>
+<p><strong>外形：</strong> 底板 50 × 30 × 2，<code>K.white</code>；两条跑道各 46 × 9，中间隔一道 0.8 高的分道线；起跑线、终点线各一条 <code>K.ink</code> 横条；跑道面刻细纹。上道刻 <code>AI route</code>，下道刻 <code>classic route</code>（字高 2.0）。起跑线后三块小翻牌（用 h15 的翻牌单元，B 面依次刻 <code>same target</code>、<code>same budget</code>、<code>same definition of a hit</code>）。两块秒表（Ø6 × 2，<code>K.black</code>，表面 12 道刻线，顶上一个按钮），终点线上方一个问号牌（<code>?</code>，字高 4）。</p>
+<p><strong>rig：</strong> <code>runner_ai</code>、<code>runner_classic</code>（两块小牌 6 × 3 × 2，loc X 0–40）；<code>hand_0</code>、<code>hand_1</code>（秒表指针 rot 0–360° 连续）；<code>flap_0…2</code>。</p>
+<h3>h21 · 片尾转台 <code>h21_turntable(K)</code></h3>
+<p><strong>用在：</strong> W5。</p>
+<p><strong>外形：</strong> 转盘 Ø60 × 4，<code>K.white</code>，侧面一圈刻度（60 道）；底座 Ø64 × 6，<code>K.black</code>。旁边一块立着的出处牌 40 × 14 × 1.6，<code>K.white</code>，两行字由参数给（字高 2.4）。</p>
+<p><strong>rig：</strong> <code>spin</code>（rot 连续）；<code>plate</code>（牌子从平躺到立起，rot −90° 到 0）。</p>
+<hr />
+<h2>五、给总管的对照（执行人不用管）</h2>
+<table>
+<thead>
+<tr>
+<th>01 文档里的说法</th>
+<th>模型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CDK20 盖章机、十台小机器</td>
+<td>h01（hero / mini）</td>
+</tr>
+<tr>
+<td>钥匙、钥匙坯、带尖疙瘩的钥匙、每把都不同</td>
+<td>h02</td>
+</tr>
+<tr>
+<td>销子锁剖面</td>
+<td>h06</td>
+</tr>
+<tr>
+<td>试错循环轨道</td>
+<td>h03</td>
+</tr>
+<tr>
+<td>Chemistry42 芯片</td>
+<td>h04</td>
+</tr>
+<tr>
+<td>细胞工坊</td>
+<td>h05</td>
+</tr>
+<tr>
+<td>样本抽屉</td>
+<td>h09</td>
+</tr>
+<tr>
+<td>PandaOmics 芯片、Top 20 牌</td>
+<td>h11</td>
+</tr>
+<tr>
+<td>盲盒、密封零件袋</td>
+<td>h10</td>
+</tr>
+<tr>
+<td>AlphaFold 折叠台、红尾巴</td>
+<td>h07</td>
+</tr>
+<tr>
+<td>数据库抽屉、free 价签、first time 章</td>
+<td>h12</td>
+</tr>
+<tr>
+<td>剪钳</td>
+<td>h14</td>
+</tr>
+<tr>
+<td>口袋模具、hinge 卡扣、筛子</td>
+<td>h13</td>
+</tr>
+<tr>
+<td>Kd 秤</td>
+<td>h08</td>
+</tr>
+<tr>
+<td>七瓶架</td>
+<td>h16</td>
+</tr>
+<tr>
+<td>撕页日历、年份翻牌</td>
+<td>h17、h15 翻牌单元</td>
+</tr>
+<tr>
+<td>翻牌记分板</td>
+<td>h15</td>
+</tr>
+<tr>
+<td>料斗、13 颗珠子</td>
+<td>h23</td>
+</tr>
+<tr>
+<td>卷尺</td>
+<td>h18</td>
+</tr>
+<tr>
+<td>048 吊牌、lirafugratinib 吊牌、EXS-21546、小旗</td>
+<td>h19</td>
+</tr>
+<tr>
+<td>十格窗胶囊</td>
+<td>h24</td>
+</tr>
+<tr>
+<td>一线药药座</td>
+<td>h25</td>
+</tr>
+<tr>
+<td>文献料杆树</td>
+<td>h26</td>
+</tr>
+<tr>
+<td>样本管剖面</td>
+<td>u01</td>
+</tr>
+<tr>
+<td>放大镜</td>
+<td>u02</td>
+</tr>
+<tr>
+<td>套件盒</td>
+<td>h20</td>
+</tr>
+<tr>
+<td>跑道</td>
+<td>h22</td>
+</tr>
+<tr>
+<td>片尾转台</td>
+<td>h21</td>
+</tr>
+</tbody>
+</table>
+<p>沿用现成零件、不另建模的：玻璃肝（p04）、肺和结肠（p05）、小人（p03 HD）、地球（p06）、香港地图（p07）、钞票（p11 HD）、奖牌（p12 HD）、楼群（p14 HD）、Case study 等字牌（p16）、论文和书（p17 HD）、生存曲线（p26，3-05 不用曲线）、磨砂 CDK20（p29）、烧瓶（p34 HD）、培养皿（p40）、珠子堆（p42）、小鼠（p43 HD）、插头和废料桶（p44 HD）、报纸（p46 HD）。</p>

@@ -1,0 +1,176 @@
+{
+ "video": "D:\\。hkbu\\molecular science\\导演检查_20261123\\15_出镜3D_4-11_4-12.mp4",
+ "group": "4-11+4-12",
+ "fps": 60.0,
+ "frames": 640,
+ "offset_f": 0,
+ "S1": {
+  "word_events": 9,
+  "table_dev_max_f": 0,
+  "video_checked": 10,
+  "video_no_motion": [],
+  "pass_": true
+ },
+ "S2": {
+  "pass_": true,
+  "early": []
+ },
+ "S3": {
+  "pass_": true,
+  "longest_still_f": 0,
+  "bad": []
+ },
+ "S4": {
+  "pass_": true,
+  "looks_like_30": false,
+  "dup_frames": 0,
+  "stepped_dups": 0,
+  "stepped_ratio": 0.0,
+  "blend_frames": 0,
+  "blend_first": [],
+  "design_fade": 0,
+  "verdict": "原生（无变速重复/混帧）"
+ },
+ "sentences": [
+  {
+   "sid": "4-11.s1",
+   "f0": 30,
+   "f1": 48,
+   "last_motion_f": 48,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "4-11.s2",
+   "f0": 114,
+   "f1": 222,
+   "last_motion_f": 222,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "4-12.s1",
+   "f0": 231,
+   "f1": 275,
+   "last_motion_f": 275,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "4-12.s2",
+   "f0": 301,
+   "f1": 510,
+   "last_motion_f": 510,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "4-12.s3",
+   "f0": 546,
+   "f1": 610,
+   "last_motion_f": 610,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  }
+ ],
+ "events": [
+  {
+   "id": "land",
+   "verb": "move",
+   "w": "Wait.",
+   "f_land": 26,
+   "table_dev": -4
+  },
+  {
+   "id": "chip_glint",
+   "verb": "move",
+   "w": "computer",
+   "f_land": 133,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "winners_hop",
+   "verb": "move",
+   "w": "winners?",
+   "f_land": 192,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "shake_no",
+   "verb": "move",
+   "w": "Not",
+   "f_land": 231,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "meter_in",
+   "verb": "eject",
+   "w": "docking",
+   "f_land": 311,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "needle_hi",
+   "verb": "move",
+   "w": "score",
+   "f_land": 336,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "needle_wob",
+   "verb": "move",
+   "w": "clue,",
+   "f_land": 421,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "step_down",
+   "verb": "move",
+   "w": "proof.",
+   "f_land": 481,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "flask_up",
+   "verb": "eject",
+   "w": "lab",
+   "f_land": 567,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "lean",
+   "verb": "move",
+   "w": "tell.",
+   "f_land": 591,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "dive",
+   "verb": "move",
+   "w": "tell.",
+   "f_land": 639,
+   "table_dev": 48,
+   "video_motion_near_start": true
+  }
+ ],
+ "pass": true
+}

@@ -1,0 +1,146 @@
+{
+ "video": "D:\\。hkbu\\molecular science\\导演检查_20261120\\15_出镜3D_3-06.mp4",
+ "group": "3-06",
+ "fps": 60.0,
+ "frames": 694,
+ "offset_f": 0,
+ "S1": {
+  "word_events": 10,
+  "table_dev_max_f": 0,
+  "video_checked": 10,
+  "video_no_motion": [],
+  "pass_": true
+ },
+ "S2": {
+  "pass_": true,
+  "early": []
+ },
+ "S3": {
+  "pass_": true,
+  "longest_still_f": 0,
+  "bad": []
+ },
+ "S4": {
+  "pass_": true,
+  "looks_like_30": false,
+  "dup_frames": 0,
+  "stepped_dups": 0,
+  "stepped_ratio": 0.0,
+  "blend_frames": 0,
+  "blend_first": [],
+  "design_fade": 0,
+  "verdict": "原生（无变速重复/混帧）"
+ },
+ "sentences": [
+  {
+   "sid": "3-06.s1",
+   "f0": 33,
+   "f1": 228,
+   "last_motion_f": 228,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "3-06.s2",
+   "f0": 315,
+   "f1": 648,
+   "last_motion_f": 648,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  }
+ ],
+ "events": [
+  {
+   "id": "arrive",
+   "verb": "move",
+   "w": "So:",
+   "f_land": 33,
+   "table_dev": 0
+  },
+  {
+   "id": "turn",
+   "verb": "move",
+   "w": "a",
+   "f_land": 146,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "lamp",
+   "verb": "power_on",
+   "w": "strong",
+   "f_land": 174,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "call",
+   "verb": "move",
+   "w": "suspect.",
+   "f_land": 195,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "other1",
+   "verb": "power_on",
+   "w": "only",
+   "f_land": 335,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "other2",
+   "verb": "power_on",
+   "w": "cause",
+   "f_land": 349,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "turn2",
+   "verb": "move",
+   "w": "cancer,",
+   "f_land": 428,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "dim",
+   "verb": "power_off",
+   "w": "but",
+   "f_land": 519,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "ring",
+   "verb": "power_on",
+   "w": "lock",
+   "f_land": 588,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "plug",
+   "verb": "move",
+   "w": "trying.",
+   "f_land": 626,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "dive",
+   "verb": "move",
+   "w": "trying.",
+   "f_land": 693,
+   "table_dev": 67,
+   "video_motion_near_start": true
+  }
+ ],
+ "pass": true
+}

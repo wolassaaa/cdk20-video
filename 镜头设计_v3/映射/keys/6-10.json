@@ -5,13 +5,13 @@
  "segs": [
   "6-10"
  ],
- "tool": "remotion",
+ "tool": "blender",
  "fps": 60,
  "len_f": 922,
  "cut": "cut_v8",
- "cut_start_f": 52462,
- "cut_start_s": 874.37,
- "master_built": "2026-11-18 02:33:56 +09:00",
+ "cut_start_f": 51158,
+ "cut_start_s": 852.6367,
+ "master_built": "2026-11-22 20:33:03 +09:00",
  "words_hash": "f4573e98ef53",
  "events_src": "镜头设计_v3/映射/events/6-10.json",
  "words": [
@@ -22,8 +22,8 @@
    "sid": "6-10.s1",
    "f0": 9,
    "f1": 15,
-   "F0": 52471,
-   "F1": 52477
+   "F0": 51167,
+   "F1": 51173
   },
   {
    "wid": "6-10.w002",
@@ -32,8 +32,8 @@
    "sid": "6-10.s1",
    "f0": 62,
    "f1": 76,
-   "F0": 52524,
-   "F1": 52538
+   "F0": 51220,
+   "F1": 51234
   },
   {
    "wid": "6-10.w003",
@@ -42,8 +42,8 @@
    "sid": "6-10.s1",
    "f0": 105,
    "f1": 131,
-   "F0": 52567,
-   "F1": 52593
+   "F0": 51263,
+   "F1": 51289
   },
   {
    "wid": "6-10.w004",
@@ -52,8 +52,8 @@
    "sid": "6-10.s1",
    "f0": 147,
    "f1": 152,
-   "F0": 52609,
-   "F1": 52614
+   "F0": 51305,
+   "F1": 51310
   },
   {
    "wid": "6-10.w005",
@@ -62,8 +62,8 @@
    "sid": "6-10.s1",
    "f0": 153,
    "f1": 157,
-   "F0": 52615,
-   "F1": 52619
+   "F0": 51311,
+   "F1": 51315
   },
   {
    "wid": "6-10.w006",
@@ -72,8 +72,8 @@
    "sid": "6-10.s1",
    "f0": 160,
    "f1": 173,
-   "F0": 52622,
-   "F1": 52635
+   "F0": 51318,
+   "F1": 51331
   },
   {
    "wid": "6-10.w007",
@@ -82,8 +82,8 @@
    "sid": "6-10.s2",
    "f0": 202,
    "f1": 229,
-   "F0": 52664,
-   "F1": 52691
+   "F0": 51360,
+   "F1": 51387
   },
   {
    "wid": "6-10.w008",
@@ -92,8 +92,8 @@
    "sid": "6-10.s2",
    "f0": 257,
    "f1": 279,
-   "F0": 52719,
-   "F1": 52741
+   "F0": 51415,
+   "F1": 51437
   },
   {
    "wid": "6-10.w009",
@@ -102,8 +102,8 @@
    "sid": "6-10.s3",
    "f0": 325,
    "f1": 339,
-   "F0": 52787,
-   "F1": 52801
+   "F0": 51483,
+   "F1": 51497
   },
   {
    "wid": "6-10.w010",
@@ -112,8 +112,8 @@
    "sid": "6-10.s3",
    "f0": 364,
    "f1": 388,
-   "F0": 52826,
-   "F1": 52850
+   "F0": 51522,
+   "F1": 51546
   },
   {
    "wid": "6-10.w011",
@@ -122,8 +122,8 @@
    "sid": "6-10.s4",
    "f0": 417,
    "f1": 444,
-   "F0": 52879,
-   "F1": 52906
+   "F0": 51575,
+   "F1": 51602
   },
   {
    "wid": "6-10.w012",
@@ -132,8 +132,8 @@
    "sid": "6-10.s4",
    "f0": 448,
    "f1": 457,
-   "F0": 52910,
-   "F1": 52919
+   "F0": 51606,
+   "F1": 51615
   },
   {
    "wid": "6-10.w013",
@@ -142,8 +142,8 @@
    "sid": "6-10.s4",
    "f0": 494,
    "f1": 522,
-   "F0": 52956,
-   "F1": 52984
+   "F0": 51652,
+   "F1": 51680
   },
   {
    "wid": "6-10.w014",
@@ -152,8 +152,8 @@
    "sid": "6-10.s5",
    "f0": 575,
    "f1": 597,
-   "F0": 53037,
-   "F1": 53059
+   "F0": 51733,
+   "F1": 51755
   },
   {
    "wid": "6-10.w015",
@@ -162,8 +162,8 @@
    "sid": "6-10.s5",
    "f0": 632,
    "f1": 649,
-   "F0": 53094,
-   "F1": 53111
+   "F0": 51790,
+   "F1": 51807
   },
   {
    "wid": "6-10.w016",
@@ -172,8 +172,8 @@
    "sid": "6-10.s5",
    "f0": 651,
    "f1": 687,
-   "F0": 53113,
-   "F1": 53149
+   "F0": 51809,
+   "F1": 51845
   },
   {
    "wid": "6-10.w017",
@@ -182,8 +182,8 @@
    "sid": "6-10.s5",
    "f0": 689,
    "f1": 704,
-   "F0": 53151,
-   "F1": 53166
+   "F0": 51847,
+   "F1": 51862
   },
   {
    "wid": "6-10.w018",
@@ -192,8 +192,8 @@
    "sid": "6-10.s6",
    "f0": 733,
    "f1": 758,
-   "F0": 53195,
-   "F1": 53220
+   "F0": 51891,
+   "F1": 51916
   },
   {
    "wid": "6-10.w019",
@@ -202,8 +202,8 @@
    "sid": "6-10.s6",
    "f0": 761,
    "f1": 768,
-   "F0": 53223,
-   "F1": 53230
+   "F0": 51919,
+   "F1": 51926
   },
   {
    "wid": "6-10.w020",
@@ -212,8 +212,8 @@
    "sid": "6-10.s6",
    "f0": 770,
    "f1": 800,
-   "F0": 53232,
-   "F1": 53262
+   "F0": 51928,
+   "F1": 51958
   },
   {
    "wid": "6-10.w021",
@@ -222,8 +222,8 @@
    "sid": "6-10.s6",
    "f0": 808,
    "f1": 835,
-   "F0": 53270,
-   "F1": 53297
+   "F0": 51966,
+   "F1": 51993
   },
   {
    "wid": "6-10.w022",
@@ -232,8 +232,8 @@
    "sid": "6-10.s6",
    "f0": 871,
    "f1": 881,
-   "F0": 53333,
-   "F1": 53343
+   "F0": 52029,
+   "F1": 52039
   },
   {
    "wid": "6-10.w023",
@@ -242,8 +242,8 @@
    "sid": "6-10.s6",
    "f0": 885,
    "f1": 899,
-   "F0": 53347,
-   "F1": 53361
+   "F0": 52043,
+   "F1": 52057
   }
  ],
  "sentences": [
@@ -299,386 +299,288 @@
  "holds": [],
  "events": [
   {
-   "id": "title",
-   "obj": "title",
-   "verb": "appear",
+   "id": "tag_drop",
+   "obj": "tag_drop",
+   "verb": "move",
    "ease": "inout",
-   "means": "where's 048 on the road：标题",
-   "f_start": 50,
-   "f_land": 62,
-   "f_end": 173,
-   "until": "6-10.w006",
-   "word": "6-10.w002",
-   "w": "where's",
-   "key": "where's#1",
-   "sid": "6-10.s1",
-   "word_f0": 62,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 52512,
-   "F_land": 52524,
-   "F_end": 52635
-  },
-  {
-   "id": "tag",
-   "obj": "tag",
-   "verb": "grow",
-   "ease": "inout",
-   "means": "048：小牌子落在起点",
-   "f_start": 91,
+   "means": "金色吊牌 `048` 从上方落到主料杆的起点，挂住，晃两下",
+   "f_start": 85,
    "f_land": 105,
-   "f_end": 131,
-   "until": "6-10.w003",
+   "f_end": 135,
+   "until": null,
    "word": "6-10.w003",
    "w": "048",
    "key": "048#1",
    "sid": "6-10.s1",
    "word_f0": 105,
-   "tool": "remotion",
+   "tool": "blender",
    "guide": {
     "kind": "none"
    },
-   "F_start": 52553,
-   "F_land": 52567,
-   "F_end": 52593
+   "F_start": 51243,
+   "F_land": 51263,
+   "F_end": 51293
   },
   {
-   "id": "road",
-   "obj": "road",
-   "verb": "grow",
+   "id": "cam_road",
+   "obj": "cam_road",
+   "verb": "camera_to",
    "ease": "inout",
-   "means": "road：七站路画出",
-   "f_start": 100,
+   "means": "镜头沿料杆后拉，前四站都在画里",
+   "f_start": 120,
    "f_land": 160,
    "f_end": 173,
-   "until": "6-10.w006",
+   "until": "6-10.s1",
    "word": "6-10.w006",
    "w": "road?",
    "key": "road#1",
    "sid": "6-10.s1",
    "word_f0": 160,
-   "tool": "remotion",
+   "tool": "blender",
    "guide": {
     "kind": "none"
    },
-   "F_start": 52562,
-   "F_land": 52622,
-   "F_end": 52635
+   "F_start": 51278,
+   "F_land": 51318,
+   "F_end": 51331
   },
   {
-   "id": "tgt",
-   "obj": "tgt",
+   "id": "slide1",
+   "obj": "slide1",
    "verb": "move",
    "ease": "inout",
-   "means": "Target：牌子走到 Target",
+   "means": "吊牌沿料杆滑到 Target 站，镜头跟",
    "f_start": 172,
    "f_land": 202,
-   "f_end": 229,
-   "until": "6-10.w007",
+   "f_end": 208,
+   "until": null,
    "word": "6-10.w007",
    "w": "Target:",
    "key": "target#1",
    "sid": "6-10.s2",
    "word_f0": 202,
-   "tool": "remotion",
+   "tool": "blender",
    "guide": {
-    "kind": "focus",
-    "target": [
-     "lock"
-    ]
+    "kind": "none"
    },
-   "F_start": 52634,
-   "F_land": 52664,
-   "F_end": 52691,
-   "g_start": 176,
-   "g_on": 194,
-   "g_end": 229,
-   "g_off": 259,
-   "g_tick": 198,
-   "G_start": 52638,
-   "G_on": 52656,
-   "G_end": 52691,
-   "G_off": 52721,
-   "G_tick": 52660
+   "F_start": 51330,
+   "F_land": 51360,
+   "F_end": 51366
   },
   {
-   "id": "tgtk",
-   "obj": "tgtk",
-   "verb": "appear",
+   "id": "tick1",
+   "obj": "tick1",
+   "verb": "snap",
    "ease": "inout",
-   "means": "found：Target 打勾",
-   "f_start": 249,
+   "means": "Target 站牌上绿色的勾扣上",
+   "f_start": 251,
    "f_land": 257,
    "f_end": 279,
-   "until": "6-10.w008",
+   "until": "6-10.s2",
    "word": "6-10.w008",
    "w": "found.",
    "key": "found#1",
    "sid": "6-10.s2",
    "word_f0": 257,
-   "tool": "remotion",
+   "tool": "blender",
    "guide": {
     "kind": "none"
    },
-   "F_start": 52711,
-   "F_land": 52719,
-   "F_end": 52741
+   "F_start": 51409,
+   "F_land": 51415,
+   "F_end": 51437
   },
   {
-   "id": "hit",
-   "obj": "hit",
+   "id": "slide2",
+   "obj": "slide2",
    "verb": "move",
    "ease": "inout",
-   "means": "Hit：牌子走到 Hit",
-   "f_start": 301,
+   "means": "吊牌滑到 Hit 站",
+   "f_start": 295,
    "f_land": 325,
-   "f_end": 339,
-   "until": "6-10.w009",
+   "f_end": 331,
+   "until": null,
    "word": "6-10.w009",
    "w": "Hit:",
    "key": "hit#1",
    "sid": "6-10.s3",
    "word_f0": 325,
-   "tool": "remotion",
+   "tool": "blender",
    "guide": {
-    "kind": "focus",
-    "target": [
-     "key"
-    ]
+    "kind": "none"
    },
-   "F_start": 52763,
-   "F_land": 52787,
-   "F_end": 52801,
-   "g_start": 299,
-   "g_on": 317,
-   "g_end": 339,
-   "g_off": 369,
-   "g_tick": 321,
-   "G_start": 52761,
-   "G_on": 52779,
-   "G_end": 52801,
-   "G_off": 52831,
-   "G_tick": 52783
+   "F_start": 51453,
+   "F_land": 51483,
+   "F_end": 51489
   },
   {
-   "id": "hitk",
-   "obj": "hitk",
-   "verb": "appear",
+   "id": "tick2",
+   "obj": "tick2",
+   "verb": "snap",
    "ease": "inout",
-   "means": "found：Hit 打勾",
-   "f_start": 356,
+   "means": "Hit 站打勾",
+   "f_start": 358,
    "f_land": 364,
    "f_end": 388,
-   "until": "6-10.w010",
+   "until": "6-10.s3",
    "word": "6-10.w010",
    "w": "found.",
    "key": "found#2",
    "sid": "6-10.s3",
    "word_f0": 364,
-   "tool": "remotion",
+   "tool": "blender",
    "guide": {
     "kind": "none"
    },
-   "F_start": 52818,
-   "F_land": 52826,
-   "F_end": 52850
+   "F_start": 51516,
+   "F_land": 51522,
+   "F_end": 51546
   },
   {
-   "id": "imp",
-   "obj": "imp",
+   "id": "slide3",
+   "obj": "slide3",
    "verb": "move",
    "ease": "inout",
-   "means": "Improving：牌子走到 Improve",
-   "f_start": 393,
+   "means": "吊牌滑到 Improve 站",
+   "f_start": 387,
    "f_land": 417,
-   "f_end": 444,
-   "until": "6-10.w011",
+   "f_end": 423,
+   "until": null,
    "word": "6-10.w011",
    "w": "Improving",
    "key": "improving#1",
    "sid": "6-10.s4",
    "word_f0": 417,
-   "tool": "remotion",
+   "tool": "blender",
    "guide": {
-    "kind": "focus",
-    "target": [
-     "flask"
-    ]
+    "kind": "none"
    },
-   "F_start": 52855,
-   "F_land": 52879,
-   "F_end": 52906,
-   "g_start": 391,
-   "g_on": 409,
-   "g_end": 444,
-   "g_off": 474,
-   "g_tick": 413,
-   "G_start": 52853,
-   "G_on": 52871,
-   "G_end": 52906,
-   "G_off": 52936,
-   "G_tick": 52875
+   "F_start": 51545,
+   "F_land": 51575,
+   "F_end": 51581
   },
   {
-   "id": "st",
-   "obj": "st",
-   "verb": "appear",
+   "id": "started",
+   "obj": "started",
+   "verb": "eject",
    "ease": "inout",
-   "means": "started：Improve 写 started",
-   "f_start": 484,
+   "means": "Improve 站牌下弹出小牌 `started`",
+   "f_start": 488,
    "f_land": 494,
    "f_end": 522,
-   "until": "6-10.w013",
+   "until": "6-10.s4",
    "word": "6-10.w013",
    "w": "started.",
    "key": "started#1",
    "sid": "6-10.s4",
    "word_f0": 494,
-   "tool": "remotion",
+   "tool": "blender",
    "guide": {
     "kind": "none"
    },
-   "F_start": 52946,
-   "F_land": 52956,
-   "F_end": 52984
+   "F_start": 51646,
+   "F_land": 51652,
+   "F_end": 51680
   },
   {
-   "id": "cells",
-   "obj": "cells",
+   "id": "slide4",
+   "obj": "slide4",
    "verb": "move",
    "ease": "inout",
-   "means": "Cells：牌子走到 Cells",
+   "means": "吊牌滑到 Cells 站",
    "f_start": 545,
    "f_land": 575,
-   "f_end": 597,
-   "until": "6-10.w014",
+   "f_end": 581,
+   "until": null,
    "word": "6-10.w014",
    "w": "Cells:",
    "key": "cells#1",
    "sid": "6-10.s5",
    "word_f0": 575,
-   "tool": "remotion",
+   "tool": "blender",
    "guide": {
-    "kind": "focus",
-    "target": [
-     "tubes"
-    ]
+    "kind": "none"
    },
-   "F_start": 53007,
-   "F_land": 53037,
-   "F_end": 53059,
-   "g_start": 549,
-   "g_on": 567,
-   "g_end": 597,
-   "g_off": 627,
-   "g_tick": 571,
-   "G_start": 53011,
-   "G_on": 53029,
-   "G_end": 53059,
-   "G_off": 53089,
-   "G_tick": 53033
+   "F_start": 51703,
+   "F_land": 51733,
+   "F_end": 51739
   },
   {
-   "id": "ft",
-   "obj": "ft",
-   "verb": "appear",
+   "id": "dish",
+   "obj": "dish",
+   "verb": "move",
    "ease": "inout",
-   "means": "tests：写 first tests",
-   "f_start": 641,
+   "means": "Cells 站旁的培养皿零件亮",
+   "f_start": 643,
    "f_land": 651,
-   "f_end": 687,
-   "until": "6-10.w016",
+   "f_end": 671,
+   "until": null,
    "word": "6-10.w016",
    "w": "tests,",
    "key": "tests#1",
    "sid": "6-10.s5",
    "word_f0": 651,
-   "tool": "remotion",
+   "tool": "blender",
    "guide": {
     "kind": "none"
    },
-   "F_start": 53103,
-   "F_land": 53113,
-   "F_end": 53149
+   "F_start": 51801,
+   "F_land": 51809,
+   "F_end": 51829
   },
   {
-   "id": "done",
-   "obj": "done",
-   "verb": "appear",
+   "id": "tick4",
+   "obj": "tick4",
+   "verb": "snap",
    "ease": "inout",
-   "means": "done：Cells 打勾",
-   "f_start": 681,
+   "means": "Cells 站打勾",
+   "f_start": 683,
    "f_land": 689,
    "f_end": 704,
-   "until": "6-10.w017",
+   "until": "6-10.s5",
    "word": "6-10.w017",
    "w": "done.",
    "key": "done#1",
    "sid": "6-10.s5",
    "word_f0": 689,
-   "tool": "remotion",
+   "tool": "blender",
    "guide": {
     "kind": "none"
    },
-   "F_start": 53143,
-   "F_land": 53151,
-   "F_end": 53166
+   "F_start": 51841,
+   "F_land": 51847,
+   "F_end": 51862
   },
   {
-   "id": "g1",
-   "obj": "g1",
-   "verb": "morph",
+   "id": "cam_ahead",
+   "obj": "cam_ahead",
+   "verb": "camera_to",
    "ease": "inout",
-   "means": "Animals：Animals 变灰",
-   "f_start": 723,
+   "means": "镜头越过吊牌看向前面的 Animals、Trials 两站",
+   "f_start": 703,
    "f_land": 733,
-   "f_end": 758,
-   "until": "6-10.w018",
+   "f_end": 835,
+   "until": "6-10.w021",
    "word": "6-10.w018",
    "w": "Animals",
    "key": "animals#1",
    "sid": "6-10.s6",
    "word_f0": 733,
-   "tool": "remotion",
+   "tool": "blender",
    "guide": {
     "kind": "none"
    },
-   "F_start": 53185,
-   "F_land": 53195,
-   "F_end": 53220
+   "F_start": 51861,
+   "F_land": 51891,
+   "F_end": 51993
   },
   {
-   "id": "g2",
-   "obj": "g2",
-   "verb": "morph",
+   "id": "notyet",
+   "obj": "notyet",
+   "verb": "eject",
    "ease": "inout",
-   "means": "trials：Trials 变灰",
-   "f_start": 798,
-   "f_land": 808,
-   "f_end": 835,
-   "until": "6-10.w021",
-   "word": "6-10.w021",
-   "w": "trials:",
-   "key": "trials#1",
-   "sid": "6-10.s6",
-   "word_f0": 808,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 53260,
-   "F_land": 53270,
-   "F_end": 53297
-  },
-  {
-   "id": "ny",
-   "obj": "ny",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "not yet：写 not yet",
-   "f_start": 861,
+   "means": "两站各弹下一块小牌 `not yet`，各差 6 帧；吊牌留在 Cells 站轻晃",
+   "f_start": 865,
    "f_land": 871,
    "f_end": 899,
    "until": "6-10.s6",
@@ -687,116 +589,15 @@
    "key": "not#1",
    "sid": "6-10.s6",
    "word_f0": 871,
-   "tool": "remotion",
+   "tool": "blender",
    "guide": {
     "kind": "none"
    },
-   "F_start": 53323,
-   "F_land": 53333,
-   "F_end": 53361
+   "F_start": 52023,
+   "F_land": 52029,
+   "F_end": 52057
   }
  ],
- "guides": [
-  {
-   "id": "tgt",
-   "target": [
-    "lock"
-   ],
-   "kind": "focus",
-   "gs": 176,
-   "gon": 194,
-   "land": 202,
-   "gend": 229,
-   "goff": 259,
-   "tick": 198,
-   "nudge": true,
-   "rim": true,
-   "ev_s": 172,
-   "events": [
-    "tgt"
-   ],
-   "G_start": 52638,
-   "G_on": 52656,
-   "G_land": 52664,
-   "G_end": 52691,
-   "G_off": 52721,
-   "G_tick": 52660
-  },
-  {
-   "id": "hit",
-   "target": [
-    "key"
-   ],
-   "kind": "focus",
-   "gs": 299,
-   "gon": 317,
-   "land": 325,
-   "gend": 339,
-   "goff": 369,
-   "tick": 321,
-   "nudge": true,
-   "rim": true,
-   "ev_s": 301,
-   "events": [
-    "hit"
-   ],
-   "G_start": 52761,
-   "G_on": 52779,
-   "G_land": 52787,
-   "G_end": 52801,
-   "G_off": 52831,
-   "G_tick": 52783
-  },
-  {
-   "id": "imp",
-   "target": [
-    "flask"
-   ],
-   "kind": "focus",
-   "gs": 391,
-   "gon": 409,
-   "land": 417,
-   "gend": 444,
-   "goff": 474,
-   "tick": 413,
-   "nudge": true,
-   "rim": true,
-   "ev_s": 393,
-   "events": [
-    "imp"
-   ],
-   "G_start": 52853,
-   "G_on": 52871,
-   "G_land": 52879,
-   "G_end": 52906,
-   "G_off": 52936,
-   "G_tick": 52875
-  },
-  {
-   "id": "cells",
-   "target": [
-    "tubes"
-   ],
-   "kind": "focus",
-   "gs": 549,
-   "gon": 567,
-   "land": 575,
-   "gend": 597,
-   "goff": 627,
-   "tick": 571,
-   "nudge": true,
-   "rim": true,
-   "ev_s": 545,
-   "events": [
-    "cells"
-   ],
-   "G_start": 53011,
-   "G_on": 53029,
-   "G_land": 53037,
-   "G_end": 53059,
-   "G_off": 53089,
-   "G_tick": 53033
-  }
- ],
+ "guides": [],
  "problems": []
 }

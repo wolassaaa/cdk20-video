@@ -1,0 +1,668 @@
+<!doctype html><meta charset="utf-8"><title>09_AI角色插段</title><style>body{font-family:"Microsoft YaHei",sans-serif;max-width:900px;margin:24px auto;padding:0 16px;line-height:1.7;color:#222;background:#fff}
+table{border-collapse:collapse;margin:12px 0}td,th{border:1px solid #ccc;padding:6px 10px}th{background:#f2f2f2}
+code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1px solid #ddd;padding-bottom:4px}a{color:#0a58ca}</style><h1>09 AI 角色插段（第 2 版：Claude / GPT / DeepSeek 短剧）</h1>
+<p>HKBU SCIE1007 课程作业的科普视频。这一步：按导演 11-21 意见重做片中 AI 角色小插段。不是科研，只用新闻层面的说法复述公开、可核实的事件。总管 Claude 写于 2026-11-21（韩国时间）。第 1 版（SVG 画的 Q 版角色、edge-tts、学术新闻列表）留作 <code>导演检查_20261120/11_AI角色插段_v1.mp4</code>。</p>
+<ul>
+<li>成片：<code>导演检查_20261120/11_AI角色插段.mp4</code>（1080p60，50.02 秒，配音和烧录英文字幕）。这是第 3 版镜头调度（11-20 重做，见第七节）；台词、配音、牌子内容和出处同第 2 版。只有一个机位的第 2 版留作 <code>11_AI角色插段_v2.mp4</code>。</li>
+<li>声线候选：<code>导演检查_20261120/11_声线候选/</code>（每角色 旧版 edge + 三个候选，标"选用"的是定稿；另有全段配音）</li>
+<li>复用方法：技能 <code>.claude/skills/expressive-voice/</code>（配音）和 <code>.claude/skills/mascot-insert/</code>（插段）</li>
+</ul>
+<h2>〇、导演意见和这版的改法</h2>
+<table>
+<thead>
+<tr>
+<th>意见</th>
+<th>这版</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>别画了，轮换播放生成的角色图</td>
+<td>不再用 SVG。用 Codex 第三批一比一角色图（open / blink / wink / talk_a / talk_o / wave）。说话的人按音量在 open、talk_o、talk_a 间切口型；其他人轮换眨眼和 wink；入场、收尾挥手</td>
+</tr>
+<tr>
+<td>声线不对，Claude 太哑，GPT、DS 太幼稚没语气</td>
+<td>换成 Chatterbox（本机 RTX 5080），逐句调情绪夸张度。按导演后补方向：Claude、GPT 成熟御姐，DeepSeek 元气少女。客观指标见第五节</td>
+</tr>
+<tr>
+<td>不要学术新闻，讲点爆的</td>
+<td>四个真实故事，角色抢话、吐槽、打假、反转。导演举的 Claude 例子核实属实，但只做到"结合"，不是解毒剂，台词和牌子都这样说</td>
+</tr>
+</tbody>
+</table>
+<h2>一、位置</h2>
+<p>不变：S7 和 S8 之间。末句 "Experiments still decide!" 接 8-04 的同一句。</p>
+<h2>二、台词（13 句，约 100 词，全段 50.0 秒）</h2>
+<p>性格：Claude 从容优雅、略得意；GPT 慵懒高冷、爱较劲；DeepSeek 元气、嘴快、专门打假。</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>角色</th>
+<th>台词</th>
+<th>情绪</th>
+<th>牌子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c1</td>
+<td>Claude</td>
+<td>Story time. Scorpion venom. A research version of me designed proteins that grab its toxins.</td>
+<td>从容、略得意</td>
+<td>0（在 "Scorpion" 上翻出）</td>
+</tr>
+<tr>
+<td>g1</td>
+<td>GPT</td>
+<td>Wait. YOU designed proteins?</td>
+<td>抢话、假装吃惊；镜头猛推</td>
+<td>0</td>
+</tr>
+<tr>
+<td>c2</td>
+<td>Claude</td>
+<td>Sixty-four hours. Over three hundred thousand designs. And seventeen stuck in lab tests!</td>
+<td>越说越骄傲</td>
+<td>0，"17 / 211" 落在 "seventeen"</td>
+</tr>
+<tr>
+<td>d1</td>
+<td>DeepSeek</td>
+<td>Seventeen binders. Not an antivenom. Not yet.</td>
+<td>嘴快打假</td>
+<td>0</td>
+</tr>
+<tr>
+<td>g2</td>
+<td>GPT</td>
+<td>Cute. A mini me redesigned stem-cell proteins. Fifty times the reprogramming markers!</td>
+<td>慵懒炫耀</td>
+<td>1，"50×" 落在 "Fifty"</td>
+</tr>
+<tr>
+<td>d2</td>
+<td>DeepSeek</td>
+<td>That's OpenAI's own report. Not peer-reviewed.</td>
+<td>俏皮拆台</td>
+<td>1</td>
+</tr>
+<tr>
+<td>g3</td>
+<td>GPT</td>
+<td>Ugh. Details!</td>
+<td>懒懒叹气</td>
+<td>1</td>
+</tr>
+<tr>
+<td>d3</td>
+<td>DeepSeek</td>
+<td>Plot twist! AI-designed proteins blocked deadly snake toxins, and the mice survived!</td>
+<td>兴奋反转；镜头猛推</td>
+<td>2，"80–100%" 落在 "survived"</td>
+</tr>
+<tr>
+<td>c3</td>
+<td>Claude</td>
+<td>And AI found new antibiotics, halicin and abaucin, that fought superbugs in mice.</td>
+<td>温和惊叹</td>
+<td>3，"2" 落在 "superbugs"</td>
+</tr>
+<tr>
+<td>g4</td>
+<td>GPT</td>
+<td>So we're curing everything now?</td>
+<td>挑眉逗人；镜头猛推</td>
+<td>3</td>
+</tr>
+<tr>
+<td>d4</td>
+<td>DeepSeek</td>
+<td>Nope.</td>
+<td>秒答</td>
+<td>3</td>
+</tr>
+<tr>
+<td>c4</td>
+<td>Claude</td>
+<td>Every one of them still had to pass a real lab.</td>
+<td>平静坚定</td>
+<td>4 收束牌</td>
+</tr>
+<tr>
+<td>g5</td>
+<td>GPT</td>
+<td>Fine. Experiments still decide!</td>
+<td>先叹气后笑；三人挥手</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<p>每个故事后都有一句"还没做到什么"（DS 打假或牌子小字）；没有一句说 AI 能独立造药。</p>
+<h2>三、出处表（牌子上印来源行）</h2>
+<table>
+<thead>
+<tr>
+<th>故事</th>
+<th>片中说法</th>
+<th>牌子上的出处行</th>
+<th>核实</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>蝎毒结合蛋白</td>
+<td>64 小时、30 多万个设计、17 个在实验室里"结合"了毒素；DS 补一句"不是解毒剂，还没有"</td>
+<td>Anthropic, "How Claude designed protein binders against scorpion neurotoxins", 20 Oct 2026; lab tests by Adaptyv Bio and Twist Bioscience</td>
+<td>牌子大字 17 / 211，小字写明只做到结合，没有证明中和毒液</td>
+</tr>
+<tr>
+<td>GPT-4b micro 干细胞蛋白</td>
+<td>重编程标志物提高 50 倍；DS 补"这是 OpenAI 自己的报告，没有同行评审"</td>
+<td>OpenAI, "Accelerating life sciences research", 22 Aug 2025</td>
+<td>牌子小字：Company report, not yet peer-reviewed</td>
+</tr>
+<tr>
+<td>抗蛇毒蛋白</td>
+<td>AI 设计的蛋白挡住致命蛇毒，小鼠存活</td>
+<td>Vázquez Torres et al., Nature 2025 (Baker lab, University of Washington)</td>
+<td>牌子数字 80–100%，小字写明是单一眼镜蛇类毒素，不是整条蛇毒</td>
+</tr>
+<tr>
+<td>抗生素 halicin、abaucin</td>
+<td>AI 找到的两个新抗生素线索，在小鼠里有效</td>
+<td>Stokes et al., Cell 2020; Liu et al., Nature Chemical Biology 2023</td>
+<td>小字：Early leads, not approved medicines</td>
+</tr>
+<tr>
+<td>收束</td>
+<td>每一个都还要过真实的实验室；实验仍然说了算</td>
+<td>Our summary of the cases above</td>
+<td>本组自己的总结</td>
+</tr>
+</tbody>
+</table>
+<p>角色形象来源（画面右下角印出）：Illustration. Characters adapted from fan designs by ZipZipPipe (Bilibili) and Shangshan Wuxing (CC BY-NC-SA 4.0)。</p>
+<h2>四、声线参数（抄自 <code>lines.json</code> 的 voices 段和每句参数）</h2>
+<p>Chatterbox TTS（本机 RTX 5080），以 edge-tts 的一小段音色当参考音（只借音色），再逐句调情绪。注意：<code>11_声线候选/</code> 里文件名带"_选用"的是中途的标记，最终以 <code>lines.json</code> 为准。</p>
+<table>
+<thead>
+<tr>
+<th>角色</th>
+<th>参考音色</th>
+<th>升降调（半音）</th>
+<th>选它的理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claude</td>
+<td>en-GB-SoniaNeural</td>
+<td>-1.0</td>
+<td>clearest of three (HNR ~15.4-17.8 dB per line vs Aria 13-15, edge Emma 12.7-13.3); elegant British; mature f0 ~210 Hz</td>
+</tr>
+<tr>
+<td>GPT</td>
+<td>en-CA-ClaraNeural</td>
+<td>-1.0</td>
+<td>mature cool f0 ~215 Hz (edge Ana 295), pitch movement p10-90 ~10 st vs 6.9</td>
+</tr>
+<tr>
+<td>DeepSeek</td>
+<td>en-AU-NatashaNeural</td>
+<td>+1.5</td>
+<td>bright girl f0 ~260 Hz (edge Maisie 295 childlike), pitch movement ~11.3 st vs 4.6</td>
+</tr>
+</tbody>
+</table>
+<p>逐句参数（exag = exaggeration 情绪夸张度，cfg = cfg_weight，temp = temperature；gap = 与上一句的间隔秒数，负数表示抢话）：</p>
+<table>
+<thead>
+<tr>
+<th>句</th>
+<th>角色</th>
+<th>exag</th>
+<th>cfg</th>
+<th>temp</th>
+<th>gap</th>
+<th>情绪</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>c1</td>
+<td>Claude</td>
+<td>0.6</td>
+<td>0.7</td>
+<td>0.8</td>
+<td>0</td>
+<td>composed, warm, a little smug, elegant</td>
+</tr>
+<tr>
+<td>g1</td>
+<td>GPT</td>
+<td>0.85</td>
+<td>0.45</td>
+<td>0.85</td>
+<td>-0.05</td>
+<td>cool tease, mock surprise, slow</td>
+</tr>
+<tr>
+<td>c2</td>
+<td>Claude</td>
+<td>0.7</td>
+<td>0.7</td>
+<td>0.8</td>
+<td>0.08</td>
+<td>proud, builds to the number</td>
+</tr>
+<tr>
+<td>d1</td>
+<td>DeepSeek</td>
+<td>0.75</td>
+<td>0.5</td>
+<td>0.75</td>
+<td>0.1</td>
+<td>bright, quick, cheeky fact-check</td>
+</tr>
+<tr>
+<td>g2</td>
+<td>GPT</td>
+<td>0.8</td>
+<td>0.7</td>
+<td>0.85</td>
+<td>0.2</td>
+<td>languid, confident brag</td>
+</tr>
+<tr>
+<td>d2</td>
+<td>DeepSeek</td>
+<td>0.8</td>
+<td>0.5</td>
+<td>0.75</td>
+<td>0.1</td>
+<td>bright, cheeky, sing-song</td>
+</tr>
+<tr>
+<td>g3</td>
+<td>GPT</td>
+<td>0.85</td>
+<td>0.45</td>
+<td>0.85</td>
+<td>0.05</td>
+<td>lazy sigh, amused</td>
+</tr>
+<tr>
+<td>d3</td>
+<td>DeepSeek</td>
+<td>1.0</td>
+<td>0.7</td>
+<td>0.8</td>
+<td>0.2</td>
+<td>excited, big energy reveal</td>
+</tr>
+<tr>
+<td>c3</td>
+<td>Claude</td>
+<td>0.65</td>
+<td>0.7</td>
+<td>0.8</td>
+<td>0.15</td>
+<td>warm wonder</td>
+</tr>
+<tr>
+<td>g4</td>
+<td>GPT</td>
+<td>0.85</td>
+<td>0.45</td>
+<td>0.85</td>
+<td>0.15</td>
+<td>teasing, raised eyebrow</td>
+</tr>
+<tr>
+<td>d4</td>
+<td>DeepSeek</td>
+<td>0.8</td>
+<td>0.5</td>
+<td>0.7</td>
+<td>-0.05</td>
+<td>instant, playful</td>
+</tr>
+<tr>
+<td>c4</td>
+<td>Claude</td>
+<td>0.55</td>
+<td>0.5</td>
+<td>0.75</td>
+<td>0.1</td>
+<td>calm, firm, clear</td>
+</tr>
+<tr>
+<td>g5</td>
+<td>GPT</td>
+<td>0.8</td>
+<td>0.45</td>
+<td>0.8</td>
+<td>0.2</td>
+<td>sigh, then warm and sure</td>
+</tr>
+</tbody>
+</table>
+<p>后处理（<code>finalize_takes.py</code>）：句内停顿压到 0.14 秒，句末 0.22 秒；音高起伏拉大（Claude 1.25 倍，GPT 和 DS 1.1 倍）；每句峰值归一后混成一轨（<code>build_timeline2.py</code>）。</p>
+<h2>五、客观指标（没人能听出细微差别，用数说话）</h2>
+<p>每句多出几条候选，<code>pick_takes.py</code> 先按"Whisper 转写和台词一致（词错率不超过 0.1）、不削波、音高断裂少、语速正常"筛，再选音高范围、音高起伏、能量起伏最大且最清晰（HNR 最高）的一条。定稿 13 句：词错率全为 0（c3 为 0.077），音高范围 11 至 21 个半音，HNR 11 至 17 dB（GPT 的 g3、g5 较低，是叹气音，属表演需要）。全段 50.02 秒。</p>
+<h2>六、画面做法（第 2 版，留档）</h2>
+<p>下面"镜头、舞台、牌子、字幕"四条已被第七节取代；角色图轮换、口型、渲染和自检的做法仍然沿用。</p>
+<ul>
+<li>代码：<code>镜头设计_v2/tests/T4_remotion/src/v3/mascots/</code>（<code>Show2.jsx</code> 时间和动作，<code>Stage2.jsx</code> 三维舞台，<code>data/timeline_v2.json</code> 由配音生成）。</li>
+<li>角色：只用 Codex 生成的透明底角色图，轮换 open、blink、wink、talk_a、talk_o、wave，不画 SVG。说话者按每帧音量在 open / talk_o / talk_a 间切换（滞后保持 3 帧防抖）；其他人轮换眨眼、偶尔 wink；<code>react</code> 指定处 wink 或挥手；开场三人弹出并挥手，结尾挥手告别。</li>
+<li>镜头：入场推近；换人时镜头轻移；<code>punch</code> 句镜头猛推加轻微抖动；说话者前移、轻弹。三人站位保证推近时也不被裁切。</li>
+<li>舞台：深蓝剧场底，六边形分子格背景、虚化光斑、每人一束追光和轮廓光、闪光粒子；不用渐变底。</li>
+<li>牌子：顶部玻璃牌，数字落在 <code>hit</code> 指定的词上（c2 的 "seventeen"、g2 的 "Fifty"、d3 的 "survived"、c3 的 "superbugs"）；牌上印出处行。</li>
+<li>字幕：烧在底部，Instrument Serif，带角色名；右下角印形象来源。</li>
+<li>入口和出口各一道光扫（T6）。</li>
+<li>渲染：<code>npx remotion render src/v3/mascots/entry.jsx MascotShow2 &lt;帧目录&gt; --sequence --image-format=jpeg --jpeg-quality=95 --gl=angle --concurrency=2 --public-dir=$CDK20_WORK/mascots/pub</code>，3002 帧用时约 3 分钟；再用带 libx264 的 ffmpeg 把帧序列和 <code>pub/m/mix.wav</code> 合成 mp4（CRF 15，1080p60）。直接让 Remotion 出 mp4 时本机会报 <code>write EOF</code>，所以走帧序列。</li>
+<li>自检：每 10 帧抽一张拼成联系表逐张看（共 301 张）：角色无裁切（站位和镜头平移收窄后修掉了推近时左右角色被切边）、无空白帧（只有第 0 帧是有意的奶白闪光）、字幕在底部牌在顶部不重叠、出处行加深色底后可读。口型直接由每帧音量决定。</li>
+</ul>
+<h2>七、镜头调度（第 3 版，11-20）</h2>
+<p>第 2 版的毛病：50 秒只有一个机位（三人平视站一排）；说话的人不突出；背景是深蓝底加几个圆；牌子小而挤；角色在膝盖处被画面下沿切掉，字幕压在胸口；蛇毒牌在等数字时显示 "0–0%"。这一版只改画面，台词、配音、牌子内容和出处一个字没动。代码 <code>Show3.jsx</code>（composition <code>MascotShow3</code>），第 2 版的 <code>Show2.jsx</code>、<code>Stage2.jsx</code> 保留。</p>
+<h3>规则</h3>
+<ul>
+<li><strong>景别</strong>：全景只在开头和结尾各用一次，取七分身（裁在大腿中段的裙摆上，不裁在膝盖）。其余都是单人镜头：半身（图放大 1.24–1.31 倍）和胸像（1.46–1.60 倍）。不做脸部大特写，1536 的图放大超过 1.6 倍会糊。</li>
+<li><strong>构图</strong>：有牌子时人在左或右三分线上，牌子占另一侧，不挡脸；没牌子时人居中。头顶留 46 px。字幕落在腰和裙子上，不压脸和胸口。</li>
+<li><strong>剪接跟配音走</strong>：每个镜头的起点都是一个词的起始时间（从 <code>timeline_v2.json</code> 读），没有手写的秒数。同一句里按"牌子出现的词"和"数字落下的词"沿轴切近一次。32 个镜头，最长 2.79 秒，平均 1.6 秒。同一句里从半身切到胸像，两档放大倍数要差四分之一以上（1.24 对 1.55），差得少看起来像没切。一句话超过 2.5 秒时插一个听众的反应镜头。</li>
+<li><strong>抢话</strong>：两处甩镜（Claude → GPT 的 "Wait."，GPT → DeepSeek 的 "That's OpenAI's own report."），横向运动模糊，方向按三人站位（Claude 左、GPT 中、DeepSeek 右）。"YOU" 用急推加一震；"Nope." 用硬切加一震。</li>
+<li><strong>冲击</strong>：闪白加速度线全段只用一次，给 "Plot twist!"。</li>
+<li><strong>反应镜头</strong>：GPT 质疑时切 Claude（镜像侧过去、眨眼，开口前翻转回正）；Claude 报数字时切 GPT（眨眼、微沉）；DeepSeek 讲蛇毒时用分屏给 Claude 和 GPT 两位听众；DeepSeek 两次打假的后半句用斜线分屏，另一半是被打假的人（Claude 闭眼下沉，GPT 连眨两下）。GPT 的 "Ugh." 和 "Fine." 是身体一沉一歪。</li>
+<li><strong>舞台</strong>：柔光棚。深蓝到靛紫的弧形底，远处一层分子格，中景几块竖直柔光箱，两道慢慢摆动的光柱，前后两层虚化光斑；说话人身后一团她的主题色光，身上一圈白加主题色的轮廓光。各层按远近以不同幅度移动，镜头越近背景越虚。全景里没说话的人压暗、降饱和、轻微虚化。</li>
+<li><strong>牌子</strong>：宽 780 px 的竖牌。小标题 29 px，标题 62 px，大数字 178 px，说明 39 px，提醒行 33 px，出处 25 px。牌子在点名的词上翻入；数字区在 hit 词前 0.45 秒才展开，之前不显示任何数字。"17" 和 "50" 用 0.4 秒计数，正好停在 hit 词上；"80–100%" 和 "2" 不计数，直接以定值在 hit 词上弹出。提醒行在对应的打假词上展开并亮一下。收束牌在结尾全景里换成顶部横幅。</li>
+<li><strong>"0–0%" 的原因</strong>：第 2 版从牌子出现起就显示计数的当前值，而计数要到 hit 词前 0.45 秒才开始，所以蛇毒牌在 "survived" 之前的 4 秒里一直是 "0–0%"（其余三张同理显示 "0 / 211"、"0×"、"0"）。</li>
+<li><strong>字幕</strong>：一次只出一个分句，在该分句第一个词上换；54 px，一行，带角色名。</li>
+</ul>
+<h3>镜头表</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>时间（秒）</th>
+<th>时长</th>
+<th>景别和构图</th>
+<th>运动、剪接和事件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0.00–1.23</td>
+<td>1.23</td>
+<td>三人全景（七分身）</td>
+<td>三人依次从下弹入并挥手，镜头缓推 0.78→0.85；入口光扫（T6）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1.23–1.99</td>
+<td>0.76</td>
+<td>全景推到 Claude 中景</td>
+<td>0.5 秒快推并左移（0.85→1.14），停在 Claude 身上，GPT 留在画右暗处；"Story time."</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1.99–4.77</td>
+<td>2.78</td>
+<td>Claude 半身，人在左三分</td>
+<td>切；"Scorpion" 上字卡 0 从右侧翻入；缓推 1.24→1.31，轻微横移</td>
+</tr>
+<tr>
+<td>4</td>
+<td>4.77–7.20</td>
+<td>2.43</td>
+<td>Claude 胸像，人在左</td>
+<td>"designed" 上沿轴切近到 1.55→1.60；末 5 帧向右甩出</td>
+</tr>
+<tr>
+<td>5</td>
+<td>7.20–8.07</td>
+<td>0.87</td>
+<td>GPT 半身，居中</td>
+<td>甩镜（T2）落到 GPT，横向运动模糊；"Wait."</td>
+</tr>
+<tr>
+<td>6</td>
+<td>8.07–9.66</td>
+<td>1.59</td>
+<td>GPT 胸像，居中</td>
+<td>"YOU" 上 0.16 秒急推 1.30→1.56，画面一震</td>
+</tr>
+<tr>
+<td>7</td>
+<td>9.66–10.30</td>
+<td>0.64</td>
+<td>Claude 胸像，居中（反应）</td>
+<td>GPT 还在说 "proteins?" 时切给 Claude：镜像侧过去、眨一下眼，开口前翻转回正</td>
+</tr>
+<tr>
+<td>8</td>
+<td>10.30–11.92</td>
+<td>1.62</td>
+<td>Claude 半身，人在左</td>
+<td>切；字卡 0 在右；"Sixty-four hours."</td>
+</tr>
+<tr>
+<td>9</td>
+<td>11.92–13.28</td>
+<td>1.36</td>
+<td>GPT 胸像，居中（反应）</td>
+<td>Claude 说 "three hundred thousand designs" 时切给 GPT：眨两下眼，身体微微一沉（不服）</td>
+</tr>
+<tr>
+<td>10</td>
+<td>13.28–15.74</td>
+<td>2.46</td>
+<td>Claude 胸像，人在左</td>
+<td>"And" 上切回；"17 / 211" 计数停在 "seventeen" 上并闪一下；句尾 wink</td>
+</tr>
+<tr>
+<td>11</td>
+<td>15.74–17.26</td>
+<td>1.52</td>
+<td>DeepSeek 半身，人在右三分</td>
+<td>硬切到 DS，字卡 0 换到左侧；"Seventeen binders."</td>
+</tr>
+<tr>
+<td>12</td>
+<td>17.26–18.61</td>
+<td>1.36</td>
+<td>DeepSeek 胸像，人在右</td>
+<td>切近；"Not an antivenom" 上字卡的提醒行（Binding only…）展开并亮一下</td>
+</tr>
+<tr>
+<td>13</td>
+<td>18.61–19.47</td>
+<td>0.86</td>
+<td>斜线分屏：DeepSeek ｜ Claude</td>
+<td>两块从两侧滑入；"Not yet."，Claude 闭眼下沉（泄气）</td>
+</tr>
+<tr>
+<td>14</td>
+<td>19.47–20.08</td>
+<td>0.61</td>
+<td>GPT 胸像，居中</td>
+<td>切；"Cute." 上 wink</td>
+</tr>
+<tr>
+<td>15</td>
+<td>20.08–22.75</td>
+<td>2.67</td>
+<td>GPT 半身，人在右</td>
+<td>切；"mini me" 上字卡 1 从左侧翻入；缓推 1.24→1.31</td>
+</tr>
+<tr>
+<td>16</td>
+<td>22.75–24.96</td>
+<td>2.21</td>
+<td>GPT 胸像，人在右</td>
+<td>切近；"50×" 计数停在 "Fifty" 上；句尾 wink；末 5 帧甩出</td>
+</tr>
+<tr>
+<td>17</td>
+<td>24.96–26.95</td>
+<td>1.99</td>
+<td>DeepSeek 半身，人在左</td>
+<td>甩镜（T2）抢话；字卡 1 换到右侧；"report" 上提醒行（Company report…）展开</td>
+</tr>
+<tr>
+<td>18</td>
+<td>26.95–28.46</td>
+<td>1.51</td>
+<td>斜线分屏：DeepSeek ｜ GPT</td>
+<td>"Not peer-reviewed."，GPT 连眨两下</td>
+</tr>
+<tr>
+<td>19</td>
+<td>28.46–30.18</td>
+<td>1.72</td>
+<td>GPT 胸像，居中</td>
+<td>切；"Ugh." 上身体一沉一歪（叹气），"Details!" 弹起</td>
+</tr>
+<tr>
+<td>20</td>
+<td>30.18–31.04</td>
+<td>0.86</td>
+<td>DeepSeek 胸像，居中</td>
+<td>全段唯一一次冲击：闪白 + 速度线 + 0.4 秒快推 1.12→1.56 + 一震；"Plot twist!"</td>
+</tr>
+<tr>
+<td>21</td>
+<td>31.04–32.68</td>
+<td>1.64</td>
+<td>DeepSeek 半身，人在左</td>
+<td>切；"AI-designed" 上字卡 2 从右侧翻入</td>
+</tr>
+<tr>
+<td>22</td>
+<td>32.68–33.83</td>
+<td>1.15</td>
+<td>斜线分屏：Claude ｜ GPT（两人在听）</td>
+<td>"deadly snake toxins" 时切给两位听众，先后眨眼</td>
+</tr>
+<tr>
+<td>23</td>
+<td>33.83–35.08</td>
+<td>1.25</td>
+<td>DeepSeek 胸像，人在左</td>
+<td>"and" 上切回；"80–100%" 定值在 "survived" 上弹出，随后提醒行展开；句尾 wink</td>
+</tr>
+<tr>
+<td>24</td>
+<td>35.08–36.72</td>
+<td>1.64</td>
+<td>Claude 胸像，居中</td>
+<td>切；"And AI found new antibiotics,"</td>
+</tr>
+<tr>
+<td>25</td>
+<td>36.72–39.44</td>
+<td>2.73</td>
+<td>Claude 半身，人在右</td>
+<td>"antibiotics" 上切，字卡 3 从左侧翻入</td>
+</tr>
+<tr>
+<td>26</td>
+<td>39.44–41.53</td>
+<td>2.09</td>
+<td>Claude 胸像，人在右</td>
+<td>切近；"2" 在 "superbugs" 上弹出；"in mice" 上提醒行展开</td>
+</tr>
+<tr>
+<td>27</td>
+<td>41.53–43.00</td>
+<td>1.47</td>
+<td>GPT 半身 → 胸像，居中</td>
+<td>整句持续推近 1.24→1.52（挑衅）</td>
+</tr>
+<tr>
+<td>28</td>
+<td>43.00–43.65</td>
+<td>0.65</td>
+<td>DeepSeek 胸像，居中</td>
+<td>硬切秒答；"Nope." 上画面一震</td>
+</tr>
+<tr>
+<td>29</td>
+<td>43.65–45.03</td>
+<td>1.38</td>
+<td>Claude 半身，人在左</td>
+<td>切；收束字卡 4 从右侧翻入</td>
+</tr>
+<tr>
+<td>30</td>
+<td>45.03–46.58</td>
+<td>1.55</td>
+<td>Claude 胸像，人在左</td>
+<td>"pass" 上切近</td>
+</tr>
+<tr>
+<td>31</td>
+<td>46.58–47.23</td>
+<td>0.65</td>
+<td>GPT 胸像，居中</td>
+<td>切；"Fine." 上身体一沉（叹气）</td>
+</tr>
+<tr>
+<td>32</td>
+<td>47.23–50.02</td>
+<td>2.79</td>
+<td>三人全景（七分身）</td>
+<td>切回全景，缓拉 0.90→0.84；顶部横幅，"Experiments still decide." 落在 "Experiments" 上；句后三人挥手、GPT wink；出口光扫（T6）</td>
+</tr>
+</tbody>
+</table>
+<h3>自检（第 3 版）</h3>
+<p>做法：3002 帧每 10 帧抽一张（301 张）拼成 11 张联系表逐张看；每个剪接点的前一帧、首帧、后一帧（93 张）单独拼表看；没有牌子的镜头按每 3 帧加密抽查；另外用脚本量全部 3002 帧的平均亮度和相邻帧差。</p>
+<table>
+<thead>
+<tr>
+<th>检查项</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>镜头有变化</td>
+<td>32 个镜头，最长 2.79 秒，每句话至少换一次景别或换人</td>
+</tr>
+<tr>
+<td>裁切</td>
+<td>单人镜头头顶留白 36–54 px，下沿在腰到裙子；全景裁在大腿中段的裙摆上；全景里两侧角色和挥手的手都在画内</td>
+</tr>
+<tr>
+<td>字卡可读</td>
+<td>标题 62 px、大数字 178 px、出处 25 px，原尺寸逐张看过，五张牌都不挡脸</td>
+</tr>
+<tr>
+<td>字幕</td>
+<td>一行一个分句，落在腰和裙子上，不压脸和胸口；换人时上一位的字幕先收掉</td>
+</tr>
+<tr>
+<td>坏数字</td>
+<td>四张数字牌在 hit 词之前不显示任何数字；"17 / 211"、"50×" 计数停在词上，"80–100%"、"2" 直接出定值</td>
+</tr>
+<tr>
+<td>空白帧、黑帧</td>
+<td>平均亮度低于 20 的帧 0 张；只有第 0 帧是有意的奶白光扫起点、"Plot twist!" 是有意的 2 帧闪白</td>
+</tr>
+<tr>
+<td>重复帧</td>
+<td>相邻帧完全相同的 0 处</td>
+</tr>
+<tr>
+<td>时长</td>
+<td>50.02 秒，1080p60，和配音等长</td>
+</tr>
+</tbody>
+</table>
+<p>过程中查出并修掉的四处：
+1. 半身和胸像只差 13% 时看不出切了，拉开到 25%，并在三句长台词里加了听众反应镜头。
+2. 有牌子的镜头切到没牌子的镜头后，个别帧还留着上一张牌子（渲染时被卸载的图层残留）。改成牌子、字幕、闪白、速度线一直挂着、用透明度藏，加密抽查后没有再出现。
+3. 分屏第一帧两块画面都还没滑进来，是一张近乎全黑的帧。改成画面从第一帧就在，只有人物滑入。
+4. 换人镜头已经切过去了，上一位的字幕还挂着 0.1 秒。改成字幕在下一位的镜头开始前收掉。</p>

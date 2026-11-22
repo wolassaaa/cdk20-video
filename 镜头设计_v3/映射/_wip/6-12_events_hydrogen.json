@@ -1,0 +1,139 @@
+{
+  "schema": "cdk20.events/1",
+  "group": "6-12",
+  "tool": "blender",
+  "note": "HKBU SCIE1007 课程作业的科普视频：6-12 三维版事件表（Codex 照 18 填）。",
+  "holds": [],
+  "events": [
+    {
+      "id": "land",
+      "obj": "tag",
+      "verb": "move",
+      "at": {
+        "word": "6-12.w001",
+        "off": -6
+      },
+      "lead": 24,
+      "means": "段首：金色吊牌的牌面从盖满画面退到右区，挂在横料杆的左端",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "tag_swing",
+      "obj": "tag",
+      "verb": "move",
+      "at": {
+        "word": "6-12.w001",
+        "off": 0
+      },
+      "lead": 2,
+      "until": {
+        "dur": 30
+      },
+      "means": "吊牌在料杆上晃两下",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "road_grow",
+      "obj": "road",
+      "verb": "grow",
+      "at": {
+        "word": "6-12.w006",
+        "off": 0
+      },
+      "lead": 20,
+      "until": {
+        "word": "6-12.w009"
+      },
+      "means": "料杆向右一直长出画外，沿路依次弹出三块小站牌（A5）",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "tape_pop",
+      "obj": "tape",
+      "verb": "eject",
+      "at": {
+        "word": "6-12.w013",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "dur": 14
+      },
+      "means": "卷尺壳弹到料杆下方（A7）",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "tape_weeks",
+      "obj": "tape",
+      "verb": "move",
+      "at": {
+        "word": "6-12.w017",
+        "off": 0
+      },
+      "lead": 20,
+      "until": {
+        "dur": 10
+      },
+      "means": "尺带拉出短短一段（屏上 160 px），带面刻 `weeks`，锁扣\"咔\"",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "tape_years",
+      "obj": "tape",
+      "verb": "move",
+      "at": {
+        "word": "6-12.w018",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "word": "6-12.w019",
+        "edge": "start"
+      },
+      "means": "尺带接着飞快拉出画外，刻着 `years` 的一段滑过",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "strike",
+      "obj": "tape",
+      "verb": "appear",
+      "at": {
+        "word": "6-12.w019",
+        "off": 0
+      },
+      "lead": 4,
+      "until": {
+        "sentence_end": true
+      },
+      "means": "一道红线划掉 `years`；尺带缩回到 `weeks` 那一段",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "dive",
+      "obj": "tape",
+      "verb": "move",
+      "at": {
+        "word": "6-12.w019",
+        "off": 92
+      },
+      "means": "卷尺的骨白壳面冲镜头",
+      "guide": {
+        "kind": "none"
+      }
+    }
+  ]
+}

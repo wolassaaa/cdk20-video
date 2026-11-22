@@ -1,0 +1,249 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "3-06",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜 3-06（D）讲解卡：肝在上，三张嫌疑犯卡（CDK20 在中间）都连箭头到肝；but 时两边卡沉下去，CDK20 卡放大，蛋白上长出锁梁变成锁，钥匙从右边滑来对准；页面 OnCam306.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "frame",
+   "obj": "frame",
+   "verb": "grow",
+   "at": {
+    "word": "3-06.w001",
+    "off": 0
+   },
+   "means": "So：讲解卡外框画出",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "3-06.w001"
+   }
+  },
+  {
+   "id": "liver",
+   "obj": "liver",
+   "verb": "grow",
+   "at": {
+    "word": "3-06.w001",
+    "off": 0
+   },
+   "means": "So：肝长出",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "3-06.w001"
+   }
+  },
+  {
+   "id": "cards",
+   "obj": "cards",
+   "verb": "grow",
+   "at": {
+    "word": "3-06.w002",
+    "off": 0
+   },
+   "means": "a：三张嫌疑犯卡立起",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "word": "3-06.w003"
+   }
+  },
+  {
+   "id": "strong",
+   "obj": "strong",
+   "verb": "morph",
+   "at": {
+    "word": "3-06.w003",
+    "off": 0
+   },
+   "means": "strong：CDK20 卡加红框、往前一步",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "3-06.w003"
+   }
+  },
+  {
+   "id": "plate",
+   "obj": "plate",
+   "verb": "appear",
+   "at": {
+    "word": "3-06.w004",
+    "off": 0
+   },
+   "means": "suspect：字牌 a strong suspect",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "3-06.w004"
+   }
+  },
+  {
+   "id": "arr1",
+   "obj": "arr1",
+   "verb": "move",
+   "at": {
+    "word": "3-06.w005",
+    "off": 0
+   },
+   "means": "Not：左卡连线到肝",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "3-06.w005"
+   }
+  },
+  {
+   "id": "arr2",
+   "obj": "arr2",
+   "verb": "move",
+   "at": {
+    "word": "3-06.w007",
+    "off": 0
+   },
+   "means": "only：中卡连线到肝",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "3-06.w007"
+   }
+  },
+  {
+   "id": "arr3",
+   "obj": "arr3",
+   "verb": "move",
+   "at": {
+    "word": "3-06.w008",
+    "off": 0
+   },
+   "means": "cause：右卡连线到肝",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "3-06.w008"
+   }
+  },
+  {
+   "id": "note",
+   "obj": "note",
+   "verb": "appear",
+   "at": {
+    "word": "3-06.w009",
+    "off": 0
+   },
+   "means": "of：红笔 not the only cause",
+   "tool": "remotion",
+   "lead": 16,
+   "until": {
+    "word": "3-06.w009"
+   }
+  },
+  {
+   "id": "liverlab",
+   "obj": "liverlab",
+   "verb": "appear",
+   "at": {
+    "word": "3-06.w010",
+    "off": 0
+   },
+   "means": "liver：标签 liver cancer 写出",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "3-06.w010"
+   }
+  },
+  {
+   "id": "hop",
+   "obj": "hop",
+   "verb": "morph",
+   "at": {
+    "word": "3-06.w011",
+    "off": 0
+   },
+   "means": "cancer：肝轻跳一下",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "3-06.w011"
+   }
+  },
+  {
+   "id": "sink",
+   "obj": "sink",
+   "verb": "move",
+   "at": {
+    "word": "3-06.w012",
+    "off": 0
+   },
+   "means": "but：两边卡沉下去淡出，箭头和字牌淡出",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "word": "3-06.w012"
+   }
+  },
+  {
+   "id": "big",
+   "obj": "big",
+   "verb": "move",
+   "at": {
+    "word": "3-06.w013",
+    "off": 0
+   },
+   "means": "a：CDK20 卡移到中间放大",
+   "tool": "remotion",
+   "lead": 36,
+   "until": {
+    "word": "3-06.w013"
+   }
+  },
+  {
+   "id": "lock",
+   "obj": "lock",
+   "verb": "morph",
+   "at": {
+    "word": "3-06.w014",
+    "off": 0
+   },
+   "means": "lock：蛋白上画出锁梁",
+   "tool": "remotion",
+   "lead": 16,
+   "until": {
+    "word": "3-06.w014"
+   }
+  },
+  {
+   "id": "key",
+   "obj": "key",
+   "verb": "move",
+   "at": {
+    "word": "3-06.w015",
+    "off": 0
+   },
+   "means": "worth：钥匙滑来对准",
+   "tool": "remotion",
+   "lead": 24,
+   "until": {
+    "word": "3-06.w015"
+   }
+  },
+  {
+   "id": "try",
+   "obj": "try",
+   "verb": "appear",
+   "at": {
+    "word": "3-06.w016",
+    "off": 0
+   },
+   "means": "trying：红笔 worth trying",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "3-06.w016"
+   }
+  }
+ ]
+}

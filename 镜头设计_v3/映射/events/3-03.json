@@ -1,249 +1,244 @@
 {
- "schema": "cdk20.events/1",
- "group": "3-03",
- "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 3-03（VO）：一把锁标 the target，一把钥匙标 a candidate molecule，旁边另两把不同的锁；钥匙滑进自己的锁打勾，再去试另两把，各弹回一次打叉；最后钥匙回到自己的锁，字牌 selectivity。页面 Manual303.jsx。",
- "holds": [],
- "events": [
-  {
-   "id": "title",
-   "obj": "title",
-   "verb": "appear",
-   "at": {
-    "word": "3-03.w001",
-    "off": 0
-   },
-   "means": "Scientists：标题",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "lock",
-   "obj": "lock",
-   "verb": "grow",
-   "at": {
-    "word": "3-03.w004",
-    "off": 0
-   },
-   "means": "lock：左边第一把锁长出",
-   "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "lock"
-    ]
-   }
-  },
-  {
-   "id": "target",
-   "obj": "target",
-   "verb": "appear",
-   "at": {
-    "word": "3-03.w006",
-    "off": 0
-   },
-   "means": "target：锁下写 the target，锁上方画红色准星圈",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "key",
-   "obj": "key",
-   "verb": "grow",
-   "at": {
-    "word": "3-03.w009",
-    "off": 0
-   },
-   "means": "key：钥匙在锁左边长出",
-   "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "key"
-    ]
-   }
-  },
-  {
-   "id": "cand",
-   "obj": "cand",
-   "verb": "appear",
-   "at": {
-    "word": "3-03.w011",
-    "off": 0
-   },
-   "means": "candidate：钥匙下写 a candidate molecule",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "good",
-   "obj": "good",
-   "verb": "grow",
-   "at": {
-    "word": "3-03.w014",
-    "off": 0
-   },
-   "means": "good：右边另两把不同的锁长出",
-   "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "fits",
-   "obj": "fits",
-   "verb": "move",
-   "at": {
-    "word": "3-03.w016",
-    "off": 0
-   },
-   "means": "fits：钥匙滑进第一把锁",
-   "tool": "remotion",
-   "lead": 24,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "tight",
-   "obj": "tight",
-   "verb": "morph",
-   "at": {
-    "word": "3-03.w020",
-    "off": 0
-   },
-   "means": "tightly：锁一颤，上方打红勾",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "opens",
-   "obj": "opens",
-   "verb": "move",
-   "at": {
-    "word": "3-03.w022",
-    "off": 0
-   },
-   "means": "opens：钥匙拔出，跳到第二把锁左边",
-   "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "no",
-   "obj": "no",
-   "verb": "move",
-   "at": {
-    "word": "3-03.w023",
-    "off": 0
-   },
-   "means": "no：钥匙撞第二把锁弹回，打叉",
-   "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "else",
-   "obj": "else",
-   "verb": "move",
-   "at": {
-    "word": "3-03.w025",
-    "off": 0
-   },
-   "means": "else's：钥匙跳到第三把锁，弹回，打叉，批注 no one else's",
-   "tool": "remotion",
-   "lead": 18,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "back",
-   "obj": "back",
-   "verb": "move",
-   "at": {
-    "word": "3-03.w026",
-    "off": 0
-   },
-   "means": "That's：钥匙回到自己的锁，三个结果下连一条线收成一行",
-   "tool": "remotion",
-   "lead": 26,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "sel",
-   "obj": "sel",
-   "verb": "appear",
-   "at": {
-    "word": "3-03.w028",
-    "off": 0
-   },
-   "means": "selectivity：字牌落下",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  }
- ]
+  "schema": "cdk20.events/1",
+  "group": "3-03",
+  "tool": "blender",
+  "note": "HKBU SCIE1007 课程作业的科普视频：3-03 三维版事件表（Codex 照 18 填）。",
+  "holds": [],
+  "events": [
+    {
+      "id": "cam_out",
+      "obj": "camera",
+      "verb": "camera_to",
+      "at": {
+        "word": "3-03.w001",
+        "off": 30
+      },
+      "lead": 39,
+      "means": "段首：从锁孔环退出来到 1 号锁的 3/4 角（K0 → K1）",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "cut_open",
+      "obj": "lock_1",
+      "verb": "move",
+      "at": {
+        "word": "3-03.w004",
+        "off": 0
+      },
+      "lead": 16,
+      "until": {
+        "dur": 12
+      },
+      "means": "剖切面从锁顶往下扫开，露出五根弹子销（刀具下移，零件不动）",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "plate_target",
+      "obj": "plate_target",
+      "verb": "eject",
+      "at": {
+        "word": "3-03.w006",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "dur": 14
+      },
+      "means": "1 号锁上方的牌子 `target` 弹下，摆 2° 停稳",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "key_up",
+      "obj": "key",
+      "verb": "eject",
+      "at": {
+        "word": "3-03.w009",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "dur": 14
+      },
+      "means": "金钥匙从左边浇口弹下，转成 3/4 角露出齿",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "plate_cand",
+      "obj": "plate_cand",
+      "verb": "eject",
+      "at": {
+        "word": "3-03.w011",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "word": "3-03.w012"
+      },
+      "means": "钥匙下方的牌子 `candidate molecule` 弹下",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "key_in",
+      "obj": "key",
+      "verb": "move",
+      "at": {
+        "word": "3-03.w016",
+        "off": 0
+      },
+      "lead": 24,
+      "until": {
+        "dur": 6
+      },
+      "means": "钥匙滑进 1 号锁，五根销被齿一根根顶起",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "pins",
+      "obj": "lock_1",
+      "verb": "move",
+      "at": {
+        "word": "3-03.w018",
+        "off": 0
+      },
+      "lead": 10,
+      "until": {
+        "word": "3-03.w020",
+        "edge": "start"
+      },
+      "means": "五根销齐到分界线上",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "turn",
+      "obj": "lock_1",
+      "verb": "move",
+      "at": {
+        "word": "3-03.w020",
+        "off": 0
+      },
+      "lead": 10,
+      "until": {
+        "dur": 16
+      },
+      "means": "锁芯带钥匙转 32°，锁梁弹起 3.6 mm，镜头微震",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "cam_row",
+      "obj": "camera",
+      "verb": "camera_to",
+      "at": {
+        "word": "3-03.w022",
+        "off": 0
+      },
+      "lead": 36,
+      "until": {
+        "dur": 20
+      },
+      "means": "镜头右移，2 号、3 号锁入画；钥匙回正、从 1 号锁抽出（先回正 6 帧再退）",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "try2",
+      "obj": "key",
+      "verb": "move",
+      "at": {
+        "word": "3-03.w023",
+        "off": 0
+      },
+      "lead": 20,
+      "until": {
+        "word": "3-03.w024",
+        "edge": "start"
+      },
+      "means": "钥匙插进 2 号锁，两根销卡在分界线上，钥匙抖 ±2° 两下转不动，被弹簧推出",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "try3",
+      "obj": "key",
+      "verb": "move",
+      "at": {
+        "word": "3-03.w025",
+        "off": 0
+      },
+      "lead": 24,
+      "until": {
+        "sentence_end": true
+      },
+      "means": "钥匙插进 3 号锁，同样转不动，退出，停在 3 号锁旁",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "cam_wide",
+      "obj": "camera",
+      "verb": "camera_to",
+      "at": {
+        "word": "3-03.w026",
+        "off": 0
+      },
+      "lead": 20,
+      "until": {
+        "word": "3-03.w028",
+        "edge": "start"
+      },
+      "means": "镜头后拉到 K2，1 号锁梁开着，2、3 号关着",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "plate_sel",
+      "obj": "plate_sel",
+      "verb": "eject",
+      "at": {
+        "word": "3-03.w028",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "sentence_end": true
+      },
+      "means": "三把锁上方的长牌 `selectivity` 弹下",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "whip",
+      "obj": "camera",
+      "verb": "camera_to",
+      "at": {
+        "word": "3-03.w028",
+        "off": 58
+      },
+      "lead": 8,
+      "means": "最后 8 帧向右甩镜（T2），在 `selectivity.` 说完以后",
+      "guide": {
+        "kind": "none"
+      }
+    }
+  ]
 }

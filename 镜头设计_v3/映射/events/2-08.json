@@ -1,172 +1,269 @@
 {
- "schema": "cdk20.events/1",
- "group": "2-08",
- "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：第 2 章二维说明书页：路线图回来，前三站（Target、Hit、Improve）是今天要走的路，上面依次落锁、钥匙（带芯片）、烧瓶；最后一个大问题。出处 课程笔记 T2 p.14（结构）。页面 Manual208.jsx。",
- "holds": [],
- "events": [
-  {
-   "id": "road",
-   "obj": "road",
-   "verb": "grow",
-   "at": {
-    "word": "2-08.w001",
-    "off": 0
-   },
-   "means": "So here's where we're going：七站的路画出",
-   "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "word": "2-08.w005"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "lock",
-   "obj": "lock",
-   "verb": "grow",
-   "at": {
-    "word": "2-08.w008",
-    "off": 0
-   },
-   "means": "First, the lock：锁长在 Target 上方",
-   "tool": "remotion",
-   "lead": 40,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "focus",
-    "target": "lock",
-    "box": [
-     160,
-     308,
-     140,
-     200
-    ]
-   }
-  },
-  {
-   "id": "chip",
-   "obj": "chip",
-   "verb": "grow",
-   "at": {
-    "word": "2-08.w011",
-    "off": 0
-   },
-   "means": "AI：芯片长出",
-   "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "word": "2-08.w012"
-   },
-   "guide": {
-    "kind": "focus",
-    "target": "hit",
-    "box": [
-     368,
-     300,
-     230,
-     200
-    ]
-   }
-  },
-  {
-   "id": "key",
-   "obj": "key",
-   "verb": "grow",
-   "at": {
-    "word": "2-08.w015",
-    "off": 0
-   },
-   "means": "cut a key：钥匙长在 Hit 上方",
-   "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "focus",
-    "target": "hit",
-    "box": [
-     368,
-     300,
-     230,
-     200
-    ]
-   }
-  },
-  {
-   "id": "flask",
-   "obj": "flask",
-   "verb": "grow",
-   "at": {
-    "word": "2-08.w023",
-    "off": 0
-   },
-   "means": "in the lab：烧瓶长在 Improve 上方",
-   "tool": "remotion",
-   "lead": 30,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "focus",
-    "target": "flask",
-    "box": [
-     647,
-     332,
-     140,
-     177
-    ]
-   }
-  },
-  {
-   "id": "route",
-   "obj": "route",
-   "verb": "appear",
-   "at": {
-    "word": "2-08.w025",
-    "off": 0
-   },
-   "means": "finally：前三站红线框起来 today's route",
-   "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "word": "2-08.w028"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "big",
-   "obj": "plate_big",
-   "verb": "appear",
-   "at": {
-    "word": "2-08.w029",
-    "off": 0
-   },
-   "means": "how much did the computers really help：大问题字牌",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "focus",
-    "target": "far",
-    "rim": false,
-    "nudge": false,
-    "box": [
-     920,
-     570,
-     800,
-     80
-    ]
-   }
-  }
- ]
+  "schema": "cdk20.events/1",
+  "group": "2-08",
+  "tool": "blender",
+  "note": "HKBU SCIE1007 课程作业的科普视频：2-08 三维版事件表（Codex 照 18 填）。",
+  "holds": [],
+  "events": [
+    {
+      "id": "cam_est",
+      "obj": "cam_est",
+      "verb": "camera_to",
+      "at": {
+        "word": "2-08.w003",
+        "off": 0
+      },
+      "lead": 40,
+      "until": {
+        "sentence_end": true
+      },
+      "means": "定场：主料杆从左下斜向右上，前三站远近排开",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "pulse1",
+      "obj": "pulse1",
+      "verb": "flow",
+      "at": {
+        "word": "2-08.w008",
+        "off": -6
+      },
+      "lead": 45,
+      "means": "鼓包沿主料杆走到 Target 站",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "cam1",
+      "obj": "cam1",
+      "verb": "camera_to",
+      "at": {
+        "word": "2-08.w008",
+        "off": 0
+      },
+      "lead": 39,
+      "until": {
+        "dur": 20
+      },
+      "means": "镜头跟到 Target 站",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "red1",
+      "obj": "red1",
+      "verb": "appear",
+      "at": {
+        "word": "2-08.w008",
+        "off": 0
+      },
+      "lead": 2,
+      "until": {
+        "sentence_end": true
+      },
+      "means": "Target 站描红；站旁的蓝色挂锁在浇口上跳一下",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "pulse2",
+      "obj": "pulse2",
+      "verb": "flow",
+      "at": {
+        "word": "2-08.w013",
+        "off": -6
+      },
+      "lead": 60,
+      "means": "鼓包从 Target 走到 Hit",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "cam2",
+      "obj": "cam2",
+      "verb": "camera_to",
+      "at": {
+        "word": "2-08.w013",
+        "off": 0
+      },
+      "lead": 54,
+      "until": {
+        "dur": 20
+      },
+      "means": "镜头跟到 Hit 站",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "red2",
+      "obj": "red2",
+      "verb": "appear",
+      "at": {
+        "word": "2-08.w013",
+        "off": 0
+      },
+      "lead": 2,
+      "until": {
+        "dur": 30
+      },
+      "means": "Hit 站描红",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "key_glint",
+      "obj": "key_glint",
+      "verb": "move",
+      "at": {
+        "word": "2-08.w015",
+        "off": 0
+      },
+      "lead": 8,
+      "until": {
+        "sentence_end": true
+      },
+      "means": "Hit 站旁那格的金钥匙扫光、在浇口上颤",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "pulse3",
+      "obj": "pulse3",
+      "verb": "flow",
+      "at": {
+        "word": "2-08.w023",
+        "off": -6
+      },
+      "lead": 60,
+      "means": "鼓包从 Hit 走到 Improve",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "cam3",
+      "obj": "cam3",
+      "verb": "camera_to",
+      "at": {
+        "word": "2-08.w023",
+        "off": 0
+      },
+      "lead": 54,
+      "until": {
+        "dur": 20
+      },
+      "means": "镜头跟到 Improve 站",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "red3",
+      "obj": "red3",
+      "verb": "appear",
+      "at": {
+        "word": "2-08.w023",
+        "off": 0
+      },
+      "lead": 2,
+      "until": {
+        "sentence_end": true
+      },
+      "means": "Improve 站描红；旁边的烧瓶零件冒泡",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "cam_up",
+      "obj": "cam_up",
+      "verb": "camera_to",
+      "at": {
+        "word": "2-08.w027",
+        "off": 0
+      },
+      "lead": 40,
+      "until": {
+        "word": "2-08.w030",
+        "edge": "start"
+      },
+      "means": "镜头升起后拉，三段红路都在画里",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "far_focus",
+      "obj": "far_focus",
+      "verb": "move",
+      "at": {
+        "word": "2-08.w030",
+        "off": 0
+      },
+      "lead": 18,
+      "until": {
+        "dur": 30
+      },
+      "means": "焦点往路的远端拉，后面四站变实，它们是白的、没亮",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "chips",
+      "obj": "chips",
+      "verb": "move",
+      "at": {
+        "word": "2-08.w033",
+        "off": 0
+      },
+      "lead": 8,
+      "until": {
+        "word": "2-08.w035"
+      },
+      "means": "板上 PandaOmics、AlphaFold、Chemistry42 三块芯片依次扫光，各差 8 帧",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "lock_rise",
+      "obj": "lock_rise",
+      "verb": "move",
+      "at": {
+        "word": "2-08.w035",
+        "off": 0
+      },
+      "lead": 10,
+      "until": {
+        "sentence_end": true
+      },
+      "means": "蓝色挂锁从浇口上断开浮起",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "dive",
+      "obj": "dive",
+      "verb": "move",
+      "at": {
+        "word": "2-08.w035",
+        "off": 23
+      },
+      "means": "挂锁冲镜头，终点对准锁孔，盖满帧是金色口环和锁芯；位姿读 `oncam/3-01/handoff.json` 的 `head_pose`",
+      "guide": {
+        "kind": "none"
+      }
+    }
+  ]
 }

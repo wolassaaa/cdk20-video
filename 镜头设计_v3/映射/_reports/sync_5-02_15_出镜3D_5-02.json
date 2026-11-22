@@ -1,0 +1,150 @@
+{
+ "video": "D:\\。hkbu\\molecular science\\导演检查_20261123\\15_出镜3D_5-02.mp4",
+ "group": "5-02",
+ "fps": 60.0,
+ "frames": 416,
+ "offset_f": 0,
+ "S1": {
+  "word_events": 7,
+  "table_dev_max_f": 0,
+  "video_checked": 8,
+  "video_no_motion": [],
+  "pass_": true
+ },
+ "S2": {
+  "pass_": true,
+  "early": []
+ },
+ "S3": {
+  "pass_": true,
+  "longest_still_f": 0,
+  "bad": []
+ },
+ "S4": {
+  "pass_": true,
+  "looks_like_30": false,
+  "dup_frames": 0,
+  "stepped_dups": 0,
+  "stepped_ratio": 0.0,
+  "blend_frames": 0,
+  "blend_first": [],
+  "design_fade": 0,
+  "verdict": "原生（无变速重复/混帧）"
+ },
+ "sentences": [
+  {
+   "sid": "5-02.s1",
+   "f0": 32,
+   "f1": 125,
+   "last_motion_f": 125,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "5-02.s2",
+   "f0": 154,
+   "f1": 251,
+   "last_motion_f": 251,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "5-02.s3",
+   "f0": 259,
+   "f1": 299,
+   "last_motion_f": 299,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "5-02.s4",
+   "f0": 330,
+   "f1": 337,
+   "last_motion_f": 337,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  }
+ ],
+ "events": [
+  {
+   "id": "land",
+   "verb": "move",
+   "w": "Six",
+   "f_land": 26,
+   "table_dev": -6
+  },
+  {
+   "id": "slip",
+   "verb": "move",
+   "w": "barely",
+   "f_land": 80,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "swing",
+   "verb": "move",
+   "w": "held",
+   "f_land": 102,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "rise",
+   "verb": "eject",
+   "w": "one",
+   "f_land": 170,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "grey",
+   "verb": "appear",
+   "w": "stood",
+   "f_land": 208,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "fwd",
+   "verb": "move",
+   "w": "out.",
+   "f_land": 223,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "face",
+   "verb": "move",
+   "w": "name?",
+   "f_land": 270,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "engrave",
+   "verb": "appear",
+   "w": "001.",
+   "f_land": 330,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "dive",
+   "verb": "move",
+   "w": "001.",
+   "f_land": 415,
+   "table_dev": 85,
+   "video_motion_near_start": true
+  }
+ ],
+ "pass": true
+}

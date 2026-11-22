@@ -1,0 +1,20 @@
+[
+  {
+    "id": "proteins",
+    "text": "proteins",
+    "kind": "label",
+    "at_word": "3-02.w004"
+  },
+  {
+    "id": "drug",
+    "text": "drug",
+    "kind": "pen",
+    "at_word": "3-02.w012"
+  },
+  {
+    "id": "source",
+    "text": "Illustration (our toy model)",
+    "kind": "source",
+    "at_word": "3-02.w001"
+  }
+]

@@ -1,0 +1,114 @@
+{
+ "video": "D:\\。hkbu\\molecular science\\导演检查_20261120\\15_出镜3D_3-09.mp4",
+ "group": "3-09",
+ "fps": 60.0,
+ "frames": 340,
+ "offset_f": 0,
+ "S1": {
+  "word_events": 6,
+  "table_dev_max_f": 0,
+  "video_checked": 6,
+  "video_no_motion": [],
+  "pass_": true
+ },
+ "S2": {
+  "pass_": true,
+  "early": []
+ },
+ "S3": {
+  "pass_": true,
+  "longest_still_f": 0,
+  "bad": []
+ },
+ "S4": {
+  "pass_": true,
+  "looks_like_30": false,
+  "dup_frames": 0,
+  "stepped_dups": 0,
+  "stepped_ratio": 0.0,
+  "blend_frames": 0,
+  "blend_first": [],
+  "design_fade": 7,
+  "verdict": "原生（无变速重复/混帧）"
+ },
+ "sentences": [
+  {
+   "sid": "3-09.s1",
+   "f0": 32,
+   "f1": 159,
+   "last_motion_f": 159,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "3-09.s2",
+   "f0": 223,
+   "f1": 311,
+   "last_motion_f": 311,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  }
+ ],
+ "events": [
+  {
+   "id": "arrive",
+   "verb": "move",
+   "w": "So",
+   "f_land": 32,
+   "table_dev": 0
+  },
+  {
+   "id": "call",
+   "verb": "move",
+   "w": "lock",
+   "f_land": 84,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "dark",
+   "verb": "power_off",
+   "w": "nobody",
+   "f_land": 115,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "veil",
+   "verb": "morph",
+   "w": "see.",
+   "f_land": 149,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "key",
+   "verb": "grow",
+   "w": "key",
+   "f_land": 259,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "reach",
+   "verb": "move",
+   "w": "dark?",
+   "f_land": 293,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "dive",
+   "verb": "move",
+   "w": "dark?",
+   "f_land": 339,
+   "table_dev": 46,
+   "video_motion_near_start": true
+  }
+ ],
+ "pass": true
+}

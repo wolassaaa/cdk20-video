@@ -1,0 +1,44 @@
+[
+  {
+    "id": "tag_048",
+    "text": "048",
+    "kind": "engrave",
+    "at_word": "6-12.w001"
+  },
+  {
+    "id": "target",
+    "text": "Target",
+    "kind": "engrave",
+    "at_word": "6-12.w006"
+  },
+  {
+    "id": "hit",
+    "text": "Hit",
+    "kind": "engrave",
+    "at_word": "6-12.w006"
+  },
+  {
+    "id": "improve",
+    "text": "Improve",
+    "kind": "engrave",
+    "at_word": "6-12.w006"
+  },
+  {
+    "id": "weeks",
+    "text": "weeks",
+    "kind": "engrave",
+    "at_word": "6-12.w017"
+  },
+  {
+    "id": "years",
+    "text": "years",
+    "kind": "engrave",
+    "at_word": "6-12.w018"
+  },
+  {
+    "id": "source",
+    "text": "Illustration · timeline: Ren et al., Chem. Sci. 2023",
+    "kind": "source",
+    "at_word": "6-12.w001"
+  }
+]

@@ -1,0 +1,129 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "1-05+1-06+1-07",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜对话 1-05（D）、1-06（B）、1-07（C），说话人之间硬切，右边讲解位一张图连贯不断：药 → 更好的药？→ 一条长路 → 尺子上 10–17 years。页面 src/v3/manual/OnCam105.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "cap",
+   "obj": "capsule",
+   "verb": "grow",
+   "at": {
+    "word": "1-05.w001",
+    "off": 0
+   },
+   "means": "So：胶囊长出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "dur": 26
+   }
+  },
+  {
+   "id": "why",
+   "obj": "note_why",
+   "verb": "appear",
+   "at": {
+    "word": "1-05.w002",
+    "off": 0
+   },
+   "means": "why not：红笔问号 why not?",
+   "tool": "remotion",
+   "until": {
+    "word": "1-05.w004"
+   }
+  },
+  {
+   "id": "better",
+   "obj": "capsule",
+   "verb": "morph",
+   "at": {
+    "word": "1-05.w007",
+    "off": 0
+   },
+   "means": "better：胶囊发亮，旁边写 + better?",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "road",
+   "obj": "road",
+   "verb": "grow",
+   "at": {
+    "word": "1-06.w001",
+    "off": 0
+   },
+   "means": "Because…sounds：七站的路从左画到右",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "harder",
+   "obj": "road",
+   "verb": "morph",
+   "at": {
+    "word": "1-06.w004",
+    "off": 0
+   },
+   "means": "harder：路变长，站点之间拉开",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "1-06.w007"
+   }
+  },
+  {
+   "id": "ruler",
+   "obj": "ruler",
+   "verb": "grow",
+   "at": {
+    "word": "1-07.w001",
+    "off": 0
+   },
+   "means": "Like：尺子沿路长出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "1-07.w002",
+    "edge": "start"
+   }
+  },
+  {
+   "id": "plate",
+   "obj": "plate_years",
+   "verb": "appear",
+   "at": {
+    "word": "1-07.w002",
+    "off": 0
+   },
+   "means": "ten-to-seventeen-years：数字牌 10–17 years",
+   "tool": "remotion",
+   "lead": 2,
+   "until": {
+    "word": "1-07.w002"
+   }
+  },
+  {
+   "id": "hard",
+   "obj": "plate_years",
+   "verb": "morph",
+   "at": {
+    "word": "1-07.w003",
+    "off": 0
+   },
+   "means": "hard：数字牌一沉，红线划下",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "sentence_end": true
+   }
+  }
+ ]
+}

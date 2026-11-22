@@ -1,0 +1,172 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "2-08",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 2 章二维说明书页：路线图回来，前三站（Target、Hit、Improve）是今天要走的路，上面依次落锁、钥匙（带芯片）、烧瓶；最后一个大问题。出处 课程笔记 T2 p.14（结构）。页面 Manual208.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "road",
+   "obj": "road",
+   "verb": "grow",
+   "at": {
+    "word": "2-08.w001",
+    "off": 0
+   },
+   "means": "So here's where we're going：七站的路画出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "2-08.w005"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "lock",
+   "obj": "lock",
+   "verb": "grow",
+   "at": {
+    "word": "2-08.w008",
+    "off": 0
+   },
+   "means": "First, the lock：锁长在 Target 上方",
+   "tool": "remotion",
+   "lead": 40,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "lock",
+    "box": [
+     160,
+     308,
+     140,
+     200
+    ]
+   }
+  },
+  {
+   "id": "chip",
+   "obj": "chip",
+   "verb": "grow",
+   "at": {
+    "word": "2-08.w011",
+    "off": 0
+   },
+   "means": "AI：芯片长出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "2-08.w012"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "hit",
+    "box": [
+     368,
+     300,
+     230,
+     200
+    ]
+   }
+  },
+  {
+   "id": "key",
+   "obj": "key",
+   "verb": "grow",
+   "at": {
+    "word": "2-08.w015",
+    "off": 0
+   },
+   "means": "cut a key：钥匙长在 Hit 上方",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "hit",
+    "box": [
+     368,
+     300,
+     230,
+     200
+    ]
+   }
+  },
+  {
+   "id": "flask",
+   "obj": "flask",
+   "verb": "grow",
+   "at": {
+    "word": "2-08.w023",
+    "off": 0
+   },
+   "means": "in the lab：烧瓶长在 Improve 上方",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "flask",
+    "box": [
+     647,
+     332,
+     140,
+     177
+    ]
+   }
+  },
+  {
+   "id": "route",
+   "obj": "route",
+   "verb": "appear",
+   "at": {
+    "word": "2-08.w025",
+    "off": 0
+   },
+   "means": "finally：前三站红线框起来 today's route",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "2-08.w028"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "big",
+   "obj": "plate_big",
+   "verb": "appear",
+   "at": {
+    "word": "2-08.w029",
+    "off": 0
+   },
+   "means": "how much did the computers really help：大问题字牌",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "focus",
+    "target": "far",
+    "rim": false,
+    "nudge": false,
+    "box": [
+     920,
+     570,
+     800,
+     80
+    ]
+   }
+  }
+ ]
+}

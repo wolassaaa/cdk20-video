@@ -1,0 +1,377 @@
+{
+ "video": "D:\\。hkbu\\molecular science\\导演检查_20261120\\13_节点2_3-04.mp4",
+ "group": "3-04",
+ "fps": 59.999,
+ "frames": 1030,
+ "offset_f": 0,
+ "S1": {
+  "word_events": 20,
+  "table_dev_max_f": 0,
+  "video_checked": 34,
+  "video_no_motion": [],
+  "pass_": true
+ },
+ "S2": {
+  "pass_": true,
+  "early": []
+ },
+ "S3": {
+  "pass_": true,
+  "longest_still_f": 0,
+  "bad": []
+ },
+ "S4": {
+  "pass_": true,
+  "looks_like_30": false,
+  "dup_frames": 0,
+  "stepped_dups": 0,
+  "stepped_ratio": 0.0,
+  "blend_frames": 11,
+  "blend_first": [
+   233,
+   349,
+   743,
+   795,
+   796,
+   797,
+   798,
+   800,
+   801,
+   802,
+   803
+  ],
+  "design_fade": 24,
+  "verdict": "有混帧（变速慢放）"
+ },
+ "sentences": [
+  {
+   "sid": "3-04.s1",
+   "f0": 9,
+   "f1": 110,
+   "last_motion_f": 110,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "3-04.s2",
+   "f0": 145,
+   "f1": 337,
+   "last_motion_f": 337,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "3-04.s3",
+   "f0": 368,
+   "f1": 678,
+   "last_motion_f": 678,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "3-04.s4",
+   "f0": 731,
+   "f1": 1015,
+   "last_motion_f": 1015,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  }
+ ],
+ "events": [
+  {
+   "id": "wipe",
+   "verb": "move",
+   "w": "Our",
+   "f_land": 12,
+   "table_dev": 3
+  },
+  {
+   "id": "pulse",
+   "verb": "flow",
+   "w": "CDK20.",
+   "f_land": 52,
+   "table_dev": -8
+  },
+  {
+   "id": "cam_board",
+   "verb": "camera_to",
+   "w": "CDK20.",
+   "f_land": 60,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "key_follow",
+   "verb": "move",
+   "w": "CDK20.",
+   "f_land": 80,
+   "table_dev": 20,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "sock_eject",
+   "verb": "eject",
+   "w": "CDK20.",
+   "f_land": 60,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "sock_turn",
+   "verb": "move",
+   "w": "CDK20.",
+   "f_land": 104,
+   "table_dev": 44,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_near",
+   "verb": "camera_to",
+   "w": "enzyme,",
+   "f_land": 143,
+   "table_dev": -24,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "lid_prep",
+   "verb": "move",
+   "w": "enzyme,",
+   "f_land": 167,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "lid_open",
+   "verb": "move",
+   "w": "enzyme,",
+   "f_land": 203,
+   "table_dev": 36,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_cabin",
+   "verb": "camera_to",
+   "w": "protein",
+   "f_land": 240,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "packet",
+   "verb": "power_on",
+   "w": "chemical",
+   "f_land": 289,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "piston_push",
+   "verb": "move",
+   "w": "chemical",
+   "f_land": 289,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "atp_out",
+   "verb": "plug_out",
+   "w": "keyhole",
+   "f_land": 379,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "lamp_dim",
+   "verb": "power_off",
+   "w": "keyhole",
+   "f_land": 379,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "lid_close",
+   "verb": "move",
+   "w": "is",
+   "f_land": 433,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_front",
+   "verb": "camera_to",
+   "w": "is",
+   "f_land": 433,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "ring_glow",
+   "verb": "appear",
+   "w": "pocket",
+   "f_land": 449,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "drill_in",
+   "verb": "camera_to",
+   "w": "pocket",
+   "f_land": 500,
+   "table_dev": 51,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "real_in",
+   "verb": "dissolve",
+   "w": "pocket",
+   "f_land": 500,
+   "table_dev": 51,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "real_out",
+   "verb": "dissolve",
+   "w": "small",
+   "f_land": 560,
+   "table_dev": -17,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "drill_out",
+   "verb": "camera_to",
+   "w": "small",
+   "f_land": 620,
+   "table_dev": 43,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "atp_free",
+   "verb": "eject",
+   "w": "molecule",
+   "f_land": 599,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "atp_plug",
+   "verb": "plug_in",
+   "w": "ATP.",
+   "f_land": 657,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "power_on",
+   "verb": "power_on",
+   "w": "ATP.",
+   "f_land": 659,
+   "table_dev": 2,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_side",
+   "verb": "camera_to",
+   "w": "Plug",
+   "f_land": 731,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "plug_enter",
+   "verb": "move",
+   "w": "Plug",
+   "f_land": 731,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "atp_eject",
+   "verb": "eject_swap",
+   "w": "that",
+   "f_land": 754,
+   "table_dev": 4,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "lamp_dim2",
+   "verb": "power_off",
+   "w": "that",
+   "f_land": 750,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "plug048_in",
+   "verb": "plug_in",
+   "w": "pocket",
+   "f_land": 777,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "twist",
+   "verb": "twist",
+   "w": "key,",
+   "f_land": 852,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "clamp",
+   "verb": "clamp",
+   "w": "key,",
+   "f_land": 854,
+   "table_dev": 2,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "lid_open2",
+   "verb": "move",
+   "w": "enzyme",
+   "f_land": 915,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_cabin2",
+   "verb": "camera_to",
+   "w": "enzyme",
+   "f_land": 936,
+   "table_dev": 21,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "stop",
+   "verb": "power_off",
+   "w": "can't",
+   "f_land": 950,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "pull_back",
+   "verb": "camera_to",
+   "w": "job.",
+   "f_land": 1015,
+   "table_dev": 18,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "whip",
+   "verb": "camera_to",
+   "w": "job.",
+   "f_land": 1029,
+   "table_dev": 32,
+   "video_motion_near_start": true
+  }
+ ],
+ "pass": true
+}

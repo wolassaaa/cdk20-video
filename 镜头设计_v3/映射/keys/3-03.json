@@ -5,13 +5,13 @@
  "segs": [
   "3-03"
  ],
- "tool": "remotion",
+ "tool": "blender",
  "fps": 60,
  "len_f": 732,
  "cut": "cut_v8",
- "cut_start_f": 17966,
- "cut_start_s": 299.43,
- "master_built": "2026-11-18 02:33:56 +09:00",
+ "cut_start_f": 17590,
+ "cut_start_s": 293.1633,
+ "master_built": "2026-11-22 20:33:03 +09:00",
  "words_hash": "6d8a5042f6e9",
  "events_src": "镜头设计_v3/映射/events/3-03.json",
  "words": [
@@ -22,8 +22,8 @@
    "sid": "3-03.s1",
    "f0": 9,
    "f1": 51,
-   "F0": 17975,
-   "F1": 18017
+   "F0": 17599,
+   "F1": 17641
   },
   {
    "wid": "3-03.w002",
@@ -32,8 +32,8 @@
    "sid": "3-03.s1",
    "f0": 61,
    "f1": 78,
-   "F0": 18027,
-   "F1": 18044
+   "F0": 17651,
+   "F1": 17668
   },
   {
    "wid": "3-03.w003",
@@ -42,8 +42,8 @@
    "sid": "3-03.s1",
    "f0": 80,
    "f1": 85,
-   "F0": 18046,
-   "F1": 18051
+   "F0": 17670,
+   "F1": 17675
   },
   {
    "wid": "3-03.w004",
@@ -52,8 +52,8 @@
    "sid": "3-03.s1",
    "f0": 98,
    "f1": 112,
-   "F0": 18064,
-   "F1": 18078
+   "F0": 17688,
+   "F1": 17702
   },
   {
    "wid": "3-03.w005",
@@ -62,8 +62,8 @@
    "sid": "3-03.s1",
    "f0": 117,
    "f1": 122,
-   "F0": 18083,
-   "F1": 18088
+   "F0": 17707,
+   "F1": 17712
   },
   {
    "wid": "3-03.w006",
@@ -72,8 +72,8 @@
    "sid": "3-03.s1",
    "f0": 127,
    "f1": 157,
-   "F0": 18093,
-   "F1": 18123
+   "F0": 17717,
+   "F1": 17747
   },
   {
    "wid": "3-03.w007",
@@ -82,8 +82,8 @@
    "sid": "3-03.s1",
    "f0": 193,
    "f1": 200,
-   "F0": 18159,
-   "F1": 18166
+   "F0": 17783,
+   "F1": 17790
   },
   {
    "wid": "3-03.w008",
@@ -92,8 +92,8 @@
    "sid": "3-03.s1",
    "f0": 201,
    "f1": 205,
-   "F0": 18167,
-   "F1": 18171
+   "F0": 17791,
+   "F1": 17795
   },
   {
    "wid": "3-03.w009",
@@ -102,8 +102,8 @@
    "sid": "3-03.s1",
    "f0": 210,
    "f1": 227,
-   "F0": 18176,
-   "F1": 18193
+   "F0": 17800,
+   "F1": 17817
   },
   {
    "wid": "3-03.w010",
@@ -112,8 +112,8 @@
    "sid": "3-03.s1",
    "f0": 228,
    "f1": 229,
-   "F0": 18194,
-   "F1": 18195
+   "F0": 17818,
+   "F1": 17819
   },
   {
    "wid": "3-03.w011",
@@ -122,8 +122,8 @@
    "sid": "3-03.s1",
    "f0": 237,
    "f1": 269,
-   "F0": 18203,
-   "F1": 18235
+   "F0": 17827,
+   "F1": 17859
   },
   {
    "wid": "3-03.w012",
@@ -132,8 +132,8 @@
    "sid": "3-03.s1",
    "f0": 272,
    "f1": 301,
-   "F0": 18238,
-   "F1": 18267
+   "F0": 17862,
+   "F1": 17891
   },
   {
    "wid": "3-03.w013",
@@ -142,8 +142,8 @@
    "sid": "3-03.s2",
    "f0": 330,
    "f1": 331,
-   "F0": 18296,
-   "F1": 18297
+   "F0": 17920,
+   "F1": 17921
   },
   {
    "wid": "3-03.w014",
@@ -152,8 +152,8 @@
    "sid": "3-03.s2",
    "f0": 338,
    "f1": 351,
-   "F0": 18304,
-   "F1": 18317
+   "F0": 17928,
+   "F1": 17941
   },
   {
    "wid": "3-03.w015",
@@ -162,8 +162,8 @@
    "sid": "3-03.s2",
    "f0": 356,
    "f1": 369,
-   "F0": 18322,
-   "F1": 18335
+   "F0": 17946,
+   "F1": 17959
   },
   {
    "wid": "3-03.w016",
@@ -172,8 +172,8 @@
    "sid": "3-03.s2",
    "f0": 374,
    "f1": 389,
-   "F0": 18340,
-   "F1": 18355
+   "F0": 17964,
+   "F1": 17979
   },
   {
    "wid": "3-03.w017",
@@ -182,8 +182,8 @@
    "sid": "3-03.s2",
    "f0": 396,
    "f1": 403,
-   "F0": 18362,
-   "F1": 18369
+   "F0": 17986,
+   "F1": 17993
   },
   {
    "wid": "3-03.w018",
@@ -192,8 +192,8 @@
    "sid": "3-03.s2",
    "f0": 413,
    "f1": 425,
-   "F0": 18379,
-   "F1": 18391
+   "F0": 18003,
+   "F1": 18015
   },
   {
    "wid": "3-03.w019",
@@ -202,8 +202,8 @@
    "sid": "3-03.s2",
    "f0": 430,
    "f1": 443,
-   "F0": 18396,
-   "F1": 18409
+   "F0": 18020,
+   "F1": 18033
   },
   {
    "wid": "3-03.w020",
@@ -212,8 +212,8 @@
    "sid": "3-03.s2",
    "f0": 448,
    "f1": 478,
-   "F0": 18414,
-   "F1": 18444
+   "F0": 18038,
+   "F1": 18068
   },
   {
    "wid": "3-03.w021",
@@ -222,8 +222,8 @@
    "sid": "3-03.s2",
    "f0": 493,
    "f1": 503,
-   "F0": 18459,
-   "F1": 18469
+   "F0": 18083,
+   "F1": 18093
   },
   {
    "wid": "3-03.w022",
@@ -232,8 +232,8 @@
    "sid": "3-03.s2",
    "f0": 512,
    "f1": 535,
-   "F0": 18478,
-   "F1": 18501
+   "F0": 18102,
+   "F1": 18125
   },
   {
    "wid": "3-03.w023",
@@ -242,8 +242,8 @@
    "sid": "3-03.s2",
    "f0": 535,
    "f1": 541,
-   "F0": 18501,
-   "F1": 18507
+   "F0": 18125,
+   "F1": 18131
   },
   {
    "wid": "3-03.w024",
@@ -252,8 +252,8 @@
    "sid": "3-03.s2",
    "f0": 551,
    "f1": 559,
-   "F0": 18517,
-   "F1": 18525
+   "F0": 18141,
+   "F1": 18149
   },
   {
    "wid": "3-03.w025",
@@ -262,8 +262,8 @@
    "sid": "3-03.s2",
    "f0": 563,
    "f1": 592,
-   "F0": 18529,
-   "F1": 18558
+   "F0": 18153,
+   "F1": 18182
   },
   {
    "wid": "3-03.w026",
@@ -272,8 +272,8 @@
    "sid": "3-03.s3",
    "f0": 634,
    "f1": 646,
-   "F0": 18600,
-   "F1": 18612
+   "F0": 18224,
+   "F1": 18236
   },
   {
    "wid": "3-03.w027",
@@ -282,8 +282,8 @@
    "sid": "3-03.s3",
    "f0": 651,
    "f1": 667,
-   "F0": 18617,
-   "F1": 18633
+   "F0": 18241,
+   "F1": 18257
   },
   {
    "wid": "3-03.w028",
@@ -292,8 +292,8 @@
    "sid": "3-03.s3",
    "f0": 673,
    "f1": 718,
-   "F0": 18639,
-   "F1": 18684
+   "F0": 18263,
+   "F1": 18308
   }
  ],
  "sentences": [
@@ -325,268 +325,255 @@
  "holds": [],
  "events": [
   {
-   "id": "title",
-   "obj": "title",
-   "verb": "appear",
+   "id": "cam_out",
+   "obj": "camera",
+   "verb": "camera_to",
    "ease": "inout",
-   "means": "Scientists：标题",
-   "f_start": 1,
-   "f_land": 9,
-   "f_end": 301,
-   "until": "3-03.s1",
+   "means": "段首：从锁孔环退出来到 1 号锁的 3/4 角（K0 → K1）",
+   "f_start": 0,
+   "f_land": 39,
+   "f_end": 39,
+   "until": null,
    "word": "3-03.w001",
    "w": "Scientists",
    "key": "scientists#1",
    "sid": "3-03.s1",
    "word_f0": 9,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 17967,
-   "F_land": 17975,
-   "F_end": 18267
+   "F_start": 17590,
+   "F_land": 17629,
+   "F_end": 17629
   },
   {
-   "id": "lock",
-   "obj": "lock",
-   "verb": "grow",
+   "id": "cut_open",
+   "obj": "lock_1",
+   "verb": "move",
    "ease": "inout",
-   "means": "lock：左边第一把锁长出",
-   "f_start": 78,
+   "means": "剖切面从锁顶往下扫开，露出五根弹子销（刀具下移，零件不动）",
+   "f_start": 82,
    "f_land": 98,
-   "f_end": 301,
-   "until": "3-03.s1",
+   "f_end": 110,
+   "until": null,
    "word": "3-03.w004",
    "w": "lock",
    "key": "lock#1",
    "sid": "3-03.s1",
    "word_f0": 98,
-   "tool": "remotion",
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "lock"
-    ]
-   },
-   "F_start": 18044,
-   "F_land": 18064,
-   "F_end": 18267,
+   "F_start": 17672,
+   "F_land": 17688,
+   "F_end": 17700,
    "g_start": 72,
    "g_on": 90,
-   "g_end": 184,
-   "g_off": 202,
+   "g_end": 141,
+   "g_off": 171,
    "g_tick": 94,
-   "G_start": 18038,
-   "G_on": 18056,
-   "G_end": 18150,
-   "G_off": 18168,
-   "G_tick": 18060
+   "G_start": 17662,
+   "G_on": 17680,
+   "G_end": 17731,
+   "G_off": 17761,
+   "G_tick": 17684
   },
   {
-   "id": "target",
-   "obj": "target",
-   "verb": "appear",
+   "id": "plate_target",
+   "obj": "plate_target",
+   "verb": "eject",
    "ease": "inout",
-   "means": "target：锁下写 the target，锁上方画红色准星圈",
-   "f_start": 119,
+   "means": "1 号锁上方的牌子 target 弹下，摆 2° 停稳",
+   "f_start": 121,
    "f_land": 127,
-   "f_end": 301,
-   "until": "3-03.s1",
+   "f_end": 141,
+   "until": null,
    "word": "3-03.w006",
    "w": "target,",
    "key": "target#1",
    "sid": "3-03.s1",
    "word_f0": 127,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 18085,
-   "F_land": 18093,
-   "F_end": 18267
+   "F_start": 17711,
+   "F_land": 17717,
+   "F_end": 17731,
+   "guide_into": "cut_open"
   },
   {
-   "id": "key",
+   "id": "key_up",
    "obj": "key",
-   "verb": "grow",
+   "verb": "eject",
    "ease": "inout",
-   "means": "key：钥匙在锁左边长出",
-   "f_start": 190,
+   "means": "金钥匙从左边浇口弹下，转成 3/4 角露出齿",
+   "f_start": 204,
    "f_land": 210,
-   "f_end": 301,
-   "until": "3-03.s1",
+   "f_end": 224,
+   "until": null,
    "word": "3-03.w009",
    "w": "key",
    "key": "key#1",
    "sid": "3-03.s1",
    "word_f0": 210,
-   "tool": "remotion",
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "key"
-    ]
-   },
-   "F_start": 18156,
-   "F_land": 18176,
-   "F_end": 18267,
+   "F_start": 17794,
+   "F_land": 17800,
+   "F_end": 17814,
    "g_start": 184,
    "g_on": 202,
    "g_end": 301,
    "g_off": 331,
    "g_tick": 206,
-   "G_start": 18150,
-   "G_on": 18168,
-   "G_end": 18267,
-   "G_off": 18297,
-   "G_tick": 18172
+   "G_start": 17774,
+   "G_on": 17792,
+   "G_end": 17891,
+   "G_off": 17921,
+   "G_tick": 17796
   },
   {
-   "id": "cand",
-   "obj": "cand",
-   "verb": "appear",
+   "id": "plate_cand",
+   "obj": "plate_cand",
+   "verb": "eject",
    "ease": "inout",
-   "means": "candidate：钥匙下写 a candidate molecule",
-   "f_start": 229,
+   "means": "钥匙下方的牌子 candidate molecule 弹下",
+   "f_start": 231,
    "f_land": 237,
    "f_end": 301,
-   "until": "3-03.s1",
+   "until": "3-03.w012",
    "word": "3-03.w011",
    "w": "candidate",
    "key": "candidate#1",
    "sid": "3-03.s1",
    "word_f0": 237,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 18195,
-   "F_land": 18203,
-   "F_end": 18267
+   "F_start": 17821,
+   "F_land": 17827,
+   "F_end": 17891,
+   "guide_into": "key_up"
   },
   {
-   "id": "good",
-   "obj": "good",
-   "verb": "grow",
-   "ease": "inout",
-   "means": "good：右边另两把不同的锁长出",
-   "f_start": 318,
-   "f_land": 338,
-   "f_end": 592,
-   "until": "3-03.s2",
-   "word": "3-03.w014",
-   "w": "good",
-   "key": "good#1",
-   "sid": "3-03.s2",
-   "word_f0": 338,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 18284,
-   "F_land": 18304,
-   "F_end": 18558
-  },
-  {
-   "id": "fits",
-   "obj": "fits",
+   "id": "key_in",
+   "obj": "key",
    "verb": "move",
    "ease": "inout",
-   "means": "fits：钥匙滑进第一把锁",
+   "means": "钥匙滑进 1 号锁，五根销被齿一根根顶起",
    "f_start": 350,
    "f_land": 374,
-   "f_end": 592,
-   "until": "3-03.s2",
+   "f_end": 380,
+   "until": null,
    "word": "3-03.w016",
    "w": "fits",
    "key": "fits#1",
    "sid": "3-03.s2",
    "word_f0": 374,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 18316,
-   "F_land": 18340,
-   "F_end": 18558
+   "F_start": 17940,
+   "F_land": 17964,
+   "F_end": 17970,
+   "g_start": 348,
+   "g_on": 366,
+   "g_end": 380,
+   "g_off": 405,
+   "g_tick": 370,
+   "G_start": 17938,
+   "G_on": 17956,
+   "G_end": 17970,
+   "G_off": 17995,
+   "G_tick": 17960
   },
   {
-   "id": "tight",
-   "obj": "tight",
-   "verb": "morph",
+   "id": "pins",
+   "obj": "lock_1",
+   "verb": "move",
    "ease": "inout",
-   "means": "tightly：锁一颤，上方打红勾",
-   "f_start": 440,
+   "means": "五根销齐到分界线上",
+   "f_start": 403,
+   "f_land": 413,
+   "f_end": 448,
+   "until": "3-03.w020",
+   "word": "3-03.w018",
+   "w": "own",
+   "key": "own#1",
+   "sid": "3-03.s2",
+   "word_f0": 413,
+   "F_start": 17993,
+   "F_land": 18003,
+   "F_end": 18038,
+   "g_start": 387,
+   "g_on": 405,
+   "g_end": 448,
+   "g_off": 478,
+   "g_tick": 409,
+   "G_start": 17977,
+   "G_on": 17995,
+   "G_end": 18038,
+   "G_off": 18068,
+   "G_tick": 17999
+  },
+  {
+   "id": "turn",
+   "obj": "lock_1",
+   "verb": "move",
+   "ease": "inout",
+   "means": "锁芯带钥匙转 32°，锁梁弹起 3.6 mm，镜头微震",
+   "f_start": 438,
    "f_land": 448,
-   "f_end": 592,
-   "until": "3-03.s2",
+   "f_end": 464,
+   "until": null,
    "word": "3-03.w020",
    "w": "tightly,",
    "key": "tightly#1",
    "sid": "3-03.s2",
    "word_f0": 448,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 18406,
-   "F_land": 18414,
-   "F_end": 18558
+   "F_start": 18028,
+   "F_land": 18038,
+   "F_end": 18054,
+   "guide_into": "pins"
   },
   {
-   "id": "opens",
-   "obj": "opens",
-   "verb": "move",
+   "id": "cam_row",
+   "obj": "camera",
+   "verb": "camera_to",
    "ease": "inout",
-   "means": "opens：钥匙拔出，跳到第二把锁左边",
-   "f_start": 492,
+   "means": "镜头右移，2 号、3 号锁入画；钥匙回正、从 1 号锁抽出（先回正 6 帧再退）",
+   "f_start": 476,
    "f_land": 512,
-   "f_end": 592,
-   "until": "3-03.s2",
+   "f_end": 532,
+   "until": null,
    "word": "3-03.w022",
    "w": "opens",
    "key": "opens#1",
    "sid": "3-03.s2",
    "word_f0": 512,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 18458,
-   "F_land": 18478,
-   "F_end": 18558
+   "F_start": 18066,
+   "F_land": 18102,
+   "F_end": 18122
   },
   {
-   "id": "no",
-   "obj": "no",
+   "id": "try2",
+   "obj": "key",
    "verb": "move",
    "ease": "inout",
-   "means": "no：钥匙撞第二把锁弹回，打叉",
-   "f_start": 521,
+   "means": "钥匙插进 2 号锁，两根销卡在分界线上，钥匙抖 ±2° 两下转不动，被弹簧推出",
+   "f_start": 515,
    "f_land": 535,
-   "f_end": 592,
-   "until": "3-03.s2",
+   "f_end": 551,
+   "until": "3-03.w024",
    "word": "3-03.w023",
    "w": "no",
    "key": "no#1",
    "sid": "3-03.s2",
    "word_f0": 535,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 18487,
-   "F_land": 18501,
-   "F_end": 18558
+   "F_start": 18105,
+   "F_land": 18125,
+   "F_end": 18141,
+   "g_start": 509,
+   "g_on": 527,
+   "g_end": 551,
+   "g_off": 581,
+   "g_tick": 531,
+   "G_start": 18099,
+   "G_on": 18117,
+   "G_end": 18141,
+   "G_off": 18171,
+   "G_tick": 18121
   },
   {
-   "id": "else",
-   "obj": "else",
+   "id": "try3",
+   "obj": "key",
    "verb": "move",
    "ease": "inout",
-   "means": "else's：钥匙跳到第三把锁，弹回，打叉，批注 no one else's",
-   "f_start": 545,
+   "means": "钥匙插进 3 号锁，同样转不动，退出，停在 3 号锁旁",
+   "f_start": 539,
    "f_land": 563,
    "f_end": 592,
    "until": "3-03.s2",
@@ -595,44 +582,37 @@
    "key": "else's#1",
    "sid": "3-03.s2",
    "word_f0": 563,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 18511,
-   "F_land": 18529,
-   "F_end": 18558
+   "F_start": 18129,
+   "F_land": 18153,
+   "F_end": 18182,
+   "guide_into": "try2"
   },
   {
-   "id": "back",
-   "obj": "back",
-   "verb": "move",
+   "id": "cam_wide",
+   "obj": "camera",
+   "verb": "camera_to",
    "ease": "inout",
-   "means": "That's：钥匙回到自己的锁，三个结果下连一条线收成一行",
-   "f_start": 608,
+   "means": "镜头后拉到 K2，1 号锁梁开着，2、3 号关着",
+   "f_start": 614,
    "f_land": 634,
-   "f_end": 718,
-   "until": "3-03.s3",
+   "f_end": 673,
+   "until": "3-03.w028",
    "word": "3-03.w026",
    "w": "That's",
    "key": "that's#1",
    "sid": "3-03.s3",
    "word_f0": 634,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 18574,
-   "F_land": 18600,
-   "F_end": 18684
+   "F_start": 18204,
+   "F_land": 18224,
+   "F_end": 18263
   },
   {
-   "id": "sel",
-   "obj": "sel",
-   "verb": "appear",
+   "id": "plate_sel",
+   "obj": "plate_sel",
+   "verb": "eject",
    "ease": "inout",
-   "means": "selectivity：字牌落下",
-   "f_start": 663,
+   "means": "三把锁上方的长牌 selectivity 弹下",
+   "f_start": 667,
    "f_land": 673,
    "f_end": 718,
    "until": "3-03.s3",
@@ -641,46 +621,64 @@
    "key": "selectivity#1",
    "sid": "3-03.s3",
    "word_f0": 673,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 18629,
-   "F_land": 18639,
-   "F_end": 18684
+   "F_start": 18257,
+   "F_land": 18263,
+   "F_end": 18308,
+   "guide_into": "try2"
+  },
+  {
+   "id": "whip",
+   "obj": "camera",
+   "verb": "camera_to",
+   "ease": "inout",
+   "means": "最后 8 帧向右甩镜（T2），在 selectivity. 说完以后",
+   "f_start": 723,
+   "f_land": 731,
+   "f_end": 731,
+   "until": null,
+   "word": "3-03.w028",
+   "w": "selectivity.",
+   "key": "selectivity#1",
+   "sid": "3-03.s3",
+   "word_f0": 673,
+   "F_start": 18313,
+   "F_land": 18321,
+   "F_end": 18321
   }
  ],
  "guides": [
   {
-   "id": "lock",
+   "id": "cut_open",
    "target": [
-    "lock"
+    "lock_1",
+    "plate_target"
    ],
    "kind": "focus",
    "gs": 72,
    "gon": 90,
    "land": 98,
-   "gend": 184,
-   "goff": 202,
+   "gend": 141,
+   "goff": 171,
    "tick": 94,
-   "nudge": false,
+   "nudge": true,
    "rim": true,
-   "ev_s": 78,
+   "ev_s": 82,
    "events": [
-    "lock"
+    "cut_open",
+    "plate_target"
    ],
-   "handoff": "key",
-   "G_start": 18038,
-   "G_on": 18056,
-   "G_land": 18064,
-   "G_end": 18150,
-   "G_off": 18168,
-   "G_tick": 18060
+   "G_start": 17662,
+   "G_on": 17680,
+   "G_land": 17688,
+   "G_end": 17731,
+   "G_off": 17761,
+   "G_tick": 17684
   },
   {
-   "id": "key",
+   "id": "key_up",
    "target": [
-    "key"
+    "key",
+    "plate_cand"
    ],
    "kind": "focus",
    "gs": 184,
@@ -691,16 +689,96 @@
    "tick": 206,
    "nudge": false,
    "rim": true,
-   "ev_s": 190,
+   "ev_s": 204,
    "events": [
+    "key_up",
+    "plate_cand"
+   ],
+   "G_start": 17774,
+   "G_on": 17792,
+   "G_land": 17800,
+   "G_end": 17891,
+   "G_off": 17921,
+   "G_tick": 17796
+  },
+  {
+   "id": "key_in",
+   "target": [
     "key"
    ],
-   "G_start": 18150,
-   "G_on": 18168,
-   "G_land": 18176,
-   "G_end": 18267,
-   "G_off": 18297,
-   "G_tick": 18172
+   "kind": "focus",
+   "gs": 348,
+   "gon": 366,
+   "land": 374,
+   "gend": 380,
+   "goff": 405,
+   "tick": 370,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 350,
+   "events": [
+    "key_in"
+   ],
+   "handoff": "pins",
+   "G_start": 17938,
+   "G_on": 17956,
+   "G_land": 17964,
+   "G_end": 17970,
+   "G_off": 17995,
+   "G_tick": 17960
+  },
+  {
+   "id": "pins",
+   "target": [
+    "lock_1"
+   ],
+   "kind": "focus",
+   "gs": 387,
+   "gon": 405,
+   "land": 413,
+   "gend": 448,
+   "goff": 478,
+   "tick": 409,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 403,
+   "events": [
+    "pins",
+    "turn"
+   ],
+   "G_start": 17977,
+   "G_on": 17995,
+   "G_land": 18003,
+   "G_end": 18038,
+   "G_off": 18068,
+   "G_tick": 17999
+  },
+  {
+   "id": "try2",
+   "target": [
+    "key"
+   ],
+   "kind": "focus",
+   "gs": 509,
+   "gon": 527,
+   "land": 535,
+   "gend": 551,
+   "goff": 581,
+   "tick": 531,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 515,
+   "events": [
+    "try2",
+    "try3",
+    "plate_sel"
+   ],
+   "G_start": 18099,
+   "G_on": 18117,
+   "G_land": 18125,
+   "G_end": 18141,
+   "G_off": 18171,
+   "G_tick": 18121
   }
  ],
  "problems": []

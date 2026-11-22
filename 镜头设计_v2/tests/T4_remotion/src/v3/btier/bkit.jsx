@@ -3,9 +3,10 @@
 // → L3 标签、出处行（Instrument Serif）→ L4 手写批注（Caveat）；最上面一层颗粒（Grain，和出镜段合成同一个颗粒函数，b_page.py 生成）。
 // 动作一律 GSAP 暂停时间线 + 逐帧 seek（gsapFrame.js）；时间从事件表 keys_<段>.json 读。视线引导用 manual/kit.jsx 的 Lens / Layer / guidePlan / nudge。
 import React from "react";
-import {AbsoluteFill, Img, staticFile, useCurrentFrame, delayRender, continueRender, getInputProps} from "remotion";
+import {AbsoluteFill, Img, staticFile, useCurrentFrame, useVideoConfig, delayRender, continueRender, getInputProps} from "remotion";
 import {useGsapTimeline, FPS, RULE} from "./gsapFrame.jsx";
 import SM from "./bsprite_meta.json";
+import {LensDefaults} from "../manual/kit.jsx";
 
 // ---------------------------------------------------------------- 5.2 配色（只许用这些，取自 kit_parts.py）
 export const C = {
@@ -35,6 +36,11 @@ export const tint = (c, k) => toHex(hex(c).map((v) => v + (255 - v) * k));     /
 // Instrument Serif 的大写字母高约 0.70 em：标签 44 px → 大写约 31 px（≥ 28）；出处行 28 px → 约 19.6 px（≥ 18）。
 // 11-21 B 档视觉规则 v2 R04：标签 ≥ 36 px（默认仍 44）、出处行 22 px、批注 Caveat 34–44 px；字幕区 y ≥ 940
 export const LABEL_MIN = 36, LABEL_PX = 44, SOURCE_PX = 30, SUB_TOP = 940;   // 出处行：规则 v2 写 22 px，Gemini 6-01/6-02 两次说看不清（26 也说小），取 30（R04 下限 22 之上）
+// 11-22 夜（总管看 4-03 对比图：标签、出处行显小）：18 的 1.6 的 44 / 36 / 30 按"屏上量得的字高"落实，不只是 CSS 字号。
+// Instrument Serif 实测（PIL 量墨迹）：字号 60 → "low confidence" 墨迹高 45、大写 43；52 → 39 / 38；34 → 出处行墨迹约 26、括号 31。
+// 标签一律不小于 LABEL_FLOOR（页面写的 44–56 统一抬到 60，写得更大的照写）；图注小牌 TAG_PX；批注 Caveat 收在 PEN_MIN–PEN_MAX（"blocked" 64 px 墨迹 44）。
+// 出处行位置照 19 第十节第 6 条定死：上沿 886、下沿 928（高 42），字号 32（≥ 30；34 时 4-03 那行 972 px 超过 960 的长度上限）。
+export const LABEL_FLOOR = 60, TAG_PX = 40, PEN_MIN = 56, PEN_MAX = 64, SOURCE_FIX = 32, SOURCE_TOP = 886, SOURCE_BOT = 928;
 // 11-20 晚查出：以前写 fontFamily "Serif"（不带引号）在 CSS 里就是通用族 serif，浏览器用的是 Times New Roman，Instrument Serif 根本没上。
 // 这里用一个不会撞通用族名的名字自己装载（装不上就抛错，页面渲不出来，不会悄悄换成 Times）。
 export const SERIF = "'InstrumentSerifB', serif";
@@ -68,7 +74,7 @@ export const probeScan = (f) => {
     const b = rg.getBoundingClientRect();
     if (b.width < 1 || b.right < 0 || b.left > 1920 || b.bottom < 0 || b.top > 1080) continue;
     const cs = getComputedStyle(el);
-    const r = ["label", "pen", "tag", "source"].find((q) => el.closest(`[data-role=${q}]`)) || (el.closest("[data-role=engrave]") ? "engrave" : "raw");
+    const r = ["label", "pen", "tag", "badge", "source"].find((q) => el.closest(`[data-role=${q}]`)) || (el.closest("[data-role=engrave]") ? "engrave" : "raw");
     const roleEl = el.closest(`[data-role=${r}]`), own = el.closest("[data-pid]");
     T.push({t: t.slice(0, 40), role: r, rid: roleEl ? roleEl.dataset.rid || "" : "", on: roleEl ? roleEl.dataset.on || "" : "", ff: cs.fontFamily, fs: parseFloat(cs.fontSize),
             x: rnd(b.left), y: rnd(b.top), w: rnd(b.width), h: rnd(b.height), op: Math.round(op * 100) / 100, own: own ? own.dataset.pid : ""});
@@ -83,7 +89,7 @@ export const probeScan = (f) => {
     const b = el.getBoundingClientRect();
     if (b.width < 1 || b.right < 0 || b.left > 1920 || b.bottom < 0 || b.top > 1080) return;
     const up = el.parentElement && el.parentElement.closest("[data-pid]");
-    P.push({pid: el.dataset.pid, name: el.dataset.part, x: rnd(b.left), y: rnd(b.top), w: rnd(b.width), h: rnd(b.height), op: Math.round(op * 100) / 100, up: up ? up.dataset.pid : ""});
+    P.push({pid: el.dataset.pid, name: el.dataset.part, hero: el.dataset.hero ? 1 : 0, sid: el.dataset.sid || "", color: el.dataset.color || "", x: rnd(b.left), y: rnd(b.top), w: rnd(b.width), h: rnd(b.height), op: Math.round(op * 100) / 100, up: up ? up.dataset.pid : ""});
   });
   console.log("BPROBE|" + JSON.stringify({f, T, P}));
 };
@@ -97,16 +103,32 @@ const pidOf = (name) => `${name}#${(PID = (PID + 1) % 1000000)}`;
 // ---------------------------------------------------------------- 事件表
 export const evMapB = (K) => Object.fromEntries(K.events.map((e) => [e.id, {s: e.f_start, l: e.f_land, e: e.f_end}]));
 
+// ---------------------------------------------------------------- 全局模板（11-22，18 文档 1.9 的 G1–G8）
+// 舞台把"托盘开没开、机位呼吸偏了多少"放进上下文：接触阴影（G5）按托盘取深浅，出处行抵掉呼吸、钉在全片同一个位置（1.6）。
+export const StageCtx = React.createContext({tray: false, bx: 0});
+// G2：第 6 章翻牌板页（Board6 自己就是一块盖满的白板）和长路页（世界在一条横贯的路上平移）不垫托盘
+export const NO_TRAY = new Set(["B601", "B602", "B603", "B606", "B607", "B608", "B609", "B702"]);
+// G6：机位呼吸：前景和托盘横移 ±22 px，周期 7 秒（420 帧），正弦；大板按 0.35 倍视差跟着走
+export const BREATH_A = 22, BREATH_T = 420;
+export const breathX = (f) => BREATH_A * Math.sin((2 * Math.PI * f) / BREATH_T);
+
 // ---------------------------------------------------------------- L0 背景大板（Blender 渲，720 帧来回播放）
+// G1（11-22）：去白纱（veil 默认 0，以前 0.3 让整页发白），大板压暗一档 brightness 0.80、saturate 0.90；大板一律 zone<N>_v2（b_page.py 链接时选）
 export const PLATE_N = 720;
 export const pingpong = (f, n = PLATE_N) => { const p = 2 * (n - 1); const m = ((f % p) + p) % p; return m < n ? m : p - m; };
-export const BoardPlate = ({zone, f, offset = 0, veil = 0.3}) => {
+// 11-22 夜（总管：大板还发白）：量过 veil 确实为 0（34 页没有一页传 veil）、brightness 0.80 生效（4-03 上边带 成片/原图 = 0.804）。
+// 发白主要是大板本身低反差、和骨白托盘贴在一起。垫托盘的页再压一档：brightness 0.74、contrast 1.08、四角暗角 0.25，托盘和件从板上跳出来；
+// 不垫托盘的页（长路、翻牌板）大板就是世界本身，压太暗整页亮度掉到 0.55 以下，只加 0.12 的暗角。
+export const BoardPlate = ({zone, f, offset = 0, veil = 0}) => {
   const i = pingpong(f + offset);
+  const tray = React.useContext(StageCtx).tray;
+  const vig = tray ? 0.25 : 0.12;
   return (
     <>
-      <Img src={staticFile(`bplate/zone${zone}/${String(i).padStart(4, "0")}.jpg`)} style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080}} />
-      {/* 台面色薄纱 30%：大板上的蓝、金、红件退后一层，前景零件和字跳出来（11-20 试渲：不加纱时背景和前景一样艳，抢主体） */}
-      <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, background: C.table, opacity: veil}} />
+      <Img src={staticFile(`bplate/zone${zone}/${String(i).padStart(4, "0")}.jpg`)} style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080,
+           filter: tray ? "brightness(0.74) contrast(1.08) saturate(0.92)" : "brightness(0.80) saturate(0.90)"}} />
+      <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, background: `radial-gradient(ellipse at 50% 48%, rgba(20,16,12,0) 50%, rgba(20,16,12,${vig}) 100%)`}} />
+      {veil > 0 && <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, background: C.table, opacity: veil}} />}
     </>
   );
 };
@@ -118,10 +140,11 @@ export const Grain = ({f, n = 24, opacity = 1}) => (
 );
 
 // ---------------------------------------------------------------- L1 接触阴影
-// 椭圆，模糊 14 px，不透明度 0.28，相对零件偏移 (+6, +10)；零件每升高 10 px 阴影放大 4%、淡 0.03。
+// 椭圆，模糊 14 px，不透明度 0.28（垫了托盘的页 0.38，G5），相对零件偏移 (+6, +10)；零件每升高 10 px 阴影放大 4%、淡 0.03。
 export const Shadow = ({cx, cy, rx, ry, lift = 0, op = 1}) => {
   const k = Math.max(0, lift) / 10;
-  const s = 1 + 0.04 * k, o = Math.max(0, 0.28 - 0.03 * k) * op;
+  const base = React.useContext(StageCtx).tray ? 0.38 : 0.28;
+  const s = 1 + 0.04 * k, o = Math.max(0, base - 0.03 * k) * op;
   return (
     <div style={{position: "absolute", left: cx + 6 - rx * s, top: cy + 10 + lift - ry * s, width: 2 * rx * s, height: 2 * ry * s,
                  borderRadius: "50%", background: "#000", opacity: o, filter: "blur(14px)"}} />
@@ -143,7 +166,8 @@ export const anchorOf = (name, key, w) => {
   const k = w / m.w;
   return [(a[0] - m.w / 2) * k, (a[1] - m.h / 2) * k];
 };
-export const Sprite = ({name, x, y, w, rot = 0, sx = 1, sy = 1, op = 1, lift = 0, shadow = true, shadowSq = 0.22, rim = 0, anchor, style, children}) => {
+// hero：这一页的英雄件（G3）；探针把它的屏上高记进 probe_parts.json，b_page.py check 的 G3 量它（不标就量最高的那个贴图）
+export const Sprite = ({name, x, y, w, rot = 0, sx = 1, sy = 1, op = 1, lift = 0, shadow = true, shadowSq = 0.22, rim = 0, anchor, style, children, hero}) => {
   const m = spriteMeta(name);
   if (w > m.w * 0.8 + 1) throw new Error(`${name} 放大超过 1.6 倍：显示宽 ${w}，原图 ${m.w}`);
   const h = (w * m.h) / m.w;
@@ -155,7 +179,7 @@ export const Sprite = ({name, x, y, w, rot = 0, sx = 1, sy = 1, op = 1, lift = 0
   return (
     <>
       {shadow && op > 0.01 && <Shadow cx={cx} cy={cy + h * 0.5 - h * shadowSq * 0.5} rx={w * 0.42} ry={h * shadowSq * 0.5} lift={lift} op={op} />}
-      <div data-part={name} data-pid={PROBE ? pidOf(name) : undefined} style={{position: "absolute", left: cx - w / 2, top: cy - h / 2 - lift, width: w, height: h, opacity: op,
+      <div data-part={name} data-hero={hero ? "1" : undefined} data-pid={PROBE ? pidOf(name) : undefined} style={{position: "absolute", left: cx - w / 2, top: cy - h / 2 - lift, width: w, height: h, opacity: op,
                    transform: `rotate(${rot}deg) scale(${sx},${sy})`, filter: fl.length ? fl.join(" ") : undefined, ...style}}>
         <Img src={staticFile(`bsprite/${name}.png`)} style={{width: w, height: h, display: "block"}} />
         {children}
@@ -175,7 +199,7 @@ export const Slab = ({x, y, w, h, r = 14, color = C.bone, depth = 8, sheen = -1,
   return (
     <>
       {shadow && op > 0.01 && <Shadow cx={x + w / 2} cy={y + h / 2 + depth / 2} rx={w * 0.5} ry={h * 0.5} lift={lift} op={op} />}
-      <div data-part="slab" data-pid={PROBE ? pidOf("slab") : undefined} style={{position: "absolute", left: x, top: y - lift, width: w, height: h + depth, opacity: op, transform: rot ? `rotate(${rot}deg)` : undefined}}>
+      <div data-part="slab" data-pid={PROBE ? pidOf("slab") : undefined} data-sid={PROBE ? id : undefined} data-color={PROBE ? color : undefined} style={{position: "absolute", left: x, top: y - lift, width: w, height: h + depth, opacity: op, transform: rot ? `rotate(${rot}deg)` : undefined}}>
         <svg width={w + 2} height={h + depth + 2} style={{position: "absolute", left: 0, top: 0, overflow: "visible"}}>
           <defs>
             <linearGradient id={`${uid}s`} x1="0" y1="0" x2="1" y2="1">
@@ -233,16 +257,18 @@ export const Runner = ({d, width = 16, draw = 1, color = C.bone, op = 1}) => (
 );
 
 // 刻字：字色 + 下方 1 px 亮线（"刻"进件里）
+export const ENGRAVE_MIN = 26;    // 1.6：刻字、牌子、表格 ≥ 26 px
 export const Engrave = ({children, size = 44, color = C.ink, light = false, style, italic}) => (
-  <span data-role="engrave" style={{fontFamily: SERIF, fontSize: size, color: light ? C.inkLight : color, fontStyle: italic ? "italic" : "normal",
+  <span data-role="engrave" style={{fontFamily: SERIF, fontSize: Math.max(ENGRAVE_MIN, size), color: light ? C.inkLight : color, fontStyle: italic ? "italic" : "normal",
                 textShadow: light ? "0 1px 0 rgba(0,0,0,0.35)" : "0 1px 0 rgba(255,255,255,0.65)", whiteSpace: "nowrap", lineHeight: 1, ...style}}>{children}</span>
 );
 
 // ---------------------------------------------------------------- L3 标签：按词拆，每词错开 3 帧、上移 12 px 淡入（SplitText 的做法，补间普通对象）
 // at = 第一个词落定的帧（一般是事件 f_land）；out = 收起的帧（可不给）。字号不小于 44（大写约 31 px）。
-export const Label = ({text, x, y, at, out, size = LABEL_PX, color = C.ink, align = "left", italic, w, plate, on}) => {
-  if (size < LABEL_MIN) throw new Error(`标签字号 ${size} 小于 ${LABEL_MIN}`);
-  if (y + size * 1.1 > SUB_TOP) throw new Error(`标签 "${text}" 压进字幕区（y=${y}）`);
+export const Label = ({text, x, y: y0, at, out, size: size0 = LABEL_PX, color = C.ink, align = "left", italic, w, plate, on}) => {
+  if (size0 < LABEL_MIN) throw new Error(`标签字号 ${size0} 小于 ${LABEL_MIN}`);
+  const size = Math.max(LABEL_FLOOR, size0);                    // 11-22 夜：统一抬到 60
+  const y = Math.min(y0, SUB_TOP - 4 - size * 1.1);              // 抬大以后底边若压进字幕区，整条往上让（不再报错停渲）
   const words = String(text).split(" ");
   const S = useGsapTimeline((tl, S) => {
     S.w = words.map(() => ({o: 0, y: RULE.rise}));
@@ -264,8 +290,9 @@ export const Label = ({text, x, y, at, out, size = LABEL_PX, color = C.ink, alig
 };
 
 // ---------------------------------------------------------------- L4 手写批注：Caveat，从左到右描出 24–36 帧（遮罩前沿是一支笔的走势，带一点起伏）
-export const Pen = ({text, x, y, at, out, dur = 30, size: size0 = 40, color = C.ink, rot = -3, on}) => {
-  const size = Math.max(34, Math.min(44, size0));      // R04：Caveat 批注 34–44 px（老页面写的 52 在这里收到 44）
+export const Pen = ({text, x, y: y0, at, out, dur = 30, size: size0 = 40, color = C.ink, rot = -3, on}) => {
+  const size = Math.max(PEN_MIN, Math.min(PEN_MAX, size0));      // 11-22 夜：Caveat 批注 56–64 px（以前 34–44，"blocked" 只有 31 px 墨迹）
+  const y = Math.min(y0, SUB_TOP - 4 - size);
   const S = useGsapTimeline((tl, S) => {
     S.p = 0;
     S.o = 1;
@@ -284,18 +311,30 @@ export const Pen = ({text, x, y, at, out, dur = 30, size: size0 = 40, color = C.
 // ---------------------------------------------------------------- 出处行（5.7）：Instrument Serif，≥ 28 px（大写约 20 px），在字幕区上面
 export const Source = ({children, op = 1, x = 64, y}) => {
   // 规则 v2 R09：左下 x = 64、底边 y = 924（字幕区 940 之上），Instrument Serif 22 px，字 #6E6B63（C.soft），骨白磨砂底 0.78、圆角 4、左右内边距 12
-  const top = y != null ? Math.min(y, 928 - 42) : 928 - 42;
-  if (top + 42 > SUB_TOP) throw new Error("出处行压进字幕区");
-  return <div data-role="source" style={{position: "absolute", left: x, top, height: 42, boxSizing: "border-box", padding: "5px 12px 0", borderRadius: 4, background: "rgba(244,241,234,0.86)",
-                      fontFamily: SERIF, fontSize: SOURCE_PX, letterSpacing: 0.3, color: C.ink, opacity: op, whiteSpace: "nowrap", lineHeight: 1.1}}>{children}</div>;
+  // 11-22（18 的 1.6）：x 64、上沿 886、下沿 928、30 px；舞台的机位呼吸（G6）在这里抵掉，出处行全片钉在同一个位置
+  // 19 第十节第 6 条：位置定死（页面给的 x、y 不再生效），字号 SOURCE_FIX；舞台的内容缩放（zoom，G3）在这里反算回去，出处行不跟着放大
+  const {bx, zoom = 1, zo = [960, 500]} = React.useContext(StageCtx);
+  const h = SOURCE_BOT - SOURCE_TOP;
+  const lx = zo[0] + (64 - bx - zo[0]) / zoom, ly = zo[1] + (SOURCE_TOP - zo[1]) / zoom;
+  return <div data-role="source" style={{position: "absolute", left: lx, top: ly, height: h, boxSizing: "border-box", padding: "3px 12px 0", borderRadius: 4, background: "rgba(244,241,234,0.86)",
+                      transform: zoom !== 1 ? `scale(${1 / zoom})` : undefined, transformOrigin: "0 0",
+                      fontFamily: SERIF, fontSize: SOURCE_FIX, letterSpacing: 0.3, color: C.ink, opacity: op, whiteSpace: "nowrap", lineHeight: 1.05}}>{children}</div>;
 };
 
 // 图注小牌（PREDICTED MODEL、OUR RE-DOCKING 这类）：和出处行同一套底，30 px，大写字距 1
-export const Tag = ({children, x, y, op = 1, align = "center", on}) => (
-  <div data-role="tag" data-on={on} style={{position: "absolute", left: x, top: y, transform: align === "center" ? "translateX(-50%)" : align === "right" ? "translateX(-100%)" : undefined,
-               padding: "3px 12px 5px", borderRadius: 10, background: "rgba(243,238,230,0.80)", fontFamily: SERIF, fontSize: 30, letterSpacing: 1,
-               color: C.ink, opacity: 0.88 * op, whiteSpace: "nowrap", lineHeight: 1.2}}>{children}</div>
-);
+// 导演 11-23（18 末尾"导演 11-23 补充"）：数据库、出处这类徽章（"PREDICTED MODEL (AlphaFold DB v6)"、"Ren et al., Chem. Sci. 2023"）
+// 缩成不超过约 40 px 高的角标：字号 BADGE_PX、整块高 ≤ 38 px、淡一点；有信息量的图注牌（"normal liver cells" 这类）照旧 TAG_PX。
+export const BADGE_PX = 26;
+export const BADGE_RE = /AlphaFold DB|Ren et al\.|Chem\. Sci\.|\bPDB\b|UniProt|ChEMBL/i;
+const textOf = (c) => (typeof c === "string" || typeof c === "number" ? String(c) : Array.isArray(c) ? c.map(textOf).join("") : c && c.props ? textOf(c.props.children) : "");
+export const Tag = ({children, x, y, op = 1, align = "center", on, badge}) => {
+  const bd = badge != null ? badge : BADGE_RE.test(textOf(children));
+  return (
+    <div data-role={bd ? "badge" : "tag"} data-on={on} style={{position: "absolute", left: x, top: y, transform: align === "center" ? "translateX(-50%)" : align === "right" ? "translateX(-100%)" : undefined,
+                 padding: bd ? "2px 9px 3px" : "3px 12px 5px", borderRadius: bd ? 7 : 10, background: "rgba(243,238,230,0.80)", fontFamily: SERIF, fontSize: bd ? BADGE_PX : TAG_PX, letterSpacing: bd ? 0.5 : 1,
+                 color: C.ink, opacity: (bd ? 0.78 : 0.88) * op, whiteSpace: "nowrap", lineHeight: 1.2}}>{children}</div>
+  );
+};
 
 // ---------------------------------------------------------------- 插座灯：灯位锚点上的一团暖黄光晕（ATP 透明黄，只给插座灯和真插头）。on 0→1
 export const Lamp = ({name, x, y, w, on = 1, r}) => {
@@ -499,23 +538,77 @@ export const camBreath = (f, K, sids = [], A = 44, half = 45) => {
   return x;
 };
 
-export const Stage = ({zone, f, shakeX = 0, shakeY = 0, whip = 0, cam = 0, children, over}) => (
-  <AbsoluteFill style={{background: C.table, overflow: "hidden"}}>
-    <WhipFilter />
-    <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `translate(${whip + shakeX}px, ${shakeY}px)`,
-                 filter: Math.abs(whip) > 1 ? "url(#whipblur)" : undefined}}>
-      <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `translateX(${(0.35 * cam).toFixed(2)}px) scale(1.02)`, transformOrigin: "960px 540px"}}>
-        {!PROBE && <BoardPlate zone={zone} f={f} />}
-        {/* 甩镜时板面是连着的：在甩来的那一侧再铺一块同一帧的大板，画面里不露出空台面 */}
-        {Math.abs(whip) > 1 && [1, 2].map((k) => (
-          <div key={k} style={{position: "absolute", left: (whip > 0 ? -1920 : 1920) * k, top: 0, width: 1920, height: 1080}}><BoardPlate zone={zone} f={f} /></div>))}
-      </div>
-      <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: cam ? `translateX(${cam.toFixed(2)}px)` : undefined}}>
-        {children}
-      </div>
+// ---------------------------------------------------------------- G2 托盘（11-22，18 文档 1.9）：每页前景下面垫一块料框托盘，零件落在托盘上
+// Slab (120, 150) 1680 × 700、圆角 28、厚 18、骨白；外面 22 px 一圈料杆（宽 14）当料框，四边各两个浇口连到托盘；
+// 盘面 4 × 2 个圆角格浅槽（每格 380 × 300，槽线 3 px、shade(bone, 0.10)，上沿 1 px 白线）；托盘影子模糊 30、不透明 0.30、偏移 (10, 22)。
+export const TRAY = {x: 120, y: 150, w: 1680, h: 700, r: 28, depth: 18, gap: 22, rw: 14, cw: 380, ch: 300, cols: 4, rows: 2};
+export const Tray = () => {
+  const T = TRAY, g = T.gap;
+  const fx = T.x - g, fy = T.y - g, fw = T.w + 2 * g, fh = T.h + 2 * g, fr = T.r + g;
+  const frame = `M${fx + fr},${fy} H${fx + fw - fr} Q${fx + fw},${fy} ${fx + fw},${fy + fr} V${fy + fh - fr} Q${fx + fw},${fy + fh} ${fx + fw - fr},${fy + fh} ` +
+                `H${fx + fr} Q${fx},${fy + fh} ${fx},${fy + fh - fr} V${fy + fr} Q${fx},${fy} ${fx + fr},${fy} Z`;
+  const gx = (T.w - T.cols * T.cw) / (T.cols + 1), gy = (T.h - T.rows * T.ch) / (T.rows + 1);
+  const gates = [];
+  [1 / 3, 2 / 3].forEach((u) => {
+    const x = T.x + T.w * u, y = T.y + T.h * u;
+    gates.push({x1: x, y1: fy, x2: x, y2: T.y}, {x1: x, y1: fy + fh, x2: x, y2: T.y + T.h}, {x1: fx, y1: y, x2: T.x, y2: y}, {x1: fx + fw, y1: y, x2: T.x + T.w, y2: y});
+  });
+  return (
+    <div data-tray="1" style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080}}>
+      <div style={{position: "absolute", left: T.x + 10, top: T.y + 22, width: T.w, height: T.h + T.depth, borderRadius: T.r, background: "#000", opacity: 0.30, filter: "blur(30px)"}} />
+      <Runner d={frame} width={T.rw} />
+      {gates.map((q, i) => <Gate key={i} {...q} w={10} />)}
+      <Slab x={T.x} y={T.y} w={T.w} h={T.h} r={T.r} depth={T.depth} color={C.bone} shadow={false} id="btray">
+        <svg width={T.w} height={T.h} style={{position: "absolute", left: 0, top: 0}}>
+          {[...Array(T.cols * T.rows)].map((_, k) => {
+            const cx = gx + (k % T.cols) * (T.cw + gx), cy = gy + Math.floor(k / T.cols) * (T.ch + gy);
+            return (
+              <g key={k}>
+                <rect x={cx} y={cy} width={T.cw} height={T.ch} rx={18} fill="none" stroke={shade(C.bone, 0.10)} strokeWidth={3} />
+                <path d={`M${cx + 18},${cy + 2.5} H${cx + T.cw - 18}`} stroke="#fff" strokeOpacity="0.8" strokeWidth={1} />
+              </g>
+            );
+          })}
+        </svg>
+      </Slab>
     </div>
-    {over}
-    {!PROBE && <Grain f={f} />}
-    {PROBE > 0 && <ProbeTap f={f} />}
-  </AbsoluteFill>
-);
+  );
+};
+
+// 舞台：L0 大板 + （托盘 + 页面内容，随机位呼吸）+ 擦除 + 颗粒。页面只填内容。
+// tray：不给时按合成名自动（NO_TRAY 里的页关）；breath：G6 机位呼吸，默认开（探针渲染时关，R02 量的是页面自己的动作）。
+// 视线引导：没点名的图层变淡到 0.9（manual/kit.jsx 默认 0.82）。亮托盘上 0.82 会让整帧变亮超过 V6 的 3%（11-22 试渲 4-03：3.46%）。
+const LENS_B = {dim: 0.9};
+// G3（11-22 夜）：zoom = 前景内容（不含托盘、出处行）绕 zoomAt 整体放大，给逐页把英雄件放到 ≥ 486 px 用；默认 1（不动），各页的倍数见 bcheck/_template/G3_英雄件表。
+export const Stage = ({zone, f, shakeX = 0, shakeY = 0, whip = 0, cam = 0, children, over, tray, breath = true, zoom = 1, zoomAt = [960, 500]}) => {
+  const {id} = useVideoConfig();
+  const useTray = tray != null ? !!tray : !NO_TRAY.has(id);
+  const bx = breath && !PROBE ? breathX(f) : 0;
+  const camX = cam + bx;
+  return (
+    <StageCtx.Provider value={{tray: useTray, bx, zoom, zo: zoomAt}}><LensDefaults.Provider value={LENS_B}>
+      {/* 探针渲染底色用纯绿（rgb 写法，不进 B4 色表）：b_page.py 数"前景加托盘"盖住的画面比例（G2 验收 ≥ 55%） */}
+      <AbsoluteFill style={{background: PROBE ? "rgb(0,255,0)" : C.table, overflow: "hidden"}}>
+        <WhipFilter />
+        <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `translate(${whip + shakeX}px, ${shakeY}px)`,
+                     filter: Math.abs(whip) > 1 ? "url(#whipblur)" : undefined}}>
+          <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `translateX(${(0.35 * camX).toFixed(2)}px) scale(1.02)`, transformOrigin: "960px 540px"}}>
+            {!PROBE && <BoardPlate zone={zone} f={f} />}
+            {/* 甩镜时板面是连着的：在甩来的那一侧再铺一块同一帧的大板，画面里不露出空台面 */}
+            {!PROBE && Math.abs(whip) > 1 && [1, 2].map((k) => (
+              <div key={k} style={{position: "absolute", left: (whip > 0 ? -1920 : 1920) * k, top: 0, width: 1920, height: 1080}}><BoardPlate zone={zone} f={f} /></div>))}
+          </div>
+          <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: camX ? `translateX(${camX.toFixed(2)}px)` : undefined}}>
+            {useTray && <Tray />}
+            <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: zoom !== 1 ? `scale(${zoom})` : undefined, transformOrigin: `${zoomAt[0]}px ${zoomAt[1]}px`}}>
+              {children}
+            </div>
+          </div>
+        </div>
+        {over}
+        {!PROBE && <Grain f={f} />}
+        {PROBE > 0 && <ProbeTap f={f} />}
+      </AbsoluteFill>
+    </LensDefaults.Provider></StageCtx.Provider>
+  );
+};

@@ -1,0 +1,104 @@
+{
+ "video": "镜头设计_v3/审片/总管/技术选型_20261117/tech203_remotion.mp4",
+ "group": "2-03",
+ "fps": 60.0,
+ "frames": 343,
+ "offset_f": 0,
+ "S1": {
+  "word_events": 6,
+  "table_dev_max_f": 0,
+  "video_checked": 6,
+  "video_no_motion": [
+   "liver_in"
+  ],
+  "pass_": false
+ },
+ "S2": {
+  "pass_": false,
+  "early": [
+   [
+    "2-03.s1",
+    -7
+   ]
+  ]
+ },
+ "S3": {
+  "pass_": true,
+  "longest_still_f": 58,
+  "bad": []
+ },
+ "S4": {
+  "pass_": true,
+  "looks_like_30": false,
+  "dup_frames": 208,
+  "stepped_dups": 0,
+  "stepped_ratio": 0.0,
+  "blend_frames": 0,
+  "blend_first": [],
+  "design_fade": 0,
+  "verdict": "原生（无变速重复/混帧）"
+ },
+ "sentences": [
+  {
+   "sid": "2-03.s1",
+   "f0": 9,
+   "f1": 341,
+   "last_motion_f": 334,
+   "end_dev": -7,
+   "longest_still_f": 58,
+   "s2": false,
+   "s3": true
+  }
+ ],
+ "events": [
+  {
+   "id": "runner_flow",
+   "verb": "flow",
+   "w": "answer",
+   "f_land": 47,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cavity_one",
+   "verb": "grow",
+   "w": "one",
+   "f_land": 114,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "tag_case",
+   "verb": "eject",
+   "w": "case",
+   "f_land": 127,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "part_cdk20",
+   "verb": "grow",
+   "w": "CDK20",
+   "f_land": 206,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "liver_in",
+   "verb": "grow",
+   "w": "liver",
+   "f_land": 288,
+   "table_dev": 0,
+   "video_motion_near_start": false
+  },
+  {
+   "id": "cancer_red",
+   "verb": "flow",
+   "w": "cancer.",
+   "f_land": 312,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  }
+ ],
+ "pass": false
+}

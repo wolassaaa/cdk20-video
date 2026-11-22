@@ -3,7 +3,7 @@
 逐帧解码（灰度，480×270），每帧和前一帧比：
   重复帧  和前一帧几乎一样（平均差 < DUP 且最大的 16×9 小块差 < DUP_TILE，0–255 刻度）
   混合帧  这一帧 ≈ 前后两帧的平均（残差 / 前后两帧差 < BLEND_R），且它和前后两帧都不一样——慢放时相邻帧叠化出来的；
-          表里这时有 flow/fade/dissolve/glow 事件的单列为 design_fade（不透明度渐变本身就满足"前后平均"）
+          表里这时有 flow/fade/dissolve/glow/power_on/power_off 事件的单列为 design_fade（不透明度渐变本身就满足"前后平均"）
 重复帧再分两类：
   步进重复  零散出现、两边都在动（每隔一两帧重一次）：变速慢放、只渲偶数帧、30 帧当 60 帧放，都是这个样子
   静止段    连续 ≥ HOLD 帧都不动：如果总表这段时间声明了 hold、或者这时没有任何事件在动，算"设计静止"；
@@ -92,11 +92,18 @@ def classify(path, group=None, offset_f=0, table=None):
         import maplib as M
         G = M.load(table).group(group)
     holds_decl = [tuple(h) for h in (G.d.get("holds", []) if G else [])]
-    FADE = {"flow", "fade", "dissolve", "glow"}                  # 表里声明的渐变：这时出现的"混帧"是设计（不透明度渐变数学上就是相邻帧平均）
+    evs = G.events() if G else []
+    kp = HERE / "keys" / f"{group}.json" if group else None
+    if kp is not None and kp.exists():                 # check_sync 的 S1 读 keys/<段>.json；总表 master_v1 要等 build_master 重建才跟上新事件表，
+        K = json.loads(kp.read_text(encoding="utf-8"))  # 这里也先读 keys（3-09 改成 Blender 版以后总表里还是二维版的 4 个 land 事件）
+        evs = K.get("events", evs)
+        holds_decl = [tuple(h) for h in K.get("holds", [])] or holds_decl
+    FADE = {"flow", "fade", "dissolve", "glow", "power_on", "power_off"}   # 表里声明的渐变：这时出现的"混帧"是设计（不透明度渐变数学上就是相邻帧平均）
+    # power_on/off：开灯、关灯是灯光强度线性渐变，整屏亮度逐帧平均，和慢放混帧一样满足"前后平均"（3-09 屋里变暗 142–148 帧被误判）
     design_fade, bl = [], []
     for i in np.where(blend)[0]:
         fi = offset_f + int(i * step)
-        if G and any(e["verb"] in FADE and e["f_start"] <= fi <= max(e["f_land"], e["f_end"]) for e in G.events()):
+        if any(e["verb"] in FADE and e["f_start"] <= fi <= max(e["f_land"], e["f_end"]) for e in evs):
             design_fade.append(int(i))
         else:
             bl.append(int(i))
@@ -108,8 +115,8 @@ def classify(path, group=None, offset_f=0, table=None):
         fa, fb = offset_f + int((a - 1) * step), offset_f + int(b * step)
         if L >= HOLD:
             active = []
-            if G:
-                active = [e["eid"] for e in G.events() if e["f_start"] < fb and max(e["f_land"], e["f_end"]) > fa]
+            if evs:
+                active = [e.get("eid", e.get("id")) for e in evs if e["f_start"] < fb and max(e["f_land"], e["f_end"]) > fa]
             declared = any(h0 <= fa and fb <= h1 for h0, h1 in holds_decl)
             (design_still if declared or not active else stopped).append(dict(frames=[int(a), int(b)], seg_f=[fa, fb], active=active[:6], declared=declared))
         elif a >= 1 and b + 1 < len(d) and d[a - 1] > STEP_MOVE and d[b + 1] > STEP_MOVE:

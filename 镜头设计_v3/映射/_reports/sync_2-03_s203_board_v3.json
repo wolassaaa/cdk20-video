@@ -1,0 +1,230 @@
+{
+ "video": "D:/。hkbu/molecular science/镜头设计_v3/映射/_cache/s203v3/s203_check.mov",
+ "group": "2-03",
+ "fps": 60.0,
+ "frames": 344,
+ "offset_f": 0,
+ "S1": {
+  "word_events": 7,
+  "table_dev_max_f": 0,
+  "video_checked": 20,
+  "video_no_motion": [],
+  "pass_": true
+ },
+ "S2": {
+  "pass_": true,
+  "early": []
+ },
+ "S3": {
+  "pass_": true,
+  "longest_still_f": 0,
+  "bad": []
+ },
+ "S4": {
+  "pass_": false,
+  "looks_like_30": true,
+  "dup_frames": 0,
+  "stepped_dups": 0,
+  "stepped_ratio": 0.0,
+  "blend_frames": 21,
+  "blend_first": [
+   120,
+   121,
+   122,
+   123,
+   124,
+   125,
+   126,
+   127,
+   128,
+   129,
+   130,
+   131,
+   132,
+   207,
+   208,
+   209,
+   210,
+   211,
+   212,
+   213
+  ],
+  "design_fade": 7,
+  "verdict": "有混帧（变速慢放）"
+ },
+ "sentences": [
+  {
+   "sid": "2-03.s1",
+   "f0": 9,
+   "f1": 341,
+   "last_motion_f": 341,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  }
+ ],
+ "events": [
+  {
+   "id": "pulse_a",
+   "verb": "flow",
+   "w": "case",
+   "f_land": 119,
+   "table_dev": -8,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_plate",
+   "verb": "camera_to",
+   "w": "one",
+   "f_land": 114,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "sub_a",
+   "verb": "appear",
+   "w": "And",
+   "f_land": 9,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "plate_grow",
+   "verb": "grow",
+   "w": "case",
+   "f_land": 127,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "source_line",
+   "verb": "appear",
+   "w": "study:",
+   "f_land": 146,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_cdk",
+   "verb": "camera_to",
+   "w": "CDK20",
+   "f_land": 198,
+   "table_dev": -8,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "pulse_b",
+   "verb": "flow",
+   "w": "CDK20",
+   "f_land": 178,
+   "table_dev": -28,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cdk_grow",
+   "verb": "grow",
+   "w": "CDK20",
+   "f_land": 206,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "sub_b",
+   "verb": "appear",
+   "w": "CDK20",
+   "f_land": 206,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cdk_eject",
+   "verb": "eject",
+   "w": "CDK20",
+   "f_land": 218,
+   "table_dev": 12,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cdk_spin",
+   "verb": "move",
+   "w": "CDK20",
+   "f_land": 220,
+   "table_dev": 14,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "pulse_c",
+   "verb": "flow",
+   "w": "liver",
+   "f_land": 258,
+   "table_dev": -30,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_liver",
+   "verb": "camera_to",
+   "w": "liver",
+   "f_land": 310,
+   "table_dev": 22,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cdk_fly",
+   "verb": "move",
+   "w": "liver",
+   "f_land": 302,
+   "table_dev": 14,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "liver_grow",
+   "verb": "grow",
+   "w": "liver",
+   "f_land": 288,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "liver_eject",
+   "verb": "eject",
+   "w": "liver",
+   "f_land": 296,
+   "table_dev": 8,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "liver_morph",
+   "verb": "morph",
+   "w": "liver",
+   "f_land": 302,
+   "table_dev": 14,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cdk_press",
+   "verb": "move",
+   "w": "liver",
+   "f_land": 311,
+   "table_dev": 23,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cdk_enter",
+   "verb": "move",
+   "w": "cancer.",
+   "f_land": 334,
+   "table_dev": 22,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "liver_close",
+   "verb": "morph",
+   "w": "cancer.",
+   "f_land": 332,
+   "table_dev": 20,
+   "video_motion_near_start": true
+  }
+ ],
+ "pass": false
+}

@@ -1,282 +1,246 @@
 {
- "schema": "cdk20.events/1",
- "group": "3-02",
- "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 3-02（VO）：细胞大框里三个带小齿轮在转的蛋白；药（钥匙）飞来抓住一个，它变灰、齿轮停；口袋红圈；这个蛋白连钥匙滑到右边放大，变成锁，写 key = drug、lock = protein。页面 Manual302.jsx。",
- "holds": [],
- "events": [
-  {
-   "id": "title",
-   "obj": "title",
-   "verb": "appear",
-   "at": {
-    "word": "3-02.w001",
-    "off": 0
-   },
-   "means": "Inside：标题 Inside your cells",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "cell",
-   "obj": "cell",
-   "verb": "grow",
-   "at": {
-    "word": "3-02.w003",
-    "off": 0
-   },
-   "means": "cells：细胞圆角大框（双线膜）画出",
-   "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "prot",
-   "obj": "prot",
-   "verb": "grow",
-   "at": {
-    "word": "3-02.w004",
-    "off": 0
-   },
-   "means": "proteins：三个蛋白长出，标签 proteins",
-   "tool": "remotion",
-   "lead": 16,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "cdk20"
-    ]
-   }
-  },
-  {
-   "id": "lot",
-   "obj": "lot",
-   "verb": "appear",
-   "at": {
-    "word": "3-02.w007",
-    "off": 0
-   },
-   "means": "lot：每个蛋白上长出一个小齿轮，开始慢转",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "work",
-   "obj": "work",
-   "verb": "morph",
-   "at": {
-    "word": "3-02.w010",
-    "off": 0
-   },
-   "means": "work：三个齿轮加速",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "drug",
-   "obj": "drug",
-   "verb": "move",
-   "at": {
-    "word": "3-02.w012",
-    "off": 0
-   },
-   "means": "drugs：钥匙从右边飞进来，挂字牌 drugs",
-   "tool": "remotion",
-   "lead": 30,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "grab",
-   "obj": "grab",
-   "verb": "move",
-   "at": {
-    "word": "3-02.w013",
-    "off": 0
-   },
-   "means": "grab：钥匙竖起来俯冲进细胞，贴住中间的蛋白，字牌淡出",
-   "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "tight",
-   "obj": "tight",
-   "verb": "morph",
-   "at": {
-    "word": "3-02.w016",
-    "off": 0
-   },
-   "means": "tightly：蛋白一侧收紧夹住钥匙",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "change",
-   "obj": "change",
-   "verb": "morph",
-   "at": {
-    "word": "3-02.w018",
-    "off": 0
-   },
-   "means": "change：这个蛋白变灰微歪，齿轮停转变灰",
-   "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "does",
-   "obj": "does",
-   "verb": "appear",
-   "at": {
-    "word": "3-02.w021",
-    "off": 0
-   },
-   "means": "does：停住的齿轮打红叉，写 change what it does",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "slot",
-   "obj": "slot",
-   "verb": "move",
-   "at": {
-    "word": "3-02.w022",
-    "off": 0
-   },
-   "means": "slotting：钥匙再压下去到底，带回弹",
-   "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "pocket",
-   "obj": "pocket",
-   "verb": "appear",
-   "at": {
-    "word": "3-02.w025",
-    "off": 0
-   },
-   "means": "pocket：口袋红圈，标签 pocket",
-   "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "like",
-   "obj": "like",
-   "verb": "move",
-   "at": {
-    "word": "3-02.w026",
-    "off": 0
-   },
-   "means": "like：这个蛋白连钥匙复制一份，沿虚线滑到右边放大，钥匙转成横的",
-   "tool": "remotion",
-   "lead": 26,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "key",
-   "obj": "key",
-   "verb": "appear",
-   "at": {
-    "word": "3-02.w028",
-    "off": 0
-   },
-   "means": "key：写 key = drug",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "lock",
-   "obj": "lock",
-   "verb": "morph",
-   "at": {
-    "word": "3-02.w031",
-    "off": 0
-   },
-   "means": "lock：右边的蛋白变成锁，钥匙插在锁孔里，写 lock = protein",
-   "tool": "remotion",
-   "lead": 16,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  }
- ]
+  "schema": "cdk20.events/1",
+  "group": "3-02",
+  "tool": "blender",
+  "note": "HKBU SCIE1007 课程作业的科普视频：3-02 三维版事件表（Codex 照 18 填）。",
+  "holds": [],
+  "events": [
+    {
+      "id": "cam_out",
+      "obj": "camera",
+      "verb": "camera_to",
+      "at": {
+        "word": "3-02.w001",
+        "off": 36
+      },
+      "lead": 45,
+      "means": "段首：镜头从金色锁芯的虚影里退出来，销子锁挂在料杆上，镜头沿料杆横移到细胞壳（K0 → K1）",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "shell_open",
+      "obj": "shell_open",
+      "verb": "move",
+      "at": {
+        "word": "3-02.w003",
+        "off": 0
+      },
+      "lead": 30,
+      "until": {
+        "dur": 14
+      },
+      "means": "细胞壳上盖绕后沿铰链翻开到 110°，过冲 4° 回落",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "cam_in",
+      "obj": "camera",
+      "verb": "camera_to",
+      "at": {
+        "word": "3-02.w003",
+        "off": 6
+      },
+      "lead": 20,
+      "until": {
+        "word": "3-02.w004",
+        "edge": "start"
+      },
+      "means": "镜头压进壳里（K2）",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "lamps",
+      "obj": "lamps",
+      "verb": "power_on",
+      "at": {
+        "word": "3-02.w004",
+        "off": 0
+      },
+      "lead": 8,
+      "until": {
+        "dur": 16
+      },
+      "means": "三台小插座的灯从左到右依次亮，各差 4 帧；焦点点名中间那台",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "run",
+      "obj": "run",
+      "verb": "move",
+      "at": {
+        "word": "3-02.w010",
+        "off": 0
+      },
+      "lead": 12,
+      "until": {
+        "sentence_end": "3-02.s2"
+      },
+      "means": "三台同时开工：齿轮转、活塞推细胞鼓、推杆走",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "plug_enter",
+      "obj": "plug_enter",
+      "verb": "move",
+      "at": {
+        "word": "3-02.w012",
+        "off": 0
+      },
+      "lead": 30,
+      "until": {
+        "dur": 10
+      },
+      "means": "金色假插头从壳的正前方飞进来（上盖开着），转正后停在中间那台的孔轴上，针尖离孔口 20 mm",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "swap",
+      "obj": "swap",
+      "verb": "eject_swap",
+      "at": {
+        "word": "3-02.w013",
+        "off": -10
+      },
+      "lead": 14,
+      "until": {
+        "dur": 30
+      },
+      "means": "中间那台的 ATP 真插头先沿孔轴退出 9 mm，再向上偏出轴线给假插头让路，然后落到壳底托盘上（两把插头的轴线错开，逐帧不相交）",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "plug_in",
+      "obj": "plug_in",
+      "verb": "plug_in",
+      "at": {
+        "word": "3-02.w013",
+        "off": 0
+      },
+      "lead": 24,
+      "until": {
+        "dur": 8
+      },
+      "means": "假插头沿孔轴插进中间那台的红环插孔",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "clack",
+      "obj": "clack",
+      "verb": "move",
+      "at": {
+        "word": "3-02.w016",
+        "off": 0
+      },
+      "lead": 4,
+      "until": {
+        "dur": 14
+      },
+      "means": "\"咔\"：中间那台整台震一下（±0.3 mm，两次衰减），镜头微震 2 帧",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "off",
+      "obj": "off",
+      "verb": "power_off",
+      "at": {
+        "word": "3-02.w018",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "word": "3-02.w021"
+      },
+      "means": "中间那台灯灭、活塞停在半程、小细胞不再鼓；左右两台照常",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "cam_pocket",
+      "obj": "camera",
+      "verb": "camera_to",
+      "at": {
+        "word": "3-02.w025",
+        "off": 0
+      },
+      "lead": 50,
+      "until": {
+        "word": "3-02.w031",
+        "edge": "start"
+      },
+      "means": "镜头推向中间那台的插孔面（K2 → K3）",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "ring",
+      "obj": "ring",
+      "verb": "appear",
+      "at": {
+        "word": "3-02.w025",
+        "off": 0
+      },
+      "lead": 2,
+      "until": {
+        "dur": 30
+      },
+      "means": "红环亮",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "key_rim",
+      "obj": "key_rim",
+      "verb": "move",
+      "at": {
+        "word": "3-02.w028",
+        "off": 0
+      },
+      "lead": 8,
+      "until": {
+        "dur": 20
+      },
+      "means": "焦点和轮廓光落到假插头的柄上（就是钥匙柄的样子）",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "cam_fill",
+      "obj": "camera",
+      "verb": "camera_to",
+      "at": {
+        "word": "3-02.w031",
+        "off": 0
+      },
+      "lead": 40,
+      "until": {
+        "sentence_end": true
+      },
+      "means": "红环和孔口占到画宽 70% 以上，停住出段",
+      "guide": {
+        "kind": "none"
+      }
+    }
+  ]
 }

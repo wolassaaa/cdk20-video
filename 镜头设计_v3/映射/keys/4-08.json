@@ -5,13 +5,13 @@
  "segs": [
   "4-08"
  ],
- "tool": "remotion",
+ "tool": "blender",
  "fps": 60,
  "len_f": 520,
  "cut": "cut_v8",
- "cut_start_f": 32956,
- "cut_start_s": 549.27,
- "master_built": "2026-11-18 02:33:56 +09:00",
+ "cut_start_f": 32020,
+ "cut_start_s": 533.67,
+ "master_built": "2026-11-22 20:33:03 +09:00",
  "words_hash": "1e34544970c3",
  "events_src": "镜头设计_v3/映射/events/4-08.json",
  "words": [
@@ -22,8 +22,8 @@
    "sid": "4-08.s1",
    "f0": 32,
    "f1": 44,
-   "F0": 32988,
-   "F1": 33000
+   "F0": 32052,
+   "F1": 32064
   },
   {
    "wid": "4-08.w002",
@@ -32,8 +32,8 @@
    "sid": "4-08.s1",
    "f0": 45,
    "f1": 59,
-   "F0": 33001,
-   "F1": 33015
+   "F0": 32065,
+   "F1": 32079
   },
   {
    "wid": "4-08.w003",
@@ -42,8 +42,8 @@
    "sid": "4-08.s1",
    "f0": 61,
    "f1": 88,
-   "F0": 33017,
-   "F1": 33044
+   "F0": 32081,
+   "F1": 32108
   },
   {
    "wid": "4-08.w004",
@@ -52,8 +52,8 @@
    "sid": "4-08.s1",
    "f0": 88,
    "f1": 92,
-   "F0": 33044,
-   "F1": 33048
+   "F0": 32108,
+   "F1": 32112
   },
   {
    "wid": "4-08.w005",
@@ -62,8 +62,8 @@
    "sid": "4-08.s1",
    "f0": 98,
    "f1": 143,
-   "F0": 33054,
-   "F1": 33099
+   "F0": 32118,
+   "F1": 32163
   },
   {
    "wid": "4-08.w006",
@@ -72,8 +72,8 @@
    "sid": "4-08.s2",
    "f0": 180,
    "f1": 184,
-   "F0": 33136,
-   "F1": 33140
+   "F0": 32200,
+   "F1": 32204
   },
   {
    "wid": "4-08.w007",
@@ -82,8 +82,8 @@
    "sid": "4-08.s2",
    "f0": 213,
    "f1": 228,
-   "F0": 33169,
-   "F1": 33184
+   "F0": 32233,
+   "F1": 32248
   },
   {
    "wid": "4-08.w008",
@@ -92,8 +92,8 @@
    "sid": "4-08.s2",
    "f0": 231,
    "f1": 243,
-   "F0": 33187,
-   "F1": 33199
+   "F0": 32251,
+   "F1": 32263
   },
   {
    "wid": "4-08.w009",
@@ -102,8 +102,8 @@
    "sid": "4-08.s2",
    "f0": 262,
    "f1": 285,
-   "F0": 33218,
-   "F1": 33241
+   "F0": 32282,
+   "F1": 32305
   },
   {
    "wid": "4-08.w010",
@@ -112,8 +112,8 @@
    "sid": "4-08.s2",
    "f0": 291,
    "f1": 298,
-   "F0": 33247,
-   "F1": 33254
+   "F0": 32311,
+   "F1": 32318
   },
   {
    "wid": "4-08.w011",
@@ -122,8 +122,8 @@
    "sid": "4-08.s2",
    "f0": 308,
    "f1": 326,
-   "F0": 33264,
-   "F1": 33282
+   "F0": 32328,
+   "F1": 32346
   },
   {
    "wid": "4-08.w012",
@@ -132,8 +132,8 @@
    "sid": "4-08.s2",
    "f0": 331,
    "f1": 352,
-   "F0": 33287,
-   "F1": 33308
+   "F0": 32351,
+   "F1": 32372
   },
   {
    "wid": "4-08.w013",
@@ -142,8 +142,8 @@
    "sid": "4-08.s2",
    "f0": 355,
    "f1": 356,
-   "F0": 33311,
-   "F1": 33312
+   "F0": 32375,
+   "F1": 32376
   },
   {
    "wid": "4-08.w014",
@@ -152,8 +152,8 @@
    "sid": "4-08.s2",
    "f0": 357,
    "f1": 390,
-   "F0": 33313,
-   "F1": 33346
+   "F0": 32377,
+   "F1": 32410
   },
   {
    "wid": "4-08.w015",
@@ -162,8 +162,8 @@
    "sid": "4-08.s2",
    "f0": 425,
    "f1": 429,
-   "F0": 33381,
-   "F1": 33385
+   "F0": 32445,
+   "F1": 32449
   },
   {
    "wid": "4-08.w016",
@@ -172,8 +172,8 @@
    "sid": "4-08.s2",
    "f0": 434,
    "f1": 450,
-   "F0": 33390,
-   "F1": 33406
+   "F0": 32454,
+   "F1": 32470
   },
   {
    "wid": "4-08.w017",
@@ -182,8 +182,8 @@
    "sid": "4-08.s2",
    "f0": 450,
    "f1": 473,
-   "F0": 33406,
-   "F1": 33429
+   "F0": 32470,
+   "F1": 32493
   }
  ],
  "sentences": [
@@ -207,245 +207,248 @@
  "holds": [],
  "events": [
   {
-   "id": "frame",
-   "obj": "frame",
-   "verb": "grow",
+   "id": "land",
+   "obj": "track",
+   "verb": "move",
    "ease": "inout",
-   "means": "AI：讲解卡外框画出",
-   "f_start": 14,
-   "f_land": 32,
-   "f_end": 44,
-   "until": "4-08.w001",
+   "means": "段首：循环轨道的骨白底板从盖满画面退到右区，小人已站在轨道左前",
+   "f_start": 0,
+   "f_land": 26,
+   "f_end": 26,
+   "until": null,
    "word": "4-08.w001",
    "w": "AI",
    "key": "ai#1",
    "sid": "4-08.s1",
    "word_f0": 32,
-   "tool": "remotion",
-   "F_start": 32970,
-   "F_land": 32988,
-   "F_end": 33000
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 32020,
+   "F_land": 32046,
+   "F_end": 32046
   },
   {
-   "id": "plate",
-   "obj": "plate",
-   "verb": "appear",
+   "id": "chip_drop",
+   "obj": "chip",
+   "verb": "eject",
    "ease": "inout",
-   "means": "AI：深色牌 AI",
-   "f_start": 24,
+   "means": "黑色芯片从上方弹下，停在轨道上方（A4）",
+   "f_start": 26,
    "f_land": 32,
-   "f_end": 44,
-   "until": "4-08.w001",
+   "f_end": 46,
+   "until": null,
    "word": "4-08.w001",
    "w": "AI",
    "key": "ai#1",
    "sid": "4-08.s1",
    "word_f0": 32,
-   "tool": "remotion",
-   "F_start": 32980,
-   "F_land": 32988,
-   "F_end": 33000
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 32046,
+   "F_land": 32052,
+   "F_end": 32066
   },
   {
-   "id": "arrow",
-   "obj": "arrow",
-   "verb": "grow",
+   "id": "chip_feint",
+   "obj": "chip",
+   "verb": "move",
    "ease": "inout",
-   "means": "replace：箭头从 AI 牌画向下方",
-   "f_start": 45,
+   "means": "芯片朝小人的位置压下去一半，停住，退回原位；小人不动",
+   "f_start": 47,
    "f_land": 61,
-   "f_end": 88,
-   "until": "4-08.w003",
+   "f_end": 81,
+   "until": null,
    "word": "4-08.w003",
    "w": "replace",
    "key": "replace#1",
    "sid": "4-08.s1",
    "word_f0": 61,
-   "tool": "remotion",
-   "F_start": 33001,
-   "F_land": 33017,
-   "F_end": 33044
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 32067,
+   "F_land": 32081,
+   "F_end": 32101
   },
   {
-   "id": "cross",
-   "obj": "cross",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "the：红叉盖在箭头上，没被替换",
-   "f_start": 74,
-   "f_land": 88,
-   "f_end": 92,
-   "until": "4-08.w004",
-   "word": "4-08.w004",
-   "w": "the",
-   "key": "the#1",
-   "sid": "4-08.s1",
-   "word_f0": 88,
-   "tool": "remotion",
-   "F_start": 33030,
-   "F_land": 33044,
-   "F_end": 33048
-  },
-  {
-   "id": "person",
+   "id": "person_hop",
    "obj": "person",
-   "verb": "grow",
+   "verb": "move",
    "ease": "inout",
-   "means": "scientists：小人长出，字牌 scientists",
-   "f_start": 84,
+   "means": "小人轻跳一下，轮廓光亮",
+   "f_start": 92,
    "f_land": 98,
    "f_end": 143,
-   "until": "4-08.w005",
+   "until": "4-08.s1",
    "word": "4-08.w005",
    "w": "scientists.",
    "key": "scientists#1",
    "sid": "4-08.s1",
    "word_f0": 98,
-   "tool": "remotion",
-   "F_start": 33040,
-   "F_land": 33054,
-   "F_end": 33099
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 32112,
+   "F_land": 32118,
+   "F_end": 32163
   },
   {
-   "id": "loop",
-   "obj": "loop",
-   "verb": "grow",
+   "id": "car_go",
+   "obj": "car",
+   "verb": "move",
    "ease": "inout",
-   "means": "ran：循环箭头长出，AI 牌的箭头淡出",
-   "f_start": 199,
-   "f_land": 213,
-   "f_end": 228,
-   "until": "4-08.w007",
-   "word": "4-08.w007",
-   "w": "ran",
-   "key": "ran#1",
-   "sid": "4-08.s2",
-   "word_f0": 213,
-   "tool": "remotion",
-   "F_start": 33155,
-   "F_land": 33169,
-   "F_end": 33184
-  },
-  {
-   "id": "trial",
-   "obj": "trial",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "trial：标签 trial，循环转起来",
+   "means": "小车沿轨道走，60 帧一圈",
    "f_start": 252,
    "f_land": 262,
-   "f_end": 285,
-   "until": "4-08.w009",
+   "f_end": 357,
+   "until": "4-08.w014",
    "word": "4-08.w009",
    "w": "trial",
    "key": "trial#1",
    "sid": "4-08.s2",
    "word_f0": 262,
-   "tool": "remotion",
-   "F_start": 33208,
-   "F_land": 33218,
-   "F_end": 33241
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 32272,
+   "F_land": 32282,
+   "F_end": 32377
   },
   {
-   "id": "error",
-   "obj": "error",
+   "id": "fail_blink",
+   "obj": "test_light",
    "verb": "appear",
    "ease": "inout",
-   "means": "error：标签 error",
-   "f_start": 298,
+   "means": "小车过 Test 站时站上的红灯闪一下",
+   "f_start": 306,
    "f_land": 308,
-   "f_end": 326,
-   "until": "4-08.w011",
+   "f_end": 332,
+   "until": null,
    "word": "4-08.w011",
    "w": "error",
    "key": "error#1",
    "sid": "4-08.s2",
    "word_f0": 308,
-   "tool": "remotion",
-   "F_start": 33254,
-   "F_land": 33264,
-   "F_end": 33282
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 32326,
+   "F_land": 32328,
+   "F_end": 32352
   },
   {
-   "id": "screen",
-   "obj": "screen",
-   "verb": "grow",
+   "id": "into_chip",
+   "obj": "track",
+   "verb": "move",
    "ease": "inout",
-   "means": "inside：屏幕框把循环框住",
-   "f_start": 311,
+   "means": "轨道连小车沿直线退进芯片下面，同时缩到 0.55 倍，芯片盖在上面",
+   "f_start": 301,
    "f_land": 331,
-   "f_end": 352,
-   "until": "4-08.w012",
+   "f_end": 390,
+   "until": "4-08.w014",
    "word": "4-08.w012",
    "w": "inside",
    "key": "inside#1",
    "sid": "4-08.s2",
    "word_f0": 331,
-   "tool": "remotion",
-   "F_start": 33267,
-   "F_land": 33287,
-   "F_end": 33308
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 32321,
+   "F_land": 32351,
+   "F_end": 32410
   },
   {
-   "id": "comp",
-   "obj": "comp",
-   "verb": "appear",
+   "id": "ring_on",
+   "obj": "ring",
+   "verb": "power_on",
    "ease": "inout",
-   "means": "computer：标签 computer",
+   "means": "芯片顶面亮起一个光环",
    "f_start": 349,
    "f_land": 357,
-   "f_end": 390,
-   "until": "4-08.w014",
+   "f_end": 377,
+   "until": null,
    "word": "4-08.w014",
    "w": "computer,",
    "key": "computer#1",
    "sid": "4-08.s2",
    "word_f0": 357,
-   "tool": "remotion",
-   "F_start": 33305,
-   "F_land": 33313,
-   "F_end": 33346
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 32369,
+   "F_land": 32377,
+   "F_end": 32397
   },
   {
-   "id": "fast",
-   "obj": "fast",
-   "verb": "morph",
+   "id": "ring_spin",
+   "obj": "ring",
+   "verb": "move",
    "ease": "inout",
-   "means": "light：循环加速",
-   "f_start": 410,
+   "means": "光环越转越快，带运动模糊",
+   "f_start": 414,
    "f_land": 434,
-   "f_end": 450,
-   "until": "4-08.w016",
+   "f_end": 473,
+   "until": "4-08.w017",
    "word": "4-08.w016",
    "w": "light",
    "key": "light#1",
    "sid": "4-08.s2",
    "word_f0": 434,
-   "tool": "remotion",
-   "F_start": 33366,
-   "F_land": 33390,
-   "F_end": 33406
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 32434,
+   "F_land": 32454,
+   "F_end": 32493
   },
   {
-   "id": "blur",
-   "obj": "blur",
-   "verb": "morph",
+   "id": "streak",
+   "obj": "streak",
+   "verb": "move",
    "ease": "inout",
-   "means": "speed：模糊光圈和加速线",
-   "f_start": 438,
+   "means": "一道光从环上甩出去，划过右上角出画",
+   "f_start": 444,
    "f_land": 450,
    "f_end": 473,
-   "until": "4-08.w017",
+   "until": "4-08.s2",
    "word": "4-08.w017",
    "w": "speed.",
    "key": "speed#1",
    "sid": "4-08.s2",
    "word_f0": 450,
-   "tool": "remotion",
-   "F_start": 33394,
-   "F_land": 33406,
-   "F_end": 33429
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 32464,
+   "F_land": 32470,
+   "F_end": 32493
+  },
+  {
+   "id": "dive",
+   "obj": "ring",
+   "verb": "move",
+   "ease": "in",
+   "means": "光环冲镜头，盖满帧是暖白的光，平均亮度 0.6–0.9",
+   "f_start": 475,
+   "f_land": 519,
+   "f_end": 519,
+   "until": null,
+   "word": "4-08.w017",
+   "w": "speed.",
+   "key": "speed#1",
+   "sid": "4-08.s2",
+   "word_f0": 450,
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 32495,
+   "F_land": 32539,
+   "F_end": 32539
   }
  ],
+ "guides": [],
  "problems": []
 }

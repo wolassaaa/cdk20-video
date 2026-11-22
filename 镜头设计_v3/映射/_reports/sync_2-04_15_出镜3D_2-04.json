@@ -1,0 +1,96 @@
+{
+ "video": "D:\\。hkbu\\molecular science\\导演检查_20261121\\15_出镜3D_2-04.mp4",
+ "group": "2-04",
+ "fps": 60.0,
+ "frames": 238,
+ "offset_f": 0,
+ "S1": {
+  "word_events": 4,
+  "table_dev_max_f": 0,
+  "video_checked": 5,
+  "video_no_motion": [],
+  "pass_": true
+ },
+ "S2": {
+  "pass_": true,
+  "early": []
+ },
+ "S3": {
+  "pass_": true,
+  "longest_still_f": 0,
+  "bad": []
+ },
+ "S4": {
+  "pass_": true,
+  "looks_like_30": false,
+  "dup_frames": 0,
+  "stepped_dups": 0,
+  "stepped_ratio": 0.0,
+  "blend_frames": 0,
+  "blend_first": [],
+  "design_fade": 0,
+  "verdict": "原生（无变速重复/混帧）"
+ },
+ "sentences": [
+  {
+   "sid": "2-04.s1",
+   "f0": 32,
+   "f1": 187,
+   "last_motion_f": 187,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  }
+ ],
+ "events": [
+  {
+   "id": "arrive",
+   "verb": "move",
+   "w": "We",
+   "f_land": 32,
+   "table_dev": 0
+  },
+  {
+   "id": "set",
+   "verb": "move",
+   "w": "set",
+   "f_land": 45,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "ourselves",
+   "verb": "move",
+   "w": "ourselves",
+   "f_land": 69,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "two",
+   "verb": "eject",
+   "w": "two",
+   "f_land": 116,
+   "table_dev": 2,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "obj",
+   "verb": "move",
+   "w": "objectives.",
+   "f_land": 138,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "dive",
+   "verb": "move",
+   "w": "objectives.",
+   "f_land": 237,
+   "table_dev": 99,
+   "video_motion_near_start": true
+  }
+ ],
+ "pass": true
+}

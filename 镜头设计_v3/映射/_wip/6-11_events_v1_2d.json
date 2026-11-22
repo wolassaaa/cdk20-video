@@ -1,0 +1,357 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "6-11",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 6 章二维说明书页 6-11（B 画外音）：同一条七站路（坐标照 Manual208），镜头先平移到远端；两个 AI-assisted 小牌子从左边走来，一个走到 Approval，牌子改写成 lirafugratinib，旁边写 September 2026 / approved in the US / for a bile duct cancer；另一个在半路倒下变灰打叉；镜头拉回全景，048 在 Cells，makers 小人，通往 trials 的虚线箭头被红杠挡住，三个研究者各连一条线。页面 Manual611.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "title",
+   "obj": "title",
+   "verb": "appear",
+   "at": {
+    "word": "6-11.w002",
+    "off": 0
+   },
+   "means": "here's what the end of that road：标题写出",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-11.w011"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "pan",
+   "obj": "pan",
+   "verb": "move",
+   "at": {
+    "word": "6-11.w008",
+    "off": 0
+   },
+   "means": "end of that road：镜头往右平移到路的远端",
+   "tool": "remotion",
+   "lead": 39,
+   "until": {
+    "word": "6-11.w008"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "ring",
+   "obj": "ring",
+   "verb": "appear",
+   "at": {
+    "word": "6-11.w010",
+    "off": 0
+   },
+   "means": "look like：Approval 站外画红色虚线圈",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "6-11.w011"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "tags",
+   "obj": "tags",
+   "verb": "grow",
+   "at": {
+    "word": "6-11.w012",
+    "off": 0
+   },
+   "means": "Some：两个小牌子从左边走进画面",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "6-11.w012"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "ai",
+   "obj": "ai",
+   "verb": "morph",
+   "at": {
+    "word": "6-11.w013",
+    "off": 0
+   },
+   "means": "AI-assisted：牌子上写 AI-assisted",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-11.w013"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "walk1",
+   "obj": "walk1",
+   "verb": "move",
+   "at": {
+    "word": "6-11.w015",
+    "off": 0
+   },
+   "means": "cancer drugs：两个牌子一起往前走一段",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "word": "6-11.w015"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "walk2",
+   "obj": "walk2",
+   "verb": "move",
+   "at": {
+    "word": "6-11.w019",
+    "off": 0
+   },
+   "means": "walked much further：两个牌子走得更远，过了 048",
+   "tool": "remotion",
+   "lead": 33,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "date",
+   "obj": "date",
+   "verb": "appear",
+   "at": {
+    "word": "6-11.w021",
+    "off": 0
+   },
+   "means": "September 2026：远端写日期",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-11.w022"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "ago",
+   "obj": "ago",
+   "verb": "move",
+   "at": {
+    "word": "6-11.w023",
+    "off": 0
+   },
+   "means": "one of them：其中一个牌子走到 Approval",
+   "tool": "remotion",
+   "lead": 112,
+   "until": {
+    "word": "6-11.w023"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "name",
+   "obj": "name",
+   "verb": "morph",
+   "at": {
+    "word": "6-11.w026",
+    "off": 0
+   },
+   "means": "lirafugratinib：牌子改写成药名，远端写药名",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "6-11.w027"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "appr",
+   "obj": "appr",
+   "verb": "snap",
+   "at": {
+    "word": "6-11.w028",
+    "off": 0
+   },
+   "means": "approved in the US：Approval 站变红，圈变实，牌子打勾，写 approved in the US",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "6-11.w031"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "bile",
+   "obj": "bile",
+   "verb": "appear",
+   "at": {
+    "word": "6-11.w034",
+    "off": 0
+   },
+   "means": "bile duct cancer：写 for a bile duct cancer",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "oth",
+   "obj": "oth",
+   "verb": "snap",
+   "at": {
+    "word": "6-11.w037",
+    "off": 0
+   },
+   "means": "Others：另一个牌子晃一下",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "6-11.w037"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "fail",
+   "obj": "fail",
+   "verb": "morph",
+   "at": {
+    "word": "6-11.w038",
+    "off": 0
+   },
+   "means": "failed along the way：牌子倒下变灰，红叉，写 failed along the way",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "back",
+   "obj": "back",
+   "verb": "move",
+   "at": {
+    "word": "6-11.w043",
+    "off": 0
+   },
+   "means": "048：镜头拉回全景，048 跳一下",
+   "tool": "remotion",
+   "lead": 36,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "mk",
+   "obj": "mk",
+   "verb": "grow",
+   "at": {
+    "word": "6-11.w045",
+    "off": 0
+   },
+   "means": "makers：048 旁长出一个小人",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-11.w046"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "person_r"
+    ]
+   }
+  },
+  {
+   "id": "nott",
+   "obj": "nott",
+   "verb": "appear",
+   "at": {
+    "word": "6-11.w047",
+    "off": 0
+   },
+   "means": "not to take it to trials：048 往 trials 的虚线箭头被红杠挡住，红批注 not to trials",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "6-11.w052"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "sh",
+   "obj": "sh",
+   "verb": "grow",
+   "at": {
+    "word": "6-11.w054",
+    "off": 0
+   },
+   "means": "shared it：三个研究者长出，048 各连一条线",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "6-11.w056"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "person_w"
+    ]
+   }
+  },
+  {
+   "id": "res",
+   "obj": "res",
+   "verb": "appear",
+   "at": {
+    "word": "6-11.w058",
+    "off": 0
+   },
+   "means": "other researchers：写 shared with other researchers，连线变红",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  }
+ ]
+}

@@ -1,0 +1,208 @@
+{
+ "video": "D:/。hkbu/molecular science/镜头设计_v3/映射/_cache/ch1_1-10/check.mov",
+ "group": "1-10",
+ "fps": 60.0,
+ "frames": 838,
+ "offset_f": 0,
+ "S1": {
+  "word_events": 13,
+  "table_dev_max_f": 0,
+  "video_checked": 16,
+  "video_no_motion": [],
+  "pass_": true
+ },
+ "S2": {
+  "pass_": true,
+  "early": []
+ },
+ "S3": {
+  "pass_": true,
+  "longest_still_f": 0,
+  "bad": []
+ },
+ "S4": {
+  "pass_": false,
+  "looks_like_30": true,
+  "dup_frames": 0,
+  "stepped_dups": 0,
+  "stepped_ratio": 0.0,
+  "blend_frames": 272,
+  "blend_first": [
+   210,
+   211,
+   212,
+   213,
+   214,
+   215,
+   216,
+   217,
+   218,
+   219,
+   220,
+   221,
+   222,
+   223,
+   224,
+   225,
+   226,
+   227,
+   228,
+   229
+  ],
+  "design_fade": 0,
+  "verdict": "有混帧（变速慢放）"
+ },
+ "sentences": [
+  {
+   "sid": "1-10.s1",
+   "f0": 9,
+   "f1": 147,
+   "last_motion_f": 147,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "1-10.s2",
+   "f0": 188,
+   "f1": 814,
+   "last_motion_f": 814,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  }
+ ],
+ "events": [
+  {
+   "id": "cam_a",
+   "verb": "camera_to",
+   "w": "interesting.",
+   "f_land": 113,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "pulse_a",
+   "verb": "flow",
+   "w": "2024,",
+   "f_land": 189,
+   "table_dev": -6,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cal_grow",
+   "verb": "grow",
+   "w": "2024,",
+   "f_land": 195,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_medal",
+   "verb": "camera_to",
+   "w": "Nobel",
+   "f_land": 317,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "medal_grow",
+   "verb": "grow",
+   "w": "Nobel",
+   "f_land": 317,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_names",
+   "verb": "camera_to",
+   "w": "Demis",
+   "f_land": 443,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "medal_eject",
+   "verb": "eject",
+   "w": "went",
+   "f_land": 417,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "medal_spin",
+   "verb": "move",
+   "w": "went",
+   "f_land": 419,
+   "table_dev": 2,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "names_grow",
+   "verb": "grow",
+   "w": "Demis",
+   "f_land": 443,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_chip",
+   "verb": "camera_to",
+   "w": "AlphaFold,",
+   "f_land": 611,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "chip_grow",
+   "verb": "grow",
+   "w": "AlphaFold,",
+   "f_land": 611,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "chain_out",
+   "verb": "flow",
+   "w": "predicts",
+   "f_land": 718,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_fold",
+   "verb": "camera_to",
+   "w": "proteins.",
+   "f_land": 783,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "chain_fold",
+   "verb": "morph",
+   "w": "shape",
+   "f_land": 756,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "surface",
+   "verb": "appear",
+   "w": "proteins.",
+   "f_land": 793,
+   "table_dev": 10,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "source_line",
+   "verb": "appear",
+   "w": "2024,",
+   "f_land": 195,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  }
+ ],
+ "pass": false
+}

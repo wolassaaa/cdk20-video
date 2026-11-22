@@ -1,357 +1,279 @@
 {
- "schema": "cdk20.events/1",
- "group": "6-11",
- "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：第 6 章二维说明书页 6-11（B 画外音）：同一条七站路（坐标照 Manual208），镜头先平移到远端；两个 AI-assisted 小牌子从左边走来，一个走到 Approval，牌子改写成 lirafugratinib，旁边写 September 2026 / approved in the US / for a bile duct cancer；另一个在半路倒下变灰打叉；镜头拉回全景，048 在 Cells，makers 小人，通往 trials 的虚线箭头被红杠挡住，三个研究者各连一条线。页面 Manual611.jsx。",
- "holds": [],
- "events": [
-  {
-   "id": "title",
-   "obj": "title",
-   "verb": "appear",
-   "at": {
-    "word": "6-11.w002",
-    "off": 0
-   },
-   "means": "here's what the end of that road：标题写出",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "6-11.w011"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "pan",
-   "obj": "pan",
-   "verb": "move",
-   "at": {
-    "word": "6-11.w008",
-    "off": 0
-   },
-   "means": "end of that road：镜头往右平移到路的远端",
-   "tool": "remotion",
-   "lead": 39,
-   "until": {
-    "word": "6-11.w008"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "ring",
-   "obj": "ring",
-   "verb": "appear",
-   "at": {
-    "word": "6-11.w010",
-    "off": 0
-   },
-   "means": "look like：Approval 站外画红色虚线圈",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "6-11.w011"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "tags",
-   "obj": "tags",
-   "verb": "grow",
-   "at": {
-    "word": "6-11.w012",
-    "off": 0
-   },
-   "means": "Some：两个小牌子从左边走进画面",
-   "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "6-11.w012"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "ai",
-   "obj": "ai",
-   "verb": "morph",
-   "at": {
-    "word": "6-11.w013",
-    "off": 0
-   },
-   "means": "AI-assisted：牌子上写 AI-assisted",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "6-11.w013"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "walk1",
-   "obj": "walk1",
-   "verb": "move",
-   "at": {
-    "word": "6-11.w015",
-    "off": 0
-   },
-   "means": "cancer drugs：两个牌子一起往前走一段",
-   "tool": "remotion",
-   "lead": 30,
-   "until": {
-    "word": "6-11.w015"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "walk2",
-   "obj": "walk2",
-   "verb": "move",
-   "at": {
-    "word": "6-11.w019",
-    "off": 0
-   },
-   "means": "walked much further：两个牌子走得更远，过了 048",
-   "tool": "remotion",
-   "lead": 33,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "date",
-   "obj": "date",
-   "verb": "appear",
-   "at": {
-    "word": "6-11.w021",
-    "off": 0
-   },
-   "means": "September 2026：远端写日期",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "6-11.w022"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "ago",
-   "obj": "ago",
-   "verb": "move",
-   "at": {
-    "word": "6-11.w023",
-    "off": 0
-   },
-   "means": "one of them：其中一个牌子走到 Approval",
-   "tool": "remotion",
-   "lead": 112,
-   "until": {
-    "word": "6-11.w023"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "name",
-   "obj": "name",
-   "verb": "morph",
-   "at": {
-    "word": "6-11.w026",
-    "off": 0
-   },
-   "means": "lirafugratinib：牌子改写成药名，远端写药名",
-   "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "word": "6-11.w027"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "appr",
-   "obj": "appr",
-   "verb": "snap",
-   "at": {
-    "word": "6-11.w028",
-    "off": 0
-   },
-   "means": "approved in the US：Approval 站变红，圈变实，牌子打勾，写 approved in the US",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "6-11.w031"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "bile",
-   "obj": "bile",
-   "verb": "appear",
-   "at": {
-    "word": "6-11.w034",
-    "off": 0
-   },
-   "means": "bile duct cancer：写 for a bile duct cancer",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "oth",
-   "obj": "oth",
-   "verb": "snap",
-   "at": {
-    "word": "6-11.w037",
-    "off": 0
-   },
-   "means": "Others：另一个牌子晃一下",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "6-11.w037"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "fail",
-   "obj": "fail",
-   "verb": "morph",
-   "at": {
-    "word": "6-11.w038",
-    "off": 0
-   },
-   "means": "failed along the way：牌子倒下变灰，红叉，写 failed along the way",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "back",
-   "obj": "back",
-   "verb": "move",
-   "at": {
-    "word": "6-11.w043",
-    "off": 0
-   },
-   "means": "048：镜头拉回全景，048 跳一下",
-   "tool": "remotion",
-   "lead": 36,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "mk",
-   "obj": "mk",
-   "verb": "grow",
-   "at": {
-    "word": "6-11.w045",
-    "off": 0
-   },
-   "means": "makers：048 旁长出一个小人",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "6-11.w046"
-   },
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "person_r"
-    ]
-   }
-  },
-  {
-   "id": "nott",
-   "obj": "nott",
-   "verb": "appear",
-   "at": {
-    "word": "6-11.w047",
-    "off": 0
-   },
-   "means": "not to take it to trials：048 往 trials 的虚线箭头被红杠挡住，红批注 not to trials",
-   "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "word": "6-11.w052"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "sh",
-   "obj": "sh",
-   "verb": "grow",
-   "at": {
-    "word": "6-11.w054",
-    "off": 0
-   },
-   "means": "shared it：三个研究者长出，048 各连一条线",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "6-11.w056"
-   },
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "person_w"
-    ]
-   }
-  },
-  {
-   "id": "res",
-   "obj": "res",
-   "verb": "appear",
-   "at": {
-    "word": "6-11.w058",
-    "off": 0
-   },
-   "means": "other researchers：写 shared with other researchers，连线变红",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  }
- ]
+  "schema": "cdk20.events/1",
+  "group": "6-11",
+  "tool": "blender",
+  "note": "HKBU SCIE1007 课程作业的科普视频：6-11 三维版事件表（Codex 照 18 填）。",
+  "holds": [],
+  "events": [
+    {
+      "id": "cam_end",
+      "obj": "cam_end",
+      "verb": "camera_to",
+      "at": {
+        "word": "6-11.w005",
+        "off": 0
+      },
+      "lead": 40,
+      "until": {
+        "word": "6-11.w011"
+      },
+      "means": "镜头沿料杆滑到路的尽头，Approval 站入画",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "tagB_run",
+      "obj": "tagB_run",
+      "verb": "move",
+      "at": {
+        "word": "6-11.w013",
+        "off": 0
+      },
+      "lead": 10,
+      "until": {
+        "word": "6-11.w019"
+      },
+      "means": "一块蓝色吊牌（h19，蓝）从起点飞快滑过 048，一路滑到 Trials 站前",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "date",
+      "obj": "date",
+      "verb": "appear",
+      "at": {
+        "word": "6-11.w021",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "word": "6-11.w022"
+      },
+      "means": "Approval 站旁的小翻牌翻出 `Sep 2026`",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "tagB_arrive",
+      "obj": "tagB_arrive",
+      "verb": "move",
+      "at": {
+        "word": "6-11.w026",
+        "off": 0
+      },
+      "lead": 24,
+      "until": {
+        "dur": 10
+      },
+      "means": "蓝色吊牌滑进 Approval 站",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "label_lira",
+      "obj": "label_lira",
+      "verb": "appear",
+      "at": {
+        "word": "6-11.w026",
+        "off": 0
+      },
+      "lead": 2,
+      "until": {
+        "word": "6-11.w036"
+      },
+      "means": "标签第一行 `lirafugratinib`",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "approved",
+      "obj": "approved",
+      "verb": "snap",
+      "at": {
+        "word": "6-11.w028",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "dur": 20
+      },
+      "means": "Approval 站描红，勾扣上",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "label_us",
+      "obj": "label_us",
+      "verb": "appear",
+      "at": {
+        "word": "6-11.w031",
+        "off": 0
+      },
+      "lead": 2,
+      "until": {
+        "word": "6-11.w036"
+      },
+      "means": "标签第二行 `approved in the US, Sep 2026`",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "label_bile",
+      "obj": "label_bile",
+      "verb": "appear",
+      "at": {
+        "word": "6-11.w034",
+        "off": 0
+      },
+      "lead": 2,
+      "until": {
+        "word": "6-11.w036"
+      },
+      "means": "标签第三行 `for a bile duct cancer`",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "tagC_run",
+      "obj": "tagC_run",
+      "verb": "move",
+      "at": {
+        "word": "6-11.w037",
+        "off": 0
+      },
+      "lead": 20,
+      "until": {
+        "word": "6-11.w038",
+        "edge": "start"
+      },
+      "means": "第三块蓝色吊牌从起点滑到 Animals 站后面",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "tagC_fail",
+      "obj": "tagC_fail",
+      "verb": "move",
+      "at": {
+        "word": "6-11.w038",
+        "off": 0
+      },
+      "lead": 8,
+      "until": {
+        "sentence_end": true
+      },
+      "means": "它从浇口断开，掉进下面的废料桶，变灰",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "cam_back",
+      "obj": "cam_back",
+      "verb": "camera_to",
+      "at": {
+        "word": "6-11.w043",
+        "off": 0
+      },
+      "lead": 24,
+      "until": {
+        "sentence_end": true
+      },
+      "means": "镜头沿料杆快速退回 Cells 站（24 帧，带运动模糊），048 吊牌在画面中间",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "nudge",
+      "obj": "nudge",
+      "verb": "move",
+      "at": {
+        "word": "6-11.w045",
+        "off": 0
+      },
+      "lead": 10,
+      "until": {
+        "dur": 30
+      },
+      "means": "048 吊牌往前挪半步又退回",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "gate",
+      "obj": "gate",
+      "verb": "snap",
+      "at": {
+        "word": "6-11.w052",
+        "off": 0
+      },
+      "lead": 8,
+      "until": {
+        "dur": 14
+      },
+      "means": "Cells 站后面的料杆上落下一个骨白小挡块，048 不再往前",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "share",
+      "obj": "share",
+      "verb": "grow",
+      "at": {
+        "word": "6-11.w054",
+        "off": 0
+      },
+      "lead": 10,
+      "until": {
+        "word": "6-11.w058",
+        "edge": "start"
+      },
+      "means": "048 吊牌的浇口上长出三根细料杆，各带一块 048 的小牌",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "people",
+      "obj": "people",
+      "verb": "eject",
+      "at": {
+        "word": "6-11.w058",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "sentence_end": true
+      },
+      "means": "三根细料杆的另一头各弹出一个白色小人，接住小牌",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "dive",
+      "obj": "dive",
+      "verb": "move",
+      "at": {
+        "word": "6-11.w059",
+        "off": 39
+      },
+      "means": "048 吊牌的金色牌面冲镜头，接 6-12",
+      "guide": {
+        "kind": "none"
+      }
+    }
+  ]
 }

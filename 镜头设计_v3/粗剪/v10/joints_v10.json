@@ -1,0 +1,1192 @@
+[
+  {
+    "id": "J00",
+    "left": null,
+    "right": "W0",
+    "code": null,
+    "wipe": null,
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "第 0 帧就是画面，不留黑",
+    "sound": "歌的鼓第 0 帧直起",
+    "source": [
+      "文件头",
+      "W0（M）",
+      "—"
+    ]
+  },
+  {
+    "id": "J01",
+    "left": "W0",
+    "right": "1-01",
+    "code": "T5",
+    "wipe": "w0plate",
+    "overlay": "assembly-right",
+    "chapter_sweep": false,
+    "note": "白料牌，已做；擦除层叠到 1-01 头 15 帧",
+    "sound": "歌尾照卡点表；风声已做；\"Every\" 在 0.54 s",
+    "source": [
+      "W0（M）",
+      "1-01（出）",
+      "T5"
+    ]
+  },
+  {
+    "id": "J02",
+    "left": "1-01",
+    "right": "1-02",
+    "code": "T1+T5",
+    "wipe": "oncam_1-01",
+    "overlay": "assembly-right",
+    "chapter_sweep": false,
+    "note": "1-01 段尾零件冲镜；`bwipe/oncam_1-01` 的退场半段叠在 1-02 头 17 帧。**已知毛病：1-01 后面有 0.5 s 黑帧，拼片时去掉**",
+    "sound": "pad 从 \"cancer.\" 起淡入",
+    "source": [
+      "1-01（出）",
+      "1-02（C）",
+      "T1 加 T5 oncam_1-01"
+    ],
+    "wipe_fallback": "runner"
+  },
+  {
+    "id": "J03",
+    "left": "1-02",
+    "right": "1-03",
+    "code": "T5",
+    "wipe": "oncam_1-03",
+    "overlay": "assembly-left",
+    "chapter_sweep": false,
+    "note": "`bwipe/oncam_1-03` 的入场半段叠在 1-02 尾 17 帧",
+    "sound": "底乐不停",
+    "source": [
+      "1-02（C）",
+      "1-03（出）",
+      "T5 oncam_1-03"
+    ],
+    "wipe_fallback": "runner"
+  },
+  {
+    "id": "J04",
+    "left": "1-03",
+    "right": "1-04",
+    "code": "T1+T5",
+    "wipe": "oncam_1-03",
+    "overlay": "assembly-right",
+    "chapter_sweep": false,
+    "note": "1-03 段尾零件冲镜；退场半段叠在 1-04 头 17 帧（1-04 现在写的是 capsule，重渲时改）",
+    "sound": "",
+    "source": [
+      "1-03（出）",
+      "1-04（B）",
+      "T1 加 T5 oncam_1-03"
+    ],
+    "wipe_fallback": "runner",
+    "alt": "（1-04 现在写的是 capsule，重渲时改）"
+  },
+  {
+    "id": "J05",
+    "left": "1-04",
+    "right": "1-05+1-06+1-07",
+    "code": "T5",
+    "wipe": "oncam_1-05_1-06_1-07",
+    "overlay": "assembly-left",
+    "chapter_sweep": false,
+    "note": "入场半段叠在 1-04 尾 17 帧；出镜段首是钥匙坯的金色柄面盖满",
+    "sound": "",
+    "source": [
+      "1-04（B）",
+      "1-05–07（出）",
+      "T5 oncam_1-05_1-06_1-07"
+    ],
+    "wipe_fallback": "runner"
+  },
+  {
+    "id": "J06",
+    "left": "1-05+1-06+1-07",
+    "right": "1-08",
+    "code": "T1+T5",
+    "wipe": "oncam_1-05_1-06_1-07",
+    "overlay": "assembly-right",
+    "chapter_sweep": false,
+    "note": "段尾是卷尺的骨白壳面盖满；退场半段叠在 1-08 头 17 帧",
+    "sound": "",
+    "source": [
+      "1-05–07（出）",
+      "1-08（B）",
+      "T1 加 T5 oncam_1-05_1-06_1-07"
+    ],
+    "wipe_fallback": "runner"
+  },
+  {
+    "id": "J07",
+    "left": "1-08",
+    "right": "1-09",
+    "code": "T5",
+    "wipe": "runner",
+    "overlay": "assembly-right",
+    "chapter_sweep": false,
+    "note": "页面已写；退场半段由拼片叠在 1-09 头 17 帧",
+    "sound": "",
+    "source": [
+      "1-08（B）",
+      "1-09（C）",
+      "T5 runner"
+    ]
+  },
+  {
+    "id": "J08",
+    "left": "1-09",
+    "right": "1-10",
+    "code": "T5",
+    "wipe": "liver",
+    "overlay": "assembly",
+    "chapter_sweep": false,
+    "note": "装配叠",
+    "sound": "底乐①后半已经在走",
+    "source": [
+      "1-09（C）",
+      "1-10（C）",
+      "T5 liver"
+    ]
+  },
+  {
+    "id": "J09",
+    "left": "1-10",
+    "right": "1-11",
+    "code": "T5",
+    "wipe": "runner",
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "页面已写",
+    "sound": "",
+    "source": [
+      "1-10（C）",
+      "1-11（B）",
+      "T5 runner"
+    ]
+  },
+  {
+    "id": "J10",
+    "left": "1-11",
+    "right": "W1",
+    "code": "T6+one-take",
+    "wipe": null,
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "已做：页面 → 三维尾巴 14 帧光扫，镜头不剪进 W1",
+    "sound": "歌的上扬段已经在下面；底乐淡到 W1 第 0 拍为 0",
+    "source": [
+      "1-11（B）",
+      "W1（M）",
+      "T6 加一镜到底"
+    ]
+  },
+  {
+    "id": "J11",
+    "left": "W1",
+    "right": "2-01",
+    "code": "one-take+T6",
+    "wipe": null,
+    "overlay": null,
+    "chapter_sweep": true,
+    "note": "已做。18 的 T1 返修做了以后：W1 的落点改到香港地图零件上，2-01 第 0 帧的地图贴图和它对位（T3，误差 ≤ 4 px），光扫照旧",
+    "sound": "歌第 47.9 拍到 0 加甩尾；底乐②在 ≥ 1.0 s 后的小节线进",
+    "source": [
+      "W1（M）",
+      "2-01（B）",
+      "一镜到底加 T6"
+    ],
+    "alt": "18 的 T1 返修做了以后：W1 的落点改到香港地图零件上，2-01 第 0 帧的地图贴图和它对位（T3，误差 ≤ 4 px），光扫照旧"
+  },
+  {
+    "id": "J12",
+    "left": "2-01",
+    "right": "2-02",
+    "code": "T5",
+    "wipe": "runner",
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "页面已写。2-02 照 18 的 2.4 重做成三维出镜以后改用 oncam_2-02",
+    "sound": "",
+    "source": [
+      "2-01（B）",
+      "2-02（C，出镜）",
+      "T5 runner"
+    ],
+    "alt": "2-02 照 18 的 2.4 重做成三维出镜以后改用 oncam_2-02"
+  },
+  {
+    "id": "J13",
+    "left": "2-02",
+    "right": "2-03",
+    "code": "T5",
+    "wipe": "key",
+    "overlay": "assembly",
+    "chapter_sweep": false,
+    "note": "装配叠。2-02 重做以后：T1（金插头的柄面冲镜）加 oncam_2-02 的退场半段，叠在 2-03 头 17 帧",
+    "sound": "",
+    "source": [
+      "2-02（C，出镜）",
+      "2-03（C）",
+      "T5 key"
+    ],
+    "alt": "2-02 重做以后：T1（金插头的柄面冲镜）加 oncam_2-02 的退场半段，叠在 2-03 头 17 帧"
+  },
+  {
+    "id": "J14",
+    "left": "2-03",
+    "right": "2-04",
+    "code": "T5",
+    "wipe": "oncam_2-04",
+    "overlay": "assembly-left",
+    "chapter_sweep": false,
+    "note": "`bwipe/oncam_2-04` 的入场半段叠在 2-03 尾 17 帧",
+    "sound": "",
+    "source": [
+      "2-03（C）",
+      "2-04（出）",
+      "T5 oncam_2-04"
+    ],
+    "wipe_fallback": "runner"
+  },
+  {
+    "id": "J15",
+    "left": "2-04",
+    "right": "2-05",
+    "code": "T1+T5",
+    "wipe": "oncam_2-04",
+    "overlay": "assembly-right",
+    "chapter_sweep": false,
+    "note": "退场半段叠在 2-05 头 17 帧",
+    "sound": "",
+    "source": [
+      "2-04（出）",
+      "2-05（B）",
+      "T1 加 T5 oncam_2-04"
+    ],
+    "wipe_fallback": "runner"
+  },
+  {
+    "id": "J16",
+    "left": "2-05",
+    "right": "2-06",
+    "code": "T2",
+    "wipe": null,
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "页面已写",
+    "sound": "",
+    "source": [
+      "2-05（B）",
+      "2-06（B）",
+      "T2"
+    ]
+  },
+  {
+    "id": "J17",
+    "left": "2-06",
+    "right": "2-07",
+    "code": "T2",
+    "wipe": null,
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "页面已写",
+    "sound": "",
+    "source": [
+      "2-06（B）",
+      "2-07（B）",
+      "T2"
+    ]
+  },
+  {
+    "id": "J18",
+    "left": "2-07",
+    "right": "2-08",
+    "code": "T5",
+    "wipe": "runner",
+    "overlay": "assembly-right",
+    "chapter_sweep": false,
+    "note": "2-07 的 `trans_out` 改成 T5 runner，退场半段由拼片叠在 2-08 头 17 帧。2-08 用简版长路页时：T2，两页各自写",
+    "sound": "",
+    "source": [
+      "2-07（B）",
+      "2-08（A；简版是 B）",
+      "T5 runner"
+    ],
+    "alt": "2-08 用简版长路页时：T2，两页各自写"
+  },
+  {
+    "id": "J19",
+    "left": "2-08",
+    "right": "3-01",
+    "code": "T1+T6",
+    "wipe": null,
+    "overlay": "assembly-right",
+    "chapter_sweep": true,
+    "note": "2-08 段尾挂锁冲镜，盖满帧是金色口环和锁芯，位姿读 `G:/cdk20/work/oncam/3-01/handoff.json` 的 `head_pose`（18 的 2.5），接 3-01 第 0 帧同一把锁盖满退开。用简版长路页时：`bwipe/runner` 的入场半段叠在 2-08 尾 17 帧。光带叠在 3-01 第 0–15 帧",
+    "sound": "底乐换到第 3 章的稀鼓，1.5 s 交叉",
+    "source": [
+      "2-08（A；简版是 B）",
+      "3-01（出）",
+      "T1 加章首 T6"
+    ],
+    "alt": "用简版长路页时：`bwipe/runner` 的入场半段叠在 2-08 尾 17 帧。"
+  },
+  {
+    "id": "J20",
+    "left": "3-01",
+    "right": "3-02",
+    "code": "T1",
+    "wipe": null,
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "3-01 末帧是金色锁芯和白色上销盖满（`handoff.json` 的 `tail_pose`），3-02 第 0 帧同样金白全虚，在这一帧切（18 的 2.1）。3-02 留 v9 页面时：T5 key，装配叠",
+    "sound": "",
+    "source": [
+      "3-01（出）",
+      "3-02（A）",
+      "T1"
+    ],
+    "alt": "3-02 留 v9 页面时：T5 key，装配叠"
+  },
+  {
+    "id": "J21",
+    "left": "3-02",
+    "right": "3-03",
+    "code": "T3",
+    "wipe": null,
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "3-02 末帧的红环和 3-03 第 0 帧的金色锁孔环同圆心同半径，误差 ≤ 4 px（`G:/cdk20/work/drill/3-02/handoff.json`，18 的 2.1、2.2）。有一段留 v9 页面时：T2",
+    "sound": "",
+    "source": [
+      "3-02（A）",
+      "3-03（A）",
+      "T3"
+    ],
+    "alt": "有一段留 v9 页面时：T2"
+  },
+  {
+    "id": "J22",
+    "left": "3-03",
+    "right": "3-04",
+    "code": "T2",
+    "wipe": null,
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "3-03 最后 8 帧向右甩；3-04 段首自带金色虚影擦过（第 0–12 帧）和风声，不用改",
+    "sound": "",
+    "source": [
+      "3-03（A）",
+      "3-04（A）",
+      "T2"
+    ]
+  },
+  {
+    "id": "J23",
+    "left": "3-04",
+    "right": "3-05",
+    "code": "T5",
+    "wipe": "socket",
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "页面已写",
+    "sound": "",
+    "source": [
+      "3-04（A）",
+      "3-05（B）",
+      "T5 socket"
+    ]
+  },
+  {
+    "id": "J24",
+    "left": "3-05",
+    "right": "3-06",
+    "code": "T5",
+    "wipe": "oncam_3-06",
+    "overlay": "assembly-left",
+    "chapter_sweep": false,
+    "note": "入场半段叠在 3-05 尾 17 帧",
+    "sound": "",
+    "source": [
+      "3-05（B）",
+      "3-06（出）",
+      "T5 oncam_3-06"
+    ],
+    "wipe_fallback": "runner"
+  },
+  {
+    "id": "J25",
+    "left": "3-06",
+    "right": "3-07",
+    "code": "T1+T5",
+    "wipe": "oncam_3-06",
+    "overlay": "assembly-right",
+    "chapter_sweep": false,
+    "note": "3-06 段尾镜头进插座的孔桶，盖满帧是骨白内壁；退场半段叠在 3-07 头 17 帧",
+    "sound": "",
+    "source": [
+      "3-06（出）",
+      "3-07（B）",
+      "T1 加 T5 oncam_3-06"
+    ],
+    "wipe_fallback": "runner"
+  },
+  {
+    "id": "J26",
+    "left": "3-07",
+    "right": "3-08",
+    "code": "T2",
+    "wipe": null,
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "页面已写",
+    "sound": "3-08 起鼓淡掉，只剩 pad",
+    "source": [
+      "3-07（B）",
+      "3-08（B）",
+      "T2"
+    ]
+  },
+  {
+    "id": "J27",
+    "left": "3-08",
+    "right": "3-09",
+    "code": "T5",
+    "wipe": "oncam_3-09",
+    "overlay": "assembly-left",
+    "chapter_sweep": false,
+    "note": "入场半段叠在 3-08 尾 17 帧",
+    "sound": "",
+    "source": [
+      "3-08（B）",
+      "3-09（出）",
+      "T5 oncam_3-09"
+    ],
+    "wipe_fallback": "runner"
+  },
+  {
+    "id": "J28",
+    "left": "3-09",
+    "right": "W2",
+    "code": "T1+T5",
+    "wipe": "runner",
+    "overlay": "assembly-right",
+    "chapter_sweep": false,
+    "note": "3-09 段尾钻进磨砂的 CDK20，盖满帧是磨砂壳；W2 第 0–16 帧叠 `bwipe/runner` 的第 17–33 帧（18 的 2.6）",
+    "sound": "HBFS 预叠 2 小节；鼓推到第 0 帧；长上扬音；第 0 帧歌到满",
+    "source": [
+      "3-09（出）",
+      "W2（M）",
+      "T1 加 T5 runner"
+    ]
+  },
+  {
+    "id": "J29",
+    "left": "W2",
+    "right": "4-01",
+    "code": "T3+T6",
+    "wipe": null,
+    "overlay": "assembly-right",
+    "chapter_sweep": true,
+    "note": "4-01 第 0 帧的 CDK20 贴图和 W2 第 1499 帧（片里用到的最后一帧）的蓝色本体同位置同大小，误差 ≤ 4 px；外接框写进 `btier/handoff_w2.json`（我量的参考值：x 358–845、y 0–371，顶部出画）。4-01 的 `trans_in` 从 T5 socket 改成 T3（18 的 2.6）。光带叠在 4-01 第 0–15 帧",
+    "sound": "歌在窗口里淡掉加甩尾；底乐③已在最后一条小节线进",
+    "source": [
+      "W2（M）",
+      "4-01（B）",
+      "T3 加章首 T6"
+    ]
+  },
+  {
+    "id": "J30",
+    "left": "4-01",
+    "right": "4-02",
+    "code": "T2",
+    "wipe": null,
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "页面已写",
+    "sound": "",
+    "source": [
+      "4-01（B）",
+      "4-02（B）",
+      "T2"
+    ]
+  },
+  {
+    "id": "J31",
+    "left": "4-02",
+    "right": "4-03",
+    "code": "T2",
+    "wipe": null,
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "页面已写",
+    "sound": "",
+    "source": [
+      "4-02（B）",
+      "4-03（B）",
+      "T2"
+    ]
+  },
+  {
+    "id": "J32",
+    "left": "4-03",
+    "right": "4-04+4-05",
+    "code": "T5",
+    "wipe": "oncam_4-04_4-05",
+    "overlay": "assembly-left",
+    "chapter_sweep": false,
+    "note": "入场半段叠在 4-03 尾 17 帧",
+    "sound": "",
+    "source": [
+      "4-03（B）",
+      "4-04+05（出）",
+      "T5 oncam_4-04_4-05"
+    ],
+    "wipe_fallback": "runner"
+  },
+  {
+    "id": "J33",
+    "left": "4-04+4-05",
+    "right": "4-06",
+    "code": "T1+T5",
+    "wipe": "oncam_4-04_4-05",
+    "overlay": "assembly-right",
+    "chapter_sweep": false,
+    "note": "退场半段叠在 4-06 头 17 帧",
+    "sound": "4-06 第一条小节线升半音",
+    "source": [
+      "4-04+05（出）",
+      "4-06（B）",
+      "T1 加 T5 oncam_4-04_4-05"
+    ],
+    "wipe_fallback": "runner"
+  },
+  {
+    "id": "J34",
+    "left": "4-06",
+    "right": "4-07",
+    "code": "T2",
+    "wipe": null,
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "页面已写（同一个环接着用）",
+    "sound": "",
+    "source": [
+      "4-06（B）",
+      "4-07（B）",
+      "T2"
+    ]
+  },
+  {
+    "id": "J35",
+    "left": "4-07",
+    "right": "4-08",
+    "code": "T5",
+    "wipe": "oncam_4-08",
+    "overlay": "assembly-left",
+    "chapter_sweep": false,
+    "note": "入场半段叠在 4-07 尾 17 帧",
+    "sound": "",
+    "source": [
+      "4-07（B）",
+      "4-08（出）",
+      "T5 oncam_4-08"
+    ],
+    "wipe_fallback": "runner"
+  },
+  {
+    "id": "J36",
+    "left": "4-08",
+    "right": "4-09",
+    "code": "T1+T5",
+    "wipe": "oncam_4-08",
+    "overlay": "assembly-right",
+    "chapter_sweep": false,
+    "note": "退场半段叠在 4-09 头 17 帧",
+    "sound": "",
+    "source": [
+      "4-08（出）",
+      "4-09（B）",
+      "T1 加 T5 oncam_4-08"
+    ],
+    "wipe_fallback": "runner"
+  },
+  {
+    "id": "J37",
+    "left": "4-09",
+    "right": "W3",
+    "code": "T5",
+    "wipe": "chip",
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "页面已写",
+    "sound": "鼓推到第 0 帧；长上扬音；第 0 帧歌到满",
+    "source": [
+      "4-09（B）",
+      "W3（M）",
+      "T5 chip"
+    ]
+  },
+  {
+    "id": "J38",
+    "left": "W3",
+    "right": "4-10",
+    "code": "T5",
+    "wipe": "key",
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "4-10 的 `trans_in` 用 `bwipe/key`（18 的 2.6；事件表里现在写的是 chip，重渲时改）。W3 用到的最后一帧是第 899 帧",
+    "sound": "同 J29",
+    "source": [
+      "W3（M）",
+      "4-10（B）",
+      "T5 key"
+    ],
+    "alt": "事件表里现在写的是 chip，重渲时改"
+  },
+  {
+    "id": "J39",
+    "left": "4-10",
+    "right": "4-11+4-12",
+    "code": "T5",
+    "wipe": "oncam_4-11_4-12",
+    "overlay": "assembly-left",
+    "chapter_sweep": false,
+    "note": "入场半段叠在 4-10 尾 17 帧",
+    "sound": "",
+    "source": [
+      "4-10（B）",
+      "4-11+12（出）",
+      "T5 oncam_4-11_4-12"
+    ],
+    "wipe_fallback": "runner"
+  },
+  {
+    "id": "J40",
+    "left": "4-11+4-12",
+    "right": "5-01",
+    "code": "T1+T5+T6",
+    "wipe": "oncam_4-11_4-12",
+    "overlay": "assembly-right",
+    "chapter_sweep": true,
+    "note": "退场半段叠在 5-01 头 17 帧；T6 页面里已有",
+    "sound": "转到 B 小调",
+    "source": [
+      "4-11+12（出）",
+      "5-01（B）",
+      "T1 加 T5 oncam_4-11_4-12，加章首 T6"
+    ],
+    "wipe_fallback": "runner"
+  },
+  {
+    "id": "J41",
+    "left": "5-01",
+    "right": "5-02",
+    "code": "T5",
+    "wipe": "oncam_5-02",
+    "overlay": "assembly-left",
+    "chapter_sweep": false,
+    "note": "入场半段叠在 5-01 尾 17 帧",
+    "sound": "",
+    "source": [
+      "5-01（B）",
+      "5-02（出）",
+      "T5 oncam_5-02"
+    ],
+    "wipe_fallback": "runner"
+  },
+  {
+    "id": "J42",
+    "left": "5-02",
+    "right": "5-03",
+    "code": "T1+T5",
+    "wipe": "oncam_5-02",
+    "overlay": "assembly-right",
+    "chapter_sweep": false,
+    "note": "退场半段叠在 5-03 头 17 帧",
+    "sound": "",
+    "source": [
+      "5-02（出）",
+      "5-03（B）",
+      "T1 加 T5 oncam_5-02"
+    ],
+    "wipe_fallback": "runner"
+  },
+  {
+    "id": "J43",
+    "left": "5-03",
+    "right": "5-04",
+    "code": "T5",
+    "wipe": "socket",
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "页面已写",
+    "sound": "底乐只剩 bass",
+    "source": [
+      "5-03（B）",
+      "5-04（A）",
+      "T5 socket"
+    ]
+  },
+  {
+    "id": "J44",
+    "left": "5-04",
+    "right": "5-05+5-06",
+    "code": "T5",
+    "wipe": "socket",
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "5-04 段尾和出镜段首是同一台插座",
+    "sound": "",
+    "source": [
+      "5-04（A）",
+      "5-05+06（出）",
+      "T5 socket"
+    ]
+  },
+  {
+    "id": "J45",
+    "left": "5-05+5-06",
+    "right": "5-07",
+    "code": "T1+T5",
+    "wipe": "oncam_5-05_5-06",
+    "overlay": "assembly-right",
+    "chapter_sweep": false,
+    "note": "退场半段叠在 5-07 头 17 帧",
+    "sound": "这里底乐是静的；5-07 第一条小节线前 0.8 s 起短上扬音",
+    "source": [
+      "5-05+06（出）",
+      "5-07（B）",
+      "T1 加 T5 oncam_5-05_5-06"
+    ],
+    "wipe_fallback": "runner"
+  },
+  {
+    "id": "J46",
+    "left": "5-07",
+    "right": "5-08",
+    "code": "T2",
+    "wipe": null,
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "页面已写",
+    "sound": "",
+    "source": [
+      "5-07（B）",
+      "5-08（B）",
+      "T2"
+    ]
+  },
+  {
+    "id": "J47",
+    "left": "5-08",
+    "right": "5-09",
+    "code": "T5",
+    "wipe": "oncam_5-09",
+    "overlay": "assembly-left",
+    "chapter_sweep": false,
+    "note": "入场半段叠在 5-08 尾 17 帧",
+    "sound": "鼓不停，接着往上推",
+    "source": [
+      "5-08（B）",
+      "5-09（出）",
+      "T5 oncam_5-09"
+    ],
+    "wipe_fallback": "runner"
+  },
+  {
+    "id": "J48",
+    "left": "5-09",
+    "right": "W4",
+    "code": "T1",
+    "wipe": null,
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "镜头进插座的孔桶，接 W4 的孔内镜头",
+    "sound": "军鼓滚奏推上去，通鼓两下 → 空一拍 → 歌砸入，低频冲击对闩落下",
+    "source": [
+      "5-09（出）",
+      "W4（M）",
+      "T1"
+    ]
+  },
+  {
+    "id": "J49",
+    "left": "W4",
+    "right": "5-10",
+    "code": "T5",
+    "wipe": "socket",
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "页面已写",
+    "sound": "歌第 16.3 拍到 0 加甩尾；底乐⑤在 5-10 第一条小节线进",
+    "source": [
+      "W4（M）",
+      "5-10（B）",
+      "T5 socket"
+    ]
+  },
+  {
+    "id": "J50",
+    "left": "5-10",
+    "right": "6-01",
+    "code": "T2+T6",
+    "wipe": null,
+    "overlay": null,
+    "chapter_sweep": true,
+    "note": "页面已写",
+    "sound": "6-01 起加边击和镲",
+    "source": [
+      "5-10（B）",
+      "6-01（B）",
+      "T2 加章首 T6"
+    ]
+  },
+  {
+    "id": "J51",
+    "left": "6-01",
+    "right": "6-02",
+    "code": "T2",
+    "wipe": null,
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "页面已写",
+    "sound": "",
+    "source": [
+      "6-01（B）",
+      "6-02（B）",
+      "T2"
+    ]
+  },
+  {
+    "id": "J52",
+    "left": "6-02",
+    "right": "6-03",
+    "code": "T2",
+    "wipe": null,
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "页面已写",
+    "sound": "",
+    "source": [
+      "6-02（B）",
+      "6-03（B）",
+      "T2"
+    ]
+  },
+  {
+    "id": "J53",
+    "left": "6-03",
+    "right": "6-04+6-05",
+    "code": "T5",
+    "wipe": "oncam_6-04_6-05",
+    "overlay": "assembly-left",
+    "chapter_sweep": false,
+    "note": "入场半段叠在 6-03 尾 17 帧（料斗飞向右侧）",
+    "sound": "",
+    "source": [
+      "6-03（B）",
+      "6-04+05（出）",
+      "T5 oncam_6-04_6-05"
+    ],
+    "wipe_fallback": "runner"
+  },
+  {
+    "id": "J54",
+    "left": "6-04+6-05",
+    "right": "6-06",
+    "code": "T1+T5",
+    "wipe": "oncam_6-04_6-05",
+    "overlay": "assembly-right",
+    "chapter_sweep": false,
+    "note": "退场半段叠在 6-06 头 17 帧（13 颗珠子飞回去）",
+    "sound": "",
+    "source": [
+      "6-04+05（出）",
+      "6-06（B）",
+      "T1 加 T5 oncam_6-04_6-05"
+    ],
+    "wipe_fallback": "runner"
+  },
+  {
+    "id": "J55",
+    "left": "6-06",
+    "right": "6-07",
+    "code": "T2",
+    "wipe": null,
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "页面已写",
+    "sound": "",
+    "source": [
+      "6-06（B）",
+      "6-07（B）",
+      "T2"
+    ]
+  },
+  {
+    "id": "J56",
+    "left": "6-07",
+    "right": "6-08",
+    "code": "T2",
+    "wipe": null,
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "页面已写",
+    "sound": "",
+    "source": [
+      "6-07（B）",
+      "6-08（B）",
+      "T2"
+    ]
+  },
+  {
+    "id": "J57",
+    "left": "6-08",
+    "right": "6-09",
+    "code": "T2",
+    "wipe": null,
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "页面已写",
+    "sound": "6-09 起鼓变疏",
+    "source": [
+      "6-08（B）",
+      "6-09（B）",
+      "T2"
+    ]
+  },
+  {
+    "id": "J58",
+    "left": "6-09",
+    "right": "6-10",
+    "code": "T5",
+    "wipe": "runner",
+    "overlay": "assembly-right",
+    "chapter_sweep": false,
+    "note": "6-09 的 `trans_out` 改成 T5 runner，退场半段由拼片叠在 6-10 头 17 帧。6-10 用简版长路页时：T2，两页各自写",
+    "sound": "",
+    "source": [
+      "6-09（B）",
+      "6-10（A；简版是 B）",
+      "T5 runner"
+    ],
+    "alt": "6-10 用简版长路页时：T2，两页各自写"
+  },
+  {
+    "id": "J59",
+    "left": "6-10",
+    "right": "6-11",
+    "code": "one-take",
+    "wipe": null,
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "不加转场：6-11 第 0 帧的机位和 6-10 末帧逐项相同（18 的 2.5）。简版也一样：6-11 第 0 帧整个世界的位置和缩放等于 6-10 末帧",
+    "sound": "",
+    "source": [
+      "6-10（A；简版是 B）",
+      "6-11（A；简版是 B）",
+      "一镜到底"
+    ],
+    "alt": "简版也一样：6-11 第 0 帧整个世界的位置和缩放等于 6-10 末帧"
+  },
+  {
+    "id": "J60",
+    "left": "6-11",
+    "right": "6-12",
+    "code": "T1",
+    "wipe": null,
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "6-11 段尾 048 吊牌的金色牌面冲镜，6-12 第 0 帧同一块牌盖满退开（18 的 2.4、2.5）。6-11 用简版长路页时：oncam_6-12 的入场半段叠在 6-11 尾 17 帧",
+    "sound": "",
+    "source": [
+      "6-11（A；简版是 B）",
+      "6-12（出）",
+      "T1"
+    ],
+    "alt": "6-11 用简版长路页时：oncam_6-12 的入场半段叠在 6-11 尾 17 帧"
+  },
+  {
+    "id": "J61",
+    "left": "6-12",
+    "right": "7-01",
+    "code": "T1+T6",
+    "wipe": null,
+    "overlay": "assembly-right",
+    "chapter_sweep": true,
+    "note": "6-12 段尾钻进零件，7-01 的编号牌第 0 帧盖满；光带叠在 7-01 第 0–15 帧",
+    "sound": "换到第 7 章的鼓型",
+    "source": [
+      "6-12（出）",
+      "7-01（出）",
+      "T1 加章首 T6"
+    ]
+  },
+  {
+    "id": "J62",
+    "left": "7-01",
+    "right": "7-02",
+    "code": "T1+T5",
+    "wipe": "oncam_7-01",
+    "overlay": "assembly-right",
+    "chapter_sweep": false,
+    "note": "退场半段叠在 7-02 头 17 帧（1 号牌飞入）",
+    "sound": "",
+    "source": [
+      "7-01（出）",
+      "7-02（B）",
+      "T1 加 T5 oncam_7-01"
+    ],
+    "wipe_fallback": "runner"
+  },
+  {
+    "id": "J63",
+    "left": "7-02",
+    "right": "7-03",
+    "code": "T2",
+    "wipe": null,
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "页面已写",
+    "sound": "",
+    "source": [
+      "7-02（B）",
+      "7-03（B）",
+      "T2"
+    ]
+  },
+  {
+    "id": "J64",
+    "left": "7-03",
+    "right": "7-04",
+    "code": "T2",
+    "wipe": null,
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "页面已写",
+    "sound": "",
+    "source": [
+      "7-03（B）",
+      "7-04（B）",
+      "T2"
+    ]
+  },
+  {
+    "id": "J65",
+    "left": "7-04",
+    "right": "8-01",
+    "code": "T5+T6",
+    "wipe": "oncam_8-01",
+    "overlay": "assembly-left",
+    "chapter_sweep": true,
+    "note": "入场半段叠在 7-04 尾 17 帧（事件表里\"接 AI 插段\"那半句作废，直接接 8-01）；光带叠在 8-01 第 0–15 帧",
+    "sound": "鼓和 arp 淡出；8-01 里 pad 换调换速",
+    "source": [
+      "7-04（B）",
+      "8-01（出）",
+      "T5 oncam_8-01 加章首 T6"
+    ],
+    "wipe_fallback": "runner"
+  },
+  {
+    "id": "J66",
+    "left": "8-01",
+    "right": "8-02",
+    "code": "T1+T5",
+    "wipe": "oncam_8-01",
+    "overlay": "assembly-right",
+    "chapter_sweep": false,
+    "note": "退场半段叠在 8-02 头 17 帧",
+    "sound": "8-02 第一条小节线底乐⑥进",
+    "source": [
+      "8-01（出）",
+      "8-02（B）",
+      "T1 加 T5 oncam_8-01"
+    ],
+    "wipe_fallback": "runner"
+  },
+  {
+    "id": "J67",
+    "left": "8-02",
+    "right": "8-03",
+    "code": "T2",
+    "wipe": null,
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "页面已写",
+    "sound": "",
+    "source": [
+      "8-02（B）",
+      "8-03（B）",
+      "T2"
+    ]
+  },
+  {
+    "id": "J68",
+    "left": "8-03",
+    "right": "8-04+8-05+8-06+8-07",
+    "code": "T5",
+    "wipe": "oncam_8-04_8-05_8-06_8-07",
+    "overlay": "assembly-left",
+    "chapter_sweep": false,
+    "note": "入场半段叠在 8-03 尾 17 帧",
+    "sound": "底乐在 8-03 段尾淡到静；8-04 那一句全静",
+    "source": [
+      "8-03（B）",
+      "8-04–07（出）",
+      "T5 oncam_8-04_8-05_8-06_8-07"
+    ],
+    "wipe_fallback": "runner"
+  },
+  {
+    "id": "J69",
+    "left": "8-04+8-05+8-06+8-07",
+    "right": "W5",
+    "code": "T1+T5",
+    "wipe": "w0plate",
+    "overlay": "assembly-right",
+    "chapter_sweep": false,
+    "note": "8-04–07 段尾是 `computer` 牌的骨白牌面冲镜盖满（18 的 2.4），起点不早于 \"watching.\" 说完后 4 帧；W5 第 0–16 帧叠白料牌擦除层（`G:/cdk20/work/w1/w0wipe_final/`，和 J01 同一块，首尾呼应）的第 17–33 帧，露出字栏底板和片名块。剧本 8-07 写的\"四人挥手 2×2 格\"不加（第八节第 6 条）",
+    "sound": "前奏预叠 2 小节；最后一小节过门；第 0 帧歌到满",
+    "source": [
+      "8-04–07（出）",
+      "W5（M）",
+      "T1 加 T5 白料牌"
+    ]
+  },
+  {
+    "id": "J70",
+    "left": "W5",
+    "right": "EGG",
+    "code": "black",
+    "wipe": null,
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "W5 最后 30 帧淡到黑；彩蛋头 0.8 s 全黑",
+    "sound": "歌切掉，甩尾在黑里响完",
+    "source": [
+      "W5（M）",
+      "彩蛋",
+      "黑（设计的）"
+    ]
+  },
+  {
+    "id": "J71",
+    "left": "EGG",
+    "right": null,
+    "code": "black",
+    "wipe": null,
+    "overlay": null,
+    "chapter_sweep": false,
+    "note": "S79：灭灯、落款、0.4 s 淡到黑",
+    "sound": "静",
+    "source": [
+      "彩蛋",
+      "文件尾",
+      "黑"
+    ]
+  }
+]

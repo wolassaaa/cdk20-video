@@ -1,0 +1,843 @@
+<!doctype html><meta charset="utf-8"><title>03_声音与TD世界</title><style>body{font-family:"Microsoft YaHei",sans-serif;max-width:900px;margin:24px auto;padding:0 16px;line-height:1.7;color:#222;background:#fff}
+table{border-collapse:collapse;margin:12px 0}td,th{border:1px solid #ccc;padding:6px 10px}th{background:#f2f2f2}
+code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1px solid #ddd;padding-bottom:4px}a{color:#0a58ca}</style><h1>声音结构和 TD 世界</h1>
+<p>HKBU SCIE1007 课程作业的科普视频。这份文档定四件事：全片的声音怎么铺（自己合成的底乐、W 段原曲、人声、音效）、W 段前后怎么和底乐对拍过渡、TouchDesigner 在片子里做什么、字幕怎么烧。写于 2026-11-19（韩国时间），给导演过目。</p>
+<p>导演 11-19 定的方向：<strong>底乐用代码自己合成；W 段继续用下载好的原曲；底乐的速度和调向相邻 W 段的歌靠拢，进出 W 段对拍交叉，不硬切；合成器的各轨信号同时喂给 TD。</strong> 方案按做到最好来写。</p>
+<hr />
+<h2>一、现在的声音是什么样（粗剪 v9）</h2>
+<table>
+<thead>
+<tr>
+<th>部分</th>
+<th>现状</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>W0（2 s）、W1（12 s）、W5（33 s）</td>
+<td>没有声音</td>
+</tr>
+<tr>
+<td>W2（25 s）</td>
+<td>HBFS，从 50.446 s 起</td>
+</tr>
+<tr>
+<td>W3（15 s）</td>
+<td>Take My Breath，从 207.711 s 起（第 104 小节），15.867 s</td>
+</tr>
+<tr>
+<td>W4（8 s）</td>
+<td>Sacrifice，从 103.27 s 起（第 52–55 小节）</td>
+</tr>
+<tr>
+<td>其余 64 段</td>
+<td>只有人声，没有底乐</td>
+</tr>
+<tr>
+<td>段间</td>
+<td>全是硬切</td>
+</tr>
+<tr>
+<td>响度</td>
+<td>各段没统一</td>
+</tr>
+<tr>
+<td>字幕</td>
+<td>没烧</td>
+</tr>
+</tbody>
+</table>
+<p>手里的 6 首（<code>镜头设计_v3/音乐/原曲/</code>，有版权，只放本地）和拍子数据（<code>音乐/拍子/*.json</code>）：</p>
+<table>
+<thead>
+<tr>
+<th>歌</th>
+<th>BPM</th>
+<th>每小节</th>
+<th>用在</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Daft Punk – Harder, Better, Faster, Stronger</td>
+<td>123.477</td>
+<td>1.944 s</td>
+<td>W2</td>
+</tr>
+<tr>
+<td>The Weeknd – Take My Breath</td>
+<td>120.998</td>
+<td>1.984 s</td>
+<td>W3</td>
+</tr>
+<tr>
+<td>The Weeknd – Sacrifice</td>
+<td>122.006</td>
+<td>1.967 s</td>
+<td>W4</td>
+</tr>
+<tr>
+<td>The Weeknd – Out of Time</td>
+<td>93.030</td>
+<td>2.580 s</td>
+<td>W1 或 W5 候选</td>
+</tr>
+<tr>
+<td>Holly Herndon – Godmother</td>
+<td>121.483</td>
+<td>1.976 s</td>
+<td>W1 候选</td>
+</tr>
+<tr>
+<td>The Weeknd – Blinding Lights</td>
+<td>171.007</td>
+<td>1.404 s</td>
+<td>W5 候选</td>
+</tr>
+</tbody>
+</table>
+<p>拍子 json 里<strong>没有调</strong>。所以第一步是测调（见 3.2）。下文凡是写"某某的调"，都指测出来的那个调；和弦用级数写（i、VI、III……），测出调以后直接换成音名。</p>
+<hr />
+<h2>二、全片声音结构</h2>
+<pre><code>W0 ─ 第1章 ─ W1 ─ 第2章 ─ 第3章 ─ W2 ─ 第4章前半 ─ W3 ─ 4-10至第5章 ─ W4 ─ 5-10至第7章 ─ 第8章 ─ W5
+打击  底乐①   原曲  底乐②   底乐②   原曲  底乐③       原曲  底乐④        原曲  底乐⑤        底乐⑥   原曲
+</code></pre>
+<ul>
+<li><strong>底乐</strong>：代码合成，铺满所有讲解段和出镜段，人声永远在最前面。</li>
+<li><strong>W 段</strong>：原曲，画面卡拍。</li>
+<li><strong>底乐的速度和调</strong>一段段向下一个（或上一个）W 段的歌靠拢，所以每个接点都能按小节对齐交叉。</li>
+<li><strong>音效</strong>：零件世界的物理声，和画面同一张事件表。</li>
+</ul>
+<hr />
+<h2>三、底乐：自己合成</h2>
+<h3>3.1 用什么合成：Python（numpy + scipy + pedalboard）</h3>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Python：numpy / scipy 生成波形，pedalboard 做混响、压缩、均衡</strong></td>
+<td><strong>采用。</strong> 和项目现有流程同一种语言；能直接读 <code>映射/master_v1.json</code> 的段时间、逐词时间和事件表，所以"音乐和画面同源"是同一份数据驱动的；离线逐采样计算，每次跑出来的 wav 完全一样；pedalboard（Spotify 开源，pip 安装，离线处理）补上混响和压缩的音质</td>
+</tr>
+<tr>
+<td>SuperCollider（非实时模式出 wav）</td>
+<td>音色更好，但要另装一套语言，读项目 json 要再写一层，数据接口分家</td>
+</tr>
+<tr>
+<td>Csound</td>
+<td>同上，而且语法更老</td>
+</tr>
+</tbody>
+</table>
+<p>做法：</p>
+<ul>
+<li>代码放 <code>镜头设计_v3/音乐/synth/</code>，主程序 <code>bed.py</code>，命令 <code>python bed.py --out G:/cdk20/work/audio/bed/</code>。</li>
+<li>输出 48 kHz、24 bit 的<strong>分轨 wav</strong>（每轨一条全片长度 17:54 的 wav）：<code>pad.wav</code>、<code>arp.wav</code>、<code>bass.wav</code>、<code>perc.wav</code>、<code>event.wav</code>，外加一个混好的 <code>bed_mix.wav</code> 和一份 <code>bed_env.npz</code>（给 TD，见第七节）。</li>
+<li>时间以全片时间轴为准（master 的段顺序和粗剪实际帧数），段长一改，重跑即可。</li>
+</ul>
+<h3>3.2 先测调（每首用到的那一段）</h3>
+<p>写 <code>镜头设计_v3/音乐/key_scan.py</code>：</p>
+<ol>
+<li>用项目里的 ffmpeg 把<strong>实际要用的那一段</strong>（比如 HBFS 50.446 s 起 25 s）解码成单声道 22.05 kHz。</li>
+<li>用 librosa 算 <code>chroma_cqt</code>，按小节取平均，再全段平均。</li>
+<li>和 Krumhansl–Kessler 的大调、小调音级分布做相关，24 个调里取最高的两个，记下相关系数。</li>
+<li>用 <code>librosa.estimate_tuning</code> 测调音偏差（歌不一定是 A = 440 Hz），单位音分。</li>
+<li>结果写回 <code>音乐/拍子/&lt;歌&gt;.json</code>，加字段 <code>key</code>、<code>key_2nd</code>、<code>key_corr</code>、<code>tuning_cents</code>、<code>key_segment</code>（测的是哪一段）。</li>
+<li>人耳复核：在这一段下面垫一个测出的主音持续音（正弦波），听着不打架才算数。两个候选相关系数接近时，以耳朵为准。</li>
+</ol>
+<p>合成器的所有音高都加上 <code>tuning_cents</code>，和原曲的调音对齐。</p>
+<h3>3.3 四条轨（加一条事件轨）</h3>
+<table>
+<thead>
+<tr>
+<th>轨</th>
+<th>音色怎么合成</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>垫音 pad</strong></td>
+<td>两个锯齿波各偏 ±7 音分 + 低一个八度的正弦；低通 1.2 kHz（共振 0.2）；起音 1.5 s、释音 3 s；混响（房间 0.6，湿 25%）</td>
+<td>和声底子，全片都在</td>
+</tr>
+<tr>
+<td><strong>琶音 arp</strong></td>
+<td>25% 脉冲波，十六分音符，每个音衰减 120 ms；低通滤波器带包络（起 2 kHz，关 700 Hz）；立体声左右轻摆</td>
+<td>第 4 章"AI 开灯"后的亮色和速度感</td>
+</tr>
+<tr>
+<td><strong>低音 bass</strong></td>
+<td>正弦 + 三角波（1:0.3），只弹根音，八分音符或四分音符；120 Hz 以上低通</td>
+<td>脉冲和推进</td>
+</tr>
+<tr>
+<td><strong>打击 perc</strong></td>
+<td>两种：① 软底鼓：正弦从 110 Hz 掉到 50 Hz，80 ms；② <strong>塑料"咔"</strong>：2–6 kHz 带通白噪声 8 ms + 1.8 kHz 共振体 30 ms（和零件世界的声音同一个质感）</td>
+<td>拍点；"咔"就是大板世界的节拍器</td>
+</tr>
+<tr>
+<td><strong>事件 event</strong></td>
+<td>拨弦音（Karplus–Strong，衰减 0.8 s），音高取当下和弦里的一个音</td>
+<td>画面事件触发，见 3.6</td>
+</tr>
+</tbody>
+</table>
+<h3>3.4 每章的速度、调、和弦、开哪些轨</h3>
+<p>调一栏写的是"向哪首歌靠"。和弦一栏每个级数占 2 小节（第 3 章悬念段占 4 小节）。小调写法：i、iv、v、VI、III、VII；如果测出的是大调，换成对应的关系小调写法照用。</p>
+<table>
+<thead>
+<tr>
+<th>底乐</th>
+<th>覆盖的段</th>
+<th>速度（BPM）</th>
+<th>调</th>
+<th>和弦走向（循环）</th>
+<th>开的轨</th>
+<th>性格</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>①</td>
+<td>1-01 至 1-11</td>
+<td><strong>= W1 歌的速度</strong>（Out of Time 93.030，或 Godmother 121.483）</td>
+<td>W1 歌的调</td>
+<td>1-01–1-08：i – VI – iv – i；1-09–1-11：i – VI – III – VII</td>
+<td>1-01–1-08 只开 pad；1-09 起加 bass 和 perc 的"咔"</td>
+<td>克制、沉；走路时往前推</td>
+</tr>
+<tr>
+<td>②</td>
+<td>2-01 至 3-09</td>
+<td><strong>123.477</strong>（HBFS）</td>
+<td>HBFS 的调</td>
+<td>第 2 章：VI – III – VII – i；第 3 章：i – i – iv – v；3-08、3-09：i 持续音，VI 叠在上面，pad 降八度</td>
+<td>第 2 章 pad + "咔"；第 3 章 pad + 稀疏"咔"（每小节一下）；3-08 起只剩 pad，滤波器慢慢关到 500 Hz</td>
+<td>讲方法时清楚平稳；第 3 章悬念、变暗</td>
+</tr>
+<tr>
+<td>③</td>
+<td>4-01 至 4-09</td>
+<td>4-01–4-05：123.477；4-06–4-09：在 8 小节里<strong>平滑减到 120.998</strong></td>
+<td>4-01–4-05：HBFS 的调；4-06 起：<strong>转到 Take My Breath 的调</strong>（"this next part honestly blew my mind" 这句是天然的转折点）</td>
+<td>VI – VII – i – III</td>
+<td>全部四轨；4-06 起琶音从八分音符变十六分，4-07 加密到两个八度，4-09 滤波全开</td>
+<td>变亮、加速，一路推进 W3</td>
+</tr>
+<tr>
+<td>④</td>
+<td>4-10 至 5-09</td>
+<td>4-10–4-12：120.998；5-01–5-09：在 4 小节里<strong>升到 122.006</strong></td>
+<td>4-10–4-12：Take My Breath 的调；5-01 起：<strong>Sacrifice 的调</strong></td>
+<td>4-10–4-12：i – VI – III – VII；5-01–5-03：i – iv – i – v；5-04：只留 i 的持续音；5-07–5-08：iv – v – VI – VII（往上走）</td>
+<td>5-01–5-03 pad + bass；5-04 只剩 bass 的单音脉冲；5-05 <strong>磁带停转</strong>（剧本要求）；5-06 静；5-07 起 pad + bass + arp 重新进来；5-09 说完空一拍</td>
+<td>紧张 → 停住 → 往上推 → W4 释放</td>
+</tr>
+<tr>
+<td>⑤</td>
+<td>5-10 至 7-04</td>
+<td><strong>122.006</strong>（Sacrifice）</td>
+<td>Sacrifice 的调</td>
+<td>5-10、第 6 章：i – III – VII – VI；第 7 章：VI – VII – i – i</td>
+<td>5-10 pad + bass；第 6 章 pad + "咔"（每拍一下，和翻牌同拍）；第 7 章 pad + bass + arp（轻）</td>
+<td>稳、有条理；第 7 章往前走</td>
+</tr>
+<tr>
+<td>⑥</td>
+<td>8-01 至 8-07</td>
+<td><strong>= W5 歌的速度</strong>（Blinding Lights 171.007 按半拍感 85.5；或 Out of Time 93.030）；在 8-01 开头 2 小节内从 122.006 过渡</td>
+<td>W5 歌的调</td>
+<td>8-01–8-03：VI – III – VII – i；<strong>8-04 没有音乐</strong>（剧本要求）；8-05–8-07：VI – III – VII – III（停在明亮的 III 上）</td>
+<td>8-01–8-03 pad + bass；8-04 全静；8-05 起 pad 回来，8-07 加 arp</td>
+<td>暖、收尾</td>
+</tr>
+</tbody>
+</table>
+<p><strong>速度变化怎么做：</strong> 合成器内部用一张"速度图"（时间 → BPM），拍点按速度图积分得到，所以减速和加速都是平滑的，不会跳。速度变化都放在章与章的接缝或一句话的空隙里，1–2% 的变化耳朵听不出来。</p>
+<h3>3.5 给人声让位</h3>
+<p>两层，全部离线做成增益曲线，不靠实时压缩器，每次跑结果一样：</p>
+<ol>
+<li><strong>频段挖空（静态）</strong>：底乐总线上 1.5–4 kHz 宽钟形衰减 4 dB（人声清晰度最关键的频段）；pad 和 arp 的 200–400 Hz 再衰减 2 dB（男声的胸腔共鸣区）。</li>
+<li><strong>侧链压低（动态）</strong>：从人声分轨算包络（20 ms 窗），起 150 ms、放 400 ms，人说话时底乐比静态电平再低 8 dB；句间空隙 ≥ 0.8 s 时自动回升。</li>
+<li><strong>出镜段</strong>：底乐整体再低 2 dB（手机录音带房间声）。</li>
+<li><strong>琶音的特别规定</strong>：人声在说话时，琶音的滤波器上限压到 1.5 kHz，不让亮音和齿音打架；句间空隙里再打开。</li>
+</ol>
+<h3>3.6 卡点：用事件表触发音乐（音乐和画面同源）</h3>
+<p>画面的每个事件都在事件表里（<code>映射/events/&lt;段&gt;.json</code>，解析后的帧号在 <code>映射/keys/&lt;段&gt;.json</code>）。合成器读同一份数据，所以音乐的变化和画面的动作在同一帧。</p>
+<p>不改事件表的格式。另写一张对照表 <code>音乐/synth/music_events.json</code>：按事件的种类或具体事件编号，指定音乐要做什么。</p>
+<table>
+<thead>
+<tr>
+<th>画面事件</th>
+<th>音乐动作</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>零件从浇口弹下（<code>appear</code>、<code>snap</code> 一类）</td>
+<td>事件轨一个拨弦音（当下和弦的根音或五音），在事件那一帧，不量化到拍子上</td>
+<td>1-03 胶囊弹下</td>
+</tr>
+<tr>
+<td>零件打开、钻进去</td>
+<td>pad 低通滤波器在 300 ms 内上扬一个八度，再用 1.5 s 回落</td>
+<td>3-04 "enzyme" 前壳翻开</td>
+</tr>
+<tr>
+<td>机构开始运转（盖章、齿轮）</td>
+<td>perc 的"咔"从这一帧起切换成"跟着机构走"：每盖一章一下</td>
+<td>3-04 "chemical job"</td>
+</tr>
+<tr>
+<td>机构停工</td>
+<td>perc 停；pad 的持续音保留</td>
+<td>3-04 "can't do its job"、W4 闩落下</td>
+</tr>
+<tr>
+<td>钥匙卡住（5-05 "barely turned"）</td>
+<td>全部轨磁带停转：0.6 s 内音高和速度一起降到零</td>
+<td>剧本要求</td>
+</tr>
+<tr>
+<td>数字跳到位（8,918、33.4、36/52）</td>
+<td>事件轨两个音的上行（五度），在数字停住那一帧</td>
+<td>5-08 "33.4"</td>
+</tr>
+<tr>
+<td>翻牌（第 6 章）</td>
+<td>perc "咔"和翻牌同帧</td>
+<td>6-02 各格</td>
+</tr>
+<tr>
+<td>镜头转场</td>
+<td>pad 和弦正好在转场那一帧换（如果离下一个小节线不超过半拍，就把和弦换点挪到转场帧）</td>
+<td>每个接点</td>
+</tr>
+</tbody>
+</table>
+<p>规则：</p>
+<ul>
+<li>有节拍的轨（bass、perc 的底鼓、arp）跟速度图走，保证和 W 段对得上拍；<strong>事件轨和滤波开合跟事件帧走</strong>，保证和画面对得上。两者叠在一起，既有稳定的节拍，又和画面动作同时发生。</li>
+<li>事件触发的音不能落在旁白重读的词上：如果事件帧离一个词的开头不到 80 ms，音提前到这个词前 80 ms。</li>
+</ul>
+<h3>3.7 响度目标</h3>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>目标值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>人声</td>
+<td>每段对白响度 −16 LUFS（对白门限测法），四个人统一；先降噪，再统一响度，再轻压缩（2:1，降 3–4 dB）</td>
+</tr>
+<tr>
+<td>底乐（静态，没人说话时）</td>
+<td>短时响度约 −26 LUFS</td>
+</tr>
+<tr>
+<td>底乐（人说话时）</td>
+<td>再低 8 dB，约 −34 LUFS，比人声低 18 dB 左右</td>
+</tr>
+<tr>
+<td>W 段原曲</td>
+<td>短时响度 −14 到 −13 LUFS（比讲解段大 2–3 LU）</td>
+</tr>
+<tr>
+<td>音效</td>
+<td>瞬时响度 −28 到 −24 LUFS</td>
+</tr>
+<tr>
+<td>全片</td>
+<td>综合响度 −16 LUFS（± 1），真峰值不超过 −1 dBTP</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>四、逐个 W 段怎么接</h2>
+<p>通用做法：原曲在 W 段画面开始之前就悄悄进来（低音量，滤波器关着），和底乐对拍叠一段；W 段第一帧原曲推到满、滤波器全开，底乐同时退掉。出来时反过来。所有交叉都在小节线上开始和结束。</p>
+<table>
+<thead>
+<tr>
+<th>W 段</th>
+<th>前一段底乐</th>
+<th>从原曲哪里开始叠</th>
+<th>进入过渡</th>
+<th>出来接什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>W0</strong>（2 s）</td>
+<td>无</td>
+<td>自做打击乐三下</td>
+<td>三下按底乐①的拍子：间隔 = 60 / 底乐①速度（93.03 时 0.645 s，121.48 时 0.494 s）</td>
+<td>第三下余音拖到 A 开口前；底乐① 在 1-02 第一个小节线进</td>
+</tr>
+<tr>
+<td><strong>W1</strong>（12 s）</td>
+<td>底乐①（W1 歌的速度和调）</td>
+<td>选定的那一段的起点前 1 小节</td>
+<td>剧本要"半拍空白再砸进来"：1-11 最后一个词说完后，底乐①在下一个小节线收掉（pad 留 1 s 尾巴），空半拍；原曲从选定段的第 1 拍满音量进，重拍对盒盖落下那一帧。<strong>这里不叠</strong></td>
+<td>原曲最后一小节在 2-01 开头 2 秒淡出；底乐②（123.477）在 2-01 第 2 句前的小节线进。速度从 W1 歌跳到 123.477，跳变藏在原曲的淡出和底乐晚进的 2 小节里</td>
+</tr>
+<tr>
+<td><strong>W2</strong>（25 s）</td>
+<td>底乐②（123.477，HBFS 的调）</td>
+<td>HBFS 50.446 s 往前 2 小节（约 46.56 s）</td>
+<td>3-09 期间：原曲在底乐②下面以 −20 dB、低通 400 Hz 叠 2 小节；W2 第一帧原曲到满、滤波器全开，底乐② 1 拍内退掉。W2 第一句唱词对磨砂壳跳起</td>
+<td>W2 最后一小节结束后，原曲继续 1 小节并淡出；底乐③ 在同一个小节线进（同速度同调，几乎无缝），先只开 pad 和 bass，2 小节后加 perc</td>
+</tr>
+<tr>
+<td><strong>W3</strong>（15 s）</td>
+<td>底乐③（已减到 120.998，Take My Breath 的调；琶音最密）</td>
+<td>Take My Breath 207.711 s 往前 2 小节（约 203.74 s）</td>
+<td>4-09 后半：原曲以 −18 dB、低通 600 Hz 叠 2 小节，底乐③的琶音和原曲同拍；W3 第一帧原曲到满，底乐③ 1 拍内退掉</td>
+<td>原曲在计数轮停在 8,918 那一拍之后继续 1 小节淡出；底乐④（同速同调）在同一个小节线进</td>
+</tr>
+<tr>
+<td><strong>W4</strong>（8 s）</td>
+<td>底乐④（已升到 122.006，Sacrifice 的调；5-07 起往上推）</td>
+<td><strong>不预叠</strong>：剧本要 5-09 说完空一拍，再满音量进</td>
+<td>5-09 最后一个词后，底乐④在小节线前一拍全部停（留混响尾巴）；空一拍；Sacrifice 103.27 s 起满音量进，重拍对闩落下</td>
+<td>原曲第 4 小节后再留 1 小节淡出，压在 5-10 开头；底乐⑤（同速同调）在 5-10 第一个小节线进</td>
+</tr>
+<tr>
+<td><strong>W5</strong>（33 s）</td>
+<td>底乐⑥（W5 歌的速度和调）</td>
+<td>选定段起点前 2 小节</td>
+<td>8-07 "Thanks for watching" 期间：原曲以 −20 dB、低通 500 Hz 叠 2 小节；8-07 最后一个词后的小节线，原曲到满，底乐⑥退</td>
+<td>原曲最后一下对盒盖合上那一帧，之后 2 秒淡出到静</td>
+</tr>
+</tbody>
+</table>
+<p>W1 和 W5 用哪一首要导演定（第六节），选定后照上表填具体秒数。</p>
+<hr />
+<h2>五、音效</h2>
+<p>音效只给"零件世界"的物理动作，每句话最多一两个，不压在重读的词上（放在词前 50–100 ms 或句间空隙）。和底乐的"咔"是同一个质感。</p>
+<table>
+<thead>
+<tr>
+<th>音效</th>
+<th>用在</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>浇口断开的"咔"</td>
+<td>零件从板上弹下（几乎每段的第一个动作）</td>
+</tr>
+<tr>
+<td>外壳打开的"嗒"和铰链声</td>
+<td>钻进零件</td>
+</tr>
+<tr>
+<td>钥匙插入、转动、卡住</td>
+<td>3-01、3-03、3-04、5-04、5-05、5-09、W4</td>
+</tr>
+<tr>
+<td>盖章"咚"和纸带走动</td>
+<td>3-04、5-04（机器在工作就一直响，停工一起停）</td>
+</tr>
+<tr>
+<td>齿轮、弹簧</td>
+<td>3-02、3-05、4-06</td>
+</tr>
+<tr>
+<td>翻牌哗啦</td>
+<td>6-01 至 6-08、2-01 年份牌</td>
+</tr>
+<tr>
+<td>抽屉滑动</td>
+<td>3-05、4-02</td>
+</tr>
+<tr>
+<td>卷尺拉出和锁扣</td>
+<td>1-07、6-06、6-12</td>
+</tr>
+<tr>
+<td>硬币和小钟落进托盘</td>
+<td>4-06</td>
+</tr>
+<tr>
+<td>珠子流</td>
+<td>6-03、6-04、8-03</td>
+</tr>
+</tbody>
+</table>
+<p>来源：</p>
+<ol>
+<li><strong>自己录</strong>：手机录掰塑料水口、按圆珠笔、开关抽屉、钥匙插锁、硬币落桌、卷尺拉出。最贴"拼装模型"的世界。</li>
+<li><strong>合成</strong>：用 3.3 里"塑料咔"同一套代码，按事件批量生成变体（每次音高、长度略不同，不会听出重复）。</li>
+<li>Freesound 只用标 CC0 的，记网址。</li>
+</ol>
+<p>每个音效登记在事件表里，混音脚本按事件时间放。</p>
+<hr />
+<h2>六、片头、W1、片尾的时间结构</h2>
+<h3>W0 片头（2.0 s）</h3>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>画面</th>
+<th>声音</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>暗台面，灯打在玻璃肝</td>
+<td>第 1 下（软底鼓 + 塑料"咔"）</td>
+</tr>
+<tr>
+<td>1 拍后</td>
+<td>灯打在 CDK20</td>
+<td>第 2 下</td>
+</tr>
+<tr>
+<td>2 拍后</td>
+<td>灯打在金钥匙</td>
+<td>第 3 下（最重，加一层低频）</td>
+</tr>
+<tr>
+<td>1.5–2.0</td>
+<td>全板亮起、虚焦，A 淡入</td>
+<td>第 3 下余音</td>
+</tr>
+</tbody>
+</table>
+<p>"一拍"按底乐①的速度算（见第四节 W0 一行）。</p>
+<h3>W1 片名（12.0 s）</h3>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>画面</th>
+<th>声音</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.0–0.5</td>
+<td>1-11 说完，空半拍</td>
+<td>静</td>
+</tr>
+<tr>
+<td>0.5</td>
+<td>套件盒盖落下盖住大板</td>
+<td>原曲重拍砸进来</td>
+</tr>
+<tr>
+<td>0.5–2.5</td>
+<td>片名 WORTH TESTING? 和副标题</td>
+<td>原曲</td>
+</tr>
+<tr>
+<td>2.5–7.0</td>
+<td>盒盖侧面一行行亮：课程、Section 20007、Group 3B、组员名字（本地渲染时读入）</td>
+<td>原曲</td>
+</tr>
+<tr>
+<td>7.0–10.0</td>
+<td>盒盖抬起、翻开，露出大板，主料杆亮一下</td>
+<td>原曲</td>
+</tr>
+<tr>
+<td>10.0–12.0</td>
+<td>镜头俯冲到第 2 区</td>
+<td>原曲最后一小节，接 2 秒淡出</td>
+</tr>
+</tbody>
+</table>
+<p>12 秒在 121.5 BPM 下约 6 小节，在 93 BPM 下约 4.6 小节（取 4 小节加半小节尾巴）。</p>
+<h3>W5 片尾（33.0 s）</h3>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>画面</th>
+<th>声音</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–2</td>
+<td>镜头从全板升起，灯稍暗</td>
+<td>原曲到满</td>
+</tr>
+<tr>
+<td>2.0–5.6</td>
+<td>转台 1：玻璃肝、肺、结肠 · BodyParts3D, © DBCLS, CC BY 4.0</td>
+<td>原曲</td>
+</tr>
+<tr>
+<td>5.6–9.2</td>
+<td>转台 2：CDK20 · AlphaFold DB, AF-Q8IZL9-F1, CC BY 4.0</td>
+<td></td>
+</tr>
+<tr>
+<td>9.2–12.8</td>
+<td>转台 3：001、048 钥匙 · Ren et al., Chem. Sci. 2023; our own re-docking (AutoDock Vina)</td>
+<td></td>
+</tr>
+<tr>
+<td>12.8–16.4</td>
+<td>转台 4：香港地图、地球 · Natural Earth, public domain</td>
+<td></td>
+</tr>
+<tr>
+<td>16.4–20.0</td>
+<td>转台 5：零件库和大板 · made by our group in Blender</td>
+<td></td>
+</tr>
+<tr>
+<td>20.0–24.5</td>
+<td>参考文献第 1 牌（ACS 格式）</td>
+<td></td>
+</tr>
+<tr>
+<td>24.5–29.0</td>
+<td>参考文献第 2 牌</td>
+<td></td>
+</tr>
+<tr>
+<td>29.0–31.5</td>
+<td>音乐出处（6 首里用到的几首，加"背景音乐由小组用代码合成"）、生成式 AI 使用说明</td>
+<td></td>
+</tr>
+<tr>
+<td>31.5–33.0</td>
+<td>套件盒盖合上，盒盖上片名</td>
+<td>原曲最后一下对盒盖合上，之后淡出</td>
+</tr>
+</tbody>
+</table>
+<p>每块停 3.6–4.5 秒，字号照 01 文档精致度标准 E1。</p>
+<hr />
+<h2>七、TD 世界</h2>
+<p>导演坚持 TouchDesigner 在片子里要有实在的角色。下面三个方案，推荐 <strong>方案 B 加一点方案 C</strong>。</p>
+<h3>方案 A：大板的"空气和光"</h3>
+<ul>
+<li><strong>是什么：</strong> 大板所在的环境：台面上缓慢流动的光斑、空气里的微尘、背景墙上的柔光图案，整片都有。</li>
+<li><strong>吃什么：</strong> 人声包络、底乐 pad 的包络。</li>
+<li><strong>输出：</strong> 会动的光纹贴图（PNG 序列），Blender 当灯的贴图或背景墙的发光贴图。</li>
+<li><strong>好处：</strong> 贯穿全片。</li>
+<li><strong>坏处：</strong> 太淡察觉不到，太浓抢画面；光跟着说话动，容易像故障。</li>
+</ul>
+<h3>方案 B（推荐）：计算机里面的世界</h3>
+<ul>
+<li><strong>是什么：</strong> 每次镜头钻进芯片（PandaOmics、AlphaFold、Chemistry42），里面的世界是 TD 做的：发光的地面、流动的数据、回流的光、点群。外面是塑料（实验室和真实世界），里面是光（计算机）。</li>
+<li><strong>为什么推荐：</strong> 这个分工本身就在讲片子的主题："AI ran their trial and error inside a computer"。观众看到塑料就知道是真实世界，看到 TD 的光就知道进了计算机。TD 的角色有内容意义。现有 TD 资产（W3 点环、4-10 点墙、millions13、W2 折叠数据）都能改造了接着用。</li>
+<li><strong>用在：</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>段</th>
+<th>TD 出什么</th>
+<th>约多长</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3-07</td>
+<td>十股光流从十个进口汇成一股，流过梳子</td>
+<td>15 s</td>
+</tr>
+<tr>
+<td>W2</td>
+<td>折叠台下的光，跟 HBFS 的低频起伏</td>
+<td>25 s</td>
+</tr>
+<tr>
+<td>4-01</td>
+<td>"known structures" 一束光流向卡爪</td>
+<td>8 s</td>
+</tr>
+<tr>
+<td>4-07</td>
+<td>Chemistry42 里的发光地面；分数回流的光</td>
+<td>20 s</td>
+</tr>
+<tr>
+<td>4-08</td>
+<td>A 手上的光迹（跟踪手）</td>
+<td>3 s</td>
+</tr>
+<tr>
+<td>W3</td>
+<td>点群主体（沿用 W3 的 TD 点环和计数）</td>
+<td>15 s</td>
+</tr>
+<tr>
+<td>4-10</td>
+<td>点墙聚团（细节另定）</td>
+<td>20 s</td>
+</tr>
+<tr>
+<td>5-07</td>
+<td>实验数据卡片进芯片后，光从凹槽回流</td>
+<td>12 s</td>
+</tr>
+<tr>
+<td>7-03</td>
+<td>失败的钥匙流回芯片</td>
+<td>5 s</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>输出：</strong> PNG 序列，作为芯片里 <code>screen</code> 平面的发光贴图（02 文档 h04 已经写好这个接口）。这几段的顺序是<strong>先 TD 出图，再 Blender 渲</strong>。</li>
+<li><strong>注意：</strong> TD 画面的颜色压在大板的配色里（骨白、克莱因蓝、一点红）。</li>
+</ul>
+<h3>方案 C：音乐段的光</h3>
+<ul>
+<li><strong>是什么：</strong> W0、W1、W3、W5 和章与章之间，一道光沿料杆网络跟着拍子跑。</li>
+<li><strong>输出：</strong> 料杆的发光遮罩贴图（Blender 先把料杆 UV 展成一条线，TD 在线上画光，Blender 读回）。</li>
+<li><strong>好处：</strong> 音乐段里 TD 存在感最强。</li>
+<li><strong>坏处：</strong> 容易做成闪烁灯带，和"不闪、整屏变化每秒不超过 2 次"冲突；内容意义弱。</li>
+</ul>
+<h3>推荐：B 为主，加 C 的一小块</h3>
+<p>方案 B 做全部芯片内部（约 2 分钟），这是 TD 的主要角色。从方案 C 只取一样：W0 三下打击和 W1 盒盖落下时，一道光沿主料杆跑一次（各 1–2 秒）。不做方案 A。</p>
+<h3>7.1 TD 吃什么信号：合成器的分轨包络</h3>
+<p>合成器自己知道每个音什么时候响、多响、滤波器开到哪，所以直接从合成器导出的信号比从混好的成品里分析出来干净得多：没有人声串进来，没有别的轨互相掩盖，拍点精确到采样。</p>
+<p><code>bed.py</code> 每次跑完，除了 wav，再写一份 <code>G:/cdk20/work/audio/bed/bed_env.npz</code>，按 <strong>60 fps、全片帧号</strong>每帧一行：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>含义</th>
+<th>范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>frame</code></td>
+<td>全片帧号（和 master 的 60 fps 帧一致）</td>
+<td>整数</td>
+</tr>
+<tr>
+<td><code>pad</code>、<code>arp</code>、<code>bass</code>、<code>perc</code>、<code>event</code></td>
+<td>各轨的响度包络（RMS，20 ms 窗，起 10 ms、放 200 ms）</td>
+<td>0–1</td>
+</tr>
+<tr>
+<td><code>pad_cutoff</code></td>
+<td>pad 低通滤波器当下的截止频率，归一化</td>
+<td>0–1</td>
+</tr>
+<tr>
+<td><code>beat_phase</code></td>
+<td>当前拍内的位置（0 = 拍头）</td>
+<td>0–1</td>
+</tr>
+<tr>
+<td><code>bar_phase</code></td>
+<td>当前小节内的位置</td>
+<td>0–1</td>
+</tr>
+<tr>
+<td><code>beat_on</code></td>
+<td>这一帧是否是拍头</td>
+<td>0 或 1</td>
+</tr>
+<tr>
+<td><code>chord</code></td>
+<td>当前和弦的级数编号（0–6）</td>
+<td>整数</td>
+</tr>
+<tr>
+<td><code>bpm</code></td>
+<td>当前速度</td>
+<td>浮点</td>
+</tr>
+<tr>
+<td><code>ev_&lt;事件名&gt;</code></td>
+<td>事件表里的事件：从 0 在事件帧跳到 1，再按 0.5 s 衰减回 0</td>
+<td>0–1</td>
+</tr>
+<tr>
+<td><code>voice</code></td>
+<td>人声包络（从人声分轨算，同样 20 ms 窗）</td>
+<td>0–1</td>
+</tr>
+<tr>
+<td><code>song_low</code></td>
+<td>W 段原曲 20–150 Hz 能量（只有 W 段有值）</td>
+<td>0–1</td>
+</tr>
+</tbody>
+</table>
+<p>TD 那边：</p>
+<ol>
+<li>每个 TD 镜头的搭建脚本里，一个 Script CHOP 读 <code>bed_env.npz</code>，按当前录制帧号 n 取第 n 行，每个字段一个通道。</li>
+<li>着色器参数直接绑这些通道。比如：Chemistry42 里回流光的速度 = <code>arp</code>；光脉冲在 <code>beat_on</code> 时发出；"score them" 那一帧 <code>ev_score</code> 跳到 1，分数灯亮。</li>
+<li>录制照现有做法：<code>rec</code> 节点每算完一帧存一张 PNG，不实时。同一帧算几次结果都一样。</li>
+<li>命令：<code>python td/scripts/tdc.py run td/&lt;段&gt;/build_&lt;段&gt;.py</code> 搭网络，<code>rec</code> 存到 <code>G:/cdk20/work/td/&lt;段&gt;/</code>。先出 1080p60，导演过了再出 4K。</li>
+<li>跑之前打开 <code>td/cdk20_td_v7_2025.1.toe</code>，控制端口 9988，窗口不要最小化；存工程用新文件名。</li>
+</ol>
+<p>改了底乐或事件表后的顺序：<code>bed.py</code> 重跑 → 新的 <code>bed_env.npz</code> → 受影响的 TD 镜头重录 → Blender 重渲那几段的芯片镜头。</p>
+<hr />
+<h2>八、字幕</h2>
+<p>已经定过：英文字幕烧在画面底部；SRT 只是额外交的。</p>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>来源</td>
+<td><code>映射/master_v1.json</code> 的逐词时间（剧本 v3.3 原文）</td>
+</tr>
+<tr>
+<td>断句</td>
+<td>每条最多 2 行，每行不超过 42 个字符；按句子和逗号断，不在词组中间断</td>
+</tr>
+<tr>
+<td>时间</td>
+<td>第一个词前 0.1 s 出，最后一个词后 0.3 s 收；每条至少 1.0 s</td>
+</tr>
+<tr>
+<td>位置</td>
+<td>底部居中，底边离画面下沿 54 像素（1080p）</td>
+</tr>
+<tr>
+<td>样式</td>
+<td>Instrument Serif，40 像素；骨白半透明圆角底（<code>#F4F1EA</code>，85% 不透明），深色字（<code>#1F1E1C</code>）；和第 1 章已认可镜头里的字幕条同一个样子</td>
+</tr>
+<tr>
+<td>出镜段</td>
+<td>同一位置，不压脸</td>
+</tr>
+<tr>
+<td>W 段</td>
+<td>不烧对白字幕；W2 的押韵歌词字幕照 <code>音乐/W2_押韵字幕.md</code> 原样保留</td>
+</tr>
+<tr>
+<td>做法</td>
+<td>所有画面（Blender、TD、出镜合成）一律出<strong>无字幕版本</strong>，全片拼好后统一烧一遍。已认可的 1-02、1-09、1-10、2-03 现在的成片带着字幕，要重出无字幕版本</td>
+</tr>
+<tr>
+<td>4K</td>
+<td>字号、边距全部 × 2</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>九、要导演拍板的事</h2>
+<ol>
+<li><strong>W1 用哪首</strong>：Out of Time（93 BPM，温柔，像开场；第 1 章底乐跟着放慢）或 Godmother（121.5 BPM，和后面同一速度网格，接第 2 章最顺）。</li>
+<li><strong>W5 用哪首</strong>：Blinding Lights（171 BPM，第 8 章底乐按半拍感 85.5 写，收得暖）或 Out of Time（93 BPM，如果 W1 没用它）。</li>
+<li><strong>TD 方案</strong>：B（计算机里面的世界）加 C 的一小块。</li>
+</ol>

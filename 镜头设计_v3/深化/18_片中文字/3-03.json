@@ -1,0 +1,26 @@
+[
+  {
+    "id": "target",
+    "text": "target",
+    "kind": "engrave",
+    "at_word": "3-03.w006"
+  },
+  {
+    "id": "candidate",
+    "text": "candidate molecule",
+    "kind": "engrave",
+    "at_word": "3-03.w011"
+  },
+  {
+    "id": "selectivity",
+    "text": "selectivity",
+    "kind": "engrave",
+    "at_word": "3-03.w028"
+  },
+  {
+    "id": "source",
+    "text": "Illustration (our toy model)",
+    "kind": "source",
+    "at_word": "3-03.w001"
+  }
+]

@@ -1,0 +1,1564 @@
+<!doctype html><meta charset="utf-8"><title>01_逐段钻取清单</title><style>body{font-family:"Microsoft YaHei",sans-serif;max-width:900px;margin:24px auto;padding:0 16px;line-height:1.7;color:#222;background:#fff}
+table{border-collapse:collapse;margin:12px 0}td,th{border:1px solid #ccc;padding:6px 10px}th{background:#f2f2f2}
+code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1px solid #ddd;padding-bottom:4px}a{color:#0a58ca}</style><h1>逐段钻取清单（全片 70 段）</h1>
+<p>HKBU SCIE1007 课程作业的科普视频。这份文档把导演 11-19 看完粗剪 v9 后的新方向落到每一段：讲到哪个零件就钻进哪个零件，用它里面的机构把这句话讲明白，再从里面带出下一段。写于 2026-11-19（韩国时间），给导演过目，过了再施工。</p>
+<p>剧本和配音已锁，不改一个字。引号里是旁白原词，动作挂在这个词上（事件表做法不变：旁白逐词时间 → 事件 → 画面）。时长取粗剪 v9 的实际帧数。</p>
+<hr />
+<h2>一、先说结论</h2>
+<ul>
+<li><strong>讲解段和出镜段一律在三维大板的世界里演。</strong> 同一批零件、同一套亮面塑料材质、同一套灯和景深。不再有整页纸面的二维说明书页，也不再有出镜段那种小白框讲解卡。</li>
+<li>二维只剩<strong>叠在画面上的少量东西</strong>：标签、出处行、手写批注、底部字幕。</li>
+<li>某段确实更适合平面（表格、刻度）时，也做成<strong>板上的一个实体零件</strong>：刻着表格的翻牌板、带刻度的卷尺、印着字的牌子，不是纸。</li>
+<li>全片要钻的地方 <strong>22 处</strong>（另有 4-03、4-10、5-10 三段细节另定），分布在 16 个零件里。</li>
+<li>新做的三维镜头约 <strong>16 分 43 秒</strong>（60,139 帧，含出镜段旁边的零件），渲染约 <strong>32–41 小时 GPU 时间</strong>，两路并行约 <strong>16–20 小时</strong>。算法见第七节。</li>
+</ul>
+<h2>二、为什么改（导演 11-19 两句话）</h2>
+<ol>
+<li>"动效要有深度，一花一世界"：现在零件摆上来、动一下、换下一个，零件只是图标。</li>
+<li>"现在这个还是太粗糙了，不够精致，细节不行"。</li>
+</ol>
+<p>总管抽帧对比后的判断：差距不在缓动和回弹，在<strong>两套画面的精致度差太多</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>画面</th>
+<th>现在的样子</th>
+<th>导演的反应</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第 1 章三维大板（1-02、1-09、1-10、2-03）</td>
+<td>亮面塑料、景深、接触阴影、零件有厚度和倒角</td>
+<td>认可</td>
+</tr>
+<tr>
+<td>二维说明书页（大部分讲解段）</td>
+<td>大片空白纸面，贴几个小图标和小字</td>
+<td>嫌粗糙</td>
+</tr>
+<tr>
+<td>出镜段讲解卡</td>
+<td>人旁边一个小白框，里面几个线稿图标</td>
+<td>"很垃圾，看不出东西"</td>
+</tr>
+</tbody>
+</table>
+<p>所以默认做法是：<strong>全部做成第一种。</strong></p>
+<hr />
+<h2>三、精致度标准（施工和验收都用这张表）</h2>
+<p>每条都有一个能量出来或一眼能判的阈值。审片时逐条打勾，不过的就是"必改"。</p>
+<h3>A 构图</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>条目</th>
+<th>阈值</th>
+<th>怎么查</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A1</td>
+<td>主体占比</td>
+<td>讲解段任一时刻，清晰对焦的主体（零件和它里面的机构）占画面面积 25%–60%</td>
+<td>抽 5 帧，框出主体估面积</td>
+</tr>
+<tr>
+<td>A2</td>
+<td>留白上限</td>
+<td>画面里"什么都没有"的区域（纯台面、纯背景、空白板面）不超过 35%</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>A3</td>
+<td>最小主体</td>
+<td>不允许出现对焦主体小于画面高度 20% 的镜头（大全景定场除外，定场每段最多 2 秒）</td>
+<td>看事件表的镜头行</td>
+</tr>
+<tr>
+<td>A4</td>
+<td>层次</td>
+<td>每个镜头至少三层：前景虚化（料杆或零件边）、对焦主体、背景虚化的板面</td>
+<td>一眼判</td>
+</tr>
+</tbody>
+</table>
+<h3>B 零件本身</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>条目</th>
+<th>阈值</th>
+<th>怎么查</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>B1</td>
+<td>厚度</td>
+<td>每个可见零件厚度不小于 1.5 mm；近景里边缘厚度在 1080p 画面上不少于 6 像素</td>
+<td>量模型；抽帧</td>
+</tr>
+<tr>
+<td>B2</td>
+<td>倒角</td>
+<td>所有外露边都有 0.2–0.8 mm 倒角，在灯下看得到一条高光线</td>
+<td>抽帧放大看边</td>
+</tr>
+<tr>
+<td>B3</td>
+<td>分件线</td>
+<td>每个零件至少一条分件线或接缝（能拆开的零件就是它开合的那条线）</td>
+<td>看模型</td>
+</tr>
+<tr>
+<td>B4</td>
+<td>细节</td>
+<td>画面里占面积超过 10% 的每个面，至少有一处可见细节：刻字、螺丝、肋条、滚花、顶针印、浇口残痕</td>
+<td>抽帧逐面看</td>
+</tr>
+<tr>
+<td>B5</td>
+<td>材质</td>
+<td>只用 Kit 里现成材质；实色塑料粗糙度不高于 0.16，不许哑光</td>
+<td>查材质表</td>
+</tr>
+<tr>
+<td>B6</td>
+<td>浇口</td>
+<td>挂在板上的零件都有浇口，离零件表面不超过 0.8 mm（<code>check_gates</code>）</td>
+<td>跑检查</td>
+</tr>
+</tbody>
+</table>
+<h3>C 灯和镜头</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>条目</th>
+<th>阈值</th>
+<th>怎么查</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1</td>
+<td>景深</td>
+<td>每个镜头开景深；对焦点在主体上；背景板面看得出虚化</td>
+<td>一眼判</td>
+</tr>
+<tr>
+<td>C2</td>
+<td>接触阴影</td>
+<td>落在台面或板面上的东西都有接触阴影；悬空的东西阴影跟着离地高度变淡变大</td>
+<td>一眼判</td>
+</tr>
+<tr>
+<td>C3</td>
+<td>渲染</td>
+<td>Cycles 不少于 48 采样加降噪；开运动模糊（快门 0.5）；60 帧</td>
+<td>看渲染设置</td>
+</tr>
+<tr>
+<td>C4</td>
+<td>镜头不死</td>
+<td>每个镜头的相机关键帧覆盖整段，中间没有超过 0.5 秒的完全静止</td>
+<td>看相机曲线</td>
+</tr>
+</tbody>
+</table>
+<h3>D 动作</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>条目</th>
+<th>阈值</th>
+<th>怎么查</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D1</td>
+<td>预备</td>
+<td>每个主动作前有 4–8 帧（60 帧制）反方向预备，幅度为行程的 5%–15%</td>
+<td>看曲线</td>
+</tr>
+<tr>
+<td>D2</td>
+<td>过冲和回弹</td>
+<td>到位时过冲 5%–12%，在 12–20 帧内回弹两次以内停稳</td>
+<td>看曲线</td>
+</tr>
+<tr>
+<td>D3</td>
+<td>次级动作</td>
+<td>每个主动作在 6 帧内带动至少一样旁边的东西：浇口震一下、料杆晃、相邻零件抖、小件弹起</td>
+<td>看事件表，每个主事件下要有一行次级事件</td>
+</tr>
+<tr>
+<td>D4</td>
+<td>事件之间不死</td>
+<td>画面上每个零件都登记一个待机微动（慢转、呼吸、齿轮慢转、指针轻晃）；事件表里相邻两个事件间隔不超过 2.5 秒</td>
+<td>查事件表</td>
+</tr>
+<tr>
+<td>D5</td>
+<td>合乎物理</td>
+<td>不穿模；运动路径按零件几何设计（先查再动）</td>
+<td>穿模检查脚本 + 一眼判</td>
+</tr>
+<tr>
+<td>D6</td>
+<td>不抢话</td>
+<td>动作落在旁白的那个词上，前后误差不超过 3 帧；画面不比声音快</td>
+<td><code>check_sync</code></td>
+</tr>
+</tbody>
+</table>
+<h3>E 文字</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>条目</th>
+<th>阈值</th>
+<th>怎么查</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>E1</td>
+<td>字号</td>
+<td>1080p 下：标签大写字母高不小于 28 像素；字幕 40 像素；出处行不小于 18 像素</td>
+<td>抽帧量</td>
+</tr>
+<tr>
+<td>E2</td>
+<td>对齐</td>
+<td>标签贴着它说的那个物件，间距 12–24 像素；离得超过 80 像素就加一条细引线</td>
+<td>抽帧量</td>
+</tr>
+<tr>
+<td>E3</td>
+<td>数量</td>
+<td>同一时刻画面上最多 2 个标签加 1 行字幕（出处行不算）</td>
+<td>抽帧数</td>
+</tr>
+<tr>
+<td>E4</td>
+<td>不压物件</td>
+<td>浮在画面上的字不压在零件的面上（零件上的刻字不算）</td>
+<td>一眼判</td>
+</tr>
+<tr>
+<td>E5</td>
+<td>字体</td>
+<td>只用 Instrument Serif；手写批注用 Caveat</td>
+<td>一眼判</td>
+</tr>
+<tr>
+<td>E6</td>
+<td>内容</td>
+<td>字只取自旁白或照旁白缩短；数字和旁白一致</td>
+<td>对剧本</td>
+</tr>
+</tbody>
+</table>
+<h3>F 出镜段</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>条目</th>
+<th>阈值</th>
+<th>怎么查</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F1</td>
+<td>大小</td>
+<td>人旁边的三维物件高度不小于画面高度的 35%（1080p 下不少于 380 像素）</td>
+<td>抽帧量</td>
+</tr>
+<tr>
+<td>F2</td>
+<td>位置</td>
+<td>物件放在画面右侧（x ≥ 1250），不碰脸；人和物件各占各的地方</td>
+<td>抽帧看</td>
+</tr>
+<tr>
+<td>F3</td>
+<td>遮挡</td>
+<td>每组出镜段至少有一处手伸到物件前面（人物抠像在前，PersonFront 做法）</td>
+<td>看事件表</td>
+</tr>
+<tr>
+<td>F4</td>
+<td>光</td>
+<td>物件的主光和人的主光同一侧、同为暖色；物件下面有一段小料杆和接触阴影，不是悬空贴图</td>
+<td>一眼判</td>
+</tr>
+<tr>
+<td>F5</td>
+<td>进出</td>
+<td>人完全露出以后才开口；最后一个词说完才开始转场；不出现黑场</td>
+<td><code>check_sync</code></td>
+</tr>
+</tbody>
+</table>
+<h3>G 转场</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>条目</th>
+<th>阈值</th>
+<th>怎么查</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>G1</td>
+<td>不硬切</td>
+<td>讲解段之间不硬切；只允许在同一物件上的匹配剪</td>
+<td>看接点</td>
+</tr>
+<tr>
+<td>G2</td>
+<td>不黑</td>
+<td>浅色画面之间没有黑场、闪黑</td>
+<td>帧条检查</td>
+</tr>
+<tr>
+<td>G3</td>
+<td>有东西带过去</td>
+<td>每个接点写明"什么东西带到下一段"（见下文每段"怎么出来"）</td>
+<td>对本表</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>四、全片通用的"钻"的语法</h2>
+<p><strong>进去。</strong> 镜头沿料杆推到零件 → 零件沿分件线打开（前壳绕铰链翻开，或像剖面模型那样少一块）→ 镜头进去。打开时有预备、过冲、回弹，浇口跟着震一下。</p>
+<p><strong>里面。</strong> 是一台真的能动的小机构，尺度是毫米，镜头是微距，景深浅。机构必须能解释这句话，不能只是好看。</p>
+<p><strong>出来。</strong> 两种：</p>
+<ol>
+<li>里面的一个东西（钥匙、料珠、卡片、光）从浇口钻出去，顺着料杆走，镜头跟着它到下一格。</li>
+<li>镜头后拉出零件，零件合壳，镜头沿料杆移到下一格。</li>
+</ol>
+<p><strong>不钻的段</strong>，镜头在板面上沿主料杆走。主料杆就是"药物之路"那条路（1-09 已认可），站牌就挂在它上面。</p>
+<p><strong>出镜段</strong>，人后面本来就是虚化的大板。上一段最后，零件移到画面右侧，大小和位置正好是下一段人旁边的位置；人淡入（不黑场），人完全露出以后才开口。人说完，零件飞回板上，镜头接回板面。</p>
+<p><strong>几个全片统一的物件：</strong></p>
+<table>
+<thead>
+<tr>
+<th>物件</th>
+<th>是什么</th>
+<th>颜色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CDK20</td>
+<td>蓝色零件，外形用 AlphaFold 预测结构的外包络；口袋只画成"一个红圈标出的凹槽"</td>
+<td>克莱因蓝，凹槽红圈</td>
+</tr>
+<tr>
+<td>钥匙</td>
+<td>候选分子的比喻，金色电镀</td>
+<td>香槟金</td>
+</tr>
+<tr>
+<td>料珠</td>
+<td>CDK20 平时要"吃"的那颗小东西（ATP），黄色透明</td>
+<td>透明黄</td>
+</tr>
+<tr>
+<td>路</td>
+<td>主料杆和站牌</td>
+<td>骨白</td>
+</tr>
+<tr>
+<td>芯片</td>
+<td>三个 AI 工具：PandaOmics、AlphaFold、Chemistry42。芯片里面是"计算机里的世界"，由 TD 出画面（见 03 文档）</td>
+<td>黑</td>
+</tr>
+</tbody>
+</table>
+<p><strong>锁的机构全片只有一套（核心比喻）。</strong> CDK20 零件里面是一台"盖章机"：凹槽通到一个料珠座，料珠落座，摆臂就落下在纸带上盖一个章（它的化学工作）。钥匙插进凹槽，占住料珠的位置；钥匙<strong>插进去</strong>是"抓住"（Kd 量的是这个），钥匙<strong>转到底</strong>拨下一根闩，把摆臂卡死，机器停工（IC50 量的是这个）。001 插得进、转不动；048 转到底。这样 5-04 的 "grabbing a lock isn't the same as jamming it" 在机构上看得见。</p>
+<hr />
+<h2>五、逐段清单</h2>
+<p><strong>做法一栏的缩写：</strong></p>
+<ul>
+<li><strong>三维钻</strong>：Blender 真三维，钻进零件里面。</li>
+<li><strong>三维板面</strong>：Blender 真三维，在板面上演，不钻。</li>
+<li><strong>出镜三维</strong>：人旁边放 Blender 渲染的零件（带透明通道合成）。</li>
+<li><strong>TD</strong>：TouchDesigner 出画面（芯片里面的世界、音乐段），再合进三维。</li>
+<li><strong>保留</strong>：已认可的成片，只重出无字幕版本供最后统一烧字幕。</li>
+</ul>
+<h3>片头和第 1 章（S1）</h3>
+<table>
+<thead>
+<tr>
+<th>段</th>
+<th>类型 · 时长</th>
+<th>讲什么</th>
+<th>钻哪里</th>
+<th>做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>W0</td>
+<td>音乐 · 2.0 s</td>
+<td>片头三下</td>
+<td>不钻</td>
+<td>三维板面 + 自做打击乐</td>
+</tr>
+<tr>
+<td>1-01</td>
+<td>出镜 A · 5.6 s</td>
+<td>香港每天约四人死于肝癌</td>
+<td>不钻</td>
+<td>出镜三维</td>
+</tr>
+<tr>
+<td>1-02</td>
+<td>画外 A · 17.3 s</td>
+<td>1,412 人、香港三大、全球第六和第三</td>
+<td>不钻（数字，钻进肝里讲不出更多）</td>
+<td>保留（已认可 21）</td>
+</tr>
+<tr>
+<td>1-03</td>
+<td>出镜 A · 5.1 s</td>
+<td>已经有药，但不够好</td>
+<td>不钻</td>
+<td>出镜三维</td>
+</tr>
+<tr>
+<td>1-04</td>
+<td>画外 D · 20.9 s</td>
+<td>一线药换过一次；五年只剩三成；未满足的需要</td>
+<td>不钻，板面上的小机构</td>
+<td>三维板面（原二维页作废）</td>
+</tr>
+<tr>
+<td>1-05–07</td>
+<td>出镜 D/B/C · 9.6 s</td>
+<td>为什么不做更好的？难，十到十七年</td>
+<td>不钻</td>
+<td>出镜三维</td>
+</tr>
+<tr>
+<td>1-08</td>
+<td>画外 C · 15.5 s</td>
+<td>从我们出生到现在；28 亿美元；十分之一</td>
+<td>不钻</td>
+<td>三维板面（原二维页作废）</td>
+</tr>
+<tr>
+<td>1-09</td>
+<td>画外 D · 24.3 s</td>
+<td>药物之路六站</td>
+<td>不钻</td>
+<td>保留（已认可 22）</td>
+</tr>
+<tr>
+<td>1-10</td>
+<td>画外 B · 14.0 s</td>
+<td>2024 诺贝尔化学奖、AlphaFold</td>
+<td>不钻（W2、4-01 再钻）</td>
+<td>保留（已认可 23）</td>
+</tr>
+<tr>
+<td>1-11</td>
+<td>画外 C · 11.5 s</td>
+<td>AI 能不能走得更快；一个真案例；从香港开始</td>
+<td>不钻</td>
+<td>三维板面（原二维页作废）</td>
+</tr>
+<tr>
+<td>W1</td>
+<td>音乐 · 12.0 s</td>
+<td>片名卡</td>
+<td>不钻</td>
+<td>三维（套件盒盖）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>W0 · 片头三下（2.0 s）</strong>
+- 画面：暗的台面。0.00 第一下，一束灯打在玻璃肝上；0.49 第二下，打在 CDK20 上；0.98 第三下，打在金钥匙上。每一下零件都轻轻一震，浇口跟着颤。1.5 秒起全板灯慢慢亮起、镜头虚焦。
+- 怎么出来：虚焦的大板正是 1-01 人身后的背景，A 淡入，不黑场。</p>
+<p><strong>1-01 · 出镜 A："Every day in Hong Kong, about four people die of liver cancer."</strong>
+- 人旁边：一本撕页日历（h17），下面一段料杆上挂四个红色小人（p03 缩小）。
+- 怎么动："Every day" 日历翻一页，纸页带风让小人晃一下；"four people" 四个小人里的灯依次亮起；"die" 四盏灯一起熄成灰白，小人轻轻倒在浇口上。动作要克制。
+- 遮挡：A 不伸手，零件在右侧不碰人。
+- 怎么出来：A 淡出，日历和小人缩回板上第 1 区原格，接 1-02 开头的板面。</p>
+<p><strong>1-02 · 保留。</strong> 已认可，只重出无字幕版。结尾镜头停在胶囊格附近。
+- 怎么出来：胶囊（p08）浮起，飞到画面右侧 → 1-03。</p>
+<p><strong>1-03 · 出镜 A："Here's the thing. We already have medicines. Just not good enough ones."</strong>
+- 人旁边：胶囊（h24），侧面有一排十个小窗。
+- 怎么动："medicines" 胶囊从浇口"咔"地弹下、立起转正；"not good enough" 十个小窗只亮三个（为 1-04 的 "three in ten" 打底，这里不写字）。A 耸肩时胶囊跟着晃。
+- 怎么出来：镜头推进十个小窗 → 1-04 的十个小人（同一排位置，匹配剪）。</p>
+<p><strong>1-04 · 画外 D（原二维页作废，改三维板面）</strong>
+"The standard first treatment for advanced liver cancer has already changed once, from Nexavar to a combo, atezolizumab plus bevacizumab. But here, only about three in ten patients are alive five years on. The study we follow calls it a huge unmet need."
+- 板面上：第 1 区一个"一线药"药座（转台式卡槽）。
+- 怎么动："first treatment" 药座亮；"Nexavar" 一粒胶囊坐在卡槽里，刻字 Nexavar；"changed once" 卡槽转半圈，胶囊转到背面；"atezolizumab plus bevacizumab" 两个输液袋（p09）由一个 Y 形接头连着转到正面（刻字两行）；"three in ten" 十个小人一排，三个亮着；"five years on" 一把小尺沿小人排拉出，刻 5 years；"huge unmet need" 镜头移到旁边一个空卡槽，槽边一圈红。
+- 怎么出来：镜头推进空卡槽 → 1-05 人 D 旁边的钥匙坯。</p>
+<p><strong>1-05、1-06、1-07 · 出镜 D、B、C</strong>
+- D "So... why not just make a better one?"：人旁边一把没齿的金钥匙坯（h02 blank）挂在浇口上；"better one" 坯子亮一下。
+- B "Because that's way harder than it sounds."：钥匙坯后面的料杆一路伸长、拐弯，伸出画面（这就是后面那条路）。
+- C "Like, ten-to-seventeen-years hard."：一把卷尺（h18）从她手边拉出，刻度一路过 10，在 "seventeen" 停在 17，锁扣"咔"。
+- 遮挡：C 的手在卷尺前（人物抠像在前）。
+- 怎么出来：卷尺尺带平铺到板面上 → 1-08 的那条尺。</p>
+<p><strong>1-08 · 画外 C（原二维页作废，改三维板面）</strong>
+"Start the search the year we were born, and it might only be ready now. It can cost almost 2.8 billion US dollars. And of drugs tested in people, only about one in ten reaches the market."
+- 板面上：1-07 的卷尺尺带沿料杆铺开。
+- 怎么动："the year we were born" 尺带起点一个很小的小人（p03 缩到很小）；"ready now" 尺带终点四个小人（四个组员的比喻，不写名字）；"2.8 billion" 尺带旁边一摞钞票（p11）一张张叠高，叠到顶刻 2.8 billion；"one in ten" 料杆上十粒胶囊往前走，九粒在半路"咔"地从浇口断下掉进废料桶（p44），一粒走到成品位。
+- 怎么出来：最后那粒胶囊停在路的起点 → 1-09 开头（已认可的 Target 站）。</p>
+<p><strong>1-09、1-10 · 保留。</strong> 1-09 结尾全景板面；1-10 结尾停在 AlphaFold 芯片和上面的蓝色蛋白。
+- 1-10 怎么出来：镜头从芯片沿主料杆滑向第 1 区的香港地图 → 1-11。</p>
+<p><strong>1-11 · 画外 C（原二维页作废，改三维板面）</strong>
+"So can AI walk the first steps faster? Let's follow one real case, where AI tools took on liver cancer. And part of it starts right here, in Hong Kong."
+- 板面上：主料杆上一粒胶囊，香港地图零件（p07）。
+- 怎么动："first steps faster" 胶囊在前两站之间一下子滑过去，后面带一道风；"one real case" 一块刻着 Case study 的牌子从浇口弹下；"liver cancer" 玻璃肝亮一下；"Hong Kong" 镜头落到香港地图，地图上一根细红管从沙田一路亮到白石角。
+- 怎么出来：半拍空白，套件盒盖从上方落下盖住大板 → W1。</p>
+<p><strong>W1 · 片名卡（12.0 s）</strong>
+- 画面：一个套件盒盖（h20）落下盖住大板，"咚"落在重拍上。盒盖顶面印片名 "WORTH TESTING?"，副标题 "How computers help find cancer drug candidates: the CDK20 story"。2.5–7 秒，盒盖侧面一行行亮起课程、Section 20007、Group 3B 和组员名字（名字在本地渲染时从 <code>名字.txt</code> 读，不写进文档和仓库）。7–10 秒盒盖沿后边的铰链翻开，露出大板，主料杆（那条路）淡淡亮一下。10–12 秒镜头俯冲到第 2 区。
+- 怎么出来：镜头落在第 2 区的楼群 → 2-01。</p>
+<h3>第 2 章（S2）</h3>
+<table>
+<thead>
+<tr>
+<th>段</th>
+<th>类型 · 时长</th>
+<th>讲什么</th>
+<th>钻哪里</th>
+<th>做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2-01</td>
+<td>画外 A · 27.5 s</td>
+<td>香港 2011 的研究；CCRK = CDK20；2023 AI 研究</td>
+<td>小钻：样本管</td>
+<td>三维钻（原二维页作废）</td>
+</tr>
+<tr>
+<td>2-02</td>
+<td>出镜 A · 10.7 s</td>
+<td>研究问题</td>
+<td>不钻</td>
+<td>保留（已认可样片），物件放大到 F1 标准</td>
+</tr>
+<tr>
+<td>2-03</td>
+<td>画外 A · 5.7 s</td>
+<td>一个案例：CDK20 和肝癌</td>
+<td>不钻</td>
+<td>保留（已认可 9 v3）</td>
+</tr>
+<tr>
+<td>2-04</td>
+<td>出镜 C · 3.6 s</td>
+<td>两个目标</td>
+<td>不钻</td>
+<td>出镜三维</td>
+</tr>
+<tr>
+<td>2-05</td>
+<td>画外 C · 13.9 s</td>
+<td>两个目标原文</td>
+<td>不钻</td>
+<td>三维板面（原二维样片作废）</td>
+</tr>
+<tr>
+<td>2-06</td>
+<td>画外 C · 33.8 s</td>
+<td>我们怎么查资料</td>
+<td>不钻</td>
+<td>三维板面（原二维页作废）</td>
+</tr>
+<tr>
+<td>2-07</td>
+<td>画外 D · 30.0 s</td>
+<td>怎么评估每个来源；利益冲突</td>
+<td>小钻：放大镜</td>
+<td>三维钻（原二维页作废）</td>
+</tr>
+<tr>
+<td>2-08</td>
+<td>画外 A · 15.3 s</td>
+<td>接下来讲什么</td>
+<td>不钻</td>
+<td>三维板面（路）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2-01 · 画外 A</strong>
+"Hong Kong first. In 2011, a team at the Chinese University of Hong Kong studied liver tumours from patients at the Prince of Wales Hospital. One protein kept showing up raised: CCRK, also called CDK20. Fast forward to 2023: an AI drug-discovery study goes after the same protein, with co-authors at Insilico Medicine's Hong Kong office in Science Park."
+- 钻哪里：样本管（p15）。
+- 里面是什么：管子剖开一半，里面一小片肝组织，组织里一根蓝色液柱，代表这个蛋白的量。旁边一支对照管，液柱低。
+- 怎么动："Hong Kong first" 楼群零件（p14）里的医院和大学亮；"2011" 一块年份翻牌翻到 2011；"liver tumours" 样本管从浇口弹下；"kept showing up raised" 镜头钻进管子剖面，蓝色液柱比对照管高出一截，一连三支管都是这样；"CCRK, also called CDK20" 管口上方升起一块牌子，正面刻 CCRK，翻过来刻 CDK20，同时第 3 区的 CDK20 零件远远亮一下；"Fast forward to 2023" 年份翻牌哗哗翻到 2023；"AI drug-discovery study" 一块 AI 芯片亮；"Science Park" 楼群里最高那栋亮。
+- 观众懂：这个蛋白在香港病人的肿瘤里本来就偏高，后来的 AI 研究找的是同一个。
+- 怎么出来：镜头停在最高那栋楼，A 淡入（楼在她身后虚化）→ 2-02。</p>
+<p><strong>2-02 · 保留。</strong> 已认可的人出镜样片（芯片和钥匙跟着人）。批量修改那一轮把物件放大到画面高度的 35%（现在约 10%，不合 F1）。</p>
+<p><strong>2-03 · 保留。</strong> 结尾在玻璃肝近景。
+- 怎么出来：玻璃肝旁边两块编号牌飞到画面右侧 → 2-04。</p>
+<p><strong>2-04 · 出镜 C："We set ourselves two objectives."</strong>
+- 人旁边：两块编号牌（p16，刻 1 和 2）。
+- 怎么动："two objectives" 她举两根手指，两块牌同时从浇口弹下、立起，比手指晚 2 帧。
+- 遮挡：手指在牌子前。
+- 怎么出来：两块牌飞落到板面上 → 2-05。</p>
+<p><strong>2-05 · 画外 C（原二维样片作废，改三维板面）</strong>
+"One: to identify the major computer-aided methods used in cancer drug discovery. Two: to evaluate how these methods help scientists assess potential drug candidates."
+- 板面上：两块长牌，上面刻着两个目标的原文。牌面上盖着一条滑盖。
+- 怎么动："One" 第一块牌落位；"identify" 起滑盖顺着字往右滑开，跟着读到哪滑到哪；"Two" 第二块牌落位；"evaluate" 同样滑开。最后两块牌缩小，挂到画面角上，变成角标（二维小标签，后面第 4、5、8 章还会回来）。
+- 怎么出来：镜头从两块牌转向旁边的论文零件 → 2-06。</p>
+<p><strong>2-06 · 画外 C（原二维页作废，改三维板面）</strong>
+"So how did we check all this? We read. A lot. No lab work of our own: this is a literature review. At the centre, one original study by Ren and colleagues in Chemical Science, 2023, with its supplementary data. Around it, the earlier Hong Kong study, papers behind two AI tools, a 2023 review, a textbook chapter, and a 2026 expert Perspective, which we read only as an abstract."
+- 板面上：一棵料杆"树"：中间是一块论文牌（主论文），六根支杆上挂六块小牌。
+- 怎么动："We read. A lot." 书零件（p17）的书页哗哗翻；"No lab work" 烧瓶（p34）被扣上盖子；"literature review" 一块牌子刻 literature review；"one original study" 中间主论文牌亮，盖一枚 original research 的章；"supplementary data" 主论文后面插上一块薄牌；"Around it" 六根支杆依次亮，每块小牌刻它的类型：original study、method paper ×2、review、book chapter、Perspective；"only as an abstract" Perspective 那块只有上面三分之一印了字，下面是磨砂空白。
+- 怎么出来：放大镜零件从旁边滑进来 → 2-07。</p>
+<p><strong>2-07 · 画外 D</strong>
+"For every source, we asked: what kind is it, how much did we read, and how strong is the evidence? Who did the work? Were there controls and repeats? One thing worth knowing: most authors of the main study work for Insilico Medicine, which built its AI tools. They say so openly. Useful evidence, not an independent check."
+- 钻哪里：放大镜（p18）的镜片。
+- 里面是什么：真的透明镜片，镜头透过它看到小牌放大的字和刻线。
+- 怎么动："what kind" 放大镜滑过六块小牌，类型字被放大；"how much did we read" 每块牌边一条小进度槽填到不同位置；"how strong" 每块牌上一个小刻度指针摆到位；"controls and repeats" 清单板上两格打勾；"Insilico Medicine" 主论文牌翻到背面，刻着 Conflicts of interest；"built its AI tools" 一根细线从这块牌连到三块芯片；"say so openly" 打勾；"not an independent check" 一个中性的括号批注（Caveat 手写）。
+- 怎么出来：镜头沿主料杆后拉 → 2-08 的路。</p>
+<p><strong>2-08 · 画外 A（三维板面，路）</strong>
+"So here's where we're going. First, the lock. Then how AI helped cut a key for it. Then what happened in the lab. And finally, the big one: how much did the computers really help?"
+- 板面上：主料杆和站牌（照搬 1-09 已认可的场景）。
+- 怎么动："the lock" Target 站描红；"cut a key" Hit 站描红；"in the lab" Improve 站描红（这三站是 today's route）；"how much did the computers really help" 镜头沿料杆看向远处，后面几站灰着。
+- 怎么出来：镜头停在 Target 站旁边的第 3 区，一把挂锁浮起飞到画面右侧 → 3-01。</p>
+<h3>第 3 章（S3）危机一：没人见过这把锁</h3>
+<table>
+<thead>
+<tr>
+<th>段</th>
+<th>类型 · 时长</th>
+<th>讲什么</th>
+<th>钻哪里</th>
+<th>做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3-01</td>
+<td>出镜 D · 6.4 s</td>
+<td>想象锁和钥匙</td>
+<td>不钻</td>
+<td>出镜三维</td>
+</tr>
+<tr>
+<td>3-02</td>
+<td>画外 D · 12.9 s</td>
+<td>蛋白在细胞里干活；药卡住一个</td>
+<td><strong>细胞工坊</strong></td>
+<td>三维钻</td>
+</tr>
+<tr>
+<td>3-03</td>
+<td>画外 D · 12.2 s</td>
+<td>靶点、候选分子、选择性</td>
+<td><strong>销子锁剖面</strong></td>
+<td>三维钻</td>
+</tr>
+<tr>
+<td>3-04</td>
+<td>画外 D · 17.2 s</td>
+<td>CDK20 是酶，口袋本来抓 ATP，堵住就不工作</td>
+<td><strong>CDK20 盖章机</strong></td>
+<td>三维钻</td>
+</tr>
+<tr>
+<td>3-05</td>
+<td>画外 D · 19.0 s</td>
+<td>52 个肿瘤里 36 个偏高；调低就长得慢</td>
+<td><strong>肝下面的样本抽屉</strong> + 细胞旋钮</td>
+<td>三维钻</td>
+</tr>
+<tr>
+<td>3-06</td>
+<td>出镜 D · 11.3 s</td>
+<td>强嫌疑，值得一试</td>
+<td>不钻</td>
+<td>出镜三维</td>
+</tr>
+<tr>
+<td>3-07</td>
+<td>画外 B · 22.8 s</td>
+<td>PandaOmics 翻十个数据集，CDK20 排第一</td>
+<td><strong>PandaOmics 芯片</strong></td>
+<td>三维钻 + TD</td>
+</tr>
+<tr>
+<td>3-08</td>
+<td>画外 B · 19.5 s</td>
+<td>没人测过 CDK20 的形状</td>
+<td><strong>磨砂外壳</strong>（看不进去就是重点）</td>
+<td>三维钻</td>
+</tr>
+<tr>
+<td>3-09</td>
+<td>出镜 B · 5.7 s</td>
+<td>看不见的锁，黑暗里怎么配钥匙</td>
+<td>不钻</td>
+<td>出镜三维</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3-01 · 出镜 D："Okay. To get this, picture a lock and a key."</strong>
+- 人旁边：销子锁剖面（h06），一把钥匙（h02 放大版）。
+- 怎么动："picture" 挂锁从浇口弹下转正；"lock" 锁的前面四分之一壳打开，露出锁芯里一排弹子销；"key" 钥匙从 D 抬起的手边滑进锁孔，五根销被顶到同一条线上，锁芯轻轻转一下。
+- 遮挡：D 的手在钥匙前。
+- 怎么出来：镜头穿过锁孔，一黑一亮（不是黑场，是锁芯内部的暗部，持续不超过 6 帧），出来已经在细胞零件里 → 3-02。</p>
+<p><strong>3-02 · 画外 D · 钻：细胞工坊（h05）</strong>
+"Inside your cells, proteins do a lot of the work. Most drugs grab one protein tightly and change what it does, slotting into a pocket like a key into a lock."
+- 里面是什么：透明细胞壳里三台蓝色小机器，各干各的：一台转齿轮，一台摆臂盖章，一台推杆送料。中间那台侧面有一个红圈凹槽。
+- 怎么动："cells" 细胞壳沿分件线翻开，镜头进去；"proteins" 三台机器亮起；"work" 三台同时开工，各带动旁边的小件（纸带走、齿轮咬合）；"drugs" 一把小金钥匙从壳上的口子飘进来；"grab one protein tightly" 钥匙卡进中间那台的红圈凹槽，"咔"一声，机器整个震一下；"change what it does" 那台的摆臂停住，另两台照常转；"key into a lock" 镜头推近凹槽，凹槽就是锁孔的形状，钥匙在里面。
+- 观众懂：药是卡住其中一台机器的钥匙，别的机器不受影响。
+- 怎么出来：镜头推进被卡住的那个锁孔，放大成 3-03 的销子锁剖面（匹配剪）。</p>
+<p><strong>3-03 · 画外 D · 钻：销子锁剖面（h06 × 3 把）</strong>
+"Scientists call the lock the target, and the key a candidate molecule. A good key fits its own lock tightly, and opens no one else's. That's called selectivity."
+- 里面是什么：锁芯里五根上下两截的弹子销。钥匙的齿把每根销顶到同一条分界线上，锁芯才转得动；齿不对，就有销卡在分界线上，转不动。
+- 怎么动："the target" 锁上方一块小牌刻 target；"candidate molecule" 钥匙柄上刻 candidate molecule；"fits its own lock tightly" 钥匙进自己的锁，五根销齐线，锁芯转、锁梁弹起；"no one else's" 同一把钥匙进旁边两把锁（销子高低不同），销子参差，锁芯转不动，钥匙被弹簧轻轻推出来；"selectivity" 三把锁排一行（一开两关），上方落下一块刻着 selectivity 的牌。
+- 观众懂：选择性就是只配一把锁。
+- 怎么出来：镜头沿料杆移到第 3 区的 CDK20 → 3-04。</p>
+<p><strong>3-04 · 画外 D · 钻：CDK20 盖章机（h01）· 全片核心机构</strong>
+"Our lock is CDK20. It's an enzyme, a protein with a chemical job. Its keyhole is a pocket where it normally grabs a small molecule called ATP. Plug that pocket with the right key, and the enzyme can't do its job."
+- 外面：蓝色 CDK20，外形是 AlphaFold 预测结构的外包络，标 predicted model（AlphaFold DB）。
+- 里面是什么：一台盖章机。表面一个红圈凹槽（口袋）通到里面一个料珠座；座下连着锁芯和一根摆臂，摆臂头上一枚印章；底下一条纸带在走。
+- 怎么动："Our lock is CDK20" 零件转正，标签贴边；"enzyme" 前壳沿分件线翻开，镜头进去；"chemical job" 摆臂落下盖一个章，纸带走一格，之后按固定节奏一直盖；"pocket" 凹槽的红圈亮；"ATP" 一颗黄色透明料珠从浇口滚进凹槽，落到座上，摆臂随即落下盖章（料珠就是它干活要"吃"的东西）；"Plug that pocket with the right key" 金钥匙插进凹槽，占住料珠的位置，料珠被挤到旁边；"can't do its job" 摆臂停在半空，纸带停住，最后一个章只盖了一半。
+- 观众懂：堵住这个口袋，这台机器就停工。后面 5-04、5-09、W4 都回到这台机器。
+- 怎么出来：镜头后拉出零件，零件合壳，沿料杆移到玻璃肝 → 3-05。</p>
+<p><strong>3-05 · 画外 D · 钻：样本抽屉（h09）+ 细胞旋钮（h05）</strong>
+"Why this lock? Remember the Hong Kong team. In 36 of 52 liver tumours, CDK20 was higher than in nearby non-tumour tissue. High levels went with later-stage tumours and shorter survival. And turning CDK20 down in liver cancer cells slowed their growth."
+- 里面是什么：玻璃肝下面抽出一个样本抽屉，52 个小格，每格一对小片：肿瘤和旁边的正常组织，每片里一根蓝色液柱（CDK20 的量）。
+- 怎么动："Hong Kong team" 抽屉从肝下滑出，抽屉前沿刻 Hong Kong 2011；"36 of 52" 52 格一行行亮，36 格里肿瘤片的液柱比旁边高，格子边框变红，计数轮跳到 36 / 52；"later-stage tumours and shorter survival" 红格旁伸出两块小牌：later stage、shorter survival（不画曲线，剧本要求不编曲线）；"turning CDK20 down" 镜头钻进旁边的细胞零件，CDK20 小机器上一个旋钮往小拧；"slowed their growth" 细胞的分裂计数轮转慢下来。
+- 观众懂：这把锁真的和肝癌有关，而且调低它，癌细胞就慢下来。
+- 怎么出来：镜头从细胞退出到第 3 区，CDK20 浮起飞到画面右侧 → 3-06。</p>
+<p><strong>3-06 · 出镜 D："So: a strong suspect. Not the only cause of liver cancer, but a lock worth trying."</strong>
+- 人旁边：三个零件排一排：左右两个是磨砂盲盒，中间是 CDK20；上方一盏小吊灯。
+- 怎么动："strong suspect" 吊灯打在 CDK20 上；"Not the only cause" 左右两个盲盒也亮一点（还有别的原因）；"a lock worth trying" CDK20 表面的红圈凹槽亮，一把金钥匙从旁边转过来对准凹槽。
+- 遮挡：D 说 "suspect" 时手指向 CDK20，手在零件前。
+- 怎么出来：三个零件回到板上，镜头移到 PandaOmics 芯片 → 3-07。</p>
+<p><strong>3-07 · 画外 B · 钻：PandaOmics 芯片（h11）+ TD</strong>
+"In 2023, an AI platform called PandaOmics backed that hunch. It combed ten liver cancer data sets, over a thousand tumour samples and hundreds of healthy ones, plus research papers. People checked its top 20 by hand, and CDK20 came out on top, with no approved drug against it yet."
+- 里面是什么：芯片盖翻开，里面一把转动的"梳子"，十个进口接着十根料杆。梳子下面是 TD 做的光流（计算机里面）。
+- 怎么动："PandaOmics" 芯片盖上的刻字亮；"backed that hunch" 盖子翻开；"ten liver cancer data sets" 十个数据盘（p27）依次转起来，每个往芯片送一股光流；"over a thousand tumour samples" 和 "hundreds of healthy ones" 两股流里的光点数量明显一多一少；"research papers" 一叠纸片也被吸进去；"top 20" 芯片出口吐出一块 Top 20 牌（p28）；"by hand" 一个白色小人拿笔逐行打勾；"on top" CDK20 那一行从第 4 行升到第 1 行；"no approved drug" 第一行旁一个红色手写批注 no approved drug yet。
+- 观众懂：AI 从一大堆数据里把 CDK20 挑出来，人再核一遍。
+- 怎么出来：第一行上的 CDK20 小图标放大，变成磨砂的 CDK20（p29）→ 3-08。</p>
+<p><strong>3-08 · 画外 B · 钻：磨砂外壳（p29）+ 盲盒架（h10）</strong>
+"But here's the problem. To design a key, you need to see the lock. And no one had measured CDK20's shape. That takes a lot of hard lab work, and only a small fraction of proteins have ever been measured. Without a 3D shape, even computer predictions of binding get expensive, slow and difficult."
+- 里面是什么：什么也看不清。这一段的"钻"就是想钻却钻不进去。
+- 怎么动："see the lock" 镜头往磨砂壳里推，里面雾蒙蒙，找不到凹槽；"no one had measured" 壳下的标签牌是空白的；"hard lab work" 旁边烧瓶冒泡，日历慢慢翻页；"only a small fraction" 镜头后拉，一整排密封的零件袋，只有零星几个是透明的，里面一张打勾的卡片；"Without a 3D shape" 一把钥匙坯在磨砂壳前犹豫地停住；"expensive, slow and difficult" 钞票、日历、烧瓶三件依次落到钥匙坯旁边，每落一件钥匙坯被压低一点。
+- 观众懂：没有形状，就没法照着配钥匙。
+- 怎么出来：板上的灯一盏盏暗下，只剩磨砂壳的轮廓光，它飞到画面右侧 → 3-09。</p>
+<p><strong>3-09 · 出镜 B："So you've got a lock nobody can see. How do you cut a key in the dark?"</strong>
+- 人旁边：磨砂 CDK20。
+- 怎么动："nobody can see" 零件只剩一圈轮廓光；"cut a key" 一把钥匙坯在旁边亮起；"in the dark" 钥匙坯伸向磨砂壳，停在半路。后期房间变暗（照剧本）。
+- 怎么出来：B 淡出，磨砂壳成为画面里唯一亮着的东西 → W2 第一拍它跳起来。</p>
+<h3>第 4 章（S4）转折一：AI 把灯打开</h3>
+<table>
+<thead>
+<tr>
+<th>段</th>
+<th>类型 · 时长</th>
+<th>讲什么</th>
+<th>钻哪里</th>
+<th>做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>W2</td>
+<td>音乐 · 25.0 s</td>
+<td>形状出现</td>
+<td><strong>AlphaFold 折叠台</strong></td>
+<td>三维钻 + TD 光</td>
+</tr>
+<tr>
+<td>4-01</td>
+<td>画外 B · 28.3 s</td>
+<td>AlphaFold 怎么猜形状、多有把握</td>
+<td><strong>AlphaFold 折叠台</strong></td>
+<td>三维钻 + TD</td>
+</tr>
+<tr>
+<td>4-02</td>
+<td>画外 B · 18.7 s</td>
+<td>以前要实验测，现在免费下载</td>
+<td><strong>数据库抽屉</strong></td>
+<td>三维钻</td>
+</tr>
+<tr>
+<td>4-03</td>
+<td>画外 B · 19.8 s</td>
+<td>尾巴挡住了钥匙孔</td>
+<td>沿用锁和钥匙的比喻，细节另定</td>
+<td>三维钻</td>
+</tr>
+<tr>
+<td>4-04+05</td>
+<td>出镜 C/B · 7.2 s</td>
+<td>他们剪掉了尾巴</td>
+<td>不钻</td>
+<td>出镜三维</td>
+</tr>
+<tr>
+<td>4-06</td>
+<td>画外 A · 17.7 s</td>
+<td>化学家的试错循环，每轮都花时间和钱</td>
+<td><strong>试错循环轨道</strong></td>
+<td>三维钻</td>
+</tr>
+<tr>
+<td>4-07</td>
+<td>画外 A · 24.6 s</td>
+<td>生成式 AI 把循环搬进计算机</td>
+<td><strong>Chemistry42 芯片</strong></td>
+<td>三维钻 + TD</td>
+</tr>
+<tr>
+<td>4-08</td>
+<td>出镜 A · 8.3 s</td>
+<td>AI 没取代科学家，是光速试错</td>
+<td>不钻</td>
+<td>出镜三维 + TD 光迹</td>
+</tr>
+<tr>
+<td>4-09</td>
+<td>画外 B · 17.6 s</td>
+<td>口袋形状、铰链规则、过滤</td>
+<td><strong>口袋模具 + 筛子</strong></td>
+<td>三维钻</td>
+</tr>
+<tr>
+<td>W3</td>
+<td>音乐 · 15.0 s</td>
+<td>8,918 个新设计</td>
+<td><strong>Chemistry42 芯片出口</strong></td>
+<td>TD 为主 + 三维</td>
+</tr>
+<tr>
+<td>4-10</td>
+<td>画外 A · 23.3 s</td>
+<td>对接、54、7</td>
+<td>沿用锁和钥匙的比喻，细节另定</td>
+<td>三维钻 + TD</td>
+</tr>
+<tr>
+<td>4-11+12</td>
+<td>出镜 D/A · 10.7 s</td>
+<td>计算机挑的？不是，只有实验能定</td>
+<td>不钻</td>
+<td>出镜三维</td>
+</tr>
+</tbody>
+</table>
+<p><strong>W2 · 钻：AlphaFold 折叠台（h07）· HBFS，从 50.446 s 起</strong>
+保留导演认可的创意（卡拍、甩红尾巴），换成大板世界。
+- 里面是什么：AlphaFold 芯片打开是一个折叠台：一条 346 块小件串成的链从卷轴上放出来，台上六只卡爪，链被一段段折到真实结构的位置（终点是 AlphaFold DB v6 的真实坐标；折的过程是画的，AlphaFold 并不模拟折叠）。
+- 怎么动（每小节约 1.94 秒）：第 1 小节，第一句唱词进来时磨砂壳从格子里跳起，落进芯片；第 2–5 小节，每一拍卡爪"咔"地折一段；第 6–8 小节，形状收拢成 CDK20 的外形；第 9–10 小节，两只喷头扫过，有把握的部分喷成克莱因蓝，低把握的尾巴喷成红色；第 11–12 小节，像湿狗甩水一样卡拍甩两下。
+- 尾巴怎么处理（<strong>需要导演定</strong>）：
+  - 推荐：<strong>甩不掉</strong>。红尾巴被甩得晃来晃去，最后一拍"啪"地搭在红圈凹槽上不动了。这样 4-03 "尾巴挡住钥匙孔"、4-05 "人把它剪掉" 顺下来，科学顺序对。
+  - 备选：照原来甩掉，尾巴落到隔壁格子里盘成一圈；4-03 再回放它原来挡在哪里。
+- 标签只有一个："AlphaFold DB v6 · predicted"。押韵字幕照 <code>音乐/W2_押韵字幕.md</code>，只在唱的地方。
+- 怎么出来：成品留在台上，镜头不动，旁白进来 → 4-01。</p>
+<p><strong>4-01 · 画外 B · 钻：AlphaFold 折叠台（续）</strong>
+"So the team did something that once sounded like science fiction. They asked an AI to guess the shape. Imagine a protein as a chain of building blocks that folds into a 3D shape. The order of the blocks is the sequence. AlphaFold learned from known structures how sequences fold. Give it one, and it predicts the shape, plus how sure it is about each part."
+- 怎么动："guess the shape" W2 的成品被推到台边；"chain of building blocks" 卷轴上一条新链被拉出来，镜头贴着看小件（四种形状轮流）；"folds into a 3D shape" 卡爪把一小段折起来；"order of the blocks is the sequence" 小件一个个经过一个读头，读头每过一块"嗒"一声；"learned from known structures" 台子后墙上一排密封的零件袋（里面的形状看不清，只表示"见过的"）依次亮一下，一束光（TD）从它们流向卡爪；"Give it one" 新链进台；"predicts the shape" 卡爪连续折，形状成型；"how sure it is about each part" 喷头扫过，蓝和红分开，台边弹出一块图例小牌：sure / not sure。
+- 观众懂：AI 是照着见过的大量形状，猜一条新链会折成什么样，还告诉你哪里有把握。
+- 怎么出来：成品从芯片的浇口被推出去，顺着料杆滑到数据库机柜 → 4-02。</p>
+<p><strong>4-02 · 画外 B · 钻：数据库抽屉（h12）</strong>
+"Before, you'd need a lab-measured structure. Now? The team just downloaded a prediction, for free, from a public database. According to the paper, this was the first time AlphaFold had been used to find a hit like this."
+- 里面是什么：数据库机柜（p33）的抽屉，每个抽屉里一排卡片，每张卡片上有一个预测形状的小浮雕。
+- 怎么动："Before" 左边一个烧瓶，下面一根进度槽极慢地爬；"lab-measured structure" 烧瓶旁的小牌刻 lab-measured；"Now?" 机柜一个抽屉"唰"地滑开；"downloaded" 一张刻着 CDK20 小浮雕的卡片从抽屉里弹起，顺着料杆滑走；"for free" 卡片上的价签翻到 free；"first time" 卡片上盖一枚 first time 的红章（章落下时卡片被压得一弹）。
+- 怎么出来：卡片顺着料杆落到 CDK20 零件上 → 4-03。</p>
+<p><strong>4-03 · 沿用锁和钥匙的比喻，细节另定。</strong></p>
+<p><strong>4-04 + 4-05 · 出镜 C、B</strong>
+- C "So what did they do?"：人旁边是带红尾巴的 CDK20（W2 的成品缩小）。
+- B "They cut the tail off. The AI made the guess. A human caught the problem."：一把剪钳（h14）从侧面进来；"cut the tail off" 钳口合上，红尾巴"咔"地断开往下掉；"The AI made the guess" 蓝色主体亮一下；"A human caught the problem" 一个白色小人站到断口旁边。
+- 遮挡：B 做剪刀手时，他的手在剪钳前面。
+- 怎么出来：剪下的尾巴落进板上的废料桶（p44），镜头跟着下落，接到旁边的循环轨道 → 4-06。</p>
+<p><strong>4-06 · 画外 A · 钻：试错循环轨道（h03）</strong>
+"And this next part honestly blew my mind. Think about how chemists have always found a key. Imagine a molecule. Make it. Test it. It fails. Tweak it. Try again. And every single round in a real lab costs time and money."
+- 里面是什么：一条椭圆小轨道，上面一辆小车，四个站各有一个机构：Imagine（钥匙坯从槽里升起）、Make（冲头压出齿）、Test（一把小锁试）、Tweak（锉刀改一个齿）。每站下面一个滑槽和小托盘。
+- 怎么动："Imagine a molecule" 小车到第一站，钥匙坯升起；"Make it" 冲头压下，钥匙出齿，碎屑弹起；"Test it" 钥匙插进小锁；"It fails" 小锁一盏红灯亮，钥匙被推回；"Tweak it" 锉刀来回两下；"Try again" 小车继续往前；"time and money" 每过一站，滑槽里滚下一枚硬币和一个小钟落进托盘；最后镜头后拉，托盘已经堆满。
+- 观众懂：在真实实验室里每转一圈都要花时间和钱。
+- 怎么出来：整条轨道被一只机械夹提起来，放进 Chemistry42 芯片 → 4-07。</p>
+<p><strong>4-07 · 画外 A · 钻：Chemistry42 芯片（h04）+ TD</strong>
+"Generative AI takes that loop and moves it inside a computer. The platform here, Chemistry42, runs dozens of AI models side by side, built on known chemistry. They invent new molecules for this exact keyhole, score them, learn from the scores, and go again. Its makers say it turns out new structures within hours."
+- 里面是什么：芯片里面一大片缩小的循环轨道，一排排并列（36 条），底下是 TD 出的发光地面；正中一块蓝色小座，上面就是 CDK20 那个红圈凹槽的复制品。
+- 怎么动："moves it inside a computer" 4-06 的轨道缩小落进芯片槽；"dozens of AI models side by side" 镜头升起，露出一排排小轨道；"built on known chemistry" 底座上刻 known chemistry；"invent new molecules" 每条小轨道吐出一把小钥匙；"this exact keyhole" 钥匙都滑向中间的凹槽复制品；"score them" 每把钥匙旁一盏小灯亮出深浅；"learn from the scores" 光沿细管从凹槽流回每条轨道（TD）；"go again" 所有小车加速；"within hours" 一个小钟的指针飞快转。
+- 观众懂：同一个试错循环，在计算机里同时跑几十条，而且越跑越快。
+- 怎么出来：最快的那圈光收成一个光环，飞到画面右侧 → 4-08。</p>
+<p><strong>4-08 · 出镜 A："AI didn't replace the scientists. It ran their trial and error inside a computer, at light speed."</strong>
+- 人旁边：一个白色小人站在一条小循环轨道旁。
+- 怎么动："didn't replace the scientists" 小人一直站着，没被挪走；"trial and error" 小车开始转；"inside a computer" 一个透明芯片壳从上面罩下来；"light speed" 小车转成一道光环（TD），A 的手一甩，一道光跟着手飞出去（跟踪手的位置）。
+- 遮挡：手在光迹前。
+- 怎么出来：光迹落回板上的口袋零件 → 4-09。</p>
+<p><strong>4-09 · 画外 B · 钻：口袋模具（p20 加深）+ 筛子（h13）</strong>
+"The team gave it the pocket's shape and one rule: every key must grip a spot called the hinge. Its filters are built to toss designs with reactive or possibly toxic groups, and to score how drug-like and easy to make each one is."
+- 里面是什么：一块模具，压着 CDK20 红圈凹槽的形状，凹槽一侧有一个亮蓝色卡扣（hinge）；下面三层筛子。
+- 怎么动："pocket's shape" 模具压下去，留下凹槽的印；"one rule" 卡扣亮；"grip a spot called the hinge" 钥匙一把把滑过来，能"咔"一下扣住卡扣的留下，扣不住的滑走；"filters" 筛子开始抖；"reactive or possibly toxic groups" 柄上带红色尖疙瘩的钥匙卡在第一层筛网上；"drug-like and easy to make" 筛子侧面两个小表盘的指针给每把通过的钥匙打分。
+- 观众懂：AI 设计时有规则和关卡，不是随便造。
+- 怎么出来：通过的钥匙落进芯片的料斗 → W3。</p>
+<p><strong>W3 · Chemistry42 芯片出口（TD 为主）</strong>
+保留导演认可的创意：每把钥匙都不同，软软推回再进去。
+- 画面：芯片出口每一拍吐出一把不同的钥匙（柄和齿都不一样），钥匙推进一个软的试配口，被轻轻顶回来（得分反馈），下一把就改了形状；最后一小节，一把钥匙顺滑地进去合上。芯片上一个四位计数轮一路滚，最后一拍停在 8,918。背后发光的点群由 TD 出（沿用 W3 的 TD 点群，改成大板配色）。不做高频全屏闪烁。
+- 怎么出来：计数轮停在 8,918，点群铺成一面墙 → 4-10。</p>
+<p><strong>4-10 · 沿用锁和钥匙的比喻，细节另定。</strong></p>
+<p><strong>4-11 + 4-12 · 出镜 D、A</strong>
+- D "Wait. So the computer picked the winners?"：人旁边一个小领奖台，七把钥匙，前三把亮着。
+- A "Not quite. A docking score is a clue, not proof. Only the lab can tell."："Not quite" 三把钥匙的小吊牌翻过来变成问号；"a clue, not proof" 台边一个打分表盘的指针来回晃，停不准；"Only the lab can tell" 烧瓶从下面升起，七把钥匙滚向它。
+- 遮挡：D 说 "Wait" 时手抬到领奖台前。
+- 怎么出来：七把钥匙落进七个小瓶 → 5-01。</p>
+<h3>第 5 章（S5）危机二到转折二：钥匙几乎没转动</h3>
+<table>
+<thead>
+<tr>
+<th>段</th>
+<th>类型 · 时长</th>
+<th>讲什么</th>
+<th>钻哪里</th>
+<th>做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5-01</td>
+<td>画外 C · 19.7 s</td>
+<td>七个分子；Kd 是什么</td>
+<td><strong>Kd 秤</strong></td>
+<td>三维钻</td>
+</tr>
+<tr>
+<td>5-02</td>
+<td>出镜 C · 6.4 s</td>
+<td>六个不行，001 突出</td>
+<td>不钻</td>
+<td>出镜三维</td>
+</tr>
+<tr>
+<td>5-03</td>
+<td>画外 C · 16.9 s</td>
+<td>9.2 µM，30 天</td>
+<td>不钻</td>
+<td>三维板面</td>
+</tr>
+<tr>
+<td>5-04</td>
+<td>画外 C · 23.7 s</td>
+<td>抓住不等于卡死；IC50 &gt; 6,000 nM</td>
+<td><strong>CDK20 盖章机 + 十台小机器</strong></td>
+<td>三维钻</td>
+</tr>
+<tr>
+<td>5-05+06</td>
+<td>出镜 C/B · 8.2 s</td>
+<td>几乎没转；回到原点？</td>
+<td>不钻</td>
+<td>出镜三维</td>
+</tr>
+<tr>
+<td>5-07</td>
+<td>画外 C · 21.3 s</td>
+<td>循环再转，带上实验数据</td>
+<td><strong>Chemistry42 芯片</strong></td>
+<td>三维钻 + TD</td>
+</tr>
+<tr>
+<td>5-08</td>
+<td>画外 C · 18.4 s</td>
+<td>048 紧 15 倍；33.4</td>
+<td><strong>Kd 秤 + 十台小机器</strong></td>
+<td>三维钻</td>
+</tr>
+<tr>
+<td>5-09</td>
+<td>出镜 C · 3.3 s</td>
+<td>这次钥匙转了</td>
+<td>不钻</td>
+<td>出镜三维</td>
+</tr>
+<tr>
+<td>W4</td>
+<td>音乐 · 7.9 s</td>
+<td>钥匙转到底</td>
+<td><strong>CDK20 盖章机</strong></td>
+<td>三维钻</td>
+</tr>
+<tr>
+<td>5-10</td>
+<td>画外 C · 29.1 s</td>
+<td>活细胞实验</td>
+<td>沿用锁和钥匙的比喻，细节另定</td>
+<td>三维钻</td>
+</tr>
+</tbody>
+</table>
+<p><strong>5-01 · 画外 C · 钻：Kd 秤（h08）+ 七瓶架（h16）</strong>
+"So, the moment of truth. Seven real molecules, made in a real lab. Do any actually grab CDK20? Grip is measured as Kd: roughly, how much molecule it takes to grab half the protein. Lower means tighter."
+- 里面是什么：一台秤：一个转盘上围着十个小 CDK20，每个都有红圈凹槽；上方一个透明料斗，壁上刻着刻度；正面一个表盘。转盘上一半的小 CDK20 抓住了钥匙，一个跳闸就把表针定住。
+- 怎么动："moment of truth" 七瓶架（h16）落位；"Seven real molecules" 七个小瓶依次插进架子；"real lab" 烧瓶在后面冒泡；"grab CDK20" 一个瓶子往料斗里倒钥匙；"Kd" 表盘上的刻字亮；"how much molecule it takes" 料斗里的钥匙越积越高，表针跟着走；"grab half the protein" 转盘上第五个小 CDK20 抓住钥匙那一刻，跳闸"咔"，表针定住；"Lower means tighter" 换一种抓得更紧的钥匙再来一次，料斗只积了一点跳闸就落下，表针停得更低，旁边一个箭头写 lower = tighter。
+- 观众懂：Kd 就是"要倒多少才能抓住一半"，倒得越少越紧。
+- 怎么出来：七瓶架浮起飞到画面右侧 → 5-02。</p>
+<p><strong>5-02 · 出镜 C："Six of them barely held on. But one stood out. Its name? 001."</strong>
+- 人旁边：七瓶架。
+- 怎么动："barely held on" 六个瓶子变灰往下沉；"one stood out" 剩下一个往上浮、发亮；"001" 瓶盖上刻 001。她竖一根手指的同时瓶子停稳。
+- 遮挡：手指在瓶子前。
+- 怎么出来：001 瓶子落回板上第 5 区 → 5-03。</p>
+<p><strong>5-03 · 画外 C（三维板面）</strong>
+"001's Kd: 9.2 micromolar. The other six? All above 30. Much weaker. And here's the wild part. The clock read just 30 days, from picking the target to this first confirmed hit."
+- 怎么动："9.2 micromolar" Kd 秤表针停在 9.2，旁边小牌刻 9.2 µM；"above 30" 六个灰瓶的表针都过了 30 的刻线；"Much weaker" 灰瓶再沉一点；"30 days" 撕页日历（h17）一页页飞快翻，停在 30；"first confirmed hit" 主料杆上 Hit 站亮。001 钥匙在 CDK20 凹槽旁的小图标处标 OUR RE-DOCKING（AutoDock Vina）。
+- 怎么出来：001 钥匙飞向 CDK20 零件 → 5-04。</p>
+<p><strong>5-04 · 画外 C · 钻：CDK20 盖章机（h01）+ 十台小机器</strong>
+"But then came a second test. Because grabbing a lock isn't the same as jamming it. Does 001 actually stop CDK20 from working? That's measured as IC50: how much you need to cut the enzyme's activity in half. For 001? Above 6,000 nanomolar. Weak."
+- 里面是什么：3-04 那台盖章机。旁边一排十台小号盖章机，前面一个剂量旋钮。
+- 怎么动："second test" 盖章机前壳翻开；"grabbing a lock" 001 钥匙插进凹槽，插得进；"isn't the same as jamming it" 钥匙试着转，只转一点就卡住，摆臂照样一下一下盖章；"stop CDK20 from working" 纸带上的章一个接一个；"IC50" 镜头移到十台小机器，剂量旋钮刻 IC50；"cut the enzyme's activity in half" 旋钮往上拧，小机器一台台停下；"Above 6,000 nanomolar" 旋钮拧过 6,000 的刻线，停下的还不到一半；"Weak" 旋钮拧到头，表针顶在尽头抖。
+- 观众懂：抓住了不等于卡住了，001 抓得住但几乎关不掉这台机器。
+- 怎么出来：盖章机缩小飞到画面右侧 → 5-05。</p>
+<p><strong>5-05 + 5-06 · 出镜 C、B</strong>
+- C "The key went into the lock. But it barely turned."：人旁边是 CDK20 盖章机的锁面；"went into the lock" 钥匙插进；"barely turned" 只转约 12° 就卡住，抖一下。底乐在这里磁带停转式地停下（照剧本）。
+- B "So was that it? Back to square one?"：钥匙被弹簧顶出来，退回起点，旁边一个小小的循环箭头。
+- 遮挡：C 做拧钥匙手势时手在锁前。
+- 怎么出来：钥匙退回循环箭头，箭头飞进 Chemistry42 芯片 → 5-07。</p>
+<p><strong>5-07 · 画外 C · 钻：Chemistry42 芯片（h04）+ TD</strong>
+"Not at all. This is where the loop kicks in again, now with real lab data inside. The results went back in, with a predicted pose of how 001 sat in the pocket. Sixteen new designs. Six made and tested. All within 30 days of that first hit."
+- 怎么动："loop kicks in again" 芯片里的小轨道重新转；"real lab data" 一张刻着烧瓶图案和 Kd、IC50 读数的小卡片顺着料杆送进芯片；"predicted pose" 第二张卡片：001 钥匙插在凹槽里的小浮雕，刻 predicted；"Sixteen new designs" 出口吐出 16 把钥匙，计数轮跳到 16；"Six made and tested" 其中 6 把滑进烧瓶；"within 30 days" 日历翻 30 页。
+- 怎么出来：6 把里一把更亮的（048）被推出来 → 5-08。</p>
+<p><strong>5-08 · 画外 C · 钻：Kd 秤 + 十台小机器</strong>
+"And one of them, 048, grabbed about fifteen times tighter. Then the enzyme test. Remember, 001 needed more than 6,000 nanomolar. 048 needed just 33.4."
+- 怎么动："048" 钥匙柄上刻 048；"fifteen times tighter" Kd 秤：料斗只积到很低跳闸就落下，旁边一个比例尺显示约 15×；"enzyme test" 十台小机器；"001 needed more than 6,000" 一根灰色幽灵表针停在 6,000 外；"048 needed just 33.4" 新表针几乎刚起步就停在 33.4，五台机器已经停了。048 的小图标标 OUR RE-DOCKING。
+- 观众懂：第二轮的钥匙抓得更紧，而且真能关掉机器。
+- 怎么出来：048 钥匙飞到画面右侧 → 5-09。</p>
+<p><strong>5-09 · 出镜 C："This time, the key turned."</strong>
+- 人旁边：同一个锁面。"turned" 钥匙一路转到底，闩"咔"地落下。然后空一拍 → W4。
+- 遮挡：手在锁前。
+- 怎么出来：镜头扎进锁面 → W4 在盖章机里面。</p>
+<p><strong>W4 · 钻：CDK20 盖章机内部（7.9 s）</strong>
+- 画面：锁芯转到底，凸轮拨下红色的闩，闩卡住摆臂，摆臂停在半空；纸带停住。随后镜头后拉出零件，主料杆上 Improve 站亮成红色。重拍和闩落下同一帧。
+- 怎么出来：镜头沿料杆往前看到 Cells 站 → 5-10。</p>
+<p><strong>5-10 · 沿用锁和钥匙的比喻，细节另定。</strong></p>
+<h3>第 6 章（S6）记分板</h3>
+<p>第 6 章的表格做成一块<strong>实体翻牌记分板</strong>（h15，像车站的翻牌显示屏），挂在第 6 区。每一行左右各有一个小凹位，放这一行的小零件。6-01 到 6-08 用同一块板、同一套机位，一行行填满。</p>
+<table>
+<thead>
+<tr>
+<th>段</th>
+<th>类型 · 时长</th>
+<th>讲什么</th>
+<th>钻哪里</th>
+<th>做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6-01</td>
+<td>画外 D · 7.3 s</td>
+<td>大问题：到底帮了多少</td>
+<td><strong>翻牌记分板</strong></td>
+<td>三维钻</td>
+</tr>
+<tr>
+<td>6-02</td>
+<td>画外 D · 12.8 s</td>
+<td>第一行：看见这把锁</td>
+<td>记分板</td>
+<td>三维钻</td>
+</tr>
+<tr>
+<td>6-03</td>
+<td>画外 D · 14.9 s</td>
+<td>第二行：找到苗头</td>
+<td>记分板 + 料斗</td>
+<td>三维钻</td>
+</tr>
+<tr>
+<td>6-04+05</td>
+<td>出镜 D/B · 9.1 s</td>
+<td>以前几百万，这里 13 个</td>
+<td>不钻</td>
+<td>出镜三维</td>
+</tr>
+<tr>
+<td>6-06</td>
+<td>画外 D · 11.6 s</td>
+<td>第三行：时间</td>
+<td>记分板</td>
+<td>三维钻</td>
+</tr>
+<tr>
+<td>6-07</td>
+<td>画外 D · 13.1 s</td>
+<td>第四行：改进钥匙</td>
+<td>记分板</td>
+<td>三维钻</td>
+</tr>
+<tr>
+<td>6-08</td>
+<td>画外 D · 12.7 s</td>
+<td>说句公道话</td>
+<td>记分板</td>
+<td>三维钻</td>
+</tr>
+<tr>
+<td>6-09</td>
+<td>画外 B · 12.0 s</td>
+<td>如果一路走下去的好处</td>
+<td>不钻</td>
+<td>三维板面</td>
+</tr>
+<tr>
+<td>6-10</td>
+<td>画外 B · 15.4 s</td>
+<td>048 在路上哪里</td>
+<td>不钻</td>
+<td>三维板面（路）</td>
+</tr>
+<tr>
+<td>6-11</td>
+<td>画外 B · 24.9 s</td>
+<td>路的尽头是什么样</td>
+<td>不钻</td>
+<td>三维板面（路）</td>
+</tr>
+<tr>
+<td>6-12</td>
+<td>出镜 B · 7.1 s</td>
+<td>起点只花了几周</td>
+<td>不钻</td>
+<td>出镜三维</td>
+</tr>
+</tbody>
+</table>
+<p><strong>6-01 · 画外 D："So, the big question. How much did the computers actually help? Let's line up before and now."</strong>
+- 怎么动："the big question" 记分板从板上立起；"computers" 顶上标题翻牌哗啦翻出；"line up" 两栏表头翻出 BEFORE 和 NOW，四行空着，每格翻牌随机抖一下待命。
+- 怎么出来：镜头推到第一行 → 6-02。</p>
+<p><strong>6-02 · "Seeing the lock. Before: hard lab experiments, and without a 3D shape, design was expensive, slow and difficult. Now: a free prediction, downloaded from a public database."</strong>
+- 怎么动："Seeing the lock" 行名翻出；"Before" 左凹位升起磨砂 CDK20，翻牌翻出 hard lab experiments；"expensive, slow and difficult" 三个小词依次翻出；"Now" 右凹位升起 4-02 那张 CDK20 卡片；"free prediction" 翻出；"public database" 卡片旁亮出小机柜图案。
+- 怎么出来：镜头下移一行 → 6-03。</p>
+<p><strong>6-03 · "Finding a hit. Before: screening real compounds by the millions, an approach a 2023 review says has hit a costly bottleneck. Now: 8,918 designs inside a computer, and just 13 molecules actually made."</strong>
+- 怎么动："by the millions" 左凹位一个透明料斗，满满的细珠往下流；"costly bottleneck" 料斗细颈处细珠堵住；"8,918 designs" 右边计数轮滚到 8,918；"just 13" 右凹位小托盘里只落下 13 颗珠子。
+- 怎么出来：料斗飞到画面右侧 → 6-04。</p>
+<p><strong>6-04 + 6-05 · 出镜 D、B</strong>
+- D "Millions of compounds screened before. Here? Thirteen made."：人旁边一个料斗（h23）；"Millions" 细珠流个不停；"Thirteen made" 料斗下的托盘里只剩 13 颗，排成一行。D 双手捧起的位置正好在托盘前。
+- B "Thirteen. That's honestly wild."：13 颗珠子整齐跳一下。
+- 遮挡：D 的手在托盘前。
+- 怎么出来：13 颗珠子飞回记分板的第二行 → 6-06。</p>
+<p><strong>6-06 · "Time. Before: a ten-to-seventeen-year road, with finding a hit just the opening stretch. Now: 30 days to the first hit, and a better key within another 30."</strong>
+- 怎么动："Time" 行名；"ten-to-seventeen-year road" 左凹位卷尺（h18）拉出很长，刻 10–17 years；"opening stretch" 卷尺最前面一小段变红；"30 days" 右凹位日历翻到 30；"another 30" 再翻 30。
+- 怎么出来：镜头下移 → 6-07。</p>
+<p><strong>6-07 · "Improving the key. Before: every change meant another costly lab round. Now: a predicted picture of the first key guided sixteen designs, and the grip got about fifteen times tighter."</strong>
+- 怎么动："costly lab round" 左凹位一枚硬币掉进一个小循环轨道，轨道转一圈；"predicted picture" 右凹位 5-07 那张 001 浮雕卡片；"sixteen designs" 卡片下扇形散开 16 把小钥匙；"fifteen times tighter" 一根小刻度尺从 1 推到约 15×。
+- 怎么出来：镜头后拉看整块板 → 6-08。</p>
+<p><strong>6-08 · "To be fair, these pairs come from different studies: they compare scale and speed, not one race run side by side. But the paper itself calls the work cost- and time-efficient."</strong>
+- 怎么动："different studies" 两栏之间一条刻出来的虚线槽亮起，旁边手写批注 different studies；"scale and speed" 右栏四格依次轻轻翻一下（不闪）；"not one race" 手写批注 not one race；"cost- and time-efficient" 记分板下方落下一块刻着这句引文的牌子，注 Ren et al. 2023。
+- 怎么出来：镜头从记分板转向第 6 区的路 → 6-09。</p>
+<p><strong>6-09 · 画外 B（三维板面）</strong>
+"Now imagine this keeps working further down the road. Fewer failed molecules, lower costs, fewer animal tests, less chemical waste. Computing costs electricity too. And the real prize? New treatments for patients."
+- 板面上：主料杆往远处延伸，路边第 6 区的零件。
+- 怎么动："further down the road" 镜头沿料杆往前推；"Fewer failed molecules" 珠子堆（p42）亮；"lower costs" 钞票亮；"fewer animal tests" 小鼠（p43）亮；"less chemical waste" 废料桶亮。这四件都是磨砂半透明的样子，表示可能有、还没量过；"electricity" 插头和闪电（p44）亮，代表代价；"New treatments for patients" 路尽头一个小人和一粒胶囊亮起。
+- 怎么出来：镜头回到路的起点 → 6-10。</p>
+<p><strong>6-10 · 画外 B（三维板面，路）</strong>
+"So where's 048 on the road? Target: found. Hit: found. Improving it: started. Cells: first tests, done. Animals and clinical trials: not yet."
+- 怎么动："048" 一块刻 048 的小吊牌（h19）挂上主料杆起点；"Target: found" 吊牌滑到 Target，站牌打勾；"Hit: found" 滑到 Hit，打勾；"started" 滑到 Improve，站牌刻 started；"first tests, done" 滑到 Cells，打勾；"not yet" Animals 和 Trials 两站变灰。
+- 怎么出来：镜头沿料杆往远端滑 → 6-11。</p>
+<p><strong>6-11 · 画外 B（三维板面，路）</strong>
+"And here's what the end of that road can look like. Some AI-assisted cancer drugs have walked much further. In September 2026, one of them, lirafugratinib, was approved in the US for a bile duct cancer. Others failed along the way. And 048? Its makers chose not to take it to trials, and shared it with other researchers instead."
+- 怎么动："end of that road" 镜头滑到成品位；"walked much further" 一块金色吊牌沿料杆一路滑过去；"lirafugratinib" 吊牌停在 Approval，刻 lirafugratinib，下面小牌 approved in the US, Sep 2026；"bile duct cancer" 再补一行；"Others failed" 另一块吊牌在半路掉下浇口，变灰，刻 EXS-21546 划掉；"And 048?" 镜头回到 Cells 站的 048；"shared it" 048 吊牌上伸出几根细线连到几个白色小人。
+- 怎么出来：一小段路和 048 吊牌缩小飞到画面右侧 → 6-12。</p>
+<p><strong>6-12 · 出镜 B："048 is at the very start of the road. But for this case, that start took weeks, not years."</strong>
+- 人旁边：一小段路，048 吊牌在起点；一把卷尺。
+- 怎么动："very start" 吊牌在起点轻晃；"weeks" 卷尺拉出很短一段，刻 weeks；"not years" 卷尺继续拉出很长一段刻 years，那段被一道红线划掉。
+- 遮挡：B 的手掌在路前。
+- 怎么出来：零件回到板上，镜头移到第 7 区 → 7-01。</p>
+<h3>第 7 章（S7）下一步</h3>
+<table>
+<thead>
+<tr>
+<th>段</th>
+<th>类型 · 时长</th>
+<th>讲什么</th>
+<th>钻哪里</th>
+<th>做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7-01</td>
+<td>出镜 A · 4.9 s</td>
+<td>我们建议三件事</td>
+<td>不钻</td>
+<td>出镜三维</td>
+</tr>
+<tr>
+<td>7-02</td>
+<td>画外 A · 18.1 s</td>
+<td>一：让 048 往前走</td>
+<td>不钻</td>
+<td>三维板面（路）</td>
+</tr>
+<tr>
+<td>7-03</td>
+<td>画外 A · 11.5 s</td>
+<td>二：拿实测结构核对；失败也回炉</td>
+<td><strong>预测模型 + 幽灵外壳</strong></td>
+<td>三维钻</td>
+</tr>
+<tr>
+<td>7-04</td>
+<td>画外 A · 13.2 s</td>
+<td>三：比一场</td>
+<td>不钻</td>
+<td>三维板面</td>
+</tr>
+</tbody>
+</table>
+<p><strong>7-01 · 出镜 A："So, what should happen next? We'd suggest three things."</strong>
+- 人旁边：三块编号牌 1、2、3。"three things" 三块牌跟着三根手指依次弹下立起。
+- 遮挡：手指在牌前。
+- 怎么出来：第 1 块牌飞到路上 048 吊牌旁 → 7-02。</p>
+<p><strong>7-02 · 画外 A（三维板面，路）</strong>
+"One: walk 048 further. It's public now, so anyone could try. Test it in more liver cancer cells and normal liver cells, then animals, and check how the body handles it and what else it hits. The authors had already listed these steps."
+- 怎么动："walk 048 further" 吊牌往前挪一步，Cells 站插一面小旗；"public" 吊牌上挂的小挂锁弹开；"liver cancer cells and normal liver cells" 一组培养皿（p40）一个变两个、两个变四个；"animals" 小鼠零件亮；"how the body handles it and what else it hits" 两块小牌刻 ADME、selectivity；"already listed" 三张卡同时打勾。
+- 怎么出来：镜头移到 CDK20 零件 → 7-03。</p>
+<p><strong>7-03 · 画外 A · 钻：预测模型 + 幽灵外壳</strong>
+"Two: check the AlphaFold model against a lab-measured structure, once one exists. And feed every result, including the failures, back into the next round."
+- 里面是什么：蓝色的预测 CDK20（predicted）和一个同样外形的磨砂幽灵外壳（measured structure?）。
+- 怎么动："AlphaFold model" 蓝色模型转正；"lab-measured structure" 磨砂幽灵外壳从上面慢慢落下，罩在模型上，两者轮廓对不准的地方留一道缝，标 measured structure?；"once one exists" 幽灵外壳是虚的，半透明闪烁（慢，不闪光）；"every result" 一排钥匙沿料杆流回 Chemistry42 芯片；"including the failures" 几把灰色打叉的钥匙也一起流回去；"next round" 芯片里的小轨道转一圈。
+- 怎么出来：镜头跟着最后一把灰钥匙到第 7 区的跑道 → 7-04。</p>
+<p><strong>7-04 · 画外 A（三维板面）</strong>
+"Three: race them. An AI route and a classic route, same target, same budget, same definition of a hit. Then we'd know exactly how much faster AI really is."
+- 板面上：两条并排跑道（h22），各一块秒表。
+- 怎么动："race them" 两条跑道亮；"AI route" 上道刻字；"classic route" 下道刻字；"same target"、"same budget"、"same definition of a hit" 起跑线上三块小牌依次翻起，每翻一块，两道上各亮一个相同的小图标；"how much faster" 两块小吊牌起跑，两块秒表开始走，终点线上一个问号。
+- 怎么出来：镜头后拉到全板，两块目标牌（第 2 章的 1、2）飞到画面右侧 → 8-01。</p>
+<h3>第 8 章（S8）答案和片尾</h3>
+<table>
+<thead>
+<tr>
+<th>段</th>
+<th>类型 · 时长</th>
+<th>讲什么</th>
+<th>钻哪里</th>
+<th>做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8-01</td>
+<td>出镜 C · 3.0 s</td>
+<td>回到开头</td>
+<td>不钻</td>
+<td>出镜三维</td>
+</tr>
+<tr>
+<td>8-02</td>
+<td>画外 C · 23.0 s</td>
+<td>四个地方帮上了；目标一达成</td>
+<td>不钻</td>
+<td>三维板面（路）</td>
+</tr>
+<tr>
+<td>8-03</td>
+<td>画外 C · 18.6 s</td>
+<td>目标二：几百万变 13 个；30 天</td>
+<td>不钻</td>
+<td>三维板面（原二维页作废）</td>
+</tr>
+<tr>
+<td>8-04–07</td>
+<td>出镜 C/B/D/A · 32.3 s</td>
+<td>细胞里有效、人身上还没有；看新闻问在路上哪里；致谢</td>
+<td>不钻</td>
+<td>出镜三维</td>
+</tr>
+<tr>
+<td>W5</td>
+<td>音乐 · 33.0 s</td>
+<td>致谢和出处</td>
+<td>不钻</td>
+<td>三维转台 + 字</td>
+</tr>
+</tbody>
+</table>
+<p><strong>8-01 · 出镜 C："So, back to where we started."</strong>
+- 人旁边：两块目标牌 1、2，从上方落回，重新亮。
+- 怎么出来：两块牌落到路的起点 → 8-02。</p>
+<p><strong>8-02 · 画外 C（三维板面，路）</strong>
+"How can computer-aided methods help scientists find and assess cancer drug candidates? In this case, at four points. Picking a target from data. Predicting the lock's shape. Designing new keys. And ranking which ones to make. That's our first objective, met for this case."
+- 怎么动："four points" 路的第一段上挂起四个工具：PandaOmics 芯片、AlphaFold 芯片、Chemistry42 芯片、打分表盘；"Picking a target from data" PandaOmics 亮，芯片里一闪 Top 20 牌；"Predicting the lock's shape" AlphaFold 亮，上面升起蓝色 CDK20；"Designing new keys" Chemistry42 亮，吐出一把钥匙；"ranking which ones to make" 表盘指针摆；"first objective" 目标牌 1 上刻出一个勾，小字 for this case。
+- 怎么出来：镜头移到目标牌 2 → 8-03。</p>
+<p><strong>8-03 · 画外 C（原二维页作废，改三维板面）</strong>
+"And our second? These methods helped the team assess candidates fast. Screening by the millions became thirteen molecules made. And on a road measured in years, the first hit came in 30 days, and round two made the key turn."
+- 怎么动："our second" 目标牌 2 亮；"Screening by the millions" 料斗细珠倾泻；"thirteen molecules made" 托盘里 13 颗；"a road measured in years" 卷尺拉出长长的 years；"30 days" 日历翻到 30；"round two made the key turn" 一个小盖章机的锁面，钥匙转到底，闩落下；最后目标牌 2 打勾。
+- 怎么出来：五站小路（computer、protein、cells、animals、patients）飞到画面右侧 → 8-04。</p>
+<p><strong>8-04 至 8-07 · 出镜 C、B、D、A（32.3 s）</strong>
+- 人旁边：一条五站小路，站牌刻 computer、protein、cells、animals、patients。
+- C "This works in cells, not yet in people. The computer narrows the search. Experiments still decide."："in cells" cells 站打勾；"not yet in people" patients 站手写 not yet；"narrows the search" computer 站下方长出一个漏斗，细珠漏成几颗；"Experiments still decide" 烧瓶亮。这一句底下没有音乐（照剧本）。
+- B "So next time you see a headline like 'AI discovers a cancer drug'..."：报纸零件（p46）从上方落下，标题刻 AI discovers a cancer drug（无真实媒体标识）。
+- D "...ask where it really is on the road: computer, protein, cells, animals, or patients?"：报纸缩小；他每点一下空中，五站按顺序亮一站（跟踪指尖）。
+- A "AI didn't replace the scientists. It gave them trial and error at light speed. Thanks for watching."："light speed" computer 站的小循环转成光环；"Thanks for watching" 五站全亮成暖色。随后照剧本接四人各自挥手的画面。
+- 遮挡：D 点空中时指尖在站牌前；B 举手比手机时手在报纸前。
+- 怎么出来：五站小路放回板上，镜头升起看全板 → W5。</p>
+<p><strong>W5 · 片尾致谢和出处（33.0 s）</strong>
+- 0–2 s：镜头从全板升起，灯稍暗。
+- 2–20 s：五个转台块，每块 3.6 s：一个模型在小转台（h21）上转半圈，旁边两行出处：
+  1. 玻璃肝、肺、结肠：BodyParts3D, © The Database Center for Life Science, CC BY 4.0
+  2. CDK20：AlphaFold Protein Structure Database, AF-Q8IZL9-F1, CC BY 4.0
+  3. 001、048 钥匙图标的出处：Ren et al., Chem. Sci. 2023；poses: our own re-docking (AutoDock Vina)
+  4. 香港地图、地球：Natural Earth, public domain
+  5. 零件库和大板：made by our group in Blender
+- 20–29 s：参考文献（ACS 格式）刻在两块长牌上，各停 4.5 s，字号按 E1。
+- 29–33 s：音乐出处和生成式 AI 使用说明一块牌；最后套件盒盖合上，盒盖上片名。
+- 怎么出来：片子结束在合上的盒盖。</p>
+<hr />
+<h2>六、TD 在哪些段（详见 03 文档）</h2>
+<p>推荐方案："计算机里面的世界"交给 TD。</p>
+<table>
+<thead>
+<tr>
+<th>段</th>
+<th>TD 出什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3-07</td>
+<td>PandaOmics 芯片里的十股光流汇合</td>
+</tr>
+<tr>
+<td>W2、4-01</td>
+<td>折叠台背景的光（随音乐低频起伏），4-01 "known structures" 那束光</td>
+</tr>
+<tr>
+<td>4-07、5-07、7-03</td>
+<td>Chemistry42 芯片里的发光地面和回流的光</td>
+</tr>
+<tr>
+<td>4-08</td>
+<td>A 手上的光迹</td>
+</tr>
+<tr>
+<td>W3</td>
+<td>点群主体和背景</td>
+</tr>
+<tr>
+<td>4-10</td>
+<td>点墙（细节另定）</td>
+</tr>
+<tr>
+<td>W0、W1</td>
+<td>料杆里跟着打击乐和音乐走的一道光</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>七、汇总</h2>
+<h3>要钻的地方</h3>
+<p>共 <strong>22 处</strong>，另有 3 段细节另定（4-03、4-10、5-10，大概率也钻）。</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>零件</th>
+<th>用在</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>样本管</td>
+<td>2-01</td>
+</tr>
+<tr>
+<td>2</td>
+<td>放大镜</td>
+<td>2-07</td>
+</tr>
+<tr>
+<td>3</td>
+<td>细胞工坊</td>
+<td>3-02、3-05</td>
+</tr>
+<tr>
+<td>4</td>
+<td>销子锁剖面</td>
+<td>3-03</td>
+</tr>
+<tr>
+<td>5</td>
+<td>CDK20 盖章机</td>
+<td>3-04、5-04、W4</td>
+</tr>
+<tr>
+<td>6</td>
+<td>样本抽屉</td>
+<td>3-05</td>
+</tr>
+<tr>
+<td>7</td>
+<td>PandaOmics 芯片</td>
+<td>3-07</td>
+</tr>
+<tr>
+<td>8</td>
+<td>磨砂外壳 / 盲盒架</td>
+<td>3-08</td>
+</tr>
+<tr>
+<td>9</td>
+<td>AlphaFold 折叠台</td>
+<td>W2、4-01</td>
+</tr>
+<tr>
+<td>10</td>
+<td>数据库抽屉</td>
+<td>4-02</td>
+</tr>
+<tr>
+<td>11</td>
+<td>试错循环轨道</td>
+<td>4-06</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Chemistry42 芯片</td>
+<td>4-07、W3、5-07</td>
+</tr>
+<tr>
+<td>13</td>
+<td>口袋模具 + 筛子</td>
+<td>4-09</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Kd 秤</td>
+<td>5-01、5-08</td>
+</tr>
+<tr>
+<td>15</td>
+<td>翻牌记分板</td>
+<td>6-01 至 6-08</td>
+</tr>
+<tr>
+<td>16</td>
+<td>预测模型 + 幽灵外壳</td>
+<td>7-03</td>
+</tr>
+</tbody>
+</table>
+<p>按"段"数：3-02、3-03、3-04、3-05、3-07、3-08、2-01、2-07、W2、4-01、4-02、4-06、4-07、4-09、W3、5-01、5-04、5-07、5-08、W4、记分板（6-01 到 6-08 算 1 处）、7-03，共 22 处。</p>
+<h3>各种做法占多少时间（按粗剪 v9 实际帧数）</h3>
+<table>
+<thead>
+<tr>
+<th>做法</th>
+<th>段数</th>
+<th>时长</th>
+<th>帧数（60 fps）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>三维钻（含 3 段另定）</td>
+<td>30</td>
+<td>9 分 15 秒</td>
+<td>33,289</td>
+</tr>
+<tr>
+<td>三维板面（含原二维页改做的 6 段、W0、W1、W5）</td>
+<td>17</td>
+<td>5 分 00 秒</td>
+<td>18,000</td>
+</tr>
+<tr>
+<td>出镜三维（人旁边的零件）</td>
+<td>18 组</td>
+<td>2 分 28 秒</td>
+<td>8,850</td>
+</tr>
+<tr>
+<td>保留已认可的三维（1-02、1-09、1-10、2-03、2-02）</td>
+<td>5</td>
+<td>1 分 12 秒</td>
+<td>4,315</td>
+</tr>
+<tr>
+<td><strong>新做的三维合计</strong></td>
+<td></td>
+<td><strong>16 分 43 秒</strong></td>
+<td><strong>60,139</strong></td>
+</tr>
+<tr>
+<td>全片</td>
+<td>70</td>
+<td>17 分 54 秒</td>
+<td>64,454</td>
+</tr>
+</tbody>
+</table>
+<p>全片除了已认可的 5 段，全部重新做成三维。</p>
+<h3>渲染量（1080p60）</h3>
+<p>参考实测：第 1 章大板 1080p60 约 1.6 秒一帧（Cycles 48 采样）。钻进零件的镜头有透明件、浅景深、更多几何，按 1.5–2 倍算；出镜段只渲零件加透明通道，按 0.5–0.75 倍算。</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>帧数</th>
+<th>每帧</th>
+<th>GPU 时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>三维钻</td>
+<td>33,289</td>
+<td>2.4–3.2 s</td>
+<td>22.2–29.6 h</td>
+</tr>
+<tr>
+<td>三维板面</td>
+<td>18,000</td>
+<td>1.6 s</td>
+<td>8.0 h</td>
+</tr>
+<tr>
+<td>出镜三维</td>
+<td>8,850</td>
+<td>0.8–1.2 s</td>
+<td>2.0–3.0 h</td>
+</tr>
+<tr>
+<td><strong>合计</strong></td>
+<td><strong>60,139</strong></td>
+<td></td>
+<td><strong>32.2–40.6 h</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>两路 Blender 并行，挂钟时间约 <strong>16–20 小时</strong>。</li>
+<li>另留一轮集中返修（约 25%）。</li>
+<li>照原先"每帧 2–5 秒"的保守估法，合计 33–84 小时 GPU 时间，两路并行 17–42 小时。</li>
+<li>这是 1080p。4K 是 4 倍像素，等 1080p 全部打磨好再算。</li>
+</ul>
+<h3>施工顺序</h3>
+<p>先做样片（3-04 盖章机、4-06/4-07 循环和芯片、3-01 出镜段），导演看过再按章铺开。模型 28 个，见 02 文档；声音和 TD 见 03 文档。</p>
+<hr />
+<h2>八、要导演拍板的事</h2>
+<ol>
+<li><strong>W2 的红尾巴</strong>：推荐"甩不掉、最后搭在凹槽上，4-05 再剪掉"（和科学顺序一致）；备选照原来甩掉。</li>
+<li><strong>已认可的二维页也改三维</strong>：1-04、1-08、1-11 和 2-05 样片原来是二维说明书页，按新标准全部改成三维板面（内容和卡点照旧）。同意就照做。</li>
+<li><strong>样片顺序</strong>：先做 3-04（盖章机）、4-06 和 4-07（循环轨道和芯片）、3-01（出镜段的销子锁），导演看过再按章铺开。</li>
+</ol>

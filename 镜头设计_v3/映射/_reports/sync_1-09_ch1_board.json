@@ -1,0 +1,438 @@
+{
+ "video": "D:/。hkbu/molecular science/镜头设计_v3/映射/_cache/ch1_1-09/check.mov",
+ "group": "1-09",
+ "fps": 60.0,
+ "frames": 1458,
+ "offset_f": 0,
+ "S1": {
+  "word_events": 28,
+  "table_dev_max_f": 0,
+  "video_checked": 36,
+  "video_no_motion": [],
+  "pass_": true
+ },
+ "S2": {
+  "pass_": true,
+  "early": []
+ },
+ "S3": {
+  "pass_": true,
+  "longest_still_f": 2,
+  "bad": []
+ },
+ "S4": {
+  "pass_": true,
+  "looks_like_30": false,
+  "dup_frames": 0,
+  "stepped_dups": 0,
+  "stepped_ratio": 0.0,
+  "blend_frames": 28,
+  "blend_first": [
+   6,
+   7,
+   8,
+   9,
+   10,
+   205,
+   206,
+   207,
+   208,
+   209,
+   537,
+   538,
+   539,
+   540,
+   541,
+   542,
+   775,
+   776,
+   777,
+   778
+  ],
+  "design_fade": 0,
+  "verdict": "有混帧（变速慢放）"
+ },
+ "sentences": [
+  {
+   "sid": "1-09.s1",
+   "f0": 9,
+   "f1": 185,
+   "last_motion_f": 185,
+   "end_dev": 0,
+   "longest_still_f": 2,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "1-09.s2",
+   "f0": 230,
+   "f1": 379,
+   "last_motion_f": 379,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "1-09.s3",
+   "f0": 416,
+   "f1": 466,
+   "last_motion_f": 466,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "1-09.s4",
+   "f0": 495,
+   "f1": 718,
+   "last_motion_f": 718,
+   "end_dev": 0,
+   "longest_still_f": 2,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "1-09.s5",
+   "f0": 753,
+   "f1": 796,
+   "last_motion_f": 796,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "1-09.s6",
+   "f0": 825,
+   "f1": 982,
+   "last_motion_f": 982,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "1-09.s7",
+   "f0": 1026,
+   "f1": 1273,
+   "last_motion_f": 1273,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "1-09.s8",
+   "f0": 1295,
+   "f1": 1339,
+   "last_motion_f": 1339,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "1-09.s9",
+   "f0": 1368,
+   "f1": 1431,
+   "last_motion_f": 1431,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  }
+ ],
+ "events": [
+  {
+   "id": "cam_a",
+   "verb": "camera_to",
+   "w": "follow",
+   "f_land": 106,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cap_grow",
+   "verb": "grow",
+   "w": "one",
+   "f_land": 130,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_wide",
+   "verb": "camera_to",
+   "w": "road.",
+   "f_land": 359,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "road_glint",
+   "verb": "flow",
+   "w": "road.",
+   "f_land": 359,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_t",
+   "verb": "camera_to",
+   "w": "target.",
+   "f_land": 439,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "hop_0",
+   "verb": "move",
+   "w": "target.",
+   "f_land": 439,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "st_0",
+   "verb": "morph",
+   "w": "target.",
+   "f_land": 441,
+   "table_dev": 2,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_h",
+   "verb": "camera_to",
+   "w": "hit,",
+   "f_land": 521,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "hop_1",
+   "verb": "move",
+   "w": "hit,",
+   "f_land": 521,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "st_1",
+   "verb": "morph",
+   "w": "hit,",
+   "f_land": 523,
+   "table_dev": 2,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cap_glow",
+   "verb": "morph",
+   "w": "molecule",
+   "f_land": 606,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cap_nod",
+   "verb": "move",
+   "w": "works",
+   "f_land": 670,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_h2",
+   "verb": "camera_to",
+   "w": "it.",
+   "f_land": 708,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "hop_2",
+   "verb": "move",
+   "w": "Improve",
+   "f_land": 753,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_i",
+   "verb": "camera_to",
+   "w": "Improve",
+   "f_land": 759,
+   "table_dev": 6,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "st_2",
+   "verb": "morph",
+   "w": "Improve",
+   "f_land": 755,
+   "table_dev": 2,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "improve",
+   "verb": "morph",
+   "w": "it.",
+   "f_land": 783,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_c",
+   "verb": "camera_to",
+   "w": "cells,",
+   "f_land": 873,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "hop_3",
+   "verb": "move",
+   "w": "cells,",
+   "f_land": 873,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "st_3",
+   "verb": "morph",
+   "w": "cells,",
+   "f_land": 875,
+   "table_dev": 2,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_an",
+   "verb": "camera_to",
+   "w": "animals.",
+   "f_land": 952,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "hop_4",
+   "verb": "move",
+   "w": "animals.",
+   "f_land": 952,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "st_4",
+   "verb": "morph",
+   "w": "animals.",
+   "f_land": 954,
+   "table_dev": 2,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_tr",
+   "verb": "camera_to",
+   "w": "trials:",
+   "f_land": 1086,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "hop_5",
+   "verb": "move",
+   "w": "trials:",
+   "f_land": 1086,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "st_5",
+   "verb": "morph",
+   "w": "trials:",
+   "f_land": 1088,
+   "table_dev": 2,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "phase_1",
+   "verb": "move",
+   "w": "one,",
+   "f_land": 1167,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "phase_2",
+   "verb": "move",
+   "w": "two,",
+   "f_land": 1214,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "phase_3",
+   "verb": "move",
+   "w": "three.",
+   "f_land": 1254,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_ap",
+   "verb": "camera_to",
+   "w": "approval.",
+   "f_land": 1311,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "hop_6",
+   "verb": "move",
+   "w": "approval.",
+   "f_land": 1311,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "st_6",
+   "verb": "morph",
+   "w": "approval.",
+   "f_land": 1313,
+   "table_dev": 2,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_end",
+   "verb": "camera_to",
+   "w": "Any",
+   "f_land": 1368,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "ghost_in",
+   "verb": "grow",
+   "w": "step",
+   "f_land": 1382,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "ghost_fail",
+   "verb": "move",
+   "w": "fail.",
+   "f_land": 1415,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "source_line",
+   "verb": "appear",
+   "w": "Every",
+   "f_land": 230,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  }
+ ],
+ "pass": true
+}

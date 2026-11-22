@@ -7,12 +7,12 @@
  ],
  "tool": "remotion",
  "fps": 60,
- "len_f": 1086,
+ "len_f": 1069,
  "cut": "cut_v8",
- "cut_start_f": 55668,
- "cut_start_s": 927.8,
- "master_built": "2026-11-18 02:33:56 +09:00",
- "words_hash": "6a165d973911",
+ "cut_start_f": 54364,
+ "cut_start_s": 906.0667,
+ "master_built": "2026-11-22 20:33:03 +09:00",
+ "words_hash": "ebe31ebc2ea2",
  "events_src": "镜头设计_v3/映射/events/7-02.json",
  "words": [
   {
@@ -22,428 +22,428 @@
    "sid": "7-02.s1",
    "f0": 9,
    "f1": 22,
-   "F0": 55677,
-   "F1": 55690
+   "F0": 54373,
+   "F1": 54386
   },
   {
    "wid": "7-02.w002",
    "w": "walk",
    "key": "walk#1",
    "sid": "7-02.s1",
-   "f0": 63,
-   "f1": 76,
-   "F0": 55731,
-   "F1": 55744
+   "f0": 46,
+   "f1": 59,
+   "F0": 54410,
+   "F1": 54423
   },
   {
    "wid": "7-02.w003",
    "w": "048",
    "key": "048#1",
    "sid": "7-02.s1",
-   "f0": 101,
-   "f1": 133,
-   "F0": 55769,
-   "F1": 55801
+   "f0": 84,
+   "f1": 116,
+   "F0": 54448,
+   "F1": 54480
   },
   {
    "wid": "7-02.w004",
    "w": "further.",
    "key": "further#1",
    "sid": "7-02.s1",
-   "f0": 146,
-   "f1": 166,
-   "F0": 55814,
-   "F1": 55834
+   "f0": 129,
+   "f1": 149,
+   "F0": 54493,
+   "F1": 54513
   },
   {
    "wid": "7-02.w005",
    "w": "It's",
    "key": "it's#1",
    "sid": "7-02.s2",
-   "f0": 202,
-   "f1": 209,
-   "F0": 55870,
-   "F1": 55877
+   "f0": 185,
+   "f1": 192,
+   "F0": 54549,
+   "F1": 54556
   },
   {
    "wid": "7-02.w006",
    "w": "public",
    "key": "public#1",
    "sid": "7-02.s2",
-   "f0": 213,
-   "f1": 235,
-   "F0": 55881,
-   "F1": 55903
+   "f0": 196,
+   "f1": 218,
+   "F0": 54560,
+   "F1": 54582
   },
   {
    "wid": "7-02.w007",
    "w": "now,",
    "key": "now#1",
    "sid": "7-02.s2",
-   "f0": 241,
-   "f1": 253,
-   "F0": 55909,
-   "F1": 55921
+   "f0": 224,
+   "f1": 236,
+   "F0": 54588,
+   "F1": 54600
   },
   {
    "wid": "7-02.w008",
    "w": "so",
    "key": "so#1",
    "sid": "7-02.s2",
-   "f0": 278,
-   "f1": 283,
-   "F0": 55946,
-   "F1": 55951
+   "f0": 261,
+   "f1": 266,
+   "F0": 54625,
+   "F1": 54630
   },
   {
    "wid": "7-02.w009",
    "w": "anyone",
    "key": "anyone#1",
    "sid": "7-02.s2",
-   "f0": 290,
-   "f1": 310,
-   "F0": 55958,
-   "F1": 55978
+   "f0": 273,
+   "f1": 293,
+   "F0": 54637,
+   "F1": 54657
   },
   {
    "wid": "7-02.w010",
    "w": "could",
    "key": "could#1",
    "sid": "7-02.s2",
-   "f0": 312,
-   "f1": 320,
-   "F0": 55980,
-   "F1": 55988
+   "f0": 295,
+   "f1": 303,
+   "F0": 54659,
+   "F1": 54667
   },
   {
    "wid": "7-02.w011",
    "w": "try.",
    "key": "try#1",
    "sid": "7-02.s2",
-   "f0": 321,
-   "f1": 342,
-   "F0": 55989,
-   "F1": 56010
+   "f0": 304,
+   "f1": 325,
+   "F0": 54668,
+   "F1": 54689
   },
   {
    "wid": "7-02.w012",
    "w": "Test",
    "key": "test#1",
    "sid": "7-02.s3",
-   "f0": 381,
-   "f1": 396,
-   "F0": 56049,
-   "F1": 56064
+   "f0": 364,
+   "f1": 379,
+   "F0": 54728,
+   "F1": 54743
   },
   {
    "wid": "7-02.w013",
    "w": "it",
    "key": "it#1",
    "sid": "7-02.s3",
-   "f0": 398,
-   "f1": 403,
-   "F0": 56066,
-   "F1": 56071
+   "f0": 381,
+   "f1": 386,
+   "F0": 54745,
+   "F1": 54750
   },
   {
    "wid": "7-02.w014",
    "w": "in",
    "key": "in#1",
    "sid": "7-02.s3",
-   "f0": 409,
-   "f1": 414,
-   "F0": 56077,
-   "F1": 56082
+   "f0": 392,
+   "f1": 397,
+   "F0": 54756,
+   "F1": 54761
   },
   {
    "wid": "7-02.w015",
    "w": "more",
    "key": "more#1",
    "sid": "7-02.s3",
-   "f0": 420,
-   "f1": 434,
-   "F0": 56088,
-   "F1": 56102
+   "f0": 403,
+   "f1": 417,
+   "F0": 54767,
+   "F1": 54781
   },
   {
    "wid": "7-02.w016",
    "w": "liver",
    "key": "liver#1",
    "sid": "7-02.s3",
-   "f0": 438,
-   "f1": 454,
-   "F0": 56106,
-   "F1": 56122
+   "f0": 421,
+   "f1": 437,
+   "F0": 54785,
+   "F1": 54801
   },
   {
    "wid": "7-02.w017",
    "w": "cancer",
    "key": "cancer#1",
    "sid": "7-02.s3",
-   "f0": 459,
-   "f1": 481,
-   "F0": 56127,
-   "F1": 56149
+   "f0": 442,
+   "f1": 464,
+   "F0": 54806,
+   "F1": 54828
   },
   {
    "wid": "7-02.w018",
    "w": "cells",
    "key": "cells#1",
    "sid": "7-02.s3",
-   "f0": 484,
-   "f1": 501,
-   "F0": 56152,
-   "F1": 56169
+   "f0": 467,
+   "f1": 484,
+   "F0": 54831,
+   "F1": 54848
   },
   {
    "wid": "7-02.w019",
    "w": "and",
    "key": "and#1",
    "sid": "7-02.s3",
-   "f0": 519,
-   "f1": 525,
-   "F0": 56187,
-   "F1": 56193
+   "f0": 502,
+   "f1": 508,
+   "F0": 54866,
+   "F1": 54872
   },
   {
    "wid": "7-02.w020",
    "w": "normal",
    "key": "normal#1",
    "sid": "7-02.s3",
-   "f0": 526,
-   "f1": 547,
-   "F0": 56194,
-   "F1": 56215
+   "f0": 509,
+   "f1": 530,
+   "F0": 54873,
+   "F1": 54894
   },
   {
    "wid": "7-02.w021",
    "w": "liver",
    "key": "liver#2",
    "sid": "7-02.s3",
-   "f0": 549,
-   "f1": 566,
-   "F0": 56217,
-   "F1": 56234
+   "f0": 532,
+   "f1": 549,
+   "F0": 54896,
+   "F1": 54913
   },
   {
    "wid": "7-02.w022",
    "w": "cells,",
    "key": "cells#2",
    "sid": "7-02.s3",
-   "f0": 571,
-   "f1": 590,
-   "F0": 56239,
-   "F1": 56258
+   "f0": 554,
+   "f1": 573,
+   "F0": 54918,
+   "F1": 54937
   },
   {
    "wid": "7-02.w023",
    "w": "then",
    "key": "then#1",
    "sid": "7-02.s3",
-   "f0": 625,
-   "f1": 633,
-   "F0": 56293,
-   "F1": 56301
+   "f0": 608,
+   "f1": 616,
+   "F0": 54972,
+   "F1": 54980
   },
   {
    "wid": "7-02.w024",
    "w": "animals,",
    "key": "animals#1",
    "sid": "7-02.s3",
-   "f0": 640,
-   "f1": 668,
-   "F0": 56308,
-   "F1": 56336
+   "f0": 623,
+   "f1": 651,
+   "F0": 54987,
+   "F1": 55015
   },
   {
    "wid": "7-02.w025",
    "w": "and",
    "key": "and#2",
    "sid": "7-02.s3",
-   "f0": 701,
-   "f1": 708,
-   "F0": 56369,
-   "F1": 56376
+   "f0": 684,
+   "f1": 691,
+   "F0": 55048,
+   "F1": 55055
   },
   {
    "wid": "7-02.w026",
    "w": "check",
    "key": "check#1",
    "sid": "7-02.s3",
-   "f0": 710,
-   "f1": 723,
-   "F0": 56378,
-   "F1": 56391
+   "f0": 693,
+   "f1": 706,
+   "F0": 55057,
+   "F1": 55070
   },
   {
    "wid": "7-02.w027",
    "w": "how",
    "key": "how#1",
    "sid": "7-02.s3",
-   "f0": 731,
-   "f1": 740,
-   "F0": 56399,
-   "F1": 56408
+   "f0": 714,
+   "f1": 723,
+   "F0": 55078,
+   "F1": 55087
   },
   {
    "wid": "7-02.w028",
    "w": "the",
    "key": "the#1",
    "sid": "7-02.s3",
-   "f0": 743,
-   "f1": 746,
-   "F0": 56411,
-   "F1": 56414
+   "f0": 726,
+   "f1": 729,
+   "F0": 55090,
+   "F1": 55093
   },
   {
    "wid": "7-02.w029",
    "w": "body",
    "key": "body#1",
    "sid": "7-02.s3",
-   "f0": 749,
-   "f1": 763,
-   "F0": 56417,
-   "F1": 56431
+   "f0": 732,
+   "f1": 746,
+   "F0": 55096,
+   "F1": 55110
   },
   {
    "wid": "7-02.w030",
    "w": "handles",
    "key": "handles#1",
    "sid": "7-02.s3",
-   "f0": 768,
-   "f1": 792,
-   "F0": 56436,
-   "F1": 56460
+   "f0": 751,
+   "f1": 775,
+   "F0": 55115,
+   "F1": 55139
   },
   {
    "wid": "7-02.w031",
    "w": "it",
    "key": "it#2",
    "sid": "7-02.s3",
-   "f0": 795,
-   "f1": 801,
-   "F0": 56463,
-   "F1": 56469
+   "f0": 778,
+   "f1": 784,
+   "F0": 55142,
+   "F1": 55148
   },
   {
    "wid": "7-02.w032",
    "w": "and",
    "key": "and#3",
    "sid": "7-02.s3",
-   "f0": 824,
-   "f1": 830,
-   "F0": 56492,
-   "F1": 56498
+   "f0": 807,
+   "f1": 813,
+   "F0": 55171,
+   "F1": 55177
   },
   {
    "wid": "7-02.w033",
    "w": "what",
    "key": "what#1",
    "sid": "7-02.s3",
-   "f0": 834,
-   "f1": 845,
-   "F0": 56502,
-   "F1": 56513
+   "f0": 817,
+   "f1": 828,
+   "F0": 55181,
+   "F1": 55192
   },
   {
    "wid": "7-02.w034",
    "w": "else",
    "key": "else#1",
    "sid": "7-02.s3",
-   "f0": 848,
-   "f1": 858,
-   "F0": 56516,
-   "F1": 56526
+   "f0": 831,
+   "f1": 841,
+   "F0": 55195,
+   "F1": 55205
   },
   {
    "wid": "7-02.w035",
    "w": "it",
    "key": "it#3",
    "sid": "7-02.s3",
-   "f0": 860,
-   "f1": 865,
-   "F0": 56528,
-   "F1": 56533
+   "f0": 843,
+   "f1": 848,
+   "F0": 55207,
+   "F1": 55212
   },
   {
    "wid": "7-02.w036",
    "w": "hits.",
    "key": "hits#1",
    "sid": "7-02.s3",
-   "f0": 871,
-   "f1": 890,
-   "F0": 56539,
-   "F1": 56558
+   "f0": 854,
+   "f1": 873,
+   "F0": 55218,
+   "F1": 55237
   },
   {
    "wid": "7-02.w037",
    "w": "The",
    "key": "the#2",
    "sid": "7-02.s4",
-   "f0": 930,
-   "f1": 935,
-   "F0": 56598,
-   "F1": 56603
+   "f0": 913,
+   "f1": 918,
+   "F0": 55277,
+   "F1": 55282
   },
   {
    "wid": "7-02.w038",
    "w": "authors",
    "key": "authors#1",
    "sid": "7-02.s4",
-   "f0": 943,
-   "f1": 963,
-   "F0": 56611,
-   "F1": 56631
+   "f0": 926,
+   "f1": 946,
+   "F0": 55290,
+   "F1": 55310
   },
   {
    "wid": "7-02.w039",
    "w": "had",
    "key": "had#1",
    "sid": "7-02.s4",
-   "f0": 965,
-   "f1": 972,
-   "F0": 56633,
-   "F1": 56640
+   "f0": 948,
+   "f1": 955,
+   "F0": 55312,
+   "F1": 55319
   },
   {
    "wid": "7-02.w040",
    "w": "already",
    "key": "already#1",
    "sid": "7-02.s4",
-   "f0": 978,
-   "f1": 996,
-   "F0": 56646,
-   "F1": 56664
+   "f0": 961,
+   "f1": 979,
+   "F0": 55325,
+   "F1": 55343
   },
   {
    "wid": "7-02.w041",
    "w": "listed",
    "key": "listed#1",
    "sid": "7-02.s4",
-   "f0": 1001,
-   "f1": 1022,
-   "F0": 56669,
-   "F1": 56690
+   "f0": 984,
+   "f1": 1005,
+   "F0": 55348,
+   "F1": 55369
   },
   {
    "wid": "7-02.w042",
    "w": "these",
    "key": "these#1",
    "sid": "7-02.s4",
-   "f0": 1029,
-   "f1": 1043,
-   "F0": 56697,
-   "F1": 56711
+   "f0": 1012,
+   "f1": 1026,
+   "F0": 55376,
+   "F1": 55390
   },
   {
    "wid": "7-02.w043",
    "w": "steps.",
    "key": "steps#1",
    "sid": "7-02.s4",
-   "f0": 1044,
-   "f1": 1072,
-   "F0": 56712,
-   "F1": 56740
+   "f0": 1027,
+   "f1": 1055,
+   "F0": 55391,
+   "F1": 55419
   }
  ],
  "sentences": [
@@ -453,31 +453,31 @@
    "w_first": "7-02.w001",
    "w_last": "7-02.w004",
    "f0": 9,
-   "f1": 166
+   "f1": 149
   },
   {
    "sid": "7-02.s2",
    "text": "It's public now, so anyone could try.",
    "w_first": "7-02.w005",
    "w_last": "7-02.w011",
-   "f0": 202,
-   "f1": 342
+   "f0": 185,
+   "f1": 325
   },
   {
    "sid": "7-02.s3",
    "text": "Test it in more liver cancer cells and normal liver cells, then animals, and check how the body handles it and what else it hits.",
    "w_first": "7-02.w012",
    "w_last": "7-02.w036",
-   "f0": 381,
-   "f1": 890
+   "f0": 364,
+   "f1": 873
   },
   {
    "sid": "7-02.s4",
    "text": "The authors had already listed these steps.",
    "w_first": "7-02.w037",
    "w_last": "7-02.w043",
-   "f0": 930,
-   "f1": 1072
+   "f0": 913,
+   "f1": 1055
   }
  ],
  "holds": [],
@@ -490,7 +490,7 @@
    "means": "One：1 号编号牌落到路旁",
    "f_start": 2,
    "f_land": 9,
-   "f_end": 76,
+   "f_end": 59,
    "until": "7-02.w002",
    "word": "7-02.w001",
    "w": "One:",
@@ -501,9 +501,9 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 55670,
-   "F_land": 55677,
-   "F_end": 55744
+   "F_start": 54366,
+   "F_land": 54373,
+   "F_end": 54423
   },
   {
    "id": "walk",
@@ -511,22 +511,22 @@
    "verb": "move",
    "ease": "inout",
    "means": "walk：048 吊牌从 Cells 站起动往前滑",
-   "f_start": 50,
-   "f_land": 63,
-   "f_end": 133,
+   "f_start": 33,
+   "f_land": 46,
+   "f_end": 116,
    "until": "7-02.w003",
    "word": "7-02.w002",
    "w": "walk",
    "key": "walk#1",
    "sid": "7-02.s1",
-   "word_f0": 63,
+   "word_f0": 46,
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 55718,
-   "F_land": 55731,
-   "F_end": 55801
+   "F_start": 54397,
+   "F_land": 54410,
+   "F_end": 54480
   },
   {
    "id": "tag48",
@@ -534,15 +534,15 @@
    "verb": "snap",
    "ease": "inout",
    "means": "048 further：048 吊牌挪一步到位，Cells 站插一面小旗",
-   "f_start": 88,
-   "f_land": 101,
-   "f_end": 166,
+   "f_start": 71,
+   "f_land": 84,
+   "f_end": 149,
    "until": "7-02.s1",
    "word": "7-02.w003",
    "w": "048",
    "key": "048#1",
    "sid": "7-02.s1",
-   "word_f0": 101,
+   "word_f0": 84,
    "tool": "remotion",
    "guide": {
     "kind": "focus",
@@ -550,19 +550,19 @@
      "tag48"
     ]
    },
-   "F_start": 55756,
-   "F_land": 55769,
-   "F_end": 55834,
-   "g_start": 75,
-   "g_on": 93,
-   "g_end": 166,
-   "g_off": 196,
-   "g_tick": 97,
-   "G_start": 55743,
-   "G_on": 55761,
-   "G_end": 55834,
-   "G_off": 55864,
-   "G_tick": 55765
+   "F_start": 54435,
+   "F_land": 54448,
+   "F_end": 54513,
+   "g_start": 58,
+   "g_on": 76,
+   "g_end": 149,
+   "g_off": 179,
+   "g_tick": 80,
+   "G_start": 54422,
+   "G_on": 54440,
+   "G_end": 54513,
+   "G_off": 54543,
+   "G_tick": 54444
   },
   {
    "id": "unlock",
@@ -570,22 +570,22 @@
    "verb": "snap",
    "ease": "inout",
    "means": "public：吊牌上挂的小挂锁弹开",
-   "f_start": 204,
-   "f_land": 213,
-   "f_end": 310,
+   "f_start": 187,
+   "f_land": 196,
+   "f_end": 293,
    "until": "7-02.w009",
    "word": "7-02.w006",
    "w": "public",
    "key": "public#1",
    "sid": "7-02.s2",
-   "word_f0": 213,
+   "word_f0": 196,
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 55872,
-   "F_land": 55881,
-   "F_end": 55978
+   "F_start": 54551,
+   "F_land": 54560,
+   "F_end": 54657
   },
   {
    "id": "anyone",
@@ -593,22 +593,22 @@
    "verb": "appear",
    "ease": "inout",
    "means": "anyone could try：路旁出现几个白色小人剪影",
-   "f_start": 277,
-   "f_land": 290,
-   "f_end": 342,
+   "f_start": 260,
+   "f_land": 273,
+   "f_end": 325,
    "until": "7-02.s2",
    "word": "7-02.w009",
    "w": "anyone",
    "key": "anyone#1",
    "sid": "7-02.s2",
-   "word_f0": 290,
+   "word_f0": 273,
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 55945,
-   "F_land": 55958,
-   "F_end": 56010
+   "F_start": 54624,
+   "F_land": 54637,
+   "F_end": 54689
   },
   {
    "id": "clear",
@@ -616,22 +616,22 @@
    "verb": "move",
    "ease": "inout",
    "means": "Test：路往左让位，培养皿组进来",
-   "f_start": 372,
-   "f_land": 381,
-   "f_end": 481,
+   "f_start": 355,
+   "f_land": 364,
+   "f_end": 464,
    "until": "7-02.w017",
    "word": "7-02.w012",
    "w": "Test",
    "key": "test#1",
    "sid": "7-02.s3",
-   "word_f0": 381,
+   "word_f0": 364,
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 56040,
-   "F_land": 56049,
-   "F_end": 56149
+   "F_start": 54719,
+   "F_land": 54728,
+   "F_end": 54828
   },
   {
    "id": "dishes",
@@ -639,15 +639,15 @@
    "verb": "grow",
    "ease": "inout",
    "means": "liver cancer cells：肝癌细胞培养皿一变二、二变四",
-   "f_start": 446,
-   "f_land": 459,
-   "f_end": 547,
+   "f_start": 429,
+   "f_land": 442,
+   "f_end": 530,
    "until": "7-02.w020",
    "word": "7-02.w017",
    "w": "cancer",
    "key": "cancer#1",
    "sid": "7-02.s3",
-   "word_f0": 459,
+   "word_f0": 442,
    "tool": "remotion",
    "guide": {
     "kind": "focus",
@@ -655,19 +655,19 @@
      "dishes"
     ]
    },
-   "F_start": 56114,
-   "F_land": 56127,
-   "F_end": 56215,
-   "g_start": 433,
-   "g_on": 451,
-   "g_end": 547,
-   "g_off": 577,
-   "g_tick": 455,
-   "G_start": 56101,
-   "G_on": 56119,
-   "G_end": 56215,
-   "G_off": 56245,
-   "G_tick": 56123
+   "F_start": 54793,
+   "F_land": 54806,
+   "F_end": 54894,
+   "g_start": 416,
+   "g_on": 434,
+   "g_end": 530,
+   "g_off": 560,
+   "g_tick": 438,
+   "G_start": 54780,
+   "G_on": 54798,
+   "G_end": 54894,
+   "G_off": 54924,
+   "G_tick": 54802
   },
   {
    "id": "norm",
@@ -675,22 +675,22 @@
    "verb": "grow",
    "ease": "inout",
    "means": "normal liver cells：正常肝细胞培养皿也亮起展开",
-   "f_start": 513,
-   "f_land": 526,
-   "f_end": 590,
+   "f_start": 496,
+   "f_land": 509,
+   "f_end": 573,
    "until": "7-02.w022",
    "word": "7-02.w020",
    "w": "normal",
    "key": "normal#1",
    "sid": "7-02.s3",
-   "word_f0": 526,
+   "word_f0": 509,
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 56181,
-   "F_land": 56194,
-   "F_end": 56258
+   "F_start": 54860,
+   "F_land": 54873,
+   "F_end": 54937
   },
   {
    "id": "dish_l",
@@ -698,22 +698,22 @@
    "verb": "appear",
    "ease": "inout",
    "means": "cells：两排培养皿分别标上 cancer / normal",
-   "f_start": 562,
-   "f_land": 571,
-   "f_end": 668,
+   "f_start": 545,
+   "f_land": 554,
+   "f_end": 651,
    "until": "7-02.w024",
    "word": "7-02.w022",
    "w": "cells,",
    "key": "cells#2",
    "sid": "7-02.s3",
-   "word_f0": 571,
+   "word_f0": 554,
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 56230,
-   "F_land": 56239,
-   "F_end": 56336
+   "F_start": 54909,
+   "F_land": 54918,
+   "F_end": 55015
   },
   {
    "id": "mouse",
@@ -721,15 +721,15 @@
    "verb": "grow",
    "ease": "inout",
    "means": "animals：小鼠零件落位亮起",
-   "f_start": 627,
-   "f_land": 640,
-   "f_end": 723,
+   "f_start": 610,
+   "f_land": 623,
+   "f_end": 706,
    "until": "7-02.w026",
    "word": "7-02.w024",
    "w": "animals,",
    "key": "animals#1",
    "sid": "7-02.s3",
-   "word_f0": 640,
+   "word_f0": 623,
    "tool": "remotion",
    "guide": {
     "kind": "focus",
@@ -737,19 +737,19 @@
      "mouse"
     ]
    },
-   "F_start": 56295,
-   "F_land": 56308,
-   "F_end": 56391,
-   "g_start": 614,
-   "g_on": 632,
-   "g_end": 723,
-   "g_off": 753,
-   "g_tick": 636,
-   "G_start": 56282,
-   "G_on": 56300,
-   "G_end": 56391,
-   "G_off": 56421,
-   "G_tick": 56304
+   "F_start": 54974,
+   "F_land": 54987,
+   "F_end": 55070,
+   "g_start": 597,
+   "g_on": 615,
+   "g_end": 706,
+   "g_off": 736,
+   "g_tick": 619,
+   "G_start": 54961,
+   "G_on": 54979,
+   "G_end": 55070,
+   "G_off": 55100,
+   "G_tick": 54983
   },
   {
    "id": "chk",
@@ -757,22 +757,22 @@
    "verb": "appear",
    "ease": "inout",
    "means": "check：小牌槽位出现",
-   "f_start": 701,
-   "f_land": 710,
-   "f_end": 792,
+   "f_start": 684,
+   "f_land": 693,
+   "f_end": 775,
    "until": "7-02.w030",
    "word": "7-02.w026",
    "w": "check",
    "key": "check#1",
    "sid": "7-02.s3",
-   "word_f0": 710,
+   "word_f0": 693,
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 56369,
-   "F_land": 56378,
-   "F_end": 56460
+   "F_start": 55048,
+   "F_land": 55057,
+   "F_end": 55139
   },
   {
    "id": "adme",
@@ -780,15 +780,15 @@
    "verb": "eject",
    "ease": "inout",
    "means": "how the body handles it：第一块小牌弹出，刻 ADME",
-   "f_start": 755,
-   "f_land": 768,
-   "f_end": 858,
+   "f_start": 738,
+   "f_land": 751,
+   "f_end": 841,
    "until": "7-02.w034",
    "word": "7-02.w030",
    "w": "handles",
    "key": "handles#1",
    "sid": "7-02.s3",
-   "word_f0": 768,
+   "word_f0": 751,
    "tool": "remotion",
    "guide": {
     "kind": "focus",
@@ -796,19 +796,19 @@
      "cards"
     ]
    },
-   "F_start": 56423,
-   "F_land": 56436,
-   "F_end": 56526,
-   "g_start": 742,
-   "g_on": 760,
-   "g_end": 858,
-   "g_off": 888,
-   "g_tick": 764,
-   "G_start": 56410,
-   "G_on": 56428,
-   "G_end": 56526,
-   "G_off": 56556,
-   "G_tick": 56432
+   "F_start": 55102,
+   "F_land": 55115,
+   "F_end": 55205,
+   "g_start": 725,
+   "g_on": 743,
+   "g_end": 841,
+   "g_off": 871,
+   "g_tick": 747,
+   "G_start": 55089,
+   "G_on": 55107,
+   "G_end": 55205,
+   "G_off": 55235,
+   "G_tick": 55111
   },
   {
    "id": "sel",
@@ -816,22 +816,22 @@
    "verb": "eject",
    "ease": "inout",
    "means": "what else：第二块小牌弹出，刻 selectivity",
-   "f_start": 835,
-   "f_land": 848,
-   "f_end": 890,
+   "f_start": 818,
+   "f_land": 831,
+   "f_end": 873,
    "until": "7-02.w036",
    "word": "7-02.w034",
    "w": "else",
    "key": "else#1",
    "sid": "7-02.s3",
-   "word_f0": 848,
+   "word_f0": 831,
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 56503,
-   "F_land": 56516,
-   "F_end": 56558
+   "F_start": 55182,
+   "F_land": 55195,
+   "F_end": 55237
   },
   {
    "id": "hits",
@@ -839,22 +839,22 @@
    "verb": "snap",
    "ease": "inout",
    "means": "hits：两块小牌锁定高亮",
-   "f_start": 862,
-   "f_land": 871,
-   "f_end": 890,
+   "f_start": 845,
+   "f_land": 854,
+   "f_end": 873,
    "until": "7-02.s3",
    "word": "7-02.w036",
    "w": "hits.",
    "key": "hits#1",
    "sid": "7-02.s3",
-   "word_f0": 871,
+   "word_f0": 854,
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 56530,
-   "F_land": 56539,
-   "F_end": 56558
+   "F_start": 55209,
+   "F_land": 55218,
+   "F_end": 55237
   },
   {
    "id": "src",
@@ -862,22 +862,22 @@
    "verb": "appear",
    "ease": "inout",
    "means": "The authors：Ren et al. 2023 出处牌落位",
-   "f_start": 934,
-   "f_land": 943,
-   "f_end": 1022,
+   "f_start": 917,
+   "f_land": 926,
+   "f_end": 1005,
    "until": "7-02.w041",
    "word": "7-02.w038",
    "w": "authors",
    "key": "authors#1",
    "sid": "7-02.s4",
-   "word_f0": 943,
+   "word_f0": 926,
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 56602,
-   "F_land": 56611,
-   "F_end": 56690
+   "F_start": 55281,
+   "F_land": 55290,
+   "F_end": 55369
   },
   {
    "id": "ticks",
@@ -885,22 +885,22 @@
    "verb": "snap",
    "ease": "inout",
    "means": "already listed：三张步骤卡同时打勾",
-   "f_start": 988,
-   "f_land": 1001,
-   "f_end": 1072,
+   "f_start": 971,
+   "f_land": 984,
+   "f_end": 1055,
    "until": "7-02.w043",
    "word": "7-02.w041",
    "w": "listed",
    "key": "listed#1",
    "sid": "7-02.s4",
-   "word_f0": 1001,
+   "word_f0": 984,
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 56656,
-   "F_land": 56669,
-   "F_end": 56740
+   "F_start": 55335,
+   "F_land": 55348,
+   "F_end": 55419
   },
   {
    "id": "steps",
@@ -908,22 +908,22 @@
    "verb": "appear",
    "ease": "inout",
    "means": "these steps：批注 next steps",
-   "f_start": 1035,
-   "f_land": 1044,
-   "f_end": 1072,
+   "f_start": 1018,
+   "f_land": 1027,
+   "f_end": 1055,
    "until": "7-02.s4",
    "word": "7-02.w043",
    "w": "steps.",
    "key": "steps#1",
    "sid": "7-02.s4",
-   "word_f0": 1044,
+   "word_f0": 1027,
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 56703,
-   "F_land": 56712,
-   "F_end": 56740
+   "F_start": 55382,
+   "F_land": 55391,
+   "F_end": 55419
   }
  ],
  "guides": [
@@ -933,24 +933,24 @@
     "tag48"
    ],
    "kind": "focus",
-   "gs": 75,
-   "gon": 93,
-   "land": 101,
-   "gend": 166,
-   "goff": 196,
-   "tick": 97,
+   "gs": 58,
+   "gon": 76,
+   "land": 84,
+   "gend": 149,
+   "goff": 179,
+   "tick": 80,
    "nudge": false,
    "rim": true,
-   "ev_s": 88,
+   "ev_s": 71,
    "events": [
     "tag48"
    ],
-   "G_start": 55743,
-   "G_on": 55761,
-   "G_land": 55769,
-   "G_end": 55834,
-   "G_off": 55864,
-   "G_tick": 55765
+   "G_start": 54422,
+   "G_on": 54440,
+   "G_land": 54448,
+   "G_end": 54513,
+   "G_off": 54543,
+   "G_tick": 54444
   },
   {
    "id": "dishes",
@@ -958,24 +958,24 @@
     "dishes"
    ],
    "kind": "focus",
-   "gs": 433,
-   "gon": 451,
-   "land": 459,
-   "gend": 547,
-   "goff": 577,
-   "tick": 455,
+   "gs": 416,
+   "gon": 434,
+   "land": 442,
+   "gend": 530,
+   "goff": 560,
+   "tick": 438,
    "nudge": false,
    "rim": true,
-   "ev_s": 446,
+   "ev_s": 429,
    "events": [
     "dishes"
    ],
-   "G_start": 56101,
-   "G_on": 56119,
-   "G_land": 56127,
-   "G_end": 56215,
-   "G_off": 56245,
-   "G_tick": 56123
+   "G_start": 54780,
+   "G_on": 54798,
+   "G_land": 54806,
+   "G_end": 54894,
+   "G_off": 54924,
+   "G_tick": 54802
   },
   {
    "id": "mouse",
@@ -983,25 +983,25 @@
     "mouse"
    ],
    "kind": "focus",
-   "gs": 614,
-   "gon": 632,
-   "land": 640,
-   "gend": 723,
-   "goff": 753,
-   "tick": 636,
+   "gs": 597,
+   "gon": 615,
+   "land": 623,
+   "gend": 706,
+   "goff": 736,
+   "tick": 619,
    "nudge": false,
    "rim": true,
-   "ev_s": 627,
+   "ev_s": 610,
    "events": [
     "mouse"
    ],
    "handoff": "adme",
-   "G_start": 56282,
-   "G_on": 56300,
-   "G_land": 56308,
-   "G_end": 56391,
-   "G_off": 56421,
-   "G_tick": 56304
+   "G_start": 54961,
+   "G_on": 54979,
+   "G_land": 54987,
+   "G_end": 55070,
+   "G_off": 55100,
+   "G_tick": 54983
   },
   {
    "id": "adme",
@@ -1009,24 +1009,24 @@
     "cards"
    ],
    "kind": "focus",
-   "gs": 742,
-   "gon": 760,
-   "land": 768,
-   "gend": 858,
-   "goff": 888,
-   "tick": 764,
+   "gs": 725,
+   "gon": 743,
+   "land": 751,
+   "gend": 841,
+   "goff": 871,
+   "tick": 747,
    "nudge": false,
    "rim": true,
-   "ev_s": 755,
+   "ev_s": 738,
    "events": [
     "adme"
    ],
-   "G_start": 56410,
-   "G_on": 56428,
-   "G_land": 56436,
-   "G_end": 56526,
-   "G_off": 56556,
-   "G_tick": 56432
+   "G_start": 55089,
+   "G_on": 55107,
+   "G_land": 55115,
+   "G_end": 55205,
+   "G_off": 55235,
+   "G_tick": 55111
   }
  ],
  "problems": []

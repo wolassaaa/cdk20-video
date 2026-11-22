@@ -1,0 +1,84 @@
+[
+  {
+    "window": "W1",
+    "credits": {
+      "song": "Blinding Lights",
+      "artist": "The Weeknd"
+    },
+    "beat_sheet": {
+      "path": "音乐/卡点/w0w1_Blinding Lights.json",
+      "song": "Blinding Lights",
+      "artist": "The Weeknd"
+    },
+    "wcfg": {
+      "song": "Out of Time"
+    },
+    "ok": false,
+    "issues": [
+      "WCFG.song 不符"
+    ]
+  },
+  {
+    "window": "W2",
+    "credits": {
+      "song": "Harder, Better, Faster, Stronger",
+      "artist": "Daft Punk"
+    },
+    "beat_sheet": null,
+    "wcfg": {
+      "song": "Harder, Better, Faster, Stronger"
+    },
+    "ok": false,
+    "issues": [
+      "缺卡点表"
+    ]
+  },
+  {
+    "window": "W3",
+    "credits": {
+      "song": "Take My Breath",
+      "artist": "The Weeknd"
+    },
+    "beat_sheet": null,
+    "wcfg": {
+      "song": "Take My Breath"
+    },
+    "ok": false,
+    "issues": [
+      "缺卡点表"
+    ]
+  },
+  {
+    "window": "W4",
+    "credits": {
+      "song": "Sacrifice",
+      "artist": "The Weeknd"
+    },
+    "beat_sheet": {
+      "path": "音乐/卡点/W4_Sacrifice.json",
+      "song": "Sacrifice",
+      "artist": "The Weeknd"
+    },
+    "wcfg": {
+      "song": "Sacrifice"
+    },
+    "ok": true,
+    "issues": []
+  },
+  {
+    "window": "W5",
+    "credits": {
+      "song": "Out of Time",
+      "artist": "The Weeknd"
+    },
+    "beat_sheet": null,
+    "wcfg": {
+      "song": "Blinding Lights"
+    },
+    "ok": false,
+    "issues": [
+      "缺卡点表",
+      "WCFG.song 不符"
+    ]
+  }
+]

@@ -4,7 +4,7 @@
   python 镜头设计_v3/映射/check_guides.py 3-04 2-08 3-01      keys + 成片全查（会另渲一版关掉引导的对照片，半分辨率）
   python 镜头设计_v3/映射/check_guides.py --keys-only 1-04 …   只查能从 keys 算的（V1–V5、V8、V10、V14），渲染前用
   python 镜头设计_v3/映射/check_guides.py --film               全片 V14（所有 keys 的引导次数）
-  python 镜头设计_v3/映射/check_guides.py --b 5-10             B 档页（src/v3/btier/B<段>.jsx，成片 导演检查_20261120/14_B档_<段>.mp4，b_page.py 出的）
+  python 镜头设计_v3/映射/check_guides.py --b 5-10             B 档页（src/v3/btier/B<段>.jsx，成片 导演检查_<日期>/14_B档_<段>.mp4（b_page.review_dir），b_page.py 出的）
 
 成片：映射/_cache/pages/<合成>.mp4（page_tool.py check 出的）。对照片：同一页传 --props {"noguide":true} 渲成半分辨率 jpg 序列（G 盘），
 亮度差（V6）、预颤位移（V5）都拿"开引导"减"关引导"算，内容本身的变化抵掉。报告写 映射/_reports/guides_<段>.md。不删任何东西。
@@ -239,7 +239,7 @@ def film_checks(seg, C, K, oncam):
     from PIL import Image
     gray = lambda p: np.asarray(Image.open(p).convert("L"), dtype=np.float32)
     R = {}
-    mp4 = ROOT / "导演检查_20261120" / f"14_B档_{seg}.mp4" if B_MODE else HERE / "_cache/pages" / f"{C}.mp4"
+    mp4 = __import__("b_page").review_dir(seg) / f"14_B档_{seg}.mp4" if B_MODE else HERE / "_cache/pages" / f"{C}.mp4"
     if not mp4.exists():
         return {"V6": (False, f"没有成片 {mp4}")}
     G = K.get("guides", [])

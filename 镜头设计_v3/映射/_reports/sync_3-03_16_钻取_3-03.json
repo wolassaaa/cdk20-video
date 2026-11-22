@@ -1,0 +1,188 @@
+{
+ "video": "D:\\。hkbu\\molecular science\\导演检查_20261123\\16_钻取_3-03.mp4",
+ "group": "3-03",
+ "fps": 60.0,
+ "frames": 732,
+ "offset_f": 0,
+ "S1": {
+  "word_events": 12,
+  "table_dev_max_f": 0,
+  "video_checked": 13,
+  "video_no_motion": [],
+  "pass_": true
+ },
+ "S2": {
+  "pass_": true,
+  "early": []
+ },
+ "S3": {
+  "pass_": true,
+  "longest_still_f": 0,
+  "bad": []
+ },
+ "S4": {
+  "pass_": true,
+  "looks_like_30": false,
+  "dup_frames": 0,
+  "stepped_dups": 0,
+  "stepped_ratio": 0.0,
+  "blend_frames": 7,
+  "blend_first": [
+   596,
+   597,
+   598,
+   599,
+   600,
+   601,
+   602
+  ],
+  "design_fade": 0,
+  "verdict": "有混帧（变速慢放）"
+ },
+ "sentences": [
+  {
+   "sid": "3-03.s1",
+   "f0": 9,
+   "f1": 301,
+   "last_motion_f": 301,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "3-03.s2",
+   "f0": 330,
+   "f1": 592,
+   "last_motion_f": 592,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "3-03.s3",
+   "f0": 634,
+   "f1": 718,
+   "last_motion_f": 718,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  }
+ ],
+ "events": [
+  {
+   "id": "cam_out",
+   "verb": "camera_to",
+   "w": "Scientists",
+   "f_land": 39,
+   "table_dev": 30
+  },
+  {
+   "id": "cut_open",
+   "verb": "move",
+   "w": "lock",
+   "f_land": 98,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "plate_target",
+   "verb": "eject",
+   "w": "target,",
+   "f_land": 127,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "key_up",
+   "verb": "eject",
+   "w": "key",
+   "f_land": 210,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "plate_cand",
+   "verb": "eject",
+   "w": "candidate",
+   "f_land": 237,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "key_in",
+   "verb": "move",
+   "w": "fits",
+   "f_land": 374,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "pins",
+   "verb": "move",
+   "w": "own",
+   "f_land": 413,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "turn",
+   "verb": "move",
+   "w": "tightly,",
+   "f_land": 448,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_row",
+   "verb": "camera_to",
+   "w": "opens",
+   "f_land": 512,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "try2",
+   "verb": "move",
+   "w": "no",
+   "f_land": 535,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "try3",
+   "verb": "move",
+   "w": "else's.",
+   "f_land": 563,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_wide",
+   "verb": "camera_to",
+   "w": "That's",
+   "f_land": 634,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "plate_sel",
+   "verb": "eject",
+   "w": "selectivity.",
+   "f_land": 673,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "whip",
+   "verb": "camera_to",
+   "w": "selectivity.",
+   "f_land": 731,
+   "table_dev": 58,
+   "video_motion_near_start": true
+  }
+ ],
+ "pass": true
+}

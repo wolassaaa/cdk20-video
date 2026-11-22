@@ -5,13 +5,13 @@
  "segs": [
   "2-08"
  ],
- "tool": "remotion",
+ "tool": "blender",
  "fps": 60,
  "len_f": 920,
  "cut": "cut_v8",
- "cut_start_f": 15886,
- "cut_start_s": 264.77,
- "master_built": "2026-11-18 02:33:56 +09:00",
+ "cut_start_f": 15510,
+ "cut_start_s": 258.5033,
+ "master_built": "2026-11-22 20:33:03 +09:00",
  "words_hash": "8922aeaa79a1",
  "events_src": "镜头设计_v3/映射/events/2-08.json",
  "words": [
@@ -22,8 +22,8 @@
    "sid": "2-08.s1",
    "f0": 9,
    "f1": 14,
-   "F0": 15895,
-   "F1": 15900
+   "F0": 15519,
+   "F1": 15524
   },
   {
    "wid": "2-08.w002",
@@ -32,8 +32,8 @@
    "sid": "2-08.s1",
    "f0": 23,
    "f1": 46,
-   "F0": 15909,
-   "F1": 15932
+   "F0": 15533,
+   "F1": 15556
   },
   {
    "wid": "2-08.w003",
@@ -42,8 +42,8 @@
    "sid": "2-08.s1",
    "f0": 52,
    "f1": 62,
-   "F0": 15938,
-   "F1": 15948
+   "F0": 15562,
+   "F1": 15572
   },
   {
    "wid": "2-08.w004",
@@ -52,8 +52,8 @@
    "sid": "2-08.s1",
    "f0": 64,
    "f1": 74,
-   "F0": 15950,
-   "F1": 15960
+   "F0": 15574,
+   "F1": 15584
   },
   {
    "wid": "2-08.w005",
@@ -62,8 +62,8 @@
    "sid": "2-08.s1",
    "f0": 80,
    "f1": 101,
-   "F0": 15966,
-   "F1": 15987
+   "F0": 15590,
+   "F1": 15611
   },
   {
    "wid": "2-08.w006",
@@ -72,8 +72,8 @@
    "sid": "2-08.s2",
    "f0": 147,
    "f1": 174,
-   "F0": 16033,
-   "F1": 16060
+   "F0": 15657,
+   "F1": 15684
   },
   {
    "wid": "2-08.w007",
@@ -82,8 +82,8 @@
    "sid": "2-08.s2",
    "f0": 191,
    "f1": 196,
-   "F0": 16077,
-   "F1": 16082
+   "F0": 15701,
+   "F1": 15706
   },
   {
    "wid": "2-08.w008",
@@ -92,8 +92,8 @@
    "sid": "2-08.s2",
    "f0": 201,
    "f1": 219,
-   "F0": 16087,
-   "F1": 16105
+   "F0": 15711,
+   "F1": 15729
   },
   {
    "wid": "2-08.w009",
@@ -102,8 +102,8 @@
    "sid": "2-08.s3",
    "f0": 286,
    "f1": 295,
-   "F0": 16172,
-   "F1": 16181
+   "F0": 15796,
+   "F1": 15805
   },
   {
    "wid": "2-08.w010",
@@ -112,8 +112,8 @@
    "sid": "2-08.s3",
    "f0": 298,
    "f1": 309,
-   "F0": 16184,
-   "F1": 16195
+   "F0": 15808,
+   "F1": 15819
   },
   {
    "wid": "2-08.w011",
@@ -122,8 +122,8 @@
    "sid": "2-08.s3",
    "f0": 316,
    "f1": 329,
-   "F0": 16202,
-   "F1": 16215
+   "F0": 15826,
+   "F1": 15839
   },
   {
    "wid": "2-08.w012",
@@ -132,8 +132,8 @@
    "sid": "2-08.s3",
    "f0": 335,
    "f1": 358,
-   "F0": 16221,
-   "F1": 16244
+   "F0": 15845,
+   "F1": 15868
   },
   {
    "wid": "2-08.w013",
@@ -142,8 +142,8 @@
    "sid": "2-08.s3",
    "f0": 368,
    "f1": 380,
-   "F0": 16254,
-   "F1": 16266
+   "F0": 15878,
+   "F1": 15890
   },
   {
    "wid": "2-08.w014",
@@ -152,8 +152,8 @@
    "sid": "2-08.s3",
    "f0": 388,
    "f1": 389,
-   "F0": 16274,
-   "F1": 16275
+   "F0": 15898,
+   "F1": 15899
   },
   {
    "wid": "2-08.w015",
@@ -162,8 +162,8 @@
    "sid": "2-08.s3",
    "f0": 397,
    "f1": 410,
-   "F0": 16283,
-   "F1": 16296
+   "F0": 15907,
+   "F1": 15920
   },
   {
    "wid": "2-08.w016",
@@ -172,8 +172,8 @@
    "sid": "2-08.s3",
    "f0": 413,
    "f1": 424,
-   "F0": 16299,
-   "F1": 16310
+   "F0": 15923,
+   "F1": 15934
   },
   {
    "wid": "2-08.w017",
@@ -182,8 +182,8 @@
    "sid": "2-08.s3",
    "f0": 428,
    "f1": 435,
-   "F0": 16314,
-   "F1": 16321
+   "F0": 15938,
+   "F1": 15945
   },
   {
    "wid": "2-08.w018",
@@ -192,8 +192,8 @@
    "sid": "2-08.s4",
    "f0": 493,
    "f1": 501,
-   "F0": 16379,
-   "F1": 16387
+   "F0": 16003,
+   "F1": 16011
   },
   {
    "wid": "2-08.w019",
@@ -202,8 +202,8 @@
    "sid": "2-08.s4",
    "f0": 506,
    "f1": 517,
-   "F0": 16392,
-   "F1": 16403
+   "F0": 16016,
+   "F1": 16027
   },
   {
    "wid": "2-08.w020",
@@ -212,8 +212,8 @@
    "sid": "2-08.s4",
    "f0": 522,
    "f1": 546,
-   "F0": 16408,
-   "F1": 16432
+   "F0": 16032,
+   "F1": 16056
   },
   {
    "wid": "2-08.w021",
@@ -222,8 +222,8 @@
    "sid": "2-08.s4",
    "f0": 553,
    "f1": 556,
-   "F0": 16439,
-   "F1": 16442
+   "F0": 16063,
+   "F1": 16066
   },
   {
    "wid": "2-08.w022",
@@ -232,8 +232,8 @@
    "sid": "2-08.s4",
    "f0": 559,
    "f1": 562,
-   "F0": 16445,
-   "F1": 16448
+   "F0": 16069,
+   "F1": 16072
   },
   {
    "wid": "2-08.w023",
@@ -242,8 +242,8 @@
    "sid": "2-08.s4",
    "f0": 566,
    "f1": 582,
-   "F0": 16452,
-   "F1": 16468
+   "F0": 16076,
+   "F1": 16092
   },
   {
    "wid": "2-08.w024",
@@ -252,8 +252,8 @@
    "sid": "2-08.s5",
    "f0": 627,
    "f1": 634,
-   "F0": 16513,
-   "F1": 16520
+   "F0": 16137,
+   "F1": 16144
   },
   {
    "wid": "2-08.w025",
@@ -262,8 +262,8 @@
    "sid": "2-08.s5",
    "f0": 640,
    "f1": 670,
-   "F0": 16526,
-   "F1": 16556
+   "F0": 16150,
+   "F1": 16180
   },
   {
    "wid": "2-08.w026",
@@ -272,8 +272,8 @@
    "sid": "2-08.s5",
    "f0": 699,
    "f1": 704,
-   "F0": 16585,
-   "F1": 16590
+   "F0": 16209,
+   "F1": 16214
   },
   {
    "wid": "2-08.w027",
@@ -282,8 +282,8 @@
    "sid": "2-08.s5",
    "f0": 708,
    "f1": 718,
-   "F0": 16594,
-   "F1": 16604
+   "F0": 16218,
+   "F1": 16228
   },
   {
    "wid": "2-08.w028",
@@ -292,8 +292,8 @@
    "sid": "2-08.s5",
    "f0": 728,
    "f1": 739,
-   "F0": 16614,
-   "F1": 16625
+   "F0": 16238,
+   "F1": 16249
   },
   {
    "wid": "2-08.w029",
@@ -302,8 +302,8 @@
    "sid": "2-08.s5",
    "f0": 782,
    "f1": 793,
-   "F0": 16668,
-   "F1": 16679
+   "F0": 16292,
+   "F1": 16303
   },
   {
    "wid": "2-08.w030",
@@ -312,8 +312,8 @@
    "sid": "2-08.s5",
    "f0": 798,
    "f1": 810,
-   "F0": 16684,
-   "F1": 16696
+   "F0": 16308,
+   "F1": 16320
   },
   {
    "wid": "2-08.w031",
@@ -322,8 +322,8 @@
    "sid": "2-08.s5",
    "f0": 815,
    "f1": 823,
-   "F0": 16701,
-   "F1": 16709
+   "F0": 16325,
+   "F1": 16333
   },
   {
    "wid": "2-08.w032",
@@ -332,8 +332,8 @@
    "sid": "2-08.s5",
    "f0": 825,
    "f1": 829,
-   "F0": 16711,
-   "F1": 16715
+   "F0": 16335,
+   "F1": 16339
   },
   {
    "wid": "2-08.w033",
@@ -342,8 +342,8 @@
    "sid": "2-08.s5",
    "f0": 831,
    "f1": 866,
-   "F0": 16717,
-   "F1": 16752
+   "F0": 16341,
+   "F1": 16376
   },
   {
    "wid": "2-08.w034",
@@ -352,8 +352,8 @@
    "sid": "2-08.s5",
    "f0": 875,
    "f1": 890,
-   "F0": 16761,
-   "F1": 16776
+   "F0": 16385,
+   "F1": 16400
   },
   {
    "wid": "2-08.w035",
@@ -362,8 +362,8 @@
    "sid": "2-08.s5",
    "f0": 896,
    "f1": 917,
-   "F0": 16782,
-   "F1": 16803
+   "F0": 16406,
+   "F1": 16427
   }
  ],
  "sentences": [
@@ -411,35 +411,81 @@
  "holds": [],
  "events": [
   {
-   "id": "road",
-   "obj": "road",
-   "verb": "grow",
+   "id": "cam_est",
+   "obj": "cam_est",
+   "verb": "camera_to",
    "ease": "inout",
-   "means": "So here's where we're going：七站的路画出",
-   "f_start": 5,
-   "f_land": 9,
+   "means": "定场：主料杆从左下斜向右上，前三站远近排开",
+   "f_start": 12,
+   "f_land": 52,
    "f_end": 101,
-   "until": "2-08.w005",
-   "word": "2-08.w001",
-   "w": "So",
-   "key": "so#1",
+   "until": "2-08.s1",
+   "word": "2-08.w003",
+   "w": "where",
+   "key": "where#1",
    "sid": "2-08.s1",
-   "word_f0": 9,
-   "tool": "remotion",
+   "word_f0": 52,
+   "tool": "blender",
    "guide": {
     "kind": "none"
    },
-   "F_start": 15891,
-   "F_land": 15895,
-   "F_end": 15987
+   "F_start": 15522,
+   "F_land": 15562,
+   "F_end": 15611
   },
   {
-   "id": "lock",
-   "obj": "lock",
-   "verb": "grow",
+   "id": "pulse1",
+   "obj": "pulse1",
+   "verb": "flow",
    "ease": "inout",
-   "means": "First, the lock：锁长在 Target 上方",
-   "f_start": 161,
+   "means": "鼓包沿主料杆走到 Target 站",
+   "f_start": 150,
+   "f_land": 195,
+   "f_end": 195,
+   "until": null,
+   "word": "2-08.w008",
+   "w": "lock.",
+   "key": "lock#1",
+   "sid": "2-08.s2",
+   "word_f0": 201,
+   "tool": "blender",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 15660,
+   "F_land": 15705,
+   "F_end": 15705
+  },
+  {
+   "id": "cam1",
+   "obj": "cam1",
+   "verb": "camera_to",
+   "ease": "inout",
+   "means": "镜头跟到 Target 站",
+   "f_start": 162,
+   "f_land": 201,
+   "f_end": 221,
+   "until": null,
+   "word": "2-08.w008",
+   "w": "lock.",
+   "key": "lock#1",
+   "sid": "2-08.s2",
+   "word_f0": 201,
+   "tool": "blender",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 15672,
+   "F_land": 15711,
+   "F_end": 15731
+  },
+  {
+   "id": "red1",
+   "obj": "red1",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "Target 站描红；站旁的蓝色挂锁在浇口上跳一下",
+   "f_start": 199,
    "f_land": 201,
    "f_end": 219,
    "until": "2-08.s2",
@@ -448,78 +494,90 @@
    "key": "lock#1",
    "sid": "2-08.s2",
    "word_f0": 201,
-   "tool": "remotion",
+   "tool": "blender",
    "guide": {
-    "kind": "focus",
-    "target": "lock",
-    "box": [
-     160,
-     308,
-     140,
-     200
-    ]
+    "kind": "none"
    },
-   "F_start": 16047,
-   "F_land": 16087,
-   "F_end": 16105,
-   "g_start": 175,
-   "g_on": 193,
-   "g_end": 219,
-   "g_off": 249,
-   "g_tick": 197,
-   "G_start": 16061,
-   "G_on": 16079,
-   "G_end": 16105,
-   "G_off": 16135,
-   "G_tick": 16083
+   "F_start": 15709,
+   "F_land": 15711,
+   "F_end": 15729
   },
   {
-   "id": "chip",
-   "obj": "chip",
-   "verb": "grow",
+   "id": "pulse2",
+   "obj": "pulse2",
+   "verb": "flow",
    "ease": "inout",
-   "means": "AI：芯片长出",
-   "f_start": 312,
-   "f_land": 316,
-   "f_end": 358,
-   "until": "2-08.w012",
-   "word": "2-08.w011",
-   "w": "AI",
-   "key": "ai#1",
+   "means": "鼓包从 Target 走到 Hit",
+   "f_start": 302,
+   "f_land": 362,
+   "f_end": 362,
+   "until": null,
+   "word": "2-08.w013",
+   "w": "cut",
+   "key": "cut#1",
    "sid": "2-08.s3",
-   "word_f0": 316,
-   "tool": "remotion",
+   "word_f0": 368,
+   "tool": "blender",
    "guide": {
-    "kind": "focus",
-    "target": "hit",
-    "box": [
-     368,
-     300,
-     230,
-     200
-    ]
+    "kind": "none"
    },
-   "F_start": 16198,
-   "F_land": 16202,
-   "F_end": 16244,
-   "g_start": 290,
-   "g_on": 308,
-   "g_end": 358,
-   "g_off": 388,
-   "g_tick": 312,
-   "G_start": 16176,
-   "G_on": 16194,
-   "G_end": 16244,
-   "G_off": 16274,
-   "G_tick": 16198
+   "F_start": 15812,
+   "F_land": 15872,
+   "F_end": 15872
   },
   {
-   "id": "key",
-   "obj": "key",
-   "verb": "grow",
+   "id": "cam2",
+   "obj": "cam2",
+   "verb": "camera_to",
    "ease": "inout",
-   "means": "cut a key：钥匙长在 Hit 上方",
-   "f_start": 377,
+   "means": "镜头跟到 Hit 站",
+   "f_start": 314,
+   "f_land": 368,
+   "f_end": 388,
+   "until": null,
+   "word": "2-08.w013",
+   "w": "cut",
+   "key": "cut#1",
+   "sid": "2-08.s3",
+   "word_f0": 368,
+   "tool": "blender",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 15824,
+   "F_land": 15878,
+   "F_end": 15898
+  },
+  {
+   "id": "red2",
+   "obj": "red2",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "Hit 站描红",
+   "f_start": 366,
+   "f_land": 368,
+   "f_end": 398,
+   "until": null,
+   "word": "2-08.w013",
+   "w": "cut",
+   "key": "cut#1",
+   "sid": "2-08.s3",
+   "word_f0": 368,
+   "tool": "blender",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 15876,
+   "F_land": 15878,
+   "F_end": 15908
+  },
+  {
+   "id": "key_glint",
+   "obj": "key_glint",
+   "verb": "move",
+   "ease": "inout",
+   "means": "Hit 站旁那格的金钥匙扫光、在浇口上颤",
+   "f_start": 389,
    "f_land": 397,
    "f_end": 435,
    "until": "2-08.s3",
@@ -528,29 +586,67 @@
    "key": "key#1",
    "sid": "2-08.s3",
    "word_f0": 397,
-   "tool": "remotion",
+   "tool": "blender",
    "guide": {
-    "kind": "focus",
-    "target": "hit",
-    "box": [
-     368,
-     300,
-     230,
-     200
-    ]
+    "kind": "none"
    },
-   "F_start": 16263,
-   "F_land": 16283,
-   "F_end": 16321,
-   "guide_into": "chip"
+   "F_start": 15899,
+   "F_land": 15907,
+   "F_end": 15945
   },
   {
-   "id": "flask",
-   "obj": "flask",
-   "verb": "grow",
+   "id": "pulse3",
+   "obj": "pulse3",
+   "verb": "flow",
    "ease": "inout",
-   "means": "in the lab：烧瓶长在 Improve 上方",
-   "f_start": 536,
+   "means": "鼓包从 Hit 走到 Improve",
+   "f_start": 500,
+   "f_land": 560,
+   "f_end": 560,
+   "until": null,
+   "word": "2-08.w023",
+   "w": "lab.",
+   "key": "lab#1",
+   "sid": "2-08.s4",
+   "word_f0": 566,
+   "tool": "blender",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 16010,
+   "F_land": 16070,
+   "F_end": 16070
+  },
+  {
+   "id": "cam3",
+   "obj": "cam3",
+   "verb": "camera_to",
+   "ease": "inout",
+   "means": "镜头跟到 Improve 站",
+   "f_start": 512,
+   "f_land": 566,
+   "f_end": 586,
+   "until": null,
+   "word": "2-08.w023",
+   "w": "lab.",
+   "key": "lab#1",
+   "sid": "2-08.s4",
+   "word_f0": 566,
+   "tool": "blender",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 16022,
+   "F_land": 16076,
+   "F_end": 16096
+  },
+  {
+   "id": "red3",
+   "obj": "red3",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "Improve 站描红；旁边的烧瓶零件冒泡",
+   "f_start": 564,
    "f_land": 566,
    "f_end": 582,
    "until": "2-08.s4",
@@ -559,223 +655,130 @@
    "key": "lab#1",
    "sid": "2-08.s4",
    "word_f0": 566,
-   "tool": "remotion",
-   "guide": {
-    "kind": "focus",
-    "target": "flask",
-    "box": [
-     647,
-     332,
-     140,
-     177
-    ]
-   },
-   "F_start": 16422,
-   "F_land": 16452,
-   "F_end": 16468,
-   "g_start": 540,
-   "g_on": 558,
-   "g_end": 582,
-   "g_off": 612,
-   "g_tick": 562,
-   "G_start": 16426,
-   "G_on": 16444,
-   "G_end": 16468,
-   "G_off": 16498,
-   "G_tick": 16448
-  },
-  {
-   "id": "route",
-   "obj": "route",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "finally：前三站红线框起来 today's route",
-   "f_start": 636,
-   "f_land": 640,
-   "f_end": 739,
-   "until": "2-08.w028",
-   "word": "2-08.w025",
-   "w": "finally,",
-   "key": "finally#1",
-   "sid": "2-08.s5",
-   "word_f0": 640,
-   "tool": "remotion",
+   "tool": "blender",
    "guide": {
     "kind": "none"
    },
-   "F_start": 16522,
-   "F_land": 16526,
-   "F_end": 16625
+   "F_start": 16074,
+   "F_land": 16076,
+   "F_end": 16092
   },
   {
-   "id": "big",
-   "obj": "plate_big",
-   "verb": "appear",
+   "id": "cam_up",
+   "obj": "cam_up",
+   "verb": "camera_to",
    "ease": "inout",
-   "means": "how much did the computers really help：大问题字牌",
-   "f_start": 772,
-   "f_land": 782,
+   "means": "镜头升起后拉，三段红路都在画里",
+   "f_start": 668,
+   "f_land": 708,
+   "f_end": 798,
+   "until": "2-08.w030",
+   "word": "2-08.w027",
+   "w": "big",
+   "key": "big#1",
+   "sid": "2-08.s5",
+   "word_f0": 708,
+   "tool": "blender",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 16178,
+   "F_land": 16218,
+   "F_end": 16308
+  },
+  {
+   "id": "far_focus",
+   "obj": "far_focus",
+   "verb": "move",
+   "ease": "inout",
+   "means": "焦点往路的远端拉，后面四站变实，它们是白的、没亮",
+   "f_start": 780,
+   "f_land": 798,
+   "f_end": 828,
+   "until": null,
+   "word": "2-08.w030",
+   "w": "much",
+   "key": "much#1",
+   "sid": "2-08.s5",
+   "word_f0": 798,
+   "tool": "blender",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 16290,
+   "F_land": 16308,
+   "F_end": 16338
+  },
+  {
+   "id": "chips",
+   "obj": "chips",
+   "verb": "move",
+   "ease": "inout",
+   "means": "板上 PandaOmics、AlphaFold、Chemistry42 三块芯片依次扫光，各差 8 帧",
+   "f_start": 823,
+   "f_land": 831,
+   "f_end": 917,
+   "until": "2-08.w035",
+   "word": "2-08.w033",
+   "w": "computers",
+   "key": "computers#1",
+   "sid": "2-08.s5",
+   "word_f0": 831,
+   "tool": "blender",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 16333,
+   "F_land": 16341,
+   "F_end": 16427
+  },
+  {
+   "id": "lock_rise",
+   "obj": "lock_rise",
+   "verb": "move",
+   "ease": "inout",
+   "means": "蓝色挂锁从浇口上断开浮起",
+   "f_start": 886,
+   "f_land": 896,
    "f_end": 917,
    "until": "2-08.s5",
-   "word": "2-08.w029",
-   "w": "how",
-   "key": "how#2",
+   "word": "2-08.w035",
+   "w": "help?",
+   "key": "help#1",
    "sid": "2-08.s5",
-   "word_f0": 782,
-   "tool": "remotion",
+   "word_f0": 896,
+   "tool": "blender",
    "guide": {
-    "kind": "focus",
-    "target": "far",
-    "rim": false,
-    "nudge": false,
-    "box": [
-     920,
-     570,
-     800,
-     80
-    ]
+    "kind": "none"
    },
-   "F_start": 16658,
-   "F_land": 16668,
-   "F_end": 16803,
-   "g_start": 756,
-   "g_on": 774,
-   "g_end": 902,
-   "g_off": 919,
-   "g_tick": 778,
-   "G_start": 16642,
-   "G_on": 16660,
-   "G_end": 16788,
-   "G_off": 16805,
-   "G_tick": 16664
+   "F_start": 16396,
+   "F_land": 16406,
+   "F_end": 16427
+  },
+  {
+   "id": "dive",
+   "obj": "dive",
+   "verb": "move",
+   "ease": "inout",
+   "means": "挂锁冲镜头，终点对准锁孔，盖满帧是金色口环和锁芯；位姿读 `oncam/3-01/handoff.json` 的 `head_pose`",
+   "f_start": 901,
+   "f_land": 919,
+   "f_end": 919,
+   "until": null,
+   "word": "2-08.w035",
+   "w": "help?",
+   "key": "help#1",
+   "sid": "2-08.s5",
+   "word_f0": 896,
+   "tool": "blender",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 16411,
+   "F_land": 16429,
+   "F_end": 16429
   }
  ],
- "guides": [
-  {
-   "id": "lock",
-   "target": [
-    "lock"
-   ],
-   "kind": "focus",
-   "gs": 175,
-   "gon": 193,
-   "land": 201,
-   "gend": 219,
-   "goff": 249,
-   "tick": 197,
-   "nudge": true,
-   "rim": true,
-   "ev_s": 161,
-   "events": [
-    "lock"
-   ],
-   "box": [
-    160,
-    308,
-    140,
-    200
-   ],
-   "G_start": 16061,
-   "G_on": 16079,
-   "G_land": 16087,
-   "G_end": 16105,
-   "G_off": 16135,
-   "G_tick": 16083
-  },
-  {
-   "id": "chip",
-   "target": [
-    "hit"
-   ],
-   "kind": "focus",
-   "gs": 290,
-   "gon": 308,
-   "land": 316,
-   "gend": 358,
-   "goff": 388,
-   "tick": 312,
-   "nudge": false,
-   "rim": true,
-   "ev_s": 312,
-   "events": [
-    "chip",
-    "key"
-   ],
-   "box": [
-    368,
-    300,
-    230,
-    200
-   ],
-   "G_start": 16176,
-   "G_on": 16194,
-   "G_land": 16202,
-   "G_end": 16244,
-   "G_off": 16274,
-   "G_tick": 16198
-  },
-  {
-   "id": "flask",
-   "target": [
-    "flask"
-   ],
-   "kind": "focus",
-   "gs": 540,
-   "gon": 558,
-   "land": 566,
-   "gend": 582,
-   "goff": 612,
-   "tick": 562,
-   "nudge": false,
-   "rim": true,
-   "ev_s": 536,
-   "events": [
-    "flask"
-   ],
-   "box": [
-    647,
-    332,
-    140,
-    177
-   ],
-   "G_start": 16426,
-   "G_on": 16444,
-   "G_land": 16452,
-   "G_end": 16468,
-   "G_off": 16498,
-   "G_tick": 16448
-  },
-  {
-   "id": "big",
-   "target": [
-    "far"
-   ],
-   "kind": "focus",
-   "gs": 756,
-   "gon": 774,
-   "land": 782,
-   "gend": 902,
-   "goff": 919,
-   "tick": 778,
-   "nudge": false,
-   "rim": false,
-   "ev_s": 772,
-   "events": [
-    "big"
-   ],
-   "box": [
-    920,
-    570,
-    800,
-    80
-   ],
-   "G_start": 16642,
-   "G_on": 16660,
-   "G_land": 16668,
-   "G_end": 16788,
-   "G_off": 16805,
-   "G_tick": 16664
-  }
- ],
+ "guides": [],
  "problems": []
 }

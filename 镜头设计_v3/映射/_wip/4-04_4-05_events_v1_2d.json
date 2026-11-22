@@ -1,0 +1,159 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "4-04+4-05",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜 4-04+4-05（C）讲解卡：一串珠子折成蛋白、尾巴长出；cut the tail off 红虚线加剪刀剪下尾巴，尾巴飘走变灰；写出 The AI made the guess. 和 A human caught the problem.（后半加红色下划线）；页面 OnCam404.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "frame",
+   "obj": "frame",
+   "verb": "grow",
+   "at": {
+    "word": "4-04.w001",
+    "off": 0
+   },
+   "means": "So：讲解卡外框画出",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "4-04.w001"
+   }
+  },
+  {
+   "id": "chain",
+   "obj": "chain",
+   "verb": "grow",
+   "at": {
+    "word": "4-04.w002",
+    "off": 0
+   },
+   "means": "what：一串珠子（折好的蛋白）逐颗长出",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "word": "4-04.w004"
+   }
+  },
+  {
+   "id": "tail",
+   "obj": "tail",
+   "verb": "grow",
+   "at": {
+    "word": "4-04.w005",
+    "off": 0
+   },
+   "means": "do：尾巴三颗松垂的珠子长出",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "4-04.w005"
+   }
+  },
+  {
+   "id": "cutline",
+   "obj": "cutline",
+   "verb": "appear",
+   "at": {
+    "word": "4-05.w002",
+    "off": 0
+   },
+   "means": "cut：红虚线画在尾巴根部，剪刀张开",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "4-05.w002"
+   }
+  },
+  {
+   "id": "snip",
+   "obj": "snip",
+   "verb": "morph",
+   "at": {
+    "word": "4-05.w004",
+    "off": 0
+   },
+   "means": "tail：剪刀合拢，剪断",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-05.w004"
+   }
+  },
+  {
+   "id": "float",
+   "obj": "float",
+   "verb": "move",
+   "at": {
+    "word": "4-05.w005",
+    "off": 0
+   },
+   "means": "off：尾巴飘走变灰",
+   "tool": "remotion",
+   "lead": 26,
+   "until": {
+    "word": "4-05.w005"
+   }
+  },
+  {
+   "id": "ai",
+   "obj": "ai",
+   "verb": "appear",
+   "at": {
+    "word": "4-05.w006",
+    "off": 0
+   },
+   "means": "The AI made the guess：写出第一行",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-05.w010"
+   }
+  },
+  {
+   "id": "pulse",
+   "obj": "pulse",
+   "verb": "morph",
+   "at": {
+    "word": "4-05.w010",
+    "off": 0
+   },
+   "means": "guess：整串珠子轻轻一跳",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "4-05.w010"
+   }
+  },
+  {
+   "id": "human",
+   "obj": "human",
+   "verb": "appear",
+   "at": {
+    "word": "4-05.w011",
+    "off": 0
+   },
+   "means": "A human caught：写出第二行",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-05.w013"
+   }
+  },
+  {
+   "id": "under",
+   "obj": "under",
+   "verb": "grow",
+   "at": {
+    "word": "4-05.w013",
+    "off": 0
+   },
+   "means": "caught the problem：红色下划线画出",
+   "tool": "remotion",
+   "lead": 0,
+   "until": {
+    "word": "4-05.w015"
+   }
+  }
+ ]
+}

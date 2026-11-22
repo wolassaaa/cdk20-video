@@ -7,12 +7,12 @@
  ],
  "tool": "remotion",
  "fps": 60,
- "len_f": 1256,
+ "len_f": 1185,
  "cut": "cut_v8",
  "cut_start_f": 1836,
  "cut_start_s": 30.6,
- "master_built": "2026-11-18 02:33:56 +09:00",
- "words_hash": "9aba3c77165c",
+ "master_built": "2026-11-22 20:33:03 +09:00",
+ "words_hash": "0d283bfd25a1",
  "events_src": "镜头设计_v3/映射/events/1-04.json",
  "words": [
   {
@@ -140,310 +140,310 @@
    "w": "from",
    "key": "from#1",
    "sid": "1-04.s1",
-   "f0": 325,
-   "f1": 336,
-   "F0": 2161,
-   "F1": 2172
+   "f0": 306,
+   "f1": 317,
+   "F0": 2142,
+   "F1": 2153
   },
   {
    "wid": "1-04.w014",
    "w": "Nexavar",
    "key": "nexavar#1",
    "sid": "1-04.s1",
-   "f0": 339,
-   "f1": 369,
-   "F0": 2175,
-   "F1": 2205
+   "f0": 320,
+   "f1": 350,
+   "F0": 2156,
+   "F1": 2186
   },
   {
    "wid": "1-04.w015",
    "w": "to",
    "key": "to#1",
    "sid": "1-04.s1",
-   "f0": 375,
-   "f1": 388,
-   "F0": 2211,
-   "F1": 2224
+   "f0": 356,
+   "f1": 369,
+   "F0": 2192,
+   "F1": 2205
   },
   {
    "wid": "1-04.w016",
    "w": "a",
    "key": "a#1",
    "sid": "1-04.s1",
-   "f0": 394,
-   "f1": 396,
-   "F0": 2230,
-   "F1": 2232
+   "f0": 375,
+   "f1": 377,
+   "F0": 2211,
+   "F1": 2213
   },
   {
    "wid": "1-04.w017",
    "w": "combo,",
    "key": "combo#1",
    "sid": "1-04.s1",
-   "f0": 402,
-   "f1": 422,
-   "F0": 2238,
-   "F1": 2258
+   "f0": 383,
+   "f1": 403,
+   "F0": 2219,
+   "F1": 2239
   },
   {
    "wid": "1-04.w018",
    "w": "atezolizumab",
    "key": "atezolizumab#1",
    "sid": "1-04.s1",
-   "f0": 481,
-   "f1": 546,
-   "F0": 2317,
-   "F1": 2382
+   "f0": 427,
+   "f1": 492,
+   "F0": 2263,
+   "F1": 2328
   },
   {
    "wid": "1-04.w019",
    "w": "plus",
    "key": "plus#1",
    "sid": "1-04.s1",
-   "f0": 555,
-   "f1": 578,
-   "F0": 2391,
-   "F1": 2414
+   "f0": 501,
+   "f1": 524,
+   "F0": 2337,
+   "F1": 2360
   },
   {
    "wid": "1-04.w020",
    "w": "bevacizumab.",
    "key": "bevacizumab#1",
    "sid": "1-04.s1",
-   "f0": 585,
-   "f1": 646,
-   "F0": 2421,
-   "F1": 2482
+   "f0": 531,
+   "f1": 592,
+   "F0": 2367,
+   "F1": 2428
   },
   {
    "wid": "1-04.w021",
    "w": "But",
    "key": "but#1",
    "sid": "1-04.s2",
-   "f0": 683,
-   "f1": 691,
-   "F0": 2519,
-   "F1": 2527
+   "f0": 629,
+   "f1": 637,
+   "F0": 2465,
+   "F1": 2473
   },
   {
    "wid": "1-04.w022",
    "w": "here,",
    "key": "here#1",
    "sid": "1-04.s2",
-   "f0": 697,
-   "f1": 718,
-   "F0": 2533,
-   "F1": 2554
+   "f0": 643,
+   "f1": 664,
+   "F0": 2479,
+   "F1": 2500
   },
   {
    "wid": "1-04.w023",
    "w": "only",
    "key": "only#1",
    "sid": "1-04.s2",
-   "f0": 749,
-   "f1": 761,
-   "F0": 2585,
-   "F1": 2597
+   "f0": 695,
+   "f1": 707,
+   "F0": 2531,
+   "F1": 2543
   },
   {
    "wid": "1-04.w024",
    "w": "about",
    "key": "about#1",
    "sid": "1-04.s2",
-   "f0": 764,
-   "f1": 784,
-   "F0": 2600,
-   "F1": 2620
+   "f0": 710,
+   "f1": 730,
+   "F0": 2546,
+   "F1": 2566
   },
   {
    "wid": "1-04.w025",
    "w": "three",
    "key": "three#1",
    "sid": "1-04.s2",
-   "f0": 788,
-   "f1": 803,
-   "F0": 2624,
-   "F1": 2639
+   "f0": 734,
+   "f1": 749,
+   "F0": 2570,
+   "F1": 2585
   },
   {
    "wid": "1-04.w026",
    "w": "in",
    "key": "in#1",
    "sid": "1-04.s2",
-   "f0": 807,
-   "f1": 813,
-   "F0": 2643,
-   "F1": 2649
+   "f0": 753,
+   "f1": 759,
+   "F0": 2589,
+   "F1": 2595
   },
   {
    "wid": "1-04.w027",
    "w": "ten",
    "key": "ten#1",
    "sid": "1-04.s2",
-   "f0": 817,
-   "f1": 832,
-   "F0": 2653,
-   "F1": 2668
+   "f0": 763,
+   "f1": 778,
+   "F0": 2599,
+   "F1": 2614
   },
   {
    "wid": "1-04.w028",
    "w": "patients",
    "key": "patients#1",
    "sid": "1-04.s2",
-   "f0": 835,
-   "f1": 867,
-   "F0": 2671,
-   "F1": 2703
+   "f0": 781,
+   "f1": 813,
+   "F0": 2617,
+   "F1": 2649
   },
   {
    "wid": "1-04.w029",
    "w": "are",
    "key": "are#1",
    "sid": "1-04.s2",
-   "f0": 887,
-   "f1": 895,
-   "F0": 2723,
-   "F1": 2731
+   "f0": 833,
+   "f1": 841,
+   "F0": 2669,
+   "F1": 2677
   },
   {
    "wid": "1-04.w030",
    "w": "alive",
    "key": "alive#1",
    "sid": "1-04.s2",
-   "f0": 900,
-   "f1": 922,
-   "F0": 2736,
-   "F1": 2758
+   "f0": 846,
+   "f1": 868,
+   "F0": 2682,
+   "F1": 2704
   },
   {
    "wid": "1-04.w031",
    "w": "five",
    "key": "five#1",
    "sid": "1-04.s2",
-   "f0": 925,
-   "f1": 941,
-   "F0": 2761,
-   "F1": 2777
+   "f0": 871,
+   "f1": 887,
+   "F0": 2707,
+   "F1": 2723
   },
   {
    "wid": "1-04.w032",
    "w": "years",
    "key": "years#1",
    "sid": "1-04.s2",
-   "f0": 943,
-   "f1": 959,
-   "F0": 2779,
-   "F1": 2795
+   "f0": 889,
+   "f1": 905,
+   "F0": 2725,
+   "F1": 2741
   },
   {
    "wid": "1-04.w033",
    "w": "on.",
    "key": "on#1",
    "sid": "1-04.s2",
-   "f0": 965,
-   "f1": 973,
-   "F0": 2801,
-   "F1": 2809
+   "f0": 911,
+   "f1": 919,
+   "F0": 2747,
+   "F1": 2755
   },
   {
    "wid": "1-04.w034",
    "w": "The",
    "key": "the#2",
    "sid": "1-04.s3",
-   "f0": 1011,
-   "f1": 1016,
-   "F0": 2847,
-   "F1": 2852
+   "f0": 957,
+   "f1": 962,
+   "F0": 2793,
+   "F1": 2798
   },
   {
    "wid": "1-04.w035",
    "w": "study",
    "key": "study#1",
    "sid": "1-04.s3",
-   "f0": 1019,
-   "f1": 1037,
-   "F0": 2855,
-   "F1": 2873
+   "f0": 965,
+   "f1": 983,
+   "F0": 2801,
+   "F1": 2819
   },
   {
    "wid": "1-04.w036",
    "w": "we",
    "key": "we#1",
    "sid": "1-04.s3",
-   "f0": 1041,
-   "f1": 1046,
-   "F0": 2877,
-   "F1": 2882
+   "f0": 987,
+   "f1": 992,
+   "F0": 2823,
+   "F1": 2828
   },
   {
    "wid": "1-04.w037",
    "w": "follow",
    "key": "follow#1",
    "sid": "1-04.s3",
-   "f0": 1052,
-   "f1": 1074,
-   "F0": 2888,
-   "F1": 2910
+   "f0": 998,
+   "f1": 1020,
+   "F0": 2834,
+   "F1": 2856
   },
   {
    "wid": "1-04.w038",
    "w": "calls",
    "key": "calls#1",
    "sid": "1-04.s3",
-   "f0": 1115,
-   "f1": 1130,
-   "F0": 2951,
-   "F1": 2966
+   "f0": 1044,
+   "f1": 1059,
+   "F0": 2880,
+   "F1": 2895
   },
   {
    "wid": "1-04.w039",
    "w": "it",
    "key": "it#1",
    "sid": "1-04.s3",
-   "f0": 1134,
-   "f1": 1140,
-   "F0": 2970,
-   "F1": 2976
+   "f0": 1063,
+   "f1": 1069,
+   "F0": 2899,
+   "F1": 2905
   },
   {
    "wid": "1-04.w040",
    "w": "a",
    "key": "a#2",
    "sid": "1-04.s3",
-   "f0": 1145,
-   "f1": 1146,
-   "F0": 2981,
-   "F1": 2982
+   "f0": 1074,
+   "f1": 1075,
+   "F0": 2910,
+   "F1": 2911
   },
   {
    "wid": "1-04.w041",
    "w": "huge",
    "key": "huge#1",
    "sid": "1-04.s3",
-   "f0": 1158,
-   "f1": 1180,
-   "F0": 2994,
-   "F1": 3016
+   "f0": 1087,
+   "f1": 1109,
+   "F0": 2923,
+   "F1": 2945
   },
   {
    "wid": "1-04.w042",
    "w": "unmet",
    "key": "unmet#1",
    "sid": "1-04.s3",
-   "f0": 1186,
-   "f1": 1215,
-   "F0": 3022,
-   "F1": 3051
+   "f0": 1115,
+   "f1": 1144,
+   "F0": 2951,
+   "F1": 2980
   },
   {
    "wid": "1-04.w043",
    "w": "need.",
    "key": "need#1",
    "sid": "1-04.s3",
-   "f0": 1236,
-   "f1": 1252,
-   "F0": 3072,
-   "F1": 3088
+   "f0": 1165,
+   "f1": 1181,
+   "F0": 3001,
+   "F1": 3017
   }
  ],
  "sentences": [
@@ -453,23 +453,23 @@
    "w_first": "1-04.w001",
    "w_last": "1-04.w020",
    "f0": 9,
-   "f1": 646
+   "f1": 592
   },
   {
    "sid": "1-04.s2",
    "text": "But here, only about three in ten patients are alive five years on.",
    "w_first": "1-04.w021",
    "w_last": "1-04.w033",
-   "f0": 683,
-   "f1": 973
+   "f0": 629,
+   "f1": 919
   },
   {
    "sid": "1-04.s3",
    "text": "The study we follow calls it a huge unmet need.",
    "w_first": "1-04.w034",
    "w_last": "1-04.w043",
-   "f0": 1011,
-   "f1": 1252
+   "f0": 957,
+   "f1": 1181
   }
  ],
  "holds": [],
@@ -552,22 +552,22 @@
    "verb": "appear",
    "ease": "inout",
    "means": "Nexavar：胶囊标名",
-   "f_start": 329,
-   "f_land": 339,
-   "f_end": 369,
+   "f_start": 310,
+   "f_land": 320,
+   "f_end": 350,
    "until": "1-04.w014",
    "word": "1-04.w014",
    "w": "Nexavar",
    "key": "nexavar#1",
    "sid": "1-04.s1",
-   "word_f0": 339,
+   "word_f0": 320,
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 2165,
-   "F_land": 2175,
-   "F_end": 2205
+   "F_start": 2146,
+   "F_land": 2156,
+   "F_end": 2186
   },
   {
    "id": "combo",
@@ -575,15 +575,15 @@
    "verb": "eject",
    "ease": "inout",
    "means": "a combo：胶囊被顶出去，两袋输液落座",
-   "f_start": 389,
-   "f_land": 402,
-   "f_end": 422,
+   "f_start": 370,
+   "f_land": 383,
+   "f_end": 403,
    "until": "1-04.w017",
    "word": "1-04.w017",
    "w": "combo,",
    "key": "combo#1",
    "sid": "1-04.s1",
-   "word_f0": 402,
+   "word_f0": 383,
    "tool": "remotion",
    "guide": {
     "kind": "focus",
@@ -591,19 +591,19 @@
      "stand"
     ]
    },
-   "F_start": 2225,
-   "F_land": 2238,
-   "F_end": 2258,
-   "g_start": 376,
-   "g_on": 394,
-   "g_end": 422,
-   "g_off": 452,
-   "g_tick": 398,
-   "G_start": 2212,
-   "G_on": 2230,
-   "G_end": 2258,
-   "G_off": 2288,
-   "G_tick": 2234
+   "F_start": 2206,
+   "F_land": 2219,
+   "F_end": 2239,
+   "g_start": 357,
+   "g_on": 375,
+   "g_end": 403,
+   "g_off": 433,
+   "g_tick": 379,
+   "G_start": 2193,
+   "G_on": 2211,
+   "G_end": 2239,
+   "G_off": 2269,
+   "G_tick": 2215
   },
   {
    "id": "atezo",
@@ -611,22 +611,22 @@
    "verb": "appear",
    "ease": "inout",
    "means": "atezolizumab：左袋标名",
-   "f_start": 471,
-   "f_land": 481,
-   "f_end": 546,
+   "f_start": 417,
+   "f_land": 427,
+   "f_end": 492,
    "until": "1-04.w018",
    "word": "1-04.w018",
    "w": "atezolizumab",
    "key": "atezolizumab#1",
    "sid": "1-04.s1",
-   "word_f0": 481,
+   "word_f0": 427,
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 2307,
-   "F_land": 2317,
-   "F_end": 2382
+   "F_start": 2253,
+   "F_land": 2263,
+   "F_end": 2328
   },
   {
    "id": "beva",
@@ -634,22 +634,22 @@
    "verb": "appear",
    "ease": "inout",
    "means": "plus bevacizumab：右袋标名",
-   "f_start": 575,
-   "f_land": 585,
-   "f_end": 646,
+   "f_start": 521,
+   "f_land": 531,
+   "f_end": 592,
    "until": "1-04.s1",
    "word": "1-04.w020",
    "w": "bevacizumab.",
    "key": "bevacizumab#1",
    "sid": "1-04.s1",
-   "word_f0": 585,
+   "word_f0": 531,
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 2411,
-   "F_land": 2421,
-   "F_end": 2482
+   "F_start": 2357,
+   "F_land": 2367,
+   "F_end": 2428
   },
   {
    "id": "clear",
@@ -657,22 +657,22 @@
    "verb": "move",
    "ease": "inout",
    "means": "But：药座退到左边变小",
-   "f_start": 677,
-   "f_land": 683,
-   "f_end": 718,
+   "f_start": 623,
+   "f_land": 629,
+   "f_end": 664,
    "until": "1-04.w022",
    "word": "1-04.w021",
    "w": "But",
    "key": "but#1",
    "sid": "1-04.s2",
-   "word_f0": 683,
+   "word_f0": 629,
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 2513,
-   "F_land": 2519,
-   "F_end": 2554
+   "F_start": 2459,
+   "F_land": 2465,
+   "F_end": 2500
   },
   {
    "id": "three",
@@ -680,22 +680,22 @@
    "verb": "appear",
    "ease": "inout",
    "means": "three：数字轮 3",
-   "f_start": 758,
-   "f_land": 788,
-   "f_end": 803,
+   "f_start": 704,
+   "f_land": 734,
+   "f_end": 749,
    "until": "1-04.w025",
    "word": "1-04.w025",
    "w": "three",
    "key": "three#1",
    "sid": "1-04.s2",
-   "word_f0": 788,
+   "word_f0": 734,
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 2594,
-   "F_land": 2624,
-   "F_end": 2639
+   "F_start": 2540,
+   "F_land": 2570,
+   "F_end": 2585
   },
   {
    "id": "ten",
@@ -703,15 +703,15 @@
    "verb": "appear",
    "ease": "inout",
    "means": "in ten patients：十个小人一个个落位",
-   "f_start": 810,
-   "f_land": 817,
-   "f_end": 867,
+   "f_start": 756,
+   "f_land": 763,
+   "f_end": 813,
    "until": "1-04.w028",
    "word": "1-04.w027",
    "w": "ten",
    "key": "ten#1",
    "sid": "1-04.s2",
-   "word_f0": 817,
+   "word_f0": 763,
    "tool": "remotion",
    "guide": {
     "kind": "focus",
@@ -719,19 +719,19 @@
      "people"
     ]
    },
-   "F_start": 2646,
-   "F_land": 2653,
-   "F_end": 2703,
-   "g_start": 791,
-   "g_on": 809,
-   "g_end": 867,
-   "g_off": 897,
-   "g_tick": 813,
-   "G_start": 2627,
-   "G_on": 2645,
-   "G_end": 2703,
-   "G_off": 2733,
-   "G_tick": 2649
+   "F_start": 2592,
+   "F_land": 2599,
+   "F_end": 2649,
+   "g_start": 737,
+   "g_on": 755,
+   "g_end": 813,
+   "g_off": 843,
+   "g_tick": 759,
+   "G_start": 2573,
+   "G_on": 2591,
+   "G_end": 2649,
+   "G_off": 2679,
+   "G_tick": 2595
   },
   {
    "id": "alive",
@@ -739,22 +739,22 @@
    "verb": "move",
    "ease": "inout",
    "means": "alive：七个变灰下沉，三个留着",
-   "f_start": 887,
-   "f_land": 900,
-   "f_end": 922,
+   "f_start": 833,
+   "f_land": 846,
+   "f_end": 868,
    "until": "1-04.w030",
    "word": "1-04.w030",
    "w": "alive",
    "key": "alive#1",
    "sid": "1-04.s2",
-   "word_f0": 900,
+   "word_f0": 846,
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 2723,
-   "F_land": 2736,
-   "F_end": 2758
+   "F_start": 2669,
+   "F_land": 2682,
+   "F_end": 2704
   },
   {
    "id": "years",
@@ -762,22 +762,22 @@
    "verb": "appear",
    "ease": "inout",
    "means": "five years on：日历落下，标 5 years",
-   "f_start": 918,
-   "f_land": 925,
-   "f_end": 973,
+   "f_start": 864,
+   "f_land": 871,
+   "f_end": 919,
    "until": "1-04.s2",
    "word": "1-04.w031",
    "w": "five",
    "key": "five#1",
    "sid": "1-04.s2",
-   "word_f0": 925,
+   "word_f0": 871,
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 2754,
-   "F_land": 2761,
-   "F_end": 2809
+   "F_start": 2700,
+   "F_land": 2707,
+   "F_end": 2755
   },
   {
    "id": "study",
@@ -785,15 +785,15 @@
    "verb": "appear",
    "ease": "inout",
    "means": "The study we follow：论文书落下",
-   "f_start": 1012,
-   "f_land": 1019,
-   "f_end": 1074,
+   "f_start": 958,
+   "f_land": 965,
+   "f_end": 1020,
    "until": "1-04.w037",
    "word": "1-04.w035",
    "w": "study",
    "key": "study#1",
    "sid": "1-04.s3",
-   "word_f0": 1019,
+   "word_f0": 965,
    "tool": "remotion",
    "guide": {
     "kind": "focus",
@@ -801,19 +801,19 @@
      "book"
     ]
    },
-   "F_start": 2848,
-   "F_land": 2855,
-   "F_end": 2910,
-   "g_start": 993,
-   "g_on": 1011,
-   "g_end": 1074,
-   "g_off": 1104,
-   "g_tick": 1015,
-   "G_start": 2829,
-   "G_on": 2847,
-   "G_end": 2910,
-   "G_off": 2940,
-   "G_tick": 2851
+   "F_start": 2794,
+   "F_land": 2801,
+   "F_end": 2856,
+   "g_start": 939,
+   "g_on": 957,
+   "g_end": 1020,
+   "g_off": 1050,
+   "g_tick": 961,
+   "G_start": 2775,
+   "G_on": 2793,
+   "G_end": 2856,
+   "G_off": 2886,
+   "G_tick": 2797
   },
   {
    "id": "calls",
@@ -821,22 +821,22 @@
    "verb": "move",
    "ease": "inout",
    "means": "calls it：书翻开一下",
-   "f_start": 1102,
-   "f_land": 1115,
-   "f_end": 1130,
+   "f_start": 1031,
+   "f_land": 1044,
+   "f_end": 1059,
    "until": "1-04.w038",
    "word": "1-04.w038",
    "w": "calls",
    "key": "calls#1",
    "sid": "1-04.s3",
-   "word_f0": 1115,
+   "word_f0": 1044,
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 2938,
-   "F_land": 2951,
-   "F_end": 2966
+   "F_start": 2867,
+   "F_land": 2880,
+   "F_end": 2895
   },
   {
    "id": "huge",
@@ -844,22 +844,22 @@
    "verb": "appear",
    "ease": "inout",
    "means": "a huge unmet need：手写",
-   "f_start": 1152,
-   "f_land": 1158,
-   "f_end": 1252,
+   "f_start": 1081,
+   "f_land": 1087,
+   "f_end": 1181,
    "until": "1-04.s3",
    "word": "1-04.w041",
    "w": "huge",
    "key": "huge#1",
    "sid": "1-04.s3",
-   "word_f0": 1158,
+   "word_f0": 1087,
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 2988,
-   "F_land": 2994,
-   "F_end": 3088
+   "F_start": 2917,
+   "F_land": 2923,
+   "F_end": 3017
   }
  ],
  "guides": [
@@ -869,24 +869,24 @@
     "stand"
    ],
    "kind": "focus",
-   "gs": 376,
-   "gon": 394,
-   "land": 402,
-   "gend": 422,
-   "goff": 452,
-   "tick": 398,
+   "gs": 357,
+   "gon": 375,
+   "land": 383,
+   "gend": 403,
+   "goff": 433,
+   "tick": 379,
    "nudge": false,
    "rim": true,
-   "ev_s": 389,
+   "ev_s": 370,
    "events": [
     "combo"
    ],
-   "G_start": 2212,
-   "G_on": 2230,
-   "G_land": 2238,
-   "G_end": 2258,
-   "G_off": 2288,
-   "G_tick": 2234
+   "G_start": 2193,
+   "G_on": 2211,
+   "G_land": 2219,
+   "G_end": 2239,
+   "G_off": 2269,
+   "G_tick": 2215
   },
   {
    "id": "ten",
@@ -894,24 +894,24 @@
     "people"
    ],
    "kind": "focus",
-   "gs": 791,
-   "gon": 809,
-   "land": 817,
-   "gend": 867,
-   "goff": 897,
-   "tick": 813,
+   "gs": 737,
+   "gon": 755,
+   "land": 763,
+   "gend": 813,
+   "goff": 843,
+   "tick": 759,
    "nudge": true,
    "rim": true,
-   "ev_s": 810,
+   "ev_s": 756,
    "events": [
     "ten"
    ],
-   "G_start": 2627,
-   "G_on": 2645,
-   "G_land": 2653,
-   "G_end": 2703,
-   "G_off": 2733,
-   "G_tick": 2649
+   "G_start": 2573,
+   "G_on": 2591,
+   "G_land": 2599,
+   "G_end": 2649,
+   "G_off": 2679,
+   "G_tick": 2595
   },
   {
    "id": "study",
@@ -919,24 +919,24 @@
     "book"
    ],
    "kind": "focus",
-   "gs": 993,
-   "gon": 1011,
-   "land": 1019,
-   "gend": 1074,
-   "goff": 1104,
-   "tick": 1015,
+   "gs": 939,
+   "gon": 957,
+   "land": 965,
+   "gend": 1020,
+   "goff": 1050,
+   "tick": 961,
    "nudge": true,
    "rim": true,
-   "ev_s": 1012,
+   "ev_s": 958,
    "events": [
     "study"
    ],
-   "G_start": 2829,
-   "G_on": 2847,
-   "G_land": 2855,
-   "G_end": 2910,
-   "G_off": 2940,
-   "G_tick": 2851
+   "G_start": 2775,
+   "G_on": 2793,
+   "G_land": 2801,
+   "G_end": 2856,
+   "G_off": 2886,
+   "G_tick": 2797
   }
  ],
  "problems": []

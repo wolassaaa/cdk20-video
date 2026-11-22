@@ -1,0 +1,84 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "7-01",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜 7-01（A）讲解卡：问号后 three things 时三个空圈号 1、2、3 依次弹出；页面 OnCam701.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "frame",
+   "obj": "frame",
+   "verb": "grow",
+   "at": {
+    "word": "7-01.w004",
+    "off": 0
+   },
+   "means": "happen：讲解卡外框画出",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "7-01.w004"
+   }
+  },
+  {
+   "id": "q",
+   "obj": "q",
+   "verb": "appear",
+   "at": {
+    "word": "7-01.w005",
+    "off": 0
+   },
+   "means": "next：红问号",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "7-01.w005"
+   }
+  },
+  {
+   "id": "c1",
+   "obj": "c1",
+   "verb": "appear",
+   "at": {
+    "word": "7-01.w008",
+    "off": 0
+   },
+   "means": "three：圈号 1 弹出",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "7-01.w008"
+   }
+  },
+  {
+   "id": "c2",
+   "obj": "c2",
+   "verb": "appear",
+   "at": {
+    "word": "7-01.w009",
+    "off": 0
+   },
+   "means": "things：圈号 2 弹出",
+   "tool": "remotion",
+   "lead": 16,
+   "until": {
+    "word": "7-01.w009"
+   }
+  },
+  {
+   "id": "c3",
+   "obj": "c3",
+   "verb": "appear",
+   "at": {
+    "word": "7-01.w009",
+    "off": 0
+   },
+   "means": "things：圈号 3 弹出",
+   "tool": "remotion",
+   "lead": 0,
+   "until": {
+    "word": "7-01.w009"
+   }
+  }
+ ]
+}

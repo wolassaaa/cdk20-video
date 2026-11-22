@@ -6,13 +6,13 @@
   "4-11",
   "4-12"
  ],
- "tool": "remotion",
+ "tool": "blender",
  "fps": 60,
  "len_f": 640,
  "cut": "cut_v8",
- "cut_start_f": 36830,
- "cut_start_s": 613.83,
- "master_built": "2026-11-18 02:33:56 +09:00",
+ "cut_start_f": 35828,
+ "cut_start_s": 597.13,
+ "master_built": "2026-11-22 20:33:03 +09:00",
  "words_hash": "35c8ec6ca8e4",
  "events_src": "镜头设计_v3/映射/events/4-11_4-12.json",
  "words": [
@@ -23,8 +23,8 @@
    "sid": "4-11.s1",
    "f0": 30,
    "f1": 48,
-   "F0": 36860,
-   "F1": 36878
+   "F0": 35858,
+   "F1": 35876
   },
   {
    "wid": "4-11.w002",
@@ -33,8 +33,8 @@
    "sid": "4-11.s2",
    "f0": 114,
    "f1": 118,
-   "F0": 36944,
-   "F1": 36948
+   "F0": 35942,
+   "F1": 35946
   },
   {
    "wid": "4-11.w003",
@@ -43,8 +43,8 @@
    "sid": "4-11.s2",
    "f0": 126,
    "f1": 130,
-   "F0": 36956,
-   "F1": 36960
+   "F0": 35954,
+   "F1": 35958
   },
   {
    "wid": "4-11.w004",
@@ -53,8 +53,8 @@
    "sid": "4-11.s2",
    "f0": 133,
    "f1": 159,
-   "F0": 36963,
-   "F1": 36989
+   "F0": 35961,
+   "F1": 35987
   },
   {
    "wid": "4-11.w005",
@@ -63,8 +63,8 @@
    "sid": "4-11.s2",
    "f0": 163,
    "f1": 176,
-   "F0": 36993,
-   "F1": 37006
+   "F0": 35991,
+   "F1": 36004
   },
   {
    "wid": "4-11.w006",
@@ -73,8 +73,8 @@
    "sid": "4-11.s2",
    "f0": 177,
    "f1": 182,
-   "F0": 37007,
-   "F1": 37012
+   "F0": 36005,
+   "F1": 36010
   },
   {
    "wid": "4-11.w007",
@@ -83,8 +83,8 @@
    "sid": "4-11.s2",
    "f0": 192,
    "f1": 222,
-   "F0": 37022,
-   "F1": 37052
+   "F0": 36020,
+   "F1": 36050
   },
   {
    "wid": "4-12.w001",
@@ -93,8 +93,8 @@
    "sid": "4-12.s1",
    "f0": 231,
    "f1": 241,
-   "F0": 37061,
-   "F1": 37071
+   "F0": 36059,
+   "F1": 36069
   },
   {
    "wid": "4-12.w002",
@@ -103,8 +103,8 @@
    "sid": "4-12.s1",
    "f0": 245,
    "f1": 275,
-   "F0": 37075,
-   "F1": 37105
+   "F0": 36073,
+   "F1": 36103
   },
   {
    "wid": "4-12.w003",
@@ -113,8 +113,8 @@
    "sid": "4-12.s2",
    "f0": 301,
    "f1": 302,
-   "F0": 37131,
-   "F1": 37132
+   "F0": 36129,
+   "F1": 36130
   },
   {
    "wid": "4-12.w004",
@@ -123,8 +123,8 @@
    "sid": "4-12.s2",
    "f0": 311,
    "f1": 332,
-   "F0": 37141,
-   "F1": 37162
+   "F0": 36139,
+   "F1": 36160
   },
   {
    "wid": "4-12.w005",
@@ -133,8 +133,8 @@
    "sid": "4-12.s2",
    "f0": 336,
    "f1": 356,
-   "F0": 37166,
-   "F1": 37186
+   "F0": 36164,
+   "F1": 36184
   },
   {
    "wid": "4-12.w006",
@@ -143,8 +143,8 @@
    "sid": "4-12.s2",
    "f0": 380,
    "f1": 407,
-   "F0": 37210,
-   "F1": 37237
+   "F0": 36208,
+   "F1": 36235
   },
   {
    "wid": "4-12.w007",
@@ -153,8 +153,8 @@
    "sid": "4-12.s2",
    "f0": 414,
    "f1": 415,
-   "F0": 37244,
-   "F1": 37245
+   "F0": 36242,
+   "F1": 36243
   },
   {
    "wid": "4-12.w008",
@@ -163,8 +163,8 @@
    "sid": "4-12.s2",
    "f0": 421,
    "f1": 443,
-   "F0": 37251,
-   "F1": 37273
+   "F0": 36249,
+   "F1": 36271
   },
   {
    "wid": "4-12.w009",
@@ -173,8 +173,8 @@
    "sid": "4-12.s2",
    "f0": 467,
    "f1": 478,
-   "F0": 37297,
-   "F1": 37308
+   "F0": 36295,
+   "F1": 36306
   },
   {
    "wid": "4-12.w010",
@@ -183,8 +183,8 @@
    "sid": "4-12.s2",
    "f0": 481,
    "f1": 510,
-   "F0": 37311,
-   "F1": 37340
+   "F0": 36309,
+   "F1": 36338
   },
   {
    "wid": "4-12.w011",
@@ -193,8 +193,8 @@
    "sid": "4-12.s3",
    "f0": 546,
    "f1": 557,
-   "F0": 37376,
-   "F1": 37387
+   "F0": 36374,
+   "F1": 36385
   },
   {
    "wid": "4-12.w012",
@@ -203,8 +203,8 @@
    "sid": "4-12.s3",
    "f0": 563,
    "f1": 567,
-   "F0": 37393,
-   "F1": 37397
+   "F0": 36391,
+   "F1": 36395
   },
   {
    "wid": "4-12.w013",
@@ -213,8 +213,8 @@
    "sid": "4-12.s3",
    "f0": 567,
    "f1": 574,
-   "F0": 37397,
-   "F1": 37404
+   "F0": 36395,
+   "F1": 36402
   },
   {
    "wid": "4-12.w014",
@@ -223,8 +223,8 @@
    "sid": "4-12.s3",
    "f0": 578,
    "f1": 587,
-   "F0": 37408,
-   "F1": 37417
+   "F0": 36406,
+   "F1": 36415
   },
   {
    "wid": "4-12.w015",
@@ -233,8 +233,8 @@
    "sid": "4-12.s3",
    "f0": 591,
    "f1": 610,
-   "F0": 37421,
-   "F1": 37440
+   "F0": 36419,
+   "F1": 36438
   }
  ],
  "sentences": [
@@ -282,13 +282,13 @@
  "holds": [],
  "events": [
   {
-   "id": "frame",
-   "obj": "frame",
-   "verb": "grow",
-   "ease": "inout",
-   "means": "Wait：讲解卡外框画出",
-   "f_start": 16,
-   "f_land": 30,
+   "id": "land",
+   "obj": "podium",
+   "verb": "move",
+   "ease": "out",
+   "means": "Wait.：领奖台的骨白台面从盖满画面退到右区，三把插头立在台上，四把挂在后面",
+   "f_start": 2,
+   "f_land": 26,
    "f_end": 48,
    "until": "4-11.w001",
    "word": "4-11.w001",
@@ -296,311 +296,234 @@
    "key": "wait#1",
    "sid": "4-11.s1",
    "word_f0": 30,
-   "tool": "remotion",
-   "F_start": 36846,
-   "F_land": 36860,
-   "F_end": 36878
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 35830,
+   "F_land": 35854,
+   "F_end": 35876
   },
   {
-   "id": "table",
-   "obj": "table",
-   "verb": "grow",
+   "id": "chip_glint",
+   "obj": "chip",
+   "verb": "move",
    "ease": "inout",
-   "means": "computer：排名表三行画出，标签 computer",
-   "f_start": 109,
+   "means": "computer：台后的芯片扫光",
+   "f_start": 125,
    "f_land": 133,
-   "f_end": 159,
-   "until": "4-11.w004",
+   "f_end": 153,
+   "until": null,
    "word": "4-11.w004",
    "w": "computer",
    "key": "computer#1",
    "sid": "4-11.s2",
    "word_f0": 133,
-   "tool": "remotion",
-   "F_start": 36939,
-   "F_land": 36963,
-   "F_end": 36989
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 35953,
+   "F_land": 35961,
+   "F_end": 35981
   },
   {
-   "id": "tick1",
-   "obj": "tick1",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "picked：第一行打勾",
-   "f_start": 155,
-   "f_land": 163,
-   "f_end": 176,
-   "until": "4-11.w005",
-   "word": "4-11.w005",
-   "w": "picked",
-   "key": "picked#1",
-   "sid": "4-11.s2",
-   "word_f0": 163,
-   "tool": "remotion",
-   "F_start": 36985,
-   "F_land": 36993,
-   "F_end": 37006
-  },
-  {
-   "id": "tick2",
-   "obj": "tick2",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "the：第二行打勾",
-   "f_start": 171,
-   "f_land": 177,
-   "f_end": 182,
-   "until": "4-11.w006",
-   "word": "4-11.w006",
-   "w": "the",
-   "key": "the#2",
-   "sid": "4-11.s2",
-   "word_f0": 177,
-   "tool": "remotion",
-   "F_start": 37001,
-   "F_land": 37007,
-   "F_end": 37012
-  },
-  {
-   "id": "tick3",
-   "obj": "tick3",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "winners：第三行打勾",
-   "f_start": 184,
+   "id": "winners_hop",
+   "obj": "plugs_top",
+   "verb": "move",
+   "ease": "out",
+   "means": "winners?：台上三把依次跳一下，各差 4 帧",
+   "f_start": 186,
    "f_land": 192,
    "f_end": 222,
-   "until": "4-11.w007",
+   "until": "4-11.s2",
    "word": "4-11.w007",
    "w": "winners?",
    "key": "winners#1",
    "sid": "4-11.s2",
    "word_f0": 192,
-   "tool": "remotion",
-   "F_start": 37014,
-   "F_land": 37022,
-   "F_end": 37052
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 36014,
+   "F_land": 36020,
+   "F_end": 36050
   },
   {
-   "id": "q1",
-   "obj": "q1",
-   "verb": "morph",
+   "id": "shake_no",
+   "obj": "plugs_top",
+   "verb": "move",
    "ease": "inout",
-   "means": "Not：第一个勾变问号",
-   "f_start": 219,
+   "means": "Not quite.：台上三把左右摇两下（±12°）",
+   "f_start": 227,
    "f_land": 231,
-   "f_end": 241,
-   "until": "4-12.w001",
+   "f_end": 275,
+   "until": "4-12.w002",
    "word": "4-12.w001",
    "w": "Not",
    "key": "not#1",
    "sid": "4-12.s1",
    "word_f0": 231,
-   "tool": "remotion",
-   "F_start": 37049,
-   "F_land": 37061,
-   "F_end": 37071
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 36055,
+   "F_land": 36059,
+   "F_end": 36103
   },
   {
-   "id": "q2",
-   "obj": "q2",
-   "verb": "morph",
-   "ease": "inout",
-   "means": "quite：第二个勾变问号",
-   "f_start": 229,
-   "f_land": 245,
-   "f_end": 275,
-   "until": "4-12.w002",
-   "word": "4-12.w002",
-   "w": "quite.",
-   "key": "quite#1",
-   "sid": "4-12.s1",
-   "word_f0": 245,
-   "tool": "remotion",
-   "F_start": 37059,
-   "F_land": 37075,
-   "F_end": 37105
-  },
-  {
-   "id": "q3",
-   "obj": "q3",
-   "verb": "morph",
-   "ease": "inout",
-   "means": "quite：第三个勾变问号",
-   "f_start": 239,
-   "f_land": 245,
-   "f_end": 275,
-   "until": "4-12.w002",
-   "word": "4-12.w002",
-   "w": "quite.",
-   "key": "quite#1",
-   "sid": "4-12.s1",
-   "word_f0": 245,
-   "tool": "remotion",
-   "F_start": 37069,
-   "F_land": 37075,
-   "F_end": 37105
-  },
-  {
-   "id": "dock",
-   "obj": "dock",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "docking：标签 docking score 写出",
+   "id": "meter_in",
+   "obj": "dial",
+   "verb": "eject",
+   "ease": "out",
+   "means": "docking：打分表从右侧弹进来",
    "f_start": 303,
    "f_land": 311,
-   "f_end": 332,
-   "until": "4-12.w004",
+   "f_end": 325,
+   "until": null,
    "word": "4-12.w004",
    "w": "docking",
    "key": "docking#1",
    "sid": "4-12.s2",
    "word_f0": 311,
-   "tool": "remotion",
-   "F_start": 37133,
-   "F_land": 37141,
-   "F_end": 37162
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 36131,
+   "F_land": 36139,
+   "F_end": 36153
   },
   {
-   "id": "score",
-   "obj": "score",
-   "verb": "morph",
-   "ease": "inout",
-   "means": "score：三根分数条轻跳",
-   "f_start": 328,
+   "id": "needle_hi",
+   "obj": "needle",
+   "verb": "move",
+   "ease": "out",
+   "means": "score：表针摆到高分",
+   "f_start": 326,
    "f_land": 336,
-   "f_end": 356,
-   "until": "4-12.w005",
+   "f_end": 346,
+   "until": null,
    "word": "4-12.w005",
    "w": "score",
    "key": "score#1",
    "sid": "4-12.s2",
    "word_f0": 336,
-   "tool": "remotion",
-   "F_start": 37158,
-   "F_land": 37166,
-   "F_end": 37186
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 36154,
+   "F_land": 36164,
+   "F_end": 36174
   },
   {
-   "id": "clue",
-   "obj": "clue",
-   "verb": "appear",
+   "id": "needle_wob",
+   "obj": "needle",
+   "verb": "move",
    "ease": "inout",
-   "means": "clue：字牌 a clue,",
-   "f_start": 409,
+   "means": "clue,：表针来回晃（±15°），停不准",
+   "f_start": 415,
    "f_land": 421,
-   "f_end": 443,
-   "until": "4-12.w008",
+   "f_end": 481,
+   "until": "4-12.w010",
    "word": "4-12.w008",
    "w": "clue,",
    "key": "clue#1",
    "sid": "4-12.s2",
    "word_f0": 421,
-   "tool": "remotion",
-   "F_start": 37239,
-   "F_land": 37251,
-   "F_end": 37273
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 36243,
+   "F_land": 36249,
+   "F_end": 36309
   },
   {
-   "id": "proof",
-   "obj": "proof",
-   "verb": "appear",
+   "id": "step_down",
+   "obj": "plugs_top",
+   "verb": "move",
    "ease": "inout",
-   "means": "not proof：字牌 not proof 红线",
-   "f_start": 459,
-   "f_land": 467,
+   "means": "proof.：三把插头从台上下来，和后面四把在料杆上排成一行；表针落回中间还在抖",
+   "f_start": 461,
+   "f_land": 481,
    "f_end": 510,
-   "until": "4-12.w010",
-   "word": "4-12.w009",
-   "w": "not",
-   "key": "not#2",
+   "until": "4-12.s2",
+   "word": "4-12.w010",
+   "w": "proof.",
+   "key": "proof#1",
    "sid": "4-12.s2",
-   "word_f0": 467,
-   "tool": "remotion",
-   "F_start": 37289,
-   "F_land": 37297,
-   "F_end": 37340
+   "word_f0": 481,
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 36289,
+   "F_land": 36309,
+   "F_end": 36338
   },
   {
-   "id": "flask",
+   "id": "flask_up",
    "obj": "flask",
-   "verb": "grow",
-   "ease": "inout",
-   "means": "lab：烧瓶长出",
-   "f_start": 549,
+   "verb": "eject",
+   "ease": "out",
+   "means": "lab：烧瓶从右下升起，冒泡",
+   "f_start": 557,
    "f_land": 567,
-   "f_end": 574,
-   "until": "4-12.w013",
+   "f_end": 581,
+   "until": null,
    "word": "4-12.w013",
    "w": "lab",
    "key": "lab#1",
    "sid": "4-12.s3",
    "word_f0": 567,
-   "tool": "remotion",
-   "F_start": 37379,
-   "F_land": 37397,
-   "F_end": 37404
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 36385,
+   "F_land": 36395,
+   "F_end": 36409
   },
   {
-   "id": "l1",
-   "obj": "l1",
+   "id": "lean",
+   "obj": "plugs",
    "verb": "move",
    "ease": "inout",
-   "means": "can：第一行连线到烧瓶",
-   "f_start": 566,
-   "f_land": 578,
-   "f_end": 587,
-   "until": "4-12.w014",
-   "word": "4-12.w014",
-   "w": "can",
-   "key": "can#1",
-   "sid": "4-12.s3",
-   "word_f0": 578,
-   "tool": "remotion",
-   "F_start": 37396,
-   "F_land": 37408,
-   "F_end": 37417
-  },
-  {
-   "id": "l2",
-   "obj": "l2",
-   "verb": "move",
-   "ease": "inout",
-   "means": "can：第二行连线到烧瓶",
-   "f_start": 574,
-   "f_land": 578,
-   "f_end": 587,
-   "until": "4-12.w014",
-   "word": "4-12.w014",
-   "w": "can",
-   "key": "can#1",
-   "sid": "4-12.s3",
-   "word_f0": 578,
-   "tool": "remotion",
-   "F_start": 37404,
-   "F_land": 37408,
-   "F_end": 37417
-  },
-  {
-   "id": "l3",
-   "obj": "l3",
-   "verb": "move",
-   "ease": "inout",
-   "means": "tell：第三行连线到烧瓶",
+   "means": "tell.：七把插头一起朝烧瓶歪过去 20°",
    "f_start": 581,
    "f_land": 591,
    "f_end": 610,
-   "until": "4-12.w015",
+   "until": "4-12.s3",
    "word": "4-12.w015",
    "w": "tell.",
    "key": "tell#1",
    "sid": "4-12.s3",
    "word_f0": 591,
-   "tool": "remotion",
-   "F_start": 37411,
-   "F_land": 37421,
-   "F_end": 37440
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 36409,
+   "F_land": 36419,
+   "F_end": 36438
+  },
+  {
+   "id": "dive",
+   "obj": "plug_front",
+   "verb": "move",
+   "ease": "in",
+   "means": "段尾：最前一把插头的金色柄面冲镜头",
+   "f_start": 615,
+   "f_land": 639,
+   "f_end": 639,
+   "until": null,
+   "word": "4-12.w015",
+   "w": "tell.",
+   "key": "tell#1",
+   "sid": "4-12.s3",
+   "word_f0": 591,
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 36443,
+   "F_land": 36467,
+   "F_end": 36467
   }
  ],
+ "guides": [],
  "problems": []
 }

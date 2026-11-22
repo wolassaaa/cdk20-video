@@ -1,173 +1,170 @@
 {
  "schema": "cdk20.events/1",
  "group": "6-04+6-05",
- "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：出镜 6-04+6-05（D）讲解卡：满卡小点；screened 红线扫过变灰；Here? 红问号；Thirteen 点收缩成 13 个；made 13 个点变红；写出 13，That's honestly wild 数字 13 和点一起跳；页面 OnCam604.jsx。",
+ "tool": "blender",
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜 6-04+6-05（D、B）三维版（11-23 甲线，18 文档 2.4）：微孔板叠成塔（筛过的几百万个化合物），退后变虚；小托盘弹出来，13 把假插头落进座里、刻字 13 亮起。Blender：inserts/shot_oncam.py recipe tray13。旧二维版事件表存 _wip/6-04_6-05_events_v1_2d.json。",
  "holds": [],
  "events": [
   {
-   "id": "frame",
-   "obj": "frame",
-   "verb": "grow",
+   "id": "land",
+   "obj": "plate",
+   "verb": "move",
    "at": {
     "word": "6-04.w001",
-    "off": 0
+    "off": -6
    },
-   "means": "Millions：讲解卡外框画出",
-   "tool": "remotion",
-   "lead": 22,
+   "lead": 24,
+   "ease": "out",
+   "means": "Millions：一块微孔板的骨白底面从盖满画面退到右区，平放在一小段料杆托上",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
     "word": "6-04.w001"
    }
   },
   {
-   "id": "dots",
-   "obj": "dots",
-   "verb": "grow",
-   "at": {
-    "word": "6-04.w003",
-    "off": 0
-   },
-   "means": "compounds：满卡小点从左上漫开",
-   "tool": "remotion",
-   "lead": 44,
-   "until": {
-    "word": "6-04.w004"
-   }
-  },
-  {
-   "id": "scan",
-   "obj": "scan",
+   "id": "stack",
+   "obj": "plates",
    "verb": "move",
    "at": {
-    "word": "6-04.w004",
+    "word": "6-04.w001",
     "off": 0
    },
-   "means": "screened：红线扫过，点变灰",
-   "tool": "remotion",
-   "lead": 36,
+   "lead": 0,
+   "ease": "in",
+   "means": "Millions … before.：微孔板一块接一块从上面落下叠上去，每 8 帧一块，塔越叠越高、轻轻晃，最上面三块出画",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
-    "word": "6-04.w004"
+    "sentence_end": true
    }
   },
   {
-   "id": "before",
-   "obj": "before",
-   "verb": "morph",
-   "at": {
-    "word": "6-04.w005",
-    "off": 0
-   },
-   "means": "before：全部点变浅灰",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "6-04.w005"
-   }
-  },
-  {
-   "id": "here",
-   "obj": "here",
-   "verb": "appear",
+   "id": "tower_back",
+   "obj": "plates",
+   "verb": "move",
    "at": {
     "word": "6-04.w006",
     "off": 0
    },
-   "means": "Here：红问号",
-   "tool": "remotion",
-   "lead": 8,
+   "lead": 20,
+   "ease": "inout",
+   "means": "Here?：塔往后往左退，变虚",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
-    "word": "6-04.w006"
+    "dur": 20
    }
   },
   {
-   "id": "thirteen",
-   "obj": "thirteen",
-   "verb": "morph",
+   "id": "tray_pop",
+   "obj": "tray",
+   "verb": "eject",
+   "at": {
+    "word": "6-04.w006",
+    "off": 6
+   },
+   "lead": 6,
+   "ease": "out",
+   "means": "Here?：小托盘弹到前面",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "dur": 14
+   }
+  },
+  {
+   "id": "drop13",
+   "obj": "plugs13",
+   "verb": "move",
    "at": {
     "word": "6-04.w007",
     "off": 0
    },
-   "means": "Thirteen：点收缩，只剩 13 个聚成一团",
-   "tool": "remotion",
    "lead": 40,
-   "until": {
-    "word": "6-04.w007"
-   }
-  },
-  {
-   "id": "made",
-   "obj": "made",
-   "verb": "morph",
-   "at": {
-    "word": "6-04.w008",
-    "off": 0
+   "ease": "in",
+   "means": "Thirteen：13 把假插头逐把落进托盘的座里，每 4 帧一把",
+   "guide": {
+    "kind": "none"
    },
-   "means": "made：13 个点变红轻跳",
-   "tool": "remotion",
-   "lead": 10,
    "until": {
     "word": "6-04.w008"
    }
   },
   {
-   "id": "num",
-   "obj": "num",
+   "id": "count13",
+   "obj": "tray_13",
    "verb": "appear",
    "at": {
-    "word": "6-05.w001",
+    "word": "6-04.w008",
     "off": 0
    },
-   "means": "Thirteen：写出数字 13",
-   "tool": "remotion",
-   "lead": 12,
+   "lead": 4,
+   "ease": "out",
+   "means": "made.：托盘前沿的刻字 13 扫光亮起",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
-    "word": "6-05.w001"
+    "dur": 40
    }
   },
   {
    "id": "wave",
-   "obj": "wave",
-   "verb": "morph",
+   "obj": "plugs13",
+   "verb": "move",
    "at": {
-    "word": "6-05.w002",
+    "word": "6-05.w001",
     "off": 0
    },
-   "means": "That's：13 个点起一阵波",
-   "tool": "remotion",
-   "lead": 8,
+   "lead": 4,
+   "ease": "out",
+   "means": "Thirteen.：13 把依次跳一下，各差 2 帧",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
-    "word": "6-05.w002"
+    "dur": 30
    }
   },
   {
-   "id": "under",
-   "obj": "under",
-   "verb": "grow",
-   "at": {
-    "word": "6-05.w003",
-    "off": 0
-   },
-   "means": "honestly：13 下面画红线",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "6-05.w003"
-   }
-  },
-  {
-   "id": "wild",
-   "obj": "wild",
-   "verb": "morph",
+   "id": "tilt",
+   "obj": "tray",
+   "verb": "move",
    "at": {
     "word": "6-05.w004",
     "off": 0
    },
-   "means": "wild：13 和点一起跳一下",
-   "tool": "remotion",
-   "lead": 10,
+   "lead": 16,
+   "ease": "inout",
+   "means": "wild.：托盘朝镜头倾 12°，一道扫光掠过 13 把",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
-    "word": "6-05.w004"
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "dive",
+   "obj": "tray",
+   "verb": "move",
+   "at": {
+    "word": "6-05.w004",
+    "off": 74
+   },
+   "lead": 42,
+   "ease": "in",
+   "means": "段尾：托盘的骨白盘面冲镜头",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "dur": 0
    }
   }
  ]

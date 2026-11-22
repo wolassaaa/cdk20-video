@@ -1,0 +1,159 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "6-12",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜 6-12（B）讲解卡：小牌子 048 出现，very start 移到路的起点，road 一条长路画出；this case 红圈圈住起点，that start 红括号括住起点那一小段，weeks 标 weeks；years 标在远处并划掉；页面 OnCam612.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "frame",
+   "obj": "frame",
+   "verb": "grow",
+   "at": {
+    "word": "6-12.w001",
+    "off": 0
+   },
+   "means": "048：讲解卡外框画出",
+   "tool": "remotion",
+   "lead": 22,
+   "until": {
+    "word": "6-12.w001"
+   }
+  },
+  {
+   "id": "plate",
+   "obj": "plate",
+   "verb": "appear",
+   "at": {
+    "word": "6-12.w001",
+    "off": 0
+   },
+   "means": "048：小牌子 048 立起",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "6-12.w001"
+   }
+  },
+  {
+   "id": "mark",
+   "obj": "mark",
+   "verb": "appear",
+   "at": {
+    "word": "6-12.w005",
+    "off": 0
+   },
+   "means": "very：起点圆点",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-12.w005"
+   }
+  },
+  {
+   "id": "move",
+   "obj": "move",
+   "verb": "move",
+   "at": {
+    "word": "6-12.w006",
+    "off": 0
+   },
+   "means": "start：牌子移到起点",
+   "tool": "remotion",
+   "lead": 22,
+   "until": {
+    "word": "6-12.w006"
+   }
+  },
+  {
+   "id": "road",
+   "obj": "road",
+   "verb": "grow",
+   "at": {
+    "word": "6-12.w009",
+    "off": 0
+   },
+   "means": "road：一条长路从起点画出",
+   "tool": "remotion",
+   "lead": 40,
+   "until": {
+    "word": "6-12.w009"
+   }
+  },
+  {
+   "id": "ring",
+   "obj": "ring",
+   "verb": "grow",
+   "at": {
+    "word": "6-12.w013",
+    "off": 0
+   },
+   "means": "case：红圈圈住起点和牌子",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "6-12.w013"
+   }
+  },
+  {
+   "id": "brace",
+   "obj": "brace",
+   "verb": "grow",
+   "at": {
+    "word": "6-12.w015",
+    "off": 0
+   },
+   "means": "start：红括号括住起点那一小段",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "6-12.w015"
+   }
+  },
+  {
+   "id": "weeks",
+   "obj": "weeks",
+   "verb": "appear",
+   "at": {
+    "word": "6-12.w017",
+    "off": 0
+   },
+   "means": "weeks：括号上写 weeks",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "6-12.w017"
+   }
+  },
+  {
+   "id": "years",
+   "obj": "years",
+   "verb": "appear",
+   "at": {
+    "word": "6-12.w019",
+    "off": 0
+   },
+   "means": "years：远处标 years",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "6-12.w019"
+   }
+  },
+  {
+   "id": "strike",
+   "obj": "strike",
+   "verb": "grow",
+   "at": {
+    "word": "6-12.w019",
+    "off": 0
+   },
+   "means": "years：红线划掉 years",
+   "tool": "remotion",
+   "lead": 0,
+   "until": {
+    "word": "6-12.w019"
+   }
+  }
+ ]
+}

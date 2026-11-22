@@ -5,13 +5,13 @@
  "segs": [
   "3-02"
  ],
- "tool": "remotion",
+ "tool": "blender",
  "fps": 60,
  "len_f": 776,
  "cut": "cut_v8",
- "cut_start_f": 17190,
- "cut_start_s": 286.5,
- "master_built": "2026-11-18 02:33:56 +09:00",
+ "cut_start_f": 16814,
+ "cut_start_s": 280.2333,
+ "master_built": "2026-11-22 20:33:03 +09:00",
  "words_hash": "ad0fcefb44d6",
  "events_src": "镜头设计_v3/映射/events/3-02.json",
  "words": [
@@ -22,8 +22,8 @@
    "sid": "3-02.s1",
    "f0": 9,
    "f1": 37,
-   "F0": 17199,
-   "F1": 17227
+   "F0": 16823,
+   "F1": 16851
   },
   {
    "wid": "3-02.w002",
@@ -32,8 +32,8 @@
    "sid": "3-02.s1",
    "f0": 38,
    "f1": 45,
-   "F0": 17228,
-   "F1": 17235
+   "F0": 16852,
+   "F1": 16859
   },
   {
    "wid": "3-02.w003",
@@ -42,8 +42,8 @@
    "sid": "3-02.s1",
    "f0": 51,
    "f1": 75,
-   "F0": 17241,
-   "F1": 17265
+   "F0": 16865,
+   "F1": 16889
   },
   {
    "wid": "3-02.w004",
@@ -52,8 +52,8 @@
    "sid": "3-02.s1",
    "f0": 106,
    "f1": 141,
-   "F0": 17296,
-   "F1": 17331
+   "F0": 16920,
+   "F1": 16955
   },
   {
    "wid": "3-02.w005",
@@ -62,8 +62,8 @@
    "sid": "3-02.s1",
    "f0": 147,
    "f1": 152,
-   "F0": 17337,
-   "F1": 17342
+   "F0": 16961,
+   "F1": 16966
   },
   {
    "wid": "3-02.w006",
@@ -72,8 +72,8 @@
    "sid": "3-02.s1",
    "f0": 159,
    "f1": 160,
-   "F0": 17349,
-   "F1": 17350
+   "F0": 16973,
+   "F1": 16974
   },
   {
    "wid": "3-02.w007",
@@ -82,8 +82,8 @@
    "sid": "3-02.s1",
    "f0": 168,
    "f1": 181,
-   "F0": 17358,
-   "F1": 17371
+   "F0": 16982,
+   "F1": 16995
   },
   {
    "wid": "3-02.w008",
@@ -92,8 +92,8 @@
    "sid": "3-02.s1",
    "f0": 186,
    "f1": 193,
-   "F0": 17376,
-   "F1": 17383
+   "F0": 17000,
+   "F1": 17007
   },
   {
    "wid": "3-02.w009",
@@ -102,8 +102,8 @@
    "sid": "3-02.s1",
    "f0": 198,
    "f1": 204,
-   "F0": 17388,
-   "F1": 17394
+   "F0": 17012,
+   "F1": 17018
   },
   {
    "wid": "3-02.w010",
@@ -112,8 +112,8 @@
    "sid": "3-02.s1",
    "f0": 210,
    "f1": 230,
-   "F0": 17400,
-   "F1": 17420
+   "F0": 17024,
+   "F1": 17044
   },
   {
    "wid": "3-02.w011",
@@ -122,8 +122,8 @@
    "sid": "3-02.s2",
    "f0": 270,
    "f1": 284,
-   "F0": 17460,
-   "F1": 17474
+   "F0": 17084,
+   "F1": 17098
   },
   {
    "wid": "3-02.w012",
@@ -132,8 +132,8 @@
    "sid": "3-02.s2",
    "f0": 288,
    "f1": 307,
-   "F0": 17478,
-   "F1": 17497
+   "F0": 17102,
+   "F1": 17121
   },
   {
    "wid": "3-02.w013",
@@ -142,8 +142,8 @@
    "sid": "3-02.s2",
    "f0": 311,
    "f1": 331,
-   "F0": 17501,
-   "F1": 17521
+   "F0": 17125,
+   "F1": 17145
   },
   {
    "wid": "3-02.w014",
@@ -152,8 +152,8 @@
    "sid": "3-02.s2",
    "f0": 343,
    "f1": 353,
-   "F0": 17533,
-   "F1": 17543
+   "F0": 17157,
+   "F1": 17167
   },
   {
    "wid": "3-02.w015",
@@ -162,8 +162,8 @@
    "sid": "3-02.s2",
    "f0": 355,
    "f1": 383,
-   "F0": 17545,
-   "F1": 17573
+   "F0": 17169,
+   "F1": 17197
   },
   {
    "wid": "3-02.w016",
@@ -172,8 +172,8 @@
    "sid": "3-02.s2",
    "f0": 389,
    "f1": 416,
-   "F0": 17579,
-   "F1": 17606
+   "F0": 17203,
+   "F1": 17230
   },
   {
    "wid": "3-02.w017",
@@ -182,8 +182,8 @@
    "sid": "3-02.s2",
    "f0": 430,
    "f1": 439,
-   "F0": 17620,
-   "F1": 17629
+   "F0": 17244,
+   "F1": 17253
   },
   {
    "wid": "3-02.w018",
@@ -192,8 +192,8 @@
    "sid": "3-02.s2",
    "f0": 444,
    "f1": 468,
-   "F0": 17634,
-   "F1": 17658
+   "F0": 17258,
+   "F1": 17282
   },
   {
    "wid": "3-02.w019",
@@ -202,8 +202,8 @@
    "sid": "3-02.s2",
    "f0": 473,
    "f1": 485,
-   "F0": 17663,
-   "F1": 17675
+   "F0": 17287,
+   "F1": 17299
   },
   {
    "wid": "3-02.w020",
@@ -212,8 +212,8 @@
    "sid": "3-02.s2",
    "f0": 487,
    "f1": 493,
-   "F0": 17677,
-   "F1": 17683
+   "F0": 17301,
+   "F1": 17307
   },
   {
    "wid": "3-02.w021",
@@ -222,8 +222,8 @@
    "sid": "3-02.s2",
    "f0": 496,
    "f1": 516,
-   "F0": 17686,
-   "F1": 17706
+   "F0": 17310,
+   "F1": 17330
   },
   {
    "wid": "3-02.w022",
@@ -232,8 +232,8 @@
    "sid": "3-02.s2",
    "f0": 565,
    "f1": 597,
-   "F0": 17755,
-   "F1": 17787
+   "F0": 17379,
+   "F1": 17411
   },
   {
    "wid": "3-02.w023",
@@ -242,8 +242,8 @@
    "sid": "3-02.s2",
    "f0": 598,
    "f1": 610,
-   "F0": 17788,
-   "F1": 17800
+   "F0": 17412,
+   "F1": 17424
   },
   {
    "wid": "3-02.w024",
@@ -252,8 +252,8 @@
    "sid": "3-02.s2",
    "f0": 621,
    "f1": 622,
-   "F0": 17811,
-   "F1": 17812
+   "F0": 17435,
+   "F1": 17436
   },
   {
    "wid": "3-02.w025",
@@ -262,8 +262,8 @@
    "sid": "3-02.s2",
    "f0": 635,
    "f1": 658,
-   "F0": 17825,
-   "F1": 17848
+   "F0": 17449,
+   "F1": 17472
   },
   {
    "wid": "3-02.w026",
@@ -272,8 +272,8 @@
    "sid": "3-02.s2",
    "f0": 663,
    "f1": 681,
-   "F0": 17853,
-   "F1": 17871
+   "F0": 17477,
+   "F1": 17495
   },
   {
    "wid": "3-02.w027",
@@ -282,8 +282,8 @@
    "sid": "3-02.s2",
    "f0": 683,
    "f1": 684,
-   "F0": 17873,
-   "F1": 17874
+   "F0": 17497,
+   "F1": 17498
   },
   {
    "wid": "3-02.w028",
@@ -292,8 +292,8 @@
    "sid": "3-02.s2",
    "f0": 696,
    "f1": 711,
-   "F0": 17886,
-   "F1": 17901
+   "F0": 17510,
+   "F1": 17525
   },
   {
    "wid": "3-02.w029",
@@ -302,8 +302,8 @@
    "sid": "3-02.s2",
    "f0": 717,
    "f1": 730,
-   "F0": 17907,
-   "F1": 17920
+   "F0": 17531,
+   "F1": 17544
   },
   {
    "wid": "3-02.w030",
@@ -312,8 +312,8 @@
    "sid": "3-02.s2",
    "f0": 735,
    "f1": 736,
-   "F0": 17925,
-   "F1": 17926
+   "F0": 17549,
+   "F1": 17550
   },
   {
    "wid": "3-02.w031",
@@ -322,8 +322,8 @@
    "sid": "3-02.s2",
    "f0": 743,
    "f1": 761,
-   "F0": 17933,
-   "F1": 17951
+   "F0": 17557,
+   "F1": 17575
   }
  ],
  "sentences": [
@@ -347,347 +347,298 @@
  "holds": [],
  "events": [
   {
-   "id": "title",
-   "obj": "title",
-   "verb": "appear",
+   "id": "cam_out",
+   "obj": "camera",
+   "verb": "camera_to",
    "ease": "inout",
-   "means": "Inside：标题 Inside your cells",
-   "f_start": 1,
-   "f_land": 9,
-   "f_end": 230,
-   "until": "3-02.s1",
+   "means": "段首：镜头从金色锁芯的虚影里退出来，销子锁挂在料杆上，镜头沿料杆横移到细胞壳（K0 → K1）",
+   "f_start": 0,
+   "f_land": 45,
+   "f_end": 45,
+   "until": null,
    "word": "3-02.w001",
    "w": "Inside",
    "key": "inside#1",
    "sid": "3-02.s1",
    "word_f0": 9,
-   "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 17191,
-   "F_land": 17199,
-   "F_end": 17420
+   "F_start": 16814,
+   "F_land": 16859,
+   "F_end": 16859
   },
   {
-   "id": "cell",
-   "obj": "cell",
-   "verb": "grow",
+   "id": "shell_open",
+   "obj": "shell_open",
+   "verb": "move",
    "ease": "inout",
-   "means": "cells：细胞圆角大框（双线膜）画出",
-   "f_start": 31,
+   "means": "细胞壳上盖绕后沿铰链翻开到 110°，过冲 4° 回落",
+   "f_start": 21,
    "f_land": 51,
-   "f_end": 230,
-   "until": "3-02.s1",
+   "f_end": 65,
+   "until": null,
    "word": "3-02.w003",
    "w": "cells,",
    "key": "cells#1",
    "sid": "3-02.s1",
    "word_f0": 51,
-   "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 17221,
-   "F_land": 17241,
-   "F_end": 17420
+   "F_start": 16835,
+   "F_land": 16865,
+   "F_end": 16879
   },
   {
-   "id": "prot",
-   "obj": "prot",
-   "verb": "grow",
+   "id": "cam_in",
+   "obj": "camera",
+   "verb": "camera_to",
    "ease": "inout",
-   "means": "proteins：三个蛋白长出，标签 proteins",
-   "f_start": 90,
+   "means": "镜头压进壳里（K2）",
+   "f_start": 37,
+   "f_land": 57,
+   "f_end": 106,
+   "until": "3-02.w004",
+   "word": "3-02.w003",
+   "w": "cells,",
+   "key": "cells#1",
+   "sid": "3-02.s1",
+   "word_f0": 51,
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 16851,
+   "F_land": 16871,
+   "F_end": 16920
+  },
+  {
+   "id": "lamps",
+   "obj": "lamps",
+   "verb": "power_on",
+   "ease": "inout",
+   "means": "三台小插座的灯从左到右依次亮，各差 4 帧；焦点点名中间那台",
+   "f_start": 98,
    "f_land": 106,
-   "f_end": 230,
-   "until": "3-02.s1",
+   "f_end": 122,
+   "until": null,
    "word": "3-02.w004",
    "w": "proteins",
    "key": "proteins#1",
    "sid": "3-02.s1",
    "word_f0": 106,
-   "tool": "remotion",
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "cdk20"
-    ]
-   },
-   "F_start": 17280,
-   "F_land": 17296,
-   "F_end": 17420,
-   "g_start": 80,
-   "g_on": 98,
-   "g_end": 226,
-   "g_off": 256,
-   "g_tick": 102,
-   "G_start": 17270,
-   "G_on": 17288,
-   "G_end": 17416,
-   "G_off": 17446,
-   "G_tick": 17292
-  },
-  {
-   "id": "lot",
-   "obj": "lot",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "lot：每个蛋白上长出一个小齿轮，开始慢转",
-   "f_start": 158,
-   "f_land": 168,
-   "f_end": 230,
-   "until": "3-02.s1",
-   "word": "3-02.w007",
-   "w": "lot",
-   "key": "lot#1",
-   "sid": "3-02.s1",
-   "word_f0": 168,
-   "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 17348,
-   "F_land": 17358,
-   "F_end": 17420
+   "F_start": 16912,
+   "F_land": 16920,
+   "F_end": 16936
   },
   {
-   "id": "work",
-   "obj": "work",
-   "verb": "morph",
+   "id": "run",
+   "obj": "run",
+   "verb": "move",
    "ease": "inout",
-   "means": "work：三个齿轮加速",
-   "f_start": 200,
+   "means": "三台同时开工：齿轮转、活塞推细胞鼓、推杆走",
+   "f_start": 198,
    "f_land": 210,
-   "f_end": 230,
-   "until": "3-02.s1",
+   "f_end": 761,
+   "until": "3-02.s2",
    "word": "3-02.w010",
    "w": "work.",
    "key": "work#1",
    "sid": "3-02.s1",
    "word_f0": 210,
-   "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 17390,
-   "F_land": 17400,
-   "F_end": 17420
+   "F_start": 17012,
+   "F_land": 17024,
+   "F_end": 17575
   },
   {
-   "id": "drug",
-   "obj": "drug",
+   "id": "plug_enter",
+   "obj": "plug_enter",
    "verb": "move",
    "ease": "inout",
-   "means": "drugs：钥匙从右边飞进来，挂字牌 drugs",
+   "means": "金色假插头从壳的正前方飞进来（上盖开着），转正后停在中间那台的孔轴上，针尖离孔口 20 mm",
    "f_start": 258,
    "f_land": 288,
-   "f_end": 761,
-   "until": "3-02.s2",
+   "f_end": 298,
+   "until": null,
    "word": "3-02.w012",
    "w": "drugs",
    "key": "drugs#1",
    "sid": "3-02.s2",
    "word_f0": 288,
-   "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 17448,
-   "F_land": 17478,
-   "F_end": 17951
+   "F_start": 17072,
+   "F_land": 17102,
+   "F_end": 17112
   },
   {
-   "id": "grab",
-   "obj": "grab",
-   "verb": "move",
+   "id": "swap",
+   "obj": "swap",
+   "verb": "eject_swap",
    "ease": "inout",
-   "means": "grab：钥匙竖起来俯冲进细胞，贴住中间的蛋白，字牌淡出",
-   "f_start": 291,
-   "f_land": 311,
-   "f_end": 761,
-   "until": "3-02.s2",
+   "means": "中间那台的 ATP 真插头先沿孔轴退出 9 mm，再向上偏出轴线给假插头让路，然后落到壳底托盘上（两把插头的轴线错开，逐帧不相交）",
+   "f_start": 287,
+   "f_land": 301,
+   "f_end": 331,
+   "until": null,
    "word": "3-02.w013",
    "w": "grab",
    "key": "grab#1",
    "sid": "3-02.s2",
    "word_f0": 311,
-   "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 17481,
-   "F_land": 17501,
-   "F_end": 17951
+   "F_start": 17101,
+   "F_land": 17115,
+   "F_end": 17145
   },
   {
-   "id": "tight",
-   "obj": "tight",
-   "verb": "morph",
+   "id": "plug_in",
+   "obj": "plug_in",
+   "verb": "plug_in",
    "ease": "inout",
-   "means": "tightly：蛋白一侧收紧夹住钥匙",
-   "f_start": 379,
+   "means": "假插头沿孔轴插进中间那台的红环插孔",
+   "f_start": 287,
+   "f_land": 311,
+   "f_end": 319,
+   "until": null,
+   "word": "3-02.w013",
+   "w": "grab",
+   "key": "grab#1",
+   "sid": "3-02.s2",
+   "word_f0": 311,
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 17101,
+   "F_land": 17125,
+   "F_end": 17133
+  },
+  {
+   "id": "clack",
+   "obj": "clack",
+   "verb": "move",
+   "ease": "inout",
+   "means": "\"咔\"：中间那台整台震一下（±0.3 mm，两次衰减），镜头微震 2 帧",
+   "f_start": 385,
    "f_land": 389,
-   "f_end": 761,
-   "until": "3-02.s2",
+   "f_end": 403,
+   "until": null,
    "word": "3-02.w016",
    "w": "tightly",
    "key": "tightly#1",
    "sid": "3-02.s2",
    "word_f0": 389,
-   "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 17569,
-   "F_land": 17579,
-   "F_end": 17951
+   "F_start": 17199,
+   "F_land": 17203,
+   "F_end": 17217
   },
   {
-   "id": "change",
-   "obj": "change",
-   "verb": "morph",
+   "id": "off",
+   "obj": "off",
+   "verb": "power_off",
    "ease": "inout",
-   "means": "change：这个蛋白变灰微歪，齿轮停转变灰",
-   "f_start": 432,
+   "means": "中间那台灯灭、活塞停在半程、小细胞不再鼓；左右两台照常",
+   "f_start": 438,
    "f_land": 444,
-   "f_end": 761,
-   "until": "3-02.s2",
+   "f_end": 516,
+   "until": "3-02.w021",
    "word": "3-02.w018",
    "w": "change",
    "key": "change#1",
    "sid": "3-02.s2",
    "word_f0": 444,
-   "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 17622,
-   "F_land": 17634,
-   "F_end": 17951
+   "F_start": 17252,
+   "F_land": 17258,
+   "F_end": 17330
   },
   {
-   "id": "does",
-   "obj": "does",
-   "verb": "appear",
+   "id": "cam_pocket",
+   "obj": "camera",
+   "verb": "camera_to",
    "ease": "inout",
-   "means": "does：停住的齿轮打红叉，写 change what it does",
-   "f_start": 488,
-   "f_land": 496,
-   "f_end": 761,
-   "until": "3-02.s2",
-   "word": "3-02.w021",
-   "w": "does,",
-   "key": "does#1",
-   "sid": "3-02.s2",
-   "word_f0": 496,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 17678,
-   "F_land": 17686,
-   "F_end": 17951
-  },
-  {
-   "id": "slot",
-   "obj": "slot",
-   "verb": "move",
-   "ease": "inout",
-   "means": "slotting：钥匙再压下去到底，带回弹",
-   "f_start": 553,
-   "f_land": 565,
-   "f_end": 761,
-   "until": "3-02.s2",
-   "word": "3-02.w022",
-   "w": "slotting",
-   "key": "slotting#1",
-   "sid": "3-02.s2",
-   "word_f0": 565,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 17743,
-   "F_land": 17755,
-   "F_end": 17951
-  },
-  {
-   "id": "pocket",
-   "obj": "pocket",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "pocket：口袋红圈，标签 pocket",
-   "f_start": 623,
+   "means": "镜头推向中间那台的插孔面（K2 → K3）",
+   "f_start": 585,
    "f_land": 635,
-   "f_end": 761,
-   "until": "3-02.s2",
+   "f_end": 743,
+   "until": "3-02.w031",
    "word": "3-02.w025",
    "w": "pocket",
    "key": "pocket#1",
    "sid": "3-02.s2",
    "word_f0": 635,
-   "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 17813,
-   "F_land": 17825,
-   "F_end": 17951
+   "F_start": 17399,
+   "F_land": 17449,
+   "F_end": 17557
   },
   {
-   "id": "like",
-   "obj": "like",
-   "verb": "move",
-   "ease": "inout",
-   "means": "like：这个蛋白连钥匙复制一份，沿虚线滑到右边放大，钥匙转成横的",
-   "f_start": 637,
-   "f_land": 663,
-   "f_end": 761,
-   "until": "3-02.s2",
-   "word": "3-02.w026",
-   "w": "like",
-   "key": "like#1",
-   "sid": "3-02.s2",
-   "word_f0": 663,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 17827,
-   "F_land": 17853,
-   "F_end": 17951
-  },
-  {
-   "id": "key",
-   "obj": "key",
+   "id": "ring",
+   "obj": "ring",
    "verb": "appear",
    "ease": "inout",
-   "means": "key：写 key = drug",
+   "means": "红环亮",
+   "f_start": 633,
+   "f_land": 635,
+   "f_end": 665,
+   "until": null,
+   "word": "3-02.w025",
+   "w": "pocket",
+   "key": "pocket#1",
+   "sid": "3-02.s2",
+   "word_f0": 635,
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 17447,
+   "F_land": 17449,
+   "F_end": 17479
+  },
+  {
+   "id": "key_rim",
+   "obj": "key_rim",
+   "verb": "move",
+   "ease": "inout",
+   "means": "焦点和轮廓光落到假插头的柄上（就是钥匙柄的样子）",
    "f_start": 688,
    "f_land": 696,
-   "f_end": 761,
-   "until": "3-02.s2",
+   "f_end": 716,
+   "until": null,
    "word": "3-02.w028",
    "w": "key",
    "key": "key#1",
    "sid": "3-02.s2",
    "word_f0": 696,
-   "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 17878,
-   "F_land": 17886,
-   "F_end": 17951
+   "F_start": 17502,
+   "F_land": 17510,
+   "F_end": 17530
   },
   {
-   "id": "lock",
-   "obj": "lock",
-   "verb": "morph",
+   "id": "cam_fill",
+   "obj": "camera",
+   "verb": "camera_to",
    "ease": "inout",
-   "means": "lock：右边的蛋白变成锁，钥匙插在锁孔里，写 lock = protein",
-   "f_start": 727,
+   "means": "红环和孔口占到画宽 70% 以上，停住出段",
+   "f_start": 703,
    "f_land": 743,
    "f_end": 761,
    "until": "3-02.s2",
@@ -696,41 +647,14 @@
    "key": "lock#1",
    "sid": "3-02.s2",
    "word_f0": 743,
-   "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 17917,
-   "F_land": 17933,
-   "F_end": 17951
+   "F_start": 17517,
+   "F_land": 17557,
+   "F_end": 17575
   }
  ],
- "guides": [
-  {
-   "id": "prot",
-   "target": [
-    "cdk20"
-   ],
-   "kind": "focus",
-   "gs": 80,
-   "gon": 98,
-   "land": 106,
-   "gend": 226,
-   "goff": 256,
-   "tick": 102,
-   "nudge": false,
-   "rim": true,
-   "ev_s": 90,
-   "events": [
-    "prot"
-   ],
-   "G_start": 17270,
-   "G_on": 17288,
-   "G_land": 17296,
-   "G_end": 17416,
-   "G_off": 17446,
-   "G_tick": 17292
-  }
- ],
+ "guides": [],
  "problems": []
 }

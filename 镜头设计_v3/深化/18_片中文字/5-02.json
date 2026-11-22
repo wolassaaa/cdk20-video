@@ -1,0 +1,14 @@
+[
+  {
+    "id": "001",
+    "text": "001",
+    "kind": "engrave",
+    "at_word": "5-02.w013"
+  },
+  {
+    "id": "source",
+    "text": "Illustration (our toy model) · data: Ren et al., Chem. Sci. 2023",
+    "kind": "source",
+    "at_word": "5-02.w001"
+  }
+]

@@ -1,0 +1,190 @@
+{
+  "schema": "cdk20.events/1",
+  "group": "4-08",
+  "tool": "blender",
+  "note": "HKBU SCIE1007 课程作业的科普视频：4-08 三维版事件表（Codex 照 18 填）。",
+  "holds": [],
+  "events": [
+    {
+      "id": "land",
+      "obj": "track",
+      "verb": "move",
+      "at": {
+        "word": "4-08.w001",
+        "off": -6
+      },
+      "lead": 26,
+      "means": "段首：循环轨道的骨白底板从盖满画面退到右区，小人已站在轨道左前",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "chip_drop",
+      "obj": "chip",
+      "verb": "eject",
+      "at": {
+        "word": "4-08.w001",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "dur": 14
+      },
+      "means": "黑色芯片从上方弹下，停在轨道上方（A4）",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "chip_feint",
+      "obj": "chip",
+      "verb": "move",
+      "at": {
+        "word": "4-08.w003",
+        "off": 0
+      },
+      "lead": 14,
+      "until": {
+        "dur": 20
+      },
+      "means": "芯片朝小人的位置压下去一半，停住，退回原位；小人不动",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "person_hop",
+      "obj": "person",
+      "verb": "move",
+      "at": {
+        "word": "4-08.w005",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "sentence_end": true
+      },
+      "means": "小人轻跳一下，轮廓光亮",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "car_go",
+      "obj": "car",
+      "verb": "move",
+      "at": {
+        "word": "4-08.w009",
+        "off": 0
+      },
+      "lead": 10,
+      "until": {
+        "word": "4-08.w014",
+        "edge": "start"
+      },
+      "means": "小车沿轨道走，60 帧一圈",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "fail_blink",
+      "obj": "test_light",
+      "verb": "appear",
+      "at": {
+        "word": "4-08.w011",
+        "off": 0
+      },
+      "lead": 2,
+      "until": {
+        "dur": 24
+      },
+      "means": "小车过 Test 站时站上的红灯闪一下",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "into_chip",
+      "obj": "track",
+      "verb": "move",
+      "at": {
+        "word": "4-08.w012",
+        "off": 0
+      },
+      "lead": 30,
+      "until": {
+        "word": "4-08.w014"
+      },
+      "means": "轨道连小车沿直线退进芯片下面，同时缩到 0.55 倍，芯片盖在上面",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "ring_on",
+      "obj": "ring",
+      "verb": "power_on",
+      "at": {
+        "word": "4-08.w014",
+        "off": 0
+      },
+      "lead": 8,
+      "until": {
+        "dur": 20
+      },
+      "means": "芯片顶面亮起一个光环",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "ring_spin",
+      "obj": "ring",
+      "verb": "move",
+      "at": {
+        "word": "4-08.w016",
+        "off": 0
+      },
+      "lead": 20,
+      "until": {
+        "word": "4-08.w017"
+      },
+      "means": "光环越转越快，带运动模糊",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "streak",
+      "obj": "streak",
+      "verb": "move",
+      "at": {
+        "word": "4-08.w017",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "sentence_end": true
+      },
+      "means": "一道光从环上甩出去，划过右上角出画",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "dive",
+      "obj": "ring",
+      "verb": "move",
+      "at": {
+        "word": "4-08.w017",
+        "off": 69
+      },
+      "means": "光环冲镜头，盖满帧是暖白的光，平均亮度 0.6–0.9",
+      "guide": {
+        "kind": "none"
+      }
+    }
+  ]
+}

@@ -6,13 +6,13 @@
   "4-04",
   "4-05"
  ],
- "tool": "remotion",
+ "tool": "blender",
  "fps": 60,
  "len_f": 474,
  "cut": "cut_v8",
- "cut_start_f": 29946,
- "cut_start_s": 499.1,
- "master_built": "2026-11-18 02:33:56 +09:00",
+ "cut_start_f": 29063,
+ "cut_start_s": 484.3833,
+ "master_built": "2026-11-22 20:33:03 +09:00",
  "words_hash": "66fa14ad54a3",
  "events_src": "镜头设计_v3/映射/events/4-04_4-05.json",
  "words": [
@@ -23,8 +23,8 @@
    "sid": "4-04.s1",
    "f0": 32,
    "f1": 40,
-   "F0": 29978,
-   "F1": 29986
+   "F0": 29095,
+   "F1": 29103
   },
   {
    "wid": "4-04.w002",
@@ -33,8 +33,8 @@
    "sid": "4-04.s1",
    "f0": 68,
    "f1": 79,
-   "F0": 30014,
-   "F1": 30025
+   "F0": 29131,
+   "F1": 29142
   },
   {
    "wid": "4-04.w003",
@@ -43,8 +43,8 @@
    "sid": "4-04.s1",
    "f0": 80,
    "f1": 87,
-   "F0": 30026,
-   "F1": 30033
+   "F0": 29143,
+   "F1": 29150
   },
   {
    "wid": "4-04.w004",
@@ -53,8 +53,8 @@
    "sid": "4-04.s1",
    "f0": 87,
    "f1": 95,
-   "F0": 30033,
-   "F1": 30041
+   "F0": 29150,
+   "F1": 29158
   },
   {
    "wid": "4-04.w005",
@@ -63,8 +63,8 @@
    "sid": "4-04.s1",
    "f0": 99,
    "f1": 105,
-   "F0": 30045,
-   "F1": 30051
+   "F0": 29162,
+   "F1": 29168
   },
   {
    "wid": "4-05.w001",
@@ -73,8 +73,8 @@
    "sid": "4-05.s1",
    "f0": 145,
    "f1": 151,
-   "F0": 30091,
-   "F1": 30097
+   "F0": 29208,
+   "F1": 29214
   },
   {
    "wid": "4-05.w002",
@@ -83,8 +83,8 @@
    "sid": "4-05.s1",
    "f0": 154,
    "f1": 162,
-   "F0": 30100,
-   "F1": 30108
+   "F0": 29217,
+   "F1": 29225
   },
   {
    "wid": "4-05.w003",
@@ -93,8 +93,8 @@
    "sid": "4-05.s1",
    "f0": 163,
    "f1": 167,
-   "F0": 30109,
-   "F1": 30113
+   "F0": 29226,
+   "F1": 29230
   },
   {
    "wid": "4-05.w004",
@@ -103,8 +103,8 @@
    "sid": "4-05.s1",
    "f0": 170,
    "f1": 186,
-   "F0": 30116,
-   "F1": 30132
+   "F0": 29233,
+   "F1": 29249
   },
   {
    "wid": "4-05.w005",
@@ -113,8 +113,8 @@
    "sid": "4-05.s1",
    "f0": 196,
    "f1": 206,
-   "F0": 30142,
-   "F1": 30152
+   "F0": 29259,
+   "F1": 29269
   },
   {
    "wid": "4-05.w006",
@@ -123,8 +123,8 @@
    "sid": "4-05.s2",
    "f0": 225,
    "f1": 229,
-   "F0": 30171,
-   "F1": 30175
+   "F0": 29288,
+   "F1": 29292
   },
   {
    "wid": "4-05.w007",
@@ -133,8 +133,8 @@
    "sid": "4-05.s2",
    "f0": 234,
    "f1": 245,
-   "F0": 30180,
-   "F1": 30191
+   "F0": 29297,
+   "F1": 29308
   },
   {
    "wid": "4-05.w008",
@@ -143,8 +143,8 @@
    "sid": "4-05.s2",
    "f0": 247,
    "f1": 257,
-   "F0": 30193,
-   "F1": 30203
+   "F0": 29310,
+   "F1": 29320
   },
   {
    "wid": "4-05.w009",
@@ -153,8 +153,8 @@
    "sid": "4-05.s2",
    "f0": 258,
    "f1": 262,
-   "F0": 30204,
-   "F1": 30208
+   "F0": 29321,
+   "F1": 29325
   },
   {
    "wid": "4-05.w010",
@@ -163,8 +163,8 @@
    "sid": "4-05.s2",
    "f0": 265,
    "f1": 282,
-   "F0": 30211,
-   "F1": 30228
+   "F0": 29328,
+   "F1": 29345
   },
   {
    "wid": "4-05.w011",
@@ -173,8 +173,8 @@
    "sid": "4-05.s3",
    "f0": 325,
    "f1": 327,
-   "F0": 30271,
-   "F1": 30273
+   "F0": 29388,
+   "F1": 29390
   },
   {
    "wid": "4-05.w012",
@@ -183,8 +183,8 @@
    "sid": "4-05.s3",
    "f0": 331,
    "f1": 348,
-   "F0": 30277,
-   "F1": 30294
+   "F0": 29394,
+   "F1": 29411
   },
   {
    "wid": "4-05.w013",
@@ -193,8 +193,8 @@
    "sid": "4-05.s3",
    "f0": 357,
    "f1": 372,
-   "F0": 30303,
-   "F1": 30318
+   "F0": 29420,
+   "F1": 29435
   },
   {
    "wid": "4-05.w014",
@@ -203,8 +203,8 @@
    "sid": "4-05.s3",
    "f0": 374,
    "f1": 378,
-   "F0": 30320,
-   "F1": 30324
+   "F0": 29437,
+   "F1": 29441
   },
   {
    "wid": "4-05.w015",
@@ -213,8 +213,8 @@
    "sid": "4-05.s3",
    "f0": 382,
    "f1": 404,
-   "F0": 30328,
-   "F1": 30350
+   "F0": 29445,
+   "F1": 29467
   }
  ],
  "sentences": [
@@ -254,13 +254,13 @@
  "holds": [],
  "events": [
   {
-   "id": "frame",
-   "obj": "frame",
-   "verb": "grow",
-   "ease": "inout",
-   "means": "So：讲解卡外框画出",
-   "f_start": 18,
-   "f_land": 32,
+   "id": "land",
+   "obj": "socket",
+   "verb": "move",
+   "ease": "out",
+   "means": "So：镜头从插座孔桶的骨白内壁里退出来，插座落到右区，红尾巴横搭在插孔上",
+   "f_start": 4,
+   "f_land": 28,
    "f_end": 40,
    "until": "4-04.w001",
    "word": "4-04.w001",
@@ -268,191 +268,212 @@
    "key": "so#1",
    "sid": "4-04.s1",
    "word_f0": 32,
-   "tool": "remotion",
-   "F_start": 29964,
-   "F_land": 29978,
-   "F_end": 29986
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 29067,
+   "F_land": 29091,
+   "F_end": 29103
   },
   {
-   "id": "chain",
-   "obj": "chain",
-   "verb": "grow",
-   "ease": "inout",
-   "means": "what：一串珠子（折好的蛋白）逐颗长出",
-   "f_start": 38,
-   "f_land": 68,
-   "f_end": 95,
-   "until": "4-04.w004",
-   "word": "4-04.w002",
-   "w": "what",
-   "key": "what#1",
-   "sid": "4-04.s1",
-   "word_f0": 68,
-   "tool": "remotion",
-   "F_start": 29984,
-   "F_land": 30014,
-   "F_end": 30041
-  },
-  {
-   "id": "tail",
+   "id": "tail_flop",
    "obj": "tail",
-   "verb": "grow",
+   "verb": "move",
    "ease": "inout",
-   "means": "do：尾巴三颗松垂的珠子长出",
-   "f_start": 87,
+   "means": "do?：尾巴软软地晃两下",
+   "f_start": 89,
    "f_land": 99,
-   "f_end": 105,
-   "until": "4-04.w005",
+   "f_end": 139,
+   "until": null,
    "word": "4-04.w005",
    "w": "do?",
    "key": "do#1",
    "sid": "4-04.s1",
    "word_f0": 99,
-   "tool": "remotion",
-   "F_start": 30033,
-   "F_land": 30045,
-   "F_end": 30051
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 29152,
+   "F_land": 29162,
+   "F_end": 29202
   },
   {
-   "id": "cutline",
-   "obj": "cutline",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "cut：红虚线画在尾巴根部，剪刀张开",
-   "f_start": 140,
+   "id": "nip_in",
+   "obj": "nippers",
+   "verb": "move",
+   "ease": "out",
+   "means": "They：剪钳张着口（36°）从右上沿弧线进来，钳口对到尾巴根部",
+   "f_start": 121,
+   "f_land": 145,
+   "f_end": 151,
+   "until": null,
+   "word": "4-05.w001",
+   "w": "They",
+   "key": "they#1",
+   "sid": "4-05.s1",
+   "word_f0": 145,
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 29184,
+   "F_land": 29208,
+   "F_end": 29214
+  },
+  {
+   "id": "snip",
+   "obj": "nippers",
+   "verb": "snap",
+   "ease": "out",
+   "means": "cut：钳口合上，咔，镜头微震",
+   "f_start": 148,
    "f_land": 154,
-   "f_end": 162,
-   "until": "4-05.w002",
+   "f_end": 168,
+   "until": null,
    "word": "4-05.w002",
    "w": "cut",
    "key": "cut#1",
    "sid": "4-05.s1",
    "word_f0": 154,
-   "tool": "remotion",
-   "F_start": 30086,
-   "F_land": 30100,
-   "F_end": 30108
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 29211,
+   "F_land": 29217,
+   "F_end": 29231
   },
   {
-   "id": "snip",
-   "obj": "snip",
-   "verb": "morph",
-   "ease": "inout",
-   "means": "tail：剪刀合拢，剪断",
-   "f_start": 162,
-   "f_land": 170,
-   "f_end": 186,
-   "until": "4-05.w004",
-   "word": "4-05.w004",
-   "w": "tail",
-   "key": "tail#1",
-   "sid": "4-05.s1",
-   "word_f0": 170,
-   "tool": "remotion",
-   "F_start": 30108,
-   "F_land": 30116,
-   "F_end": 30132
-  },
-  {
-   "id": "float",
-   "obj": "float",
+   "id": "tail_fall",
+   "obj": "tail",
    "verb": "move",
-   "ease": "inout",
-   "means": "off：尾巴飘走变灰",
-   "f_start": 170,
+   "ease": "in",
+   "means": "off.：尾巴整条掉下去，落进废料桶；剪钳同时退出右上画外",
+   "f_start": 192,
    "f_land": 196,
-   "f_end": 206,
-   "until": "4-05.w005",
+   "f_end": 226,
+   "until": null,
    "word": "4-05.w005",
    "w": "off.",
    "key": "off#1",
    "sid": "4-05.s1",
    "word_f0": 196,
-   "tool": "remotion",
-   "F_start": 30116,
-   "F_land": 30142,
-   "F_end": 30152
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 29255,
+   "F_land": 29259,
+   "F_end": 29289
   },
   {
-   "id": "ai",
-   "obj": "ai",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "The AI made the guess：写出第一行",
-   "f_start": 217,
-   "f_land": 225,
-   "f_end": 282,
-   "until": "4-05.w010",
-   "word": "4-05.w006",
-   "w": "The",
-   "key": "the#2",
+   "id": "chip_pop",
+   "obj": "chip",
+   "verb": "eject",
+   "ease": "out",
+   "means": "AI：插座后上方弹出黑色芯片",
+   "f_start": 228,
+   "f_land": 234,
+   "f_end": 248,
+   "until": null,
+   "word": "4-05.w007",
+   "w": "AI",
+   "key": "ai#1",
    "sid": "4-05.s2",
-   "word_f0": 225,
-   "tool": "remotion",
-   "F_start": 30163,
-   "F_land": 30171,
-   "F_end": 30228
+   "word_f0": 234,
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 29291,
+   "F_land": 29297,
+   "F_end": 29311
   },
   {
-   "id": "pulse",
-   "obj": "pulse",
-   "verb": "morph",
+   "id": "body_sheen",
+   "obj": "socket",
+   "verb": "move",
    "ease": "inout",
-   "means": "guess：整串珠子轻轻一跳",
-   "f_start": 255,
+   "means": "guess.：一道扫光掠过蓝色插座外壳",
+   "f_start": 257,
    "f_land": 265,
    "f_end": 282,
-   "until": "4-05.w010",
+   "until": "4-05.s2",
    "word": "4-05.w010",
    "w": "guess.",
    "key": "guess#1",
    "sid": "4-05.s2",
    "word_f0": 265,
-   "tool": "remotion",
-   "F_start": 30201,
-   "F_land": 30211,
-   "F_end": 30228
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 29320,
+   "F_land": 29328,
+   "F_end": 29345
   },
   {
-   "id": "human",
-   "obj": "human",
+   "id": "person_hop",
+   "obj": "person",
+   "verb": "eject",
+   "ease": "out",
+   "means": "human：白色小人跳到剪断的尾巴根旁边的料杆上",
+   "f_start": 325,
+   "f_land": 331,
+   "f_end": 345,
+   "until": null,
+   "word": "4-05.w012",
+   "w": "human",
+   "key": "human#1",
+   "sid": "4-05.s3",
+   "word_f0": 331,
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 29388,
+   "F_land": 29394,
+   "F_end": 29408
+  },
+  {
+   "id": "ring_on",
+   "obj": "ring",
    "verb": "appear",
    "ease": "inout",
-   "means": "A human caught：写出第二行",
-   "f_start": 317,
-   "f_land": 325,
-   "f_end": 372,
-   "until": "4-05.w013",
-   "word": "4-05.w011",
-   "w": "A",
-   "key": "a#1",
+   "means": "problem.：插孔红环亮起，孔口空了",
+   "f_start": 376,
+   "f_land": 382,
+   "f_end": 404,
+   "until": "4-05.s3",
+   "word": "4-05.w015",
+   "w": "problem.",
+   "key": "problem#1",
    "sid": "4-05.s3",
-   "word_f0": 325,
-   "tool": "remotion",
-   "F_start": 30263,
-   "F_land": 30271,
-   "F_end": 30318
+   "word_f0": 382,
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 29439,
+   "F_land": 29445,
+   "F_end": 29467
   },
   {
-   "id": "under",
-   "obj": "under",
-   "verb": "grow",
-   "ease": "inout",
-   "means": "caught the problem：红色下划线画出",
-   "f_start": 357,
-   "f_land": 357,
-   "f_end": 404,
-   "until": "4-05.w015",
-   "word": "4-05.w013",
-   "w": "caught",
-   "key": "caught#1",
+   "id": "dive",
+   "obj": "socket",
+   "verb": "move",
+   "ease": "in",
+   "means": "段尾：插座转正，插孔对准镜头冲过来，盖满帧是孔桶的骨白内壁",
+   "f_start": 429,
+   "f_land": 473,
+   "f_end": 473,
+   "until": null,
+   "word": "4-05.w015",
+   "w": "problem.",
+   "key": "problem#1",
    "sid": "4-05.s3",
-   "word_f0": 357,
-   "tool": "remotion",
-   "F_start": 30303,
-   "F_land": 30303,
-   "F_end": 30350
+   "word_f0": 382,
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 29492,
+   "F_land": 29536,
+   "F_end": 29536
   }
  ],
+ "guides": [],
  "problems": []
 }

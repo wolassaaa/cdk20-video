@@ -1,0 +1,189 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "4-08",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜 4-08（A）讲解卡：AI 牌的箭头指向小人被叉掉（没替换），小人站着；It ran 一个循环箭头长出，trial and error 转起来，inside a computer 被屏幕框框住，light speed 加速成模糊光圈；页面 OnCam408.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "frame",
+   "obj": "frame",
+   "verb": "grow",
+   "at": {
+    "word": "4-08.w001",
+    "off": 0
+   },
+   "means": "AI：讲解卡外框画出",
+   "tool": "remotion",
+   "lead": 18,
+   "until": {
+    "word": "4-08.w001"
+   }
+  },
+  {
+   "id": "plate",
+   "obj": "plate",
+   "verb": "appear",
+   "at": {
+    "word": "4-08.w001",
+    "off": 0
+   },
+   "means": "AI：深色牌 AI",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-08.w001"
+   }
+  },
+  {
+   "id": "arrow",
+   "obj": "arrow",
+   "verb": "grow",
+   "at": {
+    "word": "4-08.w003",
+    "off": 0
+   },
+   "means": "replace：箭头从 AI 牌画向下方",
+   "tool": "remotion",
+   "lead": 16,
+   "until": {
+    "word": "4-08.w003"
+   }
+  },
+  {
+   "id": "cross",
+   "obj": "cross",
+   "verb": "appear",
+   "at": {
+    "word": "4-08.w004",
+    "off": 0
+   },
+   "means": "the：红叉盖在箭头上，没被替换",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "4-08.w004"
+   }
+  },
+  {
+   "id": "person",
+   "obj": "person",
+   "verb": "grow",
+   "at": {
+    "word": "4-08.w005",
+    "off": 0
+   },
+   "means": "scientists：小人长出，字牌 scientists",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "4-08.w005"
+   }
+  },
+  {
+   "id": "loop",
+   "obj": "loop",
+   "verb": "grow",
+   "at": {
+    "word": "4-08.w007",
+    "off": 0
+   },
+   "means": "ran：循环箭头长出，AI 牌的箭头淡出",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "4-08.w007"
+   }
+  },
+  {
+   "id": "trial",
+   "obj": "trial",
+   "verb": "appear",
+   "at": {
+    "word": "4-08.w009",
+    "off": 0
+   },
+   "means": "trial：标签 trial，循环转起来",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "4-08.w009"
+   }
+  },
+  {
+   "id": "error",
+   "obj": "error",
+   "verb": "appear",
+   "at": {
+    "word": "4-08.w011",
+    "off": 0
+   },
+   "means": "error：标签 error",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "4-08.w011"
+   }
+  },
+  {
+   "id": "screen",
+   "obj": "screen",
+   "verb": "grow",
+   "at": {
+    "word": "4-08.w012",
+    "off": 0
+   },
+   "means": "inside：屏幕框把循环框住",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "word": "4-08.w012"
+   }
+  },
+  {
+   "id": "comp",
+   "obj": "comp",
+   "verb": "appear",
+   "at": {
+    "word": "4-08.w014",
+    "off": 0
+   },
+   "means": "computer：标签 computer",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-08.w014"
+   }
+  },
+  {
+   "id": "fast",
+   "obj": "fast",
+   "verb": "morph",
+   "at": {
+    "word": "4-08.w016",
+    "off": 0
+   },
+   "means": "light：循环加速",
+   "tool": "remotion",
+   "lead": 24,
+   "until": {
+    "word": "4-08.w016"
+   }
+  },
+  {
+   "id": "blur",
+   "obj": "blur",
+   "verb": "morph",
+   "at": {
+    "word": "4-08.w017",
+    "off": 0
+   },
+   "means": "speed：模糊光圈和加速线",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "4-08.w017"
+   }
+  }
+ ]
+}

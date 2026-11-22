@@ -1,0 +1,774 @@
+<!doctype html><meta charset="utf-8"><title>05_视线引导</title><style>body{font-family:"Microsoft YaHei",sans-serif;max-width:900px;margin:24px auto;padding:0 16px;line-height:1.7;color:#222;background:#fff}
+table{border-collapse:collapse;margin:12px 0}td,th{border:1px solid #ccc;padding:6px 10px}th{background:#f2f2f2}
+code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1px solid #ddd;padding-bottom:4px}a{color:#0a58ca}</style><h1>视线引导（替代红色料珠）</h1>
+<p>HKBU SCIE1007 课程作业的科普视频。这份文档定全片新的"视线引导"：观众下一眼该看哪里，由什么告诉他。写于 2026-11-20（韩国时间），按导演 11-20 的意见（<code>导演意见_1120.md</code> 第 1 条）重新设计，给施工的人照做。本文只定做法和参数，不改任何页面代码；kit.jsx 和 Blender 脚本另派施工。</p>
+<p>导演原话："当然要有引导，就是这个交互不行，得换，得根据新的设计思路来搞。"之前还说过红点"看多了晃眼睛"。</p>
+<hr />
+<h2>一、结论</h2>
+<p><strong>主方案：焦点点名。</strong> 说到哪个零件，镜头的焦点就先一步落到它身上：它从虚变实，同时一盏只照它的轮廓光把它的边缘提亮一点点；别的东西保持在景深外。画面上不多出任何东西。</p>
+<p><strong>辅助一：浇口预颤，带一声轻"嗒"。</strong> 被点名的零件在词开口前 4–8 帧，在浇口上绷一下（往外拉一点再回来），料杆跟着轻颤，同一时刻一声很轻的塑料"嗒"。零件本来就要被"拔"出来时，这一下就是它的预备动作，不另加。</p>
+<p><strong>辅助二：料杆走料，只用于远距离换场。</strong> 下一个要讲的零件不在画面里、或者离当前焦点超过画面宽度的 35% 时，一个鼓包沿料杆从当前位置走到那个零件的浇口，焦点和镜头跟着鼓包走；鼓包到浇口就被零件"吃"进去，消失。其余时候不用。</p>
+<p><strong>不用的手段：</strong> 说明书式的步骤编号（会在画面上加二维字，和"二维只留标签、出处、批注、字幕"冲突，也会和 E3 的标签数抢名额；第 6 章记分板的行号是内容本身，不算引导）；打光以外的发光材质（零件一自发光就像灯泡，塑料感没了）；单独的指示物（箭头、圈、点，就是红点的老问题）。</p>
+<h3>为什么比红点好</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>红色料珠（旧）</th>
+<th>焦点点名 + 预颤 + 走料（新）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>画面上多出的东西</td>
+<td>一颗一直在场的高饱和小点</td>
+<td>没有。引导就是零件自己、焦点和光</td>
+</tr>
+<tr>
+<td>不需要引导时</td>
+<td>小点还在，停着也在抢眼</td>
+<td>什么都不发生，画面安静</td>
+</tr>
+<tr>
+<td>眼睛的负担</td>
+<td>小而亮的运动物体会持续触发眼跳和追视，17 分钟下来就累</td>
+<td>眼睛本能去看清楚、稍亮的地方，不用"追"任何东西</td>
+</tr>
+<tr>
+<td>和世界的关系</td>
+<td>贴在纸面上的标记，和三维大板无关</td>
+<td>景深、灯、浇口、料杆都是大板本来就有的东西</td>
+</tr>
+<tr>
+<td>和念词的关系</td>
+<td>跳站，常常和零件自己的动作打架（两样东西同时动）</td>
+<td>引导就是动作的前奏，主动作仍落在词上</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>二、三个手段的规则</h2>
+<p>时间全部从事件表来（<code>映射/events/&lt;段&gt;.json</code> → <code>resolve.py</code> → <code>映射/keys/&lt;段&gt;.json</code>）。下文 <code>f_land</code> 是被点名的词开口那一帧（事件的落点），帧数都是 60 fps。</p>
+<h3>2.1 主方案：焦点点名</h3>
+<p><strong>什么时候用：</strong> 一个词第一次叫出一个零件（或零件上的一个部位：凹槽、摆臂、站牌），而且这个东西现在不在焦点上。</p>
+<p><strong>怎么走：</strong></p>
+<ol>
+<li><strong>起拉</strong> <code>g_start</code>：焦点开始从当前目标移向新目标。</li>
+<li><strong>到位</strong> <code>g_on</code>：新目标完全清楚。<code>g_on</code> 在词开口前 4–12 帧（默认 8 帧）。</li>
+<li><strong>起拉到到位</strong> 12–24 帧（默认 18 帧），缓入缓出，不过冲、不来回找焦。</li>
+<li><strong>轮廓光</strong> 和焦点同一条曲线：<code>g_start</code> 起亮，<code>f_land</code> 到峰值，最多保持到这个事件的 <code>f_end</code>（且不超过 <code>f_land</code> 后 120 帧），然后用 24–36 帧退回 0。</li>
+<li><strong>焦点留下：</strong> 轮廓光退掉以后焦点不退，留在这个零件上，直到下一次点名。所以画面永远有一个清楚的主体，不会整片虚掉。</li>
+<li><strong>镜头跟焦点，不领焦点：</strong> 如果这一步还要移镜头（<code>camera_to</code>），镜头起动不早于 <code>g_start</code> 后 6 帧。观众先看到"那里变清楚了"，镜头再过去。</li>
+</ol>
+<p><strong>不点名的情况（这些时候什么都不加）：</strong></p>
+<ul>
+<li>同一个零件刚被点过，下一个词还是说它（例如 3-01 的 "lock" 紧接 "picture"）。</li>
+<li>标签、出处行、字幕出现（<code>appear</code>）：字不需要引导。</li>
+<li>剧本里的空拍、出镜段的人在说一句不涉及零件的话。</li>
+<li>两次点名的 <code>g_on</code> 不足 36 帧：后一个并进前一个，焦点直接放在两者之间能同时看清的位置，只点一次。</li>
+</ul>
+<h3>2.2 辅助一：浇口预颤 + "嗒"</h3>
+<p><strong>什么时候用：</strong> 每次焦点点名都带一次；零件这一下要做 <code>eject</code>（拔）或 <code>snap</code>（拼）时，它自己的预备动作（精致度标准 D1）就是预颤，不另加。</p>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>起止</td>
+<td><code>f_land − 6</code> 起，<code>f_land</code> 收回（4–8 帧可调）</td>
+</tr>
+<tr>
+<td>动作</td>
+<td>沿浇口方向向外绷一下再回来：位移 0.3–0.6 mm（画面上不超过 6 像素），转动不超过 2°</td>
+</tr>
+<tr>
+<td>浇口</td>
+<td>同时被拉细到 85% 粗，回弹</td>
+</tr>
+<tr>
+<td>料杆</td>
+<td>两次以内的衰减颤动，12 帧内停，画面上不超过 3 像素</td>
+</tr>
+<tr>
+<td>声音</td>
+<td>一声轻的塑料"嗒"，在 <code>f_land − 3</code> 到 <code>f_land − 6</code>（50–100 ms，正好是 03 文档"音效放在词前 50–100 ms"的规定），比零件弹下的"咔"轻 6 dB</td>
+</tr>
+</tbody>
+</table>
+<h3>2.3 辅助二：料杆走料</h3>
+<p><strong>什么时候用：</strong> 只在两种情况：</p>
+<ul>
+<li>新目标在画面外。</li>
+<li>新目标离当前焦点的距离超过画面宽度的 35%。</li>
+</ul>
+<p>每句话最多一次。</p>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>鼓包</td>
+<td>沿用 2-03 已认可的鼓包（<code>inserts/bl_s203_board.py</code> 的 <code>make_pulse</code> / <code>put</code>）：包住料杆的纺锤，大小跟料杆粗细走</td>
+</tr>
+<tr>
+<td>颜色</td>
+<td>料杆本色提亮，最多 +0.3 EV；<strong>不用红色</strong>（红色留给内容：凹槽红圈、描红站牌、红尾巴）</td>
+</tr>
+<tr>
+<td>起点</td>
+<td>当前焦点所在零件的浇口，或上一段带过来的那颗鼓包</td>
+</tr>
+<tr>
+<td>到达</td>
+<td>到目标浇口前，比 <code>f_land</code> 早 0–8 帧</td>
+</tr>
+<tr>
+<td>速度</td>
+<td>画面上不超过每秒 0.6 个画面宽；走料时长 24–90 帧，太远就让镜头一起滑，不让鼓包飞</td>
+</tr>
+<tr>
+<td>焦点</td>
+<td>走料期间焦点挂在鼓包上；到浇口后转成焦点点名的"到位"</td>
+</tr>
+<tr>
+<td>收尾</td>
+<td>到浇口后 6 帧内被零件吸进去，消失。<strong>任何时候都不停在画面上等</strong></td>
+</tr>
+</tbody>
+</table>
+<p>走料就是 01 文档第四节"出来"第 1 种（东西从浇口钻出去、顺着料杆走、镜头跟着到下一格）和 1-09、2-08 那条主料杆的同一件事，所以它同时是转场的载体。</p>
+<h3>2.4 三个手段的分工</h3>
+<table>
+<thead>
+<tr>
+<th>场合</th>
+<th>焦点点名</th>
+<th>浇口预颤</th>
+<th>料杆走料</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>画外板面段，目标在画内近处</td>
+<td>有</td>
+<td>有</td>
+<td>无</td>
+</tr>
+<tr>
+<td>画外板面段，目标在远处或画外</td>
+<td>有（跟着鼓包）</td>
+<td>有</td>
+<td>有</td>
+</tr>
+<tr>
+<td>钻取段（零件内部）</td>
+<td>有（微距，景深最浅）</td>
+<td>换成机构的预备动作（摆臂抬一点、齿轮停半拍）</td>
+<td>无（内部没有料杆；有内容意义的东西在走，比如 ATP 料珠，焦点跟它，它不是引导）</td>
+</tr>
+<tr>
+<td>出镜段</td>
+<td>只作用在零件上，不碰人</td>
+<td>有</td>
+<td>无</td>
+</tr>
+<tr>
+<td>W 段（音乐）</td>
+<td>跟拍子走，不跟词；每小节最多一次</td>
+<td>跟重拍</td>
+<td>允许（W0、W1 的那道光就是走料，见 03 文档第七节）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>三、出镜段的特殊规定</h2>
+<p>出镜段画面里最强的引导永远是人的脸和手，我们不跟它抢。</p>
+<ul>
+<li>人是手机实拍，焦点固定，<strong>不给人加光、不虚化人、不在人身上做任何引导</strong>。</li>
+<li>零件在等待时略虚：画面上弥散圆 2–4 像素（1080p），轮廓光为 0。被点名时变实（≤ 1 像素），轮廓光最多 +0.2 EV（比画外段低一档，因为旁边有人脸做对比）。</li>
+<li>人的手势就是引导：精致度标准 F3 要求每组出镜段至少一处手伸到零件前面，那一处手的动作本身负责带眼睛，那一拍零件只预颤，不再加光。</li>
+<li>零件的主光和人的主光同侧（F4），轮廓光放在零件远离人的一侧，不在人和零件之间造出一条亮缝。</li>
+</ul>
+<hr />
+<h2>四、二维页（过渡期，Remotion）</h2>
+<p>01 文档定了二维说明书页全部改成三维；改完之前，粗剪 v10 里还会有二维页。过渡期二维页也按同一个思路换掉红点：<strong>纸面上的景深</strong>。</p>
+<p>现状：<code>kit.jsx</code> 里 <code>Bead</code> 已经返回 null（<code>BeadOld</code> 留着备查），<code>beadAt</code> 还在。以下新组件加进 <code>镜头设计_v2/tests/T4_remotion/src/v3/manual/kit.jsx</code>，旧的不删。本文只给接口和行为，施工另派。</p>
+<h3>4.1 <code>guidePlan(K, opts)</code>：从事件表算出引导表</h3>
+<pre><code class="language-js">// K = keys/&lt;段&gt;.json；返回按时间排好的引导列表
+guidePlan(K, {gOn = 8, pull = 18, minGap = 36, hold = 120, relax = 30} = {})
+// → [{id, target, kind, gs, gon, land, gend, goff}]
+//   kind: &quot;focus&quot; | &quot;runner&quot;；target: 页面图层 id
+</code></pre>
+<ul>
+<li>有 <code>K.events[i].guide</code>（见第六节事件表扩展）时按它来；没有时按默认规则：<code>grow</code>、<code>eject</code>、<code>snap</code>、<code>move</code> 到一个新对象 → <code>focus</code>；<code>appear</code> 和 <code>camera_to</code> → 不引导。</li>
+<li><code>gon = land − gOn</code>，<code>gs = gon − pull</code>，<code>gend = min(f_end, land + hold)</code>，<code>goff = gend + relax</code>。</li>
+<li>相邻两次 <code>gon</code> 不足 <code>minGap</code>：合并成一次，target 写成数组。</li>
+<li>同一个 target 连续两次：只保留第一次。</li>
+</ul>
+<h3>4.2 <code>&lt;Lens&gt;</code> 和 <code>&lt;Layer&gt;</code>：纸面景深</h3>
+<pre><code class="language-jsx">&lt;Lens plan={plan} f={f} blur={2.2} dim={0.82} desat={0.75} relax={24}&gt;
+  &lt;Layer id=&quot;cdk20&quot;&gt; &lt;Part name=&quot;cdk20&quot; ... /&gt; &lt;/Layer&gt;
+  &lt;Layer id=&quot;gear&quot;&gt;  &lt;Part name=&quot;gear&quot; ... /&gt; &lt;/Layer&gt;
+  &lt;Layer id=&quot;inset&quot;&gt; ... &lt;/Layer&gt;
+  &lt;Layer exempt&gt; &lt;Label .../&gt; &lt;Title .../&gt; &lt;/Layer&gt;   {/* 字永远不虚 */}
+&lt;/Lens&gt;
+</code></pre>
+<p>行为：</p>
+<ul>
+<li>引导窗口（<code>gs</code> 到 <code>goff</code>）里，被点名的 Layer 保持原样；其他 Layer 加 <code>filter: blur(b) saturate(s)</code> 和 <code>opacity: o</code>，在 <code>gs → gon</code> 之间从 0 渐到 <code>blur=2.2px</code>、<code>desat=0.75</code>、<code>dim=0.82</code>，在 <code>gend → goff</code> 之间退回。</li>
+<li>引导窗口以外，整页全清楚（二维页上没有"景深"可以一直保留，长时间虚着会妨碍读标签）。</li>
+<li><code>exempt</code> 的 Layer 永远不虚：标题、标签、手写批注、出处行、<code>Legend</code>。字幕在全片统一烧，不进页面。</li>
+<li>被点名的 Layer 加一点"轮廓光"：<code>filter: drop-shadow(0 0 6px rgba(255,250,235,0.9))</code>，强度跟 3D 的轮廓光同一条曲线，峰值时整个元素平均亮度提升不超过 8%（纸是浅色，提亮空间小，主要靠别的变虚）。</li>
+<li>用 React context 传当前帧的权重，每个 Layer 自己读。同一页同时被虚化的 Layer 不超过 6 个（headless Chrome 的模糊开销）。</li>
+</ul>
+<h3>4.3 <code>nudge(f, land, opts)</code>：浇口预颤</h3>
+<pre><code class="language-js">nudge(f, land, {pre = 6, amp = 4, rot = 1.2, dir = [0, 1]}) // → CSS transform 字符串
+</code></pre>
+<ul>
+<li><code>land − pre</code> 到 <code>land</code>：沿 <code>dir</code>（指向浇口，<code>Part</code> 的 <code>gate</code> 参数算得出）先拉出 <code>amp</code> 像素、转 <code>rot</code> 度，再回到 0；缓入缓出，3 帧出去 3 帧回来。</li>
+<li>用在 <code>Part</code> 外面套的 div 上，不改 <code>Part</code> 自己的生长动画。</li>
+<li>零件这一拍本来就在长出来（<code>Part</code> 的 <code>at</code> 在这附近）时不用，生长本身就是动作。</li>
+</ul>
+<h3>4.4 <code>&lt;RunnerPulse&gt;</code>：沿已有的线走料</h3>
+<pre><code class="language-jsx">&lt;RunnerPulse d={path} a={gs} b={land - 4} f={f} sw={4} color={INK} len={0.08} /&gt;
+</code></pre>
+<ul>
+<li>只能沿<strong>页面上已经画好的线</strong>走（<code>Arrow</code> 的路径、放大圈的引线、<code>Legend</code> 的横线）。页面上没有线时不用，改用 <code>Lens</code> 就够。</li>
+<li>画一段比原线稍粗（<code>sw + 2</code>）、颜色是原线色和纸色七三开的亮段，长度为路径长的 8%，用 <code>strokeDasharray</code> / <code>strokeDashoffset</code> 从 <code>a</code> 走到 <code>b</code>；<code>b</code> 之后 6 帧缩成 0 消失。</li>
+<li>不画圆点，不用红色，走完不停留。</li>
+</ul>
+<h3>4.5 <code>Bead</code> 怎么处理</h3>
+<p><code>Bead</code> 继续返回 null，页面里已有的 <code>&lt;Bead K=... f=.../&gt;</code> 调用可以先不删，换页施工时改成 <code>&lt;Lens&gt;</code> 包图层。<code>beadAt</code> 不再被新代码使用。</p>
+<hr />
+<h2>五、三维（Blender）</h2>
+<p>新写一个小模块 <code>镜头设计_v3/inserts/bl_guide.py</code>（施工另派），各段的场景脚本在 <code>schedule() → build() → check()</code> 的 <code>build()</code> 末尾调用一次。读 <code>keys/&lt;段&gt;.json</code> 的事件帧，按第二节规则生成下面四样东西。</p>
+<h3>5.1 焦点：逐帧烘焙对焦距离</h3>
+<p>照 2-03 已经在用的做法（<code>bl_s203_board.py</code> 里按权重混合目标位置、逐帧写 <code>dof.focus_distance</code>），抽成通用函数：</p>
+<pre><code class="language-python">guide_focus(cam, plan, targets, nf)
+# plan: guidePlan 同样的列表；targets: {&quot;cdk20&quot;: obj 或 (obj, 局部偏移mm)}
+# 每帧：p = 各目标世界坐标按权重混合（权重在 gs→gon 之间用 smoothstep 从旧目标移到新目标）
+#       cam.data.dof.focus_distance = (p - cam.location)·(相机朝向)，逐帧 keyframe
+</code></pre>
+<ul>
+<li>目标会动（零件在飞、ATP 在滚）时，每帧取它当前的位置，焦点自然跟住。</li>
+<li>走料期间目标是鼓包物体本身。</li>
+<li>光圈：从 2-03 的 <code>FSTOP = 16</code> 起调。用一帧试渲量：清楚主体的弥散圆不超过 1 像素，背景板面 6–14 像素（1080p），前景料杆虚到认得出形状。钻取段的微距景深最浅，出镜段零件最深（零件整个要清楚）。量好写进各段脚本的常量，不在帧间改光圈。</li>
+<li>光圈叶片 <code>aperture_blades = 0</code>（圆形光斑，干净，不出六边形高光）。</li>
+</ul>
+<h3>5.2 轮廓光：只照被点名的那一件</h3>
+<pre><code class="language-python">guide_rim(target_objs, plan_items, key_light, peak_ev=0.25)
+# 每个被点名的目标一盏面光 GUIDE_rim_&lt;id&gt;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>灯</td>
+<td>面光（Area），大小约为目标包围盒的 1.2 倍，柔</td>
+</tr>
+<tr>
+<td>位置</td>
+<td>相对相机 120°–150°（侧后方），给边缘一条亮线，不给正面打亮</td>
+</tr>
+<tr>
+<td>朝向</td>
+<td>Track To 目标</td>
+</tr>
+<tr>
+<td>只照它</td>
+<td>Cycles 灯光链接（Light Linking）：<code>light.light_linking.receiver_collection</code> 设成只装这个目标的集合 <code>GUIDE_lit_&lt;id&gt;</code>。这样别的零件、台面、背景都不变亮，全帧平均亮度几乎不动</td>
+</tr>
+<tr>
+<td>颜色</td>
+<td>和主光同色温（暖白），不加彩色</td>
+</tr>
+<tr>
+<td>强度</td>
+<td>关键帧：<code>gs</code> 为 0 → <code>f_land</code> 峰值 → 保持到 <code>gend</code> → <code>goff</code> 回 0。峰值先按主光功率的 15% 放，试渲量被照零件边缘区域亮度，调到 +0.2–0.3 EV（出镜段 +0.15–0.2 EV）</td>
+</tr>
+</tbody>
+</table>
+<p>不碰场景曝光、不碰世界光、不给零件加发光材质做引导。内容本身就是"亮"的事件（3-04 "pocket" 红圈亮、2-08 站牌描红、记分板翻牌）照 01 文档做，那是内容，不算引导，也不受本节的亮度上限约束，但仍受全帧亮度波动的总限制（第七节 V6）。</p>
+<h3>5.3 浇口预颤</h3>
+<pre><code class="language-python">guide_tick(part, gate, runner, f_land, pre=6, amp_mm=0.45, rot_deg=1.5, dir=None)
+</code></pre>
+<ul>
+<li>动作写在 <strong>delta 变换</strong>（<code>delta_location</code>、<code>delta_rotation_euler</code>）上，不和零件自己的主动画抢通道。</li>
+<li><code>dir</code> 默认取浇口指向零件的方向；绷出去 3 帧，回来 3 帧。</li>
+<li>浇口物体沿长轴缩放到 0.85 再回 1.0；料杆用 delta 旋转做两次衰减颤动（0.3°，12 帧内停）。</li>
+<li>零件这一拍有自己的 <code>eject</code> / <code>snap</code> 时不调用：D1 的预备已经是预颤。</li>
+<li>事件帧另写一份 <code>g_tick = f_land − 4</code> 进 keys，混音脚本照这一帧放"嗒"。</li>
+</ul>
+<h3>5.4 料杆走料</h3>
+<pre><code class="language-python">guide_runner(path, f_from, f_to, target_gate)
+</code></pre>
+<ul>
+<li>直接复用 2-03 的鼓包（<code>make_pulse</code>、<code>put</code>、路径 <code>pa.at(u)</code>），把"从哪走到哪"改成从参数来。</li>
+<li>鼓包材质 = 料杆材质，Principled 的 Base Color 提亮（不超过 +0.3 EV 对应的倍数 1.23），不加发光。</li>
+<li>到浇口后 6 帧内缩成 0（2-03 已有"喂料时瘪一点"的做法）。</li>
+</ul>
+<hr />
+<h2>六、事件表加一个可选字段</h2>
+<p>不改现有字段。事件可以加一个 <code>guide</code>，不写就按默认规则（第二节、4.1）。</p>
+<pre><code class="language-json">{&quot;id&quot;: &quot;cdk&quot;, &quot;obj&quot;: &quot;cdk20&quot;, &quot;verb&quot;: &quot;move&quot;, &quot;at&quot;: {&quot;word&quot;: &quot;CDK20&quot;}, &quot;lead&quot;: 10,
+ &quot;guide&quot;: {&quot;kind&quot;: &quot;focus&quot;, &quot;target&quot;: &quot;cdk20&quot;, &quot;g_on&quot;: 8, &quot;pull&quot;: 18}}
+{&quot;id&quot;: &quot;to_target&quot;, &quot;obj&quot;: &quot;station_target&quot;, &quot;verb&quot;: &quot;flow&quot;, &quot;at&quot;: {&quot;word&quot;: &quot;lock&quot;},
+ &quot;guide&quot;: {&quot;kind&quot;: &quot;runner&quot;, &quot;from&quot;: &quot;road_start&quot;}}
+{&quot;id&quot;: &quot;lbl&quot;, &quot;obj&quot;: &quot;label_enzyme&quot;, &quot;verb&quot;: &quot;appear&quot;, &quot;at&quot;: {&quot;word&quot;: &quot;enzyme&quot;},
+ &quot;guide&quot;: {&quot;kind&quot;: &quot;none&quot;}}
+</code></pre>
+<p><code>resolve.py</code> 照写进 keys：<code>g_start</code>、<code>g_on</code>、<code>g_end</code>、<code>g_off</code>、<code>g_tick</code>（片内帧另加 <code>G_*</code>）。<code>validate_events.py</code> 加第七节能自动查的几条。这两处改动随 kit.jsx 一起派施工。</p>
+<hr />
+<h2>七、验收表</h2>
+<p>审片时逐条打勾，不过的就是"必改"。"脚本"指 <code>check_guides.py</code>（施工时写，读 keys 和成片）；"抽帧"指在 <code>g_on</code>、<code>f_land</code>、<code>goff</code> 三帧各截一张。</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>条目</th>
+<th>阈值</th>
+<th>怎么查</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>V1</td>
+<td>同时被引导的东西</td>
+<td>任一帧最多 1 个（一个词叫出的一组算 1 个，如 "two objectives" 的两块牌）</td>
+<td>脚本：数重叠的引导窗口</td>
+</tr>
+<tr>
+<td>V2</td>
+<td>引导密度</td>
+<td>相邻两次 <code>g_on</code> 至少隔 36 帧；每句最多 3 次；任意 10 秒内最多 5 次</td>
+<td>脚本</td>
+</tr>
+<tr>
+<td>V3</td>
+<td>安静时间</td>
+<td>引导处在变化中的时间（拉焦和预颤 <code>g_start</code>→<code>f_land</code>、走料全程、轮廓光的升和降）不超过该段说话时间的 45%；焦点和轮廓光稳在一处不算变化</td>
+<td>脚本</td>
+</tr>
+<tr>
+<td>V4</td>
+<td>提前量</td>
+<td>焦点到位 <code>g_on</code> 在 <code>f_land</code> 前 4–12 帧；起拉 <code>g_start</code> 在 <code>f_land</code> 前 16–36 帧；引导不晚于词，也不早于词 0.6 秒以上</td>
+<td>脚本</td>
+</tr>
+<tr>
+<td>V5</td>
+<td>预颤和"嗒"</td>
+<td>预颤 4–8 帧，结束于 <code>f_land</code>；"嗒"在 <code>f_land</code> 前 3–6 帧；屏上位移不超过 6 像素，转动不超过 2°</td>
+<td>脚本查帧；抽帧量位移</td>
+</tr>
+<tr>
+<td>V6</td>
+<td>亮度</td>
+<td>被点名零件局部亮度提升不超过 +0.3 EV（出镜段 +0.2 EV）；全帧平均亮度因引导变化不超过 3%；亮度爬升不少于 12 帧；整屏亮度起伏每秒不超过 2 次</td>
+<td>ffmpeg <code>signalstats</code> 逐帧 YAVG，看曲线；局部亮度在抽帧上框零件取平均</td>
+</tr>
+<tr>
+<td>V7</td>
+<td>焦点</td>
+<td>点名到位后主体弥散圆不超过 1 像素；背景板面 6–14 像素；焦点拉动 12–24 帧，不过冲、不来回</td>
+<td>抽帧放大看；看焦距曲线</td>
+</tr>
+<tr>
+<td>V8</td>
+<td>走料</td>
+<td>只在目标画外或距离超过 35% 画面宽时出现；每句最多 1 次；速度不超过每秒 0.6 画面宽；到浇口后 6 帧内消失；不是红色</td>
+<td>脚本 + 一眼判</td>
+</tr>
+<tr>
+<td>V9</td>
+<td>没有常驻标记</td>
+<td>画面上没有任何只为引导存在的点、圈、箭头；不需要引导时画面上什么都不加</td>
+<td>一眼判</td>
+</tr>
+<tr>
+<td>V10</td>
+<td>镜头跟焦点</td>
+<td>有 <code>camera_to</code> 的引导，镜头起动不早于 <code>g_start</code> 后 6 帧</td>
+<td>脚本</td>
+</tr>
+<tr>
+<td>V11</td>
+<td>不提前泄底</td>
+<td>引导只指向已经在画面上的东西，或它马上要长出来的浇口位置；词说出之前不让新内容（新字、新数字、新零件的样子）先露出来</td>
+<td>对事件表一眼判</td>
+</tr>
+<tr>
+<td>V12</td>
+<td>出镜段</td>
+<td>人身上没有任何引导（不加光、不虚化）；零件等待时弥散圆 2–4 像素；手伸到零件前那一拍零件不加光</td>
+<td>抽帧</td>
+</tr>
+<tr>
+<td>V13</td>
+<td>二维页</td>
+<td>非点名图层模糊不超过 2.5 像素、不透明度不低于 0.75、饱和度不低于 0.7；标题、标签、批注、出处行永远不虚</td>
+<td>抽帧</td>
+</tr>
+<tr>
+<td>V14</td>
+<td>17 分钟不累</td>
+<td>全片引导总次数平均每分钟不超过 15 次，任一段不超过每分钟 25 次；连着看完一章，组员说不出"有东西一直在闪"</td>
+<td>脚本统计；组员看一章（不需要懂化学）</td>
+</tr>
+</tbody>
+</table>
+<p>V1–V5、V8、V10、V14 的次数全部能从 keys 算，渲染前就能查，不用等成片。</p>
+<hr />
+<h2>八、三个样例，逐拍</h2>
+<p>帧号是段内 60 fps 帧，取自现在的 <code>keys/&lt;段&gt;.json</code>（词开口帧）。施工时以重跑 <code>resolve.py</code> 后的数为准。画面内容照 01 文档，这里只写引导怎么走。</p>
+<h3>8.1 出镜段 3-01（D，384 帧）</h3>
+<p>"Okay. To get this, picture a lock and a key."</p>
+<p>人旁边（画面右侧）：一把销子锁剖面挂在浇口上，一把钥匙。</p>
+<table>
+<thead>
+<tr>
+<th>帧</th>
+<th>词</th>
+<th>画面上的事</th>
+<th>引导</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–39</td>
+<td>（人淡入）</td>
+<td>D 完全露出；锁挂在浇口上，慢慢轻转（待机微动）</td>
+<td>无。锁略虚（弥散圆 3 像素），轮廓光 0。眼睛在人脸上</td>
+</tr>
+<tr>
+<td>39–135</td>
+<td>"Okay. To get this,"</td>
+<td>D 说话</td>
+<td>无。这句没有叫零件</td>
+</tr>
+<tr>
+<td>160→176</td>
+<td></td>
+<td></td>
+<td><strong>焦点点名</strong>：锁从虚变实（<code>g_start</code> 160，<code>g_on</code> 176），轮廓光从 0 起亮</td>
+</tr>
+<tr>
+<td>178–184</td>
+<td></td>
+<td>锁在浇口上绷一下（拔的预备）</td>
+<td><strong>预颤</strong>就是拔的预备；"嗒"在 180</td>
+</tr>
+<tr>
+<td>184</td>
+<td>"picture"</td>
+<td>锁从浇口弹下、转正（拔）</td>
+<td>轮廓光到峰值 +0.15 EV</td>
+</tr>
+<tr>
+<td>230</td>
+<td>"lock"</td>
+<td>前面四分之一壳打开，露出弹子销</td>
+<td>无新引导（同一零件，46 帧内又被叫到）</td>
+</tr>
+<tr>
+<td>260–310</td>
+<td></td>
+<td></td>
+<td>锁的轮廓光退回 0（<code>goff</code> 约 290）</td>
+</tr>
+<tr>
+<td>292–340</td>
+<td>"and a"</td>
+<td>D 抬手，钥匙在她手边</td>
+<td><strong>手就是引导</strong>（F3 遮挡那一处），零件不加光</td>
+</tr>
+<tr>
+<td>340</td>
+<td>"key."</td>
+<td>钥匙滑进锁孔，五根销齐线，锁芯轻转</td>
+<td>焦点已在锁上，钥匙进入同一焦平面，不再拉焦</td>
+</tr>
+<tr>
+<td>355–384</td>
+<td>（说完）</td>
+<td>镜头往锁孔推（下一段的转场）</td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+<p>这一段一共 1 次焦点点名、1 次预颤，引导处在变化中的时间约占说话时间的 17%。</p>
+<h3>8.2 画外板面段 2-08（A，920 帧）</h3>
+<p>"So here's where we're going. First, the lock. Then how AI helped cut a key for it. Then what happened in the lab. And finally, the big one: how much did the computers really help?"</p>
+<p>板面上：主料杆（药物之路）和站牌，照 1-09 已认可的场景。</p>
+<table>
+<thead>
+<tr>
+<th>帧</th>
+<th>词</th>
+<th>画面上的事</th>
+<th>引导</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–101</td>
+<td>"So here's where we're going."</td>
+<td>全景板面，镜头慢慢漂</td>
+<td>无。定场不超过 2 秒，焦点放在路的中段</td>
+</tr>
+<tr>
+<td>150→195</td>
+<td>"First, the"</td>
+<td></td>
+<td><strong>走料</strong>：鼓包从路的起点出发，沿主料杆走到 Target 站的浇口（Target 离画面中心超过 35% 宽），焦点挂在鼓包上；镜头 156 起跟</td>
+</tr>
+<tr>
+<td>189–195</td>
+<td></td>
+<td>Target 站牌在浇口上绷一下</td>
+<td><strong>预颤</strong>，"嗒"在 197</td>
+</tr>
+<tr>
+<td>195–201</td>
+<td></td>
+<td>鼓包被站牌吃进去</td>
+<td>焦点转到站牌，到位</td>
+</tr>
+<tr>
+<td>201</td>
+<td>"lock."</td>
+<td>Target 站描红（红色顺着站牌刻的圈流一圈）</td>
+<td>轮廓光到峰值（描红是内容，不算引导亮度）</td>
+</tr>
+<tr>
+<td>300→362</td>
+<td>"Then how AI helped"</td>
+<td></td>
+<td><strong>走料</strong>：鼓包从 Target 走到 Hit（下一站在画外），镜头 306 起跟</td>
+</tr>
+<tr>
+<td>362–368</td>
+<td></td>
+<td>Hit 站预颤</td>
+<td>"嗒"在 364</td>
+</tr>
+<tr>
+<td>368</td>
+<td>"cut"</td>
+<td>Hit 站描红</td>
+<td>焦点到位</td>
+</tr>
+<tr>
+<td>397</td>
+<td>"key"</td>
+<td>站牌上的小钥匙图案亮</td>
+<td>无新引导（同一站牌）</td>
+</tr>
+<tr>
+<td>500→560</td>
+<td>"Then what happened"</td>
+<td></td>
+<td><strong>走料</strong>：Hit → Improve</td>
+</tr>
+<tr>
+<td>560–566</td>
+<td></td>
+<td>Improve 站预颤</td>
+<td>"嗒"在 562</td>
+</tr>
+<tr>
+<td>566</td>
+<td>"lab."</td>
+<td>Improve 站描红；三站红色连成 today's route</td>
+<td>焦点到位</td>
+</tr>
+<tr>
+<td>700–760</td>
+<td>"the big one:"</td>
+<td>镜头慢慢升起，三段红路都在画面里</td>
+<td>无。焦点不动</td>
+</tr>
+<tr>
+<td>790→822</td>
+<td>"how much"</td>
+<td></td>
+<td><strong>焦点点名</strong>（远处）：焦点往路的远端拉，近处三站变虚，后面几站（灰）变实。不走料：那几站还没走到</td>
+</tr>
+<tr>
+<td>831</td>
+<td>"computers"</td>
+<td>镜头沿料杆看向远处，后面几站灰着</td>
+<td>不加轮廓光（灰站不亮，表示还没到）</td>
+</tr>
+<tr>
+<td>831–917</td>
+<td>"really help?"</td>
+<td>镜头继续极慢推</td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+<p>这一段走料 3 次（每句 1 次），焦点点名 1 次，预颤 3 次。引导处在变化中的时间约占说话时间的 38%。走料就是这段的内容（路往前走），所以在这一段它承担主要的引导；全片别的段很少需要它。</p>
+<h3>8.3 钻取段 3-04（D，1030 帧，CDK20 盖章机）</h3>
+<p>"Our lock is CDK20. It's an enzyme, a protein with a chemical job. Its keyhole is a pocket where it normally grabs a small molecule called ATP. Plug that pocket with the right key, and the enzyme can't do its job."</p>
+<p>上一段（3-03）结尾：镜头沿料杆移到第 3 区的 CDK20。</p>
+<table>
+<thead>
+<tr>
+<th>帧</th>
+<th>词</th>
+<th>画面上的事</th>
+<th>引导</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0→52</td>
+<td>"Our lock is"</td>
+<td>3-03 带过来的鼓包沿料杆走到 CDK20 的浇口</td>
+<td><strong>走料</strong>（从销子锁到 CDK20，目标原在画外），焦点挂鼓包，镜头跟</td>
+</tr>
+<tr>
+<td>54–60</td>
+<td></td>
+<td>CDK20 在浇口上绷一下</td>
+<td><strong>预颤</strong>，"嗒"在 56</td>
+</tr>
+<tr>
+<td>60</td>
+<td>"CDK20."</td>
+<td>CDK20 转正，标签 predicted model 贴边</td>
+<td>焦点到位（<code>g_on</code> 52），轮廓光峰值 +0.25 EV</td>
+</tr>
+<tr>
+<td>143→159</td>
+<td>"It's an"</td>
+<td></td>
+<td><strong>焦点点名</strong>：焦点从整个零件收到前壳的分件线（同一零件的不同部位，要换焦平面，算一次）</td>
+</tr>
+<tr>
+<td>161–167</td>
+<td></td>
+<td>前壳的预备：先往里压半毫米</td>
+<td>机构自己的预备就是预颤</td>
+</tr>
+<tr>
+<td>167</td>
+<td>"enzyme,"</td>
+<td>前壳沿分件线翻开，镜头进去</td>
+<td>轮廓光换到分件线那一圈</td>
+</tr>
+<tr>
+<td>200–260</td>
+<td></td>
+<td>镜头进到里面，微距，景深最浅</td>
+<td>无（运镜本身在带眼睛）</td>
+</tr>
+<tr>
+<td>265→281</td>
+<td>"protein with a"</td>
+<td></td>
+<td><strong>焦点点名</strong>：摆臂</td>
+</tr>
+<tr>
+<td>283–289</td>
+<td></td>
+<td>摆臂抬高一点（落下的预备）</td>
+<td>预颤</td>
+</tr>
+<tr>
+<td>289</td>
+<td>"chemical"</td>
+<td>摆臂落下盖一个章，纸带走一格，之后按节拍一直盖</td>
+<td>轮廓光峰值，<code>goff</code> 约 440</td>
+</tr>
+<tr>
+<td>355→371</td>
+<td>"Its"</td>
+<td></td>
+<td><strong>焦点点名</strong>：凹槽（从摆臂移到表面的红圈凹槽）</td>
+</tr>
+<tr>
+<td>379</td>
+<td>"keyhole"</td>
+<td>凹槽口出现在焦平面</td>
+<td>—</td>
+</tr>
+<tr>
+<td>449</td>
+<td>"pocket"</td>
+<td>凹槽的红圈亮</td>
+<td>无新引导（红圈亮是内容）</td>
+</tr>
+<tr>
+<td>593–599</td>
+<td>"small"</td>
+<td>料杆口上一颗黄色料珠（ATP）在浇口上绷一下</td>
+<td><strong>预颤</strong>，"嗒"在 595。料珠是内容，不是引导物</td>
+</tr>
+<tr>
+<td>599–657</td>
+<td>"molecule called ATP."</td>
+<td>ATP 滚进凹槽、落座，摆臂随即盖章</td>
+<td>焦点跟着 ATP 走（目标会动，逐帧取位置）；这一段不算新的点名，不加轮廓光</td>
+</tr>
+<tr>
+<td>707→723</td>
+<td>"Plug" 前</td>
+<td></td>
+<td><strong>焦点点名</strong>：钥匙在凹槽口外出现的位置</td>
+</tr>
+<tr>
+<td>731</td>
+<td>"Plug"</td>
+<td>金钥匙进画</td>
+<td>轮廓光峰值</td>
+</tr>
+<tr>
+<td>777</td>
+<td>"pocket"</td>
+<td>钥匙插进凹槽，占住 ATP 的位置，ATP 被挤到旁边</td>
+<td>焦点留在凹槽（钥匙已在里面）</td>
+</tr>
+<tr>
+<td>920→936</td>
+<td>"the"</td>
+<td></td>
+<td><strong>焦点点名</strong>：回到摆臂</td>
+</tr>
+<tr>
+<td>950</td>
+<td>"can't"</td>
+<td>摆臂停在半空，纸带停，最后一个章只盖一半</td>
+<td>轮廓光峰值 +0.2 EV，保持到句尾</td>
+</tr>
+<tr>
+<td>997–1030</td>
+<td>"job."</td>
+<td>画面静止只剩极慢的镜头漂移</td>
+<td>轮廓光退回 0；下一段的走料从这里起</td>
+</tr>
+</tbody>
+</table>
+<p>这一段焦点点名 5 次、走料 1 次（17 秒 6 次，约每分钟 21 次，是全片最密的一类段落，仍在 V2、V14 以内），引导处在变化中的时间约占说话时间的 38%。</p>
+<hr />
+<h2>九、施工顺序</h2>
+<ol>
+<li>先改事件表的工具：<code>resolve.py</code> 输出 <code>g_*</code>、<code>validate_events.py</code> 加 V1–V5、V8、V10 的检查，写 <code>check_guides.py</code>。</li>
+<li>Blender：写 <code>bl_guide.py</code>，在 3-04 样片上先用（3-04 本来就是第一批样片）。</li>
+<li>Remotion：kit.jsx 加 <code>guidePlan</code>、<code>Lens</code>/<code>Layer</code>、<code>nudge</code>、<code>RunnerPulse</code>，先换一页（Manual304）给总管看，过了再换其余二维页。</li>
+<li>混音脚本读 <code>g_tick</code> 放"嗒"（等音乐恢复以后和 03 文档的音效一起做）。</li>
+</ol>

@@ -4,7 +4,7 @@
 
     import sys; sys.path.insert(0, r"D:/。hkbu/molecular science/镜头设计_v3/映射")
     import maplib as M
-    T = M.load()                      # 默认读 映射/master_v1.json
+    T = M.load()                      # 默认读 映射/master_v2.json（11-22 起；没裁停顿的 v1 用 CDK20_MAP 指定）
     g = T.group("1-08")               # 一段（出镜对话组用 "1-05+1-06+1-07"，或其中任一个段号）
     g.word("1-08.w018")               # 词：{"wid","w","t0","t1","f0","f1","g0","g1",...}，f 是段内 60 fps 帧
     g.key("only#2")                   # 按"词#第几次"找（和 beats_resolve 的写法一样）
@@ -21,7 +21,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 FPS = 60
-DEFAULT = HERE / "master_v1.json"
+DEFAULT = HERE / "master_v2.json"     # 11-22 起：v1 按 15_B档_停顿清单 裁停顿后的总表（trim_pauses.py 出）；要 v1 设 CDK20_MAP
 
 
 def norm(w):

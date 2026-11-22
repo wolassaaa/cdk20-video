@@ -1,0 +1,315 @@
+<!doctype html><meta charset="utf-8"><title>交接_DS_页面</title><style>body{font-family:"Microsoft YaHei",sans-serif;max-width:900px;margin:24px auto;padding:0 16px;line-height:1.7;color:#222;background:#fff}
+table{border-collapse:collapse;margin:12px 0}td,th{border:1px solid #ccc;padding:6px 10px}th{background:#f2f2f2}
+code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1px solid #ddd;padding-bottom:4px}a{color:#0a58ca}</style><h1>交接给 DS：二维说明书页（4-03、4-10，11-19 加 5-10）</h1>
+<p>HKBU SCIE1007 课程作业的科普视频。这是本科小组作业：一条 15–20 分钟的英文科普片，讲已发表论文 Ren et al. 2023（Chem. Sci.）的公开案例。我们不做实验，也不设计或优化分子；片中的图只是示意，分子、数字和结论都来自公开文献，出处写在画面上。你的活只有一件：给两段旁白各做一页 Remotion 动画。</p>
+<p>写于 2026-11-18（韩国时间）。总管：Claude。有问题写进本文末尾的"问题"一节，或直接问导演。</p>
+<hr />
+<h2>0. 交付什么</h2>
+<table>
+<thead>
+<tr>
+<th>段</th>
+<th>合成名 / 文件名</th>
+<th>类型</th>
+<th>段长</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4-03</td>
+<td><code>Manual403</code> → <code>镜头设计_v2/tests/T4_remotion/src/v3/manual/Manual403.jsx</code></td>
+<td>说明书页（画外音）</td>
+<td>1190 帧（19.8 秒）</td>
+</tr>
+<tr>
+<td>4-10</td>
+<td><code>Manual410</code> → <code>镜头设计_v2/tests/T4_remotion/src/v3/manual/Manual410.jsx</code></td>
+<td>说明书页（画外音）</td>
+<td>1396 帧（23.3 秒）</td>
+</tr>
+<tr>
+<td>5-10</td>
+<td><code>Manual510</code> → <code>镜头设计_v2/tests/T4_remotion/src/v3/manual/Manual510.jsx</code></td>
+<td>说明书页（画外音）</td>
+<td>1746 帧（29.1 秒）；11-19 加入，做法和 4-03、4-10 完全一样，至少 20 个事件</td>
+</tr>
+</tbody>
+</table>
+<p>每段交四样东西：
+1. 事件表 <code>镜头设计_v3/映射/events/&lt;段&gt;.json</code>
+2. 页面 <code>.../manual/Manual&lt;段号去横线&gt;.jsx</code>
+3. 整段 1080p 出片 <code>镜头设计_v3/映射/_cache/pages/Manual&lt;..&gt;.mp4</code>，加上静帧和 <code>report.md</code>（由检查命令自动生成）
+4. 报告 <code>镜头设计_v3/映射/_cache/pages/Manual&lt;..&gt;/ds_report.md</code>：中文，格式见第 8 节</p>
+<p><strong>画什么：</strong> 以剧本为准，本文不重复。去 <code>镜头设计_v3/script/script_v3.3.md</code> 搜 <code>**4-03 ·</code>、<code>**4-10 ·</code> 和 <code>**5-10 ·</code>，读那一节的旁白、<code>Visual:</code> 和 <code>Source:</code> 三行。
+- 旁白一律以 <code>镜头设计_v3/映射/master_v1.json</code> 里这段的 <code>words</code> 为准，剧本只作参考。
+- 剧本里写的 [3D]、[TD]、[INK]、[2D]，一律改用二维说明书页的做法来画。
+- 画面上的字只能取自这段旁白，或剧本的 Visual 行。</p>
+<hr />
+<h2>1. 先读这些（照抄结构，不要自创框架）</h2>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>看什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>镜头设计_v3/映射/GLM页面手册.md</code></td>
+<td>全部规矩（第 3 节画面、第 4 节事件表、第 5 节检查表）。<strong>本文第 4 节是它的补充，两者冲突时以本文为准</strong></td>
+</tr>
+<tr>
+<td><code>manual/Manual401.jsx</code> + <code>映射/events/4-01.json</code></td>
+<td>最近的范例：一串珠子折成三维、编号、按把握程度上色。同一样东西从头用到尾</td>
+</tr>
+<tr>
+<td><code>manual/Manual407.jsx</code> + <code>events/4-07.json</code></td>
+<td>循环飞进屏幕、四站逐个改写、打分条、回流箭头</td>
+</tr>
+<tr>
+<td><code>manual/Manual304.jsx</code></td>
+<td>放大圈（圆形 div + <code>overflow: hidden</code>）的写法、钥匙竖着落下的写法</td>
+</tr>
+<tr>
+<td><code>manual/Manual308.jsx</code></td>
+<td>点阵（几百个小圆点）、一部分点变实的写法；盖章的写法</td>
+</tr>
+<tr>
+<td><code>manual/Manual305.jsx</code></td>
+<td>三个步骤框、计数跳动</td>
+</tr>
+<tr>
+<td><code>manual/kit.jsx</code></td>
+<td>共用部件：<strong>只用，不改</strong></td>
+</tr>
+</tbody>
+</table>
+<p><code>manual/</code> 指 <code>镜头设计_v2/tests/T4_remotion/src/v3/manual/</code>。</p>
+<hr />
+<h2>2. 环境和命令</h2>
+<p>项目根目录：<code>D:/。hkbu/molecular science</code>（路径里有全角句号，命令里要整段加引号）。</p>
+<table>
+<thead>
+<tr>
+<th>做什么</th>
+<th>命令（在项目根目录跑）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>导出这段声音到 public</td>
+<td><code>python 镜头设计_v3/映射/page_tool.py prep 4-03</code></td>
+</tr>
+<tr>
+<td>简写生成事件表，并校验、算帧、拷 keys</td>
+<td><code>cd 镜头设计_v3/映射 &amp;&amp; python -X utf8 ev_make.py 4-03 _cache/spec_4-03.txt</code></td>
+</tr>
+<tr>
+<td>只出静帧（快，改版式时用）</td>
+<td><code>python 镜头设计_v3/映射/page_tool.py check 4-03 --stills-only</code></td>
+</tr>
+<tr>
+<td>整段出片 + 静帧 + 找长静止（交付前必跑）</td>
+<td><code>python 镜头设计_v3/映射/page_tool.py check 4-03</code></td>
+</tr>
+<tr>
+<td>单帧看某一帧</td>
+<td>在 <code>镜头设计_v2/tests/T4_remotion</code> 下：<code>node node_modules/@remotion/cli/remotion-cli.js still src/v3/manual/Manual403.jsx Manual403 out.png --frame=600 --public-dir="../../../镜头设计_v3/映射/_cache/ch1/public" --log=error</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意：</strong>
+- 4-03 和 4-10 的声音已经导出到 <code>映射/_cache/ch1/public/4-03.wav</code>、<code>4-10.wav</code>，prep 可以跳过。
+- 如果 Remotion 在系统 Temp 下建目录报 EPERM，先设 <code>TEMP</code>、<code>TMP</code> 指向 <code>D:/。hkbu/molecular science/_env/tmp</code> 再跑。
+- 整段出片很吃 CPU。渲染队列（<code>_env/queue/</code>）在跑别的任务时，先只出静帧，最后再整段出片。</p>
+<h3>事件表简写格式（给 ev_make.py 用）</h3>
+<p>第一行写 note，必须以"HKBU SCIE1007 课程作业的科普视频："开头，后面写这一页画什么、页面文件名。之后每行一个事件，用 <code>|</code> 分隔：</p>
+<pre><code>id | verb | 词号 | lead | until | means
+title | appear | 003 | 10 | end | 某个词：标题
+</code></pre>
+<ul>
+<li><strong>词号</strong>：本段的三位编号（<code>003</code> 指 <code>4-03.w003</code>）。去 <code>master_v1.json</code> 这段的 <code>words</code> 里查每个词的 <code>wid</code> 和 <code>f0</code>（第几帧开始说）。</li>
+<li><strong>verb</strong>：只用 grow / appear / move / snap / morph。</li>
+<li><strong>lead</strong>：提前几帧起动，东西在那个词说出口时到位。</li>
+<li><strong>until</strong>：写一个词号，或写 <code>end</code> 表示到句尾。</li>
+<li>ev_make.py 跑完会打印每个事件的 <code>起/落/止</code> 帧。页面里用 <code>E.&lt;id&gt;.s</code>、<code>E.&lt;id&gt;.l</code>、<code>E.&lt;id&gt;.e</code> 取这三个数。</li>
+</ul>
+<hr />
+<h2>3. 页面骨架（照抄）</h2>
+<pre><code class="language-jsx">// HKBU SCIE1007 课程作业的科普视频：第 4 章二维说明书页 4-03（画外音）……一句话说明画面……
+import React from &quot;react&quot;;
+import {AbsoluteFill, Audio, Composition, Easing, registerRoot, staticFile, useCurrentFrame} from &quot;remotion&quot;;
+import K from &quot;./keys_4-03.json&quot;;
+import {PAPER, INK, SOFT, RED, ease, out, span, Part, Write, Bead, evMap, Label, Pen, PageFrame, Source, Plate} from &quot;./kit.jsx&quot;;
+
+const E = evMap(K);
+const Scene = () =&gt; {
+  const f = useCurrentFrame();
+  const bead = [[0, 130, 96], [E.title.l, 440, 96], /* …每个事件落地时红珠停在哪…, */ [K.len_f, 1800, 930]];
+  return (
+    &lt;AbsoluteFill style={{background: PAPER, fontFamily: &quot;Serif&quot;, color: INK}}&gt;
+      &lt;Audio src={staticFile(&quot;4-03.wav&quot;)} /&gt;
+      &lt;PageFrame /&gt;
+      &lt;div style={{position: &quot;absolute&quot;, left: 96, top: 62, fontSize: 56}}&gt;&lt;Write p={span(f, E.title.s, E.title.e)}&gt;标题&lt;/Write&gt;&lt;/div&gt;
+      {/* …内容… */}
+      &lt;Source p={span(f, E.title.l, E.title.l + 20)}&gt;Ren et al., Chem. Sci. 2023 · Illustration&lt;/Source&gt;
+      &lt;Bead K={bead} f={f} /&gt;
+    &lt;/AbsoluteFill&gt;
+  );
+};
+const Root = () =&gt; &lt;Composition id=&quot;Manual403&quot; component={Scene} durationInFrames={K.len_f} fps={60} width={1920} height={1080} /&gt;;
+registerRoot(Root);
+</code></pre>
+<p>kit.jsx 的部件：
+- <code>span(f, a, b, easing)</code>：f 在 a→b 之间返回 0→1，可选缓动函数。
+- <code>Part</code>：零件图，用 name、cx、cy、w 定位；宽高比自动按真实图片算，不要自己给 ar。
+- <code>Write</code>：字一笔一笔写出来。
+- <code>Label</code>：x 是中心，y 是顶边，可选 align="left"。
+- <code>Pen</code>：红色手写批注，不超过 4 个词。
+- <code>Plate</code>：字牌。
+- <code>Bead</code>：红珠，在页面上带路，每个事件落地时停在一个空白处，不许压在字或零件上。</p>
+<p>能用的零件名：banknote book buildings cal calendar capsule capsules cdk20 checklist chip curve disks flask globe hk hospital ivbag key liver lock lungs magnifier magnifier1 paper paper1 person person_r person_w plate ruler tower tube tubes univ。</p>
+<hr />
+<h2>4. 规矩（全部要守，按重要程度排）</h2>
+<h3>4.1 内容</h3>
+<ol>
+<li>画面上每个英文字都要能在这段旁白里找到，或在剧本 Visual 行里找到。不许自己加结论、换说法、加数字。数字照旁白原样写（例如 "8,918"、"54"）。</li>
+<li>论文的事实只用剧本 Source 行指向的公开内容。拿不准就不画，写进报告的"没把握"一栏。</li>
+<li><strong>出处行</strong>：左下角，<code>&lt;Source&gt;</code>。Source 代号的写法照 <code>GLM页面任务.md</code> 的对照表（R23 → "Ren et al., Chem. Sci. 2023"），几篇之间用分号隔开，最后加 " · Illustration"。</li>
+<li>全片固定的比喻：锁 = 蛋白，钥匙 = 分子。芯片零件 <code>chip</code> 上印着 "AlphaFold"，只在讲 AlphaFold 时直接用；讲别的工具时，照 Manual207.jsx 盖一块深色小牌，写上正确名字。</li>
+</ol>
+<h3>4.2 对时（声音是时间基准）</h3>
+<ol start="5">
+<li>每个动作都对着旁白里的一个词：东西在那个词说出口时到位（落地帧 = 那个词的 f0，误差不超过 3 帧）。</li>
+<li>一句话说着的时候，相邻两个事件落地相隔不超过 90 帧（ev_make.py 里的 validate 会查 V4）。不够就找中间的词补一个事件。</li>
+<li>整段不许有 2.8 秒以上的静止（整段检查会用 freezedetect 报出来）。补的动作要和内容有关：画线、打勾、圈出、数字跳动、箭头连起来、零件移位。<strong>不许用镜头慢推或整页晃动来凑。</strong></li>
+<li>两个动作的起帧至少错开 2 帧。入场用 <code>out</code> 或 <code>Easing.out(Easing.back(1.4))</code>，位移用 <code>ease</code>。</li>
+</ol>
+<h3>4.3 丰富度（导演最在意，之前的简单版被整批否掉过）</h3>
+<ol start="9">
+<li>每一句至少有一个"变化"：东西移动、变形、变成另一样东西、被连线、被打勾或打叉、数字跳动。只是"出现"不算变化。</li>
+<li>事件平均每 1.5 秒至少一个：4-03 至少 13 个，4-10 至少 16 个。</li>
+<li>同一样东西从头用到尾，跟着旁白变。不要一句摆一个新东西上去就不管了。</li>
+<li>最后一帧要把这段讲的内容完整摆在那里，看最后一帧就能明白这段在说什么。</li>
+</ol>
+<h3>4.4 版式</h3>
+<ol start="13">
+<li>画面 1920×1080。纸色底 <code>PAPER</code>，字用 <code>INK</code>，次要字用 <code>SOFT</code>，强调只用 <code>RED</code>，不加别的颜色。零件图自带的颜色不算；蛋白表面可以照 Manual304.jsx 用那一种半透明蓝。</li>
+<li>字体：正文 <code>fontFamily: "Serif"</code>（Instrument Serif）。手写只用 <code>&lt;Pen&gt;</code>（Caveat），红色，而且只做批注。</li>
+<li>字号：标题 52–60；字牌 46–80；标签 22–30；出处 17。</li>
+<li>任何两个元素都不许重叠：字和字、字和零件、字和线都不行。字不许出页框（页框 x 40–1880，y 34–1036），也不许压线。先在代码里算框，字宽按"字号 × 0.5 × 字数"估。</li>
+<li>内容区：x 96–1820，y 170–1000。标题行在 y 62–130，出处行在 y 1046。</li>
+</ol>
+<h3>4.5 文件和协作</h3>
+<ol start="18">
+<li>只许写第 0 节列出的文件。不改 kit.jsx、oncam.jsx，不改别的段、总表和脚本，不删任何东西。</li>
+<li>每个新文档、每段代码的开头注释，都以"HKBU SCIE1007 课程作业的科普视频"开头。</li>
+<li>片中文字一律英文；报告、注释、和导演说话用中文。</li>
+<li>不要 git commit，由总管提交。不要提交媒体文件（mp4、png、wav），不要提交 <code>_env/</code> 目录。</li>
+</ol>
+<hr />
+<h2>5. 检查表（全过才交，逐项写进报告）</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>查什么</th>
+<th>怎么查</th>
+<th>合格</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>事件表合法</td>
+<td>ev_make.py 的输出</td>
+<td>"通过"，问题 0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>页面能渲</td>
+<td>整段检查没报 Remotion 错</td>
+<td>出了 mp4</td>
+</tr>
+<tr>
+<td>3</td>
+<td>长静止</td>
+<td><code>report.md</code> 的"长静止"</td>
+<td>写着"没有"</td>
+</tr>
+<tr>
+<td>4</td>
+<td>对词</td>
+<td>每个事件的落地帧对它挂的词的 f0</td>
+<td>差 ≤ 3 帧</td>
+</tr>
+<tr>
+<td>5</td>
+<td>丰富度</td>
+<td>事件数、每句的变化</td>
+<td>4-03 ≥ 13 个，4-10 ≥ 16 个；每句有变化</td>
+</tr>
+<tr>
+<td>6</td>
+<td>不重叠</td>
+<td>报告里列出每个元素的框（x, y, 宽, 高），两两比较</td>
+<td>没有交叉</td>
+</tr>
+<tr>
+<td>7</td>
+<td>字只来自旁白或剧本</td>
+<td>逐个对</td>
+<td>全对</td>
+</tr>
+<tr>
+<td>8</td>
+<td>出处行</td>
+<td>左下角，结尾 "· Illustration"</td>
+<td>有</td>
+</tr>
+<tr>
+<td>9</td>
+<td>红珠</td>
+<td>每个落点的静帧</td>
+<td>不压字，不压零件</td>
+</tr>
+<tr>
+<td>10</td>
+<td>看图</td>
+<td>用眼睛逐张看 <code>_cache/pages/&lt;合成&gt;/</code> 下的静帧，加上最后一帧</td>
+<td>没有重叠、出框、裁切、错字；没有一屏空着超过 1 秒</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>6. 常见坑（前面几页踩过的）</h2>
+<ul>
+<li>用 <code>span(p, i/N, i/N + 0.2)</code> 让一排东西依次出现时，最后几个的进度到不了 1，会长不全或卡在半大。要写成 <code>span(p, 0.8*i/N, 0.8*i/N + 0.2)</code>。</li>
+<li>想裁掉 SVG 圆形，clipPath 不起作用。要裁就用圆形 div 加 <code>overflow: hidden</code>（见 Manual304.jsx 的放大圈）。</li>
+<li>结尾的红珠容易停在字上。最后一个落点要挑空白处，停稳后再给一个只差 1 像素的点，让它静止。</li>
+<li>标签和图标挨得太近，看起来像压线。至少留 12 像素。</li>
+<li>用了事件表里没有的 <code>E.xxx</code>，页面会直接报错。</li>
+<li>Composition id 和文件名必须一样。</li>
+</ul>
+<hr />
+<h2>7. 交付流程</h2>
+<ol>
+<li>读第 1 节的文件，再读剧本里这段的三行和 <code>master_v1.json</code> 里这段的词。</li>
+<li>在 <code>_cache/spec_&lt;段&gt;.txt</code> 写简写，跑 ev_make.py，直到通过。</li>
+<li>写页面，只出静帧，逐张看，改到第 5 节的第 6–10 项都过。</li>
+<li>整段出片，看 <code>report.md</code> 的长静止，改到"没有"。</li>
+<li>写报告。</li>
+</ol>
+<hr />
+<h2>8. 报告格式（<code>_cache/pages/&lt;合成&gt;/ds_report.md</code>）</h2>
+<ul>
+<li>段号、合成名、段长</li>
+<li>画面讲了什么（三四句）</li>
+<li>事件表：每个事件的 id、挂的词、落地帧</li>
+<li>检查表 10 项，逐项写"过"或"不过"，不过的写原因</li>
+<li>第 6 项算的元素框</li>
+<li>没把握的地方（特别是科学内容）</li>
+</ul>
+<hr />
+<h2>9. 问题</h2>
+<p>（DS 有问题写这里）</p>

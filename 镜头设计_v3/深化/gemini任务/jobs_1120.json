@@ -1,0 +1,7 @@
+[
+ {"prompt": "镜头设计_v3/深化/gemini任务/B4_事件设计.md", "out": "镜头设计_v3/深化/gemini任务/out_B4_事件_第6章.md", "attach": ["镜头设计_v3/深化/gemini任务/_B4_words.txt", "镜头设计_v3/深化/gemini任务/_B4_design.md", "镜头设计_v3/深化/gemini任务/_B4_rules.md", "镜头设计_v3/深化/gemini任务/_b_events_example.py.txt", "镜头设计_v3/深化/gemini任务/_skill_bpage.md"]},
+ {"prompt": "镜头设计_v3/深化/gemini任务/B4_事件设计_78.md", "out": "镜头设计_v3/深化/gemini任务/out_B4_事件_78.md", "attach": ["镜头设计_v3/深化/gemini任务/_B4_words.txt", "镜头设计_v3/深化/gemini任务/_B4_design.md", "镜头设计_v3/深化/gemini任务/_B4_rules.md", "镜头设计_v3/深化/gemini任务/_b_events_example.py.txt", "镜头设计_v3/深化/gemini任务/_skill_bpage.md"]},
+ {"prompt": "镜头设计_v3/深化/gemini任务/彩蛋分镜_上.md", "out": "镜头设计_v3/深化/gemini任务/out_彩蛋分镜_上.md", "attach": ["镜头设计_v3/深化/12_片尾彩蛋_Gemini方案_v4.md", "镜头设计_v3/深化/gemini任务/_09_camera.md", "镜头设计_v3/深化/12_Gemini角色设定.md"]},
+ {"prompt": "镜头设计_v3/深化/gemini任务/彩蛋分镜_下.md", "out": "镜头设计_v3/深化/gemini任务/out_彩蛋分镜_下.md", "attach": ["镜头设计_v3/深化/12_片尾彩蛋_Gemini方案_v4.md", "镜头设计_v3/深化/gemini任务/_09_camera.md", "镜头设计_v3/深化/12_Gemini角色设定.md"]},
+ {"prompt": "镜头设计_v3/深化/gemini任务/底乐设计.md", "out": "镜头设计_v3/深化/gemini任务/out_底乐设计.md", "attach": ["镜头设计_v3/深化/03_声音与TD世界.md"]}
+]

@@ -1,0 +1,291 @@
+{
+ "video": "D:/。hkbu/molecular science/镜头设计_v3/映射/_cache/ch1_1-02/check.mov",
+ "group": "1-02",
+ "fps": 60.0,
+ "frames": 1036,
+ "offset_f": 0,
+ "S1": {
+  "word_events": 16,
+  "table_dev_max_f": 0,
+  "video_checked": 23,
+  "video_no_motion": [],
+  "pass_": true
+ },
+ "S2": {
+  "pass_": true,
+  "early": []
+ },
+ "S3": {
+  "pass_": true,
+  "longest_still_f": 3,
+  "bad": []
+ },
+ "S4": {
+  "pass_": false,
+  "looks_like_30": true,
+  "dup_frames": 0,
+  "stepped_dups": 0,
+  "stepped_ratio": 0.0,
+  "blend_frames": 298,
+  "blend_first": [
+   30,
+   31,
+   32,
+   33,
+   34,
+   35,
+   36,
+   37,
+   38,
+   39,
+   40,
+   41,
+   115,
+   116,
+   117,
+   166,
+   167,
+   168,
+   169,
+   170
+  ],
+  "design_fade": 0,
+  "verdict": "有混帧（变速慢放）"
+ },
+ "sentences": [
+  {
+   "sid": "1-02.s1",
+   "f0": 9,
+   "f1": 262,
+   "last_motion_f": 262,
+   "end_dev": 0,
+   "longest_still_f": 3,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "1-02.s2",
+   "f0": 304,
+   "f1": 622,
+   "last_motion_f": 622,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "1-02.s3",
+   "f0": 659,
+   "f1": 720,
+   "last_motion_f": 720,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "1-02.s4",
+   "f0": 751,
+   "f1": 1032,
+   "last_motion_f": 1032,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  }
+ ],
+ "events": [
+  {
+   "id": "pulse_a",
+   "verb": "flow",
+   "w": "1,412",
+   "f_land": 31,
+   "table_dev": -4
+  },
+  {
+   "id": "cam_a",
+   "verb": "camera_to",
+   "w": "people",
+   "f_land": 146,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "num_grow",
+   "verb": "grow",
+   "w": "1,412",
+   "f_land": 35,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "ppl_1",
+   "verb": "grow",
+   "w": "people",
+   "f_land": 146,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "ppl_2",
+   "verb": "grow",
+   "w": "people",
+   "f_land": 156,
+   "table_dev": 10,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cal_grow",
+   "verb": "grow",
+   "w": "2022",
+   "f_land": 187,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "num_eject",
+   "verb": "eject",
+   "w": "alone.",
+   "f_land": 244,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_b",
+   "verb": "camera_to",
+   "w": "Here,",
+   "f_land": 314,
+   "table_dev": 10,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "hk_grow",
+   "verb": "grow",
+   "w": "Here,",
+   "f_land": 304,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "pulse_b",
+   "verb": "flow",
+   "w": "three",
+   "f_land": 357,
+   "table_dev": -6,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "liver_grow",
+   "verb": "grow",
+   "w": "three",
+   "f_land": 363,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "liver_eject",
+   "verb": "eject",
+   "w": "cancers,",
+   "f_land": 419,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_c",
+   "verb": "camera_to",
+   "w": "alongside",
+   "f_land": 480,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "lung_grow",
+   "verb": "grow",
+   "w": "lung",
+   "f_land": 541,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "colon_grow",
+   "verb": "grow",
+   "w": "colorectal.",
+   "f_land": 581,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "organ_eject",
+   "verb": "eject",
+   "w": "colorectal.",
+   "f_land": 615,
+   "table_dev": 34,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_d",
+   "verb": "camera_to",
+   "w": "us.",
+   "f_land": 708,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "pulse_c",
+   "verb": "flow",
+   "w": "Worldwide,",
+   "f_land": 747,
+   "table_dev": -4,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "globe_grow",
+   "verb": "grow",
+   "w": "Worldwide,",
+   "f_land": 751,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "globe_eject",
+   "verb": "eject",
+   "w": "Worldwide,",
+   "f_land": 785,
+   "table_dev": 34,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "globe_spin",
+   "verb": "move",
+   "w": "Worldwide,",
+   "f_land": 787,
+   "table_dev": 36,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "six_grow",
+   "verb": "grow",
+   "w": "sixth",
+   "f_land": 838,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "third_grow",
+   "verb": "grow",
+   "w": "third",
+   "f_land": 972,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "source_line",
+   "verb": "appear",
+   "w": "1,412",
+   "f_land": 35,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  }
+ ],
+ "pass": false
+}

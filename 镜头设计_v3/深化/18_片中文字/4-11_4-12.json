@@ -1,0 +1,14 @@
+[
+  {
+    "id": "score",
+    "text": "Score",
+    "kind": "engrave",
+    "at_word": "4-12.w004"
+  },
+  {
+    "id": "source",
+    "text": "Illustration (our toy model)",
+    "kind": "source",
+    "at_word": "4-11.w001"
+  }
+]

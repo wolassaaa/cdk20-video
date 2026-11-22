@@ -1,0 +1,837 @@
+[
+  {
+    "from": "W0",
+    "to": "W0",
+    "chords": [],
+    "bars_per_chord": null,
+    "tracks": [
+      "song"
+    ],
+    "kd": null,
+    "sn": null,
+    "rim": null,
+    "hh": null,
+    "tom": null,
+    "tom_every": null,
+    "in": "第 0 帧直起",
+    "out": "照卡点表：第 8 拍 0.42、2.5 kHz，第 9.4 拍淡没",
+    "source": {
+      "段": "W0",
+      "和弦（循环）": "—",
+      "开的轨": "歌（Blinding Lights 鼓进来的两小节）",
+      "鼓型": "歌里的鼓"
+    }
+  },
+  {
+    "from": "1-01",
+    "to": "1-01",
+    "chords": [],
+    "bars_per_chord": null,
+    "tracks": [],
+    "kd": null,
+    "sn": null,
+    "rim": null,
+    "hh": null,
+    "tom": null,
+    "tom_every": null,
+    "in": "—",
+    "out": "pad 从最后一个词 \"cancer.\" 开口那一刻起 3.0 s S 形淡入",
+    "source": {
+      "段": "1-01（出镜）",
+      "和弦（循环）": "—",
+      "开的轨": "无底乐",
+      "鼓型": "—"
+    }
+  },
+  {
+    "from": "1-02",
+    "to": "1-08",
+    "chords": [
+      "Fm",
+      "Db",
+      "Bbm",
+      "Fm"
+    ],
+    "bars_per_chord": 2,
+    "tracks": [
+      "pad",
+      "bass",
+      "kick"
+    ],
+    "kd": "k... .... .... ....",
+    "sn": null,
+    "rim": null,
+    "hh": null,
+    "tom": null,
+    "tom_every": null,
+    "in": "接上一行",
+    "out": "无缝进下一行",
+    "source": {
+      "段": "1-02 至 1-08",
+      "和弦（循环）": "Fm – Db – Bbm – Fm",
+      "开的轨": "pad、bass（全音符根音）、底鼓",
+      "鼓型": "KD `k... .... .... ....`"
+    }
+  },
+  {
+    "from": "1-09",
+    "to": "1-11",
+    "chords": [
+      "Fm",
+      "Db",
+      "Ab",
+      "Eb"
+    ],
+    "bars_per_chord": 2,
+    "tracks": [
+      "pad",
+      "bass",
+      "kick",
+      "rim",
+      "hh"
+    ],
+    "kd": "K... .... k... ....",
+    "sn": null,
+    "rim": ".... R... .... R...",
+    "hh": "h.h. h.h. h.h. h.h.",
+    "tom": null,
+    "tom_every": null,
+    "in": "1-09 第一条小节线：bass 和镲 0.8 s 等功率推入，底鼓和边击晚 2 小节",
+    "out": "鼓不停，一直推到\"大板断开\"那一拍（W1 第 2 拍），最后一小节照下面的推进表，然后交给歌的鼓；pad 和 bass 低通 1200 → 400 Hz，S 形淡到 W1 第 0 拍为 0",
+    "source": {
+      "段": "1-09 至 1-11",
+      "和弦（循环）": "Fm – Db – Ab – Eb",
+      "开的轨": "pad、bass（四分音符）、鼓",
+      "鼓型": "KD `K... .... k... ....`　RIM `.... R... .... R...`　HH `h.h. h.h. h.h. h.h.`"
+    }
+  },
+  {
+    "from": "W1",
+    "to": "W1",
+    "chords": [],
+    "bars_per_chord": null,
+    "tracks": [
+      "song"
+    ],
+    "kd": null,
+    "sn": null,
+    "rim": null,
+    "hh": null,
+    "tom": null,
+    "tom_every": null,
+    "in": "歌的上扬段从 W1 前 4.0 s 起低通淡入（卡点表）",
+    "out": "见 1.4",
+    "source": {
+      "段": "W1",
+      "和弦（循环）": "—",
+      "开的轨": "歌",
+      "鼓型": "歌里的鼓"
+    }
+  },
+  {
+    "from": "2-01",
+    "to": "2-08",
+    "chords": [
+      "D",
+      "A",
+      "E",
+      "F#m"
+    ],
+    "bars_per_chord": 2,
+    "tracks": [
+      "pad",
+      "bass",
+      "kick",
+      "rim",
+      "hh"
+    ],
+    "kd": "K... .... k... ....",
+    "sn": null,
+    "rim": ".... R... .... R...",
+    "hh": "..h. ..h. ..h. ..h.",
+    "tom": null,
+    "tom_every": null,
+    "in": "W1 结束后 ≥ 1.0 s 的第一条小节线：pad 2.5 s S 形淡入；bass 和镲晚 2 小节；底鼓和边击晚 4 小节（这里换了速度和调，没法和歌同拍接，所以隔一口气再起）",
+    "out": "1.5 s 等功率换到下一行",
+    "source": {
+      "段": "2-01 至 2-08",
+      "和弦（循环）": "D – A – E – F#m",
+      "开的轨": "pad、bass（八分轻脉冲）、鼓",
+      "鼓型": "KD `K... .... k... ....`　RIM `.... R... .... R...`　HH `..h. ..h. ..h. ..h.`"
+    }
+  },
+  {
+    "from": "3-01",
+    "to": "3-07",
+    "chords": [
+      "F#m",
+      "F#m",
+      "Bm",
+      "C#m"
+    ],
+    "bars_per_chord": 4,
+    "tracks": [
+      "pad",
+      "bass",
+      "kick",
+      "rim",
+      "hh",
+      "tom"
+    ],
+    "kd": "K... .... .... ..k.",
+    "sn": null,
+    "rim": ".... .... R... ....",
+    "hh": "h... .... h... ....",
+    "tom": ".... .... .... T.t.",
+    "tom_every": 4,
+    "in": "3-01 第一条小节线",
+    "out": "3-07 最后 2 小节鼓和 bass 2.0 s S 形淡出",
+    "source": {
+      "段": "3-01 至 3-07",
+      "和弦（循环）": "F#m – F#m – Bm – C#m，每个 4 小节",
+      "开的轨": "pad、bass（长音，第 4 小节拖一个半音邻音）、稀鼓",
+      "鼓型": "KD `K... .... .... ..k.`　RIM `.... .... R... ....`　HH `h... .... h... ....`　每第 4 小节 TOM `.... .... .... T.t.`"
+    }
+  },
+  {
+    "from": "3-08",
+    "to": "3-09",
+    "chords": [
+      "F#m",
+      "D"
+    ],
+    "bars_per_chord": null,
+    "tracks": [
+      "pad",
+      "kick"
+    ],
+    "kd": "k... .... .... ....",
+    "sn": null,
+    "rim": null,
+    "hh": null,
+    "tom": null,
+    "tom_every": null,
+    "in": "只剩 pad 和每小节一下柔底鼓",
+    "out": "3-09 最后 2 小节：鼓照下面的推进表往上推；HBFS 的前奏以 −20 dB、低通 400 Hz 预叠；长上扬音 3.8 s，顶点在 W2 第 0 帧前 35 ms 截停；底乐在第 0 帧齐停，鼓正好接上歌的第一拍",
+    "source": {
+      "段": "3-08 至 3-09",
+      "和弦（循环）": "F#m 持续音，上面叠 D",
+      "开的轨": "pad（降八度，低通从 1200 慢慢关到 500 Hz）、柔底鼓",
+      "鼓型": "KD `k... .... .... ....`"
+    }
+  },
+  {
+    "from": "W2",
+    "to": "W2",
+    "chords": [],
+    "bars_per_chord": null,
+    "tracks": [
+      "song"
+    ],
+    "kd": null,
+    "sn": null,
+    "rim": null,
+    "hh": null,
+    "tom": null,
+    "tom_every": null,
+    "in": "第 0 帧歌到满，低通 0.25 s 扫开",
+    "out": "见 1.4",
+    "source": {
+      "段": "W2",
+      "和弦（循环）": "—",
+      "开的轨": "歌",
+      "鼓型": "—"
+    }
+  },
+  {
+    "from": "4-01",
+    "to": "4-04+4-05",
+    "chords": [
+      "D",
+      "E",
+      "F#m",
+      "A"
+    ],
+    "bars_per_chord": 2,
+    "tracks": [
+      "pad",
+      "bass",
+      "arp",
+      "kick",
+      "sn",
+      "hh"
+    ],
+    "kd": "K... ..k. K... ....",
+    "sn": ".... S... .... S...",
+    "rim": null,
+    "hh": "H.h. H.h. H.h. H.O.",
+    "tom": null,
+    "tom_every": null,
+    "in": "W2 里最后一条小节线：pad、bass、底鼓、闭镲一起进，1.6 s 等功率，和歌同拍叠着（头 2 小节鼓的力度 ×0.6）；军鼓和 arp 晚 2 小节",
+    "out": "无缝",
+    "source": {
+      "段": "4-01 至 4-05",
+      "和弦（循环）": "D – E – F#m – A",
+      "开的轨": "pad、bass（八分）、arp（八分）、整套轻鼓",
+      "鼓型": "KD `K... ..k. K... ....`　SN `.... S... .... S...`　HH `H.h. H.h. H.h. H.O.`"
+    }
+  },
+  {
+    "from": "4-06",
+    "to": "4-09",
+    "chords": [
+      "Eb",
+      "F",
+      "Gm",
+      "Bb"
+    ],
+    "bars_per_chord": 2,
+    "tracks": [
+      "pad",
+      "bass",
+      "arp",
+      "kick",
+      "sn",
+      "hh",
+      "tom"
+    ],
+    "kd": "K... ..k. K.k. ..k.",
+    "sn": ".... S..s .... S.s.",
+    "rim": null,
+    "hh": "HhHh HhHh HhHh HhOh",
+    "tom": ".... .... T.t. TTt.",
+    "tom_every": 4,
+    "in": "4-06 第一条小节线升半音，通鼓推一下",
+    "out": "最后 1 小节照下面的推进表；长上扬音 3.8 s 顶到 W3 第 0 帧；不预叠歌；底乐在第 0 帧齐停",
+    "source": {
+      "段": "4-06 至 4-09",
+      "和弦（循环）": "Eb – F – Gm – Bb",
+      "开的轨": "同上，arp 改十六分、跨两个八度",
+      "鼓型": "KD `K... ..k. K.k. ..k.`　SN `.... S..s .... S.s.`　HH `HhHh HhHh HhHh HhOh`　每第 4 小节 TOM `.... .... T.t. TTt.`"
+    }
+  },
+  {
+    "from": "W3",
+    "to": "W3",
+    "chords": [],
+    "bars_per_chord": null,
+    "tracks": [
+      "song"
+    ],
+    "kd": null,
+    "sn": null,
+    "rim": null,
+    "hh": null,
+    "tom": null,
+    "tom_every": null,
+    "in": "第 0 帧歌到满",
+    "out": "见 1.4",
+    "source": {
+      "段": "W3",
+      "和弦（循环）": "—",
+      "开的轨": "歌",
+      "鼓型": "—"
+    }
+  },
+  {
+    "from": "4-10",
+    "to": "4-11+4-12",
+    "chords": [
+      "Gm",
+      "Eb",
+      "Bb",
+      "F"
+    ],
+    "bars_per_chord": 2,
+    "tracks": [
+      "pad",
+      "bass",
+      "arp",
+      "kick",
+      "sn",
+      "hh"
+    ],
+    "kd": "K... .... k..k ....",
+    "sn": ".... S... .... S...",
+    "rim": null,
+    "hh": "H.h. h.h. H.h. h.h.",
+    "tom": null,
+    "tom_every": null,
+    "in": "W3 里最后一条小节线：pad、bass、底鼓、闭镲一起进，和歌同拍叠着（头 2 小节鼓的力度 ×0.6）；军鼓和 arp 晚 2 小节",
+    "out": "4-12 末 arp 退净，1.2 s 等功率进下一行",
+    "source": {
+      "段": "4-10 至 4-12",
+      "和弦（循环）": "Gm – Eb – Bb – F",
+      "开的轨": "pad、bass、中速鼓、arp（八分，轻）",
+      "鼓型": "KD `K... .... k..k ....`　SN `.... S... .... S...`　HH `H.h. h.h. H.h. h.h.`"
+    }
+  },
+  {
+    "from": "5-01",
+    "to": "5-03",
+    "chords": [
+      "Bm",
+      "Em",
+      "Bm",
+      "F#m"
+    ],
+    "bars_per_chord": 2,
+    "tracks": [
+      "pad",
+      "bass",
+      "kick",
+      "rim",
+      "hh",
+      "tom"
+    ],
+    "kd": "K... .... K... ....",
+    "sn": null,
+    "rim": ".... .... R... ....",
+    "hh": "h... h... h... h...",
+    "tom": ".... ..T. .... ..t.",
+    "tom_every": null,
+    "in": "5-01 第一条小节线借共同音 D 转到 B 小调",
+    "out": "5-03 末 pad 和通鼓 1.5 s S 形淡出，只留 bass",
+    "source": {
+      "段": "5-01 至 5-03",
+      "和弦（循环）": "Bm – Em – Bm – F#m",
+      "开的轨": "pad、bass（低八分）、深底鼓、低通鼓",
+      "鼓型": "KD `K... .... K... ....`　RIM `.... .... R... ....`　HH `h... h... h... h...`　TOM `.... ..T. .... ..t.`"
+    }
+  },
+  {
+    "from": "5-04",
+    "to": "5-04",
+    "chords": [
+      "Bm"
+    ],
+    "bars_per_chord": null,
+    "tracks": [
+      "bass",
+      "kick"
+    ],
+    "kd": "k... .... k... ....",
+    "sn": null,
+    "rim": null,
+    "hh": null,
+    "tom": null,
+    "tom_every": null,
+    "in": "接上一行",
+    "out": "接下一行",
+    "source": {
+      "段": "5-04",
+      "和弦（循环）": "Bm 单音",
+      "开的轨": "bass（四分音符单音）、轻底鼓",
+      "鼓型": "KD `k... .... k... ....`"
+    }
+  },
+  {
+    "from": "5-05+5-06",
+    "to": "5-05+5-06",
+    "chords": [
+      "Bm"
+    ],
+    "bars_per_chord": null,
+    "tracks": [
+      "bass",
+      "kick"
+    ],
+    "kd": "k... .... k... ....",
+    "sn": null,
+    "rim": null,
+    "hh": null,
+    "tom": null,
+    "tom_every": null,
+    "in": "—",
+    "out": "**\"turned.\" 开口那一刻起 0.60 s 磁带停转**（全部轨音高和速度一起降到零），再 0.15 s 尾衰减；之后到 5-06 结束全静",
+    "source": {
+      "段": "5-05+5-06（出镜）",
+      "和弦（循环）": "—",
+      "开的轨": "同上，直到停转",
+      "鼓型": "—"
+    },
+    "note_v10": "19 表写“同上”：照 5-04 一行（Bm 单音 bass 四分、轻底鼓 KD k... .... k... ....），直到停转。总管施工 11-23 补，原 JSON 鼓型为空。"
+  },
+  {
+    "from": "5-07",
+    "to": "5-08",
+    "chords": [
+      "Em",
+      "F#m",
+      "G",
+      "A"
+    ],
+    "bars_per_chord": 2,
+    "tracks": [
+      "pad",
+      "bass",
+      "arp",
+      "kick",
+      "sn",
+      "hh"
+    ],
+    "kd": "K... k... K... k.k.",
+    "sn": ".... S... .... S.ss",
+    "rim": null,
+    "hh": "HhHh HhHh HhHh HhOh",
+    "tom": null,
+    "tom_every": null,
+    "in": "5-07 第一条小节线前 0.8 s 起短上扬音，1.2 s 等功率进",
+    "out": "接下一行",
+    "source": {
+      "段": "5-07 至 5-08",
+      "和弦（循环）": "Em – F#m – G – A（一级级往上）",
+      "开的轨": "pad、bass、arp（十六分）、整套鼓",
+      "鼓型": "KD `K... k... K... k.k.`　SN `.... S... .... S.ss`　HH `HhHh HhHh HhHh HhOh`"
+    }
+  },
+  {
+    "from": "5-09",
+    "to": "5-09",
+    "chords": [
+      "F#"
+    ],
+    "bars_per_chord": null,
+    "tracks": [
+      "pad",
+      "bass",
+      "kick",
+      "sn",
+      "hh",
+      "rise"
+    ],
+    "kd": "K... k... K... k.k.",
+    "sn": ".... S... .... S.ss",
+    "rim": null,
+    "hh": "HhHh HhHh HhHh HhOh",
+    "tom": null,
+    "tom_every": null,
+    "in": "接 5-08，不断",
+    "out": "**W4 第 0 帧前 1 拍（0.492 s）全部干声齐停**，混响尾巴留着，空一拍，然后歌砸入",
+    "source": {
+      "段": "5-09（出镜）",
+      "和弦（循环）": "F# 持续音",
+      "开的轨": "pad、bass、鼓、短上扬音 1.2 s",
+      "鼓型": "鼓不停，接着 5-08 往上推：最后 2 小节照下面的推进表"
+    },
+    "note_v10": "19 表写“鼓不停，接着 5-08 往上推”：KD/SN/HH 照 5-07 至 5-08 一行，最后 2 小节照 builds_v10.json 的 W4 行。总管施工 11-23 补，原 JSON 鼓型为空。"
+  },
+  {
+    "from": "W4",
+    "to": "W4",
+    "chords": [],
+    "bars_per_chord": null,
+    "tracks": [
+      "song"
+    ],
+    "kd": null,
+    "sn": null,
+    "rim": null,
+    "hh": null,
+    "tom": null,
+    "tom_every": null,
+    "in": "满音量砸入（卡点表）",
+    "out": "见 1.4",
+    "source": {
+      "段": "W4",
+      "和弦（循环）": "—",
+      "开的轨": "歌",
+      "鼓型": "—"
+    }
+  },
+  {
+    "from": "5-10",
+    "to": "5-10",
+    "chords": [
+      "Bm",
+      "D",
+      "A",
+      "G"
+    ],
+    "bars_per_chord": 2,
+    "tracks": [
+      "pad",
+      "bass",
+      "kick"
+    ],
+    "kd": "k... .... k... ....",
+    "sn": null,
+    "rim": null,
+    "hh": null,
+    "tom": null,
+    "tom_every": null,
+    "in": "5-10 第一条小节线 2.0 s 等功率进",
+    "out": "无缝",
+    "source": {
+      "段": "5-10",
+      "和弦（循环）": "Bm – D – A – G",
+      "开的轨": "pad、bass、轻底鼓",
+      "鼓型": "KD `k... .... k... ....`"
+    }
+  },
+  {
+    "from": "6-01",
+    "to": "6-08",
+    "chords": [
+      "Bm",
+      "D",
+      "A",
+      "G"
+    ],
+    "bars_per_chord": 2,
+    "tracks": [
+      "pad",
+      "bass",
+      "kick",
+      "rim",
+      "hh"
+    ],
+    "kd": "K... .... k... ....",
+    "sn": null,
+    "rim": ".... R... .... R...",
+    "hh": "..h. ..h. ..h. ..h.",
+    "tom": null,
+    "tom_every": null,
+    "in": "6-01 第一条小节线",
+    "out": "无缝",
+    "source": {
+      "段": "6-01 至 6-08",
+      "和弦（循环）": "同上",
+      "开的轨": "加边击和镲",
+      "鼓型": "KD `K... .... k... ....`　RIM `.... R... .... R...`　HH `..h. ..h. ..h. ..h.`"
+    }
+  },
+  {
+    "from": "6-09",
+    "to": "6-12",
+    "chords": [
+      "Bm",
+      "D",
+      "A",
+      "G"
+    ],
+    "bars_per_chord": 2,
+    "tracks": [
+      "pad",
+      "bass",
+      "arp",
+      "kick",
+      "rim",
+      "hh"
+    ],
+    "kd": "K... .... .... ....",
+    "sn": null,
+    "rim": ".... .... R... ....",
+    "hh": "h... h... h... h...",
+    "tom": null,
+    "tom_every": null,
+    "in": "6-09 第一条小节线",
+    "out": "1.5 s 等功率进下一行",
+    "source": {
+      "段": "6-09 至 6-12",
+      "和弦（循环）": "同上",
+      "开的轨": "pad 调亮（低通 1.6 kHz），6-10 起加很轻的 arp（八分）",
+      "鼓型": "KD `K... .... .... ....`　RIM `.... .... R... ....`　HH `h... h... h... h...`"
+    }
+  },
+  {
+    "from": "7-01",
+    "to": "7-04",
+    "chords": [
+      "G",
+      "A",
+      "Bm",
+      "Bm"
+    ],
+    "bars_per_chord": 2,
+    "tracks": [
+      "pad",
+      "bass",
+      "arp",
+      "kick",
+      "sn",
+      "hh"
+    ],
+    "kd": "K... ..k. .... k...",
+    "sn": ".... S... .... s.R.",
+    "rim": null,
+    "hh": "H.h. h.h. H.h. h.h.",
+    "tom": null,
+    "tom_every": null,
+    "in": "7-01 第一条小节线",
+    "out": "7-04 最后 2 小节鼓和 arp 2.5 s S 形淡出，pad 尾音留到 8-01",
+    "source": {
+      "段": "7-01 至 7-04",
+      "和弦（循环）": "G – A – Bm – Bm",
+      "开的轨": "pad、bass、arp（八分，轻）、稳鼓",
+      "鼓型": "KD `K... ..k. .... k...`　SN `.... S... .... s.R.`　HH `H.h. h.h. H.h. h.h.`"
+    }
+  },
+  {
+    "from": "8-01",
+    "to": "8-01",
+    "chords": [
+      "Bm",
+      "Ab"
+    ],
+    "bars_per_chord": null,
+    "tracks": [
+      "pad"
+    ],
+    "kd": null,
+    "sn": null,
+    "rim": null,
+    "hh": null,
+    "tom": null,
+    "tom_every": null,
+    "in": "—",
+    "out": "—",
+    "source": {
+      "段": "8-01（出镜）",
+      "和弦（循环）": "Bm 的 pad 淡出 2.0 s，Ab 的 pad 淡入 2.5 s，两者重叠 1.0 s",
+      "开的轨": "只有 pad",
+      "鼓型": "无"
+    }
+  },
+  {
+    "from": "8-02",
+    "to": "8-03",
+    "chords": [
+      "Ab",
+      "Eb",
+      "Bb",
+      "Cm"
+    ],
+    "bars_per_chord": 2,
+    "tracks": [
+      "pad",
+      "bass",
+      "kick",
+      "sn"
+    ],
+    "kd": "k... .... .... ....",
+    "sn": ".... .... s... ....",
+    "rim": null,
+    "hh": null,
+    "tom": null,
+    "tom_every": null,
+    "in": "8-02 第一条小节线 2.0 s S 形进",
+    "out": "8-03 最后一小节 2.2 s S 形淡到静，段尾为 0",
+    "source": {
+      "段": "8-02 至 8-03",
+      "和弦（循环）": "Ab – Eb – Bb – Cm",
+      "开的轨": "pad（低通 1.6 kHz，暖）、bass（二分长音）、柔底鼓",
+      "鼓型": "KD `k... .... .... ....`　SN `.... .... s... ....`"
+    }
+  },
+  {
+    "from": "8-04+8-05+8-06+8-07",
+    "to": "8-04+8-05+8-06+8-07",
+    "chords": [
+      "Ab",
+      "Eb",
+      "Bb",
+      "Eb"
+    ],
+    "bars_per_chord": 2,
+    "tracks": [
+      "pad",
+      "bass",
+      "arp",
+      "kick",
+      "hh"
+    ],
+    "kd": "k... .... k... ....",
+    "sn": null,
+    "rim": null,
+    "hh": "h.h. h.h. h.h. h.h.",
+    "tom": null,
+    "tom_every": null,
+    "in": "8-05 第一个词 \"So\" 前 0.2 s 起 pad 3.0 s S 形淡入",
+    "out": "最后 2 小节预叠 Out of Time 的前奏（见 1.4），最后 1 小节照下面的推进表加过门；W5 第 0 帧歌到满，底乐 1 拍内退净",
+    "source": {
+      "段": "8-05 至 8-07",
+      "和弦（循环）": "Ab – Eb – Bb – Eb",
+      "开的轨": "8-05 只有 pad；8-06 加 bass、轻底鼓、柔镲；8-07 加 arp（八分）",
+      "鼓型": "KD `k... .... k... ....`　HH `h.h. h.h. h.h. h.h.`"
+    },
+    "parts": [
+      {
+        "from": "8-04",
+        "to": "8-04",
+        "chords": [],
+        "bars_per_chord": null,
+        "tracks": [],
+        "kd": null,
+        "sn": null,
+        "rim": null,
+        "hh": null,
+        "tom": null,
+        "tom_every": null,
+        "in": "—",
+        "out": "—",
+        "source": {
+          "段": "8-04（出镜组开头三句，到 \"decide.\" 为止）",
+          "和弦（循环）": "—",
+          "开的轨": "**全静**（剧本要求）",
+          "鼓型": "—"
+        }
+      },
+      {
+        "from": "8-05",
+        "to": "8-07",
+        "chords": [
+          "Ab",
+          "Eb",
+          "Bb",
+          "Eb"
+        ],
+        "bars_per_chord": 2,
+        "tracks": [
+          "pad",
+          "bass",
+          "arp",
+          "kick",
+          "hh"
+        ],
+        "kd": "k... .... k... ....",
+        "sn": null,
+        "rim": null,
+        "hh": "h.h. h.h. h.h. h.h.",
+        "tom": null,
+        "tom_every": null,
+        "in": "8-05 第一个词 \"So\" 前 0.2 s 起 pad 3.0 s S 形淡入",
+        "out": "最后 2 小节预叠 Out of Time 的前奏（见 1.4），最后 1 小节照下面的推进表加过门；W5 第 0 帧歌到满，底乐 1 拍内退净",
+        "source": {
+          "段": "8-05 至 8-07",
+          "和弦（循环）": "Ab – Eb – Bb – Eb",
+          "开的轨": "8-05 只有 pad；8-06 加 bass、轻底鼓、柔镲；8-07 加 arp（八分）",
+          "鼓型": "KD `k... .... k... ....`　HH `h.h. h.h. h.h. h.h.`"
+        }
+      }
+    ]
+  },
+  {
+    "from": "W5",
+    "to": "W5",
+    "chords": [],
+    "bars_per_chord": null,
+    "tracks": [
+      "song"
+    ],
+    "kd": null,
+    "sn": null,
+    "rim": null,
+    "hh": null,
+    "tom": null,
+    "tom_every": null,
+    "in": "见 1.4",
+    "out": "见 1.4",
+    "source": {
+      "段": "W5",
+      "和弦（循环）": "—",
+      "开的轨": "歌",
+      "鼓型": "—"
+    }
+  }
+]

@@ -1,291 +1,230 @@
 {
- "schema": "cdk20.events/1",
- "group": "6-10",
- "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：第 6 章七站路线页 6-10（画外音）：where's 048 on the road；七站路，048 小牌子逐站走到 Cells，前几站打勾，Improve 写 started，Cells 写 first tests，Animals 和 Trials 变灰写 not yet。页面 Manual610.jsx。",
- "holds": [],
- "events": [
-  {
-   "id": "title",
-   "obj": "title",
-   "verb": "appear",
-   "at": {
-    "word": "6-10.w002",
-    "off": 0
-   },
-   "means": "where's 048 on the road：标题",
-   "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "word": "6-10.w006"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "tag",
-   "obj": "tag",
-   "verb": "grow",
-   "at": {
-    "word": "6-10.w003",
-    "off": 0
-   },
-   "means": "048：小牌子落在起点",
-   "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "6-10.w003"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "road",
-   "obj": "road",
-   "verb": "grow",
-   "at": {
-    "word": "6-10.w006",
-    "off": 0
-   },
-   "means": "road：七站路画出",
-   "tool": "remotion",
-   "lead": 60,
-   "until": {
-    "word": "6-10.w006"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "tgt",
-   "obj": "tgt",
-   "verb": "move",
-   "at": {
-    "word": "6-10.w007",
-    "off": 0
-   },
-   "means": "Target：牌子走到 Target",
-   "tool": "remotion",
-   "lead": 30,
-   "until": {
-    "word": "6-10.w007"
-   },
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "lock"
-    ]
-   }
-  },
-  {
-   "id": "tgtk",
-   "obj": "tgtk",
-   "verb": "appear",
-   "at": {
-    "word": "6-10.w008",
-    "off": 0
-   },
-   "means": "found：Target 打勾",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "6-10.w008"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "hit",
-   "obj": "hit",
-   "verb": "move",
-   "at": {
-    "word": "6-10.w009",
-    "off": 0
-   },
-   "means": "Hit：牌子走到 Hit",
-   "tool": "remotion",
-   "lead": 24,
-   "until": {
-    "word": "6-10.w009"
-   },
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "key"
-    ]
-   }
-  },
-  {
-   "id": "hitk",
-   "obj": "hitk",
-   "verb": "appear",
-   "at": {
-    "word": "6-10.w010",
-    "off": 0
-   },
-   "means": "found：Hit 打勾",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "6-10.w010"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "imp",
-   "obj": "imp",
-   "verb": "move",
-   "at": {
-    "word": "6-10.w011",
-    "off": 0
-   },
-   "means": "Improving：牌子走到 Improve",
-   "tool": "remotion",
-   "lead": 24,
-   "until": {
-    "word": "6-10.w011"
-   },
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "flask"
-    ]
-   }
-  },
-  {
-   "id": "st",
-   "obj": "st",
-   "verb": "appear",
-   "at": {
-    "word": "6-10.w013",
-    "off": 0
-   },
-   "means": "started：Improve 写 started",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "6-10.w013"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "cells",
-   "obj": "cells",
-   "verb": "move",
-   "at": {
-    "word": "6-10.w014",
-    "off": 0
-   },
-   "means": "Cells：牌子走到 Cells",
-   "tool": "remotion",
-   "lead": 30,
-   "until": {
-    "word": "6-10.w014"
-   },
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "tubes"
-    ]
-   }
-  },
-  {
-   "id": "ft",
-   "obj": "ft",
-   "verb": "appear",
-   "at": {
-    "word": "6-10.w016",
-    "off": 0
-   },
-   "means": "tests：写 first tests",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "6-10.w016"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "done",
-   "obj": "done",
-   "verb": "appear",
-   "at": {
-    "word": "6-10.w017",
-    "off": 0
-   },
-   "means": "done：Cells 打勾",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "6-10.w017"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "g1",
-   "obj": "g1",
-   "verb": "morph",
-   "at": {
-    "word": "6-10.w018",
-    "off": 0
-   },
-   "means": "Animals：Animals 变灰",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "6-10.w018"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "g2",
-   "obj": "g2",
-   "verb": "morph",
-   "at": {
-    "word": "6-10.w021",
-    "off": 0
-   },
-   "means": "trials：Trials 变灰",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "6-10.w021"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "ny",
-   "obj": "ny",
-   "verb": "appear",
-   "at": {
-    "word": "6-10.w022",
-    "off": 0
-   },
-   "means": "not yet：写 not yet",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  }
- ]
+  "schema": "cdk20.events/1",
+  "group": "6-10",
+  "tool": "blender",
+  "note": "HKBU SCIE1007 课程作业的科普视频：6-10 三维版事件表（Codex 照 18 填）。",
+  "holds": [],
+  "events": [
+    {
+      "id": "tag_drop",
+      "obj": "tag_drop",
+      "verb": "move",
+      "at": {
+        "word": "6-10.w003",
+        "off": 0
+      },
+      "lead": 20,
+      "until": {
+        "dur": 30
+      },
+      "means": "金色吊牌 `048` 从上方落到主料杆的起点，挂住，晃两下",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "cam_road",
+      "obj": "cam_road",
+      "verb": "camera_to",
+      "at": {
+        "word": "6-10.w006",
+        "off": 0
+      },
+      "lead": 40,
+      "until": {
+        "sentence_end": true
+      },
+      "means": "镜头沿料杆后拉，前四站都在画里",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "slide1",
+      "obj": "slide1",
+      "verb": "move",
+      "at": {
+        "word": "6-10.w007",
+        "off": 0
+      },
+      "lead": 30,
+      "until": {
+        "dur": 6
+      },
+      "means": "吊牌沿料杆滑到 Target 站，镜头跟",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "tick1",
+      "obj": "tick1",
+      "verb": "snap",
+      "at": {
+        "word": "6-10.w008",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "sentence_end": true
+      },
+      "means": "Target 站牌上绿色的勾扣上",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "slide2",
+      "obj": "slide2",
+      "verb": "move",
+      "at": {
+        "word": "6-10.w009",
+        "off": 0
+      },
+      "lead": 30,
+      "until": {
+        "dur": 6
+      },
+      "means": "吊牌滑到 Hit 站",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "tick2",
+      "obj": "tick2",
+      "verb": "snap",
+      "at": {
+        "word": "6-10.w010",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "sentence_end": true
+      },
+      "means": "Hit 站打勾",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "slide3",
+      "obj": "slide3",
+      "verb": "move",
+      "at": {
+        "word": "6-10.w011",
+        "off": 0
+      },
+      "lead": 30,
+      "until": {
+        "dur": 6
+      },
+      "means": "吊牌滑到 Improve 站",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "started",
+      "obj": "started",
+      "verb": "eject",
+      "at": {
+        "word": "6-10.w013",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "sentence_end": true
+      },
+      "means": "Improve 站牌下弹出小牌 `started`",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "slide4",
+      "obj": "slide4",
+      "verb": "move",
+      "at": {
+        "word": "6-10.w014",
+        "off": 0
+      },
+      "lead": 30,
+      "until": {
+        "dur": 6
+      },
+      "means": "吊牌滑到 Cells 站",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "dish",
+      "obj": "dish",
+      "verb": "move",
+      "at": {
+        "word": "6-10.w016",
+        "off": 0
+      },
+      "lead": 8,
+      "until": {
+        "dur": 20
+      },
+      "means": "Cells 站旁的培养皿零件亮",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "tick4",
+      "obj": "tick4",
+      "verb": "snap",
+      "at": {
+        "word": "6-10.w017",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "sentence_end": true
+      },
+      "means": "Cells 站打勾",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "cam_ahead",
+      "obj": "cam_ahead",
+      "verb": "camera_to",
+      "at": {
+        "word": "6-10.w018",
+        "off": 0
+      },
+      "lead": 30,
+      "until": {
+        "word": "6-10.w021"
+      },
+      "means": "镜头越过吊牌看向前面的 Animals、Trials 两站",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "notyet",
+      "obj": "notyet",
+      "verb": "eject",
+      "at": {
+        "word": "6-10.w022",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "sentence_end": true
+      },
+      "means": "两站各弹下一块小牌 `not yet`，各差 6 帧；吊牌留在 Cells 站轻晃",
+      "guide": {
+        "kind": "none"
+      }
+    }
+  ]
 }

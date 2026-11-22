@@ -1,0 +1,1648 @@
+[
+  {
+    "id": "J00",
+    "left": null,
+    "right": {
+      "group": "W0",
+      "path": "G:/cdk20/work/w1/w0_final",
+      "exists": true,
+      "frames": 168,
+      "manifest_frames": 168,
+      "path_kind": "image_sequence",
+      "source_frames": 178,
+      "probed_path": "G:/cdk20/work/v10/pieces/W0_df9cbaaef31a.mp4",
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J01",
+    "left": {
+      "group": "W0",
+      "path": "G:/cdk20/work/w1/w0_final",
+      "exists": true,
+      "frames": 168,
+      "manifest_frames": 168,
+      "path_kind": "image_sequence",
+      "source_frames": 178,
+      "probed_path": "G:/cdk20/work/v10/pieces/W0_df9cbaaef31a.mp4",
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "1-01",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/15_出镜3D_1-01.mp4",
+      "exists": true,
+      "frames": 354,
+      "manifest_frames": 354,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J02",
+    "left": {
+      "group": "1-01",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/15_出镜3D_1-01.mp4",
+      "exists": true,
+      "frames": 354,
+      "manifest_frames": 354,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "1-02",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/21_1-02_无字幕.mp4",
+      "exists": true,
+      "frames": 1036,
+      "manifest_frames": 1036,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J03",
+    "left": {
+      "group": "1-02",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/21_1-02_无字幕.mp4",
+      "exists": true,
+      "frames": 1036,
+      "manifest_frames": 1036,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "1-03",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/15_出镜3D_1-03.mp4",
+      "exists": true,
+      "frames": 325,
+      "manifest_frames": 325,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J04",
+    "left": {
+      "group": "1-03",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/15_出镜3D_1-03.mp4",
+      "exists": true,
+      "frames": 325,
+      "manifest_frames": 325,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "1-04",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_1-04.mp4",
+      "exists": true,
+      "frames": 1255,
+      "manifest_frames": 1255,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J05",
+    "left": {
+      "group": "1-04",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_1-04.mp4",
+      "exists": true,
+      "frames": 1255,
+      "manifest_frames": 1255,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "1-05+1-06+1-07",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/15_出镜3D_1-05_1-06_1-07.mp4",
+      "exists": true,
+      "frames": 596,
+      "manifest_frames": 596,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J06",
+    "left": {
+      "group": "1-05+1-06+1-07",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/15_出镜3D_1-05_1-06_1-07.mp4",
+      "exists": true,
+      "frames": 596,
+      "manifest_frames": 596,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "1-08",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_1-08.mp4",
+      "exists": true,
+      "frames": 930,
+      "manifest_frames": 930,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J07",
+    "left": {
+      "group": "1-08",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_1-08.mp4",
+      "exists": true,
+      "frames": 930,
+      "manifest_frames": 930,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "1-09",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/21_1-09_无字幕.mp4",
+      "exists": true,
+      "frames": 1458,
+      "manifest_frames": 1458,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J08",
+    "left": {
+      "group": "1-09",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/21_1-09_无字幕.mp4",
+      "exists": true,
+      "frames": 1458,
+      "manifest_frames": 1458,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "1-10",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/21_1-10_无字幕.mp4",
+      "exists": true,
+      "frames": 838,
+      "manifest_frames": 838,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J09",
+    "left": {
+      "group": "1-10",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/21_1-10_无字幕.mp4",
+      "exists": true,
+      "frames": 838,
+      "manifest_frames": 838,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "1-11",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_1-11.mp4",
+      "exists": true,
+      "frames": 691,
+      "manifest_frames": 691,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J10",
+    "left": {
+      "group": "1-11",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_1-11.mp4",
+      "exists": true,
+      "frames": 691,
+      "manifest_frames": 691,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "W1",
+      "path": "G:/cdk20/work/w1/w1z_final",
+      "exists": true,
+      "frames": 1010,
+      "manifest_frames": 1010,
+      "path_kind": "image_sequence",
+      "source_frames": 1250,
+      "probed_path": "G:/cdk20/work/v10/pieces/W1_86bd9f8d66a3.mp4",
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J11",
+    "left": {
+      "group": "W1",
+      "path": "G:/cdk20/work/w1/w1z_final",
+      "exists": true,
+      "frames": 1010,
+      "manifest_frames": 1010,
+      "path_kind": "image_sequence",
+      "source_frames": 1250,
+      "probed_path": "G:/cdk20/work/v10/pieces/W1_86bd9f8d66a3.mp4",
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "2-01",
+      "path": "G:/cdk20/work/redstone_b201_20261122/B201_1080p60_preview.mp4",
+      "exists": true,
+      "frames": 1652,
+      "manifest_frames": 1652,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J12",
+    "left": {
+      "group": "2-01",
+      "path": "G:/cdk20/work/redstone_b201_20261122/B201_1080p60_preview.mp4",
+      "exists": true,
+      "frames": 1652,
+      "manifest_frames": 1652,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "2-02",
+      "path": "D:/。hkbu/molecular science/导演检查_20261118/7_样片_2-02_人出镜_v2_跟踪放稳.mp4",
+      "exists": true,
+      "frames": 639,
+      "manifest_frames": 639,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J13",
+    "left": {
+      "group": "2-02",
+      "path": "D:/。hkbu/molecular science/导演检查_20261118/7_样片_2-02_人出镜_v2_跟踪放稳.mp4",
+      "exists": true,
+      "frames": 639,
+      "manifest_frames": 639,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "2-03",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/21_2-03_无字幕.mp4",
+      "exists": true,
+      "frames": 344,
+      "manifest_frames": 344,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J14",
+    "left": {
+      "group": "2-03",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/21_2-03_无字幕.mp4",
+      "exists": true,
+      "frames": 344,
+      "manifest_frames": 344,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "2-04",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/15_出镜3D_2-04.mp4",
+      "exists": true,
+      "frames": 238,
+      "manifest_frames": 238,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J15",
+    "left": {
+      "group": "2-04",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/15_出镜3D_2-04.mp4",
+      "exists": true,
+      "frames": 238,
+      "manifest_frames": 238,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "2-05",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_2-05.mp4",
+      "exists": true,
+      "frames": 835,
+      "manifest_frames": 835,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J16",
+    "left": {
+      "group": "2-05",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_2-05.mp4",
+      "exists": true,
+      "frames": 835,
+      "manifest_frames": 835,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "2-06",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_2-06.mp4",
+      "exists": true,
+      "frames": 2026,
+      "manifest_frames": 2026,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J17",
+    "left": {
+      "group": "2-06",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_2-06.mp4",
+      "exists": true,
+      "frames": 2026,
+      "manifest_frames": 2026,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "2-07",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/14_B档_2-07.mp4",
+      "exists": true,
+      "frames": 1665,
+      "manifest_frames": 1665,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J18",
+    "left": {
+      "group": "2-07",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/14_B档_2-07.mp4",
+      "exists": true,
+      "frames": 1665,
+      "manifest_frames": 1665,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "2-08",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/14_B档_2-08.mp4",
+      "exists": true,
+      "frames": 920,
+      "manifest_frames": 920,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J19",
+    "left": {
+      "group": "2-08",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/14_B档_2-08.mp4",
+      "exists": true,
+      "frames": 920,
+      "manifest_frames": 920,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "3-01",
+      "path": "D:/。hkbu/molecular science/导演检查_20261120/10_出镜3D样片_3-01.mp4",
+      "exists": true,
+      "frames": 384,
+      "manifest_frames": 384,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J20",
+    "left": {
+      "group": "3-01",
+      "path": "D:/。hkbu/molecular science/导演检查_20261120/10_出镜3D样片_3-01.mp4",
+      "exists": true,
+      "frames": 384,
+      "manifest_frames": 384,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "3-02",
+      "path": "G:/cdk20/work/map_cache/pages/Manual302.mp4",
+      "exists": true,
+      "frames": 775,
+      "manifest_frames": 775,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J21",
+    "left": {
+      "group": "3-02",
+      "path": "G:/cdk20/work/map_cache/pages/Manual302.mp4",
+      "exists": true,
+      "frames": 775,
+      "manifest_frames": 775,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "3-03",
+      "path": "G:/cdk20/work/map_cache/pages/Manual303.mp4",
+      "exists": true,
+      "frames": 732,
+      "manifest_frames": 732,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J22",
+    "left": {
+      "group": "3-03",
+      "path": "G:/cdk20/work/map_cache/pages/Manual303.mp4",
+      "exists": true,
+      "frames": 732,
+      "manifest_frames": 732,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "3-04",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/16_钻取_3-04.mp4",
+      "exists": true,
+      "frames": 1030,
+      "manifest_frames": 1030,
+      "method": "nb_frames",
+      "avg_frame_rate": "1030000/17167",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J23",
+    "left": {
+      "group": "3-04",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/16_钻取_3-04.mp4",
+      "exists": true,
+      "frames": 1030,
+      "manifest_frames": 1030,
+      "method": "nb_frames",
+      "avg_frame_rate": "1030000/17167",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "3-05",
+      "path": "D:/。hkbu/molecular science/导演检查_20261120/14_B档_3-05.mp4",
+      "exists": true,
+      "frames": 1138,
+      "manifest_frames": 1138,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J24",
+    "left": {
+      "group": "3-05",
+      "path": "D:/。hkbu/molecular science/导演检查_20261120/14_B档_3-05.mp4",
+      "exists": true,
+      "frames": 1138,
+      "manifest_frames": 1138,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "3-06",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/15_出镜3D_3-06.mp4",
+      "exists": true,
+      "frames": 694,
+      "manifest_frames": 694,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J25",
+    "left": {
+      "group": "3-06",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/15_出镜3D_3-06.mp4",
+      "exists": true,
+      "frames": 694,
+      "manifest_frames": 694,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "3-07",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_3-07.mp4",
+      "exists": true,
+      "frames": 1368,
+      "manifest_frames": 1368,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J26",
+    "left": {
+      "group": "3-07",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_3-07.mp4",
+      "exists": true,
+      "frames": 1368,
+      "manifest_frames": 1368,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "3-08",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_3-08.mp4",
+      "exists": true,
+      "frames": 1170,
+      "manifest_frames": 1170,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J27",
+    "left": {
+      "group": "3-08",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_3-08.mp4",
+      "exists": true,
+      "frames": 1170,
+      "manifest_frames": 1170,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "3-09",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/15_出镜3D_3-09.mp4",
+      "exists": true,
+      "frames": 340,
+      "manifest_frames": 340,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J28",
+    "left": {
+      "group": "3-09",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/15_出镜3D_3-09.mp4",
+      "exists": true,
+      "frames": 340,
+      "manifest_frames": 340,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "W2",
+      "path": "D:/。hkbu/molecular science/镜头设计_v3/styleframes/art/fusion/s4/W2_lyrics_en_1080_v1.mp4",
+      "exists": true,
+      "frames": 1517,
+      "manifest_frames": 1500,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 17
+    }
+  },
+  {
+    "id": "J29",
+    "left": {
+      "group": "W2",
+      "path": "D:/。hkbu/molecular science/镜头设计_v3/styleframes/art/fusion/s4/W2_lyrics_en_1080_v1.mp4",
+      "exists": true,
+      "frames": 1517,
+      "manifest_frames": 1500,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 17
+    },
+    "right": {
+      "group": "4-01",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_4-01.mp4",
+      "exists": true,
+      "frames": 1698,
+      "manifest_frames": 1698,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J30",
+    "left": {
+      "group": "4-01",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_4-01.mp4",
+      "exists": true,
+      "frames": 1698,
+      "manifest_frames": 1698,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "4-02",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_4-02.mp4",
+      "exists": true,
+      "frames": 1120,
+      "manifest_frames": 1120,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J31",
+    "left": {
+      "group": "4-02",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_4-02.mp4",
+      "exists": true,
+      "frames": 1120,
+      "manifest_frames": 1120,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "4-03",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/14_B档_4-03.mp4",
+      "exists": true,
+      "frames": 1010,
+      "manifest_frames": 1010,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J32",
+    "left": {
+      "group": "4-03",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/14_B档_4-03.mp4",
+      "exists": true,
+      "frames": 1010,
+      "manifest_frames": 1010,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "4-04+4-05",
+      "path": "G:/cdk20/work/map_cache/pages/OnCam404.mp4",
+      "exists": true,
+      "frames": 430,
+      "manifest_frames": 430,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J33",
+    "left": {
+      "group": "4-04+4-05",
+      "path": "G:/cdk20/work/map_cache/pages/OnCam404.mp4",
+      "exists": true,
+      "frames": 430,
+      "manifest_frames": 430,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "4-06",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_4-06.mp4",
+      "exists": true,
+      "frames": 1062,
+      "manifest_frames": 1062,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J34",
+    "left": {
+      "group": "4-06",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_4-06.mp4",
+      "exists": true,
+      "frames": 1062,
+      "manifest_frames": 1062,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "4-07",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_4-07.mp4",
+      "exists": true,
+      "frames": 1474,
+      "manifest_frames": 1474,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J35",
+    "left": {
+      "group": "4-07",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_4-07.mp4",
+      "exists": true,
+      "frames": 1474,
+      "manifest_frames": 1474,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "4-08",
+      "path": "G:/cdk20/work/map_cache/pages/OnCam408.mp4",
+      "exists": true,
+      "frames": 499,
+      "manifest_frames": 499,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J36",
+    "left": {
+      "group": "4-08",
+      "path": "G:/cdk20/work/map_cache/pages/OnCam408.mp4",
+      "exists": true,
+      "frames": 499,
+      "manifest_frames": 499,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "4-09",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_4-09.mp4",
+      "exists": true,
+      "frames": 1057,
+      "manifest_frames": 1057,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J37",
+    "left": {
+      "group": "4-09",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_4-09.mp4",
+      "exists": true,
+      "frames": 1057,
+      "manifest_frames": 1057,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "W3",
+      "path": "D:/。hkbu/molecular science/镜头设计_v3/styleframes/art/fusion/w3/W3_K_4k60_1.mp4",
+      "exists": true,
+      "frames": 952,
+      "manifest_frames": 900,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 52
+    }
+  },
+  {
+    "id": "J38",
+    "left": {
+      "group": "W3",
+      "path": "D:/。hkbu/molecular science/镜头设计_v3/styleframes/art/fusion/w3/W3_K_4k60_1.mp4",
+      "exists": true,
+      "frames": 952,
+      "manifest_frames": 900,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 52
+    },
+    "right": {
+      "group": "4-10",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_4-10.mp4",
+      "exists": true,
+      "frames": 1396,
+      "manifest_frames": 1396,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J39",
+    "left": {
+      "group": "4-10",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_4-10.mp4",
+      "exists": true,
+      "frames": 1396,
+      "manifest_frames": 1396,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "4-11+4-12",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/15_出镜3D_4-11_4-12.mp4",
+      "exists": true,
+      "frames": 640,
+      "manifest_frames": 640,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J40",
+    "left": {
+      "group": "4-11+4-12",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/15_出镜3D_4-11_4-12.mp4",
+      "exists": true,
+      "frames": 640,
+      "manifest_frames": 640,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "5-01",
+      "path": "D:/。hkbu/molecular science/导演检查_20261120/14_B档_5-01.mp4",
+      "exists": true,
+      "frames": 1182,
+      "manifest_frames": 1182,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J41",
+    "left": {
+      "group": "5-01",
+      "path": "D:/。hkbu/molecular science/导演检查_20261120/14_B档_5-01.mp4",
+      "exists": true,
+      "frames": 1182,
+      "manifest_frames": 1182,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "5-02",
+      "path": "G:/cdk20/work/map_cache/pages/OnCam502.mp4",
+      "exists": true,
+      "frames": 385,
+      "manifest_frames": 385,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J42",
+    "left": {
+      "group": "5-02",
+      "path": "G:/cdk20/work/map_cache/pages/OnCam502.mp4",
+      "exists": true,
+      "frames": 385,
+      "manifest_frames": 385,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "5-03",
+      "path": "D:/。hkbu/molecular science/导演检查_20261120/14_B档_5-03.mp4",
+      "exists": true,
+      "frames": 1015,
+      "manifest_frames": 1015,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J43",
+    "left": {
+      "group": "5-03",
+      "path": "D:/。hkbu/molecular science/导演检查_20261120/14_B档_5-03.mp4",
+      "exists": true,
+      "frames": 1015,
+      "manifest_frames": 1015,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "5-04",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/16_钻取_5-04.mp4",
+      "exists": true,
+      "frames": 1420,
+      "manifest_frames": 1420,
+      "method": "nb_frames",
+      "avg_frame_rate": "1420000/23667",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J44",
+    "left": {
+      "group": "5-04",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/16_钻取_5-04.mp4",
+      "exists": true,
+      "frames": 1420,
+      "manifest_frames": 1420,
+      "method": "nb_frames",
+      "avg_frame_rate": "1420000/23667",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "5-05+5-06",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/15_出镜3D_5-05_5-06.mp4",
+      "exists": true,
+      "frames": 511,
+      "manifest_frames": 511,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J45",
+    "left": {
+      "group": "5-05+5-06",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/15_出镜3D_5-05_5-06.mp4",
+      "exists": true,
+      "frames": 511,
+      "manifest_frames": 511,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "5-07",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_5-07.mp4",
+      "exists": true,
+      "frames": 1279,
+      "manifest_frames": 1279,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J46",
+    "left": {
+      "group": "5-07",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_5-07.mp4",
+      "exists": true,
+      "frames": 1279,
+      "manifest_frames": 1279,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "5-08",
+      "path": "D:/。hkbu/molecular science/导演检查_20261120/14_B档_5-08.mp4",
+      "exists": true,
+      "frames": 1102,
+      "manifest_frames": 1102,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J47",
+    "left": {
+      "group": "5-08",
+      "path": "D:/。hkbu/molecular science/导演检查_20261120/14_B档_5-08.mp4",
+      "exists": true,
+      "frames": 1102,
+      "manifest_frames": 1102,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "5-09",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/15_出镜3D_5-09.mp4",
+      "exists": true,
+      "frames": 216,
+      "manifest_frames": 216,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J48",
+    "left": {
+      "group": "5-09",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/15_出镜3D_5-09.mp4",
+      "exists": true,
+      "frames": 216,
+      "manifest_frames": 216,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "W4",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/16_钻取_W4.mp4",
+      "exists": true,
+      "frames": 472,
+      "manifest_frames": 472,
+      "method": "nb_frames",
+      "avg_frame_rate": "472000/7867",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J49",
+    "left": {
+      "group": "W4",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/16_钻取_W4.mp4",
+      "exists": true,
+      "frames": 472,
+      "manifest_frames": 472,
+      "method": "nb_frames",
+      "avg_frame_rate": "472000/7867",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "5-10",
+      "path": "D:/。hkbu/molecular science/导演检查_20261120/14_B档_5-10.mp4",
+      "exists": true,
+      "frames": 1746,
+      "manifest_frames": 1746,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J50",
+    "left": {
+      "group": "5-10",
+      "path": "D:/。hkbu/molecular science/导演检查_20261120/14_B档_5-10.mp4",
+      "exists": true,
+      "frames": 1746,
+      "manifest_frames": 1746,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "6-01",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_6-01.mp4",
+      "exists": true,
+      "frames": 436,
+      "manifest_frames": 436,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J51",
+    "left": {
+      "group": "6-01",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_6-01.mp4",
+      "exists": true,
+      "frames": 436,
+      "manifest_frames": 436,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "6-02",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/14_B档_6-02.mp4",
+      "exists": true,
+      "frames": 755,
+      "manifest_frames": 755,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J52",
+    "left": {
+      "group": "6-02",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/14_B档_6-02.mp4",
+      "exists": true,
+      "frames": 755,
+      "manifest_frames": 755,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "6-03",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_6-03.mp4",
+      "exists": true,
+      "frames": 895,
+      "manifest_frames": 895,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J53",
+    "left": {
+      "group": "6-03",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_6-03.mp4",
+      "exists": true,
+      "frames": 895,
+      "manifest_frames": 895,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "6-04+6-05",
+      "path": "G:/cdk20/work/map_cache/pages/OnCam604.mp4",
+      "exists": true,
+      "frames": 548,
+      "manifest_frames": 548,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J54",
+    "left": {
+      "group": "6-04+6-05",
+      "path": "G:/cdk20/work/map_cache/pages/OnCam604.mp4",
+      "exists": true,
+      "frames": 548,
+      "manifest_frames": 548,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "6-06",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_6-06.mp4",
+      "exists": true,
+      "frames": 694,
+      "manifest_frames": 694,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J55",
+    "left": {
+      "group": "6-06",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_6-06.mp4",
+      "exists": true,
+      "frames": 694,
+      "manifest_frames": 694,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "6-07",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_6-07.mp4",
+      "exists": true,
+      "frames": 786,
+      "manifest_frames": 786,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J56",
+    "left": {
+      "group": "6-07",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_6-07.mp4",
+      "exists": true,
+      "frames": 786,
+      "manifest_frames": 786,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "6-08",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_6-08.mp4",
+      "exists": true,
+      "frames": 760,
+      "manifest_frames": 760,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J57",
+    "left": {
+      "group": "6-08",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_6-08.mp4",
+      "exists": true,
+      "frames": 760,
+      "manifest_frames": 760,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "6-09",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/14_B档_6-09.mp4",
+      "exists": true,
+      "frames": 670,
+      "manifest_frames": 670,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J58",
+    "left": {
+      "group": "6-09",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/14_B档_6-09.mp4",
+      "exists": true,
+      "frames": 670,
+      "manifest_frames": 670,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "6-10",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/14_B档_6-10.mp4",
+      "exists": true,
+      "frames": 922,
+      "manifest_frames": 922,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J59",
+    "left": {
+      "group": "6-10",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/14_B档_6-10.mp4",
+      "exists": true,
+      "frames": 922,
+      "manifest_frames": 922,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "6-11",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/14_B档_6-11.mp4",
+      "exists": true,
+      "frames": 1494,
+      "manifest_frames": 1494,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J60",
+    "left": {
+      "group": "6-11",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/14_B档_6-11.mp4",
+      "exists": true,
+      "frames": 1494,
+      "manifest_frames": 1494,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "6-12",
+      "path": "G:/cdk20/work/map_cache/pages/OnCam612.mp4",
+      "exists": true,
+      "frames": 426,
+      "manifest_frames": 426,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J61",
+    "left": {
+      "group": "6-12",
+      "path": "G:/cdk20/work/map_cache/pages/OnCam612.mp4",
+      "exists": true,
+      "frames": 426,
+      "manifest_frames": 426,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "7-01",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/15_出镜3D_7-01.mp4",
+      "exists": true,
+      "frames": 320,
+      "manifest_frames": 320,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J62",
+    "left": {
+      "group": "7-01",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/15_出镜3D_7-01.mp4",
+      "exists": true,
+      "frames": 320,
+      "manifest_frames": 320,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "7-02",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_7-02.mp4",
+      "exists": true,
+      "frames": 1086,
+      "manifest_frames": 1086,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J63",
+    "left": {
+      "group": "7-02",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_7-02.mp4",
+      "exists": true,
+      "frames": 1086,
+      "manifest_frames": 1086,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "7-03",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_7-03.mp4",
+      "exists": true,
+      "frames": 691,
+      "manifest_frames": 691,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J64",
+    "left": {
+      "group": "7-03",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_7-03.mp4",
+      "exists": true,
+      "frames": 691,
+      "manifest_frames": 691,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "7-04",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_7-04.mp4",
+      "exists": true,
+      "frames": 792,
+      "manifest_frames": 792,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J65",
+    "left": {
+      "group": "7-04",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_7-04.mp4",
+      "exists": true,
+      "frames": 792,
+      "manifest_frames": 792,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "8-01",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/15_出镜3D_8-01.mp4",
+      "exists": true,
+      "frames": 194,
+      "manifest_frames": 194,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J66",
+    "left": {
+      "group": "8-01",
+      "path": "D:/。hkbu/molecular science/导演检查_20261123/15_出镜3D_8-01.mp4",
+      "exists": true,
+      "frames": 194,
+      "manifest_frames": 194,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "8-02",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_8-02.mp4",
+      "exists": true,
+      "frames": 1378,
+      "manifest_frames": 1378,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J67",
+    "left": {
+      "group": "8-02",
+      "path": "D:/。hkbu/molecular science/导演检查_20261121/14_B档_8-02.mp4",
+      "exists": true,
+      "frames": 1378,
+      "manifest_frames": 1378,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "8-03",
+      "path": "D:/。hkbu/molecular science/导演检查_20261120/14_B档_8-03.mp4",
+      "exists": true,
+      "frames": 1116,
+      "manifest_frames": 1116,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J68",
+    "left": {
+      "group": "8-03",
+      "path": "D:/。hkbu/molecular science/导演检查_20261120/14_B档_8-03.mp4",
+      "exists": true,
+      "frames": 1116,
+      "manifest_frames": 1116,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "8-04+8-05+8-06+8-07",
+      "path": "G:/cdk20/work/map_cache/pages/OnCam804.mp4",
+      "exists": true,
+      "frames": 1938,
+      "manifest_frames": 1938,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    }
+  },
+  {
+    "id": "J69",
+    "left": {
+      "group": "8-04+8-05+8-06+8-07",
+      "path": "G:/cdk20/work/map_cache/pages/OnCam804.mp4",
+      "exists": true,
+      "frames": 1938,
+      "manifest_frames": 1938,
+      "method": "nb_frames",
+      "avg_frame_rate": "60/1",
+      "delta_frames": 0
+    },
+    "right": {
+      "group": "W5",
+      "path": "D:/。hkbu/molecular science/导演检查_20261120/08_W5_零件碰撞背景.mp4",
+      "exists": true,
+      "frames": 990,
+      "manifest_frames": 1980,
+      "method": "nb_frames",
+      "avg_frame_rate": "30/1",
+      "delta_frames": -990
+    }
+  },
+  {
+    "id": "J70",
+    "left": {
+      "group": "W5",
+      "path": "D:/。hkbu/molecular science/导演检查_20261120/08_W5_零件碰撞背景.mp4",
+      "exists": true,
+      "frames": 990,
+      "manifest_frames": 1980,
+      "method": "nb_frames",
+      "avg_frame_rate": "30/1",
+      "delta_frames": -990
+    },
+    "right": {
+      "group": "EGG",
+      "path": null,
+      "exists": false,
+      "frames": null,
+      "manifest_frames": null,
+      "reason": "manifest 未登记成片"
+    }
+  },
+  {
+    "id": "J71",
+    "left": {
+      "group": "EGG",
+      "path": null,
+      "exists": false,
+      "frames": null,
+      "manifest_frames": null,
+      "reason": "manifest 未登记成片"
+    },
+    "right": null
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "computer",
+    "text": "computer",
+    "kind": "engrave",
+    "at_word": "8-04.w001"
+  },
+  {
+    "id": "protein",
+    "text": "protein",
+    "kind": "engrave",
+    "at_word": "8-04.w001"
+  },
+  {
+    "id": "cells",
+    "text": "cells",
+    "kind": "engrave",
+    "at_word": "8-04.w001"
+  },
+  {
+    "id": "animals",
+    "text": "animals",
+    "kind": "engrave",
+    "at_word": "8-04.w001"
+  },
+  {
+    "id": "patients",
+    "text": "patients",
+    "kind": "engrave",
+    "at_word": "8-04.w001"
+  },
+  {
+    "id": "not_yet",
+    "text": "not yet",
+    "kind": "engrave",
+    "at_word": "8-04.w005"
+  },
+  {
+    "id": "headline",
+    "text": "AI discovers a cancer drug",
+    "kind": "engrave",
+    "at_word": "8-05.w009"
+  },
+  {
+    "id": "source",
+    "text": "Illustration · result in cells: Ren et al., Chem. Sci. 2023",
+    "kind": "source",
+    "at_word": "8-04.w001"
+  }
+]

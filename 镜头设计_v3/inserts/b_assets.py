@@ -13,7 +13,7 @@
   D:/software/blender-5.3/blender.exe -b --factory-startup -P 镜头设计_v3/inserts/b_assets.py -- plate 5 3 4 8
   D:/software/blender-5.3/blender.exe -b --factory-startup -P 镜头设计_v3/inserts/b_assets.py -- sprites
   D:/software/blender-5.3/blender.exe -b --factory-startup -P 镜头设计_v3/inserts/b_assets.py -- wipe runner socket
-可选：samples=N（背景默认 128、阈值 thr=0.005；贴图 64；擦除 16）、fmul=（背景光圈校正）、test（plate 只渲 1 帧到 zone<N>_test，量时间）、replace（贴图、擦除重渲）。
+可选：blur=像素（背景焦外，默认 21；v2 规则用 12）、suffix=_v2（背景输出目录后缀）、samples=N（背景默认 128、阈值 thr=0.005；贴图 64；擦除 16）、fmul=（背景光圈校正）、test（plate 只渲 1 帧到 zone<N>_test，量时间）、replace（贴图、擦除重渲）。
 
 一律 Cycles + OptiX GPU + OptiX 降噪，不回落 CPU；GPU_PAUSED / GPU_HOLD 存在时等。
 """
@@ -125,7 +125,8 @@ def plate(n):
     cd.dof.use_dof = True
     cd.dof.focus_distance = FOCUS_D
     f = cd.lens / 1000.0
-    c_mm = BLUR_PX / 1920 * 36.0
+    blur = float(OPT.get("blur", BLUR_PX))     # 11-21 B 档视觉规则 v2 R03：焦外 ≤ 14 px，第二版大板用 blur=12、出到 zone<N>_v2
+    c_mm = blur / 1920 * 36.0
     k = (f * f / (FOCUS_D - f)) * 1000.0 * (dist - FOCUS_D) / dist      # 毫米·光圈数
     cd.dof.aperture_fstop = k / c_mm * float(OPT.get("fmul", FMUL))
     # 慢移：沿板面横移 40 mm、往前推 6 mm，正弦缓入缓出（来回播放时转折处速度为 0，不跳）
@@ -138,7 +139,7 @@ def plate(n):
     for fc in cam.animation_data.action.fcurves if hasattr(cam.animation_data.action, "fcurves") else []:
         for kp in fc.keyframe_points:
             kp.interpolation = "LINEAR"
-    out = WORK / "bplate" / (f"zone{n}_test" if TEST else f"zone{n}")
+    out = WORK / "bplate" / (f"zone{n}{OPT.get('suffix', '')}_test" if TEST else f"zone{n}{OPT.get('suffix', '')}")
     out.mkdir(parents=True, exist_ok=True)
     for z0 in out.glob("*.jpg"):              # 上次中断留下的占位空文件（use_placeholder）删掉重渲
         if z0.stat().st_size == 0:
@@ -149,7 +150,7 @@ def plate(n):
     sc.render.use_placeholder = not TEST
     sc.render.filepath = str(out / "####")
     sc.frame_start, sc.frame_end = (0, 0) if TEST else (0, NF - 1)
-    (out / "plate.json").write_text(json.dumps(dict(zone=n, frames=NF, fps=60, blur_px=BLUR_PX, focus_m=FOCUS_D, fstop=round(cd.dof.aperture_fstop, 2),
+    (out / "plate.json").write_text(json.dumps(dict(zone=n, frames=NF, fps=60, blur_px=blur, focus_m=FOCUS_D, fstop=round(cd.dof.aperture_fstop, 2),
                                                     el=el, az=az, dist=dist, samples=sc.cycles.samples, ev=-0.3, size=[pw, pw * 9 // 16], note="来回播放：页面帧 f → 背景帧 pingpong(f, 720)"),
                                                ensure_ascii=False, indent=1), encoding="utf-8")
     wait_gpu()
@@ -421,6 +422,51 @@ def sprites(groups):
             tidy()
             r = fn()
             shoot(sc, name, "34", [r], az, el, px)
+    # B 第 2 批要的件：药（胶囊、输液袋）、钱、奖章、废料桶、筛子、回路、数据库架、论文书
+    if want("parts2"):
+        for name, fn, az, el, px in (("capsule", lambda: KP.p08_capsule(K), -18, 40, 900),
+                                     ("ivbag", lambda: KP.p09_iv_bag(K), -10, 30, 900),
+                                     ("bill", lambda: KP.p11_bill(K), -18, 50, 900),
+                                     ("medal", lambda: KP.p12_medal(K), -10, 40, 800),
+                                     ("plugbin", lambda: KP.p44_plug_bin(K), -18, 36, 1000),
+                                     ("sieve", lambda: KP.p36_sieve(K), -18, 48, 1000),
+                                     ("loop", lambda: KP.p35_loop(K), -18, 55, 1000),
+                                     ("dbrack", lambda: KP.p33_db_rack(K), -18, 36, 1000),
+                                     ("book", lambda: KP.p17_paper_book(K), -18, 50, 1000),
+                                     ("globe", lambda: KP.p06_globe(K), -18, 24, 900)):
+            tidy()
+            r = fn()
+            shoot(sc, name, "34", [r], az, el, px)
+
+
+    # B 第 4 批（规则 v2：真实对象，不用黑名单图标）：小鼠、挂锁（锁上 / 打开）、一摞硬币、两道跑道、Top 20 表、数据盘
+    if want("parts3"):
+        def coins():
+            P = KP.Part(K, "coins", "gold")
+            for i in range(6):
+                P.disc(0.6 * math.sin(i * 1.7), 0.5 * math.cos(i * 2.3), 9.0, 1.8, K.gold, z=i * 2.0, bevel=0.5)
+            P.gate(-9.5, 0, "-x")
+            return P.done()
+
+        def lock(opened):
+            r = KP.p21_lock(K)
+            if opened:
+                sh = next(o for o in r.children_recursive if "_tb" in o.name)
+                pivot = Vector((6 * MM, -2 * MM, 0))
+                sh.matrix_world = (Matrix.Translation(pivot) @ Matrix.Rotation(math.radians(-35), 4, "Z") @ Matrix.Translation(-pivot)
+                                   @ Matrix.Translation((0, 4.5 * MM, 0)) @ sh.matrix_world)
+            return r
+        for name, pose, fn, az, el, px in (("mouse", "34", lambda: KP.p43_mouse(K), -18, 34, 900),
+                                           ("lock", "closed", lambda: lock(False), -10, 62, 700),
+                                           ("lock", "open", lambda: lock(True), -10, 62, 700),
+                                           ("coins", "34", coins, -18, 30, 700),
+                                           ("track", "34", lambda: KP.p45_track(K), -14, 46, 1400),
+                                           ("top20", "34", lambda: KP.p28_top20(K), -8, 62, 1000),
+                                           ("disks", "34", lambda: KP.p27_data_disks(K), -18, 40, 1000)):
+            tidy()
+            r = fn()
+            bpy.context.view_layer.update()
+            shoot(sc, name, pose, [r], az, el, px)
 
 
 # ---------------------------------------------------------------- T5 焦点擦除层

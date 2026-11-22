@@ -1,0 +1,282 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "3-02",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 3-02（VO）：细胞大框里三个带小齿轮在转的蛋白；药（钥匙）飞来抓住一个，它变灰、齿轮停；口袋红圈；这个蛋白连钥匙滑到右边放大，变成锁，写 key = drug、lock = protein。页面 Manual302.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "title",
+   "obj": "title",
+   "verb": "appear",
+   "at": {
+    "word": "3-02.w001",
+    "off": 0
+   },
+   "means": "Inside：标题 Inside your cells",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "cell",
+   "obj": "cell",
+   "verb": "grow",
+   "at": {
+    "word": "3-02.w003",
+    "off": 0
+   },
+   "means": "cells：细胞圆角大框（双线膜）画出",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "prot",
+   "obj": "prot",
+   "verb": "grow",
+   "at": {
+    "word": "3-02.w004",
+    "off": 0
+   },
+   "means": "proteins：三个蛋白长出，标签 proteins",
+   "tool": "remotion",
+   "lead": 16,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "cdk20"
+    ]
+   }
+  },
+  {
+   "id": "lot",
+   "obj": "lot",
+   "verb": "appear",
+   "at": {
+    "word": "3-02.w007",
+    "off": 0
+   },
+   "means": "lot：每个蛋白上长出一个小齿轮，开始慢转",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "work",
+   "obj": "work",
+   "verb": "morph",
+   "at": {
+    "word": "3-02.w010",
+    "off": 0
+   },
+   "means": "work：三个齿轮加速",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "drug",
+   "obj": "drug",
+   "verb": "move",
+   "at": {
+    "word": "3-02.w012",
+    "off": 0
+   },
+   "means": "drugs：钥匙从右边飞进来，挂字牌 drugs",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "grab",
+   "obj": "grab",
+   "verb": "move",
+   "at": {
+    "word": "3-02.w013",
+    "off": 0
+   },
+   "means": "grab：钥匙竖起来俯冲进细胞，贴住中间的蛋白，字牌淡出",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "tight",
+   "obj": "tight",
+   "verb": "morph",
+   "at": {
+    "word": "3-02.w016",
+    "off": 0
+   },
+   "means": "tightly：蛋白一侧收紧夹住钥匙",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "change",
+   "obj": "change",
+   "verb": "morph",
+   "at": {
+    "word": "3-02.w018",
+    "off": 0
+   },
+   "means": "change：这个蛋白变灰微歪，齿轮停转变灰",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "does",
+   "obj": "does",
+   "verb": "appear",
+   "at": {
+    "word": "3-02.w021",
+    "off": 0
+   },
+   "means": "does：停住的齿轮打红叉，写 change what it does",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "slot",
+   "obj": "slot",
+   "verb": "move",
+   "at": {
+    "word": "3-02.w022",
+    "off": 0
+   },
+   "means": "slotting：钥匙再压下去到底，带回弹",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "pocket",
+   "obj": "pocket",
+   "verb": "appear",
+   "at": {
+    "word": "3-02.w025",
+    "off": 0
+   },
+   "means": "pocket：口袋红圈，标签 pocket",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "like",
+   "obj": "like",
+   "verb": "move",
+   "at": {
+    "word": "3-02.w026",
+    "off": 0
+   },
+   "means": "like：这个蛋白连钥匙复制一份，沿虚线滑到右边放大，钥匙转成横的",
+   "tool": "remotion",
+   "lead": 26,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "key",
+   "obj": "key",
+   "verb": "appear",
+   "at": {
+    "word": "3-02.w028",
+    "off": 0
+   },
+   "means": "key：写 key = drug",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "lock",
+   "obj": "lock",
+   "verb": "morph",
+   "at": {
+    "word": "3-02.w031",
+    "off": 0
+   },
+   "means": "lock：右边的蛋白变成锁，钥匙插在锁孔里，写 lock = protein",
+   "tool": "remotion",
+   "lead": 16,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  }
+ ]
+}

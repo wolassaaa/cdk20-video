@@ -1,0 +1,69 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "8-01",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜 8-01（C）讲解卡：2-04 的便签纸 Our objectives，back 时从上方落回，where we started 两个圈号 1、2 重新亮起；页面 OnCam801.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "frame",
+   "obj": "frame",
+   "verb": "grow",
+   "at": {
+    "word": "8-01.w001",
+    "off": 0
+   },
+   "means": "back：讲解卡外框画出",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "8-01.w002"
+   }
+  },
+  {
+   "id": "note",
+   "obj": "note",
+   "verb": "move",
+   "at": {
+    "word": "8-01.w002",
+    "off": 0
+   },
+   "means": "back：便签纸从上方落回",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "word": "8-01.w002"
+   }
+  },
+  {
+   "id": "n1",
+   "obj": "n1",
+   "verb": "morph",
+   "at": {
+    "word": "8-01.w005",
+    "off": 0
+   },
+   "means": "we：圈号 1 亮起",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "8-01.w005"
+   }
+  },
+  {
+   "id": "n2",
+   "obj": "n2",
+   "verb": "morph",
+   "at": {
+    "word": "8-01.w006",
+    "off": 0
+   },
+   "means": "started：圈号 2 亮起",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "8-01.w006"
+   }
+  }
+ ]
+}

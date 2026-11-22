@@ -1,0 +1,129 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "3-09",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜 3-09（B）讲解卡：一把锁，nobody can see 时黑幕从上往下盖住，只剩一个问号；cut a key 钥匙在左边长出；in the dark 钥匙往黑幕里探，红批注 in the dark；页面 OnCam309.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "frame",
+   "obj": "frame",
+   "verb": "grow",
+   "at": {
+    "word": "3-09.w001",
+    "off": 0
+   },
+   "means": "So：讲解卡外框画出",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "3-09.w001"
+   }
+  },
+  {
+   "id": "lock",
+   "obj": "lock",
+   "verb": "grow",
+   "at": {
+    "word": "3-09.w005",
+    "off": 0
+   },
+   "means": "lock：锁长出",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "3-09.w005"
+   }
+  },
+  {
+   "id": "curtain",
+   "obj": "curtain",
+   "verb": "move",
+   "at": {
+    "word": "3-09.w006",
+    "off": 0
+   },
+   "means": "nobody：黑幕从上往下盖住锁",
+   "tool": "remotion",
+   "lead": 26,
+   "until": {
+    "word": "3-09.w006"
+   }
+  },
+  {
+   "id": "qmark",
+   "obj": "qmark",
+   "verb": "appear",
+   "at": {
+    "word": "3-09.w007",
+    "off": 0
+   },
+   "means": "can：黑幕上出现问号",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "3-09.w007"
+   }
+  },
+  {
+   "id": "see",
+   "obj": "see",
+   "verb": "morph",
+   "at": {
+    "word": "3-09.w008",
+    "off": 0
+   },
+   "means": "see：问号轻跳一下",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "3-09.w008"
+   }
+  },
+  {
+   "id": "key",
+   "obj": "key",
+   "verb": "grow",
+   "at": {
+    "word": "3-09.w012",
+    "off": 0
+   },
+   "means": "cut：钥匙在左边长出，字牌 a key",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "word": "3-09.w012"
+   }
+  },
+  {
+   "id": "probe",
+   "obj": "probe",
+   "verb": "move",
+   "at": {
+    "word": "3-09.w015",
+    "off": 0
+   },
+   "means": "in：钥匙往黑幕里探，尖端渐隐",
+   "tool": "remotion",
+   "lead": 24,
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "pen",
+   "obj": "pen",
+   "verb": "appear",
+   "at": {
+    "word": "3-09.w017",
+    "off": 0
+   },
+   "means": "dark：红笔 in the dark",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "3-09.w017"
+   }
+  }
+ ]
+}
