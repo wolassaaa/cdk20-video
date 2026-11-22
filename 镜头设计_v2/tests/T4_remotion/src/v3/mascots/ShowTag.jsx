@@ -12,7 +12,10 @@ import META from "./art_meta.json";
 
 const {fontFamily} = loadFont();
 export const FPS_TAG = 60;
-export const TOTAL_TAG = SH.frames;
+// 11-23 director: all copyright and source text goes to one closing card after S79 (no per-card source lines, no disclosure line,
+// no voice-prompt box, no decorative version tags). The card holds still for CREDITS_F frames; dialogue and bed are untouched.
+export const CREDITS_F = 360;
+export const TOTAL_TAG = SH.frames + CREDITS_F;
 const W = 1920, HH = 1080;
 const DIR = {Claude: "claude", ChatGPT: "gpt", DeepSeek: "deepseek", Gemini: "gemini"};
 const ORDER = ["Claude", "ChatGPT", "DeepSeek", "Gemini"];
@@ -237,29 +240,6 @@ const Clones = ({f, H, gx, gy, shot}) => {
     </>
   );
 };
-const CloneTags = ({f, H, gx, gy}) => {   // the version tags, drawn above everything so they stay readable
-  const k0 = H / CLONE_REF, cm = META.gemini.clone, waist = gy + 0.42 * H;
-  const run = f >= SH.clone_run ? eIn(clamp01((f - SH.clone_run) / 40)) * 1900 : 0;
-  let prevRight = -1e9;
-  return (
-    <>
-      {SH.clones.map((c) => {
-        const v = cloneState(c, f); if (v <= 0.001) return null;
-        const k = c.k, Hc = H * Math.pow(0.86, k), s = Hc / (cm.foot - cm.top);
-        const cx = gx + 105 * k * k0 + run * (1 + k * 0.08), headTop = waist - 38 * k * k0 - 0.42 * Hc + (cm.bbox[1] - cm.top) * s;
-        const tm = META.gemini[c.tag.replace(".png", "")], th = 62, tw = tm.w * th / tm.h;
-        const light = SH.clone_taglight[k - 1] != null ? bump(clamp01((f - SH.clone_taglight[k - 1]) / 14)) : 0;
-        const lx = Math.max(cx - tw / 2, prevRight + 8); prevRight = lx + tw;   // tags never cover each other: pushed right in order
-        return (
-          <div key={c.k} style={{position: "absolute", left: lx, top: Math.max(8, headTop - th - 8 - (k % 2) * 14), width: tw, height: th, opacity: clamp01(v),
-            transform: `scale(${0.6 + 0.4 * v + 0.12 * light})`, filter: `drop-shadow(0 2px 6px rgba(0,0,20,.6)) brightness(${1 + 0.8 * light})`}}>
-            <Img src={staticFile(`t/gemini/${c.tag}`)} style={{width: "100%", height: "100%", display: "block"}} />
-          </div>
-        );
-      })}
-    </>
-  );
-};
 const clonesVisible = (f) => SH.clones.some((c) => cloneState(c, f) > 0.001);
 
 // ---------------------------------------------------------------- name tags
@@ -274,32 +254,6 @@ const BigTag = ({who, f, f_in, scale = 1, left, top, origin = "0% 100%"}) => {
     </div>
   );
 };
-const Ghost = ({who, f, f_in}) => {   // huge outlined name behind the character while the big tag is up
-  const q = clamp01((f - f_in) / 12);
-  return <div style={{position: "absolute", left: -120 + (f - f_in) / 60 * 12, top: 190, fontFamily, fontSize: 560, lineHeight: 1, whiteSpace: "nowrap", color: "transparent",
-    WebkitTextStroke: `2px ${ACCENT[who]}`, opacity: 0.16 * q, transform: "rotate(-8deg)"}}>{SH.nametags[who].name}</div>;
-};
-const Star4 = ({size = 22, col}) => (
-  <svg width={size} height={size} viewBox="0 0 20 20" style={{display: "inline-block", verticalAlign: "-3px", marginRight: 8}}><path d="M10 0 L12.3 7.7 L20 10 L12.3 12.3 L10 20 L7.7 12.3 L0 10 L7.7 7.7Z" fill={col} /></svg>
-);
-const VoiceCard = ({who, f, f_in, bottom}) => {
-  const n = SH.nametags[who], q = clamp01((f - f_in - 4) / 10), k = eBack(q);
-  const l = VOICE.find((x) => x.who === who && x.id === "L02");
-  return (
-    <div style={{position: "absolute", left: 64, top: bottom - 190, width: 620, height: 190, boxSizing: "border-box", borderRadius: 18, padding: "16px 22px 0",
-      background: "rgba(18,22,46,0.72)", border: `1.5px solid ${ACCENT[who]}`, fontFamily, opacity: clamp01(q * 2), transform: `translateY(${(1 - k) * 40}px)`}}>
-      <div style={{fontSize: 22, letterSpacing: "0.2em", color: ACCENT[who], lineHeight: 1}}><Star4 size={20} col={ACCENT[who]} />VOICE PROMPT</div>
-      <div style={{fontSize: 30, lineHeight: "38px", color: BONE, marginTop: 8, maxHeight: 114, overflow: "hidden"}}>{n.voice}</div>
-      <div style={{position: "absolute", left: 22, right: 22, bottom: 10, height: 14, display: "flex", alignItems: "flex-end", justifyContent: "space-between"}}>
-        {Array.from({length: 48}, (_, i) => {
-          const ff = f - i; const v = l && ff >= l.f0 && ff < l.f1 ? l.env[ff - l.f0] : 0;
-          return <div key={i} style={{width: 4, height: 3 + 11 * v, borderRadius: 2, background: ACCENT[who], opacity: 0.85}} />;
-        })}
-      </div>
-    </div>
-  );
-};
-
 // ---------------------------------------------------------------- cards
 const CARD_W = 780;
 const statSize = (txt) => Math.min(178, 700 / (0.42 * [...txt].length));
@@ -369,7 +323,6 @@ const CardView = ({c, f, side, op, mode, settle}) => {
                 background: `rgba(255,255,255,${0.07 + 0.2 * nPulse})`, borderRadius: 6, fontSize: 33, lineHeight: 1.12, color: "#fff", opacity: nk}}>{c.note}</div>
             </div>
           )}
-          <div style={{fontSize: 30, lineHeight: 1.18, fontStyle: "italic", color: "#c4bee0", marginTop: 18}}>Source: {c.src}</div>
         </div>
       </div>
     </div>
@@ -430,10 +383,8 @@ const Single = ({shot, f}) => {
       <Backdrop f={f} px={pxCam} zoom={isBust ? 1.6 : z * (isDual ? DUAL : 1) + 0.1} tint={tint} halo={{x: X + wx * 0.35, y: 420, r: 640}} spot={spot} />
       <AbsoluteFill style={{transform: `translateX(${wx}px)`}}>
         <AbsoluteFill style={pivot}>
-          {bigTag && <Ghost who={who} f={f} f_in={bigTag.f_in} />}
           {gem && <Clones f={f} H={H} gx={X} gy={HEAD_Y} shot={shot} />}
           <Art who={who} name={art} p={p} b={b} />
-          {gem && <CloneTags f={f} H={H} gx={X} gy={HEAD_Y} />}
         </AbsoluteFill>
         <Foreground f={f} px={pxCam} tint={tint} />
       </AbsoluteFill>
@@ -474,7 +425,6 @@ const Wide = ({shot, f}) => {
       <Backdrop f={f} px={0} zoom={0.8} tint={tint} halo={{x: 960, y: 560, r: 900, o: 0.6}} />
       {gem && clonesVisible(f) && <Clones f={f} H={H} gx={xs.Gemini + gem.b.dx} gy={WY} shot={shot} />}
       {items.map(({w, art, p, b, dim}) => <Art key={w} who={w} name={art} p={p} b={b} bright={dim ? 0.62 : 1} sat={dim ? 0.75 : 1} rim={dim ? 0.35 : 1} soft={dim ? 1.2 : 0} />)}
-      {gem && clonesVisible(f) && <CloneTags f={f} H={H} gx={xs.Gemini + gem.b.dx} gy={WY} />}
       {SH.tags.filter((tg) => (tg.kind === "small" || tg.kind === "over") && f >= tg.f_in && f < tg.f_out && names.includes(tg.who)).map((tg) => {
         const it = items.find((x) => x.w === tg.who); const sc = tg.kind === "small" ? 0.5 : 0.7;
         const headTop = WY + it.b.dy;
@@ -567,11 +517,6 @@ const Subtitle = ({f}) => {
     </div>
   );
 };
-const Disclosure = ({f}) => {
-  const d = SH.disclose, o = clamp01((f - d.f_in) / 8) * (1 - clamp01((f - (d.f_out - 8)) / 8));
-  return <div style={{position: "absolute", left: 64, top: 886, height: 42, boxSizing: "border-box", padding: "0 14px", display: "flex", alignItems: "center", fontFamily, fontSize: 30,
-    color: BONE, background: "rgba(10,12,30,0.66)", borderRadius: 6, whiteSpace: "nowrap", opacity: o}}>{d.text}</div>;
-};
 const Banner = ({f}) => {
   const B = SH.banner; if (f < B.f_in - 2 || f >= B.f_out) return null;
   const o = 1 - clamp01((f - (B.f_out - B.fade)) / B.fade);   // gone by the cut to S76
@@ -580,17 +525,60 @@ const Banner = ({f}) => {
   return (
     <div style={{position: "absolute", top: 0, left: 0, right: 0, padding: "12px 0 10px", textAlign: "center", fontFamily, color: BONE, opacity: o,
       background: "linear-gradient(180deg, rgba(8,10,32,0.9) 0%, rgba(8,10,32,0.78) 80%, rgba(8,10,32,0) 100%)"}}>
-      <div style={{fontSize: 29, letterSpacing: "0.2em", color: ACCENT.ChatGPT}}>{B.kicker}</div>
       <div style={{fontSize: 56, lineHeight: 1.08, whiteSpace: "nowrap"}}>{B.lines[0].map(word)}</div>
       <div style={{fontSize: 56, lineHeight: 1.08, whiteSpace: "nowrap", fontStyle: "italic", color: ACCENT.ChatGPT, textShadow: `0 0 ${30 * p}px ${ACCENT.ChatGPT}`}}>{B.lines[1].map(word)}</div>
-      <div style={{fontSize: 30, fontStyle: "italic", color: "#c4bee0", marginTop: 2}}>Source: {B.src}</div>
     </div>
+  );
+};
+
+// ---------------------------------------------------------------- closing card: all sources and credits in one place
+const CREDIT_SOURCES = [
+  ["Scorpion venom binders", "Anthropic, 20 Oct 2026; lab tests by Adaptyv Bio & Twist Bioscience"],
+  ["Stem-cell proteins", "OpenAI, “Accelerating life sciences research”, 22 Aug 2025"],
+  ["Super Bowl LX ad", "Adweek; The Register, Feb 2026"],
+  ["Project Vend", "Anthropic, Jun 2025"],
+  ["Protocol QA benchmark", "Anthropic, “Claude for Life Sciences”, Oct 2025"],
+  ["Novo Nordisk", "customer story, claude.com"],
+  ["Nobel Prize in Chemistry 2024", "Royal Swedish Academy of Sciences"],
+  ["Isomorphic Labs", "funding announcement, Mar 2025"],
+  ["Roadshow parody (satire)", "Business Insider, Nov 2026"],
+  ["Rentosertib", "Xu et al., Nature Medicine 2025 (Insilico Medicine)"],
+];
+const CREDIT_CHARS = [
+  ["DeepSeek", "after “Mingyue” by Shangshan Wuxing (CC BY-NC-SA 4.0); whale maid version by ZipZipPipe (Bilibili)"],
+  ["Claude", "after a popular community fan design"],
+  ["ChatGPT", "after the White Dragon design by ZipZipPipe (Bilibili)"],
+  ["Gemini", "Gemini character design by ZipZipPipe. Reference images: genderswapai.com."],
+];
+const CREDIT_ART = "Character art drawn with ChatGPT / Codex from these designs.";
+const CREDIT_NOTE = "Fictional AI characters. Synthetic voices (Chatterbox TTS). Not affiliated with or endorsed by DeepSeek, Anthropic, OpenAI or Google.";
+export const CREDITS_TEXT = {sources: CREDIT_SOURCES, chars: CREDIT_CHARS, art: CREDIT_ART, note: CREDIT_NOTE};
+const CreditsCard = ({f}) => {
+  const o = clamp01(f / 12) * (1 - clamp01((f - (CREDITS_F - 14)) / 14));
+  const row = (k, v, i, col) => <div key={i} data-credit="1" style={{fontSize: 30, lineHeight: "37px", marginBottom: 11}}>
+    <span style={{color: col}}>{k}</span><span style={{color: "rgba(246,243,255,0.55)"}}> · </span><span>{v}</span></div>;
+  const head = (t) => <div style={{fontSize: 34, fontStyle: "italic", color: "#c8b8ff", letterSpacing: "0.04em", marginBottom: 14, borderBottom: "1.5px solid rgba(200,184,255,0.45)", paddingBottom: 6}}>{t}</div>;
+  return (
+    <AbsoluteFill style={{opacity: o, fontFamily, color: "#f6f3ff", background: "linear-gradient(180deg, #080a22 0%, #121848 55%, #1d2468 100%)"}}>
+      <div style={{position: "absolute", left: 96, right: 96, top: 64, fontSize: 60, lineHeight: 1}}>Sources &amp; Credits</div>
+      <div style={{position: "absolute", left: 96, top: 156, width: 840}}>
+        {head("Skit sources")}
+        {CREDIT_SOURCES.map(([k, v], i) => row(k, v, i, "#ffb27a"))}
+      </div>
+      <div style={{position: "absolute", left: 1000, top: 156, width: 824}}>
+        {head("Characters")}
+        {CREDIT_CHARS.map(([k, v], i) => row(k, v, i, NAME_COL[k]))}
+        <div data-credit="1" style={{fontSize: 30, lineHeight: "37px", marginTop: 8, color: "rgba(246,243,255,0.85)", fontStyle: "italic"}}>{CREDIT_ART}</div>
+      </div>
+      <div data-credit="1" style={{position: "absolute", left: 96, right: 96, top: 930, fontSize: 30, lineHeight: "37px", color: "rgba(246,243,255,0.85)", textAlign: "center"}}>{CREDIT_NOTE}</div>
+    </AbsoluteFill>
   );
 };
 
 // ---------------------------------------------------------------- main
 export const MascotTag = () => {
   const f = useCurrentFrame();
+  if (f >= NF) return <AbsoluteFill style={{background: "#000"}}><CreditsCard f={f - NF} /></AbsoluteFill>;
   const shot = shotAt(f);
   let shx = 0, shy = 0;
   for (const s of SH.shake) if (f >= s.f && f < s.f + s.n) { shx += (f - s.f) % 2 ? -s.amp : s.amp; shy += (f - s.f) % 2 ? s.amp * 0.6 : -s.amp * 0.6; }
@@ -612,12 +600,10 @@ export const MascotTag = () => {
         {shot.kind !== "black" && shot.kind !== "empty" && <AbsoluteFill style={{background: "radial-gradient(ellipse at 50% 48%, rgba(0,0,0,0) 58%, rgba(0,0,12,0.5) 100%)"}} />}
         {shot.kind !== "black" && <AbsoluteFill style={{background: "linear-gradient(180deg, transparent 74%, rgba(5,7,24,0.7) 100%)", opacity: shot.kind === "empty" ? 0 : 1}} />}
         {card && <CardView c={card.c} f={f} side={card.side} op={card.op} mode={card.mode} settle={card.settle} />}
-        {bigTag && <BigTag who={bigTag.who} f={f} f_in={bigTag.f_in} left={64} top={bigTag.voice ? 860 - 190 - 24 - 218 : 860 - 218} />}
-        {bigTag && bigTag.voice && <VoiceCard who={bigTag.who} f={f} f_in={bigTag.f_in} bottom={860} />}
+        {bigTag && <BigTag who={bigTag.who} f={f} f_in={bigTag.f_in} left={64} top={860 - 218} />}
         <Banner f={f} />
         <Sparks f={f} />
       </AbsoluteFill>
-      <Disclosure f={f} />
       <Subtitle f={f} />
       {sw >= 0 && <AbsoluteFill style={{background: `linear-gradient(110deg, rgba(255,248,235,0) ${-40 + sw * 180 - 35}%, rgba(255,246,228,0.95) ${-40 + sw * 180}%, rgba(255,248,235,0) ${-40 + sw * 180 + 35}%)`}} />}
       <AbsoluteFill style={{background: "#fff", opacity: flash}} />

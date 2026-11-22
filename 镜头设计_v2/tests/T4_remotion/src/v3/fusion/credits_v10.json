@@ -1,0 +1,237 @@
+{
+ "title": [
+  "WORTH TESTING?",
+  "How computers help find cancer drug candidates: the CDK20 story",
+  "HKBU SCIE1007 · Molecular Science in Daily Life · Group project, Topic 10",
+  "Section 20007 · Group 3B",
+  "Presented, filmed and narrated by",
+  "{NAME_A}",
+  "{NAME_B}",
+  "{NAME_C}",
+  "{NAME_D}"
+ ],
+ "sections": [
+  {
+   "head": "Main paper",
+   "columns": 1,
+   "align": "left",
+   "numbered": true,
+   "items": [
+    {
+     "n": 1,
+     "text": "Ren, F.; et al. AlphaFold Accelerates Artificial Intelligence Powered Drug Discovery: Efficient Discovery of a Novel CDK20 Small Molecule Inhibitor. *Chem. Sci.* 2023, *14* (6), 1443–1452. DOI: 10.1039/D2SC05709C. Including its Electronic Supplementary Information."
+    }
+   ]
+  },
+  {
+   "head": "References",
+   "columns": 2,
+   "align": "left",
+   "numbered": true,
+   "items": [
+    {
+     "n": 2,
+     "text": "Feng, H.; et al. Cell Cycle–Related Kinase Is a Direct Androgen Receptor–Regulated Gene That Drives β-Catenin/T Cell Factor–Dependent Hepatocarcinogenesis. *J. Clin. Invest.* 2011, *121* (8), 3159–3175. DOI: 10.1172/JCI45967."
+    },
+    {
+     "n": 3,
+     "text": "Jumper, J.; et al. Highly Accurate Protein Structure Prediction with AlphaFold. *Nature* 2021, *596* (7873), 583–589. DOI: 10.1038/s41586-021-03819-2."
+    },
+    {
+     "n": 4,
+     "text": "Varadi, M.; et al. AlphaFold Protein Structure Database in 2024: Providing Structure Coverage for over 214 Million Protein Sequences. *Nucleic Acids Res.* 2024, *52* (D1), D368–D375. DOI: 10.1093/nar/gkad1011."
+    },
+    {
+     "n": 5,
+     "text": "Ivanenkov, Y. A.; et al. Chemistry42: An AI-Driven Platform for Molecular Design and Optimization. *J. Chem. Inf. Model.* 2023, *63* (3), 695–701. DOI: 10.1021/acs.jcim.2c01191."
+    },
+    {
+     "n": 6,
+     "text": "Wang, L.; et al. Advances of Artificial Intelligence in Anti-Cancer Drug Design: A Review of the Past Decade. *Pharmaceuticals* 2023, *16* (2), 253. DOI: 10.3390/ph16020253."
+    },
+    {
+     "n": 7,
+     "text": "Bender, A.; et al. Artificial Intelligence in Drug Discovery — What It Is, Where We Stand and the Path Forward. *Nat. Rev. Drug Discov.* 2026. DOI: 10.1038/s41573-026-01496-2. Abstract only consulted."
+    },
+    {
+     "n": 8,
+     "text": "Lengauer, T. Bioinformatics — From Genomes to Therapies. In *Bioinformatics — From Genomes to Therapies*; Lengauer, T., Ed.; Wiley-VCH: Weinheim, 2007; Vol. 1, pp 1–24. DOI: 10.1002/9783527619368.ch1."
+    },
+    {
+     "n": 9,
+     "text": "Mitsuhashi, N.; et al. BodyParts3D: 3D Structure Database for Anatomical Concepts. *Nucleic Acids Res.* 2009, *37* (Database issue), D782–D785. DOI: 10.1093/nar/gkn613."
+    },
+    {
+     "n": 10,
+     "text": "Bray, F.; et al. Global Cancer Statistics 2022: GLOBOCAN Estimates of Incidence and Mortality Worldwide for 36 Cancers in 185 Countries. *CA Cancer J. Clin.* 2024, *74* (3), 229–263. DOI: 10.3322/caac.21834."
+    },
+    {
+     "n": 11,
+     "text": "Hong Kong Cancer Registry, Hospital Authority. Liver Cancer in 2022. October 2024."
+    },
+    {
+     "n": 12,
+     "text": "Hong Kong Cancer Registry, Hospital Authority. Overview of Hong Kong Cancer Statistics of 2023."
+    },
+    {
+     "n": 13,
+     "text": "National Cancer Institute. Liver and Bile Duct Cancer. cancer.gov/types/liver (accessed 2026-10-03)."
+    },
+    {
+     "n": 14,
+     "text": "U.S. Food and Drug Administration. FDA Approves Lirafugratinib for Previously Treated Unresectable Locally Advanced or Metastatic Cholangiocarcinoma. September 23, 2026. fda.gov"
+    },
+    {
+     "n": 15,
+     "text": "Exscientia. Exscientia Details Pipeline Prioritisation Strategy. *Business Wire*, October 3, 2023."
+    },
+    {
+     "n": 16,
+     "text": "First Application of AlphaFold in Identifying Potential Liver Cancer Drug. *Genetic Engineering & Biotechnology News*, January 24, 2023."
+    },
+    {
+     "n": 17,
+     "text": "The Royal Swedish Academy of Sciences. The Nobel Prize in Chemistry 2024."
+    },
+    {
+     "n": 18,
+     "text": "SCIE1007 course material: Group Project Introduction, slides 45–49. Hong Kong Baptist University, 2026."
+    }
+   ]
+  },
+  {
+   "head": "Data, models and images",
+   "columns": 1,
+   "align": "left",
+   "numbered": false,
+   "items": [
+    {
+     "bullet": true,
+     "text": "CDK20 predicted structure AF-Q8IZL9-F1 (model v6): AlphaFold Protein Structure Database, EMBL-EBI and Google DeepMind, CC BY 4.0. The paper used an earlier model version."
+    },
+    {
+     "bullet": true,
+     "text": "Liver, vessels and other organs: BodyParts3D, © The Database Center for Life Science, CC BY 4.0."
+    },
+    {
+     "bullet": true,
+     "text": "Compounds 001 and 048: redrawn from Ren et al. 2023, Figs. 2, 5 and 7. Their 3D poses are our own AutoDock Vina re-docking, shown as an illustration. ATP built with RDKit."
+    },
+    {
+     "bullet": true,
+     "text": "Hong Kong outline and globe: made with Natural Earth, public domain."
+    },
+    {
+     "bullet": true,
+     "text": "Kit parts, board, socket and all other 3D scenes: built by our group in Blender. Scenes marked \"Illustration\" are drawn, not measured."
+    },
+    {
+     "bullet": true,
+     "text": "Skit characters: Claude, ChatGPT and DeepSeek adapted from fan designs by ZipZipPipe (Bilibili) and Shangshan Wuxing (\"Mingyue\"), CC BY-NC-SA 4.0. Gemini character design by ZipZipPipe. Reference images: genderswapai.com."
+    }
+   ]
+  },
+  {
+   "head": "Logos and badges",
+   "columns": 1,
+   "align": "left",
+   "numbered": false,
+   "items": [
+    {
+     "bullet": true,
+     "text": "\"AlphaFold DB v6 · predicted\" badge and the CDK20 model AF-Q8IZL9-F1: AlphaFold Protein Structure Database, EMBL-EBI and Google DeepMind, CC BY 4.0."
+    },
+    {
+     "bullet": true,
+     "text": "UniProt Q8IZL9 (the CDK20 sequence): UniProt Knowledgebase, the UniProt Consortium, CC BY 4.0."
+    },
+    {
+     "bullet": true,
+     "text": "AlphaFold name on the kit chip: AlphaFold, Google DeepMind (Jumper et al. 2021)."
+    },
+    {
+     "bullet": true,
+     "text": "PandaOmics and Chemistry42 names on the kit chips, and the Insilico Medicine plate: the platforms and company named in Ren et al. 2023."
+    },
+    {
+     "bullet": true,
+     "text": "\"OUR RE-DOCKING (AutoDock Vina)\" tag: AutoDock Vina, Scripps Research, open source (Apache 2.0)."
+    },
+    {
+     "bullet": true,
+     "text": "GLOBOCAN 2022 label: International Agency for Research on Cancer (IARC), via Bray et al. 2024."
+    },
+    {
+     "bullet": true,
+     "text": "Hong Kong Cancer Registry label: Hospital Authority, Hong Kong."
+    },
+    {
+     "bullet": true,
+     "text": "Product, company and database names are shown only to name our sources. All trademarks belong to their owners."
+    }
+   ]
+  },
+  {
+   "head": "Music",
+   "columns": 1,
+   "align": "center",
+   "numbered": false,
+   "items": [
+    {
+     "text": "Short excerpts, used for this coursework only. All rights belong to their owners.",
+     "note": true
+    },
+    {
+     "bullet": true,
+     "text": "The Weeknd — *Blinding Lights*"
+    },
+    {
+     "bullet": true,
+     "text": "Daft Punk — *Harder, Better, Faster, Stronger*"
+    },
+    {
+     "bullet": true,
+     "text": "The Weeknd — *Take My Breath*"
+    },
+    {
+     "bullet": true,
+     "text": "The Weeknd — *Sacrifice*"
+    },
+    {
+     "bullet": true,
+     "text": "The Weeknd — *Out of Time*"
+    },
+    {
+     "text": "Underscore and sound effects: synthesised by our group in Python.",
+     "note": false
+    }
+   ]
+  },
+  {
+   "head": "Made with",
+   "columns": 1,
+   "align": "center",
+   "numbered": false,
+   "items": [
+    {
+     "text": "Blender · Remotion · GSAP · TouchDesigner · FFmpeg · Python (NumPy, SciPy, librosa, pedalboard, RDKit, MediaPipe, Whisper) · AutoDock Vina · Chatterbox TTS · Real-ESRGAN",
+     "note": false
+    },
+    {
+     "text": "Fonts: Instrument Serif and Caveat, under the SIL Open Font License 1.1.",
+     "note": false
+    },
+    {
+     "text": "Footage: filmed by each of us on our own phones.",
+     "note": false
+    }
+   ]
+  }
+ ],
+ "ai": [
+  "We used generative AI throughout production, and we say exactly where.",
+  "Claude (Anthropic, through Claude Code) helped organise our reading notes, draft and edit the script, plan the visuals, and write the code for the animation, sound and editing. ChatGPT / Codex (OpenAI) helped model 3D parts and made the character art for the post-credits skit. Gemini (Google) drafted the skit script and reviewed cuts. GLM (Zhipu AI) ran render and quality checks. DeepSeek helped build early animation pages.",
+  "We checked the key facts and numbers against the sources listed here.",
+  "All narration and on-camera presenting is by the four of us, in our own voices. Synthetic voices (Chatterbox TTS) are heard only in the post-credits skit, spoken by fictional AI characters."
+ ]
+}

@@ -66,7 +66,30 @@ def data_checks():
     b = SH["banner"]
     banner_ok = " ".join(" ".join(x["w"] for x in ln) for ln in b["lines"]) == CARDS["banner"]["stat"] and b["src"] == CARDS["banner"]["src"]
     out["E7"] = {"subtitle_lines_ok": sum(sub_ok), "lines": len(sub_ok), "cards_ok": sum(card_ok), "cards": len(card_ok), "banner_ok": banner_ok}
-    out["E9"] = {"frames": SH["frames"], "seconds": round(SH["frames"] / 60, 3)}
+    # E9 (11-23): skit + closing credits card (CREDITS_F frames) must stay within 119.5 s
+    jsx = open(os.path.join(HERE, "ShowTag.jsx"), encoding="utf-8").read()
+    cf = int(re.search(r"export const CREDITS_F = (\d+);", jsx).group(1))
+    total = SH["frames"] + cf
+    out["E9"] = {"frames": total, "skit_frames": SH["frames"], "credits_frames": cf, "seconds": round(total / 60, 3), "ok": total / 60 <= 119.5}
+    # E6 sources (11-23): no per-card source line, no disclosure, no voice prompt; every card source is on the closing card
+    block = jsx[jsx.index("const CREDIT_SOURCES"):jsx.index("const CreditsCard")]
+    credits = " ".join(re.findall(r'"([^"]*)"', block))
+    def toks(t):
+        t = t.replace("Joke card (satire); roadshow ref:", "")
+        return [w for w in re.findall(r"[A-Za-z][A-Za-z]{2,}|\d{4}", t) if w[0].isupper() or w.isdigit()]
+    per = []
+    seen = set()
+    for cid, c in CARDS.items():
+        if cid == "banner" or c["src"] in seen: continue
+        seen.add(c["src"])
+        tk = toks(c["src"]); hit = [w for w in tk if w in credits]
+        per.append({"card": cid, "src": c["src"], "tokens": len(tk), "found": len(hit), "ok": len(hit) >= 0.8 * len(tk)})
+    gem = "Gemini character design by ZipZipPipe. Reference images: genderswapai.com." in credits
+    note = "Fictional AI characters. Synthetic voices (Chatterbox TTS). Not affiliated with or endorsed by DeepSeek, Anthropic, OpenAI or Google." in credits
+    gone = {k: (k not in jsx) for k in ("Source: {", "VoiceCard", "<Disclosure", "<CloneTags", "<Ghost", "B.kicker")}
+    sizes = [int(x) for x in re.findall(r"fontSize: (\d+)", jsx[jsx.index("const CreditsCard"):jsx.index("// ---------------------------------------------------------------- main")])]
+    out["E6_sources"] = {"cards": per, "gemini_line": gem, "disclaimer": note, "removed": gone, "credit_font_min_px": min(sizes),
+                         "ok": all(x["ok"] for x in per) and gem and note and all(gone.values()) and min(sizes) >= 30}
     # E10: each line's first word: the speaker is in the shot and has been still >= 4 frames (L01 excepted: black by script)
     e10 = []
     for v in SH["voice"]:
