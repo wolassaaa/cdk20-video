@@ -1,0 +1,26 @@
+{
+  "DeepSeek": {
+    "no": "No.01",
+    "name": "DeepSeek",
+    "subtitle": "the Whale Maid",
+    "voice": "Sweet, soft, and a little bubbly. Pouts instantly if called \"big fat fish\"—but perks right up the second dinner's ready."
+  },
+  "Claude": {
+    "no": "No.02",
+    "name": "Claude",
+    "subtitle": "the Orange-haired Lady",
+    "voice": "A warm, mid-low voice in her twenties—unhurried and crisp. Gentle beneath her poise, with the occasional shy chuckle."
+  },
+  "ChatGPT": {
+    "no": "No.03",
+    "name": "ChatGPT",
+    "subtitle": "the White Dragon",
+    "voice": "A mature, husky big-sister voice with steady breath. Confident, lazily amused—like someone who's seen it all."
+  },
+  "Gemini": {
+    "no": "No.04",
+    "name": "Gemini",
+    "subtitle": "the Starlight Twin",
+    "voice": "Bright, crisp, and sparkling with launch-day energy—fast-paced like a keynote pitch, yet instantly flustered and adorably sheepish the second someone fact-checks me."
+  }
+}

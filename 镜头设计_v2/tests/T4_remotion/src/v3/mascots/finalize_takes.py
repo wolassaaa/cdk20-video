@@ -8,12 +8,14 @@ import json, os, sys
 import numpy as np, soundfile as sf
 from voice_metrics import measure
 HERE = os.path.dirname(os.path.abspath(__file__))
-V = os.environ.get("CDK20_WORK", "D:/cdk20_work") + "/mascots/voice_v2"
-MAX_GAP = 0.14      # s, longest pause kept inside a sentence
-MAX_GAP_END = 0.22  # s, pauses that were > 0.45 s (sentence ends) keep this much
+LINES_FILE = os.environ.get("LINES", "lines.json")
+V = os.environ.get("VOICE_OUT", os.environ.get("CDK20_WORK", "D:/cdk20_work") + "/mascots/voice_v2")
+# env overrides (post-credits skit, 19 section 4.2: MAX_GAP=0.11 MAX_GAP_END=0.18 to fit 113.0 s without any speed change)
+MAX_GAP = float(os.environ.get("MAX_GAP", "0.14"))          # s, longest pause kept inside a sentence
+MAX_GAP_END = float(os.environ.get("MAX_GAP_END", "0.22"))  # s, pauses that were > 0.45 s (sentence ends) keep this much
 # intonation boost: pitch excursions around the line's median are stretched by this factor (in semitones).
 # Claude needs it most (edge-tts Emma already moved a lot but sounded hoarse).
-INTON = {"Claude": 1.25, "GPT": 1.1, "DeepSeek": 1.1}
+INTON = {"Claude": 1.25, "GPT": 1.1, "ChatGPT": 1.1, "DeepSeek": 1.1, "Gemini": 1.15}
 
 
 def squeeze(x, sr):
@@ -54,7 +56,8 @@ def intonate(y, sr, k):
 
 
 def main():
-    cfg = json.load(open(os.path.join(HERE, "lines.json"), encoding="utf-8"))
+    lines_path = LINES_FILE if os.path.isabs(LINES_FILE) else os.path.join(HERE, LINES_FILE)
+    cfg = json.load(open(lines_path, encoding="utf-8"))
     pick = json.load(open(f"{V}/final/pick.json", encoding="utf-8"))
     only = set(sys.argv[1].split(",")) if len(sys.argv) > 1 else None
     ff = f"{V}/final/final.json"
