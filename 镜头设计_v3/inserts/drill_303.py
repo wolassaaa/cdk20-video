@@ -51,7 +51,7 @@ FSTOP = dict(k0=5.0, k1=8.0, wide=9.0)
 OUT_DIR = SD.ROOT / "导演检查_20261123"
 OUT_MP4 = OUT_DIR / "16_钻取_3-03.mp4"
 SRC_TOY = "Illustration (our toy model)"
-SRC_SIZE, SRC_XY, PLATE_BG = 30, (96, 1046), ((14, 16, 24), 0.66, 12, 8)
+SRC_SIZE, SRC_XY, PLATE_BG = 30, (76, 907), ((14, 16, 24), 0.66, 12, 5)   # 出处行（审查批1 ②）：底衬左沿 x 64、上下沿 886–928，左中对齐，避开字幕区
 
 
 # ================================================================ 时间表
@@ -327,6 +327,11 @@ def build(seg, samples=16):
             M = Matrix.Translation(p) @ Matrix.Rotation(math.radians(ang), 4, "Y") @ Rx
             SD.key_xform(pl, f, loc=p, quat=M.to_quaternion(), scale=(s, s, s))
             plate_track.setdefault(name, []).append(tuple(p))
+    # 审查批1 ①：牌子念到之前不在画里，到各自 f_start 那一帧才在浇口处出现、接着弹下
+    for name, pl in plates.items():
+        e0 = plate_mats[name][2]["ev"][0]
+        if e0 > 0:
+            SD.hide_tree(pl, [(0, True), (e0 - 1, True), (e0, False)])
 
     # ---- 钥匙
     key = D.h02_key(Kt, which="048", scale=KEY_S)
@@ -521,6 +526,96 @@ def build(seg, samples=16):
     sc.collection.objects.link(fo)
     fo.location = mid + Vector((0.05, -0.45, 0.12))
     fo.rotation_euler = (mid - fo.location).to_track_quat("-Z", "Y").to_euler()
+
+    # ---- 审查批1 ③（18 的 1.8）：段首 0–15 帧锁孔盘换成亮的金色锁芯面 #E2CFA0（不反黑的漫反射金），16–28 帧回到原来的缎面金；
+    #      另开一盏只照 1 号锁的转场灯（面光，灯光链接，按照度折算成主光 3 倍），0–20 帧开、28 帧关。红环圆心半径不动。
+    def srgb_lin(c):
+        return c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
+    GOLD_FACE = tuple(srgb_lin(v / 255.0) for v in (0xE2, 0xCF, 0xA0)) + (1.0,)
+    core_mats = {}
+    for o in locks[0].children_recursive:
+        if o.type == "MESH" and "turning_core" in o.name:
+            for sl in o.material_slots:
+                m0 = sl.material
+                if m0 is None or not m0.use_nodes:
+                    continue
+                if m0.name not in core_mats:
+                    m1 = m0.copy()
+                    m1.name = m0.name + "_lock1_head"
+                    bs = next((n for n in m1.node_tree.nodes if n.type == "BSDF_PRINCIPLED"), None)
+                    if bs is not None:
+                        c0 = tuple(bs.inputs["Base Color"].default_value)
+                        me0, ro0 = bs.inputs["Metallic"].default_value, bs.inputs["Roughness"].default_value
+                        for fk, u in ((0, 0.0), (15, 0.0), (28, 1.0)):
+                            bs.inputs["Base Color"].default_value = tuple(lerp(a, b, u) for a, b in zip(GOLD_FACE, c0))
+                            bs.inputs["Metallic"].default_value = lerp(0.15, me0, u)
+                            bs.inputs["Roughness"].default_value = lerp(0.45, ro0, u)
+                            for nm_ in ("Base Color", "Metallic", "Roughness"):
+                                bs.inputs[nm_].keyframe_insert("default_value", frame=fk)
+                    core_mats[m0.name] = m1
+                sl.material = core_mats[m0.name]
+    # 第 0 帧盖满画面的"锁孔盘"其实是 1 号锁外壳前面（局部 y = -8，金环里 r < 4.61 那一圆）：外壳材质复制一份，
+    # 按物体坐标把这一圆在 0–15 帧换成 #E2CFA0 的金色锁芯面，16–28 帧淡回蓝色；外壳其余部分不变。
+    hs = next(o for o in locks[0].children_recursive if o.type == "MESH" and "inset_housing" in o.name and "_cut" not in o.name)
+    hm0 = hs.material_slots[0].material
+    hm = hm0.copy(); hm.name = hm0.name + "_lock1_face"
+    nt = hm.node_tree
+    out = next(n for n in nt.nodes if n.type == "OUTPUT_MATERIAL" and n.is_active_output)
+    src = out.inputs["Surface"].links[0].from_socket
+    tc = nt.nodes.new("ShaderNodeTexCoord")
+    sp = nt.nodes.new("ShaderNodeSeparateXYZ"); nt.links.new(tc.outputs["Object"], sp.inputs[0])
+    def mth(op, a_, b_=None):
+        n_ = nt.nodes.new("ShaderNodeMath"); n_.operation = op
+        for k_, v_ in enumerate((a_, b_)):
+            if v_ is None:
+                continue
+            if isinstance(v_, float):
+                n_.inputs[k_].default_value = v_
+            else:
+                nt.links.new(v_, n_.inputs[k_])
+        return n_.outputs[0]
+    dz = mth("ADD", sp.outputs["Z"], 0.55 * MM)
+    r2 = mth("ADD", mth("MULTIPLY", sp.outputs["X"], sp.outputs["X"]), mth("MULTIPLY", dz, dz))
+    m_in = mth("LESS_THAN", r2, (4.63 * MM) ** 2)
+    m_fr = mth("LESS_THAN", sp.outputs["Y"], -7.9 * MM)
+    vk = nt.nodes.new("ShaderNodeValue")
+    for fk, v in ((0, 1.0), (15, 1.0), (28, 0.0)):
+        vk.outputs[0].default_value = v
+        vk.outputs[0].keyframe_insert("default_value", frame=fk)
+    mask = mth("MULTIPLY", mth("MULTIPLY", m_in, m_fr), vk.outputs[0])
+    gb = nt.nodes.new("ShaderNodeBsdfPrincipled")
+    gb.inputs["Base Color"].default_value = GOLD_FACE
+    gb.inputs["Metallic"].default_value = 0.15
+    gb.inputs["Roughness"].default_value = 0.45
+    mx = nt.nodes.new("ShaderNodeMixShader")
+    nt.links.new(mask, mx.inputs[0]); nt.links.new(src, mx.inputs[1]); nt.links.new(gb.outputs[0], mx.inputs[2])
+    nt.links.new(mx.outputs[0], out.inputs["Surface"])
+    hs.material_slots[0].material = hm
+
+    tcol = bpy.data.collections.new("trans_lock1")
+    for o in [locks[0]] + list(locks[0].children_recursive):
+        if o.type == "MESH":
+            tcol.objects.link(o)
+    rc0 = LW(RING_C)
+    eye0 = Vector(recs[0][0])
+    dv = eye0 - rc0
+    up = recs[0][3] @ Vector((0, 1, 0))
+    lt_loc = rc0 + dv * 1.4 + up * (0.35 * dv.length)
+    tl_d = bpy.data.lights.new("trans_head", "AREA")
+    tl_d.shape = "DISK"; tl_d.size = 0.8 * dv.length
+    tl_d.color = (1, .98, .95)
+    tl_d.use_shadow = False
+    tl = bpy.data.objects.new("trans_head", tl_d)
+    sc.collection.objects.link(tl)
+    tl.location = lt_loc
+    tl.rotation_euler = (rc0 - lt_loc).to_track_quat("-Z", "Y").to_euler()
+    tl.visible_camera = False
+    tl.visible_glossy = False                                        # 只给漫反射亮度，不在蓝壳上映出白斑
+    tl.light_linking.receiver_collection = tcol
+    en_t = 3.0 * 120.0 * ((rc0 - lt_loc).length / 1.27) ** 2
+    for fk, v in ((0, 1.0), (20, 1.0), (28, 0.0)):
+        tl_d.energy = en_t * v
+        tl_d.keyframe_insert("energy", frame=fk)
 
     # ---- 焦点和光圈
     def ring_w(f):
@@ -729,7 +824,7 @@ def comp_frames(seg, flist=None):
     for f in (flist if flist is not None else range(NF)):
         pil = Image.open(W / "frames" / f"f_{f:04d}.png").convert("RGBA")
         base_a = ramp(f, 24, 44) * (1 - ramp(f, t.whip[0] - 4, t.whip[0] + 4))
-        it = dict(text=SRC_TOY, xy=SRC_XY, size=SRC_SIZE, color=(240, 238, 232), anchor="ls", shadow=False, plate=PLATE_BG)
+        it = dict(text=SRC_TOY, xy=SRC_XY, size=SRC_SIZE, color=(240, 238, 232), anchor="lm", shadow=False, plate=PLATE_BG)
         if base_a > 0.003:
             pil = Image.alpha_composite(pil, SD.draw_text_layer([it], lambda it_: base_a))
         yield f, np.asarray(pil.convert("RGB"))
