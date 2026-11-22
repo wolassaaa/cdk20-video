@@ -1,0 +1,901 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "6-03",
+ "segs": [
+  "6-03"
+ ],
+ "tool": "remotion",
+ "fps": 60,
+ "len_f": 896,
+ "cut": "cut_v8",
+ "cut_start_f": 48036,
+ "cut_start_s": 800.6,
+ "master_built": "2026-11-18 02:33:56 +09:00",
+ "words_hash": "462282498014",
+ "events_src": "镜头设计_v3/映射/events/6-03.json",
+ "words": [
+  {
+   "wid": "6-03.w001",
+   "w": "Finding",
+   "key": "finding#1",
+   "sid": "6-03.s1",
+   "f0": 9,
+   "f1": 25,
+   "F0": 48045,
+   "F1": 48061
+  },
+  {
+   "wid": "6-03.w002",
+   "w": "a",
+   "key": "a#1",
+   "sid": "6-03.s1",
+   "f0": 27,
+   "f1": 28,
+   "F0": 48063,
+   "F1": 48064
+  },
+  {
+   "wid": "6-03.w003",
+   "w": "hit.",
+   "key": "hit#1",
+   "sid": "6-03.s1",
+   "f0": 33,
+   "f1": 47,
+   "F0": 48069,
+   "F1": 48083
+  },
+  {
+   "wid": "6-03.w004",
+   "w": "Before:",
+   "key": "before#1",
+   "sid": "6-03.s2",
+   "f0": 68,
+   "f1": 88,
+   "F0": 48104,
+   "F1": 48124
+  },
+  {
+   "wid": "6-03.w005",
+   "w": "screening",
+   "key": "screening#1",
+   "sid": "6-03.s2",
+   "f0": 92,
+   "f1": 117,
+   "F0": 48128,
+   "F1": 48153
+  },
+  {
+   "wid": "6-03.w006",
+   "w": "real",
+   "key": "real#1",
+   "sid": "6-03.s2",
+   "f0": 121,
+   "f1": 134,
+   "F0": 48157,
+   "F1": 48170
+  },
+  {
+   "wid": "6-03.w007",
+   "w": "compounds",
+   "key": "compounds#1",
+   "sid": "6-03.s2",
+   "f0": 138,
+   "f1": 165,
+   "F0": 48174,
+   "F1": 48201
+  },
+  {
+   "wid": "6-03.w008",
+   "w": "by",
+   "key": "by#1",
+   "sid": "6-03.s2",
+   "f0": 168,
+   "f1": 175,
+   "F0": 48204,
+   "F1": 48211
+  },
+  {
+   "wid": "6-03.w009",
+   "w": "the",
+   "key": "the#1",
+   "sid": "6-03.s2",
+   "f0": 176,
+   "f1": 180,
+   "F0": 48212,
+   "F1": 48216
+  },
+  {
+   "wid": "6-03.w010",
+   "w": "millions,",
+   "key": "millions#1",
+   "sid": "6-03.s2",
+   "f0": 181,
+   "f1": 205,
+   "F0": 48217,
+   "F1": 48241
+  },
+  {
+   "wid": "6-03.w011",
+   "w": "an",
+   "key": "an#1",
+   "sid": "6-03.s2",
+   "f0": 236,
+   "f1": 244,
+   "F0": 48272,
+   "F1": 48280
+  },
+  {
+   "wid": "6-03.w012",
+   "w": "approach",
+   "key": "approach#1",
+   "sid": "6-03.s2",
+   "f0": 248,
+   "f1": 272,
+   "F0": 48284,
+   "F1": 48308
+  },
+  {
+   "wid": "6-03.w013",
+   "w": "a",
+   "key": "a#2",
+   "sid": "6-03.s2",
+   "f0": 274,
+   "f1": 276,
+   "F0": 48310,
+   "F1": 48312
+  },
+  {
+   "wid": "6-03.w014",
+   "w": "2023",
+   "key": "2023#1",
+   "sid": "6-03.s2",
+   "f0": 276,
+   "f1": 336,
+   "F0": 48312,
+   "F1": 48372
+  },
+  {
+   "wid": "6-03.w015",
+   "w": "review",
+   "key": "review#1",
+   "sid": "6-03.s2",
+   "f0": 336,
+   "f1": 355,
+   "F0": 48372,
+   "F1": 48391
+  },
+  {
+   "wid": "6-03.w016",
+   "w": "says",
+   "key": "says#1",
+   "sid": "6-03.s2",
+   "f0": 360,
+   "f1": 380,
+   "F0": 48396,
+   "F1": 48416
+  },
+  {
+   "wid": "6-03.w017",
+   "w": "has",
+   "key": "has#1",
+   "sid": "6-03.s2",
+   "f0": 402,
+   "f1": 411,
+   "F0": 48438,
+   "F1": 48447
+  },
+  {
+   "wid": "6-03.w018",
+   "w": "hit",
+   "key": "hit#2",
+   "sid": "6-03.s2",
+   "f0": 415,
+   "f1": 426,
+   "F0": 48451,
+   "F1": 48462
+  },
+  {
+   "wid": "6-03.w019",
+   "w": "a",
+   "key": "a#3",
+   "sid": "6-03.s2",
+   "f0": 428,
+   "f1": 429,
+   "F0": 48464,
+   "F1": 48465
+  },
+  {
+   "wid": "6-03.w020",
+   "w": "costly",
+   "key": "costly#1",
+   "sid": "6-03.s2",
+   "f0": 439,
+   "f1": 466,
+   "F0": 48475,
+   "F1": 48502
+  },
+  {
+   "wid": "6-03.w021",
+   "w": "bottleneck.",
+   "key": "bottleneck#1",
+   "sid": "6-03.s2",
+   "f0": 470,
+   "f1": 499,
+   "F0": 48506,
+   "F1": 48535
+  },
+  {
+   "wid": "6-03.w022",
+   "w": "Now:",
+   "key": "now#1",
+   "sid": "6-03.s3",
+   "f0": 529,
+   "f1": 541,
+   "F0": 48565,
+   "F1": 48577
+  },
+  {
+   "wid": "6-03.w023",
+   "w": "8,918",
+   "key": "8,918#1",
+   "sid": "6-03.s3",
+   "f0": 557,
+   "f1": 636,
+   "F0": 48593,
+   "F1": 48672
+  },
+  {
+   "wid": "6-03.w024",
+   "w": "designs",
+   "key": "designs#1",
+   "sid": "6-03.s3",
+   "f0": 639,
+   "f1": 672,
+   "F0": 48675,
+   "F1": 48708
+  },
+  {
+   "wid": "6-03.w025",
+   "w": "inside",
+   "key": "inside#1",
+   "sid": "6-03.s3",
+   "f0": 692,
+   "f1": 715,
+   "F0": 48728,
+   "F1": 48751
+  },
+  {
+   "wid": "6-03.w026",
+   "w": "a",
+   "key": "a#4",
+   "sid": "6-03.s3",
+   "f0": 717,
+   "f1": 719,
+   "F0": 48753,
+   "F1": 48755
+  },
+  {
+   "wid": "6-03.w027",
+   "w": "computer,",
+   "key": "computer#1",
+   "sid": "6-03.s3",
+   "f0": 722,
+   "f1": 752,
+   "F0": 48758,
+   "F1": 48788
+  },
+  {
+   "wid": "6-03.w028",
+   "w": "and",
+   "key": "and#1",
+   "sid": "6-03.s3",
+   "f0": 757,
+   "f1": 763,
+   "F0": 48793,
+   "F1": 48799
+  },
+  {
+   "wid": "6-03.w029",
+   "w": "just",
+   "key": "just#1",
+   "sid": "6-03.s3",
+   "f0": 764,
+   "f1": 779,
+   "F0": 48800,
+   "F1": 48815
+  },
+  {
+   "wid": "6-03.w030",
+   "w": "13",
+   "key": "13#1",
+   "sid": "6-03.s3",
+   "f0": 785,
+   "f1": 801,
+   "F0": 48821,
+   "F1": 48837
+  },
+  {
+   "wid": "6-03.w031",
+   "w": "molecules",
+   "key": "molecules#1",
+   "sid": "6-03.s3",
+   "f0": 804,
+   "f1": 834,
+   "F0": 48840,
+   "F1": 48870
+  },
+  {
+   "wid": "6-03.w032",
+   "w": "actually",
+   "key": "actually#1",
+   "sid": "6-03.s3",
+   "f0": 838,
+   "f1": 859,
+   "F0": 48874,
+   "F1": 48895
+  },
+  {
+   "wid": "6-03.w033",
+   "w": "made.",
+   "key": "made#1",
+   "sid": "6-03.s3",
+   "f0": 862,
+   "f1": 880,
+   "F0": 48898,
+   "F1": 48916
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "6-03.s1",
+   "text": "Finding a hit.",
+   "w_first": "6-03.w001",
+   "w_last": "6-03.w003",
+   "f0": 9,
+   "f1": 47
+  },
+  {
+   "sid": "6-03.s2",
+   "text": "Before: screening real compounds by the millions, an approach a 2023 review says has hit a costly bottleneck.",
+   "w_first": "6-03.w004",
+   "w_last": "6-03.w021",
+   "f0": 68,
+   "f1": 499
+  },
+  {
+   "sid": "6-03.s3",
+   "text": "Now: 8,918 designs inside a computer, and just 13 molecules actually made.",
+   "w_first": "6-03.w022",
+   "w_last": "6-03.w033",
+   "f0": 529,
+   "f1": 880
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "row2",
+   "obj": "row2",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "Finding：第 2 行行名翻出 2. FINDING A HIT",
+   "f_start": 0,
+   "f_land": 9,
+   "f_end": 47,
+   "until": "6-03.w003",
+   "word": "6-03.w001",
+   "w": "Finding",
+   "key": "finding#1",
+   "sid": "6-03.s1",
+   "word_f0": 9,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 48036,
+   "F_land": 48045,
+   "F_end": 48083
+  },
+  {
+   "id": "focus2",
+   "obj": "focus2",
+   "verb": "move",
+   "ease": "inout",
+   "means": "a hit：镜头下移对准第 2 行，左右凹位亮起",
+   "f_start": 26,
+   "f_land": 33,
+   "f_end": 47,
+   "until": "6-03.s1",
+   "word": "6-03.w003",
+   "w": "hit.",
+   "key": "hit#1",
+   "sid": "6-03.s1",
+   "word_f0": 33,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 48062,
+   "F_land": 48069,
+   "F_end": 48083
+  },
+  {
+   "id": "bef",
+   "obj": "bef",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "Before：左凹位升起透明料斗（h23）",
+   "f_start": 55,
+   "f_land": 68,
+   "f_end": 165,
+   "until": "6-03.w007",
+   "word": "6-03.w004",
+   "w": "Before:",
+   "key": "before#1",
+   "sid": "6-03.s2",
+   "word_f0": 68,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "hopper"
+    ]
+   },
+   "F_start": 48091,
+   "F_land": 48104,
+   "F_end": 48201,
+   "g_start": 42,
+   "g_on": 60,
+   "g_end": 165,
+   "g_off": 195,
+   "g_tick": 64,
+   "G_start": 48078,
+   "G_on": 48096,
+   "G_end": 48201,
+   "G_off": 48231,
+   "G_tick": 48100
+  },
+  {
+   "id": "comp",
+   "obj": "comp",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "real compounds：满槽细珠在料斗上方聚齐",
+   "f_start": 128,
+   "f_land": 138,
+   "f_end": 205,
+   "until": "6-03.w010",
+   "word": "6-03.w007",
+   "w": "compounds",
+   "key": "compounds#1",
+   "sid": "6-03.s2",
+   "word_f0": 138,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 48164,
+   "F_land": 48174,
+   "F_end": 48241
+  },
+  {
+   "id": "mil",
+   "obj": "mil",
+   "verb": "move",
+   "ease": "inout",
+   "means": "by the millions：细珠倾泻下流，BEFORE 主翻牌翻出 MILLIONS SCREENED",
+   "f_start": 153,
+   "f_land": 181,
+   "f_end": 272,
+   "until": "6-03.w012",
+   "word": "6-03.w010",
+   "w": "millions,",
+   "key": "millions#1",
+   "sid": "6-03.s2",
+   "word_f0": 181,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 48189,
+   "F_land": 48217,
+   "F_end": 48308
+  },
+  {
+   "id": "appr",
+   "obj": "appr",
+   "verb": "move",
+   "ease": "inout",
+   "means": "an approach：细珠涌向料斗细颈口开始拥堵",
+   "f_start": 235,
+   "f_land": 248,
+   "f_end": 336,
+   "until": "6-03.w014",
+   "word": "6-03.w012",
+   "w": "approach",
+   "key": "approach#1",
+   "sid": "6-03.s2",
+   "word_f0": 248,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 48271,
+   "F_land": 48284,
+   "F_end": 48372
+  },
+  {
+   "id": "rev",
+   "obj": "rev",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "a 2023 review：2023 review 小引用牌亮起",
+   "f_start": 266,
+   "f_land": 276,
+   "f_end": 380,
+   "until": "6-03.w016",
+   "word": "6-03.w014",
+   "w": "2023",
+   "key": "2023#1",
+   "sid": "6-03.s2",
+   "word_f0": 276,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 48302,
+   "F_land": 48312,
+   "F_end": 48416
+  },
+  {
+   "id": "says",
+   "obj": "says",
+   "verb": "move",
+   "ease": "inout",
+   "means": "says has hit：细颈处细珠彻底卡死堆积",
+   "f_start": 347,
+   "f_land": 360,
+   "f_end": 466,
+   "until": "6-03.w020",
+   "word": "6-03.w016",
+   "w": "says",
+   "key": "says#1",
+   "sid": "6-03.s2",
+   "word_f0": 360,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "jam"
+    ]
+   },
+   "F_start": 48383,
+   "F_land": 48396,
+   "F_end": 48502,
+   "g_start": 334,
+   "g_on": 352,
+   "g_end": 466,
+   "g_off": 496,
+   "g_tick": 356,
+   "G_start": 48370,
+   "G_on": 48388,
+   "G_end": 48502,
+   "G_off": 48532,
+   "G_tick": 48392
+  },
+  {
+   "id": "costly",
+   "obj": "costly",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "costly：细颈红环警示亮起",
+   "f_start": 429,
+   "f_land": 439,
+   "f_end": 499,
+   "until": "6-03.w021",
+   "word": "6-03.w020",
+   "w": "costly",
+   "key": "costly#1",
+   "sid": "6-03.s2",
+   "word_f0": 439,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 48465,
+   "F_land": 48475,
+   "F_end": 48535
+  },
+  {
+   "id": "bn",
+   "obj": "bn",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "bottleneck：BEFORE 副翻牌翻出 COSTLY BOTTLENECK",
+   "f_start": 457,
+   "f_land": 470,
+   "f_end": 499,
+   "until": "6-03.s2",
+   "word": "6-03.w021",
+   "w": "bottleneck.",
+   "key": "bottleneck#1",
+   "sid": "6-03.s2",
+   "word_f0": 470,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 48493,
+   "F_land": 48506,
+   "F_end": 48535
+  },
+  {
+   "id": "now",
+   "obj": "now",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "Now：右凹位切入数字计数轮与小托盘",
+   "f_start": 519,
+   "f_land": 529,
+   "f_end": 636,
+   "until": "6-03.w023",
+   "word": "6-03.w022",
+   "w": "Now:",
+   "key": "now#1",
+   "sid": "6-03.s3",
+   "word_f0": 529,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "now2"
+    ]
+   },
+   "F_start": 48555,
+   "F_land": 48565,
+   "F_end": 48672,
+   "g_start": 503,
+   "g_on": 521,
+   "g_end": 636,
+   "g_off": 666,
+   "g_tick": 525,
+   "G_start": 48539,
+   "G_on": 48557,
+   "G_end": 48672,
+   "G_off": 48702,
+   "G_tick": 48561
+  },
+  {
+   "id": "n8918",
+   "obj": "n8918",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "8,918：右侧数字轮滚停在 8,918",
+   "f_start": 529,
+   "f_land": 557,
+   "f_end": 672,
+   "until": "6-03.w024",
+   "word": "6-03.w023",
+   "w": "8,918",
+   "key": "8,918#1",
+   "sid": "6-03.s3",
+   "word_f0": 557,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 48565,
+   "F_land": 48593,
+   "F_end": 48708
+  },
+  {
+   "id": "des",
+   "obj": "des",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "designs：NOW 主翻牌翻出 8,918 DESIGNS",
+   "f_start": 626,
+   "f_land": 639,
+   "f_end": 752,
+   "until": "6-03.w027",
+   "word": "6-03.w024",
+   "w": "designs",
+   "key": "designs#1",
+   "sid": "6-03.s3",
+   "word_f0": 639,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 48662,
+   "F_land": 48675,
+   "F_end": 48788
+  },
+  {
+   "id": "comp2",
+   "obj": "comp2",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "inside a computer：芯片轮廓框在数字轮旁亮起",
+   "f_start": 712,
+   "f_land": 722,
+   "f_end": 801,
+   "until": "6-03.w030",
+   "word": "6-03.w027",
+   "w": "computer,",
+   "key": "computer#1",
+   "sid": "6-03.s3",
+   "word_f0": 722,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 48748,
+   "F_land": 48758,
+   "F_end": 48837
+  },
+  {
+   "id": "n13",
+   "obj": "n13",
+   "verb": "eject",
+   "ease": "inout",
+   "means": "just 13：右凹位小托盘只落下 13 颗珠子，排成一行",
+   "f_start": 757,
+   "f_land": 785,
+   "f_end": 834,
+   "until": "6-03.w031",
+   "word": "6-03.w030",
+   "w": "13",
+   "key": "13#1",
+   "sid": "6-03.s3",
+   "word_f0": 785,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "tray13"
+    ]
+   },
+   "F_start": 48793,
+   "F_land": 48821,
+   "F_end": 48870,
+   "g_start": 759,
+   "g_on": 777,
+   "g_end": 834,
+   "g_off": 864,
+   "g_tick": 781,
+   "G_start": 48795,
+   "G_on": 48813,
+   "G_end": 48870,
+   "G_off": 48900,
+   "G_tick": 48817
+  },
+  {
+   "id": "made",
+   "obj": "made",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "actually made：NOW 副翻牌翻出 13 MOLECULES MADE（T7 轻抖）",
+   "f_start": 849,
+   "f_land": 862,
+   "f_end": 880,
+   "until": "6-03.s3",
+   "word": "6-03.w033",
+   "w": "made.",
+   "key": "made#1",
+   "sid": "6-03.s3",
+   "word_f0": 862,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 48885,
+   "F_land": 48898,
+   "F_end": 48916
+  }
+ ],
+ "guides": [
+  {
+   "id": "bef",
+   "target": [
+    "hopper"
+   ],
+   "kind": "focus",
+   "gs": 42,
+   "gon": 60,
+   "land": 68,
+   "gend": 165,
+   "goff": 195,
+   "tick": 64,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 55,
+   "events": [
+    "bef"
+   ],
+   "G_start": 48078,
+   "G_on": 48096,
+   "G_land": 48104,
+   "G_end": 48201,
+   "G_off": 48231,
+   "G_tick": 48100
+  },
+  {
+   "id": "says",
+   "target": [
+    "jam"
+   ],
+   "kind": "focus",
+   "gs": 334,
+   "gon": 352,
+   "land": 360,
+   "gend": 466,
+   "goff": 496,
+   "tick": 356,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 347,
+   "events": [
+    "says"
+   ],
+   "G_start": 48370,
+   "G_on": 48388,
+   "G_land": 48396,
+   "G_end": 48502,
+   "G_off": 48532,
+   "G_tick": 48392
+  },
+  {
+   "id": "now",
+   "target": [
+    "now2"
+   ],
+   "kind": "focus",
+   "gs": 503,
+   "gon": 521,
+   "land": 529,
+   "gend": 636,
+   "goff": 666,
+   "tick": 525,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 519,
+   "events": [
+    "now"
+   ],
+   "G_start": 48539,
+   "G_on": 48557,
+   "G_land": 48565,
+   "G_end": 48672,
+   "G_off": 48702,
+   "G_tick": 48561
+  },
+  {
+   "id": "n13",
+   "target": [
+    "tray13"
+   ],
+   "kind": "focus",
+   "gs": 759,
+   "gon": 777,
+   "land": 785,
+   "gend": 834,
+   "goff": 864,
+   "tick": 781,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 757,
+   "events": [
+    "n13"
+   ],
+   "G_start": 48795,
+   "G_on": 48813,
+   "G_land": 48821,
+   "G_end": 48870,
+   "G_off": 48900,
+   "G_tick": 48817
+  }
+ ],
+ "problems": []
+}

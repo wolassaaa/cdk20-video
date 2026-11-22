@@ -1,83 +1,134 @@
 {
  "schema": "cdk20.events/1",
  "group": "7-01",
- "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：出镜 7-01（A）讲解卡：问号后 three things 时三个空圈号 1、2、3 依次弹出；页面 OnCam701.jsx。",
+ "tool": "blender",
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜 7-01（A）三维版（11-22 甲线，18 文档 2.4，照 2-04 的 two_plates 改）：右边一根竖料杆挂三块编号牌（p16，刻 1、2、3），牌屏上高 ≥ 200 px。Blender：inserts/shot_oncam.py recipe plates_701。旧二维版事件表存 _wip/7-01_events_v1_2d.json。",
  "holds": [],
  "events": [
   {
-   "id": "frame",
-   "obj": "frame",
-   "verb": "grow",
+   "id": "land",
+   "obj": "plates",
+   "verb": "move",
    "at": {
-    "word": "7-01.w004",
-    "off": 0
+    "word": "7-01.w001",
+    "off": -4
    },
-   "means": "happen：讲解卡外框画出",
-   "tool": "remotion",
-   "lead": 14,
+   "lead": 22,
+   "ease": "out",
+   "means": "So,：编号牌 1 的牌面从盖满画面退到右区，竖料杆上挂三块空白牌",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
-    "word": "7-01.w004"
+    "word": "7-01.w001"
    }
   },
   {
-   "id": "q",
-   "obj": "q",
-   "verb": "appear",
+   "id": "bar_sway",
+   "obj": "runner",
+   "verb": "move",
    "at": {
     "word": "7-01.w005",
     "off": 0
    },
-   "means": "next：红问号",
-   "tool": "remotion",
-   "lead": 8,
+   "lead": 10,
+   "ease": "inout",
+   "means": "next?：料杆轻晃，三个浇口跟着颤",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
-    "word": "7-01.w005"
+    "sentence_end": true
    }
   },
   {
-   "id": "c1",
-   "obj": "c1",
-   "verb": "appear",
+   "id": "p1",
+   "obj": "plate1",
+   "verb": "eject",
    "at": {
     "word": "7-01.w008",
     "off": 0
    },
-   "means": "three：圈号 1 弹出",
-   "tool": "remotion",
    "lead": 6,
+   "ease": "out",
+   "means": "three：第 1 块牌弹下立起，刻字 1 变红",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
-    "word": "7-01.w008"
+    "dur": 14
    }
   },
   {
-   "id": "c2",
-   "obj": "c2",
-   "verb": "appear",
+   "id": "p2",
+   "obj": "plate2",
+   "verb": "eject",
+   "at": {
+    "event": "p1",
+    "off": 8
+   },
+   "lead": 6,
+   "ease": "out",
+   "means": "（跟 p1 后 8 帧）第 2 块牌弹下立起，刻字 2 变红",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "dur": 14
+   }
+  },
+  {
+   "id": "p3",
+   "obj": "plate3",
+   "verb": "eject",
+   "at": {
+    "event": "p2",
+    "off": 8
+   },
+   "lead": 6,
+   "ease": "out",
+   "means": "（再后 8 帧）第 3 块牌弹下立起，刻字 3 变红",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "dur": 14
+   }
+  },
+  {
+   "id": "p1_fwd",
+   "obj": "plate1",
+   "verb": "move",
    "at": {
     "word": "7-01.w009",
     "off": 0
    },
-   "means": "things：圈号 2 弹出",
-   "tool": "remotion",
-   "lead": 16,
+   "lead": 10,
+   "ease": "inout",
+   "means": "things.：第 1 块牌往前浮出 30 mm",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
-    "word": "7-01.w009"
+    "sentence_end": true
    }
   },
   {
-   "id": "c3",
-   "obj": "c3",
-   "verb": "appear",
+   "id": "dive",
+   "obj": "plate1",
+   "verb": "move",
    "at": {
     "word": "7-01.w009",
-    "off": 0
+    "off": 82
    },
-   "means": "things：圈号 3 弹出",
-   "tool": "remotion",
-   "lead": 0,
+   "lead": 44,
+   "ease": "in",
+   "means": "（说完）牌 1 的牌面冲镜头（段尾，盖满帧是骨白牌面）",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
-    "word": "7-01.w009"
+    "dur": 0
    }
   }
  ]

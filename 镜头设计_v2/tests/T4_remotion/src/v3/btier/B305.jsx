@@ -10,7 +10,7 @@ import {Composition, registerRoot, useCurrentFrame} from "remotion";
 import {gsap} from "gsap";
 import K from "./keys_3-05.json";
 import {Lens, Layer, guidePlan} from "../manual/kit.jsx";
-import {C, camBreath, Stage, Sprite, Slab, Gate, Runner, Label, Pen, Source, Counter, Dial, Engrave, evMapB, T5In, T5Out} from "./bkit.jsx";
+import {C, Tag, shade, tint, camBreath, Stage, Sprite, Slab, Gate, Runner, Label, Pen, Source, Counter, Dial, Engrave, evMapB, T5In, T5Out} from "./bkit.jsx";
 import {useGsapTimeline, idle, RULE} from "./gsapFrame.jsx";
 
 const E = evMapB(K);
@@ -30,8 +30,10 @@ const BAR = {base: 640, w: 110, xs: [1505, 1715], tall: 290, short: 120};
 const PLQ = [{x: 600, w: 410, text: "later-stage tumours"}, {x: 1050, w: 350, text: "shorter survival"}];
 const PLQ_Y = 724;
 // ---- 第五句：分裂的细胞（中心）和芽
-const CELL = [1270, 470];
-const BUDS = [[-210, -120], [190, -150], [230, 110], [-220, 120], [10, 200], [-40, -210]];
+// 两组对照（Gemini 初审 11-20：只画一组，分裂反而像在长得快）：上面一组 CDK20 照常，45 帧分一次；下面一组 CDK20 调低，down 之后 150 帧才分一次
+const CELL_U = [1300, 410], CELL_D = [1300, 730];
+const BUDS = [[-210, -120], [190, -150], [230, 110], [-220, 120], [10, 210], [-40, -210], [300, -20], [-300, 0]].map(([x, y]) => [x * 0.55, y * 0.55]);
+const BEAT_U = 45, BEAT_D0 = 45, BEAT_D1 = 360;   // 调低以后几乎不再分裂（Gemini 二审：两组差太少）
 
 const Scene = () => {
   const f = useCurrentFrame();
@@ -55,6 +57,9 @@ const Scene = () => {
     X.land("p1", 0, 1, E.surv.l);
     X.jiggle("p0J", E.late.l, 3);
     X.jiggle("p1J", E.surv.l, 3);
+    X.tw("cmp", 0, 1, E.near.l + 6, E.near.e - 4, "power1.inOut");
+    X.tw("tum", 0, 1, E.late.s, E.late.e, "power2.out");
+    X.tw("shorten", 0, 1, E.surv.l, E.surv.e, "power2.inOut");
     X.tw("clear", 0, 1, E.clear.s, E.knob.s + 4, "power2.in");
     X.land("knob", 0, 1, E.knob.l);
     X.tw("turn", 0, 1, E.down.s, E.down.l, "power2.inOut");
@@ -72,16 +77,18 @@ const Scene = () => {
   const trayDX = (1 - S.tray) * 1300;
   const clearX = -2200 * S.clear * S.clear;
 
-  // 第五句：分裂节拍 60 帧，slowed 之后 120 帧
-  const t0 = E.knob.s, ts = E.slow.l;
-  const phase = f < t0 ? 0 : f < ts ? (f - t0) / 60 : (ts - t0) / 60 + (f - ts) / 120;
-  const fr = phase - Math.floor(phase);
-  const pulse = f < t0 ? 0 : Math.pow(Math.sin(Math.PI * fr), 6);
-  const nBud = Math.min(BUDS.length, Math.floor(phase));
-  const budAt = (i) => {                // 第 i 个芽出现的帧（相位跨过 i+1 时）
-    const p = i + 1, pre = (ts - t0) / 60;
-    return p <= pre ? t0 + p * 60 : ts + (p - pre) * 120;
+  // 第五句：两组细胞。上：一直 45 帧一拍；下：down 落定之前 45 帧，之后 150 帧
+  const t0 = E.knob.s, td = E.down.l;
+  const grp = (slow) => {
+    const ph = (g) => g < t0 ? 0 : !slow || g < td ? (g - t0) / BEAT_U : (td - t0) / BEAT_D0 + (g - td) / BEAT_D1;
+    const phase = ph(f), fr = phase - Math.floor(phase);
+    const pulse = f < t0 ? 0 : Math.pow(Math.sin(Math.PI * fr), 6);
+    const nBud = Math.min(BUDS.length, Math.floor(phase));
+    const pre = (td - t0) / BEAT_D0;
+    const budAt = (i) => { const p = i + 1; return !slow ? t0 + p * BEAT_U : p <= pre ? t0 + p * BEAT_D0 : td + (p - pre) * BEAT_D1; };
+    return {pulse, nBud, budAt};
   };
+  const GU = grp(false), GD = grp(true);
 
   const wells = [...Array(52)].map((_, i) => {
     const c = i % 13, r = Math.floor(i / 13);
@@ -143,6 +150,38 @@ const Scene = () => {
               </div>
             )}
           </Layer>
+          <Layer id="cmp">
+            {S.cmp > 0.01 && (
+              <svg width={1920} height={1080} style={{position: "absolute", left: 0, top: 0, overflow: "visible"}}>
+                <path d={`M${BAR.xs[1] - 70},${BAR.base - BAR.short} L${BAR.xs[1] - 70},${BAR.base - BAR.tall}`} fill="none" stroke={C.ink} strokeWidth={4} strokeLinecap="round"
+                      pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - S.cmp} />
+                <path d={`M${BAR.xs[1] - 84},${BAR.base - BAR.tall + 16} L${BAR.xs[1] - 70},${BAR.base - BAR.tall} L${BAR.xs[1] - 56},${BAR.base - BAR.tall + 16}`} fill="none" stroke={C.ink}
+                      strokeWidth={4} strokeLinecap="round" strokeLinejoin="round" opacity={S.cmp > 0.95 ? 1 : 0} />
+                <path d={`M${BAR.xs[0] + BAR.w / 2 + 6},${BAR.base - BAR.tall} L${BAR.xs[1] - 50},${BAR.base - BAR.tall}`} stroke={C.ink} strokeWidth={2.5} strokeDasharray="8 8" opacity={0.7 * S.cmp} />
+              </svg>
+            )}
+          </Layer>
+          <Layer id="stage">
+            {/* later-stage tumours：肝上一块红色肿瘤长大；shorter survival：一根生存时间条从长缩短 */}
+            {S.p0 > 0.01 && (
+              <svg width={1920} height={1080} style={{position: "absolute", left: 0, top: id(3).y, overflow: "visible"}}>
+                <defs>
+                  <radialGradient id="tum" cx="0.38" cy="0.34" r="0.7"><stop offset="0" stopColor={tint(C.red, 0.3)} /><stop offset="0.6" stopColor={C.red} /><stop offset="1" stopColor={shade(C.red, 0.4)} /></radialGradient>
+                </defs>
+                <ellipse cx={300} cy={470} rx={22 + 46 * S.tum} ry={18 + 36 * S.tum} fill="url(#tum)" opacity={0.92 * Math.min(1, S.p0 * 2)} />
+                <ellipse cx={288} cy={456} rx={(22 + 46 * S.tum) * 0.3} ry={(18 + 36 * S.tum) * 0.22} fill="#fff" opacity={0.5 * Math.min(1, S.p0 * 2)} />
+              </svg>
+            )}
+            {/* 生存时间两根条对比（Gemini 二审：一根条看不出意思）：灰 = CDK20 低的病人，蓝 = CDK20 高的病人，蓝条缩短 */}
+            {S.p1 > 0.01 && (
+              <>
+                <Slab x={PLQ[1].x} y={PLQ_Y + 66} w={PLQ[1].w} h={24} r={12} color={C.grey} depth={6} op={Math.min(1, S.p1 * 2)} id="survlow" />
+                <Slab x={PLQ[1].x} y={PLQ_Y + 106} w={PLQ[1].w * (1 - 0.55 * S.shorten)} h={24} r={12} color={C.blue} depth={6} op={Math.min(1, S.p1 * 2)} id="survbar" />
+                <Tag x={PLQ[1].x + PLQ[1].w + 16} y={PLQ_Y + 58} align="left" op={Math.min(1, S.p1 * 2)}>low CDK20</Tag>
+                <Tag x={PLQ[1].x + PLQ[1].w * (1 - 0.55 * S.shorten) + 16} y={PLQ_Y + 98} align="left" op={Math.min(1, S.p1 * 2)}>high CDK20</Tag>
+              </>
+            )}
+          </Layer>
           <Layer id="plaques">
             {S.feed > 0.001 && <Runner d={`M${BAR.xs[0]},${BAR.base + 80} C${BAR.xs[0]},${PLQ_Y + 40} 1460,${PLQ_Y + 40} 1410,${PLQ_Y + 40} L600,${PLQ_Y + 40}`} draw={S.feed} width={14} />}
             {PLQ.map((p, i) => {
@@ -162,9 +201,10 @@ const Scene = () => {
         <Layer id="knob">
           {S.knob > 0.01 && (
             <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, opacity: Math.min(1, S.knob * 1.5), transform: `translateX(${(1 - S.knob) * -200}px)`}}>
-              <Runner d="M470,520 L470,590" width={14} />
+              <Runner d="M470,520 L470,610" width={14} />
               <Sprite name="mini/m34_on" x={470} y={380 + id(5).y} w={330} rot={id(5).r} />
-              <Dial cx={470} cy={700} r={120} ticks={[[-70, null, true], [-35, null], [0, null, true], [35, null], [70, null, true]]}
+              <Runner d={`M590,${CELL_D[1]} L1080,${CELL_D[1]}`} width={12} draw={Math.min(1, S.turn * 1.4)} />
+              <Dial cx={470} cy={CELL_D[1]} r={120} ticks={[[-70, null, true], [-35, null], [0, null, true], [35, null], [70, null, true]]}
                     needle={62 - 124 * S.turn + S.turnJ} label="CDK20" sheen={S.turn > 0 && S.turn < 1 ? S.turn : -1} />
             </div>
           )}
@@ -172,12 +212,19 @@ const Scene = () => {
         <Layer id="cells">
           {S.knob > 0.01 && (
             <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, opacity: Math.min(1, S.knob * 1.5), transform: `translateX(${(1 - S.knob) * 200}px)`}}>
-              {BUDS.slice(0, nBud).map(([bx, by], i) => {
-                const u = Math.max(0, Math.min(1, (f - budAt(i)) / RULE.land));
-                const s = backOut(u);
-                return <Sprite key={i} name="cell/34" x={CELL[0] + bx * s} y={CELL[1] + by * s + id(10 + i).y} w={150 * Math.max(0.05, s)} rot={id(10 + i).r * 3} />;
-              })}
-              <Sprite name="cell/34" x={CELL[0]} y={CELL[1] + id(6).y} w={320} sx={1 + 0.05 * pulse} sy={1 + 0.05 * pulse} rot={id(6).r} />
+              {[[GU, CELL_U, 0], [GD, CELL_D, 1]].map(([G, CC, k]) => (
+                <React.Fragment key={k}>
+                  {BUDS.slice(0, G.nBud).map(([bx, by], i) => {
+                    const u = Math.max(0, Math.min(1, (f - G.budAt(i)) / RULE.land));
+                    const s = backOut(u);
+                    return <Sprite key={i} name="cell/34" x={CC[0] + bx * s} y={CC[1] + by * s + id(10 + i + 10 * k).y} w={100 * Math.max(0.05, s)} rot={id(10 + i + 10 * k).r * 3} />;
+                  })}
+                  <Sprite name="cell/34" x={CC[0]} y={CC[1] + id(6 + k).y} w={190} sx={1 + 0.06 * G.pulse} sy={1 + 0.06 * G.pulse} rot={id(6 + k).r} />
+                </React.Fragment>
+              ))}
+              {/* 两组各挂一块题注（Gemini 二审：上面那块小表看不出是对照组） */}
+              <Tag x={CELL_U[0] + 230} y={CELL_U[1] - 20} align="left">CDK20 normal</Tag>
+              <Tag x={CELL_D[0] + 230} y={CELL_D[1] - 20} align="left" op={Math.min(1, S.turn * 2)}>CDK20 turned down</Tag>
             </div>
           )}
         </Layer>
@@ -194,9 +241,10 @@ const Scene = () => {
               <Label text={p.text} x={p.x + p.w / 2} y={PLQ_Y - 53} at={i === 0 ? E.late.l : E.surv.l} align="center" out={E.clear.s} />
             </div>
           ))}
-          <Label text="liver cancer cells" size={56} x={CELL[0]} y={186} at={E.cellsL.l} align="center" />
-          <Pen text="slowed" x={1480} y={660} at={E.slow.l} size={84} />
-          <Source>Illustration · Feng et al., J. Clin. Invest. 2011</Source>
+          <Label text="liver cancer cells" size={56} x={CELL_U[0]} y={118} at={E.cellsL.l} align="center" />
+          <Label text="CDK20 level" size={52} x={(BAR.xs[0] + BAR.xs[1]) / 2} y={230} at={E.hi.l} out={E.clear.s} align="center" />
+          <Pen text="slowed" x={1560} y={700} at={E.slow.l} size={84} />
+          <Source>Illustration · data: Feng et al., J. Clin. Invest. 2011</Source>
         </Layer>
       </Stage>
     </Lens>

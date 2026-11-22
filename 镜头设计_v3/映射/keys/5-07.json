@@ -549,15 +549,15 @@
  "holds": [],
  "events": [
   {
-   "id": "no",
-   "obj": "no",
-   "verb": "snap",
+   "id": "not",
+   "obj": "not",
+   "verb": "appear",
    "ease": "inout",
-   "means": "Not at all：001 钥匙一颤，旁边红叉",
-   "f_start": 1,
+   "means": "Not at all：手写",
+   "f_start": 3,
    "f_land": 9,
    "f_end": 44,
-   "until": "5-07.w003",
+   "until": "5-07.s1",
    "word": "5-07.w001",
    "w": "Not",
    "key": "not#1",
@@ -567,20 +567,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 42017,
+   "F_start": 42019,
    "F_land": 42025,
    "F_end": 42060
   },
   {
    "id": "loop",
    "obj": "loop",
-   "verb": "grow",
+   "verb": "appear",
    "ease": "inout",
-   "means": "loop：循环画出",
-   "f_start": 166,
+   "means": "the loop：循环圈落下",
+   "f_start": 179,
    "f_land": 186,
-   "f_end": 201,
-   "until": "5-07.w008",
+   "f_end": 244,
+   "until": "5-07.w009",
    "word": "5-07.w008",
    "w": "loop",
    "key": "loop#1",
@@ -588,22 +588,35 @@
    "word_f0": 186,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "loop"
+    ]
    },
-   "F_start": 42182,
+   "F_start": 42195,
    "F_land": 42202,
-   "F_end": 42217
+   "F_end": 42260,
+   "g_start": 160,
+   "g_on": 178,
+   "g_end": 244,
+   "g_off": 274,
+   "g_tick": 182,
+   "G_start": 42176,
+   "G_on": 42194,
+   "G_end": 42260,
+   "G_off": 42290,
+   "G_tick": 42198
   },
   {
    "id": "kick",
    "obj": "kick",
    "verb": "move",
    "ease": "inout",
-   "means": "kicks in again：循环转起来，写 the loop",
-   "f_start": 215,
+   "means": "kicks in again：圈转起来",
+   "f_start": 208,
    "f_land": 221,
-   "f_end": 370,
-   "until": "5-07.w013",
+   "f_end": 280,
+   "until": "5-07.w011",
    "word": "5-07.w009",
    "w": "kicks",
    "key": "kicks#1",
@@ -613,20 +626,43 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 42231,
+   "F_start": 42224,
    "F_land": 42237,
+   "F_end": 42296
+  },
+  {
+   "id": "now",
+   "obj": "now",
+   "verb": "move",
+   "ease": "inout",
+   "means": "now with：圈亮一下",
+   "f_start": 303,
+   "f_land": 316,
+   "f_end": 370,
+   "until": "5-07.w013",
+   "word": "5-07.w012",
+   "w": "now",
+   "key": "now#1",
+   "sid": "5-07.s2",
+   "word_f0": 316,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 42319,
+   "F_land": 42332,
    "F_end": 42386
   },
   {
-   "id": "lab",
-   "obj": "lab",
-   "verb": "grow",
+   "id": "data",
+   "obj": "data",
+   "verb": "appear",
    "ease": "inout",
-   "means": "lab：右下 flask 长出",
-   "f_start": 387,
+   "means": "real lab data：烧瓶落下",
+   "f_start": 390,
    "f_land": 397,
-   "f_end": 407,
-   "until": "5-07.w015",
+   "f_end": 425,
+   "until": "5-07.w016",
    "word": "5-07.w015",
    "w": "lab",
    "key": "lab#1",
@@ -634,58 +670,45 @@
    "word_f0": 397,
    "tool": "remotion",
    "guide": {
-    "kind": "focus",
-    "target": [
-     "flask"
-    ]
+    "kind": "none"
    },
-   "F_start": 42403,
+   "F_start": 42406,
    "F_land": 42413,
-   "F_end": 42423,
-   "g_start": 371,
-   "g_on": 389,
-   "g_end": 407,
-   "g_off": 437,
-   "g_tick": 393,
-   "G_start": 42387,
-   "G_on": 42405,
-   "G_end": 42423,
-   "G_off": 42453,
-   "G_tick": 42409
+   "F_end": 42441
   },
   {
-   "id": "data",
-   "obj": "data",
-   "verb": "appear",
+   "id": "inside",
+   "obj": "inside",
+   "verb": "move",
    "ease": "inout",
-   "means": "data inside：数据卡从 flask 出来，写 real lab data",
-   "f_start": 405,
-   "f_land": 411,
+   "means": "inside：数据点倒进圈里",
+   "f_start": 404,
+   "f_land": 434,
    "f_end": 459,
-   "until": "5-07.w017",
-   "word": "5-07.w016",
-   "w": "data",
-   "key": "data#1",
+   "until": "5-07.s2",
+   "word": "5-07.w017",
+   "w": "inside.",
+   "key": "inside#1",
    "sid": "5-07.s2",
-   "word_f0": 411,
+   "word_f0": 434,
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 42421,
-   "F_land": 42427,
+   "F_start": 42420,
+   "F_land": 42450,
    "F_end": 42475
   },
   {
-   "id": "res",
-   "obj": "res",
+   "id": "results",
+   "obj": "results",
    "verb": "move",
    "ease": "inout",
-   "means": "results：数据卡沿循环走到左下",
-   "f_start": 489,
+   "means": "The results went back in：数据点沿圈走",
+   "f_start": 484,
    "f_land": 497,
-   "f_end": 523,
-   "until": "5-07.w019",
+   "f_end": 559,
+   "until": "5-07.w021",
    "word": "5-07.w019",
    "w": "results",
    "key": "results#1",
@@ -693,55 +716,19 @@
    "word_f0": 497,
    "tool": "remotion",
    "guide": {
-    "kind": "focus",
-    "target": [
-     "paper1"
-    ]
-   },
-   "F_start": 42505,
-   "F_land": 42513,
-   "F_end": 42539,
-   "g_start": 471,
-   "g_on": 489,
-   "g_end": 523,
-   "g_off": 553,
-   "g_tick": 493,
-   "G_start": 42487,
-   "G_on": 42505,
-   "G_end": 42539,
-   "G_off": 42569,
-   "G_tick": 42509
-  },
-  {
-   "id": "back",
-   "obj": "back",
-   "verb": "move",
-   "ease": "inout",
-   "means": "went back in：数据卡回到 design",
-   "f_start": 531,
-   "f_land": 545,
-   "f_end": 568,
-   "until": "5-07.w022",
-   "word": "5-07.w021",
-   "w": "back",
-   "key": "back#1",
-   "sid": "5-07.s3",
-   "word_f0": 545,
-   "tool": "remotion",
-   "guide": {
     "kind": "none"
    },
-   "F_start": 42547,
-   "F_land": 42561,
-   "F_end": 42584
+   "F_start": 42500,
+   "F_land": 42513,
+   "F_end": 42575
   },
   {
    "id": "pose",
    "obj": "pose",
-   "verb": "grow",
+   "verb": "appear",
    "ease": "inout",
-   "means": "predicted pose：旁边长出锁里插钥匙的小图，写 predicted pose",
-   "f_start": 637,
+   "means": "a predicted pose：小插座插着 001",
+   "f_start": 644,
    "f_land": 651,
    "f_end": 709,
    "until": "5-07.w026",
@@ -754,11 +741,10 @@
    "guide": {
     "kind": "focus",
     "target": [
-     "key",
-     "lock"
+     "pose"
     ]
    },
-   "F_start": 42653,
+   "F_start": 42660,
    "F_land": 42667,
    "F_end": 42725,
    "g_start": 625,
@@ -773,15 +759,15 @@
    "G_tick": 42663
   },
   {
-   "id": "k001",
-   "obj": "k001",
+   "id": "p001",
+   "obj": "p001",
    "verb": "appear",
    "ease": "inout",
-   "means": "001：小图里的钥匙标 001",
-   "f_start": 768,
+   "means": "001：标 001",
+   "f_start": 766,
    "f_land": 776,
-   "f_end": 814,
-   "until": "5-07.w030",
+   "f_end": 802,
+   "until": "5-07.w029",
    "word": "5-07.w029",
    "w": "001",
    "key": "001#1",
@@ -791,17 +777,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 42784,
+   "F_start": 42782,
    "F_land": 42792,
-   "F_end": 42830
+   "F_end": 42818
   },
   {
-   "id": "pock",
-   "obj": "pock",
-   "verb": "appear",
+   "id": "pocket",
+   "obj": "pocket",
+   "verb": "move",
    "ease": "inout",
-   "means": "pocket：口袋画红圈",
-   "f_start": 833,
+   "means": "sat in the pocket：插头往里一推、灯亮",
+   "f_start": 828,
    "f_land": 841,
    "f_end": 866,
    "until": "5-07.s3",
@@ -814,20 +800,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 42849,
+   "F_start": 42844,
    "F_land": 42857,
    "F_end": 42882
   },
   {
-   "id": "s16",
-   "obj": "s16",
-   "verb": "grow",
+   "id": "n16",
+   "obj": "n16",
+   "verb": "appear",
    "ease": "inout",
-   "means": "Sixteen new designs：16 把钥匙从 design 扇出到右边，写 sixteen new designs",
-   "f_start": 884,
+   "means": "Sixteen new designs：十六个新插头",
+   "f_start": 897,
    "f_land": 904,
    "f_end": 974,
-   "until": "5-07.w036",
+   "until": "5-07.s4",
    "word": "5-07.w034",
    "w": "Sixteen",
    "key": "sixteen#1",
@@ -835,22 +821,35 @@
    "word_f0": 904,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "new"
+    ]
    },
-   "F_start": 42900,
+   "F_start": 42913,
    "F_land": 42920,
-   "F_end": 42990
+   "F_end": 42990,
+   "g_start": 878,
+   "g_on": 896,
+   "g_end": 974,
+   "g_off": 1004,
+   "g_tick": 900,
+   "G_start": 42894,
+   "G_on": 42912,
+   "G_end": 42990,
+   "G_off": 43020,
+   "G_tick": 42916
   },
   {
    "id": "six",
    "obj": "six",
    "verb": "move",
    "ease": "inout",
-   "means": "Six made：其中 6 把变红落到下面一排，flask 长出",
-   "f_start": 980,
+   "means": "Six made and tested：六个进烧瓶",
+   "f_start": 977,
    "f_land": 990,
-   "f_end": 1026,
-   "until": "5-07.w038",
+   "f_end": 1065,
+   "until": "5-07.s5",
    "word": "5-07.w037",
    "w": "Six",
    "key": "six#1",
@@ -858,78 +857,19 @@
    "word_f0": 990,
    "tool": "remotion",
    "guide": {
-    "kind": "focus",
-    "target": [
-     "flask"
-    ]
+    "kind": "none"
    },
-   "F_start": 42996,
+   "F_start": 42993,
    "F_land": 43006,
-   "F_end": 43042,
-   "g_start": 964,
-   "g_on": 982,
-   "g_end": 1026,
-   "g_off": 1056,
-   "g_tick": 986,
-   "G_start": 42980,
-   "G_on": 42998,
-   "G_end": 43042,
-   "G_off": 43072,
-   "G_tick": 43002
-  },
-  {
-   "id": "test",
-   "obj": "test",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "tested：6 把各打一个勾，写 six made and tested",
-   "f_start": 1035,
-   "f_land": 1041,
-   "f_end": 1065,
-   "until": "5-07.s5",
-   "word": "5-07.w040",
-   "w": "tested.",
-   "key": "tested#1",
-   "sid": "5-07.s5",
-   "word_f0": 1041,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 43051,
-   "F_land": 43057,
    "F_end": 43081
-  },
-  {
-   "id": "all",
-   "obj": "all",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "All within：底下时间线画出",
-   "f_start": 1091,
-   "f_land": 1099,
-   "f_end": 1136,
-   "until": "5-07.w042",
-   "word": "5-07.w041",
-   "w": "All",
-   "key": "all#2",
-   "sid": "5-07.s6",
-   "word_f0": 1099,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 43107,
-   "F_land": 43115,
-   "F_end": 43152
   },
   {
    "id": "d30",
    "obj": "d30",
    "verb": "appear",
    "ease": "inout",
-   "means": "30 days：右端标 30 days",
-   "f_start": 1138,
+   "means": "within 30 days：日历，数字轮 30",
+   "f_start": 1106,
    "f_land": 1146,
    "f_end": 1178,
    "until": "5-07.w044",
@@ -940,92 +880,79 @@
    "word_f0": 1146,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "cal"
+    ]
    },
-   "F_start": 43154,
+   "F_start": 43122,
    "F_land": 43162,
-   "F_end": 43194
+   "F_end": 43194,
+   "g_start": 1120,
+   "g_on": 1138,
+   "g_end": 1178,
+   "g_off": 1208,
+   "g_tick": 1142,
+   "G_start": 43136,
+   "G_on": 43154,
+   "G_end": 43194,
+   "G_off": 43224,
+   "G_tick": 43158
   },
   {
-   "id": "fh",
-   "obj": "fh",
+   "id": "hit",
+   "obj": "hit",
    "verb": "appear",
    "ease": "inout",
-   "means": "first hit：左端红点，写 first hit",
-   "f_start": 1220,
-   "f_land": 1230,
+   "means": "that first hit：001 打勾",
+   "f_start": 1243,
+   "f_land": 1250,
    "f_end": 1263,
    "until": "5-07.s6",
-   "word": "5-07.w047",
-   "w": "first",
-   "key": "first#1",
+   "word": "5-07.w048",
+   "w": "hit.",
+   "key": "hit#1",
    "sid": "5-07.s6",
-   "word_f0": 1230,
+   "word_f0": 1250,
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 43236,
-   "F_land": 43246,
+   "F_start": 43259,
+   "F_land": 43266,
    "F_end": 43279
   }
  ],
  "guides": [
   {
-   "id": "lab",
+   "id": "loop",
    "target": [
-    "flask"
+    "loop"
    ],
    "kind": "focus",
-   "gs": 371,
-   "gon": 389,
-   "land": 397,
-   "gend": 407,
-   "goff": 437,
-   "tick": 393,
-   "nudge": false,
-   "rim": true,
-   "ev_s": 387,
-   "events": [
-    "lab"
-   ],
-   "G_start": 42387,
-   "G_on": 42405,
-   "G_land": 42413,
-   "G_end": 42423,
-   "G_off": 42453,
-   "G_tick": 42409
-  },
-  {
-   "id": "res",
-   "target": [
-    "paper1"
-   ],
-   "kind": "focus",
-   "gs": 471,
-   "gon": 489,
-   "land": 497,
-   "gend": 523,
-   "goff": 553,
-   "tick": 493,
+   "gs": 160,
+   "gon": 178,
+   "land": 186,
+   "gend": 244,
+   "goff": 274,
+   "tick": 182,
    "nudge": true,
    "rim": true,
-   "ev_s": 489,
+   "ev_s": 179,
    "events": [
-    "res"
+    "loop"
    ],
-   "G_start": 42487,
-   "G_on": 42505,
-   "G_land": 42513,
-   "G_end": 42539,
-   "G_off": 42569,
-   "G_tick": 42509
+   "G_start": 42176,
+   "G_on": 42194,
+   "G_land": 42202,
+   "G_end": 42260,
+   "G_off": 42290,
+   "G_tick": 42198
   },
   {
    "id": "pose",
    "target": [
-    "key",
-    "lock"
+    "pose"
    ],
    "kind": "focus",
    "gs": 625,
@@ -1034,9 +961,9 @@
    "gend": 709,
    "goff": 739,
    "tick": 647,
-   "nudge": false,
+   "nudge": true,
    "rim": true,
-   "ev_s": 637,
+   "ev_s": 644,
    "events": [
     "pose"
    ],
@@ -1048,29 +975,54 @@
    "G_tick": 42663
   },
   {
-   "id": "six",
+   "id": "n16",
    "target": [
-    "flask"
+    "new"
    ],
    "kind": "focus",
-   "gs": 964,
-   "gon": 982,
-   "land": 990,
-   "gend": 1026,
-   "goff": 1056,
-   "tick": 986,
+   "gs": 878,
+   "gon": 896,
+   "land": 904,
+   "gend": 974,
+   "goff": 1004,
+   "tick": 900,
    "nudge": true,
    "rim": true,
-   "ev_s": 980,
+   "ev_s": 897,
    "events": [
-    "six"
+    "n16"
    ],
-   "G_start": 42980,
-   "G_on": 42998,
-   "G_land": 43006,
-   "G_end": 43042,
-   "G_off": 43072,
-   "G_tick": 43002
+   "G_start": 42894,
+   "G_on": 42912,
+   "G_land": 42920,
+   "G_end": 42990,
+   "G_off": 43020,
+   "G_tick": 42916
+  },
+  {
+   "id": "d30",
+   "target": [
+    "cal"
+   ],
+   "kind": "focus",
+   "gs": 1120,
+   "gon": 1138,
+   "land": 1146,
+   "gend": 1178,
+   "goff": 1208,
+   "tick": 1142,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 1106,
+   "events": [
+    "d30"
+   ],
+   "G_start": 43136,
+   "G_on": 43154,
+   "G_land": 43162,
+   "G_end": 43194,
+   "G_off": 43224,
+   "G_tick": 43158
   }
  ],
  "problems": []

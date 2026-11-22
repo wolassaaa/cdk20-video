@@ -1,128 +1,141 @@
 {
  "schema": "cdk20.events/1",
  "group": "3-09",
- "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：出镜 3-09（B）讲解卡：一把锁，nobody can see 时黑幕从上往下盖住，只剩一个问号；cut a key 钥匙在左边长出；in the dark 钥匙往黑幕里探，红批注 in the dark；页面 OnCam309.jsx。",
+ "tool": "blender",
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜 3-09（B）三维版（11-20 甲线，技能 oncam-3d-parts）：人在左，右边一个磨砂的 CDK20（p29），nobody can see 时屋里暗下来，只剩它一圈轮廓光；cut a key 一把钥匙坯（h02 blank）在旁边亮起，in the dark 伸向磨砂壳、停在半路。磨砂壳自己做段首段尾转场。Blender：inserts/shot_oncam.py recipe frost_blank。旧二维版事件表存 _wip/3-09_events_v1_2d.json。",
  "holds": [],
  "events": [
   {
-   "id": "frame",
-   "obj": "frame",
-   "verb": "grow",
+   "id": "arrive",
+   "obj": "frost",
+   "verb": "move",
    "at": {
     "word": "3-09.w001",
     "off": 0
    },
-   "means": "So：讲解卡外框画出",
-   "tool": "remotion",
-   "lead": 14,
+   "lead": 32,
    "until": {
     "word": "3-09.w001"
+   },
+   "ease": "out",
+   "means": "So：磨砂 CDK20 从镜头前（段首 T5，盖满画面）退回 B 的右侧落位",
+   "guide": {
+    "kind": "none"
    }
   },
   {
-   "id": "lock",
-   "obj": "lock",
-   "verb": "grow",
+   "id": "call",
+   "obj": "frost",
+   "verb": "move",
    "at": {
     "word": "3-09.w005",
     "off": 0
    },
-   "means": "lock：锁长出",
-   "tool": "remotion",
-   "lead": 14,
+   "lead": 6,
    "until": {
     "word": "3-09.w005"
+   },
+   "ease": "out",
+   "means": "lock：焦点点名 + 预颤，磨砂壳浮起转正",
+   "guide": {
+    "kind": "focus",
+    "target": "card",
+    "box": [
+     1260,
+     180,
+     620,
+     640
+    ]
    }
   },
   {
-   "id": "curtain",
-   "obj": "curtain",
-   "verb": "move",
+   "id": "dark",
+   "obj": "room",
+   "verb": "power_off",
    "at": {
     "word": "3-09.w006",
     "off": 0
    },
-   "means": "nobody：黑幕从上往下盖住锁",
-   "tool": "remotion",
-   "lead": 26,
-   "until": {
-    "word": "3-09.w006"
-   }
-  },
-  {
-   "id": "qmark",
-   "obj": "qmark",
-   "verb": "appear",
-   "at": {
-    "word": "3-09.w007",
-    "off": 0
-   },
-   "means": "can：黑幕上出现问号",
-   "tool": "remotion",
    "lead": 10,
    "until": {
-    "word": "3-09.w007"
+    "word": "3-09.w008"
+   },
+   "ease": "inout",
+   "means": "nobody can see：屋里暗下来（大板、主光一起暗），磨砂壳只剩一圈冷白轮廓光",
+   "guide": {
+    "kind": "none"
    }
   },
   {
-   "id": "see",
-   "obj": "see",
+   "id": "veil",
+   "obj": "frost",
    "verb": "morph",
    "at": {
     "word": "3-09.w008",
     "off": 0
    },
-   "means": "see：问号轻跳一下",
-   "tool": "remotion",
-   "lead": 10,
+   "lead": 8,
    "until": {
-    "word": "3-09.w008"
+    "dur": 16
+   },
+   "ease": "out",
+   "means": "see：磨砂壳表面再糊一层（看不进去），轻轻一缩",
+   "guide": {
+    "kind": "none"
    }
   },
   {
    "id": "key",
-   "obj": "key",
+   "obj": "blank",
    "verb": "grow",
    "at": {
-    "word": "3-09.w012",
+    "word": "3-09.w014",
     "off": 0
    },
-   "means": "cut：钥匙在左边长出，字牌 a key",
-   "tool": "remotion",
-   "lead": 20,
+   "lead": 14,
    "until": {
-    "word": "3-09.w012"
+    "dur": 16
+   },
+   "ease": "out",
+   "means": "cut a key：一把钥匙坯在旁边亮起（一盏小灯只照它），弹出 0.6→1.08→1.0",
+   "guide": {
+    "kind": "none"
    }
   },
   {
-   "id": "probe",
-   "obj": "probe",
+   "id": "reach",
+   "obj": "blank",
    "verb": "move",
-   "at": {
-    "word": "3-09.w015",
-    "off": 0
-   },
-   "means": "in：钥匙往黑幕里探，尖端渐隐",
-   "tool": "remotion",
-   "lead": 24,
-   "until": {
-    "sentence_end": true
-   }
-  },
-  {
-   "id": "pen",
-   "obj": "pen",
-   "verb": "appear",
    "at": {
     "word": "3-09.w017",
     "off": 0
    },
-   "means": "dark：红笔 in the dark",
-   "tool": "remotion",
-   "lead": 10,
+   "lead": 11,
    "until": {
-    "word": "3-09.w017"
+    "sentence_end": true
+   },
+   "ease": "inout",
+   "means": "in the dark：钥匙坯伸向磨砂壳，停在半路，犹豫地往回缩一点",
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "dive",
+   "obj": "frost",
+   "verb": "move",
+   "at": {
+    "event": "reach",
+    "off": 46
+   },
+   "lead": 26,
+   "until": {
+    "dur": 0
+   },
+   "ease": "in",
+   "means": "（说完）磨砂壳冲向镜头（段尾 T1，接 W2）",
+   "guide": {
+    "kind": "none"
    }
   }
  ]

@@ -1,0 +1,1446 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "4-01",
+ "segs": [
+  "4-01"
+ ],
+ "tool": "remotion",
+ "fps": 60,
+ "len_f": 1698,
+ "cut": "cut_v8",
+ "cut_start_f": 25938,
+ "cut_start_s": 432.3,
+ "master_built": "2026-11-18 02:33:56 +09:00",
+ "words_hash": "1ab3cc87a503",
+ "events_src": "镜头设计_v3/映射/events/4-01.json",
+ "words": [
+  {
+   "wid": "4-01.w001",
+   "w": "So",
+   "key": "so#1",
+   "sid": "4-01.s1",
+   "f0": 4,
+   "f1": 6,
+   "F0": 25942,
+   "F1": 25944
+  },
+  {
+   "wid": "4-01.w002",
+   "w": "the",
+   "key": "the#1",
+   "sid": "4-01.s1",
+   "f0": 32,
+   "f1": 37,
+   "F0": 25970,
+   "F1": 25975
+  },
+  {
+   "wid": "4-01.w003",
+   "w": "team",
+   "key": "team#1",
+   "sid": "4-01.s1",
+   "f0": 41,
+   "f1": 52,
+   "F0": 25979,
+   "F1": 25990
+  },
+  {
+   "wid": "4-01.w004",
+   "w": "did",
+   "key": "did#1",
+   "sid": "4-01.s1",
+   "f0": 56,
+   "f1": 66,
+   "F0": 25994,
+   "F1": 26004
+  },
+  {
+   "wid": "4-01.w005",
+   "w": "something",
+   "key": "something#1",
+   "sid": "4-01.s1",
+   "f0": 74,
+   "f1": 100,
+   "F0": 26012,
+   "F1": 26038
+  },
+  {
+   "wid": "4-01.w006",
+   "w": "that",
+   "key": "that#1",
+   "sid": "4-01.s1",
+   "f0": 120,
+   "f1": 128,
+   "F0": 26058,
+   "F1": 26066
+  },
+  {
+   "wid": "4-01.w007",
+   "w": "once",
+   "key": "once#1",
+   "sid": "4-01.s1",
+   "f0": 141,
+   "f1": 160,
+   "F0": 26079,
+   "F1": 26098
+  },
+  {
+   "wid": "4-01.w008",
+   "w": "sounded",
+   "key": "sounded#1",
+   "sid": "4-01.s1",
+   "f0": 174,
+   "f1": 196,
+   "F0": 26112,
+   "F1": 26134
+  },
+  {
+   "wid": "4-01.w009",
+   "w": "like",
+   "key": "like#1",
+   "sid": "4-01.s1",
+   "f0": 201,
+   "f1": 215,
+   "F0": 26139,
+   "F1": 26153
+  },
+  {
+   "wid": "4-01.w010",
+   "w": "science",
+   "key": "science#1",
+   "sid": "4-01.s1",
+   "f0": 221,
+   "f1": 245,
+   "F0": 26159,
+   "F1": 26183
+  },
+  {
+   "wid": "4-01.w011",
+   "w": "fiction.",
+   "key": "fiction#1",
+   "sid": "4-01.s1",
+   "f0": 247,
+   "f1": 271,
+   "F0": 26185,
+   "F1": 26209
+  },
+  {
+   "wid": "4-01.w012",
+   "w": "They",
+   "key": "they#1",
+   "sid": "4-01.s2",
+   "f0": 312,
+   "f1": 321,
+   "F0": 26250,
+   "F1": 26259
+  },
+  {
+   "wid": "4-01.w013",
+   "w": "asked",
+   "key": "asked#1",
+   "sid": "4-01.s2",
+   "f0": 331,
+   "f1": 355,
+   "F0": 26269,
+   "F1": 26293
+  },
+  {
+   "wid": "4-01.w014",
+   "w": "an",
+   "key": "an#1",
+   "sid": "4-01.s2",
+   "f0": 369,
+   "f1": 375,
+   "F0": 26307,
+   "F1": 26313
+  },
+  {
+   "wid": "4-01.w015",
+   "w": "AI",
+   "key": "ai#1",
+   "sid": "4-01.s2",
+   "f0": 381,
+   "f1": 401,
+   "F0": 26319,
+   "F1": 26339
+  },
+  {
+   "wid": "4-01.w016",
+   "w": "to",
+   "key": "to#1",
+   "sid": "4-01.s2",
+   "f0": 406,
+   "f1": 411,
+   "F0": 26344,
+   "F1": 26349
+  },
+  {
+   "wid": "4-01.w017",
+   "w": "guess",
+   "key": "guess#1",
+   "sid": "4-01.s2",
+   "f0": 415,
+   "f1": 427,
+   "F0": 26353,
+   "F1": 26365
+  },
+  {
+   "wid": "4-01.w018",
+   "w": "the",
+   "key": "the#2",
+   "sid": "4-01.s2",
+   "f0": 430,
+   "f1": 433,
+   "F0": 26368,
+   "F1": 26371
+  },
+  {
+   "wid": "4-01.w019",
+   "w": "shape.",
+   "key": "shape#1",
+   "sid": "4-01.s2",
+   "f0": 439,
+   "f1": 458,
+   "F0": 26377,
+   "F1": 26396
+  },
+  {
+   "wid": "4-01.w020",
+   "w": "Imagine",
+   "key": "imagine#1",
+   "sid": "4-01.s3",
+   "f0": 510,
+   "f1": 536,
+   "F0": 26448,
+   "F1": 26474
+  },
+  {
+   "wid": "4-01.w021",
+   "w": "a",
+   "key": "a#1",
+   "sid": "4-01.s3",
+   "f0": 538,
+   "f1": 539,
+   "F0": 26476,
+   "F1": 26477
+  },
+  {
+   "wid": "4-01.w022",
+   "w": "protein",
+   "key": "protein#1",
+   "sid": "4-01.s3",
+   "f0": 544,
+   "f1": 572,
+   "F0": 26482,
+   "F1": 26510
+  },
+  {
+   "wid": "4-01.w023",
+   "w": "as",
+   "key": "as#1",
+   "sid": "4-01.s3",
+   "f0": 584,
+   "f1": 591,
+   "F0": 26522,
+   "F1": 26529
+  },
+  {
+   "wid": "4-01.w024",
+   "w": "a",
+   "key": "a#2",
+   "sid": "4-01.s3",
+   "f0": 594,
+   "f1": 596,
+   "F0": 26532,
+   "F1": 26534
+  },
+  {
+   "wid": "4-01.w025",
+   "w": "chain",
+   "key": "chain#1",
+   "sid": "4-01.s3",
+   "f0": 602,
+   "f1": 617,
+   "F0": 26540,
+   "F1": 26555
+  },
+  {
+   "wid": "4-01.w026",
+   "w": "of",
+   "key": "of#1",
+   "sid": "4-01.s3",
+   "f0": 626,
+   "f1": 632,
+   "F0": 26564,
+   "F1": 26570
+  },
+  {
+   "wid": "4-01.w027",
+   "w": "building",
+   "key": "building#1",
+   "sid": "4-01.s3",
+   "f0": 638,
+   "f1": 650,
+   "F0": 26576,
+   "F1": 26588
+  },
+  {
+   "wid": "4-01.w028",
+   "w": "blocks",
+   "key": "blocks#1",
+   "sid": "4-01.s3",
+   "f0": 650,
+   "f1": 706,
+   "F0": 26588,
+   "F1": 26644
+  },
+  {
+   "wid": "4-01.w029",
+   "w": "that",
+   "key": "that#2",
+   "sid": "4-01.s3",
+   "f0": 706,
+   "f1": 716,
+   "F0": 26644,
+   "F1": 26654
+  },
+  {
+   "wid": "4-01.w030",
+   "w": "folds",
+   "key": "folds#1",
+   "sid": "4-01.s3",
+   "f0": 720,
+   "f1": 740,
+   "F0": 26658,
+   "F1": 26678
+  },
+  {
+   "wid": "4-01.w031",
+   "w": "into",
+   "key": "into#1",
+   "sid": "4-01.s3",
+   "f0": 747,
+   "f1": 756,
+   "F0": 26685,
+   "F1": 26694
+  },
+  {
+   "wid": "4-01.w032",
+   "w": "a",
+   "key": "a#3",
+   "sid": "4-01.s3",
+   "f0": 761,
+   "f1": 762,
+   "F0": 26699,
+   "F1": 26700
+  },
+  {
+   "wid": "4-01.w033",
+   "w": "3D",
+   "key": "3d#1",
+   "sid": "4-01.s3",
+   "f0": 768,
+   "f1": 782,
+   "F0": 26706,
+   "F1": 26720
+  },
+  {
+   "wid": "4-01.w034",
+   "w": "shape.",
+   "key": "shape#2",
+   "sid": "4-01.s3",
+   "f0": 794,
+   "f1": 811,
+   "F0": 26732,
+   "F1": 26749
+  },
+  {
+   "wid": "4-01.w035",
+   "w": "The",
+   "key": "the#3",
+   "sid": "4-01.s4",
+   "f0": 860,
+   "f1": 863,
+   "F0": 26798,
+   "F1": 26801
+  },
+  {
+   "wid": "4-01.w036",
+   "w": "order",
+   "key": "order#1",
+   "sid": "4-01.s4",
+   "f0": 871,
+   "f1": 885,
+   "F0": 26809,
+   "F1": 26823
+  },
+  {
+   "wid": "4-01.w037",
+   "w": "of",
+   "key": "of#2",
+   "sid": "4-01.s4",
+   "f0": 893,
+   "f1": 898,
+   "F0": 26831,
+   "F1": 26836
+  },
+  {
+   "wid": "4-01.w038",
+   "w": "the",
+   "key": "the#4",
+   "sid": "4-01.s4",
+   "f0": 901,
+   "f1": 904,
+   "F0": 26839,
+   "F1": 26842
+  },
+  {
+   "wid": "4-01.w039",
+   "w": "blocks",
+   "key": "blocks#2",
+   "sid": "4-01.s4",
+   "f0": 910,
+   "f1": 928,
+   "F0": 26848,
+   "F1": 26866
+  },
+  {
+   "wid": "4-01.w040",
+   "w": "is",
+   "key": "is#1",
+   "sid": "4-01.s4",
+   "f0": 938,
+   "f1": 943,
+   "F0": 26876,
+   "F1": 26881
+  },
+  {
+   "wid": "4-01.w041",
+   "w": "the",
+   "key": "the#5",
+   "sid": "4-01.s4",
+   "f0": 945,
+   "f1": 951,
+   "F0": 26883,
+   "F1": 26889
+  },
+  {
+   "wid": "4-01.w042",
+   "w": "sequence.",
+   "key": "sequence#1",
+   "sid": "4-01.s4",
+   "f0": 955,
+   "f1": 986,
+   "F0": 26893,
+   "F1": 26924
+  },
+  {
+   "wid": "4-01.w043",
+   "w": "AlphaFold",
+   "key": "alphafold#1",
+   "sid": "4-01.s5",
+   "f0": 1041,
+   "f1": 1074,
+   "F0": 26979,
+   "F1": 27012
+  },
+  {
+   "wid": "4-01.w044",
+   "w": "learned",
+   "key": "learned#1",
+   "sid": "4-01.s5",
+   "f0": 1086,
+   "f1": 1107,
+   "F0": 27024,
+   "F1": 27045
+  },
+  {
+   "wid": "4-01.w045",
+   "w": "from",
+   "key": "from#1",
+   "sid": "4-01.s5",
+   "f0": 1116,
+   "f1": 1126,
+   "F0": 27054,
+   "F1": 27064
+  },
+  {
+   "wid": "4-01.w046",
+   "w": "known",
+   "key": "known#1",
+   "sid": "4-01.s5",
+   "f0": 1131,
+   "f1": 1147,
+   "F0": 27069,
+   "F1": 27085
+  },
+  {
+   "wid": "4-01.w047",
+   "w": "structures",
+   "key": "structures#1",
+   "sid": "4-01.s5",
+   "f0": 1150,
+   "f1": 1183,
+   "F0": 27088,
+   "F1": 27121
+  },
+  {
+   "wid": "4-01.w048",
+   "w": "how",
+   "key": "how#1",
+   "sid": "4-01.s5",
+   "f0": 1226,
+   "f1": 1236,
+   "F0": 27164,
+   "F1": 27174
+  },
+  {
+   "wid": "4-01.w049",
+   "w": "sequences",
+   "key": "sequences#1",
+   "sid": "4-01.s5",
+   "f0": 1242,
+   "f1": 1266,
+   "F0": 27180,
+   "F1": 27204
+  },
+  {
+   "wid": "4-01.w050",
+   "w": "fold.",
+   "key": "fold#1",
+   "sid": "4-01.s5",
+   "f0": 1267,
+   "f1": 1285,
+   "F0": 27205,
+   "F1": 27223
+  },
+  {
+   "wid": "4-01.w051",
+   "w": "Give",
+   "key": "give#1",
+   "sid": "4-01.s6",
+   "f0": 1316,
+   "f1": 1326,
+   "F0": 27254,
+   "F1": 27264
+  },
+  {
+   "wid": "4-01.w052",
+   "w": "it",
+   "key": "it#1",
+   "sid": "4-01.s6",
+   "f0": 1327,
+   "f1": 1332,
+   "F0": 27265,
+   "F1": 27270
+  },
+  {
+   "wid": "4-01.w053",
+   "w": "one,",
+   "key": "one#1",
+   "sid": "4-01.s6",
+   "f0": 1338,
+   "f1": 1356,
+   "F0": 27276,
+   "F1": 27294
+  },
+  {
+   "wid": "4-01.w054",
+   "w": "and",
+   "key": "and#1",
+   "sid": "4-01.s6",
+   "f0": 1411,
+   "f1": 1416,
+   "F0": 27349,
+   "F1": 27354
+  },
+  {
+   "wid": "4-01.w055",
+   "w": "it",
+   "key": "it#2",
+   "sid": "4-01.s6",
+   "f0": 1418,
+   "f1": 1422,
+   "F0": 27356,
+   "F1": 27360
+  },
+  {
+   "wid": "4-01.w056",
+   "w": "predicts",
+   "key": "predicts#1",
+   "sid": "4-01.s6",
+   "f0": 1424,
+   "f1": 1452,
+   "F0": 27362,
+   "F1": 27390
+  },
+  {
+   "wid": "4-01.w057",
+   "w": "the",
+   "key": "the#6",
+   "sid": "4-01.s6",
+   "f0": 1452,
+   "f1": 1457,
+   "F0": 27390,
+   "F1": 27395
+  },
+  {
+   "wid": "4-01.w058",
+   "w": "shape,",
+   "key": "shape#3",
+   "sid": "4-01.s6",
+   "f0": 1460,
+   "f1": 1478,
+   "F0": 27398,
+   "F1": 27416
+  },
+  {
+   "wid": "4-01.w059",
+   "w": "plus",
+   "key": "plus#1",
+   "sid": "4-01.s6",
+   "f0": 1511,
+   "f1": 1532,
+   "F0": 27449,
+   "F1": 27470
+  },
+  {
+   "wid": "4-01.w060",
+   "w": "how",
+   "key": "how#2",
+   "sid": "4-01.s6",
+   "f0": 1562,
+   "f1": 1572,
+   "F0": 27500,
+   "F1": 27510
+  },
+  {
+   "wid": "4-01.w061",
+   "w": "sure",
+   "key": "sure#1",
+   "sid": "4-01.s6",
+   "f0": 1577,
+   "f1": 1591,
+   "F0": 27515,
+   "F1": 27529
+  },
+  {
+   "wid": "4-01.w062",
+   "w": "it",
+   "key": "it#3",
+   "sid": "4-01.s6",
+   "f0": 1607,
+   "f1": 1611,
+   "F0": 27545,
+   "F1": 27549
+  },
+  {
+   "wid": "4-01.w063",
+   "w": "is",
+   "key": "is#2",
+   "sid": "4-01.s6",
+   "f0": 1614,
+   "f1": 1620,
+   "F0": 27552,
+   "F1": 27558
+  },
+  {
+   "wid": "4-01.w064",
+   "w": "about",
+   "key": "about#1",
+   "sid": "4-01.s6",
+   "f0": 1625,
+   "f1": 1644,
+   "F0": 27563,
+   "F1": 27582
+  },
+  {
+   "wid": "4-01.w065",
+   "w": "each",
+   "key": "each#1",
+   "sid": "4-01.s6",
+   "f0": 1651,
+   "f1": 1661,
+   "F0": 27589,
+   "F1": 27599
+  },
+  {
+   "wid": "4-01.w066",
+   "w": "part.",
+   "key": "part#1",
+   "sid": "4-01.s6",
+   "f0": 1664,
+   "f1": 1681,
+   "F0": 27602,
+   "F1": 27619
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "4-01.s1",
+   "text": "So the team did something that once sounded like science fiction.",
+   "w_first": "4-01.w001",
+   "w_last": "4-01.w011",
+   "f0": 4,
+   "f1": 271
+  },
+  {
+   "sid": "4-01.s2",
+   "text": "They asked an AI to guess the shape.",
+   "w_first": "4-01.w012",
+   "w_last": "4-01.w019",
+   "f0": 312,
+   "f1": 458
+  },
+  {
+   "sid": "4-01.s3",
+   "text": "Imagine a protein as a chain of building blocks that folds into a 3D shape.",
+   "w_first": "4-01.w020",
+   "w_last": "4-01.w034",
+   "f0": 510,
+   "f1": 811
+  },
+  {
+   "sid": "4-01.s4",
+   "text": "The order of the blocks is the sequence.",
+   "w_first": "4-01.w035",
+   "w_last": "4-01.w042",
+   "f0": 860,
+   "f1": 986
+  },
+  {
+   "sid": "4-01.s5",
+   "text": "AlphaFold learned from known structures how sequences fold.",
+   "w_first": "4-01.w043",
+   "w_last": "4-01.w050",
+   "f0": 1041,
+   "f1": 1285
+  },
+  {
+   "sid": "4-01.s6",
+   "text": "Give it one, and it predicts the shape, plus how sure it is about each part.",
+   "w_first": "4-01.w051",
+   "w_last": "4-01.w066",
+   "f0": 1316,
+   "f1": 1681
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "team",
+   "obj": "team",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "So the team：三个小人",
+   "f_start": 34,
+   "f_land": 41,
+   "f_end": 66,
+   "until": "4-01.w004",
+   "word": "4-01.w003",
+   "w": "team",
+   "key": "team#1",
+   "sid": "4-01.s1",
+   "word_f0": 41,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "team"
+    ]
+   },
+   "F_start": 25972,
+   "F_land": 25979,
+   "F_end": 26004,
+   "g_start": 15,
+   "g_on": 33,
+   "g_end": 66,
+   "g_off": 96,
+   "g_tick": 37,
+   "G_start": 25953,
+   "G_on": 25971,
+   "G_end": 26004,
+   "G_off": 26034,
+   "G_tick": 25975
+  },
+  {
+   "id": "some",
+   "obj": "some",
+   "verb": "move",
+   "ease": "inout",
+   "means": "did something：小人往左让开",
+   "f_start": 61,
+   "f_land": 74,
+   "f_end": 160,
+   "until": "4-01.w007",
+   "word": "4-01.w005",
+   "w": "something",
+   "key": "something#1",
+   "sid": "4-01.s1",
+   "word_f0": 74,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 25999,
+   "F_land": 26012,
+   "F_end": 26098
+  },
+  {
+   "id": "scifi",
+   "obj": "scifi",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "science fiction：手写",
+   "f_start": 215,
+   "f_land": 221,
+   "f_end": 271,
+   "until": "4-01.s1",
+   "word": "4-01.w010",
+   "w": "science",
+   "key": "science#1",
+   "sid": "4-01.s1",
+   "word_f0": 221,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 26153,
+   "F_land": 26159,
+   "F_end": 26209
+  },
+  {
+   "id": "ai",
+   "obj": "ai",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "asked an AI：AlphaFold 芯片落位",
+   "f_start": 374,
+   "f_land": 381,
+   "f_end": 427,
+   "until": "4-01.w017",
+   "word": "4-01.w015",
+   "w": "AI",
+   "key": "ai#1",
+   "sid": "4-01.s2",
+   "word_f0": 381,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chip"
+    ]
+   },
+   "F_start": 26312,
+   "F_land": 26319,
+   "F_end": 26365,
+   "g_start": 355,
+   "g_on": 373,
+   "g_end": 427,
+   "g_off": 457,
+   "g_tick": 377,
+   "G_start": 26293,
+   "G_on": 26311,
+   "G_end": 26365,
+   "G_off": 26395,
+   "G_tick": 26315
+  },
+  {
+   "id": "guess",
+   "obj": "guess",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "guess the shape：磨砂插座和问号",
+   "f_start": 432,
+   "f_land": 439,
+   "f_end": 458,
+   "until": "4-01.s2",
+   "word": "4-01.w019",
+   "w": "shape.",
+   "key": "shape#1",
+   "sid": "4-01.s2",
+   "word_f0": 439,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 26370,
+   "F_land": 26377,
+   "F_end": 26396
+  },
+  {
+   "id": "prot",
+   "obj": "prot",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "Imagine a protein：清场",
+   "f_start": 537,
+   "f_land": 544,
+   "f_end": 591,
+   "until": "4-01.w023",
+   "word": "4-01.w022",
+   "w": "protein",
+   "key": "protein#1",
+   "sid": "4-01.s3",
+   "word_f0": 544,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 26475,
+   "F_land": 26482,
+   "F_end": 26529
+  },
+  {
+   "id": "chain",
+   "obj": "chain",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "as a chain：珠子一颗颗排出来",
+   "f_start": 589,
+   "f_land": 602,
+   "f_end": 632,
+   "until": "4-01.w026",
+   "word": "4-01.w025",
+   "w": "chain",
+   "key": "chain#1",
+   "sid": "4-01.s3",
+   "word_f0": 602,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chain"
+    ]
+   },
+   "F_start": 26527,
+   "F_land": 26540,
+   "F_end": 26570,
+   "g_start": 576,
+   "g_on": 594,
+   "g_end": 632,
+   "g_off": 662,
+   "g_tick": 598,
+   "G_start": 26514,
+   "G_on": 26532,
+   "G_end": 26570,
+   "G_off": 26600,
+   "G_tick": 26536
+  },
+  {
+   "id": "blocks",
+   "obj": "blocks",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "building blocks：珠子挨个鼓一下",
+   "f_start": 637,
+   "f_land": 650,
+   "f_end": 706,
+   "until": "4-01.w028",
+   "word": "4-01.w028",
+   "w": "blocks",
+   "key": "blocks#1",
+   "sid": "4-01.s3",
+   "word_f0": 650,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 26575,
+   "F_land": 26588,
+   "F_end": 26644
+  },
+  {
+   "id": "folds",
+   "obj": "folds",
+   "verb": "move",
+   "ease": "inout",
+   "means": "that folds：链折起来",
+   "f_start": 707,
+   "f_land": 720,
+   "f_end": 756,
+   "until": "4-01.w031",
+   "word": "4-01.w030",
+   "w": "folds",
+   "key": "folds#1",
+   "sid": "4-01.s3",
+   "word_f0": 720,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 26645,
+   "F_land": 26658,
+   "F_end": 26694
+  },
+  {
+   "id": "shape3d",
+   "obj": "shape3d",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "into a 3D shape：化成预测模型",
+   "f_start": 781,
+   "f_land": 794,
+   "f_end": 811,
+   "until": "4-01.s3",
+   "word": "4-01.w034",
+   "w": "shape.",
+   "key": "shape#2",
+   "sid": "4-01.s3",
+   "word_f0": 794,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 26719,
+   "F_land": 26732,
+   "F_end": 26749
+  },
+  {
+   "id": "order",
+   "obj": "order",
+   "verb": "move",
+   "ease": "inout",
+   "means": "The order：模型退到右边，链重新排直",
+   "f_start": 858,
+   "f_land": 871,
+   "f_end": 885,
+   "until": "4-01.w036",
+   "word": "4-01.w036",
+   "w": "order",
+   "key": "order#1",
+   "sid": "4-01.s4",
+   "word_f0": 871,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chain"
+    ]
+   },
+   "F_start": 26796,
+   "F_land": 26809,
+   "F_end": 26823,
+   "g_start": 845,
+   "g_on": 863,
+   "g_end": 885,
+   "g_off": 915,
+   "g_tick": 867,
+   "G_start": 26783,
+   "G_on": 26801,
+   "G_end": 26823,
+   "G_off": 26853,
+   "G_tick": 26805
+  },
+  {
+   "id": "letters",
+   "obj": "letters",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "of the blocks：珠子上出字母",
+   "f_start": 900,
+   "f_land": 910,
+   "f_end": 928,
+   "until": "4-01.w039",
+   "word": "4-01.w039",
+   "w": "blocks",
+   "key": "blocks#2",
+   "sid": "4-01.s4",
+   "word_f0": 910,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 26838,
+   "F_land": 26848,
+   "F_end": 26866
+  },
+  {
+   "id": "seq",
+   "obj": "seq",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "is the sequence：标 sequence",
+   "f_start": 945,
+   "f_land": 955,
+   "f_end": 986,
+   "until": "4-01.s4",
+   "word": "4-01.w042",
+   "w": "sequence.",
+   "key": "sequence#1",
+   "sid": "4-01.s4",
+   "word_f0": 955,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 26883,
+   "F_land": 26893,
+   "F_end": 26924
+  },
+  {
+   "id": "af",
+   "obj": "af",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "AlphaFold：芯片落到中间",
+   "f_start": 1034,
+   "f_land": 1041,
+   "f_end": 1107,
+   "until": "4-01.w044",
+   "word": "4-01.w043",
+   "w": "AlphaFold",
+   "key": "alphafold#1",
+   "sid": "4-01.s5",
+   "word_f0": 1041,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chip"
+    ]
+   },
+   "F_start": 26972,
+   "F_land": 26979,
+   "F_end": 27045,
+   "g_start": 1015,
+   "g_on": 1033,
+   "g_end": 1107,
+   "g_off": 1137,
+   "g_tick": 1037,
+   "G_start": 26953,
+   "G_on": 26971,
+   "G_end": 27045,
+   "G_off": 27075,
+   "G_tick": 26975
+  },
+  {
+   "id": "known",
+   "obj": "known",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "known structures：数据库架落下",
+   "f_start": 1143,
+   "f_land": 1150,
+   "f_end": 1183,
+   "until": "4-01.w047",
+   "word": "4-01.w047",
+   "w": "structures",
+   "key": "structures#1",
+   "sid": "4-01.s5",
+   "word_f0": 1150,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 27081,
+   "F_land": 27088,
+   "F_end": 27121
+  },
+  {
+   "id": "learn",
+   "obj": "learn",
+   "verb": "move",
+   "ease": "inout",
+   "means": "how sequences fold：数据沿料杆流进芯片",
+   "f_start": 1213,
+   "f_land": 1226,
+   "f_end": 1285,
+   "until": "4-01.s5",
+   "word": "4-01.w048",
+   "w": "how",
+   "key": "how#1",
+   "sid": "4-01.s5",
+   "word_f0": 1226,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 27151,
+   "F_land": 27164,
+   "F_end": 27223
+  },
+  {
+   "id": "give",
+   "obj": "give",
+   "verb": "move",
+   "ease": "inout",
+   "means": "Give it one：序列条送进芯片",
+   "f_start": 1308,
+   "f_land": 1338,
+   "f_end": 1356,
+   "until": "4-01.w053",
+   "word": "4-01.w053",
+   "w": "one,",
+   "key": "one#1",
+   "sid": "4-01.s6",
+   "word_f0": 1338,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 27246,
+   "F_land": 27276,
+   "F_end": 27294
+  },
+  {
+   "id": "predicts",
+   "obj": "predicts",
+   "verb": "move",
+   "ease": "inout",
+   "means": "it predicts：芯片一震、灯亮",
+   "f_start": 1411,
+   "f_land": 1424,
+   "f_end": 1452,
+   "until": "4-01.w056",
+   "word": "4-01.w056",
+   "w": "predicts",
+   "key": "predicts#1",
+   "sid": "4-01.s6",
+   "word_f0": 1424,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 27349,
+   "F_land": 27362,
+   "F_end": 27390
+  },
+  {
+   "id": "pred",
+   "obj": "pred",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "it predicts the shape：模型出来",
+   "f_start": 1447,
+   "f_land": 1460,
+   "f_end": 1478,
+   "until": "4-01.w058",
+   "word": "4-01.w058",
+   "w": "shape,",
+   "key": "shape#3",
+   "sid": "4-01.s6",
+   "word_f0": 1460,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "model"
+    ]
+   },
+   "F_start": 27385,
+   "F_land": 27398,
+   "F_end": 27416,
+   "g_start": 1434,
+   "g_on": 1452,
+   "g_end": 1478,
+   "g_off": 1508,
+   "g_tick": 1456,
+   "G_start": 27372,
+   "G_on": 27390,
+   "G_end": 27416,
+   "G_off": 27446,
+   "G_tick": 27394
+  },
+  {
+   "id": "sure",
+   "obj": "sure",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "how sure：图例 sure / unsure",
+   "f_start": 1567,
+   "f_land": 1577,
+   "f_end": 1620,
+   "until": "4-01.w063",
+   "word": "4-01.w061",
+   "w": "sure",
+   "key": "sure#1",
+   "sid": "4-01.s6",
+   "word_f0": 1577,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 27505,
+   "F_land": 27515,
+   "F_end": 27558
+  },
+  {
+   "id": "part",
+   "obj": "part",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "each part：手写圈住红尾巴",
+   "f_start": 1658,
+   "f_land": 1664,
+   "f_end": 1681,
+   "until": "4-01.s6",
+   "word": "4-01.w066",
+   "w": "part.",
+   "key": "part#1",
+   "sid": "4-01.s6",
+   "word_f0": 1664,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 27596,
+   "F_land": 27602,
+   "F_end": 27619
+  }
+ ],
+ "guides": [
+  {
+   "id": "team",
+   "target": [
+    "team"
+   ],
+   "kind": "focus",
+   "gs": 15,
+   "gon": 33,
+   "land": 41,
+   "gend": 66,
+   "goff": 96,
+   "tick": 37,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 34,
+   "events": [
+    "team"
+   ],
+   "G_start": 25953,
+   "G_on": 25971,
+   "G_land": 25979,
+   "G_end": 26004,
+   "G_off": 26034,
+   "G_tick": 25975
+  },
+  {
+   "id": "ai",
+   "target": [
+    "chip"
+   ],
+   "kind": "focus",
+   "gs": 355,
+   "gon": 373,
+   "land": 381,
+   "gend": 427,
+   "goff": 457,
+   "tick": 377,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 374,
+   "events": [
+    "ai"
+   ],
+   "G_start": 26293,
+   "G_on": 26311,
+   "G_land": 26319,
+   "G_end": 26365,
+   "G_off": 26395,
+   "G_tick": 26315
+  },
+  {
+   "id": "chain",
+   "target": [
+    "chain"
+   ],
+   "kind": "focus",
+   "gs": 576,
+   "gon": 594,
+   "land": 602,
+   "gend": 632,
+   "goff": 662,
+   "tick": 598,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 589,
+   "events": [
+    "chain"
+   ],
+   "G_start": 26514,
+   "G_on": 26532,
+   "G_land": 26540,
+   "G_end": 26570,
+   "G_off": 26600,
+   "G_tick": 26536
+  },
+  {
+   "id": "order",
+   "target": [
+    "chain"
+   ],
+   "kind": "focus",
+   "gs": 845,
+   "gon": 863,
+   "land": 871,
+   "gend": 885,
+   "goff": 915,
+   "tick": 867,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 858,
+   "events": [
+    "order"
+   ],
+   "G_start": 26783,
+   "G_on": 26801,
+   "G_land": 26809,
+   "G_end": 26823,
+   "G_off": 26853,
+   "G_tick": 26805
+  },
+  {
+   "id": "af",
+   "target": [
+    "chip"
+   ],
+   "kind": "focus",
+   "gs": 1015,
+   "gon": 1033,
+   "land": 1041,
+   "gend": 1107,
+   "goff": 1137,
+   "tick": 1037,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 1034,
+   "events": [
+    "af"
+   ],
+   "G_start": 26953,
+   "G_on": 26971,
+   "G_land": 26979,
+   "G_end": 27045,
+   "G_off": 27075,
+   "G_tick": 26975
+  },
+  {
+   "id": "pred",
+   "target": [
+    "model"
+   ],
+   "kind": "focus",
+   "gs": 1434,
+   "gon": 1452,
+   "land": 1460,
+   "gend": 1478,
+   "goff": 1508,
+   "tick": 1456,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 1447,
+   "events": [
+    "pred"
+   ],
+   "G_start": 27372,
+   "G_on": 27390,
+   "G_land": 27398,
+   "G_end": 27416,
+   "G_off": 27446,
+   "G_tick": 27394
+  }
+ ],
+ "problems": []
+}

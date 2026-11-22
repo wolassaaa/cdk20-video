@@ -1,0 +1,480 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "4-10",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 4 章二维说明书页 4-10（画外音）：8,918 个新设计的点阵墙，一道波扫过，点聚成簇，54 个挑出来，7 个用重墨画成钥匙；右边每把钥匙在虚拟锁里试、打分。页面 Manual410.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "wall",
+   "obj": "wall",
+   "verb": "grow",
+   "at": {
+    "word": "4-10.w001",
+    "off": 0
+   },
+   "means": "It：点阵墙长出",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-10.w004"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "title",
+   "obj": "title",
+   "verb": "appear",
+   "at": {
+    "word": "4-10.w002",
+    "off": 0
+   },
+   "means": "came：标题 Docking",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-10.w003"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "num",
+   "obj": "num",
+   "verb": "morph",
+   "at": {
+    "word": "4-10.w005",
+    "off": 0
+   },
+   "means": "8,918：点一个个点亮，数字跳到 8,918",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "word": "4-10.w007"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "new",
+   "obj": "new",
+   "verb": "morph",
+   "at": {
+    "word": "4-10.w006",
+    "off": 0
+   },
+   "means": "brand-new：点全部变实心",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "4-10.w007"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "designs",
+   "obj": "designs",
+   "verb": "appear",
+   "at": {
+    "word": "4-10.w007",
+    "off": 0
+   },
+   "means": "designs：标签 brand-new designs",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-10.w008"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "many",
+   "obj": "many",
+   "verb": "morph",
+   "at": {
+    "word": "4-10.w010",
+    "off": 0
+   },
+   "means": "too many：数字和墙一起压暗",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "4-10.w011"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "make",
+   "obj": "make",
+   "verb": "appear",
+   "at": {
+    "word": "4-10.w012",
+    "off": 0
+   },
+   "means": "make：红笔 too many to make",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "lock",
+   "obj": "lock",
+   "verb": "grow",
+   "at": {
+    "word": "4-10.w014",
+    "off": 0
+   },
+   "means": "each：虚拟锁长出",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-10.w014"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "lock"
+    ]
+   }
+  },
+  {
+   "id": "key",
+   "obj": "key",
+   "verb": "move",
+   "at": {
+    "word": "4-10.w015",
+    "off": 0
+   },
+   "means": "key：钥匙出现并飞向锁",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "4-10.w015"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "tried",
+   "obj": "tried",
+   "verb": "move",
+   "at": {
+    "word": "4-10.w017",
+    "off": 0
+   },
+   "means": "tried：钥匙插进锁孔",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "4-10.w017"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "vlock",
+   "obj": "vlock",
+   "verb": "appear",
+   "at": {
+    "word": "4-10.w021",
+    "off": 0
+   },
+   "means": "lock：标签 a virtual lock",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-10.w021"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "docking",
+   "obj": "docking",
+   "verb": "appear",
+   "at": {
+    "word": "4-10.w023",
+    "off": 0
+   },
+   "means": "docking：标签 That is docking",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-10.w023"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "computer",
+   "obj": "computer",
+   "verb": "appear",
+   "at": {
+    "word": "4-10.w025",
+    "off": 0
+   },
+   "means": "computer：打分的框出现",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-10.w025"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "predicts",
+   "obj": "predicts",
+   "verb": "appear",
+   "at": {
+    "word": "4-10.w026",
+    "off": 0
+   },
+   "means": "predicts：锁孔红圈标出位置",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-10.w027"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "molecule",
+   "obj": "molecule",
+   "verb": "move",
+   "at": {
+    "word": "4-10.w029",
+    "off": 0
+   },
+   "means": "molecule：钥匙再往里坐",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "4-10.w029"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "sit",
+   "obj": "sit",
+   "verb": "morph",
+   "at": {
+    "word": "4-10.w031",
+    "off": 0
+   },
+   "means": "sit：钥匙转到坐稳",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "4-10.w031"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "pocket",
+   "obj": "pocket",
+   "verb": "appear",
+   "at": {
+    "word": "4-10.w034",
+    "off": 0
+   },
+   "means": "pocket：标签 the pocket",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-10.w034"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "scores",
+   "obj": "scores",
+   "verb": "grow",
+   "at": {
+    "word": "4-10.w036",
+    "off": 0
+   },
+   "means": "scores：打分条长起来",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "4-10.w036"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "fit",
+   "obj": "fit",
+   "verb": "morph",
+   "at": {
+    "word": "4-10.w038",
+    "off": 0
+   },
+   "means": "fit：打分条闪一下",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-10.w038"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "similar",
+   "obj": "similar",
+   "verb": "morph",
+   "at": {
+    "word": "4-10.w039",
+    "off": 0
+   },
+   "means": "Similar：点飘向簇心",
+   "tool": "remotion",
+   "lead": 22,
+   "until": {
+    "word": "4-10.w040"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "grouped",
+   "obj": "grouped",
+   "verb": "appear",
+   "at": {
+    "word": "4-10.w042",
+    "off": 0
+   },
+   "means": "grouped：簇画虚线圈",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "4-10.w042"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "n54",
+   "obj": "n54",
+   "verb": "appear",
+   "at": {
+    "word": "4-10.w043",
+    "off": 0
+   },
+   "means": "54：54 个点挑出来",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "4-10.w043"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "shortlist",
+   "obj": "shortlist",
+   "verb": "appear",
+   "at": {
+    "word": "4-10.w046",
+    "off": 0
+   },
+   "means": "shortlist：箭头和标签 the shortlist",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-10.w046"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "pick",
+   "obj": "pick",
+   "verb": "morph",
+   "at": {
+    "word": "4-10.w048",
+    "off": 0
+   },
+   "means": "chemists：7 个点升起",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "4-10.w048"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "seven",
+   "obj": "seven",
+   "verb": "grow",
+   "at": {
+    "word": "4-10.w051",
+    "off": 0
+   },
+   "means": "seven：7 把钥匙用重墨画出",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "4-10.w052"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "tomake",
+   "obj": "tomake",
+   "verb": "appear",
+   "at": {
+    "word": "4-10.w053",
+    "off": 0
+   },
+   "means": "make：标签 to make",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  }
+ ]
+}

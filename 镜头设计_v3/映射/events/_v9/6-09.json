@@ -1,0 +1,375 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "6-09",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 6 章二维说明书页 6-09（B 画外音）：further down the road，一条透视路伸向远处；路边四个虚线框依次亮起（钥匙打叉、钞票、小鼠、废料桶），每个由三变一表示更少；computing 机柜和插头用 SOFT 色，电线一跳一跳表示代价；real prize 路尽头红圈问号，New treatments 圈里长出 hospital 和两个病人，路中线变红通到尽头。页面 Manual609.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "road",
+   "obj": "road",
+   "verb": "grow",
+   "at": {
+    "word": "6-09.w006",
+    "off": 0
+   },
+   "means": "further down the road：透视路从近往远画出，标题写出",
+   "tool": "remotion",
+   "lead": 9,
+   "until": {
+    "word": "6-09.w009"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "m_box",
+   "obj": "m_box",
+   "verb": "appear",
+   "at": {
+    "word": "6-09.w010",
+    "off": 0
+   },
+   "means": "Fewer：第一个虚线框画出",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "6-09.w010"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "m_x",
+   "obj": "m_x",
+   "verb": "grow",
+   "at": {
+    "word": "6-09.w011",
+    "off": 0
+   },
+   "means": "failed：框里三把钥匙打红叉",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "6-09.w011"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "m_d",
+   "obj": "m_d",
+   "verb": "morph",
+   "at": {
+    "word": "6-09.w012",
+    "off": 0
+   },
+   "means": "molecules：两把打叉的钥匙沉下去消失，红色向下箭头，写 fewer failed molecules",
+   "tool": "remotion",
+   "lead": 0,
+   "until": {
+    "word": "6-09.w012"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "c_box",
+   "obj": "c_box",
+   "verb": "appear",
+   "at": {
+    "word": "6-09.w013",
+    "off": 0
+   },
+   "means": "lower：第二个框画出，三张钞票叠着",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "6-09.w013"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "c_d",
+   "obj": "c_d",
+   "verb": "morph",
+   "at": {
+    "word": "6-09.w014",
+    "off": 0
+   },
+   "means": "costs：钞票由三张收成一张，向下箭头，写 lower costs",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "6-09.w014"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "a_box",
+   "obj": "a_box",
+   "verb": "appear",
+   "at": {
+    "word": "6-09.w015",
+    "off": 0
+   },
+   "means": "fewer：第三个框画出",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "6-09.w015"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "a_x",
+   "obj": "a_x",
+   "verb": "grow",
+   "at": {
+    "word": "6-09.w016",
+    "off": 0
+   },
+   "means": "animal：三只小鼠画出",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-09.w016"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "a_d",
+   "obj": "a_d",
+   "verb": "morph",
+   "at": {
+    "word": "6-09.w017",
+    "off": 0
+   },
+   "means": "tests：两只小鼠淡出，向下箭头，写 fewer animal tests",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "6-09.w017"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "w_box",
+   "obj": "w_box",
+   "verb": "appear",
+   "at": {
+    "word": "6-09.w018",
+    "off": 0
+   },
+   "means": "less：第四个框画出",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "6-09.w018"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "w_x",
+   "obj": "w_x",
+   "verb": "grow",
+   "at": {
+    "word": "6-09.w019",
+    "off": 0
+   },
+   "means": "chemical：三个废料桶",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-09.w019"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "w_d",
+   "obj": "w_d",
+   "verb": "morph",
+   "at": {
+    "word": "6-09.w020",
+    "off": 0
+   },
+   "means": "waste：两个桶淡出，向下箭头，写 less chemical waste",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "srv",
+   "obj": "srv",
+   "verb": "grow",
+   "at": {
+    "word": "6-09.w021",
+    "off": 0
+   },
+   "means": "Computing：路边机柜长出（SOFT），写 computing",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "6-09.w021"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "tower"
+    ]
+   }
+  },
+  {
+   "id": "cost2",
+   "obj": "cost2",
+   "verb": "appear",
+   "at": {
+    "word": "6-09.w022",
+    "off": 0
+   },
+   "means": "costs：写 costs electricity too",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "6-09.w022"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "plug",
+   "obj": "plug",
+   "verb": "grow",
+   "at": {
+    "word": "6-09.w023",
+    "off": 0
+   },
+   "means": "electricity：插头和电线画出，电线一跳一跳",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "6-09.w023"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "too",
+   "obj": "too",
+   "verb": "snap",
+   "at": {
+    "word": "6-09.w024",
+    "off": 0
+   },
+   "means": "too：闪电符号亮一下，电线持续跳动",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "prize",
+   "obj": "prize",
+   "verb": "appear",
+   "at": {
+    "word": "6-09.w028",
+    "off": 0
+   },
+   "means": "the real prize：路尽头红色虚线圈和问号",
+   "tool": "remotion",
+   "lead": 22,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "hosp",
+   "obj": "hosp",
+   "verb": "morph",
+   "at": {
+    "word": "6-09.w029",
+    "off": 0
+   },
+   "means": "New：问号变成 hospital",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "6-09.w029"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "treat",
+   "obj": "treat",
+   "verb": "appear",
+   "at": {
+    "word": "6-09.w030",
+    "off": 0
+   },
+   "means": "treatments：写 new treatments",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "6-09.w031"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "pat",
+   "obj": "pat",
+   "verb": "grow",
+   "at": {
+    "word": "6-09.w032",
+    "off": 0
+   },
+   "means": "patients：两个病人长出，写 for patients，红圈变实，路中线变红通到尽头",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "person_w"
+    ]
+   }
+  }
+ ]
+}

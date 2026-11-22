@@ -1,0 +1,444 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "8-02",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 8-02（VO）：总结目标 1。七站路线（照 2-08）回来，find / assess 两段标出；路起点上方四个格子依次填进四个工具的小动图（从数据挑靶点、预测锁的形状、设计新钥匙、排出该做哪些）；最后 Our objectives 便签落下，1 打勾，写 for this case。页面 Manual802.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "q",
+   "obj": "q",
+   "verb": "appear",
+   "at": {
+    "word": "8-02.w003",
+    "off": 0
+   },
+   "means": "computer-aided：问题第一行",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "8-02.w004"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "q2",
+   "obj": "q2",
+   "verb": "appear",
+   "at": {
+    "word": "8-02.w004",
+    "off": 0
+   },
+   "means": "methods：问题第二行",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "8-02.w005"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "help",
+   "obj": "help",
+   "verb": "appear",
+   "at": {
+    "word": "8-02.w005",
+    "off": 0
+   },
+   "means": "help：help 下划线",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "8-02.w006"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "road",
+   "obj": "road",
+   "verb": "grow",
+   "at": {
+    "word": "8-02.w006",
+    "off": 0
+   },
+   "means": "scientists：七站路画出",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "word": "8-02.w007"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "find",
+   "obj": "find",
+   "verb": "appear",
+   "at": {
+    "word": "8-02.w007",
+    "off": 0
+   },
+   "means": "find：前两站括号",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "8-02.w009"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "assess",
+   "obj": "assess",
+   "verb": "appear",
+   "at": {
+    "word": "8-02.w009",
+    "off": 0
+   },
+   "means": "assess：中间两站括号",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "8-02.w012"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "cand",
+   "obj": "cand",
+   "verb": "grow",
+   "at": {
+    "word": "8-02.w012",
+    "off": 0
+   },
+   "means": "candidates：起点三把小钥匙",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "key"
+    ]
+   }
+  },
+  {
+   "id": "case",
+   "obj": "case",
+   "verb": "appear",
+   "at": {
+    "word": "8-02.w015",
+    "off": 0
+   },
+   "means": "this case：标签",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "8-02.w017"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "four",
+   "obj": "four",
+   "verb": "grow",
+   "at": {
+    "word": "8-02.w017",
+    "off": 0
+   },
+   "means": "four：四个空格子",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "8-02.w018"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "points",
+   "obj": "points",
+   "verb": "appear",
+   "at": {
+    "word": "8-02.w018",
+    "off": 0
+   },
+   "means": "points：格子编号",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "pick",
+   "obj": "pick",
+   "verb": "grow",
+   "at": {
+    "word": "8-02.w019",
+    "off": 0
+   },
+   "means": "Picking：格 1 漏斗",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "8-02.w021"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "target",
+   "obj": "target",
+   "verb": "morph",
+   "at": {
+    "word": "8-02.w021",
+    "off": 0
+   },
+   "means": "target：漏斗下落出 CDK20",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "8-02.w023"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "data",
+   "obj": "data",
+   "verb": "move",
+   "at": {
+    "word": "8-02.w023",
+    "off": 0
+   },
+   "means": "data：数据卡片落进漏斗",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "pred",
+   "obj": "pred",
+   "verb": "grow",
+   "at": {
+    "word": "8-02.w024",
+    "off": 0
+   },
+   "means": "Predicting：格 2 珠子串",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "8-02.w026"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "shape",
+   "obj": "shape",
+   "verb": "morph",
+   "at": {
+    "word": "8-02.w027",
+    "off": 0
+   },
+   "means": "shape：珠子折起来",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "design",
+   "obj": "design",
+   "verb": "grow",
+   "at": {
+    "word": "8-02.w028",
+    "off": 0
+   },
+   "means": "Designing：格 3 循环",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "8-02.w029"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "keys",
+   "obj": "keys",
+   "verb": "appear",
+   "at": {
+    "word": "8-02.w030",
+    "off": 0
+   },
+   "means": "keys：小钥匙冒出",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "rank",
+   "obj": "rank",
+   "verb": "grow",
+   "at": {
+    "word": "8-02.w032",
+    "off": 0
+   },
+   "means": "ranking：格 4 长条",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "8-02.w034"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "make",
+   "obj": "make",
+   "verb": "morph",
+   "at": {
+    "word": "8-02.w036",
+    "off": 0
+   },
+   "means": "make：长条排序，前两条打勾",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "obj",
+   "obj": "obj",
+   "verb": "grow",
+   "at": {
+    "word": "8-02.w038",
+    "off": 0
+   },
+   "means": "our：便签落下",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "8-02.w039"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "first",
+   "obj": "first",
+   "verb": "appear",
+   "at": {
+    "word": "8-02.w039",
+    "off": 0
+   },
+   "means": "first：圈号 1",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "8-02.w040"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "objtxt",
+   "obj": "objtxt",
+   "verb": "appear",
+   "at": {
+    "word": "8-02.w040",
+    "off": 0
+   },
+   "means": "objective：第 1 条文字",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "8-02.w041"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "met",
+   "obj": "met",
+   "verb": "snap",
+   "at": {
+    "word": "8-02.w041",
+    "off": 0
+   },
+   "means": "met：红勾",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "8-02.w042"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "thiscase",
+   "obj": "thiscase",
+   "verb": "appear",
+   "at": {
+    "word": "8-02.w044",
+    "off": 0
+   },
+   "means": "this case：红批注 for this case",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  }
+ ]
+}

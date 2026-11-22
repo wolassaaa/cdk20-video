@@ -8,7 +8,7 @@ import React from "react";
 import {Composition, registerRoot, useCurrentFrame} from "remotion";
 import K from "./keys_5-01.json";
 import {Lens, Layer, guidePlan} from "../manual/kit.jsx";
-import {C, camBreath, Stage, Sprite, Slab, Gate, Runner, Label, Pen, Source, anchorOf, pathOf, evMapB, T5In, T5Out, T6Sweep, impact} from "./bkit.jsx";
+import {C, Engrave, camBreath, Stage, Sprite, Slab, Gate, Runner, Label, Pen, Source, anchorOf, pathOf, evMapB, T5In, T5Out, T6Sweep, impact} from "./bkit.jsx";
 import {useGsapTimeline, idle, RULE} from "./gsapFrame.jsx";
 
 const E = evMapB(K);
@@ -60,7 +60,7 @@ const Scene = () => {
     X.jiggle("muchJ", E.much.l - 4, 6, 0);
     X.tw("bub", 0, 1, E.much.s, E.much.e, "power1.inOut");
     FILL.forEach((g, k) => {
-      const land = E.half.l - (FILL.length - 1 - k) * 16;
+      const land = E.half.l - (FILL.length - 1 - k) * 30;   // 第一个从 much 句尾起飞（Gemini 初审：molecule 后停 2 秒）
       X.tw(`fly${k}`, 0, 1, land - 46, land, "power2.inOut");
       X.jiggle(`mj${g}`, land, 3, 1);
     });
@@ -78,7 +78,9 @@ const Scene = () => {
 
   // 001：料杆上 → 掰下来飞到插座口前
   const tp = TRY.at(S.try);
-  const p0 = S.try > 0 ? {x: tp[0] + 1400 * S.clear, y: tp[1] + S.tryJ, w: mix(PW, PW_NEAR, S.try)} : null;
+  // 停在插座口前犹豫：一进一退（问句说完到下一句之间画面不停）
+  const hes = f > E.try.l ? 9 * Math.sin((2 * Math.PI * (f - E.try.l)) / 46) * Math.min(1, (f - E.try.l) / 20) : 0;
+  const p0 = S.try > 0 ? {x: tp[0] + hes + 1400 * S.clear, y: tp[1] + S.tryJ + hes * 0.45, w: mix(PW, PW_NEAR, S.try)} : null;
 
   return (
     <Lens plan={GP} f={f}>
@@ -152,6 +154,11 @@ const Scene = () => {
           {S.kd > 0.01 && (
             <div style={{position: "absolute", left: 0, top: 0, opacity: S.kd, transform: `translateY(${(1 - S.kd) * 20}px)`}}>
               <Slab x={KD.x} y={KD.y} w={44} h={KD.h} r={14} color={C.bone} depth={8} id="kdbar" />
+              <svg width={1920} height={1080} style={{position: "absolute", left: 0, top: 0, overflow: "visible"}}>
+                {[0, 1, 2, 3, 4].map((k) => <line key={k} x1={KD.x + 50} y1={KD.y + 30 + k * (KD.h - 60) / 4} x2={KD.x + (k % 2 ? 66 : 76)} y2={KD.y + 30 + k * (KD.h - 60) / 4} stroke={C.ink} strokeWidth={3} strokeLinecap="round" />)}
+              </svg>
+              <div style={{position: "absolute", left: KD.x + 88, top: KD.y + 8}}><Engrave size={40}>high Kd</Engrave></div>
+              <div style={{position: "absolute", left: KD.x + 88, top: KD.y + KD.h - 52}}><Engrave size={40}>low Kd</Engrave></div>
               <Slab x={KD.x - 8} y={KD.y + 40 + (KD.h - 110) * S.kdm} w={60} h={26} r={9} color={C.blue} depth={6} sheen={S.kdm > 0 && S.kdm < 1 ? S.kdm : -1} id="kdmark" />
             </div>
           )}
@@ -164,7 +171,7 @@ const Scene = () => {
           <Label text="Kd" size={110} x={KD.x - 40} y={KD.y + 20} at={E.kd.l} align="right" />
           <Pen text="half" x={1010} y={782} at={E.half.l} size={76} />
           <Pen text="lower = tighter" x={150} y={800} at={E.tight.l - 10} size={64} />
-          <Source>Illustration · Ren et al., Chem. Sci. 2023</Source>
+          <Source>Illustration · data: Ren et al., Chem. Sci. 2023</Source>
         </Layer>
       </Stage>
     </Lens>

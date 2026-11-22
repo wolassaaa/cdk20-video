@@ -1,0 +1,799 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "1-08",
+ "segs": [
+  "1-08"
+ ],
+ "tool": "remotion",
+ "fps": 60,
+ "len_f": 930,
+ "cut": "cut_v8",
+ "cut_start_f": 3688,
+ "cut_start_s": 61.47,
+ "master_built": "2026-11-18 02:33:56 +09:00",
+ "words_hash": "f7ee2e7edf2e",
+ "events_src": "镜头设计_v3/映射/events/1-08.json",
+ "words": [
+  {
+   "wid": "1-08.w001",
+   "w": "Start",
+   "key": "start#1",
+   "sid": "1-08.s1",
+   "f0": 9,
+   "f1": 33,
+   "F0": 3697,
+   "F1": 3721
+  },
+  {
+   "wid": "1-08.w002",
+   "w": "the",
+   "key": "the#1",
+   "sid": "1-08.s1",
+   "f0": 38,
+   "f1": 42,
+   "F0": 3726,
+   "F1": 3730
+  },
+  {
+   "wid": "1-08.w003",
+   "w": "search",
+   "key": "search#1",
+   "sid": "1-08.s1",
+   "f0": 48,
+   "f1": 66,
+   "F0": 3736,
+   "F1": 3754
+  },
+  {
+   "wid": "1-08.w004",
+   "w": "the",
+   "key": "the#2",
+   "sid": "1-08.s1",
+   "f0": 70,
+   "f1": 75,
+   "F0": 3758,
+   "F1": 3763
+  },
+  {
+   "wid": "1-08.w005",
+   "w": "year",
+   "key": "year#1",
+   "sid": "1-08.s1",
+   "f0": 80,
+   "f1": 93,
+   "F0": 3768,
+   "F1": 3781
+  },
+  {
+   "wid": "1-08.w006",
+   "w": "we",
+   "key": "we#1",
+   "sid": "1-08.s1",
+   "f0": 109,
+   "f1": 113,
+   "F0": 3797,
+   "F1": 3801
+  },
+  {
+   "wid": "1-08.w007",
+   "w": "were",
+   "key": "were#1",
+   "sid": "1-08.s1",
+   "f0": 118,
+   "f1": 131,
+   "F0": 3806,
+   "F1": 3819
+  },
+  {
+   "wid": "1-08.w008",
+   "w": "born,",
+   "key": "born#1",
+   "sid": "1-08.s1",
+   "f0": 133,
+   "f1": 151,
+   "F0": 3821,
+   "F1": 3839
+  },
+  {
+   "wid": "1-08.w009",
+   "w": "and",
+   "key": "and#1",
+   "sid": "1-08.s1",
+   "f0": 171,
+   "f1": 184,
+   "F0": 3859,
+   "F1": 3872
+  },
+  {
+   "wid": "1-08.w010",
+   "w": "it",
+   "key": "it#1",
+   "sid": "1-08.s1",
+   "f0": 197,
+   "f1": 206,
+   "F0": 3885,
+   "F1": 3894
+  },
+  {
+   "wid": "1-08.w011",
+   "w": "might",
+   "key": "might#1",
+   "sid": "1-08.s1",
+   "f0": 212,
+   "f1": 226,
+   "F0": 3900,
+   "F1": 3914
+  },
+  {
+   "wid": "1-08.w012",
+   "w": "only",
+   "key": "only#1",
+   "sid": "1-08.s1",
+   "f0": 234,
+   "f1": 244,
+   "F0": 3922,
+   "F1": 3932
+  },
+  {
+   "wid": "1-08.w013",
+   "w": "be",
+   "key": "be#1",
+   "sid": "1-08.s1",
+   "f0": 249,
+   "f1": 253,
+   "F0": 3937,
+   "F1": 3941
+  },
+  {
+   "wid": "1-08.w014",
+   "w": "ready",
+   "key": "ready#1",
+   "sid": "1-08.s1",
+   "f0": 261,
+   "f1": 273,
+   "F0": 3949,
+   "F1": 3961
+  },
+  {
+   "wid": "1-08.w015",
+   "w": "now.",
+   "key": "now#1",
+   "sid": "1-08.s1",
+   "f0": 279,
+   "f1": 292,
+   "F0": 3967,
+   "F1": 3980
+  },
+  {
+   "wid": "1-08.w016",
+   "w": "It",
+   "key": "it#2",
+   "sid": "1-08.s2",
+   "f0": 330,
+   "f1": 333,
+   "F0": 4018,
+   "F1": 4021
+  },
+  {
+   "wid": "1-08.w017",
+   "w": "can",
+   "key": "can#1",
+   "sid": "1-08.s2",
+   "f0": 336,
+   "f1": 345,
+   "F0": 4024,
+   "F1": 4033
+  },
+  {
+   "wid": "1-08.w018",
+   "w": "cost",
+   "key": "cost#1",
+   "sid": "1-08.s2",
+   "f0": 350,
+   "f1": 372,
+   "F0": 4038,
+   "F1": 4060
+  },
+  {
+   "wid": "1-08.w019",
+   "w": "almost",
+   "key": "almost#1",
+   "sid": "1-08.s2",
+   "f0": 389,
+   "f1": 412,
+   "F0": 4077,
+   "F1": 4100
+  },
+  {
+   "wid": "1-08.w020",
+   "w": "2.8",
+   "key": "2.8#1",
+   "sid": "1-08.s2",
+   "f0": 417,
+   "f1": 458,
+   "F0": 4105,
+   "F1": 4146
+  },
+  {
+   "wid": "1-08.w021",
+   "w": "billion",
+   "key": "billion#1",
+   "sid": "1-08.s2",
+   "f0": 462,
+   "f1": 487,
+   "F0": 4150,
+   "F1": 4175
+  },
+  {
+   "wid": "1-08.w022",
+   "w": "US",
+   "key": "us#1",
+   "sid": "1-08.s2",
+   "f0": 499,
+   "f1": 513,
+   "F0": 4187,
+   "F1": 4201
+  },
+  {
+   "wid": "1-08.w023",
+   "w": "dollars.",
+   "key": "dollars#1",
+   "sid": "1-08.s2",
+   "f0": 516,
+   "f1": 541,
+   "F0": 4204,
+   "F1": 4229
+  },
+  {
+   "wid": "1-08.w024",
+   "w": "And",
+   "key": "and#2",
+   "sid": "1-08.s3",
+   "f0": 577,
+   "f1": 590,
+   "F0": 4265,
+   "F1": 4278
+  },
+  {
+   "wid": "1-08.w025",
+   "w": "of",
+   "key": "of#1",
+   "sid": "1-08.s3",
+   "f0": 598,
+   "f1": 605,
+   "F0": 4286,
+   "F1": 4293
+  },
+  {
+   "wid": "1-08.w026",
+   "w": "drugs",
+   "key": "drugs#1",
+   "sid": "1-08.s3",
+   "f0": 610,
+   "f1": 628,
+   "F0": 4298,
+   "F1": 4316
+  },
+  {
+   "wid": "1-08.w027",
+   "w": "tested",
+   "key": "tested#1",
+   "sid": "1-08.s3",
+   "f0": 632,
+   "f1": 655,
+   "F0": 4320,
+   "F1": 4343
+  },
+  {
+   "wid": "1-08.w028",
+   "w": "in",
+   "key": "in#1",
+   "sid": "1-08.s3",
+   "f0": 661,
+   "f1": 666,
+   "F0": 4349,
+   "F1": 4354
+  },
+  {
+   "wid": "1-08.w029",
+   "w": "people,",
+   "key": "people#1",
+   "sid": "1-08.s3",
+   "f0": 670,
+   "f1": 692,
+   "F0": 4358,
+   "F1": 4380
+  },
+  {
+   "wid": "1-08.w030",
+   "w": "only",
+   "key": "only#2",
+   "sid": "1-08.s3",
+   "f0": 726,
+   "f1": 738,
+   "F0": 4414,
+   "F1": 4426
+  },
+  {
+   "wid": "1-08.w031",
+   "w": "about",
+   "key": "about#1",
+   "sid": "1-08.s3",
+   "f0": 743,
+   "f1": 762,
+   "F0": 4431,
+   "F1": 4450
+  },
+  {
+   "wid": "1-08.w032",
+   "w": "one",
+   "key": "one#1",
+   "sid": "1-08.s3",
+   "f0": 775,
+   "f1": 785,
+   "F0": 4463,
+   "F1": 4473
+  },
+  {
+   "wid": "1-08.w033",
+   "w": "in",
+   "key": "in#2",
+   "sid": "1-08.s3",
+   "f0": 791,
+   "f1": 796,
+   "F0": 4479,
+   "F1": 4484
+  },
+  {
+   "wid": "1-08.w034",
+   "w": "ten",
+   "key": "ten#1",
+   "sid": "1-08.s3",
+   "f0": 799,
+   "f1": 813,
+   "F0": 4487,
+   "F1": 4501
+  },
+  {
+   "wid": "1-08.w035",
+   "w": "reaches",
+   "key": "reaches#1",
+   "sid": "1-08.s3",
+   "f0": 828,
+   "f1": 851,
+   "F0": 4516,
+   "F1": 4539
+  },
+  {
+   "wid": "1-08.w036",
+   "w": "the",
+   "key": "the#3",
+   "sid": "1-08.s3",
+   "f0": 853,
+   "f1": 882,
+   "F0": 4541,
+   "F1": 4570
+  },
+  {
+   "wid": "1-08.w037",
+   "w": "market.",
+   "key": "market#1",
+   "sid": "1-08.s3",
+   "f0": 886,
+   "f1": 915,
+   "F0": 4574,
+   "F1": 4603
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "1-08.s1",
+   "text": "Start the search the year we were born, and it might only be ready now.",
+   "w_first": "1-08.w001",
+   "w_last": "1-08.w015",
+   "f0": 9,
+   "f1": 292
+  },
+  {
+   "sid": "1-08.s2",
+   "text": "It can cost almost 2.8 billion US dollars.",
+   "w_first": "1-08.w016",
+   "w_last": "1-08.w023",
+   "f0": 330,
+   "f1": 541
+  },
+  {
+   "sid": "1-08.s3",
+   "text": "And of drugs tested in people, only about one in ten reaches the market.",
+   "w_first": "1-08.w024",
+   "w_last": "1-08.w037",
+   "f0": 577,
+   "f1": 915
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "road",
+   "obj": "road",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "Start the search：长路从左往右铺开，胶囊在起点",
+   "f_start": 0,
+   "f_land": 9,
+   "f_end": 66,
+   "until": "1-08.w003",
+   "word": "1-08.w001",
+   "w": "Start",
+   "key": "start#1",
+   "sid": "1-08.s1",
+   "word_f0": 9,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "road"
+    ]
+   },
+   "F_start": 3688,
+   "F_land": 3697,
+   "F_end": 3754
+  },
+  {
+   "id": "year",
+   "obj": "year",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "the year：路起点立一块日历",
+   "f_start": 73,
+   "f_land": 80,
+   "f_end": 93,
+   "until": "1-08.w005",
+   "word": "1-08.w005",
+   "w": "year",
+   "key": "year#1",
+   "sid": "1-08.s1",
+   "word_f0": 80,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 3761,
+   "F_land": 3768,
+   "F_end": 3781
+  },
+  {
+   "id": "born",
+   "obj": "born",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "we were born：小人站在起点，标 born",
+   "f_start": 126,
+   "f_land": 133,
+   "f_end": 151,
+   "until": "1-08.w008",
+   "word": "1-08.w008",
+   "w": "born,",
+   "key": "born#1",
+   "sid": "1-08.s1",
+   "word_f0": 133,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 3814,
+   "F_land": 3821,
+   "F_end": 3839
+  },
+  {
+   "id": "walk",
+   "obj": "walk",
+   "verb": "move",
+   "ease": "inout",
+   "means": "it might only be ready：胶囊沿路走",
+   "f_start": 206,
+   "f_land": 212,
+   "f_end": 292,
+   "until": "1-08.w015",
+   "word": "1-08.w011",
+   "w": "might",
+   "key": "might#1",
+   "sid": "1-08.s1",
+   "word_f0": 212,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 3894,
+   "F_land": 3900,
+   "F_end": 3980
+  },
+  {
+   "id": "now",
+   "obj": "now",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "now：走到头，标 now",
+   "f_start": 269,
+   "f_land": 279,
+   "f_end": 292,
+   "until": "1-08.s1",
+   "word": "1-08.w015",
+   "w": "now.",
+   "key": "now#1",
+   "sid": "1-08.s1",
+   "word_f0": 279,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 3957,
+   "F_land": 3967,
+   "F_end": 3980
+  },
+  {
+   "id": "cost",
+   "obj": "cost",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "It can cost：清场，钞票开始落",
+   "f_start": 343,
+   "f_land": 350,
+   "f_end": 412,
+   "until": "1-08.w019",
+   "word": "1-08.w018",
+   "w": "cost",
+   "key": "cost#1",
+   "sid": "1-08.s2",
+   "word_f0": 350,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "bills"
+    ]
+   },
+   "F_start": 4031,
+   "F_land": 4038,
+   "F_end": 4100,
+   "g_start": 324,
+   "g_on": 342,
+   "g_end": 412,
+   "g_off": 442,
+   "g_tick": 346,
+   "G_start": 4012,
+   "G_on": 4030,
+   "G_end": 4100,
+   "G_off": 4130,
+   "G_tick": 4034
+  },
+  {
+   "id": "n28",
+   "obj": "n28",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "2.8：数字轮",
+   "f_start": 381,
+   "f_land": 417,
+   "f_end": 458,
+   "until": "1-08.w020",
+   "word": "1-08.w020",
+   "w": "2.8",
+   "key": "2.8#1",
+   "sid": "1-08.s2",
+   "word_f0": 417,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 4069,
+   "F_land": 4105,
+   "F_end": 4146
+  },
+  {
+   "id": "bil",
+   "obj": "bil",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "billion US dollars：标签",
+   "f_start": 452,
+   "f_land": 462,
+   "f_end": 541,
+   "until": "1-08.s2",
+   "word": "1-08.w021",
+   "w": "billion",
+   "key": "billion#1",
+   "sid": "1-08.s2",
+   "word_f0": 462,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 4140,
+   "F_land": 4150,
+   "F_end": 4229
+  },
+  {
+   "id": "drugs",
+   "obj": "drugs",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "of drugs：清场，十粒胶囊排上路",
+   "f_start": 603,
+   "f_land": 610,
+   "f_end": 655,
+   "until": "1-08.w027",
+   "word": "1-08.w026",
+   "w": "drugs",
+   "key": "drugs#1",
+   "sid": "1-08.s3",
+   "word_f0": 610,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "caps"
+    ]
+   },
+   "F_start": 4291,
+   "F_land": 4298,
+   "F_end": 4343,
+   "g_start": 584,
+   "g_on": 602,
+   "g_end": 655,
+   "g_off": 685,
+   "g_tick": 606,
+   "G_start": 4272,
+   "G_on": 4290,
+   "G_end": 4343,
+   "G_off": 4373,
+   "G_tick": 4294
+  },
+  {
+   "id": "people",
+   "obj": "people",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "tested in people：路边小人",
+   "f_start": 663,
+   "f_land": 670,
+   "f_end": 692,
+   "until": "1-08.w029",
+   "word": "1-08.w029",
+   "w": "people,",
+   "key": "people#1",
+   "sid": "1-08.s3",
+   "word_f0": 670,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 4351,
+   "F_land": 4358,
+   "F_end": 4380
+  },
+  {
+   "id": "one",
+   "obj": "one",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "one：一粒亮",
+   "f_start": 765,
+   "f_land": 775,
+   "f_end": 785,
+   "until": "1-08.w032",
+   "word": "1-08.w032",
+   "w": "one",
+   "key": "one#1",
+   "sid": "1-08.s3",
+   "word_f0": 775,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 4453,
+   "F_land": 4463,
+   "F_end": 4473
+  },
+  {
+   "id": "drop",
+   "obj": "drop",
+   "verb": "move",
+   "ease": "inout",
+   "means": "in ten：九粒掉下去",
+   "f_start": 786,
+   "f_land": 799,
+   "f_end": 851,
+   "until": "1-08.w035",
+   "word": "1-08.w034",
+   "w": "ten",
+   "key": "ten#1",
+   "sid": "1-08.s3",
+   "word_f0": 799,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 4474,
+   "F_land": 4487,
+   "F_end": 4539
+  },
+  {
+   "id": "market",
+   "obj": "market",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "reaches the market：那一粒走到奖章",
+   "f_start": 856,
+   "f_land": 886,
+   "f_end": 915,
+   "until": "1-08.s3",
+   "word": "1-08.w037",
+   "w": "market.",
+   "key": "market#1",
+   "sid": "1-08.s3",
+   "word_f0": 886,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 4544,
+   "F_land": 4574,
+   "F_end": 4603
+  }
+ ],
+ "guides": [
+  {
+   "id": "cost",
+   "target": [
+    "bills"
+   ],
+   "kind": "focus",
+   "gs": 324,
+   "gon": 342,
+   "land": 350,
+   "gend": 412,
+   "goff": 442,
+   "tick": 346,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 343,
+   "events": [
+    "cost"
+   ],
+   "G_start": 4012,
+   "G_on": 4030,
+   "G_land": 4038,
+   "G_end": 4100,
+   "G_off": 4130,
+   "G_tick": 4034
+  },
+  {
+   "id": "drugs",
+   "target": [
+    "caps"
+   ],
+   "kind": "focus",
+   "gs": 584,
+   "gon": 602,
+   "land": 610,
+   "gend": 655,
+   "goff": 685,
+   "tick": 606,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 603,
+   "events": [
+    "drugs"
+   ],
+   "G_start": 4272,
+   "G_on": 4290,
+   "G_land": 4298,
+   "G_end": 4343,
+   "G_off": 4373,
+   "G_tick": 4294
+  }
+ ],
+ "problems": []
+}

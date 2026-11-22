@@ -2,103 +2,53 @@
  "schema": "cdk20.events/1",
  "group": "4-09",
  "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 4-09（VO）：团队把锁口袋的形状和一条规则（must grip the hinge）交给芯片 Chemistry42；芯片吐出一串钥匙（designs）沿传送线过三道筛子：reactive or possibly toxic 的打叉掉进 toss 槽，其余到右下排成一列，按 drug-like 和 easy to make 打分、逐个打勾。只画示意，不画分子结构。页面 Manual409.jsx。",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 4-09（btier/B409.jsx）。Chemistry42 芯片拿到口袋的形状（插座正面），one rule：插头要卡住插孔边上的 hinge（铰点亮，手写 hinge）；filters：筛子，插头往下落；reactive / toxic 的被甩出去；score：两块表盘 drug-like、easy to make 指针摆到高处。",
+ "tier": "B",
+ "zone": 4,
+ "trans_in": "T5 runner（上一段 4-08 是出镜段）",
+ "trans_out": "T5 chip（下一段 W3 是 A 段芯片）",
  "holds": [],
  "events": [
   {
-   "id": "title",
-   "obj": "title",
+   "id": "chip",
+   "obj": "chip",
    "verb": "appear",
    "at": {
-    "word": "4-09.w002",
+    "word": "gave#1",
     "off": 0
    },
-   "means": "team：标题，小人长出",
+   "lead": 7,
+   "means": "The team gave it：Chemistry42 芯片落位",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "gave",
-   "obj": "gave",
-   "verb": "grow",
-   "at": {
-    "word": "4-09.w003",
-    "off": 0
-   },
-   "means": "gave it：芯片长出，盖牌 Chemistry42",
-   "tool": "remotion",
-   "lead": 16,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "focus",
     "target": [
      "chip"
     ]
+   },
+   "until": {
+    "word": "it#1"
    }
   },
   {
    "id": "pocket",
    "obj": "pocket",
-   "verb": "grow",
+   "verb": "appear",
    "at": {
-    "word": "4-09.w006",
+    "word": "shape#1",
     "off": 0
    },
-   "means": "pocket's：锁长出",
+   "lead": 7,
+   "means": "the pocket's shape：插座正面落位",
    "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "focus",
     "target": [
-     "lock"
+     "socket"
     ]
-   }
-  },
-  {
-   "id": "shape",
-   "obj": "shape",
-   "verb": "appear",
-   "at": {
-    "word": "4-09.w007",
-    "off": 0
    },
-   "means": "shape：锁外描一圈虚线，写 the pocket's shape",
-   "tool": "remotion",
-   "lead": 12,
    "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "one",
-   "obj": "one",
-   "verb": "move",
-   "at": {
-    "word": "4-09.w009",
-    "off": 0
-   },
-   "means": "one：虚线外形复制一份飞进芯片",
-   "tool": "remotion",
-   "lead": 24,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
+    "word": "shape#1"
    }
   },
   {
@@ -106,74 +56,53 @@
    "obj": "rule",
    "verb": "appear",
    "at": {
-    "word": "4-09.w010",
+    "word": "rule#1",
     "off": 0
    },
-   "means": "rule：规则卡片画出，写 one rule",
-   "tool": "remotion",
    "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
+   "means": "one rule：标 one rule",
+   "tool": "remotion",
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "rule#1"
    }
   },
   {
    "id": "key",
    "obj": "key",
-   "verb": "grow",
+   "verb": "move",
    "at": {
-    "word": "4-09.w012",
+    "word": "key#1",
     "off": 0
    },
-   "means": "key：锁左边长出一把钥匙",
+   "lead": 30,
+   "means": "every key：插头飞到插孔前",
    "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
-    "kind": "focus",
-    "target": [
-     "key"
-    ]
+    "kind": "none"
+   },
+   "until": {
+    "word": "must#1"
    }
   },
   {
    "id": "grip",
    "obj": "grip",
-   "verb": "move",
+   "verb": "snap",
    "at": {
-    "word": "4-09.w014",
+    "word": "grip#1",
     "off": 0
    },
-   "means": "grip：钥匙插进锁",
+   "lead": 13,
+   "means": "must grip a spot：插头卡住一边",
    "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "spot",
-   "obj": "spot",
-   "verb": "appear",
-   "at": {
-    "word": "4-09.w016",
-    "off": 0
    },
-   "means": "spot：钥匙尖旁红点，引线",
-   "tool": "remotion",
-   "lead": 8,
    "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
+    "word": "spot#1"
    }
   },
   {
@@ -181,53 +110,38 @@
    "obj": "hinge",
    "verb": "appear",
    "at": {
-    "word": "4-09.w019",
+    "word": "hinge#1",
     "off": 0
    },
-   "means": "hinge：写 hinge，卡片写 must grip the hinge，卡片到芯片虚线箭头",
+   "lead": 6,
+   "means": "called the hinge：铰点亮，手写 hinge",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
-   "id": "filters",
-   "obj": "filters",
-   "verb": "grow",
+   "id": "filt",
+   "obj": "filt",
+   "verb": "appear",
    "at": {
-    "word": "4-09.w021",
+    "word": "filters#1",
     "off": 0
    },
-   "means": "filters：右边三道筛子画出，写 filters，芯片出口传送线",
+   "lead": 7,
+   "means": "Its filters：清场，筛子落位",
    "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "built",
-   "obj": "built",
-   "verb": "move",
-   "at": {
-    "word": "4-09.w023",
-    "off": 0
+    "kind": "focus",
+    "target": [
+     "sieve"
+    ]
    },
-   "means": "built：芯片开始吐钥匙，沿线往右走",
-   "tool": "remotion",
-   "lead": 10,
    "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
+    "word": "built#1"
    }
   },
   {
@@ -235,107 +149,53 @@
    "obj": "toss",
    "verb": "move",
    "at": {
-    "word": "4-09.w025",
+    "word": "toss#1",
     "off": 0
    },
-   "means": "toss：第一把钥匙在第一道筛子打叉，掉进 toss 槽",
+   "lead": 13,
+   "means": "to toss：插头往下落",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "designs#1"
    }
   },
   {
-   "id": "designs",
-   "obj": "designs",
-   "verb": "appear",
+   "id": "react",
+   "obj": "react",
+   "verb": "eject",
    "at": {
-    "word": "4-09.w026",
+    "word": "reactive#1",
     "off": 0
    },
-   "means": "designs：钥匙流下写 designs",
+   "lead": 13,
+   "means": "reactive：一个被甩出去",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "reactive",
-   "obj": "reactive",
-   "verb": "appear",
-   "at": {
-    "word": "4-09.w028",
-    "off": 0
    },
-   "means": "reactive：第一道筛子上写 reactive or",
-   "tool": "remotion",
-   "lead": 10,
    "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "possibly",
-   "obj": "possibly",
-   "verb": "move",
-   "at": {
-    "word": "4-09.w030",
-    "off": 0
-   },
-   "means": "possibly：又一把钥匙打叉掉进槽",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
+    "word": "reactive#1"
    }
   },
   {
    "id": "toxic",
    "obj": "toxic",
-   "verb": "appear",
+   "verb": "eject",
    "at": {
-    "word": "4-09.w031",
+    "word": "toxic#1",
     "off": 0
    },
-   "means": "toxic：写 possibly toxic",
+   "lead": 13,
+   "means": "possibly toxic groups：又一个被甩出去",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "groups",
-   "obj": "groups",
-   "verb": "morph",
-   "at": {
-    "word": "4-09.w032",
-    "off": 0
    },
-   "means": "groups：toss 槽一颤，写 toss",
-   "tool": "remotion",
-   "lead": 8,
    "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
+    "word": "groups#1"
    }
   },
   {
@@ -343,71 +203,56 @@
    "obj": "score",
    "verb": "appear",
    "at": {
-    "word": "4-09.w035",
+    "word": "score#1",
     "off": 0
    },
-   "means": "score：右下一列钥匙旁画分数条框，写 score",
+   "lead": 7,
+   "means": "to score：两块表盘",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "dials"
+    ]
+   },
+   "until": {
+    "word": "how#1"
    }
   },
   {
    "id": "drug",
    "obj": "drug",
-   "verb": "morph",
+   "verb": "move",
    "at": {
-    "word": "4-09.w037",
+    "word": "drug-like#1",
     "off": 0
    },
-   "means": "drug-like：第二道筛子写 drug-like?，分数条涨第一段",
+   "lead": 13,
+   "means": "how drug-like：左表指针摆高",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "drug-like#1"
    }
   },
   {
    "id": "easy",
    "obj": "easy",
-   "verb": "morph",
+   "verb": "move",
    "at": {
-    "word": "4-09.w039",
+    "word": "easy#1",
     "off": 0
    },
-   "means": "easy：第三道筛子写 easy to make?，分数条涨第二段",
+   "lead": 13,
+   "means": "easy to make：右表指针摆高",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "each",
-   "obj": "each",
-   "verb": "appear",
-   "at": {
-    "word": "4-09.w042",
-    "off": 0
    },
-   "means": "each：每行逐个打勾",
-   "tool": "remotion",
-   "lead": 10,
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
    }
   }
  ]

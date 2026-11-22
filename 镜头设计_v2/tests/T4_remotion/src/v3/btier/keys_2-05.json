@@ -1,0 +1,592 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "2-05",
+ "segs": [
+  "2-05"
+ ],
+ "tool": "remotion",
+ "fps": 60,
+ "len_f": 836,
+ "cut": "cut_v8",
+ "cut_start_f": 11226,
+ "cut_start_s": 187.1,
+ "master_built": "2026-11-18 02:33:56 +09:00",
+ "words_hash": "fb9c0df7254c",
+ "events_src": "镜头设计_v3/映射/events/2-05.json",
+ "words": [
+  {
+   "wid": "2-05.w001",
+   "w": "One:",
+   "key": "one#1",
+   "sid": "2-05.s1",
+   "f0": 9,
+   "f1": 22,
+   "F0": 11235,
+   "F1": 11248
+  },
+  {
+   "wid": "2-05.w002",
+   "w": "to",
+   "key": "to#1",
+   "sid": "2-05.s1",
+   "f0": 39,
+   "f1": 45,
+   "F0": 11265,
+   "F1": 11271
+  },
+  {
+   "wid": "2-05.w003",
+   "w": "identify",
+   "key": "identify#1",
+   "sid": "2-05.s1",
+   "f0": 62,
+   "f1": 99,
+   "F0": 11288,
+   "F1": 11325
+  },
+  {
+   "wid": "2-05.w004",
+   "w": "the",
+   "key": "the#1",
+   "sid": "2-05.s1",
+   "f0": 111,
+   "f1": 117,
+   "F0": 11337,
+   "F1": 11343
+  },
+  {
+   "wid": "2-05.w005",
+   "w": "major",
+   "key": "major#1",
+   "sid": "2-05.s1",
+   "f0": 122,
+   "f1": 144,
+   "F0": 11348,
+   "F1": 11370
+  },
+  {
+   "wid": "2-05.w006",
+   "w": "computer-aided",
+   "key": "computer-aided#1",
+   "sid": "2-05.s1",
+   "f0": 147,
+   "f1": 199,
+   "F0": 11373,
+   "F1": 11425
+  },
+  {
+   "wid": "2-05.w007",
+   "w": "methods",
+   "key": "methods#1",
+   "sid": "2-05.s1",
+   "f0": 202,
+   "f1": 236,
+   "F0": 11428,
+   "F1": 11462
+  },
+  {
+   "wid": "2-05.w008",
+   "w": "used",
+   "key": "used#1",
+   "sid": "2-05.s1",
+   "f0": 264,
+   "f1": 277,
+   "F0": 11490,
+   "F1": 11503
+  },
+  {
+   "wid": "2-05.w009",
+   "w": "in",
+   "key": "in#1",
+   "sid": "2-05.s1",
+   "f0": 282,
+   "f1": 288,
+   "F0": 11508,
+   "F1": 11514
+  },
+  {
+   "wid": "2-05.w010",
+   "w": "cancer",
+   "key": "cancer#1",
+   "sid": "2-05.s1",
+   "f0": 293,
+   "f1": 319,
+   "F0": 11519,
+   "F1": 11545
+  },
+  {
+   "wid": "2-05.w011",
+   "w": "drug",
+   "key": "drug#1",
+   "sid": "2-05.s1",
+   "f0": 323,
+   "f1": 335,
+   "F0": 11549,
+   "F1": 11561
+  },
+  {
+   "wid": "2-05.w012",
+   "w": "discovery.",
+   "key": "discovery#1",
+   "sid": "2-05.s1",
+   "f0": 341,
+   "f1": 378,
+   "F0": 11567,
+   "F1": 11604
+  },
+  {
+   "wid": "2-05.w013",
+   "w": "Two:",
+   "key": "two#1",
+   "sid": "2-05.s2",
+   "f0": 409,
+   "f1": 422,
+   "F0": 11635,
+   "F1": 11648
+  },
+  {
+   "wid": "2-05.w014",
+   "w": "to",
+   "key": "to#2",
+   "sid": "2-05.s2",
+   "f0": 455,
+   "f1": 461,
+   "F0": 11681,
+   "F1": 11687
+  },
+  {
+   "wid": "2-05.w015",
+   "w": "evaluate",
+   "key": "evaluate#1",
+   "sid": "2-05.s2",
+   "f0": 471,
+   "f1": 510,
+   "F0": 11697,
+   "F1": 11736
+  },
+  {
+   "wid": "2-05.w016",
+   "w": "how",
+   "key": "how#1",
+   "sid": "2-05.s2",
+   "f0": 521,
+   "f1": 537,
+   "F0": 11747,
+   "F1": 11763
+  },
+  {
+   "wid": "2-05.w017",
+   "w": "these",
+   "key": "these#1",
+   "sid": "2-05.s2",
+   "f0": 546,
+   "f1": 561,
+   "F0": 11772,
+   "F1": 11787
+  },
+  {
+   "wid": "2-05.w018",
+   "w": "methods",
+   "key": "methods#2",
+   "sid": "2-05.s2",
+   "f0": 565,
+   "f1": 592,
+   "F0": 11791,
+   "F1": 11818
+  },
+  {
+   "wid": "2-05.w019",
+   "w": "help",
+   "key": "help#1",
+   "sid": "2-05.s2",
+   "f0": 602,
+   "f1": 615,
+   "F0": 11828,
+   "F1": 11841
+  },
+  {
+   "wid": "2-05.w020",
+   "w": "scientists",
+   "key": "scientists#1",
+   "sid": "2-05.s2",
+   "f0": 638,
+   "f1": 676,
+   "F0": 11864,
+   "F1": 11902
+  },
+  {
+   "wid": "2-05.w021",
+   "w": "assess",
+   "key": "assess#1",
+   "sid": "2-05.s2",
+   "f0": 698,
+   "f1": 719,
+   "F0": 11924,
+   "F1": 11945
+  },
+  {
+   "wid": "2-05.w022",
+   "w": "potential",
+   "key": "potential#1",
+   "sid": "2-05.s2",
+   "f0": 724,
+   "f1": 753,
+   "F0": 11950,
+   "F1": 11979
+  },
+  {
+   "wid": "2-05.w023",
+   "w": "drug",
+   "key": "drug#2",
+   "sid": "2-05.s2",
+   "f0": 759,
+   "f1": 773,
+   "F0": 11985,
+   "F1": 11999
+  },
+  {
+   "wid": "2-05.w024",
+   "w": "candidates.",
+   "key": "candidates#1",
+   "sid": "2-05.s2",
+   "f0": 784,
+   "f1": 821,
+   "F0": 12010,
+   "F1": 12047
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "2-05.s1",
+   "text": "One: to identify the major computer-aided methods used in cancer drug discovery.",
+   "w_first": "2-05.w001",
+   "w_last": "2-05.w012",
+   "f0": 9,
+   "f1": 378
+  },
+  {
+   "sid": "2-05.s2",
+   "text": "Two: to evaluate how these methods help scientists assess potential drug candidates.",
+   "w_first": "2-05.w013",
+   "w_last": "2-05.w024",
+   "f0": 409,
+   "f1": 821
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "aim1",
+   "obj": "aim1",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "One：编号牌 1 落下，标 Aim 1",
+   "f_start": 2,
+   "f_land": 9,
+   "f_end": 22,
+   "until": "2-05.w001",
+   "word": "2-05.w001",
+   "w": "One:",
+   "key": "one#1",
+   "sid": "2-05.s1",
+   "word_f0": 9,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "aim1"
+    ]
+   },
+   "F_start": 11228,
+   "F_land": 11235,
+   "F_end": 11248
+  },
+  {
+   "id": "identify",
+   "obj": "identify",
+   "verb": "move",
+   "ease": "inout",
+   "means": "identify：放大镜从左扫过来",
+   "f_start": 49,
+   "f_land": 62,
+   "f_end": 99,
+   "until": "2-05.w003",
+   "word": "2-05.w003",
+   "w": "identify",
+   "key": "identify#1",
+   "sid": "2-05.s1",
+   "word_f0": 62,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 11275,
+   "F_land": 11288,
+   "F_end": 11325
+  },
+  {
+   "id": "methods",
+   "obj": "methods",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "computer-aided methods：三块芯片依次落位",
+   "f_start": 140,
+   "f_land": 147,
+   "f_end": 236,
+   "until": "2-05.w007",
+   "word": "2-05.w006",
+   "w": "computer-aided",
+   "key": "computer-aided#1",
+   "sid": "2-05.s1",
+   "word_f0": 147,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chips"
+    ]
+   },
+   "F_start": 11366,
+   "F_land": 11373,
+   "F_end": 11462,
+   "g_start": 121,
+   "g_on": 139,
+   "g_end": 236,
+   "g_off": 266,
+   "g_tick": 143,
+   "G_start": 11347,
+   "G_on": 11365,
+   "G_end": 11462,
+   "G_off": 11492,
+   "G_tick": 11369
+  },
+  {
+   "id": "cancer",
+   "obj": "cancer",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "used in cancer drug discovery：玻璃肝落下",
+   "f_start": 286,
+   "f_land": 293,
+   "f_end": 378,
+   "until": "2-05.s1",
+   "word": "2-05.w010",
+   "w": "cancer",
+   "key": "cancer#1",
+   "sid": "2-05.s1",
+   "word_f0": 293,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 11512,
+   "F_land": 11519,
+   "F_end": 11604
+  },
+  {
+   "id": "aim2",
+   "obj": "aim2",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "Two：编号牌 2 落下，标 Aim 2",
+   "f_start": 402,
+   "f_land": 409,
+   "f_end": 422,
+   "until": "2-05.w013",
+   "word": "2-05.w013",
+   "w": "Two:",
+   "key": "two#1",
+   "sid": "2-05.s2",
+   "word_f0": 409,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "aim2"
+    ]
+   },
+   "F_start": 11628,
+   "F_land": 11635,
+   "F_end": 11648,
+   "g_start": 383,
+   "g_on": 401,
+   "g_end": 422,
+   "g_off": 452,
+   "g_tick": 405,
+   "G_start": 11609,
+   "G_on": 11627,
+   "G_end": 11648,
+   "G_off": 11678,
+   "G_tick": 11631
+  },
+  {
+   "id": "eval",
+   "obj": "eval",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "evaluate：下栏料杆和检测门长出来",
+   "f_start": 458,
+   "f_land": 471,
+   "f_end": 510,
+   "until": "2-05.w015",
+   "word": "2-05.w015",
+   "w": "evaluate",
+   "key": "evaluate#1",
+   "sid": "2-05.s2",
+   "word_f0": 471,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 11684,
+   "F_land": 11697,
+   "F_end": 11736
+  },
+  {
+   "id": "these",
+   "obj": "these",
+   "verb": "move",
+   "ease": "inout",
+   "means": "these methods：上栏三块芯片一块块亮一下",
+   "f_start": 552,
+   "f_land": 565,
+   "f_end": 592,
+   "until": "2-05.w018",
+   "word": "2-05.w018",
+   "w": "methods",
+   "key": "methods#2",
+   "sid": "2-05.s2",
+   "word_f0": 565,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 11778,
+   "F_land": 11791,
+   "F_end": 11818
+  },
+  {
+   "id": "sci",
+   "obj": "sci",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "help scientists：小人落下",
+   "f_start": 631,
+   "f_land": 638,
+   "f_end": 676,
+   "until": "2-05.w020",
+   "word": "2-05.w020",
+   "w": "scientists",
+   "key": "scientists#1",
+   "sid": "2-05.s2",
+   "word_f0": 638,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 11857,
+   "F_land": 11864,
+   "F_end": 11902
+  },
+  {
+   "id": "assess",
+   "obj": "assess",
+   "verb": "move",
+   "ease": "inout",
+   "means": "assess：金插头沿料杆走过检测门，各长一根分数条",
+   "f_start": 685,
+   "f_land": 698,
+   "f_end": 719,
+   "until": "2-05.w021",
+   "word": "2-05.w021",
+   "w": "assess",
+   "key": "assess#1",
+   "sid": "2-05.s2",
+   "word_f0": 698,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 11911,
+   "F_land": 11924,
+   "F_end": 11945
+  },
+  {
+   "id": "cands",
+   "obj": "cands",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "potential drug candidates：五个插头排好，最好的打勾",
+   "f_start": 777,
+   "f_land": 784,
+   "f_end": 821,
+   "until": "2-05.s2",
+   "word": "2-05.w024",
+   "w": "candidates.",
+   "key": "candidates#1",
+   "sid": "2-05.s2",
+   "word_f0": 784,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 12003,
+   "F_land": 12010,
+   "F_end": 12047
+  }
+ ],
+ "guides": [
+  {
+   "id": "methods",
+   "target": [
+    "chips"
+   ],
+   "kind": "focus",
+   "gs": 121,
+   "gon": 139,
+   "land": 147,
+   "gend": 236,
+   "goff": 266,
+   "tick": 143,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 140,
+   "events": [
+    "methods"
+   ],
+   "G_start": 11347,
+   "G_on": 11365,
+   "G_land": 11373,
+   "G_end": 11462,
+   "G_off": 11492,
+   "G_tick": 11369
+  },
+  {
+   "id": "aim2",
+   "target": [
+    "aim2"
+   ],
+   "kind": "focus",
+   "gs": 383,
+   "gon": 401,
+   "land": 409,
+   "gend": 422,
+   "goff": 452,
+   "tick": 405,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 402,
+   "events": [
+    "aim2"
+   ],
+   "G_start": 11609,
+   "G_on": 11627,
+   "G_land": 11635,
+   "G_end": 11648,
+   "G_off": 11678,
+   "G_tick": 11631
+  }
+ ],
+ "problems": []
+}

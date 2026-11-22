@@ -2,43 +2,29 @@
  "schema": "cdk20.events/1",
  "group": "7-03",
  "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：第 7 章二维说明书页 7-03（A 画外音）：左框 AlphaFold 芯片吐出折好的珠子串（预测形状），右框 flask 和同一形状的虚线（实测结构，once one exists），中间天平打问号；下方循环箭头，结果卡和一张打叉的卡被吸进循环，一条箭头回到左框，循环转一圈。页面 Manual703.jsx。",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 7-03（btier/B703.jsx）。2 号牌落位；蓝色预测 CDK20 模型转正（AlphaFold DB v6）；同样外形的磨砂幽灵外壳从上方慢慢落下罩在模型上，轮廓对不准处留一道缝，标 measured structure? 与红色问号并缓慢半透明闪烁；模型与外壳让到左边，一排金钥匙与几把灰色打叉的失败钥匙沿料杆依次流回 Chemistry42 芯片，芯片内部小轨道转一圈开启下一轮。",
+ "tier": "B",
+ "zone": 7,
+ "trans_in": "T2 甩进（上一段 7-02 是 B 页）",
+ "trans_out": "T2 甩镜往左（下一段 7-04 是 B 页）",
  "holds": [],
  "events": [
   {
-   "id": "two",
-   "obj": "two",
+   "id": "p2",
+   "obj": "p2",
    "verb": "appear",
    "at": {
-    "word": "7-03.w001",
+    "word": "two#1",
     "off": 0
    },
-   "means": "Two：圈号 2 落下，标题写出",
+   "lead": 7,
+   "means": "Two：2 号编号牌落位",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "7-03.w001"
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "bal",
-   "obj": "bal",
-   "verb": "grow",
-   "at": {
-    "word": "7-03.w002",
-    "off": 0
    },
-   "means": "check：中间天平画出",
-   "tool": "remotion",
-   "lead": 12,
    "until": {
-    "word": "7-03.w003"
-   },
-   "guide": {
-    "kind": "none"
+    "word": "alphafold#1"
    }
   },
   {
@@ -46,95 +32,77 @@
    "obj": "af",
    "verb": "grow",
    "at": {
-    "word": "7-03.w004",
+    "word": "alphafold#1",
     "off": 0
    },
-   "means": "AlphaFold：左框画出，芯片长出",
+   "lead": 13,
+   "means": "AlphaFold：蓝色预测 CDK20 模型落位转正",
    "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "7-03.w004"
-   },
    "guide": {
     "kind": "focus",
     "target": [
-     "chip"
+     "af"
     ]
+   },
+   "until": {
+    "word": "model#1"
    }
   },
   {
-   "id": "mdl",
-   "obj": "mdl",
-   "verb": "morph",
+   "id": "aflbl",
+   "obj": "aflbl",
+   "verb": "appear",
    "at": {
-    "word": "7-03.w005",
+    "word": "model#1",
     "off": 0
    },
-   "means": "model：珠子从芯片飞出折成形状，写 AlphaFold model",
+   "lead": 9,
+   "means": "model：标 predicted model (AlphaFold DB v6)",
    "tool": "remotion",
-   "lead": 16,
-   "until": {
-    "word": "7-03.w005"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "lab-measured#1"
    }
   },
   {
-   "id": "ag",
-   "obj": "ag",
+   "id": "ghost_in",
+   "obj": "ghost_in",
+   "verb": "appear",
+   "at": {
+    "word": "lab-measured#1",
+    "off": 0
+   },
+   "lead": 10,
+   "means": "lab-measured：磨砂幽灵外壳在上方现身",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "structure#1"
+   }
+  },
+  {
+   "id": "ghost",
+   "obj": "ghost",
    "verb": "move",
    "at": {
-    "word": "7-03.w006",
+    "word": "structure#1",
     "off": 0
    },
-   "means": "against：天平左低，左框连到左盘",
+   "lead": 44,
+   "means": "structure：幽灵外壳慢慢落下罩在模型上，对不准处留一道缝",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "7-03.w007"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "lab",
-   "obj": "lab",
-   "verb": "grow",
-   "at": {
-    "word": "7-03.w008",
-    "off": 0
-   },
-   "means": "lab-measured：右框画出（虚线框），flask 长出",
-   "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "word": "7-03.w008"
-   },
    "guide": {
     "kind": "focus",
     "target": [
-     "flask"
+     "ghost"
     ]
-   }
-  },
-  {
-   "id": "str",
-   "obj": "str",
-   "verb": "grow",
-   "at": {
-    "word": "7-03.w009",
-    "off": 0
    },
-   "means": "structure：同一形状的虚线出现在右框，写 lab-measured structure，右框连到右盘",
-   "tool": "remotion",
-   "lead": 14,
    "until": {
-    "word": "7-03.w009"
-   },
-   "guide": {
-    "kind": "none"
+    "word": "once#1"
    }
   },
   {
@@ -142,179 +110,131 @@
    "obj": "once",
    "verb": "appear",
    "at": {
-    "word": "7-03.w010",
+    "word": "once#1",
     "off": 0
    },
-   "means": "once one：红批注 once one exists",
+   "lead": 9,
+   "means": "once：外壳半透明慢闪，标 measured structure?",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "7-03.w011"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "exists#1"
    }
   },
   {
-   "id": "ex",
-   "obj": "ex",
-   "verb": "snap",
-   "at": {
-    "word": "7-03.w012",
-    "off": 0
-   },
-   "means": "exists：天平上方问号，天平来回晃",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "feed",
-   "obj": "feed",
-   "verb": "grow",
-   "at": {
-    "word": "7-03.w014",
-    "off": 0
-   },
-   "means": "feed：下方循环箭头画出",
-   "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "7-03.w014"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "every",
-   "obj": "every",
-   "verb": "move",
-   "at": {
-    "word": "7-03.w015",
-    "off": 0
-   },
-   "means": "every：两框各飞出结果卡进循环",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "7-03.w015"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "res",
-   "obj": "res",
+   "id": "q",
+   "obj": "q",
    "verb": "appear",
    "at": {
-    "word": "7-03.w016",
+    "word": "exists#1",
     "off": 0
    },
-   "means": "result：写 every result",
+   "lead": 9,
+   "means": "exists：缝隙旁出现红色问号",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "7-03.w016"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
-   "id": "inc",
-   "obj": "inc",
+   "id": "shift",
+   "obj": "shift",
    "verb": "move",
    "at": {
-    "word": "7-03.w017",
+    "word": "feed#1",
     "off": 0
    },
-   "means": "including：一张打叉的卡也飞进循环",
+   "lead": 13,
+   "means": "feed：模型与外壳左移，Chemistry42 芯片与料杆进来",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "7-03.w018"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "result#1"
+   }
+  },
+  {
+   "id": "keys",
+   "obj": "keys",
+   "verb": "move",
+   "at": {
+    "word": "result#1",
+    "off": 0
+   },
+   "lead": 28,
+   "means": "every result：一排金钥匙沿料杆流回 Chemistry42 芯片",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "keys"
+    ]
+   },
+   "until": {
+    "word": "failures#1"
    }
   },
   {
    "id": "fail",
    "obj": "fail",
-   "verb": "appear",
+   "verb": "move",
    "at": {
-    "word": "7-03.w019",
+    "word": "failures#1",
     "off": 0
    },
-   "means": "failures：写 including the failures",
+   "lead": 30,
+   "means": "failures：几把灰色打叉的钥匙也一起流回",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "7-03.w019"
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "fail"
+    ]
+   },
+   "until": {
+    "word": "back#1"
    }
   },
   {
    "id": "back",
    "obj": "back",
-   "verb": "grow",
-   "at": {
-    "word": "7-03.w020",
-    "off": 0
-   },
-   "means": "back into：循环引出箭头回到左框",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "7-03.w021"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "nx",
-   "obj": "nx",
-   "verb": "appear",
-   "at": {
-    "word": "7-03.w023",
-    "off": 0
-   },
-   "means": "next：写 next round",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "7-03.w023"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "rnd",
-   "obj": "rnd",
    "verb": "move",
    "at": {
-    "word": "7-03.w024",
+    "word": "back#1",
     "off": 0
    },
-   "means": "round：循环带着卡转一整圈，左框形状微调",
+   "lead": 13,
+   "means": "back into：所有钥匙汇入芯片入口",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "round#1"
+   }
+  },
+  {
+   "id": "loop",
+   "obj": "loop",
+   "verb": "snap",
+   "at": {
+    "word": "round#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "next round：芯片内小轨道转一圈，准备下一轮",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   }
  ]

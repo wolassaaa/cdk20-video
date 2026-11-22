@@ -1,0 +1,319 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "1-08",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 1 章二维说明书页。三个步骤框：时间（从我们出生那年到现在）、花费（约 28 亿美元）、上市（十个里约一个）。出处 Wang et al., Pharmaceuticals 2023（F1：美元是我们的读法）。页面 src/v3/manual/Manual108.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "step1",
+   "obj": "step_1",
+   "verb": "grow",
+   "at": {
+    "word": "1-08.w001",
+    "off": 0
+   },
+   "means": "Start：第 1 步框画出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "dur": 30
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "title1",
+   "obj": "title_1",
+   "verb": "appear",
+   "at": {
+    "word": "1-08.w003",
+    "off": 0
+   },
+   "means": "search：标题 Time 写出",
+   "tool": "remotion",
+   "until": {
+    "word": "1-08.w005"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "calendar",
+   "obj": "calendar",
+   "verb": "grow",
+   "at": {
+    "word": "1-08.w005",
+    "off": 0
+   },
+   "means": "the year：日历零件长出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "1-08.w007"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "cal"
+    ]
+   }
+  },
+  {
+   "id": "tl_born",
+   "obj": "timeline",
+   "verb": "appear",
+   "at": {
+    "word": "1-08.w008",
+    "off": 0
+   },
+   "means": "born：时间线左端起笔，印 the year we were born",
+   "tool": "remotion",
+   "lead": 2,
+   "until": {
+    "dur": 20
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "tl_run",
+   "obj": "timeline",
+   "verb": "move",
+   "at": {
+    "word": "1-08.w014",
+    "off": 0
+   },
+   "means": "might only be ready：时间线一路画到右端",
+   "tool": "remotion",
+   "lead": 60,
+   "until": {
+    "word": "1-08.w014"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "tl_now",
+   "obj": "label_now",
+   "verb": "appear",
+   "at": {
+    "word": "1-08.w015",
+    "off": 0
+   },
+   "means": "now：右端印 now，红笔 ≈ our age",
+   "tool": "remotion",
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "step2",
+   "obj": "step_2",
+   "verb": "grow",
+   "at": {
+    "word": "1-08.w016",
+    "off": 0
+   },
+   "means": "It：第 2 步框画出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "dur": 30
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "title2",
+   "obj": "title_2",
+   "verb": "appear",
+   "at": {
+    "word": "1-08.w017",
+    "off": 0
+   },
+   "means": "can cost：标题 Cost 写出",
+   "tool": "remotion",
+   "until": {
+    "word": "1-08.w018"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "bills",
+   "obj": "banknotes",
+   "verb": "grow",
+   "at": {
+    "word": "1-08.w018",
+    "off": 0
+   },
+   "means": "cost almost：钞票一张张长出叠起",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "1-08.w021"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "banknote"
+    ]
+   }
+  },
+  {
+   "id": "plate_cost",
+   "obj": "plate_cost",
+   "verb": "appear",
+   "at": {
+    "word": "1-08.w020",
+    "off": 0
+   },
+   "means": "2.8 billion：数字牌 ~US$2.8 billion",
+   "tool": "remotion",
+   "until": {
+    "word": "1-08.w023"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "bill_settle",
+   "obj": "banknotes",
+   "verb": "morph",
+   "at": {
+    "word": "1-08.w023",
+    "off": 0
+   },
+   "means": "dollars：钞票堆压实一下（变）",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "step3",
+   "obj": "step_3",
+   "verb": "grow",
+   "at": {
+    "word": "1-08.w024",
+    "off": 0
+   },
+   "means": "And：第 3 步框画出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "dur": 30
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "title3",
+   "obj": "title_3",
+   "verb": "appear",
+   "at": {
+    "word": "1-08.w026",
+    "off": 0
+   },
+   "means": "drugs tested：标题 Tested in people 写出",
+   "tool": "remotion",
+   "until": {
+    "word": "1-08.w029"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "caps",
+   "obj": "capsules",
+   "verb": "grow",
+   "at": {
+    "word": "1-08.w026",
+    "off": 0
+   },
+   "means": "drugs tested in people：十粒胶囊依次长出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "1-08.w029"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "capsule"
+    ]
+   }
+  },
+  {
+   "id": "caps_fade",
+   "obj": "capsules_9",
+   "verb": "morph",
+   "at": {
+    "word": "1-08.w032",
+    "off": 0
+   },
+   "means": "one in ten：九粒褪成灰线，一粒留下",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "1-08.w034"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "plate_1in10",
+   "obj": "plate_1in10",
+   "verb": "appear",
+   "at": {
+    "word": "1-08.w032",
+    "off": 0
+   },
+   "means": "one in ten：数字牌 ~1 in 10",
+   "tool": "remotion",
+   "until": {
+    "word": "1-08.w034",
+    "off": 10
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "market",
+   "obj": "capsule_1",
+   "verb": "move",
+   "at": {
+    "word": "1-08.w037",
+    "off": 0
+   },
+   "means": "reaches the market：留下的那粒升起进到 market 托架",
+   "tool": "remotion",
+   "lead": 40,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  }
+ ]
+}

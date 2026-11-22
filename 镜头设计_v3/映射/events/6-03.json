@@ -2,79 +2,122 @@
  "schema": "cdk20.events/1",
  "group": "6-03",
  "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：第 6 章记分板第二行 6-03（画外音）：Finding a hit；左格一大片点（millions）挤进瓶颈（costly bottleneck），右格 8,918 点计数，收缩成 13 个。页面 Manual603.jsx。",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 6-03（btier/B603.jsx，复用第 6 章翻牌记分板组件，第 1 行保持已填）。填第 2 行：行名翻出 2. FINDING A HIT；BEFORE 左凹位升起透明料斗（h23），满满细珠倾泻下流，主翻牌翻出 MILLIONS SCREENED，细珠在细颈堵塞，副翻牌翻出 COSTLY BOTTLENECK（旁注 2023 review）；NOW 右侧数字轮滚到 8,918，主翻牌翻出 8,918 DESIGNS，右凹位小托盘只落下 13 颗珠子，副翻牌翻出 13 MOLECULES MADE；段尾料斗向右飞出衔接 6-04+05 出镜。",
+ "tier": "B",
+ "zone": 6,
+ "trans_in": "T2 甩进（上一段 6-02 是 B 页）",
+ "trans_out": "T5 runner（下一段 6-04+05 是出镜 A 段，料斗飞向右侧接出镜）",
  "holds": [],
  "events": [
   {
-   "id": "lbl",
-   "obj": "lbl",
-   "verb": "appear",
+   "id": "row2",
+   "obj": "row2",
+   "verb": "snap",
    "at": {
-    "word": "6-03.w003",
+    "word": "finding#1",
     "off": 0
    },
-   "means": "Finding a hit：行标题",
+   "lead": 9,
+   "means": "Finding：第 2 行行名翻出 2. FINDING A HIT",
    "tool": "remotion",
-   "lead": 26,
-   "until": {
-    "word": "6-03.w003"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "hit#1"
    }
   },
   {
-   "id": "scr",
-   "obj": "scr",
-   "verb": "appear",
+   "id": "focus2",
+   "obj": "focus2",
+   "verb": "move",
    "at": {
-    "word": "6-03.w005",
+    "word": "hit#1",
     "off": 0
    },
-   "means": "screening real compounds：标签",
+   "lead": 7,
+   "means": "a hit：镜头下移对准第 2 行，左右凹位亮起",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "6-03.w007"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "bef",
+   "obj": "bef",
+   "verb": "grow",
+   "at": {
+    "word": "before#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "Before：左凹位升起透明料斗（h23）",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "hopper"
+    ]
+   },
+   "until": {
+    "word": "compounds#1"
+   }
+  },
+  {
+   "id": "comp",
+   "obj": "comp",
+   "verb": "appear",
+   "at": {
+    "word": "compounds#1",
+    "off": 0
+   },
+   "lead": 10,
+   "means": "real compounds：满槽细珠在料斗上方聚齐",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "millions#1"
    }
   },
   {
    "id": "mil",
    "obj": "mil",
-   "verb": "grow",
+   "verb": "move",
    "at": {
-    "word": "6-03.w010",
+    "word": "millions#1",
     "off": 0
    },
-   "means": "millions：一大片点长出",
+   "lead": 28,
+   "means": "by the millions：细珠倾泻下流，BEFORE 主翻牌翻出 MILLIONS SCREENED",
    "tool": "remotion",
-   "lead": 30,
-   "until": {
-    "word": "6-03.w010"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "approach#1"
    }
   },
   {
-   "id": "fun",
-   "obj": "fun",
-   "verb": "grow",
+   "id": "appr",
+   "obj": "appr",
+   "verb": "move",
    "at": {
-    "word": "6-03.w012",
+    "word": "approach#1",
     "off": 0
    },
-   "means": "approach：瓶颈漏斗轮廓画出",
+   "lead": 13,
+   "means": "an approach：细珠涌向料斗细颈口开始拥堵",
    "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "6-03.w012"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "2023#1"
    }
   },
   {
@@ -82,53 +125,74 @@
    "obj": "rev",
    "verb": "appear",
    "at": {
-    "word": "6-03.w015",
+    "word": "2023#1",
     "off": 0
    },
-   "means": "review：标签 2023 review",
+   "lead": 10,
+   "means": "a 2023 review：2023 review 小引用牌亮起",
    "tool": "remotion",
-   "lead": 24,
-   "until": {
-    "word": "6-03.w015"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "says#1"
    }
   },
   {
-   "id": "sq",
-   "obj": "sq",
+   "id": "says",
+   "obj": "says",
    "verb": "move",
    "at": {
-    "word": "6-03.w018",
+    "word": "says#1",
     "off": 0
    },
-   "means": "hit：点挤进瓶颈",
+   "lead": 13,
+   "means": "says has hit：细颈处细珠彻底卡死堆积",
    "tool": "remotion",
-   "lead": 40,
-   "until": {
-    "word": "6-03.w021"
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "jam"
+    ]
+   },
+   "until": {
+    "word": "costly#1"
    }
   },
   {
-   "id": "cost",
-   "obj": "cost",
+   "id": "costly",
+   "obj": "costly",
    "verb": "appear",
    "at": {
-    "word": "6-03.w020",
+    "word": "costly#1",
     "off": 0
    },
-   "means": "costly bottleneck：红批注",
+   "lead": 10,
+   "means": "costly：细颈红环警示亮起",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "6-03.w021"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "bottleneck#1"
+   }
+  },
+  {
+   "id": "bn",
+   "obj": "bn",
+   "verb": "snap",
+   "at": {
+    "word": "bottleneck#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "bottleneck：BEFORE 副翻牌翻出 COSTLY BOTTLENECK",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
@@ -136,143 +200,113 @@
    "obj": "now",
    "verb": "appear",
    "at": {
-    "word": "6-03.w022",
+    "word": "now#1",
     "off": 0
    },
-   "means": "Now：右栏亮起",
+   "lead": 10,
+   "means": "Now：右凹位切入数字计数轮与小托盘",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "6-03.w022"
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "now2"
+    ]
+   },
+   "until": {
+    "word": "8,918#1"
    }
   },
   {
-   "id": "cnt",
-   "obj": "cnt",
+   "id": "n8918",
+   "obj": "n8918",
    "verb": "grow",
    "at": {
-    "word": "6-03.w023",
+    "word": "8,918#1",
     "off": 0
    },
-   "means": "8,918：点阵长出，计数跳到 8,918",
+   "lead": 28,
+   "means": "8,918：右侧数字轮滚停在 8,918",
    "tool": "remotion",
-   "lead": 26,
-   "until": {
-    "word": "6-03.w023"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "designs#1"
    }
   },
   {
    "id": "des",
    "obj": "des",
+   "verb": "snap",
+   "at": {
+    "word": "designs#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "designs：NOW 主翻牌翻出 8,918 DESIGNS",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "computer#1"
+   }
+  },
+  {
+   "id": "comp2",
+   "obj": "comp2",
    "verb": "appear",
    "at": {
-    "word": "6-03.w024",
+    "word": "computer#1",
     "off": 0
    },
-   "means": "designs：标签",
+   "lead": 10,
+   "means": "inside a computer：芯片轮廓框在数字轮旁亮起",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "6-03.w024"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "13#1"
    }
   },
   {
-   "id": "scrn",
-   "obj": "scrn",
-   "verb": "grow",
+   "id": "n13",
+   "obj": "n13",
+   "verb": "eject",
    "at": {
-    "word": "6-03.w025",
+    "word": "13#1",
     "off": 0
    },
-   "means": "inside：屏幕框画出",
+   "lead": 28,
+   "means": "just 13：右凹位小托盘只落下 13 颗珠子，排成一行",
    "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "6-03.w025"
-   },
    "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "shr",
-   "obj": "shr",
-   "verb": "move",
-   "at": {
-    "word": "6-03.w029",
-    "off": 0
+    "kind": "focus",
+    "target": [
+     "tray13"
+    ]
    },
-   "means": "just：点收缩",
-   "tool": "remotion",
-   "lead": 30,
    "until": {
-    "word": "6-03.w030"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "thr",
-   "obj": "thr",
-   "verb": "appear",
-   "at": {
-    "word": "6-03.w030",
-    "off": 0
-   },
-   "means": "13：数字 13 跳一下",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "6-03.w030"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "mol",
-   "obj": "mol",
-   "verb": "appear",
-   "at": {
-    "word": "6-03.w031",
-    "off": 0
-   },
-   "means": "molecules：标签",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "6-03.w031"
-   },
-   "guide": {
-    "kind": "none"
+    "word": "molecules#1"
    }
   },
   {
    "id": "made",
    "obj": "made",
-   "verb": "morph",
+   "verb": "snap",
    "at": {
-    "word": "6-03.w033",
+    "word": "made#1",
     "off": 0
    },
-   "means": "made：13 个点变红实心",
+   "lead": 13,
+   "means": "actually made：NOW 副翻牌翻出 13 MOLECULES MADE（T7 轻抖）",
    "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   }
  ]

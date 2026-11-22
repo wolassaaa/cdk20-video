@@ -315,15 +315,15 @@
  "holds": [],
  "events": [
   {
-   "id": "lbl",
-   "obj": "lbl",
-   "verb": "appear",
+   "id": "row3",
+   "obj": "row3",
+   "verb": "snap",
    "ease": "inout",
-   "means": "Time：行标题",
-   "f_start": 1,
+   "means": "Time：第 3 行行名翻出 3. TIME，镜头对准第 3 行",
+   "f_start": 0,
    "f_land": 9,
    "f_end": 28,
-   "until": "6-06.w001",
+   "until": "6-06.s1",
    "word": "6-06.w001",
    "w": "Time.",
    "key": "time#1",
@@ -333,20 +333,56 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 49501,
+   "F_start": 49500,
    "F_land": 49509,
    "F_end": 49528
   },
   {
-   "id": "road",
-   "obj": "road",
-   "verb": "grow",
+   "id": "bef",
+   "obj": "bef",
+   "verb": "appear",
    "ease": "inout",
-   "means": "ten-to-seventeen-year：长路画出",
-   "f_start": 61,
-   "f_land": 111,
+   "means": "Before：左凹位卷尺底座（h18）落位",
+   "f_start": 51,
+   "f_land": 58,
    "f_end": 190,
    "until": "6-06.w004",
+   "word": "6-06.w002",
+   "w": "Before:",
+   "key": "before#1",
+   "sid": "6-06.s2",
+   "word_f0": 58,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "tape"
+    ]
+   },
+   "F_start": 49551,
+   "F_land": 49558,
+   "F_end": 49690,
+   "g_start": 32,
+   "g_on": 50,
+   "g_end": 178,
+   "g_off": 208,
+   "g_tick": 54,
+   "G_start": 49532,
+   "G_on": 49550,
+   "G_end": 49678,
+   "G_off": 49708,
+   "G_tick": 49554
+  },
+  {
+   "id": "tape",
+   "obj": "tape",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "ten-to-seventeen-year：卷尺大幅拉长，BEFORE 主翻牌翻出 10–17 YEARS",
+   "f_start": 75,
+   "f_land": 111,
+   "f_end": 218,
+   "until": "6-06.w005",
    "word": "6-06.w004",
    "w": "ten-to-seventeen-year",
    "key": "ten-to-seventeen-year#1",
@@ -356,20 +392,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 49561,
+   "F_start": 49575,
    "F_land": 49611,
-   "F_end": 49690
+   "F_end": 49718
   },
   {
-   "id": "yrs",
-   "obj": "yrs",
-   "verb": "appear",
+   "id": "road",
+   "obj": "road",
+   "verb": "move",
    "ease": "inout",
-   "means": "road：标签 10–17 years",
-   "f_start": 192,
+   "means": "road：卷尺沿左槽铺展成带年份刻度的长路",
+   "f_start": 187,
    "f_land": 200,
-   "f_end": 218,
-   "until": "6-06.w005",
+   "f_end": 305,
+   "until": "6-06.w009",
    "word": "6-06.w005",
    "w": "road,",
    "key": "road#1",
@@ -379,20 +415,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 49692,
+   "F_start": 49687,
    "F_land": 49700,
-   "F_end": 49718
+   "F_end": 49805
   },
   {
-   "id": "hitl",
-   "obj": "hitl",
+   "id": "hit",
+   "obj": "hit",
    "verb": "appear",
    "ease": "inout",
-   "means": "hit：路起点标 finding a hit",
-   "f_start": 277,
+   "means": "finding a hit：卷尺最前端一小段标出切分线",
+   "f_start": 276,
    "f_land": 289,
-   "f_end": 305,
-   "until": "6-06.w009",
+   "f_end": 377,
+   "until": "6-06.w012",
    "word": "6-06.w009",
    "w": "hit",
    "key": "hit#1",
@@ -402,40 +438,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 49777,
+   "F_start": 49776,
    "F_land": 49789,
-   "F_end": 49805
+   "F_end": 49877
   },
   {
-   "id": "brk",
-   "obj": "brk",
-   "verb": "grow",
+   "id": "open",
+   "obj": "open",
+   "verb": "snap",
    "ease": "inout",
-   "means": "just：括号框住开头一段",
-   "f_start": 316,
-   "f_land": 324,
-   "f_end": 339,
-   "until": "6-06.w010",
-   "word": "6-06.w010",
-   "w": "just",
-   "key": "just#1",
-   "sid": "6-06.s2",
-   "word_f0": 324,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 49816,
-   "F_land": 49824,
-   "F_end": 49839
-  },
-  {
-   "id": "red",
-   "obj": "red",
-   "verb": "morph",
-   "ease": "inout",
-   "means": "opening：开头一段画红",
-   "f_start": 344,
+   "means": "opening：卷尺最前端一小段描红高亮",
+   "f_start": 341,
    "f_land": 354,
    "f_end": 409,
    "until": "6-06.w013",
@@ -446,10 +459,46 @@
    "word_f0": 354,
    "tool": "remotion",
    "guide": {
+    "kind": "focus",
+    "target": [
+     "stretch"
+    ]
+   },
+   "F_start": 49841,
+   "F_land": 49854,
+   "F_end": 49909,
+   "g_start": 328,
+   "g_on": 346,
+   "g_end": 396,
+   "g_off": 414,
+   "g_tick": 350,
+   "G_start": 49828,
+   "G_on": 49846,
+   "G_end": 49896,
+   "G_off": 49914,
+   "G_tick": 49850
+  },
+  {
+   "id": "strch",
+   "obj": "strch",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "stretch：BEFORE 副翻牌翻出 HIT = OPENING STRETCH",
+   "f_start": 375,
+   "f_land": 385,
+   "f_end": 409,
+   "until": "6-06.s2",
+   "word": "6-06.w013",
+   "w": "stretch.",
+   "key": "stretch#1",
+   "sid": "6-06.s2",
+   "word_f0": 385,
+   "tool": "remotion",
+   "guide": {
     "kind": "none"
    },
-   "F_start": 49844,
-   "F_land": 49854,
+   "F_start": 49875,
+   "F_land": 49885,
    "F_end": 49909
   },
   {
@@ -457,11 +506,11 @@
    "obj": "now",
    "verb": "appear",
    "ease": "inout",
-   "means": "Now：右栏亮起",
-   "f_start": 414,
+   "means": "Now：右凹位 Calendar1 日历落位",
+   "f_start": 412,
    "f_land": 422,
-   "f_end": 434,
-   "until": "6-06.w014",
+   "f_end": 462,
+   "until": "6-06.w015",
    "word": "6-06.w014",
    "w": "Now:",
    "key": "now#1",
@@ -469,22 +518,35 @@
    "word_f0": 422,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "cal"
+    ]
    },
-   "F_start": 49914,
+   "F_start": 49912,
    "F_land": 49922,
-   "F_end": 49934
+   "F_end": 49962,
+   "g_start": 396,
+   "g_on": 414,
+   "g_end": 462,
+   "g_off": 492,
+   "g_tick": 418,
+   "G_start": 49896,
+   "G_on": 49914,
+   "G_end": 49962,
+   "G_off": 49992,
+   "G_tick": 49918
   },
   {
-   "id": "r1",
-   "obj": "r1",
+   "id": "d30a",
+   "obj": "d30a",
    "verb": "grow",
    "ease": "inout",
-   "means": "30：短路第一段画出",
-   "f_start": 422,
+   "means": "30 days：日历翻到 30，NOW 主翻牌翻出 30 DAYS (1ST HIT)",
+   "f_start": 426,
    "f_land": 446,
-   "f_end": 462,
-   "until": "6-06.w015",
+   "f_end": 479,
+   "until": "6-06.w016",
    "word": "6-06.w015",
    "w": "30",
    "key": "30#1",
@@ -494,43 +556,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 49922,
+   "F_start": 49926,
    "F_land": 49946,
-   "F_end": 49962
-  },
-  {
-   "id": "d30",
-   "obj": "d30",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "days：标签 30 days",
-   "f_start": 456,
-   "f_land": 466,
-   "f_end": 479,
-   "until": "6-06.w016",
-   "word": "6-06.w016",
-   "w": "days",
-   "key": "days#1",
-   "sid": "6-06.s3",
-   "word_f0": 466,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 49956,
-   "F_land": 49966,
    "F_end": 49979
   },
   {
-   "id": "fh",
-   "obj": "fh",
-   "verb": "appear",
+   "id": "hit1",
+   "obj": "hit1",
+   "verb": "snap",
    "ease": "inout",
-   "means": "hit：第一段终点小旗",
-   "f_start": 512,
+   "means": "first hit：001 小钥匙图标在日历旁打勾",
+   "f_start": 507,
    "f_land": 520,
-   "f_end": 534,
-   "until": "6-06.w020",
+   "f_end": 607,
+   "until": "6-06.w024",
    "word": "6-06.w020",
    "w": "hit,",
    "key": "hit#2",
@@ -540,20 +579,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 50012,
+   "F_start": 50007,
    "F_land": 50020,
-   "F_end": 50034
+   "F_end": 50107
   },
   {
-   "id": "bk",
-   "obj": "bk",
+   "id": "bkey",
+   "obj": "bkey",
    "verb": "appear",
    "ease": "inout",
-   "means": "key：钥匙落在第一段终点",
-   "f_start": 586,
+   "means": "a better key：048 金钥匙图标在下方展开",
+   "f_start": 581,
    "f_land": 594,
-   "f_end": 607,
-   "until": "6-06.w024",
+   "f_end": 678,
+   "until": "6-06.w027",
    "word": "6-06.w024",
    "w": "key",
    "key": "key#1",
@@ -563,40 +602,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 50086,
+   "F_start": 50081,
    "F_land": 50094,
-   "F_end": 50107
+   "F_end": 50178
   },
   {
-   "id": "r2",
-   "obj": "r2",
-   "verb": "grow",
+   "id": "d30b",
+   "obj": "d30b",
+   "verb": "snap",
    "ease": "inout",
-   "means": "another：短路再接一段",
-   "f_start": 619,
-   "f_land": 639,
-   "f_end": 658,
-   "until": "6-06.w026",
-   "word": "6-06.w026",
-   "w": "another",
-   "key": "another#1",
-   "sid": "6-06.s3",
-   "word_f0": 639,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 50119,
-   "F_land": 50139,
-   "F_end": 50158
-  },
-  {
-   "id": "a30",
-   "obj": "a30",
-   "verb": "move",
-   "ease": "inout",
-   "means": "30：标签 another 30，钥匙滑到终点",
-   "f_start": 652,
+   "means": "another 30：日历再翻 30，NOW 副翻牌翻出 +30 DAYS (BETTER KEY)",
+   "f_start": 640,
    "f_land": 660,
    "f_end": 678,
    "until": "6-06.s3",
@@ -609,11 +625,88 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 50152,
+   "F_start": 50140,
    "F_land": 50160,
    "F_end": 50178
   }
  ],
- "guides": [],
+ "guides": [
+  {
+   "id": "bef",
+   "target": [
+    "tape"
+   ],
+   "kind": "focus",
+   "gs": 32,
+   "gon": 50,
+   "land": 58,
+   "gend": 178,
+   "goff": 208,
+   "tick": 54,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 51,
+   "events": [
+    "bef"
+   ],
+   "G_start": 49532,
+   "G_on": 49550,
+   "G_land": 49558,
+   "G_end": 49678,
+   "G_off": 49708,
+   "G_tick": 49554
+  },
+  {
+   "id": "open",
+   "target": [
+    "stretch"
+   ],
+   "kind": "focus",
+   "gs": 328,
+   "gon": 346,
+   "land": 354,
+   "gend": 396,
+   "goff": 414,
+   "tick": 350,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 341,
+   "events": [
+    "open"
+   ],
+   "handoff": "now",
+   "G_start": 49828,
+   "G_on": 49846,
+   "G_land": 49854,
+   "G_end": 49896,
+   "G_off": 49914,
+   "G_tick": 49850
+  },
+  {
+   "id": "now",
+   "target": [
+    "cal"
+   ],
+   "kind": "focus",
+   "gs": 396,
+   "gon": 414,
+   "land": 422,
+   "gend": 462,
+   "goff": 492,
+   "tick": 418,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 412,
+   "events": [
+    "now"
+   ],
+   "G_start": 49896,
+   "G_on": 49914,
+   "G_land": 49922,
+   "G_end": 49962,
+   "G_off": 49992,
+   "G_tick": 49918
+  }
+ ],
  "problems": []
 }

@@ -1,0 +1,458 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "6-01",
+ "segs": [
+  "6-01"
+ ],
+ "tool": "remotion",
+ "fps": 60,
+ "len_f": 436,
+ "cut": "cut_v8",
+ "cut_start_f": 46832,
+ "cut_start_s": 780.53,
+ "master_built": "2026-11-18 02:33:56 +09:00",
+ "words_hash": "e5d57f4d2bc0",
+ "events_src": "镜头设计_v3/映射/events/6-01.json",
+ "words": [
+  {
+   "wid": "6-01.w001",
+   "w": "So,",
+   "key": "so#1",
+   "sid": "6-01.s1",
+   "f0": 9,
+   "f1": 14,
+   "F0": 46841,
+   "F1": 46846
+  },
+  {
+   "wid": "6-01.w002",
+   "w": "the",
+   "key": "the#1",
+   "sid": "6-01.s1",
+   "f0": 43,
+   "f1": 46,
+   "F0": 46875,
+   "F1": 46878
+  },
+  {
+   "wid": "6-01.w003",
+   "w": "big",
+   "key": "big#1",
+   "sid": "6-01.s1",
+   "f0": 50,
+   "f1": 57,
+   "F0": 46882,
+   "F1": 46889
+  },
+  {
+   "wid": "6-01.w004",
+   "w": "question.",
+   "key": "question#1",
+   "sid": "6-01.s1",
+   "f0": 61,
+   "f1": 86,
+   "F0": 46893,
+   "F1": 46918
+  },
+  {
+   "wid": "6-01.w005",
+   "w": "How",
+   "key": "how#1",
+   "sid": "6-01.s2",
+   "f0": 123,
+   "f1": 133,
+   "F0": 46955,
+   "F1": 46965
+  },
+  {
+   "wid": "6-01.w006",
+   "w": "much",
+   "key": "much#1",
+   "sid": "6-01.s2",
+   "f0": 137,
+   "f1": 151,
+   "F0": 46969,
+   "F1": 46983
+  },
+  {
+   "wid": "6-01.w007",
+   "w": "did",
+   "key": "did#1",
+   "sid": "6-01.s2",
+   "f0": 156,
+   "f1": 167,
+   "F0": 46988,
+   "F1": 46999
+  },
+  {
+   "wid": "6-01.w008",
+   "w": "the",
+   "key": "the#2",
+   "sid": "6-01.s2",
+   "f0": 168,
+   "f1": 174,
+   "F0": 47000,
+   "F1": 47006
+  },
+  {
+   "wid": "6-01.w009",
+   "w": "computers",
+   "key": "computers#1",
+   "sid": "6-01.s2",
+   "f0": 179,
+   "f1": 217,
+   "F0": 47011,
+   "F1": 47049
+  },
+  {
+   "wid": "6-01.w010",
+   "w": "actually",
+   "key": "actually#1",
+   "sid": "6-01.s2",
+   "f0": 229,
+   "f1": 252,
+   "F0": 47061,
+   "F1": 47084
+  },
+  {
+   "wid": "6-01.w011",
+   "w": "help?",
+   "key": "help#1",
+   "sid": "6-01.s2",
+   "f0": 257,
+   "f1": 274,
+   "F0": 47089,
+   "F1": 47106
+  },
+  {
+   "wid": "6-01.w012",
+   "w": "Let's",
+   "key": "let's#1",
+   "sid": "6-01.s3",
+   "f0": 310,
+   "f1": 321,
+   "F0": 47142,
+   "F1": 47153
+  },
+  {
+   "wid": "6-01.w013",
+   "w": "line",
+   "key": "line#1",
+   "sid": "6-01.s3",
+   "f0": 327,
+   "f1": 344,
+   "F0": 47159,
+   "F1": 47176
+  },
+  {
+   "wid": "6-01.w014",
+   "w": "up",
+   "key": "up#1",
+   "sid": "6-01.s3",
+   "f0": 350,
+   "f1": 357,
+   "F0": 47182,
+   "F1": 47189
+  },
+  {
+   "wid": "6-01.w015",
+   "w": "before",
+   "key": "before#1",
+   "sid": "6-01.s3",
+   "f0": 377,
+   "f1": 398,
+   "F0": 47209,
+   "F1": 47230
+  },
+  {
+   "wid": "6-01.w016",
+   "w": "and",
+   "key": "and#1",
+   "sid": "6-01.s3",
+   "f0": 401,
+   "f1": 407,
+   "F0": 47233,
+   "F1": 47239
+  },
+  {
+   "wid": "6-01.w017",
+   "w": "now.",
+   "key": "now#1",
+   "sid": "6-01.s3",
+   "f0": 409,
+   "f1": 421,
+   "F0": 47241,
+   "F1": 47253
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "6-01.s1",
+   "text": "So, the big question.",
+   "w_first": "6-01.w001",
+   "w_last": "6-01.w004",
+   "f0": 9,
+   "f1": 86
+  },
+  {
+   "sid": "6-01.s2",
+   "text": "How much did the computers actually help?",
+   "w_first": "6-01.w005",
+   "w_last": "6-01.w011",
+   "f0": 123,
+   "f1": 274
+  },
+  {
+   "sid": "6-01.s3",
+   "text": "Let's line up before and now.",
+   "w_first": "6-01.w012",
+   "w_last": "6-01.w017",
+   "f0": 310,
+   "f1": 421
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "sweep",
+   "obj": "sweep",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "So：T6 光扫过（第 6 章第一页）",
+   "f_start": 0,
+   "f_land": 9,
+   "f_end": 33,
+   "until": null,
+   "word": "6-01.w001",
+   "w": "So,",
+   "key": "so#1",
+   "sid": "6-01.s1",
+   "word_f0": 9,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 46832,
+   "F_land": 46841,
+   "F_end": 46865
+  },
+  {
+   "id": "board",
+   "obj": "board",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "the big question：实体翻牌记分板从第 6 区大板上立起",
+   "f_start": 48,
+   "f_land": 61,
+   "f_end": 86,
+   "until": "6-01.s1",
+   "word": "6-01.w004",
+   "w": "question.",
+   "key": "question#1",
+   "sid": "6-01.s1",
+   "word_f0": 61,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 46880,
+   "F_land": 46893,
+   "F_end": 46918
+  },
+  {
+   "id": "title",
+   "obj": "title",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "the computers：顶栏标题翻牌哗啦翻出 HOW MUCH DID COMPUTERS HELP?",
+   "f_start": 151,
+   "f_land": 179,
+   "f_end": 252,
+   "until": "6-01.w010",
+   "word": "6-01.w009",
+   "w": "computers",
+   "key": "computers#1",
+   "sid": "6-01.s2",
+   "word_f0": 179,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "header"
+    ]
+   },
+   "F_start": 46983,
+   "F_land": 47011,
+   "F_end": 47084,
+   "g_start": 153,
+   "g_on": 171,
+   "g_end": 252,
+   "g_off": 282,
+   "g_tick": 175,
+   "G_start": 46985,
+   "G_on": 47003,
+   "G_end": 47084,
+   "G_off": 47114,
+   "G_tick": 47007
+  },
+  {
+   "id": "help",
+   "obj": "help",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "actually help?：标题末尾红问号翻牌定格",
+   "f_start": 247,
+   "f_land": 257,
+   "f_end": 274,
+   "until": "6-01.s2",
+   "word": "6-01.w011",
+   "w": "help?",
+   "key": "help#1",
+   "sid": "6-01.s2",
+   "word_f0": 257,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 47079,
+   "F_land": 47089,
+   "F_end": 47106
+  },
+  {
+   "id": "cols",
+   "obj": "cols",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "Let's line up：4 行 × 3 列翻牌框与左右小凹位展开",
+   "f_start": 314,
+   "f_land": 327,
+   "f_end": 398,
+   "until": "6-01.w015",
+   "word": "6-01.w013",
+   "w": "line",
+   "key": "line#1",
+   "sid": "6-01.s3",
+   "word_f0": 327,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "cols"
+    ]
+   },
+   "F_start": 47146,
+   "F_land": 47159,
+   "F_end": 47230,
+   "g_start": 301,
+   "g_on": 319,
+   "g_end": 398,
+   "g_off": 428,
+   "g_tick": 323,
+   "G_start": 47133,
+   "G_on": 47151,
+   "G_end": 47230,
+   "G_off": 47260,
+   "G_tick": 47155
+  },
+  {
+   "id": "before",
+   "obj": "before",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "before：中栏表头翻出 BEFORE，左侧四行空翻牌轻抖待命",
+   "f_start": 364,
+   "f_land": 377,
+   "f_end": 421,
+   "until": "6-01.w017",
+   "word": "6-01.w015",
+   "w": "before",
+   "key": "before#1",
+   "sid": "6-01.s3",
+   "word_f0": 377,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 47196,
+   "F_land": 47209,
+   "F_end": 47253
+  },
+  {
+   "id": "now",
+   "obj": "now",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "and now：右栏表头翻出克莱因蓝框 NOW，右侧四行空翻牌轻抖待命",
+   "f_start": 399,
+   "f_land": 409,
+   "f_end": 421,
+   "until": "6-01.s3",
+   "word": "6-01.w017",
+   "w": "now.",
+   "key": "now#1",
+   "sid": "6-01.s3",
+   "word_f0": 409,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 47231,
+   "F_land": 47241,
+   "F_end": 47253
+  }
+ ],
+ "guides": [
+  {
+   "id": "title",
+   "target": [
+    "header"
+   ],
+   "kind": "focus",
+   "gs": 153,
+   "gon": 171,
+   "land": 179,
+   "gend": 252,
+   "goff": 282,
+   "tick": 175,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 151,
+   "events": [
+    "title"
+   ],
+   "G_start": 46985,
+   "G_on": 47003,
+   "G_land": 47011,
+   "G_end": 47084,
+   "G_off": 47114,
+   "G_tick": 47007
+  },
+  {
+   "id": "cols",
+   "target": [
+    "cols"
+   ],
+   "kind": "focus",
+   "gs": 301,
+   "gon": 319,
+   "land": 327,
+   "gend": 398,
+   "goff": 428,
+   "tick": 323,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 314,
+   "events": [
+    "cols"
+   ],
+   "G_start": 47133,
+   "G_on": 47151,
+   "G_land": 47159,
+   "G_end": 47230,
+   "G_off": 47260,
+   "G_tick": 47155
+  }
+ ],
+ "problems": []
+}

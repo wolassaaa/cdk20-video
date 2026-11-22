@@ -1,0 +1,944 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "3-07",
+ "segs": [
+  "3-07"
+ ],
+ "tool": "remotion",
+ "fps": 60,
+ "len_f": 1368,
+ "cut": "cut_v8",
+ "cut_start_f": 21560,
+ "cut_start_s": 359.33,
+ "master_built": "2026-11-18 02:33:56 +09:00",
+ "words_hash": "6e524d61edd7",
+ "events_src": "镜头设计_v3/映射/events/3-07.json",
+ "words": [
+  {
+   "wid": "3-07.w001",
+   "w": "In",
+   "key": "in#1",
+   "sid": "3-07.s1",
+   "f0": 9,
+   "f1": 13,
+   "F0": 21569,
+   "F1": 21573
+  },
+  {
+   "wid": "3-07.w002",
+   "w": "2023,",
+   "key": "2023#1",
+   "sid": "3-07.s1",
+   "f0": 16,
+   "f1": 133,
+   "F0": 21576,
+   "F1": 21693
+  },
+  {
+   "wid": "3-07.w003",
+   "w": "an",
+   "key": "an#1",
+   "sid": "3-07.s1",
+   "f0": 133,
+   "f1": 135,
+   "F0": 21693,
+   "F1": 21695
+  },
+  {
+   "wid": "3-07.w004",
+   "w": "AI",
+   "key": "ai#1",
+   "sid": "3-07.s1",
+   "f0": 135,
+   "f1": 138,
+   "F0": 21695,
+   "F1": 21698
+  },
+  {
+   "wid": "3-07.w005",
+   "w": "platform",
+   "key": "platform#1",
+   "sid": "3-07.s1",
+   "f0": 140,
+   "f1": 165,
+   "F0": 21700,
+   "F1": 21725
+  },
+  {
+   "wid": "3-07.w006",
+   "w": "called",
+   "key": "called#1",
+   "sid": "3-07.s1",
+   "f0": 170,
+   "f1": 187,
+   "F0": 21730,
+   "F1": 21747
+  },
+  {
+   "wid": "3-07.w007",
+   "w": "PandaOmics",
+   "key": "pandaomics#1",
+   "sid": "3-07.s1",
+   "f0": 196,
+   "f1": 243,
+   "F0": 21756,
+   "F1": 21803
+  },
+  {
+   "wid": "3-07.w008",
+   "w": "backed",
+   "key": "backed#1",
+   "sid": "3-07.s1",
+   "f0": 278,
+   "f1": 292,
+   "F0": 21838,
+   "F1": 21852
+  },
+  {
+   "wid": "3-07.w009",
+   "w": "that",
+   "key": "that#1",
+   "sid": "3-07.s1",
+   "f0": 292,
+   "f1": 301,
+   "F0": 21852,
+   "F1": 21861
+  },
+  {
+   "wid": "3-07.w010",
+   "w": "hunch.",
+   "key": "hunch#1",
+   "sid": "3-07.s1",
+   "f0": 304,
+   "f1": 327,
+   "F0": 21864,
+   "F1": 21887
+  },
+  {
+   "wid": "3-07.w011",
+   "w": "It",
+   "key": "it#1",
+   "sid": "3-07.s2",
+   "f0": 369,
+   "f1": 373,
+   "F0": 21929,
+   "F1": 21933
+  },
+  {
+   "wid": "3-07.w012",
+   "w": "combed",
+   "key": "combed#1",
+   "sid": "3-07.s2",
+   "f0": 375,
+   "f1": 389,
+   "F0": 21935,
+   "F1": 21949
+  },
+  {
+   "wid": "3-07.w013",
+   "w": "ten",
+   "key": "ten#1",
+   "sid": "3-07.s2",
+   "f0": 390,
+   "f1": 404,
+   "F0": 21950,
+   "F1": 21964
+  },
+  {
+   "wid": "3-07.w014",
+   "w": "liver",
+   "key": "liver#1",
+   "sid": "3-07.s2",
+   "f0": 407,
+   "f1": 421,
+   "F0": 21967,
+   "F1": 21981
+  },
+  {
+   "wid": "3-07.w015",
+   "w": "cancer",
+   "key": "cancer#1",
+   "sid": "3-07.s2",
+   "f0": 425,
+   "f1": 443,
+   "F0": 21985,
+   "F1": 22003
+  },
+  {
+   "wid": "3-07.w016",
+   "w": "data",
+   "key": "data#1",
+   "sid": "3-07.s2",
+   "f0": 445,
+   "f1": 458,
+   "F0": 22005,
+   "F1": 22018
+  },
+  {
+   "wid": "3-07.w017",
+   "w": "sets,",
+   "key": "sets#1",
+   "sid": "3-07.s2",
+   "f0": 464,
+   "f1": 485,
+   "F0": 22024,
+   "F1": 22045
+  },
+  {
+   "wid": "3-07.w018",
+   "w": "over",
+   "key": "over#1",
+   "sid": "3-07.s2",
+   "f0": 529,
+   "f1": 541,
+   "F0": 22089,
+   "F1": 22101
+  },
+  {
+   "wid": "3-07.w019",
+   "w": "a",
+   "key": "a#1",
+   "sid": "3-07.s2",
+   "f0": 542,
+   "f1": 543,
+   "F0": 22102,
+   "F1": 22103
+  },
+  {
+   "wid": "3-07.w020",
+   "w": "thousand",
+   "key": "thousand#1",
+   "sid": "3-07.s2",
+   "f0": 548,
+   "f1": 572,
+   "F0": 22108,
+   "F1": 22132
+  },
+  {
+   "wid": "3-07.w021",
+   "w": "tumour",
+   "key": "tumour#1",
+   "sid": "3-07.s2",
+   "f0": 575,
+   "f1": 594,
+   "F0": 22135,
+   "F1": 22154
+  },
+  {
+   "wid": "3-07.w022",
+   "w": "samples",
+   "key": "samples#1",
+   "sid": "3-07.s2",
+   "f0": 595,
+   "f1": 625,
+   "F0": 22155,
+   "F1": 22185
+  },
+  {
+   "wid": "3-07.w023",
+   "w": "and",
+   "key": "and#1",
+   "sid": "3-07.s2",
+   "f0": 637,
+   "f1": 643,
+   "F0": 22197,
+   "F1": 22203
+  },
+  {
+   "wid": "3-07.w024",
+   "w": "hundreds",
+   "key": "hundreds#1",
+   "sid": "3-07.s2",
+   "f0": 645,
+   "f1": 669,
+   "F0": 22205,
+   "F1": 22229
+  },
+  {
+   "wid": "3-07.w025",
+   "w": "of",
+   "key": "of#1",
+   "sid": "3-07.s2",
+   "f0": 673,
+   "f1": 679,
+   "F0": 22233,
+   "F1": 22239
+  },
+  {
+   "wid": "3-07.w026",
+   "w": "healthy",
+   "key": "healthy#1",
+   "sid": "3-07.s2",
+   "f0": 683,
+   "f1": 698,
+   "F0": 22243,
+   "F1": 22258
+  },
+  {
+   "wid": "3-07.w027",
+   "w": "ones,",
+   "key": "ones#1",
+   "sid": "3-07.s2",
+   "f0": 705,
+   "f1": 720,
+   "F0": 22265,
+   "F1": 22280
+  },
+  {
+   "wid": "3-07.w028",
+   "w": "plus",
+   "key": "plus#1",
+   "sid": "3-07.s2",
+   "f0": 746,
+   "f1": 763,
+   "F0": 22306,
+   "F1": 22323
+  },
+  {
+   "wid": "3-07.w029",
+   "w": "research",
+   "key": "research#1",
+   "sid": "3-07.s2",
+   "f0": 770,
+   "f1": 792,
+   "F0": 22330,
+   "F1": 22352
+  },
+  {
+   "wid": "3-07.w030",
+   "w": "papers.",
+   "key": "papers#1",
+   "sid": "3-07.s2",
+   "f0": 796,
+   "f1": 821,
+   "F0": 22356,
+   "F1": 22381
+  },
+  {
+   "wid": "3-07.w031",
+   "w": "People",
+   "key": "people#1",
+   "sid": "3-07.s3",
+   "f0": 877,
+   "f1": 892,
+   "F0": 22437,
+   "F1": 22452
+  },
+  {
+   "wid": "3-07.w032",
+   "w": "checked",
+   "key": "checked#1",
+   "sid": "3-07.s3",
+   "f0": 896,
+   "f1": 912,
+   "F0": 22456,
+   "F1": 22472
+  },
+  {
+   "wid": "3-07.w033",
+   "w": "its",
+   "key": "its#1",
+   "sid": "3-07.s3",
+   "f0": 914,
+   "f1": 920,
+   "F0": 22474,
+   "F1": 22480
+  },
+  {
+   "wid": "3-07.w034",
+   "w": "top",
+   "key": "top#1",
+   "sid": "3-07.s3",
+   "f0": 925,
+   "f1": 937,
+   "F0": 22485,
+   "F1": 22497
+  },
+  {
+   "wid": "3-07.w035",
+   "w": "20",
+   "key": "20#1",
+   "sid": "3-07.s3",
+   "f0": 948,
+   "f1": 967,
+   "F0": 22508,
+   "F1": 22527
+  },
+  {
+   "wid": "3-07.w036",
+   "w": "by",
+   "key": "by#1",
+   "sid": "3-07.s3",
+   "f0": 973,
+   "f1": 982,
+   "F0": 22533,
+   "F1": 22542
+  },
+  {
+   "wid": "3-07.w037",
+   "w": "hand,",
+   "key": "hand#1",
+   "sid": "3-07.s3",
+   "f0": 985,
+   "f1": 1002,
+   "F0": 22545,
+   "F1": 22562
+  },
+  {
+   "wid": "3-07.w038",
+   "w": "and",
+   "key": "and#2",
+   "sid": "3-07.s3",
+   "f0": 1043,
+   "f1": 1050,
+   "F0": 22603,
+   "F1": 22610
+  },
+  {
+   "wid": "3-07.w039",
+   "w": "CDK20",
+   "key": "cdk20#1",
+   "sid": "3-07.s3",
+   "f0": 1054,
+   "f1": 1108,
+   "F0": 22614,
+   "F1": 22668
+  },
+  {
+   "wid": "3-07.w040",
+   "w": "came",
+   "key": "came#1",
+   "sid": "3-07.s3",
+   "f0": 1136,
+   "f1": 1150,
+   "F0": 22696,
+   "F1": 22710
+  },
+  {
+   "wid": "3-07.w041",
+   "w": "out",
+   "key": "out#1",
+   "sid": "3-07.s3",
+   "f0": 1151,
+   "f1": 1158,
+   "F0": 22711,
+   "F1": 22718
+  },
+  {
+   "wid": "3-07.w042",
+   "w": "on",
+   "key": "on#1",
+   "sid": "3-07.s3",
+   "f0": 1162,
+   "f1": 1166,
+   "F0": 22722,
+   "F1": 22726
+  },
+  {
+   "wid": "3-07.w043",
+   "w": "top,",
+   "key": "top#2",
+   "sid": "3-07.s3",
+   "f0": 1170,
+   "f1": 1183,
+   "F0": 22730,
+   "F1": 22743
+  },
+  {
+   "wid": "3-07.w044",
+   "w": "with",
+   "key": "with#1",
+   "sid": "3-07.s3",
+   "f0": 1227,
+   "f1": 1235,
+   "F0": 22787,
+   "F1": 22795
+  },
+  {
+   "wid": "3-07.w045",
+   "w": "no",
+   "key": "no#1",
+   "sid": "3-07.s3",
+   "f0": 1237,
+   "f1": 1242,
+   "F0": 22797,
+   "F1": 22802
+  },
+  {
+   "wid": "3-07.w046",
+   "w": "approved",
+   "key": "approved#1",
+   "sid": "3-07.s3",
+   "f0": 1249,
+   "f1": 1278,
+   "F0": 22809,
+   "F1": 22838
+  },
+  {
+   "wid": "3-07.w047",
+   "w": "drug",
+   "key": "drug#1",
+   "sid": "3-07.s3",
+   "f0": 1283,
+   "f1": 1297,
+   "F0": 22843,
+   "F1": 22857
+  },
+  {
+   "wid": "3-07.w048",
+   "w": "against",
+   "key": "against#1",
+   "sid": "3-07.s3",
+   "f0": 1305,
+   "f1": 1326,
+   "F0": 22865,
+   "F1": 22886
+  },
+  {
+   "wid": "3-07.w049",
+   "w": "it",
+   "key": "it#2",
+   "sid": "3-07.s3",
+   "f0": 1329,
+   "f1": 1335,
+   "F0": 22889,
+   "F1": 22895
+  },
+  {
+   "wid": "3-07.w050",
+   "w": "yet.",
+   "key": "yet#1",
+   "sid": "3-07.s3",
+   "f0": 1338,
+   "f1": 1353,
+   "F0": 22898,
+   "F1": 22913
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "3-07.s1",
+   "text": "In 2023, an AI platform called PandaOmics backed that hunch.",
+   "w_first": "3-07.w001",
+   "w_last": "3-07.w010",
+   "f0": 9,
+   "f1": 327
+  },
+  {
+   "sid": "3-07.s2",
+   "text": "It combed ten liver cancer data sets, over a thousand tumour samples and hundreds of healthy ones, plus research papers.",
+   "w_first": "3-07.w011",
+   "w_last": "3-07.w030",
+   "f0": 369,
+   "f1": 821
+  },
+  {
+   "sid": "3-07.s3",
+   "text": "People checked its top 20 by hand, and CDK20 came out on top, with no approved drug against it yet.",
+   "w_first": "3-07.w031",
+   "w_last": "3-07.w050",
+   "f0": 877,
+   "f1": 1353
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "y23",
+   "obj": "y23",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "In 2023：年份牌落下",
+   "f_start": 9,
+   "f_land": 16,
+   "f_end": 133,
+   "until": "3-07.w002",
+   "word": "3-07.w002",
+   "w": "2023,",
+   "key": "2023#1",
+   "sid": "3-07.s1",
+   "word_f0": 16,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "year"
+    ]
+   },
+   "F_start": 21569,
+   "F_land": 21576,
+   "F_end": 21693
+  },
+  {
+   "id": "panda",
+   "obj": "panda",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "PandaOmics：芯片落下",
+   "f_start": 189,
+   "f_land": 196,
+   "f_end": 243,
+   "until": "3-07.w007",
+   "word": "3-07.w007",
+   "w": "PandaOmics",
+   "key": "pandaomics#1",
+   "sid": "3-07.s1",
+   "word_f0": 196,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 21749,
+   "F_land": 21756,
+   "F_end": 21803
+  },
+  {
+   "id": "hunch",
+   "obj": "hunch",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "backed that hunch：小插座落下打勾，手写 hunch",
+   "f_start": 268,
+   "f_land": 278,
+   "f_end": 327,
+   "until": "3-07.s1",
+   "word": "3-07.w008",
+   "w": "backed",
+   "key": "backed#1",
+   "sid": "3-07.s1",
+   "word_f0": 278,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chip"
+    ]
+   },
+   "F_start": 21828,
+   "F_land": 21838,
+   "F_end": 21887,
+   "g_start": 252,
+   "g_on": 270,
+   "g_end": 327,
+   "g_off": 357,
+   "g_tick": 274,
+   "G_start": 21812,
+   "G_on": 21830,
+   "G_end": 21887,
+   "G_off": 21917,
+   "G_tick": 21834
+  },
+  {
+   "id": "ten",
+   "obj": "ten",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "ten liver cancer data sets：十个数据架依次落下，数字轮 10",
+   "f_start": 383,
+   "f_land": 390,
+   "f_end": 485,
+   "until": "3-07.w017",
+   "word": "3-07.w013",
+   "w": "ten",
+   "key": "ten#1",
+   "sid": "3-07.s2",
+   "word_f0": 390,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "sets"
+    ]
+   },
+   "F_start": 21943,
+   "F_land": 21950,
+   "F_end": 22045,
+   "g_start": 364,
+   "g_on": 382,
+   "g_end": 485,
+   "g_off": 515,
+   "g_tick": 386,
+   "G_start": 21924,
+   "G_on": 21942,
+   "G_end": 22045,
+   "G_off": 22075,
+   "G_tick": 21946
+  },
+  {
+   "id": "tum",
+   "obj": "tum",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "over a thousand tumour samples：蓝点长满，数字轮 1,133",
+   "f_start": 512,
+   "f_land": 548,
+   "f_end": 625,
+   "until": "3-07.w022",
+   "word": "3-07.w020",
+   "w": "thousand",
+   "key": "thousand#1",
+   "sid": "3-07.s2",
+   "word_f0": 548,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 22072,
+   "F_land": 22108,
+   "F_end": 22185
+  },
+  {
+   "id": "hl",
+   "obj": "hl",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "hundreds of healthy ones：灰点长满，数字轮 674",
+   "f_start": 609,
+   "f_land": 645,
+   "f_end": 720,
+   "until": "3-07.w027",
+   "word": "3-07.w024",
+   "w": "hundreds",
+   "key": "hundreds#1",
+   "sid": "3-07.s2",
+   "word_f0": 645,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 22169,
+   "F_land": 22205,
+   "F_end": 22280
+  },
+  {
+   "id": "papers",
+   "obj": "papers",
+   "verb": "move",
+   "ease": "inout",
+   "means": "plus research papers：一叠论文飞进芯片",
+   "f_start": 733,
+   "f_land": 746,
+   "f_end": 821,
+   "until": "3-07.s2",
+   "word": "3-07.w028",
+   "w": "plus",
+   "key": "plus#1",
+   "sid": "3-07.s2",
+   "word_f0": 746,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 22293,
+   "F_land": 22306,
+   "F_end": 22381
+  },
+  {
+   "id": "people",
+   "obj": "people",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "People checked：清场，两个小人落下",
+   "f_start": 870,
+   "f_land": 877,
+   "f_end": 912,
+   "until": "3-07.w032",
+   "word": "3-07.w031",
+   "w": "People",
+   "key": "people#1",
+   "sid": "3-07.s3",
+   "word_f0": 877,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 22430,
+   "F_land": 22437,
+   "F_end": 22472
+  },
+  {
+   "id": "top20",
+   "obj": "top20",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "its top 20 by hand：表格一行行画出，逐行打勾",
+   "f_start": 912,
+   "f_land": 925,
+   "f_end": 1002,
+   "until": "3-07.w037",
+   "word": "3-07.w034",
+   "w": "top",
+   "key": "top#1",
+   "sid": "3-07.s3",
+   "word_f0": 925,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "table"
+    ]
+   },
+   "F_start": 22472,
+   "F_land": 22485,
+   "F_end": 22562,
+   "g_start": 899,
+   "g_on": 917,
+   "g_end": 1002,
+   "g_off": 1032,
+   "g_tick": 921,
+   "G_start": 22459,
+   "G_on": 22477,
+   "G_end": 22562,
+   "G_off": 22592,
+   "G_tick": 22481
+  },
+  {
+   "id": "cdkl",
+   "obj": "cdkl",
+   "verb": "move",
+   "ease": "inout",
+   "means": "and CDK20：蓝色那一行亮一下",
+   "f_start": 1041,
+   "f_land": 1054,
+   "f_end": 1108,
+   "until": "3-07.w039",
+   "word": "3-07.w039",
+   "w": "CDK20",
+   "key": "cdk20#1",
+   "sid": "3-07.s3",
+   "word_f0": 1054,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 22601,
+   "F_land": 22614,
+   "F_end": 22668
+  },
+  {
+   "id": "cdk",
+   "obj": "cdk",
+   "verb": "move",
+   "ease": "inout",
+   "means": "CDK20 came out on top：蓝色那一行升到第一",
+   "f_start": 1123,
+   "f_land": 1136,
+   "f_end": 1183,
+   "until": "3-07.w043",
+   "word": "3-07.w040",
+   "w": "came",
+   "key": "came#1",
+   "sid": "3-07.s3",
+   "word_f0": 1136,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 22683,
+   "F_land": 22696,
+   "F_end": 22743
+  },
+  {
+   "id": "nodrug",
+   "obj": "nodrug",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "no approved drug against it yet：胶囊变灰画斜杠，手写",
+   "f_start": 1230,
+   "f_land": 1237,
+   "f_end": 1353,
+   "until": "3-07.s3",
+   "word": "3-07.w045",
+   "w": "no",
+   "key": "no#1",
+   "sid": "3-07.s3",
+   "word_f0": 1237,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 22790,
+   "F_land": 22797,
+   "F_end": 22913
+  }
+ ],
+ "guides": [
+  {
+   "id": "hunch",
+   "target": [
+    "chip"
+   ],
+   "kind": "focus",
+   "gs": 252,
+   "gon": 270,
+   "land": 278,
+   "gend": 327,
+   "goff": 357,
+   "tick": 274,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 268,
+   "events": [
+    "hunch"
+   ],
+   "G_start": 21812,
+   "G_on": 21830,
+   "G_land": 21838,
+   "G_end": 21887,
+   "G_off": 21917,
+   "G_tick": 21834
+  },
+  {
+   "id": "ten",
+   "target": [
+    "sets"
+   ],
+   "kind": "focus",
+   "gs": 364,
+   "gon": 382,
+   "land": 390,
+   "gend": 485,
+   "goff": 515,
+   "tick": 386,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 383,
+   "events": [
+    "ten"
+   ],
+   "G_start": 21924,
+   "G_on": 21942,
+   "G_land": 21950,
+   "G_end": 22045,
+   "G_off": 22075,
+   "G_tick": 21946
+  },
+  {
+   "id": "top20",
+   "target": [
+    "table"
+   ],
+   "kind": "focus",
+   "gs": 899,
+   "gon": 917,
+   "land": 925,
+   "gend": 1002,
+   "goff": 1032,
+   "tick": 921,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 912,
+   "events": [
+    "top20"
+   ],
+   "G_start": 22459,
+   "G_on": 22477,
+   "G_land": 22485,
+   "G_end": 22562,
+   "G_off": 22592,
+   "G_tick": 22481
+  }
+ ],
+ "problems": []
+}

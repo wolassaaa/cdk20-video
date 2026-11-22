@@ -1,0 +1,909 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "4-06",
+ "segs": [
+  "4-06"
+ ],
+ "tool": "remotion",
+ "fps": 60,
+ "len_f": 1062,
+ "cut": "cut_v8",
+ "cut_start_f": 30420,
+ "cut_start_s": 507.0,
+ "master_built": "2026-11-18 02:33:56 +09:00",
+ "words_hash": "e9ccdc19e870",
+ "events_src": "镜头设计_v3/映射/events/4-06.json",
+ "words": [
+  {
+   "wid": "4-06.w001",
+   "w": "And",
+   "key": "and#1",
+   "sid": "4-06.s1",
+   "f0": 9,
+   "f1": 16,
+   "F0": 30429,
+   "F1": 30436
+  },
+  {
+   "wid": "4-06.w002",
+   "w": "this",
+   "key": "this#1",
+   "sid": "4-06.s1",
+   "f0": 20,
+   "f1": 29,
+   "F0": 30440,
+   "F1": 30449
+  },
+  {
+   "wid": "4-06.w003",
+   "w": "next",
+   "key": "next#1",
+   "sid": "4-06.s1",
+   "f0": 35,
+   "f1": 51,
+   "F0": 30455,
+   "F1": 30471
+  },
+  {
+   "wid": "4-06.w004",
+   "w": "part",
+   "key": "part#1",
+   "sid": "4-06.s1",
+   "f0": 55,
+   "f1": 69,
+   "F0": 30475,
+   "F1": 30489
+  },
+  {
+   "wid": "4-06.w005",
+   "w": "honestly",
+   "key": "honestly#1",
+   "sid": "4-06.s1",
+   "f0": 76,
+   "f1": 106,
+   "F0": 30496,
+   "F1": 30526
+  },
+  {
+   "wid": "4-06.w006",
+   "w": "blew",
+   "key": "blew#1",
+   "sid": "4-06.s1",
+   "f0": 116,
+   "f1": 127,
+   "F0": 30536,
+   "F1": 30547
+  },
+  {
+   "wid": "4-06.w007",
+   "w": "my",
+   "key": "my#1",
+   "sid": "4-06.s1",
+   "f0": 130,
+   "f1": 138,
+   "F0": 30550,
+   "F1": 30558
+  },
+  {
+   "wid": "4-06.w008",
+   "w": "mind.",
+   "key": "mind#1",
+   "sid": "4-06.s1",
+   "f0": 141,
+   "f1": 160,
+   "F0": 30561,
+   "F1": 30580
+  },
+  {
+   "wid": "4-06.w009",
+   "w": "Think",
+   "key": "think#1",
+   "sid": "4-06.s2",
+   "f0": 201,
+   "f1": 213,
+   "F0": 30621,
+   "F1": 30633
+  },
+  {
+   "wid": "4-06.w010",
+   "w": "about",
+   "key": "about#1",
+   "sid": "4-06.s2",
+   "f0": 216,
+   "f1": 231,
+   "F0": 30636,
+   "F1": 30651
+  },
+  {
+   "wid": "4-06.w011",
+   "w": "how",
+   "key": "how#1",
+   "sid": "4-06.s2",
+   "f0": 234,
+   "f1": 244,
+   "F0": 30654,
+   "F1": 30664
+  },
+  {
+   "wid": "4-06.w012",
+   "w": "chemists",
+   "key": "chemists#1",
+   "sid": "4-06.s2",
+   "f0": 248,
+   "f1": 278,
+   "F0": 30668,
+   "F1": 30698
+  },
+  {
+   "wid": "4-06.w013",
+   "w": "have",
+   "key": "have#1",
+   "sid": "4-06.s2",
+   "f0": 284,
+   "f1": 296,
+   "F0": 30704,
+   "F1": 30716
+  },
+  {
+   "wid": "4-06.w014",
+   "w": "always",
+   "key": "always#1",
+   "sid": "4-06.s2",
+   "f0": 302,
+   "f1": 321,
+   "F0": 30722,
+   "F1": 30741
+  },
+  {
+   "wid": "4-06.w015",
+   "w": "found",
+   "key": "found#1",
+   "sid": "4-06.s2",
+   "f0": 327,
+   "f1": 343,
+   "F0": 30747,
+   "F1": 30763
+  },
+  {
+   "wid": "4-06.w016",
+   "w": "a",
+   "key": "a#1",
+   "sid": "4-06.s2",
+   "f0": 344,
+   "f1": 345,
+   "F0": 30764,
+   "F1": 30765
+  },
+  {
+   "wid": "4-06.w017",
+   "w": "key.",
+   "key": "key#1",
+   "sid": "4-06.s2",
+   "f0": 350,
+   "f1": 366,
+   "F0": 30770,
+   "F1": 30786
+  },
+  {
+   "wid": "4-06.w018",
+   "w": "Imagine",
+   "key": "imagine#1",
+   "sid": "4-06.s3",
+   "f0": 415,
+   "f1": 441,
+   "F0": 30835,
+   "F1": 30861
+  },
+  {
+   "wid": "4-06.w019",
+   "w": "a",
+   "key": "a#2",
+   "sid": "4-06.s3",
+   "f0": 444,
+   "f1": 445,
+   "F0": 30864,
+   "F1": 30865
+  },
+  {
+   "wid": "4-06.w020",
+   "w": "molecule.",
+   "key": "molecule#1",
+   "sid": "4-06.s3",
+   "f0": 449,
+   "f1": 482,
+   "F0": 30869,
+   "F1": 30902
+  },
+  {
+   "wid": "4-06.w021",
+   "w": "Make",
+   "key": "make#1",
+   "sid": "4-06.s4",
+   "f0": 512,
+   "f1": 527,
+   "F0": 30932,
+   "F1": 30947
+  },
+  {
+   "wid": "4-06.w022",
+   "w": "it.",
+   "key": "it#1",
+   "sid": "4-06.s4",
+   "f0": 530,
+   "f1": 539,
+   "F0": 30950,
+   "F1": 30959
+  },
+  {
+   "wid": "4-06.w023",
+   "w": "Test",
+   "key": "test#1",
+   "sid": "4-06.s5",
+   "f0": 563,
+   "f1": 583,
+   "F0": 30983,
+   "F1": 31003
+  },
+  {
+   "wid": "4-06.w024",
+   "w": "it.",
+   "key": "it#2",
+   "sid": "4-06.s5",
+   "f0": 588,
+   "f1": 595,
+   "F0": 31008,
+   "F1": 31015
+  },
+  {
+   "wid": "4-06.w025",
+   "w": "It",
+   "key": "it#3",
+   "sid": "4-06.s6",
+   "f0": 623,
+   "f1": 629,
+   "F0": 31043,
+   "F1": 31049
+  },
+  {
+   "wid": "4-06.w026",
+   "w": "fails.",
+   "key": "fails#1",
+   "sid": "4-06.s6",
+   "f0": 635,
+   "f1": 659,
+   "F0": 31055,
+   "F1": 31079
+  },
+  {
+   "wid": "4-06.w027",
+   "w": "Tweak",
+   "key": "tweak#1",
+   "sid": "4-06.s7",
+   "f0": 701,
+   "f1": 717,
+   "F0": 31121,
+   "F1": 31137
+  },
+  {
+   "wid": "4-06.w028",
+   "w": "it.",
+   "key": "it#4",
+   "sid": "4-06.s7",
+   "f0": 720,
+   "f1": 727,
+   "F0": 31140,
+   "F1": 31147
+  },
+  {
+   "wid": "4-06.w029",
+   "w": "Try",
+   "key": "try#1",
+   "sid": "4-06.s8",
+   "f0": 749,
+   "f1": 769,
+   "F0": 31169,
+   "F1": 31189
+  },
+  {
+   "wid": "4-06.w030",
+   "w": "again.",
+   "key": "again#1",
+   "sid": "4-06.s8",
+   "f0": 773,
+   "f1": 791,
+   "F0": 31193,
+   "F1": 31211
+  },
+  {
+   "wid": "4-06.w031",
+   "w": "And",
+   "key": "and#2",
+   "sid": "4-06.s9",
+   "f0": 834,
+   "f1": 841,
+   "F0": 31254,
+   "F1": 31261
+  },
+  {
+   "wid": "4-06.w032",
+   "w": "every",
+   "key": "every#1",
+   "sid": "4-06.s9",
+   "f0": 847,
+   "f1": 859,
+   "F0": 31267,
+   "F1": 31279
+  },
+  {
+   "wid": "4-06.w033",
+   "w": "single",
+   "key": "single#1",
+   "sid": "4-06.s9",
+   "f0": 864,
+   "f1": 885,
+   "F0": 31284,
+   "F1": 31305
+  },
+  {
+   "wid": "4-06.w034",
+   "w": "round",
+   "key": "round#1",
+   "sid": "4-06.s9",
+   "f0": 888,
+   "f1": 903,
+   "F0": 31308,
+   "F1": 31323
+  },
+  {
+   "wid": "4-06.w035",
+   "w": "in",
+   "key": "in#1",
+   "sid": "4-06.s9",
+   "f0": 908,
+   "f1": 912,
+   "F0": 31328,
+   "F1": 31332
+  },
+  {
+   "wid": "4-06.w036",
+   "w": "a",
+   "key": "a#3",
+   "sid": "4-06.s9",
+   "f0": 917,
+   "f1": 918,
+   "F0": 31337,
+   "F1": 31338
+  },
+  {
+   "wid": "4-06.w037",
+   "w": "real",
+   "key": "real#1",
+   "sid": "4-06.s9",
+   "f0": 924,
+   "f1": 936,
+   "F0": 31344,
+   "F1": 31356
+  },
+  {
+   "wid": "4-06.w038",
+   "w": "lab",
+   "key": "lab#1",
+   "sid": "4-06.s9",
+   "f0": 939,
+   "f1": 951,
+   "F0": 31359,
+   "F1": 31371
+  },
+  {
+   "wid": "4-06.w039",
+   "w": "costs",
+   "key": "costs#1",
+   "sid": "4-06.s9",
+   "f0": 957,
+   "f1": 982,
+   "F0": 31377,
+   "F1": 31402
+  },
+  {
+   "wid": "4-06.w040",
+   "w": "time",
+   "key": "time#1",
+   "sid": "4-06.s9",
+   "f0": 982,
+   "f1": 1002,
+   "F0": 31402,
+   "F1": 31422
+  },
+  {
+   "wid": "4-06.w041",
+   "w": "and",
+   "key": "and#3",
+   "sid": "4-06.s9",
+   "f0": 1022,
+   "f1": 1028,
+   "F0": 31442,
+   "F1": 31448
+  },
+  {
+   "wid": "4-06.w042",
+   "w": "money.",
+   "key": "money#1",
+   "sid": "4-06.s9",
+   "f0": 1030,
+   "f1": 1047,
+   "F0": 31450,
+   "F1": 31467
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "4-06.s1",
+   "text": "And this next part honestly blew my mind.",
+   "w_first": "4-06.w001",
+   "w_last": "4-06.w008",
+   "f0": 9,
+   "f1": 160
+  },
+  {
+   "sid": "4-06.s2",
+   "text": "Think about how chemists have always found a key.",
+   "w_first": "4-06.w009",
+   "w_last": "4-06.w017",
+   "f0": 201,
+   "f1": 366
+  },
+  {
+   "sid": "4-06.s3",
+   "text": "Imagine a molecule.",
+   "w_first": "4-06.w018",
+   "w_last": "4-06.w020",
+   "f0": 415,
+   "f1": 482
+  },
+  {
+   "sid": "4-06.s4",
+   "text": "Make it.",
+   "w_first": "4-06.w021",
+   "w_last": "4-06.w022",
+   "f0": 512,
+   "f1": 539
+  },
+  {
+   "sid": "4-06.s5",
+   "text": "Test it.",
+   "w_first": "4-06.w023",
+   "w_last": "4-06.w024",
+   "f0": 563,
+   "f1": 595
+  },
+  {
+   "sid": "4-06.s6",
+   "text": "It fails.",
+   "w_first": "4-06.w025",
+   "w_last": "4-06.w026",
+   "f0": 623,
+   "f1": 659
+  },
+  {
+   "sid": "4-06.s7",
+   "text": "Tweak it.",
+   "w_first": "4-06.w027",
+   "w_last": "4-06.w028",
+   "f0": 701,
+   "f1": 727
+  },
+  {
+   "sid": "4-06.s8",
+   "text": "Try again.",
+   "w_first": "4-06.w029",
+   "w_last": "4-06.w030",
+   "f0": 749,
+   "f1": 791
+  },
+  {
+   "sid": "4-06.s9",
+   "text": "And every single round in a real lab costs time and money.",
+   "w_first": "4-06.w031",
+   "w_last": "4-06.w042",
+   "f0": 834,
+   "f1": 1047
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "part",
+   "obj": "part",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "this next part：圆环料杆画出来",
+   "f_start": 22,
+   "f_land": 35,
+   "f_end": 69,
+   "until": "4-06.w004",
+   "word": "4-06.w003",
+   "w": "next",
+   "key": "next#1",
+   "sid": "4-06.s1",
+   "word_f0": 35,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "loop"
+    ]
+   },
+   "F_start": 30442,
+   "F_land": 30455,
+   "F_end": 30489,
+   "g_start": 9,
+   "g_on": 27,
+   "g_end": 69,
+   "g_off": 99,
+   "g_tick": 31,
+   "G_start": 30429,
+   "G_on": 30447,
+   "G_end": 30489,
+   "G_off": 30519,
+   "G_tick": 30451
+  },
+  {
+   "id": "mind",
+   "obj": "mind",
+   "verb": "move",
+   "ease": "inout",
+   "means": "blew my mind：环一亮一抖（T7）",
+   "f_start": 109,
+   "f_land": 116,
+   "f_end": 160,
+   "until": "4-06.s1",
+   "word": "4-06.w006",
+   "w": "blew",
+   "key": "blew#1",
+   "sid": "4-06.s1",
+   "word_f0": 116,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 30529,
+   "F_land": 30536,
+   "F_end": 30580
+  },
+  {
+   "id": "chem",
+   "obj": "chem",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "chemists：小人落下",
+   "f_start": 241,
+   "f_land": 248,
+   "f_end": 278,
+   "until": "4-06.w012",
+   "word": "4-06.w012",
+   "w": "chemists",
+   "key": "chemists#1",
+   "sid": "4-06.s2",
+   "word_f0": 248,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 30661,
+   "F_land": 30668,
+   "F_end": 30698
+  },
+  {
+   "id": "key",
+   "obj": "key",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "found a key：金插头落在环顶",
+   "f_start": 343,
+   "f_land": 350,
+   "f_end": 366,
+   "until": "4-06.s2",
+   "word": "4-06.w017",
+   "w": "key.",
+   "key": "key#1",
+   "sid": "4-06.s2",
+   "word_f0": 350,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "key"
+    ]
+   },
+   "F_start": 30763,
+   "F_land": 30770,
+   "F_end": 30786,
+   "g_start": 324,
+   "g_on": 342,
+   "g_end": 366,
+   "g_off": 396,
+   "g_tick": 346,
+   "G_start": 30744,
+   "G_on": 30762,
+   "G_end": 30786,
+   "G_off": 30816,
+   "G_tick": 30766
+  },
+  {
+   "id": "imag",
+   "obj": "imag",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "Imagine：第一站牌弹出",
+   "f_start": 408,
+   "f_land": 415,
+   "f_end": 482,
+   "until": "4-06.s3",
+   "word": "4-06.w018",
+   "w": "Imagine",
+   "key": "imagine#1",
+   "sid": "4-06.s3",
+   "word_f0": 415,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 30828,
+   "F_land": 30835,
+   "F_end": 30902
+  },
+  {
+   "id": "make",
+   "obj": "make",
+   "verb": "move",
+   "ease": "inout",
+   "means": "Make it：插头走到第二站，烧瓶落下",
+   "f_start": 499,
+   "f_land": 512,
+   "f_end": 539,
+   "until": "4-06.s4",
+   "word": "4-06.w021",
+   "w": "Make",
+   "key": "make#1",
+   "sid": "4-06.s4",
+   "word_f0": 512,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 30919,
+   "F_land": 30932,
+   "F_end": 30959
+  },
+  {
+   "id": "test",
+   "obj": "test",
+   "verb": "move",
+   "ease": "inout",
+   "means": "Test it：走到第三站，小插座落下",
+   "f_start": 550,
+   "f_land": 563,
+   "f_end": 595,
+   "until": "4-06.s5",
+   "word": "4-06.w023",
+   "w": "Test",
+   "key": "test#1",
+   "sid": "4-06.s5",
+   "word_f0": 563,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 30970,
+   "F_land": 30983,
+   "F_end": 31015
+  },
+  {
+   "id": "fail",
+   "obj": "fail",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "It fails：插头顶不进，弹回变灰（T7）",
+   "f_start": 628,
+   "f_land": 635,
+   "f_end": 659,
+   "until": "4-06.s6",
+   "word": "4-06.w026",
+   "w": "fails.",
+   "key": "fails#1",
+   "sid": "4-06.s6",
+   "word_f0": 635,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 31048,
+   "F_land": 31055,
+   "F_end": 31079
+  },
+  {
+   "id": "tweak",
+   "obj": "tweak",
+   "verb": "move",
+   "ease": "inout",
+   "means": "Tweak it：走到第四站，插头换个形状",
+   "f_start": 688,
+   "f_land": 701,
+   "f_end": 727,
+   "until": "4-06.s7",
+   "word": "4-06.w027",
+   "w": "Tweak",
+   "key": "tweak#1",
+   "sid": "4-06.s7",
+   "word_f0": 701,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 31108,
+   "F_land": 31121,
+   "F_end": 31147
+  },
+  {
+   "id": "again",
+   "obj": "again",
+   "verb": "move",
+   "ease": "inout",
+   "means": "Try again：回到第一站",
+   "f_start": 736,
+   "f_land": 749,
+   "f_end": 791,
+   "until": "4-06.s8",
+   "word": "4-06.w029",
+   "w": "Try",
+   "key": "try#1",
+   "sid": "4-06.s8",
+   "word_f0": 749,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 31156,
+   "F_land": 31169,
+   "F_end": 31211
+  },
+  {
+   "id": "round",
+   "obj": "round",
+   "verb": "move",
+   "ease": "inout",
+   "means": "every single round：插头绕环越跑越快",
+   "f_start": 834,
+   "f_land": 847,
+   "f_end": 903,
+   "until": "4-06.w034",
+   "word": "4-06.w032",
+   "w": "every",
+   "key": "every#1",
+   "sid": "4-06.s9",
+   "word_f0": 847,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 31254,
+   "F_land": 31267,
+   "F_end": 31323
+  },
+  {
+   "id": "cost",
+   "obj": "cost",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "costs time and money：每过顶站掉一张钞票、日历翻一页",
+   "f_start": 950,
+   "f_land": 957,
+   "f_end": 1047,
+   "until": "4-06.s9",
+   "word": "4-06.w039",
+   "w": "costs",
+   "key": "costs#1",
+   "sid": "4-06.s9",
+   "word_f0": 957,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "costs"
+    ]
+   },
+   "F_start": 31370,
+   "F_land": 31377,
+   "F_end": 31467,
+   "g_start": 931,
+   "g_on": 949,
+   "g_end": 1047,
+   "g_off": 1061,
+   "g_tick": 953,
+   "G_start": 31351,
+   "G_on": 31369,
+   "G_end": 31467,
+   "G_off": 31481,
+   "G_tick": 31373
+  }
+ ],
+ "guides": [
+  {
+   "id": "part",
+   "target": [
+    "loop"
+   ],
+   "kind": "focus",
+   "gs": 9,
+   "gon": 27,
+   "land": 35,
+   "gend": 69,
+   "goff": 99,
+   "tick": 31,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 22,
+   "events": [
+    "part"
+   ],
+   "G_start": 30429,
+   "G_on": 30447,
+   "G_land": 30455,
+   "G_end": 30489,
+   "G_off": 30519,
+   "G_tick": 30451
+  },
+  {
+   "id": "key",
+   "target": [
+    "key"
+   ],
+   "kind": "focus",
+   "gs": 324,
+   "gon": 342,
+   "land": 350,
+   "gend": 366,
+   "goff": 396,
+   "tick": 346,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 343,
+   "events": [
+    "key"
+   ],
+   "G_start": 30744,
+   "G_on": 30762,
+   "G_land": 30770,
+   "G_end": 30786,
+   "G_off": 30816,
+   "G_tick": 30766
+  },
+  {
+   "id": "cost",
+   "target": [
+    "costs"
+   ],
+   "kind": "focus",
+   "gs": 931,
+   "gon": 949,
+   "land": 957,
+   "gend": 1047,
+   "goff": 1061,
+   "tick": 953,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 950,
+   "events": [
+    "cost"
+   ],
+   "G_start": 31351,
+   "G_on": 31369,
+   "G_land": 31377,
+   "G_end": 31467,
+   "G_off": 31481,
+   "G_tick": 31373
+  }
+ ],
+ "problems": []
+}

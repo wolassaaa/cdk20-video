@@ -1,0 +1,368 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "2-01",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 2 章二维说明书页。两个步骤框按年份：2011（中大、威尔斯亲王医院、肝肿瘤样本、CCRK = CDK20 升高）→ 2023（AI 研究、同一个蛋白搬过来、英矽智能科学园办公室）。出处 Feng et al. 2011；Ren et al. 2023。页面 Manual201.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "hk",
+   "obj": "hk_map",
+   "verb": "grow",
+   "at": {
+    "word": "2-01.w001",
+    "off": 0
+   },
+   "means": "Hong Kong first：页头小香港地图长出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "hk"
+    ]
+   }
+  },
+  {
+   "id": "step1",
+   "obj": "step_1",
+   "verb": "grow",
+   "at": {
+    "word": "2-01.w004",
+    "off": 0
+   },
+   "means": "In：第 1 步框画出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "dur": 30
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "title1",
+   "obj": "title_1",
+   "verb": "appear",
+   "at": {
+    "word": "2-01.w005",
+    "off": 0
+   },
+   "means": "2011：标题 2011",
+   "tool": "remotion",
+   "until": {
+    "word": "2-01.w005",
+    "off": 20
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "univ",
+   "obj": "univ",
+   "verb": "grow",
+   "at": {
+    "word": "2-01.w010",
+    "off": 0
+   },
+   "means": "Chinese University：大学楼长出，印校名",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "2-01.w014"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "univ"
+    ]
+   }
+  },
+  {
+   "id": "tubes",
+   "obj": "tubes",
+   "verb": "grow",
+   "at": {
+    "word": "2-01.w016",
+    "off": 0
+   },
+   "means": "liver tumours：三支样本管依次长出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "2-01.w019"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "tube"
+    ]
+   }
+  },
+  {
+   "id": "hospital",
+   "obj": "hospital",
+   "verb": "grow",
+   "at": {
+    "word": "2-01.w022",
+    "off": 0
+   },
+   "means": "Prince of Wales Hospital：医院长出，印名字",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "hospital"
+    ]
+   }
+  },
+  {
+   "id": "cdk20",
+   "obj": "cdk20",
+   "verb": "grow",
+   "at": {
+    "word": "2-01.w027",
+    "off": 0
+   },
+   "means": "protein：CDK20 长出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "2-01.w029"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "cdk20"
+    ]
+   }
+  },
+  {
+   "id": "raised",
+   "obj": "arrow_up",
+   "verb": "appear",
+   "at": {
+    "word": "2-01.w031",
+    "off": 0
+   },
+   "means": "raised：红色上升箭头",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "2-01.w031"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "plate",
+   "obj": "plate_ccrk",
+   "verb": "appear",
+   "at": {
+    "word": "2-01.w032",
+    "off": 0
+   },
+   "means": "CCRK also called CDK20：字牌 CCRK = CDK20",
+   "tool": "remotion",
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "step2",
+   "obj": "step_2",
+   "verb": "grow",
+   "at": {
+    "word": "2-01.w036",
+    "off": 0
+   },
+   "means": "Fast forward：第 2 步框画出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "dur": 30
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "title2",
+   "obj": "title_2",
+   "verb": "appear",
+   "at": {
+    "word": "2-01.w039",
+    "off": 0
+   },
+   "means": "2023：标题 2023",
+   "tool": "remotion",
+   "until": {
+    "word": "2-01.w039",
+    "off": 30
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "chip",
+   "obj": "chip",
+   "verb": "grow",
+   "at": {
+    "word": "2-01.w041",
+    "off": 0
+   },
+   "means": "AI drug-discovery study：芯片长出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "2-01.w043"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chip"
+    ]
+   }
+  },
+  {
+   "id": "same",
+   "obj": "cdk20_copy",
+   "verb": "move",
+   "at": {
+    "word": "2-01.w047",
+    "off": 0
+   },
+   "means": "same protein：CDK20 从 2011 框飞到 2023 框",
+   "tool": "remotion",
+   "lead": 40,
+   "until": {
+    "word": "2-01.w048"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "coauth",
+   "obj": "label_coauthors",
+   "verb": "appear",
+   "at": {
+    "word": "2-01.w050",
+    "off": 0
+   },
+   "means": "co-authors：小字 co-authors",
+   "tool": "remotion",
+   "until": {
+    "word": "2-01.w051"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "tower",
+   "obj": "tower",
+   "verb": "grow",
+   "at": {
+    "word": "2-01.w052",
+    "off": 0
+   },
+   "means": "Insilico Medicine：科学园高楼长出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "2-01.w055"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "tower"
+    ]
+   }
+  },
+  {
+   "id": "label_ins",
+   "obj": "label_insilico",
+   "verb": "appear",
+   "at": {
+    "word": "2-01.w052",
+    "off": 0
+   },
+   "means": "Insilico Medicine's Hong Kong office：印名字",
+   "tool": "remotion",
+   "until": {
+    "word": "2-01.w056"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "park",
+   "obj": "label_park",
+   "verb": "appear",
+   "at": {
+    "word": "2-01.w058",
+    "off": 0
+   },
+   "means": "Science Park：印 Hong Kong Science Park",
+   "tool": "remotion",
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "alias",
+   "obj": "plate_b",
+   "verb": "move",
+   "at": {
+    "word": "2-01.w034",
+    "off": 0
+   },
+   "means": "also called：= CDK20 后半块滑入",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "2-01.w035"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "pulse",
+   "obj": "cdk20",
+   "verb": "appear",
+   "at": {
+    "word": "2-01.w035",
+    "off": 0
+   },
+   "means": "CDK20：蛋白跳一下",
+   "tool": "remotion",
+   "lead": 2,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  }
+ ]
+}

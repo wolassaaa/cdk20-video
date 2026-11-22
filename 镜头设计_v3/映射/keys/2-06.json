@@ -769,38 +769,38 @@
  "holds": [],
  "events": [
   {
-   "id": "title",
-   "obj": "title",
+   "id": "q",
+   "obj": "q",
    "verb": "appear",
    "ease": "inout",
-   "means": "So how did we check：页标题",
-   "f_start": 9,
-   "f_land": 9,
+   "means": "how did we check all this?：红问号",
+   "f_start": 80,
+   "f_land": 80,
    "f_end": 128,
    "until": "2-06.s1",
-   "word": "2-06.w001",
-   "w": "So",
-   "key": "so#1",
+   "word": "2-06.w005",
+   "w": "check",
+   "key": "check#1",
    "sid": "2-06.s1",
-   "word_f0": 9,
+   "word_f0": 80,
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 12071,
-   "F_land": 12071,
+   "F_start": 12142,
+   "F_land": 12142,
    "F_end": 12190
   },
   {
-   "id": "books",
-   "obj": "book",
-   "verb": "grow",
+   "id": "read",
+   "obj": "read",
+   "verb": "appear",
    "ease": "inout",
-   "means": "We read：书长出",
-   "f_start": 171,
+   "means": "We read：一本书落下",
+   "f_start": 168,
    "f_land": 175,
-   "f_end": 222,
-   "until": "2-06.w011",
+   "f_end": 189,
+   "until": "2-06.s2",
    "word": "2-06.w009",
    "w": "read.",
    "key": "read#1",
@@ -810,30 +810,30 @@
    "guide": {
     "kind": "focus",
     "target": [
-     "book"
+     "books"
     ]
    },
-   "F_start": 12233,
+   "F_start": 12230,
    "F_land": 12237,
-   "F_end": 12284,
+   "F_end": 12251,
    "g_start": 149,
    "g_on": 167,
-   "g_end": 222,
-   "g_off": 252,
+   "g_end": 189,
+   "g_off": 219,
    "g_tick": 171,
    "G_start": 12211,
    "G_on": 12229,
-   "G_end": 12284,
-   "G_off": 12314,
+   "G_end": 12251,
+   "G_off": 12281,
    "G_tick": 12233
   },
   {
-   "id": "alot",
-   "obj": "note_alot",
-   "verb": "appear",
+   "id": "lot",
+   "obj": "lot",
+   "verb": "grow",
    "ease": "inout",
-   "means": "A lot：红笔 a lot",
-   "f_start": 210,
+   "means": "A lot：书一本本摞起来",
+   "f_start": 203,
    "f_land": 210,
    "f_end": 222,
    "until": "2-06.s3",
@@ -846,17 +846,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 12272,
+   "F_start": 12265,
    "F_land": 12272,
    "F_end": 12284
   },
   {
-   "id": "flask",
-   "obj": "flask",
-   "verb": "grow",
+   "id": "lab",
+   "obj": "lab",
+   "verb": "appear",
    "ease": "inout",
-   "means": "lab work：烧瓶长出",
-   "f_start": 275,
+   "means": "No lab work：烧瓶落下",
+   "f_start": 272,
    "f_land": 279,
    "f_end": 307,
    "until": "2-06.w014",
@@ -867,35 +867,22 @@
    "word_f0": 279,
    "tool": "remotion",
    "guide": {
-    "kind": "focus",
-    "target": [
-     "flask"
-    ]
+    "kind": "none"
    },
-   "F_start": 12337,
+   "F_start": 12334,
    "F_land": 12341,
-   "F_end": 12369,
-   "g_start": 253,
-   "g_on": 271,
-   "g_end": 307,
-   "g_off": 337,
-   "g_tick": 275,
-   "G_start": 12315,
-   "G_on": 12333,
-   "G_end": 12369,
-   "G_off": 12399,
-   "G_tick": 12337
+   "F_end": 12369
   },
   {
-   "id": "cross",
-   "obj": "cross",
-   "verb": "appear",
+   "id": "nolab",
+   "obj": "nolab",
+   "verb": "move",
    "ease": "inout",
-   "means": "of our own：红笔打叉",
-   "f_start": 326,
+   "means": "of our own：烧瓶变灰，画叉",
+   "f_start": 317,
    "f_land": 330,
-   "f_end": 410,
-   "until": "2-06.w021",
+   "f_end": 339,
+   "until": "2-06.w017",
    "word": "2-06.w017",
    "w": "own:",
    "key": "own#1",
@@ -905,17 +892,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 12388,
+   "F_start": 12379,
    "F_land": 12392,
-   "F_end": 12472
+   "F_end": 12401
   },
   {
    "id": "review",
-   "obj": "plate_review",
+   "obj": "review",
    "verb": "appear",
    "ease": "inout",
-   "means": "literature review：字牌",
-   "f_start": 410,
+   "means": "literature review：标 literature review",
+   "f_start": 400,
    "f_land": 410,
    "f_end": 454,
    "until": "2-06.s4",
@@ -928,20 +915,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 12472,
+   "F_start": 12462,
    "F_land": 12472,
    "F_end": 12516
   },
   {
    "id": "centre",
-   "obj": "paper_main",
+   "obj": "centre",
    "verb": "grow",
    "ease": "inout",
-   "means": "At the centre：主论文长到中间",
-   "f_start": 503,
+   "means": "At the centre：清场，中心一块底座",
+   "f_start": 510,
    "f_land": 523,
-   "f_end": 623,
-   "until": "2-06.w028",
+   "f_end": 549,
+   "until": "2-06.w025",
    "word": "2-06.w025",
    "w": "centre,",
    "key": "centre#1",
@@ -949,35 +936,22 @@
    "word_f0": 523,
    "tool": "remotion",
    "guide": {
-    "kind": "focus",
-    "target": [
-     "paper1"
-    ]
+    "kind": "none"
    },
-   "F_start": 12565,
+   "F_start": 12572,
    "F_land": 12585,
-   "F_end": 12685,
-   "g_start": 497,
-   "g_on": 515,
-   "g_end": 623,
-   "g_off": 653,
-   "g_tick": 519,
-   "G_start": 12559,
-   "G_on": 12577,
-   "G_end": 12685,
-   "G_off": 12715,
-   "G_tick": 12581
+   "F_end": 12611
   },
   {
-   "id": "stamp",
-   "obj": "stamp_original",
+   "id": "study",
+   "obj": "study",
    "verb": "appear",
    "ease": "inout",
-   "means": "original study：盖章 original research",
-   "f_start": 590,
-   "f_land": 590,
-   "f_end": 657,
-   "until": "2-06.w030",
+   "means": "one original study：主论文落到中心",
+   "f_start": 573,
+   "f_land": 580,
+   "f_end": 623,
+   "until": "2-06.w028",
    "word": "2-06.w027",
    "w": "original",
    "key": "original#1",
@@ -985,19 +959,32 @@
    "word_f0": 580,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "main"
+    ]
    },
-   "F_start": 12652,
-   "F_land": 12652,
-   "F_end": 12719
+   "F_start": 12635,
+   "F_land": 12642,
+   "F_end": 12685,
+   "g_start": 554,
+   "g_on": 572,
+   "g_end": 623,
+   "g_off": 653,
+   "g_tick": 576,
+   "G_start": 12616,
+   "G_on": 12634,
+   "G_end": 12685,
+   "G_off": 12715,
+   "G_tick": 12638
   },
   {
-   "id": "cite",
-   "obj": "label_ren",
+   "id": "ren",
+   "obj": "ren",
    "verb": "appear",
    "ease": "inout",
-   "means": "Ren…2023：印出处",
-   "f_start": 645,
+   "means": "Ren … 2023：名牌",
+   "f_start": 635,
    "f_land": 645,
    "f_end": 894,
    "until": "2-06.w036",
@@ -1010,17 +997,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 12707,
+   "F_start": 12697,
    "F_land": 12707,
    "F_end": 12956
   },
   {
-   "id": "si",
-   "obj": "disks",
-   "verb": "grow",
+   "id": "supp",
+   "obj": "supp",
+   "verb": "appear",
    "ease": "inout",
-   "means": "supplementary data：数据盘长出贴在论文旁",
-   "f_start": 920,
+   "means": "supplementary data：数据架落下，浇口连上",
+   "f_start": 923,
    "f_land": 930,
    "f_end": 986,
    "until": "2-06.s5",
@@ -1031,32 +1018,19 @@
    "word_f0": 930,
    "tool": "remotion",
    "guide": {
-    "kind": "focus",
-    "target": [
-     "disks"
-    ]
+    "kind": "none"
    },
-   "F_start": 12982,
+   "F_start": 12985,
    "F_land": 12992,
-   "F_end": 13048,
-   "g_start": 904,
-   "g_on": 922,
-   "g_end": 986,
-   "g_off": 1016,
-   "g_tick": 926,
-   "G_start": 12966,
-   "G_on": 12984,
-   "G_end": 13048,
-   "G_off": 13078,
-   "G_tick": 12988
+   "F_end": 13048
   },
   {
-   "id": "ring",
-   "obj": "ring",
-   "verb": "appear",
+   "id": "around",
+   "obj": "around",
+   "verb": "grow",
    "ease": "inout",
-   "means": "Around it：一圈虚线画出",
-   "f_start": 1023,
+   "means": "Around it：六根料杆从中心往外长",
+   "f_start": 1014,
    "f_land": 1027,
    "f_end": 1062,
    "until": "2-06.w042",
@@ -1067,19 +1041,32 @@
    "word_f0": 1027,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "frame"
+    ]
    },
-   "F_start": 13085,
+   "F_start": 13076,
    "F_land": 13089,
-   "F_end": 13124
+   "F_end": 13124,
+   "g_start": 1001,
+   "g_on": 1019,
+   "g_end": 1062,
+   "g_off": 1092,
+   "g_tick": 1023,
+   "G_start": 13063,
+   "G_on": 13081,
+   "G_end": 13124,
+   "G_off": 13154,
+   "G_tick": 13085
   },
   {
-   "id": "c1",
-   "obj": "card_1",
-   "verb": "eject",
+   "id": "hk",
+   "obj": "hk",
+   "verb": "appear",
    "ease": "inout",
-   "means": "earlier Hong Kong study：第 1 张卡弹出（original study）",
-   "f_start": 1127,
+   "means": "the earlier Hong Kong study：第一张卡",
+   "f_start": 1126,
    "f_land": 1133,
    "f_end": 1207,
    "until": "2-06.w047",
@@ -1092,17 +1079,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 13189,
+   "F_start": 13188,
    "F_land": 13195,
    "F_end": 13269
   },
   {
-   "id": "c2",
-   "obj": "card_2",
-   "verb": "eject",
+   "id": "papers",
+   "obj": "papers",
+   "verb": "grow",
    "ease": "inout",
-   "means": "papers behind：第 2 张卡（method paper）",
-   "f_start": 1241,
+   "means": "papers：左边两根料杆尖上长出空卡位",
+   "f_start": 1240,
    "f_land": 1247,
    "f_end": 1304,
    "until": "2-06.w049",
@@ -1115,17 +1102,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 13303,
+   "F_start": 13302,
    "F_land": 13309,
    "F_end": 13366
   },
   {
-   "id": "c3",
-   "obj": "card_3",
-   "verb": "eject",
+   "id": "tools",
+   "obj": "tools",
+   "verb": "appear",
    "ease": "inout",
-   "means": "two AI tools：第 3 张卡（method paper）",
-   "f_start": 1304,
+   "means": "papers behind two AI tools：两张卡",
+   "f_start": 1303,
    "f_land": 1310,
    "f_end": 1357,
    "until": "2-06.w052",
@@ -1138,17 +1125,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 13366,
+   "F_start": 13365,
    "F_land": 13372,
    "F_end": 13419
   },
   {
-   "id": "c4",
-   "obj": "card_4",
-   "verb": "eject",
+   "id": "rev",
+   "obj": "rev",
+   "verb": "appear",
    "ease": "inout",
-   "means": "2023 review：第 4 张卡（review）",
-   "f_start": 1355,
+   "means": "a 2023 review：第四张卡",
+   "f_start": 1354,
    "f_land": 1361,
    "f_end": 1482,
    "until": "2-06.w055",
@@ -1161,17 +1148,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 13417,
+   "F_start": 13416,
    "F_land": 13423,
    "F_end": 13544
   },
   {
-   "id": "c5",
-   "obj": "card_5",
-   "verb": "eject",
+   "id": "text",
+   "obj": "text",
+   "verb": "appear",
    "ease": "inout",
-   "means": "textbook chapter：第 5 张卡（book chapter）",
-   "f_start": 1531,
+   "means": "a textbook chapter：第五张卡",
+   "f_start": 1530,
    "f_land": 1537,
    "f_end": 1600,
    "until": "2-06.w058",
@@ -1184,17 +1171,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 13593,
+   "F_start": 13592,
    "F_land": 13599,
    "F_end": 13662
   },
   {
-   "id": "c6",
-   "obj": "card_6",
-   "verb": "eject",
+   "id": "persp",
+   "obj": "persp",
+   "verb": "appear",
    "ease": "inout",
-   "means": "2026 expert Perspective：第 6 张卡（Perspective）",
-   "f_start": 1667,
+   "means": "a 2026 expert Perspective：第六张卡",
+   "f_start": 1666,
    "f_land": 1673,
    "f_end": 1812,
    "until": "2-06.w063",
@@ -1205,205 +1192,149 @@
    "word_f0": 1673,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "card6"
+    ]
    },
-   "F_start": 13729,
+   "F_start": 13728,
    "F_land": 13735,
-   "F_end": 13874
+   "F_end": 13874,
+   "g_start": 1647,
+   "g_on": 1665,
+   "g_end": 1793,
+   "g_off": 1823,
+   "g_tick": 1669,
+   "G_start": 13709,
+   "G_on": 13727,
+   "G_end": 13855,
+   "G_off": 13885,
+   "G_tick": 13731
   },
   {
    "id": "abs",
-   "obj": "tag_abstract",
-   "verb": "appear",
+   "obj": "abs",
+   "verb": "move",
    "ease": "inout",
-   "means": "which we read only as an abstract：第 6 张卡上红字 abstract only 写出",
-   "f_start": 1849,
-   "f_land": 1853,
+   "means": "read only as an abstract：第六张卡大半变磨砂",
+   "f_start": 1902,
+   "f_land": 1915,
    "f_end": 2009,
    "until": "2-06.s6",
-   "word": "2-06.w064",
-   "w": "which",
-   "key": "which#1",
+   "word": "2-06.w067",
+   "w": "only",
+   "key": "only#1",
    "sid": "2-06.s6",
-   "word_f0": 1853,
+   "word_f0": 1915,
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 13911,
-   "F_land": 13915,
-   "F_end": 14071
-  },
-  {
-   "id": "journal",
-   "obj": "cite_ul",
-   "verb": "grow",
-   "ease": "inout",
-   "means": "Chemical Science, 2023：引用下面画红线",
-   "f_start": 739,
-   "f_land": 743,
-   "f_end": 894,
-   "until": "2-06.w036",
-   "word": "2-06.w034",
-   "w": "Chemical",
-   "key": "chemical#1",
-   "sid": "2-06.s5",
-   "word_f0": 743,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 12801,
-   "F_land": 12805,
-   "F_end": 12956
-  },
-  {
-   "id": "persp",
-   "obj": "c6",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "expert Perspective：c6 卡亮一下",
-   "f_start": 1741,
-   "f_land": 1745,
-   "f_end": 1812,
-   "until": "2-06.w063",
-   "word": "2-06.w062",
-   "w": "expert",
-   "key": "expert#1",
-   "sid": "2-06.s6",
-   "word_f0": 1745,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 13803,
-   "F_land": 13807,
-   "F_end": 13874
-  },
-  {
-   "id": "half",
-   "obj": "c6_cover",
-   "verb": "grow",
-   "ease": "inout",
-   "means": "abstract：c6 下半盖灰，只读了摘要",
-   "f_start": 1973,
-   "f_land": 1979,
-   "f_end": 2009,
-   "until": "2-06.s6",
-   "word": "2-06.w070",
-   "w": "abstract.",
-   "key": "abstract#1",
-   "sid": "2-06.s6",
-   "word_f0": 1979,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 14035,
-   "F_land": 14041,
+   "F_start": 13964,
+   "F_land": 13977,
    "F_end": 14071
   }
  ],
  "guides": [
   {
-   "id": "books",
+   "id": "read",
    "target": [
-    "book"
+    "books"
    ],
    "kind": "focus",
    "gs": 149,
    "gon": 167,
    "land": 175,
-   "gend": 222,
-   "goff": 252,
+   "gend": 189,
+   "goff": 219,
    "tick": 171,
-   "nudge": false,
+   "nudge": true,
    "rim": true,
-   "ev_s": 171,
+   "ev_s": 168,
    "events": [
-    "books"
+    "read"
    ],
    "G_start": 12211,
    "G_on": 12229,
    "G_land": 12237,
-   "G_end": 12284,
-   "G_off": 12314,
+   "G_end": 12251,
+   "G_off": 12281,
    "G_tick": 12233
   },
   {
-   "id": "flask",
+   "id": "study",
    "target": [
-    "flask"
+    "main"
    ],
    "kind": "focus",
-   "gs": 253,
-   "gon": 271,
-   "land": 279,
-   "gend": 307,
-   "goff": 337,
-   "tick": 275,
-   "nudge": false,
-   "rim": true,
-   "ev_s": 275,
-   "events": [
-    "flask"
-   ],
-   "G_start": 12315,
-   "G_on": 12333,
-   "G_land": 12341,
-   "G_end": 12369,
-   "G_off": 12399,
-   "G_tick": 12337
-  },
-  {
-   "id": "centre",
-   "target": [
-    "paper1"
-   ],
-   "kind": "focus",
-   "gs": 497,
-   "gon": 515,
-   "land": 523,
+   "gs": 554,
+   "gon": 572,
+   "land": 580,
    "gend": 623,
    "goff": 653,
-   "tick": 519,
-   "nudge": false,
+   "tick": 576,
+   "nudge": true,
    "rim": true,
-   "ev_s": 503,
+   "ev_s": 573,
    "events": [
-    "centre"
+    "study"
    ],
-   "G_start": 12559,
-   "G_on": 12577,
-   "G_land": 12585,
+   "G_start": 12616,
+   "G_on": 12634,
+   "G_land": 12642,
    "G_end": 12685,
    "G_off": 12715,
-   "G_tick": 12581
+   "G_tick": 12638
   },
   {
-   "id": "si",
+   "id": "around",
    "target": [
-    "disks"
+    "frame"
    ],
    "kind": "focus",
-   "gs": 904,
-   "gon": 922,
-   "land": 930,
-   "gend": 986,
-   "goff": 1016,
-   "tick": 926,
+   "gs": 1001,
+   "gon": 1019,
+   "land": 1027,
+   "gend": 1062,
+   "goff": 1092,
+   "tick": 1023,
    "nudge": false,
    "rim": true,
-   "ev_s": 920,
+   "ev_s": 1014,
    "events": [
-    "si"
+    "around"
    ],
-   "G_start": 12966,
-   "G_on": 12984,
-   "G_land": 12992,
-   "G_end": 13048,
-   "G_off": 13078,
-   "G_tick": 12988
+   "G_start": 13063,
+   "G_on": 13081,
+   "G_land": 13089,
+   "G_end": 13124,
+   "G_off": 13154,
+   "G_tick": 13085
+  },
+  {
+   "id": "persp",
+   "target": [
+    "card6"
+   ],
+   "kind": "focus",
+   "gs": 1647,
+   "gon": 1665,
+   "land": 1673,
+   "gend": 1793,
+   "goff": 1823,
+   "tick": 1669,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 1666,
+   "events": [
+    "persp"
+   ],
+   "G_start": 13709,
+   "G_on": 13727,
+   "G_land": 13735,
+   "G_end": 13855,
+   "G_off": 13885,
+   "G_tick": 13731
   }
  ],
  "problems": []

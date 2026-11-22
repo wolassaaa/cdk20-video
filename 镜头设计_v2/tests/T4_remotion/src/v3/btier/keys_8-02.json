@@ -1,0 +1,1297 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "8-02",
+ "segs": [
+  "8-02"
+ ],
+ "tool": "remotion",
+ "fps": 60,
+ "len_f": 1378,
+ "cut": "cut_v8",
+ "cut_start_f": 58432,
+ "cut_start_s": 973.87,
+ "master_built": "2026-11-18 02:33:56 +09:00",
+ "words_hash": "9a21da2306bf",
+ "events_src": "镜头设计_v3/映射/events/8-02.json",
+ "words": [
+  {
+   "wid": "8-02.w001",
+   "w": "How",
+   "key": "how#1",
+   "sid": "8-02.s1",
+   "f0": 9,
+   "f1": 20,
+   "F0": 58441,
+   "F1": 58452
+  },
+  {
+   "wid": "8-02.w002",
+   "w": "can",
+   "key": "can#1",
+   "sid": "8-02.s1",
+   "f0": 24,
+   "f1": 34,
+   "F0": 58456,
+   "F1": 58466
+  },
+  {
+   "wid": "8-02.w003",
+   "w": "computer-aided",
+   "key": "computer-aided#1",
+   "sid": "8-02.s1",
+   "f0": 38,
+   "f1": 96,
+   "F0": 58470,
+   "F1": 58528
+  },
+  {
+   "wid": "8-02.w004",
+   "w": "methods",
+   "key": "methods#1",
+   "sid": "8-02.s1",
+   "f0": 102,
+   "f1": 129,
+   "F0": 58534,
+   "F1": 58561
+  },
+  {
+   "wid": "8-02.w005",
+   "w": "help",
+   "key": "help#1",
+   "sid": "8-02.s1",
+   "f0": 138,
+   "f1": 153,
+   "F0": 58570,
+   "F1": 58585
+  },
+  {
+   "wid": "8-02.w006",
+   "w": "scientists",
+   "key": "scientists#1",
+   "sid": "8-02.s1",
+   "f0": 159,
+   "f1": 200,
+   "F0": 58591,
+   "F1": 58632
+  },
+  {
+   "wid": "8-02.w007",
+   "w": "find",
+   "key": "find#1",
+   "sid": "8-02.s1",
+   "f0": 209,
+   "f1": 228,
+   "F0": 58641,
+   "F1": 58660
+  },
+  {
+   "wid": "8-02.w008",
+   "w": "and",
+   "key": "and#1",
+   "sid": "8-02.s1",
+   "f0": 233,
+   "f1": 243,
+   "F0": 58665,
+   "F1": 58675
+  },
+  {
+   "wid": "8-02.w009",
+   "w": "assess",
+   "key": "assess#1",
+   "sid": "8-02.s1",
+   "f0": 252,
+   "f1": 275,
+   "F0": 58684,
+   "F1": 58707
+  },
+  {
+   "wid": "8-02.w010",
+   "w": "cancer",
+   "key": "cancer#1",
+   "sid": "8-02.s1",
+   "f0": 280,
+   "f1": 301,
+   "F0": 58712,
+   "F1": 58733
+  },
+  {
+   "wid": "8-02.w011",
+   "w": "drug",
+   "key": "drug#1",
+   "sid": "8-02.s1",
+   "f0": 304,
+   "f1": 314,
+   "F0": 58736,
+   "F1": 58746
+  },
+  {
+   "wid": "8-02.w012",
+   "w": "candidates?",
+   "key": "candidates#1",
+   "sid": "8-02.s1",
+   "f0": 319,
+   "f1": 355,
+   "F0": 58751,
+   "F1": 58787
+  },
+  {
+   "wid": "8-02.w013",
+   "w": "In",
+   "key": "in#1",
+   "sid": "8-02.s2",
+   "f0": 410,
+   "f1": 415,
+   "F0": 58842,
+   "F1": 58847
+  },
+  {
+   "wid": "8-02.w014",
+   "w": "this",
+   "key": "this#1",
+   "sid": "8-02.s2",
+   "f0": 422,
+   "f1": 435,
+   "F0": 58854,
+   "F1": 58867
+  },
+  {
+   "wid": "8-02.w015",
+   "w": "case,",
+   "key": "case#1",
+   "sid": "8-02.s2",
+   "f0": 439,
+   "f1": 457,
+   "F0": 58871,
+   "F1": 58889
+  },
+  {
+   "wid": "8-02.w016",
+   "w": "at",
+   "key": "at#1",
+   "sid": "8-02.s2",
+   "f0": 479,
+   "f1": 485,
+   "F0": 58911,
+   "F1": 58917
+  },
+  {
+   "wid": "8-02.w017",
+   "w": "four",
+   "key": "four#1",
+   "sid": "8-02.s2",
+   "f0": 491,
+   "f1": 503,
+   "F0": 58923,
+   "F1": 58935
+  },
+  {
+   "wid": "8-02.w018",
+   "w": "points.",
+   "key": "points#1",
+   "sid": "8-02.s2",
+   "f0": 508,
+   "f1": 529,
+   "F0": 58940,
+   "F1": 58961
+  },
+  {
+   "wid": "8-02.w019",
+   "w": "Picking",
+   "key": "picking#1",
+   "sid": "8-02.s3",
+   "f0": 559,
+   "f1": 578,
+   "F0": 58991,
+   "F1": 59010
+  },
+  {
+   "wid": "8-02.w020",
+   "w": "a",
+   "key": "a#1",
+   "sid": "8-02.s3",
+   "f0": 581,
+   "f1": 583,
+   "F0": 59013,
+   "F1": 59015
+  },
+  {
+   "wid": "8-02.w021",
+   "w": "target",
+   "key": "target#1",
+   "sid": "8-02.s3",
+   "f0": 590,
+   "f1": 609,
+   "F0": 59022,
+   "F1": 59041
+  },
+  {
+   "wid": "8-02.w022",
+   "w": "from",
+   "key": "from#1",
+   "sid": "8-02.s3",
+   "f0": 615,
+   "f1": 631,
+   "F0": 59047,
+   "F1": 59063
+  },
+  {
+   "wid": "8-02.w023",
+   "w": "data.",
+   "key": "data#1",
+   "sid": "8-02.s3",
+   "f0": 637,
+   "f1": 656,
+   "F0": 59069,
+   "F1": 59088
+  },
+  {
+   "wid": "8-02.w024",
+   "w": "Predicting",
+   "key": "predicting#1",
+   "sid": "8-02.s4",
+   "f0": 693,
+   "f1": 735,
+   "F0": 59125,
+   "F1": 59167
+  },
+  {
+   "wid": "8-02.w025",
+   "w": "the",
+   "key": "the#1",
+   "sid": "8-02.s4",
+   "f0": 742,
+   "f1": 749,
+   "F0": 59174,
+   "F1": 59181
+  },
+  {
+   "wid": "8-02.w026",
+   "w": "lock's",
+   "key": "lock's#1",
+   "sid": "8-02.s4",
+   "f0": 757,
+   "f1": 775,
+   "F0": 59189,
+   "F1": 59207
+  },
+  {
+   "wid": "8-02.w027",
+   "w": "shape.",
+   "key": "shape#1",
+   "sid": "8-02.s4",
+   "f0": 788,
+   "f1": 812,
+   "F0": 59220,
+   "F1": 59244
+  },
+  {
+   "wid": "8-02.w028",
+   "w": "Designing",
+   "key": "designing#1",
+   "sid": "8-02.s5",
+   "f0": 853,
+   "f1": 886,
+   "F0": 59285,
+   "F1": 59318
+  },
+  {
+   "wid": "8-02.w029",
+   "w": "new",
+   "key": "new#1",
+   "sid": "8-02.s5",
+   "f0": 892,
+   "f1": 902,
+   "F0": 59324,
+   "F1": 59334
+  },
+  {
+   "wid": "8-02.w030",
+   "w": "keys.",
+   "key": "keys#1",
+   "sid": "8-02.s5",
+   "f0": 910,
+   "f1": 931,
+   "F0": 59342,
+   "F1": 59363
+  },
+  {
+   "wid": "8-02.w031",
+   "w": "And",
+   "key": "and#2",
+   "sid": "8-02.s6",
+   "f0": 952,
+   "f1": 967,
+   "F0": 59384,
+   "F1": 59399
+  },
+  {
+   "wid": "8-02.w032",
+   "w": "ranking",
+   "key": "ranking#1",
+   "sid": "8-02.s6",
+   "f0": 979,
+   "f1": 999,
+   "F0": 59411,
+   "F1": 59431
+  },
+  {
+   "wid": "8-02.w033",
+   "w": "which",
+   "key": "which#1",
+   "sid": "8-02.s6",
+   "f0": 1006,
+   "f1": 1020,
+   "F0": 59438,
+   "F1": 59452
+  },
+  {
+   "wid": "8-02.w034",
+   "w": "ones",
+   "key": "ones#1",
+   "sid": "8-02.s6",
+   "f0": 1027,
+   "f1": 1040,
+   "F0": 59459,
+   "F1": 59472
+  },
+  {
+   "wid": "8-02.w035",
+   "w": "to",
+   "key": "to#1",
+   "sid": "8-02.s6",
+   "f0": 1047,
+   "f1": 1054,
+   "F0": 59479,
+   "F1": 59486
+  },
+  {
+   "wid": "8-02.w036",
+   "w": "make.",
+   "key": "make#1",
+   "sid": "8-02.s6",
+   "f0": 1062,
+   "f1": 1078,
+   "F0": 59494,
+   "F1": 59510
+  },
+  {
+   "wid": "8-02.w037",
+   "w": "That's",
+   "key": "that's#1",
+   "sid": "8-02.s7",
+   "f0": 1104,
+   "f1": 1122,
+   "F0": 59536,
+   "F1": 59554
+  },
+  {
+   "wid": "8-02.w038",
+   "w": "our",
+   "key": "our#1",
+   "sid": "8-02.s7",
+   "f0": 1137,
+   "f1": 1152,
+   "F0": 59569,
+   "F1": 59584
+  },
+  {
+   "wid": "8-02.w039",
+   "w": "first",
+   "key": "first#1",
+   "sid": "8-02.s7",
+   "f0": 1166,
+   "f1": 1188,
+   "F0": 59598,
+   "F1": 59620
+  },
+  {
+   "wid": "8-02.w040",
+   "w": "objective,",
+   "key": "objective#1",
+   "sid": "8-02.s7",
+   "f0": 1202,
+   "f1": 1242,
+   "F0": 59634,
+   "F1": 59674
+  },
+  {
+   "wid": "8-02.w041",
+   "w": "met",
+   "key": "met#1",
+   "sid": "8-02.s7",
+   "f0": 1284,
+   "f1": 1296,
+   "F0": 59716,
+   "F1": 59728
+  },
+  {
+   "wid": "8-02.w042",
+   "w": "for",
+   "key": "for#1",
+   "sid": "8-02.s7",
+   "f0": 1302,
+   "f1": 1311,
+   "F0": 59734,
+   "F1": 59743
+  },
+  {
+   "wid": "8-02.w043",
+   "w": "this",
+   "key": "this#2",
+   "sid": "8-02.s7",
+   "f0": 1320,
+   "f1": 1334,
+   "F0": 59752,
+   "F1": 59766
+  },
+  {
+   "wid": "8-02.w044",
+   "w": "case.",
+   "key": "case#2",
+   "sid": "8-02.s7",
+   "f0": 1339,
+   "f1": 1360,
+   "F0": 59771,
+   "F1": 59792
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "8-02.s1",
+   "text": "How can computer-aided methods help scientists find and assess cancer drug candidates?",
+   "w_first": "8-02.w001",
+   "w_last": "8-02.w012",
+   "f0": 9,
+   "f1": 355
+  },
+  {
+   "sid": "8-02.s2",
+   "text": "In this case, at four points.",
+   "w_first": "8-02.w013",
+   "w_last": "8-02.w018",
+   "f0": 410,
+   "f1": 529
+  },
+  {
+   "sid": "8-02.s3",
+   "text": "Picking a target from data.",
+   "w_first": "8-02.w019",
+   "w_last": "8-02.w023",
+   "f0": 559,
+   "f1": 656
+  },
+  {
+   "sid": "8-02.s4",
+   "text": "Predicting the lock's shape.",
+   "w_first": "8-02.w024",
+   "w_last": "8-02.w027",
+   "f0": 693,
+   "f1": 812
+  },
+  {
+   "sid": "8-02.s5",
+   "text": "Designing new keys.",
+   "w_first": "8-02.w028",
+   "w_last": "8-02.w030",
+   "f0": 853,
+   "f1": 931
+  },
+  {
+   "sid": "8-02.s6",
+   "text": "And ranking which ones to make.",
+   "w_first": "8-02.w031",
+   "w_last": "8-02.w036",
+   "f0": 952,
+   "f1": 1078
+  },
+  {
+   "sid": "8-02.s7",
+   "text": "That's our first objective, met for this case.",
+   "w_first": "8-02.w037",
+   "w_last": "8-02.w044",
+   "f0": 1104,
+   "f1": 1360
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "goal1",
+   "obj": "goal1",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "How：目标牌 1 落位，带红色问号",
+   "f_start": 2,
+   "f_land": 9,
+   "f_end": 96,
+   "until": "8-02.w003",
+   "word": "8-02.w001",
+   "w": "How",
+   "key": "how#1",
+   "sid": "8-02.s1",
+   "word_f0": 9,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 58434,
+   "F_land": 58441,
+   "F_end": 58528
+  },
+  {
+   "id": "road",
+   "obj": "road",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "computer-aided：主料杆与路在下方展开",
+   "f_start": 25,
+   "f_land": 38,
+   "f_end": 129,
+   "until": "8-02.w004",
+   "word": "8-02.w003",
+   "w": "computer-aided",
+   "key": "computer-aided#1",
+   "sid": "8-02.s1",
+   "word_f0": 38,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 58457,
+   "F_land": 58470,
+   "F_end": 58561
+  },
+  {
+   "id": "badge",
+   "obj": "badge",
+   "verb": "move",
+   "ease": "inout",
+   "means": "methods：目标牌 1 让到左上角",
+   "f_start": 89,
+   "f_land": 102,
+   "f_end": 200,
+   "until": "8-02.w006",
+   "word": "8-02.w004",
+   "w": "methods",
+   "key": "methods#1",
+   "sid": "8-02.s1",
+   "word_f0": 102,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 58521,
+   "F_land": 58534,
+   "F_end": 58632
+  },
+  {
+   "id": "sci",
+   "obj": "sci",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "scientists：科学家路标在起点亮起",
+   "f_start": 150,
+   "f_land": 159,
+   "f_end": 228,
+   "until": "8-02.w007",
+   "word": "8-02.w006",
+   "w": "scientists",
+   "key": "scientists#1",
+   "sid": "8-02.s1",
+   "word_f0": 159,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 58582,
+   "F_land": 58591,
+   "F_end": 58660
+  },
+  {
+   "id": "find",
+   "obj": "find",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "find：寻找位亮起",
+   "f_start": 199,
+   "f_land": 209,
+   "f_end": 275,
+   "until": "8-02.w009",
+   "word": "8-02.w007",
+   "w": "find",
+   "key": "find#1",
+   "sid": "8-02.s1",
+   "word_f0": 209,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "road"
+    ]
+   },
+   "F_start": 58631,
+   "F_land": 58641,
+   "F_end": 58707,
+   "g_start": 183,
+   "g_on": 201,
+   "g_end": 275,
+   "g_off": 305,
+   "g_tick": 205,
+   "G_start": 58615,
+   "G_on": 58633,
+   "G_end": 58707,
+   "G_off": 58737,
+   "G_tick": 58637
+  },
+  {
+   "id": "assess",
+   "obj": "assess",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "assess：评估位亮起",
+   "f_start": 242,
+   "f_land": 252,
+   "f_end": 355,
+   "until": "8-02.w012",
+   "word": "8-02.w009",
+   "w": "assess",
+   "key": "assess#1",
+   "sid": "8-02.s1",
+   "word_f0": 252,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 58674,
+   "F_land": 58684,
+   "F_end": 58787
+  },
+  {
+   "id": "cand",
+   "obj": "cand",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "candidates：小分子候选插头沿路排开",
+   "f_start": 306,
+   "f_land": 319,
+   "f_end": 355,
+   "until": "8-02.s1",
+   "word": "8-02.w012",
+   "w": "candidates?",
+   "key": "candidates#1",
+   "sid": "8-02.s1",
+   "word_f0": 319,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 58738,
+   "F_land": 58751,
+   "F_end": 58787
+  },
+  {
+   "id": "case_in",
+   "obj": "case_in",
+   "verb": "move",
+   "ease": "inout",
+   "means": "In this case：路的第一段推近居中",
+   "f_start": 426,
+   "f_land": 439,
+   "f_end": 529,
+   "until": "8-02.w018",
+   "word": "8-02.w015",
+   "w": "case,",
+   "key": "case#1",
+   "sid": "8-02.s2",
+   "word_f0": 439,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 58858,
+   "F_land": 58871,
+   "F_end": 58961
+  },
+  {
+   "id": "pts",
+   "obj": "pts",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "four points：四个工具节点（PandaOmics、AlphaFold、Chemistry42、排名条）挂上路",
+   "f_start": 484,
+   "f_land": 508,
+   "f_end": 529,
+   "until": "8-02.s2",
+   "word": "8-02.w018",
+   "w": "points.",
+   "key": "points#1",
+   "sid": "8-02.s2",
+   "word_f0": 508,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "pts"
+    ]
+   },
+   "F_start": 58916,
+   "F_land": 58940,
+   "F_end": 58961,
+   "g_start": 482,
+   "g_on": 500,
+   "g_end": 529,
+   "g_off": 559,
+   "g_tick": 504,
+   "G_start": 58914,
+   "G_on": 58932,
+   "G_end": 58961,
+   "G_off": 58991,
+   "G_tick": 58936
+  },
+  {
+   "id": "panda",
+   "obj": "panda",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "target：PandaOmics 芯片亮，闪出 Top 20 牌",
+   "f_start": 577,
+   "f_land": 590,
+   "f_end": 656,
+   "until": "8-02.w023",
+   "word": "8-02.w021",
+   "w": "target",
+   "key": "target#1",
+   "sid": "8-02.s3",
+   "word_f0": 590,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "panda"
+    ]
+   },
+   "F_start": 59009,
+   "F_land": 59022,
+   "F_end": 59088,
+   "g_start": 564,
+   "g_on": 582,
+   "g_end": 656,
+   "g_off": 685,
+   "g_tick": 586,
+   "G_start": 58996,
+   "G_on": 59014,
+   "G_end": 59088,
+   "G_off": 59117,
+   "G_tick": 59018
+  },
+  {
+   "id": "data",
+   "obj": "data",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "data：标 Top 20 / CDK20 数据牌",
+   "f_start": 628,
+   "f_land": 637,
+   "f_end": 656,
+   "until": "8-02.s3",
+   "word": "8-02.w023",
+   "w": "data.",
+   "key": "data#1",
+   "sid": "8-02.s3",
+   "word_f0": 637,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 59060,
+   "F_land": 59069,
+   "F_end": 59088
+  },
+  {
+   "id": "af",
+   "obj": "af",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "Predicting：AlphaFold 芯片亮",
+   "f_start": 683,
+   "f_land": 693,
+   "f_end": 775,
+   "until": "8-02.w026",
+   "word": "8-02.w024",
+   "w": "Predicting",
+   "key": "predicting#1",
+   "sid": "8-02.s4",
+   "word_f0": 693,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "af"
+    ]
+   },
+   "F_start": 59115,
+   "F_land": 59125,
+   "F_end": 59207,
+   "g_start": 667,
+   "g_on": 685,
+   "g_end": 775,
+   "g_off": 805,
+   "g_tick": 689,
+   "G_start": 59099,
+   "G_on": 59117,
+   "G_end": 59207,
+   "G_off": 59237,
+   "G_tick": 59121
+  },
+  {
+   "id": "lock_in",
+   "obj": "lock_in",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "lock's：蓝色支架升起",
+   "f_start": 748,
+   "f_land": 757,
+   "f_end": 812,
+   "until": "8-02.w027",
+   "word": "8-02.w026",
+   "w": "lock's",
+   "key": "lock's#1",
+   "sid": "8-02.s4",
+   "word_f0": 757,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 59180,
+   "F_land": 59189,
+   "F_end": 59244
+  },
+  {
+   "id": "shape",
+   "obj": "shape",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "shape：蓝色 CDK20 模型在芯片上方升起",
+   "f_start": 758,
+   "f_land": 788,
+   "f_end": 812,
+   "until": "8-02.s4",
+   "word": "8-02.w027",
+   "w": "shape.",
+   "key": "shape#1",
+   "sid": "8-02.s4",
+   "word_f0": 788,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 59190,
+   "F_land": 59220,
+   "F_end": 59244
+  },
+  {
+   "id": "chem42",
+   "obj": "chem42",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "Designing：Chemistry42 芯片亮",
+   "f_start": 843,
+   "f_land": 853,
+   "f_end": 931,
+   "until": "8-02.w030",
+   "word": "8-02.w028",
+   "w": "Designing",
+   "key": "designing#1",
+   "sid": "8-02.s5",
+   "word_f0": 853,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chem42"
+    ]
+   },
+   "F_start": 59275,
+   "F_land": 59285,
+   "F_end": 59363,
+   "g_start": 827,
+   "g_on": 845,
+   "g_end": 931,
+   "g_off": 961,
+   "g_tick": 849,
+   "G_start": 59259,
+   "G_on": 59277,
+   "G_end": 59363,
+   "G_off": 59393,
+   "G_tick": 59281
+  },
+  {
+   "id": "key",
+   "obj": "key",
+   "verb": "eject",
+   "ease": "inout",
+   "means": "keys：芯片吐出一把金钥匙",
+   "f_start": 897,
+   "f_land": 910,
+   "f_end": 931,
+   "until": "8-02.s5",
+   "word": "8-02.w030",
+   "w": "keys.",
+   "key": "keys#1",
+   "sid": "8-02.s5",
+   "word_f0": 910,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 59329,
+   "F_land": 59342,
+   "F_end": 59363
+  },
+  {
+   "id": "rank",
+   "obj": "rank",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "ranking：打分排名条长出，游标推向高分端",
+   "f_start": 966,
+   "f_land": 979,
+   "f_end": 1078,
+   "until": "8-02.w036",
+   "word": "8-02.w032",
+   "w": "ranking",
+   "key": "ranking#1",
+   "sid": "8-02.s6",
+   "word_f0": 979,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "rank"
+    ]
+   },
+   "F_start": 59398,
+   "F_land": 59411,
+   "F_end": 59510,
+   "g_start": 953,
+   "g_on": 971,
+   "g_end": 1078,
+   "g_off": 1108,
+   "g_tick": 975,
+   "G_start": 59385,
+   "G_on": 59403,
+   "G_end": 59510,
+   "G_off": 59540,
+   "G_tick": 59407
+  },
+  {
+   "id": "make",
+   "obj": "make",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "make：选出靠前的两把钥匙高亮",
+   "f_start": 1049,
+   "f_land": 1062,
+   "f_end": 1078,
+   "until": "8-02.s6",
+   "word": "8-02.w036",
+   "w": "make.",
+   "key": "make#1",
+   "sid": "8-02.s6",
+   "word_f0": 1062,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 59481,
+   "F_land": 59494,
+   "F_end": 59510
+  },
+  {
+   "id": "focus",
+   "obj": "focus",
+   "verb": "move",
+   "ease": "inout",
+   "means": "first：四个工具收拢连线，目标牌 1 回到中间",
+   "f_start": 1136,
+   "f_land": 1166,
+   "f_end": 1242,
+   "until": "8-02.w040",
+   "word": "8-02.w039",
+   "w": "first",
+   "key": "first#1",
+   "sid": "8-02.s7",
+   "word_f0": 1166,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 59568,
+   "F_land": 59598,
+   "F_end": 59674
+  },
+  {
+   "id": "obj",
+   "obj": "obj",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "objective：目标牌 1 框高亮待命",
+   "f_start": 1192,
+   "f_land": 1202,
+   "f_end": 1296,
+   "until": "8-02.w041",
+   "word": "8-02.w040",
+   "w": "objective,",
+   "key": "objective#1",
+   "sid": "8-02.s7",
+   "word_f0": 1202,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "goal1"
+    ]
+   },
+   "F_start": 59624,
+   "F_land": 59634,
+   "F_end": 59728,
+   "g_start": 1176,
+   "g_on": 1194,
+   "g_end": 1296,
+   "g_off": 1326,
+   "g_tick": 1198,
+   "G_start": 59608,
+   "G_on": 59626,
+   "G_end": 59728,
+   "G_off": 59758,
+   "G_tick": 59630
+  },
+  {
+   "id": "met",
+   "obj": "met",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "met：目标牌 1 刻出绿色勾，T7 一抖",
+   "f_start": 1271,
+   "f_land": 1284,
+   "f_end": 1360,
+   "until": "8-02.w044",
+   "word": "8-02.w041",
+   "w": "met",
+   "key": "met#1",
+   "sid": "8-02.s7",
+   "word_f0": 1284,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 59703,
+   "F_land": 59716,
+   "F_end": 59792
+  },
+  {
+   "id": "sub",
+   "obj": "sub",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "for this case：目标牌下方刻小字 for this case",
+   "f_start": 1330,
+   "f_land": 1339,
+   "f_end": 1360,
+   "until": "8-02.s7",
+   "word": "8-02.w044",
+   "w": "case.",
+   "key": "case#2",
+   "sid": "8-02.s7",
+   "word_f0": 1339,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 59762,
+   "F_land": 59771,
+   "F_end": 59792
+  }
+ ],
+ "guides": [
+  {
+   "id": "find",
+   "target": [
+    "road"
+   ],
+   "kind": "focus",
+   "gs": 183,
+   "gon": 201,
+   "land": 209,
+   "gend": 275,
+   "goff": 305,
+   "tick": 205,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 199,
+   "events": [
+    "find"
+   ],
+   "G_start": 58615,
+   "G_on": 58633,
+   "G_land": 58641,
+   "G_end": 58707,
+   "G_off": 58737,
+   "G_tick": 58637
+  },
+  {
+   "id": "pts",
+   "target": [
+    "pts"
+   ],
+   "kind": "focus",
+   "gs": 482,
+   "gon": 500,
+   "land": 508,
+   "gend": 529,
+   "goff": 559,
+   "tick": 504,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 484,
+   "events": [
+    "pts"
+   ],
+   "G_start": 58914,
+   "G_on": 58932,
+   "G_land": 58940,
+   "G_end": 58961,
+   "G_off": 58991,
+   "G_tick": 58936
+  },
+  {
+   "id": "panda",
+   "target": [
+    "panda"
+   ],
+   "kind": "focus",
+   "gs": 564,
+   "gon": 582,
+   "land": 590,
+   "gend": 656,
+   "goff": 685,
+   "tick": 586,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 577,
+   "events": [
+    "panda"
+   ],
+   "handoff": "af",
+   "G_start": 58996,
+   "G_on": 59014,
+   "G_land": 59022,
+   "G_end": 59088,
+   "G_off": 59117,
+   "G_tick": 59018
+  },
+  {
+   "id": "af",
+   "target": [
+    "af"
+   ],
+   "kind": "focus",
+   "gs": 667,
+   "gon": 685,
+   "land": 693,
+   "gend": 775,
+   "goff": 805,
+   "tick": 689,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 683,
+   "events": [
+    "af"
+   ],
+   "G_start": 59099,
+   "G_on": 59117,
+   "G_land": 59125,
+   "G_end": 59207,
+   "G_off": 59237,
+   "G_tick": 59121
+  },
+  {
+   "id": "chem42",
+   "target": [
+    "chem42"
+   ],
+   "kind": "focus",
+   "gs": 827,
+   "gon": 845,
+   "land": 853,
+   "gend": 931,
+   "goff": 961,
+   "tick": 849,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 843,
+   "events": [
+    "chem42"
+   ],
+   "handoff": "rank",
+   "G_start": 59259,
+   "G_on": 59277,
+   "G_land": 59285,
+   "G_end": 59363,
+   "G_off": 59393,
+   "G_tick": 59281
+  },
+  {
+   "id": "rank",
+   "target": [
+    "rank"
+   ],
+   "kind": "focus",
+   "gs": 953,
+   "gon": 971,
+   "land": 979,
+   "gend": 1078,
+   "goff": 1108,
+   "tick": 975,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 966,
+   "events": [
+    "rank"
+   ],
+   "G_start": 59385,
+   "G_on": 59403,
+   "G_land": 59411,
+   "G_end": 59510,
+   "G_off": 59540,
+   "G_tick": 59407
+  },
+  {
+   "id": "obj",
+   "target": [
+    "goal1"
+   ],
+   "kind": "focus",
+   "gs": 1176,
+   "gon": 1194,
+   "land": 1202,
+   "gend": 1296,
+   "goff": 1326,
+   "tick": 1198,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 1192,
+   "events": [
+    "obj"
+   ],
+   "G_start": 59608,
+   "G_on": 59626,
+   "G_land": 59634,
+   "G_end": 59728,
+   "G_off": 59758,
+   "G_tick": 59630
+  }
+ ],
+ "problems": []
+}

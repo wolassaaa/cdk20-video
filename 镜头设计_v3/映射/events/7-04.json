@@ -2,43 +2,50 @@
  "schema": "cdk20.events/1",
  "group": "7-04",
  "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：第 7 章页 7-04（画外音）：两条并排的跑道（AI route / classic route），起跑线上 same target / same budget / same definition of a hit 依次写出，每写一个两道各点亮一个相同图标，两个小牌子起跑，终点线上问号 how much faster。页面 Manual704.jsx。",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 7-04（btier/B704.jsx）。3 号牌落位；两条并排跑道（h22）和两块秒表亮起；上道刻 AI route，下道刻 classic route；起跑线上三块小牌 same target、same budget、same definition of a hit 依次翻起，每翻一块两道上各亮一个相同图标；两块小吊牌起跑，两块秒表开始走，终点线上一个红色问号。",
+ "tier": "B",
+ "zone": 7,
+ "trans_in": "T2 甩进（上一段 7-03 是 B 页）",
+ "trans_out": "T5 runner（下一段接 AI 插段 / 8-01 出镜 C 段）",
  "holds": [],
  "events": [
   {
-   "id": "title",
-   "obj": "title",
+   "id": "p3",
+   "obj": "p3",
    "verb": "appear",
    "at": {
-    "word": "7-04.w001",
+    "word": "three#1",
     "off": 0
    },
-   "means": "Three: race them：标题",
+   "lead": 7,
+   "means": "Three：3 号编号牌落位",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "7-04.w003"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "race#1"
    }
   },
   {
-   "id": "lanes",
-   "obj": "lanes",
+   "id": "tracks",
+   "obj": "tracks",
    "verb": "grow",
    "at": {
-    "word": "7-04.w003",
+    "word": "race#1",
     "off": 0
    },
-   "means": "them：两条跑道画出",
+   "lead": 13,
+   "means": "race them：两条并排跑道（h22）与两块秒表亮起",
    "tool": "remotion",
-   "lead": 30,
-   "until": {
-    "word": "7-04.w003"
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "tracks"
+    ]
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
@@ -46,143 +53,146 @@
    "obj": "ai",
    "verb": "appear",
    "at": {
-    "word": "7-04.w005",
+    "word": "ai#1",
     "off": 0
    },
-   "means": "AI：AI route 标签",
+   "lead": 10,
+   "means": "AI route：上道刻字 AI route，蓝标就位",
    "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "word": "7-04.w005"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "classic#1"
    }
   },
   {
-   "id": "cl",
-   "obj": "cl",
+   "id": "classic",
+   "obj": "classic",
    "verb": "appear",
    "at": {
-    "word": "7-04.w009",
+    "word": "classic#1",
     "off": 0
    },
-   "means": "classic：classic route 标签",
+   "lead": 10,
+   "means": "classic：下道刻字 classic route，骨白标就位",
    "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "7-04.w009"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "route#2"
    }
   },
   {
-   "id": "start",
-   "obj": "start",
-   "verb": "grow",
+   "id": "clbl",
+   "obj": "clbl",
+   "verb": "appear",
    "at": {
-    "word": "7-04.w010",
+    "word": "route#2",
     "off": 0
    },
-   "means": "route：起跑线",
+   "lead": 9,
+   "means": "route：两条跑道起跑线对齐框亮起",
    "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "7-04.w010"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "target#1"
    }
   },
   {
-   "id": "tgt",
-   "obj": "tgt",
-   "verb": "grow",
+   "id": "t1",
+   "obj": "t1",
+   "verb": "snap",
    "at": {
-    "word": "7-04.w012",
+    "word": "target#1",
     "off": 0
    },
-   "means": "target：same target，两道各亮一把锁",
+   "lead": 13,
+   "means": "same target：第一块小牌翻起，两道各亮一个靶标",
    "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "word": "7-04.w012"
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "conds"
+    ]
+   },
+   "until": {
+    "word": "budget#1"
    }
   },
   {
-   "id": "bud",
-   "obj": "bud",
-   "verb": "grow",
+   "id": "t2",
+   "obj": "t2",
+   "verb": "snap",
    "at": {
-    "word": "7-04.w014",
+    "word": "budget#1",
     "off": 0
    },
-   "means": "budget：same budget，两道各亮一叠钞票",
+   "lead": 13,
+   "means": "same budget：第二块小牌翻起，两道各亮一个预算标",
    "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "word": "7-04.w014"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "definition#1"
    }
   },
   {
-   "id": "def",
-   "obj": "def",
-   "verb": "grow",
+   "id": "t3",
+   "obj": "t3",
+   "verb": "snap",
    "at": {
-    "word": "7-04.w016",
+    "word": "definition#1",
     "off": 0
    },
-   "means": "definition：same definition of a hit，两道各亮清单",
+   "lead": 13,
+   "means": "same definition：第三块小牌翻起，两道各亮一个命中标",
    "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "word": "7-04.w018"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "hit#1"
    }
   },
   {
-   "id": "hit",
-   "obj": "hit",
-   "verb": "morph",
+   "id": "t3_lbl",
+   "obj": "t3_lbl",
+   "verb": "appear",
    "at": {
-    "word": "7-04.w019",
+    "word": "hit#1",
     "off": 0
    },
-   "means": "hit：两张清单各打勾",
+   "lead": 9,
+   "means": "hit：三块同条件牌锁齐高亮",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "7-04.w019"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
-   "id": "fin",
-   "obj": "fin",
-   "verb": "grow",
+   "id": "ready",
+   "obj": "ready",
+   "verb": "move",
    "at": {
-    "word": "7-04.w023",
+    "word": "know#1",
     "off": 0
    },
-   "means": "exactly：终点线加红问号",
+   "lead": 13,
+   "means": "know：两块小吊牌在起跑线蓄势，秒表清零",
    "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "7-04.w023"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "faster#1"
    }
   },
   {
@@ -190,35 +200,38 @@
    "obj": "run",
    "verb": "move",
    "at": {
-    "word": "7-04.w024",
+    "word": "faster#1",
     "off": 0
    },
-   "means": "how：两个小牌子起跑",
+   "lead": 30,
+   "means": "faster：两块吊牌沿跑道起跑，两块秒表开始走",
    "tool": "remotion",
-   "lead": 40,
-   "until": {
-    "word": "7-04.w025"
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "race"
+    ]
+   },
+   "until": {
+    "word": "ai#2"
    }
   },
   {
-   "id": "qm",
-   "obj": "qm",
+   "id": "q",
+   "obj": "q",
    "verb": "appear",
    "at": {
-    "word": "7-04.w026",
+    "word": "is#1",
     "off": 0
    },
-   "means": "faster：红批注 how much faster",
+   "lead": 10,
+   "means": "is：终点线上红色问号亮起",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   }
  ]

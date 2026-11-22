@@ -2,115 +2,143 @@
  "schema": "cdk20.events/1",
  "group": "6-06",
  "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：第 6 章记分板第三行 6-06（画外音）：Time；左格一条很长的路 10–17 years，开头一小段画红；右格短路 30 days，再接一段 another 30。页面 Manual606.jsx。",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 6-06（btier/B606.jsx，复用第 6 章翻牌记分板组件，第 1、2 行保持已填，第 2 行托盘保留 13 颗珠子）。填第 3 行：行名翻出 3. TIME；BEFORE 左凹位卷尺（h18）大幅拉长，主翻牌翻出 10–17 YEARS，卷尺最前面一小段变红高亮，副翻牌翻出 HIT = OPENING STRETCH；NOW 右凹位 Calendar1 日历先翻至 30，主翻牌翻出 30 DAYS (1ST HIT)，随后 048 钥匙图标展开、日历再翻 30，副翻牌翻出 +30 DAYS (BETTER KEY)。",
+ "tier": "B",
+ "zone": 6,
+ "trans_in": "T5 runner（上一段 6-04+05 是出镜 A 段，13 颗珠子飞回第 2 行）",
+ "trans_out": "T2 甩镜往左（下一段 6-07 是 B 页）",
  "holds": [],
  "events": [
   {
-   "id": "lbl",
-   "obj": "lbl",
-   "verb": "appear",
+   "id": "row3",
+   "obj": "row3",
+   "verb": "snap",
    "at": {
-    "word": "6-06.w001",
+    "word": "time#1",
     "off": 0
    },
-   "means": "Time：行标题",
+   "lead": 9,
+   "means": "Time：第 3 行行名翻出 3. TIME，镜头对准第 3 行",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "6-06.w001"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "bef",
+   "obj": "bef",
+   "verb": "appear",
+   "at": {
+    "word": "before#1",
+    "off": 0
+   },
+   "lead": 7,
+   "means": "Before：左凹位卷尺底座（h18）落位",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "tape"
+    ]
+   },
+   "until": {
+    "word": "ten-to-seventeen-year#1"
+   }
+  },
+  {
+   "id": "tape",
+   "obj": "tape",
+   "verb": "grow",
+   "at": {
+    "word": "ten-to-seventeen-year#1",
+    "off": 0
+   },
+   "lead": 36,
+   "means": "ten-to-seventeen-year：卷尺大幅拉长，BEFORE 主翻牌翻出 10–17 YEARS",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "road#1"
    }
   },
   {
    "id": "road",
    "obj": "road",
-   "verb": "grow",
+   "verb": "move",
    "at": {
-    "word": "6-06.w004",
+    "word": "road#1",
     "off": 0
    },
-   "means": "ten-to-seventeen-year：长路画出",
+   "lead": 13,
+   "means": "road：卷尺沿左槽铺展成带年份刻度的长路",
    "tool": "remotion",
-   "lead": 50,
-   "until": {
-    "word": "6-06.w004"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "hit#1"
    }
   },
   {
-   "id": "yrs",
-   "obj": "yrs",
+   "id": "hit",
+   "obj": "hit",
    "verb": "appear",
    "at": {
-    "word": "6-06.w005",
+    "word": "hit#1",
     "off": 0
    },
-   "means": "road：标签 10–17 years",
+   "lead": 13,
+   "means": "finding a hit：卷尺最前端一小段标出切分线",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "6-06.w005"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "opening#1"
    }
   },
   {
-   "id": "hitl",
-   "obj": "hitl",
-   "verb": "appear",
+   "id": "open",
+   "obj": "open",
+   "verb": "snap",
    "at": {
-    "word": "6-06.w009",
+    "word": "opening#1",
     "off": 0
    },
-   "means": "hit：路起点标 finding a hit",
+   "lead": 13,
+   "means": "opening：卷尺最前端一小段描红高亮",
    "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "word": "6-06.w009"
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "stretch"
+    ]
+   },
+   "until": {
+    "word": "stretch#1"
    }
   },
   {
-   "id": "brk",
-   "obj": "brk",
-   "verb": "grow",
+   "id": "strch",
+   "obj": "strch",
+   "verb": "snap",
    "at": {
-    "word": "6-06.w010",
+    "word": "stretch#1",
     "off": 0
    },
-   "means": "just：括号框住开头一段",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "6-06.w010"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "red",
-   "obj": "red",
-   "verb": "morph",
-   "at": {
-    "word": "6-06.w012",
-    "off": 0
-   },
-   "means": "opening：开头一段画红",
-   "tool": "remotion",
    "lead": 10,
-   "until": {
-    "word": "6-06.w013"
-   },
+   "means": "stretch：BEFORE 副翻牌翻出 HIT = OPENING STRETCH",
+   "tool": "remotion",
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
@@ -118,125 +146,92 @@
    "obj": "now",
    "verb": "appear",
    "at": {
-    "word": "6-06.w014",
+    "word": "now#1",
     "off": 0
    },
-   "means": "Now：右栏亮起",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "6-06.w014"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "r1",
-   "obj": "r1",
-   "verb": "grow",
-   "at": {
-    "word": "6-06.w015",
-    "off": 0
-   },
-   "means": "30：短路第一段画出",
-   "tool": "remotion",
-   "lead": 24,
-   "until": {
-    "word": "6-06.w015"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "d30",
-   "obj": "d30",
-   "verb": "appear",
-   "at": {
-    "word": "6-06.w016",
-    "off": 0
-   },
-   "means": "days：标签 30 days",
-   "tool": "remotion",
    "lead": 10,
-   "until": {
-    "word": "6-06.w016"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "fh",
-   "obj": "fh",
-   "verb": "appear",
-   "at": {
-    "word": "6-06.w020",
-    "off": 0
-   },
-   "means": "hit：第一段终点小旗",
+   "means": "Now：右凹位 Calendar1 日历落位",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "6-06.w020"
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "cal"
+    ]
+   },
+   "until": {
+    "word": "30#1"
    }
   },
   {
-   "id": "bk",
-   "obj": "bk",
-   "verb": "appear",
-   "at": {
-    "word": "6-06.w024",
-    "off": 0
-   },
-   "means": "key：钥匙落在第一段终点",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "6-06.w024"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "r2",
-   "obj": "r2",
+   "id": "d30a",
+   "obj": "d30a",
    "verb": "grow",
    "at": {
-    "word": "6-06.w026",
+    "word": "30#1",
     "off": 0
    },
-   "means": "another：短路再接一段",
-   "tool": "remotion",
    "lead": 20,
-   "until": {
-    "word": "6-06.w026"
-   },
+   "means": "30 days：日历翻到 30，NOW 主翻牌翻出 30 DAYS (1ST HIT)",
+   "tool": "remotion",
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "days#1"
    }
   },
   {
-   "id": "a30",
-   "obj": "a30",
-   "verb": "move",
+   "id": "hit1",
+   "obj": "hit1",
+   "verb": "snap",
    "at": {
-    "word": "6-06.w027",
+    "word": "hit#2",
     "off": 0
    },
-   "means": "30：标签 another 30，钥匙滑到终点",
+   "lead": 13,
+   "means": "first hit：001 小钥匙图标在日历旁打勾",
    "tool": "remotion",
-   "lead": 8,
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "key#1"
+   }
+  },
+  {
+   "id": "bkey",
+   "obj": "bkey",
+   "verb": "appear",
+   "at": {
+    "word": "key#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "a better key：048 金钥匙图标在下方展开",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "30#2"
+   }
+  },
+  {
+   "id": "d30b",
+   "obj": "d30b",
+   "verb": "snap",
+   "at": {
+    "word": "30#2",
+    "off": 0
+   },
+   "lead": 20,
+   "means": "another 30：日历再翻 30，NOW 副翻牌翻出 +30 DAYS (BETTER KEY)",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
    }
   }
  ]

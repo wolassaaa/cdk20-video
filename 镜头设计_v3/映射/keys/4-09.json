@@ -477,38 +477,15 @@
  "holds": [],
  "events": [
   {
-   "id": "title",
-   "obj": "title",
+   "id": "chip",
+   "obj": "chip",
    "verb": "appear",
    "ease": "inout",
-   "means": "team：标题，小人长出",
-   "f_start": 10,
-   "f_land": 18,
-   "f_end": 399,
-   "until": "4-09.s1",
-   "word": "4-09.w002",
-   "w": "team",
-   "key": "team#1",
-   "sid": "4-09.s1",
-   "word_f0": 18,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 33486,
-   "F_land": 33494,
-   "F_end": 33875
-  },
-  {
-   "id": "gave",
-   "obj": "gave",
-   "verb": "grow",
-   "ease": "inout",
-   "means": "gave it：芯片长出，盖牌 Chemistry42",
-   "f_start": 39,
+   "means": "The team gave it：Chemistry42 芯片落位",
+   "f_start": 48,
    "f_land": 55,
-   "f_end": 399,
-   "until": "4-09.s1",
+   "f_end": 70,
+   "until": "4-09.w004",
    "word": "4-09.w003",
    "w": "gave",
    "key": "gave#1",
@@ -521,57 +498,30 @@
      "chip"
     ]
    },
-   "F_start": 33515,
+   "F_start": 33524,
    "F_land": 33531,
-   "F_end": 33875,
+   "F_end": 33546,
    "g_start": 29,
    "g_on": 47,
-   "g_end": 200,
-   "g_off": 230,
+   "g_end": 70,
+   "g_off": 100,
    "g_tick": 51,
    "G_start": 33505,
    "G_on": 33523,
-   "G_end": 33676,
-   "G_off": 33706,
+   "G_end": 33546,
+   "G_off": 33576,
    "G_tick": 33527
   },
   {
    "id": "pocket",
    "obj": "pocket",
-   "verb": "grow",
-   "ease": "inout",
-   "means": "pocket's：锁长出",
-   "f_start": 66,
-   "f_land": 80,
-   "f_end": 399,
-   "until": "4-09.s1",
-   "word": "4-09.w006",
-   "w": "pocket's",
-   "key": "pocket's#1",
-   "sid": "4-09.s1",
-   "word_f0": 80,
-   "tool": "remotion",
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "lock"
-    ]
-   },
-   "F_start": 33542,
-   "F_land": 33556,
-   "F_end": 33875,
-   "guide_into": "gave"
-  },
-  {
-   "id": "shape",
-   "obj": "shape",
    "verb": "appear",
    "ease": "inout",
-   "means": "shape：锁外描一圈虚线，写 the pocket's shape",
-   "f_start": 104,
+   "means": "the pocket's shape：插座正面落位",
+   "f_start": 109,
    "f_land": 116,
-   "f_end": 399,
-   "until": "4-09.s1",
+   "f_end": 134,
+   "until": "4-09.w007",
    "word": "4-09.w007",
    "w": "shape",
    "key": "shape#1",
@@ -579,45 +529,35 @@
    "word_f0": 116,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "socket"
+    ]
    },
-   "F_start": 33580,
+   "F_start": 33585,
    "F_land": 33592,
-   "F_end": 33875
-  },
-  {
-   "id": "one",
-   "obj": "one",
-   "verb": "move",
-   "ease": "inout",
-   "means": "one：虚线外形复制一份飞进芯片",
-   "f_start": 151,
-   "f_land": 175,
-   "f_end": 399,
-   "until": "4-09.s1",
-   "word": "4-09.w009",
-   "w": "one",
-   "key": "one#1",
-   "sid": "4-09.s1",
-   "word_f0": 175,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 33627,
-   "F_land": 33651,
-   "F_end": 33875
+   "F_end": 33610,
+   "g_start": 90,
+   "g_on": 108,
+   "g_end": 134,
+   "g_off": 164,
+   "g_tick": 112,
+   "G_start": 33566,
+   "G_on": 33584,
+   "G_end": 33610,
+   "G_off": 33640,
+   "G_tick": 33588
   },
   {
    "id": "rule",
    "obj": "rule",
    "verb": "appear",
    "ease": "inout",
-   "means": "rule：规则卡片画出，写 one rule",
+   "means": "one rule：标 one rule",
    "f_start": 177,
    "f_land": 187,
-   "f_end": 399,
-   "until": "4-09.s1",
+   "f_end": 200,
+   "until": "4-09.w010",
    "word": "4-09.w010",
    "w": "rule:",
    "key": "rule#1",
@@ -629,18 +569,18 @@
    },
    "F_start": 33653,
    "F_land": 33663,
-   "F_end": 33875
+   "F_end": 33676
   },
   {
    "id": "key",
    "obj": "key",
-   "verb": "grow",
+   "verb": "move",
    "ease": "inout",
-   "means": "key：锁左边长出一把钥匙",
-   "f_start": 252,
+   "means": "every key：插头飞到插孔前",
+   "f_start": 234,
    "f_land": 264,
-   "f_end": 399,
-   "until": "4-09.s1",
+   "f_end": 292,
+   "until": "4-09.w013",
    "word": "4-09.w012",
    "w": "key",
    "key": "key#1",
@@ -648,35 +588,22 @@
    "word_f0": 264,
    "tool": "remotion",
    "guide": {
-    "kind": "focus",
-    "target": [
-     "key"
-    ]
+    "kind": "none"
    },
-   "F_start": 33728,
+   "F_start": 33710,
    "F_land": 33740,
-   "F_end": 33875,
-   "g_start": 238,
-   "g_on": 256,
-   "g_end": 384,
-   "g_off": 414,
-   "g_tick": 260,
-   "G_start": 33714,
-   "G_on": 33732,
-   "G_end": 33860,
-   "G_off": 33890,
-   "G_tick": 33736
+   "F_end": 33768
   },
   {
    "id": "grip",
    "obj": "grip",
-   "verb": "move",
+   "verb": "snap",
    "ease": "inout",
-   "means": "grip：钥匙插进锁",
-   "f_start": 282,
+   "means": "must grip a spot：插头卡住一边",
+   "f_start": 283,
    "f_land": 296,
-   "f_end": 399,
-   "until": "4-09.s1",
+   "f_end": 336,
+   "until": "4-09.w016",
    "word": "4-09.w014",
    "w": "grip",
    "key": "grip#1",
@@ -686,40 +613,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 33758,
+   "F_start": 33759,
    "F_land": 33772,
-   "F_end": 33875
-  },
-  {
-   "id": "spot",
-   "obj": "spot",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "spot：钥匙尖旁红点，引线",
-   "f_start": 308,
-   "f_land": 316,
-   "f_end": 399,
-   "until": "4-09.s1",
-   "word": "4-09.w016",
-   "w": "spot",
-   "key": "spot#1",
-   "sid": "4-09.s1",
-   "word_f0": 316,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 33784,
-   "F_land": 33792,
-   "F_end": 33875
+   "F_end": 33812
   },
   {
    "id": "hinge",
    "obj": "hinge",
    "verb": "appear",
    "ease": "inout",
-   "means": "hinge：写 hinge，卡片写 must grip the hinge，卡片到芯片虚线箭头",
-   "f_start": 364,
+   "means": "called the hinge：铰点亮，手写 hinge",
+   "f_start": 368,
    "f_land": 374,
    "f_end": 399,
    "until": "4-09.s1",
@@ -732,20 +636,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 33840,
+   "F_start": 33844,
    "F_land": 33850,
    "F_end": 33875
   },
   {
-   "id": "filters",
-   "obj": "filters",
-   "verb": "grow",
+   "id": "filt",
+   "obj": "filt",
+   "verb": "appear",
    "ease": "inout",
-   "means": "filters：右边三道筛子画出，写 filters，芯片出口传送线",
-   "f_start": 436,
+   "means": "Its filters：清场，筛子落位",
+   "f_start": 443,
    "f_land": 450,
-   "f_end": 1040,
-   "until": "4-09.s2",
+   "f_end": 522,
+   "until": "4-09.w023",
    "word": "4-09.w021",
    "w": "filters",
    "key": "filters#1",
@@ -753,45 +657,35 @@
    "word_f0": 450,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "sieve"
+    ]
    },
-   "F_start": 33912,
+   "F_start": 33919,
    "F_land": 33926,
-   "F_end": 34516
-  },
-  {
-   "id": "built",
-   "obj": "built",
-   "verb": "move",
-   "ease": "inout",
-   "means": "built：芯片开始吐钥匙，沿线往右走",
-   "f_start": 494,
-   "f_land": 504,
-   "f_end": 1040,
-   "until": "4-09.s2",
-   "word": "4-09.w023",
-   "w": "built",
-   "key": "built#1",
-   "sid": "4-09.s2",
-   "word_f0": 504,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 33970,
-   "F_land": 33980,
-   "F_end": 34516
+   "F_end": 33998,
+   "g_start": 424,
+   "g_on": 442,
+   "g_end": 522,
+   "g_off": 552,
+   "g_tick": 446,
+   "G_start": 33900,
+   "G_on": 33918,
+   "G_end": 33998,
+   "G_off": 34028,
+   "G_tick": 33922
   },
   {
    "id": "toss",
    "obj": "toss",
    "verb": "move",
    "ease": "inout",
-   "means": "toss：第一把钥匙在第一道筛子打叉，掉进 toss 槽",
-   "f_start": 545,
+   "means": "to toss：插头往下落",
+   "f_start": 540,
    "f_land": 553,
-   "f_end": 1040,
-   "until": "4-09.s2",
+   "f_end": 613,
+   "until": "4-09.w026",
    "word": "4-09.w025",
    "w": "toss",
    "key": "toss#1",
@@ -801,43 +695,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 34021,
+   "F_start": 34016,
    "F_land": 34029,
-   "F_end": 34516
+   "F_end": 34089
   },
   {
-   "id": "designs",
-   "obj": "designs",
-   "verb": "appear",
+   "id": "react",
+   "obj": "react",
+   "verb": "eject",
    "ease": "inout",
-   "means": "designs：钥匙流下写 designs",
-   "f_start": 569,
-   "f_land": 577,
-   "f_end": 1040,
-   "until": "4-09.s2",
-   "word": "4-09.w026",
-   "w": "designs",
-   "key": "designs#1",
-   "sid": "4-09.s2",
-   "word_f0": 577,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 34045,
-   "F_land": 34053,
-   "F_end": 34516
-  },
-  {
-   "id": "reactive",
-   "obj": "reactive",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "reactive：第一道筛子上写 reactive or",
-   "f_start": 634,
+   "means": "reactive：一个被甩出去",
+   "f_start": 631,
    "f_land": 644,
-   "f_end": 1040,
-   "until": "4-09.s2",
+   "f_end": 677,
+   "until": "4-09.w028",
    "word": "4-09.w028",
    "w": "reactive",
    "key": "reactive#1",
@@ -847,43 +718,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 34110,
+   "F_start": 34107,
    "F_land": 34120,
-   "F_end": 34516
-  },
-  {
-   "id": "possibly",
-   "obj": "possibly",
-   "verb": "move",
-   "ease": "inout",
-   "means": "possibly：又一把钥匙打叉掉进槽",
-   "f_start": 694,
-   "f_land": 702,
-   "f_end": 1040,
-   "until": "4-09.s2",
-   "word": "4-09.w030",
-   "w": "possibly",
-   "key": "possibly#1",
-   "sid": "4-09.s2",
-   "word_f0": 702,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 34170,
-   "F_land": 34178,
-   "F_end": 34516
+   "F_end": 34153
   },
   {
    "id": "toxic",
    "obj": "toxic",
-   "verb": "appear",
+   "verb": "eject",
    "ease": "inout",
-   "means": "toxic：写 possibly toxic",
-   "f_start": 731,
+   "means": "possibly toxic groups：又一个被甩出去",
+   "f_start": 728,
    "f_land": 741,
-   "f_end": 1040,
-   "until": "4-09.s2",
+   "f_end": 785,
+   "until": "4-09.w032",
    "word": "4-09.w031",
    "w": "toxic",
    "key": "toxic#1",
@@ -893,43 +741,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 34207,
+   "F_start": 34204,
    "F_land": 34217,
-   "F_end": 34516
-  },
-  {
-   "id": "groups",
-   "obj": "groups",
-   "verb": "morph",
-   "ease": "inout",
-   "means": "groups：toss 槽一颤，写 toss",
-   "f_start": 755,
-   "f_land": 763,
-   "f_end": 1040,
-   "until": "4-09.s2",
-   "word": "4-09.w032",
-   "w": "groups,",
-   "key": "groups#1",
-   "sid": "4-09.s2",
-   "word_f0": 763,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 34231,
-   "F_land": 34239,
-   "F_end": 34516
+   "F_end": 34261
   },
   {
    "id": "score",
    "obj": "score",
    "verb": "appear",
    "ease": "inout",
-   "means": "score：右下一列钥匙旁画分数条框，写 score",
-   "f_start": 835,
+   "means": "to score：两块表盘",
+   "f_start": 838,
    "f_land": 845,
-   "f_end": 1040,
-   "until": "4-09.s2",
+   "f_end": 881,
+   "until": "4-09.w036",
    "word": "4-09.w035",
    "w": "score",
    "key": "score#1",
@@ -937,22 +762,35 @@
    "word_f0": 845,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "dials"
+    ]
    },
-   "F_start": 34311,
+   "F_start": 34314,
    "F_land": 34321,
-   "F_end": 34516
+   "F_end": 34357,
+   "g_start": 819,
+   "g_on": 837,
+   "g_end": 881,
+   "g_off": 911,
+   "g_tick": 841,
+   "G_start": 34295,
+   "G_on": 34313,
+   "G_end": 34357,
+   "G_off": 34387,
+   "G_tick": 34317
   },
   {
    "id": "drug",
    "obj": "drug",
-   "verb": "morph",
+   "verb": "move",
    "ease": "inout",
-   "means": "drug-like：第二道筛子写 drug-like?，分数条涨第一段",
-   "f_start": 877,
+   "means": "how drug-like：左表指针摆高",
+   "f_start": 874,
    "f_land": 887,
-   "f_end": 1040,
-   "until": "4-09.s2",
+   "f_end": 920,
+   "until": "4-09.w037",
    "word": "4-09.w037",
    "w": "drug-like",
    "key": "drug-like#1",
@@ -962,17 +800,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 34353,
+   "F_start": 34350,
    "F_land": 34363,
-   "F_end": 34516
+   "F_end": 34396
   },
   {
    "id": "easy",
    "obj": "easy",
-   "verb": "morph",
+   "verb": "move",
    "ease": "inout",
-   "means": "easy：第三道筛子写 easy to make?，分数条涨第二段",
-   "f_start": 932,
+   "means": "easy to make：右表指针摆高",
+   "f_start": 929,
    "f_land": 942,
    "f_end": 1040,
    "until": "4-09.s2",
@@ -985,86 +823,112 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 34408,
+   "F_start": 34405,
    "F_land": 34418,
-   "F_end": 34516
-  },
-  {
-   "id": "each",
-   "obj": "each",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "each：每行逐个打勾",
-   "f_start": 989,
-   "f_land": 999,
-   "f_end": 1040,
-   "until": "4-09.s2",
-   "word": "4-09.w042",
-   "w": "each",
-   "key": "each#1",
-   "sid": "4-09.s2",
-   "word_f0": 999,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 34465,
-   "F_land": 34475,
    "F_end": 34516
   }
  ],
  "guides": [
   {
-   "id": "gave",
+   "id": "chip",
    "target": [
-    "chip",
-    "lock"
+    "chip"
    ],
    "kind": "focus",
    "gs": 29,
    "gon": 47,
    "land": 55,
-   "gend": 200,
-   "goff": 230,
+   "gend": 70,
+   "goff": 100,
    "tick": 51,
-   "nudge": false,
+   "nudge": true,
    "rim": true,
-   "ev_s": 39,
+   "ev_s": 48,
    "events": [
-    "gave",
-    "pocket"
+    "chip"
    ],
+   "handoff": "pocket",
    "G_start": 33505,
    "G_on": 33523,
    "G_land": 33531,
-   "G_end": 33676,
-   "G_off": 33706,
+   "G_end": 33546,
+   "G_off": 33576,
    "G_tick": 33527
   },
   {
-   "id": "key",
+   "id": "pocket",
    "target": [
-    "key"
+    "socket"
    ],
    "kind": "focus",
-   "gs": 238,
-   "gon": 256,
-   "land": 264,
-   "gend": 384,
-   "goff": 414,
-   "tick": 260,
-   "nudge": false,
+   "gs": 90,
+   "gon": 108,
+   "land": 116,
+   "gend": 134,
+   "goff": 164,
+   "tick": 112,
+   "nudge": true,
    "rim": true,
-   "ev_s": 252,
+   "ev_s": 109,
    "events": [
-    "key"
+    "pocket"
    ],
-   "G_start": 33714,
-   "G_on": 33732,
-   "G_land": 33740,
-   "G_end": 33860,
-   "G_off": 33890,
-   "G_tick": 33736
+   "G_start": 33566,
+   "G_on": 33584,
+   "G_land": 33592,
+   "G_end": 33610,
+   "G_off": 33640,
+   "G_tick": 33588
+  },
+  {
+   "id": "filt",
+   "target": [
+    "sieve"
+   ],
+   "kind": "focus",
+   "gs": 424,
+   "gon": 442,
+   "land": 450,
+   "gend": 522,
+   "goff": 552,
+   "tick": 446,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 443,
+   "events": [
+    "filt"
+   ],
+   "G_start": 33900,
+   "G_on": 33918,
+   "G_land": 33926,
+   "G_end": 33998,
+   "G_off": 34028,
+   "G_tick": 33922
+  },
+  {
+   "id": "score",
+   "target": [
+    "dials"
+   ],
+   "kind": "focus",
+   "gs": 819,
+   "gon": 837,
+   "land": 845,
+   "gend": 881,
+   "goff": 911,
+   "tick": 841,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 838,
+   "events": [
+    "score"
+   ],
+   "G_start": 34295,
+   "G_on": 34313,
+   "G_land": 34321,
+   "G_end": 34357,
+   "G_off": 34387,
+   "G_tick": 34317
   }
  ],
  "problems": []

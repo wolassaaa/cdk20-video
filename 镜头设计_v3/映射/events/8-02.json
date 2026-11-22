@@ -2,61 +2,29 @@
  "schema": "cdk20.events/1",
  "group": "8-02",
  "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 8-02（VO）：总结目标 1。七站路线（照 2-08）回来，find / assess 两段标出；路起点上方四个格子依次填进四个工具的小动图（从数据挑靶点、预测锁的形状、设计新钥匙、排出该做哪些）；最后 Our objectives 便签落下，1 打勾，写 for this case。页面 Manual802.jsx。",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 8-02（btier/B802.jsx）。目标牌 1 落位带红色问号，随后让到左上角，主料杆和路展开；路的第一段上挂起四个工具节点：PandaOmics 芯片、AlphaFold 芯片、Chemistry42 芯片、打分排名条（不用圆表盘）。Picking a target：PandaOmics 亮并闪出 Top 20 牌；Predicting the lock's shape：AlphaFold 亮并升起蓝色 CDK20；Designing new keys：Chemistry42 亮并吐出一把金钥匙；ranking：排名刻度条游标推动选中要合成的钥匙。最后目标牌 1 回到画面中央，刻上绿色勾（T7），加小字 for this case。",
+ "tier": "B",
+ "zone": 8,
+ "trans_in": "T5 runner（上一段 8-01 是出镜 C 段）",
+ "trans_out": "T2 甩镜往左（下一段 8-03 是 B 页）",
  "holds": [],
  "events": [
   {
-   "id": "q",
-   "obj": "q",
+   "id": "goal1",
+   "obj": "goal1",
    "verb": "appear",
    "at": {
-    "word": "8-02.w003",
+    "word": "how#1",
     "off": 0
    },
-   "means": "computer-aided：问题第一行",
+   "lead": 7,
+   "means": "How：目标牌 1 落位，带红色问号",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "8-02.w004"
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "q2",
-   "obj": "q2",
-   "verb": "appear",
-   "at": {
-    "word": "8-02.w004",
-    "off": 0
    },
-   "means": "methods：问题第二行",
-   "tool": "remotion",
-   "lead": 6,
    "until": {
-    "word": "8-02.w005"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "help",
-   "obj": "help",
-   "verb": "appear",
-   "at": {
-    "word": "8-02.w005",
-    "off": 0
-   },
-   "means": "help：help 下划线",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "8-02.w006"
-   },
-   "guide": {
-    "kind": "none"
+    "word": "computer-aided#1"
    }
   },
   {
@@ -64,17 +32,53 @@
    "obj": "road",
    "verb": "grow",
    "at": {
-    "word": "8-02.w006",
+    "word": "computer-aided#1",
     "off": 0
    },
-   "means": "scientists：七站路画出",
+   "lead": 13,
+   "means": "computer-aided：主料杆与路在下方展开",
    "tool": "remotion",
-   "lead": 30,
-   "until": {
-    "word": "8-02.w007"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "methods#1"
+   }
+  },
+  {
+   "id": "badge",
+   "obj": "badge",
+   "verb": "move",
+   "at": {
+    "word": "methods#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "methods：目标牌 1 让到左上角",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "scientists#1"
+   }
+  },
+  {
+   "id": "sci",
+   "obj": "sci",
+   "verb": "appear",
+   "at": {
+    "word": "scientists#1",
+    "off": 0
+   },
+   "lead": 9,
+   "means": "scientists：科学家路标在起点亮起",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "find#1"
    }
   },
   {
@@ -82,17 +86,20 @@
    "obj": "find",
    "verb": "appear",
    "at": {
-    "word": "8-02.w007",
+    "word": "find#1",
     "off": 0
    },
-   "means": "find：前两站括号",
+   "lead": 10,
+   "means": "find：寻找位亮起",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "8-02.w009"
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "road"
+    ]
+   },
+   "until": {
+    "word": "assess#1"
    }
   },
   {
@@ -100,17 +107,17 @@
    "obj": "assess",
    "verb": "appear",
    "at": {
-    "word": "8-02.w009",
+    "word": "assess#1",
     "off": 0
    },
-   "means": "assess：中间两站括号",
+   "lead": 10,
+   "means": "assess：评估位亮起",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "8-02.w012"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "candidates#1"
    }
   },
   {
@@ -118,200 +125,191 @@
    "obj": "cand",
    "verb": "grow",
    "at": {
-    "word": "8-02.w012",
+    "word": "candidates#1",
     "off": 0
    },
-   "means": "candidates：起点三把小钥匙",
+   "lead": 13,
+   "means": "candidates：小分子候选插头沿路排开",
    "tool": "remotion",
-   "lead": 8,
+   "guide": {
+    "kind": "none"
+   },
    "until": {
     "sentence_end": true
+   }
+  },
+  {
+   "id": "case_in",
+   "obj": "case_in",
+   "verb": "move",
+   "at": {
+    "word": "case#1",
+    "off": 0
    },
+   "lead": 13,
+   "means": "In this case：路的第一段推近居中",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "points#1"
+   }
+  },
+  {
+   "id": "pts",
+   "obj": "pts",
+   "verb": "grow",
+   "at": {
+    "word": "points#1",
+    "off": 0
+   },
+   "lead": 24,
+   "means": "four points：四个工具节点（PandaOmics、AlphaFold、Chemistry42、排名条）挂上路",
+   "tool": "remotion",
    "guide": {
     "kind": "focus",
     "target": [
-     "key"
+     "pts"
     ]
-   }
-  },
-  {
-   "id": "case",
-   "obj": "case",
-   "verb": "appear",
-   "at": {
-    "word": "8-02.w015",
-    "off": 0
    },
-   "means": "this case：标签",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "8-02.w017"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "four",
-   "obj": "four",
-   "verb": "grow",
-   "at": {
-    "word": "8-02.w017",
-    "off": 0
-   },
-   "means": "four：四个空格子",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "8-02.w018"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "points",
-   "obj": "points",
-   "verb": "appear",
-   "at": {
-    "word": "8-02.w018",
-    "off": 0
-   },
-   "means": "points：格子编号",
-   "tool": "remotion",
-   "lead": 6,
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
    }
   },
   {
-   "id": "pick",
-   "obj": "pick",
-   "verb": "grow",
+   "id": "panda",
+   "obj": "panda",
+   "verb": "snap",
    "at": {
-    "word": "8-02.w019",
+    "word": "target#1",
     "off": 0
    },
-   "means": "Picking：格 1 漏斗",
+   "lead": 13,
+   "means": "target：PandaOmics 芯片亮，闪出 Top 20 牌",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "8-02.w021"
-   },
    "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "target",
-   "obj": "target",
-   "verb": "morph",
-   "at": {
-    "word": "8-02.w021",
-    "off": 0
+    "kind": "focus",
+    "target": [
+     "panda"
+    ]
    },
-   "means": "target：漏斗下落出 CDK20",
-   "tool": "remotion",
-   "lead": 6,
    "until": {
-    "word": "8-02.w023"
-   },
-   "guide": {
-    "kind": "none"
+    "word": "data#1"
    }
   },
   {
    "id": "data",
    "obj": "data",
-   "verb": "move",
+   "verb": "appear",
    "at": {
-    "word": "8-02.w023",
+    "word": "data#1",
     "off": 0
    },
-   "means": "data：数据卡片落进漏斗",
+   "lead": 9,
+   "means": "data：标 Top 20 / CDK20 数据牌",
    "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
-   "id": "pred",
-   "obj": "pred",
-   "verb": "grow",
+   "id": "af",
+   "obj": "af",
+   "verb": "snap",
    "at": {
-    "word": "8-02.w024",
+    "word": "predicting#1",
     "off": 0
    },
-   "means": "Predicting：格 2 珠子串",
+   "lead": 10,
+   "means": "Predicting：AlphaFold 芯片亮",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "8-02.w026"
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "af"
+    ]
    },
+   "until": {
+    "word": "lock's#1"
+   }
+  },
+  {
+   "id": "lock_in",
+   "obj": "lock_in",
+   "verb": "appear",
+   "at": {
+    "word": "lock's#1",
+    "off": 0
+   },
+   "lead": 9,
+   "means": "lock's：蓝色支架升起",
+   "tool": "remotion",
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "shape#1"
    }
   },
   {
    "id": "shape",
    "obj": "shape",
-   "verb": "morph",
-   "at": {
-    "word": "8-02.w027",
-    "off": 0
-   },
-   "means": "shape：珠子折起来",
-   "tool": "remotion",
-   "lead": 30,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "design",
-   "obj": "design",
    "verb": "grow",
    "at": {
-    "word": "8-02.w028",
+    "word": "shape#1",
     "off": 0
    },
-   "means": "Designing：格 3 循环",
+   "lead": 30,
+   "means": "shape：蓝色 CDK20 模型在芯片上方升起",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "8-02.w029"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
-   "id": "keys",
-   "obj": "keys",
-   "verb": "appear",
+   "id": "chem42",
+   "obj": "chem42",
+   "verb": "snap",
    "at": {
-    "word": "8-02.w030",
+    "word": "designing#1",
     "off": 0
    },
-   "means": "keys：小钥匙冒出",
+   "lead": 10,
+   "means": "Designing：Chemistry42 芯片亮",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "sentence_end": true
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chem42"
+    ]
    },
+   "until": {
+    "word": "keys#1"
+   }
+  },
+  {
+   "id": "key",
+   "obj": "key",
+   "verb": "eject",
+   "at": {
+    "word": "keys#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "keys：芯片吐出一把金钥匙",
+   "tool": "remotion",
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
@@ -319,89 +317,77 @@
    "obj": "rank",
    "verb": "grow",
    "at": {
-    "word": "8-02.w032",
+    "word": "ranking#1",
     "off": 0
    },
-   "means": "ranking：格 4 长条",
+   "lead": 13,
+   "means": "ranking：打分排名条长出，游标推向高分端",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "8-02.w034"
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "rank"
+    ]
+   },
+   "until": {
+    "word": "make#1"
    }
   },
   {
    "id": "make",
    "obj": "make",
-   "verb": "morph",
+   "verb": "snap",
    "at": {
-    "word": "8-02.w036",
+    "word": "make#1",
     "off": 0
    },
-   "means": "make：长条排序，前两条打勾",
+   "lead": 13,
+   "means": "make：选出靠前的两把钥匙高亮",
    "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "focus",
+   "obj": "focus",
+   "verb": "move",
+   "at": {
+    "word": "first#1",
+    "off": 0
+   },
+   "lead": 30,
+   "means": "first：四个工具收拢连线，目标牌 1 回到中间",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "objective#1"
    }
   },
   {
    "id": "obj",
    "obj": "obj",
-   "verb": "grow",
+   "verb": "appear",
    "at": {
-    "word": "8-02.w038",
+    "word": "objective#1",
     "off": 0
    },
-   "means": "our：便签落下",
-   "tool": "remotion",
    "lead": 10,
-   "until": {
-    "word": "8-02.w039"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "first",
-   "obj": "first",
-   "verb": "appear",
-   "at": {
-    "word": "8-02.w039",
-    "off": 0
-   },
-   "means": "first：圈号 1",
+   "means": "objective：目标牌 1 框高亮待命",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "8-02.w040"
-   },
    "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "objtxt",
-   "obj": "objtxt",
-   "verb": "appear",
-   "at": {
-    "word": "8-02.w040",
-    "off": 0
+    "kind": "focus",
+    "target": [
+     "goal1"
+    ]
    },
-   "means": "objective：第 1 条文字",
-   "tool": "remotion",
-   "lead": 8,
    "until": {
-    "word": "8-02.w041"
-   },
-   "guide": {
-    "kind": "none"
+    "word": "met#1"
    }
   },
   {
@@ -409,35 +395,35 @@
    "obj": "met",
    "verb": "snap",
    "at": {
-    "word": "8-02.w041",
+    "word": "met#1",
     "off": 0
    },
-   "means": "met：红勾",
+   "lead": 13,
+   "means": "met：目标牌 1 刻出绿色勾，T7 一抖",
    "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "word": "8-02.w042"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "case#2"
    }
   },
   {
-   "id": "thiscase",
-   "obj": "thiscase",
+   "id": "sub",
+   "obj": "sub",
    "verb": "appear",
    "at": {
-    "word": "8-02.w044",
+    "word": "case#2",
     "off": 0
    },
-   "means": "this case：红批注 for this case",
+   "lead": 9,
+   "means": "for this case：目标牌下方刻小字 for this case",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   }
  ]

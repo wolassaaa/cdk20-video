@@ -8,7 +8,7 @@ import React from "react";
 import {Composition, registerRoot, useCurrentFrame} from "remotion";
 import K from "./keys_5-10.json";
 import {Lens, Layer, guidePlan} from "../manual/kit.jsx";
-import {C, camBreath, Stage, Sprite, Slab, Gate, Runner, Label, Pen, Source, Counter, Tick, Engrave, pathOf, evMapB, T5In, whipX, shade} from "./bkit.jsx";
+import {C, Calendar1, camBreath, Stage, Sprite, Slab, Gate, Runner, Label, Pen, Source, Counter, Tick, Engrave, pathOf, evMapB, T5In, whipX, shade} from "./bkit.jsx";
 import {useGsapTimeline, idle, RULE} from "./gsapFrame.jsx";
 
 const E = evMapB(K);
@@ -25,6 +25,8 @@ const DISH_W = 470;
 // 皿里细胞上的小插座（相对皿中心），9 个，4 个会变灰（失去信号的一半）
 const ICONS = [[-120, -40], [-40, -78], [52, -60], [-150, 32], [-62, 14], [30, 22], [118, 6], [-80, 84], [24, 92]];
 const DIM = [1, 4, 6, 7];
+const HEK_ICONS = [2, 4, 7];                          // HEK293：CDK20 少得多（Gemini 初审：对照皿里插座和 Huh7 一样多，看不出区别）
+const IN_DX = 40, IN_DY = -30;                        // 048 落进皿里液面的位置（相对皿中心），不卡在皿沿
 const BAR_X = 260, NM = 0.8, ROW1 = 744, ROW2 = 806, BAR_H = 26;   // 剂量条：1 nM = 0.8 px，1,700 → 1,360 px
 const GAUGE = {dx: 290, top: -170, h: 360, w: 60};                  // 信号表（相对皿中心）
 
@@ -55,6 +57,7 @@ const Scene = () => {
     // 剂量条 210
     X.tw("rail", 0, 1, E.d210.s, E.d210.s + 30, "power2.out");
     X.count("n210", 0, 210, E.d210.l, 60);
+    X.tw("calOut", 0, 1, E.dose.s, E.dose.s + 30, "power2.in");
     X.tw("nm1", 0, 1, E.nm.s, E.nm.l, "power2.out");
     // 对照：Huh7 往左让，HEK293 从右边进来
     X.tw("cmp", 0, 1, E.hek.s, E.hek.l, "power3.inOut");
@@ -84,23 +87,30 @@ const Scene = () => {
   const hopP = HOP.at(S.hop);
   let plug = {x: hopP[0], y: hopP[1] + S.hopJ, w: 220, rot: -8 * Math.sin(Math.PI * S.hop), op: S.plugIn};
   if (shift > 0) plug = {...plug, x: mix(1330, 1340, shift), y: mix(676, 740, shift)};
-  const dosePath = pathOf([[1340, 740], [1120, 330], [SOLO[0] + 120, SOLO[1] - 78]]);
+  const dosePath = pathOf([[1340, 740], [1120, 300], [SOLO[0] + IN_DX, SOLO[1] + IN_DY]]);
   if (S.dose > 0) {
     const p = dosePath.at(S.dose);
-    plug = {x: p[0], y: p[1] + S.doseJ, w: mix(220, 150, S.dose), rot: mix(0, -38, S.dose), op: 1};
+    plug = {x: p[0], y: p[1] + S.doseJ, w: mix(220, 130, S.dose), rot: mix(0, -38, S.dose), op: 1};
   }
-  if (cmp > 0) plug = {...plug, x: dishX + 120, y: SOLO[1] - 78 + S.doseJ};
-  const dose2Path = pathOf([[1990, 110], [1700, 160], [RIGHT[0] + 120, RIGHT[1] - 78]]);
+  if (cmp > 0) plug = {...plug, x: dishX + IN_DX, y: SOLO[1] + IN_DY + S.doseJ};
+  const dose2Path = pathOf([[1990, 110], [1700, 160], [RIGHT[0] + IN_DX, RIGHT[1] + IN_DY]]);
+  // 落进液面：一圈水纹往外扩
+  const ripple = (cx, cy, at) => {
+    const t = (f - at) / 40;
+    return t > 0 && t < 1 && <svg width={1920} height={1080} style={{position: "absolute", left: 0, top: 0, overflow: "visible"}}>
+      <ellipse cx={cx} cy={cy + 30} rx={30 + 120 * t} ry={(30 + 120 * t) * 0.42} fill="none" stroke={C.bone} strokeWidth={5} opacity={0.8 * (1 - t)} />
+    </svg>;
+  };
   const p2 = dose2Path.at(S.dose2);
 
-  const dish = (cx, cy, w, tag, dimKey) => {
+  const dish = (cx, cy, w, tag, dimKey, only) => {
     const kk = w / DISH_W;
     return (
       <>
         <Sprite name="dish/34" x={cx + id(tag === "h" ? 3 : 7).y * 0} y={cy + id(tag === "h" ? 3 : 7).y} w={w} />
         {ICONS.map(([ix, iy], i) => {
           const a = S[`ic${i}`];
-          if (a <= 0.01) return null;
+          if (a <= 0.01 || (only && !only.includes(i))) return null;
           const g = DIM.includes(i) ? S[`${dimKey}${i}`] || 0 : 0;
           return <Sprite key={i} name="mini/m34_on" x={cx + ix * kk} y={cy + iy * kk + id(tag === "h" ? 3 : 7).y} w={74 * kk * a} shadow={false}
                          style={{filter: g > 0.01 ? `grayscale(${g}) brightness(${1 - 0.25 * g})` : undefined}} op={Math.min(1, a) * (1 - 0.45 * g)} />;
@@ -157,18 +167,20 @@ const Scene = () => {
 
         <Layer id="plug">
           {plug.op > 0.01 && <Sprite name="plug/048_34" x={plug.x} y={plug.y} w={plug.w} rot={plug.rot} op={plug.op} shadow={S.dose < 0.5} />}
+          {ripple(SOLO[0] + IN_DX, SOLO[1] + IN_DY, E.dose.l)}
         </Layer>
 
         <Layer id="cal">
-          {S.cal > 0.01 && (
-            <Sprite name="calendar/34" x={1450 + 700 * cmp} y={300 + S.calB0 * -1 + S.calB1 * -1 + S.calB2 * -1 + id(4).y} w={340}
-                    op={Math.min(1, S.cal) * (1 - cmp)} sx={0.7 + 0.3 * S.cal} sy={0.7 + 0.3 * S.cal} rot={id(4).r} />
+          {S.cal > 0.01 && S.calOut < 1 && (
+            <Calendar1 x={1450 + 700 * cmp} y={300 + S.calB0 * -1 + S.calB1 * -1 + S.calB2 * -1 + id(4).y} w={340}
+                    op={Math.min(1, S.cal) * (1 - S.calOut)} sx={0.7 + 0.3 * S.cal} sy={0.7 + 0.3 * S.cal} rot={id(4).r} />
           )}
         </Layer>
 
         <Layer id="hek">
-          {cmp > 0.001 && dish(hekX, RIGHT[1], DISH_W, "h", "dimH")}
-          {S.dose2 > 0.001 && <Sprite name="plug/048_34" x={p2[0] + (hekX - RIGHT[0])} y={p2[1] + S.dose2J} w={mix(200, 150, S.dose2)} rot={mix(10, -38, S.dose2)} shadow={false} />}
+          {cmp > 0.001 && dish(hekX, RIGHT[1], DISH_W, "h", "dimH", HEK_ICONS)}
+          {S.dose2 > 0.001 && <Sprite name="plug/048_34" x={p2[0] + (hekX - RIGHT[0])} y={p2[1] + S.dose2J} w={mix(200, 130, S.dose2)} rot={mix(10, -38, S.dose2)} shadow={false} />}
+          {ripple(RIGHT[0] + IN_DX, RIGHT[1] + IN_DY, E.hneed.l)}
         </Layer>
 
         <Layer id="gauge">
@@ -190,7 +202,7 @@ const Scene = () => {
         {/* 字：豁免层 */}
         <Layer id="txt" exempt>
           <Label text="living cells" x={ST[2]} y={250} size={56} at={E.cells.l} out={E.shift.s} align="center" />
-          <Label text="3 days" x={1450} y={420} size={56} at={E.cal.e - 14} out={E.dose.l + 70} align="center" />
+          <Label text="3 days" x={1450} y={420} size={56} at={E.cal.e - 14} out={E.dose.s + 10} align="center" />
           <Label text="Huh7" x={dishX} y={168} size={56} at={E.huh7.l} align="center" />
           <Pen text="liver cancer cells" x={1050} y={480} at={E.liver.l - 4} out={E.lost.s - 12} />
           <Label text="half" size={52} x={dishX + GAUGE.dx + GAUGE.w + 32} y={SOLO[1] + GAUGE.top + (GAUGE.h - 24) * 0.5 - 14} at={E.half.l} out={E.hek.s} />
@@ -208,8 +220,8 @@ const Scene = () => {
               <div style={{position: "absolute", left: 4 * 30 + 26, top: 14, opacity: S.nm2, transform: `translateY(${(1 - S.nm2) * 12}px)`}}><Engrave size={44}>nM</Engrave></div>
             </div>
           )}
-          <Pen text="≈ 8× more" x={760} y={652} at={E.more.l} size={60} rot={-3} />
-          <Source>Illustration · Ren et al., Chem. Sci. 2023</Source>
+          <Pen text="≈ 8×" x={760} y={652} at={E.eight.l} dur={24} size={60} rot={-3} />
+          <Source>Illustration · data: Ren et al., Chem. Sci. 2023</Source>
         </Layer>
       </Stage>
     </Lens>

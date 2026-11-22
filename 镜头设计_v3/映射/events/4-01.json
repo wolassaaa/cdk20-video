@@ -2,139 +2,107 @@
  "schema": "cdk20.events/1",
  "group": "4-01",
  "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 4-01（VO）：目标 1，结构预测。团队 → 科幻云；问 AI 猜形状；一串积木折成三维；顺序 = 序列；AlphaFold 从已知结构学；给序列 → 预测形状 + 每部分多有把握。页面 Manual401.jsx。",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 4-01（btier/B401.jsx）。三个小人（team），手写 science fiction；AI 芯片 + 磨砂插座和问号（guess the shape）；蛋白 = 一串积木珠子，一字排开，再折起来，化成 AlphaFold 预测模型；sequence：珠子上是 CDK20 真实序列的前 16 个字母；AlphaFold 从数据库架学；Give it one：序列条进芯片，出来模型，按把握上色，图例 sure / unsure，手写圈住红尾巴。",
+ "tier": "B",
+ "zone": 4,
+ "trans_in": "T5 socket（上一段 W2 是 A 段）",
+ "trans_out": "T2 甩镜往左（下一段 4-02 是 B 页）",
  "holds": [],
  "events": [
   {
-   "id": "title",
-   "obj": "title",
+   "id": "team",
+   "obj": "team",
    "verb": "appear",
    "at": {
-    "word": "4-01.w003",
+    "word": "team#1",
     "off": 0
    },
-   "means": "team：标题 Objective 1",
+   "lead": 7,
+   "means": "So the team：三个小人",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "people",
-   "obj": "people",
-   "verb": "grow",
-   "at": {
-    "word": "4-01.w005",
-    "off": 0
-   },
-   "means": "something：三个小人",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "focus",
     "target": [
-     "person"
+     "team"
     ]
+   },
+   "until": {
+    "word": "did#1"
    }
   },
   {
-   "id": "cloud",
-   "obj": "cloud",
-   "verb": "grow",
+   "id": "some",
+   "obj": "some",
+   "verb": "move",
    "at": {
-    "word": "4-01.w007",
+    "word": "something#1",
     "off": 0
    },
-   "means": "once：想法云",
+   "lead": 13,
+   "means": "did something：小人往左让开",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "once#1"
    }
   },
   {
-   "id": "like",
-   "obj": "like",
+   "id": "scifi",
+   "obj": "scifi",
    "verb": "appear",
    "at": {
-    "word": "4-01.w009",
+    "word": "science#1",
     "off": 0
    },
-   "means": "like：云边闪线",
-   "tool": "remotion",
    "lead": 6,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "fic",
-   "obj": "fic",
-   "verb": "appear",
-   "at": {
-    "word": "4-01.w011",
-    "off": 0
-   },
-   "means": "science fiction：红批注",
+   "means": "science fiction：手写",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
    "id": "ai",
    "obj": "ai",
-   "verb": "grow",
+   "verb": "appear",
    "at": {
-    "word": "4-01.w015",
+    "word": "ai#1",
     "off": 0
    },
-   "means": "AI：芯片长出，小人到芯片的箭头",
+   "lead": 7,
+   "means": "asked an AI：AlphaFold 芯片落位",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "4-01.w018"
-   },
    "guide": {
     "kind": "focus",
     "target": [
      "chip"
     ]
+   },
+   "until": {
+    "word": "guess#1"
    }
   },
   {
    "id": "guess",
    "obj": "guess",
-   "verb": "morph",
+   "verb": "appear",
    "at": {
-    "word": "4-01.w019",
+    "word": "shape#1",
     "off": 0
    },
-   "means": "guess the shape：虚线泡泡加问号",
+   "lead": 7,
+   "means": "guess the shape：磨砂插座和问号",
    "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
@@ -142,17 +110,17 @@
    "obj": "prot",
    "verb": "appear",
    "at": {
-    "word": "4-01.w022",
+    "word": "protein#1",
     "off": 0
    },
-   "means": "protein：标签",
+   "lead": 7,
+   "means": "Imagine a protein：清场",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "4-01.w025"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "as#1"
    }
   },
   {
@@ -160,17 +128,20 @@
    "obj": "chain",
    "verb": "grow",
    "at": {
-    "word": "4-01.w025",
+    "word": "chain#1",
     "off": 0
    },
-   "means": "chain：一串珠子",
+   "lead": 13,
+   "means": "as a chain：珠子一颗颗排出来",
    "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "word": "4-01.w027"
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "chain"
+    ]
+   },
+   "until": {
+    "word": "of#1"
    }
   },
   {
@@ -178,71 +149,92 @@
    "obj": "blocks",
    "verb": "appear",
    "at": {
-    "word": "4-01.w028",
+    "word": "blocks#1",
     "off": 0
    },
-   "means": "building blocks：标签",
+   "lead": 13,
+   "means": "building blocks：珠子挨个鼓一下",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "4-01.w029"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "blocks#1"
    }
   },
   {
-   "id": "fold",
-   "obj": "fold",
-   "verb": "morph",
+   "id": "folds",
+   "obj": "folds",
+   "verb": "move",
    "at": {
-    "word": "4-01.w030",
+    "word": "folds#1",
     "off": 0
    },
-   "means": "folds：珠子折起来",
+   "lead": 13,
+   "means": "that folds：链折起来",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "4-01.w033"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "into#1"
    }
   },
   {
-   "id": "d3",
-   "obj": "d3",
+   "id": "shape3d",
+   "obj": "shape3d",
    "verb": "appear",
    "at": {
-    "word": "4-01.w034",
+    "word": "shape#2",
     "off": 0
    },
-   "means": "3D shape：标签",
+   "lead": 13,
+   "means": "into a 3D shape：化成预测模型",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
    "id": "order",
    "obj": "order",
-   "verb": "appear",
+   "verb": "move",
    "at": {
-    "word": "4-01.w036",
+    "word": "order#1",
     "off": 0
    },
-   "means": "order：珠子编号 1–12",
+   "lead": 13,
+   "means": "The order：模型退到右边，链重新排直",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "4-01.w039"
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chain"
+    ]
    },
+   "until": {
+    "word": "order#1"
+   }
+  },
+  {
+   "id": "letters",
+   "obj": "letters",
+   "verb": "appear",
+   "at": {
+    "word": "blocks#2",
+    "off": 0
+   },
+   "lead": 10,
+   "means": "of the blocks：珠子上出字母",
+   "tool": "remotion",
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "blocks#2"
    }
   },
   {
@@ -250,17 +242,17 @@
    "obj": "seq",
    "verb": "appear",
    "at": {
-    "word": "4-01.w042",
+    "word": "sequence#1",
     "off": 0
    },
-   "means": "sequence：括号和标签",
+   "lead": 10,
+   "means": "is the sequence：标 sequence",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
@@ -268,71 +260,38 @@
    "obj": "af",
    "verb": "appear",
    "at": {
-    "word": "4-01.w043",
+    "word": "alphafold#1",
     "off": 0
    },
-   "means": "AlphaFold：芯片名",
+   "lead": 7,
+   "means": "AlphaFold：芯片落到中间",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "4-01.w044"
-   },
    "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "lrn",
-   "obj": "lrn",
-   "verb": "appear",
-   "at": {
-    "word": "4-01.w044",
-    "off": 0
+    "kind": "focus",
+    "target": [
+     "chip"
+    ]
    },
-   "means": "learned：芯片亮一下",
-   "tool": "remotion",
-   "lead": 6,
    "until": {
-    "word": "4-01.w046"
-   },
-   "guide": {
-    "kind": "none"
+    "word": "learned#1"
    }
   },
   {
    "id": "known",
    "obj": "known",
-   "verb": "grow",
-   "at": {
-    "word": "4-01.w047",
-    "off": 0
-   },
-   "means": "known structures：三个小结构",
-   "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "word": "4-01.w048"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "how",
-   "obj": "how",
    "verb": "appear",
    "at": {
-    "word": "4-01.w048",
+    "word": "structures#1",
     "off": 0
    },
-   "means": "how：结构到芯片的箭头",
+   "lead": 7,
+   "means": "known structures：数据库架落下",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "4-01.w049"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "structures#1"
    }
   },
   {
@@ -340,17 +299,17 @@
    "obj": "learn",
    "verb": "move",
    "at": {
-    "word": "4-01.w050",
+    "word": "how#1",
     "off": 0
    },
-   "means": "fold：小结构飞进芯片",
+   "lead": 13,
+   "means": "how sequences fold：数据沿料杆流进芯片",
    "tool": "remotion",
-   "lead": 30,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
@@ -358,17 +317,35 @@
    "obj": "give",
    "verb": "move",
    "at": {
-    "word": "4-01.w053",
+    "word": "one#1",
     "off": 0
    },
-   "means": "give it one：序列条飞进芯片",
+   "lead": 30,
+   "means": "Give it one：序列条送进芯片",
    "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "word": "4-01.w054"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "one#1"
+   }
+  },
+  {
+   "id": "predicts",
+   "obj": "predicts",
+   "verb": "move",
+   "at": {
+    "word": "predicts#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "it predicts：芯片一震、灯亮",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "predicts#1"
    }
   },
   {
@@ -376,53 +353,20 @@
    "obj": "pred",
    "verb": "appear",
    "at": {
-    "word": "4-01.w056",
+    "word": "shape#3",
     "off": 0
    },
-   "means": "predicts：芯片到形状的箭头",
+   "lead": 13,
+   "means": "it predicts the shape：模型出来",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "4-01.w057"
-   },
    "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "shape",
-   "obj": "shape",
-   "verb": "appear",
-   "at": {
-    "word": "4-01.w058",
-    "off": 0
+    "kind": "focus",
+    "target": [
+     "model"
+    ]
    },
-   "means": "shape：预测框",
-   "tool": "remotion",
-   "lead": 8,
    "until": {
-    "word": "4-01.w059"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "plus",
-   "obj": "plus",
-   "verb": "appear",
-   "at": {
-    "word": "4-01.w059",
-    "off": 0
-   },
-   "means": "plus：图例框",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "4-01.w060"
-   },
-   "guide": {
-    "kind": "none"
+    "word": "shape#3"
    }
   },
   {
@@ -430,35 +374,35 @@
    "obj": "sure",
    "verb": "appear",
    "at": {
-    "word": "4-01.w061",
+    "word": "sure#1",
     "off": 0
    },
-   "means": "how sure：图例",
+   "lead": 10,
+   "means": "how sure：图例 sure / unsure",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "4-01.w064"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "is#2"
    }
   },
   {
-   "id": "each",
-   "obj": "each",
-   "verb": "morph",
+   "id": "part",
+   "obj": "part",
+   "verb": "appear",
    "at": {
-    "word": "4-01.w066",
+    "word": "part#1",
     "off": 0
    },
-   "means": "each part：珠子按把握程度上色",
+   "lead": 6,
+   "means": "each part：手写圈住红尾巴",
    "tool": "remotion",
-   "lead": 50,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   }
  ]

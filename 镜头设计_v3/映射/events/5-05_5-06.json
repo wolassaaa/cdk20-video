@@ -1,188 +1,206 @@
 {
  "schema": "cdk20.events/1",
- "group": "5-05+5-06",
- "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：出镜 5-05+5-06（C）讲解卡：锁和钥匙（同 3-01 的样子，钥匙从锁后面滑进去）；barely turned 钥匙只转一点点就卡住、抖一下；So was that it? 红问号；Back to square one 钥匙退回起点，红批注 back to square one?；页面 OnCam505.jsx。",
+ "group": "5-05_5-06",
+ "tool": "blender",
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜 5-05（C）+ 5-06（B）三维版（11-20 甲线，技能 oncam-3d-parts）：人在左，右边 CDK20 插座（h01b，盖合着，孔口面朝人这边斜 28°），001 假插头（h02b 001）。key 插头弹出在孔口前；went into the lock 插进去；barely turned 只拧 12° 就卡住、抖；5-06 换 B，插座转向她；that 弹簧把插头顶松；Back 顶出退回起点；square one 一圈蓝色循环箭头在插头四周画出来。插座自己做段首段尾转场。Blender：inserts/shot_oncam.py recipe socket_plug。旧二维版事件表存 _wip/5-05_5-06_events_v1_2d.json。",
  "holds": [],
  "events": [
   {
-   "id": "frame",
-   "obj": "frame",
-   "verb": "grow",
+   "id": "arrive",
+   "obj": "socket",
+   "verb": "move",
    "at": {
     "word": "5-05.w001",
     "off": 0
    },
-   "means": "The：讲解卡外框画出",
-   "tool": "remotion",
-   "lead": 22,
+   "lead": 32,
+   "ease": "out",
+   "means": "The：插座从镜头前（段首 T5，红环插孔盖满画面）退回 C 的右侧落位",
    "until": {
     "word": "5-05.w001"
-   }
-  },
-  {
-   "id": "lock",
-   "obj": "lock",
-   "verb": "grow",
-   "at": {
-    "word": "5-05.w001",
-    "off": 0
    },
-   "means": "The：锁长出",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "5-05.w001"
+   "guide": {
+    "kind": "none"
    }
   },
   {
    "id": "key",
-   "obj": "key",
+   "obj": "plug",
    "verb": "grow",
    "at": {
     "word": "5-05.w002",
     "off": 0
    },
-   "means": "key：钥匙在左下长出，标签 key",
-   "tool": "remotion",
-   "lead": 14,
+   "lead": 10,
+   "ease": "out",
+   "means": "key：001 假插头在孔口前弹出（0.6→1.08→1.0），焦点点名",
    "until": {
-    "word": "5-05.w002"
-   }
-  },
-  {
-   "id": "slide",
-   "obj": "slide",
-   "verb": "move",
-   "at": {
-    "word": "5-05.w004",
-    "off": 0
+    "dur": 16
    },
-   "means": "into：钥匙滑进锁孔（尖端在锁后面）",
-   "tool": "remotion",
-   "lead": 26,
-   "until": {
-    "word": "5-05.w004"
+   "guide": {
+    "kind": "none"
    }
   },
   {
-   "id": "lockl",
-   "obj": "lockl",
-   "verb": "appear",
+   "id": "insert",
+   "obj": "plug",
+   "verb": "plug_in",
    "at": {
     "word": "5-05.w006",
     "off": 0
    },
-   "means": "lock：标签 lock，锁一颤",
-   "tool": "remotion",
-   "lead": 6,
+   "lead": 53,
+   "ease": "inout",
+   "means": "went into the lock：插头沿孔轴插进去，lock 到底，0.1 mm 小回弹",
    "until": {
-    "word": "5-05.w006"
-   }
-  },
-  {
-   "id": "turn",
-   "obj": "turn",
-   "verb": "move",
-   "at": {
-    "word": "5-05.w009",
-    "off": 0
+    "sentence_end": true
    },
-   "means": "barely：钥匙转一点点，红弧线箭头",
-   "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "word": "5-05.w009"
+   "guide": {
+    "kind": "none"
    }
   },
   {
-   "id": "stuck",
-   "obj": "stuck",
-   "verb": "morph",
+   "id": "twist",
+   "obj": "plug",
+   "verb": "twist",
    "at": {
     "word": "5-05.w010",
     "off": 0
    },
-   "means": "turned：卡住，钥匙抖一下，红色顿挫线",
-   "tool": "remotion",
-   "lead": 8,
+   "lead": 41,
+   "ease": "out",
+   "means": "barely turned：插头开始拧，越拧越慢，到 turned 只拧了 12° 就停",
    "until": {
-    "word": "5-05.w010"
+    "dur": 4
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
-   "id": "q1",
-   "obj": "q1",
-   "verb": "appear",
+   "id": "stuck",
+   "obj": "plug",
+   "verb": "move",
+   "at": {
+    "word": "5-05.w010",
+    "off": 4
+   },
+   "lead": 0,
+   "ease": "out",
+   "means": "turned：卡住，插头和插座一起抖两下，灯照亮",
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "turn2",
+   "obj": "socket",
+   "verb": "move",
    "at": {
     "word": "5-06.w001",
     "off": 0
    },
-   "means": "So：红问号",
-   "tool": "remotion",
-   "lead": 8,
+   "lead": 14,
+   "ease": "inout",
+   "means": "So was：换 B 说话，插座慢慢转向她",
    "until": {
-    "word": "5-06.w001"
+    "word": "5-06.w002"
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
    "id": "jolt",
-   "obj": "jolt",
-   "verb": "morph",
+   "obj": "plug",
+   "verb": "plug_out",
    "at": {
     "word": "5-06.w003",
     "off": 0
    },
-   "means": "that：钥匙再试一下又卡住",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "5-06.w003"
-   }
-  },
-  {
-   "id": "q2",
-   "obj": "q2",
-   "verb": "morph",
-   "at": {
-    "word": "5-06.w004",
-    "off": 0
-   },
-   "means": "it：问号放大",
-   "tool": "remotion",
    "lead": 6,
+   "ease": "out",
+   "means": "that：弹簧一顶，插头拧回 0°、松出来一点",
    "until": {
-    "word": "5-06.w004"
-   }
-  },
-  {
-   "id": "pen",
-   "obj": "pen",
-   "verb": "appear",
-   "at": {
-    "word": "5-06.w005",
-    "off": 0
+    "sentence_end": true
    },
-   "means": "Back：红笔 back to square one? 边说边写",
-   "tool": "remotion",
-   "lead": 2,
-   "until": {
-    "word": "5-06.w008"
+   "guide": {
+    "kind": "none"
    }
   },
   {
    "id": "back",
-   "obj": "back",
-   "verb": "move",
+   "obj": "plug",
+   "verb": "plug_out",
+   "at": {
+    "word": "5-06.w005",
+    "off": 0
+   },
+   "lead": 4,
+   "ease": "out",
+   "means": "Back：插头被弹簧整个顶出，退回最初出现的地方",
+   "until": {
+    "word": "5-06.w006"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "loop",
+   "obj": "arrow",
+   "verb": "grow",
+   "at": {
+    "word": "5-06.w007",
+    "off": 0
+   },
+   "lead": 0,
+   "ease": "inout",
+   "means": "square one：一圈红色循环箭头绕着插头画出来（插座是克莱因蓝，箭头用红才跳出来）",
+   "until": {
+    "word": "5-06.w008"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "arrowhead",
+   "obj": "arrow",
+   "verb": "snap",
    "at": {
     "word": "5-06.w008",
     "off": 0
    },
-   "means": "one：钥匙退回起点",
-   "tool": "remotion",
-   "lead": 40,
+   "lead": 3,
+   "ease": "out",
+   "means": "one：箭头头部咔地扣上，整圈闭合",
    "until": {
-    "word": "5-06.w008"
+    "dur": 12
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "dive",
+   "obj": "socket",
+   "verb": "move",
+   "at": {
+    "word": "5-06.w008",
+    "off": 60
+   },
+   "lead": 40,
+   "ease": "in",
+   "means": "（说完）箭头从尾巴往头收掉，插座带着插头转过去，盖顶冲进镜头（段尾 T1，接 5-07）",
+   "until": {
+    "dur": 0
+   },
+   "guide": {
+    "kind": "none"
    }
   }
  ]

@@ -433,61 +433,15 @@
  "holds": [],
  "events": [
   {
-   "id": "before",
-   "obj": "before",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "Before：中线和左栏表头 Before",
-   "f_start": 0,
-   "f_land": 2,
-   "f_end": 148,
-   "until": "4-02.s1",
-   "word": "4-02.w001",
-   "w": "Before,",
-   "key": "before#1",
-   "sid": "4-02.s1",
-   "word_f0": 2,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 27636,
-   "F_land": 27638,
-   "F_end": 27784
-  },
-  {
-   "id": "you",
-   "obj": "you",
-   "verb": "grow",
-   "ease": "inout",
-   "means": "you'd：左栏进度条框画出",
-   "f_start": 37,
-   "f_land": 47,
-   "f_end": 148,
-   "until": "4-02.s1",
-   "word": "4-02.w002",
-   "w": "you'd",
-   "key": "you'd#1",
-   "sid": "4-02.s1",
-   "word_f0": 47,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 27673,
-   "F_land": 27683,
-   "F_end": 27784
-  },
-  {
    "id": "need",
    "obj": "need",
-   "verb": "morph",
+   "verb": "appear",
    "ease": "inout",
-   "means": "need：左条红色起头跳一下，开始慢慢爬",
-   "f_start": 50,
+   "means": "you'd need：日历落下",
+   "f_start": 49,
    "f_land": 56,
-   "f_end": 148,
-   "until": "4-02.s1",
+   "f_end": 65,
+   "until": "4-02.w003",
    "word": "4-02.w003",
    "w": "need",
    "key": "need#1",
@@ -497,20 +451,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 27686,
+   "F_start": 27685,
    "F_land": 27692,
-   "F_end": 27784
+   "F_end": 27701
   },
   {
    "id": "lab",
    "obj": "lab",
-   "verb": "grow",
+   "verb": "appear",
    "ease": "inout",
-   "means": "lab-measured：烧瓶长出，写 lab-measured",
-   "f_start": 62,
+   "means": "lab-measured：烧瓶落下，进度条开始慢慢爬",
+   "f_start": 69,
    "f_land": 76,
    "f_end": 148,
-   "until": "4-02.s1",
+   "until": "4-02.w006",
    "word": "4-02.w005",
    "w": "lab-measured",
    "key": "lab-measured#1",
@@ -520,10 +474,10 @@
    "guide": {
     "kind": "focus",
     "target": [
-     "flask"
+     "before"
     ]
    },
-   "F_start": 27698,
+   "F_start": 27705,
    "F_land": 27712,
    "F_end": 27784,
    "g_start": 50,
@@ -542,8 +496,8 @@
    "obj": "struct",
    "verb": "appear",
    "ease": "inout",
-   "means": "structure：写 structure，左条往前挪一小格",
-   "f_start": 111,
+   "means": "structure：标 lab-measured structure",
+   "f_start": 109,
    "f_land": 119,
    "f_end": 148,
    "until": "4-02.s1",
@@ -556,7 +510,7 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 27747,
+   "F_start": 27745,
    "F_land": 27755,
    "F_end": 27784
   },
@@ -565,8 +519,8 @@
    "obj": "now",
    "verb": "appear",
    "ease": "inout",
-   "means": "Now：右栏表头 Now，数据库长出，右栏进度条框",
-   "f_start": 196,
+   "means": "Now?：右栏数据架落下，手写 Now?",
+   "f_start": 199,
    "f_land": 206,
    "f_end": 221,
    "until": "4-02.s2",
@@ -577,22 +531,35 @@
    "word_f0": 206,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "now"
+    ]
    },
-   "F_start": 27832,
+   "F_start": 27835,
    "F_land": 27842,
-   "F_end": 27857
+   "F_end": 27857,
+   "g_start": 180,
+   "g_on": 198,
+   "g_end": 221,
+   "g_off": 251,
+   "g_tick": 202,
+   "G_start": 27816,
+   "G_on": 27834,
+   "G_end": 27857,
+   "G_off": 27887,
+   "G_tick": 27838
   },
   {
-   "id": "down",
-   "obj": "down",
+   "id": "dl",
+   "obj": "dl",
    "verb": "move",
    "ease": "inout",
-   "means": "downloaded：文件图标从数据库飞到右栏中间，右条一下满格",
-   "f_start": 281,
+   "means": "downloaded a prediction：抽出预测模型卡，进度条一下满格",
+   "f_start": 288,
    "f_land": 301,
-   "f_end": 573,
-   "until": "4-02.s3",
+   "f_end": 388,
+   "until": "4-02.w013",
    "word": "4-02.w011",
    "w": "downloaded",
    "key": "downloaded#1",
@@ -600,45 +567,35 @@
    "word_f0": 301,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "model"
+    ]
    },
-   "F_start": 27917,
+   "F_start": 27924,
    "F_land": 27937,
-   "F_end": 28209
-  },
-  {
-   "id": "pred",
-   "obj": "pred",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "prediction：写 a prediction",
-   "f_start": 341,
-   "f_land": 349,
-   "f_end": 573,
-   "until": "4-02.s3",
-   "word": "4-02.w013",
-   "w": "prediction,",
-   "key": "prediction#1",
-   "sid": "4-02.s3",
-   "word_f0": 349,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 27977,
-   "F_land": 27985,
-   "F_end": 28209
+   "F_end": 28024,
+   "g_start": 275,
+   "g_on": 293,
+   "g_end": 388,
+   "g_off": 418,
+   "g_tick": 297,
+   "G_start": 27911,
+   "G_on": 27929,
+   "G_end": 28024,
+   "G_off": 28054,
+   "G_tick": 27933
   },
   {
    "id": "free",
    "obj": "free",
    "verb": "appear",
    "ease": "inout",
-   "means": "free：价签 free 落下，打红勾",
-   "f_start": 421,
+   "means": "for free：价签 free",
+   "f_start": 424,
    "f_land": 431,
-   "f_end": 573,
-   "until": "4-02.s3",
+   "f_end": 445,
+   "until": "4-02.w015",
    "word": "4-02.w015",
    "w": "free,",
    "key": "free#1",
@@ -648,17 +605,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 28057,
+   "F_start": 28060,
    "F_land": 28067,
-   "F_end": 28209
+   "F_end": 28081
   },
   {
-   "id": "public",
-   "obj": "public",
+   "id": "db",
+   "obj": "db",
    "verb": "appear",
    "ease": "inout",
-   "means": "public：数据库下写 public database",
-   "f_start": 483,
+   "means": "from a public database：标 public database",
+   "f_start": 481,
    "f_land": 491,
    "f_end": 573,
    "until": "4-02.s3",
@@ -671,79 +628,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 28119,
+   "F_start": 28117,
    "F_land": 28127,
    "F_end": 28209
-  },
-  {
-   "id": "db",
-   "obj": "db",
-   "verb": "morph",
-   "ease": "inout",
-   "means": "database：右条满格上一道亮光扫过",
-   "f_start": 525,
-   "f_land": 533,
-   "f_end": 573,
-   "until": "4-02.s3",
-   "word": "4-02.w019",
-   "w": "database.",
-   "key": "database#1",
-   "sid": "4-02.s3",
-   "word_f0": 533,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 28161,
-   "F_land": 28169,
-   "F_end": 28209
-  },
-  {
-   "id": "accord",
-   "obj": "accord",
-   "verb": "grow",
-   "ease": "inout",
-   "means": "According：底部论文图标长出",
-   "f_start": 625,
-   "f_land": 637,
-   "f_end": 1106,
-   "until": "4-02.s4",
-   "word": "4-02.w020",
-   "w": "According",
-   "key": "according#1",
-   "sid": "4-02.s4",
-   "word_f0": 637,
-   "tool": "remotion",
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "paper"
-    ]
-   },
-   "F_start": 28261,
-   "F_land": 28273,
-   "F_end": 28742,
-   "g_start": 611,
-   "g_on": 629,
-   "g_end": 757,
-   "g_off": 787,
-   "g_tick": 633,
-   "G_start": 28247,
-   "G_on": 28265,
-   "G_end": 28393,
-   "G_off": 28423,
-   "G_tick": 28269
   },
   {
    "id": "paper",
    "obj": "paper",
    "verb": "appear",
    "ease": "inout",
-   "means": "paper：写 the paper",
-   "f_start": 663,
+   "means": "According to the paper：清场，论文书落下",
+   "f_start": 664,
    "f_land": 671,
-   "f_end": 1106,
-   "until": "4-02.s4",
+   "f_end": 691,
+   "until": "4-02.w023",
    "word": "4-02.w023",
    "w": "paper,",
    "key": "paper#1",
@@ -751,22 +649,35 @@
    "word_f0": 671,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "paper"
+    ]
    },
-   "F_start": 28299,
+   "F_start": 28300,
    "F_land": 28307,
-   "F_end": 28742
+   "F_end": 28327,
+   "g_start": 645,
+   "g_on": 663,
+   "g_end": 691,
+   "g_off": 721,
+   "g_tick": 667,
+   "G_start": 28281,
+   "G_on": 28299,
+   "G_end": 28327,
+   "G_off": 28357,
+   "G_tick": 28303
   },
   {
-   "id": "this1",
-   "obj": "this1",
+   "id": "this",
+   "obj": "this",
    "verb": "move",
    "ease": "inout",
-   "means": "this：论文图标连字滑到右栏下面",
-   "f_start": 752,
+   "means": "this was：论文书一抖，翻开",
+   "f_start": 751,
    "f_land": 764,
-   "f_end": 1106,
-   "until": "4-02.s4",
+   "f_end": 789,
+   "until": "4-02.w025",
    "word": "4-02.w024",
    "w": "this",
    "key": "this#1",
@@ -776,20 +687,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 28388,
+   "F_start": 28387,
    "F_land": 28400,
-   "F_end": 28742
+   "F_end": 28425
   },
   {
    "id": "first",
    "obj": "first",
    "verb": "appear",
    "ease": "inout",
-   "means": "first：红批注 first time，箭头指向文件",
-   "f_start": 796,
+   "means": "first time：手写",
+   "f_start": 806,
    "f_land": 806,
-   "f_end": 1106,
-   "until": "4-02.s4",
+   "f_end": 839,
+   "until": "4-02.w028",
    "word": "4-02.w027",
    "w": "first",
    "key": "first#1",
@@ -799,20 +710,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 28432,
+   "F_start": 28442,
    "F_land": 28442,
-   "F_end": 28742
+   "F_end": 28475
   },
   {
    "id": "af",
    "obj": "af",
-   "verb": "grow",
+   "verb": "appear",
    "ease": "inout",
-   "means": "AlphaFold：芯片长出，箭头连到文件",
-   "f_start": 839,
+   "means": "AlphaFold：芯片落下",
+   "f_start": 844,
    "f_land": 851,
-   "f_end": 1106,
-   "until": "4-02.s4",
+   "f_end": 881,
+   "until": "4-02.w029",
    "word": "4-02.w029",
    "w": "AlphaFold",
    "key": "alphafold#1",
@@ -820,35 +731,22 @@
    "word_f0": 851,
    "tool": "remotion",
    "guide": {
-    "kind": "focus",
-    "target": [
-     "chip"
-    ]
+    "kind": "none"
    },
-   "F_start": 28475,
+   "F_start": 28480,
    "F_land": 28487,
-   "F_end": 28742,
-   "g_start": 825,
-   "g_on": 843,
-   "g_end": 971,
-   "g_off": 1001,
-   "g_tick": 847,
-   "G_start": 28461,
-   "G_on": 28479,
-   "G_end": 28607,
-   "G_off": 28637,
-   "G_tick": 28483
+   "F_end": 28517
   },
   {
    "id": "used",
    "obj": "used",
-   "verb": "appear",
+   "verb": "move",
    "ease": "inout",
-   "means": "used：文件下方虚线往下伸",
-   "f_start": 939,
+   "means": "had been used：预测模型卡从芯片里滑出来",
+   "f_start": 934,
    "f_land": 947,
-   "f_end": 1106,
-   "until": "4-02.s4",
+   "f_end": 966,
+   "until": "4-02.w032",
    "word": "4-02.w032",
    "w": "used",
    "key": "used#1",
@@ -858,17 +756,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 28575,
+   "F_start": 28570,
    "F_land": 28583,
-   "F_end": 28742
+   "F_end": 28602
   },
   {
    "id": "hit",
    "obj": "hit",
-   "verb": "grow",
+   "verb": "appear",
    "ease": "inout",
-   "means": "hit：钥匙长出，写 a hit",
-   "f_start": 1035,
+   "means": "find a hit：001 插头落下打勾",
+   "f_start": 1040,
    "f_land": 1047,
    "f_end": 1106,
    "until": "4-02.s4",
@@ -879,46 +777,10 @@
    "word_f0": 1047,
    "tool": "remotion",
    "guide": {
-    "kind": "focus",
-    "target": [
-     "key"
-    ]
-   },
-   "F_start": 28671,
-   "F_land": 28683,
-   "F_end": 28742,
-   "g_start": 1021,
-   "g_on": 1039,
-   "g_end": 1106,
-   "g_off": 1119,
-   "g_tick": 1043,
-   "G_start": 28657,
-   "G_on": 28675,
-   "G_end": 28742,
-   "G_off": 28755,
-   "G_tick": 28679
-  },
-  {
-   "id": "this",
-   "obj": "this",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "this：右栏红框框住芯片、文件和钥匙",
-   "f_start": 1080,
-   "f_land": 1090,
-   "f_end": 1106,
-   "until": "4-02.s4",
-   "word": "4-02.w038",
-   "w": "this.",
-   "key": "this#2",
-   "sid": "4-02.s4",
-   "word_f0": 1090,
-   "tool": "remotion",
-   "guide": {
     "kind": "none"
    },
-   "F_start": 28716,
-   "F_land": 28726,
+   "F_start": 28676,
+   "F_land": 28683,
    "F_end": 28742
   }
  ],
@@ -926,7 +788,7 @@
   {
    "id": "lab",
    "target": [
-    "flask"
+    "before"
    ],
    "kind": "focus",
    "gs": 50,
@@ -935,9 +797,9 @@
    "gend": 148,
    "goff": 178,
    "tick": 72,
-   "nudge": false,
+   "nudge": true,
    "rim": true,
-   "ev_s": 62,
+   "ev_s": 69,
    "events": [
     "lab"
    ],
@@ -949,79 +811,79 @@
    "G_tick": 27708
   },
   {
-   "id": "accord",
+   "id": "now",
+   "target": [
+    "now"
+   ],
+   "kind": "focus",
+   "gs": 180,
+   "gon": 198,
+   "land": 206,
+   "gend": 221,
+   "goff": 251,
+   "tick": 202,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 199,
+   "events": [
+    "now"
+   ],
+   "G_start": 27816,
+   "G_on": 27834,
+   "G_land": 27842,
+   "G_end": 27857,
+   "G_off": 27887,
+   "G_tick": 27838
+  },
+  {
+   "id": "dl",
+   "target": [
+    "model"
+   ],
+   "kind": "focus",
+   "gs": 275,
+   "gon": 293,
+   "land": 301,
+   "gend": 388,
+   "goff": 418,
+   "tick": 297,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 288,
+   "events": [
+    "dl"
+   ],
+   "G_start": 27911,
+   "G_on": 27929,
+   "G_land": 27937,
+   "G_end": 28024,
+   "G_off": 28054,
+   "G_tick": 27933
+  },
+  {
+   "id": "paper",
    "target": [
     "paper"
    ],
    "kind": "focus",
-   "gs": 611,
-   "gon": 629,
-   "land": 637,
-   "gend": 757,
-   "goff": 787,
-   "tick": 633,
-   "nudge": false,
+   "gs": 645,
+   "gon": 663,
+   "land": 671,
+   "gend": 691,
+   "goff": 721,
+   "tick": 667,
+   "nudge": true,
    "rim": true,
-   "ev_s": 625,
+   "ev_s": 664,
    "events": [
-    "accord"
+    "paper"
    ],
-   "G_start": 28247,
-   "G_on": 28265,
-   "G_land": 28273,
-   "G_end": 28393,
-   "G_off": 28423,
-   "G_tick": 28269
-  },
-  {
-   "id": "af",
-   "target": [
-    "chip"
-   ],
-   "kind": "focus",
-   "gs": 825,
-   "gon": 843,
-   "land": 851,
-   "gend": 971,
-   "goff": 1001,
-   "tick": 847,
-   "nudge": false,
-   "rim": true,
-   "ev_s": 839,
-   "events": [
-    "af"
-   ],
-   "G_start": 28461,
-   "G_on": 28479,
-   "G_land": 28487,
-   "G_end": 28607,
-   "G_off": 28637,
-   "G_tick": 28483
-  },
-  {
-   "id": "hit",
-   "target": [
-    "key"
-   ],
-   "kind": "focus",
-   "gs": 1021,
-   "gon": 1039,
-   "land": 1047,
-   "gend": 1106,
-   "goff": 1119,
-   "tick": 1043,
-   "nudge": false,
-   "rim": true,
-   "ev_s": 1035,
-   "events": [
-    "hit"
-   ],
-   "G_start": 28657,
-   "G_on": 28675,
-   "G_land": 28683,
-   "G_end": 28742,
-   "G_off": 28755,
-   "G_tick": 28679
+   "G_start": 28281,
+   "G_on": 28299,
+   "G_land": 28307,
+   "G_end": 28327,
+   "G_off": 28357,
+   "G_tick": 28303
   }
  ],
  "problems": []

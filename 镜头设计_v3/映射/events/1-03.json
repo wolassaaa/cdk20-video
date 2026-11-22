@@ -1,99 +1,152 @@
 {
  "schema": "cdk20.events/1",
  "group": "1-03",
- "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：出镜 1-03（A）。讲解位：一个量杯式的刻度框；我们已经有药（胶囊、输液袋）；药效柱升到 good enough 线下面就停，红括号标出差距。页面 src/v3/manual/OnCam103.jsx。",
+ "tool": "blender",
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜 1-03（A）三维版（11-20 夜甲线，技能 oncam-3d-parts）：人在左，右边一粒大胶囊（p08 的胶囊）挂在浇口上，下面一根料杆上一排十个白色小人（p03 的小人）。 主零件自己做段首段尾转场。Blender：inserts/shot_oncam.py recipe capsule_row。旧二维版事件表存 _wip/1-03_events_v1_2d.json。",
  "holds": [],
  "events": [
   {
-   "id": "frame",
-   "obj": "gauge",
-   "verb": "grow",
+   "id": "arrive",
+   "obj": "capsule",
+   "verb": "move",
+   "at": {
+    "word": "1-03.w001",
+    "off": 0
+   },
+   "lead": 32,
+   "ease": "out",
+   "means": "Here's：胶囊从镜头前（段首盖满画面）退回 A 的右侧落位，挂在浇口上",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "1-03.w001"
+   }
+  },
+  {
+   "id": "thing",
+   "obj": "capsule",
+   "verb": "move",
    "at": {
     "word": "1-03.w003",
     "off": 0
    },
-   "means": "thing：刻度框画出",
-   "tool": "remotion",
-   "lead": 20,
+   "lead": 6,
+   "ease": "out",
+   "means": "thing：胶囊在浇口上预颤一下（引起注意）",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
-    "word": "1-03.w003",
-    "off": 12
+    "dur": 16
    }
   },
   {
-   "id": "caps",
-   "obj": "capsule",
+   "id": "row",
+   "obj": "people",
    "verb": "grow",
    "at": {
     "word": "1-03.w005",
     "off": 0
    },
-   "means": "already：胶囊长出",
-   "tool": "remotion",
-   "lead": 8,
+   "lead": 12,
+   "ease": "out",
+   "means": "already have：下面一根料杆上十个白色小人依次弹出",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
     "word": "1-03.w006"
    }
   },
   {
-   "id": "bag",
-   "obj": "ivbag",
-   "verb": "grow",
+   "id": "medicine",
+   "obj": "capsule",
+   "verb": "eject",
    "at": {
     "word": "1-03.w007",
     "off": 0
    },
-   "means": "medicines：输液袋长出",
-   "tool": "remotion",
-   "lead": 6,
+   "lead": 4,
+   "ease": "out",
+   "means": "medicines：胶囊咔地从浇口弹下，立起转正",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
     "sentence_end": true
    }
   },
   {
-   "id": "bar",
-   "obj": "bar",
-   "verb": "grow",
+   "id": "just",
+   "obj": "capsule",
+   "verb": "move",
    "at": {
     "word": "1-03.w008",
     "off": 0
    },
-   "means": "Just not：药效柱升起，到 not 停在线下",
-   "tool": "remotion",
-   "lead": 4,
+   "lead": 6,
+   "ease": "out",
+   "means": "Just：胶囊朝小人那边侧一下身",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
-    "word": "1-03.w009"
+    "dur": 14
    }
   },
   {
-   "id": "target",
-   "obj": "target_line",
-   "verb": "appear",
+   "id": "three",
+   "obj": "people",
+   "verb": "power_on",
    "at": {
-    "word": "1-03.w010",
+    "word": "1-03.w009",
     "off": 0
    },
-   "means": "good enough：虚线和字 good enough 画出",
-   "tool": "remotion",
-   "lead": 4,
+   "lead": 2,
+   "ease": "out",
+   "means": "not good enough：十个小人里只亮三个（not、good、enough 各亮一个），为 1-04 的 three in ten 打底",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
     "word": "1-03.w011"
    }
   },
   {
-   "id": "gap",
-   "obj": "gap_bracket",
-   "verb": "appear",
+   "id": "ones",
+   "obj": "capsule",
+   "verb": "move",
    "at": {
-    "word": "1-03.w011",
+    "word": "1-03.w012",
     "off": 0
    },
-   "means": "enough ones：红括号标出差距",
-   "tool": "remotion",
-   "lead": 2,
+   "lead": 4,
+   "ease": "out",
+   "means": "ones：胶囊耸肩似地晃一下",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
-    "sentence_end": true
+    "dur": 14
+   }
+  },
+  {
+   "id": "dive",
+   "obj": "capsule",
+   "verb": "move",
+   "at": {
+    "word": "1-03.w012",
+    "off": 52
+   },
+   "lead": 34,
+   "ease": "in",
+   "means": "（说完）胶囊冲进镜头（段尾，接 1-04 B 页）",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "dur": 0
    }
   }
  ]

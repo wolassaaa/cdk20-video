@@ -1,0 +1,247 @@
+{
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜段 1-05_1-06_1-07 的检查清单（照 oncam-3d-parts 技能把旧二维出镜页换成三维零件）。oncam_report.py 读它生成检查页；check 写 M 编号的由 oncam_check.py 机检判过/不过，写'看图'的是施工方逐张看抽帧后填的 result。",
+ "who": "D / B / C",
+ "line": "So... why not just make a better one? Because that's way harder than it sounds. Like, ten-to-seventeen-years hard.",
+ "design_doc": "镜头设计_v3/深化/01_逐段钻取清单.md（1-05_1-06_1-07）、11_铺开排序.md；事件表 映射/events/1-05_1-06_1-07.json",
+ "lead": [
+  "（待填）"
+ ],
+ "items": [
+  {
+   "n": 1,
+   "frames": "0–39",
+   "cat": "转场",
+   "problem": "段首：钥匙坯从镜头前（段首盖满画面）退回 D 的右侧落位，挂在浇口上",
+   "fix": "对数深度贝塞尔甩回落位",
+   "check": "M12",
+   "new": 0,
+   "show": true,
+   "result": ""
+  },
+  {
+   "n": 2,
+   "frames": "32–555",
+   "cat": "构图",
+   "problem": "零件不碰画边、不进字幕区、在人右边不压人",
+   "fix": "钥匙坯在三个人右边肩膀以上；卷尺缩到 0.7 放在钥匙杆下面，尺带往左拉到 1110 停（C 的肩在 640 行以下），右沿 1874",
+   "check": "M5",
+   "new": 92,
+   "result": ""
+  },
+  {
+   "n": 3,
+   "frames": "89–117",
+   "cat": "动作",
+   "problem": "why：钥匙坯歪头似地转一下",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 95,
+   "show": false,
+   "result": ""
+  },
+  {
+   "n": 4,
+   "frames": "135–159",
+   "cat": "动作",
+   "problem": "make：钥匙坯往前一抬",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 143,
+   "show": false,
+   "result": ""
+  },
+  {
+   "n": 5,
+   "frames": "160–194",
+   "cat": "动作",
+   "problem": "better one：钥匙坯亮一下（金光一闪）",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 164,
+   "show": false,
+   "result": ""
+  },
+  {
+   "n": 6,
+   "frames": "245–359",
+   "cat": "动作",
+   "problem": "Because … sounds：钥匙坯后面的料杆一路伸长、拐弯，伸出画面",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 249,
+   "show": true,
+   "result": ""
+  },
+  {
+   "n": 7,
+   "frames": "295–317",
+   "cat": "动作",
+   "problem": "harder：料杆拐一个急弯，钥匙坯被带得一晃",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 299,
+   "show": false,
+   "result": ""
+  },
+  {
+   "n": 8,
+   "frames": "381–413",
+   "cat": "动作",
+   "problem": "Like：一把卷尺从下面弹出来",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 391,
+   "show": false,
+   "result": ""
+  },
+  {
+   "n": 9,
+   "frames": "435–530",
+   "cat": "动作",
+   "problem": "ten-to-seventeen-years：尺带拉出来，刻度一路过 10，停在 17",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 439,
+   "show": true,
+   "result": ""
+  },
+  {
+   "n": 10,
+   "frames": "531–551",
+   "cat": "动作",
+   "problem": "hard：锁扣咔地按下，尺带一顿",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 533,
+   "show": true,
+   "result": ""
+  },
+  {
+   "n": 11,
+   "frames": "555–595",
+   "cat": "转场",
+   "problem": "段尾：",
+   "fix": "主零件正对镜头冲进去，最后一帧盖满",
+   "check": "M12",
+   "new": 595,
+   "show": true,
+   "result": ""
+  },
+  {
+   "n": 12,
+   "frames": "全段",
+   "cat": "穿模",
+   "problem": "零件之间不穿模",
+   "fix": "钥匙和浇口短杆、钥匙和卷尺、尺带和钥匙逐帧 BVH",
+   "check": "M7",
+   "result": ""
+  },
+  {
+   "n": 13,
+   "frames": "全段",
+   "cat": "动作",
+   "problem": "不甩、不定格",
+   "fix": "动作全部挂词，全程慢悬浮",
+   "check": "M11",
+   "result": ""
+  },
+  {
+   "n": 14,
+   "frames": "全段",
+   "cat": "背景",
+   "problem": "大板四边出画、焦外干净",
+   "fix": "大板 ×1.27，人头后、零件后格子藏掉",
+   "check": "M6",
+   "result": ""
+  },
+  {
+   "n": 15,
+   "frames": "全段",
+   "cat": "合成",
+   "problem": "人原像素不动、不淡入",
+   "fix": "人一直原像素贴最上层",
+   "check": "M1",
+   "result": ""
+  },
+  {
+   "n": 16,
+   "frames": "全段",
+   "cat": "合成",
+   "problem": "颗粒一致",
+   "fix": "三个人各自量颗粒，GRAIN_GAIN 按 D 起试合成定",
+   "check": "M10",
+   "result": ""
+  },
+  {
+   "n": 17,
+   "frames": "全段",
+   "cat": "合成",
+   "problem": "亮度不跳、不闪",
+   "fix": "金光一闪是设计渐变；换人那两刀亮度跟着人变",
+   "check": "M9",
+   "result": ""
+  }
+ ],
+ "beats": [
+  [
+   "0–39",
+   "So",
+   "钥匙坯从镜头前（段首盖满画面）退回 D 的右侧落位，挂在浇口上",
+   "move 段首 T5"
+  ],
+  [
+   "89–117",
+   "why",
+   "钥匙坯歪头似地转一下",
+   "move"
+  ],
+  [
+   "135–159",
+   "make",
+   "钥匙坯往前一抬",
+   "move"
+  ],
+  [
+   "160–194",
+   "better one",
+   "钥匙坯亮一下（金光一闪）",
+   "power_on"
+  ],
+  [
+   "245–359",
+   "Because … sounds",
+   "钥匙坯后面的料杆一路伸长、拐弯，伸出画面",
+   "grow"
+  ],
+  [
+   "295–317",
+   "harder",
+   "料杆拐一个急弯，钥匙坯被带得一晃",
+   "move"
+  ],
+  [
+   "381–413",
+   "Like",
+   "一把卷尺从下面弹出来",
+   "grow"
+  ],
+  [
+   "435–530",
+   "ten-to-seventeen-years",
+   "尺带拉出来，刻度一路过 10，停在 17",
+   "move"
+  ],
+  [
+   "531–551",
+   "hard",
+   "锁扣咔地按下，尺带一顿",
+   "snap"
+  ],
+  [
+   "555–595",
+   "（说完）钥匙坯冲进镜头（段尾，接 1-08）",
+   "",
+   "move 段尾 T1"
+  ]
+ ]
+}

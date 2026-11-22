@@ -2,82 +2,50 @@
  "schema": "cdk20.events/1",
  "group": "4-02",
  "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 4-02（VO）：左右两栏 Before / Now，各有一条\"拿到结构\"的进度条；左栏烧瓶、lab-measured structure，条子慢慢爬；右栏数据库，下载一个预测文件，条子一下满格，for free 价签打勾；论文图标，红批注 first time，AlphaFold 芯片，长出 a hit 钥匙，右栏红框。页面 Manual402.jsx。",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 4-02（btier/B402.jsx）。左栏 Before：烧瓶、日历翻页、进度条慢慢爬（lab-measured structure）；右栏 Now?：数据架，抽出一张预测模型卡，进度条一下满格，价签 free，public database；论文书，手写 first time，AlphaFold 芯片，001 插头打勾。",
+ "tier": "B",
+ "zone": 4,
+ "trans_in": "T2 甩进（上一段 4-01 是 B 页）",
+ "trans_out": "T2 甩镜往左（下一段 4-03 是 B 页）",
  "holds": [],
  "events": [
   {
-   "id": "before",
-   "obj": "before",
-   "verb": "appear",
-   "at": {
-    "word": "4-02.w001",
-    "off": 0
-   },
-   "means": "Before：中线和左栏表头 Before",
-   "tool": "remotion",
-   "lead": 2,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "you",
-   "obj": "you",
-   "verb": "grow",
-   "at": {
-    "word": "4-02.w002",
-    "off": 0
-   },
-   "means": "you'd：左栏进度条框画出",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
    "id": "need",
    "obj": "need",
-   "verb": "morph",
+   "verb": "appear",
    "at": {
-    "word": "4-02.w003",
+    "word": "need#1",
     "off": 0
    },
-   "means": "need：左条红色起头跳一下，开始慢慢爬",
+   "lead": 7,
+   "means": "you'd need：日历落下",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "need#1"
    }
   },
   {
    "id": "lab",
    "obj": "lab",
-   "verb": "grow",
+   "verb": "appear",
    "at": {
-    "word": "4-02.w005",
+    "word": "lab-measured#1",
     "off": 0
    },
-   "means": "lab-measured：烧瓶长出，写 lab-measured",
+   "lead": 7,
+   "means": "lab-measured：烧瓶落下，进度条开始慢慢爬",
    "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "focus",
     "target": [
-     "flask"
+     "before"
     ]
+   },
+   "until": {
+    "word": "structure#1"
    }
   },
   {
@@ -85,17 +53,17 @@
    "obj": "struct",
    "verb": "appear",
    "at": {
-    "word": "4-02.w006",
+    "word": "structure#1",
     "off": 0
    },
-   "means": "structure：写 structure，左条往前挪一小格",
+   "lead": 10,
+   "means": "structure：标 lab-measured structure",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
@@ -103,53 +71,41 @@
    "obj": "now",
    "verb": "appear",
    "at": {
-    "word": "4-02.w007",
+    "word": "now#1",
     "off": 0
    },
-   "means": "Now：右栏表头 Now，数据库长出，右栏进度条框",
+   "lead": 7,
+   "means": "Now?：右栏数据架落下，手写 Now?",
    "tool": "remotion",
-   "lead": 10,
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "now"
+    ]
+   },
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
    }
   },
   {
-   "id": "down",
-   "obj": "down",
+   "id": "dl",
+   "obj": "dl",
    "verb": "move",
    "at": {
-    "word": "4-02.w011",
+    "word": "downloaded#1",
     "off": 0
    },
-   "means": "downloaded：文件图标从数据库飞到右栏中间，右条一下满格",
+   "lead": 13,
+   "means": "downloaded a prediction：抽出预测模型卡，进度条一下满格",
    "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "pred",
-   "obj": "pred",
-   "verb": "appear",
-   "at": {
-    "word": "4-02.w013",
-    "off": 0
+    "kind": "focus",
+    "target": [
+     "model"
+    ]
    },
-   "means": "prediction：写 a prediction",
-   "tool": "remotion",
-   "lead": 8,
    "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
+    "word": "prediction#1"
    }
   },
   {
@@ -157,74 +113,35 @@
    "obj": "free",
    "verb": "appear",
    "at": {
-    "word": "4-02.w015",
+    "word": "free#1",
     "off": 0
    },
-   "means": "free：价签 free 落下，打红勾",
+   "lead": 7,
+   "means": "for free：价签 free",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "public",
-   "obj": "public",
-   "verb": "appear",
-   "at": {
-    "word": "4-02.w018",
-    "off": 0
    },
-   "means": "public：数据库下写 public database",
-   "tool": "remotion",
-   "lead": 8,
    "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
+    "word": "free#1"
    }
   },
   {
    "id": "db",
    "obj": "db",
-   "verb": "morph",
+   "verb": "appear",
    "at": {
-    "word": "4-02.w019",
+    "word": "public#1",
     "off": 0
    },
-   "means": "database：右条满格上一道亮光扫过",
+   "lead": 10,
+   "means": "from a public database：标 public database",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "accord",
-   "obj": "accord",
-   "verb": "grow",
-   "at": {
-    "word": "4-02.w020",
-    "off": 0
    },
-   "means": "According：底部论文图标长出",
-   "tool": "remotion",
-   "lead": 12,
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "paper"
-    ]
    }
   },
   {
@@ -232,35 +149,38 @@
    "obj": "paper",
    "verb": "appear",
    "at": {
-    "word": "4-02.w023",
+    "word": "paper#1",
     "off": 0
    },
-   "means": "paper：写 the paper",
+   "lead": 7,
+   "means": "According to the paper：清场，论文书落下",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "paper"
+    ]
+   },
+   "until": {
+    "word": "paper#1"
    }
   },
   {
-   "id": "this1",
-   "obj": "this1",
+   "id": "this",
+   "obj": "this",
    "verb": "move",
    "at": {
-    "word": "4-02.w024",
+    "word": "this#1",
     "off": 0
    },
-   "means": "this：论文图标连字滑到右栏下面",
+   "lead": 13,
+   "means": "this was：论文书一抖，翻开",
    "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "was#1"
    }
   },
   {
@@ -268,95 +188,71 @@
    "obj": "first",
    "verb": "appear",
    "at": {
-    "word": "4-02.w027",
+    "word": "first#1",
     "off": 0
    },
-   "means": "first：红批注 first time，箭头指向文件",
+   "lead": 0,
+   "means": "first time：手写",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "time#1"
    }
   },
   {
    "id": "af",
    "obj": "af",
-   "verb": "grow",
+   "verb": "appear",
    "at": {
-    "word": "4-02.w029",
+    "word": "alphafold#1",
     "off": 0
    },
-   "means": "AlphaFold：芯片长出，箭头连到文件",
+   "lead": 7,
+   "means": "AlphaFold：芯片落下",
    "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
-    "kind": "focus",
-    "target": [
-     "chip"
-    ]
+    "kind": "none"
+   },
+   "until": {
+    "word": "alphafold#1"
    }
   },
   {
    "id": "used",
    "obj": "used",
-   "verb": "appear",
+   "verb": "move",
    "at": {
-    "word": "4-02.w032",
+    "word": "used#1",
     "off": 0
    },
-   "means": "used：文件下方虚线往下伸",
+   "lead": 13,
+   "means": "had been used：预测模型卡从芯片里滑出来",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "used#1"
    }
   },
   {
    "id": "hit",
    "obj": "hit",
-   "verb": "grow",
-   "at": {
-    "word": "4-02.w036",
-    "off": 0
-   },
-   "means": "hit：钥匙长出，写 a hit",
-   "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "key"
-    ]
-   }
-  },
-  {
-   "id": "this",
-   "obj": "this",
    "verb": "appear",
    "at": {
-    "word": "4-02.w038",
+    "word": "hit#1",
     "off": 0
    },
-   "means": "this：右栏红框框住芯片、文件和钥匙",
+   "lead": 7,
+   "means": "find a hit：001 插头落下打勾",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   }
  ]

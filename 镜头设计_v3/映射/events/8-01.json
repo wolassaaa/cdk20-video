@@ -1,68 +1,80 @@
 {
  "schema": "cdk20.events/1",
  "group": "8-01",
- "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：出镜 8-01（C）讲解卡：2-04 的便签纸 Our objectives，back 时从上方落回，where we started 两个圈号 1、2 重新亮起；页面 OnCam801.jsx。",
+ "tool": "blender",
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜 8-01（C）三维版（11-22 甲线，18 文档 2.4，照 2-04 的 two_plates 改）：竖料杆上两块目标牌 1、2，屏上高 ≥ 200 px。Blender：inserts/shot_oncam.py recipe plates_801。旧二维版事件表存 _wip/8-01_events_v1_2d.json。",
  "holds": [],
  "events": [
   {
-   "id": "frame",
-   "obj": "frame",
-   "verb": "grow",
+   "id": "land",
+   "obj": "plates",
+   "verb": "move",
    "at": {
     "word": "8-01.w001",
-    "off": 0
+    "off": -4
    },
-   "means": "back：讲解卡外框画出",
-   "tool": "remotion",
-   "lead": 14,
+   "lead": 24,
+   "ease": "out",
+   "means": "So,：牌面从盖满画面退到右区",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
-    "word": "8-01.w002"
+    "word": "8-01.w001"
    }
   },
   {
-   "id": "note",
-   "obj": "note",
+   "id": "flip",
+   "obj": "plates",
    "verb": "move",
    "at": {
     "word": "8-01.w002",
     "off": 0
    },
-   "means": "back：便签纸从上方落回",
-   "tool": "remotion",
-   "lead": 30,
-   "until": {
-    "word": "8-01.w002"
-   }
-  },
-  {
-   "id": "n1",
-   "obj": "n1",
-   "verb": "morph",
-   "at": {
-    "word": "8-01.w005",
-    "off": 0
+   "lead": 14,
+   "ease": "inout",
+   "means": "back：两块目标牌 1、2 绕料杆翻一整圈落定，摆 2°",
+   "guide": {
+    "kind": "none"
    },
-   "means": "we：圈号 1 亮起",
-   "tool": "remotion",
-   "lead": 10,
    "until": {
-    "word": "8-01.w005"
+    "dur": 12
    }
   },
   {
-   "id": "n2",
-   "obj": "n2",
-   "verb": "morph",
+   "id": "glow",
+   "obj": "plates",
+   "verb": "power_on",
    "at": {
     "word": "8-01.w006",
     "off": 0
    },
-   "means": "started：圈号 2 亮起",
-   "tool": "remotion",
    "lead": 8,
+   "ease": "out",
+   "means": "started.：两个数字重新变红、扫光，每块牌右边一个空的勾选框",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
-    "word": "8-01.w006"
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "dive",
+   "obj": "plate1",
+   "verb": "move",
+   "at": {
+    "word": "8-01.w006",
+    "off": 69
+   },
+   "lead": 40,
+   "ease": "in",
+   "means": "（说完）牌 1 冲镜头（段尾，盖满帧是骨白牌面）",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "dur": 0
    }
   }
  ]

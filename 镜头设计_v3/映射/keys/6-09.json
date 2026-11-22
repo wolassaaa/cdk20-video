@@ -333,13 +333,13 @@
   {
    "id": "road",
    "obj": "road",
-   "verb": "grow",
+   "verb": "move",
    "ease": "inout",
-   "means": "further down the road：透视路从近往远画出，标题写出",
+   "means": "further down the road：主料杆沿第 6 区向前延伸，镜头沿料杆前推",
    "f_start": 0,
    "f_land": 9,
    "f_end": 35,
-   "until": "6-09.w009",
+   "until": "6-09.s1",
    "word": "6-09.w006",
    "w": "further",
    "key": "further#1",
@@ -354,61 +354,15 @@
    "F_end": 51775
   },
   {
-   "id": "m_box",
-   "obj": "m_box",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "Fewer：第一个虚线框画出",
-   "f_start": 21,
-   "f_land": 35,
-   "f_end": 41,
-   "until": "6-09.w010",
-   "word": "6-09.w010",
-   "w": "Fewer",
-   "key": "fewer#1",
-   "sid": "6-09.s2",
-   "word_f0": 35,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 51761,
-   "F_land": 51775,
-   "F_end": 51781
-  },
-  {
-   "id": "m_x",
-   "obj": "m_x",
+   "id": "b1",
+   "obj": "b1",
    "verb": "grow",
    "ease": "inout",
-   "means": "failed：框里三把钥匙打红叉",
+   "means": "Fewer failed molecules：磨砂半透明珠子堆（p42）亮起",
    "f_start": 35,
-   "f_land": 41,
-   "f_end": 48,
-   "until": "6-09.w011",
-   "word": "6-09.w011",
-   "w": "failed",
-   "key": "failed#1",
-   "sid": "6-09.s2",
-   "word_f0": 41,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 51775,
-   "F_land": 51781,
-   "F_end": 51788
-  },
-  {
-   "id": "m_d",
-   "obj": "m_d",
-   "verb": "morph",
-   "ease": "inout",
-   "means": "molecules：两把打叉的钥匙沉下去消失，红色向下箭头，写 fewer failed molecules",
-   "f_start": 48,
    "f_land": 48,
-   "f_end": 80,
-   "until": "6-09.w012",
+   "f_end": 119,
+   "until": "6-09.w013",
    "word": "6-09.w012",
    "w": "molecules,",
    "key": "molecules#1",
@@ -416,45 +370,35 @@
    "word_f0": 48,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "b1"
+    ]
    },
-   "F_start": 51788,
+   "F_start": 51775,
    "F_land": 51788,
-   "F_end": 51820
+   "F_end": 51859,
+   "g_start": 22,
+   "g_on": 40,
+   "g_end": 119,
+   "g_off": 149,
+   "g_tick": 44,
+   "G_start": 51762,
+   "G_on": 51780,
+   "G_end": 51859,
+   "G_off": 51889,
+   "G_tick": 51784
   },
   {
-   "id": "c_box",
-   "obj": "c_box",
-   "verb": "appear",
+   "id": "b2",
+   "obj": "b2",
+   "verb": "grow",
    "ease": "inout",
-   "means": "lower：第二个框画出，三张钞票叠着",
-   "f_start": 92,
-   "f_land": 104,
-   "f_end": 119,
-   "until": "6-09.w013",
-   "word": "6-09.w013",
-   "w": "lower",
-   "key": "lower#1",
-   "sid": "6-09.s2",
-   "word_f0": 104,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 51832,
-   "F_land": 51844,
-   "F_end": 51859
-  },
-  {
-   "id": "c_d",
-   "obj": "c_d",
-   "verb": "morph",
-   "ease": "inout",
-   "means": "costs：钞票由三张收成一张，向下箭头，写 lower costs",
-   "f_start": 119,
+   "means": "lower costs：磨砂半透明钞票图标亮起",
+   "f_start": 110,
    "f_land": 123,
-   "f_end": 146,
-   "until": "6-09.w014",
+   "f_end": 193,
+   "until": "6-09.w015",
    "word": "6-09.w014",
    "w": "costs,",
    "key": "costs#1",
@@ -464,43 +408,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 51859,
+   "F_start": 51850,
    "F_land": 51863,
-   "F_end": 51886
-  },
-  {
-   "id": "a_box",
-   "obj": "a_box",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "fewer：第三个框画出",
-   "f_start": 163,
-   "f_land": 175,
-   "f_end": 193,
-   "until": "6-09.w015",
-   "word": "6-09.w015",
-   "w": "fewer",
-   "key": "fewer#2",
-   "sid": "6-09.s2",
-   "word_f0": 175,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 51903,
-   "F_land": 51915,
    "F_end": 51933
   },
   {
-   "id": "a_x",
-   "obj": "a_x",
+   "id": "b3",
+   "obj": "b3",
    "verb": "grow",
    "ease": "inout",
-   "means": "animal：三只小鼠画出",
-   "f_start": 188,
+   "means": "fewer animal tests：磨砂半透明小鼠（p43）亮起",
+   "f_start": 183,
    "f_land": 196,
-   "f_end": 214,
-   "until": "6-09.w016",
+   "f_end": 274,
+   "until": "6-09.w018",
    "word": "6-09.w016",
    "w": "animal",
    "key": "animal#1",
@@ -508,68 +429,35 @@
    "word_f0": 196,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "b3"
+    ]
    },
-   "F_start": 51928,
+   "F_start": 51923,
    "F_land": 51936,
-   "F_end": 51954
+   "F_end": 52014,
+   "g_start": 170,
+   "g_on": 188,
+   "g_end": 252,
+   "g_off": 270,
+   "g_tick": 192,
+   "G_start": 51910,
+   "G_on": 51928,
+   "G_end": 51992,
+   "G_off": 52010,
+   "G_tick": 51932
   },
   {
-   "id": "a_d",
-   "obj": "a_d",
-   "verb": "morph",
-   "ease": "inout",
-   "means": "tests：两只小鼠淡出，向下箭头，写 fewer animal tests",
-   "f_start": 211,
-   "f_land": 215,
-   "f_end": 240,
-   "until": "6-09.w017",
-   "word": "6-09.w017",
-   "w": "tests,",
-   "key": "tests#1",
-   "sid": "6-09.s2",
-   "word_f0": 215,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 51951,
-   "F_land": 51955,
-   "F_end": 51980
-  },
-  {
-   "id": "w_box",
-   "obj": "w_box",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "less：第四个框画出",
-   "f_start": 252,
-   "f_land": 264,
-   "f_end": 274,
-   "until": "6-09.w018",
-   "word": "6-09.w018",
-   "w": "less",
-   "key": "less#1",
-   "sid": "6-09.s2",
-   "word_f0": 264,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 51992,
-   "F_land": 52004,
-   "F_end": 52014
-  },
-  {
-   "id": "w_x",
-   "obj": "w_x",
+   "id": "b4",
+   "obj": "b4",
    "verb": "grow",
    "ease": "inout",
-   "means": "chemical：三个废料桶",
-   "f_start": 270,
+   "means": "less chemical：磨砂半透明废料桶图标亮起",
+   "f_start": 265,
    "f_land": 278,
-   "f_end": 303,
-   "until": "6-09.w019",
+   "f_end": 327,
+   "until": "6-09.w020",
    "word": "6-09.w019",
    "w": "chemical",
    "key": "chemical#1",
@@ -577,19 +465,32 @@
    "word_f0": 278,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "b4"
+    ]
    },
-   "F_start": 52010,
+   "F_start": 52005,
    "F_land": 52018,
-   "F_end": 52043
+   "F_end": 52067,
+   "g_start": 252,
+   "g_on": 270,
+   "g_end": 327,
+   "g_off": 357,
+   "g_tick": 274,
+   "G_start": 51992,
+   "G_on": 52010,
+   "G_end": 52067,
+   "G_off": 52097,
+   "G_tick": 52014
   },
   {
-   "id": "w_d",
-   "obj": "w_d",
-   "verb": "morph",
+   "id": "b4l",
+   "obj": "b4l",
+   "verb": "appear",
    "ease": "inout",
-   "means": "waste：两个桶淡出，向下箭头，写 less chemical waste",
-   "f_start": 303,
+   "means": "waste：四个磨砂好处图标排齐并标出对应短标签",
+   "f_start": 298,
    "f_land": 307,
    "f_end": 327,
    "until": "6-09.s2",
@@ -602,79 +503,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 52043,
+   "F_start": 52038,
    "F_land": 52047,
    "F_end": 52067
   },
   {
-   "id": "srv",
-   "obj": "srv",
+   "id": "elec",
+   "obj": "elec",
    "verb": "grow",
    "ease": "inout",
-   "means": "Computing：路边机柜长出（SOFT），写 computing",
-   "f_start": 357,
-   "f_land": 369,
-   "f_end": 399,
-   "until": "6-09.w021",
-   "word": "6-09.w021",
-   "w": "Computing",
-   "key": "computing#1",
-   "sid": "6-09.s3",
-   "word_f0": 369,
-   "tool": "remotion",
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "tower"
-    ]
-   },
-   "F_start": 52097,
-   "F_land": 52109,
-   "F_end": 52139,
-   "g_start": 343,
-   "g_on": 361,
-   "g_end": 399,
-   "g_off": 429,
-   "g_tick": 365,
-   "G_start": 52083,
-   "G_on": 52101,
-   "G_end": 52139,
-   "G_off": 52169,
-   "G_tick": 52105
-  },
-  {
-   "id": "cost2",
-   "obj": "cost2",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "costs：写 costs electricity too",
-   "f_start": 395,
-   "f_land": 401,
-   "f_end": 417,
-   "until": "6-09.w022",
-   "word": "6-09.w022",
-   "w": "costs",
-   "key": "costs#2",
-   "sid": "6-09.s3",
-   "word_f0": 401,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 52135,
-   "F_land": 52141,
-   "F_end": 52157
-  },
-  {
-   "id": "plug",
-   "obj": "plug",
-   "verb": "grow",
-   "ease": "inout",
-   "means": "electricity：插头和电线画出，电线一跳一跳",
-   "f_start": 411,
+   "means": "Computing costs electricity：路旁插头与闪电图标（p44）亮起，代表算力代价",
+   "f_start": 393,
    "f_land": 421,
-   "f_end": 458,
-   "until": "6-09.w023",
+   "f_end": 476,
+   "until": "6-09.w024",
    "word": "6-09.w023",
    "w": "electricity",
    "key": "electricity#1",
@@ -682,19 +524,32 @@
    "word_f0": 421,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "elec"
+    ]
    },
-   "F_start": 52151,
+   "F_start": 52133,
    "F_land": 52161,
-   "F_end": 52198
+   "F_end": 52216,
+   "g_start": 395,
+   "g_on": 413,
+   "g_end": 476,
+   "g_off": 506,
+   "g_tick": 417,
+   "G_start": 52135,
+   "G_on": 52153,
+   "G_end": 52216,
+   "G_off": 52246,
+   "G_tick": 52157
   },
   {
    "id": "too",
    "obj": "too",
-   "verb": "snap",
+   "verb": "appear",
    "ease": "inout",
-   "means": "too：闪电符号亮一下，电线持续跳动",
-   "f_start": 458,
+   "means": "too：标 Electricity cost",
+   "f_start": 454,
    "f_land": 464,
    "f_end": 476,
    "until": "6-09.s3",
@@ -707,17 +562,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 52198,
+   "F_start": 52194,
    "F_land": 52204,
    "F_end": 52216
   },
   {
    "id": "prize",
    "obj": "prize",
-   "verb": "appear",
+   "verb": "move",
    "ease": "inout",
-   "means": "the real prize：路尽头红色虚线圈和问号",
-   "f_start": 543,
+   "means": "the real prize?：镜头沿料杆推到路尽头，尽头展位亮起带问号",
+   "f_start": 545,
    "f_land": 565,
    "f_end": 595,
    "until": "6-09.s4",
@@ -730,43 +585,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 52283,
+   "F_start": 52285,
    "F_land": 52305,
    "F_end": 52335
   },
   {
-   "id": "hosp",
-   "obj": "hosp",
-   "verb": "morph",
-   "ease": "inout",
-   "means": "New：问号变成 hospital",
-   "f_start": 633,
-   "f_land": 647,
-   "f_end": 655,
-   "until": "6-09.w029",
-   "word": "6-09.w029",
-   "w": "New",
-   "key": "new#1",
-   "sid": "6-09.s5",
-   "word_f0": 647,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 52373,
-   "F_land": 52387,
-   "F_end": 52395
-  },
-  {
    "id": "treat",
    "obj": "treat",
-   "verb": "appear",
+   "verb": "grow",
    "ease": "inout",
-   "means": "treatments：写 new treatments",
-   "f_start": 655,
+   "means": "New treatments：路尽头一粒暖色胶囊清晰亮起",
+   "f_start": 648,
    "f_land": 661,
-   "f_end": 696,
-   "until": "6-09.w031",
+   "f_end": 721,
+   "until": "6-09.w032",
    "word": "6-09.w030",
    "w": "treatments",
    "key": "treatments#1",
@@ -776,17 +608,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 52395,
+   "F_start": 52388,
    "F_land": 52401,
-   "F_end": 52436
+   "F_end": 52461
   },
   {
    "id": "pat",
    "obj": "pat",
-   "verb": "grow",
+   "verb": "snap",
    "ease": "inout",
-   "means": "patients：两个病人长出，写 for patients，红圈变实，路中线变红通到尽头",
-   "f_start": 689,
+   "means": "for patients：胶囊旁小人清晰亮起，标 New treatments for patients",
+   "f_start": 686,
    "f_land": 699,
    "f_end": 721,
    "until": "6-09.s5",
@@ -797,76 +629,114 @@
    "word_f0": 699,
    "tool": "remotion",
    "guide": {
-    "kind": "focus",
-    "target": [
-     "person_w"
-    ]
+    "kind": "none"
    },
-   "F_start": 52429,
+   "F_start": 52426,
    "F_land": 52439,
-   "F_end": 52461,
-   "g_start": 673,
-   "g_on": 691,
-   "g_end": 721,
-   "g_off": 721,
-   "g_tick": 695,
-   "G_start": 52413,
-   "G_on": 52431,
-   "G_end": 52461,
-   "G_off": 52461,
-   "G_tick": 52435
+   "F_end": 52461
   }
  ],
  "guides": [
   {
-   "id": "srv",
+   "id": "b1",
    "target": [
-    "tower"
+    "b1"
    ],
    "kind": "focus",
-   "gs": 343,
-   "gon": 361,
-   "land": 369,
-   "gend": 399,
-   "goff": 429,
-   "tick": 365,
+   "gs": 22,
+   "gon": 40,
+   "land": 48,
+   "gend": 119,
+   "goff": 149,
+   "tick": 44,
    "nudge": false,
    "rim": true,
-   "ev_s": 357,
+   "ev_s": 35,
    "events": [
-    "srv"
+    "b1"
    ],
-   "G_start": 52083,
-   "G_on": 52101,
-   "G_land": 52109,
-   "G_end": 52139,
-   "G_off": 52169,
-   "G_tick": 52105
+   "G_start": 51762,
+   "G_on": 51780,
+   "G_land": 51788,
+   "G_end": 51859,
+   "G_off": 51889,
+   "G_tick": 51784
   },
   {
-   "id": "pat",
+   "id": "b3",
    "target": [
-    "person_w"
+    "b3"
    ],
    "kind": "focus",
-   "gs": 673,
-   "gon": 691,
-   "land": 699,
-   "gend": 721,
-   "goff": 721,
-   "tick": 695,
+   "gs": 170,
+   "gon": 188,
+   "land": 196,
+   "gend": 252,
+   "goff": 270,
+   "tick": 192,
    "nudge": false,
    "rim": true,
-   "ev_s": 689,
+   "ev_s": 183,
    "events": [
-    "pat"
+    "b3"
    ],
-   "G_start": 52413,
-   "G_on": 52431,
-   "G_land": 52439,
-   "G_end": 52461,
-   "G_off": 52461,
-   "G_tick": 52435
+   "handoff": "b4",
+   "G_start": 51910,
+   "G_on": 51928,
+   "G_land": 51936,
+   "G_end": 51992,
+   "G_off": 52010,
+   "G_tick": 51932
+  },
+  {
+   "id": "b4",
+   "target": [
+    "b4"
+   ],
+   "kind": "focus",
+   "gs": 252,
+   "gon": 270,
+   "land": 278,
+   "gend": 327,
+   "goff": 357,
+   "tick": 274,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 265,
+   "events": [
+    "b4"
+   ],
+   "G_start": 51992,
+   "G_on": 52010,
+   "G_land": 52018,
+   "G_end": 52067,
+   "G_off": 52097,
+   "G_tick": 52014
+  },
+  {
+   "id": "elec",
+   "target": [
+    "elec"
+   ],
+   "kind": "focus",
+   "gs": 395,
+   "gon": 413,
+   "land": 421,
+   "gend": 476,
+   "goff": 506,
+   "tick": 417,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 393,
+   "events": [
+    "elec"
+   ],
+   "G_start": 52135,
+   "G_on": 52153,
+   "G_land": 52161,
+   "G_end": 52216,
+   "G_off": 52246,
+   "G_tick": 52157
   }
  ],
  "problems": []

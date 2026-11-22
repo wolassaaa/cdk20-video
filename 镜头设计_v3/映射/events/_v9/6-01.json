@@ -1,0 +1,171 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "6-01",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 6 章记分板开场页 6-01（画外音）：字牌 The big question 落在中央，How much did the computers actually help? 写出后缩小上移成标题，记分板从中缝向两边推开，Before / Now 表头写出，空行一行行画出。页面 Manual601.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "bigq",
+   "obj": "bigq",
+   "verb": "appear",
+   "at": {
+    "word": "6-01.w003",
+    "off": 0
+   },
+   "means": "big question：字牌 The big question",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "6-01.w004"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "how",
+   "obj": "how",
+   "verb": "appear",
+   "at": {
+    "word": "6-01.w005",
+    "off": 0
+   },
+   "means": "How much did the：大问题第二行开写",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "6-01.w008"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "shrink",
+   "obj": "shrink",
+   "verb": "move",
+   "at": {
+    "word": "6-01.w009",
+    "off": 0
+   },
+   "means": "computers：问句缩小上移成标题",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "word": "6-01.w009"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "help",
+   "obj": "help",
+   "verb": "appear",
+   "at": {
+    "word": "6-01.w010",
+    "off": 0
+   },
+   "means": "actually help?：问句收尾",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "6-01.w011"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "seam",
+   "obj": "seam",
+   "verb": "grow",
+   "at": {
+    "word": "6-01.w013",
+    "off": 0
+   },
+   "means": "line up：中缝竖线长出",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "6-01.w013"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "frame",
+   "obj": "frame",
+   "verb": "grow",
+   "at": {
+    "word": "6-01.w014",
+    "off": 0
+   },
+   "means": "up：外框从中缝向两边推开",
+   "tool": "remotion",
+   "lead": 24,
+   "until": {
+    "word": "6-01.w014"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "bef",
+   "obj": "bef",
+   "verb": "appear",
+   "at": {
+    "word": "6-01.w015",
+    "off": 0
+   },
+   "means": "before：表头 Before",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-01.w015"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "rows",
+   "obj": "rows",
+   "verb": "grow",
+   "at": {
+    "word": "6-01.w016",
+    "off": 0
+   },
+   "means": "and：空行横线一行行画出",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "word": "6-01.w016"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "now",
+   "obj": "now",
+   "verb": "appear",
+   "at": {
+    "word": "6-01.w017",
+    "off": 0
+   },
+   "means": "now：表头 Now",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  }
+ ]
+}

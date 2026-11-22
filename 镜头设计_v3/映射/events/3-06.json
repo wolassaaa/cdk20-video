@@ -1,248 +1,220 @@
 {
  "schema": "cdk20.events/1",
  "group": "3-06",
- "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：出镜 3-06（D）讲解卡：肝在上，三张嫌疑犯卡（CDK20 在中间）都连箭头到肝；but 时两边卡沉下去，CDK20 卡放大，蛋白上长出锁梁变成锁，钥匙从右边滑来对准；页面 OnCam306.jsx。",
+ "tool": "blender",
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜 3-06（D）三维版（11-20 甲线，技能 oncam-3d-parts）：人在左，右边一排嫌疑犯——中间 CDK20 插座（h01b），左后、右后两个磨砂盲盒（p29 代替 h10），插座上方一盏小吊灯；插座自己做段首段尾转场。Blender：inserts/shot_oncam.py recipe socket_lineup。旧二维版事件表存 _wip/3-06_events_v1_2d.json。",
  "holds": [],
  "events": [
   {
-   "id": "frame",
-   "obj": "frame",
-   "verb": "grow",
+   "id": "arrive",
+   "obj": "socket",
+   "verb": "move",
    "at": {
     "word": "3-06.w001",
     "off": 0
    },
-   "means": "So：讲解卡外框画出",
-   "tool": "remotion",
-   "lead": 14,
+   "lead": 33,
    "until": {
     "word": "3-06.w001"
-   }
-  },
-  {
-   "id": "liver",
-   "obj": "liver",
-   "verb": "grow",
-   "at": {
-    "word": "3-06.w001",
-    "off": 0
    },
-   "means": "So：肝长出",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "3-06.w001"
+   "ease": "out",
+   "means": "So：插座从镜头前（段首 T5，红环插孔盖满画面）退回 D 的右侧落位，过冲回弹停在词上",
+   "guide": {
+    "kind": "none"
    }
   },
   {
-   "id": "cards",
-   "obj": "cards",
-   "verb": "grow",
+   "id": "turn",
+   "obj": "socket",
+   "verb": "move",
    "at": {
     "word": "3-06.w002",
     "off": 0
    },
-   "means": "a：三张嫌疑犯卡立起",
-   "tool": "remotion",
-   "lead": 20,
+   "lead": 60,
    "until": {
-    "word": "3-06.w003"
+    "word": "3-06.w002"
+   },
+   "ease": "inout",
+   "means": "（So 和 a 之间）插座慢慢转、抬头，把红环插孔那面亮给观众",
+   "guide": {
+    "kind": "none"
    }
   },
   {
-   "id": "strong",
-   "obj": "strong",
-   "verb": "morph",
+   "id": "lamp",
+   "obj": "lamp",
+   "verb": "power_on",
    "at": {
     "word": "3-06.w003",
     "off": 0
    },
-   "means": "strong：CDK20 卡加红框、往前一步",
-   "tool": "remotion",
-   "lead": 12,
+   "lead": 6,
    "until": {
-    "word": "3-06.w003"
+    "dur": 18
+   },
+   "ease": "out",
+   "means": "strong：吊灯咔地亮起、轻轻一晃，光打在插座上（嫌疑犯被灯照住）",
+   "guide": {
+    "kind": "none"
    }
   },
   {
-   "id": "plate",
-   "obj": "plate",
-   "verb": "appear",
+   "id": "call",
+   "obj": "socket",
+   "verb": "move",
    "at": {
     "word": "3-06.w004",
     "off": 0
    },
-   "means": "suspect：字牌 a strong suspect",
-   "tool": "remotion",
-   "lead": 10,
+   "lead": 6,
    "until": {
     "word": "3-06.w004"
-   }
-  },
-  {
-   "id": "arr1",
-   "obj": "arr1",
-   "verb": "move",
-   "at": {
-    "word": "3-06.w005",
-    "off": 0
    },
-   "means": "Not：左卡连线到肝",
-   "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "3-06.w005"
+   "ease": "out",
+   "means": "suspect：焦点点名 + 预颤 6 帧，插座往前一步、抬头",
+   "guide": {
+    "kind": "focus",
+    "target": "card",
+    "box": [
+     1280,
+     300,
+     600,
+     500
+    ]
    }
   },
   {
-   "id": "arr2",
-   "obj": "arr2",
-   "verb": "move",
+   "id": "other1",
+   "obj": "box_l",
+   "verb": "power_on",
    "at": {
     "word": "3-06.w007",
     "off": 0
    },
-   "means": "only：中卡连线到肝",
-   "tool": "remotion",
-   "lead": 14,
+   "lead": 12,
    "until": {
-    "word": "3-06.w007"
+    "dur": 20
+   },
+   "ease": "out",
+   "means": "only：左后的磨砂盲盒里面亮起来（还有别的原因）",
+   "guide": {
+    "kind": "none"
    }
   },
   {
-   "id": "arr3",
-   "obj": "arr3",
-   "verb": "move",
+   "id": "other2",
+   "obj": "box_r",
+   "verb": "power_on",
    "at": {
     "word": "3-06.w008",
     "off": 0
    },
-   "means": "cause：右卡连线到肝",
-   "tool": "remotion",
-   "lead": 14,
+   "lead": 12,
    "until": {
-    "word": "3-06.w008"
-   }
-  },
-  {
-   "id": "note",
-   "obj": "note",
-   "verb": "appear",
-   "at": {
-    "word": "3-06.w009",
-    "off": 0
+    "dur": 20
    },
-   "means": "of：红笔 not the only cause",
-   "tool": "remotion",
-   "lead": 16,
-   "until": {
-    "word": "3-06.w009"
+   "ease": "out",
+   "means": "cause：右后的磨砂盲盒也亮起来",
+   "guide": {
+    "kind": "none"
    }
   },
   {
-   "id": "liverlab",
-   "obj": "liverlab",
-   "verb": "appear",
-   "at": {
-    "word": "3-06.w010",
-    "off": 0
-   },
-   "means": "liver：标签 liver cancer 写出",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "3-06.w010"
-   }
-  },
-  {
-   "id": "hop",
-   "obj": "hop",
-   "verb": "morph",
+   "id": "turn2",
+   "obj": "socket",
+   "verb": "move",
    "at": {
     "word": "3-06.w011",
     "off": 0
    },
-   "means": "cancer：肝轻跳一下",
-   "tool": "remotion",
-   "lead": 12,
+   "lead": 40,
    "until": {
     "word": "3-06.w011"
+   },
+   "ease": "inout",
+   "means": "liver cancer：插座转回来，插孔朝左前方（给后面的插头让出方向）",
+   "guide": {
+    "kind": "none"
    }
   },
   {
-   "id": "sink",
-   "obj": "sink",
-   "verb": "move",
+   "id": "dim",
+   "obj": "boxes",
+   "verb": "power_off",
    "at": {
     "word": "3-06.w012",
     "off": 0
    },
-   "means": "but：两边卡沉下去淡出，箭头和字牌淡出",
-   "tool": "remotion",
-   "lead": 30,
+   "lead": 20,
    "until": {
-    "word": "3-06.w012"
-   }
-  },
-  {
-   "id": "big",
-   "obj": "big",
-   "verb": "move",
-   "at": {
-    "word": "3-06.w013",
-    "off": 0
+    "dur": 24
    },
-   "means": "a：CDK20 卡移到中间放大",
-   "tool": "remotion",
-   "lead": 36,
-   "until": {
-    "word": "3-06.w013"
+   "ease": "inout",
+   "means": "but：两个盲盒暗下去、往后退一点，只剩插座在灯下",
+   "guide": {
+    "kind": "none"
    }
   },
   {
-   "id": "lock",
-   "obj": "lock",
-   "verb": "morph",
+   "id": "ring",
+   "obj": "red_ring",
+   "verb": "power_on",
    "at": {
     "word": "3-06.w014",
     "off": 0
    },
-   "means": "lock：蛋白上画出锁梁",
-   "tool": "remotion",
-   "lead": 16,
+   "lead": 8,
    "until": {
-    "word": "3-06.w014"
-   }
-  },
-  {
-   "id": "key",
-   "obj": "key",
-   "verb": "move",
-   "at": {
-    "word": "3-06.w015",
-    "off": 0
+    "dur": 16
    },
-   "means": "worth：钥匙滑来对准",
-   "tool": "remotion",
-   "lead": 24,
-   "until": {
-    "word": "3-06.w015"
+   "ease": "out",
+   "means": "lock：焦点点名，红环插孔亮起",
+   "guide": {
+    "kind": "focus",
+    "target": "card",
+    "box": [
+     1280,
+     300,
+     600,
+     500
+    ]
    }
   },
   {
-   "id": "try",
-   "obj": "try",
-   "verb": "appear",
+   "id": "plug",
+   "obj": "plug",
+   "verb": "move",
    "at": {
     "word": "3-06.w016",
     "off": 0
    },
-   "means": "trying：红笔 worth trying",
-   "tool": "remotion",
-   "lead": 10,
+   "lead": 30,
    "until": {
-    "word": "3-06.w016"
+    "dur": 22
+   },
+   "ease": "out",
+   "means": "worth trying：金色假插头从下方转过来，对准插孔，停在孔口前一个身位，不插",
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "dive",
+   "obj": "socket",
+   "verb": "move",
+   "at": {
+    "event": "plug",
+    "off": 67
+   },
+   "lead": 43,
+   "until": {
+    "dur": 0
+   },
+   "ease": "in",
+   "means": "（说完）插座带着插头转过去，盖顶冲向镜头（段尾 T1，接 3-07 的 T5 擦除）",
+   "guide": {
+    "kind": "none"
    }
   }
  ]

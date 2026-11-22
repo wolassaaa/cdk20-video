@@ -1,0 +1,272 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "1-11",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 1 章二维说明书页。上方七站的路（线稿，和三维主料杆同一条），芯片快步走过前三站；下方两个框：一个真实案例（芯片和肝拼上）、香港（地图上红点）。出处 Ren et al., Chem. Sci. 2023。页面 src/v3/manual/Manual111.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "road",
+   "obj": "road",
+   "verb": "grow",
+   "at": {
+    "word": "1-11.w001",
+    "off": 0
+   },
+   "means": "So：路的线稿从左画到右，七个站点圈依次落下",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "1-11.w003"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "chip",
+   "obj": "chip",
+   "verb": "grow",
+   "at": {
+    "word": "1-11.w003",
+    "off": 0
+   },
+   "means": "AI：芯片长在起点",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "dur": 24
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chip"
+    ]
+   }
+  },
+  {
+   "id": "chip_walk",
+   "obj": "chip",
+   "verb": "move",
+   "at": {
+    "word": "1-11.w008",
+    "off": 0
+   },
+   "means": "walk the first steps faster：芯片快步走过前三站，带速度线",
+   "tool": "remotion",
+   "lead": 66,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chip"
+    ]
+   }
+  },
+  {
+   "id": "q",
+   "obj": "question",
+   "verb": "appear",
+   "at": {
+    "word": "1-11.w008",
+    "off": 0
+   },
+   "means": "faster?：路上方手写问号 faster?",
+   "tool": "remotion",
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "step1",
+   "obj": "step_1",
+   "verb": "grow",
+   "at": {
+    "word": "1-11.w009",
+    "off": 0
+   },
+   "means": "Let's：第 1 步框画出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "dur": 30
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "title1",
+   "obj": "title_1",
+   "verb": "appear",
+   "at": {
+    "word": "1-11.w011",
+    "off": 0
+   },
+   "means": "one real case：标题 One real case 写出",
+   "tool": "remotion",
+   "until": {
+    "word": "1-11.w013"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "chip2",
+   "obj": "chip_case",
+   "verb": "grow",
+   "at": {
+    "word": "1-11.w015",
+    "off": 0
+   },
+   "means": "AI tools：芯片零件长出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "1-11.w016"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chip"
+    ]
+   }
+  },
+  {
+   "id": "liver",
+   "obj": "liver",
+   "verb": "grow",
+   "at": {
+    "word": "1-11.w019",
+    "off": 0
+   },
+   "means": "liver cancer：肝长出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "1-11.w020"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "liver"
+    ]
+   }
+  },
+  {
+   "id": "case_snap",
+   "obj": "chip_case",
+   "verb": "snap",
+   "at": {
+    "word": "1-11.w020",
+    "off": 18
+   },
+   "means": "芯片卡到肝上（拼），留接缝",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "step2",
+   "obj": "step_2",
+   "verb": "grow",
+   "at": {
+    "word": "1-11.w021",
+    "off": 0
+   },
+   "means": "And：第 2 步框画出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "dur": 30
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "title2",
+   "obj": "title_2",
+   "verb": "appear",
+   "at": {
+    "word": "1-11.w022",
+    "off": 0
+   },
+   "means": "part of it：标题 Starts here 写出",
+   "tool": "remotion",
+   "until": {
+    "word": "1-11.w025"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "hk",
+   "obj": "hk_map",
+   "verb": "grow",
+   "at": {
+    "word": "1-11.w025",
+    "off": 0
+   },
+   "means": "starts：香港地图长出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "1-11.w027"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "hk"
+    ]
+   }
+  },
+  {
+   "id": "pin",
+   "obj": "pin",
+   "verb": "snap",
+   "at": {
+    "word": "1-11.w027",
+    "off": 0
+   },
+   "means": "here：红点落在地图上（沙田）",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "dur": 16
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "hk_label",
+   "obj": "hk_label",
+   "verb": "appear",
+   "at": {
+    "word": "1-11.w029",
+    "off": 0
+   },
+   "means": "Hong Kong：地图下印 Hong Kong",
+   "tool": "remotion",
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  }
+ ]
+}

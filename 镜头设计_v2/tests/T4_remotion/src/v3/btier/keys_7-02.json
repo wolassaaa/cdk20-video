@@ -1,0 +1,1033 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "7-02",
+ "segs": [
+  "7-02"
+ ],
+ "tool": "remotion",
+ "fps": 60,
+ "len_f": 1086,
+ "cut": "cut_v8",
+ "cut_start_f": 55668,
+ "cut_start_s": 927.8,
+ "master_built": "2026-11-18 02:33:56 +09:00",
+ "words_hash": "6a165d973911",
+ "events_src": "镜头设计_v3/映射/events/7-02.json",
+ "words": [
+  {
+   "wid": "7-02.w001",
+   "w": "One:",
+   "key": "one#1",
+   "sid": "7-02.s1",
+   "f0": 9,
+   "f1": 22,
+   "F0": 55677,
+   "F1": 55690
+  },
+  {
+   "wid": "7-02.w002",
+   "w": "walk",
+   "key": "walk#1",
+   "sid": "7-02.s1",
+   "f0": 63,
+   "f1": 76,
+   "F0": 55731,
+   "F1": 55744
+  },
+  {
+   "wid": "7-02.w003",
+   "w": "048",
+   "key": "048#1",
+   "sid": "7-02.s1",
+   "f0": 101,
+   "f1": 133,
+   "F0": 55769,
+   "F1": 55801
+  },
+  {
+   "wid": "7-02.w004",
+   "w": "further.",
+   "key": "further#1",
+   "sid": "7-02.s1",
+   "f0": 146,
+   "f1": 166,
+   "F0": 55814,
+   "F1": 55834
+  },
+  {
+   "wid": "7-02.w005",
+   "w": "It's",
+   "key": "it's#1",
+   "sid": "7-02.s2",
+   "f0": 202,
+   "f1": 209,
+   "F0": 55870,
+   "F1": 55877
+  },
+  {
+   "wid": "7-02.w006",
+   "w": "public",
+   "key": "public#1",
+   "sid": "7-02.s2",
+   "f0": 213,
+   "f1": 235,
+   "F0": 55881,
+   "F1": 55903
+  },
+  {
+   "wid": "7-02.w007",
+   "w": "now,",
+   "key": "now#1",
+   "sid": "7-02.s2",
+   "f0": 241,
+   "f1": 253,
+   "F0": 55909,
+   "F1": 55921
+  },
+  {
+   "wid": "7-02.w008",
+   "w": "so",
+   "key": "so#1",
+   "sid": "7-02.s2",
+   "f0": 278,
+   "f1": 283,
+   "F0": 55946,
+   "F1": 55951
+  },
+  {
+   "wid": "7-02.w009",
+   "w": "anyone",
+   "key": "anyone#1",
+   "sid": "7-02.s2",
+   "f0": 290,
+   "f1": 310,
+   "F0": 55958,
+   "F1": 55978
+  },
+  {
+   "wid": "7-02.w010",
+   "w": "could",
+   "key": "could#1",
+   "sid": "7-02.s2",
+   "f0": 312,
+   "f1": 320,
+   "F0": 55980,
+   "F1": 55988
+  },
+  {
+   "wid": "7-02.w011",
+   "w": "try.",
+   "key": "try#1",
+   "sid": "7-02.s2",
+   "f0": 321,
+   "f1": 342,
+   "F0": 55989,
+   "F1": 56010
+  },
+  {
+   "wid": "7-02.w012",
+   "w": "Test",
+   "key": "test#1",
+   "sid": "7-02.s3",
+   "f0": 381,
+   "f1": 396,
+   "F0": 56049,
+   "F1": 56064
+  },
+  {
+   "wid": "7-02.w013",
+   "w": "it",
+   "key": "it#1",
+   "sid": "7-02.s3",
+   "f0": 398,
+   "f1": 403,
+   "F0": 56066,
+   "F1": 56071
+  },
+  {
+   "wid": "7-02.w014",
+   "w": "in",
+   "key": "in#1",
+   "sid": "7-02.s3",
+   "f0": 409,
+   "f1": 414,
+   "F0": 56077,
+   "F1": 56082
+  },
+  {
+   "wid": "7-02.w015",
+   "w": "more",
+   "key": "more#1",
+   "sid": "7-02.s3",
+   "f0": 420,
+   "f1": 434,
+   "F0": 56088,
+   "F1": 56102
+  },
+  {
+   "wid": "7-02.w016",
+   "w": "liver",
+   "key": "liver#1",
+   "sid": "7-02.s3",
+   "f0": 438,
+   "f1": 454,
+   "F0": 56106,
+   "F1": 56122
+  },
+  {
+   "wid": "7-02.w017",
+   "w": "cancer",
+   "key": "cancer#1",
+   "sid": "7-02.s3",
+   "f0": 459,
+   "f1": 481,
+   "F0": 56127,
+   "F1": 56149
+  },
+  {
+   "wid": "7-02.w018",
+   "w": "cells",
+   "key": "cells#1",
+   "sid": "7-02.s3",
+   "f0": 484,
+   "f1": 501,
+   "F0": 56152,
+   "F1": 56169
+  },
+  {
+   "wid": "7-02.w019",
+   "w": "and",
+   "key": "and#1",
+   "sid": "7-02.s3",
+   "f0": 519,
+   "f1": 525,
+   "F0": 56187,
+   "F1": 56193
+  },
+  {
+   "wid": "7-02.w020",
+   "w": "normal",
+   "key": "normal#1",
+   "sid": "7-02.s3",
+   "f0": 526,
+   "f1": 547,
+   "F0": 56194,
+   "F1": 56215
+  },
+  {
+   "wid": "7-02.w021",
+   "w": "liver",
+   "key": "liver#2",
+   "sid": "7-02.s3",
+   "f0": 549,
+   "f1": 566,
+   "F0": 56217,
+   "F1": 56234
+  },
+  {
+   "wid": "7-02.w022",
+   "w": "cells,",
+   "key": "cells#2",
+   "sid": "7-02.s3",
+   "f0": 571,
+   "f1": 590,
+   "F0": 56239,
+   "F1": 56258
+  },
+  {
+   "wid": "7-02.w023",
+   "w": "then",
+   "key": "then#1",
+   "sid": "7-02.s3",
+   "f0": 625,
+   "f1": 633,
+   "F0": 56293,
+   "F1": 56301
+  },
+  {
+   "wid": "7-02.w024",
+   "w": "animals,",
+   "key": "animals#1",
+   "sid": "7-02.s3",
+   "f0": 640,
+   "f1": 668,
+   "F0": 56308,
+   "F1": 56336
+  },
+  {
+   "wid": "7-02.w025",
+   "w": "and",
+   "key": "and#2",
+   "sid": "7-02.s3",
+   "f0": 701,
+   "f1": 708,
+   "F0": 56369,
+   "F1": 56376
+  },
+  {
+   "wid": "7-02.w026",
+   "w": "check",
+   "key": "check#1",
+   "sid": "7-02.s3",
+   "f0": 710,
+   "f1": 723,
+   "F0": 56378,
+   "F1": 56391
+  },
+  {
+   "wid": "7-02.w027",
+   "w": "how",
+   "key": "how#1",
+   "sid": "7-02.s3",
+   "f0": 731,
+   "f1": 740,
+   "F0": 56399,
+   "F1": 56408
+  },
+  {
+   "wid": "7-02.w028",
+   "w": "the",
+   "key": "the#1",
+   "sid": "7-02.s3",
+   "f0": 743,
+   "f1": 746,
+   "F0": 56411,
+   "F1": 56414
+  },
+  {
+   "wid": "7-02.w029",
+   "w": "body",
+   "key": "body#1",
+   "sid": "7-02.s3",
+   "f0": 749,
+   "f1": 763,
+   "F0": 56417,
+   "F1": 56431
+  },
+  {
+   "wid": "7-02.w030",
+   "w": "handles",
+   "key": "handles#1",
+   "sid": "7-02.s3",
+   "f0": 768,
+   "f1": 792,
+   "F0": 56436,
+   "F1": 56460
+  },
+  {
+   "wid": "7-02.w031",
+   "w": "it",
+   "key": "it#2",
+   "sid": "7-02.s3",
+   "f0": 795,
+   "f1": 801,
+   "F0": 56463,
+   "F1": 56469
+  },
+  {
+   "wid": "7-02.w032",
+   "w": "and",
+   "key": "and#3",
+   "sid": "7-02.s3",
+   "f0": 824,
+   "f1": 830,
+   "F0": 56492,
+   "F1": 56498
+  },
+  {
+   "wid": "7-02.w033",
+   "w": "what",
+   "key": "what#1",
+   "sid": "7-02.s3",
+   "f0": 834,
+   "f1": 845,
+   "F0": 56502,
+   "F1": 56513
+  },
+  {
+   "wid": "7-02.w034",
+   "w": "else",
+   "key": "else#1",
+   "sid": "7-02.s3",
+   "f0": 848,
+   "f1": 858,
+   "F0": 56516,
+   "F1": 56526
+  },
+  {
+   "wid": "7-02.w035",
+   "w": "it",
+   "key": "it#3",
+   "sid": "7-02.s3",
+   "f0": 860,
+   "f1": 865,
+   "F0": 56528,
+   "F1": 56533
+  },
+  {
+   "wid": "7-02.w036",
+   "w": "hits.",
+   "key": "hits#1",
+   "sid": "7-02.s3",
+   "f0": 871,
+   "f1": 890,
+   "F0": 56539,
+   "F1": 56558
+  },
+  {
+   "wid": "7-02.w037",
+   "w": "The",
+   "key": "the#2",
+   "sid": "7-02.s4",
+   "f0": 930,
+   "f1": 935,
+   "F0": 56598,
+   "F1": 56603
+  },
+  {
+   "wid": "7-02.w038",
+   "w": "authors",
+   "key": "authors#1",
+   "sid": "7-02.s4",
+   "f0": 943,
+   "f1": 963,
+   "F0": 56611,
+   "F1": 56631
+  },
+  {
+   "wid": "7-02.w039",
+   "w": "had",
+   "key": "had#1",
+   "sid": "7-02.s4",
+   "f0": 965,
+   "f1": 972,
+   "F0": 56633,
+   "F1": 56640
+  },
+  {
+   "wid": "7-02.w040",
+   "w": "already",
+   "key": "already#1",
+   "sid": "7-02.s4",
+   "f0": 978,
+   "f1": 996,
+   "F0": 56646,
+   "F1": 56664
+  },
+  {
+   "wid": "7-02.w041",
+   "w": "listed",
+   "key": "listed#1",
+   "sid": "7-02.s4",
+   "f0": 1001,
+   "f1": 1022,
+   "F0": 56669,
+   "F1": 56690
+  },
+  {
+   "wid": "7-02.w042",
+   "w": "these",
+   "key": "these#1",
+   "sid": "7-02.s4",
+   "f0": 1029,
+   "f1": 1043,
+   "F0": 56697,
+   "F1": 56711
+  },
+  {
+   "wid": "7-02.w043",
+   "w": "steps.",
+   "key": "steps#1",
+   "sid": "7-02.s4",
+   "f0": 1044,
+   "f1": 1072,
+   "F0": 56712,
+   "F1": 56740
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "7-02.s1",
+   "text": "One: walk 048 further.",
+   "w_first": "7-02.w001",
+   "w_last": "7-02.w004",
+   "f0": 9,
+   "f1": 166
+  },
+  {
+   "sid": "7-02.s2",
+   "text": "It's public now, so anyone could try.",
+   "w_first": "7-02.w005",
+   "w_last": "7-02.w011",
+   "f0": 202,
+   "f1": 342
+  },
+  {
+   "sid": "7-02.s3",
+   "text": "Test it in more liver cancer cells and normal liver cells, then animals, and check how the body handles it and what else it hits.",
+   "w_first": "7-02.w012",
+   "w_last": "7-02.w036",
+   "f0": 381,
+   "f1": 890
+  },
+  {
+   "sid": "7-02.s4",
+   "text": "The authors had already listed these steps.",
+   "w_first": "7-02.w037",
+   "w_last": "7-02.w043",
+   "f0": 930,
+   "f1": 1072
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "p1",
+   "obj": "p1",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "One：1 号编号牌落到路旁",
+   "f_start": 2,
+   "f_land": 9,
+   "f_end": 76,
+   "until": "7-02.w002",
+   "word": "7-02.w001",
+   "w": "One:",
+   "key": "one#1",
+   "sid": "7-02.s1",
+   "word_f0": 9,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 55670,
+   "F_land": 55677,
+   "F_end": 55744
+  },
+  {
+   "id": "walk",
+   "obj": "walk",
+   "verb": "move",
+   "ease": "inout",
+   "means": "walk：048 吊牌从 Cells 站起动往前滑",
+   "f_start": 50,
+   "f_land": 63,
+   "f_end": 133,
+   "until": "7-02.w003",
+   "word": "7-02.w002",
+   "w": "walk",
+   "key": "walk#1",
+   "sid": "7-02.s1",
+   "word_f0": 63,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 55718,
+   "F_land": 55731,
+   "F_end": 55801
+  },
+  {
+   "id": "tag48",
+   "obj": "tag48",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "048 further：048 吊牌挪一步到位，Cells 站插一面小旗",
+   "f_start": 88,
+   "f_land": 101,
+   "f_end": 166,
+   "until": "7-02.s1",
+   "word": "7-02.w003",
+   "w": "048",
+   "key": "048#1",
+   "sid": "7-02.s1",
+   "word_f0": 101,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "tag48"
+    ]
+   },
+   "F_start": 55756,
+   "F_land": 55769,
+   "F_end": 55834,
+   "g_start": 75,
+   "g_on": 93,
+   "g_end": 166,
+   "g_off": 196,
+   "g_tick": 97,
+   "G_start": 55743,
+   "G_on": 55761,
+   "G_end": 55834,
+   "G_off": 55864,
+   "G_tick": 55765
+  },
+  {
+   "id": "unlock",
+   "obj": "unlock",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "public：吊牌上挂的小挂锁弹开",
+   "f_start": 204,
+   "f_land": 213,
+   "f_end": 310,
+   "until": "7-02.w009",
+   "word": "7-02.w006",
+   "w": "public",
+   "key": "public#1",
+   "sid": "7-02.s2",
+   "word_f0": 213,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 55872,
+   "F_land": 55881,
+   "F_end": 55978
+  },
+  {
+   "id": "anyone",
+   "obj": "anyone",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "anyone could try：路旁出现几个白色小人剪影",
+   "f_start": 277,
+   "f_land": 290,
+   "f_end": 342,
+   "until": "7-02.s2",
+   "word": "7-02.w009",
+   "w": "anyone",
+   "key": "anyone#1",
+   "sid": "7-02.s2",
+   "word_f0": 290,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 55945,
+   "F_land": 55958,
+   "F_end": 56010
+  },
+  {
+   "id": "clear",
+   "obj": "clear",
+   "verb": "move",
+   "ease": "inout",
+   "means": "Test：路往左让位，培养皿组进来",
+   "f_start": 372,
+   "f_land": 381,
+   "f_end": 481,
+   "until": "7-02.w017",
+   "word": "7-02.w012",
+   "w": "Test",
+   "key": "test#1",
+   "sid": "7-02.s3",
+   "word_f0": 381,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 56040,
+   "F_land": 56049,
+   "F_end": 56149
+  },
+  {
+   "id": "dishes",
+   "obj": "dishes",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "liver cancer cells：肝癌细胞培养皿一变二、二变四",
+   "f_start": 446,
+   "f_land": 459,
+   "f_end": 547,
+   "until": "7-02.w020",
+   "word": "7-02.w017",
+   "w": "cancer",
+   "key": "cancer#1",
+   "sid": "7-02.s3",
+   "word_f0": 459,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "dishes"
+    ]
+   },
+   "F_start": 56114,
+   "F_land": 56127,
+   "F_end": 56215,
+   "g_start": 433,
+   "g_on": 451,
+   "g_end": 547,
+   "g_off": 577,
+   "g_tick": 455,
+   "G_start": 56101,
+   "G_on": 56119,
+   "G_end": 56215,
+   "G_off": 56245,
+   "G_tick": 56123
+  },
+  {
+   "id": "norm",
+   "obj": "norm",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "normal liver cells：正常肝细胞培养皿也亮起展开",
+   "f_start": 513,
+   "f_land": 526,
+   "f_end": 590,
+   "until": "7-02.w022",
+   "word": "7-02.w020",
+   "w": "normal",
+   "key": "normal#1",
+   "sid": "7-02.s3",
+   "word_f0": 526,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 56181,
+   "F_land": 56194,
+   "F_end": 56258
+  },
+  {
+   "id": "dish_l",
+   "obj": "dish_l",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "cells：两排培养皿分别标上 cancer / normal",
+   "f_start": 562,
+   "f_land": 571,
+   "f_end": 668,
+   "until": "7-02.w024",
+   "word": "7-02.w022",
+   "w": "cells,",
+   "key": "cells#2",
+   "sid": "7-02.s3",
+   "word_f0": 571,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 56230,
+   "F_land": 56239,
+   "F_end": 56336
+  },
+  {
+   "id": "mouse",
+   "obj": "mouse",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "animals：小鼠零件落位亮起",
+   "f_start": 627,
+   "f_land": 640,
+   "f_end": 723,
+   "until": "7-02.w026",
+   "word": "7-02.w024",
+   "w": "animals,",
+   "key": "animals#1",
+   "sid": "7-02.s3",
+   "word_f0": 640,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "mouse"
+    ]
+   },
+   "F_start": 56295,
+   "F_land": 56308,
+   "F_end": 56391,
+   "g_start": 614,
+   "g_on": 632,
+   "g_end": 723,
+   "g_off": 753,
+   "g_tick": 636,
+   "G_start": 56282,
+   "G_on": 56300,
+   "G_end": 56391,
+   "G_off": 56421,
+   "G_tick": 56304
+  },
+  {
+   "id": "chk",
+   "obj": "chk",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "check：小牌槽位出现",
+   "f_start": 701,
+   "f_land": 710,
+   "f_end": 792,
+   "until": "7-02.w030",
+   "word": "7-02.w026",
+   "w": "check",
+   "key": "check#1",
+   "sid": "7-02.s3",
+   "word_f0": 710,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 56369,
+   "F_land": 56378,
+   "F_end": 56460
+  },
+  {
+   "id": "adme",
+   "obj": "adme",
+   "verb": "eject",
+   "ease": "inout",
+   "means": "how the body handles it：第一块小牌弹出，刻 ADME",
+   "f_start": 755,
+   "f_land": 768,
+   "f_end": 858,
+   "until": "7-02.w034",
+   "word": "7-02.w030",
+   "w": "handles",
+   "key": "handles#1",
+   "sid": "7-02.s3",
+   "word_f0": 768,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "cards"
+    ]
+   },
+   "F_start": 56423,
+   "F_land": 56436,
+   "F_end": 56526,
+   "g_start": 742,
+   "g_on": 760,
+   "g_end": 858,
+   "g_off": 888,
+   "g_tick": 764,
+   "G_start": 56410,
+   "G_on": 56428,
+   "G_end": 56526,
+   "G_off": 56556,
+   "G_tick": 56432
+  },
+  {
+   "id": "sel",
+   "obj": "sel",
+   "verb": "eject",
+   "ease": "inout",
+   "means": "what else：第二块小牌弹出，刻 selectivity",
+   "f_start": 835,
+   "f_land": 848,
+   "f_end": 890,
+   "until": "7-02.w036",
+   "word": "7-02.w034",
+   "w": "else",
+   "key": "else#1",
+   "sid": "7-02.s3",
+   "word_f0": 848,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 56503,
+   "F_land": 56516,
+   "F_end": 56558
+  },
+  {
+   "id": "hits",
+   "obj": "hits",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "hits：两块小牌锁定高亮",
+   "f_start": 862,
+   "f_land": 871,
+   "f_end": 890,
+   "until": "7-02.s3",
+   "word": "7-02.w036",
+   "w": "hits.",
+   "key": "hits#1",
+   "sid": "7-02.s3",
+   "word_f0": 871,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 56530,
+   "F_land": 56539,
+   "F_end": 56558
+  },
+  {
+   "id": "src",
+   "obj": "src",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "The authors：Ren et al. 2023 出处牌落位",
+   "f_start": 934,
+   "f_land": 943,
+   "f_end": 1022,
+   "until": "7-02.w041",
+   "word": "7-02.w038",
+   "w": "authors",
+   "key": "authors#1",
+   "sid": "7-02.s4",
+   "word_f0": 943,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 56602,
+   "F_land": 56611,
+   "F_end": 56690
+  },
+  {
+   "id": "ticks",
+   "obj": "ticks",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "already listed：三张步骤卡同时打勾",
+   "f_start": 988,
+   "f_land": 1001,
+   "f_end": 1072,
+   "until": "7-02.w043",
+   "word": "7-02.w041",
+   "w": "listed",
+   "key": "listed#1",
+   "sid": "7-02.s4",
+   "word_f0": 1001,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 56656,
+   "F_land": 56669,
+   "F_end": 56740
+  },
+  {
+   "id": "steps",
+   "obj": "steps",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "these steps：批注 next steps",
+   "f_start": 1035,
+   "f_land": 1044,
+   "f_end": 1072,
+   "until": "7-02.s4",
+   "word": "7-02.w043",
+   "w": "steps.",
+   "key": "steps#1",
+   "sid": "7-02.s4",
+   "word_f0": 1044,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 56703,
+   "F_land": 56712,
+   "F_end": 56740
+  }
+ ],
+ "guides": [
+  {
+   "id": "tag48",
+   "target": [
+    "tag48"
+   ],
+   "kind": "focus",
+   "gs": 75,
+   "gon": 93,
+   "land": 101,
+   "gend": 166,
+   "goff": 196,
+   "tick": 97,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 88,
+   "events": [
+    "tag48"
+   ],
+   "G_start": 55743,
+   "G_on": 55761,
+   "G_land": 55769,
+   "G_end": 55834,
+   "G_off": 55864,
+   "G_tick": 55765
+  },
+  {
+   "id": "dishes",
+   "target": [
+    "dishes"
+   ],
+   "kind": "focus",
+   "gs": 433,
+   "gon": 451,
+   "land": 459,
+   "gend": 547,
+   "goff": 577,
+   "tick": 455,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 446,
+   "events": [
+    "dishes"
+   ],
+   "G_start": 56101,
+   "G_on": 56119,
+   "G_land": 56127,
+   "G_end": 56215,
+   "G_off": 56245,
+   "G_tick": 56123
+  },
+  {
+   "id": "mouse",
+   "target": [
+    "mouse"
+   ],
+   "kind": "focus",
+   "gs": 614,
+   "gon": 632,
+   "land": 640,
+   "gend": 723,
+   "goff": 753,
+   "tick": 636,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 627,
+   "events": [
+    "mouse"
+   ],
+   "handoff": "adme",
+   "G_start": 56282,
+   "G_on": 56300,
+   "G_land": 56308,
+   "G_end": 56391,
+   "G_off": 56421,
+   "G_tick": 56304
+  },
+  {
+   "id": "adme",
+   "target": [
+    "cards"
+   ],
+   "kind": "focus",
+   "gs": 742,
+   "gon": 760,
+   "land": 768,
+   "gend": 858,
+   "goff": 888,
+   "tick": 764,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 755,
+   "events": [
+    "adme"
+   ],
+   "G_start": 56410,
+   "G_on": 56428,
+   "G_land": 56436,
+   "G_end": 56526,
+   "G_off": 56556,
+   "G_tick": 56432
+  }
+ ],
+ "problems": []
+}

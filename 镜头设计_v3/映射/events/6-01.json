@@ -2,61 +2,68 @@
  "schema": "cdk20.events/1",
  "group": "6-01",
  "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：第 6 章记分板开场页 6-01（画外音）：字牌 The big question 落在中央，How much did the computers actually help? 写出后缩小上移成标题，记分板从中缝向两边推开，Before / Now 表头写出，空行一行行画出。页面 Manual601.jsx。",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 6-01（btier/B601.jsx，第 6 章第一页，T6 光扫）。第 6 章共用一块实体翻牌记分板组件（6-01/02/03/06/07/08，骨白外壳 + 炭黑翻牌槽 + 克莱因蓝高亮）：顶栏大标题翻牌 HOW MUCH DID COMPUTERS HELP?；主体 4 行 × 3 列（左窄列为行名 TASK，中列为 BEFORE 翻牌区 + 左小凹位零件槽，右列为 NOW 翻牌区 + 右小凹位零件槽），底部预留 6-08 引文落牌槽。四行预设内容：Row 1 SEEING THE LOCK（HARD LAB EXPERIMENTS / EXPENSIVE·SLOW·DIFFICULT vs FREE PREDICTION / PUBLIC DATABASE）；Row 2 FINDING A HIT（MILLIONS SCREENED / COSTLY BOTTLENECK vs 8,918 DESIGNS / 13 MOLECULES MADE）；Row 3 TIME（10–17 YEARS / HIT = OPENING STRETCH vs 30 DAYS (1ST HIT) / +30 DAYS (BETTER KEY)）；Row 4 IMPROVING THE KEY（ANOTHER COSTLY LAB ROUND vs 16 GUIDED DESIGNS / ~15× TIGHTER GRIP）。本段 6-01：记分板立起，翻出顶栏标题与 BEFORE / NOW 两栏表头，四行空位翻牌轻抖待命，随后镜头推向第 1 行。",
+ "tier": "B",
+ "zone": 6,
+ "trans_in": "T2 甩进（上一段 5-10 是 B 页）+ T6 光扫（第 6 章第一页）",
+ "trans_out": "T2 甩镜往左（下一段 6-02 是 B 页，记分板推入第 1 行）",
  "holds": [],
  "events": [
   {
-   "id": "bigq",
-   "obj": "bigq",
+   "id": "sweep",
+   "obj": "sweep",
    "verb": "appear",
    "at": {
-    "word": "6-01.w003",
+    "word": "so#1",
     "off": 0
    },
-   "means": "big question：字牌 The big question",
+   "lead": 9,
+   "means": "So：T6 光扫过（第 6 章第一页）",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "6-01.w004"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "dur": 24
    }
   },
   {
-   "id": "how",
-   "obj": "how",
-   "verb": "appear",
+   "id": "board",
+   "obj": "board",
+   "verb": "grow",
    "at": {
-    "word": "6-01.w005",
+    "word": "question#1",
     "off": 0
    },
-   "means": "How much did the：大问题第二行开写",
+   "lead": 13,
+   "means": "the big question：实体翻牌记分板从第 6 区大板上立起",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "6-01.w008"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
-   "id": "shrink",
-   "obj": "shrink",
-   "verb": "move",
+   "id": "title",
+   "obj": "title",
+   "verb": "snap",
    "at": {
-    "word": "6-01.w009",
+    "word": "computers#1",
     "off": 0
    },
-   "means": "computers：问句缩小上移成标题",
+   "lead": 28,
+   "means": "the computers：顶栏标题翻牌哗啦翻出 HOW MUCH DID COMPUTERS HELP?",
    "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "word": "6-01.w009"
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "header"
+    ]
+   },
+   "until": {
+    "word": "actually#1"
    }
   },
   {
@@ -64,107 +71,74 @@
    "obj": "help",
    "verb": "appear",
    "at": {
-    "word": "6-01.w010",
+    "word": "help#1",
     "off": 0
    },
-   "means": "actually help?：问句收尾",
+   "lead": 10,
+   "means": "actually help?：标题末尾红问号翻牌定格",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "6-01.w011"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
-   "id": "seam",
-   "obj": "seam",
+   "id": "cols",
+   "obj": "cols",
    "verb": "grow",
    "at": {
-    "word": "6-01.w013",
+    "word": "line#1",
     "off": 0
    },
-   "means": "line up：中缝竖线长出",
+   "lead": 13,
+   "means": "Let's line up：4 行 × 3 列翻牌框与左右小凹位展开",
    "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "6-01.w013"
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "cols"
+    ]
+   },
+   "until": {
+    "word": "before#1"
    }
   },
   {
-   "id": "frame",
-   "obj": "frame",
-   "verb": "grow",
+   "id": "before",
+   "obj": "before",
+   "verb": "snap",
    "at": {
-    "word": "6-01.w014",
+    "word": "before#1",
     "off": 0
    },
-   "means": "up：外框从中缝向两边推开",
+   "lead": 13,
+   "means": "before：中栏表头翻出 BEFORE，左侧四行空翻牌轻抖待命",
    "tool": "remotion",
-   "lead": 24,
-   "until": {
-    "word": "6-01.w014"
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "bef",
-   "obj": "bef",
-   "verb": "appear",
-   "at": {
-    "word": "6-01.w015",
-    "off": 0
    },
-   "means": "before：表头 Before",
-   "tool": "remotion",
-   "lead": 8,
    "until": {
-    "word": "6-01.w015"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "rows",
-   "obj": "rows",
-   "verb": "grow",
-   "at": {
-    "word": "6-01.w016",
-    "off": 0
-   },
-   "means": "and：空行横线一行行画出",
-   "tool": "remotion",
-   "lead": 30,
-   "until": {
-    "word": "6-01.w016"
-   },
-   "guide": {
-    "kind": "none"
+    "word": "now#1"
    }
   },
   {
    "id": "now",
    "obj": "now",
-   "verb": "appear",
+   "verb": "snap",
    "at": {
-    "word": "6-01.w017",
+    "word": "now#1",
     "off": 0
    },
-   "means": "now：表头 Now",
+   "lead": 10,
+   "means": "and now：右栏表头翻出克莱因蓝框 NOW，右侧四行空翻牌轻抖待命",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   }
  ]

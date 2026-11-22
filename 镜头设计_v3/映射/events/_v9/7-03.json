@@ -1,0 +1,321 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "7-03",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 7 章二维说明书页 7-03（A 画外音）：左框 AlphaFold 芯片吐出折好的珠子串（预测形状），右框 flask 和同一形状的虚线（实测结构，once one exists），中间天平打问号；下方循环箭头，结果卡和一张打叉的卡被吸进循环，一条箭头回到左框，循环转一圈。页面 Manual703.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "two",
+   "obj": "two",
+   "verb": "appear",
+   "at": {
+    "word": "7-03.w001",
+    "off": 0
+   },
+   "means": "Two：圈号 2 落下，标题写出",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "7-03.w001"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "bal",
+   "obj": "bal",
+   "verb": "grow",
+   "at": {
+    "word": "7-03.w002",
+    "off": 0
+   },
+   "means": "check：中间天平画出",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "7-03.w003"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "af",
+   "obj": "af",
+   "verb": "grow",
+   "at": {
+    "word": "7-03.w004",
+    "off": 0
+   },
+   "means": "AlphaFold：左框画出，芯片长出",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "7-03.w004"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chip"
+    ]
+   }
+  },
+  {
+   "id": "mdl",
+   "obj": "mdl",
+   "verb": "morph",
+   "at": {
+    "word": "7-03.w005",
+    "off": 0
+   },
+   "means": "model：珠子从芯片飞出折成形状，写 AlphaFold model",
+   "tool": "remotion",
+   "lead": 16,
+   "until": {
+    "word": "7-03.w005"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "ag",
+   "obj": "ag",
+   "verb": "move",
+   "at": {
+    "word": "7-03.w006",
+    "off": 0
+   },
+   "means": "against：天平左低，左框连到左盘",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "7-03.w007"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "lab",
+   "obj": "lab",
+   "verb": "grow",
+   "at": {
+    "word": "7-03.w008",
+    "off": 0
+   },
+   "means": "lab-measured：右框画出（虚线框），flask 长出",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "7-03.w008"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "flask"
+    ]
+   }
+  },
+  {
+   "id": "str",
+   "obj": "str",
+   "verb": "grow",
+   "at": {
+    "word": "7-03.w009",
+    "off": 0
+   },
+   "means": "structure：同一形状的虚线出现在右框，写 lab-measured structure，右框连到右盘",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "7-03.w009"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "once",
+   "obj": "once",
+   "verb": "appear",
+   "at": {
+    "word": "7-03.w010",
+    "off": 0
+   },
+   "means": "once one：红批注 once one exists",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "7-03.w011"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "ex",
+   "obj": "ex",
+   "verb": "snap",
+   "at": {
+    "word": "7-03.w012",
+    "off": 0
+   },
+   "means": "exists：天平上方问号，天平来回晃",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "feed",
+   "obj": "feed",
+   "verb": "grow",
+   "at": {
+    "word": "7-03.w014",
+    "off": 0
+   },
+   "means": "feed：下方循环箭头画出",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "7-03.w014"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "every",
+   "obj": "every",
+   "verb": "move",
+   "at": {
+    "word": "7-03.w015",
+    "off": 0
+   },
+   "means": "every：两框各飞出结果卡进循环",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "7-03.w015"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "res",
+   "obj": "res",
+   "verb": "appear",
+   "at": {
+    "word": "7-03.w016",
+    "off": 0
+   },
+   "means": "result：写 every result",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "7-03.w016"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "inc",
+   "obj": "inc",
+   "verb": "move",
+   "at": {
+    "word": "7-03.w017",
+    "off": 0
+   },
+   "means": "including：一张打叉的卡也飞进循环",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "7-03.w018"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "fail",
+   "obj": "fail",
+   "verb": "appear",
+   "at": {
+    "word": "7-03.w019",
+    "off": 0
+   },
+   "means": "failures：写 including the failures",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "7-03.w019"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "back",
+   "obj": "back",
+   "verb": "grow",
+   "at": {
+    "word": "7-03.w020",
+    "off": 0
+   },
+   "means": "back into：循环引出箭头回到左框",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "7-03.w021"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "nx",
+   "obj": "nx",
+   "verb": "appear",
+   "at": {
+    "word": "7-03.w023",
+    "off": 0
+   },
+   "means": "next：写 next round",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "7-03.w023"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "rnd",
+   "obj": "rnd",
+   "verb": "move",
+   "at": {
+    "word": "7-03.w024",
+    "off": 0
+   },
+   "means": "round：循环带着卡转一整圈，左框形状微调",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  }
+ ]
+}

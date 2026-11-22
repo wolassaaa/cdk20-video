@@ -2,373 +2,221 @@
  "schema": "cdk20.events/1",
  "group": "6-09",
  "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：第 6 章二维说明书页 6-09（B 画外音）：further down the road，一条透视路伸向远处；路边四个虚线框依次亮起（钥匙打叉、钞票、小鼠、废料桶），每个由三变一表示更少；computing 机柜和插头用 SOFT 色，电线一跳一跳表示代价；real prize 路尽头红圈问号，New treatments 圈里长出 hospital 和两个病人，路中线变红通到尽头。页面 Manual609.jsx。",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 6-09（btier/B609.jsx）。第 6 区主料杆向前延伸（注意本段音频首句从 further down the road 起）：路边四个“可能的好处”磨砂半透明图标依次亮起（表示可能、尚未实测）：珠子堆（p42，Fewer failed molecules）、钞票（Lower costs）、小鼠（p43，Fewer animal tests）、废料桶（Less chemical waste）；随后插头与闪电图标（p44，Electricity cost）亮起代表算力代价；路尽头清晰亮起一粒胶囊和一个小人（New treatments for patients）。",
+ "tier": "B",
+ "zone": 6,
+ "trans_in": "T2 甩进（上一段 6-08 是 B 页）",
+ "trans_out": "T2 甩镜往左（下一段 6-10 是 B 页）",
  "holds": [],
  "events": [
   {
    "id": "road",
    "obj": "road",
-   "verb": "grow",
+   "verb": "move",
    "at": {
-    "word": "6-09.w006",
+    "word": "further#1",
     "off": 0
    },
-   "means": "further down the road：透视路从近往远画出，标题写出",
-   "tool": "remotion",
    "lead": 9,
-   "until": {
-    "word": "6-09.w009"
-   },
+   "means": "further down the road：主料杆沿第 6 区向前延伸，镜头沿料杆前推",
+   "tool": "remotion",
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "m_box",
-   "obj": "m_box",
-   "verb": "appear",
-   "at": {
-    "word": "6-09.w010",
-    "off": 0
    },
-   "means": "Fewer：第一个虚线框画出",
-   "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "6-09.w010"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "m_x",
-   "obj": "m_x",
-   "verb": "grow",
-   "at": {
-    "word": "6-09.w011",
-    "off": 0
-   },
-   "means": "failed：框里三把钥匙打红叉",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "6-09.w011"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "m_d",
-   "obj": "m_d",
-   "verb": "morph",
-   "at": {
-    "word": "6-09.w012",
-    "off": 0
-   },
-   "means": "molecules：两把打叉的钥匙沉下去消失，红色向下箭头，写 fewer failed molecules",
-   "tool": "remotion",
-   "lead": 0,
-   "until": {
-    "word": "6-09.w012"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "c_box",
-   "obj": "c_box",
-   "verb": "appear",
-   "at": {
-    "word": "6-09.w013",
-    "off": 0
-   },
-   "means": "lower：第二个框画出，三张钞票叠着",
-   "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "word": "6-09.w013"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "c_d",
-   "obj": "c_d",
-   "verb": "morph",
-   "at": {
-    "word": "6-09.w014",
-    "off": 0
-   },
-   "means": "costs：钞票由三张收成一张，向下箭头，写 lower costs",
-   "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "word": "6-09.w014"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "a_box",
-   "obj": "a_box",
-   "verb": "appear",
-   "at": {
-    "word": "6-09.w015",
-    "off": 0
-   },
-   "means": "fewer：第三个框画出",
-   "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "word": "6-09.w015"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "a_x",
-   "obj": "a_x",
-   "verb": "grow",
-   "at": {
-    "word": "6-09.w016",
-    "off": 0
-   },
-   "means": "animal：三只小鼠画出",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "6-09.w016"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "a_d",
-   "obj": "a_d",
-   "verb": "morph",
-   "at": {
-    "word": "6-09.w017",
-    "off": 0
-   },
-   "means": "tests：两只小鼠淡出，向下箭头，写 fewer animal tests",
-   "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "word": "6-09.w017"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "w_box",
-   "obj": "w_box",
-   "verb": "appear",
-   "at": {
-    "word": "6-09.w018",
-    "off": 0
-   },
-   "means": "less：第四个框画出",
-   "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "word": "6-09.w018"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "w_x",
-   "obj": "w_x",
-   "verb": "grow",
-   "at": {
-    "word": "6-09.w019",
-    "off": 0
-   },
-   "means": "chemical：三个废料桶",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "6-09.w019"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "w_d",
-   "obj": "w_d",
-   "verb": "morph",
-   "at": {
-    "word": "6-09.w020",
-    "off": 0
-   },
-   "means": "waste：两个桶淡出，向下箭头，写 less chemical waste",
-   "tool": "remotion",
-   "lead": 4,
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
    }
   },
   {
-   "id": "srv",
-   "obj": "srv",
+   "id": "b1",
+   "obj": "b1",
    "verb": "grow",
    "at": {
-    "word": "6-09.w021",
+    "word": "molecules#1",
     "off": 0
    },
-   "means": "Computing：路边机柜长出（SOFT），写 computing",
+   "lead": 13,
+   "means": "Fewer failed molecules：磨砂半透明珠子堆（p42）亮起",
    "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "word": "6-09.w021"
-   },
    "guide": {
     "kind": "focus",
     "target": [
-     "tower"
+     "b1"
     ]
-   }
-  },
-  {
-   "id": "cost2",
-   "obj": "cost2",
-   "verb": "appear",
-   "at": {
-    "word": "6-09.w022",
-    "off": 0
    },
-   "means": "costs：写 costs electricity too",
-   "tool": "remotion",
-   "lead": 6,
    "until": {
-    "word": "6-09.w022"
-   },
-   "guide": {
-    "kind": "none"
+    "word": "lower#1"
    }
   },
   {
-   "id": "plug",
-   "obj": "plug",
+   "id": "b2",
+   "obj": "b2",
    "verb": "grow",
    "at": {
-    "word": "6-09.w023",
+    "word": "costs#1",
     "off": 0
    },
-   "means": "electricity：插头和电线画出，电线一跳一跳",
+   "lead": 13,
+   "means": "lower costs：磨砂半透明钞票图标亮起",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "6-09.w023"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "fewer#2"
+   }
+  },
+  {
+   "id": "b3",
+   "obj": "b3",
+   "verb": "grow",
+   "at": {
+    "word": "animal#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "fewer animal tests：磨砂半透明小鼠（p43）亮起",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "b3"
+    ]
+   },
+   "until": {
+    "word": "less#1"
+   }
+  },
+  {
+   "id": "b4",
+   "obj": "b4",
+   "verb": "grow",
+   "at": {
+    "word": "chemical#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "less chemical：磨砂半透明废料桶图标亮起",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "b4"
+    ]
+   },
+   "until": {
+    "word": "waste#1"
+   }
+  },
+  {
+   "id": "b4l",
+   "obj": "b4l",
+   "verb": "appear",
+   "at": {
+    "word": "waste#1",
+    "off": 0
+   },
+   "lead": 9,
+   "means": "waste：四个磨砂好处图标排齐并标出对应短标签",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "elec",
+   "obj": "elec",
+   "verb": "grow",
+   "at": {
+    "word": "electricity#1",
+    "off": 0
+   },
+   "lead": 28,
+   "means": "Computing costs electricity：路旁插头与闪电图标（p44）亮起，代表算力代价",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "elec"
+    ]
+   },
+   "until": {
+    "word": "too#1"
    }
   },
   {
    "id": "too",
    "obj": "too",
-   "verb": "snap",
+   "verb": "appear",
    "at": {
-    "word": "6-09.w024",
+    "word": "too#1",
     "off": 0
    },
-   "means": "too：闪电符号亮一下，电线持续跳动",
+   "lead": 10,
+   "means": "too：标 Electricity cost",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
    "id": "prize",
    "obj": "prize",
-   "verb": "appear",
+   "verb": "move",
    "at": {
-    "word": "6-09.w028",
+    "word": "prize#1",
     "off": 0
    },
-   "means": "the real prize：路尽头红色虚线圈和问号",
+   "lead": 20,
+   "means": "the real prize?：镜头沿料杆推到路尽头，尽头展位亮起带问号",
    "tool": "remotion",
-   "lead": 22,
+   "guide": {
+    "kind": "none"
+   },
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "hosp",
-   "obj": "hosp",
-   "verb": "morph",
-   "at": {
-    "word": "6-09.w029",
-    "off": 0
-   },
-   "means": "New：问号变成 hospital",
-   "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "6-09.w029"
-   },
-   "guide": {
-    "kind": "none"
    }
   },
   {
    "id": "treat",
    "obj": "treat",
-   "verb": "appear",
+   "verb": "grow",
    "at": {
-    "word": "6-09.w030",
+    "word": "treatments#1",
     "off": 0
    },
-   "means": "treatments：写 new treatments",
+   "lead": 13,
+   "means": "New treatments：路尽头一粒暖色胶囊清晰亮起",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "6-09.w031"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "patients#1"
    }
   },
   {
    "id": "pat",
    "obj": "pat",
-   "verb": "grow",
+   "verb": "snap",
    "at": {
-    "word": "6-09.w032",
+    "word": "patients#1",
     "off": 0
    },
-   "means": "patients：两个病人长出，写 for patients，红圈变实，路中线变红通到尽头",
+   "lead": 13,
+   "means": "for patients：胶囊旁小人清晰亮起，标 New treatments for patients",
    "tool": "remotion",
-   "lead": 10,
+   "guide": {
+    "kind": "none"
+   },
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "person_w"
-    ]
    }
   }
  ]

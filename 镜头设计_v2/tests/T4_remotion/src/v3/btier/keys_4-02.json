@@ -1,0 +1,890 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "4-02",
+ "segs": [
+  "4-02"
+ ],
+ "tool": "remotion",
+ "fps": 60,
+ "len_f": 1120,
+ "cut": "cut_v8",
+ "cut_start_f": 27636,
+ "cut_start_s": 460.6,
+ "master_built": "2026-11-18 02:33:56 +09:00",
+ "words_hash": "d3ea8bf01598",
+ "events_src": "镜头设计_v3/映射/events/4-02.json",
+ "words": [
+  {
+   "wid": "4-02.w001",
+   "w": "Before,",
+   "key": "before#1",
+   "sid": "4-02.s1",
+   "f0": 2,
+   "f1": 23,
+   "F0": 27638,
+   "F1": 27659
+  },
+  {
+   "wid": "4-02.w002",
+   "w": "you'd",
+   "key": "you'd#1",
+   "sid": "4-02.s1",
+   "f0": 47,
+   "f1": 56,
+   "F0": 27683,
+   "F1": 27692
+  },
+  {
+   "wid": "4-02.w003",
+   "w": "need",
+   "key": "need#1",
+   "sid": "4-02.s1",
+   "f0": 56,
+   "f1": 65,
+   "F0": 27692,
+   "F1": 27701
+  },
+  {
+   "wid": "4-02.w004",
+   "w": "a",
+   "key": "a#1",
+   "sid": "4-02.s1",
+   "f0": 67,
+   "f1": 68,
+   "F0": 27703,
+   "F1": 27704
+  },
+  {
+   "wid": "4-02.w005",
+   "w": "lab-measured",
+   "key": "lab-measured#1",
+   "sid": "4-02.s1",
+   "f0": 76,
+   "f1": 114,
+   "F0": 27712,
+   "F1": 27750
+  },
+  {
+   "wid": "4-02.w006",
+   "w": "structure.",
+   "key": "structure#1",
+   "sid": "4-02.s1",
+   "f0": 119,
+   "f1": 148,
+   "F0": 27755,
+   "F1": 27784
+  },
+  {
+   "wid": "4-02.w007",
+   "w": "Now?",
+   "key": "now#1",
+   "sid": "4-02.s2",
+   "f0": 206,
+   "f1": 221,
+   "F0": 27842,
+   "F1": 27857
+  },
+  {
+   "wid": "4-02.w008",
+   "w": "The",
+   "key": "the#1",
+   "sid": "4-02.s3",
+   "f0": 259,
+   "f1": 263,
+   "F0": 27895,
+   "F1": 27899
+  },
+  {
+   "wid": "4-02.w009",
+   "w": "team",
+   "key": "team#1",
+   "sid": "4-02.s3",
+   "f0": 267,
+   "f1": 280,
+   "F0": 27903,
+   "F1": 27916
+  },
+  {
+   "wid": "4-02.w010",
+   "w": "just",
+   "key": "just#1",
+   "sid": "4-02.s3",
+   "f0": 286,
+   "f1": 298,
+   "F0": 27922,
+   "F1": 27934
+  },
+  {
+   "wid": "4-02.w011",
+   "w": "downloaded",
+   "key": "downloaded#1",
+   "sid": "4-02.s3",
+   "f0": 301,
+   "f1": 334,
+   "F0": 27937,
+   "F1": 27970
+  },
+  {
+   "wid": "4-02.w012",
+   "w": "a",
+   "key": "a#2",
+   "sid": "4-02.s3",
+   "f0": 342,
+   "f1": 343,
+   "F0": 27978,
+   "F1": 27979
+  },
+  {
+   "wid": "4-02.w013",
+   "w": "prediction,",
+   "key": "prediction#1",
+   "sid": "4-02.s3",
+   "f0": 349,
+   "f1": 388,
+   "F0": 27985,
+   "F1": 28024
+  },
+  {
+   "wid": "4-02.w014",
+   "w": "for",
+   "key": "for#1",
+   "sid": "4-02.s3",
+   "f0": 420,
+   "f1": 427,
+   "F0": 28056,
+   "F1": 28063
+  },
+  {
+   "wid": "4-02.w015",
+   "w": "free,",
+   "key": "free#1",
+   "sid": "4-02.s3",
+   "f0": 431,
+   "f1": 445,
+   "F0": 28067,
+   "F1": 28081
+  },
+  {
+   "wid": "4-02.w016",
+   "w": "from",
+   "key": "from#1",
+   "sid": "4-02.s3",
+   "f0": 474,
+   "f1": 483,
+   "F0": 28110,
+   "F1": 28119
+  },
+  {
+   "wid": "4-02.w017",
+   "w": "a",
+   "key": "a#3",
+   "sid": "4-02.s3",
+   "f0": 485,
+   "f1": 486,
+   "F0": 28121,
+   "F1": 28122
+  },
+  {
+   "wid": "4-02.w018",
+   "w": "public",
+   "key": "public#1",
+   "sid": "4-02.s3",
+   "f0": 491,
+   "f1": 514,
+   "F0": 28127,
+   "F1": 28150
+  },
+  {
+   "wid": "4-02.w019",
+   "w": "database.",
+   "key": "database#1",
+   "sid": "4-02.s3",
+   "f0": 533,
+   "f1": 573,
+   "F0": 28169,
+   "F1": 28209
+  },
+  {
+   "wid": "4-02.w020",
+   "w": "According",
+   "key": "according#1",
+   "sid": "4-02.s4",
+   "f0": 637,
+   "f1": 658,
+   "F0": 28273,
+   "F1": 28294
+  },
+  {
+   "wid": "4-02.w021",
+   "w": "to",
+   "key": "to#1",
+   "sid": "4-02.s4",
+   "f0": 659,
+   "f1": 663,
+   "F0": 28295,
+   "F1": 28299
+  },
+  {
+   "wid": "4-02.w022",
+   "w": "the",
+   "key": "the#2",
+   "sid": "4-02.s4",
+   "f0": 665,
+   "f1": 669,
+   "F0": 28301,
+   "F1": 28305
+  },
+  {
+   "wid": "4-02.w023",
+   "w": "paper,",
+   "key": "paper#1",
+   "sid": "4-02.s4",
+   "f0": 671,
+   "f1": 691,
+   "F0": 28307,
+   "F1": 28327
+  },
+  {
+   "wid": "4-02.w024",
+   "w": "this",
+   "key": "this#1",
+   "sid": "4-02.s4",
+   "f0": 764,
+   "f1": 773,
+   "F0": 28400,
+   "F1": 28409
+  },
+  {
+   "wid": "4-02.w025",
+   "w": "was",
+   "key": "was#1",
+   "sid": "4-02.s4",
+   "f0": 778,
+   "f1": 789,
+   "F0": 28414,
+   "F1": 28425
+  },
+  {
+   "wid": "4-02.w026",
+   "w": "the",
+   "key": "the#3",
+   "sid": "4-02.s4",
+   "f0": 791,
+   "f1": 797,
+   "F0": 28427,
+   "F1": 28433
+  },
+  {
+   "wid": "4-02.w027",
+   "w": "first",
+   "key": "first#1",
+   "sid": "4-02.s4",
+   "f0": 806,
+   "f1": 821,
+   "F0": 28442,
+   "F1": 28457
+  },
+  {
+   "wid": "4-02.w028",
+   "w": "time",
+   "key": "time#1",
+   "sid": "4-02.s4",
+   "f0": 824,
+   "f1": 839,
+   "F0": 28460,
+   "F1": 28475
+  },
+  {
+   "wid": "4-02.w029",
+   "w": "AlphaFold",
+   "key": "alphafold#1",
+   "sid": "4-02.s4",
+   "f0": 851,
+   "f1": 881,
+   "F0": 28487,
+   "F1": 28517
+  },
+  {
+   "wid": "4-02.w030",
+   "w": "had",
+   "key": "had#1",
+   "sid": "4-02.s4",
+   "f0": 910,
+   "f1": 922,
+   "F0": 28546,
+   "F1": 28558
+  },
+  {
+   "wid": "4-02.w031",
+   "w": "been",
+   "key": "been#1",
+   "sid": "4-02.s4",
+   "f0": 927,
+   "f1": 936,
+   "F0": 28563,
+   "F1": 28572
+  },
+  {
+   "wid": "4-02.w032",
+   "w": "used",
+   "key": "used#1",
+   "sid": "4-02.s4",
+   "f0": 947,
+   "f1": 966,
+   "F0": 28583,
+   "F1": 28602
+  },
+  {
+   "wid": "4-02.w033",
+   "w": "to",
+   "key": "to#2",
+   "sid": "4-02.s4",
+   "f0": 1006,
+   "f1": 1012,
+   "F0": 28642,
+   "F1": 28648
+  },
+  {
+   "wid": "4-02.w034",
+   "w": "find",
+   "key": "find#1",
+   "sid": "4-02.s4",
+   "f0": 1019,
+   "f1": 1035,
+   "F0": 28655,
+   "F1": 28671
+  },
+  {
+   "wid": "4-02.w035",
+   "w": "a",
+   "key": "a#4",
+   "sid": "4-02.s4",
+   "f0": 1037,
+   "f1": 1038,
+   "F0": 28673,
+   "F1": 28674
+  },
+  {
+   "wid": "4-02.w036",
+   "w": "hit",
+   "key": "hit#1",
+   "sid": "4-02.s4",
+   "f0": 1047,
+   "f1": 1064,
+   "F0": 28683,
+   "F1": 28700
+  },
+  {
+   "wid": "4-02.w037",
+   "w": "like",
+   "key": "like#1",
+   "sid": "4-02.s4",
+   "f0": 1079,
+   "f1": 1090,
+   "F0": 28715,
+   "F1": 28726
+  },
+  {
+   "wid": "4-02.w038",
+   "w": "this.",
+   "key": "this#2",
+   "sid": "4-02.s4",
+   "f0": 1090,
+   "f1": 1106,
+   "F0": 28726,
+   "F1": 28742
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "4-02.s1",
+   "text": "Before, you'd need a lab-measured structure.",
+   "w_first": "4-02.w001",
+   "w_last": "4-02.w006",
+   "f0": 2,
+   "f1": 148
+  },
+  {
+   "sid": "4-02.s2",
+   "text": "Now?",
+   "w_first": "4-02.w007",
+   "w_last": "4-02.w007",
+   "f0": 206,
+   "f1": 221
+  },
+  {
+   "sid": "4-02.s3",
+   "text": "The team just downloaded a prediction, for free, from a public database.",
+   "w_first": "4-02.w008",
+   "w_last": "4-02.w019",
+   "f0": 259,
+   "f1": 573
+  },
+  {
+   "sid": "4-02.s4",
+   "text": "According to the paper, this was the first time AlphaFold had been used to find a hit like this.",
+   "w_first": "4-02.w020",
+   "w_last": "4-02.w038",
+   "f0": 637,
+   "f1": 1106
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "need",
+   "obj": "need",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "you'd need：日历落下",
+   "f_start": 49,
+   "f_land": 56,
+   "f_end": 65,
+   "until": "4-02.w003",
+   "word": "4-02.w003",
+   "w": "need",
+   "key": "need#1",
+   "sid": "4-02.s1",
+   "word_f0": 56,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 27685,
+   "F_land": 27692,
+   "F_end": 27701
+  },
+  {
+   "id": "lab",
+   "obj": "lab",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "lab-measured：烧瓶落下，进度条开始慢慢爬",
+   "f_start": 69,
+   "f_land": 76,
+   "f_end": 148,
+   "until": "4-02.w006",
+   "word": "4-02.w005",
+   "w": "lab-measured",
+   "key": "lab-measured#1",
+   "sid": "4-02.s1",
+   "word_f0": 76,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "before"
+    ]
+   },
+   "F_start": 27705,
+   "F_land": 27712,
+   "F_end": 27784,
+   "g_start": 50,
+   "g_on": 68,
+   "g_end": 148,
+   "g_off": 178,
+   "g_tick": 72,
+   "G_start": 27686,
+   "G_on": 27704,
+   "G_end": 27784,
+   "G_off": 27814,
+   "G_tick": 27708
+  },
+  {
+   "id": "struct",
+   "obj": "struct",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "structure：标 lab-measured structure",
+   "f_start": 109,
+   "f_land": 119,
+   "f_end": 148,
+   "until": "4-02.s1",
+   "word": "4-02.w006",
+   "w": "structure.",
+   "key": "structure#1",
+   "sid": "4-02.s1",
+   "word_f0": 119,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 27745,
+   "F_land": 27755,
+   "F_end": 27784
+  },
+  {
+   "id": "now",
+   "obj": "now",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "Now?：右栏数据架落下，手写 Now?",
+   "f_start": 199,
+   "f_land": 206,
+   "f_end": 221,
+   "until": "4-02.s2",
+   "word": "4-02.w007",
+   "w": "Now?",
+   "key": "now#1",
+   "sid": "4-02.s2",
+   "word_f0": 206,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "now"
+    ]
+   },
+   "F_start": 27835,
+   "F_land": 27842,
+   "F_end": 27857,
+   "g_start": 180,
+   "g_on": 198,
+   "g_end": 221,
+   "g_off": 251,
+   "g_tick": 202,
+   "G_start": 27816,
+   "G_on": 27834,
+   "G_end": 27857,
+   "G_off": 27887,
+   "G_tick": 27838
+  },
+  {
+   "id": "dl",
+   "obj": "dl",
+   "verb": "move",
+   "ease": "inout",
+   "means": "downloaded a prediction：抽出预测模型卡，进度条一下满格",
+   "f_start": 288,
+   "f_land": 301,
+   "f_end": 388,
+   "until": "4-02.w013",
+   "word": "4-02.w011",
+   "w": "downloaded",
+   "key": "downloaded#1",
+   "sid": "4-02.s3",
+   "word_f0": 301,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "model"
+    ]
+   },
+   "F_start": 27924,
+   "F_land": 27937,
+   "F_end": 28024,
+   "g_start": 275,
+   "g_on": 293,
+   "g_end": 388,
+   "g_off": 418,
+   "g_tick": 297,
+   "G_start": 27911,
+   "G_on": 27929,
+   "G_end": 28024,
+   "G_off": 28054,
+   "G_tick": 27933
+  },
+  {
+   "id": "free",
+   "obj": "free",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "for free：价签 free",
+   "f_start": 424,
+   "f_land": 431,
+   "f_end": 445,
+   "until": "4-02.w015",
+   "word": "4-02.w015",
+   "w": "free,",
+   "key": "free#1",
+   "sid": "4-02.s3",
+   "word_f0": 431,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 28060,
+   "F_land": 28067,
+   "F_end": 28081
+  },
+  {
+   "id": "db",
+   "obj": "db",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "from a public database：标 public database",
+   "f_start": 481,
+   "f_land": 491,
+   "f_end": 573,
+   "until": "4-02.s3",
+   "word": "4-02.w018",
+   "w": "public",
+   "key": "public#1",
+   "sid": "4-02.s3",
+   "word_f0": 491,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 28117,
+   "F_land": 28127,
+   "F_end": 28209
+  },
+  {
+   "id": "paper",
+   "obj": "paper",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "According to the paper：清场，论文书落下",
+   "f_start": 664,
+   "f_land": 671,
+   "f_end": 691,
+   "until": "4-02.w023",
+   "word": "4-02.w023",
+   "w": "paper,",
+   "key": "paper#1",
+   "sid": "4-02.s4",
+   "word_f0": 671,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "paper"
+    ]
+   },
+   "F_start": 28300,
+   "F_land": 28307,
+   "F_end": 28327,
+   "g_start": 645,
+   "g_on": 663,
+   "g_end": 691,
+   "g_off": 721,
+   "g_tick": 667,
+   "G_start": 28281,
+   "G_on": 28299,
+   "G_end": 28327,
+   "G_off": 28357,
+   "G_tick": 28303
+  },
+  {
+   "id": "this",
+   "obj": "this",
+   "verb": "move",
+   "ease": "inout",
+   "means": "this was：论文书一抖，翻开",
+   "f_start": 751,
+   "f_land": 764,
+   "f_end": 789,
+   "until": "4-02.w025",
+   "word": "4-02.w024",
+   "w": "this",
+   "key": "this#1",
+   "sid": "4-02.s4",
+   "word_f0": 764,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 28387,
+   "F_land": 28400,
+   "F_end": 28425
+  },
+  {
+   "id": "first",
+   "obj": "first",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "first time：手写",
+   "f_start": 806,
+   "f_land": 806,
+   "f_end": 839,
+   "until": "4-02.w028",
+   "word": "4-02.w027",
+   "w": "first",
+   "key": "first#1",
+   "sid": "4-02.s4",
+   "word_f0": 806,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 28442,
+   "F_land": 28442,
+   "F_end": 28475
+  },
+  {
+   "id": "af",
+   "obj": "af",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "AlphaFold：芯片落下",
+   "f_start": 844,
+   "f_land": 851,
+   "f_end": 881,
+   "until": "4-02.w029",
+   "word": "4-02.w029",
+   "w": "AlphaFold",
+   "key": "alphafold#1",
+   "sid": "4-02.s4",
+   "word_f0": 851,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 28480,
+   "F_land": 28487,
+   "F_end": 28517
+  },
+  {
+   "id": "used",
+   "obj": "used",
+   "verb": "move",
+   "ease": "inout",
+   "means": "had been used：预测模型卡从芯片里滑出来",
+   "f_start": 934,
+   "f_land": 947,
+   "f_end": 966,
+   "until": "4-02.w032",
+   "word": "4-02.w032",
+   "w": "used",
+   "key": "used#1",
+   "sid": "4-02.s4",
+   "word_f0": 947,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 28570,
+   "F_land": 28583,
+   "F_end": 28602
+  },
+  {
+   "id": "hit",
+   "obj": "hit",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "find a hit：001 插头落下打勾",
+   "f_start": 1040,
+   "f_land": 1047,
+   "f_end": 1106,
+   "until": "4-02.s4",
+   "word": "4-02.w036",
+   "w": "hit",
+   "key": "hit#1",
+   "sid": "4-02.s4",
+   "word_f0": 1047,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 28676,
+   "F_land": 28683,
+   "F_end": 28742
+  }
+ ],
+ "guides": [
+  {
+   "id": "lab",
+   "target": [
+    "before"
+   ],
+   "kind": "focus",
+   "gs": 50,
+   "gon": 68,
+   "land": 76,
+   "gend": 148,
+   "goff": 178,
+   "tick": 72,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 69,
+   "events": [
+    "lab"
+   ],
+   "G_start": 27686,
+   "G_on": 27704,
+   "G_land": 27712,
+   "G_end": 27784,
+   "G_off": 27814,
+   "G_tick": 27708
+  },
+  {
+   "id": "now",
+   "target": [
+    "now"
+   ],
+   "kind": "focus",
+   "gs": 180,
+   "gon": 198,
+   "land": 206,
+   "gend": 221,
+   "goff": 251,
+   "tick": 202,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 199,
+   "events": [
+    "now"
+   ],
+   "G_start": 27816,
+   "G_on": 27834,
+   "G_land": 27842,
+   "G_end": 27857,
+   "G_off": 27887,
+   "G_tick": 27838
+  },
+  {
+   "id": "dl",
+   "target": [
+    "model"
+   ],
+   "kind": "focus",
+   "gs": 275,
+   "gon": 293,
+   "land": 301,
+   "gend": 388,
+   "goff": 418,
+   "tick": 297,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 288,
+   "events": [
+    "dl"
+   ],
+   "G_start": 27911,
+   "G_on": 27929,
+   "G_land": 27937,
+   "G_end": 28024,
+   "G_off": 28054,
+   "G_tick": 27933
+  },
+  {
+   "id": "paper",
+   "target": [
+    "paper"
+   ],
+   "kind": "focus",
+   "gs": 645,
+   "gon": 663,
+   "land": 671,
+   "gend": 691,
+   "goff": 721,
+   "tick": 667,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 664,
+   "events": [
+    "paper"
+   ],
+   "G_start": 28281,
+   "G_on": 28299,
+   "G_land": 28307,
+   "G_end": 28327,
+   "G_off": 28357,
+   "G_tick": 28303
+  }
+ ],
+ "problems": []
+}

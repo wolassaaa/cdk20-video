@@ -2,43 +2,50 @@
  "schema": "cdk20.events/1",
  "group": "5-07",
  "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：第 5 章二维说明书页 5-07（C 画外音）：设计循环（design 顶上是 001 钥匙，右下 flask，左下数据）；循环转起来，flask 吐出数据卡，沿循环回到 design；旁边长出 predicted pose（锁里插着 001，口袋红圈）；右边扇出 16 把新钥匙，其中 6 把变红落到一排、打勾；底下时间线 first hit 到 30 days。页面 Manual507.jsx。",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 5-07（btier/B507.jsx）。Not at all（手写）；the loop：设计循环圈落下转起来，lab data：烧瓶里的数据点倒进圈；went back in：数据沿圈走；predicted pose of how 001 sat：小插座插着 001，标 predicted pose；Sixteen：十六个新插头；Six made and tested：六个进烧瓶；30 days：日历，数字轮 30，001 打勾。",
+ "tier": "B",
+ "zone": 5,
+ "trans_in": "T5 runner（上一段 5-05+06 是出镜段）",
+ "trans_out": "T2 甩镜往左（下一段 5-08 是 B 页）",
  "holds": [],
  "events": [
   {
-   "id": "no",
-   "obj": "no",
-   "verb": "snap",
+   "id": "not",
+   "obj": "not",
+   "verb": "appear",
    "at": {
-    "word": "5-07.w001",
+    "word": "not#1",
     "off": 0
    },
-   "means": "Not at all：001 钥匙一颤，旁边红叉",
+   "lead": 6,
+   "means": "Not at all：手写",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "5-07.w003"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
    "id": "loop",
    "obj": "loop",
-   "verb": "grow",
+   "verb": "appear",
    "at": {
-    "word": "5-07.w008",
+    "word": "loop#1",
     "off": 0
    },
-   "means": "loop：循环画出",
+   "lead": 7,
+   "means": "the loop：循环圈落下",
    "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "word": "5-07.w008"
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "loop"
+    ]
+   },
+   "until": {
+    "word": "kicks#1"
    }
   },
   {
@@ -46,38 +53,35 @@
    "obj": "kick",
    "verb": "move",
    "at": {
-    "word": "5-07.w009",
+    "word": "kicks#1",
     "off": 0
    },
-   "means": "kicks in again：循环转起来，写 the loop",
+   "lead": 13,
+   "means": "kicks in again：圈转起来",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "5-07.w013"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "again#1"
    }
   },
   {
-   "id": "lab",
-   "obj": "lab",
-   "verb": "grow",
+   "id": "now",
+   "obj": "now",
+   "verb": "move",
    "at": {
-    "word": "5-07.w015",
+    "word": "now#1",
     "off": 0
    },
-   "means": "lab：右下 flask 长出",
+   "lead": 13,
+   "means": "now with：圈亮一下",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "5-07.w015"
-   },
    "guide": {
-    "kind": "focus",
-    "target": [
-     "flask"
-    ]
+    "kind": "none"
+   },
+   "until": {
+    "word": "with#1"
    }
   },
   {
@@ -85,132 +89,131 @@
    "obj": "data",
    "verb": "appear",
    "at": {
-    "word": "5-07.w016",
+    "word": "lab#1",
     "off": 0
    },
-   "means": "data inside：数据卡从 flask 出来，写 real lab data",
+   "lead": 7,
+   "means": "real lab data：烧瓶落下",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "5-07.w017"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "data#1"
    }
   },
   {
-   "id": "res",
-   "obj": "res",
+   "id": "inside",
+   "obj": "inside",
    "verb": "move",
    "at": {
-    "word": "5-07.w019",
+    "word": "inside#1",
     "off": 0
    },
-   "means": "results：数据卡沿循环走到左下",
+   "lead": 30,
+   "means": "inside：数据点倒进圈里",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "5-07.w019"
-   },
    "guide": {
-    "kind": "focus",
-    "target": [
-     "paper1"
-    ]
+    "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
-   "id": "back",
-   "obj": "back",
+   "id": "results",
+   "obj": "results",
    "verb": "move",
    "at": {
-    "word": "5-07.w021",
+    "word": "results#1",
     "off": 0
    },
-   "means": "went back in：数据卡回到 design",
+   "lead": 13,
+   "means": "The results went back in：数据点沿圈走",
    "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "5-07.w022"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "back#1"
    }
   },
   {
    "id": "pose",
    "obj": "pose",
-   "verb": "grow",
+   "verb": "appear",
    "at": {
-    "word": "5-07.w025",
+    "word": "predicted#1",
     "off": 0
    },
-   "means": "predicted pose：旁边长出锁里插钥匙的小图，写 predicted pose",
+   "lead": 7,
+   "means": "a predicted pose：小插座插着 001",
    "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "5-07.w026"
-   },
    "guide": {
     "kind": "focus",
     "target": [
-     "key",
-     "lock"
+     "pose"
     ]
+   },
+   "until": {
+    "word": "pose#1"
    }
   },
   {
-   "id": "k001",
-   "obj": "k001",
+   "id": "p001",
+   "obj": "p001",
    "verb": "appear",
    "at": {
-    "word": "5-07.w029",
+    "word": "001#1",
     "off": 0
    },
-   "means": "001：小图里的钥匙标 001",
+   "lead": 10,
+   "means": "001：标 001",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "5-07.w030"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "001#1"
    }
   },
   {
-   "id": "pock",
-   "obj": "pock",
-   "verb": "appear",
+   "id": "pocket",
+   "obj": "pocket",
+   "verb": "move",
    "at": {
-    "word": "5-07.w033",
+    "word": "pocket#1",
     "off": 0
    },
-   "means": "pocket：口袋画红圈",
+   "lead": 13,
+   "means": "sat in the pocket：插头往里一推、灯亮",
    "tool": "remotion",
-   "lead": 8,
+   "guide": {
+    "kind": "none"
+   },
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
    }
   },
   {
-   "id": "s16",
-   "obj": "s16",
-   "verb": "grow",
+   "id": "n16",
+   "obj": "n16",
+   "verb": "appear",
    "at": {
-    "word": "5-07.w034",
+    "word": "sixteen#1",
     "off": 0
    },
-   "means": "Sixteen new designs：16 把钥匙从 design 扇出到右边，写 sixteen new designs",
+   "lead": 7,
+   "means": "Sixteen new designs：十六个新插头",
    "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "word": "5-07.w036"
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "new"
+    ]
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
@@ -218,56 +221,17 @@
    "obj": "six",
    "verb": "move",
    "at": {
-    "word": "5-07.w037",
+    "word": "six#1",
     "off": 0
    },
-   "means": "Six made：其中 6 把变红落到下面一排，flask 长出",
+   "lead": 13,
+   "means": "Six made and tested：六个进烧瓶",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "5-07.w038"
-   },
    "guide": {
-    "kind": "focus",
-    "target": [
-     "flask"
-    ]
-   }
-  },
-  {
-   "id": "test",
-   "obj": "test",
-   "verb": "appear",
-   "at": {
-    "word": "5-07.w040",
-    "off": 0
+    "kind": "none"
    },
-   "means": "tested：6 把各打一个勾，写 six made and tested",
-   "tool": "remotion",
-   "lead": 6,
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "all",
-   "obj": "all",
-   "verb": "appear",
-   "at": {
-    "word": "5-07.w041",
-    "off": 0
-   },
-   "means": "All within：底下时间线画出",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "5-07.w042"
-   },
-   "guide": {
-    "kind": "none"
    }
   },
   {
@@ -275,35 +239,38 @@
    "obj": "d30",
    "verb": "appear",
    "at": {
-    "word": "5-07.w043",
+    "word": "30#1",
     "off": 0
    },
-   "means": "30 days：右端标 30 days",
+   "lead": 40,
+   "means": "within 30 days：日历，数字轮 30",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "5-07.w044"
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "cal"
+    ]
+   },
+   "until": {
+    "word": "days#1"
    }
   },
   {
-   "id": "fh",
-   "obj": "fh",
+   "id": "hit",
+   "obj": "hit",
    "verb": "appear",
    "at": {
-    "word": "5-07.w047",
+    "word": "hit#1",
     "off": 0
    },
-   "means": "first hit：左端红点，写 first hit",
+   "lead": 7,
+   "means": "that first hit：001 打勾",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   }
  ]

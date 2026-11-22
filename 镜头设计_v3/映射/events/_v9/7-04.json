@@ -1,0 +1,225 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "7-04",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 7 章页 7-04（画外音）：两条并排的跑道（AI route / classic route），起跑线上 same target / same budget / same definition of a hit 依次写出，每写一个两道各点亮一个相同图标，两个小牌子起跑，终点线上问号 how much faster。页面 Manual704.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "title",
+   "obj": "title",
+   "verb": "appear",
+   "at": {
+    "word": "7-04.w001",
+    "off": 0
+   },
+   "means": "Three: race them：标题",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "7-04.w003"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "lanes",
+   "obj": "lanes",
+   "verb": "grow",
+   "at": {
+    "word": "7-04.w003",
+    "off": 0
+   },
+   "means": "them：两条跑道画出",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "word": "7-04.w003"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "ai",
+   "obj": "ai",
+   "verb": "appear",
+   "at": {
+    "word": "7-04.w005",
+    "off": 0
+   },
+   "means": "AI：AI route 标签",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "7-04.w005"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "cl",
+   "obj": "cl",
+   "verb": "appear",
+   "at": {
+    "word": "7-04.w009",
+    "off": 0
+   },
+   "means": "classic：classic route 标签",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "7-04.w009"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "start",
+   "obj": "start",
+   "verb": "grow",
+   "at": {
+    "word": "7-04.w010",
+    "off": 0
+   },
+   "means": "route：起跑线",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "7-04.w010"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "tgt",
+   "obj": "tgt",
+   "verb": "grow",
+   "at": {
+    "word": "7-04.w012",
+    "off": 0
+   },
+   "means": "target：same target，两道各亮一把锁",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "word": "7-04.w012"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "bud",
+   "obj": "bud",
+   "verb": "grow",
+   "at": {
+    "word": "7-04.w014",
+    "off": 0
+   },
+   "means": "budget：same budget，两道各亮一叠钞票",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "word": "7-04.w014"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "def",
+   "obj": "def",
+   "verb": "grow",
+   "at": {
+    "word": "7-04.w016",
+    "off": 0
+   },
+   "means": "definition：same definition of a hit，两道各亮清单",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "word": "7-04.w018"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "hit",
+   "obj": "hit",
+   "verb": "morph",
+   "at": {
+    "word": "7-04.w019",
+    "off": 0
+   },
+   "means": "hit：两张清单各打勾",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "7-04.w019"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "fin",
+   "obj": "fin",
+   "verb": "grow",
+   "at": {
+    "word": "7-04.w023",
+    "off": 0
+   },
+   "means": "exactly：终点线加红问号",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "7-04.w023"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "run",
+   "obj": "run",
+   "verb": "move",
+   "at": {
+    "word": "7-04.w024",
+    "off": 0
+   },
+   "means": "how：两个小牌子起跑",
+   "tool": "remotion",
+   "lead": 40,
+   "until": {
+    "word": "7-04.w025"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "qm",
+   "obj": "qm",
+   "verb": "appear",
+   "at": {
+    "word": "7-04.w026",
+    "off": 0
+   },
+   "means": "faster：红批注 how much faster",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  }
+ ]
+}

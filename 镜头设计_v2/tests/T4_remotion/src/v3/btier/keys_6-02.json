@@ -1,0 +1,757 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "6-02",
+ "segs": [
+  "6-02"
+ ],
+ "tool": "remotion",
+ "fps": 60,
+ "len_f": 768,
+ "cut": "cut_v8",
+ "cut_start_f": 47268,
+ "cut_start_s": 787.8,
+ "master_built": "2026-11-18 02:33:56 +09:00",
+ "words_hash": "fd4895c68170",
+ "events_src": "镜头设计_v3/映射/events/6-02.json",
+ "words": [
+  {
+   "wid": "6-02.w001",
+   "w": "Seeing",
+   "key": "seeing#1",
+   "sid": "6-02.s1",
+   "f0": 9,
+   "f1": 23,
+   "F0": 47277,
+   "F1": 47291
+  },
+  {
+   "wid": "6-02.w002",
+   "w": "the",
+   "key": "the#1",
+   "sid": "6-02.s1",
+   "f0": 23,
+   "f1": 28,
+   "F0": 47291,
+   "F1": 47296
+  },
+  {
+   "wid": "6-02.w003",
+   "w": "lock.",
+   "key": "lock#1",
+   "sid": "6-02.s1",
+   "f0": 32,
+   "f1": 46,
+   "F0": 47300,
+   "F1": 47314
+  },
+  {
+   "wid": "6-02.w004",
+   "w": "Before:",
+   "key": "before#1",
+   "sid": "6-02.s2",
+   "f0": 67,
+   "f1": 92,
+   "F0": 47335,
+   "F1": 47360
+  },
+  {
+   "wid": "6-02.w005",
+   "w": "hard",
+   "key": "hard#1",
+   "sid": "6-02.s2",
+   "f0": 115,
+   "f1": 128,
+   "F0": 47383,
+   "F1": 47396
+  },
+  {
+   "wid": "6-02.w006",
+   "w": "lab",
+   "key": "lab#1",
+   "sid": "6-02.s2",
+   "f0": 132,
+   "f1": 144,
+   "F0": 47400,
+   "F1": 47412
+  },
+  {
+   "wid": "6-02.w007",
+   "w": "experiments,",
+   "key": "experiments#1",
+   "sid": "6-02.s2",
+   "f0": 147,
+   "f1": 188,
+   "F0": 47415,
+   "F1": 47456
+  },
+  {
+   "wid": "6-02.w008",
+   "w": "and",
+   "key": "and#1",
+   "sid": "6-02.s2",
+   "f0": 219,
+   "f1": 229,
+   "F0": 47487,
+   "F1": 47497
+  },
+  {
+   "wid": "6-02.w009",
+   "w": "without",
+   "key": "without#1",
+   "sid": "6-02.s2",
+   "f0": 232,
+   "f1": 256,
+   "F0": 47500,
+   "F1": 47524
+  },
+  {
+   "wid": "6-02.w010",
+   "w": "a",
+   "key": "a#1",
+   "sid": "6-02.s2",
+   "f0": 259,
+   "f1": 260,
+   "F0": 47527,
+   "F1": 47528
+  },
+  {
+   "wid": "6-02.w011",
+   "w": "3D",
+   "key": "3d#1",
+   "sid": "6-02.s2",
+   "f0": 264,
+   "f1": 283,
+   "F0": 47532,
+   "F1": 47551
+  },
+  {
+   "wid": "6-02.w012",
+   "w": "shape,",
+   "key": "shape#1",
+   "sid": "6-02.s2",
+   "f0": 294,
+   "f1": 313,
+   "F0": 47562,
+   "F1": 47581
+  },
+  {
+   "wid": "6-02.w013",
+   "w": "design",
+   "key": "design#1",
+   "sid": "6-02.s2",
+   "f0": 318,
+   "f1": 344,
+   "F0": 47586,
+   "F1": 47612
+  },
+  {
+   "wid": "6-02.w014",
+   "w": "was",
+   "key": "was#1",
+   "sid": "6-02.s2",
+   "f0": 348,
+   "f1": 355,
+   "F0": 47616,
+   "F1": 47623
+  },
+  {
+   "wid": "6-02.w015",
+   "w": "expensive,",
+   "key": "expensive#1",
+   "sid": "6-02.s2",
+   "f0": 357,
+   "f1": 402,
+   "F0": 47625,
+   "F1": 47670
+  },
+  {
+   "wid": "6-02.w016",
+   "w": "slow",
+   "key": "slow#1",
+   "sid": "6-02.s2",
+   "f0": 407,
+   "f1": 428,
+   "F0": 47675,
+   "F1": 47696
+  },
+  {
+   "wid": "6-02.w017",
+   "w": "and",
+   "key": "and#2",
+   "sid": "6-02.s2",
+   "f0": 437,
+   "f1": 441,
+   "F0": 47705,
+   "F1": 47709
+  },
+  {
+   "wid": "6-02.w018",
+   "w": "difficult.",
+   "key": "difficult#1",
+   "sid": "6-02.s2",
+   "f0": 444,
+   "f1": 470,
+   "F0": 47712,
+   "F1": 47738
+  },
+  {
+   "wid": "6-02.w019",
+   "w": "Now:",
+   "key": "now#1",
+   "sid": "6-02.s3",
+   "f0": 499,
+   "f1": 512,
+   "F0": 47767,
+   "F1": 47780
+  },
+  {
+   "wid": "6-02.w020",
+   "w": "a",
+   "key": "a#2",
+   "sid": "6-02.s3",
+   "f0": 533,
+   "f1": 534,
+   "F0": 47801,
+   "F1": 47802
+  },
+  {
+   "wid": "6-02.w021",
+   "w": "free",
+   "key": "free#1",
+   "sid": "6-02.s3",
+   "f0": 539,
+   "f1": 550,
+   "F0": 47807,
+   "F1": 47818
+  },
+  {
+   "wid": "6-02.w022",
+   "w": "prediction,",
+   "key": "prediction#1",
+   "sid": "6-02.s3",
+   "f0": 553,
+   "f1": 587,
+   "F0": 47821,
+   "F1": 47855
+  },
+  {
+   "wid": "6-02.w023",
+   "w": "downloaded",
+   "key": "downloaded#1",
+   "sid": "6-02.s3",
+   "f0": 624,
+   "f1": 652,
+   "F0": 47892,
+   "F1": 47920
+  },
+  {
+   "wid": "6-02.w024",
+   "w": "from",
+   "key": "from#1",
+   "sid": "6-02.s3",
+   "f0": 654,
+   "f1": 668,
+   "F0": 47922,
+   "F1": 47936
+  },
+  {
+   "wid": "6-02.w025",
+   "w": "a",
+   "key": "a#3",
+   "sid": "6-02.s3",
+   "f0": 673,
+   "f1": 674,
+   "F0": 47941,
+   "F1": 47942
+  },
+  {
+   "wid": "6-02.w026",
+   "w": "public",
+   "key": "public#1",
+   "sid": "6-02.s3",
+   "f0": 688,
+   "f1": 713,
+   "F0": 47956,
+   "F1": 47981
+  },
+  {
+   "wid": "6-02.w027",
+   "w": "database.",
+   "key": "database#1",
+   "sid": "6-02.s3",
+   "f0": 718,
+   "f1": 753,
+   "F0": 47986,
+   "F1": 48021
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "6-02.s1",
+   "text": "Seeing the lock.",
+   "w_first": "6-02.w001",
+   "w_last": "6-02.w003",
+   "f0": 9,
+   "f1": 46
+  },
+  {
+   "sid": "6-02.s2",
+   "text": "Before: hard lab experiments, and without a 3D shape, design was expensive, slow and difficult.",
+   "w_first": "6-02.w004",
+   "w_last": "6-02.w018",
+   "f0": 67,
+   "f1": 470
+  },
+  {
+   "sid": "6-02.s3",
+   "text": "Now: a free prediction, downloaded from a public database.",
+   "w_first": "6-02.w019",
+   "w_last": "6-02.w027",
+   "f0": 499,
+   "f1": 753
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "row1",
+   "obj": "row1",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "Seeing：第 1 行行名翻出 1. SEEING THE LOCK",
+   "f_start": 0,
+   "f_land": 9,
+   "f_end": 46,
+   "until": "6-02.w003",
+   "word": "6-02.w001",
+   "w": "Seeing",
+   "key": "seeing#1",
+   "sid": "6-02.s1",
+   "word_f0": 9,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 47268,
+   "F_land": 47277,
+   "F_end": 47314
+  },
+  {
+   "id": "focus1",
+   "obj": "focus1",
+   "verb": "move",
+   "ease": "inout",
+   "means": "the lock：镜头推近第 1 行，左右小凹位框亮起",
+   "f_start": 25,
+   "f_land": 32,
+   "f_end": 46,
+   "until": "6-02.s1",
+   "word": "6-02.w003",
+   "w": "lock.",
+   "key": "lock#1",
+   "sid": "6-02.s1",
+   "word_f0": 32,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 47293,
+   "F_land": 47300,
+   "F_end": 47314
+  },
+  {
+   "id": "bef",
+   "obj": "bef",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "Before：左凹位升起磨砂 CDK20 轮廓件",
+   "f_start": 60,
+   "f_land": 67,
+   "f_end": 188,
+   "until": "6-02.w007",
+   "word": "6-02.w004",
+   "w": "Before:",
+   "key": "before#1",
+   "sid": "6-02.s2",
+   "word_f0": 67,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "before1"
+    ]
+   },
+   "F_start": 47328,
+   "F_land": 47335,
+   "F_end": 47456,
+   "g_start": 41,
+   "g_on": 59,
+   "g_end": 187,
+   "g_off": 217,
+   "g_tick": 63,
+   "G_start": 47309,
+   "G_on": 47327,
+   "G_end": 47455,
+   "G_off": 47485,
+   "G_tick": 47331
+  },
+  {
+   "id": "lab",
+   "obj": "lab",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "hard lab experiments：BEFORE 主翻牌翻出 HARD LAB EXPERIMENTS",
+   "f_start": 119,
+   "f_land": 147,
+   "f_end": 229,
+   "until": "6-02.w008",
+   "word": "6-02.w007",
+   "w": "experiments,",
+   "key": "experiments#1",
+   "sid": "6-02.s2",
+   "word_f0": 147,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 47387,
+   "F_land": 47415,
+   "F_end": 47497
+  },
+  {
+   "id": "no3d",
+   "obj": "no3d",
+   "verb": "move",
+   "ease": "inout",
+   "means": "without a 3D：左凹位磨砂轮廓发虚并亮起红问号",
+   "f_start": 219,
+   "f_land": 232,
+   "f_end": 313,
+   "until": "6-02.w012",
+   "word": "6-02.w009",
+   "w": "without",
+   "key": "without#1",
+   "sid": "6-02.s2",
+   "word_f0": 232,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 47487,
+   "F_land": 47500,
+   "F_end": 47581
+  },
+  {
+   "id": "shape",
+   "obj": "shape",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "shape：标出缺少三维形状示意",
+   "f_start": 284,
+   "f_land": 294,
+   "f_end": 402,
+   "until": "6-02.w015",
+   "word": "6-02.w012",
+   "w": "shape,",
+   "key": "shape#1",
+   "sid": "6-02.s2",
+   "word_f0": 294,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 47552,
+   "F_land": 47562,
+   "F_end": 47670
+  },
+  {
+   "id": "exp",
+   "obj": "exp",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "expensive：副行第 1 枚小翻牌翻出 EXPENSIVE",
+   "f_start": 344,
+   "f_land": 357,
+   "f_end": 428,
+   "until": "6-02.w016",
+   "word": "6-02.w015",
+   "w": "expensive,",
+   "key": "expensive#1",
+   "sid": "6-02.s2",
+   "word_f0": 357,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "tags1"
+    ]
+   },
+   "F_start": 47612,
+   "F_land": 47625,
+   "F_end": 47696,
+   "g_start": 331,
+   "g_on": 349,
+   "g_end": 428,
+   "g_off": 458,
+   "g_tick": 353,
+   "G_start": 47599,
+   "G_on": 47617,
+   "G_end": 47696,
+   "G_off": 47726,
+   "G_tick": 47621
+  },
+  {
+   "id": "slow",
+   "obj": "slow",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "slow：副行第 2 枚小翻牌翻出 SLOW",
+   "f_start": 394,
+   "f_land": 407,
+   "f_end": 470,
+   "until": "6-02.w018",
+   "word": "6-02.w016",
+   "w": "slow",
+   "key": "slow#1",
+   "sid": "6-02.s2",
+   "word_f0": 407,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 47662,
+   "F_land": 47675,
+   "F_end": 47738
+  },
+  {
+   "id": "diff",
+   "obj": "diff",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "difficult：副行第 3 枚小翻牌翻出 DIFFICULT",
+   "f_start": 434,
+   "f_land": 444,
+   "f_end": 470,
+   "until": "6-02.s2",
+   "word": "6-02.w018",
+   "w": "difficult.",
+   "key": "difficult#1",
+   "sid": "6-02.s2",
+   "word_f0": 444,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 47702,
+   "F_land": 47712,
+   "F_end": 47738
+  },
+  {
+   "id": "now",
+   "obj": "now",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "Now：右凹位升起 4-02 同款蓝色 CDK20 预测卡片",
+   "f_start": 486,
+   "f_land": 499,
+   "f_end": 587,
+   "until": "6-02.w022",
+   "word": "6-02.w019",
+   "w": "Now:",
+   "key": "now#1",
+   "sid": "6-02.s3",
+   "word_f0": 499,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "now1"
+    ]
+   },
+   "F_start": 47754,
+   "F_land": 47767,
+   "F_end": 47855,
+   "g_start": 473,
+   "g_on": 491,
+   "g_end": 587,
+   "g_off": 617,
+   "g_tick": 495,
+   "G_start": 47741,
+   "G_on": 47759,
+   "G_end": 47855,
+   "G_off": 47885,
+   "G_tick": 47763
+  },
+  {
+   "id": "pred",
+   "obj": "pred",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "free prediction：NOW 主翻牌翻出 FREE PREDICTION",
+   "f_start": 540,
+   "f_land": 553,
+   "f_end": 652,
+   "until": "6-02.w023",
+   "word": "6-02.w022",
+   "w": "prediction,",
+   "key": "prediction#1",
+   "sid": "6-02.s3",
+   "word_f0": 553,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 47808,
+   "F_land": 47821,
+   "F_end": 47920
+  },
+  {
+   "id": "dl",
+   "obj": "dl",
+   "verb": "move",
+   "ease": "inout",
+   "means": "downloaded：数据流小图标落向 CDK20 卡片",
+   "f_start": 596,
+   "f_land": 624,
+   "f_end": 713,
+   "until": "6-02.w026",
+   "word": "6-02.w023",
+   "w": "downloaded",
+   "key": "downloaded#1",
+   "sid": "6-02.s3",
+   "word_f0": 624,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 47864,
+   "F_land": 47892,
+   "F_end": 47981
+  },
+  {
+   "id": "pub",
+   "obj": "pub",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "public：卡片旁亮出公共数据库小机柜图标",
+   "f_start": 675,
+   "f_land": 688,
+   "f_end": 753,
+   "until": "6-02.w027",
+   "word": "6-02.w026",
+   "w": "public",
+   "key": "public#1",
+   "sid": "6-02.s3",
+   "word_f0": 688,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 47943,
+   "F_land": 47956,
+   "F_end": 48021
+  },
+  {
+   "id": "db",
+   "obj": "db",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "database：NOW 副翻牌翻出 PUBLIC DATABASE（注 AlphaFold DB v6）",
+   "f_start": 708,
+   "f_land": 718,
+   "f_end": 753,
+   "until": "6-02.s3",
+   "word": "6-02.w027",
+   "w": "database.",
+   "key": "database#1",
+   "sid": "6-02.s3",
+   "word_f0": 718,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 47976,
+   "F_land": 47986,
+   "F_end": 48021
+  }
+ ],
+ "guides": [
+  {
+   "id": "bef",
+   "target": [
+    "before1"
+   ],
+   "kind": "focus",
+   "gs": 41,
+   "gon": 59,
+   "land": 67,
+   "gend": 187,
+   "goff": 217,
+   "tick": 63,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 60,
+   "events": [
+    "bef"
+   ],
+   "G_start": 47309,
+   "G_on": 47327,
+   "G_land": 47335,
+   "G_end": 47455,
+   "G_off": 47485,
+   "G_tick": 47331
+  },
+  {
+   "id": "exp",
+   "target": [
+    "tags1"
+   ],
+   "kind": "focus",
+   "gs": 331,
+   "gon": 349,
+   "land": 357,
+   "gend": 428,
+   "goff": 458,
+   "tick": 353,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 344,
+   "events": [
+    "exp"
+   ],
+   "G_start": 47599,
+   "G_on": 47617,
+   "G_land": 47625,
+   "G_end": 47696,
+   "G_off": 47726,
+   "G_tick": 47621
+  },
+  {
+   "id": "now",
+   "target": [
+    "now1"
+   ],
+   "kind": "focus",
+   "gs": 473,
+   "gon": 491,
+   "land": 499,
+   "gend": 587,
+   "goff": 617,
+   "tick": 495,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 486,
+   "events": [
+    "now"
+   ],
+   "G_start": 47741,
+   "G_on": 47759,
+   "G_land": 47767,
+   "G_end": 47855,
+   "G_off": 47885,
+   "G_tick": 47763
+  }
+ ],
+ "problems": []
+}

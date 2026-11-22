@@ -2,133 +2,89 @@
  "schema": "cdk20.events/1",
  "group": "4-07",
  "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 4-07（VO）：生成式 AI 把 4-06 那个循环搬进电脑。左边旧循环飞进屏幕；Chemistry42 平台，几十个模型并排，底下是已知化学；循环四站改写成 invent / score / learn / go again，新钥匙冲向右边这把锁；最后 within hours。页面 Manual407.jsx。",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 4-07（btier/B407.jsx）。4-06 的圆环接着在；Chemistry42 芯片落下，环缩小飞进芯片；芯片上方 36 个小环一个个长出来一起转（dozens of AI models），底板 known chemistry；金插头从芯片冒出、右边插座落下、每个插头长分数条，分数沿料杆流回小环（learn），再来一批；new structures within hours。",
+ "tier": "B",
+ "zone": 4,
+ "trans_in": "T2 甩进（上一段 4-06 是 B 页）",
+ "trans_out": "T5 runner（下一段 4-08 是出镜段）",
  "holds": [],
  "events": [
   {
-   "id": "title",
-   "obj": "title",
+   "id": "chip",
+   "obj": "chip",
    "verb": "appear",
    "at": {
-    "word": "4-07.w001",
+    "word": "ai#1",
     "off": 0
    },
-   "means": "Generative AI：标题",
+   "lead": 7,
+   "means": "Generative AI：Chemistry42 芯片落下",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "ai#1"
    }
   },
   {
-   "id": "ai",
-   "obj": "ai",
-   "verb": "appear",
-   "at": {
-    "word": "4-07.w002",
-    "off": 0
-   },
-   "means": "AI：副标题 Tool: generative design",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "4-07.w005"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "loop",
-   "obj": "loop",
-   "verb": "grow",
-   "at": {
-    "word": "4-07.w005",
-    "off": 0
-   },
-   "means": "that loop：左边旧循环（Imagine Make Test Tweak）",
-   "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "word": "4-07.w007"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "screen",
-   "obj": "screen",
-   "verb": "grow",
-   "at": {
-    "word": "4-07.w009",
-    "off": 0
-   },
-   "means": "inside：屏幕画出",
-   "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "word": "4-07.w011"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "move",
-   "obj": "move",
+   "id": "takes",
+   "obj": "takes",
    "verb": "move",
    "at": {
-    "word": "4-07.w011",
+    "word": "takes#1",
     "off": 0
    },
-   "means": "computer：循环飞进屏幕",
+   "lead": 13,
+   "means": "takes that loop：圆环被拎起来",
    "tool": "remotion",
-   "lead": 58,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "loop"
+    ]
+   },
+   "until": {
+    "word": "loop#1"
+   }
+  },
+  {
+   "id": "inside",
+   "obj": "inside",
+   "verb": "move",
+   "at": {
+    "word": "moves#1",
+    "off": 0
+   },
+   "lead": 30,
+   "means": "moves it inside a computer：圆环缩小飞进芯片",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chip"
+    ]
+   },
+   "until": {
+    "word": "computer#1"
    }
   },
   {
    "id": "plat",
    "obj": "plat",
-   "verb": "appear",
+   "verb": "move",
    "at": {
-    "word": "4-07.w013",
+    "word": "platform#1",
     "off": 0
    },
-   "means": "platform：屏幕上方名牌框",
+   "lead": 13,
+   "means": "The platform here, Chemistry42：芯片挪到左下",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "4-07.w015"
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "c42",
-   "obj": "c42",
-   "verb": "appear",
-   "at": {
-    "word": "4-07.w015",
-    "off": 0
    },
-   "means": "Chemistry42：名牌字",
-   "tool": "remotion",
-   "lead": 10,
    "until": {
-    "word": "4-07.w016"
-   },
-   "guide": {
-    "kind": "none"
+    "word": "chemistry42#1"
    }
   },
   {
@@ -136,35 +92,20 @@
    "obj": "dozens",
    "verb": "grow",
    "at": {
-    "word": "4-07.w017",
+    "word": "dozens#1",
     "off": 0
    },
-   "means": "dozens：模型小方块一个个长出",
+   "lead": 7,
+   "means": "dozens of AI models：36 个小环一个个长出来",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "4-07.w020"
-   },
    "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "models",
-   "obj": "models",
-   "verb": "appear",
-   "at": {
-    "word": "4-07.w020",
-    "off": 0
+    "kind": "focus",
+    "target": [
+     "grid"
+    ]
    },
-   "means": "AI models：标签",
-   "tool": "remotion",
-   "lead": 6,
    "until": {
-    "word": "4-07.w021"
-   },
-   "guide": {
-    "kind": "none"
+    "word": "models#1"
    }
   },
   {
@@ -172,203 +113,128 @@
    "obj": "side",
    "verb": "move",
    "at": {
-    "word": "4-07.w023",
+    "word": "side#1",
     "off": 0
    },
-   "means": "side by side：方块排齐",
+   "lead": 13,
+   "means": "side by side：小环一起转",
    "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "word": "4-07.w024"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "side#2"
    }
   },
   {
-   "id": "built",
-   "obj": "built",
-   "verb": "grow",
-   "at": {
-    "word": "4-07.w024",
-    "off": 0
-   },
-   "means": "built：底座",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "4-07.w026"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "chem",
-   "obj": "chem",
+   "id": "known",
+   "obj": "known",
    "verb": "appear",
    "at": {
-    "word": "4-07.w027",
+    "word": "known#1",
     "off": 0
    },
-   "means": "known chemistry：底座标签和书",
+   "lead": 7,
+   "means": "built on known chemistry：底板滑进来",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
    "id": "invent",
    "obj": "invent",
+   "verb": "grow",
+   "at": {
+    "word": "invent#1",
+    "off": 0
+   },
+   "lead": 7,
+   "means": "invent new molecules：金插头从芯片冒出来",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "molecules#1"
+   }
+  },
+  {
+   "id": "key",
+   "obj": "key",
    "verb": "appear",
    "at": {
-    "word": "4-07.w029",
+    "word": "keyhole#1",
     "off": 0
    },
-   "means": "invent：循环第一站改写并亮",
+   "lead": 7,
+   "means": "this exact keyhole：右边插座落下",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "4-07.w030"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "mol",
-   "obj": "mol",
-   "verb": "grow",
-   "at": {
-    "word": "4-07.w031",
-    "off": 0
-   },
-   "means": "molecules：新钥匙长出",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "4-07.w033"
-   },
    "guide": {
     "kind": "focus",
     "target": [
-     "key"
+     "socket"
     ]
-   }
-  },
-  {
-   "id": "exact",
-   "obj": "exact",
-   "verb": "grow",
-   "at": {
-    "word": "4-07.w034",
-    "off": 0
    },
-   "means": "exact：右边锁长出",
-   "tool": "remotion",
-   "lead": 6,
    "until": {
-    "word": "4-07.w035"
-   },
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "lock"
-    ]
-   }
-  },
-  {
-   "id": "keyhole",
-   "obj": "keyhole",
-   "verb": "move",
-   "at": {
-    "word": "4-07.w035",
-    "off": 0
-   },
-   "means": "keyhole：钥匙冲向锁，标签",
-   "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "word": "4-07.w036"
-   },
-   "guide": {
-    "kind": "none"
+    "word": "keyhole#1"
    }
   },
   {
    "id": "score",
    "obj": "score",
-   "verb": "appear",
+   "verb": "grow",
    "at": {
-    "word": "4-07.w036",
+    "word": "score#1",
     "off": 0
    },
-   "means": "score：第二站亮，钥匙旁打分条",
+   "lead": 13,
+   "means": "score them：每个插头旁边长一根分数条",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "4-07.w038"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "them#1"
    }
   },
   {
    "id": "learn",
    "obj": "learn",
-   "verb": "appear",
+   "verb": "move",
    "at": {
-    "word": "4-07.w038",
+    "word": "learn#1",
     "off": 0
    },
-   "means": "learn：第三站亮，分数回流箭头",
+   "lead": 13,
+   "means": "learn from the scores：分数沿料杆流回小环",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "4-07.w041"
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "scores",
-   "obj": "scores",
-   "verb": "morph",
-   "at": {
-    "word": "4-07.w041",
-    "off": 0
    },
-   "means": "scores：分数条闪",
-   "tool": "remotion",
-   "lead": 6,
    "until": {
-    "word": "4-07.w043"
-   },
-   "guide": {
-    "kind": "none"
+    "word": "scores#1"
    }
   },
   {
    "id": "again",
    "obj": "again",
-   "verb": "morph",
+   "verb": "move",
    "at": {
-    "word": "4-07.w044",
+    "word": "go#1",
     "off": 0
    },
-   "means": "go again：第四站亮，循环转一圈",
+   "lead": 13,
+   "means": "go again：小环转快，换一批插头",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
@@ -376,56 +242,38 @@
    "obj": "makers",
    "verb": "appear",
    "at": {
-    "word": "4-07.w046",
+    "word": "makers#1",
     "off": 0
    },
-   "means": "makers say：引号标签",
+   "lead": 10,
+   "means": "Its makers say：芯片下面挂 makers' claim 名牌",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "4-07.w049"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "say#1"
    }
   },
   {
-   "id": "turns",
-   "obj": "turns",
+   "id": "new",
+   "obj": "new",
    "verb": "grow",
    "at": {
-    "word": "4-07.w049",
+    "word": "new#2",
     "off": 0
    },
-   "means": "turns out：新结构一个接一个冒出",
+   "lead": 7,
+   "means": "new structures：插头一批批冒出来",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "4-07.w052"
-   },
    "guide": {
     "kind": "focus",
     "target": [
-     "key"
+     "new"
     ]
-   }
-  },
-  {
-   "id": "struct",
-   "obj": "struct",
-   "verb": "appear",
-   "at": {
-    "word": "4-07.w052",
-    "off": 0
    },
-   "means": "new structures：标签",
-   "tool": "remotion",
-   "lead": 8,
    "until": {
-    "word": "4-07.w053"
-   },
-   "guide": {
-    "kind": "none"
+    "word": "structures#1"
    }
   },
   {
@@ -433,17 +281,17 @@
    "obj": "hours",
    "verb": "appear",
    "at": {
-    "word": "4-07.w054",
+    "word": "hours#1",
     "off": 0
    },
-   "means": "within hours：钟和红批注",
-   "tool": "remotion",
    "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
+   "means": "within hours：标 within hours",
+   "tool": "remotion",
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   }
  ]

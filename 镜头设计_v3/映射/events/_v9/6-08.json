@@ -1,0 +1,192 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "6-08",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 6 章记分板整页 6-08（画外音）：pairs 逐行连起；different studies 虚线；scale and speed 右格各闪一下；not one race 红批注；论文引文 cost- and time-efficient 盖在表下。页面 Manual608.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "pairs",
+   "obj": "pairs",
+   "verb": "grow",
+   "at": {
+    "word": "6-08.w005",
+    "off": 0
+   },
+   "means": "pairs：每行左右格连起",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "word": "6-08.w005"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "diff",
+   "obj": "diff",
+   "verb": "grow",
+   "at": {
+    "word": "6-08.w008",
+    "off": 0
+   },
+   "means": "different studies：中缝变虚线，写标签",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "word": "6-08.w009"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "sc",
+   "obj": "sc",
+   "verb": "morph",
+   "at": {
+    "word": "6-08.w012",
+    "off": 0
+   },
+   "means": "scale：右格依次闪一下，写 scale and speed",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "6-08.w013"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "sp",
+   "obj": "sp",
+   "verb": "morph",
+   "at": {
+    "word": "6-08.w014",
+    "off": 0
+   },
+   "means": "speed：右格再闪一下",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "6-08.w014"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "nr",
+   "obj": "nr",
+   "verb": "appear",
+   "at": {
+    "word": "6-08.w017",
+    "off": 0
+   },
+   "means": "race：红批注 not one race",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-08.w017"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "side",
+   "obj": "side",
+   "verb": "morph",
+   "at": {
+    "word": "6-08.w021",
+    "off": 0
+   },
+   "means": "side：红批注下划线画出",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "6-08.w021"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "pap",
+   "obj": "pap",
+   "verb": "grow",
+   "at": {
+    "word": "6-08.w024",
+    "off": 0
+   },
+   "means": "paper：论文小图标和字牌框",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "6-08.w024"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "paper1"
+    ]
+   }
+  },
+  {
+   "id": "call",
+   "obj": "call",
+   "verb": "appear",
+   "at": {
+    "word": "6-08.w026",
+    "off": 0
+   },
+   "means": "calls：标签 the paper itself calls the work",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "6-08.w028"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "c1",
+   "obj": "c1",
+   "verb": "appear",
+   "at": {
+    "word": "6-08.w029",
+    "off": 0
+   },
+   "means": "cost-：写 cost-",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "6-08.w029"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "c2",
+   "obj": "c2",
+   "verb": "appear",
+   "at": {
+    "word": "6-08.w031",
+    "off": 0
+   },
+   "means": "time-efficient：写完 and time-efficient",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  }
+ ]
+}

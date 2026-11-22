@@ -1,0 +1,712 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "7-03",
+ "segs": [
+  "7-03"
+ ],
+ "tool": "remotion",
+ "fps": 60,
+ "len_f": 692,
+ "cut": "cut_v8",
+ "cut_start_f": 56754,
+ "cut_start_s": 945.9,
+ "master_built": "2026-11-18 02:33:56 +09:00",
+ "words_hash": "b370a9b7f7bd",
+ "events_src": "镜头设计_v3/映射/events/7-03.json",
+ "words": [
+  {
+   "wid": "7-03.w001",
+   "w": "Two:",
+   "key": "two#1",
+   "sid": "7-03.s1",
+   "f0": 9,
+   "f1": 25,
+   "F0": 56763,
+   "F1": 56779
+  },
+  {
+   "wid": "7-03.w002",
+   "w": "check",
+   "key": "check#1",
+   "sid": "7-03.s1",
+   "f0": 58,
+   "f1": 71,
+   "F0": 56812,
+   "F1": 56825
+  },
+  {
+   "wid": "7-03.w003",
+   "w": "the",
+   "key": "the#1",
+   "sid": "7-03.s1",
+   "f0": 74,
+   "f1": 80,
+   "F0": 56828,
+   "F1": 56834
+  },
+  {
+   "wid": "7-03.w004",
+   "w": "AlphaFold",
+   "key": "alphafold#1",
+   "sid": "7-03.s1",
+   "f0": 86,
+   "f1": 119,
+   "F0": 56840,
+   "F1": 56873
+  },
+  {
+   "wid": "7-03.w005",
+   "w": "model",
+   "key": "model#1",
+   "sid": "7-03.s1",
+   "f0": 125,
+   "f1": 142,
+   "F0": 56879,
+   "F1": 56896
+  },
+  {
+   "wid": "7-03.w006",
+   "w": "against",
+   "key": "against#1",
+   "sid": "7-03.s1",
+   "f0": 147,
+   "f1": 168,
+   "F0": 56901,
+   "F1": 56922
+  },
+  {
+   "wid": "7-03.w007",
+   "w": "a",
+   "key": "a#1",
+   "sid": "7-03.s1",
+   "f0": 172,
+   "f1": 174,
+   "F0": 56926,
+   "F1": 56928
+  },
+  {
+   "wid": "7-03.w008",
+   "w": "lab-measured",
+   "key": "lab-measured#1",
+   "sid": "7-03.s1",
+   "f0": 181,
+   "f1": 222,
+   "F0": 56935,
+   "F1": 56976
+  },
+  {
+   "wid": "7-03.w009",
+   "w": "structure,",
+   "key": "structure#1",
+   "sid": "7-03.s1",
+   "f0": 225,
+   "f1": 256,
+   "F0": 56979,
+   "F1": 57010
+  },
+  {
+   "wid": "7-03.w010",
+   "w": "once",
+   "key": "once#1",
+   "sid": "7-03.s1",
+   "f0": 291,
+   "f1": 303,
+   "F0": 57045,
+   "F1": 57057
+  },
+  {
+   "wid": "7-03.w011",
+   "w": "one",
+   "key": "one#1",
+   "sid": "7-03.s1",
+   "f0": 309,
+   "f1": 318,
+   "F0": 57063,
+   "F1": 57072
+  },
+  {
+   "wid": "7-03.w012",
+   "w": "exists.",
+   "key": "exists#1",
+   "sid": "7-03.s1",
+   "f0": 320,
+   "f1": 349,
+   "F0": 57074,
+   "F1": 57103
+  },
+  {
+   "wid": "7-03.w013",
+   "w": "And",
+   "key": "and#1",
+   "sid": "7-03.s2",
+   "f0": 387,
+   "f1": 394,
+   "F0": 57141,
+   "F1": 57148
+  },
+  {
+   "wid": "7-03.w014",
+   "w": "feed",
+   "key": "feed#1",
+   "sid": "7-03.s2",
+   "f0": 400,
+   "f1": 414,
+   "F0": 57154,
+   "F1": 57168
+  },
+  {
+   "wid": "7-03.w015",
+   "w": "every",
+   "key": "every#1",
+   "sid": "7-03.s2",
+   "f0": 422,
+   "f1": 435,
+   "F0": 57176,
+   "F1": 57189
+  },
+  {
+   "wid": "7-03.w016",
+   "w": "result,",
+   "key": "result#1",
+   "sid": "7-03.s2",
+   "f0": 440,
+   "f1": 470,
+   "F0": 57194,
+   "F1": 57224
+  },
+  {
+   "wid": "7-03.w017",
+   "w": "including",
+   "key": "including#1",
+   "sid": "7-03.s2",
+   "f0": 491,
+   "f1": 519,
+   "F0": 57245,
+   "F1": 57273
+  },
+  {
+   "wid": "7-03.w018",
+   "w": "the",
+   "key": "the#2",
+   "sid": "7-03.s2",
+   "f0": 521,
+   "f1": 524,
+   "F0": 57275,
+   "F1": 57278
+  },
+  {
+   "wid": "7-03.w019",
+   "w": "failures,",
+   "key": "failures#1",
+   "sid": "7-03.s2",
+   "f0": 529,
+   "f1": 563,
+   "F0": 57283,
+   "F1": 57317
+  },
+  {
+   "wid": "7-03.w020",
+   "w": "back",
+   "key": "back#1",
+   "sid": "7-03.s2",
+   "f0": 594,
+   "f1": 607,
+   "F0": 57348,
+   "F1": 57361
+  },
+  {
+   "wid": "7-03.w021",
+   "w": "into",
+   "key": "into#1",
+   "sid": "7-03.s2",
+   "f0": 611,
+   "f1": 627,
+   "F0": 57365,
+   "F1": 57381
+  },
+  {
+   "wid": "7-03.w022",
+   "w": "the",
+   "key": "the#3",
+   "sid": "7-03.s2",
+   "f0": 632,
+   "f1": 636,
+   "F0": 57386,
+   "F1": 57390
+  },
+  {
+   "wid": "7-03.w023",
+   "w": "next",
+   "key": "next#1",
+   "sid": "7-03.s2",
+   "f0": 639,
+   "f1": 656,
+   "F0": 57393,
+   "F1": 57410
+  },
+  {
+   "wid": "7-03.w024",
+   "w": "round.",
+   "key": "round#1",
+   "sid": "7-03.s2",
+   "f0": 661,
+   "f1": 678,
+   "F0": 57415,
+   "F1": 57432
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "7-03.s1",
+   "text": "Two: check the AlphaFold model against a lab-measured structure, once one exists.",
+   "w_first": "7-03.w001",
+   "w_last": "7-03.w012",
+   "f0": 9,
+   "f1": 349
+  },
+  {
+   "sid": "7-03.s2",
+   "text": "And feed every result, including the failures, back into the next round.",
+   "w_first": "7-03.w013",
+   "w_last": "7-03.w024",
+   "f0": 387,
+   "f1": 678
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "p2",
+   "obj": "p2",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "Two：2 号编号牌落位",
+   "f_start": 2,
+   "f_land": 9,
+   "f_end": 119,
+   "until": "7-03.w004",
+   "word": "7-03.w001",
+   "w": "Two:",
+   "key": "two#1",
+   "sid": "7-03.s1",
+   "word_f0": 9,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 56756,
+   "F_land": 56763,
+   "F_end": 56873
+  },
+  {
+   "id": "af",
+   "obj": "af",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "AlphaFold：蓝色预测 CDK20 模型落位转正",
+   "f_start": 73,
+   "f_land": 86,
+   "f_end": 142,
+   "until": "7-03.w005",
+   "word": "7-03.w004",
+   "w": "AlphaFold",
+   "key": "alphafold#1",
+   "sid": "7-03.s1",
+   "word_f0": 86,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "af"
+    ]
+   },
+   "F_start": 56827,
+   "F_land": 56840,
+   "F_end": 56896,
+   "g_start": 60,
+   "g_on": 78,
+   "g_end": 142,
+   "g_off": 172,
+   "g_tick": 82,
+   "G_start": 56814,
+   "G_on": 56832,
+   "G_end": 56896,
+   "G_off": 56926,
+   "G_tick": 56836
+  },
+  {
+   "id": "aflbl",
+   "obj": "aflbl",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "model：标 predicted model (AlphaFold DB v6)",
+   "f_start": 116,
+   "f_land": 125,
+   "f_end": 222,
+   "until": "7-03.w008",
+   "word": "7-03.w005",
+   "w": "model",
+   "key": "model#1",
+   "sid": "7-03.s1",
+   "word_f0": 125,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 56870,
+   "F_land": 56879,
+   "F_end": 56976
+  },
+  {
+   "id": "ghost_in",
+   "obj": "ghost_in",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "lab-measured：磨砂幽灵外壳在上方现身",
+   "f_start": 171,
+   "f_land": 181,
+   "f_end": 256,
+   "until": "7-03.w009",
+   "word": "7-03.w008",
+   "w": "lab-measured",
+   "key": "lab-measured#1",
+   "sid": "7-03.s1",
+   "word_f0": 181,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 56925,
+   "F_land": 56935,
+   "F_end": 57010
+  },
+  {
+   "id": "ghost",
+   "obj": "ghost",
+   "verb": "move",
+   "ease": "inout",
+   "means": "structure：幽灵外壳慢慢落下罩在模型上，对不准处留一道缝",
+   "f_start": 181,
+   "f_land": 225,
+   "f_end": 303,
+   "until": "7-03.w010",
+   "word": "7-03.w009",
+   "w": "structure,",
+   "key": "structure#1",
+   "sid": "7-03.s1",
+   "word_f0": 225,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "ghost"
+    ]
+   },
+   "F_start": 56935,
+   "F_land": 56979,
+   "F_end": 57057,
+   "g_start": 199,
+   "g_on": 217,
+   "g_end": 303,
+   "g_off": 333,
+   "g_tick": 221,
+   "G_start": 56953,
+   "G_on": 56971,
+   "G_end": 57057,
+   "G_off": 57087,
+   "G_tick": 56975
+  },
+  {
+   "id": "once",
+   "obj": "once",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "once：外壳半透明慢闪，标 measured structure?",
+   "f_start": 282,
+   "f_land": 291,
+   "f_end": 349,
+   "until": "7-03.w012",
+   "word": "7-03.w010",
+   "w": "once",
+   "key": "once#1",
+   "sid": "7-03.s1",
+   "word_f0": 291,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 57036,
+   "F_land": 57045,
+   "F_end": 57103
+  },
+  {
+   "id": "q",
+   "obj": "q",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "exists：缝隙旁出现红色问号",
+   "f_start": 311,
+   "f_land": 320,
+   "f_end": 349,
+   "until": "7-03.s1",
+   "word": "7-03.w012",
+   "w": "exists.",
+   "key": "exists#1",
+   "sid": "7-03.s1",
+   "word_f0": 320,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 57065,
+   "F_land": 57074,
+   "F_end": 57103
+  },
+  {
+   "id": "shift",
+   "obj": "shift",
+   "verb": "move",
+   "ease": "inout",
+   "means": "feed：模型与外壳左移，Chemistry42 芯片与料杆进来",
+   "f_start": 387,
+   "f_land": 400,
+   "f_end": 470,
+   "until": "7-03.w016",
+   "word": "7-03.w014",
+   "w": "feed",
+   "key": "feed#1",
+   "sid": "7-03.s2",
+   "word_f0": 400,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 57141,
+   "F_land": 57154,
+   "F_end": 57224
+  },
+  {
+   "id": "keys",
+   "obj": "keys",
+   "verb": "move",
+   "ease": "inout",
+   "means": "every result：一排金钥匙沿料杆流回 Chemistry42 芯片",
+   "f_start": 412,
+   "f_land": 440,
+   "f_end": 563,
+   "until": "7-03.w019",
+   "word": "7-03.w016",
+   "w": "result,",
+   "key": "result#1",
+   "sid": "7-03.s2",
+   "word_f0": 440,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "keys"
+    ]
+   },
+   "F_start": 57166,
+   "F_land": 57194,
+   "F_end": 57317,
+   "g_start": 414,
+   "g_on": 432,
+   "g_end": 503,
+   "g_off": 521,
+   "g_tick": 436,
+   "G_start": 57168,
+   "G_on": 57186,
+   "G_end": 57257,
+   "G_off": 57275,
+   "G_tick": 57190
+  },
+  {
+   "id": "fail",
+   "obj": "fail",
+   "verb": "move",
+   "ease": "inout",
+   "means": "failures：几把灰色打叉的钥匙也一起流回",
+   "f_start": 499,
+   "f_land": 529,
+   "f_end": 607,
+   "until": "7-03.w020",
+   "word": "7-03.w019",
+   "w": "failures,",
+   "key": "failures#1",
+   "sid": "7-03.s2",
+   "word_f0": 529,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "fail"
+    ]
+   },
+   "F_start": 57253,
+   "F_land": 57283,
+   "F_end": 57361,
+   "g_start": 503,
+   "g_on": 521,
+   "g_end": 607,
+   "g_off": 637,
+   "g_tick": 525,
+   "G_start": 57257,
+   "G_on": 57275,
+   "G_end": 57361,
+   "G_off": 57391,
+   "G_tick": 57279
+  },
+  {
+   "id": "back",
+   "obj": "back",
+   "verb": "move",
+   "ease": "inout",
+   "means": "back into：所有钥匙汇入芯片入口",
+   "f_start": 581,
+   "f_land": 594,
+   "f_end": 678,
+   "until": "7-03.w024",
+   "word": "7-03.w020",
+   "w": "back",
+   "key": "back#1",
+   "sid": "7-03.s2",
+   "word_f0": 594,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 57335,
+   "F_land": 57348,
+   "F_end": 57432
+  },
+  {
+   "id": "loop",
+   "obj": "loop",
+   "verb": "snap",
+   "ease": "inout",
+   "means": "next round：芯片内小轨道转一圈，准备下一轮",
+   "f_start": 648,
+   "f_land": 661,
+   "f_end": 678,
+   "until": "7-03.s2",
+   "word": "7-03.w024",
+   "w": "round.",
+   "key": "round#1",
+   "sid": "7-03.s2",
+   "word_f0": 661,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 57402,
+   "F_land": 57415,
+   "F_end": 57432
+  }
+ ],
+ "guides": [
+  {
+   "id": "af",
+   "target": [
+    "af"
+   ],
+   "kind": "focus",
+   "gs": 60,
+   "gon": 78,
+   "land": 86,
+   "gend": 142,
+   "goff": 172,
+   "tick": 82,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 73,
+   "events": [
+    "af"
+   ],
+   "G_start": 56814,
+   "G_on": 56832,
+   "G_land": 56840,
+   "G_end": 56896,
+   "G_off": 56926,
+   "G_tick": 56836
+  },
+  {
+   "id": "ghost",
+   "target": [
+    "ghost"
+   ],
+   "kind": "focus",
+   "gs": 199,
+   "gon": 217,
+   "land": 225,
+   "gend": 303,
+   "goff": 333,
+   "tick": 221,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 181,
+   "events": [
+    "ghost"
+   ],
+   "G_start": 56953,
+   "G_on": 56971,
+   "G_land": 56979,
+   "G_end": 57057,
+   "G_off": 57087,
+   "G_tick": 56975
+  },
+  {
+   "id": "keys",
+   "target": [
+    "keys"
+   ],
+   "kind": "focus",
+   "gs": 414,
+   "gon": 432,
+   "land": 440,
+   "gend": 503,
+   "goff": 521,
+   "tick": 436,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 412,
+   "events": [
+    "keys"
+   ],
+   "handoff": "fail",
+   "G_start": 57168,
+   "G_on": 57186,
+   "G_land": 57194,
+   "G_end": 57257,
+   "G_off": 57275,
+   "G_tick": 57190
+  },
+  {
+   "id": "fail",
+   "target": [
+    "fail"
+   ],
+   "kind": "focus",
+   "gs": 503,
+   "gon": 521,
+   "land": 529,
+   "gend": 607,
+   "goff": 637,
+   "tick": 525,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 499,
+   "events": [
+    "fail"
+   ],
+   "G_start": 57257,
+   "G_on": 57275,
+   "G_land": 57283,
+   "G_end": 57361,
+   "G_off": 57391,
+   "G_tick": 57279
+  }
+ ],
+ "problems": []
+}

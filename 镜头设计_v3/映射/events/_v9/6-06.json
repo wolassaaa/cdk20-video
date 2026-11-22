@@ -1,0 +1,243 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "6-06",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 6 章记分板第三行 6-06（画外音）：Time；左格一条很长的路 10–17 years，开头一小段画红；右格短路 30 days，再接一段 another 30。页面 Manual606.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "lbl",
+   "obj": "lbl",
+   "verb": "appear",
+   "at": {
+    "word": "6-06.w001",
+    "off": 0
+   },
+   "means": "Time：行标题",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-06.w001"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "road",
+   "obj": "road",
+   "verb": "grow",
+   "at": {
+    "word": "6-06.w004",
+    "off": 0
+   },
+   "means": "ten-to-seventeen-year：长路画出",
+   "tool": "remotion",
+   "lead": 50,
+   "until": {
+    "word": "6-06.w004"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "yrs",
+   "obj": "yrs",
+   "verb": "appear",
+   "at": {
+    "word": "6-06.w005",
+    "off": 0
+   },
+   "means": "road：标签 10–17 years",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-06.w005"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "hitl",
+   "obj": "hitl",
+   "verb": "appear",
+   "at": {
+    "word": "6-06.w009",
+    "off": 0
+   },
+   "means": "hit：路起点标 finding a hit",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "6-06.w009"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "brk",
+   "obj": "brk",
+   "verb": "grow",
+   "at": {
+    "word": "6-06.w010",
+    "off": 0
+   },
+   "means": "just：括号框住开头一段",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-06.w010"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "red",
+   "obj": "red",
+   "verb": "morph",
+   "at": {
+    "word": "6-06.w012",
+    "off": 0
+   },
+   "means": "opening：开头一段画红",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "6-06.w013"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "now",
+   "obj": "now",
+   "verb": "appear",
+   "at": {
+    "word": "6-06.w014",
+    "off": 0
+   },
+   "means": "Now：右栏亮起",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-06.w014"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "r1",
+   "obj": "r1",
+   "verb": "grow",
+   "at": {
+    "word": "6-06.w015",
+    "off": 0
+   },
+   "means": "30：短路第一段画出",
+   "tool": "remotion",
+   "lead": 24,
+   "until": {
+    "word": "6-06.w015"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "d30",
+   "obj": "d30",
+   "verb": "appear",
+   "at": {
+    "word": "6-06.w016",
+    "off": 0
+   },
+   "means": "days：标签 30 days",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "6-06.w016"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "fh",
+   "obj": "fh",
+   "verb": "appear",
+   "at": {
+    "word": "6-06.w020",
+    "off": 0
+   },
+   "means": "hit：第一段终点小旗",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-06.w020"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "bk",
+   "obj": "bk",
+   "verb": "appear",
+   "at": {
+    "word": "6-06.w024",
+    "off": 0
+   },
+   "means": "key：钥匙落在第一段终点",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-06.w024"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "r2",
+   "obj": "r2",
+   "verb": "grow",
+   "at": {
+    "word": "6-06.w026",
+    "off": 0
+   },
+   "means": "another：短路再接一段",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "word": "6-06.w026"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "a30",
+   "obj": "a30",
+   "verb": "move",
+   "at": {
+    "word": "6-06.w027",
+    "off": 0
+   },
+   "means": "30：标签 another 30，钥匙滑到终点",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  }
+ ]
+}

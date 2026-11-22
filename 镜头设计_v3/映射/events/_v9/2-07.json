@@ -1,0 +1,298 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "2-07",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 2 章二维说明书页。左边六张卡，放大镜扫过；右边核对表五问逐条打勾；下半：主论文的 Conflicts of interest，作者多在英矽智能（造了这些 AI 工具），公开声明；结论字牌 Useful evidence, not an independent check。出处 R23 Conflicts of interest。页面 Manual207.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "cards",
+   "obj": "cards",
+   "verb": "grow",
+   "at": {
+    "word": "2-07.w002",
+    "off": 0
+   },
+   "means": "every source：六张卡依次长出",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "2-07.w003"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "mag",
+   "obj": "magnifier",
+   "verb": "move",
+   "at": {
+    "word": "2-07.w004",
+    "off": 0
+   },
+   "means": "we asked：放大镜扫过卡片",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "word": "2-07.w009"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "magnifier1"
+    ]
+   }
+  },
+  {
+   "id": "head",
+   "obj": "q_head",
+   "verb": "appear",
+   "at": {
+    "word": "2-07.w003",
+    "off": 0
+   },
+   "means": "source：核对表标题 For every source",
+   "tool": "remotion",
+   "until": {
+    "word": "2-07.w005"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "q1",
+   "obj": "q1",
+   "verb": "appear",
+   "at": {
+    "word": "2-07.w006",
+    "off": 0
+   },
+   "means": "what kind：第 1 问",
+   "tool": "remotion",
+   "until": {
+    "word": "2-07.w009"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "q2",
+   "obj": "q2",
+   "verb": "appear",
+   "at": {
+    "word": "2-07.w010",
+    "off": 0
+   },
+   "means": "how much did we read：第 2 问",
+   "tool": "remotion",
+   "until": {
+    "word": "2-07.w014"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "q3",
+   "obj": "q3",
+   "verb": "appear",
+   "at": {
+    "word": "2-07.w016",
+    "off": 0
+   },
+   "means": "how strong：第 3 问",
+   "tool": "remotion",
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "q4",
+   "obj": "q4",
+   "verb": "appear",
+   "at": {
+    "word": "2-07.w021",
+    "off": 0
+   },
+   "means": "Who did the work：第 4 问",
+   "tool": "remotion",
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "q5",
+   "obj": "q5",
+   "verb": "appear",
+   "at": {
+    "word": "2-07.w027",
+    "off": 0
+   },
+   "means": "controls and repeats：第 5 问",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "note",
+   "obj": "note_worth",
+   "verb": "appear",
+   "at": {
+    "word": "2-07.w031",
+    "off": 0
+   },
+   "means": "One thing worth knowing：红笔",
+   "tool": "remotion",
+   "until": {
+    "word": "2-07.w033"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "coi",
+   "obj": "coi_heading",
+   "verb": "appear",
+   "at": {
+    "word": "2-07.w034",
+    "off": 0
+   },
+   "means": "most authors：Conflicts of interest 标题打出来，墨色括号",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "2-07.w041"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "tower",
+   "obj": "tower",
+   "verb": "grow",
+   "at": {
+    "word": "2-07.w042",
+    "off": 0
+   },
+   "means": "Insilico Medicine：英矽智能楼长出，印名字",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "2-07.w043"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "tower"
+    ]
+   }
+  },
+  {
+   "id": "chip",
+   "obj": "chip",
+   "verb": "grow",
+   "at": {
+    "word": "2-07.w045",
+    "off": 0
+   },
+   "means": "built its AI tools：芯片长出，连线到楼",
+   "tool": "remotion",
+   "lead": 4,
+   "until": {
+    "word": "2-07.w048"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chip"
+    ]
+   }
+  },
+  {
+   "id": "open",
+   "obj": "stamp_declared",
+   "verb": "appear",
+   "at": {
+    "word": "2-07.w052",
+    "off": 0
+   },
+   "means": "say so openly：盖章 declared in the paper",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "useful",
+   "obj": "plate_useful",
+   "verb": "appear",
+   "at": {
+    "word": "2-07.w053",
+    "off": 0
+   },
+   "means": "Useful evidence：字牌前半",
+   "tool": "remotion",
+   "until": {
+    "word": "2-07.w054"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "notind",
+   "obj": "plate_notind",
+   "verb": "appear",
+   "at": {
+    "word": "2-07.w055",
+    "off": 0
+   },
+   "means": "not an independent check：字牌后半",
+   "tool": "remotion",
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "magdown",
+   "obj": "magnifier",
+   "verb": "move",
+   "at": {
+    "word": "2-07.w030",
+    "off": 0
+   },
+   "means": "One thing：放大镜滑到下半页利益声明",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "2-07.w033"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  }
+ ]
+}

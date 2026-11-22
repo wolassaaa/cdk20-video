@@ -1,128 +1,188 @@
 {
  "schema": "cdk20.events/1",
- "group": "1-05+1-06+1-07",
- "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：出镜对话 1-05（D）、1-06（B）、1-07（C），说话人之间硬切，右边讲解位一张图连贯不断：药 → 更好的药？→ 一条长路 → 尺子上 10–17 years。页面 src/v3/manual/OnCam105.jsx。",
+ "group": "1-05_1-06_1-07",
+ "tool": "blender",
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜 1-05_1-06_1-07（D/B/C）三维版（11-20 夜甲线，技能 oncam-3d-parts）：人在左，右边一把没齿的金钥匙坯（h02 blank）挂在浇口上；B 说时钥匙后面的料杆一路伸长、拐弯、伸出画面；C 说时一把卷尺弹出来拉到 17。 主零件自己做段首段尾转场。Blender：inserts/shot_oncam.py recipe key_tape。旧二维版事件表存 _wip/1-05_1-06_1-07_events_v1_2d.json。",
  "holds": [],
  "events": [
   {
-   "id": "cap",
-   "obj": "capsule",
-   "verb": "grow",
+   "id": "arrive",
+   "obj": "key",
+   "verb": "move",
    "at": {
     "word": "1-05.w001",
     "off": 0
    },
-   "means": "So：胶囊长出",
-   "tool": "remotion",
-   "lead": 4,
+   "lead": 32,
+   "ease": "out",
+   "means": "So：钥匙坯从镜头前（段首盖满画面）退回 D 的右侧落位，挂在浇口上",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
-    "dur": 26
+    "word": "1-05.w001"
    }
   },
   {
    "id": "why",
-   "obj": "note_why",
-   "verb": "appear",
+   "obj": "key",
+   "verb": "move",
    "at": {
     "word": "1-05.w002",
     "off": 0
    },
-   "means": "why not：红笔问号 why not?",
-   "tool": "remotion",
+   "lead": 6,
+   "ease": "out",
+   "means": "why：钥匙坯歪头似地转一下",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
-    "word": "1-05.w004"
+    "dur": 22
+   }
+  },
+  {
+   "id": "make",
+   "obj": "key",
+   "verb": "move",
+   "at": {
+    "word": "1-05.w005",
+    "off": 0
+   },
+   "lead": 8,
+   "ease": "out",
+   "means": "make：钥匙坯往前一抬",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "dur": 16
    }
   },
   {
    "id": "better",
-   "obj": "capsule",
-   "verb": "morph",
+   "obj": "key",
+   "verb": "power_on",
    "at": {
     "word": "1-05.w007",
     "off": 0
    },
-   "means": "better：胶囊发亮，旁边写 + better?",
-   "tool": "remotion",
-   "lead": 6,
+   "lead": 4,
+   "ease": "out",
+   "means": "better one：钥匙坯亮一下（金光一闪）",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
-    "sentence_end": true
+    "word": "1-05.w008"
    }
   },
   {
-   "id": "road",
-   "obj": "road",
+   "id": "path",
+   "obj": "runner",
    "verb": "grow",
    "at": {
     "word": "1-06.w001",
     "off": 0
    },
-   "means": "Because…sounds：七站的路从左画到右",
-   "tool": "remotion",
    "lead": 4,
-   "until": {
-    "sentence_end": true
-   }
-  },
-  {
-   "id": "harder",
-   "obj": "road",
-   "verb": "morph",
-   "at": {
-    "word": "1-06.w004",
-    "off": 0
+   "ease": "inout",
+   "means": "Because … sounds：钥匙坯后面的料杆一路伸长、拐弯，伸出画面",
+   "guide": {
+    "kind": "none"
    },
-   "means": "harder：路变长，站点之间拉开",
-   "tool": "remotion",
-   "lead": 4,
    "until": {
     "word": "1-06.w007"
    }
   },
   {
-   "id": "ruler",
-   "obj": "ruler",
+   "id": "harder",
+   "obj": "runner",
+   "verb": "move",
+   "at": {
+    "word": "1-06.w004",
+    "off": 0
+   },
+   "lead": 4,
+   "ease": "out",
+   "means": "harder：料杆拐一个急弯，钥匙坯被带得一晃",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "dur": 18
+   }
+  },
+  {
+   "id": "tape",
+   "obj": "tape",
    "verb": "grow",
    "at": {
     "word": "1-07.w001",
     "off": 0
    },
-   "means": "Like：尺子沿路长出",
-   "tool": "remotion",
-   "lead": 4,
+   "lead": 10,
+   "ease": "out",
+   "means": "Like：一把卷尺从下面弹出来",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
-    "word": "1-07.w002",
-    "edge": "start"
+    "dur": 22
    }
   },
   {
-   "id": "plate",
-   "obj": "plate_years",
-   "verb": "appear",
+   "id": "extend",
+   "obj": "tape",
+   "verb": "move",
    "at": {
     "word": "1-07.w002",
     "off": 0
    },
-   "means": "ten-to-seventeen-years：数字牌 10–17 years",
-   "tool": "remotion",
-   "lead": 2,
+   "lead": 4,
+   "ease": "inout",
+   "means": "ten-to-seventeen-years：尺带拉出来，刻度一路过 10，停在 17",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
     "word": "1-07.w002"
    }
   },
   {
-   "id": "hard",
-   "obj": "plate_years",
-   "verb": "morph",
+   "id": "lock",
+   "obj": "tape",
+   "verb": "snap",
    "at": {
     "word": "1-07.w003",
     "off": 0
    },
-   "means": "hard：数字牌一沉，红线划下",
-   "tool": "remotion",
-   "lead": 4,
+   "lead": 2,
+   "ease": "out",
+   "means": "hard：锁扣咔地按下，尺带一顿",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
     "sentence_end": true
+   }
+  },
+  {
+   "id": "dive",
+   "obj": "key",
+   "verb": "move",
+   "at": {
+    "word": "1-07.w003",
+    "off": 62
+   },
+   "lead": 40,
+   "ease": "in",
+   "means": "（说完）钥匙坯冲进镜头（段尾，接 1-08）",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "dur": 0
    }
   }
  ]

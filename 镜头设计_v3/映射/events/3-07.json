@@ -2,46 +2,32 @@
  "schema": "cdk20.events/1",
  "group": "3-07",
  "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 3-07（VO）：PandaOmics 是一个漏斗（芯片盖牌），十张数据集卡片落进漏斗口，卡片上点数跳成肿瘤和健康样本，论文也飞进去；漏斗吐出 top 20 排名表，小人逐行打勾，CDK20 那一行升到第一，红批注 no approved drug yet。页面 Manual307.jsx。",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 3-07（btier/B307.jsx）。2023 年份牌，PandaOmics 芯片，CDK20 小插座打勾（hunch）；十个数据架依次落下，数据沿料杆流进芯片；1,133 个肿瘤样本（蓝点）、674 个健康样本（灰点）；论文飞进芯片；Top 20 表一行行画出、小人逐行打勾，CDK20 那一行升到第一；胶囊变灰画斜杠，手写 no approved drug yet。",
+ "tier": "B",
+ "zone": 3,
+ "trans_in": "T5 runner（上一段 3-06 是出镜段）",
+ "trans_out": "T2 甩镜往左（下一段 3-08 是 B 页）",
  "holds": [],
  "events": [
   {
-   "id": "title",
-   "obj": "title",
+   "id": "y23",
+   "obj": "y23",
    "verb": "appear",
    "at": {
-    "word": "3-07.w002",
+    "word": "2023#1",
     "off": 0
    },
-   "means": "2023：标题 In 2023, an AI platform",
+   "lead": 7,
+   "means": "In 2023：年份牌落下",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "ai",
-   "obj": "ai",
-   "verb": "grow",
-   "at": {
-    "word": "3-07.w004",
-    "off": 0
-   },
-   "means": "AI：漏斗画出，芯片在漏斗颈长出",
-   "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "focus",
     "target": [
-     "chip"
+     "year"
     ]
+   },
+   "until": {
+    "word": "2023#1"
    }
   },
   {
@@ -49,182 +35,95 @@
    "obj": "panda",
    "verb": "appear",
    "at": {
-    "word": "3-07.w007",
+    "word": "pandaomics#1",
     "off": 0
    },
-   "means": "PandaOmics：芯片盖深色牌写 PandaOmics",
+   "lead": 7,
+   "means": "PandaOmics：芯片落下",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "pandaomics#1"
    }
   },
   {
-   "id": "backed",
-   "obj": "backed",
-   "verb": "morph",
+   "id": "hunch",
+   "obj": "hunch",
+   "verb": "appear",
    "at": {
-    "word": "3-07.w008",
+    "word": "backed#1",
     "off": 0
    },
-   "means": "backed：芯片亮一下，漏斗口的梳齿画出",
+   "lead": 10,
+   "means": "backed that hunch：小插座落下打勾，手写 hunch",
    "tool": "remotion",
-   "lead": 8,
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chip"
+    ]
+   },
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
    }
   },
   {
    "id": "ten",
    "obj": "ten",
-   "verb": "move",
-   "at": {
-    "word": "3-07.w013",
-    "off": 0
-   },
-   "means": "ten：卡片开始一张张落进漏斗口，计数跳",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "sets",
-   "obj": "sets",
-   "verb": "appear",
-   "at": {
-    "word": "3-07.w017",
-    "off": 0
-   },
-   "means": "data sets：第 10 张落定，写 10 data sets",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "thou",
-   "obj": "thou",
-   "verb": "morph",
-   "at": {
-    "word": "3-07.w020",
-    "off": 0
-   },
-   "means": "thousand：卡片上实心点长满，计数跳到 1,133",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "samp",
-   "obj": "samp",
-   "verb": "appear",
-   "at": {
-    "word": "3-07.w022",
-    "off": 0
-   },
-   "means": "samples：写 tumour",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "hund",
-   "obj": "hund",
-   "verb": "morph",
-   "at": {
-    "word": "3-07.w024",
-    "off": 0
-   },
-   "means": "hundreds：卡片上空心点长出，计数跳到 674",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "healthy",
-   "obj": "healthy",
-   "verb": "appear",
-   "at": {
-    "word": "3-07.w026",
-    "off": 0
-   },
-   "means": "healthy：写 healthy",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "plus",
-   "obj": "plus",
-   "verb": "appear",
-   "at": {
-    "word": "3-07.w028",
-    "off": 0
-   },
-   "means": "plus：写 + papers 的加号",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "research",
-   "obj": "research",
    "verb": "grow",
    "at": {
-    "word": "3-07.w029",
+    "word": "ten#1",
     "off": 0
    },
-   "means": "research：左下长出一叠论文，写 research papers",
+   "lead": 7,
+   "means": "ten liver cancer data sets：十个数据架依次落下，数字轮 10",
    "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "focus",
     "target": [
-     "paper1"
+     "sets"
     ]
+   },
+   "until": {
+    "word": "sets#1"
+   }
+  },
+  {
+   "id": "tum",
+   "obj": "tum",
+   "verb": "grow",
+   "at": {
+    "word": "thousand#1",
+    "off": 0
+   },
+   "lead": 36,
+   "means": "over a thousand tumour samples：蓝点长满，数字轮 1,133",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "samples#1"
+   }
+  },
+  {
+   "id": "hl",
+   "obj": "hl",
+   "verb": "grow",
+   "at": {
+    "word": "hundreds#1",
+    "off": 0
+   },
+   "lead": 36,
+   "means": "hundreds of healthy ones：灰点长满，数字轮 674",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "ones#1"
    }
   },
   {
@@ -232,218 +131,110 @@
    "obj": "papers",
    "verb": "move",
    "at": {
-    "word": "3-07.w030",
+    "word": "plus#1",
     "off": 0
    },
-   "means": "papers：一叠纸飞进漏斗，沉进芯片",
+   "lead": 13,
+   "means": "plus research papers：一叠论文飞进芯片",
    "tool": "remotion",
-   "lead": 24,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
    "id": "people",
    "obj": "people",
-   "verb": "grow",
+   "verb": "appear",
    "at": {
-    "word": "3-07.w031",
+    "word": "people#1",
     "off": 0
    },
-   "means": "People：小人长出",
+   "lead": 7,
+   "means": "People checked：清场，两个小人落下",
    "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "sentence_end": true
+   "guide": {
+    "kind": "none"
    },
+   "until": {
+    "word": "checked#1"
+   }
+  },
+  {
+   "id": "top20",
+   "obj": "top20",
+   "verb": "grow",
+   "at": {
+    "word": "top#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "its top 20 by hand：表格一行行画出，逐行打勾",
+   "tool": "remotion",
    "guide": {
     "kind": "focus",
     "target": [
-     "person_w"
+     "table"
     ]
+   },
+   "until": {
+    "word": "hand#1"
    }
   },
   {
-   "id": "checked",
-   "obj": "checked",
-   "verb": "appear",
+   "id": "cdkl",
+   "obj": "cdkl",
+   "verb": "move",
    "at": {
-    "word": "3-07.w032",
+    "word": "cdk20#1",
     "off": 0
    },
-   "means": "checked：漏斗出口到排名表的箭头",
+   "lead": 13,
+   "means": "and CDK20：蓝色那一行亮一下",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "top",
-   "obj": "top",
-   "verb": "grow",
-   "at": {
-    "word": "3-07.w034",
-    "off": 0
    },
-   "means": "top：排名表框和表头 top 20",
-   "tool": "remotion",
-   "lead": 12,
    "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "twenty",
-   "obj": "twenty",
-   "verb": "appear",
-   "at": {
-    "word": "3-07.w035",
-    "off": 0
-   },
-   "means": "20：20 行一行行画出",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "hand",
-   "obj": "hand",
-   "verb": "appear",
-   "at": {
-    "word": "3-07.w037",
-    "off": 0
-   },
-   "means": "by hand：小人逐行打红勾",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
+    "word": "cdk20#1"
    }
   },
   {
    "id": "cdk",
    "obj": "cdk",
-   "verb": "appear",
-   "at": {
-    "word": "3-07.w039",
-    "off": 0
-   },
-   "means": "CDK20：中间一行写 CDK20，加深",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "came",
-   "obj": "came",
    "verb": "move",
    "at": {
-    "word": "3-07.w040",
+    "word": "came#1",
     "off": 0
    },
-   "means": "came：这一行往左探出",
+   "lead": 13,
+   "means": "CDK20 came out on top：蓝色那一行升到第一",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "top#2"
    }
   },
   {
-   "id": "top2",
-   "obj": "top2",
-   "verb": "move",
-   "at": {
-    "word": "3-07.w043",
-    "off": 0
-   },
-   "means": "on top：这一行升到第一，别的行往下让",
-   "tool": "remotion",
-   "lead": 24,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "no",
-   "obj": "no",
+   "id": "nodrug",
+   "obj": "nodrug",
    "verb": "appear",
    "at": {
-    "word": "3-07.w045",
+    "word": "no#1",
     "off": 0
    },
-   "means": "no：红批注 no approved drug yet",
+   "lead": 7,
+   "means": "no approved drug against it yet：胶囊变灰画斜杠，手写",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "drug",
-   "obj": "drug",
-   "verb": "appear",
-   "at": {
-    "word": "3-07.w047",
-    "off": 0
    },
-   "means": "drug：药丸图标打红斜杠",
-   "tool": "remotion",
-   "lead": 10,
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "yet",
-   "obj": "yet",
-   "verb": "appear",
-   "at": {
-    "word": "3-07.w050",
-    "off": 0
-   },
-   "means": "yet：第一行红框框住",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
    }
   }
  ]

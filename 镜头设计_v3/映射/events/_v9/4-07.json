@@ -1,0 +1,450 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "4-07",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 4-07（VO）：生成式 AI 把 4-06 那个循环搬进电脑。左边旧循环飞进屏幕；Chemistry42 平台，几十个模型并排，底下是已知化学；循环四站改写成 invent / score / learn / go again，新钥匙冲向右边这把锁；最后 within hours。页面 Manual407.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "title",
+   "obj": "title",
+   "verb": "appear",
+   "at": {
+    "word": "4-07.w001",
+    "off": 0
+   },
+   "means": "Generative AI：标题",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "ai",
+   "obj": "ai",
+   "verb": "appear",
+   "at": {
+    "word": "4-07.w002",
+    "off": 0
+   },
+   "means": "AI：副标题 Tool: generative design",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-07.w005"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "loop",
+   "obj": "loop",
+   "verb": "grow",
+   "at": {
+    "word": "4-07.w005",
+    "off": 0
+   },
+   "means": "that loop：左边旧循环（Imagine Make Test Tweak）",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "4-07.w007"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "screen",
+   "obj": "screen",
+   "verb": "grow",
+   "at": {
+    "word": "4-07.w009",
+    "off": 0
+   },
+   "means": "inside：屏幕画出",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "word": "4-07.w011"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "move",
+   "obj": "move",
+   "verb": "move",
+   "at": {
+    "word": "4-07.w011",
+    "off": 0
+   },
+   "means": "computer：循环飞进屏幕",
+   "tool": "remotion",
+   "lead": 58,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "plat",
+   "obj": "plat",
+   "verb": "appear",
+   "at": {
+    "word": "4-07.w013",
+    "off": 0
+   },
+   "means": "platform：屏幕上方名牌框",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-07.w015"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "c42",
+   "obj": "c42",
+   "verb": "appear",
+   "at": {
+    "word": "4-07.w015",
+    "off": 0
+   },
+   "means": "Chemistry42：名牌字",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "4-07.w016"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "dozens",
+   "obj": "dozens",
+   "verb": "grow",
+   "at": {
+    "word": "4-07.w017",
+    "off": 0
+   },
+   "means": "dozens：模型小方块一个个长出",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "4-07.w020"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "models",
+   "obj": "models",
+   "verb": "appear",
+   "at": {
+    "word": "4-07.w020",
+    "off": 0
+   },
+   "means": "AI models：标签",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "4-07.w021"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "side",
+   "obj": "side",
+   "verb": "move",
+   "at": {
+    "word": "4-07.w023",
+    "off": 0
+   },
+   "means": "side by side：方块排齐",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "word": "4-07.w024"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "built",
+   "obj": "built",
+   "verb": "grow",
+   "at": {
+    "word": "4-07.w024",
+    "off": 0
+   },
+   "means": "built：底座",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-07.w026"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "chem",
+   "obj": "chem",
+   "verb": "appear",
+   "at": {
+    "word": "4-07.w027",
+    "off": 0
+   },
+   "means": "known chemistry：底座标签和书",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "invent",
+   "obj": "invent",
+   "verb": "appear",
+   "at": {
+    "word": "4-07.w029",
+    "off": 0
+   },
+   "means": "invent：循环第一站改写并亮",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "4-07.w030"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "mol",
+   "obj": "mol",
+   "verb": "grow",
+   "at": {
+    "word": "4-07.w031",
+    "off": 0
+   },
+   "means": "molecules：新钥匙长出",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-07.w033"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "key"
+    ]
+   }
+  },
+  {
+   "id": "exact",
+   "obj": "exact",
+   "verb": "grow",
+   "at": {
+    "word": "4-07.w034",
+    "off": 0
+   },
+   "means": "exact：右边锁长出",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "4-07.w035"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "lock"
+    ]
+   }
+  },
+  {
+   "id": "keyhole",
+   "obj": "keyhole",
+   "verb": "move",
+   "at": {
+    "word": "4-07.w035",
+    "off": 0
+   },
+   "means": "keyhole：钥匙冲向锁，标签",
+   "tool": "remotion",
+   "lead": 20,
+   "until": {
+    "word": "4-07.w036"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "score",
+   "obj": "score",
+   "verb": "appear",
+   "at": {
+    "word": "4-07.w036",
+    "off": 0
+   },
+   "means": "score：第二站亮，钥匙旁打分条",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "4-07.w038"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "learn",
+   "obj": "learn",
+   "verb": "appear",
+   "at": {
+    "word": "4-07.w038",
+    "off": 0
+   },
+   "means": "learn：第三站亮，分数回流箭头",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "4-07.w041"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "scores",
+   "obj": "scores",
+   "verb": "morph",
+   "at": {
+    "word": "4-07.w041",
+    "off": 0
+   },
+   "means": "scores：分数条闪",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "4-07.w043"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "again",
+   "obj": "again",
+   "verb": "morph",
+   "at": {
+    "word": "4-07.w044",
+    "off": 0
+   },
+   "means": "go again：第四站亮，循环转一圈",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "makers",
+   "obj": "makers",
+   "verb": "appear",
+   "at": {
+    "word": "4-07.w046",
+    "off": 0
+   },
+   "means": "makers say：引号标签",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-07.w049"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "turns",
+   "obj": "turns",
+   "verb": "grow",
+   "at": {
+    "word": "4-07.w049",
+    "off": 0
+   },
+   "means": "turns out：新结构一个接一个冒出",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "4-07.w052"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "key"
+    ]
+   }
+  },
+  {
+   "id": "struct",
+   "obj": "struct",
+   "verb": "appear",
+   "at": {
+    "word": "4-07.w052",
+    "off": 0
+   },
+   "means": "new structures：标签",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "4-07.w053"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "hours",
+   "obj": "hours",
+   "verb": "appear",
+   "at": {
+    "word": "4-07.w054",
+    "off": 0
+   },
+   "means": "within hours：钟和红批注",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  }
+ ]
+}

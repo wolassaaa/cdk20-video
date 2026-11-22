@@ -545,15 +545,15 @@
  "holds": [],
  "events": [
   {
-   "id": "title",
-   "obj": "title",
+   "id": "y23",
+   "obj": "y23",
    "verb": "appear",
    "ease": "inout",
-   "means": "2023：标题 In 2023, an AI platform",
-   "f_start": 6,
+   "means": "In 2023：年份牌落下",
+   "f_start": 9,
    "f_land": 16,
-   "f_end": 327,
-   "until": "3-07.s1",
+   "f_end": 133,
+   "until": "3-07.w002",
    "word": "3-07.w002",
    "w": "2023,",
    "key": "2023#1",
@@ -561,58 +561,25 @@
    "word_f0": 16,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
-   },
-   "F_start": 21566,
-   "F_land": 21576,
-   "F_end": 21887
-  },
-  {
-   "id": "ai",
-   "obj": "ai",
-   "verb": "grow",
-   "ease": "inout",
-   "means": "AI：漏斗画出，芯片在漏斗颈长出",
-   "f_start": 115,
-   "f_land": 135,
-   "f_end": 327,
-   "until": "3-07.s1",
-   "word": "3-07.w004",
-   "w": "AI",
-   "key": "ai#1",
-   "sid": "3-07.s1",
-   "word_f0": 135,
-   "tool": "remotion",
-   "guide": {
     "kind": "focus",
     "target": [
-     "chip"
+     "year"
     ]
    },
-   "F_start": 21675,
-   "F_land": 21695,
-   "F_end": 21887,
-   "g_start": 109,
-   "g_on": 127,
-   "g_end": 255,
-   "g_off": 285,
-   "g_tick": 131,
-   "G_start": 21669,
-   "G_on": 21687,
-   "G_end": 21815,
-   "G_off": 21845,
-   "G_tick": 21691
+   "F_start": 21569,
+   "F_land": 21576,
+   "F_end": 21693
   },
   {
    "id": "panda",
    "obj": "panda",
    "verb": "appear",
    "ease": "inout",
-   "means": "PandaOmics：芯片盖深色牌写 PandaOmics",
-   "f_start": 186,
+   "means": "PandaOmics：芯片落下",
+   "f_start": 189,
    "f_land": 196,
-   "f_end": 327,
-   "until": "3-07.s1",
+   "f_end": 243,
+   "until": "3-07.w007",
    "word": "3-07.w007",
    "w": "PandaOmics",
    "key": "pandaomics#1",
@@ -622,17 +589,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 21746,
+   "F_start": 21749,
    "F_land": 21756,
-   "F_end": 21887
+   "F_end": 21803
   },
   {
-   "id": "backed",
-   "obj": "backed",
-   "verb": "morph",
+   "id": "hunch",
+   "obj": "hunch",
+   "verb": "appear",
    "ease": "inout",
-   "means": "backed：芯片亮一下，漏斗口的梳齿画出",
-   "f_start": 270,
+   "means": "backed that hunch：小插座落下打勾，手写 hunch",
+   "f_start": 268,
    "f_land": 278,
    "f_end": 327,
    "until": "3-07.s1",
@@ -643,22 +610,35 @@
    "word_f0": 278,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "chip"
+    ]
    },
-   "F_start": 21830,
+   "F_start": 21828,
    "F_land": 21838,
-   "F_end": 21887
+   "F_end": 21887,
+   "g_start": 252,
+   "g_on": 270,
+   "g_end": 327,
+   "g_off": 357,
+   "g_tick": 274,
+   "G_start": 21812,
+   "G_on": 21830,
+   "G_end": 21887,
+   "G_off": 21917,
+   "G_tick": 21834
   },
   {
    "id": "ten",
    "obj": "ten",
-   "verb": "move",
+   "verb": "grow",
    "ease": "inout",
-   "means": "ten：卡片开始一张张落进漏斗口，计数跳",
-   "f_start": 384,
+   "means": "ten liver cancer data sets：十个数据架依次落下，数字轮 10",
+   "f_start": 383,
    "f_land": 390,
-   "f_end": 821,
-   "until": "3-07.s2",
+   "f_end": 485,
+   "until": "3-07.w017",
    "word": "3-07.w013",
    "w": "ten",
    "key": "ten#1",
@@ -666,45 +646,35 @@
    "word_f0": 390,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "sets"
+    ]
    },
-   "F_start": 21944,
+   "F_start": 21943,
    "F_land": 21950,
-   "F_end": 22381
+   "F_end": 22045,
+   "g_start": 364,
+   "g_on": 382,
+   "g_end": 485,
+   "g_off": 515,
+   "g_tick": 386,
+   "G_start": 21924,
+   "G_on": 21942,
+   "G_end": 22045,
+   "G_off": 22075,
+   "G_tick": 21946
   },
   {
-   "id": "sets",
-   "obj": "sets",
-   "verb": "appear",
+   "id": "tum",
+   "obj": "tum",
+   "verb": "grow",
    "ease": "inout",
-   "means": "data sets：第 10 张落定，写 10 data sets",
-   "f_start": 458,
-   "f_land": 464,
-   "f_end": 821,
-   "until": "3-07.s2",
-   "word": "3-07.w017",
-   "w": "sets,",
-   "key": "sets#1",
-   "sid": "3-07.s2",
-   "word_f0": 464,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 22018,
-   "F_land": 22024,
-   "F_end": 22381
-  },
-  {
-   "id": "thou",
-   "obj": "thou",
-   "verb": "morph",
-   "ease": "inout",
-   "means": "thousand：卡片上实心点长满，计数跳到 1,133",
-   "f_start": 538,
+   "means": "over a thousand tumour samples：蓝点长满，数字轮 1,133",
+   "f_start": 512,
    "f_land": 548,
-   "f_end": 821,
-   "until": "3-07.s2",
+   "f_end": 625,
+   "until": "3-07.w022",
    "word": "3-07.w020",
    "w": "thousand",
    "key": "thousand#1",
@@ -714,43 +684,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 22098,
+   "F_start": 22072,
    "F_land": 22108,
-   "F_end": 22381
+   "F_end": 22185
   },
   {
-   "id": "samp",
-   "obj": "samp",
-   "verb": "appear",
+   "id": "hl",
+   "obj": "hl",
+   "verb": "grow",
    "ease": "inout",
-   "means": "samples：写 tumour",
-   "f_start": 589,
-   "f_land": 595,
-   "f_end": 821,
-   "until": "3-07.s2",
-   "word": "3-07.w022",
-   "w": "samples",
-   "key": "samples#1",
-   "sid": "3-07.s2",
-   "word_f0": 595,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 22149,
-   "F_land": 22155,
-   "F_end": 22381
-  },
-  {
-   "id": "hund",
-   "obj": "hund",
-   "verb": "morph",
-   "ease": "inout",
-   "means": "hundreds：卡片上空心点长出，计数跳到 674",
-   "f_start": 635,
+   "means": "hundreds of healthy ones：灰点长满，数字轮 674",
+   "f_start": 609,
    "f_land": 645,
-   "f_end": 821,
-   "until": "3-07.s2",
+   "f_end": 720,
+   "until": "3-07.w027",
    "word": "3-07.w024",
    "w": "hundreds",
    "key": "hundreds#1",
@@ -760,40 +707,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 22195,
+   "F_start": 22169,
    "F_land": 22205,
-   "F_end": 22381
+   "F_end": 22280
   },
   {
-   "id": "healthy",
-   "obj": "healthy",
-   "verb": "appear",
+   "id": "papers",
+   "obj": "papers",
+   "verb": "move",
    "ease": "inout",
-   "means": "healthy：写 healthy",
-   "f_start": 677,
-   "f_land": 683,
-   "f_end": 821,
-   "until": "3-07.s2",
-   "word": "3-07.w026",
-   "w": "healthy",
-   "key": "healthy#1",
-   "sid": "3-07.s2",
-   "word_f0": 683,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 22237,
-   "F_land": 22243,
-   "F_end": 22381
-  },
-  {
-   "id": "plus",
-   "obj": "plus",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "plus：写 + papers 的加号",
-   "f_start": 740,
+   "means": "plus research papers：一叠论文飞进芯片",
+   "f_start": 733,
    "f_land": 746,
    "f_end": 821,
    "until": "3-07.s2",
@@ -806,79 +730,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 22300,
+   "F_start": 22293,
    "F_land": 22306,
-   "F_end": 22381
-  },
-  {
-   "id": "research",
-   "obj": "research",
-   "verb": "grow",
-   "ease": "inout",
-   "means": "research：左下长出一叠论文，写 research papers",
-   "f_start": 758,
-   "f_land": 770,
-   "f_end": 821,
-   "until": "3-07.s2",
-   "word": "3-07.w029",
-   "w": "research",
-   "key": "research#1",
-   "sid": "3-07.s2",
-   "word_f0": 770,
-   "tool": "remotion",
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "paper1"
-    ]
-   },
-   "F_start": 22318,
-   "F_land": 22330,
-   "F_end": 22381,
-   "g_start": 744,
-   "g_on": 762,
-   "g_end": 821,
-   "g_off": 851,
-   "g_tick": 766,
-   "G_start": 22304,
-   "G_on": 22322,
-   "G_end": 22381,
-   "G_off": 22411,
-   "G_tick": 22326
-  },
-  {
-   "id": "papers",
-   "obj": "papers",
-   "verb": "move",
-   "ease": "inout",
-   "means": "papers：一叠纸飞进漏斗，沉进芯片",
-   "f_start": 772,
-   "f_land": 796,
-   "f_end": 821,
-   "until": "3-07.s2",
-   "word": "3-07.w030",
-   "w": "papers.",
-   "key": "papers#1",
-   "sid": "3-07.s2",
-   "word_f0": 796,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 22332,
-   "F_land": 22356,
    "F_end": 22381
   },
   {
    "id": "people",
    "obj": "people",
-   "verb": "grow",
+   "verb": "appear",
    "ease": "inout",
-   "means": "People：小人长出",
-   "f_start": 863,
+   "means": "People checked：清场，两个小人落下",
+   "f_start": 870,
    "f_land": 877,
-   "f_end": 1353,
-   "until": "3-07.s3",
+   "f_end": 912,
+   "until": "3-07.w032",
    "word": "3-07.w031",
    "w": "People",
    "key": "people#1",
@@ -886,58 +751,22 @@
    "word_f0": 877,
    "tool": "remotion",
    "guide": {
-    "kind": "focus",
-    "target": [
-     "person_w"
-    ]
-   },
-   "F_start": 22423,
-   "F_land": 22437,
-   "F_end": 22913,
-   "g_start": 851,
-   "g_on": 869,
-   "g_end": 997,
-   "g_off": 1027,
-   "g_tick": 873,
-   "G_start": 22411,
-   "G_on": 22429,
-   "G_end": 22557,
-   "G_off": 22587,
-   "G_tick": 22433
-  },
-  {
-   "id": "checked",
-   "obj": "checked",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "checked：漏斗出口到排名表的箭头",
-   "f_start": 886,
-   "f_land": 896,
-   "f_end": 1353,
-   "until": "3-07.s3",
-   "word": "3-07.w032",
-   "w": "checked",
-   "key": "checked#1",
-   "sid": "3-07.s3",
-   "word_f0": 896,
-   "tool": "remotion",
-   "guide": {
     "kind": "none"
    },
-   "F_start": 22446,
-   "F_land": 22456,
-   "F_end": 22913
+   "F_start": 22430,
+   "F_land": 22437,
+   "F_end": 22472
   },
   {
-   "id": "top",
-   "obj": "top",
+   "id": "top20",
+   "obj": "top20",
    "verb": "grow",
    "ease": "inout",
-   "means": "top：排名表框和表头 top 20",
-   "f_start": 913,
+   "means": "its top 20 by hand：表格一行行画出，逐行打勾",
+   "f_start": 912,
    "f_land": 925,
-   "f_end": 1353,
-   "until": "3-07.s3",
+   "f_end": 1002,
+   "until": "3-07.w037",
    "word": "3-07.w034",
    "w": "top",
    "key": "top#1",
@@ -945,68 +774,35 @@
    "word_f0": 925,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "table"
+    ]
    },
-   "F_start": 22473,
+   "F_start": 22472,
    "F_land": 22485,
-   "F_end": 22913
+   "F_end": 22562,
+   "g_start": 899,
+   "g_on": 917,
+   "g_end": 1002,
+   "g_off": 1032,
+   "g_tick": 921,
+   "G_start": 22459,
+   "G_on": 22477,
+   "G_end": 22562,
+   "G_off": 22592,
+   "G_tick": 22481
   },
   {
-   "id": "twenty",
-   "obj": "twenty",
-   "verb": "appear",
+   "id": "cdkl",
+   "obj": "cdkl",
+   "verb": "move",
    "ease": "inout",
-   "means": "20：20 行一行行画出",
-   "f_start": 938,
-   "f_land": 948,
-   "f_end": 1353,
-   "until": "3-07.s3",
-   "word": "3-07.w035",
-   "w": "20",
-   "key": "20#1",
-   "sid": "3-07.s3",
-   "word_f0": 948,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 22498,
-   "F_land": 22508,
-   "F_end": 22913
-  },
-  {
-   "id": "hand",
-   "obj": "hand",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "by hand：小人逐行打红勾",
-   "f_start": 979,
-   "f_land": 985,
-   "f_end": 1353,
-   "until": "3-07.s3",
-   "word": "3-07.w037",
-   "w": "hand,",
-   "key": "hand#1",
-   "sid": "3-07.s3",
-   "word_f0": 985,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 22539,
-   "F_land": 22545,
-   "F_end": 22913
-  },
-  {
-   "id": "cdk",
-   "obj": "cdk",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "CDK20：中间一行写 CDK20，加深",
-   "f_start": 1044,
+   "means": "and CDK20：蓝色那一行亮一下",
+   "f_start": 1041,
    "f_land": 1054,
-   "f_end": 1353,
-   "until": "3-07.s3",
+   "f_end": 1108,
+   "until": "3-07.w039",
    "word": "3-07.w039",
    "w": "CDK20",
    "key": "cdk20#1",
@@ -1016,20 +812,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 22604,
+   "F_start": 22601,
    "F_land": 22614,
-   "F_end": 22913
+   "F_end": 22668
   },
   {
-   "id": "came",
-   "obj": "came",
+   "id": "cdk",
+   "obj": "cdk",
    "verb": "move",
    "ease": "inout",
-   "means": "came：这一行往左探出",
-   "f_start": 1126,
+   "means": "CDK20 came out on top：蓝色那一行升到第一",
+   "f_start": 1123,
    "f_land": 1136,
-   "f_end": 1353,
-   "until": "3-07.s3",
+   "f_end": 1183,
+   "until": "3-07.w043",
    "word": "3-07.w040",
    "w": "came",
    "key": "came#1",
@@ -1039,40 +835,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 22686,
+   "F_start": 22683,
    "F_land": 22696,
-   "F_end": 22913
+   "F_end": 22743
   },
   {
-   "id": "top2",
-   "obj": "top2",
-   "verb": "move",
-   "ease": "inout",
-   "means": "on top：这一行升到第一，别的行往下让",
-   "f_start": 1146,
-   "f_land": 1170,
-   "f_end": 1353,
-   "until": "3-07.s3",
-   "word": "3-07.w043",
-   "w": "top,",
-   "key": "top#2",
-   "sid": "3-07.s3",
-   "word_f0": 1170,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 22706,
-   "F_land": 22730,
-   "F_end": 22913
-  },
-  {
-   "id": "no",
-   "obj": "no",
+   "id": "nodrug",
+   "obj": "nodrug",
    "verb": "appear",
    "ease": "inout",
-   "means": "no：红批注 no approved drug yet",
-   "f_start": 1229,
+   "means": "no approved drug against it yet：胶囊变灰画斜杠，手写",
+   "f_start": 1230,
    "f_land": 1237,
    "f_end": 1353,
    "until": "3-07.s3",
@@ -1085,132 +858,86 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 22789,
+   "F_start": 22790,
    "F_land": 22797,
-   "F_end": 22913
-  },
-  {
-   "id": "drug",
-   "obj": "drug",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "drug：药丸图标打红斜杠",
-   "f_start": 1273,
-   "f_land": 1283,
-   "f_end": 1353,
-   "until": "3-07.s3",
-   "word": "3-07.w047",
-   "w": "drug",
-   "key": "drug#1",
-   "sid": "3-07.s3",
-   "word_f0": 1283,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 22833,
-   "F_land": 22843,
-   "F_end": 22913
-  },
-  {
-   "id": "yet",
-   "obj": "yet",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "yet：第一行红框框住",
-   "f_start": 1328,
-   "f_land": 1338,
-   "f_end": 1353,
-   "until": "3-07.s3",
-   "word": "3-07.w050",
-   "w": "yet.",
-   "key": "yet#1",
-   "sid": "3-07.s3",
-   "word_f0": 1338,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 22888,
-   "F_land": 22898,
    "F_end": 22913
   }
  ],
  "guides": [
   {
-   "id": "ai",
+   "id": "hunch",
    "target": [
     "chip"
    ],
    "kind": "focus",
-   "gs": 109,
-   "gon": 127,
-   "land": 135,
-   "gend": 255,
-   "goff": 285,
-   "tick": 131,
-   "nudge": false,
+   "gs": 252,
+   "gon": 270,
+   "land": 278,
+   "gend": 327,
+   "goff": 357,
+   "tick": 274,
+   "nudge": true,
    "rim": true,
-   "ev_s": 115,
+   "ev_s": 268,
    "events": [
-    "ai"
+    "hunch"
    ],
-   "G_start": 21669,
-   "G_on": 21687,
-   "G_land": 21695,
-   "G_end": 21815,
-   "G_off": 21845,
-   "G_tick": 21691
+   "G_start": 21812,
+   "G_on": 21830,
+   "G_land": 21838,
+   "G_end": 21887,
+   "G_off": 21917,
+   "G_tick": 21834
   },
   {
-   "id": "research",
+   "id": "ten",
    "target": [
-    "paper1"
+    "sets"
    ],
    "kind": "focus",
-   "gs": 744,
-   "gon": 762,
-   "land": 770,
-   "gend": 821,
-   "goff": 851,
-   "tick": 766,
+   "gs": 364,
+   "gon": 382,
+   "land": 390,
+   "gend": 485,
+   "goff": 515,
+   "tick": 386,
    "nudge": false,
    "rim": true,
-   "ev_s": 758,
+   "ev_s": 383,
    "events": [
-    "research"
+    "ten"
    ],
-   "G_start": 22304,
-   "G_on": 22322,
-   "G_land": 22330,
-   "G_end": 22381,
-   "G_off": 22411,
-   "G_tick": 22326
+   "G_start": 21924,
+   "G_on": 21942,
+   "G_land": 21950,
+   "G_end": 22045,
+   "G_off": 22075,
+   "G_tick": 21946
   },
   {
-   "id": "people",
+   "id": "top20",
    "target": [
-    "person_w"
+    "table"
    ],
    "kind": "focus",
-   "gs": 851,
-   "gon": 869,
-   "land": 877,
-   "gend": 997,
-   "goff": 1027,
-   "tick": 873,
+   "gs": 899,
+   "gon": 917,
+   "land": 925,
+   "gend": 1002,
+   "goff": 1032,
+   "tick": 921,
    "nudge": false,
    "rim": true,
-   "ev_s": 863,
+   "ev_s": 912,
    "events": [
-    "people"
+    "top20"
    ],
-   "G_start": 22411,
-   "G_on": 22429,
-   "G_land": 22437,
-   "G_end": 22557,
-   "G_off": 22587,
-   "G_tick": 22433
+   "G_start": 22459,
+   "G_on": 22477,
+   "G_land": 22485,
+   "G_end": 22562,
+   "G_off": 22592,
+   "G_tick": 22481
   }
  ],
  "problems": []

@@ -1,0 +1,1279 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "2-01",
+ "segs": [
+  "2-01"
+ ],
+ "tool": "remotion",
+ "fps": 60,
+ "len_f": 1652,
+ "cut": "cut_v8",
+ "cut_start_f": 8326,
+ "cut_start_s": 138.77,
+ "master_built": "2026-11-18 02:33:56 +09:00",
+ "words_hash": "0225f90e30d7",
+ "events_src": "镜头设计_v3/映射/events/2-01.json",
+ "words": [
+  {
+   "wid": "2-01.w001",
+   "w": "Hong",
+   "key": "hong#1",
+   "sid": "2-01.s1",
+   "f0": 9,
+   "f1": 22,
+   "F0": 8335,
+   "F1": 8348
+  },
+  {
+   "wid": "2-01.w002",
+   "w": "Kong",
+   "key": "kong#1",
+   "sid": "2-01.s1",
+   "f0": 23,
+   "f1": 38,
+   "F0": 8349,
+   "F1": 8364
+  },
+  {
+   "wid": "2-01.w003",
+   "w": "first.",
+   "key": "first#1",
+   "sid": "2-01.s1",
+   "f0": 41,
+   "f1": 64,
+   "F0": 8367,
+   "F1": 8390
+  },
+  {
+   "wid": "2-01.w004",
+   "w": "In",
+   "key": "in#1",
+   "sid": "2-01.s2",
+   "f0": 89,
+   "f1": 94,
+   "F0": 8415,
+   "F1": 8420
+  },
+  {
+   "wid": "2-01.w005",
+   "w": "2011,",
+   "key": "2011#1",
+   "sid": "2-01.s2",
+   "f0": 98,
+   "f1": 146,
+   "F0": 8424,
+   "F1": 8472
+  },
+  {
+   "wid": "2-01.w006",
+   "w": "a",
+   "key": "a#1",
+   "sid": "2-01.s2",
+   "f0": 171,
+   "f1": 172,
+   "F0": 8497,
+   "F1": 8498
+  },
+  {
+   "wid": "2-01.w007",
+   "w": "team",
+   "key": "team#1",
+   "sid": "2-01.s2",
+   "f0": 178,
+   "f1": 191,
+   "F0": 8504,
+   "F1": 8517
+  },
+  {
+   "wid": "2-01.w008",
+   "w": "at",
+   "key": "at#1",
+   "sid": "2-01.s2",
+   "f0": 197,
+   "f1": 203,
+   "F0": 8523,
+   "F1": 8529
+  },
+  {
+   "wid": "2-01.w009",
+   "w": "the",
+   "key": "the#1",
+   "sid": "2-01.s2",
+   "f0": 207,
+   "f1": 212,
+   "F0": 8533,
+   "F1": 8538
+  },
+  {
+   "wid": "2-01.w010",
+   "w": "Chinese",
+   "key": "chinese#1",
+   "sid": "2-01.s2",
+   "f0": 214,
+   "f1": 237,
+   "F0": 8540,
+   "F1": 8563
+  },
+  {
+   "wid": "2-01.w011",
+   "w": "University",
+   "key": "university#1",
+   "sid": "2-01.s2",
+   "f0": 239,
+   "f1": 274,
+   "F0": 8565,
+   "F1": 8600
+  },
+  {
+   "wid": "2-01.w012",
+   "w": "of",
+   "key": "of#1",
+   "sid": "2-01.s2",
+   "f0": 280,
+   "f1": 285,
+   "F0": 8606,
+   "F1": 8611
+  },
+  {
+   "wid": "2-01.w013",
+   "w": "Hong",
+   "key": "hong#2",
+   "sid": "2-01.s2",
+   "f0": 289,
+   "f1": 301,
+   "F0": 8615,
+   "F1": 8627
+  },
+  {
+   "wid": "2-01.w014",
+   "w": "Kong",
+   "key": "kong#2",
+   "sid": "2-01.s2",
+   "f0": 303,
+   "f1": 319,
+   "F0": 8629,
+   "F1": 8645
+  },
+  {
+   "wid": "2-01.w015",
+   "w": "studied",
+   "key": "studied#1",
+   "sid": "2-01.s2",
+   "f0": 340,
+   "f1": 361,
+   "F0": 8666,
+   "F1": 8687
+  },
+  {
+   "wid": "2-01.w016",
+   "w": "liver",
+   "key": "liver#1",
+   "sid": "2-01.s2",
+   "f0": 367,
+   "f1": 383,
+   "F0": 8693,
+   "F1": 8709
+  },
+  {
+   "wid": "2-01.w017",
+   "w": "tumours",
+   "key": "tumours#1",
+   "sid": "2-01.s2",
+   "f0": 388,
+   "f1": 414,
+   "F0": 8714,
+   "F1": 8740
+  },
+  {
+   "wid": "2-01.w018",
+   "w": "from",
+   "key": "from#1",
+   "sid": "2-01.s2",
+   "f0": 418,
+   "f1": 430,
+   "F0": 8744,
+   "F1": 8756
+  },
+  {
+   "wid": "2-01.w019",
+   "w": "patients",
+   "key": "patients#1",
+   "sid": "2-01.s2",
+   "f0": 434,
+   "f1": 465,
+   "F0": 8760,
+   "F1": 8791
+  },
+  {
+   "wid": "2-01.w020",
+   "w": "at",
+   "key": "at#2",
+   "sid": "2-01.s2",
+   "f0": 472,
+   "f1": 477,
+   "F0": 8798,
+   "F1": 8803
+  },
+  {
+   "wid": "2-01.w021",
+   "w": "the",
+   "key": "the#2",
+   "sid": "2-01.s2",
+   "f0": 481,
+   "f1": 486,
+   "F0": 8807,
+   "F1": 8812
+  },
+  {
+   "wid": "2-01.w022",
+   "w": "Prince",
+   "key": "prince#1",
+   "sid": "2-01.s2",
+   "f0": 494,
+   "f1": 514,
+   "F0": 8820,
+   "F1": 8840
+  },
+  {
+   "wid": "2-01.w023",
+   "w": "of",
+   "key": "of#2",
+   "sid": "2-01.s2",
+   "f0": 519,
+   "f1": 526,
+   "F0": 8845,
+   "F1": 8852
+  },
+  {
+   "wid": "2-01.w024",
+   "w": "Wales",
+   "key": "wales#1",
+   "sid": "2-01.s2",
+   "f0": 535,
+   "f1": 550,
+   "F0": 8861,
+   "F1": 8876
+  },
+  {
+   "wid": "2-01.w025",
+   "w": "Hospital.",
+   "key": "hospital#1",
+   "sid": "2-01.s2",
+   "f0": 556,
+   "f1": 586,
+   "F0": 8882,
+   "F1": 8912
+  },
+  {
+   "wid": "2-01.w026",
+   "w": "One",
+   "key": "one#1",
+   "sid": "2-01.s3",
+   "f0": 639,
+   "f1": 646,
+   "F0": 8965,
+   "F1": 8972
+  },
+  {
+   "wid": "2-01.w027",
+   "w": "protein",
+   "key": "protein#1",
+   "sid": "2-01.s3",
+   "f0": 648,
+   "f1": 669,
+   "F0": 8974,
+   "F1": 8995
+  },
+  {
+   "wid": "2-01.w028",
+   "w": "kept",
+   "key": "kept#1",
+   "sid": "2-01.s3",
+   "f0": 672,
+   "f1": 684,
+   "F0": 8998,
+   "F1": 9010
+  },
+  {
+   "wid": "2-01.w029",
+   "w": "showing",
+   "key": "showing#1",
+   "sid": "2-01.s3",
+   "f0": 690,
+   "f1": 709,
+   "F0": 9016,
+   "F1": 9035
+  },
+  {
+   "wid": "2-01.w030",
+   "w": "up",
+   "key": "up#1",
+   "sid": "2-01.s3",
+   "f0": 712,
+   "f1": 718,
+   "F0": 9038,
+   "F1": 9044
+  },
+  {
+   "wid": "2-01.w031",
+   "w": "raised:",
+   "key": "raised#1",
+   "sid": "2-01.s3",
+   "f0": 726,
+   "f1": 747,
+   "F0": 9052,
+   "F1": 9073
+  },
+  {
+   "wid": "2-01.w032",
+   "w": "CCRK,",
+   "key": "ccrk#1",
+   "sid": "2-01.s3",
+   "f0": 773,
+   "f1": 810,
+   "F0": 9099,
+   "F1": 9136
+  },
+  {
+   "wid": "2-01.w033",
+   "w": "also",
+   "key": "also#1",
+   "sid": "2-01.s3",
+   "f0": 848,
+   "f1": 861,
+   "F0": 9174,
+   "F1": 9187
+  },
+  {
+   "wid": "2-01.w034",
+   "w": "called",
+   "key": "called#1",
+   "sid": "2-01.s3",
+   "f0": 869,
+   "f1": 889,
+   "F0": 9195,
+   "F1": 9215
+  },
+  {
+   "wid": "2-01.w035",
+   "w": "CDK20.",
+   "key": "cdk20#1",
+   "sid": "2-01.s3",
+   "f0": 899,
+   "f1": 963,
+   "F0": 9225,
+   "F1": 9289
+  },
+  {
+   "wid": "2-01.w036",
+   "w": "Fast",
+   "key": "fast#1",
+   "sid": "2-01.s4",
+   "f0": 1016,
+   "f1": 1028,
+   "F0": 9342,
+   "F1": 9354
+  },
+  {
+   "wid": "2-01.w037",
+   "w": "forward",
+   "key": "forward#1",
+   "sid": "2-01.s4",
+   "f0": 1034,
+   "f1": 1051,
+   "F0": 9360,
+   "F1": 9377
+  },
+  {
+   "wid": "2-01.w038",
+   "w": "to",
+   "key": "to#1",
+   "sid": "2-01.s4",
+   "f0": 1054,
+   "f1": 1057,
+   "F0": 9380,
+   "F1": 9383
+  },
+  {
+   "wid": "2-01.w039",
+   "w": "2023:",
+   "key": "2023#1",
+   "sid": "2-01.s4",
+   "f0": 1058,
+   "f1": 1112,
+   "F0": 9384,
+   "F1": 9438
+  },
+  {
+   "wid": "2-01.w040",
+   "w": "an",
+   "key": "an#1",
+   "sid": "2-01.s4",
+   "f0": 1139,
+   "f1": 1144,
+   "F0": 9465,
+   "F1": 9470
+  },
+  {
+   "wid": "2-01.w041",
+   "w": "AI",
+   "key": "ai#1",
+   "sid": "2-01.s4",
+   "f0": 1151,
+   "f1": 1165,
+   "F0": 9477,
+   "F1": 9491
+  },
+  {
+   "wid": "2-01.w042",
+   "w": "drug-discovery",
+   "key": "drug-discovery#1",
+   "sid": "2-01.s4",
+   "f0": 1169,
+   "f1": 1214,
+   "F0": 9495,
+   "F1": 9540
+  },
+  {
+   "wid": "2-01.w043",
+   "w": "study",
+   "key": "study#1",
+   "sid": "2-01.s4",
+   "f0": 1219,
+   "f1": 1236,
+   "F0": 9545,
+   "F1": 9562
+  },
+  {
+   "wid": "2-01.w044",
+   "w": "goes",
+   "key": "goes#1",
+   "sid": "2-01.s4",
+   "f0": 1241,
+   "f1": 1254,
+   "F0": 9567,
+   "F1": 9580
+  },
+  {
+   "wid": "2-01.w045",
+   "w": "after",
+   "key": "after#1",
+   "sid": "2-01.s4",
+   "f0": 1261,
+   "f1": 1279,
+   "F0": 9587,
+   "F1": 9605
+  },
+  {
+   "wid": "2-01.w046",
+   "w": "the",
+   "key": "the#3",
+   "sid": "2-01.s4",
+   "f0": 1282,
+   "f1": 1287,
+   "F0": 9608,
+   "F1": 9613
+  },
+  {
+   "wid": "2-01.w047",
+   "w": "same",
+   "key": "same#1",
+   "sid": "2-01.s4",
+   "f0": 1291,
+   "f1": 1303,
+   "F0": 9617,
+   "F1": 9629
+  },
+  {
+   "wid": "2-01.w048",
+   "w": "protein,",
+   "key": "protein#2",
+   "sid": "2-01.s4",
+   "f0": 1305,
+   "f1": 1333,
+   "F0": 9631,
+   "F1": 9659
+  },
+  {
+   "wid": "2-01.w049",
+   "w": "with",
+   "key": "with#1",
+   "sid": "2-01.s4",
+   "f0": 1356,
+   "f1": 1365,
+   "F0": 9682,
+   "F1": 9691
+  },
+  {
+   "wid": "2-01.w050",
+   "w": "co-authors",
+   "key": "co-authors#1",
+   "sid": "2-01.s4",
+   "f0": 1371,
+   "f1": 1410,
+   "F0": 9697,
+   "F1": 9736
+  },
+  {
+   "wid": "2-01.w051",
+   "w": "at",
+   "key": "at#3",
+   "sid": "2-01.s4",
+   "f0": 1415,
+   "f1": 1422,
+   "F0": 9741,
+   "F1": 9748
+  },
+  {
+   "wid": "2-01.w052",
+   "w": "Insilico",
+   "key": "insilico#1",
+   "sid": "2-01.s4",
+   "f0": 1431,
+   "f1": 1467,
+   "F0": 9757,
+   "F1": 9793
+  },
+  {
+   "wid": "2-01.w053",
+   "w": "Medicine's",
+   "key": "medicine's#1",
+   "sid": "2-01.s4",
+   "f0": 1473,
+   "f1": 1503,
+   "F0": 9799,
+   "F1": 9829
+  },
+  {
+   "wid": "2-01.w054",
+   "w": "Hong",
+   "key": "hong#3",
+   "sid": "2-01.s4",
+   "f0": 1507,
+   "f1": 1519,
+   "F0": 9833,
+   "F1": 9845
+  },
+  {
+   "wid": "2-01.w055",
+   "w": "Kong",
+   "key": "kong#3",
+   "sid": "2-01.s4",
+   "f0": 1521,
+   "f1": 1533,
+   "F0": 9847,
+   "F1": 9859
+  },
+  {
+   "wid": "2-01.w056",
+   "w": "office",
+   "key": "office#1",
+   "sid": "2-01.s4",
+   "f0": 1537,
+   "f1": 1563,
+   "F0": 9863,
+   "F1": 9889
+  },
+  {
+   "wid": "2-01.w057",
+   "w": "in",
+   "key": "in#2",
+   "sid": "2-01.s4",
+   "f0": 1570,
+   "f1": 1575,
+   "F0": 9896,
+   "F1": 9901
+  },
+  {
+   "wid": "2-01.w058",
+   "w": "Science",
+   "key": "science#1",
+   "sid": "2-01.s4",
+   "f0": 1581,
+   "f1": 1605,
+   "F0": 9907,
+   "F1": 9931
+  },
+  {
+   "wid": "2-01.w059",
+   "w": "Park.",
+   "key": "park#1",
+   "sid": "2-01.s4",
+   "f0": 1606,
+   "f1": 1624,
+   "F0": 9932,
+   "F1": 9950
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "2-01.s1",
+   "text": "Hong Kong first.",
+   "w_first": "2-01.w001",
+   "w_last": "2-01.w003",
+   "f0": 9,
+   "f1": 64
+  },
+  {
+   "sid": "2-01.s2",
+   "text": "In 2011, a team at the Chinese University of Hong Kong studied liver tumours from patients at the Prince of Wales Hospital.",
+   "w_first": "2-01.w004",
+   "w_last": "2-01.w025",
+   "f0": 89,
+   "f1": 586
+  },
+  {
+   "sid": "2-01.s3",
+   "text": "One protein kept showing up raised: CCRK, also called CDK20.",
+   "w_first": "2-01.w026",
+   "w_last": "2-01.w035",
+   "f0": 639,
+   "f1": 963
+  },
+  {
+   "sid": "2-01.s4",
+   "text": "Fast forward to 2023: an AI drug-discovery study goes after the same protein, with co-authors at Insilico Medicine's Hong Kong office in Science Park.",
+   "w_first": "2-01.w036",
+   "w_last": "2-01.w059",
+   "f0": 1016,
+   "f1": 1624
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "map",
+   "obj": "map",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "Hong Kong first：香港地图落下",
+   "f_start": 2,
+   "f_land": 9,
+   "f_end": 64,
+   "until": "2-01.w003",
+   "word": "2-01.w001",
+   "w": "Hong",
+   "key": "hong#1",
+   "sid": "2-01.s1",
+   "word_f0": 9,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "map"
+    ]
+   },
+   "F_start": 8328,
+   "F_land": 8335,
+   "F_end": 8390
+  },
+  {
+   "id": "y2011",
+   "obj": "y2011",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "In 2011：地图缩到左上，年份牌 2011 落下",
+   "f_start": 91,
+   "f_land": 98,
+   "f_end": 146,
+   "until": "2-01.w005",
+   "word": "2-01.w005",
+   "w": "2011,",
+   "key": "2011#1",
+   "sid": "2-01.s2",
+   "word_f0": 98,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "year"
+    ]
+   },
+   "F_start": 8417,
+   "F_land": 8424,
+   "F_end": 8472,
+   "g_start": 72,
+   "g_on": 90,
+   "g_end": 146,
+   "g_off": 176,
+   "g_tick": 94,
+   "G_start": 8398,
+   "G_on": 8416,
+   "G_end": 8472,
+   "G_off": 8502,
+   "G_tick": 8420
+  },
+  {
+   "id": "team",
+   "obj": "team",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "a team：三个小人落位",
+   "f_start": 171,
+   "f_land": 178,
+   "f_end": 191,
+   "until": "2-01.w007",
+   "word": "2-01.w007",
+   "w": "team",
+   "key": "team#1",
+   "sid": "2-01.s2",
+   "word_f0": 178,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 8497,
+   "F_land": 8504,
+   "F_end": 8517
+  },
+  {
+   "id": "cuhk",
+   "obj": "cuhk",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "the Chinese University of Hong Kong：标牌，地图上沙田一点亮",
+   "f_start": 204,
+   "f_land": 214,
+   "f_end": 319,
+   "until": "2-01.w014",
+   "word": "2-01.w010",
+   "w": "Chinese",
+   "key": "chinese#1",
+   "sid": "2-01.s2",
+   "word_f0": 214,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 8530,
+   "F_land": 8540,
+   "F_end": 8645
+  },
+  {
+   "id": "tum",
+   "obj": "tum",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "liver tumours：玻璃肝和样本管落下",
+   "f_start": 381,
+   "f_land": 388,
+   "f_end": 414,
+   "until": "2-01.w017",
+   "word": "2-01.w017",
+   "w": "tumours",
+   "key": "tumours#1",
+   "sid": "2-01.s2",
+   "word_f0": 388,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "samples"
+    ]
+   },
+   "F_start": 8707,
+   "F_land": 8714,
+   "F_end": 8740,
+   "g_start": 362,
+   "g_on": 380,
+   "g_end": 414,
+   "g_off": 444,
+   "g_tick": 384,
+   "G_start": 8688,
+   "G_on": 8706,
+   "G_end": 8740,
+   "G_off": 8770,
+   "G_tick": 8710
+  },
+  {
+   "id": "pat",
+   "obj": "pat",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "from patients：两个病人小人",
+   "f_start": 427,
+   "f_land": 434,
+   "f_end": 465,
+   "until": "2-01.w019",
+   "word": "2-01.w019",
+   "w": "patients",
+   "key": "patients#1",
+   "sid": "2-01.s2",
+   "word_f0": 434,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 8753,
+   "F_land": 8760,
+   "F_end": 8791
+  },
+  {
+   "id": "pwh",
+   "obj": "pwh",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "Prince of Wales Hospital：标牌",
+   "f_start": 484,
+   "f_land": 494,
+   "f_end": 586,
+   "until": "2-01.s2",
+   "word": "2-01.w022",
+   "w": "Prince",
+   "key": "prince#1",
+   "sid": "2-01.s2",
+   "word_f0": 494,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 8810,
+   "F_land": 8820,
+   "F_end": 8912
+  },
+  {
+   "id": "prot",
+   "obj": "prot",
+   "verb": "move",
+   "ease": "inout",
+   "means": "One protein：清场，六支样本管剖面排开",
+   "f_start": 626,
+   "f_land": 639,
+   "f_end": 669,
+   "until": "2-01.w027",
+   "word": "2-01.w026",
+   "w": "One",
+   "key": "one#1",
+   "sid": "2-01.s3",
+   "word_f0": 639,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 8952,
+   "F_land": 8965,
+   "F_end": 8995
+  },
+  {
+   "id": "raised",
+   "obj": "raised",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "kept showing up raised：蓝色液柱一支支升过灰线",
+   "f_start": 642,
+   "f_land": 672,
+   "f_end": 747,
+   "until": "2-01.w031",
+   "word": "2-01.w028",
+   "w": "kept",
+   "key": "kept#1",
+   "sid": "2-01.s3",
+   "word_f0": 672,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "tubes"
+    ]
+   },
+   "F_start": 8968,
+   "F_land": 8998,
+   "F_end": 9073,
+   "g_start": 646,
+   "g_on": 664,
+   "g_end": 747,
+   "g_off": 777,
+   "g_tick": 668,
+   "G_start": 8972,
+   "G_on": 8990,
+   "G_end": 9073,
+   "G_off": 9103,
+   "G_tick": 8994
+  },
+  {
+   "id": "ccrk",
+   "obj": "ccrk",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "CCRK：小插座落下，标 CCRK",
+   "f_start": 766,
+   "f_land": 773,
+   "f_end": 810,
+   "until": "2-01.w032",
+   "word": "2-01.w032",
+   "w": "CCRK,",
+   "key": "ccrk#1",
+   "sid": "2-01.s3",
+   "word_f0": 773,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 9092,
+   "F_land": 9099,
+   "F_end": 9136
+  },
+  {
+   "id": "cdk20",
+   "obj": "cdk20",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "also called CDK20：标 CDK20",
+   "f_start": 889,
+   "f_land": 899,
+   "f_end": 963,
+   "until": "2-01.s3",
+   "word": "2-01.w035",
+   "w": "CDK20.",
+   "key": "cdk20#1",
+   "sid": "2-01.s3",
+   "word_f0": 899,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 9215,
+   "F_land": 9225,
+   "F_end": 9289
+  },
+  {
+   "id": "ff",
+   "obj": "ff",
+   "verb": "grow",
+   "ease": "inout",
+   "means": "Fast forward to 2023：样本管清场，年份牌数字轮 2011 → 2023",
+   "f_start": 980,
+   "f_land": 1016,
+   "f_end": 1112,
+   "until": "2-01.w039",
+   "word": "2-01.w036",
+   "w": "Fast",
+   "key": "fast#1",
+   "sid": "2-01.s4",
+   "word_f0": 1016,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "year"
+    ]
+   },
+   "F_start": 9306,
+   "F_land": 9342,
+   "F_end": 9438,
+   "g_start": 990,
+   "g_on": 1008,
+   "g_end": 1112,
+   "g_off": 1142,
+   "g_tick": 1012,
+   "G_start": 9316,
+   "G_on": 9334,
+   "G_end": 9438,
+   "G_off": 9468,
+   "G_tick": 9338
+  },
+  {
+   "id": "ai",
+   "obj": "ai",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "an AI drug-discovery：芯片落下",
+   "f_start": 1144,
+   "f_land": 1151,
+   "f_end": 1214,
+   "until": "2-01.w042",
+   "word": "2-01.w041",
+   "w": "AI",
+   "key": "ai#1",
+   "sid": "2-01.s4",
+   "word_f0": 1151,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 9470,
+   "F_land": 9477,
+   "F_end": 9540
+  },
+  {
+   "id": "study",
+   "obj": "study",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "study：论文书落下",
+   "f_start": 1212,
+   "f_land": 1219,
+   "f_end": 1236,
+   "until": "2-01.w043",
+   "word": "2-01.w043",
+   "w": "study",
+   "key": "study#1",
+   "sid": "2-01.s4",
+   "word_f0": 1219,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 9538,
+   "F_land": 9545,
+   "F_end": 9562
+  },
+  {
+   "id": "same",
+   "obj": "same",
+   "verb": "move",
+   "ease": "inout",
+   "means": "goes after the same protein：小插座挪到书旁边",
+   "f_start": 1261,
+   "f_land": 1291,
+   "f_end": 1333,
+   "until": "2-01.w048",
+   "word": "2-01.w047",
+   "w": "same",
+   "key": "same#1",
+   "sid": "2-01.s4",
+   "word_f0": 1291,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "book"
+    ]
+   },
+   "F_start": 9587,
+   "F_land": 9617,
+   "F_end": 9659,
+   "g_start": 1265,
+   "g_on": 1283,
+   "g_end": 1333,
+   "g_off": 1363,
+   "g_tick": 1287,
+   "G_start": 9591,
+   "G_on": 9609,
+   "G_end": 9659,
+   "G_off": 9689,
+   "G_tick": 9613
+  },
+  {
+   "id": "coauth",
+   "obj": "coauth",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "co-authors：两个小人",
+   "f_start": 1364,
+   "f_land": 1371,
+   "f_end": 1410,
+   "until": "2-01.w050",
+   "word": "2-01.w050",
+   "w": "co-authors",
+   "key": "co-authors#1",
+   "sid": "2-01.s4",
+   "word_f0": 1371,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 9690,
+   "F_land": 9697,
+   "F_end": 9736
+  },
+  {
+   "id": "ins",
+   "obj": "ins",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "at Insilico Medicine's：两个合著者底下长出一块底板",
+   "f_start": 1421,
+   "f_land": 1431,
+   "f_end": 1503,
+   "until": "2-01.w053",
+   "word": "2-01.w052",
+   "w": "Insilico",
+   "key": "insilico#1",
+   "sid": "2-01.s4",
+   "word_f0": 1431,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 9747,
+   "F_land": 9757,
+   "F_end": 9829
+  },
+  {
+   "id": "hk3",
+   "obj": "hk3",
+   "verb": "move",
+   "ease": "inout",
+   "means": "Hong Kong office：左上角地图挪近、放大一点",
+   "f_start": 1494,
+   "f_land": 1507,
+   "f_end": 1533,
+   "until": "2-01.w055",
+   "word": "2-01.w054",
+   "w": "Hong",
+   "key": "hong#3",
+   "sid": "2-01.s4",
+   "word_f0": 1507,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 9820,
+   "F_land": 9833,
+   "F_end": 9859
+  },
+  {
+   "id": "sp",
+   "obj": "sp",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "office in Science Park：地图上那一点再亮，标 Science Park",
+   "f_start": 1571,
+   "f_land": 1581,
+   "f_end": 1624,
+   "until": "2-01.s4",
+   "word": "2-01.w058",
+   "w": "Science",
+   "key": "science#1",
+   "sid": "2-01.s4",
+   "word_f0": 1581,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 9897,
+   "F_land": 9907,
+   "F_end": 9950
+  }
+ ],
+ "guides": [
+  {
+   "id": "y2011",
+   "target": [
+    "year"
+   ],
+   "kind": "focus",
+   "gs": 72,
+   "gon": 90,
+   "land": 98,
+   "gend": 146,
+   "goff": 176,
+   "tick": 94,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 91,
+   "events": [
+    "y2011"
+   ],
+   "G_start": 8398,
+   "G_on": 8416,
+   "G_land": 8424,
+   "G_end": 8472,
+   "G_off": 8502,
+   "G_tick": 8420
+  },
+  {
+   "id": "tum",
+   "target": [
+    "samples"
+   ],
+   "kind": "focus",
+   "gs": 362,
+   "gon": 380,
+   "land": 388,
+   "gend": 414,
+   "goff": 444,
+   "tick": 384,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 381,
+   "events": [
+    "tum"
+   ],
+   "G_start": 8688,
+   "G_on": 8706,
+   "G_land": 8714,
+   "G_end": 8740,
+   "G_off": 8770,
+   "G_tick": 8710
+  },
+  {
+   "id": "raised",
+   "target": [
+    "tubes"
+   ],
+   "kind": "focus",
+   "gs": 646,
+   "gon": 664,
+   "land": 672,
+   "gend": 747,
+   "goff": 777,
+   "tick": 668,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 642,
+   "events": [
+    "raised"
+   ],
+   "G_start": 8972,
+   "G_on": 8990,
+   "G_land": 8998,
+   "G_end": 9073,
+   "G_off": 9103,
+   "G_tick": 8994
+  },
+  {
+   "id": "ff",
+   "target": [
+    "year"
+   ],
+   "kind": "focus",
+   "gs": 990,
+   "gon": 1008,
+   "land": 1016,
+   "gend": 1112,
+   "goff": 1142,
+   "tick": 1012,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 980,
+   "events": [
+    "ff"
+   ],
+   "G_start": 9316,
+   "G_on": 9334,
+   "G_land": 9342,
+   "G_end": 9438,
+   "G_off": 9468,
+   "G_tick": 9338
+  },
+  {
+   "id": "same",
+   "target": [
+    "book"
+   ],
+   "kind": "focus",
+   "gs": 1265,
+   "gon": 1283,
+   "land": 1291,
+   "gend": 1333,
+   "goff": 1363,
+   "tick": 1287,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 1261,
+   "events": [
+    "same"
+   ],
+   "G_start": 9591,
+   "G_on": 9609,
+   "G_land": 9617,
+   "G_end": 9659,
+   "G_off": 9689,
+   "G_tick": 9613
+  }
+ ],
+ "problems": []
+}

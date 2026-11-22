@@ -2,270 +2,185 @@
  "schema": "cdk20.events/1",
  "group": "1-11",
  "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：第 1 章二维说明书页。上方七站的路（线稿，和三维主料杆同一条），芯片快步走过前三站；下方两个框：一个真实案例（芯片和肝拼上）、香港（地图上红点）。出处 Ren et al., Chem. Sci. 2023。页面 src/v3/manual/Manual111.jsx。",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 1-11（btier/B111.jsx）。AI 芯片落下，胶囊沿几块踏步跳（first steps），手写 faster?；one real case：论文书；AI tools：三块芯片；liver cancer：玻璃肝；right here, in Hong Kong：香港地图落下，一点亮起，标 Hong Kong。",
+ "tier": "B",
+ "zone": 1,
+ "trans_in": "T5 runner（上一段 1-10 是 C 档三维大板）",
+ "trans_out": "T5 runner（下一段 1-12）",
  "holds": [],
  "events": [
   {
-   "id": "road",
-   "obj": "road",
-   "verb": "grow",
+   "id": "ai",
+   "obj": "ai",
+   "verb": "appear",
    "at": {
-    "word": "1-11.w001",
+    "word": "ai#1",
     "off": 0
    },
-   "means": "So：路的线稿从左画到右，七个站点圈依次落下",
+   "lead": 7,
+   "means": "can AI：芯片落位",
    "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "word": "1-11.w003"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "chip",
-   "obj": "chip",
-   "verb": "grow",
-   "at": {
-    "word": "1-11.w003",
-    "off": 0
-   },
-   "means": "AI：芯片长在起点",
-   "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "dur": 24
-   },
    "guide": {
     "kind": "focus",
     "target": [
      "chip"
     ]
+   },
+   "until": {
+    "word": "walk#1"
    }
   },
   {
-   "id": "chip_walk",
-   "obj": "chip",
+   "id": "steps",
+   "obj": "steps",
    "verb": "move",
    "at": {
-    "word": "1-11.w008",
+    "word": "steps#1",
     "off": 0
    },
-   "means": "walk the first steps faster：芯片快步走过前三站，带速度线",
+   "lead": 30,
+   "means": "walk the first steps：胶囊沿踏步跳",
    "tool": "remotion",
-   "lead": 66,
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "steps#1"
+   }
+  },
+  {
+   "id": "faster",
+   "obj": "faster",
+   "verb": "appear",
+   "at": {
+    "word": "faster#1",
+    "off": 0
+   },
+   "lead": 6,
+   "means": "faster?：手写",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
     "sentence_end": true
+   }
+  },
+  {
+   "id": "case",
+   "obj": "case",
+   "verb": "appear",
+   "at": {
+    "word": "case#1",
+    "off": 0
    },
+   "lead": 7,
+   "means": "one real case：清场，论文书落下",
+   "tool": "remotion",
    "guide": {
     "kind": "focus",
     "target": [
-     "chip"
+     "book"
     ]
+   },
+   "until": {
+    "word": "case#1"
    }
   },
   {
-   "id": "q",
-   "obj": "question",
+   "id": "tools",
+   "obj": "tools",
    "verb": "appear",
    "at": {
-    "word": "1-11.w008",
+    "word": "tools#1",
     "off": 0
    },
-   "means": "faster?：路上方手写问号 faster?",
+   "lead": 7,
+   "means": "AI tools：三块芯片依次落位",
    "tool": "remotion",
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "step1",
-   "obj": "step_1",
-   "verb": "grow",
-   "at": {
-    "word": "1-11.w009",
-    "off": 0
    },
-   "means": "Let's：第 1 步框画出",
-   "tool": "remotion",
-   "lead": 4,
    "until": {
-    "dur": 30
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "title1",
-   "obj": "title_1",
-   "verb": "appear",
-   "at": {
-    "word": "1-11.w011",
-    "off": 0
-   },
-   "means": "one real case：标题 One real case 写出",
-   "tool": "remotion",
-   "until": {
-    "word": "1-11.w013"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "chip2",
-   "obj": "chip_case",
-   "verb": "grow",
-   "at": {
-    "word": "1-11.w015",
-    "off": 0
-   },
-   "means": "AI tools：芯片零件长出",
-   "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "word": "1-11.w016"
-   },
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "chip"
-    ]
+    "word": "took#1"
    }
   },
   {
    "id": "liver",
    "obj": "liver",
-   "verb": "grow",
+   "verb": "appear",
    "at": {
-    "word": "1-11.w019",
+    "word": "liver#1",
     "off": 0
    },
-   "means": "liver cancer：肝长出",
+   "lead": 7,
+   "means": "liver cancer：玻璃肝",
    "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "word": "1-11.w020"
-   },
    "guide": {
     "kind": "focus",
     "target": [
      "liver"
     ]
-   }
-  },
-  {
-   "id": "case_snap",
-   "obj": "chip_case",
-   "verb": "snap",
-   "at": {
-    "word": "1-11.w020",
-    "off": 18
    },
-   "means": "芯片卡到肝上（拼），留接缝",
-   "tool": "remotion",
-   "lead": 12,
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
    }
   },
   {
-   "id": "step2",
-   "obj": "step_2",
-   "verb": "grow",
+   "id": "starts",
+   "obj": "starts",
+   "verb": "move",
    "at": {
-    "word": "1-11.w021",
+    "word": "starts#1",
     "off": 0
    },
-   "means": "And：第 2 步框画出",
+   "lead": 13,
+   "means": "part of it starts：清场",
    "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "dur": 30
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "starts#1"
    }
   },
   {
-   "id": "title2",
-   "obj": "title_2",
+   "id": "here",
+   "obj": "here",
    "verb": "appear",
    "at": {
-    "word": "1-11.w022",
+    "word": "here#1",
     "off": 0
    },
-   "means": "part of it：标题 Starts here 写出",
+   "lead": 7,
+   "means": "right here：香港地图落下",
    "tool": "remotion",
-   "until": {
-    "word": "1-11.w025"
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "map"
+    ]
+   },
+   "until": {
+    "word": "here#1"
    }
   },
   {
    "id": "hk",
-   "obj": "hk_map",
-   "verb": "grow",
-   "at": {
-    "word": "1-11.w025",
-    "off": 0
-   },
-   "means": "starts：香港地图长出",
-   "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "word": "1-11.w027"
-   },
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "hk"
-    ]
-   }
-  },
-  {
-   "id": "pin",
-   "obj": "pin",
-   "verb": "snap",
-   "at": {
-    "word": "1-11.w027",
-    "off": 0
-   },
-   "means": "here：红点落在地图上（沙田）",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "dur": 16
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "hk_label",
-   "obj": "hk_label",
+   "obj": "hk",
    "verb": "appear",
    "at": {
-    "word": "1-11.w029",
+    "word": "hong#1",
     "off": 0
    },
-   "means": "Hong Kong：地图下印 Hong Kong",
+   "lead": 10,
+   "means": "in Hong Kong：一点亮起，标 Hong Kong",
    "tool": "remotion",
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   }
  ]

@@ -335,15 +335,15 @@
  "holds": [],
  "events": [
   {
-   "id": "title",
-   "obj": "title",
+   "id": "p3",
+   "obj": "p3",
    "verb": "appear",
    "ease": "inout",
-   "means": "Three: race them：标题",
-   "f_start": 1,
+   "means": "Three：3 号编号牌落位",
+   "f_start": 2,
    "f_land": 9,
-   "f_end": 91,
-   "until": "7-04.w003",
+   "f_end": 80,
+   "until": "7-04.w002",
    "word": "7-04.w001",
    "w": "Three:",
    "key": "three#1",
@@ -353,43 +353,56 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 57447,
+   "F_start": 57448,
    "F_land": 57455,
-   "F_end": 57537
+   "F_end": 57526
   },
   {
-   "id": "lanes",
-   "obj": "lanes",
+   "id": "tracks",
+   "obj": "tracks",
    "verb": "grow",
    "ease": "inout",
-   "means": "them：两条跑道画出",
-   "f_start": 51,
-   "f_land": 81,
+   "means": "race them：两条并排跑道（h22）与两块秒表亮起",
+   "f_start": 50,
+   "f_land": 63,
    "f_end": 91,
-   "until": "7-04.w003",
-   "word": "7-04.w003",
-   "w": "them.",
-   "key": "them#1",
+   "until": "7-04.s1",
+   "word": "7-04.w002",
+   "w": "race",
+   "key": "race#1",
    "sid": "7-04.s1",
-   "word_f0": 81,
+   "word_f0": 63,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "tracks"
+    ]
    },
-   "F_start": 57497,
-   "F_land": 57527,
-   "F_end": 57537
+   "F_start": 57496,
+   "F_land": 57509,
+   "F_end": 57537,
+   "g_start": 37,
+   "g_on": 55,
+   "g_end": 91,
+   "g_off": 121,
+   "g_tick": 59,
+   "G_start": 57483,
+   "G_on": 57501,
+   "G_end": 57537,
+   "G_off": 57567,
+   "G_tick": 57505
   },
   {
    "id": "ai",
    "obj": "ai",
    "verb": "appear",
    "ease": "inout",
-   "means": "AI：AI route 标签",
-   "f_start": 126,
+   "means": "AI route：上道刻字 AI route，蓝标就位",
+   "f_start": 128,
    "f_land": 138,
-   "f_end": 147,
-   "until": "7-04.w005",
+   "f_end": 243,
+   "until": "7-04.w009",
    "word": "7-04.w005",
    "w": "AI",
    "key": "ai#1",
@@ -399,20 +412,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 57572,
+   "F_start": 57574,
    "F_land": 57584,
-   "F_end": 57593
+   "F_end": 57689
   },
   {
-   "id": "cl",
-   "obj": "cl",
+   "id": "classic",
+   "obj": "classic",
    "verb": "appear",
    "ease": "inout",
-   "means": "classic：classic route 标签",
-   "f_start": 203,
+   "means": "classic：下道刻字 classic route，骨白标就位",
+   "f_start": 207,
    "f_land": 217,
-   "f_end": 243,
-   "until": "7-04.w009",
+   "f_end": 272,
+   "until": "7-04.w010",
    "word": "7-04.w009",
    "w": "classic",
    "key": "classic#1",
@@ -422,20 +435,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 57649,
+   "F_start": 57653,
    "F_land": 57663,
-   "F_end": 57689
+   "F_end": 57718
   },
   {
-   "id": "start",
-   "obj": "start",
-   "verb": "grow",
+   "id": "clbl",
+   "obj": "clbl",
+   "verb": "appear",
    "ease": "inout",
-   "means": "route：起跑线",
-   "f_start": 237,
+   "means": "route：两条跑道起跑线对齐框亮起",
+   "f_start": 242,
    "f_land": 251,
-   "f_end": 272,
-   "until": "7-04.w010",
+   "f_end": 351,
+   "until": "7-04.w012",
    "word": "7-04.w010",
    "w": "route,",
    "key": "route#2",
@@ -445,20 +458,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 57683,
+   "F_start": 57688,
    "F_land": 57697,
-   "F_end": 57718
+   "F_end": 57797
   },
   {
-   "id": "tgt",
-   "obj": "tgt",
-   "verb": "grow",
+   "id": "t1",
+   "obj": "t1",
+   "verb": "snap",
    "ease": "inout",
-   "means": "target：same target，两道各亮一把锁",
-   "f_start": 303,
+   "means": "same target：第一块小牌翻起，两道各亮一个靶标",
+   "f_start": 310,
    "f_land": 323,
-   "f_end": 351,
-   "until": "7-04.w012",
+   "f_end": 415,
+   "until": "7-04.w014",
    "word": "7-04.w012",
    "w": "target,",
    "key": "target#1",
@@ -466,22 +479,35 @@
    "word_f0": 323,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "conds"
+    ]
    },
-   "F_start": 57749,
+   "F_start": 57756,
    "F_land": 57769,
-   "F_end": 57797
+   "F_end": 57861,
+   "g_start": 297,
+   "g_on": 315,
+   "g_end": 415,
+   "g_off": 445,
+   "g_tick": 319,
+   "G_start": 57743,
+   "G_on": 57761,
+   "G_end": 57861,
+   "G_off": 57891,
+   "G_tick": 57765
   },
   {
-   "id": "bud",
-   "obj": "bud",
-   "verb": "grow",
+   "id": "t2",
+   "obj": "t2",
+   "verb": "snap",
    "ease": "inout",
-   "means": "budget：same budget，两道各亮一叠钞票",
-   "f_start": 371,
+   "means": "same budget：第二块小牌翻起，两道各亮一个预算标",
+   "f_start": 378,
    "f_land": 391,
-   "f_end": 415,
-   "until": "7-04.w014",
+   "f_end": 503,
+   "until": "7-04.w016",
    "word": "7-04.w014",
    "w": "budget,",
    "key": "budget#1",
@@ -491,20 +517,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 57817,
+   "F_start": 57824,
    "F_land": 57837,
-   "F_end": 57861
+   "F_end": 57949
   },
   {
-   "id": "def",
-   "obj": "def",
-   "verb": "grow",
+   "id": "t3",
+   "obj": "t3",
+   "verb": "snap",
    "ease": "inout",
-   "means": "definition：same definition of a hit，两道各亮清单",
-   "f_start": 449,
+   "means": "same definition：第三块小牌翻起，两道各亮一个命中标",
+   "f_start": 456,
    "f_land": 469,
-   "f_end": 518,
-   "until": "7-04.w018",
+   "f_end": 539,
+   "until": "7-04.w019",
    "word": "7-04.w016",
    "w": "definition",
    "key": "definition#1",
@@ -514,20 +540,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 57895,
+   "F_start": 57902,
    "F_land": 57915,
-   "F_end": 57964
+   "F_end": 57985
   },
   {
-   "id": "hit",
-   "obj": "hit",
-   "verb": "morph",
+   "id": "t3_lbl",
+   "obj": "t3_lbl",
+   "verb": "appear",
    "ease": "inout",
-   "means": "hit：两张清单各打勾",
-   "f_start": 515,
+   "means": "hit：三块同条件牌锁齐高亮",
+   "f_start": 514,
    "f_land": 523,
    "f_end": 539,
-   "until": "7-04.w019",
+   "until": "7-04.s2",
    "word": "7-04.w019",
    "w": "hit.",
    "key": "hit#1",
@@ -537,66 +563,43 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 57961,
+   "F_start": 57960,
    "F_land": 57969,
    "F_end": 57985
   },
   {
-   "id": "fin",
-   "obj": "fin",
-   "verb": "grow",
+   "id": "ready",
+   "obj": "ready",
+   "verb": "move",
    "ease": "inout",
-   "means": "exactly：终点线加红问号",
-   "f_start": 615,
-   "f_land": 629,
-   "f_end": 662,
-   "until": "7-04.w023",
-   "word": "7-04.w023",
-   "w": "exactly",
-   "key": "exactly#1",
+   "means": "know：两块小吊牌在起跑线蓄势，秒表清零",
+   "f_start": 600,
+   "f_land": 613,
+   "f_end": 724,
+   "until": "7-04.w026",
+   "word": "7-04.w022",
+   "w": "know",
+   "key": "know#1",
    "sid": "7-04.s3",
-   "word_f0": 629,
+   "word_f0": 613,
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 58061,
-   "F_land": 58075,
-   "F_end": 58108
+   "F_start": 58046,
+   "F_land": 58059,
+   "F_end": 58170
   },
   {
    "id": "run",
    "obj": "run",
    "verb": "move",
    "ease": "inout",
-   "means": "how：两个小牌子起跑",
-   "f_start": 630,
-   "f_land": 670,
-   "f_end": 695,
-   "until": "7-04.w025",
-   "word": "7-04.w024",
-   "w": "how",
-   "key": "how#1",
-   "sid": "7-04.s3",
-   "word_f0": 670,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 58076,
-   "F_land": 58116,
-   "F_end": 58141
-  },
-  {
-   "id": "qm",
-   "obj": "qm",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "faster：红批注 how much faster",
-   "f_start": 692,
+   "means": "faster：两块吊牌沿跑道起跑，两块秒表开始走",
+   "f_start": 670,
    "f_land": 700,
-   "f_end": 788,
-   "until": "7-04.s3",
+   "f_end": 738,
+   "until": "7-04.w027",
    "word": "7-04.w026",
    "w": "faster",
    "key": "faster#1",
@@ -604,13 +607,125 @@
    "word_f0": 700,
    "tool": "remotion",
    "guide": {
+    "kind": "focus",
+    "target": [
+     "race"
+    ]
+   },
+   "F_start": 58116,
+   "F_land": 58146,
+   "F_end": 58184,
+   "g_start": 674,
+   "g_on": 692,
+   "g_end": 738,
+   "g_off": 768,
+   "g_tick": 696,
+   "G_start": 58120,
+   "G_on": 58138,
+   "G_end": 58184,
+   "G_off": 58214,
+   "G_tick": 58142
+  },
+  {
+   "id": "q",
+   "obj": "q",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "is：终点线上红色问号亮起",
+   "f_start": 763,
+   "f_land": 773,
+   "f_end": 788,
+   "until": "7-04.s3",
+   "word": "7-04.w029",
+   "w": "is.",
+   "key": "is#1",
+   "sid": "7-04.s3",
+   "word_f0": 773,
+   "tool": "remotion",
+   "guide": {
     "kind": "none"
    },
-   "F_start": 58138,
-   "F_land": 58146,
+   "F_start": 58209,
+   "F_land": 58219,
    "F_end": 58234
   }
  ],
- "guides": [],
+ "guides": [
+  {
+   "id": "tracks",
+   "target": [
+    "tracks"
+   ],
+   "kind": "focus",
+   "gs": 37,
+   "gon": 55,
+   "land": 63,
+   "gend": 91,
+   "goff": 121,
+   "tick": 59,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 50,
+   "events": [
+    "tracks"
+   ],
+   "G_start": 57483,
+   "G_on": 57501,
+   "G_land": 57509,
+   "G_end": 57537,
+   "G_off": 57567,
+   "G_tick": 57505
+  },
+  {
+   "id": "t1",
+   "target": [
+    "conds"
+   ],
+   "kind": "focus",
+   "gs": 297,
+   "gon": 315,
+   "land": 323,
+   "gend": 415,
+   "goff": 445,
+   "tick": 319,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 310,
+   "events": [
+    "t1"
+   ],
+   "G_start": 57743,
+   "G_on": 57761,
+   "G_land": 57769,
+   "G_end": 57861,
+   "G_off": 57891,
+   "G_tick": 57765
+  },
+  {
+   "id": "run",
+   "target": [
+    "race"
+   ],
+   "kind": "focus",
+   "gs": 674,
+   "gon": 692,
+   "land": 700,
+   "gend": 738,
+   "goff": 768,
+   "tick": 696,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 670,
+   "events": [
+    "run"
+   ],
+   "G_start": 58120,
+   "G_on": 58138,
+   "G_land": 58146,
+   "G_end": 58184,
+   "G_off": 58214,
+   "G_tick": 58142
+  }
+ ],
  "problems": []
 }

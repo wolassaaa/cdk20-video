@@ -729,15 +729,15 @@
  "holds": [],
  "events": [
   {
-   "id": "title",
-   "obj": "title",
+   "id": "team",
+   "obj": "team",
    "verb": "appear",
    "ease": "inout",
-   "means": "team：标题 Objective 1",
-   "f_start": 31,
+   "means": "So the team：三个小人",
+   "f_start": 34,
    "f_land": 41,
-   "f_end": 271,
-   "until": "4-01.s1",
+   "f_end": 66,
+   "until": "4-01.w004",
    "word": "4-01.w003",
    "w": "team",
    "key": "team#1",
@@ -745,22 +745,35 @@
    "word_f0": 41,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "team"
+    ]
    },
-   "F_start": 25969,
+   "F_start": 25972,
    "F_land": 25979,
-   "F_end": 26209
+   "F_end": 26004,
+   "g_start": 15,
+   "g_on": 33,
+   "g_end": 66,
+   "g_off": 96,
+   "g_tick": 37,
+   "G_start": 25953,
+   "G_on": 25971,
+   "G_end": 26004,
+   "G_off": 26034,
+   "G_tick": 25975
   },
   {
-   "id": "people",
-   "obj": "people",
-   "verb": "grow",
+   "id": "some",
+   "obj": "some",
+   "verb": "move",
    "ease": "inout",
-   "means": "something：三个小人",
-   "f_start": 64,
+   "means": "did something：小人往左让开",
+   "f_start": 61,
    "f_land": 74,
-   "f_end": 271,
-   "until": "4-01.s1",
+   "f_end": 160,
+   "until": "4-01.w007",
    "word": "4-01.w005",
    "w": "something",
    "key": "something#1",
@@ -768,104 +781,45 @@
    "word_f0": 74,
    "tool": "remotion",
    "guide": {
-    "kind": "focus",
-    "target": [
-     "person"
-    ]
+    "kind": "none"
    },
-   "F_start": 26002,
+   "F_start": 25999,
    "F_land": 26012,
-   "F_end": 26209,
-   "g_start": 48,
-   "g_on": 66,
-   "g_end": 194,
-   "g_off": 224,
-   "g_tick": 70,
-   "G_start": 25986,
-   "G_on": 26004,
-   "G_end": 26132,
-   "G_off": 26162,
-   "G_tick": 26008
+   "F_end": 26098
   },
   {
-   "id": "cloud",
-   "obj": "cloud",
-   "verb": "grow",
-   "ease": "inout",
-   "means": "once：想法云",
-   "f_start": 131,
-   "f_land": 141,
-   "f_end": 271,
-   "until": "4-01.s1",
-   "word": "4-01.w007",
-   "w": "once",
-   "key": "once#1",
-   "sid": "4-01.s1",
-   "word_f0": 141,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 26069,
-   "F_land": 26079,
-   "F_end": 26209
-  },
-  {
-   "id": "like",
-   "obj": "like",
+   "id": "scifi",
+   "obj": "scifi",
    "verb": "appear",
    "ease": "inout",
-   "means": "like：云边闪线",
-   "f_start": 195,
-   "f_land": 201,
+   "means": "science fiction：手写",
+   "f_start": 215,
+   "f_land": 221,
    "f_end": 271,
    "until": "4-01.s1",
-   "word": "4-01.w009",
-   "w": "like",
-   "key": "like#1",
+   "word": "4-01.w010",
+   "w": "science",
+   "key": "science#1",
    "sid": "4-01.s1",
-   "word_f0": 201,
+   "word_f0": 221,
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
-   "F_start": 26133,
-   "F_land": 26139,
-   "F_end": 26209
-  },
-  {
-   "id": "fic",
-   "obj": "fic",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "science fiction：红批注",
-   "f_start": 237,
-   "f_land": 247,
-   "f_end": 271,
-   "until": "4-01.s1",
-   "word": "4-01.w011",
-   "w": "fiction.",
-   "key": "fiction#1",
-   "sid": "4-01.s1",
-   "word_f0": 247,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 26175,
-   "F_land": 26185,
+   "F_start": 26153,
+   "F_land": 26159,
    "F_end": 26209
   },
   {
    "id": "ai",
    "obj": "ai",
-   "verb": "grow",
+   "verb": "appear",
    "ease": "inout",
-   "means": "AI：芯片长出，小人到芯片的箭头",
-   "f_start": 371,
+   "means": "asked an AI：AlphaFold 芯片落位",
+   "f_start": 374,
    "f_land": 381,
-   "f_end": 433,
-   "until": "4-01.w018",
+   "f_end": 427,
+   "until": "4-01.w017",
    "word": "4-01.w015",
    "w": "AI",
    "key": "ai#1",
@@ -878,27 +832,27 @@
      "chip"
     ]
    },
-   "F_start": 26309,
+   "F_start": 26312,
    "F_land": 26319,
-   "F_end": 26371,
+   "F_end": 26365,
    "g_start": 355,
    "g_on": 373,
-   "g_end": 433,
-   "g_off": 463,
+   "g_end": 427,
+   "g_off": 457,
    "g_tick": 377,
    "G_start": 26293,
    "G_on": 26311,
-   "G_end": 26371,
-   "G_off": 26401,
+   "G_end": 26365,
+   "G_off": 26395,
    "G_tick": 26315
   },
   {
    "id": "guess",
    "obj": "guess",
-   "verb": "morph",
+   "verb": "appear",
    "ease": "inout",
-   "means": "guess the shape：虚线泡泡加问号",
-   "f_start": 427,
+   "means": "guess the shape：磨砂插座和问号",
+   "f_start": 432,
    "f_land": 439,
    "f_end": 458,
    "until": "4-01.s2",
@@ -911,7 +865,7 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 26365,
+   "F_start": 26370,
    "F_land": 26377,
    "F_end": 26396
   },
@@ -920,11 +874,11 @@
    "obj": "prot",
    "verb": "appear",
    "ease": "inout",
-   "means": "protein：标签",
-   "f_start": 536,
+   "means": "Imagine a protein：清场",
+   "f_start": 537,
    "f_land": 544,
-   "f_end": 617,
-   "until": "4-01.w025",
+   "f_end": 591,
+   "until": "4-01.w023",
    "word": "4-01.w022",
    "w": "protein",
    "key": "protein#1",
@@ -934,20 +888,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 26474,
+   "F_start": 26475,
    "F_land": 26482,
-   "F_end": 26555
+   "F_end": 26529
   },
   {
    "id": "chain",
    "obj": "chain",
    "verb": "grow",
    "ease": "inout",
-   "means": "chain：一串珠子",
-   "f_start": 582,
+   "means": "as a chain：珠子一颗颗排出来",
+   "f_start": 589,
    "f_land": 602,
-   "f_end": 650,
-   "until": "4-01.w027",
+   "f_end": 632,
+   "until": "4-01.w026",
    "word": "4-01.w025",
    "w": "chain",
    "key": "chain#1",
@@ -955,22 +909,35 @@
    "word_f0": 602,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "chain"
+    ]
    },
-   "F_start": 26520,
+   "F_start": 26527,
    "F_land": 26540,
-   "F_end": 26588
+   "F_end": 26570,
+   "g_start": 576,
+   "g_on": 594,
+   "g_end": 632,
+   "g_off": 662,
+   "g_tick": 598,
+   "G_start": 26514,
+   "G_on": 26532,
+   "G_end": 26570,
+   "G_off": 26600,
+   "G_tick": 26536
   },
   {
    "id": "blocks",
    "obj": "blocks",
    "verb": "appear",
    "ease": "inout",
-   "means": "building blocks：标签",
-   "f_start": 644,
+   "means": "building blocks：珠子挨个鼓一下",
+   "f_start": 637,
    "f_land": 650,
-   "f_end": 716,
-   "until": "4-01.w029",
+   "f_end": 706,
+   "until": "4-01.w028",
    "word": "4-01.w028",
    "w": "blocks",
    "key": "blocks#1",
@@ -980,20 +947,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 26582,
+   "F_start": 26575,
    "F_land": 26588,
-   "F_end": 26654
+   "F_end": 26644
   },
   {
-   "id": "fold",
-   "obj": "fold",
-   "verb": "morph",
+   "id": "folds",
+   "obj": "folds",
+   "verb": "move",
    "ease": "inout",
-   "means": "folds：珠子折起来",
-   "f_start": 714,
+   "means": "that folds：链折起来",
+   "f_start": 707,
    "f_land": 720,
-   "f_end": 782,
-   "until": "4-01.w033",
+   "f_end": 756,
+   "until": "4-01.w031",
    "word": "4-01.w030",
    "w": "folds",
    "key": "folds#1",
@@ -1003,17 +970,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 26652,
+   "F_start": 26645,
    "F_land": 26658,
-   "F_end": 26720
+   "F_end": 26694
   },
   {
-   "id": "d3",
-   "obj": "d3",
+   "id": "shape3d",
+   "obj": "shape3d",
    "verb": "appear",
    "ease": "inout",
-   "means": "3D shape：标签",
-   "f_start": 786,
+   "means": "into a 3D shape：化成预测模型",
+   "f_start": 781,
    "f_land": 794,
    "f_end": 811,
    "until": "4-01.s3",
@@ -1026,20 +993,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 26724,
+   "F_start": 26719,
    "F_land": 26732,
    "F_end": 26749
   },
   {
    "id": "order",
    "obj": "order",
-   "verb": "appear",
+   "verb": "move",
    "ease": "inout",
-   "means": "order：珠子编号 1–12",
-   "f_start": 861,
+   "means": "The order：模型退到右边，链重新排直",
+   "f_start": 858,
    "f_land": 871,
-   "f_end": 928,
-   "until": "4-01.w039",
+   "f_end": 885,
+   "until": "4-01.w036",
    "word": "4-01.w036",
    "w": "order",
    "key": "order#1",
@@ -1047,10 +1014,46 @@
    "word_f0": 871,
    "tool": "remotion",
    "guide": {
+    "kind": "focus",
+    "target": [
+     "chain"
+    ]
+   },
+   "F_start": 26796,
+   "F_land": 26809,
+   "F_end": 26823,
+   "g_start": 845,
+   "g_on": 863,
+   "g_end": 885,
+   "g_off": 915,
+   "g_tick": 867,
+   "G_start": 26783,
+   "G_on": 26801,
+   "G_end": 26823,
+   "G_off": 26853,
+   "G_tick": 26805
+  },
+  {
+   "id": "letters",
+   "obj": "letters",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "of the blocks：珠子上出字母",
+   "f_start": 900,
+   "f_land": 910,
+   "f_end": 928,
+   "until": "4-01.w039",
+   "word": "4-01.w039",
+   "w": "blocks",
+   "key": "blocks#2",
+   "sid": "4-01.s4",
+   "word_f0": 910,
+   "tool": "remotion",
+   "guide": {
     "kind": "none"
    },
-   "F_start": 26799,
-   "F_land": 26809,
+   "F_start": 26838,
+   "F_land": 26848,
    "F_end": 26866
   },
   {
@@ -1058,8 +1061,8 @@
    "obj": "seq",
    "verb": "appear",
    "ease": "inout",
-   "means": "sequence：括号和标签",
-   "f_start": 947,
+   "means": "is the sequence：标 sequence",
+   "f_start": 945,
    "f_land": 955,
    "f_end": 986,
    "until": "4-01.s4",
@@ -1072,7 +1075,7 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 26885,
+   "F_start": 26883,
    "F_land": 26893,
    "F_end": 26924
   },
@@ -1081,8 +1084,8 @@
    "obj": "af",
    "verb": "appear",
    "ease": "inout",
-   "means": "AlphaFold：芯片名",
-   "f_start": 1033,
+   "means": "AlphaFold：芯片落到中间",
+   "f_start": 1034,
    "f_land": 1041,
    "f_end": 1107,
    "until": "4-01.w044",
@@ -1093,45 +1096,35 @@
    "word_f0": 1041,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "chip"
+    ]
    },
-   "F_start": 26971,
+   "F_start": 26972,
    "F_land": 26979,
-   "F_end": 27045
-  },
-  {
-   "id": "lrn",
-   "obj": "lrn",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "learned：芯片亮一下",
-   "f_start": 1080,
-   "f_land": 1086,
-   "f_end": 1147,
-   "until": "4-01.w046",
-   "word": "4-01.w044",
-   "w": "learned",
-   "key": "learned#1",
-   "sid": "4-01.s5",
-   "word_f0": 1086,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 27018,
-   "F_land": 27024,
-   "F_end": 27085
+   "F_end": 27045,
+   "g_start": 1015,
+   "g_on": 1033,
+   "g_end": 1107,
+   "g_off": 1137,
+   "g_tick": 1037,
+   "G_start": 26953,
+   "G_on": 26971,
+   "G_end": 27045,
+   "G_off": 27075,
+   "G_tick": 26975
   },
   {
    "id": "known",
    "obj": "known",
-   "verb": "grow",
+   "verb": "appear",
    "ease": "inout",
-   "means": "known structures：三个小结构",
-   "f_start": 1138,
+   "means": "known structures：数据库架落下",
+   "f_start": 1143,
    "f_land": 1150,
-   "f_end": 1236,
-   "until": "4-01.w048",
+   "f_end": 1183,
+   "until": "4-01.w047",
    "word": "4-01.w047",
    "w": "structures",
    "key": "structures#1",
@@ -1141,20 +1134,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 27076,
+   "F_start": 27081,
    "F_land": 27088,
-   "F_end": 27174
+   "F_end": 27121
   },
   {
-   "id": "how",
-   "obj": "how",
-   "verb": "appear",
+   "id": "learn",
+   "obj": "learn",
+   "verb": "move",
    "ease": "inout",
-   "means": "how：结构到芯片的箭头",
-   "f_start": 1220,
+   "means": "how sequences fold：数据沿料杆流进芯片",
+   "f_start": 1213,
    "f_land": 1226,
-   "f_end": 1266,
-   "until": "4-01.w049",
+   "f_end": 1285,
+   "until": "4-01.s5",
    "word": "4-01.w048",
    "w": "how",
    "key": "how#1",
@@ -1164,31 +1157,8 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 27158,
+   "F_start": 27151,
    "F_land": 27164,
-   "F_end": 27204
-  },
-  {
-   "id": "learn",
-   "obj": "learn",
-   "verb": "move",
-   "ease": "inout",
-   "means": "fold：小结构飞进芯片",
-   "f_start": 1237,
-   "f_land": 1267,
-   "f_end": 1285,
-   "until": "4-01.s5",
-   "word": "4-01.w050",
-   "w": "fold.",
-   "key": "fold#1",
-   "sid": "4-01.s5",
-   "word_f0": 1267,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 27175,
-   "F_land": 27205,
    "F_end": 27223
   },
   {
@@ -1196,11 +1166,11 @@
    "obj": "give",
    "verb": "move",
    "ease": "inout",
-   "means": "give it one：序列条飞进芯片",
-   "f_start": 1318,
+   "means": "Give it one：序列条送进芯片",
+   "f_start": 1308,
    "f_land": 1338,
-   "f_end": 1416,
-   "until": "4-01.w054",
+   "f_end": 1356,
+   "until": "4-01.w053",
    "word": "4-01.w053",
    "w": "one,",
    "key": "one#1",
@@ -1210,20 +1180,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 27256,
+   "F_start": 27246,
    "F_land": 27276,
-   "F_end": 27354
+   "F_end": 27294
   },
   {
-   "id": "pred",
-   "obj": "pred",
-   "verb": "appear",
+   "id": "predicts",
+   "obj": "predicts",
+   "verb": "move",
    "ease": "inout",
-   "means": "predicts：芯片到形状的箭头",
-   "f_start": 1414,
+   "means": "it predicts：芯片一震、灯亮",
+   "f_start": 1411,
    "f_land": 1424,
-   "f_end": 1457,
-   "until": "4-01.w057",
+   "f_end": 1452,
+   "until": "4-01.w056",
    "word": "4-01.w056",
    "w": "predicts",
    "key": "predicts#1",
@@ -1233,20 +1203,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 27352,
+   "F_start": 27349,
    "F_land": 27362,
-   "F_end": 27395
+   "F_end": 27390
   },
   {
-   "id": "shape",
-   "obj": "shape",
+   "id": "pred",
+   "obj": "pred",
    "verb": "appear",
    "ease": "inout",
-   "means": "shape：预测框",
-   "f_start": 1452,
+   "means": "it predicts the shape：模型出来",
+   "f_start": 1447,
    "f_land": 1460,
-   "f_end": 1532,
-   "until": "4-01.w059",
+   "f_end": 1478,
+   "until": "4-01.w058",
    "word": "4-01.w058",
    "w": "shape,",
    "key": "shape#3",
@@ -1254,45 +1224,35 @@
    "word_f0": 1460,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "model"
+    ]
    },
-   "F_start": 27390,
+   "F_start": 27385,
    "F_land": 27398,
-   "F_end": 27470
-  },
-  {
-   "id": "plus",
-   "obj": "plus",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "plus：图例框",
-   "f_start": 1505,
-   "f_land": 1511,
-   "f_end": 1572,
-   "until": "4-01.w060",
-   "word": "4-01.w059",
-   "w": "plus",
-   "key": "plus#1",
-   "sid": "4-01.s6",
-   "word_f0": 1511,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 27443,
-   "F_land": 27449,
-   "F_end": 27510
+   "F_end": 27416,
+   "g_start": 1434,
+   "g_on": 1452,
+   "g_end": 1478,
+   "g_off": 1508,
+   "g_tick": 1456,
+   "G_start": 27372,
+   "G_on": 27390,
+   "G_end": 27416,
+   "G_off": 27446,
+   "G_tick": 27394
   },
   {
    "id": "sure",
    "obj": "sure",
    "verb": "appear",
    "ease": "inout",
-   "means": "how sure：图例",
-   "f_start": 1569,
+   "means": "how sure：图例 sure / unsure",
+   "f_start": 1567,
    "f_land": 1577,
-   "f_end": 1644,
-   "until": "4-01.w064",
+   "f_end": 1620,
+   "until": "4-01.w063",
    "word": "4-01.w061",
    "w": "sure",
    "key": "sure#1",
@@ -1302,17 +1262,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 27507,
+   "F_start": 27505,
    "F_land": 27515,
-   "F_end": 27582
+   "F_end": 27558
   },
   {
-   "id": "each",
-   "obj": "each",
-   "verb": "morph",
+   "id": "part",
+   "obj": "part",
+   "verb": "appear",
    "ease": "inout",
-   "means": "each part：珠子按把握程度上色",
-   "f_start": 1614,
+   "means": "each part：手写圈住红尾巴",
+   "f_start": 1658,
    "f_land": 1664,
    "f_end": 1681,
    "until": "4-01.s6",
@@ -1325,36 +1285,36 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 27552,
+   "F_start": 27596,
    "F_land": 27602,
    "F_end": 27619
   }
  ],
  "guides": [
   {
-   "id": "people",
+   "id": "team",
    "target": [
-    "person"
+    "team"
    ],
    "kind": "focus",
-   "gs": 48,
-   "gon": 66,
-   "land": 74,
-   "gend": 194,
-   "goff": 224,
-   "tick": 70,
-   "nudge": false,
+   "gs": 15,
+   "gon": 33,
+   "land": 41,
+   "gend": 66,
+   "goff": 96,
+   "tick": 37,
+   "nudge": true,
    "rim": true,
-   "ev_s": 64,
+   "ev_s": 34,
    "events": [
-    "people"
+    "team"
    ],
-   "G_start": 25986,
-   "G_on": 26004,
-   "G_land": 26012,
-   "G_end": 26132,
-   "G_off": 26162,
-   "G_tick": 26008
+   "G_start": 25953,
+   "G_on": 25971,
+   "G_land": 25979,
+   "G_end": 26004,
+   "G_off": 26034,
+   "G_tick": 25975
   },
   {
    "id": "ai",
@@ -1365,21 +1325,121 @@
    "gs": 355,
    "gon": 373,
    "land": 381,
-   "gend": 433,
-   "goff": 463,
+   "gend": 427,
+   "goff": 457,
    "tick": 377,
-   "nudge": false,
+   "nudge": true,
    "rim": true,
-   "ev_s": 371,
+   "ev_s": 374,
    "events": [
     "ai"
    ],
    "G_start": 26293,
    "G_on": 26311,
    "G_land": 26319,
-   "G_end": 26371,
-   "G_off": 26401,
+   "G_end": 26365,
+   "G_off": 26395,
    "G_tick": 26315
+  },
+  {
+   "id": "chain",
+   "target": [
+    "chain"
+   ],
+   "kind": "focus",
+   "gs": 576,
+   "gon": 594,
+   "land": 602,
+   "gend": 632,
+   "goff": 662,
+   "tick": 598,
+   "nudge": false,
+   "rim": true,
+   "ev_s": 589,
+   "events": [
+    "chain"
+   ],
+   "G_start": 26514,
+   "G_on": 26532,
+   "G_land": 26540,
+   "G_end": 26570,
+   "G_off": 26600,
+   "G_tick": 26536
+  },
+  {
+   "id": "order",
+   "target": [
+    "chain"
+   ],
+   "kind": "focus",
+   "gs": 845,
+   "gon": 863,
+   "land": 871,
+   "gend": 885,
+   "goff": 915,
+   "tick": 867,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 858,
+   "events": [
+    "order"
+   ],
+   "G_start": 26783,
+   "G_on": 26801,
+   "G_land": 26809,
+   "G_end": 26823,
+   "G_off": 26853,
+   "G_tick": 26805
+  },
+  {
+   "id": "af",
+   "target": [
+    "chip"
+   ],
+   "kind": "focus",
+   "gs": 1015,
+   "gon": 1033,
+   "land": 1041,
+   "gend": 1107,
+   "goff": 1137,
+   "tick": 1037,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 1034,
+   "events": [
+    "af"
+   ],
+   "G_start": 26953,
+   "G_on": 26971,
+   "G_land": 26979,
+   "G_end": 27045,
+   "G_off": 27075,
+   "G_tick": 26975
+  },
+  {
+   "id": "pred",
+   "target": [
+    "model"
+   ],
+   "kind": "focus",
+   "gs": 1434,
+   "gon": 1452,
+   "land": 1460,
+   "gend": 1478,
+   "goff": 1508,
+   "tick": 1456,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 1447,
+   "events": [
+    "pred"
+   ],
+   "G_start": 27372,
+   "G_on": 27390,
+   "G_land": 27398,
+   "G_end": 27416,
+   "G_off": 27446,
+   "G_tick": 27394
   }
  ],
  "problems": []

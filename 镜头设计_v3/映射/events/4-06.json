@@ -2,100 +2,68 @@
  "schema": "cdk20.events/1",
  "group": "4-06",
  "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 4-06（VO）：化学家一直以来的试错循环。一把钥匙沿循环走：Imagine → Make → Test → fails（打叉）→ Tweak → Try again；最后每转一圈掉一张钞票、日历翻一页（costs time and money）。循环位置和 4-07 开头一致，两页剪在一起连得上。页面 Manual406.jsx。",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 4-06（btier/B406.jsx）。一圈骨白料杆环，四站牌 Imagine / Make / Test / Tweak；化学家小人，一个金插头沿环走：Make 烧瓶、Test 小插座插不进弹回变灰（fails）、Tweak 换形、回到第一站；every single round：插头越跑越快，每过顶站掉一张钞票、日历翻一页。",
+ "tier": "B",
+ "zone": 4,
+ "trans_in": "T5 runner（上一段 4-04+05 是出镜段）",
+ "trans_out": "T2 甩镜往左（下一段 4-07 是 B 页，同一个环接着用）",
  "holds": [],
  "events": [
   {
-   "id": "tease",
-   "obj": "tease",
+   "id": "part",
+   "obj": "part",
    "verb": "grow",
    "at": {
-    "word": "4-06.w004",
+    "word": "next#1",
     "off": 0
    },
-   "means": "next part：淡虚线圈预告",
+   "lead": 13,
+   "means": "this next part：圆环料杆画出来",
    "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "word": "4-06.w008"
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "loop"
+    ]
+   },
+   "until": {
+    "word": "part#1"
    }
   },
   {
    "id": "mind",
    "obj": "mind",
-   "verb": "appear",
+   "verb": "move",
    "at": {
-    "word": "4-06.w008",
+    "word": "blew#1",
     "off": 0
    },
-   "means": "blew my mind：圈外闪线",
+   "lead": 7,
+   "means": "blew my mind：环一亮一抖（T7）",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "title",
-   "obj": "title",
-   "verb": "appear",
-   "at": {
-    "word": "4-06.w009",
-    "off": 0
    },
-   "means": "Think：标题写出",
-   "tool": "remotion",
-   "lead": 6,
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
    }
   },
   {
    "id": "chem",
    "obj": "chem",
-   "verb": "grow",
+   "verb": "appear",
    "at": {
-    "word": "4-06.w012",
+    "word": "chemists#1",
     "off": 0
    },
-   "means": "chemists：圈中心两个小人",
+   "lead": 7,
+   "means": "chemists：小人落下",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "4-06.w014"
-   },
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "person"
-    ]
-   }
-  },
-  {
-   "id": "always",
-   "obj": "always",
-   "verb": "grow",
-   "at": {
-    "word": "4-06.w014",
-    "off": 0
-   },
-   "means": "always：实线循环画出",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "4-06.w017"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "chemists#1"
    }
   },
   {
@@ -103,56 +71,38 @@
    "obj": "key",
    "verb": "appear",
    "at": {
-    "word": "4-06.w017",
+    "word": "key#1",
     "off": 0
    },
-   "means": "key：右上虚影钥匙 + a key",
+   "lead": 7,
+   "means": "found a key：金插头落在环顶",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "imagine",
-   "obj": "imagine",
-   "verb": "appear",
-   "at": {
-    "word": "4-06.w018",
-    "off": 0
-   },
-   "means": "Imagine：顶站亮",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "4-06.w020"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "mol",
-   "obj": "mol",
-   "verb": "grow",
-   "at": {
-    "word": "4-06.w020",
-    "off": 0
-   },
-   "means": "molecule：顶站出现虚线小钥匙",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "focus",
     "target": [
      "key"
     ]
+   },
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "imag",
+   "obj": "imag",
+   "verb": "appear",
+   "at": {
+    "word": "imagine#1",
+    "off": 0
+   },
+   "lead": 7,
+   "means": "Imagine：第一站牌弹出",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
@@ -160,17 +110,17 @@
    "obj": "make",
    "verb": "move",
    "at": {
-    "word": "4-06.w021",
+    "word": "make#1",
     "off": 0
    },
-   "means": "Make：小钥匙走到右站、变实",
+   "lead": 13,
+   "means": "Make it：插头走到第二站，烧瓶落下",
    "tool": "remotion",
-   "lead": 18,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
@@ -178,35 +128,35 @@
    "obj": "test",
    "verb": "move",
    "at": {
-    "word": "4-06.w023",
+    "word": "test#1",
     "off": 0
    },
-   "means": "Test：走到底站",
+   "lead": 13,
+   "means": "Test it：走到第三站，小插座落下",
    "tool": "remotion",
-   "lead": 18,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
-   "id": "fails",
-   "obj": "fails",
-   "verb": "morph",
+   "id": "fail",
+   "obj": "fail",
+   "verb": "snap",
    "at": {
-    "word": "4-06.w026",
+    "word": "fails#1",
     "off": 0
    },
-   "means": "fails：钥匙变灰、红叉",
+   "lead": 7,
+   "means": "It fails：插头顶不进，弹回变灰（T7）",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
@@ -214,164 +164,74 @@
    "obj": "tweak",
    "verb": "move",
    "at": {
-    "word": "4-06.w027",
+    "word": "tweak#1",
     "off": 0
    },
-   "means": "Tweak：走到左站、改形、恢复颜色",
+   "lead": 13,
+   "means": "Tweak it：走到第四站，插头换个形状",
    "tool": "remotion",
-   "lead": 20,
+   "guide": {
+    "kind": "none"
+   },
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "try",
-   "obj": "try",
-   "verb": "move",
-   "at": {
-    "word": "4-06.w029",
-    "off": 0
-   },
-   "means": "Try：往顶站走",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "4-06.w030"
-   },
-   "guide": {
-    "kind": "none"
    }
   },
   {
    "id": "again",
    "obj": "again",
-   "verb": "morph",
+   "verb": "move",
    "at": {
-    "word": "4-06.w030",
+    "word": "try#1",
     "off": 0
    },
-   "means": "again：回到顶站，循环快转一圈",
+   "lead": 13,
+   "means": "Try again：回到第一站",
    "tool": "remotion",
-   "lead": 6,
+   "guide": {
+    "kind": "none"
+   },
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "every",
-   "obj": "every",
-   "verb": "appear",
-   "at": {
-    "word": "4-06.w032",
-    "off": 0
-   },
-   "means": "every single round：右边标签和圈数",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "4-06.w034"
-   },
-   "guide": {
-    "kind": "none"
    }
   },
   {
    "id": "round",
    "obj": "round",
-   "verb": "morph",
+   "verb": "move",
    "at": {
-    "word": "4-06.w034",
+    "word": "every#1",
     "off": 0
    },
-   "means": "round：开始一圈圈转，计数跳",
+   "lead": 13,
+   "means": "every single round：插头绕环越跑越快",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "4-06.w038"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "round#1"
    }
   },
   {
-   "id": "lab",
-   "obj": "lab",
+   "id": "cost",
+   "obj": "cost",
    "verb": "grow",
    "at": {
-    "word": "4-06.w038",
+    "word": "costs#1",
     "off": 0
    },
-   "means": "real lab：烧瓶",
+   "lead": 7,
+   "means": "costs time and money：每过顶站掉一张钞票、日历翻一页",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "4-06.w039"
-   },
    "guide": {
     "kind": "focus",
     "target": [
-     "flask"
+     "costs"
     ]
-   }
-  },
-  {
-   "id": "costs",
-   "obj": "costs",
-   "verb": "appear",
-   "at": {
-    "word": "4-06.w039",
-    "off": 0
    },
-   "means": "costs：字牌",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "4-06.w040"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "time",
-   "obj": "time",
-   "verb": "morph",
-   "at": {
-    "word": "4-06.w040",
-    "off": 0
-   },
-   "means": "time：日历翻页、字下划线",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "4-06.w042"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "money",
-   "obj": "money",
-   "verb": "morph",
-   "at": {
-    "word": "4-06.w042",
-    "off": 0
-   },
-   "means": "money：钞票叠起、字下划线",
-   "tool": "remotion",
-   "lead": 6,
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
    }
   }
  ]

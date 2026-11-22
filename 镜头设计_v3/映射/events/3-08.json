@@ -2,271 +2,332 @@
  "schema": "cdk20.events/1",
  "group": "3-08",
  "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：说明书页 3-08（B）：看不见的锁。设计钥匙要看见锁；CDK20 只剩虚线轮廓和问号、never measured；测结构很难，只有一小部分蛋白测过（点阵，不写比例）；没有三维形状，电脑预测也贵、慢、难。页面 Manual308.jsx。",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 3-08（btier/B308.jsx）。要做插头，得先看清插座：空插头在左，插座在右但是磨砂、虚焦；no one had measured：红问号；hard lab work：烧瓶和样本管；only a small fraction：四十台小插座，只有三台是清楚的；Without a 3D shape：磨砂插座回来，芯片去算，插头对不准；expensive（钞票）、slow（日历）、difficult（问号）。",
+ "tier": "B",
+ "zone": 3,
+ "trans_in": "T2 甩进（上一段 3-07 是 B 页）",
+ "trans_out": "T5 runner（下一段 3-09 是出镜段）",
  "holds": [],
  "events": [
   {
-   "id": "title",
-   "obj": "title",
+   "id": "prob",
+   "obj": "prob",
    "verb": "appear",
    "at": {
-    "word": "3-08.w004",
+    "word": "problem#1",
     "off": 0
    },
-   "means": "problem：标题",
+   "lead": 6,
+   "means": "But here's the problem：手写 problem",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
    "id": "key",
    "obj": "key",
-   "verb": "grow",
+   "verb": "appear",
    "at": {
-    "word": "3-08.w006",
+    "word": "key#1",
     "off": 0
    },
-   "means": "design a key：钥匙长出",
+   "lead": 7,
+   "means": "To design a key：空插头落位",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "3-08.w009"
-   },
    "guide": {
     "kind": "focus",
     "target": [
-     "key"
+     "plug"
     ]
+   },
+   "until": {
+    "word": "need#1"
    }
   },
   {
-   "id": "eye",
-   "obj": "eye",
+   "id": "lock",
+   "obj": "lock",
    "verb": "appear",
    "at": {
-    "word": "3-08.w012",
+    "word": "lock#1",
     "off": 0
    },
-   "means": "see the lock：眼睛和视线",
+   "lead": 7,
+   "means": "see the lock：插座出现，磨砂看不清",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "3-08.w014"
-   },
    "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "hide",
-   "obj": "cdk_ghost",
-   "verb": "morph",
-   "at": {
-    "word": "3-08.w016",
-    "off": 0
+    "kind": "focus",
+    "target": [
+     "socket"
+    ]
    },
-   "means": "no one had measured：CDK20 变成虚线轮廓加问号",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "3-08.w020"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "stamp",
-   "obj": "stamp",
-   "verb": "snap",
-   "at": {
-    "word": "3-08.w021",
-    "off": 0
-   },
-   "means": "shape：盖章 never measured",
-   "tool": "remotion",
-   "lead": 4,
    "until": {
     "sentence_end": true
+   }
+  },
+  {
+   "id": "nobody",
+   "obj": "nobody",
+   "verb": "move",
+   "at": {
+    "word": "no#1",
+    "off": 0
    },
+   "lead": 13,
+   "means": "no one had measured：插座更虚",
+   "tool": "remotion",
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "measured#1"
+   }
+  },
+  {
+   "id": "q",
+   "obj": "q",
+   "verb": "appear",
+   "at": {
+    "word": "shape#1",
+    "off": 0
+   },
+   "lead": 6,
+   "means": "CDK20's shape：红问号",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "takes",
+   "obj": "takes",
+   "verb": "move",
+   "at": {
+    "word": "takes#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "That takes：插头和插座往右退场",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "takes#1"
    }
   },
   {
    "id": "lab",
-   "obj": "flask",
-   "verb": "grow",
-   "at": {
-    "word": "3-08.w027",
-    "off": 0
-   },
-   "means": "hard lab work：烧瓶和日历",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "3-08.w029"
-   },
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "flask"
-    ]
-   }
-  },
-  {
-   "id": "cal",
-   "obj": "cal",
-   "verb": "grow",
-   "at": {
-    "word": "3-08.w029",
-    "off": 0
-   },
-   "means": "work：日历翻页",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "3-08.w031"
-   },
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "cal"
-    ]
-   }
-  },
-  {
-   "id": "dots",
-   "obj": "dots",
-   "verb": "grow",
-   "at": {
-    "word": "3-08.w036",
-    "off": 0
-   },
-   "means": "proteins：一大片蛋白点",
-   "tool": "remotion",
-   "lead": 40,
-   "until": {
-    "word": "3-08.w037"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "few",
-   "obj": "dots_few",
+   "obj": "lab",
    "verb": "appear",
    "at": {
-    "word": "3-08.w040",
+    "word": "lab#1",
     "off": 0
    },
-   "means": "measured：只有少数点变实",
+   "lead": 7,
+   "means": "hard lab work：清场，烧瓶和样本管",
    "tool": "remotion",
-   "lead": 20,
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "lab"
+    ]
+   },
+   "until": {
+    "word": "work#1"
+   }
+  },
+  {
+   "id": "work",
+   "obj": "work",
+   "verb": "move",
+   "at": {
+    "word": "work#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "work：烧瓶晃",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "work#1"
+   }
+  },
+  {
+   "id": "grid",
+   "obj": "grid",
+   "verb": "appear",
+   "at": {
+    "word": "small#1",
+    "off": 0
+   },
+   "lead": 7,
+   "means": "only a small fraction：四十台磨砂小插座铺开",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "grid"
+    ]
+   },
+   "until": {
+    "word": "fraction#1"
+   }
+  },
+  {
+   "id": "prot",
+   "obj": "prot",
+   "verb": "appear",
+   "at": {
+    "word": "proteins#1",
+    "off": 0
+   },
+   "lead": 10,
+   "means": "of proteins：标 proteins",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "proteins#1"
+   }
+  },
+  {
+   "id": "meas",
+   "obj": "meas",
+   "verb": "appear",
+   "at": {
+    "word": "measured#2",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "have ever been measured：三台变清楚、灯亮",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
    }
   },
   {
-   "id": "no3d",
-   "obj": "cdk_ghost",
+   "id": "noshape",
+   "obj": "noshape",
    "verb": "appear",
    "at": {
-    "word": "3-08.w043",
+    "word": "without#1",
     "off": 0
    },
-   "means": "Without a 3D shape：虚线轮廓闪一下、标 no 3D shape",
+   "lead": 7,
+   "means": "Without a 3D shape：清场，磨砂插座回到中间",
    "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "word": "3-08.w045"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "chip",
-   "obj": "chip",
-   "verb": "grow",
-   "at": {
-    "word": "3-08.w046",
-    "off": 0
-   },
-   "means": "computer predictions：芯片",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "3-08.w048"
-   },
    "guide": {
     "kind": "focus",
     "target": [
-     "chip"
+     "socket"
     ]
+   },
+   "until": {
+    "word": "shape#2"
+   }
+  },
+  {
+   "id": "comp",
+   "obj": "comp",
+   "verb": "appear",
+   "at": {
+    "word": "computer#1",
+    "off": 0
+   },
+   "lead": 7,
+   "means": "computer predictions：芯片落位",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "predictions#1"
+   }
+  },
+  {
+   "id": "bind",
+   "obj": "bind",
+   "verb": "move",
+   "at": {
+    "word": "binding#1",
+    "off": 0
+   },
+   "lead": 30,
+   "means": "of binding：插头去试，对不准",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "get#1"
    }
   },
   {
    "id": "exp",
-   "obj": "w_exp",
+   "obj": "exp",
    "verb": "appear",
    "at": {
-    "word": "3-08.w051",
+    "word": "expensive#1",
     "off": 0
    },
-   "means": "expensive",
+   "lead": 7,
+   "means": "expensive：钞票",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "3-08.w052"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "expensive#1"
    }
   },
   {
    "id": "slow",
-   "obj": "w_slow",
+   "obj": "slow",
    "verb": "appear",
    "at": {
-    "word": "3-08.w052",
+    "word": "slow#1",
     "off": 0
    },
-   "means": "slow",
+   "lead": 7,
+   "means": "slow：日历",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "3-08.w053"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "slow#1"
    }
   },
   {
    "id": "diff",
-   "obj": "w_diff",
+   "obj": "diff",
    "verb": "appear",
    "at": {
-    "word": "3-08.w054",
+    "word": "difficult#1",
     "off": 0
    },
-   "means": "difficult",
-   "tool": "remotion",
    "lead": 6,
-   "until": {
-    "sentence_end": true
-   },
+   "means": "difficult：问号",
+   "tool": "remotion",
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   }
  ]

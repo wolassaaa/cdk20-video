@@ -475,35 +475,12 @@
  "holds": [],
  "events": [
   {
-   "id": "step1",
-   "obj": "step_1",
-   "verb": "grow",
-   "ease": "inout",
-   "means": "The：第 1 步框一笔画出，步骤号落章",
-   "f_start": 5,
-   "f_land": 9,
-   "f_end": 39,
-   "until": null,
-   "word": "1-04.w001",
-   "w": "The",
-   "key": "the#1",
-   "sid": "1-04.s1",
-   "word_f0": 9,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 1841,
-   "F_land": 1845,
-   "F_end": 1875
-  },
-  {
-   "id": "title1",
-   "obj": "title_1",
+   "id": "stand",
+   "obj": "stand",
    "verb": "appear",
    "ease": "inout",
-   "means": "standard first treatment：框标题写出",
-   "f_start": 17,
+   "means": "standard first treatment：骨白药座升起，胶囊落座",
+   "f_start": 10,
    "f_land": 17,
    "f_end": 93,
    "until": "1-04.w004",
@@ -514,21 +491,24 @@
    "word_f0": 17,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "stand"
+    ]
    },
-   "F_start": 1853,
+   "F_start": 1846,
    "F_land": 1853,
    "F_end": 1929
   },
   {
    "id": "liver",
    "obj": "liver",
-   "verb": "grow",
+   "verb": "appear",
    "ease": "inout",
-   "means": "liver cancer：肝零件线稿画出、红色从浇口漫开",
-   "f_start": 138,
+   "means": "advanced liver cancer：右边玻璃肝",
+   "f_start": 133,
    "f_land": 140,
-   "f_end": 208,
+   "f_end": 184,
    "until": "1-04.w008",
    "word": "1-04.w007",
    "w": "liver",
@@ -537,34 +517,21 @@
    "word_f0": 140,
    "tool": "remotion",
    "guide": {
-    "kind": "focus",
-    "target": [
-     "liver"
-    ]
+    "kind": "none"
    },
-   "F_start": 1974,
+   "F_start": 1969,
    "F_land": 1976,
-   "F_end": 2044,
-   "g_start": 114,
-   "g_on": 132,
-   "g_end": 208,
-   "g_off": 238,
-   "g_tick": 136,
-   "G_start": 1950,
-   "G_on": 1968,
-   "G_end": 2044,
-   "G_off": 2074,
-   "G_tick": 1972
+   "F_end": 2020
   },
   {
-   "id": "note_changed",
-   "obj": "note_changed",
+   "id": "changed",
+   "obj": "changed",
    "verb": "appear",
    "ease": "inout",
-   "means": "changed once：红笔笔记写出",
-   "f_start": 243,
+   "means": "changed once：手写",
+   "f_start": 237,
    "f_land": 243,
-   "f_end": 312,
+   "f_end": 282,
    "until": "1-04.w012",
    "word": "1-04.w011",
    "w": "changed",
@@ -575,20 +542,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 2079,
+   "F_start": 2073,
    "F_land": 2079,
-   "F_end": 2148
+   "F_end": 2118
   },
   {
-   "id": "nexavar",
-   "obj": "capsule",
-   "verb": "grow",
+   "id": "nex",
+   "obj": "nex",
+   "verb": "appear",
    "ease": "inout",
-   "means": "Nexavar：胶囊长出，下方印名字",
-   "f_start": 335,
+   "means": "Nexavar：胶囊标名",
+   "f_start": 329,
    "f_land": 339,
-   "f_end": 363,
-   "until": null,
+   "f_end": 369,
+   "until": "1-04.w014",
    "word": "1-04.w014",
    "w": "Nexavar",
    "key": "nexavar#1",
@@ -596,58 +563,22 @@
    "word_f0": 339,
    "tool": "remotion",
    "guide": {
-    "kind": "focus",
-    "target": [
-     "capsule"
-    ]
-   },
-   "F_start": 2171,
-   "F_land": 2175,
-   "F_end": 2199,
-   "g_start": 313,
-   "g_on": 331,
-   "g_end": 363,
-   "g_off": 393,
-   "g_tick": 335,
-   "G_start": 2149,
-   "G_on": 2167,
-   "G_end": 2199,
-   "G_off": 2229,
-   "G_tick": 2171
-  },
-  {
-   "id": "arrow1",
-   "obj": "arrow_1",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "to：手画箭头从胶囊指向右边",
-   "f_start": 373,
-   "f_land": 375,
-   "f_end": 402,
-   "until": "1-04.w017",
-   "word": "1-04.w015",
-   "w": "to",
-   "key": "to#1",
-   "sid": "1-04.s1",
-   "word_f0": 375,
-   "tool": "remotion",
-   "guide": {
     "kind": "none"
    },
-   "F_start": 2209,
-   "F_land": 2211,
-   "F_end": 2238
+   "F_start": 2165,
+   "F_land": 2175,
+   "F_end": 2205
   },
   {
-   "id": "nexavar_dim",
-   "obj": "capsule",
-   "verb": "morph",
+   "id": "combo",
+   "obj": "combo",
+   "verb": "eject",
    "ease": "inout",
-   "means": "combo：旧药褪成线稿（被换掉）",
-   "f_start": 396,
+   "means": "a combo：胶囊被顶出去，两袋输液落座",
+   "f_start": 389,
    "f_land": 402,
-   "f_end": 432,
-   "until": null,
+   "f_end": 422,
+   "until": "1-04.w017",
    "word": "1-04.w017",
    "w": "combo,",
    "key": "combo#1",
@@ -655,19 +586,32 @@
    "word_f0": 402,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "stand"
+    ]
    },
-   "F_start": 2232,
+   "F_start": 2225,
    "F_land": 2238,
-   "F_end": 2268
+   "F_end": 2258,
+   "g_start": 376,
+   "g_on": 394,
+   "g_end": 422,
+   "g_off": 452,
+   "g_tick": 398,
+   "G_start": 2212,
+   "G_on": 2230,
+   "G_end": 2258,
+   "G_off": 2288,
+   "G_tick": 2234
   },
   {
-   "id": "bag1",
-   "obj": "ivbag_1",
-   "verb": "grow",
+   "id": "atezo",
+   "obj": "atezo",
+   "verb": "appear",
    "ease": "inout",
-   "means": "atezolizumab：第一只输液袋长出，印名字",
-   "f_start": 477,
+   "means": "atezolizumab：左袋标名",
+   "f_start": 471,
    "f_land": 481,
    "f_end": 546,
    "until": "1-04.w018",
@@ -678,83 +622,20 @@
    "word_f0": 481,
    "tool": "remotion",
    "guide": {
-    "kind": "focus",
-    "target": [
-     "ivbag"
-    ]
-   },
-   "F_start": 2313,
-   "F_land": 2317,
-   "F_end": 2382,
-   "g_start": 455,
-   "g_on": 473,
-   "g_end": 546,
-   "g_off": 576,
-   "g_tick": 477,
-   "G_start": 2291,
-   "G_on": 2309,
-   "G_end": 2382,
-   "G_off": 2412,
-   "G_tick": 2313
-  },
-  {
-   "id": "plus",
-   "obj": "plus",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "plus：加号落下",
-   "f_start": 555,
-   "f_land": 555,
-   "f_end": 565,
-   "until": null,
-   "word": "1-04.w019",
-   "w": "plus",
-   "key": "plus#1",
-   "sid": "1-04.s1",
-   "word_f0": 555,
-   "tool": "remotion",
-   "guide": {
     "kind": "none"
    },
-   "F_start": 2391,
-   "F_land": 2391,
-   "F_end": 2401
+   "F_start": 2307,
+   "F_land": 2317,
+   "F_end": 2382
   },
   {
-   "id": "bag2",
-   "obj": "ivbag_2",
-   "verb": "grow",
+   "id": "beva",
+   "obj": "beva",
+   "verb": "appear",
    "ease": "inout",
-   "means": "bevacizumab：第二只输液袋长出，印名字",
-   "f_start": 581,
+   "means": "plus bevacizumab：右袋标名",
+   "f_start": 575,
    "f_land": 585,
-   "f_end": 646,
-   "until": "1-04.w020",
-   "word": "1-04.w020",
-   "w": "bevacizumab.",
-   "key": "bevacizumab#1",
-   "sid": "1-04.s1",
-   "word_f0": 585,
-   "tool": "remotion",
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "ivbag"
-    ]
-   },
-   "F_start": 2417,
-   "F_land": 2421,
-   "F_end": 2482,
-   "guide_into": "bag1"
-  },
-  {
-   "id": "combo_snap",
-   "obj": "ivbag_2",
-   "verb": "snap",
-   "ease": "inout",
-   "means": "两只袋子靠拢卡在一起，留接缝（合用）",
-   "f_start": 609,
-   "f_land": 619,
    "f_end": 646,
    "until": "1-04.s1",
    "word": "1-04.w020",
@@ -766,20 +647,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 2445,
-   "F_land": 2455,
+   "F_start": 2411,
+   "F_land": 2421,
    "F_end": 2482
   },
   {
-   "id": "step2",
-   "obj": "step_2",
-   "verb": "grow",
+   "id": "clear",
+   "obj": "clear",
+   "verb": "move",
    "ease": "inout",
-   "means": "But：第 2 步框画出",
-   "f_start": 679,
+   "means": "But：药座退到左边变小",
+   "f_start": 677,
    "f_land": 683,
-   "f_end": 713,
-   "until": null,
+   "f_end": 718,
+   "until": "1-04.w022",
    "word": "1-04.w021",
    "w": "But",
    "key": "but#1",
@@ -789,66 +670,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 2515,
+   "F_start": 2513,
    "F_land": 2519,
-   "F_end": 2549
-  },
-  {
-   "id": "people",
-   "obj": "people",
-   "verb": "grow",
-   "ease": "inout",
-   "means": "only about：十个小人依次长出",
-   "f_start": 745,
-   "f_land": 749,
-   "f_end": 832,
-   "until": "1-04.w027",
-   "word": "1-04.w023",
-   "w": "only",
-   "key": "only#1",
-   "sid": "1-04.s2",
-   "word_f0": 749,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 2581,
-   "F_land": 2585,
-   "F_end": 2668
+   "F_end": 2554
   },
   {
    "id": "three",
-   "obj": "people_3",
-   "verb": "morph",
-   "ease": "inout",
-   "means": "three：前三个小人亮起（实色），其余还是线稿",
-   "f_start": 786,
-   "f_land": 788,
-   "f_end": 832,
-   "until": "1-04.w027",
-   "word": "1-04.w025",
-   "w": "three",
-   "key": "three#1",
-   "sid": "1-04.s2",
-   "word_f0": 788,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 2622,
-   "F_land": 2624,
-   "F_end": 2668
-  },
-  {
-   "id": "plate_3in10",
-   "obj": "plate_3in10",
+   "obj": "three",
    "verb": "appear",
    "ease": "inout",
-   "means": "three in ten：大号数字牌 ~3 in 10",
-   "f_start": 788,
+   "means": "three：数字轮 3",
+   "f_start": 758,
    "f_land": 788,
-   "f_end": 842,
-   "until": "1-04.w027",
+   "f_end": 803,
+   "until": "1-04.w025",
    "word": "1-04.w025",
    "w": "three",
    "key": "three#1",
@@ -858,19 +693,55 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 2624,
+   "F_start": 2594,
    "F_land": 2624,
-   "F_end": 2678
+   "F_end": 2639
   },
   {
-   "id": "rest_fade",
-   "obj": "people_7",
-   "verb": "morph",
+   "id": "ten",
+   "obj": "ten",
+   "verb": "appear",
    "ease": "inout",
-   "means": "alive：其余七个褪成灰线",
-   "f_start": 896,
+   "means": "in ten patients：十个小人一个个落位",
+   "f_start": 810,
+   "f_land": 817,
+   "f_end": 867,
+   "until": "1-04.w028",
+   "word": "1-04.w027",
+   "w": "ten",
+   "key": "ten#1",
+   "sid": "1-04.s2",
+   "word_f0": 817,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "people"
+    ]
+   },
+   "F_start": 2646,
+   "F_land": 2653,
+   "F_end": 2703,
+   "g_start": 791,
+   "g_on": 809,
+   "g_end": 867,
+   "g_off": 897,
+   "g_tick": 813,
+   "G_start": 2627,
+   "G_on": 2645,
+   "G_end": 2703,
+   "G_off": 2733,
+   "G_tick": 2649
+  },
+  {
+   "id": "alive",
+   "obj": "alive",
+   "verb": "move",
+   "ease": "inout",
+   "means": "alive：七个变灰下沉，三个留着",
+   "f_start": 887,
    "f_land": 900,
-   "f_end": 942,
+   "f_end": 922,
    "until": "1-04.w030",
    "word": "1-04.w030",
    "w": "alive",
@@ -881,17 +752,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 2732,
+   "F_start": 2723,
    "F_land": 2736,
-   "F_end": 2778
+   "F_end": 2758
   },
   {
-   "id": "title2",
-   "obj": "title_2",
+   "id": "years",
+   "obj": "years",
    "verb": "appear",
    "ease": "inout",
-   "means": "five years on：框标题写出",
-   "f_start": 925,
+   "means": "five years on：日历落下，标 5 years",
+   "f_start": 918,
    "f_land": 925,
    "f_end": 973,
    "until": "1-04.s2",
@@ -904,40 +775,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 2761,
+   "F_start": 2754,
    "F_land": 2761,
    "F_end": 2809
   },
   {
-   "id": "step3",
-   "obj": "step_3",
-   "verb": "grow",
+   "id": "study",
+   "obj": "study",
+   "verb": "appear",
    "ease": "inout",
-   "means": "The：第 3 步框画出",
-   "f_start": 1007,
-   "f_land": 1011,
-   "f_end": 1041,
-   "until": null,
-   "word": "1-04.w034",
-   "w": "The",
-   "key": "the#2",
-   "sid": "1-04.s3",
-   "word_f0": 1011,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 2843,
-   "F_land": 2847,
-   "F_end": 2877
-  },
-  {
-   "id": "paper",
-   "obj": "paper",
-   "verb": "grow",
-   "ease": "inout",
-   "means": "study：论文零件长出",
-   "f_start": 1017,
+   "means": "The study we follow：论文书落下",
+   "f_start": 1012,
    "f_land": 1019,
    "f_end": 1074,
    "until": "1-04.w037",
@@ -950,10 +798,10 @@
    "guide": {
     "kind": "focus",
     "target": [
-     "paper1"
+     "book"
     ]
    },
-   "F_start": 2853,
+   "F_start": 2848,
    "F_land": 2855,
    "F_end": 2910,
    "g_start": 993,
@@ -968,15 +816,15 @@
    "G_tick": 2851
   },
   {
-   "id": "title3",
-   "obj": "title_3",
-   "verb": "appear",
+   "id": "calls",
+   "obj": "calls",
+   "verb": "move",
    "ease": "inout",
-   "means": "calls it：框标题 In the study's words 写出",
-   "f_start": 1115,
+   "means": "calls it：书翻开一下",
+   "f_start": 1102,
    "f_land": 1115,
-   "f_end": 1146,
-   "until": "1-04.w040",
+   "f_end": 1130,
+   "until": "1-04.w038",
    "word": "1-04.w038",
    "w": "calls",
    "key": "calls#1",
@@ -986,20 +834,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 2951,
+   "F_start": 2938,
    "F_land": 2951,
-   "F_end": 2982
+   "F_end": 2966
   },
   {
-   "id": "quote",
-   "obj": "quote",
+   "id": "huge",
+   "obj": "huge",
    "verb": "appear",
    "ease": "inout",
-   "means": "huge unmet need：引文逐字写出",
-   "f_start": 1158,
+   "means": "a huge unmet need：手写",
+   "f_start": 1152,
    "f_land": 1158,
    "f_end": 1252,
-   "until": "1-04.w043",
+   "until": "1-04.s3",
    "word": "1-04.w041",
    "w": "huge",
    "key": "huge#1",
@@ -1009,115 +857,66 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 2994,
+   "F_start": 2988,
    "F_land": 2994,
-   "F_end": 3088
-  },
-  {
-   "id": "underline",
-   "obj": "underline",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "need：红线划在引文下",
-   "f_start": 1236,
-   "f_land": 1236,
-   "f_end": 1252,
-   "until": "1-04.s3",
-   "word": "1-04.w043",
-   "w": "need.",
-   "key": "need#1",
-   "sid": "1-04.s3",
-   "word_f0": 1236,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 3072,
-   "F_land": 3072,
    "F_end": 3088
   }
  ],
  "guides": [
   {
-   "id": "liver",
+   "id": "combo",
    "target": [
-    "liver"
+    "stand"
    ],
    "kind": "focus",
-   "gs": 114,
-   "gon": 132,
-   "land": 140,
-   "gend": 208,
-   "goff": 238,
-   "tick": 136,
+   "gs": 376,
+   "gon": 394,
+   "land": 402,
+   "gend": 422,
+   "goff": 452,
+   "tick": 398,
    "nudge": false,
    "rim": true,
-   "ev_s": 138,
+   "ev_s": 389,
    "events": [
-    "liver"
+    "combo"
    ],
-   "G_start": 1950,
-   "G_on": 1968,
-   "G_land": 1976,
-   "G_end": 2044,
-   "G_off": 2074,
-   "G_tick": 1972
+   "G_start": 2212,
+   "G_on": 2230,
+   "G_land": 2238,
+   "G_end": 2258,
+   "G_off": 2288,
+   "G_tick": 2234
   },
   {
-   "id": "nexavar",
+   "id": "ten",
    "target": [
-    "capsule"
+    "people"
    ],
    "kind": "focus",
-   "gs": 313,
-   "gon": 331,
-   "land": 339,
-   "gend": 363,
-   "goff": 393,
-   "tick": 335,
-   "nudge": false,
+   "gs": 791,
+   "gon": 809,
+   "land": 817,
+   "gend": 867,
+   "goff": 897,
+   "tick": 813,
+   "nudge": true,
    "rim": true,
-   "ev_s": 335,
+   "ev_s": 810,
    "events": [
-    "nexavar"
+    "ten"
    ],
-   "G_start": 2149,
-   "G_on": 2167,
-   "G_land": 2175,
-   "G_end": 2199,
-   "G_off": 2229,
-   "G_tick": 2171
+   "G_start": 2627,
+   "G_on": 2645,
+   "G_land": 2653,
+   "G_end": 2703,
+   "G_off": 2733,
+   "G_tick": 2649
   },
   {
-   "id": "bag1",
+   "id": "study",
    "target": [
-    "ivbag"
-   ],
-   "kind": "focus",
-   "gs": 455,
-   "gon": 473,
-   "land": 481,
-   "gend": 546,
-   "goff": 576,
-   "tick": 477,
-   "nudge": false,
-   "rim": true,
-   "ev_s": 477,
-   "events": [
-    "bag1",
-    "bag2"
-   ],
-   "G_start": 2291,
-   "G_on": 2309,
-   "G_land": 2317,
-   "G_end": 2382,
-   "G_off": 2412,
-   "G_tick": 2313
-  },
-  {
-   "id": "paper",
-   "target": [
-    "paper1"
+    "book"
    ],
    "kind": "focus",
    "gs": 993,
@@ -1126,11 +925,11 @@
    "gend": 1074,
    "goff": 1104,
    "tick": 1015,
-   "nudge": false,
+   "nudge": true,
    "rim": true,
-   "ev_s": 1017,
+   "ev_s": 1012,
    "events": [
-    "paper"
+    "study"
    ],
    "G_start": 2829,
    "G_on": 2847,

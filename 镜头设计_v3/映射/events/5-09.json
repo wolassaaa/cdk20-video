@@ -1,113 +1,134 @@
 {
  "schema": "cdk20.events/1",
  "group": "5-09",
- "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：出镜 5-09（C）讲解卡：同一把锁和钥匙（5-05 的样子，钥匙插在锁孔）；the 红弧线箭头，key 标签，turned 钥匙转到底，锁梁弹起；页面 OnCam509.jsx。",
+ "tool": "blender",
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜 5-09（C）三维版（11-20 甲线，技能 oncam-3d-parts）：人在左，右边同一台 CDK20 插座。This 插座落位；time 048 假插头从下面转进来停在孔口前；the key 插进去；turned 一路拧到 90°（2° 过冲，咔），红色卡扣扣上，灯灭、红环暗；空一拍后孔口正对镜头冲进去（段尾，接 W4 插座里面）。Blender：inserts/shot_oncam.py recipe socket_plug。旧二维版事件表存 _wip/5-09_events_v1_2d.json。",
  "holds": [],
  "events": [
   {
-   "id": "frame",
-   "obj": "frame",
-   "verb": "grow",
+   "id": "arrive",
+   "obj": "socket",
+   "verb": "move",
    "at": {
     "word": "5-09.w001",
     "off": 0
    },
-   "means": "This：讲解卡外框画出",
-   "tool": "remotion",
-   "lead": 22,
+   "lead": 32,
+   "ease": "out",
+   "means": "This：插座从镜头前（段首 T5，红环插孔盖满画面）退回 C 的右侧落位",
    "until": {
     "word": "5-09.w001"
-   }
-  },
-  {
-   "id": "lock",
-   "obj": "lock",
-   "verb": "grow",
-   "at": {
-    "word": "5-09.w001",
-    "off": 0
    },
-   "means": "This：锁长出",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "5-09.w001"
+   "guide": {
+    "kind": "none"
    }
   },
   {
    "id": "key",
-   "obj": "key",
-   "verb": "grow",
+   "obj": "plug",
+   "verb": "move",
    "at": {
     "word": "5-09.w002",
     "off": 0
    },
-   "means": "time：钥匙插在锁孔上长出",
-   "tool": "remotion",
-   "lead": 16,
+   "lead": 24,
+   "ease": "out",
+   "means": "time：048 假插头从画面下方划一道弧转进来，停在孔口前",
    "until": {
-    "word": "5-09.w002"
-   }
-  },
-  {
-   "id": "arc",
-   "obj": "arc",
-   "verb": "appear",
-   "at": {
-    "word": "5-09.w003",
-    "off": 0
+    "dur": 14
    },
-   "means": "the：红色虚弧线箭头，画出要转的方向",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "5-09.w003"
+   "guide": {
+    "kind": "none"
    }
   },
   {
-   "id": "keyl",
-   "obj": "keyl",
-   "verb": "appear",
+   "id": "insert",
+   "obj": "plug",
+   "verb": "plug_in",
    "at": {
     "word": "5-09.w004",
     "off": 0
    },
-   "means": "key：标签 key",
-   "tool": "remotion",
-   "lead": 8,
+   "lead": 12,
+   "ease": "inout",
+   "means": "the key：插头插进孔，到底",
    "until": {
-    "word": "5-09.w004"
+    "dur": 10
+   },
+   "guide": {
+    "kind": "none"
    }
   },
   {
-   "id": "turn",
-   "obj": "turn",
+   "id": "twist",
+   "obj": "plug",
+   "verb": "twist",
+   "at": {
+    "word": "5-09.w005",
+    "off": 0
+   },
+   "lead": 40,
+   "ease": "inout",
+   "means": "turned：插头一路拧到 90°，2° 过冲，咔",
+   "until": {
+    "dur": 10
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "clamp",
+   "obj": "tab",
+   "verb": "clamp",
+   "at": {
+    "word": "5-09.w005",
+    "off": 6
+   },
+   "lead": 4,
+   "ease": "out",
+   "means": "（咔）红色卡扣扣住插头凸缘",
+   "until": {
+    "dur": 12
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "off",
+   "obj": "socket",
+   "verb": "power_off",
+   "at": {
+    "word": "5-09.w005",
+    "off": 10
+   },
+   "lead": 4,
+   "ease": "inout",
+   "means": "插座顶上的灯灭、红环暗下去：这台机器停了",
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "dive",
+   "obj": "socket",
    "verb": "move",
    "at": {
     "word": "5-09.w005",
-    "off": 0
+    "off": 73
    },
-   "means": "turned：钥匙转到底",
-   "tool": "remotion",
-   "lead": 40,
+   "lead": 35,
+   "ease": "in",
+   "means": "（空一拍）孔口正对镜头冲进去（段尾 T1，接 W4 插座里面）",
    "until": {
-    "word": "5-09.w005"
-   }
-  },
-  {
-   "id": "open",
-   "obj": "open",
-   "verb": "morph",
-   "at": {
-    "word": "5-09.w005",
-    "off": 0
+    "dur": 0
    },
-   "means": "turned：锁梁弹起，几道红线",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "5-09.w005"
+   "guide": {
+    "kind": "none"
    }
   }
  ]

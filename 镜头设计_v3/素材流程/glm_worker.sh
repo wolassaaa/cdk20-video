@@ -51,6 +51,9 @@ fi
 if [ "$TASK" = PAGELOOK ]; then
   PROMPT="HKBU SCIE1007 课程作业的科普视频。现在是 $(date '+%Y-%m-%d %H:%M') 韩国时间。你是二维页面的看片员。先读 $ROOT/镜头设计_v3/映射/GLM页面手册.md 第 3、5 节和 $ROOT/镜头设计_v3/映射/GLM页面任务.md 里段 $WHO 那一节。再读这段的 report.md（在 $ROOT/镜头设计_v3/映射/_cache/pages/ 下，合成名见手册第 1 节），用 Read 逐张打开里面列出的静帧 png。对每张图查：字或零件有没有互相重叠、压线、出框、被裁掉；出镜页图形有没有挡到人；字是不是太小看不清；画面是不是空、和任务单说的内容对不对；有没有错字。把结果写到同一目录的 look_report.md：第一行写 '看图：过' 或 '看图：不过'，下面逐张列问题（写清在哪个位置、哪个元素、建议怎么挪）。只用 Read 和 Write，只写 look_report.md。不删任何东西，不运行 git，不改页面代码。"
 fi
+if [ "$TASK" = QC ]; then
+  PROMPT="HKBU SCIE1007 课程作业的科普视频。现在是 $(date '+%Y-%m-%d %H:%M') 韩国时间。你是成片机检员兼进度监督。1) 运行 bash _env/ft.sh qc，它会给导演检查文件夹里新出的视频做机检（分辨率、帧率、黑帧、冻帧、响度），结果追加在 $ROOT/导演检查_$(date +%Y%m%d)/_GLM机检.md。2) 读 $ROOT/镜头设计_v3/深化/17_收尾排班.md 第四节时段表和第六节判定点，再用 ls 看 $ROOT/导演检查_$(date +%Y%m%d)/ 和前一天文件夹、以及 $ROOT/导演检查_20261123/ 里已经交出的 mp4（文件名里有段号），对照现在的时间，列出：已交哪些段、按排期这时应该交哪些段、落后了哪些、到这个钟点应该交而没交的（单列一行）、下一个判定点是什么时候、照判定点规则到时该降哪几段。3) 把机检里结果不是'过'的条目和进度落后的条目，写成一段简短中文，追加到 $FLOW/日报/监督_$(date +%Y%m%d).md（带时间）；如果有黑帧、冻帧、分辨率或帧率不对，第一行写【机检不过】并列出文件和时间点。只用 bash _env/ft.sh qc、ls、cat 和 Read/Write/Edit；不删任何东西，不改视频和程序，不运行 git。"
+fi
 case "$TASK" in G1|G4|G5|G6|CUT|PAGELOOK) MODEL=$VISION ;; PAGE) MODEL=$LIGHT ;; G3|G7) MODEL=$HEAVY ;; *) MODEL=$LIGHT ;; esac
 [ -n "$GLM_MODEL_OVERRIDE" ] && MODEL=$GLM_MODEL_OVERRIDE
 case " $ALLOWED " in *" $MODEL "*) ;; *) echo "不允许的模型：$MODEL（只许 $ALLOWED）"; exit 2 ;; esac
@@ -90,6 +93,7 @@ case "$1" in
        case "$3" in "") exit 0 ;; *.mp4|*.mov) ;; *) echo "video must be .mp4 or .mov"; exit 2 ;; esac
        case "$4" in "") exec "$PY" "$M/check_sync.py" "$3" "$2" ;; *[!0-9.]*) echo "t0 must be seconds"; exit 2 ;; *) exec "$PY" "$M/check_sync.py" "$3" "$2" --t0 "$4" --dur "${5:-30}" ;; esac ;;
   status) exec bash "$ROOT/_env/jobs/watch_status.sh" ;;
+  qc) PYTHONIOENCODING=utf-8 exec "$PY" -X utf8 "$ROOT/_env/jobs/qc_new.py" ;;
   resume) exec bash "$ROOT/_env/jobs/resume_renders.sh" ;;
   board) PYTHONIOENCODING=utf-8 exec "$PY" "$FLOW/board.py" ;;
   pageprep|pagecheck|pagestills)

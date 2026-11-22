@@ -1,201 +1,202 @@
 {
  "schema": "cdk20.events/1",
  "group": "2-05",
- "tool": "warp_source",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/2-05.json",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 2-05（btier/B205.jsx）。两个目标上下两栏：编号牌 1、放大镜扫过三块 AI 芯片、玻璃肝（cancer drug discovery）；编号牌 2、小人、五个金插头沿料杆走过检测门，各长一根分数条，最好的打勾。导演 11-18 看二维样片时要求加说明文字：两栏各一行 Aim 1 / Aim 2。",
+ "tier": "B",
+ "zone": 2,
+ "trans_in": "T5 runner（上一段 2-04 是出镜段）",
+ "trans_out": "T2 甩镜往左（下一段 2-06 是 B 页）",
  "holds": [],
  "events": [
   {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
+   "id": "aim1",
+   "obj": "aim1",
+   "verb": "appear",
    "at": {
-    "word": "2-05.w001",
-    "off": -9
-   },
-   "until": {
-    "dur": 6
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.00→0.58 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.0,
-    0.583
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage01",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "2-05.w001",
-    "off": -3
-   },
-   "until": {
-    "dur": 116
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.58→2.08 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.583,
-    2.083
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage02",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "2-05.w005",
+    "word": "one#1",
     "off": 0
    },
-   "until": {
-    "dur": 25
+   "lead": 7,
+   "means": "One：编号牌 1 落下，标 Aim 1",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "aim1"
+    ]
    },
-   "ease": "linear",
-   "means": "旧动画源片 2.08→2.35 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    2.083,
-    2.35
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "until": {
+    "word": "one#1"
+   }
   },
   {
-   "id": "footage03",
-   "obj": "footage",
+   "id": "identify",
+   "obj": "identify",
    "verb": "move",
    "at": {
-    "word": "2-05.w006",
+    "word": "identify#1",
     "off": 0
    },
-   "until": {
-    "dur": 55
+   "lead": 13,
+   "means": "identify：放大镜从左扫过来",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
    },
-   "ease": "linear",
-   "means": "旧动画源片 2.35→3.48 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    2.35,
-    3.483
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "until": {
+    "word": "identify#1"
+   }
   },
   {
-   "id": "footage04",
-   "obj": "footage",
-   "verb": "move",
+   "id": "methods",
+   "obj": "methods",
+   "verb": "appear",
    "at": {
-    "word": "2-05.w007",
+    "word": "computer-aided#1",
     "off": 0
    },
-   "until": {
-    "dur": 139
+   "lead": 7,
+   "means": "computer-aided methods：三块芯片依次落位",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "chips"
+    ]
    },
-   "ease": "linear",
-   "means": "旧动画源片 3.48→6.88 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    3.483,
-    6.883
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "until": {
+    "word": "methods#1"
+   }
   },
   {
-   "id": "footage05",
-   "obj": "footage",
-   "verb": "move",
+   "id": "cancer",
+   "obj": "cancer",
+   "verb": "appear",
    "at": {
-    "word": "2-05.w012",
+    "word": "cancer#1",
     "off": 0
    },
-   "until": {
-    "dur": 130
+   "lead": 7,
+   "means": "used in cancer drug discovery：玻璃肝落下",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
    },
-   "ease": "linear",
-   "means": "旧动画源片 6.88→8.20 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    6.883,
-    8.2
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "until": {
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage06",
-   "obj": "footage",
-   "verb": "move",
+   "id": "aim2",
+   "obj": "aim2",
+   "verb": "appear",
    "at": {
-    "word": "2-05.w015",
+    "word": "two#1",
     "off": 0
    },
-   "until": {
-    "dur": 75
+   "lead": 7,
+   "means": "Two：编号牌 2 落下，标 Aim 2",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "aim2"
+    ]
    },
-   "ease": "linear",
-   "means": "旧动画源片 8.20→9.72 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    8.2,
-    9.717
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "until": {
+    "word": "two#1"
+   }
   },
   {
-   "id": "footage07",
-   "obj": "footage",
-   "verb": "move",
+   "id": "eval",
+   "obj": "eval",
+   "verb": "grow",
    "at": {
-    "word": "2-05.w017",
+    "word": "evaluate#1",
     "off": 0
    },
-   "until": {
-    "dur": 152
+   "lead": 13,
+   "means": "evaluate：下栏料杆和检测门长出来",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
    },
-   "ease": "linear",
-   "means": "旧动画源片 9.72→13.17 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    9.717,
-    13.167
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "until": {
+    "word": "evaluate#1"
+   }
   },
   {
-   "id": "footage08",
-   "obj": "footage",
+   "id": "these",
+   "obj": "these",
    "verb": "move",
    "at": {
-    "word": "2-05.w021",
+    "word": "methods#2",
     "off": 0
    },
-   "until": {
-    "dur": 86
+   "lead": 13,
+   "means": "these methods：上栏三块芯片一块块亮一下",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
    },
-   "ease": "linear",
-   "means": "旧动画源片 13.17→14.87 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    13.167,
-    14.867
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "until": {
+    "word": "methods#2"
+   }
   },
   {
-   "id": "footage09",
-   "obj": "footage",
-   "verb": "move",
+   "id": "sci",
+   "obj": "sci",
+   "verb": "appear",
    "at": {
-    "word": "2-05.w024",
+    "word": "scientists#1",
     "off": 0
    },
-   "until": {
-    "dur": 37
+   "lead": 7,
+   "means": "help scientists：小人落下",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
    },
-   "ease": "linear",
-   "means": "旧动画源片 14.87→15.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    14.867,
-    15.45
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "until": {
+    "word": "scientists#1"
+   }
+  },
+  {
+   "id": "assess",
+   "obj": "assess",
+   "verb": "move",
+   "at": {
+    "word": "assess#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "assess：金插头沿料杆走过检测门，各长一根分数条",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "assess#1"
+   }
+  },
+  {
+   "id": "cands",
+   "obj": "cands",
+   "verb": "appear",
+   "at": {
+    "word": "candidates#1",
+    "off": 0
+   },
+   "lead": 7,
+   "means": "potential drug candidates：五个插头排好，最好的打勾",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
+   }
   }
  ]
 }

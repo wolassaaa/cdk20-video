@@ -2,415 +2,293 @@
  "schema": "cdk20.events/1",
  "group": "1-04",
  "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：第 1 章二维说明书页。三个步骤框：治疗换过一次（Nexavar → atezolizumab + bevacizumab）、五年后约三成在世、论文原话 huge unmet need。框下零件说明栏，出处行 Ren et al. 2023；HKCaR 2022。页面代码 src/v3/manual/Manual104.jsx。",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 1-04（btier/B104.jsx）。一线药换过一次：骨白药座上先是胶囊（Nexavar），combo 时胶囊被顶走，两袋输液落座（atezolizumab + bevacizumab）；three in ten：十个小人，五年后只亮三个，日历 5 years；the study we follow：论文书落下，手写 huge unmet need。",
+ "tier": "B",
+ "zone": 1,
+ "trans_in": "T5 capsule（上一段 1-03 是出镜段，胶囊）",
+ "trans_out": "T5 runner（下一段 1-05 是出镜段）",
  "holds": [],
  "events": [
   {
-   "id": "step1",
-   "obj": "step_1",
-   "verb": "grow",
-   "at": {
-    "word": "1-04.w001",
-    "off": 0
-   },
-   "means": "The：第 1 步框一笔画出，步骤号落章",
-   "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "dur": 30
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "title1",
-   "obj": "title_1",
+   "id": "stand",
+   "obj": "stand",
    "verb": "appear",
    "at": {
-    "word": "1-04.w002",
+    "word": "standard#1",
     "off": 0
    },
-   "means": "standard first treatment：框标题写出",
+   "lead": 7,
+   "means": "standard first treatment：骨白药座升起，胶囊落座",
    "tool": "remotion",
-   "until": {
-    "word": "1-04.w004"
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "stand"
+    ]
+   },
+   "until": {
+    "word": "treatment#1"
    }
   },
   {
    "id": "liver",
    "obj": "liver",
-   "verb": "grow",
-   "at": {
-    "word": "1-04.w007",
-    "off": 0
-   },
-   "means": "liver cancer：肝零件线稿画出、红色从浇口漫开",
-   "tool": "remotion",
-   "lead": 2,
-   "until": {
-    "word": "1-04.w008",
-    "off": 24
-   },
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "liver"
-    ]
-   }
-  },
-  {
-   "id": "note_changed",
-   "obj": "note_changed",
    "verb": "appear",
    "at": {
-    "word": "1-04.w011",
+    "word": "liver#1",
     "off": 0
    },
-   "means": "changed once：红笔笔记写出",
+   "lead": 7,
+   "means": "advanced liver cancer：右边玻璃肝",
    "tool": "remotion",
-   "until": {
-    "word": "1-04.w012",
-    "off": 30
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "nexavar",
-   "obj": "capsule",
-   "verb": "grow",
-   "at": {
-    "word": "1-04.w014",
-    "off": 0
    },
-   "means": "Nexavar：胶囊长出，下方印名字",
-   "tool": "remotion",
-   "lead": 4,
    "until": {
-    "dur": 24
-   },
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "capsule"
-    ]
+    "word": "cancer#1"
    }
   },
   {
-   "id": "arrow1",
-   "obj": "arrow_1",
+   "id": "changed",
+   "obj": "changed",
    "verb": "appear",
    "at": {
-    "word": "1-04.w015",
+    "word": "changed#1",
     "off": 0
    },
-   "means": "to：手画箭头从胶囊指向右边",
-   "tool": "remotion",
-   "lead": 2,
-   "until": {
-    "word": "1-04.w017",
-    "edge": "start"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "nexavar_dim",
-   "obj": "capsule",
-   "verb": "morph",
-   "at": {
-    "word": "1-04.w017",
-    "off": 0
-   },
-   "means": "combo：旧药褪成线稿（被换掉）",
-   "tool": "remotion",
    "lead": 6,
-   "until": {
-    "dur": 30
-   },
+   "means": "changed once：手写",
+   "tool": "remotion",
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "bag1",
-   "obj": "ivbag_1",
-   "verb": "grow",
-   "at": {
-    "word": "1-04.w018",
-    "off": 0
    },
-   "means": "atezolizumab：第一只输液袋长出，印名字",
-   "tool": "remotion",
-   "lead": 4,
    "until": {
-    "word": "1-04.w018"
-   },
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "ivbag"
-    ]
+    "word": "once#1"
    }
   },
   {
-   "id": "plus",
-   "obj": "plus",
+   "id": "nex",
+   "obj": "nex",
    "verb": "appear",
    "at": {
-    "word": "1-04.w019",
+    "word": "nexavar#1",
     "off": 0
    },
-   "means": "plus：加号落下",
+   "lead": 10,
+   "means": "Nexavar：胶囊标名",
    "tool": "remotion",
-   "until": {
-    "dur": 10
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "nexavar#1"
    }
   },
   {
-   "id": "bag2",
-   "obj": "ivbag_2",
-   "verb": "grow",
+   "id": "combo",
+   "obj": "combo",
+   "verb": "eject",
    "at": {
-    "word": "1-04.w020",
+    "word": "combo#1",
     "off": 0
    },
-   "means": "bevacizumab：第二只输液袋长出，印名字",
+   "lead": 13,
+   "means": "a combo：胶囊被顶出去，两袋输液落座",
    "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "word": "1-04.w020"
-   },
    "guide": {
     "kind": "focus",
     "target": [
-     "ivbag"
+     "stand"
     ]
+   },
+   "until": {
+    "word": "combo#1"
    }
   },
   {
-   "id": "combo_snap",
-   "obj": "ivbag_2",
-   "verb": "snap",
+   "id": "atezo",
+   "obj": "atezo",
+   "verb": "appear",
    "at": {
-    "word": "1-04.w020",
-    "off": 34
+    "word": "atezolizumab#1",
+    "off": 0
    },
-   "means": "两只袋子靠拢卡在一起，留接缝（合用）",
-   "tool": "remotion",
    "lead": 10,
+   "means": "atezolizumab：左袋标名",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "atezolizumab#1"
+   }
+  },
+  {
+   "id": "beva",
+   "obj": "beva",
+   "verb": "appear",
+   "at": {
+    "word": "bevacizumab#1",
+    "off": 0
+   },
+   "lead": 10,
+   "means": "plus bevacizumab：右袋标名",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
    }
   },
   {
-   "id": "step2",
-   "obj": "step_2",
-   "verb": "grow",
+   "id": "clear",
+   "obj": "clear",
+   "verb": "move",
    "at": {
-    "word": "1-04.w021",
+    "word": "but#1",
     "off": 0
    },
-   "means": "But：第 2 步框画出",
+   "lead": 6,
+   "means": "But：药座退到左边变小",
    "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "dur": 30
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "people",
-   "obj": "people",
-   "verb": "grow",
-   "at": {
-    "word": "1-04.w023",
-    "off": 0
    },
-   "means": "only about：十个小人依次长出",
-   "tool": "remotion",
-   "lead": 4,
    "until": {
-    "word": "1-04.w027"
-   },
-   "guide": {
-    "kind": "none"
+    "word": "here#1"
    }
   },
   {
    "id": "three",
-   "obj": "people_3",
-   "verb": "morph",
-   "at": {
-    "word": "1-04.w025",
-    "off": 0
-   },
-   "means": "three：前三个小人亮起（实色），其余还是线稿",
-   "tool": "remotion",
-   "lead": 2,
-   "until": {
-    "word": "1-04.w027"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "plate_3in10",
-   "obj": "plate_3in10",
+   "obj": "three",
    "verb": "appear",
    "at": {
-    "word": "1-04.w025",
+    "word": "three#1",
     "off": 0
    },
-   "means": "three in ten：大号数字牌 ~3 in 10",
+   "lead": 30,
+   "means": "three：数字轮 3",
    "tool": "remotion",
-   "until": {
-    "word": "1-04.w027",
-    "off": 10
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "three#1"
    }
   },
   {
-   "id": "rest_fade",
-   "obj": "people_7",
-   "verb": "morph",
-   "at": {
-    "word": "1-04.w030",
-    "off": 0
-   },
-   "means": "alive：其余七个褪成灰线",
-   "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "word": "1-04.w030",
-    "off": 20
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "title2",
-   "obj": "title_2",
+   "id": "ten",
+   "obj": "ten",
    "verb": "appear",
    "at": {
-    "word": "1-04.w031",
+    "word": "ten#1",
     "off": 0
    },
-   "means": "five years on：框标题写出",
+   "lead": 7,
+   "means": "in ten patients：十个小人一个个落位",
    "tool": "remotion",
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "step3",
-   "obj": "step_3",
-   "verb": "grow",
-   "at": {
-    "word": "1-04.w034",
-    "off": 0
-   },
-   "means": "The：第 3 步框画出",
-   "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "dur": 30
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "paper",
-   "obj": "paper",
-   "verb": "grow",
-   "at": {
-    "word": "1-04.w035",
-    "off": 0
-   },
-   "means": "study：论文零件长出",
-   "tool": "remotion",
-   "lead": 2,
-   "until": {
-    "word": "1-04.w037"
-   },
    "guide": {
     "kind": "focus",
     "target": [
-     "paper1"
+     "people"
     ]
+   },
+   "until": {
+    "word": "patients#1"
    }
   },
   {
-   "id": "title3",
-   "obj": "title_3",
-   "verb": "appear",
+   "id": "alive",
+   "obj": "alive",
+   "verb": "move",
    "at": {
-    "word": "1-04.w038",
+    "word": "alive#1",
     "off": 0
    },
-   "means": "calls it：框标题 In the study's words 写出",
+   "lead": 13,
+   "means": "alive：七个变灰下沉，三个留着",
    "tool": "remotion",
-   "until": {
-    "word": "1-04.w040"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "alive#1"
    }
   },
   {
-   "id": "quote",
-   "obj": "quote",
+   "id": "years",
+   "obj": "years",
    "verb": "appear",
    "at": {
-    "word": "1-04.w041",
+    "word": "five#1",
     "off": 0
    },
-   "means": "huge unmet need：引文逐字写出",
+   "lead": 7,
+   "means": "five years on：日历落下，标 5 years",
    "tool": "remotion",
-   "until": {
-    "word": "1-04.w043"
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "underline",
-   "obj": "underline",
-   "verb": "appear",
-   "at": {
-    "word": "1-04.w043",
-    "off": 0
    },
-   "means": "need：红线划在引文下",
-   "tool": "remotion",
    "until": {
     "sentence_end": true
+   }
+  },
+  {
+   "id": "study",
+   "obj": "study",
+   "verb": "appear",
+   "at": {
+    "word": "study#1",
+    "off": 0
    },
+   "lead": 7,
+   "means": "The study we follow：论文书落下",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "book"
+    ]
+   },
+   "until": {
+    "word": "follow#1"
+   }
+  },
+  {
+   "id": "calls",
+   "obj": "calls",
+   "verb": "move",
+   "at": {
+    "word": "calls#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "calls it：书翻开一下",
+   "tool": "remotion",
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "calls#1"
+   }
+  },
+  {
+   "id": "huge",
+   "obj": "huge",
+   "verb": "appear",
+   "at": {
+    "word": "huge#1",
+    "off": 0
+   },
+   "lead": 6,
+   "means": "a huge unmet need：手写",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   }
  ]

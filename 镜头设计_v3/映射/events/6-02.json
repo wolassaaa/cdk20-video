@@ -2,25 +2,47 @@
  "schema": "cdk20.events/1",
  "group": "6-02",
  "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：第 6 章记分板第一行 6-02（画外音）：Seeing the lock；左栏烧瓶加 expensive / slow / difficult，右栏文件落进格子 a free prediction，再飞向 public database，两栏之间一个右箭头。页面 Manual602.jsx。",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 6-02（btier/B602.jsx，复用第 6 章翻牌记分板组件）。填第 1 行：行名翻出 1. SEEING THE LOCK；BEFORE 左凹位升起磨砂 CDK20 轮廓件，主翻牌翻出 HARD LAB EXPERIMENTS，副行三枚小翻牌依次翻出 EXPENSIVE、SLOW、DIFFICULT；NOW 右凹位升起 4-02 同款克莱因蓝 CDK20 预测卡片，主翻牌翻出 FREE PREDICTION，卡片旁亮出公共数据库小机柜，副翻牌翻出 PUBLIC DATABASE（注 AlphaFold DB v6）。",
+ "tier": "B",
+ "zone": 6,
+ "trans_in": "T2 甩进（上一段 6-01 是 B 页）",
+ "trans_out": "T2 甩镜往左（下一段 6-03 是 B 页）",
  "holds": [],
  "events": [
   {
-   "id": "lbl",
-   "obj": "lbl",
-   "verb": "appear",
+   "id": "row1",
+   "obj": "row1",
+   "verb": "snap",
    "at": {
-    "word": "6-02.w003",
+    "word": "seeing#1",
     "off": 0
    },
-   "means": "Seeing the lock：行标题",
+   "lead": 9,
+   "means": "Seeing：第 1 行行名翻出 1. SEEING THE LOCK",
    "tool": "remotion",
-   "lead": 26,
-   "until": {
-    "word": "6-02.w003"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "lock#1"
+   }
+  },
+  {
+   "id": "focus1",
+   "obj": "focus1",
+   "verb": "move",
+   "at": {
+    "word": "lock#1",
+    "off": 0
+   },
+   "lead": 7,
+   "means": "the lock：镜头推近第 1 行，左右小凹位框亮起",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
@@ -28,164 +50,131 @@
    "obj": "bef",
    "verb": "appear",
    "at": {
-    "word": "6-02.w004",
+    "word": "before#1",
     "off": 0
    },
-   "means": "Before：左栏亮起",
+   "lead": 7,
+   "means": "Before：左凹位升起磨砂 CDK20 轮廓件",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "6-02.w004"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "flask",
-   "obj": "flask",
-   "verb": "grow",
-   "at": {
-    "word": "6-02.w006",
-    "off": 0
-   },
-   "means": "lab：烧瓶长出",
-   "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "word": "6-02.w006"
-   },
    "guide": {
     "kind": "focus",
     "target": [
-     "flask"
+     "before1"
     ]
+   },
+   "until": {
+    "word": "experiments#1"
    }
   },
   {
-   "id": "cap",
-   "obj": "cap",
-   "verb": "appear",
+   "id": "lab",
+   "obj": "lab",
+   "verb": "snap",
    "at": {
-    "word": "6-02.w007",
+    "word": "experiments#1",
     "off": 0
    },
-   "means": "experiments：标签 hard lab experiments",
+   "lead": 28,
+   "means": "hard lab experiments：BEFORE 主翻牌翻出 HARD LAB EXPERIMENTS",
    "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "and#1"
+   }
+  },
+  {
+   "id": "no3d",
+   "obj": "no3d",
+   "verb": "move",
+   "at": {
+    "word": "without#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "without a 3D：左凹位磨砂轮廓发虚并亮起红问号",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "shape#1"
+   }
+  },
+  {
+   "id": "shape",
+   "obj": "shape",
+   "verb": "appear",
+   "at": {
+    "word": "shape#1",
+    "off": 0
+   },
    "lead": 10,
-   "until": {
-    "word": "6-02.w007"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "dash",
-   "obj": "dash",
-   "verb": "appear",
-   "at": {
-    "word": "6-02.w009",
-    "off": 0
-   },
-   "means": "without：虚线锁轮廓",
+   "means": "shape：标出缺少三维形状示意",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "6-02.w009"
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "d3",
-   "obj": "d3",
-   "verb": "appear",
-   "at": {
-    "word": "6-02.w011",
-    "off": 0
    },
-   "means": "3D：标签 3D shape",
-   "tool": "remotion",
-   "lead": 6,
    "until": {
-    "word": "6-02.w011"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "cross",
-   "obj": "cross",
-   "verb": "morph",
-   "at": {
-    "word": "6-02.w012",
-    "off": 0
-   },
-   "means": "shape：红叉盖住虚线锁",
-   "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "6-02.w012"
-   },
-   "guide": {
-    "kind": "none"
+    "word": "expensive#1"
    }
   },
   {
    "id": "exp",
    "obj": "exp",
-   "verb": "appear",
+   "verb": "snap",
    "at": {
-    "word": "6-02.w015",
+    "word": "expensive#1",
     "off": 0
    },
-   "means": "expensive：写出",
+   "lead": 13,
+   "means": "expensive：副行第 1 枚小翻牌翻出 EXPENSIVE",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "6-02.w015"
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "tags1"
+    ]
+   },
+   "until": {
+    "word": "slow#1"
    }
   },
   {
    "id": "slow",
    "obj": "slow",
-   "verb": "appear",
+   "verb": "snap",
    "at": {
-    "word": "6-02.w016",
+    "word": "slow#1",
     "off": 0
    },
-   "means": "slow：写出",
+   "lead": 13,
+   "means": "slow：副行第 2 枚小翻牌翻出 SLOW",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "6-02.w016"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "difficult#1"
    }
   },
   {
-   "id": "dif",
-   "obj": "dif",
-   "verb": "appear",
+   "id": "diff",
+   "obj": "diff",
+   "verb": "snap",
    "at": {
-    "word": "6-02.w018",
+    "word": "difficult#1",
     "off": 0
    },
-   "means": "difficult：写出",
+   "lead": 10,
+   "means": "difficult：副行第 3 枚小翻牌翻出 DIFFICULT",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
@@ -193,71 +182,56 @@
    "obj": "now",
    "verb": "grow",
    "at": {
-    "word": "6-02.w019",
+    "word": "now#1",
     "off": 0
    },
-   "means": "Now：右栏亮起，两栏之间画箭头",
+   "lead": 13,
+   "means": "Now：右凹位升起 4-02 同款蓝色 CDK20 预测卡片",
    "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "6-02.w019"
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "now1"
+    ]
+   },
+   "until": {
+    "word": "prediction#1"
    }
   },
   {
-   "id": "file",
-   "obj": "file",
-   "verb": "move",
+   "id": "pred",
+   "obj": "pred",
+   "verb": "snap",
    "at": {
-    "word": "6-02.w021",
+    "word": "prediction#1",
     "off": 0
    },
-   "means": "free：文件图标从上方落进格子",
+   "lead": 13,
+   "means": "free prediction：NOW 主翻牌翻出 FREE PREDICTION",
    "tool": "remotion",
-   "lead": 18,
-   "until": {
-    "word": "6-02.w021"
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "txt",
-   "obj": "txt",
-   "verb": "appear",
-   "at": {
-    "word": "6-02.w022",
-    "off": 0
    },
-   "means": "prediction：写 a free prediction",
-   "tool": "remotion",
-   "lead": 8,
    "until": {
-    "word": "6-02.w022"
-   },
-   "guide": {
-    "kind": "none"
+    "word": "downloaded#1"
    }
   },
   {
    "id": "dl",
    "obj": "dl",
-   "verb": "grow",
+   "verb": "move",
    "at": {
-    "word": "6-02.w023",
+    "word": "downloaded#1",
     "off": 0
    },
-   "means": "downloaded：箭头从文件指向右边",
+   "lead": 28,
+   "means": "downloaded：数据流小图标落向 CDK20 卡片",
    "tool": "remotion",
-   "lead": 16,
-   "until": {
-    "word": "6-02.w023"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "public#1"
    }
   },
   {
@@ -265,35 +239,35 @@
    "obj": "pub",
    "verb": "grow",
    "at": {
-    "word": "6-02.w026",
+    "word": "public#1",
     "off": 0
    },
-   "means": "public：数据库图标长出",
+   "lead": 13,
+   "means": "public：卡片旁亮出公共数据库小机柜图标",
    "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "word": "6-02.w026"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "database#1"
    }
   },
   {
-   "id": "dbl",
-   "obj": "dbl",
-   "verb": "appear",
+   "id": "db",
+   "obj": "db",
+   "verb": "snap",
    "at": {
-    "word": "6-02.w027",
+    "word": "database#1",
     "off": 0
    },
-   "means": "database：标签 public database",
+   "lead": 10,
+   "means": "database：NOW 副翻牌翻出 PUBLIC DATABASE（注 AlphaFold DB v6）",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   }
  ]

@@ -277,15 +277,15 @@
  "holds": [],
  "events": [
   {
-   "id": "two",
-   "obj": "two",
+   "id": "p2",
+   "obj": "p2",
    "verb": "appear",
    "ease": "inout",
-   "means": "Two：圈号 2 落下，标题写出",
-   "f_start": 1,
+   "means": "Two：2 号编号牌落位",
+   "f_start": 2,
    "f_land": 9,
-   "f_end": 25,
-   "until": "7-03.w001",
+   "f_end": 119,
+   "until": "7-03.w004",
    "word": "7-03.w001",
    "w": "Two:",
    "key": "two#1",
@@ -295,43 +295,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 56755,
+   "F_start": 56756,
    "F_land": 56763,
-   "F_end": 56779
-  },
-  {
-   "id": "bal",
-   "obj": "bal",
-   "verb": "grow",
-   "ease": "inout",
-   "means": "check：中间天平画出",
-   "f_start": 46,
-   "f_land": 58,
-   "f_end": 80,
-   "until": "7-03.w003",
-   "word": "7-03.w002",
-   "w": "check",
-   "key": "check#1",
-   "sid": "7-03.s1",
-   "word_f0": 58,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 56800,
-   "F_land": 56812,
-   "F_end": 56834
+   "F_end": 56873
   },
   {
    "id": "af",
    "obj": "af",
    "verb": "grow",
    "ease": "inout",
-   "means": "AlphaFold：左框画出，芯片长出",
-   "f_start": 72,
+   "means": "AlphaFold：蓝色预测 CDK20 模型落位转正",
+   "f_start": 73,
    "f_land": 86,
-   "f_end": 119,
-   "until": "7-03.w004",
+   "f_end": 142,
+   "until": "7-03.w005",
    "word": "7-03.w004",
    "w": "AlphaFold",
    "key": "alphafold#1",
@@ -341,33 +318,33 @@
    "guide": {
     "kind": "focus",
     "target": [
-     "chip"
+     "af"
     ]
    },
-   "F_start": 56826,
+   "F_start": 56827,
    "F_land": 56840,
-   "F_end": 56873,
+   "F_end": 56896,
    "g_start": 60,
    "g_on": 78,
-   "g_end": 119,
-   "g_off": 149,
+   "g_end": 142,
+   "g_off": 172,
    "g_tick": 82,
    "G_start": 56814,
    "G_on": 56832,
-   "G_end": 56873,
-   "G_off": 56903,
+   "G_end": 56896,
+   "G_off": 56926,
    "G_tick": 56836
   },
   {
-   "id": "mdl",
-   "obj": "mdl",
-   "verb": "morph",
+   "id": "aflbl",
+   "obj": "aflbl",
+   "verb": "appear",
    "ease": "inout",
-   "means": "model：珠子从芯片飞出折成形状，写 AlphaFold model",
-   "f_start": 109,
+   "means": "model：标 predicted model (AlphaFold DB v6)",
+   "f_start": 116,
    "f_land": 125,
-   "f_end": 142,
-   "until": "7-03.w005",
+   "f_end": 222,
+   "until": "7-03.w008",
    "word": "7-03.w005",
    "w": "model",
    "key": "model#1",
@@ -377,43 +354,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 56863,
+   "F_start": 56870,
    "F_land": 56879,
-   "F_end": 56896
+   "F_end": 56976
   },
   {
-   "id": "ag",
-   "obj": "ag",
-   "verb": "move",
+   "id": "ghost_in",
+   "obj": "ghost_in",
+   "verb": "appear",
    "ease": "inout",
-   "means": "against：天平左低，左框连到左盘",
-   "f_start": 137,
-   "f_land": 147,
-   "f_end": 174,
-   "until": "7-03.w007",
-   "word": "7-03.w006",
-   "w": "against",
-   "key": "against#1",
-   "sid": "7-03.s1",
-   "word_f0": 147,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 56891,
-   "F_land": 56901,
-   "F_end": 56928
-  },
-  {
-   "id": "lab",
-   "obj": "lab",
-   "verb": "grow",
-   "ease": "inout",
-   "means": "lab-measured：右框画出（虚线框），flask 长出",
-   "f_start": 169,
+   "means": "lab-measured：磨砂幽灵外壳在上方现身",
+   "f_start": 171,
    "f_land": 181,
-   "f_end": 222,
-   "until": "7-03.w008",
+   "f_end": 256,
+   "until": "7-03.w009",
    "word": "7-03.w008",
    "w": "lab-measured",
    "key": "lab-measured#1",
@@ -421,35 +375,22 @@
    "word_f0": 181,
    "tool": "remotion",
    "guide": {
-    "kind": "focus",
-    "target": [
-     "flask"
-    ]
+    "kind": "none"
    },
-   "F_start": 56923,
+   "F_start": 56925,
    "F_land": 56935,
-   "F_end": 56976,
-   "g_start": 155,
-   "g_on": 173,
-   "g_end": 222,
-   "g_off": 252,
-   "g_tick": 177,
-   "G_start": 56909,
-   "G_on": 56927,
-   "G_end": 56976,
-   "G_off": 57006,
-   "G_tick": 56931
+   "F_end": 57010
   },
   {
-   "id": "str",
-   "obj": "str",
-   "verb": "grow",
+   "id": "ghost",
+   "obj": "ghost",
+   "verb": "move",
    "ease": "inout",
-   "means": "structure：同一形状的虚线出现在右框，写 lab-measured structure，右框连到右盘",
-   "f_start": 211,
+   "means": "structure：幽灵外壳慢慢落下罩在模型上，对不准处留一道缝",
+   "f_start": 181,
    "f_land": 225,
-   "f_end": 256,
-   "until": "7-03.w009",
+   "f_end": 303,
+   "until": "7-03.w010",
    "word": "7-03.w009",
    "w": "structure,",
    "key": "structure#1",
@@ -457,22 +398,35 @@
    "word_f0": 225,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "ghost"
+    ]
    },
-   "F_start": 56965,
+   "F_start": 56935,
    "F_land": 56979,
-   "F_end": 57010
+   "F_end": 57057,
+   "g_start": 199,
+   "g_on": 217,
+   "g_end": 303,
+   "g_off": 333,
+   "g_tick": 221,
+   "G_start": 56953,
+   "G_on": 56971,
+   "G_end": 57057,
+   "G_off": 57087,
+   "G_tick": 56975
   },
   {
    "id": "once",
    "obj": "once",
    "verb": "appear",
    "ease": "inout",
-   "means": "once one：红批注 once one exists",
-   "f_start": 283,
+   "means": "once：外壳半透明慢闪，标 measured structure?",
+   "f_start": 282,
    "f_land": 291,
-   "f_end": 318,
-   "until": "7-03.w011",
+   "f_end": 349,
+   "until": "7-03.w012",
    "word": "7-03.w010",
    "w": "once",
    "key": "once#1",
@@ -482,17 +436,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 57037,
+   "F_start": 57036,
    "F_land": 57045,
-   "F_end": 57072
+   "F_end": 57103
   },
   {
-   "id": "ex",
-   "obj": "ex",
-   "verb": "snap",
+   "id": "q",
+   "obj": "q",
+   "verb": "appear",
    "ease": "inout",
-   "means": "exists：天平上方问号，天平来回晃",
-   "f_start": 314,
+   "means": "exists：缝隙旁出现红色问号",
+   "f_start": 311,
    "f_land": 320,
    "f_end": 349,
    "until": "7-03.s1",
@@ -505,20 +459,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 57068,
+   "F_start": 57065,
    "F_land": 57074,
    "F_end": 57103
   },
   {
-   "id": "feed",
-   "obj": "feed",
-   "verb": "grow",
+   "id": "shift",
+   "obj": "shift",
+   "verb": "move",
    "ease": "inout",
-   "means": "feed：下方循环箭头画出",
-   "f_start": 386,
+   "means": "feed：模型与外壳左移，Chemistry42 芯片与料杆进来",
+   "f_start": 387,
    "f_land": 400,
-   "f_end": 414,
-   "until": "7-03.w014",
+   "f_end": 470,
+   "until": "7-03.w016",
    "word": "7-03.w014",
    "w": "feed",
    "key": "feed#1",
@@ -528,43 +482,20 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 57140,
+   "F_start": 57141,
    "F_land": 57154,
-   "F_end": 57168
+   "F_end": 57224
   },
   {
-   "id": "every",
-   "obj": "every",
+   "id": "keys",
+   "obj": "keys",
    "verb": "move",
    "ease": "inout",
-   "means": "every：两框各飞出结果卡进循环",
+   "means": "every result：一排金钥匙沿料杆流回 Chemistry42 芯片",
    "f_start": 412,
-   "f_land": 422,
-   "f_end": 435,
-   "until": "7-03.w015",
-   "word": "7-03.w015",
-   "w": "every",
-   "key": "every#1",
-   "sid": "7-03.s2",
-   "word_f0": 422,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 57166,
-   "F_land": 57176,
-   "F_end": 57189
-  },
-  {
-   "id": "res",
-   "obj": "res",
-   "verb": "appear",
-   "ease": "inout",
-   "means": "result：写 every result",
-   "f_start": 434,
    "f_land": 440,
-   "f_end": 470,
-   "until": "7-03.w016",
+   "f_end": 563,
+   "until": "7-03.w019",
    "word": "7-03.w016",
    "w": "result,",
    "key": "result#1",
@@ -572,45 +503,35 @@
    "word_f0": 440,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "keys"
+    ]
    },
-   "F_start": 57188,
+   "F_start": 57166,
    "F_land": 57194,
-   "F_end": 57224
-  },
-  {
-   "id": "inc",
-   "obj": "inc",
-   "verb": "move",
-   "ease": "inout",
-   "means": "including：一张打叉的卡也飞进循环",
-   "f_start": 481,
-   "f_land": 491,
-   "f_end": 524,
-   "until": "7-03.w018",
-   "word": "7-03.w017",
-   "w": "including",
-   "key": "including#1",
-   "sid": "7-03.s2",
-   "word_f0": 491,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 57235,
-   "F_land": 57245,
-   "F_end": 57278
+   "F_end": 57317,
+   "g_start": 414,
+   "g_on": 432,
+   "g_end": 503,
+   "g_off": 521,
+   "g_tick": 436,
+   "G_start": 57168,
+   "G_on": 57186,
+   "G_end": 57257,
+   "G_off": 57275,
+   "G_tick": 57190
   },
   {
    "id": "fail",
    "obj": "fail",
-   "verb": "appear",
+   "verb": "move",
    "ease": "inout",
-   "means": "failures：写 including the failures",
-   "f_start": 523,
+   "means": "failures：几把灰色打叉的钥匙也一起流回",
+   "f_start": 499,
    "f_land": 529,
-   "f_end": 563,
-   "until": "7-03.w019",
+   "f_end": 607,
+   "until": "7-03.w020",
    "word": "7-03.w019",
    "w": "failures,",
    "key": "failures#1",
@@ -618,22 +539,35 @@
    "word_f0": 529,
    "tool": "remotion",
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "fail"
+    ]
    },
-   "F_start": 57277,
+   "F_start": 57253,
    "F_land": 57283,
-   "F_end": 57317
+   "F_end": 57361,
+   "g_start": 503,
+   "g_on": 521,
+   "g_end": 607,
+   "g_off": 637,
+   "g_tick": 525,
+   "G_start": 57257,
+   "G_on": 57275,
+   "G_end": 57361,
+   "G_off": 57391,
+   "G_tick": 57279
   },
   {
    "id": "back",
    "obj": "back",
-   "verb": "grow",
+   "verb": "move",
    "ease": "inout",
-   "means": "back into：循环引出箭头回到左框",
-   "f_start": 584,
+   "means": "back into：所有钥匙汇入芯片入口",
+   "f_start": 581,
    "f_land": 594,
-   "f_end": 627,
-   "until": "7-03.w021",
+   "f_end": 678,
+   "until": "7-03.w024",
    "word": "7-03.w020",
    "w": "back",
    "key": "back#1",
@@ -643,40 +577,17 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 57338,
+   "F_start": 57335,
    "F_land": 57348,
-   "F_end": 57381
+   "F_end": 57432
   },
   {
-   "id": "nx",
-   "obj": "nx",
-   "verb": "appear",
+   "id": "loop",
+   "obj": "loop",
+   "verb": "snap",
    "ease": "inout",
-   "means": "next：写 next round",
-   "f_start": 631,
-   "f_land": 639,
-   "f_end": 656,
-   "until": "7-03.w023",
-   "word": "7-03.w023",
-   "w": "next",
-   "key": "next#1",
-   "sid": "7-03.s2",
-   "word_f0": 639,
-   "tool": "remotion",
-   "guide": {
-    "kind": "none"
-   },
-   "F_start": 57385,
-   "F_land": 57393,
-   "F_end": 57410
-  },
-  {
-   "id": "rnd",
-   "obj": "rnd",
-   "verb": "move",
-   "ease": "inout",
-   "means": "round：循环带着卡转一整圈，左框形状微调",
-   "f_start": 651,
+   "means": "next round：芯片内小轨道转一圈，准备下一轮",
+   "f_start": 648,
    "f_land": 661,
    "f_end": 678,
    "until": "7-03.s2",
@@ -689,7 +600,7 @@
    "guide": {
     "kind": "none"
    },
-   "F_start": 57405,
+   "F_start": 57402,
    "F_land": 57415,
    "F_end": 57432
   }
@@ -698,52 +609,103 @@
   {
    "id": "af",
    "target": [
-    "chip"
+    "af"
    ],
    "kind": "focus",
    "gs": 60,
    "gon": 78,
    "land": 86,
-   "gend": 119,
-   "goff": 149,
+   "gend": 142,
+   "goff": 172,
    "tick": 82,
    "nudge": false,
    "rim": true,
-   "ev_s": 72,
+   "ev_s": 73,
    "events": [
     "af"
    ],
    "G_start": 56814,
    "G_on": 56832,
    "G_land": 56840,
-   "G_end": 56873,
-   "G_off": 56903,
+   "G_end": 56896,
+   "G_off": 56926,
    "G_tick": 56836
   },
   {
-   "id": "lab",
+   "id": "ghost",
    "target": [
-    "flask"
+    "ghost"
    ],
    "kind": "focus",
-   "gs": 155,
-   "gon": 173,
-   "land": 181,
-   "gend": 222,
-   "goff": 252,
-   "tick": 177,
-   "nudge": false,
+   "gs": 199,
+   "gon": 217,
+   "land": 225,
+   "gend": 303,
+   "goff": 333,
+   "tick": 221,
+   "nudge": true,
    "rim": true,
-   "ev_s": 169,
+   "ev_s": 181,
    "events": [
-    "lab"
+    "ghost"
    ],
-   "G_start": 56909,
-   "G_on": 56927,
-   "G_land": 56935,
-   "G_end": 56976,
-   "G_off": 57006,
-   "G_tick": 56931
+   "G_start": 56953,
+   "G_on": 56971,
+   "G_land": 56979,
+   "G_end": 57057,
+   "G_off": 57087,
+   "G_tick": 56975
+  },
+  {
+   "id": "keys",
+   "target": [
+    "keys"
+   ],
+   "kind": "focus",
+   "gs": 414,
+   "gon": 432,
+   "land": 440,
+   "gend": 503,
+   "goff": 521,
+   "tick": 436,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 412,
+   "events": [
+    "keys"
+   ],
+   "handoff": "fail",
+   "G_start": 57168,
+   "G_on": 57186,
+   "G_land": 57194,
+   "G_end": 57257,
+   "G_off": 57275,
+   "G_tick": 57190
+  },
+  {
+   "id": "fail",
+   "target": [
+    "fail"
+   ],
+   "kind": "focus",
+   "gs": 503,
+   "gon": 521,
+   "land": 529,
+   "gend": 607,
+   "goff": 637,
+   "tick": 525,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 499,
+   "events": [
+    "fail"
+   ],
+   "G_start": 57257,
+   "G_on": 57275,
+   "G_land": 57283,
+   "G_end": 57361,
+   "G_off": 57391,
+   "G_tick": 57279
   }
  ],
  "problems": []

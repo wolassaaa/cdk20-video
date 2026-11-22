@@ -8,7 +8,7 @@ import React from "react";
 import {Composition, registerRoot, useCurrentFrame, Img, staticFile} from "remotion";
 import K from "./keys_4-03.json";
 import {Lens, Layer, guidePlan} from "../manual/kit.jsx";
-import {C, camBreath, shade, tint, Stage, Sprite, Label, Pen, Source, anchorOf, pathOf, evMapB, T5Out, whipX, impact} from "./bkit.jsx";
+import {C, SERIF, Tag, camBreath, shade, tint, Stage, Sprite, Label, Pen, Source, anchorOf, pathOf, evMapB, T5Out, whipX, impact} from "./bkit.jsx";
 import {useGsapTimeline, idle, RULE} from "./gsapFrame.jsx";
 
 const E = evMapB(K);
@@ -40,7 +40,7 @@ const KEYS = [[300, 470], [560, 560], [300, 650]];
 const KEY_W = 230;
 // 飞的那把：尖朝右（翻过来的侧面图），尖顶到尾巴上（孔心左边一点）就被挡回
 const [tipOX, tipOY] = anchorOf("plug/blank_34", "tip", KEY_W);
-const STOP = [M[0] - 34, M[1] + 4];
+const STOP = [M[0] - 62, M[1] + 4];
 const FLY = pathOf([[KEYS[1][0] - tipOX, KEYS[1][1] + tipOY], [880, 560], [1120, 500], STOP]);
 
 const clamp01 = (v) => Math.max(0, Math.min(1, v));
@@ -73,7 +73,7 @@ const Scene = () => {
     X.tw("clear", 0, 1, E.trust.s - 8, E.trust.e, "power3.in");
     X.group(KEYS.map((_, i) => `k${i}`), 0, 1, E.cut.l, {step: RULE.stagger});
     X.tw("go", 0, 1, E.go.s - 6, E.go.l, "power2.in");
-    X.tw("back", 0, 1, E.go.l, E.go.e, "power2.out");
+    X.tw("back", 0, 1, E.go.l, Math.min(E.go.e, LEN - 22), "power2.out");
     X.jiggle("hitJ", E.go.l, 9, 0);
   });
 
@@ -84,7 +84,9 @@ const Scene = () => {
 
   // 放大镜：从右上落到尾巴上，trust 时跟模型一起往左收走
   const lpP = Math.min(1, S.lp);
-  const lc = [mix(TAIL_SCR[0] + 420, TAIL_SCR[0], lpP) + clearX, mix(TAIL_SCR[1] - 360, TAIL_SCR[1], lpP) + id(2).y];
+  // 放大镜落定后在尾巴上方慢慢打小圈（看的动作），别停住（Gemini 初审：2–6 秒不动）
+  const look = lpP >= 1 ? 1 : 0;
+  const lc = [mix(TAIL_SCR[0] + 420, TAIL_SCR[0], lpP) + clearX + look * 10 * Math.sin((2 * Math.PI * f) / 150), mix(TAIL_SCR[1] - 360, TAIL_SCR[1], lpP) + id(2).y + look * 7 * Math.cos((2 * Math.PI * f) / 150)];
   const lpS = (0.7 + 0.3 * S.lp) * (1 + 0.05 * Math.sin(Math.PI * S.model));
   const big = LOUPE_W / AF_SRC.w;
   const bigC = [lc[0] - (TAIL_SRC[0] - AF_SRC.w / 2) * big, lc[1] - (TAIL_SRC[1] - AF_SRC.h / 2) * big];
@@ -107,6 +109,15 @@ const Scene = () => {
     const vis = clamp01(S.tail * (N + 3) - i);
     return {x, y, r: r * gsapBack(vis), on: vis > 0.01, i};
   });
+
+  // low confidence 那段：一道亮圈从尾巴根跑到尖，来回两趟
+  const lowRun = (i) => {
+    if (f < E.low.s || f > E.lay.s) return 0;
+    const ph = ((f - E.low.s) / 40) % 1, pos = ph * (N + 4) - 2;
+    return 0.85 * Math.max(0, 1 - Math.abs(i - pos) / 2.2) * sm(E.low.s, E.low.s + 8, f) * (1 - sm(E.lay.s - 10, E.lay.s, f));
+  };
+  // 落进孔里的那颗：一直一明一暗地圈着，直到三把插头出来
+  const kbPulse = f > E.inside.l && f < E.cut.s ? 0.35 + 0.35 * Math.sin((2 * Math.PI * (f - E.inside.l)) / 40) : 0;
 
   // 金插头飞向插孔，被挡回来
   const fp = FLY.at(S.go);
@@ -156,8 +167,8 @@ const Scene = () => {
             {beads.filter((b) => b.on).map((b, j, arr) => j > 0 && (
               <line key={`l${b.i}`} x1={arr[j - 1].x} y1={arr[j - 1].y} x2={b.x} y2={b.y} stroke={shade(C.red, 0.3)} strokeWidth={7} strokeLinecap="round" />
             ))}
-            {beads.filter((b) => b.on && b.i !== KB).map((b) => <TailBead key={b.i} x={b.x} y={b.y} r={b.r} />)}
-            {beads[KB].on && <TailBead x={beads[KB].x} y={beads[KB].y} r={beads[KB].r} k={S.inside} ring={clamp01(S.block * 1.4) * (1 - S.inside)} />}
+            {beads.filter((b) => b.on && b.i !== KB).map((b) => <TailBead key={b.i} x={b.x} y={b.y} r={b.r} ring={lowRun(b.i)} />)}
+            {beads[KB].on && <TailBead x={beads[KB].x} y={beads[KB].y} r={beads[KB].r} k={S.inside} ring={Math.max(lowRun(KB), clamp01(S.block * 1.4) * (1 - S.inside), kbPulse)} />}
           </svg>
         </Layer>
 
@@ -186,13 +197,12 @@ const Scene = () => {
 
         <Layer id="txt" exempt>
           {S.af > 0.01 && (
-            <div style={{position: "absolute", left: AF.x + clearX, top: 800, transform: "translateX(-50%)", fontFamily: "Serif", fontSize: 28, letterSpacing: 1,
-                         color: C.soft, opacity: Math.min(1, S.af), whiteSpace: "nowrap", textShadow: "0 1px 0 rgba(255,255,255,0.6)"}}>PREDICTED MODEL (AlphaFold DB)</div>
+            <Tag x={AF.x + clearX} y={800} op={Math.min(1, S.af)}>PREDICTED MODEL (AlphaFold DB v6)</Tag>
           )}
           <Label text="low confidence" size={52} x={975} y={800} at={E.low.l} out={E.lay.s} align="center" />
           <Label text="ATP pocket" size={52} x={M[0]} y={790} at={E.atp.l} out={E.cut.s} align="center" />
-          <Pen text="blocked" x={1520} y={170} at={E.go.l + 2} size={76} />
-          <Source>Illustration · Ren et al., Chem. Sci. 2023 · model colours: AlphaFold confidence</Source>
+          <Pen text="blocked" x={1500} y={170} at={E.go.l - 8} dur={14} size={76} />
+          <Source>{f < E.trust.e ? "Illustration · data: Ren et al., Chem. Sci. 2023 · model colours: AlphaFold confidence" : "Illustration · data: Ren et al., Chem. Sci. 2023"}</Source>
         </Layer>
       </Stage>
     </Lens>

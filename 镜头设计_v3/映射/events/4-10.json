@@ -1,315 +1,295 @@
 {
  "schema": "cdk20.events/1",
  "group": "4-10",
- "tool": "warp_source",
- "migrated": "migrate_beats_v8",
- "note": "HKBU SCIE1007 课程作业的科普视频。由 beats_v8 自动迁移：footage* 是旧动画变速锚点（结构性），没有语义事件，要手写。",
- "source": "镜头设计_v3/粗剪/对时/beats_v8/4-10.json",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 4-10（btier/B410.jsx）。8,918：数字轮转到 8,918，一大片小插头铺满；way too many：手写；a virtual lock：一个插头出来，蓝色线框的插座；docking：插头进孔，表盘打分；grouped：插头按形状聚成几堆；54：数字轮停 54；chemists pick just seven：小人，七个插头进托盘，烧瓶。",
+ "tier": "B",
+ "zone": 4,
+ "trans_in": "T5 chip（上一段 W3 是 A 段芯片）",
+ "trans_out": "T5 runner（下一段 4-11+12 是出镜段）",
  "holds": [],
  "events": [
   {
-   "id": "footage00",
-   "obj": "footage",
-   "verb": "move",
+   "id": "n8918",
+   "obj": "n8918",
+   "verb": "appear",
    "at": {
-    "word": "4-10.w001",
-    "off": -9
-   },
-   "until": {
-    "dur": 6
-   },
-   "ease": "linear",
-   "means": "旧动画源片 0.00→1.10 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    0.0,
-    1.1
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage01",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "4-10.w001",
-    "off": -3
-   },
-   "until": {
-    "dur": 46
-   },
-   "ease": "linear",
-   "means": "旧动画源片 1.10→1.77 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    1.1,
-    1.767
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage02",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "4-10.w004",
+    "word": "8,918#1",
     "off": 0
    },
-   "until": {
-    "dur": 143
+   "lead": 60,
+   "means": "8,918：数字轮转到 8,918",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
    },
-   "ease": "linear",
-   "means": "旧动画源片 1.77→3.37 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    1.767,
-    3.367
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "until": {
+    "word": "designs#1"
+   }
   },
   {
-   "id": "footage03",
-   "obj": "footage",
-   "verb": "move",
+   "id": "pile",
+   "obj": "pile",
+   "verb": "appear",
    "at": {
-    "word": "4-10.w006",
+    "word": "brand-new#1",
     "off": 0
    },
-   "until": {
-    "dur": 127
+   "lead": 7,
+   "means": "brand-new designs：小插头一片片铺满",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "pile"
+    ]
    },
-   "ease": "linear",
-   "means": "旧动画源片 3.37→6.07 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    3.367,
-    6.067
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "until": {
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage04",
-   "obj": "footage",
-   "verb": "move",
+   "id": "many",
+   "obj": "many",
+   "verb": "appear",
    "at": {
-    "word": "4-10.w010",
+    "word": "many#1",
     "off": 0
    },
-   "until": {
-    "dur": 89
+   "lead": 6,
+   "means": "Way too many to make：手写",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
    },
-   "ease": "linear",
-   "means": "旧动画源片 6.07→7.20 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    6.067,
-    7.2
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "until": {
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage05",
-   "obj": "footage",
+   "id": "each",
+   "obj": "each",
    "verb": "move",
    "at": {
-    "word": "4-10.w014",
+    "word": "key#1",
     "off": 0
    },
-   "until": {
-    "dur": 114
+   "lead": 13,
+   "means": "each key：一个插头升起来",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
    },
-   "ease": "linear",
-   "means": "旧动画源片 7.20→9.50 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    7.2,
-    9.5
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "until": {
+    "word": "tried#1"
+   }
   },
   {
-   "id": "footage06",
-   "obj": "footage",
-   "verb": "move",
+   "id": "vlock",
+   "obj": "vlock",
+   "verb": "appear",
    "at": {
-    "word": "4-10.w021",
+    "word": "virtual#1",
     "off": 0
    },
-   "until": {
-    "dur": 58
+   "lead": 7,
+   "means": "a virtual lock：线框插座",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "socket"
+    ]
    },
-   "ease": "linear",
-   "means": "旧动画源片 9.50→10.07 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    9.5,
-    10.067
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "until": {
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage07",
-   "obj": "footage",
-   "verb": "move",
+   "id": "dock",
+   "obj": "dock",
+   "verb": "appear",
    "at": {
-    "word": "4-10.w022",
+    "word": "docking#1",
     "off": 0
    },
-   "until": {
-    "dur": 84
+   "lead": 10,
+   "means": "That's docking：标 docking",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
    },
-   "ease": "linear",
-   "means": "旧动画源片 10.07→11.43 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    10.067,
-    11.433
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "until": {
+    "word": "docking#1"
+   }
   },
   {
-   "id": "footage08",
-   "obj": "footage",
+   "id": "comp",
+   "obj": "comp",
    "verb": "move",
    "at": {
-    "word": "4-10.w025",
+    "word": "computer#1",
     "off": 0
    },
-   "until": {
-    "dur": 30
+   "lead": 13,
+   "means": "the computer：线框插座扫一遍",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
    },
-   "ease": "linear",
-   "means": "旧动画源片 11.43→12.07 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    11.433,
-    12.067
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "until": {
+    "word": "computer#1"
+   }
   },
   {
-   "id": "footage09",
-   "obj": "footage",
+   "id": "mol",
+   "obj": "mol",
    "verb": "move",
    "at": {
-    "word": "4-10.w026",
+    "word": "molecule#1",
     "off": 0
    },
-   "until": {
-    "dur": 82
+   "lead": 13,
+   "means": "a molecule：插头转向插孔",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
    },
-   "ease": "linear",
-   "means": "旧动画源片 12.07→13.93 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    12.067,
-    13.933
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "until": {
+    "word": "molecule#1"
+   }
   },
   {
-   "id": "footage10",
-   "obj": "footage",
+   "id": "sit",
+   "obj": "sit",
    "verb": "move",
    "at": {
-    "word": "4-10.w030",
+    "word": "sit#1",
     "off": 0
    },
-   "until": {
-    "dur": 113
+   "lead": 40,
+   "means": "might sit in the pocket：插头进孔",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
    },
-   "ease": "linear",
-   "means": "旧动画源片 13.93→15.50 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    13.933,
-    15.5
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "until": {
+    "word": "pocket#1"
+   }
   },
   {
-   "id": "footage11",
-   "obj": "footage",
+   "id": "scorefit",
+   "obj": "scorefit",
    "verb": "move",
    "at": {
-    "word": "4-10.w036",
+    "word": "scores#1",
     "off": 0
    },
-   "until": {
-    "dur": 104
+   "lead": 13,
+   "means": "scores the fit：表盘指针",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "dial"
+    ]
    },
-   "ease": "linear",
-   "means": "旧动画源片 15.50→17.20 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    15.5,
-    17.2
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "until": {
+    "sentence_end": true
+   }
   },
   {
-   "id": "footage12",
-   "obj": "footage",
+   "id": "group",
+   "obj": "group",
    "verb": "move",
    "at": {
-    "word": "4-10.w039",
+    "word": "grouped#1",
     "off": 0
    },
-   "until": {
-    "dur": 69
-   },
-   "ease": "linear",
-   "means": "旧动画源片 17.20→18.10 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    17.2,
-    18.1
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage13",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "4-10.w042",
-    "off": 1
+   "lead": 13,
+   "means": "Similar designs get grouped：插头聚成几堆",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "pile"
+    ]
    },
    "until": {
-    "dur": 125
-   },
-   "ease": "linear",
-   "means": "旧动画源片 18.10→21.17 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    18.1,
-    21.167
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+    "word": "grouped#1"
+   }
   },
   {
-   "id": "footage14",
-   "obj": "footage",
-   "verb": "move",
+   "id": "n54",
+   "obj": "n54",
+   "verb": "appear",
    "at": {
-    "word": "4-10.w046",
-    "off": 1
-   },
-   "until": {
-    "dur": 76
-   },
-   "ease": "linear",
-   "means": "旧动画源片 21.17→21.97 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    21.167,
-    21.967
-   ],
-   "migrated": "migrate_beats_v8:anchor"
-  },
-  {
-   "id": "footage15",
-   "obj": "footage",
-   "verb": "move",
-   "at": {
-    "word": "4-10.w048",
+    "word": "54#1",
     "off": 0
    },
-   "until": {
-    "dur": 126
+   "lead": 40,
+   "means": "54：数字轮停 54，只剩一小片",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
    },
-   "ease": "linear",
-   "means": "旧动画源片 21.97→23.83 s 在这段里播放（原生重渲时按这个对应，不再变速）",
-   "value": [
-    21.967,
-    23.833
-   ],
-   "migrated": "migrate_beats_v8:anchor"
+   "until": {
+    "word": "shortlist#1"
+   }
+  },
+  {
+   "id": "chem",
+   "obj": "chem",
+   "verb": "appear",
+   "at": {
+    "word": "chemists#1",
+    "off": 0
+   },
+   "lead": 7,
+   "means": "chemists：小人",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "pick#1"
+   }
+  },
+  {
+   "id": "seven",
+   "obj": "seven",
+   "verb": "move",
+   "at": {
+    "word": "seven#1",
+    "off": 0
+   },
+   "lead": 30,
+   "means": "pick just seven：七个插头进托盘",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "to#2"
+   }
+  },
+  {
+   "id": "make",
+   "obj": "make",
+   "verb": "appear",
+   "at": {
+    "word": "make#3",
+    "off": 0
+   },
+   "lead": 7,
+   "means": "to make：烧瓶",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
+   }
   }
  ]
 }

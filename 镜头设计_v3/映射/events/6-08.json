@@ -2,190 +2,236 @@
  "schema": "cdk20.events/1",
  "group": "6-08",
  "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：第 6 章记分板整页 6-08（画外音）：pairs 逐行连起；different studies 虚线；scale and speed 右格各闪一下；not one race 红批注；论文引文 cost- and time-efficient 盖在表下。页面 Manual608.jsx。",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 6-08（btier/B608.jsx，复用第 6 章翻牌记分板组件，四行全部填满）。镜头后拉看整块记分板：BEFORE 与 NOW 两栏之间刻出的虚线槽由上至下亮起，旁侧 Caveat 手写批注 different studies；右栏四格翻牌依次轻轻翻一下（不闪光）呼应 scale and speed；Caveat 手写批注 not one race；最后记分板底部落下一块刻字引文牌：“cost- and time-efficient” — Ren et al. 2023。",
+ "tier": "B",
+ "zone": 6,
+ "trans_in": "T2 甩进（上一段 6-07 是 B 页）",
+ "trans_out": "T2 甩镜往左（下一段 6-09 是 B 页）",
  "holds": [],
  "events": [
   {
+   "id": "wide",
+   "obj": "wide",
+   "verb": "move",
+   "at": {
+    "word": "to#1",
+    "off": 0
+   },
+   "lead": 9,
+   "means": "To be fair：镜头后拉展示四行填满的整块记分板",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "pairs#1"
+   }
+  },
+  {
    "id": "pairs",
    "obj": "pairs",
-   "verb": "grow",
-   "at": {
-    "word": "6-08.w005",
-    "off": 0
-   },
-   "means": "pairs：每行左右格连起",
-   "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "word": "6-08.w005"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "diff",
-   "obj": "diff",
-   "verb": "grow",
-   "at": {
-    "word": "6-08.w008",
-    "off": 0
-   },
-   "means": "different studies：中缝变虚线，写标签",
-   "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "word": "6-08.w009"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "sc",
-   "obj": "sc",
-   "verb": "morph",
-   "at": {
-    "word": "6-08.w012",
-    "off": 0
-   },
-   "means": "scale：右格依次闪一下，写 scale and speed",
-   "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "6-08.w013"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "sp",
-   "obj": "sp",
-   "verb": "morph",
-   "at": {
-    "word": "6-08.w014",
-    "off": 0
-   },
-   "means": "speed：右格再闪一下",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "6-08.w014"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "nr",
-   "obj": "nr",
    "verb": "appear",
    "at": {
-    "word": "6-08.w017",
+    "word": "pairs#1",
     "off": 0
    },
-   "means": "race：红批注 not one race",
+   "lead": 10,
+   "means": "these pairs：四组 BEFORE / NOW 对应行轻亮配对框",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "6-08.w017"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "different#1"
+   }
+  },
+  {
+   "id": "seam",
+   "obj": "seam",
+   "verb": "grow",
+   "at": {
+    "word": "different#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "different：两栏之间刻出的虚线槽由上至下亮起",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "seam"
+    ]
+   },
+   "until": {
+    "word": "studies#1"
+   }
+  },
+  {
+   "id": "note1",
+   "obj": "note1",
+   "verb": "appear",
+   "at": {
+    "word": "studies#1",
+    "off": 0
+   },
+   "lead": 6,
+   "means": "studies：虚线槽旁 Caveat 手写批注 different studies",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "scale#1"
+   }
+  },
+  {
+   "id": "scale",
+   "obj": "scale",
+   "verb": "snap",
+   "at": {
+    "word": "scale#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "scale：右栏第 1、2 格翻牌依次轻翻一下（不闪光）",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "nowcol"
+    ]
+   },
+   "until": {
+    "word": "speed#1"
+   }
+  },
+  {
+   "id": "speed",
+   "obj": "speed",
+   "verb": "snap",
+   "at": {
+    "word": "speed#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "speed：右栏第 3、4 格翻牌依次轻翻一下",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "race#1"
+   }
+  },
+  {
+   "id": "race",
+   "obj": "race",
+   "verb": "appear",
+   "at": {
+    "word": "race#1",
+    "off": 0
+   },
+   "lead": 6,
+   "means": "not one race：Caveat 手写批注 not one race",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "side#2"
    }
   },
   {
    "id": "side",
    "obj": "side",
-   "verb": "morph",
+   "verb": "move",
    "at": {
-    "word": "6-08.w021",
+    "word": "side#2",
     "off": 0
    },
-   "means": "side：红批注下划线画出",
+   "lead": 13,
+   "means": "side by side：两栏轻微错拍，强调并非同场并跑",
    "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "6-08.w021"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
-   "id": "pap",
-   "obj": "pap",
-   "verb": "grow",
+   "id": "paper",
+   "obj": "paper",
+   "verb": "appear",
    "at": {
-    "word": "6-08.w024",
+    "word": "paper#1",
     "off": 0
    },
-   "means": "paper：论文小图标和字牌框",
+   "lead": 10,
+   "means": "the paper：记分板底部引文槽口打开",
    "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "6-08.w024"
-   },
    "guide": {
     "kind": "focus",
     "target": [
-     "paper1"
+     "quote"
     ]
+   },
+   "until": {
+    "word": "calls#1"
    }
   },
   {
-   "id": "call",
-   "obj": "call",
-   "verb": "appear",
+   "id": "calls",
+   "obj": "calls",
+   "verb": "move",
    "at": {
-    "word": "6-08.w026",
+    "word": "calls#1",
     "off": 0
    },
-   "means": "calls：标签 the paper itself calls the work",
+   "lead": 13,
+   "means": "calls the work：刻字引文牌从下方槽口滑出就位",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "6-08.w028"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "cost#1"
    }
   },
   {
-   "id": "c1",
-   "obj": "c1",
-   "verb": "appear",
+   "id": "cost",
+   "obj": "cost",
+   "verb": "snap",
    "at": {
-    "word": "6-08.w029",
+    "word": "cost#1",
     "off": 0
    },
-   "means": "cost-：写 cost-",
+   "lead": 13,
+   "means": "cost-：引文牌刻亮 cost-",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "6-08.w029"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "time-efficient#1"
    }
   },
   {
-   "id": "c2",
-   "obj": "c2",
-   "verb": "appear",
+   "id": "timeef",
+   "obj": "timeef",
+   "verb": "snap",
    "at": {
-    "word": "6-08.w031",
+    "word": "time-efficient#1",
     "off": 0
    },
-   "means": "time-efficient：写完 and time-efficient",
+   "lead": 13,
+   "means": "time-efficient：引文牌刻全 “cost- and time-efficient” — Ren et al. 2023（T7 轻抖）",
    "tool": "remotion",
-   "lead": 10,
+   "guide": {
+    "kind": "none"
+   },
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
    }
   }
  ]

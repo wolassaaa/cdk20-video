@@ -1,0 +1,213 @@
+{
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜段 1-03 的检查清单（照 oncam-3d-parts 技能把旧二维出镜页换成三维零件）。oncam_report.py 读它生成检查页；check 写 M 编号的由 oncam_check.py 机检判过/不过，写'看图'的是施工方逐张看抽帧后填的 result。",
+ "who": "A",
+ "line": "Here's the thing. We already have medicines. Just not good enough ones.",
+ "design_doc": "镜头设计_v3/深化/01_逐段钻取清单.md（1-03）、11_铺开排序.md；事件表 映射/events/1-03.json",
+ "lead": [
+  "（待填）"
+ ],
+ "items": [
+  {
+   "n": 1,
+   "frames": "0–49",
+   "cat": "转场",
+   "problem": "段首：胶囊从镜头前（段首盖满画面）退回 A 的右侧落位，挂在浇口上",
+   "fix": "对数深度贝塞尔甩回落位",
+   "check": "M12",
+   "new": 0,
+   "show": true,
+   "result": ""
+  },
+  {
+   "n": 2,
+   "frames": "32–291",
+   "cat": "构图",
+   "problem": "零件不碰画边、不进字幕区、在人右边不压人",
+   "fix": "胶囊挂在左上浇口，十个小人一排在料杆上，整组在 A 右边、620 行以上（A 的手从 604 行起伸到 1195）",
+   "check": "M5",
+   "new": 92,
+   "result": ""
+  },
+  {
+   "n": 3,
+   "frames": "54–76",
+   "cat": "动作",
+   "problem": "thing：胶囊在浇口上预颤一下（引起注意）",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 60,
+   "show": false,
+   "result": ""
+  },
+  {
+   "n": 4,
+   "frames": "109–155",
+   "cat": "动作",
+   "problem": "already have：下面一根料杆上十个白色小人依次弹出",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 121,
+   "show": true,
+   "result": ""
+  },
+  {
+   "n": 5,
+   "frames": "154–192",
+   "cat": "动作",
+   "problem": "medicines：胶囊咔地从浇口弹下，立起转正",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 158,
+   "show": false,
+   "result": ""
+  },
+  {
+   "n": 6,
+   "frames": "203–223",
+   "cat": "动作",
+   "problem": "Just：胶囊朝小人那边侧一下身",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 209,
+   "show": false,
+   "result": ""
+  },
+  {
+   "n": 7,
+   "frames": "221–273",
+   "cat": "动作",
+   "problem": "not good enough：十个小人里只亮三个（not、good、enough 各亮一个），为 1-04 的 three in ten 打底",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 223,
+   "show": true,
+   "result": ""
+  },
+  {
+   "n": 8,
+   "frames": "269–287",
+   "cat": "动作",
+   "problem": "ones：胶囊耸肩似地晃一下",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 273,
+   "show": false,
+   "result": ""
+  },
+  {
+   "n": 9,
+   "frames": "291–325",
+   "cat": "转场",
+   "problem": "段尾：",
+   "fix": "主零件正对镜头冲进去，最后一帧盖满",
+   "check": "M12",
+   "new": 325,
+   "show": true,
+   "result": ""
+  },
+  {
+   "n": 10,
+   "frames": "全段",
+   "cat": "穿模",
+   "problem": "零件之间不穿模",
+   "fix": "胶囊和浇口、胶囊落地和小人逐帧 BVH",
+   "check": "M7",
+   "result": ""
+  },
+  {
+   "n": 11,
+   "frames": "全段",
+   "cat": "动作",
+   "problem": "不甩、不定格",
+   "fix": "动作全部挂词，全程慢悬浮",
+   "check": "M11",
+   "result": ""
+  },
+  {
+   "n": 12,
+   "frames": "全段",
+   "cat": "背景",
+   "problem": "大板四边出画、焦外干净",
+   "fix": "大板 ×1.27，人头后、零件后格子藏掉",
+   "check": "M6",
+   "result": ""
+  },
+  {
+   "n": 13,
+   "frames": "全段",
+   "cat": "合成",
+   "problem": "人原像素不动、不淡入",
+   "fix": "人一直原像素贴最上层",
+   "check": "M1",
+   "result": ""
+  },
+  {
+   "n": 14,
+   "frames": "全段",
+   "cat": "合成",
+   "problem": "颗粒一致",
+   "fix": "A 白 T 恤，颗粒按量出来的 σ，GRAIN_GAIN 试合成定",
+   "check": "M10",
+   "result": ""
+  },
+  {
+   "n": 15,
+   "frames": "全段",
+   "cat": "合成",
+   "problem": "亮度不跳、不闪",
+   "fix": "三个小人亮灯是设计渐变",
+   "check": "M9",
+   "result": ""
+  }
+ ],
+ "beats": [
+  [
+   "0–49",
+   "Here's",
+   "胶囊从镜头前（段首盖满画面）退回 A 的右侧落位，挂在浇口上",
+   "move 段首 T5"
+  ],
+  [
+   "54–76",
+   "thing",
+   "胶囊在浇口上预颤一下（引起注意）",
+   "move"
+  ],
+  [
+   "109–155",
+   "already have",
+   "下面一根料杆上十个白色小人依次弹出",
+   "grow"
+  ],
+  [
+   "154–192",
+   "medicines",
+   "胶囊咔地从浇口弹下，立起转正",
+   "eject"
+  ],
+  [
+   "203–223",
+   "Just",
+   "胶囊朝小人那边侧一下身",
+   "move"
+  ],
+  [
+   "221–273",
+   "not good enough",
+   "十个小人里只亮三个（not、good、enough 各亮一个），为 1-04 的 three in ten 打底",
+   "power_on"
+  ],
+  [
+   "269–287",
+   "ones",
+   "胶囊耸肩似地晃一下",
+   "move"
+  ],
+  [
+   "291–325",
+   "（说完）胶囊冲进镜头（段尾，接 1-04 B 页）",
+   "",
+   "move 段尾 T1"
+  ]
+ ]
+}

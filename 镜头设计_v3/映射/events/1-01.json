@@ -1,38 +1,44 @@
 {
  "schema": "cdk20.events/1",
  "group": "1-01",
- "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：出镜 1-01（A），版式照 2-02：人在左，右边讲解位是说明书零件。香港地图、四个小人（说到 die 变红）、肝。跟踪：讲解位随头 0.2 倍。页面 src/v3/manual/OnCam101.jsx。",
+ "tool": "blender",
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜 1-01（A）三维版（11-20 夜甲线，技能 oncam-3d-parts）：人在左，右边一本撕页日历（p10），下面一根料杆上挂四个红色小人（p03 的小人），后来旁边出现一个玻璃肝（p04）。 主零件自己做段首段尾转场。Blender：inserts/shot_oncam.py recipe calendar_people。旧二维版事件表存 _wip/1-01_events_v1_2d.json。",
  "holds": [],
  "events": [
   {
-   "id": "note_day",
-   "obj": "note_day",
-   "verb": "appear",
+   "id": "arrive",
+   "obj": "calendar",
+   "verb": "move",
+   "at": {
+    "word": "1-01.w001",
+    "off": 0
+   },
+   "lead": 32,
+   "ease": "out",
+   "means": "Every：日历从镜头前（段首，日历面盖满画面）退回 A 的右侧落位",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "1-01.w001"
+   }
+  },
+  {
+   "id": "page",
+   "obj": "page",
+   "verb": "eject",
    "at": {
     "word": "1-01.w002",
     "off": 0
    },
-   "means": "day：红笔 every day",
-   "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "word": "1-01.w005"
-   }
-  },
-  {
-   "id": "hk",
-   "obj": "hk_map",
-   "verb": "grow",
-   "at": {
-    "word": "1-01.w004",
-    "off": 0
+   "lead": 8,
+   "ease": "out",
+   "means": "day：日历最上面一页翻起来、撕下飞走，带起一阵风",
+   "guide": {
+    "kind": "none"
    },
-   "means": "Hong Kong：香港地图长出",
-   "tool": "remotion",
-   "lead": 4,
    "until": {
-    "word": "1-01.w005"
+    "dur": 30
    }
   },
   {
@@ -40,26 +46,33 @@
    "obj": "people",
    "verb": "grow",
    "at": {
-    "word": "1-01.w007",
+    "word": "1-01.w004",
     "off": 0
    },
-   "means": "four：四个小人依次长出",
-   "tool": "remotion",
    "lead": 10,
+   "ease": "out",
+   "means": "Hong Kong：日历下面一根料杆长出来，四个红色小人依次从浇口弹出",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
-    "word": "1-01.w008"
+    "word": "1-01.w005"
    }
   },
   {
-   "id": "plate",
-   "obj": "plate_4",
-   "verb": "appear",
+   "id": "light",
+   "obj": "people",
+   "verb": "power_on",
    "at": {
     "word": "1-01.w007",
     "off": 0
    },
-   "means": "four：数字牌 ~4 a day",
-   "tool": "remotion",
+   "lead": 4,
+   "ease": "out",
+   "means": "four people：四个小人里的灯一个接一个亮起",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
     "word": "1-01.w008"
    }
@@ -67,17 +80,19 @@
   {
    "id": "die",
    "obj": "people",
-   "verb": "morph",
+   "verb": "power_off",
    "at": {
     "word": "1-01.w009",
     "off": 0
    },
-   "means": "die：四个小人流成红色",
-   "tool": "remotion",
    "lead": 4,
+   "ease": "inout",
+   "means": "die：四盏灯一起熄成灰白，小人轻轻往后倒在料杆上（克制）",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
-    "word": "1-01.w009",
-    "off": 10
+    "word": "1-01.w010"
    }
   },
   {
@@ -88,11 +103,50 @@
     "word": "1-01.w011",
     "off": 0
    },
-   "means": "liver cancer：肝长出",
-   "tool": "remotion",
+   "lead": 10,
+   "ease": "out",
+   "means": "liver：小人旁边弹出一个玻璃肝",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "dur": 20
+   }
+  },
+  {
+   "id": "cancer",
+   "obj": "liver",
+   "verb": "morph",
+   "at": {
+    "word": "1-01.w012",
+    "off": 0
+   },
    "lead": 4,
+   "ease": "inout",
+   "means": "cancer：玻璃肝里暗红地一亮再沉下去，日历轻轻点一下头",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
     "sentence_end": true
+   }
+  },
+  {
+   "id": "dive",
+   "obj": "calendar",
+   "verb": "move",
+   "at": {
+    "word": "1-01.w012",
+    "off": 75
+   },
+   "lead": 40,
+   "ease": "in",
+   "means": "（说完）日历冲进镜头（段尾，接 1-02 大板）",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "dur": 0
    }
   }
  ]

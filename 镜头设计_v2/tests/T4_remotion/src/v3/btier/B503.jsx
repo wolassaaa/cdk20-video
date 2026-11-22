@@ -8,7 +8,7 @@ import React from "react";
 import {Composition, registerRoot, useCurrentFrame} from "remotion";
 import K from "./keys_5-03.json";
 import {Lens, Layer, guidePlan} from "../manual/kit.jsx";
-import {C, camBreath, Stage, Sprite, Slab, Gate, Runner, Label, Pen, Source, Counter, Engrave, Tick, anchorOf, pathOf, evMapB, T5In, T5Out, impact} from "./bkit.jsx";
+import {C, Calendar1, SERIF, Tag, camBreath, Stage, Sprite, Slab, Gate, Runner, Label, Pen, Source, Counter, Engrave, Tick, anchorOf, pathOf, evMapB, T5In, T5Out, impact} from "./bkit.jsx";
 import {useGsapTimeline, idle, RULE} from "./gsapFrame.jsx";
 
 const E = evMapB(K);
@@ -23,6 +23,7 @@ const SIX_V = [34, 38, 43, 48, 53, 58];         // 示意位置：都在 30 右�
 const SIX_W = 170;
 const tipDX = (n, w) => -anchorOf(`plug/${n}_34`, "tip", w)[0];
 const HIT = {x: 1560, y: 620, w: 320}, ROAD_Y = 770, CHIP = {x: 340, y: 600, w: 420};
+const DOCK = {x: HIT.x - 150, y: 590, w: 300};
 const TRAVEL = pathOf([[CHIP.x, 400], [700, 470], [1100, 540], [HIT.x - 260, 600]]);
 
 const Scene = () => {
@@ -53,11 +54,12 @@ const Scene = () => {
   const id = (s) => idle(f, s, {rot: 0.6, bob: 1.6});
   const mix = (a, b, t) => a + (b - a) * t;
   const clearX = -2000 * S.clear * S.clear;
-  const shake = impact(f, E.wild.l);
+  const shake = impact(f, E.wild.l) + impact(f, E.hit.l - 1);
 
   // 001：尺上 9.2 → 去右边当命中
   const p001 = {x: mix(X(S.k) + tipDX("001", 260), HIT.x, S.go), y: mix(610, HIT.y, S.go) + (S.hitJ || 0), w: mix(260, HIT.w, S.go)};
   const tr = TRAVEL.at(S.travel);
+  const docked = f >= E.hit.l - 1;
 
   return (
     <Lens plan={GP} f={f}>
@@ -75,8 +77,8 @@ const Scene = () => {
             {S.post > 0.01 && (
               <>
                 <Slab x={X(30) - 11} y={RAIL_Y - 250 * Math.min(1.05, S.post)} w={22} h={250 * Math.min(1.05, S.post)} r={8} color={C.bone} depth={6} id="post" />
-                <Slab x={X(30) - 50} y={RAIL_Y - 250 * Math.min(1.05, S.post) - 70} w={100} h={62} r={14} color={C.bone} depth={8} op={Math.min(1, S.post)} id="post30">
-                  <div style={{width: 100, height: 62, display: "flex", alignItems: "center", justifyContent: "center"}}><Engrave size={48}>30</Engrave></div>
+                <Slab x={X(30) - 80} y={RAIL_Y - 250 * Math.min(1.05, S.post) - 70} w={160} h={62} r={14} color={C.bone} depth={8} op={Math.min(1, S.post)} id="post30">
+                  <div style={{width: 160, height: 62, display: "flex", alignItems: "center", justifyContent: "center"}}><Engrave size={48}>30 µM</Engrave></div>
                 </Slab>
               </>
             )}
@@ -103,11 +105,12 @@ const Scene = () => {
 
         <Layer id="p001">
           {S.mol > 0.01 && <Gate x1={p001.x - tipDX("001", p001.w)} y1={mix(RAIL_Y, ROAD_Y, S.go)} x2={p001.x - tipDX("001", p001.w)} y2={p001.y + 30} w={12} />}
-          {S.mol > 0.01 && <Sprite name="plug/001_34" x={p001.x} y={p001.y + id(2).y} w={p001.w} op={S.mol} rot={id(2).r} />}
+          {S.mol > 0.01 && !docked && <Sprite name="plug/001_34" x={p001.x} y={p001.y + id(2).y} w={p001.w} op={S.mol} rot={id(2).r} />}
+          {docked && <Sprite name="mini/m34_001" x={DOCK.x} y={DOCK.y + id(2).y + (S.hitJ || 0)} w={DOCK.w} rot={id(2).r} />}
         </Layer>
 
         <Layer id="cal">
-          {S.cal > 0.01 && <Sprite name="calendar/34" x={900} y={mix(-260, 290, Math.min(1, S.cal)) + (S.calJ || 0) * -1 + id(3).y} w={440} rot={id(3).r} />}
+          {S.cal > 0.01 && <Calendar1 x={900} y={mix(-260, 290, Math.min(1, S.cal)) + (S.calJ || 0) * -1 + id(3).y} w={440} rot={id(3).r} />}
         </Layer>
 
         <Layer id="road">
@@ -116,14 +119,13 @@ const Scene = () => {
           {S.pick > 0.01 && S.travel <= 0 && <Sprite name="mini/m34_on" x={CHIP.x} y={mix(CHIP.y, 400, S.pick)} w={160 * Math.min(1, S.pick)} lift={10} />}
         </Layer>
         <Layer id="hit">
-          {S.travel > 0 && <Sprite name="mini/m34_on" x={tr[0]} y={tr[1]} w={160} lift={20 * Math.sin(Math.PI * S.travel)} />}
+          {S.travel > 0 && !docked && <Sprite name="mini/m34_on" x={tr[0]} y={tr[1]} w={160} lift={20 * Math.sin(Math.PI * S.travel)} />}
           <Tick x={HIT.x + 60} y={440} s={90} p={S.tick} sw={13} />
         </Layer>
 
         <Layer id="txt" exempt>
           {S.mol > 0.01 && (
-            <div style={{position: "absolute", left: 560 + clearX, top: 498, transform: "translateX(-50%)", fontFamily: "Serif", fontSize: 28, letterSpacing: 1,
-                         color: C.soft, opacity: S.mol, whiteSpace: "nowrap", textShadow: "0 1px 0 rgba(255,255,255,0.6)"}}>OUR RE-DOCKING (AutoDock Vina)</div>
+            <Tag x={560 + clearX} y={96} op={S.mol}>OUR RE-DOCKING (AutoDock Vina)</Tag>
           )}
           {S.k > 0.05 && (
             <div style={{position: "absolute", left: 830 + clearX, top: 170}}>
@@ -139,8 +141,8 @@ const Scene = () => {
             </div>
           )}
           <Label text="target" size={52} x={CHIP.x} y={808} at={E.target.l} align="center" />
-          <Label text="first confirmed hit" size={52} x={HIT.x - 60} y={808} at={E.hit.l} align="center" />
-          <Source>Illustration · Ren et al., Chem. Sci. 2023</Source>
+          <Label text="first confirmed hit" size={52} x={HIT.x - 120} y={808} at={E.hit.l - 34} align="center" />
+          <Source>Illustration · data: Ren et al., Chem. Sci. 2023</Source>
         </Layer>
       </Stage>
     </Lens>

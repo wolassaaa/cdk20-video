@@ -3,7 +3,7 @@
 // → L3 标签、出处行（Instrument Serif）→ L4 手写批注（Caveat）；最上面一层颗粒（Grain，和出镜段合成同一个颗粒函数，b_page.py 生成）。
 // 动作一律 GSAP 暂停时间线 + 逐帧 seek（gsapFrame.js）；时间从事件表 keys_<段>.json 读。视线引导用 manual/kit.jsx 的 Lens / Layer / guidePlan / nudge。
 import React from "react";
-import {AbsoluteFill, Img, staticFile, useCurrentFrame} from "remotion";
+import {AbsoluteFill, Img, staticFile, useCurrentFrame, delayRender, continueRender, getInputProps} from "remotion";
 import {useGsapTimeline, FPS, RULE} from "./gsapFrame.jsx";
 import SM from "./bsprite_meta.json";
 
@@ -33,11 +33,66 @@ export const tint = (c, k) => toHex(hex(c).map((v) => v + (255 - v) * k));     /
 
 // ---------------------------------------------------------------- 字（5.7）
 // Instrument Serif 的大写字母高约 0.70 em：标签 44 px → 大写约 31 px（≥ 28）；出处行 28 px → 约 19.6 px（≥ 18）。
-export const LABEL_PX = 44, SOURCE_PX = 28, SUB_TOP = 940;
-const FONTS = typeof window !== "undefined" ? (() => {
-  // 字体由 manual/kit.jsx 装载（Serif、Hand 两个族名），这里只核对：页面先 import kit.jsx
-  return true;
-})() : null;
+// 11-21 B 档视觉规则 v2 R04：标签 ≥ 36 px（默认仍 44）、出处行 22 px、批注 Caveat 34–44 px；字幕区 y ≥ 940
+export const LABEL_MIN = 36, LABEL_PX = 44, SOURCE_PX = 30, SUB_TOP = 940;   // 出处行：规则 v2 写 22 px，Gemini 6-01/6-02 两次说看不清（26 也说小），取 30（R04 下限 22 之上）
+// 11-20 晚查出：以前写 fontFamily "Serif"（不带引号）在 CSS 里就是通用族 serif，浏览器用的是 Times New Roman，Instrument Serif 根本没上。
+// 这里用一个不会撞通用族名的名字自己装载（装不上就抛错，页面渲不出来，不会悄悄换成 Times）。
+export const SERIF = "'InstrumentSerifB', serif";
+if (typeof window !== "undefined" && !window.__bSerif) {
+  window.__bSerif = true;
+  const h = delayRender("Instrument Serif");
+  Promise.all([["InstrumentSerif-Regular.ttf", "normal"], ["InstrumentSerif-Italic.ttf", "italic"]]
+    .map(([file, st]) => new FontFace("InstrumentSerifB", `url(${staticFile("fonts/" + file)})`, {style: st}).load().then((x) => document.fonts.add(x))))
+    .then(() => continueRender(h))
+    .catch((e) => { throw new Error("Instrument Serif 装载失败：" + e); });
+}
+
+// ---------------------------------------------------------------- 检查探针（b_page.py check 用 --props='{"bprobe":6}' 渲一遍半分辨率）
+// 开着时：不铺 L0 大板和颗粒（只剩前景，帧差量"前景静止"），每 bprobe 帧把字和零件的框打到浏览器日志（BPROBE|{...}），
+// b_page.py 读日志查字体、字号、同屏标签数、标签框和零件掩码的重叠。正式渲染不开，不影响画面。
+export const PROBE = (() => { try { return Number(getInputProps().bprobe || 0); } catch (e) { return 0; } })();
+const effOp = (el) => { let o = 1; for (let e = el; e && e.nodeType === 1; e = e.parentElement) { const cs = getComputedStyle(e); o *= Number(cs.opacity); if (cs.visibility === "hidden" || cs.display === "none") return 0; } return o; };
+const rnd = (v) => Math.round(v);
+export const probeScan = (f) => {
+  const T = [], P = [];
+  const tw = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  for (let n = tw.nextNode(); n; n = tw.nextNode()) {
+    const t = n.textContent.trim();
+    if (!t) continue;
+    const el = n.parentElement;
+    if (el.closest("[data-role=counter]")) continue;      // 数字轮：整个计数器记一条（下面），不记轮上每个数字
+    const op = effOp(el);
+    if (op < 0.1) continue;
+    const rg = document.createRange();
+    rg.selectNodeContents(n);
+    const b = rg.getBoundingClientRect();
+    if (b.width < 1 || b.right < 0 || b.left > 1920 || b.bottom < 0 || b.top > 1080) continue;
+    const cs = getComputedStyle(el);
+    const r = ["label", "pen", "tag", "source"].find((q) => el.closest(`[data-role=${q}]`)) || (el.closest("[data-role=engrave]") ? "engrave" : "raw");
+    const roleEl = el.closest(`[data-role=${r}]`), own = el.closest("[data-pid]");
+    T.push({t: t.slice(0, 40), role: r, rid: roleEl ? roleEl.dataset.rid || "" : "", on: roleEl ? roleEl.dataset.on || "" : "", ff: cs.fontFamily, fs: parseFloat(cs.fontSize),
+            x: rnd(b.left), y: rnd(b.top), w: rnd(b.width), h: rnd(b.height), op: Math.round(op * 100) / 100, own: own ? own.dataset.pid : ""});
+  }
+  document.querySelectorAll("[data-role=counter]").forEach((el) => {
+    const op = effOp(el), b = el.getBoundingClientRect(), cs = getComputedStyle(el);
+    if (op >= 0.1 && b.width >= 1) T.push({t: "#counter", role: "counter", rid: "", ff: cs.fontFamily, fs: parseFloat(cs.fontSize), x: rnd(b.left), y: rnd(b.top), w: rnd(b.width), h: rnd(b.height), op: Math.round(op * 100) / 100, own: ""});
+  });
+  document.querySelectorAll("[data-pid]").forEach((el) => {
+    const op = effOp(el);
+    if (op < 0.1) return;
+    const b = el.getBoundingClientRect();
+    if (b.width < 1 || b.right < 0 || b.left > 1920 || b.bottom < 0 || b.top > 1080) return;
+    const up = el.parentElement && el.parentElement.closest("[data-pid]");
+    P.push({pid: el.dataset.pid, name: el.dataset.part, x: rnd(b.left), y: rnd(b.top), w: rnd(b.width), h: rnd(b.height), op: Math.round(op * 100) / 100, up: up ? up.dataset.pid : ""});
+  });
+  console.log("BPROBE|" + JSON.stringify({f, T, P}));
+};
+const ProbeTap = ({f}) => {
+  React.useEffect(() => { if (PROBE && f % PROBE === 0) probeScan(f); }, [f]);
+  return null;
+};
+let PID = 0;
+const pidOf = (name) => `${name}#${(PID = (PID + 1) % 1000000)}`;
 
 // ---------------------------------------------------------------- 事件表
 export const evMapB = (K) => Object.fromEntries(K.events.map((e) => [e.id, {s: e.f_start, l: e.f_land, e: e.f_end}]));
@@ -100,7 +155,7 @@ export const Sprite = ({name, x, y, w, rot = 0, sx = 1, sy = 1, op = 1, lift = 0
   return (
     <>
       {shadow && op > 0.01 && <Shadow cx={cx} cy={cy + h * 0.5 - h * shadowSq * 0.5} rx={w * 0.42} ry={h * shadowSq * 0.5} lift={lift} op={op} />}
-      <div style={{position: "absolute", left: cx - w / 2, top: cy - h / 2 - lift, width: w, height: h, opacity: op,
+      <div data-part={name} data-pid={PROBE ? pidOf(name) : undefined} style={{position: "absolute", left: cx - w / 2, top: cy - h / 2 - lift, width: w, height: h, opacity: op,
                    transform: `rotate(${rot}deg) scale(${sx},${sy})`, filter: fl.length ? fl.join(" ") : undefined, ...style}}>
         <Img src={staticFile(`bsprite/${name}.png`)} style={{width: w, height: h, display: "block"}} />
         {children}
@@ -120,7 +175,7 @@ export const Slab = ({x, y, w, h, r = 14, color = C.bone, depth = 8, sheen = -1,
   return (
     <>
       {shadow && op > 0.01 && <Shadow cx={x + w / 2} cy={y + h / 2 + depth / 2} rx={w * 0.5} ry={h * 0.5} lift={lift} op={op} />}
-      <div style={{position: "absolute", left: x, top: y - lift, width: w, height: h + depth, opacity: op, transform: rot ? `rotate(${rot}deg)` : undefined}}>
+      <div data-part="slab" data-pid={PROBE ? pidOf("slab") : undefined} style={{position: "absolute", left: x, top: y - lift, width: w, height: h + depth, opacity: op, transform: rot ? `rotate(${rot}deg)` : undefined}}>
         <svg width={w + 2} height={h + depth + 2} style={{position: "absolute", left: 0, top: 0, overflow: "visible"}}>
           <defs>
             <linearGradient id={`${uid}s`} x1="0" y1="0" x2="1" y2="1">
@@ -179,14 +234,14 @@ export const Runner = ({d, width = 16, draw = 1, color = C.bone, op = 1}) => (
 
 // 刻字：字色 + 下方 1 px 亮线（"刻"进件里）
 export const Engrave = ({children, size = 44, color = C.ink, light = false, style, italic}) => (
-  <span style={{fontFamily: "Serif", fontSize: size, color: light ? C.inkLight : color, fontStyle: italic ? "italic" : "normal",
+  <span data-role="engrave" style={{fontFamily: SERIF, fontSize: size, color: light ? C.inkLight : color, fontStyle: italic ? "italic" : "normal",
                 textShadow: light ? "0 1px 0 rgba(0,0,0,0.35)" : "0 1px 0 rgba(255,255,255,0.65)", whiteSpace: "nowrap", lineHeight: 1, ...style}}>{children}</span>
 );
 
 // ---------------------------------------------------------------- L3 标签：按词拆，每词错开 3 帧、上移 12 px 淡入（SplitText 的做法，补间普通对象）
 // at = 第一个词落定的帧（一般是事件 f_land）；out = 收起的帧（可不给）。字号不小于 44（大写约 31 px）。
-export const Label = ({text, x, y, at, out, size = LABEL_PX, color = C.ink, align = "left", italic, w, plate}) => {
-  if (size < LABEL_PX) throw new Error(`标签字号 ${size} 小于 ${LABEL_PX}`);
+export const Label = ({text, x, y, at, out, size = LABEL_PX, color = C.ink, align = "left", italic, w, plate, on}) => {
+  if (size < LABEL_MIN) throw new Error(`标签字号 ${size} 小于 ${LABEL_MIN}`);
   if (y + size * 1.1 > SUB_TOP) throw new Error(`标签 "${text}" 压进字幕区（y=${y}）`);
   const words = String(text).split(" ");
   const S = useGsapTimeline((tl, S) => {
@@ -205,11 +260,12 @@ export const Label = ({text, x, y, at, out, size = LABEL_PX, color = C.ink, alig
       ))}
     </div>
   );
-  return <div style={{position: "absolute", left: x, top: y, transform: `translateX(${tx})`, width: w}}>{body}</div>;
+  return <div data-role="label" data-rid={text} data-on={on} style={{position: "absolute", left: x, top: y, transform: `translateX(${tx})`, width: w}}>{body}</div>;
 };
 
 // ---------------------------------------------------------------- L4 手写批注：Caveat，从左到右描出 24–36 帧（遮罩前沿是一支笔的走势，带一点起伏）
-export const Pen = ({text, x, y, at, out, dur = 30, size = 52, color = C.ink, rot = -3}) => {
+export const Pen = ({text, x, y, at, out, dur = 30, size: size0 = 40, color = C.ink, rot = -3, on}) => {
+  const size = Math.max(34, Math.min(44, size0));      // R04：Caveat 批注 34–44 px（老页面写的 52 在这里收到 44）
   const S = useGsapTimeline((tl, S) => {
     S.p = 0;
     S.o = 1;
@@ -220,17 +276,26 @@ export const Pen = ({text, x, y, at, out, dur = 30, size = 52, color = C.ink, ro
   const lx = -6 + 112 * S.p;
   const m = `linear-gradient(90deg,#000 ${lx - 4}%,transparent ${lx}%)`;
   return (
-    <div style={{position: "absolute", left: x, top: y, opacity: S.o, transform: `rotate(${rot}deg)`, font: `${size}px Hand`, color, whiteSpace: "nowrap",
+    <div data-role="pen" data-rid={text} data-on={on} style={{position: "absolute", left: x, top: y, opacity: S.p > 0 ? S.o : 0, transform: `rotate(${rot}deg)`, font: `${size}px Hand`, color, whiteSpace: "nowrap",
                  WebkitMaskImage: m, maskImage: m, padding: "0 0.3em", margin: "0 -0.3em"}}>{text}</div>
   );
 };
 
 // ---------------------------------------------------------------- 出处行（5.7）：Instrument Serif，≥ 28 px（大写约 20 px），在字幕区上面
-export const Source = ({children, op = 1, x = 48, y = 892}) => {
-  if (y + SOURCE_PX * 1.2 > SUB_TOP) throw new Error("出处行压进字幕区");
-  return <div style={{position: "absolute", left: x, top: y, fontFamily: "Serif", fontSize: SOURCE_PX, color: C.soft, opacity: op, whiteSpace: "nowrap",
-                      textShadow: "0 1px 0 rgba(255,255,255,0.6)"}}>{children}</div>;
+export const Source = ({children, op = 1, x = 64, y}) => {
+  // 规则 v2 R09：左下 x = 64、底边 y = 924（字幕区 940 之上），Instrument Serif 22 px，字 #6E6B63（C.soft），骨白磨砂底 0.78、圆角 4、左右内边距 12
+  const top = y != null ? Math.min(y, 928 - 42) : 928 - 42;
+  if (top + 42 > SUB_TOP) throw new Error("出处行压进字幕区");
+  return <div data-role="source" style={{position: "absolute", left: x, top, height: 42, boxSizing: "border-box", padding: "5px 12px 0", borderRadius: 4, background: "rgba(244,241,234,0.86)",
+                      fontFamily: SERIF, fontSize: SOURCE_PX, letterSpacing: 0.3, color: C.ink, opacity: op, whiteSpace: "nowrap", lineHeight: 1.1}}>{children}</div>;
 };
+
+// 图注小牌（PREDICTED MODEL、OUR RE-DOCKING 这类）：和出处行同一套底，30 px，大写字距 1
+export const Tag = ({children, x, y, op = 1, align = "center", on}) => (
+  <div data-role="tag" data-on={on} style={{position: "absolute", left: x, top: y, transform: align === "center" ? "translateX(-50%)" : align === "right" ? "translateX(-100%)" : undefined,
+               padding: "3px 12px 5px", borderRadius: 10, background: "rgba(243,238,230,0.80)", fontFamily: SERIF, fontSize: 30, letterSpacing: 1,
+               color: C.ink, opacity: 0.88 * op, whiteSpace: "nowrap", lineHeight: 1.2}}>{children}</div>
+);
 
 // ---------------------------------------------------------------- 插座灯：灯位锚点上的一团暖黄光晕（ATP 透明黄，只给插座灯和真插头）。on 0→1
 export const Lamp = ({name, x, y, w, on = 1, r}) => {
@@ -254,8 +319,8 @@ export const Counter = ({value, digits = 2, decimals = 0, size = 96, color = C.i
     cols.push({pos, hide, dot: i === decimals && decimals > 0, comma: comma && i === decimals + 2 && n >= 999.5 * Math.pow(10, decimals)});   // 千分位逗号在百位前
   }
   return (
-    <div style={{position: "absolute", left: x, top: y, display: "flex", transform: align === "right" ? "translateX(-100%)" : align === "center" ? "translateX(-50%)" : undefined,
-                 fontFamily: "Serif", fontSize: size, color, lineHeight: `${h}px`, height: h, overflow: "hidden", textShadow: "0 1px 0 rgba(255,255,255,0.65)"}}>
+    <div data-role="counter" style={{position: "absolute", left: x, top: y, display: "flex", transform: align === "right" ? "translateX(-100%)" : align === "center" ? "translateX(-50%)" : undefined,
+                 fontFamily: SERIF, fontSize: size, color, lineHeight: `${h}px`, height: h, overflow: "hidden", textShadow: "0 1px 0 rgba(255,255,255,0.65)"}}>
       {cols.map((c, i) => (
         <React.Fragment key={i}>
           {c.comma && !c.hide && <span>,</span>}
@@ -282,7 +347,7 @@ export const Dial = ({cx, cy, r, color = C.bone, ticks = [], needle = 0, ghost, 
           <g key={i}>
             <line x1={cx + (r - 14) * Math.cos(a2(ang))} y1={cy + (r - 14) * Math.sin(a2(ang))} x2={cx + (r - (big ? 34 : 24)) * Math.cos(a2(ang))} y2={cy + (r - (big ? 34 : 24)) * Math.sin(a2(ang))}
                   stroke={C.ink} strokeWidth={big ? 4 : 2.5} strokeLinecap="round" />
-            {txt && <text x={cx + (r - 66) * Math.cos(a2(ang))} y={cy + (r - 66) * Math.sin(a2(ang)) + 12} textAnchor="middle" fontFamily="Serif" fontSize={34} fill={C.ink}>{txt}</text>}
+            {txt && <text x={cx + (r - 66) * Math.cos(a2(ang))} y={cy + (r - 66) * Math.sin(a2(ang)) + 12} textAnchor="middle" fontFamily={SERIF} fontSize={34} fill={C.ink}>{txt}</text>}
           </g>
         ))}
         {ghost != null && <g opacity={0.45}><line x1={cx} y1={cy} x2={cx + (r - 30) * Math.cos(a2(ghost))} y2={cy + (r - 30) * Math.sin(a2(ghost))} stroke={C.grey} strokeWidth={7} strokeLinecap="round" /></g>}
@@ -290,7 +355,7 @@ export const Dial = ({cx, cy, r, color = C.bone, ticks = [], needle = 0, ghost, 
         <line x1={cx} y1={cy} x2={cx + (r - 30) * Math.cos(a2(needle))} y2={cy + (r - 30) * Math.sin(a2(needle))} stroke={needleColor} strokeWidth={7} strokeLinecap="round" />
         <circle cx={cx} cy={cy} r={14} fill={C.black} />
         <circle cx={cx - 4} cy={cy - 4} r={4} fill="#fff" opacity={0.5} />
-        {label && <text x={cx} y={cy + r * 0.48} textAnchor="middle" fontFamily="Serif" fontSize={labelSize} fill={C.ink} style={{textShadow: "0 1px 0 rgba(255,255,255,0.65)"}}>{label}</text>}
+        {label && <text x={cx} y={cy + r * 0.48} textAnchor="middle" fontFamily={SERIF} fontSize={labelSize} fill={C.ink} style={{textShadow: "0 1px 0 rgba(255,255,255,0.65)"}}>{label}</text>}
       </svg>
     </>
   );
@@ -370,6 +435,57 @@ export const WhipFilter = () => (
 export const impact = (f, at) => (f === at ? 6 : f === at + 1 ? -6 : 0);
 
 // ---------------------------------------------------------------- 舞台：L0 + 内容 + 颗粒 + 擦除，页面只填内容
+// 裁一块贴图：box = [左, 上, 右, 下]（占贴图宽高的比例）。(x, y) 是裁出那块的中心，w 是整张贴图的显示宽。
+// capsule/34 是三粒叠放 → Capsule1 取最前面那一粒；person/34 是白、红两个小人 → Person1 取一个。
+export const SpriteCrop = ({name, box, x, y, w, rot = 0, op = 1, lift = 0, sx = 1, sy = 1, shadow = true, round = 0, style}) => {
+  const m = spriteMeta(name);
+  if (w > m.w * 0.8 + 1) throw new Error(`${name} 放大超过 1.6 倍：显示宽 ${w}，原图 ${m.w}`);
+  const h = (w * m.h) / m.w;
+  const [l, t, r, b] = box;
+  const fx = (l + r) / 2, fy = (t + b) / 2;
+  const cx = x - (fx - 0.5) * w, cy = y - (fy - 0.5) * h;
+  return (
+    <>
+      {shadow && op > 0.01 && <Shadow cx={x} cy={y + (b - t) * h * 0.38} rx={(r - l) * w * 0.42} ry={(b - t) * h * 0.12} lift={lift} op={op} />}
+      <div style={{position: "absolute", left: cx - w / 2, top: cy - h / 2 - lift, width: w, height: h, opacity: op, transformOrigin: `${fx * w}px ${fy * h}px`,
+                   transform: `rotate(${rot}deg) scale(${sx},${sy})`, clipPath: `inset(${t * 100}% ${(1 - r) * 100}% ${(1 - b) * 100}% ${l * 100}%${round ? ` round ${(round * h).toFixed(1)}px` : ""})`, ...style}}>
+        <Img src={staticFile(`bsprite/${name}.png`)} style={{width: w, height: h, display: "block"}} />
+      </div>
+    </>
+  );
+};
+// 前面那一粒：圆角裁成药丸形，后面那粒露不出来
+// 日历：calendar/34 贴图下面连着一把尺子（Gemini 初审 11-20：尺子和"天数"不搭）。按日历轮廓裁掉尺子；x, y 是日历本身的中心，w 按原来整张图的宽给，内部放大 1.3 倍补回尺寸
+export const Calendar1 = ({x, y, w, ...p}) => {
+  const W = Math.min(671, w * 1.3), k = W / 839;
+  return <Sprite name="calendar/34" x={x + 89.5 * k} y={y + 75 * k} w={W} shadow={false} {...p}
+                 style={{clipPath: "polygon(11.5% 13%, 19% 4%, 55% 0%, 67% 8%, 66% 52%, 64.5% 56.5%, 28% 67.5%, 23% 65%, 11.5% 38%)"}} />;
+};
+// 刻字牌：一块 Slab，正中刻一行字（站牌、来源卡、核对表行都用它）。x, y 是左上角
+export const Plate = ({x, y, w, h, text, size = 44, color = C.bone, light = false, op = 1, id, depth = 8, r = 14, rot = 0, sheen = -1, lift = 0, align = "center", pad = 22, shadow = true, children}) => (
+  <Slab x={x} y={y} w={w} h={h} r={r} color={color} depth={depth} op={op} id={id} rot={rot} sheen={sheen} lift={lift} shadow={shadow}>
+    <div style={{width: w, height: h, display: "flex", alignItems: "center", justifyContent: align === "left" ? "flex-start" : "center", paddingLeft: align === "left" ? pad : 0, boxSizing: "border-box"}}>
+      <Engrave size={size} light={light}>{text}</Engrave>
+    </div>
+    {children}
+  </Slab>
+);
+// 放大镜（骨白框 + 柄，镜片一层亮光）：x, y 是镜片中心
+export const LoupeRing = ({x, y, r = 80, op = 1, rot = 45}) => (
+  <div style={{position: "absolute", left: x, top: y, width: 0, height: 0, opacity: op}}>
+    <div style={{position: "absolute", left: 0, top: -r * 0.17, width: r * 1.9, height: r * 0.34, borderRadius: r * 0.17, background: C.bone,
+                 transform: `rotate(${rot}deg) translateX(${r * 0.95}px)`, transformOrigin: `0 ${r * 0.17}px`, boxShadow: `0 10px 14px rgba(40,30,20,0.25), inset 0 -5px 0 ${shade(C.bone, 0.22)}`}} />
+    <div style={{position: "absolute", left: -r, top: -r, width: 2 * r, height: 2 * r, borderRadius: r, background: "radial-gradient(circle at 32% 28%, rgba(255,255,255,0.55), rgba(255,255,255,0.08) 55%, rgba(61,107,230,0.10))"}} />
+    <div style={{position: "absolute", left: -r - 12, top: -r - 12, width: 2 * r + 24, height: 2 * r + 24, borderRadius: r + 12, border: `12px solid ${C.bone}`, boxSizing: "border-box",
+                 boxShadow: `0 12px 18px rgba(40,30,20,0.28), inset 0 3px 0 rgba(255,255,255,0.7), 0 -2px 0 ${shade(C.bone, 0.22)} inset`}} />
+  </div>
+);
+export const Capsule1 = (p) => <SpriteCrop name="capsule/34" box={[0.26, 0.535, 0.935, 0.865]} round={0.165} {...p} />;
+export const Person1 = ({red, ...p}) => <SpriteCrop name="person/34" box={red ? [0.5, 0.0, 1, 1] : [0, 0.08, 0.5, 1]} {...p} />;
+
+// 磨砂：插座"看不清"（3-08、4-01）。k 0–1：虚焦 + 一层台面色磨砂
+export const frost = (k) => (k > 0.01 ? {filter: `blur(${(10 * k).toFixed(1)}px) saturate(${1 - 0.5 * k})`, opacity: 1 - 0.35 * k} : undefined);
+
 // 句尾机位：说完一句时，画面里最后落位的件已经停了，按规矩"动作接到句尾"，这时让机位横移一小段（L0 大板 0.35 倍视差，像真机位从台面上滑过）。
 // 只给自然动作接不到句尾的句子用（check_sync S2 不过的句子），sids 例 ["s1", "s3"]；每段 ±A px，sine.inOut，峰值速度落在句末那一帧，方向逐句交替。
 export const camBreath = (f, K, sids = [], A = 44, half = 45) => {
@@ -389,7 +505,7 @@ export const Stage = ({zone, f, shakeX = 0, shakeY = 0, whip = 0, cam = 0, child
     <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `translate(${whip + shakeX}px, ${shakeY}px)`,
                  filter: Math.abs(whip) > 1 ? "url(#whipblur)" : undefined}}>
       <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `translateX(${(0.35 * cam).toFixed(2)}px) scale(1.02)`, transformOrigin: "960px 540px"}}>
-        <BoardPlate zone={zone} f={f} />
+        {!PROBE && <BoardPlate zone={zone} f={f} />}
         {/* 甩镜时板面是连着的：在甩来的那一侧再铺一块同一帧的大板，画面里不露出空台面 */}
         {Math.abs(whip) > 1 && [1, 2].map((k) => (
           <div key={k} style={{position: "absolute", left: (whip > 0 ? -1920 : 1920) * k, top: 0, width: 1920, height: 1080}}><BoardPlate zone={zone} f={f} /></div>))}
@@ -399,6 +515,7 @@ export const Stage = ({zone, f, shakeX = 0, shakeY = 0, whip = 0, cam = 0, child
       </div>
     </div>
     {over}
-    <Grain f={f} />
+    {!PROBE && <Grain f={f} />}
+    {PROBE > 0 && <ProbeTap f={f} />}
   </AbsoluteFill>
 );

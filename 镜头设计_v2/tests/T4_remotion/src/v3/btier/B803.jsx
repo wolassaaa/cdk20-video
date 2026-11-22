@@ -43,6 +43,7 @@ const Scene = () => {
     X.count("n13", 0, 13, E.n13.l, 52);
     X.tw("clear2", 0, 1, E.road.s - 4, E.road.l + 16, "power3.in");
     X.tw("road", 0, 1, E.road.s + 6, E.road.e, "power2.out");
+    X.tw("hop1", 0, 1, E.road.s + 10, E.hit.l, "power2.inOut");
     X.land("hit", 0, 1, E.hit.l);
     X.land("sock", 0, 1, E.road.l + 30, {antic: false});
     X.tw("r2", 0, 1, E.r2.s, E.r2.l, "power2.inOut");
@@ -59,6 +60,9 @@ const Scene = () => {
   const c1 = -2000 * S.clear1 * S.clear1, c2 = -2000 * S.clear2 * S.clear2;
   // 料杆上走过的候选插头：每帧 15 px（每秒 0.47 个画面宽）
   const convX = (i) => ((f - E.conv.s) * 15 + i * 230) % (8 * 230) - 160;
+  const convRim = (x) => Math.max(0, ...CHIP_X.map((cx) => 1 - Math.abs(x - cx) / 60));
+  const pileBreath = 1 + 0.025 * Math.sin((2 * Math.PI * f) / 70);
+  const T0 = SLOT(0), H1 = [ROAD_X0 + 110, ROAD_Y - 80];
   // 048：从右上飞到插座口，越飞越"远"（变小到插座口的尺寸），再拧 90°
   const mouth = (() => { const [dx, dy] = anchorOf("mini/mface_on", "mouth", SOCK.w); return [SOCK.x + dx, SOCK.y + dy]; })();
   const R2 = pathOf([[1760, 210], [1560, 200], mouth]);
@@ -88,21 +92,26 @@ const Scene = () => {
           </Layer>
           <Layer id="conv">
             {S.conv > 0.001 && <Runner d={`M100,${CONV_Y} L1820,${CONV_Y}`} draw={S.conv} width={18} />}
-            {S.conv > 0.5 && [...Array(8)].map((_, i) => <Sprite key={i} name="plug/blank_34" x={convX(i)} y={CONV_Y - 46} w={120} op={Math.min(1, (S.conv - 0.5) * 3)} />)}
+            {S.conv > 0.5 && [...Array(8)].map((_, i) => {
+              const x = convX(i), out = i % 3 === 1 && x > CHIP_X[1];
+              return <Sprite key={i} name="plug/blank_34" x={x} y={CONV_Y - 46 + (out ? Math.min(60, (x - CHIP_X[1]) * 0.25) : 0)} w={120} op={Math.min(1, (S.conv - 0.5) * 3) * (out ? 0.55 : 1)}
+                             rim={out ? 0 : convRim(x)} style={out ? {filter: "grayscale(0.9)"} : undefined} />;
+            })}
           </Layer>
         </div>
 
         <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `translateX(${c2}px)`}}>
           <Layer id="pile">
-            {S.pile > 0.01 && <Sprite name="beads/34" x={560} y={500 + id(5).y} w={700} op={Math.min(1, S.pile * 1.5)} sx={0.85 + 0.15 * S.pile} sy={0.85 + 0.15 * S.pile} />}
+            {S.pile > 0.01 && <Sprite name="beads/34" x={560} y={500 + id(5).y} w={700} op={Math.min(1, S.pile * 1.5)} sx={(0.85 + 0.15 * S.pile) * pileBreath} sy={(0.85 + 0.15 * S.pile) * (2 - pileBreath)} />}
           </Layer>
           <Layer id="tray">
             {S.tray > 0.01 && <Slab x={TRAY.x} y={TRAY.y} w={TRAY.w} h={TRAY.h} r={24} color={C.bone} depth={10} op={S.tray} id="tray" />}
             {[...Array(13)].map((_, i) => {
               const d = S[`d${i}`];
-              if (d <= 0.001) return null;
+              if (d <= 0.001 || (i === 0 && S.hop1 > 0)) return null;
               const s = SLOT(i);
-              return <Sprite key={i} name="plug/A_34" x={mix(800, s.x, Math.min(1, d * 1.3))} y={mix(260, s.y, d) + (S[`dj${i}`] || 0)} w={80} lift={30 * (1 - d)} />;
+              // 从料珠堆顶上跳出来，划一道弧进盘
+              return <Sprite key={i} name="plug/A_34" x={mix(640, s.x, Math.min(1, d * 1.1))} y={mix(380, s.y, d) - 220 * Math.sin(Math.PI * d) + (S[`dj${i}`] || 0)} w={80} lift={30 * (1 - d)} />;
             })}
           </Layer>
         </div>
@@ -113,7 +122,11 @@ const Scene = () => {
             const x = ROAD_X0 + 30 + i * 98, a = Math.max(0, Math.min(1, (S.road * 1.2 - i / 17) * 3));
             return a > 0 && <Slab key={i} x={x - 3} y={ROAD_Y + 16} w={6} h={i % 4 === 0 ? 34 : 20} r={3} color={C.bone} depth={3} shadow={false} op={a} id={`rt${i}`} />;
           })}
-          {S.hit > 0.01 && <Sprite name="plug/001_34" x={ROAD_X0 + 110} y={ROAD_Y - 80 - 50 * (1 - Math.min(1, S.hit)) + id(6).y} w={220} op={Math.min(1, S.hit * 1.5)} />}
+          {S.hop1 > 0 && (() => {
+            // 盘里第一个插头（001）跳到路的起点；路走的是年，001 只走了 30 天
+            const u = S.hop1, sx = T0.x, sy = T0.y;   // 盘往左清场时 001 自己留下
+            return <Sprite name="plug/001_34" x={mix(sx, H1[0], u)} y={mix(sy, H1[1], u) - 260 * Math.sin(Math.PI * u) + (u >= 1 ? id(6).y : 0)} w={mix(80, 220, u)} lift={30 * Math.sin(Math.PI * u)} />;
+          })()}
         </Layer>
 
         <Layer id="socket">
@@ -121,7 +134,7 @@ const Scene = () => {
             <>
               <Sprite name={clamped ? "mini/mface_048clamp" : "mini/mface_on"} x={SOCK.x} y={SOCK.y + id(7).y - 40 * (1 - Math.min(1, S.sock))} w={SOCK.w}
                       op={Math.min(1, S.sock * 1.5)} />
-              <Lamp name="mini/mface_on" x={SOCK.x} y={SOCK.y + id(7).y} w={SOCK.w} on={clamped ? 0 : Math.min(1, S.sock)} r={22} />
+              <Lamp name="mini/mface_on" x={SOCK.x} y={SOCK.y + id(7).y} w={SOCK.w} on={clamped ? 0 : Math.min(1, S.sock) * (0.8 + 0.2 * Math.sin((2 * Math.PI * f) / 36))} r={22} />
             </>
           )}
           {S.r2 > 0 && !clamped && <Sprite name="plug/048_end" x={rp[0]} y={rp[1] + id(7).y * S.r2} w={plugW} rot={90 * S.twist} lift={40 * (1 - S.r2)} shadow={S.r2 < 0.9} />}
@@ -139,7 +152,8 @@ const Scene = () => {
           <Label text="molecules made" size={56} x={TRAY.x + 220 + c2} y={TRAY.y - 112} at={E.made.l} />
           <Pen text="years" x={1560} y={700} at={E.years.l - 4} size={80} />
           <Label text="30 days" size={56} x={ROAD_X0 + 110} y={ROAD_Y - 230} at={E.d30.l} align="center" />
-          <Source>Illustration · Ren et al., Chem. Sci. 2023</Source>
+          <Label text="round two" size={56} x={SOCK.x} y={SOCK.y - 250} at={E.r2.s} align="center" />
+          <Source>Illustration · data: Ren et al., Chem. Sci. 2023</Source>
         </Layer>
       </Stage>
     </Lens>

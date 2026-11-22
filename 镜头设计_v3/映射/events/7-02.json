@@ -2,43 +2,29 @@
  "schema": "cdk20.events/1",
  "group": "7-02",
  "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：第 7 章页 7-02（画外音）：048 小牌子和路；048 往前走一步；public 牌子上的小锁打开；三张清单卡依次飞到路边（liver cancer cells and normal liver cells / animals / how the body handles it, what else it hits）；already listed 三张卡一起打勾。页面 Manual702.jsx。",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 7-02（btier/B702.jsx）。第 1 块编号牌落到路上 048 吊牌旁，048 吊牌往前挪一步到 Cells 站插一面小旗；挂在 048 吊牌上的小挂锁弹开（public），旁边出现白色小人（anyone）；画面让位，一组肝癌细胞培养皿（p40）一变二、二变四，旁边正常肝细胞培养皿也展开；小鼠零件（p43）亮起；两块小牌（Plate）刻 ADME、selectivity 依次弹出；最后来源卡 Ren et al. 2023 出现，三张步骤卡同时打勾。",
+ "tier": "B",
+ "zone": 7,
+ "trans_in": "T5 runner（上一段 7-01 是出镜 A 段，1 号牌飞入）",
+ "trans_out": "T2 甩镜往左（下一段 7-03 是 B 页）",
  "holds": [],
  "events": [
   {
-   "id": "title",
-   "obj": "title",
+   "id": "p1",
+   "obj": "p1",
    "verb": "appear",
    "at": {
-    "word": "7-02.w001",
+    "word": "one#1",
     "off": 0
    },
-   "means": "One: walk 048 further：标题",
+   "lead": 7,
+   "means": "One：1 号编号牌落到路旁",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "7-02.w004"
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "road",
-   "obj": "road",
-   "verb": "grow",
-   "at": {
-    "word": "7-02.w002",
-    "off": 0
    },
-   "means": "walk：路和 048 小牌子（在 Cells）",
-   "tool": "remotion",
-   "lead": 40,
    "until": {
-    "word": "7-02.w002"
-   },
-   "guide": {
-    "kind": "none"
+    "word": "walk#1"
    }
   },
   {
@@ -46,272 +32,299 @@
    "obj": "walk",
    "verb": "move",
    "at": {
-    "word": "7-02.w004",
+    "word": "walk#1",
     "off": 0
    },
-   "means": "further：048 往前走一步",
+   "lead": 13,
+   "means": "walk：048 吊牌从 Cells 站起动往前滑",
    "tool": "remotion",
-   "lead": 26,
-   "until": {
-    "word": "7-02.w004"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "048#1"
    }
   },
   {
-   "id": "pub",
-   "obj": "pub",
-   "verb": "morph",
+   "id": "tag48",
+   "obj": "tag48",
+   "verb": "snap",
    "at": {
-    "word": "7-02.w006",
+    "word": "048#1",
     "off": 0
    },
-   "means": "public：小锁打开",
+   "lead": 13,
+   "means": "048 further：048 吊牌挪一步到位，Cells 站插一面小旗",
    "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "7-02.w006"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "any",
-   "obj": "any",
-   "verb": "appear",
-   "at": {
-    "word": "7-02.w009",
-    "off": 0
-   },
-   "means": "anyone：三个小人",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "7-02.w009"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "try",
-   "obj": "try",
-   "verb": "grow",
-   "at": {
-    "word": "7-02.w011",
-    "off": 0
-   },
-   "means": "try：箭头从小人指向 048 牌子",
-   "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "7-02.w011"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "c1",
-   "obj": "c1",
-   "verb": "move",
-   "at": {
-    "word": "7-02.w016",
-    "off": 0
-   },
-   "means": "liver：第一张卡飞到路边",
-   "tool": "remotion",
-   "lead": 40,
-   "until": {
-    "word": "7-02.w016"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "c1a",
-   "obj": "c1a",
-   "verb": "appear",
-   "at": {
-    "word": "7-02.w018",
-    "off": 0
-   },
-   "means": "cells：写 liver cancer cells",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "7-02.w018"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "c1b",
-   "obj": "c1b",
-   "verb": "appear",
-   "at": {
-    "word": "7-02.w022",
-    "off": 0
-   },
-   "means": "cells：写 and normal liver cells",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "7-02.w022"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "c2",
-   "obj": "c2",
-   "verb": "move",
-   "at": {
-    "word": "7-02.w024",
-    "off": 0
-   },
-   "means": "animals：第二张卡飞来，写 animals",
-   "tool": "remotion",
-   "lead": 30,
-   "until": {
-    "word": "7-02.w024"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "c3",
-   "obj": "c3",
-   "verb": "move",
-   "at": {
-    "word": "7-02.w026",
-    "off": 0
-   },
-   "means": "check：第三张卡飞来",
-   "tool": "remotion",
-   "lead": 30,
-   "until": {
-    "word": "7-02.w026"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "c3a",
-   "obj": "c3a",
-   "verb": "appear",
-   "at": {
-    "word": "7-02.w031",
-    "off": 0
-   },
-   "means": "it：写 how the body handles it",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "7-02.w031"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "c3b",
-   "obj": "c3b",
-   "verb": "appear",
-   "at": {
-    "word": "7-02.w036",
-    "off": 0
-   },
-   "means": "hits：写 and what else it hits",
-   "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "word": "7-02.w036"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "auth",
-   "obj": "auth",
-   "verb": "grow",
-   "at": {
-    "word": "7-02.w038",
-    "off": 0
-   },
-   "means": "authors：论文图标和 the authors",
-   "tool": "remotion",
-   "lead": 12,
-   "until": {
-    "word": "7-02.w038"
-   },
    "guide": {
     "kind": "focus",
     "target": [
-     "paper1"
+     "tag48"
     ]
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
-   "id": "al",
-   "obj": "al",
-   "verb": "appear",
+   "id": "unlock",
+   "obj": "unlock",
+   "verb": "snap",
    "at": {
-    "word": "7-02.w040",
+    "word": "public#1",
     "off": 0
    },
-   "means": "already：红批注 already listed",
+   "lead": 9,
+   "means": "public：吊牌上挂的小挂锁弹开",
    "tool": "remotion",
-   "lead": 8,
-   "until": {
-    "word": "7-02.w040"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "anyone#1"
+   }
+  },
+  {
+   "id": "anyone",
+   "obj": "anyone",
+   "verb": "appear",
+   "at": {
+    "word": "anyone#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "anyone could try：路旁出现几个白色小人剪影",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "clear",
+   "obj": "clear",
+   "verb": "move",
+   "at": {
+    "word": "test#1",
+    "off": 0
+   },
+   "lead": 9,
+   "means": "Test：路往左让位，培养皿组进来",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "cancer#1"
+   }
+  },
+  {
+   "id": "dishes",
+   "obj": "dishes",
+   "verb": "grow",
+   "at": {
+    "word": "cancer#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "liver cancer cells：肝癌细胞培养皿一变二、二变四",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "dishes"
+    ]
+   },
+   "until": {
+    "word": "normal#1"
+   }
+  },
+  {
+   "id": "norm",
+   "obj": "norm",
+   "verb": "grow",
+   "at": {
+    "word": "normal#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "normal liver cells：正常肝细胞培养皿也亮起展开",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "cells#2"
+   }
+  },
+  {
+   "id": "dish_l",
+   "obj": "dish_l",
+   "verb": "appear",
+   "at": {
+    "word": "cells#2",
+    "off": 0
+   },
+   "lead": 9,
+   "means": "cells：两排培养皿分别标上 cancer / normal",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "animals#1"
+   }
+  },
+  {
+   "id": "mouse",
+   "obj": "mouse",
+   "verb": "grow",
+   "at": {
+    "word": "animals#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "animals：小鼠零件落位亮起",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "mouse"
+    ]
+   },
+   "until": {
+    "word": "check#1"
+   }
+  },
+  {
+   "id": "chk",
+   "obj": "chk",
+   "verb": "appear",
+   "at": {
+    "word": "check#1",
+    "off": 0
+   },
+   "lead": 9,
+   "means": "check：小牌槽位出现",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "handles#1"
+   }
+  },
+  {
+   "id": "adme",
+   "obj": "adme",
+   "verb": "eject",
+   "at": {
+    "word": "handles#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "how the body handles it：第一块小牌弹出，刻 ADME",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "cards"
+    ]
+   },
+   "until": {
+    "word": "else#1"
+   }
+  },
+  {
+   "id": "sel",
+   "obj": "sel",
+   "verb": "eject",
+   "at": {
+    "word": "else#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "what else：第二块小牌弹出，刻 selectivity",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "hits#1"
+   }
+  },
+  {
+   "id": "hits",
+   "obj": "hits",
+   "verb": "snap",
+   "at": {
+    "word": "hits#1",
+    "off": 0
+   },
+   "lead": 9,
+   "means": "hits：两块小牌锁定高亮",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
+   }
+  },
+  {
+   "id": "src",
+   "obj": "src",
+   "verb": "appear",
+   "at": {
+    "word": "authors#1",
+    "off": 0
+   },
+   "lead": 9,
+   "means": "The authors：Ren et al. 2023 出处牌落位",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "listed#1"
    }
   },
   {
    "id": "ticks",
    "obj": "ticks",
-   "verb": "grow",
+   "verb": "snap",
    "at": {
-    "word": "7-02.w041",
+    "word": "listed#1",
     "off": 0
    },
-   "means": "listed：三张卡一起打勾",
+   "lead": 13,
+   "means": "already listed：三张步骤卡同时打勾",
    "tool": "remotion",
-   "lead": 14,
-   "until": {
-    "word": "7-02.w041"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "steps#1"
    }
   },
   {
-   "id": "step",
-   "obj": "step",
-   "verb": "morph",
+   "id": "steps",
+   "obj": "steps",
+   "verb": "appear",
    "at": {
-    "word": "7-02.w043",
+    "word": "steps#1",
     "off": 0
    },
-   "means": "steps：三张卡红框",
+   "lead": 9,
+   "means": "these steps：批注 next steps",
    "tool": "remotion",
-   "lead": 10,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   }
  ]

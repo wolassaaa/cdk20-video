@@ -1,0 +1,279 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "6-03",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 6 章记分板第二行 6-03（画外音）：Finding a hit；左格一大片点（millions）挤进瓶颈（costly bottleneck），右格 8,918 点计数，收缩成 13 个。页面 Manual603.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "lbl",
+   "obj": "lbl",
+   "verb": "appear",
+   "at": {
+    "word": "6-03.w003",
+    "off": 0
+   },
+   "means": "Finding a hit：行标题",
+   "tool": "remotion",
+   "lead": 26,
+   "until": {
+    "word": "6-03.w003"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "scr",
+   "obj": "scr",
+   "verb": "appear",
+   "at": {
+    "word": "6-03.w005",
+    "off": 0
+   },
+   "means": "screening real compounds：标签",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "6-03.w007"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "mil",
+   "obj": "mil",
+   "verb": "grow",
+   "at": {
+    "word": "6-03.w010",
+    "off": 0
+   },
+   "means": "millions：一大片点长出",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "word": "6-03.w010"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "fun",
+   "obj": "fun",
+   "verb": "grow",
+   "at": {
+    "word": "6-03.w012",
+    "off": 0
+   },
+   "means": "approach：瓶颈漏斗轮廓画出",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "6-03.w012"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "rev",
+   "obj": "rev",
+   "verb": "appear",
+   "at": {
+    "word": "6-03.w015",
+    "off": 0
+   },
+   "means": "review：标签 2023 review",
+   "tool": "remotion",
+   "lead": 24,
+   "until": {
+    "word": "6-03.w015"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "sq",
+   "obj": "sq",
+   "verb": "move",
+   "at": {
+    "word": "6-03.w018",
+    "off": 0
+   },
+   "means": "hit：点挤进瓶颈",
+   "tool": "remotion",
+   "lead": 40,
+   "until": {
+    "word": "6-03.w021"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "cost",
+   "obj": "cost",
+   "verb": "appear",
+   "at": {
+    "word": "6-03.w020",
+    "off": 0
+   },
+   "means": "costly bottleneck：红批注",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-03.w021"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "now",
+   "obj": "now",
+   "verb": "appear",
+   "at": {
+    "word": "6-03.w022",
+    "off": 0
+   },
+   "means": "Now：右栏亮起",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-03.w022"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "cnt",
+   "obj": "cnt",
+   "verb": "grow",
+   "at": {
+    "word": "6-03.w023",
+    "off": 0
+   },
+   "means": "8,918：点阵长出，计数跳到 8,918",
+   "tool": "remotion",
+   "lead": 26,
+   "until": {
+    "word": "6-03.w023"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "des",
+   "obj": "des",
+   "verb": "appear",
+   "at": {
+    "word": "6-03.w024",
+    "off": 0
+   },
+   "means": "designs：标签",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-03.w024"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "scrn",
+   "obj": "scrn",
+   "verb": "grow",
+   "at": {
+    "word": "6-03.w025",
+    "off": 0
+   },
+   "means": "inside：屏幕框画出",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "6-03.w025"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "shr",
+   "obj": "shr",
+   "verb": "move",
+   "at": {
+    "word": "6-03.w029",
+    "off": 0
+   },
+   "means": "just：点收缩",
+   "tool": "remotion",
+   "lead": 30,
+   "until": {
+    "word": "6-03.w030"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "thr",
+   "obj": "thr",
+   "verb": "appear",
+   "at": {
+    "word": "6-03.w030",
+    "off": 0
+   },
+   "means": "13：数字 13 跳一下",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "6-03.w030"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "mol",
+   "obj": "mol",
+   "verb": "appear",
+   "at": {
+    "word": "6-03.w031",
+    "off": 0
+   },
+   "means": "molecules：标签",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-03.w031"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "made",
+   "obj": "made",
+   "verb": "morph",
+   "at": {
+    "word": "6-03.w033",
+    "off": 0
+   },
+   "means": "made：13 个点变红实心",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  }
+ ]
+}

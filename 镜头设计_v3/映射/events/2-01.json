@@ -2,366 +2,371 @@
  "schema": "cdk20.events/1",
  "group": "2-01",
  "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：第 2 章二维说明书页。两个步骤框按年份：2011（中大、威尔斯亲王医院、肝肿瘤样本、CCRK = CDK20 升高）→ 2023（AI 研究、同一个蛋白搬过来、英矽智能科学园办公室）。出处 Feng et al. 2011；Ren et al. 2023。页面 Manual201.jsx。",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 2-01（btier/B201.jsx）。香港地图落下；2011 年份牌、中大团队、肝肿瘤样本、威尔斯亲王医院；六支样本管剖面里的蓝色液柱一支支高过灰线（raised），CCRK = CDK20；年份牌滚到 2023，论文书和同一个小插座，合著者在科学园。",
+ "tier": "B",
+ "zone": 2,
+ "trans_in": "T5 runner（上一段 1-12 不是 B 页）",
+ "trans_out": "T5 runner（下一段 2-02 是出镜段）",
  "holds": [],
  "events": [
   {
-   "id": "hk",
-   "obj": "hk_map",
-   "verb": "grow",
-   "at": {
-    "word": "2-01.w001",
-    "off": 0
-   },
-   "means": "Hong Kong first：页头小香港地图长出",
-   "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "hk"
-    ]
-   }
-  },
-  {
-   "id": "step1",
-   "obj": "step_1",
-   "verb": "grow",
-   "at": {
-    "word": "2-01.w004",
-    "off": 0
-   },
-   "means": "In：第 1 步框画出",
-   "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "dur": 30
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "title1",
-   "obj": "title_1",
+   "id": "map",
+   "obj": "map",
    "verb": "appear",
    "at": {
-    "word": "2-01.w005",
+    "word": "hong#1",
     "off": 0
    },
-   "means": "2011：标题 2011",
+   "lead": 7,
+   "means": "Hong Kong first：香港地图落下",
    "tool": "remotion",
-   "until": {
-    "word": "2-01.w005",
-    "off": 20
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "map"
+    ]
    },
+   "until": {
+    "word": "first#1"
+   }
+  },
+  {
+   "id": "y2011",
+   "obj": "y2011",
+   "verb": "appear",
+   "at": {
+    "word": "2011#1",
+    "off": 0
+   },
+   "lead": 7,
+   "means": "In 2011：地图缩到左上，年份牌 2011 落下",
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "year"
+    ]
+   },
+   "until": {
+    "word": "2011#1"
+   }
+  },
+  {
+   "id": "team",
+   "obj": "team",
+   "verb": "appear",
+   "at": {
+    "word": "team#1",
+    "off": 0
+   },
+   "lead": 7,
+   "means": "a team：三个小人落位",
+   "tool": "remotion",
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "team#1"
    }
   },
   {
-   "id": "univ",
-   "obj": "univ",
-   "verb": "grow",
+   "id": "cuhk",
+   "obj": "cuhk",
+   "verb": "appear",
    "at": {
-    "word": "2-01.w010",
+    "word": "chinese#1",
     "off": 0
    },
-   "means": "Chinese University：大学楼长出，印校名",
+   "lead": 10,
+   "means": "the Chinese University of Hong Kong：标牌，地图上沙田一点亮",
    "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "word": "2-01.w014"
+   "guide": {
+    "kind": "none"
    },
+   "until": {
+    "word": "kong#2"
+   }
+  },
+  {
+   "id": "tum",
+   "obj": "tum",
+   "verb": "appear",
+   "at": {
+    "word": "tumours#1",
+    "off": 0
+   },
+   "lead": 7,
+   "means": "liver tumours：玻璃肝和样本管落下",
+   "tool": "remotion",
    "guide": {
     "kind": "focus",
     "target": [
-     "univ"
+     "samples"
     ]
-   }
-  },
-  {
-   "id": "tubes",
-   "obj": "tubes",
-   "verb": "grow",
-   "at": {
-    "word": "2-01.w016",
-    "off": 0
    },
-   "means": "liver tumours：三支样本管依次长出",
-   "tool": "remotion",
-   "lead": 4,
    "until": {
-    "word": "2-01.w019"
-   },
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "tube"
-    ]
+    "word": "tumours#1"
    }
   },
   {
-   "id": "hospital",
-   "obj": "hospital",
-   "verb": "grow",
+   "id": "pat",
+   "obj": "pat",
+   "verb": "appear",
    "at": {
-    "word": "2-01.w022",
+    "word": "patients#1",
     "off": 0
    },
-   "means": "Prince of Wales Hospital：医院长出，印名字",
+   "lead": 7,
+   "means": "from patients：两个病人小人",
    "tool": "remotion",
-   "lead": 4,
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "patients#1"
+   }
+  },
+  {
+   "id": "pwh",
+   "obj": "pwh",
+   "verb": "appear",
+   "at": {
+    "word": "prince#1",
+    "off": 0
+   },
+   "lead": 10,
+   "means": "Prince of Wales Hospital：标牌",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
     "sentence_end": true
+   }
+  },
+  {
+   "id": "prot",
+   "obj": "prot",
+   "verb": "move",
+   "at": {
+    "word": "one#1",
+    "off": 0
    },
+   "lead": 13,
+   "means": "One protein：清场，六支样本管剖面排开",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "protein#1"
+   }
+  },
+  {
+   "id": "raised",
+   "obj": "raised",
+   "verb": "grow",
+   "at": {
+    "word": "kept#1",
+    "off": 0
+   },
+   "lead": 30,
+   "means": "kept showing up raised：蓝色液柱一支支升过灰线",
+   "tool": "remotion",
    "guide": {
     "kind": "focus",
     "target": [
-     "hospital"
+     "tubes"
     ]
+   },
+   "until": {
+    "word": "raised#1"
+   }
+  },
+  {
+   "id": "ccrk",
+   "obj": "ccrk",
+   "verb": "appear",
+   "at": {
+    "word": "ccrk#1",
+    "off": 0
+   },
+   "lead": 7,
+   "means": "CCRK：小插座落下，标 CCRK",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "ccrk#1"
    }
   },
   {
    "id": "cdk20",
    "obj": "cdk20",
-   "verb": "grow",
-   "at": {
-    "word": "2-01.w027",
-    "off": 0
-   },
-   "means": "protein：CDK20 长出",
-   "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "word": "2-01.w029"
-   },
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "cdk20"
-    ]
-   }
-  },
-  {
-   "id": "raised",
-   "obj": "arrow_up",
    "verb": "appear",
    "at": {
-    "word": "2-01.w031",
+    "word": "cdk20#1",
     "off": 0
    },
-   "means": "raised：红色上升箭头",
+   "lead": 10,
+   "means": "also called CDK20：标 CDK20",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "2-01.w031"
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "plate",
-   "obj": "plate_ccrk",
-   "verb": "appear",
-   "at": {
-    "word": "2-01.w032",
-    "off": 0
    },
-   "means": "CCRK also called CDK20：字牌 CCRK = CDK20",
-   "tool": "remotion",
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
    }
   },
   {
-   "id": "step2",
-   "obj": "step_2",
+   "id": "ff",
+   "obj": "ff",
    "verb": "grow",
    "at": {
-    "word": "2-01.w036",
+    "word": "fast#1",
     "off": 0
    },
-   "means": "Fast forward：第 2 步框画出",
+   "lead": 36,
+   "means": "Fast forward to 2023：样本管清场，年份牌数字轮 2011 → 2023",
    "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "dur": 30
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "title2",
-   "obj": "title_2",
-   "verb": "appear",
-   "at": {
-    "word": "2-01.w039",
-    "off": 0
-   },
-   "means": "2023：标题 2023",
-   "tool": "remotion",
-   "until": {
-    "word": "2-01.w039",
-    "off": 30
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "chip",
-   "obj": "chip",
-   "verb": "grow",
-   "at": {
-    "word": "2-01.w041",
-    "off": 0
-   },
-   "means": "AI drug-discovery study：芯片长出",
-   "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "word": "2-01.w043"
-   },
    "guide": {
     "kind": "focus",
     "target": [
-     "chip"
+     "year"
     ]
+   },
+   "until": {
+    "word": "2023#1"
+   }
+  },
+  {
+   "id": "ai",
+   "obj": "ai",
+   "verb": "appear",
+   "at": {
+    "word": "ai#1",
+    "off": 0
+   },
+   "lead": 7,
+   "means": "an AI drug-discovery：芯片落下",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "drug-discovery#1"
+   }
+  },
+  {
+   "id": "study",
+   "obj": "study",
+   "verb": "appear",
+   "at": {
+    "word": "study#1",
+    "off": 0
+   },
+   "lead": 7,
+   "means": "study：论文书落下",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "study#1"
    }
   },
   {
    "id": "same",
-   "obj": "cdk20_copy",
+   "obj": "same",
    "verb": "move",
    "at": {
-    "word": "2-01.w047",
+    "word": "same#1",
     "off": 0
    },
-   "means": "same protein：CDK20 从 2011 框飞到 2023 框",
+   "lead": 30,
+   "means": "goes after the same protein：小插座挪到书旁边",
    "tool": "remotion",
-   "lead": 40,
-   "until": {
-    "word": "2-01.w048"
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "book"
+    ]
+   },
+   "until": {
+    "word": "protein#2"
    }
   },
   {
    "id": "coauth",
-   "obj": "label_coauthors",
+   "obj": "coauth",
    "verb": "appear",
    "at": {
-    "word": "2-01.w050",
+    "word": "co-authors#1",
     "off": 0
    },
-   "means": "co-authors：小字 co-authors",
+   "lead": 7,
+   "means": "co-authors：两个小人",
    "tool": "remotion",
-   "until": {
-    "word": "2-01.w051"
-   },
    "guide": {
     "kind": "none"
-   }
-  },
-  {
-   "id": "tower",
-   "obj": "tower",
-   "verb": "grow",
-   "at": {
-    "word": "2-01.w052",
-    "off": 0
    },
-   "means": "Insilico Medicine：科学园高楼长出",
-   "tool": "remotion",
-   "lead": 4,
    "until": {
-    "word": "2-01.w055"
-   },
-   "guide": {
-    "kind": "focus",
-    "target": [
-     "tower"
-    ]
+    "word": "co-authors#1"
    }
   },
   {
-   "id": "label_ins",
-   "obj": "label_insilico",
+   "id": "ins",
+   "obj": "ins",
    "verb": "appear",
    "at": {
-    "word": "2-01.w052",
+    "word": "insilico#1",
     "off": 0
    },
-   "means": "Insilico Medicine's Hong Kong office：印名字",
+   "lead": 10,
+   "means": "at Insilico Medicine's：两个合著者底下长出一块底板",
    "tool": "remotion",
-   "until": {
-    "word": "2-01.w056"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "medicine's#1"
    }
   },
   {
-   "id": "park",
-   "obj": "label_park",
-   "verb": "appear",
-   "at": {
-    "word": "2-01.w058",
-    "off": 0
-   },
-   "means": "Science Park：印 Hong Kong Science Park",
-   "tool": "remotion",
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "alias",
-   "obj": "plate_b",
+   "id": "hk3",
+   "obj": "hk3",
    "verb": "move",
    "at": {
-    "word": "2-01.w034",
+    "word": "hong#3",
     "off": 0
    },
-   "means": "also called：= CDK20 后半块滑入",
+   "lead": 13,
+   "means": "Hong Kong office：左上角地图挪近、放大一点",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "2-01.w035"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "kong#3"
    }
   },
   {
-   "id": "pulse",
-   "obj": "cdk20",
+   "id": "sp",
+   "obj": "sp",
    "verb": "appear",
    "at": {
-    "word": "2-01.w035",
+    "word": "science#1",
     "off": 0
    },
-   "means": "CDK20：蛋白跳一下",
+   "lead": 10,
+   "means": "office in Science Park：地图上那一点再亮，标 Science Park",
    "tool": "remotion",
-   "lead": 2,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   }
  ]

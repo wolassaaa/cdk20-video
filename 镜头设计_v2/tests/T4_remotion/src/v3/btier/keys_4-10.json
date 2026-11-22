@@ -1,0 +1,1094 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "4-10",
+ "segs": [
+  "4-10"
+ ],
+ "tool": "remotion",
+ "fps": 60,
+ "len_f": 1396,
+ "cut": "cut_v8",
+ "cut_start_f": 35434,
+ "cut_start_s": 590.57,
+ "master_built": "2026-11-18 02:33:56 +09:00",
+ "words_hash": "834c88a7cced",
+ "events_src": "镜头设计_v3/映射/events/4-10.json",
+ "words": [
+  {
+   "wid": "4-10.w001",
+   "w": "It",
+   "key": "it#1",
+   "sid": "4-10.s1",
+   "f0": 9,
+   "f1": 15,
+   "F0": 35443,
+   "F1": 35449
+  },
+  {
+   "wid": "4-10.w002",
+   "w": "came",
+   "key": "came#1",
+   "sid": "4-10.s1",
+   "f0": 20,
+   "f1": 32,
+   "F0": 35454,
+   "F1": 35466
+  },
+  {
+   "wid": "4-10.w003",
+   "w": "back",
+   "key": "back#1",
+   "sid": "4-10.s1",
+   "f0": 33,
+   "f1": 46,
+   "F0": 35467,
+   "F1": 35480
+  },
+  {
+   "wid": "4-10.w004",
+   "w": "with",
+   "key": "with#1",
+   "sid": "4-10.s1",
+   "f0": 52,
+   "f1": 62,
+   "F0": 35486,
+   "F1": 35496
+  },
+  {
+   "wid": "4-10.w005",
+   "w": "8,918",
+   "key": "8,918#1",
+   "sid": "4-10.s1",
+   "f0": 76,
+   "f1": 189,
+   "F0": 35510,
+   "F1": 35623
+  },
+  {
+   "wid": "4-10.w006",
+   "w": "brand-new",
+   "key": "brand-new#1",
+   "sid": "4-10.s1",
+   "f0": 195,
+   "f1": 224,
+   "F0": 35629,
+   "F1": 35658
+  },
+  {
+   "wid": "4-10.w007",
+   "w": "designs.",
+   "key": "designs#1",
+   "sid": "4-10.s1",
+   "f0": 227,
+   "f1": 263,
+   "F0": 35661,
+   "F1": 35697
+  },
+  {
+   "wid": "4-10.w008",
+   "w": "Way",
+   "key": "way#1",
+   "sid": "4-10.s2",
+   "f0": 298,
+   "f1": 305,
+   "F0": 35732,
+   "F1": 35739
+  },
+  {
+   "wid": "4-10.w009",
+   "w": "too",
+   "key": "too#1",
+   "sid": "4-10.s2",
+   "f0": 310,
+   "f1": 320,
+   "F0": 35744,
+   "F1": 35754
+  },
+  {
+   "wid": "4-10.w010",
+   "w": "many",
+   "key": "many#1",
+   "sid": "4-10.s2",
+   "f0": 322,
+   "f1": 334,
+   "F0": 35756,
+   "F1": 35768
+  },
+  {
+   "wid": "4-10.w011",
+   "w": "to",
+   "key": "to#1",
+   "sid": "4-10.s2",
+   "f0": 338,
+   "f1": 343,
+   "F0": 35772,
+   "F1": 35777
+  },
+  {
+   "wid": "4-10.w012",
+   "w": "make.",
+   "key": "make#1",
+   "sid": "4-10.s2",
+   "f0": 348,
+   "f1": 369,
+   "F0": 35782,
+   "F1": 35803
+  },
+  {
+   "wid": "4-10.w013",
+   "w": "So",
+   "key": "so#1",
+   "sid": "4-10.s3",
+   "f0": 394,
+   "f1": 400,
+   "F0": 35828,
+   "F1": 35834
+  },
+  {
+   "wid": "4-10.w014",
+   "w": "each",
+   "key": "each#1",
+   "sid": "4-10.s3",
+   "f0": 411,
+   "f1": 421,
+   "F0": 35845,
+   "F1": 35855
+  },
+  {
+   "wid": "4-10.w015",
+   "w": "key",
+   "key": "key#1",
+   "sid": "4-10.s3",
+   "f0": 426,
+   "f1": 436,
+   "F0": 35860,
+   "F1": 35870
+  },
+  {
+   "wid": "4-10.w016",
+   "w": "gets",
+   "key": "gets#1",
+   "sid": "4-10.s3",
+   "f0": 440,
+   "f1": 454,
+   "F0": 35874,
+   "F1": 35888
+  },
+  {
+   "wid": "4-10.w017",
+   "w": "tried",
+   "key": "tried#1",
+   "sid": "4-10.s3",
+   "f0": 459,
+   "f1": 478,
+   "F0": 35893,
+   "F1": 35912
+  },
+  {
+   "wid": "4-10.w018",
+   "w": "in",
+   "key": "in#1",
+   "sid": "4-10.s3",
+   "f0": 483,
+   "f1": 488,
+   "F0": 35917,
+   "F1": 35922
+  },
+  {
+   "wid": "4-10.w019",
+   "w": "a",
+   "key": "a#1",
+   "sid": "4-10.s3",
+   "f0": 490,
+   "f1": 492,
+   "F0": 35924,
+   "F1": 35926
+  },
+  {
+   "wid": "4-10.w020",
+   "w": "virtual",
+   "key": "virtual#1",
+   "sid": "4-10.s3",
+   "f0": 498,
+   "f1": 522,
+   "F0": 35932,
+   "F1": 35956
+  },
+  {
+   "wid": "4-10.w021",
+   "w": "lock.",
+   "key": "lock#1",
+   "sid": "4-10.s3",
+   "f0": 525,
+   "f1": 542,
+   "F0": 35959,
+   "F1": 35976
+  },
+  {
+   "wid": "4-10.w022",
+   "w": "That's",
+   "key": "that's#1",
+   "sid": "4-10.s4",
+   "f0": 583,
+   "f1": 596,
+   "F0": 36017,
+   "F1": 36030
+  },
+  {
+   "wid": "4-10.w023",
+   "w": "docking:",
+   "key": "docking#1",
+   "sid": "4-10.s4",
+   "f0": 601,
+   "f1": 630,
+   "F0": 36035,
+   "F1": 36064
+  },
+  {
+   "wid": "4-10.w024",
+   "w": "the",
+   "key": "the#1",
+   "sid": "4-10.s4",
+   "f0": 661,
+   "f1": 665,
+   "F0": 36095,
+   "F1": 36099
+  },
+  {
+   "wid": "4-10.w025",
+   "w": "computer",
+   "key": "computer#1",
+   "sid": "4-10.s4",
+   "f0": 667,
+   "f1": 695,
+   "F0": 36101,
+   "F1": 36129
+  },
+  {
+   "wid": "4-10.w026",
+   "w": "predicts",
+   "key": "predicts#1",
+   "sid": "4-10.s4",
+   "f0": 697,
+   "f1": 720,
+   "F0": 36131,
+   "F1": 36154
+  },
+  {
+   "wid": "4-10.w027",
+   "w": "how",
+   "key": "how#1",
+   "sid": "4-10.s4",
+   "f0": 727,
+   "f1": 739,
+   "F0": 36161,
+   "F1": 36173
+  },
+  {
+   "wid": "4-10.w028",
+   "w": "a",
+   "key": "a#2",
+   "sid": "4-10.s4",
+   "f0": 744,
+   "f1": 745,
+   "F0": 36178,
+   "F1": 36179
+  },
+  {
+   "wid": "4-10.w029",
+   "w": "molecule",
+   "key": "molecule#1",
+   "sid": "4-10.s4",
+   "f0": 751,
+   "f1": 779,
+   "F0": 36185,
+   "F1": 36213
+  },
+  {
+   "wid": "4-10.w030",
+   "w": "might",
+   "key": "might#1",
+   "sid": "4-10.s4",
+   "f0": 779,
+   "f1": 793,
+   "F0": 36213,
+   "F1": 36227
+  },
+  {
+   "wid": "4-10.w031",
+   "w": "sit",
+   "key": "sit#1",
+   "sid": "4-10.s4",
+   "f0": 798,
+   "f1": 810,
+   "F0": 36232,
+   "F1": 36244
+  },
+  {
+   "wid": "4-10.w032",
+   "w": "in",
+   "key": "in#2",
+   "sid": "4-10.s4",
+   "f0": 817,
+   "f1": 822,
+   "F0": 36251,
+   "F1": 36256
+  },
+  {
+   "wid": "4-10.w033",
+   "w": "the",
+   "key": "the#2",
+   "sid": "4-10.s4",
+   "f0": 823,
+   "f1": 828,
+   "F0": 36257,
+   "F1": 36262
+  },
+  {
+   "wid": "4-10.w034",
+   "w": "pocket,",
+   "key": "pocket#1",
+   "sid": "4-10.s4",
+   "f0": 831,
+   "f1": 859,
+   "F0": 36265,
+   "F1": 36293
+  },
+  {
+   "wid": "4-10.w035",
+   "w": "and",
+   "key": "and#1",
+   "sid": "4-10.s4",
+   "f0": 882,
+   "f1": 888,
+   "F0": 36316,
+   "F1": 36322
+  },
+  {
+   "wid": "4-10.w036",
+   "w": "scores",
+   "key": "scores#1",
+   "sid": "4-10.s4",
+   "f0": 892,
+   "f1": 911,
+   "F0": 36326,
+   "F1": 36345
+  },
+  {
+   "wid": "4-10.w037",
+   "w": "the",
+   "key": "the#3",
+   "sid": "4-10.s4",
+   "f0": 913,
+   "f1": 918,
+   "F0": 36347,
+   "F1": 36352
+  },
+  {
+   "wid": "4-10.w038",
+   "w": "fit.",
+   "key": "fit#1",
+   "sid": "4-10.s4",
+   "f0": 923,
+   "f1": 940,
+   "F0": 36357,
+   "F1": 36374
+  },
+  {
+   "wid": "4-10.w039",
+   "w": "Similar",
+   "key": "similar#1",
+   "sid": "4-10.s5",
+   "f0": 996,
+   "f1": 1016,
+   "F0": 36430,
+   "F1": 36450
+  },
+  {
+   "wid": "4-10.w040",
+   "w": "designs",
+   "key": "designs#2",
+   "sid": "4-10.s5",
+   "f0": 1018,
+   "f1": 1044,
+   "F0": 36452,
+   "F1": 36478
+  },
+  {
+   "wid": "4-10.w041",
+   "w": "get",
+   "key": "get#1",
+   "sid": "4-10.s5",
+   "f0": 1048,
+   "f1": 1058,
+   "F0": 36482,
+   "F1": 36492
+  },
+  {
+   "wid": "4-10.w042",
+   "w": "grouped,",
+   "key": "grouped#1",
+   "sid": "4-10.s5",
+   "f0": 1064,
+   "f1": 1090,
+   "F0": 36498,
+   "F1": 36524
+  },
+  {
+   "wid": "4-10.w043",
+   "w": "54",
+   "key": "54#1",
+   "sid": "4-10.s5",
+   "f0": 1121,
+   "f1": 1158,
+   "F0": 36555,
+   "F1": 36592
+  },
+  {
+   "wid": "4-10.w044",
+   "w": "make",
+   "key": "make#2",
+   "sid": "4-10.s5",
+   "f0": 1164,
+   "f1": 1176,
+   "F0": 36598,
+   "F1": 36610
+  },
+  {
+   "wid": "4-10.w045",
+   "w": "the",
+   "key": "the#4",
+   "sid": "4-10.s5",
+   "f0": 1179,
+   "f1": 1182,
+   "F0": 36613,
+   "F1": 36616
+  },
+  {
+   "wid": "4-10.w046",
+   "w": "shortlist,",
+   "key": "shortlist#1",
+   "sid": "4-10.s5",
+   "f0": 1189,
+   "f1": 1229,
+   "F0": 36623,
+   "F1": 36663
+  },
+  {
+   "wid": "4-10.w047",
+   "w": "and",
+   "key": "and#2",
+   "sid": "4-10.s5",
+   "f0": 1257,
+   "f1": 1264,
+   "F0": 36691,
+   "F1": 36698
+  },
+  {
+   "wid": "4-10.w048",
+   "w": "chemists",
+   "key": "chemists#1",
+   "sid": "4-10.s5",
+   "f0": 1266,
+   "f1": 1297,
+   "F0": 36700,
+   "F1": 36731
+  },
+  {
+   "wid": "4-10.w049",
+   "w": "pick",
+   "key": "pick#1",
+   "sid": "4-10.s5",
+   "f0": 1300,
+   "f1": 1313,
+   "F0": 36734,
+   "F1": 36747
+  },
+  {
+   "wid": "4-10.w050",
+   "w": "just",
+   "key": "just#1",
+   "sid": "4-10.s5",
+   "f0": 1318,
+   "f1": 1331,
+   "F0": 36752,
+   "F1": 36765
+  },
+  {
+   "wid": "4-10.w051",
+   "w": "seven",
+   "key": "seven#1",
+   "sid": "4-10.s5",
+   "f0": 1336,
+   "f1": 1357,
+   "F0": 36770,
+   "F1": 36791
+  },
+  {
+   "wid": "4-10.w052",
+   "w": "to",
+   "key": "to#2",
+   "sid": "4-10.s5",
+   "f0": 1361,
+   "f1": 1367,
+   "F0": 36795,
+   "F1": 36801
+  },
+  {
+   "wid": "4-10.w053",
+   "w": "make.",
+   "key": "make#3",
+   "sid": "4-10.s5",
+   "f0": 1371,
+   "f1": 1392,
+   "F0": 36805,
+   "F1": 36826
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "4-10.s1",
+   "text": "It came back with 8,918 brand-new designs.",
+   "w_first": "4-10.w001",
+   "w_last": "4-10.w007",
+   "f0": 9,
+   "f1": 263
+  },
+  {
+   "sid": "4-10.s2",
+   "text": "Way too many to make.",
+   "w_first": "4-10.w008",
+   "w_last": "4-10.w012",
+   "f0": 298,
+   "f1": 369
+  },
+  {
+   "sid": "4-10.s3",
+   "text": "So each key gets tried in a virtual lock.",
+   "w_first": "4-10.w013",
+   "w_last": "4-10.w021",
+   "f0": 394,
+   "f1": 542
+  },
+  {
+   "sid": "4-10.s4",
+   "text": "That's docking: the computer predicts how a molecule might sit in the pocket, and scores the fit.",
+   "w_first": "4-10.w022",
+   "w_last": "4-10.w038",
+   "f0": 583,
+   "f1": 940
+  },
+  {
+   "sid": "4-10.s5",
+   "text": "Similar designs get grouped, 54 make the shortlist, and chemists pick just seven to make.",
+   "w_first": "4-10.w039",
+   "w_last": "4-10.w053",
+   "f0": 996,
+   "f1": 1392
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "n8918",
+   "obj": "n8918",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "8,918：数字轮转到 8,918",
+   "f_start": 16,
+   "f_land": 76,
+   "f_end": 263,
+   "until": "4-10.w007",
+   "word": "4-10.w005",
+   "w": "8,918",
+   "key": "8,918#1",
+   "sid": "4-10.s1",
+   "word_f0": 76,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 35450,
+   "F_land": 35510,
+   "F_end": 35697
+  },
+  {
+   "id": "pile",
+   "obj": "pile",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "brand-new designs：小插头一片片铺满",
+   "f_start": 188,
+   "f_land": 195,
+   "f_end": 263,
+   "until": "4-10.s1",
+   "word": "4-10.w006",
+   "w": "brand-new",
+   "key": "brand-new#1",
+   "sid": "4-10.s1",
+   "word_f0": 195,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "pile"
+    ]
+   },
+   "F_start": 35622,
+   "F_land": 35629,
+   "F_end": 35697,
+   "g_start": 169,
+   "g_on": 187,
+   "g_end": 263,
+   "g_off": 293,
+   "g_tick": 191,
+   "G_start": 35603,
+   "G_on": 35621,
+   "G_end": 35697,
+   "G_off": 35727,
+   "G_tick": 35625
+  },
+  {
+   "id": "many",
+   "obj": "many",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "Way too many to make：手写",
+   "f_start": 316,
+   "f_land": 322,
+   "f_end": 369,
+   "until": "4-10.s2",
+   "word": "4-10.w010",
+   "w": "many",
+   "key": "many#1",
+   "sid": "4-10.s2",
+   "word_f0": 322,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 35750,
+   "F_land": 35756,
+   "F_end": 35803
+  },
+  {
+   "id": "each",
+   "obj": "each",
+   "verb": "move",
+   "ease": "inout",
+   "means": "each key：一个插头升起来",
+   "f_start": 413,
+   "f_land": 426,
+   "f_end": 478,
+   "until": "4-10.w017",
+   "word": "4-10.w015",
+   "w": "key",
+   "key": "key#1",
+   "sid": "4-10.s3",
+   "word_f0": 426,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 35847,
+   "F_land": 35860,
+   "F_end": 35912
+  },
+  {
+   "id": "vlock",
+   "obj": "vlock",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "a virtual lock：线框插座",
+   "f_start": 491,
+   "f_land": 498,
+   "f_end": 542,
+   "until": "4-10.s3",
+   "word": "4-10.w020",
+   "w": "virtual",
+   "key": "virtual#1",
+   "sid": "4-10.s3",
+   "word_f0": 498,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "socket"
+    ]
+   },
+   "F_start": 35925,
+   "F_land": 35932,
+   "F_end": 35976,
+   "g_start": 472,
+   "g_on": 490,
+   "g_end": 542,
+   "g_off": 572,
+   "g_tick": 494,
+   "G_start": 35906,
+   "G_on": 35924,
+   "G_end": 35976,
+   "G_off": 36006,
+   "G_tick": 35928
+  },
+  {
+   "id": "dock",
+   "obj": "dock",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "That's docking：标 docking",
+   "f_start": 591,
+   "f_land": 601,
+   "f_end": 630,
+   "until": "4-10.w023",
+   "word": "4-10.w023",
+   "w": "docking:",
+   "key": "docking#1",
+   "sid": "4-10.s4",
+   "word_f0": 601,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 36025,
+   "F_land": 36035,
+   "F_end": 36064
+  },
+  {
+   "id": "comp",
+   "obj": "comp",
+   "verb": "move",
+   "ease": "inout",
+   "means": "the computer：线框插座扫一遍",
+   "f_start": 654,
+   "f_land": 667,
+   "f_end": 695,
+   "until": "4-10.w025",
+   "word": "4-10.w025",
+   "w": "computer",
+   "key": "computer#1",
+   "sid": "4-10.s4",
+   "word_f0": 667,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 36088,
+   "F_land": 36101,
+   "F_end": 36129
+  },
+  {
+   "id": "mol",
+   "obj": "mol",
+   "verb": "move",
+   "ease": "inout",
+   "means": "a molecule：插头转向插孔",
+   "f_start": 738,
+   "f_land": 751,
+   "f_end": 779,
+   "until": "4-10.w029",
+   "word": "4-10.w029",
+   "w": "molecule",
+   "key": "molecule#1",
+   "sid": "4-10.s4",
+   "word_f0": 751,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 36172,
+   "F_land": 36185,
+   "F_end": 36213
+  },
+  {
+   "id": "sit",
+   "obj": "sit",
+   "verb": "move",
+   "ease": "inout",
+   "means": "might sit in the pocket：插头进孔",
+   "f_start": 758,
+   "f_land": 798,
+   "f_end": 859,
+   "until": "4-10.w034",
+   "word": "4-10.w031",
+   "w": "sit",
+   "key": "sit#1",
+   "sid": "4-10.s4",
+   "word_f0": 798,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 36192,
+   "F_land": 36232,
+   "F_end": 36293
+  },
+  {
+   "id": "scorefit",
+   "obj": "scorefit",
+   "verb": "move",
+   "ease": "inout",
+   "means": "scores the fit：表盘指针",
+   "f_start": 879,
+   "f_land": 892,
+   "f_end": 940,
+   "until": "4-10.s4",
+   "word": "4-10.w036",
+   "w": "scores",
+   "key": "scores#1",
+   "sid": "4-10.s4",
+   "word_f0": 892,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "dial"
+    ]
+   },
+   "F_start": 36313,
+   "F_land": 36326,
+   "F_end": 36374,
+   "g_start": 866,
+   "g_on": 884,
+   "g_end": 940,
+   "g_off": 970,
+   "g_tick": 888,
+   "G_start": 36300,
+   "G_on": 36318,
+   "G_end": 36374,
+   "G_off": 36404,
+   "G_tick": 36322
+  },
+  {
+   "id": "group",
+   "obj": "group",
+   "verb": "move",
+   "ease": "inout",
+   "means": "Similar designs get grouped：插头聚成几堆",
+   "f_start": 1051,
+   "f_land": 1064,
+   "f_end": 1090,
+   "until": "4-10.w042",
+   "word": "4-10.w042",
+   "w": "grouped,",
+   "key": "grouped#1",
+   "sid": "4-10.s5",
+   "word_f0": 1064,
+   "tool": "remotion",
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "pile"
+    ]
+   },
+   "F_start": 36485,
+   "F_land": 36498,
+   "F_end": 36524,
+   "g_start": 1038,
+   "g_on": 1056,
+   "g_end": 1090,
+   "g_off": 1120,
+   "g_tick": 1060,
+   "G_start": 36472,
+   "G_on": 36490,
+   "G_end": 36524,
+   "G_off": 36554,
+   "G_tick": 36494
+  },
+  {
+   "id": "n54",
+   "obj": "n54",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "54：数字轮停 54，只剩一小片",
+   "f_start": 1081,
+   "f_land": 1121,
+   "f_end": 1229,
+   "until": "4-10.w046",
+   "word": "4-10.w043",
+   "w": "54",
+   "key": "54#1",
+   "sid": "4-10.s5",
+   "word_f0": 1121,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 36515,
+   "F_land": 36555,
+   "F_end": 36663
+  },
+  {
+   "id": "chem",
+   "obj": "chem",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "chemists：小人",
+   "f_start": 1259,
+   "f_land": 1266,
+   "f_end": 1313,
+   "until": "4-10.w049",
+   "word": "4-10.w048",
+   "w": "chemists",
+   "key": "chemists#1",
+   "sid": "4-10.s5",
+   "word_f0": 1266,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 36693,
+   "F_land": 36700,
+   "F_end": 36747
+  },
+  {
+   "id": "seven",
+   "obj": "seven",
+   "verb": "move",
+   "ease": "inout",
+   "means": "pick just seven：七个插头进托盘",
+   "f_start": 1306,
+   "f_land": 1336,
+   "f_end": 1367,
+   "until": "4-10.w052",
+   "word": "4-10.w051",
+   "w": "seven",
+   "key": "seven#1",
+   "sid": "4-10.s5",
+   "word_f0": 1336,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 36740,
+   "F_land": 36770,
+   "F_end": 36801
+  },
+  {
+   "id": "make",
+   "obj": "make",
+   "verb": "appear",
+   "ease": "inout",
+   "means": "to make：烧瓶",
+   "f_start": 1364,
+   "f_land": 1371,
+   "f_end": 1392,
+   "until": "4-10.s5",
+   "word": "4-10.w053",
+   "w": "make.",
+   "key": "make#3",
+   "sid": "4-10.s5",
+   "word_f0": 1371,
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "F_start": 36798,
+   "F_land": 36805,
+   "F_end": 36826
+  }
+ ],
+ "guides": [
+  {
+   "id": "pile",
+   "target": [
+    "pile"
+   ],
+   "kind": "focus",
+   "gs": 169,
+   "gon": 187,
+   "land": 195,
+   "gend": 263,
+   "goff": 293,
+   "tick": 191,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 188,
+   "events": [
+    "pile"
+   ],
+   "G_start": 35603,
+   "G_on": 35621,
+   "G_land": 35629,
+   "G_end": 35697,
+   "G_off": 35727,
+   "G_tick": 35625
+  },
+  {
+   "id": "vlock",
+   "target": [
+    "socket"
+   ],
+   "kind": "focus",
+   "gs": 472,
+   "gon": 490,
+   "land": 498,
+   "gend": 542,
+   "goff": 572,
+   "tick": 494,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 491,
+   "events": [
+    "vlock"
+   ],
+   "G_start": 35906,
+   "G_on": 35924,
+   "G_land": 35932,
+   "G_end": 35976,
+   "G_off": 36006,
+   "G_tick": 35928
+  },
+  {
+   "id": "scorefit",
+   "target": [
+    "dial"
+   ],
+   "kind": "focus",
+   "gs": 866,
+   "gon": 884,
+   "land": 892,
+   "gend": 940,
+   "goff": 970,
+   "tick": 888,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 879,
+   "events": [
+    "scorefit"
+   ],
+   "G_start": 36300,
+   "G_on": 36318,
+   "G_land": 36326,
+   "G_end": 36374,
+   "G_off": 36404,
+   "G_tick": 36322
+  },
+  {
+   "id": "group",
+   "target": [
+    "pile"
+   ],
+   "kind": "focus",
+   "gs": 1038,
+   "gon": 1056,
+   "land": 1064,
+   "gend": 1090,
+   "goff": 1120,
+   "tick": 1060,
+   "nudge": true,
+   "rim": true,
+   "ev_s": 1051,
+   "events": [
+    "group"
+   ],
+   "G_start": 36472,
+   "G_on": 36490,
+   "G_land": 36498,
+   "G_end": 36524,
+   "G_off": 36554,
+   "G_tick": 36494
+  }
+ ],
+ "problems": []
+}

@@ -1,0 +1,300 @@
+{
+ "schema": "cdk20.events/1",
+ "group": "6-02",
+ "tool": "remotion",
+ "note": "HKBU SCIE1007 课程作业的科普视频：第 6 章记分板第一行 6-02（画外音）：Seeing the lock；左栏烧瓶加 expensive / slow / difficult，右栏文件落进格子 a free prediction，再飞向 public database，两栏之间一个右箭头。页面 Manual602.jsx。",
+ "holds": [],
+ "events": [
+  {
+   "id": "lbl",
+   "obj": "lbl",
+   "verb": "appear",
+   "at": {
+    "word": "6-02.w003",
+    "off": 0
+   },
+   "means": "Seeing the lock：行标题",
+   "tool": "remotion",
+   "lead": 26,
+   "until": {
+    "word": "6-02.w003"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "bef",
+   "obj": "bef",
+   "verb": "appear",
+   "at": {
+    "word": "6-02.w004",
+    "off": 0
+   },
+   "means": "Before：左栏亮起",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-02.w004"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "flask",
+   "obj": "flask",
+   "verb": "grow",
+   "at": {
+    "word": "6-02.w006",
+    "off": 0
+   },
+   "means": "lab：烧瓶长出",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "6-02.w006"
+   },
+   "guide": {
+    "kind": "focus",
+    "target": [
+     "flask"
+    ]
+   }
+  },
+  {
+   "id": "cap",
+   "obj": "cap",
+   "verb": "appear",
+   "at": {
+    "word": "6-02.w007",
+    "off": 0
+   },
+   "means": "experiments：标签 hard lab experiments",
+   "tool": "remotion",
+   "lead": 10,
+   "until": {
+    "word": "6-02.w007"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "dash",
+   "obj": "dash",
+   "verb": "appear",
+   "at": {
+    "word": "6-02.w009",
+    "off": 0
+   },
+   "means": "without：虚线锁轮廓",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-02.w009"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "d3",
+   "obj": "d3",
+   "verb": "appear",
+   "at": {
+    "word": "6-02.w011",
+    "off": 0
+   },
+   "means": "3D：标签 3D shape",
+   "tool": "remotion",
+   "lead": 6,
+   "until": {
+    "word": "6-02.w011"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "cross",
+   "obj": "cross",
+   "verb": "morph",
+   "at": {
+    "word": "6-02.w012",
+    "off": 0
+   },
+   "means": "shape：红叉盖住虚线锁",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-02.w012"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "exp",
+   "obj": "exp",
+   "verb": "appear",
+   "at": {
+    "word": "6-02.w015",
+    "off": 0
+   },
+   "means": "expensive：写出",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-02.w015"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "slow",
+   "obj": "slow",
+   "verb": "appear",
+   "at": {
+    "word": "6-02.w016",
+    "off": 0
+   },
+   "means": "slow：写出",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-02.w016"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "dif",
+   "obj": "dif",
+   "verb": "appear",
+   "at": {
+    "word": "6-02.w018",
+    "off": 0
+   },
+   "means": "difficult：写出",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "now",
+   "obj": "now",
+   "verb": "grow",
+   "at": {
+    "word": "6-02.w019",
+    "off": 0
+   },
+   "means": "Now：右栏亮起，两栏之间画箭头",
+   "tool": "remotion",
+   "lead": 14,
+   "until": {
+    "word": "6-02.w019"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "file",
+   "obj": "file",
+   "verb": "move",
+   "at": {
+    "word": "6-02.w021",
+    "off": 0
+   },
+   "means": "free：文件图标从上方落进格子",
+   "tool": "remotion",
+   "lead": 18,
+   "until": {
+    "word": "6-02.w021"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "txt",
+   "obj": "txt",
+   "verb": "appear",
+   "at": {
+    "word": "6-02.w022",
+    "off": 0
+   },
+   "means": "prediction：写 a free prediction",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "word": "6-02.w022"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "dl",
+   "obj": "dl",
+   "verb": "grow",
+   "at": {
+    "word": "6-02.w023",
+    "off": 0
+   },
+   "means": "downloaded：箭头从文件指向右边",
+   "tool": "remotion",
+   "lead": 16,
+   "until": {
+    "word": "6-02.w023"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "pub",
+   "obj": "pub",
+   "verb": "grow",
+   "at": {
+    "word": "6-02.w026",
+    "off": 0
+   },
+   "means": "public：数据库图标长出",
+   "tool": "remotion",
+   "lead": 12,
+   "until": {
+    "word": "6-02.w026"
+   },
+   "guide": {
+    "kind": "none"
+   }
+  },
+  {
+   "id": "dbl",
+   "obj": "dbl",
+   "verb": "appear",
+   "at": {
+    "word": "6-02.w027",
+    "off": 0
+   },
+   "means": "database：标签 public database",
+   "tool": "remotion",
+   "lead": 8,
+   "until": {
+    "sentence_end": true
+   },
+   "guide": {
+    "kind": "none"
+   }
+  }
+ ]
+}

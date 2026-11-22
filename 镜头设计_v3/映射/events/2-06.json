@@ -2,393 +2,347 @@
  "schema": "cdk20.events/1",
  "group": "2-06",
  "tool": "remotion",
- "note": "HKBU SCIE1007 课程作业的科普视频：第 2 章二维说明书页。左栏：我们读、没有自己的实验（烧瓶打叉）→ literature review；中间主论文盖 original research 章，带补充数据；周围六张卡按类型扇开。出处 R23、R23-SI、F11、J21、I23、W23、L07、B26。页面 Manual206.jsx。",
+ "note": "HKBU SCIE1007 课程作业的科普视频：B 档 2-06（btier/B206.jsx）。红问号；We read：一本书；A lot：书一本本摞起来；没有自己的实验：烧瓶变灰打叉；literature review；主论文落到料杆框中心，挂 Ren et al. 名牌，下面数据架（supplementary data）；六根料杆往外长，六张来源卡依次挂上；Perspective 那张大半磨砂（只读了摘要）。",
+ "tier": "B",
+ "zone": 2,
+ "trans_in": "T2 甩进（上一段 2-05 是 B 页）",
+ "trans_out": "T2 甩镜往左（下一段 2-07 是 B 页）",
  "holds": [],
  "events": [
   {
-   "id": "title",
-   "obj": "title",
+   "id": "q",
+   "obj": "q",
    "verb": "appear",
    "at": {
-    "word": "2-06.w001",
+    "word": "check#1",
     "off": 0
    },
-   "means": "So how did we check：页标题",
+   "lead": 0,
+   "means": "how did we check all this?：红问号",
    "tool": "remotion",
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
-   "id": "books",
-   "obj": "book",
-   "verb": "grow",
+   "id": "read",
+   "obj": "read",
+   "verb": "appear",
    "at": {
-    "word": "2-06.w009",
+    "word": "read#1",
     "off": 0
    },
-   "means": "We read：书长出",
+   "lead": 7,
+   "means": "We read：一本书落下",
    "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "word": "2-06.w011"
-   },
    "guide": {
     "kind": "focus",
     "target": [
-     "book"
+     "books"
     ]
-   }
-  },
-  {
-   "id": "alot",
-   "obj": "note_alot",
-   "verb": "appear",
-   "at": {
-    "word": "2-06.w011",
-    "off": 0
    },
-   "means": "A lot：红笔 a lot",
-   "tool": "remotion",
    "until": {
     "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
    }
   },
   {
-   "id": "flask",
-   "obj": "flask",
+   "id": "lot",
+   "obj": "lot",
    "verb": "grow",
    "at": {
-    "word": "2-06.w013",
+    "word": "lot#1",
     "off": 0
    },
-   "means": "lab work：烧瓶长出",
+   "lead": 7,
+   "means": "A lot：书一本本摞起来",
    "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "word": "2-06.w014"
-   },
    "guide": {
-    "kind": "focus",
-    "target": [
-     "flask"
-    ]
+    "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
-   "id": "cross",
-   "obj": "cross",
+   "id": "lab",
+   "obj": "lab",
    "verb": "appear",
    "at": {
-    "word": "2-06.w017",
+    "word": "lab#1",
     "off": 0
    },
-   "means": "of our own：红笔打叉",
+   "lead": 7,
+   "means": "No lab work：烧瓶落下",
    "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "word": "2-06.w021",
-    "edge": "start"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "work#1"
+   }
+  },
+  {
+   "id": "nolab",
+   "obj": "nolab",
+   "verb": "move",
+   "at": {
+    "word": "own#1",
+    "off": 0
+   },
+   "lead": 13,
+   "means": "of our own：烧瓶变灰，画叉",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "own#1"
    }
   },
   {
    "id": "review",
-   "obj": "plate_review",
+   "obj": "review",
    "verb": "appear",
    "at": {
-    "word": "2-06.w021",
+    "word": "literature#1",
     "off": 0
    },
-   "means": "literature review：字牌",
+   "lead": 10,
+   "means": "literature review：标 literature review",
    "tool": "remotion",
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   },
   {
    "id": "centre",
-   "obj": "paper_main",
+   "obj": "centre",
    "verb": "grow",
    "at": {
-    "word": "2-06.w025",
+    "word": "centre#1",
     "off": 0
    },
-   "means": "At the centre：主论文长到中间",
+   "lead": 13,
+   "means": "At the centre：清场，中心一块底座",
    "tool": "remotion",
-   "lead": 20,
-   "until": {
-    "word": "2-06.w028"
+   "guide": {
+    "kind": "none"
    },
+   "until": {
+    "word": "centre#1"
+   }
+  },
+  {
+   "id": "study",
+   "obj": "study",
+   "verb": "appear",
+   "at": {
+    "word": "original#1",
+    "off": 0
+   },
+   "lead": 7,
+   "means": "one original study：主论文落到中心",
+   "tool": "remotion",
    "guide": {
     "kind": "focus",
     "target": [
-     "paper1"
+     "main"
     ]
+   },
+   "until": {
+    "word": "study#1"
    }
   },
   {
-   "id": "stamp",
-   "obj": "stamp_original",
+   "id": "ren",
+   "obj": "ren",
    "verb": "appear",
    "at": {
-    "word": "2-06.w027",
-    "off": 10
-   },
-   "means": "original study：盖章 original research",
-   "tool": "remotion",
-   "until": {
-    "word": "2-06.w030"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "cite",
-   "obj": "label_ren",
-   "verb": "appear",
-   "at": {
-    "word": "2-06.w030",
+    "word": "ren#1",
     "off": 0
    },
-   "means": "Ren…2023：印出处",
-   "tool": "remotion",
-   "until": {
-    "word": "2-06.w036"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "si",
-   "obj": "disks",
-   "verb": "grow",
-   "at": {
-    "word": "2-06.w039",
-    "off": 0
-   },
-   "means": "supplementary data：数据盘长出贴在论文旁",
-   "tool": "remotion",
    "lead": 10,
+   "means": "Ren … 2023：名牌",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "2023#1"
+   }
+  },
+  {
+   "id": "supp",
+   "obj": "supp",
+   "verb": "appear",
+   "at": {
+    "word": "supplementary#1",
+    "off": 0
+   },
+   "lead": 7,
+   "means": "supplementary data：数据架落下，浇口连上",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
    "until": {
     "sentence_end": true
+   }
+  },
+  {
+   "id": "around",
+   "obj": "around",
+   "verb": "grow",
+   "at": {
+    "word": "around#1",
+    "off": 0
    },
+   "lead": 13,
+   "means": "Around it：六根料杆从中心往外长",
+   "tool": "remotion",
    "guide": {
     "kind": "focus",
     "target": [
-     "disks"
+     "frame"
     ]
+   },
+   "until": {
+    "word": "it#1"
    }
   },
   {
-   "id": "ring",
-   "obj": "ring",
+   "id": "hk",
+   "obj": "hk",
    "verb": "appear",
    "at": {
-    "word": "2-06.w041",
+    "word": "earlier#1",
     "off": 0
    },
-   "means": "Around it：一圈虚线画出",
+   "lead": 7,
+   "means": "the earlier Hong Kong study：第一张卡",
    "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "word": "2-06.w042"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "study#2"
    }
   },
   {
-   "id": "c1",
-   "obj": "card_1",
-   "verb": "eject",
-   "at": {
-    "word": "2-06.w044",
-    "off": 0
-   },
-   "means": "earlier Hong Kong study：第 1 张卡弹出（original study）",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "2-06.w047"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "c2",
-   "obj": "card_2",
-   "verb": "eject",
-   "at": {
-    "word": "2-06.w048",
-    "off": 0
-   },
-   "means": "papers behind：第 2 张卡（method paper）",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "2-06.w049"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "c3",
-   "obj": "card_3",
-   "verb": "eject",
-   "at": {
-    "word": "2-06.w050",
-    "off": 0
-   },
-   "means": "two AI tools：第 3 张卡（method paper）",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "2-06.w052"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "c4",
-   "obj": "card_4",
-   "verb": "eject",
-   "at": {
-    "word": "2-06.w054",
-    "off": 0
-   },
-   "means": "2023 review：第 4 张卡（review）",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "2-06.w055"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "c5",
-   "obj": "card_5",
-   "verb": "eject",
-   "at": {
-    "word": "2-06.w057",
-    "off": 0
-   },
-   "means": "textbook chapter：第 5 张卡（book chapter）",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "2-06.w058"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "c6",
-   "obj": "card_6",
-   "verb": "eject",
-   "at": {
-    "word": "2-06.w061",
-    "off": 0
-   },
-   "means": "2026 expert Perspective：第 6 张卡（Perspective）",
-   "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "word": "2-06.w063"
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "abs",
-   "obj": "tag_abstract",
-   "verb": "appear",
-   "at": {
-    "word": "2-06.w064",
-    "off": 0
-   },
-   "means": "which we read only as an abstract：第 6 张卡上红字 abstract only 写出",
-   "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "sentence_end": true
-   },
-   "guide": {
-    "kind": "none"
-   }
-  },
-  {
-   "id": "journal",
-   "obj": "cite_ul",
+   "id": "papers",
+   "obj": "papers",
    "verb": "grow",
    "at": {
-    "word": "2-06.w034",
+    "word": "papers#1",
     "off": 0
    },
-   "means": "Chemical Science, 2023：引用下面画红线",
+   "lead": 7,
+   "means": "papers：左边两根料杆尖上长出空卡位",
    "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "word": "2-06.w036"
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "word": "behind#1"
+   }
+  },
+  {
+   "id": "tools",
+   "obj": "tools",
+   "verb": "appear",
+   "at": {
+    "word": "two#1",
+    "off": 0
+   },
+   "lead": 7,
+   "means": "papers behind two AI tools：两张卡",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "tools#1"
+   }
+  },
+  {
+   "id": "rev",
+   "obj": "rev",
+   "verb": "appear",
+   "at": {
+    "word": "2023#2",
+    "off": 0
+   },
+   "lead": 7,
+   "means": "a 2023 review：第四张卡",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "review#2"
+   }
+  },
+  {
+   "id": "text",
+   "obj": "text",
+   "verb": "appear",
+   "at": {
+    "word": "textbook#1",
+    "off": 0
+   },
+   "lead": 7,
+   "means": "a textbook chapter：第五张卡",
+   "tool": "remotion",
+   "guide": {
+    "kind": "none"
+   },
+   "until": {
+    "word": "chapter#1"
    }
   },
   {
    "id": "persp",
-   "obj": "c6",
+   "obj": "persp",
    "verb": "appear",
    "at": {
-    "word": "2-06.w062",
+    "word": "2026#1",
     "off": 0
    },
-   "means": "expert Perspective：c6 卡亮一下",
+   "lead": 7,
+   "means": "a 2026 expert Perspective：第六张卡",
    "tool": "remotion",
-   "lead": 4,
-   "until": {
-    "word": "2-06.w063"
-   },
    "guide": {
-    "kind": "none"
+    "kind": "focus",
+    "target": [
+     "card6"
+    ]
+   },
+   "until": {
+    "word": "perspective#1"
    }
   },
   {
-   "id": "half",
-   "obj": "c6_cover",
-   "verb": "grow",
+   "id": "abs",
+   "obj": "abs",
+   "verb": "move",
    "at": {
-    "word": "2-06.w070",
+    "word": "only#1",
     "off": 0
    },
-   "means": "abstract：c6 下半盖灰，只读了摘要",
+   "lead": 13,
+   "means": "read only as an abstract：第六张卡大半变磨砂",
    "tool": "remotion",
-   "lead": 6,
-   "until": {
-    "sentence_end": true
-   },
    "guide": {
     "kind": "none"
+   },
+   "until": {
+    "sentence_end": true
    }
   }
  ]
