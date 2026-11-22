@@ -88,7 +88,7 @@ const Scene = () => {
 
   return (
     <Lens plan={GP} f={f}>
-      <Stage zone={ZONE} f={f} cam={camBreath(f, K, [])} shakeX={shake} over={<><T5In name="runner" f={f} /><T5Out name="chip" f={f} len={LEN} /></>}>
+      <Stage zone={ZONE} f={f} cam={camBreath(f, K, [])} shakeX={shake} over={<><T5In name="runner" f={f} /><T5Out name="runner" f={f} len={LEN} /></>}>
         <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `translateX(${out1}px)`}}>
           <Layer id="chip">
             {S.chip > 0.01 && <Sprite name="chip_chemistry42/34" x={CHIP.x} y={CHIP.y - 50 * (1 - Math.min(1, S.chip)) + id(1).y} w={CHIP.w} op={Math.min(1, S.chip * 1.5)} rot={id(1).r} />}

@@ -64,7 +64,7 @@ const Scene = () => {
   return (
     <Lens plan={GP} f={f}>
       <Stage zone={ZONE} f={f} cam={camBreath(f, K, ["s1", "s2", "s5"])} shakeX={shake} shakeY={shake * 0.5}
-             over={<><T5In name="runner" f={f} /><T5Out name="socket" f={f} len={LEN} /></>}>
+             over={<><T5In name="runner" f={f} /><T5Out name="socket_bore" f={f} len={LEN} /></>}>
         <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `translateX(${clearX}px)`}}>
           <Layer id="mol">
             {S.mol > 0.01 && <Sprite name="mol001/34" x={560} y={310 + id(1).y} w={480} op={S.mol} rot={id(1).r} />}

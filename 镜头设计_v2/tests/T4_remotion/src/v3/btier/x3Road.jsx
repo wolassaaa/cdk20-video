@@ -5,7 +5,9 @@ import {C, Slab, Plate, Runner, Engrave, Gate, Tick} from "./bkit.jsx";
 export const X = [250,570,890,1210,1530,1850,2170];
 export const Y = 602;
 export const names = ["Target","Hit","Improve","Cells","Animals","Trials","Approval"];
-export const start = 40, end610 = [1510, 1.07];
+// 审查批 1（11-23）：长路页停站时容器缩放 ZS（原 1.09 × 1.8 ≈ 2.0），拉回看路 ZF = 1.2；6-10 末机位留在拉回的 1.2，6-11 从这里接
+export const ZS = 2.0, ZF = 1.2;
+export const start = 40, end610 = [1510, ZF];
 const road = `M -220 ${Y} H 2520`;
 export const clamp = (x) => Math.max(0,Math.min(1,x));
 export const mix = (a,b,t) => a+(b-a)*t;

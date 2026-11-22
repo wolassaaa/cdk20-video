@@ -27,7 +27,7 @@ const ICONS = [[-120, -40], [-40, -78], [52, -60], [-150, 32], [-62, 14], [30, 2
 const DIM = [1, 4, 6, 7];
 const HEK_ICONS = [2, 4, 7];                          // HEK293：CDK20 少得多（Gemini 初审：对照皿里插座和 Huh7 一样多，看不出区别）
 const IN_DX = 40, IN_DY = -30;                        // 048 落进皿里液面的位置（相对皿中心），不卡在皿沿
-const BAR_X = 260, NM = 0.8, ROW1 = 744, ROW2 = 806, BAR_H = 26;   // 剂量条：1 nM = 0.8 px，1,700 → 1,360 px
+const BAR_X = 260, NM = 0.72, ROW1 = 744, ROW2 = 806, BAR_H = 26;   // 剂量条：1 nM = 0.72 px，1,700 → 1,224 px（审查批 1："1,700 nM" 整个标签右沿 ≤ x 1700，210 那条同比例）
 const GAUGE = {dx: 290, top: -170, h: 360, w: 60};                  // 信号表（相对皿中心）
 
 const Scene = () => {
@@ -141,7 +141,7 @@ const Scene = () => {
   return (
     <Lens plan={GP} f={f}>
       <Stage zone={ZONE} f={f} cam={camBreath(f, K, ["s1", "s2", "s3"])} whip={whipX(f, LEN - 7, "out", -1)}
-             over={<T5In name="socket" f={f} />}>
+             over={<T5In name="socket_bore" f={f} />}>
         {/* 第一幕：路和三站 */}
         <Layer id="road">
           <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `translateX(${roadX}px)`, opacity: roadOp}}>

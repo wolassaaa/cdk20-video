@@ -156,7 +156,7 @@ const Scene = () => {
 
   return (
     <Lens plan={GP} f={f}>
-      <Stage zone={ZONE} f={f} cam={camBreath(f, K, [])} whip={whip} shakeX={shake} over={<T5In name="socket" f={f} />}>
+      <Stage zone={ZONE} f={f} cam={camBreath(f, K, [])} whip={whip} shakeX={shake} over={<T5In name="socket_bore" f={f} />}>
         {/* s1–s2 */}
         <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `translateX(${out1}px)`}}>
           <Layer id="team">

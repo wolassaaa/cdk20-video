@@ -114,7 +114,7 @@ const Scene = () => {
 
   return (
     <Lens plan={GP} f={f}>
-      <Stage zone={ZONE} f={f} cam={camBreath(f, K, [])} shakeX={shake} over={<><T5In name="chip" f={f} /><T5Out name="runner" f={f} len={LEN} /></>}>
+      <Stage zone={ZONE} f={f} cam={camBreath(f, K, [])} shakeX={shake} over={<><T5In name="key" f={f} /><T5Out name="runner" f={f} len={LEN} /></>}>
         <Layer id="traybase">
           {seven > 0.001 && (
             <Slab x={TRAY.x} y={TRAY.y + 40 * (1 - sm(seven * 3)) + (S.trayJ || 0)} w={TRAY.w} h={TRAY.h} r={22} color={C.bone} depth={14} op={sm(seven * 3)} id="tray10" />

@@ -673,7 +673,6 @@
    "key": "end#1",
    "sid": "6-11.s1",
    "word_f0": 49,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -696,7 +695,6 @@
    "key": "ai-assisted#1",
    "sid": "6-11.s2",
    "word_f0": 191,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -719,7 +717,6 @@
    "key": "september#1",
    "sid": "6-11.s3",
    "word_f0": 407,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -742,7 +739,6 @@
    "key": "lirafugratinib#1",
    "sid": "6-11.s3",
    "word_f0": 610,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -765,7 +761,6 @@
    "key": "lirafugratinib#1",
    "sid": "6-11.s3",
    "word_f0": 610,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -788,7 +783,6 @@
    "key": "approved#1",
    "sid": "6-11.s3",
    "word_f0": 731,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -811,7 +805,6 @@
    "key": "us#1",
    "sid": "6-11.s3",
    "word_f0": 784,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -834,7 +827,6 @@
    "key": "bile#1",
    "sid": "6-11.s3",
    "word_f0": 838,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -857,7 +849,6 @@
    "key": "others#1",
    "sid": "6-11.s4",
    "word_f0": 934,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -880,7 +871,6 @@
    "key": "failed#1",
    "sid": "6-11.s4",
    "word_f0": 969,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -903,7 +893,6 @@
    "key": "048#1",
    "sid": "6-11.s5",
    "word_f0": 1088,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -926,7 +915,6 @@
    "key": "makers#1",
    "sid": "6-11.s6",
    "word_f0": 1155,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -949,7 +937,6 @@
    "key": "trials#1",
    "sid": "6-11.s6",
    "word_f0": 1275,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -972,7 +959,6 @@
    "key": "shared#1",
    "sid": "6-11.s6",
    "word_f0": 1348,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -995,7 +981,6 @@
    "key": "researchers#1",
    "sid": "6-11.s6",
    "word_f0": 1414,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -1009,7 +994,7 @@
    "verb": "move",
    "ease": "inout",
    "means": "048 吊牌的金色牌面冲镜头，接 6-12",
-   "f_start": 1473,
+   "f_start": 1493,
    "f_land": 1493,
    "f_end": 1493,
    "until": null,
@@ -1018,11 +1003,10 @@
    "key": "instead#1",
    "sid": "6-11.s6",
    "word_f0": 1454,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
-   "F_start": 53553,
+   "F_start": 53573,
    "F_land": 53573,
    "F_end": 53573
   }

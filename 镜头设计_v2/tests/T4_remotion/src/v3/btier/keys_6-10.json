@@ -313,7 +313,6 @@
    "key": "048#1",
    "sid": "6-10.s1",
    "word_f0": 105,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -336,7 +335,6 @@
    "key": "road#1",
    "sid": "6-10.s1",
    "word_f0": 160,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -359,7 +357,6 @@
    "key": "target#1",
    "sid": "6-10.s2",
    "word_f0": 202,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -382,7 +379,6 @@
    "key": "found#1",
    "sid": "6-10.s2",
    "word_f0": 257,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -405,7 +401,6 @@
    "key": "hit#1",
    "sid": "6-10.s3",
    "word_f0": 325,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -428,7 +423,6 @@
    "key": "found#2",
    "sid": "6-10.s3",
    "word_f0": 364,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -451,7 +445,6 @@
    "key": "improving#1",
    "sid": "6-10.s4",
    "word_f0": 417,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -474,7 +467,6 @@
    "key": "started#1",
    "sid": "6-10.s4",
    "word_f0": 494,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -497,7 +489,6 @@
    "key": "cells#1",
    "sid": "6-10.s5",
    "word_f0": 575,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -520,7 +511,6 @@
    "key": "tests#1",
    "sid": "6-10.s5",
    "word_f0": 651,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -543,7 +533,6 @@
    "key": "done#1",
    "sid": "6-10.s5",
    "word_f0": 689,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -566,7 +555,6 @@
    "key": "animals#1",
    "sid": "6-10.s6",
    "word_f0": 733,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -589,7 +577,6 @@
    "key": "not#1",
    "sid": "6-10.s6",
    "word_f0": 871,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },

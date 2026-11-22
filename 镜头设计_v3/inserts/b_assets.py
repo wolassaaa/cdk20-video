@@ -439,6 +439,12 @@ def sprites(groups):
             shoot(sc, name, "34", [r], az, el, px)
 
 
+    # 审查批 1（11-23）2-06：论文书当英雄件放大 ×2.1（屏上 ≥ 486 px 高），1000 px 的图不够（显示宽 ≤ 原图 × 0.8），按 2 倍出一张 book/34x2
+    if want("book2x"):
+        tidy()
+        r = KP.p17_paper_book(K)
+        shoot(sc, "book", "34x2", [r], -18, 50, 2000)
+
     # B 第 4 批（规则 v2：真实对象，不用黑名单图标）：小鼠、挂锁（锁上 / 打开）、一摞硬币、两道跑道、Top 20 表、数据盘
     if want("parts3"):
         def coins():
@@ -514,6 +520,44 @@ def wipe(name):
         g = bpy.context.object; bpy.ops.object.shade_smooth(); g.data.materials.append(mw); g.parent = root
         root.rotation_euler = (0, math.radians(14), 0)
         span = 0.62
+    elif name == "socket_bore":
+        # 11-23 审查批 1（18 的 1.8）：插座擦除层的亮版。孔口正对镜头、沿孔轴推近，第 17 帧镜头在孔桶里，盖满的是骨白内壁和触点块，
+        # 不是克莱因蓝外壳；前后段边推边横移（右进左出），蓝壳只在几帧里扫过画面一侧。另加一盏转场灯（镜头位置的面光，主光 120 W 的 3 倍）。
+        part = S.h01b_cdk20_socket(K)
+        bar = [o for o in [part] + list(part.children_recursive) if o.type == "MESH" and "barrel" in o.name and not o.hide_render]
+        bp = [o.matrix_world @ Vector(c) for o in bar for c in o.bound_box]
+        xs, ys, zs = [p.x for p in bp], [p.y for p in bp], [p.z for p in bp]
+        mouth = Vector((max(xs), (min(ys) + max(ys)) / 2, (min(zs) + max(zs)) / 2))
+        u = (max(ys) - min(ys)) / 14.0                     # 孔桶外径 Ø14 mm → 世界单位每 mm
+        R = 0.10                                           # 孔桶内径 5.15 mm 放到 0.10 m
+        root = bpy.data.objects.new("W_root", None); sc.collection.objects.link(root)
+        part.parent = root
+        part.location = part.location - mouth
+        s = R / (5.15 * u)
+        root.scale = (s, s, s)
+        root.rotation_euler = (0, 0, math.radians(-90))     # 孔轴 +X 转到 -Y（朝镜头）
+        for o in [part] + list(part.children_recursive):
+            for sl in getattr(o, "material_slots", []):
+                if sl.material and sl.material.use_nodes:
+                    m2 = sl.material.copy()
+                    pb = next((n for n in m2.node_tree.nodes if n.type == "BSDF_PRINCIPLED"), None)
+                    if pb:
+                        bc = pb.inputs["Base Color"].default_value
+                        pb.inputs["Emission Color"].default_value = (bc[0], bc[1], bc[2], 1)
+                        pb.inputs["Emission Strength"].default_value = 0.9      # 试过 0.45 + 灯退到镜头后 0.4 m：孔桶里第 17、18 帧掉到 0.44、0.33，用回这一版
+                    sl.material = m2
+        ld = bpy.data.lights.new("wipe_trans", "AREA")
+        ld.shape, ld.size, ld.energy, ld.color = "DISK", 0.5, 360.0, (1, 0.97, 0.93)
+        lo = bpy.data.objects.new("wipe_trans", ld); sc.collection.objects.link(lo)
+        lo.location, lo.rotation_euler = (0, -0.02, 0), (math.radians(90), 0, 0)  # 跟着镜头，进孔桶时照亮内壁（盖满帧 0.91）
+        light_rig(0, 1.0).location = (0, 0.35, 0)
+        for fr in range(-2, WIPE_NF + 2):
+            t = (fr - WIPE_MID) / WIPE_MID
+            a = abs(t)
+            root.location = (-1.5 * t * a, -0.25 * R + 1.4 * a ** 1.6, 0)
+            root.keyframe_insert("location", frame=fr)
+        depth = 0.0
+        span = None
     else:
         build = {"key": lambda: KP.p22_key(K, 2), "socket": lambda: S.h01b_cdk20_socket(K), "capsule": lambda: KP.p08_capsule(K),
                  "chip": lambda: KP.p13_chip(K, "AI"), "liver": lambda: KP.p04_liver(K, big=True)}[name]
@@ -538,15 +582,16 @@ def wipe(name):
                         pb.inputs["Emission Color"].default_value = (bc[0], bc[1], bc[2], 1)
                         pb.inputs["Emission Strength"].default_value = 0.9
                     sl.material = m2
-    light_rig(0, 1.0)
-    for o in bpy.data.objects:
-        if o.name.startswith("light_rig"):
-            o.location = (0, depth, 0)
-    # 从右往左飞过，第 17 帧在画面正中
-    for fr in range(-2, WIPE_NF + 2):
-        x = 0.012 * 0 + (WIPE_MID - fr) * (2 * span / WIPE_NF) * 1.05
-        root.location = (x, depth, 0)
-        root.keyframe_insert("location", frame=fr)
+    if span is not None:                               # socket_bore 自己摆了灯和路径
+        light_rig(0, 1.0)
+        for o in bpy.data.objects:
+            if o.name.startswith("light_rig"):
+                o.location = (0, depth, 0)
+        # 从右往左飞过，第 17 帧在画面正中
+        for fr in range(-2, WIPE_NF + 2):
+            x = 0.012 * 0 + (WIPE_MID - fr) * (2 * span / WIPE_NF) * 1.05
+            root.location = (x, depth, 0)
+            root.keyframe_insert("location", frame=fr)
     out = WORK / "bwipe" / name
     out.mkdir(parents=True, exist_ok=True)
     sc.render.use_overwrite = "replace" in ARGS

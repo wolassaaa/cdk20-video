@@ -98,7 +98,7 @@ const Scene = () => {
 
   return (
     <Lens plan={GP} f={f}>
-      <Stage zone={ZONE} f={f} cam={camBreath(f, K, ["s1", "s3", "s4"])} over={<><T5In name="socket" f={f} /><T5Out name="runner" f={f} len={LEN} /></>}>
+      <Stage zone={ZONE} f={f} cam={camBreath(f, K, ["s1", "s3", "s4"])} over={<><T5In name="socket_bore" f={f} /><T5Out name="runner" f={f} len={LEN} /></>}>
         <Layer id="sock">
           {S.sock > 0.01 && S.out1 < 1 && <Sprite name="socket/hero_34" x={sockX} y={sockY} w={sockW} op={Math.min(1, S.sock * 1.5)} rot={id(1).r}
                                                 sx={0.85 + 0.15 * S.sock} sy={0.85 + 0.15 * S.sock} />}
