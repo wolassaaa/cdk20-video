@@ -3939,7 +3939,7 @@ V105 = dict(
     HEAD_D=0.10, HEAD_PX=(960.0, 540.0), HEAD_CTRL=(2300.0, 430.0, 0.95),
     TAIL_D=0.10, TAIL_PX=(960.0, 540.0), TAIL_CTRL=(1450.0, 330.0, 0.7),
     OC=True, OC1_EXEMPT=[(381, 555)], MAKE_FWD=4.0, HAND_FRONT=[(94, 112)], TAIL_TAPE=True, TAIL_LIVE=True, TAPE_WHITE=True, TRANS=True, TRANS_K=1.0, HIDE_RED=True, H_MIN=486, TOP_MIN=60, BOT_MAX=860,
-    KEY_K=3.4, KEY_GLOW=6.0, TAPE_POS=(21.4, -15.1), TAPE_U=4.0, TAPE_S=0.7, TAPE_N=17,
+    KEY_K=3.4, KEY_GLOW=6.0, TAPE_POS=(16.1, -15.1), TAPE_U=3.6, TAPE_S=0.7, TAPE_N=17,   # 11-24 Z24：卷尺壳左移 5.3 mm（PXMM 14.95，屏上约 80 px）；尺带往左拉出，刻度 4.0 → 3.6 mm 让尺钩不压人（M5）
     BOARD_K=1.27, BOARD_HIDE=("stations", "zone_tags", "z1_c0_r0"),
     HEAD_BOX=(300, 90, 900, 680), LOCK_BOX=(900, 0, 1940, 1080),
     RIM_W=60.0, SAMPLES=16, GRAIN_F=150, GRAIN_GAIN=1.0,
@@ -4015,7 +4015,7 @@ def recipe_key_tape(W):
     white = P.get("TAPE_WHITE")                                   # 18 文档：卷尺壳骨白（段尾盖满画面只许浅色面）
     hs = KP.Part(K, "tape_case", "white" if white else "blue")
     hs.box(0, 0, 8.0, 9.0, 9.0, K.white if white else K.blue, r=3.0, bevel=1.0)
-    hs.text(P.get("CASE_TXT", "years"), 3.2, 0.6, 2.0, 4.5, K.ink if white else K.inkw, italic=True)
+    hs.text(P.get("CASE_TXT", "years"), 4.2, 0.6, 2.0, 4.5, K.ink if white else K.inkw, italic=True)
     hs.inkbox(mouth + 0.9, -5.25, 0.5, 2.1, K.ink, 4.5)         # 出尺口（深色缝）
     case = hs.done()
     f_tp = e_tp["f_start"]
@@ -4513,7 +4513,7 @@ def recipe_podium(W):
     cx, cy, cz = P["CHIP"]
     g.add("chip", KP.p13_chip(K, "AI"), _T(cx, cy, cz))
     dx, dy, dz = P["DIAL"]
-    dial = KP.p38_dial(K, "Score")
+    dial = KP.p38_dial(K, "")
     for o in dial.children_recursive:                                     # 表盘自带的静止表针（三角，6 个顶点）删掉，换成会转的
         if o.type == "MESH" and len(o.data.vertices) == 6:
             o.hide_render = True
@@ -5113,7 +5113,7 @@ V604 = dict(
     HEAD_D=0.02, HEAD_PX=(960.0, 540.0), HEAD_CTRL=(2300.0, 470.0, 0.95), HEAD_ROT=(0.0, -90.0), HEAD_QW=True, HEAD_EASE=0.6, HEAD_QLAG=0.0,   # 11-23 返修：晚转身、跟灯几版都更糟，退回首版退法，只在第 3–8 帧把段首灯加上去（试渲 ×1.6 第 4 帧 0.634→0.690），填平第 4 帧那个坑   # 11-23 首版：段首牌子退出前转到背光面，往回闪 13.2 → 晚转身；试渲二：牌子边第 3→4 帧一下扫过（bg 亮度跳 36）→ EASE 0.6→0.9 退得更匀；试渲三：仍有 −31 一跳、第 9→10 帧回亮 5 → TRANS_K 1.0→0.6（盖满面不用那么亮）、QLAG 0.45
     TAIL_D=0.038, TAIL_PX=(960.0, 540.0), TAIL_CTRL=(1500.0, 420.0, 0.7), TAIL_ROT=(0.0, 58.0),   # 首版 0.02：段尾盖满 10 帧（OC7 ≤ 6）
     N_PLATES=25, BBOX_N=15, GAP0=7.0, GAP1=3.0, FALL_N=10, SWAY=0.35, BACK=(16.0, 0.0, -54.0),
-    TRAY=(-35.0, -1.0, 22.0), TRAY_WH=(52.0, 22.0), TRAY_TILT0=20.0, TRAY_TILT=12.0, PLUG_K=0.45, SEAT_DX=7.0, ROWS_Y=(5.5, -1.5), TXT_Y=-8.0, TXT_SIZE=9.0,
+    TRAY=(-35.0, -1.0, 22.0), TRAY_WH=(52.0, 22.0), TRAY_TILT0=20.0, TRAY_TILT=12.0, PLUG_K=0.45, SEAT_DX=7.0, ROWS_Y=(5.5, -1.5), TXT_Y=-6.5, TXT_SIZE=14.4,
     TAIL_AT=(18.0, -8.6), TEXT_GLOW=4.0, HAND_FRONT=[(214, 224)],   # D 双手捧起的位置在托盘前（18 文档"手在前"）
     OC=True, TRANS=True, TRANS_K=1.0, TRANS_HK=[(0, 1.0), (2, 1.0), (3, 1.21), (4, 1.65), (6, 1.6), (9, 1.0), (20, 1.0), (28, 0.0)], HIDE_RED=True, H_MIN=486, TOP_MIN=60, BOT_MAX=860, OC1_LO_EXEMPT=[(0, 120), (187, 214)], OC1_EXEMPT=[(207, 524)],
     BOARD_K=1.27, BOARD_HIDE=("stations", "zone_tags", "z1_c0_r0"),
@@ -5333,10 +5333,10 @@ V408 = dict(
     # 11-23 甲线（18 文档 2.4 4-08）：循环轨道（h03，朝镜头倾 50°）+ 左前料杆上的小人 + 上方弹下的 AI 芯片；
     # trial：小车绕轨道跑（60 帧一圈），error 过 Test 站红灯闪；inside：轨道沿自己的平面退到芯片底下、缩小，芯片落下盖住；computer：芯片上方亮起光环，越转越快，甩出一道光；段尾光环冲镜头。
     # 定案（可改回）：18 写缩到 0.55 倍，芯片（屏上宽 220 px）盖不住 0.55 倍的轨道，改缩到 TRACK_IN；光环悬在芯片顶上方、分 12 段（转起来看得出），管径加粗到盖满时盖得住画面。
-    PXMM=11.5, REST_D=1.5, REST_PX=(1430.0, 588.0), REST=(12.0, 8.0), ORG=(0.0, 8.0),
+    PXMM=11.5, REST_D=1.5, REST_PX=(1462.0, 574.0), REST=(12.0, 8.0), ORG=(0.0, 8.0),   # 11-24 Z11：站牌 ×1.7 后下沿 868、小人左移后左沿余 −37 → 整组右移 32、上移 14 px
     HEAD_D=0.03, HEAD_PX=(960.0, 540.0), HEAD_CTRL=(2300.0, 470.0, 0.95), HEAD_QW=True, HEAD_EASE=0.6,   # 11-23 首版 M9 段首先亮后暗往回闪 20.9（第 0 帧贴得太近反而暗）→ 0.02→0.03
     TAIL_D=0.013, TAIL_PX=(960.0, 540.0), TAIL_CTRL=(1500.0, 420.0, 0.7),
-    TRACK_TILT=42.0, TRACK_IN=0.36, CHIP_AT=(0.0, 30.0, 12.0), CHIP_K=0.68, CHIP_DOWN=4.0, CHIP_DROP=45.0, PERSON=(-34.0, -8.0, 10.0), PERSON_K=0.77,
+    TRACK_TILT=42.0, TRACK_IN=0.36, CHIP_AT=(0.0, 30.0, 12.0), CHIP_K=0.68, CHIP_DOWN=4.0, CHIP_DROP=45.0, PERSON=(-42.0, -8.0, 10.0), PERSON_K=0.77,
     RING_R=9.95, RING_T=2.0, RING_Z=5.2, RING_SEG=12, RING_GLOW=3.0, CAR_LAP=60.0, CAR_PHASE=0.65,
     OC=True, TRANS=True, TRANS_K=1.0, TRANS_H0=1.8, DIVE_AT=478, HIDE_RED=True, H_MIN=486, TOP_MIN=60, BOT_MAX=860, ACC=["person", "chip"],   # 试渲 0.03：第 0→2 帧 0.89→0.99 往回闪 25 → 第 0 帧灯 ×1.8
     HAND_FRONT=[(440, 505)], OC2_EXEMPT=[(20, 40)], OC1_LO_EXEMPT=[(20, 40)], OC1_EXEMPT=[(20, 30), (306, 384)],   # A 第 446 帧起甩手横过整组（手在前）；芯片从上方掉进来那几帧还没进框；轨道退进芯片底下那段整组临时拉高
@@ -5523,7 +5523,7 @@ V612 = dict(
     HEAD_D=0.02, HEAD_PX=(960.0, 540.0), HEAD_CTRL=(2300.0, 470.0, 0.95), HEAD_ROT=(0.0, 0.0), HEAD_QW=True, HEAD_EASE=0.6,
     TAIL_D=0.05, TAIL_PX=(960.0, 540.0), TAIL_CTRL=(1500.0, 420.0, 0.7), TAIL_ROT=(0.0, 0.0),   # 11-23 首版 OC7 段尾盖满 11 帧（要 ≤ 6）→ 0.036 还盖满 8 帧 → 0.05
     RY=20.0, RX0=-32.0, RX1=150.0, RUN_R=0.73, TAG_X=-24.0, PL_X=(-4.0, 16.0, 36.0), PL_K=0.57, PL_LABELS=("Target", "Hit", "Improve"),
-    TAPE=(4.0, -19.0), TAPE_K=0.95, EXT_WEEKS=16.0, EXT_YEARS=56.0, WEEKS_B=9.0, YEARS_B=38.0, TXT_SIZE=6.5,   # 11-23 试渲：尺带上 weeks / years 小写字身只有 20 px，放大整只卷尺和字（字身约 30 px），拉出长度收一点免得出右边
+    TAPE=(-2.5, -19.0), TAPE_K=0.95, EXT_WEEKS=16.0, EXT_YEARS=56.0, WEEKS_B=9.0, YEARS_B=38.0, TXT_SIZE=8.5,   # 11-23 试渲：尺带上 weeks / years 小写字身只有 20 px，放大整只卷尺和字（字身约 30 px），拉出长度收一点免得出右边
     OC=True, TRANS=True, TRANS_K=1.0, HIDE_RED=True, H_MIN=486, TOP_MIN=60, BOT_MAX=860, OC1_LO_EXEMPT=[(0, 241)],
     BOARD_K=1.27, BOARD_HIDE=("stations", "zone_tags", "z1_c0_r0"),
     HEAD_BOX=(300, 90, 900, 680), LOCK_BOX=(1000, 0, 1940, 1080),
@@ -5931,7 +5931,7 @@ def recipe_road5(W):
     txt, bodies = [], []
     for i, (lab, y) in enumerate(zip(P["LABELS"], ys)):
         pp = KP.Part(K, f"road5_pl{i}", "white")
-        pp.box(0, 0, hw, hh, 2.8, K.land if lab == "patients" else K.white, r=1.8, bevel=0.6)
+        pp.box(0, 0, hw, hh, 2.8, K.white, r=1.8, bevel=0.6)
         if P.get("FULL"):
             t = pp.text(lab, P["TXT_SIZE"], P["TXT_X0"], -0.3, 1.4, K.ink, align="LEFT")     # 全版：刻字左对齐，右上角让给小件
         else:
@@ -5988,7 +5988,7 @@ def recipe_road5(W):
     def nyfn(f):
         u = ease_out_back(clamp01((f - e_ny["f_start"]) / max(1, e_ny["f_land"] - e_ny["f_start"] + 4)), 1.4)
         a = _wob(f, e_ny["f_land"] + 2, 6.0, 12.0, 14.0)
-        return g.kids["pl4"]["fn"](f) @ _T(12.0, -9.3 + 3.0 * (1 - u), 2.5) @ _R("Z", -5.0 + a) @ _Sc(_popk(f, e_ny["f_start"], 8, 1.6))
+        return g.kids["pl4"]["fn"](f) @ _T(18.0, 8.8 + 3.0 * (1 - u), 2.5) @ _R("Z", -5.0 + a) @ _Sc(_popk(f, e_ny["f_start"], 8, 1.6))
     g.kids["notyet"]["fn"] = nyfn
     # ---- 报纸（不印报名）：headline 落到上面两块牌前，标题逐词变红；ask 缩小挂到料杆左上
     pp = KP.Part(K, "road5_paper", "white")
@@ -6001,16 +6001,22 @@ def recipe_road5(W):
     pp.inkbox(-9.6, -5.4, 8.0, 6.6, K.inkg, 1.0)
     for j in range(8):
         pp.inkbox(9.0, 0.6 - 1.8 * j, 8.6 if j != 7 else 5.0, 0.28, K.inkg, 1.0)
-    hs = 3.4
+    hs = 6.8   # 11-24 Z20：报纸标题字高 3.4 → 6.8；总宽超 38 mm 分两行
     words = ["AI", "discovers", "a", "cancer", "drug"]
     wo = [pp.text(w, hs, 0.0, 5.2, 1.0, K.ink, italic=True, align="LEFT") for w in words]
     bpy.context.view_layer.update()
     wid = [o.dimensions.x / MM for o in wo]
     sp = 0.3 * hs
-    x = -(sum(wid) + sp * (len(wo) - 1)) / 2
-    for o, wd in zip(wo, wid):
-        o.location.x = x * MM
-        x += wd + sp
+    if sum(wid) + sp * (len(wo) - 1) <= 38.0:
+        lines = [(5.2, list(range(len(wo))))]
+    else:
+        lines = [(6.6, [0, 1, 2]), (1.4, [3, 4])]   # AI discovers a / cancer drug
+    for ly, ids in lines:
+        x = -(sum(wid[i] for i in ids) + sp * (len(ids) - 1)) / 2
+        for i in ids:
+            wo[i].location.x = x * MM
+            wo[i].location.y = (ly + getattr(pp, "oy", 0.0)) * MM
+            x += wid[i] + sp
     px, py, pz = P["PAPER"]
     ax, ay, az = P["PAPER_AWAY"]
     pk, ak = P["PAPER_K"], P["PAPER_AWAY_K"]
@@ -6638,6 +6644,10 @@ def _enc_args():
 
 
 def comp(seg, ab=False):
+    if os.environ.get("CDK20_GPU_COMP") == "1" and not ab:   # 11-24：合成搬显卡（comp_gpu.py，见 comp_gpu.md）；去掉这个环境变量 = 下面原来的 CPU 版
+        import comp_gpu
+        comp_gpu.drive(seg)
+        return
     cfg = seg_cfg(seg)
     C = Comp(seg)
     from PIL import Image
