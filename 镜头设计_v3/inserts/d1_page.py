@@ -22,7 +22,7 @@ def grab(mp4, f):
 
 
 def nframes(mp4):
-    r = subprocess.run([S.FF, "-i", str(mp4)], capture_output=True, text=True).stderr
+    r = subprocess.run([S.FF, "-i", str(mp4)], capture_output=True, text=True, encoding="utf-8", errors="replace").stderr
     import re
     d = re.search(r"Duration: (\d+):(\d+):([\d.]+)", r)
     return round((int(d[1]) * 3600 + int(d[2]) * 60 + float(d[3])) * 60) if d else -1

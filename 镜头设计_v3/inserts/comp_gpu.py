@@ -259,7 +259,7 @@ class GpuComp:
 
     # 人像 ----------------------------------------------------------
     def person_enhance(self, a, f):
-        dn, sh = S.PERSON_DN, S.PERSON_SH
+        dn, sh = S.PERSON_DN, (S.SEG_SH.get(self.cfg.get("seg"), S.PERSON_SH) if "ONCAM_SH" not in __import__("os").environ else S.PERSON_SH)   # 11-24 段内覆盖，同 shot_oncam.Comp.person_enhance
         if dn <= 0 and sh <= 0:
             return a
         rgb = a[..., :3]

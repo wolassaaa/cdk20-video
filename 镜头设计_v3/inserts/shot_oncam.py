@@ -4915,7 +4915,7 @@ V404 = dict(
     OC=True, TRANS=True, TRANS_K=1.0, HIDE_RED=True, H_MIN=486, TOP_MIN=60, BOT_MAX=860, ACC=["chip", "person"], OC1_EXEMPT=[(192, 232)], HAND_FRONT=[(150, 224)], OC2_EXEMPT=[(228, 240), (325, 334)],   # B 比剪刀手那只手在剪钳、插座前面（18 文档"手在前"）
     BOARD_K=1.27, BOARD_HIDE=("stations", "zone_tags", "z1_c0_r0"),
     HEAD_BOX=(300, 90, 900, 680), LOCK_BOX=(1000, 0, 1940, 1080),
-    RIM_W=60.0, SAMPLES=16, GRAIN_F=150, GRAIN_GAIN=1.0,   # 11-23 重出 M10 颗粒比 0.36（2.4）→ 6.0
+    RIM_W=60.0, SAMPLES=16, GRAIN_F=150, GRAIN_GAIN=1.7,   # 11-23 重出 M10 颗粒比 0.36（2.4）→ 6.0
 )
 
 
@@ -6317,6 +6317,7 @@ def rimcal(seg):
 # ================================================================ 合成（纯 numpy + PIL，CPU，不用 Blender）
 PERSON_DN = int(os.environ.get("ONCAM_DN", "1"))       # 11-23 D1：人像时域降噪档（0 无 / 1 弱 / 2 中），默认 = 弱档（1-01 试验选定：弱降噪 + unsharp 0.7）
 PERSON_SH = float(os.environ.get("ONCAM_SH", "0.7"))     # 人像 unsharp 量
+SEG_SH = {"4-08": 0.5, "1-01": 0.3, "4-04_4-05": 0.15, "5-02": 0.25, "8-04_8-05_8-06_8-07": 0.4}   # 11-24：M10 颗粒比 < 0.25 的段，人像锐化减小（试验 4-08 0.5 → 0.28）
 GRAIN_GAIN = 1.0       # 11-23 D1：1.7 → 1.0（颗粒只对上素材底噪，不放大；原 1.7 保留在这行注释里）。颗粒强度倍数（σ 从 T 恤量，见 measure）。1.4 时成片零件层只有人的 0.60，1.7 → 约 0.73
 LW_STRENGTH = 0.28      # 光包边强度（08 文档第八节 0.15–0.35）
 LW_BLUR = 26            # 背景取色模糊（px）
@@ -6461,7 +6462,7 @@ class Comp:
     def person_enhance(self, a, f):
         import numpy as np
         from PIL import ImageFilter
-        dn, sh = PERSON_DN, PERSON_SH
+        dn, sh = PERSON_DN, SEG_SH.get(self.cfg.get("seg"), PERSON_SH) if "ONCAM_SH" not in os.environ else PERSON_SH   # 11-24 段内覆盖：这几段 M10 卡下限，锐化放小
         if dn <= 0 and sh <= 0:
             return a
         rgb = a[..., :3]
