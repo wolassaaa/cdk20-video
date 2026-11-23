@@ -1,0 +1,349 @@
+{
+ "note": "HKBU SCIE1007 课程作业的科普视频：英文字幕对稿子的改动（总管 11-23 定，build_subs.py 读）。依据：v10 人声分轨听写两遍（_asr_v10.json 普通提示；_asr_v10_scriptprompt*.json 拿稿子做提示，偏向稿子，还听成别的才算）、素材流程当初对原始录音的听写（素材流程_out/<人>/2_pick/align/<take>.json 的 heard）、人声能量包络。改回只要删掉对应条目重跑。",
+ "drop_sentences": {
+  "3-08.s1": "没录（19 的 3.4）；两遍听写和原录音听写都没有",
+  "3-08.s2": "没录（同上）",
+  "6-09.s1": "前半句被裁掉，后半句 further down the road 也听不到：原录音听写在这里听到的是 Fewer failed molecules；段首 9–35 帧的能量就是 Fewer failed",
+  "5-04.s7": "Weak. 三遍听写都没有；1483–1502 帧只有 −35 dB 左右的微弱声音（正常说话 −12 至 −20 dB），19 的 3.4：听不到就删"
+ },
+ "drop_words": {
+  "1-03.w012": "ones：三遍都没有，273 帧以后是静音（19 的 3.4）",
+  "5-10.w037": "more：两遍都没有，1619 帧以后是静音（19 的 3.4）",
+  "4-01.w001": "So：段首 4–12 帧只有 −40 dB 左右的残音（被裁停顿切掉了大半），两遍听写都没有；原录音里有",
+  "5-02.w003": "them：成员 C 念的是 Six options",
+  "5-06.w002": "was：念的是 So that's it?",
+  "4-01.w028": "blocks：of building blocks 念成 of beads，building 换成 beads、blocks 去掉"
+ },
+ "replace_words": {
+  "1-03.w001": {
+   "w": "Here is",
+   "why": "三遍都是 Here is（成员 A 的习惯，2-03、2-08 同样）"
+  },
+  "2-03.w002": {
+   "w": "we will",
+   "why": "三遍都是 we will"
+  },
+  "2-08.w002": {
+   "w": "here is",
+   "why": "普通听写和原录音听写都是 here is"
+  },
+  "2-08.w004": {
+   "w": "we are",
+   "why": "普通听写和原录音听写都是 we are"
+  },
+  "4-01.w025": {
+   "w": "string",
+   "why": "录的是改稿前的旧句（19 的 3.4），三遍一致"
+  },
+  "4-01.w027": {
+   "w": "beads",
+   "why": "同上：of building blocks → of beads"
+  },
+  "4-01.w039": {
+   "w": "beads",
+   "why": "同上"
+  },
+  "4-07.w008": {
+   "w": "this",
+   "why": "三遍都是 moves this into"
+  },
+  "4-07.w009": {
+   "w": "into",
+   "why": "同上"
+  },
+  "5-02.w002": {
+   "w": "options",
+   "why": "成员 C 用的第 2 条：普通听写 Six thousand、原录音听写 Six options，都是两个音节的另一个词；第 1 条才是稿子 Six of them"
+  },
+  "5-02.w006": {
+   "w": "up.",
+   "why": "普通听写和原录音听写都是 held up"
+  },
+  "5-02.w012": {
+   "w": "name",
+   "why": "两遍都是 Its name is 001"
+  },
+  "5-06.w003": {
+   "w": "that's",
+   "why": "普通听写和原录音听写都是 So that's it"
+  }
+ },
+ "insert_words": [
+  {
+   "after": "3-06.w001",
+   "w": "it is",
+   "why": "两遍听写都是 So, it is a really strong suspect"
+  },
+  {
+   "after": "3-06.w002",
+   "w": "really",
+   "why": "同上；原录音听写也有 really"
+  },
+  {
+   "after": "4-08.w006",
+   "w": "just",
+   "why": "三遍都是 It just ran"
+  },
+  {
+   "after": "5-02.w008",
+   "w": "option",
+   "why": "one 后面多一个词：普通听写 one thousand、原录音听写 one option、稿子提示那遍也多出一个词"
+  },
+  {
+   "after": "5-02.w012",
+   "w": "is",
+   "why": "两遍都是 Its name is 001"
+  }
+ ],
+ "merge_sentences": [
+  [
+   "5-02.s3",
+   "5-02.s4"
+  ]
+ ],
+ "retime_sentences": {
+  "3-08.s3": "master 把前两句的 21 个词挤在开头，时间是假的；按听写重对（加上该段 Whisper 的系统偏差）",
+  "6-09.s2": "同上：master 把没录的前半句放在 9–35 帧，Fewer 其实在第 10 帧左右开口",
+  "_": "5-02 只有改过、加上的词跟听写，其余词沿用总表（能量包络核过开口）"
+ },
+ "asr_off": {
+  "6-09": 22
+ },
+ "asr_off_note": "6-09 按能量包络量的开口（Fewer 9、failed 30、lower 103、less 262 帧）反推 Whisper 在这段早 22 帧，比同段自动量的 18 帧准",
+ "word_f0": {
+  "3-08.w015": {
+   "f": 13,
+   "why": "And 的开口（能量包络第 13 帧起，前面是静音）"
+  },
+  "6-09.w010": {
+   "f": 9,
+   "why": "Fewer 的开口（能量包络第 9 帧起），Whisper 把段首词钉在 0 s 不可信"
+  }
+ },
+ "shift_f": {
+  "2-02": -7
+ },
+ "shift_note": "2-02 成片用的是 v9 那版出镜（639 帧，比 master 短 27 帧），人声开口比 master 早 7–8 帧（能量包络和听写一致），整段字幕提前 7 帧",
+ "changes": [
+  {
+   "seg": "1-03",
+   "who": "A",
+   "script": "Here's the thing.",
+   "subs": "Here is the thing.",
+   "heard": "Here is the thing.",
+   "why": "三遍听写一致"
+  },
+  {
+   "seg": "1-03",
+   "who": "A",
+   "script": "Just not good enough ones.",
+   "subs": "Just not good enough.",
+   "heard": "Just not good enough.",
+   "why": "ones 没念，之后是静音（19 已登记）"
+  },
+  {
+   "seg": "2-03",
+   "who": "A",
+   "script": "And we'll answer it with …",
+   "subs": "And we will answer it with …",
+   "heard": "And we will answer it",
+   "why": "三遍听写一致"
+  },
+  {
+   "seg": "2-08",
+   "who": "A",
+   "script": "So here's where we're going.",
+   "subs": "So here is where we are going.",
+   "heard": "So here is where we are going.",
+   "why": "两遍一致（成员 A 的习惯，同 1-03、2-03）"
+  },
+  {
+   "seg": "3-06",
+   "who": "D",
+   "script": "So: a strong suspect.",
+   "subs": "So: it is a really strong suspect.",
+   "heard": "So, it is a really strong suspect.",
+   "why": "两遍一致，原录音听写也有 really"
+  },
+  {
+   "seg": "3-08",
+   "who": "B",
+   "script": "But here's the problem. To design a key, you need to see the lock.",
+   "subs": "（不上字幕）",
+   "heard": "（没有）",
+   "why": "没录（19 已登记）；后面 And no one had measured CDK20's shape. 按听写重对时间"
+  },
+  {
+   "seg": "4-01",
+   "who": "B",
+   "script": "So the team did something …",
+   "subs": "The team did something …",
+   "heard": "The team did something …",
+   "why": "So 只剩 −40 dB 的残音，听不出"
+  },
+  {
+   "seg": "4-01",
+   "who": "B",
+   "script": "Imagine a protein as a chain of building blocks that folds into a 3D shape. The order of the blocks is the sequence.",
+   "subs": "Imagine a protein as a string of beads that folds into a 3D shape. The order of the beads is the sequence.",
+   "heard": "… a string of beads that folds … The order of the beads …",
+   "why": "录的是改稿前的旧句（19 已登记）"
+  },
+  {
+   "seg": "4-07",
+   "who": "A",
+   "script": "… and moves it inside a computer.",
+   "subs": "… and moves this into a computer.",
+   "heard": "moves this into a computer",
+   "why": "三遍听写一致"
+  },
+  {
+   "seg": "4-08",
+   "who": "A",
+   "script": "It ran their trial and error …",
+   "subs": "It just ran their trial and error …",
+   "heard": "It just ran their trial and error",
+   "why": "三遍听写一致"
+  },
+  {
+   "seg": "5-02",
+   "who": "C",
+   "script": "Six of them barely held on. But one stood out. Its name? 001.",
+   "subs": "Six options barely held up. But one option stood out. Its name is 001.",
+   "heard": "Six thousand barely held up, but one thousand stood up. Its name is 001.（原录音听写：Six options barely held up, but one option sold out. Its name is 001.）",
+   "why": "19 第八节第 5 条按听写定：念的是改写版。成片用的是她的第 2 条录音（第 1 条录音才是照稿子念的）。stood out 照稿子（三遍里两遍是 out）"
+  },
+  {
+   "seg": "5-04",
+   "who": "C",
+   "script": "Above 6,000 nanomolar. Weak.",
+   "subs": "Above 6,000 nanomolar.",
+   "heard": "Above 6,000 nanomolar.",
+   "why": "补回 0.9 s 以后重听：Weak 三遍都没有，只有微弱残音（19 的 3.4：听不到就删）"
+  },
+  {
+   "seg": "5-06",
+   "who": "B",
+   "script": "So was that it?",
+   "subs": "So that's it?",
+   "heard": "So that's it?",
+   "why": "普通听写和原录音听写一致"
+  },
+  {
+   "seg": "5-10",
+   "who": "C",
+   "script": "Roughly eight times more.",
+   "subs": "Roughly eight times.",
+   "heard": "Roughly 8 times.",
+   "why": "more 没念，之后是静音（19 已登记）"
+  },
+  {
+   "seg": "6-09",
+   "who": "B",
+   "script": "(Now imagine this keeps working) further down the road.",
+   "subs": "（不上字幕）",
+   "heard": "（没有）",
+   "why": "前半句被裁，后半句也听不到（19 已登记）；后面 Fewer failed molecules … 按听写重对时间"
+  }
+ ],
+ "kept_as_script": [
+  {
+   "kind": "口音、近音词（模型每遍都同样听错，几遍一致也不算念错）",
+   "examples": "lock → log（3-03、6-02）；hit → heat（6-06、6-10）；road → row / roll（6-10、6-11、8-03）；toss → toast（4-09）；team → theme（4-09）；prize → price（6-09）；lab → lap（6-07）；Grip → Grid（5-01）；loop → loose（5-07）；every → everyone's（2-07）；sure → short（4-01）；caught → caused（4-05）；walks → works（1-09）；combed → comp（3-07）；Then → than（5-08、7-02）；meant → made（6-07）；better → battery（6-06）；round → rung / the wrong（7-03、8-03）；race → Raise（7-04）；that start took weeks → let's talk grief（6-12）；still decide → stoke the site（8-04）",
+   "why": "19 的 3.4 第 3 条：口音照稿子。判断标准：听写出来的那个词放回句子里不通，或者只是稿子那个词的近音"
+  },
+  {
+   "kind": "词尾 -s、-ed 弱读，时态、单复数",
+   "examples": "steps → step（1-11）；costs → cost（6-09）；experiments → experiment（6-02）；downloaded → download（6-02）；predicted → predict（6-07）；helped → help（8-03）；opens → open（3-03）；built → build / builds（2-07、4-07）；learned → learns（4-01）；blocked → block（4-03）；tests → test（6-10）；medicines → medicine（1-03）；scientists → scientist（4-08）；patients → patient（8-06）；Seeing → Seen / See（6-02）；gave → gives（4-09，两遍一致，但是时态）",
+   "why": "19 的 3.4 第 3 条：单复数、时态这类小出入照稿子"
+  },
+  {
+   "kind": "冠词",
+   "examples": "a ↔ the（4-05、4-06、5-05、5-07、6-11）；Not the only cause → Not only cause（3-06）；Only the lab → Only lab（4-12）；And the real prize → And real price（6-09）",
+   "why": "19 的 3.4 第 3 条"
+  },
+  {
+   "kind": "数字、专有名词、连字符的写法",
+   "examples": "1,412；2.8；8,918；33.4；Kd: 9.2；210 nanomolar → nM；ten-to-seventeen → 10 to 17；Sixteen / fifteen → 16 / 15；Nexavar → Nexvar；atezolizumab、bevacizumab、lirafugratinib、bile duct；tumour → tumor；drug-like、lab-measured、co-authors 拆开",
+   "why": "任务单：数字、专有名词照稿子；英式拼写照稿子"
+  },
+  {
+   "kind": "只有一遍听写听到的多词、换词",
+   "examples": "8-05 next time when you see（when）；5-08 grabbed it about（it）；4-12 is just a clue（just）；8-04 search → research、This → These、discovers → discovered；1-09 human trials → humans' truth；2-06 At the centre → Lee Center；5-05 But it barely → But barely",
+   "why": "另外两遍（稿子提示那遍、原录音那遍）听到的是稿子，证据不够，照稿子"
+  }
+ ],
+ "unclear": [
+  {
+   "seg": "6-03",
+   "script": "Finding a hit.",
+   "heard": "Finally, a hit.",
+   "why": "段首第一个词，三遍成片听写都是 Finally，原录音听写是 Finding（对齐分 0.53）；B 档页面上的小标题是 Finding a hit，照稿子"
+  },
+  {
+   "seg": "6-06",
+   "script": "Time.",
+   "heard": "（三遍都没听出来）",
+   "why": "段首 10–28 帧有清楚的人声（−12 dB），是 Whisper 漏了段首的单词，照稿子"
+  },
+  {
+   "seg": "4-02",
+   "script": "Before, you'd need …",
+   "heard": "You need …",
+   "why": "段首 12–28 帧有清楚的人声，就是 Before，是 Whisper 漏了；you'd / you 照稿子"
+  },
+  {
+   "seg": "3-05",
+   "script": "High levels went with later-stage tumours",
+   "heard": "Hype level went with later stage tumors",
+   "why": "近音，听不准"
+  },
+  {
+   "seg": "4-03",
+   "script": "Trust it blindly, and you'd cut keys for a blocked door.",
+   "heard": "Trace it blindly, and use the cut keys for a block door.",
+   "why": "单遍，另外两遍是稿子"
+  },
+  {
+   "seg": "5-07",
+   "script": "with a predicted pose of how 001 sat",
+   "heard": "with a predictive pulse of how 001 sat",
+   "why": "近音，听不准"
+  },
+  {
+   "seg": "6-08",
+   "script": "not one race run side by side",
+   "heard": "No one reads from side by side",
+   "why": "听不准"
+  },
+  {
+   "seg": "6-11",
+   "script": "lirafugratinib … a bile duct cancer … to take it to trials",
+   "heard": "Levofregrinotib … a bio-dirt cancer … to take it to the trails",
+   "why": "药名、病名念得含糊，照稿子"
+  },
+  {
+   "seg": "1-02",
+   "script": "Worldwide, it's the sixth most common",
+   "heard": "For a while, it's the sixth most common（第一遍）",
+   "why": "开 VAD 那遍和原录音听写都是 Worldwide，照稿子"
+  },
+  {
+   "seg": "1-04",
+   "script": "five years on. The study we follow calls it",
+   "heard": "five years old. The study we follow caused it（第一遍）",
+   "why": "开 VAD 那遍和原录音听写都是稿子，照稿子"
+  }
+ ],
+ "decisions": [
+  "做法（总管定，能改回）：每段听写三遍：v10 人声分轨普通听写、拿该段稿子做提示再听一遍、再加素材流程当初对原始录音的听写。两遍以上一致、而且听出来的说法放回句子里通顺的，字幕跟实际念的走；听出来的词只是稿子那个词的近音（口音），或者只有一遍听到，照稿子。数字、专有名词的写法一律照稿子。",
+  "19 的 3.4 第 3 条原本把 just、really 这类多说的虚词、缩写念全（Here's 念成 Here is）也算照稿子；这次任务单要求字幕对准实际说出口的词，所以这两类有两遍以上一致的就跟实际念的走（1-03、2-03、2-08、3-06、4-08）。要退回 19 的写法，删掉 subs_edits.json 里对应的几条重跑即可。冠词、单复数、时态的出入仍照稿子。",
+  "一块一行、≤ 44 个字符，照 19 的 3.1（不用两行：两行会压到出处行）。双语版的中文以后加在英文上面一行。",
+  "切块在 19 的 3.2 上补了几条（可改回）：一块不以介词、冠词、助动词、物主代词收尾（of、to、the、can、its、inside 之类），免得断在半截，比如 6-11 原来会切成 And here's what the end of | that road can look like.；带 of、in 的机构名不拆（the Chinese University of Hong Kong、the Prince of Wales Hospital）；side by side、trial and error、more than 不拆；引号刚开头不断（‘AI discovers a cancer drug’ 整句在一块）。同一句里前一块每秒超过 20 个字符、后一块有富余的，把断点挪到两边都更好读的地方。1-02、1-09、1-10 三段的切法和 Ch1Board.jsx 原来的逐块相同。",
+  "一句只有一个词、24 帧停不满 0.8 s 的（Okay.、Wait.、Now?、001. 这类），后面有空就多停到 0.8 s；没空的才和同一个人的上一句合成一块。5-02 的 Its name is 001. 本来就是一句话，合成一块。",
+  "时间：总表 v2 的词时间和成片人声逐句比过（能量包络找开口），62 段里除了 2-02 都在 ±3 帧内。2-02 成片用的是 v9 那版出镜，人声早 7–8 帧，整段字幕提前 7 帧。3-08、6-09 两段开头和 5-02 改过词的句子，按听写重对（Whisper 的词起点整体早约 13 帧，按同段可信的词量出来补回去）。"
+ ],
+ "exceptions": {
+  "C8": "每秒超过 20 个字符的 2 块都不是词时间错，是念得快：6-11 And here’s what the end of that road（1.62 s，22.3 字/秒，这句 51 个字符 2.8 s 念完，没有别的断点更慢）；6-09 New treatments for patients.（1.28 s，21.8 字/秒，段尾 670 帧截住，不能停到下一段）。超出不到 2 字/秒，不硬拉时间，留着。"
+ }
+}
