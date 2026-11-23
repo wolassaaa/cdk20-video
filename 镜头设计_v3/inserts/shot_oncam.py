@@ -5677,7 +5677,7 @@ V804 = dict(
     # 简版（18 定案）：牌上不挂小件、不做漏斗和小循环；funnel → computer 牌往前弹一下，loop_on、ring → computer 牌扫光；报纸、五站依次亮、全亮照做。
     # 定案（可改回）：flask（烧瓶是小件）→ cells 牌往前弹 5 mm；person（小人是小件）→ computer 牌跳一下；报纸不印报名（不带任何媒体标识）；
     # paper_away 缩到 0.35 挂到料杆左上（右上角放不下：右沿会过 1880，上沿过 60）；not yet 小牌挂在 patients 牌右下角前面；整组高约 760 px（18 的布局），OC1 上限全段不算。
-    PXMM=8.5, REST_D=1.5, REST_PX=(1540.0, 460.0), REST=(10.0, 4.0), ORG=(25.0, 0.0),   # 11-23 试渲 PXMM 10：整组屏上 800–850 px，上沿 7、下沿 878、右沿 1938 → 缩到 0.85（牌约 410 × 95 px）
+    PXMM=8.5, REST_D=1.5, REST_PX=(1500.0, 460.0), REST=(10.0, 4.0), ORG=(25.0, 0.0),   # 11-24 Z20：not yet 挪到 patients 右上角外后右沿 1911 → 整组左移 40 px   # 11-23 试渲 PXMM 10：整组屏上 800–850 px，上沿 7、下沿 878、右沿 1938 → 缩到 0.85（牌约 410 × 95 px）
     HEAD_D=0.02, HEAD_PX=(960.0, 540.0), HEAD_CTRL=(2300.0, 470.0, 0.95), HEAD_QW=True, HEAD_EASE=0.6,
     TAIL_D=0.06, TAIL_PX=(960.0, 540.0), TAIL_CTRL=(1500.0, 420.0, 0.7),   # 试渲 0.02：段尾骨白盖满 10 帧（OC7 ≤ 6）→ 0.036；全版 computer 牌带着芯片、小人一起冲，0.036 盖满 9 帧 → 同 6-12 的 0.05；r2 0.05 盖满 7 帧 → 0.06
     BAR=(-38.0, 38.5), RUN_R=0.8, GATE_R=0.45, PL_HW=24.0, PL_HH=5.5, PL_X0=2.0, PL_YS=(32.0, 17.0, 2.0, -13.0, -28.0),
@@ -5980,15 +5980,15 @@ def recipe_road5(W):
     g.kids["tick"]["fn"] = lambda f: g.kids["pl2"]["fn"](f) @ _T(tick_x, 0.0, 2.3) @ _Sc(_popk(f, e_ck["f_land"] - 2, 8, 2.4))
     # ---- not yet 小牌：patients 牌右下角前面弹下
     ny = KP.Part(K, "road5_notyet", "white")
-    ny.box(0, 0, 12.0, 4.3, 1.4, K.white, r=1.2, bevel=0.3)
+    ny.box(0, 0, 10.0, 4.3, 1.4, K.white, r=1.2, bevel=0.3)   # 11-24 Z20：半宽 12 → 10（右沿不出 1880）
     ny.text("not yet", 6.5, 0, -0.3, 0.7, K.ink, italic=True)
     e_ny = E["notyet"]
     g.add("notyet", ny.done(), _Sc(0.001), show=e_ny["f_start"])
 
-    def nyfn(f):
+    def nyfn(f):   # 11-24 Z20：not yet 在 patients 牌右上角、"patients" 字右边（字右端约局部 x 7.2），上沿离 animals 牌下沿 ≥ 0.3 mm；从右边弹进（往下落会碰 animals 牌）
         u = ease_out_back(clamp01((f - e_ny["f_start"]) / max(1, e_ny["f_land"] - e_ny["f_start"] + 4)), 1.4)
         a = _wob(f, e_ny["f_land"] + 2, 6.0, 12.0, 14.0)
-        return g.kids["pl4"]["fn"](f) @ _T(18.0, 8.8 + 3.0 * (1 - u), 2.5) @ _R("Z", -5.0 + a) @ _Sc(_popk(f, e_ny["f_start"], 8, 1.6))
+        return g.kids["pl4"]["fn"](f) @ _T(19.0 + 3.0 * (1 - u), 3.0, 2.5) @ _R("Z", -5.0 + a) @ _Sc(_popk(f, e_ny["f_start"], 8, 1.6))
     g.kids["notyet"]["fn"] = nyfn
     # ---- 报纸（不印报名）：headline 落到上面两块牌前，标题逐词变红；ask 缩小挂到料杆左上
     pp = KP.Part(K, "road5_paper", "white")
