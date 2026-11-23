@@ -1,13 +1,13 @@
 <!doctype html><meta charset="utf-8"><title>清单_v10</title><style>body{font-family:"Microsoft YaHei",sans-serif;max-width:900px;margin:24px auto;padding:0 16px;line-height:1.7;color:#222;background:#fff}
 table{border-collapse:collapse;margin:12px 0}td,th{border:1px solid #ccc;padding:6px 10px}th{background:#f2f2f2}
 code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1px solid #ddd;padding-bottom:4px}a{color:#0a58ca}</style><h1>v10 整片清单</h1>
-<p>HKBU SCIE1007 课程作业的科普视频。v10：把各段成片按总表顺序硬切接起来（1080p60），没改任何一段的画面，没烧字幕。
-出片：<code>（--dry，没拼）</code>，2026-11-23 00:10（韩国时间）；全长 <strong>17:56.77</strong>（64606 帧）；声音：各段成片自带的声音接起来；用时 20 秒。
-段序和“总表”帧数：<code>映射/master_v2.json</code>（W0 168、W1 1010、5-04 1474 照 17 的 1.2 改）。“差”= 实际 − 总表。</p>
-<p><strong>时长门槛</strong>（19 的 7.3，≤ 19:55.0 = 71700 帧）：过，余 7094 帧（118.23 秒）。</p>
-<p>还在用旧时间的 B 档页（门槛已过，仅列出）：4-02（+121）、4-01（+107）、2-06（+97）、5-10（+94）、3-07（+80）、1-04（+70）、2-01（+54）、5-07（+50）、8-03（+46）、5-01（+43）、4-09（+42）、8-02（+40）、4-07（+37）、4-10（+23）、1-11（+20）、3-08（+20）、5-03（+18）、5-08（+17）、7-02（+17）、4-06（+16）、6-08（+14）、7-04（+14）。</p>
-<p>没接的：片尾彩蛋（<code>导演检查_20261123/20_片尾彩蛋.mp4</code> 还没有）。</p>
-<p>状态统计：新 17、v9 13、B 初版 30、B 模板重渲 4、简版 3、认可旧版 3。</p>
+<p>HKBU SCIE1007 课程作业的科普视频。v10：把各段成片按总表顺序接起来（1080p60），接点照 19 的 6.3 叠装配擦除层和章首光扫，段内画面没改，没烧字幕。
+出片：<code>G:/cdk20/work/v10/rc/v10_rc06_mix.mp4</code>，2026-11-23 21:20（韩国时间）；全长 <strong>19:41.25</strong>（70875 帧）；声音：整片混音 G:/cdk20/work/audio/v10/master_v10.wav；用时 122 秒。
+段序和“总表”帧数：<code>映射/master_v2.json</code>（W0 168、W1 1010 照 17 的 1.2 改；5-04 1510 照 18 的 A5 接长，11-23）。“差”= 实际 − 总表。</p>
+<p><strong>时长门槛</strong>（19 的 7.3，≤ 19:55.0 = 71700 帧）：过，余 825 帧（13.75 秒）。</p>
+<p>机检：有不过的项，见 <code>导演检查_20261123/_机检_v10.md</code>。
+- F5 冻帧 ≥ 0.5 s（freezedetect −60 dB，逐段量；逐处帧号见 json）：W2 1 处共 1.1 s（最长 1.1 s，片内 06:45.77 起）；EGG 5 处共 8.1 s（最长 5.6 s，片内 17:42.28 起）（要求 没有（W1、W5、彩蛋里片名和 AI 使用说明的停留除外，要看图确认））</p>
+<p>状态统计：新 28、v9 4、B 模板重渲 34、简版 5。</p>
 <table>
 <thead>
 <tr>
@@ -34,7 +34,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>168</td>
 <td>168</td>
 <td>+0</td>
-<td></td>
+<td>w0_final 前 168 帧；声音从 09_片头W0_大标题W1.mp4 第 0.00 s 起截；亮度系数：52 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.949–0.998</td>
 </tr>
 <tr>
 <td>2</td>
@@ -46,7 +46,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>354</td>
 <td>354</td>
 <td>+0</td>
-<td></td>
+<td>头上叠 W0 擦除层（w0wipe_final 第 168–183 帧）；亮度系数：16 帧不是 1（接点匹配 + 出镜段首尾下限），范围 1.003–1.300</td>
 </tr>
 <tr>
 <td>3</td>
@@ -58,7 +58,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>1036</td>
 <td>1036</td>
 <td>+0</td>
-<td>v9 去字幕版，出处行移出字幕区（18 的 C1、C2）</td>
+<td>头 17 帧叠接点擦除层（退场半段）；尾 17 帧叠接点擦除层（入场半段）；亮度系数：104 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.811–0.997；v9 去字幕版，出处行移出字幕区（18 的 C1、C2）</td>
 </tr>
 <tr>
 <td>4</td>
@@ -77,18 +77,18 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>1-04</td>
 <td>B</td>
 <td>00:31.38</td>
-<td><code>导演检查_20261121/14_B档_1-04.mp4</code></td>
-<td>B 初版</td>
-<td>1255</td>
+<td><code>导演检查_20261123/14_B档_1-04.mp4</code></td>
+<td>B 模板重渲</td>
+<td>1184</td>
 <td>1185</td>
-<td>+70</td>
+<td>-1</td>
 <td></td>
 </tr>
 <tr>
 <td>6</td>
 <td>1-05+1-06+1-07</td>
 <td>A</td>
-<td>00:52.30</td>
+<td>00:51.12</td>
 <td><code>导演检查_20261123/15_出镜3D_1-05_1-06_1-07.mp4</code></td>
 <td>新</td>
 <td>596</td>
@@ -100,103 +100,103 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>7</td>
 <td>1-08</td>
 <td>B</td>
-<td>01:02.23</td>
-<td><code>导演检查_20261121/14_B档_1-08.mp4</code></td>
-<td>B 初版</td>
+<td>01:01.05</td>
+<td><code>导演检查_20261123/14_B档_1-08.mp4</code></td>
+<td>B 模板重渲</td>
 <td>930</td>
 <td>930</td>
 <td>+0</td>
-<td></td>
+<td>亮度系数：52 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.963–0.998</td>
 </tr>
 <tr>
 <td>8</td>
 <td>1-09</td>
 <td>C</td>
-<td>01:17.73</td>
+<td>01:16.55</td>
 <td><code>导演检查_20261123/21_1-09_无字幕.mp4</code></td>
 <td>v9</td>
 <td>1458</td>
 <td>1458</td>
 <td>+0</td>
-<td>v9 去字幕版，出处行移出字幕区（18 的 C1、C2）</td>
+<td>头 17 帧叠接点擦除层（退场半段）；尾 17 帧叠接点擦除层（入场半段）；v9 去字幕版，出处行移出字幕区（18 的 C1、C2）</td>
 </tr>
 <tr>
 <td>9</td>
 <td>1-10</td>
 <td>C</td>
-<td>01:42.03</td>
+<td>01:40.85</td>
 <td><code>导演检查_20261123/21_1-10_无字幕.mp4</code></td>
 <td>v9</td>
 <td>838</td>
 <td>838</td>
 <td>+0</td>
-<td>v9 去字幕版，出处行移出字幕区（18 的 C1、C2）</td>
+<td>头 17 帧叠接点擦除层（退场半段）；尾 17 帧叠接点擦除层（入场半段）；v9 去字幕版，出处行移出字幕区（18 的 C1、C2）</td>
 </tr>
 <tr>
 <td>10</td>
 <td>1-11</td>
 <td>B</td>
-<td>01:56.00</td>
-<td><code>导演检查_20261121/14_B档_1-11.mp4</code></td>
-<td>B 初版</td>
-<td>691</td>
+<td>01:54.82</td>
+<td><code>导演检查_20261123/14_B档_1-11.mp4</code></td>
+<td>B 模板重渲</td>
+<td>670</td>
 <td>671</td>
-<td>+20</td>
-<td></td>
+<td>-1</td>
+<td>最后 120 帧换成 W1 三维尾（w1z_final 0–119），切点 14 帧 T6 光扫</td>
 </tr>
 <tr>
 <td>11</td>
 <td>W1</td>
 <td>A</td>
-<td>02:07.52</td>
+<td>02:05.98</td>
 <td><code>G:/cdk20/work/w1/w1z_final</code></td>
 <td>新</td>
 <td>1010</td>
 <td>1010</td>
 <td>+0</td>
-<td></td>
+<td>w1z_final 第 120–1129 帧；声音从 09_片头W0_大标题W1.mp4 第 9.30 s 起截</td>
 </tr>
 <tr>
 <td>12</td>
 <td>2-01</td>
 <td>B</td>
-<td>02:24.35</td>
-<td><code>G:/cdk20/work/redstone_b201_20261122/B201_1080p60_preview.mp4</code></td>
-<td>B 初版</td>
-<td>1652</td>
+<td>02:22.82</td>
+<td><code>导演检查_20261123/14_B档_2-01.mp4</code></td>
+<td>B 模板重渲</td>
+<td>1597</td>
 <td>1598</td>
-<td>+54</td>
-<td>Codex 11-22 按旧页面渲的草稿</td>
+<td>-1</td>
+<td>头 120 帧换成 W1 三维头（w1z_final 1130–1249），切点 14 帧 T6 光扫</td>
 </tr>
 <tr>
 <td>13</td>
 <td>2-02</td>
 <td>C</td>
-<td>02:51.88</td>
-<td><code>导演检查_20261118/7_样片_2-02_人出镜_v2_跟踪放稳.mp4</code></td>
-<td>v9</td>
-<td>639</td>
+<td>02:49.43</td>
+<td><code>导演检查_20261123/15_出镜_2-02_简版.mp4</code></td>
+<td>简版</td>
 <td>666</td>
-<td>-27</td>
+<td>666</td>
+<td>+0</td>
 <td></td>
 </tr>
 <tr>
 <td>14</td>
 <td>2-03</td>
 <td>C</td>
-<td>03:02.53</td>
+<td>03:00.53</td>
 <td><code>导演检查_20261123/21_2-03_无字幕.mp4</code></td>
 <td>v9</td>
 <td>344</td>
 <td>344</td>
 <td>+0</td>
-<td>v9 去字幕版，出处行移出字幕区（18 的 C1、C2）</td>
+<td>头 17 帧叠接点擦除层（退场半段）；尾 17 帧叠接点擦除层（入场半段）；亮度系数：104 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.905–0.997；v9 去字幕版，出处行移出字幕区（18 的 C1、C2）</td>
 </tr>
 <tr>
 <td>15</td>
 <td>2-04</td>
 <td>A</td>
-<td>03:08.27</td>
+<td>03:06.27</td>
 <td><code>导演检查_20261121/15_出镜3D_2-04.mp4</code></td>
 <td>新</td>
 <td>238</td>
@@ -208,9 +208,9 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>16</td>
 <td>2-05</td>
 <td>B</td>
-<td>03:12.23</td>
-<td><code>导演检查_20261121/14_B档_2-05.mp4</code></td>
-<td>B 初版</td>
+<td>03:10.23</td>
+<td><code>导演检查_20261123/14_B档_2-05.mp4</code></td>
+<td>B 模板重渲</td>
 <td>835</td>
 <td>836</td>
 <td>-1</td>
@@ -220,69 +220,69 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>17</td>
 <td>2-06</td>
 <td>B</td>
-<td>03:26.15</td>
-<td><code>导演检查_20261121/14_B档_2-06.mp4</code></td>
-<td>B 初版</td>
-<td>2026</td>
+<td>03:24.15</td>
+<td><code>导演检查_20261123/14_B档_2-06.mp4</code></td>
+<td>B 模板重渲</td>
 <td>1929</td>
-<td>+97</td>
+<td>1929</td>
+<td>+0</td>
 <td></td>
 </tr>
 <tr>
 <td>18</td>
 <td>2-07</td>
 <td>B</td>
-<td>03:59.92</td>
+<td>03:56.30</td>
 <td><code>导演检查_20261123/14_B档_2-07.mp4</code></td>
 <td>B 模板重渲</td>
 <td>1665</td>
 <td>1665</td>
 <td>+0</td>
-<td></td>
+<td>亮度系数：52 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.958–0.998</td>
 </tr>
 <tr>
 <td>19</td>
 <td>2-08</td>
 <td>B→A</td>
-<td>04:27.67</td>
+<td>04:24.05</td>
 <td><code>导演检查_20261123/14_B档_2-08.mp4</code></td>
 <td>简版</td>
+<td>919</td>
 <td>920</td>
-<td>920</td>
-<td>+0</td>
-<td></td>
+<td>-1</td>
+<td>尾 17 帧叠接点擦除层（入场半段）</td>
 </tr>
 <tr>
 <td>20</td>
 <td>3-01</td>
 <td>A</td>
-<td>04:43.00</td>
-<td><code>导演检查_20261120/10_出镜3D样片_3-01.mp4</code></td>
+<td>04:39.37</td>
+<td><code>导演检查_20261123/15_出镜3D_3-01.mp4</code></td>
 <td>新</td>
 <td>384</td>
 <td>384</td>
 <td>+0</td>
-<td></td>
+<td>头 16 帧章首 T6 光扫；亮度系数：47 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.948–0.998</td>
 </tr>
 <tr>
 <td>21</td>
 <td>3-02</td>
 <td>A</td>
-<td>04:49.40</td>
-<td><code>镜头设计_v3/映射/_cache/pages/Manual302.mp4</code></td>
-<td>v9</td>
-<td>775</td>
+<td>04:45.77</td>
+<td><code>导演检查_20261123/16_钻取_3-02.mp4</code></td>
+<td>新</td>
 <td>776</td>
-<td>-1</td>
+<td>776</td>
+<td>+0</td>
 <td></td>
 </tr>
 <tr>
 <td>22</td>
 <td>3-03</td>
 <td>A</td>
-<td>05:02.32</td>
-<td><code>镜头设计_v3/映射/_cache/pages/Manual303.mp4</code></td>
-<td>v9</td>
+<td>04:58.70</td>
+<td><code>导演检查_20261123/16_钻取_3-03.mp4</code></td>
+<td>新</td>
 <td>732</td>
 <td>732</td>
 <td>+0</td>
@@ -292,8 +292,8 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>23</td>
 <td>3-04</td>
 <td>A</td>
-<td>05:14.52</td>
-<td><code>导演检查_20261121/16_钻取_3-04.mp4</code></td>
+<td>05:10.90</td>
+<td><code>导演检查_20261123/16_钻取_3-04.mp4</code></td>
 <td>新</td>
 <td>1030</td>
 <td>1030</td>
@@ -304,9 +304,9 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>24</td>
 <td>3-05</td>
 <td>B</td>
-<td>05:31.68</td>
-<td><code>导演检查_20261120/14_B档_3-05.mp4</code></td>
-<td>B 初版</td>
+<td>05:28.07</td>
+<td><code>导演检查_20261123/14_B档_3-05.mp4</code></td>
+<td>B 模板重渲</td>
 <td>1138</td>
 <td>1138</td>
 <td>+0</td>
@@ -316,91 +316,91 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>25</td>
 <td>3-06</td>
 <td>A</td>
-<td>05:50.65</td>
-<td><code>导演检查_20261121/15_出镜3D_3-06.mp4</code></td>
+<td>05:47.03</td>
+<td><code>导演检查_20261123/15_出镜3D_3-06.mp4</code></td>
 <td>新</td>
 <td>694</td>
 <td>694</td>
 <td>+0</td>
-<td></td>
+<td>亮度系数：7 帧不是 1（接点匹配 + 出镜段首尾下限），范围 1.003–1.013</td>
 </tr>
 <tr>
 <td>26</td>
 <td>3-07</td>
 <td>B</td>
-<td>06:02.22</td>
-<td><code>导演检查_20261121/14_B档_3-07.mp4</code></td>
-<td>B 初版</td>
-<td>1368</td>
+<td>05:58.60</td>
+<td><code>导演检查_20261123/14_B档_3-07.mp4</code></td>
+<td>B 模板重渲</td>
 <td>1288</td>
-<td>+80</td>
+<td>1288</td>
+<td>+0</td>
 <td></td>
 </tr>
 <tr>
 <td>27</td>
 <td>3-08</td>
 <td>B</td>
-<td>06:25.02</td>
-<td><code>导演检查_20261121/14_B档_3-08.mp4</code></td>
-<td>B 初版</td>
-<td>1170</td>
+<td>06:20.07</td>
+<td><code>导演检查_20261123/14_B档_3-08.mp4</code></td>
+<td>B 模板重渲</td>
 <td>1150</td>
-<td>+20</td>
+<td>1150</td>
+<td>+0</td>
 <td></td>
 </tr>
 <tr>
 <td>28</td>
 <td>3-09</td>
 <td>A</td>
-<td>06:44.52</td>
-<td><code>导演检查_20261121/15_出镜3D_3-09.mp4</code></td>
+<td>06:39.23</td>
+<td><code>导演检查_20261123/15_出镜3D_3-09.mp4</code></td>
 <td>新</td>
 <td>340</td>
 <td>340</td>
 <td>+0</td>
-<td></td>
+<td>亮度系数：19 帧不是 1（接点匹配 + 出镜段首尾下限），范围 1.007–1.065</td>
 </tr>
 <tr>
 <td>29</td>
 <td>W2</td>
 <td>A</td>
-<td>06:50.18</td>
-<td><code>镜头设计_v3/styleframes/art/fusion/s4/W2_lyrics_en_1080_v1.mp4</code></td>
-<td>认可旧版</td>
+<td>06:44.90</td>
+<td><code>导演检查_20261123/24_W2_加工.mp4</code></td>
+<td>新</td>
 <td>1500</td>
 <td>1500</td>
 <td>+0</td>
-<td></td>
+<td>头 17 帧叠接点擦除层（退场半段）；尾 17 帧叠接点擦除层（入场半段）；亮度系数：52 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.679–0.987</td>
 </tr>
 <tr>
 <td>30</td>
 <td>4-01</td>
 <td>B</td>
-<td>07:15.18</td>
-<td><code>导演检查_20261121/14_B档_4-01.mp4</code></td>
-<td>B 初版</td>
-<td>1698</td>
+<td>07:09.90</td>
+<td><code>导演检查_20261123/14_B档_4-01.mp4</code></td>
+<td>B 模板重渲</td>
 <td>1591</td>
-<td>+107</td>
-<td></td>
+<td>1591</td>
+<td>+0</td>
+<td>头 16 帧章首 T6 光扫</td>
 </tr>
 <tr>
 <td>31</td>
 <td>4-02</td>
 <td>B</td>
-<td>07:43.48</td>
-<td><code>导演检查_20261121/14_B档_4-02.mp4</code></td>
-<td>B 初版</td>
-<td>1120</td>
+<td>07:36.42</td>
+<td><code>导演检查_20261123/14_B档_4-02.mp4</code></td>
+<td>B 模板重渲</td>
 <td>999</td>
-<td>+121</td>
+<td>999</td>
+<td>+0</td>
 <td></td>
 </tr>
 <tr>
 <td>32</td>
 <td>4-03</td>
 <td>B</td>
-<td>08:02.15</td>
+<td>07:53.07</td>
 <td><code>导演检查_20261123/14_B档_4-03.mp4</code></td>
 <td>B 模板重渲</td>
 <td>1010</td>
@@ -412,91 +412,91 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>33</td>
 <td>4-04+4-05</td>
 <td>A</td>
-<td>08:18.98</td>
-<td><code>镜头设计_v3/映射/_cache/pages/OnCam404.mp4</code></td>
-<td>v9</td>
-<td>430</td>
+<td>08:09.90</td>
+<td><code>导演检查_20261123/15_出镜3D_4-04_4-05.mp4</code></td>
+<td>新</td>
 <td>474</td>
-<td>-44</td>
-<td></td>
+<td>474</td>
+<td>+0</td>
+<td>亮度系数：14 帧不是 1（接点匹配 + 出镜段首尾下限），范围 1.005–1.090</td>
 </tr>
 <tr>
 <td>34</td>
 <td>4-06</td>
 <td>B</td>
-<td>08:26.15</td>
-<td><code>导演检查_20261121/14_B档_4-06.mp4</code></td>
-<td>B 初版</td>
-<td>1062</td>
+<td>08:17.80</td>
+<td><code>导演检查_20261123/14_B档_4-06.mp4</code></td>
+<td>B 模板重渲</td>
 <td>1046</td>
-<td>+16</td>
-<td></td>
+<td>1046</td>
+<td>+0</td>
+<td>亮度系数：52 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.938–0.997</td>
 </tr>
 <tr>
 <td>35</td>
 <td>4-07</td>
 <td>B</td>
-<td>08:43.85</td>
-<td><code>导演检查_20261121/14_B档_4-07.mp4</code></td>
-<td>B 初版</td>
-<td>1474</td>
+<td>08:35.23</td>
+<td><code>导演检查_20261123/14_B档_4-07.mp4</code></td>
+<td>B 模板重渲</td>
 <td>1437</td>
-<td>+37</td>
+<td>1437</td>
+<td>+0</td>
 <td></td>
 </tr>
 <tr>
 <td>36</td>
 <td>4-08</td>
 <td>A</td>
-<td>09:08.42</td>
-<td><code>镜头设计_v3/映射/_cache/pages/OnCam408.mp4</code></td>
-<td>v9</td>
-<td>499</td>
+<td>08:59.18</td>
+<td><code>导演检查_20261123/15_出镜3D_4-08.mp4</code></td>
+<td>新</td>
 <td>520</td>
-<td>-21</td>
+<td>520</td>
+<td>+0</td>
 <td></td>
 </tr>
 <tr>
 <td>37</td>
 <td>4-09</td>
 <td>B</td>
-<td>09:16.73</td>
-<td><code>导演检查_20261121/14_B档_4-09.mp4</code></td>
-<td>B 初版</td>
-<td>1057</td>
+<td>09:07.85</td>
+<td><code>导演检查_20261123/14_B档_4-09.mp4</code></td>
+<td>B 模板重渲</td>
+<td>1014</td>
 <td>1015</td>
-<td>+42</td>
+<td>-1</td>
 <td></td>
 </tr>
 <tr>
 <td>38</td>
 <td>W3</td>
 <td>A</td>
-<td>09:34.35</td>
-<td><code>镜头设计_v3/styleframes/art/fusion/w3/W3_K_4k60_1.mp4</code></td>
-<td>认可旧版</td>
+<td>09:24.75</td>
+<td><code>导演检查_20261123/24_W3_加工.mp4</code></td>
+<td>新</td>
 <td>900</td>
 <td>900</td>
 <td>+0</td>
-<td></td>
+<td>头 17 帧叠接点擦除层（退场半段）；尾 17 帧叠接点擦除层（入场半段）</td>
 </tr>
 <tr>
 <td>39</td>
 <td>4-10</td>
 <td>B</td>
-<td>09:49.35</td>
-<td><code>导演检查_20261121/14_B档_4-10.mp4</code></td>
-<td>B 初版</td>
-<td>1396</td>
+<td>09:39.75</td>
+<td><code>导演检查_20261123/14_B档_4-10.mp4</code></td>
+<td>B 模板重渲</td>
 <td>1373</td>
-<td>+23</td>
+<td>1373</td>
+<td>+0</td>
 <td></td>
 </tr>
 <tr>
 <td>40</td>
 <td>4-11+4-12</td>
 <td>A</td>
-<td>10:12.62</td>
+<td>10:02.63</td>
 <td><code>导演检查_20261123/15_出镜3D_4-11_4-12.mp4</code></td>
 <td>新</td>
 <td>640</td>
@@ -508,129 +508,129 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>41</td>
 <td>5-01</td>
 <td>B</td>
-<td>10:23.28</td>
-<td><code>导演检查_20261120/14_B档_5-01.mp4</code></td>
-<td>B 初版</td>
-<td>1182</td>
+<td>10:13.30</td>
+<td><code>导演检查_20261123/14_B档_5-01.mp4</code></td>
+<td>B 模板重渲</td>
 <td>1139</td>
-<td>+43</td>
+<td>1139</td>
+<td>+0</td>
 <td></td>
 </tr>
 <tr>
 <td>42</td>
 <td>5-02</td>
 <td>A</td>
-<td>10:42.98</td>
-<td><code>镜头设计_v3/映射/_cache/pages/OnCam502.mp4</code></td>
-<td>v9</td>
-<td>385</td>
+<td>10:32.28</td>
+<td><code>导演检查_20261123/15_出镜3D_5-02.mp4</code></td>
+<td>新</td>
 <td>416</td>
-<td>-31</td>
+<td>416</td>
+<td>+0</td>
 <td></td>
 </tr>
 <tr>
 <td>43</td>
 <td>5-03</td>
 <td>B</td>
-<td>10:49.40</td>
-<td><code>导演检查_20261120/14_B档_5-03.mp4</code></td>
-<td>B 初版</td>
-<td>1015</td>
+<td>10:39.22</td>
+<td><code>导演检查_20261123/14_B档_5-03.mp4</code></td>
+<td>B 模板重渲</td>
+<td>996</td>
 <td>997</td>
-<td>+18</td>
-<td></td>
+<td>-1</td>
+<td>亮度系数：52 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.960–0.998</td>
 </tr>
 <tr>
 <td>44</td>
 <td>5-04</td>
 <td>A</td>
-<td>11:06.32</td>
-<td><code>导演检查_20261121/16_钻取_5-04.mp4</code></td>
+<td>10:55.82</td>
+<td><code>导演检查_20261123/16_钻取_5-04.mp4</code></td>
 <td>新</td>
-<td>1420</td>
-<td>1474</td>
-<td>-54</td>
+<td>1510</td>
+<td>1510</td>
+<td>+0</td>
 <td></td>
 </tr>
 <tr>
 <td>45</td>
 <td>5-05+5-06</td>
 <td>A</td>
-<td>11:29.98</td>
-<td><code>导演检查_20261121/15_出镜3D_5-05_5-06.mp4</code></td>
+<td>11:20.98</td>
+<td><code>导演检查_20261123/15_出镜3D_5-05_5-06.mp4</code></td>
 <td>新</td>
-<td>511</td>
 <td>512</td>
-<td>-1</td>
-<td></td>
+<td>512</td>
+<td>+0</td>
+<td>亮度系数：8 帧不是 1（接点匹配 + 出镜段首尾下限），范围 1.014–1.168</td>
 </tr>
 <tr>
 <td>46</td>
 <td>5-07</td>
 <td>B</td>
-<td>11:38.50</td>
-<td><code>导演检查_20261121/14_B档_5-07.mp4</code></td>
-<td>B 初版</td>
-<td>1279</td>
+<td>11:29.52</td>
+<td><code>导演检查_20261123/14_B档_5-07.mp4</code></td>
+<td>B 模板重渲</td>
+<td>1228</td>
 <td>1229</td>
-<td>+50</td>
+<td>-1</td>
 <td></td>
 </tr>
 <tr>
 <td>47</td>
 <td>5-08</td>
 <td>B</td>
-<td>11:59.82</td>
-<td><code>导演检查_20261120/14_B档_5-08.mp4</code></td>
-<td>B 初版</td>
-<td>1102</td>
+<td>11:49.98</td>
+<td><code>导演检查_20261123/14_B档_5-08.mp4</code></td>
+<td>B 模板重渲</td>
 <td>1085</td>
-<td>+17</td>
+<td>1085</td>
+<td>+0</td>
 <td></td>
 </tr>
 <tr>
 <td>48</td>
 <td>5-09</td>
 <td>A</td>
-<td>12:18.18</td>
-<td><code>导演检查_20261121/15_出镜3D_5-09.mp4</code></td>
+<td>12:08.07</td>
+<td><code>导演检查_20261123/15_出镜3D_5-09.mp4</code></td>
 <td>新</td>
 <td>216</td>
 <td>216</td>
 <td>+0</td>
-<td></td>
+<td>亮度系数：31 帧不是 1（接点匹配 + 出镜段首尾下限），范围 1.003–1.247</td>
 </tr>
 <tr>
 <td>49</td>
 <td>W4</td>
 <td>A</td>
-<td>12:21.78</td>
+<td>12:11.67</td>
 <td><code>导演检查_20261121/16_钻取_W4.mp4</code></td>
 <td>新</td>
 <td>472</td>
 <td>472</td>
 <td>+0</td>
-<td></td>
+<td>尾 17 帧叠接点擦除层（入场半段）；亮度系数：47 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.870–0.995</td>
 </tr>
 <tr>
 <td>50</td>
 <td>5-10</td>
 <td>B</td>
-<td>12:29.65</td>
-<td><code>导演检查_20261120/14_B档_5-10.mp4</code></td>
-<td>B 初版</td>
-<td>1746</td>
+<td>12:19.53</td>
+<td><code>导演检查_20261123/14_B档_5-10.mp4</code></td>
+<td>B 模板重渲</td>
 <td>1652</td>
-<td>+94</td>
+<td>1652</td>
+<td>+0</td>
 <td></td>
 </tr>
 <tr>
 <td>51</td>
 <td>6-01</td>
 <td>B</td>
-<td>12:58.75</td>
-<td><code>导演检查_20261121/14_B档_6-01.mp4</code></td>
-<td>B 初版</td>
+<td>12:47.07</td>
+<td><code>导演检查_20261123/14_B档_6-01.mp4</code></td>
+<td>B 模板重渲</td>
 <td>436</td>
 <td>436</td>
 <td>+0</td>
@@ -640,7 +640,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>52</td>
 <td>6-02</td>
 <td>B</td>
-<td>13:06.02</td>
+<td>12:54.33</td>
 <td><code>导演检查_20261123/14_B档_6-02.mp4</code></td>
 <td>B 模板重渲</td>
 <td>755</td>
@@ -652,9 +652,9 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>53</td>
 <td>6-03</td>
 <td>B</td>
-<td>13:18.60</td>
-<td><code>导演检查_20261121/14_B档_6-03.mp4</code></td>
-<td>B 初版</td>
+<td>13:06.92</td>
+<td><code>导演检查_20261123/14_B档_6-03_r3.mp4</code></td>
+<td>B 模板重渲</td>
 <td>895</td>
 <td>896</td>
 <td>-1</td>
@@ -664,21 +664,21 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>54</td>
 <td>6-04+6-05</td>
 <td>A</td>
-<td>13:33.52</td>
-<td><code>镜头设计_v3/映射/_cache/pages/OnCam604.mp4</code></td>
-<td>v9</td>
-<td>548</td>
+<td>13:21.83</td>
+<td><code>导演检查_20261123/15_出镜3D_6-04_6-05.mp4</code></td>
+<td>新</td>
 <td>568</td>
-<td>-20</td>
+<td>568</td>
+<td>+0</td>
 <td></td>
 </tr>
 <tr>
 <td>55</td>
 <td>6-06</td>
 <td>B</td>
-<td>13:42.65</td>
-<td><code>导演检查_20261121/14_B档_6-06.mp4</code></td>
-<td>B 初版</td>
+<td>13:31.30</td>
+<td><code>导演检查_20261123/14_B档_6-06.mp4</code></td>
+<td>B 模板重渲</td>
 <td>694</td>
 <td>694</td>
 <td>+0</td>
@@ -688,9 +688,9 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>56</td>
 <td>6-07</td>
 <td>B</td>
-<td>13:54.22</td>
-<td><code>导演检查_20261121/14_B档_6-07.mp4</code></td>
-<td>B 初版</td>
+<td>13:42.87</td>
+<td><code>导演检查_20261123/14_B档_6-07.mp4</code></td>
+<td>B 模板重渲</td>
 <td>786</td>
 <td>786</td>
 <td>+0</td>
@@ -700,19 +700,19 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>57</td>
 <td>6-08</td>
 <td>B</td>
-<td>14:07.32</td>
-<td><code>导演检查_20261121/14_B档_6-08.mp4</code></td>
-<td>B 初版</td>
-<td>760</td>
+<td>13:55.97</td>
+<td><code>导演检查_20261123/14_B档_6-08.mp4</code></td>
+<td>B 模板重渲</td>
 <td>746</td>
-<td>+14</td>
+<td>746</td>
+<td>+0</td>
 <td></td>
 </tr>
 <tr>
 <td>58</td>
 <td>6-09</td>
 <td>B</td>
-<td>14:19.98</td>
+<td>14:08.40</td>
 <td><code>导演检查_20261123/14_B档_6-09.mp4</code></td>
 <td>B 模板重渲</td>
 <td>670</td>
@@ -724,7 +724,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>59</td>
 <td>6-10</td>
 <td>B→A</td>
-<td>14:31.15</td>
+<td>14:19.57</td>
 <td><code>导演检查_20261123/14_B档_6-10.mp4</code></td>
 <td>简版</td>
 <td>922</td>
@@ -736,7 +736,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>60</td>
 <td>6-11</td>
 <td>B→A</td>
-<td>14:46.52</td>
+<td>14:34.93</td>
 <td><code>导演检查_20261123/14_B档_6-11.mp4</code></td>
 <td>简版</td>
 <td>1494</td>
@@ -748,121 +748,133 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>61</td>
 <td>6-12</td>
 <td>A</td>
-<td>15:11.42</td>
-<td><code>镜头设计_v3/映射/_cache/pages/OnCam612.mp4</code></td>
-<td>v9</td>
-<td>426</td>
+<td>14:59.83</td>
+<td><code>导演检查_20261123/15_出镜3D_6-12.mp4</code></td>
+<td>新</td>
 <td>470</td>
-<td>-44</td>
+<td>470</td>
+<td>+0</td>
 <td></td>
 </tr>
 <tr>
 <td>62</td>
 <td>7-01</td>
 <td>A</td>
-<td>15:18.52</td>
+<td>15:07.67</td>
 <td><code>导演检查_20261123/15_出镜3D_7-01.mp4</code></td>
 <td>新</td>
 <td>320</td>
 <td>320</td>
 <td>+0</td>
-<td></td>
+<td>头 16 帧章首 T6 光扫</td>
 </tr>
 <tr>
 <td>63</td>
 <td>7-02</td>
 <td>B</td>
-<td>15:23.85</td>
-<td><code>导演检查_20261121/14_B档_7-02.mp4</code></td>
-<td>B 初版</td>
-<td>1086</td>
+<td>15:13.00</td>
+<td><code>导演检查_20261123/14_B档_7-02.mp4</code></td>
+<td>B 模板重渲</td>
 <td>1069</td>
-<td>+17</td>
+<td>1069</td>
+<td>+0</td>
 <td></td>
 </tr>
 <tr>
 <td>64</td>
 <td>7-03</td>
 <td>B</td>
-<td>15:41.95</td>
-<td><code>导演检查_20261121/14_B档_7-03.mp4</code></td>
-<td>B 初版</td>
+<td>15:30.82</td>
+<td><code>导演检查_20261123/14_B档_7-03.mp4</code></td>
+<td>B 模板重渲</td>
 <td>691</td>
 <td>692</td>
 <td>-1</td>
-<td></td>
+<td>亮度系数：43 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.953–0.998</td>
 </tr>
 <tr>
 <td>65</td>
 <td>7-04</td>
 <td>B</td>
-<td>15:53.47</td>
-<td><code>导演检查_20261121/14_B档_7-04.mp4</code></td>
-<td>B 初版</td>
-<td>792</td>
+<td>15:42.33</td>
+<td><code>导演检查_20261123/14_B档_7-04.mp4</code></td>
+<td>B 模板重渲</td>
 <td>778</td>
-<td>+14</td>
+<td>778</td>
+<td>+0</td>
 <td></td>
 </tr>
 <tr>
 <td>66</td>
 <td>8-01</td>
 <td>A</td>
-<td>16:06.67</td>
+<td>15:55.30</td>
 <td><code>导演检查_20261123/15_出镜3D_8-01.mp4</code></td>
 <td>新</td>
 <td>194</td>
 <td>194</td>
 <td>+0</td>
-<td></td>
+<td>头 16 帧章首 T6 光扫</td>
 </tr>
 <tr>
 <td>67</td>
 <td>8-02</td>
 <td>B</td>
-<td>16:09.90</td>
-<td><code>导演检查_20261121/14_B档_8-02.mp4</code></td>
-<td>B 初版</td>
-<td>1378</td>
+<td>15:58.53</td>
+<td><code>导演检查_20261123/14_B档_8-02.mp4</code></td>
+<td>B 模板重渲</td>
 <td>1338</td>
-<td>+40</td>
+<td>1338</td>
+<td>+0</td>
 <td></td>
 </tr>
 <tr>
 <td>68</td>
 <td>8-03</td>
 <td>B</td>
-<td>16:32.87</td>
-<td><code>导演检查_20261120/14_B档_8-03.mp4</code></td>
-<td>B 初版</td>
-<td>1116</td>
+<td>16:20.83</td>
+<td><code>导演检查_20261123/14_B档_8-03.mp4</code></td>
+<td>B 模板重渲</td>
 <td>1070</td>
-<td>+46</td>
+<td>1070</td>
+<td>+0</td>
 <td></td>
 </tr>
 <tr>
 <td>69</td>
 <td>8-04–07</td>
 <td>A</td>
-<td>16:51.47</td>
-<td><code>镜头设计_v3/映射/_cache/pages/OnCam804.mp4</code></td>
-<td>v9</td>
-<td>1938</td>
+<td>16:38.67</td>
+<td><code>导演检查_20261123/15_出镜3D_8-04_8-07.mp4</code></td>
+<td>简版</td>
 <td>1960</td>
-<td>-22</td>
+<td>1960</td>
+<td>+0</td>
 <td></td>
 </tr>
 <tr>
 <td>70</td>
 <td>W5</td>
 <td>A</td>
-<td>17:23.77</td>
-<td><code>导演检查_20261120/08_W5_零件碰撞背景.mp4</code></td>
-<td>认可旧版</td>
+<td>17:11.33</td>
+<td><code>导演检查_20261123/22_W5_片尾字幕.mp4</code></td>
+<td>新</td>
+<td>1857</td>
 <td>1980</td>
-<td>1980</td>
-<td>+0</td>
-<td>现成版：背景 30 帧/秒、没有音轨</td>
+<td>-123</td>
+<td>头 17 帧叠接点擦除层（退场半段）；亮度系数：52 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.925–0.997；11-23 片尾滚动字幕（审查批 1 rc02 ②：不再用 11-20 的无字幕背景）</td>
+</tr>
+<tr>
+<td>71</td>
+<td>EGG</td>
+<td>—</td>
+<td>17:42.28</td>
+<td><code>导演检查_20261123/20_片尾彩蛋.mp4</code></td>
+<td>新</td>
+<td>7138</td>
+<td>6780</td>
+<td>+358</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -871,6 +883,6 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <li>选文件：<code>粗剪/v10/sources_v10.json</code> 每段的候选按先后取第一个存在、读得出、不在 <code>粗剪/v10/blocklist.txt</code> 里的。没过验收的片，把文件名写进 blocklist.txt 再拼一次。</li>
 <li>段长用成片自己的帧数，不拉伸、不冻末帧；30 fps 的源（W5 现成版）按时长换算成 60 fps（复帧）。</li>
 <li>W0、W1 用渲染帧接：W1 三维尾 120 帧盖在 1-11 最后 120 帧上、三维头 120 帧盖在 2-01 头 120 帧上，各一道 14 帧 T6 光扫；W0 的擦除层叠在 1-01 头 16 帧。W1 的歌在 1-11 尾巴下面的淡入这一版没有（W0、W1 的声音按段截自 09_片头W0_大标题W1.mp4），整片混音出来后用 <code>--mix</code> 换掉。</li>
-<li>接点一律硬切；装配叠层、章首光扫和接点机检 K1–K7 由 17 的 T2b 加。</li>
+<li>接点：19 的 6.3 的装配叠层和四处章首 T6 光扫由拼片叠（build_v10.ASM、SWEEP_ON，逐接点做了什么写在 manifest 的 asm_in/asm_out）；其余接点两段自己带转场。接点机检 K1–K7：<code>粗剪/_check/check_joints_v10.py</code>。</li>
 <li>W2 取英文押韵字幕版前 1500 帧，没加 ROUGH CUT 角标；W3 4K 版 lanczos 缩到 1080p 取前 900 帧。</li>
 </ul>

@@ -61,13 +61,16 @@ SR = 48000
 LIMIT_F = 71700                       # 19 的 7.3：≤ 19:55.0
 MIN_F = 54000                         # ≥ 15:00
 CPU_ENC = os.environ.get("CDK20_CPU_ENC") == "1"   # 显卡不可用时用 CPU 编码（libx264）；缓存键带编码器，两种版本不混用
-PIPE_VER = "v10.1" + ("+x264" if CPU_ENC else "")   # 转码做法变了就改这个，缓存全部重转
+GPU_DEC = os.environ.get("CDK20_GPU_DEC") == "1" and not CPU_ENC   # 显卡解码+缩放（只管 piece_plain 的 源→1080p60；gpu_decode_patch.md）；关时行为和以前完全一样
+PIPE_VER = "v10.1" + ("+x264" if CPU_ENC else "") + ("+gpudec" if GPU_DEC else "")   # 转码做法变了就改这个，缓存全部重转
 _ENC = (["-c:v", "libx264", "-preset", "fast", "-crf", "18", "-pix_fmt", "yuv420p"] if CPU_ENC else
         ["-c:v", "h264_nvenc", "-preset", "p5", "-rc", "vbr", "-cq", "19", "-b:v", "0", "-pix_fmt", "yuv420p"])
 NV = _ENC + ["-r", str(FPS),
       "-g", "120", "-bf", "0", "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709",
       "-video_track_timescale", "60000"]
 VF = f"scale=1920:1080:flags=lanczos:out_range=tv,format=yuv420p,setsar=1"
+VF_G = "fps=60,scale_cuda=1920:1080:interp_algo=lanczos:format=yuv420p,setsar=1"      # 显卡版（含 fps=60，不要再加前缀）
+NV_G = [x for i, x in enumerate(NV) if x != "-pix_fmt" and NV[i - 1] != "-pix_fmt"]   # 显卡帧后面不能再带 -pix_fmt（会插 CPU 转换而报 Function not implemented）
 WORKERS = 2                           # CPU、内存紧：同时最多转两段
 
 # 19 的 6.3 接点代号（joints_v10.json 没有时用；Jk 是第 k 段左边的接点，J00 = 文件头）
@@ -307,6 +310,10 @@ def resolve(entry, block):
         p = Path(c["path"])
         if not p.is_absolute():
             p = ROOT / p
+        if not p.exists() and "导演检查_20261123" in p.as_posix():     # 别的队列正在重渲这一页时原名文件会暂时不在（先挪成 _rN）：用最近的 _rN，不退到更旧的候选（11-23 rc06）
+            rn = sorted(p.parent.glob(p.stem + "_r[0-9]*.mp4"), key=lambda q: q.stat().st_mtime)
+            if rn:
+                p = rn[-1]
         if not p.exists():
             continue
         if blocked(p, block):
@@ -368,6 +375,12 @@ def tail_black_frames(src, nf, fps):
     return 0
 
 
+def gpu_ok(src):
+    """显卡解码只接 8-bit 4:2:0 的 H.264 / HEVC；别的（ProRes、10-bit、PNG 序列）回 CPU。"""
+    r = run([FP, "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=codec_name,pix_fmt", "-of", "csv=p=0", src])
+    return r.returncode == 0 and r.stdout.strip() in ("h264,yuv420p", "hevc,yuv420p")
+
+
 def piece_plain(g, src, pr, entry):
     """普通段：源 → 1080p60。返回 piece 字典。"""
     lim = entry.get("max_frames")
@@ -383,7 +396,13 @@ def piece_plain(g, src, pr, entry):
     vp, ap, mp = PIECES / f"{g}_{key}.mp4", PIECES / f"{g}_{key}.wav", PIECES / f"{g}_{key}.json"
     if not (vp.exists() and ap.exists() and mp.exists()):
         tmpv = vp.with_name(vp.stem + "_tmp.mp4")
-        ff("-i", src, "-vf", f"fps={FPS},{VF}", "-frames:v", n, *NV, "-an", tmpv)
+        if GPU_DEC and gpu_ok(src):
+            try:
+                ff("-hwaccel", "cuda", "-hwaccel_output_format", "cuda", "-i", src, "-vf", VF_G, "-frames:v", n, *NV_G, "-an", tmpv)
+            except RuntimeError:                                   # 显卡失败就退回 CPU 做法
+                ff("-i", src, "-vf", f"fps={FPS},{VF}", "-frames:v", n, *NV, "-an", tmpv)
+        else:
+            ff("-i", src, "-vf", f"fps={FPS},{VF}", "-frames:v", n, *NV, "-an", tmpv)
         os.replace(tmpv, vp)
         audio_from(src, 0.0, n / FPS, ap, pr["audio"])
         got = probe(vp)["nf"]
@@ -568,6 +587,214 @@ def piece_neighbor(g, src, pr, entry, mode):
     return dict(v=vp, a=ap, meta=m, note=note)
 
 
+# ---------------------------------------------------------------- 接点亮度匹配（11-23 rc06，K1）
+
+
+def k1_window(code):
+    """和 _check/check_joints_v10.window_for 同口径 → (w0, w1, 限)：K1 量 [c+w0−12, c+w0) 和 [c+w1, c+w1+12) 两个 12 帧窗口的平均亮度差。"""
+    c = code or ""
+    if "T5" in c:
+        return -17, 17, 0.15
+    if "T2" in c:
+        return -8, 8, 0.15
+    if "T1" in c:
+        return -12, 12, 0.15
+    if c.strip() == "T6":
+        return 0, 16, 0.15
+    if "T3" in c or "one-take" in c:
+        if "T6" in c and "one-take" not in c:
+            return 0, 16, 0.15
+        return 0, 0, 0.10
+    return 0, 0, 0.10
+
+
+LUMA_RAMP = 24          # 亮度系数回到 1.0 的帧数
+LUMA_MARGIN = 0.025     # 目标差 = 限 − 这个值（0.15 → 0.125）
+
+
+def luma_mean(vp, f0, n):
+    """段文件第 f0 帧起 n 帧的平均亮度（BT.709，0–1；480×270 area 缩放，和接点机检同口径）。"""
+    np, _ = _np()
+    cmd = [FF, "-v", "error", "-ss", f"{f0 / FPS:.6f}", "-i", str(vp), "-frames:v", str(n), "-vf", "scale=480:270:flags=area",
+           "-f", "rawvideo", "-pix_fmt", "rgb24", "-"]
+    b = subprocess.run(cmd, capture_output=True).stdout
+    k = len(b) // (480 * 270 * 3)
+    if not k:
+        return None
+    f = np.frombuffer(b[:k * 480 * 270 * 3], np.uint8).reshape(k, 270, 480, 3).astype(np.float32) / 255.0
+    y = f[..., 0] * 0.2126 + f[..., 1] * 0.7152 + f[..., 2] * 0.0722
+    return float(y.reshape(k, -1).mean(axis=1).mean())
+
+
+def luma_series(vp, f0, n):
+    """段文件第 f0 帧起 n 帧，逐帧平均亮度（同 luma_mean 口径）。"""
+    np, _ = _np()
+    cmd = [FF, "-v", "error", "-ss", f"{f0 / FPS:.6f}", "-i", str(vp), "-frames:v", str(n), "-vf", "scale=480:270:flags=area",
+           "-f", "rawvideo", "-pix_fmt", "rgb24", "-"]
+    b = subprocess.run(cmd, capture_output=True).stdout
+    k = len(b) // (480 * 270 * 3)
+    if not k:
+        return np.zeros(0, np.float32)
+    f = np.frombuffer(b[:k * 480 * 270 * 3], np.uint8).reshape(k, 270, 480, 3).astype(np.float32) / 255.0
+    return (f[..., 0] * 0.2126 + f[..., 1] * 0.7152 + f[..., 2] * 0.0722).reshape(k, -1).mean(axis=1)
+
+
+FLOOR_Y = 0.48          # 三维出镜段段首 16 帧、段尾 15 帧每帧平均亮度的下限（机检 M14 要 ≥ 0.45；重编码、重缩放会掉 0.01 左右，留 0.03）
+FLOOR_CAP = 1.30        # 单帧最多乘这么多
+FLOOR_TAPER = 4         # 窗口外再各 4 帧线性回 1.0
+
+
+DARK_Y = 0.36           # 接点 ±1 s 内 K2 要每帧 ≥ 0.35：被调暗的帧乘完不许低于这个（原来就更暗的帧不动）
+
+
+def guard_gains(row, g):
+    """接点亮度匹配把较亮一侧调暗以后，段头/段尾原本就偏暗的几帧（如擦除层深色料杆格）不能被压到 K2 的 0.35 线下：这些帧的系数提回 min(1, DARK_Y / 原亮度)。"""
+    np, _ = _np()
+    if g is None:
+        return None
+    idx = np.where(g < 0.9999)[0]
+    if not len(idx):
+        return g
+    pc = row["piece"]
+    out = g.copy()
+    # 连续成片的区间各量一次
+    runs, a = [], int(idx[0])
+    for u, v in zip(idx[:-1], idx[1:]):
+        if v - u > 1:
+            runs.append((a, int(u)))
+            a = int(v)
+    runs.append((a, int(idx[-1])))
+    fixed = 0
+    for lo, hi in runs:
+        y = luma_series(pc["v"], lo, hi - lo + 1)
+        for j, v in enumerate(y):
+            i = lo + j
+            if v * g[i] < DARK_Y and v > 1e-3:
+                out[i] = max(g[i], min(1.0, DARK_Y / float(v)))
+                fixed += 1
+    if fixed:
+        print(f"暗帧保护 {row['group']}：{fixed} 帧系数提回（乘完不低于 {DARK_Y}）", flush=True)
+    return out
+
+
+def floor_gains(row, g):
+    """三维出镜段（新做的 出镜3D）段首 16 帧、段尾 15 帧里低于 FLOOR_Y 的帧提到 FLOOR_Y（只乘亮度，最多 ×1.3，窗外各 4 帧线性收回）；
+    g = 接点亮度匹配已有的系数（可为 None）。返回新的系数序列，没有要提的返回原样。"""
+    np, _ = _np()
+    if row["kind"] != "ON-CAM" or row["state"] != "新" or "出镜3D" not in rel(row["src"]):
+        return g
+    pc = row["piece"]
+    n = pc["meta"]["frames"]
+    base = np.ones(n, np.float32) if g is None else g.copy()
+    out = base.copy()
+    hit = []
+    for lo, hi in ((0, 16), (n - 15, n)):
+        y = luma_series(pc["v"], lo, hi - lo)
+        for j, v in enumerate(y):
+            i = lo + j
+            yy = float(v) * float(base[i])
+            if yy < FLOOR_Y:
+                out[i] = base[i] * min(FLOOR_CAP, FLOOR_Y / max(yy, 1e-3))
+                hit.append(i)
+    if not hit:
+        return g
+    for i in hit:                                                   # 窗外各 4 帧线性收回
+        for d in range(1, FLOOR_TAPER + 1):
+            for j in (i - d, i + d):
+                if 0 <= j < n and (j < 0 or j not in hit):
+                    t = 1.0 - d / (FLOOR_TAPER + 1)
+                    cand = base[j] * (1.0 + (out[i] / base[i] - 1.0) * t)
+                    if cand > out[j]:
+                        out[j] = cand
+    print(f"出镜亮度下限 {row['group']}：{len(hit)} 帧提到 {FLOOR_Y}（最大 ×{max(out[i] / base[i] for i in hit):.3f}）", flush=True)
+    return out
+
+
+def calibrate_luma(rows, joints):
+    """量每个接点两侧（已叠好擦除层的段文件）K1 窗口的平均亮度；差超限的，把较亮一侧乘 luma_k（目标差 = 限 − 0.025），
+    结果写进 joints 的 luma_k / luma_side / luma_meas（原来的这三个字段先清掉）。返回有变动的接点 id 列表。"""
+    for r in joints.values():
+        for f in ("luma_k", "luma_side", "luma_meas"):
+            r.pop(f, None)
+    changed = []
+    for k in range(1, len(rows)):
+        jid = f"J{k:02d}"
+        jr = joints.get(jid)
+        if not jr or rows[k]["group"] == "EGG":
+            continue
+        code = jr.get("code")
+        if not code or code == "black":
+            continue
+        L, R = rows[k - 1]["piece"], rows[k]["piece"]
+        nL, nR = L["meta"]["frames"], R["meta"]["frames"]
+        w0, w1, lim = k1_window(code)
+        if w0 == w1:
+            a = luma_mean(L["v"], nL - 6, 6)
+            b = luma_mean(R["v"], 0, 6)
+        else:
+            a = luma_mean(L["v"], nL + w0 - 12, 12)
+            b = luma_mean(R["v"], w1, 12)
+        if a is None or b is None:
+            continue
+        d = abs(a - b)
+        meas = dict(before=round(a, 3), after=round(b, 3), diff=round(d, 3), lim=lim)
+        if d <= lim:
+            continue
+        hi, lo = max(a, b), min(a, b)
+        kk = (lo + lim - LUMA_MARGIN) / hi
+        jr["luma_k"] = round(kk, 3)
+        jr["luma_side"] = "left" if a > b else "right"
+        jr["luma_meas"] = meas
+        changed.append(jid)
+        print(f"{jid} {rows[k - 1]['group']}→{rows[k]['group']} {code} 前 {a:.3f} 后 {b:.3f} 差 {d:.3f} > {lim}：{jr['luma_side']} 乘 {kk:.3f}", flush=True)
+    return changed
+
+
+def luma_gains(k, row, rows, joints):
+    """第 k 段（0 起）要乘的逐帧亮度系数（长度 = 段帧数）；没有要调的返回 None。
+    左接点 J<k>（本段在右侧）、右接点 J<k+1>（本段在左侧）各一条：较亮一侧从接点起、到 K1 窗口外沿再多 12 帧内保持 luma_k，之后 24 帧线性回到 1.0。"""
+    np, _ = _np()
+    n = row["piece"]["meta"]["frames"]
+    g = None
+    jl, jr = joints.get(f"J{k:02d}"), joints.get(f"J{k + 1:02d}")
+    if jl and jl.get("luma_k") and jl.get("luma_side") == "right" and k > 0:
+        w0, w1, _l = k1_window(jl.get("code"))
+        kk, E = jl["luma_k"], max(w1 + 12, 12)
+        h = np.ones(n, np.float32)
+        for i in range(min(n, E + LUMA_RAMP)):
+            h[i] = kk if i < E else kk + (1.0 - kk) * (i - E + 1) / LUMA_RAMP
+        g = h
+    if jr and jr.get("luma_k") and jr.get("luma_side") == "left" and k + 1 < len(rows):
+        w0, w1, _l = k1_window(jr.get("code"))
+        kk, S = jr["luma_k"], n + min(w0, 0) - 12 if w0 != w1 else n - 12
+        S = min(S, n - 12)
+        h = np.ones(n, np.float32)
+        for i in range(max(0, S - LUMA_RAMP), n):
+            h[i] = kk if i >= S else kk + (1.0 - kk) * (S - i) / LUMA_RAMP
+        g = h if g is None else g * h
+    return g
+
+
+def piece_luma(g, pc, gains):
+    """逐帧乘亮度系数（RGB 三通道同乘 = 只调亮度，不动色相饱和），重新转码；缓存按系数序列。"""
+    np, _ = _np()
+    n = pc["meta"]["frames"]
+    tag = hashlib.sha1(np.round(gains, 4).tobytes()).hexdigest()[:8]
+    key = sig(pc["v"], extra=f"luma|{tag}")
+    vp, mp = PIECES / f"{g}_lm_{key}.mp4", PIECES / f"{g}_lm_{key}.json"
+    if not (vp.exists() and mp.exists()):
+        def gen():
+            for i, fr in enumerate(decode(pc["v"], n)):
+                if abs(float(gains[i]) - 1.0) > 1e-4:
+                    fr = (fr.astype(np.float32) * float(gains[i])).clip(0, 255).round().astype(np.uint8)
+                yield fr
+        encode_frames(gen(), vp)
+        finish(vp, pc["a"], mp, n, dict(src=pc["meta"].get("src"), base=Path(pc["v"]).name))
+    lo = [float(x) for x in gains if abs(float(x) - 1.0) > 1e-4]
+    return dict(v=vp, a=pc["a"], meta=json.loads(mp.read_text(encoding="utf-8")),
+                note=list(pc["note"]) + [f"亮度系数：{len(lo)} 帧不是 1（接点匹配 + 出镜段首尾下限），范围 {min(lo):.3f}–{max(lo):.3f}"])
+
+
 # ---------------------------------------------------------------- 主体
 
 
@@ -604,6 +831,9 @@ def main():
     ap_.add_argument("--final", action="store_true")
     ap_.add_argument("--mix", help="整片混音 wav（mix_v10.py 出）")
     ap_.add_argument("--dry", action="store_true")
+    ap_.add_argument("--calib-luma", action="store_true", help="重新量各接点两侧亮度、重算 luma_k 写回 joints_v10.json（量的是叠好擦除层的段文件）")
+    ap_.add_argument("--calib-only", action="store_true", help="只做 --calib-luma（量完写回 joints_v10.json 就退出，不拼）")
+    ap_.add_argument("--no-luma", action="store_true", help="不做接点亮度匹配（出和 rc05 同口径的片）")
     A = ap_.parse_args()
     t_start = time.time()
     PIECES.mkdir(parents=True, exist_ok=True)
@@ -708,6 +938,20 @@ def main():
                 pc = futs[id(r)].result()
                 r["piece"] = pc
                 print(f"{r['i']:3d} {r['name']:14} {r['state']:8} {pc['meta']['frames']:5d}/{r['want'] or 0:5d} {rel(r['src'])}", flush=True)
+        if joints and not A.no_luma:                                     # 接点亮度匹配（K1）：先（按需）量，再给较亮一侧乘 luma_k
+            if A.calib_luma or A.calib_only:
+                calibrate_luma(rows, joints)
+                jp = HERE / "joints_v10.json"
+                jp.write_text(json.dumps(list(joints.values()), ensure_ascii=False, indent=2).replace(chr(10), chr(13) + chr(10)) + chr(13) + chr(10), encoding="utf-8", newline="")
+            if A.calib_only:
+                print("CALIB 完成（--calib-only，不拼）", flush=True)
+                return
+            todo = [(k, r, floor_gains(r, guard_gains(r, luma_gains(k, r, rows, joints)))) for k, r in enumerate(rows) if r["group"] != "EGG"]
+            todo = [(k, r, gn) for k, r, gn in todo if gn is not None]
+            with ThreadPoolExecutor(WORKERS) as ex:
+                for (k, r, gn), pc in zip(todo, ex.map(lambda t: piece_luma(t[1]["group"].replace("+", "_"), t[1]["piece"], t[2]), todo)):
+                    r["piece"] = pc
+                    print(f"亮度匹配 {r['group']}：{pc['note'][-1]}", flush=True)
 
     # ---- 起点、清单
     t = 0

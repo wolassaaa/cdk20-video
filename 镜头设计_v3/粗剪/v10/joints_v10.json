@@ -29,7 +29,15 @@
       "W0（M）",
       "1-01（出）",
       "T5"
-    ]
+    ],
+    "luma_k": 0.949,
+    "luma_side": "left",
+    "luma_meas": {
+      "before": 0.816,
+      "after": 0.649,
+      "diff": 0.167,
+      "lim": 0.15
+    }
   },
   {
     "id": "J02",
@@ -46,7 +54,15 @@
       "1-02（C）",
       "T1 加 T5 oncam_1-01"
     ],
-    "wipe_fallback": "runner"
+    "wipe_fallback": "runner",
+    "luma_k": 0.811,
+    "luma_side": "right",
+    "luma_meas": {
+      "before": 0.565,
+      "after": 0.851,
+      "diff": 0.286,
+      "lim": 0.15
+    }
   },
   {
     "id": "J03",
@@ -63,7 +79,15 @@
       "1-03（出）",
       "T5 oncam_1-03"
     ],
-    "wipe_fallback": "runner"
+    "wipe_fallback": "runner",
+    "luma_k": 0.937,
+    "luma_side": "left",
+    "luma_meas": {
+      "before": 0.8,
+      "after": 0.624,
+      "diff": 0.176,
+      "lim": 0.15
+    }
   },
   {
     "id": "J04",
@@ -115,7 +139,15 @@
       "1-08（B）",
       "T1 加 T5 oncam_1-05_1-06_1-07"
     ],
-    "wipe_fallback": "runner"
+    "wipe_fallback": "runner",
+    "luma_k": 0.963,
+    "luma_side": "right",
+    "luma_meas": {
+      "before": 0.586,
+      "after": 0.738,
+      "diff": 0.153,
+      "lim": 0.15
+    }
   },
   {
     "id": "J07",
@@ -230,7 +262,15 @@
       "2-03（C）",
       "T5 key"
     ],
-    "alt": "2-02 重做以后：T1（金插头的柄面冲镜）加 oncam_2-02 的退场半段，叠在 2-03 头 17 帧"
+    "alt": "2-02 重做以后：T1（金插头的柄面冲镜）加 oncam_2-02 的退场半段，叠在 2-03 头 17 帧",
+    "luma_k": 0.905,
+    "luma_side": "right",
+    "luma_meas": {
+      "before": 0.61,
+      "after": 0.812,
+      "diff": 0.202,
+      "lim": 0.15
+    }
   },
   {
     "id": "J14",
@@ -247,7 +287,15 @@
       "2-04（出）",
       "T5 oncam_2-04"
     ],
-    "wipe_fallback": "runner"
+    "wipe_fallback": "runner",
+    "luma_k": 0.939,
+    "luma_side": "left",
+    "luma_meas": {
+      "before": 0.78,
+      "after": 0.607,
+      "diff": 0.173,
+      "lim": 0.15
+    }
   },
   {
     "id": "J15",
@@ -313,7 +361,15 @@
       "2-08（A；简版是 B）",
       "T5 runner"
     ],
-    "alt": "2-08 用简版长路页时：T2，两页各自写"
+    "alt": "2-08 用简版长路页时：T2，两页各自写",
+    "luma_k": 0.958,
+    "luma_side": "left",
+    "luma_meas": {
+      "before": 0.71,
+      "after": 0.554,
+      "diff": 0.155,
+      "lim": 0.15
+    }
   },
   {
     "id": "J19",
@@ -347,7 +403,15 @@
       "3-02（A）",
       "T1"
     ],
-    "alt": "3-02 留 v9 页面时：T5 key，装配叠"
+    "alt": "3-02 留 v9 页面时：T5 key，装配叠",
+    "luma_k": 0.948,
+    "luma_side": "left",
+    "luma_meas": {
+      "before": 0.643,
+      "after": 0.485,
+      "diff": 0.159,
+      "lim": 0.15
+    }
   },
   {
     "id": "J21",
@@ -479,7 +543,15 @@
       "3-09（出）",
       "W2（M）",
       "T1 加 T5 runner"
-    ]
+    ],
+    "luma_k": 0.679,
+    "luma_side": "right",
+    "luma_meas": {
+      "before": 0.449,
+      "after": 0.845,
+      "diff": 0.396,
+      "lim": 0.15
+    }
   },
   {
     "id": "J29",
@@ -561,7 +633,15 @@
       "4-06（B）",
       "T1 加 T5 oncam_4-04_4-05"
     ],
-    "wipe_fallback": "runner"
+    "wipe_fallback": "runner",
+    "luma_k": 0.938,
+    "luma_side": "right",
+    "luma_meas": {
+      "before": 0.553,
+      "after": 0.722,
+      "diff": 0.17,
+      "lim": 0.15
+    }
   },
   {
     "id": "J34",
@@ -712,7 +792,15 @@
       "5-03（B）",
       "T1 加 T5 oncam_5-02"
     ],
-    "wipe_fallback": "runner"
+    "wipe_fallback": "runner",
+    "luma_k": 0.96,
+    "luma_side": "right",
+    "luma_meas": {
+      "before": 0.561,
+      "after": 0.714,
+      "diff": 0.153,
+      "lim": 0.15
+    }
   },
   {
     "id": "J43",
@@ -810,7 +898,15 @@
       "5-09（出）",
       "W4（M）",
       "T1"
-    ]
+    ],
+    "luma_k": 0.87,
+    "luma_side": "right",
+    "luma_meas": {
+      "before": 0.441,
+      "after": 0.651,
+      "diff": 0.209,
+      "lim": 0.15
+    }
   },
   {
     "id": "J49",
@@ -1056,7 +1152,15 @@
       "7-02（B）",
       "7-03（B）",
       "T2"
-    ]
+    ],
+    "luma_k": 0.953,
+    "luma_side": "right",
+    "luma_meas": {
+      "before": 0.586,
+      "after": 0.746,
+      "diff": 0.16,
+      "lim": 0.15
+    }
   },
   {
     "id": "J64",
@@ -1155,7 +1259,15 @@
       "8-04–07（出）",
       "W5（M）",
       "T1 加 T5 白料牌"
-    ]
+    ],
+    "luma_k": 0.925,
+    "luma_side": "right",
+    "luma_meas": {
+      "before": 0.638,
+      "after": 0.825,
+      "diff": 0.187,
+      "lim": 0.15
+    }
   },
   {
     "id": "J70",
