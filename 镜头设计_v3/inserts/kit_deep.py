@@ -567,12 +567,12 @@ def _trolley_joint(P, s):
 
 def _plate(P, title, x, y, rot, bottom):
     K = P.K
-    o = P.slab(rrect(0,0,6,2.5,1),1,K.white,bevel=.2)
+    o = P.slab(rrect(0,0,10.2,4.25,1.7),1,K.white,bevel=.2)   # 11-24 Z11：牌 ×1.7
     o.name = P.nm("station_plate")
     o.location = _mm((x,y,bottom+.5))
     o.rotation_euler.z = math.radians(rot)
     o["station"] = title
-    text = _label(P,title,2.4,x,y,bottom+1,K.ink)
+    text = _label(P,title,4.1,x,y,bottom+1,K.ink)   # 11-24 Z11：字高 2.4 → 4.1
     # 用实字形高度（而非字体的软件字号）做 2.4 mm 测量。
     bpy.context.view_layer.update()
     dg = bpy.context.evaluated_depsgraph_get()
@@ -580,8 +580,8 @@ def _plate(P, title, x, y, rot, bottom):
     me = te.to_mesh()
     xs, ys = [[v.co[a] for v in me.vertices] for a in (0,1)]
     te.to_mesh_clear()
-    k = 2.4*MM/(max(ys)-min(ys))
-    text.scale.x = min(k, 10.8*MM/(max(xs)-min(xs)))
+    k = 4.1*MM/(max(ys)-min(ys))
+    text.scale.x = min(k, 18.4*MM/(max(xs)-min(xs)))
     text.scale.y = k
     text.rotation_euler.z = math.radians(rot)
     text["station_label"] = title
@@ -664,8 +664,8 @@ def h03_loop_track(K, lod="hero"):
     for x in (-23,23):
         for y in (-13,13):
             _screw(P,(x,y,2),(0,0,1),.55,K.gold_satin)
-    for cfg in (("Imagine",22.5,0,90,6.43),("Make",0,-12.5,0,13.04),
-                ("Test",-22.5,0,90,6.43),("Tweak",0,12.5,0,6.43)):
+    for cfg in (("Imagine",22.5,0,0,6.43),("Make",0,-12.5,0,13.04),
+                ("Test",-22.5,0,0,6.43),("Tweak",0,12.5,0,6.43)):   # 11-24 Z11：四块 rot 全 0，字朝镜头
         _plate(P,*cfg)
     # Imagine：键坯与凹槽保留明确的行程；Tip 朝向轨道切线。
     slot = P.box(23.25,6.7,1.65,3.05,1.45,K.white,z=2.725,r=.36,bevel=.2)
