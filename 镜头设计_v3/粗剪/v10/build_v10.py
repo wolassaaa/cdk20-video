@@ -60,8 +60,11 @@ W, H = 1920, 1080
 SR = 48000
 LIMIT_F = 71700                       # 19 的 7.3：≤ 19:55.0
 MIN_F = 54000                         # ≥ 15:00
-PIPE_VER = "v10.1"                    # 转码做法变了就改这个，缓存全部重转
-NV = ["-c:v", "h264_nvenc", "-preset", "p5", "-rc", "vbr", "-cq", "19", "-b:v", "0", "-pix_fmt", "yuv420p", "-r", str(FPS),
+CPU_ENC = os.environ.get("CDK20_CPU_ENC") == "1"   # 显卡不可用时用 CPU 编码（libx264）；缓存键带编码器，两种版本不混用
+PIPE_VER = "v10.1" + ("+x264" if CPU_ENC else "")   # 转码做法变了就改这个，缓存全部重转
+_ENC = (["-c:v", "libx264", "-preset", "fast", "-crf", "18", "-pix_fmt", "yuv420p"] if CPU_ENC else
+        ["-c:v", "h264_nvenc", "-preset", "p5", "-rc", "vbr", "-cq", "19", "-b:v", "0", "-pix_fmt", "yuv420p"])
+NV = _ENC + ["-r", str(FPS),
       "-g", "120", "-bf", "0", "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709",
       "-video_track_timescale", "60000"]
 VF = f"scale=1920:1080:flags=lanczos:out_range=tv,format=yuv420p,setsar=1"

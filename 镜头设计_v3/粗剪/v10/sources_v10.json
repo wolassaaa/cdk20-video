@@ -260,6 +260,10 @@
    "want_f": 666,
    "cands": [
     {
+     "path": "导演检查_20261123/15_出镜_2-02_简版.mp4",
+     "state": "简版"
+    },
+    {
      "path": "导演检查_20261123/15_出镜3D_2-02.mp4",
      "state": "新"
     },
@@ -610,6 +614,10 @@
    "want_f": 1500,
    "cands": [
     {
+     "path": "导演检查_20261123/24_W2_加工.mp4",
+     "state": "新"
+    },
+    {
      "path": "镜头设计_v3/styleframes/art/fusion/s4/W2_lyrics_en_1080_v1.mp4",
      "state": "认可旧版"
     }
@@ -790,6 +798,10 @@
    "tier": "A",
    "want_f": 900,
    "cands": [
+    {
+     "path": "导演检查_20261123/24_W3_加工.mp4",
+     "state": "新"
+    },
     {
      "path": "镜头设计_v3/styleframes/art/fusion/w3/W3_K_4k60_1.mp4",
      "state": "认可旧版"
