@@ -8,7 +8,7 @@ import React from "react";
 import {Composition, registerRoot, useCurrentFrame} from "remotion";
 import K from "./keys_5-08.json";
 import {Lens, Layer, guidePlan} from "../manual/kit.jsx";
-import {C, camBreath, Stage, Sprite, Slab, Gate, Runner, Label, Pen, Source, Counter, Engrave, Dial, Lamp, anchorOf, pathOf, evMapB, T5Out, whipX, impact} from "./bkit.jsx";
+import {C, Tag, camBreath, Stage, Sprite, Slab, Gate, Runner, Label, Pen, Source, Counter, Engrave, Dial, Lamp, anchorOf, pathOf, evMapB, T5Out, whipX, impact} from "./bkit.jsx";
 import {useGsapTimeline, idle, RULE} from "./gsapFrame.jsx";
 
 const E = evMapB(K);
@@ -25,11 +25,11 @@ const X = (v) => 360 + v * 132;                 // 0–10 µM → x 360–1680
 const tipDX = (n, w) => -anchorOf(`plug/${n}_34`, "tip", w)[0];
 const K48 = 9.2 / 15;                           // ≈ 0.6 µM（fifteen times tighter）
 // ---- 第二幕：十个小插座（5 × 2，右边），左边对数表盘
-const MW = 165;
-const GRID = [...Array(10)].map((_, i) => ({x: 1000 + (i % 5) * 185, y: 400 + Math.floor(i / 5) * 240}));
+const MW = 160;
+const GRID = [...Array(10)].map((_, i) => ({x: 1030 + (i % 5) * 170, y: 400 + Math.floor(i / 5) * 240}));
 const CLAMP = [1, 3, 5, 7, 9];
 // 剂量条：对数刻度 1 nM（x0）到 10,000 nM（x0 + SPAN）；上面一根 001，下面一根 048，左头各停一个插头
-const DOSE = {x0: 260, span: 600, y1: 470, y2: 640, h: 36};
+const DOSE = {x0: 400, span: 480, y1: 470, y2: 640, h: 36};
 const xv = (lg) => DOSE.x0 + (DOSE.span * Math.max(0, lg)) / 4;     // lg = log10(nM)
 const PARK1 = [DOSE.x0 - 110, DOSE.y1 + 12], PARK2 = [DOSE.x0 - 110, DOSE.y2 + 12];
 
@@ -92,7 +92,7 @@ const Scene = () => {
                   {isOne && S.k48 > 0 ? (
                     <>
                       <Sprite name="plug/blank_34" x={ROW_X(i)} y={y} w={PW} op={1 - S.k48} rot={id(10 + i).r} />
-                      <Sprite name="plug/048_34" x={ROW_X(i)} y={y} w={PW} op={S.k48} rot={id(10 + i).r} shadow={false} rim={S.k48 * (1 - S.grab)} />
+                      <Sprite name="plug/048_34" x={ROW_X(i)-174*(1-S.k48)} y={y-38*Math.sin(Math.PI*S.k48)} w={PW} op={S.k48>0?1:0} rot={id(10 + i).r} shadow={false} rim={S.k48 * (1 - S.grab)} />
                     </>
                   ) : (
                     <Sprite name={`plug/${n}_34`} x={ROW_X(i)} y={y} w={PW} op={Math.min(1, a * 1.6)} rot={id(10 + i).r} />
@@ -144,11 +144,13 @@ const Scene = () => {
             const a = S[`m${i}`];
             if (a <= 0.01) return null;
             const c = S[`c${i}`] || 0;
-            const y = g.y - 40 * (1 - Math.min(1, a)) + id(20 + i).y;
+            const touch = Math.max(0,1-Math.abs(f-E.nm.l-i*5)/18);
+            const y = g.y - 40 * (1 - Math.min(1, a)) + id(20 + i).y - (i<4?18*touch:0);
             return (
               <React.Fragment key={i}>
                 <Sprite name="mini/m34_on" x={g.x} y={y} w={MW} op={Math.min(1, a * 1.6) * (1 - c)} rot={id(20 + i).r} />
                 <Lamp name="mini/m34_on" x={g.x} y={y} w={MW} on={Math.min(1, a) * (1 - c) * (f > E.dial.s && f < E.clamp.l ? 0.78 + 0.22 * Math.sin((2 * Math.PI * (f + 9 * i)) / 40) : 1)} />
+                {i<4 && f>=E.nm.l+i*5 && c<.01 && <Sprite name="mini/m34_001" x={g.x} y={y} w={MW} op={Math.min(1,(f-E.nm.l-i*5)/12)} shadow={false}/>}
                 {c > 0 && <Sprite name="mini/m34_048clamp" x={g.x} y={y} w={MW} op={c} rot={id(20 + i).r} shadow={false} />}
               </React.Fragment>
             );
@@ -169,12 +171,15 @@ const Scene = () => {
               {/* 两根条：001 灰（要很多），048 蓝（一点就够） */}
               <Slab x={DOSE.x0} y={DOSE.y1} w={Math.max(4, xv(S.sw1 + (S.sw1J || 0) * 0.01) - DOSE.x0)} h={DOSE.h} r={12} color={C.grey} depth={7} sheen={S.sw1 > 0 && f < E.sweep.l + 10 ? (S.sw1 / 3.78) : -1} id="bar001" />
               {f >= E.sweep.l && <div style={{position: "absolute", left: xv(Math.log10(6000)) + 14, top: DOSE.y1 - 6, opacity: Math.min(1, (f - E.sweep.l) / 10)}}><Engrave size={52}>›</Engrave></div>}
-              {S.sw2 > 0.001 && <Slab x={DOSE.x0} y={DOSE.y2} w={Math.max(4, xv(S.sw2) - DOSE.x0)} h={DOSE.h} r={12} color={C.blue} depth={7} sheen={S.sw2 < Math.log10(33.4) ? S.sw2 / 1.52 : -1} id="bar048" />}
+              {S.sw2 > 0.001 && <Slab x={DOSE.x0} y={DOSE.y2} w={Math.max(4, xv(S.sw2) - DOSE.x0)} h={DOSE.h} r={12} color={C.gold} depth={7} sheen={S.sw2 < Math.log10(33.4) ? S.sw2 / 1.52 : -1} id="bar048" />}
             </div>
           )}
         </Layer>
 
         <Layer id="txt" exempt>
+          <Label text="001 · 9.2 µM" size={44} x={1574 + clearX} y={535} at={E.one.l + 10} out={E.clear.s} align="center" />
+          <Label text="048 · 566.7 nM" size={44} x={435 + clearX} y={535} at={E.grab.l} out={E.clear.s} align="center" />
+          {S.rail > 0.6 && <Tag x={1710 + clearX} y={RAIL_Y - 20} op={Math.min(1, (S.rail - 0.6) * 3)}>Kd</Tag>}
           <Label text="048" size={60} x={ROW_X(ONE)} y={186} at={E.k48.l} out={E.grab.l} align="center" />
           {S.n15 > 0.05 && S.clear < 1 && (
             <div style={{position: "absolute", left: 150 + clearX, top: RAIL_Y - 44}}>

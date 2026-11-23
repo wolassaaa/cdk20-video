@@ -20,12 +20,12 @@ const ZONE = 3;
 const backOut = gsap.parseEase(RULE.landEase);
 
 // ---- 样本盘：13 × 4 个孔，变蓝的 36 个按固定乱序
-const TRAY = {x: 640, y: 380, w: 700, h: 250};
-const WELL = 40, PITCH = 52;
+const TRAY = {x: 362, y: 353, w: 1100, h: 420};
+const WELL = 65, PITCH = 82;
 const ORDER = [...Array(52).keys()].sort((a, b) => ((a * 37) % 52) - ((b * 37) % 52));
 const RANK = Object.fromEntries(ORDER.map((d, k) => [d, k]));
 // ---- 两根条（肿瘤 / 旁边正常组织）
-const BAR = {base: 640, w: 110, xs: [1505, 1715], tall: 290, short: 120};
+const BAR = {base: 640, w: 110, xs: [1530, 1710], tall: 290, short: 120};
 // ---- 牌子
 const PLQ = [{x: 600, w: 410, text: "later-stage tumours"}, {x: 1050, w: 350, text: "shorter survival"}];
 const PLQ_Y = 724;
@@ -76,6 +76,7 @@ const Scene = () => {
   const hkX = mix(2300, 1250, S.hk) - 1300 * S.out1 * S.out1;
   const trayDX = (1 - S.tray) * 1300;
   const clearX = -2200 * S.clear * S.clear;
+  const trayGone = Math.max(0, Math.min(1, (f - E.high.s) / Math.max(1, E.high.l + 20 - E.high.s)));   // P30：托盘和计数器从 high 起淡出
 
   // 第五句：两组细胞。上：一直 45 帧一拍；下：down 落定之前 45 帧，之后 150 帧
   const t0 = E.knob.s, td = E.down.l;
@@ -100,7 +101,7 @@ const Scene = () => {
     <Lens plan={GP} f={f}>
       <Stage zone={ZONE} f={f} cam={camBreath(f, K, ["s1", "s3", "s4"])} over={<><T5In name="socket_bore" f={f} /><T5Out name="runner" f={f} len={LEN} /></>}>
         <Layer id="sock">
-          {S.sock > 0.01 && S.out1 < 1 && <Sprite name="socket/hero_34" x={sockX} y={sockY} w={sockW} op={Math.min(1, S.sock * 1.5)} rot={id(1).r}
+          {S.sock > 0.01 && S.out1 < 1 && <Sprite name="socket/hero_34" hero x={sockX} y={sockY} w={sockW} op={Math.min(1, S.sock * 1.5)} rot={id(1).r}
                                                 sx={0.85 + 0.15 * S.sock} sy={0.85 + 0.15 * S.sock} />}
         </Layer>
         <Layer id="hk">
@@ -110,7 +111,7 @@ const Scene = () => {
         <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `translateX(${clearX}px)`}}>
           <Layer id="tray">
             {S.tray > 0.001 && (
-              <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `translateX(${trayDX}px)`}}>
+              <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `translateX(${trayDX}px)`, opacity: 1 - trayGone}}>
                 <Slab x={TRAY.x} y={TRAY.y} w={TRAY.w} h={TRAY.h} r={22} color={C.bone} depth={10} sheen={S.tray < 1 ? S.tray : -1} id="tray" />
                 <svg width={1920} height={1080} style={{position: "absolute", left: 0, top: 0, overflow: "visible"}}>
                   {wells.map((w, i) => (
@@ -128,7 +129,7 @@ const Scene = () => {
             )}
           </Layer>
           <Layer id="liver">
-            {S.liver > 0.01 && <Sprite name="liver/34" x={330} y={520 + id(3).y} w={520} op={Math.min(1, S.liver * 1.5)} sx={0.8 + 0.2 * S.liver} sy={0.8 + 0.2 * S.liver} rot={id(3).r} />}
+            {S.liver > 0.01 && <Sprite name="liver/34" x={225} y={600 + id(3).y} w={270} op={Math.min(1, S.liver * 1.5)} sx={0.8 + 0.2 * S.liver} sy={0.8 + 0.2 * S.liver} rot={id(3).r} />}
           </Layer>
           <Layer id="bars">
             {S.bars > 0.01 && (
@@ -137,11 +138,12 @@ const Scene = () => {
                   const h = i === 0 ? 40 + (BAR.tall - 40) * S.hi : 40 + (BAR.short - 40) * S.near;
                   return (
                     <React.Fragment key={i}>
-                      <Slab x={x - BAR.w / 2} y={BAR.base - h - (i === 0 ? S.highJ : 0)} w={BAR.w} h={h} r={14} color={i === 0 ? C.blue : C.grey} depth={8}
+                      <Slab x={x-BAR.w/2-19} y={BAR.base-320} w={BAR.w+38} h={320} r={57} color={C.bone} depth={10} id={`tube${i}`}/>
+                      <Slab x={x - BAR.w / 2} y={BAR.base - h - (i === 0 ? S.highJ : 0)} w={BAR.w} h={h} r={34} color={C.blue} depth={8}
                             sheen={i === 0 ? (S.hi < 1 ? S.hi : S.glow > 0 ? S.glow : -1) : S.near < 1 ? S.near : -1} id={`bar${i}`} />
-                      <Slab x={x - 102} y={BAR.base + 14} w={204} h={58} r={12} color={C.bone} depth={6} id={`base${i}`}>
-                        <div style={{width: 204, height: 58, display: "flex", alignItems: "center", justifyContent: "center"}}>
-                          <Engrave size={44}>{i === 0 ? "tumour" : "non-tumour"}</Engrave>
+                      <Slab x={x - 85} y={BAR.base + 14} w={170} h={58} r={12} color={C.bone} depth={6} id={`base${i}`}>
+                        <div style={{width: 170, height: 58, display: "flex", alignItems: "center", justifyContent: "center"}}>
+                          <Engrave size={34}>{i === 0 ? "tumour" : "non-tumour"}</Engrave>
                         </div>
                       </Slab>
                     </React.Fragment>
@@ -168,8 +170,8 @@ const Scene = () => {
                 <defs>
                   <radialGradient id="tum" cx="0.38" cy="0.34" r="0.7"><stop offset="0" stopColor={tint(C.red, 0.3)} /><stop offset="0.6" stopColor={C.red} /><stop offset="1" stopColor={shade(C.red, 0.4)} /></radialGradient>
                 </defs>
-                <ellipse cx={300} cy={470} rx={22 + 46 * S.tum} ry={18 + 36 * S.tum} fill="url(#tum)" opacity={0.92 * Math.min(1, S.p0 * 2)} />
-                <ellipse cx={288} cy={456} rx={(22 + 46 * S.tum) * 0.3} ry={(18 + 36 * S.tum) * 0.22} fill="#fff" opacity={0.5 * Math.min(1, S.p0 * 2)} />
+                <ellipse cx={209.4} cy={574} rx={(22 + 46 * S.tum) * 0.519} ry={(18 + 36 * S.tum) * 0.519} fill="url(#tum)" opacity={0.92 * Math.min(1, S.p0 * 2)} />
+                <ellipse cx={203.2} cy={566.8} rx={(22 + 46 * S.tum) * 0.3 * 0.519} ry={(18 + 36 * S.tum) * 0.22 * 0.519} fill="#fff" opacity={0.5 * Math.min(1, S.p0 * 2)} />
               </svg>
             )}
             {/* 生存时间两根条对比（Gemini 二审：一根条看不出意思）：灰 = CDK20 低的病人，蓝 = CDK20 高的病人，蓝条缩短 */}
@@ -231,8 +233,8 @@ const Scene = () => {
 
         <Layer id="txt" exempt>
           <Pen text="?" x={1240} y={110} at={E.q.l - 16} out={E.rem.s} size={240} color={C.red} rot={8} dur={32} />
-          <Label text="Hong Kong team" size={56} x={hkX} y={735} at={E.hk.l + 6} out={E.tray.s - 4} align="center" />
-          <div style={{position: "absolute", left: TRAY.x + trayDX + clearX, top: 262, display: "flex", alignItems: "baseline", opacity: S.tray > 0.01 ? 1 : 0}}>
+          <Label text="Hong Kong, 2011" size={56} x={hkX} y={750} at={E.hk.l + 6} out={E.tray.s - 4} align="center" />
+          <div style={{position: "absolute", left: TRAY.x + trayDX + clearX, top: 262, display: "flex", alignItems: "baseline", opacity: S.tray > 0.01 ? 1 - trayGone : 0}}>
             <Counter value={S.n36} digits={2} size={110} x={0} y={0} />
             <div style={{position: "absolute", left: 128, top: 46, opacity: S.of52, transform: `translateY(${(1 - S.of52) * 12}px)`}}><Engrave size={64}>of 52</Engrave></div>
           </div>
@@ -243,7 +245,7 @@ const Scene = () => {
           ))}
           <Label text="liver cancer cells" size={56} x={CELL_U[0]} y={118} at={E.cellsL.l} align="center" />
           <Label text="CDK20 level" size={52} x={(BAR.xs[0] + BAR.xs[1]) / 2} y={230} at={E.hi.l} out={E.clear.s} align="center" />
-          <Pen text="slowed" x={1560} y={700} at={E.slow.l} size={84} />
+          <Pen text="slowed" x={1530} y={790} at={E.slow.l} size={84} />
           <Source>Illustration · data: Feng et al., J. Clin. Invest. 2011</Source>
         </Layer>
       </Stage>

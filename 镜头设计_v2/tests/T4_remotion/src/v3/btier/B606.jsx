@@ -26,7 +26,7 @@ export const CAM3 = {yB: 460, z: 1.45};
 const CASE = {x: 260, y: 400};
 const YR = 44, T0 = CASE.x + 70;           // 一年 44 px，尺带从盒右边出来
 const TW = 6, TH = 5, TS = 58, TG = 6;     // 日子小翻牌 6 × 5
-const GRID = (k) => ({x: k ? 1350 : 1180, y: 215});
+const GRID = (k) => ({x: 1180, y: 215});   // P56：第二个日历放到第一个的位置
 const SHIFT = 290;
 
 const Scene = () => {
@@ -45,12 +45,13 @@ const Scene = () => {
     X.land("p1", 0, 1, E.hit1.l, {antic: false, dur: 18});
     X.tw("t1", 0, 1, E.hit1.l + 4, E.hit1.l + 24, "power2.out");
     X.tw("k48", 0, 1, E.bkey.s, E.bkey.l, "power2.out");
-    X.tw("p2", 0, 1, E.d30b.l - 14, E.d30b.l, "power2.inOut");
+    X.tw("p2", 0, 1, E.bkey.s, E.bkey.l, "power2.inOut");
     X.jiggle("gj", E.d30b.l, 5, 0);
     X.tw("t2", 0, 1, E.d30b.l + 4, E.d30b.l + 24, "power2.out");
   });
   const drift = 0.04 * (f / LEN);
-  const cam = {x: mix(640, 1440, S.pan), y: CAM3.yB, z: CAM3.z + drift};
+  const transition = cl((f-LEN+36)/28);
+  const cam = {x: mix(mix(640,1440,S.pan),640,transition), y: mix(CAM3.yB,620,transition), z: mix(CAM3.z+drift,1.45,transition)};
   const whip = f > LEN - 8 ? whipX(f, LEN - 7, "out", -1) : 0;
   const id = (s) => idle(f, s, {rot: 0.6, bob: 1.6});
   const pop = S.pop * (1 - S.back);
@@ -60,7 +61,7 @@ const Scene = () => {
   // 30 块日子牌：第 k 组，第 j 块落在 at0 + j × 0.66
   const grid = (k, at0) => {
     const g = GRID(k);
-    const gx = g.x - (k === 0 ? SHIFT * S.shift : 0);
+    const gx = g.x;
     return [...Array(TW * TH)].map((_, j) => {
       const at = Math.round(at0 + j * 0.66);
       if (f < at - 18) return null;
@@ -70,7 +71,7 @@ const Scene = () => {
   };
   const slot30 = (k) => {
     const g = GRID(k);
-    return {x: g.x - (k === 0 ? SHIFT * S.shift : 0) + 5 * (TS + TG) + TS / 2, y: g.y + 4 * (TS - 10 + TG) + (TS - 10) / 2};
+    return {x: g.x + 5 * (TS + TG) + TS / 2, y: g.y + 4 * (TS - 10 + TG) + (TS - 10) / 2};
   };
   const s0 = slot30(0), s1 = slot30(1);
   return (
@@ -84,6 +85,7 @@ const Scene = () => {
             {/* BEFORE：卷尺 */}
             {tape && (
               <div style={{position: "absolute", left: 0, top: 0}}>
+                <Tag x={1108} y={400} op={cl(S.len / 10)}>years</Tag>
                 <Slab x={T0} y={CASE.y - 27} w={len * YR + 18} h={54} r={8} color={C.gold} depth={6} id="tapeband" sheen={S.len < 17 ? (S.len / 17) : -1} />
                 {S.red > 0.01 && <div style={{position: "absolute", left: T0 + 4, top: CASE.y - 24, width: Math.min(len, 2) * YR * S.red, height: 48, borderRadius: 6, background: C.red, opacity: 0.82}} />}
                 {[...Array(Math.floor(len) + 1)].map((_, y) => (
@@ -100,16 +102,19 @@ const Scene = () => {
             )}
             {(pop > 0.02 || S.back < 1) && <TapeCase x={cs.x} y={cs.y + id(1).y} s={cs.s} spin={len * 40} />}
             {/* NOW：日子小翻牌 + 001 / 048 */}
-            {S.pan > 0.3 && grid(0, E.d30a.l - 19)}
+            <div style={{position: "absolute", left: 0, top: 0, opacity: 1 - S.shift}}>
+              {S.pan > 0.3 && grid(0, E.d30a.l - 19)}
+              {S.p1 > 0.01 && <Tag x={s0.x + 124 + 72} y={s0.y - 89 * (1 - Math.min(1, S.p1)) - 20} align="left" op={cl(S.p1 * 2)} on="plug1">001</Tag>}
+            </div>
             {f >= E.d30b.s - 6 && grid(1, E.d30b.l - 19)}
-            {S.p1 > 0.01 && <Sprite name="plug/001_34" x={s0.x + 86} y={s0.y - 50 * (1 - Math.min(1, S.p1)) + id(2).y} w={104} op={cl(S.p1 * 2)} rot={-8} />}
-            <Tick x={s0.x + 86} y={s0.y - 66} s={44} p={S.t1} sw={9} />
+            {S.p1 > 0.01 && <Sprite name="plug/001_34" x={s0.x + 124} y={s0.y - 89 * (1 - Math.min(1, S.p1)) + id(2).y} w={104} op={cl(S.p1 * 2) * (1 - S.shift)} rot={-8} />}
+            <div style={{position: "absolute", left: 0, top: 0, opacity: 1 - S.shift}}><Tick x={s0.x + 86} y={s0.y - 66} s={44} p={S.t1} sw={9} /></div>
             <Tick x={s1.x + 86} y={s1.y - 66} s={44} p={S.t2} sw={9} />
             {S.k48 > 0.01 && (
-              <Sprite name="plug/048_34" x={mix(mix(1900, 1700, S.k48), s1.x + 86, S.p2)} y={mix(470, s1.y, S.p2) - 70 * Math.sin(Math.PI * S.p2) + id(3).y}
+              <Sprite name="plug/048_34" x={mix(mix(1900, 1700, S.k48), s1.x + 135, S.p2)} y={mix(470, s1.y-52, S.p2) - 70 * Math.sin(Math.PI * S.p2) + id(3).y}
                       w={mix(150, 104, S.p2)} op={cl(S.k48 * 2)} rot={-8} rim={0.8} />
             )}
-            {S.k48 > 0.3 && <Tag x={s1.x - 120} y={150} op={cl(S.k48 * 2 - 0.6)} on="plug">better key, 048</Tag>}
+            {S.k48 > 0.3 && <Tag x={mix(mix(1900, 1700, S.k48), s1.x + 135, S.p2) + 72} y={mix(470, s1.y-52, S.p2) - 70 * Math.sin(Math.PI * S.p2) - 20} align="left" op={cl(S.k48 * 2 - 0.6)} on="plug">048</Tag>}
           </Board6>
         </Layer>
         <Layer id="txt" exempt>

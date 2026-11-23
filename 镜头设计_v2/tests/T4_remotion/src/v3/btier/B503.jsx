@@ -8,7 +8,7 @@ import React from "react";
 import {Composition, registerRoot, useCurrentFrame} from "remotion";
 import K from "./keys_5-03.json";
 import {Lens, Layer, guidePlan} from "../manual/kit.jsx";
-import {C, Calendar1, SERIF, Tag, camBreath, Stage, Sprite, Slab, Gate, Runner, Label, Pen, Source, Counter, Engrave, Tick, anchorOf, pathOf, evMapB, T5In, T5Out, impact} from "./bkit.jsx";
+import {C, Plate, Calendar1, SERIF, Tag, camBreath, Stage, Sprite, Slab, Gate, Runner, Label, Pen, Source, Counter, Engrave, Tick, anchorOf, pathOf, evMapB, T5In, T5Out, impact} from "./bkit.jsx";
 import {useGsapTimeline, idle, RULE} from "./gsapFrame.jsx";
 
 const E = evMapB(K);
@@ -23,7 +23,7 @@ const SIX_V = [34, 38, 43, 48, 53, 58];         // 示意位置：都在 30 右�
 const SIX_W = 170;
 const tipDX = (n, w) => -anchorOf(`plug/${n}_34`, "tip", w)[0];
 const HIT = {x: 1560, y: 620, w: 320}, ROAD_Y = 770, CHIP = {x: 340, y: 600, w: 420};
-const DOCK = {x: HIT.x - 150, y: 590, w: 300};
+const DOCK = {x: HIT.x - 150, y: 500, w: 300};
 const TRAVEL = pathOf([[CHIP.x, 400], [700, 470], [1100, 540], [HIT.x - 260, 600]]);
 
 const Scene = () => {
@@ -67,7 +67,7 @@ const Scene = () => {
              over={<><T5In name="runner" f={f} /><T5Out name="socket_bore" f={f} len={LEN} /></>}>
         <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `translateX(${clearX}px)`}}>
           <Layer id="mol">
-            {S.mol > 0.01 && <Sprite name="mol001/34" x={560} y={310 + id(1).y} w={480} op={S.mol} rot={id(1).r} />}
+            {S.mol > 0.01 && <Sprite name="plug/001_34" x={560} y={310 + id(1).y} w={480} op={S.mol} rot={id(1).r} />}
           </Layer>
           <Layer id="rail">
             <Runner d={`M240,${RAIL_Y} L1700,${RAIL_Y}`} draw={S.rail} width={18} />
@@ -115,24 +115,24 @@ const Scene = () => {
 
         <Layer id="road">
           {S.road > 0.001 && <Runner d={`M${CHIP.x},${ROAD_Y} L${HIT.x},${ROAD_Y}`} draw={S.road} width={18} />}
-          {S.chip > 0.01 && <Sprite name="chip_pandaomics/34" x={CHIP.x} y={CHIP.y - 30 * (1 - Math.min(1, S.chip)) + id(4).y} w={CHIP.w} op={Math.min(1, S.chip * 1.5)} />}
-          {S.pick > 0.01 && S.travel <= 0 && <Sprite name="mini/m34_on" x={CHIP.x} y={mix(CHIP.y, 400, S.pick)} w={160 * Math.min(1, S.pick)} lift={10} />}
+          {S.chip > .01 && <div style={{opacity:Math.min(1,S.chip)}}><Plate x={CHIP.x-134} y={ROAD_Y-97} w={268} h={76} text="Target" size={50}/></div>}
         </Layer>
-        <Layer id="hit">
-          {S.travel > 0 && !docked && <Sprite name="mini/m34_on" x={tr[0]} y={tr[1]} w={160} lift={20 * Math.sin(Math.PI * S.travel)} />}
+        <Layer id="hit" exempt>
+          {S.road>.1&&<Plate x={HIT.x-132} y={ROAD_Y-98} w={264} h={76} text="Hit" size={50} color={f>=E.hit.l?C.blue:C.bone} light={f>=E.hit.l}/> }
+
+          {S.travel > 0 && !docked && <Sprite name="plug/001_34" x={tr[0]} y={tr[1]} w={160} lift={20 * Math.sin(Math.PI * S.travel)} />}
           <Tick x={HIT.x + 60} y={440} s={90} p={S.tick} sw={13} />
         </Layer>
 
         <Layer id="txt" exempt>
-          {S.mol > 0.01 && (
-            <Tag x={560 + clearX} y={96} op={S.mol}>OUR RE-DOCKING (AutoDock Vina)</Tag>
-          )}
           {S.k > 0.05 && (
             <div style={{position: "absolute", left: 830 + clearX, top: 170}}>
               <Counter value={S.k} digits={1} decimals={1} size={120} x={0} y={0} />
               <div style={{position: "absolute", left: 172, top: 50, opacity: S.um, transform: `translateY(${(1 - S.um) * 12}px)`}}><Engrave size={64}>µM</Engrave></div>
             </div>
           )}
+          <Label text="compound 001" size={48} x={585} y={470} at={E.mol.l} out={E.clear.s} align="center" />
+          {S.rail > 0.6 && <Tag x={1640 + clearX} y={680} op={Math.min(1, (S.rail - 0.6) * 3)}>Kd (µM)</Tag>}
           <Pen text="much weaker" x={1180 + clearX} y={780} at={E.weak.l - 6} size={64} />
           {S.n30 > 0.05 && (
             <div style={{position: "absolute", left: 1150, top: 200}}>
@@ -140,8 +140,8 @@ const Scene = () => {
               <div style={{position: "absolute", left: 132, top: 50, opacity: S.days, transform: `translateY(${(1 - S.days) * 12}px)`}}><Engrave size={64}>days</Engrave></div>
             </div>
           )}
-          <Label text="target" size={52} x={CHIP.x} y={808} at={E.target.l} align="center" />
-          <Label text="first confirmed hit" size={52} x={HIT.x - 120} y={808} at={E.hit.l - 34} align="center" />
+
+
           <Source>Illustration · data: Ren et al., Chem. Sci. 2023</Source>
         </Layer>
       </Stage>

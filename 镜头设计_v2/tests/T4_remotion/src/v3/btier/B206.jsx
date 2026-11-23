@@ -10,6 +10,7 @@ import K from "./keys_2-06.json";
 import {Lens, Layer, guidePlan} from "../manual/kit.jsx";
 import {C, SERIF, Tag, camBreath, Stage, Sprite, Slab, Runner, Plate, Label, Pen, Source, evMapB, whipX} from "./bkit.jsx";
 import {useGsapTimeline, idle} from "./gsapFrame.jsx";
+import {REFS, RefCard} from "./refcards.jsx";
 
 const E = evMapB(K);
 const GP = guidePlan(K);
@@ -17,7 +18,7 @@ const LEN = K.len_f;
 const ZONE = 2;
 
 const BOOK0 = {x: 700, y: 430, w: 520};
-const STACK = [...Array(7)].map((_, i) => ({x: 1130 + ((i * 37) % 50) - 25, y: 690 - i * 52, w: 330 - (i % 3) * 20, c: [C.bone, C.blue, C.grey][i % 3], r: ((i * 53) % 10) - 5}));
+const STACK = [...Array(8)].map((_, i) => ({x: 1130 + ((i * 37) % 50) - 25, y: 690 - i * 52, w: 330 - (i % 3) * 20, c: [C.bone, C.blue, C.grey][i % 3], r: ((i * 53) % 10) - 5}));
 const FLASK = {x: 1620, y: 470, w: 220};
 const HUB = {x: 960, y: 410};
 // 审查批 1（11-23）：主论文放大 ×2.1 当英雄件（book/34x2，430 → 903 宽，屏上约 495 px 高），居中；名牌抬到 40 px 放在书下；
@@ -26,14 +27,14 @@ const MAIN = {x: 960, y: 380, w: 903};
 const RACK = {x: 1180, y: 785, w: 200};
 const RACK_H = Math.round(200 * 571 / 928);
 const QM = {x: 960, y: 500, size: 316};               // 问号：托盘正中，字高 240 px（Instrument Serif "?" 墨迹 0.76 em）
-const CW = 400, CH = 96;
+const CW = 440, CH = 112;   // P02：卡 440×112，两列 x=100 / 1380
 const CARDS = [
-  {t: "Hong Kong study, 2011", x: 120, y: 160, ev: "hk"},
-  {t: "AI tool paper", x: 120, y: 420, ev: "tools", k: 0},
-  {t: "AI tool paper", x: 120, y: 680, ev: "tools", k: 1},
-  {t: "Review, 2023", x: 1400, y: 160, ev: "rev"},
-  {t: "Textbook chapter", x: 1400, y: 420, ev: "text"},
-  {t: "Perspective, 2026", x: 1400, y: 680, ev: "persp"},
+  {x: 100, y: 160, ev: "hk"},
+  {x: 1380, y: 160, ev: "tools", k: 0},
+  {x: 100, y: 420, ev: "tools", k: 1},
+  {x: 1380, y: 420, ev: "rev"},
+  {x: 100, y: 680, ev: "text"},
+  {x: 1380, y: 680, ev: "persp"},
 ];
 const armD = (c) => {
   const ex = c.x < HUB.x ? c.x + CW : c.x, ey = c.y + CH / 2, sx = HUB.x + (c.x < HUB.x ? -230 : 230);
@@ -64,7 +65,7 @@ const Scene = () => {
   // 中心主论文一直轻轻发亮：它是中心
   const mainRim = f > E.ren.l ? 0.25 + 0.2 * Math.sin((2 * Math.PI * (f - E.ren.l)) / 90) : 0;
   // 主论文：放大 ×2.1 演到 Around it，六根料杆长出来时缩到 780 宽给两边的来源卡让位（不和卡片边相压）
-  const shrink = clamp01((f - E.around.s) / 48), bookW = MAIN.w + (780 - MAIN.w) * shrink * shrink * (3 - 2 * shrink);
+  const shrink = clamp01((f - E.around.s) / 48), bookW = MAIN.w + (700 - MAIN.w) * shrink * shrink * (3 - 2 * shrink);
 
   return (
     <Lens plan={GP} f={f}>
@@ -73,18 +74,12 @@ const Scene = () => {
           <Layer id="books">
             {S.book > 0.01 && <Sprite name="book/34" x={BOOK0.x} y={BOOK0.y - 40 * (1 - Math.min(1, S.book)) + id(1).y} w={BOOK0.w} op={Math.min(1, S.book * 1.5)} rot={id(1).r} />}
             {STACK.map((b, i) => S[`s${i}`] > 0.01 && (
-              <Slab key={i} x={b.x - b.w / 2} y={b.y - 80 * (1 - Math.min(1, S[`s${i}`]))} w={b.w} h={42} r={8} color={b.c} depth={12} rot={b.r} op={Math.min(1, S[`s${i}`] * 2)} id={`bk${i}`} />
+              <Slab key={i} x={b.x - b.w / 2} y={b.y - 80 * (1 - Math.min(1, S[`s${i}`]))} w={b.w} h={42} r={8} color={C.bone} depth={12} rot={b.r+(i-3.5)*5*(1-S.no)} op={Math.min(1, S[`s${i}`] * 2)} id={`bk${i}`} />
             ))}
           </Layer>
           <Layer id="flask">
-            {S.flask > 0.01 && <Sprite name="flask/34" x={FLASK.x} y={FLASK.y - 40 * (1 - Math.min(1, S.flask)) + id(2).y} w={FLASK.w} op={Math.min(1, S.flask * 1.5) * (1 - 0.35 * S.no)}
+            {S.flask > 0.01 && <Sprite name="flask/34" x={FLASK.x+222*S.no} y={FLASK.y - 40 * (1 - Math.min(1, S.flask)) + id(2).y} w={FLASK.w} op={Math.min(1, S.flask * 1.5) * (1 - S.no)}
                                      style={{filter: S.no > 0.01 ? `grayscale(${S.no})` : undefined}} />}
-            {S.no > 0.01 && (
-              <svg width={1920} height={1080} style={{position: "absolute", left: 0, top: 0, overflow: "visible"}}>
-                <path d={`M${FLASK.x - 110},${FLASK.y - 140} L${FLASK.x + 110},${FLASK.y + 150}`} stroke={C.ink} strokeWidth={12} strokeLinecap="round" pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - clamp01(S.no * 2)} />
-                <path d={`M${FLASK.x + 110},${FLASK.y - 140} L${FLASK.x - 110},${FLASK.y + 150}`} stroke={C.ink} strokeWidth={12} strokeLinecap="round" pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - clamp01(S.no * 2 - 1)} />
-              </svg>
-            )}
           </Layer>
         </div>
 
@@ -103,24 +98,18 @@ const Scene = () => {
           )}
         </Layer>
         <Layer id="main">
-          {S.main > 0.01 && <Sprite name="book/34x2" hero x={MAIN.x} y={MAIN.y - 50 * (1 - Math.min(1, S.main)) + id(3).y} w={bookW} op={Math.min(1, S.main * 1.5)} rim={mainRim} />}
+          {S.main>.01&&<Slab x={MAIN.x-bookW/2} y={MAIN.y-182-50*(1-Math.min(1,S.main))} w={bookW} h={486*Math.min(1,bookW/903)} r={18} depth={14} op={Math.min(1,S.main*1.5)} sheen={mainRim>0?mainRim:-1} id="primaryPaper">
+            <div data-role="engrave" data-on="primaryPaper" style={{position:"absolute",left:"7%",top:"9%",fontFamily:SERIF,fontSize:Math.max(32,48*bookW/903),whiteSpace:"nowrap",color:C.ink}}>Ren et al. · Chem. Sci., 2023</div>
+            {Array.from({length:24},(_,i)=><div key={i} style={{position:"absolute",left:(7+i%2*49)+"%",top:(28+Math.floor(i/2)*5)+"%",width:(i%6===4?31:36)+"%",height:8,borderRadius:4,background:C.grey,opacity:.54}}/>)}
+          </Slab>}
         </Layer>
         <Layer id="cards">
           {CARDS.slice(0, 5).map((c, i) => S[`c${i}`] > 0.01 && (
-            <Plate key={i} x={c.x} y={c.y - 30 * (1 - Math.min(1, S[`c${i}`])) + id(10 + i).y} w={CW} h={CH} text={c.t} size={44} op={Math.min(1, S[`c${i}`] * 1.5)} id={`cd${i}`} />
+            <RefCard key={i} x={c.x} y={c.y - 30 * (1 - Math.min(1, S[`c${i}`])) + id(10 + i).y} w={CW} h={CH} ref2={REFS[i]} op={Math.min(1, S[`c${i}`] * 1.5)} id={`cd${i}`} />
           ))}
         </Layer>
         <Layer id="card6">
-          {S.c5 > 0.01 && (
-            <Plate x={CARDS[5].x} y={CARDS[5].y - 30 * (1 - Math.min(1, S.c5)) + id(15).y} w={CW} h={CH + 50 * S.frost} text={CARDS[5].t} size={44} op={Math.min(1, S.c5 * 1.5)} id="cd5">
-              {S.frost > 0.01 && (
-                <div style={{position: "absolute", left: 0, top: CH * 0.62, width: CW, height: (CH + 50 * S.frost) - CH * 0.62, borderRadius: "0 0 14px 14px",
-                             background: "rgba(243,238,230,0.86)", backdropFilter: "blur(6px)", opacity: S.frost}}>
-                  {[0, 1, 2].map((k) => <div key={k} style={{position: "absolute", left: 24, top: 14 + k * 18, width: CW - 48 - k * 40, height: 7, borderRadius: 4, background: "rgba(154,150,140,0.45)", filter: "blur(2.5px)"}} />)}
-                </div>
-              )}
-            </Plate>
-          )}
+          {S.c5 > 0.01 && <RefCard x={CARDS[5].x} y={CARDS[5].y - 30 * (1 - Math.min(1, S.c5)) + id(15).y} w={CW} h={CH} ref2={REFS[5]} op={Math.min(1, S.c5 * 1.5)} id="cd5" />}
         </Layer>
 
         <Layer id="txt" exempt>
@@ -135,10 +124,9 @@ const Scene = () => {
                                                            fontFamily: SERIF, fontSize: QM.size, lineHeight: 1, color: C.red, whiteSpace: "nowrap"}}>?</div>;
           })()}
           <Label text="literature review" size={60} x={900 + cx} y={760} at={E.review.l} out={E.centre.s} align="center" />
-          {S.main > 0.5 && <Tag x={MAIN.x} y={MAIN.y + 262} badge={false} op={Math.min(1, (S.main - 0.5) * 2)}>Ren et al., Chem. Sci. 2023</Tag>}
           <Label text="original study" size={52} x={MAIN.x} y={712} at={E.study.l + 8} out={E.supp.s - 12} align="center" />
           {S.rack > 0.5 && <Tag x={RACK.x - RACK.w / 2 - 20} y={RACK.y - 28} align="right" op={Math.min(1, (S.rack - 0.5) * 2)}>supplementary data</Tag>}
-          <Pen text="abstract only" x={1420} y={596} at={E.abs.l} size={56} rot={-3} />
+          <Pen text="abstract only" x={1420} y={812} at={E.abs.l} size={56} rot={-3} />
           <Source>Illustration · the sources this review is built on</Source>
         </Layer>
       </Stage>

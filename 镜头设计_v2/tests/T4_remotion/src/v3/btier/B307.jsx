@@ -10,7 +10,8 @@ import React from "react";
 import {Composition, registerRoot, useCurrentFrame} from "remotion";
 import K from "./keys_3-07.json";
 import {Lens, Layer, guidePlan} from "../manual/kit.jsx";
-import {C, Slab, Runner, Plate, Label, Pen, Source, Counter, Engrave, Tick, Capsule1, Person1, camBreath, Stage, Sprite, pathOf, evMapB, T5In, whipX} from "./bkit.jsx";
+import {C, Slab, Runner, Plate, Tag, Label, Pen, Source, Counter, Engrave, Tick, Capsule1, Person1, camBreath, Stage, Sprite, pathOf, evMapB, T5In, whipX} from "./bkit.jsx";
+import {Flap} from "./board6.jsx";
 import {useGsapTimeline, idle} from "./gsapFrame.jsx";
 
 const E = evMapB(K);
@@ -18,16 +19,16 @@ const GP = guidePlan(K);
 const LEN = K.len_f;
 const ZONE = 3;
 
-const YEAR = {x: 90, y: 70, w: 270, h: 110};
-const CHIP0 = {x: 900, y: 450, w: 560}, CHIP1 = {x: 1460, y: 360, w: 460}, CHIP2 = {x: 300, y: 330, w: 340};
+const YEAR = {x: 190, y: 176, w: 270, h: 110};
+const CHIP0 = {x: 875, y: 451, w: 650}, CHIP1 = {x: 1430, y: 360, w: 520}, CHIP2 = {x: 300, y: 330, w: 340};
 const MINI = {x: 1500, y: 470, w: 280};
 const RACK = (i) => ({x: 170 + (i % 5) * 150, y: 230 + Math.floor(i / 5) * 160});
 const RACK_W = 140;
 const DOT_T = [...Array(120)].map((_, i) => [150 + (i % 20) * 30, 590 + Math.floor(i / 20) * 26]);
 const DOT_H = [...Array(80)].map((_, i) => [150 + (i % 20) * 30, 760 + Math.floor(i / 20) * 26]);
 const NT = 113, NH = 67;                                  // 一个点 ≈ 10 个样本
-const TAB = {x: 760, y: 120, colW: 500, gap: 40, rowH: 66};
-const CDK_FROM = 6;                                       // 示意：CDK20 起先排在第 7 行
+const TAB = {x: 760, y: 190, colW: 500, gap: 40, rowH: 62};   // P33
+const CDK_FROM = 0;                                       // P33：CDK20 从一开始就在第一行
 const PIL = {x: 420, y: 690, w: 300};
 const FEEDS = [...Array(10)].map((_, i) => pathOf([[RACK(i).x + 60, RACK(i).y], [CHIP1.x - 180, CHIP1.y + (i - 4.5) * 8]]));
 const PAP = pathOf([[1850, 120], [1600, 140], [CHIP1.x, CHIP1.y - 40]]);
@@ -82,7 +83,7 @@ const Scene = () => {
     <Lens plan={GP} f={f}>
       <Stage zone={ZONE} f={f} whip={whip} cam={camBreath(f, K, ["s1"])} over={<T5In name="runner" f={f} />}>
         <Layer id="year">
-          {S.year > 0.01 && <Plate x={YEAR.x} y={YEAR.y - 30 * (1 - Math.min(1, S.year))} w={YEAR.w} h={YEAR.h} text="2023" size={90} r={22} depth={12} op={Math.min(1, S.year * 1.5) * (1 - S.clear)} id="year" />}
+          {S.year > .01 && S.clear<.8 && f < E.ten.s - 10 && <Flap f={f} {...YEAR} text="2023" at={E.y23.l} fs={80} bg={C.ink} color={C.inkLight}/>}
         </Layer>
         <Layer id="chip">
           {S.chip > 0.01 && <Sprite name="chip_pandaomics/34" x={ch.x} y={ch.y - 40 * (1 - Math.min(1, S.chip)) + id(1).y} w={ch.w} op={Math.min(1, S.chip * 1.5)}
@@ -103,7 +104,7 @@ const Scene = () => {
                 }))}
               </svg>
             )}
-            {[...Array(10)].map((_, i) => S[`r${i}`] > 0.01 && <Sprite key={i} name="dbrack/34" x={RACK(i).x} y={RACK(i).y - 40 * (1 - Math.min(1, S[`r${i}`])) + id(10 + i).y} w={RACK_W} op={Math.min(1, S[`r${i}`] * 1.5)} />)}
+            {[...Array(10)].map((_, i) => S[`r${i}`] > 0.01 && <Sprite key={i} name="disks/34" x={RACK(i).x} y={RACK(i).y - 40 * (1 - Math.min(1, S[`r${i}`])) + id(10 + i).y} w={RACK_W} rot={f>=E.ten.l ? ((f-E.ten.l+i*4)%24)/8 : 0} op={Math.min(1, S[`r${i}`] * 1.5)} />)}
           </Layer>
           <Layer id="dots">
             <svg width={1920} height={1080} style={{position: "absolute", left: 0, top: 0, overflow: "visible"}}>
@@ -129,9 +130,8 @@ const Scene = () => {
             return (
               <Slab key={k} x={xx + 30 * (1 - a)} y={yy} w={TAB.colW} h={TAB.rowH - 12} r={12} color={isC ? C.blue : C.bone} depth={7} op={a} lift={isC ? 14 * Math.sin(Math.PI * S.rise) : 0}
                     sheen={lit > 0 ? lit : -1} id={`row${k}`}>
-                <div style={{position: "absolute", left: 18, top: 6}}><Engrave size={40} light={isC}>{rank}</Engrave></div>
-                {isC ? <div style={{position: "absolute", left: 90, top: 6}}><Engrave size={40} light>CDK20</Engrave></div>
-                     : <div style={{position: "absolute", left: 90, top: 22, width: 180 + ((k * 71) % 160), height: 12, borderRadius: 6, background: "rgba(154,150,140,0.55)"}} />}
+                {isC ? <div style={{position: "absolute", left: 24, top: 6}}><Engrave size={40} light>CDK20</Engrave></div>
+                     : <div style={{position: "absolute", left: 24, top: 22, width: 180 + ((k * 71) % 160), height: 12, borderRadius: 6, background: "rgba(154,150,140,0.55)"}} />}
               </Slab>
             );
           })}
@@ -141,31 +141,21 @@ const Scene = () => {
             return p > 0 && <Tick key={`k${k}`} x={x + TAB.colW - 40} y={y + 22} s={36} p={p} sw={7} />;
           })}
         </Layer>
-        <Layer id="people">
-          {["pp0", "pp1"].map((k, i) => S[k] > 0.01 && <Person1 key={k} x={170 + i * 170} y={560 - 40 * (1 - Math.min(1, S[k])) + id(40 + i).y} w={300} op={Math.min(1, S[k] * 1.5)} />)}
-          {S.pill > 0.01 && (
-            <>
-              <Capsule1 x={PIL.x} y={PIL.y - 30 * (1 - Math.min(1, S.pill)) + id(42).y} w={PIL.w} op={Math.min(1, S.pill * 1.5)} style={{filter: `grayscale(${S.slash})`}} />
-              <svg width={1920} height={1080} style={{position: "absolute", left: 0, top: 0, overflow: "visible"}}>
-                <path d={`M${PIL.x - 120},${PIL.y + 70} L${PIL.x + 120},${PIL.y - 70}`} stroke={C.ink} strokeWidth={12} strokeLinecap="round" pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - S.slash} />
-              </svg>
-            </>
-          )}
-        </Layer>
 
         <Layer id="txt" exempt>
-          <Pen text="hunch" x={1610} y={250} at={E.hunch.l} out={E.ten.s} size={64} />
+          <Pen text="hunch" x={1400} y={640} at={E.hunch.l} out={E.ten.s} size={64} />
           {S.n10 > 0.05 && S.clear < 1 && (
             <div style={{position: "absolute", left: 820 + cx, top: 140, display: "flex", alignItems: "baseline", gap: 16}}>
               <Counter value={S.n10} digits={2} size={96} x={0} y={0} />
-              <div style={{position: "relative", left: 120, top: 30}}><Engrave size={52}>data sets</Engrave></div>
+              <div style={{position: "relative", left: 120, top: 30}}><Engrave size={44}>liver cancer data sets</Engrave></div>
             </div>
           )}
           {S.nt > 1 && <div style={{position: "absolute", left: 780 + cx, top: 586}}><Counter value={S.nt} digits={4} comma size={60} x={0} y={0} /></div>}
           {S.nh > 1 && <div style={{position: "absolute", left: 780 + cx, top: 756}}><Counter value={S.nh} digits={3} size={60} x={0} y={0} /></div>}
-          <Label text="tumour" size={48} x={1000 + cx} y={596} at={E.tum.l} align="left" />
-          <Label text="healthy" size={48} x={1000 + cx} y={766} at={E.hl.l} align="left" />
-          <Label text="top 20" size={56} x={TAB.x + TAB.colW + TAB.gap / 2} y={40} at={E.top20.l} align="center" />
+          <Label text="tumour samples" size={48} x={1000 + cx} y={596} at={E.tum.l} align="left" />
+          <Label text="healthy samples" size={48} x={1000 + cx} y={766} at={E.hl.l} align="left" />
+          <Label text="top 20" size={36} x={730} y={190} at={E.top20.l} align="right" />
+          <Tag x={1280} y={800} op={clamp01((f - (E.top20.l - 10)) / 12)}>19 other targets</Tag>
           <Pen text="no approved drug yet" x={110} y={780} at={E.nodrug.l + 8} size={60} />
           <Source>Illustration · data: Ren et al., Chem. Sci. 2023 (PandaOmics target selection)</Source>
         </Layer>

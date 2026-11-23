@@ -22,7 +22,7 @@ const SOCK0 = {x: 960, y: 470, w: 700}, SOCK1 = {x: 1330, y: 400, w: 500};
 const PLUGS = ["001", "A", "B", "C", "D", "E", "F"];
 const ROW_Y = 600, SPRUE_Y = 712, PW = 150;
 const ROW_X = (i) => 150 + i * 142;
-const FLASK1 = {x: 1720, y: 770, w: 180}, FLASK2 = {x: 330, y: 610, w: 260};
+const FLASK1 = {x: 1720, y: 770, w: 180}, FLASK2 = {x: 250, y: 610, w: 260};
 // 001 飞到插座口前：尖对准插座的 approach 点，再往 contact 走 25% 停住
 const SOCK_APP = at("socket/hero_34", "approach", SOCK1.x, SOCK1.y, SOCK1.w);
 const SOCK_CON = at("socket/hero_34", "contact", SOCK1.x, SOCK1.y, SOCK1.w);
@@ -33,11 +33,11 @@ const TRY_END = [HOVER[0] - tipOff(PW_NEAR)[0], HOVER[1] - tipOff(PW_NEAR)[1]];
 const TRY = pathOf([[ROW_X(0), ROW_Y], [640, 290], [1360, 250], TRY_END]);
 
 // ---- 第四幕：十个小插座（5 × 2），左边烧瓶
-const MW = 170;
+const MW = 191;
 const GRID = [...Array(10)].map((_, i) => ({x: 820 + (i % 5) * 200, y: 380 + Math.floor(i / 5) * 250}));
 const FILL = [0, 6, 2, 8, 4];                  // 依次插上的五个（交错，不是一排）
 const FLY_W = 92;                              // 小插座按 0.4 缩：插头 27 mm × 0.4 → 显示 92 px
-const KD = {x: 470, y: 200, h: 300};
+const KD = {x: 403, y: 230, h: 520};
 
 const Scene = () => {
   const f = useCurrentFrame();
@@ -153,12 +153,13 @@ const Scene = () => {
         <Layer id="kd">
           {S.kd > 0.01 && (
             <div style={{position: "absolute", left: 0, top: 0, opacity: S.kd, transform: `translateY(${(1 - S.kd) * 20}px)`}}>
-              <Slab x={KD.x} y={KD.y} w={44} h={KD.h} r={14} color={C.bone} depth={8} id="kdbar" />
+              <Slab x={KD.x} y={KD.y} w={120} h={KD.h} r={14} color={C.bone} depth={8} id="kdbar" />
               <svg width={1920} height={1080} style={{position: "absolute", left: 0, top: 0, overflow: "visible"}}>
-                {[0, 1, 2, 3, 4].map((k) => <line key={k} x1={KD.x + 50} y1={KD.y + 30 + k * (KD.h - 60) / 4} x2={KD.x + (k % 2 ? 66 : 76)} y2={KD.y + 30 + k * (KD.h - 60) / 4} stroke={C.ink} strokeWidth={3} strokeLinecap="round" />)}
+                {[0, 1, 2, 3, 4].map((k) => <line key={k} x1={KD.x + 68} y1={KD.y + 30 + k * (KD.h - 60) / 4} x2={KD.x + (k % 2 ? 90 : 105)} y2={KD.y + 30 + k * (KD.h - 60) / 4} stroke={C.ink} strokeWidth={3} strokeLinecap="round" />)}
               </svg>
-              <div style={{position: "absolute", left: KD.x + 88, top: KD.y + 8}}><Engrave size={40}>high Kd</Engrave></div>
-              <div style={{position: "absolute", left: KD.x + 88, top: KD.y + KD.h - 52}}><Engrave size={40}>low Kd</Engrave></div>
+              <div style={{position: "absolute", left: KD.x + 130, top: KD.y + 8}}><Engrave size={40}>high Kd</Engrave></div>
+              <div style={{position: "absolute", left: KD.x + 130, top: KD.y + KD.h - 52}}><Engrave size={40}>low Kd</Engrave></div>
+              {f>E.much.s && <Slab x={KD.x+25} y={KD.y+KD.h-45-(KD.h-98)*Math.min(1,(f-E.much.s)/Math.max(1,E.half.l-E.much.s))*(1-.84*S.kdm)} w={43} h={(KD.h-98)*Math.min(1,(f-E.much.s)/Math.max(1,E.half.l-E.much.s))*(1-.84*S.kdm)+5} color={C.blueHi} op={.68} depth={4} id="kdlevel"/>}
               <Slab x={KD.x - 8} y={KD.y + 40 + (KD.h - 110) * S.kdm} w={60} h={26} r={9} color={C.blue} depth={6} sheen={S.kdm > 0 && S.kdm < 1 ? S.kdm : -1} id="kdmark" />
             </div>
           )}
@@ -167,7 +168,6 @@ const Scene = () => {
         <Layer id="txt" exempt>
           <Label text="seven real molecules" size={56} x={576} y={430} at={E.rack.e - 30} out={E.try.s} align="center" />
           <Pen text="made in a real lab" x={1180} y={830} at={E.made.l} out={E.clear.s} size={58} />
-          <Pen text="?" x={1560} y={150} at={E.q.l - 4} out={E.clear.s} size={220} color={C.red} rot={8} dur={24} />
           <Label text="Kd" size={110} x={KD.x - 40} y={KD.y + 20} at={E.kd.l} align="right" />
           <Pen text="half" x={1010} y={782} at={E.half.l} size={76} />
           <Pen text="lower = tighter" x={150} y={800} at={E.tight.l - 10} size={64} />

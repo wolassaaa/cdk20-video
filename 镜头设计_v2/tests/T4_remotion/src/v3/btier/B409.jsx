@@ -8,7 +8,7 @@ import React from "react";
 import {Composition, registerRoot, useCurrentFrame} from "remotion";
 import K from "./keys_4-09.json";
 import {Lens, Layer, guidePlan} from "../manual/kit.jsx";
-import {C, camBreath, Stage, Sprite, Slab, Label, Pen, Source, Engrave, anchorOf, pathOf, evMapB, T5In, T5Out, impact} from "./bkit.jsx";
+import {C, Tick, camBreath, Stage, Sprite, Slab, Label, Pen, Source, Engrave, anchorOf, pathOf, evMapB, T5In, T5Out, impact} from "./bkit.jsx";
 import {useGsapTimeline, idle} from "./gsapFrame.jsx";
 
 const E = evMapB(K);
@@ -17,7 +17,7 @@ const LEN = K.len_f;
 const ZONE = 4;
 
 const CHIP = {x: 400, y: 330, w: 420};
-const SOCK = {x: 1300, y: 500, w: 640};
+const SOCK = {x: 1300, y: 504, w: 694};
 const [mdx, mdy] = anchorOf("socket/hero_face", "mouth", SOCK.w);
 const M = [SOCK.x + mdx, SOCK.y + mdy];
 const HOLE_R = 205 * (SOCK.w / 1312);
@@ -27,7 +27,7 @@ const [tipOX, tipOY] = anchorOf("plug/A_34", "tip", KEY_W);   // 翻过来以后
 const FLY = pathOf([[CHIP.x + 150, CHIP.y + 90], [640, 520], [880, 560], [M[0] - 40, M[1] + 10]]);
 
 // s2：筛子、六个插头
-const SIEVE = {x: 960, y: 450, w: 600};
+const SIEVE = {x: 980, y: 505, w: 700};
 const NAMES = ["A", "B", "C", "D", "E", "F"];
 const PW = 150;
 const TOP = NAMES.map((_, i) => [610 + i * 140, 150]);
@@ -35,7 +35,7 @@ const ON = NAMES.map((_, i) => [740 + i * 66, 352 + (i % 2) * 22]);
 const BELOW = NAMES.map((_, i) => [690 + i * 110, 740]);
 const BAD_R = 1, BAD_T = 4;                       // 带红点的两个
 // 两根竖分数条（圆表盘像时钟，见 5-08 初审）：骨白槽，蓝色从下往上涨
-const DIALS = [{cx: 1290, cy: 430}, {cx: 1650, cy: 430}];
+const DIALS = [{cx: 1210, cy: 430}, {cx: 1570, cy: 430}];   // 两个 Label 的中心（左移 80，让 easy to make 后的勾留在托盘里）
 const MT = {w: 80, h: 300, top: 270};
 
 const clamp01 = (v) => Math.max(0, Math.min(1, v));
@@ -51,8 +51,8 @@ const Scene = () => {
     X.jiggle("gripJ", E.grip.l, 5, 0);
     X.tw("hinge", 0, 1, E.hinge.s, E.hinge.l + 20, "power2.out");
     X.tw("clear", 0, 1, E.filt.s - 6, E.filt.l + 20, "power1.in");
-    X.land("sieve", 0, 1, E.filt.l + 6, {antic: false});
-    X.group(NAMES.map((_, i) => `p${i}`), 0, 1, E.filt.l + 14, {antic: false, step: 4});
+    X.land("sieve", 0, 1, E.filt.l, {antic: false});
+    X.group(NAMES.map((_, i) => `p${i}`), 0, 1, E.filt.l, {antic: false, step: 4});
     X.tw("toss", 0, 1, E.toss.s, E.toss.l + 8, "power2.in");
     X.tw("react", 0, 1, E.react.s, E.react.e + 20, "power2.out");
     X.tw("toxic", 0, 1, E.toxic.s, E.toxic.e + 20, "power2.out");
@@ -94,7 +94,7 @@ const Scene = () => {
             {S.chip > 0.01 && <Sprite name="chip_chemistry42/34" x={CHIP.x} y={CHIP.y - 50 * (1 - Math.min(1, S.chip)) + id(1).y} w={CHIP.w} op={Math.min(1, S.chip * 1.5)} rot={id(1).r} />}
           </Layer>
           <Layer id="socket">
-            {S.sock > 0.01 && <Sprite name="socket/hero_face" x={SOCK.x} y={SOCK.y - 50 * (1 - Math.min(1, S.sock)) + id(2).y} w={SOCK.w} op={Math.min(1, S.sock * 1.5)} />}
+            {S.sock > 0.01 && <Sprite name="socket/hero_face" hero x={SOCK.x} y={SOCK.y - 50 * (1 - Math.min(1, S.sock)) + id(2).y} w={SOCK.w} op={Math.min(1, S.sock * 1.5)} />}
             {hingeRing > 0.01 && (
               <svg width={1920} height={1080} style={{position: "absolute", left: 0, top: id(2).y, overflow: "visible"}}>
                 <circle cx={HINGE[0]} cy={HINGE[1]} r={16 + 22 * S.hinge} fill="none" stroke={C.bone} strokeWidth={6} opacity={hingeRing} />
@@ -109,13 +109,14 @@ const Scene = () => {
             )}
           </Layer>
           <Layer id="txt1" exempt>
-            <Label text="one rule" size={56} x={CHIP.x} y={530} at={E.rule.l} align="center" />
-            <Pen text="hinge" x={HINGE[0] - 300} y={HINGE[1] - 200} at={E.hinge.s} size={88} />
+            <Label text="one rule" size={56} x={CHIP.x} y={530} at={E.rule.l} out={E.hinge.l} align="center" />
+            <Label text="rule: must grip the hinge" size={56} x={CHIP.x} y={530} at={E.hinge.l} align="center" />
+            <Pen text="hinge" x={HINGE[0] - 120} y={150} at={E.hinge.s} size={88} />
           </Layer>
         </div>
 
         <Layer id="sieve">
-          {S.sieve > 0.01 && <Sprite name="sieve/34" x={SIEVE.x - 470 * S.shift} y={SIEVE.y - 50 * (1 - Math.min(1, S.sieve)) + id(4).y} w={SIEVE.w} op={Math.min(1, S.sieve * 1.5)} rot={id(4).r} />}
+          {S.sieve > 0.01 && <Sprite name="sieve/34" x={SIEVE.x - 470 * S.shift} y={SIEVE.y - 50 * (1 - Math.min(1, S.sieve)) + id(4).y + 10*Math.sin((f-E.filt.l)*.65)*Math.max(0,1-Math.abs(f-E.filt.l)/21)} w={SIEVE.w} op={Math.min(1, S.sieve * 1.5)} rot={id(4).r} />}
           {plugs.map((p) => S[`p${p.i}`] > 0.01 && p.op > 0.01 && (
             <Sprite key={p.i} name={`plug/${p.n}_34`} x={p.x} y={p.y + id(10 + p.i).y} w={PW} sx={-1} rot={p.rot + id(10 + p.i).r} op={p.op}>
               {p.bad && <div style={{position: "absolute", left: PW * 0.62, top: PW * 0.12, width: 26, height: 26, borderRadius: 13, background: C.red,
@@ -124,26 +125,13 @@ const Scene = () => {
           ))}
         </Layer>
         <Layer id="dials">
-          {S.dials > 0.01 && DIALS.map((d, k) => {
-            const x = d.cx - MT.w / 2 + 500 * (1 - S.dials), y = MT.top + id(20 + k).y, lv = k === 0 ? 0.08 + 0.8 * S.n1 : 0.08 + 0.74 * S.n2;
-            const ih = (MT.h - 24) * lv;
-            return (
-              <div key={k} style={{position: "absolute", left: 0, top: 0, opacity: Math.min(1, S.dials * 1.4)}}>
-                <Slab x={x} y={y} w={MT.w} h={MT.h} r={20} color={C.bone} depth={9} id={`meter${k}`} />
-                <Slab x={x + 12} y={y + 12 + (MT.h - 24 - ih)} w={MT.w - 24} h={Math.max(4, ih)} r={10} color={C.blue} depth={0} shadow={false}
-                      sheen={(k === 0 ? S.n1 : S.n2) < 1 ? (k === 0 ? S.n1 : S.n2) : -1} id={`mfill${k}`} />
-                <div style={{position: "absolute", left: x + MT.w + 14, top: y - 4}}><Engrave size={34}>high</Engrave></div>
-                <div style={{position: "absolute", left: x + MT.w + 14, top: y + MT.h - 40}}><Engrave size={34}>low</Engrave></div>
-              </div>
-            );
-          })}
+          {[[E.drug.l, DIALS[0].cx + 153], [E.easy.l, DIALS[1].cx + 190]].map(([at, x], i) => <Tick key={i} x={x} y={272} s={50} p={clamp01((f - at) / 14)} />)}
         </Layer>
-
         <Layer id="txt2" exempt>
           <Pen text="reactive" x={1480} y={150} at={E.react.l} out={E.score.s} size={76} />
           <Pen text="possibly toxic" x={150} y={150} at={E.toxic.l} out={E.score.s} size={76} />
-          <Label text="drug-like" size={52} x={DIALS[0].cx} y={620} at={E.drug.l} align="center" />
-          <Label text="easy to make" size={52} x={DIALS[1].cx} y={620} at={E.easy.l} align="center" />
+          <Label text="drug-like" size={52} x={DIALS[0].cx} y={248} at={E.drug.l} align="center" />
+          <Label text="easy to make" size={52} x={DIALS[1].cx} y={248} at={E.easy.l} align="center" />
           <Source>Illustration · data: Ren et al., Chem. Sci. 2023 (Chemistry42 design rules)</Source>
         </Layer>
       </Stage>

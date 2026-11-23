@@ -12,7 +12,7 @@ import React from "react";
 import {Composition, registerRoot, useCurrentFrame} from "remotion";
 import K from "./keys_8-02.json";
 import {Lens, Layer, guidePlan} from "../manual/kit.jsx";
-import {C, Stage, Sprite, Slab, Runner, Tag, Tick, Engrave, Source, evMapB, whipX, impact, T5In, camBreath} from "./bkit.jsx";
+import {C, Label, Stage, Sprite, Slab, Runner, Tag, Tick, Engrave, Source, evMapB, whipX, impact, T5In, camBreath} from "./bkit.jsx";
 import {useGsapTimeline, idle} from "./gsapFrame.jsx";
 
 const E = evMapB(K);
@@ -59,15 +59,16 @@ const Scene = () => {
   const whip = f > LEN - 8 ? whipX(f, LEN - 7, "out", -1) : 0;
   const id = (s) => idle(f, s, {rot: 0.5, bob: 1.5});
   const corner = S.badge * (1 - S.back);
-  const gs = mix(1, 0.5, corner);
-  const gx = mix(GOAL.x, 70 + (GOAL.w * 0.5) / 2, corner), gy = mix(GOAL.y, 60 + (GOAL.h * 0.5) / 2, corner);
+  const GS_MIN = 0.55;                      // 角标最小缩放：Objective 1 刻字 64 × 0.55 ≈ 35 px（≥ 30）
+  const gs = mix(1, GS_MIN, corner);
+  const gx = mix(GOAL.x, 70 + (GOAL.w * GS_MIN) / 2, corner), gy = mix(GOAL.y, 60 + (GOAL.h * GS_MIN) / 2, corner);
   const lit = [S.p0 * (f < E.af.s ? 1 : 0.35), f >= E.af.s ? (f < E.chem42.s ? 1 : 0.35) : 0, f >= E.chem42.s ? (f < E.rank.s ? 1 : 0.35) : 0];
   const tuck = 1 - S.tuck;
   const node = (k) => S[`n${k}`] || 0;
   const plugs = [...Array(9)].map((_, k) => {
     const u = cl(S.cand * 9 - k);
     if (u <= 0) return null;
-    return <Sprite key={k} name={`plug/${["A", "B", "C", "D", "E", "F", "001", "048", "A"][k]}_34`} x={mix(150, 520 + k * 150, u) + 200 * S.clear} y={ROAD_Y - 40 - 30 * Math.sin(Math.PI * u)} w={90} op={1 - S.clear} />;
+    return <Sprite key={k} name={k===4&&f>=E.find.l?"plug/048_34":"plug/001_34"} x={mix(150, 520 + k * 150, u) + 200 * S.clear} y={ROAD_Y - 40 - 30 * Math.sin(Math.PI * u)} w={90} op={1 - S.clear} />;
   });
   return (
     <Lens plan={GP} f={f}>
@@ -89,14 +90,15 @@ const Scene = () => {
               <div style={{position: "absolute", left: x - 3, top: NODE_Y + 70, width: 6, height: (ROAD_Y - NODE_Y - 80) * Math.min(1, node(k)), background: C.bone, opacity: 0.8}} />
               {k < 3 ? <Sprite name={CHIPS[k]} x={x} y={NODE_Y - 70 * (1 - Math.min(1, node(k))) + id(k).y} w={340} rim={lit[k] > 0.5 ? 0.7 : 0} />
                 : (
-                  <Slab x={x - 160} y={NODE_Y - 100 - 70 * (1 - Math.min(1, node(k)))} w={320} h={200} r={14} color={C.bone} depth={10} id="rankboard">
+                  <Slab x={x - 160} y={NODE_Y - 100 - 70 * (1 - Math.min(1, node(k)))} w={340} h={228} r={14} color={C.bone} depth={10} id="rankboard">
+                    <div style={{position:"absolute",left:24,top:16}}><Engrave size={38}>ranking</Engrave></div>
                     {SCORES.map((v, j) => (
                       <React.Fragment key={j}>
-                        <div style={{position: "absolute", left: 24, top: 24 + j * 33, width: 240, height: 20, borderRadius: 5, background: "rgba(0,0,0,0.10)"}} />
-                        <div style={{position: "absolute", left: 24, top: 24 + j * 33, width: 240 * v * S.bars, height: 20, borderRadius: 5, background: S.pick > 0.5 && j < 2 ? C.green : C.blueHi, opacity: 0.9}} />
+                        <div style={{position: "absolute", left: 24, top: 65 + j * 28, width: 240, height: 20, borderRadius: 5, background: "rgba(0,0,0,0.10)"}} />
+                        <div style={{position: "absolute", left: 24, top: 65 + j * 28, width: 240 * v * S.bars, height: 20, borderRadius: 5, background: S.pick > 0.5 && j < 2 ? C.green : C.blueHi, opacity: 0.9}} />
                       </React.Fragment>
                     ))}
-                    {S.bars > 0.5 && <div style={{position: "absolute", left: 274, top: mix(24 + 4 * 33, 24, S.cursor) - 1, width: 0, height: 0, borderTop: "11px solid transparent", borderBottom: "11px solid transparent", borderRight: `16px solid ${C.ink}`}} />}
+                    {S.bars > 0.5 && <div style={{position: "absolute", left: 274, top: mix(65 + 4 * 28, 65, S.cursor) - 1, width: 0, height: 0, borderTop: "11px solid transparent", borderBottom: "11px solid transparent", borderRight: `16px solid ${C.ink}`}} />}
                   </Slab>
                 )}
             </div>
@@ -124,10 +126,10 @@ const Scene = () => {
           )}
         </Layer>
         <Layer id="txt" exempt>
+          <Tag x={1300} y={ROAD_Y + 40} op={cl((f - E.cand.l) / 10) * (1 - S.clear)}>candidates</Tag>
           <Tag x={200} y={ROAD_Y - 290} op={cl((f - E.sci.s) / (E.sci.l - E.sci.s + 2)) * (1 - S.clear)} on="dish">scientists' lab</Tag>
-          <Tag x={NODE[0]} y={NODE_Y + 120} op={cl((f - E.data.l) / 8) * tuck} on="chip">target from data</Tag>
-          <Tag x={GOAL.x} y={GOAL.y + 110} op={cl((f - E.sub.l) / 8)} on="goal">for this case</Tag>
-          <Source>Illustration · the four tools as used in Ren et al., Chem. Sci. 2023</Source>
+          {[[E.data,"target"],[E.shape,"structure"],[E.key,"design"],[E.rank,"ranking"]].map(([e,t],i,a)=>e && <Label key={t} x={NODE[i]} y={NODE_Y+117} text={t} at={e.l} out={a[i+1]?.[0]?.s-9||E.met.s} align="center"/>)}
+          {f>=E.data.l && <Source>Illustration · the four tools as used in Ren et al., Chem. Sci. 2023</Source>}
         </Layer>
       </Stage>
     </Lens>

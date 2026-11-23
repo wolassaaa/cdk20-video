@@ -6,10 +6,10 @@
 // round two made the key turn：048 插进小插座、拧 90°、红卡扣、灯灭（T7 一抖），左上角目标牌 2 打勾。
 // 接点：开头 T2 从右甩进（8-02 是 B 页），结尾 T5 料杆擦除（8-04–07 出镜段）。L0 第 8 区大板。数字照旁白：thirteen、30 days、two。
 import React from "react";
-import {Composition, registerRoot, useCurrentFrame} from "remotion";
+import {Composition, registerRoot, useCurrentFrame, OffthreadVideo, Sequence, staticFile} from "remotion";
 import K from "./keys_8-03.json";
 import {Lens, Layer, guidePlan} from "../manual/kit.jsx";
-import {C, camBreath, Stage, Sprite, Slab, Runner, Label, Pen, Source, Counter, Engrave, Tick, Lamp, anchorOf, pathOf, evMapB, T5Out, whipX, impact} from "./bkit.jsx";
+import {C, Plate, Tag, camBreath, Stage, Sprite, Slab, Runner, Label, Pen, Source, Counter, Engrave, Tick, Lamp, anchorOf, pathOf, evMapB, T5Out, whipX, impact} from "./bkit.jsx";
 import {useGsapTimeline, idle, RULE} from "./gsapFrame.jsx";
 
 const E = evMapB(K);
@@ -17,15 +17,16 @@ const GP = guidePlan(K);
 const LEN = K.len_f;
 const ZONE = 8;
 
-const GOAL0 = {x: 760, y: 280, w: 400, h: 330, fs: 270}, GOAL1 = {x: 70, y: 60, w: 170, h: 140, fs: 116};
+const GOAL0 = {x: 700, y: 326, w: 520, h: 160, fs: 76}, GOAL1 = {x: 145, y: 163, w: 330, h: 86, fs: 52};
 const CHIPS = ["pandaomics", "chemistry42", "alphafold"];
 const CHIP_X = [500, 960, 1420], CHIP_Y = 450, CHIP_W = 400;
 const CONV_Y = 760;
 // 十三个插头掉进盘（7 + 6）
-const TRAY = {x: 1080, y: 470, w: 640, h: 230};
-const SLOT = (i) => ({x: TRAY.x + 70 + (i < 7 ? i : i - 7 + 0.5) * 83, y: TRAY.y + (i < 7 ? 70 : 160)});
+const TRAY = {x: 220, y: 197, w: 1498, h: 588};
+const TD_POINTS = [[109,45],[178,50],[129,69],[189,72],[108,92],[138,92],[161,80],[200,101],[110,118],[172,119],[248,110],[228,132],[91,134]];
+const SLOT = (i) => ({x:157+1606*TD_POINTS[i][0]/320,y:185+610*TD_POINTS[i][1]/180});
 const ROAD_Y = 800, ROAD_X0 = 150, ROAD_X1 = 1770;
-const SOCK = {x: 1240, y: 420, w: 400};
+const SOCK = {x: 1310, y: 420, w: 615};
 const PLUG_IN = 0.29;                           // 小插座正面图里插头端面的直径 / 插座宽
 
 const Scene = () => {
@@ -38,8 +39,8 @@ const Scene = () => {
     X.tw("clear1", 0, 1, E.pile.s - 6, E.pile.l + 10, "power3.in");
     X.land("pile", 0, 1, E.pile.l + 8);
     X.tw("tray", 0, 1, E.mil.l, E.mil.l + 30, "power2.out");
-    [...Array(13)].forEach((_, i) => X.tw(`d${i}`, 0, 1, E.n13.l - 52 + i * 4 - 14, E.n13.l - 52 + i * 4 + 4, "power2.in"));
-    [...Array(13)].forEach((_, i) => X.jiggle(`dj${i}`, E.n13.l - 52 + i * 4 + 4, 3, 0));
+    [...Array(13)].forEach((_, i) => X.tw(`d${i}`, 0, 1, E.n13.l-10+i*2, E.n13.l+i*2, "power2.in"));
+    [...Array(13)].forEach((_, i) => X.jiggle(`dj${i}`, E.n13.l+i*2, 3, 0));
     X.count("n13", 0, 13, E.n13.l, 52);
     X.tw("clear2", 0, 1, E.road.s - 4, E.road.l + 16, "power3.in");
     X.tw("road", 0, 1, E.road.s + 6, E.road.e, "power2.out");
@@ -77,7 +78,7 @@ const Scene = () => {
           {S.goal > 0.01 && (
             <Slab x={g.x} y={g.y - 40 * (1 - Math.min(1, S.goal))} w={g.w} h={g.h} r={mix(34, 18, S.badge)} color={C.bone} depth={mix(12, 7, S.badge)} op={Math.min(1, S.goal * 1.5)}
                   sheen={S.badge > 0 && S.badge < 1 ? S.badge : -1} id="goal">
-              <div style={{width: g.w, height: g.h, display: "flex", alignItems: "center", justifyContent: "center"}}><Engrave size={g.fs}>2</Engrave></div>
+              <div style={{width: g.w, height: g.h, display: "flex", alignItems: "center", justifyContent: "center"}}><Engrave size={Math.min(68,g.fs)}>Objective 2</Engrave></div>
             </Slab>
           )}
           <Tick x={GOAL1.x + GOAL1.w + 50} y={GOAL1.y + 60} s={80} p={S.tick} sw={13} />
@@ -85,38 +86,45 @@ const Scene = () => {
 
         <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `translateX(${c1}px)`}}>
           <Layer id="chips">
-            {CHIPS.map((n, i) => {
-              const a = S[`c${i}`];
-              return a > 0.01 && <Sprite key={i} name={`chip_${n}/34`} x={CHIP_X[i]} y={CHIP_Y - 40 * (1 - Math.min(1, a)) + id(1 + i).y} w={CHIP_W} op={Math.min(1, a * 1.6)} rot={id(1 + i).r} />;
+            {["pandaomics", "alphafold", "chemistry42"].map((n, i) => {
+              const a = S[`c${i}`] || 0;
+              return a > 0.01 && <React.Fragment key={n}>
+                <Sprite name={`chip_${n}/34`} x={CHIP_X[i]} y={CHIP_Y - 40 * (1 - Math.min(1, a)) + id(10 + i).y} w={300} op={Math.min(1, a * 1.5)} />
+                <Tag x={CHIP_X[i]} y={640} op={Math.min(1, a * 1.5)}>{["PandaOmics", "AlphaFold", "Chemistry42"][i]}</Tag>
+              </React.Fragment>;
             })}
+            {f>=E.conv.s && <Runner d="M355 604 H1675" draw={Math.min(1,(f-E.conv.s)/21)} width={23}/>}
           </Layer>
           <Layer id="conv">
-            {S.conv > 0.001 && <Runner d={`M100,${CONV_Y} L1820,${CONV_Y}`} draw={S.conv} width={18} />}
-            {S.conv > 0.5 && [...Array(8)].map((_, i) => {
-              const x = convX(i), out = i % 3 === 1 && x > CHIP_X[1];
-              return <Sprite key={i} name="plug/blank_34" x={x} y={CONV_Y - 46 + (out ? Math.min(60, (x - CHIP_X[1]) * 0.25) : 0)} w={120} op={Math.min(1, (S.conv - 0.5) * 3) * (out ? 0.55 : 1)}
-                             rim={out ? 0 : convRim(x)} style={out ? {filter: "grayscale(0.9)"} : undefined} />;
+            {[0,1,2].map(i=>{
+              const p=Math.max(0,Math.min(1,(f-E.fast.l+30-i*10)/10));
+              return p>0&&p<1&&<Sprite key={i} name={`plug/${"ABC"[i]}_34`} x={355+1320*p} y={500-44*Math.sin(Math.PI*p)} w={200}/>;
             })}
           </Layer>
         </div>
 
         <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `translateX(${c2}px)`}}>
           <Layer id="pile">
-            {S.pile > 0.01 && <Sprite name="beads/34" x={560} y={500 + id(5).y} w={700} op={Math.min(1, S.pile * 1.5)} sx={(0.85 + 0.15 * S.pile) * pileBreath} sy={(0.85 + 0.15 * S.pile) * (2 - pileBreath)} />}
+            {f>=E.mil.l && f<E.road.s && <Sequence from={E.mil.l} layout="none">
+              <OffthreadVideo src={staticFile("millions13.mp4")} trimBefore={220-(E.n13.l-E.mil.l)} muted style={{position:"absolute",left:157,top:185,width:1606,height:610,objectFit:"fill",borderRadius:24}}/>
+            </Sequence>}
           </Layer>
           <Layer id="tray">
-            {S.tray > 0.01 && <Slab x={TRAY.x} y={TRAY.y} w={TRAY.w} h={TRAY.h} r={24} color={C.bone} depth={10} op={S.tray} id="tray" />}
+
             {[...Array(13)].map((_, i) => {
               const d = S[`d${i}`];
               if (d <= 0.001 || (i === 0 && S.hop1 > 0)) return null;
               const s = SLOT(i);
               // 从料珠堆顶上跳出来，划一道弧进盘
-              return <Sprite key={i} name="plug/A_34" x={mix(640, s.x, Math.min(1, d * 1.1))} y={mix(380, s.y, d) - 220 * Math.sin(Math.PI * d) + (S[`dj${i}`] || 0)} w={80} lift={30 * (1 - d)} />;
+              return <Sprite key={i} name="plug/048_34" x={s.x} y={s.y-105*(1-d)+(S[`dj${i}`] || 0)} w={158} lift={30 * (1 - d)} />;
             })}
           </Layer>
         </div>
 
-        <Layer id="road">
+        <Layer id="road" exempt>
+          {f>=E.d30.s&&<Plate x={500} y={670} w={230} h={100} text={f>=E.d30.l?"30 days":""} size={56} rot={-13*Math.max(0,1-Math.abs(f-E.d30.l)/12)}/>}
+          {f>=E.hit.l&&<Plate x={750} y={740} w={185} h={70} text="Hit" size={45} color={C.blue} light/>}
+
           {S.road > 0.001 && <Runner d={`M${ROAD_X0},${ROAD_Y} L${ROAD_X1},${ROAD_Y}`} draw={S.road} width={20} />}
           {S.road > 0.3 && [...Array(17)].map((_, i) => {
             const x = ROAD_X0 + 30 + i * 98, a = Math.max(0, Math.min(1, (S.road * 1.2 - i / 17) * 3));
@@ -141,7 +149,6 @@ const Scene = () => {
         </Layer>
 
         <Layer id="txt" exempt>
-          <Pen text="?" x={1190} y={200} at={E.q.l - 4} out={E.badge.s} size={220} color={C.red} rot={8} dur={24} />
           <Pen text="fast" x={1500 + c1} y={610} at={E.fast.l} out={E.pile.s} size={80} />
           <Pen text="millions" x={330 + c2} y={240} at={E.mil.l} size={80} />
           {S.n13 > 0.05 && (
@@ -151,8 +158,7 @@ const Scene = () => {
           )}
           <Label text="molecules made" size={56} x={TRAY.x + 220 + c2} y={TRAY.y - 112} at={E.made.l} />
           <Pen text="years" x={1560} y={700} at={E.years.l - 4} size={80} />
-          <Label text="30 days" size={56} x={ROAD_X0 + 110} y={ROAD_Y - 230} at={E.d30.l} align="center" />
-          <Label text="round two" size={56} x={SOCK.x} y={SOCK.y - 250} at={E.r2.s} align="center" />
+          <Label text="round two" size={56} x={860} y={300} at={E.r2.s} align="right" />
           <Source>Illustration · data: Ren et al., Chem. Sci. 2023</Source>
         </Layer>
       </Stage>

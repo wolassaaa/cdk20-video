@@ -11,7 +11,7 @@ import React from "react";
 import {Composition, registerRoot, useCurrentFrame} from "remotion";
 import K from "./keys_7-03.json";
 import {Lens, Layer, guidePlan} from "../manual/kit.jsx";
-import {C, Stage, Sprite, Plate, Runner, Tag, Pen, Source, evMapB, whipX, impact, pathOf, camBreath} from "./bkit.jsx";
+import {C, Stage, Sprite, Plate, Runner, Tag, Label, Pen, Source, evMapB, whipX, impact, pathOf, camBreath} from "./bkit.jsx";
 import {useGsapTimeline, idle} from "./gsapFrame.jsx";
 
 const E = evMapB(K);
@@ -20,7 +20,7 @@ const LEN = K.len_f;
 const ZONE = 7;
 const mix = (a, b, t) => a + (b - a) * t;
 const cl = (t) => Math.max(0, Math.min(1, t));
-const AF = {x: 820, y: 500, w: 400};
+const AF = {x: 795, y: 499, w: 462};
 const AF2 = {x: 420, y: 420, w: 340};
 const CHIP = {x: 1440, y: 580, w: 470};
 const LANE = pathOf([[60, 860], [500, 850], [900, 800], [1180, 680], [1290, 600]]);
@@ -42,7 +42,7 @@ const Scene = () => {
     X.tw("lane", 0, 1, E.shift.l, E.keys.s + 6, "power2.out");
     X.tw("keys", 0, 1, E.keys.s, E.back.l, "none");
     X.tw("fails", 0, 1, E.fail.s, E.back.l + 6, "none");
-    X.tw("loop", 0, 1, E.back.l + 8, E.loop.l, "power2.inOut");
+    X.tw("loop", 0, 1, E.back.l + 8, Math.max(E.loop.e,LEN-10), "power2.inOut");
     X.jiggle("chj", E.loop.l, 6, 0);
   });
   const whip = f < 7 ? whipX(f, 0, "in", -1) : f > LEN - 8 ? whipX(f, LEN - 7, "out", -1) : 0;
@@ -80,7 +80,6 @@ const Scene = () => {
           ))}
           {/* 芯片 + 环 */}
           {S.chip > 0.01 && <Sprite name="chip_chemistry42/34" x={mix(CHIP.x + 500, CHIP.x, S.chip)} y={CHIP.y - (S.chj || 0)} w={CHIP.w} op={cl(S.chip * 2)} />}
-          {S.chip > 0.5 && <Sprite name="loop/34" x={CHIP.x + 10} y={CHIP.y - 290 - (S.chj || 0)} w={330} rot={360 * S.loop} op={cl(S.chip * 2 - 1)} />}
           {flow(KEYS, S.keys, 0.09)}
           {flow(FAILS, S.fails, 0.14)}
         </Layer>
@@ -88,8 +87,8 @@ const Scene = () => {
           <div style={{position: "absolute", left: 0, top: 0, opacity: cl(S.plate * 2), transform: `translateY(${(-80 * (1 - S.plate)).toFixed(1)}px)`}}>
             <Plate x={70} y={60} w={110} h={110} text="2" size={80} color={C.bone} id="step2" />
           </div>
-          <Tag x={AF.x} y={AF.y + 250} op={cl((f - E.aflbl.s) / (E.aflbl.l - E.aflbl.s + 2)) * (1 - cl((f - E.once.s) / 10))} on="af">predicted model (AlphaFold DB v6)</Tag>
-          <Tag x={AF.x} y={AF.y + 250} op={cl((f - E.once.l) / 10) * (1 - S.shift)} on="af">lab-measured structure</Tag>
+          <Label text="predicted model (AlphaFold DB v6)" size={40} x={AF.x} y={AF.y + 250} at={E.aflbl.l} out={E.once.s} align="center" on="af" />
+          <Tag x={AF.x} y={AF.y + 250} op={(f>=(K.words.find(w=>w.key==="structure#1")?.f0??E.once.l)?1:0) * (1 - S.shift)} on="af">lab-measured structure</Tag>
           <Pen text="not measured yet" x={AF.x + 230} y={250} at={E.q.s} out={E.shift.s} rot={-3} />
           <Pen text="failures too" x={660} y={660} at={E.fail.l} out={E.loop.s} rot={-3} />
           <Tag x={CHIP.x + 10} y={CHIP.y + 170} op={cl((f - E.loop.l) / 10)} on="chip">next round</Tag>

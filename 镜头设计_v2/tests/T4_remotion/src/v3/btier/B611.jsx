@@ -13,6 +13,8 @@ const GP=guidePlan(K);
 // 审查批 1（11-23）：容器缩放 ×1.8（ZS = 2.0）跟着蓝色吊牌和 048 走；cam_end、cam_back 拉回 ZF = 1.2；share 起 ×3.0 以 048 吊牌为中心。
 // 机位三个数 [cx, 缩放, 路在屏上的 y]；dest 可以是函数（逐帧跟着吊牌）。
 const BIN={x:X[4],top:Y+110,w:180,h:100,rim:14,front:Y+178};     // Animals 站下的骨白敞口料盒（世界坐标）
+// P59：世界坐标里的 30 px 小牌（Tag 固定 40 px，在 ×2–3 的机位下太大）
+const TagS=({x,y,op=1,align="left",children})=><div data-role="tag" style={{position:"absolute",left:x,top:y,transform:align==="center"?"translateX(-50%)":undefined,padding:"3px 12px 5px",borderRadius:10,background:"rgba(243,238,230,0.80)",fontFamily:"InstrumentSerifB",fontSize:30,letterSpacing:1,color:C.ink,opacity:0.88*op,whiteSpace:"nowrap",lineHeight:1.2}}>{children}</div>;
 const camAt=(f,init,list)=>{
   let v=init;
   for (const [e,d] of list) {
@@ -51,10 +53,9 @@ const Scene=()=>{
   ].filter(([,e])=>f>=e.l && f<=E.label_bile.e);
   return <Lens plan={GP} f={f}>
     <Stage zone={ZONE} f={continuous} tray={false}>
-      <div style={{position:"absolute",inset:0,background:"rgba(244,241,234,.20)"}}/>
       <RoadWorld cx={mix(cx+5.6*Math.sin(continuous*.15),X[3],dive)} zoom={z} y={ry} red={{6:glow(f,E.approved)}} ticks={{0:1,1:1,3:1,6:hit(f,E.approved)}}>
         <Status/>
-        <Sprite name="dish/34" x={X[3]+142} y={Y+57+3*Math.sin(continuous*.22)} w={108}/>
+        {gate>0 && <TagS x={X[3]+188} y={Y+40} op={gate*(1-tween(f,E.share.s-12,E.share.s))}>not taken to trials</TagS>}
         {gate>0 && <Slab x={X[3]+172} y={Y-25-60*(1-gate)} w={33} h={53} r={6} color={C.bone} op={gate} id="gate"/>}
         {dates>0 && <Plate x={X[6]-98} y={Y-193} w={196} h={52} size={36} text="Sep 2026" color={C.bone} op={dates} id="date"/>}
         {blueOn>0 && <TagBody x={blueX} color={C.blue} op={blueOn} rot={Math.sin(f*.26)*4} id="approvedTag"/>}
@@ -69,16 +70,19 @@ const Scene=()=>{
             <Gate x1={X[3]} y1={Y+97} x2={mix(X[3],x,share)} y2={mix(Y+97,y,share)} w={6}/>
             <Plate x={mix(X[3],x,share)-37} y={mix(Y+97,y,share)} w={74} h={42} size={29} text="048" color={C.gold} op={share} id={`share${i}`}/>
             {people>0 && <Person1 x={x+64} y={y+4+16*(1-people)} w={130} op={people}/>}
+            {people>0 && i===0 && <TagS x={X[3]} y={Y+150} op={people} align="center">other researchers</TagS>}
           </React.Fragment>;
         })}
         <TagBody x={X[3]+53*Math.sin(Math.PI*nudge)} y={Y+18} text="048" rot={Math.sin(continuous*.16)*1.7} id="gold048"/>
       </RoadWorld>
-      {labelLines.length>0 && <div data-role="label" data-rid="lira" style={{position:"absolute",left:130,top:672,
+      {labelLines.length>0 && <div data-role="label" data-rid="lira" style={{position:"absolute",left:1241,top:720,maxWidth:574,
         background:"rgba(244,241,234,.8)", borderRadius:12,padding:"12px 22px",fontFamily:"InstrumentSerifB",fontSize:60,lineHeight:1,color:C.ink}}>
         {labelLines.map(([s])=><div key={s}>{s}</div>)}</div>}
-      <Source>Illustration · Wang et al. 2023; FDA, Sep 2026; GEN, Jan 2023</Source>
+      {dive<.01 && <Source>Illustration · Wang et al. 2023; FDA, Sep 2026; GEN, Jan 2023</Source>}
       {dive>0 && <Slab x={mix(960-66*z,-1000,dive)} y={mix(ry+18*z,-800,dive)} w={mix(132*z,3900,dive)} h={mix(77*z,2700,dive)}
-        color={C.gold} id="diveGold" depth={8}/>}
+        color={C.gold} id="diveGold" depth={8}>
+        <div style={{position:"absolute",inset:0,display:"grid",placeItems:"center"}}><Engrave size={mix(36,470,dive)}>048</Engrave></div>
+      </Slab>}
     </Stage>
   </Lens>;
 };

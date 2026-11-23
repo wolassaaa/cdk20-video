@@ -31,10 +31,10 @@ const LANE_Y = 790;
 const STACK = {x: 260, y: 700};
 const BOOK = {x: 620, y: 650, w: 170};
 const CNT = {x: 1250, y: 572};
-const CHIP = {x: 1010, y: 745, w: 200};
-const TRAY = {x: 1480, y: 735, w: 300, h: 104};
+const CHIP = {x: 900, y: 624, w: 200};
+const TRAY = {x: 1460, y: 651, w: 300, h: 104};
 const PLUGS = [...Array(13)].map((_, k) => ({x: TRAY.x + 30 + (k % 7) * 40, y: TRAY.y + 30 + Math.floor(k / 7) * 46, name: ["A", "B", "C", "D", "E", "F", "001"][k % 7]}));
-const GHOST = [...Array(40)].map((_, k) => ({x: 1140 + rand(k + 1) * 300, y: 740 + rand(k + 50) * 100, r: (rand(k + 9) - 0.5) * 60}));
+const GHOST = [...Array(40)].map((_, k) => ({x: 1140 + rand(k + 1) * 300, y: 652 + rand(k + 50) * 100, r: (rand(k + 9) - 0.5) * 60}));
 const DOTC = [C.blueHi, C.gold, C.green, C.blue, C.grey];
 
 // 孔板：骨白板 + 8 × 12 个孔，孔里一点颜色（每孔一种化合物）
@@ -108,7 +108,7 @@ const Scene = () => {
       <Stage zone={ZONE} f={f} whip={whip} shakeX={impact(f, E.made.l)} over={<T5Out name="runner" f={f} len={LEN} />}>
         <Layer id={["board", "hopper", "jam", "now2", "tray13"]}>
           <Board6 f={f} cam={cam} cols={1} hdr={{B: E.bef.l, N: E.now.l}}
-                  rows={[true, {name: E.row2.l, B: E.mil.l, Bs: [E.bn.l], N: E.des.l, Ns: [E.made.l]}, false, false]}
+                  rows={[true, {name: (wf("hit#1")?.f0 ?? E.row2.l), B: E.mil.l, Bs: [E.bn.l], N: E.des.l, Ns: [E.made.l]}, false, false]}
                   lit={{"1B": cl((f - E.focus2.s) / 12) * (1 - S.pan) * (popB > 0.5 ? 0 : 1), "1N": S.pan * (popN > 0.5 ? 0 : 1)}}>
             <Dim i={1} v={Math.max(popB, popN, S.move * 0.7)} />
             {/* BEFORE：化合物板堆 → 料杆 → 读板机 */}
@@ -127,13 +127,14 @@ const Scene = () => {
               </Slab>
             )}
             {S.book > 0.01 && popB > 0.05 && <Sprite name="book/34" x={mix(BOOK.x - 260, BOOK.x, S.book)} y={BOOK.y} w={BOOK.w} op={cl(S.book * 2) * popB} rot={-4} />}
-            {S.book > 0.5 && popB > 0.5 && <Tag x={BOOK.x + 200} y={BOOK.y - 30} op={cl((S.book - 0.5) * 2) * cl(popB * 2 - 1)} on="book">2023 review</Tag>}
+            {f>=E.rev.l && popB > 0.5 && <Tag x={620} y={545} op={cl((S.book - 0.5) * 2) * cl(popB * 2 - 1)} on="book">Wang et al., 2023 (review)</Tag>}
+            {S.run > 0.01 && popB > 0.5 && <Tag x={1060} y={570} op={popB * cl(S.run * 3)} on="reader">plate reader</Tag>}
             {/* NOW：数字轮 + Chemistry42 芯片 + 一片半透明的设计 → 13 个做出来的 */}
             <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, opacity: keepN, transformOrigin: `${N.cx}px ${N.cy}px`, transform: `scale(${(0.35 + 0.65 * keepN).toFixed(3)})`}}>
               {popN > 0.01 && (
                 <div style={{position: "absolute", left: CNT.x, top: CNT.y - (S.cj || 0), opacity: cl(popN * 2)}}>
                   <Slab x={-200} y={-14} w={400} h={128} r={18} color={C.bone} depth={10} id="cntslab" sheen={S.n > 13.5 && S.n < 8917.5 ? (S.n / 8918) : -1} />
-                  <Counter value={S.n} digits={4} comma size={100} x={0} y={0} align="center" />
+                  <Counter value={f>=E.made.l?13:8918} digits={4} comma size={100} x={0} y={0} align="center" />
                 </div>
               )}
               {S.chip > 0.01 && <Sprite name="chip_chemistry42/34" x={mix(CHIP.x - 300, CHIP.x, S.chip)} y={CHIP.y + id(3).y} w={CHIP.w} op={cl(S.chip * 2)} />}
@@ -143,7 +144,6 @@ const Scene = () => {
               ))}
               {S.chip > 0.01 && <Slab x={TRAY.x} y={TRAY.y + 40 * (1 - S.chip) - (S.tj || 0)} w={TRAY.w} h={TRAY.h} r={16} color={C.bone} depth={10} op={cl(S.chip * 2)} id="tray13" />}
               {plugs}
-              {S.eject > 0.3 && <Tag x={TRAY.x + TRAY.w / 2} y={TRAY.y - 56} op={cl(S.eject * 3 - 1)} on="plug">each plug = one molecule</Tag>}
             </div>
             {S.backN > 0.01 && <SlotDeco i={1} side="N" op={S.backN} />}
           </Board6>

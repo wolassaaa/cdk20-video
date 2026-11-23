@@ -7,7 +7,7 @@ import React from "react";
 import {Composition, registerRoot, useCurrentFrame} from "remotion";
 import K from "./keys_4-06.json";
 import {Lens, Layer, guidePlan} from "../manual/kit.jsx";
-import {C, Calendar1, camBreath, Stage, Sprite, Runner, Plate, Label, Pen, Source, Person1, evMapB, T5In, whipX, impact} from "./bkit.jsx";
+import {C, Slab, Calendar1, camBreath, Stage, Sprite, Runner, Plate, Label, Pen, Source, Person1, evMapB, T5In, whipX, impact} from "./bkit.jsx";
 import {useGsapTimeline, idle} from "./gsapFrame.jsx";
 
 const E = evMapB(K);
@@ -15,7 +15,7 @@ const GP = guidePlan(K);
 const LEN = K.len_f;
 const ZONE = 4;
 
-const LOOP = {cx: 820, cy: 450, r: 230};
+const LOOP = {cx: 910, cy: 470, r: 230};
 const ringD = `M${LOOP.cx},${LOOP.cy - LOOP.r} a${LOOP.r},${LOOP.r} 0 1,1 -0.01,0`;
 // 四站：顶 Imagine、右 Make、底 Test、左 Tweak（角度：-90 顶，顺时针）
 const ST = [["Imagine", -90], ["Make", 0], ["Test", 90], ["Tweak", 180]];
@@ -29,7 +29,7 @@ const onRing = (a) => { const t = (a * Math.PI) / 180; return [LOOP.cx + LOOP.r 
 const FLASK = {x: 1360, y: 330, w: 190};
 const MINI = {x: 1250, y: 720, w: 230};
 const BILL = {x: 1640, y: 760};
-const CAL = {x: 1640, y: 330, w: 330};
+const CAL = {x: 1640, y: 440, w: 218};
 const KEY_W = 170;
 
 const Scene = () => {
@@ -54,7 +54,7 @@ const Scene = () => {
     X.tw("a3", 90, 180, E.tweak.s, E.tweak.l + 6, "power2.inOut");
     X.tw("morph", 0, 1, E.tweak.l, E.tweak.l + 18, "power2.inOut");
     X.tw("a4", 180, 270, E.again.s, E.again.l + 10, "power2.inOut");
-    X.land("cal", 0, 1, E.round.l, {antic: false});
+    X.land("cal", 0, 1, K.words.find(w=>w.key==="time#1")?.f0??E.round.l, {antic: false});
     // every single round：越跑越快，到段尾跑三圈半
     X.tw("a5", 270, 270 + 360 * 3.5, E.round.s, LEN - 8, "power2.in");
   });
@@ -72,7 +72,7 @@ const Scene = () => {
   const pokeOut = S.poke * (1 - S.back);
   const kp = [kx + 120 * pokeOut + (S.failJ || 0), ky + 40 * pokeOut];
   const grey = S.grey * (1 - S.morph);
-  const keyName = S.morph > 0.5 ? "plug/A_34" : "plug/blank_34";
+  const keyName = f >= E.make.l ? "plug/A_34" : "plug/blank_34";
   const morphSq = 1 - 0.25 * Math.sin(Math.PI * S.morph);
   // 每过顶站一次（270 + 360k）掉一张钞票、日历翻一页
   const laps = f >= E.round.s ? Math.max(0, (S.a5 - 270) / 360) : 0;
@@ -85,7 +85,8 @@ const Scene = () => {
     <Lens plan={GP} f={f}>
       <Stage zone={ZONE} f={f} whip={whip} shakeX={shake} shakeY={shake * 0.5} cam={camBreath(f, K, [])} over={<T5In name="runner" f={f} />}>
         <Layer id="loop">
-          {S.ring > 0.001 && <Runner d={ringD} draw={S.ring} width={26} />}
+          {S.ring > .001 && <Sprite hero name="track/34_codex2x" x={910} y={463} w={1100} op={Math.min(1,S.ring)}/>}
+          {S.ring > 0.001 && <Runner d={ringD} draw={S.ring} width={14} />}
           {ringFlash > 0.01 && (
             <svg width={1920} height={1080} style={{position: "absolute", left: 0, top: 0, overflow: "visible"}}>
               <circle cx={LOOP.cx} cy={LOOP.cy} r={LOOP.r + 30 * S.flash} fill="none" stroke={C.bone} strokeWidth={10} opacity={0.8 * ringFlash} />
@@ -102,14 +103,13 @@ const Scene = () => {
         </Layer>
 
         <Layer id="props">
-          {S.chem > 0.01 && <Person1 x={250} y={600 - 40 * (1 - Math.min(1, S.chem)) + id(6).y} w={460} op={Math.min(1, S.chem * 1.5)} />}
-          {S.flask > 0.01 && <Sprite name="flask/34" x={FLASK.x} y={FLASK.y - 40 * (1 - Math.min(1, S.flask)) + id(7).y} w={FLASK.w} op={Math.min(1, S.flask * 1.5)} rot={id(7).r} />}
+          {S.flask > 0.01 && <Sprite name="flask/34" x={FLASK.x} y={FLASK.y - 50 * (1 - Math.min(1, S.flask)) + id(11).y} w={FLASK.w} op={Math.min(1, S.flask * 1.5)} rot={id(11).r} />}
           {S.mini > 0.01 && <Sprite name="mini/m34_on" x={MINI.x} y={MINI.y - 40 * (1 - Math.min(1, S.mini)) + id(8).y} w={MINI.w} op={Math.min(1, S.mini * 1.5)} />}
         </Layer>
         <Layer id="costs">
           {S.cal > 0.01 && <Calendar1 x={CAL.x} y={CAL.y - 40 * (1 - Math.min(1, S.cal)) - 14 * flip + id(9).y} w={CAL.w} op={Math.min(1, S.cal * 1.5)} rot={id(9).r - 3 * flip} />}
           {[0, 1, 2].map((k) => drop(k) > 0.01 && (
-            <Sprite key={k} name="bill/34" x={BILL.x + (k % 2 ? 26 : -18)} y={mix(LOOP.cy - LOOP.r - 40, BILL.y - k * 26, drop(k))} w={300}
+            <Sprite key={k} name="coins/34" x={BILL.x + (k % 2 ? 26 : -18)} y={mix(LOOP.cy - LOOP.r - 40, BILL.y - k * 26, drop(k))} w={300}
                     rot={mix(-30, ((k * 53) % 14) - 7, drop(k))} op={Math.min(1, drop(k) * 3)} shadow={drop(k) > 0.9} />
           ))}
         </Layer>
@@ -123,9 +123,8 @@ const Scene = () => {
         </Layer>
 
         <Layer id="txt" exempt>
-          <Label text="chemists" size={52} x={230} y={800} at={E.chem.l} out={E.round.s} align="center" />
           <Pen text="fails" x={560} y={790} at={E.fail.l - 4} out={E.tweak.s} size={64} rot={-4} />
-          <Label text="time and money" size={56} x={1640} y={130} at={E.cost.l} align="center" />
+          <Label text="time and money" size={56} x={1560} y={150} at={E.cost.l} align="center" />
           <Source>Illustration · the classic design–make–test cycle</Source>
         </Layer>
       </Stage>

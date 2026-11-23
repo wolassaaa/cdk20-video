@@ -21,13 +21,13 @@ const RUN_Y = 720;                                   // 第一幕的料杆
 const ST = [320, 830, 1600];                         // 三站中心 x
 const HOP = pathOf([[1000, 676], [1165, 470], [1330, 676]]);       // 048 一大步
 const SOLO = [670, 440], LEFT = [390, 440], RIGHT = [1310, 440], OFF_R = [2350, 440];
-const DISH_W = 470;
+const DISH_W = 520;
 // 皿里细胞上的小插座（相对皿中心），9 个，4 个会变灰（失去信号的一半）
 const ICONS = [[-120, -40], [-40, -78], [52, -60], [-150, 32], [-62, 14], [30, 22], [118, 6], [-80, 84], [24, 92]];
 const DIM = [1, 4, 6, 7];
 const HEK_ICONS = [2, 4, 7];                          // HEK293：CDK20 少得多（Gemini 初审：对照皿里插座和 Huh7 一样多，看不出区别）
 const IN_DX = 40, IN_DY = -30;                        // 048 落进皿里液面的位置（相对皿中心），不卡在皿沿
-const BAR_X = 260, NM = 0.72, ROW1 = 744, ROW2 = 806, BAR_H = 26;   // 剂量条：1 nM = 0.72 px，1,700 → 1,224 px（审查批 1："1,700 nM" 整个标签右沿 ≤ x 1700，210 那条同比例）
+const BAR_X = 260, NM = 0.66, ROW1 = 744, ROW2 = 806, BAR_H = 26;   // 剂量条：1 nM = 0.72 px，1,700 → 1,224 px（审查批 1："1,700 nM" 整个标签右沿 ≤ x 1700，210 那条同比例）
 const GAUGE = {dx: 290, top: -170, h: 360, w: 60};                  // 信号表（相对皿中心）
 
 const Scene = () => {
@@ -107,7 +107,7 @@ const Scene = () => {
     const kk = w / DISH_W;
     return (
       <>
-        <Sprite name="dish/34" x={cx + id(tag === "h" ? 3 : 7).y * 0} y={cy + id(tag === "h" ? 3 : 7).y} w={w} />
+        <Sprite name="dish/34_codex2x" x={cx + id(tag === "h" ? 3 : 7).y * 0} y={cy + id(tag === "h" ? 3 : 7).y} w={w} />
         {ICONS.map(([ix, iy], i) => {
           const a = S[`ic${i}`];
           if (a <= 0.01 || (only && !only.includes(i))) return null;
@@ -201,6 +201,10 @@ const Scene = () => {
 
         {/* 字：豁免层 */}
         <Layer id="txt" exempt>
+          <Label text="binding test" size={44} x={ST[0]} y={760} at={E.road.l} out={E.shift.s} align="center" />
+          <Label text="enzyme test" size={44} x={ST[1]} y={760} at={E.road.l} out={E.shift.s} align="center" />
+          <Label text="048" size={44} x={1330} y={580} at={E.hop.l} out={E.shift.s} align="center" />
+          <Label text="packed with CDK20" size={44} x={1150} y={565} at={E.packed.l} out={E.lost.s} align="center" />
           <Label text="living cells" x={ST[2]} y={250} size={56} at={E.cells.l} out={E.shift.s} align="center" />
           <Label text="3 days" x={1450} y={420} size={56} at={E.cal.e - 14} out={E.dose.s + 10} align="center" />
           <Label text="Huh7" x={dishX} y={168} size={56} at={E.huh7.l} align="center" />
@@ -220,7 +224,7 @@ const Scene = () => {
               <div style={{position: "absolute", left: 4 * 30 + 26, top: 14, opacity: S.nm2, transform: `translateY(${(1 - S.nm2) * 12}px)`}}><Engrave size={44}>nM</Engrave></div>
             </div>
           )}
-          <Pen text="≈ 8×" x={760} y={652} at={E.eight.l} dur={24} size={60} rot={-3} />
+          <Pen text="≈ 8×" x={1325} y={682} at={E.eight.l} dur={24} size={60} rot={-3} />
           <Source>Illustration · data: Ren et al., Chem. Sci. 2023</Source>
         </Layer>
       </Stage>

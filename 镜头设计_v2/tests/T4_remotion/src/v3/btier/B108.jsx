@@ -16,8 +16,8 @@ const LEN = K.len_f;
 const ZONE = 1;
 
 const ROAD_Y = 690, X0 = 180, X1 = 1740;
-const CAP_W = 440;
-const BILLS = [...Array(20)].map((_, i) => ({x: 700 + ((i * 37) % 60) - 30, y: 650 - i * 15, r: ((i * 53) % 14) - 7}));   // 钞票一直落到句尾（Gemini 初审：一摞钞票落完就不动）
+const CAP_W = 445;
+const BILLS = [...Array(8)].map((_, i) => ({x: 700 + ((i * 37) % 60) - 30, y: 650 - i * 15, r: ((i * 53) % 14) - 7}));   // 钞票一直落到句尾（Gemini 初审：一摞钞票落完就不动）
 const CAPS = [...Array(10)].map((_, i) => ({x: 260 + i * 132, y: ROAD_Y - 52}));
 const WIN = 6;
 const MEDAL = {x: 1690, y: 470, w: 260};
@@ -27,16 +27,17 @@ const STAGES = [["find a target", 480], ["lab tests", 800], ["trials in people",
 const Scene = () => {
   const f = useCurrentFrame();
   const S = useGsapTimeline((tl, S, X) => {
-    X.tw("road", 0, 1, E.road.s, E.road.s + 50, "power2.out");
+    X.tw("road", 0, 1, E.born.s, E.born.l, "power2.out");
     X.land("cap0", 0, 1, E.road.s + 30, {antic: false});
     X.land("cal", 0, 1, E.year.l, {antic: false});
     X.land("born", 0, 1, E.born.l, {antic: false});
     X.tw("walk", 0, 1, E.walk.s, E.now.l, "sine.inOut");
     X.tw("clear1", 0, 1, E.cost.s - 8, E.cost.l + 20, "power3.in");
-    X.group(BILLS.map((_, i) => `b${i}`), 0, 1, E.cost.l, {step: Math.max(4, Math.floor((E.bil.e - E.cost.l - 10) / BILLS.length)), antic: false});
+    X.group(BILLS.map((_, i) => `b${i}`), 0, 1, E.n28.l, {step: 6, antic: false});
+    X.tw("billsettle",0,1,E.n28.l+42,E.bil.e,"sine.out");
     X.count("n28", 0, 2.8, E.n28.l, 36);
     X.tw("clear2", 0, 1, E.drugs.s - 8, E.drugs.l + 16, "power3.in");
-    X.group(CAPS.map((_, i) => `c${i}`), 0, 1, E.drugs.l + 4, {step: RULE.stagger, antic: false});
+    X.group(CAPS.map((_, i) => `c${i}`), 0, 1, E.people.l, {step: 3, antic: false});
     X.land("ppl", 0, 1, E.people.l, {antic: false});
     X.tw("one", 0, 1, E.one.s, E.one.l + 8, "power2.out");
     CAPS.forEach((_, i) => i !== WIN && X.tw(`d${i}`, 0, 1, E.drop.s - 6 + (i % 5) * 4, E.drop.s + (i % 5) * 4 + 30, "power2.in"));
@@ -60,8 +61,6 @@ const Scene = () => {
               const x = X0 + 20 + i * 76, a = Math.max(0, Math.min(1, (S.road * 1.2 - i / 21) * 3));
               return a > 0 && <Slab key={i} x={x - 3} y={ROAD_Y + 16} w={6} h={i % 5 === 0 ? 34 : 20} r={3} color={C.bone} depth={3} shadow={false} op={a} id={`yt${i}`} />;
             })}
-            {S.cal > 0.01 && <Calendar1 x={330} y={430 - 40 * (1 - Math.min(1, S.cal)) + id(1).y} w={330} op={Math.min(1, S.cal * 1.5)} rot={id(1).r} />}
-            {S.born > 0.01 && <Person1 red x={X0 + 40} y={ROAD_Y - 80 - 40 * (1 - Math.min(1, S.born))} w={360} op={Math.min(1, S.born * 1.5)} />}
             {S.cap0 > 0.01 && <Capsule1 x={walkX} y={ROAD_Y - 96 - 30 * hop(S.walk, 9)} w={CAP_W} op={Math.min(1, S.cap0 * 1.5)} lift={10} rot={-6 * Math.sin(Math.PI * 9 * S.walk)} />}
           </Layer>
           <Layer id="stages">
@@ -71,7 +70,7 @@ const Scene = () => {
             })}
           </Layer>
           <Layer id="roadtxt" exempt>
-            <Label text="born" size={52} x={X0 + 30} y={ROAD_Y + 70} at={E.born.l} align="center" />
+            {S.born > 0.01 && <Plate x={X0} y={ROAD_Y+55} w={118} h={62} text="born" size={36} op={Math.min(1,S.born)}/>}
             <Label text="now" size={52} x={X1 - 110} y={ROAD_Y + 70} at={E.now.l} align="center" />
           </Layer>
         </div>
@@ -81,7 +80,7 @@ const Scene = () => {
             {BILLS.map((b, i) => {
               const a = S[`b${i}`];
               if (a <= 0.01) return null;
-              return <Sprite key={i} name="bill/34" x={b.x} y={b.y - 120 * (1 - Math.min(1, a))} w={460} rot={b.r * (1.6 - 0.6 * Math.min(1, a))} op={Math.min(1, a * 2)} lift={i ? 0 : 0} shadow={i === 0} />;
+              return <Sprite key={i} name="bill/34" x={b.x} y={b.y - 120 * (1 - Math.min(1, a)) + 26*S.billsettle} w={452} rot={b.r * (1.6 - 0.6 * Math.min(1, a))} op={Math.min(1, a * 2)} lift={i ? 0 : 0} shadow={i === 0} />;
             })}
           </Layer>
           <Layer id="money" exempt>
@@ -101,23 +100,22 @@ const Scene = () => {
             if (a <= 0.01) return null;
             const d = S[`d${i}`] || 0;
             const win = i === WIN;
-            const x = win ? mix(c.x, MEDAL.x - 230, S.go) : c.x + 40 * d;
-            const y = c.y - 40 * (1 - Math.min(1, a)) + 420 * d - (win ? 30 * S.one + 20 * Math.sin(Math.PI * S.go) : 0) + id(20 + i).y;
-            return <Capsule1 key={i} x={x} y={y} w={200} rot={60 * d + id(20 + i).r} op={Math.min(1, a * 1.5) * (1 - d)} lift={win ? 20 * S.one : 4}
+            const x = win ? mix(c.x, MEDAL.x - 105, S.go) : mix(c.x, 960 + (i-5)*15,d);
+            const y = c.y - 40 * (1 - Math.min(1, a)) + 182 * d - (win ? 30 * S.one + 20 * Math.sin(Math.PI * S.go) : 0) + id(20 + i).y;
+            return <Capsule1 key={i} x={x} y={y} w={win?160:123} rot={-90+60*d+id(20+i).r} op={Math.min(1, a * 1.5) * (1 - d)} lift={win ? 20 * S.one : 4}
                              style={{filter: win && S.one > 0.01 ? `brightness(${1 + 0.15 * S.one}) drop-shadow(0 0 ${10 * S.one}px rgba(255,250,235,0.9))` : undefined}} />;
           })}
-          {S.ppl > 0.01 && <Person1 red x={160} y={ROAD_Y - 230 - 40 * (1 - Math.min(1, S.ppl))} w={300} op={Math.min(1, S.ppl * 1.5)} />}
-          {S.medal > 0.01 && <Sprite name="medal/34" x={MEDAL.x} y={MEDAL.y - 40 * (1 - Math.min(1, S.medal)) + id(9).y} w={MEDAL.w} op={Math.min(1, S.medal * 1.5)} rot={id(9).r} />}
+          {S.medal > .01 && <Plate x={1540} y={464} w={240} h={115} text="market" size={52} sheen={S.go} op={Math.min(1,S.medal)}/>}
         </Layer>
 
         <Layer id="txt" exempt>
+          <Label text="did not reach the market" size={44} x={1020} y={860} at={E.drop.l} align="center" />
           <Label text="tested in people" size={48} x={160} y={ROAD_Y - 400} at={E.people.l} out={E.market.s} align="left" />
           {S.one > 0.05 && (
             <div style={{position: "absolute", left: 820, top: 250, opacity: Math.min(1, S.one * 1.5), display: "flex", alignItems: "baseline", gap: 20}}>
               <Engrave size={120}>1</Engrave><Engrave size={64}>in 10</Engrave>
             </div>
           )}
-          <Label text="market" size={52} x={MEDAL.x} y={MEDAL.y + 150} at={E.market.l} align="center" />
           <Source>Illustration · data: Wang et al., Pharmaceuticals 2023</Source>
         </Layer>
       </Stage>

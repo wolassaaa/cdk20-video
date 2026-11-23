@@ -17,12 +17,12 @@ const LEN = K.len_f;
 const ZONE = 4;
 
 // 预测模型：贴图 960×1061，红尾巴重心在贴图 (486, 244)
-const AF = {x: 430, y: 500, w: 480}, AF_SRC = {w: 960, h: 1061}, TAIL_SRC = [486, 244];
+const AF = {x: 513, y: 514, w: 507}, AF_SRC = {w: 960, h: 1061}, TAIL_SRC = [486, 244];
 const afK = AF.w / AF_SRC.w;
 const TAIL_SCR = [AF.x + (TAIL_SRC[0] - AF_SRC.w / 2) * afK, AF.y + (TAIL_SRC[1] - AF_SRC.h / 2) * afK];
 const LOUPE_R = 165, LOUPE_W = 760;                         // 放大镜里的贴图宽（≤ 原图 0.8 倍）
 // 插座正面：贴图 1312×1020，插孔中心 = mouth 锚点，孔半径约 205 px（贴图）
-const SOCK = {x: 1360, y: 520, w: 620};
+const SOCK = {x: 1320, y: 515, w: 672};
 const sk = SOCK.w / 1312;
 const [mdx, mdy] = anchorOf("socket/hero_face", "mouth", SOCK.w);
 const M = [SOCK.x + mdx, SOCK.y + mdy];
@@ -37,9 +37,9 @@ const acrossAt = (i) => ACROSS.at((i * SP) / ACROSS.length);
 const KB = (() => { let b = 0, d = 1e9; for (let i = 0; i < N; i++) { const p = acrossAt(i), q = Math.hypot(p[0] - M[0], p[1] - M[1]); if (q < d) { d = q; b = i; } } return b; })();
 // 三把金插头（侧面图翻过来，尖朝右）
 const KEYS = [[300, 470], [560, 560], [300, 650]];
-const KEY_W = 230;
+const KEY_W = 260;
 // 飞的那把：尖朝右（翻过来的侧面图），尖顶到尾巴上（孔心左边一点）就被挡回
-const [tipOX, tipOY] = anchorOf("plug/blank_34", "tip", KEY_W);
+const [tipOX, tipOY] = anchorOf("plug/048_34", "tip", KEY_W);
 const STOP = [M[0] - 62, M[1] + 4];
 const FLY = pathOf([[KEYS[1][0] - tipOX, KEYS[1][1] + tipOY], [880, 560], [1120, 500], STOP]);
 
@@ -127,7 +127,7 @@ const Scene = () => {
 
   return (
     <Lens plan={GP} f={f}>
-      <Stage zone={ZONE} f={f} cam={camBreath(f, K, ["s3"])} whip={whip} shakeX={shake} shakeY={shake * 0.5} over={<T5Out name="runner" f={f} len={LEN} />}>
+      <Stage zone={ZONE} f={f} zoom={1+.35*sm(E.closer.s,E.closer.l,f)*(1-sm(E.model.s,E.model.e,f))} zoomAt={[AF.x,355]} cam={camBreath(f, K, ["s1","s3","s4"], 32)} whip={whip} shakeX={shake} shakeY={shake * 0.5} over={<T5Out name="runner" f={f} len={LEN} />}>
         <Layer id="af">
           {S.af > 0.01 && <Sprite name="af/front305" x={AF.x + clearX} y={AF.y + id(1).y - 30 * (1 - Math.min(1, S.af))} w={AF.w} op={Math.min(1, S.af * 1.5)} rot={id(1).r} />}
         </Layer>
@@ -141,10 +141,10 @@ const Scene = () => {
             const a = S[`k${i}`];
             if (a <= 0.01) return null;
             if (i === 1 && S.go > 0.001) return null;
-            return <Sprite key={i} name="plug/blank_34" x={x - 60 * (1 - Math.min(1, a))} y={y + id(6 + i).y} w={KEY_W} sx={-1} op={Math.min(1, a * 1.6)} rot={id(6 + i).r} />;
+            return <Sprite key={i} name="plug/048_34" x={x - 60 * (1 - Math.min(1, a))} y={y + id(6 + i).y} w={KEY_W} sx={-1} op={Math.min(1, a * 1.6)} rot={id(6 + i).r} />;
           })}
           {S.go > 0.001 && (
-            <Sprite name="plug/blank_34" x={tipX + tipOX} y={tipY - tipOY} w={KEY_W} sx={-1} rot={plugRot} lift={24 * Math.sin(Math.PI * S.go) * (1 - S.back)} />
+            <Sprite name="plug/048_34" x={tipX + tipOX} y={tipY - tipOY} w={KEY_W} sx={-1} rot={plugRot} lift={24 * Math.sin(Math.PI * S.go) * (1 - S.back)} />
           )}
         </Layer>
 
@@ -196,13 +196,11 @@ const Scene = () => {
         </Layer>
 
         <Layer id="txt" exempt>
-          {S.af > 0.01 && (
-            <Tag x={AF.x + clearX} y={800} op={Math.min(1, S.af)}>PREDICTED MODEL (AlphaFold DB v6)</Tag>
-          )}
-          <Label text="low confidence" size={52} x={975} y={800} at={E.low.l} out={E.lay.s} align="center" />
+          <Label text="floppy tail" size={52} x={840} y={190} at={E.floppy.l} out={E.lay.s} align="center" />
+          <Label text="low confidence" size={60} x={890} y={770} at={E.low.l} out={E.lay.s} align="center" />
           <Label text="ATP pocket" size={52} x={M[0]} y={790} at={E.atp.l} out={E.cut.s} align="center" />
           <Pen text="blocked" x={1500} y={170} at={E.go.l - 8} dur={14} size={76} />
-          <Source>{f < E.trust.e ? "Illustration · data: Ren et al., Chem. Sci. 2023 · model colours: AlphaFold confidence" : "Illustration · data: Ren et al., Chem. Sci. 2023"}</Source>
+          <Source>{f < E.trust.e ? "Illustration · data: Ren et al., Chem. Sci. 2023 · predicted model (AlphaFold DB v6)" : "Illustration · data: Ren et al., Chem. Sci. 2023"}</Source>
         </Layer>
       </Stage>
     </Lens>

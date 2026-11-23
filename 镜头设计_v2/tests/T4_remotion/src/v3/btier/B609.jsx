@@ -11,7 +11,7 @@ import React from "react";
 import {Composition, registerRoot, useCurrentFrame} from "remotion";
 import K from "./keys_6-09.json";
 import {Lens, Layer, guidePlan} from "../manual/kit.jsx";
-import {C, shade, Stage, Sprite, Runner, Tag, Pen, Source, Capsule1, evMapB, whipX, impact, pathOf} from "./bkit.jsx";
+import {C, shade, Plate, Slab, Stage, Sprite, Runner, Tag, Pen, Source, Capsule1, evMapB, whipX, impact, pathOf} from "./bkit.jsx";
 import {useGsapTimeline, idle} from "./gsapFrame.jsx";
 
 const E = evMapB(K);
@@ -73,7 +73,7 @@ const Scene = () => {
     return <div key={k} style={{position: "absolute", left: x - 8, top: y - 8, width: 16, height: 16, borderRadius: 8, background: C.yellow, boxShadow: "0 0 12px rgba(255,243,63,0.9)"}} />;
   });
   const flip = S.flip, capT = S.cap;
-  const LIV = {x: ST.end + 300, y: ROAD_Y - 200, w: 300};
+  const LIV = {x: ST.end + 300, y: ROAD_Y - 250, w: 345};
   const capP = {x: mix(ST.end, LIV.x - 10, capT), y: mix(ROAD_Y - 260, LIV.y + 10, capT) - 120 * Math.sin(Math.PI * capT)};
   return (
     <Lens plan={GP} f={f}>
@@ -85,7 +85,7 @@ const Scene = () => {
             {fails}
             <Tag x={ST.b1} y={ROAD_Y + 36} op={cl((f - E.b1.s) / (E.b1.l - E.b1.s + 2))}>fewer failed molecules</Tag>
             {/* 站 2 */}
-            <Sprite name="coins/34" x={ST.b2} y={ROAD_Y - 60} w={210} sy={1 - 0.45 * S.b2} />
+            <Sprite name="coins/34" x={ST.b2} y={ROAD_Y - 60} w={320} sy={1 - 0.50 * S.b2} />
             {ccoin(0)}{ccoin(1)}
             <Tag x={ST.b2} y={ROAD_Y + 36} op={cl((f - E.b2.s) / (E.b2.l - E.b2.s + 2))}>lower costs</Tag>
             {/* 站 3 */}
@@ -95,12 +95,9 @@ const Scene = () => {
                              w={200} op={1 - u * (k === 1 ? 0 : 1)} sx={k === 2 ? -1 : 1} />;
             })}
             <Tag x={ST.b3} y={ROAD_Y + 36} op={cl((f - E.b3.s) / (E.b3.l - E.b3.s + 2))}>fewer animal tests</Tag>
-            {/* 站 4 */}
-            {[0, 1, 2].map((k) => {
-              const u = k === 0 ? 0 : S.b4;
-              return <Sprite key={k} name="tube/34" x={ST.b4 - 170 + k * 75 + 160 * u} y={ROAD_Y - 150 - 70 * u} w={150} op={1 - u} />;
-            })}
-            <Sprite name="dish/34" x={ST.b4 + 120} y={ROAD_Y - 60} w={mix(220, 130, S.b4l)} />
+            {/* 站 4：废料桶，液面卡词下降 */}
+            <Sprite name="flask/34" x={ST.b4} y={ROAD_Y-146} w={333} style={{filter: "grayscale(1)"}}/>
+            <Slab x={ST.b4-71} y={ROAD_Y-197+44*S.b4l} w={142} h={13} r={6} color={C.blueHi} depth={4} id="liquid" shadow={false}/>
             <Tag x={ST.b4} y={ROAD_Y + 36} op={cl((f - E.b4l.s) / (E.b4l.l - E.b4l.s + 2))}>less chemical waste</Tag>
             {/* 站 5：算力也要电 */}
             {S.rack > 0.01 && <Sprite name="dbrack/34" x={ST.el} y={ROAD_Y - 120 + 60 * (1 - S.rack)} w={330} op={cl(S.rack * 2)} />}
@@ -115,14 +112,15 @@ const Scene = () => {
             )}
             <Tag x={ST.el} y={ROAD_Y + 36} op={cl((f - E.too.s) / (E.too.l - E.too.s + 2))} on="dbrack">electricity, too</Tag>
             {/* 路尽头：奖牌 → 胶囊 → 玻璃肝 */}
-            {S.medal > 0.01 && flip < 0.5 && <Sprite name="medal/34" x={ST.end} y={ROAD_Y - 250 + 60 * (1 - Math.min(1, S.medal)) + id(8).y} w={240} sx={Math.max(0.02, 1 - 2 * flip)} op={cl(S.medal * 2)} />}
-            {flip >= 0.5 && <Capsule1 x={capP.x} y={capP.y + id(9).y} w={mix(170, 90, capT)} sx={capT > 0 ? 1 : Math.max(0.02, 2 * flip - 1)} op={capT > 0.97 ? 0 : 1} />}
+            {S.medal>.01&&<Plate x={ST.end-143} y={ROAD_Y-274-73*(1-S.medal)} w={286} h={99} text="New treatments" size={48} sheen={Math.min(1,Math.max(0,(f-E.prize.s)/75))} op={cl(S.medal)}/>}
+            {flip >= 0.5 && <Capsule1 x={capP.x} y={capP.y + id(9).y} w={mix(170, 90, capT)} sx={capT > 0 ? 1 : Math.max(0.02, 2 * flip - 1)} op={1} />}
             {S.cap > 0.01 && <Sprite name="liver/34" x={LIV.x} y={LIV.y} w={LIV.w} op={cl(S.cap * 3)} rim={0.9 * S.glow * (1 - 0.5 * cl((f - E.pat.l - 24) / 30))} />}
             {S.glow > 0.01 && <Tag x={LIV.x} y={ROAD_Y + 36} op={S.glow} on="liver">for patients</Tag>}
           </div>
         </Layer>
         <Layer id="txt" exempt>
           <Pen text="possible gains" x={180} y={110} at={E.b1.l + 4} out={E.elec.s} rot={-3} />
+          <Pen text="possible costs" x={180} y={110} at={E.elec.l} out={E.prize.s} rot={-3}/>
           <Source>Illustration · possible benefits and costs as discussed in Ren et al., Chem. Sci. 2023</Source>
         </Layer>
       </Stage>

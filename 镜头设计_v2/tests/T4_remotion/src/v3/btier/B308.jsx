@@ -9,7 +9,7 @@ import React from "react";
 import {Composition, registerRoot, useCurrentFrame} from "remotion";
 import K from "./keys_3-08.json";
 import {Lens, Layer, guidePlan} from "../manual/kit.jsx";
-import {C, Calendar1, camBreath, Stage, Sprite, Slab, Label, Pen, Engrave, Source, anchorOf, frost, evMapB, T5Out, whipX, impact} from "./bkit.jsx";
+import {C, Plate, Tag, camBreath, Stage, Sprite, Slab, Label, Pen, Engrave, Source, anchorOf, frost, evMapB, T5Out, whipX, impact} from "./bkit.jsx";
 import {useGsapTimeline, idle, RULE} from "./gsapFrame.jsx";
 
 const E = evMapB(K);
@@ -23,10 +23,10 @@ const [mdx, mdy] = anchorOf("socket/hero_34", "mouth", SOCK.w);
 const [tipOX, tipOY] = anchorOf("plug/blank_34", "tip", PLUG.w);   // 翻过来以后尖在 (x − tipOX, y + tipOY)
 const FLASK = {x: 760, y: 500, w: 380};
 const TUBE = {x: 1160, y: 580, w: 440};
-const COLS = 8, ROWS = 5;
-const GRID = [...Array(COLS * ROWS)].map((_, i) => ({x: 440 + (i % COLS) * 150, y: 220 + Math.floor(i / COLS) * 120}));
-const CLEAR = [11, 22, 37];
-const MINI_W = 124;
+const COLS = 6, ROWS = 2;
+const GRID = [...Array(COLS * ROWS)].map((_, i) => ({x: 410 + (i % COLS) * 221, y: 410 + Math.floor(i / COLS) * 211}));
+const CLEAR = [3];   // P37：只有第 4 格是空的
+const MINI_W = 143;
 // 第 5 句：插座在右，芯片左上，插头在左
 const SOCK2 = {x: 1380, y: 500, w: 600};
 const [m2x, m2y] = anchorOf("socket/hero_34", "mouth", SOCK2.w);
@@ -34,6 +34,20 @@ const MOUTH2 = [SOCK2.x + m2x, SOCK2.y + m2y];
 const PLUG2 = {x: 520, y: 640};
 
 const mix = (a, b, t) => a + (b - a) * t;
+
+const LabScene = ({x,y,a,scatter=0}) => !a ? null : <div style={{position:"absolute",left:0,top:0,opacity:a,transform:`translateY(${45*(1-a)}px)`}}>
+  <Slab x={x-310} y={y+100} w={690} h={104} r={18} depth={14} id="measureDock"/>
+  <Sprite name="dish/34" x={x-156} y={y+56} w={250}/>
+  <Slab x={x+110} y={y-172} w={245} h={256} r={22} depth={13} id="diffraction">
+    <svg width={245} height={256} style={{position:"absolute"}}>
+      {Array.from({length:28},(_,i)=>{
+        const t=i*2.39996, rd=33+(i%5)*12+scatter*((i*31)%19);
+        return <circle key={i} cx={122+rd*Math.cos(t)} cy={128+rd*Math.sin(t)} r={4+i%3} fill={C.blue} opacity={.38+(i%7)*.075}/>;
+      })}
+    </svg>
+  </Slab>
+  <svg width={1920} height={1080} style={{position:"absolute",inset:0}}><path d={`M${x-140} ${y+43}L${x+111} ${y-36}`} stroke={C.blueHi} strokeWidth={5} opacity={.45+.35*Math.sin(scatter*3)}/></svg>
+</div>;
 
 const Scene = () => {
   const f = useCurrentFrame();
@@ -69,17 +83,19 @@ const Scene = () => {
   // 插头试插：尖从起点去插孔，差一点，碰到边沿滑下去
   const tip0 = [PLUG2.x - tipOX, PLUG2.y + tipOY];
   const miss = [MOUTH2[0] - 40, MOUTH2[1] + 70];
-  const tipX = mix(tip0[0], miss[0], S.try) + 40 * S.slip;
-  const tipY = mix(tip0[1], miss[1], S.try) + 150 * S.slip - 60 * Math.sin(Math.PI * S.try);
+  const trial = Math.max(0, Math.min(60, f - E.bind.l + 40));
+  const reach = trial < 60 ? Math.sin(Math.PI*(trial%20)/20) : 0;
+  const tipX = mix(tip0[0], miss[0]-18, reach);
+  const tipY = mix(tip0[1], miss[1] + 43*(Math.floor(trial/20)-1), reach) + 14*[E.exp,E.slow,E.diff].filter(e=>f>=e.l).length;
   const pRot = 20 * S.slip;
 
   return (
     <Lens plan={GP} f={f}>
-      <Stage zone={ZONE} f={f} cam={camBreath(f, K, [])} whip={whip} shakeX={shake} over={<T5Out name="runner" f={f} len={LEN} />}>
+      <Stage zoom={1+.10*Math.max(0,Math.min(1,(f-E.lock.s)/29))*(1-S.out1)} zoomAt={[1360,520]} zone={ZONE} f={f} cam={camBreath(f, K, [])} whip={whip} shakeX={shake} over={<T5Out name="runner" f={f} len={LEN} />}>
         {/* 第 1–3 句：插头和磨砂插座 */}
         <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `translateX(${o1}px)`}}>
           <Layer id="plug">
-            {S.plug > 0.01 && S.out1 < 1 && <Sprite name="plug/blank_34" x={PLUG.x} y={PLUG.y - 40 * (1 - Math.min(1, S.plug)) + id(1).y} w={PLUG.w} sx={-1} op={Math.min(1, S.plug * 1.5)} rot={id(1).r} />}
+            {S.plug > 0.01 && S.out1 < 1 && <Sprite name="plug/048_34" x={PLUG.x} y={PLUG.y - 40 * (1 - Math.min(1, S.plug)) + id(1).y} w={PLUG.w} sx={-1} op={Math.min(1, S.plug * 1.5)} rot={id(1).r} />}
           </Layer>
           <Layer id="socket">
             {S.sock > 0.01 && S.out1 < 1 && (
@@ -96,9 +112,7 @@ const Scene = () => {
         {/* 第 4 句：实验室，再是四十台小插座 */}
         <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `translateX(${o2}px)`}}>
           <Layer id="lab">
-            {S.flask > 0.01 && <Sprite name="flask/34" x={FLASK.x} y={FLASK.y - 60 * (1 - Math.min(1, S.flask))} w={FLASK.w} op={Math.min(1, S.flask * 1.5)}
-                                       rot={6 * Math.sin(2 * Math.PI * 3 * S.work) * (1 - S.work) + id(3).r} />}
-            {S.tube > 0.01 && <Sprite name="tube/34" x={TUBE.x} y={TUBE.y - 60 * (1 - Math.min(1, S.tube)) + id(4).y} w={TUBE.w} op={Math.min(1, S.tube * 1.5)} rot={id(4).r} />}
+            <LabScene x={883} y={495} a={S.flask} scatter={S.work}/>
           </Layer>
         </div>
         <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `translateX(${o3}px)`}}>
@@ -118,7 +132,8 @@ const Scene = () => {
           </Layer>
           <Layer id="txt4" exempt>
             <Label text="proteins" size={56} x={960} y={790} at={E.prot.l} align="center" />
-            <Pen text="measured" x={1640} y={300} at={E.meas.s} size={72} />
+            {f>=E.meas.s && <Tag x={1620} y={715} align="left" op={Math.min(1,(f-E.meas.s)/12)*(1-S.out3)}>not to scale</Tag>}
+            <Pen text="measured" x={1440} y={250} at={E.meas.s} size={72} />
           </Layer>
         </div>
 
@@ -128,27 +143,19 @@ const Scene = () => {
             {S.sock2 > 0.01 && <Sprite name="socket/hero_34" x={SOCK2.x} y={SOCK2.y - 40 * (1 - Math.min(1, S.sock2)) + id(5).y} w={SOCK2.w} op={Math.min(1, S.sock2 * 1.5)} style={frost(0.85)} />}
           </Layer>
           <Layer id="chip">
-            {S.chip > 0.01 && S.shrink < 1 && (
-              <Slab x={330} y={210 - 40 * (1 - Math.min(1, S.chip)) + id(6).y} w={300} h={190} r={18} color={C.black} depth={16} op={Math.min(1, S.chip * 1.5) * (1 - S.shrink)} id="chipslab">
-                <div style={{position: "absolute", left: 0, top: 0, width: 300, height: 190, display: "flex", alignItems: "center", justifyContent: "center"}}><Engrave size={48} light>computer</Engrave></div>
-              </Slab>
-            )}
-          </Layer>
-          <Layer id="plug2">
-            {S.plug2 > 0.01 && <Sprite name="plug/blank_34" x={tipX + tipOX} y={tipY - tipOY - 40 * (1 - Math.min(1, S.plug2)) + id(7).y} w={PLUG.w} sx={-1} rot={pRot + id(7).r}
-                                       op={Math.min(1, S.plug2 * 1.5)} lift={20 * Math.sin(Math.PI * S.try)} />}
+            {S.plug2 > 0.01 && <Sprite name="plug/048_34" x={tipX + tipOX} y={tipY - tipOY - 40 * (1 - Math.min(1, S.plug2)) + id(7).y} w={PLUG.w} sx={-1} rot={pRot + id(7).r}
+                                       op={Math.min(1, S.plug2 * 1.5) * (1 - Math.max(0, Math.min(1, (f - E.bind.e) / 12)))} lift={20 * Math.sin(Math.PI * S.try)} />}
           </Layer>
         </div>
 
         <Layer id="cost">
-          {S.bill > 0.01 && <Sprite name="bill/34" x={1190} y={360 - 50 * (1 - Math.min(1, S.bill)) + id(8).y} w={380} op={Math.min(1, S.bill * 1.5)} rot={-4 + id(8).r} />}
-          {S.cal > 0.01 && <Calendar1 x={1560} y={360 - 50 * (1 - Math.min(1, S.cal)) + id(9).y} w={380} op={Math.min(1, S.cal * 1.5)} rot={id(9).r} />}
         </Layer>
         <Layer id="txt5" exempt>
-          <Label text="expensive" size={52} x={1190} y={520} at={E.exp.l} align="center" />
-          <Label text="slow" size={52} x={1560} y={520} at={E.slow.l} align="center" />
-          <Pen text="?" x={1330} y={600} at={E.diff.s - 8} dur={24} size={170} color={C.red} rot={6} />
-          <Pen text="difficult" x={1420} y={680} at={E.diff.s} dur={30} size={80} />
+          <Label text="hard lab work" size={52} x={960} y={760} at={E.lab.l} out={E.grid.s} align="center" />
+          {[[E.exp,"expensive"],[E.slow,"slow"],[E.diff,"difficult"]].map(([e,t],i)=>{
+            const a=Math.max(0,Math.min(1,(f-e.s)/Math.max(1,e.l-e.s)));
+            return a>0 && <Plate key={t} x={795+i*305} y={198-58*(1-a)} w={276} h={108} text={t} size={51} op={a} id={t}/>;
+          })}
           <Source>Illustration · data: Wang et al., Pharmaceuticals 2023; Ren et al., Chem. Sci. 2023</Source>
         </Layer>
       </Stage>

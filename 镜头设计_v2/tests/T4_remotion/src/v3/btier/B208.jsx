@@ -26,10 +26,10 @@ const Scene=()=>{
   const wave=(e,rate=8)=>f<e.l || f>e.e?0:Math.sin((f-e.l)/rate);
   return <Lens plan={GP} f={f}>
     <Stage zone={ZONE} f={f} tray={false}>
-      <div style={{position:"absolute",inset:0,background:"rgba(244,241,234,.20)"}}/>
       <RoadWorld cx={cx+5.6*Math.sin(f*.15)} zoom={z} y={ry}
         red={{0:Math.max(glow(f,E.red1),.16*hit(f,E.red1)),1:Math.max(glow(f,E.red2),.16*hit(f,E.red2)),2:Math.max(glow(f,E.red3),.16*hit(f,E.red3))}}
         pulse={f>=E.pulse1.s && f<=E.cam_up.l?pulse:undefined}>
+        {[E.red1,E.red2,E.red3].map((e,i)=>f>=e.l&&<div key={i} style={{position:"absolute",left:X[i]-113,top:Y-115,width:226,height:90,boxSizing:"border-box",borderRadius:14,border:`4px solid ${C.red}`,pointerEvents:"none"}}/>)}
         {lock>0 && dive===0 && <Sprite name="lock/closed" x={X[0]} y={Y+98-85*rise-15*wave(E.red1)}
           w={166} rot={-3+3*wave(E.red1)} op={lock}/>}
         {f>=E.key_glint.s && <div style={{position:"absolute",left:X[1]-96,top:Y+48,width:192,height:74,
@@ -44,14 +44,14 @@ const Scene=()=>{
             width:8+2*i,height:8+2*i,opacity:.24+.16*wave(E.red3)}}/>)}</>}
         {["pandaomics","alphafold","chemistry42"].map((n,i)=>{
           const op=clamp((f-E.chips.l-i*8+1)/10);
-          return op>0 && <React.Fragment key={n}><div style={{opacity:op}}><Gate x1={X[i]} y1={Y-133} x2={X[i]} y2={Y-150} w={12}/></div>
-            <Sprite name={`chip_${n}/34`} x={X[i]} y={Y-222-14*(1-op)} w={210} op={op}/></React.Fragment>;
+          return op>0 && <React.Fragment key={n}><div style={{opacity:op}}><Gate x1={X[i]} y1={Y-133} x2={X[i]} y2={Y-200} w={12}/></div>
+            <Sprite name={`chip_${n}/34`} x={X[i]} y={Y-262-14*(1-op)} w={180} op={op}/></React.Fragment>;
         })}
       </RoadWorld>
       {dive>0 && dive<.72 && <Sprite name="lock/closed" x={lockX} y={lockY} w={Math.min(cap,mix(180,2300,dive))}
         rot={mix(-3,0,dive)} hero/>}
       {face>0 && <Slab x={lockX-faceW/2} y={lockY-faceH/2} w={faceW} h={faceH} color={C.gold} id="diveLock">
-        <div style={{position:"absolute",left:"41%",top:"17%",width:"18%",height:"62%",borderRadius:"44%",background:C.black,border:`20px solid ${C.gold}`}}/>
+        <div style={{position:"absolute",left:"41%",top:"17%",width:"18%",height:"62%",borderRadius:"44%",background:C.gold,border:`20px solid ${C.inkLight}`,boxShadow:"inset 0 19px 28px rgba(69,44,12,.36)"}}/>
       </Slab>}
       {dive<.85 && <Source>Illustration · our route through this review</Source>}
     </Stage>

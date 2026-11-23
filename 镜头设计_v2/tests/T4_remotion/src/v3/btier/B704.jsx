@@ -25,7 +25,7 @@ const LANE = [500, 690];                             // 两条道的中线
 const LH = 140;
 const X0 = 380, XF = 1400;                           // 起跑线、终点线
 const DIAL = {x: 1650, r: 66};
-const COND = ["same target", "same budget", "same hit definition"];
+const COND = ["same target", "same budget", "same definition of a hit"];
 const CX = (k) => 640 + k * 230;
 
 const Scene = () => {
@@ -42,7 +42,7 @@ const Scene = () => {
     X.jiggle("cj", E.t3_lbl.l, 6, 0);
     X.tw("crouch", 0, 1, E.ready.s, E.ready.l, "power2.inOut");
     X.tw("zero", 0, 1, E.ready.s, E.ready.l, "power2.inOut");
-    X.tw("run", 0, 1, E.run.s, LEN - 10, "power1.in");
+    X.tw("run", 0, 1, (K.words.find(w=>w.key==="know#1")?.f0??E.run.s), LEN - 10, "power1.in");
   });
   const id = (s) => idle(f, s, {rot: 0.5, bob: 1.4});
   const run = S.run;
@@ -56,7 +56,7 @@ const Scene = () => {
     const flip = Math.abs(Math.cos(Math.PI * p)), front = p >= 0.5;
     return (
       <div key={k} style={{position: "absolute", left: 330 + k * 400, top: 190 - (S.cj || 0), width: 370, height: 110, transform: `scaleY(${Math.max(0.04, flip).toFixed(3)})`, transformOrigin: "50% 100%"}}>
-        <Slab x={0} y={0} w={370} h={110} r={14} color={front ? C.bone : C.black} depth={10} id={`cond${k}`}>
+        <Slab x={0} y={0} w={370} h={110} r={14} color={front ? C.bone : C.inkLight} depth={10} id={`cond${k}`}>
           {front && <div style={{width: 370, height: 110, display: "flex", alignItems: "center", justifyContent: "center"}}><Engrave size={42}>{COND[k]}</Engrave></div>}
         </Slab>
       </div>
@@ -65,11 +65,10 @@ const Scene = () => {
   const icon = (k, lane) => {
     const u = S[`i${k}`] || 0;
     if (u < 0.01) return null;
-    const x = CX(k), y = LANE[lane] - 4, sc = 1.3 * Math.min(1.15, u);
-    const body = k === 0 ? <Sprite name="socket/hero_34" x={x} y={y} w={74 * sc} shadow={false} />
-      : k === 1 ? <div style={{position: "absolute", left: x - 26 * sc, top: y - 26 * sc, width: 52 * sc, height: 52 * sc, borderRadius: 26 * sc,
-                               background: `radial-gradient(circle at 35% 30%, ${C.bone}, ${C.gold} 45%, ${shade(C.gold, 0.3)})`, boxShadow: "0 3px 5px rgba(0,0,0,0.4)"}} />
-      : <Tick x={x} y={y} s={56 * sc} p={cl(u * 1.4)} sw={10} />;
+    const x = CX(k), y = LANE[lane] - 4, sc = 1.3 * Math.min(1.15, u), fo = 1 - cl((f - E.run.s) / 12);   // 图标在 run 起淡出
+    const body = k === 0 ? <Sprite name="socket/hero_34" x={x} y={y} w={74 * sc} shadow={false} op={fo} />
+      : k === 1 ? <Sprite name="coins/34" x={x} y={y} w={86*sc} shadow={false} op={fo}/>
+      : <Plate x={x-45} y={y-22} w={90} h={44} text="hit" size={30} op={fo} id={`hitbar${lane}`}/>;
     return <React.Fragment key={`${k}${lane}`}>{body}</React.Fragment>;
   };
   return (
@@ -89,8 +88,10 @@ const Scene = () => {
           )}
           {[0, 1, 2].map(card)}
           {[0, 1, 2].map((k) => [0, 1].map((l) => icon(k, l)))}
-          {S.ai > 0.01 && <Sprite name="chip_chemistry42/34" x={pos(0)} y={LANE[0] - 4 - 50 * (1 - Math.min(1, S.ai)) + id(1).y * (1 - run)} w={180} op={cl(S.ai * 2)} />}
-          {S.cls > 0.01 && <MiniPlate x={pos(1)} y={LANE[1] - 6 - 50 * (1 - Math.min(1, S.cls)) + id(2).y * (1 - run)} s={0.8} op={cl(S.cls * 2)} seed={4} />}
+          {[S.ai,S.cls].map((a,i)=>a>.01&&<Slab key={i} x={pos(i)-83} y={LANE[i]-42-58*(1-Math.min(1,a))} w={166} h={78} r={17} color={i?C.bone:C.blue} op={cl(a*2)} id={`runner${i}`}>
+            <div style={{position:"absolute",left:17,top:26,border:`4px solid ${i?C.grey:C.bone}`,width:18,height:18,borderRadius:18}}/>
+            <div style={{position:"absolute",top:17,left:55}}><Engrave size={45} light={!i}>{i?"classic":"AI"}</Engrave></div>
+          </Slab>)}
           {S.trk > 0.3 && [0, 1].map((k) => (
             <Dial key={k} cx={DIAL.x} cy={LANE[k]} r={DIAL.r} op={cl(S.trk * 2 - 0.6)} needle={needle(k)} color={C.bone}
                   ticks={[0, 90, 180, 270].map((a) => [a, null, true])} />
@@ -102,7 +103,7 @@ const Scene = () => {
           </div>
           <Tag x={X0} y={LANE[0] - LH / 2 - 52} op={cl((f - E.ai.l) / 8) * (1 - cl(run * 4))} on="chip">AI route</Tag>
           <Tag x={X0} y={LANE[1] + LH / 2 + 18} op={cl((f - E.clbl.l) / 8) * (1 - cl(run * 4))} on="mp">classic route</Tag>
-          <Pen text="how much faster?" x={1180} y={790} at={E.run.l + 10} rot={-3} />
+          <Pen text="?" color={C.red} x={1450} y={755} at={K.words.find(w=>w.key==="faster#1")?.f0??E.run.l} rot={-3} />
           <Source>Illustration · a fair head-to-head test that has not been run yet</Source>
         </Layer>
       </Stage>

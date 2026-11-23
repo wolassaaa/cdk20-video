@@ -12,7 +12,7 @@ import React from "react";
 import {Composition, registerRoot, useCurrentFrame} from "remotion";
 import K from "./keys_7-02.json";
 import {Lens, Layer, guidePlan} from "../manual/kit.jsx";
-import {C, Stage, Sprite, Slab, Plate, Runner, Tag, Pen, Tick, Engrave, Source, evMapB, whipX, impact, T5In, camBreath} from "./bkit.jsx";
+import {C, Stage, Sprite, Slab, Plate, Runner, Tag, Pen, Tick, Engrave, Label, Source, evMapB, whipX, impact, T5In, camBreath} from "./bkit.jsx";
 import {useGsapTimeline, idle} from "./gsapFrame.jsx";
 
 const E = evMapB(K);
@@ -29,11 +29,11 @@ const GLOBE = {x: 1120, y: 500, w: 300};
 const GDOTS = [[-60, -40], [40, -70], [70, 10], [-20, 30], [-80, 50], [20, 80], [90, -30]];
 const DC = (k) => ({x: 1880 + k * 230, y: 520});            // 肝癌细胞皿（4 个）
 const DN = (k) => ({x: 2110 + k * 230, y: 700});            // 正常肝细胞皿（2 个）
-const MOUSE = {x: 3150, y: 640, w: 280};
+const MOUSE = {x: 3150, y: 640, w: 330};
 const CARD = (k) => ({x: 3460 + k * 320, y: 450, w: 260, h: 260});
 const CAM = {A: 760, B: 2230, C: 3560, all: 2910};
 // 世界放大：路在屏幕 y 720，平时 1.6 倍（初版 1 倍件太小、上半屏空），authors 时拉远到 0.75 倍看全路
-const ZN = 1.6, ZA = 0.75, ROAD_SY = 720;
+const ZN = 1.6, ZA = 0.76, ROAD_SY = 720;
 
 const Scene = () => {
   const f = useCurrentFrame();
@@ -73,7 +73,8 @@ const Scene = () => {
   const st = S.walk * 4, step = Math.floor(st), ph = st - step;
   const mx = mix(MOL.x0, MOL.x1, (step + (1 - Math.cos(Math.PI * Math.min(1, ph * 1.3))) / 2) / 4);
   const my = MOL.y - 26 * Math.sin(Math.PI * Math.min(1, ph * 1.3)) * (S.walk < 1 ? 1 : 0);
-  const opened = f >= E.unlock.l;
+  const publicAt = K.words.find(w=>w.key==="public#1")?.f0??E.unlock.l;
+  const opened = f >= publicAt;
   const dishC = [0, 1, 2, 3].map((k) => {
     const at = [0, 0.33, 0.66, 0.66][k];
     const u = cl((S.dc - at) / 0.3);
@@ -102,7 +103,7 @@ const Scene = () => {
     return (
       <div key={k} style={{position: "absolute", left: c.x, top: c.y + 80 * (1 - rise) - (S.cj || 0) - (S[`cs${k}`] || 0), width: c.w, height: c.h, opacity: cl(rise * 2),
                            transform: `scaleX(${Math.max(0.03, flip).toFixed(3)})`, transformOrigin: "50% 50%"}}>
-        <Slab x={0} y={0} w={c.w} h={c.h} r={18} color={front ? C.bone : C.black} depth={12} id={`card${k}`}>
+        <Slab x={0} y={0} w={c.w} h={c.h} r={18} color={front ? C.bone : C.inkLight} depth={12} id={`card${k}`}>
           {front && <div style={{position: "absolute", left: 0, top: 24, width: c.w, textAlign: "center"}}><Engrave size={44}>{title}</Engrave></div>}
           {front && body}
         </Slab>
@@ -116,25 +117,9 @@ const Scene = () => {
           <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transformOrigin: "0 0", transform: world}}>
             <Runner d={ROADD} width={64} />
             {/* 站 1：048 往前走，小旗，挂锁，地球 */}
-            {S.globe > 0.01 && (
-              <div style={{position: "absolute", left: 0, top: 0, opacity: cl(S.globe * 2)}}>
-                <Sprite name="globe/34" x={GLOBE.x} y={GLOBE.y + 60 * (1 - S.globe) + id(4).y} w={GLOBE.w} />
-                {GDOTS.map(([dx, dy], k) => {
-                  const v = cl(S.dots * 7 - k);
-                  return v > 0 && <div key={k} style={{position: "absolute", left: GLOBE.x + dx - 9, top: GLOBE.y + dy - 9 + id(4).y, width: 18, height: 18, borderRadius: 9, background: C.blueHi,
-                                                       transform: `scale(${(0.4 + 0.6 * v + 0.2 * Math.sin(f / 6 + k)).toFixed(2)})`, boxShadow: "0 0 12px rgba(61,107,230,0.95)"}} />;
-                })}
-                <Tag x={GLOBE.x} y={GLOBE.y + 170} op={cl((f - E.anyone.l) / 10) * tagOp} on="globe">anyone could try</Tag>
-              </div>
-            )}
-            {S.flag > 0.01 && (
-              <div style={{position: "absolute", left: MOL.x1 + 150, top: ROAD_Y - 150, width: 6, height: 150 * Math.min(1, S.flag), background: C.ink, borderRadius: 3}}>
-                <div style={{position: "absolute", left: 6, top: 0, width: 70 * Math.min(1, S.flag), height: 44, background: C.blue, borderRadius: "0 6px 6px 0"}} />
-              </div>
-            )}
-            <Sprite name="mol048/34" x={mx} y={my + (S.walk >= 1 ? id(1).y : 0)} w={MOL.w} rot={S.walk < 1 ? 4 * Math.sin(Math.PI * 2 * st) : 0} />
+            <Sprite name="mol048/34" x={mx+cl((f-E.clear.s)/65)*1280} y={my + (S.walk >= 1 ? id(1).y : 0)} w={MOL.w} rot={S.walk < 1 ? 4 * Math.sin(Math.PI * 2 * st) : 0} />
             {S.lockIn > 0.01 && <Sprite name={opened ? "lock/open" : "lock/closed"} x={LOCK.x} y={LOCK.y - 40 * (1 - S.lockIn) - (S.lj || 0) - (S.lj0 || 0)} w={LOCK.w} op={cl(S.lockIn * 2)} rot={opened ? 6 : 0} />}
-            {opened && <Tag x={LOCK.x} y={LOCK.y + 100} op={cl((f - E.unlock.l) / 10) * tagOp} on="lock">public</Tag>}
+            {opened && <Tag x={LOCK.x} y={LOCK.y + 100} op={tagOp} on="lock">public</Tag>}
             {/* 站 2：培养皿 */}
             {dishC}
             {dishN}
@@ -142,10 +127,14 @@ const Scene = () => {
             <Tag x={(DN(0).x + DN(1).x) / 2} y={ROAD_Y + 34} op={cl((f - E.dish_l.l) / 10) * tagOp}>normal liver cells</Tag>
             {/* 站 3：小鼠 + 两块检查牌 */}
             {S.mouse > 0.01 && <Sprite name="mouse/34" x={mix(MOUSE.x - 300, MOUSE.x, S.mouse)} y={MOUSE.y + id(6).y - 10 * Math.abs(Math.sin(S.mouse * Math.PI * 4))} w={MOUSE.w} op={cl(S.mouse * 3)} />}
-            {card(0, S.c1, S.c1 >= 0.5 && <Sprite name="liver/34" x={CARD(0).w / 2} y={200} w={170} />, "ADME")}
-            {card(1, S.c2, S.c2 >= 0.5 && [0, 1, 2, 3].map((k) => (
-              <Sprite key={k} name="socket/hero_34" x={50 + k * 54} y={210 + (k % 2) * 34} w={64} shadow={false} style={k === 2 ? undefined : {filter: "grayscale(1) brightness(1.1)"}} />
+            {card(0,S.c1,S.c1>=.5&&<>
+              <Sprite name="liver/34" x={CARD(0).w/2} y={174} w={174}/>
+              <svg width={260} height={260} style={{position:"absolute",inset:0}}><path d="M92 185 Q101 138 136 148 T154 194 Q115 218 92 185" fill="none" stroke={C.red} strokeWidth={4} pathLength={1} strokeDasharray="1" strokeDashoffset={1-cl((f-(K.words.find(w=>w.key==="handles#1")?.f0??E.adme.l))/26)} /></svg>
+            </>,"ADME")}
+            {card(1, S.c2, S.c2 >= 0.5 && [0, 1, 2].map((k) => (
+              <Sprite key={k} name="socket/hero_34" x={50 + k * 54} y={190+(k%2)*22-(k===1?10*Math.max(0,1-Math.abs(f-E.hits.l)/13):0)} rim={k===2&&f>=E.hits.l?.85:0} w={66} shadow={false} style={k === 2 ? undefined : {filter: "grayscale(1) brightness(1.1)"}} />
             )), "selectivity")}
+            {S.mouse > 0.01 && <Tag x={MOUSE.x} y={MOUSE.y + 79} op={cl(S.mouse * 3) * tagOp}>animals</Tag>}
             {/* 三处打勾 */}
             <Tick x={DC(3).x + 60} y={DC(0).y - 140} s={150} p={S.tk} sw={22} />
             <Tick x={MOUSE.x + 40} y={MOUSE.y - 200} s={150} p={cl(S.tk * 1.2 - 0.1)} sw={22} />
@@ -159,11 +148,11 @@ const Scene = () => {
           {S.book > 0.01 && (
             <div style={{position: "absolute", left: 0, top: 0, opacity: cl(S.book * 2), transform: `translateY(${(-60 * (1 - S.book)).toFixed(1)}px)`}}>
               <Sprite name="book/34" x={880} y={230} w={300} rot={-4} />
-              <Tag x={1180} y={210} on="book">Ren et al. 2023</Tag>
+              <Label text="Ren et al., Chem. Sci. 2023" size={40} x={1060} y={210} at={E.src.l} on="book" />
             </div>
           )}
           <Pen text="next steps" x={1080} y={300} at={E.steps.l} rot={-3} />
-          <Source>{f < E.src.s ? "Illustration · next steps as listed in Ren et al., Chem. Sci. 2023" : "Illustration · Ren et al., Chem. Sci. 2023 (steps listed by the authors)"}</Source>
+          <Source>Illustration · next steps as listed in Ren et al., Chem. Sci. 2023</Source>
         </Layer>
       </Stage>
     </Lens>

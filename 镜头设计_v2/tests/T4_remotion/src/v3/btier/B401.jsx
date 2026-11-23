@@ -30,13 +30,13 @@ const STRAIGHT = (i) => [960 + (i - (N - 1) / 2) * 68, 500];
 const FOLD_P = pathOf([[860, 400], [1060, 400], [1070, 470], [860, 480], [850, 550], [1060, 560]]);
 const FOLDED = (i) => { const p = FOLD_P.at(i / (N - 1)); return [p[0], p[1]]; };
 const STRIP = (i) => [170 + i * 30, 760];
-const AF_C = {x: 960, y: 480, w: 460};          // s3 模型（和折好的链同一处）
+const AF_C = {x: 960, y: 480, w: 506};          // s3 模型（和折好的链同一处）
 const AF_R = {x: 1600, y: 380, w: 300};          // s4 模型让到右上
 const CHIP = {x: 960, y: 450, w: 420};
 const RACK = {x: 360, y: 330, w: 380};
 const FEED = pathOf([[545, 345], [640, 318], [720, 372], [780, 440]]);
 const GIVE = pathOf([[395, 760], [640, 720], [820, 600], [CHIP.x, CHIP.y]]);
-const MODEL = {x: 1480, y: 450, w: 440};
+const MODEL = {x: 1450, y: 463, w: 506};
 const TAIL = [1476, 326];                         // 模型上红尾巴（af/front305 贴图上部那一段）
 
 const clamp01 = (v) => Math.max(0, Math.min(1, v));
@@ -160,12 +160,6 @@ const Scene = () => {
         {/* s1–s2 */}
         <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `translateX(${out1}px)`}}>
           <Layer id="team">
-            {TEAM.map(([x, y], i) => {
-              const a = S[`t${i}`];
-              if (a <= 0.01) return null;
-              return <Person1 key={i} red={i === 1} x={x - 420 * S.left + 40 * (i - 1) * S.left * -0.5} y={y - 50 * (1 - Math.min(1, a)) + id(1 + i).y} w={P_W}
-                              op={Math.min(1, a * 1.5)} rot={id(1 + i).r} />;
-            })}
           </Layer>
           <Layer id="chip">
             {S.chip1 > 0.01 && <Sprite name="chip_alphafold/34" x={CHIP1.x} y={CHIP1.y - 50 * (1 - Math.min(1, S.chip1)) + id(5).y} w={CHIP1.w} op={Math.min(1, S.chip1 * 1.5)} rot={id(5).r} />}
@@ -222,7 +216,10 @@ const Scene = () => {
           )}
         </Layer>
         <Layer id="rack">
-          {S.rack > 0.01 && <Sprite name="dbrack/34" x={RACK.x} y={RACK.y - 50 * (1 - Math.min(1, S.rack)) + id(10).y} w={RACK.w} op={Math.min(1, S.rack * 1.5)} rot={id(10).r} />}
+          {S.rack>.01&&Array.from({length:6},(_,i)=>{
+            const u=clamp01((S.rack*1.52-i*.082)*2);
+            return <Sprite key={i} name="af/front305" x={330+237*i} y={258-34*(1-u)} w={129} op={u*(1-clamp01((f-E.give.s)/Math.max(1,E.give.l-E.give.s)))} style={{...frost(1-u), filter: `${frost(1-u)?.filter||""} grayscale(1)`.trim()}}/>;
+          })}
           {S.feed > 0.01 && <Runner d={FEED.d} width={14} draw={S.feed} />}
           {flowBeads.length > 0 && (
             <svg width={1920} height={1080} style={{position: "absolute", left: 0, top: 0, overflow: "visible"}}>
@@ -243,12 +240,11 @@ const Scene = () => {
         </Layer>
 
         <Layer id="txt" exempt>
+          <Label text="known structures" size={44} x={330} y={345} at={E.known.l} out={E.give.l-12} />
           <Label text="sequence" size={56} x={960} y={610} at={E.seq.l} out={E.af.s} align="center" />
-          {afOp > 0.01 && ord < 0.2 && <Tag x={AF_C.x} y={760} op={afOp * (1 - ord * 5)}>PREDICTED MODEL (AlphaFold DB v6)</Tag>}
-          {S.pred > 0.3 && <Tag x={MODEL.x} y={706} op={clamp01((S.pred - 0.3) * 2)}>PREDICTED MODEL (AlphaFold DB v6)</Tag>}
           <Label text="sure" size={48} x={1322} y={772} at={E.sure.l} />
-          <Label text="unsure" size={48} x={1562} y={772} at={E.sure.l + 6} />
-          <Source>Illustration · sequence: UniProt Q8IZL9 · model: AlphaFold DB, colours = confidence</Source>
+          <Label text="not sure" size={48} x={1562} y={772} at={E.sure.l + 6} />
+          <Source>Illustration · sequence: UniProt Q8IZL9 · predicted model (AlphaFold DB v6)</Source>
         </Layer>
       </Stage>
     </Lens>

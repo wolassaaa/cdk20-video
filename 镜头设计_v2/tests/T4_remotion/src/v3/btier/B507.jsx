@@ -8,7 +8,7 @@ import React from "react";
 import {Composition, registerRoot, useCurrentFrame} from "remotion";
 import K from "./keys_5-07.json";
 import {Lens, Layer, guidePlan} from "../manual/kit.jsx";
-import {C, Calendar1, camBreath, shade, tint, Stage, Sprite, Label, Pen, Source, Counter, Engrave, Tick, Lamp, pathOf, evMapB, T5In, whipX} from "./bkit.jsx";
+import {C, Plate, Slab, Calendar1, camBreath, shade, tint, Stage, Sprite, Label, Pen, Source, Counter, Engrave, Tick, Lamp, pathOf, evMapB, T5In, whipX} from "./bkit.jsx";
 import {useGsapTimeline, idle} from "./gsapFrame.jsx";
 
 const E = evMapB(K);
@@ -20,7 +20,7 @@ const LOOP = {x: 960, y: 450, w: 560};
 const RING_R = 70;                                // 圈上箭头那一环的半径（显示像素）
 const FLASK = {x: 380, y: 470, w: 300};
 const POUR = pathOf([[FLASK.x + 10, FLASK.y - 200], [620, 230], [820, 300], [LOOP.x, LOOP.y]]);
-const MINI = {x: 1300, y: 470, w: 470};
+const MINI = {x: 1300, y: 470, w: 248};
 const NAMES = ["A", "B", "C", "D", "E", "F"];
 const NEW = [...Array(16)].map((_, i) => [520 + (i % 8) * 125, 380 + Math.floor(i / 8) * 150]);
 const SIX = [1, 3, 6, 9, 12, 14];
@@ -55,7 +55,7 @@ const Scene = () => {
     X.tw("clear1", 0, 1, E.n16.s - 10, E.n16.l + 10, "power1.in");
     X.tw("new", 0, 1, E.n16.s, E.n16.s + 40, "none");
     S.n16 = 0;
-    X.count("n16", 0, 16, E.n16.l + 16, 22, "power2.out");
+    X.count("n16", 0, 16, E.n16.l, 22, "power2.out");
     X.land("flask2", 0, 1, E.six.l - 4, {antic: false});
     X.tw("six", 0, 1, E.six.s, E.six.e, "power2.inOut");
     X.tw("clear2", 0, 1, E.d30.s - 10, E.d30.s + 30, "power1.in");
@@ -110,9 +110,10 @@ const Scene = () => {
         <Layer id="loop">
           {S.loop > 0.01 && (
             <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `translate(${lp.x}px, ${lp.y}px) scale(${lp.s}) translate(${-lp.x}px, ${-lp.y}px)`}}>
-              <Sprite name="loop/34" x={lp.x} y={lp.y - 50 * (1 - Math.min(1, S.loop)) + id(1).y} w={LOOP.w} op={Math.min(1, S.loop * 1.5)} rot={id(1).r} rim={flash} />
+              <Sprite name="track/34" x={lp.x} y={lp.y - 50 * (1 - Math.min(1, S.loop)) + id(1).y} w={LOOP.w} op={Math.min(1, S.loop * 1.5)} rot={id(1).r} rim={flash} />
             </div>
           )}
+          {S.loop > .01 && c1 < 1 && <Sprite name="chip_chemistry42/34" x={lp.x} y={lp.y+128} w={560} op={Math.min(1,S.loop)*(1-c1)} rim={flash}/>}
           {S.kick > 0.01 && c1 < 1 && (
             <svg width={1920} height={1080} style={{position: "absolute", left: 0, top: 0, overflow: "visible"}}>
               {[0, 0.04, 0.08].map((d, k) => { const p = orbit(runU - d, RING_R + 2); return <circle key={k} cx={p[0]} cy={p[1]} r={(12 - 3 * k) * lp.s} fill={C.bone} opacity={(0.95 - 0.3 * k) * clamp01(S.kick * 3) * (1 - c1)} />; })}
@@ -121,12 +122,14 @@ const Scene = () => {
           )}
         </Layer>
         <Layer id="flask">
-          {S.flask > 0.01 && <Sprite name="flask/34" x={FLASK.x - 900 * a} y={FLASK.y - 50 * (1 - Math.min(1, S.flask)) + id(2).y} w={FLASK.w} op={Math.min(1, S.flask * 1.5)}
-                                     rot={-14 * Math.sin(Math.PI * clamp01(S.pour * 1.3)) + id(2).r} />}
+          {S.flask > 0.01 && a<1 && <Slab x={235+670*a} y={337-70*(1-Math.min(1,S.flask))} w={380} h={200} op={Math.min(1,S.flask)*(1-a)} id="labData">
+            <div style={{position:"absolute",left:24,top:20,display:"flex",flexDirection:"column",gap:8}}><Engrave size={40}>001</Engrave><Engrave size={40}>Kd 9.2 µM</Engrave><Engrave size={40}>IC50 &gt; 6,000 nM</Engrave></div>
+          </Slab>}
         </Layer>
         <Layer id="pose">
           {S.mini > 0.01 && c1 < 1 && (
             <>
+              <Slab x={MINI.x-183-1500*sm(c1*1.2)} y={MINI.y-148} w={366} h={270} op={Math.min(1,S.mini)} id="poseCard"/>
               <Sprite name="mini/m34_001" x={MINI.x - 1500 * sm(c1 * 1.2) + 10 * S.push * (1 - S.push) * 4} y={MINI.y - 50 * (1 - Math.min(1, S.mini)) + id(3).y + (S.pushJ || 0)} w={MINI.w}
                       op={Math.min(1, S.mini * 1.5)} rot={id(3).r} />
               <Lamp name="mini/m34_001" x={MINI.x - 1500 * sm(c1 * 1.2)} y={MINI.y + id(3).y} w={MINI.w} on={S.push} />
@@ -147,13 +150,12 @@ const Scene = () => {
         </Layer>
 
         <Layer id="txt" exempt>
-          <Pen text="Not at all." x={720} y={420} at={E.not.s} out={E.loop.s} dur={26} size={110} />
           <Label text="lab data" size={52} x={FLASK.x} y={690} at={E.data.l + 6} out={E.results.s} align="center" />
           <Label text="predicted pose" size={52} x={MINI.x} y={740} at={E.pose.l + 4} out={E.n16.s} align="center" />
           <Label text="001" size={64} x={MINI.x + 210} y={250} at={E.p001.l} out={E.n16.s} align="center" />
           {S.n16 > 0.05 && c2 < 1 && (
             <div style={{position: "absolute", left: 960, top: 130, opacity: 1 - sm(c2 * 1.5), display: "flex", alignItems: "baseline"}}>
-              <Counter value={S.n16} digits={2} size={110} x={0} y={0} align="center" />
+              <Counter value={f>=E.six.l?6:S.n16} digits={f>=E.six.l?1:2} size={110} x={0} y={0} align="center" />
             </div>
           )}
           <Label text="new designs" size={52} x={960} y={270} at={E.n16.l + 30} out={E.six.s} align="center" />

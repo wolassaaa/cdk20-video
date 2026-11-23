@@ -27,7 +27,7 @@ const wf = (k) => K.words.find((w) => w.key === k).f0;
 const B = cell(0, "B").slot, N = cell(0, "N").slot;
 const PB = POP(0, "B"), PN = POP(0, "N");
 // BEFORE 版面（世界坐标；机位 z 1.6 对准 y 477，能用的竖向带 380–680）
-const SOCK = {x: 1000, y: 515, w: 290};
+const SOCK = {x: 1080, y: 515, w: 492};
 const XS = {x: 215, y: 560, w: 96, h: 64};          // X 光源
 const DISH = {x: 420, y: 590, w: 190};               // 结晶皿
 const DET = {x: 600, y: 450, w: 200, h: 200};        // 探测板
@@ -67,12 +67,13 @@ const Scene = () => {
   const whip = f < 7 ? whipX(f, 0, "in", -1) : whipX(f, LEN - 7, "out", -1);
   const FB = FOCUS(0, "B"), FN = FOCUS(0, "N"), F0 = FOCUS(0, "B", 1.25);
   const drift = 0.05 * (f / LEN);
-  const cam = {x: mix(mix(F0.x, FB.x, S.push), FN.x, S.pan), y: mix(F0.y, FB.y, S.push), z: mix(F0.z, FB.z, S.push) + drift};
+  const cam = {x: 960, y: 550-24*S.pan, z: 1.015 + .002*drift};
   const id = (s) => idle(f, s, {rot: 0.8, bob: 1.8});
   const popB = S.popB * (1 - S.backB), popN = S.popN * (1 - S.backN);
   const sock = {x: mix(B.cx, SOCK.x, popB), y: mix(B.cy - 8 * S.rise, SOCK.y, popB), w: mix(118, SOCK.w, popB)};
   const pour = ATT.reduce((m, _, k) => Math.max(m, Math.sin(Math.PI * (S[`pour${k}`] || 0))), 0);
   const done = ATT.reduce((m, _, k) => m + (S[`pc${k}`] || 0), 0);        // 做完了几次（0–4，连续）
+  const scatter = Math.max(0,Math.min(1,(f-E.diff.s)/Math.max(1,E.diff.l-E.diff.s)));
   const beam = ATT.reduce((m, _, k) => Math.max(m, Math.sin(Math.PI * (S[`pc${k}`] || 0))), 0);
   const rig = S.lab * popB;
   const AFP = {x: PN.x + 120, y: PN.y - 40, w: 250};
@@ -95,7 +96,7 @@ const Scene = () => {
       <Stage zone={ZONE} f={f} whip={whip} shakeX={impact(f, E.pred.l)}>
         <Layer id={["board", "before1", "tags1", "now1"]}>
           <Board6 f={f} cam={cam} title={-999} help={-999} hdr={{B: E.bef.l, N: E.now.l}} cols={1}
-                  rows={[{name: E.row1.l, B: E.lab.l, Bs: [E.exp.l, E.slow.l, E.diff.l], N: E.pred.l, Ns: [E.pub.l]}, false, false, false]}
+                  rows={[{name: L, B: E.lab.l, Bs: [E.exp.l, E.slow.l, E.diff.l], N: E.pred.l, Ns: [E.pub.l]}, false, false, false]}
                   lit={{"0B": cl((f - E.focus1.s) / 12) * (1 - S.pan), "0N": S.pan}}>
             <Dim i={0} v={Math.max(popB, popN, S.push * 0.6)} />
             {S.rise > 0.01 && (
@@ -109,6 +110,7 @@ const Scene = () => {
                   <div style={{position: "absolute", right: 8, top: XS.h / 2 - 7, width: 14, height: 14, borderRadius: 7, background: C.blueHi, opacity: 0.4 + 0.6 * beam,
                                boxShadow: `0 0 ${(6 + 14 * beam).toFixed(0)}px rgba(61,107,230,0.9)`}} />
                 </Slab>
+                {f>=E.exp.s&&<Sprite name="coins/34" x={XS.x+72} y={XS.y+113-60*(1-cl((f-E.exp.s)/Math.max(1,E.exp.l-E.exp.s)))} w={98} op={cl((f-E.exp.s)/6)}/>}
                 <Sprite name="dish/34" x={DISH.x} y={DISH.y} w={DISH.w} rot={-3} />
                 {XTAL.map((c, k) => k < done * 3 && (
                   <div key={k} style={{position: "absolute", left: c.x - c.s / 2, top: c.y - c.s / 2, width: c.s, height: c.s, transform: `rotate(45deg) scale(${cl(done * 3 - k).toFixed(2)})`,
@@ -123,20 +125,21 @@ const Scene = () => {
                   <div style={{position: "absolute", left: DET.w / 2 - 6, top: DET.h / 2 - 6, width: 12, height: 12, borderRadius: 6, background: C.black, boxShadow: "0 0 0 2px #333"}} />
                   {SPOTS.map((p, k) => {
                     const v = cl(done * 16 - k);
-                    return v > 0 && <div key={k} style={{position: "absolute", left: p.x - p.s / 2, top: p.y - p.s / 2, width: p.s, height: p.s, borderRadius: p.s,
+                    return v > 0 && <div key={k} style={{position: "absolute", left: p.x + scatter*22*Math.sin(k*11) - p.s / 2, top: p.y + scatter*21*Math.cos(k*9) - p.s / 2, width: p.s, height: p.s, borderRadius: p.s,
                                                          background: C.inkLight, opacity: v * (0.55 + 0.45 * rand(k + 7)), boxShadow: `0 0 ${(4 + 6 * beam).toFixed(0)}px rgba(160,190,255,0.9)`}} />;
                   })}
                 </Slab>
-                <Tag x={DET.x + DET.w / 2 - 40} y={DET.y - 64} op={cl(S.lab * 3 - 2) * cl(popB * 3 - 2)} on="det">e.g. X-ray crystallography</Tag>
+                <Tag x={XS.x} y={690} op={cl(rig * 2)}>X-rays</Tag>
+                <Tag x={DISH.x} y={690} op={cl(rig * 2)}>crystals</Tag>
+                <Tag x={DET.x + DET.w / 2} y={690} op={cl(rig * 2)}>pattern</Tag>
+                <Tag x={DET.x + DET.w / 2 - 40} y={DET.y - 118} op={cl(S.lab * 3 - 2) * cl(popB * 3 - 2)} on="det">e.g. X-ray crystallography</Tag>
               </div>
             )}
             {/* NOW：数据库机架 + 数据珠 + 从下往上长出来的蓝色预测模型 */}
             {S.rack > 0.01 && popN > 0.05 && <Sprite name="dbrack/34" x={RK.x} y={RK.y + 30 * (1 - S.rack)} w={300 * popN} op={cl(S.rack * 2) * popN} />}
             {/* 下载进度条：机架下面一条骨白槽，蓝色一格格填满（从公开数据库下载） */}
             {S.dl > 0.01 && popN > 0.3 && (
-              <Slab x={RK.x - 140} y={RK.y - 118} w={280} h={28} r={8} color={C.bone} depth={5} op={cl(S.dl * 4) * popN} id="dlbar">
-                <div style={{position: "absolute", left: 5, top: 5, width: 270 * cl(S.dl * 1.15), height: 18, borderRadius: 5, background: C.blueHi}} />
-              </Slab>
+              <Slab x={RK.x-135-90*S.dl} y={RK.y-86} w={270} h={132} r={14} color={C.bone} depth={8} op={cl(S.dl*4)*popN} id="predictionCard"/>
             )}
             {grown > 0.001 && (
               <Sprite name="af/front305" x={S.backN > 0 ? af.x : mix(RK.x + 40, af.x, grown)} y={(S.backN > 0 ? af.y : mix(RK.y - 60, af.y, grown)) + id(2).y - (S.afj || 0)}

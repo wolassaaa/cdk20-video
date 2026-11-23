@@ -70,7 +70,7 @@ const Scene = () => {
     X.tw("backN", 0, 1, E.tight.l + 6, E.tight.l + 32, "power2.inOut");
     X.tw("wide", 0, 1, E.tight.l + 14, LEN - 2, "power2.inOut");
   });
-  const F0 = {x: 1440, y: 460, z: 1.45};                 // 接 6-06 结尾的机位（第 3 行 NOW，弹出台在行上面）
+  const F0 = CB;                 // 接 6-06 结尾的机位（第 3 行 NOW，弹出台在行上面）
   const drift = 0.04 * (f / LEN);
   const c1 = {x: mix(mix(F0.x, CB.x, S.move), CN.x, S.pan), y: mix(F0.y, CB.y, S.move), z: mix(F0.z, CB.z, S.move) + drift};
   const cam = {x: mix(c1.x, WIDE.x, S.wide), y: mix(c1.y, WIDE.y, S.wide), z: mix(c1.z, WIDE.z, S.wide)};
@@ -126,18 +126,14 @@ const Scene = () => {
                 {S.lap > 0.001 && <Sprite name={`plug/${plugName}_34`} x={pl.x} y={pl.y - (S.lj || 0)} w={92 * popB} />}
                 <Sprite name="coins/34" x={COINS.x} y={COINS.y + 40 * (1 - popB)} w={COINS.w} sy={1 - 0.16 * spent} op={cl(popB * 2)} />
                 {coins}
-                <div style={{position: "absolute", left: LAPC.x, top: LAPC.y, opacity: cl(popB * 2)}}>
-                  <Slab x={-90} y={-12} w={180} h={110} r={14} color={C.bone} depth={8} id="lapslab" />
-                  <Counter value={laps} digits={1} size={80} x={0} y={-4} align="center" />
-                </div>
-                <Tag x={LAPC.x} y={LAPC.y + 112} op={cl(popB * 3 - 2)} on="lapslab">lab rounds</Tag>
+                <Tag x={LAPC.x} y={LAPC.y + 112} op={cl(popB * 3 - 2)} on="lapslab">costly lab rounds</Tag>
               </>
             )}
             {/* NOW：预测出来的结合图（插着 001 的小插座）→ 16 个设计 → 048 卡紧 → 握力尺 */}
             {popN > 0.01 && (
               <>
                 <Sprite name="mini/m34_001" x={pic.x} y={pic.y + id(2).y - (S.kj || 0)} w={pic.w} shadow={popN > 0.5} rim={S.k1 > 0 && f < E.k1.l + 40 ? 0.8 * S.k1 : 0} />
-                <Tag x={PIC.x} y={PIC.y + 135} op={cl(popN * 3 - 2)} on="mini">predicted picture</Tag>
+                <Tag x={PIC.x + 50} y={PIC.y + 135} op={cl(popN * 3 - 2)} on="mini">predicted pose of 001</Tag>
                 {S.fan > 0.01 && (
                   <div style={{position: "absolute", left: C16.x, top: C16.y, opacity: cl(S.fan * 4) * cl(popN * 2 - 0.6)}}>
                     <Slab x={-70} y={-10} w={140} h={60} r={10} color={C.bone} depth={6} id="c16slab" />
@@ -154,7 +150,7 @@ const Scene = () => {
           </Board6>
         </Layer>
         <Layer id="txt" exempt>
-          <Source>{f < E.now.s ? "Illustration · the design–make–test–change cycle" : "Illustration · numbers from Ren et al., Chem. Sci. 2023"}</Source>
+          {f>=(wf("lab#1")?.f0??E.rnd.s) && <Source>{f < E.now.s ? "Illustration · the design–make–test–change cycle" : "Illustration · numbers from Ren et al., Chem. Sci. 2023"}</Source>}
         </Layer>
       </Stage>
     </Lens>
