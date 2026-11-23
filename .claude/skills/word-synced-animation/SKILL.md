@@ -46,6 +46,7 @@ segment → sentence → word (start/end from step-2 word timings, as used in th
 
 - Use `inserts/fast_render.py`: render the whole segment in one call with persistent data. Rendering a saved .blend frame by frame with `render(write_still)` is about 30× slower.
 - Use Cycles. EEVEE put shadows in the wrong place.
+- Remotion: `--gl=angle` (this is the RTX 5080 via D3D11) with `--concurrency=6` (env `CDK20_REM_CONC`, 11-24). The bottleneck is CPU, not the GPU; one render uses about 3 GB RAM, so the queue decides how many run at once from free memory, VRAM (12 GB budget) and NVENC sessions (≤ 8) — see `_env/queue/README.md`.
 - Run at most 2 Blender processes. Intermediate frames go to `G:/cdk20/work/`, because D fills up. Use Blender 5.3 for new work once tested; 5.1.2 is at `D:/software/tools/blender.exe`.
 
 ## Who does what (quota is limited)

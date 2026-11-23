@@ -195,6 +195,9 @@ def encoder(path):
 
 
 def cmd_film(a):
+    if os.environ.get("CDK20_GPU_W5", "1") == "1" and not a.frames:      # 11-24：逐帧合成走显卡（comp_w5roll_gpu.py，整条 450 s → 68 s，逐帧 SSIM ≥ 0.9988，机检一致）；=0 回这里的 CPU 版
+        import comp_w5roll_gpu
+        return comp_w5roll_gpu.drive(a)
     meta = json.loads((WORK / "sheet_meta.json").read_text(encoding="utf-8"))
     P = plan(a.N, meta)
     sheet = np.asarray(Image.open(WORK / "sheet.png").convert("RGBA"), np.float32)

@@ -3,7 +3,7 @@
 用法（项目根目录，python 3.11+，要 numpy + PIL）：
   python 镜头设计_v3/映射/b_page.py post               Blender 贴图裁边 + 尺寸锚点表（src/v3/btier/bsprite_meta.json）+ 24 张颗粒图
   python 镜头设计_v3/映射/b_page.py render 3-05        validate + resolve + 拷 keys；搭本段的精简 public（G 盘硬链接）；
-                                                       Remotion 出 1080p60 帧序列（--gl=angle --concurrency=2，帧和临时目录都在 G 盘）；
+                                                       Remotion 出 1080p60 帧序列（--gl=angle --concurrency=6（CDK20_REM_CONC），帧和临时目录都在 G 盘）；
                                                        CipherTalk 的 ffmpeg（h264_nvenc）合声音（裁过停顿的段用 map_trim/<段>.wav），
                                                        出 导演检查_<BREVIEW>/14_B档_<段>.mp4（BREVIEW 默认 20261123）
   python 镜头设计_v3/映射/b_page.py check 3-05         自检：check_sync（对词、到句尾、1.5 s、帧率）、check_guides（V1–V14）、
@@ -39,6 +39,7 @@ PUB_SHARED = HERE / "_cache/ch1/public"          # 字体、各段声音（page_
 SPR_RAW, SPR = WORK / "bsprite", WORK / "bpub_src/bsprite"
 GRAIN = WORK / "bpub_src/grain"
 FRAMES, PUBS, CHK, RTMP = WORK / "bframes", WORK / "bpub", WORK / "bcheck", WORK / "remotion_tmp"
+REM_CONC = int(os.environ.get("CDK20_REM_CONC", "6"))   # 11-24 GPU 迁移：Chromium 本来就走 RTX 5080（--gl=angle = D3D11），卡在 CPU 并发；2→6 实测快，画面和旧设置同一噪声带。=2 回旧做法
 FF = "D:/software/tools/CipherTalk/resources/app.asar.unpacked/node_modules/ffmpeg-static/ffmpeg.exe"   # 带 h264_nvenc；_env/ffmpeg 写不了 G 盘
 TRIM = HERE / "_cache/remotion_public/map_trim"
 LONG_ROAD = {"6-09", "7-02", "6-10", "6-11", "2-08"}   # 11-22 夜总管裁定：X3 简版 6-10、6-11、2-08 也算长路页                                       # B 档长路页（bkit NO_TRAY 里的 B609、B702）：G2 覆盖只记录  # 11-22 停顿裁剪（trim_pauses.py，19 文档 7.3）：裁过的段先用这里的声音
@@ -189,7 +190,7 @@ def render(seg, frames=None):
     t = Path(tempfile.mkdtemp(dir=RTMP))
     env = dict(ENV, TEMP=str(t), TMP=str(t))
     cli = ["node", REM / "node_modules/@remotion/cli/remotion-cli.js", "render", f"src/v3/btier/{C}.jsx", C, fr,
-           "--sequence", "--image-format=jpeg", "--jpeg-quality=94", "--gl=angle", "--concurrency=2", f"--public-dir={pub}", "--log=error",
+           "--sequence", "--image-format=jpeg", "--jpeg-quality=94", "--gl=angle", f"--concurrency={REM_CONC}", f"--public-dir={pub}", "--log=error",
            f"--bundle-cache=false"]
     if frames:
         cli.append(f"--frames={frames}")
@@ -356,7 +357,7 @@ def probe(seg):
     t = Path(tempfile.mkdtemp(dir=RTMP))
     env = dict(ENV, TEMP=str(t), TMP=str(t))
     cli = ["node", REM / "node_modules/@remotion/cli/remotion-cli.js", "render", f"src/v3/btier/{C}.jsx", C, out,
-           "--sequence", "--image-format=jpeg", "--jpeg-quality=90", "--gl=angle", "--concurrency=2", f"--public-dir={pub}", "--scale=0.5",
+           "--sequence", "--image-format=jpeg", "--jpeg-quality=90", "--gl=angle", f"--concurrency={REM_CONC}", f"--public-dir={pub}", "--scale=0.5",
            "--props=" + json.dumps({"bprobe": PROBE_STEP}), "--log=verbose", "--bundle-cache=false"]
     t0 = time.time()
     r = run(cli, cwd=REM, env=env, capture_output=True, text=True, encoding="utf-8", errors="replace")
@@ -616,7 +617,7 @@ def html(batch=1):
         note = (BT / f"note_{safe(seg)}.txt")
         note_t = note.read_text(encoding="utf-8") if note.exists() else ""
         rows.append(f"""<section><h2>{seg} <small>{c['comp']} · {c['len_f']} 帧 · {c['len_f'] / 60:.1f} 秒 · {'全部通过' if ok else '有不过的项'}</small></h2>
-<p class=meta>成片 <code>{RV.name}/14_B档_{seg}.mp4</code>　渲染：Remotion {r.get('remotion_s', '?')} 秒（{r.get('s_per_frame', '?')} 秒/帧，--gl=angle --concurrency=2），ffmpeg h264_nvenc {r.get('ffmpeg_s', '?')} 秒　背景第 {r.get('zones')} 区　擦除层 {r.get('wipes')}</p>
+<p class=meta>成片 <code>{RV.name}/14_B档_{seg}.mp4</code>　渲染：Remotion {r.get('remotion_s', '?')} 秒（{r.get('s_per_frame', '?')} 秒/帧，--gl=angle --concurrency={REM_CONC}），ffmpeg h264_nvenc {r.get('ffmpeg_s', '?')} 秒　背景第 {r.get('zones')} 区　擦除层 {r.get('wipes')}</p>
 <p>{note_t}</p>
 <table>{res}</table>
 {''.join(f'<img src="data:image/jpeg;base64,{b}">' for b in imgs)}

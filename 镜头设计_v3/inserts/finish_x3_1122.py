@@ -26,7 +26,7 @@ expected=keys["len_f"]
 assert expected=={"6-10":922,"6-11":1494,"2-08":920}[seg]
 if len(list(frame.glob("element-*.jpeg"))) != expected:
     B.run(["node",B.REM/"node_modules/@remotion/cli/remotion-cli.js","render",f"src/v3/btier/{comp}.jsx",
-        comp,frame,"--sequence","--image-format=jpeg","--jpeg-quality=94","--gl=angle","--concurrency=2",
+        comp,frame,"--sequence","--image-format=jpeg","--jpeg-quality=94","--gl=angle",f"--concurrency={B.REM_CONC}",
         f"--public-dir={pub}","--log=error","--bundle-cache=false"],cwd=B.REM,check=True)
 files=sorted(frame.glob("element-*.jpeg"))
 assert len(files)==expected and [int(f.stem.split("-")[-1]) for f in files]==list(range(expected))

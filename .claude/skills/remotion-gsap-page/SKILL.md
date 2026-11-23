@@ -62,7 +62,7 @@ HKBU SCIE1007 课程作业的科普视频（英文，15–20 分钟，讲 Ren et
 
 ## 渲染命令（b_page.py 里已经写好）
 
-- Remotion：`node node_modules/@remotion/cli/remotion-cli.js render src/v3/btier/B<seg>.jsx B<seg> G:/cdk20/work/bframes/<seg> --sequence --image-format=jpeg --jpeg-quality=94 --gl=angle --concurrency=2 --public-dir=G:/cdk20/work/bpub/<seg> --bundle-cache=false`，TEMP/TMP 指到 `G:/cdk20/work/remotion_tmp/` 下的新目录。1080p60，约 0.07–0.08 s/帧，一页 1.5–2 分钟。
+- Remotion：`node node_modules/@remotion/cli/remotion-cli.js render src/v3/btier/B<seg>.jsx B<seg> G:/cdk20/work/bframes/<seg> --sequence --image-format=jpeg --jpeg-quality=94 --gl=angle --concurrency=6 --public-dir=G:/cdk20/work/bpub/<seg> --bundle-cache=false`，TEMP/TMP 指到 `G:/cdk20/work/remotion_tmp/` 下的新目录。`--gl=angle` 就是走 RTX 5080（D3D11），瓶颈在 CPU 并发：11-24 起并发 6（环境变量 `CDK20_REM_CONC`，=2 回旧做法），比 2 快约 1.35 倍，一个渲染约吃 3 GB 内存，同时跑几个由队列按空闲内存决定。别用 `angle-egl`/`egl`/`swiftshader`（会落到软件渲染）。1080p60，一页 1–2 分钟。
 - 合成：`D:/software/tools/CipherTalk/resources/app.asar.unpacked/node_modules/ffmpeg-static/ffmpeg.exe`（或 `D:/software/TouchDesigner/bin/ffmpeg.exe`），h264_nvenc p6 vbr cq17 + 段音 aac 192k。**不要用 `_env/ffmpeg`，它写不了文件。**
 - 引导对照：`check_guides.py --b <seg>` 会自己出一份 noguide、半分辨率的对照渲染到 `G:/cdk20/work/bnoguide/`。
 

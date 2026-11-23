@@ -43,7 +43,7 @@ HKBU SCIE1007 课程作业的科普视频。这是片里十几个出镜段的做
 5. **量光、比光**（每段一次，换人换场景必须重来）：
    `bash 镜头设计_v3/inserts/run_oncam.sh <段> measure` → 从脸和白 T 恤量主光方位、主辅比、色温、颗粒，写 `light.json`
    `bash 镜头设计_v3/inserts/run_oncam.sh <段> calib` → 灰球、白球逐轮比光，写 `light_fit.json`（约 3 分钟）
-6. **搭场景**：`bash 镜头设计_v3/inserts/run_oncam.sh <段> build`（约 4 分钟，日志里 `ONCAM step …` 一步一行）。搭完先跑 `python 镜头设计_v3/inserts/oncam_check.py <段> --no-video`，M3–M7、M12 以外的场景项不过就回第 4 步改参数，不要先渲。
+6. **搭场景**：`bash 镜头设计_v3/inserts/run_oncam.sh <段> build`（约 4 分钟，日志里 `ONCAM step …` 一步一行）。有缓存（`inserts/build_cache.py`）：`CDK20_BUILD_CACHE=1` 时，配置、代码、输入和上次搭完时一样且场景之后没被改过，就直接用现成的 scene.blend，打印 `BUILD_CACHE hit`；改了参数会自动重搭。搭完先跑 `python 镜头设计_v3/inserts/oncam_check.py <段> --no-video`，M3–M7、M12 以外的场景项不过就回第 4 步改参数，不要先渲。
 7. **试渲关键帧**（半分辨率，每帧约 1.5–2.5 秒）：`FR=0,20,39,184,240,332,360,383 bash 镜头设计_v3/inserts/run_oncam.sh <段> frames`；挡人层也看：`WHICH=front FR=0,383 bash … frames`。图在 `$CDK20_WORK/oncam/<段>/test/`，用 `oncam_sheet.py … --person <段>` 拼成网格（垫上人）自己看（第 5.2 节的看图项）。帧取每个事件的 f_land、段首 0/8/20、段尾最后 4 帧。
 8. **正式渲**：`bash 镜头设计_v3/inserts/run_oncam.sh <段> render` 然后 `… front`、`… wipe`（会排队等显卡空位）。`wipe` 是给相邻 B 页的 T5 擦除层（11 文档 5.6）：段首 16 帧、段尾 16 帧只有零件的透明层，写 `$CDK20_WORK/bwipe/oncam_<段>/`，`fr_front` 里已有的帧直接拷。`render` 跳过已存在的帧：改了场景要先把旧的 `fr_bg/` 挪走（不删，挪到 `_old/`）。
 9. **合成、机检、检查页**：`… comp`、`… check`、`… report`。`check` 先跑 `shot_oncam.py check`（亮度、颗粒、`check_sync.py` 对词），再跑 `oncam_check.py`（M1–M13）。`report` 要先写好 `inserts/oncam_review/<段>.json`：重做的段照 3-01 那份（有 `old_video`，旧版穿帮清单每条的问题、改法、新旧对比帧）；新做的段照 3-06 那份（没有 `old_video`，`items` 写技能看图项和本段设计要求，`check` 填机检编号或"看图"，`new` 填代表帧，`show: true` 的条目在页上配图）。几段一起交：`python oncam_report.py 3-06 3-09 --out 导演检查_…/15_出镜3D_检查.html`。

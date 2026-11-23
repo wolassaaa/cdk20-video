@@ -5,6 +5,7 @@
 #   wipe：段首段尾各 16 帧只有零件的透明层，给相邻 B 页当 T5 擦除层（$CDK20_WORK/bwipe/oncam_<段>/）
 #   FR=0,20,240 PCT=50 bash run_oncam.sh 3-01 frames   试渲几帧（半分辨率）到 $CDK20_WORK/oncam/<段>/test/
 #   SAMPLES=24 bash run_oncam.sh 3-01 build              覆盖采样（默认 16，看得出噪点的镜头才加，最多 24）
+#   build 有缓存（11-24）：同一段配置、代码、输入都没变就直接用上次的 scene.blend，不重搭；CDK20_BUILD_CACHE=0 强制重搭
 # 守规矩：同时最多 2 个 Blender（排队等空位）；有 _env/queue/GPU_HOLD 或 GPU_PAUSED 就等。
 # 中间帧、场景都在 $CDK20_WORK（默认 G:/cdk20/work；D 是系统盘，帧和缓存不写 D）/oncam/<段>/；成片 nvenc 写 SEGS[段]["out"]。
 # 旧流程（v1：rimcal、fg 擦除层）的步骤仍可单独调：rimcal、fg。
@@ -28,12 +29,20 @@ wait_gpu() {
 }
 bl() { wait_gpu; PYTHONUNBUFFERED=1 "$B" -b --factory-startup --python-exit-code 1 -P shot_oncam.py -- "$@" 2>&1 | grep -E "ONCAM|GUIDE|Error|Traceback|File \"|Assert" ; }
 py() { PYTHONIOENCODING=utf-8 python shot_oncam.py "$@"; }
+py_bc() { PYTHONIOENCODING=utf-8 python build_cache.py "$@"; }
 is() { [ "$step" = "$1" ] || [ "$step" = all ]; }
 stamp() { mkdir -p "$WK"; date +%s > "$WK/render_t$1.txt"; }
 
 if is measure; then py measure "$SEG" || exit 1; fi
 if is calib; then bl calib "$SEG"; fi
-if is build; then bl build "$SEG" ${SAMPLES:+$SAMPLES}; fi
+if is build; then   # 11-24：搭场景缓存（build_cache.py）。配置/代码/输入和上次一样、场景之后没被改过，就不重搭；CDK20_BUILD_CACHE=0 每次重搭
+  if [ "${CDK20_BUILD_CACHE:-0}" != 0 ] && py_bc check "$SEG" ${SAMPLES:-}; then :; else
+    touch "$WK/.build_t0" 2>/dev/null || { mkdir -p "$WK"; touch "$WK/.build_t0"; }
+    bl build "$SEG" ${SAMPLES:+$SAMPLES}; rc=$?
+    [ "$WK/scene.blend" -nt "$WK/.build_t0" ] && py_bc stamp "$SEG" ${SAMPLES:-}
+    (exit $rc)
+  fi
+fi
 if [ "$step" = frames ]; then bl frames "$SEG" "${FR:-0,120,184,200,240,300,335,360,383}" "${WHICH:-bg}" "${PCT:-50}"; fi
 if is render; then wait_gpu; stamp 0; bl render "$SEG" bg; stamp 1; fi   # 计时从拿到显卡空位算，不算排队
 if is front; then wait_gpu; [ -e "$WK/render_t1.txt" ] || stamp 1; t=$(date +%s); bl render "$SEG" front; echo $(( $(date +%s) - t )) > "$WK/render_front_s.txt"; stamp 2; fi
