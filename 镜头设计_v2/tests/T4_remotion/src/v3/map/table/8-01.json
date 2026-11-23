@@ -1,0 +1,240 @@
+{
+ "schema": "cdk20.wordmap/1",
+ "built": "2026-11-18 02:33:56 +09:00",
+ "cut": "cut_v8",
+ "group": "8-01",
+ "fps": 60,
+ "len_f": 194,
+ "cut_start_s": 970.63,
+ "holds": [],
+ "words": [
+  {
+   "wid": "8-01.w001",
+   "w": "So,",
+   "key": "so#1",
+   "sid": "8-01.s1",
+   "f0": 33,
+   "f1": 39
+  },
+  {
+   "wid": "8-01.w002",
+   "w": "back",
+   "key": "back#1",
+   "sid": "8-01.s1",
+   "f0": 69,
+   "f1": 83
+  },
+  {
+   "wid": "8-01.w003",
+   "w": "to",
+   "key": "to#1",
+   "sid": "8-01.s1",
+   "f0": 88,
+   "f1": 94
+  },
+  {
+   "wid": "8-01.w004",
+   "w": "where",
+   "key": "where#1",
+   "sid": "8-01.s1",
+   "f0": 100,
+   "f1": 111
+  },
+  {
+   "wid": "8-01.w005",
+   "w": "we",
+   "key": "we#1",
+   "sid": "8-01.s1",
+   "f0": 113,
+   "f1": 118
+  },
+  {
+   "wid": "8-01.w006",
+   "w": "started.",
+   "key": "started#1",
+   "sid": "8-01.s1",
+   "f0": 124,
+   "f1": 148
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "8-01.s1",
+   "text": "So, back to where we started.",
+   "w_first": "8-01.w001",
+   "w_last": "8-01.w006",
+   "f0": 33,
+   "f1": 148
+  }
+ ],
+ "events": [
+  {
+   "eid": "t00_drop_p0",
+   "obj": "p0",
+   "verb": "drop",
+   "means": null,
+   "word": "8-01.w002",
+   "f_start": 35,
+   "f_land": 51,
+   "f_end": 51,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t01_drop_p1",
+   "obj": "p1",
+   "verb": "drop",
+   "means": null,
+   "word": "8-01.w002",
+   "f_start": 37,
+   "f_land": 53,
+   "f_end": 53,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t02_drop_p2",
+   "obj": "p2",
+   "verb": "drop",
+   "means": null,
+   "word": "8-01.w002",
+   "f_start": 39,
+   "f_land": 55,
+   "f_end": 55,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t03_drop_p3",
+   "obj": "p3",
+   "verb": "drop",
+   "means": null,
+   "word": "8-01.w002",
+   "f_start": 41,
+   "f_land": 57,
+   "f_end": 57,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t04_drop_p4",
+   "obj": "p4",
+   "verb": "drop",
+   "means": null,
+   "word": "8-01.w002",
+   "f_start": 43,
+   "f_land": 59,
+   "f_end": 59,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t05_drop_p5",
+   "obj": "p5",
+   "verb": "drop",
+   "means": null,
+   "word": "8-01.w002",
+   "f_start": 45,
+   "f_land": 61,
+   "f_end": 61,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t06_drop_p6",
+   "obj": "p6",
+   "verb": "drop",
+   "means": null,
+   "word": "8-01.w002",
+   "f_start": 47,
+   "f_land": 63,
+   "f_end": 63,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t07_drop_p7",
+   "obj": "p7",
+   "verb": "drop",
+   "means": null,
+   "word": "8-01.w002",
+   "f_start": 49,
+   "f_land": 65,
+   "f_end": 65,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t08_drop_p8",
+   "obj": "p8",
+   "verb": "drop",
+   "means": null,
+   "word": "8-01.w002",
+   "f_start": 51,
+   "f_land": 67,
+   "f_end": 67,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t09_drop_p9",
+   "obj": "p9",
+   "verb": "drop",
+   "means": null,
+   "word": "8-01.w002",
+   "f_start": 53,
+   "f_land": 69,
+   "f_end": 69,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t10_red_p3",
+   "obj": "p3",
+   "verb": "red",
+   "means": null,
+   "word": "8-01.w006",
+   "f_start": 115,
+   "f_land": 115,
+   "f_end": 115,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t11_red_p4",
+   "obj": "p4",
+   "verb": "red",
+   "means": null,
+   "word": "8-01.w006",
+   "f_start": 118,
+   "f_land": 118,
+   "f_end": 118,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t12_red_p5",
+   "obj": "p5",
+   "verb": "red",
+   "means": null,
+   "word": "8-01.w006",
+   "f_start": 121,
+   "f_land": 121,
+   "f_end": 121,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t13_red_p6",
+   "obj": "p6",
+   "verb": "red",
+   "means": null,
+   "word": "8-01.w006",
+   "f_start": 124,
+   "f_land": 124,
+   "f_end": 124,
+   "role": "primary",
+   "tool": "remotion+blender"
+  }
+ ]
+}

@@ -1,8 +1,8 @@
 {
- "video": "D:\\。hkbu\\molecular science\\导演检查_20261121\\16_钻取_5-04.mp4",
+ "video": "D:\\。hkbu\\molecular science\\导演检查_20261123\\16_钻取_5-04.mp4",
  "group": "5-04",
  "fps": 59.999,
- "frames": 1420,
+ "frames": 1510,
  "offset_f": 0,
  "S1": {
   "word_events": 23,
@@ -49,7 +49,7 @@
    271,
    291
   ],
-  "design_fade": 16,
+  "design_fade": 17,
   "verdict": "有混帧（变速慢放）"
  },
  "sentences": [
@@ -106,8 +106,8 @@
   {
    "sid": "5-04.s6",
    "f0": 1292,
-   "f1": 1411,
-   "last_motion_f": 1411,
+   "f1": 1447,
+   "last_motion_f": 1447,
    "end_dev": 0,
    "longest_still_f": 0,
    "s2": true,
@@ -115,9 +115,9 @@
   },
   {
    "sid": "5-04.s7",
-   "f0": 1411,
-   "f1": 1416,
-   "last_motion_f": 1416,
+   "f0": 1483,
+   "f1": 1502,
+   "last_motion_f": 1502,
    "end_dev": 0,
    "longest_still_f": 0,
    "s2": true,
@@ -416,8 +416,8 @@
    "id": "tail_rush",
    "verb": "move",
    "w": "Weak.",
-   "f_land": 1419,
-   "table_dev": 8,
+   "f_land": 1509,
+   "table_dev": 26,
    "video_motion_near_start": true
   }
  ],

@@ -1,0 +1,393 @@
+{
+  "schema": "cdk20.events/1",
+  "group": "8-04+8-05+8-06+8-07",
+  "tool": "blender",
+  "note": "HKBU SCIE1007 课程作业的科普视频：8-04_8-05_8-06_8-07 三维版事件表（Codex 照 18 填）。",
+  "holds": [],
+  "events": [
+    {
+      "id": "land",
+      "obj": "road",
+      "verb": "move",
+      "at": {
+        "word": "8-04.w001",
+        "off": -6
+      },
+      "lead": 24,
+      "means": "段首：`cells` 牌的骨白牌面从盖满画面退到位，五块牌挂在竖料杆上",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "cells_tick",
+      "obj": "cells_tick",
+      "verb": "snap",
+      "at": {
+        "word": "8-04.w004",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "dur": 14
+      },
+      "means": "`cells` 牌上绿色的勾\"咔\"地扣上，培养皿小件亮",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "notyet",
+      "obj": "notyet",
+      "verb": "eject",
+      "at": {
+        "word": "8-04.w005",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "word": "8-04.w008"
+      },
+      "means": "`patients` 牌旁弹下小牌 `not yet`；`patients` 牌保持灰",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "chip_glow",
+      "obj": "computer",
+      "verb": "move",
+      "at": {
+        "word": "8-04.w010",
+        "off": 0
+      },
+      "lead": 8,
+      "until": {
+        "dur": 20
+      },
+      "means": "`computer` 牌被点名（焦点加轮廓光），芯片小件亮",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "funnel",
+      "obj": "funnel",
+      "verb": "move",
+      "at": {
+        "word": "8-04.w011",
+        "off": 0
+      },
+      "lead": 20,
+      "until": {
+        "word": "8-04.w013"
+      },
+      "means": "`computer` 牌下的漏斗里 40 颗小珠往下流，出口只漏出 5 颗",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "flask",
+      "obj": "flask",
+      "verb": "eject",
+      "at": {
+        "word": "8-04.w014",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "dur": 14
+      },
+      "means": "`cells` 牌旁的烧瓶升起，冒泡",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "decide",
+      "obj": "flask",
+      "verb": "snap",
+      "at": {
+        "word": "8-04.w016",
+        "off": 0
+      },
+      "lead": 8,
+      "until": {
+        "sentence_end": true
+      },
+      "means": "烧瓶往牌上一磕，\"咔\"，镜头微震，五块牌齐齐颤一下",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "bar_sway",
+      "obj": "road",
+      "verb": "move",
+      "at": {
+        "word": "8-05.w002",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "dur": 30
+      },
+      "means": "竖料杆轻晃",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "paper",
+      "obj": "paper",
+      "verb": "move",
+      "at": {
+        "word": "8-05.w007",
+        "off": 0
+      },
+      "lead": 20,
+      "until": {
+        "dur": 12
+      },
+      "means": "报纸从上方落下，停在上面两块牌前面（A4）",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "headline",
+      "obj": "headline",
+      "verb": "appear",
+      "at": {
+        "word": "8-05.w009",
+        "off": 0
+      },
+      "lead": 2,
+      "until": {
+        "word": "8-05.w013"
+      },
+      "means": "报纸标题逐词亮，跟着念的词；B 举手机的手在报纸前",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "paper_away",
+      "obj": "paper",
+      "verb": "move",
+      "at": {
+        "word": "8-06.w001",
+        "off": 0
+      },
+      "lead": 16,
+      "until": {
+        "dur": 10
+      },
+      "means": "报纸缩到 0.45 倍，滑到右上角挂着",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "pulse",
+      "obj": "road",
+      "verb": "flow",
+      "at": {
+        "word": "8-06.w008",
+        "off": 0
+      },
+      "lead": 40,
+      "until": {
+        "dur": 6
+      },
+      "means": "一个鼓包沿竖料杆从上走到下",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "st1",
+      "obj": "computer",
+      "verb": "move",
+      "at": {
+        "word": "8-06.w009",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "dur": 14
+      },
+      "means": "`computer` 牌往前弹出 8 mm、亮起；D 的指尖在牌前",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "st2",
+      "obj": "protein",
+      "verb": "move",
+      "at": {
+        "word": "8-06.w010",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "dur": 14
+      },
+      "means": "`protein` 牌同上",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "st3",
+      "obj": "cells",
+      "verb": "move",
+      "at": {
+        "word": "8-06.w011",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "dur": 14
+      },
+      "means": "`cells` 牌同上",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "st4",
+      "obj": "animals",
+      "verb": "move",
+      "at": {
+        "word": "8-06.w012",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "dur": 14
+      },
+      "means": "`animals` 牌同上",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "st5",
+      "obj": "patients",
+      "verb": "move",
+      "at": {
+        "word": "8-06.w014",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "sentence_end": true
+      },
+      "means": "`patients` 牌亮起后左右晃两下",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "chip2",
+      "obj": "chip",
+      "verb": "move",
+      "at": {
+        "word": "8-07.w001",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "dur": 20
+      },
+      "means": "芯片小件扫光",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "person",
+      "obj": "person",
+      "verb": "eject",
+      "at": {
+        "word": "8-07.w005",
+        "off": 0
+      },
+      "lead": 6,
+      "until": {
+        "sentence_end": true
+      },
+      "means": "`computer` 牌旁的白色小人跳一下",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "loop_on",
+      "obj": "loop",
+      "verb": "power_on",
+      "at": {
+        "word": "8-07.w009",
+        "off": 0
+      },
+      "lead": 10,
+      "until": {
+        "word": "8-07.w011"
+      },
+      "means": "`computer` 牌上的小循环轨道转起来",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "ring",
+      "obj": "ring",
+      "verb": "move",
+      "at": {
+        "word": "8-07.w013",
+        "off": 0
+      },
+      "lead": 16,
+      "until": {
+        "word": "8-07.w014"
+      },
+      "means": "小循环转成一个暖白的光环",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "allglow",
+      "obj": "road",
+      "verb": "move",
+      "at": {
+        "word": "8-07.w015",
+        "off": 0
+      },
+      "lead": 10,
+      "until": {
+        "word": "8-07.w017"
+      },
+      "means": "五块牌从上到下依次亮成暖色，各差 6 帧，整条路轻轻摆一下",
+      "guide": {
+        "kind": "none"
+      }
+    },
+    {
+      "id": "dive",
+      "obj": "computer",
+      "verb": "move",
+      "at": {
+        "word": "8-07.w017",
+        "off": 73
+      },
+      "means": "`computer` 牌的骨白牌面冲镜头",
+      "guide": {
+        "kind": "none"
+      }
+    }
+  ]
+}

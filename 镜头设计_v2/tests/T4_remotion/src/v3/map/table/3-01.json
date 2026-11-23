@@ -1,0 +1,196 @@
+{
+ "schema": "cdk20.wordmap/1",
+ "built": "2026-11-18 02:33:56 +09:00",
+ "cut": "cut_v8",
+ "group": "3-01",
+ "fps": 60,
+ "len_f": 384,
+ "cut_start_s": 280.1,
+ "holds": [],
+ "words": [
+  {
+   "wid": "3-01.w001",
+   "w": "Okay.",
+   "key": "okay#1",
+   "sid": "3-01.s1",
+   "f0": 39,
+   "f1": 58
+  },
+  {
+   "wid": "3-01.w002",
+   "w": "To",
+   "key": "to#1",
+   "sid": "3-01.s2",
+   "f0": 89,
+   "f1": 94
+  },
+  {
+   "wid": "3-01.w003",
+   "w": "get",
+   "key": "get#1",
+   "sid": "3-01.s2",
+   "f0": 100,
+   "f1": 113
+  },
+  {
+   "wid": "3-01.w004",
+   "w": "this,",
+   "key": "this#1",
+   "sid": "3-01.s2",
+   "f0": 118,
+   "f1": 135
+  },
+  {
+   "wid": "3-01.w005",
+   "w": "picture",
+   "key": "picture#1",
+   "sid": "3-01.s2",
+   "f0": 184,
+   "f1": 212
+  },
+  {
+   "wid": "3-01.w006",
+   "w": "a",
+   "key": "a#1",
+   "sid": "3-01.s2",
+   "f0": 220,
+   "f1": 221
+  },
+  {
+   "wid": "3-01.w007",
+   "w": "lock",
+   "key": "lock#1",
+   "sid": "3-01.s2",
+   "f0": 230,
+   "f1": 249
+  },
+  {
+   "wid": "3-01.w008",
+   "w": "and",
+   "key": "and#1",
+   "sid": "3-01.s2",
+   "f0": 292,
+   "f1": 308
+  },
+  {
+   "wid": "3-01.w009",
+   "w": "a",
+   "key": "a#2",
+   "sid": "3-01.s2",
+   "f0": 332,
+   "f1": 333
+  },
+  {
+   "wid": "3-01.w010",
+   "w": "key.",
+   "key": "key#1",
+   "sid": "3-01.s2",
+   "f0": 340,
+   "f1": 355
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "3-01.s1",
+   "text": "Okay.",
+   "w_first": "3-01.w001",
+   "w_last": "3-01.w001",
+   "f0": 39,
+   "f1": 58
+  },
+  {
+   "sid": "3-01.s2",
+   "text": "To get this, picture a lock and a key.",
+   "w_first": "3-01.w002",
+   "w_last": "3-01.w010",
+   "f0": 89,
+   "f1": 355
+  }
+ ],
+ "events": [
+  {
+   "eid": "s1_02",
+   "obj": "第一站红半球亮起升高",
+   "verb": "action",
+   "means": null,
+   "word": "3-01.w001",
+   "f_start": 33,
+   "f_land": 39,
+   "f_end": 39,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "s1_03",
+   "obj": "其余五站向后滑远，第一站放大移到中央",
+   "verb": "action",
+   "means": null,
+   "word": "3-01.w002",
+   "f_start": 67,
+   "f_land": 89,
+   "f_end": 89,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "s1_05",
+   "obj": "第一站落回台面",
+   "verb": "action",
+   "means": null,
+   "word": "3-01.w004",
+   "f_start": 112,
+   "f_land": 118,
+   "f_end": 118,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "s1_07",
+   "obj": "红半球压平，当前格朱红边升起",
+   "verb": "action",
+   "means": null,
+   "word": "3-01.w005",
+   "f_start": 168,
+   "f_land": 184,
+   "f_end": 184,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "s1_08",
+   "obj": "锁落进朱红格",
+   "verb": "action",
+   "means": null,
+   "word": "3-01.w007",
+   "f_start": 214,
+   "f_land": 230,
+   "f_end": 230,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "s1_11",
+   "obj": "锁转回朝向钥匙",
+   "verb": "action",
+   "means": null,
+   "word": "3-01.w008",
+   "f_start": 280,
+   "f_land": 292,
+   "f_end": 292,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "s1_12",
+   "obj": "钥匙递入、滑到锁槽前",
+   "verb": "action",
+   "means": null,
+   "word": "3-01.w010",
+   "f_start": 322,
+   "f_land": 340,
+   "f_end": 340,
+   "role": "primary",
+   "tool": "remotion+blender"
+  }
+ ]
+}

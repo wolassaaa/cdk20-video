@@ -1,0 +1,175 @@
+{
+ "video": "D:\\。hkbu\\molecular science\\导演检查_20261123\\16_钻取_3-02.mp4",
+ "group": "3-02",
+ "fps": 60.002,
+ "frames": 776,
+ "offset_f": 0,
+ "S1": {
+  "word_events": 11,
+  "table_dev_max_f": 0,
+  "video_checked": 13,
+  "video_no_motion": [],
+  "pass_": true
+ },
+ "S2": {
+  "pass_": true,
+  "early": []
+ },
+ "S3": {
+  "pass_": true,
+  "longest_still_f": 2,
+  "bad": []
+ },
+ "S4": {
+  "pass_": true,
+  "looks_like_30": false,
+  "dup_frames": 0,
+  "stepped_dups": 0,
+  "stepped_ratio": 0.0,
+  "blend_frames": 4,
+  "blend_first": [
+   2,
+   3,
+   4,
+   5
+  ],
+  "design_fade": 0,
+  "verdict": "有混帧（变速慢放）"
+ },
+ "sentences": [
+  {
+   "sid": "3-02.s1",
+   "f0": 9,
+   "f1": 230,
+   "last_motion_f": 230,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "3-02.s2",
+   "f0": 270,
+   "f1": 761,
+   "last_motion_f": 761,
+   "end_dev": 0,
+   "longest_still_f": 2,
+   "s2": true,
+   "s3": true
+  }
+ ],
+ "events": [
+  {
+   "id": "cam_out",
+   "verb": "camera_to",
+   "w": "Inside",
+   "f_land": 45,
+   "table_dev": 36
+  },
+  {
+   "id": "shell_open",
+   "verb": "move",
+   "w": "cells,",
+   "f_land": 51,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_in",
+   "verb": "camera_to",
+   "w": "cells,",
+   "f_land": 57,
+   "table_dev": 6,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "lamps",
+   "verb": "power_on",
+   "w": "proteins",
+   "f_land": 106,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "run",
+   "verb": "move",
+   "w": "work.",
+   "f_land": 210,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "plug_enter",
+   "verb": "move",
+   "w": "drugs",
+   "f_land": 288,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "swap",
+   "verb": "eject_swap",
+   "w": "grab",
+   "f_land": 301,
+   "table_dev": -10,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "plug_in",
+   "verb": "plug_in",
+   "w": "grab",
+   "f_land": 311,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "clack",
+   "verb": "move",
+   "w": "tightly",
+   "f_land": 389,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "off",
+   "verb": "power_off",
+   "w": "change",
+   "f_land": 444,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_pocket",
+   "verb": "camera_to",
+   "w": "pocket",
+   "f_land": 635,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "ring",
+   "verb": "appear",
+   "w": "pocket",
+   "f_land": 635,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "key_rim",
+   "verb": "move",
+   "w": "key",
+   "f_land": 696,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "cam_fill",
+   "verb": "camera_to",
+   "w": "lock.",
+   "f_land": 743,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  }
+ ],
+ "pass": true
+}

@@ -1,0 +1,120 @@
+<!doctype html><meta charset="utf-8"><title>渲染进度</title><style>body{font-family:"Microsoft YaHei",sans-serif;max-width:900px;margin:24px auto;padding:0 16px;line-height:1.7;color:#222;background:#fff}
+table{border-collapse:collapse;margin:12px 0}td,th{border:1px solid #ccc;padding:6px 10px}th{background:#f2f2f2}
+code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1px solid #ddd;padding-bottom:4px}a{color:#0a58ca}</style><h1>渲染进度（板件新方案）</h1>
+<p>HKBU SCIE1007 课程作业的科普视频。这张表记录板件新方案每一项渲染做到哪了，额度用完或者电脑重启以后照着它接着渲。时间都是韩国时间（机器时钟）。</p>
+<p>怎么用：
+- 每个渲染脚本都能断点续渲：已有的帧跳过，重跑不会重复劳动。
+- 脚本每渲完一段，更新下面这张表里自己那一行（已渲帧数、最后更新时间）。
+- 待渲的命令登记在 <code>_env/jobs/resume_renders.sh</code> 的 QUEUE 里。没有 Blender 在跑时，GLM 的看守任务每 30 分钟会自动重启队列，不需要 Claude 在线。
+- 显卡暂停（<code>C:/Users/woola/cdk20_guard/GPU_PAUSED</code> 存在）时队列不启动。
+- 同时最多 2 个 Blender。</p>
+<h2>已定版，不用再渲</h2>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>文件</th>
+<th>完成</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>零件目录两页</td>
+<td>导演检查_20261117/6_零件目录_1/2_定版.png</td>
+<td>11-17</td>
+</tr>
+<tr>
+<td>大板全景和三张分区图</td>
+<td>导演检查_20261117/7a、8a/8b/8c_定版.png</td>
+<td>11-17</td>
+</tr>
+<tr>
+<td>定版大板场景</td>
+<td>G:/cdk20/work/kit/board_final.blend</td>
+<td>11-17</td>
+</tr>
+</tbody>
+</table>
+<h2>进行中和排队</h2>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>项目</th>
+<th>脚本</th>
+<th>输出目录</th>
+<th>总帧数</th>
+<th>已渲</th>
+<th>状态</th>
+<th>最后更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A1</td>
+<td>2-03 动画样片（三维）</td>
+<td>镜头设计_v3/inserts/bl_s203_board.py</td>
+<td>G:/cdk20/work/sample1b/</td>
+<td>344</td>
+<td>0</td>
+<td>场景和预览帧已有，正式帧未渲</td>
+<td>11-18 02:05</td>
+</tr>
+<tr>
+<td>B1</td>
+<td>16 种主角零件转台，各 4 秒 240 帧，透明底</td>
+<td>镜头设计_v3/inserts/kit_batch.py turn hero</td>
+<td>G:/cdk20/work/kit/turn/</td>
+<td>3840</td>
+<td>0</td>
+<td>排在 B2 后面自动接着渲</td>
+<td>11-18 02:15</td>
+</tr>
+<tr>
+<td>B2</td>
+<td>46 种零件正上方零件图，透明底</td>
+<td>镜头设计_v3/inserts/kit_batch.py flat all</td>
+<td>G:/cdk20/work/kit/flat/</td>
+<td>46</td>
+<td>2</td>
+<td>在渲，每张约 15 秒</td>
+<td>11-18 02:15</td>
+</tr>
+<tr>
+<td>B3</td>
+<td>16 种主角零件"长出来"</td>
+<td>待写</td>
+<td>G:/cdk20/work/kit/grow/</td>
+<td>待定</td>
+<td>0</td>
+<td>代码未写</td>
+<td></td>
+</tr>
+<tr>
+<td>B4</td>
+<td>大板沿主料杆长镜头</td>
+<td>待写</td>
+<td>G:/cdk20/work/kit/glide/</td>
+<td>待定</td>
+<td>0</td>
+<td>代码未写</td>
+<td></td>
+</tr>
+<tr>
+<td>B5</td>
+<td>46 种零件"拔起"通用动作</td>
+<td>待写</td>
+<td>G:/cdk20/work/kit/snap/</td>
+<td>待定</td>
+<td>0</td>
+<td>代码未写</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>B1、B2 的启动命令：<code>bash _env/jobs/render_kit_batch.sh</code>（已登记在 QUEUE 里）。实时进度看 <code>G:/cdk20/work/kit/progress.json</code>，或者跑 <code>blender -b --factory-startup -P kit_batch.py -- status</code>。其余 30 种零件要转台时：<code>kit_batch.py -- turn all</code>。</p>
+<h2>记录</h2>
+<ul>
+<li>11-18 02:05 建表。A1 的动画代理两次撞到 5 小时额度（11-17 20:00 前、11-18 01:40 前），正式帧还没开始渲。</li>
+<li>11-18 02:15 B2、B1 开渲（一个 Blender 顺序跑，留一个名额给 A1）。线稿不单独渲：Freestyle 在 5.3 的 Cycles 下出不了线，改由 Remotion 从透明通道描边。</li>
+</ul>

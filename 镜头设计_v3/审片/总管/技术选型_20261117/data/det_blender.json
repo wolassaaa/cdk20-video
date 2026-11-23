@@ -1,0 +1,42 @@
+{
+ "a": "G:/cdk20/work/tech_test/bl/frames_a",
+ "b": "G:/cdk20/work/tech_test/bl/frames_b",
+ "frames": 344,
+ "identical": 0,
+ "differ": 344,
+ "max_diff": 255,
+ "mean_diff_max": 0.0483,
+ "px_over2_max": 2414,
+ "worst": [
+  {
+   "f": 29,
+   "max": 255,
+   "mean": 0.0013,
+   "px": 208
+  },
+  {
+   "f": 30,
+   "max": 255,
+   "mean": 0.001,
+   "px": 135
+  },
+  {
+   "f": 31,
+   "max": 255,
+   "mean": 0.0029,
+   "px": 485
+  },
+  {
+   "f": 32,
+   "max": 255,
+   "mean": 0.0057,
+   "px": 237
+  },
+  {
+   "f": 33,
+   "max": 255,
+   "mean": 0.0068,
+   "px": 1864
+  }
+ ]
+}

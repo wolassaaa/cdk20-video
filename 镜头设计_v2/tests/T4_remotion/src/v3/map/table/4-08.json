@@ -1,0 +1,240 @@
+{
+ "schema": "cdk20.wordmap/1",
+ "built": "2026-11-18 02:33:56 +09:00",
+ "cut": "cut_v8",
+ "group": "4-08",
+ "fps": 60,
+ "len_f": 520,
+ "cut_start_s": 549.27,
+ "holds": [],
+ "words": [
+  {
+   "wid": "4-08.w001",
+   "w": "AI",
+   "key": "ai#1",
+   "sid": "4-08.s1",
+   "f0": 32,
+   "f1": 44
+  },
+  {
+   "wid": "4-08.w002",
+   "w": "didn't",
+   "key": "didn't#1",
+   "sid": "4-08.s1",
+   "f0": 45,
+   "f1": 59
+  },
+  {
+   "wid": "4-08.w003",
+   "w": "replace",
+   "key": "replace#1",
+   "sid": "4-08.s1",
+   "f0": 61,
+   "f1": 88
+  },
+  {
+   "wid": "4-08.w004",
+   "w": "the",
+   "key": "the#1",
+   "sid": "4-08.s1",
+   "f0": 88,
+   "f1": 92
+  },
+  {
+   "wid": "4-08.w005",
+   "w": "scientists.",
+   "key": "scientists#1",
+   "sid": "4-08.s1",
+   "f0": 98,
+   "f1": 143
+  },
+  {
+   "wid": "4-08.w006",
+   "w": "It",
+   "key": "it#1",
+   "sid": "4-08.s2",
+   "f0": 180,
+   "f1": 184
+  },
+  {
+   "wid": "4-08.w007",
+   "w": "ran",
+   "key": "ran#1",
+   "sid": "4-08.s2",
+   "f0": 213,
+   "f1": 228
+  },
+  {
+   "wid": "4-08.w008",
+   "w": "their",
+   "key": "their#1",
+   "sid": "4-08.s2",
+   "f0": 231,
+   "f1": 243
+  },
+  {
+   "wid": "4-08.w009",
+   "w": "trial",
+   "key": "trial#1",
+   "sid": "4-08.s2",
+   "f0": 262,
+   "f1": 285
+  },
+  {
+   "wid": "4-08.w010",
+   "w": "and",
+   "key": "and#1",
+   "sid": "4-08.s2",
+   "f0": 291,
+   "f1": 298
+  },
+  {
+   "wid": "4-08.w011",
+   "w": "error",
+   "key": "error#1",
+   "sid": "4-08.s2",
+   "f0": 308,
+   "f1": 326
+  },
+  {
+   "wid": "4-08.w012",
+   "w": "inside",
+   "key": "inside#1",
+   "sid": "4-08.s2",
+   "f0": 331,
+   "f1": 352
+  },
+  {
+   "wid": "4-08.w013",
+   "w": "a",
+   "key": "a#1",
+   "sid": "4-08.s2",
+   "f0": 355,
+   "f1": 356
+  },
+  {
+   "wid": "4-08.w014",
+   "w": "computer,",
+   "key": "computer#1",
+   "sid": "4-08.s2",
+   "f0": 357,
+   "f1": 390
+  },
+  {
+   "wid": "4-08.w015",
+   "w": "at",
+   "key": "at#1",
+   "sid": "4-08.s2",
+   "f0": 425,
+   "f1": 429
+  },
+  {
+   "wid": "4-08.w016",
+   "w": "light",
+   "key": "light#1",
+   "sid": "4-08.s2",
+   "f0": 434,
+   "f1": 450
+  },
+  {
+   "wid": "4-08.w017",
+   "w": "speed.",
+   "key": "speed#1",
+   "sid": "4-08.s2",
+   "f0": 450,
+   "f1": 473
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "4-08.s1",
+   "text": "AI didn't replace the scientists.",
+   "w_first": "4-08.w001",
+   "w_last": "4-08.w005",
+   "f0": 32,
+   "f1": 143
+  },
+  {
+   "sid": "4-08.s2",
+   "text": "It ran their trial and error inside a computer, at light speed.",
+   "w_first": "4-08.w006",
+   "w_last": "4-08.w017",
+   "f0": 180,
+   "f1": 473
+  }
+ ],
+ "events": [
+  {
+   "eid": "t00_drop_p0",
+   "obj": "p0",
+   "verb": "drop",
+   "means": null,
+   "word": "4-08.w001",
+   "f_start": 18,
+   "f_land": 32,
+   "f_end": 32,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t01_hop_p0",
+   "obj": "p0",
+   "verb": "hop",
+   "means": null,
+   "word": "4-08.w005",
+   "f_start": 86,
+   "f_land": 98,
+   "f_end": 98,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t02_drop_r0",
+   "obj": "r0",
+   "verb": "drop",
+   "means": null,
+   "word": "4-08.w006",
+   "f_start": 166,
+   "f_land": 180,
+   "f_end": 180,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t03_drop_o0",
+   "obj": "o0",
+   "verb": "drop",
+   "means": null,
+   "word": "4-08.w009",
+   "f_start": 249,
+   "f_land": 263,
+   "f_end": 263,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t04_orbit_o0",
+   "obj": "o0",
+   "verb": "orbit",
+   "means": null,
+   "word": "4-08.w011",
+   "f_start": 308,
+   "f_land": 308,
+   "f_end": 308,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t05_drop_c0",
+   "obj": "c0",
+   "verb": "drop",
+   "means": null,
+   "word": "4-08.w014",
+   "f_start": 343,
+   "f_land": 357,
+   "f_end": 357,
+   "role": "primary",
+   "tool": "remotion+blender"
+  }
+ ]
+}

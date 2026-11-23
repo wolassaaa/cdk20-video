@@ -1,0 +1,255 @@
+{
+ "schema": "cdk20.wordmap/1",
+ "built": "2026-11-18 02:33:56 +09:00",
+ "cut": "cut_v8",
+ "group": "6-02",
+ "fps": 60,
+ "len_f": 768,
+ "cut_start_s": 787.8,
+ "holds": [],
+ "words": [
+  {
+   "wid": "6-02.w001",
+   "w": "Seeing",
+   "key": "seeing#1",
+   "sid": "6-02.s1",
+   "f0": 9,
+   "f1": 23
+  },
+  {
+   "wid": "6-02.w002",
+   "w": "the",
+   "key": "the#1",
+   "sid": "6-02.s1",
+   "f0": 23,
+   "f1": 28
+  },
+  {
+   "wid": "6-02.w003",
+   "w": "lock.",
+   "key": "lock#1",
+   "sid": "6-02.s1",
+   "f0": 32,
+   "f1": 46
+  },
+  {
+   "wid": "6-02.w004",
+   "w": "Before:",
+   "key": "before#1",
+   "sid": "6-02.s2",
+   "f0": 67,
+   "f1": 92
+  },
+  {
+   "wid": "6-02.w005",
+   "w": "hard",
+   "key": "hard#1",
+   "sid": "6-02.s2",
+   "f0": 115,
+   "f1": 128
+  },
+  {
+   "wid": "6-02.w006",
+   "w": "lab",
+   "key": "lab#1",
+   "sid": "6-02.s2",
+   "f0": 132,
+   "f1": 144
+  },
+  {
+   "wid": "6-02.w007",
+   "w": "experiments,",
+   "key": "experiments#1",
+   "sid": "6-02.s2",
+   "f0": 147,
+   "f1": 188
+  },
+  {
+   "wid": "6-02.w008",
+   "w": "and",
+   "key": "and#1",
+   "sid": "6-02.s2",
+   "f0": 219,
+   "f1": 229
+  },
+  {
+   "wid": "6-02.w009",
+   "w": "without",
+   "key": "without#1",
+   "sid": "6-02.s2",
+   "f0": 232,
+   "f1": 256
+  },
+  {
+   "wid": "6-02.w010",
+   "w": "a",
+   "key": "a#1",
+   "sid": "6-02.s2",
+   "f0": 259,
+   "f1": 260
+  },
+  {
+   "wid": "6-02.w011",
+   "w": "3D",
+   "key": "3d#1",
+   "sid": "6-02.s2",
+   "f0": 264,
+   "f1": 283
+  },
+  {
+   "wid": "6-02.w012",
+   "w": "shape,",
+   "key": "shape#1",
+   "sid": "6-02.s2",
+   "f0": 294,
+   "f1": 313
+  },
+  {
+   "wid": "6-02.w013",
+   "w": "design",
+   "key": "design#1",
+   "sid": "6-02.s2",
+   "f0": 318,
+   "f1": 344
+  },
+  {
+   "wid": "6-02.w014",
+   "w": "was",
+   "key": "was#1",
+   "sid": "6-02.s2",
+   "f0": 348,
+   "f1": 355
+  },
+  {
+   "wid": "6-02.w015",
+   "w": "expensive,",
+   "key": "expensive#1",
+   "sid": "6-02.s2",
+   "f0": 357,
+   "f1": 402
+  },
+  {
+   "wid": "6-02.w016",
+   "w": "slow",
+   "key": "slow#1",
+   "sid": "6-02.s2",
+   "f0": 407,
+   "f1": 428
+  },
+  {
+   "wid": "6-02.w017",
+   "w": "and",
+   "key": "and#2",
+   "sid": "6-02.s2",
+   "f0": 437,
+   "f1": 441
+  },
+  {
+   "wid": "6-02.w018",
+   "w": "difficult.",
+   "key": "difficult#1",
+   "sid": "6-02.s2",
+   "f0": 444,
+   "f1": 470
+  },
+  {
+   "wid": "6-02.w019",
+   "w": "Now:",
+   "key": "now#1",
+   "sid": "6-02.s3",
+   "f0": 499,
+   "f1": 512
+  },
+  {
+   "wid": "6-02.w020",
+   "w": "a",
+   "key": "a#2",
+   "sid": "6-02.s3",
+   "f0": 533,
+   "f1": 534
+  },
+  {
+   "wid": "6-02.w021",
+   "w": "free",
+   "key": "free#1",
+   "sid": "6-02.s3",
+   "f0": 539,
+   "f1": 550
+  },
+  {
+   "wid": "6-02.w022",
+   "w": "prediction,",
+   "key": "prediction#1",
+   "sid": "6-02.s3",
+   "f0": 553,
+   "f1": 587
+  },
+  {
+   "wid": "6-02.w023",
+   "w": "downloaded",
+   "key": "downloaded#1",
+   "sid": "6-02.s3",
+   "f0": 624,
+   "f1": 652
+  },
+  {
+   "wid": "6-02.w024",
+   "w": "from",
+   "key": "from#1",
+   "sid": "6-02.s3",
+   "f0": 654,
+   "f1": 668
+  },
+  {
+   "wid": "6-02.w025",
+   "w": "a",
+   "key": "a#3",
+   "sid": "6-02.s3",
+   "f0": 673,
+   "f1": 674
+  },
+  {
+   "wid": "6-02.w026",
+   "w": "public",
+   "key": "public#1",
+   "sid": "6-02.s3",
+   "f0": 688,
+   "f1": 713
+  },
+  {
+   "wid": "6-02.w027",
+   "w": "database.",
+   "key": "database#1",
+   "sid": "6-02.s3",
+   "f0": 718,
+   "f1": 753
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "6-02.s1",
+   "text": "Seeing the lock.",
+   "w_first": "6-02.w001",
+   "w_last": "6-02.w003",
+   "f0": 9,
+   "f1": 46
+  },
+  {
+   "sid": "6-02.s2",
+   "text": "Before: hard lab experiments, and without a 3D shape, design was expensive, slow and difficult.",
+   "w_first": "6-02.w004",
+   "w_last": "6-02.w018",
+   "f0": 67,
+   "f1": 470
+  },
+  {
+   "sid": "6-02.s3",
+   "text": "Now: a free prediction, downloaded from a public database.",
+   "w_first": "6-02.w019",
+   "w_last": "6-02.w027",
+   "f0": 499,
+   "f1": 753
+  }
+ ],
+ "events": []
+}

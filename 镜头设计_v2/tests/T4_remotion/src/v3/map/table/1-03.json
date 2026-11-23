@@ -1,0 +1,208 @@
+{
+ "schema": "cdk20.wordmap/1",
+ "built": "2026-11-18 02:33:56 +09:00",
+ "cut": "cut_v8",
+ "group": "1-03",
+ "fps": 60,
+ "len_f": 326,
+ "cut_start_s": 25.17,
+ "holds": [],
+ "words": [
+  {
+   "wid": "1-03.w001",
+   "w": "Here's",
+   "key": "here's#1",
+   "sid": "1-03.s1",
+   "f0": 32,
+   "f1": 49
+  },
+  {
+   "wid": "1-03.w002",
+   "w": "the",
+   "key": "the#1",
+   "sid": "1-03.s1",
+   "f0": 51,
+   "f1": 56
+  },
+  {
+   "wid": "1-03.w003",
+   "w": "thing.",
+   "key": "thing#1",
+   "sid": "1-03.s1",
+   "f0": 60,
+   "f1": 75
+  },
+  {
+   "wid": "1-03.w004",
+   "w": "We",
+   "key": "we#1",
+   "sid": "1-03.s2",
+   "f0": 107,
+   "f1": 111
+  },
+  {
+   "wid": "1-03.w005",
+   "w": "already",
+   "key": "already#1",
+   "sid": "1-03.s2",
+   "f0": 121,
+   "f1": 140
+  },
+  {
+   "wid": "1-03.w006",
+   "w": "have",
+   "key": "have#1",
+   "sid": "1-03.s2",
+   "f0": 145,
+   "f1": 155
+  },
+  {
+   "wid": "1-03.w007",
+   "w": "medicines.",
+   "key": "medicines#1",
+   "sid": "1-03.s2",
+   "f0": 158,
+   "f1": 192
+  },
+  {
+   "wid": "1-03.w008",
+   "w": "Just",
+   "key": "just#1",
+   "sid": "1-03.s3",
+   "f0": 209,
+   "f1": 221
+  },
+  {
+   "wid": "1-03.w009",
+   "w": "not",
+   "key": "not#1",
+   "sid": "1-03.s3",
+   "f0": 223,
+   "f1": 233
+  },
+  {
+   "wid": "1-03.w010",
+   "w": "good",
+   "key": "good#1",
+   "sid": "1-03.s3",
+   "f0": 237,
+   "f1": 245
+  },
+  {
+   "wid": "1-03.w011",
+   "w": "enough",
+   "key": "enough#1",
+   "sid": "1-03.s3",
+   "f0": 247,
+   "f1": 273
+  },
+  {
+   "wid": "1-03.w012",
+   "w": "ones.",
+   "key": "ones#1",
+   "sid": "1-03.s3",
+   "f0": 273,
+   "f1": 281
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "1-03.s1",
+   "text": "Here's the thing.",
+   "w_first": "1-03.w001",
+   "w_last": "1-03.w003",
+   "f0": 32,
+   "f1": 75
+  },
+  {
+   "sid": "1-03.s2",
+   "text": "We already have medicines.",
+   "w_first": "1-03.w004",
+   "w_last": "1-03.w007",
+   "f0": 107,
+   "f1": 192
+  },
+  {
+   "sid": "1-03.s3",
+   "text": "Just not good enough ones.",
+   "w_first": "1-03.w008",
+   "w_last": "1-03.w012",
+   "f0": 209,
+   "f1": 281
+  }
+ ],
+ "events": [
+  {
+   "eid": "t00_drop_c0",
+   "obj": "c0",
+   "verb": "drop",
+   "means": null,
+   "word": "1-03.w001",
+   "f_start": 18,
+   "f_land": 32,
+   "f_end": 32,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t01_hop_c0",
+   "obj": "c0",
+   "verb": "hop",
+   "means": null,
+   "word": "1-03.w003",
+   "f_start": 48,
+   "f_land": 60,
+   "f_end": 60,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t02_drop_t0",
+   "obj": "t0",
+   "verb": "drop",
+   "means": null,
+   "word": "1-03.w005",
+   "f_start": 105,
+   "f_land": 121,
+   "f_end": 121,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t03_drop_t1",
+   "obj": "t1",
+   "verb": "drop",
+   "means": null,
+   "word": "1-03.w007",
+   "f_start": 143,
+   "f_land": 159,
+   "f_end": 159,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t04_fill_t0",
+   "obj": "t0",
+   "verb": "fill",
+   "means": null,
+   "word": "1-03.w009",
+   "f_start": 210,
+   "f_land": 224,
+   "f_end": 224,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t05_fill_t1",
+   "obj": "t1",
+   "verb": "fill",
+   "means": null,
+   "word": "1-03.w010",
+   "f_start": 223,
+   "f_land": 237,
+   "f_end": 237,
+   "role": "primary",
+   "tool": "remotion+blender"
+  }
+ ]
+}

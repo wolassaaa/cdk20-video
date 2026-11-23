@@ -1,0 +1,11 @@
+{
+ "a": "G:/cdk20/work/tech_test/td/run_a",
+ "b": "G:/cdk20/work/tech_test/td/run_b",
+ "frames": 344,
+ "identical": 344,
+ "differ": 0,
+ "max_diff": 0,
+ "mean_diff_max": 0,
+ "px_over2_max": 0,
+ "worst": []
+}

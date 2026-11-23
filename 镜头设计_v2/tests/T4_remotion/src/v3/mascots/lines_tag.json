@@ -22,13 +22,13 @@
   },
   "DeepSeek": {
    "ref": "en-US-AnaNeural",
-   "pitch_st": -0.5,
-   "why": "General American en-US female (Cartoon/Conversation, Cute); sweet soft girly timbre for Chatterbox prompt, -0.5 st tames raw ~295 Hz into ~260-275 Hz bright girl register without shrillness"
+   "pitch_st": -1.5,
+   "why": "General American en-US female (Cartoon/Conversation, Cute); sweet soft girly timbre for Chatterbox prompt, -1.5 st tames raw ~295 Hz into ~270-285 Hz bright girl register without shrillness"
   },
   "Gemini": {
    "ref": "en-US-AriaNeural",
-   "pitch_st": 0.5,
-   "why": "General American en-US female (News/Novel, Positive, Confident); prior cand tests showed widest pitch excursion (14.1-15.7 st) and crisp clarity (HNR ~15.2 dB); +0.5 st puts f0 ~250 Hz bright sparkling launch-day energy"
+   "pitch_st": -0.5,
+   "why": "General American en-US female (News/Novel, Positive, Confident); prior cand tests showed widest pitch excursion (14.1-15.7 st) and crisp clarity (HNR ~15.2 dB); -0.5 st puts f0 ~245 Hz bright sparkling launch-day energy cleanly between Claude and DeepSeek"
   }
  },
  "lines": [

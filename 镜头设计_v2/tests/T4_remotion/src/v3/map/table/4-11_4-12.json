@@ -1,0 +1,412 @@
+{
+ "schema": "cdk20.wordmap/1",
+ "built": "2026-11-18 02:33:56 +09:00",
+ "cut": "cut_v8",
+ "group": "4-11+4-12",
+ "fps": 60,
+ "len_f": 640,
+ "cut_start_s": 613.83,
+ "holds": [],
+ "words": [
+  {
+   "wid": "4-11.w001",
+   "w": "Wait.",
+   "key": "wait#1",
+   "sid": "4-11.s1",
+   "f0": 30,
+   "f1": 48
+  },
+  {
+   "wid": "4-11.w002",
+   "w": "So",
+   "key": "so#1",
+   "sid": "4-11.s2",
+   "f0": 114,
+   "f1": 118
+  },
+  {
+   "wid": "4-11.w003",
+   "w": "the",
+   "key": "the#1",
+   "sid": "4-11.s2",
+   "f0": 126,
+   "f1": 130
+  },
+  {
+   "wid": "4-11.w004",
+   "w": "computer",
+   "key": "computer#1",
+   "sid": "4-11.s2",
+   "f0": 133,
+   "f1": 159
+  },
+  {
+   "wid": "4-11.w005",
+   "w": "picked",
+   "key": "picked#1",
+   "sid": "4-11.s2",
+   "f0": 163,
+   "f1": 176
+  },
+  {
+   "wid": "4-11.w006",
+   "w": "the",
+   "key": "the#2",
+   "sid": "4-11.s2",
+   "f0": 177,
+   "f1": 182
+  },
+  {
+   "wid": "4-11.w007",
+   "w": "winners?",
+   "key": "winners#1",
+   "sid": "4-11.s2",
+   "f0": 192,
+   "f1": 222
+  },
+  {
+   "wid": "4-12.w001",
+   "w": "Not",
+   "key": "not#1",
+   "sid": "4-12.s1",
+   "f0": 231,
+   "f1": 241
+  },
+  {
+   "wid": "4-12.w002",
+   "w": "quite.",
+   "key": "quite#1",
+   "sid": "4-12.s1",
+   "f0": 245,
+   "f1": 275
+  },
+  {
+   "wid": "4-12.w003",
+   "w": "A",
+   "key": "a#1",
+   "sid": "4-12.s2",
+   "f0": 301,
+   "f1": 302
+  },
+  {
+   "wid": "4-12.w004",
+   "w": "docking",
+   "key": "docking#1",
+   "sid": "4-12.s2",
+   "f0": 311,
+   "f1": 332
+  },
+  {
+   "wid": "4-12.w005",
+   "w": "score",
+   "key": "score#1",
+   "sid": "4-12.s2",
+   "f0": 336,
+   "f1": 356
+  },
+  {
+   "wid": "4-12.w006",
+   "w": "is",
+   "key": "is#1",
+   "sid": "4-12.s2",
+   "f0": 380,
+   "f1": 407
+  },
+  {
+   "wid": "4-12.w007",
+   "w": "a",
+   "key": "a#2",
+   "sid": "4-12.s2",
+   "f0": 414,
+   "f1": 415
+  },
+  {
+   "wid": "4-12.w008",
+   "w": "clue,",
+   "key": "clue#1",
+   "sid": "4-12.s2",
+   "f0": 421,
+   "f1": 443
+  },
+  {
+   "wid": "4-12.w009",
+   "w": "not",
+   "key": "not#2",
+   "sid": "4-12.s2",
+   "f0": 467,
+   "f1": 478
+  },
+  {
+   "wid": "4-12.w010",
+   "w": "proof.",
+   "key": "proof#1",
+   "sid": "4-12.s2",
+   "f0": 481,
+   "f1": 510
+  },
+  {
+   "wid": "4-12.w011",
+   "w": "Only",
+   "key": "only#1",
+   "sid": "4-12.s3",
+   "f0": 546,
+   "f1": 557
+  },
+  {
+   "wid": "4-12.w012",
+   "w": "the",
+   "key": "the#1",
+   "sid": "4-12.s3",
+   "f0": 563,
+   "f1": 567
+  },
+  {
+   "wid": "4-12.w013",
+   "w": "lab",
+   "key": "lab#1",
+   "sid": "4-12.s3",
+   "f0": 567,
+   "f1": 574
+  },
+  {
+   "wid": "4-12.w014",
+   "w": "can",
+   "key": "can#1",
+   "sid": "4-12.s3",
+   "f0": 578,
+   "f1": 587
+  },
+  {
+   "wid": "4-12.w015",
+   "w": "tell.",
+   "key": "tell#1",
+   "sid": "4-12.s3",
+   "f0": 591,
+   "f1": 610
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "4-11.s1",
+   "text": "Wait.",
+   "w_first": "4-11.w001",
+   "w_last": "4-11.w001",
+   "f0": 30,
+   "f1": 48
+  },
+  {
+   "sid": "4-11.s2",
+   "text": "So the computer picked the winners?",
+   "w_first": "4-11.w002",
+   "w_last": "4-11.w007",
+   "f0": 114,
+   "f1": 222
+  },
+  {
+   "sid": "4-12.s1",
+   "text": "Not quite.",
+   "w_first": "4-12.w001",
+   "w_last": "4-12.w002",
+   "f0": 231,
+   "f1": 275
+  },
+  {
+   "sid": "4-12.s2",
+   "text": "A docking score is a clue, not proof.",
+   "w_first": "4-12.w003",
+   "w_last": "4-12.w010",
+   "f0": 301,
+   "f1": 510
+  },
+  {
+   "sid": "4-12.s3",
+   "text": "Only the lab can tell.",
+   "w_first": "4-12.w011",
+   "w_last": "4-12.w015",
+   "f0": 546,
+   "f1": 610
+  }
+ ],
+ "events": [
+  {
+   "eid": "t411_00",
+   "obj": "hop",
+   "verb": "land",
+   "means": null,
+   "word": "4-11.w001",
+   "f_start": 30,
+   "f_land": 30,
+   "f_end": 30,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t411_01",
+   "obj": "hop",
+   "verb": "land",
+   "means": null,
+   "word": "4-11.w002",
+   "f_start": 113,
+   "f_land": 113,
+   "f_end": 113,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t411_02",
+   "obj": "note",
+   "verb": "land",
+   "means": null,
+   "word": "4-11.w004",
+   "f_start": 133,
+   "f_land": 133,
+   "f_end": 133,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t411_03",
+   "obj": "step fwd",
+   "verb": "land",
+   "means": null,
+   "word": "4-11.w005",
+   "f_start": 163,
+   "f_land": 163,
+   "f_end": 163,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t411_04",
+   "obj": "note",
+   "verb": "land",
+   "means": null,
+   "word": "4-11.w007",
+   "f_start": 191,
+   "f_land": 191,
+   "f_end": 191,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t411_05",
+   "obj": "hop",
+   "verb": "land",
+   "means": null,
+   "word": "4-12.w001",
+   "f_start": 231,
+   "f_land": 231,
+   "f_end": 231,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t411_06",
+   "obj": "step back",
+   "verb": "land",
+   "means": null,
+   "word": "4-12.w002",
+   "f_start": 244,
+   "f_land": 244,
+   "f_end": 244,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t411_07",
+   "obj": "note",
+   "verb": "land",
+   "means": null,
+   "word": "4-12.w004",
+   "f_start": 310,
+   "f_land": 310,
+   "f_end": 310,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t411_08",
+   "obj": "underline",
+   "verb": "land",
+   "means": null,
+   "word": "4-12.w005",
+   "f_start": 336,
+   "f_land": 336,
+   "f_end": 336,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t411_09",
+   "obj": "note",
+   "verb": "land",
+   "means": null,
+   "word": "4-12.w008",
+   "f_start": 421,
+   "f_land": 421,
+   "f_end": 421,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t411_10",
+   "obj": "note",
+   "verb": "land",
+   "means": null,
+   "word": "4-12.w009",
+   "f_start": 467,
+   "f_land": 467,
+   "f_end": 467,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t411_11",
+   "obj": "strike",
+   "verb": "land",
+   "means": null,
+   "word": "4-12.w010",
+   "f_start": 481,
+   "f_land": 481,
+   "f_end": 481,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t411_12",
+   "obj": "tube",
+   "verb": "land",
+   "means": null,
+   "word": "4-12.w011",
+   "f_start": 546,
+   "f_land": 546,
+   "f_end": 546,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t411_13",
+   "obj": "slide",
+   "verb": "land",
+   "means": null,
+   "word": "4-12.w013",
+   "f_start": 567,
+   "f_land": 567,
+   "f_end": 567,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t411_14",
+   "obj": "fill",
+   "verb": "land",
+   "means": null,
+   "word": "4-12.w015",
+   "f_start": 591,
+   "f_land": 591,
+   "f_end": 591,
+   "role": "primary",
+   "tool": "remotion+blender"
+  }
+ ]
+}

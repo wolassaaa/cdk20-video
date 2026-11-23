@@ -1,0 +1,176 @@
+{
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜段 6-04_6-05 的检查清单（照 oncam-3d-parts 技能新做，没有旧三维版对比）。oncam_report.py 读它生成检查页；check 写 M 编号的由 oncam_check.py 机检判过/不过，写'看图'的是施工方逐张看抽帧后填的 result。",
+ "who": "D / B",
+ "line": "Millions of compounds screened before. Here? Thirteen made. Thirteen. That's honestly wild.",
+ "design_doc": "镜头设计_v3/深化/18_剩余画面设计定稿.md（2.4 6-04_6-05）；事件表 映射/events/6-04_6-05.json",
+ "lead": [
+  "（待填）"
+ ],
+ "items": [
+  {
+   "n": 1,
+   "frames": "0–26",
+   "cat": "转场",
+   "problem": "Millions：一块微孔板的骨白底面从盖满画面退到右区，平放在一小段料杆托上",
+   "fix": "对数深度贝塞尔甩回落位，段首几帧退得慢（M9 每帧亮度跳变 ≤ 24）",
+   "check": "M12",
+   "new": 0,
+   "show": true,
+   "result": ""
+  },
+  {
+   "n": 2,
+   "frames": "26–525",
+   "cat": "构图",
+   "problem": "零件不碰画边、不进字幕区、在人右边不压人、够大",
+   "fix": "停留位置和大小照 18 文档 2.4 本段规格；OC1 / M5 豁免帧写在参数表里",
+   "check": "M5",
+   "new": 275,
+   "result": ""
+  },
+  {
+   "n": 3,
+   "frames": "32–155",
+   "cat": "动作",
+   "problem": "Millions：Millions … before.：微孔板一块接一块从上面落下叠上去，每 8 帧一块，塔越叠越高、轻轻晃，最上面三块出画",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 32,
+   "show": false,
+   "result": ""
+  },
+  {
+   "n": 4,
+   "frames": "187–227",
+   "cat": "动作",
+   "problem": "Here?：Here?：塔往后往左退，变虚",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 207,
+   "show": false,
+   "result": ""
+  },
+  {
+   "n": 5,
+   "frames": "207–227",
+   "cat": "动作",
+   "problem": "Here?：Here?：小托盘弹到前面",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 213,
+   "show": false,
+   "result": ""
+  },
+  {
+   "n": 6,
+   "frames": "257–340",
+   "cat": "动作",
+   "problem": "Thirteen：Thirteen：13 把假插头逐把落进托盘的座里，每 4 帧一把",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 297,
+   "show": false,
+   "result": ""
+  },
+  {
+   "n": 7,
+   "frames": "317–361",
+   "cat": "动作",
+   "problem": "made.：made.：托盘前沿的刻字 13 扫光亮起",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 321,
+   "show": false,
+   "result": ""
+  },
+  {
+   "n": 8,
+   "frames": "364–398",
+   "cat": "动作",
+   "problem": "Thirteen.：Thirteen.：13 把依次跳一下，各差 2 帧",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 368,
+   "show": false,
+   "result": ""
+  },
+  {
+   "n": 9,
+   "frames": "477–521",
+   "cat": "动作",
+   "problem": "wild.：wild.：托盘朝镜头倾 12°，一道扫光掠过 13 把",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 493,
+   "show": false,
+   "result": ""
+  },
+  {
+   "n": 10,
+   "frames": "525–567",
+   "cat": "转场",
+   "problem": "段尾：托盘的骨白盘面冲镜头",
+   "fix": "说完 + 4 帧以后才起；末帧盖满（接下一段的擦除层）",
+   "check": "M12",
+   "new": 567,
+   "show": true,
+   "result": ""
+  }
+ ],
+ "beats": [
+  [
+   "2–58",
+   "Millions",
+   "Millions：一块微孔板的骨白底面从盖满画面退到右区，平放在一小段料杆托上",
+   "move"
+  ],
+  [
+   "32–155",
+   "Millions",
+   "Millions … before.：微孔板一块接一块从上面落下叠上去，每 8 帧一块，塔越叠越高、轻轻晃，最上面三块出画",
+   "move"
+  ],
+  [
+   "187–227",
+   "Here?",
+   "Here?：塔往后往左退，变虚",
+   "move"
+  ],
+  [
+   "207–227",
+   "Here?",
+   "Here?：小托盘弹到前面",
+   "eject"
+  ],
+  [
+   "257–340",
+   "Thirteen",
+   "Thirteen：13 把假插头逐把落进托盘的座里，每 4 帧一把",
+   "move"
+  ],
+  [
+   "317–361",
+   "made.",
+   "made.：托盘前沿的刻字 13 扫光亮起",
+   "appear"
+  ],
+  [
+   "364–398",
+   "Thirteen.",
+   "Thirteen.：13 把依次跳一下，各差 2 帧",
+   "move"
+  ],
+  [
+   "477–521",
+   "wild.",
+   "wild.：托盘朝镜头倾 12°，一道扫光掠过 13 把",
+   "move"
+  ],
+  [
+   "525–567",
+   "wild.",
+   "段尾：托盘的骨白盘面冲镜头",
+   "move"
+  ]
+ ]
+}

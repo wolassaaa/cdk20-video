@@ -1,0 +1,216 @@
+{
+ "schema": "cdk20.wordmap/1",
+ "built": "2026-11-18 02:33:56 +09:00",
+ "cut": "cut_v8",
+ "group": "5-05+5-06",
+ "fps": 60,
+ "len_f": 512,
+ "cut_start_s": 691.73,
+ "holds": [],
+ "words": [
+  {
+   "wid": "5-05.w001",
+   "w": "The",
+   "key": "the#1",
+   "sid": "5-05.s1",
+   "f0": 32,
+   "f1": 37
+  },
+  {
+   "wid": "5-05.w002",
+   "w": "key",
+   "key": "key#1",
+   "sid": "5-05.s1",
+   "f0": 43,
+   "f1": 50
+  },
+  {
+   "wid": "5-05.w003",
+   "w": "went",
+   "key": "went#1",
+   "sid": "5-05.s1",
+   "f0": 69,
+   "f1": 83
+  },
+  {
+   "wid": "5-05.w004",
+   "w": "into",
+   "key": "into#1",
+   "sid": "5-05.s1",
+   "f0": 95,
+   "f1": 110
+  },
+  {
+   "wid": "5-05.w005",
+   "w": "the",
+   "key": "the#2",
+   "sid": "5-05.s1",
+   "f0": 112,
+   "f1": 116
+  },
+  {
+   "wid": "5-05.w006",
+   "w": "lock.",
+   "key": "lock#1",
+   "sid": "5-05.s1",
+   "f0": 122,
+   "f1": 135
+  },
+  {
+   "wid": "5-05.w007",
+   "w": "But",
+   "key": "but#1",
+   "sid": "5-05.s2",
+   "f0": 156,
+   "f1": 166
+  },
+  {
+   "wid": "5-05.w008",
+   "w": "it",
+   "key": "it#1",
+   "sid": "5-05.s2",
+   "f0": 166,
+   "f1": 169
+  },
+  {
+   "wid": "5-05.w009",
+   "w": "barely",
+   "key": "barely#1",
+   "sid": "5-05.s2",
+   "f0": 183,
+   "f1": 216
+  },
+  {
+   "wid": "5-05.w010",
+   "w": "turned.",
+   "key": "turned#1",
+   "sid": "5-05.s2",
+   "f0": 224,
+   "f1": 243
+  },
+  {
+   "wid": "5-06.w001",
+   "w": "So",
+   "key": "so#1",
+   "sid": "5-06.s1",
+   "f0": 271,
+   "f1": 280
+  },
+  {
+   "wid": "5-06.w002",
+   "w": "was",
+   "key": "was#1",
+   "sid": "5-06.s1",
+   "f0": 280,
+   "f1": 366
+  },
+  {
+   "wid": "5-06.w003",
+   "w": "that",
+   "key": "that#1",
+   "sid": "5-06.s1",
+   "f0": 372,
+   "f1": 384
+  },
+  {
+   "wid": "5-06.w004",
+   "w": "it?",
+   "key": "it#1",
+   "sid": "5-06.s1",
+   "f0": 387,
+   "f1": 394
+  },
+  {
+   "wid": "5-06.w005",
+   "w": "Back",
+   "key": "back#1",
+   "sid": "5-06.s2",
+   "f0": 412,
+   "f1": 419
+  },
+  {
+   "wid": "5-06.w006",
+   "w": "to",
+   "key": "to#1",
+   "sid": "5-06.s2",
+   "f0": 420,
+   "f1": 425
+  },
+  {
+   "wid": "5-06.w007",
+   "w": "square",
+   "key": "square#1",
+   "sid": "5-06.s2",
+   "f0": 428,
+   "f1": 451
+  },
+  {
+   "wid": "5-06.w008",
+   "w": "one?",
+   "key": "one#1",
+   "sid": "5-06.s2",
+   "f0": 451,
+   "f1": 466
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "5-05.s1",
+   "text": "The key went into the lock.",
+   "w_first": "5-05.w001",
+   "w_last": "5-05.w006",
+   "f0": 32,
+   "f1": 135
+  },
+  {
+   "sid": "5-05.s2",
+   "text": "But it barely turned.",
+   "w_first": "5-05.w007",
+   "w_last": "5-05.w010",
+   "f0": 156,
+   "f1": 243
+  },
+  {
+   "sid": "5-06.s1",
+   "text": "So was that it?",
+   "w_first": "5-06.w001",
+   "w_last": "5-06.w004",
+   "f0": 271,
+   "f1": 394
+  },
+  {
+   "sid": "5-06.s2",
+   "text": "Back to square one?",
+   "w_first": "5-06.w005",
+   "w_last": "5-06.w008",
+   "f0": 412,
+   "f1": 466
+  }
+ ],
+ "events": [
+  {
+   "eid": "t00_turn_lock",
+   "obj": "lock",
+   "verb": "turn",
+   "means": null,
+   "word": "5-05.w010",
+   "f_start": 194,
+   "f_land": 224,
+   "f_end": 224,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t01_turn_lock",
+   "obj": "lock",
+   "verb": "turn",
+   "means": null,
+   "word": "5-06.w008",
+   "f_start": 436,
+   "f_land": 450,
+   "f_end": 450,
+   "role": "primary",
+   "tool": "remotion+blender"
+  }
+ ]
+}

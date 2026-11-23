@@ -1,0 +1,268 @@
+{
+ "schema": "cdk20.wordmap/1",
+ "built": "2026-11-18 02:33:56 +09:00",
+ "cut": "cut_v8",
+ "group": "3-06",
+ "fps": 60,
+ "len_f": 694,
+ "cut_start_s": 347.77,
+ "holds": [],
+ "words": [
+  {
+   "wid": "3-06.w001",
+   "w": "So:",
+   "key": "so#1",
+   "sid": "3-06.s1",
+   "f0": 33,
+   "f1": 39
+  },
+  {
+   "wid": "3-06.w002",
+   "w": "a",
+   "key": "a#1",
+   "sid": "3-06.s1",
+   "f0": 146,
+   "f1": 147
+  },
+  {
+   "wid": "3-06.w003",
+   "w": "strong",
+   "key": "strong#1",
+   "sid": "3-06.s1",
+   "f0": 174,
+   "f1": 192
+  },
+  {
+   "wid": "3-06.w004",
+   "w": "suspect.",
+   "key": "suspect#1",
+   "sid": "3-06.s1",
+   "f0": 195,
+   "f1": 228
+  },
+  {
+   "wid": "3-06.w005",
+   "w": "Not",
+   "key": "not#1",
+   "sid": "3-06.s2",
+   "f0": 315,
+   "f1": 326
+  },
+  {
+   "wid": "3-06.w006",
+   "w": "the",
+   "key": "the#1",
+   "sid": "3-06.s2",
+   "f0": 331,
+   "f1": 335
+  },
+  {
+   "wid": "3-06.w007",
+   "w": "only",
+   "key": "only#1",
+   "sid": "3-06.s2",
+   "f0": 335,
+   "f1": 344
+  },
+  {
+   "wid": "3-06.w008",
+   "w": "cause",
+   "key": "cause#1",
+   "sid": "3-06.s2",
+   "f0": 349,
+   "f1": 372
+  },
+  {
+   "wid": "3-06.w009",
+   "w": "of",
+   "key": "of#1",
+   "sid": "3-06.s2",
+   "f0": 377,
+   "f1": 386
+  },
+  {
+   "wid": "3-06.w010",
+   "w": "liver",
+   "key": "liver#1",
+   "sid": "3-06.s2",
+   "f0": 410,
+   "f1": 425
+  },
+  {
+   "wid": "3-06.w011",
+   "w": "cancer,",
+   "key": "cancer#1",
+   "sid": "3-06.s2",
+   "f0": 428,
+   "f1": 455
+  },
+  {
+   "wid": "3-06.w012",
+   "w": "but",
+   "key": "but#1",
+   "sid": "3-06.s2",
+   "f0": 519,
+   "f1": 535
+  },
+  {
+   "wid": "3-06.w013",
+   "w": "a",
+   "key": "a#2",
+   "sid": "3-06.s2",
+   "f0": 581,
+   "f1": 582
+  },
+  {
+   "wid": "3-06.w014",
+   "w": "lock",
+   "key": "lock#1",
+   "sid": "3-06.s2",
+   "f0": 588,
+   "f1": 600
+  },
+  {
+   "wid": "3-06.w015",
+   "w": "worth",
+   "key": "worth#1",
+   "sid": "3-06.s2",
+   "f0": 609,
+   "f1": 621
+  },
+  {
+   "wid": "3-06.w016",
+   "w": "trying.",
+   "key": "trying#1",
+   "sid": "3-06.s2",
+   "f0": 626,
+   "f1": 648
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "3-06.s1",
+   "text": "So: a strong suspect.",
+   "w_first": "3-06.w001",
+   "w_last": "3-06.w004",
+   "f0": 33,
+   "f1": 228
+  },
+  {
+   "sid": "3-06.s2",
+   "text": "Not the only cause of liver cancer, but a lock worth trying.",
+   "w_first": "3-06.w005",
+   "w_last": "3-06.w016",
+   "f0": 315,
+   "f1": 648
+  }
+ ],
+ "events": [
+  {
+   "eid": "t00_drop_c0",
+   "obj": "c0",
+   "verb": "drop",
+   "means": null,
+   "word": "3-06.w005",
+   "f_start": 292,
+   "f_land": 308,
+   "f_end": 308,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t01_drop_c1",
+   "obj": "c1",
+   "verb": "drop",
+   "means": null,
+   "word": "3-06.w005",
+   "f_start": 296,
+   "f_land": 312,
+   "f_end": 312,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t02_drop_c2",
+   "obj": "c2",
+   "verb": "drop",
+   "means": null,
+   "word": "3-06.w005",
+   "f_start": 300,
+   "f_land": 316,
+   "f_end": 316,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t03_hop_c0",
+   "obj": "c0",
+   "verb": "hop",
+   "means": null,
+   "word": "3-06.w008",
+   "f_start": 331,
+   "f_land": 343,
+   "f_end": 343,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t04_hop_c1",
+   "obj": "c1",
+   "verb": "hop",
+   "means": null,
+   "word": "3-06.w008",
+   "f_start": 334,
+   "f_land": 346,
+   "f_end": 346,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t05_hop_c2",
+   "obj": "c2",
+   "verb": "hop",
+   "means": null,
+   "word": "3-06.w008",
+   "f_start": 337,
+   "f_land": 349,
+   "f_end": 349,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t06_lift_c0",
+   "obj": "c0",
+   "verb": "lift",
+   "means": null,
+   "word": "3-06.w012",
+   "f_start": 495,
+   "f_land": 513,
+   "f_end": 513,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t07_lift_c1",
+   "obj": "c1",
+   "verb": "lift",
+   "means": null,
+   "word": "3-06.w012",
+   "f_start": 498,
+   "f_land": 516,
+   "f_end": 516,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t08_lift_c2",
+   "obj": "c2",
+   "verb": "lift",
+   "means": null,
+   "word": "3-06.w012",
+   "f_start": 501,
+   "f_land": 519,
+   "f_end": 519,
+   "role": "primary",
+   "tool": "remotion+blender"
+  }
+ ]
+}

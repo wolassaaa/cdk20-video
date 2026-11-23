@@ -22,7 +22,7 @@ export const Part = ({name, gid, cx, cy, w, ar: arGiven, at, gate = [0.5, 1], f,
   // 宽高比一律按零件图实际尺寸，页面传的 ar 只在尺寸表里没有这个零件时才用
   const ar = META[name] ? META[name][0] / META[name][1] : arGiven;
   const h = w / ar;
-  const C = useContext(GuideCtx);
+  const C = withDefaults(useContext(GuideCtx), useContext(LensDefaults));
   const L = C && !C.layered ? guideLook(C, [gid ?? name], at) : null;
   const ndg = L && L.nudge ? nudge(f, L.nudge.land, {dir: [gate[0] - 0.5, gate[1] - 0.5], R: Math.hypot(w, h) / 2}) + " " : "";
   const pl = span(f, at - 2, at - 2 + wipe, out);
@@ -249,20 +249,24 @@ export const guideLook = (C, ids, at) => {
 
 // 页面自带零件组件时（如 Manual205）用这个钩子读引导：返回 {style, nudge} 或 null
 export const useGuideLook = (ids, at) => {
-  const C = useContext(GuideCtx);
+  const C = withDefaults(useContext(GuideCtx), useContext(LensDefaults));
   return C && !C.layered ? guideLook(C, [].concat(ids), at) : null;
 };
 
 // 页面景深：plan = guidePlan(K)。blur/dim/desat 是没被点名的图层到底时的样子（V13：模糊 ≤ 2.5 px、不透明度 ≥ 0.75、饱和度 ≥ 0.7）。
 // idle：出镜段零件等待时的模糊（2–4 px）；说明书页为 0。byAt：没有 Layer 的老页面，零件按"它长出的帧落在这次引导的事件里"认领目标。
-export const Lens = ({plan, f, blur = 2.2, dim = 0.82, desat = 0.75, rimPx = 6, rimA = 0.9, rimDx = 0, idle = 0, byAt = false, children}) => {
-  const v = {plan: plan || [], f, blur: Math.min(2.5, blur), dim: Math.max(0.75, dim), desat: Math.max(0.7, desat), rimPx, rimA, rimDx, idle, byAt, off: noGuide()};
+// LensDefaults：B 档 Stage（在 Lens 里面）给的默认值，Lens 自己显式传的参数优先。11-22 B 档模板加了亮托盘，没点名的图层按 0.82 变淡会透出托盘、
+// 整帧变亮超过 V6 的 3%，所以 B 档 Stage 把 dim 提到 0.9（V13 的下限 0.75 不变）。
+export const LensDefaults = createContext(null);
+const withDefaults = (C, D) => (C && D && D.dim != null && !C.dimSet ? {...C, dim: Math.max(0.75, D.dim)} : C);
+export const Lens = ({plan, f, blur = 2.2, dim, desat = 0.75, rimPx = 6, rimA = 0.9, rimDx = 0, idle = 0, byAt = false, children}) => {
+  const v = {plan: plan || [], f, blur: Math.min(2.5, blur), dim: Math.max(0.75, dim ?? 0.82), dimSet: dim != null, desat: Math.max(0.7, desat), rimPx, rimA, rimDx, idle, byAt, off: noGuide()};
   return <GuideCtx.Provider value={v}>{children}</GuideCtx.Provider>;
 };
 
 // 一个图层（整页大小的绝对定位层）。exempt：标题、标签、批注、出处行，永远不虚。dir：预颤方向（指向浇口）。
 export const Layer = ({id, exempt, dir = [0, 1], children, style}) => {
-  const C = useContext(GuideCtx);
+  const C = withDefaults(useContext(GuideCtx), useContext(LensDefaults));
   const L = exempt || !C ? null : guideLook(C, [].concat(id));
   let tf, org;
   if (L && L.nudge && L.nudge.box) {

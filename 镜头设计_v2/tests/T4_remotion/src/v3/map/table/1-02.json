@@ -584,11 +584,11 @@
    "eid": "third_grow",
    "obj": "rank_deadly",
    "verb": "grow",
-   "means": "third deadliest：右边长出字牌 3rd deadliest",
+   "means": "third deadliest：右边长出字牌 3rd deadliest（30 帧长完，留 1 秒冷却，结尾字是清楚的）",
    "word": "1-02.w033",
    "f_start": 966,
    "f_land": 972,
-   "f_end": 1032,
+   "f_end": 1002,
    "role": null,
    "tool": null
   },

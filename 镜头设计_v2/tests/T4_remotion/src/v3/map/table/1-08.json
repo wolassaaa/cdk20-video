@@ -1,0 +1,900 @@
+{
+ "schema": "cdk20.wordmap/1",
+ "built": "2026-11-18 02:33:56 +09:00",
+ "cut": "cut_v8",
+ "group": "1-08",
+ "fps": 60,
+ "len_f": 930,
+ "cut_start_s": 61.47,
+ "holds": [],
+ "words": [
+  {
+   "wid": "1-08.w001",
+   "w": "Start",
+   "key": "start#1",
+   "sid": "1-08.s1",
+   "f0": 9,
+   "f1": 33
+  },
+  {
+   "wid": "1-08.w002",
+   "w": "the",
+   "key": "the#1",
+   "sid": "1-08.s1",
+   "f0": 38,
+   "f1": 42
+  },
+  {
+   "wid": "1-08.w003",
+   "w": "search",
+   "key": "search#1",
+   "sid": "1-08.s1",
+   "f0": 48,
+   "f1": 66
+  },
+  {
+   "wid": "1-08.w004",
+   "w": "the",
+   "key": "the#2",
+   "sid": "1-08.s1",
+   "f0": 70,
+   "f1": 75
+  },
+  {
+   "wid": "1-08.w005",
+   "w": "year",
+   "key": "year#1",
+   "sid": "1-08.s1",
+   "f0": 80,
+   "f1": 93
+  },
+  {
+   "wid": "1-08.w006",
+   "w": "we",
+   "key": "we#1",
+   "sid": "1-08.s1",
+   "f0": 109,
+   "f1": 113
+  },
+  {
+   "wid": "1-08.w007",
+   "w": "were",
+   "key": "were#1",
+   "sid": "1-08.s1",
+   "f0": 118,
+   "f1": 131
+  },
+  {
+   "wid": "1-08.w008",
+   "w": "born,",
+   "key": "born#1",
+   "sid": "1-08.s1",
+   "f0": 133,
+   "f1": 151
+  },
+  {
+   "wid": "1-08.w009",
+   "w": "and",
+   "key": "and#1",
+   "sid": "1-08.s1",
+   "f0": 171,
+   "f1": 184
+  },
+  {
+   "wid": "1-08.w010",
+   "w": "it",
+   "key": "it#1",
+   "sid": "1-08.s1",
+   "f0": 197,
+   "f1": 206
+  },
+  {
+   "wid": "1-08.w011",
+   "w": "might",
+   "key": "might#1",
+   "sid": "1-08.s1",
+   "f0": 212,
+   "f1": 226
+  },
+  {
+   "wid": "1-08.w012",
+   "w": "only",
+   "key": "only#1",
+   "sid": "1-08.s1",
+   "f0": 234,
+   "f1": 244
+  },
+  {
+   "wid": "1-08.w013",
+   "w": "be",
+   "key": "be#1",
+   "sid": "1-08.s1",
+   "f0": 249,
+   "f1": 253
+  },
+  {
+   "wid": "1-08.w014",
+   "w": "ready",
+   "key": "ready#1",
+   "sid": "1-08.s1",
+   "f0": 261,
+   "f1": 273
+  },
+  {
+   "wid": "1-08.w015",
+   "w": "now.",
+   "key": "now#1",
+   "sid": "1-08.s1",
+   "f0": 279,
+   "f1": 292
+  },
+  {
+   "wid": "1-08.w016",
+   "w": "It",
+   "key": "it#2",
+   "sid": "1-08.s2",
+   "f0": 330,
+   "f1": 333
+  },
+  {
+   "wid": "1-08.w017",
+   "w": "can",
+   "key": "can#1",
+   "sid": "1-08.s2",
+   "f0": 336,
+   "f1": 345
+  },
+  {
+   "wid": "1-08.w018",
+   "w": "cost",
+   "key": "cost#1",
+   "sid": "1-08.s2",
+   "f0": 350,
+   "f1": 372
+  },
+  {
+   "wid": "1-08.w019",
+   "w": "almost",
+   "key": "almost#1",
+   "sid": "1-08.s2",
+   "f0": 389,
+   "f1": 412
+  },
+  {
+   "wid": "1-08.w020",
+   "w": "2.8",
+   "key": "2.8#1",
+   "sid": "1-08.s2",
+   "f0": 417,
+   "f1": 458
+  },
+  {
+   "wid": "1-08.w021",
+   "w": "billion",
+   "key": "billion#1",
+   "sid": "1-08.s2",
+   "f0": 462,
+   "f1": 487
+  },
+  {
+   "wid": "1-08.w022",
+   "w": "US",
+   "key": "us#1",
+   "sid": "1-08.s2",
+   "f0": 499,
+   "f1": 513
+  },
+  {
+   "wid": "1-08.w023",
+   "w": "dollars.",
+   "key": "dollars#1",
+   "sid": "1-08.s2",
+   "f0": 516,
+   "f1": 541
+  },
+  {
+   "wid": "1-08.w024",
+   "w": "And",
+   "key": "and#2",
+   "sid": "1-08.s3",
+   "f0": 577,
+   "f1": 590
+  },
+  {
+   "wid": "1-08.w025",
+   "w": "of",
+   "key": "of#1",
+   "sid": "1-08.s3",
+   "f0": 598,
+   "f1": 605
+  },
+  {
+   "wid": "1-08.w026",
+   "w": "drugs",
+   "key": "drugs#1",
+   "sid": "1-08.s3",
+   "f0": 610,
+   "f1": 628
+  },
+  {
+   "wid": "1-08.w027",
+   "w": "tested",
+   "key": "tested#1",
+   "sid": "1-08.s3",
+   "f0": 632,
+   "f1": 655
+  },
+  {
+   "wid": "1-08.w028",
+   "w": "in",
+   "key": "in#1",
+   "sid": "1-08.s3",
+   "f0": 661,
+   "f1": 666
+  },
+  {
+   "wid": "1-08.w029",
+   "w": "people,",
+   "key": "people#1",
+   "sid": "1-08.s3",
+   "f0": 670,
+   "f1": 692
+  },
+  {
+   "wid": "1-08.w030",
+   "w": "only",
+   "key": "only#2",
+   "sid": "1-08.s3",
+   "f0": 726,
+   "f1": 738
+  },
+  {
+   "wid": "1-08.w031",
+   "w": "about",
+   "key": "about#1",
+   "sid": "1-08.s3",
+   "f0": 743,
+   "f1": 762
+  },
+  {
+   "wid": "1-08.w032",
+   "w": "one",
+   "key": "one#1",
+   "sid": "1-08.s3",
+   "f0": 775,
+   "f1": 785
+  },
+  {
+   "wid": "1-08.w033",
+   "w": "in",
+   "key": "in#2",
+   "sid": "1-08.s3",
+   "f0": 791,
+   "f1": 796
+  },
+  {
+   "wid": "1-08.w034",
+   "w": "ten",
+   "key": "ten#1",
+   "sid": "1-08.s3",
+   "f0": 799,
+   "f1": 813
+  },
+  {
+   "wid": "1-08.w035",
+   "w": "reaches",
+   "key": "reaches#1",
+   "sid": "1-08.s3",
+   "f0": 828,
+   "f1": 851
+  },
+  {
+   "wid": "1-08.w036",
+   "w": "the",
+   "key": "the#3",
+   "sid": "1-08.s3",
+   "f0": 853,
+   "f1": 882
+  },
+  {
+   "wid": "1-08.w037",
+   "w": "market.",
+   "key": "market#1",
+   "sid": "1-08.s3",
+   "f0": 886,
+   "f1": 915
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "1-08.s1",
+   "text": "Start the search the year we were born, and it might only be ready now.",
+   "w_first": "1-08.w001",
+   "w_last": "1-08.w015",
+   "f0": 9,
+   "f1": 292
+  },
+  {
+   "sid": "1-08.s2",
+   "text": "It can cost almost 2.8 billion US dollars.",
+   "w_first": "1-08.w016",
+   "w_last": "1-08.w023",
+   "f0": 330,
+   "f1": 541
+  },
+  {
+   "sid": "1-08.s3",
+   "text": "And of drugs tested in people, only about one in ten reaches the market.",
+   "w_first": "1-08.w024",
+   "w_last": "1-08.w037",
+   "f0": 577,
+   "f1": 915
+  }
+ ],
+ "events": [
+  {
+   "eid": "head_start",
+   "obj": "flow",
+   "verb": "flow",
+   "means": "Start：红料从左边进画，沿流道走，经过四个时间小格的浇口，now 到 A 格",
+   "word": "1-08.w001",
+   "f_start": 9,
+   "f_land": 9,
+   "f_end": 279,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "well0",
+   "obj": "well_0",
+   "verb": "grow",
+   "means": "year：时间小格（圆饼）长满",
+   "word": "1-08.w005",
+   "f_start": 59,
+   "f_land": 80,
+   "f_end": 80,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "well1",
+   "obj": "well_1",
+   "verb": "grow",
+   "means": "born：时间小格（圆饼）长满",
+   "word": "1-08.w008",
+   "f_start": 112,
+   "f_land": 133,
+   "f_end": 133,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "well2",
+   "obj": "well_2",
+   "verb": "grow",
+   "means": "might：时间小格（圆饼）长满",
+   "word": "1-08.w011",
+   "f_start": 191,
+   "f_land": 212,
+   "f_end": 212,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "well3",
+   "obj": "well_3",
+   "verb": "grow",
+   "means": "ready：时间小格（圆饼）长满",
+   "word": "1-08.w014",
+   "f_start": 240,
+   "f_land": 261,
+   "f_end": 261,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "head_now",
+   "obj": "flow",
+   "verb": "flow",
+   "means": "now：料头到 A 格，再经 B、C 慢流到药排",
+   "word": "1-08.w015",
+   "f_start": 279,
+   "f_land": 279,
+   "f_end": 577,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "cam_follow",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "ready 鼓完后机位停到格子区",
+   "word": "1-08.w014",
+   "f_start": 262,
+   "f_land": 262,
+   "f_end": 293,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "bill0",
+   "obj": "bill_0",
+   "verb": "eject",
+   "means": "cost：第 1 张钞票长满、顶出、翻落成叠",
+   "word": "1-08.w018",
+   "f_start": 290,
+   "f_land": 350,
+   "f_end": 350,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "bill1",
+   "obj": "bill_1",
+   "verb": "eject",
+   "means": "almost：第 2 张钞票长满、顶出、翻落成叠",
+   "word": "1-08.w019",
+   "f_start": 329,
+   "f_land": 389,
+   "f_end": 389,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "bill2",
+   "obj": "bill_2",
+   "verb": "eject",
+   "means": "第 3 张钞票长满、顶出、翻落成叠",
+   "word": "1-08.w020",
+   "f_start": 370,
+   "f_land": 430,
+   "f_end": 430,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "bill3",
+   "obj": "bill_3",
+   "verb": "eject",
+   "means": "billion：第 4 张钞票长满、顶出、翻落成叠",
+   "word": "1-08.w021",
+   "f_start": 402,
+   "f_land": 462,
+   "f_end": 462,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "bill4",
+   "obj": "bill_4",
+   "verb": "eject",
+   "means": "第 5 张钞票长满、顶出、翻落成叠",
+   "word": "1-08.w021",
+   "f_start": 412,
+   "f_land": 472,
+   "f_end": 472,
+   "role": "stagger",
+   "tool": "blender"
+  },
+  {
+   "eid": "bill5",
+   "obj": "bill_5",
+   "verb": "eject",
+   "means": "第 6 张钞票长满、顶出、翻落成叠",
+   "word": "1-08.w022",
+   "f_start": 422,
+   "f_land": 482,
+   "f_end": 482,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "bill6",
+   "obj": "bill_6",
+   "verb": "eject",
+   "means": "US：第 7 张钞票长满、顶出、翻落成叠",
+   "word": "1-08.w022",
+   "f_start": 439,
+   "f_land": 499,
+   "f_end": 499,
+   "role": "stagger",
+   "tool": "blender"
+  },
+  {
+   "eid": "bill7",
+   "obj": "bill_7",
+   "verb": "eject",
+   "means": "第 8 张钞票长满、顶出、翻落成叠",
+   "word": "1-08.w023",
+   "f_start": 448,
+   "f_land": 508,
+   "f_end": 508,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "bill8",
+   "obj": "bill_8",
+   "verb": "eject",
+   "means": "dollars：第 9 张钞票长满、顶出、翻落成叠",
+   "word": "1-08.w023",
+   "f_start": 456,
+   "f_land": 516,
+   "f_end": 516,
+   "role": "stagger",
+   "tool": "blender"
+  },
+  {
+   "eid": "text_28",
+   "obj": "letters_$2.8",
+   "verb": "grow",
+   "means": "2.8：凸字 $2.8 长满",
+   "word": "1-08.w020",
+   "f_start": 394,
+   "f_land": 417,
+   "f_end": 417,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "text_billion",
+   "obj": "letters_billion",
+   "verb": "grow",
+   "means": "billion：一个字母一个字母长完",
+   "word": "1-08.w021",
+   "f_start": 448,
+   "f_land": 462,
+   "f_end": 486,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "stack_press",
+   "obj": "stack",
+   "verb": "move",
+   "means": "dollars 落完：顶上两张错开 5 mm 再归位（压实）",
+   "word": "1-08.w023",
+   "f_start": 522,
+   "f_land": 522,
+   "f_end": 561,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "cam_push",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "And：真机位推向药格",
+   "word": "1-08.w024",
+   "f_start": 577,
+   "f_land": 577,
+   "f_end": 622,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "pill0",
+   "obj": "pill_0",
+   "verb": "grow",
+   "means": "drugs：十颗胶囊依次长满",
+   "word": "1-08.w026",
+   "f_start": 594,
+   "f_land": 610,
+   "f_end": 610,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "pill1",
+   "obj": "pill_1",
+   "verb": "grow",
+   "means": "",
+   "word": "1-08.w026",
+   "f_start": 606,
+   "f_land": 622,
+   "f_end": 622,
+   "role": "stagger",
+   "tool": "blender"
+  },
+  {
+   "eid": "pill2",
+   "obj": "pill_2",
+   "verb": "grow",
+   "means": "",
+   "word": "1-08.w026",
+   "f_start": 618,
+   "f_land": 634,
+   "f_end": 634,
+   "role": "stagger",
+   "tool": "blender"
+  },
+  {
+   "eid": "pill3",
+   "obj": "pill_3",
+   "verb": "grow",
+   "means": "",
+   "word": "1-08.w026",
+   "f_start": 630,
+   "f_land": 646,
+   "f_end": 646,
+   "role": "stagger",
+   "tool": "blender"
+  },
+  {
+   "eid": "pill4",
+   "obj": "pill_4",
+   "verb": "grow",
+   "means": "",
+   "word": "1-08.w026",
+   "f_start": 642,
+   "f_land": 658,
+   "f_end": 658,
+   "role": "stagger",
+   "tool": "blender"
+  },
+  {
+   "eid": "pill5",
+   "obj": "pill_5",
+   "verb": "grow",
+   "means": "",
+   "word": "1-08.w026",
+   "f_start": 654,
+   "f_land": 670,
+   "f_end": 670,
+   "role": "stagger",
+   "tool": "blender"
+  },
+  {
+   "eid": "pill6",
+   "obj": "pill_6",
+   "verb": "grow",
+   "means": "",
+   "word": "1-08.w026",
+   "f_start": 666,
+   "f_land": 682,
+   "f_end": 682,
+   "role": "stagger",
+   "tool": "blender"
+  },
+  {
+   "eid": "pill7",
+   "obj": "pill_7",
+   "verb": "grow",
+   "means": "",
+   "word": "1-08.w026",
+   "f_start": 678,
+   "f_land": 694,
+   "f_end": 694,
+   "role": "stagger",
+   "tool": "blender"
+  },
+  {
+   "eid": "pill8",
+   "obj": "pill_8",
+   "verb": "grow",
+   "means": "",
+   "word": "1-08.w026",
+   "f_start": 690,
+   "f_land": 706,
+   "f_end": 706,
+   "role": "stagger",
+   "tool": "blender"
+  },
+  {
+   "eid": "pill9",
+   "obj": "pill_9",
+   "verb": "grow",
+   "means": "",
+   "word": "1-08.w026",
+   "f_start": 702,
+   "f_land": 718,
+   "f_end": 718,
+   "role": "stagger",
+   "tool": "blender"
+  },
+  {
+   "eid": "head_and",
+   "obj": "flow",
+   "verb": "flow",
+   "means": "And：料头流过十个药格",
+   "word": "1-08.w024",
+   "f_start": 577,
+   "f_land": 577,
+   "f_end": 695,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "pillx0",
+   "obj": "pill_0",
+   "verb": "retract",
+   "means": "only：九颗依次收回浇口",
+   "word": "1-08.w030",
+   "f_start": 722,
+   "f_land": 726,
+   "f_end": 742,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "pillx1",
+   "obj": "pill_1",
+   "verb": "retract",
+   "means": "",
+   "word": "1-08.w030",
+   "f_start": 728,
+   "f_land": 732,
+   "f_end": 748,
+   "role": "stagger",
+   "tool": "blender"
+  },
+  {
+   "eid": "pillx2",
+   "obj": "pill_2",
+   "verb": "retract",
+   "means": "",
+   "word": "1-08.w030",
+   "f_start": 734,
+   "f_land": 738,
+   "f_end": 754,
+   "role": "stagger",
+   "tool": "blender"
+  },
+  {
+   "eid": "pillx3",
+   "obj": "pill_3",
+   "verb": "retract",
+   "means": "",
+   "word": "1-08.w030",
+   "f_start": 740,
+   "f_land": 744,
+   "f_end": 760,
+   "role": "stagger",
+   "tool": "blender"
+  },
+  {
+   "eid": "pillx4",
+   "obj": "pill_4",
+   "verb": "retract",
+   "means": "",
+   "word": "1-08.w030",
+   "f_start": 746,
+   "f_land": 750,
+   "f_end": 766,
+   "role": "stagger",
+   "tool": "blender"
+  },
+  {
+   "eid": "pillx5",
+   "obj": "pill_5",
+   "verb": "retract",
+   "means": "",
+   "word": "1-08.w030",
+   "f_start": 762,
+   "f_land": 766,
+   "f_end": 782,
+   "role": "stagger",
+   "tool": "blender"
+  },
+  {
+   "eid": "pillx7",
+   "obj": "pill_7",
+   "verb": "retract",
+   "means": "",
+   "word": "1-08.w030",
+   "f_start": 768,
+   "f_land": 772,
+   "f_end": 788,
+   "role": "stagger",
+   "tool": "blender"
+  },
+  {
+   "eid": "pillx8",
+   "obj": "pill_8",
+   "verb": "retract",
+   "means": "",
+   "word": "1-08.w030",
+   "f_start": 774,
+   "f_land": 778,
+   "f_end": 794,
+   "role": "stagger",
+   "tool": "blender"
+  },
+  {
+   "eid": "pillx9",
+   "obj": "pill_9",
+   "verb": "retract",
+   "means": "",
+   "word": "1-08.w030",
+   "f_start": 780,
+   "f_land": 784,
+   "f_end": 800,
+   "role": "stagger",
+   "tool": "blender"
+  },
+  {
+   "eid": "keep_up",
+   "obj": "pill_6",
+   "verb": "eject",
+   "means": "one：留下那颗被顶针顶起",
+   "word": "1-08.w032",
+   "f_start": 769,
+   "f_land": 775,
+   "f_end": 775,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "label_1in10",
+   "obj": "letters_1in10",
+   "verb": "grow",
+   "means": "one：凸字 1 in 10 一个字一个字长",
+   "word": "1-08.w032",
+   "f_start": 775,
+   "f_land": 775,
+   "f_end": 799,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "keep_hop",
+   "obj": "pill_6",
+   "verb": "move",
+   "means": "reaches：那颗跳向钱堆",
+   "word": "1-08.w035",
+   "f_start": 828,
+   "f_land": 828,
+   "f_end": 886,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "cam_pull",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "reaches 前 6 帧起拉到钱堆和药排之间",
+   "word": "1-08.w035",
+   "f_start": 822,
+   "f_land": 822,
+   "f_end": 870,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "keep_land",
+   "obj": "pill_6",
+   "verb": "move",
+   "means": "market：落定在钱堆上，轻轻落稳到句尾",
+   "word": "1-08.w037",
+   "f_start": 886,
+   "f_land": 886,
+   "f_end": 915,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "gates_retract",
+   "obj": "gates",
+   "verb": "retract",
+   "means": "market 后空药格的浇口料依次退回主沟，动到话说完",
+   "word": "1-08.w037",
+   "f_start": 886,
+   "f_land": 886,
+   "f_end": 915,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "cam_settle",
+   "obj": "camera",
+   "verb": "camera_to",
+   "means": "market：轻推到钱堆",
+   "word": "1-08.w037",
+   "f_start": 886,
+   "f_land": 886,
+   "f_end": 926,
+   "role": "primary",
+   "tool": "blender"
+  }
+ ]
+}

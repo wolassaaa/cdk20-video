@@ -1,0 +1,626 @@
+{
+ "E1": {
+  "shots": 79,
+  "longest_s": 2.833,
+  "longest": "S69",
+  "shortest_s": 0.35,
+  "over_3s": []
+ },
+ "E3_E4": [
+  {
+   "card": "0",
+   "what": "row0",
+   "f": 731,
+   "shot": "S09",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "0",
+   "what": "note",
+   "f": 787,
+   "shot": "S10",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "0",
+   "what": "funnel",
+   "f": 479,
+   "shot": "S05",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "0",
+   "what": "funnel",
+   "f": 552,
+   "shot": "S06",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "0",
+   "what": "funnel",
+   "f": 633,
+   "shot": "S08",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "0",
+   "what": "funnel",
+   "f": 731,
+   "shot": "S09",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "1",
+   "what": "row0",
+   "f": 1276,
+   "shot": "S17",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "1",
+   "what": "note",
+   "f": 1360,
+   "shot": "S18",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "2",
+   "what": "row0",
+   "f": 3243,
+   "shot": "S43",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "2",
+   "what": "note",
+   "f": 3186,
+   "shot": "S42",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "3",
+   "what": "row0",
+   "f": 3476,
+   "shot": "S45",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "3",
+   "what": "note",
+   "f": 3741,
+   "shot": "S48",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "4",
+   "what": "row0",
+   "f": 4306,
+   "shot": "S55",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "4",
+   "what": "note",
+   "f": 4575,
+   "shot": "S59",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "4",
+   "what": "side_note",
+   "f": 4373,
+   "shot": "S56",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "4",
+   "what": "stamp",
+   "f": 4575,
+   "shot": "S59",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "5",
+   "what": "row0",
+   "f": 5612,
+   "shot": "S69",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "5",
+   "what": "row1",
+   "f": 5665,
+   "shot": "S69",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "5",
+   "what": "note",
+   "f": 5765,
+   "shot": "S70",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "6",
+   "what": "row0",
+   "f": 1864,
+   "shot": "S25",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "6",
+   "what": "note",
+   "f": 1954,
+   "shot": "S25",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "7",
+   "what": "row0",
+   "f": 2141,
+   "shot": "S27",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "7",
+   "what": "note",
+   "f": 2197,
+   "shot": "S28",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "8",
+   "what": "row0",
+   "f": 2430,
+   "shot": "S32",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "8",
+   "what": "row1",
+   "f": 2495,
+   "shot": "S33",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "8",
+   "what": "note",
+   "f": 2570,
+   "shot": "S34",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "9",
+   "what": "row0",
+   "f": 2846,
+   "shot": "S38",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "9",
+   "what": "row1",
+   "f": 2899,
+   "shot": "S38",
+   "opacity": 1.0,
+   "ok": true
+  },
+  {
+   "card": "9",
+   "what": "note",
+   "f": 2969,
+   "shot": "S39",
+   "opacity": 1.0,
+   "ok": true
+  }
+ ],
+ "E3_E4_fail": [],
+ "E7": {
+  "subtitle_lines_ok": 32,
+  "lines": 32,
+  "cards_ok": 10,
+  "cards": 10,
+  "banner_ok": true
+ },
+ "E9": {
+  "frames": 7138,
+  "skit_frames": 6778,
+  "credits_frames": 360,
+  "seconds": 118.967,
+  "ok": true
+ },
+ "E6_sources": {
+  "cards": [
+   {
+    "card": "0",
+    "src": "Anthropic (20 Oct 2026); lab tests by Adaptyv Bio & Twist Bioscience",
+    "tokens": 7,
+    "found": 7,
+    "ok": true
+   },
+   {
+    "card": "1",
+    "src": "OpenAI, \"Accelerating life sciences research\" (22 Aug 2025)",
+    "tokens": 4,
+    "found": 4,
+    "ok": true
+   },
+   {
+    "card": "2",
+    "src": "The Nobel Prize in Chemistry 2024 (Royal Swedish Academy of Sciences)",
+    "tokens": 9,
+    "found": 9,
+    "ok": true
+   },
+   {
+    "card": "3",
+    "src": "Isomorphic Labs, Mar 2025",
+    "tokens": 4,
+    "found": 4,
+    "ok": true
+   },
+   {
+    "card": "4",
+    "src": "Joke card (satire); roadshow ref: Business Insider, Nov 2026",
+    "tokens": 4,
+    "found": 4,
+    "ok": true
+   },
+   {
+    "card": "5",
+    "src": "Xu et al., Nature Medicine 2025 (Insilico Medicine)",
+    "tokens": 5,
+    "found": 5,
+    "ok": true
+   },
+   {
+    "card": "6",
+    "src": "Adweek / The Register, Feb 2026",
+    "tokens": 5,
+    "found": 5,
+    "ok": true
+   },
+   {
+    "card": "7",
+    "src": "Anthropic, \"Project Vend\", Jun 2025",
+    "tokens": 5,
+    "found": 5,
+    "ok": true
+   },
+   {
+    "card": "8",
+    "src": "Anthropic, \"Claude for Life Sciences\", Oct 2025",
+    "tokens": 6,
+    "found": 6,
+    "ok": true
+   },
+   {
+    "card": "9",
+    "src": "Novo Nordisk customer story, claude.com",
+    "tokens": 2,
+    "found": 2,
+    "ok": true
+   }
+  ],
+  "gemini_line": true,
+  "disclaimer": true,
+  "removed": {
+   "Source: {": true,
+   "VoiceCard": true,
+   "<Disclosure": true,
+   "<CloneTags": true,
+   "<Ghost": true,
+   "B.kicker": true
+  },
+  "credit_font_min_px": 30,
+  "ok": true
+ },
+ "E10": [
+  {
+   "line": "L02",
+   "who": "DeepSeek",
+   "f": 134,
+   "shot": "S02",
+   "in_shot": true,
+   "still_frames": 6,
+   "ok": true
+  },
+  {
+   "line": "L03",
+   "who": "Claude",
+   "f": 376,
+   "shot": "S04",
+   "in_shot": true,
+   "still_frames": 5,
+   "ok": true
+  },
+  {
+   "line": "L04",
+   "who": "DeepSeek",
+   "f": 787,
+   "shot": "S10",
+   "in_shot": true,
+   "still_frames": 4,
+   "ok": true
+  },
+  {
+   "line": "L05",
+   "who": "Claude",
+   "f": 928,
+   "shot": "S12",
+   "in_shot": true,
+   "still_frames": 5,
+   "ok": true
+  },
+  {
+   "line": "L06",
+   "who": "ChatGPT",
+   "f": 1056,
+   "shot": "S14",
+   "in_shot": true,
+   "still_frames": 4,
+   "ok": true
+  },
+  {
+   "line": "L07",
+   "who": "DeepSeek",
+   "f": 1351,
+   "shot": "S18",
+   "in_shot": true,
+   "still_frames": 4,
+   "ok": true
+  },
+  {
+   "line": "L08",
+   "who": "ChatGPT",
+   "f": 1490,
+   "shot": "S20",
+   "in_shot": true,
+   "still_frames": 5,
+   "ok": true
+  },
+  {
+   "line": "L09",
+   "who": "DeepSeek",
+   "f": 1593,
+   "shot": "S22",
+   "in_shot": true,
+   "still_frames": 4,
+   "ok": true
+  },
+  {
+   "line": "L10",
+   "who": "Claude",
+   "f": 1732,
+   "shot": "S24",
+   "in_shot": true,
+   "still_frames": 4,
+   "ok": true
+  },
+  {
+   "line": "L11",
+   "who": "ChatGPT",
+   "f": 1983,
+   "shot": "S26",
+   "in_shot": true,
+   "still_frames": 4,
+   "ok": true
+  },
+  {
+   "line": "L12",
+   "who": "Claude",
+   "f": 2245,
+   "shot": "S29",
+   "in_shot": true,
+   "still_frames": 4,
+   "ok": true
+  },
+  {
+   "line": "L13",
+   "who": "DeepSeek",
+   "f": 2570,
+   "shot": "S34",
+   "in_shot": true,
+   "still_frames": 4,
+   "ok": true
+  },
+  {
+   "line": "L14",
+   "who": "Claude",
+   "f": 2674,
+   "shot": "S36",
+   "in_shot": true,
+   "still_frames": 4,
+   "ok": true
+  },
+  {
+   "line": "L15",
+   "who": "DeepSeek",
+   "f": 2960,
+   "shot": "S39",
+   "in_shot": true,
+   "still_frames": 4,
+   "ok": true
+  },
+  {
+   "line": "L16",
+   "who": "Gemini",
+   "f": 3087,
+   "shot": "S41",
+   "in_shot": true,
+   "still_frames": 6,
+   "ok": true
+  },
+  {
+   "line": "L17",
+   "who": "Gemini",
+   "f": 3378,
+   "shot": "S44",
+   "in_shot": true,
+   "still_frames": 5,
+   "ok": true
+  },
+  {
+   "line": "L18",
+   "who": "Claude",
+   "f": 3646,
+   "shot": "S47",
+   "in_shot": true,
+   "still_frames": 4,
+   "ok": true
+  },
+  {
+   "line": "L19",
+   "who": "Gemini",
+   "f": 3809,
+   "shot": "S49",
+   "in_shot": true,
+   "still_frames": 5,
+   "ok": true
+  },
+  {
+   "line": "L20",
+   "who": "Gemini",
+   "f": 4012,
+   "shot": "S52",
+   "in_shot": true,
+   "still_frames": 5,
+   "ok": true
+  },
+  {
+   "line": "L21",
+   "who": "ChatGPT",
+   "f": 4373,
+   "shot": "S56",
+   "in_shot": true,
+   "still_frames": 4,
+   "ok": true
+  },
+  {
+   "line": "L22",
+   "who": "Claude",
+   "f": 4489,
+   "shot": "S58",
+   "in_shot": true,
+   "still_frames": 4,
+   "ok": true
+  },
+  {
+   "line": "L23",
+   "who": "DeepSeek",
+   "f": 4716,
+   "shot": "S61",
+   "in_shot": true,
+   "still_frames": 4,
+   "ok": true
+  },
+  {
+   "line": "L24",
+   "who": "Gemini",
+   "f": 4919,
+   "shot": "S63",
+   "in_shot": true,
+   "still_frames": 5,
+   "ok": true
+  },
+  {
+   "line": "L25",
+   "who": "ChatGPT",
+   "f": 5117,
+   "shot": "S65",
+   "in_shot": true,
+   "still_frames": 4,
+   "ok": true
+  },
+  {
+   "line": "L26",
+   "who": "Claude",
+   "f": 5404,
+   "shot": "S68",
+   "in_shot": true,
+   "still_frames": 4,
+   "ok": true
+  },
+  {
+   "line": "L27",
+   "who": "DeepSeek",
+   "f": 5738,
+   "shot": "S70",
+   "in_shot": true,
+   "still_frames": 4,
+   "ok": true
+  },
+  {
+   "line": "L28",
+   "who": "Claude",
+   "f": 6018,
+   "shot": "S73",
+   "in_shot": true,
+   "still_frames": 5,
+   "ok": true
+  },
+  {
+   "line": "L29",
+   "who": "ChatGPT",
+   "f": 6126,
+   "shot": "S74",
+   "in_shot": true,
+   "still_frames": 5,
+   "ok": true
+  },
+  {
+   "line": "L30",
+   "who": "Claude",
+   "f": 6263,
+   "shot": "S76",
+   "in_shot": true,
+   "still_frames": 5,
+   "ok": true
+  },
+  {
+   "line": "L31",
+   "who": "DeepSeek",
+   "f": 6361,
+   "shot": "S77",
+   "in_shot": true,
+   "still_frames": 5,
+   "ok": true
+  },
+  {
+   "line": "L32",
+   "who": "Gemini",
+   "f": 6509,
+   "shot": "S78",
+   "in_shot": true,
+   "still_frames": 5,
+   "ok": true
+  }
+ ],
+ "E10_fail": []
+}

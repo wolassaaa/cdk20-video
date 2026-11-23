@@ -5,7 +5,8 @@
 import glob, json, os, shutil, sys
 from voice_metrics import measure
 HERE = os.path.dirname(os.path.abspath(__file__))
-V = os.environ.get("CDK20_WORK", "D:/cdk20_work") + "/mascots/voice_v2"
+LINES_FILE = os.environ.get("LINES", "lines.json")
+V = os.environ.get("VOICE_OUT", os.environ.get("CDK20_WORK", "D:/cdk20_work") + "/mascots/voice_v2")
 
 
 def score(m):
@@ -16,7 +17,8 @@ def score(m):
 
 
 def main():
-    cfg = json.load(open(os.path.join(HERE, "lines.json"), encoding="utf-8"))
+    lines_path = LINES_FILE if os.path.isabs(LINES_FILE) else os.path.join(HERE, LINES_FILE)
+    cfg = json.load(open(lines_path, encoding="utf-8"))
     only = set(sys.argv[1].split(",")) if len(sys.argv) > 1 else None
     os.makedirs(f"{V}/final", exist_ok=True)
     pf = f"{V}/final/pick.json"

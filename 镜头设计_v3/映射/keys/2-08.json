@@ -425,7 +425,6 @@
    "key": "where#1",
    "sid": "2-08.s1",
    "word_f0": 52,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -448,7 +447,6 @@
    "key": "lock#1",
    "sid": "2-08.s2",
    "word_f0": 201,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -471,7 +469,6 @@
    "key": "lock#1",
    "sid": "2-08.s2",
    "word_f0": 201,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -494,7 +491,6 @@
    "key": "lock#1",
    "sid": "2-08.s2",
    "word_f0": 201,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -517,7 +513,6 @@
    "key": "cut#1",
    "sid": "2-08.s3",
    "word_f0": 368,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -540,7 +535,6 @@
    "key": "cut#1",
    "sid": "2-08.s3",
    "word_f0": 368,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -563,7 +557,6 @@
    "key": "cut#1",
    "sid": "2-08.s3",
    "word_f0": 368,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -586,7 +579,6 @@
    "key": "key#1",
    "sid": "2-08.s3",
    "word_f0": 397,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -609,7 +601,6 @@
    "key": "lab#1",
    "sid": "2-08.s4",
    "word_f0": 566,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -632,7 +623,6 @@
    "key": "lab#1",
    "sid": "2-08.s4",
    "word_f0": 566,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -655,7 +645,6 @@
    "key": "lab#1",
    "sid": "2-08.s4",
    "word_f0": 566,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -678,7 +667,6 @@
    "key": "big#1",
    "sid": "2-08.s5",
    "word_f0": 708,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -701,7 +689,6 @@
    "key": "much#1",
    "sid": "2-08.s5",
    "word_f0": 798,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -724,7 +711,6 @@
    "key": "computers#1",
    "sid": "2-08.s5",
    "word_f0": 831,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -747,7 +733,6 @@
    "key": "help#1",
    "sid": "2-08.s5",
    "word_f0": 896,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
@@ -761,7 +746,7 @@
    "verb": "move",
    "ease": "inout",
    "means": "挂锁冲镜头，终点对准锁孔，盖满帧是金色口环和锁芯；位姿读 `oncam/3-01/handoff.json` 的 `head_pose`",
-   "f_start": 901,
+   "f_start": 919,
    "f_land": 919,
    "f_end": 919,
    "until": null,
@@ -770,11 +755,10 @@
    "key": "help#1",
    "sid": "2-08.s5",
    "word_f0": 896,
-   "tool": "blender",
    "guide": {
     "kind": "none"
    },
-   "F_start": 16411,
+   "F_start": 16429,
    "F_land": 16429,
    "F_end": 16429
   }

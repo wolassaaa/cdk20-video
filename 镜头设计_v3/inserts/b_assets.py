@@ -478,6 +478,11 @@ def sprites(groups):
 # ---------------------------------------------------------------- T5 焦点擦除层
 
 WIPE_NF, WIPE_MID = 34, 17
+# socket_bore 转场灯逐帧功率（W），没写的帧 360。11-23 由 E=0 / E=36 两遍试渲（4–29 帧）线性分解：每帧取零件 99.5% 分位线性值 ≤ 0.92 的最大功率，
+# 15、19 两帧再压一点让盖满段亮度连着走（预计盖满帧整帧平均 0.64–0.82）
+WIPE_BORE_E = {4: 360.0, 5: 256.0, 6: 256.0, 7: 100.0, 8: 36.0, 9: 28.0, 10: 26.0, 11: 32.0, 12: 32.0, 13: 32.0, 14: 32.0, 15: 28.0,
+               16: 124.0, 17: 124.0, 18: 124.0, 19: 28.0, 20: 32.0, 21: 32.0, 22: 32.0, 23: 32.0, 24: 26.0, 25: 28.0, 26: 36.0, 27: 100.0,
+               28: 256.0, 29: 256.0}                        # 18–29 帧：出场改走孔口面一侧以后按入场对称帧取
 
 
 def wipe(name):
@@ -550,11 +555,21 @@ def wipe(name):
         ld.shape, ld.size, ld.energy, ld.color = "DISK", 0.5, 360.0, (1, 0.97, 0.93)
         lo = bpy.data.objects.new("wipe_trans", ld); sc.collection.objects.link(lo)
         lo.location, lo.rotation_euler = (0, -0.02, 0), (math.radians(90), 0, 0)  # 跟着镜头，进孔桶时照亮内壁（盖满帧 0.91）
+        # 11-23 接点机检 K3：孔口正对镜头那几帧（12–15、19–21）骨白面离转场灯只有 0.02–0.2 m，360 W 下整帧过曝成纯 255 白，
+        # 几帧一模一样（不是帧号或拷贝错）。转场灯逐帧打关键帧：按 E=0 / E=36 两遍试渲线性分解，每帧取不过曝的最大功率（WIPE_BORE_E），
+        # 孔桶里 16–18 帧保持 360 W。wE=常数 只给试渲量光用。
+        for fr in range(-2, WIPE_NF + 2):
+            e = float(OPT["wE"]) if "wE" in OPT else WIPE_BORE_E.get(fr, 360.0)
+            ld.energy = e
+            ld.keyframe_insert("energy", frame=fr)
         light_rig(0, 1.0).location = (0, 0.35, 0)
         for fr in range(-2, WIPE_NF + 2):
             t = (fr - WIPE_MID) / WIPE_MID
             a = abs(t)
-            root.location = (-1.5 * t * a, -0.25 * R + 1.4 * a ** 1.6, 0)
+            if t <= 0:
+                root.location = (-1.5 * t * a, -0.25 * R + 1.4 * a ** 1.6, 0)
+            else:                                           # 11-23：出场原来往左甩，第 19–21 帧盖满的是克莱因蓝外壳（过曝时看不出），改成从骨白孔口面那一侧退回右边；
+                root.location = (1.75 * t * a, -0.25 * R + 1.4 * a ** 1.5, 0)   # 和入场不对称（x 1.75、y 指数 1.5；1.1 时第 33 帧还剩 4% 没出画），免得出场帧和入场帧一模一样（接点 K3）
             root.keyframe_insert("location", frame=fr)
         depth = 0.0
         span = None
@@ -592,16 +607,19 @@ def wipe(name):
             x = 0.012 * 0 + (WIPE_MID - fr) * (2 * span / WIPE_NF) * 1.05
             root.location = (x, depth, 0)
             root.keyframe_insert("location", frame=fr)
-    out = WORK / "bwipe" / name
+    out = WORK / "bwipe" / (name + OPT.get("wout", ""))          # wout=_probe0 这类后缀：试渲另放一个目录
     out.mkdir(parents=True, exist_ok=True)
     sc.render.use_overwrite = "replace" in ARGS
     sc.render.use_placeholder = False
     sc.render.filepath = str(out / "####")
     sc.frame_start, sc.frame_end = 0, WIPE_NF - 1
+    if "wfr" in OPT:                                                  # wfr=4-29：只渲这几帧（试渲）
+        a, b = OPT["wfr"].split("-")
+        sc.frame_start, sc.frame_end = int(a), int(b)
     wait_gpu()
     t = time.time()
     bpy.ops.render.render(animation=True)
-    (out / "wipe.json").write_text(json.dumps(dict(name=name, frames=WIPE_NF, cover=WIPE_MID, dir="right_to_left", depth_m=depth,
+    (out / "wipe.json").write_text(json.dumps(dict(name=name, frames=WIPE_NF, cover=WIPE_MID, dir=("right_in_right_out" if name == "socket_bore" else "right_to_left"), depth_m=depth,
                                                    note="A 段结尾用 0–17 帧（进），B 页开头用 17–33 帧（出）；盖满那一帧对齐接点"), ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"WIPE_DONE {name} {time.time() - t:.1f}s", flush=True)
 

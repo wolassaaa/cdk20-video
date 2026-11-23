@@ -1,0 +1,105 @@
+<!doctype html><meta charset="utf-8"><title>技术选型_20261117</title><style>body{font-family:"Microsoft YaHei",sans-serif;max-width:900px;margin:24px auto;padding:0 16px;line-height:1.7;color:#222;background:#fff}
+table{border-collapse:collapse;margin:12px 0}td,th{border:1px solid #ccc;padding:6px 10px}th{background:#f2f2f2}
+code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1px solid #ddd;padding-bottom:4px}a{color:#0a58ca}</style><h1>技术选型测试报告（2026-11-17）</h1>
+<p>HKBU SCIE1007 课程作业的科普视频。本页是同一段 2-03 台词（343 帧，60 fps，约 5.7 s），用四种工具各做一遍的对比结论。所有片段都由 <code>镜头设计_v3/映射/keys/2-03.json</code> 驱动。时间均为韩国时间（+09:00）。</p>
+<p>产物：<code>镜头设计_v3/审片/总管/技术选型_20261117/</code>（5 个 mp4、对比_f130/f210/f340.png、data/ 下的两次渲染逐帧一致性记录）。</p>
+<h2>一、实测数字</h2>
+<table>
+<thead>
+<tr>
+<th>片子</th>
+<th>帧率/帧数</th>
+<th>每帧耗时（1080p）</th>
+<th>两次渲染一致</th>
+<th>对词 check_sync</th>
+<th>不过的项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Remotion</td>
+<td>60 / 343</td>
+<td>约 0.04 s（15 s 出 344 帧，含启动）</td>
+<td>214/344 帧逐像素相同，其余差值 ≤3</td>
+<td>5/6，不通过</td>
+<td>liver_in 无动作；句尾早停 7 帧</td>
+</tr>
+<tr>
+<td>HyperFrames</td>
+<td>60 / 343</td>
+<td>约 0.14 s（约 47 s 出 344 帧）</td>
+<td>344/344 完全相同</td>
+<td>5/6，不通过</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>Blender 5.3（Cycles）</td>
+<td>60 / 343</td>
+<td>0.66–0.72 s（GPU 占用约 71%，显存 6.6–7.1 GB）</td>
+<td>每帧都有少量噪点差（平均差 0.05）</td>
+<td>6/6，通过</td>
+<td>—</td>
+</tr>
+<tr>
+<td>TouchDesigner 单独</td>
+<td>60 / 343</td>
+<td>约 0.05 s（16–17 s 出 344 帧）</td>
+<td>344/344 完全相同</td>
+<td>3/6，不通过</td>
+<td>part_cdk20、liver_in、cancer_red 无动作；早停 18 帧</td>
+</tr>
+<tr>
+<td>TD 叠在 Blender 上</td>
+<td>60 / 343</td>
+<td>Blender 那份 + TD 约 0.05 s</td>
+<td>—</td>
+<td>6/6，通过</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>说明：check_sync 对 mp4 可能有 2–4 帧误报。Remotion 和 HyperFrames 差的是 7 帧早停加一个事件没动，这不是误报，是这一版动画本身少做了 liver_in，句尾也收得早。属于脚本问题，工具本身没问题。TD 单独版漏了三个事件，说明在 TD 里手搭逐词事件费工、容易漏。</p>
+<h2>二、画面质感（看 对比_f210.png）</h2>
+<ul>
+<li><strong>Remotion / HyperFrames</strong>：两者画面几乎一样，干净的 2.5D 纸盒加球，字是 Instrument Serif，锐利、排版准。但光影是假的，纸盒像贴图，"PPT 感"在这里最重。</li>
+<li><strong>Blender 5.3</strong>：真实的接触阴影、软光，球面形变，是唯一"像在桌面上的实物"的版本，和已批准的 S1/S2 三维台面镜头同一种质感。</li>
+<li><strong>TD 单独</strong>：适合程序化纹理和粒子，做主体叙事动画不合适，事件漏得最多。</li>
+<li><strong>TD + Blender</strong>：Blender 主体加 TD 生成的蓝色雾状体积，层次最丰富。雾的颗粒还偏粗，要调，但方向对。</li>
+</ul>
+<h2>三、Blender 5.3 兼容性</h2>
+<p>可以用。<code>G:/software/blender-5.3</code>（5.3.0，2026-11-10 构建）跑完整个 fast_render 流程：烘焙 0.3 s、Alembic 导出、Cycles 渲 344 帧，返回码 0，没有报错。日志里只有一条 Alembic 警告（<code>unable to export /runner-0/runner as instance</code>），对成片没有影响。新镜头一律用 5.3；5.1.2 只留着重渲旧镜头。注意：Cycles 两次渲染不是逐像素一致，最终版请固定采样种子，不要拿两次渲染做逐像素比对。</p>
+<h2>四、和映射表对接的难度</h2>
+<ul>
+<li><strong>Remotion</strong>：最容易。keys JSON 直接 import，帧号就是 <code>useCurrentFrame()</code>，改一个词的时间只要改 JSON 再重渲，十几秒出结果。</li>
+<li><strong>HyperFrames</strong>：和 Remotion 一样容易，而且两次渲染完全一致。缺点是速度只有 Remotion 的三分之一左右，项目里已有大量 Remotion 代码，两套并存没有好处。</li>
+<li><strong>Blender</strong>：中等。要用 Python 把 keys 写成关键帧（已有 bl_* 脚本模式），每次改时间都要重烘焙重渲，比 Remotion 慢十几倍。</li>
+<li><strong>TD</strong>：最难。逐词事件要靠 Timer/CHOP 手搭，这次漏了三个。适合吃一条连续曲线（如句子能量、拍点），不适合吃离散事件表。</li>
+</ul>
+<h2>五、统一架构建议（结论）</h2>
+<p><strong>一条原则：Blender 管"东西"，Remotion 管"字"，TD 管"空气和质地"，最后在 Remotion 里按音频时间合成。</strong></p>
+<ol>
+<li><strong>Blender 5.3：所有三维主体和台面。</strong> 分子、蛋白口袋、纸卡实物、机位运动都放在这里。理由：只有它有真实光影，导演已批准的 S1/S2 台面和 W2/W3 锁钥都是这个质感；对词 6/6 通过。成本是 0.7 s/帧（1080p），按 4K 配方算，全片要按 <code>排片表.md</code> 排队。</li>
+<li><strong>Remotion：所有文字、数字卡、字幕、出处行、人像旁图形，以及最终合成。</strong> 理由：最快（0.04 s/帧）、最贴映射表、字最锐利、已有代码最多。HyperFrames 不再引入：画面一样，速度慢 3 倍，多一套工具只会增加维护。</li>
+<li><strong>TouchDesigner：负责"质感层"，这是一个实在的、全片都会用到的角色。</strong> 具体管三件事：
+   - <strong>体积和氛围</strong>：雾、光晕、溶液、粒子（本次蓝雾就是这一层），按 keys 里的事件帧或句子包络驱动强度，渲成带 alpha 的序列，叠在 Blender 之上；
+   - <strong>转场</strong>：段与段之间的液体/墨晕/溶解转场（替代被否掉的生硬黑墨转场），用 TD 做程序化遮罩，交给 Remotion 当 matte；
+   - <strong>材质贴图生成</strong>：给 Blender 用的噪声、法线、流动贴图（例如分子表面的流动光泽），离线导出 PNG/EXR 序列再贴回 Blender。
+   TD 不做主体动画、不做文字。理由：它单独做主体时漏了一半事件，但当叠加层时（TD+Blender）对词 6/6 通过、画面最丰富，速度也快（0.05 s/帧），所以把它放在它擅长、出错不影响对词的位置。</li>
+<li><strong>AE 只做实拍素材调色、抠像和跟踪</strong>（不变）。</li>
+</ol>
+<h2>六、全片从第一帧到最后一帧的流程</h2>
+<ol>
+<li><strong>音频定时间轴</strong>：配音 → 词级时间 → <code>映射/keys/&lt;段&gt;.json</code>（resolve.py）。之后所有工具只读这一份，不手填帧号。</li>
+<li><strong>Blender 出主体层</strong>：脚本读 keys 写关键帧 → 先渲 1080p 草稿 → check_sync 过 6/6 → 用 5.3 跑 fast_render。</li>
+<li><strong>TD 出质感层</strong>：同一份 keys 驱动雾/粒子/转场遮罩/贴图，渲带 alpha 的序列（贴图回到第 2 步）。</li>
+<li><strong>Remotion 出文字层并合成</strong>：读 keys 放字卡、数字、字幕、出处；把 Blender 层、TD 层、实拍层按音频对齐叠起来，输出该段成片。</li>
+<li><strong>每段自检</strong>：check_sync（S1–S4）加 <code>审片/导演标准_审片用.md</code>，自己先过一遍，过了再给导演看。</li>
+<li><strong>全片拼接</strong>：Remotion 主合成按段拼接，在接缝处查转场和对词；1080p 全部打磨好之后才上 4K60。</li>
+</ol>
+<p>这个流程里每一层都能单独重渲：改字只重渲 Remotion，改雾只重渲 TD，只有改主体才动最慢的 Blender。</p>
+<h2>七、下一步</h2>
+<ul>
+<li>2-03 的 Remotion 版补上 liver_in，句尾延到最后一词（修掉 −7 帧）。</li>
+<li>TD 蓝雾颗粒调细，作为质感层样板。</li>
+<li>把"TD 质感层"写进映射 skill 的分工表。</li>
+</ul>

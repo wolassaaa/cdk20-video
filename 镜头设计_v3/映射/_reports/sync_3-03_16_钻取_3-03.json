@@ -26,14 +26,11 @@
   "dup_frames": 0,
   "stepped_dups": 0,
   "stepped_ratio": 0.0,
-  "blend_frames": 7,
+  "blend_frames": 4,
   "blend_first": [
-   596,
    597,
-   598,
    599,
    600,
-   601,
    602
   ],
   "design_fade": 0,

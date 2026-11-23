@@ -1,0 +1,223 @@
+{
+ "schema": "cdk20.wordmap/1",
+ "built": "2026-11-18 02:33:56 +09:00",
+ "cut": "cut_v8",
+ "group": "7-03",
+ "fps": 60,
+ "len_f": 692,
+ "cut_start_s": 945.9,
+ "holds": [],
+ "words": [
+  {
+   "wid": "7-03.w001",
+   "w": "Two:",
+   "key": "two#1",
+   "sid": "7-03.s1",
+   "f0": 9,
+   "f1": 25
+  },
+  {
+   "wid": "7-03.w002",
+   "w": "check",
+   "key": "check#1",
+   "sid": "7-03.s1",
+   "f0": 58,
+   "f1": 71
+  },
+  {
+   "wid": "7-03.w003",
+   "w": "the",
+   "key": "the#1",
+   "sid": "7-03.s1",
+   "f0": 74,
+   "f1": 80
+  },
+  {
+   "wid": "7-03.w004",
+   "w": "AlphaFold",
+   "key": "alphafold#1",
+   "sid": "7-03.s1",
+   "f0": 86,
+   "f1": 119
+  },
+  {
+   "wid": "7-03.w005",
+   "w": "model",
+   "key": "model#1",
+   "sid": "7-03.s1",
+   "f0": 125,
+   "f1": 142
+  },
+  {
+   "wid": "7-03.w006",
+   "w": "against",
+   "key": "against#1",
+   "sid": "7-03.s1",
+   "f0": 147,
+   "f1": 168
+  },
+  {
+   "wid": "7-03.w007",
+   "w": "a",
+   "key": "a#1",
+   "sid": "7-03.s1",
+   "f0": 172,
+   "f1": 174
+  },
+  {
+   "wid": "7-03.w008",
+   "w": "lab-measured",
+   "key": "lab-measured#1",
+   "sid": "7-03.s1",
+   "f0": 181,
+   "f1": 222
+  },
+  {
+   "wid": "7-03.w009",
+   "w": "structure,",
+   "key": "structure#1",
+   "sid": "7-03.s1",
+   "f0": 225,
+   "f1": 256
+  },
+  {
+   "wid": "7-03.w010",
+   "w": "once",
+   "key": "once#1",
+   "sid": "7-03.s1",
+   "f0": 291,
+   "f1": 303
+  },
+  {
+   "wid": "7-03.w011",
+   "w": "one",
+   "key": "one#1",
+   "sid": "7-03.s1",
+   "f0": 309,
+   "f1": 318
+  },
+  {
+   "wid": "7-03.w012",
+   "w": "exists.",
+   "key": "exists#1",
+   "sid": "7-03.s1",
+   "f0": 320,
+   "f1": 349
+  },
+  {
+   "wid": "7-03.w013",
+   "w": "And",
+   "key": "and#1",
+   "sid": "7-03.s2",
+   "f0": 387,
+   "f1": 394
+  },
+  {
+   "wid": "7-03.w014",
+   "w": "feed",
+   "key": "feed#1",
+   "sid": "7-03.s2",
+   "f0": 400,
+   "f1": 414
+  },
+  {
+   "wid": "7-03.w015",
+   "w": "every",
+   "key": "every#1",
+   "sid": "7-03.s2",
+   "f0": 422,
+   "f1": 435
+  },
+  {
+   "wid": "7-03.w016",
+   "w": "result,",
+   "key": "result#1",
+   "sid": "7-03.s2",
+   "f0": 440,
+   "f1": 470
+  },
+  {
+   "wid": "7-03.w017",
+   "w": "including",
+   "key": "including#1",
+   "sid": "7-03.s2",
+   "f0": 491,
+   "f1": 519
+  },
+  {
+   "wid": "7-03.w018",
+   "w": "the",
+   "key": "the#2",
+   "sid": "7-03.s2",
+   "f0": 521,
+   "f1": 524
+  },
+  {
+   "wid": "7-03.w019",
+   "w": "failures,",
+   "key": "failures#1",
+   "sid": "7-03.s2",
+   "f0": 529,
+   "f1": 563
+  },
+  {
+   "wid": "7-03.w020",
+   "w": "back",
+   "key": "back#1",
+   "sid": "7-03.s2",
+   "f0": 594,
+   "f1": 607
+  },
+  {
+   "wid": "7-03.w021",
+   "w": "into",
+   "key": "into#1",
+   "sid": "7-03.s2",
+   "f0": 611,
+   "f1": 627
+  },
+  {
+   "wid": "7-03.w022",
+   "w": "the",
+   "key": "the#3",
+   "sid": "7-03.s2",
+   "f0": 632,
+   "f1": 636
+  },
+  {
+   "wid": "7-03.w023",
+   "w": "next",
+   "key": "next#1",
+   "sid": "7-03.s2",
+   "f0": 639,
+   "f1": 656
+  },
+  {
+   "wid": "7-03.w024",
+   "w": "round.",
+   "key": "round#1",
+   "sid": "7-03.s2",
+   "f0": 661,
+   "f1": 678
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "7-03.s1",
+   "text": "Two: check the AlphaFold model against a lab-measured structure, once one exists.",
+   "w_first": "7-03.w001",
+   "w_last": "7-03.w012",
+   "f0": 9,
+   "f1": 349
+  },
+  {
+   "sid": "7-03.s2",
+   "text": "And feed every result, including the failures, back into the next round.",
+   "w_first": "7-03.w013",
+   "w_last": "7-03.w024",
+   "f0": 387,
+   "f1": 678
+  }
+ ],
+ "events": []
+}

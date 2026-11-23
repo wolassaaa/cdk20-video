@@ -4,6 +4,7 @@
 # 已有的帧跳过（fast_render.py 用占位文件、不覆盖），重跑是安全的；每次跑完更新 渲染进度.md 的 A1 行。
 # 场景文件没有就先搭（bl_s203_board.py build，同时跑穿模、丝滑、画面位置三项自检）。改了事件表或脚本要重渲时，
 # 先把 G:/cdk20/work/sample1b/v2/s203_board.blend 和 frames/ 挪走再跑。
+# 发令器用系统的 python（_env/footage 那个 python 在这台机器上写不了 G 盘）。
 # 机器上已经有两个 Blender、显卡暂停（GPU_PAUSED）、或者这条渲染自己已经在跑，就直接退出，不排队等。
 ROOT="D:/。hkbu/molecular science"
 W="G:/cdk20/work/sample1b/v2"
@@ -38,7 +39,7 @@ if [ ! -f "$W/s203_board.blend" ]; then
 fi
 find "$W/frames" -name 'f_*.png' -size 0 -delete          # 上次被打断留下的空占位
 progress "渲染中"
-"$PY" "$ROOT/镜头设计_v3/styleframes/art/fusion/s1/inserts/fast_render.py" "$W/s203_board.blend" --out "$W/frames" --f0 0 --f1 $((N - 1)) \
+python "$ROOT/镜头设计_v3/styleframes/art/fusion/s1/inserts/fast_render.py" "$W/s203_board.blend" --out "$W/frames" --f0 0 --f1 $((N - 1)) \
   --blender "$B" --no-bake --split auto --samples 48 >> "$W/render.log" 2>&1
 find "$W/frames" -name 'f_*.png' -size 0 -delete
 if [ "$(count)" -ge $N ]; then progress "正式帧渲完，等合成（bash 镜头设计_v3/inserts/finish_s203.sh）"; else progress "中断，已渲的帧保留；重跑 render_s203.sh 接着渲"; fi

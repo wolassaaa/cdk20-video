@@ -1,0 +1,76 @@
+{
+ "schema": "cdk20.wordmap/1",
+ "built": "2026-11-18 02:33:56 +09:00",
+ "cut": "cut_v8",
+ "group": "5-09",
+ "fps": 60,
+ "len_f": 216,
+ "cut_start_s": 739.97,
+ "holds": [],
+ "words": [
+  {
+   "wid": "5-09.w001",
+   "w": "This",
+   "key": "this#1",
+   "sid": "5-09.s1",
+   "f0": 32,
+   "f1": 43
+  },
+  {
+   "wid": "5-09.w002",
+   "w": "time,",
+   "key": "time#1",
+   "sid": "5-09.s1",
+   "f0": 47,
+   "f1": 64
+  },
+  {
+   "wid": "5-09.w003",
+   "w": "the",
+   "key": "the#1",
+   "sid": "5-09.s1",
+   "f0": 77,
+   "f1": 82
+  },
+  {
+   "wid": "5-09.w004",
+   "w": "key",
+   "key": "key#1",
+   "sid": "5-09.s1",
+   "f0": 89,
+   "f1": 103
+  },
+  {
+   "wid": "5-09.w005",
+   "w": "turned.",
+   "key": "turned#1",
+   "sid": "5-09.s1",
+   "f0": 142,
+   "f1": 170
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "5-09.s1",
+   "text": "This time, the key turned.",
+   "w_first": "5-09.w001",
+   "w_last": "5-09.w005",
+   "f0": 32,
+   "f1": 170
+  }
+ ],
+ "events": [
+  {
+   "eid": "t00_turn_lock",
+   "obj": "lock",
+   "verb": "turn",
+   "means": null,
+   "word": "5-09.w005",
+   "f_start": 116,
+   "f_land": 142,
+   "f_end": 142,
+   "role": "primary",
+   "tool": "remotion+blender"
+  }
+ ]
+}

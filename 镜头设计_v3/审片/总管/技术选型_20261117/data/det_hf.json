@@ -1,0 +1,11 @@
+{
+ "a": "_env/tmp/tech/hf_a.mov",
+ "b": "_env/tmp/tech/hf_b.mov",
+ "frames": 344,
+ "identical": 344,
+ "differ": 0,
+ "max_diff": 0,
+ "mean_diff_max": 0,
+ "px_over2_max": 0,
+ "worst": []
+}

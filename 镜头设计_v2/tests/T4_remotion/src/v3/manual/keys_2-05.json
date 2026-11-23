@@ -1,0 +1,522 @@
+{
+ "schema": "cdk20.keys/1",
+ "note": "HKBU SCIE1007 课程作业的科普视频：resolve.py 算出的事件帧（不要手改，改 events/ 再重跑）。",
+ "group": "2-05",
+ "segs": [
+  "2-05"
+ ],
+ "tool": "warp_source",
+ "fps": 60,
+ "len_f": 836,
+ "cut": "cut_v8",
+ "cut_start_f": 11226,
+ "cut_start_s": 187.1,
+ "master_built": "2026-11-18 02:33:56 +09:00",
+ "words_hash": "fb9c0df7254c",
+ "events_src": "镜头设计_v3/映射/events/2-05.json",
+ "words": [
+  {
+   "wid": "2-05.w001",
+   "w": "One:",
+   "key": "one#1",
+   "sid": "2-05.s1",
+   "f0": 9,
+   "f1": 22,
+   "F0": 11235,
+   "F1": 11248
+  },
+  {
+   "wid": "2-05.w002",
+   "w": "to",
+   "key": "to#1",
+   "sid": "2-05.s1",
+   "f0": 39,
+   "f1": 45,
+   "F0": 11265,
+   "F1": 11271
+  },
+  {
+   "wid": "2-05.w003",
+   "w": "identify",
+   "key": "identify#1",
+   "sid": "2-05.s1",
+   "f0": 62,
+   "f1": 99,
+   "F0": 11288,
+   "F1": 11325
+  },
+  {
+   "wid": "2-05.w004",
+   "w": "the",
+   "key": "the#1",
+   "sid": "2-05.s1",
+   "f0": 111,
+   "f1": 117,
+   "F0": 11337,
+   "F1": 11343
+  },
+  {
+   "wid": "2-05.w005",
+   "w": "major",
+   "key": "major#1",
+   "sid": "2-05.s1",
+   "f0": 122,
+   "f1": 144,
+   "F0": 11348,
+   "F1": 11370
+  },
+  {
+   "wid": "2-05.w006",
+   "w": "computer-aided",
+   "key": "computer-aided#1",
+   "sid": "2-05.s1",
+   "f0": 147,
+   "f1": 199,
+   "F0": 11373,
+   "F1": 11425
+  },
+  {
+   "wid": "2-05.w007",
+   "w": "methods",
+   "key": "methods#1",
+   "sid": "2-05.s1",
+   "f0": 202,
+   "f1": 236,
+   "F0": 11428,
+   "F1": 11462
+  },
+  {
+   "wid": "2-05.w008",
+   "w": "used",
+   "key": "used#1",
+   "sid": "2-05.s1",
+   "f0": 264,
+   "f1": 277,
+   "F0": 11490,
+   "F1": 11503
+  },
+  {
+   "wid": "2-05.w009",
+   "w": "in",
+   "key": "in#1",
+   "sid": "2-05.s1",
+   "f0": 282,
+   "f1": 288,
+   "F0": 11508,
+   "F1": 11514
+  },
+  {
+   "wid": "2-05.w010",
+   "w": "cancer",
+   "key": "cancer#1",
+   "sid": "2-05.s1",
+   "f0": 293,
+   "f1": 319,
+   "F0": 11519,
+   "F1": 11545
+  },
+  {
+   "wid": "2-05.w011",
+   "w": "drug",
+   "key": "drug#1",
+   "sid": "2-05.s1",
+   "f0": 323,
+   "f1": 335,
+   "F0": 11549,
+   "F1": 11561
+  },
+  {
+   "wid": "2-05.w012",
+   "w": "discovery.",
+   "key": "discovery#1",
+   "sid": "2-05.s1",
+   "f0": 341,
+   "f1": 378,
+   "F0": 11567,
+   "F1": 11604
+  },
+  {
+   "wid": "2-05.w013",
+   "w": "Two:",
+   "key": "two#1",
+   "sid": "2-05.s2",
+   "f0": 409,
+   "f1": 422,
+   "F0": 11635,
+   "F1": 11648
+  },
+  {
+   "wid": "2-05.w014",
+   "w": "to",
+   "key": "to#2",
+   "sid": "2-05.s2",
+   "f0": 455,
+   "f1": 461,
+   "F0": 11681,
+   "F1": 11687
+  },
+  {
+   "wid": "2-05.w015",
+   "w": "evaluate",
+   "key": "evaluate#1",
+   "sid": "2-05.s2",
+   "f0": 471,
+   "f1": 510,
+   "F0": 11697,
+   "F1": 11736
+  },
+  {
+   "wid": "2-05.w016",
+   "w": "how",
+   "key": "how#1",
+   "sid": "2-05.s2",
+   "f0": 521,
+   "f1": 537,
+   "F0": 11747,
+   "F1": 11763
+  },
+  {
+   "wid": "2-05.w017",
+   "w": "these",
+   "key": "these#1",
+   "sid": "2-05.s2",
+   "f0": 546,
+   "f1": 561,
+   "F0": 11772,
+   "F1": 11787
+  },
+  {
+   "wid": "2-05.w018",
+   "w": "methods",
+   "key": "methods#2",
+   "sid": "2-05.s2",
+   "f0": 565,
+   "f1": 592,
+   "F0": 11791,
+   "F1": 11818
+  },
+  {
+   "wid": "2-05.w019",
+   "w": "help",
+   "key": "help#1",
+   "sid": "2-05.s2",
+   "f0": 602,
+   "f1": 615,
+   "F0": 11828,
+   "F1": 11841
+  },
+  {
+   "wid": "2-05.w020",
+   "w": "scientists",
+   "key": "scientists#1",
+   "sid": "2-05.s2",
+   "f0": 638,
+   "f1": 676,
+   "F0": 11864,
+   "F1": 11902
+  },
+  {
+   "wid": "2-05.w021",
+   "w": "assess",
+   "key": "assess#1",
+   "sid": "2-05.s2",
+   "f0": 698,
+   "f1": 719,
+   "F0": 11924,
+   "F1": 11945
+  },
+  {
+   "wid": "2-05.w022",
+   "w": "potential",
+   "key": "potential#1",
+   "sid": "2-05.s2",
+   "f0": 724,
+   "f1": 753,
+   "F0": 11950,
+   "F1": 11979
+  },
+  {
+   "wid": "2-05.w023",
+   "w": "drug",
+   "key": "drug#2",
+   "sid": "2-05.s2",
+   "f0": 759,
+   "f1": 773,
+   "F0": 11985,
+   "F1": 11999
+  },
+  {
+   "wid": "2-05.w024",
+   "w": "candidates.",
+   "key": "candidates#1",
+   "sid": "2-05.s2",
+   "f0": 784,
+   "f1": 821,
+   "F0": 12010,
+   "F1": 12047
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "2-05.s1",
+   "text": "One: to identify the major computer-aided methods used in cancer drug discovery.",
+   "w_first": "2-05.w001",
+   "w_last": "2-05.w012",
+   "f0": 9,
+   "f1": 378
+  },
+  {
+   "sid": "2-05.s2",
+   "text": "Two: to evaluate how these methods help scientists assess potential drug candidates.",
+   "w_first": "2-05.w013",
+   "w_last": "2-05.w024",
+   "f0": 409,
+   "f1": 821
+  }
+ ],
+ "holds": [],
+ "events": [
+  {
+   "id": "footage00",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 0.00→0.58 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 0,
+   "f_land": 0,
+   "f_end": 6,
+   "until": null,
+   "word": "2-05.w001",
+   "w": "One:",
+   "key": "one#1",
+   "sid": "2-05.s1",
+   "word_f0": 9,
+   "value": [
+    0.0,
+    0.583
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 11226,
+   "F_land": 11226,
+   "F_end": 11232
+  },
+  {
+   "id": "footage01",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 0.58→2.08 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 6,
+   "f_land": 6,
+   "f_end": 122,
+   "until": null,
+   "word": "2-05.w001",
+   "w": "One:",
+   "key": "one#1",
+   "sid": "2-05.s1",
+   "word_f0": 9,
+   "value": [
+    0.583,
+    2.083
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 11232,
+   "F_land": 11232,
+   "F_end": 11348
+  },
+  {
+   "id": "footage02",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 2.08→2.35 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 122,
+   "f_land": 122,
+   "f_end": 147,
+   "until": null,
+   "word": "2-05.w005",
+   "w": "major",
+   "key": "major#1",
+   "sid": "2-05.s1",
+   "word_f0": 122,
+   "value": [
+    2.083,
+    2.35
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 11348,
+   "F_land": 11348,
+   "F_end": 11373
+  },
+  {
+   "id": "footage03",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 2.35→3.48 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 147,
+   "f_land": 147,
+   "f_end": 202,
+   "until": null,
+   "word": "2-05.w006",
+   "w": "computer-aided",
+   "key": "computer-aided#1",
+   "sid": "2-05.s1",
+   "word_f0": 147,
+   "value": [
+    2.35,
+    3.483
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 11373,
+   "F_land": 11373,
+   "F_end": 11428
+  },
+  {
+   "id": "footage04",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 3.48→6.88 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 202,
+   "f_land": 202,
+   "f_end": 341,
+   "until": null,
+   "word": "2-05.w007",
+   "w": "methods",
+   "key": "methods#1",
+   "sid": "2-05.s1",
+   "word_f0": 202,
+   "value": [
+    3.483,
+    6.883
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 11428,
+   "F_land": 11428,
+   "F_end": 11567
+  },
+  {
+   "id": "footage05",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 6.88→8.20 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 341,
+   "f_land": 341,
+   "f_end": 471,
+   "until": null,
+   "word": "2-05.w012",
+   "w": "discovery.",
+   "key": "discovery#1",
+   "sid": "2-05.s1",
+   "word_f0": 341,
+   "value": [
+    6.883,
+    8.2
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 11567,
+   "F_land": 11567,
+   "F_end": 11697
+  },
+  {
+   "id": "footage06",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 8.20→9.72 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 471,
+   "f_land": 471,
+   "f_end": 546,
+   "until": null,
+   "word": "2-05.w015",
+   "w": "evaluate",
+   "key": "evaluate#1",
+   "sid": "2-05.s2",
+   "word_f0": 471,
+   "value": [
+    8.2,
+    9.717
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 11697,
+   "F_land": 11697,
+   "F_end": 11772
+  },
+  {
+   "id": "footage07",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 9.72→13.17 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 546,
+   "f_land": 546,
+   "f_end": 698,
+   "until": null,
+   "word": "2-05.w017",
+   "w": "these",
+   "key": "these#1",
+   "sid": "2-05.s2",
+   "word_f0": 546,
+   "value": [
+    9.717,
+    13.167
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 11772,
+   "F_land": 11772,
+   "F_end": 11924
+  },
+  {
+   "id": "footage08",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 13.17→14.87 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 698,
+   "f_land": 698,
+   "f_end": 784,
+   "until": null,
+   "word": "2-05.w021",
+   "w": "assess",
+   "key": "assess#1",
+   "sid": "2-05.s2",
+   "word_f0": 698,
+   "value": [
+    13.167,
+    14.867
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 11924,
+   "F_land": 11924,
+   "F_end": 12010
+  },
+  {
+   "id": "footage09",
+   "obj": "footage",
+   "verb": "move",
+   "ease": "linear",
+   "means": "旧动画源片 14.87→15.45 s 在这段里播放（原生重渲时按这个对应，不再变速）",
+   "f_start": 784,
+   "f_land": 784,
+   "f_end": 821,
+   "until": null,
+   "word": "2-05.w024",
+   "w": "candidates.",
+   "key": "candidates#1",
+   "sid": "2-05.s2",
+   "word_f0": 784,
+   "value": [
+    14.867,
+    15.45
+   ],
+   "migrated": "migrate_beats_v8:anchor",
+   "F_start": 12010,
+   "F_land": 12010,
+   "F_end": 12047
+  }
+ ],
+ "guides": [],
+ "problems": []
+}

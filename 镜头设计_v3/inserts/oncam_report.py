@@ -6,7 +6,10 @@
   CDK20_WORK/oncam/<段>/render_t*.txt、comp.json   渲染、合成用时
   成片 SEGS[段]["out"]，旧片 review["old_video"]（有就出新旧对比）
 用法：python 镜头设计_v3/inserts/oncam_report.py 3-01 [输出.html]
+      python 镜头设计_v3/inserts/oncam_report.py 3-06 3-09 --out 导演检查_20261120/15_出镜3D_检查.html   # 几段放一页
 默认输出：成片同目录的 10_出镜3D_检查.html。
+新做的段（没有旧三维版）review 里不写 old_video，items 写的是技能 5.2 看图项和本段设计要求的逐条结果（old 可省），
+页面上那一节叫"检查清单"而不是"旧版穿帮清单"。
 """
 import base64
 import io
@@ -76,6 +79,30 @@ def ok(b):
 
 
 def run(seg, out=None):
+    page([seg], out)
+
+
+def page(segs, out=None):
+    secs = [section(s, multi=len(segs) > 1) for s in segs]
+    cfg0 = S.seg_cfg(segs[0])
+    out = Path(out) if out else Path(cfg0["out"]).with_name("10_出镜3D_检查.html")
+    if len(segs) == 1:
+        body = secs[0][1]
+        title = f"出镜 3D 检查 {segs[0]}"
+    else:
+        title = "出镜 3D 检查 " + "、".join(segs)
+        body = [f"<h1>出镜 + 旁边 3D 零件：{'、'.join(segs)}</h1>",
+                f"<p class=mut>HKBU SCIE1007 课程作业的科普视频。代码 <code>镜头设计_v3/inserts/shot_oncam.py</code>（搭场景、渲、合成）、<code>oncam_check.py</code>（机检）、"
+                f"<code>oncam_report.py</code>（本页）；照技能 <code>.claude/skills/oncam-3d-parts</code> 做。生成于 {time.strftime('%Y-%m-%d %H:%M')}（韩国时间）。</p>",
+                "<div class=lead>" + "".join(f"<p><b>{esc(s)}</b>：{esc(sec[0])}</p>" for s, sec in zip(segs, secs)) + "</div>"]
+        for s, sec in zip(segs, secs):
+            body += [f"<hr><h1 id='s{esc(s)}'>{esc(s)}</h1>"] + sec[1]
+    out.write_text(f"<!doctype html><html lang=zh><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'>"
+                   f"<title>{esc(title)}</title><style>{CSS}</style></head><body><main>" + "".join(body) + "</main></body></html>", encoding="utf-8")
+    print("ONCAM report", out, round(out.stat().st_size / 1e6, 1), "MB", flush=True)
+
+
+def section(seg, multi=False):
     cfg = S.seg_cfg(seg)
     work = cfg["work"]
     rv = json.loads((HERE / "oncam_review" / f"{seg}.json").read_text(encoding="utf-8"))
@@ -84,11 +111,10 @@ def run(seg, out=None):
     vid = Path(cfg["out"])
     old = S.ROOT / rv["old_video"] if rv.get("old_video") else None
     nf = cfg["nf"]
-    out = Path(out) if out else vid.with_name("10_出镜3D_检查.html")
 
-    want = sorted({it["new"] for it in rv["items"]} | set(range(0, nf, 6)) | {nf - 1})
+    want = sorted({it["new"] for it in rv["items"] if "new" in it} | set(range(0, nf, 6)) | {nf - 1})
     NEW = frames_of(vid, want)
-    OLD = frames_of(old, sorted({it["old"] for it in rv["items"]})) if old else {}
+    OLD = frames_of(old, sorted({it["old"] for it in rv["items"] if "old" in it})) if old else {}
 
     # 渲染用时
     def rd(n):
@@ -101,10 +127,13 @@ def run(seg, out=None):
     n_front = len(cam.get("front", []))
     bg_s = (t1 - t0) if t0 and t1 else None
     fr_s = (t2 - t1) if t1 and t2 else None
+    fsp = work / "render_front_s.txt"                    # 挡人层净时长（不算排队等显卡空位）
+    if fsp.exists():
+        fr_s = int(fsp.read_text().strip())
 
-    h = [f"<!doctype html><html lang=zh><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'>"
-         f"<title>出镜 3D 检查 {seg}</title><style>{CSS}</style></head><body><main>"]
-    h.append(f"<h1>出镜 + 旁边 3D 零件：{seg}（{esc(rv.get('who', ''))}）重做检查</h1>")
+    h = []
+    if not multi:
+        h.append(f"<h1>出镜 + 旁边 3D 零件：{seg}（{esc(rv.get('who', ''))}）{'重做' if old else ''}检查</h1>")
     h.append(f"<p class=mut>HKBU SCIE1007 课程作业的科普视频。台词：\"{esc(rv.get('line', ''))}\"。成片 <code>{esc(vid.name)}</code>（1080p60，{nf} 帧 = {nf / S.FPS:.1f} 秒，带原声）。"
              f"设计 <code>{esc(rv.get('design_doc', ''))}</code>；代码 <code>镜头设计_v3/inserts/shot_oncam.py</code>（搭场景、渲、合成）、<code>oncam_check.py</code>（机检）、<code>oncam_report.py</code>（本页）；"
              f"做法写成技能 <code>.claude/skills/oncam-3d-parts</code>。生成于 {time.strftime('%Y-%m-%d %H:%M')}（韩国时间）。</p>")
@@ -121,18 +150,34 @@ def run(seg, out=None):
         else:
             res = "<b class=bad>未查</b>"
         rows.append([it["n"], esc(it["frames"]), esc(it["cat"]), esc(it["problem"]), esc(it["fix"]), res])
-    h.append("<h2>一、旧版穿帮清单和逐条结果</h2>")
-    h.append(table(rows, ["#", "旧版帧", "类别", "问题", "怎么改的", "复查"]))
+    if old:
+        h.append("<h2>一、旧版穿帮清单和逐条结果</h2>")
+        h.append(table(rows, ["#", "旧版帧", "类别", "问题", "怎么改的", "复查"]))
+    else:
+        h.append("<h2>一、检查清单（技能看图项 + 本段设计要求）和逐条结果</h2>")
+        h.append(table(rows, ["#", "帧", "类别", "查什么", "怎么做到的", "结果"]))
+        figs = [it for it in rv["items"] if "new" in it and it.get("show")]
+        if figs:
+            h.append("<div class=row>" + "".join(f"<figure><img src='{b64(NEW[it['new']], 640)}' alt='第 {it['new']} 帧'><figcaption>{it['n']}. 第 {it['new']} 帧</figcaption></figure>"
+                                               for it in figs if it["new"] in NEW) + "</div>")
 
     # 二、机检
     h.append("<h2>二、机检（oncam_check.py，换段号就能跑）</h2>")
     h.append(table([[r["id"], esc(r["name"]), esc(r["value"]), esc(r["rule"]), ok(r["ok"])] for r in flaws], ["编号", "查什么", "量到", "要求", "结果"]))
 
+    # 二之二、Gemini 初审：它报的"必改"逐条处理（改掉，或写明为什么不改）
+    gm = rv.get("gemini")
+    if gm:
+        h.append("<h2>二之二、Gemini 初审逐条处理</h2>")
+        h.append(f"<p class=mut>{esc(gm.get('note', ''))}</p>")
+        h.append(table([[esc(r.get("level", "")), esc(r.get("t", "")), esc(r["what"]), esc(r["verdict"]), esc(r["why"])] for r in gm.get("rows", [])],
+                       ["级别", "Gemini 报的时间", "它说的问题", "处理", "为什么 / 怎么改的"]))
+
     # 三、新旧对比
     if OLD:
         h.append("<h2>三、新旧对比（每条一对，左旧右新，同一个词附近）</h2>")
         for it in rv["items"]:
-            o, n = OLD.get(it["old"]), NEW.get(it["new"])
+            o, n = OLD.get(it.get("old")), NEW.get(it.get("new"))
             if o is None or n is None:
                 continue
             h.append(f"<p><b>{it['n']}. {esc(it['problem'])}</b></p><div class=row>"
@@ -175,12 +220,20 @@ def run(seg, out=None):
     if hp.exists():
         h.append("<h2>七、和上下段的交接</h2><p class=mut>段首、段尾那一帧零件的位姿（相机坐标）在 "
                  f"<code>{esc(hp)}</code>。上一段结尾让同一个零件冲进镜头、在盖满画面那一帧切；下一段从段尾特写里退出来。</p>")
-    h.append("</main></body></html>")
-    out.write_text("".join(h), encoding="utf-8")
-    print("ONCAM report", out, round(out.stat().st_size / 1e6, 1), "MB", flush=True)
+        wd = S.WORK_ROOT / "bwipe" / f"oncam_{seg}"
+        nw = len(list(wd.glob("w_*.png"))) if wd.exists() else 0
+        h.append(f"<p class=mut>相邻 B 页（Remotion）用的 T5 擦除层：段首、段尾各 16 帧只有零件的透明层，共 {nw} 张，在 <code>{esc(wd)}</code>"
+                 "（11 文档 5.6：B 页开头或结尾放同一个零件的擦除层，盖满那一帧对齐）。</p>")
+    lead = " ".join(rv.get("lead", [])[:1])
+    return lead, h
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
+    a = sys.argv[1:]
+    if not a:
         raise SystemExit(__doc__)
-    run(sys.argv[1], sys.argv[2] if len(sys.argv) > 2 else None)
+    out = a[a.index("--out") + 1] if "--out" in a else None
+    segs = [x for i, x in enumerate(a) if x != "--out" and (i == 0 or a[i - 1] != "--out") and not x.endswith(".html")]
+    if out is None and any(x.endswith(".html") for x in a):
+        out = next(x for x in a if x.endswith(".html"))
+    page(segs, (S.ROOT / out) if out and not Path(out).is_absolute() else out)

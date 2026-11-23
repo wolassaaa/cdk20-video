@@ -387,6 +387,11 @@
       "means": "`computer` 牌的骨白牌面冲镜头",
       "guide": {
         "kind": "none"
+      },
+      "lead": 44,
+      "ease": "in",
+      "until": {
+        "dur": 0
       }
     }
   ]

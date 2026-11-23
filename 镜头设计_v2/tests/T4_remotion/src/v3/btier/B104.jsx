@@ -104,7 +104,7 @@ const Scene = () => {
             })}
           </Layer>
           <Layer id="names" exempt>
-            <Label text="Nexavar" size={52} x={CAP.x} y={815} at={E.nex.l} out={E.combo.l} align="center" />
+            <Label text="Nexavar" size={52} x={CAP.x} y={838} at={E.nex.l} out={E.combo.l} align="center" />
             <Label text="atezolizumab" size={48} x={BAG[0].x - 30} y={822} at={E.atezo.l} out={E.clear.s} align="center" />
             <Label text="bevacizumab" size={48} x={BAG[1].x + 30} y={822} at={E.beva.l} out={E.clear.s} align="center" />
           </Layer>
@@ -132,7 +132,7 @@ const Scene = () => {
         </Layer>
         <Layer id="txt" exempt>
           <Label text="5 years" x={950} y={705} at={E.years.l} out={need-12} align="center"/>
-          <Label text="about 3 in 10" size={56} x={960} y={300} at={E.three.l} out={E.study.s} align="center"/>
+          <Label text="about 3 in 10" size={56} x={960} y={300} at={E.three.l} out={E.alive.s} align="center"/>
           <Label text="alive" size={44} x={423} y={572} at={E.alive.l} out={need-10} align="center"/>
           <Source>{f < E.clear.s ? "Illustration · treatments as described in Ren et al., Chem. Sci. 2023" : "Illustration · 5-year survival about 3 in 10: Hong Kong Cancer Registry 2022"}</Source>
         </Layer>

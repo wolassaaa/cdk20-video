@@ -1,0 +1,31 @@
+diff --git a/镜头设计_v3/script/script_v3.3.md b/镜头设计_v3/script/script_v3.3.md
+index f34a794..8648d82 100644
+--- a/镜头设计_v3/script/script_v3.3.md
++++ b/镜头设计_v3/script/script_v3.3.md
+@@ -513,7 +513,7 @@ Every member stays at 3.5 minutes or more on both estimates. C keeps both turnin
+ 
+ > 001's Kd: 9.2 micromolar. The other six? All above 30. Much weaker. And here's the wild part. The clock read just 30 days, from picking the target to this first confirmed hit.
+ 
+-- Visual: [3D] 001 rebuilt from Ren Fig. 5, placed in the pocket by our own AutoDock Vina re-docking, labelled "OUR RE-DOCKING (AutoDock Vina)"; [2D] "Kd = 9.2 ± 0.5 µM (n = 3)"; ink calendar "30 days". ROAD MAP: station 2 "Hit" lights.
++- Visual: [3D] 001 rebuilt from its published 2D structure (Ren Fig. 5) and placed in the pocket by our own AutoDock Vina re-docking (`poses.json`, mode 3, -7.944 kcal/mol), labelled "OUR RE-DOCKING (AutoDock Vina), not the authors' coordinates"; [2D] "Kd = 9.2 ± 0.5 µM (n = 3)"; ink calendar "30 days". ROAD MAP: station 2 "Hit" lights.
+ - Source: R23 Abstract, Results, Conclusions, Figs. 5-6 (E13, E14); flags F11, F13
+ 
+ **5-04 · 11:02–11:26 · C · VO** (44 words)
+@@ -548,7 +548,7 @@ Every member stays at 3.5 minutes or more on both estimates. C keeps both turnin
+ 
+ > And one of them, 048, grabbed about fifteen times tighter. Then the enzyme test. Remember, 001 needed more than 6,000 nanomolar. 048 needed just 33.4.
+ 
+-- Visual: [3D] 048 rebuilt from Ren Fig. 7 in our AutoDock Vina re-docked pose, labelled "OUR RE-DOCKING"; Lys33 hydrogen bond as an ink dash; [2D] "Kd 566.7 ± 256.2 nM (~15x tighter than 001)", then two bars: "001 > 6,000 nM" vs "048 = 33.4 ± 22.6 nM"; side note "049: 360.0 ± 14.1 nM, an even tighter binder, not tested further". ROAD MAP: station 3 "Improve" lights.
++- Visual: [3D] 048 rebuilt from Ren Fig. 7 in our own AutoDock Vina re-docked pose (`poses.json`, mode 2, -8.838 kcal/mol), labelled "OUR RE-DOCKING (AutoDock Vina)"; Lys33 hydrogen bond drawn as an ink dash from that pose's contacts (the paper describes the same interaction in Fig. 8); [2D] "Kd 566.7 ± 256.2 nM (~15x tighter than 001)", then two bars: "001 > 6,000 nM" vs "048 = 33.4 ± 22.6 nM"; side note "049: 360.0 ± 14.1 nM — also tighter than 001; the cell test went to 048". ROAD MAP: station 3 "Improve" lights.
+ - Source: R23 Results, Figs. 7-9A (E18, E19, E20); flag F13
+ 
+ **5-09 · 12:09–12:10 · C · ON-CAM** (5 words)
+@@ -560,7 +560,7 @@ Every member stays at 3.5 minutes or more on both estimates. C keeps both turnin
+ 
+ **W4 · 12:10–12:18 · MUSIC-ONLY WINDOW** (8 s, no narration)
+ 
+-- Visual: EMOTIONAL PEAK 3, the key turns. 048 slides into the pocket in our re-docked pose (label "OUR RE-DOCKING"); the ink key completes its turn; the road-map station "Improve" flares vermilion.
++- Visual: EMOTIONAL PEAK 3, the key turns. 048 in our re-docked pose (label "OUR RE-DOCKING (AutoDock Vina)") slides into the pocket; the ink key completes its turn; the road-map station "Improve" flares red.
+ - Music: The Weeknd - Dancing in the Flames (Instrumental), 4 bars (~8.2 s), full level after one empty beat
+ 
+ **5-10 · 12:18–12:42 · C · VO** (37 words)

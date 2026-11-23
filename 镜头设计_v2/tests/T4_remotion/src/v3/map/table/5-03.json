@@ -1,0 +1,584 @@
+{
+ "schema": "cdk20.wordmap/1",
+ "built": "2026-11-18 02:33:56 +09:00",
+ "cut": "cut_v8",
+ "group": "5-03",
+ "fps": 60,
+ "len_f": 1016,
+ "cut_start_s": 651.13,
+ "holds": [],
+ "words": [
+  {
+   "wid": "5-03.w001",
+   "w": "001's",
+   "key": "001's#1",
+   "sid": "5-03.s1",
+   "f0": 9,
+   "f1": 40
+  },
+  {
+   "wid": "5-03.w002",
+   "w": "Kd:",
+   "key": "kd#1",
+   "sid": "5-03.s1",
+   "f0": 43,
+   "f1": 57
+  },
+  {
+   "wid": "5-03.w003",
+   "w": "9.2",
+   "key": "9.2#1",
+   "sid": "5-03.s1",
+   "f0": 60,
+   "f1": 150
+  },
+  {
+   "wid": "5-03.w004",
+   "w": "micromolar.",
+   "key": "micromolar#1",
+   "sid": "5-03.s1",
+   "f0": 150,
+   "f1": 222
+  },
+  {
+   "wid": "5-03.w005",
+   "w": "The",
+   "key": "the#1",
+   "sid": "5-03.s2",
+   "f0": 248,
+   "f1": 253
+  },
+  {
+   "wid": "5-03.w006",
+   "w": "other",
+   "key": "other#1",
+   "sid": "5-03.s2",
+   "f0": 260,
+   "f1": 271
+  },
+  {
+   "wid": "5-03.w007",
+   "w": "six?",
+   "key": "six#1",
+   "sid": "5-03.s2",
+   "f0": 278,
+   "f1": 294
+  },
+  {
+   "wid": "5-03.w008",
+   "w": "All",
+   "key": "all#1",
+   "sid": "5-03.s3",
+   "f0": 331,
+   "f1": 343
+  },
+  {
+   "wid": "5-03.w009",
+   "w": "above",
+   "key": "above#1",
+   "sid": "5-03.s3",
+   "f0": 351,
+   "f1": 373
+  },
+  {
+   "wid": "5-03.w010",
+   "w": "30.",
+   "key": "30#1",
+   "sid": "5-03.s3",
+   "f0": 377,
+   "f1": 398
+  },
+  {
+   "wid": "5-03.w011",
+   "w": "Much",
+   "key": "much#1",
+   "sid": "5-03.s4",
+   "f0": 426,
+   "f1": 440
+  },
+  {
+   "wid": "5-03.w012",
+   "w": "weaker.",
+   "key": "weaker#1",
+   "sid": "5-03.s4",
+   "f0": 446,
+   "f1": 467
+  },
+  {
+   "wid": "5-03.w013",
+   "w": "And",
+   "key": "and#1",
+   "sid": "5-03.s5",
+   "f0": 510,
+   "f1": 518
+  },
+  {
+   "wid": "5-03.w014",
+   "w": "here's",
+   "key": "here's#1",
+   "sid": "5-03.s5",
+   "f0": 526,
+   "f1": 544
+  },
+  {
+   "wid": "5-03.w015",
+   "w": "the",
+   "key": "the#2",
+   "sid": "5-03.s5",
+   "f0": 546,
+   "f1": 551
+  },
+  {
+   "wid": "5-03.w016",
+   "w": "wild",
+   "key": "wild#1",
+   "sid": "5-03.s5",
+   "f0": 556,
+   "f1": 574
+  },
+  {
+   "wid": "5-03.w017",
+   "w": "part.",
+   "key": "part#1",
+   "sid": "5-03.s5",
+   "f0": 576,
+   "f1": 590
+  },
+  {
+   "wid": "5-03.w018",
+   "w": "The",
+   "key": "the#3",
+   "sid": "5-03.s6",
+   "f0": 642,
+   "f1": 647
+  },
+  {
+   "wid": "5-03.w019",
+   "w": "clock",
+   "key": "clock#1",
+   "sid": "5-03.s6",
+   "f0": 653,
+   "f1": 673
+  },
+  {
+   "wid": "5-03.w020",
+   "w": "read",
+   "key": "read#1",
+   "sid": "5-03.s6",
+   "f0": 694,
+   "f1": 703
+  },
+  {
+   "wid": "5-03.w021",
+   "w": "just",
+   "key": "just#1",
+   "sid": "5-03.s6",
+   "f0": 712,
+   "f1": 730
+  },
+  {
+   "wid": "5-03.w022",
+   "w": "30",
+   "key": "30#2",
+   "sid": "5-03.s6",
+   "f0": 733,
+   "f1": 747
+  },
+  {
+   "wid": "5-03.w023",
+   "w": "days,",
+   "key": "days#1",
+   "sid": "5-03.s6",
+   "f0": 750,
+   "f1": 767
+  },
+  {
+   "wid": "5-03.w024",
+   "w": "from",
+   "key": "from#1",
+   "sid": "5-03.s6",
+   "f0": 790,
+   "f1": 801
+  },
+  {
+   "wid": "5-03.w025",
+   "w": "picking",
+   "key": "picking#1",
+   "sid": "5-03.s6",
+   "f0": 810,
+   "f1": 835
+  },
+  {
+   "wid": "5-03.w026",
+   "w": "the",
+   "key": "the#4",
+   "sid": "5-03.s6",
+   "f0": 843,
+   "f1": 851
+  },
+  {
+   "wid": "5-03.w027",
+   "w": "target",
+   "key": "target#1",
+   "sid": "5-03.s6",
+   "f0": 852,
+   "f1": 868
+  },
+  {
+   "wid": "5-03.w028",
+   "w": "to",
+   "key": "to#1",
+   "sid": "5-03.s6",
+   "f0": 882,
+   "f1": 887
+  },
+  {
+   "wid": "5-03.w029",
+   "w": "this",
+   "key": "this#1",
+   "sid": "5-03.s6",
+   "f0": 897,
+   "f1": 909
+  },
+  {
+   "wid": "5-03.w030",
+   "w": "first",
+   "key": "first#1",
+   "sid": "5-03.s6",
+   "f0": 917,
+   "f1": 939
+  },
+  {
+   "wid": "5-03.w031",
+   "w": "confirmed",
+   "key": "confirmed#1",
+   "sid": "5-03.s6",
+   "f0": 957,
+   "f1": 987
+  },
+  {
+   "wid": "5-03.w032",
+   "w": "hit.",
+   "key": "hit#1",
+   "sid": "5-03.s6",
+   "f0": 989,
+   "f1": 1001
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "5-03.s1",
+   "text": "001's Kd: 9.2 micromolar.",
+   "w_first": "5-03.w001",
+   "w_last": "5-03.w004",
+   "f0": 9,
+   "f1": 222
+  },
+  {
+   "sid": "5-03.s2",
+   "text": "The other six?",
+   "w_first": "5-03.w005",
+   "w_last": "5-03.w007",
+   "f0": 248,
+   "f1": 294
+  },
+  {
+   "sid": "5-03.s3",
+   "text": "All above 30.",
+   "w_first": "5-03.w008",
+   "w_last": "5-03.w010",
+   "f0": 331,
+   "f1": 398
+  },
+  {
+   "sid": "5-03.s4",
+   "text": "Much weaker.",
+   "w_first": "5-03.w011",
+   "w_last": "5-03.w012",
+   "f0": 426,
+   "f1": 467
+  },
+  {
+   "sid": "5-03.s5",
+   "text": "And here's the wild part.",
+   "w_first": "5-03.w013",
+   "w_last": "5-03.w017",
+   "f0": 510,
+   "f1": 590
+  },
+  {
+   "sid": "5-03.s6",
+   "text": "The clock read just 30 days, from picking the target to this first confirmed hit.",
+   "w_first": "5-03.w018",
+   "w_last": "5-03.w032",
+   "f0": 642,
+   "f1": 1001
+  }
+ ],
+ "events": [
+  {
+   "eid": "hl001",
+   "obj": "hl001",
+   "verb": "ring",
+   "means": null,
+   "word": "5-03.w001",
+   "f_start": 9,
+   "f_land": 9,
+   "f_end": 29,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "kd",
+   "obj": "kd",
+   "verb": "keyed",
+   "means": null,
+   "word": "5-03.w003",
+   "f_start": 59,
+   "f_land": 59,
+   "f_end": 95,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "lbl",
+   "obj": "lbl",
+   "verb": "ink",
+   "means": null,
+   "word": "5-03.w003",
+   "f_start": 65,
+   "f_land": 65,
+   "f_end": 79,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "n3",
+   "obj": "n3",
+   "verb": "ink",
+   "means": null,
+   "word": "5-03.w004",
+   "f_start": 150,
+   "f_land": 150,
+   "f_end": 162,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "cam1s",
+   "obj": "cam1s",
+   "verb": "mark",
+   "means": null,
+   "word": "5-03.w004",
+   "f_start": 80,
+   "f_land": 80,
+   "f_end": 80,
+   "role": "mark",
+   "tool": "blender"
+  },
+  {
+   "eid": "lift",
+   "obj": "cards",
+   "verb": "land",
+   "means": null,
+   "word": "5-03.w004",
+   "f_start": 90,
+   "f_land": 90,
+   "f_end": 156,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "cards_gone",
+   "obj": "cards",
+   "verb": "land",
+   "means": null,
+   "word": "5-03.w004",
+   "f_start": 175,
+   "f_land": 175,
+   "f_end": 175,
+   "role": "stagger",
+   "tool": "blender"
+  },
+  {
+   "eid": "cam1",
+   "obj": "cam",
+   "verb": "land",
+   "means": null,
+   "word": "5-03.w006",
+   "f_start": 80,
+   "f_land": 260,
+   "f_end": 260,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "tag",
+   "obj": "tag",
+   "verb": "tag",
+   "means": null,
+   "word": "5-03.w007",
+   "f_start": 278,
+   "f_land": 278,
+   "f_end": 278,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "six",
+   "obj": "six",
+   "verb": "ink",
+   "means": null,
+   "word": "5-03.w008",
+   "f_start": 331,
+   "f_land": 331,
+   "f_end": 361,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "ul30",
+   "obj": "ul30",
+   "verb": "ul",
+   "means": null,
+   "word": "5-03.w010",
+   "f_start": 377,
+   "f_land": 377,
+   "f_end": 389,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "weaker",
+   "obj": "weaker",
+   "verb": "note",
+   "means": null,
+   "word": "5-03.w012",
+   "f_start": 426,
+   "f_land": 446,
+   "f_end": 452,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "pocket_out",
+   "obj": "pocket_out",
+   "verb": "fade",
+   "means": null,
+   "word": "5-03.w013",
+   "f_start": 510,
+   "f_land": 510,
+   "f_end": 530,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "m2",
+   "obj": "cam",
+   "verb": "land",
+   "means": null,
+   "word": "5-03.w017",
+   "f_start": 440,
+   "f_land": 576,
+   "f_end": 576,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "cal",
+   "obj": "cal",
+   "verb": "calendar",
+   "means": null,
+   "word": "5-03.w019",
+   "f_start": 653,
+   "f_land": 653,
+   "f_end": 689,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "days30",
+   "obj": "days30",
+   "verb": "keyed",
+   "means": null,
+   "word": "5-03.w022",
+   "f_start": 733,
+   "f_land": 733,
+   "f_end": 763,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "from",
+   "obj": "from",
+   "verb": "ink",
+   "means": null,
+   "word": "5-03.w024",
+   "f_start": 790,
+   "f_land": 790,
+   "f_end": 830,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "road",
+   "obj": "road",
+   "verb": "land",
+   "means": null,
+   "word": "5-03.w025",
+   "f_start": 756,
+   "f_land": 810,
+   "f_end": 810,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "target",
+   "obj": "roadlbl",
+   "verb": "ink",
+   "means": null,
+   "word": "5-03.w027",
+   "f_start": 852,
+   "f_land": 852,
+   "f_end": 864,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "arrow",
+   "obj": "roadlbl",
+   "verb": "pen",
+   "means": null,
+   "word": "5-03.w030",
+   "f_start": 917,
+   "f_land": 917,
+   "f_end": 937,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "fill",
+   "obj": "road",
+   "verb": "land",
+   "means": null,
+   "word": "5-03.w032",
+   "f_start": 839,
+   "f_land": 989,
+   "f_end": 989,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "hit",
+   "obj": "roadlbl",
+   "verb": "ink",
+   "means": null,
+   "word": "5-03.w032",
+   "f_start": 995,
+   "f_land": 995,
+   "f_end": 1007,
+   "role": "primary",
+   "tool": "blender"
+  }
+ ]
+}

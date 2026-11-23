@@ -53,8 +53,8 @@ const Scene = () => {
       <Stage zone={ZONE} f={f} whip={whip} shakeX={impact(f, E.board.l)} over={<T6Sweep f={f} at={E.sweep.s} />}>
         <Layer id={["header", "cols", "board"]}>
           <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transformOrigin: "960px 880px", transform: `perspective(1900px) rotateX(${th.toFixed(2)}deg)`}}>
-            <Board6 f={f} cam={cam} rise={Math.min(1, 0.35 + S.stand)} titleLand={TLAND} titleFrom={null} help={E.help.l + 8} hdr={{B: E.before.l, N: E.now.l - 3}} cols={S.cols}
-                    rows={[false, false, false, false]} jig={jig} nowFrame={(f - E.now.l + 10) / 10} />
+            <Board6 f={f} cam={cam} rise={Math.min(1, 0.35 + S.stand)} titleLand={TLAND.map((at,i)=>wf("question#1")-Math.ceil((TLAND.length-i)/6))} titleFrom={null} help={E.help.l + 8} hdr={{B: wf("before#1"), N: wf("now#1")}} cols={S.cols}
+                    rows={[false, false, false, false]} jig={wf("question#1")} nowFrame={(f - E.now.l + 10) / 10} />
           </div>
         </Layer>
         <Layer id="txt" exempt>

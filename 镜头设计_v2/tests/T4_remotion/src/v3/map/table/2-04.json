@@ -1,0 +1,100 @@
+{
+ "schema": "cdk20.wordmap/1",
+ "built": "2026-11-18 02:33:56 +09:00",
+ "cut": "cut_v8",
+ "group": "2-04",
+ "fps": 60,
+ "len_f": 238,
+ "cut_start_s": 183.13,
+ "holds": [],
+ "words": [
+  {
+   "wid": "2-04.w001",
+   "w": "We",
+   "key": "we#1",
+   "sid": "2-04.s1",
+   "f0": 32,
+   "f1": 37
+  },
+  {
+   "wid": "2-04.w002",
+   "w": "set",
+   "key": "set#1",
+   "sid": "2-04.s1",
+   "f0": 45,
+   "f1": 60
+  },
+  {
+   "wid": "2-04.w003",
+   "w": "ourselves",
+   "key": "ourselves#1",
+   "sid": "2-04.s1",
+   "f0": 69,
+   "f1": 104
+  },
+  {
+   "wid": "2-04.w004",
+   "w": "two",
+   "key": "two#1",
+   "sid": "2-04.s1",
+   "f0": 114,
+   "f1": 128
+  },
+  {
+   "wid": "2-04.w005",
+   "w": "objectives.",
+   "key": "objectives#1",
+   "sid": "2-04.s1",
+   "f0": 138,
+   "f1": 187
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "2-04.s1",
+   "text": "We set ourselves two objectives.",
+   "w_first": "2-04.w001",
+   "w_last": "2-04.w005",
+   "f0": 32,
+   "f1": 187
+  }
+ ],
+ "events": [
+  {
+   "eid": "t00_drop_q0",
+   "obj": "q0",
+   "verb": "drop",
+   "means": null,
+   "word": "2-04.w002",
+   "f_start": 31,
+   "f_land": 45,
+   "f_end": 45,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t01_hop_q0",
+   "obj": "q0",
+   "verb": "hop",
+   "means": null,
+   "word": "2-04.w004",
+   "f_start": 101,
+   "f_land": 113,
+   "f_end": 113,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t02_drop_q1",
+   "obj": "q1",
+   "verb": "drop",
+   "means": null,
+   "word": "2-04.w005",
+   "f_start": 124,
+   "f_land": 138,
+   "f_end": 138,
+   "role": "primary",
+   "tool": "remotion+blender"
+  }
+ ]
+}

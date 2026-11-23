@@ -1,0 +1,456 @@
+{
+ "schema": "cdk20.wordmap/1",
+ "built": "2026-11-18 02:33:56 +09:00",
+ "cut": "cut_v8",
+ "group": "1-01",
+ "fps": 60,
+ "len_f": 354,
+ "cut_start_s": 2.0,
+ "holds": [],
+ "words": [
+  {
+   "wid": "1-01.w001",
+   "w": "Every",
+   "key": "every#1",
+   "sid": "1-01.s1",
+   "f0": 32,
+   "f1": 47
+  },
+  {
+   "wid": "1-01.w002",
+   "w": "day",
+   "key": "day#1",
+   "sid": "1-01.s1",
+   "f0": 52,
+   "f1": 62
+  },
+  {
+   "wid": "1-01.w003",
+   "w": "in",
+   "key": "in#1",
+   "sid": "1-01.s1",
+   "f0": 72,
+   "f1": 77
+  },
+  {
+   "wid": "1-01.w004",
+   "w": "Hong",
+   "key": "hong#1",
+   "sid": "1-01.s1",
+   "f0": 82,
+   "f1": 95
+  },
+  {
+   "wid": "1-01.w005",
+   "w": "Kong,",
+   "key": "kong#1",
+   "sid": "1-01.s1",
+   "f0": 97,
+   "f1": 117
+  },
+  {
+   "wid": "1-01.w006",
+   "w": "about",
+   "key": "about#1",
+   "sid": "1-01.s1",
+   "f0": 146,
+   "f1": 161
+  },
+  {
+   "wid": "1-01.w007",
+   "w": "four",
+   "key": "four#1",
+   "sid": "1-01.s1",
+   "f0": 164,
+   "f1": 177
+  },
+  {
+   "wid": "1-01.w008",
+   "w": "people",
+   "key": "people#1",
+   "sid": "1-01.s1",
+   "f0": 180,
+   "f1": 202
+  },
+  {
+   "wid": "1-01.w009",
+   "w": "die",
+   "key": "die#1",
+   "sid": "1-01.s1",
+   "f0": 215,
+   "f1": 231
+  },
+  {
+   "wid": "1-01.w010",
+   "w": "of",
+   "key": "of#1",
+   "sid": "1-01.s1",
+   "f0": 236,
+   "f1": 244
+  },
+  {
+   "wid": "1-01.w011",
+   "w": "liver",
+   "key": "liver#1",
+   "sid": "1-01.s1",
+   "f0": 254,
+   "f1": 272
+  },
+  {
+   "wid": "1-01.w012",
+   "w": "cancer.",
+   "key": "cancer#1",
+   "sid": "1-01.s1",
+   "f0": 278,
+   "f1": 308
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "1-01.s1",
+   "text": "Every day in Hong Kong, about four people die of liver cancer.",
+   "w_first": "1-01.w001",
+   "w_last": "1-01.w012",
+   "f0": 32,
+   "f1": 308
+  }
+ ],
+ "events": [
+  {
+   "eid": "t00_drop_p0",
+   "obj": "p0",
+   "verb": "drop",
+   "means": null,
+   "word": "1-01.w001",
+   "f_start": -2,
+   "f_land": 14,
+   "f_end": 14,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t01_drop_p1",
+   "obj": "p1",
+   "verb": "drop",
+   "means": null,
+   "word": "1-01.w001",
+   "f_start": 0,
+   "f_land": 16,
+   "f_end": 16,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t02_drop_p2",
+   "obj": "p2",
+   "verb": "drop",
+   "means": null,
+   "word": "1-01.w001",
+   "f_start": 2,
+   "f_land": 18,
+   "f_end": 18,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t03_drop_p3",
+   "obj": "p3",
+   "verb": "drop",
+   "means": null,
+   "word": "1-01.w001",
+   "f_start": 4,
+   "f_land": 20,
+   "f_end": 20,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t04_drop_p4",
+   "obj": "p4",
+   "verb": "drop",
+   "means": null,
+   "word": "1-01.w001",
+   "f_start": 6,
+   "f_land": 22,
+   "f_end": 22,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t05_drop_p5",
+   "obj": "p5",
+   "verb": "drop",
+   "means": null,
+   "word": "1-01.w001",
+   "f_start": 8,
+   "f_land": 24,
+   "f_end": 24,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t06_drop_p6",
+   "obj": "p6",
+   "verb": "drop",
+   "means": null,
+   "word": "1-01.w001",
+   "f_start": 10,
+   "f_land": 26,
+   "f_end": 26,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t07_drop_p7",
+   "obj": "p7",
+   "verb": "drop",
+   "means": null,
+   "word": "1-01.w001",
+   "f_start": 12,
+   "f_land": 28,
+   "f_end": 28,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t08_drop_p8",
+   "obj": "p8",
+   "verb": "drop",
+   "means": null,
+   "word": "1-01.w001",
+   "f_start": 14,
+   "f_land": 30,
+   "f_end": 30,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t09_drop_p9",
+   "obj": "p9",
+   "verb": "drop",
+   "means": null,
+   "word": "1-01.w001",
+   "f_start": 16,
+   "f_land": 32,
+   "f_end": 32,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t10_hop_p0",
+   "obj": "p0",
+   "verb": "hop",
+   "means": null,
+   "word": "1-01.w005",
+   "f_start": 76,
+   "f_land": 88,
+   "f_end": 88,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t11_hop_p1",
+   "obj": "p1",
+   "verb": "hop",
+   "means": null,
+   "word": "1-01.w005",
+   "f_start": 77,
+   "f_land": 89,
+   "f_end": 89,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t12_hop_p2",
+   "obj": "p2",
+   "verb": "hop",
+   "means": null,
+   "word": "1-01.w005",
+   "f_start": 78,
+   "f_land": 90,
+   "f_end": 90,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t13_hop_p3",
+   "obj": "p3",
+   "verb": "hop",
+   "means": null,
+   "word": "1-01.w005",
+   "f_start": 79,
+   "f_land": 91,
+   "f_end": 91,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t14_hop_p4",
+   "obj": "p4",
+   "verb": "hop",
+   "means": null,
+   "word": "1-01.w005",
+   "f_start": 80,
+   "f_land": 92,
+   "f_end": 92,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t15_hop_p5",
+   "obj": "p5",
+   "verb": "hop",
+   "means": null,
+   "word": "1-01.w005",
+   "f_start": 81,
+   "f_land": 93,
+   "f_end": 93,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t16_hop_p6",
+   "obj": "p6",
+   "verb": "hop",
+   "means": null,
+   "word": "1-01.w005",
+   "f_start": 82,
+   "f_land": 94,
+   "f_end": 94,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t17_hop_p7",
+   "obj": "p7",
+   "verb": "hop",
+   "means": null,
+   "word": "1-01.w005",
+   "f_start": 83,
+   "f_land": 95,
+   "f_end": 95,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t18_hop_p8",
+   "obj": "p8",
+   "verb": "hop",
+   "means": null,
+   "word": "1-01.w005",
+   "f_start": 84,
+   "f_land": 96,
+   "f_end": 96,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t19_hop_p9",
+   "obj": "p9",
+   "verb": "hop",
+   "means": null,
+   "word": "1-01.w005",
+   "f_start": 85,
+   "f_land": 97,
+   "f_end": 97,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t20_red_p3",
+   "obj": "p3",
+   "verb": "red",
+   "means": null,
+   "word": "1-01.w007",
+   "f_start": 155,
+   "f_land": 155,
+   "f_end": 155,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t21_red_p4",
+   "obj": "p4",
+   "verb": "red",
+   "means": null,
+   "word": "1-01.w007",
+   "f_start": 158,
+   "f_land": 158,
+   "f_end": 158,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t22_red_p5",
+   "obj": "p5",
+   "verb": "red",
+   "means": null,
+   "word": "1-01.w007",
+   "f_start": 161,
+   "f_land": 161,
+   "f_end": 161,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t23_red_p6",
+   "obj": "p6",
+   "verb": "red",
+   "means": null,
+   "word": "1-01.w007",
+   "f_start": 164,
+   "f_land": 164,
+   "f_end": 164,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t24_tip_p3",
+   "obj": "p3",
+   "verb": "tip",
+   "means": null,
+   "word": "1-01.w009",
+   "f_start": 192,
+   "f_land": 206,
+   "f_end": 206,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t25_tip_p4",
+   "obj": "p4",
+   "verb": "tip",
+   "means": null,
+   "word": "1-01.w009",
+   "f_start": 195,
+   "f_land": 209,
+   "f_end": 209,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t26_tip_p5",
+   "obj": "p5",
+   "verb": "tip",
+   "means": null,
+   "word": "1-01.w009",
+   "f_start": 198,
+   "f_land": 212,
+   "f_end": 212,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t27_tip_p6",
+   "obj": "p6",
+   "verb": "tip",
+   "means": null,
+   "word": "1-01.w009",
+   "f_start": 201,
+   "f_land": 215,
+   "f_end": 215,
+   "role": "primary",
+   "tool": "remotion+blender"
+  }
+ ]
+}

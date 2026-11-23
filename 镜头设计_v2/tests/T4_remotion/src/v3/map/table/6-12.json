@@ -1,0 +1,316 @@
+{
+ "schema": "cdk20.wordmap/1",
+ "built": "2026-11-18 02:33:56 +09:00",
+ "cut": "cut_v8",
+ "group": "6-12",
+ "fps": 60,
+ "len_f": 470,
+ "cut_start_s": 914.63,
+ "holds": [],
+ "words": [
+  {
+   "wid": "6-12.w001",
+   "w": "048",
+   "key": "048#1",
+   "sid": "6-12.s1",
+   "f0": 32,
+   "f1": 69
+  },
+  {
+   "wid": "6-12.w002",
+   "w": "is",
+   "key": "is#1",
+   "sid": "6-12.s1",
+   "f0": 72,
+   "f1": 79
+  },
+  {
+   "wid": "6-12.w003",
+   "w": "at",
+   "key": "at#1",
+   "sid": "6-12.s1",
+   "f0": 81,
+   "f1": 84
+  },
+  {
+   "wid": "6-12.w004",
+   "w": "the",
+   "key": "the#1",
+   "sid": "6-12.s1",
+   "f0": 86,
+   "f1": 91
+  },
+  {
+   "wid": "6-12.w005",
+   "w": "very",
+   "key": "very#1",
+   "sid": "6-12.s1",
+   "f0": 95,
+   "f1": 109
+  },
+  {
+   "wid": "6-12.w006",
+   "w": "start",
+   "key": "start#1",
+   "sid": "6-12.s1",
+   "f0": 111,
+   "f1": 127
+  },
+  {
+   "wid": "6-12.w007",
+   "w": "of",
+   "key": "of#1",
+   "sid": "6-12.s1",
+   "f0": 131,
+   "f1": 134
+  },
+  {
+   "wid": "6-12.w008",
+   "w": "the",
+   "key": "the#2",
+   "sid": "6-12.s1",
+   "f0": 137,
+   "f1": 140
+  },
+  {
+   "wid": "6-12.w009",
+   "w": "road.",
+   "key": "road#1",
+   "sid": "6-12.s1",
+   "f0": 144,
+   "f1": 161
+  },
+  {
+   "wid": "6-12.w010",
+   "w": "But",
+   "key": "but#1",
+   "sid": "6-12.s2",
+   "f0": 198,
+   "f1": 203
+  },
+  {
+   "wid": "6-12.w011",
+   "w": "for",
+   "key": "for#1",
+   "sid": "6-12.s2",
+   "f0": 204,
+   "f1": 213
+  },
+  {
+   "wid": "6-12.w012",
+   "w": "this",
+   "key": "this#1",
+   "sid": "6-12.s2",
+   "f0": 215,
+   "f1": 223
+  },
+  {
+   "wid": "6-12.w013",
+   "w": "case,",
+   "key": "case#1",
+   "sid": "6-12.s2",
+   "f0": 227,
+   "f1": 246
+  },
+  {
+   "wid": "6-12.w014",
+   "w": "that",
+   "key": "that#1",
+   "sid": "6-12.s2",
+   "f0": 292,
+   "f1": 299
+  },
+  {
+   "wid": "6-12.w015",
+   "w": "start",
+   "key": "start#2",
+   "sid": "6-12.s2",
+   "f0": 299,
+   "f1": 305
+  },
+  {
+   "wid": "6-12.w016",
+   "w": "took",
+   "key": "took#1",
+   "sid": "6-12.s2",
+   "f0": 308,
+   "f1": 320
+  },
+  {
+   "wid": "6-12.w017",
+   "w": "weeks,",
+   "key": "weeks#1",
+   "sid": "6-12.s2",
+   "f0": 325,
+   "f1": 340
+  },
+  {
+   "wid": "6-12.w018",
+   "w": "not",
+   "key": "not#1",
+   "sid": "6-12.s2",
+   "f0": 364,
+   "f1": 373
+  },
+  {
+   "wid": "6-12.w019",
+   "w": "years.",
+   "key": "years#1",
+   "sid": "6-12.s2",
+   "f0": 377,
+   "f1": 399
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "6-12.s1",
+   "text": "048 is at the very start of the road.",
+   "w_first": "6-12.w001",
+   "w_last": "6-12.w009",
+   "f0": 32,
+   "f1": 161
+  },
+  {
+   "sid": "6-12.s2",
+   "text": "But for this case, that start took weeks, not years.",
+   "w_first": "6-12.w010",
+   "w_last": "6-12.w019",
+   "f0": 198,
+   "f1": 399
+  }
+ ],
+ "events": [
+  {
+   "eid": "t00_drop_k",
+   "obj": "k",
+   "verb": "drop",
+   "means": null,
+   "word": "6-12.w001",
+   "f_start": 18,
+   "f_land": 32,
+   "f_end": 32,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t01_red_k",
+   "obj": "k",
+   "verb": "red",
+   "means": null,
+   "word": "6-12.w001",
+   "f_start": 32,
+   "f_land": 32,
+   "f_end": 32,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t02_drop_s0",
+   "obj": "s0",
+   "verb": "drop",
+   "means": null,
+   "word": "6-12.w005",
+   "f_start": 66,
+   "f_land": 84,
+   "f_end": 84,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t03_drop_s1",
+   "obj": "s1",
+   "verb": "drop",
+   "means": null,
+   "word": "6-12.w005",
+   "f_start": 68,
+   "f_land": 86,
+   "f_end": 86,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t04_drop_s2",
+   "obj": "s2",
+   "verb": "drop",
+   "means": null,
+   "word": "6-12.w005",
+   "f_start": 70,
+   "f_land": 88,
+   "f_end": 88,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t05_drop_s3",
+   "obj": "s3",
+   "verb": "drop",
+   "means": null,
+   "word": "6-12.w005",
+   "f_start": 72,
+   "f_land": 90,
+   "f_end": 90,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t06_drop_s4",
+   "obj": "s4",
+   "verb": "drop",
+   "means": null,
+   "word": "6-12.w005",
+   "f_start": 74,
+   "f_land": 92,
+   "f_end": 92,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t07_drop_s5",
+   "obj": "s5",
+   "verb": "drop",
+   "means": null,
+   "word": "6-12.w005",
+   "f_start": 76,
+   "f_land": 94,
+   "f_end": 94,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t08_hop_s0",
+   "obj": "s0",
+   "verb": "hop",
+   "means": null,
+   "word": "6-12.w006",
+   "f_start": 99,
+   "f_land": 111,
+   "f_end": 111,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t09_hop_k",
+   "obj": "k",
+   "verb": "hop",
+   "means": null,
+   "word": "6-12.w013",
+   "f_start": 215,
+   "f_land": 227,
+   "f_end": 227,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t10_slide_k",
+   "obj": "k",
+   "verb": "slide",
+   "means": null,
+   "word": "6-12.w017",
+   "f_start": 300,
+   "f_land": 324,
+   "f_end": 324,
+   "role": "primary",
+   "tool": "remotion+blender"
+  }
+ ]
+}

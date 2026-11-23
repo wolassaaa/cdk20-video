@@ -43,7 +43,7 @@ const Scene = () => {
       <Layer id="chips">
         {CHIPS.map((n,i)=>{
           const a=cf(E.methods.s+i*5,E.methods.l+i*5);
-          return a>0 && <React.Fragment key={n}><Tag x={760+400*i} y={500+85*(1-a)} op={a}>{["PandaOmics","Chemistry42"][i]}</Tag><Sprite name={`chip_${n}/34`} x={760+400*i} y={432+85*(1-a)} w={180} op={a} rim={.35*Math.max(0,1-Math.abs(f-E.these.l-i*5)/15)}/></React.Fragment>;
+          return a>0 && <React.Fragment key={n}><Sprite name={`chip_${n}/34`} x={760+400*i} y={432+85*(1-a)} w={180} op={a} rim={.35*Math.max(0,1-Math.abs(f-E.these.l-i*5)/15)}/></React.Fragment>;
         })}
       </Layer>
       <Layer id="score">
@@ -54,7 +54,7 @@ const Scene = () => {
           </React.Fragment>;
         })}
       </Layer>
-      <Layer id="txt" exempt><Label text="potential drug candidates" size={40} x={900} y={790} at={E.cands.l} align="right"/><Source>Illustration · our two aims for this review</Source></Layer>
+      <Layer id="txt" exempt>{CHIPS.map((n,i)=>{const a=cf(E.methods.s+i*5,E.methods.l+i*5);return a>0&&<Tag key={n} x={760+400*i} y={500+85*(1-a)} op={a}>{["PandaOmics","Chemistry42"][i]}</Tag>;})}<Label text="potential drug candidates" size={40} x={900} y={790} at={E.cands.l} align="right"/><Source>Illustration · our two aims for this review</Source></Layer>
     </Stage>
   </Lens>;
 };

@@ -1,12 +1,12 @@
 #!/bin/bash
 # HKBU SCIE1007 coursework science video. S3's third to fifth pieces: joins the take of shot q, lays the words on it with Remotion. k is 1 for 1080p, 2 for 4K. Run: bash cut_q.sh <work folder> [out] [k]
-export TEMP=D:/render_tmp TMP=D:/render_tmp
+export TEMP="${CUT_TEMP:-D:/render_tmp}" TMP="${CUT_TEMP:-D:/render_tmp}"   # CUT_TEMP: another temp folder, when D:/render_tmp is not writable
 W="$1"
 ROOT="D:/。hkbu/molecular science"
 HERE="$ROOT/镜头设计_v3/styleframes/art/fusion/s1/inserts"
 A="$ROOT/镜头设计_v2/tests/T4_remotion/src/v3/fusion"
 K="${3:-1}"
-REVIEW=$([ "$K" = 1 ] && echo true || echo false)
+REVIEW=${REVIEW:-$([ "$K" = 1 ] && echo true || echo false)}   # REVIEW=false drops the script line
 OUT="${2:-$HERE/S3_q_${K}.mp4}"
 PUB="$W/q_public"
 mkdir -p "$PUB/fusion_s1"

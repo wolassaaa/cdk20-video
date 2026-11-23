@@ -1,0 +1,348 @@
+<!doctype html><meta charset="utf-8"><title>00_下次开工</title><style>body{font-family:"Microsoft YaHei",sans-serif;max-width:900px;margin:24px auto;padding:0 16px;line-height:1.7;color:#222;background:#fff}
+table{border-collapse:collapse;margin:12px 0}td,th{border:1px solid #ccc;padding:6px 10px}th{background:#f2f2f2}
+code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1px solid #ddd;padding-bottom:4px}a{color:#0a58ca}</style><h1>▶ 11-14 起先看这里（韩国时间）</h1>
+<p><strong>11-17 02:50（韩国时间）词→画面映射第一阶段完成（导演 11-16 23:30 意见）：全片总表 <code>映射/master_v1.json</code>（70 段、243 句、2055 词，词时间在 cut_v8 声音里实测，逐词误差 ≤0.011 帧；538 个事件），读表入口 maplib.py / bl_maptable.py / T4_remotion/src/v3/map/mapTable.mjs，检查 check_master.py、frame_integrity.py、verify_render.py。说明和验收结果看 <code>映射/README.html</code>，每句覆盖和未决项看 <code>映射/覆盖与未决_v1.html</code>。cut_v8 里按表原生生成的画面只占说话时间 0.1%：画外音 40 段仍是旧动画变速，下一步是逐段写 <code>映射/events/&lt;段&gt;.json</code> 原生出片（导演挑方向后再做，不批量重渲）。第二阶段（事件表格式、beats_v8 迁移、validate_events/resolve）由 claude-6d 会话按文件分开在做。新动效概念提案：<code>审片/总管/动效概念提案_20261117.html</code>。</strong></p>
+<p><strong>11-15 01:20 导演定优先级：4K 先不出，先把 1080p 完全打磨好再说 4K。问题不能等导演一个个挑：标准在 <code>审片/导演标准_审片用.md</code>，全片问题清单在 <code>审片/</code>（4 个审片员分段出，总管汇总成 <code>审片/问题清单_v1.md</code>），按必改→应改的顺序改完再请导演看。</strong></p>
+<p><strong>11-15 01:00 导演（说过多次，这次必须改）：粗剪 1:02（1-08 开头）三张棕色人形纸卡沿红线滑走——不是三人同框就删掉这个特效。同类还有 2-05 开头清单旁一张、2-08 总览里两张。来源：三维台面 S1S2_table_2 / S1S2_notes_2（<code>styleframes/art/fusion/s1/inserts/bl_inserts.py</code>）。做法：从场景里删掉所有人形纸卡，重渲受影响的帧段；空出来的时间按声音裁掉。不要再把它们叫"照片占位"。</strong></p>
+<p><strong>11-15 00:50 导演再定一条：画面明显比声音快，内容要和声音对上。以声音的时间为基准；声音（空白、长停顿）和画面都要裁。做法：每段做锚点表（第 2 步词级时间 → 画面事件），画面按锚点重新对时（Remotion 段按词时间重渲；三维台面段在锚点之间变速或重渲），不许再用"末帧停住"补时长。</strong></p>
+<p><strong>11-15 00:40 导演看粗剪 v3 再否两条：① 音画不对，人还没露出来声音就出来了（实测：开头墨还没退完就开口，4-04 声音比人早 1.3 秒；28 段里 20 段墨在最后一个词说完前 0.1–0.5 秒就盖上来）；② 转场太生硬、卡：墨盖满后全黑停约 0.5 秒再硬切到浅色动画，回来时又闪一下黑。硬规则：人完全露出后才开口、说完才起转场；浅色画面之间不许有黑场。检查脚本 粗剪/_check/sync_check.py，接点帧条 粗剪/_check/tr/tr.jpg。转场和动效一起重新设计。</strong></p>
+<p><strong>11-15 00:20 导演看了出镜 28 段一览：出镜动效太简单，现有的全部不行（oncam2 的 S12/S34/S58/V2 都算）。不要再在 v2 上修，动效侧要重新设计得更丰富；人物位置和细胞底没被否。先请 Fable 给方向，做几段试片给导演看，过了再铺 28 段。</strong></p>
+<p>HKBU SCIE1007 课程作业的科普视频。导演 11-14 下午出门，总管自主干到 23:00。
+接手先读 <code>镜头设计_v3/自主工作_20261114.md</code>：任务清单、决策记录、当前进度都在里面；后台任务看 <code>_env/jobs/*.log</code> 和 <code>watchdog.log</code>；出镜新版式规则见 <code>镜头设计_v3/script/出镜新版式_v1.md</code>。
+22:45 收工：粗剪 v3 18:12 缺录音 0（动效 v2 接入）；导演清单 导演回来看_20261114.md；GLM 粗剪复查因中转站 502 未成。下一步：查中转站→分段重查；4K 试跑；今天改的代码和文档（cellbg.py、s5_place.py、build_cut.py、config.json、oncam2/V2.jsx、script/出镜新版式_v1.md 等）还没提交，提交前先 git diff 只挑自己的改动。
+旧 20:50 进度：人物位置全部重出、动效 v2 28 段导出、粗剪 v3 重拼 18:12（缺录音 0）；字幕样张 v2 做好；GLM 正在复查粗剪（_env/jobs/glm_cut4.log）。下一步：看 GLM 结果；导演回来看 自主工作_20261114.md 的 D4 清单。
+旧 18:50 进度：粗剪 v3 已按 Fable 收紧到 18:12（粗剪/流动性审片_Fable_20261114.md；build_cut 旧版 build_cut_v3a.py）；C 声音全过；stage3 重画 D→B→A 约 21:10 完；动效 V2.jsx 已去黑闪待导出。下一步：stage3 完 → 通知动效代理导出 28 段 → build_cut.py → GLM 复查。23:00 后不排。
+旧 16:50 进度：C 录音处理完、A 收边快完；stage3 排队重画全部人物位置（约 19:30）；动效 v2（src/v3/oncam2/V2.jsx）改完待导出。下一步：stage3 完 → 通知动效代理导出 28 段到 oncam2_beats（旧的改名 _v1）→ build_cut.py 出 cut_v3 → GLM 复查（时限放长）。
+旧 14:47 进度：28 段出镜动效都做完并验收（Remotion <code>src/v3/oncam2/</code>，样片在 <code>镜头设计_v3/粗剪/样片/</code>）；正在导出单段成片到 <code>镜头设计_v3/粗剪/oncam2_beats/</code>，下一步改 build_cut.py 用它们出粗剪 v3；edges 任务收边后需再导一遍。</p>
+<h1>下次开工 · 2026-10-31 收工时写</h1>
+<p>HKBU SCIE1007 课程作业的科普视频，这里记导演今天定的事和下次要做的事。</p>
+<h2>最先做：定全片主基调</h2>
+<ul>
+<li>11-01 晚：艺术方向按评分标准重做，导演选白底融合细胞内景（<code>fusion</code>），六张静帧已出，下一步动态试片和真人试接。见 <code>镜头设计_v3/styleframes/art/05_结论.md</code></li>
+<li>11-02：<code>fusion</code> 的 S1 动态试片 v2 已出（2:21，1080p60，无声），接缝、遮挡和蛋白接管口已修。导演看后认可，用时见 <code>镜头设计_v3/工作记录.md</code>，说明见 <code>镜头设计_v3/styleframes/art/fusion/s1/README.md</code></li>
+<li>11-02 清晨：S1 第三版（含药物）和 S2 第一版都出了，1080p60。TouchDesigner 接手 W2、4-07、W3、4-10 四场，4K 成片已出，节拍等歌到再对，见 <code>镜头设计_v3/td/TD_接手方案.md</code>。当晚的进度看 <code>镜头设计_v3/排片表.md</code>。</li>
+<li>11-02 上午：S1、S2 全片 4K 出了，<code>fusion/s1/S1_fusion_4k_v2.mp4</code>、<code>fusion/s2/S2_fusion_4k_v1.mp4</code>，全部帧已查。S3 三张测试板在 <code>fusion/s3/stills/</code>，3-03 直接用 F3。S3 的台面、钥匙滑入和 CDK20 剪影还没渲。<code>bl_shots.py</code> 的 f3 已能传钥匙位移，下一步先出 3-02 的三个位置看效果。</li>
+<li>等导演：把四首歌放进 <code>镜头设计_v3/assets/music/</code>，W3 和 W2 才能对拍重录。</li>
+<li>11-02 中午：不用的文件挪进了 <code>D:/。hkbu/_待删_20261102/</code>，共 56 GB，39,619 个文件，清单在里面的 <code>清单.txt</code>。D 盘要导演把这个文件夹删掉才会腾出空间。</li>
+<li>11-02 中午：导演说 S1、S2 更像 PPT。只动镜头的测试被否，说只是更高级的幻灯片。TD 物质测试也被否，说乱、燥，不如现版，记录在 <code>styleframes/art/fusion/s1/motion_test/</code>。现版留着，不重做。导演同意试插入镜头：现版不动，在长停顿处硬切进 2–3 秒真 3D 低机位特写。第 33–47 秒的药片、药瓶、十个人三个镜头已出，片子和实测在 <code>styleframes/art/fusion/s1/inserts/</code>，等导演看片。S3 的动态等这一步定了再做。租算力先不租。</li>
+<li>11-02 下午：导演说转场还可以更有创意，又提了相纸不能压图、<code>schematic</code> 标不好看。第二版 <code>styleframes/art/fusion/s1/inserts/inserts_25_52_v2.mp4</code> 已出，等导演看片：镜头落到同一张台面，东西站起来，升回去时躺回全景，不再硬切。相纸只有 0:25–0:31 压到肝，已改。斜线标全删，示意场景在出处行写 <code>Illustration ·</code>。这一版还没并进 S1，S1、S2 的 4K 成片是旧相纸和旧标。导演点头后才铺到其他长停顿、重出 4K、开始 S3 动态。</li>
+<li>11-02 傍晚：台面镜头铺到 S1、S2，新增路线 78.8–94.8 秒、样本管 146–152.9 秒、文献卡片 224.5–235.4 秒。Blender 一律 4K、16 采样，2778 帧已渲完并核对。导演看完这一版只提了字体，选了方案 C：整句改用 Instrument Serif，重点词斜体加红下划线，规矩写在 <code>styleframes/art/fusion/方向说明.md</code>。审片版 <code>styleframes/art/fusion/s1/inserts/S1S2_table_1_v3.mp4</code>，1080p，等导演看片。看完没问题再跑全片 4K：<code>bash cut.sh &lt;工作文件夹&gt; &lt;输出&gt; 2</code>，Blender 全停后跑，估约 1 小时 15 分。然后才开始 S3 动态。</li>
+<li>11-02 晚：导演看完第三版通过。全片 4K 已出，<code>styleframes/art/fusion/s1/inserts/S1S2_table_2.mp4</code>，16980 帧，380 MB，不带顶部台词行，用时 57 分 21 秒。英文字幕定为单独的 SRT 文件，不压进画面，等真录音到了再对时间，排在 11-20 至 11-24。下一步是 S3 动态。</li>
+<li>11-02 深夜：S3 动效改成一条一条做，导演逐条把关，通过才做下一条，真人素材和组员名字后放。第 1 条锁和钥匙（04:43–05:12）审片片已出，<code>styleframes/art/fusion/s1/inserts/S3_lock_key_1.mp4</code>，1080p，等导演看。分条和重现方法见同目录 <code>README.md</code>。通过后做第 2 条 CDK20 剪影。</li>
+<li>11-03：第 1 条第二版导演通过，钥匙改成从上方落下，修掉穿模。下一步第 2 条 CDK20 剪影。导演另提一个接音乐的想法：锁做得弯弯绕绕，钥匙像密码破译器一样疯狂变形，最后“嘣”一下找到对的那一把。提议变形放 W3、“嘣”放 W4，因为 4-12 说 docking 只是线索，第一轮 001 也只是弱命中。落点等导演定，W3、W4 都要等歌到了才能对拍。导演 11-03 定了这个落点。</li>
+<li>11-03 凌晨：第 2 条 CDK20 审片片已出，<code>styleframes/art/fusion/s1/inserts/S3_cdk20_1.mp4</code>，等导演看。通过后做第 3 条 52 支样本管。</li>
+<li>11-03 清晨：导演睡前让我把要渲的挨个渲到 8 点。第 1、2 条出了 4K，第 3–5 条做完并出了 1080p 和 4K，整段 S3 接成 <code>styleframes/art/fusion/s1/inserts/S3_all_1.mp4</code>（1080p）和 <code>S3_all_2.mp4</code>（4K）。等导演看第 2–5 条，通过后并进全片时间线。</li>
+<li>11-03 晚：导演看完 S3 提了四处要改。① 第 1→2 条转场：镜头冲进蓝锁、整屏蓝、再从 CDK20 表面退出来，不连贯；改成镜头不动，钥匙原路抽出，同一把锁就地鼓起变成 CDK20，锁孔落在 ATP 口袋。② 1:59 <code>expensive, slow, difficult</code> 出格子，要分行或挪到空白处。③ 第 5 条格子里的孔形太简单，看不出难；改用真实模型 ATP 口袋的切面轮廓，以后钥匙变形那段也用它。④ 字体改手写体，多种搭配。6 个 OFL 手写体已下到 <code>remotion_public/fusion_s1/fonts/</code>（许可证 <code>OFL_*.txt</code> 同目录），三套全手写样张 A–C 导演看后说差一点，还是喜欢原来的罗马体（像 Times New Roman 那样正式），手写只当批注，像做笔记时标上去。于是出了 D（批注用 Caveat）、E（批注用 Kalam）：正文、数字、重点词照旧 Instrument Serif，手写只用在箭头旁注、标签和圈数字，等导演挑。出处行留 Inter Tight；手写体没有 <code>→</code>，箭头要画成笔画。字体定了用到全片，只重出 Remotion 层，全片 4K 约 3.7 小时。</li>
+<li>11-03 深夜：导演选 D（Caveat 批注）。四处改动都已动手：① 新 shot p（312.0–330.0 秒）钥匙抽出、同一把锁就地鼓成 CDK20，4K 在渲（<code>render_p.sh</code>）；② 1:59 那句拆成四行，放进 CDK20 左边那格（<code>patch_q.py</code>）；③ 格子里的锁孔换成 CDK20 预测模型 ATP 口袋的真实切面，虚线表示没人测过，生成方法在 <code>styleframes/art/fusion/s1/inserts/pocket_outline.py</code>，能看到它的 q 帧用 <code>render_qk.sh</code> 重渲；④ <code>entry.jsx</code> 加了 <code>Note</code> 组件，S3 里的无衬线标签都改成 Caveat 手写批注，箭头画成笔画。11-04 02:24 审片片已出，<code>styleframes/art/fusion/s1/inserts/S3_all_1.mp4</code>（1080p，129 秒），锁变模型最后 19 帧叠化进真模型，去掉了一跳。导演 11-04 02:28 看后通过。</li>
+<li>11-04 凌晨（导演睡前让我做到 7 点）：S3 4K 出了，<code>S3_all_2.mp4</code>，129 秒；第一次压出来第 2 条整段放大一倍（4K 下 take 视频没定尺寸），修好重剪，帧差扫过。S1、S2 的 17 个小标签也改成 Caveat 批注，审片片 <code>styleframes/art/fusion/s1/inserts/S1S2_notes_1.mp4</code>（1080p），4K <code>S1S2_notes_2.mp4</code>，旧版 <code>S1S2_table_2.mp4</code> 没动，等导演看。S4 升级想法写在 <code>styleframes/art/fusion/s4/S4_升级想法.md</code>，五点，推荐先做前三点；第 1 点出了动态试片 <code>s4/W2_beads_test_1.mp4</code>（1080p，25 秒）；第二版 <code>s4/W2_beads_test_2.mp4</code> 改成开头接 S3 最后一帧的空格子和虚线锁孔，珠串从上方放进格子盘起来，盖住的虚线才藏，提起后露回来。S1S2 4K 已核：和 1080p 比只差顶部台词行，帧差最大是 35.3 秒设计好的落瓶。第 2、3 点也出了试片 <code>s4/W2_tail_test_1.mp4</code>（12 秒）：镜头推近红尾巴，剪断，整条往上提出、荡到右边一格放进去盘起来；和 W2 第二版接成 <code>s4/W2_then_tail_test_1.mp4</code>（37 秒）。等导演挑。</li>
+<li>11-04 上午：导演看了 37 秒的珠串试片说看不懂，珠子这个比喻不好理解。改成导演提的“AI 一遍遍猜 CDK20 的形状”：有把握的部分定住变蓝，没把握的尾巴一直晃、横在锁孔上，最后剪掉。台词只改 4-01 B 画外音两句（剧本里珠子只在这里出现），导演同意可以改，要小改、这周改完。6 格分镜草图 <code>styleframes/art/fusion/s4/W2_storyboard_1.jpg</code>（脚本 <code>storyboard_w2.py</code>），导演看懂了；同样 6 格的 3D 静帧 <code>s4/W2_stills_1.jpg</code>（<code>bl_inserts.py</code> 镜头 v，拼图 <code>stills_w2.py</code>），尾巴用 303–346 自己的表面（<code>make_cdk20_mesh.py frames/cdk20_tail.npz 346 303</code>），因为是 Arg305 的侧链伸进口袋，只画主链看不出堵住。等导演看。珠串试片留作对照。</li>
+<li>11-04 中午：S4 开头动态试片 <code>styleframes/art/fusion/s4/W2_guess_test_1.mp4</code>（42.5 秒，1080p30，无声；<code>bl_inserts.py</code> 镜头 u，压片 <code>take_u.py</code>）。从 S3 最后一帧接：字母走进格子，三个半透明的猜法一直变，合成一个，大部分变蓝定住，尾巴变红一直晃（三种晃法，每种都测过不碰本体），推近，尾巴停在锁孔上，剪断，收紧成一根管子，顺着自己原来的走向抽出来，挂着移到右边一格盘起来。4-01、4-02 在试片里只留 1 秒。路径和每帧检查在 <code>u_path.py</code>：管子离本体原子最近 3.31 Å，管子自己不相碰，键长最多拉长 1.6%。弱点：推近那段看不出锁孔被堵，要靠批注；抽出来时尾巴有一段出了画面上边；虚线锁孔在 18.8 秒一下子消失。</li>
+<li>11-04 12:40：导演看了第一版说继续。第二版 <code>s4/W2_guess_test_2.mp4</code>：剪下的尾巴改成从低处翻过本体，最高 0.60，爬进右边一格盘成平的一圈，全程在画面里（路径 <code>u_path_2.py</code>，数据 <code>frames/u_tail_2.npz</code>；管子离本体原子最近 3.39 Å，自己最近 3.44 Å，键长不拉长）；字母放大、走慢；主猜法更实，另外两个更淡；虚线锁孔一段一段地消失，不再跳。第一版和 <code>u_tail.npz</code> 留着。还剩：推近那段的锁孔要靠 Remotion 批注；4-01 台词等导演定。</li>
+<li>11-04 12:45：导演看了第二版，说变化太慢、输入不够有意思，要改成老虎机：容器窗口里先是问号，转到 CDK20 停下；红尾巴由一只虚拟机械手夹住、猛晃、扯下来，扯下来变成一根线。8 格平面分镜 <code>s4/W2_storyboard_2.jpg</code>（脚本 <code>storyboard_slot.py</code>）：序列从投币口喂进去，拉杆，转轮飞快地转，停在 CDK20 上变蓝，尾巴还是一团红在转，盒子升走，推近，机械手夹住、晃、扯下，挂成直线。转轮里转的是 CDK20 自己的各种猜法，不放别的蛋白（AlphaFold 是算出形状，不是从一堆里挑）。等导演看，看懂了再做 3D。</li>
+<li>11-04 12:53：导演说老虎机那种平面盒子不对，容器要是 3D 的，像科幻电影的培养罐，在罐里猜，最后开罐露出 CDK20。W2 的歌定为 Daft Punk《Harder Better Faster Stronger》（剧本音乐表里还写着 Emerald Rush，等歌到了再改），罐里的形状跟着拍子一拍换一个。6 张 3D 静帧 <code>s4/W2_tank_stills_1.jpg</code>（<code>bl_inserts.py</code> 镜头 t，批注 <code>stills_tank.py</code>，原图 <code>s4/stills_t/</code>）：罐里悬着问号，序列从顶上进料管送进去，猜，定住（蓝和红），排液、玻璃罩提走，开罐。罐子比格子宽，所以站在一块搭在格子红边框上的玻璃底板上，不压边框，锁孔从玻璃底下透出来。机械手那段还没做 3D。等导演看。</li>
+<li>11-04 13:05：导演说罐子不够科幻、不够有意思，字母飘进去怪。要：问号像抽真空一样被抽走；罐里 CDK20 疯狂成形、一直抖；罐子底下加老虎机转轮，从问号一直转到 CDK20；先朦胧（蒸汽），慢慢变实体；拿开罐子时砰一下喷出气。<code>bl_inserts.py</code> 镜头 r 已写（雾、抽真空、抖动用运动模糊、底座转轮、开罐喷气），只出了半尺寸试渲 <code>s4/W2_tank_test_2_rough.jpg</code>。下次要改：雾太浓，第 2、3 张看不见形状；转轮盒子被画面下边裁掉，镜头要往下或拉远；最后一张喷出的气盖满画面，要小一点、淡一点；还没加批注。外观上导演说我理解的科幻和他不一样，等导演给参考图。</li>
+<li>11-04 14:14：导演说老虎机不能只有一个转盘，要写实，把概率应证在轮盘上；培养罐和机器太粗糙。<code>bl_inserts.py</code> 镜头 s（第三版）：罐盖分层加螺栓和状态灯，四根支架和罐盖一起提走，两根软管，管上有阀门；底座正面是四轮老虎机，四段 1–100、101–200、201–302、303–346，转轮停在 AlphaFold DB v6 每段的平均 pLDDT：87、92、95（蓝），47（红），拉杆拉下才转。静帧在 <code>s4/stills_s/</code>，批注拼图 <code>s4/W2_tank_stills_3.jpg</code>（<code>stills_slot_tank.py</code>）。还没做：第 3 张雾里的猜法偏灰，看不太清；软管在开罐时直接消失；机械手还没上 3D；外观等导演看。</li>
+<li>11-04 14:29：导演看第三版说罐顶不好看、不够科幻帅气，没有设计感，让我怎么帅怎么来。<code>bl_inserts.py</code> 镜头 n 出了四个造型方向，都停在定住那一拍：A 白色硬件、B 深色机甲（散热片、橙光、线缆）、C 悬浮光环玻璃胶囊、D 六角舱。罐子改高改瘦，中心对准模型最小外接圆 (127.03, -2.35)，老虎机做成斜靠在底座前面的控制台。静帧在 <code>s4/stills_n/</code>，拼图 <code>s4/W2_tank_looks_1.jpg</code>（<code>sheet_tank_looks.py</code>）。我自己看 B 最像科幻，A 的顶还是有点像瓶盖。等导演挑一个，再把抽真空、雾、转轮转、开罐喷气、机械手搬到选中的造型上。</li>
+<li>11-04 14:42：导演说四个造型都丑，让先看科幻片的培养罐。参考和共同点写在 <code>s4/培养罐参考.md</code>（只学造型，不放进片子）。<code>bl_inserts.py</code> 镜头 o 照参考重做：直玻璃管两头藏进上下两个高壳子（分缝、发光方块、通风口），一根吊杆加一圈圆环和四只机械臂夹住顶壳，背后三根线缆，罐里发青光的雾、气泡、后面一根竖灯条，老虎机做成右边伸出的一块屏；W2 里台面灯暗到 5%，一盏只照蓝红形状的白光（灯光链接）保住颜色。静帧 <code>s4/stills_o5/</code>（14:54 从提交 73ee68d 重渲，因为第六版写进了同一个文件夹），拼图 <code>s4/W2_tank_5.jpg</code>（<code>sheet_tank_o.py</code>）。还没做：老虎机屏在正面远景里太小、看不清数字；雾里红尾巴偏暗；动作（抽真空、转轮转、开罐喷气、机械手）等导演认了造型再上。</li>
+<li>11-04 14:56：导演说顶上只插一根管子怪，要多插几根；老虎机放到罐顶，拉杆一拉，咕噜咕噜，上面的转轮转。镜头 o 第六版：吊杆去掉，圆环由四根吊杆吊着，罐顶后半边伸出 8 根粗细不一的管子和线缆，往后往外散开；老虎机坐在罐顶的一个高底座上，高过圆环，转轮从里面发光；拉杆装在底座右前方。静帧 <code>s4/stills_o6/</code>，拼图 <code>s4/W2_tank_6.jpg</code>（<code>sheet_tank_o6.py</code>）。动作（拉杆、冒泡、转轮转、开罐、机械手）还没做。</li>
+<li>11-04 15:19：导演说定了，做动作。镜头 m 是第一段（06:52 起约 19.5 秒）：台面灯暗下去，罐子落到格子里，底座拉杆拉一下，罐里冒泡，"?" 被吸进罐顶，形状跟着 123 BPM 的拍子乱变，四个转轮依次停在 87、92、95、47，形状定住，尾巴变红一跳一跳地亮。试片 <code>s4/W2_tank_motion_1.mp4</code>（半尺寸 30 fps，<code>take_m.py</code> 编码）。下一段：雾散、灯亮、开罐喷气、机械手夹尾巴。拍子等歌到了换成真的。</li>
+<li>11-04 17:52：导演看了培养罐动作说丑，培养罐不做了（镜头 m、o 留着当旧版）。新镜头 j（约 17.6 秒，123 BPM 拍子）：S3 空格子里的虚线轮廓第 4 拍突然从台面蹦起来（先扁后拉长再弹回），在空中每拍换一个灰色猜测、翻滚、半拍一抽，越来越蓝越来越稳；第 28 拍定成真的 CDK20（核心克莱因蓝），第 29 拍尾巴变红，之后尾巴的几种摆法每拍闪一下；第 30 到 34 拍飘回格子，接 4-01。试片 <code>s4/W2_jump_motion_1.mp4</code>（<code>take_j.py</code>）。下一步看导演意见；尾巴剪掉那一下还没做。</li>
+<li>11-04 18:07：导演看了镜头 j 说变化不够流畅，要像磁流体，这里突出一下那里突出一下。新镜头 l（<code>shot_j(ferro=True)</code>，镜头 j 留着）：蹦起来和落回格子跟 j 一样，空中的形状换成一团黑色镜面液体：表面抹平（扩散平滑 1500 步再放回原大小），每半拍在随机一块地方鼓起来长尖刺（0.2 秒起来、约 1 秒落下，前后重叠），拍子上尖刺一抖，下面一层慢波一直在动，整体平滑翻滚；第 20 拍起越来越稳，颜色从黑变克莱因蓝，表面变回真实形状，第 28 拍接上真的模型。试片 <code>s4/W2_ferro_motion_1.mp4</code>（<code>take_l.py</code>）。</li>
+<li>11-04 19:15：导演说不一定要尖刺，要靠液体快速流畅地变。新镜头 e（<code>shot_j(ferro=True, spikes=False, meta=True)</code>，镜头 j、l 留着）：空中的形状是一个 metaball，346 个残基每个 CA 一个球；液体时球放大 1.5 倍、往里收一点，融成一整团黑色镜面液体，六个大鼓包绕着表面滑、各自鼓起落下，每半拍一处鼓出来，下面一层宽波；第 20 拍起球回到各自残基、缩回原大小、变克莱因蓝，第 28 拍换成真的模型时轮廓几乎一样。网格上直接抹平的做法不行：蛋白中间有个穿通的洞，抹平后那里起皱。试片 <code>s4/W2_liquid_motion_1.mp4</code>（<code>take_e.py</code>）。</li>
+<li>11-04 19:16：导演定了镜头 e（液体版），说“对，就这个”。S4 开头往下就用它。接下来：尾巴怎么去掉（原来的机械手跟着罐子没了，要重新想）；歌到了以后把 123 BPM 的拍子换成真的鼓点；最后出 4K。</li>
+<li>11-04 21:03：导演选了尾巴的方案 3 甩掉。新镜头 d（<code>shot_j(..., shake=True)</code>，镜头 e 留着），全长 1099 帧（18.3 秒，还在 W2 的 25 秒里）。第 28 拍定形、第 29 拍尾巴变红闪，和镜头 e 一样；第 30 拍尾巴化回红色液体（每个残基一个球），先从口袋里流出来、聚到外面离保留部分 8 Å 的地方，本体反向蓄力扭 22 度；第 31 拍甩：每秒约五下、越甩越小，液体从尖端开始脱开，沿一条平滑弧线（离开时的速度接上落下的水滴）飞进旁边一格（cell 23），第 32 拍摔下去摊开，第 33 拍收成 u_path_2 的那圈，一拍后换成镜头 u 的红管子；本体第 32 到 36 拍落回自己的格子，口袋空着。镜头在甩的时候退远，空中的本体和旁边一格都在画里，最后落到两格都看得到。每帧检查：甩出去的液体离保留部分的 CA 至少 8.9 Å，飞行时离台面至少 0.09。试片 <code>s4/W2_shake_motion_1.mp4</code>（<code>take_d.py</code>）。等导演看。</li>
+<li>11-04 21:16：导演说甩的幅度和震荡感不够强。镜头 d 第二版：扭 50 度（原来 22 度），周期 0.18 秒，衰减 0.55 秒，加绕尾巴方向前后摆 18 度、蓄力下蹲、每甩一下跳一下、镜头跟着震；液体往外甩的速度从 2.5 加到 4，离本体仍在 9 Å 以上。试片 <code>s4/W2_shake_motion_2.mp4</code>，第一版 <code>W2_shake_motion_1.mp4</code> 留着。等导演看。</li>
+<li>11-04 21:18：导演定了镜头 d 第二版（<code>s4/W2_shake_motion_2.mp4</code>），说“可以了”。W2 的开头和去尾巴就用它。接下来：歌到了以后把 123 BPM 的拍子换成真的鼓点（甩的那一下卡重拍）；补一句画外音或批注，说尾巴原来堵着口袋（甩掉这一版画面上看不出来）；最后出 4K。</li>
+<li>11-04 21:58：歌放进 <code>镜头设计_v3/音乐/原曲/</code>（只在本地）。导演说纯音乐窗口加中英押韵字幕，直接烧进画面，要对节奏和音节，信达雅。测了拍子（<code>音乐/beat_scan.py</code>，HBFS 123.48 BPM）：HBFS 从 4.29 秒起的 25 秒正好对上镜头 d，主旋律进来对上蹦起来，低音砸进来对上尾巴摔下。W2 字幕第 1 稿在 <code>音乐/W2_押韵字幕.md</code>，等导演看词。之后要做的：镜头 d 改成 123.48 BPM 并对准歌；落地后多停 7 秒补满 25 秒；用 Remotion 把字幕叠上去；导演听一遍 4–30 秒确认没有人声。</li>
+<li>11-04 22:20：导演说词可以，做上屏；又说字幕不用固定在一个地方，可以飘着。出了带歌的 <code>s4/W2_lyrics_1.mp4</code>（1080p 30 fps，画面是半尺寸放大，25.3 秒）。镜头 d 第 3 版按 123.477 BPM 重排，长 25.3 秒。歌从 5.732 秒起：第一帧主旋律进来，第 32 拍尾巴摔下时低音砸进来。字幕用 Remotion 合成 <code>W2Lyrics</code>（<code>src/v3/fusion/entry.jsx</code>），8 句各有位置、会飘，标签和来源行在右下角；整条流程 <code>styleframes/art/fusion/s1/inserts/render_w2_lyrics.sh &lt;帧目录&gt; &lt;输出&gt;</code>。等导演看。待办：导演听一下 5.7–31 秒有没有人声；剧本音乐表的 W2 改成 HBFS（要导演点头）；最后出 4K。</li>
+<li>11-04 22:42：导演说字幕跟着人声走，没人唱就不放；原曲 53 秒才开唱；歌从 50 秒左右起；简单一点，不要尬，用手写体。W2 字幕第 2 版 <code>s4/W2_lyrics_2.mp4</code>（第 1 版留着）：歌改从 50.446 秒起，开唱那小节落在第 4 拍蹦起来。把开唱前的四小节伴奏从后面减掉，看出这段唱了三段、每段两小节（第 4–11、20–27、36–43 拍），只在这三段放字：猜它 捏它 翻它 转它 / Guess it, squeeze it, twist it, turn it；慢了 稳了 定了 蓝了 / Slower, calmer, firmer, bluer.；没准？甩掉！留下核心 / Not sure? Shake it! Keep the core. 每个词在原曲唱的那拍上墨。中文方正舒体，英文 Caveat。代价：低音砸下不再落在尾巴摔下那拍。详细在 <code>音乐/W2_押韵字幕.md</code>。等导演看；剧本音乐表 W2 还写着 Emerald Rush，导演认了再改成 HBFS。</li>
+<li>11-04 22:48：导演说手写体不好，字幕本身挺好。第 3 版 <code>s4/W2_lyrics_3.mp4</code>：词、拍点、位置不变，字体换回全片的 Instrument Serif 和 Noto Serif SC，每段最后一个英文词斜体。第 2 版留着。等导演看。</li>
+<li>11-04 22:57：导演说红尾巴甩得太快，要多甩一会、卡拍。镜头 d 第 4 版，带字幕和歌出 <code>s4/W2_lyrics_4.mp4</code>（第 3 版留着）：尾巴红着闪到第 32 拍才化成液体，第 33 拍蓄力，第 34 拍起甩，每个八分音符转到头一次（原来每秒约 5.5 下，现在约 2 下），甩到第 39 拍后四分之一拍甩飞，第 40 拍小节头摔进旁边一格，第 41–42 拍收成线；本体第 40–44 拍落回格子。这样"没准？"出来时正在甩，"甩掉！"之后甩飞，"留下"对上摔下，"核心"对上收线。甩出的液体离本体仍在 9 Å 以上。第 28.5 拍以前的帧和第 3 版一样，直接复用。等导演看。</li>
+<li>11-04 23:50：导演看了第 4 版说 good，W2 定稿：<code>s4/W2_lyrics_4.mp4</code>（镜头 d 第 4 版 + 衬线体字幕）。剧本里 W2 的音乐和画面说明已改成 HBFS 和现在的画面。导演让我定下一步：<strong>先往前推 S4 后半，不回头打磨。</strong> 理由和分条在 <code>styleframes/art/fusion/s4/00_S4后半简报.md</code>：有画面的只到 07:17，后面一半多还空着，离交片只剩 15 天。下一条是 4-01、4-02（07:17–08:00），接 W2 最后一帧。要导演先定 4-01 珠子那两句改不改（建议 "a chain of building blocks"），B 要在 11-12 前录。W2 的 4K 60 fps 和 S1S2 批注审片片放到批量里。</li>
+<li>11-05 凌晨（导演睡前让我做到 7 点，该卡拍的卡拍，自己排）：S4 后半第 1、2 条做完，等导演看。<strong>第 1 条</strong> <code>styleframes/art/fusion/s4/S4_401_test_2.mp4</code>（4-01，26 秒）和 <code>S4_402_test_1.mp4</code>（4-02，17 秒）：接 W2 最后一帧，本体变玻璃露出里面每个残基一块积木，线圈也变积木；光沿链跑、序列字母立起来；每块按 AlphaFold DB v6 的真实 pLDDT 上色。4-02 升到 S3 的格子上，实验测过的四个形状画实线圈，CDK20 的预测画虚线圈。<strong>第 2 条</strong> <code>s4/S4_piece2_test_1.mp4</code>（28.5 秒）：4-03 线圈积木再亮一次，尾巴的红色虚影沿 W2 抽出时的路径倒着走回口袋，Arg305 一块积木在口袋里亮；4-04/4-05 出镜留 7 秒字卡；回台面时虚影碎成积木飘散。4-03 单独一条 <code>s4/S4_403_test_2.mp4</code>。画外音时间都是按每词 0.4–0.45 秒估的，11-12 录音到了再对。镜头 i、i2、i3、i4（<code>bl_inserts.py</code>），叠层 S401–S403、S4B（<code>entry.jsx</code>），一条龙 <code>render_401.sh</code>。 <strong>第 3 条</strong> <code>s4/S4_loop_test_2.mp4</code>（4-06、4-07，41.5 秒）：CDK20 前一格的转盘带五样东西走试错循环，每个词转一格；4-07 地板亮成屏幕，转盘糊成光环再分成 42 个小环，光点飞到口袋再回来，最后钟的指针飞转。<strong>第 4 条</strong> <code>s4/S4_409_test_3.mp4</code>（4-09，17 秒）：口袋一带的真实表面变纸色加墨线框，红头针插到 Met84，筛子筛掉三张带红色基团的设计卡、剩下六张打分。镜头 lp、hz，叠层 S4C、S4D。W2 4K 60 fps 出了 <code>s4/W2_lyrics_4k60_1.mp4</code>。W3 的歌还没下载（要导演同意）。4-10 还没开始（04:25 写镜头代码时中断），下一步做它；设想是屏幕格上 98×91 = 8,918 个点、一个点试进口袋、波扫过打分、聚成 54 团、每团最好的一个升起、7 个重画成墨线卡。W3 接 4-10 时要把 4-09 的针收掉。</li>
+<li>11-05 11:40 导演看了早报，回了两条，都还没开始做（导演 12:00 带电脑走，显卡断开）。<strong>4-06/07</strong> 加一个人的表情：一个 3D 的 😵 emoji（X 眼、晕），放在转盘旁边；转盘越转越快时 emoji 开始分裂，越分越小。我的理解是接到转盘分成 42 个小环那一下，emoji 跟着分成一群小的；下次先出两三张静帧给导演看怎么接。脸自己画，不下载 emoji 字体。<strong>4-09</strong> 导演觉得呈现要改，还没说改成什么。我看到的问题：针只是一个小红点，看不出铰链；筛子是一大片透明圆盘压在小环上，卡片小、上面的分子看不清，划掉和碎屑都不显眼。备选 A：去掉筛子，口袋推近、Met84 处亮一个大红圈，42 个小环各冒一个小分子，带红色基团的闪红沉进屏幕，留下的长两根分数条。备选 B：保留针和筛子，镜头推近，卡减到 6 张放大，红叉加粗，碎屑掉得明显。下次先问导演选哪个，或者先出静帧。</li>
+<li>11-05 下午（导演没带显卡，笔记本上做了约一个半小时）：<strong>4-06/07 的 😵 emoji 做了第一版</strong>，在镜头 lp 里（<code>bl_inserts.py</code>，改前的备份在 <code>D:/render_tmp/bl_inserts_before_emoji.py</code>）。黄色小球放在转盘那格的右后角（放右前角会贴着画面底边和底部的笔记）：6.1 秒落下，笑脸，每个词点一下头；"every single round costs time and money" 两圈里头跟着转盘转，第一圈完眼睛变 ✕✕、嘴变小 o、头上绕三颗星，第二圈完侧身倒下；地板亮成屏幕时还躺着；20.8 秒转盘加速时弹起来开始分裂，五次一次比一次快、一次比一次小（1→32），24 秒左右转盘缩没的时候 32 个小的一个个消失。脸是自己画的，没下载 emoji 字体。查过：每个小球离转盘、格子边、硬币、钟都不碰（最紧 0.000），同一代两个小球不重叠（最近 8 mm）。审片片 <code>styleframes/art/fusion/s4/S4_loop_test_3.mp4</code>：只有 6–24.5 秒是新渲的，在笔记本的 Radeon 780M 上渲的 0.375 尺寸、12 采样，所以这一段比前后略糊；正式版要回到 5080 上重渲整条 lp（以及调用它的 hz）。同时修了 4-07 那个已知问题：推向钟、镜头绕到钟另一侧时，右下的角标和出处行淡出约 2 秒（38.6–41 秒），不再从小环上扫过。Remotion 的 lp 底片换成了带 emoji 的拼接版，旧底片留在 <code>remotion_public/fusion_s1/s4_lp_1_before_emoji.mp4</code>。4-09 还没动，等导演选方向。</li>
+<li>11-05 导演看了 <code>S4_loop_test_3.mp4</code> 又说：表情要一步步变，喜笑颜开 → 有点震惊 → 看不下去 → 悲伤 → 晕，随着转一圈，然后填满整个盘子。<strong>表情已做</strong>（<code>bl_inserts.py</code> 镜头 lp）：Imagine/Make/Test 笑眯眼大笑；"It fails" 瞪眼张嘴、眉毛上挑；Tweak/Try again 眼睛挤成 &gt; &lt;、嘴成锯齿、头别开一点；"every single round costs" 第一圈八字眉、撇嘴、左眼下一滴蓝泪；第二圈 ✕✕ 晕、三颗星、头只在这一圈跟着转盘转一圈，转完侧身倒下。每换一张脸弹一下。静帧对照 <code>styleframes/art/fusion/s4/S4_emoji_faces_1.png</code>（笔记本渲的）。<strong>"填满整个盘子"还没做</strong>：现在分裂出来的 32 个挤在右后角，要改成分裂后铺满转盘（我理解"盘子"是转盘；也可能是指后面亮起来的整块屏幕，下次先问一句）。铺满转盘要躲开转盘上五样东西，或者让东西先缩掉再铺；之后跟转盘一起转快、糊成那圈光。这一版还没出动画，要回 5080 上渲。</li>
+<li>11-05 导演定"盘子"是转盘。<strong>铺满转盘已做</strong>（静帧对照 <code>styleframes/art/fusion/s4/S4_emoji_plate_1.png</code>）：倒地晕着到 20.3 秒，跳起来落到转盘正中，同时转盘上五样东西在 1.2 秒里缩没（原来要到 22.4 秒才缩，现在提前给 emoji 让地方）；20.95 秒起分裂六次（2→4→8→16→32→64），一次比一次快，小球挂在转盘上跟着转、跟着转盘一起糊（运动模糊）；64 个铺满转盘后跟转盘一起压扁成那圈光，接 4-07 原来的光环和 42 个小环。每代的大小按同代最近的间距定，所以后两代比原来的公式小一点（2.2、2.1 cm）。查过：转盘上离边、离正在缩的五样东西（按各自真实伸出去的长度，扳手柄最长 12.5 cm）都不碰（最紧 0.000），同代两个最近 4 mm，跳的时候离东西顶上 10 cm，地上看着的位置离边 3.2 cm。这一版只有静帧，动画要回 5080 上渲整条 lp（顺带 hz）再合 S4C；改前的代码备份在 <code>D:/render_tmp/bl_inserts_before_plate.py</code>。</li>
+<li>11-05 22:13 回到 5080，整条 lp 重渲（1245 张，半尺寸 16 采样，两个 Blender 并行，约 8 分钟），合成出 <code>styleframes/art/fusion/s4/S4_loop_test_4.mp4</code>：五张脸、倒地、跳上转盘、铺满、糊成光环都在动画里了，等导演看。hz（4-09）不用重渲：那时 emoji 和五样东西早都没了。Remotion 的 lp 底片现在是这一版。</li>
+<li>11-05 22:35 导演又加：Chemistry42 的东西打到 CDK20、成功了，CDK20 就抖一下。<strong>已做</strong>（镜头 lp）：4-07 "invent... score them" 那段 48 个火花里打分好的（回来是蓝色的）有 7 个，每个碰到口袋时 CDK20 本体绕自己竖直的轴快速扭一下（最大 3.7°，0.35 秒停稳）再轻轻弹起 4 mm；绕竖轴转不会压进台面，只往上弹；最远一点横向最多动 1.8 cm，还在红框格子里；最后一次之后回到原位，hz 从同一个本体接。片中时间 30.5、32.1、32.5–32.9（连续 4 下）、34.5 秒。整条 lp 重渲合成出 <code>styleframes/art/fusion/s4/S4_loop_test_5.mp4</code>，等导演看。改前代码备份 <code>D:/render_tmp/bl_inserts_before_shake.py</code>。</li>
+<li>11-05 23:05 导演说抖得再大一点：改成每次最大约 12°、弹起 1.2 cm、0.5 秒停稳（摆得慢一点更看得清），时间不变。最远一点横向动 5.9 cm；查过离红框格子边最近 14.6 cm（不动时 15.8 cm），飞着的火花离正在抖的本体最近 1.8 cm（火花不跟着本体扭，逐帧查过）。整条 lp 重渲出 <code>styleframes/art/fusion/s4/S4_loop_test_6.mp4</code>，等导演看。</li>
+<li>11-05 23:30 D 盘只剩 4.8 GB，清了一次：<code>D:/render_tmp</code> 里有新版替代的帧（lp 前四版、今天 emoji 的测试帧、hz 前两版、u、d1–d3、几个小测试）、三个可重建的 Remotion 打包缓存、W2 的 4K 帧 d4k（W2 的 4K 60 fps 成品已编码），共 27.4 GB，<strong>搬到了 <code>C:/render_tmp_old</code>，没有删</strong>。D 盘现在空 31.5 GB，C 盘空 47.8 GB。留在原地的：lp6、hz3、d4、s401_bundle、S1/S2 的 4K 帧（<code>inserts/frames</code>，63 GB，是源帧）和模型数据。确认用不上后，<code>C:/render_tmp_old</code> 由导演自己删。</li>
+<li>11-05 23:40 导演说直接扔回收站：C 盘回收站上限 20.3 GB，一次放 27.4 GB 会让 Windows 把装不下的直接永久删掉，所以分两批。第一批 30 个文件夹 15.1 GB 已进回收站；<code>C:/render_tmp_old</code> 里只剩 W2 的 4K 帧 d4k（12 GB），等导演清空回收站后再扔。代码和文档本来就每步都推到 GitHub 了，帧和视频按规矩不进库。</li>
+<li>11-06 00:13 <strong>4-09 按导演选的 A 版重做完 3D</strong>（镜头 hz，改前备份 <code>D:/render_tmp/bl_inserts_before_hzA.py</code>）：不加新道具。口袋推近，铰链 Met84 那块真实表面发红光（画在表面上，不会穿模）；Met84 藏在裂缝深处，从原来那一侧完全看不到，搜了 400 个方向后改从另一侧（az −121°）推进去，4-08 后本来就是切镜。离开时升高过顶再转到屏幕。4-07 的小环各冒一个白色球棍小分子（41 个：4-07 的 0 号环和 17 号环叠在同一位置，4-09 里把 0 号收成一点；<strong>4-07 那版里这个叠环看着是一个带条纹的环，导演看后定要不要修</strong>）。11 个带红色基团的在 "reactive" 闪红，"toxic" 后缩小沉回自己的环，环变暗红；留下的在 "drug-like" 长第一根分数条、"easy to make" 长第二根，立在环右侧的缝里（放环后面会像从分子中间穿过去）。查过：分子离屏幕最近 2.0 cm、离环管 2.0 cm、相邻 6 mm，分数条离环管 2 mm、离分子 6 mm。叠层 S4D 已改（<code>entry.jsx</code>，备份 <code>D:/render_tmp/entry_before_hzA.jsx</code>）：红笔手画圈套住 Met84 那条红带、引线到 "must grip here"，屏幕段笔记挪到左上角空台面，口袋段先藏掉右上角标题（那时身子占满右上）。<strong>没合成出来</strong>：23:51 电脑非正常关机重启后，本机所有无头 Chromium 都不出动画帧，Remotion 载不进页面，连最小测试页也不行。先给导演看的是没笔记的 <code>styleframes/art/fusion/s4/S4_409_test_4_无笔记.mp4</code>，试帧 <code>s4/S4_409_A_stills_1.png</code>。帧在 <code>D:/render_tmp/hz4</code>，Remotion 底片已是新版；Chromium 好了以后只要跑 <code>npx remotion render D:/render_tmp/s401_bundle S4D &lt;out&gt;</code>（或整条 <code>render_401.sh D:/render_tmp/hz4 s4/S4_409_test_4.mp4 hz</code>）。</li>
+<li>11-06 02:33 导演重启后 Remotion 好了。<strong>4-09 A 版带笔记的审片片 <code>styleframes/art/fusion/s4/S4_409_test_5.mp4</code>，等导演看。</strong> 比 test_4 多改了：屏幕那段镜头往后瞄、放低（顶上留一条空台面放笔记、标题和出处，小环占下面大半）；出处行在屏幕段挪到右上标题下分两行，CDK20 不在画面里时角标不出；拉远时（14–16.5 秒）标题和出处先藏，全景停稳后回到右下，右下的出处也拆成两行，不压屏幕的角；"the hinge · Met84" 提前 1 秒印。帧在 <code>D:/render_tmp/hz4</code>（上一版帧在 <code>hz4_v1</code>，可清）。</li>
+<li>11-06 04:05（导演睡前让我做到 7 点）：<strong>4-09 改成钥匙版，审片片 <code>styleframes/art/fusion/s4/S4_409_test_12.mp4</code>，等导演看，先读 <code>镜头设计_v3/早报_20261106.md</code>。</strong> 新镜头 hk（<code>bl_inserts.py</code>，A 版 hz 不动，改前备份 <code>D:/render_tmp/bl_inserts_before_hzK.py</code>），Remotion 合成 S4K：CDK20 口袋的真实轮廓升起来、飞到屏幕后的锁孔板上，Met84 是锁孔壁上的蓝点；一把钥匙尖扣在蓝点上，九个环依次亮起、各冒出一把钥匙上传送带，过警告门，四把带红色基团的扔进桶；留下的每把身后两支管注满（深色 drug-like，浅灰 easy to make）。每版都给没看过文档的新代理盲看，满分 5：A 版 2，钥匙版 3、3、3、3.5、3、4。要导演定：换不换掉 A 版；红色和蓝色各用在三处，要不要换；Met84 为什么重要画面上看不出，靠画外音。分镜草图和计划在 <code>s4/4-09_好懂版_夜间计划.md</code>。</li>
+</ul>
+<p>10-31 的艺术方向探索已收齐，展示页 https://claude.ai/artifact/SvSzPLeWPQ9viL7JKf3krN （私有），结论和导演 11-01 的取舍在 <code>styleframes/art/05_结论.md</code>。</p>
+<p>导演否了日食，新标准是先把生物和科学展示出来，概念不能压过内容。留下手、举灯、马拉松热色，科学图像这组挺好，色即分子、光与当代装置、部分 3D demo 还可以。</p>
+<ol>
+<li>确认导演说"我们做的已经相当不错"是不是指旧作，这决定下一轮是新开一批，还是回到旧作上定基调。</li>
+<li>导演或组员拍一段 10 秒手机片：坐着说话，普通房间。有了就走一遍决赛方向的 T2，这是现在最大的未知。</li>
+<li>导演定路线图第四站的写法（<code>05_结论.md</code>"要导演定的"第 3 条）。</li>
+<li>主基调定了之后，M2 路线图、M4 数据卡、M3 出镜卡都按新基调重做。</li>
+</ol>
+<h2>已定</h2>
+<ul>
+<li><strong>PULSE 用 EEVEE。</strong> 导演看不出和 Cycles 的区别。</li>
+<li><strong>SPLAT 不走 Cycles。</strong> 效果好，但不值那个渲染时间。只有更快的办法成立才留。</li>
+<li><strong>SCAN、GROW 还没定。</strong></li>
+<li><strong>写提示和文档先说明是课程作业。</strong> 规矩写进了根目录的 <code>CLAUDE.md</code>，新对话会自动读到。</li>
+<li><strong>组里没人能审高深的化学。</strong> 读结构、审对接姿势不再派给组员。</li>
+</ul>
+<h2>SPLAT 快速版要导演看一眼</h2>
+<p>更快的办法已经有了：<code>styleframes/S1/v3_frontier/splat_fast/test_splat_fast.mp4</code>，显卡直接画。四组对比片里放的是 Cycles 版，所以这条导演可能没看过。</p>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>1080p 每帧</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cycles</td>
+<td>约 21 秒</td>
+<td>不用</td>
+</tr>
+<tr>
+<td>显卡直画</td>
+<td>渲染约 0.3 秒，后期约 1.7 秒</td>
+<td>待导演看</td>
+</tr>
+<tr>
+<td>显卡直画 4K</td>
+<td>估 0.5–1.2 秒</td>
+<td>没测过，这个数要等 bloom 搬进着色器</td>
+</tr>
+</tbody>
+</table>
+<p>和 Cycles 的差别：第 150 帧平均每像素差 1.33/255，血管略亮，黑色空洞略浅。</p>
+<h2>静帧 7 的结构，不用懂化学也能解决</h2>
+<p><code>assets/figures/fig5_smiles.json</code> 的七个结构今天做了两项检查，都过了：</p>
+<ol>
+<li>和论文 Fig. 5（<code>fig5_inverted.png</code>）并排看，连接方式一致。这是 Claude 目视比对。</li>
+<li>按结构算 [M+H]+，和论文补充材料里每个成品的 LCMS 实测值比对。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>化合物</th>
+<th>分子式</th>
+<th>计算</th>
+<th>实测</th>
+<th>差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>001</td>
+<td>C14H13N5O</td>
+<td>268.12</td>
+<td>268.0</td>
+<td>-0.12</td>
+</tr>
+<tr>
+<td>004</td>
+<td>C13H16N4O</td>
+<td>245.14</td>
+<td>245.1</td>
+<td>-0.04</td>
+</tr>
+<tr>
+<td>007</td>
+<td>C13H14F2N6O</td>
+<td>309.13</td>
+<td>309.2</td>
+<td>0.07</td>
+</tr>
+<tr>
+<td>009</td>
+<td>C13H15N5O</td>
+<td>258.13</td>
+<td>258.2</td>
+<td>0.07</td>
+</tr>
+<tr>
+<td>015</td>
+<td>C19H22N4O</td>
+<td>323.19</td>
+<td>323.1</td>
+<td>-0.09</td>
+</tr>
+<tr>
+<td>019</td>
+<td>C13H15N5O</td>
+<td>258.13</td>
+<td>258.2</td>
+<td>0.07</td>
+</tr>
+<tr>
+<td>025</td>
+<td>C13H13N7S</td>
+<td>300.10</td>
+<td>300.2</td>
+<td>0.10</td>
+</tr>
+</tbody>
+</table>
+<p>质谱只能确认分子式，分不出同分异构体，所以两项检查要一起看。分子式是手算后用脚本核的算术。这份转录的来历也要改口：<code>lead_notes_20261027.md</code> 只写"转录人是我们"，查不到是组员做的，台账已更正。</p>
+<p><strong>建议：</strong> 七个结构接进静帧 7，标 <code>structures redrawn from Ren et al. 2023, Fig. 5</code>。</p>
+<ul>
+<li>025 有一处还是要小心。论文 Fig. 5 在这里画了虚楔键，补充材料没写构型。按台账规矩画平，片尾注明立体化学从略。</li>
+<li>重画要 RDKit，这台机器现在的 Python 里没有，装之前要问导演。</li>
+<li>不想重画的话，可以直接用论文原图。论文是 CC BY，但这张图只有约 1400 px 宽，紫框也不在调色板里，4K 下会偏软。</li>
+<li>F15、048 的对接姿势没人能审。按排产表标 <code>OUR RE-DOCKING</code>，只当示意。想多一层保险可以问老师。</li>
+</ul>
+<h2>提交</h2>
+<p>Moodle 上限 1 GB（导演确认）。全片 17:43，1 GB 约等于 7.5 Mbps。全片 4K60 估约 2.4 GB，范围 2–3.5 GB：动画按实测的约 13 Mbps（S1 11.4、S2 6.3、TD 全屏 16–52），实拍约 2 分 20 秒，手机码率假设约 50 Mbps，素材到了要重算。所以 4K60 交不进 Moodle。</p>
+<p>导演定的做法：先出 4K 母版，再从它转码出 1 GB 以内的 1080p 交 Moodle，这一步不用重渲。高清原片的链接另外问老师，优先 OneDrive，YouTube 要先试音乐。跟老师说的是"Moodle 版按时交，4K 原片超限，想附链接"，不说"传不上去"，因为片子压得到 1 GB 以内。</p>
+<p>原方案是片子做好后问老师，能不能传 YouTube，交一份带链接的 PDF。有两件事要先想到：</p>
+<ul>
+<li><strong>格式。</strong> 课程写明的格式只有视频文件（.mov .mp4 .m4v .mpeg .mpe .mpg .avi .wmv .asf .3gp），没有 PDF。要拿到老师的书面同意，不然有不算提交的风险。不管老师怎么说，都备一份 1 GB 以内的 .mp4 传 Moodle。</li>
+<li><strong>音乐。</strong> 片子用商业歌曲，<code>research/music_curation.md</code> 第 6 节写了 YouTube 多半会静音或限制。不公开链接也一样会被扫描。尽早传一段带音乐窗口的测试片看结果，不行就要出一个换曲版。</li>
+</ul>
+<h2>授权</h2>
+<ul>
+<li><strong>BodyParts3D：</strong> 查清了。档案站授权页（最后更新 2025-02-27）写 CC BY 4.0，片尾写法：<code>BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International</code>。2011 版 README 和我们的 OBJ 文件头还是 CC BY-SA 2.1 JP，页面没写哪天改的。</li>
+<li><strong>Ren 2023：</strong> Europe PMC 记录为开放获取、CC BY。RSC 页面打不开，具体版本号没读到，片尾定稿前要在浏览器里看一眼。</li>
+</ul>
+<h2>马拉松重看已完成，等导演看</h2>
+<p>结果在 <code>research/marathon_refs_v2_20261031.md</code>。静帧 03、04、06、09 重做了一版，代号 M03、M04、M06、M09。</p>
+<ul>
+<li>先看 <code>styleframes/S2plus/stills/m/前后对比.jpg</code>，4K 版在 <code>stills/m/4k/</code>。</li>
+<li>第 6 节有七件事要导演定，其中最大的一件是其余 10 张要不要铺开。</li>
+<li>W2、W3 的动态还停在第一版静帧上，导演定了再改。</li>
+<li>M 系列已提交，第一版静帧没有删。</li>
+</ul>
+<p>规矩不变：只学方法，不用它的标志、字体、界面和素材。</p>
+<h2>屏幕数字要加大白话</h2>
+<p>已定。导演 10-31 看过 <code>styleframes/S2plus/stills/before_plain/前后对比.jpg</code>，说"按这版定"：三条规则、五句屏幕字、049 撤到脚注、M04 撤掉两个 pLDDT 数。定稿措辞在 <code>script/数字大白话_brief_20261031.md</code> 的"第一轮结果"。</p>
+<p>S07 到 S10、M09、M04 已改好。还没落到画面上的是 5-03 数据卡的 ± 说明，和 5-08 Kd 卡的 048 大白话、049 脚注，等做数据卡时放进去。其余静帧的数字要不要加，按三条规则走。</p>
+<h2>问老师（一条消息问完）</h2>
+<ol>
+<li>能不能传 YouTube，交带链接的 PDF，或者 Moodle 和 YouTube 都交。</li>
+<li>片中用商业歌曲的短片段，放在不公开的 YouTube 上是否可以。</li>
+<li>有没有时间帮忙看一眼 Fig. 5 的重画和两张对接示意。这条是可选的。</li>
+</ol>
+<h2>早报里还开着的决定</h2>
+<p>马拉松六件事（5-08 的 049 换位置已定，第 6 件要在 11-12 前定）、1-04 B 的蓝色轮廓光、S04 / S09 / S06 / S12 / S14 / S10 / S13 / S11 / S05 的取舍、新增屏幕字。见 <code>早报_20261031.md</code>。</p>
+<h2>11-07 在深圳，没有 5080（文稿和设计）</h2>
+<p>笔记本是 AMD 780M，只做文稿、设计和 Remotion（CPU 能跑），Blender 等 5080 回来。笔记本时钟是 UTC+9，工作记录里按香港时间记。</p>
+<ul>
+<li><strong>片尾卡 W5：</strong> 定稿 <code>script/片尾卡_W5_v1.md</code>，审片片 <code>styleframes/art/fusion/end/W5_end_v1.mp4</code>（33 秒，七页），代码 <code>镜头设计_v2/tests/T4_remotion/src/v3/fusion/endcard.jsx</code>。要组员确认：AI 说明里的方括号（有没有用过别的 AI）、"We checked the facts and numbers" 是否真做过（不用懂化学，对着原文找数字）、五首歌下载后核对署名。Varadi 2024 的作者和 Mitsuhashi 2009 定稿前在 PubMed 对一下。</li>
+<li><strong>S7、S8 分镜：</strong> <code>styleframes/art/fusion/s7s8/00_S7S8分镜_v1.md</code> 和草图 <code>S7S8_storyboard_v1.png</code>。用全片旧物回头讲，下一步全用虚线。等导演定四件事（文档最后一节）。三个 3D 镜头约 1 小时显卡，等 5080。</li>
+<li><strong>字幕底稿：</strong> <code>script/subtitles_v3.3_draft.srt</code>，<code>python script/build_srt.py</code> 生成，234 条。时间是剧本的估计，11-20 到 11-24 拿真录音再对，不压进画面。</li>
+<li>4-10 和 S5 的 5-01 到 5-03 化合物、结合结果画面，我这边做不了（安全检查拦了两次），要组员或换个做法。</li>
+<li><strong>先做完再打磨（导演 11-07）：</strong> 整条片做完以后再统一打磨一轮，目标是高级宣传片的质感，参照 Anthropic 官方讲细胞的短片。做的时候想到要磨的地方，记进 <code>打磨清单.md</code>，接着往下做。打磨阶段可以租卡（比如 5090），不换工具，不引入 Hyperframes。</li>
+<li><strong>11-07 晚：</strong> 导演说这周先暂停，周末休息。字幕底稿已经做完（234 条），剩下的对时间要等 11-20 的真录音。S7、S8 的方向等休息完再定。</li>
+<li><strong>11-09 导演定：</strong> 各部分内容做完以后，引入 Hyperframes 专门做更好的转场，只接两段成片之间的几秒，各段里面照旧是 Blender 和 Remotion。开始前先小测：能不能读 4K 60 帧片段、出 4K 60 帧、渲多久、颜色和 Remotion 对不对得上。见 <code>打磨清单.md</code>。</li>
+<li><strong>11-08 23:33（香港时间）5080 回来，开渲 S4 的 4-01 到 4-07 的 4K 60 帧</strong>：<code>bash styleframes/art/fusion/s1/inserts/render_s4_4k.sh</code>，帧在 <code>C:/render_tmp_4k/s4</code>（JPEG，D 盘只剩 8.8 GB），日志 <code>C:/render_tmp_4k/s4_run.log</code>。估约 5 小时，香港时间约 04:45 出四条：<code>fusion/s4/S4_401_4k60_1.mp4</code>、<code>S4_402_4k60_1.mp4</code>、<code>S4_piece2_4k60_1.mp4</code>（里面 4-04、4-05 的字卡还是占位）、<code>S4_loop_4k60_1.mp4</code>。停了重跑会接着渲。4-09 等导演定钥匙版还是 A 版。</li>
+<li><strong>11-09 导演定 4-09 用钥匙版</strong>（<code>S4_409_test_12.mp4</code>，A 版 hz 留着当旧版）。4K 60 帧排在 S4 那批后面自动开渲（<code>render_409k_4k.sh</code>，日志 <code>C:/render_tmp_4k/hk_run.log</code>），估香港时间约 05:35 出 <code>fusion/s4/S4_409_4k60_1.mp4</code>。全片进度见 <code>进度表.md</code>：动画段 51 段，今晚渲完后做完 28 段、59%，还剩 23 段，其中 4-10 和 S5 的 8 段我做不了，要导演定做法。</li>
+<li><strong>11-09 导演定 4-10 和 S5 那 8 段的做法：</strong> 导演自己用别的模型做内容，我不当中间人、不转述化合物和数据。我要准备交接单，只写格式和风格：每段起止时间、4K 60 帧、骨白底、配色、三种字体、出处行和 Illustration 写法、交回的文件格式和命名，再导出前后两段的接头帧（4-10 夹在 W3 和 4-11 之间，S5 夹在 4-12 和 S6 之间，所以要等 W3 和 S6 做出来）。片段交回后我放进时间线、接转场、调颜色。提醒导演：尽量直接用论文原图和原数，不让模型自己画结构、写数值。</li>
+<li><strong>11-09 交接文件夹 <code>交接_4-10_S5/</code> 已备好</strong>（只有 <code>00_交接单.md</code> 进 GitHub，论文 PDF、图、字体、截图只在本地）：论文正文和补充材料、Fig. 5 和 Fig. 7 浅底版、剧本、四种字体文件、四张风格参考截图、交接单（时间、4K 60 帧规格、配色、字体、出处行、接头、交回命名）。<code>接头帧/</code> 等 W3 和 S6 做好再放。</li>
+<li><strong>11-09 01:20 交接包审完</strong>：交接_4-10_S5/00_交接包审阅_20261109.md。剧本行号、8 段时长帧数（148 秒，加前后各 1 秒 164 秒）全对；Fig5/7_浅底 其实是黑底，已出骨白底版和 2 倍版（tools/figs_to_bone.py），交接单加了一节交付前自查。等导演定：八段是他那边做，还是我接手（我这边能做，走现有 Blender + Remotion）；开工时间。</li>
+<li><strong>11-09 01:45 八段的做法已定（导演全权交给我）</strong>：① 3D 重对接不装 Vina，直接用 <code>镜头设计_v2/tests/T6_molecules/poses.json</code> 里已有的姿态（001 mode 3、−7.944；048 mode 2、−8.838），标签保留 <code>OUR RE-DOCKING (AutoDock Vina), not the authors' coordinates</code>；② 049 脚注改成 <code>049: 360.0 ± 14.1 nM — also tighter than 001; the cell test went to 048</code>，不再写 not tested further（跟 Fig. 7 的 IC50 468.3 打架）；③ W4 的 vermilion 改成 red；④ W3 的歌导演自己搞，4-10 先按空台面起手。剧本三处画面说明已改，<code>script/script_v3.3.md</code> 和交接包那份逐行一致。排产见 <code>交接_4-10_S5/01_我接手这8段_排产.md</code>，09:00 开工。</li>
+<li><strong>11-09 W3 改用 The Weeknd – Take My Breath</strong>（导演否了 Godmother；备选 11 首见 <code>音乐/W3_备选_20261109.md</code>）。测得 121 BPM，8 小节 15.9 秒。三段试听在 <code>音乐/试听/</code>（A 第 24 小节、B 第 56 小节、C 第 104 小节），等导演挑。分镜第 1 版 <code>styleframes/art/fusion/w3/W3_storyboard_1.png</code>（<code>storyboard_w3.py</code>）：4-09 的锁孔卡长成带三圈刻度环的锁，钥匙每拍换齿形，蓝环冒出的钥匙绕锁盘旋、越来越快，始终不插进去，最后一拍落满空格交给 4-10。等导演看。另：Remotion 的 ffmpeg 现在只能写项目文件夹，<code>TEMP</code> 要设成 <code>D:/。hkbu/molecular science/_render_tmp</code>；S4 那两条渲染的合成一步改由 <code>finish_s4_4k.sh</code> 收尾。</li>
+<li><strong>11-09 06:35 夜里渲完的（先读 <code>早报_20261109.md</code>）</strong>：S4 五条 4K（<code>styleframes/art/fusion/s4/S4_*_4k60_1.mp4</code>）、W3 第 1 版半尺寸带歌审片片 <code>styleframes/art/fusion/w3/W3_test_1.mp4</code> 和 4K <code>W3_4k60_1.mp4</code>、片尾卡 4K <code>fusion/end/W5_end_4k60_1.mp4</code>，都用 <code>inserts/check_4k.py</code> 查过。W3 镜头代码已并进 <code>bl_inserts.py</code>（镜头 w3）。W3 最后一帧给 DS 接 4-10：<code>fusion/w3/W3_last.png</code>。等导演看 W3、定 S6 四件事。</li>
+<li><strong>11-09 上午 4-10 重做第二版 + 5-04 第一版</strong>：导演说 4-10 数字有但看不懂、钥匙孔不好。第二版改成"一张打印纸 + 一把钥匙"：点阵印在纸上、一个点变钥匙横插进锁孔板、讲到 grouped 时整张点阵缩成纸角小戳、54 个环按 9×6 正常大小排出来、七个点亮后七把钥匙落到台面（带影子）——数量级靠画面大小分，不靠读数字。审片 <code>s4/S4_410_test_2.mp4</code>（第一版留着对照），改动记在 <code>s4/4-10_数字对照.md</code>。5-04 用同一套语言：CDK20 锁板 + 001 的钥匙横插、只转几度，右边酶活柱掉到一半、剂量轴跑到最后一格还超出纸外，出 <code>&gt; 6,000 nM</code>（p1447）和红笔 weak.，审片 <code>s4/S4_504_test_1.mp4</code>，数字对照 <code>s4/5-04_数字对照.md</code>。两段都是 Remotion 矢量，4K 60 帧等导演点头再出。</li>
+<li><strong>11-09 下午（总管在 Orca 聊天里，Run <code>run_fe16ebae535d</code>）：</strong> 导演改用 Orca 聊天当总管，规矩见 <code>orca/总管规矩.md</code>（第 1 节是选模型顺序：Haiku → Sonnet → 加 effort → DS → Opus）。做完的：D 盘旧帧挪到 C 盘（D 空 21.8 GiB）；Codex 建 <code>资源清单.md</code>（79 段）；<code>素材收货/</code> 出镜对照表和 <code>check_footage.py</code>；全片粗剪 <code>粗剪/rough_v0.mp4</code>（1080p，左上角段号）；<code>低龄感诊断.md</code>（10 条，根子是 <code>plate_kit.gloss()</code> 的厚清漆）；Hyperframes 0.9.26 小测能用（<code>hyperframes/README.md</code>）；出镜转场 47 处接头，导演选<strong>方案 A 推进相纸</strong>（<code>转场/00_转场方案.md</code>）；W3 三方向小样，导演选 <strong>B 液体金属钥匙</strong>。在做的：DS 做 4-10 第二版（约 17:30 交，导演转话，任务单 <code>交接_4-10_S5/给DS_当前任务.md</code>），督办 GrayChapel 和复核员 SilverHawk 盯着；W3 B 全长审片版；出镜转场 A 的 1-02→1-04 小样；新质感试样 3-02/3-03（<code>styleframes/art/fusion/look/</code>）。等导演定：黄色表情球删不删；S6、S7/S8 分镜那几件小事；4-01~4-07、W3、W5 算不算点过头；补发组员拍摄设置（4K60、关 HDR）。DeepSeek Harness 更新到一半坏了，已重装回 0.2.1-rc.2，别点更新。</li>
+<li><strong>11-09 晚（香港 19:10，总管 Orca，Run <code>run_fe16ebae535d</code>，工人全停）：</strong> 做完的：① 镜头 k 换质感试样（<code>fusion/look/</code>），导演说<strong>改前那版最好，质感不换</strong>，幼态在"呈现形式"不在细节（记在 <code>打磨清单.md</code>）；② 呈现形式小样 F1 微距 / F2 剖面 / F3 中俯角长焦缓推（<code>fusion/form/</code>，对照 <code>form_k_compare.mp4</code>），<strong>等导演挑</strong>；③ W3 B 液体金属：test_1 导演嫌变化不够、反光不够，test_2（<code>fusion/w3/W3_B_test_2.mp4</code>，十种钥匙、长短差 3 倍、暗铬）<strong>等导演看，过了出 4K（<code>bash render_w3l.sh 4k</code>，两路约 1 小时）</strong>；④ 转场 A 铺了 5 处 15 个接头（<code>转场/A_*_4k60.mp4</code>，占位剪影），剩 31 处等前后段；⑤ TD：W5 底层 <code>td/w5/W5_bg_4k60_v1.mp4</code>、叠字审片 <code>W5_with_bg_1080p_v1.mp4</code>，millions→13 试样 <code>td/millions13/</code>，<strong>等导演定用不用</strong>；⑥ 文件整理两轮（<code>文件整理_20261109.md</code>），挪走 3.73 GB 到 C（D 22.3 GiB、C 31.9 GiB，C 按规矩不低于 30），<strong>删不删等导演</strong>：TD 帧 1.2 GB、<code>D:/render_tmp</code> 14 GB（要先逐个核对）、<code>_render_tmp/w3*_bundle</code> 4 GB。卡住的：<strong>DS 4-10 第二版没交</strong>（15:15 后无改动），要导演去 DS 窗口贴"请根据这个做 …/给DS_当前任务.md"，或改派 Claude 工人；督办、复核员已停。注意：Remotion 自带 ffmpeg 今天写不了文件，工人改用 <code>hyperframes/hfenv.sh</code> 里的 ffmpeg 或 digiKam 的。</li>
+<li><strong>11-10 通宵（香港 01:40–05:50，总管 Orca，Run <code>run_fe16ebae535d</code>）：</strong> 05:50 前后 Claude 额度用完，所有工人停了。做完的（都是 1080p 审片片）：S6 全段 <code>fusion/s6/S6_test_1.mp4</code>；S7、S8 第 2 版 <code>fusion/s7s8/S7_test_2.mp4</code>、<code>S8_test_2.mp4</code>（S7 接 S6 末帧）；4-10 改派 Claude 工人做三维版 <code>fusion/s4/S4_410_3d_test_3.mp4</code>、5-04 <code>S4_504_3d_test_2.mp4</code>、5-01 <code>S4_501_3d_test_1.mp4</code>、5-07 <code>S4_507_3d_test_2.mp4</code>，SilverHawk 审过 1–12 全过（<code>交接_4-10_S5/05_审片意见.md</code> 第 3–8 轮）；5-03、5-08 第 1 版（<code>S4_5-03_3d_test_1.mp4</code>、<code>S4_5-08_3d_test_1.mp4</code>）交了没审；W3 B 4K <code>fusion/w3/W3_B_4k60_1.mp4</code>。没做：5-10、W4、5-01 四条小修、5-07 试管半出画、5-03 第一次移镜偏快和 ROAD MAP 站点亮。等导演定：4-10 结尾取景（现版 / <code>C:/render_tmp/s5_altB/</code> / <code>s5_altC/</code>）、钥匙放大 3.2 倍、W3 红格框螺旋留不留、5-01 讲 CDK20 时它不在画里、S6/S7/S8 文档里列的几件、镜头 k 呈现形式、W3 test_2、删文件、W5 底层。DS 没回信。</li>
+<li><strong>11-10 16:48（韩国时间，导演在韩国，以后时间按韩国时间写并标明）导演批准 S6 审片版。</strong> 按导演意见出了第 2 版 <code>fusion/s6/S6_test_2.mp4</code>：关掉顶上台词条、6-07 右格换成钥匙 → 16 点 → <code>~15×</code> 图示、6-09 插头加闪电圆圈和电流，等导演看这两处。还没出 4K；6-01 起手等 S5 末帧再接。</li>
+<li><strong>11-10 17:50（韩国时间）导演看片意见：</strong> ① S6 第 2 版通过。② S8 的 8-06 红圈没套在站上（圈在两站中间），已改：五个词各圈一个站，cells 和 animals 同圈第 4 站，出 <code>fusion/s7s8/S8_test_3.mp4</code>。③ <strong>W3、4-10 和 S5 三维这一批都不过</strong>：锁的意象不突出、太糊；带刻度的转盘环和液体金属钥匙不是一路；要更现代。液体金属钥匙本身导演是认的。下一步先出锁的新样子静帧（<code>fusion/lock/</code>，三个方向）给导演挑，挑定以前 4-10、S5 各段不再往下修，也不出 4K。④ 巡检四件先不改，记在 <code>打磨清单.md</code>。镜头 k 呈现形式和片尾卡底层导演还没看到，已帮他打开文件夹。</li>
+<li><strong>11-10 18:40（韩国时间）导演看片尾卡带底层版的意见：</strong> 整体不错。底层想换成真实一点的细胞，从不同方向进来，有"二维画三维"的感觉，细胞之间的碰撞各不一样；页和页的转场要各不一样，不要每次都生硬；没定的音乐先不放。已派工人出小样 <code>fusion/end/W5_cells_test_1.mp4</code>（前三页、两种转场、约 12 秒），等导演看。导演另说：以后该用显卡就用显卡，尽量少用 CPU。镜头 k 呈现形式导演看了，没挑，先这样放着；钥匙顶面和侧面两种红、F1 圆头处的小黑点记着，定了拍法再一起修。</li>
+<li><strong>11-10 19:00（韩国时间）导演定两件：</strong> ① 片尾卡细胞小样 <code>fusion/end/W5_cells_test_1.mp4</code> 通过（"一点问题都没有"），已派工人铺到七页全长、六个转场各不一样，出 <code>W5_cells_test_2.mp4</code>（1080p，无音轨）。② 锁选 <strong>A 暗铬锁体</strong>（<code>fusion/lock/</code>）。导演加了新想法：锁浮上来时锁孔像液体一样打开；之后一直留着口但不停挤压变换，不一定是钥匙孔形；钥匙也不停变形往里怼；最后锁孔和钥匙互相适应。总管加的约束：钥匙变得多、锁孔变得少，看得出谁在试谁；最后锁孔落回现版口袋轮廓。已派工人出 8 秒动态小样 <code>fusion/w3/W3_K_test_1.mp4</code>。资源规矩：两个工人各占一个 Blender 工位，渲染全走显卡不留余量，CPU 的活低优先级、少线程（导演要在这台机器上办公）。</li>
+<li><strong>11-11 01:15（韩国时间）W3 新锁：</strong> 导演看了三版小样，定了：锁口始终一个口、高速大幅变形；钥匙靠近时有柔和的排斥；最后无缝进去，金属把钥匙裹住融成一块（<code>fusion/w3/W3_K_test_3.mp4</code>，导演说 ok）。全长带歌审片版 <code>fusion/w3/W3_K_full_1.mp4</code> 已出，等导演看；过了再出 4K（估一个 Blender 约 2 小时，没实测），然后拿 <code>W3_K_last.png</code> 当接头重做 4-10 和 S5。片尾卡七页全长 <code>fusion/end/W5_cells_test_2.mp4</code> 也等导演看六个转场。文件整理删了 78 GB（<code>文件整理_20261110.md</code>）。</li>
+<li><strong>11-11 01:40（韩国时间）导演定：</strong> ① 片尾卡细胞版七页全长 <code>fusion/end/W5_cells_test_2.mp4</code> 通过，六个转场都留；已派工人出 4K 60 帧 <code>W5_cells_4k60_1.mp4</code>，细胞层另留一条 <code>W5_cells_bg_4k60_1.mp4</code>（以后改字只重叠字层）。片尾卡还有两处字要改：音乐页还列着 Godmother（W3 已换 Take My Breath），AI 说明页的方括号提醒要组员确认后去掉。② W3 全长 <code>W3_K_full_1.mp4</code> 其他都不错，几处毛病在改，出 <code>W3_K_full_2.mp4</code>，总管看过再出 4K。③ 4-10 换新锁重做，出 <code>fusion/s4/S4_410k_test_1.mp4</code>（<code>inserts/bl_s410k.py</code>、<code>s410k.jsx</code>）；S5 各段等 4-10 导演看过再铺。</li>
+<li><strong>11-11 21:40（韩国时间）导演批准 W3 新锁 4K 成片</strong> <code>fusion/w3/W3_K_4k60_1.mp4</code>（暗铬锁、液体锁口、柔和排斥、无缝进去后融成一块；带 Take My Breath）。旧的 <code>W3_B_4k60_1.mp4</code>、<code>W3_4k60_1.mp4</code> 作废。接头帧 <code>W3_K_last.png</code>、<code>W3_K_last_4k.png</code>。片尾卡 4K <code>fusion/end/W5_cells_4k60_1.mp4</code> 也已出（还欠两处字）。4-10 新锁版第 1 版导演嫌钥匙太像，第 2 版在做（每把钥匙都不一样，<code>S4_410k_test_2.mp4</code>）；过了再铺 S5 各段。教训：出 4K 时不能同时开第二个 Blender（显存不够，11-11 中午 4K 被挤停）；工人和总管共用额度，两三个工人同时跑约一个半小时就用完。</li>
+</ul>
+<h2>11-16 傍晚交接（韩国时间约 17:00，额度将尽）</h2>
+<p>HKBU SCIE1007 课程作业的科普视频。导演只看最终成果；意见全在 打磨清单.md「导演意见 11-16」。
+- 在跑：cut_v8（按词铺满整句对时、撤推镜和模型徽标、人像构图、托盘字贴台面、出镜不裁话尾；字幕先不做）；样板 A 1-08 钱第 2 版（等 Fable 审）；渲染提速 fast_render.py + Blender 5.3（G:/software/blender-5.3）测速。各自的续跑说明见 工作记录.md 末尾。
+- 磁盘：中间帧一律写 G:/cdk20/work/；D:/…/_render_tmp 和 C:/render_tmp 是指向 G 的联接；S1/S2 逐帧图只在 G:/cdk20/backup_20261116/ 里。每天 05:00 自动备份到 G。
+- 下一步：cut_v8 拼完 → 机器检查 → Fable 审 → 给导演；样板 B（2-02/2-03 托盘）、样板 C（开头）；以后新工作用 Blender 5.3 + fast_render。
+- 看板：https://claude.ai/artifact/F1gCcr3Wcmu4FhyvF25n63（素材流程_out/now.json → board.py → 发布）</p>
+<h2>续跑（cut_v8，11-16 17:25 写）</h2>
+<ul>
+<li>显卡渲染已全部完成（40 段画外音对时、托盘 19 组 v8），resume_renders.sh 里 cut_v8 没有要排的。</li>
+<li>拼片 + 检查已脱离会话在跑：<code>cmd /c "D:\。hkbu\molecular science\镜头设计_v3\粗剪\_work8\run_v8.cmd"</code>（可重复运行；已出的对时段 _work8/vo 自动复用）。日志 粗剪/_work8/build.log、粗剪/_work8/check.log（末行 RUN_V8_DONE 表示完）。预计约 25 分钟，17:50 前后。</li>
+<li>完后：看 粗剪/_check/cut_v8_check.json；出联系表 <code>_env/footage/Scripts/python.exe 镜头设计_v3/粗剪/_check/sheets_v7b.py cut_v8</code>；开 Fable 子代理审片。</li>
+<li>注意：本机 Python/ffmpeg 写不了 G 盘和 _render_tmp 联接（拒绝访问，bash/PowerShell 可以），所以 cut_v8 中间文件在 粗剪/_work8/（D）。</li>
+<li>渲染监督（11-16 17:30 起）：GLM 每 30 分钟巡检一次（Windows 计划任务 cdk20_glm_watch → C:/Users/woola/cdk20_watch/watch.sh → glm_worker.sh WATCH）。它只能 status / resume / board：看机器状态，没有 Blender 在跑且队列未完时运行 _env/jobs/resume_renders.sh 续跑，写 素材流程/日报/渲染监督_YYYYMMDD.md，更新本地看板。不删、不杀、不 git。要停：schtasks /Change /TN cdk20_glm_watch /DISABLE。</li>
+<li>渲染提速结论：用 inserts/fast_render.py 整段一次渲，Cycles 正式档，5.1.2（0.79 s/帧）；EEVEE 阴影错位不用；5.3 待显卡空闲时重测（先删 speedtest 下 C–G 目录再跑 D:/render_tmp/fr_tools/run_tests2.sh）。</li>
+</ul>
+<hr />
+<h2>11-18 02:40 交接（板件新方案，韩国时间）</h2>
+<p>HKBU SCIE1007 课程作业的科普视频。新会话从这里接手。先读这一节，再读下面"必读文件"里列的三份。</p>
+<h3>现在的方向（导演 11-17 定）</h3>
+<ul>
+<li>全片画面是一整块高达式拼装大板。亮面塑料，按类别分色，材质分透明、电镀、实色三类。</li>
+<li>零件是活的：在框里长出来，"哒"一声拔起，会流动变形，拼装时留接缝。</li>
+<li>三维约占三成，是这盒模型；二维约占七成，由 Remotion 做，是它的说明书。人出镜的段落用同一套东西。</li>
+<li>导演 11-18 的补充：要更有创意、更流畅丝滑。AE 不作为主力。要测试零件和出镜的人绑定。</li>
+</ul>
+<h3>必读文件</h3>
+<ol>
+<li><code>镜头设计_v3/审片/总管/全局统筹_板件与资产_v1.md</code>：大板 8 个区、七个动作、分色、46 种零件、二维三维分工。</li>
+<li><code>镜头设计_v3/审片/总管/动效打磨要点_v1.md</code>：创意和丝滑的做法，带可量的检查表。</li>
+<li><code>镜头设计_v3/渲染进度.md</code>：每项渲染做到哪了，怎么接着渲。</li>
+</ol>
+<p>另外：
+- 零件库接口：<code>镜头设计_v3/inserts/kit_README.md</code>。
+- 定版大板：<code>G:/cdk20/work/kit/board_final.blend</code>。
+- 导演看的东西按天放在 <code>导演检查_20261117/</code> 和 <code>导演检查_20261118/</code>。</p>
+<h3>正在跑的</h3>
+<table>
+<thead>
+<tr>
+<th>任务</th>
+<th>谁在做</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A1：2-03 动画样片</td>
+<td>Fable 代理</td>
+<td>在做。成品放 <code>导演检查_20261118/1_样片_2-03_动画.mp4</code>。如果它断了，看 <code>渲染进度.md</code> 的 A1 行和 <code>inserts/finish_s203.sh</code></td>
+</tr>
+<tr>
+<td>B2、B1：零件图和主角零件转台</td>
+<td>后台脚本，<code>_env/jobs/</code> 下的 kit 批量脚本</td>
+<td>在渲，已登记在续渲队列的 QUEUE 里，断了会自动续渲。进度看 <code>G:/cdk20/work/kit/progress.json</code></td>
+</tr>
+<tr>
+<td>人物跟踪测试</td>
+<td>Sonnet 代理</td>
+<td>在做。报告放 <code>导演检查_20261118/4_人物跟踪测试.html</code></td>
+</tr>
+</tbody>
+</table>
+<h3>接下来要做的（按顺序）</h3>
+<ol>
+<li>审 2-03 动画样片：逐帧看，对照打磨要点里的检查表。能说出名字的问题先修好，再给导演看。</li>
+<li>做人出镜样片 2-02：人在左，零件拔下来浮在右边。测两样：零件从肩后绕到身前；零件跟着手或头走。跟踪数据用上面那个测试的结果。</li>
+<li>做二维说明书页样片 2-05：用 Remotion，零件图取自 <code>G:/cdk20/work/kit/flat/</code>，线稿从透明通道描边。</li>
+<li>三条样片导演认可后，按章铺开：每章先写事件表，再渲染。</li>
+<li>还没写代码的预渲染：B3 主角零件"长出来"，B4 大板长镜头，B5 "拔起"通用动作。</li>
+</ol>
+<h3>规矩</h3>
+<ul>
+<li>硬规则由钩子强制执行，脚本是 <code>C:/Users/woola/cdk20_guard/guard.py</code>，另有 git pre-commit。</li>
+<li>钩子的一个已知误拦：已有 2 个 Blender 在跑时，任何 Bash 命令的文字里只要出现渲染脚本的名字（包括写文档的 heredoc）也会被拦。遇到就改用 Write 工具写文件。</li>
+<li>导演要用显卡时：在 <code>C:/Users/woola/cdk20_guard/</code> 下建 <code>GPU_PAUSED</code> 文件，并停掉 Blender。导演说恢复后再删这个文件。</li>
+<li>模型分工：</li>
+<li>设计、创意、审片、动画编排：Fable。</li>
+<li>按清单改代码、补渲染、整理报告、提数据：Sonnet 或 Haiku。</li>
+<li>监督、检查、抽帧、搬文件：GLM。</li>
+<li>批量渲染：直接跑脚本。</li>
+<li>代理的上下文长了就换新的，不接着用。</li>
+<li>器官用 <code>assets/anatomy</code> 里的真实模型。做新东西前先在项目里搜有没有现成的。</li>
+</ul>
+<h3>已知还没修的小问题</h3>
+<ul>
+<li>垃圾桶（44）是黑底黑纹，条纹不明显。</li>
+<li>线稿不单独渲（Freestyle 在 5.3 的 Cycles 下出不了线），改由 Remotion 描边。</li>
+<li><code>工作记录.md</code> 和本文件里有别的代理没提交的改动。提交时只提交自己写的文件。</li>
+</ul>

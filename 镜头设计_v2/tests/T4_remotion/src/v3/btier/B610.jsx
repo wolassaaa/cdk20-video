@@ -29,11 +29,9 @@ const Scene=()=>{
   const dish=clamp((f-E.dish.s)/12);
   return <Lens plan={GP} f={f}>
     <Stage zone={ZONE} f={f} tray={false}>
-      <div style={{position:"absolute",inset:0,background:"rgba(244,241,234,.20)"}}/>
       <RoadWorld cx={cx+5.6*Math.sin(f*.15)} zoom={zoom} y={ry}
         ticks={{0:hit(f,E.tick1),1:hit(f,E.tick2),3:hit(f,E.tick4)}}>
         <Status started={hit(f,E.started)} n1={hit(f,E.notyet)} n2={clamp((f-E.notyet.l-5)/6)}/>
-        {dish>0 && <Sprite name="dish/34" x={X[3]+142} y={Y+57+3*Math.sin(f*.22)} w={108} op={dish}/>}
         {drop>0 && <TagBody x={tag} y={Y+18-390*(1-drop)} text="048" rot={swing} id="gold048"/>}
       </RoadWorld>
       <Source>Illustration · status of 048: Ren et al., Chem. Sci. 2023</Source>

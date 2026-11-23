@@ -3,11 +3,13 @@ name: oncam-3d-parts
 description: HKBU SCIE1007 coursework video — how to build an on-camera segment where a team member talks on the left and a real 3D part (lock, key, socket…) floats beside them, lands on the spoken words and carries the head/tail transition. Covers inputs, the parameterised commands (segment number in, video + check page out), placement/lighting/DOF/occlusion rules, the flaw checklist (machine checks in oncam_check.py) and the pitfalls from remaking 3-01. Use whenever making, remaking or reviewing any 出镜 segment with 3D parts beside the person.
 ---
 
-# 出镜人 + 旁边 3D 零件（经验到 11-20，样板 3-01 v2）
+# 出镜人 + 旁边 3D 零件（经验到 11-20，样板 3-01 v2；照技能施工的第一批：3-06、3-09）
 
 HKBU SCIE1007 课程作业的科普视频。这是片里十几个出镜段的做法：组员一个人对着手机讲（素材已抠像），我们在他右边放一个真的三维零件（锁、钥匙、插座…），零件的动作落在他说的词上，段首段尾由零件自己当转场。不是科研，零件和数值只作示意。
 
-先加载 `word-synced-animation`（声音是时间基准、事件表的写法）。样板：3-01（D："Okay. To get this, picture a lock and a key."），成片 `导演检查_20261120/10_出镜3D样片_3-01.mp4`，检查页同目录 `10_出镜3D_检查.html`，设计 `镜头设计_v3/深化/10_出镜3-01_重做.md`。
+先加载 `word-synced-animation`（声音是时间基准、事件表的写法）。样板：3-01（D："Okay. To get this, picture a lock and a key."），成片 `导演检查_20261120/10_出镜3D样片_3-01.mp4`，检查页同目录 `10_出镜3D_检查.html`，设计 `镜头设计_v3/深化/10_出镜3-01_重做.md`。照技能新做的段：3-06（插座 + 两个磨砂盲盒 + 吊灯 + 假插头，`recipe_socket_lineup`）、3-09（磨砂 CDK20 + 钥匙坯 + 屋里变暗，`recipe_frost_blank`），成片和合并检查页 `导演检查_20261120/15_出镜3D_*`。
+
+**这个技能要从 D 盘主仓库读**（`D:/。hkbu/molecular science/.claude/skills/`）：Orca 开的旧 worktree 里可能还没有它，Skill 工具会报 Unknown skill，直接读文件。
 
 路径一律用环境变量 `CDK20_WORK`（默认 `G:/cdk20/work`）。C、D 是同一块系统盘，大量写入会让电脑卡：**帧、缓存、临时文件一律写 G**，D 只放代码、文档和导演检查文件夹里的成品 mp4/html（`D:/cdk20_work` 现在是指向 G 的目录联接，老路径照常能用）。Blender 用 `CDK20_BLENDER`（默认 `D:/software/blender-5.3/blender.exe`）。
 
@@ -15,44 +17,47 @@ HKBU SCIE1007 课程作业的科普视频。这是片里十几个出镜段的做
 
 | 东西 | 位置 |
 |---|---|
-| 主脚本（搭场景、渲、合成） | `镜头设计_v3/inserts/shot_oncam.py`（`SEGS` 里每段一条配置，`RECIPES` 里每段一个零件编排函数） |
+| 主脚本（搭场景、渲、合成） | `镜头设计_v3/inserts/shot_oncam.py`（`SEGS` 里每段一条配置，`RECIPES` 里每段一个零件编排函数，每段一个位置参数字典 `V2`/`V306`/`V309`…，`SEGS` 里用 `prm` 指） |
 | 一条龙 | `镜头设计_v3/inserts/run_oncam.sh <段> [步骤]` |
 | 穿帮机检 | `镜头设计_v3/inserts/oncam_check.py <段> [--no-video]` → `$CDK20_WORK/oncam/<段>/flaws.json` |
-| 检查页 | `镜头设计_v3/inserts/oncam_report.py <段>`，读 `inserts/oncam_review/<段>.json`（人写的穿帮清单、逐拍表、结论） |
+| 检查页 | `镜头设计_v3/inserts/oncam_report.py <段> [<段> …] [--out 导演检查_…/xx.html]`，读 `inserts/oncam_review/<段>.json`（人写的检查清单、逐拍表、结论）；几段可以合成一页 |
+| 试渲拼图 | `镜头设计_v3/inserts/oncam_sheet.py "<test 目录>/bg_*.png" <输出 jpg> [列] [宽] --person <段>`（垫上同一帧的人看构图） |
 | 人物逐帧图（抠像后 RGBA，1728×972） | `$CDK20_WORK/pub_slim/<段>/person_<段>/0000.png…`（原在 `G:/cdk20/work/pub_slim/`，素材流程 `_fg + _a` 合成） |
 | 这段的声音 | `$CDK20_WORK/pub_slim/<段>.wav` 或 `pub_slim/<段>/<段>.wav`（cut_v8 里截出来的） |
 | 鼻尖轨迹、素材尺寸、off/n | `镜头设计_v2/tests/T4_remotion/src/v3/manual/oncam_<段>.json` |
 | 事件表 | `镜头设计_v3/映射/events/<段>.json` → `validate_events.py <段>` → `resolve.py <段>` → `映射/keys/<段>.json` |
 | 背景大板 | `$CDK20_WORK/kit/board_final.blend`（第 1–3 区零件格子，立起来当后墙，8 m 外） |
 | 零件 | `inserts/kit_deep.py`、`kit_deep_r2.py`（H02 钥匙）、`kit_deep_r3.py`（H06 销子锁）、`kit_socket.py`（插座/插头）；`kit_parts.py` 读 `$CDK20_WORK/kit/cdk20.npz`、`organs.npz` |
-| 中间产物 | `$CDK20_WORK/oncam/<段>/`：`light.json`、`light_fit.json`、`scene.blend`、`cam.json`（逐帧零件框、焦点、哪些帧要挡人）、`check.json`（穿模、景深）、`handoff.json`（段首段尾零件位姿）、`fr_bg/`、`fr_front/`、`test/` |
+| 中间产物 | `$CDK20_WORK/oncam/<段>/`：`light.json`、`light_fit.json`、`scene.blend`、`cam.json`（逐帧零件框、焦点、哪些帧要挡人）、`check.json`（穿模、景深）、`handoff.json`（段首段尾零件位姿）、`fr_bg/`、`fr_front/`、`test/`；给相邻 B 页的擦除层 `$CDK20_WORK/bwipe/oncam_<段>/w_####.png` |
 
 ## 2. 新开一段：步骤和命令
 
 全部在仓库根目录跑（bash）。`SEG=3-04` 这样换段号就行。
 
 1. **人物图和声音拷到 `$CDK20_WORK/pub_slim/<段>/`**（只拷这一段要的）。
-2. **在 `shot_oncam.py` 的 `SEGS` 加一条**（照 3-01 抄）：`person`、`n`、`off`（从 `oncam_<段>.json` 的 clips 抄）、`wav`、`oncam`、`keys`、`recipe`、`who`、`head`/`tail`、`fade_in=None`、`version=2`、`out`（成片路径，放当天导演检查文件夹）。
+2. **在 `shot_oncam.py` 的 `SEGS` 加一条**（照 3-06 抄）：`person`、`n`、`off`（从 `oncam_<段>.json` 的 clips 抄）、`wav`、`oncam`、`keys`、`recipe`、`prm`（这段的位置参数字典名，如 `"V306"`；不写 = 3-01 的 `V2`）、`who`、`head`/`tail`、`fade_in=None`、`version=2`、`out`（成片路径，放当天导演检查文件夹）。段长按声音算（`nf`），**人物图比声音短**（3-06 人 676 帧、声音 694 帧）时加 `pingpong=True`：多出来的帧倒着往回放，不冻最后一帧。
 3. **写事件表** `映射/events/<段>.json`：每个零件动作挂在一个词上（`at` 词 + `lead`），第一个事件是"零件落位"（段首转场结束），最后一个事件是"零件冲进镜头"（段尾转场开始）。跑：
    `python 镜头设计_v3/映射/validate_events.py <段> && python 镜头设计_v3/映射/resolve.py <段>`
-4. **写 recipe**：在 `shot_oncam.py` 里照 `recipe_lock_key_v2` 写 `recipe_<名字>(W)`，登记进 `RECIPES`。它返回 `targets`、`hero`、`bbox`（逐帧零件包围盒的 8 个角）、`key`（第二个零件，没有就给一个空物体）、`focus(f, Mcam)`、`fstop(f)`、`tail_t0`、`checks()`（穿模，见 5.1 M7）、`handoff`、`info`。位置参数都放进一个字典（3-01 是 `V2`），别散在代码里。
+4. **写 recipe**：在 `shot_oncam.py` 里照 `recipe_socket_lineup`（多零件 + 灯）或 `recipe_frost_blank`（单零件 + 第二零件 + 屋里变暗）写 `recipe_<名字>(W)`，登记进 `RECIPES`；3-01 的 `recipe_lock_key_v2` 是最早的一份，很多东西写死在里面，别照它抄。返回 `targets`、`hero`、`bbox(f)`（逐帧零件外形点，用 `_extreme_pts` 取，别用包围盒 8 角）、`key`（第二个零件，没有就给一个空物体）、`focus(f, Mcam)`、`fstop(f)`、`tail_t0`、`checks()`（穿模，见 5.1 M7）、`handoff`、`info`。位置参数都放进这段自己的字典（`V306`），别散在代码里，也别改 `V2`（3-01 在用）。
+   现成的小工具（都在 `shot_oncam.py`）：`_bake(root)` 把布尔应用掉、删刀具（不扫开的零件一律先烤，坑 14）；`_q(yaw, tilt, roll, base)` 朝向；`_fit_scale(…, pts=外形点)` 按投影高定缩放；`_bz`、`_bz_at_depth`、`_logd` 段首段尾对数深度弧线；`_Mof` 位姿矩阵；`_RigidClip` 刚体逐帧 BVH 穿模；`_hero_lights` 3-01 那套轮廓光、侧补光、反光卡、只给镜面看的世界；`_emit_mat`、`_key_val` 自发光开灯、关灯；`_vol_rescale` 透明件放大后改体积密度（坑 19）；`_make_lamp` 小吊灯；`_extreme_pts` 外形点。
 5. **量光、比光**（每段一次，换人换场景必须重来）：
    `bash 镜头设计_v3/inserts/run_oncam.sh <段> measure` → 从脸和白 T 恤量主光方位、主辅比、色温、颗粒，写 `light.json`
    `bash 镜头设计_v3/inserts/run_oncam.sh <段> calib` → 灰球、白球逐轮比光，写 `light_fit.json`（约 3 分钟）
 6. **搭场景**：`bash 镜头设计_v3/inserts/run_oncam.sh <段> build`（约 4 分钟，日志里 `ONCAM step …` 一步一行）。搭完先跑 `python 镜头设计_v3/inserts/oncam_check.py <段> --no-video`，M3–M7、M12 以外的场景项不过就回第 4 步改参数，不要先渲。
-7. **试渲关键帧**（半分辨率，每帧约 2.5 秒）：`FR=0,20,39,184,240,332,360,383 bash 镜头设计_v3/inserts/run_oncam.sh <段> frames`；挡人层也看：`WHICH=front FR=0,383 bash … frames`。图在 `$CDK20_WORK/oncam/<段>/test/`，拼成网格自己看（第 6 节的看图项）。
-8. **正式渲**：`bash 镜头设计_v3/inserts/run_oncam.sh <段> render` 然后 `… front`（会排队等显卡空位）。`render` 跳过已存在的帧：改了场景要先把旧的 `fr_bg/` 挪走（不删，挪到 `_old/`）。
-9. **合成、机检、检查页**：`… comp`、`… check`、`… report`。`check` 先跑 `shot_oncam.py check`（亮度、颗粒、`check_sync.py` 对词），再跑 `oncam_check.py`（M1–M13）。`report` 要先写好 `inserts/oncam_review/<段>.json`（照 3-01 那份：旧版穿帮清单每条的问题、改法、对比帧、`check` 填机检编号或"看图"）。
+7. **试渲关键帧**（半分辨率，每帧约 1.5–2.5 秒）：`FR=0,20,39,184,240,332,360,383 bash 镜头设计_v3/inserts/run_oncam.sh <段> frames`；挡人层也看：`WHICH=front FR=0,383 bash … frames`。图在 `$CDK20_WORK/oncam/<段>/test/`，用 `oncam_sheet.py … --person <段>` 拼成网格（垫上人）自己看（第 5.2 节的看图项）。帧取每个事件的 f_land、段首 0/8/20、段尾最后 4 帧。
+8. **正式渲**：`bash 镜头设计_v3/inserts/run_oncam.sh <段> render` 然后 `… front`、`… wipe`（会排队等显卡空位）。`wipe` 是给相邻 B 页的 T5 擦除层（11 文档 5.6）：段首 16 帧、段尾 16 帧只有零件的透明层，写 `$CDK20_WORK/bwipe/oncam_<段>/`，`fr_front` 里已有的帧直接拷。`render` 跳过已存在的帧：改了场景要先把旧的 `fr_bg/` 挪走（不删，挪到 `_old/`）。
+9. **合成、机检、检查页**：`… comp`、`… check`、`… report`。`check` 先跑 `shot_oncam.py check`（亮度、颗粒、`check_sync.py` 对词），再跑 `oncam_check.py`（M1–M13）。`report` 要先写好 `inserts/oncam_review/<段>.json`：重做的段照 3-01 那份（有 `old_video`，旧版穿帮清单每条的问题、改法、新旧对比帧）；新做的段照 3-06 那份（没有 `old_video`，`items` 写技能看图项和本段设计要求，`check` 填机检编号或"看图"，`new` 填代表帧，`show: true` 的条目在页上配图）。几段一起交：`python oncam_report.py 3-06 3-09 --out 导演检查_…/15_出镜3D_检查.html`。
 10. **每 6 帧抽一张**（检查页第六节就是）自己从头看一遍找新问题；有问题回到 4，再整段重渲。全部过了才交。
 
-`bash run_oncam.sh <段> all` 按 measure → calib → build → render → front → comp → check → report 一口气跑。
+`bash run_oncam.sh <段> all` 按 measure → calib → build → render → front → wipe → comp → check → report 一口气跑。
 
 ## 3. 设计规则
 
 **构图**
 - 人在左、零件在右，人永远原像素不动（`PERSON` 框 x −301、y 108、1728×972），相机只有以人卡片为轴的 ±0.3° 微动。
-- 零件停留时的包围盒：左沿 ≥ 人在那条高度带里最靠右的像素 + 30（3-01：x ≥ 1200）；右沿 ≤ 1880；上沿 ≥ 40；下沿 ≤ 940（下面是字幕区）；高 ≥ 380 px。零件转出侧面会变宽，靠前会变大：包围盒逐帧算，靠前浮起时同时往左让。
-- 画面里的三维东西只有主角零件（加第二个零件，如钥匙）和身后的大板。不要料框、碎块、飞过的第二个物体。
+- 零件停留时的包围盒：左沿 ≥ 同一帧、零件占的那几行里人最靠右的像素 + 30（M5 逐帧逐行量人物图；人头那一带一般只到 x≈750，胸口和手到 1100–1220，所以上半画面的第二、第三个零件可以比主零件靠左得多）；右沿 ≤ 1880；上沿 ≥ 40；下沿 ≤ 940（下面是字幕区）；高 ≥ 380 px。零件转出侧面会变宽，靠前会变大：包围盒逐帧算（用外形点，不用 8 角），靠前浮起时同时往左让。
+- 几个零件同框（3-06 嫌疑人一排）：主零件在前、在中间，配角往后 0.5–0.8 m、在它左右排成一排（同一高度带，不要一上一下像飘着的石头）；配角磨砂、透明件在 2 m 外会灰成一块，给一点底光自发光（`BOX_BASE`）。
+- 画面里的三维东西只有设计文档点名的零件和身后的大板。不要料框、碎块、没点名的东西。
 - 大板放大到四边都出画（3-01 ×1.27），人头后面、零件后面那几格零件藏掉（`HEAD_BOX`、`LOCK_BOX`），只留料杆网格；红色、白色小人这种抢眼的格子也藏。
 
 **入场、出场（段首 T5、段尾 T1，零件自己当转场）**
@@ -71,7 +76,9 @@ HKBU SCIE1007 课程作业的科普视频。这是片里十几个出镜段的做
 - 要看里面就用剖切面扫开：把剖切象限的布尔刀具从零件上方往下移到位（16 帧，词说到一半时扫过一半），零件本身一个都不动。**不要做"剖下来的那块外壳飞出去"**：剖下的那块被内部零件前后夹住，往哪个方向拔都会穿模（3-01 逐方向 BVH 实测）。
 
 **光**
-- 主光方向、色温、主辅比从人脸量（`measure`），零件亮面要看得出同一盏暖光。
+- 主光方向、色温、主辅比从人脸量（`measure`），零件亮面要看得出同一盏暖光。`default_fit` 把主光方位夹在左侧 30–60°：人是正面光或右侧光（3-09 的 B 量出来 −3°）时也会被摆到左 30°，calib 仍对得上球，但零件和脸的光向会差一点，看图时留意。
+- 剧本要屋里变暗（3-09 "nobody can see"）：洗墙光、雾里的暖光、世界光（`oncam_map` 的 To Min）、主光、补光、零件侧补光、镜面世界、反光卡一起按事件打关键帧；只留轮廓光（甚至加强）和点名零件自己的小灯。人不重渲，合成里只把远离窗的一侧压暗（`person_dim`，`PERSON_DIM` ≤ 0.2）。只降主光、补光不够：大板主要是洗墙光和世界光照亮的。
+- 开灯这种动作（3-06 吊灯）：灭着的灯泡做成灰的，亮起来时自发光 + 聚光灯一起上，功率要大到开灯前后零件顶面看得出差别（3-06 聚光灯 140 W；60 W 看不出）。
 - 只照零件的冷白轮廓光（右后上方）+ 只照零件的侧补光（灯光链接），零件朝画面右边那一面不死黑。
 - 镜面反射卡（只给镜面看，不照明、不投影）：柔光箱、条灯、相机侧大柔光、相机正后方、左、上、下各一张；世界只在"镜面光线看到"时换成暖灰（Light Path → Is Glossy Ray 混一个 Background）。金属件（金钥匙）任何角度都是亮金，不会反射出一片黑。
 
@@ -84,6 +91,7 @@ HKBU SCIE1007 课程作业的科普视频。这是片里十几个出镜段的做
 
 - Cycles + OptiX GPU + OptiX 降噪，**1080p60，16 采样**（只有看得出噪点的镜头才加，最多 24，`SAMPLES=24`），种子逐帧变，运动模糊 180°；之后统一用 GPU 放大成 4K。
 - 3-01 实测（384 帧，RTX 5080，同时另有一个 Blender 在跑）：搭场景 3.5–4 分钟（CPU）；背景层 3.64 秒/帧，整段 1398 秒 ≈ 23 分钟；挡人层 29 帧 101 秒；合成 + nvenc 约 6 分钟（CPU，人物图读写为主）；机检约 1 分钟。一段按 **35 分钟**排，其中显卡 25 分钟。慢的主要是布尔每帧重算（CPU），不是采样。实际数写在检查页第五节，铺开排时间按它。
+- 3-06、3-09 实测（同时另有一个 Blender）：搭场景 3-06 约 6 分钟（插座、插头、两个盲盒都要烤布尔）、3-09 约 25 秒；背景层 3-06 694 帧 1847 秒（2.66 秒/帧）、3-09 340 帧约 935 秒（2.75 秒/帧）；挡人层 58 帧 103 秒、37 帧 95 秒；合成 + nvenc 3-06 696 秒、3-09 343 秒。布尔烤掉以后比 3-01 快约 25%。**另算排队**：两个位常被别的代理占着，一次等 10–30 分钟。
 - 同时最多 2 个 Blender（`run_oncam.sh` 自己排队；钩子也会拦一条命令里起两个 Blender）。
 
 ## 5. 穿帮清单
@@ -96,13 +104,13 @@ HKBU SCIE1007 课程作业的科普视频。这是片里十几个出镜段的做
 | M2 | 人不做半透明淡入 | `fade_in=None` |
 | M3 | 零件不碰画边 | 停留段右沿 ≤ 1880、上沿 ≥ 40 |
 | M4 | 零件不进字幕区 | 下沿 ≤ 940 |
-| M5 | 零件够大、在人旁边 | 高 ≥ 380，左沿 ≥ 1200（人在右边的段改 `LIMITS`） |
+| M5 | 零件够大、在人旁边 | 高 ≥ 380；左沿 ≥ 同一帧、同几行里人最右的像素 + 30（逐帧逐行量人物图；人在右边的段要改成量右沿） |
 | M6 | 大板边不进画 | 四边都在画外 |
 | M7 | 穿模 | recipe 的 `checks()` 里所有 `*_frames` 为空（BVH 逐帧；`*_touch` 只许贴着，如钥匙顶销） |
 | M8 | 抠像漏块 | 剥完还剩 0 帧 |
 | M9 | 黑场、亮度跳变 | 帧数 = 段长，黑场 0；零件停留段相邻帧平均亮度跳 ≤ 12；段首段尾钻出/钻进零件的转场里每帧 ≤ 24、一路变亮或变暗、往回 ≤ 3（不闪） |
-| M10 | 颗粒一致 | 零件层 / 人 = 0.6–1.6 |
-| M11 | 画面跟词 | `check_sync.py` S1–S4 全过 |
+| M10 | 颗粒一致 | 零件层 / 人 = 0.6–1.6（人那块自动找衬衫最平的 48×48，不再用固定偏移）；差一点就调这段的 `GRAIN_GAIN` |
+| M11 | 画面跟词 | `check_sync.py` S1–S4 全过（S4 的"混帧"在 fade/glow/power_on/power_off 事件里算设计渐变；事件读 `keys/<段>.json`） |
 | M12 | 段首段尾零件盖住人 | 第 0 帧、最后一帧人被挡住 ≥ 98% |
 | M13 | 焦点不来回抖 | 停留段换向 ≤ 6 次 |
 
@@ -131,3 +139,43 @@ V1 零件是不是一眼认得出（锁孔、齿形朝镜头，不是"白圆柱 
 17. **这台机器上的 `_env/ffmpeg` 写不了 G 盘和 C 盘临时目录**（Permission denied，只能写 D）。抽帧、拼图一律让 ffmpeg 输出到管道（`-f rawvideo -`），用 Python 存到 G；成片 mp4 本来就写 D 的导演检查文件夹，不受影响。
 18. **通用版复跑验收**：先把 `cam.json`、`check.json`、`handoff.json` 拷到 `_ref_final/`，`run_oncam.sh <段> build` 重搭，三个文件逐字节相同；`FR=… PCT=100 … frames` 试渲 4 帧和 `fr_bg/` 比，平均差 < 0.01（3-01：0.008）。
 
+
+## 7. 照技能新做两段时补上的坑（3-06、3-09，11-20）
+
+19. **透明件放大后发墨蓝**：`kit_parts.mat_clear` 的体积吸收密度按米算，零件放大 s 倍厚度也大 s 倍。放大后调 `_vol_rescale(root, s)`（密度 ÷ s）。
+20. **包围盒 8 个角投影比零件大得多**：圆滚滚的零件（p29 磨砂壳）按 8 角量高 410 px，真实外形只有 321；3/4 侧面时右沿多算一百多像素。机检点和定大小都用 `_extreme_pts`（沿 96 个方向取最远顶点），`_fit_scale(…, pts=…)`。方盒子（插座）两种量法差不多。
+21. **人物图比声音短**（3-06 人 676 帧、声音 694 帧）：`SEGS` 加 `pingpong=True`，多出来的帧倒着放，不冻最后一帧。
+22. **`build_v2` 量景深的帧原来写死成 3-01 的**，段长不到 361 帧就 IndexError。现在用事件的 f_land。
+23. **`mesh_bounds` 碰到藏着的零件或空物体会崩**（技能原来说"没有第二个零件就给空物体"，照做就崩）。现在返回 None，调用处判空。
+24. **零件朝向要看真实长边**：p29 只绕 X 转 90° 时 36 mm 长边是横的，又宽又矮，占满右半边还不够高。再绕 Y 转 90°（`BASE_Y`）长边竖起来。
+25. **钥匙坯正对镜头认不出**：正面看是"一个圆环加一小截"。绕竖轴转 30–40°（`KEY_YAW`）成 3/4 侧面；弹出时从朝灯那边转过来（反过来转，落位那几帧钥匙背光是黑的）。
+26. **屋里变暗只降主光、补光看不出来**：大板主要是洗墙光和世界光照亮的。要一起降（见第 3 节"光"）。
+27. **灭着的灯泡用白色**，开灯前看着就像亮着的。灭着用灰（0.42），亮起来靠自发光。
+28. **2 m 外的磨砂配角像一块灰石头**：太小（按 8 角量的大小只有目标一半）、没光。按真实外形定大小，加底光自发光。
+29. **等显卡空位会等很久**：别的代理的渲染（3-04、B 档贴图）常常占满两个位，一次等 10–30 分钟。把要跑的几步串成一条后台命令（build → frames → 下一段 build），等的时候写检查清单、改技能；不要用"等某个 PID 结束"的循环（别人的 Blender 换了 PID 你会一直等）。
+30. **颗粒帧每段自己选**（`GRAIN_F`）：选人和零件都在、不在段首段尾转场里、背景不暗的一帧。原来写死 150。
+31. **段首段尾盖满要按零件真实形状试**：磨砂壳长边竖起来后变窄，段首 0.32 m 时左边盖不满，改 0.27；段尾中心放在 (800, 620) 而不是画面正中，因为零件的形状偏右上。M12 只能在挡人层渲完后查，试渲时先看 `bg_0000`、最后一帧四个角有没有露板。
+32. **几家同时抢空位**：各代理都在"Blender 少于 2 个就起"，一空出来几家同时看到，19:43 一下起了 3 个。`run_oncam.sh` 的 `wait_gpu` 现在看到空位后随机再等 3–17 秒复查一次。
+33. **停后台任务停不干净**：Windows 上停掉外层 bash，里面的 `run_oncam.sh` 子进程和它起的 Blender 还会接着跑（还会接着跑串好的下一步）。要停就按进程树杀（PowerShell 递归 `ParentProcessId`），停完 `tasklist` 确认没有自己的 Blender 和 `run_oncam` 了再重起。
+34. **渲染计时别把排队算进去**：`render` 的起始戳现在在拿到空位以后打；挡人层净时长写 `render_front_s.txt`。排期按净时长。
+35. **颗粒机检量到衣服的边**：固定偏移的 T 恤块落到 B 的 polo 领口上，量出 4.9（是边不是颗粒），M10 报 0.10。现在在衬衫框里自动找最平的一块。
+36. **关灯被当成慢放混帧**：灯光线性降、整屏亮度逐帧平均，`frame_integrity` 判成"混帧 → 像 30 帧"。`power_on/power_off` 加进设计渐变；它原来读总表 `master_v1.json`，总表没重建时还是旧的二维事件，改成先读 `keys/<段>.json`（和 S1 一致）。
+37. **挡人层的细缝**：零件贴镜头时分模线、盖子和底座之间的缝在透明通道里是一道低谷，人会从缝里透出一条线。`v2_person` 先对挡人透明度做 7 px 闭运算再拉满。
+38. **只改段首就只补渲段首**：把受影响的帧（段首 0 到落位后几帧）从 `fr_bg`、`fr_front`、`bwipe` 挪到 `_old/`（不删），重搭后 `render` 只补缺的帧。补渲前把 `render_t*.txt` 也拷进 `_old/`，检查页的整段用时用原来的。
+
+
+## 8. 铺开第 1、2 批补上的（5-05+06、5-09、1-01、1-03、1-05+06+07、2-04，11-20 夜）
+
+39. **一组零件挂在一个空物体下当主零件**：`_Grp`（`shot_oncam.py`）。G 的局部坐标按毫米摆（`ORG` = 构图中心，落位时投到 `REST_PX`，`PXMM` = 落位时 1 mm 多少像素，比 `_fit_scale` 好控：先在纸上按像素排版再换算毫米）。`g.add(名, 零件根, M0, show=, hide=, bbox=)` 挂子零件，`g.kids[名]["fn"] = lambda f: 局部矩阵` 逐帧动；`g.run(段首点, 段尾点, tail_kids=[…])`；`g.result(对焦点函数, 穿模对)`。`tail_kids` 写了就只有这几个子零件从料杆上掰下来冲进镜头（别的留在原地，不会整块料杆扫过相机）。工具：`_T _R _Sc _piv`（毫米平移、旋转、缩放、绕点）、`_bumpf _wob _popk`（鼓包、阻尼抖、弹出）、`_curve_mm`（可以"长出来"的料杆：按 0.5 mm 重采样，`bevel_factor_end` 逐帧打）、`_people_part`（kit 小人 + 头顶浇口）、`_hang`。四个 recipe：`calendar_people`、`capsule_row`、`key_tape`、`two_plates`，新段照它们抄。
+40. **M5 的"高 ≥ 380"在落位以后每一帧都算**：后面才弹出来的零件（一排小人、卷尺）不算在早先那几帧里。排版时先算"只有第一个零件时多高"，不够就把第一个零件放大、或让料杆一开始就在。
+41. **M5 逐行带含下一行**：60 px 一带按 `y0..y0+60` 两头都算，零件底边落在 599 行也要跟第 600 行的人比（1-03 A 的手从第 604 行起伸到 1195）。底边留到带内 ≤ y0+50。
+42. **人穿黑 T 恤（C）**：衬衫量出来的色温（6700 K）和颗粒（σ 1.7）不准、比光把主光拉到 1.5 W。`light.json` 手写 5300 K、σ [1.0, 0.95, 1.0]（原值存 `kelvin_measured`、`grain_measured`，`override_note` 写原因）；`calib` 遇到衬衫太暗自动借 3-06 的 `light_fit.json`。
+43. **多人段**（5-05+06、1-05+06+07）：`SEGS` 里写 `clips=[dict(person=, off=, cut=, n=)…]`，`person_png(cfg, f)` 按 cut 换人；量光按全段抽帧。每个人的右沿轮廓不一样（1-06 B 在 660 行以下伸到 1425），零件要躲开所有人。
+44. **段尾零件跑到相机后面**：插头、循环箭头这种伸出来的东西在冲镜头时会穿过相机平面，投影是 NaN，`build_v2` 以前直接崩。现在只记 `ONCAM warn behind_cam`，框按前面的点量；箭头在段尾开头 12 帧收掉。
+45. **拧着退就蹭**：插头一边回正一边退，齿和槽蹭到（M7 367–369 帧）。先回正（6 帧、不过冲）再退。
+46. **编码器**：`shot_oncam.py` 的 `FF` 先找 `D:/software/tools/CipherTalk/…/ffmpeg-static/ffmpeg.exe`，再找 `_env/ffmpeg`；`CDK20_FF` 可覆盖。
+47. **Gemini 初审**：每段成片跑 `py -3.11 -X utf8 _env/jobs/gemini_review.py <mp4>`（PowerShell），报告在 `G:/cdk20/work/gemini_review/`。它看的是 30 fps 代理片，说"早于/晚于某词"的都拿 `keys/<段>.json` 核对；逐条处理写进 `oncam_review/<段>.json` 的 `gemini`（`note`、`rows`：level、t、what、verdict、why），检查页"二之二"一节自动出。
+48. **颗粒倍数先试 10 帧再整段**：`GRAIN_GAIN` 按人定（D 3.6、C 2.4 起），整段 h264 编码后零件层颗粒再掉三成；M10 不过就照 3-06 的做法 10 帧试合成找倍数。
+49. **不开显卡的干跑**：Blender 空位等不到时，排版先干跑 recipe，不占 Blender 进程：用 bpy 模块环境 `G:/cdk20/work/envs/bpy311`（bpy 4.4 + numpy<2），`CDK20_WORK=G:/cdk20/work G:/cdk20/work/envs/bpy311/Scripts/python.exe 镜头设计_v3/inserts/oncam_dryrun.py -- <段> 帧,帧,…` 出 `proj/proj.json`（每帧零件框、点），再用系统 Python `python oncam_dryrun_draw.py <段>` 叠人物图出 `proj/proj_sheet.jpg`。构图、穿模（recipe 的 BVH 对）、Python 错一起看，过了再排队正式 build。注意：build 要读 5.3 存的 `kit/board_final.blend`，bpy 4.4 读不了，build 和渲染还是走 run_oncam.sh 排队；深色衣服段的 calib 只是借光，可以用这个环境跑 `shot_oncam.py -- calib <段>`。
+50. **段长 = 冲镜头落点 + 1**：`keys/<段>.json` 的 `len_f` 由 dive 的落点定，比人的片段长（人用 pingpong 补），不要为了"落在片段内"去改 dive。
+51. **零件比预想大**：钥匙这类长件按包围盒算宽，`_Sc(k)` 以后还要加上偏航透视，先干跑量 `h02_key` 的投影宽再定 k（1-05 原定 KEY_K 4 实际 743 px，改 3.4）。附件太大就给整组加一个缩放（卷尺 `TAPE_S`，壳、尺带、刻度、钩一起缩），不要单改尺寸破坏件内对位。

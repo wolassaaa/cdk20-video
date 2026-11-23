@@ -62,7 +62,7 @@ const Scene = () => {
         {plateIn>0 && <Plate x={1000} y={480} w={720} h={90} text="Insilico Medicine · 21 of 24 authors" size={40} op={plateIn} id="authors"/>}
         {revealed>0 && <Plate x={300} y={747-20*revealed} w={630} h={94} text="Conflicts of interest: declared" size={42} op={revealed} id="coi" rot={-12*(1-revealed)}><Tick x={594} y={48} s={40} p={revealed}/></Plate>}
       </Layer>
-      <Layer id="auth">
+      <Layer id="auth" exempt>
         <Runner d="M1360 578 V600 H1200 M1360 600 H1520" width={14} draw={p(E.built.s,E.built.l)}/>
         {["pandaomics","chemistry42"].map((n,i)=>{
           const a=p(E.built.s+i*4,E.built.l+i*4);

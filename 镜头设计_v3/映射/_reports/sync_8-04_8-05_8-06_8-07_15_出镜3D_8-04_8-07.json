@@ -1,0 +1,302 @@
+{
+ "video": "D:\\。hkbu\\molecular science\\导演检查_20261123\\15_出镜3D_8-04_8-07.mp4",
+ "group": "8-04+8-05+8-06+8-07",
+ "fps": 60.0,
+ "frames": 1960,
+ "offset_f": 0,
+ "S1": {
+  "word_events": 21,
+  "table_dev_max_f": 0,
+  "video_checked": 22,
+  "video_no_motion": [],
+  "pass_": true
+ },
+ "S2": {
+  "pass_": true,
+  "early": []
+ },
+ "S3": {
+  "pass_": true,
+  "longest_still_f": 0,
+  "bad": []
+ },
+ "S4": {
+  "pass_": true,
+  "looks_like_30": false,
+  "dup_frames": 0,
+  "stepped_dups": 0,
+  "stepped_ratio": 0.0,
+  "blend_frames": 0,
+  "blend_first": [],
+  "design_fade": 0,
+  "verdict": "原生（无变速重复/混帧）"
+ },
+ "sentences": [
+  {
+   "sid": "8-04.s1",
+   "f0": 32,
+   "f1": 223,
+   "last_motion_f": 223,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "8-04.s2",
+   "f0": 277,
+   "f1": 389,
+   "last_motion_f": 389,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "8-04.s3",
+   "f0": 468,
+   "f1": 561,
+   "last_motion_f": 561,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "8-05.s1",
+   "f0": 596,
+   "f1": 849,
+   "last_motion_f": 849,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "8-06.s1",
+   "f0": 884,
+   "f1": 1472,
+   "last_motion_f": 1472,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "8-07.s1",
+   "f0": 1501,
+   "f1": 1608,
+   "last_motion_f": 1608,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "8-07.s2",
+   "f0": 1648,
+   "f1": 1804,
+   "last_motion_f": 1804,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "8-07.s3",
+   "f0": 1857,
+   "f1": 1911,
+   "last_motion_f": 1911,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  }
+ ],
+ "events": [
+  {
+   "id": "land",
+   "verb": "move",
+   "w": "This",
+   "f_land": 26,
+   "table_dev": -6
+  },
+  {
+   "id": "cells_tick",
+   "verb": "snap",
+   "w": "cells,",
+   "f_land": 90,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "notyet",
+   "verb": "eject",
+   "w": "not",
+   "f_land": 132,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "chip_glow",
+   "verb": "move",
+   "w": "computer",
+   "f_land": 286,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "funnel",
+   "verb": "move",
+   "w": "narrows",
+   "f_land": 317,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "flask",
+   "verb": "eject",
+   "w": "Experiments",
+   "f_land": 468,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "decide",
+   "verb": "snap",
+   "w": "decide.",
+   "f_land": 545,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "bar_sway",
+   "verb": "move",
+   "w": "next",
+   "f_land": 605,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "paper",
+   "verb": "move",
+   "w": "headline",
+   "f_land": 660,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "headline",
+   "verb": "appear",
+   "w": "'AI",
+   "f_land": 741,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "paper_away",
+   "verb": "move",
+   "w": "...ask",
+   "f_land": 884,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "pulse",
+   "verb": "flow",
+   "w": "road:",
+   "f_land": 1020,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "st1",
+   "verb": "move",
+   "w": "computer,",
+   "f_land": 1096,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "st2",
+   "verb": "move",
+   "w": "protein,",
+   "f_land": 1176,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "st3",
+   "verb": "move",
+   "w": "cells,",
+   "f_land": 1261,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "st4",
+   "verb": "move",
+   "w": "animals,",
+   "f_land": 1347,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "st5",
+   "verb": "move",
+   "w": "patients?",
+   "f_land": 1435,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "chip2",
+   "verb": "move",
+   "w": "AI",
+   "f_land": 1501,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "person",
+   "verb": "eject",
+   "w": "scientists.",
+   "f_land": 1565,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "loop_on",
+   "verb": "power_on",
+   "w": "trial",
+   "f_land": 1692,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "ring",
+   "verb": "move",
+   "w": "light",
+   "f_land": 1774,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "allglow",
+   "verb": "move",
+   "w": "Thanks",
+   "f_land": 1857,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "dive",
+   "verb": "move",
+   "w": "watching.",
+   "f_land": 1959,
+   "table_dev": 73,
+   "video_motion_near_start": true
+  }
+ ],
+ "pass": true
+}

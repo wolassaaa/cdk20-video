@@ -1,0 +1,271 @@
+{
+ "schema": "cdk20.wordmap/1",
+ "built": "2026-11-18 02:33:56 +09:00",
+ "cut": "cut_v8",
+ "group": "6-09",
+ "fps": 60,
+ "len_f": 722,
+ "cut_start_s": 862.33,
+ "holds": [],
+ "words": [
+  {
+   "wid": "6-09.w006",
+   "w": "further",
+   "key": "further#1",
+   "sid": "6-09.s1",
+   "f0": 9,
+   "f1": 15
+  },
+  {
+   "wid": "6-09.w007",
+   "w": "down",
+   "key": "down#1",
+   "sid": "6-09.s1",
+   "f0": 15,
+   "f1": 21
+  },
+  {
+   "wid": "6-09.w008",
+   "w": "the",
+   "key": "the#1",
+   "sid": "6-09.s1",
+   "f0": 22,
+   "f1": 26
+  },
+  {
+   "wid": "6-09.w009",
+   "w": "road.",
+   "key": "road#1",
+   "sid": "6-09.s1",
+   "f0": 26,
+   "f1": 35
+  },
+  {
+   "wid": "6-09.w010",
+   "w": "Fewer",
+   "key": "fewer#1",
+   "sid": "6-09.s2",
+   "f0": 35,
+   "f1": 41
+  },
+  {
+   "wid": "6-09.w011",
+   "w": "failed",
+   "key": "failed#1",
+   "sid": "6-09.s2",
+   "f0": 41,
+   "f1": 48
+  },
+  {
+   "wid": "6-09.w012",
+   "w": "molecules,",
+   "key": "molecules#1",
+   "sid": "6-09.s2",
+   "f0": 48,
+   "f1": 80
+  },
+  {
+   "wid": "6-09.w013",
+   "w": "lower",
+   "key": "lower#1",
+   "sid": "6-09.s2",
+   "f0": 104,
+   "f1": 119
+  },
+  {
+   "wid": "6-09.w014",
+   "w": "costs,",
+   "key": "costs#1",
+   "sid": "6-09.s2",
+   "f0": 123,
+   "f1": 146
+  },
+  {
+   "wid": "6-09.w015",
+   "w": "fewer",
+   "key": "fewer#2",
+   "sid": "6-09.s2",
+   "f0": 175,
+   "f1": 193
+  },
+  {
+   "wid": "6-09.w016",
+   "w": "animal",
+   "key": "animal#1",
+   "sid": "6-09.s2",
+   "f0": 196,
+   "f1": 214
+  },
+  {
+   "wid": "6-09.w017",
+   "w": "tests,",
+   "key": "tests#1",
+   "sid": "6-09.s2",
+   "f0": 215,
+   "f1": 240
+  },
+  {
+   "wid": "6-09.w018",
+   "w": "less",
+   "key": "less#1",
+   "sid": "6-09.s2",
+   "f0": 264,
+   "f1": 274
+  },
+  {
+   "wid": "6-09.w019",
+   "w": "chemical",
+   "key": "chemical#1",
+   "sid": "6-09.s2",
+   "f0": 278,
+   "f1": 303
+  },
+  {
+   "wid": "6-09.w020",
+   "w": "waste.",
+   "key": "waste#1",
+   "sid": "6-09.s2",
+   "f0": 307,
+   "f1": 327
+  },
+  {
+   "wid": "6-09.w021",
+   "w": "Computing",
+   "key": "computing#1",
+   "sid": "6-09.s3",
+   "f0": 369,
+   "f1": 399
+  },
+  {
+   "wid": "6-09.w022",
+   "w": "costs",
+   "key": "costs#2",
+   "sid": "6-09.s3",
+   "f0": 401,
+   "f1": 417
+  },
+  {
+   "wid": "6-09.w023",
+   "w": "electricity",
+   "key": "electricity#1",
+   "sid": "6-09.s3",
+   "f0": 421,
+   "f1": 458
+  },
+  {
+   "wid": "6-09.w024",
+   "w": "too.",
+   "key": "too#1",
+   "sid": "6-09.s3",
+   "f0": 464,
+   "f1": 476
+  },
+  {
+   "wid": "6-09.w025",
+   "w": "And",
+   "key": "and#1",
+   "sid": "6-09.s4",
+   "f0": 541,
+   "f1": 546
+  },
+  {
+   "wid": "6-09.w026",
+   "w": "the",
+   "key": "the#2",
+   "sid": "6-09.s4",
+   "f0": 546,
+   "f1": 550
+  },
+  {
+   "wid": "6-09.w027",
+   "w": "real",
+   "key": "real#1",
+   "sid": "6-09.s4",
+   "f0": 552,
+   "f1": 563
+  },
+  {
+   "wid": "6-09.w028",
+   "w": "prize?",
+   "key": "prize#1",
+   "sid": "6-09.s4",
+   "f0": 565,
+   "f1": 595
+  },
+  {
+   "wid": "6-09.w029",
+   "w": "New",
+   "key": "new#1",
+   "sid": "6-09.s5",
+   "f0": 647,
+   "f1": 655
+  },
+  {
+   "wid": "6-09.w030",
+   "w": "treatments",
+   "key": "treatments#1",
+   "sid": "6-09.s5",
+   "f0": 661,
+   "f1": 687
+  },
+  {
+   "wid": "6-09.w031",
+   "w": "for",
+   "key": "for#1",
+   "sid": "6-09.s5",
+   "f0": 689,
+   "f1": 696
+  },
+  {
+   "wid": "6-09.w032",
+   "w": "patients.",
+   "key": "patients#1",
+   "sid": "6-09.s5",
+   "f0": 699,
+   "f1": 721
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "6-09.s1",
+   "text": "Now imagine this keeps working further down the road.",
+   "w_first": "6-09.w006",
+   "w_last": "6-09.w009",
+   "f0": 9,
+   "f1": 35
+  },
+  {
+   "sid": "6-09.s2",
+   "text": "Fewer failed molecules, lower costs, fewer animal tests, less chemical waste.",
+   "w_first": "6-09.w010",
+   "w_last": "6-09.w020",
+   "f0": 35,
+   "f1": 327
+  },
+  {
+   "sid": "6-09.s3",
+   "text": "Computing costs electricity too.",
+   "w_first": "6-09.w021",
+   "w_last": "6-09.w024",
+   "f0": 369,
+   "f1": 476
+  },
+  {
+   "sid": "6-09.s4",
+   "text": "And the real prize?",
+   "w_first": "6-09.w025",
+   "w_last": "6-09.w028",
+   "f0": 541,
+   "f1": 595
+  },
+  {
+   "sid": "6-09.s5",
+   "text": "New treatments for patients.",
+   "w_first": "6-09.w029",
+   "w_last": "6-09.w032",
+   "f0": 647,
+   "f1": 721
+  }
+ ],
+ "events": []
+}

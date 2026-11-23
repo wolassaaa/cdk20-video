@@ -1,0 +1,1040 @@
+{
+ "schema": "cdk20.wordmap/1",
+ "built": "2026-11-18 02:33:56 +09:00",
+ "cut": "cut_v8",
+ "group": "8-04+8-05+8-06+8-07",
+ "fps": 60,
+ "len_f": 1960,
+ "cut_start_s": 1015.43,
+ "holds": [],
+ "words": [
+  {
+   "wid": "8-04.w001",
+   "w": "This",
+   "key": "this#1",
+   "sid": "8-04.s1",
+   "f0": 32,
+   "f1": 49
+  },
+  {
+   "wid": "8-04.w002",
+   "w": "works",
+   "key": "works#1",
+   "sid": "8-04.s1",
+   "f0": 62,
+   "f1": 78
+  },
+  {
+   "wid": "8-04.w003",
+   "w": "in",
+   "key": "in#1",
+   "sid": "8-04.s1",
+   "f0": 80,
+   "f1": 85
+  },
+  {
+   "wid": "8-04.w004",
+   "w": "cells,",
+   "key": "cells#1",
+   "sid": "8-04.s1",
+   "f0": 90,
+   "f1": 114
+  },
+  {
+   "wid": "8-04.w005",
+   "w": "not",
+   "key": "not#1",
+   "sid": "8-04.s1",
+   "f0": 132,
+   "f1": 144
+  },
+  {
+   "wid": "8-04.w006",
+   "w": "yet",
+   "key": "yet#1",
+   "sid": "8-04.s1",
+   "f0": 149,
+   "f1": 163
+  },
+  {
+   "wid": "8-04.w007",
+   "w": "in",
+   "key": "in#2",
+   "sid": "8-04.s1",
+   "f0": 190,
+   "f1": 194
+  },
+  {
+   "wid": "8-04.w008",
+   "w": "people.",
+   "key": "people#1",
+   "sid": "8-04.s1",
+   "f0": 198,
+   "f1": 223
+  },
+  {
+   "wid": "8-04.w009",
+   "w": "The",
+   "key": "the#1",
+   "sid": "8-04.s2",
+   "f0": 277,
+   "f1": 284
+  },
+  {
+   "wid": "8-04.w010",
+   "w": "computer",
+   "key": "computer#1",
+   "sid": "8-04.s2",
+   "f0": 286,
+   "f1": 311
+  },
+  {
+   "wid": "8-04.w011",
+   "w": "narrows",
+   "key": "narrows#1",
+   "sid": "8-04.s2",
+   "f0": 317,
+   "f1": 344
+  },
+  {
+   "wid": "8-04.w012",
+   "w": "the",
+   "key": "the#2",
+   "sid": "8-04.s2",
+   "f0": 344,
+   "f1": 360
+  },
+  {
+   "wid": "8-04.w013",
+   "w": "search.",
+   "key": "search#1",
+   "sid": "8-04.s2",
+   "f0": 366,
+   "f1": 389
+  },
+  {
+   "wid": "8-04.w014",
+   "w": "Experiments",
+   "key": "experiments#1",
+   "sid": "8-04.s3",
+   "f0": 468,
+   "f1": 508
+  },
+  {
+   "wid": "8-04.w015",
+   "w": "still",
+   "key": "still#1",
+   "sid": "8-04.s3",
+   "f0": 523,
+   "f1": 539
+  },
+  {
+   "wid": "8-04.w016",
+   "w": "decide.",
+   "key": "decide#1",
+   "sid": "8-04.s3",
+   "f0": 545,
+   "f1": 561
+  },
+  {
+   "wid": "8-05.w001",
+   "w": "So",
+   "key": "so#1",
+   "sid": "8-05.s1",
+   "f0": 596,
+   "f1": 601
+  },
+  {
+   "wid": "8-05.w002",
+   "w": "next",
+   "key": "next#1",
+   "sid": "8-05.s1",
+   "f0": 605,
+   "f1": 616
+  },
+  {
+   "wid": "8-05.w003",
+   "w": "time",
+   "key": "time#1",
+   "sid": "8-05.s1",
+   "f0": 617,
+   "f1": 635
+  },
+  {
+   "wid": "8-05.w004",
+   "w": "you",
+   "key": "you#1",
+   "sid": "8-05.s1",
+   "f0": 638,
+   "f1": 643
+  },
+  {
+   "wid": "8-05.w005",
+   "w": "see",
+   "key": "see#1",
+   "sid": "8-05.s1",
+   "f0": 646,
+   "f1": 654
+  },
+  {
+   "wid": "8-05.w006",
+   "w": "a",
+   "key": "a#1",
+   "sid": "8-05.s1",
+   "f0": 655,
+   "f1": 657
+  },
+  {
+   "wid": "8-05.w007",
+   "w": "headline",
+   "key": "headline#1",
+   "sid": "8-05.s1",
+   "f0": 660,
+   "f1": 691
+  },
+  {
+   "wid": "8-05.w008",
+   "w": "like",
+   "key": "like#1",
+   "sid": "8-05.s1",
+   "f0": 714,
+   "f1": 730
+  },
+  {
+   "wid": "8-05.w009",
+   "w": "'AI",
+   "key": "ai#1",
+   "sid": "8-05.s1",
+   "f0": 741,
+   "f1": 751
+  },
+  {
+   "wid": "8-05.w010",
+   "w": "discovers",
+   "key": "discovers#1",
+   "sid": "8-05.s1",
+   "f0": 755,
+   "f1": 787
+  },
+  {
+   "wid": "8-05.w011",
+   "w": "a",
+   "key": "a#2",
+   "sid": "8-05.s1",
+   "f0": 787,
+   "f1": 788
+  },
+  {
+   "wid": "8-05.w012",
+   "w": "cancer",
+   "key": "cancer#1",
+   "sid": "8-05.s1",
+   "f0": 799,
+   "f1": 820
+  },
+  {
+   "wid": "8-05.w013",
+   "w": "drug'...",
+   "key": "drug#1",
+   "sid": "8-05.s1",
+   "f0": 826,
+   "f1": 849
+  },
+  {
+   "wid": "8-06.w001",
+   "w": "...ask",
+   "key": "ask#1",
+   "sid": "8-06.s1",
+   "f0": 884,
+   "f1": 899
+  },
+  {
+   "wid": "8-06.w002",
+   "w": "where",
+   "key": "where#1",
+   "sid": "8-06.s1",
+   "f0": 907,
+   "f1": 925
+  },
+  {
+   "wid": "8-06.w003",
+   "w": "it",
+   "key": "it#1",
+   "sid": "8-06.s1",
+   "f0": 940,
+   "f1": 946
+  },
+  {
+   "wid": "8-06.w004",
+   "w": "really",
+   "key": "really#1",
+   "sid": "8-06.s1",
+   "f0": 974,
+   "f1": 988
+  },
+  {
+   "wid": "8-06.w005",
+   "w": "is",
+   "key": "is#1",
+   "sid": "8-06.s1",
+   "f0": 992,
+   "f1": 998
+  },
+  {
+   "wid": "8-06.w006",
+   "w": "on",
+   "key": "on#1",
+   "sid": "8-06.s1",
+   "f0": 1004,
+   "f1": 1012
+  },
+  {
+   "wid": "8-06.w007",
+   "w": "the",
+   "key": "the#1",
+   "sid": "8-06.s1",
+   "f0": 1012,
+   "f1": 1015
+  },
+  {
+   "wid": "8-06.w008",
+   "w": "road:",
+   "key": "road#1",
+   "sid": "8-06.s1",
+   "f0": 1020,
+   "f1": 1039
+  },
+  {
+   "wid": "8-06.w009",
+   "w": "computer,",
+   "key": "computer#1",
+   "sid": "8-06.s1",
+   "f0": 1096,
+   "f1": 1129
+  },
+  {
+   "wid": "8-06.w010",
+   "w": "protein,",
+   "key": "protein#1",
+   "sid": "8-06.s1",
+   "f0": 1176,
+   "f1": 1210
+  },
+  {
+   "wid": "8-06.w011",
+   "w": "cells,",
+   "key": "cells#1",
+   "sid": "8-06.s1",
+   "f0": 1261,
+   "f1": 1287
+  },
+  {
+   "wid": "8-06.w012",
+   "w": "animals,",
+   "key": "animals#1",
+   "sid": "8-06.s1",
+   "f0": 1347,
+   "f1": 1377
+  },
+  {
+   "wid": "8-06.w013",
+   "w": "or",
+   "key": "or#1",
+   "sid": "8-06.s1",
+   "f0": 1423,
+   "f1": 1430
+  },
+  {
+   "wid": "8-06.w014",
+   "w": "patients?",
+   "key": "patients#1",
+   "sid": "8-06.s1",
+   "f0": 1435,
+   "f1": 1472
+  },
+  {
+   "wid": "8-07.w001",
+   "w": "AI",
+   "key": "ai#1",
+   "sid": "8-07.s1",
+   "f0": 1501,
+   "f1": 1515
+  },
+  {
+   "wid": "8-07.w002",
+   "w": "didn't",
+   "key": "didn't#1",
+   "sid": "8-07.s1",
+   "f0": 1517,
+   "f1": 1530
+  },
+  {
+   "wid": "8-07.w003",
+   "w": "replace",
+   "key": "replace#1",
+   "sid": "8-07.s1",
+   "f0": 1531,
+   "f1": 1558
+  },
+  {
+   "wid": "8-07.w004",
+   "w": "the",
+   "key": "the#1",
+   "sid": "8-07.s1",
+   "f0": 1558,
+   "f1": 1561
+  },
+  {
+   "wid": "8-07.w005",
+   "w": "scientists.",
+   "key": "scientists#1",
+   "sid": "8-07.s1",
+   "f0": 1565,
+   "f1": 1608
+  },
+  {
+   "wid": "8-07.w006",
+   "w": "It",
+   "key": "it#1",
+   "sid": "8-07.s2",
+   "f0": 1648,
+   "f1": 1653
+  },
+  {
+   "wid": "8-07.w007",
+   "w": "gave",
+   "key": "gave#1",
+   "sid": "8-07.s2",
+   "f0": 1658,
+   "f1": 1672
+  },
+  {
+   "wid": "8-07.w008",
+   "w": "them",
+   "key": "them#1",
+   "sid": "8-07.s2",
+   "f0": 1676,
+   "f1": 1683
+  },
+  {
+   "wid": "8-07.w009",
+   "w": "trial",
+   "key": "trial#1",
+   "sid": "8-07.s2",
+   "f0": 1692,
+   "f1": 1715
+  },
+  {
+   "wid": "8-07.w010",
+   "w": "and",
+   "key": "and#1",
+   "sid": "8-07.s2",
+   "f0": 1724,
+   "f1": 1731
+  },
+  {
+   "wid": "8-07.w011",
+   "w": "error",
+   "key": "error#1",
+   "sid": "8-07.s2",
+   "f0": 1738,
+   "f1": 1757
+  },
+  {
+   "wid": "8-07.w012",
+   "w": "at",
+   "key": "at#1",
+   "sid": "8-07.s2",
+   "f0": 1764,
+   "f1": 1770
+  },
+  {
+   "wid": "8-07.w013",
+   "w": "light",
+   "key": "light#1",
+   "sid": "8-07.s2",
+   "f0": 1774,
+   "f1": 1786
+  },
+  {
+   "wid": "8-07.w014",
+   "w": "speed.",
+   "key": "speed#1",
+   "sid": "8-07.s2",
+   "f0": 1788,
+   "f1": 1804
+  },
+  {
+   "wid": "8-07.w015",
+   "w": "Thanks",
+   "key": "thanks#1",
+   "sid": "8-07.s3",
+   "f0": 1857,
+   "f1": 1871
+  },
+  {
+   "wid": "8-07.w016",
+   "w": "for",
+   "key": "for#1",
+   "sid": "8-07.s3",
+   "f0": 1874,
+   "f1": 1881
+  },
+  {
+   "wid": "8-07.w017",
+   "w": "watching.",
+   "key": "watching#1",
+   "sid": "8-07.s3",
+   "f0": 1886,
+   "f1": 1911
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "8-04.s1",
+   "text": "This works in cells, not yet in people.",
+   "w_first": "8-04.w001",
+   "w_last": "8-04.w008",
+   "f0": 32,
+   "f1": 223
+  },
+  {
+   "sid": "8-04.s2",
+   "text": "The computer narrows the search.",
+   "w_first": "8-04.w009",
+   "w_last": "8-04.w013",
+   "f0": 277,
+   "f1": 389
+  },
+  {
+   "sid": "8-04.s3",
+   "text": "Experiments still decide.",
+   "w_first": "8-04.w014",
+   "w_last": "8-04.w016",
+   "f0": 468,
+   "f1": 561
+  },
+  {
+   "sid": "8-05.s1",
+   "text": "So next time you see a headline like 'AI discovers a cancer drug'...",
+   "w_first": "8-05.w001",
+   "w_last": "8-05.w013",
+   "f0": 596,
+   "f1": 849
+  },
+  {
+   "sid": "8-06.s1",
+   "text": "...ask where it really is on the road: computer, protein, cells, animals, or patients?",
+   "w_first": "8-06.w001",
+   "w_last": "8-06.w014",
+   "f0": 884,
+   "f1": 1472
+  },
+  {
+   "sid": "8-07.s1",
+   "text": "AI didn't replace the scientists.",
+   "w_first": "8-07.w001",
+   "w_last": "8-07.w005",
+   "f0": 1501,
+   "f1": 1608
+  },
+  {
+   "sid": "8-07.s2",
+   "text": "It gave them trial and error at light speed.",
+   "w_first": "8-07.w006",
+   "w_last": "8-07.w014",
+   "f0": 1648,
+   "f1": 1804
+  },
+  {
+   "sid": "8-07.s3",
+   "text": "Thanks for watching.",
+   "w_first": "8-07.w015",
+   "w_last": "8-07.w017",
+   "f0": 1857,
+   "f1": 1911
+  }
+ ],
+ "events": [
+  {
+   "eid": "t00_drop_t0",
+   "obj": "t0",
+   "verb": "drop",
+   "means": null,
+   "word": "8-04.w002",
+   "f_start": 48,
+   "f_land": 62,
+   "f_end": 62,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t01_fill_t0",
+   "obj": "t0",
+   "verb": "fill",
+   "means": null,
+   "word": "8-04.w004",
+   "f_start": 74,
+   "f_land": 90,
+   "f_end": 90,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t02_drop_pp",
+   "obj": "pp",
+   "verb": "drop",
+   "means": null,
+   "word": "8-04.w005",
+   "f_start": 118,
+   "f_land": 132,
+   "f_end": 132,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t03_hop_pp",
+   "obj": "pp",
+   "verb": "hop",
+   "means": null,
+   "word": "8-04.w008",
+   "f_start": 186,
+   "f_land": 198,
+   "f_end": 198,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t04_drop_c0",
+   "obj": "c0",
+   "verb": "drop",
+   "means": null,
+   "word": "8-04.w010",
+   "f_start": 257,
+   "f_land": 273,
+   "f_end": 273,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t05_drop_c1",
+   "obj": "c1",
+   "verb": "drop",
+   "means": null,
+   "word": "8-04.w010",
+   "f_start": 259,
+   "f_land": 275,
+   "f_end": 275,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t06_drop_c2",
+   "obj": "c2",
+   "verb": "drop",
+   "means": null,
+   "word": "8-04.w010",
+   "f_start": 261,
+   "f_land": 277,
+   "f_end": 277,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t07_drop_c3",
+   "obj": "c3",
+   "verb": "drop",
+   "means": null,
+   "word": "8-04.w010",
+   "f_start": 263,
+   "f_land": 279,
+   "f_end": 279,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t08_drop_c4",
+   "obj": "c4",
+   "verb": "drop",
+   "means": null,
+   "word": "8-04.w010",
+   "f_start": 265,
+   "f_land": 281,
+   "f_end": 281,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t09_drop_c5",
+   "obj": "c5",
+   "verb": "drop",
+   "means": null,
+   "word": "8-04.w010",
+   "f_start": 267,
+   "f_land": 283,
+   "f_end": 283,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t10_drop_c6",
+   "obj": "c6",
+   "verb": "drop",
+   "means": null,
+   "word": "8-04.w010",
+   "f_start": 269,
+   "f_land": 285,
+   "f_end": 285,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t11_lift_c0",
+   "obj": "c0",
+   "verb": "lift",
+   "means": null,
+   "word": "8-04.w013",
+   "f_start": 338,
+   "f_land": 356,
+   "f_end": 356,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t12_lift_c1",
+   "obj": "c1",
+   "verb": "lift",
+   "means": null,
+   "word": "8-04.w013",
+   "f_start": 340,
+   "f_land": 358,
+   "f_end": 358,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t13_lift_c2",
+   "obj": "c2",
+   "verb": "lift",
+   "means": null,
+   "word": "8-04.w013",
+   "f_start": 342,
+   "f_land": 360,
+   "f_end": 360,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t14_lift_c4",
+   "obj": "c4",
+   "verb": "lift",
+   "means": null,
+   "word": "8-04.w013",
+   "f_start": 344,
+   "f_land": 362,
+   "f_end": 362,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t15_lift_c5",
+   "obj": "c5",
+   "verb": "lift",
+   "means": null,
+   "word": "8-04.w013",
+   "f_start": 346,
+   "f_land": 364,
+   "f_end": 364,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t16_lift_c6",
+   "obj": "c6",
+   "verb": "lift",
+   "means": null,
+   "word": "8-04.w013",
+   "f_start": 348,
+   "f_land": 366,
+   "f_end": 366,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t17_hop_c3",
+   "obj": "c3",
+   "verb": "hop",
+   "means": null,
+   "word": "8-04.w014",
+   "f_start": 456,
+   "f_land": 468,
+   "f_end": 468,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t18_hop_t0",
+   "obj": "t0",
+   "verb": "hop",
+   "means": null,
+   "word": "8-04.w016",
+   "f_start": 533,
+   "f_land": 545,
+   "f_end": 545,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t19_lift_t0",
+   "obj": "t0",
+   "verb": "lift",
+   "means": null,
+   "word": "8-05.w001",
+   "f_start": 574,
+   "f_land": 592,
+   "f_end": 592,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t20_lift_pp",
+   "obj": "pp",
+   "verb": "lift",
+   "means": null,
+   "word": "8-05.w001",
+   "f_start": 576,
+   "f_land": 594,
+   "f_end": 594,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t21_lift_c3",
+   "obj": "c3",
+   "verb": "lift",
+   "means": null,
+   "word": "8-05.w001",
+   "f_start": 578,
+   "f_land": 596,
+   "f_end": 596,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t22_drop_hd",
+   "obj": "hd",
+   "verb": "drop",
+   "means": null,
+   "word": "8-05.w007",
+   "f_start": 646,
+   "f_land": 660,
+   "f_end": 660,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t23_hop_hd",
+   "obj": "hd",
+   "verb": "hop",
+   "means": null,
+   "word": "8-05.w010",
+   "f_start": 743,
+   "f_land": 755,
+   "f_end": 755,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t24_lift_hd",
+   "obj": "hd",
+   "verb": "lift",
+   "means": null,
+   "word": "8-06.w002",
+   "f_start": 891,
+   "f_land": 907,
+   "f_end": 907,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t25_drop_r0",
+   "obj": "r0",
+   "verb": "drop",
+   "means": null,
+   "word": "8-06.w009",
+   "f_start": 1082,
+   "f_land": 1096,
+   "f_end": 1096,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t26_drop_r1",
+   "obj": "r1",
+   "verb": "drop",
+   "means": null,
+   "word": "8-06.w010",
+   "f_start": 1162,
+   "f_land": 1176,
+   "f_end": 1176,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t27_drop_r2",
+   "obj": "r2",
+   "verb": "drop",
+   "means": null,
+   "word": "8-06.w011",
+   "f_start": 1246,
+   "f_land": 1260,
+   "f_end": 1260,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t28_drop_r3",
+   "obj": "r3",
+   "verb": "drop",
+   "means": null,
+   "word": "8-06.w012",
+   "f_start": 1333,
+   "f_land": 1347,
+   "f_end": 1347,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t29_drop_r4",
+   "obj": "r4",
+   "verb": "drop",
+   "means": null,
+   "word": "8-06.w014",
+   "f_start": 1421,
+   "f_land": 1435,
+   "f_end": 1435,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t30_lift_r0",
+   "obj": "r0",
+   "verb": "lift",
+   "means": null,
+   "word": "8-07.w001",
+   "f_start": 1477,
+   "f_land": 1493,
+   "f_end": 1493,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t31_lift_r1",
+   "obj": "r1",
+   "verb": "lift",
+   "means": null,
+   "word": "8-07.w001",
+   "f_start": 1479,
+   "f_land": 1495,
+   "f_end": 1495,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t32_lift_r2",
+   "obj": "r2",
+   "verb": "lift",
+   "means": null,
+   "word": "8-07.w001",
+   "f_start": 1481,
+   "f_land": 1497,
+   "f_end": 1497,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t33_lift_r3",
+   "obj": "r3",
+   "verb": "lift",
+   "means": null,
+   "word": "8-07.w001",
+   "f_start": 1483,
+   "f_land": 1499,
+   "f_end": 1499,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t34_lift_r4",
+   "obj": "r4",
+   "verb": "lift",
+   "means": null,
+   "word": "8-07.w001",
+   "f_start": 1485,
+   "f_land": 1501,
+   "f_end": 1501,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t35_drop_sci",
+   "obj": "sci",
+   "verb": "drop",
+   "means": null,
+   "word": "8-07.w005",
+   "f_start": 1551,
+   "f_land": 1565,
+   "f_end": 1565,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t36_drop_ring",
+   "obj": "ring",
+   "verb": "drop",
+   "means": null,
+   "word": "8-07.w007",
+   "f_start": 1643,
+   "f_land": 1657,
+   "f_end": 1657,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t37_drop_ob",
+   "obj": "ob",
+   "verb": "drop",
+   "means": null,
+   "word": "8-07.w009",
+   "f_start": 1678,
+   "f_land": 1692,
+   "f_end": 1692,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t38_orbit_ob",
+   "obj": "ob",
+   "verb": "orbit",
+   "means": null,
+   "word": "8-07.w011",
+   "f_start": 1738,
+   "f_land": 1738,
+   "f_end": 1738,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t39_hop_sci",
+   "obj": "sci",
+   "verb": "hop",
+   "means": null,
+   "word": "8-07.w015",
+   "f_start": 1845,
+   "f_land": 1857,
+   "f_end": 1857,
+   "role": "primary",
+   "tool": "remotion+blender"
+  }
+ ]
+}

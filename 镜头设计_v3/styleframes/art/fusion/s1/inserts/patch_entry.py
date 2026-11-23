@@ -1,6 +1,7 @@
-"""HKBU SCIE1007 coursework science video. S1 and S2 table shots: makes entry_cut.jsx, a copy of entry.jsx with one more composition, the film with its takes laid over it and the torn strip patched into the full view. The takes start and end on the full view's own frame, so only the words fade. Run: python patch_entry.py"""
+"""HKBU SCIE1007 coursework science video. S1 and S2 table shots: makes entry_cut.jsx, a copy of entry.jsx with one more composition, the film with its takes laid over it and the torn strip patched into the full view. The takes start and end on the full view's own frame, so only the words fade. Run: python patch_entry.py   (ENTRY_SRC=entry_table.jsx picks another source file in the same folder)"""
+import os
 A = "D:/。hkbu/molecular science/镜头设计_v2/tests/T4_remotion/src/v3/fusion/"
-s = open(A + "entry.jsx", encoding="utf8").read()
+s = open(A + os.environ.get("ENTRY_SRC", "entry.jsx"), encoding="utf8").read()
 tail = '  <Composition id="S3Board"'
 assert tail in s
 a = s.index("const S1 = (")
@@ -46,6 +47,8 @@ const Takes = ({f}) => {
 };
 
 '''
+if "const Note" not in s:   # the pre-notes source (S1S2_table): the label as it was before 11-04
+    comp = comp.replace('<Note x={660} y={300} size={48} at={46.8} fill={DARK}>HK, 2010-2021</Note>', '<Ink x={660} y={300} size={36} at={46.8} weight={500} fill={SOFT}>HK, 2010-2021</Ink>')
 s = s[:a] + comp + one + s[a:]
 s = s.replace(tail, '  <Composition id="Cut" component={Cut} durationInFrames={N} fps={FPS} width={W} height={H} defaultProps={{file: "fusion_s1/clip_1_0_141.mp4"}}/>\n' + tail, 1)
 s = s.replace("AbsoluteFill, OffthreadVideo,", "AbsoluteFill, Img, OffthreadVideo,", 1)

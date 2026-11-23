@@ -22,7 +22,7 @@ const CAP_W = 300;
 const HOP = pathOf([[760, 640], ...STEPS.flatMap((s, i) => [[s.x + s.w * 0.5 - 60, s.y - 150 - (i === 0 ? 30 : 0)], [s.x + s.w * 0.5, s.y - 44]])]);
 const BOOK = {x: 485, y: 470, w: 520};
 const CHIPS = [["chip_pandaomics/34", 1100], ["chip_alphafold/34", 1390], ["chip_chemistry42/34", 1680]];
-const LIVER = {x: 1380, y: 640, w: 440};
+const LIVER = {x: 1380, y: 670, w: 440};
 const MAP = {x: 1040, y: 489, w: 738};
 const HK = {x: MAP.x + (0.597 - 0.5) * MAP.w, y: MAP.y + (0.46 - 0.5) * (MAP.w * 586 / 924)};   // 九龙塘（浸会大学）在贴图里的位置
 
@@ -75,7 +75,7 @@ const Scene = () => {
           <Layer id="book" exempt>
             {S.book > 0.01 && <Plate x={BOOK.x-260} y={BOOK.y-180-60*(1-S.book)} w={520} h={360} text="Ren et al., Chem. Sci. 2023" size={42} op={Math.min(1,S.book)}/>}
           </Layer>
-          <Layer id="tools">
+          <Layer id="tools" exempt>
             {S.c0>.01 && <Runner d="M700 412 H1670 M1100 412 V365 M1390 412 V365 M1680 412 V365 M1390 412 V530" width={14} draw={Math.min(1,S.c0)}/>}
             {CHIPS.map(([n, x], i) => S[`c${i}`] > 0.01 && (
               <React.Fragment key={i}>

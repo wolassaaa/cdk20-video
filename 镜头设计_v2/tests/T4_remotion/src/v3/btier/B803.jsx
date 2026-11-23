@@ -85,7 +85,7 @@ const Scene = () => {
         </Layer>
 
         <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `translateX(${c1}px)`}}>
-          <Layer id="chips">
+          <Layer id="chips" exempt>
             {["pandaomics", "alphafold", "chemistry42"].map((n, i) => {
               const a = S[`c${i}`] || 0;
               return a > 0.01 && <React.Fragment key={n}>

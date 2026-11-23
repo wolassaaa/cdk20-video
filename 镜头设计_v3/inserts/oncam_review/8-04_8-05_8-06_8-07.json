@@ -1,0 +1,415 @@
+{
+ "note": "HKBU SCIE1007 课程作业的科普视频：出镜段 8-04_8-05_8-06_8-07 的检查清单（照 oncam-3d-parts 技能新做，没有旧三维版对比）。oncam_report.py 读它生成检查页；check 写 M 编号的由 oncam_check.py 机检判过/不过，写'看图'的是施工方逐张看抽帧后填的 result。",
+ "who": "C / B / D / A",
+ "line": "This works in cells, not yet in people. The computer narrows the search. Experiments still decide. So next time you see a headline like 'AI discovers a cancer drug'... ...ask where it really is on the road: computer, protein, cells, animals, or patients? AI didn't replace the scientists. It gave them trial and error at light speed. Thanks for watching.",
+ "design_doc": "镜头设计_v3/深化/18_剩余画面设计定稿.md（2.4 8-04_8-05_8-06_8-07）；事件表 映射/events/8-04_8-05_8-06_8-07.json",
+ "lead": [
+  "全版：五块牌挂在竖料杆上，每块牌右上角挂一个小件（芯片、显示器、培养皿、小鼠、灰色病人）；漏斗、烧瓶、小循环、白色小人、报纸都照 18 文档 2.4 做了。r2 去掉了扫光冲白（2.5→0.8×），r3 让段尾盖满帧数达标（TAIL_D 0.06）。",
+  "和 18 不一致：牌约 370×100 px（文档 480×110）；烧瓶只磕牌、不冒泡；小循环是芯片前的 12 节圆环，不是 h03 迷你件；没有四人挥手，段尾直接 computer 牌骨白面接 W5。"
+ ],
+ "items": [
+  {
+   "n": 1,
+   "frames": "0–26",
+   "cat": "转场",
+   "problem": "段首：`cells` 牌的骨白牌面从盖满画面退到位，五块牌挂在竖料杆上",
+   "fix": "对数深度贝塞尔甩回落位，段首几帧退得慢（M9 每帧亮度跳变 ≤ 24）",
+   "check": "M12",
+   "new": 0,
+   "show": true,
+   "result": ""
+  },
+  {
+   "n": 2,
+   "frames": "26–1915",
+   "cat": "构图",
+   "problem": "零件不碰画边、不进字幕区、在人右边不压人、够大",
+   "fix": "停留位置和大小照 18 文档 2.4 本段规格；OC1 / M5 豁免帧写在参数表里",
+   "check": "M5",
+   "new": 970,
+   "result": ""
+  },
+  {
+   "n": 3,
+   "frames": "84–104",
+   "cat": "动作",
+   "problem": "cells,：`cells` 牌上绿色的勾\"咔\"地扣上，培养皿小件亮",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 90,
+   "show": false,
+   "result": "第 92 帧勾扣上，培养皿同帧闪一下后回落"
+  },
+  {
+   "n": 4,
+   "frames": "126–223",
+   "cat": "动作",
+   "problem": "not：`patients` 牌旁弹下小牌 `not yet`；`patients` 牌保持灰",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 132,
+   "show": false,
+   "result": "not yet 小牌弹下，patients 牌一直灰"
+  },
+  {
+   "n": 5,
+   "frames": "278–306",
+   "cat": "动作",
+   "problem": "computer：`computer` 牌被点名（焦点加轮廓光），芯片小件亮",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 286,
+   "show": false,
+   "result": "r2 起扫光降到 0.8×，牌不再整列冲白，芯片亮"
+  },
+  {
+   "n": 6,
+   "frames": "297–389",
+   "cat": "动作",
+   "problem": "narrows：`computer` 牌下的漏斗里 40 颗小珠往下流，出口只漏出 5 颗",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 317,
+   "show": false,
+   "result": "漏斗在 computer/protein 牌右角前，金珠往下流、出口漏出几颗"
+  },
+  {
+   "n": 7,
+   "frames": "462–482",
+   "cat": "动作",
+   "problem": "Experiments：`cells` 牌旁的烧瓶升起，冒泡",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 468,
+   "show": false,
+   "result": "烧瓶从 cells 牌后升起；不冒泡（简化，见首段）"
+  },
+  {
+   "n": 8,
+   "frames": "537–561",
+   "cat": "动作",
+   "problem": "decide.：烧瓶往牌上一磕，\"咔\"，镜头微震，五块牌齐齐颤一下",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 545,
+   "show": false,
+   "result": "烧瓶磕牌，cells 牌多颤一下，五块牌一起颤"
+  },
+  {
+   "n": 9,
+   "frames": "599–635",
+   "cat": "动作",
+   "problem": "next：竖料杆轻晃",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 605,
+   "show": false,
+   "result": "竖料杆轻晃"
+  },
+  {
+   "n": 10,
+   "frames": "640–672",
+   "cat": "动作",
+   "problem": "headline：报纸从上方落下，停在上面两块牌前面（A4）",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 660,
+   "show": false,
+   "result": "报纸落到上面两块牌前，B 的手机在报纸前不被挡"
+  },
+  {
+   "n": 11,
+   "frames": "739–849",
+   "cat": "动作",
+   "problem": "'AI：报纸标题逐词亮，跟着念的词；B 举手机的手在报纸前",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 741,
+   "show": false,
+   "result": "标题词逐个变红跟念词"
+  },
+  {
+   "n": 12,
+   "frames": "868–894",
+   "cat": "动作",
+   "problem": "...ask：报纸缩到 0.45 倍，滑到右上角挂着",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 884,
+   "show": false,
+   "result": "报纸缩小挂到左上角（简版定的位置，留着）"
+  },
+  {
+   "n": 13,
+   "frames": "980–1026",
+   "cat": "动作",
+   "problem": "road:：一个鼓包沿竖料杆从上走到下",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 1020,
+   "show": false,
+   "result": "鼓包沿料杆走下，动作小但看得到"
+  },
+  {
+   "n": 14,
+   "frames": "1090–1110",
+   "cat": "动作",
+   "problem": "computer,：`computer` 牌往前弹出 8 mm、亮起；D 的指尖在牌前",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 1096,
+   "show": false,
+   "result": "computer 牌弹出亮起"
+  },
+  {
+   "n": 15,
+   "frames": "1170–1190",
+   "cat": "动作",
+   "problem": "protein,：`protein` 牌同上",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 1176,
+   "show": false,
+   "result": "protein 牌同上"
+  },
+  {
+   "n": 16,
+   "frames": "1255–1275",
+   "cat": "动作",
+   "problem": "cells,：`cells` 牌同上",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 1261,
+   "show": false,
+   "result": "cells 牌同上"
+  },
+  {
+   "n": 17,
+   "frames": "1341–1361",
+   "cat": "动作",
+   "problem": "animals,：`animals` 牌同上",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 1347,
+   "show": false,
+   "result": "animals 牌同上"
+  },
+  {
+   "n": 18,
+   "frames": "1429–1472",
+   "cat": "动作",
+   "problem": "patients?：`patients` 牌亮起后左右晃两下",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 1435,
+   "show": false,
+   "result": "patients 牌亮起后晃两下"
+  },
+  {
+   "n": 19,
+   "frames": "1495–1521",
+   "cat": "动作",
+   "problem": "AI：芯片小件扫光",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 1501,
+   "show": false,
+   "result": "扫光掠过，r2 不冲白"
+  },
+  {
+   "n": 20,
+   "frames": "1559–1608",
+   "cat": "动作",
+   "problem": "scientists.：`computer` 牌旁的白色小人跳一下",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 1565,
+   "show": false,
+   "result": "白色小人跳一下"
+  },
+  {
+   "n": 21,
+   "frames": "1682–1757",
+   "cat": "动作",
+   "problem": "trial：`computer` 牌上的小循环轨道转起来",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 1692,
+   "show": false,
+   "result": "芯片前小圆环转起来"
+  },
+  {
+   "n": 22,
+   "frames": "1758–1804",
+   "cat": "动作",
+   "problem": "light：小循环转成一个暖白的光环",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 1774,
+   "show": false,
+   "result": "圆环变暖白，r2 不冲白"
+  },
+  {
+   "n": 23,
+   "frames": "1847–1911",
+   "cat": "动作",
+   "problem": "Thanks：五块牌从上到下依次亮成暖色，各差 6 帧，整条路轻轻摆一下",
+   "fix": "动作挂在这个词的帧上（事件表）",
+   "check": "看图",
+   "new": 1857,
+   "show": false,
+   "result": "五块牌从上到下变暖，最后一起轻摆"
+  },
+  {
+   "n": 24,
+   "frames": "1915–1959",
+   "cat": "转场",
+   "problem": "`computer` 牌的骨白牌面冲镜头",
+   "fix": "说完 + 4 帧以后才起；末帧盖满（接下一段的擦除层）",
+   "check": "M12",
+   "new": 1959,
+   "show": true,
+   "result": ""
+  }
+ ],
+ "beats": [
+  [
+   "2–26",
+   "This",
+   "段首：`cells` 牌的骨白牌面从盖满画面退到位，五块牌挂在竖料杆上",
+   "move"
+  ],
+  [
+   "84–104",
+   "cells,",
+   "`cells` 牌上绿色的勾\"咔\"地扣上，培养皿小件亮",
+   "snap"
+  ],
+  [
+   "126–223",
+   "not",
+   "`patients` 牌旁弹下小牌 `not yet`；`patients` 牌保持灰",
+   "eject"
+  ],
+  [
+   "278–306",
+   "computer",
+   "`computer` 牌被点名（焦点加轮廓光），芯片小件亮",
+   "move"
+  ],
+  [
+   "297–389",
+   "narrows",
+   "`computer` 牌下的漏斗里 40 颗小珠往下流，出口只漏出 5 颗",
+   "move"
+  ],
+  [
+   "462–482",
+   "Experiments",
+   "`cells` 牌旁的烧瓶升起，冒泡",
+   "eject"
+  ],
+  [
+   "537–561",
+   "decide.",
+   "烧瓶往牌上一磕，\"咔\"，镜头微震，五块牌齐齐颤一下",
+   "snap"
+  ],
+  [
+   "599–635",
+   "next",
+   "竖料杆轻晃",
+   "move"
+  ],
+  [
+   "640–672",
+   "headline",
+   "报纸从上方落下，停在上面两块牌前面（A4）",
+   "move"
+  ],
+  [
+   "739–849",
+   "'AI",
+   "报纸标题逐词亮，跟着念的词；B 举手机的手在报纸前",
+   "appear"
+  ],
+  [
+   "868–894",
+   "...ask",
+   "报纸缩到 0.45 倍，滑到右上角挂着",
+   "move"
+  ],
+  [
+   "980–1026",
+   "road:",
+   "一个鼓包沿竖料杆从上走到下",
+   "flow"
+  ],
+  [
+   "1090–1110",
+   "computer,",
+   "`computer` 牌往前弹出 8 mm、亮起；D 的指尖在牌前",
+   "move"
+  ],
+  [
+   "1170–1190",
+   "protein,",
+   "`protein` 牌同上",
+   "move"
+  ],
+  [
+   "1255–1275",
+   "cells,",
+   "`cells` 牌同上",
+   "move"
+  ],
+  [
+   "1341–1361",
+   "animals,",
+   "`animals` 牌同上",
+   "move"
+  ],
+  [
+   "1429–1472",
+   "patients?",
+   "`patients` 牌亮起后左右晃两下",
+   "move"
+  ],
+  [
+   "1495–1521",
+   "AI",
+   "芯片小件扫光",
+   "move"
+  ],
+  [
+   "1559–1608",
+   "scientists.",
+   "`computer` 牌旁的白色小人跳一下",
+   "eject"
+  ],
+  [
+   "1682–1757",
+   "trial",
+   "`computer` 牌上的小循环轨道转起来",
+   "power_on"
+  ],
+  [
+   "1758–1804",
+   "light",
+   "小循环转成一个暖白的光环",
+   "move"
+  ],
+  [
+   "1847–1911",
+   "Thanks",
+   "五块牌从上到下依次亮成暖色，各差 6 帧，整条路轻轻摆一下",
+   "move"
+  ],
+  [
+   "1915–1959",
+   "watching.",
+   "`computer` 牌的骨白牌面冲镜头",
+   "move"
+  ]
+ ]
+}

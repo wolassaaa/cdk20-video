@@ -254,12 +254,12 @@
   "C7_coverage": {
    "pass": true,
    "sentences": 243,
-   "speech_s": 816.9,
+   "speech_s": 817.7,
    "covered_native_in_cut_pct": 0.1,
    "covered_any_source_pct": 7.1,
    "by_status": {
     "部分": 158.0,
-    "无事件": 600.9,
+    "无事件": 601.7,
     "覆盖（源片原生，cut_v8 未原生）；样板 A v4 原生，未接进 cut_v8": 13.9,
     "覆盖（源片原生，cut_v8 未原生）": 43.1,
     "覆盖": 1.2
@@ -2078,11 +2078,11 @@
    "group": "5-04",
    "sid": "5-04.s6",
    "text": "Above 6,000 nanomolar.",
-   "t": 1.98,
+   "t": 2.58,
    "picture": "warp",
    "events": 0,
    "landings": 0,
-   "gap_f": 119,
+   "gap_f": 155,
    "reach_end": false,
    "status": "无事件"
   },
@@ -2090,11 +2090,11 @@
    "group": "5-04",
    "sid": "5-04.s7",
    "text": "Weak.",
-   "t": 0.08,
+   "t": 0.33,
    "picture": "warp",
    "events": 0,
    "landings": 0,
-   "gap_f": 5,
+   "gap_f": 19,
    "reach_end": false,
    "status": "无事件"
   },

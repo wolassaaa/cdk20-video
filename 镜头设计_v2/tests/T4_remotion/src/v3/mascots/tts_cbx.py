@@ -7,7 +7,8 @@ import json, os, sys, subprocess
 import torch, torchaudio
 HERE = os.path.dirname(os.path.abspath(__file__))
 WORK = os.environ.get("CDK20_WORK", "D:/cdk20_work")
-OUT = f"{WORK}/mascots/voice_v2"
+LINES_FILE = os.environ.get("LINES", "lines.json")
+OUT = os.environ.get("VOICE_OUT", f"{WORK}/mascots/voice_v2")
 REFS = f"{OUT}/refs"
 FF = os.environ.get("CDK20_FFMPEG", "D:/software/TouchDesigner/bin/ffmpeg.exe")
 TAKES = 4
@@ -23,13 +24,25 @@ TEST = {"Claude": "c2", "GPT": "g2", "DeepSeek": "d3"}
 
 def ref_wav(voice, st):
     """mp3 -> 24 kHz mono wav, optional pitch shift in semitones (resample trick keeps tempo via atempo)."""
+    os.makedirs(REFS, exist_ok=True)
     dst = f"{REFS}/{voice}_{st:+.1f}.wav"
     if not os.path.exists(dst):
+        mp3 = f"{REFS}/{voice}.mp3"
+        if not os.path.exists(mp3):
+            alt = f"{WORK}/mascots/voice_v2/refs/{voice}.mp3"
+            if os.path.exists(alt):
+                mp3 = alt
+            else:
+                import asyncio, edge_tts
+                asyncio.run(edge_tts.Communicate(
+                    "Hello everyone, let's look closely at the real experimental data together.",
+                    voice
+                ).save(mp3))
         f = "aresample=24000"
         if st:
             r = 2 ** (st / 12)
             f = f"asetrate={int(24000 * r)},aresample=24000,atempo={1 / r:.5f}"
-        subprocess.run([FF, "-y", "-v", "error", "-i", f"{REFS}/{voice}.mp3", "-af", f, "-ac", "1", dst], check=True)
+        subprocess.run([FF, "-y", "-v", "error", "-i", mp3, "-af", f, "-ac", "1", dst], check=True)
     return dst
 
 
@@ -47,7 +60,8 @@ def gen(model, text, ref, exag, cfg, temp, seed, path):
 
 def main():
     mode = sys.argv[1]
-    cfg = json.load(open(os.path.join(HERE, "lines.json"), encoding="utf-8"))
+    lines_path = LINES_FILE if os.path.isabs(LINES_FILE) else os.path.join(HERE, LINES_FILE)
+    cfg = json.load(open(lines_path, encoding="utf-8"))
     L = {l["id"]: l for l in cfg["lines"]}
     model = load()
     if mode == "cand":
@@ -59,6 +73,15 @@ def main():
                     p = f"{OUT}/cand/{who}_{tag}_t{k}.wav"
                     gen(model, ln["text"], ref_wav(voice, st), ln["exag"], ln["cfg"], ln["temp"], 1000 + k, p)
                     print("cand", p, flush=True)
+    elif mode == "cand_voices":
+        os.makedirs(f"{OUT}/cand", exist_ok=True)
+        for who, v in cfg["voices"].items():
+            cands = [l for l in cfg["lines"] if l["who"] == who]
+            ln = max(cands, key=lambda x: len(x["text"].split()))
+            for k in range(2):
+                p = f"{OUT}/cand/{who}_cand_t{k}.wav"
+                gen(model, ln["text"], ref_wav(v["ref"], v["pitch_st"]), ln["exag"], ln["cfg"], ln["temp"], 1000 + k, p)
+                print("cand_voices", ln["id"], p, flush=True)
     elif mode == "trial":   # trial <line id> <edge voice> <semitones> <exag> <cfg> <tag> [takes]: one line, one setting
         lid, voice, st, ex, cf, tag = sys.argv[2], sys.argv[3], float(sys.argv[4]), float(sys.argv[5]), float(sys.argv[6]), sys.argv[7]
         n = int(sys.argv[8]) if len(sys.argv) > 8 else 2

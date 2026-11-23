@@ -1,0 +1,332 @@
+{
+ "schema": "cdk20.wordmap/1",
+ "built": "2026-11-18 02:33:56 +09:00",
+ "cut": "cut_v8",
+ "group": "5-02",
+ "fps": 60,
+ "len_f": 416,
+ "cut_start_s": 644.2,
+ "holds": [],
+ "words": [
+  {
+   "wid": "5-02.w001",
+   "w": "Six",
+   "key": "six#1",
+   "sid": "5-02.s1",
+   "f0": 32,
+   "f1": 42
+  },
+  {
+   "wid": "5-02.w002",
+   "w": "of",
+   "key": "of#1",
+   "sid": "5-02.s1",
+   "f0": 49,
+   "f1": 55
+  },
+  {
+   "wid": "5-02.w003",
+   "w": "them",
+   "key": "them#1",
+   "sid": "5-02.s1",
+   "f0": 56,
+   "f1": 67
+  },
+  {
+   "wid": "5-02.w004",
+   "w": "barely",
+   "key": "barely#1",
+   "sid": "5-02.s1",
+   "f0": 80,
+   "f1": 97
+  },
+  {
+   "wid": "5-02.w005",
+   "w": "held",
+   "key": "held#1",
+   "sid": "5-02.s1",
+   "f0": 102,
+   "f1": 115
+  },
+  {
+   "wid": "5-02.w006",
+   "w": "on.",
+   "key": "on#1",
+   "sid": "5-02.s1",
+   "f0": 119,
+   "f1": 125
+  },
+  {
+   "wid": "5-02.w007",
+   "w": "But",
+   "key": "but#1",
+   "sid": "5-02.s2",
+   "f0": 154,
+   "f1": 162
+  },
+  {
+   "wid": "5-02.w008",
+   "w": "one",
+   "key": "one#1",
+   "sid": "5-02.s2",
+   "f0": 170,
+   "f1": 197
+  },
+  {
+   "wid": "5-02.w009",
+   "w": "stood",
+   "key": "stood#1",
+   "sid": "5-02.s2",
+   "f0": 208,
+   "f1": 219
+  },
+  {
+   "wid": "5-02.w010",
+   "w": "out.",
+   "key": "out#1",
+   "sid": "5-02.s2",
+   "f0": 223,
+   "f1": 251
+  },
+  {
+   "wid": "5-02.w011",
+   "w": "Its",
+   "key": "its#1",
+   "sid": "5-02.s3",
+   "f0": 259,
+   "f1": 268
+  },
+  {
+   "wid": "5-02.w012",
+   "w": "name?",
+   "key": "name#1",
+   "sid": "5-02.s3",
+   "f0": 270,
+   "f1": 299
+  },
+  {
+   "wid": "5-02.w013",
+   "w": "001.",
+   "key": "001#1",
+   "sid": "5-02.s4",
+   "f0": 330,
+   "f1": 337
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "5-02.s1",
+   "text": "Six of them barely held on.",
+   "w_first": "5-02.w001",
+   "w_last": "5-02.w006",
+   "f0": 32,
+   "f1": 125
+  },
+  {
+   "sid": "5-02.s2",
+   "text": "But one stood out.",
+   "w_first": "5-02.w007",
+   "w_last": "5-02.w010",
+   "f0": 154,
+   "f1": 251
+  },
+  {
+   "sid": "5-02.s3",
+   "text": "Its name?",
+   "w_first": "5-02.w011",
+   "w_last": "5-02.w012",
+   "f0": 259,
+   "f1": 299
+  },
+  {
+   "sid": "5-02.s4",
+   "text": "001.",
+   "w_first": "5-02.w013",
+   "w_last": "5-02.w013",
+   "f0": 330,
+   "f1": 337
+  }
+ ],
+ "events": [
+  {
+   "eid": "t00_drop_c0",
+   "obj": "c0",
+   "verb": "drop",
+   "means": null,
+   "word": "5-02.w001",
+   "f_start": 4,
+   "f_land": 20,
+   "f_end": 20,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t01_drop_c1",
+   "obj": "c1",
+   "verb": "drop",
+   "means": null,
+   "word": "5-02.w001",
+   "f_start": 6,
+   "f_land": 22,
+   "f_end": 22,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t02_drop_c2",
+   "obj": "c2",
+   "verb": "drop",
+   "means": null,
+   "word": "5-02.w001",
+   "f_start": 8,
+   "f_land": 24,
+   "f_end": 24,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t03_drop_c3",
+   "obj": "c3",
+   "verb": "drop",
+   "means": null,
+   "word": "5-02.w001",
+   "f_start": 10,
+   "f_land": 26,
+   "f_end": 26,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t04_drop_c4",
+   "obj": "c4",
+   "verb": "drop",
+   "means": null,
+   "word": "5-02.w001",
+   "f_start": 12,
+   "f_land": 28,
+   "f_end": 28,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t05_drop_c5",
+   "obj": "c5",
+   "verb": "drop",
+   "means": null,
+   "word": "5-02.w001",
+   "f_start": 14,
+   "f_land": 30,
+   "f_end": 30,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t06_drop_c6",
+   "obj": "c6",
+   "verb": "drop",
+   "means": null,
+   "word": "5-02.w001",
+   "f_start": 16,
+   "f_land": 32,
+   "f_end": 32,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t07_hop_c0",
+   "obj": "c0",
+   "verb": "hop",
+   "means": null,
+   "word": "5-02.w004",
+   "f_start": 65,
+   "f_land": 75,
+   "f_end": 75,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t08_hop_c1",
+   "obj": "c1",
+   "verb": "hop",
+   "means": null,
+   "word": "5-02.w004",
+   "f_start": 66,
+   "f_land": 76,
+   "f_end": 76,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t09_hop_c2",
+   "obj": "c2",
+   "verb": "hop",
+   "means": null,
+   "word": "5-02.w004",
+   "f_start": 67,
+   "f_land": 77,
+   "f_end": 77,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t10_hop_c4",
+   "obj": "c4",
+   "verb": "hop",
+   "means": null,
+   "word": "5-02.w004",
+   "f_start": 68,
+   "f_land": 78,
+   "f_end": 78,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t11_hop_c5",
+   "obj": "c5",
+   "verb": "hop",
+   "means": null,
+   "word": "5-02.w004",
+   "f_start": 69,
+   "f_land": 79,
+   "f_end": 79,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t12_hop_c6",
+   "obj": "c6",
+   "verb": "hop",
+   "means": null,
+   "word": "5-02.w004",
+   "f_start": 70,
+   "f_land": 80,
+   "f_end": 80,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t13_slide_c3",
+   "obj": "c3",
+   "verb": "slide",
+   "means": null,
+   "word": "5-02.w009",
+   "f_start": 186,
+   "f_land": 208,
+   "f_end": 208,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t14_hop_c3",
+   "obj": "c3",
+   "verb": "hop",
+   "means": null,
+   "word": "5-02.w012",
+   "f_start": 258,
+   "f_land": 270,
+   "f_end": 270,
+   "role": "primary",
+   "tool": "remotion+blender"
+  }
+ ]
+}

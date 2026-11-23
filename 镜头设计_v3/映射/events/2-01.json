@@ -14,11 +14,11 @@
    "obj": "map",
    "verb": "appear",
    "at": {
-    "word": "hong#1",
+    "word": "first#1",
     "off": 0
    },
    "lead": 7,
-   "means": "Hong Kong first：香港地图落下",
+   "means": "香港地图从浇口落位",
    "tool": "remotion",
    "guide": {
     "kind": "focus",
@@ -39,7 +39,7 @@
     "off": 0
    },
    "lead": 7,
-   "means": "In 2011：地图缩到左上，年份牌 2011 落下",
+   "means": "年份牌翻到 2011",
    "tool": "remotion",
    "guide": {
     "kind": "focus",
@@ -60,7 +60,7 @@
     "off": 0
    },
    "lead": 7,
-   "means": "a team：三个小人落位",
+   "means": "机位沿着地图滑到沙田",
    "tool": "remotion",
    "guide": {
     "kind": "none"
@@ -74,11 +74,11 @@
    "obj": "cuhk",
    "verb": "appear",
    "at": {
-    "word": "chinese#1",
+    "word": "university#1",
     "off": 0
    },
    "lead": 10,
-   "means": "the Chinese University of Hong Kong：标牌，地图上沙田一点亮",
+   "means": "中大图钉和名牌",
    "tool": "remotion",
    "guide": {
     "kind": "none"
@@ -96,7 +96,7 @@
     "off": 0
    },
    "lead": 7,
-   "means": "liver tumours：玻璃肝和样本管落下",
+   "means": "地图缩到左侧，肝与红结节落位",
    "tool": "remotion",
    "guide": {
     "kind": "focus",
@@ -117,7 +117,7 @@
     "off": 0
    },
    "lead": 7,
-   "means": "from patients：两个病人小人",
+   "means": "样本来源：镜头移向肝",
    "tool": "remotion",
    "guide": {
     "kind": "none"
@@ -131,11 +131,11 @@
    "obj": "pwh",
    "verb": "appear",
    "at": {
-    "word": "prince#1",
+    "word": "hospital#1",
     "off": 0
    },
    "lead": 10,
-   "means": "Prince of Wales Hospital：标牌",
+   "means": "医院图钉和名牌",
    "tool": "remotion",
    "guide": {
     "kind": "none"
@@ -149,11 +149,11 @@
    "obj": "prot",
    "verb": "move",
    "at": {
-    "word": "one#1",
+    "word": "protein#1",
     "off": 0
    },
    "lead": 13,
-   "means": "One protein：清场，六支样本管剖面排开",
+   "means": "肝缩向左侧，三对样本管排开",
    "tool": "remotion",
    "guide": {
     "kind": "none"
@@ -167,11 +167,11 @@
    "obj": "raised",
    "verb": "grow",
    "at": {
-    "word": "kept#1",
+    "word": "raised#1",
     "off": 0
    },
    "lead": 30,
-   "means": "kept showing up raised：蓝色液柱一支支升过灰线",
+   "means": "三对样本管内肿瘤管液面升高",
    "tool": "remotion",
    "guide": {
     "kind": "focus",
@@ -192,7 +192,7 @@
     "off": 0
    },
    "lead": 7,
-   "means": "CCRK：小插座落下，标 CCRK",
+   "means": "同一块翻牌显示 CCRK",
    "tool": "remotion",
    "guide": {
     "kind": "none"
@@ -210,7 +210,7 @@
     "off": 0
    },
    "lead": 10,
-   "means": "also called CDK20：标 CDK20",
+   "means": "翻牌翻到 CDK20，小插座落位",
    "tool": "remotion",
    "guide": {
     "kind": "none"
@@ -224,11 +224,11 @@
    "obj": "ff",
    "verb": "grow",
    "at": {
-    "word": "fast#1",
+    "word": "2023#1",
     "off": 0
    },
    "lead": 36,
-   "means": "Fast forward to 2023：样本管清场，年份牌数字轮 2011 → 2023",
+   "means": "年份牌翻到 2023",
    "tool": "remotion",
    "guide": {
     "kind": "focus",
@@ -249,7 +249,7 @@
     "off": 0
    },
    "lead": 7,
-   "means": "an AI drug-discovery：芯片落下",
+   "means": "三对样本管退回托盘",
    "tool": "remotion",
    "guide": {
     "kind": "none"
@@ -267,7 +267,7 @@
     "off": 0
    },
    "lead": 7,
-   "means": "study：论文书落下",
+   "means": "论文牌落位",
    "tool": "remotion",
    "guide": {
     "kind": "none"
@@ -285,7 +285,7 @@
     "off": 0
    },
    "lead": 30,
-   "means": "goes after the same protein：小插座挪到书旁边",
+   "means": "同一插座滑到论文牌旁",
    "tool": "remotion",
    "guide": {
     "kind": "focus",
@@ -306,7 +306,7 @@
     "off": 0
    },
    "lead": 7,
-   "means": "co-authors：两个小人",
+   "means": "论文牌作者栏扫光",
    "tool": "remotion",
    "guide": {
     "kind": "none"
@@ -324,7 +324,7 @@
     "off": 0
    },
    "lead": 10,
-   "means": "at Insilico Medicine's：两个合著者底下长出一块底板",
+   "means": "合著者机构名牌贴在作者栏",
    "tool": "remotion",
    "guide": {
     "kind": "none"
@@ -338,17 +338,17 @@
    "obj": "hk3",
    "verb": "move",
    "at": {
-    "word": "hong#3",
+    "word": "science#1",
     "off": 0
    },
    "lead": 13,
-   "means": "Hong Kong office：左上角地图挪近、放大一点",
+   "means": "地图回到正中，路线亮",
    "tool": "remotion",
    "guide": {
     "kind": "none"
    },
    "until": {
-    "word": "kong#3"
+    "word": "park#1"
    }
   },
   {
@@ -356,11 +356,11 @@
    "obj": "sp",
    "verb": "appear",
    "at": {
-    "word": "science#1",
+    "word": "park#1",
     "off": 0
    },
    "lead": 10,
-   "means": "office in Science Park：地图上那一点再亮，标 Science Park",
+   "means": "科学园图钉落位",
    "tool": "remotion",
    "guide": {
     "kind": "none"

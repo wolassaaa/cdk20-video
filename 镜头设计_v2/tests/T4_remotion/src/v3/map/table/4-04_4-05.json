@@ -1,0 +1,496 @@
+{
+ "schema": "cdk20.wordmap/1",
+ "built": "2026-11-18 02:33:56 +09:00",
+ "cut": "cut_v8",
+ "group": "4-04+4-05",
+ "fps": 60,
+ "len_f": 474,
+ "cut_start_s": 499.1,
+ "holds": [],
+ "words": [
+  {
+   "wid": "4-04.w001",
+   "w": "So",
+   "key": "so#1",
+   "sid": "4-04.s1",
+   "f0": 32,
+   "f1": 40
+  },
+  {
+   "wid": "4-04.w002",
+   "w": "what",
+   "key": "what#1",
+   "sid": "4-04.s1",
+   "f0": 68,
+   "f1": 79
+  },
+  {
+   "wid": "4-04.w003",
+   "w": "did",
+   "key": "did#1",
+   "sid": "4-04.s1",
+   "f0": 80,
+   "f1": 87
+  },
+  {
+   "wid": "4-04.w004",
+   "w": "they",
+   "key": "they#1",
+   "sid": "4-04.s1",
+   "f0": 87,
+   "f1": 95
+  },
+  {
+   "wid": "4-04.w005",
+   "w": "do?",
+   "key": "do#1",
+   "sid": "4-04.s1",
+   "f0": 99,
+   "f1": 105
+  },
+  {
+   "wid": "4-05.w001",
+   "w": "They",
+   "key": "they#1",
+   "sid": "4-05.s1",
+   "f0": 145,
+   "f1": 151
+  },
+  {
+   "wid": "4-05.w002",
+   "w": "cut",
+   "key": "cut#1",
+   "sid": "4-05.s1",
+   "f0": 154,
+   "f1": 162
+  },
+  {
+   "wid": "4-05.w003",
+   "w": "the",
+   "key": "the#1",
+   "sid": "4-05.s1",
+   "f0": 163,
+   "f1": 167
+  },
+  {
+   "wid": "4-05.w004",
+   "w": "tail",
+   "key": "tail#1",
+   "sid": "4-05.s1",
+   "f0": 170,
+   "f1": 186
+  },
+  {
+   "wid": "4-05.w005",
+   "w": "off.",
+   "key": "off#1",
+   "sid": "4-05.s1",
+   "f0": 196,
+   "f1": 206
+  },
+  {
+   "wid": "4-05.w006",
+   "w": "The",
+   "key": "the#2",
+   "sid": "4-05.s2",
+   "f0": 225,
+   "f1": 229
+  },
+  {
+   "wid": "4-05.w007",
+   "w": "AI",
+   "key": "ai#1",
+   "sid": "4-05.s2",
+   "f0": 234,
+   "f1": 245
+  },
+  {
+   "wid": "4-05.w008",
+   "w": "made",
+   "key": "made#1",
+   "sid": "4-05.s2",
+   "f0": 247,
+   "f1": 257
+  },
+  {
+   "wid": "4-05.w009",
+   "w": "the",
+   "key": "the#3",
+   "sid": "4-05.s2",
+   "f0": 258,
+   "f1": 262
+  },
+  {
+   "wid": "4-05.w010",
+   "w": "guess.",
+   "key": "guess#1",
+   "sid": "4-05.s2",
+   "f0": 265,
+   "f1": 282
+  },
+  {
+   "wid": "4-05.w011",
+   "w": "A",
+   "key": "a#1",
+   "sid": "4-05.s3",
+   "f0": 325,
+   "f1": 327
+  },
+  {
+   "wid": "4-05.w012",
+   "w": "human",
+   "key": "human#1",
+   "sid": "4-05.s3",
+   "f0": 331,
+   "f1": 348
+  },
+  {
+   "wid": "4-05.w013",
+   "w": "caught",
+   "key": "caught#1",
+   "sid": "4-05.s3",
+   "f0": 357,
+   "f1": 372
+  },
+  {
+   "wid": "4-05.w014",
+   "w": "the",
+   "key": "the#4",
+   "sid": "4-05.s3",
+   "f0": 374,
+   "f1": 378
+  },
+  {
+   "wid": "4-05.w015",
+   "w": "problem.",
+   "key": "problem#1",
+   "sid": "4-05.s3",
+   "f0": 382,
+   "f1": 404
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "4-04.s1",
+   "text": "So what did they do?",
+   "w_first": "4-04.w001",
+   "w_last": "4-04.w005",
+   "f0": 32,
+   "f1": 105
+  },
+  {
+   "sid": "4-05.s1",
+   "text": "They cut the tail off.",
+   "w_first": "4-05.w001",
+   "w_last": "4-05.w005",
+   "f0": 145,
+   "f1": 206
+  },
+  {
+   "sid": "4-05.s2",
+   "text": "The AI made the guess.",
+   "w_first": "4-05.w006",
+   "w_last": "4-05.w010",
+   "f0": 225,
+   "f1": 282
+  },
+  {
+   "sid": "4-05.s3",
+   "text": "A human caught the problem.",
+   "w_first": "4-05.w011",
+   "w_last": "4-05.w015",
+   "f0": 325,
+   "f1": 404
+  }
+ ],
+ "events": [
+  {
+   "eid": "t00_drop_body",
+   "obj": "body",
+   "verb": "drop",
+   "means": null,
+   "word": "4-04.w002",
+   "f_start": 54,
+   "f_land": 68,
+   "f_end": 68,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t01_drop_b0",
+   "obj": "b0",
+   "verb": "drop",
+   "means": null,
+   "word": "4-04.w005",
+   "f_start": 75,
+   "f_land": 89,
+   "f_end": 89,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t02_drop_b1",
+   "obj": "b1",
+   "verb": "drop",
+   "means": null,
+   "word": "4-04.w005",
+   "f_start": 77,
+   "f_land": 91,
+   "f_end": 91,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t03_drop_b2",
+   "obj": "b2",
+   "verb": "drop",
+   "means": null,
+   "word": "4-04.w005",
+   "f_start": 79,
+   "f_land": 93,
+   "f_end": 93,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t04_drop_b3",
+   "obj": "b3",
+   "verb": "drop",
+   "means": null,
+   "word": "4-04.w005",
+   "f_start": 81,
+   "f_land": 95,
+   "f_end": 95,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t05_drop_b4",
+   "obj": "b4",
+   "verb": "drop",
+   "means": null,
+   "word": "4-04.w005",
+   "f_start": 83,
+   "f_land": 97,
+   "f_end": 97,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t06_drop_b5",
+   "obj": "b5",
+   "verb": "drop",
+   "means": null,
+   "word": "4-04.w005",
+   "f_start": 85,
+   "f_land": 99,
+   "f_end": 99,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t07_red_b0",
+   "obj": "b0",
+   "verb": "red",
+   "means": null,
+   "word": "4-04.w005",
+   "f_start": 103,
+   "f_land": 103,
+   "f_end": 103,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t08_red_b1",
+   "obj": "b1",
+   "verb": "red",
+   "means": null,
+   "word": "4-04.w005",
+   "f_start": 103,
+   "f_land": 103,
+   "f_end": 103,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t09_red_b2",
+   "obj": "b2",
+   "verb": "red",
+   "means": null,
+   "word": "4-04.w005",
+   "f_start": 103,
+   "f_land": 103,
+   "f_end": 103,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t10_red_b3",
+   "obj": "b3",
+   "verb": "red",
+   "means": null,
+   "word": "4-04.w005",
+   "f_start": 103,
+   "f_land": 103,
+   "f_end": 103,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t11_red_b4",
+   "obj": "b4",
+   "verb": "red",
+   "means": null,
+   "word": "4-04.w005",
+   "f_start": 103,
+   "f_land": 103,
+   "f_end": 103,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t12_red_b5",
+   "obj": "b5",
+   "verb": "red",
+   "means": null,
+   "word": "4-04.w005",
+   "f_start": 103,
+   "f_land": 103,
+   "f_end": 103,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t13_lift_b0",
+   "obj": "b0",
+   "verb": "lift",
+   "means": null,
+   "word": "4-05.w005",
+   "f_start": 166,
+   "f_land": 186,
+   "f_end": 186,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t14_lift_b1",
+   "obj": "b1",
+   "verb": "lift",
+   "means": null,
+   "word": "4-05.w005",
+   "f_start": 168,
+   "f_land": 188,
+   "f_end": 188,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t15_lift_b2",
+   "obj": "b2",
+   "verb": "lift",
+   "means": null,
+   "word": "4-05.w005",
+   "f_start": 170,
+   "f_land": 190,
+   "f_end": 190,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t16_lift_b3",
+   "obj": "b3",
+   "verb": "lift",
+   "means": null,
+   "word": "4-05.w005",
+   "f_start": 172,
+   "f_land": 192,
+   "f_end": 192,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t17_lift_b4",
+   "obj": "b4",
+   "verb": "lift",
+   "means": null,
+   "word": "4-05.w005",
+   "f_start": 174,
+   "f_land": 194,
+   "f_end": 194,
+   "role": "stagger",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t18_lift_b5",
+   "obj": "b5",
+   "verb": "lift",
+   "means": null,
+   "word": "4-05.w005",
+   "f_start": 176,
+   "f_land": 196,
+   "f_end": 196,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t19_drop_ai",
+   "obj": "ai",
+   "verb": "drop",
+   "means": null,
+   "word": "4-05.w007",
+   "f_start": 220,
+   "f_land": 234,
+   "f_end": 234,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t20_hop_ai",
+   "obj": "ai",
+   "verb": "hop",
+   "means": null,
+   "word": "4-05.w010",
+   "f_start": 253,
+   "f_land": 265,
+   "f_end": 265,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t21_drop_hu",
+   "obj": "hu",
+   "verb": "drop",
+   "means": null,
+   "word": "4-05.w012",
+   "f_start": 318,
+   "f_land": 332,
+   "f_end": 332,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t22_hop_hu",
+   "obj": "hu",
+   "verb": "hop",
+   "means": null,
+   "word": "4-05.w013",
+   "f_start": 345,
+   "f_land": 357,
+   "f_end": 357,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t23_hop_body",
+   "obj": "body",
+   "verb": "hop",
+   "means": null,
+   "word": "4-05.w015",
+   "f_start": 370,
+   "f_land": 382,
+   "f_end": 382,
+   "role": "primary",
+   "tool": "remotion+blender"
+  }
+ ]
+}

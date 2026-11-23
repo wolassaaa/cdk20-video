@@ -1,0 +1,140 @@
+{
+ "schema": "cdk20.wordmap/1",
+ "built": "2026-11-18 02:33:56 +09:00",
+ "cut": "cut_v8",
+ "group": "7-01",
+ "fps": 60,
+ "len_f": 320,
+ "cut_start_s": 922.47,
+ "holds": [],
+ "words": [
+  {
+   "wid": "7-01.w001",
+   "w": "So,",
+   "key": "so#1",
+   "sid": "7-01.s1",
+   "f0": 28,
+   "f1": 33
+  },
+  {
+   "wid": "7-01.w002",
+   "w": "what",
+   "key": "what#1",
+   "sid": "7-01.s1",
+   "f0": 40,
+   "f1": 51
+  },
+  {
+   "wid": "7-01.w003",
+   "w": "should",
+   "key": "should#1",
+   "sid": "7-01.s1",
+   "f0": 53,
+   "f1": 64
+  },
+  {
+   "wid": "7-01.w004",
+   "w": "happen",
+   "key": "happen#1",
+   "sid": "7-01.s1",
+   "f0": 66,
+   "f1": 87
+  },
+  {
+   "wid": "7-01.w005",
+   "w": "next?",
+   "key": "next#1",
+   "sid": "7-01.s1",
+   "f0": 92,
+   "f1": 119
+  },
+  {
+   "wid": "7-01.w006",
+   "w": "We'd",
+   "key": "we'd#1",
+   "sid": "7-01.s2",
+   "f0": 165,
+   "f1": 178
+  },
+  {
+   "wid": "7-01.w007",
+   "w": "suggest",
+   "key": "suggest#1",
+   "sid": "7-01.s2",
+   "f0": 182,
+   "f1": 210
+  },
+  {
+   "wid": "7-01.w008",
+   "w": "three",
+   "key": "three#1",
+   "sid": "7-01.s2",
+   "f0": 211,
+   "f1": 231
+  },
+  {
+   "wid": "7-01.w009",
+   "w": "things.",
+   "key": "things#1",
+   "sid": "7-01.s2",
+   "f0": 237,
+   "f1": 267
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "7-01.s1",
+   "text": "So, what should happen next?",
+   "w_first": "7-01.w001",
+   "w_last": "7-01.w005",
+   "f0": 28,
+   "f1": 119
+  },
+  {
+   "sid": "7-01.s2",
+   "text": "We'd suggest three things.",
+   "w_first": "7-01.w006",
+   "w_last": "7-01.w009",
+   "f0": 165,
+   "f1": 267
+  }
+ ],
+ "events": [
+  {
+   "eid": "t00_drop_q0",
+   "obj": "q0",
+   "verb": "drop",
+   "means": null,
+   "word": "7-01.w007",
+   "f_start": 168,
+   "f_land": 182,
+   "f_end": 182,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t01_drop_q1",
+   "obj": "q1",
+   "verb": "drop",
+   "means": null,
+   "word": "7-01.w008",
+   "f_start": 197,
+   "f_land": 211,
+   "f_end": 211,
+   "role": "primary",
+   "tool": "remotion+blender"
+  },
+  {
+   "eid": "t02_drop_q2",
+   "obj": "q2",
+   "verb": "drop",
+   "means": null,
+   "word": "7-01.w009",
+   "f_start": 223,
+   "f_land": 237,
+   "f_end": 237,
+   "role": "primary",
+   "tool": "remotion+blender"
+  }
+ ]
+}

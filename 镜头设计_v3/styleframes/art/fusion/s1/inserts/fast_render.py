@@ -241,7 +241,7 @@ def apply(engine, profile, out, samples=None, pct=None):
     r.use_persistent_data = True
     r.resolution_percentage = pct or (50 if profile == "preview" else 100)
     r.image_settings.file_format = "PNG"
-    r.image_settings.color_mode = "RGB"
+    r.image_settings.color_mode = "RGBA" if r.film_transparent else "RGB"   # 透明底片（出镜旁动效要叠真人）留 alpha
     r.image_settings.compression = 15
     r.use_overwrite = False
     r.use_placeholder = True

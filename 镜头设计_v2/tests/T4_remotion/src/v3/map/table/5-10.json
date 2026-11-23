@@ -1,0 +1,764 @@
+{
+ "schema": "cdk20.wordmap/1",
+ "built": "2026-11-18 02:33:56 +09:00",
+ "cut": "cut_v8",
+ "group": "5-10",
+ "fps": 60,
+ "len_f": 1746,
+ "cut_start_s": 751.43,
+ "holds": [],
+ "words": [
+  {
+   "wid": "5-10.w001",
+   "w": "Then,",
+   "key": "then#1",
+   "sid": "5-10.s1",
+   "f0": 9,
+   "f1": 24
+  },
+  {
+   "wid": "5-10.w002",
+   "w": "the",
+   "key": "the#1",
+   "sid": "5-10.s1",
+   "f0": 50,
+   "f1": 55
+  },
+  {
+   "wid": "5-10.w003",
+   "w": "big",
+   "key": "big#1",
+   "sid": "5-10.s1",
+   "f0": 60,
+   "f1": 69
+  },
+  {
+   "wid": "5-10.w004",
+   "w": "step:",
+   "key": "step#1",
+   "sid": "5-10.s1",
+   "f0": 74,
+   "f1": 88
+  },
+  {
+   "wid": "5-10.w005",
+   "w": "living",
+   "key": "living#1",
+   "sid": "5-10.s1",
+   "f0": 128,
+   "f1": 146
+  },
+  {
+   "wid": "5-10.w006",
+   "w": "cells.",
+   "key": "cells#1",
+   "sid": "5-10.s1",
+   "f0": 149,
+   "f1": 168
+  },
+  {
+   "wid": "5-10.w007",
+   "w": "After",
+   "key": "after#1",
+   "sid": "5-10.s2",
+   "f0": 219,
+   "f1": 241
+  },
+  {
+   "wid": "5-10.w008",
+   "w": "three",
+   "key": "three#1",
+   "sid": "5-10.s2",
+   "f0": 251,
+   "f1": 264
+  },
+  {
+   "wid": "5-10.w009",
+   "w": "days",
+   "key": "days#1",
+   "sid": "5-10.s2",
+   "f0": 267,
+   "f1": 281
+  },
+  {
+   "wid": "5-10.w010",
+   "w": "with",
+   "key": "with#1",
+   "sid": "5-10.s2",
+   "f0": 291,
+   "f1": 303
+  },
+  {
+   "wid": "5-10.w011",
+   "w": "048,",
+   "key": "048#1",
+   "sid": "5-10.s2",
+   "f0": 321,
+   "f1": 417
+  },
+  {
+   "wid": "5-10.w012",
+   "w": "Huh7",
+   "key": "huh7#1",
+   "sid": "5-10.s2",
+   "f0": 417,
+   "f1": 471
+  },
+  {
+   "wid": "5-10.w013",
+   "w": "liver",
+   "key": "liver#1",
+   "sid": "5-10.s2",
+   "f0": 480,
+   "f1": 493
+  },
+  {
+   "wid": "5-10.w014",
+   "w": "cancer",
+   "key": "cancer#1",
+   "sid": "5-10.s2",
+   "f0": 499,
+   "f1": 517
+  },
+  {
+   "wid": "5-10.w015",
+   "w": "cells,",
+   "key": "cells#2",
+   "sid": "5-10.s2",
+   "f0": 522,
+   "f1": 540
+  },
+  {
+   "wid": "5-10.w016",
+   "w": "packed",
+   "key": "packed#1",
+   "sid": "5-10.s2",
+   "f0": 552,
+   "f1": 578
+  },
+  {
+   "wid": "5-10.w017",
+   "w": "with",
+   "key": "with#2",
+   "sid": "5-10.s2",
+   "f0": 588,
+   "f1": 601
+  },
+  {
+   "wid": "5-10.w018",
+   "w": "CDK20,",
+   "key": "cdk20#1",
+   "sid": "5-10.s2",
+   "f0": 614,
+   "f1": 661
+  },
+  {
+   "wid": "5-10.w019",
+   "w": "lost",
+   "key": "lost#1",
+   "sid": "5-10.s2",
+   "f0": 707,
+   "f1": 727
+  },
+  {
+   "wid": "5-10.w020",
+   "w": "half",
+   "key": "half#1",
+   "sid": "5-10.s2",
+   "f0": 766,
+   "f1": 781
+  },
+  {
+   "wid": "5-10.w021",
+   "w": "their",
+   "key": "their#1",
+   "sid": "5-10.s2",
+   "f0": 789,
+   "f1": 801
+  },
+  {
+   "wid": "5-10.w022",
+   "w": "living-cell",
+   "key": "living-cell#1",
+   "sid": "5-10.s2",
+   "f0": 816,
+   "f1": 849
+  },
+  {
+   "wid": "5-10.w023",
+   "w": "signal",
+   "key": "signal#1",
+   "sid": "5-10.s2",
+   "f0": 859,
+   "f1": 882
+  },
+  {
+   "wid": "5-10.w024",
+   "w": "at",
+   "key": "at#1",
+   "sid": "5-10.s2",
+   "f0": 912,
+   "f1": 923
+  },
+  {
+   "wid": "5-10.w025",
+   "w": "about",
+   "key": "about#1",
+   "sid": "5-10.s2",
+   "f0": 930,
+   "f1": 949
+  },
+  {
+   "wid": "5-10.w026",
+   "w": "210",
+   "key": "210#1",
+   "sid": "5-10.s2",
+   "f0": 996,
+   "f1": 1057
+  },
+  {
+   "wid": "5-10.w027",
+   "w": "nanomolar.",
+   "key": "nanomolar#1",
+   "sid": "5-10.s2",
+   "f0": 1068,
+   "f1": 1118
+  },
+  {
+   "wid": "5-10.w028",
+   "w": "Comparison",
+   "key": "comparison#1",
+   "sid": "5-10.s3",
+   "f0": 1157,
+   "f1": 1200
+  },
+  {
+   "wid": "5-10.w029",
+   "w": "cells,",
+   "key": "cells#3",
+   "sid": "5-10.s3",
+   "f0": 1203,
+   "f1": 1221
+  },
+  {
+   "wid": "5-10.w030",
+   "w": "HEK293,",
+   "key": "hek293#1",
+   "sid": "5-10.s3",
+   "f0": 1252,
+   "f1": 1412
+  },
+  {
+   "wid": "5-10.w031",
+   "w": "needed",
+   "key": "needed#1",
+   "sid": "5-10.s3",
+   "f0": 1412,
+   "f1": 1420
+  },
+  {
+   "wid": "5-10.w032",
+   "w": "about",
+   "key": "about#2",
+   "sid": "5-10.s3",
+   "f0": 1426,
+   "f1": 1445
+  },
+  {
+   "wid": "5-10.w033",
+   "w": "1,700.",
+   "key": "1,700#1",
+   "sid": "5-10.s3",
+   "f0": 1474,
+   "f1": 1607
+  },
+  {
+   "wid": "5-10.w034",
+   "w": "Roughly",
+   "key": "roughly#1",
+   "sid": "5-10.s4",
+   "f0": 1636,
+   "f1": 1658
+  },
+  {
+   "wid": "5-10.w035",
+   "w": "eight",
+   "key": "eight#1",
+   "sid": "5-10.s4",
+   "f0": 1672,
+   "f1": 1681
+  },
+  {
+   "wid": "5-10.w036",
+   "w": "times",
+   "key": "times#1",
+   "sid": "5-10.s4",
+   "f0": 1683,
+   "f1": 1712
+  },
+  {
+   "wid": "5-10.w037",
+   "w": "more.",
+   "key": "more#1",
+   "sid": "5-10.s4",
+   "f0": 1713,
+   "f1": 1738
+  }
+ ],
+ "sentences": [
+  {
+   "sid": "5-10.s1",
+   "text": "Then, the big step: living cells.",
+   "w_first": "5-10.w001",
+   "w_last": "5-10.w006",
+   "f0": 9,
+   "f1": 168
+  },
+  {
+   "sid": "5-10.s2",
+   "text": "After three days with 048, Huh7 liver cancer cells, packed with CDK20, lost half their living-cell signal at about 210 nanomolar.",
+   "w_first": "5-10.w007",
+   "w_last": "5-10.w027",
+   "f0": 219,
+   "f1": 1118
+  },
+  {
+   "sid": "5-10.s3",
+   "text": "Comparison cells, HEK293, needed about 1,700.",
+   "w_first": "5-10.w028",
+   "w_last": "5-10.w033",
+   "f0": 1157,
+   "f1": 1607
+  },
+  {
+   "sid": "5-10.s4",
+   "text": "Roughly eight times more.",
+   "w_first": "5-10.w034",
+   "w_last": "5-10.w037",
+   "f0": 1636,
+   "f1": 1738
+  }
+ ],
+ "events": [
+  {
+   "eid": "step",
+   "obj": "step",
+   "verb": "keyed",
+   "means": null,
+   "word": "5-10.w004",
+   "f_start": 74,
+   "f_land": 74,
+   "f_end": 114,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "dishes",
+   "obj": "dishes",
+   "verb": "ring",
+   "means": null,
+   "word": "5-10.w006",
+   "f_start": 148,
+   "f_land": 148,
+   "f_end": 166,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "cal3",
+   "obj": "cal3",
+   "verb": "minical",
+   "means": null,
+   "word": "5-10.w007",
+   "f_start": 219,
+   "f_land": 219,
+   "f_end": 231,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "p1",
+   "obj": "p1",
+   "verb": "minipage",
+   "means": null,
+   "word": "5-10.w008",
+   "f_start": 250,
+   "f_land": 250,
+   "f_end": 250,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "p2",
+   "obj": "p2",
+   "verb": "minipage",
+   "means": null,
+   "word": "5-10.w009",
+   "f_start": 267,
+   "f_land": 267,
+   "f_end": 267,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "p3",
+   "obj": "p3",
+   "verb": "minipage",
+   "means": null,
+   "word": "5-10.w010",
+   "f_start": 291,
+   "f_land": 291,
+   "f_end": 291,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "w048",
+   "obj": "w048",
+   "verb": "note",
+   "means": null,
+   "word": "5-10.w011",
+   "f_start": 321,
+   "f_land": 321,
+   "f_end": 345,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "add",
+   "obj": "add",
+   "verb": "leader",
+   "means": null,
+   "word": "5-10.w011",
+   "f_start": 371,
+   "f_land": 371,
+   "f_end": 391,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "huh7",
+   "obj": "huh7",
+   "verb": "ink",
+   "means": null,
+   "word": "5-10.w012",
+   "f_start": 417,
+   "f_land": 417,
+   "f_end": 429,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "liver",
+   "obj": "liver",
+   "verb": "ink",
+   "means": null,
+   "word": "5-10.w014",
+   "f_start": 499,
+   "f_land": 499,
+   "f_end": 519,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "packed",
+   "obj": "packed",
+   "verb": "note",
+   "means": null,
+   "word": "5-10.w016",
+   "f_start": 552,
+   "f_land": 552,
+   "f_end": 582,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "ulcdk",
+   "obj": "ulcdk",
+   "verb": "ul",
+   "means": null,
+   "word": "5-10.w018",
+   "f_start": 614,
+   "f_land": 614,
+   "f_end": 626,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "cdk_dots",
+   "obj": "cdk_dots",
+   "verb": "dots",
+   "means": null,
+   "word": "5-10.w018",
+   "f_start": 654,
+   "f_land": 654,
+   "f_end": 672,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "lost",
+   "obj": "lost",
+   "verb": "ink",
+   "means": null,
+   "word": "5-10.w019",
+   "f_start": 715,
+   "f_land": 715,
+   "f_end": 735,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "slide0",
+   "obj": "slider",
+   "verb": "land",
+   "means": null,
+   "word": "5-10.w019",
+   "f_start": 707,
+   "f_land": 707,
+   "f_end": 707,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "half",
+   "obj": "half",
+   "verb": "note",
+   "means": null,
+   "word": "5-10.w020",
+   "f_start": 765,
+   "f_land": 765,
+   "f_end": 801,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "sig1",
+   "obj": "sig1",
+   "verb": "ul",
+   "means": null,
+   "word": "5-10.w022",
+   "f_start": 816,
+   "f_land": 816,
+   "f_end": 828,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "sig2",
+   "obj": "sig2",
+   "verb": "ul",
+   "means": null,
+   "word": "5-10.w023",
+   "f_start": 859,
+   "f_land": 859,
+   "f_end": 871,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "about",
+   "obj": "about",
+   "verb": "pen",
+   "means": null,
+   "word": "5-10.w025",
+   "f_start": 930,
+   "f_land": 930,
+   "f_end": 940,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "huh7_stop",
+   "obj": "slider",
+   "verb": "land",
+   "means": null,
+   "word": "5-10.w026",
+   "f_start": 996,
+   "f_land": 996,
+   "f_end": 996,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "v210",
+   "obj": "v210",
+   "verb": "keyed",
+   "means": null,
+   "word": "5-10.w026",
+   "f_start": 1002,
+   "f_land": 1002,
+   "f_end": 1022,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "nm1",
+   "obj": "nm1",
+   "verb": "ul",
+   "means": null,
+   "word": "5-10.w027",
+   "f_start": 1068,
+   "f_land": 1068,
+   "f_end": 1069,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "cmp",
+   "obj": "cmp",
+   "verb": "ink",
+   "means": null,
+   "word": "5-10.w028",
+   "f_start": 1157,
+   "f_land": 1157,
+   "f_end": 1171,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "cmp2",
+   "obj": "cmp2",
+   "verb": "ink",
+   "means": null,
+   "word": "5-10.w029",
+   "f_start": 1203,
+   "f_land": 1203,
+   "f_end": 1219,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "hek",
+   "obj": "hek",
+   "verb": "ul",
+   "means": null,
+   "word": "5-10.w030",
+   "f_start": 1252,
+   "f_land": 1252,
+   "f_end": 1264,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "hek2",
+   "obj": "hek2",
+   "verb": "ring",
+   "means": null,
+   "word": "5-10.w030",
+   "f_start": 1260,
+   "f_land": 1260,
+   "f_end": 1278,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "hek_go",
+   "obj": "hek_go",
+   "verb": "note",
+   "means": null,
+   "word": null,
+   "f_start": 1350,
+   "f_land": 1350,
+   "f_end": 1370,
+   "role": "free",
+   "tool": "blender"
+  },
+  {
+   "eid": "needed",
+   "obj": "needed",
+   "verb": "pen",
+   "means": null,
+   "word": "5-10.w031",
+   "f_start": 1412,
+   "f_land": 1412,
+   "f_end": 1422,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "hek_stop",
+   "obj": "slider",
+   "verb": "land",
+   "means": null,
+   "word": "5-10.w033",
+   "f_start": 1474,
+   "f_land": 1474,
+   "f_end": 1474,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "v1700",
+   "obj": "v1700",
+   "verb": "keyed",
+   "means": null,
+   "word": "5-10.w033",
+   "f_start": 1480,
+   "f_land": 1480,
+   "f_end": 1500,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "link",
+   "obj": "link",
+   "verb": "pen",
+   "means": null,
+   "word": null,
+   "f_start": 1540,
+   "f_land": 1540,
+   "f_end": 1564,
+   "role": "free",
+   "tool": "blender"
+  },
+  {
+   "eid": "hekhalf",
+   "obj": "hekhalf",
+   "verb": "note",
+   "means": null,
+   "word": null,
+   "f_start": 1590,
+   "f_land": 1590,
+   "f_end": 1614,
+   "role": "free",
+   "tool": "blender"
+  },
+  {
+   "eid": "roughly",
+   "obj": "roughly",
+   "verb": "bracket",
+   "means": null,
+   "word": "5-10.w034",
+   "f_start": 1636,
+   "f_land": 1636,
+   "f_end": 1656,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "eight",
+   "obj": "eight",
+   "verb": "note",
+   "means": null,
+   "word": "5-10.w035",
+   "f_start": 1672,
+   "f_land": 1672,
+   "f_end": 1698,
+   "role": "primary",
+   "tool": "blender"
+  },
+  {
+   "eid": "foot",
+   "obj": "foot",
+   "verb": "ink",
+   "means": null,
+   "word": "5-10.w037",
+   "f_start": 1713,
+   "f_land": 1713,
+   "f_end": 1733,
+   "role": "primary",
+   "tool": "blender"
+  }
+ ]
+}

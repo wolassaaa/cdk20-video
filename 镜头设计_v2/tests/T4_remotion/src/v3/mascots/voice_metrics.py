@@ -25,13 +25,15 @@ def words(n):
     if n < 20: return ONES[n]
     if n < 100: return TENS[n // 10] + ("" if n % 10 == 0 else " " + ONES[n % 10])
     if n < 1000: return ONES[n // 100] + " hundred" + ("" if n % 100 == 0 else " " + words(n % 100))
-    return words(n // 1000) + " thousand" + ("" if n % 1000 == 0 else " " + words(n % 1000))
+    if n < 1000000: return words(n // 1000) + " thousand" + ("" if n % 1000 == 0 else " " + words(n % 1000))
+    return words(n // 1000000) + " million" + ("" if n % 1000000 == 0 else " " + words(n % 1000000))
 
 
 def norm(s):
     s = re.sub(r"(?<=\d),(?=\d{3})", "", s.lower())
+    s = re.sub(r"(\d+)\.(\d+)", lambda m: " " + words(int(m.group(1))) + " point " + " ".join(ONES[int(d)] for d in m.group(2)) + " ", s)
     s = re.sub(r"\d+", lambda m: " " + words(int(m.group())) + " ", s)
-    s = s.replace("-", " ").replace("a.i.", "ai")
+    s = s.replace("-", " ").replace("a.i.", "ai").replace("ai's", "ais")
     s = re.sub(r"[^a-z' ]", " ", s)
     return s.split()
 

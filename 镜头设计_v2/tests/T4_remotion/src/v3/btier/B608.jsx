@@ -25,7 +25,7 @@ const wf = (k) => K.words.find((w) => w.key === k);
 const SEAM_X = (COL.B.x + COL.B.w + COL.N.x) / 2;
 const TRACK = {x: 960, y: 520, w: 980};
 const BOOK = {x: 560, y: 520, w: 400};
-const QUOTE = {x: 800, y: 400, w: 880, h: 230};
+const QUOTE = {x: 516, y: 691, w: 902, h: 174};
 
 const Scene = () => {
   const f = useCurrentFrame();
@@ -41,7 +41,7 @@ const Scene = () => {
     X.tw("split", 0, 1, E.side.s - 10, E.side.l, "power3.inOut");
     X.tw("trkOut", 0, 1, E.paper.s - 24, E.paper.s + 2, "power2.in");
     X.tw("book", 0, 1, E.paper.s - 6, E.paper.l, "power2.out");
-    X.tw("quote", 0, 1, E.calls.s, E.calls.l, "power2.out");
+    X.tw("quote", 0, 1, E.cost.s, E.cost.l, "power2.out");
     X.tw("u1", 0, 1, E.cost.s, E.cost.l + 4, "power2.out");
     X.tw("u2", 0, 1, E.timeef.s, E.timeef.l + 4, "power2.out");
     X.tw("tk", 0, 1, E.timeef.l + 6, E.timeef.l + 26, "power2.out");
@@ -77,29 +77,22 @@ const Scene = () => {
         <Layer id={["board", "pairs", "seam", "nowcol", "quote"]}>
           <Board6 f={f} cam={cam} cols={1} rows={[true, true, true, true]}>
             {[0, 1, 2, 3].map(pair)}
-            {S.seam > 0.01 && (
-              <div style={{position: "absolute", left: SEAM_X - 3, top: 150, width: 6, height: 700 * S.seam, borderRadius: 3, background: C.red,
+            {(S.seam > 0.01 || f>=E.race.s) && (
+              <div style={{position: "absolute", left: SEAM_X - 3, top: 150, width: 6, height: 700 * S.seam, borderRadius: 3, background: f>=E.race.s ? `repeating-linear-gradient(${C.blue} 0 12px,transparent 12px 26px)` : C.red,
                            boxShadow: "0 0 14px rgba(200,16,46,0.85)", opacity: 1 - 0.6 * S.dim}} />
             )}
             <DimUp i={4} v={S.dim * 0.92} />
           </Board6>
         </Layer>
         <Layer id={["track", "quote", "seam", "nowcol", "pairs"]}>
-          {trk > 0.01 && (
-            <div style={{position: "absolute", left: 0, top: 0, opacity: cl(trk * 2), transform: `translateY(${(-60 * (1 - Math.min(1, S.trk))).toFixed(1)}px)`}}>
-              <Sprite name="track/34" x={TRACK.x - 90 * split} y={TRACK.y - 70 * split + id(1).y} w={TRACK.w} style={{clipPath: "inset(0 0 50% 0)"}} shadow={false} />
-              <Sprite name="track/34" x={TRACK.x + 90 * split} y={TRACK.y + 70 * split + id(2).y} w={TRACK.w} style={{clipPath: "inset(50% 0 0 0)"}} />
-            </div>
-          )}
-          {S.book > 0.01 && <Sprite name="book/34" x={mix(BOOK.x - 420, BOOK.x, S.book)} y={BOOK.y + id(3).y} w={BOOK.w} op={cl(S.book * 2)} rot={-4} />}
           {S.quote > 0.01 && (
             <div style={{position: "absolute", left: 0, top: 0, opacity: cl(S.quote * 2), transform: `translateY(${(40 * (1 - Math.min(1, S.quote))).toFixed(1)}px)`}}>
               <Slab x={QUOTE.x} y={QUOTE.y - (S.qj || 0)} w={QUOTE.w} h={QUOTE.h} r={18} color={C.bone} depth={12} id="quote">
                 <div data-role="label" data-on="plug,socket,mini,af,loop,tcase,thub,mp,slab" style={{position: "absolute", left: 40, top: 40, fontFamily: SERIF, fontSize: 66, color: C.ink, whiteSpace: "nowrap", fontStyle: "italic", lineHeight: 1.1}}>
                   “<span style={under(S.u1)}>cost-</span> and <span style={under(S.u2)}>time-efficient</span>”
                 </div>
-                <div data-role="source" style={{position: "absolute", left: 44, top: 140, fontFamily: SERIF, fontSize: 34, color: C.soft, whiteSpace: "nowrap"}}>
-                  — Ren et al., Chem. Sci. 2023, in its own words
+                <div data-role="source" style={{position: "absolute", left: 44, top: 110, fontFamily: SERIF, fontSize: 34, color: C.soft, whiteSpace: "nowrap"}}>
+                  Ren et al., Chem. Sci. 2023
                 </div>
               </Slab>
               <Tick x={QUOTE.x + QUOTE.w - 70} y={QUOTE.y - 40} s={70} p={S.tk} sw={12} />
@@ -108,8 +101,8 @@ const Scene = () => {
         </Layer>
         <Layer id="txt" exempt>
           <Pen text="different studies" x={SEAM_X * 0.84 + 960 * 0.16 - 120} y={56} at={E.note1.l} out={E.race.s - 10} rot={-2} />
-          <Pen text="not one race" x={760} y={56} at={E.side.l + 4} out={E.paper.s} rot={-2} />
-          <Source>{f < E.paper.s ? "Illustration · before and now come from different studies" : "Illustration · quote: Ren et al., Chem. Sci. 2023"}</Source>
+          <Pen text="not one race" x={760} y={56} at={E.race.l} out={E.paper.s} rot={-2} />
+          <Source>Illustration · before: Wang et al. 2023 · now: Ren et al. 2023</Source>
         </Layer>
       </Stage>
     </Lens>

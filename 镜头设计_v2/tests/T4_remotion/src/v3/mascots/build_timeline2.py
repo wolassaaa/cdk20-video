@@ -5,11 +5,13 @@ import json, os, subprocess
 import numpy as np, soundfile as sf
 from voice_metrics import norm
 HERE = os.path.dirname(os.path.abspath(__file__))
-V = os.environ.get("CDK20_WORK", "D:/cdk20_work") + "/mascots/voice_v2"
+LINES_FILE = os.environ.get("LINES", "lines.json")
+V = os.environ.get("VOICE_OUT", os.environ.get("CDK20_WORK", "D:/cdk20_work") + "/mascots/voice_v2")
+TL_OUT = os.environ.get("TIMELINE_OUT", os.path.join(HERE, "data", "timeline_v2.json"))
 FF = os.environ.get("CDK20_FFMPEG", "D:/software/TouchDesigner/bin/ffmpeg.exe")
 FPS, SR = 60, 48000
-LEAD = 1.35  # entrance (three characters pop up and wave) before the first line
-TAIL = 1.15   # goodbye wave after the last line
+LEAD = float(os.environ.get("VOICE_LEAD", "1.35"))  # entrance (characters pop up and wave) before the first line
+TAIL = float(os.environ.get("VOICE_TAIL", "1.15"))  # goodbye wave after the last line
 PAD_IN, PAD_OUT = 0.04, 0.10
 
 
@@ -23,7 +25,8 @@ def load(path):
 
 
 def main():
-    cfg = json.load(open(os.path.join(HERE, "lines.json"), encoding="utf-8"))
+    lines_path = LINES_FILE if os.path.isabs(LINES_FILE) else os.path.join(HERE, LINES_FILE)
+    cfg = json.load(open(lines_path, encoding="utf-8"))
     pick = json.load(open(f"{V}/final/final.json", encoding="utf-8"))   # id -> {path, metrics} (finalize_takes.py)
     t = LEAD
     lines, clips = [], []
@@ -70,7 +73,9 @@ def main():
     mix = mix[: int(total * SR)]
     mix = mix / max(1.0, np.abs(mix).max() / 0.89)
     sf.write(f"{V}/final/mix.wav", np.stack([mix, mix], 1).astype(np.float32), SR, subtype="PCM_16")
-    json.dump({"fps": FPS, "total": total, "lead": LEAD, "lines": lines}, open(os.path.join(HERE, "data", "timeline_v2.json"), "w", encoding="utf-8"), ensure_ascii=False)
+    tl_path = TL_OUT if os.path.isabs(TL_OUT) else os.path.join(HERE, TL_OUT)
+    os.makedirs(os.path.dirname(tl_path), exist_ok=True)
+    json.dump({"fps": FPS, "total": total, "lead": LEAD, "lines": lines}, open(tl_path, "w", encoding="utf-8"), ensure_ascii=False)
     for l in lines:
         print(f"{l['id']:3s} {l['who']:8s} {l['start']:6.2f} +{l['dur']:.2f}  {l.get('hit_t', '')}")
     print("total", total)

@@ -1,0 +1,683 @@
+<!doctype html><meta charset="utf-8"><title>下一步方案_20261116</title><style>body{font-family:"Microsoft YaHei",sans-serif;max-width:900px;margin:24px auto;padding:0 16px;line-height:1.7;color:#222;background:#fff}
+table{border-collapse:collapse;margin:12px 0}td,th{border:1px solid #ccc;padding:6px 10px}th{background:#f2f2f2}
+code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1px solid #ddd;padding-bottom:4px}a{color:#0a58ca}</style><h1>下一步方案：第 5 章、按词对时、托盘 28 段、显卡排程（2026-11-16 04:20，韩国时间）</h1>
+<p>HKBU SCIE1007 课程作业的科普视频（英文，15–20 分钟，讲已发表论文 Ren et al. 2023 的 CDK20 案例，不是科研）。这份只写方案，不动代码、不渲染。对应 <code>处理计划_v1.md</code> 的线 3（按词对时）、线 5（第 5 章）、线 6（出镜重做），和 <code>总管自定_20261116.md</code> 已定的决定。目标：RTX 5080 从现在起不空着，同时最多 2 个 Blender；只出 1080p。</p>
+<p>导演规则（全文照此）：声音是时间基准，画面事件落在说它的词上；不许末帧停住；不许穿模；转场只用镜头和物体，不用黑墨遮盖；任何 1.5 秒内要有一个落在词上的动作；导演只看最终成果。</p>
+<h2>0. 先量出来的事实（决定做法）</h2>
+<p>C 的录音（<code>素材流程_out/C/5_place/place.json</code>）比剧本预估长，而第 5 章 11-10 的三维台面审片版全部按剧本时长做：</p>
+<table>
+<thead>
+<tr>
+<th>段</th>
+<th>审片版帧数（剧本秒）</th>
+<th>录音首词→末词</th>
+<th>压停顿后约需（头 0.15 + 尾 0.25 秒）</th>
+<th>差</th>
+<th>现状</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5-01</td>
+<td>1020（17 s）</td>
+<td>19.3 s</td>
+<td>19.7 s ≈ 1180 帧</td>
+<td>短 2.7 s</td>
+<td><code>S4_501_3d_test_1.mp4</code>，SilverHawk 过；讲 CDK20 时它不在画里</td>
+</tr>
+<tr>
+<td>5-03</td>
+<td>840（14 s）</td>
+<td>16.5 s</td>
+<td>16.9 s ≈ 1015 帧</td>
+<td>短 2.9 s</td>
+<td><code>S4_5-03_3d_test_1.mp4</code> 没审；第 2 版代码改到一半（b09e209）</td>
+</tr>
+<tr>
+<td>5-07</td>
+<td>1200（20 s）</td>
+<td>20.9 s</td>
+<td>21.3 s ≈ 1280 帧</td>
+<td>短 1.3 s</td>
+<td><code>S4_507_3d_test_2.mp4</code>，过；试管半出画未修</td>
+</tr>
+<tr>
+<td>5-08</td>
+<td>960（16 s）</td>
+<td>18.5 s</td>
+<td>18.9 s ≈ 1135 帧</td>
+<td>短 2.9 s</td>
+<td><code>S4_5-08_3d_test_1.mp4</code> 没审</td>
+</tr>
+<tr>
+<td>5-10</td>
+<td>1440（24 s）</td>
+<td>30.6 s（1,700 → Roughly 之间空 4 秒，压到 0.7）</td>
+<td>约 27.5 s ≈ 1650 帧</td>
+<td>短 3.5 s</td>
+<td><code>shot_s510</code> 代码在，穿模 none，没渲过</td>
+</tr>
+<tr>
+<td>W4</td>
+<td>—</td>
+<td>歌 4 小节 ≈ 8.2 s</td>
+<td>492 帧</td>
+<td>—</td>
+<td>没做</td>
+</tr>
+</tbody>
+</table>
+<p>结论：五段画外音全部要重渲，不是变速。原因不是差几秒，是每段都有相机移动（5-03 两次大移镜、5-07 退成中景、5-10 落到格子 29），变速会让移镜忽快忽慢；而且差的几秒要用新动作填，不是拉长。好处是代码都在（<code>bl_s5b.py</code>、<code>bl_s5c.py</code>、<code>bl_s5.py</code>），台面、口袋姿态、纸卡、试管、培养皿都搭好了，要改的是时间常数和补几个动作。</p>
+<h2>1. 第 5 章六段怎么补</h2>
+<h3>1.1 总的做法</h3>
+<ul>
+<li>每段先做节拍表（格式见第 2 节），词时间直接取 <code>place.json</code>，经 <code>build_cut.condense</code> 同样的头尾裁剪和停顿压缩换算成段内帧（60 fps）。</li>
+<li>Blender 脚本里现在写死的秒（<code>META</code> 的时长、<code>upd(T + x)</code> 里的 x）改成读节拍表的帧；渲染仍走 <code>render_s5c.sh</code> 的"只渲会变的帧"（<code>S5C_PLAN</code>）+ 两路 <code>gpu_slot.sh</code>。</li>
+<li>字、数、日历、回路线在 Remotion（<code>s5.jsx</code>、<code>s5b.jsx</code>、<code>s5c.jsx</code>）里叠，<code>at=</code> 同样从节拍表读。</li>
+<li>段与段的接头：5-01 接 4-12 托盘推近（七枚代币 → 格子 39 七张纸卡）；5-02、5-05、5-06、5-09 出镜段的托盘物件按第 3 节模板做；W4 由 5-09 推近进入，W4 结束台面横移到 5-10 的格子 29。</li>
+<li>每段末帧不停：最后一个词之后只留 0.25 秒尾音，画面上最后一个动作落在最后一个词，然后直接拉远接出镜。</li>
+</ul>
+<h3>1.2 逐段（词时间是录音秒，首词前 0.15 秒为段内 0 秒）</h3>
+<p><strong>5-01（C，19.7 s，接 4-12 "Only the lab can tell"）</strong></p>
+<table>
+<thead>
+<tr>
+<th>词</th>
+<th>录音秒</th>
+<th>画面事件</th>
+<th>模块</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>So,</td>
+<td>0.49</td>
+<td>推近落定在格子 39，上一段的 7 枚代币躺在格子里</td>
+<td>相机</td>
+</tr>
+<tr>
+<td>Seven</td>
+<td>2.63</td>
+<td>七张纸卡从上方落下，间隔 8 帧，到 "lab."(5.47) 前排完；代币被卡压住消失</td>
+<td>纸卡</td>
+</tr>
+<tr>
+<td>grab</td>
+<td>7.72</td>
+<td>相机抬高，后排 CDK20 和锁进画（解决 11-10 记的"讲 CDK20 时它不在画里"）</td>
+<td>相机</td>
+</tr>
+<tr>
+<td>CDK20?</td>
+<td>8.40</td>
+<td>CDK20 口袋亮一圈</td>
+<td>蛋白</td>
+</tr>
+<tr>
+<td>Kd:</td>
+<td>11.44</td>
+<td>一把墨线小尺从格子前沿升起（"Kd: lower = tighter"，字在 Remotion）</td>
+<td>纸卡</td>
+</tr>
+<tr>
+<td>molecule</td>
+<td>13.74</td>
+<td>一小撮珠子从卡边倒向 CDK20</td>
+<td>珠子</td>
+</tr>
+<tr>
+<td>half</td>
+<td>16.83</td>
+<td>口袋亮圈收到一半</td>
+<td>蛋白</td>
+</tr>
+<tr>
+<td>Lower</td>
+<td>18.57</td>
+<td>小尺上的滑块向 "tighter" 滑到底</td>
+<td>纸卡</td>
+</tr>
+<tr>
+<td>tighter.</td>
+<td>19.37</td>
+<td>滑块到位，起拉远接 5-02（C 出镜，托盘上是尺子和七张卡）</td>
+<td>转场</td>
+</tr>
+</tbody>
+</table>
+<p><strong>5-03（C，16.9 s，接 5-02 "001." 推近）</strong></p>
+<table>
+<thead>
+<tr>
+<th>词</th>
+<th>录音秒</th>
+<th>画面事件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>001's</td>
+<td>0.60</td>
+<td>推近落定；001 那张卡升起 6 cm，朱红边</td>
+</tr>
+<tr>
+<td>9.2</td>
+<td>1.44</td>
+<td>Kd 卡三行写出（<code>Kd = 9.2 ± 0.5 µM (n = 3)</code>）</td>
+</tr>
+<tr>
+<td>micromolar. → other</td>
+<td>2.94–4.78</td>
+<td>第一次移镜 3.0 秒：落进口袋，001 以我们的 Vina 重对接姿态在口袋里（标 <code>OUR RE-DOCKING (AutoDock Vina)</code>）；六张卡竖直升走</td>
+</tr>
+<tr>
+<td>30.</td>
+<td>6.73</td>
+<td>右侧六个小 <code>&gt; 30 µM</code> 依次压暗</td>
+</tr>
+<tr>
+<td>weaker.</td>
+<td>7.89</td>
+<td>001 原子亮一下，口袋壁半透明</td>
+</tr>
+<tr>
+<td>wild</td>
+<td>9.71</td>
+<td>第二次移镜 2.6 秒：退到 5-04 开头机位（4-10 末机位）；001 淡掉、外壳回不透明</td>
+</tr>
+<tr>
+<td>clock</td>
+<td>11.33</td>
+<td>墨线 30 格日历从左边写出，一格 2 帧</td>
+</tr>
+<tr>
+<td>30 days,</td>
+<td>12.67</td>
+<td>日历写满，<code>30 days</code> 大字</td>
+</tr>
+<tr>
+<td>target</td>
+<td>14.65</td>
+<td>小路线 <code>small_road</code> 上第 1 站 Target 亮</td>
+</tr>
+<tr>
+<td>hit.</td>
+<td>16.93</td>
+<td>第 2 站 Hit 亮（第 2 版已写）；起拉远接 5-04</td>
+</tr>
+</tbody>
+</table>
+<p><strong>5-07（C，21.3 s，接 5-06 B "Back to square one?"）</strong></p>
+<table>
+<thead>
+<tr>
+<th>词</th>
+<th>录音秒</th>
+<th>画面事件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Not</td>
+<td>0.52</td>
+<td>推近落定在格子 21 试管特写（5-04 末帧）；5-06 托盘上退到一半的钥匙被推回锁里</td>
+</tr>
+<tr>
+<td>loop</td>
+<td>3.48</td>
+<td>相机退成中景 2.2 秒，格子 20 进画；试管周围一圈回路墨线开始流（Remotion）</td>
+</tr>
+<tr>
+<td>data</td>
+<td>7.22</td>
+<td>回路把一粒数据珠从试管送到格子 20</td>
+</tr>
+<tr>
+<td>pose</td>
+<td>11.89</td>
+<td>格子 20 里升起口袋轮廓板，001 的姿态影子落在上面（4-09 那块）</td>
+</tr>
+<tr>
+<td>pocket.</td>
+<td>14.39</td>
+<td>轮廓板压平</td>
+</tr>
+<tr>
+<td>Sixteen</td>
+<td>15.45</td>
+<td>16 把新钥匙 4×4 长出，一把 3 帧，到 "designs."(16.11) 长完</td>
+</tr>
+<tr>
+<td>Six</td>
+<td>16.87</td>
+<td>10 把缩没，6 把滑到前沿排一行，"tested."(17.73) 到位</td>
+</tr>
+<tr>
+<td>30 days</td>
+<td>19.47</td>
+<td>日历（5-03 同一张）再写一遍，写到一半</td>
+</tr>
+<tr>
+<td>hit.</td>
+<td>21.21</td>
+<td>6 把钥匙里一把微抬；起拉远接 5-08（不是出镜，5-07→5-08 画外音相接，用台面小横移 24 帧）</td>
+</tr>
+</tbody>
+</table>
+<p>修 11-10 遗留：试管半出画，改中景机位 <code>d</code> 放大 10%。</p>
+<p><strong>5-08（C，18.9 s，接 5-07）</strong></p>
+<table>
+<thead>
+<tr>
+<th>词</th>
+<th>录音秒</th>
+<th>画面事件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>048,</td>
+<td>2.63</td>
+<td>六把里一把升起，名牌 048 落下</td>
+</tr>
+<tr>
+<td>fifteen</td>
+<td>4.93</td>
+<td>Kd 卡 <code>566.7 ± 256.2 nM</code> 和 <code>~15×</code> 写出；旁边 15 颗小珠排成一排</td>
+</tr>
+<tr>
+<td>tighter.</td>
+<td>5.96</td>
+<td>048 滑进口袋（相机落到口袋 2.4 秒，到 "test."8.52 落定）；Lys33 氢键墨线一笔</td>
+</tr>
+<tr>
+<td>Remember,</td>
+<td>9.50</td>
+<td>右边立起第一根柱子，骨白</td>
+</tr>
+<tr>
+<td>6,000</td>
+<td>12.36</td>
+<td>柱子长到顶还溢出纸外（5-04 的做法），标 <code>001 &gt; 6,000 nM</code></td>
+</tr>
+<tr>
+<td>048</td>
+<td>15.09</td>
+<td>第二根柱子立起</td>
+</tr>
+<tr>
+<td>33.4.</td>
+<td>17.21</td>
+<td>第二根只到 1/180 高，标 <code>048 = 33.4 ± 22.6 nM</code>；049 脚注同帧出，<code>049: 360.0 ± 14.1 nM — also tighter than 001; the cell test went to 048</code></td>
+</tr>
+<tr>
+<td>尾</td>
+<td>18.9</td>
+<td>相机退到 5-04 酶活特写（现版已写）；起拉远接 5-09</td>
+</tr>
+</tbody>
+</table>
+<p><strong>W4（音乐窗，8.2 s，4 小节，接 5-09 "the key turned." 推近）</strong></p>
+<ul>
+<li>锁用导演批准的 W3 暗铬锁（<code>w3/bl_w3k.py</code> 的锁体和液体锁口），钥匙是 5-09 托盘上那把 048 钥匙；台面是 5-08 末帧。</li>
+<li>节拍按歌的拍点（The Weeknd – Dancing in the Flames，先用 librosa 量出 16 拍的时刻，不手估）：第 1 拍空（推近落定）；第 2 拍 048 分子滑进口袋（标 <code>OUR RE-DOCKING</code>）；第 5–8 拍钥匙转满 90°；第 9 拍锁口亮；第 11 拍小路线第 3 站 Improve 闪红（导演 11-09 定 red 不是 vermilion）；第 13–16 拍相机抬起横移到格子 29，正好接 5-10 的第 0 帧。</li>
+<li>没有字；来源行 <code>Illustration · our re-docking</code> 右下。</li>
+</ul>
+<p><strong>5-10（C，27.5 s，接 W4 横移）</strong></p>
+<table>
+<thead>
+<tr>
+<th>词</th>
+<th>录音秒</th>
+<th>画面事件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>step:</td>
+<td>1.36</td>
+<td>横移落定在格子 29：两只培养皿、各 40 个细胞、剂量尺和滑块</td>
+</tr>
+<tr>
+<td>cells.</td>
+<td>2.60</td>
+<td>皿里细胞各闪一下</td>
+</tr>
+<tr>
+<td>three</td>
+<td>4.30</td>
+<td>皿边一枚三格小日历翻三页（3 页各 10 帧）</td>
+</tr>
+<tr>
+<td>048,</td>
+<td>5.48</td>
+<td>048 名牌从前沿滑到两皿之间</td>
+</tr>
+<tr>
+<td>Huh7</td>
+<td>7.08</td>
+<td>后排皿升起 3 cm，标 <code>Huh7</code></td>
+</tr>
+<tr>
+<td>CDK20,</td>
+<td>10.37</td>
+<td>皿里细胞各带一点蓝（packed with CDK20）</td>
+</tr>
+<tr>
+<td>lost</td>
+<td>11.91</td>
+<td>两个滑块一起起步</td>
+</tr>
+<tr>
+<td>half</td>
+<td>12.89</td>
+<td>Huh7 皿一半细胞沉进胶里（0.4 秒竖直沉，不缩）</td>
+</tr>
+<tr>
+<td>210</td>
+<td>16.73</td>
+<td>Huh7 滑块停在 208.7 那道线，标 <code>208.7 ± 3.3 nM</code></td>
+</tr>
+<tr>
+<td>HEK293,</td>
+<td>20.99</td>
+<td>前排皿升起，标 <code>HEK293</code>；滑块继续走</td>
+</tr>
+<tr>
+<td>1,700.</td>
+<td>25.26</td>
+<td>HEK 滑块停在 1,706.7；一半细胞沉下</td>
+</tr>
+<tr>
+<td>eight</td>
+<td>29.82（压停顿后约 26.5）</td>
+<td>两道尺子之间一段朱红括号 <code>~8× (our calculation)</code>；脚注 <code>HEK293 is not normal liver tissue</code></td>
+</tr>
+<tr>
+<td>more.</td>
+<td>末词</td>
+<td>小路线红流到第 4 站 Cells &amp; animals 门口停住；起横移接 S6</td>
+</tr>
+</tbody>
+</table>
+<p>1,700 → Roughly 之间 4 秒空白由 <code>build_cut</code> 压到 0.7 秒；画面里这 0.7 秒是 HEK 细胞沉下去的尾巴，不是停住。</p>
+<h3>1.3 第 5 章出镜段（5-02、5-05、5-06、5-09）</h3>
+<p>按第 3 节模板出：5-02（代币六滑一留，9.2 µM，对一指手势）、5-05（钥匙进锁转 10° 弹回两次）、5-06（钥匙退一半，路线珠子往回滚）、5-09（钥匙转满 90°）。全部用 M1 锁钥匙 + M4 代币，是模板段，排在三段样板之后的第一批。</p>
+<h2>2. 全片按词对时</h2>
+<h3>2.1 变速还是重渲：判定阈值（机器判）</h3>
+<p>对每段按 <code>对时/anchors.py</code> 的办法量锚点（画面事件 src 秒 → 词的粗剪秒），算相邻锚点之间的倍速，然后按下面判，<code>retime_check.py</code> 直接输出 "变速 / 重渲 / Remotion 重出"：</p>
+<table>
+<thead>
+<tr>
+<th>条件</th>
+<th>判定</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>段是 Remotion 矢量（S1S2 平面、S6 后半、S7/S8、所有数据卡）</td>
+<td>一律从节拍表重出，不变速（CPU，便宜，没有补帧问题）</td>
+</tr>
+<tr>
+<td>任一对锚点先后和台词相反</td>
+<td>重渲</td>
+</tr>
+<tr>
+<td>任一倍速 &lt; 0.5 或 &gt; 2.0</td>
+<td>重渲</td>
+</tr>
+<tr>
+<td>相机在动的区间倍速在 0.75–1.35 以外</td>
+<td>重渲（移镜忽快忽慢最显眼）</td>
+</tr>
+<tr>
+<td>相机不动的区间倍速在 0.6–1.6 以外的超过 1/3</td>
+<td>重渲</td>
+</tr>
+<tr>
+<td>对时后任一 1.5 秒窗口里没有落在词上的动作（含最后一个词到声音完）</td>
+<td>重渲或补动作（没有东西可拉）</td>
+</tr>
+<tr>
+<td>以上都不中</td>
+<td>变速（甲档），<code>trial.py</code> 那套；尾部多余画面裁掉，末帧不停</td>
+</tr>
+</tbody>
+</table>
+<p>1080p30 交片，源是 60 fps，0.5× 以上不补帧。变速过的段在交片单里记倍速表，4K 阶段（导演批后）凡 &lt; 1.0× 的按同一节拍表重出。</p>
+<h3>2.2 节拍表格式（一段一份 JSON，Blender 和 Remotion 读同一份）</h3>
+<pre><code>镜头设计_v3/对时/beats/&lt;段号&gt;.json
+{
+ &quot;seg&quot;: &quot;5-03&quot;, &quot;fps&quot;: 60, &quot;speaker&quot;: &quot;C&quot;,
+ &quot;audio&quot;: {&quot;take&quot;: &quot;C_vo_5-03_t1&quot;, &quot;head&quot;: 0.15, &quot;tail&quot;: 0.25, &quot;speech_from&quot;: null},
+ &quot;words&quot;: [{&quot;w&quot;: &quot;001's&quot;, &quot;t0&quot;: 0.60, &quot;t1&quot;: 0.92}, ...],          // 由 resolve 写入，已换算成段内秒
+ &quot;frames&quot;: {&quot;len&quot;: 1015, &quot;first_word&quot;: 9, &quot;last_word_end&quot;: 1000},  // 由 resolve 写入
+ &quot;events&quot;: [
+  {&quot;id&quot;: &quot;card_up&quot;,  &quot;word&quot;: &quot;001's&quot;, &quot;lead&quot;: 10, &quot;dur&quot;: 14, &quot;verb&quot;: &quot;升&quot;, &quot;obj&quot;: &quot;card_001&quot;, &quot;p&quot;: {&quot;dz&quot;: 0.06}},
+  {&quot;id&quot;: &quot;cam_pocket&quot;,&quot;word&quot;: &quot;micromolar.&quot;, &quot;lead&quot;: 0, &quot;dur&quot;: 180, &quot;verb&quot;: &quot;cam&quot;, &quot;to&quot;: &quot;pocket_001&quot;},
+  {&quot;id&quot;: &quot;kd_card&quot;,  &quot;word&quot;: &quot;9.2&quot;, &quot;lead&quot;: 6, &quot;dur&quot;: 20, &quot;layer&quot;: &quot;remotion&quot;, &quot;text&quot;: &quot;Kd = 9.2 ± 0.5 µM (n = 3)&quot;, &quot;pos&quot;: &quot;tl&quot;},
+  ...
+ ],
+ &quot;handoff&quot;: {&quot;in&quot;: &quot;push_from_5-02&quot;, &quot;out&quot;: &quot;pull_to_5-04&quot;, &quot;frames_in&quot;: 24, &quot;frames_out&quot;: 24}
+}
+</code></pre>
+<ul>
+<li><code>word</code> 是词的原文（同一词出现多次写 <code>"word": "30.#2"</code>）；<code>lead</code> 是提前起动的帧数（6–16，相机 0）；落点帧 = 词 t0 的帧。无台词的事件写 <code>"after": "&lt;id&gt;", "gap": 帧</code>。</li>
+<li>动词只用托盘方向稿的 12 个安全动词加 <code>cam</code>、<code>text</code>；<code>obj</code> 是场景里的物件名，路径由代码按几何定，不许穿模。</li>
+<li>resolve 步骤：<code>beats_resolve.py &lt;段号&gt;</code> 读 <code>place.json</code>，用 <code>build_cut.condense</code> 同一函数算头尾和压停顿后的词时间，写回 <code>words</code> 和 <code>frames</code>，并给每个 event 算出 <code>f_start</code>、<code>f_land</code>。声音一改就重跑，改了帧的段才重渲（按 <code>frames</code> 和 events 的哈希比对）。</li>
+<li>机器检查在 resolve 时就做：任意 90 帧窗口没有 <code>f_land</code> → 报错；两个事件 <code>f_land</code> 相差 &lt; 6 帧且不是同一主体 → 报错；<code>last_word_end</code> 之后没有事件 → 报错。</li>
+</ul>
+<h3>2.3 Blender 和 Remotion 怎么读</h3>
+<ul>
+<li>Blender：<code>bl_inserts.py</code> 加环境变量 <code>BEATS=&lt;json&gt;</code>；各 <code>shot_*</code> 里现在的 <code>upd(T + 秒)</code> 和 <code>META</code> 时长改成 <code>B.f("word")</code> 和 <code>B.len</code>。关键帧插入统一经一个 <code>at_word(obj, word, lead, dur, fn)</code> 小函数。先改第 5 章五段，再改 S1 的 <code>a w b</code>、<code>f</code> 两组插镜，其余按 2.1 判出来的重渲清单逐个改。</li>
+<li>Remotion：<code>entry.jsx</code> 等的 <code>at={秒}</code> 改成 <code>at={B("5-03","9.2")}</code>，<code>B</code> 从 <code>对时/beats/*.json</code> 读；S1S2 的 <code>s1_timeline.json</code> 不再从 <code>节奏表.csv</code> 生成，而是从节拍表生成（<code>timeline.py</code> 加一个输入）。</li>
+<li>拼片：<code>build_cut.py</code> 读同一批节拍表取每段长度，声音仍按毫秒；接点帧数从 <code>handoff</code> 取。</li>
+</ul>
+<h3>2.4 顺序和工作量</h3>
+<p>全片约 45 个画外音段。S1 六段已量；第 5 章五段这次直接做节拍表；其余 34 段量锚点每段 20 分钟（抽帧和字区实测可交 GLM，我抽查），约 11 小时 CPU 时间，和显卡渲染并行做。按 S1 比例约一半要重渲，三维台面段在 S3、S4、S6 前半、S7，估 10–14 段，每段 600–1500 帧，共约 1.2 万帧，两路 1080p 16 采样约 2 小时显卡。</p>
+<h2>3. 托盘 28 段怎么铺</h2>
+<h3>3.1 模板化（18 段）和单独设计（10 段）</h3>
+<p><strong>模板化</strong>：一个 Blender 场景 <code>托盘 + 物件库</code>（M0），每段只给节拍表，脚本把 <code>f_land</code> 写成关键帧，批量渲带透明通道的 1080p60 PNG，Remotion 叠批注。条件：只用物件库里已有的东西和 12 个安全动词、不改机位、不新建模型。</p>
+<table>
+<thead>
+<tr>
+<th>模块</th>
+<th>段</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M6 实物计数 + M8 批注</td>
+<td>1-03、1-05</td>
+</tr>
+<tr>
+<td>M3 路线</td>
+<td>1-06、1-07、6-12、7-01、8-01</td>
+</tr>
+<tr>
+<td>M7 纸卡</td>
+<td>2-02、2-04、8-05、8-06</td>
+</tr>
+<tr>
+<td>M1 锁钥匙</td>
+<td>5-05、5-06、5-09</td>
+</tr>
+<tr>
+<td>M4 代币</td>
+<td>5-02、6-05</td>
+</tr>
+<tr>
+<td>M5 循环轮</td>
+<td>4-08、8-07（同一套，8-07 多一个减速停住）</td>
+</tr>
+<tr>
+<td>M2 蛋白</td>
+<td>4-04</td>
+</tr>
+</tbody>
+</table>
+<p><strong>单独设计</strong>（有新几何、新动作路径或要先试看）：1-01（托盘面刻香港轮廓、小人倒下）、3-01（已做，试片 v2）、3-06（三把灰锁加 52 颗珠子）、3-09（玻璃锁褪成虚线、钥匙坯切齿）、4-05（尾巴剪断落成线圈）、4-11、4-12（代币、小柱、口袋板、七个小皿）、6-04（珠子倒满溢出再筛空）、8-04（漏斗 7 → 1）。</p>
+<p>单独段做好的物件进物件库，后面的模板段直接用（4-11/4-12 的代币给 5-02，4-05 的尾巴给 4-04）。</p>
+<h3>3.2 先做的三段样板</h3>
+<table>
+<thead>
+<tr>
+<th>样板</th>
+<th>验证什么</th>
+<th>现状</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3-01 D（2-08 拉远 → 托盘锁钥匙 → 推近 3-02）</td>
+<td>托盘不像小屏幕；拉远、推近两种转场；单物件接力</td>
+<td>v2 已出（<code>粗剪/样片/托盘试片1/</code>），只要按新节拍表格式重出一遍当模板</td>
+</tr>
+<tr>
+<td>4-11 D → 4-12 A → 5-01（对话正反打 + 托盘镜像 + 推近进第 5 章）</td>
+<td>正反打硬切托盘镜像会不会跳；代币接到 5-01 纸卡；第 5 章入口</td>
+<td>新做，单独段</td>
+</tr>
+<tr>
+<td>3-09 B → W2（托盘压暗 + 推近进音乐窗）</td>
+<td>暗的处理不压纸底；进音乐窗的推近</td>
+<td>新做，单独段</td>
+</tr>
+</tbody>
+</table>
+<p>三段覆盖全部四种转场（拉远、推近、正反打、进音乐窗），且一段模板、两段单独，可以同时验证批量流程和手做流程。样板过了，先铺第 5 章的四段出镜（5-02、5-05、5-06、5-09），让第 5 章整章成片；再按章铺其余。</p>
+<h3>3.3 批量做法和检查</h3>
+<ul>
+<li>每段：<code>beats_resolve</code> → Blender 两路（<code>gpu_slot.sh</code>，每块 ≤ 60 帧）→ <code>TRAY_TRACK</code> 出锚点和穿模 → Remotion 叠批注 → <code>tray/check.py</code>（已有，扩成通用）。</li>
+<li>过关（机器）：落点差 |land − word| ≤ 3 帧；<code>max_object_gap</code> ≤ 90 帧；x &lt; 860 没有物体；穿模帧 0；最小亮度不低于纸底的 0.35（3-09 例外只暗托盘）；人完全露出到首词 ≥ 6 帧；末词结束到转场起点 ≥ 4 帧；接点两侧帧差（check.py 的 <code>join_diff</code>）≤ 8；文字 ≥ 56 px；字幕区 y &gt; 930 无物体。</li>
+<li>渲染量：28 段约 170 秒 ≈ 1 万帧，托盘区 1080p 16 采样每帧约 0.5 秒（试片 v2 实测 32 采样两路 576 帧 9 分钟），两路约 1.5 小时，加场景搭建开销约 2.5 小时。</li>
+</ul>
+<h2>4. 显卡排程（韩国时间，现在 04:20；显卡最多 2 个 Blender，CPU 一次只跑一条 Remotion/ffmpeg 链）</h2>
+<p>每步先写预估和完成时刻；过关检查以机器能跑的为准，过不了不往下走。显卡的空档全部用第 5 章和托盘填，节拍表、Remotion、拼片在 CPU 上和显卡并行。</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>时段</th>
+<th>显卡（两路）</th>
+<th>CPU / 我</th>
+<th>预估</th>
+<th>完成</th>
+<th>过关检查</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>04:20–04:50</td>
+<td>W4 静帧 3 张（暗铬锁 + 048 在口袋 + Improve 站红），看样子对不对</td>
+<td>写 <code>beats_resolve.py</code>（复用 <code>condense</code>、<code>words_in_cut.py</code>）；5-03、5-08 节拍表</td>
+<td>30 分</td>
+<td>04:50</td>
+<td>resolve 通过 2.2 的三项自检；静帧穿模 0、锁和 W3 同材质</td>
+</tr>
+<tr>
+<td>2</td>
+<td>04:50–05:35</td>
+<td>5-03（1015 帧）+ 5-08（1135 帧），各一路，<code>S5C_PLAN</code> 只渲会变的帧</td>
+<td>5-01、5-07 节拍表；量歌的 16 个拍点写 W4 节拍表</td>
+<td>45 分</td>
+<td>05:35</td>
+<td><code>S5C_CLASH</code> 0；<code>BL_CAMCHECK</code> 移镜 ≥ 2.4 秒；帧数 = <code>frames.len</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td>05:35–06:20</td>
+<td>5-01（1180 帧）+ 5-07（1280 帧）</td>
+<td>5-03、5-08 Remotion 叠字、<code>cut_s5c.sh</code> 合成；跑 check（落点、90 帧窗口、静止、接头）</td>
+<td>45 分</td>
+<td>06:20</td>
+<td>同上；5-03/5-08 合成后落点差 ≤ 3 帧，静止 ≥ 3 s 为 0</td>
+</tr>
+<tr>
+<td>4</td>
+<td>06:20–07:15</td>
+<td>5-10（1650 帧）+ W4（492 帧，<code>bl_w3k</code> 锁 + <code>bl_s5c</code> 姿态）</td>
+<td>5-01、5-07 叠字合成和检查；5-10 叠字准备</td>
+<td>55 分</td>
+<td>07:15</td>
+<td>5-10 细胞沉底不碰皿底（穿模 0）；W4 钥匙 90° 落在第 8 拍 ±2 帧</td>
+</tr>
+<tr>
+<td>5</td>
+<td>07:15–07:45</td>
+<td>托盘样板 2（4-11/4-12，约 650 帧 + 转场）+ 样板 3（3-09，约 340 帧）</td>
+<td>5-10、W4 合成；第 5 章七段连起来（出镜段暂用无动效的人 + 细胞纸）跑 <code>sync_check</code>、<code>av_offset</code>、静止、黑场</td>
+<td>30 分</td>
+<td>07:45</td>
+<td>第 5 章整章：黑场 0、静止 ≥ 3 s 为 0、偏移 ≤ 1 帧、人露出后 ≥ 6 帧开口</td>
+</tr>
+<tr>
+<td>6</td>
+<td>07:45–08:20</td>
+<td>S1 插镜重渲 <code>a w b</code>（约 600 帧）+ <code>f</code>（约 1300 帧），按 S1 锚点表</td>
+<td>样板 2、3 Remotion 批注、<code>check.py</code>、帧条；样板 1 按新格式重出</td>
+<td>35 分</td>
+<td>08:20</td>
+<td>样板三条全过 3.3 的机器检查</td>
+</tr>
+<tr>
+<td>7</td>
+<td>08:20–09:00</td>
+<td>第 5 章四段出镜托盘（5-02、5-05、5-06、5-09，约 900 帧）</td>
+<td>S1 六段：1-09、1-11 变速，1-02、1-04、1-10 Remotion 按节拍表重出；拼 <code>cut_v5</code>，跑四项自动检查</td>
+<td>40 分</td>
+<td>09:00</td>
+<td>cut_v5 四项全过；第 5 章在拼好的片上复看一遍</td>
+</tr>
+<tr>
+<td>8</td>
+<td>09:00</td>
+<td>给导演：第 5 章整章（含 W4）、三段托盘样板、S1 对时后的 cut_v5 前 2 分 21 秒</td>
+<td>早报、工作记录、提交（只挑自己的 hunk）</td>
+<td>15 分</td>
+<td>09:15</td>
+<td>—</td>
+</tr>
+<tr>
+<td>9</td>
+<td>09:15–11:45</td>
+<td>托盘模板段 14 段（去掉第 5 章 4 段），两路批量</td>
+<td>其余章节量锚点（GLM 抽帧，我抽查）、写重渲清单</td>
+<td>2.5 小时</td>
+<td>11:45</td>
+<td>每段过 3.3 的检查；不过的回炉，不混进批次</td>
+</tr>
+<tr>
+<td>10</td>
+<td>11:45–13:45</td>
+<td>托盘单独段 1-01、3-06、4-05、6-04、8-04（约 1800 帧）；之后接 2.1 判出的三维台面重渲</td>
+<td>单独段节拍表和代码（每段 20–30 分）；S3/S4 Remotion 段按节拍表重出</td>
+<td>2 小时</td>
+<td>13:45</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>11</td>
+<td>13:45 起</td>
+<td>三维台面重渲清单（估 1.2 万帧，2 小时）</td>
+<td>转场（拉远推近按重排后的首末帧）、拼 <code>cut_v6</code></td>
+<td>2 小时</td>
+<td>约 16:00</td>
+<td>四项自动检查；我按 <code>审片/导演标准_审片用.md</code> 自查一遍再给导演</td>
+</tr>
+</tbody>
+</table>
+<p>说明：
+- 第 1–4 步显卡只渲第 5 章，到 07:15 五段画外音加 W4 全部渲完；第 5–7 步显卡转托盘和 S1 重渲，CPU 合成第 5 章。导演起床（约 09:00）能看到完整的第 5 章和三段样板，这两样是他要定的事；看完样板才铺 28 段，所以第 9 步起如果导演还没看，先跑模板段里风险最小的 M7 纸卡和 M3 路线那几段。
+- 渲染速度按 1080p 16 采样每帧约 1 秒、两路、<code>S5C_PLAN</code> 跳过不变的帧估；实际每块加约 1 分钟搭场景。第 2 步跑完先对一次实测，后面的时刻按实测改。
+- CPU 紧：Remotion <code>--concurrency 4</code> 时不开第二条 ffmpeg；GLM 抽帧用低优先级。
+- 显存：1080p 两路没问题（11-15 试片实测）；不出 4K，不会再撞 11-11 的显存不够。</p>
+<h2>5. 风险</h2>
+<ol>
+<li>第 5 章画外音加了新动作（5-01 珠子、5-07 回路、5-10 小日历），每个都要走一遍穿模检查；路径按零件几何定。</li>
+<li>对话段托盘镜像没试过，样板 2 专门验证；看着跳就退到提问段不带托盘、只推近人。</li>
+<li>1.5 秒动作下限在 5-10 的 "Comparison cells, HEK293, needed about 1,700" 这 5 秒只有滑块在走，节拍表里补了皿升起和细胞沉下两件事，合成后用 90 帧窗口检查确认。</li>
+<li>歌的拍点要先量；W4 之前导演只批了 W3 的歌，W4 用 Dancing in the Flames 是剧本 v3.3 写的（导演 11-09），没有换过。</li>
+<li>这张排程假设 Claude 额度够用到 16:00；工人用 Sonnet/Haiku，判断类的事我自己做。</li>
+</ol>

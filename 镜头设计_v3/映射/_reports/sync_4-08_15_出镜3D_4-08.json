@@ -1,0 +1,146 @@
+{
+ "video": "D:\\。hkbu\\molecular science\\导演检查_20261123\\15_出镜3D_4-08.mp4",
+ "group": "4-08",
+ "fps": 60.0,
+ "frames": 520,
+ "offset_f": 0,
+ "S1": {
+  "word_events": 9,
+  "table_dev_max_f": 0,
+  "video_checked": 10,
+  "video_no_motion": [],
+  "pass_": true
+ },
+ "S2": {
+  "pass_": true,
+  "early": []
+ },
+ "S3": {
+  "pass_": true,
+  "longest_still_f": 0,
+  "bad": []
+ },
+ "S4": {
+  "pass_": true,
+  "looks_like_30": false,
+  "dup_frames": 0,
+  "stepped_dups": 0,
+  "stepped_ratio": 0.0,
+  "blend_frames": 0,
+  "blend_first": [],
+  "design_fade": 0,
+  "verdict": "原生（无变速重复/混帧）"
+ },
+ "sentences": [
+  {
+   "sid": "4-08.s1",
+   "f0": 32,
+   "f1": 143,
+   "last_motion_f": 143,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  },
+  {
+   "sid": "4-08.s2",
+   "f0": 180,
+   "f1": 473,
+   "last_motion_f": 473,
+   "end_dev": 0,
+   "longest_still_f": 0,
+   "s2": true,
+   "s3": true
+  }
+ ],
+ "events": [
+  {
+   "id": "land",
+   "verb": "move",
+   "w": "AI",
+   "f_land": 26,
+   "table_dev": -6
+  },
+  {
+   "id": "chip_drop",
+   "verb": "eject",
+   "w": "AI",
+   "f_land": 32,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "chip_feint",
+   "verb": "move",
+   "w": "replace",
+   "f_land": 61,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "person_hop",
+   "verb": "move",
+   "w": "scientists.",
+   "f_land": 98,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "car_go",
+   "verb": "move",
+   "w": "trial",
+   "f_land": 262,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "fail_blink",
+   "verb": "appear",
+   "w": "error",
+   "f_land": 308,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "into_chip",
+   "verb": "move",
+   "w": "inside",
+   "f_land": 331,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "ring_on",
+   "verb": "power_on",
+   "w": "computer,",
+   "f_land": 357,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "ring_spin",
+   "verb": "move",
+   "w": "light",
+   "f_land": 434,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "streak",
+   "verb": "move",
+   "w": "speed.",
+   "f_land": 450,
+   "table_dev": 0,
+   "video_motion_near_start": true
+  },
+  {
+   "id": "dive",
+   "verb": "move",
+   "w": "speed.",
+   "f_land": 519,
+   "table_dev": 69,
+   "video_motion_near_start": true
+  }
+ ],
+ "pass": true
+}

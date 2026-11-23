@@ -1,13 +1,13 @@
 #!/bin/bash
 # HKBU SCIE1007 coursework science video. Lays the table shots into S1 and S2 with Remotion, then joins the two. k is 1 for 1080p, 2 for 4K. Run: bash cut.sh <work folder> [out] [k] [takes to encode]
-export TEMP=D:/render_tmp TMP=D:/render_tmp
+export TEMP="${CUT_TEMP:-D:/render_tmp}" TMP="${CUT_TEMP:-D:/render_tmp}"   # CUT_TEMP: another temp folder, when D:/render_tmp is not writable
 W="$1"
 ROOT="D:/。hkbu/molecular science"
 HERE="$ROOT/镜头设计_v3/styleframes/art/fusion/s1/inserts"
 FUSION="$ROOT/镜头设计_v3/remotion_public/fusion_s1"
 A="$ROOT/镜头设计_v2/tests/T4_remotion/src/v3/fusion"
 K="${3:-1}"
-REVIEW=$([ "$K" = 1 ] && echo true || echo false)   # the script line along the top is for the 1080p review only
+REVIEW=${REVIEW:-$([ "$K" = 1 ] && echo true || echo false)}   # the script line along the top is for the 1080p review only; REVIEW=false drops it
 OUT="${2:-$HERE/S1S2_table_${K}.mp4}"
 PUB="$W/cut_public"
 FF="$ROOT/镜头设计_v2/tests/T4_remotion/node_modules/@remotion/compositor-win32-x64-msvc/ffmpeg.exe"

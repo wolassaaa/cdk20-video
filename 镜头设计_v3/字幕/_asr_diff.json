@@ -1,0 +1,3751 @@
+{
+ "1-01": {
+  "n_script": 12,
+  "n_heard": 12,
+  "matched": 12,
+  "off_med_f": -16.0,
+  "off_mad_f": 4.0,
+  "heard_text": "Every day in Hong Kong, about 4 people die of liver cancer.",
+  "diffs": []
+ },
+ "1-02": {
+  "n_script": 34,
+  "n_heard": 37,
+  "matched": 32,
+  "off_med_f": -12.8,
+  "off_mad_f": 4.5,
+  "heard_text": "That's 1,412 people in 2022 alone. Here it's one of the three deadliest cancers alongside lung and colorectal. And it's not just us. For a while, it's the sixth most common cancer and the third deadliest.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "1-02.w002"
+    ],
+    "script": "1,412",
+    "heard": "1 ,412",
+    "heard_t": [
+     0.42,
+     2.0
+    ],
+    "heard_p": [
+     0.624,
+     0.992
+    ],
+    "master_f": [
+     35,
+     141
+    ],
+    "ctx": "That's [_] people in 2022"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "1-02.w024"
+    ],
+    "script": "Worldwide,",
+    "heard": "For a while,",
+    "heard_t": [
+     12.12,
+     12.9
+    ],
+    "heard_p": [
+     0.4,
+     0.996,
+     0.996
+    ],
+    "master_f": [
+     751,
+     786
+    ],
+    "ctx": "it's not just us. [_] it's the sixth"
+   }
+  ]
+ },
+ "1-03": {
+  "n_script": 12,
+  "n_heard": 12,
+  "matched": 9,
+  "off_med_f": -12.6,
+  "off_mad_f": 4.2,
+  "heard_text": "Here is the thing, we already have medicine, just not good enough.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "1-03.w001"
+    ],
+    "script": "Here's",
+    "heard": "Here is",
+    "heard_t": [
+     0.0,
+     0.74
+    ],
+    "heard_p": [
+     0.906,
+     0.75
+    ],
+    "master_f": [
+     32,
+     49
+    ],
+    "ctx": " [_] the thing. We"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "1-03.w007"
+    ],
+    "script": "medicines.",
+    "heard": "medicine,",
+    "heard_t": [
+     2.46,
+     2.9
+    ],
+    "heard_p": [
+     0.194
+    ],
+    "master_f": [
+     158,
+     192
+    ],
+    "ctx": "thing. We already have [_] Just not good"
+   },
+   {
+    "op": "delete",
+    "wids": [
+     "1-03.w012"
+    ],
+    "script": "ones.",
+    "heard": "",
+    "heard_t": null,
+    "heard_p": [],
+    "master_f": [
+     273,
+     281
+    ],
+    "ctx": "Just not good enough [_] "
+   }
+  ]
+ },
+ "1-04": {
+  "n_script": 43,
+  "n_heard": 44,
+  "matched": 38,
+  "off_med_f": -13.5,
+  "off_mad_f": 3.1,
+  "heard_text": "The standard first treatment for advanced liver cancer has already changed once, from Nexvar to a combo, a tezolizumab plus bivetsizumab. But here, only about 3 in 10 patients are alive 5 years old. The study we follow caused it a huge unmet need.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "1-04.w014"
+    ],
+    "script": "Nexavar",
+    "heard": "Nexvar",
+    "heard_t": [
+     5.16,
+     5.66
+    ],
+    "heard_p": [
+     0.86
+    ],
+    "master_f": [
+     320,
+     350
+    ],
+    "ctx": "already changed once, from [_] to a combo,"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "1-04.w018"
+    ],
+    "script": "atezolizumab",
+    "heard": "a tezolizumab",
+    "heard_t": [
+     6.82,
+     8.04
+    ],
+    "heard_p": [
+     0.56,
+     0.829
+    ],
+    "master_f": [
+     427,
+     492
+    ],
+    "ctx": "Nexavar to a combo, [_] plus bevacizumab. But"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "1-04.w020"
+    ],
+    "script": "bevacizumab.",
+    "heard": "bivetsizumab.",
+    "heard_t": [
+     8.5,
+     9.72
+    ],
+    "heard_p": [
+     0.761
+    ],
+    "master_f": [
+     531,
+     592
+    ],
+    "ctx": "a combo, atezolizumab plus [_] But here, only"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "1-04.w033"
+    ],
+    "script": "on.",
+    "heard": "old.",
+    "heard_t": [
+     14.86,
+     15.18
+    ],
+    "heard_p": [
+     0.895
+    ],
+    "master_f": [
+     911,
+     919
+    ],
+    "ctx": "are alive five years [_] The study we"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "1-04.w038"
+    ],
+    "script": "calls",
+    "heard": "caused",
+    "heard_t": [
+     16.88,
+     17.48
+    ],
+    "heard_p": [
+     0.578
+    ],
+    "master_f": [
+     1044,
+     1059
+    ],
+    "ctx": "The study we follow [_] it a huge"
+   }
+  ]
+ },
+ "1-05+1-06+1-07": {
+  "n_script": 18,
+  "n_heard": 21,
+  "matched": 17,
+  "off_med_f": -11.0,
+  "off_mad_f": 3.6,
+  "heard_text": "So, why not just make a better one? Because that's way harder than it sounds. Like, 10 to 17 years hard.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "1-07.w002"
+    ],
+    "script": "ten-to-seventeen-years",
+    "heard": "10 to 17 years",
+    "heard_t": [
+     6.76,
+     8.6
+    ],
+    "heard_p": [
+     0.853,
+     0.758,
+     0.918,
+     0.993
+    ],
+    "master_f": [
+     439,
+     530
+    ],
+    "ctx": "than it sounds. Like, [_] hard."
+   }
+  ]
+ },
+ "1-08": {
+  "n_script": 37,
+  "n_heard": 38,
+  "matched": 36,
+  "off_med_f": -12.7,
+  "off_mad_f": 4.1,
+  "heard_text": "Start the search the year we were born, and it might only be ready now. It can cost almost 2.8 billion US dollars, and of drugs tested in people, only about 1 in 10 reaches the market.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "1-08.w020"
+    ],
+    "script": "2.8",
+    "heard": "2 .8",
+    "heard_t": [
+     6.66,
+     7.56
+    ],
+    "heard_p": [
+     0.587,
+     0.992
+    ],
+    "master_f": [
+     417,
+     458
+    ],
+    "ctx": "It can cost almost [_] billion US dollars."
+   }
+  ]
+ },
+ "1-09": {
+  "n_script": 48,
+  "n_heard": 48,
+  "matched": 45,
+  "off_med_f": -14.8,
+  "off_mad_f": 6.8,
+  "heard_text": "To see why, let's follow one drug's journey. Every medicine works the same road. Find a target, find a hit, a first molecule that works on it, improve it, test it in cells, then animals, then humans' truth. Phase one, two, three, then approval. Any step can fail.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "1-09.w011"
+    ],
+    "script": "walks",
+    "heard": "works",
+    "heard_t": [
+     4.44,
+     4.9
+    ],
+    "heard_p": [
+     0.942
+    ],
+    "master_f": [
+     290,
+     313
+    ],
+    "ctx": "drug's journey. Every medicine [_] the same road."
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "1-09.w037",
+     "1-09.w038"
+    ],
+    "script": "human trials:",
+    "heard": "humans' truth.",
+    "heard_t": [
+     17.18,
+     18.22
+    ],
+    "heard_p": [
+     0.782,
+     0.325
+    ],
+    "master_f": [
+     1045,
+     1112
+    ],
+    "ctx": "cells, then animals. Then [_] phase one, two,"
+   }
+  ]
+ },
+ "1-10": {
+  "n_script": 32,
+  "n_heard": 32,
+  "matched": 32,
+  "off_med_f": -9.8,
+  "off_mad_f": 2.6,
+  "heard_text": "Now, here's where it gets interesting. In 2024, part of the Nobel Prize in Chemistry went to Demis Hassabis and John Jumper for AlphaFold, an AI that predicts the shape of proteins.",
+  "diffs": []
+ },
+ "1-11": {
+  "n_script": 30,
+  "n_heard": 30,
+  "matched": 29,
+  "off_med_f": -14.0,
+  "off_mad_f": 2.4,
+  "heard_text": "So, can AI walk the first step faster? Let's follow one real case where AI tools took on liver cancer, and part of it starts right here, in Hong Kong.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "1-11.w007"
+    ],
+    "script": "steps",
+    "heard": "step",
+    "heard_t": [
+     1.84,
+     2.1
+    ],
+    "heard_p": [
+     0.944
+    ],
+    "master_f": [
+     119,
+     138
+    ],
+    "ctx": "AI walk the first [_] faster? Let's follow"
+   }
+  ]
+ },
+ "2-01": {
+  "n_script": 59,
+  "n_heard": 61,
+  "matched": 56,
+  "off_med_f": -13.6,
+  "off_mad_f": 4.6,
+  "heard_text": "Hong Kong first. In 2011, a team at the Chinese University of Hong Kong studied liver tumors from patients at the Prince of Wales Hospital. One protein kept showing up raised, CCRK, also called CDK20. Fast forward to 2023, an AI drug discovery study goes after the same protein, with co-authors at Insilico Medicine's Hong Kong office in Science Park.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "2-01.w017"
+    ],
+    "script": "tumours",
+    "heard": "tumors",
+    "heard_t": [
+     6.16,
+     6.58
+    ],
+    "heard_p": [
+     0.882
+    ],
+    "master_f": [
+     388,
+     414
+    ],
+    "ctx": "Hong Kong studied liver [_] from patients at"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "2-01.w042"
+    ],
+    "script": "drug-discovery",
+    "heard": "drug discovery",
+    "heard_t": [
+     18.36,
+     19.02
+    ],
+    "heard_p": [
+     1.0,
+     1.0
+    ],
+    "master_f": [
+     1115,
+     1160
+    ],
+    "ctx": "to 2023: an AI [_] study goes after"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "2-01.w050"
+    ],
+    "script": "co-authors",
+    "heard": "co -authors",
+    "heard_t": [
+     21.74,
+     22.56
+    ],
+    "heard_p": [
+     1.0,
+     1.0
+    ],
+    "master_f": [
+     1317,
+     1356
+    ],
+    "ctx": "the same protein, with [_] at Insilico Medicine's"
+   }
+  ]
+ },
+ "2-02": {
+  "n_script": 18,
+  "n_heard": 19,
+  "matched": 17,
+  "off_med_f": -22.6,
+  "off_mad_f": 6.4,
+  "heard_text": "So our research question is, how can computer-aided methods help scientists find and assess potential cancer drug candidates?",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "2-02.w008"
+    ],
+    "script": "computer-aided",
+    "heard": "computer -aided",
+    "heard_t": [
+     3.0,
+     4.14
+    ],
+    "heard_p": [
+     0.971,
+     0.901
+    ],
+    "master_f": [
+     192,
+     260
+    ],
+    "ctx": "question is: how can [_] methods help scientists"
+   }
+  ]
+ },
+ "2-03": {
+  "n_script": 12,
+  "n_heard": 13,
+  "matched": 11,
+  "off_med_f": -13.0,
+  "off_mad_f": 2.6,
+  "heard_text": "And we will answer it with one case study, CDK20 in liver cancer.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "2-03.w002"
+    ],
+    "script": "we'll",
+    "heard": "we will",
+    "heard_t": [
+     0.24,
+     0.62
+    ],
+    "heard_p": [
+     0.977,
+     0.968
+    ],
+    "master_f": [
+     26,
+     41
+    ],
+    "ctx": "And [_] answer it with"
+   }
+  ]
+ },
+ "2-04": {
+  "n_script": 5,
+  "n_heard": 5,
+  "matched": 5,
+  "off_med_f": -20.4,
+  "off_mad_f": 11.4,
+  "heard_text": "We set ourselves two objectives.",
+  "diffs": []
+ },
+ "2-05": {
+  "n_script": 24,
+  "n_heard": 25,
+  "matched": 23,
+  "off_med_f": -22.0,
+  "off_mad_f": 5.4,
+  "heard_text": "One, to identify the major computer-aided methods used in cancer drug discovery. Two, to evaluate how these methods help scientists assess potential drug candidates.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "2-05.w006"
+    ],
+    "script": "computer-aided",
+    "heard": "computer -aided",
+    "heard_t": [
+     2.22,
+     3.14
+    ],
+    "heard_p": [
+     0.991,
+     0.904
+    ],
+    "master_f": [
+     147,
+     199
+    ],
+    "ctx": "to identify the major [_] methods used in"
+   }
+  ]
+ },
+ "2-06": {
+  "n_script": 70,
+  "n_heard": 70,
+  "matched": 66,
+  "off_med_f": -17.1,
+  "off_mad_f": 5.6,
+  "heard_text": "So how did we check all this? We read a lot, no lab work of our own. This is a literature review. At Lee Center, one original study by Ren and colleagues in Chemical Science , with the supplementary data. Around it, the earlier Hong Kong study, papers behind two AI tools, a 2023 review, a textbook chapter, and a 2026 expert perspective, which we read only as an abstract.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "2-06.w024",
+     "2-06.w025"
+    ],
+    "script": "the centre,",
+    "heard": "Lee Center,",
+    "heard_t": [
+     8.26,
+     8.94
+    ],
+    "heard_p": [
+     0.571,
+     0.937
+    ],
+    "master_f": [
+     508,
+     549
+    ],
+    "ctx": "a literature review. At [_] one original study"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "2-06.w036"
+    ],
+    "script": "2023,",
+    "heard": ",",
+    "heard_t": [
+     12.84,
+     13.32
+    ],
+    "heard_p": [
+     0.055
+    ],
+    "master_f": [
+     776,
+     894
+    ],
+    "ctx": "colleagues in Chemical Science, [_] with its supplementary"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "2-06.w038"
+    ],
+    "script": "its",
+    "heard": "the",
+    "heard_t": [
+     14.92,
+     15.18
+    ],
+    "heard_p": [
+     0.361
+    ],
+    "master_f": [
+     913,
+     919
+    ],
+    "ctx": "Chemical Science, 2023, with [_] supplementary data. Around"
+   }
+  ]
+ },
+ "2-07": {
+  "n_script": 58,
+  "n_heard": 58,
+  "matched": 56,
+  "off_med_f": -15.4,
+  "off_mad_f": 5.5,
+  "heard_text": "For everyone's source, we asked, what kind is it? How much did we read? And how strong is the evidence? Who did the work? Were there controls and repeats? One thing worth knowing, most authors of the main study work for Insilico Medicine, which builds its AI tools. They say so openly, useful evidence, not an independent check.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "2-07.w002"
+    ],
+    "script": "every",
+    "heard": "everyone's",
+    "heard_t": [
+     0.24,
+     0.84
+    ],
+    "heard_p": [
+     0.635
+    ],
+    "master_f": [
+     26,
+     38
+    ],
+    "ctx": "For [_] source, we asked:"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "2-07.w045"
+    ],
+    "script": "built",
+    "heard": "builds",
+    "heard_t": [
+     19.52,
+     20.04
+    ],
+    "heard_p": [
+     0.827
+    ],
+    "master_f": [
+     1186,
+     1204
+    ],
+    "ctx": "for Insilico Medicine, which [_] its AI tools."
+   }
+  ]
+ },
+ "2-08": {
+  "n_script": 35,
+  "n_heard": 37,
+  "matched": 33,
+  "off_med_f": -13.2,
+  "off_mad_f": 4.2,
+  "heard_text": "So here is where we are going. First, the lock. Then how AI helped cut a key for it. Then what happened in the lab. And finally, the big one. How much did the computers really help?",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "2-08.w002"
+    ],
+    "script": "here's",
+    "heard": "here is",
+    "heard_t": [
+     0.2,
+     0.7
+    ],
+    "heard_p": [
+     0.915,
+     0.786
+    ],
+    "master_f": [
+     23,
+     46
+    ],
+    "ctx": "So [_] where we're going."
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "2-08.w004"
+    ],
+    "script": "we're",
+    "heard": "we are",
+    "heard_t": [
+     0.94,
+     1.18
+    ],
+    "heard_p": [
+     0.997,
+     0.806
+    ],
+    "master_f": [
+     64,
+     74
+    ],
+    "ctx": "So here's where [_] going. First, the"
+   }
+  ]
+ },
+ "3-01": {
+  "n_script": 10,
+  "n_heard": 10,
+  "matched": 10,
+  "off_med_f": -28.5,
+  "off_mad_f": 14.0,
+  "heard_text": "Okay, to get this, picture a lock and a key.",
+  "diffs": []
+ },
+ "3-02": {
+  "n_script": 31,
+  "n_heard": 32,
+  "matched": 30,
+  "off_med_f": -14.0,
+  "off_mad_f": 3.3,
+  "heard_text": "Inside your cells, proteins do a lot of the work. Most drugs grab one protein tightly and change what it does, slot it into a pocket like a key into a lock.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "3-02.w022"
+    ],
+    "script": "slotting",
+    "heard": "slot it",
+    "heard_t": [
+     8.7,
+     9.74
+    ],
+    "heard_p": [
+     0.654,
+     0.717
+    ],
+    "master_f": [
+     565,
+     597
+    ],
+    "ctx": "change what it does, [_] into a pocket"
+   }
+  ]
+ },
+ "3-03": {
+  "n_script": 28,
+  "n_heard": 28,
+  "matched": 23,
+  "off_med_f": -12.4,
+  "off_mad_f": 3.4,
+  "heard_text": "Scientists call the log the target and the key a candidate's molecule. A good key fits its own log tightly and open no one else. That's called selectivity.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "3-03.w004"
+    ],
+    "script": "lock",
+    "heard": "log",
+    "heard_t": [
+     1.36,
+     1.76
+    ],
+    "heard_p": [
+     0.435
+    ],
+    "master_f": [
+     98,
+     112
+    ],
+    "ctx": "Scientists call the [_] the target, and"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "3-03.w011"
+    ],
+    "script": "candidate",
+    "heard": "candidate's",
+    "heard_t": [
+     3.8,
+     4.44
+    ],
+    "heard_p": [
+     0.805
+    ],
+    "master_f": [
+     237,
+     269
+    ],
+    "ctx": "and the key a [_] molecule. A good"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "3-03.w019"
+    ],
+    "script": "lock",
+    "heard": "log",
+    "heard_t": [
+     6.98,
+     7.26
+    ],
+    "heard_p": [
+     0.971
+    ],
+    "master_f": [
+     430,
+     443
+    ],
+    "ctx": "key fits its own [_] tightly, and opens"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "3-03.w022"
+    ],
+    "script": "opens",
+    "heard": "open",
+    "heard_t": [
+     8.24,
+     8.66
+    ],
+    "heard_p": [
+     0.568
+    ],
+    "master_f": [
+     512,
+     535
+    ],
+    "ctx": "own lock tightly, and [_] no one else's."
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "3-03.w025"
+    ],
+    "script": "else's.",
+    "heard": "else.",
+    "heard_t": [
+     9.16,
+     9.54
+    ],
+    "heard_p": [
+     0.995
+    ],
+    "master_f": [
+     563,
+     592
+    ],
+    "ctx": "and opens no one [_] That's called selectivity."
+   }
+  ]
+ },
+ "3-04": {
+  "n_script": 41,
+  "n_heard": 40,
+  "matched": 38,
+  "off_med_f": -11.4,
+  "off_mad_f": 4.6,
+  "heard_text": "Our lucky CDK20 is an enzyme, a protein with a chemical job. Its keyhole is a pocket where it normally grabs a small molecule called ATP. Plug that pocket with the right key, and the enzyme can't do its job.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "3-04.w002"
+    ],
+    "script": "lock",
+    "heard": "lucky CDK20",
+    "heard_t": [
+     0.26,
+     1.52
+    ],
+    "heard_p": [
+     0.346,
+     0.886
+    ],
+    "master_f": [
+     28,
+     43
+    ],
+    "ctx": "Our [_] is CDK20. It's"
+   },
+   {
+    "op": "delete",
+    "wids": [
+     "3-04.w004",
+     "3-04.w005"
+    ],
+    "script": "CDK20. It's",
+    "heard": "",
+    "heard_t": null,
+    "heard_p": [],
+    "master_f": [
+     60,
+     151
+    ],
+    "ctx": "Our lock is [_] an enzyme, a"
+   }
+  ]
+ },
+ "3-05": {
+  "n_script": 42,
+  "n_heard": 44,
+  "matched": 36,
+  "off_med_f": -13.6,
+  "off_mad_f": 3.7,
+  "heard_text": "Why this lock? Remember the Hong Kong team? In 36 of 52 liver tumors, CDK20 was higher than in nearby non-tumor tissue. Hype level went with later stage tumors and shorter survival, and turning CDK20 down in liver cancer cells slowed their growth.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "3-05.w014"
+    ],
+    "script": "tumours,",
+    "heard": "tumors,",
+    "heard_t": [
+     4.42,
+     4.82
+    ],
+    "heard_p": [
+     0.971
+    ],
+    "master_f": [
+     282,
+     306
+    ],
+    "ctx": "36 of 52 liver [_] CDK20 was higher"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "3-05.w021"
+    ],
+    "script": "non-tumour",
+    "heard": "non -tumor",
+    "heard_t": [
+     7.94,
+     8.72
+    ],
+    "heard_p": [
+     0.99,
+     0.998
+    ],
+    "master_f": [
+     494,
+     527
+    ],
+    "ctx": "higher than in nearby [_] tissue. High levels"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "3-05.w023",
+     "3-05.w024"
+    ],
+    "script": "High levels",
+    "heard": "Hype level",
+    "heard_t": [
+     9.24,
+     10.0
+    ],
+    "heard_p": [
+     0.496,
+     0.956
+    ],
+    "master_f": [
+     580,
+     616
+    ],
+    "ctx": "in nearby non-tumour tissue. [_] went with later-stage"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "3-05.w027",
+     "3-05.w028"
+    ],
+    "script": "later-stage tumours",
+    "heard": "later stage tumors",
+    "heard_t": [
+     10.62,
+     12.1
+    ],
+    "heard_p": [
+     0.995,
+     0.961,
+     0.999
+    ],
+    "master_f": [
+     671,
+     739
+    ],
+    "ctx": "High levels went with [_] and shorter survival."
+   }
+  ]
+ },
+ "3-06": {
+  "n_script": 16,
+  "n_heard": 18,
+  "matched": 15,
+  "off_med_f": -18.8,
+  "off_mad_f": 9.4,
+  "heard_text": "So, it is a really strong suspect, not only cause of liver cancer, but a lock worth trying.",
+  "diffs": [
+   {
+    "op": "insert",
+    "wids": [],
+    "script": "",
+    "heard": "it is",
+    "heard_t": [
+     0.76,
+     1.56
+    ],
+    "heard_p": [
+     0.96,
+     0.795
+    ],
+    "master_f": null,
+    "ctx": "So: [_] a strong suspect."
+   },
+   {
+    "op": "insert",
+    "wids": [],
+    "script": "",
+    "heard": "really",
+    "heard_t": [
+     1.76,
+     2.46
+    ],
+    "heard_p": [
+     0.95
+    ],
+    "master_f": null,
+    "ctx": "So: a [_] strong suspect. Not"
+   },
+   {
+    "op": "delete",
+    "wids": [
+     "3-06.w006"
+    ],
+    "script": "the",
+    "heard": "",
+    "heard_t": null,
+    "heard_p": [],
+    "master_f": [
+     331,
+     335
+    ],
+    "ctx": "a strong suspect. Not [_] only cause of"
+   }
+  ]
+ },
+ "3-07": {
+  "n_script": 50,
+  "n_heard": 50,
+  "matched": 46,
+  "off_med_f": -13.7,
+  "off_mad_f": 4.4,
+  "heard_text": "In 2023, an AI platform called PandaOmics, back that hunch, it comp 10 liver cancer data sets, over a thousand tumor samples and hundreds of healthy ones, plus research papers. People checked this top 20 by hand, and CDK20 came out on top, with no approved drug against it yet.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "3-07.w008"
+    ],
+    "script": "backed",
+    "heard": "back",
+    "heard_t": [
+     4.08,
+     4.7
+    ],
+    "heard_p": [
+     0.465
+    ],
+    "master_f": [
+     278,
+     292
+    ],
+    "ctx": "AI platform called PandaOmics [_] that hunch. It"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "3-07.w012"
+    ],
+    "script": "combed",
+    "heard": "comp",
+    "heard_t": [
+     6.12,
+     6.28
+    ],
+    "heard_p": [
+     0.222
+    ],
+    "master_f": [
+     375,
+     389
+    ],
+    "ctx": "backed that hunch. It [_] ten liver cancer"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "3-07.w021"
+    ],
+    "script": "tumour",
+    "heard": "tumor",
+    "heard_t": [
+     9.02,
+     9.38
+    ],
+    "heard_p": [
+     0.752
+    ],
+    "master_f": [
+     555,
+     574
+    ],
+    "ctx": "sets, over a thousand [_] samples and hundreds"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "3-07.w033"
+    ],
+    "script": "its",
+    "heard": "this",
+    "heard_t": [
+     14.34,
+     14.56
+    ],
+    "heard_p": [
+     0.441
+    ],
+    "master_f": [
+     871,
+     877
+    ],
+    "ctx": "research papers. People checked [_] top 20 by"
+   }
+  ]
+ },
+ "3-08": {
+  "n_script": 54,
+  "n_heard": 40,
+  "matched": 39,
+  "off_med_f": -14.4,
+  "off_mad_f": 7.4,
+  "heard_text": "When no one had measured CDK20's shape, that takes a lot of hard lab work, and only a small fraction of proteins have ever been measured. Without a 3D shape, even computer predictions of binding get expensive, slow, and difficult.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "3-08.w001",
+     "3-08.w002",
+     "3-08.w003",
+     "3-08.w004",
+     "3-08.w005",
+     "3-08.w006",
+     "3-08.w007",
+     "3-08.w008",
+     "3-08.w009",
+     "3-08.w010",
+     "3-08.w011",
+     "3-08.w012",
+     "3-08.w013",
+     "3-08.w014",
+     "3-08.w015"
+    ],
+    "script": "But here's the problem. To design a key, you need to see the lock. And",
+    "heard": "When",
+    "heard_t": [
+     0.0,
+     0.3
+    ],
+    "heard_p": [
+     0.095
+    ],
+    "master_f": [
+     9,
+     146
+    ],
+    "ctx": " [_] no one had"
+   }
+  ]
+ },
+ "3-09": {
+  "n_script": 17,
+  "n_heard": 17,
+  "matched": 15,
+  "off_med_f": -7.2,
+  "off_mad_f": 2.6,
+  "heard_text": "So you've got a lock nobody can see. How did you get a key in the dark?",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "3-09.w010"
+    ],
+    "script": "do",
+    "heard": "did",
+    "heard_t": [
+     3.74,
+     3.9
+    ],
+    "heard_p": [
+     0.957
+    ],
+    "master_f": [
+     232,
+     235
+    ],
+    "ctx": "nobody can see. How [_] you cut a"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "3-09.w012"
+    ],
+    "script": "cut",
+    "heard": "get",
+    "heard_t": [
+     4.02,
+     4.14
+    ],
+    "heard_p": [
+     0.892
+    ],
+    "master_f": [
+     245,
+     253
+    ],
+    "ctx": "see. How do you [_] a key in"
+   }
+  ]
+ },
+ "4-01": {
+  "n_script": 66,
+  "n_heard": 64,
+  "matched": 58,
+  "off_med_f": -14.8,
+  "off_mad_f": 6.1,
+  "heard_text": "The team did something that once sounded like science fiction. They asked an AI to guess the shape. Imagine a protein as a string of beads. That folds into a 3D shape. The order of the beads is the sequence. AlphaFold learns from known structures. How sequences fold? Give it once, and it predicts the shape. Plus, how short it is about each part.",
+  "diffs": [
+   {
+    "op": "delete",
+    "wids": [
+     "4-01.w001"
+    ],
+    "script": "So",
+    "heard": "",
+    "heard_t": null,
+    "heard_p": [],
+    "master_f": [
+     4,
+     6
+    ],
+    "ctx": " [_] the team did"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "4-01.w025"
+    ],
+    "script": "chain",
+    "heard": "string",
+    "heard_t": [
+     9.56,
+     9.86
+    ],
+    "heard_p": [
+     0.99
+    ],
+    "master_f": [
+     583,
+     598
+    ],
+    "ctx": "a protein as a [_] of building blocks"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "4-01.w027",
+     "4-01.w028"
+    ],
+    "script": "building blocks",
+    "heard": "beads.",
+    "heard_t": [
+     10.1,
+     10.42
+    ],
+    "heard_p": [
+     0.902
+    ],
+    "master_f": [
+     619,
+     687
+    ],
+    "ctx": "as a chain of [_] that folds into"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "4-01.w039"
+    ],
+    "script": "blocks",
+    "heard": "beads",
+    "heard_t": [
+     14.42,
+     14.72
+    ],
+    "heard_p": [
+     0.999
+    ],
+    "master_f": [
+     875,
+     893
+    ],
+    "ctx": "The order of the [_] is the sequence."
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "4-01.w044"
+    ],
+    "script": "learned",
+    "heard": "learns",
+    "heard_t": [
+     16.82,
+     17.18
+    ],
+    "heard_p": [
+     0.717
+    ],
+    "master_f": [
+     1029,
+     1050
+    ],
+    "ctx": "is the sequence. AlphaFold [_] from known structures"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "4-01.w053"
+    ],
+    "script": "one,",
+    "heard": "once,",
+    "heard_t": [
+     20.84,
+     21.12
+    ],
+    "heard_p": [
+     0.907
+    ],
+    "master_f": [
+     1262,
+     1280
+    ],
+    "ctx": "sequences fold. Give it [_] and it predicts"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "4-01.w061"
+    ],
+    "script": "sure",
+    "heard": "short",
+    "heard_t": [
+     24.3,
+     24.58
+    ],
+    "heard_p": [
+     0.873
+    ],
+    "master_f": [
+     1470,
+     1484
+    ],
+    "ctx": "the shape, plus how [_] it is about"
+   }
+  ]
+ },
+ "4-02": {
+  "n_script": 38,
+  "n_heard": 38,
+  "matched": 34,
+  "off_med_f": -14.1,
+  "off_mad_f": 6.0,
+  "heard_text": "You need a lab-measure structure. Now, the team just downloaded a prediction for free from a public database. According to the paper, this was the first time AlphaFold had been used to find a kit like this.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "4-02.w001",
+     "4-02.w002"
+    ],
+    "script": "Before, you'd",
+    "heard": "You",
+    "heard_t": [
+     0.0,
+     0.32
+    ],
+    "heard_p": [
+     0.044
+    ],
+    "master_f": [
+     2,
+     56
+    ],
+    "ctx": " [_] need a lab-measured"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "4-02.w005"
+    ],
+    "script": "lab-measured",
+    "heard": "lab -measure",
+    "heard_t": [
+     1.14,
+     1.74
+    ],
+    "heard_p": [
+     0.854,
+     0.833
+    ],
+    "master_f": [
+     76,
+     114
+    ],
+    "ctx": "Before, you'd need a [_] structure. Now? The"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "4-02.w036"
+    ],
+    "script": "hit",
+    "heard": "kit",
+    "heard_t": [
+     15.28,
+     15.56
+    ],
+    "heard_p": [
+     0.811
+    ],
+    "master_f": [
+     926,
+     943
+    ],
+    "ctx": "used to find a [_] like this."
+   }
+  ]
+ },
+ "4-03": {
+  "n_script": 44,
+  "n_heard": 45,
+  "matched": 40,
+  "off_med_f": -10.6,
+  "off_mad_f": 4.4,
+  "heard_text": "But look closer, one end of the protein, a flabby tail, had really low confidence. And in the model, it lay across the keyhole, with one building block sitting inside the ATP pocket. Trace it blindly, and use the cut keys for a block door.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "4-03.w010"
+    ],
+    "script": "floppy",
+    "heard": "flabby",
+    "heard_t": [
+     3.34,
+     3.76
+    ],
+    "heard_p": [
+     0.765
+    ],
+    "master_f": [
+     208,
+     226
+    ],
+    "ctx": "of the protein, a [_] tail, had really"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "4-03.w034"
+    ],
+    "script": "Trust",
+    "heard": "Trace",
+    "heard_t": [
+     12.96,
+     13.52
+    ],
+    "heard_p": [
+     0.665
+    ],
+    "master_f": [
+     803,
+     816
+    ],
+    "ctx": "inside the ATP pocket. [_] it blindly, and"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "4-03.w038"
+    ],
+    "script": "you'd",
+    "heard": "use the",
+    "heard_t": [
+     14.6,
+     14.92
+    ],
+    "heard_p": [
+     0.381,
+     0.948
+    ],
+    "master_f": [
+     883,
+     893
+    ],
+    "ctx": "Trust it blindly, and [_] cut keys for"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "4-03.w043"
+    ],
+    "script": "blocked",
+    "heard": "block",
+    "heard_t": [
+     16.12,
+     16.32
+    ],
+    "heard_p": [
+     0.732
+    ],
+    "master_f": [
+     973,
+     991
+    ],
+    "ctx": "cut keys for a [_] door."
+   }
+  ]
+ },
+ "4-04+4-05": {
+  "n_script": 20,
+  "n_heard": 20,
+  "matched": 18,
+  "off_med_f": -9.5,
+  "off_mad_f": 3.0,
+  "heard_text": "So, what did they do? They cut the tail off. The AI made the guess. The human caused the problem.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "4-05.w011"
+    ],
+    "script": "A",
+    "heard": "The",
+    "heard_t": [
+     4.9,
+     5.38
+    ],
+    "heard_p": [
+     0.954
+    ],
+    "master_f": [
+     325,
+     327
+    ],
+    "ctx": "AI made the guess. [_] human caught the"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "4-05.w013"
+    ],
+    "script": "caught",
+    "heard": "caused",
+    "heard_t": [
+     5.64,
+     6.06
+    ],
+    "heard_p": [
+     0.962
+    ],
+    "master_f": [
+     357,
+     372
+    ],
+    "ctx": "the guess. A human [_] the problem."
+   }
+  ]
+ },
+ "4-06": {
+  "n_script": 42,
+  "n_heard": 42,
+  "matched": 41,
+  "off_med_f": -12.8,
+  "off_mad_f": 3.6,
+  "heard_text": "And this next part honestly blew my mind. Think about how chemists have always found the key. Imagine a molecule, make it, test it, it fails. Tweak it, try again. And every single round in a real lab costs time and money.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "4-06.w016"
+    ],
+    "script": "a",
+    "heard": "the",
+    "heard_t": [
+     5.58,
+     5.72
+    ],
+    "heard_p": [
+     0.572
+    ],
+    "master_f": [
+     344,
+     345
+    ],
+    "ctx": "chemists have always found [_] key. Imagine a"
+   }
+  ]
+ },
+ "4-07": {
+  "n_script": 54,
+  "n_heard": 54,
+  "matched": 51,
+  "off_med_f": -13.0,
+  "off_mad_f": 4.0,
+  "heard_text": "Generative AI takes that loop and moves this into a computer. The platform here, Chemistry42, runs dozens of AI models side by side, build on known chemistry. They invent new molecules for this exact keyhole, score them, learn from the scores, and go again. Its makers say it turns out new structures within hours.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "4-07.w008",
+     "4-07.w009"
+    ],
+    "script": "it inside",
+    "heard": "this into",
+    "heard_t": [
+     2.62,
+     3.08
+    ],
+    "heard_p": [
+     0.836,
+     0.996
+    ],
+    "master_f": [
+     167,
+     197
+    ],
+    "ctx": "that loop and moves [_] a computer. The"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "4-07.w024"
+    ],
+    "script": "built",
+    "heard": "build",
+    "heard_t": [
+     10.5,
+     11.06
+    ],
+    "heard_p": [
+     0.52
+    ],
+    "master_f": [
+     658,
+     674
+    ],
+    "ctx": "models side by side, [_] on known chemistry."
+   }
+  ]
+ },
+ "4-08": {
+  "n_script": 17,
+  "n_heard": 18,
+  "matched": 16,
+  "off_med_f": -15.0,
+  "off_mad_f": 5.6,
+  "heard_text": "AI didn't replace the scientist, it just ran their trial and error inside a computer at light speed.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "4-08.w005"
+    ],
+    "script": "scientists.",
+    "heard": "scientist,",
+    "heard_t": [
+     1.52,
+     1.96
+    ],
+    "heard_p": [
+     0.481
+    ],
+    "master_f": [
+     98,
+     143
+    ],
+    "ctx": "AI didn't replace the [_] It ran their"
+   },
+   {
+    "op": "insert",
+    "wids": [],
+    "script": "",
+    "heard": "just",
+    "heard_t": [
+     2.96,
+     3.24
+    ],
+    "heard_p": [
+     0.981
+    ],
+    "master_f": null,
+    "ctx": "replace the scientists. It [_] ran their trial"
+   }
+  ]
+ },
+ "4-09": {
+  "n_script": 44,
+  "n_heard": 45,
+  "matched": 38,
+  "off_med_f": -13.6,
+  "off_mad_f": 4.5,
+  "heard_text": "The theme gives it a pocket shape and one rule, every key must grip a spot called the hinge. Its filters are built to toast designs with reactive or possibly toxic groups, and to score how drug-like and easy to make each one is.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "4-09.w002",
+     "4-09.w003"
+    ],
+    "script": "team gave",
+    "heard": "theme gives",
+    "heard_t": [
+     0.2,
+     0.98
+    ],
+    "heard_p": [
+     0.469,
+     0.708
+    ],
+    "master_f": [
+     18,
+     64
+    ],
+    "ctx": "The [_] it the pocket's"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "4-09.w005",
+     "4-09.w006"
+    ],
+    "script": "the pocket's",
+    "heard": "a pocket",
+    "heard_t": [
+     1.18,
+     1.56
+    ],
+    "heard_p": [
+     0.842,
+     0.96
+    ],
+    "master_f": [
+     72,
+     108
+    ],
+    "ctx": "The team gave it [_] shape and one"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "4-09.w025"
+    ],
+    "script": "toss",
+    "heard": "toast",
+    "heard_t": [
+     8.7,
+     9.08
+    ],
+    "heard_p": [
+     0.802
+    ],
+    "master_f": [
+     531,
+     555
+    ],
+    "ctx": "filters are built to [_] designs with reactive"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "4-09.w037"
+    ],
+    "script": "drug-like",
+    "heard": "drug -like",
+    "heard_t": [
+     13.82,
+     14.46
+    ],
+    "heard_p": [
+     0.889,
+     0.894
+    ],
+    "master_f": [
+     844,
+     877
+    ],
+    "ctx": "and to score how [_] and easy to"
+   }
+  ]
+ },
+ "4-10": {
+  "n_script": 53,
+  "n_heard": 55,
+  "matched": 51,
+  "off_med_f": -12.6,
+  "off_mad_f": 3.6,
+  "heard_text": "It came back with 8,918 brand new designs. Way too many to make, so each key gets tried in a virtual lock. That's docking. The computer predicts how a molecule might sit in the pocket and scores the fit. Similar designs get grouped. 54 make the shortlist, and chemists pick just 7 to make.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "4-10.w005",
+     "4-10.w006"
+    ],
+    "script": "8,918 brand-new",
+    "heard": "8 ,918 brand new",
+    "heard_t": [
+     0.96,
+     3.66
+    ],
+    "heard_p": [
+     0.382,
+     0.985,
+     0.987,
+     0.691
+    ],
+    "master_f": [
+     76,
+     224
+    ],
+    "ctx": "It came back with [_] designs. Way too"
+   }
+  ]
+ },
+ "4-11+4-12": {
+  "n_script": 22,
+  "n_heard": 22,
+  "matched": 21,
+  "off_med_f": -12.6,
+  "off_mad_f": 5.2,
+  "heard_text": "Wait, so the computer picked the winners? Not quite. A docking score is just a clue, not proof. Only lab can tell.",
+  "diffs": [
+   {
+    "op": "insert",
+    "wids": [],
+    "script": "",
+    "heard": "just",
+    "heard_t": [
+     6.38,
+     6.72
+    ],
+    "heard_p": [
+     0.993
+    ],
+    "master_f": null,
+    "ctx": "A docking score is [_] a clue, not"
+   },
+   {
+    "op": "delete",
+    "wids": [
+     "4-12.w012"
+    ],
+    "script": "the",
+    "heard": "",
+    "heard_t": null,
+    "heard_p": [],
+    "master_f": [
+     563,
+     567
+    ],
+    "ctx": "clue, not proof. Only [_] lab can tell."
+   }
+  ]
+ },
+ "5-01": {
+  "n_script": 37,
+  "n_heard": 37,
+  "matched": 36,
+  "off_med_f": -18.0,
+  "off_mad_f": 6.0,
+  "heard_text": "So the moment of truth, 7 real molecules made in a real lab. Do any actually grab CDK20? Grid is measured as Kd, roughly how much molecule it takes to grab half the protein, lower means tighter.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "5-01.w019"
+    ],
+    "script": "Grip",
+    "heard": "Grid",
+    "heard_t": [
+     8.96,
+     9.68
+    ],
+    "heard_p": [
+     0.48
+    ],
+    "master_f": [
+     576,
+     592
+    ],
+    "ctx": "any actually grab CDK20? [_] is measured as"
+   }
+  ]
+ },
+ "5-02": {
+  "n_script": 13,
+  "n_heard": 14,
+  "matched": 9,
+  "off_med_f": -23.6,
+  "off_mad_f": 5.2,
+  "heard_text": "Six thousand barely held up, but one thousand stood up. Its name is 001.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "5-02.w002",
+     "5-02.w003"
+    ],
+    "script": "of them",
+    "heard": "thousand",
+    "heard_t": [
+     0.64,
+     0.94
+    ],
+    "heard_p": [
+     0.128
+    ],
+    "master_f": [
+     49,
+     67
+    ],
+    "ctx": "Six [_] barely held on."
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "5-02.w006"
+    ],
+    "script": "on.",
+    "heard": "up,",
+    "heard_t": [
+     1.8,
+     2.04
+    ],
+    "heard_p": [
+     0.875
+    ],
+    "master_f": [
+     119,
+     125
+    ],
+    "ctx": "of them barely held [_] But one stood"
+   },
+   {
+    "op": "insert",
+    "wids": [],
+    "script": "",
+    "heard": "thousand",
+    "heard_t": [
+     2.86,
+     3.14
+    ],
+    "heard_p": [
+     0.877
+    ],
+    "master_f": null,
+    "ctx": "held on. But one [_] stood out. Its"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "5-02.w010"
+    ],
+    "script": "out.",
+    "heard": "up.",
+    "heard_t": [
+     3.52,
+     3.84
+    ],
+    "heard_p": [
+     0.899
+    ],
+    "master_f": [
+     223,
+     251
+    ],
+    "ctx": "on. But one stood [_] Its name? 001."
+   },
+   {
+    "op": "insert",
+    "wids": [],
+    "script": "",
+    "heard": "is",
+    "heard_t": [
+     4.64,
+     5.02
+    ],
+    "heard_p": [
+     0.979
+    ],
+    "master_f": null,
+    "ctx": "stood out. Its name? [_] 001."
+   }
+  ]
+ },
+ "5-03": {
+  "n_script": 32,
+  "n_heard": 32,
+  "matched": 28,
+  "off_med_f": -15.9,
+  "off_mad_f": 4.6,
+  "heard_text": "001's KD9.2, Micromolar, the other 6, all above 30, much weaker, and here's the wild part, the clock reached just 30 days, from peaking the target to this first confirmed hit.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "5-03.w002",
+     "5-03.w003"
+    ],
+    "script": "Kd: 9.2",
+    "heard": "KD9 .2,",
+    "heard_t": [
+     0.62,
+     2.06
+    ],
+    "heard_p": [
+     0.558,
+     0.986
+    ],
+    "master_f": [
+     43,
+     150
+    ],
+    "ctx": "001's [_] micromolar. The other"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "5-03.w020"
+    ],
+    "script": "read",
+    "heard": "reached",
+    "heard_t": [
+     10.74,
+     11.3
+    ],
+    "heard_p": [
+     0.391
+    ],
+    "master_f": [
+     675,
+     684
+    ],
+    "ctx": "wild part. The clock [_] just 30 days,"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "5-03.w025"
+    ],
+    "script": "picking",
+    "heard": "peaking",
+    "heard_t": [
+     12.92,
+     13.46
+    ],
+    "heard_p": [
+     0.879
+    ],
+    "master_f": [
+     791,
+     816
+    ],
+    "ctx": "just 30 days, from [_] the target to"
+   }
+  ]
+ },
+ "5-04": {
+  "n_script": 44,
+  "n_heard": 43,
+  "matched": 42,
+  "off_med_f": -18.1,
+  "off_mad_f": 6.2,
+  "heard_text": "But then came a second test, because grabbing a lot isn't the same as jamming it. Does 001 actually stop CDK20 from working? That's measured as IC50. How much you need to cut the enzyme's activity in half for 001 above 6000 nanomolar?",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "5-04.w010"
+    ],
+    "script": "lock",
+    "heard": "lot",
+    "heard_t": [
+     3.84,
+     4.12
+    ],
+    "heard_p": [
+     0.937
+    ],
+    "master_f": [
+     241,
+     254
+    ],
+    "ctx": "test. Because grabbing a [_] isn't the same"
+   },
+   {
+    "op": "delete",
+    "wids": [
+     "5-04.w044"
+    ],
+    "script": "Weak.",
+    "heard": "",
+    "heard_t": null,
+    "heard_p": [],
+    "master_f": [
+     1483,
+     1502
+    ],
+    "ctx": "001? Above 6,000 nanomolar. [_] "
+   }
+  ]
+ },
+ "5-05+5-06": {
+  "n_script": 18,
+  "n_heard": 16,
+  "matched": 14,
+  "off_med_f": -18.8,
+  "off_mad_f": 7.4,
+  "heard_text": "The key went into a lock, but barely turned, so that's it, back to square one.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "5-05.w005"
+    ],
+    "script": "the",
+    "heard": "a",
+    "heard_t": [
+     1.74,
+     1.9
+    ],
+    "heard_p": [
+     0.749
+    ],
+    "master_f": [
+     112,
+     116
+    ],
+    "ctx": "The key went into [_] lock. But it"
+   },
+   {
+    "op": "delete",
+    "wids": [
+     "5-05.w008"
+    ],
+    "script": "it",
+    "heard": "",
+    "heard_t": null,
+    "heard_p": [],
+    "master_f": [
+     166,
+     169
+    ],
+    "ctx": "into the lock. But [_] barely turned. So"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "5-06.w002",
+     "5-06.w003"
+    ],
+    "script": "was that",
+    "heard": "that's",
+    "heard_t": [
+     4.44,
+     6.4
+    ],
+    "heard_p": [
+     0.963
+    ],
+    "master_f": [
+     280,
+     384
+    ],
+    "ctx": "it barely turned. So [_] it? Back to"
+   }
+  ]
+ },
+ "5-07": {
+  "n_script": 48,
+  "n_heard": 48,
+  "matched": 44,
+  "off_med_f": -16.6,
+  "off_mad_f": 4.7,
+  "heard_text": "Not at all. This is where the loose kicks in again. Now, with real lab data inside, the results went back in, with a predictive pulse of how 001 sat in a pocket. 16 new designs, 6 made and tested, all within 30 days of that first hit.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "5-07.w008"
+    ],
+    "script": "loop",
+    "heard": "loose",
+    "heard_t": [
+     2.5,
+     2.76
+    ],
+    "heard_p": [
+     0.177
+    ],
+    "master_f": [
+     157,
+     172
+    ],
+    "ctx": "This is where the [_] kicks in again,"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "5-07.w025",
+     "5-07.w026"
+    ],
+    "script": "predicted pose",
+    "heard": "predictive pulse",
+    "heard_t": [
+     9.66,
+     10.8
+    ],
+    "heard_p": [
+     0.896,
+     0.69
+    ],
+    "master_f": [
+     600,
+     658
+    ],
+    "ctx": "back in, with a [_] of how 001"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "5-07.w032"
+    ],
+    "script": "the",
+    "heard": "a",
+    "heard_t": [
+     12.86,
+     13.0
+    ],
+    "heard_p": [
+     0.578
+    ],
+    "master_f": [
+     780,
+     784
+    ],
+    "ctx": "how 001 sat in [_] pocket. Sixteen new"
+   }
+  ]
+ },
+ "5-08": {
+  "n_script": 25,
+  "n_heard": 27,
+  "matched": 23,
+  "off_med_f": -19.8,
+  "off_mad_f": 7.6,
+  "heard_text": "And one of them, 048, grabbed it about 15 times tighter than the enzyme test. Remember, 001 needed more than 6000 nanomolar. 048 needed just 33.4.",
+  "diffs": [
+   {
+    "op": "insert",
+    "wids": [],
+    "script": "",
+    "heard": "it",
+    "heard_t": [
+     2.82,
+     3.1
+    ],
+    "heard_p": [
+     0.976
+    ],
+    "master_f": null,
+    "ctx": "of them, 048, grabbed [_] about fifteen times"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "5-08.w011"
+    ],
+    "script": "Then",
+    "heard": "than",
+    "heard_t": [
+     5.04,
+     5.5
+    ],
+    "heard_p": [
+     0.984
+    ],
+    "master_f": [
+     333,
+     348
+    ],
+    "ctx": "about fifteen times tighter. [_] the enzyme test."
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "5-08.w025"
+    ],
+    "script": "33.4.",
+    "heard": "33 .4.",
+    "heard_t": [
+     15.82,
+     17.72
+    ],
+    "heard_p": [
+     0.992,
+     0.994
+    ],
+    "master_f": [
+     963,
+     1071
+    ],
+    "ctx": "nanomolar. 048 needed just [_] "
+   }
+  ]
+ },
+ "5-09": {
+  "n_script": 5,
+  "n_heard": 5,
+  "matched": 5,
+  "off_med_f": -15.8,
+  "off_mad_f": 7.2,
+  "heard_text": "This time, the key turned.",
+  "diffs": []
+ },
+ "5-10": {
+  "n_script": 37,
+  "n_heard": 37,
+  "matched": 34,
+  "off_med_f": -23.2,
+  "off_mad_f": 8.2,
+  "heard_text": "Then, the big step, living cells. After 3 days with 048, HUH7 liver cancer cells packed with CDK20 lost half their living cell signal at about 210 nM. Comparison cells, HEK293, needed about 1700, roughly 8 times.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "5-10.w022"
+    ],
+    "script": "living-cell",
+    "heard": "living cell",
+    "heard_t": [
+     12.04,
+     12.78
+    ],
+    "heard_p": [
+     0.957,
+     0.962
+    ],
+    "master_f": [
+     745,
+     778
+    ],
+    "ctx": "CDK20, lost half their [_] signal at about"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "5-10.w027"
+    ],
+    "script": "nanomolar.",
+    "heard": "nM.",
+    "heard_t": [
+     15.42,
+     16.62
+    ],
+    "heard_p": [
+     0.538
+    ],
+    "master_f": [
+     974,
+     1024
+    ],
+    "ctx": "signal at about 210 [_] Comparison cells, HEK293,"
+   },
+   {
+    "op": "delete",
+    "wids": [
+     "5-10.w037"
+    ],
+    "script": "more.",
+    "heard": "",
+    "heard_t": null,
+    "heard_p": [],
+    "master_f": [
+     1619,
+     1644
+    ],
+    "ctx": "1,700. Roughly eight times [_] "
+   }
+  ]
+ },
+ "6-01": {
+  "n_script": 17,
+  "n_heard": 17,
+  "matched": 17,
+  "off_med_f": -12.2,
+  "off_mad_f": 5.4,
+  "heard_text": "So the big question, how much did the computers actually help? Let's line up before and now.",
+  "diffs": []
+ },
+ "6-02": {
+  "n_script": 27,
+  "n_heard": 27,
+  "matched": 23,
+  "off_med_f": -13.2,
+  "off_mad_f": 4.8,
+  "heard_text": "Seen the log before, hard lab experiment, and without a 3D shape, design was expensive, slow, and difficult. Now, a free prediction, download from a public database.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "6-02.w001"
+    ],
+    "script": "Seeing",
+    "heard": "Seen",
+    "heard_t": [
+     0.0,
+     0.32
+    ],
+    "heard_p": [
+     0.612
+    ],
+    "master_f": [
+     9,
+     23
+    ],
+    "ctx": " [_] the lock. Before:"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-02.w003"
+    ],
+    "script": "lock.",
+    "heard": "log",
+    "heard_t": [
+     0.42,
+     0.64
+    ],
+    "heard_p": [
+     0.827
+    ],
+    "master_f": [
+     32,
+     46
+    ],
+    "ctx": "Seeing the [_] Before: hard lab"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-02.w007"
+    ],
+    "script": "experiments,",
+    "heard": "experiment,",
+    "heard_t": [
+     2.28,
+     2.68
+    ],
+    "heard_p": [
+     0.978
+    ],
+    "master_f": [
+     147,
+     188
+    ],
+    "ctx": "lock. Before: hard lab [_] and without a"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-02.w023"
+    ],
+    "script": "downloaded",
+    "heard": "download",
+    "heard_t": [
+     9.8,
+     10.34
+    ],
+    "heard_p": [
+     0.723
+    ],
+    "master_f": [
+     611,
+     639
+    ],
+    "ctx": "Now: a free prediction, [_] from a public"
+   }
+  ]
+ },
+ "6-03": {
+  "n_script": 33,
+  "n_heard": 34,
+  "matched": 29,
+  "off_med_f": -15.6,
+  "off_mad_f": 5.0,
+  "heard_text": "Finally a hit, before screen real compounds by the millions, an approach a 2023 review says has hit a costly bottleneck. Now, 8,918 designs inside a computer and just 30 molecules actually made.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "6-03.w001"
+    ],
+    "script": "Finding",
+    "heard": "Finally",
+    "heard_t": [
+     0.0,
+     0.34
+    ],
+    "heard_p": [
+     0.042
+    ],
+    "master_f": [
+     9,
+     25
+    ],
+    "ctx": " [_] a hit. Before:"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-03.w005"
+    ],
+    "script": "screening",
+    "heard": "screen",
+    "heard_t": [
+     1.26,
+     1.74
+    ],
+    "heard_p": [
+     0.45
+    ],
+    "master_f": [
+     92,
+     117
+    ],
+    "ctx": "Finding a hit. Before: [_] real compounds by"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-03.w023"
+    ],
+    "script": "8,918",
+    "heard": "8 ,918",
+    "heard_t": [
+     9.02,
+     10.36
+    ],
+    "heard_p": [
+     0.37,
+     0.975
+    ],
+    "master_f": [
+     557,
+     636
+    ],
+    "ctx": "a costly bottleneck. Now: [_] designs inside a"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-03.w030"
+    ],
+    "script": "13",
+    "heard": "30",
+    "heard_t": [
+     12.84,
+     13.14
+    ],
+    "heard_p": [
+     0.868
+    ],
+    "master_f": [
+     785,
+     801
+    ],
+    "ctx": "a computer, and just [_] molecules actually made."
+   }
+  ]
+ },
+ "6-04+6-05": {
+  "n_script": 12,
+  "n_heard": 12,
+  "matched": 12,
+  "off_med_f": -19.7,
+  "off_mad_f": 12.6,
+  "heard_text": "Millions of compounds screened before. Here, 13 made. 13? That's honestly wild.",
+  "diffs": []
+ },
+ "6-06": {
+  "n_script": 27,
+  "n_heard": 28,
+  "matched": 21,
+  "off_med_f": -12.8,
+  "off_mad_f": 3.8,
+  "heard_text": "Before, a 10-17 year road with finding a heat just the opening stretch. Now, 30 days to the first heat, and a battery key with another 30.",
+  "diffs": [
+   {
+    "op": "delete",
+    "wids": [
+     "6-06.w001"
+    ],
+    "script": "Time.",
+    "heard": "",
+    "heard_t": null,
+    "heard_p": [],
+    "master_f": [
+     9,
+     28
+    ],
+    "ctx": " [_] Before: a ten-to-seventeen-year"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-06.w004"
+    ],
+    "script": "ten-to-seventeen-year",
+    "heard": "10 -17 year",
+    "heard_t": [
+     1.7,
+     3.06
+    ],
+    "heard_p": [
+     0.94,
+     0.699,
+     0.744
+    ],
+    "master_f": [
+     111,
+     190
+    ],
+    "ctx": "Time. Before: a [_] road, with finding"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-06.w009"
+    ],
+    "script": "hit",
+    "heard": "heat",
+    "heard_t": [
+     4.66,
+     4.98
+    ],
+    "heard_p": [
+     0.271
+    ],
+    "master_f": [
+     289,
+     305
+    ],
+    "ctx": "road, with finding a [_] just the opening"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-06.w020"
+    ],
+    "script": "hit,",
+    "heard": "heat,",
+    "heard_t": [
+     8.5,
+     8.78
+    ],
+    "heard_p": [
+     0.993
+    ],
+    "master_f": [
+     520,
+     534
+    ],
+    "ctx": "days to the first [_] and a better"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-06.w023"
+    ],
+    "script": "better",
+    "heard": "battery",
+    "heard_t": [
+     9.48,
+     9.76
+    ],
+    "heard_p": [
+     0.228
+    ],
+    "master_f": [
+     575,
+     592
+    ],
+    "ctx": "first hit, and a [_] key within another"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-06.w025"
+    ],
+    "script": "within",
+    "heard": "with",
+    "heard_t": [
+     10.02,
+     10.26
+    ],
+    "heard_p": [
+     0.97
+    ],
+    "master_f": [
+     612,
+     639
+    ],
+    "ctx": "and a better key [_] another 30."
+   }
+  ]
+ },
+ "6-07": {
+  "n_script": 30,
+  "n_heard": 30,
+  "matched": 25,
+  "off_med_f": -14.8,
+  "off_mad_f": 5.8,
+  "heard_text": "Improving the key. Before, every change made another costly lap round. Now, a predict picture of the first key guide 16 design. And the grip got about 15 times tighter.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "6-07.w007"
+    ],
+    "script": "meant",
+    "heard": "made",
+    "heard_t": [
+     2.64,
+     2.88
+    ],
+    "heard_p": [
+     0.889
+    ],
+    "master_f": [
+     170,
+     182
+    ],
+    "ctx": "key. Before: every change [_] another costly lab"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-07.w010"
+    ],
+    "script": "lab",
+    "heard": "lap",
+    "heard_t": [
+     3.86,
+     4.28
+    ],
+    "heard_p": [
+     0.894
+    ],
+    "master_f": [
+     252,
+     264
+    ],
+    "ctx": "change meant another costly [_] round. Now: a"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-07.w014"
+    ],
+    "script": "predicted",
+    "heard": "predict",
+    "heard_t": [
+     5.8,
+     6.16
+    ],
+    "heard_p": [
+     0.292
+    ],
+    "master_f": [
+     355,
+     390
+    ],
+    "ctx": "lab round. Now: a [_] picture of the"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-07.w020"
+    ],
+    "script": "guided",
+    "heard": "guide",
+    "heard_t": [
+     7.72,
+     8.04
+    ],
+    "heard_p": [
+     0.929
+    ],
+    "master_f": [
+     477,
+     492
+    ],
+    "ctx": "of the first key [_] sixteen designs, and"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-07.w022"
+    ],
+    "script": "designs,",
+    "heard": "design.",
+    "heard_t": [
+     8.36,
+     9.18
+    ],
+    "heard_p": [
+     0.893
+    ],
+    "master_f": [
+     546,
+     576
+    ],
+    "ctx": "first key guided sixteen [_] and the grip"
+   }
+  ]
+ },
+ "6-08": {
+  "n_script": 31,
+  "n_heard": 32,
+  "matched": 27,
+  "off_med_f": -12.2,
+  "off_mad_f": 4.2,
+  "heard_text": "To be fair, these pairs come from different studies. They compare scale and speed. No one reads from side by side. But the paper itself calls the work cost and time efficient.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "6-08.w015"
+    ],
+    "script": "not",
+    "heard": "No",
+    "heard_t": [
+     5.14,
+     5.58
+    ],
+    "heard_p": [
+     0.767
+    ],
+    "master_f": [
+     335,
+     343
+    ],
+    "ctx": "compare scale and speed, [_] one race run"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-08.w017",
+     "6-08.w018"
+    ],
+    "script": "race run",
+    "heard": "reads from",
+    "heard_t": [
+     5.86,
+     6.46
+    ],
+    "heard_p": [
+     0.682,
+     0.555
+    ],
+    "master_f": [
+     362,
+     400
+    ],
+    "ctx": "and speed, not one [_] side by side."
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-08.w031"
+    ],
+    "script": "time-efficient.",
+    "heard": "time efficient.",
+    "heard_t": [
+     11.06,
+     11.8
+    ],
+    "heard_p": [
+     0.993,
+     0.926
+    ],
+    "master_f": [
+     681,
+     730
+    ],
+    "ctx": "the work cost- and [_] "
+   }
+  ]
+ },
+ "6-09": {
+  "n_script": 27,
+  "n_heard": 22,
+  "matched": 19,
+  "off_med_f": -18.2,
+  "off_mad_f": 5.4,
+  "heard_text": "Fewer failed molecules, lower cost, fewer animal tests, less chemical waste, computing cost electricity too, and real price, new treatments for patients.",
+  "diffs": [
+   {
+    "op": "delete",
+    "wids": [
+     "6-09.w006",
+     "6-09.w007",
+     "6-09.w008",
+     "6-09.w009"
+    ],
+    "script": "further down the road.",
+    "heard": "",
+    "heard_t": null,
+    "heard_p": [],
+    "master_f": [
+     9,
+     35
+    ],
+    "ctx": " [_] Fewer failed molecules,"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-09.w014"
+    ],
+    "script": "costs,",
+    "heard": "cost,",
+    "heard_t": [
+     1.8,
+     2.18
+    ],
+    "heard_p": [
+     0.542
+    ],
+    "master_f": [
+     123,
+     146
+    ],
+    "ctx": "Fewer failed molecules, lower [_] fewer animal tests,"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-09.w022"
+    ],
+    "script": "costs",
+    "heard": "cost",
+    "heard_t": [
+     6.44,
+     6.78
+    ],
+    "heard_p": [
+     0.472
+    ],
+    "master_f": [
+     401,
+     417
+    ],
+    "ctx": "less chemical waste. Computing [_] electricity too. And"
+   },
+   {
+    "op": "delete",
+    "wids": [
+     "6-09.w026"
+    ],
+    "script": "the",
+    "heard": "",
+    "heard_t": null,
+    "heard_p": [],
+    "master_f": [
+     514,
+     518
+    ],
+    "ctx": "costs electricity too. And [_] real prize? New"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-09.w028"
+    ],
+    "script": "prize?",
+    "heard": "price,",
+    "heard_t": [
+     8.68,
+     9.04
+    ],
+    "heard_p": [
+     0.864
+    ],
+    "master_f": [
+     533,
+     563
+    ],
+    "ctx": "too. And the real [_] New treatments for"
+   }
+  ]
+ },
+ "6-10": {
+  "n_script": 23,
+  "n_heard": 23,
+  "matched": 20,
+  "off_med_f": -20.5,
+  "off_mad_f": 10.2,
+  "heard_text": "So, where's 048 on the roll? Target? Found. Heat? Found. Improving it? Started. Cells? First test. Done. Animals and clinical trials? Not yet.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "6-10.w006"
+    ],
+    "script": "road?",
+    "heard": "roll?",
+    "heard_t": [
+     2.58,
+     2.76
+    ],
+    "heard_p": [
+     0.491
+    ],
+    "master_f": [
+     160,
+     173
+    ],
+    "ctx": "where's 048 on the [_] Target: found. Hit:"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-10.w009"
+    ],
+    "script": "Hit:",
+    "heard": "Heat?",
+    "heard_t": [
+     4.86,
+     5.5
+    ],
+    "heard_p": [
+     0.892
+    ],
+    "master_f": [
+     325,
+     339
+    ],
+    "ctx": "the road? Target: found. [_] found. Improving it:"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-10.w016"
+    ],
+    "script": "tests,",
+    "heard": "test.",
+    "heard_t": [
+     10.66,
+     10.9
+    ],
+    "heard_p": [
+     0.874
+    ],
+    "master_f": [
+     651,
+     687
+    ],
+    "ctx": "it: started. Cells: first [_] done. Animals and"
+   }
+  ]
+ },
+ "6-11": {
+  "n_script": 59,
+  "n_heard": 61,
+  "matched": 51,
+  "off_med_f": -10.6,
+  "off_mad_f": 3.6,
+  "heard_text": "And here's what the end of that row can look like. Some AI-assisted cancer drugs have walked much further. In September 2026, one of them, Levofregrinotib, was approved in the US for a bio-dirt cancer. Others failed along that way. In 048, its makers chose not to take it to the trails and shared it with other researchers instead.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "6-11.w008"
+    ],
+    "script": "road",
+    "heard": "row",
+    "heard_t": [
+     1.26,
+     1.52
+    ],
+    "heard_p": [
+     0.1
+    ],
+    "master_f": [
+     87,
+     97
+    ],
+    "ctx": "the end of that [_] can look like."
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-11.w013"
+    ],
+    "script": "AI-assisted",
+    "heard": "AI -assisted",
+    "heard_t": [
+     2.96,
+     3.84
+    ],
+    "heard_p": [
+     0.956,
+     0.975
+    ],
+    "master_f": [
+     191,
+     240
+    ],
+    "ctx": "can look like. Some [_] cancer drugs have"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-11.w026"
+    ],
+    "script": "lirafugratinib,",
+    "heard": "Levofregrinotib,",
+    "heard_t": [
+     9.74,
+     11.38
+    ],
+    "heard_p": [
+     0.492
+    ],
+    "master_f": [
+     610,
+     689
+    ],
+    "ctx": "2026, one of them, [_] was approved in"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-11.w034",
+     "6-11.w035"
+    ],
+    "script": "bile duct",
+    "heard": "bio -dirt",
+    "heard_t": [
+     13.88,
+     14.5
+    ],
+    "heard_p": [
+     0.649,
+     0.74
+    ],
+    "master_f": [
+     838,
+     873
+    ],
+    "ctx": "the US for a [_] cancer. Others failed"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-11.w040"
+    ],
+    "script": "the",
+    "heard": "that",
+    "heard_t": [
+     16.54,
+     16.88
+    ],
+    "heard_p": [
+     0.992
+    ],
+    "master_f": [
+     1011,
+     1017
+    ],
+    "ctx": "cancer. Others failed along [_] way. And 048?"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-11.w042"
+    ],
+    "script": "And",
+    "heard": "In",
+    "heard_t": [
+     17.38,
+     17.74
+    ],
+    "heard_p": [
+     0.09
+    ],
+    "master_f": [
+     1064,
+     1070
+    ],
+    "ctx": "failed along the way. [_] 048? Its makers"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "6-11.w052"
+    ],
+    "script": "trials,",
+    "heard": "the trails",
+    "heard_t": [
+     20.94,
+     21.5
+    ],
+    "heard_p": [
+     0.319,
+     0.959
+    ],
+    "master_f": [
+     1275,
+     1309
+    ],
+    "ctx": "to take it to [_] and shared it"
+   }
+  ]
+ },
+ "6-12": {
+  "n_script": 19,
+  "n_heard": 18,
+  "matched": 15,
+  "off_med_f": -8.6,
+  "off_mad_f": 2.4,
+  "heard_text": "048 is at the very start of the road, but for this case, let's talk grief, not years.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "6-12.w014",
+     "6-12.w015",
+     "6-12.w016",
+     "6-12.w017"
+    ],
+    "script": "that start took weeks,",
+    "heard": "let's talk grief,",
+    "heard_t": [
+     4.1,
+     5.5
+    ],
+    "heard_p": [
+     0.772,
+     0.991,
+     0.559
+    ],
+    "master_f": [
+     292,
+     340
+    ],
+    "ctx": "But for this case, [_] not years."
+   }
+  ]
+ },
+ "7-01": {
+  "n_script": 9,
+  "n_heard": 9,
+  "matched": 8,
+  "off_med_f": -16.4,
+  "off_mad_f": 4.6,
+  "heard_text": "So what should happen next? We suggest three things.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "7-01.w006"
+    ],
+    "script": "We'd",
+    "heard": "We",
+    "heard_t": [
+     2.0,
+     2.76
+    ],
+    "heard_p": [
+     0.971
+    ],
+    "master_f": [
+     165,
+     178
+    ],
+    "ctx": "what should happen next? [_] suggest three things."
+   }
+  ]
+ },
+ "7-02": {
+  "n_script": 43,
+  "n_heard": 43,
+  "matched": 42,
+  "off_med_f": -12.4,
+  "off_mad_f": 3.6,
+  "heard_text": "1. Walk 048 further. It's public now, so anyone could try. Test it in more liver cancer cells and normal liver cells than animals, and check how the body handles it and what else it hits. The authors had already listed these steps.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "7-02.w023"
+    ],
+    "script": "then",
+    "heard": "than",
+    "heard_t": [
+     9.34,
+     10.16
+    ],
+    "heard_p": [
+     0.947
+    ],
+    "master_f": [
+     608,
+     616
+    ],
+    "ctx": "and normal liver cells, [_] animals, and check"
+   }
+  ]
+ },
+ "7-03": {
+  "n_script": 24,
+  "n_heard": 25,
+  "matched": 22,
+  "off_med_f": -13.5,
+  "off_mad_f": 4.5,
+  "heard_text": "2. Check the AlphaFold model against a lab-measured structure once one exists, and feed every result, including the failures, back into the next rung.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "7-03.w008"
+    ],
+    "script": "lab-measured",
+    "heard": "lab -measured",
+    "heard_t": [
+     2.9,
+     3.6
+    ],
+    "heard_p": [
+     0.712,
+     0.918
+    ],
+    "master_f": [
+     181,
+     222
+    ],
+    "ctx": "AlphaFold model against a [_] structure, once one"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "7-03.w024"
+    ],
+    "script": "round.",
+    "heard": "rung.",
+    "heard_t": [
+     10.84,
+     11.14
+    ],
+    "heard_p": [
+     0.625
+    ],
+    "master_f": [
+     661,
+     678
+    ],
+    "ctx": "back into the next [_] "
+   }
+  ]
+ },
+ "7-04": {
+  "n_script": 29,
+  "n_heard": 29,
+  "matched": 28,
+  "off_med_f": -13.0,
+  "off_mad_f": 3.5,
+  "heard_text": "3. Raise them. An AI route and a classic route. Same target, same budget, same definition of a hit. Then we'd know exactly how much faster AI really is.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "7-04.w002"
+    ],
+    "script": "race",
+    "heard": "Raise",
+    "heard_t": [
+     0.56,
+     1.18
+    ],
+    "heard_p": [
+     0.596
+    ],
+    "master_f": [
+     63,
+     80
+    ],
+    "ctx": "Three: [_] them. An AI"
+   }
+  ]
+ },
+ "8-01": {
+  "n_script": 6,
+  "n_heard": 6,
+  "matched": 6,
+  "off_med_f": -11.2,
+  "off_mad_f": 1.9,
+  "heard_text": "So, back to where we started.",
+  "diffs": []
+ },
+ "8-02": {
+  "n_script": 44,
+  "n_heard": 45,
+  "matched": 43,
+  "off_med_f": -17.2,
+  "off_mad_f": 4.8,
+  "heard_text": "How can computer-aided methods help scientists find and assess cancer drug candidates? In this case, at four points, picking a target from data, predicting the lock's shape, designing new keys, and ranking which ones to make. That's our first objective, met for this case.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "8-02.w003"
+    ],
+    "script": "computer-aided",
+    "heard": "computer -aided",
+    "heard_t": [
+     0.46,
+     1.36
+    ],
+    "heard_p": [
+     0.954,
+     0.949
+    ],
+    "master_f": [
+     38,
+     96
+    ],
+    "ctx": "How can [_] methods help scientists"
+   }
+  ]
+ },
+ "8-03": {
+  "n_script": 40,
+  "n_heard": 41,
+  "matched": 37,
+  "off_med_f": -15.6,
+  "off_mad_f": 5.0,
+  "heard_text": "And our second, these methods help the team assess candidates fast. Screening by the millions became 13 molecules made, and on a row measured in years, the first hit came in 30 days, and the wrong two made the key turn.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "8-03.w006"
+    ],
+    "script": "helped",
+    "heard": "help",
+    "heard_t": [
+     2.02,
+     2.6
+    ],
+    "heard_p": [
+     0.744
+    ],
+    "master_f": [
+     147,
+     165
+    ],
+    "ctx": "our second? These methods [_] the team assess"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "8-03.w023"
+    ],
+    "script": "road",
+    "heard": "row",
+    "heard_t": [
+     11.56,
+     11.78
+    ],
+    "heard_p": [
+     0.574
+    ],
+    "master_f": [
+     704,
+     715
+    ],
+    "ctx": "made. And on a [_] measured in years,"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "8-03.w035"
+    ],
+    "script": "round",
+    "heard": "the wrong",
+    "heard_t": [
+     15.9,
+     16.32
+    ],
+    "heard_p": [
+     0.655,
+     0.481
+    ],
+    "master_f": [
+     972,
+     984
+    ],
+    "ctx": "in 30 days, and [_] two made the"
+   }
+  ]
+ },
+ "8-04+8-05+8-06+8-07": {
+  "n_script": 60,
+  "n_heard": 61,
+  "matched": 51,
+  "off_med_f": -13.2,
+  "off_mad_f": 6.0,
+  "heard_text": "These works in cells, not yet in people. The computer narrows the research. Experiments stoke the site. So next time when you see a headline like AI discovered cancer drugs, ask where it's really is on the road. Computer, protein, cells, animals, or patient. AI didn't replace the scientists, it gave them trial and error at light speed. Thanks for watching.",
+  "diffs": [
+   {
+    "op": "replace",
+    "wids": [
+     "8-04.w001"
+    ],
+    "script": "This",
+    "heard": "These",
+    "heard_t": [
+     0.0,
+     0.68
+    ],
+    "heard_p": [
+     0.253
+    ],
+    "master_f": [
+     32,
+     49
+    ],
+    "ctx": " [_] works in cells,"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "8-04.w013"
+    ],
+    "script": "search.",
+    "heard": "research.",
+    "heard_t": [
+     5.76,
+     6.14
+    ],
+    "heard_p": [
+     0.998
+    ],
+    "master_f": [
+     366,
+     389
+    ],
+    "ctx": "The computer narrows the [_] Experiments still decide."
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "8-04.w015",
+     "8-04.w016"
+    ],
+    "script": "still decide.",
+    "heard": "stoke the site.",
+    "heard_t": [
+     8.34,
+     9.42
+    ],
+    "heard_p": [
+     0.618,
+     0.996,
+     0.872
+    ],
+    "master_f": [
+     523,
+     561
+    ],
+    "ctx": "narrows the search. Experiments [_] So next time"
+   },
+   {
+    "op": "insert",
+    "wids": [],
+    "script": "",
+    "heard": "when",
+    "heard_t": [
+     10.4,
+     10.56
+    ],
+    "heard_p": [
+     0.98
+    ],
+    "master_f": null,
+    "ctx": "decide. So next time [_] you see a"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "8-05.w010",
+     "8-05.w011"
+    ],
+    "script": "discovers a",
+    "heard": "discovered",
+    "heard_t": [
+     12.42,
+     12.82
+    ],
+    "heard_p": [
+     0.98
+    ],
+    "master_f": [
+     755,
+     788
+    ],
+    "ctx": "a headline like 'AI [_] cancer drug'... ...ask"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "8-05.w013"
+    ],
+    "script": "drug'...",
+    "heard": "drugs,",
+    "heard_t": [
+     13.34,
+     13.92
+    ],
+    "heard_p": [
+     0.994
+    ],
+    "master_f": [
+     826,
+     849
+    ],
+    "ctx": "'AI discovers a cancer [_] ...ask where it"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "8-06.w003"
+    ],
+    "script": "it",
+    "heard": "it's",
+    "heard_t": [
+     15.22,
+     15.78
+    ],
+    "heard_p": [
+     0.754
+    ],
+    "master_f": [
+     940,
+     946
+    ],
+    "ctx": "cancer drug'... ...ask where [_] really is on"
+   },
+   {
+    "op": "replace",
+    "wids": [
+     "8-06.w014"
+    ],
+    "script": "patients?",
+    "heard": "patient.",
+    "heard_t": [
+     23.62,
+     24.16
+    ],
+    "heard_p": [
+     0.797
+    ],
+    "master_f": [
+     1435,
+     1472
+    ],
+    "ctx": "protein, cells, animals, or [_] AI didn't replace"
+   }
+  ]
+ }
+}
