@@ -1,0 +1,6 @@
+{
+  "note": "HKBU SCIE1007 coursework video. W2 -> 4-01 junction (18 section 2.6, 19 J29, T3 match-shape): bounding box of W2's blue CDK20 body on the last used frame (1499 of 24_W2_加工.mp4 = frame 1499 of W2_lyrics_en_1080_v1.mp4), 1920x1080 pixels. Top edge is out of frame. Measured 11-23 with mask B > R+50 and B > G+30.",
+  "frame": 1499,
+  "bbox": {"x0": 358, "x1": 847, "y0": 0, "y1": 373},
+  "top_out_of_frame": true
+}

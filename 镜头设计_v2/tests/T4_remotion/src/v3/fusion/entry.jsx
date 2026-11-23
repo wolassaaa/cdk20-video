@@ -563,22 +563,33 @@ const W2Phrase = ({t, i}) => {
     <div style={{fontFamily: SERIF, fontSize: 66, lineHeight: "70px"}}>{en.map((w, k) => <span key={k} style={{...ink(k), color: tint(k), fontStyle: k === 3 ? "italic" : "normal"}}>{w}</span>)}</div>
   </div>;
 };
-const W2Lyrics = ({file = "fusion_s1/w2_shake_3.mp4", fps = 30}) => {
+// 11-23（18 的 2.6 加工）：统一出处行，样式照 btier/bkit.jsx 的 Source（上沿 886、下沿 928、32 px、骨白底 0.86、深字）。
+// align "right"：右沿 1856（W2 左下角是押韵字幕第 2 句 y 848–918 的位置，左对齐会压字，所以照出镜段的右对齐写法）。
+const SrcLine = ({text, align = "left", op = 1}) =>
+  <div style={{position: "absolute", top: 886, height: 42, boxSizing: "border-box", padding: "3px 12px 0", borderRadius: 4, background: "rgba(244,241,234,0.86)",
+               ...(align === "right" ? {right: W - 1856} : {left: 64}), fontFamily: SERIF, fontSize: 32, letterSpacing: 0.3, color: "#1F1E1C",
+               opacity: op, whiteSpace: "nowrap", lineHeight: 1.05}}>{text}</div>;
+const W2_SRC = "Illustration · the motion is drawn · final shape: predicted model (AlphaFold DB v6)";
+const W3_SRC = "Illustration · each key stands for one AI-proposed design";
+const W2Lyrics = ({file = "fusion_s1/w2_shake_3.mp4", fps = 30, v10 = false}) => {
   const t = useCurrentFrame() / fps;
   ruler.font = `600 28px "${SANS}"`;
   const W2_TAG_W = ruler.measureText("AlphaFold DB v6 · predicted").width;          // measured once the fonts are in
   return <Clock.Provider value={t}><AbsoluteFill style={{background: BONE}}>
     <OffthreadVideo src={staticFile(file)} muted style={{width: W, height: H}}/>
-    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
+    {!v10 && <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: "absolute", left: 0, top: 0}}>
       <g opacity={after(t, 0.3)}>
         <circle cx={W - 72 - W2_TAG_W - 26} cy={1018 - 10} r={14} fill="none" stroke={INK} strokeWidth={2.5} strokeDasharray="6 5"/>
         <text x={W - 72} y={1018} fontFamily={SANS} fontSize={28} fontWeight={600} fill={INK} textAnchor="end">AlphaFold DB v6 · predicted</text>
         <text x={W - 72} y={1056} fontFamily={SANS} fontSize={22} fontWeight={500} fill={SOFT} textAnchor="end">Illustration · motion drawn · structure AlphaFold DB v6 · Ren 2023</text>
       </g>
-    </svg>
+    </svg>}
+    {v10 && <SrcLine text={W2_SRC} align="right" op={after(t, 0.3)}/>}
     {W2_PHRASES.map((_, i) => <W2Phrase key={i} t={t} i={i}/>)}
   </AbsoluteFill></Clock.Provider>;
 };
+// W3 的出处行单独出一张透明 PNG（ffmpeg 叠在 W3_K_4k60_1 缩出的 1080p 上），和 W2 同一个组件、同一套字
+const W3SrcStill = () => <AbsoluteFill><SrcLine text={W3_SRC}/></AbsoluteFill>;
 
 /** 4-01 (07:17-07:43, B's voice-over) over shot i: the coil and then the body turn into a chain of blocks, a light runs along it as the sequence stands up, and each block takes
  * its AlphaFold DB v6 confidence colour. Times follow I_VO in bl_inserts.py (the sentences at 0.39 s a word, until the real recording on 11-12). The corner tag sits top right,
@@ -991,6 +1002,9 @@ const Root = () => <>
   <Composition id="W2" component={W2} durationInFrames={1500} fps={60} width={W} height={H}/>
   <Composition id="W2Lyrics" component={W2Lyrics} durationInFrames={759} fps={30} width={W} height={H}/>
   <Composition id="W2Lyrics4K" component={W2Lyrics} durationInFrames={1517} fps={60} width={W} height={H} defaultProps={{file: "fusion_s1/w2_shake_4k.mp4", fps: 60}}/>
+  {/* 11-23 v10 加工（18 的 2.6）：去掉右下角徽标和小出处行，换统一出处行；片里只用前 1500 帧（19 第九节）。不加 --scale 出 1080p60 */}
+  <Composition id="W2LyricsV10" component={W2Lyrics} durationInFrames={1500} fps={60} width={W} height={H} defaultProps={{file: "fusion_s1/w2_shake_4k.mp4", fps: 60, v10: true}}/>
+  <Composition id="W3SrcStill" component={W3SrcStill} durationInFrames={1} fps={60} width={W} height={H}/>
   <Composition id="S401" component={S401} durationInFrames={780} fps={30} width={W} height={H}/>
   <Composition id="S402" component={S402} durationInFrames={510} fps={30} width={W} height={H}/>
   <Composition id="S403" component={S403} durationInFrames={540} fps={30} width={W} height={H}/>
