@@ -14,7 +14,7 @@ const INK = "#1F1E1C", RED = "#C8102E", SMALL = "#6E6B63";
 const FAM = "InstrumentSerifW5";
 const SERIF = `'${FAM}'`;                           // no generic fallback on purpose: a missing font shows up as a check failure, not as Times
 const GREEK = "'Times New Roman', serif";           // Instrument Serif has no β (U+03B2); only that one glyph uses this
-const BODY = 26, LH = 34, GAP = 14, SMALLPX = 22, HEAD = 40;
+const BODY = 28, LH = 36, GAP = 14, SMALLPX = 30, HEAD = 42;   // Z29（11-23）：正文 26→28、声明行 22→30 改墨色，行距 +2
 const COLW = 480, COLGAP = 60, ONEW = 900;
 
 const fontHandle = delayRender("Instrument Serif");
@@ -45,7 +45,7 @@ const Item = ({it, numbered, align}) => {
     <div style={{flex: "0 0 40px", color: SMALL}}>{it.n}.</div><div style={{flex: 1}}><Rich s={it.text}/></div></div>;
   if (it.bullet && align === "left") return <div style={{...base, display: "flex"}}>
     <div style={{flex: "0 0 26px", color: RED}}>•</div><div style={{flex: 1}}><Rich s={it.text}/></div></div>;
-  if (it.note) return <div style={{...base, fontSize: SMALLPX, color: SMALL, marginBottom: GAP + 6}}><Rich s={it.text}/></div>;
+  if (it.note) return <div style={{...base, fontSize: SMALLPX, color: INK, marginBottom: GAP + 6}}><Rich s={it.text}/></div>;
   return <div style={base}><Rich s={it.text}/></div>;
 };
 

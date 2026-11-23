@@ -47,8 +47,8 @@ const Scene = () => {
     X.tw("tk", 0, 1, E.timeef.l + 6, E.timeef.l + 26, "power2.out");
     X.jiggle("qj", E.timeef.l, 6, 0);
   });
-  const z = mix(mix(1.0, 1.03, S.push), 0.84, S.back) * (1 + 0.05 * f / LEN);      // 全程慢推（不停在一处）
-  const cam = {x: 960 + 24 * Math.sin(f / 70), y: mix(540, 500, S.back), z};          // 1 倍时 y 540：板底 878 在出处行上面
+  const z = mix(mix(1.0, 1.03, S.push), 0.92, S.back) * (1 + 0.05 * f / LEN);      // 全程慢推（不停在一处）
+  const cam = {x: 960 + 24 * Math.sin(f / 70), y: mix(540, 515, S.back), z};          // 1 倍时 y 540：板底 878 在出处行上面
   const whip = f < 4 ? 0 : f > LEN - 8 ? whipX(f, LEN - 7, "out", -1) : 0;
   const id = (s) => idle(f, s, {rot: 0.5, bob: 1.4});
   // 一对的框：BEFORE 主翻牌左边到 NOW 主翻牌右边，两个框中间一道连线
@@ -75,13 +75,13 @@ const Scene = () => {
     <Lens plan={GP} f={f}>
       <Stage zone={ZONE} f={f} cam={camBreath(f, K, ["s1", "s2"], 30)} whip={whip} shakeX={impact(f, E.race.l) + impact(f, E.calls.l)}>
         <Layer id={["board", "pairs", "seam", "nowcol", "quote"]}>
-          <Board6 f={f} cam={cam} cols={1} rows={[true, true, true, true]}>
+          <Board6 f={f} cam={cam} cols={1} subFsN={34} rows={[true, true, true, true]}>
             {[0, 1, 2, 3].map(pair)}
             {(S.seam > 0.01 || f>=E.race.s) && (
               <div style={{position: "absolute", left: SEAM_X - 3, top: 150, width: 6, height: 700 * S.seam, borderRadius: 3, background: f>=E.race.s ? `repeating-linear-gradient(${C.blue} 0 12px,transparent 12px 26px)` : C.red,
                            boxShadow: "0 0 14px rgba(200,16,46,0.85)", opacity: 1 - 0.6 * S.dim}} />
             )}
-            <DimUp i={4} v={S.dim * 0.92} />
+            <DimUp i={4} v={S.dim * 0.70} />
           </Board6>
         </Layer>
         <Layer id={["track", "quote", "seam", "nowcol", "pairs"]}>

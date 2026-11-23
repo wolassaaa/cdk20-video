@@ -976,7 +976,9 @@ def build(sc, args):
     for F in range(NF):
         u = u_of(F)
         v = 8.0
-        for (ua, ub, a, b_) in ((0.2, 1.0, 8.0, 2.8), (1.2, 1.6, 2.8, 2.0), (2.5, 3.6, 2.0, 4.0), (13.5, 15.5, 4.0, 8.0)):
+        # 11-23 Z16（字检）：拉远（吸回大板）时名牌、Section / Group 牌在 f/4 景深外发糊 → 读字结束起 0.3 u 内收到 f/16，吸回到底后回 f/8。
+        # 焦点不改：这段镜头目标点就在名牌平面（y=0）上，焦距本来随镜头推远。
+        for (ua, ub, a, b_) in ((0.2, 1.0, 8.0, 2.8), (1.2, 1.6, 2.8, 2.0), (2.5, 3.6, 2.0, 4.0), (13.5, 13.8, 4.0, 16.0), (15.0, 15.5, 16.0, 8.0)):
             if u >= ua:
                 v = a + (b_ - a) * smooth((u - ua) / (ub - ua))
         fs.append(v)
@@ -1012,6 +1014,12 @@ def build(sc, args):
             o.visible_volume_scatter = False
     sc.render.use_motion_blur = True
     sc.render.motion_blur_shutter = 0.5
+    # 11-23 Z16：拉远段快门 180° → 90°（0.5 → 0.25），前后各用 6 / 12 帧过渡；其余帧不变（只补渲 MB_FIX 这几帧）
+    for fk, v in ((Fu(TL["read_end"]) - 6, 0.5), (Fu(TL["read_end"]), 0.25), (Fu(15.5), 0.25), (Fu(15.5) + 12, 0.5)):
+        sc.render.motion_blur_shutter = v
+        sc.keyframe_insert(data_path="render.motion_blur_shutter", frame=fk)
+    sc.render.motion_blur_shutter = 0.5
+    print(f"W1_Z16 redo frames {Fu(TL['read_end']) - 6}-{Fu(15.5) + 12}", flush=True)
     sc.frame_set(0)
     # ---- 检查
     chk = dict(part="w1z", nf=NF, bpm=S.BPM, beat_s=BEAT, song=S.SHEET["song"], tl=TL, beats=S.SHEET["w1"]["beats"],

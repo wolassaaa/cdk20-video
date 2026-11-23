@@ -175,7 +175,7 @@ const Shutter = ({x, y, w, h}) => (w < 1 ? null :
 // G8 各栏牌面：BEFORE 炭黑浅字，NOW 克莱因蓝浅字，行号和行名骨白深字；没翻的空牌一律灰 0.35
 const FACE = {B: {bg: C.ink, color: C.inkLight, blank: C.grey}, N: {bg: C.blue, color: C.inkLight, blank: C.grey}, name: {bg: C.bone, color: C.ink, blank: C.grey}};
 export const Board6 = ({f, cam = {x: 960, y: 457, z: 1}, rise = 1, title = -999, titleLand = null, titleFrom = null, help = -999, hdr = {B: -999, N: -999}, cols = 1, rows = [false, false, false, false],
-                        lit = {}, jig = null, nowFrame = 1, children, over}) => {
+                        lit = {}, jig = null, nowFrame = 1, hideB = 0, subFsN = 28, children, over}) => {
   const tx = 960 - cam.x * cam.z, ty = 540 - cam.y * cam.z;
   const ry = 60 * (1 - rise);
   const jg = (seed) => (jig != null && f >= jig && f < jig + 14 ? Math.sin(((f - jig - seed) / 14) * Math.PI * 3) * 3 * (1 - (f - jig) / 14) : 0);
@@ -200,7 +200,9 @@ export const Board6 = ({f, cam = {x: 960, y: 457, z: 1}, rise = 1, title = -999,
                 flips={titleFrom != null && titleLand && ch !== " " ? Math.max(3, Math.floor(((ch === "?" ? help : titleLand[i]) - titleFrom - i * 0.7) / 6)) : 3} color={C.inkLight} bg={ch === "?" && f >= help ? C.red : C.ink} jig={jg(i)} />
         ))}
         {/* 栏头 */}
-        <Flap f={f} x={COL.B.x + COL.B.w / 2 - 150} y={158} w={300} h={50} text="BEFORE" at={hdr.B} fs={36} seed={50} jig={jg(3)} {...FACE.B} />
+        <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, opacity: 1 - hideB}}>
+          <Flap f={f} x={COL.B.x + COL.B.w / 2 - 150} y={158} w={300} h={50} text="BEFORE" at={hdr.B} fs={36} seed={50} jig={jg(3)} {...FACE.B} />
+        </div>
         <Flap f={f} x={COL.N.x + COL.N.w / 2 - 150} y={158} w={300} h={50} text="NOW" at={hdr.N} fs={36} seed={51} jig={jg(5)} {...FACE.N} />
         {/* 4 行 */}
         {ROWS.map((R, i) => {
@@ -213,19 +215,21 @@ export const Board6 = ({f, cam = {x: 960, y: 457, z: 1}, rise = 1, title = -999,
           const B = cell(i, "B"), N = cell(i, "N");
           return (
             <div key={i} style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080}}>
-              {/* 行名：号码牌 + 两行翻牌 */}
+              {/* 行名：号码牌 + 两行翻牌（hideB：镜头移到 NOW 栏后淡出，免得左半截字被屏左缘切） */}
+              <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, opacity: 1 - hideB}}>
               <Flap f={f} x={COL.name.x} y={y + 10} w={70} h={132} text={R.n} at={at("name")} fs={56} seed={i * 10 + 1} jig={jg(i)} {...FACE.name} />
               <Flap f={f} x={COL.name.x + 80} y={y + 10} w={COL.name.w - 80} h={62} text={R.name[0]} at={at("name")} fs={34} seed={i * 10 + 2} jig={jg(i + 1)} {...FACE.name} />
               <Flap f={f} x={COL.name.x + 80} y={y + 80} w={COL.name.w - 80} h={62} text={R.name[1]} at={R.name[1] ? at("name") : null} fs={34} seed={i * 10 + 3} jig={jg(i + 2)} {...FACE.name} />
+              </div>
               {[["B", B], ["N", N]].map(([sd, g]) => (
-                <React.Fragment key={sd}>
+                <div key={sd} style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, opacity: sd === "B" ? 1 - hideB : 1}}>
                   <Recess {...g.slot} lit={(lit[`${i}${sd}`] || 0)} />
                   <Flap f={f} {...g.main} text={R[sd]} at={at(sd)} fs={36} seed={i * 10 + (sd === "B" ? 4 : 6)} jig={jg(i + 3)} {...FACE[sd]} />
-                  {g.sub.map((b, j) => (R[sd + "s"][j] ? <Flap key={j} f={f} {...b} text={R[sd + "s"][j]} at={atS(sd + "s", j)} fs={28} seed={i * 10 + 7 + j} jig={jg(i + 4 + j)} {...FACE[sd]} /> : null))}
+                  {g.sub.map((b, j) => (R[sd + "s"][j] ? <Flap key={j} f={f} {...b} text={R[sd + "s"][j]} at={atS(sd + "s", j)} fs={sd === "N" ? subFsN : 28} seed={i * 10 + 7 + j} jig={jg(i + 4 + j)} {...FACE[sd]} /> : null))}
                   {!g.sub.length && <Flap f={f} x={g.main.x} y={g.y + 88} w={g.main.w} h={50} text="" at={null} {...FACE[sd]} />}
-                </React.Fragment>
+                </div>
               ))}
-              {full && <SlotDeco i={i} side="B" />}
+              {full && <div style={{opacity: 1 - hideB}}><SlotDeco i={i} side="B" /></div>}
               {full && <SlotDeco i={i} side="N" />}
               {open < 0.999 && <Shutter x={COL.name.x - 6 + (COL.N.x + COL.N.w - COL.name.x + 12) * open} y={y + 4} w={(COL.N.x + COL.N.w - COL.name.x + 12) * (1 - open)} h={ROW_H - 8} />}
             </div>

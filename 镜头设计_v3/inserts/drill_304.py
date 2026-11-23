@@ -1040,6 +1040,7 @@ SRC_REAL = "CDK20: AlphaFold DB AF-Q8IZL9-F1 (predicted, CC BY 4.0)"
 INK_RED = (232, 25, 15)
 INK_NOTE = (255, 66, 48)                                             # 手写批注：比墨线圈的红亮一档，深色真实层上也醒目（11-21 Gemini 第二轮）
 NOTE_STROKE = (5, (255, 250, 244))
+INK_DEEP, DEEP_STROKE = (158, 10, 20), (6, (255, 250, 244))           # 11-23 Z23：pocket（红压粉管）、ATP binds here（浅粉落白台面）改深红 (0.62,0.04,0.08) + 白描边 6
 SRC_SIZE, SRC_XY, PLATE = 30, (76, 907), ((14, 16, 24), 0.66, 12, 8)   # 11-21 Gemini 必改：出处行 Instrument Serif、放大、深色底衬（同 5-04）
 SRC_PLATE_Y = (886, 928)            # 11-23（18 的 A1）：移出字幕区，底衬左沿 x 64、上下沿 886–928，左中对齐
 NOTE_PROTEIN = "CDK20, a protein"
@@ -1141,8 +1142,8 @@ def comp_frames(seg, flist=None):
                 pil = Image.alpha_composite(pil, SD.dashed_circle(cx, cy, r * 0.98, 9.0, (255, 250, 244), 0.55 * k, rot=rot))
                 pil = Image.alpha_composite(pil, SD.dashed_circle(cx, cy, r * 0.98, 5.0, INK_RED, 1.0 * k, rot=rot))
             if w is WIN[1] and k > 0.003:
-                items = [dict(text="pocket", xy=(cx + r * 0.74, cy - r * 0.78), size=78, color=INK_NOTE, hand=True, anchor="ls",
-                              stroke=NOTE_STROKE, shadow=False)]
+                items = [dict(text="pocket", xy=(cx + r * 0.74, cy - r * 0.78), size=78, color=INK_DEEP, hand=True, anchor="ls",
+                              stroke=DEEP_STROKE, shadow=False)]
                 pil = Image.alpha_composite(pil, SD.draw_text_layer(items, lambda it: k))
         # 手写 "CDK20, a protein"：protein 这个词落下，写在口袋圈左边；随第一段真实层收回淡出
         if ring:
@@ -1165,16 +1166,16 @@ def comp_frames(seg, flist=None):
                 cx, cy, r = ring
                 r = r * rk.get(f, 1.0)
                 tx, ty = cx - r * 1.05 - 330, cy + r * 0.9 + 70                  # 放到蛋白左下外面的空处，箭头拉长指进口袋
-                tx, ty = max(tx, 260.0), min(ty, SD.OUT_H - 130.0)
-                items = [dict(text=NOTE_ATP, xy=(tx, ty), size=74, color=INK_NOTE, hand=True, anchor="ms",
-                              stroke=NOTE_STROKE, shadow=False)]
+                tx, ty = max(tx, 340.0), min(ty, SD.OUT_H - 130.0)                # 11-23 Z23：字 ×1.3 后半宽约 270 px，左缘夹到 ≥ 64
+                items = [dict(text=NOTE_ATP, xy=(tx, ty), size=96, color=INK_DEEP, hand=True, anchor="ms",
+                              stroke=DEEP_STROKE, shadow=False)]
                 pil = Image.alpha_composite(pil, SD.draw_text_layer(items, lambda it: clamp(ka * 1.6)))
                 ke = clamp((f - t.note_atp[0] - 8) / (t.note_atp[1] - t.note_atp[0]))
-                p0 = (tx + 150, ty - 52)
+                p0 = (tx + 195, ty - 68)
                 ang = math.radians(135)
                 p1 = (cx + r * 0.82 * math.cos(ang), cy + r * 0.82 * math.sin(ang))
                 if ke > 0:
-                    pil = Image.alpha_composite(pil, ink_arrow(p0, p1, -0.18, ease_out(ke), width=4.0, color=INK_NOTE, alpha=clamp(ka * 1.6)))
+                    pil = Image.alpha_composite(pil, ink_arrow(p0, p1, -0.18, ease_out(ke), width=4.0, color=INK_DEEP, alpha=clamp(ka * 1.6)))
         # 出处行：玩具一行 / 真实一行（叠化时交换）；段首随 T5 淡入，甩镜时淡出
         base_a = ramp(f, 10, 30) * (1 - ramp(f, t.whip[0] - 4, t.whip[0] + 4))
         it_t = dict(text=SRC_TOY, xy=SRC_XY, size=SRC_SIZE, color=(240, 238, 232), anchor="lm", shadow=False, plate=PLATE, plate_y=SRC_PLATE_Y)

@@ -219,6 +219,9 @@ def build(seg, samples=16):
     cx, cy = cell.matrix_world.translation.x, cell.matrix_world.translation.y
     print("DRILL cell", cell.name, round(cx / MM, 1), round(cy / MM, 1), "zb", round(zb / MM, 1), flush=True)
     SD.hide_tree(old_part)
+    for o in bpy.data.objects:                                       # 11-23 Z18：板上 Imagine 牌的字在段尾贴着屏右缘被切成半截（背景过路牌，不是念词），这段里只藏字
+        if o.type == "FONT" and (o.data.body or "") == "Imagine" and o.parent and o.parent.name.startswith("p35_loop"):
+            o.hide_render = True
     for g in KP.gates_of(cell):
         SD.hide_tree(g)
     for o in [o for o in board.children if o.name.startswith("foot") and (o.matrix_world.translation.xy - Vector((cx, cy))).length < 0.05]:
@@ -353,7 +356,8 @@ def build(seg, samples=16):
     ic50_em = SD.add_emission(ic50_m, (1.0, 0.93, 0.80), 0.0)
     rot_txt = (math.radians(90), 0, math.radians(90))
     t_ic50 = S_.label(P, "IC50", 4.2, (-0.5, DIAL[1], -10.5), rot_txt, ic50_m)
-    t_6000 = S_.label(P, "6,000 nM", 2.2, (-0.5, DIAL[1] + 8.4 * math.cos(a6), 8.4 * math.sin(a6) - 0.8), rot_txt, Kt.inkw)
+    # 11-23 Z17：字号 2.2 → 4.4（全景时屏上 ≥ 28 px）。放大后在红刻度旁放不下（会压刻度和旋钮），挪到盘面上半（12 点、半径 8.6，刻度内圈和旋钮之间）
+    t_6000 = S_.label(P, "6,000 nM", 4.4, (-0.5, DIAL[1], 8.6), rot_txt, Kt.inkw)
     t_0 = S_.label(P, "0", 2.6, (-0.5, DIAL[1] + 10.2 * math.cos(math.radians(225)), 10.2 * math.sin(math.radians(225)) - 0.9), rot_txt, Kt.inkw)
     # "half"：上排上方一道红色括线 + 字（上排五台 = 十台的一半）
     half_m = Kt.red.copy(); half_m.name = "drill_half_red"
@@ -362,7 +366,7 @@ def build(seg, samples=16):
     for uu in (-50.0, 50.0):
         hb.append(S_.box(P, "half_tick", (-0.6, uu, 16.4), (0.8, 0.8, 3.2), half_m, .1))
         S_.cyl(P, "half_post", (-0.9, uu, 21.6), (0, 0, 1), .45, 8.2, run_m, .1)
-    hb.append(S_.label(P, "half", 4.6, (-0.2, 0.0, 19.4), rot_txt, half_m))
+    hb.append(S_.label(P, "half", 4.6, (-0.2, 0.0, 21.4), rot_txt, half_m))     # 11-23 Z17：19.4 → 21.4，离括线 ≥ 20 px
     # 旋钮和表针：一个转轴空物体，挂在料架上
     spin = bpy.data.objects.new("drill_dial_spin", None)
     sc.collection.objects.link(spin)
@@ -546,6 +550,9 @@ def build(seg, samples=16):
         half_em.inputs["Strength"].keyframe_insert("default_value", frame=f)
     for o in hb:                                                        # 11-21 Gemini：括线原来一直挂着，"IC50" 时就看得见；改成 "in half" 的 in 上才出现（同时发亮）
         SD.hide_tree(o, [(0, True), (t.half[0], False)])
+    # 11-23 Z17：6,000 nM 放大后，镜头下摇到料架时（第 798–802 帧）字从屏上缘半截进画（scan_text 贴边）。
+    # 照钻取规矩“标注类在词上出现”：念到 6,000 前 2 帧才出现（同 half 的做法），之前盘面只有刻度
+    SD.hide_tree(t_6000, [(0, True), (t.cross - 2, False)])
 
     # ---- 插座里的两个插头：ATP（真插头）被顶出、001 插到底、在孔里晃、拧 12° 卡住弹回、被弹簧顶出
     axis_q = Quaternion()
@@ -1234,6 +1241,7 @@ SRC_SIZE = 30                                         # 出处行：Instrument S
 LABEL_XY, LABEL_PLATE_Y = (76, 857), (836, 878)
 SRC_XY, SRC_PLATE_Y = (76, 907), (886, 928)
 PLATE = ((14, 16, 24), 0.66, 12, 8)
+PLATE_REAL = ((14, 16, 24), 0.9, 12, 8)               # 11-23 Z18：真实层上 OUR RE-DOCKING 和 AlphaFold 出处行压在浅蓝蛋白管上，底衬 0.66 → 0.9（W4 借这里，一起变）
 LABEL_REAL = "OUR RE-DOCKING (AutoDock Vina)"
 NOTE_REAL = "001"
 INK_RED = (232, 25, 15)
@@ -1248,7 +1256,7 @@ def _lum_box(a, box):
 
 
 def comp_frames(seg, flist=None, *, Tcls=None, src_toy=SRC_TOY, src_real=SRC_REAL, label=LABEL_REAL, note=NOTE_REAL, src_alpha=None,
-                note_at=None, pulses=None):
+                note_at=None, pulses=None, note_style=None):
     """生成合成后的帧（uint8 RGB）。src_alpha(t, f) 给出处行整体透明度（段首淡入、段尾淡出）。
     note_at(t) -> (起, 落)：手写编号落下的帧（默认 001 这个词）；pulses(t) -> [帧]：口袋墨线圈跳一下的帧。"""
     import numpy as np
@@ -1312,16 +1320,18 @@ def comp_frames(seg, flist=None, *, Tcls=None, src_toy=SRC_TOY, src_real=SRC_REA
                 pil = Image.alpha_composite(pil, SD.dashed_circle(cx, cy, rr, 5.0, INK_RED, 1.0 * k, rot=rot))
             kn = ramp(f, n0, n1, ease_out) * (1 - ramp(f, ro0 - 8, ro0 + 6))
             if kn > 0.003:
-                items = [dict(text=note, xy=(cx + r * 0.74, cy - r * 0.78 - 14 * (1 - kn)), size=78, color=INK_RED, hand=True, anchor="ls",
-                              stroke=(3, (255, 250, 244)), shadow=False)]
+                ns = dict(size=78, color=INK_RED, stroke=(3, (255, 250, 244)))
+                ns.update(note_style or {})                                  # W4 的 048（11-23 Z25）：深红、白描边 6、字 ×1.4
+                items = [dict(text=note, xy=(cx + r * 0.74, cy - r * 0.78 - 14 * (1 - kn)), size=ns["size"], color=ns["color"], hand=True, anchor="ls",
+                              stroke=ns["stroke"], shadow=False)]
                 pil = Image.alpha_composite(pil, SD.draw_text_layer(items, lambda it: kn))
             kl = ramp(f, ri1 - 16, ri1 + 4) * (1 - ramp(f, ro0 - 2, ro0 + 14))
             if kl > 0.003:                                                   # 标签放出处行上面一行、同样深色底衬（11-21 Gemini 审 W4：压在蛋白和墨线圈上挡科学画面）
-                items = [dict(text=label, xy=LABEL_XY, size=36, color=(244, 240, 232), anchor="lm", shadow=False, plate=PLATE, plate_y=LABEL_PLATE_Y)]
+                items = [dict(text=label, xy=LABEL_XY, size=36, color=(244, 240, 232), anchor="lm", shadow=False, plate=PLATE_REAL, plate_y=LABEL_PLATE_Y)]
                 pil = Image.alpha_composite(pil, SD.draw_text_layer(items, lambda it: kl))
         base_a = src_alpha(t, f)
         it_t = dict(text=src_toy, xy=SRC_XY, size=SRC_SIZE, color=(240, 238, 232), anchor="lm", shadow=False, plate=PLATE, plate_y=SRC_PLATE_Y)
-        it_r = dict(text=src_real, xy=SRC_XY, size=SRC_SIZE, color=(240, 238, 232), anchor="lm", shadow=False, plate=PLATE, plate_y=SRC_PLATE_Y)
+        it_r = dict(text=src_real, xy=SRC_XY, size=SRC_SIZE, color=(240, 238, 232), anchor="lm", shadow=False, plate=PLATE_REAL, plate_y=SRC_PLATE_Y)
         for it_, a_ in ((it_t, clamp(1 - 2 * a_real)), (it_r, clamp(2 * a_real - 1))):   # 两行各画一层（底衬不互相盖掉字）
             if base_a * a_ > 0.003:
                 pil = Image.alpha_composite(pil, SD.draw_text_layer([it_], lambda it, _a=a_: base_a * _a))

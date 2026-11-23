@@ -583,7 +583,8 @@ def src_alpha(t, f):
 
 def comp_frames(seg, flist=None):
     return D5.comp_frames(seg, flist, Tcls=T, src_real=SRC_REAL, note="048", src_alpha=src_alpha,
-                          note_at=lambda t: (t.note[0], t.note[1]), pulses=lambda t: t.pushes)
+                          note_at=lambda t: (t.note[0], t.note[1]), pulses=lambda t: t.pushes,
+                          note_style=dict(size=109, color=(158, 10, 20), stroke=(6, (255, 250, 244))))   # 11-23 Z25：048 红字压在橙粉管上，改深红 + 白描边 6、字 78 → 109
 
 
 def comp(seg, *a):

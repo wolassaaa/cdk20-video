@@ -48,6 +48,11 @@ RING_R_MM = 4.91                             # 前口金环外半径（锁单位
 RING_C = (0.0, -7.89, -0.55)                 # 前口金环中心（锁单位）
 HANDOFF_DEFAULT = dict(ring_cx=960.0, ring_cy=540.0, ring_r=700.0)
 FSTOP = dict(k0=5.0, k1=8.0, wide=9.0)
+# 11-23 Z22（字检）：try3 时 target 牌左缘 x0≈−17，全景时 candidate molecule 牌 x0≈−115 半截出画。
+# 施工：单子写“平移减 120 px”，量下来 cand 要挪 ≥ 180 px，平移会把 3 号锁和钥匙推出右缘、cand 牌又撞出处行；
+# 改成第 500–560 帧（随 cam_row 镜头移动一起）镜头沿视线退远 1/0.82 倍、保持到段尾：画面以中心缩到约 0.82，
+# 0.85 试搭量下来 target x0 114–141、cand x0 43–70（差一点）→ 0.82：cand x0 ≈ 75、cand 底 ≈ 850（出处行底衬 886 之上）。只动第 500 帧往后。cand 牌宽 52 不改（字高由字号定，加宽只会更出框）。
+WIDE_PULL, WIDE_PULL_F = 1 / 0.82 - 1, (500, 560)
 OUT_DIR = SD.ROOT / "导演检查_20261123"
 OUT_MP4 = OUT_DIR / "16_钻取_3-03.mp4"
 SRC_TOY = "Illustration (our toy model)"
@@ -495,7 +500,8 @@ def build(seg, samples=16):
         upv = right.cross(fwd)
         k = ramp(f, 30, 70)                                          # 段首对位（T3）时不漂
         o = (right * 0.008 * math.sin(f / 97.0) + upv * 0.006 * (math.cos(f / 131.0) - 1.0)) * d * k
-        return o, o * 0.6
+        back = (eye - tgt) * WIDE_PULL * ramp(f, WIDE_PULL_F[0], WIDE_PULL_F[1])   # 11-23 Z22：试 2/3 号锁到段尾整体退远，两块牌入画
+        return o + back, o * 0.6
     recs = rigc.bake(cam, NF, drift=drift)
     for f in range(0, 40):                                           # 段首去掉手持感（第 0 帧金环要和 3-02 末帧对上，误差 ≤ 4 px）
         eye, tgt, lens, q = recs[f]

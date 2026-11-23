@@ -417,7 +417,7 @@ def cmd_check(a):
     lin = lmin ** 2.2                                                        # 灰度近似转线性亮度
     contrast = (lin + 0.05) / (ink_l + 0.05)
     outside = sum(s[3] for s in fs["stats"])
-    R["W5"] = dict(ok=serif_ok and "26px" in meta["sizes"] and contrast >= 7 and outside == 0, fonts=fams, sizes=meta["sizes"],
+    R["W5"] = dict(ok=serif_ok and "28px" in meta["sizes"] and contrast >= 7 and outside == 0, fonts=fams, sizes=meta["sizes"],
                    board_lum_p1_min=round(lmin, 3), contrast_min=round(contrast, 2), text_px_outside_board=outside,
                    note="板后零件全部虚化 10 px，字只在板内，所以字和实的零件像素重叠恒为 0")
     r = subprocess.run([sys.executable, str(Path(__file__).with_name("credits_v10_data.py")), "check"], capture_output=True, env=dict(os.environ, PYTHONIOENCODING="utf-8"))

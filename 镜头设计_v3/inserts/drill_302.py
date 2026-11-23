@@ -57,6 +57,7 @@ INK = (31, 30, 28)
 BONE = (244, 241, 234)
 INK_NOTE = (255, 66, 48)
 NOTE_STROKE = (5, (255, 250, 244))
+INK_DRUG, DRUG_STROKE = (140, 13, 20), (8, (255, 250, 244))           # 11-23 Z21：drug 红对金看不清 → 深红 (0.55,0.05,0.08)，白描边 5 → 8（×1.5）
 
 
 # ================================================================ 时间表
@@ -895,21 +896,23 @@ def comp_frames(seg, flist=None):
         kl = ramp(f, t.lamps[1] - 2, t.lamps[1] + 10, ease_out) * (1 - ramp(f, t.enter[1] - 12, t.enter[1] - 6))
         if kl > 0.003 and c["socks"]:
             x0, y0, x1, y1 = c["socks"]
-            tx, ty = (x0 + x1) / 2, max(70.0, y0 - 24 - 8 * (1 - kl))
-            it = dict(text="proteins", xy=(tx, ty), size=44, color=INK, anchor="ms", shadow=False, halo=BONE)
+            # 11-23 Z21：原来压在粉球上沿、离屏上缘 28 px。单子写下移 90 px，试合成下移后整块压在粉球上（球坐在三台上面，中间没有空地）；
+            # 施工：改放到三台左边的白托盘空处（右对齐到三台左沿外 24 px、三台上 30% 高处），不压球、不压台
+            tx, ty = max(64.0 + 170.0, x0 - 24), y0 + 0.30 * (y1 - y0) - 8 * (1 - kl)
+            it = dict(text="proteins", xy=(tx, ty), size=44, color=INK, anchor="rs", shadow=False, halo=BONE)
             pil = Image.alpha_composite(pil, SD.draw_text_layer([it], lambda it_: kl))
         # 批注 drug：drugs 后 4 帧出，细箭头指假插头的柄，pocket 前退
         kd = ramp(f, t.enter[1] + 4, t.enter[1] + 16, ease_out) * (1 - ramp(f, t.pocket[1] - 30, t.pocket[1] - 6))
         if kd > 0.003:
             px, py = c["p48"][0], c["p48"][1]
-            tx, ty = min(SD.OUT_W - 150.0, px + 190), max(120.0, py - 150)
-            it = dict(text="drug", xy=(tx, ty), size=40, color=INK_NOTE, hand=True, anchor="ms", stroke=NOTE_STROKE, shadow=False)
+            tx, ty = min(SD.OUT_W - 150.0, px + 190) - 140, max(120.0, py - 150)   # 11-23 Z21：左移 140 px 离开金色旋钮
+            it = dict(text="drug", xy=(tx, ty), size=40, color=INK_DRUG, hand=True, anchor="ms", stroke=DRUG_STROKE, shadow=False)
             pil = Image.alpha_composite(pil, SD.draw_text_layer([it], lambda it_: kd))
             ke = clamp((f - t.enter[1] - 8) / 14.0)
             if ke > 0:
                 ang = math.atan2(ty - 30 - py, tx - 40 - px)
                 p1 = (px + 46 * math.cos(ang), py + 46 * math.sin(ang))
-                pil = Image.alpha_composite(pil, ink_arrow((tx - 40, ty - 30), p1, 0.12, ease_out(ke), width=4.0, color=INK_NOTE, alpha=kd))
+                pil = Image.alpha_composite(pil, ink_arrow((tx - 40, ty - 30), p1, 0.12, ease_out(ke), width=4.0, color=INK_DRUG, alpha=kd))
         base_a = ramp(f, 10, 30) * (1 - ramp(f, NF - 22, NF - 2))
         if base_a > 0.003:
             pil = Image.alpha_composite(pil, _src_layer(base_a))

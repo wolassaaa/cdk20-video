@@ -49,12 +49,12 @@ export function RoadWorld({cx,zoom,y=600,children,red={},ticks={},pulse}) {
     {children}
   </div>;
 }
-export function Pending({x,label,amount,id}) {
-  return amount>0 && <Plate x={x-76} y={Y-183-22*(1-amount)} w={152} h={52} text={label} size={36}
+export function Pending({x,label,amount,id,dy=0}) {
+  return amount>0 && <Plate x={x-76} y={Y-183-dy-22*(1-amount)} w={152} h={52} text={label} size={36}
     color={C.bone} op={amount} depth={6} id={id}/>;
 }
-export function Status({started=1,n1=1,n2=1}) {
-  return <><Pending x={X[2]} label="started" amount={started} id="started"/>
-    <Pending x={X[4]} label="not yet" amount={n1} id="notyetA"/>
-    <Pending x={X[5]} label="not yet" amount={n2} id="notyetB"/></>;
+export function Status({started=1,n1=1,n2=1,dy=0}) {
+  return <><Pending x={X[2]} label="started" amount={started} id="started" dy={dy}/>
+    <Pending x={X[4]} label="not yet" amount={n1} id="notyetA" dy={dy}/>
+    <Pending x={X[5]} label="not yet" amount={n2} id="notyetB" dy={dy}/></>;
 }
