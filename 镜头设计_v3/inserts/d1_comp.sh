@@ -4,6 +4,7 @@
 cd "$(dirname "$0")"
 export CDK20_WORK=${CDK20_WORK:-G:/cdk20/work}
 export PYTHONIOENCODING=utf-8
+export CDK20_GPU_COMP=${CDK20_GPU_COMP:-1}   # 11-24：合成走显卡（comp_gpu.py，约 50 倍快）；CDK20_GPU_COMP=0 bash d1_comp.sh … 回到 CPU 版
 SEG=${1:?段号}
 OUT=$(python -c "import shot_oncam as S;print(S.seg_cfg('$SEG')['out'])" | tr '\' '/')
 G1="${OUT%.mp4}_g1.mp4"
