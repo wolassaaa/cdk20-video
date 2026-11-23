@@ -36,7 +36,7 @@ stamp() { mkdir -p "$WK"; date +%s > "$WK/render_t$1.txt"; }
 if is measure; then py measure "$SEG" || exit 1; fi
 if is calib; then bl calib "$SEG"; fi
 if is build; then   # 11-24：搭场景缓存（build_cache.py）。配置/代码/输入和上次一样、场景之后没被改过，就不重搭；CDK20_BUILD_CACHE=0 每次重搭
-  if [ "${CDK20_BUILD_CACHE:-0}" != 0 ] && py_bc check "$SEG" ${SAMPLES:-}; then :; else
+  if [ "${CDK20_BUILD_CACHE:-1}" != 0 ] && py_bc check "$SEG" ${SAMPLES:-}; then :; else
     touch "$WK/.build_t0" 2>/dev/null || { mkdir -p "$WK"; touch "$WK/.build_t0"; }
     bl build "$SEG" ${SAMPLES:+$SAMPLES}; rc=$?
     [ "$WK/scene.blend" -nt "$WK/.build_t0" ] && py_bc stamp "$SEG" ${SAMPLES:-}
