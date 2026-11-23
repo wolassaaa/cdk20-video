@@ -59,7 +59,7 @@ const Scene = () => {
   const whip = f > LEN - 8 ? whipX(f, LEN - 7, "out", -1) : 0;
   const id = (s) => idle(f, s, {rot: 0.5, bob: 1.5});
   const corner = S.badge * (1 - S.back);
-  const GS_MIN = 0.55;                      // 角标最小缩放：Objective 1 刻字 64 × 0.55 ≈ 35 px（≥ 30）
+  const GS_MIN = 0.8;                       // 角标最小缩放：Objective 1 刻字 64 × 0.55 ≈ 35 px（≥ 30）
   const gs = mix(1, GS_MIN, corner);
   const gx = mix(GOAL.x, 70 + (GOAL.w * GS_MIN) / 2, corner), gy = mix(GOAL.y, 60 + (GOAL.h * GS_MIN) / 2, corner);
   const lit = [S.p0 * (f < E.af.s ? 1 : 0.35), f >= E.af.s ? (f < E.chem42.s ? 1 : 0.35) : 0, f >= E.chem42.s ? (f < E.rank.s ? 1 : 0.35) : 0];

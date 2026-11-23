@@ -68,7 +68,7 @@ const Scene = () => {
     const x = CX(k), y = LANE[lane] - 4, sc = 1.3 * Math.min(1.15, u), fo = 1 - cl((f - E.run.s) / 12);   // 图标在 run 起淡出
     const body = k === 0 ? <Sprite name="socket/hero_34" x={x} y={y} w={74 * sc} shadow={false} op={fo} />
       : k === 1 ? <Sprite name="coins/34" x={x} y={y} w={86*sc} shadow={false} op={fo}/>
-      : <Plate x={x-45} y={y-22} w={90} h={44} text="hit" size={30} op={fo} id={`hitbar${lane}`}/>;
+      : <Slab x={x-45} y={y-22} w={90} h={44} r={12} depth={7} op={fo} id={`hitbar${lane}`}><div style={{width:90,height:44,display:"flex",alignItems:"center",justifyContent:"center"}}><Engrave size={30}>hit</Engrave></div></Slab>;
     return <React.Fragment key={`${k}${lane}`}>{body}</React.Fragment>;
   };
   return (

@@ -124,7 +124,7 @@ const Scene = () => {
 
         <Layer id="txt" exempt>
           <Pen text="fails" x={560} y={790} at={E.fail.l - 4} out={E.tweak.s} size={64} rot={-4} />
-          <Label text="time and money" size={56} x={1560} y={150} at={E.cost.l} align="center" />
+          <Label text="time and money" size={56} x={1230} y={120} at={E.cost.l} align="center" />
           <Source>Illustration · the classic design–make–test cycle</Source>
         </Layer>
       </Stage>

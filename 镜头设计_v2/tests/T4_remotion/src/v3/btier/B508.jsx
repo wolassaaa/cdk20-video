@@ -165,9 +165,6 @@ const Scene = () => {
                 {[0, 1, 2, 3, 4].map((k) => <line key={k} x1={xv(k)} y1={DOSE.y2 + 86} x2={xv(k)} y2={DOSE.y2 + 106} stroke={C.ink} strokeWidth={3} />)}
                 {[0, 1, 2, 3].flatMap((k) => [2, 3, 4, 5, 6, 7, 8, 9].map((m) => <line key={`${k}${m}`} x1={xv(k + Math.log10(m))} y1={DOSE.y2 + 90} x2={xv(k + Math.log10(m))} y2={DOSE.y2 + 102} stroke={C.ink} strokeWidth={1.5} opacity={0.6} />))}
               </svg>
-              {["1", "10", "100", "1,000", "10,000 nM"].map((t, k) => (
-                <div key={k} style={{position: "absolute", left: xv(k), top: DOSE.y2 + 112, transform: k === 4 ? "translateX(-22%)" : "translateX(-50%)"}}><Engrave size={34}>{t}</Engrave></div>
-              ))}
               {/* 两根条：001 灰（要很多），048 蓝（一点就够） */}
               <Slab x={DOSE.x0} y={DOSE.y1} w={Math.max(4, xv(S.sw1 + (S.sw1J || 0) * 0.01) - DOSE.x0)} h={DOSE.h} r={12} color={C.grey} depth={7} sheen={S.sw1 > 0 && f < E.sweep.l + 10 ? (S.sw1 / 3.78) : -1} id="bar001" />
               {f >= E.sweep.l && <div style={{position: "absolute", left: xv(Math.log10(6000)) + 14, top: DOSE.y1 - 6, opacity: Math.min(1, (f - E.sweep.l) / 10)}}><Engrave size={52}>›</Engrave></div>}
@@ -177,6 +174,14 @@ const Scene = () => {
         </Layer>
 
         <Layer id="txt" exempt>
+          {/* Z19（11-23）：刻度数字放进不虚的字层（在 dial 层里被视线引导一起虚掉，con 0.15），字号 34 → 38 */}
+          {S.dial > 0.01 && (
+            <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, opacity: Math.min(1, S.dial * 1.5), transform: `translateY(${(1 - Math.min(1, S.dial)) * 40}px)`}}>
+              {["1", "10", "100", "1,000", "10,000 nM"].map((t, k) => (
+                <div key={k} style={{position: "absolute", left: xv(k), top: DOSE.y2 + 112, transform: k === 4 ? "translateX(-22%)" : "translateX(-50%)"}}><Engrave size={38}>{t}</Engrave></div>
+              ))}
+            </div>
+          )}
           <Label text="001 · 9.2 µM" size={44} x={1574 + clearX} y={535} at={E.one.l + 10} out={E.clear.s} align="center" />
           <Label text="048 · 566.7 nM" size={44} x={435 + clearX} y={535} at={E.grab.l} out={E.clear.s} align="center" />
           {S.rail > 0.6 && <Tag x={1710 + clearX} y={RAIL_Y - 20} op={Math.min(1, (S.rail - 0.6) * 3)}>Kd</Tag>}

@@ -155,7 +155,7 @@ const Scene = () => {
           <Label text="tumour samples" size={48} x={1000 + cx} y={596} at={E.tum.l} align="left" />
           <Label text="healthy samples" size={48} x={1000 + cx} y={766} at={E.hl.l} align="left" />
           <Label text="top 20" size={36} x={730} y={190} at={E.top20.l} align="right" />
-          <Tag x={1280} y={800} op={clamp01((f - (E.top20.l - 10)) / 12)}>19 other targets</Tag>
+          <Tag x={1280} y={806} op={clamp01((f - (E.top20.l - 10)) / 12)}>19 other targets</Tag>
           <Pen text="no approved drug yet" x={110} y={780} at={E.nodrug.l + 8} size={60} />
           <Source>Illustration · data: Ren et al., Chem. Sci. 2023 (PandaOmics target selection)</Source>
         </Layer>

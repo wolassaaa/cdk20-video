@@ -78,7 +78,7 @@ const Scene = () => {
     <Lens plan={GP} f={f}>
       <Stage zone={ZONE} f={f} whip={whip} shakeX={impact(f, E.hit1.l)} over={<T5In name="runner" f={f} />}>
         <Layer id={["board", "tape", "stretch", "cal"]}>
-          <Board6 f={f} cam={cam} cols={1} hdr={{B: E.bef.l, N: E.now.l}}
+          <Board6 f={f} cam={cam} cols={1} hideB={cl((S.pan - 0.15) / 0.35)} hdr={{B: E.bef.l, N: E.now.l}}
                   rows={[true, true, {name: E.row3.l, B: E.tape.l, Bs: [E.strch.l], N: E.d30a.l, Ns: [E.d30b.l]}, false]}
                   lit={{"2B": cl(f / 12) * (1 - S.pan), "2N": S.pan}}>
             <DimUp i={2} v={Math.max(pop, S.pan, 0.6)} />

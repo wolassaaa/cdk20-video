@@ -78,7 +78,7 @@ const Scene = () => {
     X.jiggle("tj", E.made.l, 6, 0);
     X.tw("backN", 0, 1, E.made.l + 8, LEN - 14, "power2.inOut");
   });
-  const F0 = FOCUS(0, "N"), FB = FOCUS(1, "B"), FN = FOCUS(1, "N");
+  const F0 = FOCUS(0, "N"), FB = {...FOCUS(1, "B"), y: FOCUS(1, "B").y - 70}, FN = FOCUS(1, "N");
   const drift = 0.05 * (f / LEN);
   const cam = {x: mix(mix(F0.x, FB.x, S.move), FN.x, S.pan), y: mix(F0.y, FB.y, S.move), z: FB.z + drift};
   const whip = f < 7 ? whipX(f, 0, "in", -1) : 0;
@@ -107,7 +107,7 @@ const Scene = () => {
     <Lens plan={GP} f={f}>
       <Stage zone={ZONE} f={f} whip={whip} shakeX={impact(f, E.made.l)} over={<T5Out name="runner" f={f} len={LEN} />}>
         <Layer id={["board", "hopper", "jam", "now2", "tray13"]}>
-          <Board6 f={f} cam={cam} cols={1} hdr={{B: E.bef.l, N: E.now.l}}
+          <Board6 f={f} cam={cam} cols={1} hideB={cl((S.pan - 0.15) / 0.35)} hdr={{B: E.bef.l, N: E.now.l}}
                   rows={[true, {name: (wf("hit#1")?.f0 ?? E.row2.l), B: E.mil.l, Bs: [E.bn.l], N: E.des.l, Ns: [E.made.l]}, false, false]}
                   lit={{"1B": cl((f - E.focus2.s) / 12) * (1 - S.pan) * (popB > 0.5 ? 0 : 1), "1N": S.pan * (popN > 0.5 ? 0 : 1)}}>
             <Dim i={1} v={Math.max(popB, popN, S.move * 0.7)} />

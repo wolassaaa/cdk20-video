@@ -72,7 +72,7 @@ const Scene = () => {
   });
   const F0 = CB;                 // 接 6-06 结尾的机位（第 3 行 NOW，弹出台在行上面）
   const drift = 0.04 * (f / LEN);
-  const c1 = {x: mix(mix(F0.x, CB.x, S.move), CN.x, S.pan), y: mix(F0.y, CB.y, S.move), z: mix(F0.z, CB.z, S.move) + drift};
+  const c1 = {x: mix(mix(F0.x, CB.x, S.move), CN.x, S.pan), y: mix(F0.y, CB.y, S.move) - 70, z: mix(F0.z, CB.z, S.move) + drift};
   const cam = {x: mix(c1.x, WIDE.x, S.wide), y: mix(c1.y, WIDE.y, S.wide), z: mix(c1.z, WIDE.z, S.wide)};
   const whip = f < 7 ? whipX(f, 0, "in", -1) : 0;
   const id = (s) => idle(f, s, {rot: 0.6, bob: 1.6});
@@ -115,7 +115,7 @@ const Scene = () => {
     <Lens plan={GP} f={f}>
       <Stage zone={ZONE} f={f} whip={whip} shakeX={impact(f, E.tight.l)}>
         <Layer id={["board", "loop4", "now4", "fan16", "ruler15"]}>
-          <Board6 f={f} cam={cam} cols={1} hdr={{B: E.bef.l, N: E.now.l}}
+          <Board6 f={f} cam={cam} cols={1} hideB={cl((S.pan - 0.15) / 0.35)} hdr={{B: E.bef.l, N: E.now.l}}
                   rows={[true, true, true, {name: E.row4.l, B: E.rnd.l, Bs: [], N: E.des.l, Ns: [w15.f0]}]}
                   lit={{"3B": cl((f - E.focus4.s) / 12) * (1 - S.pan) * (popB > 0.5 ? 0 : 1), "3N": S.pan * (popN > 0.5 ? 0 : 1) * (1 - S.wide)}}>
             <DimUp i={3} v={Math.max(popB, popN, S.move * 0.75) * (1 - S.wide)} />

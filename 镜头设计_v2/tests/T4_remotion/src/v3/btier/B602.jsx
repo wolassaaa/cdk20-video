@@ -100,7 +100,7 @@ const Scene = () => {
                   lit={{"0B": cl((f - E.focus1.s) / 12) * (1 - S.pan), "0N": S.pan}}>
             <Dim i={0} v={Math.max(popB, popN, S.push * 0.6)} />
             {S.rise > 0.01 && (
-              <Sprite name="socket/hero_34" x={sock.x} y={sock.y + id(1).y} w={sock.w} op={cl(S.rise * 2) * (1 - 0.4 * S.dark + 0.06 * done)} rot={id(1).r} shadow={popB > 0.5 && S.dark < 0.5}
+              <Sprite name="socket/hero_34" x={sock.x} y={sock.y + id(1).y} w={sock.w} op={cl(S.rise * 2) * (1 - 0.4 * S.dark + 0.06 * done) * (1 - cl((f - E.lab.s) / 30))} rot={id(1).r} shadow={popB > 0.5 && S.dark < 0.5}
                       style={{filter: S.dark > 0.001 ? darkF : undefined}} />
             )}
             {/* BEFORE：结构测定实验——结晶皿 + 样本管 + X 光源 + 探测板（衍射点一圈圈多起来） */}
@@ -132,7 +132,7 @@ const Scene = () => {
                 <Tag x={XS.x} y={690} op={cl(rig * 2)}>X-rays</Tag>
                 <Tag x={DISH.x} y={690} op={cl(rig * 2)}>crystals</Tag>
                 <Tag x={DET.x + DET.w / 2} y={690} op={cl(rig * 2)}>pattern</Tag>
-                <Tag x={DET.x + DET.w / 2 - 40} y={DET.y - 118} op={cl(S.lab * 3 - 2) * cl(popB * 3 - 2)} on="det">e.g. X-ray crystallography</Tag>
+                <Tag x={DET.x + DET.w / 2} y={DET.y - 118 - 70} op={cl(S.lab * 3 - 2) * cl(popB * 3 - 2)} on="det">e.g. X-ray crystallography</Tag>
               </div>
             )}
             {/* NOW：数据库机架 + 数据珠 + 从下往上长出来的蓝色预测模型 */}

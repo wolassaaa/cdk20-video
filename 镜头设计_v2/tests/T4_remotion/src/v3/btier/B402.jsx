@@ -97,7 +97,7 @@ const Scene = () => {
           <Label text="lab-measured structure" size={52} x={500 + cx} y={720} at={E.struct.l} out={E.paper.s} align="center" />
           <Pen text="Now?" x={1080 + cx} y={150} at={E.now.l - 4} out={E.paper.s} size={84} />
           <Label text="public database" size={52} x={1400 + cx} y={720} at={E.db.l} out={E.paper.s} align="center" />
-          <Label text="Ren et al., Chem. Sci. 2023" size={36} x={BOOK.x} y={BOOK.y + 160} at={E.paper.l + 16} align="center" />
+          <Label text="Ren et al., Chem. Sci. 2023" size={36} x={BOOK.x} y={BOOK.y + 185} at={E.paper.l + 16} align="center" />
           {f >= E.dl.l && <Tag x={820 + cx} y={640} op={Math.min(1, (f - E.dl.l) / 12) * (1 - Math.max(0, Math.min(1, (f - E.paper.s) / 12)))}>AlphaFold prediction</Tag>}
           <Pen text="first time" x={760} y={170} at={E.first.l} size={72} />
           <Label text="a hit" size={56} x={HIT.x} y={640} at={E.hit.l + 6} align="center" />

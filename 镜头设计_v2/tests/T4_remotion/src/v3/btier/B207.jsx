@@ -50,11 +50,13 @@ const Scene = () => {
       <Layer id="list">
         {book>0 && <Slab x={120} y={200-65*(1-book)} w={760} h={420} id="paper" op={book}>
           <div data-role="engrave" data-on="paper" style={{position:"absolute",left:35,top:24,fontSize:53,fontFamily:SERIF,color:C.ink}}>Ren et al., Chem. Sci. 2023</div>
-          <div style={{position:"absolute",left:30,top:100,width:700,lineHeight:"40px"}}>
-            {AUTHORS.map((nm,i)=>{
-              const k=INS_ORDER.indexOf(i), blue=k>=0&&f>=E.authors.l+2*k;
-              return <React.Fragment key={i}><Engrave size={30} color={blue?C.blue:C.ink}>{nm}{i<23?",":""}</Engrave>{" "}</React.Fragment>;
+          <div style={{position:"absolute",left:30,top:110,width:700,lineHeight:"56px"}}>
+            {/* Z14（11-23）：24 个名字字高只有 17 px 读不出，改成前 6 位（都在 Insilico，逐个变蓝）+ et al.，字号 42；"21 of 24" 由右边的牌和小人讲 */}
+            {AUTHORS.slice(0,6).map((nm,i)=>{
+              const blue=f>=E.authors.l+8*i;
+              return <React.Fragment key={i}><Engrave size={42} color={blue?C.blue:C.ink}>{nm},</Engrave>{" "}</React.Fragment>;
             })}
+            <Engrave size={42} color={C.ink}>et al.</Engrave>
           </div>
         </Slab>}
       </Layer>

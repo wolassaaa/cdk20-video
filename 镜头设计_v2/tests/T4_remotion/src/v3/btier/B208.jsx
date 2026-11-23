@@ -15,7 +15,7 @@ const Scene=()=>{
   // 审查批 1（11-23）：cam1–cam3 落定时容器缩放 ×1.8（ZS = 2.0），该站站牌在横向正中（站牌 452 px），路上移到屏上 y 440 让站下的挂锁、钥匙、烧瓶整件入画；
   // 钥匙放大 2.3 倍（钥匙墨迹高 54 → 屏上约 248 px）；cam_up 拉回到七站都在画里（0.81–0.82），三块芯片放大到屏上 ≥ 110 px，分别挂在 Target、Hit、Improve 正上方。第三个数是路在屏上的 y。
   const [cx,z,ry]=pathAt(f,[493,.97,600],[[E.cam_est,[567,.96,600]],[follow(E.cam1,E.pulse1),[X[0],ZS,440]],[follow(E.cam2,E.pulse2),[X[1],ZS,440]],[follow(E.cam3,E.pulse3),[X[2],ZS,440]],
-    [E.cam_up,[1180,.82,650]],[E.far_focus,[1220,.81,650]]]);
+    [E.cam_up,[1240,.76,650]],[E.far_focus,[1240,.76,650]]]);
   const pulse=pathAt(f,[start],[[E.pulse1,[X[0]]],[E.pulse2,[X[1]]],[E.pulse3,[X[2]]]])[0];
   const lock=hit(f,E.red1),rise=run(f,E.lock_rise),dive=pos(f,E.dive);
   // 低分辨率锁图只到套件容许宽度，最后靠近锁芯的部分由矢量件继续。

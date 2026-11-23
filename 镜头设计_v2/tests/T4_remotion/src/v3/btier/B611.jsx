@@ -33,8 +33,8 @@ const Scene=()=>{
   const [cx,z,ry]=camAt(f,[...end610,600],[
     [E.cam_end,[1820,ZF,600]],
     [{s:166,l:192},(g)=>[blueAt(g)+100,ZS,600]],                    // 甩到路起点，跟着蓝色吊牌走
-    [{s:372,l:400},[1975,ZS,480]],                                  // 蓝牌停在 Trials 后，Sep 2026 牌和 Approval 入画；路上移给左下的字让位
-    [{s:E.tagB_arrive.s,l:E.tagB_arrive.l+6},[X[6]-260,ZS,480]],    // 到 Approval：站在画面右半，左下是 lirafugratinib 三行字
+    [{s:372,l:400},[1880,ZS,480]],                                  // 蓝牌停在 Trials 后，Sep 2026 牌和 Approval 入画；路上移给左下的字让位
+    [{s:E.tagB_arrive.s,l:E.tagB_arrive.l+6},[X[6]-290,ZS,480]],    // 到 Approval：站在画面右半，左下是 lirafugratinib 三行字
     [{s:906,l:950},[X[4]+60,ZS,420]],                               // Others failed：Animals 站和下面的料盒
     [E.cam_back,[X[3],ZF,600]],
     [{s:E.cam_back.e+1,l:E.nudge.s},[X[3],ZS,600]],                // 回到 048
@@ -54,7 +54,7 @@ const Scene=()=>{
   return <Lens plan={GP} f={f}>
     <Stage zone={ZONE} f={continuous} tray={false}>
       <RoadWorld cx={mix(cx+5.6*Math.sin(continuous*.15),X[3],dive)} zoom={z} y={ry} red={{6:glow(f,E.approved)}} ticks={{0:1,1:1,3:1,6:hit(f,E.approved)}}>
-        <Status/>
+        <Status dy={14}/>
         {gate>0 && <TagS x={X[3]+188} y={Y+40} op={gate*(1-tween(f,E.share.s-12,E.share.s))}>not taken to trials</TagS>}
         {gate>0 && <Slab x={X[3]+172} y={Y-25-60*(1-gate)} w={33} h={53} r={6} color={C.bone} op={gate} id="gate"/>}
         {dates>0 && <Plate x={X[6]-98} y={Y-193} w={196} h={52} size={36} text="Sep 2026" color={C.bone} op={dates} id="date"/>}

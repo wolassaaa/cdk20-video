@@ -22,7 +22,7 @@ const CAP_W = 300;
 const HOP = pathOf([[760, 640], ...STEPS.flatMap((s, i) => [[s.x + s.w * 0.5 - 60, s.y - 150 - (i === 0 ? 30 : 0)], [s.x + s.w * 0.5, s.y - 44]])]);
 const BOOK = {x: 485, y: 470, w: 520};
 const CHIPS = [["chip_pandaomics/34", 1100], ["chip_alphafold/34", 1390], ["chip_chemistry42/34", 1680]];
-const LIVER = {x: 1380, y: 670, w: 440};
+const LIVER = {x: 1530, y: 750, w: 440};   // Z13（11-23）：右移 150、下移 80，名牌 y 407–470 区无肝脏
 const MAP = {x: 1040, y: 489, w: 738};
 const HK = {x: MAP.x + (0.597 - 0.5) * MAP.w, y: MAP.y + (0.46 - 0.5) * (MAP.w * 586 / 924)};   // 九龙塘（浸会大学）在贴图里的位置
 
