@@ -17,7 +17,7 @@ SEG=${1:?段号}
 step=${2:-all}
 WK="$CDK20_WORK/oncam/$SEG"
 
-busy() { [ -e "$ROOT/_env/queue/GPU_HOLD" ] || [ -e "$ROOT/_env/queue/GPU_PAUSED" ] || [ -e "$HOME/cdk20_guard/GPU_PAUSED" ] || [ "$(tasklist 2>/dev/null | grep -ci 'blender.exe')" -ge 2 ]; }
+busy() { [ -e "$ROOT/_env/queue/GPU_HOLD" ] || [ -e "$ROOT/_env/queue/GPU_PAUSED" ] || [ -e "$HOME/cdk20_guard/GPU_PAUSED" ] || [ "$(tasklist 2>/dev/null | grep -ci 'blender.exe')" -ge 3 ]; }
 wait_gpu() {
   # 别的代理也在同样地等空位：一空出来几家同时看到、同时起 Blender（11-20 19:43 实测一下起了 3 个）。
   # 看到空位后再随机等 3–17 秒复查一次，还空才起。
