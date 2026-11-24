@@ -15,6 +15,7 @@ STRIP_Y, STRIP_H = 620, 460                                # 条整体抬高到 
 SS = 2                                                     # 超采样
 EN_FONT = V3 / "remotion_public/fusion_s1/fonts/InstrumentSerif-Regular.ttf"
 ZH_FONT = Path("C:/Windows/Fonts/NotoSerifSC-VF.ttf")
+ZH_FONT_TC = Path("G:/cdk20/work/fonts/NotoSerifTC-VF.ttf")   # 11-25：繁中版用繁体字形（Google Fonts，OFL）
 TOTAL_F = 70876
 EGG_START = 63738
 
@@ -166,6 +167,9 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--frames", type=int, default=TOTAL_F)
     a = ap.parse_args()
+    global ZH_FONT
+    if a.lang == "hant":
+        ZH_FONT = ZH_FONT_TC
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
     en = json.loads((HERE / "subs_en.json").read_text("utf8"))["subs"]
@@ -178,7 +182,7 @@ def main():
 
     def get(key, mk):
         if key not in cache:
-            fn = out / (hashlib.md5(key.encode("utf8")).hexdigest()[:16] + ".png")
+            fn = out / (hashlib.md5((key + "|" + ZH_FONT.name).encode("utf8")).hexdigest()[:16] + ".png")
             if not fn.exists():
                 mk().save(fn, compress_level=1)
             cache[key] = fn
