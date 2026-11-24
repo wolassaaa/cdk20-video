@@ -178,6 +178,74 @@ def p48_track(t, f):
     return S_SEAT_W(), ALL, 0.0
 
 
+# 11-24 返修：长出 / 缩回不再用切面显现（切开处没封口，画面上是空心圆环和薄片飘着），改成整只插头以嘴尖前一点为中心均匀缩放：
+# 缩回 = 向嘴尖平移 + 缩到 0（8–10 帧，ease-in），缩到 0 那帧起藏；长出 = 反过来（长出窗口不变，ease-out）。物体始终是封闭实体。
+# 缩放中心放在嘴尖前 PIVOT_D（插座单位）：缩得很小时插头整只在嘴尖前面、不和嘴尖相交；大一点时嘴尖落在柄后的凹坑（半径 4.1 × s）里。
+PIVOT_D = 0.25
+SCALE_EPS = 1e-3
+
+
+def retract_win(t, i):
+    """第 i 个不合插头的缩回窗口 (起, 帧数)：8–10 帧，止帧不晚于下一个长出的起帧（= r1）。"""
+    g0, g1, h, p1, r1 = t.ph[i]
+    n = max(8, min(10, r1 - p1))
+    a = min(p1, r1 - n)
+    return a, n
+
+
+def plug_scale(t, i, f):
+    """第 i 个不合插头的整体缩放（0 = 藏）。"""
+    g0, g1, h, p1, r1 = t.ph[i]
+    if f <= g0:
+        return 0.0
+    if f < g1:
+        u = (f - g0) / (g1 - g0)
+        return 1 - (1 - u) ** 2
+    a, n = retract_win(t, i)
+    if f < a:
+        return 1.0
+    if f >= a + n:
+        return 0.0
+    u = (f - a) / n
+    return 1 - u * u
+
+
+def p48_scale(t, f):
+    if f <= t.last_grow:
+        return 0.0
+    if f < t.lock:
+        u = (f - t.last_grow) / (t.lock - t.last_grow)
+        return 1 - (1 - u) ** 2
+    return 1.0
+
+
+def scaled_W(Wo, s):
+    """插头原点 W 在以嘴尖前 PIVOT_D 为中心缩放 s 以后的位置。"""
+    P = TIP_W - PIVOT_D
+    return P + s * (Wo - P)
+
+
+def nozzle_scale(t, f):
+    """注料嘴以根部为中心整体缩放（长出 / 缩回的时刻同 nozzle_reveal）。"""
+    return nozzle_reveal(t, f)
+
+
+def rescale_windows(t, pad=0):
+    """11-24 返修改动的帧段（含注料嘴长出 / 缩回、九把插头长出 / 缩回、048 长出）：[(起, 止)]，pad 是两边各加几帧（动态模糊）。"""
+    w = [(t.pull, t.nozzle_done), (t.detach + 4, t.f(27.6)), (t.last_grow, t.lock)]
+    for i, (g0, g1, h, p1, r1) in enumerate(t.ph):
+        a, n = retract_win(t, i)
+        w += [(g0, g1), (a, a + n)]
+    w = sorted((a - pad, b + pad) for a, b in w)
+    out = []
+    for a, b in w:
+        if out and a <= out[-1][1] + 1:
+            out[-1] = (out[-1][0], max(out[-1][1], b))
+        else:
+            out.append((a, b))
+    return out
+
+
 def S_SEAT_W():
     return 12.03                                                   # kit_socket.SEAT_W（这里写死，免得纯 Python 自检时导入 bpy）
 
@@ -523,27 +591,43 @@ def build(seg, samples=16):
         reveal[p.name] = reveal_mats(p, "w3_" + p.name)[0]
 
     # 每帧：插头位置、显现、藏/显；048 转正
-    plug_state = {}
+    # 11-24 返修：切面显现的值钉在 ALL（整只看得见，材质节点留着，别的帧渲出来和原来一样）；长出 / 缩回改成整体缩放（plug_scale、scaled_W）。
+    # plug_state 仍按原来的 plug_track 记（焦点、光圈从它算，不变 → 长出 / 缩回以外的帧不用重渲）；缩放另记在 plug_sc。
+    ALL_CUT = -17.2
+    for p in plugs + [p48]:
+        for v in reveal[p.name]:
+            v.outputs[0].default_value = ALL_CUT * MM
+            v.outputs[0].keyframe_insert("default_value", frame=0)
+    plug_state, plug_sc = {}, {}
     for f in range(NF):
         for i, p in enumerate(plugs):
             wt, cut, vis = plug_track(t, i, f)
             Wo = wt + PLUG_TIP_X
-            SD.key_xform(p, f, loc=Vector((Wo, 0, 0)) * MM, quat=Quaternion())
-            for v in reveal[p.name]:
-                v.outputs[0].default_value = cut * MM
-                v.outputs[0].keyframe_insert("default_value", frame=f)
+            sk = plug_scale(t, i, f)
+            sv = max(sk, SCALE_EPS)
+            SD.key_xform(p, f, loc=Vector((scaled_W(Wo, sk), 0, 0)) * MM, quat=Quaternion(), scale=(sv, sv, sv))
             plug_state.setdefault(f, []).append((i, Wo, cut, vis))
+            plug_sc[(i, f)] = sk
         Wo, cut, roll = p48_track(t, f)
-        SD.key_xform(p48, f, loc=Vector((Wo, 0, 0)) * MM, quat=Quaternion((1, 0, 0), math.radians(roll)))
-        for v in reveal[p48.name]:
-            v.outputs[0].default_value = cut * MM
-            v.outputs[0].keyframe_insert("default_value", frame=f)
+        sk = p48_scale(t, f)
+        sv = max(sk, SCALE_EPS)
+        SD.key_xform(p48, f, loc=Vector((scaled_W(Wo, sk), 0, 0)) * MM, quat=Quaternion((1, 0, 0), math.radians(roll)), scale=(sv, sv, sv))
         plug_state[f].append((9, Wo, cut, f >= t.last_grow - 1))
+        plug_sc[(9, f)] = sk
+
+    def vis_from_scale(fn):
+        """缩放 ≤ SCALE_EPS 的帧藏；在每个切换处打前一帧和这一帧两个键（布尔、后面 linear_all 也不会插出中间态）。"""
+        seq, prev = [(0, fn(0) <= SCALE_EPS)], fn(0) <= SCALE_EPS
+        for f in range(1, NF):
+            hid = fn(f) <= SCALE_EPS
+            if hid != prev:
+                seq += [(f - 1, prev), (f, hid)]
+                prev = hid
+        return sorted(set(seq))
     for i, p in enumerate(plugs):
-        g0, g1, h, p1, r1 = t.ph[i]
         objs = [o for o in p.children_recursive if o.type == "MESH" and not o.hide_render]
-        vis_keys(objs, sorted(set([(0, True), (max(0, g0 - 2), True), (g0 - 1, False), (r1 + 1, False), (r1 + 2, True)])))
-    vis_keys([o for o in p48.children_recursive if o.type == "MESH" and not o.hide_render], [(0, True), (t.last_grow - 2, True), (t.last_grow - 1, False)])
+        vis_keys(objs, vis_from_scale(lambda f, i=i: plug_sc[(i, f)]))
+    vis_keys([o for o in p48.children_recursive if o.type == "MESH" and not o.hide_render], vis_from_scale(lambda f: plug_sc[(9, f)]))
 
     # ---- 软唇形态键（逐帧）
     lip_rec = []
@@ -555,13 +639,15 @@ def build(seg, samples=16):
         lip_rec.append(st)
 
     # ---- 注料嘴显现（逐帧）+ 第 3.2–4 拍走到嘴尖的金色鼓包
+    # 11-24 返修：注料嘴也不再按 run_u 切（切口是空心管口），改成以根部为中心整体缩放 0 → 1 → 0（时刻同 nozzle_reveal）；run_u 值钉在 1.01（整根看得见）。
+    for v in noz_vals:
+        v.outputs[0].default_value = 1.01
+        v.outputs[0].keyframe_insert("default_value", frame=0)
+    noz_sc = [nozzle_scale(t, f) for f in range(NF)]
     for f in range(NF):
-        rv = nozzle_reveal(t, f)
-        for v in noz_vals:
-            v.outputs[0].default_value = -0.01 if rv <= 0 else (1.01 if rv >= 1 else rv)
-            v.outputs[0].keyframe_insert("default_value", frame=f)
-    vis_keys([o for o in noz.children_recursive if o.type == "MESH" and not o.hide_render],
-             [(0, True), (t.pull - 1, True), (t.pull, False), (t.f(27.6) + 1, False), (t.f(27.6) + 2, True)])
+        sv = max(noz_sc[f], SCALE_EPS)
+        SD.key_xform(noz, f, scale=(sv, sv, sv))
+    vis_keys([o for o in noz.children_recursive if o.type == "MESH" and not o.hide_render], vis_from_scale(lambda f: noz_sc[f]))
     bpy.ops.mesh.primitive_uv_sphere_add(radius=1.6 * MM, segments=32, ring_count=16)
     bead = bpy.context.object
     bead.name = "w3_bead"
@@ -808,7 +894,10 @@ def build(seg, samples=16):
             p_, Wo, cut = cp
             roll = p48_track(t, f)[2] if p_ is p48 else 0.0
             Rr = Matrix.Translation(Vector((Wo, 0, 0)) * MM) @ Quaternion((1, 0, 0), math.radians(roll)).to_matrix().to_4x4()
-            pb = bbox([M @ (Rr @ v) for v in plug_box[p_.name] if v.x >= cut * MM - 1e-6] or [M @ (Rr @ Vector((cut * MM, 0, 0)))], f)
+            ii = 9 if p_ is p48 else plugs.index(p_)
+            sk = max(plug_sc[(ii, f)], SCALE_EPS)
+            Rr = Matrix.Translation(Vector((scaled_W(Wo, plug_sc[(ii, f)]), 0, 0)) * MM) @ Quaternion((1, 0, 0), math.radians(roll)).to_matrix().to_4x4() @ Matrix.Diagonal((sk, sk, sk, 1))
+            pb = bbox([M @ (Rr @ v) for v in plug_box[p_.name]], f) if plug_sc[(ii, f)] > SCALE_EPS else None
         row = dict(f=f, beat=round(t.b(f), 3), eye=list(eye), q=list(q), lens=lens, fstop=round(fst[f], 2), focus=fpts[f], sock=sb, plug=pb,
                    mouth=list(SD.project(recs[f], mouth_w(f)) or [0, 0, 0]))
         camj["frames"].append(row)
@@ -880,6 +969,7 @@ def clip_plan(sc):
     print("DRILL clip plan: socket", len(s_all), "face", [o.name for o in face], "board near", len(near), flush=True)
     hits = [x[2] for x in t.ph]
     fr = set(range(0, NF, 2)) | set(range(t.pull, t.float_at + 4)) | set(range(t.detach - 2, NF)) | {h + d for h in hits for d in (-1, 0, 1)}
+    fr |= set(f for a, b in rescale_windows(t) for f in range(a, b + 1))      # 11-24：长出 / 缩回（整体缩放）的每一帧
 
     def groups(f):
         """刚体之间（缓存的树）。软唇是形态键变形的，缓存的树在长序列里会拿到旧形状（11-24 实测：同一帧单独查没有、整段查报相交），
