@@ -237,6 +237,11 @@ def apply(engine, profile, out, samples=None, pct=None):
         sc.cycles.samples = samples or (8 if profile == "preview" else base)
         sc.cycles.use_denoising = True
         sc.cycles.denoiser = "OPTIX"
+        if os.environ.get("CDK20_DENOISER", "").lower() == "oidn":   # 11-24 透明件补渲：换 OpenImageDenoise（显卡）；默认不设 = 不变
+            sc.cycles.denoiser = "OPENIMAGEDENOISE"
+            sc.cycles.denoising_use_gpu = True
+            sc.cycles.denoising_input_passes = "RGB_ALBEDO_NORMAL"
+            sc.cycles.denoising_prefilter = "ACCURATE"
         sc.cycles.use_auto_tile = False
     r.use_persistent_data = True
     r.resolution_percentage = pct or (50 if profile == "preview" else 100)

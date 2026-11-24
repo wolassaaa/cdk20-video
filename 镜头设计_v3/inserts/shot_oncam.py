@@ -6257,7 +6257,12 @@ def render(seg, which="bg"):
     cfg, sc = _open(seg)
     _pass(sc, which, cfg)
     sc.render.resolution_percentage = 100      # rimcal（bl_guide.calib）存回的场景是半分辨率
-    out = cfg["work"] / f"fr_{which}"
+    if which in ("bg", "front"):                # 11-24 透明/体积件补渲开关（CDK20_SAMPLES / CDK20_DENOISER，见 shot_drill.noise_knobs）；默认不设 = 不变
+        import shot_drill as _SD
+        _SD.noise_knobs(sc)
+    tag = os.environ.get("CDK20_FR_TAG", "") if which in ("bg", "front") else ""   # 补渲写 fr_bg<TAG>/、fr_front<TAG>/，不碰原帧
+    fr0, fr1 = (int(x) for x in os.environ["CDK20_FRANGE"].split("-")) if os.environ.get("CDK20_FRANGE") else (0, 10 ** 9)
+    out = cfg["work"] / f"fr_{which}{tag}"
     if which != "wipe":                        # wipe 写 bwipe/，不建 fr_wipe
         out.mkdir(parents=True, exist_ok=True)
         sc.render.filepath = str(out / {"bg": "b_", "fg": "f_", "front": "r_"}[which])
@@ -6287,6 +6292,8 @@ def render(seg, which="bg"):
     if which == "front":
         cam = json.loads((cfg["work"] / "cam.json").read_text(encoding="utf-8"))
         for f in cam["front"]:
+            if not fr0 <= f <= fr1:
+                continue
             p = out / f"r_{f:04d}.png"
             if p.exists():
                 continue
@@ -6295,6 +6302,8 @@ def render(seg, which="bg"):
             bpy.ops.render.render(write_still=True)
         print("ONCAM render front", len(cam["front"]), round(time.time() - t, 1), "s", flush=True)
         return
+    if os.environ.get("CDK20_FRANGE"):         # 只补渲这一截（默认整段）
+        sc.frame_start, sc.frame_end = max(sc.frame_start, fr0), min(sc.frame_end, fr1)
     bpy.ops.render.render(animation=True)
     print("ONCAM render", which, round(time.time() - t, 1), "s", flush=True)
 

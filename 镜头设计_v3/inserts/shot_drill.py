@@ -489,6 +489,8 @@ def render_range(blend, outdir, f0=None, f1=None, prefix="f_"):
     bpy.ops.wm.open_mainfile(filepath=str(blend))
     sc = bpy.context.scene
     gpu(sc)
+    if prefix == "f_":                                                   # 主层才认 11-24 补渲开关；真实层（r_）照旧 64 采样
+        noise_knobs(sc)
     if f0 is not None:
         sc.frame_start = f0
     if f1 is not None:
@@ -502,6 +504,22 @@ def render_range(blend, outdir, f0=None, f1=None, prefix="f_"):
     t = time.time()
     bpy.ops.render.render(animation=True)
     print("DRILL render done", sc.frame_start, sc.frame_end, round(time.time() - t, 1), "s", flush=True)
+
+
+def noise_knobs(sc):
+    """11-24 透明/体积件补渲（默认不设环境变量 = 什么都不改）：
+    CDK20_SAMPLES=64 覆盖采样；CDK20_DENOISER=oidn 换 OpenImageDenoise（显卡，albedo+normal，accurate 预滤波）。"""
+    c = sc.cycles
+    if os.environ.get("CDK20_SAMPLES"):
+        c.samples = int(os.environ["CDK20_SAMPLES"])
+    dn = os.environ.get("CDK20_DENOISER", "").lower()
+    if dn:
+        c.use_denoising = True
+        c.denoiser = {"oidn": "OPENIMAGEDENOISE", "optix": "OPTIX"}[dn]
+        if c.denoiser == "OPENIMAGEDENOISE":
+            c.denoising_use_gpu = True
+        c.denoising_input_passes = "RGB_ALBEDO_NORMAL"
+        c.denoising_prefilter = "ACCURATE"
 
 
 def stills(blend, outdir, flist, pct=50, samples=None):
@@ -810,7 +828,7 @@ def main():
     elif cmd == "render":
         f0 = int(a[2]) if len(a) > 2 else None
         f1 = int(a[3]) if len(a) > 3 else None
-        render_range(W / "scene.blend", W / "frames", f0, f1)
+        render_range(W / "scene.blend", W / ("frames" + os.environ.get("CDK20_FR_TAG", "")), f0, f1)   # 11-24：CDK20_FR_TAG 写到 frames<TAG>/（补渲不碰原帧）
     elif cmd == "real":
         M.build_real(seg, *(a[2:]))
     elif cmd == "realstills":
