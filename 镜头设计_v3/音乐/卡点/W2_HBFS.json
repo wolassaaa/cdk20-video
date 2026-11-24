@@ -1,0 +1,49 @@
+{
+ "note": "HKBU SCIE1007 课程作业的科普视频：音乐段 W2（大板上 AlphaFold 芯片送料，磨砂 CDK20 化成熔融塑料猜形状、定成蓝色插座，湿狗甩掉红尾巴，钻进插孔接 4-01）的卡点表。设计：深化/20_W2W3新模板重做.md 第二、三节；配方 inserts/drill_W2.py 的 make_keys() 读这张表。帧 = round(60 × (grid_fix_s + 拍长 × 拍号))。",
+ "song": "Harder, Better, Faster, Stronger",
+ "file": "Harder, Better, Faster, Stronger - Daft Punk[Harder, Better, Faster, Stronger].flac",
+ "audio_from": "导演检查_20261123/24_W2_加工.mp4（-c:a copy，第 0 帧 = 歌里 50.446 s）",
+ "bpm": 123.477,
+ "grid_fix_s": 0.083,
+ "grid_fix_note": "11-24 施工方用 check_w0w1 T7b 同一量法复量：原曲 50.446 s 起 50 拍，6–11 kHz 3 ms 包络升到 30% 峰值的起音，中位 +79.4 ms（网格位置 0/1/3：+76.9/+79.7/+79.6；位置 2 是提前约 60 ms 的装饰音，不算）；40–120 Hz 底鼓中位 +88.8 ms。和 20 号文档的 +83 ms 差 < 10 ms，照规矩保留 0.083。",
+ "w2": {
+  "song_t_at_beat": [0, 50.446],
+  "nbeats": 51.27,
+  "len_f": 1500,
+  "beats": {
+   "chip_focus": 0.5,
+   "pulse": 1.0,
+   "pulse_end": 3.2,
+   "squash_end": 3.8,
+   "jump": 4.0,
+   "squeeze": 6.0,
+   "twist": 8.0,
+   "turn": 10.0,
+   "blue_start": 12.0,
+   "cam_d": 20.0,
+   "slower": 21.0,
+   "calmer": 23.0,
+   "firmer": 25.0,
+   "bluer": 27.0,
+   "float_at": 27.5,
+   "settle": 28.0,
+   "tail": 29.0,
+   "liquid": 32.0,
+   "windup": 33.0,
+   "shake": 34.0,
+   "fling": 39.25,
+   "land": 40.0,
+   "coil": 41.0,
+   "coil_end": 42.0,
+   "seat": 44.0,
+   "rise": 48.0,
+   "bore_full": 50.7
+  },
+  "strong": {
+   "jump": "第 4 拍：第一句开唱（Guess it,），液团跳起",
+   "settle": "第 28 拍：定形成插座（T7 落位冲击）",
+   "fling": "第 39¼ 拍：红尾巴甩飞",
+   "seat": "第 44 拍：插座落回格子（T7）"
+  }
+ }
+}

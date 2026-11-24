@@ -588,6 +588,17 @@ const W2Lyrics = ({file = "fusion_s1/w2_shake_3.mp4", fps = 30, v10 = false}) =>
     {W2_PHRASES.map((_, i) => <W2Phrase key={i} t={t} i={i}/>)}
   </AbsoluteFill></Clock.Provider>;
 };
+// 11-24（深化/20 第 7.1 节）：W2 按新模板三维重做后，押韵字幕和出处行单独出一层透明 PNG 序列，叠在 Blender 帧上（inserts/comp_w23.py）。
+// 词、位置、字体、落拍一个不动；只把字幕的时间原点挪 t0 = 0.083 s（= 卡点表 W2_HBFS.json 的 grid_fix，画面这次按真底鼓落拍）。t0 = 0 就是原样。
+// 出处行照旧 0.3 s 起淡入（不跟 t0）。
+const W2LyricsLayer = ({t0 = 0.083}) => {
+  const ts = useCurrentFrame() / 60;
+  const t = ts - t0;
+  return <Clock.Provider value={ts}><AbsoluteFill>
+    <SrcLine text={W2_SRC} align="right" op={after(ts, 0.3)}/>
+    {W2_PHRASES.map((_, i) => <W2Phrase key={i} t={t} i={i}/>)}
+  </AbsoluteFill></Clock.Provider>;
+};
 // W3 的出处行单独出一张透明 PNG（ffmpeg 叠在 W3_K_4k60_1 缩出的 1080p 上），和 W2 同一个组件、同一套字
 const W3SrcStill = () => <AbsoluteFill><SrcLine text={W3_SRC}/></AbsoluteFill>;
 
@@ -1005,6 +1016,7 @@ const Root = () => <>
   {/* 11-23 v10 加工（18 的 2.6）：去掉右下角徽标和小出处行，换统一出处行；片里只用前 1500 帧（19 第九节）。不加 --scale 出 1080p60 */}
   <Composition id="W2LyricsV10" component={W2Lyrics} durationInFrames={1500} fps={60} width={W} height={H} defaultProps={{file: "fusion_s1/w2_shake_4k.mp4", fps: 60, v10: true}}/>
   <Composition id="W3SrcStill" component={W3SrcStill} durationInFrames={1} fps={60} width={W} height={H}/>
+  <Composition id="W2LyricsLayer" component={W2LyricsLayer} durationInFrames={1500} fps={60} width={W} height={H} defaultProps={{t0: 0.083}}/>
   <Composition id="S401" component={S401} durationInFrames={780} fps={30} width={W} height={H}/>
   <Composition id="S402" component={S402} durationInFrames={510} fps={30} width={W} height={H}/>
   <Composition id="S403" component={S403} durationInFrames={540} fps={30} width={W} height={H}/>
