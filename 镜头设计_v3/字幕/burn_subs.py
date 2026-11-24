@@ -11,7 +11,7 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 HERE = Path(__file__).resolve().parent
 V3 = HERE.parent
 FPS, W, H = 60, 1920, 1080
-STRIP_Y, STRIP_H = 860, 220
+STRIP_Y, STRIP_H = 620, 460                                # 条整体抬高到 y=620 起，给上移避让留空间（run_burn.sh 的 overlay 也是 620）
 SS = 2                                                     # 超采样
 EN_FONT = V3 / "remotion_public/fusion_s1/fonts/InstrumentSerif-Regular.ttf"
 ZH_FONT = Path("C:/Windows/Fonts/NotoSerifSC-VF.ttf")
@@ -40,23 +40,24 @@ def rr_mask(w, h, r, size):
     return m
 
 
-def render(kind, en=None, zh=None, who=None):
+def render(kind, en=None, zh=None, who=None, dy=0):
     """kind: 'en' (EN plate 944–1018), 'bi' (zh above en, 930–1052), 'egg_zh' (dark zh plate 876–940). Returns RGBA at 1x, size (W, STRIP_H)."""
     fe, fz = font(EN_FONT, 46), font(ZH_FONT, 40, zh=True)
     if kind == "egg_zh":
         fz = font(ZH_FONT, 44, zh=True)
     if kind == "en":
         txt = pretty(en)
-        w, h, top = int(round(tw(fe, txt))) + 60, 74, 944
+        w, h, top = int(round(tw(fe, txt))) + 60, 74, 944 + dy
     elif kind == "bi":
         wen, wzh = tw(fe, pretty(en)), tw(fz, zh)
-        w, h, top = int(round(max(wen, wzh))) + 60, 122, 930
+        w, h, top = int(round(max(wen, wzh))) + 60, 122, 930 + dy
     else:
         label = (who + "：") if who else ""
         wlab = tw(fz, label)
         w, h, top = int(round(wlab + tw(fz, zh))) + 52, 64, 876
     x0 = (W - w) // 2
     y0 = top - STRIP_Y
+    assert 0 <= y0 and y0 + h <= STRIP_H, f"小牌出条 top={top}"
     canvas = Image.new("RGBA", (W * SS, STRIP_H * SS), (0, 0, 0, 0))
     mask = Image.new("L", canvas.size, 0)
     box = (x0 * SS, y0 * SS)
@@ -112,7 +113,7 @@ def render(kind, en=None, zh=None, who=None):
             xl += fz.getlength(who + "：")
         line(zh, fz, 46, (y0 + 9) * SS, ink, x_left=xl)
     out = canvas.resize((W, STRIP_H), Image.LANCZOS)
-    return out
+    return out, (x0, x0 + w, top, top + h)
 
 
 def dark_kind(kind):
@@ -124,6 +125,39 @@ def scaled(img, a):
         return img
     r, g, b, al = img.split()
     return Image.merge("RGBA", (r, g, b, al.point(lambda v: int(v * a + 0.5))))
+
+
+BOXES = json.loads((HERE / "bottom_text_boxes.json").read_text("utf8"))["boxes"] if (HERE / "bottom_text_boxes.json").exists() else []
+GAP_Y = 6                                                  # 竖向也留 6 px，贴得太近（如双语牌 930 对出处行 928）也算碰
+GAP_X, UP_Y = 16, 12                                      # 横向留 16 px 才算不相交；上移后小牌底边在框顶以上 12 px
+
+
+def avoid(kind, plate, f0, f1):
+    """plate=(x0,x1,top,bot)（未上移）。返回需上移的像素 dy（<=0）和碰到的框。迭代到不再碰任何框。"""
+    dy, hit = 0, []
+    for _ in range(6):
+        x0, x1, top, bot = plate[0], plate[1], plate[2] + dy, plate[3] + dy
+        moved = False
+        for b in BOXES:
+            if b["f1"] < f0 or b["f0"] > f1:
+                continue
+            if x1 + GAP_X <= b["x0"] or x0 - GAP_X >= b["x1"]:
+                continue
+            if bot <= b["y0"] or top >= b["y1"] + GAP_Y:           # 竖向不相交（含小牌贴着框上沿的情况）
+                continue
+            if top >= b["y1"] and plate[3] + (b["y1"] + 8 - plate[2]) <= 1062:   # 只是贴着框下沿（间隙不足 6 px）：下移到留 8 px
+                dy = b["y1"] + 8 - plate[2]
+            else:
+                dy = (b["y0"] - UP_Y) - plate[3]
+            hit.append(b)
+            moved = True
+            break
+        if not moved:
+            break
+    return dy, hit
+
+
+AVOIDED = []
 
 
 def main():
@@ -158,7 +192,15 @@ def main():
         key0 = f"{kind}|{s['text']}|{zh.get(s['id'], '')}"
         if key0 not in base_cache:
             base_cache[key0] = render(kind, en=s["text"], zh=zh.get(s["id"]))
-        img = base_cache[key0]
+        img, plate = base_cache[key0]
+        dy, hit = avoid(kind, plate, s["f0"], s["f1"])
+        if dy:
+            key0 += f"|dy{dy}"
+            if key0 not in base_cache:
+                base_cache[key0] = render(kind, en=s["text"], zh=zh.get(s["id"]), dy=dy)
+            img, plate = base_cache[key0]
+            AVOIDED.append(dict(id=s["id"], f0=s["f0"], f1=s["f1"], dy=dy, top=plate[2], bot=plate[3], x0=plate[0], x1=plate[1],
+                                boxes=[b["txt"] for b in hit]))
         f0, f1 = s["f0"], s["f1"]
         for f in range(f0, f1 + 1):
             if not (0 <= f < a.frames):
@@ -183,7 +225,7 @@ def main():
                         continue
                     assert plan[g] is None
                     if img is None:
-                        img = get(img_key, lambda t=tag, c=c: render("egg_zh", zh=c["text_zh"]))
+                        img = get(img_key, lambda t=tag, c=c: render("egg_zh", zh=c["text_zh"])[0])
                     plan[g] = img
                     n_egg += 1
     # 写 concat 清单：每帧一条，时长按累计微秒取整，避免 1/60 取整漂移
@@ -196,6 +238,8 @@ def main():
             fh.write(f"file '{(p or blank).as_posix()}'\nduration {(nxt - prev) / 1e6:.6f}\n")
             prev = nxt
         fh.write(f"file '{(plan[-1] or blank).as_posix()}'\n")
+    (out / "avoided.json").write_text(json.dumps(AVOIDED, ensure_ascii=False, indent=1), "utf8")
+    print(f"{a.lang}: 避让 {len(AVOIDED)} 块")
     print(f"{a.lang}: 正片字幕帧 {n_en}，彩蛋中文帧 {n_egg}，图 {len(cache)} 张 -> {lst}")
 
 
