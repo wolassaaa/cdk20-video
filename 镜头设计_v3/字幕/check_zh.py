@@ -103,7 +103,7 @@ def main():
     to_simplified = OpenCC("hk2s").convert
 
     def canonical_hk(text):
-        return to_hk(to_simplified(text))
+        return to_hk(to_simplified(text)).replace("臨牀", "臨床")  # 香港報刊多用「臨床」
 
     failed = False
     for stem, array_key, count in (("subs", "subs", 414), ("subs_tag", "lines", 32)):
