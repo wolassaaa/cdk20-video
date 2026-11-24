@@ -775,6 +775,92 @@ def luma_gains(k, row, rows, joints):
     return g
 
 
+STEP_LIM = 0.12         # 11-24 R2-04：接点 ±12 帧内相邻两帧亮度差上限（check_joints_v10 K1 逐帧口径同值）
+STEP_AIM = 0.105        # 做过渡时按这个算（重编码会差 0.005 左右，留余量）
+STEP_FLOOR = 0.45       # 接点 ±12 帧内每帧亮度下限（R2 的 J23、J29、J49 闪暗）
+STEP_N = 12             # 接点左右各查几帧
+STEP_CAP = (0.55, 1.30) # 单帧过渡系数范围
+
+
+def _env_lo(y, s):
+    """不高于 y、相邻差 ≤ s 的最大序列（只压亮的帧，压成线性坡）。"""
+    np, _ = _np()
+    i = np.arange(len(y))
+    return np.min(y[None, :] + s * np.abs(i[:, None] - i[None, :]), axis=1)
+
+
+def _env_hi(y, s):
+    """不低于 y、相邻差 ≤ s 的最小序列（只提暗的帧，提成线性坡）。"""
+    np, _ = _np()
+    i = np.arange(len(y))
+    return np.max(y[None, :] - s * np.abs(i[:, None] - i[None, :]), axis=1)
+
+
+def step_fix(rows, gains, joints, off=False):
+    """11-24 R2-04：接点逐帧亮度约束。K1 只比两侧 12 帧均值，查不出出镜段首尾"盖满"白帧（0.92–1.00）紧挨 B 页灰擦除帧（0.61–0.66）
+    一帧跳 0.24–0.37、以及 J23/J29/J49 接点处 2–3 帧闪暗 0.2。这里在接点亮度匹配、暗帧保护、出镜下限都算完以后，
+    量接点左段最后 12 帧 + 右段最前 12 帧（乘上已有系数后）的逐帧亮度：
+      相邻差 > STEP_LIM 或有帧 < STEP_FLOOR 时，做线性亮度过渡——闪白（超限的帧比窗口中位数亮）把亮帧压成每帧 ≤ STEP_AIM 的坡，
+      闪暗（超限的帧比中位数暗）把那一段按两头好帧线性插值托起（单帧 ≤ ×1.3，提不够的再压亮帧补齐），低于 STEP_FLOOR 的提到 STEP_FLOOR；
+    过渡系数（24 个，左 12 + 右 12）乘进两段的系数，写进 joints[接点]["step_k"]，量的数写 step_meas。
+    改回：joints_v10.json 里给那个接点加 "step_off": true（或整片 --no-step），下次拼就不做。gains: {段下标: 系数序列或 None}，原地改。"""
+    np, _ = _np()
+    for r in joints.values():
+        for f in ("step_k", "step_meas"):
+            r.pop(f, None)
+    if off:
+        return []
+    N = STEP_N
+    fixed = []
+    for k in range(1, len(rows)):
+        jid = f"J{k:02d}"
+        jr = joints.get(jid)
+        if not jr or rows[k]["group"] == "EGG" or rows[k - 1]["group"] == "EGG" or jr.get("step_off"):
+            continue
+        code = jr.get("code")
+        if not code or code == "black":
+            continue
+        L, R = rows[k - 1]["piece"], rows[k]["piece"]
+        nL, nR = L["meta"]["frames"], R["meta"]["frames"]
+        if nL < N or nR < N:
+            continue
+        yL, yR = luma_series(L["v"], nL - N, N), luma_series(R["v"], 0, N)
+        if len(yL) != N or len(yR) != N:
+            continue
+        gL = gains.get(k - 1) if gains.get(k - 1) is not None else np.ones(nL, np.float32)
+        gR = gains.get(k) if gains.get(k) is not None else np.ones(nR, np.float32)
+        y0 = np.concatenate([yL * gL[nL - N:], yR * gR[:N]]).astype(np.float64)
+        d0 = np.abs(np.diff(y0))
+        if d0.max() <= STEP_LIM and y0.min() >= STEP_FLOOR:
+            continue
+        bad = sorted({i for i in np.where(d0 > STEP_LIM)[0]} | {i + 1 for i in np.where(d0 > STEP_LIM)[0]} | set(np.where(y0 < STEP_FLOOR)[0]))
+        dip = float(y0[bad].mean()) < float(np.median(y0))
+        t = np.maximum(y0, STEP_FLOOR)
+        if dip:                                        # 闪暗：超限那一段用两头好帧之间的线性插值托起（R2 写法：接点前第 2 帧和后第 3 帧之间线性过渡），不低于原值
+            a, b = max(0, bad[0] - 1), min(2 * N - 1, bad[-1] + 1)
+            lin = np.interp(np.arange(2 * N), [a, b], [t[a], t[b]])
+            seg = slice(a, b + 1)
+            t[seg] = np.minimum(np.maximum(t[seg], lin[seg]), y0[seg] * STEP_CAP[1])
+        t = _env_lo(t, STEP_AIM)                       # 提完还超的（或闪白）把亮帧压成坡；结果相邻差一定 ≤ STEP_AIM
+        m = np.clip(t / np.maximum(y0, 1e-3), *STEP_CAP)
+        y1 = y0 * m
+        if gains.get(k - 1) is None:
+            gains[k - 1] = gL.copy()
+        if gains.get(k) is None:
+            gains[k] = gR.copy()
+        gains[k - 1][nL - N:] *= m[:N].astype(np.float32)
+        gains[k][:N] *= m[N:].astype(np.float32)
+        jr["step_k"] = [round(float(x), 4) for x in m]
+        jr["step_meas"] = dict(kind="闪暗" if dip else "闪白", max_step_before=round(float(d0.max()), 3), at=int(d0.argmax()) - N,
+                               min_before=round(float(y0.min()), 3), max_step_after=round(float(np.abs(np.diff(y1)).max()), 3),
+                               min_after=round(float(y1.min()), 3), lim=STEP_LIM, floor=STEP_FLOOR,
+                               y_before=[round(float(v), 3) for v in y0], y_after=[round(float(v), 3) for v in y1])
+        fixed.append(jid)
+        print(f"{jid} {rows[k - 1]['group']}→{rows[k]['group']} 逐帧亮度（{jr['step_meas']['kind']}）：最大跳 {d0.max():.3f}（换场帧 {int(d0.argmax()) - N:+d}）"
+              f"→ {jr['step_meas']['max_step_after']}，最暗 {y0.min():.3f} → {y1.min():.3f}，过渡 {int((np.abs(m - 1) > 1e-3).sum())} 帧", flush=True)
+    return fixed
+
+
 def piece_luma(g, pc, gains):
     """逐帧乘亮度系数（RGB 三通道同乘 = 只调亮度，不动色相饱和），重新转码；缓存按系数序列。"""
     np, _ = _np()
@@ -834,6 +920,7 @@ def main():
     ap_.add_argument("--calib-luma", action="store_true", help="重新量各接点两侧亮度、重算 luma_k 写回 joints_v10.json（量的是叠好擦除层的段文件）")
     ap_.add_argument("--calib-only", action="store_true", help="只做 --calib-luma（量完写回 joints_v10.json 就退出，不拼）")
     ap_.add_argument("--no-luma", action="store_true", help="不做接点亮度匹配（出和 rc05 同口径的片）")
+    ap_.add_argument("--no-step", action="store_true", help="不做接点逐帧亮度过渡（11-24 R2-04；单个接点改回用 joints_v10.json 的 step_off: true）")
     A = ap_.parse_args()
     t_start = time.time()
     PIECES.mkdir(parents=True, exist_ok=True)
@@ -946,8 +1033,12 @@ def main():
             if A.calib_only:
                 print("CALIB 完成（--calib-only，不拼）", flush=True)
                 return
-            todo = [(k, r, floor_gains(r, guard_gains(r, luma_gains(k, r, rows, joints)))) for k, r in enumerate(rows) if r["group"] != "EGG"]
-            todo = [(k, r, gn) for k, r, gn in todo if gn is not None]
+            gmap = {k: floor_gains(r, guard_gains(r, luma_gains(k, r, rows, joints))) for k, r in enumerate(rows) if r["group"] != "EGG"}
+            # 11-24 R2-04：接点 ±12 帧逐帧亮度约束（相邻差 ≤ 0.12、每帧 ≥ 0.45），过渡系数写回 joints_v10.json 的 step_k / step_meas
+            step_fix(rows, gmap, joints, off=A.no_step)
+            jp = HERE / "joints_v10.json"
+            jp.write_text(json.dumps(list(joints.values()), ensure_ascii=False, indent=2).replace(chr(10), chr(13) + chr(10)) + chr(13) + chr(10), encoding="utf-8", newline="")
+            todo = [(k, rows[k], gn) for k, gn in gmap.items() if gn is not None]
             with ThreadPoolExecutor(WORKERS) as ex:
                 for (k, r, gn), pc in zip(todo, ex.map(lambda t: piece_luma(t[1]["group"].replace("+", "_"), t[1]["piece"], t[2]), todo)):
                     r["piece"] = pc

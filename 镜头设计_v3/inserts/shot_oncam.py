@@ -4584,8 +4584,9 @@ V502 = dict(
     TAIL_D=0.038, TAIL_PX=(960.0, 540.0), TAIL_CTRL=(1450.0, 330.0, 0.7), TAIL_ROT=(15.0, 5.0), TAIL_FACE=-0.8, GOLD001_ROUGH=0.3,   # 11-23 返修六：段尾盖满 8 帧 → 0.03→0.038（落点挪中以后外圈齿面盖得住四角）
                   HEAD_EASE=1.0, HEAD_QLAG=0.35,   # 11-23 审查返修试渲：刻字放大 2.5 倍、离镜头 0.03 后末帧左上角又露白底（约 5%）→ 落点往柄面中心挪 −2.0→−0.8（001 落在画面中间）  # 返修五：末帧左上角露出柄面齿边和白底（M12）→ 落点往柄面中心挪 −3.2→−2.0；返修四：段尾盖满 9 帧 → 0.022→0.03；段首 0→1 跳 27.9、往回 10.1（贴着镜头一上来就转 90°）→ 晚转身   # 11-23 首版机检：段尾 M12 0.938（TAIL_D 0.04）、段首 M9 第 0→1 帧跳 35.6；返修二：0.013 时段尾盖满 10 帧（OC7 ≤ 6）、段首 0→1 还跳 27.3（EASE 0.85）
     PLUG_K=0.9, SLOT=15.0, BAR_Y=4.0, FRAME=(-58.0, 58.0, -41.0, 41.0), SLIP=12.0, RISE=30.0, RISE_Z=10.0, FWD_MM=95.0, FWD_XY=(0.0, 0.0), FWD_TGT=(1300.0, 440.0, 0.42), HEAD_QW=True,
-    FACE_PLANAR=True, FACE_SPIN=90.0, INK_001="#1F1E1C", ENGRAVE_K=2.7, TRANS_TK=1.5, TRANS_T1=1.25, TRANS_HK=[(0, 1.0), (4, 1.0), (14, 1.8), (19, 1.8), (24, 1.0), (28, 0.0)],   # 返修八：段首第 16 帧暗到 0.53、露出大板又亮回（往回闪 4.5，第 17→18 帧）→ 零件退开那几帧灯加 PBLUR_ZERO=(30, 371),   # 返修七：成片量字高 93 px → 2.5→2.7；段尾先暗到 0.53 再亮到 0.61、末 3 帧又回 0.58（往回闪 4.5）→ 段尾灯 ×1.5、末帧再 ×1.25
+    FACE_PLANAR=True, FACE_SPIN=90.0, INK_001="#1F1E1C", ENGRAVE_K=2.7, TRANS_TK=1.5, TRANS_T1=1.25, TRANS_HK=[(0, 1.0), (4, 1.0), (14, 1.8), (19, 1.8), (24, 1.0), (28, 0.0)],   # 返修八：段首第 16 帧暗到 0.53、露出大板又亮回（往回闪 4.5，第 17→18 帧）→ 零件退开那几帧灯加 TRANS_HK；返修七：成片量字高 93 px → 2.5→2.7；段尾先暗到 0.53 再亮到 0.61、末 3 帧又回 0.58（往回闪 4.5）→ 段尾灯 ×1.5、末帧再 ×1.25
                     # 11-23 Fable 审查必改：001 刻字深色、字高 ≥ 96 px（离镜头 0.5→0.42 m、屏上 x 1440→1300（0.36 m 时右沿出画 2074）、刻字 1.8→2.5 倍（2.0 时字高约 80 px））、柄面平行底片、亮槽在字下；dive 以前人不虚
+    PBLUR_ZERO=(0, 371),   # 11-24 R2-01 写死：段内帧 0–370 人物虚化 = 0，371（dive 起点）起才按焦距差虚。原来的 PBLUR_ZERO=(30, 371) 被拼进上一行行尾注释里（# 之后），一直没生效，D1 重合成就把虚化带回来了
     OC=True, OC1_EXEMPT=[(211, 415)], TRANS=True, TRANS_K=1.0, HIDE_RED=True, H_MIN=486, TOP_MIN=60, BOT_MAX=860, ACC=["p001"],
     BOARD_K=1.27, BOARD_HIDE=("stations", "zone_tags", "z1_c0_r0"),
     HEAD_BOX=(300, 90, 900, 680), LOCK_BOX=(1000, 0, 1940, 1080),
@@ -5994,23 +5995,28 @@ def recipe_road5(W):
     pp = KP.Part(K, "road5_paper", "white")
     pp.box(1.0, -1.0, 20, 14.6, 0.8, K.white, z=-0.5, r=0.4, bevel=0.2)
     pp.box(0, 0, 20, 14.6, 1.2, K.white, z=0.4, r=0.4, bevel=0.2)
-    pp.inkbox(0, 11.6, 16.0, 0.45, K.inkg, 1.0)
-    pp.inkbox(0, 10.2, 12.0, 0.3, K.inkg, 1.0)
-    pp.inkbox(0, 8.0, 18, 0.22, K.ink, 1.0)
-    pp.inkbox(0, 2.6, 18, 0.12, K.ink, 1.0)
-    pp.inkbox(-9.6, -5.4, 8.0, 6.6, K.inkg, 1.0)
-    for j in range(8):
-        pp.inkbox(9.0, 0.6 - 1.8 * j, 8.6 if j != 7 else 5.0, 0.28, K.inkg, 1.0)
+    # 11-24 R2-15（_审查批2.md）：标题被报纸自己的横线穿过（y 8.0 那条穿第一行、2.6 那条和图块、栏线顶穿第二行）。
+    # 改成：报头两条灰条和上横线都挪到标题第一行上沿以上（上横线下沿 10.38，第一行字顶约 8.9），中间那条删掉，
+    # 下横线挪到第二行 g 的下沿（约 −3.8）以下（−5.3…−5.5），图块和栏线整体挪到下横线以下；标题改常规体（不斜）。
+    # 字的上下沿按 Blender align_y=CENTER（基线 = y − 0.34 em）和 Instrument Serif 字面（升部 0.74 em、降部 0.215 em）算。
+    # 原值：灰条 11.6 / 10.2，横线 8.0（0.22）/ 2.6（0.12），图块 (−9.6, −5.4, 8.0, 6.6)，栏线 0.6 起 8 条，标题斜体、两行 y 6.6 / 1.4。
+    pp.inkbox(0, 13.0, 16.0, 0.45, K.inkg, 1.0)
+    pp.inkbox(0, 11.7, 12.0, 0.3, K.inkg, 1.0)
+    pp.inkbox(0, 10.6, 18, 0.22, K.ink, 1.0)
+    pp.inkbox(0, -5.4, 18, 0.12, K.ink, 1.0)
+    pp.inkbox(-9.6, -10.2, 8.0, 3.8, K.inkg, 1.0)
+    for j in range(5):
+        pp.inkbox(9.0, -6.6 - 1.8 * j, 8.6 if j != 4 else 5.0, 0.28, K.inkg, 1.0)
     hs = 6.8   # 11-24 Z20：报纸标题字高 3.4 → 6.8；总宽超 38 mm 分两行
     words = ["AI", "discovers", "a", "cancer", "drug"]
-    wo = [pp.text(w, hs, 0.0, 5.2, 1.0, K.ink, italic=True, align="LEFT") for w in words]
+    wo = [pp.text(w, hs, 0.0, 5.2, 1.0, K.ink, italic=False, align="LEFT") for w in words]
     bpy.context.view_layer.update()
     wid = [o.dimensions.x / MM for o in wo]
     sp = 0.3 * hs
     if sum(wid) + sp * (len(wo) - 1) <= 38.0:
         lines = [(5.2, list(range(len(wo))))]
     else:
-        lines = [(6.6, [0, 1, 2]), (1.4, [3, 4])]   # AI discovers a / cancer drug
+        lines = [(6.2, [0, 1, 2]), (0.0, [3, 4])]   # AI discovers a / cancer drug（11-24 R2-15：6.6 / 1.4 → 6.2 / 0.0，两行都在上下横线之间）
     for ly, ids in lines:
         x = -(sum(wid[i] for i in ids) + sp * (len(ids) - 1)) / 2
         for i in ids:

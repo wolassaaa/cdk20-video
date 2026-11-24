@@ -6,6 +6,9 @@
 // 段长照 master_v2：666 帧。素材只有 639 帧，master 里词比素材晚 4 帧（段帧 = 素材帧 + 4）；
 //   段首 4 帧、段尾 23 帧没有素材，用来回放（4,3,2,1 / 637,636,…），每帧都是真实素材帧，不冻结、不变速、不混帧。
 // 声音：2-02.wav 前面垫 4 帧静音、尾巴垫到 11.1 秒，由 ffmpeg 合成时做（--sequence 不出声音）。
+// 11-24 R2-03（_审查批2.md）：删箭头和两行手写小字（computer-aided methods、a candidate）；标题牌下加三行研究问题文字牌（Instrument Serif 44 px，
+//   左 1010、上 248、宽 830，三行各落在 how / scientists / potential 开口，10 帧上移 12 px 淡入）；芯片字改 AI（parts/chip_*_ai.png）、缩到 214 外框放右下
+//   （左 1560、上 560）；钥匙缩到 1.65 倍放文字牌下方左列（find 落 1240,640；assess 跟手但 y ≥ 636，不碰文字牌、不进字幕区）。
 //   node node_modules/@remotion/cli/remotion-cli.js render src/v3/manual/OnCam202S.jsx OnCam202S <帧目录> --sequence --image-format=png --public-dir=<映射/_cache/oc202/public>
 import React from "react";
 import {AbsoluteFill, Audio, Composition, Easing, Img, Sequence, registerRoot, staticFile, useCurrentFrame, continueRender, delayRender} from "remotion";
@@ -14,8 +17,10 @@ import T from "./track_2-02.json";
 const PAPER = "#EDE9DF", INK = "#1F1E1C", SOFT = "#6E6B63";
 const LEN = 666, OFF = 4;                       // master_v2 的段长；段帧 = 素材帧 + OFF
 const BG_BRIGHT = 0.87;                         // 大板压暗：第一遍 0.80 出片量得整段 0.570（1-03 是 0.607），抬到 0.87
-const CHIP = 420;                               // 芯片外框边长（贴图实体占 654/699 → 屏上约 393 px）
-const KS = 1.9;                                 // 钥匙在讲解位和手上方的缩放（转台 48–72 帧实体高 202–230 → 屏上 ≥ 384 px）
+const CHIP = 214;                               // 11-24 R2-03：420 → 214（屏上实体约 200 px），给研究问题文字牌让位
+//const CHIP_OLD = 420;                               // 芯片外框边长（贴图实体占 654/699 → 屏上约 393 px）
+const KS = 1.65;   // 11-24 R2-03：1.9 → 1.65，钥匙要塞进文字牌下沿（484）和字幕区（930）之间
+//const KS_OLD = 1.9;                                 // 钥匙在讲解位和手上方的缩放（转台 48–72 帧实体高 202–230 → 屏上 ≥ 384 px）
 const W = Object.fromEntries(T.words.map((w, i) => [i + 1, w]));
 const ease = Easing.bezier(0.33, 0, 0.2, 1);
 const out = Easing.out(Easing.cubic);
@@ -65,18 +70,18 @@ const Scene = () => {
   const cr = cc * 150;
   const cBump = f > cAt + 27 ? 0.03 * Math.exp(-(f - cAt - 27) / 5) * Math.cos((f - cAt - 27) / 3.2) : 0;
   const bob = Math.sin(f / 31) * 5;
-  const CX = 1440, CY = 256;                    // 芯片外框左上角：右沿 1860，下沿 676
+  const CX = 1560, CY = 560;                    // 11-24 R2-03：芯片外框左上角（右沿 1774，下沿 774；原 1440,256）
 
   // ---- 钥匙：find 时从肩后出来，assess 时落到手的右上方并跟着手走 ----
   const sh = at(SH_S, m);
   const pr = at(PALM_S, m), pm = [PALM_M[0] * SC + PX, PALM_M[1] * SC + PY];
   const palm = [mix(pm[0], pr[0], FOLLOW), mix(pm[1], pr[1], FOLLOW)];
   const k0 = [sh[0] - 70, sh[1] + 40];
-  const k1 = [1215 + hx, 452 + hy + Math.sin(f / 23) * 6];
-  const k2 = [palm[0] + 170, palm[1] - 460 + Math.sin(f / 19) * 4];   // 放大后底边 ≤ 930，不进字幕区（贴图实体偏下 ~90 px，试渲量过）；离开人的肩
+  const k1 = [1240 + hx, 640 + hy + Math.sin(f / 23) * 6];          // 11-24 R2-03：原 1215,452（会压文字牌）
+  const k2 = [palm[0] + 230, Math.max(636, palm[1] - 460) + Math.sin(f / 19) * 4];   // 11-24 R2-03：y 不高于 636（钥匙上沿不碰文字牌下沿 484）   // 放大后底边 ≤ 930，不进字幕区（贴图实体偏下 ~90 px，试渲量过）；离开人的肩
   const a = span(f, W[12].f0 - 6, W[12].f0 + 30, io);
   const b = span(f, W[14].f0 - 4, W[14].f0 + 34, io);
-  const arcUp = Math.sin(Math.PI * a) * -70 + Math.sin(Math.PI * b) * -40;
+  const arcUp = Math.sin(Math.PI * a) * -30 + Math.sin(Math.PI * b) * -20;   // 11-24：弧收小，路过时不顶到文字牌
   const kx = mix(mix(k0[0], k1[0], a), k2[0], b);
   const ky = mix(mix(k0[1], k1[1], a), k2[1], b) + arcUp;
   const ks = mix(mix(0.9, KS, a), KS, b);
@@ -89,9 +94,9 @@ const Scene = () => {
          transform: `scale(${ks}) rotate(${mix(-24, 0, a) + mix(0, -8, b)}deg)`, filter: "drop-shadow(0 26px 18px rgba(60,40,10,0.28))"}} />
   );
 
-  const ar = span(f, W[10].f0 - 2, W[11].f0 + 14, ease);
-  const arOut = 1 - span(f, W[12].f0 + 20, W[12].f0 + 40);
-  const head = [nose[0] + 210, nose[1] - 40];
+  // ---- 研究问题文字牌（11-24 R2-03）：三行各落在本行第一个词开口 ----
+  const QL = [[W[6], "How can computer-aided methods help"], [W[11], "scientists find and assess"], [W[15], "potential cancer drug candidates?"]];
+  const qCard = span(f, W[6].f0 - 10, W[6].f0, out);
 
   return (
     <AbsoluteFill style={{background: PAPER, fontFamily: "Serif", color: INK}}>
@@ -115,29 +120,25 @@ const Scene = () => {
 
       {/* 芯片 */}
       <div style={{position: "absolute", left: CX + hx, top: CY + hy + bob, width: CHIP, height: CHIP, transform: `scale(${1 + cBump})`, filter: "drop-shadow(0 26px 18px rgba(30,25,15,0.28))"}}>
-        <Img src={staticFile("parts/chip_c.png")} style={{position: "absolute", width: CHIP, height: CHIP,
+        <Img src={staticFile("parts/chip_c_ai.png")} style={{position: "absolute", width: CHIP, height: CHIP,
              WebkitMaskImage: `radial-gradient(circle at 50% 0%,#000 ${cr - 6}%,transparent ${cr}%)`, maskImage: `radial-gradient(circle at 50% 0%,#000 ${cr - 6}%,transparent ${cr}%)`}} />
-        <Img src={staticFile("parts/chip_l.png")} style={{position: "absolute", width: CHIP, height: CHIP, opacity: 1 - cc,
+        <Img src={staticFile("parts/chip_l_ai.png")} style={{position: "absolute", width: CHIP, height: CHIP, opacity: 1 - cc,
              WebkitMaskImage: `linear-gradient(90deg,#000 ${cl * 112 - 11}%,transparent ${cl * 112 - 6}%)`, maskImage: `linear-gradient(90deg,#000 ${cl * 112 - 11}%,transparent ${cl * 112 - 6}%)`}} />
       </div>
-      <div style={{position: "absolute", left: CX + CHIP / 2 - 200 + hx, top: CY + CHIP + 8 + hy + bob, width: 400, textAlign: "center", font: "40px Hand", color: INK, opacity: span(f, W[9].f0, W[9].f0 + 10)}}>
-        computer-aided methods
-      </div>
 
-      {/* 箭头：方法帮到人（起点跟着芯片挪到它的左沿中间） */}
-      <svg width={1920} height={1080} style={{position: "absolute", left: 0, top: 0, opacity: arOut}}>
-        {ar > 0 && (
-          <g fill="none" stroke={INK} strokeWidth={5} strokeLinecap="round" strokeLinejoin="round">
-            <path d={`M${CX - 10 + hx},${CY + CHIP / 2 + hy + bob} C${1300},${360} ${head[0] + 190},${head[1] - 40} ${head[0] + 14},${head[1]}`} pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - ar} />
-            <g transform={`translate(${head[0]},${head[1]}) rotate(${168}) scale(${span(ar, 0.82, 1)})`}><path d="M-24,-13 L0,0 L-24,13" /></g>
-          </g>
-        )}
-      </svg>
+      {/* 研究问题文字牌（11-24 R2-03，替换原箭头和手写小字） */}
+      <div style={{position: "absolute", left: 1010 + hx, top: 248 + hy, width: 830, height: 226, borderRadius: 14, opacity: qCard,
+                   transform: `translateY(${(1 - qCard) * 12}px)`,
+                   background: "linear-gradient(180deg,#FBF9F4 0%,#F3EFE6 55%,#E6E0D3 100%)",
+                   boxShadow: "inset 0 2px 0 rgba(255,255,255,0.95), inset 0 -10px 16px rgba(0,0,0,0.06), 0 22px 26px rgba(60,45,20,0.22)"}}>
+        {QL.map(([w, t], i) => {
+          const q = span(f, w.f0 - 4, w.f0 + 6, out);
+          return <div key={i} style={{position: "absolute", left: 0, top: 26 + i * 58, width: 830, textAlign: "center", fontSize: 44, lineHeight: "58px",
+                                      opacity: q, transform: `translateY(${(1 - q) * 12}px)`}}>{t}</div>;
+        })}
+      </div>
 
       {kShow && front && Key}
-      <div style={{position: "absolute", left: kx + 240, top: ky + 170 + settle, width: 320, font: "40px Hand", color: INK, opacity: span(f, W[18].f0, W[18].f0 + 10)}}>
-        a candidate
-      </div>
     </AbsoluteFill>
   );
 };

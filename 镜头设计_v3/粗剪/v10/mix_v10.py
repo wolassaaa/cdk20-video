@@ -39,6 +39,15 @@ TARGET, TOL, CEIL = -14.0, 0.3, -1.5
 LIM_CEIL = -2.1   # 限幅上限：母带要 ≤ −1.5 dBTP，编成 AAC 320k 后还要 ≤ −1.0；试跑 −1.6 上片后 AAC 是 −0.8，所以多留 0.5 dB
 BLK = SR * 60
 
+# 11-24 R2-05（导演检查_20261124/_审查批2.md）：这几段人声按"和前后段同响度 ±1 LU"补增益。
+# 做法：混音前量每段念词时段（manifest 的 first_word_f…last_word_end_f）人声 + 底乐的综合响度（BS.1770，K 加权、门限），
+# 和前后最近的有词段的平均比，差 > VOICE_TOL 就给这段人声补上这个差（只乘人声分轨，段两头 20 ms 线性过渡），限 ±VOICE_MAX。
+# 审查单写的固定值（5-09 +4.5、5-05+5-06 +2.5、6-10 +2.0 dB）是在 rc07 上量的念词时段 RMS；11-24 用同一个 rc07 复量（K 加权综合响度）
+# 三段和前后段的差都在 ±0.6 LU 内，按量的数补（量出来差 ≤ 1 LU 就不加）；要硬加固定值，写进 VOICE_GAIN_FIXED（优先于量的数）。
+VOICE_FIX = ("5-09", "5-05+5-06", "6-10")
+VOICE_GAIN_FIXED = {}          # 例：{"5-09": 4.5}；空 = 全按量的数
+VOICE_TOL, VOICE_MAX, VOICE_RAMP = 1.0, 6.0, SR // 50
+
 
 def man_sig(M):
     rows = [(s["group"], s["frames"], s.get("voice_wav") or "", s["file"] if s["group"] == "EGG" else "") for s in M["segments"]]
@@ -69,14 +78,73 @@ def tp_env(x):
     return np.abs(signal.resample_poly(x, 4, 1, axis=0)).reshape(-1, 4, x.shape[1]).max(axis=(1, 2))[:len(x)]
 
 
+def seg_lufs(fv, fm, a, z):
+    """[a, z) 采样里人声 + 底乐的综合响度（BS.1770 门限）。"""
+    fv.seek(a); fm.seek(a)
+    y = (fv.read(z - a, dtype="float64", always_2d=True) + fm.read(z - a, dtype="float64", always_2d=True))
+    if y.shape[1] == 1:
+        y = np.repeat(y, 2, 1)
+    k = signal.lfilter(SB._KB1, SB._KA1, y, axis=0)
+    k = signal.lfilter(SB._KB2, SB._KA2, k, axis=0)
+    pw = np.pad((k ** 2).sum(1), (0, (-len(k)) % SB.BIN)).reshape(-1, SB.BIN).sum(1)
+    return SB.lufs_bins(pw)
+
+
+def voice_gains(M, fv, fm):
+    """R2-05：VOICE_FIX 里每段的人声增益（dB）和量的数。返回 ([(起采样, 止采样, dB)], info)。"""
+    S, spf = M["segments"], SR // FPS
+    def span(s):
+        if s.get("first_word_f") is None or s.get("last_word_end_f") is None or s["group"] == "EGG" or s["kind"] == "MUSIC":
+            return None
+        return (s["start_f"] + s["first_word_f"]) * spf, (s["start_f"] + s["last_word_end_f"]) * spf
+    out, info = [], {}
+    for i, s in enumerate(S):
+        if s["group"] not in VOICE_FIX:
+            continue
+        sp = span(s)
+        if not sp:
+            continue
+        me = seg_lufs(fv, fm, *sp)
+        nb = []
+        for rng in (range(i - 1, -1, -1), range(i + 1, len(S))):
+            for j in rng:
+                q = span(S[j])
+                if q:
+                    nb.append((S[j]["group"], seg_lufs(fv, fm, *q)))
+                    break
+        ref = float(np.mean([v for _, v in nb])) if nb else me
+        d = ref - me
+        g = VOICE_GAIN_FIXED.get(s["group"], d if abs(d) > VOICE_TOL else 0.0)
+        g = float(np.clip(g, -VOICE_MAX, VOICE_MAX))
+        info[s["group"]] = dict(self_lufs=round(me, 2), neighbours={k: round(v, 2) for k, v in nb}, diff_lu=round(d, 2), gain_db=round(g, 2),
+                                how="固定值" if s["group"] in VOICE_GAIN_FIXED else ("按量的数补齐" if g else f"差 ≤ {VOICE_TOL} LU，不加"))
+        print("人声增益", s["group"], info[s["group"]], flush=True)
+        if abs(g) > 1e-3:
+            out.append((s["start_f"] * spf, (s["start_f"] + s["frames"]) * spf, g))
+    return out, info
+
+
 def mix(M):
     n = M["total_f"] * (SR // FPS)
     fv, fm = sf.SoundFile(str(BED / "voice.wav")), sf.SoundFile(str(BED / "bed_v10.wav"))
     assert fv.frames == n and fm.frames == n, (fv.frames, fm.frames, n)
+    vg, vinfo = voice_gains(M, fv, fm)
+
+    def vgain(a, z):
+        """[a, z) 采样的人声增益包络（段内 dB 值，段两头 VOICE_RAMP 采样线性过渡）。"""
+        g = np.ones(z - a, np.float32)
+        for s0, s1, db in vg:
+            lo, hi = max(a, s0), min(z, s1)
+            if lo >= hi:
+                continue
+            t = np.arange(lo, hi)
+            w = np.minimum(1.0, np.minimum(t - s0 + 1, s1 - t) / VOICE_RAMP)
+            g[lo - a:hi - a] *= (1.0 + (SB.db(db) - 1.0) * w).astype(np.float32)
+        return g[:, None]
 
     def read(a, z):
         fv.seek(a); fm.seek(a)
-        return fv.read(z - a, dtype="float32", always_2d=True) + fm.read(z - a, dtype="float32", always_2d=True)
+        return fv.read(z - a, dtype="float32", always_2d=True) * vgain(a, z) + fm.read(z - a, dtype="float32", always_2d=True)
 
     def kacc(bins, y, zs):
         k, zs[0] = signal.lfilter(SB._KB1, SB._KA1, y, axis=0, zi=zs[0])
@@ -92,7 +160,7 @@ def mix(M):
         p = kacc(bins, read(a, z).astype(np.float64), zs)
         bins[a // SB.BIN:a // SB.BIN + len(p)] += p
     L1 = SB.lufs_bins(bins)
-    info = dict(sum_lufs=round(L1, 2), limiter="4 倍过采样真峰值限幅（synth_bed.tp_limit，前瞻窗 241 采样），不用 pedalboard.Limiter")
+    info = dict(sum_lufs=round(L1, 2), voice_gain=vinfo, limiter="4 倍过采样真峰值限幅（synth_bed.tp_limit，前瞻窗 241 采样），不用 pedalboard.Limiter")
     # 第二遍起：整体增益 → 真峰值限幅（上限 LIM_CEIL）→ 量 → 差 > 0.3 LU 再调一次
     gain_db, ceil = TARGET - L1, LIM_CEIL
     tmp = OUT / "_master_tmp.wav"
