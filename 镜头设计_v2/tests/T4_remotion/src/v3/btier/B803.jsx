@@ -150,13 +150,13 @@ const Scene = () => {
 
         <Layer id="txt" exempt>
           <Pen text="fast" x={1500 + c1} y={610} at={E.fast.l} out={E.pile.s} size={80} />
-          <Pen text="millions" x={330 + c2} y={240} at={E.mil.l} size={80} />
+          <Pen text="millions" x={250 + c2} y={320} at={E.mil.l} size={80} />
           {S.n13 > 0.05 && (
-            <div style={{position: "absolute", left: TRAY.x + 240 + c2, top: TRAY.y - 150}}>
+            <div style={{position: "absolute", left: 1150 + c2, top: TRAY.y + 34}}>
               <Counter value={S.n13} digits={2} size={110} x={0} y={0} />
             </div>
           )}
-          <Label text="molecules made" size={56} x={TRAY.x + 420 + c2} y={TRAY.y - 112} at={E.made.l} />
+          <Label text="molecules made" size={56} x={1290 + c2} y={TRAY.y + 58} at={E.made.l} />
           <Pen text="years" x={1560} y={700} at={E.years.l - 4} size={80} />
           <Label text="round two" size={56} x={860} y={300} at={E.r2.s} align="right" />
           <Source>Illustration · data: Ren et al., Chem. Sci. 2023</Source>

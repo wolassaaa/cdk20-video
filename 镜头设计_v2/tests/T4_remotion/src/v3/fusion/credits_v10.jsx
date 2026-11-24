@@ -60,9 +60,11 @@ const Section = ({sec}) => {
   </div>;
 };
 
-const Title = ({names}) => {
+// R2-14：四个名字统一成同一种写法（每个词首字母大写、其余小写），后面按 W1 名牌同一格式（两个空格）接学号；名字、学号都只从 props 来
+const caseName = (n) => String(n).replace(/[A-Za-z]+/g, (w) => w[0].toUpperCase() + w.slice(1).toLowerCase());
+const Title = ({names, ids}) => {
   const [t, sub, course, section, by, ...ph] = DATA.title;
-  const fill = (s) => s.replace(/\{NAME_([A-D])\}/, (_, m) => names[m] || `Member ${m}`);
+  const fill = (s) => s.replace(/\{NAME_([A-D])\}/, (_, m) => (names[m] ? caseName(names[m]) + (ids && ids[m] ? "  " + ids[m] : "") : `Member ${m}`));
   const line = (s, px, lh, extra = {}) => <div style={{fontSize: px, lineHeight: `${lh}px`, color: INK, whiteSpace: "nowrap", ...extra}}>{s}</div>;
   return <div data-k="title" style={{width: ONEW, marginLeft: (SHEET_W - ONEW) / 2, textAlign: "center"}}>
     {line(t, 96, 104)}
@@ -87,6 +89,7 @@ const AI = () => <div style={{width: ONEW, marginLeft: (SHEET_W - ONEW) / 2, pad
 
 const Sheet = () => {
   const names = (getInputProps() || {}).names || {};
+  const ids = (getInputProps() || {}).ids || {};
   const [h] = React.useState(() => delayRender("measure"));
   useEffect(() => {
     document.fonts.ready.then(() => requestAnimationFrame(() => {
@@ -113,7 +116,7 @@ const Sheet = () => {
   return <AbsoluteFill style={{background: "transparent"}}>
     <div id="w5sheet" style={{position: "absolute", left: 0, top: 0, width: SHEET_W, fontFamily: SERIF, color: INK, fontKerning: "normal", textRendering: "geometricPrecision"}}>
       <div id="w5content">
-        <Title names={names}/>
+        <Title names={names} ids={ids}/>
         {DATA.sections.map((s) => <Section key={s.head} sec={s}/>)}
         <AI/>
       </div>

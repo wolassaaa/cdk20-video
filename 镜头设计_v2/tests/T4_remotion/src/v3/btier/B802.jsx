@@ -12,7 +12,7 @@ import React from "react";
 import {Composition, registerRoot, useCurrentFrame} from "remotion";
 import K from "./keys_8-02.json";
 import {Lens, Layer, guidePlan} from "../manual/kit.jsx";
-import {C, Label, Stage, Sprite, Slab, Runner, Tag, Tick, Engrave, Source, evMapB, whipX, impact, T5In, camBreath} from "./bkit.jsx";
+import {C, SERIF, Label, Stage, Sprite, Slab, Runner, Tag, Tick, Engrave, Source, evMapB, whipX, impact, T5In, camBreath} from "./bkit.jsx";
 import {useGsapTimeline, idle} from "./gsapFrame.jsx";
 
 const E = evMapB(K);
@@ -42,6 +42,7 @@ const Scene = () => {
     X.tw("cand", 0, 1, E.cand.s, E.cand.l + 20, "none");
     X.tw("clear", 0, 1, E.case_in.s, E.case_in.l + 10, "power2.out");
     [0, 1, 2, 3].forEach((k) => X.land(`n${k}`, 0, 1, E.pts.s + 8 * k + 6, {antic: false, dur: 14}));
+    X.tw("zb", 0, 1, 480, 537, "power2.inOut");            // R2-11：帧 0–480 容器 ×2.2，480–537 拉回 ×1
     X.tw("p0", 0, 1, E.panda.s, E.panda.l, "back.out(1.6)");
     X.tw("p1", 0, 1, E.lock_in.s, E.lock_in.l, "power2.out");
     X.tw("grow", 0, 1, E.shape.s, E.shape.l + 10, "power1.inOut");
@@ -74,6 +75,8 @@ const Scene = () => {
     <Lens plan={GP} f={f}>
       <Stage zone={ZONE} f={f} cam={camBreath(f, K, ["s1", "s2", "s3", "s4", "s5", "s6", "s7"], 36)} whip={whip} shakeX={impact(f, E.met.l)} over={<T5In name="runner" f={f} />}>
         <Layer id={["road", "pts", "panda", "af", "chem42", "rank"]}>
+          <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transformOrigin: "190px 700px",
+                       transform: `translate(${(208 * (1 - S.zb)).toFixed(1)}px, ${(-180 * (1 - S.zb)).toFixed(1)}px) scale(${mix(2.2 * (1 + 0.035 * cl(f / 480)), 1, S.zb).toFixed(4)})`}}>
           <Runner d={ROADD} width={60} draw={S.road} />
           {S.find > 0.01 && <div style={{position: "absolute", left: 130, top: ROAD_Y - 10, width: (560 * S.find + 600 * S.assess) * (1 - S.clear * 0), height: 20, borderRadius: 10, background: C.blueHi,
                                          opacity: 0.85 * (1 - 0.6 * S.clear), boxShadow: "0 0 14px rgba(61,107,230,0.8)"}} />}
@@ -110,6 +113,7 @@ const Scene = () => {
           {S.p1 > 0.01 && tuck > 0.01 && <Sprite name="socket/hero_34" x={NODE[1] - 120} y={mix(NODE_Y - 40, POPY + 60, S.p1)} w={130 * tuck} op={cl(S.p1 * 2)} />}
           {S.grow > 0.01 && tuck > 0.01 && <Sprite name="af/front305" x={NODE[1] + 40} y={POPY - 10 + id(6).y} w={280 * tuck} style={{clipPath: `inset(${((1 - S.grow) * 100).toFixed(1)}% 0 0 0)`}} />}
           {S.p2 > 0.01 && tuck > 0.01 && <Sprite name="plug/001_34" x={NODE[2]} y={mix(NODE_Y - 40, POPY + 20, S.p2) - 80 * Math.sin(Math.PI * S.p2) + id(7).y} w={210 * tuck} op={cl(S.p2 * 2)} rot={-10} />}
+          </div>
         </Layer>
         <Layer id={["goal1"]}>
           {S.goal > 0.01 && (
@@ -126,9 +130,14 @@ const Scene = () => {
           )}
         </Layer>
         <Layer id="txt" exempt>
-          <Tag x={1300} y={ROAD_Y + 40} op={cl((f - E.cand.l) / 10) * (1 - S.clear)}>candidates</Tag>
-          <Tag x={200} y={ROAD_Y - 290} op={cl((f - E.sci.s) / (E.sci.l - E.sci.s + 2)) * (1 - S.clear)} on="dish">scientists' lab</Tag>
+          <Tag x={1124} y={520} op={cl((f - E.cand.l) / 10) * (1 - S.clear)}>candidates</Tag>
+          <Tag x={730} y={462} op={cl((f - E.sci.s) / (E.sci.l - E.sci.s + 2)) * (1 - S.clear)} on="dish">scientists' lab</Tag>
           {[[E.data,"target"],[E.shape,"structure"],[E.key,"design"],[E.rank,"ranking"]].map(([e,t],i,a)=>e && <Label key={t} x={NODE[i]} y={NODE_Y+117} text={t} at={e.l} out={a[i+1]?.[0]?.s-9||E.met.s} align="center"/>)}
+          {/* R2-11：研究问题重说一遍（帧 9 / 209 淡入，480 淡出） */}
+          {[["How can computer-aided methods help scientists", 9, 335], ["find and assess cancer drug candidates?", 209, 393]].map(([t, a, y]) => (
+            <div key={a} style={{position: "absolute", left: 760, top: y, padding: "3px 14px 5px", borderRadius: 10, background: "rgba(243,238,230,0.86)", fontFamily: SERIF, fontSize: 40, color: C.ink, whiteSpace: "nowrap", lineHeight: 1.2,
+                                 opacity: cl((f - a) / 12) * (1 - cl((f - 480) / 12)), transform: `translateY(${(12 * (1 - cl((f - a) / 12))).toFixed(1)}px)`}}>{t}</div>
+          ))}
           {f>=E.data.l && <Source>Illustration · the four tools as used in Ren et al., Chem. Sci. 2023</Source>}
         </Layer>
       </Stage>

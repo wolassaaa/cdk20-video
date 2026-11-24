@@ -75,7 +75,7 @@ const Scene = () => {
       <Layer id="txt" exempt>
         {plateIn>0 && f<E.built.s && <Tag x={1360} y={400} op={plateIn}>3 other authors: Univ. of Toronto, Stanford</Tag>}
         <Label text="useful evidence" x={500} y={650} at={E.useful.l} size={44}/>
-        <Pen text="not an independent check" x={1000} y={850} size={56} at={E.notind.l}/>
+        <Pen text="not an independent check" x={1100} y={330} size={56} at={E.notind.l}/>
         <Source>{f<E.authors.l?"Illustration · how we graded our sources":"Illustration · author affiliations as declared in Ren et al., Chem. Sci. 2023"}</Source>
       </Layer>
     </Stage>

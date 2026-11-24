@@ -71,7 +71,7 @@ const Scene = () => {
           </Layer>
           <Layer id="roadtxt" exempt>
             {S.born > 0.01 && <Plate x={X0} y={ROAD_Y+55} w={118} h={62} text="born" size={36} op={Math.min(1,S.born)}/>}
-            <Label text="now" size={52} x={X1 - 110} y={ROAD_Y + 70} at={E.now.l} align="center" />
+            <Label text="now" size={52} x={X1 - 110} y={ROAD_Y + 52} at={E.now.l} align="center" />
           </Layer>
         </div>
 
@@ -109,7 +109,7 @@ const Scene = () => {
         </Layer>
 
         <Layer id="txt" exempt>
-          <Label text="did not reach the market" size={44} x={1020} y={860} at={E.drop.l} align="center" />
+          <Label text="did not reach the market" size={44} x={1020} y={712} at={E.drop.l} align="center" />
           <Label text="tested in people" size={48} x={160} y={ROAD_Y - 400} at={E.people.l} out={E.market.s} align="left" />
           {S.one > 0.05 && (
             <div style={{position: "absolute", left: 820, top: 250, opacity: Math.min(1, S.one * 1.5), display: "flex", alignItems: "baseline", gap: 20}}>

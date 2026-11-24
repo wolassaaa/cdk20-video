@@ -8,7 +8,7 @@ import React from "react";
 import {Composition, registerRoot, useCurrentFrame} from "remotion";
 import K from "./keys_5-10.json";
 import {Lens, Layer, guidePlan} from "../manual/kit.jsx";
-import {C, Calendar1, camBreath, Stage, Sprite, Slab, Gate, Runner, Label, Pen, Source, Counter, Tick, Engrave, pathOf, evMapB, T5In, whipX, shade} from "./bkit.jsx";
+import {C, SERIF, Calendar1, camBreath, Stage, Sprite, Slab, Gate, Runner, Label, Pen, Source, Counter, Tick, Engrave, pathOf, evMapB, T5In, whipX, shade} from "./bkit.jsx";
 import {useGsapTimeline, idle, RULE} from "./gsapFrame.jsx";
 
 const E = evMapB(K);
@@ -212,6 +212,10 @@ const Scene = () => {
           <Label text="half" size={52} x={dishX + GAUGE.dx + GAUGE.w + 32} y={SOLO[1] + GAUGE.top + (GAUGE.h - 24) * 0.5 - 14} at={E.half.l} out={E.hek.s} />
           <Pen text="living-cell signal" x={1060} y={600} at={E.half.e - 70} out={E.hek.s} rot={-2} />
           <Label text="HEK293" x={hekX} y={168} size={56} at={E.hekl.l} align="center" />
+          {/* R2-13：对照细胞是什么 + 保留语 */}
+          <div style={{position: "absolute", left: hekX - 100, top: 186, transform: "translateX(-100%)", fontFamily: SERIF, fontSize: 30, color: C.soft, whiteSpace: "nowrap", opacity: Math.max(0, Math.min(1, (f - 1158) / 10))}}>human kidney-derived cell line</div>
+          <Pen text="one study" x={770} y={410} at={1542} size={56} rot={-3} />
+          <Pen text="cells in a dish" x={770} y={522} at={1556} size={56} rot={-3} />
           {S.n210 > 0.5 && (
             <div style={{position: "absolute", left: BAR_X + S.n210 * NM + 18, top: ROW1 - 18, display: "flex", alignItems: "baseline"}}>
               <Counter value={S.n210} digits={3} size={60} x={0} y={0} />

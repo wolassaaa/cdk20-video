@@ -243,7 +243,7 @@ const Scene = () => {
               <Label text={p.text} x={p.x + p.w / 2} y={PLQ_Y - 53} at={i === 0 ? E.late.l : E.surv.l} align="center" out={E.clear.s} />
             </div>
           ))}
-          <Label text="liver cancer cells" size={56} x={CELL_U[0]} y={118} at={E.cellsL.l} align="center" />
+          <Label text="liver cancer cells" size={56} x={CELL_U[0]} y={182} at={E.cellsL.l} align="center" />
           <Label text="CDK20 level" size={52} x={(BAR.xs[0] + BAR.xs[1]) / 2} y={230} at={E.hi.l} out={E.clear.s} align="center" />
           <Pen text="slowed" x={1530} y={790} at={E.slow.l} size={84} />
           <Source>Illustration · data: Feng et al., J. Clin. Invest. 2011</Source>

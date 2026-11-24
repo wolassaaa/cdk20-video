@@ -327,11 +327,11 @@ export const Source = ({children, op = 1, x = 64, y}) => {
 export const BADGE_PX = 26;
 export const BADGE_RE = /AlphaFold DB|Ren et al\.|Chem\. Sci\.|\bPDB\b|UniProt|ChEMBL/i;
 const textOf = (c) => (typeof c === "string" || typeof c === "number" ? String(c) : Array.isArray(c) ? c.map(textOf).join("") : c && c.props ? textOf(c.props.children) : "");
-export const Tag = ({children, x, y, op = 1, align = "center", on, badge}) => {
+export const Tag = ({children, x, y, op = 1, align = "center", on, badge, size}) => {
   const bd = badge != null ? badge : BADGE_RE.test(textOf(children));
   return (
     <div data-role={bd ? "badge" : "tag"} data-on={on} style={{position: "absolute", left: x, top: y, transform: align === "center" ? "translateX(-50%)" : align === "right" ? "translateX(-100%)" : undefined,
-                 padding: bd ? "2px 9px 3px" : "3px 12px 5px", borderRadius: bd ? 7 : 10, background: "rgba(243,238,230,0.80)", fontFamily: SERIF, fontSize: bd ? BADGE_PX : TAG_PX, letterSpacing: bd ? 0.5 : 1,
+                 padding: bd ? "2px 9px 3px" : "3px 12px 5px", borderRadius: bd ? 7 : 10, background: "rgba(243,238,230,0.80)", fontFamily: SERIF, fontSize: size || (bd ? BADGE_PX : TAG_PX), letterSpacing: bd ? 0.5 : 1,
                  color: C.ink, opacity: (bd ? 0.78 : 0.88) * op, whiteSpace: "nowrap", lineHeight: 1.2}}>{children}</div>
   );
 };

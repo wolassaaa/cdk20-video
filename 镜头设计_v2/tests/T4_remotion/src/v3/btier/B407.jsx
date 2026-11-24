@@ -19,8 +19,9 @@ const ZONE = 4;
 const LOOP = {cx: 820, cy: 450, r: 230};            // 和 B406 一样
 const ST = [["Imagine", -90], ["Make", 0], ["Test", 90], ["Tweak", 180]];
 const CHIP0 = {x: 1290, y: 531, w: 640};
+const CHIPC = {x: 960, y: 500, w: 640};            // R2-10：芯片居中（帧 205–468），w 沿用 640（原图 844，不会糊）
 const CHIP1 = {x: 566, y: 619, w: 640};
-const GRID = [...Array(24)].map((_, i) => ({x: 396 + (i % 6) * 180, y: 236 + Math.floor(i / 6) * 79}));
+const GRID = [...Array(24)].map((_, i) => ({x: 396 + (i % 6) * 180, y: 312 + Math.floor(i / 6) * 62}));   // R2-09：整体下移 40，给 dozens of AI models 标签让出盘面最上一行
 const GR = 24;
 const BASE = {x: 900, y: 800, w: 600, h: 54};
 const SOCK = {x: 1600, y: 470, w: 420};
@@ -36,7 +37,10 @@ const Scene = () => {
     X.land("chip", 0, 1, E.chip.l, {antic: false});
     X.tw("lift", 0, 1, E.takes.s, E.takes.e, "power2.out");
     X.tw("into", 0, 1, E.inside.s, E.inside.e, "power2.inOut");
-    X.tw("plat", 0, 1, E.chip.l, E.plat.l + 30, "power2.inOut");
+    X.tw("cent", 0, 1, 120, 205, "power2.inOut");                 // R2-10：芯片居中放大
+    X.tw("glow", 0, 1, 370, 400, "none");                          // 帧 370（Chemistry42）描亮一次
+    X.tw("plat", 0, 1, 462, 500, "power2.inOut");                 // 468（runs）起芯片挪到左下
+    X.tw("scr", 0, 1, 468, 486, "power2.out");                    // 白牌 468 起从芯片位置弹出
     X.group(GRID.map((_, i) => `g${i}`), 0, 1, E.dozens.l, {step: 2, antic: false});
     X.tw("spin", 0, 1, E.side.s, E.side.l + 20, "power2.inOut");
     X.land("base", 0, 1, E.known.l, {antic: false});
@@ -56,9 +60,10 @@ const Scene = () => {
   const shake = impact(f, E.inside.e);
 
   // 芯片：先在右边，platform 时挪到左下变大
-  const ch = {x: mix(CHIP0.x, CHIP1.x, S.plat), y: mix(CHIP0.y, CHIP1.y, S.plat), w: mix(CHIP0.w, CHIP1.w, S.plat)};
+  const c0 = {x: mix(CHIP0.x, CHIPC.x, S.cent), y: mix(CHIP0.y, CHIPC.y, S.cent), w: mix(CHIP0.w, CHIPC.w, S.cent)};
+  const ch = {x: mix(c0.x, CHIP1.x, S.plat), y: mix(c0.y, CHIP1.y, S.plat), w: mix(c0.w, CHIP1.w, S.plat)};
   // 圆环：被拎起（上移 40、略放大），再缩小飞进芯片
-  const lc = [mix(LOOP.cx, CHIP0.x, S.into), mix(LOOP.cy - 40 * S.lift, CHIP0.y - 20, S.into)];
+  const lc = [mix(LOOP.cx, c0.x, S.into), mix(LOOP.cy - 40 * S.lift, c0.y - 20, S.into)];
   const lr = LOOP.r * (1 + 0.06 * S.lift) * (1 - 0.92 * S.into);
   const ringD = (cx, cy, r) => `M${cx},${cy - r} a${r},${r} 0 1,1 -0.01,0`;
   // 小环转速：side 时起转，go again 时加快
@@ -90,7 +95,8 @@ const Scene = () => {
         </Layer>
 
         <Layer id="grid">
-          {S.plat>.01 && <Slab x={270} y={170} w={1200} h={330} r={22} depth={14} op={S.plat*.91} id="model-screen"/>}
+          {S.scr>.01 && <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transformOrigin: `${ch.x}px ${ch.y}px`, transform: `scale(${(0.2 + 0.8 * S.scr).toFixed(3)})`, opacity: Math.min(1, S.scr * 2)}}>
+            <Slab x={270} y={262} w={1200} h={278} r={22} depth={14} op={.91} id="model-screen"/></div>}
           <svg width={1920} height={1080} style={{position: "absolute", left: 0, top: 0, overflow: "visible"}}>
             {GRID.map((g, i) => {
               const a = S[`g${i}`];
@@ -112,7 +118,7 @@ const Scene = () => {
 
         <Layer id="chip">
           {S.chip > 0.01 && <Sprite name="chip_chemistry42/34" x={ch.x} y={ch.y - 40 * (1 - Math.min(1, S.chip)) + id(1).y} w={ch.w} op={Math.min(1, S.chip * 1.5)}
-                                   rim={S.into > 0.9 && S.into < 1 ? 1 : f > E.inside.e && f < E.inside.e + 20 ? 1 - (f - E.inside.e) / 20 : 0} />}
+                                   rim={Math.max(S.into > 0.9 && S.into < 1 ? 1 : f > E.inside.e && f < E.inside.e + 20 ? 1 - (f - E.inside.e) / 20 : 0, Math.sin(Math.PI * S.glow))} />}
         </Layer>
 
         <Layer id="socket">
@@ -159,8 +165,8 @@ const Scene = () => {
         </Layer>
 
         <Layer id="txt" exempt>
-          <Label text="dozens of AI models" size={52} x={560} y={36} at={E.dozens.l + 20} out={E.invent.s} align="center" />
-          <Label text="fit score" size={52} x={BAR_X + 130} y={110} at={E.score.l} out={E.again.s} align="center" />
+          <Label text="dozens of AI models" size={52} x={560} y={176} at={E.dozens.l + 20} out={E.invent.s} align="center" />
+          <Label text="fit score" size={52} x={BAR_X + BAR_W + 90} y={224} at={E.score.l} out={E.again.s} align="left" />
           {S.maker > 0.01 && <Tag x={BASE.x + BASE.w + 30} y={BASE.y + 10} align="left" op={Math.min(1, S.maker)}>the makers' claim</Tag>}
           <Label text="within hours" size={52} x={1600} y={720} at={E.hours.l} align="center"/>
           <Source>Illustration · data: Ren et al., Chem. Sci. 2023 (Chemistry42)</Source>

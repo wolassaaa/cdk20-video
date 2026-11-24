@@ -104,9 +104,9 @@ const Scene = () => {
             })}
           </Layer>
           <Layer id="names" exempt>
-            <Label text="Nexavar" size={52} x={CAP.x} y={838} at={E.nex.l} out={E.combo.l} align="center" />
-            <Label text="atezolizumab" size={48} x={BAG[0].x - 30} y={822} at={E.atezo.l} out={E.clear.s} align="center" />
-            <Label text="bevacizumab" size={48} x={BAG[1].x + 30} y={822} at={E.beva.l} out={E.clear.s} align="center" />
+            <Label text="Nexavar" size={52} x={1400} y={735} at={E.nex.l} out={E.combo.l} align="left" />
+            <Label text="atezolizumab" size={48} x={780} y={735} at={E.atezo.l} out={E.clear.s} align="center" />
+            <Label text="bevacizumab" size={48} x={BAG[1].x + 30} y={735} at={E.beva.l} out={E.clear.s} align="center" />
           </Layer>
         </div>
 

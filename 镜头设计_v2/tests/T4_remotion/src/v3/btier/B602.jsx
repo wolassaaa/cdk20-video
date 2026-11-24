@@ -132,7 +132,7 @@ const Scene = () => {
                 <Tag x={XS.x} y={690} op={cl(rig * 2)}>X-rays</Tag>
                 <Tag x={DISH.x} y={690} op={cl(rig * 2)}>crystals</Tag>
                 <Tag x={DET.x + DET.w / 2} y={690} op={cl(rig * 2)}>pattern</Tag>
-                <Tag x={DET.x + DET.w / 2} y={DET.y - 118 - 70} op={cl(S.lab * 3 - 2) * cl(popB * 3 - 2)} on="det">e.g. X-ray crystallography</Tag>
+                <Tag x={430} y={376} align="left" size={40} op={cl(S.lab * 3 - 2) * cl(popB * 3 - 2)} on="det">e.g. X-ray crystallography</Tag>
               </div>
             )}
             {/* NOW：数据库机架 + 数据珠 + 从下往上长出来的蓝色预测模型 */}

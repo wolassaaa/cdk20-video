@@ -99,7 +99,9 @@ def content_top(P, f):
 def cmd_sheet(a):
     sys.path.insert(0, str(ROOT / "镜头设计_v3/inserts"))
     import title_names
-    names = {m: v["name"] for m, v in title_names.load_members(draft=a.draft, verbose=False).items()}   # 只在内存里
+    _mem = title_names.load_members(draft=a.draft, verbose=False)
+    names = {m: v["name"] for m, v in _mem.items()}   # 只在内存里
+    ids = {m: v["id"] for m, v in _mem.items() if v.get("id")}   # R2-14：学号照 W1 名牌格式接在名字后面，同样只在内存里
     print("names loaded:", len(names), "(draft placeholders allowed)" if a.draft else "", flush=True)
     pub = WORK / "pub/fonts"
     pub.mkdir(parents=True, exist_ok=True)
@@ -110,8 +112,8 @@ def cmd_sheet(a):
     tmp.mkdir(parents=True, exist_ok=True)
     env = dict(os.environ, TEMP=str(tmp), TMP=str(tmp))
     out = WORK / "sheet.png"
-    props = json.dumps({"names": names}, ensure_ascii=False)
-    secrets = [n for n in names.values() if not n.startswith("Member ")]
+    props = json.dumps({"names": names, "ids": ids}, ensure_ascii=False)
+    secrets = [n for n in names.values() if not n.startswith("Member ")] + list(ids.values())
     cmd = ["node", "node_modules/@remotion/cli/remotion-cli.js", "still", "src/v3/fusion/credits_v10.jsx", "W5RollSheet", str(out),
            "--image-format=png", "--gl=angle", "--log=verbose", "--public-dir=" + str(WORK / "pub"), "--bundle-cache=false", "--props=" + props]
     r = subprocess.run(cmd, cwd=RM, env=env, capture_output=True)

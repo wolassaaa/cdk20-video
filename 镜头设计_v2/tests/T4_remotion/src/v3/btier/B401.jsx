@@ -74,7 +74,9 @@ const Scene = () => {
     X.tw("left", 0, 1, E.some.s, E.some.e, "power2.out");
     // s2
     X.land("chip1", 0, 1, E.ai.l, {antic: false});
-    X.land("sock", 0, 1, E.guess.l, {antic: false});
+    // R2-02：开头就放那只虚化的蓝锁（居中、呼吸），"AI" 时移到右边现在的位置
+    X.tw("sockIn", 0, 1, 32, 46, "power2.out");
+    X.tw("sockMv", 0, 1, E.ai.l, E.ai.l + 58, "power2.inOut");
     // s3
     X.tw("clear1", 0, 1, E.prot.s - 4, E.prot.e, "power1.in");
     X.tw("chain", 0, 1, E.chain.s, E.chain.s + 2 * N + 8, "none");
@@ -165,10 +167,14 @@ const Scene = () => {
             {S.chip1 > 0.01 && <Sprite name="chip_alphafold/34" x={CHIP1.x} y={CHIP1.y - 50 * (1 - Math.min(1, S.chip1)) + id(5).y} w={CHIP1.w} op={Math.min(1, S.chip1 * 1.5)} rot={id(5).r} />}
           </Layer>
           <Layer id="sock">
-            {S.sock > 0.01 && <Sprite name="socket/hero_face" x={SOCK.x} y={SOCK.y - 50 * (1 - Math.min(1, S.sock)) + id(6).y} w={SOCK.w} op={Math.min(1, S.sock * 1.5)} style={frost(0.9)} />}
+            {S.sockIn > 0.01 && (() => {
+              const mv = sm(S.sockMv), br = 1 + 0.04 * 0.5 * (1 - Math.cos((2 * Math.PI * f) / 200)) * (1 - mv);
+              const sw = mix(625, SOCK.w, mv) * br;
+              return <Sprite name="socket/hero_face" x={mix(960, SOCK.x, mv)} y={mix(470, SOCK.y, mv) - 30 * (1 - Math.min(1, S.sockIn)) + id(6).y} w={sw} op={Math.min(1, S.sockIn * 1.5)} style={frost(0.9)} />;
+            })()}
           </Layer>
           <Layer id="txt1" exempt>
-            <Pen text="science fiction" x={1000} y={300} at={E.scifi.s} out={E.ai.s} size={92} />
+            <Pen text="science fiction" x={300} y={250} at={E.scifi.s} out={E.ai.s} size={56} />
             <Pen text="?" x={SOCK.x + 150} y={SOCK.y - 330} at={E.guess.l} dur={26} size={190} color={C.red} rot={6} />
           </Layer>
         </div>

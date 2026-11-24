@@ -87,8 +87,10 @@ const Scene = () => {
           <div style={{position: "absolute", left: 0, top: 0, opacity: cl(S.plate * 2), transform: `translateY(${(-80 * (1 - S.plate)).toFixed(1)}px)`}}>
             <Plate x={70} y={60} w={110} h={110} text="2" size={80} color={C.bone} id="step2" />
           </div>
-          <Label text="predicted model (AlphaFold DB v6)" size={40} x={AF.x} y={AF.y + 250} at={E.aflbl.l} out={E.once.s} align="center" on="af" />
-          <Tag x={AF.x} y={AF.y + 250} op={(f>=(K.words.find(w=>w.key==="structure#1")?.f0??E.once.l)?1:0) * (1 - S.shift)} on="af">lab-measured structure</Tag>
+          {/* R2-06：predicted 在模型左侧（右对齐，离模型 24 px），lab-measured 在模型右侧（左对齐，离模型 24 px），两块框不相交 */}
+          <Label text="predicted model" size={60} x={AF.x - AF.w / 2 - 24} y={AF.y + 190} at={E.aflbl.l} out={E.once.s} align="right" on="af" />
+          <Tag x={AF.x - AF.w / 2 - 24} y={AF.y + 266} align="right" op={cl((f - E.aflbl.l) / 10) * cl(1 - (f - E.once.s) / 10)} on="af">AlphaFold DB v6</Tag>
+          <Tag x={AF.x + AF.w / 2 + 24} y={AF.y + 190} align="left" op={(f>=(K.words.find(w=>w.key==="structure#1")?.f0??E.once.l)?1:0) * (1 - cl(S.shift * 4))} on="af">lab-measured structure</Tag>
           <Pen text="not measured yet" x={AF.x + 230} y={250} at={E.q.s} out={E.shift.s} rot={-3} />
           <Pen text="failures too" x={660} y={660} at={E.fail.l} out={E.loop.s} rot={-3} />
           <Tag x={CHIP.x + 10} y={CHIP.y + 170} op={cl((f - E.loop.l) / 10)} on="chip">next round</Tag>

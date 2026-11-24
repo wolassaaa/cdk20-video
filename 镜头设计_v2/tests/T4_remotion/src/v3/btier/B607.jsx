@@ -13,7 +13,7 @@ import React from "react";
 import {Composition, registerRoot, useCurrentFrame} from "remotion";
 import K from "./keys_6-07.json";
 import {Lens, Layer, guidePlan} from "../manual/kit.jsx";
-import {C, shade, Stage, Sprite, Slab, Tag, Counter, Engrave, Source, evMapB, whipX, impact} from "./bkit.jsx";
+import {C, shade, Stage, Sprite, Slab, Plate, Tag, Counter, Engrave, Source, evMapB, whipX, impact} from "./bkit.jsx";
 import {useGsapTimeline, idle} from "./gsapFrame.jsx";
 import {Board6, FOCUS, DimUp, cell, SlotDeco} from "./board6.jsx";
 
@@ -69,6 +69,7 @@ const Scene = () => {
     X.jiggle("tj", E.tight.l, 7, 0);
     X.tw("backN", 0, 1, E.tight.l + 6, E.tight.l + 32, "power2.inOut");
     X.tw("wide", 0, 1, E.tight.l + 14, LEN - 2, "power2.inOut");
+    X.tw("lift90", 0, 1, 0, 30, "power2.out");      // R2-08：推近期间整张表上移 110 px（实测 90 时 THE KEY 下沿 880，要 ≤ 860），THE KEY 牌不进出处行（886–928）
   });
   const F0 = CB;                 // 接 6-06 结尾的机位（第 3 行 NOW，弹出台在行上面）
   const drift = 0.04 * (f / LEN);
@@ -105,7 +106,8 @@ const Scene = () => {
   const bar = (len, y, name, col) => (
     <div style={{position: "absolute", left: 0, top: 0, opacity: cl(S.bars * 2) * popN}}>
       <div style={{position: "absolute", left: BAR.x - 12, top: y - 2, transform: "translateX(-100%)"}}><Engrave size={30} light>{name}</Engrave></div>
-      <div style={{position: "absolute", left: BAR.x + len * BAR.u + 10, top: y - 2}}><Engrave size={30} light>{len < 1.5 ? "1×" : `${Math.round(len)}×`}</Engrave></div>
+      {len < 1.5 ? <div style={{position: "absolute", left: BAR.x + len * BAR.u + 10, top: y - 2}}><Engrave size={30} light>1×</Engrave></div>
+        : <Plate x={BAR.x + len * BAR.u + 10} y={y - 18} w={112} h={60} r={10} depth={6} size={44} text={`${Math.round(len)}×`} id="x15plate" />}
       <div style={{position: "absolute", left: BAR.x, top: y, width: 15 * BAR.u, height: 26, borderRadius: 6, background: "rgba(255,255,255,0.08)", boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.14)"}} />
       <div style={{position: "absolute", left: BAR.x, top: y, width: len * BAR.u, height: 26, borderRadius: 6, background: col, boxShadow: "0 3px 4px rgba(0,0,0,0.45), inset 0 3px 3px rgba(255,255,255,0.45)"}} />
       {[...Array(16)].map((_, k) => <div key={k} style={{position: "absolute", left: BAR.x + k * BAR.u - 1, top: y + 26, width: 2, height: k % 5 === 0 ? 10 : 5, background: "rgba(255,255,255,0.4)"}} />)}
@@ -115,6 +117,7 @@ const Scene = () => {
     <Lens plan={GP} f={f}>
       <Stage zone={ZONE} f={f} whip={whip} shakeX={impact(f, E.tight.l)}>
         <Layer id={["board", "loop4", "now4", "fan16", "ruler15"]}>
+          <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `translateY(${(-110 * S.lift90 * (1 - S.wide)).toFixed(2)}px)`}}>
           <Board6 f={f} cam={cam} cols={1} hideB={cl((S.pan - 0.15) / 0.35)} hdr={{B: E.bef.l, N: E.now.l}}
                   rows={[true, true, true, {name: E.row4.l, B: E.rnd.l, Bs: [], N: E.des.l, Ns: [w15.f0]}]}
                   lit={{"3B": cl((f - E.focus4.s) / 12) * (1 - S.pan) * (popB > 0.5 ? 0 : 1), "3N": S.pan * (popN > 0.5 ? 0 : 1) * (1 - S.wide)}}>
@@ -148,6 +151,7 @@ const Scene = () => {
             )}
             {S.backN > 0.01 && <SlotDeco i={3} side="N" op={S.backN} />}
           </Board6>
+          </div>
         </Layer>
         <Layer id="txt" exempt>
           {f>=(wf("lab#1")?.f0??E.rnd.s) && <Source>{f < E.now.s ? "Illustration · the design–make–test–change cycle" : "Illustration · numbers from Ren et al., Chem. Sci. 2023"}</Source>}

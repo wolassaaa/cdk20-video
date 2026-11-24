@@ -35,6 +35,7 @@ const CAM = {A: 760, B: 2230, C: 3560, all: 2910};
 // 世界放大：路在屏幕 y 720，平时 1.6 倍（初版 1 倍件太小、上半屏空），authors 时拉远到 0.75 倍看全路
 const ZN = 1.6, ZA = 0.76, ROAD_SY = 720;
 
+const WB = K.words.find((w) => w.key === "body#1").f0, WW = K.words.find((w) => w.key === "what#1").f0;
 const Scene = () => {
   const f = useCurrentFrame();
   const S = useGsapTimeline((tl, S, X) => {
@@ -55,7 +56,9 @@ const Scene = () => {
     X.tw("dc", 0, 1, E.dishes.s, E.dishes.l + 18, "none");
     X.tw("dn", 0, 1, E.norm.s, E.norm.l + 10, "power2.out");
     X.tw("mouse", 0, 1, E.mouse.s, E.mouse.l, "power2.out");
-    X.tw("cards", 0, 1, E.chk.s, E.chk.l + 8, "power3.out");
+    // R2-12：两张卡各自带着内容一起落下，落下前不显示（ADME 在 "body" 732，selectivity 在 "what" 817）
+    X.tw("cardA", 0, 1, WB, WB + 13, "power3.out");
+    X.tw("cardB", 0, 1, WW, WW + 13, "power3.out");
     X.tw("c1", 0, 1, E.adme.s, E.adme.l, "power2.inOut");
     X.tw("c2", 0, 1, E.sel.s, E.sel.l, "power2.inOut");
     X.jiggle("cj", E.hits.l, 6, 0);
@@ -96,7 +99,7 @@ const Scene = () => {
   ));
   const card = (k, p, body, title) => {
     const c = CARD(k);
-    const rise = S.cards;
+    const rise = k === 0 ? S.cardA : S.cardB;
     if (rise < 0.01) return null;
     const flip = Math.abs(Math.cos(Math.PI * p));        // 翻牌：宽度 1 → 0 → 1，过半换成正面
     const front = p >= 0.5;
@@ -127,11 +130,11 @@ const Scene = () => {
             <Tag x={(DN(0).x + DN(1).x) / 2} y={ROAD_Y + 34} op={cl((f - E.dish_l.l) / 10) * tagOp}>normal liver cells</Tag>
             {/* 站 3：小鼠 + 两块检查牌 */}
             {S.mouse > 0.01 && <Sprite name="mouse/34" x={mix(MOUSE.x - 300, MOUSE.x, S.mouse)} y={MOUSE.y + id(6).y - 10 * Math.abs(Math.sin(S.mouse * Math.PI * 4))} w={MOUSE.w} op={cl(S.mouse * 3)} />}
-            {card(0,S.c1,S.c1>=.5&&<>
+            {card(0,1,<>
               <Sprite name="liver/34" x={CARD(0).w/2} y={174} w={174}/>
               <svg width={260} height={260} style={{position:"absolute",inset:0}}><path d="M92 185 Q101 138 136 148 T154 194 Q115 218 92 185" fill="none" stroke={C.red} strokeWidth={4} pathLength={1} strokeDasharray="1" strokeDashoffset={1-cl((f-(K.words.find(w=>w.key==="handles#1")?.f0??E.adme.l))/26)} /></svg>
             </>,"ADME")}
-            {card(1, S.c2, S.c2 >= 0.5 && [0, 1, 2].map((k) => (
+            {card(1, 1, [0, 1, 2].map((k) => (
               <Sprite key={k} name="socket/hero_34" x={50 + k * 54} y={190+(k%2)*22-(k===1?10*Math.max(0,1-Math.abs(f-E.hits.l)/13):0)} rim={k===2&&f>=E.hits.l?.85:0} w={66} shadow={false} style={k === 2 ? undefined : {filter: "grayscale(1) brightness(1.1)"}} />
             )), "selectivity")}
             {S.mouse > 0.01 && <Tag x={MOUSE.x} y={MOUSE.y + 79} op={cl(S.mouse * 3) * tagOp}>animals</Tag>}

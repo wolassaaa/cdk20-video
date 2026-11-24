@@ -8,7 +8,7 @@ import React from "react";
 import {Composition, registerRoot, useCurrentFrame} from "remotion";
 import K from "./keys_5-08.json";
 import {Lens, Layer, guidePlan} from "../manual/kit.jsx";
-import {C, Tag, camBreath, Stage, Sprite, Slab, Gate, Runner, Label, Pen, Source, Counter, Engrave, Dial, Lamp, anchorOf, pathOf, evMapB, T5Out, whipX, impact} from "./bkit.jsx";
+import {C, SERIF, Tag, camBreath, Stage, Sprite, Slab, Gate, Runner, Label, Pen, Source, Counter, Engrave, Dial, Lamp, anchorOf, pathOf, evMapB, T5Out, whipX, impact} from "./bkit.jsx";
 import {useGsapTimeline, idle, RULE} from "./gsapFrame.jsx";
 
 const E = evMapB(K);
@@ -206,6 +206,8 @@ const Scene = () => {
             <div style={{position: "absolute", left: xv(Math.log10(33.4)) + 24, top: DOSE.y2 - 16}}>
               <Counter value={S.n334} digits={2} decimals={1} size={84} x={0} y={0} />
               <div style={{position: "absolute", left: 3 * 42 + 20, top: 24}}><Engrave size={52}>nM</Engrave></div>
+              {/* R2-13：论文摘要 IC50 = 33.4 ± 22.6 nM (n = 3)，已对 Ren2023 正文核过 */}
+              <div style={{position: "absolute", left: 3 * 42 + 20 + 92, top: 38, fontFamily: SERIF, fontSize: 30, color: C.soft, whiteSpace: "nowrap", opacity: Math.max(0, Math.min(1, (f - 963) / 10))}}>± 22.6</div>
             </div>
           )}
           <Source>Illustration · data: Ren et al., Chem. Sci. 2023</Source>
