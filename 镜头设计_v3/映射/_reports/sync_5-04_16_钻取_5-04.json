@@ -26,7 +26,7 @@
   "dup_frames": 0,
   "stepped_dups": 0,
   "stepped_ratio": 0.0,
-  "blend_frames": 32,
+  "blend_frames": 31,
   "blend_first": [
    253,
    254,
@@ -49,7 +49,7 @@
    271,
    291
   ],
-  "design_fade": 17,
+  "design_fade": 18,
   "verdict": "有混帧（变速慢放）"
  },
  "sentences": [

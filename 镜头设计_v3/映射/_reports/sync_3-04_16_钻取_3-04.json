@@ -21,26 +21,19 @@
   "bad": []
  },
  "S4": {
-  "pass_": false,
-  "looks_like_30": true,
+  "pass_": true,
+  "looks_like_30": false,
   "dup_frames": 0,
   "stepped_dups": 0,
   "stepped_ratio": 0.0,
-  "blend_frames": 21,
+  "blend_frames": 13,
   "blend_first": [
    349,
    510,
    513,
-   522,
    523,
-   526,
-   527,
    538,
-   545,
-   550,
-   551,
-   557,
-   558,
+   543,
    743,
    795,
    796,
@@ -422,5 +415,5 @@
    "video_motion_near_start": true
   }
  ],
- "pass": false
+ "pass": true
 }

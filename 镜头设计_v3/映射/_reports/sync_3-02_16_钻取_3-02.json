@@ -17,7 +17,7 @@
  },
  "S3": {
   "pass_": true,
-  "longest_still_f": 2,
+  "longest_still_f": 4,
   "bad": []
  },
  "S4": {
@@ -53,7 +53,7 @@
    "f1": 761,
    "last_motion_f": 761,
    "end_dev": 0,
-   "longest_still_f": 2,
+   "longest_still_f": 4,
    "s2": true,
    "s3": true
   }

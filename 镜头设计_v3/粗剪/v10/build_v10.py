@@ -878,7 +878,7 @@ def piece_luma(g, pc, gains):
         finish(vp, pc["a"], mp, n, dict(src=pc["meta"].get("src"), base=Path(pc["v"]).name))
     lo = [float(x) for x in gains if abs(float(x) - 1.0) > 1e-4]
     return dict(v=vp, a=pc["a"], meta=json.loads(mp.read_text(encoding="utf-8")),
-                note=list(pc["note"]) + [f"亮度系数：{len(lo)} 帧不是 1（接点匹配 + 出镜段首尾下限），范围 {min(lo):.3f}–{max(lo):.3f}"])
+                note=list(pc["note"]) + ([f"亮度系数：{len(lo)} 帧不是 1（接点匹配 + 出镜段首尾下限），范围 {min(lo):.3f}–{max(lo):.3f}"] if lo else ["亮度系数：全是 1（无需调整）"]))
 
 
 # ---------------------------------------------------------------- 主体

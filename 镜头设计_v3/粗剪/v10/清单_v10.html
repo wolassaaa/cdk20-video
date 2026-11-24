@@ -2,11 +2,10 @@
 table{border-collapse:collapse;margin:12px 0}td,th{border:1px solid #ccc;padding:6px 10px}th{background:#f2f2f2}
 code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1px solid #ddd;padding-bottom:4px}a{color:#0a58ca}</style><h1>v10 整片清单</h1>
 <p>HKBU SCIE1007 课程作业的科普视频。v10：把各段成片按总表顺序接起来（1080p60），接点照 19 的 6.3 叠装配擦除层和章首光扫，段内画面没改，没烧字幕。
-出片：<code>G:/cdk20/work/v10/rc/v10_rc07.mp4</code>，2026-11-24 06:44（韩国时间）；全长 <strong>19:41.27</strong>（70876 帧）；声音：整片混音 G:/cdk20/work/audio/v10/master_v10.wav；用时 97 秒。
+出片：<code>G:/cdk20/work/v10/rc/v10_rc08_mix.mp4</code>，2026-11-24 13:17（韩国时间）；全长 <strong>19:41.27</strong>（70876 帧）；声音：整片混音 G:/cdk20/work/audio/v10/master_v10.wav；用时 118 秒。
 段序和“总表”帧数：<code>映射/master_v2.json</code>（W0 168、W1 1010 照 17 的 1.2 改；5-04 1510 照 18 的 A5 接长，11-23）。“差”= 实际 − 总表。</p>
 <p><strong>时长门槛</strong>（19 的 7.3，≤ 19:55.0 = 71700 帧）：过，余 824 帧（13.73 秒）。</p>
-<p>机检：有不过的项，见 <code>导演检查_20261123/_机检_v10.md</code>。
-- F5 冻帧 ≥ 0.5 s（freezedetect −60 dB，逐段量；逐处帧号见 json）：W2 1 处共 1.1 s（最长 1.1 s，片内 06:45.78 起）；EGG 5 处共 8.1 s（最长 5.6 s，片内 17:42.30 起）（要求 没有（W1、W5、彩蛋里片名和 AI 使用说明的停留除外，要看图确认））</p>
+<p>机检：全过，见 <code>导演检查_20261123/_机检_v10.md</code>。</p>
 <p>状态统计：新 28、v9 4、B 模板重渲 34、简版 5。</p>
 <table>
 <thead>
@@ -58,7 +57,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>1036</td>
 <td>1036</td>
 <td>+0</td>
-<td>头 17 帧叠接点擦除层（退场半段）；尾 17 帧叠接点擦除层（入场半段）；亮度系数：104 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.811–0.997；v9 去字幕版，出处行移出字幕区（18 的 C1、C2）</td>
+<td>头 17 帧叠接点擦除层（退场半段）；尾 17 帧叠接点擦除层（入场半段）；亮度系数：104 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.811–1.266；v9 去字幕版，出处行移出字幕区（18 的 C1、C2）</td>
 </tr>
 <tr>
 <td>4</td>
@@ -94,7 +93,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>596</td>
 <td>596</td>
 <td>+0</td>
-<td></td>
+<td>亮度系数：2 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.745–0.862</td>
 </tr>
 <tr>
 <td>7</td>
@@ -106,7 +105,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>930</td>
 <td>930</td>
 <td>+0</td>
-<td>亮度系数：52 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.963–0.998</td>
+<td>亮度系数：52 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.964–0.998</td>
 </tr>
 <tr>
 <td>8</td>
@@ -118,7 +117,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>1458</td>
 <td>1458</td>
 <td>+0</td>
-<td>头 17 帧叠接点擦除层（退场半段）；尾 17 帧叠接点擦除层（入场半段）；v9 去字幕版，出处行移出字幕区（18 的 C1、C2）</td>
+<td>头 17 帧叠接点擦除层（退场半段）；尾 17 帧叠接点擦除层（入场半段）；亮度系数：2 帧不是 1（接点匹配 + 出镜段首尾下限），范围 1.069–1.119；v9 去字幕版，出处行移出字幕区（18 的 C1、C2）</td>
 </tr>
 <tr>
 <td>9</td>
@@ -130,7 +129,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>838</td>
 <td>838</td>
 <td>+0</td>
-<td>头 17 帧叠接点擦除层（退场半段）；尾 17 帧叠接点擦除层（入场半段）；v9 去字幕版，出处行移出字幕区（18 的 C1、C2）</td>
+<td>头 17 帧叠接点擦除层（退场半段）；尾 17 帧叠接点擦除层（入场半段）；亮度系数：3 帧不是 1（接点匹配 + 出镜段首尾下限），范围 1.022–1.107；v9 去字幕版，出处行移出字幕区（18 的 C1、C2）</td>
 </tr>
 <tr>
 <td>10</td>
@@ -190,7 +189,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>344</td>
 <td>344</td>
 <td>+0</td>
-<td>头 17 帧叠接点擦除层（退场半段）；尾 17 帧叠接点擦除层（入场半段）；亮度系数：104 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.905–0.997；v9 去字幕版，出处行移出字幕区（18 的 C1、C2）</td>
+<td>头 17 帧叠接点擦除层（退场半段）；尾 17 帧叠接点擦除层（入场半段）；亮度系数：104 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.938–0.998；v9 去字幕版，出处行移出字幕区（18 的 C1、C2）</td>
 </tr>
 <tr>
 <td>15</td>
@@ -238,7 +237,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>1665</td>
 <td>1665</td>
 <td>+0</td>
-<td>亮度系数：52 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.958–0.998</td>
+<td>亮度系数：52 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.953–0.998</td>
 </tr>
 <tr>
 <td>19</td>
@@ -298,7 +297,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>1030</td>
 <td>1030</td>
 <td>+0</td>
-<td></td>
+<td>亮度系数：2 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.851–0.954</td>
 </tr>
 <tr>
 <td>24</td>
@@ -310,7 +309,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>1138</td>
 <td>1138</td>
 <td>+0</td>
-<td></td>
+<td>亮度系数：1 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.959–0.959</td>
 </tr>
 <tr>
 <td>25</td>
@@ -322,7 +321,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>694</td>
 <td>694</td>
 <td>+0</td>
-<td>亮度系数：7 帧不是 1（接点匹配 + 出镜段首尾下限），范围 1.003–1.013</td>
+<td>亮度系数：11 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.784–1.051</td>
 </tr>
 <tr>
 <td>26</td>
@@ -334,7 +333,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>1288</td>
 <td>1288</td>
 <td>+0</td>
-<td></td>
+<td>亮度系数：1 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.990–0.990</td>
 </tr>
 <tr>
 <td>27</td>
@@ -346,7 +345,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>1150</td>
 <td>1150</td>
 <td>+0</td>
-<td></td>
+<td>亮度系数：全是 1（无需调整）</td>
 </tr>
 <tr>
 <td>28</td>
@@ -358,19 +357,19 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>340</td>
 <td>340</td>
 <td>+0</td>
-<td>亮度系数：19 帧不是 1（接点匹配 + 出镜段首尾下限），范围 1.007–1.065</td>
+<td>亮度系数：20 帧不是 1（接点匹配 + 出镜段首尾下限），范围 1.007–1.109</td>
 </tr>
 <tr>
 <td>29</td>
 <td>W2</td>
 <td>A</td>
 <td>06:44.92</td>
-<td><code>导演检查_20261123/24_W2_加工.mp4</code></td>
+<td><code>导演检查_20261124/03_W2_重做.mp4</code></td>
 <td>新</td>
 <td>1500</td>
 <td>1500</td>
 <td>+0</td>
-<td>头 17 帧叠接点擦除层（退场半段）；尾 17 帧叠接点擦除层（入场半段）；亮度系数：52 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.679–0.987</td>
+<td>头 17 帧叠接点擦除层（退场半段）；尾 17 帧叠接点擦除层（入场半段）；亮度系数：53 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.789–0.991；11-24 W2 重做，1500 帧</td>
 </tr>
 <tr>
 <td>30</td>
@@ -382,7 +381,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>1591</td>
 <td>1591</td>
 <td>+0</td>
-<td>头 16 帧章首 T6 光扫</td>
+<td>头 16 帧章首 T6 光扫；亮度系数：1 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.949–0.949</td>
 </tr>
 <tr>
 <td>31</td>
@@ -406,7 +405,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>1010</td>
 <td>1011</td>
 <td>-1</td>
-<td></td>
+<td>亮度系数：全是 1（无需调整）</td>
 </tr>
 <tr>
 <td>33</td>
@@ -418,7 +417,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>474</td>
 <td>474</td>
 <td>+0</td>
-<td>亮度系数：14 帧不是 1（接点匹配 + 出镜段首尾下限），范围 1.005–1.089</td>
+<td>亮度系数：19 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.755–1.089</td>
 </tr>
 <tr>
 <td>34</td>
@@ -442,7 +441,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>1437</td>
 <td>1437</td>
 <td>+0</td>
-<td></td>
+<td>亮度系数：全是 1（无需调整）</td>
 </tr>
 <tr>
 <td>36</td>
@@ -454,7 +453,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>520</td>
 <td>520</td>
 <td>+0</td>
-<td></td>
+<td>亮度系数：5 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.768–0.980</td>
 </tr>
 <tr>
 <td>37</td>
@@ -466,19 +465,19 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>1014</td>
 <td>1015</td>
 <td>-1</td>
-<td></td>
+<td>亮度系数：全是 1（无需调整）</td>
 </tr>
 <tr>
 <td>38</td>
 <td>W3</td>
 <td>A</td>
 <td>09:24.77</td>
-<td><code>导演检查_20261123/24_W3_加工.mp4</code></td>
+<td><code>导演检查_20261124/04_W3_重做.mp4</code></td>
 <td>新</td>
 <td>900</td>
 <td>900</td>
 <td>+0</td>
-<td>头 17 帧叠接点擦除层（退场半段）；尾 17 帧叠接点擦除层（入场半段）</td>
+<td>头 17 帧叠接点擦除层（退场半段）；尾 17 帧叠接点擦除层（入场半段）；11-24 W3 重做，900 帧</td>
 </tr>
 <tr>
 <td>39</td>
@@ -490,7 +489,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>1373</td>
 <td>1373</td>
 <td>+0</td>
-<td></td>
+<td>亮度系数：52 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.853–0.994</td>
 </tr>
 <tr>
 <td>40</td>
@@ -502,7 +501,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>640</td>
 <td>640</td>
 <td>+0</td>
-<td></td>
+<td>亮度系数：2 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.798–0.951</td>
 </tr>
 <tr>
 <td>41</td>
@@ -514,7 +513,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>1139</td>
 <td>1139</td>
 <td>+0</td>
-<td></td>
+<td>亮度系数：全是 1（无需调整）</td>
 </tr>
 <tr>
 <td>42</td>
@@ -526,7 +525,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>416</td>
 <td>416</td>
 <td>+0</td>
-<td></td>
+<td>亮度系数：1 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.932–0.932</td>
 </tr>
 <tr>
 <td>43</td>
@@ -538,7 +537,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>996</td>
 <td>997</td>
 <td>-1</td>
-<td>亮度系数：52 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.960–0.998</td>
+<td>亮度系数：53 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.900–0.998</td>
 </tr>
 <tr>
 <td>44</td>
@@ -550,7 +549,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>1510</td>
 <td>1510</td>
 <td>+0</td>
-<td></td>
+<td>亮度系数：全是 1（无需调整）</td>
 </tr>
 <tr>
 <td>45</td>
@@ -562,7 +561,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>512</td>
 <td>512</td>
 <td>+0</td>
-<td>亮度系数：8 帧不是 1（接点匹配 + 出镜段首尾下限），范围 1.014–1.168</td>
+<td>亮度系数：12 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.749–1.168</td>
 </tr>
 <tr>
 <td>46</td>
@@ -586,7 +585,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>1085</td>
 <td>1085</td>
 <td>+0</td>
-<td></td>
+<td>亮度系数：全是 1（无需调整）</td>
 </tr>
 <tr>
 <td>48</td>
@@ -598,7 +597,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>216</td>
 <td>216</td>
 <td>+0</td>
-<td>亮度系数：31 帧不是 1（接点匹配 + 出镜段首尾下限），范围 1.003–1.246</td>
+<td>亮度系数：35 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.786–1.246</td>
 </tr>
 <tr>
 <td>49</td>
@@ -610,7 +609,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>472</td>
 <td>472</td>
 <td>+0</td>
-<td>尾 17 帧叠接点擦除层（入场半段）；亮度系数：47 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.870–0.995</td>
+<td>尾 17 帧叠接点擦除层（入场半段）；亮度系数：48 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.873–0.995</td>
 </tr>
 <tr>
 <td>50</td>
@@ -622,7 +621,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>1652</td>
 <td>1652</td>
 <td>+0</td>
-<td></td>
+<td>亮度系数：1 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.959–0.959</td>
 </tr>
 <tr>
 <td>51</td>
@@ -658,7 +657,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>895</td>
 <td>896</td>
 <td>-1</td>
-<td></td>
+<td>亮度系数：全是 1（无需调整）</td>
 </tr>
 <tr>
 <td>54</td>
@@ -670,7 +669,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>568</td>
 <td>568</td>
 <td>+0</td>
-<td></td>
+<td>亮度系数：2 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.819–0.984</td>
 </tr>
 <tr>
 <td>55</td>
@@ -682,7 +681,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>694</td>
 <td>694</td>
 <td>+0</td>
-<td></td>
+<td>亮度系数：44 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.958–1.109</td>
 </tr>
 <tr>
 <td>56</td>
@@ -766,7 +765,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>320</td>
 <td>320</td>
 <td>+0</td>
-<td>头 16 帧章首 T6 光扫</td>
+<td>头 16 帧章首 T6 光扫；亮度系数：2 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.793–0.904</td>
 </tr>
 <tr>
 <td>63</td>
@@ -778,7 +777,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>1069</td>
 <td>1069</td>
 <td>+0</td>
-<td></td>
+<td>亮度系数：全是 1（无需调整）</td>
 </tr>
 <tr>
 <td>64</td>
@@ -790,7 +789,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>691</td>
 <td>692</td>
 <td>-1</td>
-<td>亮度系数：43 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.953–0.998</td>
+<td>亮度系数：43 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.945–0.998</td>
 </tr>
 <tr>
 <td>65</td>
@@ -802,7 +801,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>778</td>
 <td>778</td>
 <td>+0</td>
-<td></td>
+<td>亮度系数：全是 1（无需调整）</td>
 </tr>
 <tr>
 <td>66</td>
@@ -814,7 +813,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>194</td>
 <td>194</td>
 <td>+0</td>
-<td>头 16 帧章首 T6 光扫</td>
+<td>头 16 帧章首 T6 光扫；亮度系数：4 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.767–0.960</td>
 </tr>
 <tr>
 <td>67</td>
@@ -826,7 +825,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>1338</td>
 <td>1338</td>
 <td>+0</td>
-<td></td>
+<td>亮度系数：全是 1（无需调整）</td>
 </tr>
 <tr>
 <td>68</td>
@@ -838,7 +837,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>1070</td>
 <td>1070</td>
 <td>+0</td>
-<td></td>
+<td>亮度系数：全是 1（无需调整）</td>
 </tr>
 <tr>
 <td>69</td>
@@ -850,7 +849,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>1960</td>
 <td>1960</td>
 <td>+0</td>
-<td></td>
+<td>亮度系数：2 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.852–0.980</td>
 </tr>
 <tr>
 <td>70</td>
@@ -862,7 +861,7 @@ code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1p
 <td>1857</td>
 <td>1980</td>
 <td>-123</td>
-<td>头 17 帧叠接点擦除层（退场半段）；亮度系数：52 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.925–0.997；11-23 片尾滚动字幕（审查批 1 rc02 ②：不再用 11-20 的无字幕背景）</td>
+<td>头 17 帧叠接点擦除层（退场半段）；亮度系数：52 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.931–0.997；11-23 片尾滚动字幕（审查批 1 rc02 ②：不再用 11-20 的无字幕背景）</td>
 </tr>
 <tr>
 <td>71</td>

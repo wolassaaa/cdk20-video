@@ -26,15 +26,10 @@
   "dup_frames": 0,
   "stepped_dups": 0,
   "stepped_ratio": 0.0,
-  "blend_frames": 4,
-  "blend_first": [
-   597,
-   599,
-   600,
-   602
-  ],
+  "blend_frames": 0,
+  "blend_first": [],
   "design_fade": 0,
-  "verdict": "有混帧（变速慢放）"
+  "verdict": "原生（无变速重复/混帧）"
  },
  "sentences": [
   {

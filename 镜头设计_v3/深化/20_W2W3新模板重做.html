@@ -1,0 +1,1191 @@
+<!doctype html><meta charset="utf-8"><title>20_W2W3新模板重做</title><style>body{font-family:"Microsoft YaHei",sans-serif;max-width:900px;margin:24px auto;padding:0 16px;line-height:1.7;color:#222;background:#fff}
+table{border-collapse:collapse;margin:12px 0}td,th{border:1px solid #ccc;padding:6px 10px}th{background:#f2f2f2}
+code{background:#f3f3f3;padding:1px 4px;border-radius:3px}h1,h2{border-bottom:1px solid #ddd;padding-bottom:4px}a{color:#0a58ca}</style><h1>20 W2、W3 按新模板重做（定稿，给建模和 Blender 施工）</h1>
+<p>HKBU SCIE1007 课程作业的科普视频（15–20 分钟英文科普片，讲已发表论文 Ren et al. 2023 的公开案例；不是科研，不做实验、不设计分子，画面只是示意）。这一步把两段音乐段 W2、W3 换到全片的新世界里重做：画面在亮面拼装大板上，CDK20 是克莱因蓝插座，论文里的化合物是金色假插头。本文只写设计，不施工。写于 2026-11-24 10:15（韩国时间，下同），总管。</p>
+<p>导演看完 rc07 的原话："其实没有什么太大的问题了。现在把之前的两个场景重建了吧，把场景弄得更符合我们的需求一点。"对应打磨清单 D6、D7。本文取代 <code>18_剩余画面设计定稿.md</code> 2.6 节"只加工不重做"那一条；18 号文档其余规矩（1.1–1.8 的世界、亮度、镜头、灯、材质、字、转场）照旧适用，冲突时以本文为准。</p>
+<p>施工方先加载项目技能 <code>word-synced-animation</code>、<code>drill-3d</code>、<code>beat-retime</code>，再读本文。本文写死的数，施工方照做，不再回头问设计问题；做不到的写进 review.json，附实测数和改法。</p>
+<hr />
+<h2>一、两段一句话</h2>
+<table>
+<thead>
+<tr>
+<th>段</th>
+<th>新版讲什么</th>
+<th>和旧版一样的</th>
+<th>换掉的</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>W2</strong>（1500 帧，HBFS）</td>
+<td>大板上 AlphaFold 芯片沿料杆送出一股料，把格子里那个看不清的磨砂 CDK20 化成一团熔融亮面塑料；它跳起来在空中一拍一变地"猜"形状，越变越慢、越来越蓝，第 28 拍咔一声定成蓝色 CDK20 插座；红色尾巴冒出来，插座像湿狗一样甩，把红尾巴甩进隔壁格子，红尾巴收成一圈红线，插座落回自己的格子；最后镜头钻进插孔，接 4-01</td>
+<td>歌和押韵字幕的词、位置、字体、落拍一个不动；动作节奏全照 v9 第 4 版：第 4 拍跳起、每拍一变、第 28 拍定形、第 29 拍尾巴变红、第 32 拍化液、第 33 拍蓄力、第 34 拍起每个八分音符甩一下、第 39¼ 拍甩飞、第 40 拍摔下、第 41–42 拍收成线、第 40–44 拍本体落回格子、最后慢推两个格子</td>
+<td>白凹格台面 → 拼装大板（料杆、格子、浇口）；黑色液团 → 暖灰熔融亮面塑料，冷却成克莱因蓝；定形后的蓝色蛋白团 → h01b 蓝色插座（外形就是同一个 AlphaFold 包络，多了红环插孔）；台面上的蓝药丸、红框格、虚线轮廓全部去掉；开头 2 秒空格子换成"AlphaFold 芯片送料"；结尾从"停住"换成"钻进插孔"转场</td>
+</tr>
+<tr>
+<td><strong>W3</strong>（900 帧，Take My Breath）</td>
+<td>蓝色插座从格子上拔起、浮起，孔口一圈软唇张开；旁边料杆上长出一根注料嘴，一拍长出一个金色假插头，每个都不一样；它沿孔轴凑到孔口，软唇朝它鼓起、把它轻轻推回，它缩回注料嘴，换下一个形状，越来越密；第 24 拍最后一个形状对上了，摆正、拔下浇口，无缝插到底，第 28 拍咔一声坐实，软唇卷上去包住凸缘（融合），镜头推到金色柄面，接 4-10</td>
+<td>九次靠近的拍点照 K 版：第 6、9、12、14、16、18、19.5、21、22.5 拍；第 1 小节锁浮起、口张开；第 24 拍两边定下来；第 26–28 拍插进去；第 28 拍起融合；"每把钥匙都不同"、"软推回，不碰"、"无缝进入再融合"、"只有一个口"、没有拨盘</td>
+<td>暗铬锁 → h01b 蓝色插座；液态金属钥匙 → 金色假插头（h02b 的 seed 变体，每把针型和柄形都不同），"液体"的感觉改由注料嘴的长出/缩回和孔口软唇的鼓起、波纹来带；锁口不再变形（口袋形状是 4-09 里给定的，变的是钥匙）；融合时的蓝光改成落位冲击加软唇包边（18 的 1.4：自发光只给亮灯这类内容）</td>
+</tr>
+</tbody>
+</table>
+<p>两段都不出现：拨盘（lock-dial、表盘）、药丸、销子锁、人形纸卡、<code>ROUGH CUT</code> 角标、中文。</p>
+<hr />
+<h2>二、时间基准（两段通用）</h2>
+<h3>2.1 拍点和帧</h3>
+<p>歌不动，帧数不动（W2 1500 帧、W3 900 帧，60 fps 原生）。音轨原样取自 <code>导演检查_20261123/24_W2_加工.mp4</code>、<code>24_W3_加工.mp4</code>（<code>-c:a copy</code>）。</p>
+<table>
+<thead>
+<tr>
+<th>段</th>
+<th>歌</th>
+<th>第 0 帧对歌的</th>
+<th>BPM</th>
+<th>一拍</th>
+<th>实测底鼓偏移 grid_fix</th>
+<th>第 b 拍落在段内第几帧</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>W2</td>
+<td>Harder, Better, Faster, Stronger</td>
+<td>50.446 s</td>
+<td>123.477</td>
+<td>0.48592 s = 29.155 帧</td>
+<td><strong>+0.083 s</strong>（19 号文档量的 50.529 s；我 11-24 用 40–120 Hz 起音复量 +0.088 s）</td>
+<td><code>f = round(60 × (0.083 + 0.48592 × b))</code></td>
+</tr>
+<tr>
+<td>W3</td>
+<td>Take My Breath</td>
+<td>207.711 s</td>
+<td>120.998</td>
+<td>0.49588 s = 29.753 帧</td>
+<td><strong>+0.079 s</strong>（11-24 同法复量）</td>
+<td><code>f = round(60 × (0.079 + 0.49588 × b))</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>施工前写两张卡点表，格式照 <code>音乐/卡点/W4_Sacrifice.json</code>：<code>音乐/卡点/W2_HBFS.json</code>、<code>音乐/卡点/W3_TakeMyBreath.json</code>（<code>song</code>、<code>file</code>、<code>bpm</code>、<code>grid_fix_s</code>、<code>song_t_at_beat: [0, 50.446]</code> 或 <code>[0, 207.711]</code>、<code>nbeats</code>、<code>beats</code> 字典）。<code>grid_fix_s</code> 先用上表的数，施工方用 <code>check_w0w1</code> 的 T7b 方法（6–11 kHz 起音）再量一次，差 &gt; 10 ms 就改成实测值，下表所有帧号跟着变（配方里帧号全从表算，不手写）。</li>
+<li>配方 <code>drill_W2.py</code>、<code>drill_W3.py</code> 照 <code>drill_W4.py</code> 写 <code>make_keys()</code>：每个事件挂一个拍号，<code>f_land = f(拍)</code>。</li>
+<li>下文分镜表里的帧号就是按上表公式算的。</li>
+</ul>
+<h3>2.2 押韵字幕（只 W2）</h3>
+<ul>
+<li>词、位置、字体、字号、颜色、浮动全部照 <code>entry.jsx</code> 的 <code>W2_PHRASES</code>、<code>W2Phrase</code> 不动：第 1 句 <code>Guess it, squeeze it, twist it, turn it</code> 在第 4、6、8、10 拍；第 2 句 <code>Slower, calmer, firmer, bluer.</code> 在第 21、23、25、27 拍；第 3 句 <code>Not sure? Shake it! Keep the core.</code> 在第 36、38、40、42 拍。</li>
+<li><strong>我定的一处改动</strong>：字幕的时间原点加 <code>t0 = 0.083 s</code>（同 grid_fix）。理由：旧版字幕和旧画面都按第 0 帧起算，实际比底鼓早约 5 帧，导演看的时候两者一起早所以没察觉；这次画面按真拍落，字幕不跟着挪就会比画面早 5 帧，过不了 ≤ 2 帧的机检。改法可退回：组件参数 <code>t0</code> 设 0 就是原样。</li>
+<li>字幕框的位置（1080p，机检用）：第 1 句 x 700–1680、y 772–842，可见帧 110–373；第 2 句 x 160–760、y 848–918，可见帧 605–868；第 3 句 x 1050–1830、y 168–238，可见帧 1043–1306。这三个框在各自可见期间里，关键物件（液团、插座、尾巴、红线）的投影外接框离框 ≥ 20 px。</li>
+</ul>
+<hr />
+<h2>三、W2 逐拍分镜（1500 帧）</h2>
+<h3>3.1 场景和物件位置</h3>
+<p>大板 <code>G:/cdk20/work/kit/board_final.blend</code>，三格（坐标是按 <code>kit_parts.ZONES</code> 算的格子中心，毫米，板面 z = 30；施工时以 blend 里 <code>cell.matrix_world</code> 实测为准）：</p>
+<table>
+<thead>
+<tr>
+<th>格</th>
+<th>原来放的</th>
+<th>W2 里</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>z3_c4_r0</code>（CDK20 的家，约 (−165, 123)）</td>
+<td><code>p19_cdk20</code></td>
+<td>藏掉 p19；格子空着，浇口按插座躺平位姿用 <code>SD.make_gates</code> 重建三根（尖头碰到第 44 拍落下来的插座外壳），整段都在</td>
+</tr>
+<tr>
+<td><code>z3_c5_r0</code>（约 (−99, 123)）</td>
+<td><code>p29_cdk20_unknown</code>（磨砂 CDK20，<code>K.frost</code>）</td>
+<td>开头就是它：看不清的锁。第 4 拍化成液团跳走后，这一格空着；第 40 拍红尾巴穿过这一格的框，摔在框下面的台面上</td>
+</tr>
+<tr>
+<td><code>z4_c6_r2</code>（约 (−25, 31)）</td>
+<td><code>p13_chip("AlphaFold")</code></td>
+<td>开头的送料起点，刻字 <code>AlphaFold</code> 第 0.5–1.8 拍可读</td>
+</tr>
+</tbody>
+</table>
+<p>这一段藏掉不许出现的件：<code>p21_lock</code>（z3_c4_r2）、<code>p22_key</code>（z3_c4_r3）、全部 <code>p38_dial</code>、全部 <code>p08_capsule</code>（<code>SD.hide_tree</code>，格子框留着）。</p>
+<p>插座的两个位姿直接用 5-04、W4 验过的：浮着 = <code>drill_504</code> 的 <code>S = 0.7</code>、<code>BC</code>、<code>FACE</code>、<code>H_FLOAT = 30</code>（插孔朝前偏上，正对镜头一侧）；躺平 = <code>drill_W4</code> 的 <code>q_lie</code>（孔口朝上，落在 z3_c4_r0 中心）。</p>
+<h3>3.2 分镜表</h3>
+<p>拍号对应帧照 2.1 公式。机位写法：目标点（世界毫米）、距离、方位（0° = 从正前方 −Y 看过来，正值 = 镜头在右）、俯角、等效焦距、光圈（8 mm 传感器的数，照 drill-3d 技能）。相邻键之间照引擎的球坐标插值，静止 ≤ 30 帧。</p>
+<table>
+<thead>
+<tr>
+<th>拍</th>
+<th>帧</th>
+<th>物件动作</th>
+<th>镜头</th>
+<th>押韵字幕</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>进场</td>
+<td>0–16</td>
+<td>（拼片时叠 <code>bwipe/runner</code> 第 17–33 帧，见第六节）</td>
+<td>键 A：目标 (−62, 77, 38)，距 190，方位 +28°，俯 32°，35 mm，f/4；焦点在磨砂 CDK20</td>
+<td>—</td>
+</tr>
+<tr>
+<td>0</td>
+<td>5</td>
+<td>磨砂 CDK20 躺在 z3_c5_r0 格子里，焦点在它身上；前景右下 AlphaFold 芯片虚着</td>
+<td>键 A 起缓推（整段 0–4 拍推近 25%）</td>
+<td>—</td>
+</tr>
+<tr>
+<td>0.5–1.8</td>
+<td>20–57</td>
+<td>焦点点名到芯片（词前 8 帧那条规矩换成拍前 8 帧：第 0.5 拍焦点到位）；芯片浇口预颤 6 帧；第 1 拍一个骨白鼓包从芯片的浇口出发</td>
+<td>焦点拉到芯片，刻字 <code>AlphaFold</code> 屏上字高 ≥ 30 px、弥散圆 ≤ 1 px</td>
+<td>—</td>
+</tr>
+<tr>
+<td>1–3.2</td>
+<td>34–98</td>
+<td>鼓包沿料杆走：芯片格 → 上一格（z4_c6_r1）的格框 → z4_c6_r0 的格框 → 两区之间的短连杆 → z3_c5_r0 的格框，约 110 mm，匀速后段放慢；鼓包用 <code>bl_guide.py</code> 里 1-09、W4 用过的走料鼓包</td>
+<td>焦点跟着鼓包走（focus_bake 逐帧对鼓包中心）；镜头向左上转，跟到 z3_c5_r0</td>
+<td>—</td>
+</tr>
+<tr>
+<td>3.2–3.8</td>
+<td>98–116</td>
+<td>鼓包被磨砂 CDK20 的浇口"吃"进去；磨砂壳表面起波纹（磨砂材质到熔料材质 6 帧交叉），整个往下压扁到 0.85（预备）</td>
+<td>键 B：目标 C5 上方 10 mm，距 120，方位 +18°，俯 30°，f/5</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td><strong>122</strong></td>
+<td>液团跳起（"Guess it,"）：从格子里弹出，浇口三根一起断（<code>SD.break_gates</code>，断口留骨白疤），带过冲往上飞</td>
+<td>镜头抬起跟着它</td>
+<td>第 1 句出现，<code>Guess it,</code> 上墨</td>
+</tr>
+<tr>
+<td>4–6</td>
+<td>122–180</td>
+<td>飞到最高点 (−105, 118, 72)，到顶时第一次变形</td>
+<td>键 C：目标液团中心，距 110，方位 +12°，俯 16°，45 mm，f/6；液团在画面上半，中心 y ≈ 400</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>6</strong></td>
+<td><strong>180</strong></td>
+<td>"squeeze it"：沿竖直方向挤到 0.72、横向胀开，再弹回</td>
+<td>每个变形拍落位时镜头微震 2 帧（≤ 0.2°）</td>
+<td><code>squeeze it,</code></td>
+</tr>
+<tr>
+<td><strong>8</strong></td>
+<td><strong>238</strong></td>
+<td>"twist it"：绕竖轴拧 35°（上半拧、下半不拧，扭转变形）</td>
+<td>镜头开始慢绕（4–20 拍共绕 20°，方位 +12° → −8°）</td>
+<td><code>twist it,</code></td>
+</tr>
+<tr>
+<td><strong>10</strong></td>
+<td><strong>297</strong></td>
+<td>"turn it"：整团翻 90°</td>
+<td></td>
+<td><code>turn it</code></td>
+</tr>
+<tr>
+<td>4–20</td>
+<td>122–588</td>
+<td>每拍换一个新的"猜测"形状，每半拍抽动一下（见 3.3 液团的写法）；整团慢慢翻滚；颜色从第 12 拍起由暖灰往克莱因蓝走</td>
+<td>液团显示高 520–640 px</td>
+<td>第 12 拍后两拍第 1 句淡出</td>
+</tr>
+<tr>
+<td>12–28</td>
+<td>355–821</td>
+<td>液团从 z3_c5_r0 上方慢慢往左飘到 z3_c4_r0 上方，第 27.5 拍到浮着的位姿（<code>drill_504</code> 的位置和朝向，插孔朝镜头）；第 20 拍起变形幅度逐拍减小</td>
+<td>键 D（第 20 拍）：目标液团，距 105，方位 −8°，俯 18°，45 mm，f/6；第 20–29 拍液团在画面中间偏右（中心 x 1050–1250），给左下的第 2 句让位</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>21</strong></td>
+<td><strong>617</strong></td>
+<td>"Slower"：变形幅度降到 0.6</td>
+<td></td>
+<td><code>Slower,</code></td>
+</tr>
+<tr>
+<td><strong>23</strong></td>
+<td><strong>676</strong></td>
+<td>"calmer"：幅度 0.4，抽动停</td>
+<td></td>
+<td><code>calmer,</code></td>
+</tr>
+<tr>
+<td><strong>25</strong></td>
+<td><strong>734</strong></td>
+<td>"firmer"：幅度 0.2，表面的熔融平滑度降到 0（凹凸变清楚）</td>
+<td></td>
+<td><code>firmer,</code></td>
+</tr>
+<tr>
+<td><strong>27</strong></td>
+<td><strong>792</strong></td>
+<td>"bluer"：颜色到 <code>#002FA7</code></td>
+<td></td>
+<td><code>bluer.</code>（克莱因蓝）</td>
+</tr>
+<tr>
+<td><strong>28</strong></td>
+<td><strong>821</strong></td>
+<td><strong>定形</strong>：液团和插座外壳重合，同一帧换成 h01b 插座（盖合上、红环插孔、灯照 rest），T7 落位冲击：镜头震 2 帧 ≤ 0.3°</td>
+<td>小推近 6%，第 28–33 拍</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>29</strong></td>
+<td><strong>850</strong></td>
+<td>红尾巴出现：沿 AlphaFold 模型 303–346 号残基的走向，一根红色亮面软管趴在插座表面（横过孔口一带），每半拍在三个"猜测"位置之间跳一下</td>
+<td>焦点点名到尾巴（拍前 8 帧到位）</td>
+<td>第 29 拍后两拍第 2 句淡出</td>
+</tr>
+<tr>
+<td><strong>32</strong></td>
+<td><strong>938</strong></td>
+<td>尾巴化成红色液体：管径 1.0 → 1.6 mm，表面起伏，根部仍连在 302 号残基的位置</td>
+<td></td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>33</strong></td>
+<td><strong>967</strong></td>
+<td>插座蓄力：绕竖轴反拧 −25°（预备）</td>
+<td>键 E（第 33 拍起）：目标 z3_c4_r0 与 z3_c5_r0 中点上方 15 mm，距 165，方位 +20°，俯 38°，35 mm，f/7；两格都在画里，插座在画面左中，z3_c5_r0 在右下，透过它的框看得见下面的台面</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>34–39</strong></td>
+<td><strong>996–1142</strong></td>
+<td>湿狗甩：插座绕竖轴来回甩，每个八分音符甩到一头（半拍一个来回的一半），幅度 ±32°；红液体被甩得往外拉长，根部跟着转、尾端滞后（弹簧链）</td>
+<td>镜头不动轴，只极轻手持感</td>
+<td><code>Not sure?</code>（36，帧 1055）、<code>Shake it!</code>（38，帧 1113）</td>
+</tr>
+<tr>
+<td><strong>39¼</strong></td>
+<td><strong>1149</strong></td>
+<td>甩飞：红液体从根部脱开，尖头在前，沿平滑弧线往右飞，越过 z3_c5_r0 的格框，从框里穿下去</td>
+<td>弧线最高点在画面上 y ≥ 300（不进第 3 句的字框）</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>40</strong></td>
+<td><strong>1171</strong></td>
+<td>摔下：落在 z3_c5_r0 框下面的台面上（板面下方 30 mm），12 帧摊成一片</td>
+<td>甩停：插座的甩动在 40.5 拍前回正（settle）</td>
+<td><code>Keep the</code></td>
+</tr>
+<tr>
+<td>40–44</td>
+<td>1171–1288</td>
+<td>插座从浮着的位姿往下落，同时从朝前转成躺平（<code>q_up</code> → <code>q_lie</code>），离板面 14 mm 前转完，最后 14 mm 竖直落下</td>
+<td></td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>41–42</strong></td>
+<td><strong>1200–1229</strong></td>
+<td>红液体收拢成一圈扁平的红线圈（阿基米德螺线 2.5 圈，半径 2.5 → 9 mm，管半径 1.2 mm），静在台面上</td>
+<td></td>
+<td><code>core.</code>（42，帧 1229，红色斜体）</td>
+</tr>
+<tr>
+<td><strong>44</strong></td>
+<td><strong>1288</strong></td>
+<td>插座落进 z3_c4_r0：外壳碰到三根浇口尖，咔（T7，镜头震 2 帧 ≤ 0.3°），浇口抖一下</td>
+<td>第 44–48 拍慢推近两个格子 8%</td>
+<td>第 44 拍后两拍第 3 句淡出</td>
+</tr>
+<tr>
+<td><strong>48</strong></td>
+<td><strong>1404</strong></td>
+<td>（歌从这条小节线起淡出，见 19 号文档）</td>
+<td>镜头升到插座正上方，转成俯 85° 对准插孔（插座躺着，孔口朝上）</td>
+<td>—</td>
+</tr>
+<tr>
+<td>48–51.25</td>
+<td>1404–1499</td>
+<td>不动</td>
+<td>沿孔轴往下钻进插孔：第 50.7 拍（帧 1483）起孔桶骨白内壁盖满画面 ≥ 90%；转场灯（见第五节）帧 1460 起开；f/14</td>
+<td>—</td>
+</tr>
+<tr>
+<td>出场</td>
+<td>1483–1499</td>
+<td>（拼片时叠 <code>bwipe/socket_bore</code> 第 0–16 帧，见第六节）</td>
+<td></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>出处行：整段一行，右对齐到 x 1856，上沿 886、下沿 928，30 px（沿用 v10 的 <code>SrcLine align="right"</code>，因为左下是第 2 句字幕），第 18 帧（0.3 s）起 0.5 s 淡入，到段尾不变：</p>
+<p><code>Illustration · the motion is drawn · final shape: predicted model (AlphaFold DB v6)</code></p>
+<h3>3.3 液团、尾巴、红线怎么做（施工方在配方里程序化，不交给 Codex）</h3>
+<p><strong>液团</strong> <code>w2_blob</code>：</p>
+<ul>
+<li>底网格：h01b 插座两半外壳（rest、盖合上、浮着位姿的局部坐标）合成一个网格，体素重建 0.6 mm（插座单位，≈ 2–3 万顶点），孔口的孔照留。液团的"静止形状"就是插座外壳，所以第 28 拍换成插座时轮廓误差 ≤ 0.3 mm。</li>
+<li>每帧顶点 = 静止形状 + 熔化平滑 + 猜测变形，逐帧在 build 里用 numpy 算好，写成 <code>G:/cdk20/work/drill/W2/blob.pc2</code>，Blender 里挂 Mesh Cache 修改器回放（拓扑不变，Cycles 的变形运动模糊照常）：</li>
+<li>猜测变形：8 个猜测，第 k 个 = 三层 <code>A · sin(k·v + φ)</code> 叠加，<code>random.default_rng(40 + k)</code>（和旧版同种子），<code>k</code> 各分量 0.14–0.36 /mm，<code>A = 4.5 mm</code>（插座单位）。每拍换下一个猜测：从拍点起 0.6 拍内 smootherstep 过渡；每半拍再叠一次 0.25 倍的抽动。</li>
+<li>熔化平滑：Taubin 平滑（λ 0.5、μ −0.53）40 遍的结果，按"熔化度"混进去。</li>
+<li>幅度和熔化度随拍：第 4–12 拍幅度 1.0、熔化度 1.0；第 12–20 拍幅度 1.0 → 0.7；第 21、23、25、27 拍幅度依次 0.6、0.4、0.2、0.05；第 28 拍 0。熔化度第 20 拍起从 1 降到第 25 拍的 0。</li>
+<li>整团的位置、朝向：第 4 拍跳起（预备压扁 0.85、6 帧；起跳过冲 8%），之后每小节绕一根随机轴翻 0.25 圈，第 20 拍起用球面插值收向浮着位姿的朝向，第 27.5 拍到位、误差 0。</li>
+<li>材质 <code>w2_melt</code>（配方里建，颜色只取 18 号 1.5 表）：底色从 <code>#9A968C</code>（灰）按第 12–27 拍的进度混到 <code>#002FA7</code>；粗糙度 0.06、清漆 1.0；不透明、不发光。开头磨砂壳到熔料：<code>K.frost</code> 到 <code>w2_melt</code> 6 帧交叉（帧 98–116）。</li>
+</ul>
+<p><strong>红尾巴</strong> <code>w2_tail</code>（一根管，全段同一个网格，形状全写进 <code>tail.pc2</code>）：</p>
+<ul>
+<li>路径：AlphaFold 模型 303–346 号残基的 CA 坐标（<code>G:/cdk20/work/structures/AF-Q8IZL9-F1-model_v6.pdb</code>），用 kit_socket 把 <code>cdk20.npz</code> 变成外壳的同一个变换（旋转、缩放、平移）转到插座局部；每点沿最近的外壳法线往外推到管面离壳 ≥ 0.3 mm。44 个节点，每节点一圈 16 个顶点，管半径 1.0 mm，<code>K.red</code>（<code>#C8102E</code>）亮面。</li>
+<li>三个猜测位置：路径加平滑随机偏移 ≤ 3 mm（种子 60、61、62），同样推到壳外。</li>
+<li>化液、甩、飞、摔、收线：节点链用 numpy 逐帧模拟（根节点钉在插座上随插座转，链节弹簧 + 阻尼，甩的时候尾端滞后）；第 39¼ 拍根节点放开，整条按抛物线飞，尖头先走；第 40 拍落地后 12 帧摊成扁片（管截面竖向压到 0.3、横向放到 2.2）；第 41–42 拍沿螺线收成红线圈。每帧查管和插座、格框、台面不相交（台面接触 ≤ 0.05 mm 允许）。</li>
+</ul>
+<hr />
+<h2>四、W3 逐拍分镜（900 帧）</h2>
+<h3>4.1 场景和物件位置</h3>
+<p>同一块大板，z3_c4_r0 是插座的家（开场时插座躺在里面，接得上 W2 的结尾）。藏掉：<code>p29_cdk20_unknown</code>（z3_c5_r0，连浇口；这一格空框）、<code>p21_lock</code>、<code>p22_key</code>、全部 <code>p38_dial</code>、<code>p08_capsule</code>。</p>
+<ul>
+<li>插座浮着的位姿（W3 专用）：插座中心在 z3_c4_r0 上方 34 mm；插孔轴 W 水平，指向世界 (0.906, −0.423, 0)（朝右并朝镜头一侧转 25°）。</li>
+<li>注料嘴：新件 <code>h22_nozzle_runner</code>（5.2 节），根部长在 z3_c4_r0 和 z3_c5_r0 之间那根短连杆的中点（约 (−132, 123, 30)），嘴尖落在插孔轴上、离触点面 56.5 mm（插座单位；世界里约 39.6 mm），嘴朝向沿 −W（对着孔口）。施工方按这两个点给 <code>rise</code>、<code>reach</code> 和绕 Z 的转角。</li>
+<li>孔口软唇：新件 <code>h21_mouth_lip</code>（5.1 节），挂在插座根上，跟插座走。</li>
+<li>插头：9 个不合的 <code>h02b_plug(K, seed=n)</code>，施工方从 n = 301 起往上试，取前 9 个"柄形 + 针型组合"互不相同的；最后一个合的用 <code>h02b_plug(K, "048")</code>，<strong>把柄面的刻字物体藏掉</strong>（W3 还没讲到 048，画面不出现编号）。全部 <code>scale</code> 和插座一样是 0.7（挂在插座下）。</li>
+</ul>
+<h3>4.2 分镜表</h3>
+<table>
+<thead>
+<tr>
+<th>拍</th>
+<th>帧</th>
+<th>物件动作</th>
+<th>镜头</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>进场</td>
+<td>0–16</td>
+<td>（拼片时叠 <code>bwipe/runner</code> 第 17–33 帧）</td>
+<td>键 A：目标 z3_c4_r0 与 z3_c5_r0 中点上方 12 mm，距 175，方位 +24°，俯 34°，35 mm，f/5；焦点在插座</td>
+</tr>
+<tr>
+<td>0–1</td>
+<td>5–34</td>
+<td>插座躺在格子里；第 0.8 拍浇口预颤 6 帧</td>
+<td>缓推起（第 0.5–4 拍推到键 B）</td>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td><strong>34</strong></td>
+<td>插座从浇口上拔下（<code>SD.break_gates</code>，T7 轻震），往上浮，同时转到 W3 浮着位姿</td>
+<td></td>
+</tr>
+<tr>
+<td>1–3</td>
+<td>34–94</td>
+<td>注料嘴从短连杆上长出来（沿管长的 <code>run_u</code> 属性做显现，0 → 1）</td>
+<td></td>
+</tr>
+<tr>
+<td>1.6–3.2</td>
+<td>52–100</td>
+<td>孔口软唇从合拢（<code>bulge</code> = 1，口只剩 Ø8）张开到静止（<code>bulge</code> = 0）——旧版"锁口打开"</td>
+<td></td>
+</tr>
+<tr>
+<td>2.5</td>
+<td>79</td>
+<td>插座到浮着位姿，之后极慢漂（±0.25 mm，周期 160 帧）</td>
+<td></td>
+</tr>
+<tr>
+<td>3.2–4</td>
+<td>100–124</td>
+<td>一个金色鼓包沿注料嘴的料杆往上走到嘴尖</td>
+<td>键 B（第 4 拍）：目标 = 孔口和嘴尖的中点，距 95，方位 +32°（看得到孔口正面和软唇的鼓起），俯 20°，50 mm，f/6；插座显示高 ≥ 500 px，在画面左半，嘴尖在右边 x ≈ 1650</td>
+</tr>
+<tr>
+<td>4–5</td>
+<td>124–154</td>
+<td>第 1 个插头从嘴尖"长"出来：从柄后面往针尖逐段显现（着色器沿插头轴的切面），金色</td>
+<td>第 4–24 拍镜头横移 6 mm、绕 4°，连续慢动（不静止）</td>
+</tr>
+<tr>
+<td>5–6</td>
+<td>154–183</td>
+<td>插头离开嘴尖沿孔轴凑向孔口，越近越慢（指数 2.4）；软唇的 <code>bulge</code> 跟着它涨</td>
+<td>焦点钉在孔口（等候的东西都在景深里，f/6 覆盖）</td>
+</tr>
+<tr>
+<td><strong>6</strong></td>
+<td><strong>183</strong></td>
+<td>第 1 次最近：针尖离软唇顶 1.5 mm（插座单位），软唇鼓到 <code>bulge</code> = 1，顶面起波纹，<strong>不碰</strong></td>
+<td>镜头微震 2 帧 ≤ 0.2°</td>
+</tr>
+<tr>
+<td>6 起</td>
+<td>183–228</td>
+<td>插头被缓缓推回嘴尖（smooth^0.8），软唇在 1.3 拍里慢慢落回；回到嘴尖后插头从针尖往柄"缩回"嘴里</td>
+<td></td>
+</tr>
+<tr>
+<td>第 2–9 次</td>
+<td>见下表</td>
+<td>同上：长出 → 凑近 → 第 h 拍最近、软唇鼓起 → 推回 → 缩回 → 下一个长出；每个插头的针型和柄形都不同；软唇从第 4 拍到第 24 拍一直带一层小波纹（<code>ripple3</code>、<code>ripple5</code> 交替，幅度 1 → 0.4）</td>
+<td></td>
+</tr>
+<tr>
+<td>22.5–23.5</td>
+<td>674–704</td>
+<td>第 9 个推回、缩回</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>23.5–24</strong></td>
+<td><strong>704–719</strong></td>
+<td>最后一个（048 外形，不刻字）长出来，第 24 拍长完</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>24</strong></td>
+<td><strong>719</strong></td>
+<td>两边定下来：软唇的波纹停（0.8 拍里收到 0），口保持静止张开</td>
+<td>键 C 起（第 24–28 拍）第二次缓推，推近 9%</td>
+</tr>
+<tr>
+<td>24.8–25.6</td>
+<td>743–766</td>
+<td>插头绕自己的轴从 +20° 转正到 0°（针对上孔位、卡口销对上入口槽）——旧版"钥匙摆正"</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>26</strong></td>
+<td><strong>778</strong></td>
+<td>浇口断开（插头从嘴尖脱下，T7 轻），开始沿孔轴插进去</td>
+<td></td>
+</tr>
+<tr>
+<td>26–28</td>
+<td>778–838</td>
+<td>直着插进孔里，先快后慢（ease-out 指数 2.2），最后 2 mm 最慢；本体进孔桶、针进孔位，缝照 06 号 5.3 节 0.05</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>28</strong></td>
+<td><strong>838</strong></td>
+<td>坐实：凸缘贴住孔口面（缝 0.03），咔（T7，镜头震 2 帧 ≤ 0.3°）。歌最后一条小节线就在这一拍</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>28–28.8</strong></td>
+<td><strong>838–862</strong></td>
+<td>融合：软唇 <code>hug</code> 0 → 1，往上卷过凸缘侧面、在凸缘前沿包住 0.4 mm，金色插头和蓝色插座之间不再有缝</td>
+<td></td>
+</tr>
+<tr>
+<td>28.8–30.05</td>
+<td>862–899</td>
+<td>不动</td>
+<td>键 D：沿插头轴推到金色柄面，第 29.8 拍（帧 891）起柄面盖满画面 ≥ 90%；转场灯（第五节）帧 860 起开</td>
+</tr>
+<tr>
+<td>出场</td>
+<td>883–899</td>
+<td>（拼片时叠 <code>bwipe/key</code> 第 0–16 帧）</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>九次靠近的帧（落位帧 = 第 h 拍；"长出/凑近/推回/缩回"的分配：相邻两次相隔 g 拍，推回 0.35g、缩回 0.15g、下一个长出 0.15g、凑近 0.35g）：</p>
+<table>
+<thead>
+<tr>
+<th>次</th>
+<th>最近（拍 / 帧）</th>
+<th>长出</th>
+<th>凑近</th>
+<th>推回</th>
+<th>缩回</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>6 / 183</td>
+<td>124–154</td>
+<td>154–183</td>
+<td>183–214</td>
+<td>214–228</td>
+</tr>
+<tr>
+<td>2</td>
+<td>9 / 273</td>
+<td>228–241</td>
+<td>241–273</td>
+<td>273–304</td>
+<td>304–317</td>
+</tr>
+<tr>
+<td>3</td>
+<td>12 / 362</td>
+<td>317–331</td>
+<td>331–362</td>
+<td>362–383</td>
+<td>383–392</td>
+</tr>
+<tr>
+<td>4</td>
+<td>14 / 421</td>
+<td>392–400</td>
+<td>400–421</td>
+<td>421–442</td>
+<td>442–451</td>
+</tr>
+<tr>
+<td>5</td>
+<td>16 / 481</td>
+<td>451–460</td>
+<td>460–481</td>
+<td>481–502</td>
+<td>502–511</td>
+</tr>
+<tr>
+<td>6</td>
+<td>18 / 540</td>
+<td>511–519</td>
+<td>519–540</td>
+<td>540–556</td>
+<td>556–563</td>
+</tr>
+<tr>
+<td>7</td>
+<td>19.5 / 585</td>
+<td>563–569</td>
+<td>569–585</td>
+<td>585–601</td>
+<td>601–607</td>
+</tr>
+<tr>
+<td>8</td>
+<td>21 / 630</td>
+<td>607–614</td>
+<td>614–630</td>
+<td>630–645</td>
+<td>645–652</td>
+</tr>
+<tr>
+<td>9</td>
+<td>22.5 / 674</td>
+<td>652–659</td>
+<td>659–674</td>
+<td>674–689</td>
+<td>689–704</td>
+</tr>
+</tbody>
+</table>
+<p>插头的路径只在孔轴上（嘴尖针尖 W = 30 → 最近 W = 17.0 → 回 30），所以插头之间、插头和插座之间不会碰；软唇鼓起时的最高点 W = 15.5，最近时缝 1.5。</p>
+<p>出处行：左对齐 x 64，上沿 886、下沿 928，30 px，第 18 帧起 0.5 s 淡入，整段不变（插座外接框下沿全段 ≤ y 866）：</p>
+<p><code>Illustration · each key stands for one AI-proposed design</code></p>
+<p>画面里没有别的字。</p>
+<hr />
+<h2>五、零件清单</h2>
+<h3>5.1 已有，直接用</h3>
+<table>
+<thead>
+<tr>
+<th>件</th>
+<th>在哪</th>
+<th>用在</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>大板（格子、料杆、短连杆、外框、站牌、灯和全景相机）</td>
+<td><code>G:/cdk20/work/kit/board_final.blend</code></td>
+<td>两段</td>
+</tr>
+<tr>
+<td>磨砂 CDK20 <code>p29_cdk20_unknown</code></td>
+<td>板上 z3_c5_r0</td>
+<td>W2 开头</td>
+</tr>
+<tr>
+<td>AlphaFold 芯片 <code>p13_chip("AlphaFold")</code></td>
+<td>板上 z4_c6_r2</td>
+<td>W2 开头</td>
+</tr>
+<tr>
+<td>CDK20 插座 <code>h01b_cdk20_socket(K)</code>（hero，<code>rig</code>/<code>pose</code>/<code>rest</code>、<code>SEAT_W</code>、<code>FACE_W</code>）</td>
+<td><code>inserts/kit_socket.py</code></td>
+<td>两段</td>
+</tr>
+<tr>
+<td>插头 <code>h02b_plug(K, "048")</code>、<code>h02b_plug(K, seed=n)</code></td>
+<td><code>inserts/kit_socket.py</code></td>
+<td>W3</td>
+</tr>
+<tr>
+<td>插座浮着/躺平位姿、浇口重建和折断、逐帧烘焙、对焦、穿模、编码</td>
+<td><code>inserts/shot_drill.py</code>、<code>drill_504.py</code>（S、BC、FACE、H_FLOAT）、<code>drill_W4.py</code>（<code>q_lie</code>、<code>make_keys</code> 写法）</td>
+<td>两段</td>
+</tr>
+<tr>
+<td>走料鼓包、轮廓光</td>
+<td><code>inserts/bl_guide.py</code></td>
+<td>两段</td>
+</tr>
+<tr>
+<td>擦除层</td>
+<td><code>G:/cdk20/work/bwipe/runner</code>、<code>socket_bore</code>、<code>key</code></td>
+<td>接点</td>
+</tr>
+<tr>
+<td>押韵字幕、出处行组件</td>
+<td><code>镜头设计_v2/tests/T4_remotion/src/v3/fusion/entry.jsx</code> 的 <code>W2_PHRASES</code>、<code>W2Phrase</code>、<code>SrcLine</code>、<code>W3SrcStill</code></td>
+<td>两段</td>
+</tr>
+<tr>
+<td>AlphaFold 模型、CDK20 外形</td>
+<td><code>G:/cdk20/work/structures/AF-Q8IZL9-F1-model_v6.pdb</code>、<code>G:/cdk20/work/kit/cdk20.npz</code></td>
+<td>W2 尾巴、液团</td>
+</tr>
+<tr>
+<td>旧版动作曲线（只当参考，不跑）</td>
+<td><code>styleframes/art/fusion/s1/inserts/bl_inserts.py</code> 的 <code>shot_j</code>/<code>shot_d</code>（约 3628–4190 行）；<code>styleframes/art/fusion/w3/bl_w3k.py</code> 的 <code>HITS</code>、<code>bulge</code>、<code>fuse</code>；旧红线圈 <code>G:/cdk20/backup_20261116/镜头设计_v3/styleframes/art/fusion/s1/inserts/frames/u_tail_2.npz</code></td>
+<td>对节奏</td>
+</tr>
+</tbody>
+</table>
+<h3>5.2 施工方在配方里程序化做（不交 Codex）</h3>
+<p>液团 <code>w2_blob</code>（+ <code>blob.pc2</code>）、红尾巴/红线圈 <code>w2_tail</code>（+ <code>tail.pc2</code>）、材质 <code>w2_melt</code>、插头的长出/缩回着色器、转场灯。写法见 3.3 和第六节。</p>
+<h3>5.3 新建，交给 Codex（2 件）</h3>
+<p>通用规矩照 <code>02_零件建模清单_给GPT.md</code> 第一、二节：单位毫米、材质只用 <code>Kit</code> 现成的、外露边倒角 0.2–0.8、浇口 <code>P.gate</code> 登记、不改任何现有文件。新代码写进新文件 <strong><code>镜头设计_v3/inserts/kit_deep_r6.py</code></strong>（<code>from kit_parts_hd import *</code>，插座坐标常量从 <code>kit_socket</code> 导入）。每件交检查图 <code>G:/cdk20/work/kit_deep/&lt;函数名&gt;_sheet.png</code>（Cycles 64 采样、1600×900）和 <code>&lt;函数名&gt;_report.json</code>。两件合计约 1.5 小时，h21 先做。</p>
+<p><strong>h21 孔口软唇 <code>h21_mouth_lip(K)</code></strong></p>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>规格</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>坐标</td>
+<td>照 h01b 插座的局部系：x = W（孔轴朝外），y = U，z = Z，原点 = 触点面中心。零件根是空物体 <code>h21_mouth_lip</code>，用的时候挂在插座根下、局部矩阵为单位阵</td>
+</tr>
+<tr>
+<td>形状</td>
+<td>平的圆环片，内半径 7.20，外半径 9.00，厚 0.50，下表面在 x = 12.00（孔口面板前表面 <code>FACE_W</code>），上表面 x = 12.50。内外两圈边倒圆 0.20（每边 4 段）</td>
+</tr>
+<tr>
+<td>网格</td>
+<td>只用四边面：环向 128 段，径向 12 圈，上下两层加内外边带，封闭实体。三角面 ≤ 2 万</td>
+</tr>
+<tr>
+<td>材质</td>
+<td><code>K.white</code>（<code>#F4F1EA</code>，亮面）</td>
+</tr>
+<tr>
+<td>形态键（相对 Basis；s = (r − 7.20)/1.80 是径向位置，0 内 1 外，θ 是环向角）</td>
+<td><code>bulge</code>：r' = 9.00 − (1 − s)·5.00（内圈收到半径 4.00），x' = x + 3.00·(1 − s)^1.5；厚度沿法线保持 0.50。<br><code>ripple3</code>：x' = x + 0.35·sin 3θ·sin πs。<br><code>ripple5</code>：x' = x + 0.25·sin(5θ + 0.7)·sin πs。<br><code>hug</code>：最内 2 圈到 r = 6.70、x = 13.86（盖在凸缘前沿上，接触 0.03）；第 3–5 圈沿凸缘侧面立起，r = 7.05，x 从 12.10 线性到 13.80；其余圈不动</td>
+</tr>
+<tr>
+<td>不许碰</td>
+<td>Basis 和 <code>bulge</code> = 1、<code>ripple3</code>/<code>ripple5</code> = 1 时，和插座外壳、红环、孔桶都不相交（和面板的接触 ≤ 0.05 允许）；<code>bulge</code> = 1 时内圈半径 ≤ 6.65 的部分下表面 x ≥ 12.55（在红环顶 12.45 之上）。<code>hug</code> = 1 且 048 插到底（<code>SEAT_W</code>）时，和凸缘只许接触 ≤ 0.05，不许相交</td>
+</tr>
+<tr>
+<td>先量再做</td>
+<td>用 BVH 量孔口面板在 x = 12.00 处平的部分的最大半径 R_face。R_face &lt; 9.30 时：外半径改成 R_face − 0.30，其余数不变，报告里写实测 R_face 和改后的外半径</td>
+</tr>
+<tr>
+<td>报告</td>
+<td>四个形态键各一张检查图（3/4 角，插座盖合上一起出；<code>hug</code> 那张带插到底的 048）；<code>_report.json</code> 里写四种状态下的最小间隙和接触深度</td>
+</tr>
+</tbody>
+</table>
+<p><strong>h22 注料嘴料杆 <code>h22_nozzle_runner(K, rise=34.0, reach=17.0)</code></strong></p>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>规格</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>坐标</td>
+<td>原点在根部（长在短连杆上的那一点），z 向上；嘴朝 −x</td>
+</tr>
+<tr>
+<td>料杆</td>
+<td>圆管 Ø2.4（和板上短连杆同粗），<code>K.white</code>。路径四点：P0 (0, 0, 0) → P1 (0, 0, rise − 16) → P2 (−0.43·reach, 0, rise − 4) → P3 (−reach, 0, rise)，用 <code>rounded_path</code> 圆角半径 6 倒圆；P3 处切线水平朝 −x。根部一个 Ø3.4 × 1.2 的圆台（像从短连杆上长出来的疙瘩）</td>
+</tr>
+<tr>
+<td>注料嘴</td>
+<td>接在 P3：圆锥台，长 5.0，Ø4.6 → Ø3.0，<code>K.white</code>，外缘倒角 0.3；锥尖再接一根浇口细锥（长 1.6，Ø1.2 → Ø0.6），用 <code>P.gate</code> 登记，尖头就是插头柄后面接上去的点</td>
+</tr>
+<tr>
+<td>属性</td>
+<td>料杆和嘴的每个顶点带浮点属性 <code>run_u</code>：从根部 0 沿管长到浇口尖 1（给"长出来"的显现用）</td>
+</tr>
+<tr>
+<td>空物体</td>
+<td><code>h22_nozzle_runner__tip</code>：浇口尖头位置，−x 朝向</td>
+</tr>
+<tr>
+<td>三角面</td>
+<td>≤ 1.5 万</td>
+</tr>
+<tr>
+<td>报告</td>
+<td>默认参数和 (rise 40, reach 22) 各一张检查图；<code>run_u</code> 着色出一张 0 → 1 渐变图</td>
+</tr>
+</tbody>
+</table>
+<p>Codex 到点没交的替代（不挡施工）：软唇用一个 <code>bpy</code> 圆环片加四个手写形态键（同上公式）；注料嘴用 <code>SD</code> 的管子函数加一个圆锥。</p>
+<hr />
+<h2>六、灯光、材质、景深、亮度、接点</h2>
+<h3>6.1 灯光</h3>
+<ul>
+<li>用大板自带的主光（左上暖白）和补光；英雄件（W2 液团/插座、W3 插座和当前插头）加冷白轮廓光（<code>bl_guide.guide_rim</code>，功率按 drill-3d 技能的公式，灯挂在零件上跟着走）。</li>
+<li>浮着的插座下面加一块只给反射看的骨白反光卡（大小 80 × 50 mm，在插座下方 20 mm，朝上），蓝色壳的下半不许发黑。</li>
+<li>转场灯：W2 帧 1460–1499 开一盏挂在镜头上、只照插座孔桶的小面光（灯光链接），功率为主光的 3 倍；W3 帧 860–899 同样一盏只照最后那个插头的柄面。</li>
+<li>自发光只有插座的灯（照 rest）。不加任何光效、光晕、粒子。</li>
+</ul>
+<h3>6.2 材质</h3>
+<p>全部用 <code>Kit</code> 现成材质；只有 <code>w2_melt</code> 是配方里新建，颜色只取 18 号 1.5 表的值。所有实色粗糙度 ≤ 0.16。红只给红尾巴、红线圈、插座红环；黄只给插座的灯；黑只有 AlphaFold 芯片，任一帧黑色面积 ≤ 35%。</p>
+<h3>6.3 景深（8 mm 传感器的光圈值）</h3>
+<table>
+<thead>
+<tr>
+<th>时段</th>
+<th>对焦</th>
+<th>光圈</th>
+<th>要求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>W2 第 0–0.5 拍</td>
+<td>磨砂 CDK20</td>
+<td>f/4</td>
+<td>磨砂件弥散圆 ≤ 1 px</td>
+</tr>
+<tr>
+<td>W2 第 0.5–1.8 拍</td>
+<td>AlphaFold 芯片</td>
+<td>f/4</td>
+<td>刻字 ≤ 1 px</td>
+</tr>
+<tr>
+<td>W2 第 1–3.2 拍</td>
+<td>走料鼓包（逐帧）</td>
+<td>f/5</td>
+<td>鼓包 ≤ 1.5 px</td>
+</tr>
+<tr>
+<td>W2 第 4–33 拍</td>
+<td>液团 / 插座中心</td>
+<td>f/6</td>
+<td>液团、插座全身 ≤ 1.5 px；第 29–33 拍尾巴 ≤ 1 px</td>
+</tr>
+<tr>
+<td>W2 第 33–48 拍</td>
+<td>两格中点（插座和红液体/红线圈都要实）</td>
+<td>f/7，不够就加到 f/9</td>
+<td>插座和红线圈都 ≤ 2 px</td>
+</tr>
+<tr>
+<td>W2 第 48 拍起</td>
+<td>孔口 → 孔桶内壁</td>
+<td>f/14</td>
+<td>盖满时内壁 ≤ 2 px</td>
+</tr>
+<tr>
+<td>W3 第 0–4 拍</td>
+<td>插座</td>
+<td>f/5</td>
+<td>≤ 1.5 px</td>
+</tr>
+<tr>
+<td>W3 第 4–28.8 拍</td>
+<td>孔口中心</td>
+<td>f/6</td>
+<td>插座孔口、软唇、当前插头、嘴尖都 ≤ 1.5 px</td>
+</tr>
+<tr>
+<td>W3 第 28.8 拍起</td>
+<td>柄面</td>
+<td>f/9</td>
+<td>盖满时 ≤ 2 px</td>
+</tr>
+</tbody>
+</table>
+<p>押韵字幕和出处行是合成时叠上去的平面字，不受景深影响。</p>
+<h3>6.4 亮度</h3>
+<p>整帧灰度平均（sRGB 0–1）：两段都在板面场，每一帧 ≥ 0.45，段平均 0.55–0.82；接点盖满画面的那几帧 ≥ 0.45。黑场（&lt; 0.35）0 帧。</p>
+<h3>6.5 接点（照 18 号 1.8 的写法；"装配叠" = 拼片时把擦除层叠在接点两侧各 17 帧上，第 17 帧盖满）</h3>
+<table>
+<thead>
+<tr>
+<th>接点</th>
+<th>转场</th>
+<th>做法</th>
+<th>改了什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>J28 3-09 → W2</td>
+<td>T1 + T5 runner，加 T3</td>
+<td>3-09 段尾钻进磨砂 CDK20，盖满帧是磨砂壳（浅色）；W2 第 0–16 帧装配叠 <code>bwipe/runner</code> 第 17–33 帧；擦开后第一眼看到的就是格子里的磨砂 CDK20（同材质同形，T3）</td>
+<td>不用改 3-09</td>
+</tr>
+<tr>
+<td>J29 W2 → 4-01</td>
+<td>T1 钻插孔 + T5 socket_bore</td>
+<td>W2 自己钻进插孔，帧 1483 起骨白内壁盖满；W2 第 1483–1499 帧装配叠 <code>bwipe/socket_bore</code> 第 0–16 帧，4-01 第 0–16 帧叠第 17–33 帧</td>
+<td>4-01 页的 <code>trans_in</code> 从 <code>socket</code> 改成 <code>socket_bore</code>，只重渲 4-01 前 34 帧（Remotion）。理由：<code>socket</code> 擦除层盖满那帧实测平均亮度 0.23，<code>socket_bore</code> 0.65</td>
+</tr>
+<tr>
+<td>J37 4-09 → W3</td>
+<td>T5 runner</td>
+<td>4-09 最后 17 帧叠 <code>bwipe/runner</code> 第 0–16 帧，W3 第 0–16 帧叠第 17–33 帧</td>
+<td>4-09 页的 <code>trans_out</code> 从 <code>chip</code> 改成 <code>runner</code>，只重渲 4-09 最后 34 帧。理由：<code>chip</code> 盖满那帧实测 0.37 &lt; 0.45</td>
+</tr>
+<tr>
+<td>J38 W3 → 4-10</td>
+<td>T1 推柄面 + T5 key</td>
+<td>W3 推到金色柄面，帧 891 起盖满；W3 第 883–899 帧叠 <code>bwipe/key</code> 第 0–16 帧，4-10 第 0–16 帧叠第 17–33 帧（金柄接金钥匙，同色）</td>
+<td>4-10 的 <code>trans_in</code> 用 <code>key</code>（19 号 J38 已经这么写）</td>
+</tr>
+</tbody>
+</table>
+<p>两段的音乐进出（歌到满、小节线起淡出、底乐同拍接回）照 19 号文档 1.3、1.4，不动。</p>
+<hr />
+<h2>七、施工方案</h2>
+<h3>7.1 管线</h3>
+<p>用 <code>drill-3d</code> 的钻取引擎，两段各一个配方，照 <code>drill_W4.py</code> 的结构（音乐段：<code>make_keys()</code> 读卡点表）：</p>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>音乐/卡点/W2_HBFS.json</code>、<code>W3_TakeMyBreath.json</code></td>
+<td>第二节的卡点表</td>
+</tr>
+<tr>
+<td><code>inserts/drill_W2.py</code></td>
+<td><code>make_keys</code>、类 <code>T</code>、<code>build</code>（开板、藏件、插座和浇口、液团 PC2、尾巴 PC2、走料鼓包、机位键、对焦、灯）、穿模对、<code>check</code> 额外项</td>
+</tr>
+<tr>
+<td><code>inserts/drill_W3.py</code></td>
+<td>同上（插座、软唇形态键逐帧、注料嘴显现、10 个插头的显现/位置逐帧、机位键）</td>
+</tr>
+<tr>
+<td><code>inserts/comp_w23.py</code></td>
+<td>合成：照 <code>comp_gpu.py</code> 的两进程写法（<code>drive()</code> 起 ffmpeg h264_nvenc cq16，<code>child()</code> 用 <code>_env/footage</code> 的 torch 在显卡上逐帧叠层）；W2 叠 Blender 帧 + 押韵字幕层 + 出处行层，W3 叠 Blender 帧 + 出处行层；音轨 <code>-c:a copy</code> 取自 <code>24_W2_加工.mp4</code>、<code>24_W3_加工.mp4</code>，<code>-t 25.0</code> / <code>15.0</code>；不加 <code>-shortest</code></td>
+</tr>
+<tr>
+<td><code>entry.jsx</code> 加一个合成 <code>W2LyricsLayer</code></td>
+<td>透明底，只有 <code>W2Phrase</code> × 3 和 <code>SrcLine</code>（右对齐），60 fps、1500 帧，参数 <code>t0 = 0.083</code>；出 PNG 序列（带 alpha）到 <code>G:/cdk20/work/drill/W2/lyr/</code>。W3 的出处行用现成的 <code>W3SrcStill</code> 出一张 PNG</td>
+</tr>
+</tbody>
+</table>
+<p>命令照技能：<code>bash run_drill.sh W2 build</code>、<code>FR=… PCT=50 bash run_drill.sh W2 stills</code>、<code>clip</code>、<code>render</code>、然后 <code>comp_w23.py W2</code>、<code>python shot_drill.py check W2</code>、<code>sheet</code>、<code>report</code>；W3 同。中间产物全在 <code>G:/cdk20/work/drill/W2/</code>、<code>W3/</code>。</p>
+<h3>7.2 渲染量</h3>
+<p>1080p60，Cycles + OPTIX + OptiX 降噪，16 采样，运动模糊 180°。</p>
+<table>
+<thead>
+<tr>
+<th>段</th>
+<th>帧</th>
+<th>每帧估（单个 Blender 独占 5080）</th>
+<th>显卡时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>W2</td>
+<td>1500</td>
+<td>约 2.7 s（3-04 实测 2.25 s，液团变形网格加清漆、钻插孔那几十帧多算一点）</td>
+<td>约 68 分钟</td>
+</tr>
+<tr>
+<td>W3</td>
+<td>900</td>
+<td>约 2.4 s</td>
+<td>约 36 分钟</td>
+</tr>
+<tr>
+<td>合计</td>
+<td>2400</td>
+<td></td>
+<td>约 104 分钟（单路）</td>
+</tr>
+</tbody>
+</table>
+<p>三个 Blender 并行（W2 拆成 0–749、750–1499 两段，加 W3 整段），按一路约慢 1.7 倍、总吞吐约 1.4 倍算，墙钟约 <strong>70–75 分钟</strong>。先按"最难的一帧"试：W2 帧 200（液团 + 运动模糊）、帧 1490（孔桶 + 转场灯），W3 帧 674（插头最密）、帧 895（柄面盖满），各渲一张量秒数，再用实测秒数 × 帧数改完成时间写进排片表。押韵字幕层（Remotion 1500 帧，并发 6）约 4 分钟；两段合成（显卡）各约 1 分钟；4-01、4-09 各重渲 34 帧不到 1 分钟。</p>
+<h3>7.3 分工和预计完成（11-24，韩国时间）</h3>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>谁</th>
+<th>做什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10:30–12:00</td>
+<td>Codex（gpt-6.2-sol high）</td>
+<td>h21、h22，交检查图和报告</td>
+</tr>
+<tr>
+<td>10:45–16:00</td>
+<td>Opus 施工方甲</td>
+<td>W2：卡点表、<code>drill_W2.py</code>、试渲、穿模、改到全过，入队渲染后停手（软唇和注料嘴不在 W2，不等 Codex）</td>
+</tr>
+<tr>
+<td>10:45–14:30</td>
+<td>Opus 施工方乙</td>
+<td>W3：卡点表、<code>drill_W3.py</code>（Codex 没交前用 5.3 末尾的替代件先搭，交了再换）、试渲、穿模、入队后停手</td>
+</tr>
+<tr>
+<td>14:30–15:15</td>
+<td>渲染</td>
+<td>W3 900 帧（和甲的试渲共用显卡）</td>
+</tr>
+<tr>
+<td>16:00–17:15</td>
+<td>渲染</td>
+<td>W2 1500 帧，两个 Blender</td>
+</tr>
+<tr>
+<td>17:15–18:00</td>
+<td>Sonnet 验收</td>
+<td>合成、机检、抽帧页、检查页；4-01、4-09 改转场重渲 34 帧</td>
+</tr>
+<tr>
+<td><strong>18:30</strong></td>
+<td></td>
+<td>成片和检查页进 <code>导演检查_20261124/</code>（<code>&lt;序号&gt;_W2_重做.mp4</code>、<code>&lt;序号&gt;_W3_重做.mp4</code>、<code>&lt;序号&gt;_W2W3_检查.html</code>），赶得上 rc08 和 11-25 20:00 的候选版</td>
+</tr>
+</tbody>
+</table>
+<p>同一时间最多两个 Claude 子代理；Blender 最多三个（守卫 guard.py 管）。</p>
+<hr />
+<h2>八、机检表（全部可量，不过就改，不拿给导演）</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>项</th>
+<th>怎么量</th>
+<th>通过条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>K1</td>
+<td>帧数、帧率</td>
+<td>ffprobe</td>
+<td>W2 正好 1500 帧、W3 正好 900 帧，60 fps；<code>frame_integrity</code> 无重复帧、无混帧（误报照技能第 3 节用原 PNG 帧排除）</td>
+</tr>
+<tr>
+<td>K2</td>
+<td>卡拍</td>
+<td>卡点表的每个事件 <code>f_land</code> 对 2.1 公式</td>
+<td>全部误差 ≤ 2 帧；W2 第 4、6、8、10、21、23、25、27、28、29、32、33、34、39¼、40、41、42、44 拍和 W3 九次最近、第 24、26、28 拍逐个列出</td>
+</tr>
+<tr>
+<td>K3</td>
+<td>卡拍（听感）</td>
+<td>成片音轨 6–11 kHz 起音和画面拍点中位差（T7b 量法，<code>beat_check</code>）</td>
+<td>≤ 17 ms</td>
+</tr>
+<tr>
+<td>K4</td>
+<td>押韵字幕落拍</td>
+<td>每个词上墨完成帧对它的拍</td>
+<td>≤ 2 帧；词、位置、字体和 <code>W2_PHRASES</code> 逐字一致</td>
+</tr>
+<tr>
+<td>K5</td>
+<td>穿模</td>
+<td><code>clip</code>：逐帧 BVH。W2：液团 vs 板（格框、短连杆、浇口、芯片）、插座下落 vs 格框和浇口、尾巴 vs 插座（放开前）、飞行的尾巴 vs 插座和 z3_c5_r0 格框、红线圈 vs 台面；W3：每个插头 vs 软唇/外壳/红环/孔桶、软唇 vs 外壳和红环、注料嘴 vs 插座、最后的插头 vs 孔桶和孔位</td>
+<td><code>hit_summary</code> 为空；允许接触清单只有 06 号 5.1 那几条加"软唇 vs 面板、软唇 hug vs 凸缘、红线圈 vs 台面"，深度 ≤ 0.05 mm；<code>cam_min_mm</code> &gt; 0</td>
+</tr>
+<tr>
+<td>K6</td>
+<td>不碰（软推回）</td>
+<td>W3 九次最近时针尖到软唇的最小距离（插座单位）</td>
+<td>每次 ≥ 1.0 mm，且 ≤ 2.0 mm（看得出"差一点"）</td>
+</tr>
+<tr>
+<td>K7</td>
+<td>黑场、亮度</td>
+<td>每帧整帧灰度平均</td>
+<td>每帧 ≥ 0.45；段平均 0.55–0.82；相邻帧跳变 ≤ 0.06（设计的钻孔、推柄面除外，那几帧单调）</td>
+</tr>
+<tr>
+<td>K8</td>
+<td>接点</td>
+<td>拼好后 <code>check_joints_v10.py</code></td>
+<td>J28、J29、J37、J38 盖满帧 ≥ 0.45；没有硬切；4-01、4-09 改转场后帧数不变</td>
+</tr>
+<tr>
+<td>K9</td>
+<td>字号</td>
+<td>押韵字幕、出处行的字高；W2 第 0.5–1.8 拍芯片刻字 <code>AlphaFold</code> 的屏上字高（<code>cam.json</code> 投影）</td>
+<td>押韵字幕 66 px、出处行 30 px 不变；刻字 ≥ 30 px</td>
+</tr>
+<tr>
+<td>K10</td>
+<td>零遮挡</td>
+<td>关键物件（液团、插座、尾巴、红线圈；W3 插座、当前插头）每帧投影外接框 vs 2.2 节三个字框、出处行框</td>
+<td>在各字框可见期间间距 ≥ 20 px；任何东西不进 y &gt; 940</td>
+</tr>
+<tr>
+<td>K11</td>
+<td>景深</td>
+<td><code>build_check.json</code> 的逐段弥散圆</td>
+<td>照 6.3 表</td>
+</tr>
+<tr>
+<td>K12</td>
+<td>主体大小</td>
+<td>投影外接框高</td>
+<td>W2 第 6–28 拍液团 520–640 px；W3 第 4–28 拍插座 ≥ 500 px</td>
+</tr>
+<tr>
+<td>K13</td>
+<td>禁用件不入画</td>
+<td><code>p21_lock</code>、<code>p22_key</code>、<code>p38_dial</code>、<code>p08_capsule</code> 每帧投影</td>
+<td>在画面内的像素 0（已藏掉，查的是没藏漏）</td>
+</tr>
+<tr>
+<td>K14</td>
+<td>颜色</td>
+<td>黑色面积、红色只在内容件上</td>
+<td>黑 ≤ 35%；画面里红色像素只来自尾巴、红线圈、红环</td>
+</tr>
+<tr>
+<td>K15</td>
+<td>静止</td>
+<td>前景物件逐帧位移</td>
+<td>前景静止 ≤ 45 帧；镜头静止 ≤ 30 帧</td>
+</tr>
+<tr>
+<td>K16</td>
+<td>音轨</td>
+<td>成片音轨解码后和 <code>24_W2_加工.mp4</code>、<code>24_W3_加工.mp4</code> 的音轨逐样本比</td>
+<td>完全相同（<code>-c:a copy</code>）</td>
+</tr>
+<tr>
+<td>K17</td>
+<td>每把都不同</td>
+<td>W3 九个不合插头的"柄形 + 针型"签名</td>
+<td>9 个互不相同；第 10 个柄面无刻字</td>
+</tr>
+<tr>
+<td>K18</td>
+<td>人看</td>
+<td>每 6 帧一张抽帧页逐页看；Gemini 初审（<code>_env/jobs/gemini_review.py</code>）的 [必改] 逐条改或写明不改的理由</td>
+<td>review.json 每条 <code>ok</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>九、我替导演定下的品味问题（都能改回）</h2>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>定成</th>
+<th>理由</th>
+<th>改回的办法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>W2 的液团用什么料</td>
+<td>暖灰熔融亮面塑料，冷却成克莱因蓝</td>
+<td>新世界是亮面塑料，没有液态金属；黑色大团会把画面压暗，也超黑色面积；灰到蓝正好对上"越来越确定"</td>
+<td><code>w2_melt</code> 底色换回 <code>#1E1E20</code></td>
+</tr>
+<tr>
+<td>W2 开头的 2 秒</td>
+<td>AlphaFold 芯片沿料杆送料，焦点点名到芯片</td>
+<td>旧版是空格子等 2 秒；新版让"AI 猜形状"有出处，又用的是 05 号的走料，不加新符号；4-01 紧接着就念 AlphaFold</td>
+<td>镜头从第 0 帧就停在磨砂 CDK20 上，去掉芯片那一段</td>
+</tr>
+<tr>
+<td>W2 定形后是什么</td>
+<td>h01b 插座（同一个 AlphaFold 外包络加红环插孔）</td>
+<td>全片 CDK20 就是这个插座；外形来自同一份公开模型，所以不是换了东西</td>
+<td>换成不带插孔的 <code>p19_cdk20</code></td>
+</tr>
+<tr>
+<td>W2 红尾巴落在哪</td>
+<td>从 z3_c5_r0 的框里穿下去，落在台面上</td>
+<td>新大板的格子是空框，没有底；落在台面上合乎物理，"不确定的那段被甩出套件"</td>
+<td>落在格框上方 2 mm 的一块骨白托片上（要加件）</td>
+</tr>
+<tr>
+<td>W3 锁口变不变形</td>
+<td>不变；"液体"感放在软唇的鼓起和波纹、插头的长出和缩回</td>
+<td>4-09 刚念过"把口袋的形状给了 AI"，口袋是定的，变的是钥匙；插座的孔位和 06 号定的公差不能动</td>
+<td>软唇加 <code>ripple</code> 幅度到 1.0 全程</td>
+</tr>
+<tr>
+<td>W3 钥匙怎么换</td>
+<td>注料嘴一个一个长出来、推回后缩回去</td>
+<td>旧版是液体钥匙流成下一把；新版用模具的"流 / 长 / 缩"三个动词，同一个意思，不需要液态金属</td>
+<td>改成料框上一排 10 个插头逐个拔下</td>
+</tr>
+<tr>
+<td>W3 融合</td>
+<td>落位冲击 + 软唇卷上去包住凸缘，不发光</td>
+<td>18 号 1.4：自发光只给亮灯；插到底后红环被凸缘盖住，没法让它亮</td>
+<td>第 29.2–29.7 拍让插座外灯闪一下（会被读成"通电"，所以没选）</td>
+</tr>
+<tr>
+<td>押韵字幕时间</td>
+<td>原点 +0.083 s</td>
+<td>见 2.2</td>
+<td><code>t0 = 0</code></td>
+</tr>
+<tr>
+<td>音效</td>
+<td>不加</td>
+<td>歌是满音量，加的"咔"听不出来，还会让音轨和原来不一致</td>
+<td>照 W4 的做法混塑料声 ×0.8</td>
+</tr>
+<tr>
+<td>不入画的件</td>
+<td>藏掉销子锁、钥匙、表盘、胶囊</td>
+<td>导演说过不要拨盘、药丸；销子锁、钥匙在这两段会和插座、插头混</td>
+<td>不藏，改机位避开</td>
+</tr>
+</tbody>
+</table>
+<h2>十、没核实的</h2>
+<ul>
+<li>格子中心坐标是按 <code>kit_parts.ZONES</code> 手算的，以 blend 实测为准。</li>
+<li><code>cdk20.npz</code> 里有没有包含 303–346 号残基（尾巴贴在壳上那一带），没量；尾巴是推到壳外的管子，两种情况都不穿模。</li>
+<li>每帧秒数是估的，先按 7.2 末尾的四帧实测。</li>
+<li>孔口面板平面部分的半径没量，h21 的外半径按 5.3 节"先量再做"处理。</li>
+<li>W3 的 <code>grid_fix</code> 只用低频起音量了一次（+0.079 s），施工方按 2.1 再用 T7b 法量。</li>
+</ul>

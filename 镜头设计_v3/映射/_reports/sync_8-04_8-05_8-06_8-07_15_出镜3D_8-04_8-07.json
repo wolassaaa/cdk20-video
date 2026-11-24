@@ -26,10 +26,13 @@
   "dup_frames": 0,
   "stepped_dups": 0,
   "stepped_ratio": 0.0,
-  "blend_frames": 0,
-  "blend_first": [],
+  "blend_frames": 2,
+  "blend_first": [
+   1,
+   2
+  ],
   "design_fade": 0,
-  "verdict": "原生（无变速重复/混帧）"
+  "verdict": ""
  },
  "sentences": [
   {
