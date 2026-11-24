@@ -5683,7 +5683,8 @@ V804 = dict(
     TAIL_D=0.06, TAIL_PX=(960.0, 540.0), TAIL_CTRL=(1500.0, 420.0, 0.7),   # 试渲 0.02：段尾骨白盖满 10 帧（OC7 ≤ 6）→ 0.036；全版 computer 牌带着芯片、小人一起冲，0.036 盖满 9 帧 → 同 6-12 的 0.05；r2 0.05 盖满 7 帧 → 0.06
     BAR=(-38.0, 38.5), RUN_R=0.8, GATE_R=0.45, PL_HW=24.0, PL_HH=5.5, PL_X0=2.0, PL_YS=(32.0, 17.0, 2.0, -13.0, -28.0),
     LABELS=("computer", "protein", "cells", "animals", "patients"), TXT_SIZE=8.0, TEXT_GLOW=3.0, BODY_GLOW=0.45, POP_MM=8.0,
-    PAPER=(26.0, 15.0, 9.0), PAPER_K=1.4, PAPER_AWAY=(-14.0, 30.0, 1.5), PAPER_AWAY_K=0.35,
+    # 11-24 R2f：报纸 z 9.0 → 10.6。protein 牌上的小插座（转 -60°）后缘和红色卡扣比报纸正面还靠前 0.6–0.9 mm，戳出报纸，成了 a 和 g 之间的灰色碎片和红点；整张报纸前移 1.6 mm（相机远，屏上大小位置变化 < 1 px）
+    PAPER=(26.0, 15.0, 10.6), PAPER_K=1.4, PAPER_AWAY=(-14.0, 30.0, 1.5), PAPER_AWAY_K=0.35,
     OC=True, TRANS=True, TRANS_K=1.0, HIDE_RED=True, H_MIN=486, TOP_MIN=60, BOT_MAX=860, OC1_EXEMPT=[(0, 1960)],
     HAND_FRONT=[(641, 877)],                                              # B 举手机的手在报纸前（18 文档 headline 行）
     BOARD_K=1.27, BOARD_HIDE=("stations", "zone_tags", "z1_c0_r0"),

@@ -264,8 +264,8 @@ export const Lens = ({plan, f, blur = 2.2, dim, desat = 0.75, rimPx = 6, rimA = 
   return <GuideCtx.Provider value={v}>{children}</GuideCtx.Provider>;
 };
 
-// 一个图层（整页大小的绝对定位层）。exempt：标题、标签、批注、出处行，永远不虚。dir：预颤方向（指向浇口）。
-export const Layer = ({id, exempt, dir = [0, 1], children, style}) => {
+// 一个图层（整页大小的绝对定位层）。exempt：标题、标签、批注、出处行，永远不虚。noDim：角标（Objective N）没被点名时不虚不淡，只保留被点名时的轮廓光。dir：预颤方向（指向浇口）。
+export const Layer = ({id, exempt, noDim, dir = [0, 1], children, style}) => {
   const C = withDefaults(useContext(GuideCtx), useContext(LensDefaults));
   const L = exempt || !C ? null : guideLook(C, [].concat(id));
   let tf, org;
@@ -275,7 +275,7 @@ export const Layer = ({id, exempt, dir = [0, 1], children, style}) => {
     tf = nudge(C.f, L.nudge.land, {dir, R: Math.hypot(w, h) / 2});
   }
   return (
-    <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, ...(L ? L.style : null), transform: tf, transformOrigin: org, ...style}}>
+    <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, ...(L ? (noDim ? (L.rim > 0.002 ? {filter: `drop-shadow(${C.rimDx}px 0 ${C.rimPx}px rgba(255,250,235,${(C.rimA * L.rim).toFixed(3)}))`} : null) : L.style) : null), transform: tf, transformOrigin: org, ...style}}>
       <GuideCtx.Provider value={C ? {...C, layered: true} : null}>{children}</GuideCtx.Provider>
     </div>
   );

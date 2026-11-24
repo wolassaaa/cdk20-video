@@ -74,15 +74,6 @@ const Scene = () => {
   return (
     <Lens plan={GP} f={f}>
       <Stage zone={ZONE} f={f} cam={camBreath(f, K, ["s1", "s3"])} whip={whip} shakeX={shake} shakeY={shake * 0.5} over={<T5Out name="runner" f={f} len={LEN} />}>
-        <Layer id="goal">
-          {S.goal > 0.01 && (
-            <Slab x={g.x} y={g.y - 40 * (1 - Math.min(1, S.goal))} w={g.w} h={g.h} r={mix(34, 18, S.badge)} color={C.bone} depth={mix(12, 7, S.badge)} op={Math.min(1, S.goal * 1.5)}
-                  sheen={S.badge > 0 && S.badge < 1 ? S.badge : -1} id="goal">
-              <div style={{width: g.w, height: g.h, display: "flex", alignItems: "center", justifyContent: "center"}}><Engrave size={Math.min(68,g.fs)}>Objective 2</Engrave></div>
-            </Slab>
-          )}
-          <Tick x={GOAL1.x + GOAL1.w + 50} y={GOAL1.y + 60} s={80} p={S.tick} sw={13} />
-        </Layer>
 
         <div style={{position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `translateX(${c1}px)`}}>
           <Layer id="chips" exempt>
@@ -120,6 +111,16 @@ const Scene = () => {
             })}
           </Layer>
         </div>
+
+        <Layer id="goal" noDim>
+          {S.goal > 0.01 && (
+            <Slab x={g.x} y={g.y - 40 * (1 - Math.min(1, S.goal))} w={g.w} h={g.h} r={mix(34, 18, S.badge)} color={C.bone} depth={mix(12, 7, S.badge)} op={Math.min(1, S.goal * 1.5)}
+                  sheen={S.badge > 0 && S.badge < 1 ? S.badge : -1} id="goal">
+              <div style={{width: g.w, height: g.h, display: "flex", alignItems: "center", justifyContent: "center"}}><Engrave size={Math.min(68,g.fs)}>Objective 2</Engrave></div>
+            </Slab>
+          )}
+          <Tick x={GOAL1.x + GOAL1.w + 50} y={GOAL1.y + 60} s={80} p={S.tick} sw={13} />
+        </Layer>
 
         <Layer id="road" exempt>
           {f>=E.d30.s&&<Plate x={500} y={670} w={230} h={100} text={f>=E.d30.l?"30 days":""} size={56} rot={-13*Math.max(0,1-Math.abs(f-E.d30.l)/12)}/>}

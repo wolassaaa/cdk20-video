@@ -136,7 +136,7 @@ const Scene = () => {
             {popN > 0.01 && (
               <>
                 <Sprite name="mini/m34_001" x={pic.x} y={pic.y + id(2).y - (S.kj || 0)} w={pic.w} shadow={popN > 0.5} rim={S.k1 > 0 && f < E.k1.l + 40 ? 0.8 * S.k1 : 0} />
-                <Tag x={PIC.x + 50} y={PIC.y + 135} op={cl(popN * 3 - 2)} on="mini">predicted pose of 001</Tag>
+                <Tag x={PIC.x - 10} y={PIC.y + 135} op={cl(popN * 3 - 2)} on="mini">predicted pose</Tag>
                 {S.fan > 0.01 && (
                   <div style={{position: "absolute", left: C16.x, top: C16.y, opacity: cl(S.fan * 4) * cl(popN * 2 - 0.6)}}>
                     <Slab x={-70} y={-10} w={140} h={60} r={10} color={C.bone} depth={6} id="c16slab" />

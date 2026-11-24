@@ -115,7 +115,7 @@ const Scene = () => {
           {S.p2 > 0.01 && tuck > 0.01 && <Sprite name="plug/001_34" x={NODE[2]} y={mix(NODE_Y - 40, POPY + 20, S.p2) - 80 * Math.sin(Math.PI * S.p2) + id(7).y} w={210 * tuck} op={cl(S.p2 * 2)} rot={-10} />}
           </div>
         </Layer>
-        <Layer id={["goal1"]}>
+        <Layer id={["goal1"]} noDim>
           {S.goal > 0.01 && (
             <div style={{position: "absolute", left: 0, top: 0, opacity: cl(S.goal * 2), transformOrigin: `${GOAL.x}px ${GOAL.y}px`,
                          transform: `translate(${(gx - GOAL.x).toFixed(1)}px, ${(gy - GOAL.y - 50 * (1 - Math.min(1, S.goal)) - (S.gj || 0)).toFixed(1)}px) scale(${gs.toFixed(3)})`}}>
