@@ -1,8 +1,8 @@
 {
  "fps": 60,
- "built": "2026-11-24 13:17",
+ "built": "2026-11-25 02:37",
  "master": "master_v2.json",
- "out": "G:/cdk20/work/v10/rc/v10_rc08_mix.mp4",
+ "out": "G:/cdk20/work/v10/rc/v10_rc09_mix.mp4",
  "total_f": 70876,
  "mix": "G:/cdk20/work/audio/v10/master_v10.wav",
  "joints_src": "粗剪/v10/joints_v10.json",
@@ -1177,7 +1177,7 @@
    "wipe_out": "oncam_5-05_5-06",
    "asm_in": null,
    "asm_out": null,
-   "note": "亮度系数：12 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.749–1.168"
+   "note": "亮度系数：12 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.750–1.168"
   },
   {
    "i": 46,
@@ -1411,7 +1411,7 @@
    "wipe_out": "oncam_6-04_6-05",
    "asm_in": null,
    "asm_out": null,
-   "note": "亮度系数：2 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.819–0.984"
+   "note": "亮度系数：2 帧不是 1（接点匹配 + 出镜段首尾下限），范围 0.819–0.985"
   },
   {
    "i": 55,
