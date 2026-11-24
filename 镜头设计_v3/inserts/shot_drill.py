@@ -166,6 +166,7 @@ def open_board(board, nf, samples):
     sc.render.motion_blur_shutter = 0.5
     sc.render.image_settings.file_format = "PNG"
     sc.render.image_settings.color_depth = "8"
+    sc.render.image_settings.compression = 0  # 11-24: CPU 锁 45 W，PNG 不压缩省 CPU
     bpy.context.preferences.edit.keyframe_new_interpolation_type = "LINEAR"
     gpu(sc)
     return sc
