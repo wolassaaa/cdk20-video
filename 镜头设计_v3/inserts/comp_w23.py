@@ -38,7 +38,9 @@ SEGS = {
     # W3 接口：施工方确认帧数、输出名后改这里。出处行是一张静图（W3SrcStill），整段叠同一张。
     "W3": dict(frames=WORK / "drill/W3/frames", n=900, dur=15.0,
                layer=dict(comp="W3SrcStill", seq=False, out=WORK / "drill/W3/src.png", props=None),
-               audio=AUD_DIR / "24_W3_加工.mp4", out=OUT_DIR / "04_W3_重做.mp4"),
+               audio=AUD_DIR / "24_W3_加工.mp4", out=OUT_DIR / "04_W3_重做.mp4",
+               # W3 施工方（11-24）：出处行 0.3 s 起 0.5 s 淡入（20 号第四节、和 11-23 加工版同写法）；src.png 已从 jg1123/w3src.png（同一个 W3SrcStill）拷好，缺了才重渲
+               fade=(0.3, 0.5)),
 }
 
 
@@ -101,7 +103,8 @@ def comp(seg):
     ins += ["-i", str(S["audio"])]
     tmp = S["out"].with_name(S["out"].stem + "_tmp.mp4")
     cmd = [FF, "-y", "-v", "error"] + ins + [
-        "-filter_complex", "[0:v][1:v]overlay=0:0:format=auto,format=yuv420p[v]",
+        "-filter_complex", (f"[1:v]format=rgba,fade=t=in:st={S['fade'][0]}:d={S['fade'][1]}:alpha=1[s];[0:v][s]overlay=0:0:shortest=1:format=auto,format=yuv420p[v]"
+                            if S.get("fade") else "[0:v][1:v]overlay=0:0:format=auto,format=yuv420p[v]"),
         "-map", "[v]", "-map", "2:a", "-frames:v", str(S["n"]),
         "-c:v", "h264_nvenc", "-preset", "p7", "-tune", "hq", "-rc", "vbr", "-cq", "16", "-b:v", "0", "-maxrate", "60M",
         "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709",
