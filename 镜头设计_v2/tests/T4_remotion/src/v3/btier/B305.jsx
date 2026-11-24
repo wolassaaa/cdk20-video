@@ -226,7 +226,7 @@ const Scene = () => {
               ))}
               {/* 两组各挂一块题注（Gemini 二审：上面那块小表看不出是对照组） */}
               <Tag x={CELL_U[0] + 230} y={CELL_U[1] - 20} align="left">CDK20 normal</Tag>
-              <Tag x={CELL_D[0] + 230} y={CELL_D[1] - 20} align="left" op={Math.min(1, S.turn * 2)}>CDK20 turned down</Tag>
+              <Tag x={CELL_D[0] + 135} y={CELL_D[1] - 20} align="left" op={Math.min(1, S.turn * 2)}>CDK20 turned down</Tag>
             </div>
           )}
         </Layer>
