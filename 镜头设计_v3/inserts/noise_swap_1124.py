@@ -26,6 +26,9 @@ WORK = Path(os.environ.get("CDK20_WORK", "G:/cdk20/work"))
 LIMIT = 3.0
 
 
+GITBASH = "C:/Program Files/Git/bin/bash.exe"  # 11-25：裸 bash 会落到 WSL
+
+
 def dirs(kind, seg):
     if kind == "drill":
         return [(WORK / "drill" / seg / "frames", "f_*.png")]
@@ -91,11 +94,11 @@ def comp(kind, seg):
         shutil.copy2(out, bk)
         print("原成片备份", bk, flush=True)
     if kind == "oncam":
-        run(["bash", "run_oncam.sh", seg, "comp"], env=dict(CDK20_GPU_COMP="1"))
+        run([GITBASH, "run_oncam.sh", seg, "comp"], env=dict(CDK20_GPU_COMP="1"))
     elif seg in ("W2", "W3"):
         run([sys.executable, "-X", "utf8", "comp_w23.py", seg])
     else:
-        run(["bash", "run_drill.sh", seg, "comp"])
+        run([GITBASH, "run_drill.sh", seg, "comp"])
         if seg == "W4":
             base = out.with_name(out.stem + "_n64底.mp4")
             os.replace(out, base)
